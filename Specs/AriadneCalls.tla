@@ -39,6 +39,7 @@ Instructions == [a \in 1..4 |->
    mustDefs |-> {}, mayDefs |-> IF a = 1 THEN {"x"} ELSE {}]]
 
 Engine == INSTANCE Ariadne WITH
+  SnapshotId <- "calls-snapshot",
   Addresses <- 1..4, Locations <- {"x"}, EntryPoints <- {1, 3}, SliceSeeds <- {2, 3},
   InputKind <- "binary", Captured <- NoAddresses, FileBacked <- 1..4,
   TrustedFallback <- NoAddresses, Decodable <- 1..4, Insn <- Instructions

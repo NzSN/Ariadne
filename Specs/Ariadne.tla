@@ -44,9 +44,15 @@ EXTENDS Naturals, FiniteSets
 \*
 \* FIXED INPUTS
 \* ============
-\* Addresses: finite universe of candidate instruction starts, represented as
-\* integers. Every represented target/continuation must belong to it, even if
-\* its bytes are missing. Membership alone does not validate a code boundary.
+\* SnapshotId: nonempty opaque identity of one address-space snapshot. The
+\* adapter must distinguish processes and capture times (or standalone binary
+\* mappings). Every input belongs to this same immutable snapshot.
+\*
+\* Addresses: finite universe of candidate instruction virtual addresses,
+\* represented as nonnegative integers. These are semantic VAs, not file
+\* offsets, module-relative offsets, or compact graph node IDs. Every represented
+\* target/continuation must belong to it, even if its bytes are missing.
+\* Membership alone does not validate a code boundary.
 \*
 \* Locations: abstract storage identities, represented as strings. These can
 \* name registers, individual flags, or memory regions. The adapter must handle
@@ -71,6 +77,9 @@ EXTENDS Naturals, FiniteSets
 \* and all other inputs remain fixed throughout this request.
 \* Finite abstraction of one analysis request. Instruction semantics and byte
 \* availability are immutable inputs, supplied by validated adapters/decoders.
+CONSTANT
+  \* @type: Str;
+  SnapshotId
 CONSTANT
   \* @type: Set(Int);
   Addresses
@@ -145,7 +154,12 @@ InstructionType ==
 \* All listed targets must be represented in Addresses, even at a boundary.
 \* An empty indirect target set with complete = FALSE is wholly unresolved;
 \* complete = TRUE is a stronger, trusted claim about the analysis scope.
-ASSUME /\ IsFiniteSet(Addresses) /\ Addresses # {}
+AddressSpaceContract ==
+  /\ SnapshotId # ""
+  /\ \A a \in Addresses : a >= 0
+
+ASSUME /\ AddressSpaceContract
+       /\ IsFiniteSet(Addresses) /\ Addresses # {}
        /\ IsFiniteSet(Locations)
        /\ EntryPoints \subseteq Addresses /\ EntryPoints # {}
        /\ SliceSeeds \subseteq Addresses
@@ -165,6 +179,20 @@ ASSUME /\ IsFiniteSet(Addresses) /\ Addresses # {}
             /\ (Insn[a].kind \in {"conditional", "jump"}
                  => Cardinality(Insn[a].targets) = 1)
 
+\* External identity of an address when results from multiple requests coexist.
+\* Inside this machine, the snapshot is fixed, so all address-bearing fields
+\* use the VA alone. EntryPoints are discovery roots, never a coordinate base.
+\* There is no implicit rebasing or address arithmetic in the core model.
+AddressIdentity(a) == [snapshot |-> SnapshotId, va |-> a]
+
+\* Adapter contract: resolve(SnapshotId, VA, byte length) supplies bytes and
+\* provenance or reports unavailability. Dump region mappings and binary
+\* section/segment mappings translate VAs to storage offsets outside this
+\* abstraction. VA minus load base is a module-relative offset, not generally
+\* a file offset. A standalone binary requires a chosen virtual load layout.
+\* Captured/FileBacked/TrustedFallback/Decodable and Insn must all be keyed
+\* by those same VAs. Providers must not combine different snapshots. The
+\* model assumes this contract; it does not verify storage mapping or bytes.
 \* These sets describe complete instruction-byte spans, not single bytes.
 \* For dumps, captured bytes win. Fallback requires a separate certificate
 \* covering image identity, address relocation and suitability of file bytes.
@@ -463,6 +491,8 @@ Spec == Init /\ [][Next]_vars /\ WF_vars(Next)
 \* It alone does not justify CFG edges or prove definition reachability; the
 \* subsequent invariants constrain bookkeeping and transfer-equation results.
 TypeOK ==
+  \* Also check the address contract through instantiated fixture invariants.
+  /\ AddressSpaceContract
   /\ phase \in Phases
   /\ pending \subseteq Addresses /\ visited \subseteq Addresses
   /\ decoded \subseteq Addresses

@@ -68,6 +68,7 @@ Fallback == {2, 7}
 Seeds == IF Scenario = "loop" THEN {5} ELSE {4, 5}
 
 Engine == INSTANCE Ariadne WITH
+  SnapshotId <- "example-snapshot",
   Addresses <- Addr, Locations <- Loc, EntryPoints <- {1}, SliceSeeds <- Seeds,
   InputKind <- Mode, Captured <- Capture, FileBacked <- Files,
   TrustedFallback <- Fallback, Decodable <- 1..6, Insn <- Instructions

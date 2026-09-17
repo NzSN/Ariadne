@@ -32,6 +32,12 @@ flowchart LR
     Dataflow --> Slice[Build backward data slice]
 ```
 
+Each request uses one immutable address-space snapshot, identified by
+`SnapshotId`. `Addresses` and `EntryPoints` contain virtual addresses directly;
+entry points start discovery and do not define an address base. Adapters map
+those VAs to dump regions or binary sections/segments. Storage offsets and
+compact graph node IDs are not semantic addresses.
+
 The current model abstracts the input adapters and decoder as fixed inputs. It
 specifies the engine's behavior once byte availability and instruction summaries
 have been supplied. Planned outputs include annotated assembly, a unified graph,

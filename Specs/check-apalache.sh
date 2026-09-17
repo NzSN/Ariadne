@@ -21,8 +21,10 @@ run_root=$(mktemp -d "${TMPDIR:-/tmp}/ariadne-apalache.XXXXXXXX")
 printf 'Apalache artifacts: %s\n' "$run_root"
 cd -- "$spec_dir"
 "$checker" version
-for module in Ariadne AriadneExample AriadnePipeline AriadneCalls; do
-  "$checker" --out-dir="$run_root/typecheck-$module" typecheck "$module.tla"
+# Discover every specification so a new module cannot silently skip typing.
+for source in "$spec_dir"/*.tla; do
+  module=$(basename -- "$source" .tla)
+  "$checker" --out-dir="$run_root/typecheck-$module" typecheck "$source"
 done
 for name in "${scenarios[@]}"; do
   "$checker" --out-dir="$run_root/$name" check \

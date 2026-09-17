@@ -11,7 +11,10 @@ The model specifies instruction-level CFG recovery, forward may-reaching
 definitions, and a backward data slice over a finite analysis request. It models
 the analyzer's execution, not execution of the analyzed program.
 
-An address identifies a candidate instruction start in one fixed address space.
+An address is the virtual address (VA) of a candidate instruction start in one
+fixed address-space snapshot, identified by the nonempty `SnapshotId`. VAs are
+nonnegative integers; architecture-specific address widths remain an adapter
+constraint.
 Apalache annotations represent addresses as `Int` and location identifiers as
 `Str`; record fields and function/set element types are explicitly declared.
 `Insn` is a trusted semantic description supplied by a decoder/semantics adapter.
@@ -35,7 +38,8 @@ modeled here.
 
 | Input | Meaning |
 | --- | --- |
-| `Addresses` | Finite candidate starts, including every represented target and continuation, even when its bytes are unavailable |
+| `SnapshotId` | Opaque identity of the one immutable address-space snapshot shared by all inputs |
+| `Addresses` | Finite candidate instruction VAs, including every represented target and continuation, even when its bytes are unavailable |
 | `EntryPoints` | Nonempty set of roots to analyze; successor discovery does not infer predecessors of arbitrary crash addresses |
 | `SliceSeeds` | Instructions whose input dependencies should be traced |
 | `InputKind` | `binary` or `dump` |
@@ -45,6 +49,33 @@ modeled here.
 | `Decodable` | Starts whose selected bytes decode successfully |
 | `Insn` | Instruction kind, continuation, known targets, target-completeness certificate, uses, must-defs, and may-defs |
 | `Locations` | Finite normalized register/flag/memory locations for this request |
+
+### Virtual addresses and storage mapping
+
+`EntryPoints` contains VAs at which discovery begins, not coordinate origins.
+Every address-bearing field uses this same VA domain, including slice seeds,
+instruction continuations/targets, edges, provenance keys, and definition sites.
+`AddressSpaceContract` requires a nonempty snapshot identity and nonnegative
+VAs. It appears both in `ASSUME` and in `TypeOK`, so fixture safety checks
+exercise it even when instantiated-module assumptions are not enforced by TLC.
+No implicit rebasing occurs. `AddressIdentity(a)` exposes the pair
+`[snapshot |-> SnapshotId, va |-> a]` for identifying addresses across requests.
+The adapter must assign distinct identities to distinct address-space snapshots;
+a matching VA alone does not identify code across processes or capture times.
+
+The provider contract is `resolve(snapshot, VA, length) -> bytes + provenance`
+or unavailability. A dump provider locates a captured virtual-memory region;
+a binary provider uses the selected module load base and section/segment layout
+to locate file bytes. `VA - loadBase` is a module-relative offset, not generally
+a file offset, and some virtual spans have no file backing. Standalone binaries
+require a chosen virtual load layout. Compact internal node IDs are permitted
+in an implementation only with a mapping back to these semantic VAs.
+
+The model consumes the provider's whole-instruction availability and semantic
+summaries. It does not implement or verify region tables, storage offsets,
+byte lengths, relocation processing, or snapshot-identity uniqueness. All such
+inputs must describe the same immutable snapshot. Successors remain explicit;
+integer ordering or adjacency does not imply a control-flow edge.
 
 For binary input, file bytes are used. For dump input, captured bytes take
 precedence; file fallback requires `TrustedFallback`. File availability alone
@@ -145,7 +176,7 @@ edges; an unresolved predecessor path can introduce additional definitions.
 
 | Property | Checked claim |
 | --- | --- |
-| `TypeOK` | Every state component remains in its declared domain |
+| `TypeOK` | The address-space contract holds (nonempty snapshot identity, nonnegative VAs), and every state component remains in its declared domain |
 | `RecoveryInvariant` | Local-only worklist bookkeeping, exact unified edges/obligations, successful decodes, and byte provenance stay consistent |
 | `DefinitionInvariant` | Definitions have valid origins and propagation never exceeds the current transfer equation |
 | `ResultInvariant` | Slicing starts only at the data-flow fixed point, includes decoded seeds, and finishes closed under data dependencies |
@@ -168,6 +199,16 @@ recovery alone does not establish that the requested slice was available.
 ## Model checking
 
 ### Apalache
+
+All TLA+ modules must remain Apalache-compatible. The check script discovers
+and typechecks every `Specs/*.tla` file. Each new executable scenario must also
+be registered in the script with its constant initialization, `Init`/`Next`,
+safety invariant, and a practical transition bound. Shared parameterized
+modules are exercised through those concrete scenarios.
+
+Compatibility here means typechecking and bounded safety checking through
+`Init`/`Next`. The fair temporal `Spec` and `Terminates` remain the TLC interface;
+a passing Apalache safety run does not establish fair termination.
 
 The modules include Snowcat type annotations. `AriadneExample.tla` exposes
 `Init`, `Next`, `Safety`, and four constant initializers (`BinaryConstants`,
@@ -252,7 +293,7 @@ Validated on 2026-09-17 with Apalache **0.57.0**, build `635865a`:
 | Closed / `Safety` | 6 | No error |
 | Calls / `Safety` (includes `CallPolicy`) | 6 | No error |
 | Pipeline / `Safety` | 8 | No error |
-| Pipeline / `NotDone` reachability witness | 8 | Expected counterexample; final phase `done`, slice `{1, 2}` |
+| Pipeline / `NotDone` reachability witness | 8 | Expected counterexample; final phase `done`, slice `{1, 2}` (original fixture addresses) |
 
 All four modules passed typechecking, including the instantiated modules in
 the bounded checks. The `NotDone` check intentionally exits with code 12;
@@ -273,6 +314,8 @@ two abstract locations. Its configurations exercise:
 
 `Pipeline.cfg` checks the additional two-instruction `AriadnePipeline.tla`
 instance, including termination and the exact final reaching definitions/slice.
+Its sparse VAs 4096 and 4100 also check that addresses are preserved as supplied,
+with an explicit successor rather than an implicit adjacent node index.
 `Calls.cfg` checks `AriadneCalls.tla`, including the independent `CallPolicy`
 assertions and exact final unified graph and data-flow results.
 
@@ -312,3 +355,22 @@ The call-edge regression was also checked against two deliberately broken
 temporary copies of the model. Queuing all edge destinations (including calls)
 and letting `Preds` inspect all edges each caused TLC to reject `Safety`.
 The repository model retains the local-edge filters in both operations.
+
+### Virtual-address contract validation (2026-09-17)
+
+After adding `SnapshotId`, `AddressSpaceContract`, and the sparse-VA pipeline,
+TLC 2026.03.24.222644 (revision `1476e7f`) passed all six configurations,
+including safety and fair termination, with the same state counts listed above.
+Two temporary copies of the pipeline were also checked: replacing VA 4096 with
+-1 (and importing `Integers` to express it), and replacing `pipeline-snapshot`
+with the empty string. Both violated `Safety` in the initial state (exit 12).
+This checks contract rejection through `TypeOK`, independently of how TLC
+handles assumptions inside instantiated modules.
+
+Apalache 0.61.0 (build `831d473`) passed typechecking of all four final modules
+and bounded `Safety` checks for Binary, Dump, Loop, Closed, and Calls through
+six transitions, and Pipeline through eight. Binary was rerun after adding
+the contract to `TypeOK`; the other bounded runs used that final contract.
+The updated pipeline's `NotDone` check at bound eight produced the expected
+counterexample (exit 12), ending in `done` with slice `{4096, 4100}`.
+These checks do not validate a byte provider or uniqueness of snapshot IDs.
