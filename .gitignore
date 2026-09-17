@@ -1,0 +1,17 @@
+# Temporary directories and caches, at any depth.
+tmp/
+temp/
+.tmp/
+.temp/
+tmp-*/
+temp-*/
+.cache/
+__pycache__/
+
+# Apalache output and TLC state storage.
+_apalache-out/
+/states/
+/Specs/**/states/
+
+# Bazel-generated output directories and workspace symlinks.
+/bazel-*
