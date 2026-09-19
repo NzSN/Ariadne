@@ -9,9 +9,9 @@ they use.
 **Current status: Rust machine-analysis core and formal specifications.** The
 Rust library implements `Specs/Ariadne.tla`: local CFG recovery, may-reaching
 definitions, and backward data slicing from fixed adapter-supplied inputs.
-The separate native LLVM IR and abstract machine-state models remain formal
-specifications. Readers, LLVM integration, the analyzer CLI, and graph exporters
-have not been implemented.
+The separate native LLVM IR, abstract machine-state, and initial x86-64
+instruction-semantics models remain formal specifications. Readers, LLVM
+integration, the analyzer CLI, and graph exporters have not been implemented.
 
 The core uses **Rust 2024 and Cargo**, with no external crate dependencies.
 LLVM MC remains the intended instruction-decoding foundation for a future
@@ -162,13 +162,20 @@ cross-location correlations, while valuations expose finite per-location value
 sets. It does not reconstruct historical execution, prove ISA semantics, or
 justify applying a crash-time observation to an earlier program point.
 
+`AriadneX86_64Semantics.tla` now supplies executable rules for a register/immediate
+subset of x86-64 and derives inputs for the state-propagation model. See the
+[supported forms and assumptions](docs/x86-64-semantics.md). It is not a complete
+ISA model, a decoder, or a Rust implementation.
+
 The slice follows all modeled inputs of each included instruction. It does not
 yet select individual operands, include control dependencies, or establish which
 instructions actually executed. Missing slice seeds are reported separately.
 
-Interprocedural call/return matching, path-feasibility reasoning, concrete CPU
-execution, exceptions and unwinding, concurrency, self-modifying code, and TTD
-history are outside the current model. Basic-block coalescing is also deferred.
+Interprocedural call/return matching, general concrete CPU execution, exception
+delivery and unwinding, concurrency, self-modifying code, and TTD history remain
+outside these models. State/branch reasoning is limited to supplied or supported
+semantics, and `UD2` records a fault without delivering it. Basic-block coalescing
+is also deferred.
 These boundaries matter when interpreting a result: a possible dependency is
 evidence for investigation, not proof of a crash's root cause.
 
@@ -184,6 +191,8 @@ state transitions, invariants, and interpretation of partial results.
 | [src/engine.rs](src/engine.rs) | Executable implementation of `Specs/Ariadne.tla` |
 | [tests/](tests/) | Specification fixtures, transition checks, and independent generated-request oracles |
 | [docs/implementation.md](docs/implementation.md) | Rust API, model correspondence, and implementation boundaries |
+| [docs/machine-state-design.md](docs/machine-state-design.md) | Proposed Rust design for abstract machine-state propagation |
+| [docs/x86-64-semantics.md](docs/x86-64-semantics.md) | Supported x86-64 instruction rules, stateflow composition, and validation limits |
 | [mbt/README.md](mbt/README.md) | Mirrors/MirrorRust MBT setup, checked corpus, mutation gate, and evidence |
 | [Specs/AriadneTypes.tla](Specs/AriadneTypes.tla) | Shared Apalache aliases for semantic identities, labels, states, and values |
 | [Specs/AriadneMachineCommon.tla](Specs/AriadneMachineCommon.tla) | Stateless machine address, local-edge, and effect contracts shared by machine models |
@@ -195,6 +204,10 @@ state transitions, invariants, and interpretation of partial results.
 | [Specs/AriadneLLVMIRExample.tla](Specs/AriadneLLVMIRExample.tla) | Branch/phi, memory-dependency, and incomplete-call IR fixture |
 | [Specs/AriadneMachineState.tla](Specs/AriadneMachineState.tla) | Post-recovery finite abstract machine-state propagation and edge classification |
 | [Specs/AriadneMachineStateExample.tla](Specs/AriadneMachineStateExample.tla) | Constant/flag propagation and branch-feasibility fixture |
+| [Specs/AriadneX86_64Semantics.tla](Specs/AriadneX86_64Semantics.tla) | Executable register/immediate x86-64 subset and finite-state bridge |
+| [Specs/AriadneX86_64SemanticsChecks.tla](Specs/AriadneX86_64SemanticsChecks.tla) | Arithmetic, flags, operand, branch, and bridge regression checks |
+| [Specs/AriadneX86_64SemanticsExample.tla](Specs/AriadneX86_64SemanticsExample.tla) | Instruction-derived stateflow with complete and incomplete inputs |
+| [Specs/check-x86-64.sh](Specs/check-x86-64.sh) | x86-64 Apalache typechecks and executable TLC checks |
 | [Specs/check-apalache.sh](Specs/check-apalache.sh) | Typechecking and bounded safety checks |
 | [Specs/README.md](Specs/README.md) | Checking commands, assumptions, and recorded validation results |
 

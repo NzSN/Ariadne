@@ -7,13 +7,15 @@ crash-dump inputs, while `AriadneMachineState.tla` consumes its frozen local CFG
 `AriadneLLVMIR.tla` separately specifies analysis of verified LLVM IR supplied
 directly as `.ll` or `.bc`. The [Rust library](../src/lib.rs), built with Cargo,
 implements the `Ariadne.tla` machine-analysis core. The LLVM IR and abstract
-machine-state models remain specification-only. See the
+machine-state models remain specification-only. `AriadneX86_64Semantics.tla`
+adds executable TLA+ instruction rules for an initial register/immediate x86-64
+subset, also without a Rust implementation. See the
 [implementation guide](../docs/implementation.md) for the Rust correspondence
 and validation boundary.
 
 ## Shared semantic types
 
-`AriadneTypes.tla` is the single alias catalogue for specification-level roles.
+`AriadneTypes.tla` is the shared alias catalogue for specification-level roles.
 Machine aliases cover addresses, snapshots, locations, instruction and edge
 kinds, byte sources, definition origins, abstract states and values, machine
 statuses, and terminal outcomes. LLVM IR aliases cover artifacts, modules,
@@ -21,6 +23,8 @@ functions, blocks, instructions, values, value kinds, terminator kinds, and
 callees. Analysis phases and obligation reasons are shared where their role is
 representation-independent.
 
+Architecture-private aliases for decoded instructions and bit-vector states are
+declared in `AriadneX86_64Semantics.tla`; the original shared catalogue is unchanged.
 Every semantic string position uses a meaningful `$alias` in Snowcat
 annotations. `Str` remains only as the underlying representation in alias
 declarations. These aliases are documentary and transparent, not nominal
@@ -96,7 +100,8 @@ through one instruction and one existing structural edge to a running
 after-state. `TerminalTransitions` records faults, returns, and stops. Every
 transition must preserve locations outside the instruction's `MayDefs`; the
 model checks this frame property but does not prove the supplied transitions
-faithfully implement an ISA.
+faithfully implement an ISA. It can now be derived by the separate x86-64 module
+for that module's supported forms, without changing this generic contract.
 
 Entry states are attached only to declared entry points. Propagation repeatedly
 adds after-states along local structural edges until a fixed point. The graph is
@@ -114,9 +119,33 @@ system calls, and concurrency. A crash-time state may seed its exact captured
 instruction; the model does not authorize treating it as an earlier state or
 using it to rewrite the structural CFG.
 
+## Executable x86-64 instruction semantics
+
+`AriadneX86_64Semantics.tla` defines `Execute(instruction, state)` for an initial
+32/64-bit register/immediate subset: MOV, ADD/SUB/CMP, AND/OR/XOR/TEST, NOP,
+direct JMP, the 16 flag-based Jcc conditions, and a terminal pre-delivery UD2
+fault. It calculates register/flag values and selected destinations, instead of
+accepting a supplied instruction transition table. All 64 bits are modeled.
+
+Its finite catalogue bridge derives running/terminal transitions, effect sets,
+reporting valuations, and completeness certificates for `AriadneMachineState`.
+Unsupported forms, missing result IDs, and missing labeled CFG edges cannot
+silently become completeness certificates. The original generic stateflow and
+recovery contracts remain unchanged.
+
+This is not a full ISA, decoder, memory model, or Rust interpreter. Completeness
+is relative to the supplied exact projected states and the documented execution
+environment. The supported forms, preconditions, Intel references, and
+composition rules are in [the semantics guide](../docs/x86-64-semantics.md).
+
+```sh
+# From the repository root: three Apalache typechecks and five TLC fixtures.
+bash Specs/check-x86-64.sh
+```
+
 ## Scope and abstraction boundary
 
-The model specifies instruction-level CFG recovery, forward may-reaching
+The core `Ariadne.tla` model specifies instruction-level CFG recovery, forward may-reaching
 definitions, and a backward data slice over a finite analysis request. It models
 the analyzer's execution, not execution of the analyzed program.
 
@@ -137,7 +166,8 @@ The preserved information is instruction identity, typed local and call
 edges, byte provenance, reads, may-writes, must-writes, and
 explicit unresolved obligations. Concrete bytes, instruction widths, numeric
 register values, flag equations, memory contents, thread scheduling, and timing
-are abstracted away. A later semantic refinement can add those details.
+are abstracted away by the core model. The separate x86-64 module now adds a
+scoped instruction/value semantics; it does not change those recovery inputs.
 
 The graph has one node per decoded instruction. Edges may also reference
 unavailable/invalid local targets or callees outside local discovery. Local
@@ -592,3 +622,24 @@ Binary recovery and machine-state propagation through six transitions, or for
 LLVM IR through eight. All eight TLC configurations passed with unchanged state
 counts; as expected, Snowcat aliases change annotations rather than untyped
 TLA+ behavior.
+
+### x86-64 instruction-semantics validation (2026-09-19)
+
+Apalache 0.61.0 typechecked `AriadneX86_64Semantics.tla` and its two fixtures.
+TLC revision `1476e7f` passed `X86_64Semantics.cfg` plus all four integration
+configurations, including fair stateflow termination:
+
+| Configuration | Generated / distinct states | Search depth |
+| --- | ---: | ---: |
+| `X86_64Semantics.cfg` | 2 / 2 | 2 |
+| `X86_64Stateflow.cfg` | 5 / 5 | 5 |
+| `X86_64Unsupported.cfg` | 3 / 3 | 3 |
+| `X86_64MissingState.cfg` | 2 / 2 | 2 |
+| `X86_64MissingEdge.cfg` | 4 / 4 | 4 |
+
+The semantic invariant checks hundreds of input vectors and all flag-condition
+combinations within those two driver states; this count is not the number of
+CPU states tested. Four isolated semantic mutations were rejected by invariant
+violations. The existing Rust test suite also passed, and the recorded generated
+MBT corpus hashes remained unchanged. No x86-64 Rust implementation or new
+Rust/semantic MBT result is claimed; see the guide for exact coverage and limits.
