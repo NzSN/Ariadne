@@ -6,9 +6,12 @@ investigating Chromium and Electron crashes: start from instructions of interest
 recover their surrounding control flow, and trace possible origins of the values
 they use.
 
-**Current status: formal specification.** This repository contains a TLA+ model,
-executable model-checking scenarios, and documentation. Binary/dump readers, LLVM
-integration, the analyzer CLI, and graph exporters have not been implemented.
+**Current status: formal specification.** This repository contains TLA+ models,
+executable model-checking scenarios, and documentation. One model covers machine
+code supplied by binary/dump adapters; another covers verified LLVM IR supplied
+directly as `.ll` or `.bc`; a post-recovery model propagates finite abstract
+machine states. Readers, LLVM integration, the analyzer CLI, and graph exporters
+have not been implemented.
 
 The intended implementation stack is **C++23, Bazel, and a pinned LLVM release**.
 The LLVM release has not yet been selected or pinned; there are currently no
@@ -18,7 +21,7 @@ semantic layer; decoder metadata alone does not provide the complete analysis.
 
 ## Intended workflow
 
-Both input formats should feed the same analysis engine through a common view
+Binary and dump inputs should feed the same machine analysis through a common view
 of addresses, available bytes, module mappings, and instruction semantics:
 
 ```mermaid
@@ -29,7 +32,20 @@ flowchart LR
     View --> Decode[Decode and summarize instructions]
     Decode --> CFG[Recover CFG]
     CFG --> Dataflow[Compute reaching definitions]
+    CFG --> Stateflow[Propagate abstract machine states]
     Dataflow --> Slice[Build backward data slice]
+    Stateflow --> StateResults[Report states and edge feasibility]
+```
+
+Native LLVM IR is a separate input path. It is not reconstructed from machine
+code:
+
+```mermaid
+flowchart LR
+    IR[Supplied .ll or .bc] --> Adapter[Verified IR adapter]
+    Adapter --> IRCFG[Terminator-derived block CFG]
+    IRCFG --> Dependencies[SSA, phi, memory and call dependencies]
+    Dependencies --> IRSlice[Build backward data slice]
 ```
 
 Each request uses one immutable address-space snapshot, identified by
@@ -38,12 +54,16 @@ entry points start discovery and do not define an address base. Adapters map
 those VAs to dump regions or binary sections/segments. Storage offsets and
 compact graph node IDs are not semantic addresses.
 
-The current model abstracts the input adapters and decoder as fixed inputs. It
+Snowcat annotations use the shared `$address` type alias for every semantic VA.
+The alias expands to `Int` for Apalache and is documentary rather than nominal;
+unrelated integer quantities retain explicit `Int` annotations.
+
+The machine model abstracts the input adapters and decoder as fixed inputs. It
 specifies the engine's behavior once byte availability and instruction summaries
 have been supplied. Planned outputs include annotated assembly, a unified graph,
 and dependency information, with JSON and Graphviz DOT export for SVG rendering.
 
-## Analysis phases
+## Machine analysis phases
 
 The model describes the analyzer's execution, rather than executing the program
 under investigation.
@@ -60,6 +80,17 @@ location's value. A definite overwrite removes earlier definitions of that
 location; a possible overwrite preserves both old and new origins. The backward
 slice follows these relationships from the instructions being investigated.
 
+The LLVM IR model starts with a verified, normalized function. Its CFG is
+derived from explicit terminator successors rather than recovered heuristically.
+Ordinary SSA dependencies are direct; phi inputs retain predecessor blocks, and
+conservative memory predecessors are supplied by an analysis adapter.
+
+The separate machine-state model starts from a frozen recovered local CFG. It
+propagates finite abstract states to a fixed point using a trusted ISA-semantics
+relation. The structural graph is never pruned: feasibility, proven
+infeasibility under stated entry facts, and unknown feasibility are derived
+classifications.
+
 ## Modeling decisions
 
 - **Preserve byte provenance.** Dump-captured bytes take precedence. Filling a
@@ -71,7 +102,7 @@ slice follows these relationships from the instructions being investigated.
 - **Keep structural alternatives.** Conditional branches retain both edges.
   Crash-time register values do not automatically establish earlier branch
   outcomes or justify pruning paths.
-- **Use one edge representation.** Local and `call` edges share the graph, while
+- **Use one machine-edge representation.** Local and `call` edges share the graph, while
   explicit policies determine which edges discovery and data flow follow.
 
 For a call at A to F with continuation B, the graph contains:
@@ -89,10 +120,23 @@ independently as another entry point.
 
 ## Scope and limitations
 
-The current specification models an instruction-level CFG, forward may-reaching
+The machine specification models an instruction-level CFG, forward may-reaching
 definitions, and a backward **data** slice over a finite request. Its inputs
 already contain decoded instruction summaries; checking the model does not
 validate an instruction decoder, dump parser, symbol file, or alias analysis.
+
+The LLVM IR specification models one directly supplied, verifier-accepted
+function per request: a block CFG, instruction-level SSA dependencies,
+edge-sensitive phi inputs, conservative memory predecessors, separate call
+edges, obligations, and a backward data slice. It does not recover original
+LLVM IR from a binary, prove LLVM's verifier, validate alias analysis, or claim
+a correspondence between IR instructions and machine addresses.
+
+The machine-state specification models possible abstract register, flag, and
+memory states before decoded instructions. State identities preserve
+cross-location correlations, while valuations expose finite per-location value
+sets. It does not reconstruct historical execution, prove ISA semantics, or
+justify applying a crash-time observation to an earlier program point.
 
 The slice follows all modeled inputs of each included instruction. It does not
 yet select individual operands, include control dependencies, or establish which
@@ -111,10 +155,16 @@ state transitions, invariants, and interpretation of partial results.
 
 | Path | Purpose |
 | --- | --- |
+| [Specs/AriadneTypes.tla](Specs/AriadneTypes.tla) | Shared Apalache aliases for semantic identities, labels, states, and values |
+| [Specs/AriadneMachineCommon.tla](Specs/AriadneMachineCommon.tla) | Stateless machine address, local-edge, and effect contracts shared by machine models |
 | [Specs/Ariadne.tla](Specs/Ariadne.tla) | Core state machine, with detailed behavioral comments and Apalache type annotations |
 | [Specs/AriadneExample.tla](Specs/AriadneExample.tla) | Binary, dump, loop, and closed-graph scenarios |
 | [Specs/AriadnePipeline.tla](Specs/AriadnePipeline.tla) | Small end-to-end recovery, propagation, and slicing scenario |
 | [Specs/AriadneCalls.tla](Specs/AriadneCalls.tla) | Call visibility, discovery isolation, and data-flow isolation regression |
+| [Specs/AriadneLLVMIR.tla](Specs/AriadneLLVMIR.tla) | Native LLVM IR CFG, dependency, obligation, identity, and slicing model |
+| [Specs/AriadneLLVMIRExample.tla](Specs/AriadneLLVMIRExample.tla) | Branch/phi, memory-dependency, and incomplete-call IR fixture |
+| [Specs/AriadneMachineState.tla](Specs/AriadneMachineState.tla) | Post-recovery finite abstract machine-state propagation and edge classification |
+| [Specs/AriadneMachineStateExample.tla](Specs/AriadneMachineStateExample.tla) | Constant/flag propagation and branch-feasibility fixture |
 | [Specs/check-apalache.sh](Specs/check-apalache.sh) | Typechecking and bounded safety checks |
 | [Specs/README.md](Specs/README.md) | Checking commands, assumptions, and recorded validation results |
 
@@ -123,9 +173,11 @@ model-checker outputs, and Bazel output paths are covered by [.gitignore](.gitig
 
 ## Run the specification checks
 
-Use Java and the corresponding TLA+ tools. Recorded validation used **Java 17**,
-**Apalache 0.57.0**, and **TLC 2.19**. These are tested versions, not a repository
-dependency lock. No C++ or Bazel installation is needed for the model checks.
+Use Java and the corresponding TLA+ tools. Recorded validation includes
+**Java 17**, **Apalache 0.57.0**, and **TLC 2.19**, plus the current native-IR
+validation with **Java 25**, **Apalache 0.61.0**, and TLC revision `1476e7f`.
+These are tested versions, not a repository dependency lock. No C++ or Bazel
+installation is needed for the model checks.
 
 From the repository root, run Apalache with `apalache-mc` on `PATH`:
 
@@ -139,10 +191,12 @@ To select another installation, set `APALACHE_MC` to its absolute executable pat
 APALACHE_MC=/absolute/path/to/apalache-mc bash Specs/check-apalache.sh
 ```
 
-The script typechecks all four modules, checks the four general scenarios and
+The script typechecks all ten modules, checks the four general scenarios and
 the call regression through six transitions, and checks the pipeline through
-eight transitions. Artifacts go to a fresh temporary directory whose path is
-printed at startup. These checks can take several minutes.
+eight transitions. The native LLVM IR fixture is also checked through eight
+transitions, and the machine-state fixture through six. Artifacts go to a fresh
+temporary directory whose path is printed at startup. These checks can take
+several minutes.
 
 An optional bound and general-scenario selector are supported:
 
@@ -150,24 +204,27 @@ An optional bound and general-scenario selector are supported:
 bash Specs/check-apalache.sh 6 Loop
 ```
 
-This selects `Loop` among the general scenarios; the pipeline and call regression
-still run. The supplied bound also applies to the call regression, while the
-pipeline remains at eight steps. Higher bounds can be substantially more costly.
+This selects `Loop` among the general scenarios; the pipeline, call regression,
+LLVM IR fixture, and machine-state fixture still run. The supplied bound also
+applies to the call regression, while the other specialized checks retain their
+documented bounds. Higher bounds can be substantially more costly.
 
 For an exhaustive TLC check of the call scenario, with a `tlc` launcher on `PATH`:
 
 ```sh
 cd Specs
 tlc -workers 2 -metadir /tmp/ariadne-tlc-calls -config Calls.cfg AriadneCalls.tla
+tlc -workers 2 -metadir /tmp/ariadne-tlc-llvmir -config LLVMIR.cfg AriadneLLVMIRExample.tla
+tlc -workers 2 -metadir /tmp/ariadne-tlc-machine-state -config MachineState.cfg AriadneMachineStateExample.tla
 ```
 
 If using the tools JAR directly, replace `tlc` with
-`java -cp /absolute/path/to/tla2tools.jar tlc2.TLC`. Commands for all six TLC
+`java -cp /absolute/path/to/tla2tools.jar tlc2.TLC`. Commands for all eight TLC
 scenarios are in [Specs/README.md](Specs/README.md#tlc).
 
 ## Validation status
 
-The [recorded checks](Specs/README.md#model-checking) passed for all six TLC
+The [recorded checks](Specs/README.md#model-checking) passed for all eight TLC
 scenarios, including safety and fair termination. Apalache passed bounded safety
 at the default bounds described above. The call regression also rejected
 deliberately broken variants that traversed call edges or allowed them into

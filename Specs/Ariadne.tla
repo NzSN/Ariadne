@@ -1,5 +1,5 @@
 ----------------------------- MODULE Ariadne -----------------------------
-EXTENDS Naturals, FiniteSets
+EXTENDS AriadneMachineCommon
 
 \* WHAT THIS MACHINE DOES
 \* ======================
@@ -78,38 +78,40 @@ EXTENDS Naturals, FiniteSets
 \* Finite abstraction of one analysis request. Instruction semantics and byte
 \* availability are immutable inputs, supplied by validated adapters/decoders.
 CONSTANT
-  \* @type: Str;
+  \* @type: $snapshotId;
   SnapshotId
 CONSTANT
-  \* @type: Set(Int);
+  \* @type: Set($address);
   Addresses
 CONSTANT
-  \* @type: Set(Str);
+  \* @type: Set($location);
   Locations
 CONSTANT
-  \* @type: Set(Int);
+  \* @type: Set($address);
   EntryPoints
 CONSTANT
-  \* @type: Set(Int);
+  \* @type: Set($address);
   SliceSeeds
 CONSTANT
-  \* @type: Str;
+  \* @type: $inputKind;
   InputKind
 CONSTANT
-  \* @type: Set(Int);
+  \* @type: Set($address);
   Captured
 CONSTANT
-  \* @type: Set(Int);
+  \* @type: Set($address);
   FileBacked
 CONSTANT
-  \* @type: Set(Int);
+  \* @type: Set($address);
   TrustedFallback
 CONSTANT
-  \* @type: Set(Int);
+  \* @type: Set($address);
   Decodable
 CONSTANT
-  \* @type: Int -> {kind: Str, fall: Set(Int), targets: Set(Int), complete: Bool,
-  \*               uses: Set(Str), mustDefs: Set(Str), mayDefs: Set(Str)};
+  \* @type: $address -> {kind: $instructionKind,
+  \*               fall: Set($address), targets: Set($address), complete: Bool,
+  \*               uses: Set($location), mustDefs: Set($location),
+  \*               mayDefs: Set($location)};
   Insn
 
 \* Small string vocabularies make graph labels and result states explicit.
@@ -121,9 +123,9 @@ Kinds == {"ordinary", "conditional", "jump", "indirect", "call",
 Sources == {"captured", "file", "unavailable"}
 \* Unified storage/display vocabulary, with an explicit local-analysis policy.
 \* Adding a new edge kind does not silently opt it into discovery or data flow.
-LocalEdgeKinds == {"next", "taken", "fallthrough", "jump", "indirect", "summary"}
+LocalEdgeKinds == MachineLocalEdgeKinds
 EdgeKinds == LocalEdgeKinds \cup {"call"}
-\* @type: {src: Int, dst: Int, kind: Str} => Bool;
+\* @type: {src: $address, dst: $address, kind: $edgeKind} => Bool;
 IsLocalEdge(e) == e.kind \in LocalEdgeKinds
 Reasons == {"unavailable", "decode-failed", "indirect-targets", "call-targets"}
 Phases == {"recover", "dataflow", "slice", "done"}
@@ -155,11 +157,9 @@ InstructionType ==
 \* An empty indirect target set with complete = FALSE is wholly unresolved;
 \* complete = TRUE is a stronger, trusted claim about the analysis scope.
 AddressSpaceContract ==
-  /\ SnapshotId # ""
-  /\ \A a \in Addresses : a >= 0
+  MachineAddressSpaceContract(SnapshotId, Addresses)
 
 ASSUME /\ AddressSpaceContract
-       /\ IsFiniteSet(Addresses) /\ Addresses # {}
        /\ IsFiniteSet(Locations)
        /\ EntryPoints \subseteq Addresses /\ EntryPoints # {}
        /\ SliceSeeds \subseteq Addresses
@@ -170,7 +170,8 @@ ASSUME /\ AddressSpaceContract
        /\ Decodable \subseteq Addresses
        /\ Insn \in [Addresses -> InstructionType]
        /\ \A a \in Addresses :
-            /\ Insn[a].mustDefs \subseteq Insn[a].mayDefs
+            /\ MachineEffectWellFormed(
+                 Locations, Insn[a].uses, Insn[a].mustDefs, Insn[a].mayDefs)
             /\ Cardinality(Insn[a].fall) =
                  IF Insn[a].kind \in {"ordinary", "conditional", "call"}
                  THEN 1 ELSE 0
@@ -183,7 +184,7 @@ ASSUME /\ AddressSpaceContract
 \* Inside this machine, the snapshot is fixed, so all address-bearing fields
 \* use the VA alone. EntryPoints are discovery roots, never a coordinate base.
 \* There is no implicit rebasing or address arithmetic in the core model.
-AddressIdentity(a) == [snapshot |-> SnapshotId, va |-> a]
+AddressIdentity(a) == MachineAddressIdentity(SnapshotId, a)
 
 \* Adapter contract: resolve(SnapshotId, VA, byte length) supplies bytes and
 \* provenance or reports unavailability. Dump region mappings and binary
@@ -210,7 +211,7 @@ Source(a) ==
 CanDecode(a) == Source(a) # "unavailable" /\ a \in Decodable
 \* Records are identified structurally. Edge kind is part of identity: taken
 \* and fallthrough edges to the same destination remain distinct records.
-Edge(a, b, k) == [src |-> a, dst |-> b, kind |-> k]
+Edge(a, b, k) == MachineEdge(a, b, k)
 \* An obligation records a gap at a site; it is not an inferred edge.
 \* Obligations accumulate and are never discharged within this fixed request.
 Obligation(a, r) == [site |-> a, reason |-> r]
@@ -296,31 +297,32 @@ Gen(a) == {[loc |-> l, site |-> a, origin |-> "instruction"] : l \in Insn[a].may
 \*           Undecoded addresses keep empty sets throughout the analysis.
 \* slice: decoded instructions currently included in the backward data slice.
 VARIABLE
-  \* @type: Str;
+  \* @type: $analysisPhase;
   phase
 VARIABLE
-  \* @type: Set(Int);
+  \* @type: Set($address);
   pending
 VARIABLE
-  \* @type: Set(Int);
+  \* @type: Set($address);
   visited
 VARIABLE
-  \* @type: Set(Int);
+  \* @type: Set($address);
   decoded
 VARIABLE
-  \* @type: Int -> Str;
+  \* @type: $address -> $byteSource;
   provenance
 VARIABLE
-  \* @type: Set({src: Int, dst: Int, kind: Str});
+  \* @type: Set({src: $address, dst: $address, kind: $edgeKind});
   edges
 VARIABLE
-  \* @type: Set({site: Int, reason: Str});
+  \* @type: Set({site: $address, reason: $obligationReason});
   obligations
 VARIABLE
-  \* @type: Int -> Set({loc: Str, site: Int, origin: Str});
+  \* @type: $address -> Set({loc: $location, site: $address,
+  \*                         origin: $definitionOrigin});
   reaching
 VARIABLE
-  \* @type: Set(Int);
+  \* @type: Set($address);
   slice
 \* The complete state vector defines stuttering and the fairness condition.
 vars == <<phase, pending, visited, decoded, provenance, edges,

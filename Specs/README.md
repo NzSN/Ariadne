@@ -1,9 +1,115 @@
 # Ariadne formal model
 
-`Ariadne.tla` specifies the shared analysis engine for binary and crash-dump
-inputs. The intended implementation is C++23, Bazel, and a pinned LLVM release;
-the model does not depend on a particular LLVM version. No analyzer implementation
-is introduced here.
+`AriadneTypes.tla` defines semantic Apalache aliases shared across the suite.
+`AriadneMachineCommon.tla` defines stateless knowledge shared by the machine
+models. `Ariadne.tla` specifies the machine-code analysis engine for binary and
+crash-dump inputs, while `AriadneMachineState.tla` consumes its frozen local CFG.
+`AriadneLLVMIR.tla` separately specifies analysis of verified LLVM IR supplied
+directly as `.ll` or `.bc`. The intended implementation is C++23, Bazel, and a
+pinned LLVM release; no analyzer implementation is introduced here.
+
+## Shared semantic types
+
+`AriadneTypes.tla` is the single alias catalogue for specification-level roles.
+Machine aliases cover addresses, snapshots, locations, instruction and edge
+kinds, byte sources, definition origins, abstract states and values, machine
+statuses, and terminal outcomes. LLVM IR aliases cover artifacts, modules,
+functions, blocks, instructions, values, value kinds, terminator kinds, and
+callees. Analysis phases and obligation reasons are shared where their role is
+representation-independent.
+
+Every semantic string position uses a meaningful `$alias` in Snowcat
+annotations. `Str` remains only as the underlying representation in alias
+declarations. These aliases are documentary and transparent, not nominal
+newtypes; set-membership contracts still constrain their permitted values.
+
+## Shared machine contract
+
+`AriadneMachineCommon.tla` owns only knowledge that has the same meaning in CFG
+recovery and post-recovery state propagation:
+
+- local machine edge-kind vocabulary;
+- the snapshot-scoped, finite, nonempty, nonnegative VA contract;
+- snapshot-plus-VA external identity;
+- the typed structural edge constructor; and
+- well-formed normalized `uses`, `mustDefs`, and `mayDefs` sets.
+
+The module has no constants, variables, phases, transitions, obligations, or
+analysis policy. `Ariadne.tla` retains discovery, byte provenance, reaching
+definitions, and slicing. `AriadneMachineState.tla` retains abstract valuations,
+semantic transitions, fixed-point state propagation, and edge-feasibility
+classification. Compatibility aliases in the consumers preserve their existing
+public operator names while delegating definitions to the common module.
+
+## Native LLVM IR model
+
+The LLVM IR model consumes one normalized, verifier-accepted function from one
+artifact. It does not lift machine code, reconstruct compiler IR, or assert that
+an IR instruction corresponds to a machine address. Its identity is the tuple
+of `ArtifactId`, `ModuleId`, `FunctionId`, block, and instruction.
+
+The representation has two node domains:
+
+- Basic blocks form the authoritative CFG. `ControlGraph` is derived exactly
+  from each terminator's typed successors.
+- LLVM instructions form the dependency and slice graph. Direct SSA uses name
+  their unique instruction producers; argument, constant, global, and external
+  values remain non-instruction inputs.
+
+Phi inputs retain both predecessor block and incoming value. The contract
+requires exactly one incoming record per CFG predecessor and keeps all incoming
+values for conservative slicing. `MemoryPreds` is a trusted conservative input
+for dependencies not represented by ordinary SSA def-use. Passing this model
+does not validate an alias analysis or LLVM opcode semantics.
+
+Calls occupy a separate `CallGraph`; they do not become intraprocedural block
+CFG edges. Incomplete call targets produce a `call-targets` obligation. Adapter
+obligations also preserve unsupported instructions, incomplete semantics,
+unknown memory aliases, and unmodeled exceptional, system, or concurrent
+behavior. A completed slice may therefore remain partial.
+
+The LLVM IR state machine starts with the requested instruction seeds, adds SSA
+and memory producers until dependency closure, and then reaches `done`. Its
+properties check normalized input types, exact terminator-derived control
+edges, phi/CFG correspondence, valid dependency producers, slice closure, and
+fair termination. Interprocedural call/return matching, path feasibility, and
+machine/IR correlation remain outside this model.
+
+## Abstract machine-state model
+
+`AriadneMachineState.tla` consumes the frozen decoded-node set and `LocalGraph`
+produced by machine recovery. It does not discover instructions, change edges,
+or follow `call` edges. A returning call summary is represented by the existing
+local `summary` edge and an adapter-supplied semantic transition.
+
+The model uses a finite collecting semantics. `statesAt[a]` contains abstract
+state identities that may hold before instruction `a`. Each identity has a
+`Valuation` mapping normalized register, flag, or memory locations to nonempty
+finite value sets, plus a status. Separate identities can preserve correlations
+that a single pointwise join would lose.
+
+`StateSteps` is a trusted nondeterministic relation from a running before-state
+through one instruction and one existing structural edge to a running
+after-state. `TerminalTransitions` records faults, returns, and stops. Every
+transition must preserve locations outside the instruction's `MayDefs`; the
+model checks this frame property but does not prove the supplied transitions
+faithfully implement an ISA.
+
+Entry states are attached only to declared entry points. Propagation repeatedly
+adds after-states along local structural edges until a fixed point. The graph is
+never filtered. Instead, the final result partitions structural edges into:
+
+- `FeasibleEdges`, witnessed by a reached semantic transition;
+- `ProvablyInfeasibleEdges`, absent at a reached site whose semantics adapter
+  supplied a trusted completeness certificate; and
+- `UnknownFeasibilityEdges`, where reachability or semantic completeness is
+  insufficient for either conclusion.
+
+Missing semantic completeness produces an `incomplete-semantics` obligation.
+Additional adapter obligations preserve unknown memory, unmodeled exceptions,
+system calls, and concurrency. A crash-time state may seed its exact captured
+instruction; the model does not authorize treating it as an earlier state or
+using it to rewrite the structural CFG.
 
 ## Scope and abstraction boundary
 
@@ -15,8 +121,10 @@ An address is the virtual address (VA) of a candidate instruction start in one
 fixed address-space snapshot, identified by the nonempty `SnapshotId`. VAs are
 nonnegative integers; architecture-specific address widths remain an adapter
 constraint.
-Apalache annotations represent addresses as `Int` and location identifiers as
-`Str`; record fields and function/set element types are explicitly declared.
+Apalache annotations represent addresses as the shared `$address` alias backed
+by `Int`, and location identifiers as `Str`; record fields and function/set
+element types are explicitly declared. The alias documents intent but is not a
+nominal type, so the nonnegative-VA contract remains semantically necessary.
 `Insn` is a trusted semantic description supplied by a decoder/semantics adapter.
 `Decodable` identifies successful decodes. Thus the model verifies what the
 engine does with decoded instructions; it does not verify x86 decoding, LLVM,
@@ -222,12 +330,13 @@ Run the compatibility checks from the repository root:
 bash Specs/check-apalache.sh
 ```
 
-The script typechecks all four modules, checks each larger scenario through
+The script typechecks all ten modules, checks each larger machine scenario through
 six transitions, checks `AriadnePipeline.tla` through eight transitions, and
 checks `AriadneCalls.tla` through the same configurable bound (six by default).
-It writes all artifacts to a fresh temporary directory and prints its path.
-Set `APALACHE_MC` to select an executable. To change the bound for the larger
-scenarios or select one scenario:
+It checks `AriadneLLVMIRExample.tla` through eight transitions and
+`AriadneMachineStateExample.tla` through six. It writes all artifacts to a fresh
+temporary directory and prints its path. Set `APALACHE_MC` to select an
+executable. To change the bound for the larger scenarios or select one scenario:
 
 ```sh
 bash Specs/check-apalache.sh 10 Loop
@@ -246,6 +355,12 @@ apalache-mc --out-dir=/tmp/ariadne-apalache-pipeline check \
 apalache-mc --out-dir=/tmp/ariadne-apalache-calls check \
   --init=Init --next=Next --inv=Safety \
   --length=6 --no-deadlock AriadneCalls.tla
+apalache-mc --out-dir=/tmp/ariadne-apalache-llvmir check \
+  --init=Init --next=Next --inv=Safety \
+  --length=8 --no-deadlock AriadneLLVMIRExample.tla
+apalache-mc --out-dir=/tmp/ariadne-apalache-machine-state check \
+  --init=Init --next=Next --inv=Safety \
+  --length=6 --no-deadlock AriadneMachineStateExample.tla
 ```
 
 The six-step runs primarily cover recovery, not completion of the larger
@@ -272,6 +387,16 @@ are not recorded as passes or as discovered model errors.
 apalache-mc --out-dir=/tmp/ariadne-apalache-witness check \
   --init=Init --next=Next --inv=NotDone \
   --length=8 --no-deadlock AriadnePipeline.tla
+
+# Expected result: a counterexample to NotDone with the exact LLVM IR slice.
+apalache-mc --out-dir=/tmp/ariadne-apalache-llvmir-witness check \
+  --init=Init --next=Next --inv=NotDone \
+  --length=5 --no-deadlock AriadneLLVMIRExample.tla
+
+# Expected result: a counterexample with the exact final machine-state map.
+apalache-mc --out-dir=/tmp/ariadne-apalache-machine-state-witness check \
+  --init=Init --next=Next --inv=NotDone \
+  --length=5 --no-deadlock AriadneMachineStateExample.tla
 ```
 
 These commands check **bounded safety**, not fair termination. They deliberately
@@ -318,6 +443,14 @@ Its sparse VAs 4096 and 4100 also check that addresses are preserved as supplied
 with an explicit successor rather than an implicit adjacent node index.
 `Calls.cfg` checks `AriadneCalls.tla`, including the independent `CallPolicy`
 assertions and exact final unified graph and data-flow results.
+`LLVMIR.cfg` checks `AriadneLLVMIRExample.tla`: an exact four-block CFG, a phi
+join, conservative store/call memory predecessors, a separate call edge, an
+incomplete-call obligation, artifact-scoped identity, final dependency slice,
+and fair termination.
+`MachineState.cfg` checks `AriadneMachineStateExample.tla`: propagation of a
+finite entry state through a constant and flag update, preservation of both
+structural branch edges, separate feasible/infeasible classification, the
+unreachable fallthrough node, the reached return outcome, and fair termination.
 
 Run from `Specs/` with Java and the TLA+ tools available:
 
@@ -328,6 +461,8 @@ tlc -workers 2 -metadir /tmp/ariadne-tlc-loop -config Loop.cfg AriadneExample.tl
 tlc -workers 2 -metadir /tmp/ariadne-tlc-closed -config Closed.cfg AriadneExample.tla
 tlc -workers 2 -metadir /tmp/ariadne-tlc-pipeline -config Pipeline.cfg AriadnePipeline.tla
 tlc -workers 2 -metadir /tmp/ariadne-tlc-calls -config Calls.cfg AriadneCalls.tla
+tlc -workers 2 -metadir /tmp/ariadne-tlc-llvmir -config LLVMIR.cfg AriadneLLVMIRExample.tla
+tlc -workers 2 -metadir /tmp/ariadne-tlc-machine-state -config MachineState.cfg AriadneMachineStateExample.tla
 ```
 
 If no `tlc` launcher is installed, substitute `java -cp /path/to/tla2tools.jar
@@ -374,3 +509,83 @@ the contract to `TypeOK`; the other bounded runs used that final contract.
 The updated pipeline's `NotDone` check at bound eight produced the expected
 counterexample (exit 12), ending in `done` with slice `{4096, 4100}`.
 These checks do not validate a byte provider or uniqueness of snapshot IDs.
+
+### Native LLVM IR validation (2026-09-19)
+
+Apalache 0.61.0 (build `831d473`) typechecked `AriadneLLVMIR.tla` and
+`AriadneLLVMIRExample.tla`. Its bounded `Safety` check through eight transitions
+reported no error; the fixture has no executions as long as the supplied bound
+because it reaches `done` after five transitions.
+
+The full `check-apalache.sh 6 all` run also typechecked all six modules and
+reported no safety error for Binary, Dump, Loop, Closed, and Calls through six
+transitions or for Pipeline and LLVM IR through eight.
+
+The LLVM IR `NotDone` reachability check at bound five produced the expected
+counterexample (exit 12). Its final state is `done` with the exact nine-node
+`ExpectedSlice`, demonstrating that the fixture's completion assertion is
+exercised rather than vacuous.
+
+TLC 2026.03.24.222644 (revision `1476e7f`) with Java 25 and two workers
+exhaustively checked `LLVMIR.cfg`, including safety and fair termination:
+
+| Configuration | Generated states | Distinct states | Search depth |
+| --- | ---: | ---: | ---: |
+| `LLVMIR.cfg` | 5 | 5 | 5 |
+
+The seven configurations present at that point passed together in the same
+environment. The six existing machine fixtures retained their generated and
+distinct state counts.
+
+### Abstract machine-state validation (2026-09-19)
+
+Apalache 0.61.0 (build `831d473`) typechecked `AriadneMachineState.tla` and
+`AriadneMachineStateExample.tla`. Its bounded `Safety` check through six
+transitions reported no error and reached the terminal analysis state before
+the supplied bound.
+
+The final `check-apalache.sh 6 all` run typechecked all eight modules and
+reported no safety error for Binary, Dump, Loop, Closed, and Calls through six
+transitions, Pipeline and LLVM IR through eight, or machine state through six.
+
+The `NotDone` reachability check at bound five produced the expected
+counterexample (exit 12). Its final state is `done` with `statesAt` equal to
+`ExpectedStates`, demonstrating that the final edge classifications are
+exercised rather than vacuous.
+
+TLC 2026.03.24.222644 (revision `1476e7f`) with Java 25 and two workers
+exhaustively checked `MachineState.cfg`, including safety and fair termination:
+
+| Configuration | Generated states | Distinct states | Search depth |
+| --- | ---: | ---: | ---: |
+| `MachineState.cfg` | 5 | 5 | 5 |
+
+The full eight-configuration TLC suite passed in the same environment. The
+seven prior configurations retained their generated and distinct state counts.
+
+### Shared machine contract extraction validation (2026-09-19)
+
+Apalache 0.61.0 (build `831d473`) typechecked
+`AriadneMachineCommon.tla`, `Ariadne.tla`, and
+`AriadneMachineStateExample.tla`. Bounded `Safety` checks reported no error for
+the Binary recovery fixture and the machine-state fixture through six
+transitions.
+
+TLC 2026.03.24.222644 (revision `1476e7f`) with Java 25 and two workers passed
+all eight configurations after the extraction. Generated and distinct state
+counts remained unchanged, providing a behavioral-preservation check for both
+common-module consumers and the unaffected LLVM IR model.
+
+### Semantic type-alias validation (2026-09-19)
+
+`AriadneTypes.tla` declares Apalache lower-camel aliases for every semantic
+`Str` role and `address = Int`. Machine-model annotations use `$address` for
+semantic VAs, address-keyed functions, graph endpoints, definition sites, and
+obligations. Unrelated numeric quantities remain annotated as `Int`.
+
+Apalache 0.61.0 typechecked all ten modules with the aliases, with no raw `Str`
+remaining in `@type` annotations. Bounded `Safety` checks reported no error for
+Binary recovery and machine-state propagation through six transitions, or for
+LLVM IR through eight. All eight TLC configurations passed with unchanged state
+counts; as expected, Snowcat aliases change annotations rather than untyped
+TLA+ behavior.

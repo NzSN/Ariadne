@@ -1,38 +1,39 @@
 ------------------------- MODULE AriadneExample -------------------------
-EXTENDS Naturals, FiniteSets
+EXTENDS AriadneMachineCommon
 
 CONSTANT
-  \* @type: Str;
+  \* @type: $inputKind;
   Mode
 CONSTANT
-  \* @type: Str;
+  \* @type: $scenarioId;
   Scenario
 VARIABLE
-  \* @type: Str;
+  \* @type: $analysisPhase;
   phase
 VARIABLE
-  \* @type: Set(Int);
+  \* @type: Set($address);
   pending
 VARIABLE
-  \* @type: Set(Int);
+  \* @type: Set($address);
   visited
 VARIABLE
-  \* @type: Set(Int);
+  \* @type: Set($address);
   decoded
 VARIABLE
-  \* @type: Int -> Str;
+  \* @type: $address -> $byteSource;
   provenance
 VARIABLE
-  \* @type: Set({src: Int, dst: Int, kind: Str});
+  \* @type: Set({src: $address, dst: $address, kind: $edgeKind});
   edges
 VARIABLE
-  \* @type: Set({site: Int, reason: Str});
+  \* @type: Set({site: $address, reason: $obligationReason});
   obligations
 VARIABLE
-  \* @type: Int -> Set({loc: Str, site: Int, origin: Str});
+  \* @type: $address -> Set({loc: $location, site: $address,
+  \*                         origin: $definitionOrigin});
   reaching
 VARIABLE
-  \* @type: Set(Int);
+  \* @type: Set($address);
   slice
 ASSUME Mode \in {"binary", "dump"} /\ Scenario \in {"partial", "loop", "closed"}
 

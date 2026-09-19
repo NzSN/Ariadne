@@ -1,34 +1,37 @@
 ------------------------- MODULE AriadnePipeline -------------------------
-EXTENDS Naturals
+EXTENDS AriadneMachineCommon
 
 \* Small end-to-end instance: VA 4096 defines x, VA 4100 uses x.
 \* Sparse VAs check that discovery uses explicit successors, not node indices.
 \* Unlike the larger recovery fixtures, all phases fit within eight steps.
 VARIABLES
-  \* @type: Str;
+  \* @type: $analysisPhase;
   phase,
-  \* @type: Set(Int);
+  \* @type: Set($address);
   pending,
-  \* @type: Set(Int);
+  \* @type: Set($address);
   visited,
-  \* @type: Set(Int);
+  \* @type: Set($address);
   decoded,
-  \* @type: Int -> Str;
+  \* @type: $address -> $byteSource;
   provenance,
-  \* @type: Set({src: Int, dst: Int, kind: Str});
+  \* @type: Set({src: $address, dst: $address, kind: $edgeKind});
   edges,
-  \* @type: Set({site: Int, reason: Str});
+  \* @type: Set({site: $address, reason: $obligationReason});
   obligations,
-  \* @type: Int -> Set({loc: Str, site: Int, origin: Str});
+  \* @type: $address -> Set({loc: $location, site: $address,
+  \*                         origin: $definitionOrigin});
   reaching,
-  \* @type: Set(Int);
+  \* @type: Set($address);
   slice
 
-\* @type: Set(Int);
+\* @type: Set($address);
 NoAddresses == {}
 
-\* @type: Int -> {kind: Str, fall: Set(Int), targets: Set(Int), complete: Bool,
-\*               uses: Set(Str), mustDefs: Set(Str), mayDefs: Set(Str)};
+\* @type: $address -> {kind: $instructionKind,
+\*               fall: Set($address), targets: Set($address), complete: Bool,
+\*               uses: Set($location), mustDefs: Set($location),
+\*               mayDefs: Set($location)};
 Instructions == [a \in {4096, 4100} |->
   [kind |-> IF a = 4096 THEN "ordinary" ELSE "return",
    fall |-> IF a = 4096 THEN {4100} ELSE {},

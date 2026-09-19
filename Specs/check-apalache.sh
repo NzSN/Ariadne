@@ -35,4 +35,8 @@ done
   --init=Init --next=Next --inv=Safety --length=8 --no-deadlock AriadnePipeline.tla
 "$checker" --out-dir="$run_root/Calls" check \
   --init=Init --next=Next --inv=Safety --length="$bound" --no-deadlock AriadneCalls.tla
-printf 'Scenario and call-policy safety checks passed through bound %s; pipeline through 8.\n' "$bound"
+"$checker" --out-dir="$run_root/LLVMIR" check \
+  --init=Init --next=Next --inv=Safety --length=8 --no-deadlock AriadneLLVMIRExample.tla
+"$checker" --out-dir="$run_root/MachineState" check \
+  --init=Init --next=Next --inv=Safety --length=6 --no-deadlock AriadneMachineStateExample.tla
+printf 'Scenario and call-policy safety checks passed through bound %s; pipeline and LLVM IR through 8; machine state through 6.\n' "$bound"

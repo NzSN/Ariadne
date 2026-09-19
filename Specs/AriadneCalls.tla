@@ -1,5 +1,5 @@
 --------------------------- MODULE AriadneCalls ---------------------------
-EXTENDS Naturals
+EXTENDS AriadneMachineCommon
 
 \* Instruction 1 calls either 3 or 4 and may return to continuation 2.
 \* Root 3 is independently analyzed; readable callee 4 is not a root.
@@ -7,30 +7,33 @@ EXTENDS Naturals
 \*   1 --summary--> 2     1 --call--> 3     1 --call--> 4
 \* Caller definitions must reach 2, never 3 via the call edge; 4 stays unvisited.
 VARIABLES
-  \* @type: Str;
+  \* @type: $analysisPhase;
   phase,
-  \* @type: Set(Int);
+  \* @type: Set($address);
   pending,
-  \* @type: Set(Int);
+  \* @type: Set($address);
   visited,
-  \* @type: Set(Int);
+  \* @type: Set($address);
   decoded,
-  \* @type: Int -> Str;
+  \* @type: $address -> $byteSource;
   provenance,
-  \* @type: Set({src: Int, dst: Int, kind: Str});
+  \* @type: Set({src: $address, dst: $address, kind: $edgeKind});
   edges,
-  \* @type: Set({site: Int, reason: Str});
+  \* @type: Set({site: $address, reason: $obligationReason});
   obligations,
-  \* @type: Int -> Set({loc: Str, site: Int, origin: Str});
+  \* @type: $address -> Set({loc: $location, site: $address,
+  \*                         origin: $definitionOrigin});
   reaching,
-  \* @type: Set(Int);
+  \* @type: Set($address);
   slice
 
-\* @type: Set(Int);
+\* @type: Set($address);
 NoAddresses == {}
 
-\* @type: Int -> {kind: Str, fall: Set(Int), targets: Set(Int), complete: Bool,
-\*               uses: Set(Str), mustDefs: Set(Str), mayDefs: Set(Str)};
+\* @type: $address -> {kind: $instructionKind,
+\*               fall: Set($address), targets: Set($address), complete: Bool,
+\*               uses: Set($location), mustDefs: Set($location),
+\*               mayDefs: Set($location)};
 Instructions == [a \in 1..4 |->
   [kind |-> IF a = 1 THEN "call" ELSE "return",
    fall |-> IF a = 1 THEN {2} ELSE {},
