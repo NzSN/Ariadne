@@ -1,0 +1,35 @@
+{
+  "projectedSha256": "8064b20c784e499fade65d004faae8d2c5d2cc252810e1c4c155ee74cadf7f42",
+  "projectedVariables": [
+    "action_taken",
+    "decoded",
+    "edges",
+    "fixture_id",
+    "obligations",
+    "parameters",
+    "pending",
+    "phase",
+    "provenance",
+    "reaching",
+    "slice",
+    "visited"
+  ],
+  "projectionSha256": "adf53be15f9c6ca7b7d1e563f6978cac984ed3d9512e79fde789c5a775ceaa80",
+  "rawSha256": "5ba25b43d084150ec736e4175f835a3339ba1d6487b16a0875ccf467e97aeb94",
+  "rawVariables": [
+    "action_taken",
+    "decoded",
+    "edges",
+    "fixture_id",
+    "obligations",
+    "parameters",
+    "pending",
+    "phase",
+    "provenance",
+    "reaching",
+    "slice",
+    "visited"
+  ],
+  "roundTripChecked": true,
+  "schema": "ariadne.mbt-address-map-projection/v1"
+}

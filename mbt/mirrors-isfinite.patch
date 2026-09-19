@@ -1,0 +1,39 @@
+diff --git a/Core/Tla/Elaboration.lean b/Core/Tla/Elaboration.lean
+index 31f93df..e423eda 100644
+--- a/Core/Tla/Elaboration.lean
++++ b/Core/Tla/Elaboration.lean
+@@ -227,6 +227,8 @@ def standardOperatorFacts : Array StandardOperatorFact := #[
+   { name := "Len", arity := 1, level := .constant, module := ⟨"Sequences"⟩ },
+   { name := "Head", arity := 1, level := .constant, module := ⟨"Sequences"⟩ },
+   { name := "Tail", arity := 1, level := .constant, module := ⟨"Sequences"⟩ },
++  { name := "IsFiniteSet", arity := 1, level := .constant,
++    module := ⟨"FiniteSets"⟩ },
+   { name := "Cardinality", arity := 1, level := .constant,
+     module := ⟨"FiniteSets"⟩ }]
+ 
+diff --git a/Core/Tla/Lexer.lean b/Core/Tla/Lexer.lean
+index f82d604..465cd07 100644
+--- a/Core/Tla/Lexer.lean
++++ b/Core/Tla/Lexer.lean
+@@ -182,7 +182,7 @@ namespace LanguageProfile
+ the reviewed standard-catalog revision. Later revisions extend these tables
+ instead of changing lexer code. -/
+ def default : LanguageProfile :=
+-  { name := "mirrors-tla-frontend-profile-4"
++  { name := "mirrors-tla-frontend-profile-4-ariadne-isfinite-v1"
+     keywords := defaultKeywords
+     prefixKeywords := defaultPrefixKeywords
+     symbols := defaultSymbolAliases
+diff --git a/Core/Tla/Parser.lean b/Core/Tla/Parser.lean
+index 3767a73..c83710c 100644
+--- a/Core/Tla/Parser.lean
++++ b/Core/Tla/Parser.lean
+@@ -263,7 +263,7 @@ which are unchanged by the standard-catalog revision, and the profile name
+ `mirrors-tla-frontend-profile-4`. The three Unicode aliases admitted in
+ revision 3 still reach the parser under their canonical ASCII spellings. -/
+ def default : ParserProfile :=
+-  { name := "mirrors-tla-frontend-profile-4"
++  { name := "mirrors-tla-frontend-profile-4-ariadne-isfinite-v1"
+     operators := revisionTwoOperators }
+ 
+ /-- The tightest precedence level the profile defines. Levels above it parse

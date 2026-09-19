@@ -1,0 +1,110 @@
+{
+  "#meta": {
+    "description": "Created by Apalache on Sat Sep 19 16:16:11 CST 2026",
+    "format": "ITF",
+    "format-description": "https://apalache-mc.org/docs/adr/015adr-trace.html",
+    "varTypes": {
+      "action_taken": "Str",
+      "decoded": "Set(Int)",
+      "edges": "Set({ dst: Int, kind: Str, src: Int })",
+      "fixture_id": "Str",
+      "obligations": "Set({ reason: Str, site: Int })",
+      "parameters": "{ fixture: Str }",
+      "pending": "Set(Int)",
+      "phase": "Str",
+      "provenance": "(Int -> Str)",
+      "reaching": "(Int -> Set({ loc: Str, origin: Str, site: Int }))",
+      "slice": "Set(Int)",
+      "visited": "Set(Int)"
+    }
+  },
+  "params": [
+    "Fixture"
+  ],
+  "states": [
+    {
+      "#meta": {
+        "index": 0
+      },
+      "Fixture": "Pipeline",
+      "action_taken": "init",
+      "decoded": {
+        "#set": []
+      },
+      "edges": {
+        "#set": []
+      },
+      "fixture_id": "Pipeline",
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "Pipeline"
+      },
+      "pending": {
+        "#set": [
+          {
+            "#bigint": "4096"
+          }
+        ]
+      },
+      "phase": "recover",
+      "provenance": {
+        "#map": [
+          [
+            {
+              "#bigint": "4096"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "4100"
+            },
+            "unavailable"
+          ]
+        ]
+      },
+      "reaching": {
+        "#map": [
+          [
+            {
+              "#bigint": "4096"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "4100"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "slice": {
+        "#set": []
+      },
+      "visited": {
+        "#set": []
+      }
+    }
+  ],
+  "vars": [
+    "fixture_id",
+    "edges",
+    "provenance",
+    "pending",
+    "action_taken",
+    "parameters",
+    "visited",
+    "slice",
+    "obligations",
+    "reaching",
+    "phase",
+    "decoded"
+  ]
+}

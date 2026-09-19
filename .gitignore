@@ -15,3 +15,8 @@ _apalache-out/
 
 # Bazel-generated output directories and workspace symlinks.
 /bazel-*
+
+# Cargo build output.
+/target/
+/mbt/target/
+/mbt/.work/

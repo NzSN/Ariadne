@@ -5,8 +5,11 @@
 models. `Ariadne.tla` specifies the machine-code analysis engine for binary and
 crash-dump inputs, while `AriadneMachineState.tla` consumes its frozen local CFG.
 `AriadneLLVMIR.tla` separately specifies analysis of verified LLVM IR supplied
-directly as `.ll` or `.bc`. The intended implementation is C++23, Bazel, and a
-pinned LLVM release; no analyzer implementation is introduced here.
+directly as `.ll` or `.bc`. The [Rust library](../src/lib.rs), built with Cargo,
+implements the `Ariadne.tla` machine-analysis core. The LLVM IR and abstract
+machine-state models remain specification-only. See the
+[implementation guide](../docs/implementation.md) for the Rust correspondence
+and validation boundary.
 
 ## Shared semantic types
 

@@ -6,18 +6,42 @@ investigating Chromium and Electron crashes: start from instructions of interest
 recover their surrounding control flow, and trace possible origins of the values
 they use.
 
-**Current status: formal specification.** This repository contains TLA+ models,
-executable model-checking scenarios, and documentation. One model covers machine
-code supplied by binary/dump adapters; another covers verified LLVM IR supplied
-directly as `.ll` or `.bc`; a post-recovery model propagates finite abstract
-machine states. Readers, LLVM integration, the analyzer CLI, and graph exporters
+**Current status: Rust machine-analysis core and formal specifications.** The
+Rust library implements `Specs/Ariadne.tla`: local CFG recovery, may-reaching
+definitions, and backward data slicing from fixed adapter-supplied inputs.
+The separate native LLVM IR and abstract machine-state models remain formal
+specifications. Readers, LLVM integration, the analyzer CLI, and graph exporters
 have not been implemented.
 
-The intended implementation stack is **C++23, Bazel, and a pinned LLVM release**.
-The LLVM release has not yet been selected or pinned; there are currently no
-Bazel build targets. LLVM MC is the intended instruction-decoding foundation.
-Instruction-effect summaries and memory-alias analysis require an additional
-semantic layer; decoder metadata alone does not provide the complete analysis.
+The core uses **Rust 2024 and Cargo**, with no external crate dependencies.
+LLVM MC remains the intended instruction-decoding foundation for a future
+adapter; an LLVM release has not yet been selected or pinned. Instruction-effect
+summaries and memory-alias analysis require an additional semantic layer;
+decoder metadata alone does not provide the complete analysis.
+
+Build and test the Rust library from the repository root:
+
+```sh
+cargo test --offline
+cargo clippy --offline --all-targets -- -D warnings
+```
+
+Use `ariadne::analyze(request)` for a completed result, or `Analyzer::step()` to
+observe individual specification transitions. The input contract, runnable
+example, and specification correspondence are described in
+[the implementation guide](docs/implementation.md).
+
+The [model-based test gate](mbt/README.md) uses Mirrors' generated `mirrorrust-v1`
+binding and MirrorRust to replay TLC-generated traces against the real Rust
+analyzer, with required interface negotiation, coverage checks, and deliberate
+implementation mutations:
+
+```sh
+python3 mbt/run.py
+```
+
+Follow the MBT guide's one-time tool preparation first; ordinary Cargo tests
+remain independent of the model-checking tools and client dependencies.
 
 ## Intended workflow
 
@@ -155,6 +179,12 @@ state transitions, invariants, and interpretation of partial results.
 
 | Path | Purpose |
 | --- | --- |
+| [src/lib.rs](src/lib.rs) | Rust library entry point and runnable API example |
+| [src/model.rs](src/model.rs) | Request validation, semantic types, state, and result views |
+| [src/engine.rs](src/engine.rs) | Executable implementation of `Specs/Ariadne.tla` |
+| [tests/](tests/) | Specification fixtures, transition checks, and independent generated-request oracles |
+| [docs/implementation.md](docs/implementation.md) | Rust API, model correspondence, and implementation boundaries |
+| [mbt/README.md](mbt/README.md) | Mirrors/MirrorRust MBT setup, checked corpus, mutation gate, and evidence |
 | [Specs/AriadneTypes.tla](Specs/AriadneTypes.tla) | Shared Apalache aliases for semantic identities, labels, states, and values |
 | [Specs/AriadneMachineCommon.tla](Specs/AriadneMachineCommon.tla) | Stateless machine address, local-edge, and effect contracts shared by machine models |
 | [Specs/Ariadne.tla](Specs/Ariadne.tla) | Core state machine, with detailed behavioral comments and Apalache type annotations |
@@ -169,15 +199,16 @@ state transitions, invariants, and interpretation of partial results.
 | [Specs/README.md](Specs/README.md) | Checking commands, assumptions, and recorded validation results |
 
 The `.cfg` files in `Specs/` configure TLC scenarios. Temporary directories,
-model-checker outputs, and Bazel output paths are covered by [.gitignore](.gitignore).
+model-checker outputs, Cargo build output, and Bazel output paths are covered by
+[.gitignore](.gitignore).
 
 ## Run the specification checks
 
 Use Java and the corresponding TLA+ tools. Recorded validation includes
 **Java 17**, **Apalache 0.57.0**, and **TLC 2.19**, plus the current native-IR
 validation with **Java 25**, **Apalache 0.61.0**, and TLC revision `1476e7f`.
-These are tested versions, not a repository dependency lock. No C++ or Bazel
-installation is needed for the model checks.
+These are tested versions, not a repository dependency lock. The Rust library
+and the TLA+ model checks can be built and run independently.
 
 From the repository root, run Apalache with `apalache-mc` on `PATH`:
 

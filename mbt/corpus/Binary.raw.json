@@ -1,0 +1,4845 @@
+{
+  "#meta": {
+    "format": "ITF",
+    "varTypes": {
+      "action_taken": "Str",
+      "decoded": "Set(Int)",
+      "edges": "Set({ dst: Int, kind: Str, src: Int })",
+      "fixture_id": "Str",
+      "obligations": "Set({ reason: Str, site: Int })",
+      "parameters": "{ fixture: Str }",
+      "pending": "Set(Int)",
+      "phase": "Str",
+      "provenance": "(Int -> Str)",
+      "reaching": "(Int -> Set({ loc: Str, origin: Str, site: Int }))",
+      "slice": "Set(Int)",
+      "visited": "Set(Int)"
+    }
+  },
+  "param_vars": [],
+  "params": [],
+  "states": [
+    {
+      "#meta": {
+        "index": 0
+      },
+      "action_taken": "init",
+      "decoded": {
+        "#set": []
+      },
+      "edges": {
+        "#set": []
+      },
+      "fixture_id": "Binary",
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "Binary"
+      },
+      "pending": {
+        "#set": [
+          {
+            "#bigint": "1"
+          }
+        ]
+      },
+      "phase": "recover",
+      "provenance": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            "unavailable"
+          ]
+        ]
+      },
+      "reaching": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "slice": {
+        "#set": []
+      },
+      "visited": {
+        "#set": []
+      }
+    },
+    {
+      "#meta": {
+        "index": 1
+      },
+      "action_taken": "visit",
+      "decoded": {
+        "#set": [
+          {
+            "#bigint": "1"
+          }
+        ]
+      },
+      "edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "1"
+            }
+          }
+        ]
+      },
+      "fixture_id": "Binary",
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "Binary"
+      },
+      "pending": {
+        "#set": [
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          }
+        ]
+      },
+      "phase": "recover",
+      "provenance": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            "unavailable"
+          ]
+        ]
+      },
+      "reaching": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "slice": {
+        "#set": []
+      },
+      "visited": {
+        "#set": [
+          {
+            "#bigint": "1"
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 2
+      },
+      "action_taken": "visit",
+      "decoded": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          }
+        ]
+      },
+      "edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          }
+        ]
+      },
+      "fixture_id": "Binary",
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "Binary"
+      },
+      "pending": {
+        "#set": [
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          }
+        ]
+      },
+      "phase": "recover",
+      "provenance": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            "unavailable"
+          ]
+        ]
+      },
+      "reaching": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "slice": {
+        "#set": []
+      },
+      "visited": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 3
+      },
+      "action_taken": "visit",
+      "decoded": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          }
+        ]
+      },
+      "edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "7"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      },
+      "fixture_id": "Binary",
+      "obligations": {
+        "#set": [
+          {
+            "reason": "indirect-targets",
+            "site": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "Binary"
+      },
+      "pending": {
+        "#set": [
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "6"
+          },
+          {
+            "#bigint": "7"
+          }
+        ]
+      },
+      "phase": "recover",
+      "provenance": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            "unavailable"
+          ]
+        ]
+      },
+      "reaching": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "slice": {
+        "#set": []
+      },
+      "visited": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 4
+      },
+      "action_taken": "visit",
+      "decoded": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          }
+        ]
+      },
+      "edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "7"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "summary",
+            "src": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "call",
+            "src": {
+              "#bigint": "4"
+            }
+          }
+        ]
+      },
+      "fixture_id": "Binary",
+      "obligations": {
+        "#set": [
+          {
+            "reason": "indirect-targets",
+            "site": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "reason": "call-targets",
+            "site": {
+              "#bigint": "4"
+            }
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "Binary"
+      },
+      "pending": {
+        "#set": [
+          {
+            "#bigint": "5"
+          },
+          {
+            "#bigint": "6"
+          },
+          {
+            "#bigint": "7"
+          }
+        ]
+      },
+      "phase": "recover",
+      "provenance": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            "unavailable"
+          ]
+        ]
+      },
+      "reaching": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "slice": {
+        "#set": []
+      },
+      "visited": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 5
+      },
+      "action_taken": "visit",
+      "decoded": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          }
+        ]
+      },
+      "edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "7"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "summary",
+            "src": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "call",
+            "src": {
+              "#bigint": "4"
+            }
+          }
+        ]
+      },
+      "fixture_id": "Binary",
+      "obligations": {
+        "#set": [
+          {
+            "reason": "indirect-targets",
+            "site": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "reason": "call-targets",
+            "site": {
+              "#bigint": "4"
+            }
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "Binary"
+      },
+      "pending": {
+        "#set": [
+          {
+            "#bigint": "6"
+          },
+          {
+            "#bigint": "7"
+          }
+        ]
+      },
+      "phase": "recover",
+      "provenance": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            "unavailable"
+          ]
+        ]
+      },
+      "reaching": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "slice": {
+        "#set": []
+      },
+      "visited": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 6
+      },
+      "action_taken": "visit",
+      "decoded": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          }
+        ]
+      },
+      "edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "7"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "summary",
+            "src": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "call",
+            "src": {
+              "#bigint": "4"
+            }
+          }
+        ]
+      },
+      "fixture_id": "Binary",
+      "obligations": {
+        "#set": [
+          {
+            "reason": "indirect-targets",
+            "site": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "reason": "call-targets",
+            "site": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "reason": "unavailable",
+            "site": {
+              "#bigint": "6"
+            }
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "Binary"
+      },
+      "pending": {
+        "#set": [
+          {
+            "#bigint": "7"
+          }
+        ]
+      },
+      "phase": "recover",
+      "provenance": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            "unavailable"
+          ]
+        ]
+      },
+      "reaching": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "slice": {
+        "#set": []
+      },
+      "visited": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          },
+          {
+            "#bigint": "6"
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 7
+      },
+      "action_taken": "visit",
+      "decoded": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          }
+        ]
+      },
+      "edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "7"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "summary",
+            "src": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "call",
+            "src": {
+              "#bigint": "4"
+            }
+          }
+        ]
+      },
+      "fixture_id": "Binary",
+      "obligations": {
+        "#set": [
+          {
+            "reason": "indirect-targets",
+            "site": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "reason": "call-targets",
+            "site": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "reason": "unavailable",
+            "site": {
+              "#bigint": "6"
+            }
+          },
+          {
+            "reason": "decode-failed",
+            "site": {
+              "#bigint": "7"
+            }
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "Binary"
+      },
+      "pending": {
+        "#set": []
+      },
+      "phase": "recover",
+      "provenance": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            "unavailable"
+          ]
+        ]
+      },
+      "reaching": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "slice": {
+        "#set": []
+      },
+      "visited": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          },
+          {
+            "#bigint": "6"
+          },
+          {
+            "#bigint": "7"
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 8
+      },
+      "action_taken": "finishRecovery",
+      "decoded": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          }
+        ]
+      },
+      "edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "7"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "summary",
+            "src": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "call",
+            "src": {
+              "#bigint": "4"
+            }
+          }
+        ]
+      },
+      "fixture_id": "Binary",
+      "obligations": {
+        "#set": [
+          {
+            "reason": "indirect-targets",
+            "site": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "reason": "call-targets",
+            "site": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "reason": "unavailable",
+            "site": {
+              "#bigint": "6"
+            }
+          },
+          {
+            "reason": "decode-failed",
+            "site": {
+              "#bigint": "7"
+            }
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "Binary"
+      },
+      "pending": {
+        "#set": []
+      },
+      "phase": "dataflow",
+      "provenance": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            "unavailable"
+          ]
+        ]
+      },
+      "reaching": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "slice": {
+        "#set": []
+      },
+      "visited": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          },
+          {
+            "#bigint": "6"
+          },
+          {
+            "#bigint": "7"
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 9
+      },
+      "action_taken": "propagate",
+      "decoded": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          }
+        ]
+      },
+      "edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "7"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "summary",
+            "src": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "call",
+            "src": {
+              "#bigint": "4"
+            }
+          }
+        ]
+      },
+      "fixture_id": "Binary",
+      "obligations": {
+        "#set": [
+          {
+            "reason": "indirect-targets",
+            "site": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "reason": "call-targets",
+            "site": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "reason": "unavailable",
+            "site": {
+              "#bigint": "6"
+            }
+          },
+          {
+            "reason": "decode-failed",
+            "site": {
+              "#bigint": "7"
+            }
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "Binary"
+      },
+      "pending": {
+        "#set": []
+      },
+      "phase": "dataflow",
+      "provenance": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            "unavailable"
+          ]
+        ]
+      },
+      "reaching": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "slice": {
+        "#set": []
+      },
+      "visited": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          },
+          {
+            "#bigint": "6"
+          },
+          {
+            "#bigint": "7"
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 10
+      },
+      "action_taken": "propagate",
+      "decoded": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          }
+        ]
+      },
+      "edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "7"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "summary",
+            "src": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "call",
+            "src": {
+              "#bigint": "4"
+            }
+          }
+        ]
+      },
+      "fixture_id": "Binary",
+      "obligations": {
+        "#set": [
+          {
+            "reason": "indirect-targets",
+            "site": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "reason": "call-targets",
+            "site": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "reason": "unavailable",
+            "site": {
+              "#bigint": "6"
+            }
+          },
+          {
+            "reason": "decode-failed",
+            "site": {
+              "#bigint": "7"
+            }
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "Binary"
+      },
+      "pending": {
+        "#set": []
+      },
+      "phase": "dataflow",
+      "provenance": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            "unavailable"
+          ]
+        ]
+      },
+      "reaching": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "slice": {
+        "#set": []
+      },
+      "visited": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          },
+          {
+            "#bigint": "6"
+          },
+          {
+            "#bigint": "7"
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 11
+      },
+      "action_taken": "propagate",
+      "decoded": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          }
+        ]
+      },
+      "edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "7"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "summary",
+            "src": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "call",
+            "src": {
+              "#bigint": "4"
+            }
+          }
+        ]
+      },
+      "fixture_id": "Binary",
+      "obligations": {
+        "#set": [
+          {
+            "reason": "indirect-targets",
+            "site": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "reason": "call-targets",
+            "site": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "reason": "unavailable",
+            "site": {
+              "#bigint": "6"
+            }
+          },
+          {
+            "reason": "decode-failed",
+            "site": {
+              "#bigint": "7"
+            }
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "Binary"
+      },
+      "pending": {
+        "#set": []
+      },
+      "phase": "dataflow",
+      "provenance": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            "unavailable"
+          ]
+        ]
+      },
+      "reaching": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "slice": {
+        "#set": []
+      },
+      "visited": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          },
+          {
+            "#bigint": "6"
+          },
+          {
+            "#bigint": "7"
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 12
+      },
+      "action_taken": "propagate",
+      "decoded": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          }
+        ]
+      },
+      "edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "7"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "summary",
+            "src": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "call",
+            "src": {
+              "#bigint": "4"
+            }
+          }
+        ]
+      },
+      "fixture_id": "Binary",
+      "obligations": {
+        "#set": [
+          {
+            "reason": "indirect-targets",
+            "site": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "reason": "call-targets",
+            "site": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "reason": "unavailable",
+            "site": {
+              "#bigint": "6"
+            }
+          },
+          {
+            "reason": "decode-failed",
+            "site": {
+              "#bigint": "7"
+            }
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "Binary"
+      },
+      "pending": {
+        "#set": []
+      },
+      "phase": "dataflow",
+      "provenance": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            "unavailable"
+          ]
+        ]
+      },
+      "reaching": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "x",
+                  "origin": "instruction",
+                  "site": {
+                    "#bigint": "2"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "slice": {
+        "#set": []
+      },
+      "visited": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          },
+          {
+            "#bigint": "6"
+          },
+          {
+            "#bigint": "7"
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 13
+      },
+      "action_taken": "propagate",
+      "decoded": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          }
+        ]
+      },
+      "edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "7"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "summary",
+            "src": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "call",
+            "src": {
+              "#bigint": "4"
+            }
+          }
+        ]
+      },
+      "fixture_id": "Binary",
+      "obligations": {
+        "#set": [
+          {
+            "reason": "indirect-targets",
+            "site": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "reason": "call-targets",
+            "site": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "reason": "unavailable",
+            "site": {
+              "#bigint": "6"
+            }
+          },
+          {
+            "reason": "decode-failed",
+            "site": {
+              "#bigint": "7"
+            }
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "Binary"
+      },
+      "pending": {
+        "#set": []
+      },
+      "phase": "dataflow",
+      "provenance": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            "unavailable"
+          ]
+        ]
+      },
+      "reaching": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "x",
+                  "origin": "instruction",
+                  "site": {
+                    "#bigint": "2"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "x",
+                  "origin": "instruction",
+                  "site": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "loc": "x",
+                  "origin": "instruction",
+                  "site": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "instruction",
+                  "site": {
+                    "#bigint": "4"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "slice": {
+        "#set": []
+      },
+      "visited": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          },
+          {
+            "#bigint": "6"
+          },
+          {
+            "#bigint": "7"
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 14
+      },
+      "action_taken": "finishDataflow",
+      "decoded": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          }
+        ]
+      },
+      "edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "7"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "summary",
+            "src": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "call",
+            "src": {
+              "#bigint": "4"
+            }
+          }
+        ]
+      },
+      "fixture_id": "Binary",
+      "obligations": {
+        "#set": [
+          {
+            "reason": "indirect-targets",
+            "site": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "reason": "call-targets",
+            "site": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "reason": "unavailable",
+            "site": {
+              "#bigint": "6"
+            }
+          },
+          {
+            "reason": "decode-failed",
+            "site": {
+              "#bigint": "7"
+            }
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "Binary"
+      },
+      "pending": {
+        "#set": []
+      },
+      "phase": "slice",
+      "provenance": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            "unavailable"
+          ]
+        ]
+      },
+      "reaching": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "x",
+                  "origin": "instruction",
+                  "site": {
+                    "#bigint": "2"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "x",
+                  "origin": "instruction",
+                  "site": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "loc": "x",
+                  "origin": "instruction",
+                  "site": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "instruction",
+                  "site": {
+                    "#bigint": "4"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "slice": {
+        "#set": [
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          }
+        ]
+      },
+      "visited": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          },
+          {
+            "#bigint": "6"
+          },
+          {
+            "#bigint": "7"
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 15
+      },
+      "action_taken": "expandSlice",
+      "decoded": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          }
+        ]
+      },
+      "edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "7"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "summary",
+            "src": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "call",
+            "src": {
+              "#bigint": "4"
+            }
+          }
+        ]
+      },
+      "fixture_id": "Binary",
+      "obligations": {
+        "#set": [
+          {
+            "reason": "indirect-targets",
+            "site": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "reason": "call-targets",
+            "site": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "reason": "unavailable",
+            "site": {
+              "#bigint": "6"
+            }
+          },
+          {
+            "reason": "decode-failed",
+            "site": {
+              "#bigint": "7"
+            }
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "Binary"
+      },
+      "pending": {
+        "#set": []
+      },
+      "phase": "slice",
+      "provenance": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            "unavailable"
+          ]
+        ]
+      },
+      "reaching": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "x",
+                  "origin": "instruction",
+                  "site": {
+                    "#bigint": "2"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "x",
+                  "origin": "instruction",
+                  "site": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "loc": "x",
+                  "origin": "instruction",
+                  "site": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "instruction",
+                  "site": {
+                    "#bigint": "4"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "slice": {
+        "#set": [
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          }
+        ]
+      },
+      "visited": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          },
+          {
+            "#bigint": "6"
+          },
+          {
+            "#bigint": "7"
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 16
+      },
+      "action_taken": "finishSlice",
+      "decoded": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          }
+        ]
+      },
+      "edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "7"
+            },
+            "kind": "indirect",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "summary",
+            "src": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "6"
+            },
+            "kind": "call",
+            "src": {
+              "#bigint": "4"
+            }
+          }
+        ]
+      },
+      "fixture_id": "Binary",
+      "obligations": {
+        "#set": [
+          {
+            "reason": "indirect-targets",
+            "site": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "reason": "call-targets",
+            "site": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "reason": "unavailable",
+            "site": {
+              "#bigint": "6"
+            }
+          },
+          {
+            "reason": "decode-failed",
+            "site": {
+              "#bigint": "7"
+            }
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "Binary"
+      },
+      "pending": {
+        "#set": []
+      },
+      "phase": "done",
+      "provenance": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            "file"
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            "unavailable"
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            "unavailable"
+          ]
+        ]
+      },
+      "reaching": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "x",
+                  "origin": "instruction",
+                  "site": {
+                    "#bigint": "2"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "loc": "x",
+                  "origin": "instruction",
+                  "site": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "loc": "x",
+                  "origin": "instruction",
+                  "site": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "loc": "target",
+                  "origin": "instruction",
+                  "site": {
+                    "#bigint": "4"
+                  }
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "6"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "7"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "slice": {
+        "#set": [
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          }
+        ]
+      },
+      "visited": {
+        "#set": [
+          {
+            "#bigint": "1"
+          },
+          {
+            "#bigint": "2"
+          },
+          {
+            "#bigint": "3"
+          },
+          {
+            "#bigint": "4"
+          },
+          {
+            "#bigint": "5"
+          },
+          {
+            "#bigint": "6"
+          },
+          {
+            "#bigint": "7"
+          }
+        ]
+      }
+    }
+  ],
+  "vars": [
+    "action_taken",
+    "decoded",
+    "edges",
+    "fixture_id",
+    "obligations",
+    "parameters",
+    "pending",
+    "phase",
+    "provenance",
+    "reaching",
+    "slice",
+    "visited"
+  ]
+}

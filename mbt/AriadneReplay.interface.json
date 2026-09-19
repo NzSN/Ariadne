@@ -1,0 +1,31 @@
+{
+  "schema": "mirrors.model-interface/v1",
+  "interfaceVersion": "1.0.0",
+  "model": {"module": "AriadneReplay", "source": "AriadneReplay.tla"},
+  "wire": {"actionVariable": "action_taken", "parameterVariable": "parameters"},
+  "initializers": [
+    {"id": "Initialize", "wireAction": "init", "wireAliases": [], "inputs": [
+      {"id": "Fixture", "from": {"root": "initialState", "path": [{"field": "fixture_id"}]}}
+    ]}
+  ],
+  "actions": [
+    {"id": "Visit", "wireAction": "visit", "wireAliases": [], "inputs": []},
+    {"id": "FinishRecovery", "wireAction": "finishRecovery", "wireAliases": [], "inputs": []},
+    {"id": "Propagate", "wireAction": "propagate", "wireAliases": [], "inputs": []},
+    {"id": "FinishDataflow", "wireAction": "finishDataflow", "wireAliases": [], "inputs": []},
+    {"id": "ExpandSlice", "wireAction": "expandSlice", "wireAliases": [], "inputs": []},
+    {"id": "FinishSlice", "wireAction": "finishSlice", "wireAliases": [], "inputs": []}
+  ],
+  "observations": [
+    {"id": "FixtureId", "wireName": "fixture_id", "provenance": "implementation"},
+    {"id": "Phase", "wireName": "phase", "provenance": "implementation"},
+    {"id": "Pending", "wireName": "pending", "provenance": "implementation"},
+    {"id": "Visited", "wireName": "visited", "provenance": "implementation"},
+    {"id": "Decoded", "wireName": "decoded", "provenance": "implementation"},
+    {"id": "Provenance", "wireName": "provenance", "provenance": "implementation"},
+    {"id": "Edges", "wireName": "edges", "provenance": "implementation"},
+    {"id": "Obligations", "wireName": "obligations", "provenance": "implementation"},
+    {"id": "Reaching", "wireName": "reaching", "provenance": "implementation"},
+    {"id": "Slice", "wireName": "slice", "provenance": "implementation"}
+  ]
+}

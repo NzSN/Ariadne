@@ -1,0 +1,13 @@
+[package]
+name = "ariadne-analysis"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+description = "Snapshot-scoped machine-code analysis from normalized instruction summaries"
+publish = false
+
+[lib]
+name = "ariadne"
+
+[lints.rust]
+unsafe_code = "forbid"

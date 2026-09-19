@@ -1,0 +1,32 @@
+[
+  {
+    "name": "discover-call-targets",
+    "action": "visit",
+    "old": "if edge.kind.is_local() && !self.state.visited.contains(&edge.dst) {",
+    "new": "if !self.state.visited.contains(&edge.dst) {"
+  },
+  {
+    "name": "propagate-across-call-edges",
+    "action": "propagate",
+    "old": "                || !edge.kind.is_local()\n",
+    "new": ""
+  },
+  {
+    "name": "may-writes-kill-origins",
+    "action": "propagate",
+    "old": ".filter(|definition| !predecessor.must_defs.contains(&definition.loc))",
+    "new": ".filter(|definition| !predecessor.may_defs.contains(&definition.loc))"
+  },
+  {
+    "name": "untrusted-dump-fallback",
+    "action": "visit",
+    "old": "InputKind::Dump if self.request.trusted_fallback.contains(&address) => ByteSource::File,",
+    "new": "InputKind::Dump if self.request.file_backed.contains(&address) => ByteSource::File,"
+  },
+  {
+    "name": "skip-slice-closure",
+    "action": "expandSlice",
+    "old": "self.state.slice.extend(predecessors); // ExpandSlice",
+    "new": "self.state.phase = Phase::Done; // Mutant: skip producer closure"
+  }
+]

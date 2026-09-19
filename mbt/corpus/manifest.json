@@ -1,0 +1,61 @@
+{
+  "artifacts": {
+    "AriadneReplay.lock.json": "d6681e18b19d74010c338ec990f17d9a2028a1454abc681e75884e64dce621a2",
+    "Binary.itf.json": "629a298da117aad717e237bbf47f8368d8ec53f6166d7dc7c3a0808f3805feb5",
+    "Binary.projection.json": "ad9feb5f7a9e60cf7ed32e81167c0c1f2a76afe27571855b890dc2fb2276ce1c",
+    "Binary.raw.json": "038e57956c18c4336f0158dc97b6a72ae7d5ef1a35aa686e5940058e51c7079c",
+    "Calls.itf.json": "6ccaf09c15721a7bfed710575256a9a268f44ae623b78bbd49e662bb66e5ae73",
+    "Calls.projection.json": "05dbf80a62e350d940cb6f3dc8dd45729e3cffb1ac8efac447723e9fbbf71c94",
+    "Calls.raw.json": "43e37d5af463c4b8aca0f52a5e4a7749316db4995ae0bd175a152ab91198005a",
+    "Closed.itf.json": "9bd3b5ce5cb1a71801c7918e6e4de9e1230ef096973b84a2cbb9ef5dcc0c7e8b",
+    "Closed.projection.json": "ddee7d5a7533c67d2dc5418ce774e1d3845ebc40cda6ee54adb84528c227e631",
+    "Closed.raw.json": "4f6036621d56adc0f03d652362dc240343f2c0269123e9e456c8d1ac602959c8",
+    "Dump.itf.json": "f396aa4046a5b68cc3669a66851ed5fe562124b8c5151e25bd745896c18fc597",
+    "Dump.projection.json": "1134321ac4339691cbd53da8fbc6f159ba9eeeffd2d0fdc874b02a86ca858a2b",
+    "Dump.raw.json": "d61dbd7e93d4ea63952f13aef6a1ba89b14af30267eaad6583633b322df58535",
+    "Loop.itf.json": "8064b20c784e499fade65d004faae8d2c5d2cc252810e1c4c155ee74cadf7f42",
+    "Loop.projection.json": "4c22727a81cedb8e770a8154e7e514b311979d8852d3a69f330134d0221a1534",
+    "Loop.raw.json": "5ba25b43d084150ec736e4175f835a3339ba1d6487b16a0875ccf467e97aeb94",
+    "Pipeline.itf.json": "5e132055d5657f0c6f597280b2ed1a6ed695c9dfbc0dfc8a6320c9c04ef54ebe",
+    "Pipeline.projection.json": "a4eabfb45ffb651dfbf21637750ad9bdb0f930d12110b31d1d3779f0b84948b7",
+    "Pipeline.raw.json": "fe6b332dc27b2edbe3c156b84315148443065af163e948e882d6ffd12a515af6",
+    "raw-type-evidence.json": "37f46d267308fd593343615fbf5ac094b8af5dcb0abee66a9e9438f8cb0a5f4b",
+    "type-evidence.json": "227c176d4aa80602775568564714283f45354d291c065cbb7b3eb37c7aba62d7"
+  },
+  "generation": {
+    "apalache": "0.61.0",
+    "command": "python3 mbt/generate.py",
+    "compilerSha256": "693551f626774b883a37b70f38dbbc7c92186688f8c7472f782a12e5fff4c3e5",
+    "mirrorsRevision": "40f78acc3fab2e2e89683be3a68244979d995b96",
+    "tlc": [
+      "",
+      "",
+      "\u001b[1mSYNOPSIS\u001b[0m",
+      ""
+    ],
+    "traces": "TLC checked safety/termination, then TraceComplete counterexample (expected exit 12)",
+    "typeEvidence": "Apalache length-0 TypeWitness counterexample (expected exit 12)"
+  },
+  "oracleSources": {
+    "Specs/Ariadne.tla": "26d3a783c43b0b86029bfbeb2e9f8bff7a56d3c7e8702493d7b502d21bf32019",
+    "Specs/AriadneCalls.tla": "159d6a1cc26ee3d45368784940959cf26feb4c7bbe9a2112b5219f9d3c779be3",
+    "Specs/AriadneExample.tla": "1eb90a98f3caf237cf6fdbd109cbd3dc675ee100cc4866b73ba32ff23be344ec",
+    "Specs/AriadneMachineCommon.tla": "32b60854773c7c14e06e449300a9757fefdfbfc763a0f58ef4574f1edd019947",
+    "Specs/AriadnePipeline.tla": "7115b6365ad378f6a9fcb2594c715b5a8b41c0d29d26bf36b362c40fc5a7246c",
+    "Specs/AriadneTypes.tla": "3bfb36f3bf96adc324a9c714d34a12af708d0e7daaba91a5a1ae5f79f2820329",
+    "mbt/AriadneReplay.interface.json": "5746139dbe6e35a7d7ea1754130b9d46f01fd9b7e56929fd48edfdb0a33cec4c",
+    "mbt/generate.py": "fd2c499fd27c1196622151eb633578694b724c88863a33c9d7390a88a2233228",
+    "mbt/model/AriadneReplay.tla": "cf750e45e3115eb66a5c587c214f7aaba582bf0a6688f11c792cf8777d2157e8",
+    "mbt/projection.py": "adf53be15f9c6ca7b7d1e563f6978cac984ed3d9512e79fde789c5a775ceaa80",
+    "mbt/tools.py": "1d3a36db33e17c183f0584929704161ab8a5a0ef359c4412fc6d765c647f83d4"
+  },
+  "schema": "ariadne.mbt-corpus/v1",
+  "traceStates": {
+    "Binary": 17,
+    "Calls": 11,
+    "Closed": 15,
+    "Dump": 16,
+    "Loop": 16,
+    "Pipeline": 9
+  }
+}

@@ -1,0 +1,906 @@
+{
+  "#meta": {
+    "format": "ITF",
+    "varTypes": {
+      "action_taken": "Str",
+      "decoded": "Set(Int)",
+      "edges": "Set({ dst: Int, kind: Str, src: Int })",
+      "fixture_id": "Str",
+      "obligations": "Set({ reason: Str, site: Int })",
+      "parameters": "{ fixture: Str }",
+      "pending": "Set(Int)",
+      "phase": "Str",
+      "provenance": "Set({ source: Str, va: Int })",
+      "reaching": "Set({ definitions: Set({ loc: Str, origin: Str, site: Int }), va: Int })",
+      "slice": "Set(Int)",
+      "visited": "Set(Int)"
+    }
+  },
+  "param_vars": [],
+  "params": [],
+  "states": [
+    {
+      "#meta": {
+        "index": 0
+      },
+      "action_taken": "init",
+      "decoded": {
+        "#set": []
+      },
+      "edges": {
+        "#set": []
+      },
+      "fixture_id": "Pipeline",
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "Pipeline"
+      },
+      "pending": {
+        "#set": [
+          {
+            "#bigint": "4096"
+          }
+        ]
+      },
+      "phase": "recover",
+      "provenance": {
+        "#set": [
+          {
+            "source": "unavailable",
+            "va": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "source": "unavailable",
+            "va": {
+              "#bigint": "4100"
+            }
+          }
+        ]
+      },
+      "reaching": {
+        "#set": [
+          {
+            "definitions": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "definitions": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "4100"
+            }
+          }
+        ]
+      },
+      "slice": {
+        "#set": []
+      },
+      "visited": {
+        "#set": []
+      }
+    },
+    {
+      "#meta": {
+        "index": 1
+      },
+      "action_taken": "visit",
+      "decoded": {
+        "#set": [
+          {
+            "#bigint": "4096"
+          }
+        ]
+      },
+      "edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "4100"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4096"
+            }
+          }
+        ]
+      },
+      "fixture_id": "Pipeline",
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "Pipeline"
+      },
+      "pending": {
+        "#set": [
+          {
+            "#bigint": "4100"
+          }
+        ]
+      },
+      "phase": "recover",
+      "provenance": {
+        "#set": [
+          {
+            "source": "file",
+            "va": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "source": "unavailable",
+            "va": {
+              "#bigint": "4100"
+            }
+          }
+        ]
+      },
+      "reaching": {
+        "#set": [
+          {
+            "definitions": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "definitions": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "4100"
+            }
+          }
+        ]
+      },
+      "slice": {
+        "#set": []
+      },
+      "visited": {
+        "#set": [
+          {
+            "#bigint": "4096"
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 2
+      },
+      "action_taken": "visit",
+      "decoded": {
+        "#set": [
+          {
+            "#bigint": "4096"
+          },
+          {
+            "#bigint": "4100"
+          }
+        ]
+      },
+      "edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "4100"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4096"
+            }
+          }
+        ]
+      },
+      "fixture_id": "Pipeline",
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "Pipeline"
+      },
+      "pending": {
+        "#set": []
+      },
+      "phase": "recover",
+      "provenance": {
+        "#set": [
+          {
+            "source": "file",
+            "va": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "source": "file",
+            "va": {
+              "#bigint": "4100"
+            }
+          }
+        ]
+      },
+      "reaching": {
+        "#set": [
+          {
+            "definitions": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "definitions": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "4100"
+            }
+          }
+        ]
+      },
+      "slice": {
+        "#set": []
+      },
+      "visited": {
+        "#set": [
+          {
+            "#bigint": "4096"
+          },
+          {
+            "#bigint": "4100"
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 3
+      },
+      "action_taken": "finishRecovery",
+      "decoded": {
+        "#set": [
+          {
+            "#bigint": "4096"
+          },
+          {
+            "#bigint": "4100"
+          }
+        ]
+      },
+      "edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "4100"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4096"
+            }
+          }
+        ]
+      },
+      "fixture_id": "Pipeline",
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "Pipeline"
+      },
+      "pending": {
+        "#set": []
+      },
+      "phase": "dataflow",
+      "provenance": {
+        "#set": [
+          {
+            "source": "file",
+            "va": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "source": "file",
+            "va": {
+              "#bigint": "4100"
+            }
+          }
+        ]
+      },
+      "reaching": {
+        "#set": [
+          {
+            "definitions": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "definitions": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "4100"
+            }
+          }
+        ]
+      },
+      "slice": {
+        "#set": []
+      },
+      "visited": {
+        "#set": [
+          {
+            "#bigint": "4096"
+          },
+          {
+            "#bigint": "4100"
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 4
+      },
+      "action_taken": "propagate",
+      "decoded": {
+        "#set": [
+          {
+            "#bigint": "4096"
+          },
+          {
+            "#bigint": "4100"
+          }
+        ]
+      },
+      "edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "4100"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4096"
+            }
+          }
+        ]
+      },
+      "fixture_id": "Pipeline",
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "Pipeline"
+      },
+      "pending": {
+        "#set": []
+      },
+      "phase": "dataflow",
+      "provenance": {
+        "#set": [
+          {
+            "source": "file",
+            "va": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "source": "file",
+            "va": {
+              "#bigint": "4100"
+            }
+          }
+        ]
+      },
+      "reaching": {
+        "#set": [
+          {
+            "definitions": {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "4096"
+                  }
+                }
+              ]
+            },
+            "va": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "definitions": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "4100"
+            }
+          }
+        ]
+      },
+      "slice": {
+        "#set": []
+      },
+      "visited": {
+        "#set": [
+          {
+            "#bigint": "4096"
+          },
+          {
+            "#bigint": "4100"
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 5
+      },
+      "action_taken": "propagate",
+      "decoded": {
+        "#set": [
+          {
+            "#bigint": "4096"
+          },
+          {
+            "#bigint": "4100"
+          }
+        ]
+      },
+      "edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "4100"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4096"
+            }
+          }
+        ]
+      },
+      "fixture_id": "Pipeline",
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "Pipeline"
+      },
+      "pending": {
+        "#set": []
+      },
+      "phase": "dataflow",
+      "provenance": {
+        "#set": [
+          {
+            "source": "file",
+            "va": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "source": "file",
+            "va": {
+              "#bigint": "4100"
+            }
+          }
+        ]
+      },
+      "reaching": {
+        "#set": [
+          {
+            "definitions": {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "4096"
+                  }
+                }
+              ]
+            },
+            "va": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "definitions": {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "instruction",
+                  "site": {
+                    "#bigint": "4096"
+                  }
+                }
+              ]
+            },
+            "va": {
+              "#bigint": "4100"
+            }
+          }
+        ]
+      },
+      "slice": {
+        "#set": []
+      },
+      "visited": {
+        "#set": [
+          {
+            "#bigint": "4096"
+          },
+          {
+            "#bigint": "4100"
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 6
+      },
+      "action_taken": "finishDataflow",
+      "decoded": {
+        "#set": [
+          {
+            "#bigint": "4096"
+          },
+          {
+            "#bigint": "4100"
+          }
+        ]
+      },
+      "edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "4100"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4096"
+            }
+          }
+        ]
+      },
+      "fixture_id": "Pipeline",
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "Pipeline"
+      },
+      "pending": {
+        "#set": []
+      },
+      "phase": "slice",
+      "provenance": {
+        "#set": [
+          {
+            "source": "file",
+            "va": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "source": "file",
+            "va": {
+              "#bigint": "4100"
+            }
+          }
+        ]
+      },
+      "reaching": {
+        "#set": [
+          {
+            "definitions": {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "4096"
+                  }
+                }
+              ]
+            },
+            "va": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "definitions": {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "instruction",
+                  "site": {
+                    "#bigint": "4096"
+                  }
+                }
+              ]
+            },
+            "va": {
+              "#bigint": "4100"
+            }
+          }
+        ]
+      },
+      "slice": {
+        "#set": [
+          {
+            "#bigint": "4100"
+          }
+        ]
+      },
+      "visited": {
+        "#set": [
+          {
+            "#bigint": "4096"
+          },
+          {
+            "#bigint": "4100"
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 7
+      },
+      "action_taken": "expandSlice",
+      "decoded": {
+        "#set": [
+          {
+            "#bigint": "4096"
+          },
+          {
+            "#bigint": "4100"
+          }
+        ]
+      },
+      "edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "4100"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4096"
+            }
+          }
+        ]
+      },
+      "fixture_id": "Pipeline",
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "Pipeline"
+      },
+      "pending": {
+        "#set": []
+      },
+      "phase": "slice",
+      "provenance": {
+        "#set": [
+          {
+            "source": "file",
+            "va": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "source": "file",
+            "va": {
+              "#bigint": "4100"
+            }
+          }
+        ]
+      },
+      "reaching": {
+        "#set": [
+          {
+            "definitions": {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "4096"
+                  }
+                }
+              ]
+            },
+            "va": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "definitions": {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "instruction",
+                  "site": {
+                    "#bigint": "4096"
+                  }
+                }
+              ]
+            },
+            "va": {
+              "#bigint": "4100"
+            }
+          }
+        ]
+      },
+      "slice": {
+        "#set": [
+          {
+            "#bigint": "4096"
+          },
+          {
+            "#bigint": "4100"
+          }
+        ]
+      },
+      "visited": {
+        "#set": [
+          {
+            "#bigint": "4096"
+          },
+          {
+            "#bigint": "4100"
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 8
+      },
+      "action_taken": "finishSlice",
+      "decoded": {
+        "#set": [
+          {
+            "#bigint": "4096"
+          },
+          {
+            "#bigint": "4100"
+          }
+        ]
+      },
+      "edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "4100"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4096"
+            }
+          }
+        ]
+      },
+      "fixture_id": "Pipeline",
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "Pipeline"
+      },
+      "pending": {
+        "#set": []
+      },
+      "phase": "done",
+      "provenance": {
+        "#set": [
+          {
+            "source": "file",
+            "va": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "source": "file",
+            "va": {
+              "#bigint": "4100"
+            }
+          }
+        ]
+      },
+      "reaching": {
+        "#set": [
+          {
+            "definitions": {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "entry",
+                  "site": {
+                    "#bigint": "4096"
+                  }
+                }
+              ]
+            },
+            "va": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "definitions": {
+              "#set": [
+                {
+                  "loc": "x",
+                  "origin": "instruction",
+                  "site": {
+                    "#bigint": "4096"
+                  }
+                }
+              ]
+            },
+            "va": {
+              "#bigint": "4100"
+            }
+          }
+        ]
+      },
+      "slice": {
+        "#set": [
+          {
+            "#bigint": "4096"
+          },
+          {
+            "#bigint": "4100"
+          }
+        ]
+      },
+      "visited": {
+        "#set": [
+          {
+            "#bigint": "4096"
+          },
+          {
+            "#bigint": "4100"
+          }
+        ]
+      }
+    }
+  ],
+  "vars": [
+    "action_taken",
+    "decoded",
+    "edges",
+    "fixture_id",
+    "obligations",
+    "parameters",
+    "pending",
+    "phase",
+    "provenance",
+    "reaching",
+    "slice",
+    "visited"
+  ]
+}
