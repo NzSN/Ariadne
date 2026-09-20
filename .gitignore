@@ -20,3 +20,6 @@ _apalache-out/
 /target/
 /mbt/target/
 /mbt/.work/
+
+# Machine-specific MBT execution report.
+/mbt/results/latest.json
