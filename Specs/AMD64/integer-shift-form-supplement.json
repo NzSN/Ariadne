@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "authority": {
+    "manual": "AMD APM Volume 3 publication 24594 revision 3.38, July 2026",
+    "source_lock": "Specs/AMD64/manuals.lock.json",
+    "entries": [
+      {"entry_id":"V3-GP-113","title":"RCL","pdf_pages":[344,345]},
+      {"entry_id":"V3-GP-114","title":"RCR","pdf_pages":[346,347]},
+      {"entry_id":"V3-GP-122","title":"ROL","pdf_pages":[360,361]},
+      {"entry_id":"V3-GP-123","title":"ROR","pdf_pages":[362,363]},
+      {"entry_id":"V3-GP-124","title":"RORX","pdf_pages":[364,365]},
+      {"entry_id":"V3-GP-126","title":"SAL SHL","pdf_pages":[367,369]},
+      {"entry_id":"V3-GP-127","title":"SAR","pdf_pages":[370,371]},
+      {"entry_id":"V3-GP-128","title":"SARX","pdf_pages":[372,373]},
+      {"entry_id":"V3-GP-134","title":"SHLD","pdf_pages":[382,383]},
+      {"entry_id":"V3-GP-135","title":"SHLX","pdf_pages":[384,385]},
+      {"entry_id":"V3-GP-136","title":"SHR","pdf_pages":[386,387]},
+      {"entry_id":"V3-GP-137","title":"SHRD","pdf_pages":[388,389]},
+      {"entry_id":"V3-GP-138","title":"SHRX","pdf_pages":[390,391]}
+    ]
+  },
+  "scope": "Execution supplement for all 116 source rows. Original reg/mem alternatives are retained; register bodies are implemented and memory bodies remain modeling-unavailable after form checks.",
+  "legacy_groups": [
+    {"operation":"RCL","form_ids":["AMD64-F-0645","AMD64-F-0646","AMD64-F-0647","AMD64-F-0648","AMD64-F-0649","AMD64-F-0650","AMD64-F-0651","AMD64-F-0652","AMD64-F-0653","AMD64-F-0654","AMD64-F-0655","AMD64-F-0656"]},
+    {"operation":"RCR","form_ids":["AMD64-F-0657","AMD64-F-0658","AMD64-F-0659","AMD64-F-0660","AMD64-F-0661","AMD64-F-0662","AMD64-F-0663","AMD64-F-0664","AMD64-F-0665","AMD64-F-0666","AMD64-F-0667","AMD64-F-0668"]},
+    {"operation":"ROL","form_ids":["AMD64-F-0685","AMD64-F-0686","AMD64-F-0687","AMD64-F-0688","AMD64-F-0689","AMD64-F-0690","AMD64-F-0691","AMD64-F-0692","AMD64-F-0693","AMD64-F-0694","AMD64-F-0695","AMD64-F-0696"]},
+    {"operation":"ROR","form_ids":["AMD64-F-0697","AMD64-F-0698","AMD64-F-0699","AMD64-F-0700","AMD64-F-0701","AMD64-F-0702","AMD64-F-0703","AMD64-F-0704","AMD64-F-0705","AMD64-F-0706","AMD64-F-0707","AMD64-F-0708"]},
+    {"operation":"SAL","semantic_operation":"SHL","form_ids":["AMD64-F-0712","AMD64-F-0713","AMD64-F-0714","AMD64-F-0715","AMD64-F-0716","AMD64-F-0717","AMD64-F-0718","AMD64-F-0719","AMD64-F-0720","AMD64-F-0721","AMD64-F-0722","AMD64-F-0723"]},
+    {"operation":"SHL","form_ids":["AMD64-F-0724","AMD64-F-0725","AMD64-F-0726","AMD64-F-0727","AMD64-F-0728","AMD64-F-0729","AMD64-F-0730","AMD64-F-0731","AMD64-F-0732","AMD64-F-0733","AMD64-F-0734","AMD64-F-0735"]},
+    {"operation":"SAR","form_ids":["AMD64-F-0736","AMD64-F-0737","AMD64-F-0738","AMD64-F-0739","AMD64-F-0740","AMD64-F-0741","AMD64-F-0742","AMD64-F-0743","AMD64-F-0744","AMD64-F-0745","AMD64-F-0746","AMD64-F-0747"]},
+    {"operation":"SHR","form_ids":["AMD64-F-0816","AMD64-F-0817","AMD64-F-0818","AMD64-F-0819","AMD64-F-0820","AMD64-F-0821","AMD64-F-0822","AMD64-F-0823","AMD64-F-0824","AMD64-F-0825","AMD64-F-0826","AMD64-F-0827"]}
+  ],
+  "legacy_group_order": {
+    "width_and_count_source": [[8,"one"],[8,"CL"],[8,"imm8"],[16,"one"],[16,"CL"],[16,"imm8"],[32,"one"],[32,"CL"],[32,"imm8"],[64,"one"],[64,"CL"],[64,"imm8"]],
+    "modes": "8/16/32 in all modes; 64 only long64 with REX.W",
+    "lock": "illegal",
+    "count_mask": "five bits except six bits for 64-bit operands"
+  },
+  "double_shift": {
+    "form_ids": ["AMD64-F-0808","AMD64-F-0809","AMD64-F-0810","AMD64-F-0811","AMD64-F-0812","AMD64-F-0813","AMD64-F-0828","AMD64-F-0829","AMD64-F-0830","AMD64-F-0831","AMD64-F-0832","AMD64-F-0833"],
+    "operations": ["SHLD","SHRD"],
+    "widths": [16,32,64],
+    "count_sources": ["imm8","CL"],
+    "oversize": "destination and affected flags are relationally undefined when masked count exceeds width"
+  },
+  "bmi2": {
+    "form_ids": ["AMD64-F-0709","AMD64-F-0710","AMD64-F-0748","AMD64-F-0749","AMD64-F-0814","AMD64-F-0815","AMD64-F-0834","AMD64-F-0835"],
+    "operations": ["RORX","SARX","SHLX","SHRX"],
+    "required_feature": "CPUID Fn0000_0007_EBX_x0[BMI2]",
+    "modes": ["protected","compatibility","long64"],
+    "real_and_virtual8086": "#UD",
+    "vex_l_one": "#UD",
+    "widths": "VEX.W=0 selects 32; VEX.W=1 selects 64 in long mode; no 16-bit form",
+    "flags": "all arithmetic flags preserved"
+  },
+  "implementation": {
+    "tla":"AMD64IntegerShiftExecution.tla",
+    "lean":"AMD64.IntegerShiftExecution",
+    "register_body":"implemented",
+    "memory_body":"modeling-unavailable pending MachineAccess",
+    "fallthrough":"composed separately"
+  },
+  "open_obligations": [
+    "compose memory alternatives with MachineAccess and ordinary #SS/#GP/#PF/#AC ordering",
+    "merge reviewed rows into the generated shared catalogue without hand-editing forms.json",
+    "prove general Lean correspondence for flag domains and double-shift relational outcomes"
+  ]
+}

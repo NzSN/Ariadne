@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "scope": "Pure integer value and flag kernels only; no instruction entry or form is complete here.",
+  "manuals": {
+    "volume1": "24592 revision 3.25, May 2026",
+    "volume3": "24594 revision 3.38, July 2026"
+  },
+  "width_contract": {
+    "container_bits": 64,
+    "architectural_widths": [8, 16, 32, 64],
+    "tla_preconditions": ["ValidUnaryInputs", "ValidBinaryInputs"],
+    "invalid_width_policy": "outside kernel domain; form validation must reject it"
+  },
+  "families": [
+    {
+      "family": "data-transfer-and-extension",
+      "operations": ["truncate", "zero-extend", "sign-extend", "byte-swap", "exchange", "conditional-select"],
+      "applicable_widths": [8, 16, 32, 64],
+      "source_entries": [
+        {"id": "V3-GP-026", "title": "BSWAP", "pdf_pages": [167, 167]},
+        {"id": "V3-GP-034", "title": "CBW CWDE CDQE", "pdf_pages": [188, 188]},
+        {"id": "V3-GP-035", "title": "CWD CDQ CQO", "pdf_pages": [189, 189]},
+        {"id": "V3-GP-043", "title": "CMOVcc", "pdf_pages": [200, 203]},
+        {"id": "V3-GP-080", "title": "MOV", "pdf_pages": [282, 284]},
+        {"id": "V3-GP-081", "title": "MOVBE", "pdf_pages": [285, 286]},
+        {"id": "V3-GP-089", "title": "MOVSX", "pdf_pages": [303, 303]},
+        {"id": "V3-GP-090", "title": "MOVSXD", "pdf_pages": [304, 304]},
+        {"id": "V3-GP-091", "title": "MOVZX", "pdf_pages": [305, 305]}
+      ],
+      "tla_operators": ["Truncate", "ZeroExtend", "SignExtend", "ByteSwap", "Exchange", "ConditionalMove"],
+      "lean_definitions": ["truncate", "zeroExtend", "signExtend", "byteSwap"],
+      "general_lean_proofs": ["truncate_inside", "truncate_outside", "zeroExtend_source", "Source.truncate_correspondence", "Source.zeroExtend_correspondence", "Source.signExtend_correspondence"],
+      "status": "pure-values-implemented",
+      "gaps": ["XCHG storage alias behavior and memory atomicity are outside this lane", "CMOV condition decoding and fault-before-condition behavior require form/memory binding", "MOVBE memory access and all destination-write rules are unbound"]
+    },
+    {
+      "family": "arithmetic-and-compare",
+      "operations": ["add", "add-with-carry", "subtract", "subtract-with-borrow", "compare", "increment", "decrement", "negate", "ADCX carry chain", "ADOX overflow chain", "XADD value exchange", "CMPXCHG value selection"],
+      "applicable_widths": [8, 16, 32, 64],
+      "source_entries": [
+        {"id": "V3-GP-005", "title": "ADC", "pdf_pages": [127, 128]},
+        {"id": "V3-GP-006", "title": "ADCX", "pdf_pages": [129, 130]},
+        {"id": "V3-GP-007", "title": "ADD", "pdf_pages": [131, 132]},
+        {"id": "V3-GP-008", "title": "ADOX", "pdf_pages": [133, 134]},
+        {"id": "V3-GP-044", "title": "CMP", "pdf_pages": [204, 206]},
+        {"id": "V3-GP-052", "title": "DEC", "pdf_pages": [220, 221]},
+        {"id": "V3-GP-058", "title": "INC", "pdf_pages": [232, 233]},
+        {"id": "V3-GP-095", "title": "NEG", "pdf_pages": [312, 313]},
+        {"id": "V3-GP-129", "title": "SBB", "pdf_pages": [374, 375]},
+        {"id": "V3-GP-143", "title": "SUB", "pdf_pages": [398, 399]}
+      ],
+      "tla_operators": ["AddWord", "SubWord", "AddResult", "SubResult", "IncResult", "DecResult", "NegResult", "AdxResultAllowed", "CompareExchange", "XAdd"],
+      "lean_definitions": ["carryInto", "addWord", "subWord", "addResult", "subResult", "incResult", "decResult", "negResult"],
+      "general_lean_proofs": ["adcx_preserves_overflow", "adox_preserves_carry", "adx_value", "Source.addWord_correspondence", "Source.adxResult_correspondence"],
+      "status": "tla-and-lean-definitions-sample-checked",
+      "gaps": ["Full AddResult/SubResult flag correspondence is not yet proved in Lean", "ADCX/ADOX are TLA relations only", "CMPXCHG/XADD final atomic bindings belong to D1", "Immediate extension and operand legality require reviewed forms"]
+    },
+    {
+      "family": "logical",
+      "operations": ["and", "or", "xor", "test", "and-not", "not"],
+      "applicable_widths": [8, 16, 32, 64],
+      "source_entries": [
+        {"id": "V3-GP-009", "title": "AND", "pdf_pages": [135, 136]},
+        {"id": "V3-GP-010", "title": "ANDN", "pdf_pages": [137, 138]},
+        {"id": "V3-GP-097", "title": "NOT", "pdf_pages": [315, 315]},
+        {"id": "V3-GP-098", "title": "OR", "pdf_pages": [316, 318]},
+        {"id": "V3-GP-145", "title": "TEST", "pdf_pages": [402, 403]},
+        {"id": "V3-GP-154", "title": "XOR", "pdf_pages": [415, 418]}
+      ],
+      "tla_operators": ["NotWord", "LogicWord", "LogicFlagDomains", "LogicResultAllowed"],
+      "lean_definitions": ["notWord", "logicWord", "logicEffects"],
+      "general_lean_proofs": ["Source.notWord_correspondence", "Source.logicWord_correspondence"],
+      "status": "tla-and-lean-definitions-sample-checked",
+      "gaps": ["Logical flag-domain correspondence is sample checked but not generally proved", "ANDN correctly leaves PF and AF undefined while ordinary logical operations define PF and leave AF undefined"]
+    },
+    {
+      "family": "shifts-and-rotates",
+      "operations": ["SHL/SAL", "SHR", "SAR", "ROL", "ROR", "RCL", "RCR", "SHLD", "SHRD", "SHLX", "SHRX", "SARX", "RORX"],
+      "applicable_widths": [8, 16, 32, 64],
+      "source_entries": [
+        {"id": "V3-GP-113", "title": "RCL", "pdf_pages": [344, 345]},
+        {"id": "V3-GP-114", "title": "RCR", "pdf_pages": [346, 347]},
+        {"id": "V3-GP-122", "title": "ROL", "pdf_pages": [360, 361]},
+        {"id": "V3-GP-123", "title": "ROR", "pdf_pages": [362, 363]},
+        {"id": "V3-GP-124", "title": "RORX", "pdf_pages": [364, 365]},
+        {"id": "V3-GP-126", "title": "SAL SHL", "pdf_pages": [367, 369]},
+        {"id": "V3-GP-133", "title": "SHL alias reference", "pdf_pages": [381, 381]},
+        {"id": "V3-GP-127", "title": "SAR", "pdf_pages": [370, 371]},
+        {"id": "V3-GP-128", "title": "SARX", "pdf_pages": [372, 373]},
+        {"id": "V3-GP-134", "title": "SHLD", "pdf_pages": [382, 383]},
+        {"id": "V3-GP-135", "title": "SHLX", "pdf_pages": [384, 385]},
+        {"id": "V3-GP-136", "title": "SHR", "pdf_pages": [386, 387]},
+        {"id": "V3-GP-137", "title": "SHRD", "pdf_pages": [388, 389]},
+        {"id": "V3-GP-138", "title": "SHRX", "pdf_pages": [390, 391]}
+      ],
+      "tla_operators": ["MaskedCount", "ShiftAllowed", "RotateAllowed", "CarryRotateAllowed", "DoubleShiftAllowed"],
+      "lean_definitions": ["maskedCount", "shiftValue", "shiftEffects", "rotateValue", "rotateEffects", "carryRotateValue", "carryRotateCF", "carryRotateEffects", "doubleShiftAllowed"],
+      "general_lean_proofs": ["Source.maskedCount_correspondence", "Source.shiftValue_correspondence", "Source.rotateValue_correspondence"],
+      "status": "value-and-flag-domains-directed-checked",
+      "gaps": ["General Lean correspondence for flag domains and double shifts remains open", "SHLD/SHRD oversize destination is relational and flags are undefined", "Memory writes, prefix legality and fault behavior are unbound"]
+    },
+    {
+      "family": "bit-manipulation-and-count",
+      "operations": ["BT", "BTC", "BTR", "BTS", "BSF", "BSR", "BEXTR", "BZHI", "PDEP", "PEXT", "POPCNT", "LZCNT", "TZCNT"],
+      "applicable_widths": [16, 32, 64],
+      "source_entries": [
+        {"id": "V3-GP-011", "title": "BEXTR register", "pdf_pages": [139, 140]},
+        {"id": "V3-GP-012", "title": "BEXTR immediate", "pdf_pages": [141, 142]},
+        {"id": "V3-GP-024", "title": "BSF", "pdf_pages": [165, 165]},
+        {"id": "V3-GP-025", "title": "BSR", "pdf_pages": [166, 166]},
+        {"id": "V3-GP-027", "title": "BT", "pdf_pages": [168, 169]},
+        {"id": "V3-GP-028", "title": "BTC", "pdf_pages": [170, 171]},
+        {"id": "V3-GP-029", "title": "BTR", "pdf_pages": [172, 173]},
+        {"id": "V3-GP-030", "title": "BTS", "pdf_pages": [174, 175]},
+        {"id": "V3-GP-031", "title": "BZHI", "pdf_pages": [176, 177]},
+        {"id": "V3-GP-076", "title": "LZCNT", "pdf_pages": [276, 277]},
+        {"id": "V3-GP-102", "title": "PDEP", "pdf_pages": [323, 324]},
+        {"id": "V3-GP-103", "title": "PEXT", "pdf_pages": [325, 326]},
+        {"id": "V3-GP-106", "title": "POPCNT", "pdf_pages": [330, 331]},
+        {"id": "V3-GP-146", "title": "TZCNT", "pdf_pages": [404, 405]}
+      ],
+      "tla_operators": ["BitTest", "BitModify", "BitScanAllowed", "BitScanFlagDomains", "BitTestFlagDomains", "BextrFlagDomains", "BzhiFlagDomains", "CountFlagDomains", "ExtractBits", "ZeroHighBits", "ParallelDeposit", "ParallelExtract", "PopCount", "LeadingZeroCount", "TrailingZeroCount"],
+      "lean_definitions": ["bitTest", "bitModify", "bitScanAllowed", "bitScanEffects", "bitTestEffects", "bextrEffects", "bzhiEffects", "countEffects", "extractBits", "zeroHighBits", "parallelDeposit", "parallelExtract", "popCount", "leadingZeroCount", "trailingZeroCount"],
+      "general_lean_proofs": ["bitModify_selected", "Source.bitModify_correspondence", "Source.bitScanEffects_correspondence", "Source.bitTestEffects_correspondence", "Source.bextrEffects_correspondence", "Source.bzhiEffects_correspondence", "Source.countEffects_correspondence"],
+      "status": "pure-values-directed-checked",
+      "gaps": ["BSF/BSR zero-source destinations preserve the old destination; only their non-ZF status flags are undefined", "Source correspondence is to the reviewed Lean transcription, not parsed TLA+", "Memory bit-string addressing and atomicity are unbound"]
+    },
+    {
+      "family": "derived-bit-bmi-tbm",
+      "operations": ["BLCFILL", "BLCI", "BLCIC", "BLCMSK", "BLCS", "BLSFILL", "BLSI", "BLSIC", "BLSMSK", "BLSR", "T1MSKC", "TZMSK"],
+      "applicable_widths": [32, 64],
+      "source_entries": [
+        {"id": "V3-GP-013", "title": "BLCFILL", "pdf_pages": [143, 144]},
+        {"id": "V3-GP-014", "title": "BLCI", "pdf_pages": [145, 146]},
+        {"id": "V3-GP-015", "title": "BLCIC", "pdf_pages": [147, 148]},
+        {"id": "V3-GP-016", "title": "BLCMSK", "pdf_pages": [149, 150]},
+        {"id": "V3-GP-017", "title": "BLCS", "pdf_pages": [151, 152]},
+        {"id": "V3-GP-018", "title": "BLSFILL", "pdf_pages": [153, 154]},
+        {"id": "V3-GP-019", "title": "BLSI", "pdf_pages": [155, 156]},
+        {"id": "V3-GP-020", "title": "BLSIC", "pdf_pages": [157, 158]},
+        {"id": "V3-GP-021", "title": "BLSMSK", "pdf_pages": [159, 160]},
+        {"id": "V3-GP-022", "title": "BLSR", "pdf_pages": [161, 162]},
+        {"id": "V3-GP-144", "title": "T1MSKC", "pdf_pages": [400, 401]},
+        {"id": "V3-GP-147", "title": "TZMSK", "pdf_pages": [406, 407]}
+      ],
+      "tla_operators": ["DerivedBitValue", "DerivedBitFlagDomains"],
+      "lean_definitions": ["derivedBitValue", "derivedBitEffects"],
+      "general_lean_proofs": [],
+      "status": "manual-pseudo-operation-transcriptions-directed-checked",
+      "gaps": ["No general TLA/Lean correspondence theorem", "BMI1/TBM feature, protected-mode and VEX/XOP legality are unbound", "Memory-source exceptions are unbound"]
+    },
+    {
+      "family": "status-flags-and-conditions",
+      "operations": ["CLC", "STC", "CMC", "CLD", "STD", "LAHF", "SAHF", "condition evaluation", "SETcc byte value"],
+      "applicable_widths": [8, 16, 32, 64],
+      "source_entries": [
+        {"id": "V3-GP-036", "title": "CLC", "pdf_pages": [190, 190]},
+        {"id": "V3-GP-037", "title": "CLD", "pdf_pages": [191, 191]},
+        {"id": "V3-GP-042", "title": "CMC", "pdf_pages": [199, 199]},
+        {"id": "V3-GP-066", "title": "LAHF", "pdf_pages": [257, 257]},
+        {"id": "V3-GP-125", "title": "SAHF", "pdf_pages": [366, 366]},
+        {"id": "V3-GP-131", "title": "SETcc", "pdf_pages": [378, 379]},
+        {"id": "V3-GP-140", "title": "STC", "pdf_pages": [394, 394]},
+        {"id": "V3-GP-141", "title": "STD", "pdf_pages": [395, 395]}
+      ],
+      "tla_operators": ["SetStatusFlag", "ComplementStatusFlag", "LahfValue", "SahfFlags", "ConditionHolds", "SetConditionValue", "ProjectStatusFlags", "ApplyStatusFlags", "StatusDomainsAllowed", "SetDirectionFlag"],
+      "lean_definitions": ["clearCarry", "setCarry", "complementCarry", "lahfValue", "sahfFlags", "conditionHolds", "setConditionValue", "projectStatusFlags", "applyStatusFlags", "setDirectionFlag"],
+      "general_lean_proofs": ["project_apply_status", "apply_project_status", "apply_status_preserves_df", "set_direction_preserves_validity"],
+      "status": "pure-values-directed-checked",
+      "gaps": ["LAHF/SAHF mode and feature guards are unbound", "SETcc destination write and condition form binding are unbound", "The state adapter is not a full instruction step"]
+    },
+    {
+      "family": "multiply-and-divide",
+      "operations": ["unsigned multiply", "signed multiply", "unsigned divide", "signed divide"],
+      "applicable_widths": [8, 16, 32, 64],
+      "source_entries": [
+        {"id": "V3-GP-053", "title": "DIV", "pdf_pages": [222, 223]},
+        {"id": "V3-GP-055", "title": "IDIV", "pdf_pages": [226, 227]},
+        {"id": "V3-GP-056", "title": "IMUL", "pdf_pages": [228, 229]},
+        {"id": "V3-GP-092", "title": "MUL", "pdf_pages": [306, 307]},
+        {"id": "V3-GP-093", "title": "MULX", "pdf_pages": [308, 309]}
+      ],
+      "tla_operators": ["UnsignedProduct", "SignedProduct", "MulResultAllowed", "UnsignedDivisionOK", "UnsignedDivisionOutcome", "SignedDivisionOK"],
+      "lean_definitions": ["unsignedMul", "signedMul", "unsignedDivide", "signedDivide"],
+      "general_lean_proofs": ["unsignedDivide_by_zero"],
+      "status": "tla-relations-and-lean-definitions-directed-checked",
+      "gaps": ["TLA uses column carries while Lean uses mathematical Nat/Int encodings; their general equivalence is unproved", "Signed division has full double-width value, zero-sign, remainder-sign and overflow relations but no general Lean correspondence proof", "Divide flag undefinedness is represented in TLA but full successful/fault architectural outcomes are unbound", "Implicit accumulator/high-half storage writes and #DE delivery require state/form/exception integration"]
+    }
+  ],
+  "checks": {
+    "tla_snowcat": ["AMD64IntegerCore", "AMD64IntegerArithmetic", "AMD64IntegerShiftBit", "AMD64IntegerMulDiv", "AMD64IntegerChecks", "AMD64IntegerStateAdapter", "AMD64IntegerStateAdapterChecks", "AMD64IntegerExecution", "AMD64IntegerExecutionChecks"],
+    "tlc_fixture": ["AMD64Integer.cfg + AMD64IntegerChecks.tla", "AMD64IntegerStateAdapter.cfg + AMD64IntegerStateAdapterChecks.tla", "AMD64IntegerExecution.cfg + AMD64IntegerExecutionChecks.tla"],
+    "lean_compile": ["AMD64.IntegerSemantics", "AMD64.IntegerSemanticsChecks", "AMD64.IntegerStateAdapter", "AMD64.IntegerStateAdapterChecks", "AMD64.IntegerExecution", "AMD64.IntegerExecutionChecks"],
+    "directed_boundaries": ["8-bit carry and borrow", "signed minimum negate overflow", "ANDN PF undefined", "logical and arithmetic shift counts 8 and 9", "rotate masked counts 8 and 9", "carry rotate full-ring count 9", "SHLD oversize two distinct destinations", "zero BSF destination preservation and changed-candidate rejection", "PDEP/PEXT", "8x8 full product", "unsigned divide success, zero divisor and quotient overflow", "signed negative quotient and minimum/-1 overflow"]
+  },
+  "full_instruction_entries_completed": [],
+  "execution_binding": {
+    "boundary": "body-applied covers validated operand and instruction effects; fallthrough checks before RIP, length 1..15, mode/CS-selected IP width and next-IP arithmetic, while fetch and synchronous/asynchronous event resolution remain explicit assumptions, not architectural retirement",
+    "outcome_name": "body-applied",
+    "reviewed_form_ids": [
+      "AMD64-F-0026", "AMD64-F-0027", "AMD64-F-0028", "AMD64-F-0029",
+      "AMD64-F-0047", "AMD64-F-0048", "AMD64-F-0049", "AMD64-F-0050",
+      "AMD64-F-0240", "AMD64-F-0241", "AMD64-F-0242", "AMD64-F-0243",
+      "AMD64-F-0496", "AMD64-F-0497", "AMD64-F-0498", "AMD64-F-0499", "AMD64-F-0503-R",
+      "AMD64-F-0561", "AMD64-F-0562", "AMD64-F-0563", "AMD64-F-0564",
+      "AMD64-F-0848", "AMD64-F-0849", "AMD64-F-0850", "AMD64-F-0851",
+      "AMD64-F-0869", "AMD64-F-0870", "AMD64-F-0871", "AMD64-F-0872",
+      "AMD64-F-0913", "AMD64-F-0914", "AMD64-F-0915", "AMD64-F-0916"
+    ],
+    "reviewed_forms": ["ADD accumulator immediate 8/16/32/64", "AND accumulator immediate 8/16/32/64", "CMP accumulator immediate 8/16/32/64", "MOV register immediate 8/16/32/64 and reviewed sign-extended imm32-to-r64 variant", "OR accumulator immediate 8/16/32/64", "SUB accumulator immediate 8/16/32/64", "TEST accumulator immediate 8/16/32/64", "XOR accumulator immediate 8/16/32/64"],
+    "conditional_operations": ["MOV", "ADD", "ADC", "SUB", "SBB", "CMP", "INC", "DEC", "NEG", "AND", "OR", "XOR", "TEST", "NOT", "CLC", "STC", "CMC", "CLD", "STD"],
+    "validated_path": "CPUState validity -> executable payload validation against source-reviewed form -> kernel body step",
+    "unavailable_policy": "unbound forms and memory payloads produce modeling-unavailable; validation failures are a separate validation-rejected result",
+    "checked_boundaries": ["all 33 reviewed form IDs map to kernels", "actual positive dispatch at 8/16/32/64 widths", "sign-extended imm32-to-r64", "high-byte write", "same-register snapshot reads", "32-bit long-mode zero extension", "distinct permitted legacy/compatibility low32 upper-bit alternatives", "complete rFLAGS framing", "invalid before-state rejection", "length-certified next-IP and CPU frames", "legacy 16-bit IP wrap", "length 0 and 16 rejection"],
+    "supplemental_unary_binding": {
+      "source": "Specs/AMD64/integer-form-supplement.json",
+      "forms": 20,
+      "operations": ["DEC", "INC", "NEG", "NOT"],
+      "tla_rule": "AMD64IntegerExecution!ExecuteSupplementalUnary",
+      "lean_rule": "AMD64.IntegerExecution.ExecuteSupplementalUnary",
+      "shared_registry_status": "partially reviewed; remaining prefix/exception/state review open",
+      "memory_policy": "retain legal memory alternatives; validated memory execution remains modeling-unavailable"
+    }
+  },
+  "instruction_binding": {
+    "status": "partial-register-immediate-body-binding",
+    "missing": ["remaining source-reviewed forms", "memory operand events", "next-RIP and retirement", "exceptions and priority", "atomicity and observable events"]
+  },
+  "assigned_but_no_accepted_kernel": [
+    "V3-GP-001", "V3-GP-002", "V3-GP-003", "V3-GP-004",
+    "V3-GP-023", "V3-GP-048",
+    "V3-GP-049", "V3-GP-050", "V3-GP-051", "V3-GP-057",
+    "V3-GP-068", "V3-GP-071", "V3-GP-074", "V3-GP-075", "V3-GP-079",
+    "V3-GP-082", "V3-GP-085", "V3-GP-086", "V3-GP-094", "V3-GP-096",
+    "V3-GP-099", "V3-GP-101", "V3-GP-115", "V3-GP-116", "V3-GP-117",
+    "V3-GP-118", "V3-GP-119", "V3-GP-139", "V3-GP-149",
+    "V3-GP-152", "V3-GP-153"
+  ]
+}

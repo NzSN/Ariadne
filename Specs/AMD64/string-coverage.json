@@ -1,0 +1,1698 @@
+{
+  "schema_version": 1,
+  "generated_by": "tools/check_amd64_strings.py",
+  "authority": {
+    "volume1_sha256": "aed9236b718ae86cdb49f7d628f4ebb1a4bdce1a012df6cf6aad6735776c8a38",
+    "volume2_sha256": "7257d41d3584822edb7934e2c630c7d3865eea30c0ab95b8de4e546088d5ea9a",
+    "volume3_sha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+    "repeat_section": {
+      "id": "V3-SECTION-1082",
+      "pdf_page": 54
+    },
+    "partial_progress_dependency": "SYS-PARTIAL-PROGRESS",
+    "io_intercept_dependency": {
+      "id": "V2-SECTION-0773",
+      "pdf_page": 601
+    }
+  },
+  "completeness_boundary": "Checked means only the pure count/pointer/condition/stage/restart kernel. No entry or form is fully implemented until data movement, memory/I/O events, fault ordering, form legality, and CPU/memory outcome binding are evidenced.",
+  "summary": {
+    "entry_rows": 7,
+    "form_rows": 52,
+    "control_kernel_entries": 7,
+    "memory_data_binding_entries": 5,
+    "io_mixed_failure_ordering_open_entries": 2,
+    "fully_implemented_entries": 0,
+    "fully_bound_forms": 0
+  },
+  "entries": [
+    {
+      "entry_id": "V3-GP-045",
+      "title": "CMPS CMPSB CMPSW CMPSD CMPSQ",
+      "pdf_pages": [
+        207,
+        208
+      ],
+      "form_ids": [
+        "AMD64-F-0259",
+        "AMD64-F-0260",
+        "AMD64-F-0261",
+        "AMD64-F-0262",
+        "AMD64-F-0263",
+        "AMD64-F-0264",
+        "AMD64-F-0265",
+        "AMD64-F-0266"
+      ],
+      "kind": "cmps",
+      "element_width_bytes": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "address_sizes_bits": [
+        16,
+        32,
+        64
+      ],
+      "repeat_modes": [
+        "none",
+        "repe",
+        "repne"
+      ],
+      "implicit_registers": [
+        "RSI",
+        "RDI",
+        "RCX when repeated",
+        "RFLAGS.DF",
+        "status flags"
+      ],
+      "stage_order": [
+        "sourceRead",
+        "destinationRead",
+        "flagsWrite",
+        "commitReady"
+      ],
+      "control_kernel_status": "implemented-checked",
+      "memory_binding_status": "resolved-captured-bytes-and-relational-cpu-memory-commit",
+      "io_binding_status": "not-applicable",
+      "entry_implementation_status": "partial-memory-iteration-binding",
+      "evidence": {
+        "tla": [
+          "Specs/AMD64Strings.tla",
+          "Specs/AMD64StringsChecks.tla",
+          "Specs/AMD64StringsMemory.tla",
+          "Specs/AMD64StringsMemoryChecks.tla"
+        ],
+        "lean": [
+          "lean/AMD64/Strings.lean",
+          "lean/AMD64/StringsMemory.lean"
+        ]
+      },
+      "open_obligations": [
+        "bind both memory reads and their exception order",
+        "bind full SUB flags to CPU state",
+        "reconcile and validate every form in the parent form ledger",
+        "bind interruption/fault outcomes with independent committed-effect and iteration counts"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-059",
+      "title": "INS INSB INSW INSD",
+      "pdf_pages": [
+        234,
+        235
+      ],
+      "form_ids": [
+        "AMD64-F-0324",
+        "AMD64-F-0325",
+        "AMD64-F-0326",
+        "AMD64-F-0327",
+        "AMD64-F-0328",
+        "AMD64-F-0329"
+      ],
+      "kind": "ins",
+      "element_width_bytes": [
+        1,
+        2,
+        4
+      ],
+      "address_sizes_bits": [
+        16,
+        32,
+        64
+      ],
+      "repeat_modes": [
+        "none",
+        "rep"
+      ],
+      "implicit_registers": [
+        "RDX",
+        "RDI",
+        "RCX when repeated",
+        "RFLAGS.DF"
+      ],
+      "stage_order": [
+        "ioRead",
+        "destinationWrite",
+        "commitReady"
+      ],
+      "control_kernel_status": "implemented-checked",
+      "memory_binding_status": "successful-path-resolved-memory-binding",
+      "io_binding_status": "successful-explicit-device-rule-only",
+      "entry_implementation_status": "partial-success-binding-ordering-open",
+      "evidence": {
+        "tla": [
+          "Specs/AMD64Strings.tla",
+          "Specs/AMD64StringsChecks.tla",
+          "Specs/AMD64IO.tla",
+          "Specs/AMD64IOStrings.tla"
+        ],
+        "lean": [
+          "lean/AMD64/Strings.lean",
+          "lean/AMD64/IO.lean",
+          "lean/AMD64/IOStrings.lean"
+        ]
+      },
+      "open_obligations": [
+        "define port-width/device result contract",
+        "prove I/O-read versus destination-fault ordering",
+        "bind I/O permission and memory write outcomes",
+        "reconcile and validate every form in the parent form ledger",
+        "bind interruption/fault outcomes with independent committed-effect and iteration counts"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-072",
+      "title": "LODS LODSB LODSW LODSD LODSQ",
+      "pdf_pages": [
+        267,
+        268
+      ],
+      "form_ids": [
+        "AMD64-F-0455",
+        "AMD64-F-0456",
+        "AMD64-F-0457",
+        "AMD64-F-0458",
+        "AMD64-F-0459",
+        "AMD64-F-0460",
+        "AMD64-F-0461",
+        "AMD64-F-0462"
+      ],
+      "kind": "lods",
+      "element_width_bytes": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "address_sizes_bits": [
+        16,
+        32,
+        64
+      ],
+      "repeat_modes": [
+        "none",
+        "rep"
+      ],
+      "implicit_registers": [
+        "RAX view",
+        "RSI",
+        "RCX when repeated",
+        "RFLAGS.DF"
+      ],
+      "stage_order": [
+        "sourceRead",
+        "accumulatorWrite",
+        "commitReady"
+      ],
+      "control_kernel_status": "implemented-checked",
+      "memory_binding_status": "resolved-captured-bytes-and-relational-cpu-memory-commit",
+      "io_binding_status": "not-applicable",
+      "entry_implementation_status": "partial-memory-iteration-binding",
+      "evidence": {
+        "tla": [
+          "Specs/AMD64Strings.tla",
+          "Specs/AMD64StringsChecks.tla",
+          "Specs/AMD64StringsMemory.tla",
+          "Specs/AMD64StringsMemoryChecks.tla"
+        ],
+        "lean": [
+          "lean/AMD64/Strings.lean",
+          "lean/AMD64/StringsMemory.lean"
+        ]
+      },
+      "open_obligations": [
+        "bind memory data to AL/AX/EAX/RAX write semantics",
+        "bind memory faults",
+        "reconcile and validate every form in the parent form ledger",
+        "bind interruption/fault outcomes with independent committed-effect and iteration counts"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-088",
+      "title": "MOVS MOVSB MOVSW MOVSD MOVSQ",
+      "pdf_pages": [
+        301,
+        302
+      ],
+      "form_ids": [
+        "AMD64-F-0523",
+        "AMD64-F-0524",
+        "AMD64-F-0525",
+        "AMD64-F-0526",
+        "AMD64-F-0527",
+        "AMD64-F-0528",
+        "AMD64-F-0529",
+        "AMD64-F-0530"
+      ],
+      "kind": "movs",
+      "element_width_bytes": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "address_sizes_bits": [
+        16,
+        32,
+        64
+      ],
+      "repeat_modes": [
+        "none",
+        "rep"
+      ],
+      "implicit_registers": [
+        "RSI",
+        "RDI",
+        "RCX when repeated",
+        "RFLAGS.DF"
+      ],
+      "stage_order": [
+        "sourceRead",
+        "destinationWrite",
+        "commitReady"
+      ],
+      "control_kernel_status": "implemented-checked",
+      "memory_binding_status": "resolved-captured-bytes-and-relational-cpu-memory-commit",
+      "io_binding_status": "not-applicable",
+      "entry_implementation_status": "partial-memory-iteration-binding",
+      "evidence": {
+        "tla": [
+          "Specs/AMD64Strings.tla",
+          "Specs/AMD64StringsChecks.tla",
+          "Specs/AMD64StringsMemory.tla",
+          "Specs/AMD64StringsMemoryChecks.tla"
+        ],
+        "lean": [
+          "lean/AMD64/Strings.lean",
+          "lean/AMD64/StringsMemory.lean"
+        ]
+      },
+      "open_obligations": [
+        "bind read value to destination write",
+        "prove source-read/destination-write fault and event ordering",
+        "reconcile and validate every form in the parent form ledger",
+        "bind interruption/fault outcomes with independent committed-effect and iteration counts"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-100",
+      "title": "OUTS OUTSB OUTSW OUTSD",
+      "pdf_pages": [
+        320,
+        321
+      ],
+      "form_ids": [
+        "AMD64-F-0586",
+        "AMD64-F-0587",
+        "AMD64-F-0588",
+        "AMD64-F-0589",
+        "AMD64-F-0590",
+        "AMD64-F-0591"
+      ],
+      "kind": "outs",
+      "element_width_bytes": [
+        1,
+        2,
+        4
+      ],
+      "address_sizes_bits": [
+        16,
+        32,
+        64
+      ],
+      "repeat_modes": [
+        "none",
+        "rep"
+      ],
+      "implicit_registers": [
+        "RDX",
+        "RSI",
+        "RCX when repeated",
+        "RFLAGS.DF"
+      ],
+      "stage_order": [
+        "sourceRead",
+        "ioWrite",
+        "commitReady"
+      ],
+      "control_kernel_status": "implemented-checked",
+      "memory_binding_status": "successful-path-resolved-memory-binding",
+      "io_binding_status": "successful-explicit-device-rule-only",
+      "entry_implementation_status": "partial-success-binding-ordering-open",
+      "evidence": {
+        "tla": [
+          "Specs/AMD64Strings.tla",
+          "Specs/AMD64StringsChecks.tla",
+          "Specs/AMD64IO.tla",
+          "Specs/AMD64IOStrings.tla"
+        ],
+        "lean": [
+          "lean/AMD64/Strings.lean",
+          "lean/AMD64/IO.lean",
+          "lean/AMD64/IOStrings.lean"
+        ]
+      },
+      "open_obligations": [
+        "define port-width/device write contract",
+        "prove memory-read versus I/O permission/effect ordering",
+        "reconcile and validate every form in the parent form ledger",
+        "bind interruption/fault outcomes with independent committed-effect and iteration counts"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-130",
+      "title": "SCAS SCASB SCASW SCASD SCASQ",
+      "pdf_pages": [
+        376,
+        377
+      ],
+      "form_ids": [
+        "AMD64-F-0769",
+        "AMD64-F-0770",
+        "AMD64-F-0771",
+        "AMD64-F-0772",
+        "AMD64-F-0773",
+        "AMD64-F-0774",
+        "AMD64-F-0775",
+        "AMD64-F-0776"
+      ],
+      "kind": "scas",
+      "element_width_bytes": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "address_sizes_bits": [
+        16,
+        32,
+        64
+      ],
+      "repeat_modes": [
+        "none",
+        "repe",
+        "repne"
+      ],
+      "implicit_registers": [
+        "RAX view",
+        "RDI",
+        "RCX when repeated",
+        "RFLAGS.DF",
+        "status flags"
+      ],
+      "stage_order": [
+        "destinationRead",
+        "flagsWrite",
+        "commitReady"
+      ],
+      "control_kernel_status": "implemented-checked",
+      "memory_binding_status": "resolved-captured-bytes-and-relational-cpu-memory-commit",
+      "io_binding_status": "not-applicable",
+      "entry_implementation_status": "partial-memory-iteration-binding",
+      "evidence": {
+        "tla": [
+          "Specs/AMD64Strings.tla",
+          "Specs/AMD64StringsChecks.tla",
+          "Specs/AMD64StringsMemory.tla",
+          "Specs/AMD64StringsMemoryChecks.tla"
+        ],
+        "lean": [
+          "lean/AMD64/Strings.lean",
+          "lean/AMD64/StringsMemory.lean"
+        ]
+      },
+      "open_obligations": [
+        "bind destination memory value and faults",
+        "bind accumulator-minus-destination flags",
+        "reconcile and validate every form in the parent form ledger",
+        "bind interruption/fault outcomes with independent committed-effect and iteration counts"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-142",
+      "title": "STOS STOSB STOSW STOSD STOSQ",
+      "pdf_pages": [
+        396,
+        397
+      ],
+      "form_ids": [
+        "AMD64-F-0840",
+        "AMD64-F-0841",
+        "AMD64-F-0842",
+        "AMD64-F-0843",
+        "AMD64-F-0844",
+        "AMD64-F-0845",
+        "AMD64-F-0846",
+        "AMD64-F-0847"
+      ],
+      "kind": "stos",
+      "element_width_bytes": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "address_sizes_bits": [
+        16,
+        32,
+        64
+      ],
+      "repeat_modes": [
+        "none",
+        "rep"
+      ],
+      "implicit_registers": [
+        "RAX view",
+        "RDI",
+        "RCX when repeated",
+        "RFLAGS.DF"
+      ],
+      "stage_order": [
+        "destinationWrite",
+        "commitReady"
+      ],
+      "control_kernel_status": "implemented-checked",
+      "memory_binding_status": "resolved-captured-bytes-and-relational-cpu-memory-commit",
+      "io_binding_status": "not-applicable",
+      "entry_implementation_status": "partial-memory-iteration-binding",
+      "evidence": {
+        "tla": [
+          "Specs/AMD64Strings.tla",
+          "Specs/AMD64StringsChecks.tla",
+          "Specs/AMD64StringsMemory.tla",
+          "Specs/AMD64StringsMemoryChecks.tla"
+        ],
+        "lean": [
+          "lean/AMD64/Strings.lean",
+          "lean/AMD64/StringsMemory.lean"
+        ]
+      },
+      "open_obligations": [
+        "bind accumulator value to destination memory write",
+        "bind memory faults",
+        "reconcile and validate every form in the parent form ledger",
+        "bind interruption/fault outcomes with independent committed-effect and iteration counts"
+      ]
+    }
+  ],
+  "forms": [
+    {
+      "form_id": "AMD64-F-0259",
+      "entry_id": "V3-GP-045",
+      "source_spelling": "CMPS mem8, mem8",
+      "element_width_bytes": 1,
+      "source_rows": [
+        "V3-ROW-0259"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0260",
+      "entry_id": "V3-GP-045",
+      "source_spelling": "CMPS mem16, mem16",
+      "element_width_bytes": 2,
+      "source_rows": [
+        "V3-ROW-0260"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0261",
+      "entry_id": "V3-GP-045",
+      "source_spelling": "CMPS mem32, mem32",
+      "element_width_bytes": 4,
+      "source_rows": [
+        "V3-ROW-0261"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0262",
+      "entry_id": "V3-GP-045",
+      "source_spelling": "CMPS mem64, mem64",
+      "element_width_bytes": 8,
+      "source_rows": [
+        "V3-ROW-0262"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0263",
+      "entry_id": "V3-GP-045",
+      "source_spelling": "CMPSB",
+      "element_width_bytes": 1,
+      "source_rows": [
+        "V3-ROW-0263"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0264",
+      "entry_id": "V3-GP-045",
+      "source_spelling": "CMPSW",
+      "element_width_bytes": 2,
+      "source_rows": [
+        "V3-ROW-0264"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0265",
+      "entry_id": "V3-GP-045",
+      "source_spelling": "CMPSD",
+      "element_width_bytes": 4,
+      "source_rows": [
+        "V3-ROW-0265"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0266",
+      "entry_id": "V3-GP-045",
+      "source_spelling": "CMPSQ",
+      "element_width_bytes": 8,
+      "source_rows": [
+        "V3-ROW-0266"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0324",
+      "entry_id": "V3-GP-059",
+      "source_spelling": "INS mem8, DX",
+      "element_width_bytes": 1,
+      "source_rows": [
+        "V3-ROW-0324"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0325",
+      "entry_id": "V3-GP-059",
+      "source_spelling": "INS mem16, DX",
+      "element_width_bytes": 2,
+      "source_rows": [
+        "V3-ROW-0325"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0326",
+      "entry_id": "V3-GP-059",
+      "source_spelling": "INS mem32, DX",
+      "element_width_bytes": 4,
+      "source_rows": [
+        "V3-ROW-0326"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0327",
+      "entry_id": "V3-GP-059",
+      "source_spelling": "INSB",
+      "element_width_bytes": 1,
+      "source_rows": [
+        "V3-ROW-0327"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0328",
+      "entry_id": "V3-GP-059",
+      "source_spelling": "INSW",
+      "element_width_bytes": 2,
+      "source_rows": [
+        "V3-ROW-0328"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0329",
+      "entry_id": "V3-GP-059",
+      "source_spelling": "INSD",
+      "element_width_bytes": 4,
+      "source_rows": [
+        "V3-ROW-0329"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0455",
+      "entry_id": "V3-GP-072",
+      "source_spelling": "LODS mem8",
+      "element_width_bytes": 1,
+      "source_rows": [
+        "V3-ROW-0455"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0456",
+      "entry_id": "V3-GP-072",
+      "source_spelling": "LODS mem16",
+      "element_width_bytes": 2,
+      "source_rows": [
+        "V3-ROW-0456"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0457",
+      "entry_id": "V3-GP-072",
+      "source_spelling": "LODS mem32",
+      "element_width_bytes": 4,
+      "source_rows": [
+        "V3-ROW-0457"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0458",
+      "entry_id": "V3-GP-072",
+      "source_spelling": "LODS mem64",
+      "element_width_bytes": 8,
+      "source_rows": [
+        "V3-ROW-0458"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0459",
+      "entry_id": "V3-GP-072",
+      "source_spelling": "LODSB",
+      "element_width_bytes": 1,
+      "source_rows": [
+        "V3-ROW-0459"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0460",
+      "entry_id": "V3-GP-072",
+      "source_spelling": "LODSW",
+      "element_width_bytes": 2,
+      "source_rows": [
+        "V3-ROW-0460"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0461",
+      "entry_id": "V3-GP-072",
+      "source_spelling": "LODSD",
+      "element_width_bytes": 4,
+      "source_rows": [
+        "V3-ROW-0461"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0462",
+      "entry_id": "V3-GP-072",
+      "source_spelling": "LODSQ",
+      "element_width_bytes": 8,
+      "source_rows": [
+        "V3-ROW-0462"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0523",
+      "entry_id": "V3-GP-088",
+      "source_spelling": "MOVS mem8, mem8",
+      "element_width_bytes": 1,
+      "source_rows": [
+        "V3-ROW-0523"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0524",
+      "entry_id": "V3-GP-088",
+      "source_spelling": "MOVS mem16, mem16",
+      "element_width_bytes": 2,
+      "source_rows": [
+        "V3-ROW-0524"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0525",
+      "entry_id": "V3-GP-088",
+      "source_spelling": "MOVS mem32, mem32",
+      "element_width_bytes": 4,
+      "source_rows": [
+        "V3-ROW-0525"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0526",
+      "entry_id": "V3-GP-088",
+      "source_spelling": "MOVS mem64, mem64",
+      "element_width_bytes": 8,
+      "source_rows": [
+        "V3-ROW-0526"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0527",
+      "entry_id": "V3-GP-088",
+      "source_spelling": "MOVSB",
+      "element_width_bytes": 1,
+      "source_rows": [
+        "V3-ROW-0527"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0528",
+      "entry_id": "V3-GP-088",
+      "source_spelling": "MOVSW",
+      "element_width_bytes": 2,
+      "source_rows": [
+        "V3-ROW-0528"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0529",
+      "entry_id": "V3-GP-088",
+      "source_spelling": "MOVSD",
+      "element_width_bytes": 4,
+      "source_rows": [
+        "V3-ROW-0529"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0530",
+      "entry_id": "V3-GP-088",
+      "source_spelling": "MOVSQ",
+      "element_width_bytes": 8,
+      "source_rows": [
+        "V3-ROW-0530"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0586",
+      "entry_id": "V3-GP-100",
+      "source_spelling": "OUTS DX, mem8",
+      "element_width_bytes": 1,
+      "source_rows": [
+        "V3-ROW-0586"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0587",
+      "entry_id": "V3-GP-100",
+      "source_spelling": "OUTS DX, mem16",
+      "element_width_bytes": 2,
+      "source_rows": [
+        "V3-ROW-0587"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0588",
+      "entry_id": "V3-GP-100",
+      "source_spelling": "OUTS DX, mem32",
+      "element_width_bytes": 4,
+      "source_rows": [
+        "V3-ROW-0588"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0589",
+      "entry_id": "V3-GP-100",
+      "source_spelling": "OUTSB",
+      "element_width_bytes": 1,
+      "source_rows": [
+        "V3-ROW-0589"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0590",
+      "entry_id": "V3-GP-100",
+      "source_spelling": "OUTSW",
+      "element_width_bytes": 2,
+      "source_rows": [
+        "V3-ROW-0590"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0591",
+      "entry_id": "V3-GP-100",
+      "source_spelling": "OUTSD",
+      "element_width_bytes": 4,
+      "source_rows": [
+        "V3-ROW-0591"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0769",
+      "entry_id": "V3-GP-130",
+      "source_spelling": "SCAS mem8",
+      "element_width_bytes": 1,
+      "source_rows": [
+        "V3-ROW-0769"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0770",
+      "entry_id": "V3-GP-130",
+      "source_spelling": "SCAS mem16",
+      "element_width_bytes": 2,
+      "source_rows": [
+        "V3-ROW-0770"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0771",
+      "entry_id": "V3-GP-130",
+      "source_spelling": "SCAS mem32",
+      "element_width_bytes": 4,
+      "source_rows": [
+        "V3-ROW-0771"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0772",
+      "entry_id": "V3-GP-130",
+      "source_spelling": "SCAS mem64",
+      "element_width_bytes": 8,
+      "source_rows": [
+        "V3-ROW-0772"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0773",
+      "entry_id": "V3-GP-130",
+      "source_spelling": "SCASB",
+      "element_width_bytes": 1,
+      "source_rows": [
+        "V3-ROW-0773"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0774",
+      "entry_id": "V3-GP-130",
+      "source_spelling": "SCASW",
+      "element_width_bytes": 2,
+      "source_rows": [
+        "V3-ROW-0774"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0775",
+      "entry_id": "V3-GP-130",
+      "source_spelling": "SCASD",
+      "element_width_bytes": 4,
+      "source_rows": [
+        "V3-ROW-0775"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0776",
+      "entry_id": "V3-GP-130",
+      "source_spelling": "SCASQ",
+      "element_width_bytes": 8,
+      "source_rows": [
+        "V3-ROW-0776"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0840",
+      "entry_id": "V3-GP-142",
+      "source_spelling": "STOS mem8",
+      "element_width_bytes": 1,
+      "source_rows": [
+        "V3-ROW-0840"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0841",
+      "entry_id": "V3-GP-142",
+      "source_spelling": "STOS mem16",
+      "element_width_bytes": 2,
+      "source_rows": [
+        "V3-ROW-0841"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0842",
+      "entry_id": "V3-GP-142",
+      "source_spelling": "STOS mem32",
+      "element_width_bytes": 4,
+      "source_rows": [
+        "V3-ROW-0842"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0843",
+      "entry_id": "V3-GP-142",
+      "source_spelling": "STOS mem64",
+      "element_width_bytes": 8,
+      "source_rows": [
+        "V3-ROW-0843"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0844",
+      "entry_id": "V3-GP-142",
+      "source_spelling": "STOSB",
+      "element_width_bytes": 1,
+      "source_rows": [
+        "V3-ROW-0844"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0845",
+      "entry_id": "V3-GP-142",
+      "source_spelling": "STOSW",
+      "element_width_bytes": 2,
+      "source_rows": [
+        "V3-ROW-0845"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0846",
+      "entry_id": "V3-GP-142",
+      "source_spelling": "STOSD",
+      "element_width_bytes": 4,
+      "source_rows": [
+        "V3-ROW-0846"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0847",
+      "entry_id": "V3-GP-142",
+      "source_spelling": "STOSQ",
+      "element_width_bytes": 8,
+      "source_rows": [
+        "V3-ROW-0847"
+      ],
+      "form_review_status": "pending-semantic-review",
+      "form_implementation_status": "missing",
+      "control_kernel_status": "covered-by-kind-and-width",
+      "instruction_binding_status": "open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies"
+      ]
+    }
+  ]
+}

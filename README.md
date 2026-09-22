@@ -13,6 +13,20 @@ The separate native LLVM IR, abstract machine-state, and initial x86-64
 instruction-semantics models remain formal specifications. Readers, LLVM
 integration, the analyzer CLI, and graph exporters have not been implemented.
 
+The [immediate AMD64 milestone](docs/amd64-user64.md) is a verified 64-bit
+user-mode subset, starting with 49 register/immediate form cases and then near
+control/stack and common RAM operations. Unsupported semantics must retain
+explicit analysis uncertainty. Full Volume 3 general-purpose and Volume 1 state
+coverage remains the [long-term design target](docs/amd64-semantics-design.md). Its
+[pinned source inventory](Specs/AMD64/README.md) and
+[TLA+/Lean foundations](lean/README.md) now include CPU-state representation,
+instruction-form validation, memory/exception contracts and integer kernels.
+The conservative default fallback foundation is accepted for the exact user64
+profile hash. Register-core acceptance remains pending: its 49 paired bodies
+are recorded separately from its zero verified instruction steps. TLA+ stays
+authoritative and the
+[task list](docs/amd64-semantics-tasks.md) tracks the proof and implementation work.
+
 The core uses **Rust 2024 and Cargo**, with no external crate dependencies.
 LLVM MC remains the intended instruction-decoding foundation for a future
 adapter; an LLVM release has not yet been selected or pinned. Instruction-effect

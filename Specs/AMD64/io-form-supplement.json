@@ -1,0 +1,1022 @@
+{
+  "schema_version": 1,
+  "generated_by": "tools/check_amd64_io.py",
+  "authority": {
+    "volume1_sha256": "aed9236b718ae86cdb49f7d628f4ebb1a4bdce1a012df6cf6aad6735776c8a38",
+    "volume2_sha256": "7257d41d3584822edb7934e2c630c7d3865eea30c0ab95b8de4e546088d5ea9a",
+    "volume3_sha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+    "sources": [
+      "V1-SECTION-0090",
+      "V1-SECTION-0091",
+      "V1-SECTION-0092",
+      "V2-SECTION-0650",
+      "V2-SECTION-0683",
+      "V3-GP-057",
+      "V3-GP-059",
+      "V3-GP-099",
+      "V3-GP-100"
+    ]
+  },
+  "completeness_boundary": "This supplement records reviewed IO semantics without changing forms.json. Direct IN/OUT body effects are bound to explicit device events; shared form acceptance remains open. INS/OUTS are bound only for successful resolved/device-rule cases. No entry or form is complete.",
+  "summary": {
+    "entry_rows": 4,
+    "form_rows": 24,
+    "fully_implemented_entries": 0,
+    "fully_bound_forms": 0
+  },
+  "entries": [
+    {
+      "entry_id": "V3-GP-057",
+      "title": "IN",
+      "pdf_pages": [
+        230,
+        231
+      ],
+      "form_ids": [
+        "AMD64-F-0312",
+        "AMD64-F-0313",
+        "AMD64-F-0314",
+        "AMD64-F-0315",
+        "AMD64-F-0316",
+        "AMD64-F-0317"
+      ],
+      "full_entry_status": "open"
+    },
+    {
+      "entry_id": "V3-GP-059",
+      "title": "INS INSB INSW INSD",
+      "pdf_pages": [
+        234,
+        235
+      ],
+      "form_ids": [
+        "AMD64-F-0324",
+        "AMD64-F-0325",
+        "AMD64-F-0326",
+        "AMD64-F-0327",
+        "AMD64-F-0328",
+        "AMD64-F-0329"
+      ],
+      "full_entry_status": "open"
+    },
+    {
+      "entry_id": "V3-GP-099",
+      "title": "OUT",
+      "pdf_pages": [
+        319
+      ],
+      "form_ids": [
+        "AMD64-F-0580",
+        "AMD64-F-0581",
+        "AMD64-F-0582",
+        "AMD64-F-0583",
+        "AMD64-F-0584",
+        "AMD64-F-0585"
+      ],
+      "full_entry_status": "open"
+    },
+    {
+      "entry_id": "V3-GP-100",
+      "title": "OUTS OUTSB OUTSW OUTSD",
+      "pdf_pages": [
+        320,
+        321
+      ],
+      "form_ids": [
+        "AMD64-F-0586",
+        "AMD64-F-0587",
+        "AMD64-F-0588",
+        "AMD64-F-0589",
+        "AMD64-F-0590",
+        "AMD64-F-0591"
+      ],
+      "full_entry_status": "open"
+    }
+  ],
+  "forms": [
+    {
+      "form_id": "AMD64-F-0312",
+      "entry_id": "V3-GP-057",
+      "source_spelling": "IN AL, imm8",
+      "source_rows": [
+        "V3-ROW-0312"
+      ],
+      "direction": "input",
+      "string": false,
+      "port_source": "immediate8-zero-extended",
+      "data_width_bits": 8,
+      "effective_64_bit_operand_behavior": "normalize-to-32-bit-port",
+      "repeat_modes": [
+        "none"
+      ],
+      "permission_dependency": "SYS-IO-PERMISSION",
+      "permission_rule": "bitmap required in virtual8086 or when CPL > IOPL; all consecutive byte-port bits must be covered and clear",
+      "unaligned_rule": "architecturally permitted; byte transaction order implementation-dependent",
+      "boundary_rule": "cross-FFFF behavior remains source-unspecified when IOPL bypasses bitmap denial",
+      "form_review_status": "pending-semantic-review",
+      "shared_form_implementation_status": "missing",
+      "io1_projection_status": "source-reviewed-supplement",
+      "binding_owner": "/root/external_io",
+      "binding_status": "direct-body-bound-shared-form-open",
+      "exception_device_priority": "permission denial or permission-read page fault precedes device binding; missing device rule is modeling-unavailable after permission and ordering",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies",
+        "attach supplement to validated executable form",
+        "close cross-boundary port behavior or retain unavailable outcome"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0313",
+      "entry_id": "V3-GP-057",
+      "source_spelling": "IN AX, imm8",
+      "source_rows": [
+        "V3-ROW-0313"
+      ],
+      "direction": "input",
+      "string": false,
+      "port_source": "immediate8-zero-extended",
+      "data_width_bits": 16,
+      "effective_64_bit_operand_behavior": "normalize-to-32-bit-port",
+      "repeat_modes": [
+        "none"
+      ],
+      "permission_dependency": "SYS-IO-PERMISSION",
+      "permission_rule": "bitmap required in virtual8086 or when CPL > IOPL; all consecutive byte-port bits must be covered and clear",
+      "unaligned_rule": "architecturally permitted; byte transaction order implementation-dependent",
+      "boundary_rule": "cross-FFFF behavior remains source-unspecified when IOPL bypasses bitmap denial",
+      "form_review_status": "pending-semantic-review",
+      "shared_form_implementation_status": "missing",
+      "io1_projection_status": "source-reviewed-supplement",
+      "binding_owner": "/root/external_io",
+      "binding_status": "direct-body-bound-shared-form-open",
+      "exception_device_priority": "permission denial or permission-read page fault precedes device binding; missing device rule is modeling-unavailable after permission and ordering",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies",
+        "attach supplement to validated executable form",
+        "close cross-boundary port behavior or retain unavailable outcome"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0314",
+      "entry_id": "V3-GP-057",
+      "source_spelling": "IN EAX, imm8",
+      "source_rows": [
+        "V3-ROW-0314"
+      ],
+      "direction": "input",
+      "string": false,
+      "port_source": "immediate8-zero-extended",
+      "data_width_bits": 32,
+      "effective_64_bit_operand_behavior": "normalize-to-32-bit-port",
+      "repeat_modes": [
+        "none"
+      ],
+      "permission_dependency": "SYS-IO-PERMISSION",
+      "permission_rule": "bitmap required in virtual8086 or when CPL > IOPL; all consecutive byte-port bits must be covered and clear",
+      "unaligned_rule": "architecturally permitted; byte transaction order implementation-dependent",
+      "boundary_rule": "cross-FFFF behavior remains source-unspecified when IOPL bypasses bitmap denial",
+      "form_review_status": "pending-semantic-review",
+      "shared_form_implementation_status": "missing",
+      "io1_projection_status": "source-reviewed-supplement",
+      "binding_owner": "/root/external_io",
+      "binding_status": "direct-body-bound-shared-form-open",
+      "exception_device_priority": "permission denial or permission-read page fault precedes device binding; missing device rule is modeling-unavailable after permission and ordering",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies",
+        "attach supplement to validated executable form",
+        "close cross-boundary port behavior or retain unavailable outcome"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0315",
+      "entry_id": "V3-GP-057",
+      "source_spelling": "IN AL, DX",
+      "source_rows": [
+        "V3-ROW-0315"
+      ],
+      "direction": "input",
+      "string": false,
+      "port_source": "dx-low16",
+      "data_width_bits": 8,
+      "effective_64_bit_operand_behavior": "normalize-to-32-bit-port",
+      "repeat_modes": [
+        "none"
+      ],
+      "permission_dependency": "SYS-IO-PERMISSION",
+      "permission_rule": "bitmap required in virtual8086 or when CPL > IOPL; all consecutive byte-port bits must be covered and clear",
+      "unaligned_rule": "architecturally permitted; byte transaction order implementation-dependent",
+      "boundary_rule": "cross-FFFF behavior remains source-unspecified when IOPL bypasses bitmap denial",
+      "form_review_status": "pending-semantic-review",
+      "shared_form_implementation_status": "missing",
+      "io1_projection_status": "source-reviewed-supplement",
+      "binding_owner": "/root/external_io",
+      "binding_status": "direct-body-bound-shared-form-open",
+      "exception_device_priority": "permission denial or permission-read page fault precedes device binding; missing device rule is modeling-unavailable after permission and ordering",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies",
+        "attach supplement to validated executable form",
+        "close cross-boundary port behavior or retain unavailable outcome"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0316",
+      "entry_id": "V3-GP-057",
+      "source_spelling": "IN AX, DX",
+      "source_rows": [
+        "V3-ROW-0316"
+      ],
+      "direction": "input",
+      "string": false,
+      "port_source": "dx-low16",
+      "data_width_bits": 16,
+      "effective_64_bit_operand_behavior": "normalize-to-32-bit-port",
+      "repeat_modes": [
+        "none"
+      ],
+      "permission_dependency": "SYS-IO-PERMISSION",
+      "permission_rule": "bitmap required in virtual8086 or when CPL > IOPL; all consecutive byte-port bits must be covered and clear",
+      "unaligned_rule": "architecturally permitted; byte transaction order implementation-dependent",
+      "boundary_rule": "cross-FFFF behavior remains source-unspecified when IOPL bypasses bitmap denial",
+      "form_review_status": "pending-semantic-review",
+      "shared_form_implementation_status": "missing",
+      "io1_projection_status": "source-reviewed-supplement",
+      "binding_owner": "/root/external_io",
+      "binding_status": "direct-body-bound-shared-form-open",
+      "exception_device_priority": "permission denial or permission-read page fault precedes device binding; missing device rule is modeling-unavailable after permission and ordering",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies",
+        "attach supplement to validated executable form",
+        "close cross-boundary port behavior or retain unavailable outcome"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0317",
+      "entry_id": "V3-GP-057",
+      "source_spelling": "IN EAX, DX",
+      "source_rows": [
+        "V3-ROW-0317"
+      ],
+      "direction": "input",
+      "string": false,
+      "port_source": "dx-low16",
+      "data_width_bits": 32,
+      "effective_64_bit_operand_behavior": "normalize-to-32-bit-port",
+      "repeat_modes": [
+        "none"
+      ],
+      "permission_dependency": "SYS-IO-PERMISSION",
+      "permission_rule": "bitmap required in virtual8086 or when CPL > IOPL; all consecutive byte-port bits must be covered and clear",
+      "unaligned_rule": "architecturally permitted; byte transaction order implementation-dependent",
+      "boundary_rule": "cross-FFFF behavior remains source-unspecified when IOPL bypasses bitmap denial",
+      "form_review_status": "pending-semantic-review",
+      "shared_form_implementation_status": "missing",
+      "io1_projection_status": "source-reviewed-supplement",
+      "binding_owner": "/root/external_io",
+      "binding_status": "direct-body-bound-shared-form-open",
+      "exception_device_priority": "permission denial or permission-read page fault precedes device binding; missing device rule is modeling-unavailable after permission and ordering",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies",
+        "attach supplement to validated executable form",
+        "close cross-boundary port behavior or retain unavailable outcome"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0324",
+      "entry_id": "V3-GP-059",
+      "source_spelling": "INS mem8, DX",
+      "source_rows": [
+        "V3-ROW-0324"
+      ],
+      "direction": "input",
+      "string": true,
+      "port_source": "dx-low16",
+      "data_width_bits": 8,
+      "effective_64_bit_operand_behavior": "normalize-to-32-bit-port",
+      "repeat_modes": [
+        "none",
+        "rep"
+      ],
+      "permission_dependency": "SYS-IO-PERMISSION",
+      "permission_rule": "bitmap required in virtual8086 or when CPL > IOPL; all consecutive byte-port bits must be covered and clear",
+      "unaligned_rule": "architecturally permitted; byte transaction order implementation-dependent",
+      "boundary_rule": "cross-FFFF behavior remains source-unspecified when IOPL bypasses bitmap denial",
+      "form_review_status": "pending-semantic-review",
+      "shared_form_implementation_status": "missing",
+      "io1_projection_status": "source-reviewed-supplement",
+      "binding_owner": "/root/external_io",
+      "binding_status": "partial-success-binding-ordering-open",
+      "exception_device_priority": "mixed memory/permission/device priority remains ordering-open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies",
+        "attach supplement to validated executable form",
+        "close cross-boundary port behavior or retain unavailable outcome"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0325",
+      "entry_id": "V3-GP-059",
+      "source_spelling": "INS mem16, DX",
+      "source_rows": [
+        "V3-ROW-0325"
+      ],
+      "direction": "input",
+      "string": true,
+      "port_source": "dx-low16",
+      "data_width_bits": 16,
+      "effective_64_bit_operand_behavior": "normalize-to-32-bit-port",
+      "repeat_modes": [
+        "none",
+        "rep"
+      ],
+      "permission_dependency": "SYS-IO-PERMISSION",
+      "permission_rule": "bitmap required in virtual8086 or when CPL > IOPL; all consecutive byte-port bits must be covered and clear",
+      "unaligned_rule": "architecturally permitted; byte transaction order implementation-dependent",
+      "boundary_rule": "cross-FFFF behavior remains source-unspecified when IOPL bypasses bitmap denial",
+      "form_review_status": "pending-semantic-review",
+      "shared_form_implementation_status": "missing",
+      "io1_projection_status": "source-reviewed-supplement",
+      "binding_owner": "/root/external_io",
+      "binding_status": "partial-success-binding-ordering-open",
+      "exception_device_priority": "mixed memory/permission/device priority remains ordering-open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies",
+        "attach supplement to validated executable form",
+        "close cross-boundary port behavior or retain unavailable outcome"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0326",
+      "entry_id": "V3-GP-059",
+      "source_spelling": "INS mem32, DX",
+      "source_rows": [
+        "V3-ROW-0326"
+      ],
+      "direction": "input",
+      "string": true,
+      "port_source": "dx-low16",
+      "data_width_bits": 32,
+      "effective_64_bit_operand_behavior": "normalize-to-32-bit-port",
+      "repeat_modes": [
+        "none",
+        "rep"
+      ],
+      "permission_dependency": "SYS-IO-PERMISSION",
+      "permission_rule": "bitmap required in virtual8086 or when CPL > IOPL; all consecutive byte-port bits must be covered and clear",
+      "unaligned_rule": "architecturally permitted; byte transaction order implementation-dependent",
+      "boundary_rule": "cross-FFFF behavior remains source-unspecified when IOPL bypasses bitmap denial",
+      "form_review_status": "pending-semantic-review",
+      "shared_form_implementation_status": "missing",
+      "io1_projection_status": "source-reviewed-supplement",
+      "binding_owner": "/root/external_io",
+      "binding_status": "partial-success-binding-ordering-open",
+      "exception_device_priority": "mixed memory/permission/device priority remains ordering-open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies",
+        "attach supplement to validated executable form",
+        "close cross-boundary port behavior or retain unavailable outcome"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0327",
+      "entry_id": "V3-GP-059",
+      "source_spelling": "INSB",
+      "source_rows": [
+        "V3-ROW-0327"
+      ],
+      "direction": "input",
+      "string": true,
+      "port_source": "dx-low16",
+      "data_width_bits": 8,
+      "effective_64_bit_operand_behavior": "normalize-to-32-bit-port",
+      "repeat_modes": [
+        "none",
+        "rep"
+      ],
+      "permission_dependency": "SYS-IO-PERMISSION",
+      "permission_rule": "bitmap required in virtual8086 or when CPL > IOPL; all consecutive byte-port bits must be covered and clear",
+      "unaligned_rule": "architecturally permitted; byte transaction order implementation-dependent",
+      "boundary_rule": "cross-FFFF behavior remains source-unspecified when IOPL bypasses bitmap denial",
+      "form_review_status": "pending-semantic-review",
+      "shared_form_implementation_status": "missing",
+      "io1_projection_status": "source-reviewed-supplement",
+      "binding_owner": "/root/external_io",
+      "binding_status": "partial-success-binding-ordering-open",
+      "exception_device_priority": "mixed memory/permission/device priority remains ordering-open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies",
+        "attach supplement to validated executable form",
+        "close cross-boundary port behavior or retain unavailable outcome"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0328",
+      "entry_id": "V3-GP-059",
+      "source_spelling": "INSW",
+      "source_rows": [
+        "V3-ROW-0328"
+      ],
+      "direction": "input",
+      "string": true,
+      "port_source": "dx-low16",
+      "data_width_bits": 16,
+      "effective_64_bit_operand_behavior": "normalize-to-32-bit-port",
+      "repeat_modes": [
+        "none",
+        "rep"
+      ],
+      "permission_dependency": "SYS-IO-PERMISSION",
+      "permission_rule": "bitmap required in virtual8086 or when CPL > IOPL; all consecutive byte-port bits must be covered and clear",
+      "unaligned_rule": "architecturally permitted; byte transaction order implementation-dependent",
+      "boundary_rule": "cross-FFFF behavior remains source-unspecified when IOPL bypasses bitmap denial",
+      "form_review_status": "pending-semantic-review",
+      "shared_form_implementation_status": "missing",
+      "io1_projection_status": "source-reviewed-supplement",
+      "binding_owner": "/root/external_io",
+      "binding_status": "partial-success-binding-ordering-open",
+      "exception_device_priority": "mixed memory/permission/device priority remains ordering-open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies",
+        "attach supplement to validated executable form",
+        "close cross-boundary port behavior or retain unavailable outcome"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0329",
+      "entry_id": "V3-GP-059",
+      "source_spelling": "INSD",
+      "source_rows": [
+        "V3-ROW-0329"
+      ],
+      "direction": "input",
+      "string": true,
+      "port_source": "dx-low16",
+      "data_width_bits": 32,
+      "effective_64_bit_operand_behavior": "normalize-to-32-bit-port",
+      "repeat_modes": [
+        "none",
+        "rep"
+      ],
+      "permission_dependency": "SYS-IO-PERMISSION",
+      "permission_rule": "bitmap required in virtual8086 or when CPL > IOPL; all consecutive byte-port bits must be covered and clear",
+      "unaligned_rule": "architecturally permitted; byte transaction order implementation-dependent",
+      "boundary_rule": "cross-FFFF behavior remains source-unspecified when IOPL bypasses bitmap denial",
+      "form_review_status": "pending-semantic-review",
+      "shared_form_implementation_status": "missing",
+      "io1_projection_status": "source-reviewed-supplement",
+      "binding_owner": "/root/external_io",
+      "binding_status": "partial-success-binding-ordering-open",
+      "exception_device_priority": "mixed memory/permission/device priority remains ordering-open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies",
+        "attach supplement to validated executable form",
+        "close cross-boundary port behavior or retain unavailable outcome"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0580",
+      "entry_id": "V3-GP-099",
+      "source_spelling": "OUT imm8, AL",
+      "source_rows": [
+        "V3-ROW-0580"
+      ],
+      "direction": "output",
+      "string": false,
+      "port_source": "immediate8-zero-extended",
+      "data_width_bits": 8,
+      "effective_64_bit_operand_behavior": "normalize-to-32-bit-port",
+      "repeat_modes": [
+        "none"
+      ],
+      "permission_dependency": "SYS-IO-PERMISSION",
+      "permission_rule": "bitmap required in virtual8086 or when CPL > IOPL; all consecutive byte-port bits must be covered and clear",
+      "unaligned_rule": "architecturally permitted; byte transaction order implementation-dependent",
+      "boundary_rule": "cross-FFFF behavior remains source-unspecified when IOPL bypasses bitmap denial",
+      "form_review_status": "pending-semantic-review",
+      "shared_form_implementation_status": "missing",
+      "io1_projection_status": "source-reviewed-supplement",
+      "binding_owner": "/root/external_io",
+      "binding_status": "direct-body-bound-shared-form-open",
+      "exception_device_priority": "permission denial or permission-read page fault precedes device binding; missing device rule is modeling-unavailable after permission and ordering",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies",
+        "attach supplement to validated executable form",
+        "close cross-boundary port behavior or retain unavailable outcome"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0581",
+      "entry_id": "V3-GP-099",
+      "source_spelling": "OUT imm8, AX",
+      "source_rows": [
+        "V3-ROW-0581"
+      ],
+      "direction": "output",
+      "string": false,
+      "port_source": "immediate8-zero-extended",
+      "data_width_bits": 16,
+      "effective_64_bit_operand_behavior": "normalize-to-32-bit-port",
+      "repeat_modes": [
+        "none"
+      ],
+      "permission_dependency": "SYS-IO-PERMISSION",
+      "permission_rule": "bitmap required in virtual8086 or when CPL > IOPL; all consecutive byte-port bits must be covered and clear",
+      "unaligned_rule": "architecturally permitted; byte transaction order implementation-dependent",
+      "boundary_rule": "cross-FFFF behavior remains source-unspecified when IOPL bypasses bitmap denial",
+      "form_review_status": "pending-semantic-review",
+      "shared_form_implementation_status": "missing",
+      "io1_projection_status": "source-reviewed-supplement",
+      "binding_owner": "/root/external_io",
+      "binding_status": "direct-body-bound-shared-form-open",
+      "exception_device_priority": "permission denial or permission-read page fault precedes device binding; missing device rule is modeling-unavailable after permission and ordering",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies",
+        "attach supplement to validated executable form",
+        "close cross-boundary port behavior or retain unavailable outcome"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0582",
+      "entry_id": "V3-GP-099",
+      "source_spelling": "OUT imm8, EAX",
+      "source_rows": [
+        "V3-ROW-0582"
+      ],
+      "direction": "output",
+      "string": false,
+      "port_source": "immediate8-zero-extended",
+      "data_width_bits": 32,
+      "effective_64_bit_operand_behavior": "normalize-to-32-bit-port",
+      "repeat_modes": [
+        "none"
+      ],
+      "permission_dependency": "SYS-IO-PERMISSION",
+      "permission_rule": "bitmap required in virtual8086 or when CPL > IOPL; all consecutive byte-port bits must be covered and clear",
+      "unaligned_rule": "architecturally permitted; byte transaction order implementation-dependent",
+      "boundary_rule": "cross-FFFF behavior remains source-unspecified when IOPL bypasses bitmap denial",
+      "form_review_status": "pending-semantic-review",
+      "shared_form_implementation_status": "missing",
+      "io1_projection_status": "source-reviewed-supplement",
+      "binding_owner": "/root/external_io",
+      "binding_status": "direct-body-bound-shared-form-open",
+      "exception_device_priority": "permission denial or permission-read page fault precedes device binding; missing device rule is modeling-unavailable after permission and ordering",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies",
+        "attach supplement to validated executable form",
+        "close cross-boundary port behavior or retain unavailable outcome"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0583",
+      "entry_id": "V3-GP-099",
+      "source_spelling": "OUT DX, AL",
+      "source_rows": [
+        "V3-ROW-0583"
+      ],
+      "direction": "output",
+      "string": false,
+      "port_source": "dx-low16",
+      "data_width_bits": 8,
+      "effective_64_bit_operand_behavior": "normalize-to-32-bit-port",
+      "repeat_modes": [
+        "none"
+      ],
+      "permission_dependency": "SYS-IO-PERMISSION",
+      "permission_rule": "bitmap required in virtual8086 or when CPL > IOPL; all consecutive byte-port bits must be covered and clear",
+      "unaligned_rule": "architecturally permitted; byte transaction order implementation-dependent",
+      "boundary_rule": "cross-FFFF behavior remains source-unspecified when IOPL bypasses bitmap denial",
+      "form_review_status": "pending-semantic-review",
+      "shared_form_implementation_status": "missing",
+      "io1_projection_status": "source-reviewed-supplement",
+      "binding_owner": "/root/external_io",
+      "binding_status": "direct-body-bound-shared-form-open",
+      "exception_device_priority": "permission denial or permission-read page fault precedes device binding; missing device rule is modeling-unavailable after permission and ordering",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies",
+        "attach supplement to validated executable form",
+        "close cross-boundary port behavior or retain unavailable outcome"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0584",
+      "entry_id": "V3-GP-099",
+      "source_spelling": "OUT DX, AX",
+      "source_rows": [
+        "V3-ROW-0584"
+      ],
+      "direction": "output",
+      "string": false,
+      "port_source": "dx-low16",
+      "data_width_bits": 16,
+      "effective_64_bit_operand_behavior": "normalize-to-32-bit-port",
+      "repeat_modes": [
+        "none"
+      ],
+      "permission_dependency": "SYS-IO-PERMISSION",
+      "permission_rule": "bitmap required in virtual8086 or when CPL > IOPL; all consecutive byte-port bits must be covered and clear",
+      "unaligned_rule": "architecturally permitted; byte transaction order implementation-dependent",
+      "boundary_rule": "cross-FFFF behavior remains source-unspecified when IOPL bypasses bitmap denial",
+      "form_review_status": "pending-semantic-review",
+      "shared_form_implementation_status": "missing",
+      "io1_projection_status": "source-reviewed-supplement",
+      "binding_owner": "/root/external_io",
+      "binding_status": "direct-body-bound-shared-form-open",
+      "exception_device_priority": "permission denial or permission-read page fault precedes device binding; missing device rule is modeling-unavailable after permission and ordering",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies",
+        "attach supplement to validated executable form",
+        "close cross-boundary port behavior or retain unavailable outcome"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0585",
+      "entry_id": "V3-GP-099",
+      "source_spelling": "OUT DX, EAX",
+      "source_rows": [
+        "V3-ROW-0585"
+      ],
+      "direction": "output",
+      "string": false,
+      "port_source": "dx-low16",
+      "data_width_bits": 32,
+      "effective_64_bit_operand_behavior": "normalize-to-32-bit-port",
+      "repeat_modes": [
+        "none"
+      ],
+      "permission_dependency": "SYS-IO-PERMISSION",
+      "permission_rule": "bitmap required in virtual8086 or when CPL > IOPL; all consecutive byte-port bits must be covered and clear",
+      "unaligned_rule": "architecturally permitted; byte transaction order implementation-dependent",
+      "boundary_rule": "cross-FFFF behavior remains source-unspecified when IOPL bypasses bitmap denial",
+      "form_review_status": "pending-semantic-review",
+      "shared_form_implementation_status": "missing",
+      "io1_projection_status": "source-reviewed-supplement",
+      "binding_owner": "/root/external_io",
+      "binding_status": "direct-body-bound-shared-form-open",
+      "exception_device_priority": "permission denial or permission-read page fault precedes device binding; missing device rule is modeling-unavailable after permission and ordering",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies",
+        "attach supplement to validated executable form",
+        "close cross-boundary port behavior or retain unavailable outcome"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0586",
+      "entry_id": "V3-GP-100",
+      "source_spelling": "OUTS DX, mem8",
+      "source_rows": [
+        "V3-ROW-0586"
+      ],
+      "direction": "output",
+      "string": true,
+      "port_source": "dx-low16",
+      "data_width_bits": 8,
+      "effective_64_bit_operand_behavior": "normalize-to-32-bit-port",
+      "repeat_modes": [
+        "none",
+        "rep"
+      ],
+      "permission_dependency": "SYS-IO-PERMISSION",
+      "permission_rule": "bitmap required in virtual8086 or when CPL > IOPL; all consecutive byte-port bits must be covered and clear",
+      "unaligned_rule": "architecturally permitted; byte transaction order implementation-dependent",
+      "boundary_rule": "cross-FFFF behavior remains source-unspecified when IOPL bypasses bitmap denial",
+      "form_review_status": "pending-semantic-review",
+      "shared_form_implementation_status": "missing",
+      "io1_projection_status": "source-reviewed-supplement",
+      "binding_owner": "/root/external_io",
+      "binding_status": "partial-success-binding-ordering-open",
+      "exception_device_priority": "mixed memory/permission/device priority remains ordering-open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies",
+        "attach supplement to validated executable form",
+        "close cross-boundary port behavior or retain unavailable outcome"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0587",
+      "entry_id": "V3-GP-100",
+      "source_spelling": "OUTS DX, mem16",
+      "source_rows": [
+        "V3-ROW-0587"
+      ],
+      "direction": "output",
+      "string": true,
+      "port_source": "dx-low16",
+      "data_width_bits": 16,
+      "effective_64_bit_operand_behavior": "normalize-to-32-bit-port",
+      "repeat_modes": [
+        "none",
+        "rep"
+      ],
+      "permission_dependency": "SYS-IO-PERMISSION",
+      "permission_rule": "bitmap required in virtual8086 or when CPL > IOPL; all consecutive byte-port bits must be covered and clear",
+      "unaligned_rule": "architecturally permitted; byte transaction order implementation-dependent",
+      "boundary_rule": "cross-FFFF behavior remains source-unspecified when IOPL bypasses bitmap denial",
+      "form_review_status": "pending-semantic-review",
+      "shared_form_implementation_status": "missing",
+      "io1_projection_status": "source-reviewed-supplement",
+      "binding_owner": "/root/external_io",
+      "binding_status": "partial-success-binding-ordering-open",
+      "exception_device_priority": "mixed memory/permission/device priority remains ordering-open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies",
+        "attach supplement to validated executable form",
+        "close cross-boundary port behavior or retain unavailable outcome"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0588",
+      "entry_id": "V3-GP-100",
+      "source_spelling": "OUTS DX, mem32",
+      "source_rows": [
+        "V3-ROW-0588"
+      ],
+      "direction": "output",
+      "string": true,
+      "port_source": "dx-low16",
+      "data_width_bits": 32,
+      "effective_64_bit_operand_behavior": "normalize-to-32-bit-port",
+      "repeat_modes": [
+        "none",
+        "rep"
+      ],
+      "permission_dependency": "SYS-IO-PERMISSION",
+      "permission_rule": "bitmap required in virtual8086 or when CPL > IOPL; all consecutive byte-port bits must be covered and clear",
+      "unaligned_rule": "architecturally permitted; byte transaction order implementation-dependent",
+      "boundary_rule": "cross-FFFF behavior remains source-unspecified when IOPL bypasses bitmap denial",
+      "form_review_status": "pending-semantic-review",
+      "shared_form_implementation_status": "missing",
+      "io1_projection_status": "source-reviewed-supplement",
+      "binding_owner": "/root/external_io",
+      "binding_status": "partial-success-binding-ordering-open",
+      "exception_device_priority": "mixed memory/permission/device priority remains ordering-open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies",
+        "attach supplement to validated executable form",
+        "close cross-boundary port behavior or retain unavailable outcome"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0589",
+      "entry_id": "V3-GP-100",
+      "source_spelling": "OUTSB",
+      "source_rows": [
+        "V3-ROW-0589"
+      ],
+      "direction": "output",
+      "string": true,
+      "port_source": "dx-low16",
+      "data_width_bits": 8,
+      "effective_64_bit_operand_behavior": "normalize-to-32-bit-port",
+      "repeat_modes": [
+        "none",
+        "rep"
+      ],
+      "permission_dependency": "SYS-IO-PERMISSION",
+      "permission_rule": "bitmap required in virtual8086 or when CPL > IOPL; all consecutive byte-port bits must be covered and clear",
+      "unaligned_rule": "architecturally permitted; byte transaction order implementation-dependent",
+      "boundary_rule": "cross-FFFF behavior remains source-unspecified when IOPL bypasses bitmap denial",
+      "form_review_status": "pending-semantic-review",
+      "shared_form_implementation_status": "missing",
+      "io1_projection_status": "source-reviewed-supplement",
+      "binding_owner": "/root/external_io",
+      "binding_status": "partial-success-binding-ordering-open",
+      "exception_device_priority": "mixed memory/permission/device priority remains ordering-open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies",
+        "attach supplement to validated executable form",
+        "close cross-boundary port behavior or retain unavailable outcome"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0590",
+      "entry_id": "V3-GP-100",
+      "source_spelling": "OUTSW",
+      "source_rows": [
+        "V3-ROW-0590"
+      ],
+      "direction": "output",
+      "string": true,
+      "port_source": "dx-low16",
+      "data_width_bits": 16,
+      "effective_64_bit_operand_behavior": "normalize-to-32-bit-port",
+      "repeat_modes": [
+        "none",
+        "rep"
+      ],
+      "permission_dependency": "SYS-IO-PERMISSION",
+      "permission_rule": "bitmap required in virtual8086 or when CPL > IOPL; all consecutive byte-port bits must be covered and clear",
+      "unaligned_rule": "architecturally permitted; byte transaction order implementation-dependent",
+      "boundary_rule": "cross-FFFF behavior remains source-unspecified when IOPL bypasses bitmap denial",
+      "form_review_status": "pending-semantic-review",
+      "shared_form_implementation_status": "missing",
+      "io1_projection_status": "source-reviewed-supplement",
+      "binding_owner": "/root/external_io",
+      "binding_status": "partial-success-binding-ordering-open",
+      "exception_device_priority": "mixed memory/permission/device priority remains ordering-open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies",
+        "attach supplement to validated executable form",
+        "close cross-boundary port behavior or retain unavailable outcome"
+      ]
+    },
+    {
+      "form_id": "AMD64-F-0591",
+      "entry_id": "V3-GP-100",
+      "source_spelling": "OUTSD",
+      "source_rows": [
+        "V3-ROW-0591"
+      ],
+      "direction": "output",
+      "string": true,
+      "port_source": "dx-low16",
+      "data_width_bits": 32,
+      "effective_64_bit_operand_behavior": "normalize-to-32-bit-port",
+      "repeat_modes": [
+        "none",
+        "rep"
+      ],
+      "permission_dependency": "SYS-IO-PERMISSION",
+      "permission_rule": "bitmap required in virtual8086 or when CPL > IOPL; all consecutive byte-port bits must be covered and clear",
+      "unaligned_rule": "architecturally permitted; byte transaction order implementation-dependent",
+      "boundary_rule": "cross-FFFF behavior remains source-unspecified when IOPL bypasses bitmap denial",
+      "form_review_status": "pending-semantic-review",
+      "shared_form_implementation_status": "missing",
+      "io1_projection_status": "source-reviewed-supplement",
+      "binding_owner": "/root/external_io",
+      "binding_status": "partial-success-binding-ordering-open",
+      "exception_device_priority": "mixed memory/permission/device priority remains ordering-open",
+      "open_obligations": [
+        "review-operands-and-implicit-resources",
+        "review-mode-and-size-rules",
+        "review-feature-requirements",
+        "review-prefix-legality",
+        "review-effects-preserved-and-undefined-outputs",
+        "review-exceptions-and-ordering",
+        "record-volume1-state-dependencies",
+        "record-volume2-behavior-dependencies",
+        "attach supplement to validated executable form",
+        "close cross-boundary port behavior or retain unavailable outcome"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+import AMD64.AtomicExecutionChecks
+
+#print axioms AMD64.AtomicExecution.execute_resolved_delegates
+#print axioms AMD64.AtomicExecution.execute_unresolved_is_unavailable
+#print axioms AMD64.AtomicExecution.unknown_profile_preserves_candidate
+#print axioms AMD64.AtomicExecution.Checks.high8_exchange_write_targets_bits_8_through_15
+#print axioms AMD64.AtomicExecution.Checks.low32_failure_write_zero_extends
+#print axioms AMD64.AtomicExecution.Checks.block_expected_pair_is_low_then_high
+#print axioms AMD64.AtomicExecution.Checks.block_failure_updates_expected_pair_and_zf_only
+#print axioms AMD64.AtomicExecution.Checks.cmpxchg_without_lock_remains_non_atomic
+#print axioms AMD64.AtomicExecution.Checks.unknown_group7_preserves_gp_pf_ac
+#print axioms AMD64.AtomicExecution.Checks.known_group7_profile_is_stable

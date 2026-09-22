@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "authority": {
+    "manual": "AMD APM Volume 3 publication 24594 revision 3.38, July 2026",
+    "source_lock": "Specs/AMD64/manuals.lock.json",
+    "entries": [
+      { "entry_id": "V3-GP-046", "pages": [209, 210], "title": "CMPXCHG" },
+      { "entry_id": "V3-GP-047", "pages": [211, 212], "title": "CMPXCHG8B CMPXCHG16B" },
+      { "entry_id": "V3-GP-150", "pages": [410, 411], "title": "XADD" },
+      { "entry_id": "V3-GP-151", "pages": [412, 413], "title": "XCHG" }
+    ]
+  },
+  "scope": "Source-reviewed semantic supplement for the atomic-memory lane. Shared forms remain pending until this evidence is merged into their validated constraints.",
+  "families": [
+    {
+      "mnemonic": "CMPXCHG",
+      "form_ids": ["AMD64-F-0267", "AMD64-F-0268", "AMD64-F-0269", "AMD64-F-0270"],
+      "width_bits": [8, 16, 32, 64],
+      "memory_access": "always-read-modify-write-even-when-comparison-fails",
+      "atomicity": "memory form is indivisible only when a validated LOCK prefix is selected",
+      "lock_prefix": "supported only for a memory destination",
+      "implicit_accumulator": "AL, AX, EAX, or RAX selected by operand width",
+      "flags": {
+        "written_from_subtract_compare": ["OF", "SF", "ZF", "AF", "PF", "CF"],
+        "comparison_failure": "load observed destination into the selected accumulator"
+      },
+      "memory_exceptions": ["#SS(address)", "#GP(address-or-nonwritable)", "#PF", "#AC"],
+      "binding_status": "permission-checked CPU and concrete-memory adapter implemented; shared form constraints remain pending"
+    },
+    {
+      "mnemonic": "CMPXCHG8B/CMPXCHG16B",
+      "form_ids": ["AMD64-F-0271", "AMD64-F-0272"],
+      "width_bits": [64, 128],
+      "memory_access": "always-read-modify-write-even-when-comparison-fails",
+      "atomicity": "indivisible only when a validated LOCK prefix is selected",
+      "lock_prefix": "supported",
+      "implicit_registers": {
+        "cmpxchg8b": { "expected": "EDX:EAX", "replacement": "ECX:EBX" },
+        "cmpxchg16b": { "expected": "RDX:RAX", "replacement": "RCX:RBX" }
+      },
+      "flags": { "written": ["ZF"], "preserved": "all other rFLAGS fields" },
+      "features": {
+        "cmpxchg8b": "CPUID CMPXCHG8B",
+        "cmpxchg16b": "CPUID CMPXCHG16B"
+      },
+      "mandatory_alignment": "CMPXCHG16B requires a 16-byte linear-address boundary and otherwise raises #GP(0)",
+      "memory_exceptions": ["#UD(feature-or-register-operand)", "#SS(address)", "#GP(address-nonwritable-or-CMPXCHG16B-alignment)", "#PF", "#AC"],
+      "exception_priority": "#UD feature/mode checks precede data translation by Volume 2 Table 8-9; mandatory-alignment #GP and data #PF are both group 7 and remain implementation-dependent within that group",
+      "binding_status": "feature and mode prechecks, data, ZF, failure-register, and #GP alignment behavior implemented; the current adapter selects #PF before mandatory-alignment #GP and is not a general rule for the unresolved within-group pair"
+    },
+    {
+      "mnemonic": "XADD",
+      "form_ids": ["AMD64-F-0893", "AMD64-F-0894", "AMD64-F-0895", "AMD64-F-0896"],
+      "width_bits": [8, 16, 32, 64],
+      "memory_access": "read-modify-write",
+      "atomicity": "memory form is indivisible only when a validated LOCK prefix is selected",
+      "lock_prefix": "supported only for a memory destination",
+      "data": "source register receives the old destination; destination receives their sum",
+      "flags": { "written_from_add": ["OF", "SF", "ZF", "AF", "PF", "CF"] },
+      "memory_exceptions": ["#SS(address)", "#GP(address-or-nonwritable)", "#PF", "#AC"],
+      "binding_status": "permission-checked CPU and concrete-memory adapter implemented; shared form constraints remain pending"
+    },
+    {
+      "mnemonic": "XCHG",
+      "form_ids": [
+        "AMD64-F-0897", "AMD64-F-0898", "AMD64-F-0899", "AMD64-F-0900",
+        "AMD64-F-0901", "AMD64-F-0902", "AMD64-F-0903", "AMD64-F-0904",
+        "AMD64-F-0905", "AMD64-F-0906", "AMD64-F-0907", "AMD64-F-0908",
+        "AMD64-F-0909", "AMD64-F-0910"
+      ],
+      "width_bits": [8, 16, 32, 64],
+      "memory_access": "read-modify-write when either operand is memory",
+      "atomicity": "a memory operand is implicitly locked whether or not LOCK is encoded and independently of IOPL",
+      "flags": { "preserved": "all rFLAGS fields" },
+      "special_opcode_90": "in 64-bit mode, exchange of EAX with itself through opcode 90h is treated as a true NOP; the ModRM form has no such exception",
+      "memory_exceptions": ["#SS(address)", "#GP(address-or-nonwritable)", "#PF", "#AC"],
+      "binding_status": "permission-checked memory-register adapter implemented; register-register and opcode-90 special binding remain outside this memory lane"
+    }
+  ],
+  "open_obligations": [
+    "merge supplement evidence into shared validated form constraints without claiming the current unknown fields are reviewed",
+    "represent the implementation-dependent CMPXCHG16B mandatory-alignment #GP versus data #PF alternatives without imposing a universal order",
+    "model visibility of unlocked RMW as multiple execution-level observations rather than one atomic event",
+    "add general AMD ordering, coherency, fence, UC/WC/MMIO, and locked-cycle behavior"
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "authority": {
+    "manual": "AMD APM Volume 3 publication 24594 revision 3.38, July 2026",
+    "source_lock": "Specs/AMD64/manuals.lock.json",
+    "prefix_pages": [48, 57],
+    "entries": [
+      {"entry_id": "V3-GP-052", "title": "DEC", "pdf_pages": [220, 221]},
+      {"entry_id": "V3-GP-058", "title": "INC", "pdf_pages": [232, 233]},
+      {"entry_id": "V3-GP-095", "title": "NEG", "pdf_pages": [312, 313]},
+      {"entry_id": "V3-GP-097", "title": "NOT", "pdf_pages": [315, 315]}
+    ]
+  },
+  "scope": "Source-reviewed form constraints and register-body execution for DEC, INC, NEG and NOT. Reg/mem source rows retain both concrete kinds; memory execution remains unavailable after successful form validation.",
+  "shared_rules": {
+    "unrestricted_cpl": true,
+    "required_features": [],
+    "encoding_family": "legacy",
+    "reg_mem_modes": ["real", "virtual8086", "protected", "compatibility", "long64"],
+    "width64_modes": ["long64"],
+    "embedded_register_modes": ["real", "virtual8086", "protected", "compatibility"],
+    "operand_access": "readWrite",
+    "lock_rule": "LOCK is legal only for the memory instance of a reg/mem row; embedded-register rows reject LOCK",
+    "memory_exceptions_in_priority_layer": ["#SS(stack-address)", "#GP(data-address-or-nonwritable-or-null-segment)", "#PF", "#AC"],
+    "register_exceptions": [],
+    "legacy_low32_upper_bits": "architecturally undefined per Volume 1 section 3.1.2.4 and represented relationally"
+  },
+  "forms": [
+    {"form_id":"AMD64-F-0282","entry_id":"V3-GP-052","row_id":"V3-ROW-0282","source_spelling":"DEC reg/mem8","width_bits":8,"concrete_kinds":["gpr","memory"],"encoding":"FE /1","long64":true,"lock_memory":true},
+    {"form_id":"AMD64-F-0283","entry_id":"V3-GP-052","row_id":"V3-ROW-0283","source_spelling":"DEC reg/mem16","width_bits":16,"concrete_kinds":["gpr","memory"],"encoding":"FF /1","long64":true,"lock_memory":true},
+    {"form_id":"AMD64-F-0284","entry_id":"V3-GP-052","row_id":"V3-ROW-0284","source_spelling":"DEC reg/mem32","width_bits":32,"concrete_kinds":["gpr","memory"],"encoding":"FF /1","long64":true,"lock_memory":true},
+    {"form_id":"AMD64-F-0285","entry_id":"V3-GP-052","row_id":"V3-ROW-0285","source_spelling":"DEC reg/mem64","width_bits":64,"concrete_kinds":["gpr","memory"],"encoding":"FF /1","long64":true,"requires_rex_w":true,"lock_memory":true},
+    {"form_id":"AMD64-F-0286","entry_id":"V3-GP-052","row_id":"V3-ROW-0286","source_spelling":"DEC reg16","width_bits":16,"concrete_kinds":["gpr"],"encoding":"48 +rw","long64":false,"lock_memory":false},
+    {"form_id":"AMD64-F-0287","entry_id":"V3-GP-052","row_id":"V3-ROW-0287","source_spelling":"DEC reg32","width_bits":32,"concrete_kinds":["gpr"],"encoding":"48 +rd","long64":false,"lock_memory":false},
+    {"form_id":"AMD64-F-0318","entry_id":"V3-GP-058","row_id":"V3-ROW-0318","source_spelling":"INC reg/mem8","width_bits":8,"concrete_kinds":["gpr","memory"],"encoding":"FE /0","long64":true,"lock_memory":true},
+    {"form_id":"AMD64-F-0319","entry_id":"V3-GP-058","row_id":"V3-ROW-0319","source_spelling":"INC reg/mem16","width_bits":16,"concrete_kinds":["gpr","memory"],"encoding":"FF /0","long64":true,"lock_memory":true},
+    {"form_id":"AMD64-F-0320","entry_id":"V3-GP-058","row_id":"V3-ROW-0320","source_spelling":"INC reg/mem32","width_bits":32,"concrete_kinds":["gpr","memory"],"encoding":"FF /0","long64":true,"lock_memory":true},
+    {"form_id":"AMD64-F-0321","entry_id":"V3-GP-058","row_id":"V3-ROW-0321","source_spelling":"INC reg/mem64","width_bits":64,"concrete_kinds":["gpr","memory"],"encoding":"FF /0","long64":true,"requires_rex_w":true,"lock_memory":true},
+    {"form_id":"AMD64-F-0322","entry_id":"V3-GP-058","row_id":"V3-ROW-0322","source_spelling":"INC reg16","width_bits":16,"concrete_kinds":["gpr"],"encoding":"40 +rw","long64":false,"lock_memory":false},
+    {"form_id":"AMD64-F-0323","entry_id":"V3-GP-058","row_id":"V3-ROW-0323","source_spelling":"INC reg32","width_bits":32,"concrete_kinds":["gpr"],"encoding":"40 +rd","long64":false,"lock_memory":false},
+    {"form_id":"AMD64-F-0549","entry_id":"V3-GP-095","row_id":"V3-ROW-0549","source_spelling":"NEG reg/mem8","width_bits":8,"concrete_kinds":["gpr","memory"],"encoding":"F6 /3","long64":true,"lock_memory":true},
+    {"form_id":"AMD64-F-0550","entry_id":"V3-GP-095","row_id":"V3-ROW-0550","source_spelling":"NEG reg/mem16","width_bits":16,"concrete_kinds":["gpr","memory"],"encoding":"F7 /3","long64":true,"lock_memory":true},
+    {"form_id":"AMD64-F-0551","entry_id":"V3-GP-095","row_id":"V3-ROW-0551","source_spelling":"NEG reg/mem32","width_bits":32,"concrete_kinds":["gpr","memory"],"encoding":"F7 /3","long64":true,"lock_memory":true},
+    {"form_id":"AMD64-F-0552","entry_id":"V3-GP-095","row_id":"V3-ROW-0552","source_spelling":"NEG reg/mem64","width_bits":64,"concrete_kinds":["gpr","memory"],"encoding":"F7 /3","long64":true,"requires_rex_w":true,"lock_memory":true},
+    {"form_id":"AMD64-F-0557","entry_id":"V3-GP-097","row_id":"V3-ROW-0557","source_spelling":"NOT reg/mem8","width_bits":8,"concrete_kinds":["gpr","memory"],"encoding":"F6 /2","long64":true,"lock_memory":true},
+    {"form_id":"AMD64-F-0558","entry_id":"V3-GP-097","row_id":"V3-ROW-0558","source_spelling":"NOT reg/mem16","width_bits":16,"concrete_kinds":["gpr","memory"],"encoding":"F7 /2","long64":true,"lock_memory":true},
+    {"form_id":"AMD64-F-0559","entry_id":"V3-GP-097","row_id":"V3-ROW-0559","source_spelling":"NOT reg/mem32","width_bits":32,"concrete_kinds":["gpr","memory"],"encoding":"F7 /2","long64":true,"lock_memory":true},
+    {"form_id":"AMD64-F-0560","entry_id":"V3-GP-097","row_id":"V3-ROW-0560","source_spelling":"NOT reg/mem64","width_bits":64,"concrete_kinds":["gpr","memory"],"encoding":"F7 /2","long64":true,"requires_rex_w":true,"lock_memory":true}
+  ],
+  "effects": {
+    "DEC": {"value":"destination - 1","flags_written":["OF","SF","ZF","AF","PF"],"flags_preserved":["CF"]},
+    "INC": {"value":"destination + 1","flags_written":["OF","SF","ZF","AF","PF"],"flags_preserved":["CF"]},
+    "NEG": {"value":"0 - destination","flags_written":["OF","SF","ZF","AF","PF","CF"],"cf":"clear iff input is zero; set otherwise"},
+    "NOT": {"value":"bitwise complement","flags_preserved":"all rFLAGS fields"}
+  },
+  "implementation": {
+    "tla_forms":"AMD64IntegerFormSupplement.tla",
+    "tla_execution":"AMD64IntegerExecution!ExecuteSupplementalUnary",
+    "lean_forms":"AMD64.IntegerFormSupplement",
+    "lean_execution":"AMD64.IntegerExecution.ExecuteSupplementalUnary",
+    "register_body":"implemented",
+    "memory_body":"modeling-unavailable-after-validation",
+    "fallthrough":"separate boundary evidence; not instruction-body completion"
+  },
+  "open_obligations": [
+    "compose memory instances with resolved access, ordered #SS/#GP/#PF/#AC delivery and concrete writes",
+    "compose LOCK memory instances with the atomic execution lane",
+    "merge reviewed constraints into the shared generated registry without editing forms.json by hand",
+    "bind sequential next-IP through instruction length and before-RIP rather than an arbitrary nextIP witness"
+  ]
+}

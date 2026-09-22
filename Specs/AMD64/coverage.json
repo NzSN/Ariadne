@@ -1,0 +1,3634 @@
+{
+  "schema_version": 2,
+  "instruction_entries": [
+    {
+      "id": "V3-GP-001",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-002",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-003",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-004",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-005",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-006",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-007",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-008",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-009",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-010",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-011",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-012",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-013",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-014",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-015",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-016",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-017",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-018",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-019",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-020",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-021",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-022",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-023",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-024",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-025",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-026",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-027",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-028",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-029",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-030",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-031",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-032",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-033",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-034",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-035",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-036",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-037",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-038",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-039",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-040",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-041",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-042",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-043",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-044",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-045",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-046",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-047",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-048",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-049",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-050",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-051",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-052",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-053",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-054",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-055",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-056",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-057",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-058",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-059",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-060",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-061",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-062",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-063",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-064",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-065",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-066",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-067",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-068",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-069",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-070",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-071",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-072",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-073",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-074",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-075",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-076",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-077",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-078",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-079",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-080",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-081",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-082",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-083",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-084",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-085",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-086",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-087",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-088",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-089",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-090",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-091",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-092",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-093",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-094",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-095",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-096",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-097",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-098",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-099",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-100",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-101",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-102",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-103",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-104",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-105",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-106",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-107",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-108",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-109",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-110",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-111",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-112",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-113",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-114",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-115",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-116",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-117",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-118",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-119",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-120",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-121",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-122",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-123",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-124",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-125",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-126",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-127",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-128",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-129",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-130",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-131",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-132",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-133",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-134",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-135",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-136",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-137",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-138",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-139",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-140",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-141",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-142",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-143",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-144",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-145",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-146",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-147",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-148",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-149",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-150",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-151",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-152",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-153",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    },
+    {
+      "id": "V3-GP-154",
+      "status": "pending-form-review",
+      "semantic_cases": [],
+      "tla_rules": [],
+      "lean_theorems": [],
+      "validation": []
+    }
+  ],
+  "volume1_sections": [
+    {
+      "id": "V1-SECTION-0001",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0002",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0003",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0004",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0005",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0006",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0007",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0008",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0009",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0010",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0011",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0012",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0013",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0014",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0015",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0016",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0017",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0018",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0019",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0020",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0021",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0022",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0023",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0024",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0025",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0026",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0027",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0028",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0029",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0030",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0031",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0032",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0033",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0034",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0035",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0036",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0037",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0038",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0039",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0040",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0041",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0042",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0043",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0044",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0045",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0046",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0047",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0048",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0049",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0050",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0051",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0052",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0053",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0054",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0055",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0056",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0057",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0058",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0059",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0060",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0061",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0062",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0063",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0064",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0065",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0066",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0067",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0068",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0069",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0070",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0071",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0072",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0073",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0074",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0075",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0076",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0077",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0078",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0079",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0080",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0081",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0082",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0083",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0084",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0085",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0086",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0087",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0088",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0089",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0090",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0091",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0092",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0093",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0094",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0095",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0096",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0097",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0098",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0099",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0100",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0101",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0102",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0103",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0104",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0105",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0106",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0107",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0108",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0109",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0110",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0111",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0112",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0113",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0114",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0115",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0116",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0117",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0118",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0119",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0120",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0121",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0122",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0123",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0124",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0125",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0126",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0127",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0128",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0129",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0130",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0131",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0132",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0133",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0134",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0135",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0136",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0137",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0138",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0139",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0140",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0141",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0142",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0143",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0144",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0145",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0146",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0147",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0148",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0149",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0150",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0151",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0152",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0153",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0154",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0155",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0156",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0157",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0158",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0159",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0160",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0161",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0162",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0163",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0164",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0165",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0166",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0167",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0168",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0169",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0170",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0171",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0172",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0173",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0174",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0175",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0176",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0177",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0178",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0179",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0180",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0181",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0182",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0183",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0184",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0185",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0186",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0187",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0188",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0189",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0190",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0191",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0192",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0193",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0194",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0195",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0196",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0197",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0198",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0199",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0200",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0201",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0202",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0203",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0204",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0205",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0206",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0207",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0208",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0209",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0210",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0211",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0212",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0213",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0214",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0215",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0216",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0217",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0218",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0219",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0220",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0221",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0222",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0223",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0224",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0225",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0226",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0227",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0228",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0229",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0230",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0231",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0232",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0233",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0234",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0235",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0236",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0237",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0238",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0239",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0240",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0241",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0242",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0243",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0244",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0245",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0246",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0247",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0248",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0249",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0250",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0251",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0252",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0253",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0254",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0255",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0256",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0257",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0258",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0259",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0260",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0261",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0262",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0263",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0264",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0265",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0266",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0267",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0268",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0269",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0270",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0271",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0272",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0273",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0274",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0275",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0276",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0277",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0278",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0279",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0280",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0281",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0282",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0283",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0284",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0285",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0286",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0287",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0288",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0289",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0290",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0291",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0292",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0293",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0294",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0295",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0296",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0297",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    },
+    {
+      "id": "V1-SECTION-0298",
+      "status": "pending-state-review",
+      "state_components": [],
+      "rationale": null
+    }
+  ],
+  "semantic_cases": [],
+  "state_components": [],
+  "system_dependencies": [],
+  "validation_records": [
+    {
+      "id": "unsupported-default-tla-typecheck-20260922",
+      "kind": "tla-typecheck",
+      "result": "passed",
+      "command": [
+        "apalache-mc",
+        "typecheck",
+        "AMD64Unsupported.tla",
+        "and",
+        "AMD64UnsupportedChecks.tla"
+      ],
+      "summary": "Apalache 0.62.2 Snowcat typechecked the default fallback definition and its focused checks.",
+      "sources": [
+        {
+          "path": "Specs/AMD64Unsupported.tla",
+          "sha256": "e77aff718229525a3964aba9dc3ffb405a3839a15f41773966f84436a6f3557e"
+        },
+        {
+          "path": "Specs/AMD64UnsupportedChecks.tla",
+          "sha256": "0909754073f8b49dcda7293d65099f21757096636f7ba890c4ce14cb9f31dd1f"
+        }
+      ]
+    },
+    {
+      "id": "unsupported-default-tlc-20260922",
+      "kind": "tlc",
+      "result": "passed",
+      "command": [
+        "tlc",
+        "-deadlock",
+        "-cleanup",
+        "-config",
+        "AMD64Unsupported.cfg",
+        "AMD64UnsupportedChecks.tla"
+      ],
+      "summary": "TLC 2.19 checked the complete focused fixture: 3 generated states, 2 distinct states, depth 2, no error.",
+      "sources": [
+        {
+          "path": "Specs/AMD64Unsupported.tla",
+          "sha256": "e77aff718229525a3964aba9dc3ffb405a3839a15f41773966f84436a6f3557e"
+        },
+        {
+          "path": "Specs/AMD64UnsupportedChecks.tla",
+          "sha256": "0909754073f8b49dcda7293d65099f21757096636f7ba890c4ce14cb9f31dd1f"
+        },
+        {
+          "path": "Specs/AMD64Unsupported.cfg",
+          "sha256": "0b2d14cf6a47766109313d1ebf5555f60cc0c6a042bcc37deec2076126d11e9b"
+        }
+      ]
+    },
+    {
+      "id": "unsupported-default-lean-build-20260922",
+      "kind": "lean-build",
+      "result": "passed",
+      "command": [
+        "lake",
+        "build",
+        "AMD64.Unsupported",
+        "AMD64.UnsupportedChecks"
+      ],
+      "summary": "Lean 4.33.1 built the default fallback and its focused checks.",
+      "sources": [
+        {
+          "path": "lean/AMD64/Unsupported.lean",
+          "sha256": "60d41f849010ffccd80399f37bb47b6f00e4c236b22a9dfe6f129e9aa962bb78"
+        },
+        {
+          "path": "lean/AMD64/UnsupportedChecks.lean",
+          "sha256": "592ccb1e6f5184d7046742236a669c6637b4cc18fd66cfdd7108622264aa1934"
+        },
+        {
+          "path": "lean/lean-toolchain",
+          "sha256": "3aac669c7a910ec2389f4e4f921b605adf6ebf2d1e0c9b9cd0be4d33f3f5db71"
+        }
+      ]
+    },
+    {
+      "id": "unsupported-default-lean-audit-20260922",
+      "kind": "lean-axiom-audit",
+      "result": "passed",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "AMD64/UnsupportedAudit.lean"
+      ],
+      "summary": "Focused axiom audit covered 316 declarations and 94 theorems with only propext, Quot.sound and Classical.choice allowed.",
+      "sources": [
+        {
+          "path": "lean/AMD64/Unsupported.lean",
+          "sha256": "60d41f849010ffccd80399f37bb47b6f00e4c236b22a9dfe6f129e9aa962bb78"
+        },
+        {
+          "path": "lean/AMD64/UnsupportedChecks.lean",
+          "sha256": "592ccb1e6f5184d7046742236a669c6637b4cc18fd66cfdd7108622264aa1934"
+        },
+        {
+          "path": "lean/AMD64/UnsupportedAudit.lean",
+          "sha256": "68bef8e9c55aaa19c0316905715c6b8d8e8ae9052602c9dc64d72cb54de9fb7b"
+        },
+        {
+          "path": "lean/lean-toolchain",
+          "sha256": "3aac669c7a910ec2389f4e4f921b605adf6ebf2d1e0c9b9cd0be4d33f3f5db71"
+        }
+      ]
+    }
+  ],
+  "integration_obligations": [
+    {
+      "id": "analysis-projection",
+      "status": "pending",
+      "description": "analysis projection",
+      "rules": [],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "No accepted implementation and evidence yet."
+      ]
+    },
+    {
+      "id": "decoded-form-dispatch",
+      "status": "pending",
+      "description": "decoded form dispatch",
+      "rules": [],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "No accepted implementation and evidence yet."
+      ]
+    },
+    {
+      "id": "exception-priority",
+      "status": "pending",
+      "description": "exception priority",
+      "rules": [],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "No accepted implementation and evidence yet."
+      ]
+    },
+    {
+      "id": "machine-state-composition",
+      "status": "pending",
+      "description": "machine state composition",
+      "rules": [],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "No accepted implementation and evidence yet."
+      ]
+    },
+    {
+      "id": "memory-ordering",
+      "status": "pending",
+      "description": "memory ordering",
+      "rules": [],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "No accepted implementation and evidence yet."
+      ]
+    },
+    {
+      "id": "old-subset-correspondence",
+      "status": "pending",
+      "description": "old subset correspondence",
+      "rules": [],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "No accepted implementation and evidence yet."
+      ]
+    },
+    {
+      "id": "profile-dependent-behavior",
+      "status": "pending",
+      "description": "profile dependent behavior",
+      "rules": [],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "No accepted implementation and evidence yet."
+      ]
+    },
+    {
+      "id": "restart",
+      "status": "pending",
+      "description": "restart",
+      "rules": [],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "No accepted implementation and evidence yet."
+      ]
+    }
+  ],
+  "foundation_components": [
+    {
+      "id": "register-views64",
+      "status": "implemented",
+      "description": "Five physical GPR storage views and one-based/zero-based representation laws",
+      "rules": [
+        {
+          "path": "Specs/AMD64RegisterViews.tla",
+          "symbol": "WriteView64"
+        },
+        {
+          "path": "lean/AMD64/RegisterViews.lean",
+          "symbol": "AMD64.Source.write_correspondence"
+        }
+      ],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "Component checks are documented separately; full architectural acceptance and remaining composition/proof obligations are not closed."
+      ],
+      "validation_report": "docs/amd64-validation.md"
+    },
+    {
+      "id": "cpu-state-representation",
+      "status": "implemented",
+      "description": "CPU-local state, canonical alias banks, profile/mode/reset predicates; partial external validity remains",
+      "rules": [
+        {
+          "path": "Specs/AMD64ArchitecturalState.tla",
+          "symbol": "CPUStateWellFormed"
+        },
+        {
+          "path": "lean/AMD64/ArchitecturalState.lean",
+          "symbol": "AMD64.Arch.ValidCPUState"
+        }
+      ],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "Component checks are documented separately; full architectural acceptance and remaining composition/proof obligations are not closed."
+      ],
+      "validation_report": "docs/amd64-validation.md"
+    },
+    {
+      "id": "form-shape-validation",
+      "status": "implemented",
+      "description": "Reviewed-constraint shape validator, not a byte decoder or whole form catalogue closure",
+      "rules": [
+        {
+          "path": "Specs/AMD64InstructionForms.tla",
+          "symbol": "ValidateDecoded"
+        },
+        {
+          "path": "lean/AMD64/InstructionForms.lean",
+          "symbol": "AMD64.Forms.validate"
+        }
+      ],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "Component checks are documented separately; full architectural acceptance and remaining composition/proof obligations are not closed."
+      ],
+      "validation_report": "docs/amd64-validation.md"
+    },
+    {
+      "id": "operand-payload-coupling",
+      "status": "implemented",
+      "description": "Executable operand identities/values and shape erasure; not instruction execution",
+      "rules": [
+        {
+          "path": "Specs/AMD64Operands.tla",
+          "symbol": "ValidateExecutable"
+        },
+        {
+          "path": "lean/AMD64/Operands.lean",
+          "symbol": "AMD64.Operands.validateExecutable"
+        }
+      ],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "Component checks are documented separately; full architectural acceptance and remaining composition/proof obligations are not closed."
+      ],
+      "validation_report": "docs/amd64-validation.md"
+    },
+    {
+      "id": "integer-kernels",
+      "status": "implemented",
+      "description": "Value/flag kernels with directed checks and selected correspondence proofs; full mul/div equivalence remains open",
+      "rules": [
+        {
+          "path": "Specs/AMD64IntegerArithmetic.tla",
+          "symbol": "AddResult"
+        },
+        {
+          "path": "lean/AMD64/IntegerSemantics.lean",
+          "symbol": "AMD64.IntegerSemantics.addResult"
+        }
+      ],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "Component checks are documented separately; full architectural acceptance and remaining composition/proof obligations are not closed."
+      ],
+      "validation_report": "docs/amd64-validation.md"
+    },
+    {
+      "id": "integer-cpu-bodies",
+      "status": "implemented",
+      "description": "Conditional and source-reviewed register/immediate body application; no RIP retirement/fetch/trap composition",
+      "rules": [
+        {
+          "path": "Specs/AMD64IntegerExecution.tla",
+          "symbol": "ExecuteReviewed"
+        },
+        {
+          "path": "lean/AMD64/IntegerExecution.lean",
+          "symbol": "AMD64.IntegerExecution.ExecuteReviewed"
+        }
+      ],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "Component checks are documented separately; full architectural acceptance and remaining composition/proof obligations are not closed."
+      ],
+      "validation_report": "docs/amd64-validation.md"
+    },
+    {
+      "id": "memory-access-projection",
+      "status": "implemented",
+      "description": "Constrained address/access/captured-memory projection with explicit unavailable knowledge",
+      "rules": [
+        {
+          "path": "Specs/AMD64Memory.tla",
+          "symbol": "MemoryFaultCandidates"
+        },
+        {
+          "path": "lean/AMD64/Memory.lean",
+          "symbol": "AMD64.MemoryModel.resolveAccess"
+        }
+      ],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "Component checks are documented separately; full architectural acceptance and remaining composition/proof obligations are not closed."
+      ],
+      "validation_report": "docs/amd64-validation.md"
+    },
+    {
+      "id": "exception-progress-contract",
+      "status": "implemented",
+      "description": "Exception, committed effect and iteration progress contracts; full delivery remains open",
+      "rules": [
+        {
+          "path": "Specs/AMD64Exceptions.tla",
+          "symbol": "OutcomeWellFormed"
+        },
+        {
+          "path": "lean/AMD64/Exceptions.lean",
+          "symbol": "AMD64.Exceptions.Outcome.Valid"
+        }
+      ],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "Component checks are documented separately; full architectural acceptance and remaining composition/proof obligations are not closed."
+      ],
+      "validation_report": "docs/amd64-validation.md"
+    },
+    {
+      "id": "common-page-walk-certificates",
+      "status": "implemented",
+      "description": "Byte-backed common paging certificates; exhaustive feature/entry matrices and TLB behavior remain open",
+      "rules": [
+        {
+          "path": "Specs/AMD64PageWalk.tla",
+          "symbol": "SuccessfulWalk"
+        },
+        {
+          "path": "lean/AMD64/PageWalk.lean",
+          "symbol": "AMD64.PageWalk.walk"
+        }
+      ],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "Component checks are documented separately; full architectural acceptance and remaining composition/proof obligations are not closed."
+      ],
+      "validation_report": "docs/amd64-validation.md"
+    },
+    {
+      "id": "concrete-memory-refinement",
+      "status": "implemented",
+      "description": "Concrete byte storage separated from captured knowledge; IO/layout and ordering remain separate",
+      "rules": [
+        {
+          "path": "Specs/AMD64ConcreteMemory.tla",
+          "symbol": "ConcreteRefinesCaptured"
+        },
+        {
+          "path": "lean/AMD64/ConcreteMemory.lean",
+          "symbol": "AMD64.ConcreteMemory.RefinesCaptured"
+        }
+      ],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "Component checks are documented separately; full architectural acceptance and remaining composition/proof obligations are not closed."
+      ],
+      "validation_report": "docs/amd64-validation.md"
+    },
+    {
+      "id": "string-control",
+      "status": "implemented",
+      "description": "Address-sized count/pointer/DF/repetition control and restart bookkeeping",
+      "rules": [
+        {
+          "path": "Specs/AMD64Strings.tla",
+          "symbol": "SpecWellFormed"
+        },
+        {
+          "path": "lean/AMD64/Strings.lean",
+          "symbol": "AMD64.Strings.Spec.Valid"
+        }
+      ],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "Component checks are documented separately; full architectural acceptance and remaining composition/proof obligations are not closed."
+      ],
+      "validation_report": "docs/amd64-validation.md"
+    },
+    {
+      "id": "string-memory-bodies",
+      "status": "implemented",
+      "description": "Resolved RAM byte/CPU bodies for five string kinds; no full retirement or INS/OUTS binding",
+      "rules": [
+        {
+          "path": "Specs/AMD64StringsMemory.tla",
+          "symbol": "MoveIterationMemory"
+        },
+        {
+          "path": "lean/AMD64/StringsMemory.lean",
+          "symbol": "AMD64.StringsMemory.Finish"
+        }
+      ],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "Component checks are documented separately; full architectural acceptance and remaining composition/proof obligations are not closed."
+      ],
+      "validation_report": "docs/amd64-validation.md"
+    },
+    {
+      "id": "control-projections",
+      "status": "implemented",
+      "description": "Control conditions, stack plans and flag-image kernels; larger Lean CPU prototypes have explicit authoritative TLA gaps",
+      "rules": [
+        {
+          "path": "Specs/AMD64Control.tla",
+          "symbol": "PopFlagImage"
+        },
+        {
+          "path": "lean/AMD64/Control.lean",
+          "symbol": "AMD64.Control.flagsAfterPop"
+        }
+      ],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "Complete paired CPU/memory bodies, far/privilege/CET behavior, descriptor derivation and exception delivery."
+      ],
+      "validation_report": "docs/amd64-validation.md"
+    },
+    {
+      "id": "atomic-memory-projections",
+      "status": "implemented",
+      "description": "Atomic byte/event/permission kernels and separate Lean CPU adapter; no full cross-language instruction-body acceptance",
+      "rules": [
+        {
+          "path": "Specs/AMD64Atomic.tla",
+          "symbol": "AtomicityFor"
+        },
+        {
+          "path": "lean/AMD64/Atomic.lean",
+          "symbol": "AMD64.Atomic.Operation.locked"
+        }
+      ],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "Complete TLA CPU adapter pairing, decoded forms, implementation-dependent fault priorities and unlocked visibility."
+      ],
+      "validation_report": "docs/amd64-validation.md"
+    },
+    {
+      "id": "memory-type-resolution",
+      "status": "implemented",
+      "description": "Partial explicit memory-type resolution with unresolved outcomes",
+      "rules": [
+        {
+          "path": "Specs/AMD64MemoryTypes.tla",
+          "symbol": "ResolveMemoryType"
+        },
+        {
+          "path": "lean/AMD64/MemoryTypes.lean",
+          "symbol": "AMD64.MemoryTypes.resolve"
+        }
+      ],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "Complete PAT/MTRR combinations and bind resolved types to all access/event paths."
+      ],
+      "validation_report": "docs/amd64-validation.md"
+    },
+    {
+      "id": "io-device-contract",
+      "status": "implemented",
+      "description": "Permission and device-rule relations with accumulator effects for direct I/O",
+      "rules": [
+        {
+          "path": "Specs/AMD64IO.tla",
+          "symbol": "DirectExecution"
+        },
+        {
+          "path": "lean/AMD64/IO.lean",
+          "symbol": "AMD64.IO.ExecuteDirect"
+        }
+      ],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "Compose TSS bitmap faults, shared form validation, string mixed-fault priority and instruction boundaries."
+      ],
+      "validation_report": "docs/amd64-validation.md"
+    },
+    {
+      "id": "external-body-kernels",
+      "status": "implemented",
+      "description": "Decimal and profile-dependent body relations; environment and pairing gaps tracked per entry",
+      "rules": [
+        {
+          "path": "Specs/AMD64External.tla",
+          "symbol": "DecimalBody"
+        },
+        {
+          "path": "lean/AMD64/External.lean",
+          "symbol": "AMD64.External.DecimalCompute"
+        }
+      ],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "Complete source-form bindings, all authoritative CPU bodies, media/system enablement, LWP layout and monitor access composition."
+      ],
+      "validation_report": "docs/amd64-validation.md"
+    },
+    {
+      "id": "memory-ordering-contract",
+      "status": "implemented",
+      "description": "Bounded WB/WC required-edge and single-writer publication contract with explicit read-from evidence",
+      "rules": [
+        {
+          "path": "Specs/AMD64MemoryOrdering.tla",
+          "symbol": "PublicationConsistent"
+        },
+        {
+          "path": "lean/AMD64/MemoryOrdering.lean",
+          "symbol": "AMD64.MemoryOrdering.publicationConsistent"
+        }
+      ],
+      "checks": [],
+      "dependencies": [],
+      "open_obligations": [
+        "Complete coherence and locked global order, other memory types, device completion and instruction-event integration."
+      ],
+      "validation_report": "docs/amd64-validation.md"
+    },
+    {
+      "id": "unsupported-analysis-fallback",
+      "status": "accepted",
+      "description": "Profile-bound no-trust analysis fallback for a decoded instruction outside the verified subset; it discards all observed concrete and undefined facts and supplies no architectural outcome or successor.",
+      "profile_sha256": "5c07adb4b1391d5b2ec29348b208789c2469b2728afd700f27cd3a90bef078cf",
+      "rules": [
+        {
+          "path": "Specs/AMD64Unsupported.tla",
+          "symbol": "UnknownInstructionFallback"
+        },
+        {
+          "path": "lean/AMD64/Unsupported.lean",
+          "symbol": "AMD64.Unsupported.UnknownInstructionFallback"
+        }
+      ],
+      "checks": [
+        "unsupported-default-tla-typecheck-20260922",
+        "unsupported-default-tlc-20260922",
+        "unsupported-default-lean-build-20260922",
+        "unsupported-default-lean-audit-20260922"
+      ],
+      "dependencies": [],
+      "open_obligations": [],
+      "validation_report": "docs/amd64-validation.md"
+    }
+  ]
+}

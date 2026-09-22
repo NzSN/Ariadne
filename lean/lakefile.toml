@@ -1,0 +1,6 @@
+name = "ariadneAMD64"
+version = "0.1.0"
+defaultTargets = ["AMD64"]
+
+[[lean_lib]]
+name = "AMD64"

@@ -1,0 +1,10 @@
+import AMD64.MachineAccessChecks
+
+#print axioms AMD64.MachineAccess.resolveSpan_delegates_success
+#print axioms AMD64.MachineAccess.resolveSpan_delegates_fault
+#print axioms AMD64.MachineAccess.rollback_preserves_memory
+#print axioms AMD64.MachineAccess.body_all_applies_every_effect
+#print axioms AMD64.MachineAccess.Checks.read_uses_exact_resolved_order
+#print axioms AMD64.MachineAccess.Checks.shape_mismatch_has_no_write_plan
+#print axioms AMD64.MachineAccess.Checks.one_byte_prefix_applies_only_first
+#print axioms AMD64.MachineAccess.Checks.body_applied_preserves_explicit_plan

@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "authority": {
+    "volume": 3,
+    "publication": "24594",
+    "revision": "3.38"
+  },
+  "completeness_boundary": "These records bind source forms to reviewed Lean control-stack prototypes. Lean-prototype-bound is neither full-entry closure nor pairing with a full authoritative TLA+ instruction body; each binding names its remaining architectural obligations.",
+  "tla_pairing_source": "Specs/AMD64/control-coverage.json pairing_rows",
+  "binding_definitions": {
+    "enter-zero": {
+      "implemented": ["push-old-rBP", "set-frame-pointer", "subtract-imm16-allocation", "final-SS-write-access-check-without-store"],
+      "residuals": ["nesting-levels-1-through-31", "architectural-fault-visibility-contract", "captured-memory-refinement"]
+    },
+    "leave": {
+      "implemented": ["copy-address-sized-rBP-to-rSP", "resolved-SS-pop", "write-operand-sized-rBP"],
+      "residuals": ["architectural-fault-visibility-contract", "captured-memory-refinement"]
+    },
+    "pop-gpr": {
+      "implemented": ["resolved-SS-read", "address-sized-stack-increment", "operand-sized-GPR-write", "POP-rSP-write-after-increment"],
+      "residuals": ["memory-destination-forms", "segment-destination-forms", "architectural-fault-delivery"]
+    },
+    "pop-all": {
+      "implemented": ["DI-SI-BP-discard-SP-BX-DX-CX-AX-order", "16/32-bit-register-views", "long64-UD-legality"],
+      "residuals": ["architectural-partial-completion-on-later-access-fault", "captured-memory-refinement"]
+    },
+    "pop-flags": {
+      "implemented": ["real/protected/long64-writable-mask", "IOPL-CPL-rule", "IF-old-IOPL-rule", "VIF-VIP-VM-preservation", "RF-clear", "resolved-SS-pop"],
+      "residuals": ["virtual8086-low-IOPL-CR4.VME-path", "architectural-fault-delivery"]
+    },
+    "push-gpr": {
+      "implemented": ["pre-decrement-address-sized-stack-pointer", "source-read-before-rSP-update", "little-endian-resolved-SS-write"],
+      "residuals": ["memory-source-forms", "segment-source-forms", "architectural-fault-delivery"]
+    },
+    "push-immediate": {
+      "implemented": ["validated-immediate-extension", "pre-decrement-address-sized-stack-pointer", "little-endian-resolved-SS-write"],
+      "residuals": ["shared-form-validator-binding", "architectural-fault-delivery"]
+    },
+    "push-all": {
+      "implemented": ["AX-CX-DX-BX-original-SP-BP-SI-DI-order", "16/32-bit-register-views", "long64-UD-legality"],
+      "residuals": ["architectural-partial-completion-on-later-access-fault", "captured-memory-refinement"]
+    },
+    "push-flags": {
+      "implemented": ["RF-image-clear", "real-and-virtual-VM-image-clear", "resolved-SS-push", "64-bit-mode-width-legality"],
+      "residuals": ["virtual8086-low-IOPL-CR4.VME-path", "architectural-fault-delivery"]
+    },
+    "undefined-opcode": {
+      "implemented": ["unconditional-invalid-opcode-fault"],
+      "residuals": ["exception-delivery-state-transition"]
+    }
+  },
+  "forms": [
+    {"form_id":"AMD64-F-0292","entry_id":"V3-GP-054","source_spelling":"ENTER imm16, 0","encoding":"C8 iw 00","pdf_pages":[224],"binding":"enter-zero","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0449","entry_id":"V3-GP-069","source_spelling":"LEAVE","encoding":"C9","pdf_pages":[262],"binding":"leave","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0450","entry_id":"V3-GP-069","source_spelling":"LEAVE","encoding":"C9","pdf_pages":[262],"binding":"leave","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0451","entry_id":"V3-GP-069","source_spelling":"LEAVE","encoding":"C9","pdf_pages":[262],"binding":"leave","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0600","entry_id":"V3-GP-104","source_spelling":"POP reg16","encoding":"58 +rw","pdf_pages":[327],"binding":"pop-gpr","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0601","entry_id":"V3-GP-104","source_spelling":"POP reg32","encoding":"58 +rd","pdf_pages":[327],"binding":"pop-gpr","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0602","entry_id":"V3-GP-104","source_spelling":"POP reg64","encoding":"58 +rq","pdf_pages":[327],"binding":"pop-gpr","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0608","entry_id":"V3-GP-105","source_spelling":"POPA","encoding":"61","pdf_pages":[329],"binding":"pop-all","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0609","entry_id":"V3-GP-105","source_spelling":"POPAD","encoding":"61","pdf_pages":[329],"binding":"pop-all","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0613","entry_id":"V3-GP-107","source_spelling":"POPF","encoding":"9D","pdf_pages":[332],"binding":"pop-flags","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0614","entry_id":"V3-GP-107","source_spelling":"POPFD","encoding":"9D","pdf_pages":[332],"binding":"pop-flags","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0615","entry_id":"V3-GP-107","source_spelling":"POPFQ","encoding":"9D","pdf_pages":[332],"binding":"pop-flags","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0627","entry_id":"V3-GP-110","source_spelling":"PUSH reg16","encoding":"50 +rw","pdf_pages":[339],"binding":"push-gpr","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0628","entry_id":"V3-GP-110","source_spelling":"PUSH reg32","encoding":"50 +rd","pdf_pages":[339],"binding":"push-gpr","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0629","entry_id":"V3-GP-110","source_spelling":"PUSH reg64","encoding":"50 +rq","pdf_pages":[339],"binding":"push-gpr","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0630","entry_id":"V3-GP-110","source_spelling":"PUSH imm8","encoding":"6A ib","pdf_pages":[339],"binding":"push-immediate","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0631","entry_id":"V3-GP-110","source_spelling":"PUSH imm16","encoding":"68 iw","pdf_pages":[339],"binding":"push-immediate","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0632","entry_id":"V3-GP-110","source_spelling":"PUSH imm32","encoding":"68 id","pdf_pages":[339],"binding":"push-immediate","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0633","entry_id":"V3-GP-110","source_spelling":"PUSH imm64","encoding":"68 id","pdf_pages":[339],"binding":"push-immediate","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0640","entry_id":"V3-GP-111","source_spelling":"PUSHA","encoding":"60","pdf_pages":[341],"binding":"push-all","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0641","entry_id":"V3-GP-111","source_spelling":"PUSHAD","encoding":"60","pdf_pages":[341],"binding":"push-all","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0642","entry_id":"V3-GP-112","source_spelling":"PUSHF","encoding":"9C","pdf_pages":[342],"binding":"push-flags","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0643","entry_id":"V3-GP-112","source_spelling":"PUSHFD","encoding":"9C","pdf_pages":[342],"binding":"push-flags","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0644","entry_id":"V3-GP-112","source_spelling":"PUSHFQ","encoding":"9C","pdf_pages":[342],"binding":"push-flags","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0886","entry_id":"V3-GP-148","source_spelling":"UD0","encoding":"0F FF","pdf_pages":[408],"binding":"undefined-opcode","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0887","entry_id":"V3-GP-148","source_spelling":"UD1","encoding":"0F B9 /r","pdf_pages":[408],"binding":"undefined-opcode","status":"lean-prototype-bound"},
+    {"form_id":"AMD64-F-0888","entry_id":"V3-GP-148","source_spelling":"UD2","encoding":"0F 0B","pdf_pages":[408],"binding":"undefined-opcode","status":"lean-prototype-bound"}
+  ],
+  "summary": {
+    "forms": 27,
+    "lean_prototype_bound": 27,
+    "fully_closed_entries": 0
+  }
+}

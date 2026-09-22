@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "lane": "D2-external-io",
+  "authority": {
+    "volume1": "24592 revision 3.25",
+    "volume2": "24593 revision 3.45",
+    "volume3": "24594 revision 3.38"
+  },
+  "summary": {
+    "assigned_entries": 27,
+    "paired_tla_lean_cpu_entries": 21,
+    "lean_cpu_prototypes_with_tla_environment_contract_only": 6,
+    "fully_accepted_entries": 0,
+    "fully_accepted_forms": 0
+  },
+  "entries": [
+    {"id":"V3-GP-001","title":"AAA","status":"paired-cpu-body-form-open"},
+    {"id":"V3-GP-002","title":"AAD","status":"paired-cpu-body-form-open"},
+    {"id":"V3-GP-003","title":"AAM","status":"paired-cpu-body-form-open"},
+    {"id":"V3-GP-004","title":"AAS","status":"paired-cpu-body-form-open"},
+    {"id":"V3-GP-048","title":"CPUID","status":"paired-profile-cpu-query-serialization-open"},
+    {"id":"V3-GP-049","title":"CRC32","status":"paired-register-cpu-body-memory-form-open"},
+    {"id":"V3-GP-050","title":"DAA","status":"paired-cpu-body-form-open"},
+    {"id":"V3-GP-051","title":"DAS","status":"paired-cpu-body-form-open"},
+    {"id":"V3-GP-057","title":"IN","status":"direct-device-body-bound-form-open"},
+    {"id":"V3-GP-071","title":"LLWPCB","status":"explicit-environment-partial"},
+    {"id":"V3-GP-074","title":"LWPINS","status":"explicit-environment-partial"},
+    {"id":"V3-GP-075","title":"LWPVAL","status":"explicit-environment-partial"},
+    {"id":"V3-GP-079","title":"MONITORX","status":"explicit-monitor-contract-partial"},
+    {"id":"V3-GP-082","title":"MOVD","status":"paired-register-cpu-body-memory-form-open"},
+    {"id":"V3-GP-085","title":"MOVMSKPD","status":"paired-cpu-body-form-open"},
+    {"id":"V3-GP-086","title":"MOVMSKPS","status":"paired-cpu-body-form-open"},
+    {"id":"V3-GP-094","title":"MWAITX","status":"explicit-wake-contract-partial"},
+    {"id":"V3-GP-096","title":"NOP","status":"paired-cpu-body-form-open"},
+    {"id":"V3-GP-099","title":"OUT","status":"direct-device-body-bound-form-open"},
+    {"id":"V3-GP-101","title":"PAUSE","status":"paired-cpu-body-form-open"},
+    {"id":"V3-GP-115","title":"RDFSBASE RDGSBASE","status":"paired-cpu-body-control-gates-explicit"},
+    {"id":"V3-GP-116","title":"RDPID","status":"paired-processor-register-cpu-body-form-open"},
+    {"id":"V3-GP-117","title":"RDPRU","status":"paired-cpu-body-flag-effect-review-open"},
+    {"id":"V3-GP-118","title":"RDRAND","status":"paired-entropy-cpu-body-form-open"},
+    {"id":"V3-GP-119","title":"RDSEED","status":"paired-entropy-cpu-body-form-open"},
+    {"id":"V3-GP-139","title":"SLWPCB","status":"explicit-environment-partial"},
+    {"id":"V3-GP-149","title":"WRFSBASE WRGSBASE","status":"paired-cpu-body-canonicality-explicit"}
+  ],
+  "open_obligations": [
+    "shared forms remain unaccepted and are not modified by this lane",
+    "memory operand forms require the shared M2 access/fault composition",
+    "LWP control-block validation and event record layout require full Volume 2 Chapter 13 binding",
+    "MONITORX one-byte memory resolution must be composed with M2 before entry acceptance",
+    "MWAITX implementation power state and external wake observation remain environment supplied",
+    "full CPUID leaf catalogue is processor-profile data, not an architectural constant"
+    ,"MONITORX/MWAITX and all four LWP entries have TLA environment contracts but their Lean CPU wrappers are not yet paired by TLA CPU transitions"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "reviewed": "2026-09-22",
+  "boundary": "Reviewed Lean transcription; not a verified TLA+ parser or a complete ISA correspondence proof.",
+  "files": [
+    {
+      "path": "Specs/AMD64RegisterViews.tla",
+      "sha256": "b78d67c2b7035b16f466ffa79d14b3fc50e0fb7a3374385b9a6a134ff1ff0591"
+    },
+    {
+      "path": "lean/AMD64/RegisterViews.lean",
+      "sha256": "75ae5cb4c9feb72c54b38ce90e1da2732c9f57490abf333e53789b80e60980ab"
+    }
+  ],
+  "operators": [
+    {
+      "tla": "WordWellFormed",
+      "lean": "AMD64.Source.Word",
+      "relation": "Structural finite one-based domain with Boolean range"
+    },
+    {
+      "tla": "Views",
+      "lean": "AMD64.GPRView",
+      "relation": "Five valid physical slices in 64-bit mode; encoding legality excluded"
+    },
+    {
+      "tla": "ReadView",
+      "lean": "AMD64.Source.readView",
+      "theorem": "AMD64.Source.read_correspondence"
+    },
+    {
+      "tla": "WriteView64",
+      "lean": "AMD64.Source.writeView64",
+      "theorem": "AMD64.Source.write_correspondence"
+    }
+  ]
+}

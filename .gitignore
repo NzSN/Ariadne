@@ -23,3 +23,6 @@ _apalache-out/
 
 # Machine-specific MBT execution report.
 /mbt/results/latest.json
+
+# Lean proof build artifacts (the toolchain and dependency manifest are tracked).
+/lean/.lake/

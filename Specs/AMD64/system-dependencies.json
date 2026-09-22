@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "authority": {
+    "volume_1": "24592 revision 3.25, May 2026",
+    "volume_2": "24593 revision 3.45, July 2026",
+    "volume_3": "24594 revision 3.38, July 2026",
+    "source_lock": "Specs/AMD64/manuals.lock.json"
+  },
+  "scope": "Volume 2 behavior required by Volume 3 General-Purpose instruction forms",
+  "dependencies": [
+    {
+      "id": "SYS-ADDR-LOGICAL-LINEAR-PHYSICAL",
+      "kind": "addressing",
+      "sources": ["V1-SECTION-0014", "V1-SECTION-0015", "V1-SECTION-0016", "V1-SECTION-0017", "V1-SECTION-0018", "V1-SECTION-0022", "V1-SECTION-0023", "V2-SECTION-0301", "V2-SECTION-0304", "V2-SECTION-0305", "V2-SECTION-0306", "V2-SECTION-0307", "V2-SECTION-0308"],
+      "contract": "Keep segment selector plus effective offset, linear address, and translated physical address distinct. Address-size truncation occurs before segmentation. Compatibility-mode 16/32-bit effective addresses and 64-bit-submode 32-bit effective addresses are zero-extended; the 64-bit submode does not permit 16-bit address size.",
+      "foundation": "AMD64Memory EffectiveOffset, SegmentLinear, TranslateAddress",
+      "remaining": ["I2 binding of mode and CS.D/CS.L to default and override address sizes", "far-pointer form binding", "A20 interaction with every paging/SMM variant", "complete variant-specific page-walk matrices"]
+    },
+    {
+      "id": "SYS-ADDR-CANONICAL",
+      "kind": "addressing",
+      "sources": ["V1-SECTION-0021", "V1-SECTION-0065", "V2-SECTION-0303", "V2-SECTION-0447"],
+      "contract": "Bits above the most-significant implemented virtual-address bit equal its sign bit. Non-canonical implied-stack references select #SS(0); other ordinary references select #GP(0).",
+      "foundation": "AMD64Memory Canonical, AddressFault",
+      "remaining": ["LA57/profile legality", "UAI interaction", "instruction-fetch boundary cases"]
+    },
+    {
+      "id": "SYS-ADDR-SEGMENTATION",
+      "kind": "segmentation",
+      "sources": ["V1-SECTION-0016", "V2-SECTION-0388", "V2-SECTION-0394", "V2-SECTION-0396", "V2-SECTION-0429", "V2-SECTION-0432"],
+      "contract": "Legacy and compatibility accesses use effective hidden descriptor state for base, limit, type and privilege. In 64-bit mode DS/ES/SS base, limit and attributes are ignored for ordinary data references; FS/GS base remains effective.",
+      "foundation": "AMD64Memory EffectiveSegmentBase, SegmentPermits",
+      "remaining": ["expand-down limit arithmetic", "descriptor-load faults", "system-table accesses", "far control-transfer descriptor validation"]
+    },
+    {
+      "id": "SYS-PROT-SEGMENT-PRIVILEGE",
+      "kind": "protection",
+      "sources": ["V2-SECTION-0419", "V2-SECTION-0420", "V2-SECTION-0421", "V2-SECTION-0422", "V2-SECTION-0423", "V2-SECTION-0424"],
+      "contract": "Use CPL, selector RPL and descriptor DPL according to access/load kind. Data-segment load uses max(CPL,RPL) <= DPL; stack-segment load requires CPL=RPL=DPL. Runtime data access also enforces cached type and writable/readable attributes.",
+      "foundation": "AMD64Memory SegmentPermits for cached access",
+      "remaining": ["segment-register load operations", "null-selector distinctions", "conforming-code load and control-transfer privilege rules"]
+    },
+    {
+      "id": "SYS-PAGE-TRANSLATION",
+      "kind": "paging",
+      "sources": ["V2-SECTION-0435", "V2-SECTION-0436", "V2-SECTION-0438", "V2-SECTION-0442", "V2-SECTION-0446", "V2-SECTION-0449", "V2-SECTION-0450", "V2-SECTION-0451", "V2-SECTION-0452"],
+      "contract": "Translate a linear address through the mode-selected hierarchy or use the linear address as physical when paging is disabled. Page size, implemented physical width and hierarchy are profile/configuration facts.",
+      "foundation": "Explicit PageMap plus AMD64PageWalk raw-entry certificates for long4/long5/PAE/legacy path shapes and 4K/2M/1G/legacy-4M leaves",
+      "remaining": ["variant-exhaustive reserved/PAT/global bit matrices", "exact CR3 PCID/PWT/PCD and PAE-PDPT loading rules", "PSE36 legacy 4M addressing", "PWT/PCD/PAT/MTRR memory-type derivation", "TLB state and invalidation", "nested translation"]
+    },
+    {
+      "id": "SYS-PAGE-WALK-SIDE-EFFECTS",
+      "kind": "paging",
+      "sources": ["V2-SECTION-0442", "V2-SECTION-0443", "V2-SECTION-0444", "V2-SECTION-0445", "V2-SECTION-0446", "V2-SECTION-0448", "V2-SECTION-0449", "V2-SECTION-0450", "V2-SECTION-0451", "V2-SECTION-0452", "V2-SECTION-0453", "V2-SECTION-0454"],
+      "contract": "A walk fetches each raw entry at root-or-prior-base plus the scaled linear-address index, stops at the first not-present/reserved entry, and derives the page base and combined permissions only from a valid chain. A bits can commit for the valid prefix; not-present entries receive no A/D update; D is non-speculative and belongs only to an allowed write leaf, with instruction-level partial writes retained.",
+      "foundation": "AMD64PageWalk certificate validation, DerivedPage, FailedWalkAt, SuccessfulADUpdates and FailedADUpdates; Lean executable PageWalk.walk",
+      "remaining": ["TLB-hit path that performs no table-memory reads", "speculative A-update interleavings", "rare dirty-without-write instruction catalogue", "writeback faults while updating paging structures", "event-order integration with D1"]
+    },
+    {
+      "id": "SYS-CONCRETE-MEMORY-KNOWLEDGE",
+      "kind": "memory-state",
+      "sources": ["V1-SECTION-0014", "V1-SECTION-0017", "V1-SECTION-0020", "V2-SECTION-0504", "V2-SECTION-0542"],
+      "contract": "Concrete architectural bytes are total over the modeled physical domain; captured bytes constrain only their explicit domain. Missing captured data is an analysis obligation, never an inferred byte or architectural fault. Concrete writes and captured snapshot writes preserve refinement at valid addresses.",
+      "foundation": "AMD64ConcreteMemory ConcreteRead/ConcreteWrite/ConcreteRefinesCaptured and Lean Store/RefinesCaptured/ConcreteMachineState; page-table evidence is checked against concrete reads",
+      "remaining": ["MMIO/device address-space partition", "physical holes and bus-error contract", "memory-type derivation", "D1 ordering/atomicity/coherency", "checked TLA-to-Lean representation isomorphism"]
+    },
+    {
+      "id": "SYS-MEMORY-TYPE-ATOMIC",
+      "kind": "memory-system",
+      "sources": ["V2-SECTION-0510", "V2-SECTION-0512", "V2-SECTION-0513", "V2-SECTION-0514", "V2-SECTION-0528", "V2-SECTION-0529", "V2-SECTION-0532", "V2-SECTION-0534", "V2-SECTION-0539"],
+      "contract": "Resolve effective type from explicit PAT and MTRR configuration without inventing WB. Atomic memory forms emit indivisible RMW events with kernel-derived values/flags; ordering is a separate profile relation.",
+      "foundation": "AMD64MemoryTypes partial resolver; AMD64Atomic permission-checked CPU/concrete-memory bindings for memory XCHG/XADD/CMPXCHG and block compare-exchange; explicit locked/atomic event distinction; coherent-WB bounded locked-RMW litmus; atomic-form-supplement.json source review",
+      "remaining": ["complete Table 7-11 matrix review", "fixed/extended/overlapping MTRR precedence", "PWT/PCD/PAT extraction from every leaf size", "merge atomic supplement into shared validated form constraints", "mandatory CMPXCHG16B alignment priority relative to translation", "general AMD ordering/coherency and fence litmus suite", "unlocked RMW visibility", "UC/WC/MMIO locked-operation bus behavior"]
+    },
+    {
+      "id": "SYS-PAGE-PROTECTION",
+      "kind": "protection",
+      "sources": ["V2-SECTION-0459", "V2-SECTION-0460", "V2-SECTION-0461", "V2-SECTION-0462", "V2-SECTION-0463", "V2-SECTION-0464", "V2-SECTION-0465", "V2-SECTION-0466", "V2-SECTION-0471"],
+      "contract": "Combine U/S, R/W and NX across the hierarchy, then apply CPL, CR0.WP, SMEP, SMAP, RFLAGS.AC and PKRU conditions. Protection failures are #PF with access-derived error-code bits.",
+      "foundation": "AMD64PageWalk derives U/S as all levels, R/W as all levels and NX as any effective level; AMD64Memory applies CPL/WP/SMEP/SMAP/PKRU",
+      "remaining": ["PKRS", "implicit-supervisor access catalogue", "complete PFEC including SGX/RMP", "nested paging", "variant-specific protection exceptions"]
+    },
+    {
+      "id": "SYS-PAGE-SHADOW-STACK",
+      "kind": "protection",
+      "sources": ["V2-SECTION-0467", "V2-SECTION-0468", "V2-SECTION-0469", "V2-SECTION-0470"],
+      "contract": "Distinguish shadow-stack accesses and pages; ordinary writes to shadow-stack pages and shadow accesses to ordinary or wrong-privilege pages fault with #PF and SS error-code bit.",
+      "foundation": "Typed access/page flags and explicit permit predicate",
+      "remaining": ["CET enable preconditions", "WRUSS privilege exception", "shadow-stack mechanism-generated accesses"]
+    },
+    {
+      "id": "SYS-MEMORY-TYPE-ORDER",
+      "kind": "memory-system",
+      "sources": ["V1-SECTION-0091", "V1-SECTION-0094", "V1-SECTION-0095", "V1-SECTION-0096", "V2-SECTION-0504", "V2-SECTION-0507", "V2-SECTION-0508", "V2-SECTION-0510", "V2-SECTION-0518", "V2-SECTION-0532", "V2-SECTION-0542"],
+      "contract": "Memory accesses are events carrying access kind and memory type. A sequential byte store does not define architectural ordering, locking, coherency or MMIO effects.",
+      "foundation": "MemoryEvent plus byte-state projection",
+      "remaining": ["D1 multiprocessor execution relation", "locked cycles", "fences", "memory-type combination", "MMIO device semantics", "non-temporal and direct-store behavior"]
+    },
+    {
+      "id": "SYS-ALIGNMENT",
+      "kind": "exception",
+      "sources": ["V1-SECTION-0041", "V2-SECTION-0582"],
+      "contract": "Ordinary #AC requires CR0.AM=1, RFLAGS.AC=1 and CPL=3, with the operand-type alignment. Instruction-specific mandatory alignment can instead cause #GP or suppress accesses as Volume 3 states.",
+      "foundation": "AMD64Memory AlignmentFault",
+      "remaining": ["form-specific required alignment", "split accesses", "suppressed/fault-first vector memory behavior"]
+    },
+    {
+      "id": "SYS-IO-PERMISSION",
+      "kind": "io",
+      "sources": ["V1-SECTION-0056", "V1-SECTION-0089", "V1-SECTION-0090", "V1-SECTION-0091", "V1-SECTION-0092", "V2-SECTION-0679", "V2-SECTION-0683"],
+      "contract": "IN/OUT/INS/OUTS use the separate 16-bit port space. Access is allowed when CPL <= IOPL or every addressed port bit is allowed by the current TSS I/O bitmap; denied or out-of-limit bitmap access yields #GP(0).",
+      "foundation": "SystemConfig IOPL and explicit IOPermissionMap contract",
+      "remaining": ["TSS limit/read faults", "virtual-8086/VME details", "multi-transaction device response", "SMM I/O restart"]
+    },
+    {
+      "id": "SYS-EXCEPTION-RESTART",
+      "kind": "exception",
+      "sources": ["V2-SECTION-0558", "V2-SECTION-0559", "V2-SECTION-0560", "V2-SECTION-0561"],
+      "contract": "Faults save the faulting rIP and ordinarily discard faulting-instruction changes; traps save the following rIP after committed changes; aborts do not promise restart. Explicit partial-progress contracts override ordinary rollback.",
+      "foundation": "AMD64Exceptions Outcome, RestartPoint and CommitPolicy",
+      "remaining": ["per-form partial-progress catalogue", "debug RF behavior", "imprecise x87 and machine-check outcomes"]
+    },
+    {
+      "id": "SYS-EXCEPTION-VECTORS",
+      "kind": "exception",
+      "sources": ["V2-SECTION-0565", "V2-SECTION-0566", "V2-SECTION-0571", "V2-SECTION-0572", "V2-SECTION-0573", "V2-SECTION-0578", "V2-SECTION-0579", "V2-SECTION-0580", "V2-SECTION-0582", "V2-SECTION-0585"],
+      "contract": "Instruction legality, arithmetic, address, page, alignment, device, floating-point and control-protection conditions select named vectors with class, saved-IP and error-code rules.",
+      "foundation": "Named vector/class/detail representation; common memory faults",
+      "remaining": ["all form-specific vector predicates", "exception delivery state transition", "double-fault escalation", "handler stack/IST and gate validation"]
+    },
+    {
+      "id": "SYS-EXCEPTION-PRIORITY",
+      "kind": "exception",
+      "sources": ["V2-SECTION-0595", "V2-SECTION-0596", "V2-SECTION-0597"],
+      "contract": "Architectural group priority governs simultaneous interrupt classes. Within the ordinary memory pipeline, only stage ordering supported by the relevant instruction description may select a winner; same-group ordering can be implementation-dependent.",
+      "foundation": "Ordered, unique fault candidates with explicit stage",
+      "remaining": ["Volume 3 per-form priority matrix", "fetch/decode boundary model dependence", "floating-point sub-operation priorities", "external interrupt acceptance"]
+    },
+    {
+      "id": "SYS-CONTROL-TRANSFER",
+      "kind": "control-transfer",
+      "sources": ["V1-SECTION-0054", "V1-SECTION-0078", "V1-SECTION-0079", "V1-SECTION-0080", "V1-SECTION-0081", "V1-SECTION-0082", "V1-SECTION-0083", "V1-SECTION-0084", "V1-SECTION-0088", "V2-SECTION-0425", "V2-SECTION-0426", "V2-SECTION-0427", "V2-SECTION-0428", "V2-SECTION-0598", "V2-SECTION-0599", "V2-SECTION-0609"],
+      "contract": "Near transfers retain CS and validate target width/canonicality; far, call-gate, return and interrupt transfers validate descriptors, privilege, stacks and shadow stacks in their specified commit/fault order.",
+      "foundation": "Address/exception/commit vocabulary only",
+      "remaining": ["C3 near/far CALL/JMP/RET", "interrupt/IRET delivery", "SYSCALL/SYSRET", "task-gate legacy behavior", "CET target validation"]
+    },
+    {
+      "id": "SYS-PARTIAL-PROGRESS",
+      "kind": "restart",
+      "sources": ["V2-SECTION-0559", "V2-SECTION-0560", "V2-SECTION-0650"],
+      "contract": "Repeated strings, task switches and selected external operations can expose committed prefixes or after-instruction state. Their continuation identifies completed work and restart location; they cannot use the ordinary all-or-nothing fault rule.",
+      "foundation": "CommitPolicy rollback/committed-prefix/after-instruction with independent committed-effect and completed-iteration counts",
+      "remaining": ["C4 REP register update order", "task-switch state", "SMM I/O restart", "instruction-specific non-transactional forms"]
+    }
+  ],
+  "coverage_boundary": {
+    "implemented_here": [
+      "full-width address bit-vector helpers",
+      "mode-specific segment-base selection",
+      "effective non-overlapping page-map translation abstraction",
+      "byte-backed page-walk certificates and common long4/long5/PAE/legacy hierarchy rules",
+      "explicit A/D update events for successful and failed walk prefixes",
+      "common page permission checks",
+      "common memory-fault priority",
+      "little-endian byte reads and writes",
+      "explicit commit/restart outcome vocabulary"
+    ],
+    "not_closed": [
+      "A4 complete form-to-dependency attachment",
+      "variant-exhaustive page-entry matrices, TLB paths and paging-structure writeback behavior",
+      "exception delivery",
+      "per-instruction exception ordering",
+      "D1 architectural memory ordering and concurrency",
+      "C3/C4 control-transfer and string restart rules"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+import AMD64.MemoryOrderingChecks
+
+#print axioms AMD64.MemoryOrdering.Checks.locked_publication_orders_wc_data
+#print axioms AMD64.MemoryOrdering.Checks.omitted_synchronization_admits_stale_wc_read
+#print axioms AMD64.MemoryOrdering.Checks.fences_have_distinct_directions
+#print axioms AMD64.MemoryOrdering.Checks.lock_transport_uses_type_and_profile_alignment
+#print axioms AMD64.MemoryOrdering.Checks.unknown_and_destructive_streaming_are_unavailable
+#print axioms AMD64.MemoryOrdering.Checks.wb_store_buffering_witness_is_not_globally_sc
+#print axioms AMD64.MemoryOrdering.Checks.equal_values_do_not_infer_read_from
+#print axioms AMD64.MemoryOrdering.Checks.racing_writer_disables_single_writer_publication_rule
+#print axioms AMD64.MemoryOrdering.Checks.read_from_rejects_self_and_future_sources

@@ -5,6 +5,12 @@ The new [module](../Specs/AriadneX86_64Semantics.tla) computes outcomes from dec
 instructions and register/flag values. `StateSteps` is no longer a hand-authored
 input when using its bridge to `AriadneMachineState`.
 
+The [accepted AMD64 expansion](amd64-semantics-design.md) covers the full
+general-purpose instruction reference and application-visible state, with a
+Lean formalization. Its [source inventory and first foundation](../Specs/AMD64/README.md)
+are separate from the register-only evaluator documented here. The wider scope
+is a delivery target, not a claim that this module already implements it.
+
 `Execute` is the instruction semantics interface; finite catalogue binding is
 the seam to the existing propagation module. Neither module owns instruction
 discovery.

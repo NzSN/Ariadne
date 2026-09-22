@@ -13,6 +13,19 @@ subset, also without a Rust implementation. See the
 [implementation guide](../docs/implementation.md) for the Rust correspondence
 and validation boundary.
 
+The [AMD64 expansion](AMD64/README.md) pins AMD Volumes 1–3 and inventories the
+full requested instruction/state scope. Its separate modules cover register
+views, CPU-state representation, decoded-form validation, memory/exception
+contracts and integer kernels with [Lean counterparts](../lean/README.md).
+This does not expand `AriadneX86_64Semantics!Supported` yet. Run the discovering
+component gate with `bash Specs/check-amd64.sh`; add
+`--require-milestone register-core` for the immediate [user64 profile](../docs/amd64-user64.md).
+The optional `--require-complete` gate retains full-manual roadmap closure.
+The conservative no-trust fallback foundation is accepted for the current
+profile hash. Register-core case acceptance and full-manual closure remain
+pending. The original
+register-view gate remains `bash Specs/check-amd64-foundation.sh`.
+
 ## Shared semantic types
 
 `AriadneTypes.tla` is the shared alias catalogue for specification-level roles.

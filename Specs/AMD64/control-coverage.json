@@ -1,0 +1,886 @@
+{
+  "schema_version": 2,
+  "authority": {
+    "volume": 3,
+    "publication": "24594",
+    "revision": "3.38"
+  },
+  "scope": "All 21 C3-assigned General-Purpose Instruction Reference entries; staged status never implies full entry closure.",
+  "summary": {
+    "entries": 21,
+    "fully_complete": 0,
+    "lean_executable_or_contract_staged": 18,
+    "open": 3,
+    "lean_prototype_bound_forms": 27,
+    "paired_full_instruction_bodies": 0,
+    "helper_paired_entries": 3,
+    "fault_selection_paired_entries": 1,
+    "projection_to_lean_prototype_entries": 9,
+    "unpaired_lean_body_entries": 5,
+    "assumed_projection_entries": 1,
+    "unmodeled_entries": 2
+  },
+  "entries": [
+    {
+      "entry_id": "V3-GP-032",
+      "title": "CALL (Near)",
+      "source_pages": [
+        178,
+        179,
+        180
+      ],
+      "form_ids": [
+        "AMD64-F-0128",
+        "AMD64-F-0129",
+        "AMD64-F-0130",
+        "AMD64-F-0131",
+        "AMD64-F-0132"
+      ],
+      "status": "near-call-concrete-stack-staged",
+      "implemented": [
+        "relative/register-target",
+        "stack-width/address-size-plan",
+        "resolved-concrete-stack-write",
+        "post-push-target-check-with-tentative-fault-effect"
+      ],
+      "open_obligations": [
+        "close-near-CALL-forms",
+        "bind-memory-indirect-target-read",
+        "bind-CET-shadow-stack",
+        "prove-fault-priority-and-captured-refinement"
+      ],
+      "modules": [
+        "Specs/AMD64Control.tla",
+        "lean/AMD64/Control.lean"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-033",
+      "title": "CALL (Far)",
+      "source_pages": [
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187
+      ],
+      "form_ids": [
+        "AMD64-F-0133",
+        "AMD64-F-0134",
+        "AMD64-F-0135",
+        "AMD64-F-0136"
+      ],
+      "status": "real-and-virtual8086-executable-staged",
+      "implemented": [
+        "real/v8086-CS-then-IP-stack-order",
+        "resolved-concrete-stack-writes",
+        "real-segment-base-and-target-commit",
+        "tentative-fault-effects-separated-from-architectural-state"
+      ],
+      "open_obligations": [
+        "bind-memory-indirect-far-pointer-read",
+        "bind-protected-descriptor/gate/task/privilege-transitions",
+        "bind-CET-and-exception-delivery"
+      ],
+      "modules": [
+        "Specs/AMD64Control.tla",
+        "lean/AMD64/Control.lean"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-054",
+      "title": "ENTER",
+      "source_pages": [
+        224,
+        225
+      ],
+      "form_ids": [
+        "AMD64-F-0292",
+        "AMD64-F-0293",
+        "AMD64-F-0294"
+      ],
+      "status": "level-zero-executable-staged",
+      "implemented": [
+        "push-old-rBP",
+        "set-frame-pointer",
+        "imm16-allocation",
+        "final-stack-write-check-without-store"
+      ],
+      "open_obligations": [
+        "implement-nesting-levels-1-through-31",
+        "bind-fault-visibility-and-captured-refinement"
+      ],
+      "modules": [
+        "Specs/AMD64Control.tla",
+        "lean/AMD64/Control.lean"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-060",
+      "title": "INT",
+      "source_pages": [
+        236,
+        237,
+        238,
+        239,
+        240,
+        241,
+        242,
+        243
+      ],
+      "form_ids": [
+        "AMD64-F-0330"
+      ],
+      "status": "open",
+      "implemented": [],
+      "open_obligations": [
+        "complete-form-semantic-review",
+        "bind-IDT/gate/privilege/frame-transitions",
+        "bind-exception-and-trap-delivery"
+      ],
+      "modules": [
+        "Specs/AMD64Control.tla",
+        "lean/AMD64/Control.lean"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-061",
+      "title": "INTO",
+      "source_pages": [
+        244
+      ],
+      "form_ids": [
+        "AMD64-F-0331"
+      ],
+      "status": "open",
+      "implemented": [],
+      "open_obligations": [
+        "complete-form-semantic-review",
+        "bind-exceptions-and-retirement",
+        "bind-descriptor/privilege/CET/delivery-transitions"
+      ],
+      "modules": [
+        "Specs/AMD64Control.tla",
+        "lean/AMD64/Control.lean"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-062",
+      "title": "Jcc",
+      "source_pages": [
+        245,
+        246,
+        247,
+        248
+      ],
+      "form_ids": [
+        "AMD64-F-0332",
+        "AMD64-F-0333",
+        "AMD64-F-0334",
+        "AMD64-F-0335",
+        "AMD64-F-0336",
+        "AMD64-F-0337",
+        "AMD64-F-0338",
+        "AMD64-F-0339",
+        "AMD64-F-0340",
+        "AMD64-F-0341",
+        "AMD64-F-0342",
+        "AMD64-F-0343",
+        "AMD64-F-0344",
+        "AMD64-F-0345",
+        "AMD64-F-0346",
+        "AMD64-F-0347",
+        "AMD64-F-0348",
+        "AMD64-F-0349",
+        "AMD64-F-0350",
+        "AMD64-F-0351",
+        "AMD64-F-0352",
+        "AMD64-F-0353",
+        "AMD64-F-0354",
+        "AMD64-F-0355",
+        "AMD64-F-0356",
+        "AMD64-F-0357",
+        "AMD64-F-0358",
+        "AMD64-F-0359",
+        "AMD64-F-0360",
+        "AMD64-F-0361",
+        "AMD64-F-0362",
+        "AMD64-F-0363",
+        "AMD64-F-0364",
+        "AMD64-F-0365",
+        "AMD64-F-0366",
+        "AMD64-F-0367",
+        "AMD64-F-0368",
+        "AMD64-F-0369",
+        "AMD64-F-0370",
+        "AMD64-F-0371",
+        "AMD64-F-0372",
+        "AMD64-F-0373",
+        "AMD64-F-0374",
+        "AMD64-F-0375",
+        "AMD64-F-0376",
+        "AMD64-F-0377",
+        "AMD64-F-0378",
+        "AMD64-F-0379",
+        "AMD64-F-0380",
+        "AMD64-F-0381",
+        "AMD64-F-0382",
+        "AMD64-F-0383",
+        "AMD64-F-0384",
+        "AMD64-F-0385",
+        "AMD64-F-0386",
+        "AMD64-F-0387",
+        "AMD64-F-0388",
+        "AMD64-F-0389",
+        "AMD64-F-0390",
+        "AMD64-F-0391",
+        "AMD64-F-0392",
+        "AMD64-F-0393",
+        "AMD64-F-0394",
+        "AMD64-F-0395",
+        "AMD64-F-0396",
+        "AMD64-F-0397",
+        "AMD64-F-0398",
+        "AMD64-F-0399",
+        "AMD64-F-0400",
+        "AMD64-F-0401",
+        "AMD64-F-0402",
+        "AMD64-F-0403",
+        "AMD64-F-0404",
+        "AMD64-F-0405",
+        "AMD64-F-0406",
+        "AMD64-F-0407",
+        "AMD64-F-0408",
+        "AMD64-F-0409",
+        "AMD64-F-0410",
+        "AMD64-F-0411",
+        "AMD64-F-0412",
+        "AMD64-F-0413",
+        "AMD64-F-0414",
+        "AMD64-F-0415",
+        "AMD64-F-0416",
+        "AMD64-F-0417",
+        "AMD64-F-0418",
+        "AMD64-F-0419",
+        "AMD64-F-0420",
+        "AMD64-F-0421"
+      ],
+      "status": "predicate-and-direct-target-checked",
+      "implemented": [
+        "all-16-condition-predicates",
+        "taken/fallthrough-selection",
+        "signed-relative-target",
+        "current-code-target-check"
+      ],
+      "open_obligations": [
+        "close-Jcc-forms",
+        "bind-fetch-and-#GP-delivery"
+      ],
+      "modules": [
+        "Specs/AMD64Control.tla",
+        "lean/AMD64/Control.lean"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-063",
+      "title": "JCXZ JECXZ JRCXZ",
+      "source_pages": [
+        249
+      ],
+      "form_ids": [
+        "AMD64-F-0422",
+        "AMD64-F-0423",
+        "AMD64-F-0424"
+      ],
+      "status": "predicate-and-direct-target-checked",
+      "implemented": [
+        "CX/ECX/RCX-zero-selection",
+        "signed-rel8-target",
+        "taken/fallthrough-selection"
+      ],
+      "open_obligations": [
+        "close-JrCXZ-forms",
+        "bind-address-size-prefix-form",
+        "bind-fetch-and-#GP-delivery"
+      ],
+      "modules": [
+        "Specs/AMD64Control.tla",
+        "lean/AMD64/Control.lean"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-064",
+      "title": "JMP (Near)",
+      "source_pages": [
+        250,
+        251
+      ],
+      "form_ids": [
+        "AMD64-F-0425",
+        "AMD64-F-0426",
+        "AMD64-F-0427",
+        "AMD64-F-0428",
+        "AMD64-F-0429",
+        "AMD64-F-0430"
+      ],
+      "status": "near-target-foundation",
+      "implemented": [
+        "relative-target",
+        "register-indirect-target",
+        "width-truncation",
+        "current-code-target-check"
+      ],
+      "open_obligations": [
+        "close-near-JMP-forms",
+        "bind-memory-indirect-read",
+        "bind-fetch-and-fault-delivery"
+      ],
+      "modules": [
+        "Specs/AMD64Control.tla",
+        "lean/AMD64/Control.lean"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-065",
+      "title": "JMP (Far)",
+      "source_pages": [
+        252,
+        253,
+        254,
+        255,
+        256
+      ],
+      "form_ids": [
+        "AMD64-F-0431",
+        "AMD64-F-0432",
+        "AMD64-F-0433",
+        "AMD64-F-0434"
+      ],
+      "status": "real-and-virtual8086-executable-staged",
+      "implemented": [
+        "direct/resolved-far-pointer-target",
+        "real-segment-base-and-target-commit"
+      ],
+      "open_obligations": [
+        "bind-memory-indirect-far-pointer-read",
+        "bind-protected-descriptor/gate/task/privilege-transitions",
+        "bind-exception-delivery"
+      ],
+      "modules": [
+        "Specs/AMD64Control.tla",
+        "lean/AMD64/Control.lean"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-067",
+      "title": "LDS LES LFS LGS LSS",
+      "source_pages": [
+        258,
+        259
+      ],
+      "form_ids": [
+        "AMD64-F-0436",
+        "AMD64-F-0437",
+        "AMD64-F-0438",
+        "AMD64-F-0439",
+        "AMD64-F-0440",
+        "AMD64-F-0441",
+        "AMD64-F-0442",
+        "AMD64-F-0443",
+        "AMD64-F-0444",
+        "AMD64-F-0445"
+      ],
+      "status": "open-assumed-projection-only",
+      "implemented": [
+        "destination-specific-segment-cache-update-helper",
+        "explicit-label-that-projection-is-assumed-not-validated"
+      ],
+      "open_obligations": [
+        "bind-compound-memory-pointer-read-and-GPR-write",
+        "derive-loaded-cache-from-raw-GDT/LDT-bytes/table-bounds/type/CPL/presence",
+        "bind-selector-specific-fault-delivery"
+      ],
+      "modules": [
+        "Specs/AMD64Control.tla",
+        "lean/AMD64/Control.lean"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-069",
+      "title": "LEAVE",
+      "source_pages": [
+        262
+      ],
+      "form_ids": [
+        "AMD64-F-0449",
+        "AMD64-F-0450",
+        "AMD64-F-0451"
+      ],
+      "status": "executable-staged",
+      "implemented": [
+        "copy-address-sized-rBP-to-rSP",
+        "resolved-concrete-stack-read",
+        "operand-sized-rBP-write",
+        "tentative-fault-effects-separated-from-architectural-state"
+      ],
+      "open_obligations": [
+        "bind-fault-visibility-and-captured-refinement"
+      ],
+      "modules": [
+        "Specs/AMD64Control.tla",
+        "lean/AMD64/Control.lean"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-073",
+      "title": "LOOP LOOPE LOOPNE LOOPNZ LOOPZ",
+      "source_pages": [
+        269,
+        270
+      ],
+      "form_ids": [
+        "AMD64-F-0463",
+        "AMD64-F-0464",
+        "AMD64-F-0465",
+        "AMD64-F-0466",
+        "AMD64-F-0467"
+      ],
+      "status": "count-update-and-predicate-foundation",
+      "implemented": [
+        "address-sized-RCX-decrement",
+        "upper-register-and-flags-frame",
+        "post-decrement-count-and-ZF-selection",
+        "signed-rel8-target"
+      ],
+      "open_obligations": [
+        "close-LOOP-forms",
+        "bind-fetch-and-#GP-delivery"
+      ],
+      "modules": [
+        "Specs/AMD64Control.tla",
+        "lean/AMD64/Control.lean"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-104",
+      "title": "POP",
+      "source_pages": [
+        327,
+        328
+      ],
+      "form_ids": [
+        "AMD64-F-0597",
+        "AMD64-F-0598",
+        "AMD64-F-0599",
+        "AMD64-F-0600",
+        "AMD64-F-0601",
+        "AMD64-F-0602",
+        "AMD64-F-0603",
+        "AMD64-F-0604",
+        "AMD64-F-0605",
+        "AMD64-F-0606",
+        "AMD64-F-0607"
+      ],
+      "status": "gpr-forms-executable-staged",
+      "implemented": [
+        "resolved-concrete-stack-read",
+        "address-sized-stack-increment",
+        "operand-sized-GPR-write-including-rSP-alias"
+      ],
+      "open_obligations": [
+        "bind-memory-destination-effective-address-order",
+        "bind-segment-destination-descriptor-transitions",
+        "bind-fault-delivery-and-captured-refinement"
+      ],
+      "modules": [
+        "Specs/AMD64Control.tla",
+        "lean/AMD64/Control.lean"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-105",
+      "title": "POPA POPAD",
+      "source_pages": [
+        329
+      ],
+      "form_ids": [
+        "AMD64-F-0608",
+        "AMD64-F-0609"
+      ],
+      "status": "executable-order-staged",
+      "implemented": [
+        "DI/SI/BP/discard-SP/BX/DX/CX/AX-order",
+        "16/32-bit-GPR-view-writes",
+        "long64-invalid-payload-boundary",
+        "tentative-partial-effects-separated-from-architectural-state"
+      ],
+      "open_obligations": [
+        "bind-architectural-partial-completion-on-later-fault",
+        "bind-UD-and-memory-fault-delivery"
+      ],
+      "modules": [
+        "Specs/AMD64Control.tla",
+        "lean/AMD64/Control.lean"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-107",
+      "title": "POPF POPFD POPFQ",
+      "source_pages": [
+        332,
+        333,
+        334
+      ],
+      "form_ids": [
+        "AMD64-F-0613",
+        "AMD64-F-0614",
+        "AMD64-F-0615"
+      ],
+      "status": "mode-mask-executable-staged",
+      "implemented": [
+        "resolved-concrete-stack-read",
+        "real/protected/long64-flag-write-mask",
+        "IOPL-and-IF-privilege-rules",
+        "VIF/VIP/VM-preservation-and-RF-clear"
+      ],
+      "open_obligations": [
+        "bind-virtual8086-low-IOPL-CR4.VME-path",
+        "bind-fault-delivery-and-captured-refinement"
+      ],
+      "modules": [
+        "Specs/AMD64Control.tla",
+        "lean/AMD64/Control.lean"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-110",
+      "title": "PUSH",
+      "source_pages": [
+        339,
+        340
+      ],
+      "form_ids": [
+        "AMD64-F-0624",
+        "AMD64-F-0625",
+        "AMD64-F-0626",
+        "AMD64-F-0627",
+        "AMD64-F-0628",
+        "AMD64-F-0629",
+        "AMD64-F-0630",
+        "AMD64-F-0631",
+        "AMD64-F-0632",
+        "AMD64-F-0633",
+        "AMD64-F-0634",
+        "AMD64-F-0635",
+        "AMD64-F-0636",
+        "AMD64-F-0637",
+        "AMD64-F-0638",
+        "AMD64-F-0639"
+      ],
+      "status": "gpr-and-immediate-forms-executable-staged",
+      "implemented": [
+        "source-read-before-rSP-update",
+        "validated-immediate-extension",
+        "address-sized-predecrement",
+        "resolved-little-endian-SS-write"
+      ],
+      "open_obligations": [
+        "bind-memory-source-effective-address-order",
+        "bind-segment-source-forms",
+        "bind-fault-delivery-and-captured-refinement"
+      ],
+      "modules": [
+        "Specs/AMD64Control.tla",
+        "lean/AMD64/Control.lean"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-111",
+      "title": "PUSHA PUSHAD",
+      "source_pages": [
+        341
+      ],
+      "form_ids": [
+        "AMD64-F-0640",
+        "AMD64-F-0641"
+      ],
+      "status": "executable-order-staged",
+      "implemented": [
+        "AX/CX/DX/BX/original-SP/BP/SI/DI-order",
+        "16/32-bit-GPR-view-reads",
+        "long64-invalid-payload-boundary",
+        "tentative-partial-effects-separated-from-architectural-state"
+      ],
+      "open_obligations": [
+        "bind-architectural-partial-completion-on-later-fault",
+        "bind-UD-and-memory-fault-delivery"
+      ],
+      "modules": [
+        "Specs/AMD64Control.tla",
+        "lean/AMD64/Control.lean"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-112",
+      "title": "PUSHF PUSHFD PUSHFQ",
+      "source_pages": [
+        342,
+        343
+      ],
+      "form_ids": [
+        "AMD64-F-0642",
+        "AMD64-F-0643",
+        "AMD64-F-0644"
+      ],
+      "status": "mode-image-executable-staged",
+      "implemented": [
+        "RF-image-clear",
+        "real/v8086-VM-image-clear",
+        "resolved-concrete-stack-write",
+        "mode-sensitive-width-legality"
+      ],
+      "open_obligations": [
+        "bind-virtual8086-low-IOPL-CR4.VME-path",
+        "bind-fault-delivery-and-captured-refinement"
+      ],
+      "modules": [
+        "Specs/AMD64Control.tla",
+        "lean/AMD64/Control.lean"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-120",
+      "title": "RET (Near)",
+      "source_pages": [
+        353,
+        354
+      ],
+      "form_ids": [
+        "AMD64-F-0681",
+        "AMD64-F-0682"
+      ],
+      "status": "near-ret-concrete-stack-staged",
+      "implemented": [
+        "stack-width/address-size-plan",
+        "resolved-concrete-stack-read",
+        "post-pop-target-check-with-tentative-fault-effect",
+        "imm16-cleanup-after-target-check"
+      ],
+      "open_obligations": [
+        "close-near-RET-forms",
+        "bind-CET-shadow-stack",
+        "prove-fault-priority-and-captured-refinement"
+      ],
+      "modules": [
+        "Specs/AMD64Control.tla",
+        "lean/AMD64/Control.lean"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-121",
+      "title": "RET (Far)",
+      "source_pages": [
+        355,
+        356,
+        357,
+        358,
+        359
+      ],
+      "form_ids": [
+        "AMD64-F-0683",
+        "AMD64-F-0684"
+      ],
+      "status": "real-and-virtual8086-executable-staged",
+      "implemented": [
+        "IP-then-CS-pop-order",
+        "real-segment-base-and-target-commit",
+        "imm16-cleanup-after-target-check",
+        "tentative-fault-effects-separated-from-architectural-state"
+      ],
+      "open_obligations": [
+        "bind-protected-descriptor/privilege-stack-switch-transitions",
+        "bind-CET-and-exception-delivery"
+      ],
+      "modules": [
+        "Specs/AMD64Control.tla",
+        "lean/AMD64/Control.lean"
+      ]
+    },
+    {
+      "entry_id": "V3-GP-148",
+      "title": "UD0, UD1, UD2",
+      "source_pages": [
+        408
+      ],
+      "form_ids": [
+        "AMD64-F-0886",
+        "AMD64-F-0887",
+        "AMD64-F-0888"
+      ],
+      "status": "fault-semantics-staged",
+      "implemented": [
+        "UD0-unconditional-#UD",
+        "UD1-unconditional-#UD",
+        "UD2-unconditional-#UD"
+      ],
+      "open_obligations": [
+        "bind-invalid-opcode-exception-delivery-state-transition"
+      ],
+      "modules": [
+        "Specs/AMD64Control.tla",
+        "lean/AMD64/Control.lean"
+      ]
+    }
+  ],
+  "pairing_rows": [
+    {
+      "entry_id": "V3-GP-032",
+      "tla_symbols": ["FallthroughValid", "RelativeTarget", "NearCallPushPlan", "TargetWithinCurrentCode", "TentativeStackFault", "RetireTo"],
+      "lean_symbols": ["FallthroughEvidence.Valid", "resolveNearTarget", "planNearCallPush", "executeNearCall"],
+      "pairing_status": "projection-to-cpu-prototype-partial",
+      "authoritative_tla_gap": "No TLA concrete memory write/CPU commit transition, indirect-memory target read, CET path, or delivered fault outcome."
+    },
+    {
+      "entry_id": "V3-GP-033",
+      "tla_symbols": ["StackPushPlan", "TentativeStackFault"],
+      "lean_symbols": ["commitRealFarTarget", "executeFarCall"],
+      "pairing_status": "lean-cpu-prototype-unpaired",
+      "authoritative_tla_gap": "No far-pointer, CS update, real/v8086 far-call, protected descriptor/gate, or privilege transition in TLA+."
+    },
+    {
+      "entry_id": "V3-GP-054",
+      "tla_symbols": ["StackPushPlan", "TentativeStackFault"],
+      "lean_symbols": ["executeEnter"],
+      "pairing_status": "lean-cpu-prototype-unpaired",
+      "authoritative_tla_gap": "No TLA ENTER allocation, frame-pointer update, final access check, or nested-frame transition."
+    },
+    {
+      "entry_id": "V3-GP-060",
+      "tla_symbols": [],
+      "lean_symbols": [],
+      "pairing_status": "unmodeled",
+      "authoritative_tla_gap": "INT IDT lookup, gate checks, privilege change, frame construction, and delivery are absent."
+    },
+    {
+      "entry_id": "V3-GP-061",
+      "tla_symbols": [],
+      "lean_symbols": [],
+      "pairing_status": "unmodeled",
+      "authoritative_tla_gap": "INTO mode/OF selection and interrupt delivery are absent."
+    },
+    {
+      "entry_id": "V3-GP-062",
+      "tla_symbols": ["FallthroughValid", "RelativeTarget", "ConditionHolds", "JccPlan", "TargetWithinCurrentCode", "RetireTo"],
+      "lean_symbols": ["checkedJccPlan", "retireBranch"],
+      "pairing_status": "helper-paired",
+      "authoritative_tla_gap": "Validated-form dispatch, fetch, and delivered #GP transition are not composed into an instruction step."
+    },
+    {
+      "entry_id": "V3-GP-063",
+      "tla_symbols": ["FallthroughValid", "RelativeTarget", "CountIsZero", "JrCXZPlan"],
+      "lean_symbols": ["countIsZero", "planJrCXZ"],
+      "pairing_status": "helper-paired",
+      "authoritative_tla_gap": "Address-prefix form validation, target fault, fetch, and retirement composition remain absent."
+    },
+    {
+      "entry_id": "V3-GP-064",
+      "tla_symbols": ["RelativeTarget", "TargetWithinCurrentCode", "RetireTo"],
+      "lean_symbols": ["resolveNearTarget", "retireBranch"],
+      "pairing_status": "projection-to-cpu-prototype-partial",
+      "authoritative_tla_gap": "No TLA indirect register/memory operand transition or complete instruction-step composition."
+    },
+    {
+      "entry_id": "V3-GP-065",
+      "tla_symbols": ["TargetWithinCurrentCode", "RetireTo"],
+      "lean_symbols": ["commitRealFarTarget", "executeFarJump"],
+      "pairing_status": "lean-cpu-prototype-unpaired",
+      "authoritative_tla_gap": "No TLA far-pointer/CS transition, protected descriptor/gate/task transition, or fault delivery."
+    },
+    {
+      "entry_id": "V3-GP-067",
+      "tla_symbols": [],
+      "lean_symbols": ["AssumedSegmentProjection", "applyAssumedSegmentProjection"],
+      "pairing_status": "unpaired-assumed-projection",
+      "authoritative_tla_gap": "No raw far-pointer read, GPR write, descriptor-table derivation, validated cache transition, or delivered fault in TLA+. Lean accepts only an explicitly assumed projection."
+    },
+    {
+      "entry_id": "V3-GP-069",
+      "tla_symbols": ["StackPopPlan", "TentativeStackFault"],
+      "lean_symbols": ["executeLeave"],
+      "pairing_status": "lean-cpu-prototype-unpaired",
+      "authoritative_tla_gap": "No TLA rBP-to-rSP body, concrete memory pop, rBP write, or fault visibility transition."
+    },
+    {
+      "entry_id": "V3-GP-073",
+      "tla_symbols": ["FallthroughValid", "RelativeTarget", "DecrementCount", "LoopTaken", "LoopPlan"],
+      "lean_symbols": ["decrementCount", "loopTaken", "planLoop"],
+      "pairing_status": "helper-paired",
+      "authoritative_tla_gap": "Validated-form dispatch, fetch, target fault, and retirement composition remain absent."
+    },
+    {
+      "entry_id": "V3-GP-104",
+      "tla_symbols": ["StackOperandReady", "StackPopPlan"],
+      "lean_symbols": ["executeStackPop", "executePopGPR"],
+      "pairing_status": "projection-to-cpu-prototype-partial",
+      "authoritative_tla_gap": "No TLA concrete memory read, stack/GPR CPU body, alias ordering, next-IP composition, or delivered fault."
+    },
+    {
+      "entry_id": "V3-GP-105",
+      "tla_symbols": ["PopaOrder", "AllRegisterStackReady", "StackPopPlan", "TentativeStackFault"],
+      "lean_symbols": ["executePopSequence", "executePopa"],
+      "pairing_status": "projection-to-cpu-prototype-partial",
+      "authoritative_tla_gap": "TLA records order and single-pop planning only; it has no eight-read CPU transition or partial-fault semantics."
+    },
+    {
+      "entry_id": "V3-GP-107",
+      "tla_symbols": ["StackPopPlan", "FlagWritePermitted", "PopFlagBitWritable", "PopFlagImage"],
+      "lean_symbols": ["flagsAfterPop", "executePopFlags"],
+      "pairing_status": "projection-to-cpu-prototype-partial",
+      "authoritative_tla_gap": "TLA has the flag-image kernel but no concrete stack read, CPU body/next-IP composition, VME path, or delivered fault."
+    },
+    {
+      "entry_id": "V3-GP-110",
+      "tla_symbols": ["StackOperandReady", "StackPushPlan"],
+      "lean_symbols": ["executeStackPush", "executePushGPR", "executePushImmediate"],
+      "pairing_status": "projection-to-cpu-prototype-partial",
+      "authoritative_tla_gap": "No TLA concrete memory write, source-form dispatch, CPU body/next-IP composition, or delivered fault."
+    },
+    {
+      "entry_id": "V3-GP-111",
+      "tla_symbols": ["PushaOrder", "AllRegisterStackReady", "StackPushPlan", "TentativeStackFault"],
+      "lean_symbols": ["executePushSequence", "executePusha"],
+      "pairing_status": "projection-to-cpu-prototype-partial",
+      "authoritative_tla_gap": "TLA records order and single-push planning only; it has no eight-write CPU transition or partial-fault semantics."
+    },
+    {
+      "entry_id": "V3-GP-112",
+      "tla_symbols": ["StackPushPlan", "PushFlagImage"],
+      "lean_symbols": ["flagImage", "executePushFlags"],
+      "pairing_status": "projection-to-cpu-prototype-partial",
+      "authoritative_tla_gap": "TLA has the pushed-image kernel but no concrete stack write, CPU body/next-IP composition, VME path, or delivered fault."
+    },
+    {
+      "entry_id": "V3-GP-120",
+      "tla_symbols": ["StackPopPlan", "TargetWithinCurrentCode", "TentativeStackFault", "RetireTo"],
+      "lean_symbols": ["executeNearRet"],
+      "pairing_status": "projection-to-cpu-prototype-partial",
+      "authoritative_tla_gap": "No TLA concrete pop/read, imm16 cleanup, CET shadow-stack, CPU commit, or delivered fault transition."
+    },
+    {
+      "entry_id": "V3-GP-121",
+      "tla_symbols": ["StackPopPlan", "TentativeStackFault"],
+      "lean_symbols": ["commitRealFarTarget", "executeFarRet"],
+      "pairing_status": "lean-cpu-prototype-unpaired",
+      "authoritative_tla_gap": "No TLA far IP/CS pop sequence, CS transition, protected privilege return, CET, or delivered fault."
+    },
+    {
+      "entry_id": "V3-GP-148",
+      "tla_symbols": ["UndefinedOpcodeOutcome"],
+      "lean_symbols": ["executeUndefinedOpcode", "undefined_opcode_faults"],
+      "pairing_status": "fault-selection-paired",
+      "authoritative_tla_gap": "Invalid-opcode exception delivery state transition remains absent."
+    }
+  ]
+}
