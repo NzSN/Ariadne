@@ -38,6 +38,7 @@
 //! ```
 
 mod engine;
+pub mod llvm_mc;
 mod model;
 
 pub use engine::{Analyzer, analyze};

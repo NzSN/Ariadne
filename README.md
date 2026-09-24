@@ -9,9 +9,11 @@ they use.
 **Current status: Rust machine-analysis core and formal specifications.** The
 Rust library implements `Specs/Ariadne.tla`: local CFG recovery, may-reaching
 definitions, and backward data slicing from fixed adapter-supplied inputs.
+An optional [LLVM MC byte-span adapter](docs/llvm-mc-adapter.md) now supplies
+decoded control-flow summaries from caller-provided bytes. Binary/dump file
+readers, the analyzer CLI, and graph exporters have not been implemented.
 The separate native LLVM IR, abstract machine-state, and initial x86-64
-instruction-semantics models remain formal specifications. Readers, LLVM
-integration, the analyzer CLI, and graph exporters have not been implemented.
+instruction-semantics models remain formal specifications.
 
 The [immediate AMD64 milestone](docs/amd64-user64.md) is a verified 64-bit
 user-mode subset, starting with 49 register/immediate form cases and then near
@@ -31,9 +33,8 @@ effects, verified semantics and investigator output without requiring full AMD64
 coverage for useful partial analysis.
 
 The core uses **Rust 2024 and Cargo**, with no external crate dependencies.
-LLVM MC remains the intended instruction-decoding foundation for a future
-adapter; an LLVM release has not yet been selected or pinned. Instruction-effect
-summaries and memory-alias analysis require an additional semantic layer;
+The separate native decoder pins LLVM MC 20.1.2. Precise instruction-effect
+summaries and memory-alias analysis still require an additional semantic layer;
 decoder metadata alone does not provide the complete analysis.
 
 Build and test the Rust library from the repository root:
@@ -208,6 +209,7 @@ state transitions, invariants, and interpretation of partial results.
 | [src/engine.rs](src/engine.rs) | Executable implementation of `Specs/Ariadne.tla` |
 | [tests/](tests/) | Specification fixtures, transition checks, and independent generated-request oracles |
 | [docs/implementation.md](docs/implementation.md) | Rust API, model correspondence, and implementation boundaries |
+| [docs/llvm-mc-adapter.md](docs/llvm-mc-adapter.md) | Optional pinned decoder build, snapshot input contract, and validation |
 | [docs/machine-state-design.md](docs/machine-state-design.md) | Proposed Rust design for abstract machine-state propagation |
 | [docs/x86-64-semantics.md](docs/x86-64-semantics.md) | Supported x86-64 instruction rules, stateflow composition, and validation limits |
 | [mbt/README.md](mbt/README.md) | Mirrors/MirrorRust MBT setup, checked corpus, mutation gate, and evidence |

@@ -5,6 +5,11 @@ The `ariadne-analysis` package exports the `ariadne` Rust library. It implements
 standard library. The separate LLVM IR and abstract machine-state models do
 not yet have Rust implementations.
 
+The optional [LLVM MC byte-span adapter](llvm-mc-adapter.md) now constructs
+requests from caller-provided x86-64 bytes using a separate native decoder.
+The core's behavior and fixed-input specification are unchanged. Binary/dump
+file parsing and precise instruction-effect summaries remain separate work.
+
 ## Build and use
 
 The crate uses Rust 2024 with a declared minimum Rust version of 1.85. Validation
