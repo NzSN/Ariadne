@@ -26,6 +26,9 @@ profile hash. Register-core acceptance remains pending: its 49 paired bodies
 are recorded separately from its zero verified instruction steps. TLA+ stays
 authoritative and the
 [task list](docs/amd64-semantics-tasks.md) tracks the proof and implementation work.
+The [roadmap](ROADMAP.md) orders binary/dump input, CFG recovery, conservative
+effects, verified semantics and investigator output without requiring full AMD64
+coverage for useful partial analysis.
 
 The core uses **Rust 2024 and Cargo**, with no external crate dependencies.
 LLVM MC remains the intended instruction-decoding foundation for a future
