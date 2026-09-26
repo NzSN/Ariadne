@@ -1,6 +1,9 @@
 //! Snapshot byte spans to `AnalysisRequest` through the pinned native LLVM MC decoder.
 //! The native tool is an explicit dependency of this adapter, never of the core.
 
+mod prepare;
+pub(crate) mod protocol;
+
 use std::collections::{BTreeMap, BTreeSet};
 use std::error::Error;
 use std::fmt;
@@ -57,12 +60,12 @@ impl From<std::io::Error> for AdapterError {
     }
 }
 
-struct Decoded {
-    address: Address,
-    status: String,
-    length: u64,
-    kind: Option<InstructionKind>,
-    target: Option<Address>,
+pub(crate) struct Decoded {
+    pub(crate) address: Address,
+    pub(crate) status: String,
+    pub(crate) length: u64,
+    pub(crate) kind: Option<InstructionKind>,
+    pub(crate) target: Option<Address>,
 }
 
 fn decode_row(row: &str) -> Result<Decoded, AdapterError> {

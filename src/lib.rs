@@ -37,6 +37,7 @@
 //! # Ok::<(), ariadne::InvalidRequest>(())
 //! ```
 
+pub mod effects;
 mod engine;
 pub mod llvm_mc;
 mod model;

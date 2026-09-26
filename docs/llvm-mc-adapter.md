@@ -75,7 +75,7 @@ fallthrough. In the current `Ariadne.tla` vocabulary these are recorded as
 `decode-failed`, which includes unsupported instruction decoding. This first
 adapter does not certify instruction legality or exception delivery.
 
-No precise effects are claimed. Every successfully decoded instruction is
+For the legacy `to_request()` interface, no precise effects are claimed. Every successfully decoded instruction is
 summarized as possibly reading and writing **all caller-tracked locations**;
 `must_defs` is empty. Thus a decoded write cannot incorrectly kill an earlier
 origin, but slices may be much larger than necessary. Callers must choose a
@@ -108,3 +108,72 @@ The native integration fixtures exercise direct and conditional flow, calls,
 returns, indirect targets, truncated bytes, dump capture precedence, untrusted
 fallback, and opaque system/transactional control. They check the real LLVM
 decoder together with `AnalysisRequest` construction and the Rust analyzer.
+
+
+## Reviewed effect preparation
+
+`ByteSnapshot::prepare()` adds an opt-in path using structured LLVM operands
+and reviewed normal-continuation effect rules. Set `snapshot.locations` from
+`Catalogue.locations()`; a mismatch is rejected before decoding. The legacy
+`to_request()` path retains its coarse summaries and protocol 1 behavior.
+
+```rust
+use ariadne::effects::{Catalogue, PreparationOptions, PreparedAnalysis};
+use ariadne::llvm_mc::ByteSnapshot;
+use ariadne::analyze;
+use std::path::Path;
+
+let snapshot = ByteSnapshot {
+    snapshot_id: "snapshot-with-reviewed-effects".into(),
+    file_backed: [(0x1000, vec![0x48, 0x89, 0xd8]), // mov rax, rbx
+                  (0x1003, vec![0x48, 0x89, 0xc6]), // mov rsi, rax
+                  (0x1006, vec![0xc3])].into(),
+    entry_points: [0x1000].into(),
+    slice_seeds: [0x1003].into(),
+    locations: Catalogue.locations(),
+    ..ByteSnapshot::default()
+};
+let PreparedAnalysis { request, instructions, gaps, identity } =
+    snapshot.prepare(Path::new("target/ariadne-llvm-mc"),
+                     &PreparationOptions::default())?;
+let result = analyze(request)?;
+assert_eq!(result.state.slice, [0x1000, 0x1003].into());
+// Retain instructions, gaps and identity alongside result.
+# Ok::<(), Box<dyn std::error::Error>>(())
+```
+
+The catalogue has 137 disjoint locations: 128 GPR bytes, CF/PF/AF/ZF/SF/OF/DF,
+`memory:any`, and `state:other` for FP/vector/opmask application data/status.
+RIP and system/debug/control state, including RF/TF/IF, are outside the tracked
+vocabulary. Untracked state is not certified preserved. Effects concern normal
+long64 user-mode continuation with ordinary RAM and CET disabled, without
+exception-handler, asynchronous or concurrent-interference paths.
+
+The [rule matrix](Ariadne/operand-effects-rules.md) lists 137 exact LLVM opcode
+identities and additional shape/prefix restrictions. MOV, LEA, selected integer
+operations and branches gain useful GPR/flag effects. Memory uses one coarse
+alias cell; stores never kill all memory. Calls, RET and control-only CLC/STC
+remain opaque. Undefined flags retain an explicit annotation and conservative
+may-write. The new path uses a positive control registry: unknown control stops
+local discovery instead of inventing a fallthrough. This can discover fewer
+instructions than the legacy interface, with the reason retained as evidence.
+
+`PreparedAnalysis` exposes source bytes, provenance, normalized operands, raw
+LLVM observations, rule IDs, effect quality and preparation gaps. Core
+`scope_closed()` does not include these precision gaps. A gap can also describe
+an input candidate that the analyzer never visits; reports should distinguish
+candidate evidence from visited instructions.
+
+See [the protocol](Ariadne/operand-effects-protocol.md),
+[design](Ariadne/operand-effects-design.md), and
+[implementation plan](Ariadne/operand-effects-plan.md). Run all effects gates:
+
+```sh
+LLVM20_INCLUDE_DIR=/tmp/ariadne-llvm20/usr/include/llvm-20 \
+  python3 tools/check_effects.py
+```
+
+This runs core checks, both real native interfaces, the projection model,
+isolated effect mutations, core MBT and a small batch measurement. It requires
+prepared LLVM, TLA+ and MBT tools; none is an ordinary Cargo dependency. Full
+AMD64 instruction-step acceptance is unchanged by effect-rule delivery.

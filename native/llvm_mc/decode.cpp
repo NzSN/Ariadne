@@ -157,17 +157,64 @@ struct Decoder {
       std::cout << '-';
     std::cout << '\n';
   }
+
+  // V2 carries raw MC facts. Rust owns their interpretation as architectural
+  // operands/effects. The trailing v1 record retains the existing classifier.
+  void decode_v2(uint64_t address, const std::vector<uint8_t> &bytes) {
+    llvm::MCInst inst;
+    uint64_t size = 0;
+    std::string comments;
+    llvm::raw_string_ostream stream(comments);
+    analysis->resetState();
+    const auto status = disassembler->getInstruction(
+        inst, size, llvm::ArrayRef<uint8_t>(bytes), address, stream);
+    if (status != llvm::MCDisassembler::Success || size == 0 || size > bytes.size()) {
+      std::cout << "v2 - 0 0 0 0 0 ";
+      decode(address, bytes);
+      return;
+    }
+    const auto &desc = instructions->get(inst.getOpcode());
+    std::cout << "v2 " << instructions->getName(inst.getOpcode()).str()
+              << ' ' << inst.getNumOperands();
+    for (unsigned i = 0; i < inst.getNumOperands(); ++i) {
+      const auto &op = inst.getOperand(i);
+      if (op.isReg()) {
+        std::cout << " r:" << (op.getReg() ? registers->getName(op.getReg()) : "NONE");
+      } else if (op.isImm()) {
+        std::cout << " i:" << op.getImm();
+      } else {
+        std::cout << " x:unsupported";
+      }
+    }
+    std::cout << ' ' << desc.getNumDefs() << ' '
+              << (unsigned(desc.mayLoad()) | (unsigned(desc.mayStore()) << 1)
+                  | (unsigned(desc.hasUnmodeledSideEffects()) << 2));
+    std::cout << ' ' << desc.implicit_uses().size();
+    for (auto reg : desc.implicit_uses()) std::cout << ' ' << registers->getName(reg);
+    std::cout << ' ' << desc.implicit_defs().size();
+    for (auto reg : desc.implicit_defs()) std::cout << ' ' << registers->getName(reg);
+    // One tied-to index per raw operand; -1 means no descriptor tie.
+    for (unsigned i = 0; i < inst.getNumOperands(); ++i)
+      std::cout << ' ' << desc.getOperandConstraint(i, llvm::MCOI::TIED_TO);
+    std::cout << ' ';
+    decode(address, bytes);
+  }
 };
 
 }  // namespace
 
 int main(int argc, char **argv) {
+  if (argc == 2 && std::string(argv[1]) == "--protocol-version") {
+    std::cout << "ariadne-llvm-mc 20.1.2 protocol 2\n";
+    return 0;
+  }
   if (argc == 2 && std::string(argv[1]) == "--version") {
     std::cout << "ariadne-llvm-mc 20.1.2\n";
     return 0;
   }
-  if (argc != 1) {
-    std::cerr << "usage: ariadne-llvm-mc [--version]\n";
+  const bool v2 = argc == 2 && std::string(argv[1]) == "--protocol=2";
+  if (argc != 1 && !v2) {
+    std::cerr << "usage: ariadne-llvm-mc [--version|--protocol-version|--protocol=2]\n";
     return 2;
   }
   Decoder decoder;
@@ -186,7 +233,8 @@ int main(int argc, char **argv) {
       std::cerr << "invalid decoder input line\n";
       return 2;
     }
-    decoder.decode(address, bytes);
+    if (v2) decoder.decode_v2(address, bytes);
+    else decoder.decode(address, bytes);
   }
   return std::cin.bad() ? 2 : 0;
 }

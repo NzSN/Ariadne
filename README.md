@@ -10,7 +10,9 @@ they use.
 Rust library implements `Specs/Ariadne.tla`: local CFG recovery, may-reaching
 definitions, and backward data slicing from fixed adapter-supplied inputs.
 An optional [LLVM MC byte-span adapter](docs/llvm-mc-adapter.md) now supplies
-decoded control-flow summaries from caller-provided bytes. Binary/dump file
+decoded control-flow summaries from caller-provided bytes. Its new
+`ByteSnapshot::prepare()` interface adds structured operands, reviewed effects
+and per-site evidence for an [explicit rule registry](docs/Ariadne/operand-effects-rules.md). Binary/dump file
 readers, the analyzer CLI, and graph exporters have not been implemented.
 The separate native LLVM IR, abstract machine-state, and initial x86-64
 instruction-semantics models remain formal specifications.
@@ -33,9 +35,11 @@ effects, verified semantics and investigator output without requiring full AMD64
 coverage for useful partial analysis.
 
 The core uses **Rust 2024 and Cargo**, with no external crate dependencies.
-The separate native decoder pins LLVM MC 20.1.2. Precise instruction-effect
-summaries and memory-alias analysis still require an additional semantic layer;
-decoder metadata alone does not provide the complete analysis.
+The separate native decoder pins LLVM MC 20.1.2. Reviewed rules now provide
+byte-level GPR and flag effects for the scoped registry. Memory remains
+conservative, calls remain opaque, and broader effect coverage and precise
+alias analysis remain future work. Decoder metadata alone does not provide
+the complete analysis. See the [delivery evidence](docs/Ariadne/operand-effects-validation.md).
 
 Build and test the Rust library from the repository root:
 

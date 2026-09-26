@@ -1,0 +1,138 @@
+# bytes	LLVM MC 20.1.2 protocol-2 observation at VA 4096
+6681d30101	v2 ADC16ri 3 r:BX r:BX i:257 1 0 1 EFLAGS 1 EFLAGS -1 0 -1 4096 ok 5 ordinary -
+6683d3ff	v2 ADC16ri8 3 r:BX r:BX i:-1 1 0 1 EFLAGS 1 EFLAGS -1 0 -1 4096 ok 4 ordinary -
+6611d8	v2 ADC16rr 3 r:AX r:AX r:BX 1 0 1 EFLAGS 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+81d301010101	v2 ADC32ri 3 r:EBX r:EBX i:16843009 1 0 1 EFLAGS 1 EFLAGS -1 0 -1 4096 ok 6 ordinary -
+83d3ff	v2 ADC32ri8 3 r:EBX r:EBX i:-1 1 0 1 EFLAGS 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+11d8	v2 ADC32rr 3 r:EAX r:EAX r:EBX 1 0 1 EFLAGS 1 EFLAGS -1 0 -1 4096 ok 2 ordinary -
+4881d301010101	v2 ADC64ri32 3 r:RBX r:RBX i:16843009 1 0 1 EFLAGS 1 EFLAGS -1 0 -1 4096 ok 7 ordinary -
+4883d3ff	v2 ADC64ri8 3 r:RBX r:RBX i:-1 1 0 1 EFLAGS 1 EFLAGS -1 0 -1 4096 ok 4 ordinary -
+4811d8	v2 ADC64rr 3 r:RAX r:RAX r:RBX 1 0 1 EFLAGS 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+80d301	v2 ADC8ri 3 r:BL r:BL i:1 1 0 1 EFLAGS 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+10d8	v2 ADC8rr 3 r:AL r:AL r:BL 1 0 1 EFLAGS 1 EFLAGS -1 0 -1 4096 ok 2 ordinary -
+6681c30101	v2 ADD16ri 3 r:BX r:BX i:257 1 0 0 1 EFLAGS -1 0 -1 4096 ok 5 ordinary -
+6683c3ff	v2 ADD16ri8 3 r:BX r:BX i:-1 1 0 0 1 EFLAGS -1 0 -1 4096 ok 4 ordinary -
+6601d8	v2 ADD16rr 3 r:AX r:AX r:BX 1 0 0 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+81c301010101	v2 ADD32ri 3 r:EBX r:EBX i:16843009 1 0 0 1 EFLAGS -1 0 -1 4096 ok 6 ordinary -
+83c3ff	v2 ADD32ri8 3 r:EBX r:EBX i:-1 1 0 0 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+01d8	v2 ADD32rr 3 r:EAX r:EAX r:EBX 1 0 0 1 EFLAGS -1 0 -1 4096 ok 2 ordinary -
+4881c301010101	v2 ADD64ri32 3 r:RBX r:RBX i:16843009 1 0 0 1 EFLAGS -1 0 -1 4096 ok 7 ordinary -
+4883c3ff	v2 ADD64ri8 3 r:RBX r:RBX i:-1 1 0 0 1 EFLAGS -1 0 -1 4096 ok 4 ordinary -
+4801d8	v2 ADD64rr 3 r:RAX r:RAX r:RBX 1 0 0 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+80c301	v2 ADD8ri 3 r:BL r:BL i:1 1 0 0 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+00d8	v2 ADD8rr 3 r:AL r:AL r:BL 1 0 0 1 EFLAGS -1 0 -1 4096 ok 2 ordinary -
+6681e30101	v2 AND16ri 3 r:BX r:BX i:257 1 0 0 1 EFLAGS -1 0 -1 4096 ok 5 ordinary -
+6683e3ff	v2 AND16ri8 3 r:BX r:BX i:-1 1 0 0 1 EFLAGS -1 0 -1 4096 ok 4 ordinary -
+6621d8	v2 AND16rr 3 r:AX r:AX r:BX 1 0 0 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+81e301010101	v2 AND32ri 3 r:EBX r:EBX i:16843009 1 0 0 1 EFLAGS -1 0 -1 4096 ok 6 ordinary -
+83e3ff	v2 AND32ri8 3 r:EBX r:EBX i:-1 1 0 0 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+21d8	v2 AND32rr 3 r:EAX r:EAX r:EBX 1 0 0 1 EFLAGS -1 0 -1 4096 ok 2 ordinary -
+4881e301010101	v2 AND64ri32 3 r:RBX r:RBX i:16843009 1 0 0 1 EFLAGS -1 0 -1 4096 ok 7 ordinary -
+4883e3ff	v2 AND64ri8 3 r:RBX r:RBX i:-1 1 0 0 1 EFLAGS -1 0 -1 4096 ok 4 ordinary -
+4821d8	v2 AND64rr 3 r:RAX r:RAX r:RBX 1 0 0 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+80e301	v2 AND8ri 3 r:BL r:BL i:1 1 0 0 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+20d8	v2 AND8rr 3 r:AL r:AL r:BL 1 0 0 1 EFLAGS -1 0 -1 4096 ok 2 ordinary -
+ff10	v2 CALL64m 5 r:RAX i:1 r:NONE i:0 r:NONE 0 1 2 RSP SSP 0 -1 -1 -1 -1 -1 4096 ok 2 call -
+e802000000	v2 CALL64pcrel32 1 i:2 0 0 2 RSP SSP 0 -1 4096 ok 5 call 4103
+ffd0	v2 CALL64r 1 r:RAX 0 0 2 RSP SSP 0 -1 4096 ok 2 call -
+f8	v2 CLC 0 0 4 1 EFLAGS 1 EFLAGS 4096 ok 1 ordinary -
+6681fb0101	v2 CMP16ri 2 r:BX i:257 0 0 0 1 EFLAGS -1 -1 4096 ok 5 ordinary -
+6683fbff	v2 CMP16ri8 2 r:BX i:-1 0 0 0 1 EFLAGS -1 -1 4096 ok 4 ordinary -
+6639d8	v2 CMP16rr 2 r:AX r:BX 0 0 0 1 EFLAGS -1 -1 4096 ok 3 ordinary -
+81fb01010101	v2 CMP32ri 2 r:EBX i:16843009 0 0 0 1 EFLAGS -1 -1 4096 ok 6 ordinary -
+83fbff	v2 CMP32ri8 2 r:EBX i:-1 0 0 0 1 EFLAGS -1 -1 4096 ok 3 ordinary -
+39d8	v2 CMP32rr 2 r:EAX r:EBX 0 0 0 1 EFLAGS -1 -1 4096 ok 2 ordinary -
+4881fb01010101	v2 CMP64ri32 2 r:RBX i:16843009 0 0 0 1 EFLAGS -1 -1 4096 ok 7 ordinary -
+4883fbff	v2 CMP64ri8 2 r:RBX i:-1 0 0 0 1 EFLAGS -1 -1 4096 ok 4 ordinary -
+4839d8	v2 CMP64rr 2 r:RAX r:RBX 0 0 0 1 EFLAGS -1 -1 4096 ok 3 ordinary -
+80fb01	v2 CMP8ri 2 r:BL i:1 0 0 0 1 EFLAGS -1 -1 4096 ok 3 ordinary -
+38d8	v2 CMP8rr 2 r:AL r:BL 0 0 0 1 EFLAGS -1 -1 4096 ok 2 ordinary -
+66ffc8	v2 DEC16r 2 r:AX r:AX 1 0 0 1 EFLAGS -1 0 4096 ok 3 ordinary -
+ffc8	v2 DEC32r 2 r:EAX r:EAX 1 0 0 1 EFLAGS -1 0 4096 ok 2 ordinary -
+48ffc8	v2 DEC64r 2 r:RAX r:RAX 1 0 0 1 EFLAGS -1 0 4096 ok 3 ordinary -
+fec8	v2 DEC8r 2 r:AL r:AL 1 0 0 1 EFLAGS -1 0 4096 ok 2 ordinary -
+66ffc0	v2 INC16r 2 r:AX r:AX 1 0 0 1 EFLAGS -1 0 4096 ok 3 ordinary -
+ffc0	v2 INC32r 2 r:EAX r:EAX 1 0 0 1 EFLAGS -1 0 4096 ok 2 ordinary -
+48ffc0	v2 INC64r 2 r:RAX r:RAX 1 0 0 1 EFLAGS -1 0 4096 ok 3 ordinary -
+fec0	v2 INC8r 2 r:AL r:AL 1 0 0 1 EFLAGS -1 0 4096 ok 2 ordinary -
+7502	v2 JCC_1 2 i:2 i:5 0 0 1 EFLAGS 0 -1 -1 4096 ok 2 conditional 4100
+0f8502000000	v2 JCC_4 2 i:2 i:5 0 0 1 EFLAGS 0 -1 -1 4096 ok 6 conditional 4104
+ff20	v2 JMP64m 5 r:RAX i:1 r:NONE i:0 r:NONE 0 1 0 0 -1 -1 -1 -1 -1 4096 ok 2 indirect -
+ffe0	v2 JMP64r 1 r:RAX 0 0 0 0 -1 4096 ok 2 indirect -
+eb02	v2 JMP_1 1 i:2 0 0 0 0 -1 4096 ok 2 jump 4100
+e902000000	v2 JMP_4 1 i:2 0 0 0 0 -1 4096 ok 5 jump 4103
+668d4308	v2 LEA16r 6 r:AX r:RBX i:1 r:NONE i:8 r:NONE 1 0 0 0 -1 -1 -1 -1 -1 -1 4096 ok 4 ordinary -
+8d4308	v2 LEA64_32r 6 r:EAX r:RBX i:1 r:NONE i:8 r:NONE 1 0 0 0 -1 -1 -1 -1 -1 -1 4096 ok 3 ordinary -
+488d4308	v2 LEA64r 6 r:RAX r:RBX i:1 r:NONE i:8 r:NONE 1 0 0 0 -1 -1 -1 -1 -1 -1 4096 ok 4 ordinary -
+66894308	v2 MOV16mr 6 r:RBX i:1 r:NONE i:8 r:NONE r:AX 0 2 0 0 -1 -1 -1 -1 -1 -1 4096 ok 4 ordinary -
+66b80100	v2 MOV16ri 2 r:AX i:1 1 0 0 0 -1 -1 4096 ok 4 ordinary -
+668b4308	v2 MOV16rm 6 r:AX r:RBX i:1 r:NONE i:8 r:NONE 1 1 0 0 -1 -1 -1 -1 -1 -1 4096 ok 4 ordinary -
+6689d8	v2 MOV16rr 2 r:AX r:BX 1 0 0 0 -1 -1 4096 ok 3 ordinary -
+894308	v2 MOV32mr 6 r:RBX i:1 r:NONE i:8 r:NONE r:EAX 0 2 0 0 -1 -1 -1 -1 -1 -1 4096 ok 3 ordinary -
+b801000000	v2 MOV32ri 2 r:EAX i:1 1 0 0 0 -1 -1 4096 ok 5 ordinary -
+8b4308	v2 MOV32rm 6 r:EAX r:RBX i:1 r:NONE i:8 r:NONE 1 1 0 0 -1 -1 -1 -1 -1 -1 4096 ok 3 ordinary -
+89d8	v2 MOV32rr 2 r:EAX r:EBX 1 0 0 0 -1 -1 4096 ok 2 ordinary -
+48894308	v2 MOV64mr 6 r:RBX i:1 r:NONE i:8 r:NONE r:RAX 0 2 0 0 -1 -1 -1 -1 -1 -1 4096 ok 4 ordinary -
+48b80100000000000000	v2 MOV64ri 2 r:RAX i:1 1 0 0 0 -1 -1 4096 ok 10 ordinary -
+48c7c0ffffffff	v2 MOV64ri32 2 r:RAX i:-1 1 0 0 0 -1 -1 4096 ok 7 ordinary -
+488b4308	v2 MOV64rm 6 r:RAX r:RBX i:1 r:NONE i:8 r:NONE 1 1 0 0 -1 -1 -1 -1 -1 -1 4096 ok 4 ordinary -
+4889d8	v2 MOV64rr 2 r:RAX r:RBX 1 0 0 0 -1 -1 4096 ok 3 ordinary -
+884308	v2 MOV8mr 6 r:RBX i:1 r:NONE i:8 r:NONE r:AL 0 2 0 0 -1 -1 -1 -1 -1 -1 4096 ok 3 ordinary -
+b001	v2 MOV8ri 2 r:AL i:1 1 0 0 0 -1 -1 4096 ok 2 ordinary -
+8a4308	v2 MOV8rm 6 r:AL r:RBX i:1 r:NONE i:8 r:NONE 1 1 0 0 -1 -1 -1 -1 -1 -1 4096 ok 3 ordinary -
+88d8	v2 MOV8rr 2 r:AL r:BL 1 0 0 0 -1 -1 4096 ok 2 ordinary -
+90	v2 NOOP 0 0 0 0 0 4096 ok 1 ordinary -
+6681cb0101	v2 OR16ri 3 r:BX r:BX i:257 1 0 0 1 EFLAGS -1 0 -1 4096 ok 5 ordinary -
+6683cbff	v2 OR16ri8 3 r:BX r:BX i:-1 1 0 0 1 EFLAGS -1 0 -1 4096 ok 4 ordinary -
+6609d8	v2 OR16rr 3 r:AX r:AX r:BX 1 0 0 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+81cb01010101	v2 OR32ri 3 r:EBX r:EBX i:16843009 1 0 0 1 EFLAGS -1 0 -1 4096 ok 6 ordinary -
+83cbff	v2 OR32ri8 3 r:EBX r:EBX i:-1 1 0 0 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+09d8	v2 OR32rr 3 r:EAX r:EAX r:EBX 1 0 0 1 EFLAGS -1 0 -1 4096 ok 2 ordinary -
+4881cb01010101	v2 OR64ri32 3 r:RBX r:RBX i:16843009 1 0 0 1 EFLAGS -1 0 -1 4096 ok 7 ordinary -
+4883cbff	v2 OR64ri8 3 r:RBX r:RBX i:-1 1 0 0 1 EFLAGS -1 0 -1 4096 ok 4 ordinary -
+4809d8	v2 OR64rr 3 r:RAX r:RAX r:RBX 1 0 0 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+80cb01	v2 OR8ri 3 r:BL r:BL i:1 1 0 0 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+08d8	v2 OR8rr 3 r:AL r:AL r:BL 1 0 0 1 EFLAGS -1 0 -1 4096 ok 2 ordinary -
+c3	v2 RET64 0 0 4 0 0 4096 ok 1 return -
+6681db0101	v2 SBB16ri 3 r:BX r:BX i:257 1 0 1 EFLAGS 1 EFLAGS -1 0 -1 4096 ok 5 ordinary -
+6683dbff	v2 SBB16ri8 3 r:BX r:BX i:-1 1 0 1 EFLAGS 1 EFLAGS -1 0 -1 4096 ok 4 ordinary -
+6619d8	v2 SBB16rr 3 r:AX r:AX r:BX 1 0 1 EFLAGS 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+81db01010101	v2 SBB32ri 3 r:EBX r:EBX i:16843009 1 0 1 EFLAGS 1 EFLAGS -1 0 -1 4096 ok 6 ordinary -
+83dbff	v2 SBB32ri8 3 r:EBX r:EBX i:-1 1 0 1 EFLAGS 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+19d8	v2 SBB32rr 3 r:EAX r:EAX r:EBX 1 0 1 EFLAGS 1 EFLAGS -1 0 -1 4096 ok 2 ordinary -
+4881db01010101	v2 SBB64ri32 3 r:RBX r:RBX i:16843009 1 0 1 EFLAGS 1 EFLAGS -1 0 -1 4096 ok 7 ordinary -
+4883dbff	v2 SBB64ri8 3 r:RBX r:RBX i:-1 1 0 1 EFLAGS 1 EFLAGS -1 0 -1 4096 ok 4 ordinary -
+4819d8	v2 SBB64rr 3 r:RAX r:RAX r:RBX 1 0 1 EFLAGS 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+80db01	v2 SBB8ri 3 r:BL r:BL i:1 1 0 1 EFLAGS 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+18d8	v2 SBB8rr 3 r:AL r:AL r:BL 1 0 1 EFLAGS 1 EFLAGS -1 0 -1 4096 ok 2 ordinary -
+f9	v2 STC 0 0 4 1 EFLAGS 1 EFLAGS 4096 ok 1 ordinary -
+6681eb0101	v2 SUB16ri 3 r:BX r:BX i:257 1 0 0 1 EFLAGS -1 0 -1 4096 ok 5 ordinary -
+6683ebff	v2 SUB16ri8 3 r:BX r:BX i:-1 1 0 0 1 EFLAGS -1 0 -1 4096 ok 4 ordinary -
+6629d8	v2 SUB16rr 3 r:AX r:AX r:BX 1 0 0 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+81eb01010101	v2 SUB32ri 3 r:EBX r:EBX i:16843009 1 0 0 1 EFLAGS -1 0 -1 4096 ok 6 ordinary -
+83ebff	v2 SUB32ri8 3 r:EBX r:EBX i:-1 1 0 0 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+29d8	v2 SUB32rr 3 r:EAX r:EAX r:EBX 1 0 0 1 EFLAGS -1 0 -1 4096 ok 2 ordinary -
+4881eb01010101	v2 SUB64ri32 3 r:RBX r:RBX i:16843009 1 0 0 1 EFLAGS -1 0 -1 4096 ok 7 ordinary -
+4883ebff	v2 SUB64ri8 3 r:RBX r:RBX i:-1 1 0 0 1 EFLAGS -1 0 -1 4096 ok 4 ordinary -
+4829d8	v2 SUB64rr 3 r:RAX r:RAX r:RBX 1 0 0 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+80eb01	v2 SUB8ri 3 r:BL r:BL i:1 1 0 0 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+28d8	v2 SUB8rr 3 r:AL r:AL r:BL 1 0 0 1 EFLAGS -1 0 -1 4096 ok 2 ordinary -
+66f7c30101	v2 TEST16ri 2 r:BX i:257 0 0 0 1 EFLAGS -1 -1 4096 ok 5 ordinary -
+6685d8	v2 TEST16rr 2 r:AX r:BX 0 0 0 1 EFLAGS -1 -1 4096 ok 3 ordinary -
+f7c301010101	v2 TEST32ri 2 r:EBX i:16843009 0 0 0 1 EFLAGS -1 -1 4096 ok 6 ordinary -
+85d8	v2 TEST32rr 2 r:EAX r:EBX 0 0 0 1 EFLAGS -1 -1 4096 ok 2 ordinary -
+48f7c301010101	v2 TEST64ri32 2 r:RBX i:16843009 0 0 0 1 EFLAGS -1 -1 4096 ok 7 ordinary -
+4885d8	v2 TEST64rr 2 r:RAX r:RBX 0 0 0 1 EFLAGS -1 -1 4096 ok 3 ordinary -
+f6c301	v2 TEST8ri 2 r:BL i:1 0 0 0 1 EFLAGS -1 -1 4096 ok 3 ordinary -
+84d8	v2 TEST8rr 2 r:AL r:BL 0 0 0 1 EFLAGS -1 -1 4096 ok 2 ordinary -
+6681f30101	v2 XOR16ri 3 r:BX r:BX i:257 1 0 0 1 EFLAGS -1 0 -1 4096 ok 5 ordinary -
+6683f3ff	v2 XOR16ri8 3 r:BX r:BX i:-1 1 0 0 1 EFLAGS -1 0 -1 4096 ok 4 ordinary -
+6631d8	v2 XOR16rr 3 r:AX r:AX r:BX 1 0 0 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+81f301010101	v2 XOR32ri 3 r:EBX r:EBX i:16843009 1 0 0 1 EFLAGS -1 0 -1 4096 ok 6 ordinary -
+83f3ff	v2 XOR32ri8 3 r:EBX r:EBX i:-1 1 0 0 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+31d8	v2 XOR32rr 3 r:EAX r:EAX r:EBX 1 0 0 1 EFLAGS -1 0 -1 4096 ok 2 ordinary -
+4881f301010101	v2 XOR64ri32 3 r:RBX r:RBX i:16843009 1 0 0 1 EFLAGS -1 0 -1 4096 ok 7 ordinary -
+4883f3ff	v2 XOR64ri8 3 r:RBX r:RBX i:-1 1 0 0 1 EFLAGS -1 0 -1 4096 ok 4 ordinary -
+4831d8	v2 XOR64rr 3 r:RAX r:RAX r:RBX 1 0 0 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+80f301	v2 XOR8ri 3 r:BL r:BL i:1 1 0 0 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
+30d8	v2 XOR8rr 3 r:AL r:AL r:BL 1 0 0 1 EFLAGS -1 0 -1 4096 ok 2 ordinary -

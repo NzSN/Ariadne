@@ -13,7 +13,11 @@ The Rust core already recovers a local instruction-level CFG, computes
 may-reaching definitions, and builds a backward data slice from fixed,
 adapter-supplied instruction summaries. An optional pinned LLVM MC adapter
 decodes caller-provided byte spans and supplies conservative control-flow
-summaries. Binary/dump file readers are still pending. The LLVM IR path and
+summaries. `ByteSnapshot::prepare()` now adds structured operands and reviewed
+normal-continuation effects for an explicit 137-opcode registry, with byte-level
+GPR aliases, coarse memory and per-site gaps; see the
+[delivery record](docs/Ariadne/operand-effects-validation.md). Binary/dump file
+readers are still pending. The LLVM IR path and
 abstract machine-state propagation are formal specifications without Rust
 implementations.
 
@@ -33,7 +37,7 @@ remaining obligations.
 | --- | --- | --- |
 | 1. Input and decode | The pinned LLVM MC byte-span adapter is delivered; binary and dump readers must provide one immutable address-space snapshot, VA mapping, and verified byte provenance. | The same known bytes decode consistently from binary and dump views; missing or conflicting bytes remain explicit. VAs are never confused with file offsets. |
 | 2. Control-flow recovery | Translate decoded control transfers into the core's instruction kinds, direct targets, fallthroughs, calls, returns, and unresolved-edge obligations. | End-to-end binary and dump fixtures exercise direct branches, calls, returns, sparse bytes, and indirect branches. Every edge has source instruction evidence; unresolved targets are visible, not silently omitted. |
-| 3. Conservative effects | Supply `uses`, `may_defs`, and justified `must_defs` for the reaching-definitions and slicing core. Start with decoded operand and instruction metadata, then add reviewed rules for important register, flag, stack, and memory effects. | Slices retain every possible origin in representative crash paths. An unknown effect cannot become a definite overwrite, a no-op, or a known successor. Alias and call-summary assumptions are recorded. |
+| 3. Conservative effects | Initial scoped rules and evidence are delivered; broader forms and precise aliasing remain. Supply `uses`, `may_defs`, and justified `must_defs` for the reaching-definitions and slicing core. Start with decoded operand and instruction metadata, then add reviewed rules for important register, flag, stack, and memory effects. | Slices retain every possible origin in representative crash paths. An unknown effect cannot become a definite overwrite, a no-op, or a known successor. Alias and call-summary assumptions are recorded. |
 | 4. Verified precision | Close the existing `register-core` profile gate, then advance `near-control-stack` and `ram-data` case by case. Connect accepted semantics to effect summaries and, where justified, branch feasibility or indirect-target reasoning. | Each promoted case has source-bound TLA+ and Lean evidence for legality, payload, effects, frames, faults, instruction boundary, correspondence, and conservative analysis projection. The selected milestone gate passes. |
 | 5. Investigator output | Expose annotated instructions, graph edges, slice origins, and unresolved obligations through a CLI and stable exports suitable for SVG rendering. | A crash-analysis fixture can be reproduced from a pinned snapshot, and each displayed conclusion links to its bytes, decoded instruction, and semantic evidence or uncertainty reason. |
 
