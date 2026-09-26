@@ -204,6 +204,10 @@ struct Decoder {
 }  // namespace
 
 int main(int argc, char **argv) {
+  if (argc == 2 && std::string(argv[1]) == "--protocol-version=linux") {
+    std::cout << "ariadne-llvm-mc 20.1.2 protocol 2 target x86_64-unknown-linux-gnu\n";
+    return 0;
+  }
   if (argc == 2 && std::string(argv[1]) == "--protocol-version") {
     std::cout << "ariadne-llvm-mc 20.1.2 protocol 2\n";
     return 0;
@@ -212,12 +216,14 @@ int main(int argc, char **argv) {
     std::cout << "ariadne-llvm-mc 20.1.2\n";
     return 0;
   }
-  const bool v2 = argc == 2 && std::string(argv[1]) == "--protocol=2";
+  const bool linux_target = argc == 2 && std::string(argv[1]) == "--protocol=2-linux";
+  const bool v2 = linux_target || (argc == 2 && std::string(argv[1]) == "--protocol=2");
   if (argc != 1 && !v2) {
-    std::cerr << "usage: ariadne-llvm-mc [--version|--protocol-version|--protocol=2]\n";
+    std::cerr << "usage: ariadne-llvm-mc [--version|--protocol-version[=linux]|--protocol=2[-linux]]\n";
     return 2;
   }
   Decoder decoder;
+  if (linux_target) decoder.triple = llvm::Triple("x86_64-unknown-linux-gnu");
   if (!decoder.initialize()) {
     std::cerr << "LLVM MC initialization failed\n";
     return 2;

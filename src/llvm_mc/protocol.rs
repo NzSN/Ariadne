@@ -115,16 +115,31 @@ fn exchange(path: &Path, arg: &str, input: String, cap: usize) -> Result<String,
     String::from_utf8(output).map_err(|_| error("non-UTF-8 decoder output"))
 }
 
-pub(crate) fn invoke(path: &Path, input: String, count: usize) -> Result<Vec<Raw>, AdapterError> {
-    if exchange(path, "--protocol-version", String::new(), 128)?
-        != "ariadne-llvm-mc 20.1.2 protocol 2\n"
-    {
+pub(crate) fn invoke(
+    path: &Path,
+    input: String,
+    count: usize,
+    target: super::DecoderTarget,
+) -> Result<Vec<Raw>, AdapterError> {
+    let (version_arg, decode_arg, expected) = match target {
+        super::DecoderTarget::WindowsAmd64 => (
+            "--protocol-version",
+            "--protocol=2",
+            "ariadne-llvm-mc 20.1.2 protocol 2\n",
+        ),
+        super::DecoderTarget::LinuxAmd64 => (
+            "--protocol-version=linux",
+            "--protocol=2-linux",
+            "ariadne-llvm-mc 20.1.2 protocol 2 target x86_64-unknown-linux-gnu\n",
+        ),
+    };
+    if exchange(path, version_arg, String::new(), 128)? != expected {
         return Err(error("expected LLVM 20.1.2 protocol 2"));
     }
     let cap = count
         .checked_mul(MAX_RECORD)
         .ok_or_else(|| error("batch too large"))?;
-    let output = exchange(path, "--protocol=2", input, cap)?;
+    let output = exchange(path, decode_arg, input, cap)?;
     if !output.is_empty() && !output.ends_with('\n') {
         return Err(error("unterminated record"));
     }

@@ -12,8 +12,10 @@ definitions, and backward data slicing from fixed adapter-supplied inputs.
 An optional [LLVM MC byte-span adapter](docs/llvm-mc-adapter.md) now supplies
 decoded control-flow summaries from caller-provided bytes. Its new
 `ByteSnapshot::prepare()` interface adds structured operands, reviewed effects
-and per-site evidence for an [explicit rule registry](docs/Ariadne/operand-effects-rules.md). Binary/dump file
-readers, the analyzer CLI, and graph exporters have not been implemented.
+and per-site evidence for an [explicit rule registry](docs/Ariadne/operand-effects-rules.md).
+The separate [minidump input package](input/README.md) now reads Windows/Linux
+AMD64 captures and discovers local instruction starts. PE/ELF image readers,
+ELF core readers, the analyzer CLI, and graph exporters remain pending.
 The separate native LLVM IR, abstract machine-state, and initial x86-64
 instruction-semantics models remain formal specifications.
 

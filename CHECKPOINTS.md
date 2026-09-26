@@ -1,7 +1,7 @@
 # Ariadne checkpoints
 
-Recorded on **2026-09-26 (Asia/Shanghai)** against HEAD **`fb7f142`**,
-with the operand/effects implementation now delivered as an uncommitted working-tree change.
+Recorded on **2026-09-26 (Asia/Shanghai)** against HEAD **`aee833f`**,
+with minidump input delivered as an uncommitted working-tree change.
 Dates in the flow below are commit dates; validation dates are stated separately.
 
 ```mermaid
@@ -13,8 +13,9 @@ flowchart TD
     E["2026-09-22 · 9a21901<br/>AMD64 foundations and scoped user64 acceptance gates"]
     F["2026-09-24 · 6fbfbd9<br/>Staged delivery roadmap"]
     G["2026-09-24 · fb7f142<br/>Pinned LLVM MC byte-span adapter · current HEAD"]
-    H["2026-09-26 · working tree<br/>Structured operands and reviewed conservative effects"]
-    A --> B --> C --> D --> E --> F --> G --> H
+    H["2026-09-26 · aee833f<br/>Structured operands and reviewed conservative effects"]
+    I["2026-09-26 · working tree<br/>Windows/Linux AMD64 minidump input"]
+    A --> B --> C --> D --> E --> F --> G --> H --> I
 ```
 
 ## Current delivery checkpoint
@@ -39,7 +40,8 @@ for 137 exact LLVM opcode identities, byte-level register aliases, and per-site
 evidence. Memory remains coarse and calls remain opaque. See the
 [effect validation record](docs/Ariadne/operand-effects-validation.md).
 
-Binary/dump file readers, broader effect coverage and precise alias analysis,
+Windows/Linux AMD64 minidump input is delivered in [input/](input/README.md).
+PE/ELF image and ELF core readers, broader effect coverage and precise alias analysis,
 Rust abstract machine-state propagation, the native LLVM IR analysis implementation, the
 analyzer CLI, and graph exporters remain pending. The AMD64 formal library is
 not yet integrated into the Rust runtime.
@@ -80,7 +82,7 @@ ran its focused TLA+ gate and the existing core MBT gate successfully.
 ```mermaid
 flowchart TD
     A["Delivered: byte-span decoding and Rust analysis core"]
-    B["Pending: binary/dump readers and snapshot provenance"]
+    B["Minidump reader delivered<br/>PE/ELF images and ELF cores pending"]
     C["Pending: end-to-end binary/dump CFG fixtures"]
     D["Initial reviewed effects delivered<br/>Broader rules and precise aliasing pending"]
     E["Pending: verified precision<br/>register-core → near-control-stack → ram-data"]
@@ -120,3 +122,21 @@ TLA+/Lean correspondence, and conservative analysis-projection obligations.
 [Implementation plan](docs/Ariadne/operand-effects-plan.md),
 [rule matrix](docs/Ariadne/operand-effects-rules.md),
 [validation and limitations](docs/Ariadne/operand-effects-validation.md).
+
+
+## 2026-09-26 — Minidump-only delivery
+
+The separate `ariadne-input` package reads Windows/Linux AMD64 minidumps,
+indexes MemoryList/Memory64List/thread-stack capture, retains mapping and
+context evidence, and prepares local instruction starts automatically. Captured
+conflicts and holes stay explicit; no image fallback is enabled. The existing
+engine remains unchanged. PE/ELF images and ELF cores are still design-only.
+
+Linux and Windows target negotiation now shares the reviewed effect pipeline.
+Local-only materialization preserves original roots, keeps seeds separate, and
+returns an error rather than a partial request if resource limits are exhausted.
+
+See [minidump usage](input/README.md) and
+[the source-bound validation record](docs/Ariadne/minidump-validation.md).
+No commit or push was performed for this delivery. Unrelated Lean moves/deletions
+in the working tree were preserved.

@@ -327,3 +327,98 @@ impl ByteSnapshot {
         Ok(request)
     }
 }
+
+/// Decoder profile records target OS without importing calling-convention claims.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum DecoderTarget {
+    WindowsAmd64,
+    LinuxAmd64,
+}
+impl DecoderTarget {
+    pub fn triple(self) -> &'static str {
+        match self {
+            Self::WindowsAmd64 => "x86_64-pc-windows-msvc",
+            Self::LinuxAmd64 => "x86_64-unknown-linux-gnu",
+        }
+    }
+}
+
+/// One explicitly requested candidate. Referenced successors are not implicitly
+/// included; an input materializer decides which prefixes to acquire next.
+#[derive(Clone, Debug)]
+pub struct PreparedSite {
+    pub instruction: Instruction,
+    pub evidence: crate::effects::InstructionEvidence,
+    pub gaps: Vec<crate::effects::PreparationGap>,
+    pub decodable: bool,
+    pub complete_capture: bool,
+}
+#[derive(Clone, Debug)]
+pub struct PreparedBatch {
+    pub sites: BTreeMap<Address, PreparedSite>,
+    pub identity: crate::effects::PreparationIdentity,
+}
+
+/// Shared bounded-batch seam for captured-memory providers. None means no
+/// available prefix; Some must contain 1..15 bytes. No Analyzer is run here.
+/// The candidate set is used only to validate preparation's finite input domain;
+/// it does not turn candidates into entry roots of the eventual analysis.
+pub fn prepare_captured_batch(
+    snapshot_id: &str,
+    candidates: &BTreeMap<Address, Option<Vec<u8>>>,
+    decoder: &Path,
+    options: &crate::effects::PreparationOptions,
+    target: DecoderTarget,
+) -> Result<PreparedBatch, AdapterError> {
+    if candidates.is_empty()
+        || candidates
+            .values()
+            .flatten()
+            .any(|b| b.is_empty() || b.len() > 15)
+    {
+        return Err(AdapterError::InvalidInput(
+            "batch must have candidates with absent or 1..15-byte prefixes".into(),
+        ));
+    }
+    let snapshot = ByteSnapshot {
+        snapshot_id: snapshot_id.into(),
+        input_kind: InputKind::Dump,
+        captured: candidates
+            .iter()
+            .filter_map(|(a, b)| b.as_ref().map(|b| (*a, b.clone())))
+            .collect(),
+        entry_points: candidates.keys().copied().collect(),
+        locations: options.catalogue.locations(),
+        ..ByteSnapshot::default()
+    };
+    let mut prepared = snapshot.prepare_with_target(decoder, options, target)?;
+    let mut sites = BTreeMap::new();
+    for &address in candidates.keys() {
+        sites.insert(
+            address,
+            PreparedSite {
+                instruction: prepared
+                    .request
+                    .instructions
+                    .remove(&address)
+                    .expect("total domain"),
+                evidence: prepared
+                    .instructions
+                    .remove(&address)
+                    .expect("candidate evidence"),
+                gaps: prepared
+                    .gaps
+                    .iter()
+                    .filter(|g| g.address == address)
+                    .cloned()
+                    .collect(),
+                decodable: prepared.request.decodable.contains(&address),
+                complete_capture: prepared.request.captured.contains(&address),
+            },
+        );
+    }
+    Ok(PreparedBatch {
+        sites,
+        identity: prepared.identity,
+    })
+}

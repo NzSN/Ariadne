@@ -52,3 +52,21 @@ The checked observations for all 137 admitted opcode identities are frozen in
 changes in decoder layouts. The tests also separately assert architectural
 read/write expectations and resulting analysis behavior. Updating snapshots
 alone cannot justify a semantic change.
+
+
+## Explicit Linux target profile
+
+The legacy flags above retain the Windows AMD64 target. A Linux request uses
+`--protocol-version=linux`, requiring exactly:
+
+```text
+ariadne-llvm-mc 20.1.2 protocol 2 target x86_64-unknown-linux-gnu
+```
+
+Decode with `--protocol=2-linux`. The row grammar is unchanged. The Rust
+`prepare_with_target()` method and `prepare_captured_batch()` seam record the
+selected target triple in `PreparationIdentity`; default `prepare()` remains
+Windows-compatible. Minidump input selects the target from validated platform
+metadata. Calls remain opaque under both profiles; no ABI preservation rules
+are inferred. The input native gate exercises the full frozen opcode registry
+under both targets.

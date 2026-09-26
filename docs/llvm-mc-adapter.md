@@ -10,8 +10,9 @@ slice engine. No LLVM code is linked into the Rust crate; its offline build and
 This is a byte-span adapter. It does **not** open a PE/ELF binary or crash dump,
 map VAs to file offsets, validate image identity, or prove that a supplied span
 is from the stated snapshot. Binary/dump readers must establish those facts
-before populating `ByteSnapshot`. The planned file readers and analyzer CLI are
-separate roadmap work.
+before populating `ByteSnapshot`. The [separate minidump package](../input/README.md) now supplies captured
+memory and local instruction-start discovery. PE/ELF image readers, ELF core
+readers and the analyzer CLI remain separate roadmap work.
 
 ## Build and check
 
@@ -177,3 +178,14 @@ This runs core checks, both real native interfaces, the projection model,
 isolated effect mutations, core MBT and a small batch measurement. It requires
 prepared LLVM, TLA+ and MBT tools; none is an ordinary Cargo dependency. Full
 AMD64 instruction-step acceptance is unchanged by effect-rule delivery.
+
+
+The reader integration uses `prepare_captured_batch()` as a public seam. It
+returns only explicitly requested candidate results and a preparation identity;
+referenced targets are not silently turned into roots. It shares the existing
+normalization/effect implementation rather than duplicating ISA rules. Each
+candidate carries decodability and complete-capture status as well as its
+instruction, evidence and gaps. The batch's temporary root set is solely for
+validating preparation's finite domain; the eventual analysis uses the caller's
+original roots. Explicit `DecoderTarget` selection keeps Linux captures out of
+the legacy Windows-only profile.

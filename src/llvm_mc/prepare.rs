@@ -13,6 +13,16 @@ impl ByteSnapshot {
         decoder: &Path,
         options: &PreparationOptions,
     ) -> Result<PreparedAnalysis, AdapterError> {
+        self.prepare_with_target(decoder, options, super::DecoderTarget::WindowsAmd64)
+    }
+
+    /// Prepare with an explicit target, independent of the analysis host OS.
+    pub fn prepare_with_target(
+        &self,
+        decoder: &Path,
+        options: &PreparationOptions,
+        target: super::DecoderTarget,
+    ) -> Result<PreparedAnalysis, AdapterError> {
         if self.locations != options.catalogue.locations() {
             return Err(AdapterError::InvalidInput(
                 "locations must exactly match the effects catalogue".into(),
@@ -74,7 +84,7 @@ impl ByteSnapshot {
             .iter()
             .map(|(a, (bytes, _))| format!("{a} {}\n", hex(bytes)))
             .collect();
-        let rows = protocol::invoke(decoder, input, selected.len())?;
+        let rows = protocol::invoke(decoder, input, selected.len(), target)?;
         let mut instructions = BTreeMap::new();
         let mut gaps = Vec::new();
         let mut seen = BTreeSet::new();
@@ -236,6 +246,7 @@ impl ByteSnapshot {
             instructions,
             gaps,
             identity: PreparationIdentity {
+                target: target.triple().into(),
                 decoder: "LLVM MC 20.1.2".into(),
                 protocol: 2,
                 ruleset: RULESET.into(),

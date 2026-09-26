@@ -13,6 +13,12 @@ reviewed conservative effects for an explicit form registry, with byte-level
 GPR aliases and per-site evidence. This adds trusted-input preparation without
 changing the core state machine; see the [effect rule matrix](Ariadne/operand-effects-rules.md).
 
+The separate [minidump input package](../input/README.md) now supplies immutable
+captured memory and local instruction discovery for AMD64 Windows/Linux dumps.
+Its dependency lock is independent of the root crate. The public batch-preparation
+seam reuses this adapter's rules; it does not change the analyzer transitions.
+PE/ELF images and ELF core readers remain pending.
+
 ## Build and use
 
 The crate uses Rust 2024 with a declared minimum Rust version of 1.85. Validation

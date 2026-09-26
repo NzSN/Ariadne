@@ -26,3 +26,5 @@ _apalache-out/
 
 # Lean proof build artifacts (the toolchain and dependency manifest are tracked).
 /lean/.lake/
+
+/input/target/

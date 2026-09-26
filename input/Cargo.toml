@@ -1,0 +1,14 @@
+[package]
+name = "ariadne-input"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+publish = false
+
+[dependencies]
+ariadne-analysis = { path = ".." }
+minidump = "=0.26.1"
+sha2 = "=0.10.9"
+
+[lints.rust]
+unsafe_code = "forbid"

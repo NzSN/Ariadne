@@ -1,0 +1,163 @@
+{
+  "recordedUtc": "2026-09-26T14:49:54.808677+00:00",
+  "sourceSha256": {
+    "Cargo.lock": "f1d5d49897a04815e3b9b1291770c38a71f560329440e4aace6f4a038ddee283",
+    "Cargo.toml": "10a7e789d98fc97f26ef1c7fff61ccc4f9969d3d9ecdca44c5a9c1f47943ea65",
+    "Specs/AriadneInput.tla": "dee2efe4ebcabac7dcc5c3097ca0fcc7495d4acd5cba2dea53da4137240079a9",
+    "Specs/AriadneInputChecks.tla": "57a7c2974c6beb8b420bf48a1fc338568c54ddcdbe57162203fe3c3841697574",
+    "Specs/AriadneMachineCommon.tla": "32b60854773c7c14e06e449300a9757fefdfbfc763a0f58ef4574f1edd019947",
+    "Specs/AriadneTypes.tla": "3bfb36f3bf96adc324a9c714d34a12af708d0e7daaba91a5a1ae5f79f2820329",
+    "Specs/Input.cfg": "a7625802bbfb1ee7c9c7940133769c47c8e0e60cd55c70e812e6b5997d06361a",
+    "Specs/InputLimit.cfg": "bed03a8ebbfefe8beb802a91f4217add54f397a45a9ed8a45712eb8898470523",
+    "Specs/check-input.sh": "9ef9d64df9252c604069a79c706557097332e1c94e72c2760713c5129633ed99",
+    "input/Cargo.lock": "92d4148c16139f2cf7336414bdfe87befa92be37465033e5392e38be2e12f447",
+    "input/Cargo.toml": "956e22164c9fa464ed959e644260fe621fd9ad6ea5a4c3affe115158e470b8e0",
+    "input/examples/inspect.rs": "b29a8086261112738bd6e9fc29249e846e0da51ab6eedcaf8fbcedc96e7cac8c",
+    "input/src/address_space.rs": "5b6bc4e94616eeb911f09ead0e512ee420d85ec9f324d965e1610637aa840634",
+    "input/src/lib.rs": "e573f512a597ee582d646874051559f4aecd038ae9afc0310a894fc49ef5af05",
+    "input/src/materialize.rs": "dd094bd714eacb457797b9897b6d50c599864d764e78314574047d976dced9b3",
+    "input/src/minidump.rs": "02588ccfed70c8bc601d3a6a473f9659ccea1da0951965e4e152c859e499c04c",
+    "input/tests/common/mod.rs": "af6b41728e969e022a5b72206ac0471982be367f84f693254f06b17ab3c26ea4",
+    "input/tests/native.rs": "58347dc87ce5575296882bffb174ceef27894d41a13090a208ced8e097b41f78",
+    "input/tests/reader.rs": "06e4720f60eeb6ad145102cd5f604cd2db69f08446a8e363950299ff765d4403",
+    "input/tests/real_dumps.rs": "06acdd2e8066957c9465a06a8b0019d1e8eb55d2753a03095d127616e495abfb",
+    "native/llvm_mc/build.sh": "07eca5b34dc5409a2d5e7cc91ca69df701f10eb3690b17388ec75bc95f72ad4c",
+    "native/llvm_mc/check.sh": "66876c8bc92ca67b41e86067df5d3be9522f42c8f41106d87e141baabf7c6f25",
+    "native/llvm_mc/decode.cpp": "af7691c5b7df08c62efff468f7e9045c787ee242504a8a8c61943c0631a6fb1d",
+    "src/effects/forms.txt": "e2469e20cee977a493e296710c848a11fc1ce5b07f2ef37440eedff6e2a0768f",
+    "src/effects/locations.rs": "b890a4895a4b48841b075d4c11e17ed3ba8cd63d5bd2f1f83d777df64df8c2f4",
+    "src/effects/rules.rs": "109a61d184100c611c9238bb55b1ae194f2d77f8d5f0571f0d7d2576544ab68f",
+    "src/effects.rs": "6780a7d794e8973ca7726dad0d8973e1f2b878fb184323f86724adf962aab43d",
+    "src/engine.rs": "97defef6707525d93b2de06637bb97182befac15f79e955c0bb9fdb4a355c4bb",
+    "src/lib.rs": "0e28af6a429c57b6c607da0686fed9484ad72d43a8a0f1a66c1cebd64fa133a1",
+    "src/llvm_mc/prepare.rs": "faada468b5814927950ae641c1d07f2627a5a3e69847e862285d17efb35c2852",
+    "src/llvm_mc/protocol.rs": "234ff2d2a1a603803497ac0eabbbdefefd427d4f7cd27f4d1c543ad3787f5e2a",
+    "src/llvm_mc.rs": "5ac6e89a2b034e44b3d14b26eb175ccfb57c3aa247abf254ce1e09011929c083",
+    "src/model.rs": "9bccc617340450535872b43515bceef16cfd60891cbd0ebc17349f88ce586f06",
+    "tests/common/mod.rs": "435b020cc3e77185229f8556ff14bd00e3b3aefa29b99600331300086f79fcb5",
+    "tests/conformance.rs": "7c8e71ff80a04bc57940f6a275ad0e9aabac5250cc28930f1de73f7e01f3f86c",
+    "tests/effects.rs": "c9c7b275e548a920fb7381244cb811d2bfaca9cd515c6a3a592e4102bd58a166",
+    "tests/effects_protocol.rs": "f5ee60167275386e6f90c5cf50d46bc012f2caca7a3dde2b192acb5577b8e907",
+    "tests/fixtures/effects-v2.tsv": "8fbd9f368e94fa2659234c19f4b7fbddc6861168966ecc687f36232deb21c070",
+    "tests/generated.rs": "fd2a9f0763eeadfd20d737ca4691a521df54f35a4a958ed2422f3c585d1dbe76",
+    "tests/llvm_mc.rs": "bfa76f6371cb5b998e86caf27b0e59c80eb75226423798098be0357709651584",
+    "tools/check_minidump.py": "c51fbcb9fa44c3daf906bbcfa0fb82574ee10a76c6c8a9de2e7febb905eaf85d",
+    "tools/check_minidump_mutations.py": "2eae3bf06fee8f12fe46db4f137e8cdc3050b0a857eadc159f5f2fdd214c8bfc"
+  },
+  "sourcesStable": true,
+  "gates": [
+    {
+      "gate": "effects-regression",
+      "exitCode": 0,
+      "seconds": 52.396,
+      "command": [
+        "python3",
+        "tools/check_effects.py"
+      ],
+      "log": "/tmp/ariadne-minidump-acceptance-82blb69k/effects-regression.log"
+    },
+    {
+      "gate": "input-tests",
+      "exitCode": 0,
+      "seconds": 1.081,
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "input/Cargo.toml"
+      ],
+      "log": "/tmp/ariadne-minidump-acceptance-82blb69k/input-tests.log"
+    },
+    {
+      "gate": "format",
+      "exitCode": 0,
+      "seconds": 0.08,
+      "command": [
+        "cargo",
+        "fmt",
+        "--manifest-path",
+        "input/Cargo.toml",
+        "--",
+        "--check"
+      ],
+      "log": "/tmp/ariadne-minidump-acceptance-82blb69k/format.log"
+    },
+    {
+      "gate": "clippy",
+      "exitCode": 0,
+      "seconds": 0.469,
+      "command": [
+        "cargo",
+        "clippy",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "input/Cargo.toml",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "log": "/tmp/ariadne-minidump-acceptance-82blb69k/clippy.log"
+    },
+    {
+      "gate": "native",
+      "exitCode": 0,
+      "seconds": 22.068,
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "input/Cargo.toml",
+        "--test",
+        "native",
+        "--",
+        "--ignored"
+      ],
+      "log": "/tmp/ariadne-minidump-acceptance-82blb69k/native.log"
+    },
+    {
+      "gate": "real-artifacts",
+      "exitCode": 0,
+      "seconds": 0.158,
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "input/Cargo.toml",
+        "--test",
+        "real_dumps",
+        "--",
+        "--ignored"
+      ],
+      "log": "/tmp/ariadne-minidump-acceptance-82blb69k/real-artifacts.log"
+    },
+    {
+      "gate": "formal-input",
+      "exitCode": 0,
+      "seconds": 5.081,
+      "command": [
+        "bash",
+        "Specs/check-input.sh"
+      ],
+      "log": "/tmp/ariadne-minidump-acceptance-82blb69k/formal-input.log"
+    },
+    {
+      "gate": "mutations",
+      "exitCode": 0,
+      "seconds": 20.589,
+      "command": [
+        "python3",
+        "tools/check_minidump_mutations.py"
+      ],
+      "log": "/tmp/ariadne-minidump-acceptance-82blb69k/mutations.log"
+    }
+  ],
+  "passed": true
+}

@@ -78,6 +78,7 @@ pub struct InstructionEvidence {
 }
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct PreparationIdentity {
+    pub target: String,
     pub decoder: String,
     pub protocol: u8,
     pub ruleset: String,
