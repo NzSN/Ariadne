@@ -129,3 +129,10 @@ minidump and can optionally prepare an explicitly supplied hexadecimal root:
 cargo run --offline --locked --manifest-path input/Cargo.toml --example inspect -- \
   crash.dmp target/ariadne-llvm-mc 140001000
 ```
+
+
+To render a result with distinct entry and seed addresses, use the
+[`render_minidump` example](examples/render_minidump.rs). It writes the core
+report/DOT to stdout and upstream diagnostics to stderr. See the
+[rendering guide](../docs/Ariadne/result-rendering.md). The existing `inspect`
+example retains its summary output.

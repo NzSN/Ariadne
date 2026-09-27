@@ -171,3 +171,13 @@ reproduction commands. Migration preserved the existing oracle, implementation,
 coverage, and first mutant mismatch positions. Cleanup evidence now observes
 the generated binding's actual port `Drop`. This is local conformance evidence; Gate isolation and
 restricted authoring were not exercised.
+
+
+## Rendering results
+
+`ariadne::render::render(&result, Format::Text | Format::Dot)` now returns a
+readable report or a Graphviz CFG document without changing analysis state or
+performing I/O. The text view includes the full reaching-definition relation;
+DOT retains it in node tooltips and highlights the data slice and unresolved
+obligations. Missing seeds and unvisited references remain visible. See the
+[rendering guide](Ariadne/result-rendering.md) for examples and interpretation.

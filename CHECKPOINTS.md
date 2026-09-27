@@ -1,7 +1,7 @@
 # Ariadne checkpoints
 
-Recorded on **2026-09-26 (Asia/Shanghai)** against HEAD **`aee833f`**,
-with minidump input delivered as an uncommitted working-tree change.
+Recorded on **2026-09-27 (Asia/Shanghai)** against HEAD **`712a635`**,
+with analyzer-outcome rendering delivered as an uncommitted working-tree change.
 Dates in the flow below are commit dates; validation dates are stated separately.
 
 ```mermaid
@@ -14,8 +14,9 @@ flowchart TD
     F["2026-09-24 · 6fbfbd9<br/>Staged delivery roadmap"]
     G["2026-09-24 · fb7f142<br/>Pinned LLVM MC byte-span adapter · current HEAD"]
     H["2026-09-26 · aee833f<br/>Structured operands and reviewed conservative effects"]
-    I["2026-09-26 · working tree<br/>Windows/Linux AMD64 minidump input"]
-    A --> B --> C --> D --> E --> F --> G --> H --> I
+    I["2026-09-26 · 712a635<br/>Windows/Linux AMD64 minidump input"]
+    J["2026-09-27 · working tree<br/>Text and Graphviz outcome rendering"]
+    A --> B --> C --> D --> E --> F --> G --> H --> I --> J
 ```
 
 ## Current delivery checkpoint
@@ -43,7 +44,8 @@ evidence. Memory remains coarse and calls remain opaque. See the
 Windows/Linux AMD64 minidump input is delivered in [input/](input/README.md).
 PE/ELF image and ELF core readers, broader effect coverage and precise alias analysis,
 Rust abstract machine-state propagation, the native LLVM IR analysis implementation, the
-analyzer CLI, and graph exporters remain pending. The AMD64 formal library is
+analyzer CLI, annotated assembly and JSON export remain pending.
+Text and Graphviz DOT rendering is available in `ariadne::render`. The AMD64 formal library is
 not yet integrated into the Rust runtime.
 
 ## Formal acceptance checkpoint
@@ -86,7 +88,7 @@ flowchart TD
     C["Pending: end-to-end binary/dump CFG fixtures"]
     D["Initial reviewed effects delivered<br/>Broader rules and precise aliasing pending"]
     E["Pending: verified precision<br/>register-core → near-control-stack → ram-data"]
-    F["Pending: investigator CLI and stable graph exports"]
+    F["Text and DOT rendering delivered<br/>Investigator CLI and JSON pending"]
     A --> B --> C --> D --> E --> F
 ```
 
@@ -140,3 +142,17 @@ See [minidump usage](input/README.md) and
 [the source-bound validation record](docs/Ariadne/minidump-validation.md).
 No commit or push was performed for this delivery. Unrelated Lean moves/deletions
 in the working tree were preserved.
+
+
+## 2026-09-27 — Analyzer-outcome rendering
+
+Added the pure `ariadne::render` module with readable text and Graphviz DOT
+formats. It preserves snapshot identity, structural edges, possible reaching
+origins, slice membership, missing seeds and unresolved recovery obligations.
+The input example keeps upstream evidence separate from the core rendering.
+
+Root/input tests, formatting and Clippy passed; real Graphviz parsed escaped
+metadata and generated valid SVG examples. Full analysis/formal suites were
+not rerun for this presentation-only addition. No commit or push performed.
+
+[Rendering guide and examples](docs/Ariadne/result-rendering.md).

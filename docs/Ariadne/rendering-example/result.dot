@@ -1,0 +1,12 @@
+digraph Ariadne {
+  graph [rankdir=TB, labelloc=t, label="Ariadne analysis | snapshot \"render-example\"\nphase: done | recovery scope closed: false\nobligations: 2 | missing slice seeds: 1\nBlue fill: data slice; dashed edge: call (excluded from local analysis)\nReaching definitions are possible origins; see node tooltips.\nAnalyzer facts only; input/preparation evidence is separate."];
+  node [shape=box, fontname="monospace"];
+  edge [fontname="monospace"];
+  n_0000000000001000 [label="0x0000000000001000\ndecoded\nsource: file\nin data slice", tooltip="0x0000000000001000\nReaching definitions BEFORE this address:\n\"x\" <- entry@0x0000000000001000", style="filled", fillcolor="#dbeafe", color="#334155", penwidth=1];
+  n_0000000000001004 [label="0x0000000000001004\ndecoded\nsource: file\nin data slice\nobligation: call-targets", tooltip="0x0000000000001004\nReaching definitions BEFORE this address:\n\"x\" <- instruction@0x0000000000001000", style="filled", fillcolor="#dbeafe", color="#b45309", penwidth=2];
+  n_0000000000001008 [label="0x0000000000001008\nvisited, not decoded\nsource: no successful decode\nmissing slice seed\nobligation: unavailable", tooltip="0x0000000000001008\nReaching definitions BEFORE this address:\n(none)", style="filled,dashed", fillcolor="#f3f4f6", color="#b45309", penwidth=2];
+  n_0000000000002000 [label="0x0000000000002000\nunvisited\nsource: no successful decode", tooltip="0x0000000000002000\nReaching definitions BEFORE this address:\n(none)", style="filled,dashed", fillcolor="#f3f4f6", color="#334155", penwidth=1];
+  n_0000000000001000 -> n_0000000000001004 [label="next", style="solid", color="#334155"];
+  n_0000000000001004 -> n_0000000000001008 [label="summary", style="solid", color="#334155"];
+  n_0000000000001004 -> n_0000000000002000 [label="call", style="dashed", color="#64748b"];
+}

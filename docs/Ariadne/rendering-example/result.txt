@@ -1,0 +1,42 @@
+Ariadne analysis (render v1)
+snapshot: "render-example"
+phase: done
+scope_closed: false (recovery only; relative to supplied inputs)
+pending: []
+visited: [0x0000000000001000, 0x0000000000001004, 0x0000000000001008]
+decoded: [0x0000000000001000, 0x0000000000001004]
+data_slice: [0x0000000000001000, 0x0000000000001004]
+missing_slice_seeds: [0x0000000000001008]
+
+Nodes:
+  0x0000000000001000: decoded; source=file
+    in data slice
+  0x0000000000001004: decoded; source=file
+    in data slice
+    obligation: call-targets
+  0x0000000000001008: visited, not decoded; source=no successful decode
+    missing slice seed
+    obligation: unavailable
+  0x0000000000002000: unvisited; source=no successful decode
+
+Control-flow edges (structural possibilities):
+  0x0000000000001000 --next--> 0x0000000000001004
+  0x0000000000001004 --summary--> 0x0000000000001008
+  0x0000000000001004 --call--> 0x0000000000002000 [excluded from local discovery/dataflow]
+
+Reaching definitions (possible origins BEFORE each address):
+  0x0000000000001000:
+    "x" <- entry@0x0000000000001000
+  0x0000000000001004:
+    "x" <- instruction@0x0000000000001000
+  0x0000000000001008:
+    (none)
+  0x0000000000002000:
+    (none)
+
+Unresolved recovery obligations:
+  0x0000000000001004: call-targets
+  0x0000000000001008: unavailable
+
+Scope: analyzer facts only. Input/preparation evidence is separate.
+A completed data slice does not establish executed paths or a crash cause.

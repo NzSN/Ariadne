@@ -15,7 +15,9 @@ decoded control-flow summaries from caller-provided bytes. Its new
 and per-site evidence for an [explicit rule registry](docs/Ariadne/operand-effects-rules.md).
 The separate [minidump input package](input/README.md) now reads Windows/Linux
 AMD64 captures and discovers local instruction starts. PE/ELF image readers,
-ELF core readers, the analyzer CLI, and graph exporters remain pending.
+ELF core readers, the analyzer CLI, and JSON export remain pending.
+The [rendering module](docs/Ariadne/result-rendering.md) now produces readable
+text and Graphviz DOT from analyzer outcomes.
 The separate native LLVM IR, abstract machine-state, and initial x86-64
 instruction-semantics models remain formal specifications.
 
@@ -108,8 +110,9 @@ unrelated integer quantities retain explicit `Int` annotations.
 
 The machine model abstracts the input adapters and decoder as fixed inputs. It
 specifies the engine's behavior once byte availability and instruction summaries
-have been supplied. Planned outputs include annotated assembly, a unified graph,
-and dependency information, with JSON and Graphviz DOT export for SVG rendering.
+have been supplied. The rendering module supplies a unified CFG with slice and obligation
+annotations as Graphviz DOT for SVG rendering, plus a full text report of
+possible value origins. Annotated assembly and JSON export remain planned.
 
 ## Machine analysis phases
 

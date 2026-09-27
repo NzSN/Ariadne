@@ -41,6 +41,7 @@ pub mod effects;
 mod engine;
 pub mod llvm_mc;
 mod model;
+pub mod render;
 
 pub use engine::{Analyzer, analyze};
 pub use model::*;
