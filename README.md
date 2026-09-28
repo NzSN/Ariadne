@@ -13,6 +13,10 @@ An optional [LLVM MC byte-span adapter](docs/llvm-mc-adapter.md) now supplies
 decoded control-flow summaries from caller-provided bytes. Its new
 `ByteSnapshot::prepare()` interface adds structured operands, reviewed effects
 and per-site evidence for an [explicit rule registry](docs/Ariadne/operand-effects-rules.md).
+The [Stage A memory-immediate MOV delivery](docs/Ariadne/stage-a-validation.md)
+extends that registry to 139 exact LLVM opcode identities and decodes the
+first instruction of both pinned real-dump fixtures. This does not certify
+their architectural instruction steps or a historical crash path.
 The separate [minidump input package](input/README.md) now reads Windows/Linux
 AMD64 captures and discovers local instruction starts. PE/ELF image readers,
 ELF core readers, the analyzer CLI, and JSON export remain pending.
@@ -43,7 +47,8 @@ The separate native decoder pins LLVM MC 20.1.2. Reviewed rules now provide
 byte-level GPR and flag effects for the scoped registry. Memory remains
 conservative, calls remain opaque, and broader effect coverage and precise
 alias analysis remain future work. Decoder metadata alone does not provide
-the complete analysis. See the [delivery evidence](docs/Ariadne/operand-effects-validation.md).
+the complete analysis. See the [initial effects evidence](docs/Ariadne/operand-effects-validation.md)
+and the [Stage A evidence](docs/Ariadne/stage-a-validation.md).
 
 Build and test the Rust library from the repository root:
 

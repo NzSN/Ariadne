@@ -2,9 +2,10 @@
 
 Design proposal, 2026-09-26. Source baseline: `fb7f142`.
 The initial design is implemented; see its [implementation plan and delivery
-status](operand-effects-plan.md). The next scoped extension has its own
-[Stage A memory-immediate MOV implementation plan](stage-a-memory-immediate-mov-plan.md).
-Neither plan alone certifies a complete AMD64 instruction step.
+status](operand-effects-plan.md). The scoped memory-immediate MOV extension is
+also implemented; see its [Stage A implementation plan](stage-a-memory-immediate-mov-plan.md)
+and [validation record](stage-a-validation.md). Neither delivery certifies a
+complete AMD64 instruction step.
 
 ## Decision
 

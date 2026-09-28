@@ -7,7 +7,7 @@ pub use locations::{Catalogue, RegisterView};
 pub(crate) use rules::summarize;
 use std::collections::BTreeMap;
 
-pub const RULESET: &str = "user64-effects-v1.0";
+pub const RULESET: &str = "user64-effects-v1.1";
 
 /// Fixed long64 user-mode environment: ordinary RAM, CET disabled, no
 /// asynchronous/exception-handler edges or concurrent interference.

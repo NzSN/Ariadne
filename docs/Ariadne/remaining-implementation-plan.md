@@ -12,18 +12,20 @@ Produce a reproducible **minidump → decoded local graph → possible value ori
 Keep the existing `Specs/Ariadne.tla`/Rust analyzer core and its call-edge policy
 stable unless a separately reviewed contract change is necessary.
 
-Already delivered: pinned LLVM MC decoding, the minidump reader, local CFG
+At plan inception: pinned LLVM MC decoding, the minidump reader, local CFG
 recovery, reaching definitions, backward data slices, 137 exact LLVM opcode
-identities with reviewed/opaque effects, and text/DOT rendering. Both retained
-real crash fixtures currently stop at their first instruction with zero decoded
-nodes. They exercise the reader, but do not yet demonstrate a useful crash
-slice. The scoped user64 semantics gate still reports 49 paired register bodies
+identities with reviewed/opaque effects, and text/DOT rendering were delivered.
+The two retained real crash fixtures then stopped at their first instruction.
+The [Stage A delivery](stage-a-validation.md) now expands the registry to 139
+identities and decodes both faulting instructions. It does not yet demonstrate
+a predecessor slice from an earlier real entry. The scoped user64 semantics
+gate still reports 49 paired register bodies
 and **0/49 accepted instruction steps**; the later 72 control/stack and 156 RAM
 cases remain unaccepted.
 
 ```mermaid
 flowchart TD
-    A["A · Review two blocking crash forms"] --> B["B · Real-dump slice from an earlier entry"]
+    A["A · Two crash forms reviewed and implemented"] --> B["B · Real-dump slice from an earlier entry"]
     B --> C["C · Minidump investigator CLI and evidence report"]
     A --> D["D · Source-bound formal instruction-step acceptance"]
     C --> E["E · Separate machine-state / native-IR implementations"]
@@ -48,6 +50,8 @@ part may be pulled earlier if B/C measurements expose a blocking cost.
 
 The [Stage A implementation plan](stage-a-memory-immediate-mov-plan.md) gives
 exact rule, fixture, negative-control and validation steps.
+Its [completed source-bound record](stage-a-validation.md) leaves
+instruction-step acceptance and Stage B's predecessor slice open.
 
 The Linux fixture's first opcode is LLVM `MOV32mi` (`mov dword ptr [rax], imm32`);
 the Windows fixture's is `MOV64mi32` (sign-extended imm32 to a 64-bit memory

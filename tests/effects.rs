@@ -457,3 +457,132 @@ fn extended_register_views_and_immediate_widths_are_preserved() {
         );
     }
 }
+
+#[test]
+#[ignore = "requires pinned LLVM; run native/llvm_mc/check.sh"]
+fn memory_immediate_mov_uses_address_registers_and_only_may_writes_memory() {
+    for (bytes, width, expected_uses) in [
+        (&[0xc7, 0x00, 5, 0, 0, 0][..], 32, cells(0, 0, 64)),
+        (
+            &[0x48, 0xc7, 0x04, 0x08, 0x41, 0x41, 0x41, 0x41][..],
+            64,
+            cells(0, 0, 64).union(&cells(1, 0, 64)).cloned().collect(),
+        ),
+    ] {
+        let p = decode(&[(4096, bytes)], &[4096], &[4096]);
+        assert_eq!(p.identity.ruleset, "user64-effects-v1.1");
+        let e = &p.instructions[&4096];
+        let summary = &p.request.instructions[&4096];
+        assert_eq!(e.quality, EffectQuality::Reviewed);
+        assert_eq!(e.source, ariadne::ByteSource::File);
+        assert_eq!(summary.kind, InstructionKind::Ordinary);
+        assert_eq!(summary.uses, expected_uses);
+        assert_eq!(summary.may_defs, ["memory:any".into()].into());
+        assert!(summary.must_defs.is_empty());
+        assert!(!summary.uses.contains("memory:any"));
+        assert!(
+            matches!(&e.operands[0], Operand::Memory{access_width,address_width:64,..} if *access_width==width)
+        );
+        assert!(
+            matches!(&e.operands[1], Operand::Immediate{encoded_width:32,semantic_width,sign_extend,..}
+            if *semantic_width==width && *sign_extend==(width==64))
+        );
+        assert!(e.undefined_flags.is_empty());
+        assert_eq!(summary.fall, [4096 + bytes.len() as u64].into());
+    }
+}
+
+#[test]
+#[ignore = "requires pinned LLVM; run native/llvm_mc/check.sh"]
+fn memory_immediate_mov_preserves_signed_payload_and_address_size() {
+    for bytes in [
+        &[0x48, 0xc7, 0x00, 0xff, 0xff, 0xff, 0xff][..],
+        &[0x48, 0xc7, 0x00, 0, 0, 0, 0x80],
+    ] {
+        let p = decode(&[(4096, bytes)], &[4096], &[]);
+        assert!(
+            matches!(&p.instructions[&4096].operands[1],Operand::Immediate{
+            encoded_width:32,semantic_width:64,sign_extend:true,bits,..}
+            if *bits==if bytes[3]==0xff {0xffff_ffff}else{0x8000_0000})
+        );
+    }
+    let p = decode(&[(4096, &[0x67, 0xc7, 0x00, 5, 0, 0, 0])], &[4096], &[]);
+    assert_eq!(p.request.instructions[&4096].uses, cells(0, 0, 32));
+    assert!(matches!(
+        &p.instructions[&4096].operands[0],
+        Operand::Memory {
+            address_width: 32,
+            access_width: 32,
+            ..
+        }
+    ));
+    let p = decode(
+        &[(4096, &[0x66, 0x48, 0xc7, 0x00, 5, 0, 0, 0])],
+        &[4096],
+        &[],
+    );
+    assert!(matches!(
+        &p.instructions[&4096].operands[1],
+        Operand::Immediate {
+            semantic_width: 64,
+            sign_extend: true,
+            ..
+        }
+    ));
+}
+
+#[test]
+#[ignore = "requires pinned LLVM; run native/llvm_mc/check.sh"]
+fn memory_immediate_store_keeps_address_producers_and_weak_memory_origins() {
+    let p = decode(
+        &[
+            (0x1000, &[0x89, 0x07]), // mov [rdi], eax: earlier possible memory origin
+            (0x1002, &[0x48, 0x89, 0xd8]), // mov rax, rbx: address producer
+            (0x1005, &[0x48, 0x89, 0xd1]), // mov rcx, rdx: irrelevant
+            (0x1008, &[0xc7, 0x00, 5, 0, 0, 0]), // mov dword [rax], 5
+            (0x100e, &[0x8b, 0x30]), // mov esi, [rax]
+            (0x1010, &[0xc3]),
+        ],
+        &[0x1000],
+        &[0x1008, 0x100e],
+    );
+    let r = analyze(p.request).unwrap();
+    assert!(r.state.slice.contains(&0x1002));
+    assert!(r.state.slice.contains(&0x1008));
+    assert!(r.state.slice.contains(&0x100e));
+    assert!(!r.state.slice.contains(&0x1005));
+    let origins: std::collections::BTreeSet<_> = r.state.reaching[&0x100e]
+        .iter()
+        .filter(|d| d.loc == "memory:any" && d.origin == DefinitionOrigin::Instruction)
+        .map(|d| d.site)
+        .collect();
+    assert_eq!(origins, [0x1000, 0x1008].into());
+    assert!(r.missing_slice_seeds.is_empty());
+}
+
+#[test]
+#[ignore = "requires pinned LLVM; run native/llvm_mc/check.sh"]
+fn memory_immediate_rule_rejects_unreviewed_prefixes_without_stealing_register_mov() {
+    for bytes in [
+        &[0xf0, 0xc7, 0x00, 5, 0, 0, 0][..],
+        &[0xf3, 0xc7, 0x00, 5, 0, 0, 0],
+        &[0x64, 0xc7, 0x00, 5, 0, 0, 0],
+        &[0x66, 0x66, 0xc7, 0x00, 5, 0, 0, 0],
+    ] {
+        let p = decode(&[(4096, bytes)], &[4096], &[]);
+        assert!(!p.request.decodable.contains(&4096), "{bytes:x?}");
+        assert!(analyze(p.request).unwrap().state.edges.is_empty());
+    }
+    let p = decode(
+        &[(4096, &[0x48, 0xc7, 0xc0, 0xff, 0xff, 0xff, 0xff])],
+        &[4096],
+        &[],
+    );
+    assert_eq!(p.instructions[&4096].opcode.as_deref(), Some("MOV64ri32"));
+    assert!(
+        !p.request.instructions[&4096]
+            .may_defs
+            .contains("memory:any")
+    );
+    assert_eq!(p.request.instructions[&4096].must_defs, cells(0, 0, 64));
+}

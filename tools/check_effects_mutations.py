@@ -31,6 +31,17 @@ MUTATIONS = [
     ("unknown-fallthrough", RULES, '.any(|code| code == raw.opcode)\n    {\n        return None;',
      '.any(|code| code == raw.opcode)\n    {\n        ' + UNKNOWN,
      "control_flags_calls_and_unrecognized_control_have_distinct_evidence"),
+    ("mov-immediate-missing-address", RULES, "s.uses = reads(&destination);",
+     "s.uses.clear();", "memory_immediate_mov_uses_address_registers_and_only_may_writes_memory"),
+    ("mov-immediate-reads-old-memory", RULES, "s.uses = reads(&destination);",
+     's.uses = reads(&destination); s.uses.insert("memory:any".into());',
+     "memory_immediate_mov_uses_address_registers_and_only_may_writes_memory"),
+    ("mov-immediate-kills-all-memory", RULES, 's.may_defs.extend(["memory:any".to_owned()]);',
+     's.may_defs.extend(["memory:any".to_owned()]); s.must_defs.insert("memory:any".into());',
+     "memory_immediate_mov_uses_address_registers_and_only_may_writes_memory"),
+    ("mov-immediate-forgets-sign-extension", RULES, "let source = imm(&ops[5], 32, width)?;",
+     "let source = imm(&ops[5], 32, 32)?;",
+     "memory_immediate_mov_preserves_signed_payload_and_address_size"),
 ]
 
 

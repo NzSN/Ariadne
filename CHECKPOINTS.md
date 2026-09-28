@@ -1,8 +1,9 @@
 # Ariadne checkpoints
 
-Updated **2026-09-28 23:08 CST (Asia/Shanghai)** against HEAD **`a9dc41a`**.
-The new entry is the start point for the remaining implementation plan. Earlier
-delivery entries retain their historical, time-local commit and validation status.
+Updated **2026-09-29 07:26 CST (Asia/Shanghai)** for the Stage A delivery
+checkpoint. Its source-bound validation ran on 2026-09-28 against parent commit
+`9bde052`. The plan-start entry remains a separate time point. Earlier delivery
+entries retain their historical, time-local commit and validation status.
 
 ```mermaid
 flowchart TD
@@ -17,8 +18,40 @@ flowchart TD
     I["2026-09-26 · 712a635<br/>Windows/Linux AMD64 minidump input"]
     J["2026-09-27 · a9dc41a<br/>Text and Graphviz outcome rendering"]
     K["2026-09-28 23:08 CST · plan baseline<br/>Remaining implementation stages A–F"]
-    A --> B --> C --> D --> E --> F --> G --> H --> I --> J --> K
+    L["2026-09-28 23:49 CST · validation<br/>Stage A MOV memory-immediate effects"]
+    M["2026-09-29 07:26 CST · handoff<br/>Stage A delivered; Stage B next"]
+    A --> B --> C --> D --> E --> F --> G --> H --> I --> J --> K --> L --> M
 ```
+
+## 2026-09-29 07:26 CST — Stage A handoff
+
+The reviewed memory-immediate MOV effects and source-bound Stage A validation
+are the delivery baseline for this commit. Both pinned Linux/Windows minidumps
+now decode their crash-IP instruction, while a captured predecessor path and
+backward address-producer slice remain Stage B work. The evidence-linked CLI
+and JSON output remain Stage C work. This handoff does not promote an AMD64
+instruction-step case: `register-core` remains **0/49** verified and `ram-data`
+remains **0/156** verified.
+
+## 2026-09-28 23:49 CST — Stage A effect delivery
+
+Implemented the exact `MOV32mi` and `MOV64mi32` memory-immediate effect rules.
+The registry is now **139 LLVM opcode identities** under
+`user64-effects-v1.1`. Both pinned Windows/Linux AMD64 dumps decode their
+crash-IP instruction from captured bytes: the Linux fixture decodes one node,
+the Windows fixture three. Each still has one later unresolved obligation;
+neither run establishes earlier address producers or the actual faulting
+store's commit behavior. That predecessor slice remains Stage B work.
+
+The [Stage A validation](docs/Ariadne/stage-a-validation.md) records the pinned
+AMD/LLVM source review, all eight passing source-bound acceptance gates,
+ten rejected effect mutations, six rejected input mutations and the
+unchanged 12-trace/168-state core MBT replay. The generic `AMD64-F-0503`
+catalogue row still needs reviewed semantic binding before the memory form can
+be accepted as an instruction step. The active profile remains **0/49**
+verified `register-core` steps and **0/156** verified `ram-data` cases.
+No source-form ledger, core engine or user64 profile was promoted. The
+validation report below records the working-tree status at its own time point.
 
 ## 2026-09-28 23:08 CST — remaining implementation plan begins
 
@@ -66,9 +99,10 @@ locations, with no must-writes. These summaries
 do not certify precise architectural effects or verified instruction steps.
 
 `ByteSnapshot::prepare()` now supplies reviewed normal-continuation summaries
-for 137 exact LLVM opcode identities, byte-level register aliases, and per-site
+for 139 exact LLVM opcode identities, byte-level register aliases, and per-site
 evidence. Memory remains coarse and calls remain opaque. See the
-[effect validation record](docs/Ariadne/operand-effects-validation.md).
+[initial effects record](docs/Ariadne/operand-effects-validation.md) and
+[Stage A validation](docs/Ariadne/stage-a-validation.md).
 
 Windows/Linux AMD64 minidump input is delivered in [input/](input/README.md).
 PE/ELF image and ELF core readers, broader effect coverage and precise alias analysis,
@@ -104,7 +138,8 @@ remains deferred.
 | 2026-09-26, fresh at `fb7f142` | `cargo clippy --offline --all-targets -- -D warnings` | Passed. |
 | 2026-09-26, attempted at `fb7f142` | `bash native/llvm_mc/check.sh` | Stopped before native build/tests: LLVM 20.1.2 headers or library unavailable at configured paths. Native behavior was not freshly verified; this is an environment prerequisite failure. |
 | 2026-09-26, fresh | `python3 tools/amd64_profile.py report` | Confirmed 49 paired register bodies and zero verified cases across all three milestones. This report does not execute the formal proof/model gates. |
-| 2026-09-28, fresh | `python3 tools/amd64_profile.py report` | Reconfirmed 49 paired register bodies and zero verified cases across all three milestones. Planning and this progress report do not execute the formal proof/model gates. |
+| 2026-09-28, fresh | `python3 tools/amd64_profile.py report` | Reconfirmed 49 paired register bodies and zero verified cases across all three milestones. The Stage A effect rule does not change the profile case ledger. |
+| 2026-09-28 23:49 CST, source-bound | Stage A integrated gate | All eight minidump gates passed, including the complete existing effects gate, formal projection/input checks, native Windows/Linux tests, real artifacts and mutations. Source hashes stayed stable; this does not certify faulting-store retirement or a user64 instruction step. |
 
 The full AMD64 TLA+/Lean suite was not rerun. The subsequent effects delivery
 ran its focused TLA+ gate and the existing core MBT gate successfully.
@@ -114,8 +149,8 @@ ran its focused TLA+ gate and the existing core MBT gate successfully.
 ```mermaid
 flowchart TD
     A["Delivered: minidump input, CFG/data slice,<br/>reviewed initial effects, text/DOT"]
-    B["Next: review MOV32mi and MOV64mi32 effects"]
-    C["Then: real-dump predecessor slice"]
+    B["Delivered: reviewed MOV32mi and MOV64mi32 effects"]
+    C["Next: real-dump predecessor slice"]
     D["Then: evidence-linked CLI and JSON"]
     E["Parallel: source-bound register-core acceptance"]
     F["Later: separate state/IR machines,<br/>proof boundary and performance"]
@@ -138,6 +173,7 @@ TLA+/Lean correspondence, and conservative analysis-projection obligations.
 - [AMD64 task ledger](docs/amd64-semantics-tasks.md)
 - [Model-based testing evidence](mbt/README.md)
 - [Remaining implementation plan](docs/Ariadne/remaining-implementation-plan.md)
+- [Stage A source review and validation](docs/Ariadne/stage-a-validation.md)
 
 
 ## 2026-09-26 — Operand/effects working-tree delivery

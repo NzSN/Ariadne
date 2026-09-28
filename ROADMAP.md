@@ -14,13 +14,16 @@ may-reaching definitions, and builds a backward data slice from fixed,
 adapter-supplied instruction summaries. An optional pinned LLVM MC adapter
 decodes caller-provided byte spans and supplies conservative control-flow
 summaries. `ByteSnapshot::prepare()` now adds structured operands and reviewed
-normal-continuation effects for an explicit 137-opcode registry, with byte-level
+normal-continuation effects for an explicit 139-opcode registry, with byte-level
 GPR aliases, coarse memory and per-site gaps; see the
-[delivery record](docs/Ariadne/operand-effects-validation.md). The [minidump package](input/README.md) now provides captured-memory input and
+[initial delivery record](docs/Ariadne/operand-effects-validation.md) and
+[Stage A validation](docs/Ariadne/stage-a-validation.md). The [minidump package](input/README.md) now provides captured-memory input and
 local-start discovery for Windows/Linux AMD64. PE/ELF image and ELF core readers
 remain pending. The LLVM IR path and
 abstract machine-state propagation are formal specifications without Rust
 implementations.
+Both pinned real dumps now decode their faulting instruction; a predecessor
+slice from an independently known earlier entry remains Stage B work.
 
 The user64 profile targets 277 form/profile cases in three milestones:
 `register-core` (49), `near-control-stack` (72), and `ram-data` (156). All 49

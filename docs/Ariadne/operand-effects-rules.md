@@ -1,8 +1,12 @@
 # Operand/effect rule matrix
 
-Delivered 2026-09-26 for `user64-effects-v1.0`, LLVM MC 20.1.2.
-The table lists **137 exact LLVM opcode identities**, not 137 accepted ISA
-steps or 137 AMD user64 cases. Each entry additionally requires the shape,
+Initial delivery 2026-09-26 used `user64-effects-v1.0`, LLVM MC 20.1.2.
+Stage A advances the preparation identity to `user64-effects-v1.1` and adds
+two source-reviewed memory-immediate MOV effect rules.
+Their bounded [source and decoder review](stage-a-source-review.md) records the
+form-catalogue correspondence still required for instruction-step acceptance.
+The table now lists **139 exact LLVM opcode identities**, not verified ISA
+steps or accepted user64 cases. Each entry additionally requires the shape,
 register widths, prefix and address constraints in `src/effects/rules.rs`.
 Names not in `src/effects/forms.txt` have unresolved control in the new path.
 
@@ -104,10 +108,12 @@ locations. All writes to `memory:any` remain may-writes, never whole-memory kill
 | `MOV16ri` | `66b80100` | Reviewed normal-continuation effects | V3-GP-080, PDF 282–284 |
 | `MOV16rm` | `668b4308` | Reviewed normal-continuation effects | V3-GP-080, PDF 282–284 |
 | `MOV16rr` | `6689d8` | Reviewed normal-continuation effects | V3-GP-080, PDF 282–284 |
+| `MOV32mi` | `c70005000000` | Reviewed memory-immediate normal-continuation effects | V3-GP-080, AMD64-F-0502, PDF 283–284 |
 | `MOV32mr` | `894308` | Reviewed normal-continuation effects | V3-GP-080, PDF 282–284 |
 | `MOV32ri` | `b801000000` | Reviewed normal-continuation effects | V3-GP-080, PDF 282–284 |
 | `MOV32rm` | `8b4308` | Reviewed normal-continuation effects | V3-GP-080, PDF 282–284 |
 | `MOV32rr` | `89d8` | Reviewed normal-continuation effects | V3-GP-080, PDF 282–284 |
+| `MOV64mi32` | `48c7040841414141` | Reviewed memory-immediate normal-continuation effects | V3-GP-080, AMD64-F-0503, PDF 283–284 |
 | `MOV64mr` | `48894308` | Reviewed normal-continuation effects | V3-GP-080, PDF 282–284 |
 | `MOV64ri` | `48b80100000000000000` | Reviewed normal-continuation effects | V3-GP-080, PDF 282–284 |
 | `MOV64ri32` | `48c7c0ffffffff` | Reviewed normal-continuation effects | V3-GP-080, PDF 282–284 |

@@ -51,7 +51,7 @@ fn add_flags(s: &mut Summary, names: &[&str], undefined: &[&str]) {
 
 // Only one operand-size/address-size prefix, followed by at most one REX.
 // REP, LOCK, segment, duplicate/reordered prefixes are deliberately not admitted.
-fn prefixes(bytes: &[u8]) -> Option<(u8, bool)> {
+fn prefixes(bytes: &[u8]) -> Option<(u8, bool, bool)> {
     let (mut i, mut operand, mut address) = (0, false, false);
     while let Some(b) = bytes.get(i) {
         match b {
@@ -62,8 +62,8 @@ fn prefixes(bytes: &[u8]) -> Option<(u8, bool)> {
         }
         i += 1;
     }
-    let rex = bytes.get(i).is_some_and(|b| (0x40..=0x4f).contains(b));
-    if rex {
+    let rex = bytes.get(i).copied().filter(|b| (0x40..=0x4f).contains(b));
+    if rex.is_some() {
         i += 1;
     }
     if bytes.get(i).is_none_or(|b| {
@@ -75,7 +75,11 @@ fn prefixes(bytes: &[u8]) -> Option<(u8, bool)> {
     }) {
         return None;
     }
-    Some((if address { 32 } else { 64 }, rex))
+    Some((
+        if address { 32 } else { 64 },
+        rex.is_some(),
+        rex.is_some_and(|b| b & 8 != 0),
+    ))
 }
 fn memory(raw: &[RawOperand], width: u8, address_width: u8, next: Address) -> Option<Operand> {
     let [
@@ -130,7 +134,7 @@ pub(crate) fn summarize(raw: &Raw, bytes: &[u8]) -> Option<Summary> {
     {
         return None;
     }
-    let (address_width, rex) = prefixes(bytes)?;
+    let (address_width, rex, rex_w) = prefixes(bytes)?;
     if rex
         && raw.operands.iter().any(
             |r| matches!(r,RawOperand::Register(s) if ["AH","BH","CH","DH"].contains(&s.as_str())),
@@ -247,6 +251,18 @@ pub(crate) fn summarize(raw: &Raw, bytes: &[u8]) -> Option<Summary> {
         }
     }
     match code {
+        "MOV32mi" | "MOV64mi32" => {
+            if ops.len() != 6 || (code == "MOV64mi32") != rex_w {
+                return None;
+            }
+            let width = if rex_w { 64 } else { 32 };
+            let destination = memory(&ops[..5], width, address_width, next)?;
+            let source = imm(&ops[5], 32, width)?;
+            s.uses = reads(&destination);
+            s.may_defs.extend(["memory:any".to_owned()]);
+            s.operands = vec![destination, source];
+            return Some(s);
+        }
         "JCC_1" | "JCC_4" | "JMP_1" | "JMP_4" | "CALL64pcrel32" => {
             let conditional = code.starts_with("JCC");
             if ops.len() != if conditional { 2 } else { 1 } {
@@ -330,4 +346,37 @@ pub(crate) fn summarize(raw: &Raw, bytes: &[u8]) -> Option<Summary> {
         opaque(&mut s);
     }
     Some(s)
+}
+
+#[cfg(test)]
+mod stage_a_tests {
+    use super::*;
+    use crate::llvm_mc::protocol;
+
+    fn decoded() -> Raw {
+        protocol::parse("v2 MOV32mi 6 r:RAX i:1 r:NONE i:0 r:NONE i:5 0 2 0 0 -1 -1 -1 -1 -1 -1 4096 ok 6 ordinary -").unwrap()
+    }
+
+    #[test]
+    fn memory_immediate_rule_rejects_invalid_payload_and_width_claims() {
+        let bytes = [0xc7, 0, 5, 0, 0, 0];
+        let mut row = decoded();
+        assert!(summarize(&row, &bytes).is_some());
+        row.operands.pop();
+        assert!(summarize(&row, &bytes).is_none());
+        let mut row = decoded();
+        row.operands[0] = RawOperand::Unsupported;
+        assert!(summarize(&row, &bytes).is_none());
+        let mut row = decoded();
+        row.operands[4] = RawOperand::Register("FS".into());
+        assert!(summarize(&row, &bytes).is_none());
+        let mut row = decoded();
+        row.operands[5] = RawOperand::Immediate(1 << 32);
+        assert!(summarize(&row, &bytes).is_none());
+        let mut row = decoded();
+        row.opcode = "MOV64mi32".into();
+        assert!(summarize(&row, &bytes).is_none());
+        row.opcode = "MOV32mi".into();
+        assert!(summarize(&row, &[0x48, 0xc7, 0, 5, 0, 0, 0]).is_none());
+    }
 }

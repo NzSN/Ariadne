@@ -1,5 +1,10 @@
 # Minidump input delivery and validation
 
+This document retains the initial 2026-09-26 source-bound result. The later
+[Stage A delivery](stage-a-validation.md) decodes the previously unsupported
+faulting MOV in both pinned fixtures; the zero-decoded observations below
+remain historical for their original source hashes.
+
 2026-09-26, working-tree implementation based on `aee833f`. The current user
 scope is **only minidump input**, including Windows and Linux/Crashpad AMD64.
 PE/ELF images and ELF cores remain design work. No commit/push is included.

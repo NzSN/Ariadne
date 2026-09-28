@@ -1,5 +1,10 @@
 # Operand/effects delivery evidence
 
+This document retains the initial 137-opcode source-bound result. The later
+[Stage A delivery](stage-a-validation.md) adds two exact memory-immediate MOV
+identities under ruleset `user64-effects-v1.1` without changing this historical
+report's source hashes.
+
 2026-09-26; implementation in the working tree based on `fb7f142`.
 No commit or push. P0–P6 of [the plan](operand-effects-plan.md) are delivered
 within the scope below. Full instruction-step acceptance is unchanged.

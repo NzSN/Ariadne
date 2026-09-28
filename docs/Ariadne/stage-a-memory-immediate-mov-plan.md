@@ -1,8 +1,10 @@
 # Stage A implementation plan: memory-immediate MOV effects
 
-Prepared 2026-09-28 against `a9dc41a`. **Plan only:** no implementation,
-coverage-ledger promotion or instruction-step acceptance is claimed. This
+Prepared 2026-09-28 against `a9dc41a`. **Implementation delivered:** see the
+[Stage A validation record](stage-a-validation.md) for the exact source-bound
+result. This document preserves the planned steps and exit conditions. It
 expands [Stage A of the remaining plan](remaining-implementation-plan.md).
+No coverage-ledger promotion or instruction-step acceptance is claimed.
 The scope is two exact LLVM MC 20.1.2 forms, `MOV32mi` and `MOV64mi32`, used
 by the two retained AMD64 Windows/Linux minidump fixtures.
 

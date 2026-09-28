@@ -68,10 +68,12 @@ e902000000	v2 JMP_4 1 i:2 0 0 0 0 -1 4096 ok 5 jump 4103
 66b80100	v2 MOV16ri 2 r:AX i:1 1 0 0 0 -1 -1 4096 ok 4 ordinary -
 668b4308	v2 MOV16rm 6 r:AX r:RBX i:1 r:NONE i:8 r:NONE 1 1 0 0 -1 -1 -1 -1 -1 -1 4096 ok 4 ordinary -
 6689d8	v2 MOV16rr 2 r:AX r:BX 1 0 0 0 -1 -1 4096 ok 3 ordinary -
+c70005000000	v2 MOV32mi 6 r:RAX i:1 r:NONE i:0 r:NONE i:5 0 2 0 0 -1 -1 -1 -1 -1 -1 4096 ok 6 ordinary -
 894308	v2 MOV32mr 6 r:RBX i:1 r:NONE i:8 r:NONE r:EAX 0 2 0 0 -1 -1 -1 -1 -1 -1 4096 ok 3 ordinary -
 b801000000	v2 MOV32ri 2 r:EAX i:1 1 0 0 0 -1 -1 4096 ok 5 ordinary -
 8b4308	v2 MOV32rm 6 r:EAX r:RBX i:1 r:NONE i:8 r:NONE 1 1 0 0 -1 -1 -1 -1 -1 -1 4096 ok 3 ordinary -
 89d8	v2 MOV32rr 2 r:EAX r:EBX 1 0 0 0 -1 -1 4096 ok 2 ordinary -
+48c7040841414141	v2 MOV64mi32 6 r:RAX i:1 r:RCX i:0 r:NONE i:1094795585 0 2 0 0 -1 -1 -1 -1 -1 -1 4096 ok 8 ordinary -
 48894308	v2 MOV64mr 6 r:RBX i:1 r:NONE i:8 r:NONE r:RAX 0 2 0 0 -1 -1 -1 -1 -1 -1 4096 ok 4 ordinary -
 48b80100000000000000	v2 MOV64ri 2 r:RAX i:1 1 0 0 0 -1 -1 4096 ok 10 ordinary -
 48c7c0ffffffff	v2 MOV64ri32 2 r:RAX i:-1 1 0 0 0 -1 -1 4096 ok 7 ordinary -
