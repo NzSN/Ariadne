@@ -66,6 +66,10 @@ an unaccepted case as verified. The existing Rust core and its
   different achievements. Do not infer whole-mnemonic or whole-ISA support from
   a passing fixture.
 
-The next acceptance decision is the existing `register-core` gate. Its command,
-evidence rules, and open obligations are defined in
-[the user64 profile guide](docs/amd64-user64.md#progress-and-acceptance).
+The [remaining implementation plan](docs/Ariadne/remaining-implementation-plan.md)
+orders the real-minidump, reporting, formal-semantics and later analysis work
+with acceptance gates.
+
+The next formal instruction-step acceptance decision is the existing
+`register-core` gate. Its command, evidence rules, and open obligations are
+defined in [the user64 profile guide](docs/amd64-user64.md#progress-and-acceptance).

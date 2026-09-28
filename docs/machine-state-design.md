@@ -2,6 +2,8 @@
 
 Status: proposed implementation design; no machine-state implementation is
 introduced by this document. Source baseline: `62d7c57ac88336d1defd4bd121e9976470cf704f`.
+The [remaining implementation plan](Ariadne/remaining-implementation-plan.md)
+places this Rust module in Stage E.
 
 The specification is [AriadneMachineState.tla](../Specs/AriadneMachineState.tla),
 with shared facts in [AriadneMachineCommon.tla](../Specs/AriadneMachineCommon.tla)

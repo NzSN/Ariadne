@@ -1,8 +1,8 @@
 # Ariadne checkpoints
 
-Recorded on **2026-09-27 (Asia/Shanghai)** against HEAD **`712a635`**,
-with analyzer-outcome rendering delivered as an uncommitted working-tree change.
-Dates in the flow below are commit dates; validation dates are stated separately.
+Updated **2026-09-28 23:08 CST (Asia/Shanghai)** against HEAD **`a9dc41a`**.
+The new entry is the start point for the remaining implementation plan. Earlier
+delivery entries retain their historical, time-local commit and validation status.
 
 ```mermaid
 flowchart TD
@@ -12,12 +12,41 @@ flowchart TD
     D["2026-09-20 · bd54f7a<br/>Initial x86-64 instruction-semantics specification"]
     E["2026-09-22 · 9a21901<br/>AMD64 foundations and scoped user64 acceptance gates"]
     F["2026-09-24 · 6fbfbd9<br/>Staged delivery roadmap"]
-    G["2026-09-24 · fb7f142<br/>Pinned LLVM MC byte-span adapter · current HEAD"]
+    G["2026-09-24 · fb7f142<br/>Pinned LLVM MC byte-span adapter"]
     H["2026-09-26 · aee833f<br/>Structured operands and reviewed conservative effects"]
     I["2026-09-26 · 712a635<br/>Windows/Linux AMD64 minidump input"]
-    J["2026-09-27 · working tree<br/>Text and Graphviz outcome rendering"]
-    A --> B --> C --> D --> E --> F --> G --> H --> I --> J
+    J["2026-09-27 · a9dc41a<br/>Text and Graphviz outcome rendering"]
+    K["2026-09-28 23:08 CST · plan baseline<br/>Remaining implementation stages A–F"]
+    A --> B --> C --> D --> E --> F --> G --> H --> I --> J --> K
 ```
+
+## 2026-09-28 23:08 CST — remaining implementation plan begins
+
+This checkpoint starts the [remaining implementation plan](docs/Ariadne/remaining-implementation-plan.md)
+from committed HEAD `a9dc41a`. The existing analyzer, LLVM MC adapter,
+Windows/Linux AMD64 minidump reader, reviewed effect registry and text/DOT
+renderer are delivered. No implementation or acceptance status changes at this
+plan-start point; the only task edits are this checkpoint and the cross-linked
+planning documents. Untracked editor/TLA+ caches remain outside delivery.
+
+Two hash-pinned real minidumps still decode **zero** instructions at their
+crash IPs because `MOV32mi` and `MOV64mi32` are outside the current reviewed
+effect/control registry. The plan first reviews those exact memory alternatives,
+then establishes a captured predecessor path to a decoded crash-IP slice,
+and then produces an evidence-linked minidump CLI/report. Useful analysis from
+those forms is distinct from source-bound ISA instruction-step acceptance.
+
+The live `amd64-user64-v1` report at this checkpoint shows 49 paired
+`register-core` bodies and **0/49 verified instruction steps**; the 72
+control/stack and 156 RAM cases also have zero accepted steps. The accepted
+no-trust unknown-instruction fallback remains in force. Formal case closure can
+advance alongside the practical minidump path. The separate abstract-state
+and supplied LLVM IR Rust machines, explicit Rust-refinement assurance and
+measured scalability follow under their own gates. PE/ELF image and ELF core
+readers remain deferred under the current input scope.
+
+This entry records the plan baseline, not passing evidence for any of its six
+future stages. The plan document defines each deliverable and acceptance test.
 
 ## Current delivery checkpoint
 
@@ -50,7 +79,7 @@ not yet integrated into the Rust runtime.
 
 ## Formal acceptance checkpoint
 
-The live profile report on 2026-09-26 remains:
+The live profile report was rechecked on 2026-09-28:
 
 | Milestone | Paired bodies | Verified instruction steps | Status |
 | --- | ---: | ---: | --- |
@@ -75,6 +104,7 @@ remains deferred.
 | 2026-09-26, fresh at `fb7f142` | `cargo clippy --offline --all-targets -- -D warnings` | Passed. |
 | 2026-09-26, attempted at `fb7f142` | `bash native/llvm_mc/check.sh` | Stopped before native build/tests: LLVM 20.1.2 headers or library unavailable at configured paths. Native behavior was not freshly verified; this is an environment prerequisite failure. |
 | 2026-09-26, fresh | `python3 tools/amd64_profile.py report` | Confirmed 49 paired register bodies and zero verified cases across all three milestones. This report does not execute the formal proof/model gates. |
+| 2026-09-28, fresh | `python3 tools/amd64_profile.py report` | Reconfirmed 49 paired register bodies and zero verified cases across all three milestones. Planning and this progress report do not execute the formal proof/model gates. |
 
 The full AMD64 TLA+/Lean suite was not rerun. The subsequent effects delivery
 ran its focused TLA+ gate and the existing core MBT gate successfully.
@@ -83,13 +113,14 @@ ran its focused TLA+ gate and the existing core MBT gate successfully.
 
 ```mermaid
 flowchart TD
-    A["Delivered: byte-span decoding and Rust analysis core"]
-    B["Minidump reader delivered<br/>PE/ELF images and ELF cores pending"]
-    C["Pending: end-to-end binary/dump CFG fixtures"]
-    D["Initial reviewed effects delivered<br/>Broader rules and precise aliasing pending"]
-    E["Pending: verified precision<br/>register-core → near-control-stack → ram-data"]
-    F["Text and DOT rendering delivered<br/>Investigator CLI and JSON pending"]
-    A --> B --> C --> D --> E --> F
+    A["Delivered: minidump input, CFG/data slice,<br/>reviewed initial effects, text/DOT"]
+    B["Next: review MOV32mi and MOV64mi32 effects"]
+    C["Then: real-dump predecessor slice"]
+    D["Then: evidence-linked CLI and JSON"]
+    E["Parallel: source-bound register-core acceptance"]
+    F["Later: separate state/IR machines,<br/>proof boundary and performance"]
+    A --> B --> C --> D --> F
+    B --> E --> F
 ```
 
 Formal acceptance work can advance alongside adapter work. The next formal
@@ -106,6 +137,7 @@ TLA+/Lean correspondence, and conservative analysis-projection obligations.
 - [AMD64 validation record](docs/amd64-validation.md)
 - [AMD64 task ledger](docs/amd64-semantics-tasks.md)
 - [Model-based testing evidence](mbt/README.md)
+- [Remaining implementation plan](docs/Ariadne/remaining-implementation-plan.md)
 
 
 ## 2026-09-26 — Operand/effects working-tree delivery

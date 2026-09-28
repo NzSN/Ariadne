@@ -1,9 +1,10 @@
 # Structured operands and conservative instruction effects
 
 Design proposal, 2026-09-26. Source baseline: `fb7f142`.
-The proposal below has now been implemented in the working tree; see the
-[plan and delivery status](operand-effects-plan.md). This document itself does
-not certify full instruction-step acceptance.
+The initial design is implemented; see its [implementation plan and delivery
+status](operand-effects-plan.md). The next scoped extension has its own
+[Stage A memory-immediate MOV implementation plan](stage-a-memory-immediate-mov-plan.md).
+Neither plan alone certifies a complete AMD64 instruction step.
 
 ## Decision
 
