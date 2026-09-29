@@ -1,7 +1,15 @@
 # AMD64 delivery tasks
 
+Priority update 2026-09-29: the scoped 49-case register-core gate is retained
+as a [long-term formal research purpose](Ariadne/practical-assurance-priorities.md).
+The task tables below preserve their original formal dependencies and status;
+they no longer gate the practical minidump analyzer. The
+[Stage D implementation plan](Ariadne/stage-d-register-core-implementation-plan.md)
+and [progress record](Ariadne/stage-d-progress.md) remain the formal track.
+
 The user approved a scoped delivery strategy: [amd64-user64-v1](amd64-user64.md)
-is immediate; full-manual coverage is a long-term roadmap. The active first
+was the original immediate formal target; full-manual coverage is a longer
+roadmap. The active first formal
 milestone is `register-core` (49 exact form/profile cases), followed by
 `near-control-stack` (72) and `ram-data` (156). Source inventory and prior work
 are preserved. The historical full-coverage tables below are roadmap records,
@@ -9,7 +17,7 @@ not prerequisites for the first scoped milestone.
 
 Current scoped `general-purpose-gpt` responsibilities:
 
-| Responsibility | Immediate work | Deferred expansion |
+| Responsibility | Scoped formal work | Deferred expansion |
 | --- | --- | --- |
 | Profile gate review | Bind exact source forms and profile hashes; keep paired bodies distinct from verified cases | Later profile milestones |
 | Default fallback foundation | Prove the no-trust unknown-instruction projection in TLA+ and Lean | Selective expert summaries and runtime integration |
@@ -73,7 +81,7 @@ none of C1–F3 is marked delivered.
 
 The tables below preserve the earlier full-coverage workstream decomposition.
 They are deferred roadmap routing, not live worker status or an acceptance
-decision. Immediate acceptance uses the profile-bound gate above.
+decision. Formal scoped acceptance uses the profile-bound gate above.
 
 | Task | Owner role / workstream | Scope | Dependencies | Acceptance |
 | --- | --- | --- | --- | --- |

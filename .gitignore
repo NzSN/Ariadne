@@ -7,6 +7,8 @@ tmp-*/
 temp-*/
 .cache/
 __pycache__/
+.projectile-cache.eld
+/Specs/.tlacache/
 
 # Apalache output and TLC state storage.
 _apalache-out/
@@ -28,3 +30,5 @@ _apalache-out/
 /lean/.lake/
 
 /input/target/
+/ir/target/
+/bench/target/

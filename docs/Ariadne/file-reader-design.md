@@ -2,10 +2,21 @@
 
 Design proposal, 2026-09-26. Source baseline: `aee833f`.
 Scope update: the user selected **only the minidump path** for current
-implementation. Windows/Linux AMD64 minidump input is now being delivered in
+implementation. Windows/Linux AMD64 minidump input is delivered in
 [`input/`](../../input/README.md); PE/ELF images and ELF cores below remain design
 work. The broader initial-delivery proposal is retained for future planning,
 not used to claim implementation of those formats.
+The minidump-only [Stage C implementation plan](remaining-implementation-plan.md#c--investigator-cli-and-versioned-output)
+and [versioned report schema](stage-c-report-schema.md) cover the investigator
+CLI built on this reader.
+The [current practical queue](practical-assurance-priorities.md) prioritizes a
+source-anchored historical capture path; it does not expand reader formats.
+Its minidump-only [Priority 1 real-capture implementation plan](priority-1-real-capture-plan.md)
+and [Priority 4 workload-performance implementation plan](priority-4-workload-performance-plan.md)
+cover historical evidence and measured scale for this reader and request builder.
+The corresponding [real-capture evidence design](priority-1-real-capture-design.md)
+and [workload-performance design](priority-4-workload-performance-design.md)
+specify the case and measurement claims without expanding reader scope.
 
 ## Decision and first delivery
 

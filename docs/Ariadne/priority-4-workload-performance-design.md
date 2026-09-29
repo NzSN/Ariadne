@@ -1,0 +1,86 @@
+# Priority 4 design: workload-based performance decision
+
+Design decision, **2026-09-29**. The scoped
+[Priority 4 implementation plan](priority-4-workload-performance-plan.md)
+applies this design. It builds on the current
+[Stage F baseline](stage-f-proof-and-performance.md), the separate
+[`bench/` harness](../../bench/README.md), and the supported
+[minidump CLI/report contract](stage-c-report-schema.md). The long-term Rust
+refinement proof remains independent of this performance decision.
+
+## Decision to be made
+
+Measure whether a representative Windows/Linux AMD64 minidump investigation
+has a reproducible delay or resource problem. If it does, identify the stage
+and operation responsible before changing code. A faster synthetic graph alone
+does not justify a solver or decoder change for investigators. A no-change
+decision with measured evidence is a valid result.
+
+The unit of comparison is one **frozen query**: exact dump SHA-256, platform,
+entry and seed VAs, preparation limits, decoder build/protocol/target, effect
+ruleset/catalogue and output formats. Source revision, host, toolchain and
+measurement settings are part of the measurement record. Before/after claims
+compare the same query and host. Results from different hosts or artifact
+versions remain separate observations.
+
+## Workload set and measurement layers
+
+| Workload | Purpose | Claim limit |
+| --- | --- | --- |
+| Priority 1 real-capture query, after Priority 2 classifies path blockers | Investigator workload through the supported CLI; seek at least 64 decoded starts and a meaningful slice | Without a qualifying larger capture, release-scale behavior remains unqualified |
+| Existing four-node Stage B minidump | Stable end-to-end regression and startup-cost reference | Too small to motivate graph-solver optimization by itself |
+| Synthetic linear, loop, join, opaque-call and dense-alias graphs at bounded growing sizes | Isolate graph and reaching-definition scaling | Does not measure reading, decoding or reporting |
+
+Two measurements answer different questions. **End-to-end CLI time** includes
+process startup, opening/validating the dump, local discovery and native LLVM
+MC launches, analysis, rendering and publishing text/DOT/JSON. Measure it with
+a prebuilt release binary and fresh output destination. **Stage measurements**
+locate cost in reader/materializer, decoder, core and report; they may extend
+`bench/` but must use the same query facts. The core's `AnalyzerMetrics` record
+actions, incoming evaluations, full edge scans, transfer evaluations and
+reaching-set sizes. The benchmark allocator counts allocation requests and
+cumulative requested bytes in its own process, not peak live memory or LLVM
+helper allocations. Use an external measurement for process peak resident
+memory where available.
+
+Retain one warm-up and at least five measured repetitions, median and spread,
+raw observations, graph sizes and operation counts. Keep cold-process CLI
+numbers separate from warm in-process stage numbers. Preserve source/artifact
+hashes and resource-limit outcomes, including timeouts. The previous
+`stage-f-baseline.csv` remains a historical result, not a file to overwrite.
+
+## Optimization decision and invariants
+
+Set and record the investigation's practical latency/resource budget **before**
+editing performance-sensitive code. An optimization candidate requires a
+qualifying real workload that exceeds that budget or hits a documented limit,
+plus stage/counter evidence for a specific bottleneck. If the real workload is
+within budget, record no change. If no larger real capture exists, record an
+inconclusive real-workload decision even if synthetic graphs are slow.
+
+Candidate remedies follow the measured cause. A private predecessor index is
+plausible only if repeated full-edge scans dominate. Decoder batching or a
+persistent helper is plausible only if launch overhead dominates. Dense-alias
+cost needs its own profile before selecting a representation change. Select
+one change and a concrete before/after improvement target before editing.
+
+The change must preserve the analyzer's externally observable `step()`
+schedule, graph, reaching definitions, slice, obligations, byte provenance and
+report identities for fixed input. Benchmark-only counters and timers must not
+alter semantic state. A change that genuinely needs a different public result
+or replay contract is a separate design decision, not an incidental speedup.
+After an implementation change, compare exact fixed-input results and replay
+traces, then rerun the applicable core, minidump, MBT and mutation gates.
+
+## Decision record
+
+Publish raw CSV and a short validation record with frozen workload identities,
+host/tool versions, distributions, stage/counter attribution, selected budget,
+decision, and any remaining limits. For an optimization, include before/after
+results on the same workloads and source-bound conformance evidence. For no
+change, state the measured range in which the current implementation is
+acceptable. Neither result asserts a universal performance bound, formal Rust
+refinement, or AMD64 instruction-step correctness.
+The first [measurement record](priority-4-performance-validation.md) is
+bounded by the currently available 34-node real capture; it does not close
+the larger real-workload target.

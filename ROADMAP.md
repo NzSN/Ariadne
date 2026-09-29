@@ -3,9 +3,12 @@
 Ariadne should produce useful, evidence-bounded control-flow and data-flow
 results before the full AMD64 instruction set is modeled. Its long-term AMD64
 coverage target remains in [the semantics design](docs/amd64-semantics-design.md).
-The immediate formal deliverable remains the scoped
-[64-bit user-mode profile](docs/amd64-user64.md). Neither a decoded instruction
-nor a successful component check is, by itself, a verified instruction step.
+The scoped [64-bit user-mode profile](docs/amd64-user64.md) is retained as a
+long-term formal research purpose under the
+[assurance priority decision](docs/Ariadne/practical-assurance-priorities.md).
+Neither a decoded instruction nor a successful component check is, by itself,
+a verified instruction step. Its 49-case gate does not block practical
+minidump investigations.
 
 ## Current checkpoint
 
@@ -19,11 +22,23 @@ GPR aliases, coarse memory and per-site gaps; see the
 [initial delivery record](docs/Ariadne/operand-effects-validation.md) and
 [Stage A validation](docs/Ariadne/stage-a-validation.md). The [minidump package](input/README.md) now provides captured-memory input and
 local-start discovery for Windows/Linux AMD64. PE/ELF image and ELF core readers
-remain pending. The LLVM IR path and
-abstract machine-state propagation are formal specifications without Rust
-implementations.
-Both pinned real dumps now decode their faulting instruction; a predecessor
-slice from an independently known earlier entry remains Stage B work.
+remain deferred. A tool-produced [captured predecessor slice and versioned
+investigator CLI](docs/Ariadne/stage-b-c-validation.md) are delivered. The
+two historical Breakpad dumps still serve as independent crash-IP regressions.
+A separate [controlled Chromium real-capture investigation](docs/Ariadne/priority-1-real-capture-validation.md)
+now qualifies one possible predecessor slice with an exact matching-build
+entry witness. It does not reconstruct the actual execution path or qualify
+larger-workload performance.
+The [Priority 2 effect review](docs/Ariadne/priority-2-effects-validation.md)
+retains opaque calls on that path. [Priority 3 presentation](docs/Ariadne/priority-3-presentation-validation.md)
+adds a readable text overview and Linux/Windows examples without changing
+JSON or DOT semantics. [Priority 4 measurements](docs/Ariadne/priority-4-performance-validation.md)
+are source-bound but await a 64-node real capture before an optimization
+decision.
+The [machine-state and directly supplied LLVM IR Rust paths](docs/Ariadne/stage-e-validation.md)
+pass focused model fixtures; generated replay is still open. A
+[proof-boundary and benchmark baseline](docs/Ariadne/stage-f-proof-and-performance.md)
+is recorded without a universal refinement or optimization claim.
 
 The user64 profile targets 277 form/profile cases in three milestones:
 `register-core` (49), `near-control-stack` (72), and `ram-data` (156). All 49
@@ -39,16 +54,17 @@ remaining obligations.
 
 | Phase | Deliverable | Completion evidence |
 | --- | --- | --- |
-| 1. Input and decode | The pinned LLVM MC adapter and Windows/Linux minidump reader are delivered; PE/ELF images and ELF cores remain pending. Readers must provide one immutable address-space snapshot, VA mapping, and verified byte provenance. | The same known bytes decode consistently from binary and dump views; missing or conflicting bytes remain explicit. VAs are never confused with file offsets. |
+| 1. Input and decode | The pinned LLVM MC adapter and Windows/Linux minidump reader are delivered; PE/ELF images and ELF cores remain deferred by the current input scope. Readers must provide one immutable address-space snapshot, VA mapping, and verified byte provenance. | The same known bytes decode consistently from binary and dump views; missing or conflicting bytes remain explicit. VAs are never confused with file offsets. |
 | 2. Control-flow recovery | Translate decoded control transfers into the core's instruction kinds, direct targets, fallthroughs, calls, returns, and unresolved-edge obligations. | End-to-end binary and dump fixtures exercise direct branches, calls, returns, sparse bytes, and indirect branches. Every edge has source instruction evidence; unresolved targets are visible, not silently omitted. |
 | 3. Conservative effects | Initial scoped rules and evidence are delivered; broader forms and precise aliasing remain. Supply `uses`, `may_defs`, and justified `must_defs` for the reaching-definitions and slicing core. Start with decoded operand and instruction metadata, then add reviewed rules for important register, flag, stack, and memory effects. | Slices retain every possible origin in representative crash paths. An unknown effect cannot become a definite overwrite, a no-op, or a known successor. Alias and call-summary assumptions are recorded. |
-| 4. Verified precision | Close the existing `register-core` profile gate, then advance `near-control-stack` and `ram-data` case by case. Connect accepted semantics to effect summaries and, where justified, branch feasibility or indirect-target reasoning. | Each promoted case has source-bound TLA+ and Lean evidence for legality, payload, effects, frames, faults, instruction boundary, correspondence, and conservative analysis projection. The selected milestone gate passes. |
-| 5. Investigator output | Text and Graphviz DOT rendering of analyzer outcomes is delivered. Annotated assembly, a production CLI and JSON export remain pending. | A crash-analysis fixture can be reproduced from a pinned snapshot, and each displayed conclusion links to its bytes, decoded instruction, and semantic evidence or uncertainty reason. |
+| 4. Formal research precision | Long term: close `register-core`, then `near-control-stack` and `ram-data` case by case. Keep this acceptance track independent of investigator delivery. | Each promoted case has source-bound TLA+ and Lean evidence for legality, payload, effects, frames, faults, instruction boundary, correspondence, and conservative analysis projection. The existing milestone gate passes only at full closure. |
+| 5. Investigator output | Text, Graphviz DOT, JSON v1 and a readable per-instruction minidump overview are delivered. Separate Stage E result envelopes remain. | Pinned Linux/Windows examples and the controlled Chromium case retain matching identities, edges, possible origins and uncertainty across formats. |
 
-Phases 1–3 provide a useful partial analyzer without waiting for complete AMD64
-coverage. Phase 4 increases precision only where its evidence is accepted. The
-formal work can advance alongside adapter work, but the adapter must not label
-an unaccepted case as verified. The existing Rust core and its
+Phases 1–3 and 5 provide a useful evidence-bounded minidump workflow without
+waiting for the 49-case formal gate. Phase 4 is an independent long-term
+research track. Source-reviewed effect rules can improve practical slices
+while retaining uncertainty; the adapter must not label an unaccepted case
+as verified. The existing Rust core and its
 [input contract](docs/implementation.md) remain the integration boundary.
 
 ## Scope and priority rules
@@ -70,9 +86,10 @@ an unaccepted case as verified. The existing Rust core and its
   a passing fixture.
 
 The [remaining implementation plan](docs/Ariadne/remaining-implementation-plan.md)
-orders the real-minidump, reporting, formal-semantics and later analysis work
-with acceptance gates.
+orders the real-minidump, reporting and later analysis work. The
+[practical assurance queue](docs/Ariadne/practical-assurance-priorities.md)
+lists the next release-facing work separately from formal research.
 
-The next formal instruction-step acceptance decision is the existing
+When formal research resumes, its next instruction-step acceptance decision is the existing
 `register-core` gate. Its command, evidence rules, and open obligations are
 defined in [the user64 profile guide](docs/amd64-user64.md#progress-and-acceptance).

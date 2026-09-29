@@ -1,14 +1,20 @@
 # AMD64 semantics and Lean correspondence
 
-Status: staged delivery approved. The immediate target is the explicit
+Status: staged formal design retained. Its first scoped target is the explicit
 64-bit user-mode profile in [the subset plan](amd64-user64.md). Complete manual
-coverage is a long-term roadmap target, not the first-release gate.
+coverage is a still broader long-term roadmap target.
+The scoped [Stage D register-core implementation plan](Ariadne/stage-d-register-core-implementation-plan.md)
+details source-bound closure of the first 49 form/profile cases.
+The [2026-09-29 assurance decision](Ariadne/practical-assurance-priorities.md)
+places that unchanged 49-case gate in the long-term formal research track.
+Practical minidump investigations use reviewed conservative effects and
+explicit gaps without claiming accepted ISA instruction steps.
 The [work list](amd64-semantics-tasks.md) distinguishes completed artifacts from
 remaining semantic coverage. No inventory entry alone establishes ISA support.
 
 ## Accepted scope
 
-The current implementation priority is `amd64-user64-v1`: long64, CPL 3,
+The formal research profile is `amd64-user64-v1`: long64, CPL 3,
 validated decoded inputs, ordinary write-back RAM where accessed, and explicit
 instruction-boundary outcomes. The first milestone is 49 register/immediate
 form/profile cases; near control/stack and common RAM forms follow separately.

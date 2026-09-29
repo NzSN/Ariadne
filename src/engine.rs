@@ -1,4 +1,16 @@
 use crate::model::*;
+use std::cell::Cell;
+
+/// Operation counts for a single deterministic analyzer run. These are
+/// observations of implementation work, not an ISA or refinement certificate.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub struct AnalyzerMetrics {
+    pub actions: u64,
+    pub incoming_evaluations: u64,
+    pub edge_scans: u64,
+    pub transfer_evaluations: u64,
+    pub max_reaching_definitions_at_site: usize,
+}
 
 /// A deterministic schedule of the specification's enabled actions. Inputs are
 /// owned, validated at construction, and only exposed by shared reference.
@@ -6,6 +18,7 @@ use crate::model::*;
 pub struct Analyzer {
     request: AnalysisRequest,
     state: AnalysisState,
+    metrics: Cell<AnalyzerMetrics>,
 }
 
 impl Analyzer {
@@ -25,7 +38,11 @@ impl Analyzer {
                 .collect(),
             ..AnalysisState::default()
         };
-        Ok(Self { request, state })
+        Ok(Self {
+            request,
+            state,
+            metrics: Cell::new(AnalyzerMetrics::default()),
+        })
     }
 
     pub fn request(&self) -> &AnalysisRequest {
@@ -36,9 +53,19 @@ impl Analyzer {
         &self.state
     }
 
+    pub fn metrics(&self) -> AnalyzerMetrics {
+        self.metrics.get()
+    }
+
     /// Perform one `Next` action, choosing the lowest eligible VA when the
     /// specification leaves scheduling open. Returns false only in `Done`.
     pub fn step(&mut self) -> bool {
+        if self.state.phase == Phase::Done {
+            return false;
+        }
+        let mut metrics = self.metrics.get();
+        metrics.actions += 1;
+        self.metrics.set(metrics);
         match self.state.phase {
             Phase::Recover => {
                 if let Some(&address) = self.state.pending.first() {
@@ -57,6 +84,10 @@ impl Analyzer {
                         .expect("validated domain");
                     if !incoming.is_subset(reaching) {
                         reaching.extend(incoming); // Propagate
+                        let mut metrics = self.metrics.get();
+                        metrics.max_reaching_definitions_at_site =
+                            metrics.max_reaching_definitions_at_site.max(reaching.len());
+                        self.metrics.set(metrics);
                         return true;
                     }
                 }
@@ -78,7 +109,7 @@ impl Analyzer {
                     self.state.slice.extend(predecessors); // ExpandSlice
                 }
             }
-            Phase::Done => return false,
+            Phase::Done => unreachable!("handled before action counting"),
         }
         true
     }
@@ -178,6 +209,8 @@ impl Analyzer {
     }
 
     fn incoming(&self, address: Address) -> DefinitionSet {
+        let mut metrics = self.metrics.get();
+        metrics.incoming_evaluations += 1;
         let mut incoming = DefinitionSet::new();
         if self.request.entry_points.contains(&address) {
             incoming.extend(self.request.locations.iter().map(|loc| Definition {
@@ -187,12 +220,14 @@ impl Analyzer {
             }));
         }
         for edge in &self.state.edges {
+            metrics.edge_scans += 1;
             if edge.dst != address
                 || !edge.kind.is_local()
                 || !self.state.decoded.contains(&edge.src)
             {
                 continue;
             }
+            metrics.transfer_evaluations += 1;
             let predecessor = &self.request.instructions[&edge.src];
             incoming.extend(
                 self.state.reaching[&edge.src]
@@ -206,6 +241,7 @@ impl Analyzer {
                 origin: DefinitionOrigin::Instruction,
             }));
         }
+        self.metrics.set(metrics);
         incoming
     }
 

@@ -1,0 +1,48 @@
+{
+  "recordedUtc": "2026-09-29T03:40:33.011309+00:00",
+  "baselineHead": "32a1f3d",
+  "profileId": "amd64-user64-v1",
+  "profileSha256": "5c07adb4b1391d5b2ec29348b208789c2469b2728afd700f27cd3a90bef078cf",
+  "candidateCaseId": "register-core:AMD64-F-0503-R",
+  "candidateCaseSha256": "9ee47873244e00ea52502f00b5438fae3cbfaddede1925a74ddf88d3ce67d0c2",
+  "candidateSourceFormSha256": "d45a228c0720624d73a267ced2b728de85f0058ef94601f61e459329f8fbaa29",
+  "pairedRegisterCoreBodies": 49,
+  "verifiedRegisterCoreCases": 0,
+  "acceptedFallback": true,
+  "semanticCaseCount": 0,
+  "checksPassed": [
+    "python3 tools/amd64_inventory.py check --cache /tmp/ariadne-amd-sources",
+    "python3 tools/amd64_forms.py check",
+    "python3 tools/amd64_profile.py check"
+  ],
+  "manualSha256": {
+    "/tmp/ariadne-amd-sources/24592_3.25_APM_Vol1_PUB.pdf": "aed9236b718ae86cdb49f7d628f4ebb1a4bdce1a012df6cf6aad6735776c8a38",
+    "/tmp/ariadne-amd-sources/24593_3.45_APM_Vol2_PUB.pdf": "7257d41d3584822edb7934e2c630c7d3865eea30c0ab95b8de4e546088d5ea9a",
+    "/tmp/ariadne-amd-sources/24594_3.38_APM_Vol3_PUB.pdf": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee"
+  },
+  "sourceSha256": {
+    "Specs/AMD64/manuals.lock.json": "eb8e6fea525e43a1f2740e97f4bff0dede564cac1fda64c5a5e2e9a46a6699f3",
+    "Specs/AMD64/forms.json": "59b18b6a0668fe9836b4355829a347ef2e75bfc6fb161c979f5a4233569a1f40",
+    "Specs/AMD64/user64-profile.json": "7a98a2a031fc4ad89184562762806ebe371c12f0d27d23008ab66aa02784cd39",
+    "Specs/AMD64/user64-coverage.json": "9287c23cb1ce99f79d08687e19c3282e512425002eecc80b96e89df4aa657cb1",
+    "Specs/AMD64/coverage.json": "139fd326445bec8947ef617e49dc97ba8a244b6c6234f6c6980dad634e641e04",
+    "Specs/AMD64IntegerExecution.tla": "35f3dd249198c26c509054beacd52aa149a93e6a59d211ba427d8dc895288756",
+    "Specs/AMD64IntegerExecutionChecks.tla": "4395068565c2f8795bba947568b93bb747ef9d7b389ef8def189b573c4e02617",
+    "Specs/AMD64InstructionFormsCore.tla": "1f95f280c610f936899844c4a9eaa4b8d6b6e3910329ff94c59252f2ef1842a4",
+    "Specs/AMD64Operands.tla": "efbac6b3ad0f928b2cbbfc007743cb6b9b5f994ddffa5c6d8bb8920ac0a37947",
+    "Specs/AMD64ArchitecturalState.tla": "527d0e3d6ddd4d3ef7a5185f847acc583811aa40fa55ad887131f6e48af32782",
+    "Specs/AMD64Exceptions.tla": "353e92d1b7acab7a47b230488fda54b7371ed14ce3a008f073a66b9bf37b8ceb",
+    "Specs/AMD64RegisterCoreProfileChecks.tla": "a6592691cf4c49768a4482d04a6e1ddde938c33474f374a2e83bdc54783f260f",
+    "lean/AMD64/IntegerExecution.lean": "740b8048175bed98bb2efdb1e054363708dea160b2f80817ff91a656c67a22aa",
+    "lean/AMD64/IntegerExecutionChecks.lean": "8b193710a5314e1c41ef18ad1cba674630f9b2457efc4fc14c6d1afc9a4298f4",
+    "lean/AMD64/InstructionFormsCore.lean": "0317f05a2c45f7fb81a07fbf5f082d8626d1bfc5aa3af0e169796a4a6bbd9e07",
+    "lean/AMD64/Operands.lean": "e0b5bdb2c2536e75d77df18b4bee80d69fc9c75bba2d3aaecaad135150c0519b",
+    "lean/AMD64/ArchitecturalState.lean": "f6cd75e24c5a55152f66ec1384611ff0a83dec0626802e67d87ed038ea464fe1",
+    "lean/AMD64/Exceptions.lean": "88b511ebe96b0cda8ad619f85a05fa2f9c0ff768a21d3455bc7a96b328bfe024",
+    "lean/AMD64/RegisterViews.lean": "75ae5cb4c9feb72c54b38ce90e1da2732c9f57490abf333e53789b80e60980ab",
+    "tools/amd64_profile.py": "2909a4dca820331307fb5f4efbf96b0e07518ac11e1ca675a338bde43c31f4d4",
+    "tools/amd64_forms.py": "4562ea4f4b1f24012206c124c25cd053283ddc3c7aa7f5aa5bdd7fbf703c087b",
+    "tools/amd64_inventory.py": "23dbf1d8c2630b1cbf5e4e0cf8be2cdc0db5890052761dab11e0e05130a9408b",
+    "tools/amd64_acceptance.py": "2a9a22a141d6b76489147adc2c9959049e519d8a76ba84b4c85823b85b39f7be"
+  }
+}

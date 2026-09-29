@@ -6,6 +6,18 @@ starts, and prepares the existing Ariadne analysis request. This package is
 separate from the dependency-free core. PE/ELF images and ELF core files are
 not implemented here.
 
+The supported [minidump investigator CLI](src/bin/ariadne-minidump.rs) now
+joins the reader, reviewed effects, analyzer and renderer into one
+[versioned evidence report](../docs/Ariadne/stage-c-report-schema.md). A
+tool-produced [captured predecessor fixture](../docs/Ariadne/stage-b-c-validation.md)
+demonstrates an earlier address producer reaching the crash-IP seed.
+A separate [controlled Chromium real-capture case](../docs/Ariadne/priority-1-real-capture-validation.md)
+retains an independently anchored local entry, possible RBX producer and
+explicit opaque-call gaps. Its raw dump remains an external, hash-pinned
+artifact rather than a committed fixture.
+The [investigator examples](../docs/Ariadne/minidump-investigator-examples.md)
+show the Linux/Windows CLI commands and the readable instruction overview.
+
 ```rust
 use ariadne::effects::PreparationOptions;
 use ariadne_input::{AnalysisQuery, FileSnapshot, OpenLimits, PrepareLimits};
@@ -113,7 +125,8 @@ bash Specs/check-input.sh
 ```
 
 The complete gate also checks the existing effects/MBT pipeline, isolated
-minidump mutations and two explicitly supplied, hash-pinned Breakpad test dumps:
+minidump mutations, the pinned Stage B/C fixtures and CLI, and two explicitly
+supplied, hash-pinned Breakpad test dumps:
 
 ```sh
 LLVM20_INCLUDE_DIR=/tmp/ariadne-llvm20/usr/include/llvm-20 \
@@ -136,3 +149,19 @@ To render a result with distinct entry and seed addresses, use the
 report/DOT to stdout and upstream diagnostics to stderr. See the
 [rendering guide](../docs/Ariadne/result-rendering.md). The existing `inspect`
 example retains its summary output.
+
+To publish text, DOT and JSON v1 together from one frozen query:
+
+```sh
+cargo run --offline --locked --manifest-path input/Cargo.toml \
+  --bin ariadne-minidump -- input/tests/fixtures/stage_b_windows.dmp \
+  --decoder target/ariadne-llvm-mc --entry 0x7ff700001000 \
+  --seed-exception-rip --output-dir /tmp/ariadne-investigation
+```
+
+Use `--format text|dot|json` instead of `--output-dir` for one stdout format.
+`--entry` and `--seed` may repeat and are semantic hexadecimal VAs. The
+exception RIP option adds a seed only; it never invents an earlier root. The
+output directory must not exist. `--max-starts N` bounds local discovery and
+fails before publishing when exhausted. See the [Stage B/C validation](../docs/Ariadne/stage-b-c-validation.md)
+for exact fixtures, graph and output evidence.

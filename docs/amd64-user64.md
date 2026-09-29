@@ -1,9 +1,16 @@
 # Verified 64-bit user-mode semantics
 
-The immediate deliverable is an explicitly scoped, machine-checked formal
-semantics library for Ariadne's crash-analysis needs. Full-manual coverage stays
-on the roadmap. Acceptance is measured per **form/profile case**, and useful
-component progress is recorded independently of completed instruction steps.
+This explicitly scoped, machine-checked semantics library is a **long-term
+formal research purpose** for Ariadne. The
+[practical assurance decision](Ariadne/practical-assurance-priorities.md)
+allows evidence-bounded minidump analysis to proceed without the 49-case gate.
+Full-manual coverage remains a still broader roadmap target. Acceptance within
+this formal profile is measured per **form/profile case**, and component
+progress is recorded independently of completed instruction steps.
+The [standalone Stage D implementation plan](Ariadne/stage-d-register-core-implementation-plan.md)
+and [first-case progress record](Ariadne/stage-d-progress.md) retain the
+[0/49 acceptance audit](Ariadne/stage-d-acceptance-audit.md) until complete
+source-bound instruction steps are checked.
 
 ## Profile and milestones
 
@@ -99,6 +106,8 @@ python3 tools/amd64_inventory.py check --require-complete
 The lightweight gate validates only the selected profile's recursively cited
 evidence and current source hashes; unrelated open full-manual roadmap leaves
 do not block it. The
+required `register-core` gate is an acceptance command for this long-term
+formal track, not a release prerequisite for the minidump CLI. The
 full check script actually runs the model/proof checks. Accepted cases must cite
 accepted semantic leaves in the existing coverage ledger, tied to both the
 profile hash and exact case hash. Both formalizations, executable TLA checks,

@@ -1,0 +1,385 @@
+{
+  "recordedUtc": "2026-09-29T16:13:09.171796+00:00",
+  "sourceSha256": {
+    "Cargo.lock": "f1d5d49897a04815e3b9b1291770c38a71f560329440e4aace6f4a038ddee283",
+    "Cargo.toml": "10a7e789d98fc97f26ef1c7fff61ccc4f9969d3d9ecdca44c5a9c1f47943ea65",
+    "Specs/Ariadne.tla": "26d3a783c43b0b86029bfbeb2e9f8bff7a56d3c7e8702493d7b502d21bf32019",
+    "Specs/AriadneLLVMIR.tla": "d67c63270444125bdef4dde1c8284d13d0b5706f14ec9cd2336c5cd7f8b04a54",
+    "Specs/AriadneLLVMIRExample.tla": "c812c7638e2a9e619059cf15d700758e94872ec6cf1ec1b8949cfb3f7517f95d",
+    "Specs/AriadneMachineCommon.tla": "32b60854773c7c14e06e449300a9757fefdfbfc763a0f58ef4574f1edd019947",
+    "Specs/AriadneMachineState.tla": "7edb33e3d03e1a91c015489ef670d2d37654a7ce8a4cdec927d3a834ffec9fe7",
+    "Specs/AriadneMachineStateExample.tla": "24e4b5bf4d7792d379705d0cc0bbf704178f8de40dab6e382b44d270b1e04eff",
+    "Specs/LLVMIR.cfg": "820b0be1c17185708bb6e64edcb751f5607136df6bc3530b0fe45a506b349388",
+    "Specs/MachineState.cfg": "820b0be1c17185708bb6e64edcb751f5607136df6bc3530b0fe45a506b349388",
+    "bench/Cargo.lock": "02a6b334049a53e12beb7e45172a96a416363ebaee4fa2ec8b166b30c615bb2b",
+    "bench/Cargo.toml": "8aebb47f7d2a75b98fc1f06466436c876d94e4d6cc9ed97d54a90050688b6bbd",
+    "bench/src/bin/real_minidump.rs": "5aa98a252df85969ec008df92e49171d8910d6a640548cce215302c344b2d0f4",
+    "bench/src/main.rs": "b645266de63f29e9f9bc9d3dba104409d9a595ae0a517e85dc3a23ec68196e59",
+    "input/Cargo.lock": "e6b7793b82f589eadb9f570c4212ffccdbf488236bc83310a7d8c3e919050593",
+    "input/Cargo.toml": "fa91e49864d7506acf2f2f25a88f10dc6bd9fe5153a71daae8f6f00444494a9a",
+    "input/examples/inspect.rs": "b29a8086261112738bd6e9fc29249e846e0da51ab6eedcaf8fbcedc96e7cac8c",
+    "input/examples/render_minidump.rs": "a38f1507adad5bc1fee95b41111da2a5189df933a4426fdbaae970305823d9cf",
+    "input/src/address_space.rs": "5b6bc4e94616eeb911f09ead0e512ee420d85ec9f324d965e1610637aa840634",
+    "input/src/bin/ariadne-minidump.rs": "4d7435120d09bac46d090186c3d5dc193b4c84914c9d18c8f48857e503e1e7bd",
+    "input/src/lib.rs": "296f3e2b6cb7b189c9fe4969a1fa3625137f81a725659526b79900bd5ccf8376",
+    "input/src/materialize.rs": "c00daebf4e9861915ad7a747354eb7125700e4537d412339888f7233a15ab2f4",
+    "input/src/minidump.rs": "02588ccfed70c8bc601d3a6a473f9659ccea1da0951965e4e152c859e499c04c",
+    "input/src/report.rs": "7718360470b319100a37659b221d1e89120d4167fb34d27112b027801678e6f3",
+    "input/tests/common/mod.rs": "af6b41728e969e022a5b72206ac0471982be367f84f693254f06b17ab3c26ea4",
+    "input/tests/fixtures/make_stage_b.py": "8433813d2d31c7bc3ca1dd01e498f548817ed5ff2efd5eeed55532e3761bafa9",
+    "input/tests/fixtures/stage_b_linux.dmp": "7e71f4926e615789815299b98e3c3c725180ed4dce4065937fa533beb1018824",
+    "input/tests/fixtures/stage_b_windows.dmp": "f3a0407bff881356c0128e7587c03ea9f143dbd5fee59abbe8fc5edb75ad30bf",
+    "input/tests/native.rs": "58347dc87ce5575296882bffb174ceef27894d41a13090a208ced8e097b41f78",
+    "input/tests/reader.rs": "06e4720f60eeb6ad145102cd5f604cd2db69f08446a8e363950299ff765d4403",
+    "input/tests/real_dumps.rs": "3e5f6a0851ae0873b513ab3e98f4c2c874da2f3a7845c574466caf9ccd33fe54",
+    "input/tests/stage_b.rs": "9170bdb1d406477dd63d7e7880b01eaa0e4695191ddb299a7724031c266cc11d",
+    "input/tests/stage_c.rs": "c7d49b4a98b20fea34f3356bca00ea9a3d20baf342a36d5f9417481290e25787",
+    "ir/Cargo.lock": "8439c1421afa211a5aa3fb86801ce1bb6d555ac49e6a015b556f7ef8466d8fca",
+    "ir/Cargo.toml": "979de40d6cd15cf70bdf2e28ef131d420d33a673d7c87739b08b63780383cf71",
+    "ir/src/lib.rs": "71065c079ef8374ea1517e7e9db8b435b4cd365839ad16dd68902698ec244fce",
+    "ir/tests/fixtures/diamond.bc": "bec3302fd1aa62cc39df8dc7351efc9fe472ffa70496dd47a513ef506b2cade6",
+    "ir/tests/fixtures/diamond.ll": "3dc51d62e4448958beb960afb9eea9bc7ff9484ec79a617f3637c58ed2ca6dcf",
+    "ir/tests/native.rs": "bda175989f153cdbf2e43f4353aa554687e6b9de8b08329c29ac92602efb0cab",
+    "native/llvm_ir/build.sh": "4e9a49dc9f89eef12c802f3039eb63ef0ae758a220e38168771b426174f1e9f8",
+    "native/llvm_ir/inspect.cpp": "1d7fd4f9bd68e4b10936f9ad05ef344d37ac677b0b602f0e5b9832f258b7fbad",
+    "native/llvm_mc/build.sh": "07eca5b34dc5409a2d5e7cc91ca69df701f10eb3690b17388ec75bc95f72ad4c",
+    "native/llvm_mc/check.sh": "66876c8bc92ca67b41e86067df5d3be9522f42c8f41106d87e141baabf7c6f25",
+    "native/llvm_mc/decode.cpp": "af7691c5b7df08c62efff468f7e9045c787ee242504a8a8c61943c0631a6fb1d",
+    "src/effects/forms.txt": "919b00bd284e94efa070e542a1b440fb21508bbbaba39d19fd75388bb12e7542",
+    "src/effects/locations.rs": "b890a4895a4b48841b075d4c11e17ed3ba8cd63d5bd2f1f83d777df64df8c2f4",
+    "src/effects/rules.rs": "737e7ec477d23ae5317a828ac903eca86cdef4295ce0e570d14252774498b8fc",
+    "src/effects.rs": "fd700cac0aab38852f0cd18bf81ec7f0f4fe4e01dca0dbd9a2c8c362a2b92c5d",
+    "src/engine.rs": "8e46a95d2553cfdcfb805603928fbd715ceb4ef1c75fc1209602e703f840f2e4",
+    "src/lib.rs": "13989ad2b8975b0958ce571533c87114fbc054cf24fceab0abaaed32b5356c32",
+    "src/llvm_ir.rs": "c5b173605bab60001b04b829258519412f94d92d0c4c558eee6f4d2618914e93",
+    "src/llvm_mc/prepare.rs": "faada468b5814927950ae641c1d07f2627a5a3e69847e862285d17efb35c2852",
+    "src/llvm_mc/protocol.rs": "234ff2d2a1a603803497ac0eabbbdefefd427d4f7cd27f4d1c543ad3787f5e2a",
+    "src/llvm_mc.rs": "5ac6e89a2b034e44b3d14b26eb175ccfb57c3aa247abf254ce1e09011929c083",
+    "src/machine_state.rs": "382078f91da9ae503be69e8485a5e5cdacdf5e2a676dce59848960349edfa3e8",
+    "src/model.rs": "9bccc617340450535872b43515bceef16cfd60891cbd0ebc17349f88ce586f06",
+    "src/render.rs": "9d153e2653d7b6cd6e57ece17605f7e395bb2018498f43006750909f2e96fbbf",
+    "tests/common/mod.rs": "435b020cc3e77185229f8556ff14bd00e3b3aefa29b99600331300086f79fcb5",
+    "tests/conformance.rs": "7c8e71ff80a04bc57940f6a275ad0e9aabac5250cc28930f1de73f7e01f3f86c",
+    "tests/effects.rs": "bd50b8e1ef42a1e5e027abbf405f1b28402e43216af52bbb6885e031df1db5bd",
+    "tests/effects_protocol.rs": "f5ee60167275386e6f90c5cf50d46bc012f2caca7a3dde2b192acb5577b8e907",
+    "tests/fixtures/effects-v2.tsv": "75df17759ba46b0e37beef93afac126a64329548d2384a8ba173824405e61f66",
+    "tests/generated.rs": "fd2a9f0763eeadfd20d737ca4691a521df54f35a4a958ed2422f3c585d1dbe76",
+    "tests/llvm_ir.rs": "ad5e89773f14dc651e54a5861ba6f66aa475493657bfffc1a3a7d0da05e6f424",
+    "tests/llvm_mc.rs": "bfa76f6371cb5b998e86caf27b0e59c80eb75226423798098be0357709651584",
+    "tests/machine_state.rs": "1ab11d807428256387e725add044afe548e6e181fb7bbe662bce9f3c4bd8f2d5",
+    "tests/render.rs": "72d0cd571e7157b177063c6a91684bd955d0f78ad86f0176dbc72447a9e82117",
+    "tools/amd64_acceptance.py": "2a9a22a141d6b76489147adc2c9959049e519d8a76ba84b4c85823b85b39f7be",
+    "tools/amd64_forms.py": "4562ea4f4b1f24012206c124c25cd053283ddc3c7aa7f5aa5bdd7fbf703c087b",
+    "tools/amd64_inventory.py": "23dbf1d8c2630b1cbf5e4e0cf8be2cdc0db5890052761dab11e0e05130a9408b",
+    "tools/amd64_profile.py": "2909a4dca820331307fb5f4efbf96b0e07518ac11e1ca675a338bde43c31f4d4",
+    "tools/check_amd64_io.py": "02dc7a4840972e7eae389e50050ce845394103069a642ee05a2d88b7d4957379",
+    "tools/check_amd64_mutations.py": "53521db073dde55c99c73f7115b922ae865f2d6e4c6d97ec8c6e89e960715dc7",
+    "tools/check_amd64_state.py": "2b7a92ea003173b852342d8ee2f2a74b36279e2562610cda869d814ce01410e1",
+    "tools/check_amd64_strings.py": "32affb35696e8aafdc743ebe305d81f9c020ce2a44424f47342a8489731b43fe",
+    "tools/check_b_f_progress.py": "cf0695019a32a3f1cee3369699f5127bac088fa5541ae67057b29f9bdab249c4",
+    "tools/check_effects.py": "2f8af6a4380df95eea11509b76d0f90704928cd65fd7170d01f9d8c2a9a00d00",
+    "tools/check_effects_mutations.py": "6bdf59db41609662b918c2f52a8cc42a55ff1eb65628438126e06beaf3ec603e",
+    "tools/check_minidump.py": "502a92c049a124b348e8061cf9bb70d68b41d7c4723e1477eaf733d4d54bcc02",
+    "tools/check_minidump_mutations.py": "2eae3bf06fee8f12fe46db4f137e8cdc3050b0a857eadc159f5f2fdd214c8bfc",
+    "tools/check_priority1_real_capture.py": "94bfbd8be4d126d09be6de3b7e3ec5395807a05bed68294aff89ad2090ec0991",
+    "tools/check_stage_d_mov_binding.py": "2446411c3d326e2f80be8c9af08f275fe6e3ac165f20314e08f07cc330c0b8c7",
+    "tools/check_stage_d_mov_mutations.py": "f66cabb54c477ca955e452e4eda36dbaba93aeea80e19bd7d5e3e4fbf54f6c8f",
+    "tools/check_stage_d_progress.py": "c7a9e290b368422ec793dd29cd64d71734f78fb3276174f753835a9878b4f0ff",
+    "tools/measure_priority4.py": "9806a08208213f096d65b1af5ebc19d44894997f3c7113a7f3d840e9ce24bac7",
+    "tools/test_amd64_acceptance.py": "8e1763334eeb114d0308867a5825449567efe92f114b8f108fdf2b84d099d989",
+    "tools/test_amd64_forms.py": "8332ee2503ab154961ea2f8b82ed4ae506d5e750f7ff9e67cffce2e5fca45331",
+    "tools/test_amd64_inventory.py": "b8f137e6e6cfd1ef3647e48cf6d3c5d233005f1b71c6d6fd8f2ec9411881d78c",
+    "tools/test_amd64_profile.py": "72d898299ef098621679713fe772e546ee61ae2933bc19f7b8ced4e5a0d4f1ff"
+  },
+  "sourcesStable": true,
+  "gates": [
+    {
+      "gate": "minidump-b-c",
+      "exitCode": 0,
+      "seconds": 136.467,
+      "command": [
+        "python3",
+        "tools/check_minidump.py"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-14dh3dt7/minidump-b-c.log"
+    },
+    {
+      "gate": "llvm-ir-build",
+      "exitCode": 0,
+      "seconds": 4.536,
+      "command": [
+        "bash",
+        "native/llvm_ir/build.sh"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-14dh3dt7/llvm-ir-build.log"
+    },
+    {
+      "gate": "root-tests",
+      "exitCode": 0,
+      "seconds": 0.647,
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-14dh3dt7/root-tests.log"
+    },
+    {
+      "gate": "root-format",
+      "exitCode": 0,
+      "seconds": 0.155,
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-14dh3dt7/root-format.log"
+    },
+    {
+      "gate": "root-clippy",
+      "exitCode": 0,
+      "seconds": 0.116,
+      "command": [
+        "cargo",
+        "clippy",
+        "--offline",
+        "--locked",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-14dh3dt7/root-clippy.log"
+    },
+    {
+      "gate": "ir-tests",
+      "exitCode": 0,
+      "seconds": 0.167,
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "ir/Cargo.toml"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-14dh3dt7/ir-tests.log"
+    },
+    {
+      "gate": "ir-native",
+      "exitCode": 0,
+      "seconds": 0.168,
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "ir/Cargo.toml",
+        "--test",
+        "native",
+        "--",
+        "--ignored"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-14dh3dt7/ir-native.log"
+    },
+    {
+      "gate": "ir-format",
+      "exitCode": 0,
+      "seconds": 0.07,
+      "command": [
+        "cargo",
+        "fmt",
+        "--manifest-path",
+        "ir/Cargo.toml",
+        "--",
+        "--check"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-14dh3dt7/ir-format.log"
+    },
+    {
+      "gate": "ir-clippy",
+      "exitCode": 0,
+      "seconds": 0.155,
+      "command": [
+        "cargo",
+        "clippy",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "ir/Cargo.toml",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-14dh3dt7/ir-clippy.log"
+    },
+    {
+      "gate": "bench-format",
+      "exitCode": 0,
+      "seconds": 0.096,
+      "command": [
+        "cargo",
+        "fmt",
+        "--manifest-path",
+        "bench/Cargo.toml",
+        "--",
+        "--check"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-14dh3dt7/bench-format.log"
+    },
+    {
+      "gate": "bench-clippy",
+      "exitCode": 0,
+      "seconds": 0.194,
+      "command": [
+        "cargo",
+        "clippy",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "bench/Cargo.toml",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-14dh3dt7/bench-clippy.log"
+    },
+    {
+      "gate": "machine-type",
+      "exitCode": 0,
+      "seconds": 4.302,
+      "command": [
+        "apalache-mc",
+        "--out-dir=/tmp/ariadne-b-f-progress-14dh3dt7/machine-type",
+        "typecheck",
+        "AriadneMachineState.tla"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-14dh3dt7/machine-type.log"
+    },
+    {
+      "gate": "ir-type",
+      "exitCode": 0,
+      "seconds": 5.272,
+      "command": [
+        "apalache-mc",
+        "--out-dir=/tmp/ariadne-b-f-progress-14dh3dt7/ir-type",
+        "typecheck",
+        "AriadneLLVMIR.tla"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-14dh3dt7/ir-type.log"
+    },
+    {
+      "gate": "machine-model",
+      "exitCode": 0,
+      "seconds": 27.063,
+      "command": [
+        "apalache-mc",
+        "--out-dir=/tmp/ariadne-b-f-progress-14dh3dt7/machine-model",
+        "check",
+        "--init=Init",
+        "--next=Next",
+        "--inv=Safety",
+        "--length=6",
+        "--no-deadlock",
+        "AriadneMachineStateExample.tla"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-14dh3dt7/machine-model.log"
+    },
+    {
+      "gate": "ir-model",
+      "exitCode": 0,
+      "seconds": 97.062,
+      "command": [
+        "apalache-mc",
+        "--out-dir=/tmp/ariadne-b-f-progress-14dh3dt7/ir-model",
+        "check",
+        "--init=Init",
+        "--next=Next",
+        "--inv=Safety",
+        "--length=8",
+        "--no-deadlock",
+        "AriadneLLVMIRExample.tla"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-14dh3dt7/ir-model.log"
+    },
+    {
+      "gate": "machine-tlc",
+      "exitCode": 0,
+      "seconds": 0.858,
+      "command": [
+        "tlc",
+        "-workers",
+        "1",
+        "-metadir",
+        "/tmp/ariadne-b-f-progress-14dh3dt7/machine-tlc",
+        "-config",
+        "MachineState.cfg",
+        "AriadneMachineStateExample.tla"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-14dh3dt7/machine-tlc.log"
+    },
+    {
+      "gate": "ir-tlc",
+      "exitCode": 0,
+      "seconds": 0.849,
+      "command": [
+        "tlc",
+        "-workers",
+        "1",
+        "-metadir",
+        "/tmp/ariadne-b-f-progress-14dh3dt7/ir-tlc",
+        "-config",
+        "LLVMIR.cfg",
+        "AriadneLLVMIRExample.tla"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-14dh3dt7/ir-tlc.log"
+    },
+    {
+      "gate": "profile-integrity",
+      "exitCode": 0,
+      "seconds": 0.092,
+      "command": [
+        "python3",
+        "tools/amd64_profile.py",
+        "check"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-14dh3dt7/profile-integrity.log"
+    },
+    {
+      "gate": "benchmark",
+      "exitCode": 0,
+      "seconds": 2.934,
+      "command": [
+        "cargo",
+        "run",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "bench/Cargo.toml",
+        "--release",
+        "--bin",
+        "ariadne-bench",
+        "--",
+        "128",
+        "3",
+        "minidump"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-14dh3dt7/benchmark.log"
+    }
+  ],
+  "passed": true,
+  "registerCoreAcceptance": {
+    "exitCode": 1,
+    "status": "pending",
+    "log": "/tmp/ariadne-b-f-progress-14dh3dt7/register-core-required.log"
+  },
+  "rustRefinementProof": "open",
+  "machineStateModelBasedReplay": "open",
+  "nativeIrModelBasedReplay": "open"
+}

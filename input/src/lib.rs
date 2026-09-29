@@ -2,6 +2,7 @@
 mod address_space;
 mod materialize;
 mod minidump;
+pub mod report;
 
 pub use address_space::{ByteRead, CaptureSource, ReadSpan, ReadStop};
 use ariadne::Address;

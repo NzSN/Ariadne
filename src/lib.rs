@@ -39,9 +39,14 @@
 
 pub mod effects;
 mod engine;
+pub mod llvm_ir;
 pub mod llvm_mc;
+pub mod machine_state;
 mod model;
 pub mod render;
 
-pub use engine::{Analyzer, analyze};
+pub use engine::{Analyzer, AnalyzerMetrics, analyze};
 pub use model::*;
+
+/// Version of this dependency-free analysis package, for report identity.
+pub const PACKAGE_VERSION: &str = env!("CARGO_PKG_VERSION");

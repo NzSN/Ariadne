@@ -48,6 +48,7 @@ pub struct MaterializationReport {
 pub struct FilePreparedAnalysis {
     pub prepared: PreparedAnalysis,
     pub snapshot: Arc<SnapshotMetadata>,
+    pub open_limits: OpenLimits,
     pub reads: BTreeMap<Address, ByteRead>,
     pub materialization: MaterializationReport,
 }
@@ -288,6 +289,7 @@ impl FileSnapshot {
                 identity: identity.expect("nonempty roots"),
             },
             snapshot: self.metadata.clone(),
+            open_limits: self.limits.clone(),
             reads,
             materialization: report,
         })

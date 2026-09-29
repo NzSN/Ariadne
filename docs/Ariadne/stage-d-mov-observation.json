@@ -1,0 +1,126 @@
+{
+  "recordedUtc": "2026-09-29T05:36:27.378615+00:00",
+  "caseId": "register-core:AMD64-F-0503-R",
+  "caseSha256": "9ee47873244e00ea52502f00b5438fae3cbfaddede1925a74ddf88d3ce67d0c2",
+  "formSha256": "d45a228c0720624d73a267ced2b728de85f0058ef94601f61e459329f8fbaa29",
+  "profileSha256": "5c07adb4b1391d5b2ec29348b208789c2469b2728afd700f27cd3a90bef078cf",
+  "manualSha256": {
+    "24592_3.25_APM_Vol1_PUB.pdf": "aed9236b718ae86cdb49f7d628f4ebb1a4bdce1a012df6cf6aad6735776c8a38",
+    "24593_3.45_APM_Vol2_PUB.pdf": "7257d41d3584822edb7934e2c630c7d3865eea30c0ab95b8de4e546088d5ea9a",
+    "24594_3.38_APM_Vol3_PUB.pdf": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee"
+  },
+  "decoderSha256": "dca617ca3e4ad50aef0f795b7793b73a6dae10cf04eebd695b030f8ba82ac7b7",
+  "sourceSha256": {
+    "Specs/AMD64/manuals.lock.json": "eb8e6fea525e43a1f2740e97f4bff0dede564cac1fda64c5a5e2e9a46a6699f3",
+    "Specs/AMD64/forms.json": "59b18b6a0668fe9836b4355829a347ef2e75bfc6fb161c979f5a4233569a1f40",
+    "Specs/AMD64/user64-profile.json": "7a98a2a031fc4ad89184562762806ebe371c12f0d27d23008ab66aa02784cd39",
+    "Specs/AMD64/user64-coverage.json": "9287c23cb1ce99f79d08687e19c3282e512425002eecc80b96e89df4aa657cb1",
+    "native/llvm_mc/decode.cpp": "af7691c5b7df08c62efff468f7e9045c787ee242504a8a8c61943c0631a6fb1d",
+    "tools/check_stage_d_mov_binding.py": "2446411c3d326e2f80be8c9af08f275fe6e3ac165f20314e08f07cc330c0b8c7"
+  },
+  "sourcesStable": true,
+  "targets": {
+    "windows-amd64": [
+      {
+        "name": "rax-negative-one",
+        "bytesHex": "48c7c0ffffffff",
+        "candidate": true,
+        "decoderRecord": "v2 MOV64ri32 2 r:RAX i:-1 1 0 0 0 -1 -1 4096 ok 7 ordinary -"
+      },
+      {
+        "name": "rax-sign-bit",
+        "bytesHex": "48c7c000000080",
+        "candidate": true,
+        "decoderRecord": "v2 MOV64ri32 2 r:RAX i:-2147483648 1 0 0 0 -1 -1 4112 ok 7 ordinary -"
+      },
+      {
+        "name": "r8-sign-bit",
+        "bytesHex": "49c7c000000080",
+        "candidate": true,
+        "decoderRecord": "v2 MOV64ri32 2 r:R8 i:-2147483648 1 0 0 0 -1 -1 4128 ok 7 ordinary -"
+      },
+      {
+        "name": "rex-over-66",
+        "bytesHex": "6648c7c0ffffffff",
+        "candidate": true,
+        "decoderRecord": "v2 MOV64ri32 2 r:RAX i:-1 1 0 0 0 -1 -1 4144 ok 8 ordinary -"
+      },
+      {
+        "name": "missing-rex-w",
+        "bytesHex": "c7c0ffffffff",
+        "candidate": false,
+        "decoderRecord": "v2 MOV32ri_alt 2 r:EAX i:4294967295 1 0 0 0 -1 -1 4160 ok 6 ordinary -"
+      },
+      {
+        "name": "memory-alternative",
+        "bytesHex": "48c700ffffffff",
+        "candidate": false,
+        "decoderRecord": "v2 MOV64mi32 6 r:RAX i:1 r:NONE i:0 r:NONE i:-1 0 2 0 0 -1 -1 -1 -1 -1 -1 4176 ok 7 ordinary -"
+      },
+      {
+        "name": "illegal-lock",
+        "bytesHex": "f048c7c0ffffffff",
+        "candidate": false,
+        "decoderRecord": "v2 LOCK_PREFIX 0 0 4 0 0 4192 ok 1 ordinary -"
+      },
+      {
+        "name": "wrong-modrm-group",
+        "bytesHex": "48c7c8ffffffff",
+        "candidate": false,
+        "decoderRecord": "v2 - 0 0 0 0 0 4208 invalid 0 - -"
+      }
+    ],
+    "linux-amd64": [
+      {
+        "name": "rax-negative-one",
+        "bytesHex": "48c7c0ffffffff",
+        "candidate": true,
+        "decoderRecord": "v2 MOV64ri32 2 r:RAX i:-1 1 0 0 0 -1 -1 4096 ok 7 ordinary -"
+      },
+      {
+        "name": "rax-sign-bit",
+        "bytesHex": "48c7c000000080",
+        "candidate": true,
+        "decoderRecord": "v2 MOV64ri32 2 r:RAX i:-2147483648 1 0 0 0 -1 -1 4112 ok 7 ordinary -"
+      },
+      {
+        "name": "r8-sign-bit",
+        "bytesHex": "49c7c000000080",
+        "candidate": true,
+        "decoderRecord": "v2 MOV64ri32 2 r:R8 i:-2147483648 1 0 0 0 -1 -1 4128 ok 7 ordinary -"
+      },
+      {
+        "name": "rex-over-66",
+        "bytesHex": "6648c7c0ffffffff",
+        "candidate": true,
+        "decoderRecord": "v2 MOV64ri32 2 r:RAX i:-1 1 0 0 0 -1 -1 4144 ok 8 ordinary -"
+      },
+      {
+        "name": "missing-rex-w",
+        "bytesHex": "c7c0ffffffff",
+        "candidate": false,
+        "decoderRecord": "v2 MOV32ri_alt 2 r:EAX i:4294967295 1 0 0 0 -1 -1 4160 ok 6 ordinary -"
+      },
+      {
+        "name": "memory-alternative",
+        "bytesHex": "48c700ffffffff",
+        "candidate": false,
+        "decoderRecord": "v2 MOV64mi32 6 r:RAX i:1 r:NONE i:0 r:NONE i:-1 0 2 0 0 -1 -1 -1 -1 -1 -1 4176 ok 7 ordinary -"
+      },
+      {
+        "name": "illegal-lock",
+        "bytesHex": "f048c7c0ffffffff",
+        "candidate": false,
+        "decoderRecord": "v2 LOCK_PREFIX 0 0 4 0 0 4192 ok 1 ordinary -"
+      },
+      {
+        "name": "wrong-modrm-group",
+        "bytesHex": "48c7c8ffffffff",
+        "candidate": false,
+        "decoderRecord": "v2 - 0 0 0 0 0 4208 invalid 0 - -"
+      }
+    ]
+  },
+  "scope": "source/decoder observation only; no instruction-step acceptance",
+  "passed": true
+}

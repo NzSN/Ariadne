@@ -1,0 +1,318 @@
+{
+  "accepted": true,
+  "focused_real_capture": {
+    "build_id": "97676574663086478a8fe1b40f3a541a444bc634",
+    "case_manifest_sha256": "e29c9c7b0534a0eab52082490525aa709033b61e15a0bc57341d555aae03cedd",
+    "companion_sha256": "d665de26a68430eccf3ae2621d76738bb044619cf75d556cf6126268bbb0776a",
+    "dump_sha256": "31481f3f080b0b165cc0d0c70f555f127f882556b34129055e80b082225a45c9",
+    "entry_va": "0x0000566817922dc5",
+    "forward_companion_instruction_matches": 30,
+    "graphviz_parsed": true,
+    "graphviz_version": "dot - graphviz version 2.43.0 (0)",
+    "host": "Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "observations": {
+      "decoded": 34,
+      "local_edges": 36,
+      "obligations": [
+        {
+          "reason": "decode_failed",
+          "va": "0x0000566817922e5b"
+        }
+      ],
+      "slice": 28
+    },
+    "passed": true,
+    "paths": {
+      "cli": "input/target/debug/ariadne-minidump",
+      "companion": "/home/nzsn/Repos/chromium/src/out/Default/chrome",
+      "decoder": "target/ariadne-llvm-mc",
+      "dump": "tmp/priority1/chromium-member-uaf.dmp",
+      "report_dir": "tmp/priority1/accepted-report"
+    },
+    "python": "3.12.3",
+    "recorded_utc": "2026-09-29T09:27:12.903972+00:00",
+    "report_sha256": {
+      "report.dot": "0a79d979f90b055e9b90926c9b39df4d5903b61e94b2f0060c3823ab1c3462ec",
+      "report.json": "b43d383a8566e50b8e23b93aa4a7978736b325fc64dcb054ae4843b18e89f63a",
+      "report.txt": "c0daa29496413e5bc0c60c31de10c2048eba0b0f6973858fe3f8ca1027102e08"
+    },
+    "schema": "ariadne-priority-1-validation-v1",
+    "seed_only_negative_passed": true,
+    "seed_va": "0x0000566817922e42",
+    "source_sha256": {
+      "Cargo.lock": "f1d5d49897a04815e3b9b1291770c38a71f560329440e4aace6f4a038ddee283",
+      "Cargo.toml": "10a7e789d98fc97f26ef1c7fff61ccc4f9969d3d9ecdca44c5a9c1f47943ea65",
+      "docs/Ariadne/priority-1-real-capture-case.json": "e29c9c7b0534a0eab52082490525aa709033b61e15a0bc57341d555aae03cedd",
+      "input/Cargo.lock": "e6b7793b82f589eadb9f570c4212ffccdbf488236bc83310a7d8c3e919050593",
+      "input/Cargo.toml": "fa91e49864d7506acf2f2f25a88f10dc6bd9fe5153a71daae8f6f00444494a9a",
+      "input/src/address_space.rs": "5b6bc4e94616eeb911f09ead0e512ee420d85ec9f324d965e1610637aa840634",
+      "input/src/bin/ariadne-minidump.rs": "4d7435120d09bac46d090186c3d5dc193b4c84914c9d18c8f48857e503e1e7bd",
+      "input/src/lib.rs": "296f3e2b6cb7b189c9fe4969a1fa3625137f81a725659526b79900bd5ccf8376",
+      "input/src/materialize.rs": "c00daebf4e9861915ad7a747354eb7125700e4537d412339888f7233a15ab2f4",
+      "input/src/minidump.rs": "02588ccfed70c8bc601d3a6a473f9659ccea1da0951965e4e152c859e499c04c",
+      "input/src/report.rs": "0c530d6503e2625dd094277ad76c079b6314a1a81f0a1f9e918f666b8d371354",
+      "native/llvm_mc/build.sh": "07eca5b34dc5409a2d5e7cc91ca69df701f10eb3690b17388ec75bc95f72ad4c",
+      "native/llvm_mc/check.sh": "66876c8bc92ca67b41e86067df5d3be9522f42c8f41106d87e141baabf7c6f25",
+      "native/llvm_mc/decode.cpp": "af7691c5b7df08c62efff468f7e9045c787ee242504a8a8c61943c0631a6fb1d",
+      "src/effects.rs": "fd700cac0aab38852f0cd18bf81ec7f0f4fe4e01dca0dbd9a2c8c362a2b92c5d",
+      "src/effects/forms.txt": "919b00bd284e94efa070e542a1b440fb21508bbbaba39d19fd75388bb12e7542",
+      "src/effects/locations.rs": "b890a4895a4b48841b075d4c11e17ed3ba8cd63d5bd2f1f83d777df64df8c2f4",
+      "src/effects/rules.rs": "737e7ec477d23ae5317a828ac903eca86cdef4295ce0e570d14252774498b8fc",
+      "src/engine.rs": "8e46a95d2553cfdcfb805603928fbd715ceb4ef1c75fc1209602e703f840f2e4",
+      "src/lib.rs": "13989ad2b8975b0958ce571533c87114fbc054cf24fceab0abaaed32b5356c32",
+      "src/llvm_ir.rs": "c5b173605bab60001b04b829258519412f94d92d0c4c558eee6f4d2618914e93",
+      "src/llvm_mc.rs": "5ac6e89a2b034e44b3d14b26eb175ccfb57c3aa247abf254ce1e09011929c083",
+      "src/llvm_mc/prepare.rs": "faada468b5814927950ae641c1d07f2627a5a3e69847e862285d17efb35c2852",
+      "src/llvm_mc/protocol.rs": "234ff2d2a1a603803497ac0eabbbdefefd427d4f7cd27f4d1c543ad3787f5e2a",
+      "src/machine_state.rs": "382078f91da9ae503be69e8485a5e5cdacdf5e2a676dce59848960349edfa3e8",
+      "src/model.rs": "9bccc617340450535872b43515bceef16cfd60891cbd0ebc17349f88ce586f06",
+      "src/render.rs": "9d153e2653d7b6cd6e57ece17605f7e395bb2018498f43006750909f2e96fbbf",
+      "tools/check_priority1_real_capture.py": "94bfbd8be4d126d09be6de3b7e3ec5395807a05bed68294aff89ad2090ec0991"
+    },
+    "source_stable": true,
+    "tool_sha256": {
+      "cli": "438144f02fb1b38e5727a91602d0974817a3b8ea8c0cd5f6cf422eb9e19abb1f",
+      "decoder": "dca617ca3e4ad50aef0f795b7793b73a6dae10cf04eebd695b030f8ba82ac7b7",
+      "graphviz_dot": "da690d0c28520a98e311cdb3577c22953b5ccfbd9f9e4219a0d031a1f15961d6"
+    }
+  },
+  "minidump_regression": {
+    "gates": [
+      {
+        "command": [
+          "python3",
+          "tools/check_effects.py"
+        ],
+        "exitCode": 0,
+        "gate": "effects-regression",
+        "log": "/tmp/ariadne-minidump-acceptance-cecw1sh6/effects-regression.log",
+        "seconds": 67.51
+      },
+      {
+        "command": [
+          "cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "input/Cargo.toml"
+        ],
+        "exitCode": 0,
+        "gate": "input-tests",
+        "log": "/tmp/ariadne-minidump-acceptance-cecw1sh6/input-tests.log",
+        "seconds": 0.358
+      },
+      {
+        "command": [
+          "cargo",
+          "fmt",
+          "--manifest-path",
+          "input/Cargo.toml",
+          "--",
+          "--check"
+        ],
+        "exitCode": 0,
+        "gate": "format",
+        "log": "/tmp/ariadne-minidump-acceptance-cecw1sh6/format.log",
+        "seconds": 0.08
+      },
+      {
+        "command": [
+          "cargo",
+          "clippy",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "input/Cargo.toml",
+          "--all-targets",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "exitCode": 0,
+        "gate": "clippy",
+        "log": "/tmp/ariadne-minidump-acceptance-cecw1sh6/clippy.log",
+        "seconds": 0.161
+      },
+      {
+        "command": [
+          "cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "input/Cargo.toml",
+          "--test",
+          "native",
+          "--",
+          "--ignored"
+        ],
+        "exitCode": 0,
+        "gate": "native",
+        "log": "/tmp/ariadne-minidump-acceptance-cecw1sh6/native.log",
+        "seconds": 17.276
+      },
+      {
+        "command": [
+          "python3",
+          "input/tests/fixtures/make_stage_b.py",
+          "--check"
+        ],
+        "exitCode": 0,
+        "gate": "stage-b-fixtures",
+        "log": "/tmp/ariadne-minidump-acceptance-cecw1sh6/stage-b-fixtures.log",
+        "seconds": 0.025
+      },
+      {
+        "command": [
+          "cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "input/Cargo.toml",
+          "--test",
+          "stage_b",
+          "--",
+          "--ignored"
+        ],
+        "exitCode": 0,
+        "gate": "stage-b-native",
+        "log": "/tmp/ariadne-minidump-acceptance-cecw1sh6/stage-b-native.log",
+        "seconds": 0.326
+      },
+      {
+        "command": [
+          "cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "input/Cargo.toml",
+          "--test",
+          "stage_c",
+          "--",
+          "--ignored"
+        ],
+        "exitCode": 0,
+        "gate": "stage-c-cli",
+        "log": "/tmp/ariadne-minidump-acceptance-cecw1sh6/stage-c-cli.log",
+        "seconds": 0.545
+      },
+      {
+        "command": [
+          "cargo",
+          "test",
+          "--offline",
+          "--locked",
+          "--manifest-path",
+          "input/Cargo.toml",
+          "--test",
+          "real_dumps",
+          "--",
+          "--ignored"
+        ],
+        "exitCode": 0,
+        "gate": "real-artifacts",
+        "log": "/tmp/ariadne-minidump-acceptance-cecw1sh6/real-artifacts.log",
+        "seconds": 0.287
+      },
+      {
+        "command": [
+          "bash",
+          "Specs/check-input.sh"
+        ],
+        "exitCode": 0,
+        "gate": "formal-input",
+        "log": "/tmp/ariadne-minidump-acceptance-cecw1sh6/formal-input.log",
+        "seconds": 4.343
+      },
+      {
+        "command": [
+          "python3",
+          "tools/check_minidump_mutations.py"
+        ],
+        "exitCode": 0,
+        "gate": "mutations",
+        "log": "/tmp/ariadne-minidump-acceptance-cecw1sh6/mutations.log",
+        "seconds": 21.867
+      }
+    ],
+    "passed": true,
+    "recordedUtc": "2026-09-29T09:20:55.122226+00:00",
+    "sourceSha256": {
+      "Cargo.lock": "f1d5d49897a04815e3b9b1291770c38a71f560329440e4aace6f4a038ddee283",
+      "Cargo.toml": "10a7e789d98fc97f26ef1c7fff61ccc4f9969d3d9ecdca44c5a9c1f47943ea65",
+      "Specs/AriadneInput.tla": "dee2efe4ebcabac7dcc5c3097ca0fcc7495d4acd5cba2dea53da4137240079a9",
+      "Specs/AriadneInputChecks.tla": "57a7c2974c6beb8b420bf48a1fc338568c54ddcdbe57162203fe3c3841697574",
+      "Specs/AriadneMachineCommon.tla": "32b60854773c7c14e06e449300a9757fefdfbfc763a0f58ef4574f1edd019947",
+      "Specs/AriadneTypes.tla": "3bfb36f3bf96adc324a9c714d34a12af708d0e7daaba91a5a1ae5f79f2820329",
+      "Specs/Input.cfg": "a7625802bbfb1ee7c9c7940133769c47c8e0e60cd55c70e812e6b5997d06361a",
+      "Specs/InputLimit.cfg": "bed03a8ebbfefe8beb802a91f4217add54f397a45a9ed8a45712eb8898470523",
+      "Specs/check-input.sh": "9ef9d64df9252c604069a79c706557097332e1c94e72c2760713c5129633ed99",
+      "input/Cargo.lock": "e6b7793b82f589eadb9f570c4212ffccdbf488236bc83310a7d8c3e919050593",
+      "input/Cargo.toml": "fa91e49864d7506acf2f2f25a88f10dc6bd9fe5153a71daae8f6f00444494a9a",
+      "input/examples/inspect.rs": "b29a8086261112738bd6e9fc29249e846e0da51ab6eedcaf8fbcedc96e7cac8c",
+      "input/examples/render_minidump.rs": "a38f1507adad5bc1fee95b41111da2a5189df933a4426fdbaae970305823d9cf",
+      "input/src/address_space.rs": "5b6bc4e94616eeb911f09ead0e512ee420d85ec9f324d965e1610637aa840634",
+      "input/src/bin/ariadne-minidump.rs": "4d7435120d09bac46d090186c3d5dc193b4c84914c9d18c8f48857e503e1e7bd",
+      "input/src/lib.rs": "296f3e2b6cb7b189c9fe4969a1fa3625137f81a725659526b79900bd5ccf8376",
+      "input/src/materialize.rs": "c00daebf4e9861915ad7a747354eb7125700e4537d412339888f7233a15ab2f4",
+      "input/src/minidump.rs": "02588ccfed70c8bc601d3a6a473f9659ccea1da0951965e4e152c859e499c04c",
+      "input/src/report.rs": "0c530d6503e2625dd094277ad76c079b6314a1a81f0a1f9e918f666b8d371354",
+      "input/tests/common/mod.rs": "af6b41728e969e022a5b72206ac0471982be367f84f693254f06b17ab3c26ea4",
+      "input/tests/fixtures/__pycache__/make_stage_b.cpython-312.pyc": "e3b3455a6f39b6826e4858906b85878e730b0eec650e35b85ae8e103c31651fc",
+      "input/tests/fixtures/make_stage_b.py": "8433813d2d31c7bc3ca1dd01e498f548817ed5ff2efd5eeed55532e3761bafa9",
+      "input/tests/fixtures/stage_b_linux.dmp": "7e71f4926e615789815299b98e3c3c725180ed4dce4065937fa533beb1018824",
+      "input/tests/fixtures/stage_b_windows.dmp": "f3a0407bff881356c0128e7587c03ea9f143dbd5fee59abbe8fc5edb75ad30bf",
+      "input/tests/native.rs": "58347dc87ce5575296882bffb174ceef27894d41a13090a208ced8e097b41f78",
+      "input/tests/reader.rs": "06e4720f60eeb6ad145102cd5f604cd2db69f08446a8e363950299ff765d4403",
+      "input/tests/real_dumps.rs": "3e5f6a0851ae0873b513ab3e98f4c2c874da2f3a7845c574466caf9ccd33fe54",
+      "input/tests/stage_b.rs": "9170bdb1d406477dd63d7e7880b01eaa0e4695191ddb299a7724031c266cc11d",
+      "input/tests/stage_c.rs": "f68bc35e0f75274b3c67e60d7a7ef29381393aac54414d212e7f0ae368c1f35f",
+      "native/llvm_mc/build.sh": "07eca5b34dc5409a2d5e7cc91ca69df701f10eb3690b17388ec75bc95f72ad4c",
+      "native/llvm_mc/check.sh": "66876c8bc92ca67b41e86067df5d3be9522f42c8f41106d87e141baabf7c6f25",
+      "native/llvm_mc/decode.cpp": "af7691c5b7df08c62efff468f7e9045c787ee242504a8a8c61943c0631a6fb1d",
+      "src/effects.rs": "fd700cac0aab38852f0cd18bf81ec7f0f4fe4e01dca0dbd9a2c8c362a2b92c5d",
+      "src/effects/forms.txt": "919b00bd284e94efa070e542a1b440fb21508bbbaba39d19fd75388bb12e7542",
+      "src/effects/locations.rs": "b890a4895a4b48841b075d4c11e17ed3ba8cd63d5bd2f1f83d777df64df8c2f4",
+      "src/effects/rules.rs": "737e7ec477d23ae5317a828ac903eca86cdef4295ce0e570d14252774498b8fc",
+      "src/engine.rs": "8e46a95d2553cfdcfb805603928fbd715ceb4ef1c75fc1209602e703f840f2e4",
+      "src/lib.rs": "13989ad2b8975b0958ce571533c87114fbc054cf24fceab0abaaed32b5356c32",
+      "src/llvm_ir.rs": "c5b173605bab60001b04b829258519412f94d92d0c4c558eee6f4d2618914e93",
+      "src/llvm_mc.rs": "5ac6e89a2b034e44b3d14b26eb175ccfb57c3aa247abf254ce1e09011929c083",
+      "src/llvm_mc/prepare.rs": "faada468b5814927950ae641c1d07f2627a5a3e69847e862285d17efb35c2852",
+      "src/llvm_mc/protocol.rs": "234ff2d2a1a603803497ac0eabbbdefefd427d4f7cd27f4d1c543ad3787f5e2a",
+      "src/machine_state.rs": "382078f91da9ae503be69e8485a5e5cdacdf5e2a676dce59848960349edfa3e8",
+      "src/model.rs": "9bccc617340450535872b43515bceef16cfd60891cbd0ebc17349f88ce586f06",
+      "src/render.rs": "9d153e2653d7b6cd6e57ece17605f7e395bb2018498f43006750909f2e96fbbf",
+      "tests/common/mod.rs": "435b020cc3e77185229f8556ff14bd00e3b3aefa29b99600331300086f79fcb5",
+      "tests/conformance.rs": "7c8e71ff80a04bc57940f6a275ad0e9aabac5250cc28930f1de73f7e01f3f86c",
+      "tests/effects.rs": "bd50b8e1ef42a1e5e027abbf405f1b28402e43216af52bbb6885e031df1db5bd",
+      "tests/effects_protocol.rs": "f5ee60167275386e6f90c5cf50d46bc012f2caca7a3dde2b192acb5577b8e907",
+      "tests/fixtures/effects-v2.tsv": "75df17759ba46b0e37beef93afac126a64329548d2384a8ba173824405e61f66",
+      "tests/generated.rs": "fd2a9f0763eeadfd20d737ca4691a521df54f35a4a958ed2422f3c585d1dbe76",
+      "tests/llvm_ir.rs": "ad5e89773f14dc651e54a5861ba6f66aa475493657bfffc1a3a7d0da05e6f424",
+      "tests/llvm_mc.rs": "bfa76f6371cb5b998e86caf27b0e59c80eb75226423798098be0357709651584",
+      "tests/machine_state.rs": "1ab11d807428256387e725add044afe548e6e181fb7bbe662bce9f3c4bd8f2d5",
+      "tests/render.rs": "72d0cd571e7157b177063c6a91684bd955d0f78ad86f0176dbc72447a9e82117",
+      "tools/check_minidump.py": "502a92c049a124b348e8061cf9bb70d68b41d7c4723e1477eaf733d4d54bcc02",
+      "tools/check_minidump_mutations.py": "2eae3bf06fee8f12fe46db4f137e8cdc3050b0a857eadc159f5f2fdd214c8bfc"
+    },
+    "sourcesStable": true
+  },
+  "negative_controls": {
+    "changed_dump": {
+      "reason": "dump identity changed",
+      "rejected": true,
+      "report_published": false
+    },
+    "wrong_build_id": {
+      "reason": "dump CodeView build ID does not match companion",
+      "rejected": true,
+      "report_published": false
+    }
+  },
+  "recorded_utc": "2026-09-29T09:27:40.070378+00:00",
+  "schema": "ariadne-priority-1-delivery-validation-v1"
+}

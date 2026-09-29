@@ -1,7 +1,9 @@
 # Rust design for abstract machine-state analysis
 
-Status: proposed implementation design; no machine-state implementation is
-introduced by this document. Source baseline: `62d7c57ac88336d1defd4bd121e9976470cf704f`.
+Status: the finite Rust path and recovery handoff are implemented with focused
+fixture validation; generated model-based replay remains open. See the
+[Stage E validation](Ariadne/stage-e-validation.md). Historical design source
+baseline: `62d7c57ac88336d1defd4bd121e9976470cf704f`.
 The [remaining implementation plan](Ariadne/remaining-implementation-plan.md)
 places this Rust module in Stage E.
 

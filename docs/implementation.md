@@ -3,12 +3,19 @@
 The `ariadne-analysis` package exports the `ariadne` Rust library. It implements
 [Ariadne.tla](../Specs/Ariadne.tla) over an owned immutable request using the
 standard library. The separate LLVM IR and abstract machine-state models do
-not yet have Rust implementations.
+now have [fixture-validated Rust paths](Ariadne/stage-e-validation.md). The
+[Stage E and F implementation plan](Ariadne/remaining-implementation-plan.md)
+and [proof-boundary record](Ariadne/stage-f-proof-and-performance.md) distinguish
+that progress from generated model-based replay or a Rust refinement proof.
+The scoped [Priority 4 workload-performance implementation plan](Ariadne/priority-4-workload-performance-plan.md)
+measures larger minidump requests before proposing a solver change.
+Its [performance design](Ariadne/priority-4-workload-performance-design.md)
+separates end-to-end CLI observations from core counters.
 
 The optional [LLVM MC byte-span adapter](llvm-mc-adapter.md) now constructs
 requests from caller-provided x86-64 bytes using a separate native decoder.
-The core's behavior and fixed-input specification are unchanged. Binary/dump
-file parsing remains separate work. `ByteSnapshot::prepare()` now supplies
+The core's behavior and fixed-input specification are unchanged. File parsing
+stays in separate packages. `ByteSnapshot::prepare()` now supplies
 reviewed conservative effects for an explicit form registry, with byte-level
 GPR aliases and per-site evidence. This adds trusted-input preparation without
 changing the core state machine; see the [effect rule matrix](Ariadne/operand-effects-rules.md).

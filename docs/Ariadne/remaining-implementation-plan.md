@@ -5,6 +5,22 @@ acceptance change is made by this document.** Scope follows the user's current
 decision: Windows/Linux AMD64 minidumps are enough for input. PE/ELF images and
 ELF cores remain deferred.
 
+Progress update **2026-09-29 10:16 CST**: A, B and C are delivered with
+[source-bound B/C validation](stage-b-c-validation.md). D remains pending at
+0/49 accepted register-core cases despite the later
+[first-case D0–D3 progress](stage-d-progress.md); see its
+[acceptance audit](stage-d-acceptance-audit.md).
+E has [two implemented, fixture-validated paths](stage-e-validation.md) but
+model-based replay remains open. F has a [proof-boundary record and measured
+baseline](stage-f-proof-and-performance.md), not a Rust refinement proof or
+qualified optimization. The [19-gate progress report](stage-b-f-validation.json)
+keeps these distinctions explicit.
+
+Priority decision **2026-09-29**: the [practical assurance queue](practical-assurance-priorities.md)
+drives minidump investigations. Stage D's unchanged 49-case gate is a
+**long-term formal research purpose**, not a dependency for the CLI, reviewed
+conservative effects, Stage E's separate machines or workload measurement.
+
 ## Objective and current boundary
 
 Produce a reproducible **minidump → decoded local graph → possible value origins
@@ -25,26 +41,44 @@ cases remain unaccepted.
 
 ```mermaid
 flowchart TD
-    A["A · Two crash forms reviewed and implemented"] --> B["B · Real-dump slice from an earlier entry"]
-    B --> C["C · Minidump investigator CLI and evidence report"]
-    A --> D["D · Source-bound formal instruction-step acceptance"]
-    C --> E["E · Separate machine-state / native-IR implementations"]
-    D --> E
-    E --> F["F · Refinement assurance and measured scalability"]
+    A["A · Delivered: two crash forms"] --> B["B · Delivered: captured predecessor slice"]
+    B --> C["C · Delivered: minidump CLI and report"]
+    A --> D["D · Long-term: formal instruction-step acceptance"]
+    C --> E["E · Partial: stateflow and verified native IR"]
+    E --> F["F · Partial: proof boundary and performance baseline"]
 ```
 
-D can advance while B/C are implemented. E's two specification paths are
-independent; neither depends on adding PE/ELF file readers. F's performance
-part may be pulled earlier if B/C measurements expose a blocking cost.
+D can advance as a formal research track. E's two specification paths are
+independent of D acceptance and of PE/ELF readers. F's performance work follows
+measured minidump needs; its universal Rust proof remains a separate research
+boundary.
 
-| Stage | Deliverable | Acceptance decision |
+| Stage | Current status | Acceptance decision |
 | --- | --- | --- |
-| A | Precisely scoped normal-continuation summaries for the two real faulting MOV forms | Both dumps decode their first instruction; address reads and conservative memory writes have negative regression controls |
-| B | A real captured path from an independently known earlier entry to crash-IP seed | At least one pinned dump yields a decoded seed and a nontrivial slice with checked origins and visible gaps |
-| C | One supported CLI/report envelope over the existing reader/engine/renderer | Reproducible text, DOT and versioned JSON all agree on identity, bytes, CFG, origins and uncertainty |
-| D | `register-core` case-by-case formal closure | Existing profile milestone gate passes only after all 49 cases satisfy its source-bound obligations |
-| E | Separate Rust machines for abstract state and supplied native LLVM IR | Each matches its own TLA+ model on focused fixtures; neither is advertised as machine-code lifting |
-| F | Explicit proof boundary and workload-driven optimization | No universal Rust-refinement claim without its own proof; measured benchmark and conformance gates support any optimization |
+| A | Delivered: two scoped memory-immediate MOV summaries | Both historical dumps decode their first instruction; no ISA-step acceptance |
+| B | Delivered: tool-produced captured predecessor fixture | Windows/Linux pinned dumps give a decoded seed, address-producer slice and visible opaque return gap |
+| C | Delivered: minidump investigator CLI | One query publishes matching text, parsed DOT and JSON v1 with byte provenance and uncertainty |
+| D | Long-term formal research: 0/49 accepted `register-core` cases | Existing profile milestone gate passes only after all 49 source-bound cases close; it does not gate practical minidump work |
+| E | Separate optional paths: two Rust machines implemented and fixture-validated | Generated model-based replay and independent result contracts remain open before production use of these paths |
+| F | Performance path conditional on measured need; proof boundary recorded | No universal Rust-refinement claim; no solver optimization qualified yet |
+
+The practical priorities are tracked in the
+[assurance decision](practical-assurance-priorities.md). Standalone execution
+plans now cover [Priority 1, a real captured predecessor slice](priority-1-real-capture-plan.md),
+[Priority 2, exact path-driven effects](priority-2-path-driven-effects-plan.md),
+and [Priority 4, workload-sized performance](priority-4-workload-performance-plan.md).
+Their respective designs are the [real-capture evidence design](priority-1-real-capture-design.md),
+[structured-effects design](operand-effects-design.md), and
+[workload-performance design](priority-4-workload-performance-design.md).
+Priority 1 now has a [qualified controlled Chromium/Linux case](priority-1-real-capture-validation.md)
+with an independently established captured boundary and possible RBX producer.
+This is additional to Stage B's tool-produced fixture; it does not change the
+long-term formal gate or complete the later practical priorities.
+Priority 2 has a [scoped no-change decision](priority-2-effects-validation.md)
+for that path; opaque calls remain explicit. Priority 3 now has a
+[readable text overview and Linux/Windows examples](priority-3-presentation-validation.md).
+Priority 4 has [bounded measurements](priority-4-performance-validation.md)
+but remains open until a larger real capture qualifies its scale decision.
 
 ## A — Unblock the real minidump instructions
 
@@ -169,6 +203,14 @@ for Linux-host use with both Windows and Linux dumps.
 
 ## D — Close the scoped AMD64 semantics gate separately
 
+The standalone [Stage D register-core implementation plan](stage-d-register-core-implementation-plan.md)
+gives the case-first sequence, exact evidence bindings and milestone exit
+criteria. [First-case progress](stage-d-progress.md) is bounded and the
+[current audit](stage-d-acceptance-audit.md) remains 0/49.
+The [assurance priority decision](practical-assurance-priorities.md) places
+this unchanged gate in the long-term formal track; practical analysis may
+continue with reviewed effects and explicit gaps.
+
 The active deliverable is the existing
 [`amd64-user64-v1` profile](../amd64-user64.md): 49 `register-core` cases first,
 then 72 `near-control-stack` and 156 `ram-data` cases. The accepted no-trust
@@ -269,8 +311,9 @@ counterexamples or passes. Do not commit/push as part of plan authoring.
 
 Deferred input formats stay deferred by user choice. A CLI over minidumps and a
 useful but incomplete analyzer result are legitimate deliverables; neither
-requires all 277 user64 cases, full Volume 3 coverage, matched interprocedural
-returns, nor a mechanically verified runtime ISA library first.
+requires the 49-case register-core gate, all 277 user64 cases, full Volume 3
+coverage, matched interprocedural returns, or a mechanically verified runtime
+ISA library first.
 
 Source map: [roadmap](../../ROADMAP.md),
 [core implementation](../implementation.md),

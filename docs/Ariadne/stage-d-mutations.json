@@ -1,0 +1,135 @@
+{
+  "recordedUtc": "2026-09-29T05:42:23.674525+00:00",
+  "sourceSha256": {
+    "Specs/AMD64RegisterCoreProfileChecks.tla": "79dc4e7dbe1878cc6174fdf0582f92d794c3ea1ea3eea7e150940da6389fff34",
+    "lean/AMD64/RegisterCoreProfileChecks.lean": "72275678cd75176dd6f3ffc857dfce7cf69b7fd6ceb4930ab46ebe7d08286e44",
+    "Specs/AMD64RegisterCoreProjectionChecks.tla": "2b087fd755f48a519b241b429003f64002fc20f4a168a65223d471263b2428f2",
+    "Specs/AMD64RegisterCoreFaultChecks.tla": "034cf4dcb3f4172cf5d86e7e49072c1c22b2a912301a25ef357a39679974306f",
+    "lean/AMD64/RegisterCoreProjectionChecks.lean": "1065d01b72017a7bcf4f9747afabedc808044c06c7265d9c5cb042861c65c042",
+    "tools/check_stage_d_mov_mutations.py": "f66cabb54c477ca955e452e4eda36dbaba93aeea80e19bd7d5e3e4fbf54f6c8f"
+  },
+  "sourcesStable": true,
+  "leanVersion": "Lake version 5.0.0-src+819816b (Lean version 4.33.1)",
+  "mutations": [
+    {
+      "name": "lost-sign-extension",
+      "kind": "tlc-invariant",
+      "command": [
+        "tlc",
+        "-workers",
+        "1",
+        "-metadir",
+        "/tmp/ariadne-stage-d-mov-mutants-kcix5yrd/lost-sign-extension/states",
+        "-config",
+        "AMD64RegisterCoreProfileChecks.cfg",
+        "AMD64RegisterCoreProfileChecks.tla"
+      ],
+      "log": "/tmp/ariadne-stage-d-mov-mutants-kcix5yrd/lost-sign-extension/check.log"
+    },
+    {
+      "name": "wrong-next-ip",
+      "kind": "tlc-invariant",
+      "command": [
+        "tlc",
+        "-workers",
+        "1",
+        "-metadir",
+        "/tmp/ariadne-stage-d-mov-mutants-kcix5yrd/wrong-next-ip/states",
+        "-config",
+        "AMD64RegisterCoreProfileChecks.cfg",
+        "AMD64RegisterCoreProfileChecks.tla"
+      ],
+      "log": "/tmp/ariadne-stage-d-mov-mutants-kcix5yrd/wrong-next-ip/check.log"
+    },
+    {
+      "name": "wrong-destination",
+      "kind": "tlc-invariant",
+      "command": [
+        "tlc",
+        "-workers",
+        "1",
+        "-metadir",
+        "/tmp/ariadne-stage-d-mov-mutants-kcix5yrd/wrong-destination/states",
+        "-config",
+        "AMD64RegisterCoreProfileChecks.cfg",
+        "AMD64RegisterCoreProfileChecks.tla"
+      ],
+      "log": "/tmp/ariadne-stage-d-mov-mutants-kcix5yrd/wrong-destination/check.log"
+    },
+    {
+      "name": "projection-kills-faulted-rax",
+      "kind": "tlc-invariant",
+      "command": [
+        "tlc",
+        "-workers",
+        "1",
+        "-metadir",
+        "/tmp/ariadne-stage-d-mov-mutants-kcix5yrd/projection-kills-faulted-rax/states",
+        "-config",
+        "AMD64RegisterCoreProjection.cfg",
+        "AMD64RegisterCoreProjectionChecks.tla"
+      ],
+      "log": "/tmp/ariadne-stage-d-mov-mutants-kcix5yrd/projection-kills-faulted-rax/check.log"
+    },
+    {
+      "name": "fault-commits-register",
+      "kind": "tlc-invariant",
+      "command": [
+        "tlc",
+        "-workers",
+        "1",
+        "-metadir",
+        "/tmp/ariadne-stage-d-mov-mutants-kcix5yrd/fault-commits-register/states",
+        "-config",
+        "AMD64RegisterCoreFault.cfg",
+        "AMD64RegisterCoreFaultChecks.tla"
+      ],
+      "log": "/tmp/ariadne-stage-d-mov-mutants-kcix5yrd/fault-commits-register/check.log"
+    },
+    {
+      "name": "lean-forgets-sign",
+      "kind": "lean-proof",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "/tmp/ariadne-stage-d-mov-mutants-kcix5yrd/lean-forgets-sign.lean"
+      ],
+      "log": "/tmp/ariadne-stage-d-mov-mutants-kcix5yrd/lean-forgets-sign.log"
+    },
+    {
+      "name": "lean-missing-rex-w",
+      "kind": "lean-proof",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "/tmp/ariadne-stage-d-mov-mutants-kcix5yrd/lean-missing-rex-w.lean"
+      ],
+      "log": "/tmp/ariadne-stage-d-mov-mutants-kcix5yrd/lean-missing-rex-w.log"
+    },
+    {
+      "name": "lean-projection-kills-faulted-rax",
+      "kind": "lean-proof",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "/tmp/ariadne-stage-d-mov-mutants-kcix5yrd/lean-projection-kills-faulted-rax.lean"
+      ],
+      "log": "/tmp/ariadne-stage-d-mov-mutants-kcix5yrd/lean-projection-kills-faulted-rax.log"
+    },
+    {
+      "name": "lean-fault-commits-register",
+      "kind": "lean-proof",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "/tmp/ariadne-stage-d-mov-mutants-kcix5yrd/lean-fault-commits-register.lean"
+      ],
+      "log": "/tmp/ariadne-stage-d-mov-mutants-kcix5yrd/lean-fault-commits-register.log"
+    }
+  ],
+  "passed": true
+}

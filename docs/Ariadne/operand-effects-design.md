@@ -6,6 +6,12 @@ status](operand-effects-plan.md). The scoped memory-immediate MOV extension is
 also implemented; see its [Stage A implementation plan](stage-a-memory-immediate-mov-plan.md)
 and [validation record](stage-a-validation.md). Neither delivery certifies a
 complete AMD64 instruction step.
+Further exact effect rules are prioritized by the
+[practical assurance queue](practical-assurance-priorities.md), while the
+49-case formal acceptance gate remains a long-term research purpose.
+The [Priority 2 path-driven effects implementation plan](priority-2-path-driven-effects-plan.md)
+limits further bindings to exact forms observed on independently rooted
+captured paths.
 
 ## Decision
 

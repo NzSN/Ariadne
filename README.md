@@ -18,18 +18,33 @@ extends that registry to 139 exact LLVM opcode identities and decodes the
 first instruction of both pinned real-dump fixtures. This does not certify
 their architectural instruction steps or a historical crash path.
 The separate [minidump input package](input/README.md) now reads Windows/Linux
-AMD64 captures and discovers local instruction starts. PE/ELF image readers,
-ELF core readers, the analyzer CLI, and JSON export remain pending.
+AMD64 captures and discovers local instruction starts. A pinned tool-produced
+[predecessor fixture](docs/Ariadne/stage-b-c-validation.md) now yields an
+address-producer slice, and its [investigator CLI](docs/Ariadne/stage-c-report-schema.md)
+publishes evidence-linked text, DOT and JSON v1. PE/ELF image and ELF core
+readers remain deferred under the current input scope.
+A separate [controlled Chromium real-capture case](docs/Ariadne/priority-1-real-capture-validation.md)
+now reaches a faulting memory read from an independently established captured
+entry and retains a possible address producer with explicit opaque-call gaps.
+The CLI text report now has a [scan-friendly instruction overview and
+Linux/Windows examples](docs/Ariadne/priority-3-presentation-validation.md);
+JSON v1 and DOT graph semantics remain unchanged. The first
+[performance measurement](docs/Ariadne/priority-4-performance-validation.md)
+is bounded by a 34-node real capture and does not qualify larger workloads.
 The [rendering module](docs/Ariadne/result-rendering.md) now produces readable
 text and Graphviz DOT from analyzer outcomes.
-The separate native LLVM IR, abstract machine-state, and initial x86-64
-instruction-semantics models remain formal specifications.
+The separate [abstract machine-state and verifier-accepted native LLVM IR paths](docs/Ariadne/stage-e-validation.md)
+now have Rust implementations and focused formal-fixture checks; generated
+model-based replay remains open. Initial x86-64 instruction semantics retain
+their distinct TLA+/Lean acceptance gate.
 
-The [immediate AMD64 milestone](docs/amd64-user64.md) is a verified 64-bit
-user-mode subset, starting with 49 register/immediate form cases and then near
-control/stack and common RAM operations. Unsupported semantics must retain
-explicit analysis uncertainty. Full Volume 3 general-purpose and Volume 1 state
-coverage remains the [long-term design target](docs/amd64-semantics-design.md). Its
+The [long-term AMD64 formal track](docs/amd64-user64.md) targets a verified
+64-bit user-mode subset, starting with 49 register/immediate form cases and
+then near control/stack and common RAM operations. Its gate remains **0/49**;
+it does not block the [practical minidump workflow](docs/Ariadne/practical-assurance-priorities.md).
+Unsupported semantics retain explicit analysis uncertainty. Full Volume 3
+general-purpose and Volume 1 state coverage remains the
+[broader design target](docs/amd64-semantics-design.md). Its
 [pinned source inventory](Specs/AMD64/README.md) and
 [TLA+/Lean foundations](lean/README.md) now include CPU-state representation,
 instruction-form validation, memory/exception contracts and integer kernels.
@@ -38,9 +53,11 @@ profile hash. Register-core acceptance remains pending: its 49 paired bodies
 are recorded separately from its zero verified instruction steps. TLA+ stays
 authoritative and the
 [task list](docs/amd64-semantics-tasks.md) tracks the proof and implementation work.
-The [roadmap](ROADMAP.md) orders binary/dump input, CFG recovery, conservative
-effects, verified semantics and investigator output without requiring full AMD64
-coverage for useful partial analysis.
+The [roadmap](ROADMAP.md) orders minidump input, CFG recovery, conservative
+effects and investigator output while formal ISA acceptance advances separately.
+The [Stage F record](docs/Ariadne/stage-f-proof-and-performance.md) states the
+remaining Rust refinement boundary and reports a repeatable performance
+baseline without claiming a proof or qualified solver optimization.
 
 The core uses **Rust 2024 and Cargo**, with no external crate dependencies.
 The separate native decoder pins LLVM MC 20.1.2. Reviewed rules now provide
@@ -117,7 +134,8 @@ The machine model abstracts the input adapters and decoder as fixed inputs. It
 specifies the engine's behavior once byte availability and instruction summaries
 have been supplied. The rendering module supplies a unified CFG with slice and obligation
 annotations as Graphviz DOT for SVG rendering, plus a full text report of
-possible value origins. Annotated assembly and JSON export remain planned.
+possible value origins. The minidump report layer now adds JSON v1 and captured
+evidence; further annotated assembly remains planned.
 
 ## Machine analysis phases
 
@@ -224,7 +242,7 @@ state transitions, invariants, and interpretation of partial results.
 | [tests/](tests/) | Specification fixtures, transition checks, and independent generated-request oracles |
 | [docs/implementation.md](docs/implementation.md) | Rust API, model correspondence, and implementation boundaries |
 | [docs/llvm-mc-adapter.md](docs/llvm-mc-adapter.md) | Optional pinned decoder build, snapshot input contract, and validation |
-| [docs/machine-state-design.md](docs/machine-state-design.md) | Proposed Rust design for abstract machine-state propagation |
+| [docs/machine-state-design.md](docs/machine-state-design.md) | Implemented Rust design for abstract machine-state propagation; generated replay still open |
 | [docs/x86-64-semantics.md](docs/x86-64-semantics.md) | Supported x86-64 instruction rules, stateflow composition, and validation limits |
 | [mbt/README.md](mbt/README.md) | Mirrors/MirrorRust MBT setup, checked corpus, mutation gate, and evidence |
 | [Specs/AriadneTypes.tla](Specs/AriadneTypes.tla) | Shared Apalache aliases for semantic identities, labels, states, and values |

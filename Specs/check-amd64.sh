@@ -90,7 +90,13 @@ if failed:
 PY
 for config in AMD64*.cfg; do
   base=${config%.cfg}
-  module="${base}Checks.tla"
+  # Most configurations name a base module; a configuration already ending in
+  # Checks names its explicit Checks module directly (e.g. RegisterCoreProfile).
+  if [[ $base == *Checks ]]; then
+    module="${base}.tla"
+  else
+    module="${base}Checks.tla"
+  fi
   if [[ ! -f $module ]]; then
     printf 'Missing explicit Checks module for configuration %s\n' "$config" >&2
     exit 1
