@@ -30,7 +30,7 @@ v2 OPCODE N OPERAND... DEFS FLAGS U IMPLICIT_USE... D IMPLICIT_DEF... TIE... VA 
 
 Counts are bounded by 32; names are 1..96 ASCII letters/digits/underscores.
 Records are shorter than 4096 bytes; stdout is bounded by 4096 times the input
-record count, stderr by 4096 bytes. Each process exchange has a 30-second
+record count plus 128 bytes for a checked header, stderr by 4096 bytes. Each process exchange has a 30-second
 limit, including exit after stream closure. All streams are drained concurrently;
 limit/error handling kills and reaps the helper. The helper is a trusted local
 executable, not an isolation interface for arbitrary descendant processes.
@@ -47,7 +47,7 @@ Example (`mov rax, rbx`):
 v2 MOV64rr 2 r:RAX r:RBX 1 0 0 0 -1 -1 4096 ok 3 ordinary -
 ```
 
-The checked observations for all 137 admitted opcode identities are frozen in
+The checked observations for all 147 admitted opcode identities are frozen in
 [effects-v2.tsv](../../tests/fixtures/effects-v2.tsv). Their purpose is detecting
 changes in decoder layouts. The tests also separately assert architectural
 read/write expectations and resulting analysis behavior. Updating snapshots
@@ -70,3 +70,14 @@ Windows-compatible. Minidump input selects the target from validated platform
 metadata. Calls remain opaque under both profiles; no ABI preservation rules
 are inferred. The input native gate exercises the full frozen opcode registry
 under both targets.
+
+## Checked batch invocation
+
+Rust preparation now uses `--protocol=2-checked` or
+`--protocol=2-checked-linux`. A single invocation emits the exact version/target
+line above, followed by the unchanged protocol-2 records. The parser requires
+that header before accepting any rows. This replaces a separate version
+process for each batch; legacy version and decode modes remain available.
+Raw per-instruction records, evidence identities and row/error bounds keep
+their existing meaning. Rebuild the helper together with the updated Rust
+adapter; an older helper lacking the checked mode is rejected.

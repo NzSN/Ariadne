@@ -82,5 +82,8 @@ change, state the measured range in which the current implementation is
 acceptable. Neither result asserts a universal performance bound, formal Rust
 refinement, or AMD64 instruction-step correctness.
 The first [measurement record](priority-4-performance-validation.md) is
-bounded by the currently available 34-node real capture; it does not close
-the larger real-workload target.
+bounded by the initial 34-node real capture. The
+[2026-09-30 qualification and optimization stage](priority-4-workload-performance-plan.md#2026-09-30-qualification-run)
+uses a larger Windows Electron capture, exact control bindings, a frozen
+scanning reference and successive measurements before making the final
+performance decision.

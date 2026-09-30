@@ -1,7 +1,7 @@
 # Ariadne checkpoints
 
-Updated **2026-09-30 00:13 CST (Asia/Shanghai)** for the current-source
-integration gate. The Stage D 49-case gate remains intact at **0/49** as a
+Updated **2026-09-30** for the Priority 4 delivery and current-source
+integration evidence. The Stage D 49-case gate remains intact at **0/49** as a
 long-term formal purpose. Earlier entries retain their historical,
 time-local commit and validation status.
 
@@ -29,15 +29,35 @@ flowchart TD
     A --> B --> C --> D --> E --> F --> G --> H --> I --> J --> K --> L --> M --> N --> O --> P --> Q --> R --> S
 ```
 
-## 2026-09-30 00:13 CST — current-source integration
+## 2026-09-30 — Priority 4 qualification and measured optimization
 
-The [current integration report](docs/Ariadne/current-integration-validation.json)
+The [qualified Windows Electron workload](docs/Ariadne/priority-4-performance-validation.md)
+has 98 captured decoded instructions, 113 edges and a 19-node predecessor
+slice. A matching PE runtime-function entry and 101 forward byte matches
+anchor the query independently of RIP. Eight exact control-only bindings
+retain fully opaque effects. The private predecessor cache and checked native
+helper reduce CLI median from 3,845.7 to 1,787.6 ms, meeting the fixed 2,000 ms
+median budget. The measured range is 1,680.0–2,450.0 ms; no worst-case bound is
+claimed. All five synthetic families complete at 128, 256 and 512 nodes.
+
+All 277 visible actions match the frozen scanning reference, as do transitions
+on 256 generated requests. Text, DOT and JSON hashes are byte-identical across
+the performance checkpoints. The [integration record](docs/Ariadne/current-integration-validation.json)
+has 19 passing components and 93 stable source hashes, including the fresh
+11-component minidump gate, native Windows/Linux matrix, MBT replay and
+mutation gates. It retains the rerun of an interrupted generated test artifact.
+Practical Priority 4 is delivered for this query. Formal instruction-step
+acceptance, the Rust refinement proof and Stage E generated replay remain open.
+
+## 2026-09-30 00:13 CST — historical integration checkpoint
+
+The integration report at that checkpoint
 passed all 19 B/C/E/F gates with **89 stable source hashes**, including the
 11-gate nested minidump acceptance, root and IR tests, formal fixtures and
 the now explicitly selected original benchmark binary. The required
 register-core gate returned its expected **pending 0/49** result. The
 retained [Stage D component record](docs/Ariadne/stage-d-progress-validation.json)
-still matches all **242 current source hashes**; it remains a component
+matched all **242 source hashes** at that checkpoint; it remains a component
 checkpoint, not accepted instruction steps. A redundant Stage D rerun passed
 its first observation, AMD64 component and mutation checks before it was
 stopped; that incomplete run is not counted as a new acceptance result.
@@ -271,7 +291,8 @@ remains deferred.
 | 2026-09-29 17:27 CST, source-bound | Priority 1 controlled Chromium real-capture gate | Focused case passed with 30 forward-companion byte matches, 34 decoded starts, 28 slice nodes, Graphviz parsing, seed-only negative control and 28 stable source hashes. Changed dump and wrong build ID were rejected before publication. The existing minidump gate passed 11/11 components with 57 stable source hashes. |
 | 2026-09-29 23:29 CST, source-bound | Practical priorities 2 and 3 | First real path received a no-change effect decision; the text report gained an instruction overview and two platform examples. JSON/DOT for the controlled case remained byte-identical. All 11 minidump gates passed with 57 stable source hashes; the focused replay retained 28 stable hashes. |
 | 2026-09-29 23:29 CST, source-bound | Priority 4 bounded measurement | Five measured runs each for the 34-node real CLI query, the four-node Windows reference and 128/256-node synthetic families; 28 source and four tool hashes stable. The attempted 512-node five-repeat run timed out at 180 seconds. The 64-node real workload target remains open. |
-| 2026-09-30 00:13 CST, source-bound | Current B/C/E/F integration | 19/19 gates passed with 89 stable source hashes; required register-core milestone remained pending at 0/49. Stage D's retained 242-hash component record matches current sources byte-for-byte; no new full Stage D gate result is claimed. |
+| 2026-09-30 00:13 CST, source-bound | Historical B/C/E/F integration | 19/19 gates passed with 89 stable source hashes; required register-core milestone remained pending at 0/49. Stage D's retained 242-hash component record matched that snapshot; no new full Stage D gate result is claimed. |
+| 2026-09-30, source-bound | Priority 4 delivery | A 98-instruction real Windows query meets the fixed median budget after optimization; 277 actions and report hashes are preserved. All 128/256/512-node synthetic families complete. Current integration has 19 passing components and 93 stable source hashes, with a recorded minidump recheck after an interrupted test artifact. Formal register-core remains 0/49. |
 
 The full AMD64 TLA+/Lean suite was not rerun. The subsequent effects delivery
 ran its focused TLA+ gate and the existing core MBT gate successfully.
@@ -286,7 +307,7 @@ flowchart TD
     D["Delivered: minidump CLI and JSON v1"]
     G["Delivered: controlled Chromium real-capture slice"]
     H["Delivered: readable text overview and examples"]
-    I["Open: 64-node real workload qualification"]
+    I["Delivered: 98-instruction real workload qualification"]
     E["Long-term: source-bound register-core acceptance"]
     F["Partial: state/IR replay and Rust proof"]
     A --> B --> C --> D --> G --> H --> I

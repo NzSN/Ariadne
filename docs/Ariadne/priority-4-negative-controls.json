@@ -1,0 +1,10 @@
+{
+  "wrong_identity": {
+    "rejected_before_publication": true,
+    "reason": "dump RSDS mismatch"
+  },
+  "changed_captured_bytes": {
+    "rejected_before_publication": true,
+    "reason": "function bytes are not completely captured or differ"
+  }
+}

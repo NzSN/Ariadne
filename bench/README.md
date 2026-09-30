@@ -29,3 +29,12 @@ the existing synthetic graph families. The first
 [validation record](../docs/Ariadne/priority-4-performance-validation.md)
 keeps the raw CSV and the observed 512-node timeout separate from any
 release-scale claim.
+
+The real-capture checker supplies `--qualification` to the measurement tool;
+a graph's node count alone cannot close the workload gate. Completed CLI,
+stage and synthetic-size data remain available when a later size times out.
+`compare_schedule DUMP DECODER ENTRY_HEX SEED_HEX` compares every public state
+transition and the completed result against the frozen pre-optimization
+scanning engine. The optimized engine caches incoming sets and invalidates
+local successors when a predecessor's reaching set grows; operation counters
+therefore describe less work while the visible schedule is preserved.

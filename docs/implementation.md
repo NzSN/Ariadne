@@ -8,7 +8,9 @@ now have [fixture-validated Rust paths](Ariadne/stage-e-validation.md). The
 and [proof-boundary record](Ariadne/stage-f-proof-and-performance.md) distinguish
 that progress from generated model-based replay or a Rust refinement proof.
 The scoped [Priority 4 workload-performance implementation plan](Ariadne/priority-4-workload-performance-plan.md)
-measures larger minidump requests before proposing a solver change.
+now qualifies a 98-instruction Windows minidump and a measured predecessor
+cache. Incoming sets are recomputed only when local predecessors change;
+the sorted one-action schedule is preserved by full-transition comparisons.
 Its [performance design](Ariadne/priority-4-workload-performance-design.md)
 separates end-to-end CLI observations from core counters.
 

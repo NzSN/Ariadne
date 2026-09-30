@@ -1,0 +1,3046 @@
+{
+  "command": "python3 mbt/run.py",
+  "corpusManifestSha256": "796648f8fff9877e40b3d1f4cab5199f3a1d4fe02ebdfd1f76c1889dbeebac67",
+  "generatedBinding": {
+    "artifacts": {
+      ".model-interface-generated.json": "f77c728d10519958aff05105c2720b9962c769463d312d2964cc5a54143100d8",
+      "AriadneReplayMirror.generated.rs": "b7a17b9f982e9e438ae80113e12f5befc3b2cffbe98390e8b28d4825f708bc00"
+    },
+    "freshnessChecked": true,
+    "targetProfile": "mirrorrust-v1"
+  },
+  "mutants": [
+    {
+      "adapterId": "ariadne.machine-analysis/v1",
+      "bindingImplementation": "compiler-generated",
+      "cleanupMechanism": "Rust Drop of generated binding port",
+      "completedTraces": 3,
+      "coverageSatisfied": false,
+      "engineSha256": "7d03f3f29f644a781de132ecb69a74ad83bb3424293bb369e04b7c0340431d27",
+      "error": "step mismatch on action \"visit\": expected {\"decoded\":[1,2,3,4],\"edges\":[{\"dst\":2,\"kind\":\"fallthrough\",\"src\":1},{\"dst\":3,\"kind\":\"taken\",\"src\":1},{\"dst\":4,\"kind\":\"next\",\"src\":2},{\"dst\":4,\"kind\":\"indirect\",\"src\":3},{\"dst\":5,\"kind\":\"summary\",\"src\":4},{\"dst\":6,\"kind\":\"call\",\"src\":4}],\"fixture_id\":\"Closed\",\"obligations\":[],\"pending\":[5],\"phase\":\"recover\",\"provenance\":[{\"source\":\"captured\",\"va\":1},{\"source\":\"file\",\"va\":2},{\"source\":\"captured\",\"va\":3},{\"source\":\"captured\",\"va\":4},{\"source\":\"unavailable\",\"va\":5},{\"source\":\"unavailable\",\"va\":6},{\"source\":\"unavailable\",\"va\":7}],\"reaching\":[{\"definitions\":[],\"va\":1},{\"definitions\":[],\"va\":2},{\"definitions\":[],\"va\":3},{\"definitions\":[],\"va\":4},{\"definitions\":[],\"va\":5},{\"definitions\":[],\"va\":6},{\"definitions\":[],\"va\":7}],\"slice\":[],\"visited\":[1,2,3,4]}, got {\"decoded\":[1,2,3,4],\"edges\":[{\"dst\":2,\"kind\":\"fallthrough\",\"src\":1},{\"dst\":3,\"kind\":\"taken\",\"src\":1},{\"dst\":4,\"kind\":\"next\",\"src\":2},{\"dst\":4,\"kind\":\"indirect\",\"src\":3},{\"dst\":5,\"kind\":\"summary\",\"src\":4},{\"dst\":6,\"kind\":\"call\",\"src\":4}],\"fixture_id\":\"Closed\",\"obligations\":[],\"pending\":[5,6],\"phase\":\"recover\",\"provenance\":[{\"source\":\"captured\",\"va\":1},{\"source\":\"file\",\"va\":2},{\"source\":\"captured\",\"va\":3},{\"source\":\"captured\",\"va\":4},{\"source\":\"unavailable\",\"va\":5},{\"source\":\"unavailable\",\"va\":6},{\"source\":\"unavailable\",\"va\":7}],\"reaching\":[{\"definitions\":[],\"va\":1},{\"definitions\":[],\"va\":2},{\"definitions\":[],\"va\":3},{\"definitions\":[],\"va\":4},{\"definitions\":[],\"va\":5},{\"definitions\":[],\"va\":6},{\"definitions\":[],\"va\":7}],\"slice\":[],\"visited\":[1,2,3,4]}",
+      "executableSha256": "45f3542795e5d3882f53dd6da34a3a49ffae09afc9728d6cf4491a0ab68a0a90",
+      "factoryCalls": 1,
+      "fixtures": [
+        "Binary",
+        "Dump",
+        "Loop",
+        "Closed"
+      ],
+      "gatePassed": true,
+      "interfaceMatched": true,
+      "matchedActionCounts": null,
+      "matchedObservations": null,
+      "matchedPairCounts": null,
+      "mismatch": {
+        "action": "visit",
+        "actual": {
+          "decoded": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              }
+            ]
+          },
+          "edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "summary",
+                "src": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "call",
+                "src": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "fixture_id": "Closed",
+          "obligations": {
+            "#set": []
+          },
+          "pending": {
+            "#set": [
+              {
+                "#bigint": "5"
+              },
+              {
+                "#bigint": "6"
+              }
+            ]
+          },
+          "phase": "recover",
+          "provenance": {
+            "#set": [
+              {
+                "source": "captured",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "captured",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "captured",
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": []
+          },
+          "visited": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              }
+            ]
+          }
+        },
+        "expected": {
+          "decoded": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              }
+            ]
+          },
+          "edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "summary",
+                "src": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "call",
+                "src": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "fixture_id": "Closed",
+          "obligations": {
+            "#set": []
+          },
+          "pending": {
+            "#set": [
+              {
+                "#bigint": "5"
+              }
+            ]
+          },
+          "phase": "recover",
+          "provenance": {
+            "#set": [
+              {
+                "source": "captured",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "captured",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "captured",
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": []
+          },
+          "visited": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              }
+            ]
+          }
+        },
+        "hints": "[ExtraElem { path: [Field(\"pending\")], actual: Int(6) }]"
+      },
+      "mode": "mutant",
+      "modelMatched": false,
+      "mutation": "discover-call-targets",
+      "observationsDispatched": 54,
+      "portDrops": 1,
+      "schema": "ariadne.mbt-replay/v2",
+      "semanticDigest": "3c175901a7393a77065f69e16c6849ed898504a7cf1103e656b62bfa47bfebb2",
+      "status": "mismatch",
+      "targetProfile": "mirrorrust-v1"
+    },
+    {
+      "adapterId": "ariadne.machine-analysis/v1",
+      "bindingImplementation": "compiler-generated",
+      "cleanupMechanism": "Rust Drop of generated binding port",
+      "completedTraces": 5,
+      "coverageSatisfied": false,
+      "engineSha256": "6b94486ed8284faca571f4065c50dee34dd9b5014fafaddf977f9d7a1bed88c4",
+      "error": "step mismatch on action \"propagate\": expected {\"decoded\":[1,2,3],\"edges\":[{\"dst\":2,\"kind\":\"summary\",\"src\":1},{\"dst\":3,\"kind\":\"call\",\"src\":1},{\"dst\":4,\"kind\":\"call\",\"src\":1}],\"fixture_id\":\"Calls\",\"obligations\":[],\"pending\":[],\"phase\":\"dataflow\",\"provenance\":[{\"source\":\"file\",\"va\":1},{\"source\":\"file\",\"va\":2},{\"source\":\"file\",\"va\":3},{\"source\":\"unavailable\",\"va\":4}],\"reaching\":[{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1}],\"va\":1},{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":1}],\"va\":2},{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":3}],\"va\":3},{\"definitions\":[],\"va\":4}],\"slice\":[],\"visited\":[1,2,3]}, got {\"decoded\":[1,2,3],\"edges\":[{\"dst\":2,\"kind\":\"summary\",\"src\":1},{\"dst\":3,\"kind\":\"call\",\"src\":1},{\"dst\":4,\"kind\":\"call\",\"src\":1}],\"fixture_id\":\"Calls\",\"obligations\":[],\"pending\":[],\"phase\":\"dataflow\",\"provenance\":[{\"source\":\"file\",\"va\":1},{\"source\":\"file\",\"va\":2},{\"source\":\"file\",\"va\":3},{\"source\":\"unavailable\",\"va\":4}],\"reaching\":[{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1}],\"va\":1},{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":1}],\"va\":2},{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":1},{\"loc\":\"x\",\"origin\":\"entry\",\"site\":3}],\"va\":3},{\"definitions\":[],\"va\":4}],\"slice\":[],\"visited\":[1,2,3]}",
+      "executableSha256": "c762f51fcbcfb8b6434efd5e12e143a6228c72f65cbd6c7331f2fad825661ba1",
+      "factoryCalls": 1,
+      "fixtures": [
+        "Binary",
+        "Dump",
+        "Loop",
+        "Closed",
+        "Pipeline",
+        "Calls"
+      ],
+      "gatePassed": true,
+      "interfaceMatched": true,
+      "matchedActionCounts": null,
+      "matchedObservations": null,
+      "matchedPairCounts": null,
+      "mismatch": {
+        "action": "propagate",
+        "actual": {
+          "decoded": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              }
+            ]
+          },
+          "edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "summary",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "call",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "call",
+                "src": {
+                  "#bigint": "1"
+                }
+              }
+            ]
+          },
+          "fixture_id": "Calls",
+          "obligations": {
+            "#set": []
+          },
+          "pending": {
+            "#set": []
+          },
+          "phase": "dataflow",
+          "provenance": {
+            "#set": [
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "3"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": []
+          },
+          "visited": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              }
+            ]
+          }
+        },
+        "expected": {
+          "decoded": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              }
+            ]
+          },
+          "edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "summary",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "call",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "call",
+                "src": {
+                  "#bigint": "1"
+                }
+              }
+            ]
+          },
+          "fixture_id": "Calls",
+          "obligations": {
+            "#set": []
+          },
+          "pending": {
+            "#set": []
+          },
+          "phase": "dataflow",
+          "provenance": {
+            "#set": [
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "3"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": []
+          },
+          "visited": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              }
+            ]
+          }
+        },
+        "hints": "[MissingElem { path: [Field(\"reaching\")], expected: Record({\"definitions\": Set([Record({\"loc\": Str(\"x\"), \"origin\": Str(\"entry\"), \"site\": Int(3)})]), \"va\": Int(3)}) }, ExtraElem { path: [Field(\"reaching\")], actual: Record({\"definitions\": Set([Record({\"loc\": Str(\"x\"), \"origin\": Str(\"entry\"), \"site\": Int(1)}), Record({\"loc\": Str(\"x\"), \"origin\": Str(\"instruction\"), \"site\": Int(1)}), Record({\"loc\": Str(\"x\"), \"origin\": Str(\"entry\"), \"site\": Int(3)})]), \"va\": Int(3)}) }]"
+      },
+      "mode": "mutant",
+      "modelMatched": false,
+      "mutation": "propagate-across-call-edges",
+      "observationsDispatched": 81,
+      "portDrops": 1,
+      "schema": "ariadne.mbt-replay/v2",
+      "semanticDigest": "3c175901a7393a77065f69e16c6849ed898504a7cf1103e656b62bfa47bfebb2",
+      "status": "mismatch",
+      "targetProfile": "mirrorrust-v1"
+    },
+    {
+      "adapterId": "ariadne.machine-analysis/v1",
+      "bindingImplementation": "compiler-generated",
+      "cleanupMechanism": "Rust Drop of generated binding port",
+      "completedTraces": 0,
+      "coverageSatisfied": false,
+      "engineSha256": "5b613e1f909719697833e9e93cfed172c16275f5176a4aff1b761e92a04b2c4d",
+      "error": "step mismatch on action \"propagate\": expected {\"decoded\":[1,2,3,4,5],\"edges\":[{\"dst\":2,\"kind\":\"fallthrough\",\"src\":1},{\"dst\":3,\"kind\":\"taken\",\"src\":1},{\"dst\":4,\"kind\":\"next\",\"src\":2},{\"dst\":4,\"kind\":\"indirect\",\"src\":3},{\"dst\":6,\"kind\":\"indirect\",\"src\":3},{\"dst\":7,\"kind\":\"indirect\",\"src\":3},{\"dst\":5,\"kind\":\"summary\",\"src\":4},{\"dst\":6,\"kind\":\"call\",\"src\":4}],\"fixture_id\":\"Binary\",\"obligations\":[{\"reason\":\"indirect-targets\",\"site\":3},{\"reason\":\"call-targets\",\"site\":4},{\"reason\":\"unavailable\",\"site\":6},{\"reason\":\"decode-failed\",\"site\":7}],\"pending\":[],\"phase\":\"dataflow\",\"provenance\":[{\"source\":\"file\",\"va\":1},{\"source\":\"file\",\"va\":2},{\"source\":\"file\",\"va\":3},{\"source\":\"file\",\"va\":4},{\"source\":\"file\",\"va\":5},{\"source\":\"unavailable\",\"va\":6},{\"source\":\"unavailable\",\"va\":7}],\"reaching\":[{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1}],\"va\":1},{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1}],\"va\":2},{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1}],\"va\":3},{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":2}],\"va\":4},{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":2},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":4},{\"loc\":\"target\",\"origin\":\"instruction\",\"site\":4}],\"va\":5},{\"definitions\":[],\"va\":6},{\"definitions\":[],\"va\":7}],\"slice\":[],\"visited\":[1,2,3,4,5,6,7]}, got {\"decoded\":[1,2,3,4,5],\"edges\":[{\"dst\":2,\"kind\":\"fallthrough\",\"src\":1},{\"dst\":3,\"kind\":\"taken\",\"src\":1},{\"dst\":4,\"kind\":\"next\",\"src\":2},{\"dst\":4,\"kind\":\"indirect\",\"src\":3},{\"dst\":6,\"kind\":\"indirect\",\"src\":3},{\"dst\":7,\"kind\":\"indirect\",\"src\":3},{\"dst\":5,\"kind\":\"summary\",\"src\":4},{\"dst\":6,\"kind\":\"call\",\"src\":4}],\"fixture_id\":\"Binary\",\"obligations\":[{\"reason\":\"indirect-targets\",\"site\":3},{\"reason\":\"call-targets\",\"site\":4},{\"reason\":\"unavailable\",\"site\":6},{\"reason\":\"decode-failed\",\"site\":7}],\"pending\":[],\"phase\":\"dataflow\",\"provenance\":[{\"source\":\"file\",\"va\":1},{\"source\":\"file\",\"va\":2},{\"source\":\"file\",\"va\":3},{\"source\":\"file\",\"va\":4},{\"source\":\"file\",\"va\":5},{\"source\":\"unavailable\",\"va\":6},{\"source\":\"unavailable\",\"va\":7}],\"reaching\":[{\"definitions\":[{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1}],\"va\":1},{\"definitions\":[{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1}],\"va\":2},{\"definitions\":[{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1}],\"va\":3},{\"definitions\":[{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":2}],\"va\":4},{\"definitions\":[{\"loc\":\"target\",\"origin\":\"instruction\",\"site\":4},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":4}],\"va\":5},{\"definitions\":[],\"va\":6},{\"definitions\":[],\"va\":7}],\"slice\":[],\"visited\":[1,2,3,4,5,6,7]}",
+      "executableSha256": "e501af90af1e41c58d61eb65bbc107c297cab6e1da71cc9e024474719ec1062f",
+      "factoryCalls": 1,
+      "fixtures": [
+        "Binary"
+      ],
+      "gatePassed": true,
+      "interfaceMatched": true,
+      "matchedActionCounts": null,
+      "matchedObservations": null,
+      "matchedPairCounts": null,
+      "mismatch": {
+        "action": "propagate",
+        "actual": {
+          "decoded": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              }
+            ]
+          },
+          "edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "7"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "summary",
+                "src": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "call",
+                "src": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "fixture_id": "Binary",
+          "obligations": {
+            "#set": [
+              {
+                "reason": "indirect-targets",
+                "site": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "reason": "call-targets",
+                "site": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "reason": "unavailable",
+                "site": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "reason": "decode-failed",
+                "site": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "pending": {
+            "#set": []
+          },
+          "phase": "dataflow",
+          "provenance": {
+            "#set": [
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "2"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "target",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "4"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "4"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": []
+          },
+          "visited": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              },
+              {
+                "#bigint": "6"
+              },
+              {
+                "#bigint": "7"
+              }
+            ]
+          }
+        },
+        "expected": {
+          "decoded": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              }
+            ]
+          },
+          "edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "7"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "summary",
+                "src": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "call",
+                "src": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "fixture_id": "Binary",
+          "obligations": {
+            "#set": [
+              {
+                "reason": "indirect-targets",
+                "site": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "reason": "call-targets",
+                "site": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "reason": "unavailable",
+                "site": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "reason": "decode-failed",
+                "site": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "pending": {
+            "#set": []
+          },
+          "phase": "dataflow",
+          "provenance": {
+            "#set": [
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "2"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "2"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "4"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "4"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": []
+          },
+          "visited": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              },
+              {
+                "#bigint": "6"
+              },
+              {
+                "#bigint": "7"
+              }
+            ]
+          }
+        },
+        "hints": "[MissingElem { path: [Field(\"reaching\")], expected: Record({\"definitions\": Set([Record({\"loc\": Str(\"x\"), \"origin\": Str(\"entry\"), \"site\": Int(1)}), Record({\"loc\": Str(\"target\"), \"origin\": Str(\"entry\"), \"site\": Int(1)}), Record({\"loc\": Str(\"x\"), \"origin\": Str(\"instruction\"), \"site\": Int(2)}), Record({\"loc\": Str(\"x\"), \"origin\": Str(\"instruction\"), \"site\": Int(4)}), Record({\"loc\": Str(\"target\"), \"origin\": Str(\"instruction\"), \"site\": Int(4)})]), \"va\": Int(5)}) }, ExtraElem { path: [Field(\"reaching\")], actual: Record({\"definitions\": Set([Record({\"loc\": Str(\"target\"), \"origin\": Str(\"instruction\"), \"site\": Int(4)}), Record({\"loc\": Str(\"x\"), \"origin\": Str(\"instruction\"), \"site\": Int(4)})]), \"va\": Int(5)}) }]"
+      },
+      "mode": "mutant",
+      "modelMatched": false,
+      "mutation": "may-writes-kill-origins",
+      "observationsDispatched": 14,
+      "portDrops": 1,
+      "schema": "ariadne.mbt-replay/v2",
+      "semanticDigest": "3c175901a7393a77065f69e16c6849ed898504a7cf1103e656b62bfa47bfebb2",
+      "status": "mismatch",
+      "targetProfile": "mirrorrust-v1"
+    },
+    {
+      "adapterId": "ariadne.machine-analysis/v1",
+      "bindingImplementation": "compiler-generated",
+      "cleanupMechanism": "Rust Drop of generated binding port",
+      "completedTraces": 1,
+      "coverageSatisfied": false,
+      "engineSha256": "14dc68386d3db81291144208f5cd62f891fcf4221f07fb5743ffe42afc3e4b65",
+      "error": "step mismatch on action \"visit\": expected {\"decoded\":[1,2,3,4],\"edges\":[{\"dst\":2,\"kind\":\"fallthrough\",\"src\":1},{\"dst\":3,\"kind\":\"taken\",\"src\":1},{\"dst\":4,\"kind\":\"next\",\"src\":2},{\"dst\":4,\"kind\":\"indirect\",\"src\":3},{\"dst\":6,\"kind\":\"indirect\",\"src\":3},{\"dst\":7,\"kind\":\"indirect\",\"src\":3},{\"dst\":5,\"kind\":\"summary\",\"src\":4},{\"dst\":6,\"kind\":\"call\",\"src\":4}],\"fixture_id\":\"Dump\",\"obligations\":[{\"reason\":\"indirect-targets\",\"site\":3},{\"reason\":\"call-targets\",\"site\":4},{\"reason\":\"unavailable\",\"site\":5}],\"pending\":[6,7],\"phase\":\"recover\",\"provenance\":[{\"source\":\"captured\",\"va\":1},{\"source\":\"file\",\"va\":2},{\"source\":\"captured\",\"va\":3},{\"source\":\"captured\",\"va\":4},{\"source\":\"unavailable\",\"va\":5},{\"source\":\"unavailable\",\"va\":6},{\"source\":\"unavailable\",\"va\":7}],\"reaching\":[{\"definitions\":[],\"va\":1},{\"definitions\":[],\"va\":2},{\"definitions\":[],\"va\":3},{\"definitions\":[],\"va\":4},{\"definitions\":[],\"va\":5},{\"definitions\":[],\"va\":6},{\"definitions\":[],\"va\":7}],\"slice\":[],\"visited\":[1,2,3,4,5]}, got {\"decoded\":[1,2,3,4,5],\"edges\":[{\"dst\":2,\"kind\":\"fallthrough\",\"src\":1},{\"dst\":3,\"kind\":\"taken\",\"src\":1},{\"dst\":4,\"kind\":\"next\",\"src\":2},{\"dst\":4,\"kind\":\"indirect\",\"src\":3},{\"dst\":6,\"kind\":\"indirect\",\"src\":3},{\"dst\":7,\"kind\":\"indirect\",\"src\":3},{\"dst\":5,\"kind\":\"summary\",\"src\":4},{\"dst\":6,\"kind\":\"call\",\"src\":4}],\"fixture_id\":\"Dump\",\"obligations\":[{\"reason\":\"indirect-targets\",\"site\":3},{\"reason\":\"call-targets\",\"site\":4}],\"pending\":[6,7],\"phase\":\"recover\",\"provenance\":[{\"source\":\"captured\",\"va\":1},{\"source\":\"file\",\"va\":2},{\"source\":\"captured\",\"va\":3},{\"source\":\"captured\",\"va\":4},{\"source\":\"file\",\"va\":5},{\"source\":\"unavailable\",\"va\":6},{\"source\":\"unavailable\",\"va\":7}],\"reaching\":[{\"definitions\":[],\"va\":1},{\"definitions\":[],\"va\":2},{\"definitions\":[],\"va\":3},{\"definitions\":[],\"va\":4},{\"definitions\":[],\"va\":5},{\"definitions\":[],\"va\":6},{\"definitions\":[],\"va\":7}],\"slice\":[],\"visited\":[1,2,3,4,5]}",
+      "executableSha256": "2d122d331745543cd1f155f3085142c6a8fc19ec39cbde854c140b41cc1ea90e",
+      "factoryCalls": 1,
+      "fixtures": [
+        "Binary",
+        "Dump"
+      ],
+      "gatePassed": true,
+      "interfaceMatched": true,
+      "matchedActionCounts": null,
+      "matchedObservations": null,
+      "matchedPairCounts": null,
+      "mismatch": {
+        "action": "visit",
+        "actual": {
+          "decoded": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              }
+            ]
+          },
+          "edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "7"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "summary",
+                "src": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "call",
+                "src": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "fixture_id": "Dump",
+          "obligations": {
+            "#set": [
+              {
+                "reason": "indirect-targets",
+                "site": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "reason": "call-targets",
+                "site": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "pending": {
+            "#set": [
+              {
+                "#bigint": "6"
+              },
+              {
+                "#bigint": "7"
+              }
+            ]
+          },
+          "phase": "recover",
+          "provenance": {
+            "#set": [
+              {
+                "source": "captured",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "captured",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "captured",
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": []
+          },
+          "visited": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              }
+            ]
+          }
+        },
+        "expected": {
+          "decoded": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              }
+            ]
+          },
+          "edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "7"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "summary",
+                "src": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "call",
+                "src": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "fixture_id": "Dump",
+          "obligations": {
+            "#set": [
+              {
+                "reason": "indirect-targets",
+                "site": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "reason": "call-targets",
+                "site": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "reason": "unavailable",
+                "site": {
+                  "#bigint": "5"
+                }
+              }
+            ]
+          },
+          "pending": {
+            "#set": [
+              {
+                "#bigint": "6"
+              },
+              {
+                "#bigint": "7"
+              }
+            ]
+          },
+          "phase": "recover",
+          "provenance": {
+            "#set": [
+              {
+                "source": "captured",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "captured",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "captured",
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": []
+          },
+          "visited": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              }
+            ]
+          }
+        },
+        "hints": "[ExtraElem { path: [Field(\"decoded\")], actual: Int(5) }, MissingElem { path: [Field(\"obligations\")], expected: Record({\"reason\": Str(\"unavailable\"), \"site\": Int(5)}) }, MissingElem { path: [Field(\"provenance\")], expected: Record({\"source\": Str(\"unavailable\"), \"va\": Int(5)}) }, ExtraElem { path: [Field(\"provenance\")], actual: Record({\"source\": Str(\"file\"), \"va\": Int(5)}) }]"
+      },
+      "mode": "mutant",
+      "modelMatched": false,
+      "mutation": "untrusted-dump-fallback",
+      "observationsDispatched": 23,
+      "portDrops": 1,
+      "schema": "ariadne.mbt-replay/v2",
+      "semanticDigest": "3c175901a7393a77065f69e16c6849ed898504a7cf1103e656b62bfa47bfebb2",
+      "status": "mismatch",
+      "targetProfile": "mirrorrust-v1"
+    },
+    {
+      "adapterId": "ariadne.machine-analysis/v1",
+      "bindingImplementation": "compiler-generated",
+      "cleanupMechanism": "Rust Drop of generated binding port",
+      "completedTraces": 1,
+      "coverageSatisfied": false,
+      "engineSha256": "f20fd96d6b00c2d550ebe207a208a98139483b946fd1c69dbe388a4c6fee8efa",
+      "error": "step mismatch on action \"expandSlice\": expected {\"decoded\":[1,2,3,4,5],\"edges\":[{\"dst\":2,\"kind\":\"fallthrough\",\"src\":1},{\"dst\":3,\"kind\":\"taken\",\"src\":1},{\"dst\":4,\"kind\":\"next\",\"src\":2},{\"dst\":4,\"kind\":\"indirect\",\"src\":3},{\"dst\":6,\"kind\":\"indirect\",\"src\":3},{\"dst\":7,\"kind\":\"indirect\",\"src\":3},{\"dst\":5,\"kind\":\"summary\",\"src\":4},{\"dst\":6,\"kind\":\"call\",\"src\":4}],\"fixture_id\":\"Binary\",\"obligations\":[{\"reason\":\"indirect-targets\",\"site\":3},{\"reason\":\"call-targets\",\"site\":4},{\"reason\":\"unavailable\",\"site\":6},{\"reason\":\"decode-failed\",\"site\":7}],\"pending\":[],\"phase\":\"slice\",\"provenance\":[{\"source\":\"file\",\"va\":1},{\"source\":\"file\",\"va\":2},{\"source\":\"file\",\"va\":3},{\"source\":\"file\",\"va\":4},{\"source\":\"file\",\"va\":5},{\"source\":\"unavailable\",\"va\":6},{\"source\":\"unavailable\",\"va\":7}],\"reaching\":[{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1}],\"va\":1},{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1}],\"va\":2},{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1}],\"va\":3},{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":2}],\"va\":4},{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":2},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":4},{\"loc\":\"target\",\"origin\":\"instruction\",\"site\":4}],\"va\":5},{\"definitions\":[],\"va\":6},{\"definitions\":[],\"va\":7}],\"slice\":[2,4,5],\"visited\":[1,2,3,4,5,6,7]}, got {\"decoded\":[1,2,3,4,5],\"edges\":[{\"dst\":2,\"kind\":\"fallthrough\",\"src\":1},{\"dst\":3,\"kind\":\"taken\",\"src\":1},{\"dst\":4,\"kind\":\"next\",\"src\":2},{\"dst\":4,\"kind\":\"indirect\",\"src\":3},{\"dst\":6,\"kind\":\"indirect\",\"src\":3},{\"dst\":7,\"kind\":\"indirect\",\"src\":3},{\"dst\":5,\"kind\":\"summary\",\"src\":4},{\"dst\":6,\"kind\":\"call\",\"src\":4}],\"fixture_id\":\"Binary\",\"obligations\":[{\"reason\":\"indirect-targets\",\"site\":3},{\"reason\":\"call-targets\",\"site\":4},{\"reason\":\"unavailable\",\"site\":6},{\"reason\":\"decode-failed\",\"site\":7}],\"pending\":[],\"phase\":\"done\",\"provenance\":[{\"source\":\"file\",\"va\":1},{\"source\":\"file\",\"va\":2},{\"source\":\"file\",\"va\":3},{\"source\":\"file\",\"va\":4},{\"source\":\"file\",\"va\":5},{\"source\":\"unavailable\",\"va\":6},{\"source\":\"unavailable\",\"va\":7}],\"reaching\":[{\"definitions\":[{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1}],\"va\":1},{\"definitions\":[{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1}],\"va\":2},{\"definitions\":[{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1}],\"va\":3},{\"definitions\":[{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":2}],\"va\":4},{\"definitions\":[{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"target\",\"origin\":\"instruction\",\"site\":4},{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":2},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":4}],\"va\":5},{\"definitions\":[],\"va\":6},{\"definitions\":[],\"va\":7}],\"slice\":[4,5],\"visited\":[1,2,3,4,5,6,7]}",
+      "executableSha256": "622b8b190f07c54412211f4d175d54d0eb743cf6c6088f6daa698eba302990c7",
+      "factoryCalls": 1,
+      "fixtures": [
+        "Binary"
+      ],
+      "gatePassed": true,
+      "interfaceMatched": true,
+      "matchedActionCounts": null,
+      "matchedObservations": null,
+      "matchedPairCounts": null,
+      "mismatch": {
+        "action": "expandSlice",
+        "actual": {
+          "decoded": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              }
+            ]
+          },
+          "edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "7"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "summary",
+                "src": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "call",
+                "src": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "fixture_id": "Binary",
+          "obligations": {
+            "#set": [
+              {
+                "reason": "indirect-targets",
+                "site": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "reason": "call-targets",
+                "site": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "reason": "unavailable",
+                "site": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "reason": "decode-failed",
+                "site": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "pending": {
+            "#set": []
+          },
+          "phase": "done",
+          "provenance": {
+            "#set": [
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "2"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "4"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "2"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "4"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": [
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              }
+            ]
+          },
+          "visited": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              },
+              {
+                "#bigint": "6"
+              },
+              {
+                "#bigint": "7"
+              }
+            ]
+          }
+        },
+        "expected": {
+          "decoded": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              }
+            ]
+          },
+          "edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "7"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "summary",
+                "src": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "call",
+                "src": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "fixture_id": "Binary",
+          "obligations": {
+            "#set": [
+              {
+                "reason": "indirect-targets",
+                "site": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "reason": "call-targets",
+                "site": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "reason": "unavailable",
+                "site": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "reason": "decode-failed",
+                "site": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "pending": {
+            "#set": []
+          },
+          "phase": "slice",
+          "provenance": {
+            "#set": [
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "2"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "2"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "4"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "4"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": [
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              }
+            ]
+          },
+          "visited": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              },
+              {
+                "#bigint": "6"
+              },
+              {
+                "#bigint": "7"
+              }
+            ]
+          }
+        },
+        "hints": "[ValueMismatch { path: [Field(\"phase\")], expected: Str(\"slice\"), actual: Str(\"done\") }, MissingElem { path: [Field(\"slice\")], expected: Int(2) }]"
+      },
+      "mode": "mutant",
+      "modelMatched": false,
+      "mutation": "skip-slice-closure",
+      "observationsDispatched": 16,
+      "portDrops": 1,
+      "schema": "ariadne.mbt-replay/v2",
+      "semanticDigest": "3c175901a7393a77065f69e16c6849ed898504a7cf1103e656b62bfa47bfebb2",
+      "status": "mismatch",
+      "targetProfile": "mirrorrust-v1"
+    }
+  ],
+  "observerSha256": "557b20c2fc86359cf3af5092c29a07802367c12121ae0dfbcc034e1097431e25",
+  "passed": true,
+  "positive": {
+    "adapterId": "ariadne.machine-analysis/v1",
+    "bindingImplementation": "compiler-generated",
+    "cleanupMechanism": "Rust Drop of generated binding port",
+    "completedTraces": 12,
+    "coverageSatisfied": true,
+    "error": null,
+    "executableSha256": "8e7017bd1b78986f3416636a689ad3338232fc4c57877c139df634522fc8b9f6",
+    "factoryCalls": 1,
+    "fixtures": [
+      "Binary",
+      "Dump",
+      "Loop",
+      "Closed",
+      "Pipeline",
+      "Calls",
+      "Binary",
+      "Dump",
+      "Loop",
+      "Closed",
+      "Pipeline",
+      "Calls"
+    ],
+    "gatePassed": true,
+    "interfaceMatched": true,
+    "matchedActionCounts": {
+      "ExpandSlice": 12,
+      "FinishDataflow": 12,
+      "FinishRecovery": 12,
+      "FinishSlice": 12,
+      "Propagate": 50,
+      "Visit": 58
+    },
+    "matchedObservations": 168,
+    "matchedPairCounts": {
+      "ExpandSlice->FinishSlice": 12,
+      "FinishDataflow->ExpandSlice": 12,
+      "FinishRecovery->Propagate": 12,
+      "Propagate->FinishDataflow": 12,
+      "Propagate->Propagate": 38,
+      "Visit->FinishRecovery": 12,
+      "Visit->Visit": 46
+    },
+    "mismatch": null,
+    "mode": "good",
+    "modelMatched": true,
+    "observationsDispatched": 168,
+    "portDrops": 1,
+    "schema": "ariadne.mbt-replay/v2",
+    "semanticDigest": "3c175901a7393a77065f69e16c6849ed898504a7cf1103e656b62bfa47bfebb2",
+    "status": "passed",
+    "targetProfile": "mirrorrust-v1"
+  },
+  "schema": "ariadne.mbt-results/v2",
+  "scope": "local negotiated replay; no restricted-worker or author-isolation claim",
+  "sutSources": {
+    "src/effects.rs": "3bbc00f6e800ca366579306cb90d100043e77b3d2e4d97a9ad14ccc4057e8656",
+    "src/engine.rs": "d59a6874ac3add446fc4aa3c590745c06e0e763890db7a76de43f95af687d6b1",
+    "src/lib.rs": "13989ad2b8975b0958ce571533c87114fbc054cf24fceab0abaaed32b5356c32",
+    "src/llvm_ir.rs": "c5b173605bab60001b04b829258519412f94d92d0c4c558eee6f4d2618914e93",
+    "src/llvm_mc.rs": "5ac6e89a2b034e44b3d14b26eb175ccfb57c3aa247abf254ce1e09011929c083",
+    "src/machine_state.rs": "382078f91da9ae503be69e8485a5e5cdacdf5e2a676dce59848960349edfa3e8",
+    "src/model.rs": "9bccc617340450535872b43515bceef16cfd60891cbd0ebc17349f88ce586f06",
+    "src/render.rs": "9d153e2653d7b6cd6e57ece17605f7e395bb2018498f43006750909f2e96fbbf"
+  },
+  "tools": {
+    "cargoLockSha256": "3c0c038adbc4adfbe3419c22eafc855cc9fbbe9b82286a48783ed2b1be417acc",
+    "compatibilityBuild": {
+      "binaries": {
+        "mirror": "60219ddae47e9b5764fe91cc3d0b6c86b68d4d3d201c66bedb4e6129b4537f00",
+        "model_interface_gen": "562a271ede8cf932bd8b18a81eb772bd403703a58ff5766929a394e848df9ed3"
+      },
+      "elaborationCheck": "TLA ELABORATION CORPUS (accepted): 34 fixtures, 34 elaborated and matched to their summaries\nTLA ELABORATION CORPUS (rejected): 27 fixtures, 7 rejected by this slice's stages\nTLA ELABORATION SPEC GREEN",
+      "originalRoot": "/home/nzsn/Repos/Flow/mbt/.work/mirrors-source-eb5cd00",
+      "patchSha256": "c18c5ccac09f7ee87050a1bf6c3073f15d19d77f56325a5860910b48e654192e",
+      "profile": "mirrors-tla-frontend-profile-4-ariadne-isfinite-v1",
+      "requiredTargets": [
+        "mirrorrust-v1"
+      ],
+      "revision": "eb5cd001b990e6ac5e9b1e9b1c5a17ffb85e25fc",
+      "root": "/home/nzsn/Repos/Flow/mbt/.work/toolchain-httatdf6/Mirrors",
+      "schema": "ariadne.mbt-toolchain/v1"
+    },
+    "compilerSha256": "562a271ede8cf932bd8b18a81eb772bd403703a58ff5766929a394e848df9ed3",
+    "mirrorSha256": "60219ddae47e9b5764fe91cc3d0b6c86b68d4d3d201c66bedb4e6129b4537f00",
+    "mirrorgateInspectedRevision": "0fa8a311018db9cbfdf2bb516235c1ec09e1ddbd",
+    "mirrorrustRevision": "cf0e6297f0973696d0900f5ffb598c9d4dd10ff7",
+    "mirrorsRevision": "eb5cd001b990e6ac5e9b1e9b1c5a17ffb85e25fc",
+    "rustc": "rustc 1.95.0 (59807616e 2026-04-14)"
+  },
+  "wrongDigest": {
+    "adapterId": "ariadne.machine-analysis/v1",
+    "bindingImplementation": "compiler-generated",
+    "cleanupMechanism": "Rust Drop of generated binding port",
+    "completedTraces": 0,
+    "coverageSatisfied": false,
+    "error": "register failed (interface_digest_mismatch): interface_digest_mismatch",
+    "executableSha256": "8e7017bd1b78986f3416636a689ad3338232fc4c57877c139df634522fc8b9f6",
+    "factoryCalls": 0,
+    "fixtures": [],
+    "gatePassed": true,
+    "interfaceMatched": false,
+    "matchedActionCounts": null,
+    "matchedObservations": null,
+    "matchedPairCounts": null,
+    "mismatch": null,
+    "mode": "wrong-digest",
+    "modelMatched": false,
+    "observationsDispatched": 0,
+    "portDrops": 0,
+    "schema": "ariadne.mbt-replay/v2",
+    "semanticDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+    "status": "rejected",
+    "targetProfile": "mirrorrust-v1"
+  }
+}

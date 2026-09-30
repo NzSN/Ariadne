@@ -1,6 +1,6 @@
 //! External Breakpad-produced artifacts are supplied explicitly, not copied or
 //! downloaded by tests. Exact hashes prevent a changed fixture inheriting evidence.
-use ariadne::effects::{EffectQuality, Operand, PreparationOptions, RegisterView};
+use ariadne::effects::{EffectQuality, GapReason, Operand, PreparationOptions, RegisterView};
 use ariadne::{ByteSource, InstructionKind};
 use ariadne_input::{AnalysisQuery, FileSnapshot, OpenLimits, Platform, PrepareLimits};
 #[test]
@@ -94,9 +94,29 @@ fn real_windows_and_linux_crash_artifacts_preserve_bytes_and_report_semantic_gap
         assert!(r.state.slice.contains(&rip));
         assert!(r.missing_slice_seeds.is_empty());
         assert!(!r.state.obligations.iter().any(|gap| gap.site == rip));
-        assert!(r.state.obligations.iter().any(|gap| gap.site != rip));
         // A normal-continuation effect says nothing about whether the crash-time
-        // store retired. The remaining obligation is later in this local view.
-        assert!(!r.scope_closed());
+        // store retired. Reviewed POP control closes this Linux local graph,
+        // while POP/RET effects remain explicitly opaque. Windows still stops
+        // at an unreviewed XOR encoding after the seed.
+        if platform == Platform::Linux {
+            assert_eq!(r.state.decoded, [rip, rip + 6, rip + 7].into());
+            assert!(r.state.obligations.is_empty());
+            assert!(r.scope_closed());
+            for site in [rip + 6, rip + 7] {
+                assert_eq!(
+                    p.prepared.instructions[&site].quality,
+                    EffectQuality::Opaque
+                );
+                assert!(
+                    p.prepared
+                        .gaps
+                        .iter()
+                        .any(|gap| gap.address == site && gap.reason == GapReason::OpaqueEffects)
+                );
+            }
+        } else {
+            assert!(r.state.obligations.iter().any(|gap| gap.site == rip + 18));
+            assert!(!r.scope_closed());
+        }
     }
 }

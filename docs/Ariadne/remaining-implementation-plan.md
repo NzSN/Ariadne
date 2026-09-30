@@ -78,7 +78,10 @@ Priority 2 has a [scoped no-change decision](priority-2-effects-validation.md)
 for that path; opaque calls remain explicit. Priority 3 now has a
 [readable text overview and Linux/Windows examples](priority-3-presentation-validation.md).
 Priority 4 has [bounded measurements](priority-4-performance-validation.md)
-but remains open until a larger real capture qualifies its scale decision.
+and now qualifies a 98-instruction Windows Electron capture. Its measured
+predecessor cache and checked helper meet the fixed median CLI budget while
+preserving the visible schedule and report bytes. This closes F's scoped
+workload-performance decision; the Rust refinement proof remains open.
 
 ## A — Unblock the real minidump instructions
 

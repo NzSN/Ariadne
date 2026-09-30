@@ -10,6 +10,9 @@ static NEXT: AtomicUsize = AtomicUsize::new(0);
 struct Helper(PathBuf);
 impl Helper {
     fn new(body: &str) -> Self {
+        Self::with_header("ariadne-llvm-mc 20.1.2 protocol 2", body)
+    }
+    fn with_header(header: &str, body: &str) -> Self {
         let path = std::env::temp_dir().join(format!(
             "ariadne-protocol-{}-{}",
             std::process::id(),
@@ -17,7 +20,11 @@ impl Helper {
         ));
         std::fs::create_dir(&path).unwrap();
         let program = path.join("decoder");
-        std::fs::write(&program,format!("#!/bin/sh\nif [ \"$1\" = --protocol-version ]; then\n printf 'ariadne-llvm-mc 20.1.2 protocol 2\\n'\n exit 0\nfi\ncat >/dev/null\n{body}\n")).unwrap();
+        std::fs::write(
+            &program,
+            format!("#!/bin/sh\ncat >/dev/null\nprintf '%s\\n' '{header}'\n{body}\n"),
+        )
+        .unwrap();
         std::fs::set_permissions(&program, std::fs::Permissions::from_mode(0o700)).unwrap();
         Self(path)
     }
@@ -39,6 +46,22 @@ impl Drop for Helper {
 }
 const ONE: &str = "v2 NOOP 0 0 0 0 0 1 ok 1 ordinary -";
 const TWO: &str = "v2 NOOP 0 0 0 0 0 2 ok 1 ordinary -";
+#[test]
+fn checked_batch_rejects_wrong_version_target_and_absent_header() {
+    for header in [
+        "ariadne-llvm-mc 20.1.1 protocol 2",
+        "ariadne-llvm-mc 20.1.2 protocol 2 target x86_64-unknown-linux-gnu",
+        "",
+    ] {
+        let result = Helper::with_header(header, &format!("printf '%s\\n' '{ONE}' '{TWO}'")).run();
+        assert!(matches!(result, Err(AdapterError::DecoderProtocol(_))));
+    }
+    assert!(
+        Helper::new(&format!("printf '%s\\n' '{ONE}' '{TWO}'"))
+            .run()
+            .is_ok()
+    );
+}
 #[test]
 fn preparation_rejects_missing_duplicate_unexpected_and_contradictory_rows() {
     for output in [

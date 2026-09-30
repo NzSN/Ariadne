@@ -1,0 +1,32 @@
+{
+  "schema": "ariadne-priority-4-real-capture-case-v1",
+  "description": "Historical Windows Electron application access violation; matching PE runtime-function entry witness",
+  "capture": {
+    "sha256": "4b3deb70134015ec227b3cf5edf82e1dac0b308b3f19ae62f79cbd4251109e86",
+    "bytes": 2028400,
+    "exception_thread": 37008,
+    "exception_code": "0xc0000005",
+    "code_stream": 5,
+    "code_stream_entry": 156,
+    "code_range_start": "0x7ff6451d528f",
+    "code_range_end_exclusive": "0x7ff6451d548f",
+    "code_file_offset": "0x1ed710"
+  },
+  "companion": {
+    "sha256": "8ed58d015ad328da011e0bc889c2fa431cc13944610a5ead8b9a353bb91fe9a9",
+    "module_base": "0x7ff640970000",
+    "image_size": "0xd8e7000",
+    "timestamp": "0x69f08473",
+    "rsds_hex": "525344536b019b11ef57ec434c4c44205044422e01000000",
+    "function_begin_rva": "0x48652d0",
+    "function_end_rva": "0x486543f"
+  },
+  "query": {
+    "entry_rva": "0x48652d0",
+    "entry_va": "0x00007ff6451d52d0",
+    "seed_rva": "0x486530f",
+    "seed_va": "0x00007ff6451d530f",
+    "producer_rva": "0x486530b",
+    "producer_va": "0x00007ff6451d530b"
+  }
+}

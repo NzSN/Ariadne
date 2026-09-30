@@ -1,6 +1,9 @@
-use crate::model::*;
+// Frozen pre-optimization reference, 2026-09-30. Original engine SHA-256:
+// 8e46a95d2553cfdcfb805603928fbd715ceb4ef1c75fc1209602e703f840f2e4
+// Keep this scanning schedule independent of the optimized implementation.
+#![allow(dead_code)]
+use ariadne::*;
 use std::cell::Cell;
-use std::collections::BTreeMap;
 
 /// Operation counts for a single deterministic analyzer run. These are
 /// observations of implementation work, not an ISA or refinement certificate.
@@ -20,11 +23,6 @@ pub struct Analyzer {
     request: AnalysisRequest,
     state: AnalysisState,
     metrics: Cell<AnalyzerMetrics>,
-    incoming_edges: BTreeMap<Address, EdgeSet>,
-    local_successors: BTreeMap<Address, AddressSet>,
-    incoming_cache: BTreeMap<Address, DefinitionSet>,
-    dirty_incoming: AddressSet,
-    dataflow_order: Vec<Address>,
 }
 
 impl Analyzer {
@@ -48,11 +46,6 @@ impl Analyzer {
             request,
             state,
             metrics: Cell::new(AnalyzerMetrics::default()),
-            incoming_edges: BTreeMap::new(),
-            local_successors: BTreeMap::new(),
-            incoming_cache: BTreeMap::new(),
-            dirty_incoming: AddressSet::new(),
-            dataflow_order: Vec::new(),
         })
     }
 
@@ -82,46 +75,19 @@ impl Analyzer {
                 if let Some(&address) = self.state.pending.first() {
                     self.visit(address);
                 } else {
-                    // Recovery freezes the graph. Index it once without
-                    // changing the visible FinishRecovery action.
-                    for &edge in &self.state.edges {
-                        self.incoming_edges
-                            .entry(edge.dst)
-                            .or_default()
-                            .insert(edge);
-                        if edge.kind.is_local() {
-                            self.local_successors
-                                .entry(edge.src)
-                                .or_default()
-                                .insert(edge.dst);
-                        }
-                    }
-                    self.dirty_incoming = self.state.decoded.clone();
-                    self.dataflow_order = self.state.decoded.iter().copied().collect();
                     self.state.phase = Phase::Dataflow; // FinishRecovery
                 }
             }
             Phase::Dataflow => {
-                for index in 0..self.dataflow_order.len() {
-                    let address = self.dataflow_order[index];
-                    // Incoming depends only on the immutable entry facts and
-                    // local predecessors' reaching sets. A predecessor growth
-                    // invalidates its successors, including itself on a loop.
-                    if self.dirty_incoming.remove(&address) {
-                        let incoming = self.incoming(address);
-                        self.incoming_cache.insert(address, incoming);
-                    }
-                    let incoming = &self.incoming_cache[&address];
+                for &address in &self.state.decoded {
+                    let incoming = self.incoming(address);
                     let reaching = self
                         .state
                         .reaching
                         .get_mut(&address)
                         .expect("validated domain");
                     if !incoming.is_subset(reaching) {
-                        reaching.extend(incoming.iter().cloned()); // Propagate
-                        if let Some(successors) = self.local_successors.get(&address) {
-                            self.dirty_incoming.extend(successors.iter().copied());
-                        }
+                        reaching.extend(incoming); // Propagate
                         let mut metrics = self.metrics.get();
                         metrics.max_reaching_definitions_at_site =
                             metrics.max_reaching_definitions_at_site.max(reaching.len());
@@ -257,7 +223,7 @@ impl Analyzer {
                 origin: DefinitionOrigin::Entry,
             }));
         }
-        for edge in self.incoming_edges.get(&address).into_iter().flatten() {
+        for edge in &self.state.edges {
             metrics.edge_scans += 1;
             if edge.dst != address
                 || !edge.kind.is_local()

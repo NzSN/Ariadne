@@ -138,3 +138,11 @@ f6c301	v2 TEST8ri 2 r:BL i:1 0 0 0 1 EFLAGS -1 -1 4096 ok 3 ordinary -
 4831d8	v2 XOR64rr 3 r:RAX r:RAX r:RBX 1 0 0 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
 80f301	v2 XOR8ri 3 r:BL r:BL i:1 1 0 0 1 EFLAGS -1 0 -1 4096 ok 3 ordinary -
 30d8	v2 XOR8rr 3 r:AL r:AL r:BL 1 0 0 1 EFLAGS -1 0 -1 4096 ok 2 ordinary -
+4156	v2 PUSH64r 1 r:R14 0 2 1 RSP 1 RSP -1 4096 ok 2 ordinary -
+415e	v2 POP64r 1 r:R14 1 1 1 RSP 1 RSP -1 4096 ok 2 ordinary -
+034807	v2 ADD32rm 7 r:ECX r:ECX r:RAX i:1 r:NONE i:7 r:NONE 1 1 0 1 EFLAGS -1 0 -1 -1 -1 -1 -1 4096 ok 3 ordinary -
+480307	v2 ADD64rm 7 r:RAX r:RAX r:RDI i:1 r:NONE i:0 r:NONE 1 1 0 1 EFLAGS -1 0 -1 -1 -1 -1 -1 4096 ok 3 ordinary -
+c644242000	v2 MOV8mi 6 r:RSP i:1 r:NONE i:32 r:NONE i:0 0 2 0 0 -1 -1 -1 -1 -1 -1 4096 ok 5 ordinary -
+807f0c01	v2 CMP8mi 6 r:RDI i:1 r:NONE i:12 r:NONE i:1 0 1 0 1 EFLAGS -1 -1 -1 -1 -1 -1 4096 ok 4 ordinary -
+05d3feffff	v2 ADD32i32 1 i:4294966995 0 0 1 EAX 2 EAX EFLAGS -1 4096 ok 5 ordinary -
+3df0000000	v2 CMP32i32 1 i:240 0 0 1 EAX 1 EFLAGS -1 4096 ok 5 ordinary -

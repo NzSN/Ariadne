@@ -1,0 +1,219 @@
+{
+  "artifact_sha256": "31481f3f080b0b165cc0d0c70f555f127f882556b34129055e80b082225a45c9",
+  "csv_sha256": {
+    "cli.csv": "e7f3f98acef07557fc534ce9a9ba1948a5c7f6e145a44a51989e1bf82fe31043",
+    "stage.csv": "3238b649720c5f42dc29239933046656a80b9e72e8587605b54d43a2c0df3855",
+    "synthetic.csv": "6c254f45e5a9a979335c104b3a64ae4338715da6ddeac152388a14e14426805a"
+  },
+  "decision": "larger_real_capture_required",
+  "host": "Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "latency_budget_ms": 2000.0,
+  "passed": true,
+  "python": "3.12.3",
+  "real": {
+    "decoded": 34,
+    "edges": 45,
+    "elapsed_ms": {
+      "max": 1345.884413,
+      "median": 1298.944462,
+      "min": 1275.550853,
+      "samples": 5
+    },
+    "identity": {
+      "artifact_sha256": "31481f3f080b0b165cc0d0c70f555f127f882556b34129055e80b082225a45c9",
+      "core_package_version": "0.1.0",
+      "decoder_build": "LLVM MC 20.1.2",
+      "decoder_protocol": 2,
+      "decoder_target": "x86_64-unknown-linux-gnu",
+      "effects_ruleset": "user64-effects-v1.1",
+      "input_package_version": "0.1.0",
+      "location_catalogue": "gpr-bytes-status-df-memory-other-v1",
+      "platform": "linux",
+      "query_id": "144ac7659361447e5ce69896bc284810fcc236eaef09dbcdc62d7e3059bd41b9",
+      "snapshot_id": "minidump-captured-amd64-v1:31481f3f080b0b165cc0d0c70f555f127f882556b34129055e80b082225a45c9"
+    },
+    "obligations": 1,
+    "peak_rss_kib": {
+      "max": 52416,
+      "median": 52416,
+      "min": 52416,
+      "samples": 5
+    },
+    "report_sha256": {
+      "dot": "0a79d979f90b055e9b90926c9b39df4d5903b61e94b2f0060c3823ab1c3462ec",
+      "json": "b43d383a8566e50b8e23b93aa4a7978736b325fc64dcb054ae4843b18e89f63a",
+      "text": "ef857a081d63c39fd5058392cf1940a2a99f568f5858c869fac05b09600d75b5"
+    },
+    "slice": 28
+  },
+  "real_workload_target_met": false,
+  "recorded_utc": "2026-09-29T16:06:29.272774+00:00",
+  "runs": 5,
+  "rustc": "rustc 1.96.0 (ac68faa20 2026-05-25)",
+  "schema": "ariadne-priority-4-measurement-v1",
+  "source_sha256": {
+    "Cargo.lock": "f1d5d49897a04815e3b9b1291770c38a71f560329440e4aace6f4a038ddee283",
+    "Cargo.toml": "10a7e789d98fc97f26ef1c7fff61ccc4f9969d3d9ecdca44c5a9c1f47943ea65",
+    "bench/Cargo.lock": "02a6b334049a53e12beb7e45172a96a416363ebaee4fa2ec8b166b30c615bb2b",
+    "bench/Cargo.toml": "8aebb47f7d2a75b98fc1f06466436c876d94e4d6cc9ed97d54a90050688b6bbd",
+    "bench/src/bin/real_minidump.rs": "5aa98a252df85969ec008df92e49171d8910d6a640548cce215302c344b2d0f4",
+    "bench/src/main.rs": "b645266de63f29e9f9bc9d3dba104409d9a595ae0a517e85dc3a23ec68196e59",
+    "input/Cargo.lock": "e6b7793b82f589eadb9f570c4212ffccdbf488236bc83310a7d8c3e919050593",
+    "input/Cargo.toml": "fa91e49864d7506acf2f2f25a88f10dc6bd9fe5153a71daae8f6f00444494a9a",
+    "input/src/address_space.rs": "5b6bc4e94616eeb911f09ead0e512ee420d85ec9f324d965e1610637aa840634",
+    "input/src/bin/ariadne-minidump.rs": "4d7435120d09bac46d090186c3d5dc193b4c84914c9d18c8f48857e503e1e7bd",
+    "input/src/lib.rs": "296f3e2b6cb7b189c9fe4969a1fa3625137f81a725659526b79900bd5ccf8376",
+    "input/src/materialize.rs": "c00daebf4e9861915ad7a747354eb7125700e4537d412339888f7233a15ab2f4",
+    "input/src/minidump.rs": "02588ccfed70c8bc601d3a6a473f9659ccea1da0951965e4e152c859e499c04c",
+    "input/src/report.rs": "7718360470b319100a37659b221d1e89120d4167fb34d27112b027801678e6f3",
+    "src/effects.rs": "fd700cac0aab38852f0cd18bf81ec7f0f4fe4e01dca0dbd9a2c8c362a2b92c5d",
+    "src/effects/forms.txt": "919b00bd284e94efa070e542a1b440fb21508bbbaba39d19fd75388bb12e7542",
+    "src/effects/locations.rs": "b890a4895a4b48841b075d4c11e17ed3ba8cd63d5bd2f1f83d777df64df8c2f4",
+    "src/effects/rules.rs": "737e7ec477d23ae5317a828ac903eca86cdef4295ce0e570d14252774498b8fc",
+    "src/engine.rs": "8e46a95d2553cfdcfb805603928fbd715ceb4ef1c75fc1209602e703f840f2e4",
+    "src/lib.rs": "13989ad2b8975b0958ce571533c87114fbc054cf24fceab0abaaed32b5356c32",
+    "src/llvm_ir.rs": "c5b173605bab60001b04b829258519412f94d92d0c4c558eee6f4d2618914e93",
+    "src/llvm_mc.rs": "5ac6e89a2b034e44b3d14b26eb175ccfb57c3aa247abf254ce1e09011929c083",
+    "src/llvm_mc/prepare.rs": "faada468b5814927950ae641c1d07f2627a5a3e69847e862285d17efb35c2852",
+    "src/llvm_mc/protocol.rs": "234ff2d2a1a603803497ac0eabbbdefefd427d4f7cd27f4d1c543ad3787f5e2a",
+    "src/machine_state.rs": "382078f91da9ae503be69e8485a5e5cdacdf5e2a676dce59848960349edfa3e8",
+    "src/model.rs": "9bccc617340450535872b43515bceef16cfd60891cbd0ebc17349f88ce586f06",
+    "src/render.rs": "9d153e2653d7b6cd6e57ece17605f7e395bb2018498f43006750909f2e96fbbf",
+    "tools/measure_priority4.py": "9806a08208213f096d65b1af5ebc19d44894997f3c7113a7f3d840e9ce24bac7"
+  },
+  "sources_stable": true,
+  "stage": {
+    "counts": {
+      "actions": {
+        "max": 74,
+        "median": 74,
+        "min": 74,
+        "samples": 5
+      },
+      "allocated_bytes": {
+        "max": 175412908,
+        "median": 175412908,
+        "min": 175412908,
+        "samples": 5
+      },
+      "allocations": {
+        "max": 1970334,
+        "median": 1970334,
+        "min": 1970334,
+        "samples": 5
+      },
+      "edge_scans": {
+        "max": 28305,
+        "median": 28305,
+        "min": 28305,
+        "samples": 5
+      },
+      "incoming_evaluations": {
+        "max": 629,
+        "median": 629,
+        "min": 629,
+        "samples": 5
+      },
+      "max_reaching_at_site": {
+        "max": 1102,
+        "median": 1102,
+        "min": 1102,
+        "samples": 5
+      },
+      "total_reaching": {
+        "max": 17481,
+        "median": 17481,
+        "min": 17481,
+        "samples": 5
+      },
+      "transfer_evaluations": {
+        "max": 626,
+        "median": 626,
+        "min": 626,
+        "samples": 5
+      }
+    },
+    "decoded": 34,
+    "slice": 28,
+    "stage_ms": {
+      "analysis_ns": {
+        "max": 57.672554,
+        "median": 49.470312,
+        "min": 46.700464,
+        "samples": 5
+      },
+      "open_ns": {
+        "max": 0.626696,
+        "median": 0.395514,
+        "min": 0.348728,
+        "samples": 5
+      },
+      "prepare_ns": {
+        "max": 1245.266111,
+        "median": 1156.140535,
+        "min": 1068.53257,
+        "samples": 5
+      },
+      "render_ns": {
+        "max": 180.366462,
+        "median": 169.404177,
+        "min": 149.385139,
+        "samples": 5
+      },
+      "total_ns": {
+        "max": 1459.831505,
+        "median": 1387.475928,
+        "min": 1265.244869,
+        "samples": 5
+      }
+    }
+  },
+  "startup": {
+    "decoded": 4,
+    "edges": 3,
+    "elapsed_ms": {
+      "max": 202.959145,
+      "median": 197.673652,
+      "min": 181.102339,
+      "samples": 5
+    },
+    "identity": {
+      "artifact_sha256": "f3a0407bff881356c0128e7587c03ea9f143dbd5fee59abbe8fc5edb75ad30bf",
+      "core_package_version": "0.1.0",
+      "decoder_build": "LLVM MC 20.1.2",
+      "decoder_protocol": 2,
+      "decoder_target": "x86_64-pc-windows-msvc",
+      "effects_ruleset": "user64-effects-v1.1",
+      "input_package_version": "0.1.0",
+      "location_catalogue": "gpr-bytes-status-df-memory-other-v1",
+      "platform": "windows",
+      "query_id": "e131cd13028304a7e30615a2474839ee4cfa6c597a6fb649d9bc8c93df82c738",
+      "snapshot_id": "minidump-captured-amd64-v1:f3a0407bff881356c0128e7587c03ea9f143dbd5fee59abbe8fc5edb75ad30bf"
+    },
+    "obligations": 0,
+    "peak_rss_kib": {
+      "max": 52416,
+      "median": 52416,
+      "min": 52416,
+      "samples": 5
+    },
+    "report_sha256": {
+      "dot": "b58eea6748c7a5f9c97f466767b00a5202e5be8c33f3649f9817e04ab89a3058",
+      "json": "505ec4f7e846fb7545fc645e094f0cc950609fc1a421154e2fab75961332a65f",
+      "text": "b4083957b7132db576519b3684a483092b4cc43d18e4dcc8c3611e23e9374691"
+    },
+    "slice": 2
+  },
+  "synthetic_sizes": [
+    128,
+    256
+  ],
+  "tool_sha256": {
+    "cli": "47ed2984e100cb5d50cc83deb1a525ea4a4ca0ce14788e6c167d5630e4dff313",
+    "decoder": "dca617ca3e4ad50aef0f795b7793b73a6dae10cf04eebd695b030f8ba82ac7b7",
+    "stage_bench": "8880fbffd75224123112ddc1ea4b3f89ab9c229c786d4096f438a0554cb0fc7c",
+    "synthetic_bench": "31e87b7079c0cd6f5fb455586b2eddbb6102acc6234c13b6fe6a78eee51cf2fb"
+  },
+  "tools_stable": true,
+  "warmups": 1
+}

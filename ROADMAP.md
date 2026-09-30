@@ -17,7 +17,7 @@ may-reaching definitions, and builds a backward data slice from fixed,
 adapter-supplied instruction summaries. An optional pinned LLVM MC adapter
 decodes caller-provided byte spans and supplies conservative control-flow
 summaries. `ByteSnapshot::prepare()` now adds structured operands and reviewed
-normal-continuation effects for an explicit 139-opcode registry, with byte-level
+normal-continuation effects and reviewed control for an explicit 147-opcode registry, with byte-level
 GPR aliases, coarse memory and per-site gaps; see the
 [initial delivery record](docs/Ariadne/operand-effects-validation.md) and
 [Stage A validation](docs/Ariadne/stage-a-validation.md). The [minidump package](input/README.md) now provides captured-memory input and
@@ -33,8 +33,10 @@ The [Priority 2 effect review](docs/Ariadne/priority-2-effects-validation.md)
 retains opaque calls on that path. [Priority 3 presentation](docs/Ariadne/priority-3-presentation-validation.md)
 adds a readable text overview and Linux/Windows examples without changing
 JSON or DOT semantics. [Priority 4 measurements](docs/Ariadne/priority-4-performance-validation.md)
-are source-bound but await a 64-node real capture before an optimization
-decision.
+qualify a 98-instruction Windows Electron capture and a measured optimization:
+the CLI median falls from 3,846 to 1,788 ms against the fixed 2,000 ms budget,
+with the visible schedule and report hashes preserved. The scoped performance
+stage is recorded in the [remaining implementation plan](docs/Ariadne/remaining-implementation-plan.md).
 The [machine-state and directly supplied LLVM IR Rust paths](docs/Ariadne/stage-e-validation.md)
 pass focused model fixtures; generated replay is still open. A
 [proof-boundary and benchmark baseline](docs/Ariadne/stage-f-proof-and-performance.md)

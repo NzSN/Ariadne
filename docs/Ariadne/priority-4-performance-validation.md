@@ -1,59 +1,169 @@
-# Priority 4: measured workload decision
+# Priority 4: qualified workload and performance decision
 
-Measured **2026-09-29 23:26 CST** under the
-[Priority 4 design](priority-4-workload-performance-design.md) and
-[implementation plan](priority-4-workload-performance-plan.md). The
-[validation record](priority-4-validation.json) binds 28 stable source
-hashes, all four tool binaries, query identity, host and a **predeclared
-2,000 ms local CLI budget**. Raw observations are retained as
-[CLI](priority-4-cli.csv), [stage](priority-4-stage.csv) and
-[synthetic](priority-4-synthetic.csv) CSV files. One warm-up and five
-measured repetitions were used per completed workload.
+Qualified **2026-09-30** under the
+[design](priority-4-workload-performance-design.md) and
+[implementation plan](priority-4-workload-performance-plan.md).
+**Priority 4 is complete for the frozen Windows Electron query below.**
+The [delivery record](priority-4-validation.json) retains the real-capture
+qualification, before/after measurements, source-bound regression evidence,
+report comparisons and remaining limits. The initial 34-node Linux
+measurement is retained separately as
+[historical evidence](priority-4-20260929-validation.json).
 
-The supported release CLI opened the external Priority 1 Chromium dump,
-decoded 34 starts, analyzed its possible predecessor slice and published
-text/DOT/JSON in a median **1,299 ms** (range 1,276–1,346 ms). Median
-peak resident memory was **52,416 KiB**. Its separate in-process stage
-measurement attributed a median 1,156 ms to preparation and native decoder
-launches, 49 ms to core analysis, 169 ms to rendering and less than 1 ms to
-opening the dump. Those stage timings exclude process startup and output
-publication, so they are not interchangeable with the CLI timing. The
-benchmark allocator counted cumulative allocation requests/bytes only in
-its process, excluding memory allocated by LLVM helper processes. The
-four-node Stage B Windows CLI reference had a 198 ms median.
+## Qualifying captured workload
 
-| Synthetic graph | 128 nodes median | 256 nodes median |
-| --- | ---: | ---: |
-| Linear | 17.0 ms | 72.7 ms |
-| Loops | 191.8 ms | 2,551.8 ms |
-| Joins | 35.5 ms | 219.7 ms |
-| Opaque calls | 16.8 ms | 86.1 ms |
-| Dense alias set | 223.0 ms | 1,362.2 ms |
+The external `f13d18cd-9ade-4eff-947c-15a649b636fa.dmp` is a historical Windows
+Electron application access violation, not a generated graph fixture.
+The [case manifest](priority-4-real-capture-case.json) pins its 2,028,400 bytes
+and SHA-256 `4b3deb70134015ec227b3cf5edf82e1dac0b308b3f19ae62f79cbd4251109e86`.
+Its companion has SHA-256
+`8ed58d015ad328da011e0bc889c2fa431cc13944610a5ead8b9a353bb91fe9a9`.
+Dump and PE match RSDS GUID `{119B016B-57EF-43EC-4C4C-44205044422E}`, age 1,
+timestamp `0x69f08473` and image size `0xd8e7000`.
 
-The attempted five-repeat 512-node synthetic suite exceeded its 180-second
-bound; the [timeout record](priority-4-512-timeout.json) is retained as a
-limit result, not a passing measurement. The bounded follow-up completed
-128 and 256 nodes without weakening the real-workload target.
+The matching PE runtime-function table independently establishes entry RVA
+`0x48652d0`, with the function ending at RVA `0x486543f`. Its entire 367-byte
+body is captured. Forward disassembly supplies 101 instruction boundaries;
+all bytes match MemoryList entry 156, whose 512-byte range starts at
+`0x7ff6451d528f`, dump file offset `0x1ed710`. The companion establishes the
+entry and boundaries; the CLI reads code exclusively from the dump.
 
-## Larger real-capture search
+The selected entry `0x7ff6451d52d0` reaches exception RIP
+`0x7ff6451d530f`, reviewed `MOV64mr [RCX],RAX`. The earlier reviewed
+`MOV64rm RCX,[RDI+0x20]` at `0x7ff6451d530b` remains a possible origin of all
+eight RCX byte cells before the seed. The query has **98 captured decoded
+instructions, 113 edges and a 19-node backward slice**, with no missing seed.
+The [qualification record](priority-4-real-capture-validation.json) checks
+local reachability, captured forward boundaries, cross-format agreement,
+Graphviz parsing and the seed-only negative control. The
+[identity/byte negative controls](priority-4-negative-controls.json) reject
+wrong module identity and changed captured function bytes before publication.
 
-The local Breakpad processor test corpus has 53 `.dmp` files. The plausible
-AMD64 dumps with matching crash-module symbols did not supply a qualifying
-larger memory-fault path: `linux_inline.dmp` does not capture bytes at its
-exception RIP; `linux_null_read_av.dmp` has a matching `crash()` symbol that
-starts at RIP, with no earlier local producer; `linux_overflow.dmp` reaches
-`gsignal` in libc for an abort rather than a faulting memory read; and the
-`linux_stacksmash.dmp` libgcc symbols do not establish a captured function
-start near RIP. The older `driver` and Windows `crash.exe` fixtures lack
-matching symbol artifacts in this corpus. This is a bounded local candidate
-audit, not proof that no suitable capture exists elsewhere.
+Eight path blockers gained [source-reviewed ordinary control](priority-4-control-source-review.md)
+with fully opaque effects under `user64-effects-v1.2`. Calls and stack effects
+remain uncertain. Two later `INT3` sites remain unsupported after the seed,
+so the recovery scope is partial. This is a possible predecessor slice, not
+an execution trace or proof that the faulting store committed.
 
-**Decision:** the current 34-node real query is within the local budget, so
-no production solver or decoder change is justified by this case. Preparation
-is the measured stage to examine if a larger real case proves slow; synthetic
-loops and dense aliases expose scaling risk in the core. The plan's target of
-at least **64 decoded starts in one qualifying real capture** remains unmet.
-Release-scale performance qualification is therefore **open**, and the
-synthetic timeout must not be used to claim a real investigator bottleneck.
-No `Analyzer::step()` schedule, result, provenance or report contract was
-changed by the benchmark harness.
+## Same-query release measurements
+
+The budget was **2,000 ms CLI median**, fixed before optimization. Each
+workload used one warm-up and five measured repetitions with prebuilt release
+binaries, default reader/preparation limits and fresh report directories.
+The measured host was WSL2 Linux `6.6.87.2`, Intel Core i5-1240P, 12 logical
+CPUs, Rust `1.95.0`, and the pinned LLVM MC `20.1.2` helper. CLI time includes
+opening, discovery, analysis and publication of text/DOT/JSON. Stage timings
+include benchmark allocation counters and omit process startup/publication;
+they must not be substituted for CLI timings.
+
+| Measurement | Before | Predecessor cache | Cache + checked helper |
+| --- | ---: | ---: | ---: |
+| CLI median | 3,845.7 ms | 2,712.3 ms | **1,787.6 ms** |
+| CLI measured range | 3,756.3–4,163.8 ms | 2,667.2–2,830.1 ms | 1,680.0–2,450.0 ms |
+| Peak RSS median | 270,000 KiB | 270,084 KiB | 270,180 KiB |
+| Instrumented preparation median | 1,734.4 ms | 1,675.9 ms | 704.1 ms |
+| Instrumented core median | 2,288.4 ms | 259.1 ms | 193.0 ms |
+| Instrumented rendering median | 1,047.3 ms | 1,048.3 ms | 899.9 ms |
+| Incoming evaluations | 8,561 | 170 | 170 |
+| Incoming edge scans | 967,393 | 188 | 188 |
+| Analyzer actions | 277 | 277 | 277 |
+
+The private predecessor index and incoming-set cache avoid recomputing
+unchanged predecessor inputs; predecessor growth invalidates local successors.
+The sorted one-action schedule remains unchanged. The checked helper returns
+its exact version/target header and unchanged protocol-2 rows in one invocation
+per batch, removing a separate version process. No global decoder cache or
+persistent process was added. Legacy helper modes remain available; the Rust
+adapter requires the checked mode, so the helper must be rebuilt with it.
+
+The final CLI median improved **53.5 percent** and meets the predeclared
+budget. One measured run exceeded 2 seconds; this is a median qualification,
+not a worst-case latency guarantee. RSS remained essentially unchanged.
+Benchmark allocation counters exclude allocations in LLVM helper processes.
+
+Raw data and identities are retained for all three checkpoints:
+
+| Checkpoint | CLI CSV | Stage CSV | Synthetic CSV | Measurement record |
+| --- | --- | --- | --- | --- |
+| Before | [CSV](priority-4-20260930-before-cli.csv) | [CSV](priority-4-20260930-before-stage.csv) | [CSV](priority-4-20260930-before-synthetic.csv) | [JSON](priority-4-20260930-before-validation.json) |
+| Cache | [CSV](priority-4-20260930-solver-cli.csv) | [CSV](priority-4-20260930-solver-stage.csv) | [CSV](priority-4-20260930-solver-synthetic.csv) | [JSON](priority-4-20260930-solver-validation.json) |
+| Final | [CSV](priority-4-20260930-after-cli.csv) | [CSV](priority-4-20260930-after-stage.csv) | [CSV](priority-4-20260930-after-synthetic.csv) | [JSON](priority-4-20260930-after-validation.json) |
+
+## Bounded synthetic scaling
+
+All five families completed one warm-up and five repetitions at 128, 256 and
+512 nodes after optimization. The before-change 512-node measured suite
+reached its 180-second bound; its
+[partial output](priority-4-20260930-before-synthetic-512-measured-partial.csv)
+and [outcomes](priority-4-20260930-before-synthetic-outcomes.json) remain limit
+evidence rather than a completed baseline. The initial September 29 timeout
+and `stage-f-baseline.csv` also remain intact.
+
+| Family | 128 nodes, final median | 256 nodes, final median | 512 nodes, final median |
+| --- | ---: | ---: | ---: |
+| Linear | 2.4 ms | 7.6 ms | 49.6 ms |
+| Loops | 22.1 ms | 261.0 ms | 5,293.9 ms |
+| Joins | 3.4 ms | 18.9 ms | 184.6 ms |
+| Opaque calls | 2.0 ms | 8.6 ms | 46.6 ms |
+| Dense aliases | 22.1 ms | 119.9 ms | 749.9 ms |
+
+Synthetic loops still expose scaling risk. These numbers are not limits on
+larger real captures, and no speedup factor is claimed against the timed-out
+512-node baseline.
+
+## Conformance and decision
+
+The [schedule comparison](priority-4-schedule-validation.json) matches all
+277 visible transitions and the completed real-query result against the
+[frozen scanning implementation](../../tests/support/scanning_engine.rs).
+All 256 generated requests also compare every visible state with that
+reference, alongside their independent graph/path oracles. Text, DOT and JSON
+hashes are byte-identical across the three performance checkpoints.
+
+The [current integration record](current-integration-validation.json) covers
+the existing root/input/native/formal/IR checks, MBT replay, effect and reader
+mutations, formatting and Clippy. The effect registry is exercised on both
+Windows and Linux. The new control bindings retain all possible prior origins
+and have no definite replacements; shape/prefix and checked-header negatives
+remain enforced. The Linux Breakpad regression now reaches opaque POP/RET
+with a closed local graph; its effect uncertainty remains explicit. The
+Windows regression retains its later unsupported-control obligation.
+
+**Decision:** accept the two measured performance changes for this query and
+close Priority 4's larger-workload qualification. Further optimization needs
+new real-workload evidence. A universal Rust refinement proof, generated
+machine-state/IR replay, and formal AMD64 instruction-step acceptance remain
+separate; `register-core` is still **0/49**.
+
+## Reproduction
+
+Keep the raw dump and matching companion external to tracked files. Build the
+release CLI and benchmark binaries, plus the pinned native helper, using the
+[input build guide](../../input/README.md#build-and-verification). With the
+exact hash-pinned artifacts available:
+
+```sh
+cargo build --offline --locked --release --manifest-path input/Cargo.toml
+cargo build --offline --locked --release --manifest-path bench/Cargo.toml
+mkdir -p tmp/priority4
+run_dir=$(mktemp -d "$PWD/tmp/priority4/recheck-XXXXXX")
+
+python3 tools/check_priority4_real_capture.py \
+  --dump "$ARIADNE_PRIORITY4_DUMP" --companion "$ARIADNE_PRIORITY4_COMPANION" \
+  --decoder target/ariadne-llvm-mc --cli input/target/release/ariadne-minidump \
+  --report-dir "$run_dir/report" --validation-json "$run_dir/qualification.json"
+
+python3 tools/measure_priority4.py \
+  --dump "$ARIADNE_PRIORITY4_DUMP" --decoder target/ariadne-llvm-mc \
+  --entry 0x7ff6451d52d0 --seed 0x7ff6451d530f \
+  --qualification "$run_dir/qualification.json" \
+  --latency-budget-ms 2000 --synthetic-sizes 128,256,512 \
+  --output-dir "$run_dir/measurements"
+```
+
+Set the two artifact variables to the exact dump and companion paths. All
+output destinations must be new. A missing artifact is an unavailable gate;
+a new dump/build requires its own manifest and boundary evidence. The
+measurement tool preserves completed workloads if a later size times out and
+requires a matching source/tool/query qualification record before closing the
+real-workload target.

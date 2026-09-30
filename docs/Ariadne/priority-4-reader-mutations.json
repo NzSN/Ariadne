@@ -1,0 +1,32 @@
+[
+  {
+    "mutation": "wrong-file-offset",
+    "test": "memory_lists_and_packed_memory64_preserve_virtual_addresses_and_file_offsets",
+    "assertionRejected": true
+  },
+  {
+    "mutation": "memory64-descriptor-stride",
+    "test": "memory_lists_and_packed_memory64_preserve_virtual_addresses_and_file_offsets",
+    "assertionRejected": true
+  },
+  {
+    "mutation": "choose-conflicting-byte",
+    "test": "adjacent_and_identical_overlaps_compose_but_conflicts_are_localized",
+    "assertionRejected": true
+  },
+  {
+    "mutation": "zero-fill-gap",
+    "test": "metadata_and_unknown_streams_never_supply_memory",
+    "assertionRejected": true
+  },
+  {
+    "mutation": "discover-call-only-targets",
+    "test": "calls_and_seeds_do_not_discover_callees_but_explicit_roots_do",
+    "assertionRejected": true
+  },
+  {
+    "mutation": "publish-on-budget-exhaustion",
+    "test": "budgets_fail_without_publishing_partial_requests",
+    "assertionRejected": true
+  }
+]

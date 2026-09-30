@@ -392,8 +392,9 @@ fn frozen_opcode_matrix_has_real_native_evidence_and_no_unexercised_rules() {
         );
         observed.insert(e.opcode.clone().unwrap());
         let s = &p.request.instructions[&4096];
-        if e.opcode.as_ref().unwrap().starts_with("MOV")
-            || e.opcode.as_ref().unwrap().starts_with("LEA")
+        if e.quality == EffectQuality::Reviewed
+            && (e.opcode.as_ref().unwrap().starts_with("MOV")
+                || e.opcode.as_ref().unwrap().starts_with("LEA"))
         {
             assert!(!s.may_defs.iter().any(|l| l.starts_with("flag:")));
             if let Operand::Register(dst) = &e.operands[0] {
@@ -410,6 +411,58 @@ fn frozen_opcode_matrix_has_real_native_evidence_and_no_unexercised_rules() {
         .map(str::to_owned)
         .collect();
     assert_eq!(observed, declared);
+}
+
+#[test]
+#[ignore = "requires pinned LLVM; run native/llvm_mc/check.sh"]
+fn opaque_control_forms_preserve_prior_origins_and_expose_uncertainty() {
+    for bytes in [
+        &[0x41, 0x56][..],
+        &[0x41, 0x5e],
+        &[0x03, 0x48, 0x07],
+        &[0x48, 0x03, 0x07],
+        &[0xc6, 0x44, 0x24, 0x20, 0],
+        &[0x80, 0x7f, 0x0c, 1],
+        &[0x05, 0xd3, 0xfe, 0xff, 0xff],
+        &[0x3d, 0xf0, 0, 0, 0],
+    ] {
+        let next = 0x1003 + bytes.len() as u64;
+        let p = decode(
+            &[
+                (0x1000, &[0x48, 0x89, 0xd8]),
+                (0x1003, bytes),
+                (next, &[0x48, 0x89, 0xc6]),
+            ],
+            &[0x1000],
+            &[next],
+        );
+        assert_eq!(p.instructions[&0x1003].quality, EffectQuality::Opaque);
+        let summary = &p.request.instructions[&0x1003];
+        assert_eq!(summary.kind, InstructionKind::Ordinary);
+        assert_eq!(summary.uses, Catalogue.locations());
+        assert_eq!(summary.may_defs, Catalogue.locations());
+        assert!(summary.must_defs.is_empty());
+        assert!(
+            p.gaps
+                .iter()
+                .any(|gap| gap.address == 0x1003 && gap.reason == GapReason::OpaqueEffects)
+        );
+        let result = analyze(p.request).unwrap();
+        for loc in cells(0, 0, 64) {
+            let origins: std::collections::BTreeSet<_> = result.state.reaching[&next]
+                .iter()
+                .filter(|d| d.loc == loc)
+                .map(|d| d.site)
+                .collect();
+            assert_eq!(origins, [0x1000, 0x1003].into());
+        }
+        assert_eq!(result.state.slice, [0x1000, 0x1003, next].into());
+        let mut prefix = vec![0x67];
+        prefix.extend(bytes);
+        let p = decode(&[(0x1000, &prefix)], &[0x1000], &[]);
+        assert_eq!(p.instructions[&0x1000].quality, EffectQuality::Unavailable);
+        assert!(!p.request.decodable.contains(&0x1000));
+    }
 }
 
 #[test]
@@ -470,7 +523,7 @@ fn memory_immediate_mov_uses_address_registers_and_only_may_writes_memory() {
         ),
     ] {
         let p = decode(&[(4096, bytes)], &[4096], &[4096]);
-        assert_eq!(p.identity.ruleset, "user64-effects-v1.1");
+        assert_eq!(p.identity.ruleset, "user64-effects-v1.2");
         let e = &p.instructions[&4096];
         let summary = &p.request.instructions[&4096];
         assert_eq!(e.quality, EffectQuality::Reviewed);

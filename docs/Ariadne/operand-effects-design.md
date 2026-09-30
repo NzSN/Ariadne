@@ -12,6 +12,9 @@ Further exact effect rules are prioritized by the
 The [Priority 2 path-driven effects implementation plan](priority-2-path-driven-effects-plan.md)
 limits further bindings to exact forms observed on independently rooted
 captured paths.
+The [Priority 4 Windows qualification stage](priority-4-workload-performance-plan.md#2026-09-30-qualification-run)
+applies that policy to eight observed forms with reviewed ordinary control
+and explicitly opaque effects.
 
 ## Decision
 

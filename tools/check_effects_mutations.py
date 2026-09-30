@@ -16,6 +16,18 @@ UNKNOWN = '''return Some(Summary {
     undefined: LocationSet::new(), quality: EffectQuality::Opaque,
 });'''
 MUTATIONS = [
+    ("opaque-control-loses-uncertainty", RULES,
+     "opaque(&mut s);\n        return Some(s);\n    }\n    for width",
+     "return Some(s);\n    }\n    for width",
+     "opaque_control_forms_preserve_prior_origins_and_expose_uncertainty"),
+    ("opaque-control-definite-kill", RULES,
+     "opaque(&mut s);\n        return Some(s);\n    }\n    for width",
+     "opaque(&mut s); s.must_defs = Catalogue.locations();\n        return Some(s);\n    }\n    for width",
+     "opaque_control_forms_preserve_prior_origins_and_expose_uncertainty"),
+    ("opaque-control-unreviewed-address-prefix", RULES,
+     "if address_width != 64\n            || bytes.first()",
+     "if false\n            || bytes.first()",
+     "opaque_control_forms_preserve_prior_origins_and_expose_uncertainty"),
     ("partial-register-kill", "src/effects/locations.rs", "if self.width == 32 {", "if self.width <= 32 {",
      "partial_writes_preserve_other_bytes_and_dword_replaces_upper_half"),
     ("missing-address-use", RULES, "s.uses.extend(reads(&m));", "// mutated: omit address reads",

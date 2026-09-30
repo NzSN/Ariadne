@@ -1,5 +1,12 @@
 # Priority 2: path-driven effect decision for the first real case
 
+The first-case no-change decision below remains historical evidence. The
+2026-09-30 larger Windows workload subsequently required
+[eight source-reviewed control-only bindings](priority-4-control-source-review.md).
+They retain opaque effects and are covered by the
+[Priority 4 delivery record](priority-4-performance-validation.md); the formal
+instruction-step ledger remains unchanged.
+
 Reviewed **2026-09-29 23:26 CST** against the
 [Priority 2 plan](priority-2-path-driven-effects-plan.md) and the
 [controlled Chromium case](priority-1-real-capture-validation.md). The

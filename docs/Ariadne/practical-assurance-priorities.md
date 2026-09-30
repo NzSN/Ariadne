@@ -27,9 +27,9 @@ of the delivered minidump reader, renderer or conservative analyzer.
 | Priority | Deliverable | Acceptance evidence |
 | --- | --- | --- |
 | [1. Representative real-capture investigation](priority-1-real-capture-plan.md) — delivered for one controlled Chromium/Linux crash | Run the supported CLI on a hash-pinned real Chromium/Electron Windows or Linux minidump with an independently established earlier captured entry and crash-IP seed. Where capture lacks that path, report the gap; do not infer a function entry by decoding backward from RIP or supply executable bytes from a companion file. | The [qualified case](priority-1-real-capture-validation.md) links a possible address producer to captured bytes, a matched-build entry witness, reviewed effects and explicit uncertainty. The tool-produced Stage B fixture remains a separate regression. |
-| [2. Path-driven effect coverage](priority-2-path-driven-effects-plan.md) — no-change for the first real path | Inventory the exact unsupported instructions that stop real investigations. Add only source-reviewed opcode/operand/prefix bindings needed on those paths, preserving weak memory updates, flags/alias uncertainty and unknown control. | The [first case review](priority-2-effects-validation.md) found no source-reviewable binding needed to reach its possible producer; opaque calls remain. New real paths may reopen coverage work. |
+| [2. Path-driven effect coverage](priority-2-path-driven-effects-plan.md) — delivered for the selected paths | Inventory the exact unsupported instructions that stop real investigations. Add only source-reviewed opcode/operand/prefix bindings needed on those paths, preserving weak memory updates, flags/alias uncertainty and unknown control. | The [first case review](priority-2-effects-validation.md) required no change. The larger Windows query gained [eight reviewed control-only bindings](priority-4-control-source-review.md), with opaque effects and negative controls. New paths may reopen coverage work. |
 | [3. Investigator presentation and release examples](priority-3-investigator-presentation-plan.md) — delivered | Make decoded instruction, exact bytes, normalized operands, rule quality and provenance easy to scan alongside possible origins and gaps. Retain versioned JSON as the machine contract and publish reproducible CLI examples for both platforms. | The [validation](priority-3-presentation-validation.md) confirms a readable overview, Linux/Windows [examples](minidump-investigator-examples.md), Graphviz parsing, partial-report behavior and unchanged JSON/DOT semantics. |
-| [4. Workload-sized performance decision](priority-4-workload-performance-plan.md) — measured, qualification open | Measure larger representative captured graphs and dense aliases through the same CLI path. Optimize only a demonstrated bottleneck, such as predecessor scans, without changing the analyzer's observable schedule or result. | The [first measurement](priority-4-performance-validation.md) has a 34-node real query, bounded synthetic data and a 512-node timeout. A qualifying 64-node real capture is still needed. |
+| [4. Workload-sized performance decision](priority-4-workload-performance-plan.md) — delivered for one larger Windows capture | Measure larger representative captured graphs and dense aliases through the same CLI path. Optimize only a demonstrated bottleneck, such as predecessor scans, without changing the analyzer's observable schedule or result. | The [qualified measurement](priority-4-performance-validation.md) has 98 captured decoded instructions and a 19-node slice. CLI median improved from 3,846 to 1,788 ms against the fixed 2,000 ms budget. All 277 visible actions and text/DOT/JSON hashes are preserved; 128/256/512-node synthetic families complete. |
 
 The designs behind these plans are the
 [Priority 1 real-capture design](priority-1-real-capture-design.md),
@@ -41,9 +41,12 @@ Priority 1 was qualified on **2026-09-29** for one real, controlled Chromium
 renderer crash. The independently anchored entry is a complete captured
 instruction reached by forward decoding from a matching binary's function
 symbol. Its slice is a set of possible origins, not an execution trace.
-Priority 2 has a scoped no-change decision for that path, Priority 3 is
-delivered, and Priority 4 remains open: the 34-node case does not satisfy its
-larger-workload target.
+Priority 2 has a scoped no-change decision for that path and eight conservative
+control bindings for the later Windows workload. Priority 3 is delivered.
+Priority 4 was qualified on **2026-09-30** for a separately hash-pinned,
+98-instruction Windows Electron query with a matched-PE entry witness. Its
+measured optimization preserves the visible schedule and report bytes. The
+median meets the budget; this is not a worst-case or universal scale guarantee.
 
 The separate machine-state and directly supplied LLVM IR paths can advance
 when a concrete investigation needs them; their generated model-based replay

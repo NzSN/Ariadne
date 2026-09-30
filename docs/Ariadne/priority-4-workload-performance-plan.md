@@ -11,7 +11,57 @@ and a four-node tool-produced Windows minidump, not a representative real-captur
 workload.
 The first [workload measurement](priority-4-performance-validation.md)
 retains a 34-node real query, five-repeat 128/256-node synthetic data and a
-bounded 512-node timeout. Its 64-node real-capture qualification remains open.
+bounded 512-node timeout. Its 64-node real-capture qualification remained open
+at that checkpoint.
+The later [2026-09-30 delivery](priority-4-performance-validation.md) closes
+that gate for a 98-instruction Windows capture, retains before/after evidence,
+and meets the unchanged 2,000 ms median budget.
+
+## 2026-09-30 qualification run
+
+Audit the available Windows Electron captures against a companion's exact
+RSDS GUID/age, image size and timestamp. Use the matching PE runtime-function
+table as an independent entry witness and compare its forward-disassembled
+function bytes with capture; companion bytes must never enter the analyzer.
+The selected candidate is `f13d18cd-9ade-4eff-947c-15a649b636fa.dmp`, with
+runtime-function RVA `0x48652d0` and exception RIP RVA `0x486530f`.
+
+This path reopens Priority 2 for eight exact forms: `PUSH64r`, `POP64r`,
+`ADD32rm`, `ADD64rm`, `MOV8mi`, `CMP8mi`, `ADD32i32`, and `CMP32i32`.
+Review their pinned AMD sources and actual native operand/prefix shapes.
+Admit only ordinary control, keeping all effects opaque with empty definite
+replacements. Add shape/prefix negative controls and run the existing effect,
+minidump, MBT and mutation gates before accepting this larger path.
+
+Retain a separate hash-pinned case manifest and checker for this external
+Windows capture. Require at least 64 actually decoded captured instructions,
+an entry-to-seed local route and an earlier possible address-register producer;
+an exploratory control projection is never acceptance evidence. Then measure
+the release CLI and identical stage query with one warm-up and five repeats.
+Keep the predeclared **2,000 ms** CLI budget. Preserve completed workload data
+if a later synthetic size times out, retaining that size as a bounded limit
+result. Update the decision and assurance queue only after the gates close.
+
+The qualified 98-instruction query exceeds that budget in the initial release
+runs (roughly 3.8 seconds). Instrumented core analysis takes roughly 2.3 seconds,
+with 8,561 incoming evaluations and about 20 million cumulative allocation
+requests. Before changing the solver, freeze this baseline. The selected
+optimization is a private local-predecessor index and cached incoming sets,
+invalidated whenever a predecessor's reaching set grows. Keep the same sorted
+scan and one-action `step()` behavior. Compare every transition with the
+retained scanning implementation, including the exact real request, then
+compare text/DOT/JSON hashes for this same query. Target at least a 50 percent
+core-time reduction and the existing 2,000 ms CLI median; retain any residual
+budget miss explicitly rather than changing the budget.
+
+The first solver change reduces instrumented core time by about 89 percent,
+but the CLI median remains roughly 2.7 seconds. Preparation remains about
+1.7 seconds because each batch launches separate version and decode processes.
+The second measured change combines the exact version/target response and
+unchanged protocol-2 rows in one checked helper invocation. Retain the legacy
+helper modes, reject absent/wrong checked headers, and preserve raw row bytes,
+caps, process-error handling, timeout behavior and all report hashes. Keep the
+same 2,000 ms target and rerun both platform matrices and protocol negatives.
 
 ## 1. Freeze workloads and measurement contract
 

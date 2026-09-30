@@ -1,80 +1,5 @@
 {
-  "accepted": true,
-  "caseManifest": "priority-4-real-capture-case.json",
-  "cliMedianBudgetMet": true,
-  "decision": "accept_measured_optimization_for_qualified_query",
-  "generatedRequestsWithCompleteTransitionComparison": 256,
-  "integrationComponentsPassed": 19,
-  "latencyBudgetMs": 2000,
-  "limits": [
-    "Median budget only; one measured run exceeded two seconds.",
-    "One partial Windows local recovery with later unsupported INT3 sites.",
-    "Opaque calls and new control-only bindings retain effect uncertainty.",
-    "Synthetic loops retain scaling risk; no universal performance or Rust refinement claim.",
-    "Raw dump and matched PE remain external to tracked files."
-  ],
-  "measurements": {
-    "after": "priority-4-20260930-after-validation.json",
-    "before": "priority-4-20260930-before-validation.json",
-    "solver": "priority-4-20260930-solver-validation.json"
-  },
-  "negativeControls": {
-    "changed_captured_bytes": {
-      "reason": "function bytes are not completely captured or differ",
-      "rejected_before_publication": true
-    },
-    "wrong_identity": {
-      "reason": "dump RSDS mismatch",
-      "rejected_before_publication": true
-    }
-  },
-  "nestedMinidumpComponentsPassed": 11,
-  "qualification": "priority-4-real-capture-validation.json",
-  "qualificationSha256": "8efb4897d21443c3ffdb994db910f6e040ef832958de21b5d18970d29f75ade2",
-  "real": {
-    "cliAfterMs": {
-      "max": 2449.960616,
-      "median": 1787.571403,
-      "min": 1679.974244,
-      "samples": 5
-    },
-    "cliBeforeMs": {
-      "max": 4163.816537,
-      "median": 3845.699487,
-      "min": 3756.322061,
-      "samples": 5
-    },
-    "decoded": 98,
-    "edges": 113,
-    "medianImprovementPercent": 53.51765240516828,
-    "reportHashesPreserved": true,
-    "slice": 19,
-    "trackedLocations": 137
-  },
-  "realWorkloadTargetMet": true,
-  "recordedUtc": "2026-09-30T05:38:26.359834+00:00",
-  "registerCoreAcceptance": {
-    "exitCode": 1,
-    "log": "/tmp/ariadne-b-f-progress-kokumc_m/register-core-required.log",
-    "status": "pending"
-  },
-  "regressionRecords": [
-    "current-integration-validation.json",
-    "priority-4-regression-validation.json",
-    "priority-4-effects-validation.json",
-    "priority-4-effect-mutations.json",
-    "priority-4-mbt-validation.json",
-    "priority-4-reader-mutations.json"
-  ],
-  "schedule": {
-    "edge_scans": 188,
-    "incoming_evaluations": 170,
-    "matched_actions": 277,
-    "passed": true,
-    "reference_edge_scans": 967393,
-    "reference_incoming_evaluations": 8561
-  },
-  "schema": "ariadne-priority-4-delivery-validation-v1",
+  "recordedUtc": "2026-09-30T05:19:27.761652+00:00",
   "sourceSha256": {
     "Cargo.lock": "f1d5d49897a04815e3b9b1291770c38a71f560329440e4aace6f4a038ddee283",
     "Cargo.toml": "10a7e789d98fc97f26ef1c7fff61ccc4f9969d3d9ecdca44c5a9c1f47943ea65",
@@ -121,16 +46,16 @@
     "native/llvm_mc/build.sh": "07eca5b34dc5409a2d5e7cc91ca69df701f10eb3690b17388ec75bc95f72ad4c",
     "native/llvm_mc/check.sh": "66876c8bc92ca67b41e86067df5d3be9522f42c8f41106d87e141baabf7c6f25",
     "native/llvm_mc/decode.cpp": "862fa9396102f9dfa8529b2718fc7663cefab9e3c1a5706710bb52b0fac043e5",
-    "src/effects.rs": "3bbc00f6e800ca366579306cb90d100043e77b3d2e4d97a9ad14ccc4057e8656",
     "src/effects/forms.txt": "1185f64112ac129678d17edd61324c3badb02a63de4c60b1131e5ec0ff000581",
     "src/effects/locations.rs": "b890a4895a4b48841b075d4c11e17ed3ba8cd63d5bd2f1f83d777df64df8c2f4",
     "src/effects/rules.rs": "bfcfa0a4d8b9c301089faf81148cee24465ee9a606d17ca3edb0ff806b837dd9",
+    "src/effects.rs": "3bbc00f6e800ca366579306cb90d100043e77b3d2e4d97a9ad14ccc4057e8656",
     "src/engine.rs": "d59a6874ac3add446fc4aa3c590745c06e0e763890db7a76de43f95af687d6b1",
     "src/lib.rs": "13989ad2b8975b0958ce571533c87114fbc054cf24fceab0abaaed32b5356c32",
     "src/llvm_ir.rs": "c5b173605bab60001b04b829258519412f94d92d0c4c558eee6f4d2618914e93",
-    "src/llvm_mc.rs": "5ac6e89a2b034e44b3d14b26eb175ccfb57c3aa247abf254ce1e09011929c083",
     "src/llvm_mc/prepare.rs": "faada468b5814927950ae641c1d07f2627a5a3e69847e862285d17efb35c2852",
     "src/llvm_mc/protocol.rs": "cab3edab316a6d9ff2b6f3dea67fdd5f4f2213e4b481f7afa769cf22b2ee53b4",
+    "src/llvm_mc.rs": "5ac6e89a2b034e44b3d14b26eb175ccfb57c3aa247abf254ce1e09011929c083",
     "src/machine_state.rs": "382078f91da9ae503be69e8485a5e5cdacdf5e2a676dce59848960349edfa3e8",
     "src/model.rs": "9bccc617340450535872b43515bceef16cfd60891cbd0ebc17349f88ce586f06",
     "src/render.rs": "9d153e2653d7b6cd6e57ece17605f7e395bb2018498f43006750909f2e96fbbf",
@@ -171,28 +96,294 @@
     "tools/test_priority4.py": "ded8b435a68221f02466520121d0f8ef2898ac3c3b22aa471b2ce849fe52dc20"
   },
   "sourcesStable": true,
-  "syntheticLocationCounts": {
-    "calls": 17,
-    "dense": 129,
-    "joins": 17,
-    "linear": 17,
-    "loops": 17
-  },
-  "syntheticOutcomes": [
+  "gates": [
     {
-      "nodes": 128,
-      "rows": 25,
-      "status": "complete"
+      "gate": "minidump-b-c",
+      "exitCode": 1,
+      "seconds": 191.059,
+      "command": [
+        "python3",
+        "tools/check_minidump.py"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-kokumc_m/minidump-b-c.log"
     },
     {
-      "nodes": 256,
-      "rows": 25,
-      "status": "complete"
+      "gate": "llvm-ir-build",
+      "exitCode": 0,
+      "seconds": 4.653,
+      "command": [
+        "bash",
+        "native/llvm_ir/build.sh"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-kokumc_m/llvm-ir-build.log"
     },
     {
-      "nodes": 512,
-      "rows": 25,
-      "status": "complete"
+      "gate": "root-tests",
+      "exitCode": 0,
+      "seconds": 1.125,
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-kokumc_m/root-tests.log"
+    },
+    {
+      "gate": "root-format",
+      "exitCode": 0,
+      "seconds": 0.125,
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-kokumc_m/root-format.log"
+    },
+    {
+      "gate": "root-clippy",
+      "exitCode": 0,
+      "seconds": 0.074,
+      "command": [
+        "cargo",
+        "clippy",
+        "--offline",
+        "--locked",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-kokumc_m/root-clippy.log"
+    },
+    {
+      "gate": "ir-tests",
+      "exitCode": 0,
+      "seconds": 0.184,
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "ir/Cargo.toml"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-kokumc_m/ir-tests.log"
+    },
+    {
+      "gate": "ir-native",
+      "exitCode": 0,
+      "seconds": 0.124,
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "ir/Cargo.toml",
+        "--test",
+        "native",
+        "--",
+        "--ignored"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-kokumc_m/ir-native.log"
+    },
+    {
+      "gate": "ir-format",
+      "exitCode": 0,
+      "seconds": 0.053,
+      "command": [
+        "cargo",
+        "fmt",
+        "--manifest-path",
+        "ir/Cargo.toml",
+        "--",
+        "--check"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-kokumc_m/ir-format.log"
+    },
+    {
+      "gate": "ir-clippy",
+      "exitCode": 0,
+      "seconds": 0.108,
+      "command": [
+        "cargo",
+        "clippy",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "ir/Cargo.toml",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-kokumc_m/ir-clippy.log"
+    },
+    {
+      "gate": "bench-format",
+      "exitCode": 0,
+      "seconds": 0.062,
+      "command": [
+        "cargo",
+        "fmt",
+        "--manifest-path",
+        "bench/Cargo.toml",
+        "--",
+        "--check"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-kokumc_m/bench-format.log"
+    },
+    {
+      "gate": "bench-clippy",
+      "exitCode": 0,
+      "seconds": 0.172,
+      "command": [
+        "cargo",
+        "clippy",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "bench/Cargo.toml",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-kokumc_m/bench-clippy.log"
+    },
+    {
+      "gate": "machine-type",
+      "exitCode": 0,
+      "seconds": 3.287,
+      "command": [
+        "/home/nzsn/.apalache/bin/apalache-mc",
+        "--out-dir=/tmp/ariadne-b-f-progress-kokumc_m/machine-type",
+        "typecheck",
+        "AriadneMachineState.tla"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-kokumc_m/machine-type.log"
+    },
+    {
+      "gate": "ir-type",
+      "exitCode": 0,
+      "seconds": 3.786,
+      "command": [
+        "/home/nzsn/.apalache/bin/apalache-mc",
+        "--out-dir=/tmp/ariadne-b-f-progress-kokumc_m/ir-type",
+        "typecheck",
+        "AriadneLLVMIR.tla"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-kokumc_m/ir-type.log"
+    },
+    {
+      "gate": "machine-model",
+      "exitCode": 0,
+      "seconds": 29.65,
+      "command": [
+        "/home/nzsn/.apalache/bin/apalache-mc",
+        "--out-dir=/tmp/ariadne-b-f-progress-kokumc_m/machine-model",
+        "check",
+        "--init=Init",
+        "--next=Next",
+        "--inv=Safety",
+        "--length=6",
+        "--no-deadlock",
+        "AriadneMachineStateExample.tla"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-kokumc_m/machine-model.log"
+    },
+    {
+      "gate": "ir-model",
+      "exitCode": 0,
+      "seconds": 106.992,
+      "command": [
+        "/home/nzsn/.apalache/bin/apalache-mc",
+        "--out-dir=/tmp/ariadne-b-f-progress-kokumc_m/ir-model",
+        "check",
+        "--init=Init",
+        "--next=Next",
+        "--inv=Safety",
+        "--length=8",
+        "--no-deadlock",
+        "AriadneLLVMIRExample.tla"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-kokumc_m/ir-model.log"
+    },
+    {
+      "gate": "machine-tlc",
+      "exitCode": 0,
+      "seconds": 1.369,
+      "command": [
+        "/home/nzsn/.local/bin/tlc",
+        "-workers",
+        "1",
+        "-metadir",
+        "/tmp/ariadne-b-f-progress-kokumc_m/machine-tlc",
+        "-config",
+        "MachineState.cfg",
+        "AriadneMachineStateExample.tla"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-kokumc_m/machine-tlc.log"
+    },
+    {
+      "gate": "ir-tlc",
+      "exitCode": 0,
+      "seconds": 1.311,
+      "command": [
+        "/home/nzsn/.local/bin/tlc",
+        "-workers",
+        "1",
+        "-metadir",
+        "/tmp/ariadne-b-f-progress-kokumc_m/ir-tlc",
+        "-config",
+        "LLVMIR.cfg",
+        "AriadneLLVMIRExample.tla"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-kokumc_m/ir-tlc.log"
+    },
+    {
+      "gate": "profile-integrity",
+      "exitCode": 0,
+      "seconds": 0.12,
+      "command": [
+        "python3",
+        "tools/amd64_profile.py",
+        "check"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-kokumc_m/profile-integrity.log"
+    },
+    {
+      "gate": "benchmark",
+      "exitCode": 0,
+      "seconds": 0.611,
+      "command": [
+        "cargo",
+        "run",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "bench/Cargo.toml",
+        "--release",
+        "--bin",
+        "ariadne-bench",
+        "--",
+        "128",
+        "3",
+        "minidump"
+      ],
+      "log": "/tmp/ariadne-b-f-progress-kokumc_m/benchmark.log"
     }
-  ]
+  ],
+  "passed": false,
+  "registerCoreAcceptance": {
+    "exitCode": 1,
+    "status": "pending",
+    "log": "/tmp/ariadne-b-f-progress-kokumc_m/register-core-required.log"
+  },
+  "rustRefinementProof": "open",
+  "machineStateModelBasedReplay": "open",
+  "nativeIrModelBasedReplay": "open"
 }

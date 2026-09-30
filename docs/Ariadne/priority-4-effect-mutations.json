@@ -1,0 +1,95 @@
+{
+  "sources": {
+    "src/effects/forms.txt": "1185f64112ac129678d17edd61324c3badb02a63de4c60b1131e5ec0ff000581",
+    "src/effects/locations.rs": "b890a4895a4b48841b075d4c11e17ed3ba8cd63d5bd2f1f83d777df64df8c2f4",
+    "src/effects/rules.rs": "bfcfa0a4d8b9c301089faf81148cee24465ee9a606d17ca3edb0ff806b837dd9",
+    "src/effects.rs": "3bbc00f6e800ca366579306cb90d100043e77b3d2e4d97a9ad14ccc4057e8656",
+    "src/engine.rs": "d59a6874ac3add446fc4aa3c590745c06e0e763890db7a76de43f95af687d6b1",
+    "src/lib.rs": "13989ad2b8975b0958ce571533c87114fbc054cf24fceab0abaaed32b5356c32",
+    "src/llvm_ir.rs": "c5b173605bab60001b04b829258519412f94d92d0c4c558eee6f4d2618914e93",
+    "src/llvm_mc/prepare.rs": "faada468b5814927950ae641c1d07f2627a5a3e69847e862285d17efb35c2852",
+    "src/llvm_mc/protocol.rs": "cab3edab316a6d9ff2b6f3dea67fdd5f4f2213e4b481f7afa769cf22b2ee53b4",
+    "src/llvm_mc.rs": "5ac6e89a2b034e44b3d14b26eb175ccfb57c3aa247abf254ce1e09011929c083",
+    "src/machine_state.rs": "382078f91da9ae503be69e8485a5e5cdacdf5e2a676dce59848960349edfa3e8",
+    "src/model.rs": "9bccc617340450535872b43515bceef16cfd60891cbd0ebc17349f88ce586f06",
+    "src/render.rs": "9d153e2653d7b6cd6e57ece17605f7e395bb2018498f43006750909f2e96fbbf",
+    "tests/common/mod.rs": "435b020cc3e77185229f8556ff14bd00e3b3aefa29b99600331300086f79fcb5",
+    "tests/conformance.rs": "7c8e71ff80a04bc57940f6a275ad0e9aabac5250cc28930f1de73f7e01f3f86c",
+    "tests/effects.rs": "cfbba958a85e5e5a4db22bd25ae5e984f244601e318b0ebf266dd3874068ba42",
+    "tests/effects_protocol.rs": "f90814bb527622a3c3dd0b5a6fb386d3d8d46dd954788aaa32670889f647704a",
+    "tests/fixtures/effects-v2.tsv": "6ef430507db79306d21e1dd70f9a7019a825d09e86d0dfbc3024f118c437eb30",
+    "tests/generated.rs": "11ab52556ba6ad2439e5ce22b94cde98e3a09f8b7ffd6e74815cc8a3dba92ff1",
+    "tests/llvm_ir.rs": "ad5e89773f14dc651e54a5861ba6f66aa475493657bfffc1a3a7d0da05e6f424",
+    "tests/llvm_mc.rs": "bfa76f6371cb5b998e86caf27b0e59c80eb75226423798098be0357709651584",
+    "tests/machine_state.rs": "1ab11d807428256387e725add044afe548e6e181fb7bbe662bce9f3c4bd8f2d5",
+    "tests/render.rs": "72d0cd571e7157b177063c6a91684bd955d0f78ad86f0176dbc72447a9e82117",
+    "tests/support/scanning_engine.rs": "0a96bfb4d76df3417951a1f628619f6ba866c4427fb22ef6a11d0d1e2469acf5"
+  },
+  "mutants": [
+    {
+      "mutation": "opaque-control-loses-uncertainty",
+      "test": "opaque_control_forms_preserve_prior_origins_and_expose_uncertainty",
+      "assertionRejected": true
+    },
+    {
+      "mutation": "opaque-control-definite-kill",
+      "test": "opaque_control_forms_preserve_prior_origins_and_expose_uncertainty",
+      "assertionRejected": true
+    },
+    {
+      "mutation": "opaque-control-unreviewed-address-prefix",
+      "test": "opaque_control_forms_preserve_prior_origins_and_expose_uncertainty",
+      "assertionRejected": true
+    },
+    {
+      "mutation": "partial-register-kill",
+      "test": "partial_writes_preserve_other_bytes_and_dword_replaces_upper_half",
+      "assertionRejected": true
+    },
+    {
+      "mutation": "missing-address-use",
+      "test": "memory_keeps_possible_aliases_and_address_dependencies_lea_does_not_read_memory",
+      "assertionRejected": true
+    },
+    {
+      "mutation": "missing-carry-use",
+      "test": "carry_dependency_survives_increment_and_cmp_does_not_write_registers",
+      "assertionRejected": true
+    },
+    {
+      "mutation": "memory-wide-kill",
+      "test": "memory_keeps_possible_aliases_and_address_dependencies_lea_does_not_read_memory",
+      "assertionRejected": true
+    },
+    {
+      "mutation": "call-preserves-rbx",
+      "test": "control_flags_calls_and_unrecognized_control_have_distinct_evidence",
+      "assertionRejected": true
+    },
+    {
+      "mutation": "unknown-fallthrough",
+      "test": "control_flags_calls_and_unrecognized_control_have_distinct_evidence",
+      "assertionRejected": true
+    },
+    {
+      "mutation": "mov-immediate-missing-address",
+      "test": "memory_immediate_mov_uses_address_registers_and_only_may_writes_memory",
+      "assertionRejected": true
+    },
+    {
+      "mutation": "mov-immediate-reads-old-memory",
+      "test": "memory_immediate_mov_uses_address_registers_and_only_may_writes_memory",
+      "assertionRejected": true
+    },
+    {
+      "mutation": "mov-immediate-kills-all-memory",
+      "test": "memory_immediate_mov_uses_address_registers_and_only_may_writes_memory",
+      "assertionRejected": true
+    },
+    {
+      "mutation": "mov-immediate-forgets-sign-extension",
+      "test": "memory_immediate_mov_preserves_signed_payload_and_address_size",
+      "assertionRejected": true
+    }
+  ]
+}

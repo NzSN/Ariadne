@@ -5,10 +5,13 @@ Stage A advances the preparation identity to `user64-effects-v1.1` and adds
 two source-reviewed memory-immediate MOV effect rules.
 Their bounded [source and decoder review](stage-a-source-review.md) records the
 form-catalogue correspondence still required for instruction-step acceptance.
-The table now lists **139 exact LLVM opcode identities**, not verified ISA
+The initial table below lists **139 exact LLVM opcode identities**, not verified ISA
 steps or accepted user64 cases. Each entry additionally requires the shape,
 register widths, prefix and address constraints in `src/effects/rules.rs`.
 Names not in `src/effects/forms.txt` have unresolved control in the new path.
+The [Priority 4 real-path review](priority-4-control-source-review.md) adds eight
+control-only bindings, bringing the current registry to **147** and preparation
+identity to `user64-effects-v1.2`. Their effects remain opaque.
 
 Sources: pinned AMD Volume 3 revision 3.38, SHA-256
 `e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee`;

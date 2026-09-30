@@ -216,10 +216,16 @@ int main(int argc, char **argv) {
     std::cout << "ariadne-llvm-mc 20.1.2\n";
     return 0;
   }
-  const bool linux_target = argc == 2 && std::string(argv[1]) == "--protocol=2-linux";
-  const bool v2 = linux_target || (argc == 2 && std::string(argv[1]) == "--protocol=2");
+  const bool checked = argc == 2 &&
+      (std::string(argv[1]) == "--protocol=2-checked" ||
+       std::string(argv[1]) == "--protocol=2-checked-linux");
+  const bool linux_target = argc == 2 &&
+      (std::string(argv[1]) == "--protocol=2-linux" ||
+       std::string(argv[1]) == "--protocol=2-checked-linux");
+  const bool v2 = checked || linux_target ||
+      (argc == 2 && std::string(argv[1]) == "--protocol=2");
   if (argc != 1 && !v2) {
-    std::cerr << "usage: ariadne-llvm-mc [--version|--protocol-version[=linux]|--protocol=2[-linux]]\n";
+    std::cerr << "usage: ariadne-llvm-mc [--version|--protocol-version[=linux]|--protocol=2[-linux]|--protocol=2-checked[-linux]]\n";
     return 2;
   }
   Decoder decoder;
@@ -227,6 +233,11 @@ int main(int argc, char **argv) {
   if (!decoder.initialize()) {
     std::cerr << "LLVM MC initialization failed\n";
     return 2;
+  }
+  if (checked) {
+    std::cout << "ariadne-llvm-mc 20.1.2 protocol 2";
+    if (linux_target) std::cout << " target x86_64-unknown-linux-gnu";
+    std::cout << '\n';
   }
   std::string line;
   while (std::getline(std::cin, line)) {

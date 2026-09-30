@@ -1,0 +1,19 @@
+[
+  {
+    "nodes": 128,
+    "status": "complete",
+    "rows": 25
+  },
+  {
+    "nodes": 256,
+    "status": "complete",
+    "rows": 25
+  },
+  {
+    "nodes": 512,
+    "status": "timeout",
+    "phase": "measured",
+    "timeout_seconds": 180,
+    "partial_csv": "synthetic-512-measured-partial.csv"
+  }
+]

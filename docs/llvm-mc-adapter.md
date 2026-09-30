@@ -165,6 +165,13 @@ LLVM observations, rule IDs, effect quality and preparation gaps. Core
 an input candidate that the analyzer never visits; reports should distinguish
 candidate evidence from visited instructions.
 
+Priority 4 adds eight exact, shape-checked control-only forms, with opaque
+effects, under `user64-effects-v1.2`; see the
+[source review](Ariadne/priority-4-control-source-review.md). The preparation
+transport now obtains the checked version/target header and raw rows from one
+helper invocation per batch. The [protocol guide](Ariadne/operand-effects-protocol.md#checked-batch-invocation)
+documents the additive helper modes and rebuild requirement.
+
 See [the protocol](Ariadne/operand-effects-protocol.md),
 [design](Ariadne/operand-effects-design.md), and
 [implementation plan](Ariadne/operand-effects-plan.md). Run all effects gates:

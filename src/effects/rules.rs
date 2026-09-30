@@ -155,6 +155,55 @@ pub(crate) fn summarize(raw: &Raw, bytes: &[u8]) -> Option<Summary> {
     };
     let ops = &raw.operands;
     let code = raw.opcode.as_str();
+    // Eight exact forms needed by the Priority 4 Windows capture. The source
+    // review establishes ordinary continuation only; effects stay opaque.
+    // See docs/Ariadne/priority-4-control-source-review.md.
+    if matches!(
+        code,
+        "PUSH64r"
+            | "POP64r"
+            | "ADD32rm"
+            | "ADD64rm"
+            | "MOV8mi"
+            | "CMP8mi"
+            | "ADD32i32"
+            | "CMP32i32"
+    ) {
+        if address_width != 64
+            || bytes.first() == Some(&0x66)
+            || rex_w != (code == "ADD64rm")
+            || raw.decoded.kind != Some(InstructionKind::Ordinary)
+        {
+            return None;
+        }
+        s.operands = match code {
+            "PUSH64r" | "POP64r" if ops.len() == 1 => {
+                vec![Operand::Register(reg(&ops[0], 64)?)]
+            }
+            "ADD32rm" | "ADD64rm" if ops.len() == 7 => {
+                let width = if rex_w { 64 } else { 32 };
+                let destination = reg(&ops[0], width)?;
+                if reg(&ops[1], width)? != destination {
+                    return None;
+                }
+                vec![
+                    Operand::Register(destination),
+                    memory(&ops[2..], width, address_width, next)?,
+                ]
+            }
+            "MOV8mi" | "CMP8mi" if ops.len() == 6 => vec![
+                memory(&ops[..5], 8, address_width, next)?,
+                imm(&ops[5], 8, 8)?,
+            ],
+            "ADD32i32" | "CMP32i32" if ops.len() == 1 => vec![
+                Operand::Register(RegisterView::new(0, 0, 32)?),
+                imm(&ops[0], 32, 32)?,
+            ],
+            _ => return None,
+        };
+        opaque(&mut s);
+        return Some(s);
+    }
     for width in [8u8, 16, 32, 64] {
         for operation in [
             "MOV", "ADD", "SUB", "ADC", "SBB", "CMP", "TEST", "AND", "OR", "XOR", "INC", "DEC",
@@ -346,6 +395,58 @@ pub(crate) fn summarize(raw: &Raw, bytes: &[u8]) -> Option<Summary> {
         opaque(&mut s);
     }
     Some(s)
+}
+
+#[cfg(test)]
+mod priority4_tests {
+    use super::*;
+    use crate::llvm_mc::protocol;
+
+    #[test]
+    fn control_only_bindings_reject_unreviewed_shapes_and_prefixes() {
+        for row in include_str!("../../tests/fixtures/effects-v2.tsv").lines() {
+            let Some((hex, record)) = row.split_once('\t') else {
+                continue;
+            };
+            let opcode = record.split_whitespace().nth(1).unwrap();
+            if ![
+                "PUSH64r", "POP64r", "ADD32rm", "ADD64rm", "MOV8mi", "CMP8mi", "ADD32i32",
+                "CMP32i32",
+            ]
+            .contains(&opcode)
+            {
+                continue;
+            }
+            let bytes: Vec<_> = (0..hex.len())
+                .step_by(2)
+                .map(|i| u8::from_str_radix(&hex[i..i + 2], 16).unwrap())
+                .collect();
+            let mut raw = protocol::parse(record).unwrap();
+            assert!(summarize(&raw, &bytes).is_some());
+            for prefix in [0x66, 0x67, 0xf0, 0xf2, 0xf3, 0x64] {
+                let mut prefixed = vec![prefix];
+                prefixed.extend(&bytes);
+                assert!(summarize(&raw, &prefixed).is_none(), "{opcode}: {prefix:x}");
+            }
+            raw.decoded.kind = Some(InstructionKind::Indirect);
+            assert!(summarize(&raw, &bytes).is_none());
+            raw.decoded.kind = Some(InstructionKind::Ordinary);
+            raw.operands.push(RawOperand::Immediate(0));
+            assert!(summarize(&raw, &bytes).is_none());
+            raw.operands.pop();
+            raw.operands[0] = RawOperand::Register("AX".into());
+            assert!(summarize(&raw, &bytes).is_none());
+            if opcode == "ADD32rm" || opcode == "ADD64rm" {
+                let mut raw = protocol::parse(record).unwrap();
+                raw.operands[1] = RawOperand::Register(if opcode == "ADD64rm" {
+                    "RBX".into()
+                } else {
+                    "EBX".into()
+                });
+                assert!(summarize(&raw, &bytes).is_none());
+            }
+        }
+    }
 }
 
 #[cfg(test)]

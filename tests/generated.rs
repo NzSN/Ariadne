@@ -1,4 +1,6 @@
 mod common;
+#[path = "support/scanning_engine.rs"]
+mod scanning_engine;
 
 use std::collections::BTreeMap;
 
@@ -259,6 +261,25 @@ fn generated_requests_match_independent_graph_and_path_oracles() {
             .collect();
         let reaching = reaching_by_paths(&r, &decoded, &graph);
         let slice = slice_by_paths(&r, &decoded, &reaching);
+        let mut optimized = Analyzer::new(r.clone()).unwrap();
+        let mut scanning = scanning_engine::Analyzer::new(r.clone()).unwrap();
+        loop {
+            let advanced = optimized.step();
+            assert_eq!(advanced, scanning.step(), "case {case}: action completion");
+            assert_eq!(
+                optimized.state(),
+                scanning.state(),
+                "case {case}: full transition"
+            );
+            if !advanced {
+                break;
+            }
+        }
+        assert_eq!(
+            optimized.finish(),
+            scanning.finish(),
+            "case {case}: final result"
+        );
         let result = run_checked(r.clone());
         assert_eq!(result.state.visited, visited, "case {case}");
         assert_eq!(result.state.decoded, decoded, "case {case}");

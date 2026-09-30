@@ -1,0 +1,226 @@
+{
+  "recordedUtc": "2026-09-30T05:24:25.137826+00:00",
+  "sourceSha256": {
+    "Cargo.lock": "f1d5d49897a04815e3b9b1291770c38a71f560329440e4aace6f4a038ddee283",
+    "Cargo.toml": "10a7e789d98fc97f26ef1c7fff61ccc4f9969d3d9ecdca44c5a9c1f47943ea65",
+    "Specs/AriadneInput.tla": "dee2efe4ebcabac7dcc5c3097ca0fcc7495d4acd5cba2dea53da4137240079a9",
+    "Specs/AriadneInputChecks.tla": "57a7c2974c6beb8b420bf48a1fc338568c54ddcdbe57162203fe3c3841697574",
+    "Specs/AriadneMachineCommon.tla": "32b60854773c7c14e06e449300a9757fefdfbfc763a0f58ef4574f1edd019947",
+    "Specs/AriadneTypes.tla": "3bfb36f3bf96adc324a9c714d34a12af708d0e7daaba91a5a1ae5f79f2820329",
+    "Specs/Input.cfg": "a7625802bbfb1ee7c9c7940133769c47c8e0e60cd55c70e812e6b5997d06361a",
+    "Specs/InputLimit.cfg": "bed03a8ebbfefe8beb802a91f4217add54f397a45a9ed8a45712eb8898470523",
+    "Specs/check-input.sh": "9ef9d64df9252c604069a79c706557097332e1c94e72c2760713c5129633ed99",
+    "input/Cargo.lock": "e6b7793b82f589eadb9f570c4212ffccdbf488236bc83310a7d8c3e919050593",
+    "input/Cargo.toml": "fa91e49864d7506acf2f2f25a88f10dc6bd9fe5153a71daae8f6f00444494a9a",
+    "input/examples/inspect.rs": "b29a8086261112738bd6e9fc29249e846e0da51ab6eedcaf8fbcedc96e7cac8c",
+    "input/examples/render_minidump.rs": "a38f1507adad5bc1fee95b41111da2a5189df933a4426fdbaae970305823d9cf",
+    "input/src/address_space.rs": "5b6bc4e94616eeb911f09ead0e512ee420d85ec9f324d965e1610637aa840634",
+    "input/src/bin/ariadne-minidump.rs": "4d7435120d09bac46d090186c3d5dc193b4c84914c9d18c8f48857e503e1e7bd",
+    "input/src/lib.rs": "296f3e2b6cb7b189c9fe4969a1fa3625137f81a725659526b79900bd5ccf8376",
+    "input/src/materialize.rs": "c00daebf4e9861915ad7a747354eb7125700e4537d412339888f7233a15ab2f4",
+    "input/src/minidump.rs": "02588ccfed70c8bc601d3a6a473f9659ccea1da0951965e4e152c859e499c04c",
+    "input/src/report.rs": "7718360470b319100a37659b221d1e89120d4167fb34d27112b027801678e6f3",
+    "input/tests/common/mod.rs": "af6b41728e969e022a5b72206ac0471982be367f84f693254f06b17ab3c26ea4",
+    "input/tests/fixtures/__pycache__/make_stage_b.cpython-312.pyc": "bd698064fcf9ed19066c566b734241f131fc78383bf4f334a7829a601c5dce02",
+    "input/tests/fixtures/make_stage_b.py": "8433813d2d31c7bc3ca1dd01e498f548817ed5ff2efd5eeed55532e3761bafa9",
+    "input/tests/fixtures/stage_b_linux.dmp": "7e71f4926e615789815299b98e3c3c725180ed4dce4065937fa533beb1018824",
+    "input/tests/fixtures/stage_b_windows.dmp": "f3a0407bff881356c0128e7587c03ea9f143dbd5fee59abbe8fc5edb75ad30bf",
+    "input/tests/native.rs": "58347dc87ce5575296882bffb174ceef27894d41a13090a208ced8e097b41f78",
+    "input/tests/reader.rs": "06e4720f60eeb6ad145102cd5f604cd2db69f08446a8e363950299ff765d4403",
+    "input/tests/real_dumps.rs": "491e38df54ccc2a841fe1d25970c041c1a05e2792a612379a3457a5da20edcbf",
+    "input/tests/stage_b.rs": "9170bdb1d406477dd63d7e7880b01eaa0e4695191ddb299a7724031c266cc11d",
+    "input/tests/stage_c.rs": "c7d49b4a98b20fea34f3356bca00ea9a3d20baf342a36d5f9417481290e25787",
+    "native/llvm_mc/build.sh": "07eca5b34dc5409a2d5e7cc91ca69df701f10eb3690b17388ec75bc95f72ad4c",
+    "native/llvm_mc/check.sh": "66876c8bc92ca67b41e86067df5d3be9522f42c8f41106d87e141baabf7c6f25",
+    "native/llvm_mc/decode.cpp": "862fa9396102f9dfa8529b2718fc7663cefab9e3c1a5706710bb52b0fac043e5",
+    "src/effects/forms.txt": "1185f64112ac129678d17edd61324c3badb02a63de4c60b1131e5ec0ff000581",
+    "src/effects/locations.rs": "b890a4895a4b48841b075d4c11e17ed3ba8cd63d5bd2f1f83d777df64df8c2f4",
+    "src/effects/rules.rs": "bfcfa0a4d8b9c301089faf81148cee24465ee9a606d17ca3edb0ff806b837dd9",
+    "src/effects.rs": "3bbc00f6e800ca366579306cb90d100043e77b3d2e4d97a9ad14ccc4057e8656",
+    "src/engine.rs": "d59a6874ac3add446fc4aa3c590745c06e0e763890db7a76de43f95af687d6b1",
+    "src/lib.rs": "13989ad2b8975b0958ce571533c87114fbc054cf24fceab0abaaed32b5356c32",
+    "src/llvm_ir.rs": "c5b173605bab60001b04b829258519412f94d92d0c4c558eee6f4d2618914e93",
+    "src/llvm_mc/prepare.rs": "faada468b5814927950ae641c1d07f2627a5a3e69847e862285d17efb35c2852",
+    "src/llvm_mc/protocol.rs": "cab3edab316a6d9ff2b6f3dea67fdd5f4f2213e4b481f7afa769cf22b2ee53b4",
+    "src/llvm_mc.rs": "5ac6e89a2b034e44b3d14b26eb175ccfb57c3aa247abf254ce1e09011929c083",
+    "src/machine_state.rs": "382078f91da9ae503be69e8485a5e5cdacdf5e2a676dce59848960349edfa3e8",
+    "src/model.rs": "9bccc617340450535872b43515bceef16cfd60891cbd0ebc17349f88ce586f06",
+    "src/render.rs": "9d153e2653d7b6cd6e57ece17605f7e395bb2018498f43006750909f2e96fbbf",
+    "tests/common/mod.rs": "435b020cc3e77185229f8556ff14bd00e3b3aefa29b99600331300086f79fcb5",
+    "tests/conformance.rs": "7c8e71ff80a04bc57940f6a275ad0e9aabac5250cc28930f1de73f7e01f3f86c",
+    "tests/effects.rs": "cfbba958a85e5e5a4db22bd25ae5e984f244601e318b0ebf266dd3874068ba42",
+    "tests/effects_protocol.rs": "f90814bb527622a3c3dd0b5a6fb386d3d8d46dd954788aaa32670889f647704a",
+    "tests/fixtures/effects-v2.tsv": "6ef430507db79306d21e1dd70f9a7019a825d09e86d0dfbc3024f118c437eb30",
+    "tests/generated.rs": "11ab52556ba6ad2439e5ce22b94cde98e3a09f8b7ffd6e74815cc8a3dba92ff1",
+    "tests/llvm_ir.rs": "ad5e89773f14dc651e54a5861ba6f66aa475493657bfffc1a3a7d0da05e6f424",
+    "tests/llvm_mc.rs": "bfa76f6371cb5b998e86caf27b0e59c80eb75226423798098be0357709651584",
+    "tests/machine_state.rs": "1ab11d807428256387e725add044afe548e6e181fb7bbe662bce9f3c4bd8f2d5",
+    "tests/render.rs": "72d0cd571e7157b177063c6a91684bd955d0f78ad86f0176dbc72447a9e82117",
+    "tests/support/scanning_engine.rs": "0a96bfb4d76df3417951a1f628619f6ba866c4427fb22ef6a11d0d1e2469acf5",
+    "tools/check_minidump.py": "502a92c049a124b348e8061cf9bb70d68b41d7c4723e1477eaf733d4d54bcc02",
+    "tools/check_minidump_mutations.py": "2eae3bf06fee8f12fe46db4f137e8cdc3050b0a857eadc159f5f2fdd214c8bfc"
+  },
+  "sourcesStable": true,
+  "gates": [
+    {
+      "gate": "effects-regression",
+      "exitCode": 0,
+      "seconds": 105.638,
+      "command": [
+        "python3",
+        "tools/check_effects.py"
+      ],
+      "log": "/tmp/ariadne-minidump-acceptance-nyr2r_23/effects-regression.log"
+    },
+    {
+      "gate": "input-tests",
+      "exitCode": 0,
+      "seconds": 0.26,
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "input/Cargo.toml"
+      ],
+      "log": "/tmp/ariadne-minidump-acceptance-nyr2r_23/input-tests.log"
+    },
+    {
+      "gate": "format",
+      "exitCode": 0,
+      "seconds": 0.084,
+      "command": [
+        "cargo",
+        "fmt",
+        "--manifest-path",
+        "input/Cargo.toml",
+        "--",
+        "--check"
+      ],
+      "log": "/tmp/ariadne-minidump-acceptance-nyr2r_23/format.log"
+    },
+    {
+      "gate": "clippy",
+      "exitCode": 0,
+      "seconds": 0.116,
+      "command": [
+        "cargo",
+        "clippy",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "input/Cargo.toml",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "log": "/tmp/ariadne-minidump-acceptance-nyr2r_23/clippy.log"
+    },
+    {
+      "gate": "native",
+      "exitCode": 0,
+      "seconds": 8.294,
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "input/Cargo.toml",
+        "--test",
+        "native",
+        "--",
+        "--ignored"
+      ],
+      "log": "/tmp/ariadne-minidump-acceptance-nyr2r_23/native.log"
+    },
+    {
+      "gate": "stage-b-fixtures",
+      "exitCode": 0,
+      "seconds": 0.036,
+      "command": [
+        "python3",
+        "input/tests/fixtures/make_stage_b.py",
+        "--check"
+      ],
+      "log": "/tmp/ariadne-minidump-acceptance-nyr2r_23/stage-b-fixtures.log"
+    },
+    {
+      "gate": "stage-b-native",
+      "exitCode": 0,
+      "seconds": 0.179,
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "input/Cargo.toml",
+        "--test",
+        "stage_b",
+        "--",
+        "--ignored"
+      ],
+      "log": "/tmp/ariadne-minidump-acceptance-nyr2r_23/stage-b-native.log"
+    },
+    {
+      "gate": "stage-c-cli",
+      "exitCode": 0,
+      "seconds": 0.375,
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "input/Cargo.toml",
+        "--test",
+        "stage_c",
+        "--",
+        "--ignored"
+      ],
+      "log": "/tmp/ariadne-minidump-acceptance-nyr2r_23/stage-c-cli.log"
+    },
+    {
+      "gate": "real-artifacts",
+      "exitCode": 0,
+      "seconds": 0.178,
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--manifest-path",
+        "input/Cargo.toml",
+        "--test",
+        "real_dumps",
+        "--",
+        "--ignored"
+      ],
+      "log": "/tmp/ariadne-minidump-acceptance-nyr2r_23/real-artifacts.log"
+    },
+    {
+      "gate": "formal-input",
+      "exitCode": 0,
+      "seconds": 7.745,
+      "command": [
+        "bash",
+        "Specs/check-input.sh"
+      ],
+      "log": "/tmp/ariadne-minidump-acceptance-nyr2r_23/formal-input.log"
+    },
+    {
+      "gate": "mutations",
+      "exitCode": 0,
+      "seconds": 50.471,
+      "command": [
+        "python3",
+        "tools/check_minidump_mutations.py"
+      ],
+      "log": "/tmp/ariadne-minidump-acceptance-nyr2r_23/mutations.log"
+    }
+  ],
+  "passed": true
+}

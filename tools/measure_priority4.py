@@ -32,11 +32,14 @@ def digest(path):
 
 def source_hashes():
     paths = set()
-    for directory in ("src", "input/src", "bench/src"):
+    for directory in ("src", "input/src", "bench/src", "native/llvm_mc"):
         paths.update(p for p in (ROOT / directory).rglob("*") if p.is_file())
     paths.update(ROOT / name for name in (
         "Cargo.toml", "Cargo.lock", "input/Cargo.toml", "input/Cargo.lock",
         "bench/Cargo.toml", "bench/Cargo.lock", "tools/measure_priority4.py",
+        "tools/check_priority4_real_capture.py", "tools/check_priority1_real_capture.py",
+        "docs/Ariadne/priority-4-real-capture-case.json",
+        "tests/support/scanning_engine.rs",
     ))
     return {str(p.relative_to(ROOT)): digest(p) for p in sorted(paths)}
 
@@ -132,21 +135,61 @@ def stage_runs(args):
                             "slice": int(measured[0]["slice"])}
 
 
-def synthetic_runs(args):
+def synthetic_runs(args, output):
     outputs = []
+    outcomes = []
     for nodes in args.synthetic_sizes:
-        warm = command([str(args.synthetic_bench), str(nodes), "1"], timeout=120)
-        if warm.returncode:
-            raise RuntimeError(f"synthetic warmup {nodes} failed: {warm.stderr[-800:]}")
-        measured = command([str(args.synthetic_bench), str(nodes),
-                            str(args.runs)], timeout=180)
-        if measured.returncode:
-            raise RuntimeError(f"synthetic {nodes} failed: {measured.stderr[-800:]}")
-        rows = list(csv.DictReader(io.StringIO(measured.stdout)))
-        if len(rows) != 5 * args.runs:
-            raise RuntimeError(f"synthetic {nodes} row count mismatch")
-        outputs.append(measured.stdout)
-    return outputs[0] + "".join(output.split("\n", 1)[1] for output in outputs[1:])
+        phase = "warmup"
+        bound = 120
+        try:
+            warm = command([str(args.synthetic_bench), str(nodes), "1"], timeout=bound)
+            if warm.returncode:
+                raise RuntimeError(f"synthetic warmup {nodes} failed: {warm.stderr[-800:]}")
+            phase, bound = "measured", 180
+            measured = command([str(args.synthetic_bench), str(nodes),
+                                str(args.runs)], timeout=bound)
+            if measured.returncode:
+                raise RuntimeError(f"synthetic {nodes} failed: {measured.stderr[-800:]}")
+            rows = list(csv.DictReader(io.StringIO(measured.stdout)))
+            if len(rows) != 5 * args.runs:
+                raise RuntimeError(f"synthetic {nodes} row count mismatch")
+            outputs.append(measured.stdout)
+            outcomes.append({"nodes": nodes, "status": "complete", "rows": len(rows)})
+        except subprocess.TimeoutExpired as error:
+            partial = error.stdout or b""
+            if isinstance(partial, bytes):
+                partial = partial.decode("utf-8", errors="replace")
+            (output / f"synthetic-{nodes}-{phase}-partial.csv").write_text(partial)
+            outcomes.append({"nodes": nodes, "status": "timeout", "phase": phase,
+                             "timeout_seconds": bound,
+                             "partial_csv": f"synthetic-{nodes}-{phase}-partial.csv"})
+        # Retain each completed size before attempting the next bounded size.
+        (output / "synthetic.csv").write_text(
+            outputs[0] + "".join(part.split("\n", 1)[1] for part in outputs[1:])
+            if outputs else "")
+        (output / "synthetic-outcomes.json").write_text(json.dumps(outcomes, indent=2) + "\n")
+    return outcomes
+
+
+def qualifies(record, args, identity, tools, sources):
+    """Measurement counts alone cannot qualify an unanchored dump query."""
+    try:
+        return bool(record and record.get("passed") and record.get("source_stable") and
+                    record.get("dump_sha256") == digest(args.dump) and
+                    number_va(record.get("entry_va")) == number_va(args.entry) and
+                    number_va(record.get("seed_va")) == number_va(args.seed) and
+                    record.get("tool_sha256", {}).get("cli") == tools["cli"] and
+                    record.get("tool_sha256", {}).get("decoder") == tools["decoder"] and
+                    record.get("source_sha256") == sources and
+                    record.get("report_identity") == identity and
+                    record.get("observations", {}).get("decoded", 0) >= 64 and
+                    record.get("observations", {}).get("slice", 0) > 1)
+    except (AttributeError, KeyError, TypeError, ValueError):
+        return False
+
+
+def number_va(value):
+    return int(value, 16) if isinstance(value, str) else value
 
 
 def save_csv(path, rows):
@@ -175,6 +218,8 @@ def main():
     parser.add_argument("--synthetic-sizes", default="128,256,512",
                         help="ascending comma-separated bounded node counts")
     parser.add_argument("--latency-budget-ms", type=float, required=True)
+    parser.add_argument("--qualification", type=Path,
+                        help="source/tool-bound independent real-capture acceptance record")
     args = parser.parse_args()
     try:
         args.synthetic_sizes = tuple(int(part) for part in
@@ -192,6 +237,10 @@ def main():
         ("cli", args.cli), ("decoder", args.decoder),
         ("stage_bench", args.stage_bench),
         ("synthetic_bench", args.synthetic_bench))}
+    qualification = json.loads(args.qualification.read_text()) if args.qualification else None
+    cpu_model = next((line.split(":", 1)[1].strip() for line in
+                      Path("/proc/cpuinfo").read_text().splitlines()
+                      if line.startswith("model name")), platform.processor())
     record = {"schema": "ariadne-priority-4-measurement-v1",
               "recorded_utc": datetime.now(timezone.utc).isoformat(),
               "host": platform.platform(), "python": sys.version.split()[0],
@@ -201,26 +250,36 @@ def main():
               "synthetic_sizes": args.synthetic_sizes,
               "tool_sha256": tool_sha, "source_sha256": before,
               "artifact_sha256": digest(args.dump),
+              "cpu": {"model": cpu_model, "logical_cpus": os.cpu_count()},
+              "build_profile": "release",
+              "query": {"entry": args.entry, "seed": args.seed, "open_limits": "default",
+                        "prepare_limits": "default", "formats": ["text", "dot", "json"]},
+              "qualification_sha256": digest(args.qualification) if args.qualification else None,
               "passed": False}
     try:
-        real_rows, real = cli_runs("real_chromium", args.dump, args.entry,
+        real_rows, real = cli_runs("real_capture", args.dump, args.entry,
                                    args.seed, args, args.output_dir)
+        record["real"] = real
+        save_csv(args.output_dir / "cli.csv", real_rows)
         stage_rows, stage = stage_runs(args)
         if stage["decoded"] != real["decoded"] or stage["slice"] != real["slice"]:
             raise RuntimeError("stage and CLI semantic counts disagree")
+        record["stage"] = stage
+        (args.output_dir / "stage.csv").write_text(stage_rows)
         startup_rows, startup = cli_runs("stage_b_windows", STAGE_B,
                                          STAGE_B_ENTRY, STAGE_B_SEED,
                                          args, args.output_dir)
         save_csv(args.output_dir / "cli.csv", real_rows + startup_rows)
-        (args.output_dir / "stage.csv").write_text(stage_rows)
-        (args.output_dir / "synthetic.csv").write_text(synthetic_runs(args))
-        qualified = real["decoded"] >= 64 and real["slice"] > 1
+        record["startup"] = startup
+        record["synthetic_outcomes"] = synthetic_runs(args, args.output_dir)
+        qualified = qualifies(qualification, args, real["identity"], tool_sha, before)
         record.update({"real": real, "stage": stage, "startup": startup,
                        "real_workload_target_met": qualified,
                        "decision": "no_change_within_budget" if qualified and
                        real["elapsed_ms"]["median"] <= args.latency_budget_ms
                        else "optimize_candidate" if qualified
-                       else "larger_real_capture_required",
+                       else "larger_real_capture_required" if real["decoded"] < 64
+                       else "real_capture_qualification_required",
                        "csv_sha256": {name: digest(args.output_dir / name)
                                       for name in ("cli.csv", "stage.csv", "synthetic.csv")}})
         record["sources_stable"] = before == source_hashes()

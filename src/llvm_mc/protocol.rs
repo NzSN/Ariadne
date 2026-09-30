@@ -121,25 +121,24 @@ pub(crate) fn invoke(
     count: usize,
     target: super::DecoderTarget,
 ) -> Result<Vec<Raw>, AdapterError> {
-    let (version_arg, decode_arg, expected) = match target {
+    let (decode_arg, expected) = match target {
         super::DecoderTarget::WindowsAmd64 => (
-            "--protocol-version",
-            "--protocol=2",
+            "--protocol=2-checked",
             "ariadne-llvm-mc 20.1.2 protocol 2\n",
         ),
         super::DecoderTarget::LinuxAmd64 => (
-            "--protocol-version=linux",
-            "--protocol=2-linux",
+            "--protocol=2-checked-linux",
             "ariadne-llvm-mc 20.1.2 protocol 2 target x86_64-unknown-linux-gnu\n",
         ),
     };
-    if exchange(path, version_arg, String::new(), 128)? != expected {
-        return Err(error("expected LLVM 20.1.2 protocol 2"));
-    }
     let cap = count
         .checked_mul(MAX_RECORD)
+        .and_then(|cap| cap.checked_add(128))
         .ok_or_else(|| error("batch too large"))?;
     let output = exchange(path, decode_arg, input, cap)?;
+    let output = output
+        .strip_prefix(expected)
+        .ok_or_else(|| error("expected LLVM 20.1.2 protocol 2 checked header"))?;
     if !output.is_empty() && !output.ends_with('\n') {
         return Err(error("unterminated record"));
     }
