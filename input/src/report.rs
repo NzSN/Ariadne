@@ -63,6 +63,7 @@ fn byte_source(source: ByteSource) -> &'static str {
 fn quality(quality: &EffectQuality) -> &'static str {
     match quality {
         EffectQuality::Reviewed => "reviewed",
+        EffectQuality::ExternalLifted => "external_lift",
         EffectQuality::Opaque => "opaque",
         EffectQuality::Unavailable => "unavailable",
     }
@@ -216,7 +217,7 @@ fn site(
     address: Address,
     evidence: &InstructionEvidence,
 ) -> Value {
-    json!({
+    let mut value = json!({
         "va": va(address), "bytes_hex": hex(&evidence.bytes),
         "byte_source": byte_source(evidence.source), "opcode": evidence.opcode,
         "length": evidence.length, "operands": evidence.operands.iter().map(operand).collect::<Vec<_>>(),
@@ -224,7 +225,11 @@ fn site(
         "quality": quality(&evidence.quality), "undefined_flags": evidence.undefined_flags,
         "decoder_record": evidence.decoder_record,
         "issues": site_issues(prepared, address, evidence),
-    })
+    });
+    if let Some(semantic) = &evidence.semantic {
+        value["semantic"] = json!({"backend":semantic.backend,"helper_sha256":semantic.helper_sha256,"runtime_sha256":semantic.runtime_sha256,"projection":semantic.projection,"status":semantic.status,"ast_sha256":semantic.ast_sha256,"fallback":semantic.fallback,"gaps":semantic.gaps});
+    }
+    value
 }
 
 fn register_name(view: &RegisterView) -> String {

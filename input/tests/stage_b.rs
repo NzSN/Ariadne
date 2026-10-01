@@ -71,9 +71,9 @@ fn captured_predecessor_path_yields_address_producer_slice_on_both_platforms() {
         assert_eq!(prepared.materialization.entry_points, [entry].into());
         assert_eq!(prepared.materialization.slice_seeds, [seed].into());
         for (va, opcode, length, quality) in [
-            (entry, "MOV64rr", 3, EffectQuality::Reviewed),
-            (entry + 3, "MOV64rr", 3, EffectQuality::Reviewed),
-            (seed, "MOV32mi", 6, EffectQuality::Reviewed),
+            (entry, "MOV64rr", 3, EffectQuality::ExternalLifted),
+            (entry + 3, "MOV64rr", 3, EffectQuality::ExternalLifted),
+            (seed, "MOV32mi", 6, EffectQuality::ExternalLifted),
             (entry + 12, "RET64", 1, EffectQuality::Opaque),
         ] {
             let evidence = &prepared.prepared.instructions[&va];

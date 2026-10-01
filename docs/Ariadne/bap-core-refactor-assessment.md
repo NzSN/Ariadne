@@ -4,7 +4,13 @@
 
 The [two-stage BAP integration implementation plan](../../Plans/bap-integration.md)
 specifies **Stage 1: semantic backend**, followed by **Stage 2: analysis core**.
-It is plan-only; no BAP runtime acceptance is claimed.
+Stage 1 is now implemented; its [current validation report](bap-stage1-validation.md)
+keeps the missing historical Windows capture explicit. The subsequent
+[LLVM semantic-backend removal](bap-only-removal-validation.md) makes BAP the
+sole minidump semantic producer by user instruction. Stage 2 remains unstarted.
+The [Stage 1 implementation design](bap-semantic-backend-design.md) now records
+the native protocol and projection being implemented; qualification is separate
+from this earlier source/API assessment.
 
 ## Decision in brief
 

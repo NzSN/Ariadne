@@ -149,6 +149,8 @@ impl ByteSnapshot {
                 quality: EffectQuality::Unavailable,
                 undefined_flags: LocationSet::new(),
                 decoder_record: Some(raw.record.clone()),
+                decoder_control: d.kind,
+                semantic: None,
             };
             if d.status == "invalid" {
                 gaps.push(PreparationGap {
@@ -236,6 +238,8 @@ impl ByteSnapshot {
                     quality: EffectQuality::Unavailable,
                     undefined_flags: LocationSet::new(),
                     decoder_record: None,
+                    decoder_control: None,
+                    semantic: None,
                 }
             });
         }

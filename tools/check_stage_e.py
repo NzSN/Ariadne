@@ -17,9 +17,9 @@ def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 def sources():
     paths=set()
-    for directory in ['src','tests','reports/src','reports/tests','input/src','input/tests','input/examples','ir/src','ir/tests','native/llvm_mc','native/llvm_ir','mbt/stage-e']:
+    for directory in ['src','tests','reports/src','reports/tests','input/src','input/tests','input/examples','ir/src','ir/tests','native/llvm_mc','native/llvm_ir','mbt/stage-e','bap/src','bap/tests','native/bap']:
         paths.update(p for p in (ROOT/directory).rglob('*') if p.is_file() and p.suffix!='.md' and not set(p.parts)&{'target','.work','__pycache__','results'})
-    for name in ['Cargo.toml','Cargo.lock','reports/Cargo.toml','reports/Cargo.lock','input/Cargo.toml','input/Cargo.lock','ir/Cargo.toml','ir/Cargo.lock','tools/check_stage_e.py','tools/check_minidump.py','tools/check_minidump_mutations.py','Specs/AriadneMachineState.tla','Specs/AriadneLLVMIR.tla','Specs/AriadneMachineCommon.tla','Specs/AriadneTypes.tla']:
+    for name in ['Cargo.toml','Cargo.lock','reports/Cargo.toml','reports/Cargo.lock','input/Cargo.toml','input/Cargo.lock','ir/Cargo.toml','ir/Cargo.lock','bap/Cargo.toml','bap/Cargo.lock','tools/check_stage_e.py','tools/check_minidump.py','tools/check_minidump_mutations.py','Specs/AriadneMachineState.tla','Specs/AriadneLLVMIR.tla','Specs/AriadneMachineCommon.tla','Specs/AriadneTypes.tla']:
         paths.add(ROOT/name)
     return {str(p.relative_to(ROOT)):sha(p) for p in sorted(paths)}
 
@@ -29,7 +29,7 @@ def main():
     parser.add_argument('--minidump-record',type=Path,help='reuse an already passing minidump record only after exact source-hash verification')
     args=parser.parse_args()
     work=Path(tempfile.mkdtemp(prefix='ariadne-stage-e-completion-'));before=sources()
-    env={**os.environ,'ARIADNE_LLVM_MC':str(ROOT/'target/ariadne-llvm-mc'),'ARIADNE_LLVM_IR':str(ROOT/'target/ariadne-llvm-ir')}
+    env={**os.environ,'ARIADNE_LLVM_MC':str(ROOT/'target/ariadne-llvm-mc'),'ARIADNE_LLVM_IR':str(ROOT/'target/ariadne-llvm-ir'),'ARIADNE_BAP_HELPER':str(ROOT/'target/ariadne-bap-lift'),'BAP_RUNTIME_ROOT':str(ROOT/'tmp/bap-setup/stable')}
     headers=ROOT/'tmp/llvm20-headers/root/usr/include/llvm-20'
     if 'LLVM20_INCLUDE_DIR' not in env and headers.is_dir():env['LLVM20_INCLUDE_DIR']=str(headers)
     graph=ROOT/'tmp/graphviz-headers/root'

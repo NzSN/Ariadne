@@ -1,0 +1,69 @@
+{
+  "schema": "ariadne.bap-high-va-control-probe/v1",
+  "passed": true,
+  "request": "ARIADNE-BAP-LIFT 1 windows-amd64 43d0a7d6259605308634a503be3fb6e8ddf3c1af9404e0f3090fb306b735e446\nbatch 0 1\n0xffff800000001060 7502\n",
+  "actual": [
+    {
+      "schema": "ariadne.bap-ready/v1",
+      "snapshot": "43d0a7d6259605308634a503be3fb6e8ddf3c1af9404e0f3090fb306b735e446",
+      "target": "windows-amd64",
+      "version": "2.5.0-alpha",
+      "lifter": "legacy"
+    },
+    {
+      "schema": "ariadne.bap-site/v1",
+      "batch": 0,
+      "snapshot": "43d0a7d6259605308634a503be3fb6e8ddf3c1af9404e0f3090fb306b735e446",
+      "va": "0xffff800000001060",
+      "status": "decoded",
+      "length": 2,
+      "bytes": "7502",
+      "opcode": "JCC_1",
+      "properties": {
+        "jump": true,
+        "conditional": true,
+        "indirect": false,
+        "call": false,
+        "return": false,
+        "control": true
+      },
+      "bil": [
+        {
+          "kind": "if",
+          "condition": {
+            "kind": "unop",
+            "op": 0,
+            "arg": {
+              "kind": "var",
+              "var": {
+                "name": "ZF",
+                "index": 0,
+                "virtual": false,
+                "width": 1,
+                "type": "imm"
+              }
+            }
+          },
+          "yes": [
+            {
+              "kind": "jump",
+              "target": {
+                "kind": "int",
+                "value": "0xFFFF800000001064:64u"
+              }
+            }
+          ],
+          "no": []
+        }
+      ]
+    },
+    {
+      "schema": "ariadne.bap-batch/v1",
+      "batch": 0,
+      "count": 1
+    }
+  ],
+  "expectedTakenVa": "0xffff800000001064",
+  "helperSha256": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+  "scope": "Native u64 PC and direct-target binding diagnostic, separate from architectural step acceptance"
+}

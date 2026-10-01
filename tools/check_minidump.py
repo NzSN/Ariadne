@@ -14,13 +14,13 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def sources():
     paths = set()
-    for directory in ('src', 'tests', 'native/llvm_mc', 'input/src', 'input/tests', 'input/examples', 'reports/src'):
-        paths.update(p for p in (ROOT / directory).rglob('*') if p.is_file())
+    for directory in ('src', 'tests', 'native/llvm_mc', 'input/src', 'input/tests', 'input/examples', 'reports/src', 'bap/src', 'native/bap'):
+        paths.update(p for p in (ROOT / directory).rglob('*') if p.is_file() and '__pycache__' not in p.parts)
     for pattern in ('Specs/AriadneInput*.tla', 'Specs/Input*.cfg', 'Specs/check-input.sh',
                     'tools/check_minidump*.py'):
         paths.update(ROOT.glob(pattern))
     paths.update(ROOT / p for p in ('Cargo.toml', 'Cargo.lock', 'input/Cargo.toml', 'input/Cargo.lock',
-                                   'reports/Cargo.toml', 'reports/Cargo.lock',
+                                   'reports/Cargo.toml', 'reports/Cargo.lock', 'bap/Cargo.toml', 'bap/Cargo.lock',
                                    'Specs/AriadneMachineCommon.tla', 'Specs/AriadneTypes.tla'))
     return {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(paths)}
 
@@ -29,7 +29,7 @@ def main():
     directory = Path(tempfile.mkdtemp(prefix='ariadne-minidump-acceptance-'))
     print(f'Acceptance artifacts: {directory}', flush=True)
     before = sources()
-    env = {**os.environ, 'ARIADNE_LLVM_MC': str(ROOT / 'target/ariadne-llvm-mc')}
+    env = {**os.environ, 'ARIADNE_LLVM_MC': str(ROOT / 'target/ariadne-llvm-mc'), 'ARIADNE_BAP_HELPER':str(ROOT/'target/ariadne-bap-lift'),'BAP_RUNTIME_ROOT':str(ROOT/'tmp/bap-setup/stable')}
     # The effects regression gate builds the native helper before input-native tests.
     gates = [
         ('effects-regression', ['python3', 'tools/check_effects.py']),

@@ -31,6 +31,7 @@ def main():
     artifacts = Path(tempfile.mkdtemp(prefix='ariadne-minidump-mutations-'))
     print(f'Mutation artifacts: {artifacts}', flush=True)
     env = {**os.environ, 'ARIADNE_LLVM_MC': str(Path(os.environ.get('ARIADNE_LLVM_MC', ROOT / 'target/ariadne-llvm-mc')).resolve())}
+    env.update(ARIADNE_BAP_HELPER=str(ROOT/'target/ariadne-bap-lift'),BAP_RUNTIME_ROOT=str(ROOT/'tmp/bap-setup/stable'))
     reports = []
     for name, file, old, new, suite, test in MUTATIONS:
         # Baseline uses the exact same observer and environment.
@@ -53,6 +54,12 @@ def main():
             shutil.copytree(ROOT / 'reports' / tree, sut / 'reports' / tree)
         for file_name in ('Cargo.toml', 'Cargo.lock'):
             shutil.copy2(ROOT / 'reports' / file_name, sut / 'reports' / file_name)
+        (sut / 'bap').mkdir()
+        shutil.copytree(ROOT / 'bap/src', sut / 'bap/src')
+        for file_name in ('Cargo.toml', 'Cargo.lock'):
+            shutil.copy2(ROOT / 'bap' / file_name, sut / 'bap' / file_name)
+        (sut / 'native/bap').mkdir(parents=True)
+        shutil.copy2(ROOT / 'native/bap/toolchain.lock.json', sut / 'native/bap/toolchain.lock.json')
         (sut / 'input').mkdir()
         for tree in ('src', 'tests'):
             shutil.copytree(ROOT / 'input' / tree, sut / 'input' / tree)

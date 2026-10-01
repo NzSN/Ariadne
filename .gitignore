@@ -36,3 +36,6 @@ _apalache-out/
 /ir/target/
 /bench/target/
 /reports/target/
+
+/bap/target/
+/bap/.work/

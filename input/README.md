@@ -7,7 +7,7 @@ separate from the dependency-free core. PE/ELF images and ELF core files are
 not implemented here.
 
 The supported [minidump investigator CLI](src/bin/ariadne-minidump.rs) now
-joins the reader, reviewed effects, analyzer and renderer into one
+joins the reader, BAP instruction effects, analyzer and renderer into one
 [versioned evidence report](../docs/Ariadne/stage-c-report-schema.md). A
 tool-produced [captured predecessor fixture](../docs/Ariadne/stage-b-c-validation.md)
 demonstrates an earlier address producer reaching the crash-IP seed.
@@ -17,6 +17,12 @@ explicit opaque-call gaps. Its raw dump remains an external, hash-pinned
 artifact rather than a committed fixture.
 The [investigator examples](../docs/Ariadne/minidump-investigator-examples.md)
 show the Linux/Windows CLI commands and the readable instruction overview.
+
+BAP is the sole semantic backend for `FileSnapshot::prepare` and the CLI.
+Build the [BAP helper/runtime](../native/bap/README.md) and LLVM MC decode reference
+first. `prepare_with_bap` accepts an explicit configuration; the ordinary method
+uses `Config::from_env`. No semantic fallback is made to LLVM. The separate
+[Stage 1 removal plan](../Plans/bap-only-semantics.md) defines this change.
 
 ```rust
 use ariadne::effects::PreparationOptions;
@@ -116,6 +122,9 @@ validation currently uses Rust 1.96.0. Root offline tests do not need this packa
 cargo test --offline --locked --manifest-path input/Cargo.toml
 cargo clippy --offline --locked --manifest-path input/Cargo.toml --all-targets -- -D warnings
 
+# Build both the BAP provider and the independent LLVM decode reference.
+python3 native/bap/setup.py
+bash native/bap/build.sh
 # See the LLVM guide for matching headers/runtime setup.
 LLVM20_INCLUDE_DIR=/tmp/ariadne-llvm20/usr/include/llvm-20 \
   bash native/llvm_mc/build.sh

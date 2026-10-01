@@ -13,10 +13,22 @@ name = "ariadne-analysis"
 version = "0.1.0"
 
 [[package]]
+name = "ariadne-bap"
+version = "0.1.0"
+dependencies = [
+ "ariadne-analysis",
+ "ariadne-reports",
+ "serde",
+ "serde_json",
+ "sha2",
+]
+
+[[package]]
 name = "ariadne-input"
 version = "0.1.0"
 dependencies = [
  "ariadne-analysis",
+ "ariadne-bap",
  "ariadne-reports",
  "minidump",
  "serde_json",

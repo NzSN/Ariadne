@@ -2,6 +2,8 @@
 //! The native tool is an explicit dependency of this adapter, never of the core.
 
 mod prepare;
+mod reference;
+pub use reference::decode_captured_batch;
 pub(crate) mod protocol;
 
 use std::collections::{BTreeMap, BTreeSet};

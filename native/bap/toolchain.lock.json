@@ -1,0 +1,44 @@
+{
+  "assets": [
+    {
+      "bytes": 25392,
+      "file": "libbap-dev_2.5.0.deb",
+      "sha256": "1ca25091241400531527219ef2e9b01567d23d7a9d5d6b1dec318e0495875da5"
+    },
+    {
+      "bytes": 10255984,
+      "file": "libbap_2.5.0.deb",
+      "sha256": "d027306e7f3732d0390c8139c435afbd1cab7c7596f052db864598c5484388a4"
+    },
+    {
+      "bytes": 130755392,
+      "file": "bap_2.5.0.deb",
+      "sha256": "d7d615738bac4990ed039d04692eb477e0fd4284cf65f2e43d6918563a2e0293"
+    },
+    {
+      "bytes": 17948,
+      "file": "libffi6_3.2.1-8_amd64.deb",
+      "sha256": "fa26945b0aadfc72ec623c68be9cc59235a7fe42e2388f7015fd131f4fb06dc9"
+    }
+  ],
+  "decoderProvider": "llvm",
+  "files": {
+    "usr/lib/x86_64-linux-gnu/libffi.so.6": "5a675e4f4e40312eebbaf9816e009793a394ae9385115bf10b82b83643f84963",
+    "usr/lib/x86_64-linux-gnu/libffi.so.6.0.4": "5a675e4f4e40312eebbaf9816e009793a394ae9385115bf10b82b83643f84963",
+    "usr/local/bin/bap": "41244a6b207b11518d240fadb8b862160d2f45a4fa79673ebf319a7aeed31e14",
+    "usr/local/include/bap.h": "ad54c7f8aeb4b70020c5d002acce61b2d9d3d45aca9f2bf3c8dc5cc9ef92b24e",
+    "usr/local/lib/bap/bil.plugin": "26da4737961f341e07882cdf768a4d90146c80f235a2ef4080f0f15922644dfd",
+    "usr/local/lib/bap/llvm.plugin": "c78f4c245a7a0b5cd7b52b394a7272e1c97926f4e46bd5fb13e0e14488fcd8a9",
+    "usr/local/lib/bap/x86.plugin": "8b0c0e31e3a4e8d472eaaecf7fff65a09d21df9bc85052b3e97538c04531ff37",
+    "usr/local/lib/libbap.so.2.5.0": "fb03843b065556c791e909b2cd7d1a8e2ef736ed461b6d8979da3f3fd5d6612a"
+  },
+  "nativeApi": "bap-api C bridge hosting the OCaml BAP runtime",
+  "note": "Asset labels and reported build fingerprints differ; qualification is for these exact hashes, not clean-release build provenance.",
+  "releaseAssetTag": "v2.5.0",
+  "reportedCliVersion": "2.5.0-alpha+baa9022",
+  "reportedLibraryVersion": "2.5.0-alpha",
+  "schema": "ariadne.bap-toolchain-lock/v1",
+  "sourceArchiveSha256": "b0f28f00e78958f671d84de918f36be8b068ea2ec4459dc72c6f7fe3a0ecf428",
+  "sourceRevisionReference": "baa9022",
+  "x86Lifter": "legacy"
+}

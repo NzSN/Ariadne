@@ -127,7 +127,10 @@ fn complete_short_prefix_conflict_and_unsupported_control_remain_distinct() {
             PrepareLimits::default(),
         )
         .unwrap();
-    assert_eq!(p.prepared.instructions[&1].quality, EffectQuality::Reviewed);
+    assert_eq!(
+        p.prepared.instructions[&1].quality,
+        EffectQuality::ExternalLifted
+    );
     let r = analyze(p.prepared.request).unwrap();
     assert!(r.state.decoded.contains(&1));
     assert!(!r.state.decoded.contains(&2));
@@ -181,7 +184,7 @@ fn budgets_fail_without_publishing_partial_requests() {
 }
 #[test]
 #[ignore = "requires pinned decoder"]
-fn linux_and_windows_profiles_exercise_the_frozen_effect_registry() {
+fn linux_and_windows_reference_facts_match_the_frozen_decoder_corpus() {
     for linux in [false, true] {
         for row in include_str!("../../tests/fixtures/effects-v2.tsv")
             .lines()
@@ -192,18 +195,19 @@ fn linux_and_windows_profiles_exercise_the_frozen_effect_registry() {
                 .step_by(2)
                 .map(|i| u8::from_str_radix(&hex[i..i + 2], 16).unwrap())
                 .collect();
-            let mut d = Dump::new(linux);
-            d.memory(&[(4096, &bytes)]);
-            let s = open(d);
-            let p = s
-                .prepare(
-                    &query(&[4096], &[]),
-                    &decoder(),
-                    &PreparationOptions::default(),
-                    PrepareLimits::default(),
-                )
-                .unwrap();
-            let evidence = &p.prepared.instructions[&4096];
+            let batch = ariadne::llvm_mc::decode_captured_batch(
+                "frozen-decoder-fixture",
+                &[(4096, Some(bytes))].into(),
+                &decoder(),
+                &PreparationOptions::default(),
+                if linux {
+                    ariadne::llvm_mc::DecoderTarget::LinuxAmd64
+                } else {
+                    ariadne::llvm_mc::DecoderTarget::WindowsAmd64
+                },
+            )
+            .unwrap();
+            let evidence = &batch.sites[&4096].evidence;
             assert_eq!(evidence.decoder_record.as_deref(), Some(expected));
             assert_ne!(evidence.quality, EffectQuality::Unavailable, "{hex}");
         }

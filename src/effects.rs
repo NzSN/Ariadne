@@ -46,6 +46,8 @@ pub enum Operand {
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum EffectQuality {
     Reviewed,
+    /// Tested external lift and scoped projection; not architectural acceptance.
+    ExternalLifted,
     Opaque,
     Unavailable,
 }
@@ -75,6 +77,21 @@ pub struct InstructionEvidence {
     pub undefined_flags: LocationSet,
     /// Raw LLVM facts are retained for inspection; they do not justify kills.
     pub decoder_record: Option<String>,
+    /// Typed decoded control facts, independent of reviewed semantic coverage.
+    pub decoder_control: Option<InstructionKind>,
+    pub semantic: Option<SemanticEvidence>,
+}
+
+#[derive(Clone, Debug)]
+pub struct SemanticEvidence {
+    pub backend: String,
+    pub helper_sha256: String,
+    pub runtime_sha256: String,
+    pub projection: String,
+    pub status: String,
+    pub ast_sha256: Option<String>,
+    pub fallback: Option<String>,
+    pub gaps: Vec<String>,
 }
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct PreparationIdentity {

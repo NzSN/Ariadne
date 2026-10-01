@@ -8,3 +8,4 @@ publish = false
 [dependencies]
 ariadne-analysis = { path = ".." }
 ariadne-input = { path = "../input" }
+ariadne-bap = { path = "../bap" }

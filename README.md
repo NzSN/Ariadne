@@ -9,14 +9,16 @@ they use.
 **Current status: Rust machine-analysis core and formal specifications.** The
 Rust library implements `Specs/Ariadne.tla`: local CFG recovery, may-reaching
 definitions, and backward data slicing from fixed adapter-supplied inputs.
-An optional [LLVM MC byte-span adapter](docs/llvm-mc-adapter.md) now supplies
-decoded control-flow summaries from caller-provided bytes. Its new
-`ByteSnapshot::prepare()` interface adds structured operands, reviewed effects
-and per-site evidence for an [explicit rule registry](docs/Ariadne/operand-effects-rules.md).
-The [Stage A memory-immediate MOV delivery](docs/Ariadne/stage-a-validation.md)
-extends that registry to 139 exact LLVM opcode identities and decodes the
-first instruction of both pinned real-dump fixtures. This does not certify
-their architectural instruction steps or a historical crash path.
+The [BAP adapter](bap/README.md) is now the sole production minidump semantic
+backend. It projects a finite typed-BIL subset into byte-register, flag and
+weak-memory effects. LLVM MC 20 remains an independent decode/control reference;
+its semantic selector and automatic effect fallback have been removed.
+The [Stage 1 removal plan](Plans/bap-only-semantics.md) records the requested
+default change. Unsupported BIL retains explicit opaque/control gaps.
+Historical [LLVM effect-rule research](docs/Ariadne/operand-effects-rules.md)
+and its formal tests remain reference evidence, distinct from production BAP.
+Neither backend establishes architectural instruction-step acceptance or a
+historical crash path. The original Windows workload qualification remains open.
 The separate [minidump input package](input/README.md) now reads Windows/Linux
 AMD64 captures and discovers local instruction starts. A pinned tool-produced
 [predecessor fixture](docs/Ariadne/stage-b-c-validation.md) now yields an

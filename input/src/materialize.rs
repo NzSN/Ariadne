@@ -1,6 +1,6 @@
 use crate::*;
 use ariadne::effects::{EffectQuality, InstructionEvidence, PreparationOptions, PreparedAnalysis};
-use ariadne::llvm_mc::{AdapterError, prepare_captured_batch};
+use ariadne::llvm_mc::AdapterError;
 use ariadne::{
     AddressSet, AnalysisRequest, ByteSource, EdgeKind, InputKind, Instruction, InstructionKind,
     LocationSet,
@@ -57,6 +57,7 @@ pub enum PreparationError {
     Input(InputError),
     Decoder(AdapterError),
     InvalidQuery(&'static str),
+    Backend(String),
     LimitReached {
         reason: &'static str,
         progress: Box<MaterializationReport>,
@@ -68,6 +69,7 @@ impl fmt::Display for PreparationError {
             Self::Input(e) => write!(f, "{e}"),
             Self::Decoder(e) => write!(f, "{e}"),
             Self::InvalidQuery(e) => write!(f, "invalid query: {e}"),
+            Self::Backend(e) => write!(f, "semantic backend: {e}"),
             Self::LimitReached { reason, .. } => write!(f, "materialization limit: {reason}"),
         }
     }
@@ -120,6 +122,8 @@ fn placeholder() -> InstructionEvidence {
         quality: EffectQuality::Unavailable,
         undefined_flags: LocationSet::new(),
         decoder_record: None,
+        decoder_control: None,
+        semantic: None,
     }
 }
 impl FileSnapshot {
@@ -133,6 +137,54 @@ impl FileSnapshot {
         options: &PreparationOptions,
         limits: PrepareLimits,
     ) -> Result<FilePreparedAnalysis, PreparationError> {
+        self.prepare_with_bap(
+            query,
+            decoder,
+            &ariadne_bap::Config::from_env(),
+            options,
+            limits,
+        )
+    }
+
+    /// The sole production semantic backend; the decoder is an independent reference.
+    pub fn prepare_with_bap(
+        &self,
+        query: &AnalysisQuery,
+        decoder: &Path,
+        config: &ariadne_bap::Config,
+        options: &PreparationOptions,
+        limits: PrepareLimits,
+    ) -> Result<FilePreparedAnalysis, PreparationError> {
+        let mut backend = ariadne_bap::Backend::new(config.clone(), decoder)
+            .map_err(|e| PreparationError::Backend(e.to_string()))?;
+        let prepared = self.prepare_with_preparer(query, options, limits, |s, c, o, t| {
+            backend
+                .prepare(s, c, o, t)
+                .map_err(|e| PreparationError::Backend(e.to_string()))
+        })?;
+        backend
+            .finish()
+            .map_err(|e| PreparationError::Backend(e.to_string()))?;
+        Ok(prepared)
+    }
+
+    /// Backend-neutral materialization. Reader-owned captured bytes, local
+    /// discovery, query limits and evidence stay identical across preparers.
+    pub fn prepare_with_preparer<F>(
+        &self,
+        query: &AnalysisQuery,
+        options: &PreparationOptions,
+        limits: PrepareLimits,
+        mut preparer: F,
+    ) -> Result<FilePreparedAnalysis, PreparationError>
+    where
+        F: FnMut(
+            &str,
+            &BTreeMap<Address, Option<Vec<u8>>>,
+            &PreparationOptions,
+            ariadne::llvm_mc::DecoderTarget,
+        ) -> Result<ariadne::llvm_mc::PreparedBatch, PreparationError>,
+    {
         use sha2::{Digest, Sha256};
         if query.entry_points.is_empty() || limits.batch_size == 0 {
             return Err(PreparationError::InvalidQuery(
@@ -207,10 +259,9 @@ impl FileSnapshot {
                 reads.insert(a, read);
                 report.attempted.insert(a);
             }
-            let prepared = prepare_captured_batch(
+            let prepared = preparer(
                 &self.metadata.snapshot_id,
                 &candidates,
-                decoder,
                 options,
                 self.metadata.platform.decoder_target(),
             )?;

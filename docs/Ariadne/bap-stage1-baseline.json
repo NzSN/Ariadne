@@ -1,0 +1,18 @@
+{
+  "sourceRevision": "b3fb3ce0f9f7e9680ed1444c9c86e68a20ea9dbc",
+  "sourceHashes": {
+    "Cargo.toml": "10a7e789d98fc97f26ef1c7fff61ccc4f9969d3d9ecdca44c5a9c1f47943ea65",
+    "Cargo.lock": "f1d5d49897a04815e3b9b1291770c38a71f560329440e4aace6f4a038ddee283",
+    "src/effects.rs": "3bbc00f6e800ca366579306cb90d100043e77b3d2e4d97a9ad14ccc4057e8656",
+    "src/engine.rs": "d59a6874ac3add446fc4aa3c590745c06e0e763890db7a76de43f95af687d6b1",
+    "src/model.rs": "9bccc617340450535872b43515bceef16cfd60891cbd0ebc17349f88ce586f06",
+    "src/llvm_mc.rs": "5ac6e89a2b034e44b3d14b26eb175ccfb57c3aa247abf254ce1e09011929c083",
+    "input/src/materialize.rs": "c00daebf4e9861915ad7a747354eb7125700e4537d412339888f7233a15ab2f4",
+    "input/src/report.rs": "7718360470b319100a37659b221d1e89120d4167fb34d27112b027801678e6f3",
+    "input/src/bin/ariadne-minidump.rs": "3e5a7d5259a8fddb35f13556f1f4d63e2e60c80b6ac17383687e45f66f8944c5",
+    "docs/Ariadne/stage-e-completion-validation.json": "a4cb93afb2a05d23b2c691259137c9e4a1069e1d75e85b0016d18a0e8c4179fc",
+    "docs/Ariadne/priority-4-20260930-after-validation.json": "658f13b6321800bb44a2f3c4ddfffe079fc55c32fe1c11207e2c73d00d553d00",
+    "Plans/bap-integration.md": "e26edc001fca670e6572b1ec5219c22d842fcf8cbd8d777bc3cde89e42fac184"
+  },
+  "scope": "BAP Stage 1 pre-change baseline; existing acceptance records preserved"
+}

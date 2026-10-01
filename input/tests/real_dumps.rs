@@ -63,7 +63,7 @@ fn real_windows_and_linux_crash_artifacts_preserve_bytes_and_report_semantic_gap
         assert_eq!(p.reads[&rip].bytes.len(), 15);
         let evidence = &p.prepared.instructions[&rip];
         assert_eq!(evidence.opcode.as_deref(), Some(opcode));
-        assert_eq!(evidence.quality, EffectQuality::Reviewed);
+        assert_eq!(evidence.quality, EffectQuality::ExternalLifted);
         assert_eq!(evidence.source, ByteSource::Captured);
         assert_eq!(evidence.length, length);
         assert_eq!(evidence.bytes, p.reads[&rip].bytes[..length as usize]);
@@ -105,13 +105,18 @@ fn real_windows_and_linux_crash_artifacts_preserve_bytes_and_report_semantic_gap
             for site in [rip + 6, rip + 7] {
                 assert_eq!(
                     p.prepared.instructions[&site].quality,
-                    EffectQuality::Opaque
+                    if site == rip + 6 {
+                        EffectQuality::ExternalLifted
+                    } else {
+                        EffectQuality::Opaque
+                    }
                 );
-                assert!(
+                assert_eq!(
                     p.prepared
                         .gaps
                         .iter()
-                        .any(|gap| gap.address == site && gap.reason == GapReason::OpaqueEffects)
+                        .any(|gap| gap.address == site && gap.reason == GapReason::OpaqueEffects),
+                    site == rip + 7
                 );
             }
         } else {

@@ -1,7 +1,7 @@
 # BAP integration plan: semantic backend, then analysis core
 
 Prepared **2026-10-01** against Ariadne `818f93e`.
-Status: **plan only; implementation has not started**.
+Status: **Stage 1 implemented; final qualification awaits the pinned Windows capture. Stage 2 has not started**.
 Design basis: [BAP assessment](../docs/Ariadne/bap-core-refactor-assessment.md),
 [current effect contract](../docs/Ariadne/operand-effects-design.md), and
 [Stage E contracts](../docs/Ariadne/stage-e-report-contracts.md).
@@ -12,11 +12,16 @@ Stage 2 depends on a passing Stage 1 record. Partial acceptance does not
 satisfy that dependency. Existing Stage D ISA proofs and Stage F universal
 refinement remain independent research obligations.
 
+The [Stage 1 protocol/projection implementation design](../docs/Ariadne/bap-semantic-backend-design.md)
+records the selected isolated C bridge hosting BAP's OCaml runtime, actual
+release-asset fingerprints and conservative admission policy. S0 uses pinned
+official assets rather than modifying the user's existing OCaml switches.
+
 ## Architecture and boundaries
 
 ```mermaid
 flowchart TD
-    Capture["Ariadne captured snapshot and explicit roots"] --> BAP["Pinned OCaml/BAP helper"]
+    Capture["Ariadne captured snapshot and explicit roots"] --> BAP["Pinned BAP/OCaml runtime helper"]
     BAP --> Project["Validated effects, control and source attribution"]
     Project --> Rust["Stage 1: current Rust core"]
     Project --> Core["Stage 2: BAP-owned analysis passes"]
@@ -24,12 +29,15 @@ flowchart TD
     Core --> Reports
 ```
 
-Use a separate OCaml/BAP helper process and optional Rust adapter package.
+Host the packaged BAP/OCaml runtime in a separate C++ helper process and use
+an optional Rust adapter package.
 Keep the root analysis crate dependency-free. Proposed ownership:
 `native/bap/` for toolchain/helper/passes, `bap/` for the Rust protocol and
 backend facade, `input/` for captured input/query orchestration, `reports/`
-for output, and `mbt/` for generated replay. These names and CLI options below
-are proposals, not existing commands or interfaces.
+for output, and `mbt/` for generated replay. The
+[Stage 1 follow-up](bap-only-semantics.md) removes backend selection and LLVM
+semantic fallback; BAP is the sole minidump provider. Stage 2
+paths/options remain proposals.
 
 The initial scope remains Linux-host investigation of Windows/Linux AMD64
 minidumps under the current user64 effect assumptions. Preserve captured-byte
@@ -180,6 +188,20 @@ and [driver API](https://binaryanalysisplatform.github.io/bap/api/master/bap/Bap
 are primary references; master API documentation must be checked against the
 selected build.
 
-This request authorizes the plan. Implementation has not started. The next
-execution task is **S0**, followed by Stage 1 in order; Stage 2 follows its
-acceptance gate. Commit/push remains a separate publication action.
+## Stage 1 execution status
+
+The [implementation and validation report](../docs/Ariadne/bap-stage1-validation.md)
+and [machine-readable record](../docs/Ariadne/bap-stage1-validation.json)
+track the selected build. S0–S3 are implemented. S4 exercises 34 native BIL
+cases, strict transport, both platform fixtures, full-state model replay,
+15 real producer/adapter mutants, and the existing Rust/Stage E regression.
+S5 includes startup/lift/projection/analysis/render timing and a controlled
+coverage benefit, with one warm-up and five release-build repeats.
+
+**Stage 1 remains partial at its exit gate:** the original hash-pinned
+98-instruction Windows capture is unavailable for a fresh selected-backend
+acceptance and same-query workload comparison. The existing historical LLVM
+record does not qualify the new BAP path. The user has separately authorized
+removing the LLVM semantic backend and selecting BAP. Keep Stage 2 unqualified
+until the missing S4/S5 evidence is retained; default selection is not qualification. Commit/push remains
+a separate publication action.

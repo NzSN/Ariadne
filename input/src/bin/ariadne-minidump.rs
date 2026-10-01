@@ -8,7 +8,7 @@ use std::io::{self, Write};
 use std::path::{Path, PathBuf};
 
 fn usage() -> &'static str {
-    "usage: ariadne-minidump DUMP --decoder PATH --entry VA_HEX [--entry VA_HEX ...] [--seed VA_HEX ...] [--seed-exception-rip] [--max-starts N] [--stateflow-input SEMANTICS_JSON] (--format text|dot|json | --output-dir NEW_DIR)"
+    "usage: ariadne-minidump DUMP --decoder-reference PATH --entry VA_HEX [--entry VA_HEX ...] [--seed VA_HEX ...] [--seed-exception-rip] [--max-starts N] [--stateflow-input SEMANTICS_JSON] [--bap-helper PATH] [--bap-runtime DIR] (--format text|dot|json | --output-dir NEW_DIR)"
 }
 fn invalid(message: impl Into<String>) -> io::Error {
     io::Error::new(io::ErrorKind::InvalidInput, message.into())
@@ -41,6 +41,8 @@ struct Args {
     format: Option<ReportFormat>,
     output_dir: Option<PathBuf>,
     stateflow_input: Option<PathBuf>,
+    bap_helper: Option<PathBuf>,
+    bap_runtime: Option<PathBuf>,
 }
 fn arguments() -> Result<Args, Box<dyn Error>> {
     let mut args = std::env::args_os().skip(1);
@@ -57,6 +59,8 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
     let mut format = None;
     let mut output_dir = None;
     let mut stateflow_input = None;
+    let mut bap_helper = None;
+    let mut bap_runtime = None;
     while let Some(flag) = args.next() {
         let flag = flag
             .to_str()
@@ -70,7 +74,9 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
         }
         let value = args.next().ok_or_else(|| invalid(usage()))?;
         match flag {
-            "--decoder" if decoder.is_none() => decoder = Some(PathBuf::from(value)),
+            "--decoder-reference" | "--decoder" if decoder.is_none() => {
+                decoder = Some(PathBuf::from(value))
+            }
             "--entry" => {
                 entries.insert(parse_va(
                     value.to_str().ok_or_else(|| invalid("non-UTF-8 VA"))?,
@@ -99,6 +105,14 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
                 });
             }
             "--output-dir" if output_dir.is_none() => output_dir = Some(PathBuf::from(value)),
+            "--semantics-backend" => {
+                return Err(invalid(
+                    "--semantics-backend was removed; BAP is the sole minidump semantic backend",
+                )
+                .into());
+            }
+            "--bap-helper" if bap_helper.is_none() => bap_helper = Some(PathBuf::from(value)),
+            "--bap-runtime" if bap_runtime.is_none() => bap_runtime = Some(PathBuf::from(value)),
             "--stateflow-input" if stateflow_input.is_none() => {
                 stateflow_input = Some(PathBuf::from(value))
             }
@@ -118,6 +132,8 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
         format,
         output_dir,
         stateflow_input,
+        bap_helper,
+        bap_runtime,
     })
 }
 
@@ -189,15 +205,20 @@ fn run() -> Result<(), Box<dyn Error>> {
             .ok_or_else(|| invalid("exception context has no valid RIP"))?;
         args.seeds.insert(*rip);
     }
-    let prepared = snapshot.prepare(
-        &AnalysisQuery {
-            entry_points: args.entries,
-            slice_seeds: args.seeds,
-        },
-        &args.decoder,
-        &PreparationOptions::default(),
-        args.limits,
-    )?;
+    let query = AnalysisQuery {
+        entry_points: args.entries,
+        slice_seeds: args.seeds,
+    };
+    let options = PreparationOptions::default();
+    let mut config = ariadne_bap::Config::from_env();
+    if let Some(helper) = args.bap_helper {
+        config.helper = helper;
+    }
+    if let Some(runtime) = args.bap_runtime {
+        config.runtime = runtime;
+    }
+    let prepared =
+        snapshot.prepare_with_bap(&query, &args.decoder, &config, &options, args.limits)?;
     let mut analyzer = ariadne::Analyzer::new(prepared.prepared.request.clone())?;
     while analyzer.step() {}
     let mut stateflow = if let Some(path) = args.stateflow_input {

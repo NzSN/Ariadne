@@ -1,7 +1,7 @@
 # Ariadne checkpoints
 
-Updated **2026-10-01** for completed Stage E conformance, handoffs and report/CLI
-acceptance, following the first MirrorRust integration and Priority 4 delivery. The Stage D 49-case gate remains intact at **0/49** as a
+Updated **2026-10-01** for BAP-only minidump semantics and the separate partial
+Stage 1 exit gate, following Stage E completion, MirrorRust integration and Priority 4 delivery. The Stage D 49-case gate remains intact at **0/49** as a
 long-term formal purpose. Earlier entries retain their historical,
 time-local commit and validation status.
 
@@ -29,8 +29,55 @@ flowchart TD
     T["2026-10-01 · working tree<br/>518ed9e · Stage E typed MirrorRust ports; two-fixture replay"]
     A --> B --> C --> D --> E --> F --> G --> H --> I --> J --> K --> L --> M --> N --> O --> P --> Q --> R --> S
     U["2026-10-01 · source-bound working tree<br/>Stage E complete: generated replay, mutations, reports/CLI"]
-    S --> T --> U
+    V["2026-10-01 · working tree<br/>BAP Stage 1 implemented; Windows acceptance still required"]
+    W["2026-10-01 · working tree<br/>LLVM semantic backend removed; BAP-only default"]
+    S --> T --> U --> V --> W
 ```
+
+## 2026-10-01 — LLVM semantic backend removed
+
+Following the user's removal instruction, BAP is the sole semantic producer for
+normal minidump CLI/library preparation. The semantic selector and automatic
+LLVM effect fallback are removed. LLVM MC remains an independent decoded-fact
+reference, with no production uses/defs/rules from its legacy semantic layer.
+Historical effect-rule research and the separate supplied LLVM IR path remain.
+The [removal plan](Plans/bap-only-semantics.md) and
+[current record](docs/Ariadne/bap-only-removal-validation.json) identify the scope.
+
+All **16 removal gates** pass against **93 stable current hashes**, including
+**12 Stage E regression gates**, **99 model observations** and **16 producer/adapter
+mutants**. BIL-only immediate-store coverage preserves both platform producer
+fixtures; partial-register self-move definitions remain explicit. The retained
+real Linux query still has 34 decoded instructions, 45 edges and a 28-site slice.
+The [validation report](docs/Ariadne/bap-only-removal-validation.md) records
+remaining gaps and workload samples.
+
+The explicit default change does not complete the missing original Windows
+98-instruction qualification or its 2,000 ms condition. Stage 2 remains
+unstarted and unqualified; Stage D remains **0/49**. Validation was retained
+before the user-authorized commit.
+
+## 2026-10-01 — BAP Stage 1 implementation
+
+The [BAP integration plan](Plans/bap-integration.md) now has an optional semantic
+backend feeding the existing Rust core. A hash-pinned isolated BAP helper,
+strict Rust transport, conservative BIL projection, shared captured-preparation
+seam, CLI selector and per-site reports are implemented. LLVM remains default.
+
+The [current record](docs/Ariadne/bap-stage1-validation.json) passes all
+**16 implementation gates** with **92 stable source hashes**. Its finite corpus
+contains 34 native BIL cases and 23 admitted opcode forms. Independent model
+replay compares all nine fields for **99 observations**, all **15 producer/adapter
+mutants** are detected, and a fresh **12-gate Stage E regression** passes.
+Release workload evidence shows a controlled NOT coverage gain and preserves
+the real 34-site Linux analysis, at a measured median cost of about 645 ms.
+
+**Stage 1's exit remains partial:** fresh BAP acceptance and timing on the
+original hash-pinned 98-instruction Windows capture are unavailable. The
+[validation report](docs/Ariadne/bap-stage1-validation.md) identifies the missing
+S4/S5 clause and rerun command. The 2,000 ms default-promotion target is preserved.
+Stage 2 remains unstarted and unqualified; Stage D stays **0/49**. These Stage 1
+implementation changes are uncommitted.
 
 ## 2026-10-01 — Stage E completion
 
