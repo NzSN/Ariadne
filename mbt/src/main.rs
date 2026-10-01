@@ -140,19 +140,19 @@ fn execute() -> Result<bool, Box<dyn std::error::Error>> {
             .iter()
             .all(|fixture| e.fixtures.iter().filter(|f| f.as_str() == *fixture).count() >= 2);
     let mismatch = match &result {
-        Err(Error::StepMismatch {
+        Err(NegotiatedError::Legacy(Error::StepMismatch {
             action,
             expected,
             actual,
             hints,
             ..
-        }) => Some(json!({
+        })) => Some(json!({
             "action": action, "expected": encode_state(expected), "actual": encode_state(actual),
             "hints": format!("{hints:?}"),
         })),
         _ => None,
     };
-    let rejection = matches!(&result, Err(Error::Registration { code, .. }) if code == "interface_digest_mismatch");
+    let rejection = matches!(&result, Err(NegotiatedError::Registration { code, .. }) if code == "interface_digest_mismatch");
     let passed = match mode.as_str() {
         "good" => {
             result.is_ok()

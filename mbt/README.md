@@ -1,5 +1,12 @@
 # Model-based tests for Ariadne
 
+The separate [Stage E MirrorRust integration](stage-e/README.md) provides typed
+ports for machine-state and LLVM IR analysis. Its two-fixture gate is separate
+from the core replay/mutation gate below.
+The [installed-server compatibility record](../docs/Ariadne/installed-modelmirrors-compatibility.md)
+checks the current local ModelMirrors executable with the integrated MirrorRust
+client, independently of the prepared toolchain used by the normal runner.
+
 This integration uses the compiler-generated `mirrorrust-v1` binding described
 in the [Rust target contract](../../Mirrors/Docs/model-interface-compiler/rust-target.md).
 The evaluator requires an exact interface digest match before constructing the

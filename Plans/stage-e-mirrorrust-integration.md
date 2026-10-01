@@ -1,0 +1,34 @@
+# Stage E: first MirrorRust integration stage
+
+Prepared 2026-10-01. Design: [typed replay integration](../docs/Ariadne/stage-e-mirrorrust-design.md).
+
+This stage connects the two existing Stage E Rust engines to the sibling
+`MirrorRust` checkout. It does not close the broader Stage E acceptance campaign.
+
+Completed 2026-10-01. The [retained validation record](../docs/Ariadne/stage-e-mirrorrust-integration-validation.json)
+contains four complete Stage E fixture traces and 20 matched observations,
+both pre-factory wrong-digest rejections, seven supporting tests, formatting
+and Clippy checks. The restored core gate also passed its 12 traces,
+168 matched states and five mechanical mutation checks. All six steps below
+are delivered within this first-stage scope.
+
+1. Restore the existing core harness against MirrorRust's negotiated error API
+   and rerun its unchanged corpus and mutation gate.
+2. Add an independent `mbt/stage-e` Cargo package with compiler-generated
+   `mirrorrust-v1` ports for machine-state and LLVM IR. Keep the core dependency-free.
+3. Instantiate the authoritative Stage E models and existing example inputs.
+   Select the lowest enabled address for machine-state propagation. Export
+   every mutable field and the public derived result observations.
+4. Generate type witnesses, reviewed interface locks and typed bindings using
+   Apalache and the existing prepared Mirrors compiler. Preserve raw witnesses;
+   encode the full address map losslessly, including empty entries.
+5. Implement observers over actual Rust engines and deferred negotiated
+   factories. Test initialization, transitions, malformed actions, repeated
+   initialization, completion, and field-preserving observations.
+6. Exercise both fixture traces through real negotiated MirrorRust replay and
+   require wrong-digest rejection before adapter creation. Record source/tool
+   identities and clarify the bounded fixture scope.
+
+Further Stage E work: expand generated input/trace coverage, mechanical engine
+mutants and retained mismatch evidence, recovery/native-adapter coverage, and
+independent report/CLI integration. Fixture replay alone is not Stage E completion.

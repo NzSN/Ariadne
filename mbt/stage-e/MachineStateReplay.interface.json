@@ -1,0 +1,86 @@
+{
+  "schema": "mirrors.model-interface/v1",
+  "interfaceVersion": "1.0.0",
+  "model": {
+    "module": "MachineStateReplay",
+    "source": "MachineStateReplay.tla"
+  },
+  "wire": {
+    "actionVariable": "action_taken",
+    "parameterVariable": "parameters"
+  },
+  "initializers": [
+    {
+      "id": "Initialize",
+      "wireAction": "init",
+      "wireAliases": [],
+      "inputs": []
+    }
+  ],
+  "actions": [
+    {
+      "id": "Propagate",
+      "wireAction": "propagate",
+      "wireAliases": [],
+      "inputs": []
+    },
+    {
+      "id": "FinishStateflow",
+      "wireAction": "finishStateflow",
+      "wireAliases": [],
+      "inputs": []
+    }
+  ],
+  "observations": [
+    {
+      "id": "SnapshotId",
+      "wireName": "snapshot_id",
+      "provenance": "implementation"
+    },
+    {
+      "id": "Phase",
+      "wireName": "phase",
+      "provenance": "implementation"
+    },
+    {
+      "id": "StatesAt",
+      "wireName": "statesAt",
+      "provenance": "implementation"
+    },
+    {
+      "id": "StructuralEdges",
+      "wireName": "structural_edges",
+      "provenance": "implementation"
+    },
+    {
+      "id": "FeasibleEdges",
+      "wireName": "feasible_edges",
+      "provenance": "implementation"
+    },
+    {
+      "id": "InfeasibleEdges",
+      "wireName": "infeasible_edges",
+      "provenance": "implementation"
+    },
+    {
+      "id": "UnknownEdges",
+      "wireName": "unknown_edges",
+      "provenance": "implementation"
+    },
+    {
+      "id": "Terminals",
+      "wireName": "terminals",
+      "provenance": "implementation"
+    },
+    {
+      "id": "NotReached",
+      "wireName": "not_reached",
+      "provenance": "implementation"
+    },
+    {
+      "id": "Obligations",
+      "wireName": "obligations",
+      "provenance": "implementation"
+    }
+  ]
+}

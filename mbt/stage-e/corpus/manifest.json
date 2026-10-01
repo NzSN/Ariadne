@@ -1,0 +1,51 @@
+{
+  "artifacts": {
+    "corpus/LLVMIRReplay.itf.json": "0c7b144312c61afa4bf5fad86ed02ffd389083503d29faebf0434c8aef84703e",
+    "corpus/LLVMIRReplay.lock.json": "faf812056995340c6ebed695d871827d2024896b85fe5e36ff53cc8ac594e2e2",
+    "corpus/LLVMIRReplay.raw-types.json": "be31eec4c65884bf732697d48bdf7bbb26c729cba6b5f70c703f970fcffb0229",
+    "corpus/LLVMIRReplay.raw.json": "0c7b144312c61afa4bf5fad86ed02ffd389083503d29faebf0434c8aef84703e",
+    "corpus/LLVMIRReplay.tlc.json": "4e4bf490ea353d591d75ac860bd4d81db84a2f5929654ad97594dcde16996b07",
+    "corpus/LLVMIRReplay.types.json": "be31eec4c65884bf732697d48bdf7bbb26c729cba6b5f70c703f970fcffb0229",
+    "corpus/MachineStateReplay.itf.json": "fe8ef8023e9a5459ac7d2c8df35d6000385b8bf3b7ca046d5f91bd5706e5f3bf",
+    "corpus/MachineStateReplay.lock.json": "df6538724d603ce52ae34fa2de3adcbaa475ab9e1b2764015419c4adb0db6c43",
+    "corpus/MachineStateReplay.raw-types.json": "235c3e0b1b7e626320c4a0b24930aa1239f7c73072581489e2eef1f2dc43fe23",
+    "corpus/MachineStateReplay.raw.json": "798129cca59f2c53fe97ff1bba244cbcd17d22c6e3068fb8005355cd71e5bb89",
+    "corpus/MachineStateReplay.tlc.json": "2c4dd6e0d8fc2113bddfe360d9f866ed2803f9342d0f59afc4a2f13e4f531109",
+    "corpus/MachineStateReplay.types.json": "c1c40981ab87ede451978bb59a6a8f295fe6873319f8e1d8a8b79ec82fe2d26b",
+    "generated/llvm_ir/.model-interface-generated.json": "36e78317fa200670544704ef5f7998243aa569c7e586ef6480b62f6602d02e93",
+    "generated/llvm_ir/LLVMIRReplayMirror.generated.rs": "a5fbcc8da254caa0e60a579bd485122e181f4b23684dc49a9d35bd23e8a10b47",
+    "generated/machine_state/.model-interface-generated.json": "663d57ea4fb90faabc13ae73d8159da0f9ae7d80ac1774c87c6e5bcbc5e31495",
+    "generated/machine_state/MachineStateReplayMirror.generated.rs": "75d2b842eeab9940d85e6cb8716243901d553d21562e477bed746d72b35fa2e2"
+  },
+  "generation": {
+    "apalache": "0.61.0",
+    "compilerSha256": "562a271ede8cf932bd8b18a81eb772bd403703a58ff5766929a394e848df9ed3",
+    "scope": "two existing formal fixtures; no Rust SUT executed during generation",
+    "tlc": [
+      "",
+      "",
+      "\u001b[1mSYNOPSIS\u001b[0m",
+      ""
+    ]
+  },
+  "oracleSources": {
+    "Specs/AriadneLLVMIR.tla": "d67c63270444125bdef4dde1c8284d13d0b5706f14ec9cd2336c5cd7f8b04a54",
+    "Specs/AriadneLLVMIRExample.tla": "c812c7638e2a9e619059cf15d700758e94872ec6cf1ec1b8949cfb3f7517f95d",
+    "Specs/AriadneMachineCommon.tla": "32b60854773c7c14e06e449300a9757fefdfbfc763a0f58ef4574f1edd019947",
+    "Specs/AriadneMachineState.tla": "7edb33e3d03e1a91c015489ef670d2d37654a7ce8a4cdec927d3a834ffec9fe7",
+    "Specs/AriadneMachineStateExample.tla": "24e4b5bf4d7792d379705d0cc0bbf704178f8de40dab6e382b44d270b1e04eff",
+    "Specs/AriadneTypes.tla": "3bfb36f3bf96adc324a9c714d34a12af708d0e7daaba91a5a1ae5f79f2820329",
+    "mbt/generate.py": "fd2c499fd27c1196622151eb633578694b724c88863a33c9d7390a88a2233228",
+    "mbt/stage-e/LLVMIRReplay.interface.json": "44bbca62fd6e5dcba7fecd869e0e231cfe5aa021d4179e5095ae3c6cd79e4954",
+    "mbt/stage-e/MachineStateReplay.interface.json": "46b693520c6dd4fe5397e2382e8a74dc6cae1ac8f5a06aa353cf2b86ed8ecb00",
+    "mbt/stage-e/model/LLVMIRReplay.tla": "0b80b3fa6f7fc52a0026920a432b507c71adae3726dca4e833ba86b5b488ed14",
+    "mbt/stage-e/model/MachineStateReplay.tla": "36f3187987547fdf9fcb1dfdcaf8a5fc00469690410e91b57d5fe205f7c71017",
+    "mbt/stage-e/prepare.py": "ffd91fc8796c426e0eaa30dfae6440ce453734f1249cf0d80d87cc9d34595c0b",
+    "mbt/tools.py": "1d3a36db33e17c183f0584929704161ab8a5a0ef359c4412fc6d765c647f83d4"
+  },
+  "schema": "ariadne.stage-e-mirrorrust-corpus/v1",
+  "traceStates": {
+    "LLVMIRReplay": 5,
+    "MachineStateReplay": 5
+  }
+}

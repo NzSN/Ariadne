@@ -63,8 +63,14 @@ machine-code lifting or IR/machine address correspondence.
 
 ## Remaining Stage E acceptance
 
-The requested generated model-based replay against **all observable** TLA+
-state fields is still open for both paths. The focused Rust fixtures and
+The [first MirrorRust integration stage](../../mbt/stage-e/README.md), added
+2026-10-01, now replays the existing machine-state and LLVM IR examples through
+separate compiler-generated ports, including all mutable fields and declared
+derived observations. Its [source-bound record](stage-e-mirrorrust-integration-validation.json)
+retains repeated initialization, exact-digest admission and port ownership.
+The broader generated model-based replay campaign remains open for both paths:
+additional scenarios and mechanical implementation mutants are still needed.
+The focused Rust fixtures and
 separate Apalache/TLC runs agree on their stated examples but are not a
 universal implementation-to-model comparison. Neither new result family is
 yet exposed through the minidump CLI. These limitations keep Stage E

@@ -1,0 +1,188 @@
+{
+  "#meta": {
+    "description": "Created by Apalache on Thu Oct 01 08:44:20 CST 2026",
+    "format": "ITF",
+    "format-description": "https://apalache-mc.org/docs/adr/015adr-trace.html",
+    "varTypes": {
+      "action_taken": "Str",
+      "artifact_id": "Str",
+      "call_graph": "Set({ callee: Str, kind: Str, site: Str })",
+      "control_graph": "Set({ dst: Str, kind: Str, src: Str })",
+      "dependency_preds": "(Str -> Set(Str))",
+      "function_id": "Str",
+      "module_id": "Str",
+      "obligations": "Set({ reason: Str, site: Str })",
+      "parameters": "{ fixture: Str }",
+      "phase": "Str",
+      "slice": "Set(Str)"
+    }
+  },
+  "states": [
+    {
+      "#meta": {
+        "index": 0
+      },
+      "action_taken": "init",
+      "artifact_id": "fixture.bc.sha256",
+      "call_graph": {
+        "#set": [
+          {
+            "callee": "possible.callee",
+            "kind": "call",
+            "site": "join.call"
+          }
+        ]
+      },
+      "control_graph": {
+        "#set": [
+          {
+            "dst": "join",
+            "kind": "next",
+            "src": "left"
+          },
+          {
+            "dst": "join",
+            "kind": "next",
+            "src": "right"
+          },
+          {
+            "dst": "left",
+            "kind": "true",
+            "src": "entry"
+          },
+          {
+            "dst": "right",
+            "kind": "false",
+            "src": "entry"
+          }
+        ]
+      },
+      "dependency_preds": {
+        "#map": [
+          [
+            "entry.br",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "join.call",
+            {
+              "#set": [
+                "join.phi"
+              ]
+            }
+          ],
+          [
+            "join.combine",
+            {
+              "#set": [
+                "join.load",
+                "join.phi"
+              ]
+            }
+          ],
+          [
+            "join.load",
+            {
+              "#set": [
+                "join.call",
+                "left.store",
+                "right.store"
+              ]
+            }
+          ],
+          [
+            "join.phi",
+            {
+              "#set": [
+                "left.def",
+                "right.def"
+              ]
+            }
+          ],
+          [
+            "join.ret",
+            {
+              "#set": [
+                "join.combine"
+              ]
+            }
+          ],
+          [
+            "left.br",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "left.def",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "left.store",
+            {
+              "#set": [
+                "left.def"
+              ]
+            }
+          ],
+          [
+            "right.br",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "right.def",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "right.store",
+            {
+              "#set": [
+                "right.def"
+              ]
+            }
+          ]
+        ]
+      },
+      "function_id": "fixture-function",
+      "module_id": "fixture-module",
+      "obligations": {
+        "#set": [
+          {
+            "reason": "call-targets",
+            "site": "join.call"
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "LLVMIRReplay"
+      },
+      "phase": "slice",
+      "slice": {
+        "#set": [
+          "join.ret"
+        ]
+      }
+    }
+  ],
+  "vars": [
+    "phase",
+    "artifact_id",
+    "call_graph",
+    "function_id",
+    "dependency_preds",
+    "control_graph",
+    "action_taken",
+    "parameters",
+    "slice",
+    "module_id",
+    "obligations"
+  ]
+}

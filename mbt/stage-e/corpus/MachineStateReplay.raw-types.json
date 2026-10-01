@@ -1,0 +1,190 @@
+{
+  "#meta": {
+    "description": "Created by Apalache on Thu Oct 01 08:44:10 CST 2026",
+    "format": "ITF",
+    "format-description": "https://apalache-mc.org/docs/adr/015adr-trace.html",
+    "varTypes": {
+      "action_taken": "Str",
+      "feasible_edges": "Set({ dst: Int, kind: Str, src: Int })",
+      "infeasible_edges": "Set({ dst: Int, kind: Str, src: Int })",
+      "not_reached": "Set(Int)",
+      "obligations": "Set({ reason: Str, site: Int })",
+      "parameters": "{ fixture: Str }",
+      "phase": "Str",
+      "snapshot_id": "Str",
+      "statesAt": "(Int -> Set(Str))",
+      "structural_edges": "Set({ dst: Int, kind: Str, src: Int })",
+      "terminals": "Set({ after: Str, before: Str, outcome: Str, site: Int })",
+      "unknown_edges": "Set({ dst: Int, kind: Str, src: Int })"
+    }
+  },
+  "states": [
+    {
+      "#meta": {
+        "index": 0
+      },
+      "action_taken": "init",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "1"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "MachineStateReplay"
+      },
+      "phase": "stateflow",
+      "snapshot_id": "machine-state-snapshot",
+      "statesAt": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            {
+              "#set": [
+                "entry"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": []
+      },
+      "unknown_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "vars": [
+    "phase",
+    "unknown_edges",
+    "action_taken",
+    "parameters",
+    "terminals",
+    "structural_edges",
+    "feasible_edges",
+    "infeasible_edges",
+    "not_reached",
+    "obligations",
+    "snapshot_id",
+    "statesAt"
+  ]
+}

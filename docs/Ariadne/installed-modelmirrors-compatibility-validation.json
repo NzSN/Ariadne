@@ -1,0 +1,3315 @@
+{
+  "checks": {
+    "core-discover-call-targets": {
+      "command": [
+        "/home/nzsn/Repos/Ariadne/mbt/.work/replay-dtwga0yx/discover-call-targets/ariadne-mbt",
+        "mutant",
+        "/home/nzsn/.local/bin/ModelMirrors",
+        "/home/nzsn/Repos/Ariadne/mbt/.work/replay-dtwga0yx/model/AriadneReplay.tla",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/AriadneReplay.lock.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Binary.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Dump.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Loop.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Closed.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Pipeline.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Calls.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Binary.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Dump.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Loop.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Closed.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Pipeline.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Calls.itf.json"
+      ],
+      "executableSha256": "a3f7d82a5f53741a2265d9d36c32bd5f165f1f6889c1415fefd51c33b4920d1d",
+      "exitCode": 0,
+      "report": {
+        "adapterId": "ariadne.machine-analysis/v1",
+        "bindingImplementation": "compiler-generated",
+        "cleanupMechanism": "Rust Drop of generated binding port",
+        "completedTraces": 3,
+        "coverageSatisfied": false,
+        "error": "step mismatch on action \"visit\": expected {\"decoded\":[1,2,3,4],\"edges\":[{\"dst\":2,\"kind\":\"fallthrough\",\"src\":1},{\"dst\":3,\"kind\":\"taken\",\"src\":1},{\"dst\":4,\"kind\":\"next\",\"src\":2},{\"dst\":4,\"kind\":\"indirect\",\"src\":3},{\"dst\":5,\"kind\":\"summary\",\"src\":4},{\"dst\":6,\"kind\":\"call\",\"src\":4}],\"fixture_id\":\"Closed\",\"obligations\":[],\"pending\":[5],\"phase\":\"recover\",\"provenance\":[{\"source\":\"captured\",\"va\":1},{\"source\":\"file\",\"va\":2},{\"source\":\"captured\",\"va\":3},{\"source\":\"captured\",\"va\":4},{\"source\":\"unavailable\",\"va\":5},{\"source\":\"unavailable\",\"va\":6},{\"source\":\"unavailable\",\"va\":7}],\"reaching\":[{\"definitions\":[],\"va\":1},{\"definitions\":[],\"va\":2},{\"definitions\":[],\"va\":3},{\"definitions\":[],\"va\":4},{\"definitions\":[],\"va\":5},{\"definitions\":[],\"va\":6},{\"definitions\":[],\"va\":7}],\"slice\":[],\"visited\":[1,2,3,4]}, got {\"decoded\":[1,2,3,4],\"edges\":[{\"dst\":2,\"kind\":\"fallthrough\",\"src\":1},{\"dst\":3,\"kind\":\"taken\",\"src\":1},{\"dst\":4,\"kind\":\"next\",\"src\":2},{\"dst\":4,\"kind\":\"indirect\",\"src\":3},{\"dst\":5,\"kind\":\"summary\",\"src\":4},{\"dst\":6,\"kind\":\"call\",\"src\":4}],\"fixture_id\":\"Closed\",\"obligations\":[],\"pending\":[5,6],\"phase\":\"recover\",\"provenance\":[{\"source\":\"captured\",\"va\":1},{\"source\":\"file\",\"va\":2},{\"source\":\"captured\",\"va\":3},{\"source\":\"captured\",\"va\":4},{\"source\":\"unavailable\",\"va\":5},{\"source\":\"unavailable\",\"va\":6},{\"source\":\"unavailable\",\"va\":7}],\"reaching\":[{\"definitions\":[],\"va\":1},{\"definitions\":[],\"va\":2},{\"definitions\":[],\"va\":3},{\"definitions\":[],\"va\":4},{\"definitions\":[],\"va\":5},{\"definitions\":[],\"va\":6},{\"definitions\":[],\"va\":7}],\"slice\":[],\"visited\":[1,2,3,4]}",
+        "factoryCalls": 1,
+        "fixtures": [
+          "Binary",
+          "Dump",
+          "Loop",
+          "Closed"
+        ],
+        "gatePassed": true,
+        "interfaceMatched": true,
+        "matchedActionCounts": null,
+        "matchedObservations": null,
+        "matchedPairCounts": null,
+        "mismatch": {
+          "action": "visit",
+          "actual": {
+            "decoded": {
+              "#set": [
+                {
+                  "#bigint": "1"
+                },
+                {
+                  "#bigint": "2"
+                },
+                {
+                  "#bigint": "3"
+                },
+                {
+                  "#bigint": "4"
+                }
+              ]
+            },
+            "edges": {
+              "#set": [
+                {
+                  "dst": {
+                    "#bigint": "2"
+                  },
+                  "kind": "fallthrough",
+                  "src": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "3"
+                  },
+                  "kind": "taken",
+                  "src": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "4"
+                  },
+                  "kind": "next",
+                  "src": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "4"
+                  },
+                  "kind": "indirect",
+                  "src": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "5"
+                  },
+                  "kind": "summary",
+                  "src": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "6"
+                  },
+                  "kind": "call",
+                  "src": {
+                    "#bigint": "4"
+                  }
+                }
+              ]
+            },
+            "fixture_id": "Closed",
+            "obligations": {
+              "#set": []
+            },
+            "pending": {
+              "#set": [
+                {
+                  "#bigint": "5"
+                },
+                {
+                  "#bigint": "6"
+                }
+              ]
+            },
+            "phase": "recover",
+            "provenance": {
+              "#set": [
+                {
+                  "source": "captured",
+                  "va": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "source": "captured",
+                  "va": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "source": "captured",
+                  "va": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "source": "unavailable",
+                  "va": {
+                    "#bigint": "5"
+                  }
+                },
+                {
+                  "source": "unavailable",
+                  "va": {
+                    "#bigint": "6"
+                  }
+                },
+                {
+                  "source": "unavailable",
+                  "va": {
+                    "#bigint": "7"
+                  }
+                }
+              ]
+            },
+            "reaching": {
+              "#set": [
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "5"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "6"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "7"
+                  }
+                }
+              ]
+            },
+            "slice": {
+              "#set": []
+            },
+            "visited": {
+              "#set": [
+                {
+                  "#bigint": "1"
+                },
+                {
+                  "#bigint": "2"
+                },
+                {
+                  "#bigint": "3"
+                },
+                {
+                  "#bigint": "4"
+                }
+              ]
+            }
+          },
+          "expected": {
+            "decoded": {
+              "#set": [
+                {
+                  "#bigint": "1"
+                },
+                {
+                  "#bigint": "2"
+                },
+                {
+                  "#bigint": "3"
+                },
+                {
+                  "#bigint": "4"
+                }
+              ]
+            },
+            "edges": {
+              "#set": [
+                {
+                  "dst": {
+                    "#bigint": "2"
+                  },
+                  "kind": "fallthrough",
+                  "src": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "3"
+                  },
+                  "kind": "taken",
+                  "src": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "4"
+                  },
+                  "kind": "next",
+                  "src": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "4"
+                  },
+                  "kind": "indirect",
+                  "src": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "5"
+                  },
+                  "kind": "summary",
+                  "src": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "6"
+                  },
+                  "kind": "call",
+                  "src": {
+                    "#bigint": "4"
+                  }
+                }
+              ]
+            },
+            "fixture_id": "Closed",
+            "obligations": {
+              "#set": []
+            },
+            "pending": {
+              "#set": [
+                {
+                  "#bigint": "5"
+                }
+              ]
+            },
+            "phase": "recover",
+            "provenance": {
+              "#set": [
+                {
+                  "source": "captured",
+                  "va": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "source": "captured",
+                  "va": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "source": "captured",
+                  "va": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "source": "unavailable",
+                  "va": {
+                    "#bigint": "5"
+                  }
+                },
+                {
+                  "source": "unavailable",
+                  "va": {
+                    "#bigint": "6"
+                  }
+                },
+                {
+                  "source": "unavailable",
+                  "va": {
+                    "#bigint": "7"
+                  }
+                }
+              ]
+            },
+            "reaching": {
+              "#set": [
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "5"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "6"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "7"
+                  }
+                }
+              ]
+            },
+            "slice": {
+              "#set": []
+            },
+            "visited": {
+              "#set": [
+                {
+                  "#bigint": "1"
+                },
+                {
+                  "#bigint": "2"
+                },
+                {
+                  "#bigint": "3"
+                },
+                {
+                  "#bigint": "4"
+                }
+              ]
+            }
+          },
+          "hints": "[ExtraElem { path: [Field(\"pending\")], actual: Int(6) }]"
+        },
+        "mode": "mutant",
+        "modelMatched": false,
+        "observationsDispatched": 54,
+        "portDrops": 1,
+        "schema": "ariadne.mbt-replay/v2",
+        "semanticDigest": "3c175901a7393a77065f69e16c6849ed898504a7cf1103e656b62bfa47bfebb2",
+        "status": "mismatch",
+        "targetProfile": "mirrorrust-v1"
+      }
+    },
+    "core-good": {
+      "command": [
+        "/home/nzsn/Repos/Ariadne/mbt/.work/replay-dtwga0yx/good/ariadne-mbt",
+        "good",
+        "/home/nzsn/.local/bin/ModelMirrors",
+        "/home/nzsn/Repos/Ariadne/mbt/.work/replay-dtwga0yx/model/AriadneReplay.tla",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/AriadneReplay.lock.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Binary.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Dump.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Loop.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Closed.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Pipeline.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Calls.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Binary.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Dump.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Loop.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Closed.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Pipeline.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Calls.itf.json"
+      ],
+      "exitCode": 0,
+      "report": {
+        "adapterId": "ariadne.machine-analysis/v1",
+        "bindingImplementation": "compiler-generated",
+        "cleanupMechanism": "Rust Drop of generated binding port",
+        "completedTraces": 12,
+        "coverageSatisfied": true,
+        "error": null,
+        "factoryCalls": 1,
+        "fixtures": [
+          "Binary",
+          "Dump",
+          "Loop",
+          "Closed",
+          "Pipeline",
+          "Calls",
+          "Binary",
+          "Dump",
+          "Loop",
+          "Closed",
+          "Pipeline",
+          "Calls"
+        ],
+        "gatePassed": true,
+        "interfaceMatched": true,
+        "matchedActionCounts": {
+          "ExpandSlice": 12,
+          "FinishDataflow": 12,
+          "FinishRecovery": 12,
+          "FinishSlice": 12,
+          "Propagate": 50,
+          "Visit": 58
+        },
+        "matchedObservations": 168,
+        "matchedPairCounts": {
+          "ExpandSlice->FinishSlice": 12,
+          "FinishDataflow->ExpandSlice": 12,
+          "FinishRecovery->Propagate": 12,
+          "Propagate->FinishDataflow": 12,
+          "Propagate->Propagate": 38,
+          "Visit->FinishRecovery": 12,
+          "Visit->Visit": 46
+        },
+        "mismatch": null,
+        "mode": "good",
+        "modelMatched": true,
+        "observationsDispatched": 168,
+        "portDrops": 1,
+        "schema": "ariadne.mbt-replay/v2",
+        "semanticDigest": "3c175901a7393a77065f69e16c6849ed898504a7cf1103e656b62bfa47bfebb2",
+        "status": "passed",
+        "targetProfile": "mirrorrust-v1"
+      }
+    },
+    "core-may-writes-kill-origins": {
+      "command": [
+        "/home/nzsn/Repos/Ariadne/mbt/.work/replay-dtwga0yx/may-writes-kill-origins/ariadne-mbt",
+        "mutant",
+        "/home/nzsn/.local/bin/ModelMirrors",
+        "/home/nzsn/Repos/Ariadne/mbt/.work/replay-dtwga0yx/model/AriadneReplay.tla",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/AriadneReplay.lock.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Binary.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Dump.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Loop.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Closed.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Pipeline.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Calls.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Binary.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Dump.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Loop.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Closed.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Pipeline.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Calls.itf.json"
+      ],
+      "executableSha256": "9045f4324d520e3a910a85a490e240656354d6ec39489b89dbea6476ed7bb3ad",
+      "exitCode": 0,
+      "report": {
+        "adapterId": "ariadne.machine-analysis/v1",
+        "bindingImplementation": "compiler-generated",
+        "cleanupMechanism": "Rust Drop of generated binding port",
+        "completedTraces": 0,
+        "coverageSatisfied": false,
+        "error": "step mismatch on action \"propagate\": expected {\"decoded\":[1,2,3,4,5],\"edges\":[{\"dst\":2,\"kind\":\"fallthrough\",\"src\":1},{\"dst\":3,\"kind\":\"taken\",\"src\":1},{\"dst\":4,\"kind\":\"next\",\"src\":2},{\"dst\":4,\"kind\":\"indirect\",\"src\":3},{\"dst\":6,\"kind\":\"indirect\",\"src\":3},{\"dst\":7,\"kind\":\"indirect\",\"src\":3},{\"dst\":5,\"kind\":\"summary\",\"src\":4},{\"dst\":6,\"kind\":\"call\",\"src\":4}],\"fixture_id\":\"Binary\",\"obligations\":[{\"reason\":\"indirect-targets\",\"site\":3},{\"reason\":\"call-targets\",\"site\":4},{\"reason\":\"unavailable\",\"site\":6},{\"reason\":\"decode-failed\",\"site\":7}],\"pending\":[],\"phase\":\"dataflow\",\"provenance\":[{\"source\":\"file\",\"va\":1},{\"source\":\"file\",\"va\":2},{\"source\":\"file\",\"va\":3},{\"source\":\"file\",\"va\":4},{\"source\":\"file\",\"va\":5},{\"source\":\"unavailable\",\"va\":6},{\"source\":\"unavailable\",\"va\":7}],\"reaching\":[{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1}],\"va\":1},{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1}],\"va\":2},{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1}],\"va\":3},{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":2}],\"va\":4},{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":2},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":4},{\"loc\":\"target\",\"origin\":\"instruction\",\"site\":4}],\"va\":5},{\"definitions\":[],\"va\":6},{\"definitions\":[],\"va\":7}],\"slice\":[],\"visited\":[1,2,3,4,5,6,7]}, got {\"decoded\":[1,2,3,4,5],\"edges\":[{\"dst\":2,\"kind\":\"fallthrough\",\"src\":1},{\"dst\":3,\"kind\":\"taken\",\"src\":1},{\"dst\":4,\"kind\":\"next\",\"src\":2},{\"dst\":4,\"kind\":\"indirect\",\"src\":3},{\"dst\":6,\"kind\":\"indirect\",\"src\":3},{\"dst\":7,\"kind\":\"indirect\",\"src\":3},{\"dst\":5,\"kind\":\"summary\",\"src\":4},{\"dst\":6,\"kind\":\"call\",\"src\":4}],\"fixture_id\":\"Binary\",\"obligations\":[{\"reason\":\"indirect-targets\",\"site\":3},{\"reason\":\"call-targets\",\"site\":4},{\"reason\":\"unavailable\",\"site\":6},{\"reason\":\"decode-failed\",\"site\":7}],\"pending\":[],\"phase\":\"dataflow\",\"provenance\":[{\"source\":\"file\",\"va\":1},{\"source\":\"file\",\"va\":2},{\"source\":\"file\",\"va\":3},{\"source\":\"file\",\"va\":4},{\"source\":\"file\",\"va\":5},{\"source\":\"unavailable\",\"va\":6},{\"source\":\"unavailable\",\"va\":7}],\"reaching\":[{\"definitions\":[{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1}],\"va\":1},{\"definitions\":[{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1}],\"va\":2},{\"definitions\":[{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1}],\"va\":3},{\"definitions\":[{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":2}],\"va\":4},{\"definitions\":[{\"loc\":\"target\",\"origin\":\"instruction\",\"site\":4},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":4}],\"va\":5},{\"definitions\":[],\"va\":6},{\"definitions\":[],\"va\":7}],\"slice\":[],\"visited\":[1,2,3,4,5,6,7]}",
+        "factoryCalls": 1,
+        "fixtures": [
+          "Binary"
+        ],
+        "gatePassed": true,
+        "interfaceMatched": true,
+        "matchedActionCounts": null,
+        "matchedObservations": null,
+        "matchedPairCounts": null,
+        "mismatch": {
+          "action": "propagate",
+          "actual": {
+            "decoded": {
+              "#set": [
+                {
+                  "#bigint": "1"
+                },
+                {
+                  "#bigint": "2"
+                },
+                {
+                  "#bigint": "3"
+                },
+                {
+                  "#bigint": "4"
+                },
+                {
+                  "#bigint": "5"
+                }
+              ]
+            },
+            "edges": {
+              "#set": [
+                {
+                  "dst": {
+                    "#bigint": "2"
+                  },
+                  "kind": "fallthrough",
+                  "src": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "3"
+                  },
+                  "kind": "taken",
+                  "src": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "4"
+                  },
+                  "kind": "next",
+                  "src": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "4"
+                  },
+                  "kind": "indirect",
+                  "src": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "6"
+                  },
+                  "kind": "indirect",
+                  "src": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "7"
+                  },
+                  "kind": "indirect",
+                  "src": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "5"
+                  },
+                  "kind": "summary",
+                  "src": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "6"
+                  },
+                  "kind": "call",
+                  "src": {
+                    "#bigint": "4"
+                  }
+                }
+              ]
+            },
+            "fixture_id": "Binary",
+            "obligations": {
+              "#set": [
+                {
+                  "reason": "indirect-targets",
+                  "site": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "reason": "call-targets",
+                  "site": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "reason": "unavailable",
+                  "site": {
+                    "#bigint": "6"
+                  }
+                },
+                {
+                  "reason": "decode-failed",
+                  "site": {
+                    "#bigint": "7"
+                  }
+                }
+              ]
+            },
+            "pending": {
+              "#set": []
+            },
+            "phase": "dataflow",
+            "provenance": {
+              "#set": [
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "5"
+                  }
+                },
+                {
+                  "source": "unavailable",
+                  "va": {
+                    "#bigint": "6"
+                  }
+                },
+                {
+                  "source": "unavailable",
+                  "va": {
+                    "#bigint": "7"
+                  }
+                }
+              ]
+            },
+            "reaching": {
+              "#set": [
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "target",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "target",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "target",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "target",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "x",
+                        "origin": "instruction",
+                        "site": {
+                          "#bigint": "2"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "target",
+                        "origin": "instruction",
+                        "site": {
+                          "#bigint": "4"
+                        }
+                      },
+                      {
+                        "loc": "x",
+                        "origin": "instruction",
+                        "site": {
+                          "#bigint": "4"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "5"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "6"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "7"
+                  }
+                }
+              ]
+            },
+            "slice": {
+              "#set": []
+            },
+            "visited": {
+              "#set": [
+                {
+                  "#bigint": "1"
+                },
+                {
+                  "#bigint": "2"
+                },
+                {
+                  "#bigint": "3"
+                },
+                {
+                  "#bigint": "4"
+                },
+                {
+                  "#bigint": "5"
+                },
+                {
+                  "#bigint": "6"
+                },
+                {
+                  "#bigint": "7"
+                }
+              ]
+            }
+          },
+          "expected": {
+            "decoded": {
+              "#set": [
+                {
+                  "#bigint": "1"
+                },
+                {
+                  "#bigint": "2"
+                },
+                {
+                  "#bigint": "3"
+                },
+                {
+                  "#bigint": "4"
+                },
+                {
+                  "#bigint": "5"
+                }
+              ]
+            },
+            "edges": {
+              "#set": [
+                {
+                  "dst": {
+                    "#bigint": "2"
+                  },
+                  "kind": "fallthrough",
+                  "src": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "3"
+                  },
+                  "kind": "taken",
+                  "src": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "4"
+                  },
+                  "kind": "next",
+                  "src": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "4"
+                  },
+                  "kind": "indirect",
+                  "src": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "6"
+                  },
+                  "kind": "indirect",
+                  "src": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "7"
+                  },
+                  "kind": "indirect",
+                  "src": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "5"
+                  },
+                  "kind": "summary",
+                  "src": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "6"
+                  },
+                  "kind": "call",
+                  "src": {
+                    "#bigint": "4"
+                  }
+                }
+              ]
+            },
+            "fixture_id": "Binary",
+            "obligations": {
+              "#set": [
+                {
+                  "reason": "indirect-targets",
+                  "site": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "reason": "call-targets",
+                  "site": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "reason": "unavailable",
+                  "site": {
+                    "#bigint": "6"
+                  }
+                },
+                {
+                  "reason": "decode-failed",
+                  "site": {
+                    "#bigint": "7"
+                  }
+                }
+              ]
+            },
+            "pending": {
+              "#set": []
+            },
+            "phase": "dataflow",
+            "provenance": {
+              "#set": [
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "5"
+                  }
+                },
+                {
+                  "source": "unavailable",
+                  "va": {
+                    "#bigint": "6"
+                  }
+                },
+                {
+                  "source": "unavailable",
+                  "va": {
+                    "#bigint": "7"
+                  }
+                }
+              ]
+            },
+            "reaching": {
+              "#set": [
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "target",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "target",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "target",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "target",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "x",
+                        "origin": "instruction",
+                        "site": {
+                          "#bigint": "2"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "target",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "x",
+                        "origin": "instruction",
+                        "site": {
+                          "#bigint": "2"
+                        }
+                      },
+                      {
+                        "loc": "x",
+                        "origin": "instruction",
+                        "site": {
+                          "#bigint": "4"
+                        }
+                      },
+                      {
+                        "loc": "target",
+                        "origin": "instruction",
+                        "site": {
+                          "#bigint": "4"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "5"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "6"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "7"
+                  }
+                }
+              ]
+            },
+            "slice": {
+              "#set": []
+            },
+            "visited": {
+              "#set": [
+                {
+                  "#bigint": "1"
+                },
+                {
+                  "#bigint": "2"
+                },
+                {
+                  "#bigint": "3"
+                },
+                {
+                  "#bigint": "4"
+                },
+                {
+                  "#bigint": "5"
+                },
+                {
+                  "#bigint": "6"
+                },
+                {
+                  "#bigint": "7"
+                }
+              ]
+            }
+          },
+          "hints": "[MissingElem { path: [Field(\"reaching\")], expected: Record({\"definitions\": Set([Record({\"loc\": Str(\"x\"), \"origin\": Str(\"entry\"), \"site\": Int(1)}), Record({\"loc\": Str(\"target\"), \"origin\": Str(\"entry\"), \"site\": Int(1)}), Record({\"loc\": Str(\"x\"), \"origin\": Str(\"instruction\"), \"site\": Int(2)}), Record({\"loc\": Str(\"x\"), \"origin\": Str(\"instruction\"), \"site\": Int(4)}), Record({\"loc\": Str(\"target\"), \"origin\": Str(\"instruction\"), \"site\": Int(4)})]), \"va\": Int(5)}) }, ExtraElem { path: [Field(\"reaching\")], actual: Record({\"definitions\": Set([Record({\"loc\": Str(\"target\"), \"origin\": Str(\"instruction\"), \"site\": Int(4)}), Record({\"loc\": Str(\"x\"), \"origin\": Str(\"instruction\"), \"site\": Int(4)})]), \"va\": Int(5)}) }]"
+        },
+        "mode": "mutant",
+        "modelMatched": false,
+        "observationsDispatched": 14,
+        "portDrops": 1,
+        "schema": "ariadne.mbt-replay/v2",
+        "semanticDigest": "3c175901a7393a77065f69e16c6849ed898504a7cf1103e656b62bfa47bfebb2",
+        "status": "mismatch",
+        "targetProfile": "mirrorrust-v1"
+      }
+    },
+    "core-propagate-across-call-edges": {
+      "command": [
+        "/home/nzsn/Repos/Ariadne/mbt/.work/replay-dtwga0yx/propagate-across-call-edges/ariadne-mbt",
+        "mutant",
+        "/home/nzsn/.local/bin/ModelMirrors",
+        "/home/nzsn/Repos/Ariadne/mbt/.work/replay-dtwga0yx/model/AriadneReplay.tla",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/AriadneReplay.lock.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Binary.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Dump.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Loop.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Closed.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Pipeline.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Calls.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Binary.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Dump.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Loop.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Closed.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Pipeline.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Calls.itf.json"
+      ],
+      "executableSha256": "34650fa4910e6094e12440706c5e960bdaf510e2140ad6bb0342b9e48167bb44",
+      "exitCode": 0,
+      "report": {
+        "adapterId": "ariadne.machine-analysis/v1",
+        "bindingImplementation": "compiler-generated",
+        "cleanupMechanism": "Rust Drop of generated binding port",
+        "completedTraces": 5,
+        "coverageSatisfied": false,
+        "error": "step mismatch on action \"propagate\": expected {\"decoded\":[1,2,3],\"edges\":[{\"dst\":2,\"kind\":\"summary\",\"src\":1},{\"dst\":3,\"kind\":\"call\",\"src\":1},{\"dst\":4,\"kind\":\"call\",\"src\":1}],\"fixture_id\":\"Calls\",\"obligations\":[],\"pending\":[],\"phase\":\"dataflow\",\"provenance\":[{\"source\":\"file\",\"va\":1},{\"source\":\"file\",\"va\":2},{\"source\":\"file\",\"va\":3},{\"source\":\"unavailable\",\"va\":4}],\"reaching\":[{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1}],\"va\":1},{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":1}],\"va\":2},{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":3}],\"va\":3},{\"definitions\":[],\"va\":4}],\"slice\":[],\"visited\":[1,2,3]}, got {\"decoded\":[1,2,3],\"edges\":[{\"dst\":2,\"kind\":\"summary\",\"src\":1},{\"dst\":3,\"kind\":\"call\",\"src\":1},{\"dst\":4,\"kind\":\"call\",\"src\":1}],\"fixture_id\":\"Calls\",\"obligations\":[],\"pending\":[],\"phase\":\"dataflow\",\"provenance\":[{\"source\":\"file\",\"va\":1},{\"source\":\"file\",\"va\":2},{\"source\":\"file\",\"va\":3},{\"source\":\"unavailable\",\"va\":4}],\"reaching\":[{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1}],\"va\":1},{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":1}],\"va\":2},{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":1},{\"loc\":\"x\",\"origin\":\"entry\",\"site\":3}],\"va\":3},{\"definitions\":[],\"va\":4}],\"slice\":[],\"visited\":[1,2,3]}",
+        "factoryCalls": 1,
+        "fixtures": [
+          "Binary",
+          "Dump",
+          "Loop",
+          "Closed",
+          "Pipeline",
+          "Calls"
+        ],
+        "gatePassed": true,
+        "interfaceMatched": true,
+        "matchedActionCounts": null,
+        "matchedObservations": null,
+        "matchedPairCounts": null,
+        "mismatch": {
+          "action": "propagate",
+          "actual": {
+            "decoded": {
+              "#set": [
+                {
+                  "#bigint": "1"
+                },
+                {
+                  "#bigint": "2"
+                },
+                {
+                  "#bigint": "3"
+                }
+              ]
+            },
+            "edges": {
+              "#set": [
+                {
+                  "dst": {
+                    "#bigint": "2"
+                  },
+                  "kind": "summary",
+                  "src": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "3"
+                  },
+                  "kind": "call",
+                  "src": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "4"
+                  },
+                  "kind": "call",
+                  "src": {
+                    "#bigint": "1"
+                  }
+                }
+              ]
+            },
+            "fixture_id": "Calls",
+            "obligations": {
+              "#set": []
+            },
+            "pending": {
+              "#set": []
+            },
+            "phase": "dataflow",
+            "provenance": {
+              "#set": [
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "source": "unavailable",
+                  "va": {
+                    "#bigint": "4"
+                  }
+                }
+              ]
+            },
+            "reaching": {
+              "#set": [
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "x",
+                        "origin": "instruction",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "x",
+                        "origin": "instruction",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "3"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "4"
+                  }
+                }
+              ]
+            },
+            "slice": {
+              "#set": []
+            },
+            "visited": {
+              "#set": [
+                {
+                  "#bigint": "1"
+                },
+                {
+                  "#bigint": "2"
+                },
+                {
+                  "#bigint": "3"
+                }
+              ]
+            }
+          },
+          "expected": {
+            "decoded": {
+              "#set": [
+                {
+                  "#bigint": "1"
+                },
+                {
+                  "#bigint": "2"
+                },
+                {
+                  "#bigint": "3"
+                }
+              ]
+            },
+            "edges": {
+              "#set": [
+                {
+                  "dst": {
+                    "#bigint": "2"
+                  },
+                  "kind": "summary",
+                  "src": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "3"
+                  },
+                  "kind": "call",
+                  "src": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "4"
+                  },
+                  "kind": "call",
+                  "src": {
+                    "#bigint": "1"
+                  }
+                }
+              ]
+            },
+            "fixture_id": "Calls",
+            "obligations": {
+              "#set": []
+            },
+            "pending": {
+              "#set": []
+            },
+            "phase": "dataflow",
+            "provenance": {
+              "#set": [
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "source": "unavailable",
+                  "va": {
+                    "#bigint": "4"
+                  }
+                }
+              ]
+            },
+            "reaching": {
+              "#set": [
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "x",
+                        "origin": "instruction",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "3"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "4"
+                  }
+                }
+              ]
+            },
+            "slice": {
+              "#set": []
+            },
+            "visited": {
+              "#set": [
+                {
+                  "#bigint": "1"
+                },
+                {
+                  "#bigint": "2"
+                },
+                {
+                  "#bigint": "3"
+                }
+              ]
+            }
+          },
+          "hints": "[MissingElem { path: [Field(\"reaching\")], expected: Record({\"definitions\": Set([Record({\"loc\": Str(\"x\"), \"origin\": Str(\"entry\"), \"site\": Int(3)})]), \"va\": Int(3)}) }, ExtraElem { path: [Field(\"reaching\")], actual: Record({\"definitions\": Set([Record({\"loc\": Str(\"x\"), \"origin\": Str(\"entry\"), \"site\": Int(1)}), Record({\"loc\": Str(\"x\"), \"origin\": Str(\"instruction\"), \"site\": Int(1)}), Record({\"loc\": Str(\"x\"), \"origin\": Str(\"entry\"), \"site\": Int(3)})]), \"va\": Int(3)}) }]"
+        },
+        "mode": "mutant",
+        "modelMatched": false,
+        "observationsDispatched": 81,
+        "portDrops": 1,
+        "schema": "ariadne.mbt-replay/v2",
+        "semanticDigest": "3c175901a7393a77065f69e16c6849ed898504a7cf1103e656b62bfa47bfebb2",
+        "status": "mismatch",
+        "targetProfile": "mirrorrust-v1"
+      }
+    },
+    "core-skip-slice-closure": {
+      "command": [
+        "/home/nzsn/Repos/Ariadne/mbt/.work/replay-dtwga0yx/skip-slice-closure/ariadne-mbt",
+        "mutant",
+        "/home/nzsn/.local/bin/ModelMirrors",
+        "/home/nzsn/Repos/Ariadne/mbt/.work/replay-dtwga0yx/model/AriadneReplay.tla",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/AriadneReplay.lock.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Binary.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Dump.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Loop.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Closed.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Pipeline.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Calls.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Binary.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Dump.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Loop.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Closed.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Pipeline.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Calls.itf.json"
+      ],
+      "executableSha256": "38d9a7e6a1c4241c9daa555d1af9670648f21fc5f876dcba49a1663a423d2a79",
+      "exitCode": 0,
+      "report": {
+        "adapterId": "ariadne.machine-analysis/v1",
+        "bindingImplementation": "compiler-generated",
+        "cleanupMechanism": "Rust Drop of generated binding port",
+        "completedTraces": 1,
+        "coverageSatisfied": false,
+        "error": "step mismatch on action \"expandSlice\": expected {\"decoded\":[1,2,3,4,5],\"edges\":[{\"dst\":2,\"kind\":\"fallthrough\",\"src\":1},{\"dst\":3,\"kind\":\"taken\",\"src\":1},{\"dst\":4,\"kind\":\"next\",\"src\":2},{\"dst\":4,\"kind\":\"indirect\",\"src\":3},{\"dst\":6,\"kind\":\"indirect\",\"src\":3},{\"dst\":7,\"kind\":\"indirect\",\"src\":3},{\"dst\":5,\"kind\":\"summary\",\"src\":4},{\"dst\":6,\"kind\":\"call\",\"src\":4}],\"fixture_id\":\"Binary\",\"obligations\":[{\"reason\":\"indirect-targets\",\"site\":3},{\"reason\":\"call-targets\",\"site\":4},{\"reason\":\"unavailable\",\"site\":6},{\"reason\":\"decode-failed\",\"site\":7}],\"pending\":[],\"phase\":\"slice\",\"provenance\":[{\"source\":\"file\",\"va\":1},{\"source\":\"file\",\"va\":2},{\"source\":\"file\",\"va\":3},{\"source\":\"file\",\"va\":4},{\"source\":\"file\",\"va\":5},{\"source\":\"unavailable\",\"va\":6},{\"source\":\"unavailable\",\"va\":7}],\"reaching\":[{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1}],\"va\":1},{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1}],\"va\":2},{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1}],\"va\":3},{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":2}],\"va\":4},{\"definitions\":[{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":2},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":4},{\"loc\":\"target\",\"origin\":\"instruction\",\"site\":4}],\"va\":5},{\"definitions\":[],\"va\":6},{\"definitions\":[],\"va\":7}],\"slice\":[2,4,5],\"visited\":[1,2,3,4,5,6,7]}, got {\"decoded\":[1,2,3,4,5],\"edges\":[{\"dst\":2,\"kind\":\"fallthrough\",\"src\":1},{\"dst\":3,\"kind\":\"taken\",\"src\":1},{\"dst\":4,\"kind\":\"next\",\"src\":2},{\"dst\":4,\"kind\":\"indirect\",\"src\":3},{\"dst\":6,\"kind\":\"indirect\",\"src\":3},{\"dst\":7,\"kind\":\"indirect\",\"src\":3},{\"dst\":5,\"kind\":\"summary\",\"src\":4},{\"dst\":6,\"kind\":\"call\",\"src\":4}],\"fixture_id\":\"Binary\",\"obligations\":[{\"reason\":\"indirect-targets\",\"site\":3},{\"reason\":\"call-targets\",\"site\":4},{\"reason\":\"unavailable\",\"site\":6},{\"reason\":\"decode-failed\",\"site\":7}],\"pending\":[],\"phase\":\"done\",\"provenance\":[{\"source\":\"file\",\"va\":1},{\"source\":\"file\",\"va\":2},{\"source\":\"file\",\"va\":3},{\"source\":\"file\",\"va\":4},{\"source\":\"file\",\"va\":5},{\"source\":\"unavailable\",\"va\":6},{\"source\":\"unavailable\",\"va\":7}],\"reaching\":[{\"definitions\":[{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1}],\"va\":1},{\"definitions\":[{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1}],\"va\":2},{\"definitions\":[{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1}],\"va\":3},{\"definitions\":[{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":2}],\"va\":4},{\"definitions\":[{\"loc\":\"target\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"target\",\"origin\":\"instruction\",\"site\":4},{\"loc\":\"x\",\"origin\":\"entry\",\"site\":1},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":2},{\"loc\":\"x\",\"origin\":\"instruction\",\"site\":4}],\"va\":5},{\"definitions\":[],\"va\":6},{\"definitions\":[],\"va\":7}],\"slice\":[4,5],\"visited\":[1,2,3,4,5,6,7]}",
+        "factoryCalls": 1,
+        "fixtures": [
+          "Binary"
+        ],
+        "gatePassed": true,
+        "interfaceMatched": true,
+        "matchedActionCounts": null,
+        "matchedObservations": null,
+        "matchedPairCounts": null,
+        "mismatch": {
+          "action": "expandSlice",
+          "actual": {
+            "decoded": {
+              "#set": [
+                {
+                  "#bigint": "1"
+                },
+                {
+                  "#bigint": "2"
+                },
+                {
+                  "#bigint": "3"
+                },
+                {
+                  "#bigint": "4"
+                },
+                {
+                  "#bigint": "5"
+                }
+              ]
+            },
+            "edges": {
+              "#set": [
+                {
+                  "dst": {
+                    "#bigint": "2"
+                  },
+                  "kind": "fallthrough",
+                  "src": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "3"
+                  },
+                  "kind": "taken",
+                  "src": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "4"
+                  },
+                  "kind": "next",
+                  "src": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "4"
+                  },
+                  "kind": "indirect",
+                  "src": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "6"
+                  },
+                  "kind": "indirect",
+                  "src": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "7"
+                  },
+                  "kind": "indirect",
+                  "src": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "5"
+                  },
+                  "kind": "summary",
+                  "src": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "6"
+                  },
+                  "kind": "call",
+                  "src": {
+                    "#bigint": "4"
+                  }
+                }
+              ]
+            },
+            "fixture_id": "Binary",
+            "obligations": {
+              "#set": [
+                {
+                  "reason": "indirect-targets",
+                  "site": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "reason": "call-targets",
+                  "site": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "reason": "unavailable",
+                  "site": {
+                    "#bigint": "6"
+                  }
+                },
+                {
+                  "reason": "decode-failed",
+                  "site": {
+                    "#bigint": "7"
+                  }
+                }
+              ]
+            },
+            "pending": {
+              "#set": []
+            },
+            "phase": "done",
+            "provenance": {
+              "#set": [
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "5"
+                  }
+                },
+                {
+                  "source": "unavailable",
+                  "va": {
+                    "#bigint": "6"
+                  }
+                },
+                {
+                  "source": "unavailable",
+                  "va": {
+                    "#bigint": "7"
+                  }
+                }
+              ]
+            },
+            "reaching": {
+              "#set": [
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "target",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "target",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "target",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "target",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "x",
+                        "origin": "instruction",
+                        "site": {
+                          "#bigint": "2"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "target",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "target",
+                        "origin": "instruction",
+                        "site": {
+                          "#bigint": "4"
+                        }
+                      },
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "x",
+                        "origin": "instruction",
+                        "site": {
+                          "#bigint": "2"
+                        }
+                      },
+                      {
+                        "loc": "x",
+                        "origin": "instruction",
+                        "site": {
+                          "#bigint": "4"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "5"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "6"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "7"
+                  }
+                }
+              ]
+            },
+            "slice": {
+              "#set": [
+                {
+                  "#bigint": "4"
+                },
+                {
+                  "#bigint": "5"
+                }
+              ]
+            },
+            "visited": {
+              "#set": [
+                {
+                  "#bigint": "1"
+                },
+                {
+                  "#bigint": "2"
+                },
+                {
+                  "#bigint": "3"
+                },
+                {
+                  "#bigint": "4"
+                },
+                {
+                  "#bigint": "5"
+                },
+                {
+                  "#bigint": "6"
+                },
+                {
+                  "#bigint": "7"
+                }
+              ]
+            }
+          },
+          "expected": {
+            "decoded": {
+              "#set": [
+                {
+                  "#bigint": "1"
+                },
+                {
+                  "#bigint": "2"
+                },
+                {
+                  "#bigint": "3"
+                },
+                {
+                  "#bigint": "4"
+                },
+                {
+                  "#bigint": "5"
+                }
+              ]
+            },
+            "edges": {
+              "#set": [
+                {
+                  "dst": {
+                    "#bigint": "2"
+                  },
+                  "kind": "fallthrough",
+                  "src": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "3"
+                  },
+                  "kind": "taken",
+                  "src": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "4"
+                  },
+                  "kind": "next",
+                  "src": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "4"
+                  },
+                  "kind": "indirect",
+                  "src": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "6"
+                  },
+                  "kind": "indirect",
+                  "src": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "7"
+                  },
+                  "kind": "indirect",
+                  "src": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "5"
+                  },
+                  "kind": "summary",
+                  "src": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "6"
+                  },
+                  "kind": "call",
+                  "src": {
+                    "#bigint": "4"
+                  }
+                }
+              ]
+            },
+            "fixture_id": "Binary",
+            "obligations": {
+              "#set": [
+                {
+                  "reason": "indirect-targets",
+                  "site": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "reason": "call-targets",
+                  "site": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "reason": "unavailable",
+                  "site": {
+                    "#bigint": "6"
+                  }
+                },
+                {
+                  "reason": "decode-failed",
+                  "site": {
+                    "#bigint": "7"
+                  }
+                }
+              ]
+            },
+            "pending": {
+              "#set": []
+            },
+            "phase": "slice",
+            "provenance": {
+              "#set": [
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "5"
+                  }
+                },
+                {
+                  "source": "unavailable",
+                  "va": {
+                    "#bigint": "6"
+                  }
+                },
+                {
+                  "source": "unavailable",
+                  "va": {
+                    "#bigint": "7"
+                  }
+                }
+              ]
+            },
+            "reaching": {
+              "#set": [
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "target",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "target",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "target",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "target",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "x",
+                        "origin": "instruction",
+                        "site": {
+                          "#bigint": "2"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": [
+                      {
+                        "loc": "x",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "target",
+                        "origin": "entry",
+                        "site": {
+                          "#bigint": "1"
+                        }
+                      },
+                      {
+                        "loc": "x",
+                        "origin": "instruction",
+                        "site": {
+                          "#bigint": "2"
+                        }
+                      },
+                      {
+                        "loc": "x",
+                        "origin": "instruction",
+                        "site": {
+                          "#bigint": "4"
+                        }
+                      },
+                      {
+                        "loc": "target",
+                        "origin": "instruction",
+                        "site": {
+                          "#bigint": "4"
+                        }
+                      }
+                    ]
+                  },
+                  "va": {
+                    "#bigint": "5"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "6"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "7"
+                  }
+                }
+              ]
+            },
+            "slice": {
+              "#set": [
+                {
+                  "#bigint": "2"
+                },
+                {
+                  "#bigint": "4"
+                },
+                {
+                  "#bigint": "5"
+                }
+              ]
+            },
+            "visited": {
+              "#set": [
+                {
+                  "#bigint": "1"
+                },
+                {
+                  "#bigint": "2"
+                },
+                {
+                  "#bigint": "3"
+                },
+                {
+                  "#bigint": "4"
+                },
+                {
+                  "#bigint": "5"
+                },
+                {
+                  "#bigint": "6"
+                },
+                {
+                  "#bigint": "7"
+                }
+              ]
+            }
+          },
+          "hints": "[ValueMismatch { path: [Field(\"phase\")], expected: Str(\"slice\"), actual: Str(\"done\") }, MissingElem { path: [Field(\"slice\")], expected: Int(2) }]"
+        },
+        "mode": "mutant",
+        "modelMatched": false,
+        "observationsDispatched": 16,
+        "portDrops": 1,
+        "schema": "ariadne.mbt-replay/v2",
+        "semanticDigest": "3c175901a7393a77065f69e16c6849ed898504a7cf1103e656b62bfa47bfebb2",
+        "status": "mismatch",
+        "targetProfile": "mirrorrust-v1"
+      }
+    },
+    "core-untrusted-dump-fallback": {
+      "command": [
+        "/home/nzsn/Repos/Ariadne/mbt/.work/replay-dtwga0yx/untrusted-dump-fallback/ariadne-mbt",
+        "mutant",
+        "/home/nzsn/.local/bin/ModelMirrors",
+        "/home/nzsn/Repos/Ariadne/mbt/.work/replay-dtwga0yx/model/AriadneReplay.tla",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/AriadneReplay.lock.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Binary.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Dump.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Loop.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Closed.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Pipeline.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Calls.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Binary.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Dump.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Loop.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Closed.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Pipeline.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Calls.itf.json"
+      ],
+      "executableSha256": "586a0ab687d9afea79b8eb1fb96e56b88874515b583259cf8218027c046466a6",
+      "exitCode": 0,
+      "report": {
+        "adapterId": "ariadne.machine-analysis/v1",
+        "bindingImplementation": "compiler-generated",
+        "cleanupMechanism": "Rust Drop of generated binding port",
+        "completedTraces": 1,
+        "coverageSatisfied": false,
+        "error": "step mismatch on action \"visit\": expected {\"decoded\":[1,2,3,4],\"edges\":[{\"dst\":2,\"kind\":\"fallthrough\",\"src\":1},{\"dst\":3,\"kind\":\"taken\",\"src\":1},{\"dst\":4,\"kind\":\"next\",\"src\":2},{\"dst\":4,\"kind\":\"indirect\",\"src\":3},{\"dst\":6,\"kind\":\"indirect\",\"src\":3},{\"dst\":7,\"kind\":\"indirect\",\"src\":3},{\"dst\":5,\"kind\":\"summary\",\"src\":4},{\"dst\":6,\"kind\":\"call\",\"src\":4}],\"fixture_id\":\"Dump\",\"obligations\":[{\"reason\":\"indirect-targets\",\"site\":3},{\"reason\":\"call-targets\",\"site\":4},{\"reason\":\"unavailable\",\"site\":5}],\"pending\":[6,7],\"phase\":\"recover\",\"provenance\":[{\"source\":\"captured\",\"va\":1},{\"source\":\"file\",\"va\":2},{\"source\":\"captured\",\"va\":3},{\"source\":\"captured\",\"va\":4},{\"source\":\"unavailable\",\"va\":5},{\"source\":\"unavailable\",\"va\":6},{\"source\":\"unavailable\",\"va\":7}],\"reaching\":[{\"definitions\":[],\"va\":1},{\"definitions\":[],\"va\":2},{\"definitions\":[],\"va\":3},{\"definitions\":[],\"va\":4},{\"definitions\":[],\"va\":5},{\"definitions\":[],\"va\":6},{\"definitions\":[],\"va\":7}],\"slice\":[],\"visited\":[1,2,3,4,5]}, got {\"decoded\":[1,2,3,4,5],\"edges\":[{\"dst\":2,\"kind\":\"fallthrough\",\"src\":1},{\"dst\":3,\"kind\":\"taken\",\"src\":1},{\"dst\":4,\"kind\":\"next\",\"src\":2},{\"dst\":4,\"kind\":\"indirect\",\"src\":3},{\"dst\":6,\"kind\":\"indirect\",\"src\":3},{\"dst\":7,\"kind\":\"indirect\",\"src\":3},{\"dst\":5,\"kind\":\"summary\",\"src\":4},{\"dst\":6,\"kind\":\"call\",\"src\":4}],\"fixture_id\":\"Dump\",\"obligations\":[{\"reason\":\"indirect-targets\",\"site\":3},{\"reason\":\"call-targets\",\"site\":4}],\"pending\":[6,7],\"phase\":\"recover\",\"provenance\":[{\"source\":\"captured\",\"va\":1},{\"source\":\"file\",\"va\":2},{\"source\":\"captured\",\"va\":3},{\"source\":\"captured\",\"va\":4},{\"source\":\"file\",\"va\":5},{\"source\":\"unavailable\",\"va\":6},{\"source\":\"unavailable\",\"va\":7}],\"reaching\":[{\"definitions\":[],\"va\":1},{\"definitions\":[],\"va\":2},{\"definitions\":[],\"va\":3},{\"definitions\":[],\"va\":4},{\"definitions\":[],\"va\":5},{\"definitions\":[],\"va\":6},{\"definitions\":[],\"va\":7}],\"slice\":[],\"visited\":[1,2,3,4,5]}",
+        "factoryCalls": 1,
+        "fixtures": [
+          "Binary",
+          "Dump"
+        ],
+        "gatePassed": true,
+        "interfaceMatched": true,
+        "matchedActionCounts": null,
+        "matchedObservations": null,
+        "matchedPairCounts": null,
+        "mismatch": {
+          "action": "visit",
+          "actual": {
+            "decoded": {
+              "#set": [
+                {
+                  "#bigint": "1"
+                },
+                {
+                  "#bigint": "2"
+                },
+                {
+                  "#bigint": "3"
+                },
+                {
+                  "#bigint": "4"
+                },
+                {
+                  "#bigint": "5"
+                }
+              ]
+            },
+            "edges": {
+              "#set": [
+                {
+                  "dst": {
+                    "#bigint": "2"
+                  },
+                  "kind": "fallthrough",
+                  "src": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "3"
+                  },
+                  "kind": "taken",
+                  "src": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "4"
+                  },
+                  "kind": "next",
+                  "src": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "4"
+                  },
+                  "kind": "indirect",
+                  "src": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "6"
+                  },
+                  "kind": "indirect",
+                  "src": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "7"
+                  },
+                  "kind": "indirect",
+                  "src": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "5"
+                  },
+                  "kind": "summary",
+                  "src": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "6"
+                  },
+                  "kind": "call",
+                  "src": {
+                    "#bigint": "4"
+                  }
+                }
+              ]
+            },
+            "fixture_id": "Dump",
+            "obligations": {
+              "#set": [
+                {
+                  "reason": "indirect-targets",
+                  "site": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "reason": "call-targets",
+                  "site": {
+                    "#bigint": "4"
+                  }
+                }
+              ]
+            },
+            "pending": {
+              "#set": [
+                {
+                  "#bigint": "6"
+                },
+                {
+                  "#bigint": "7"
+                }
+              ]
+            },
+            "phase": "recover",
+            "provenance": {
+              "#set": [
+                {
+                  "source": "captured",
+                  "va": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "source": "captured",
+                  "va": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "source": "captured",
+                  "va": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "5"
+                  }
+                },
+                {
+                  "source": "unavailable",
+                  "va": {
+                    "#bigint": "6"
+                  }
+                },
+                {
+                  "source": "unavailable",
+                  "va": {
+                    "#bigint": "7"
+                  }
+                }
+              ]
+            },
+            "reaching": {
+              "#set": [
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "5"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "6"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "7"
+                  }
+                }
+              ]
+            },
+            "slice": {
+              "#set": []
+            },
+            "visited": {
+              "#set": [
+                {
+                  "#bigint": "1"
+                },
+                {
+                  "#bigint": "2"
+                },
+                {
+                  "#bigint": "3"
+                },
+                {
+                  "#bigint": "4"
+                },
+                {
+                  "#bigint": "5"
+                }
+              ]
+            }
+          },
+          "expected": {
+            "decoded": {
+              "#set": [
+                {
+                  "#bigint": "1"
+                },
+                {
+                  "#bigint": "2"
+                },
+                {
+                  "#bigint": "3"
+                },
+                {
+                  "#bigint": "4"
+                }
+              ]
+            },
+            "edges": {
+              "#set": [
+                {
+                  "dst": {
+                    "#bigint": "2"
+                  },
+                  "kind": "fallthrough",
+                  "src": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "3"
+                  },
+                  "kind": "taken",
+                  "src": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "4"
+                  },
+                  "kind": "next",
+                  "src": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "4"
+                  },
+                  "kind": "indirect",
+                  "src": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "6"
+                  },
+                  "kind": "indirect",
+                  "src": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "7"
+                  },
+                  "kind": "indirect",
+                  "src": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "5"
+                  },
+                  "kind": "summary",
+                  "src": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "dst": {
+                    "#bigint": "6"
+                  },
+                  "kind": "call",
+                  "src": {
+                    "#bigint": "4"
+                  }
+                }
+              ]
+            },
+            "fixture_id": "Dump",
+            "obligations": {
+              "#set": [
+                {
+                  "reason": "indirect-targets",
+                  "site": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "reason": "call-targets",
+                  "site": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "reason": "unavailable",
+                  "site": {
+                    "#bigint": "5"
+                  }
+                }
+              ]
+            },
+            "pending": {
+              "#set": [
+                {
+                  "#bigint": "6"
+                },
+                {
+                  "#bigint": "7"
+                }
+              ]
+            },
+            "phase": "recover",
+            "provenance": {
+              "#set": [
+                {
+                  "source": "captured",
+                  "va": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "source": "file",
+                  "va": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "source": "captured",
+                  "va": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "source": "captured",
+                  "va": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "source": "unavailable",
+                  "va": {
+                    "#bigint": "5"
+                  }
+                },
+                {
+                  "source": "unavailable",
+                  "va": {
+                    "#bigint": "6"
+                  }
+                },
+                {
+                  "source": "unavailable",
+                  "va": {
+                    "#bigint": "7"
+                  }
+                }
+              ]
+            },
+            "reaching": {
+              "#set": [
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "1"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "2"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "3"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "4"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "5"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "6"
+                  }
+                },
+                {
+                  "definitions": {
+                    "#set": []
+                  },
+                  "va": {
+                    "#bigint": "7"
+                  }
+                }
+              ]
+            },
+            "slice": {
+              "#set": []
+            },
+            "visited": {
+              "#set": [
+                {
+                  "#bigint": "1"
+                },
+                {
+                  "#bigint": "2"
+                },
+                {
+                  "#bigint": "3"
+                },
+                {
+                  "#bigint": "4"
+                },
+                {
+                  "#bigint": "5"
+                }
+              ]
+            }
+          },
+          "hints": "[ExtraElem { path: [Field(\"decoded\")], actual: Int(5) }, MissingElem { path: [Field(\"obligations\")], expected: Record({\"reason\": Str(\"unavailable\"), \"site\": Int(5)}) }, MissingElem { path: [Field(\"provenance\")], expected: Record({\"source\": Str(\"unavailable\"), \"va\": Int(5)}) }, ExtraElem { path: [Field(\"provenance\")], actual: Record({\"source\": Str(\"file\"), \"va\": Int(5)}) }]"
+        },
+        "mode": "mutant",
+        "modelMatched": false,
+        "observationsDispatched": 23,
+        "portDrops": 1,
+        "schema": "ariadne.mbt-replay/v2",
+        "semanticDigest": "3c175901a7393a77065f69e16c6849ed898504a7cf1103e656b62bfa47bfebb2",
+        "status": "mismatch",
+        "targetProfile": "mirrorrust-v1"
+      }
+    },
+    "core-wrong-digest": {
+      "command": [
+        "/home/nzsn/Repos/Ariadne/mbt/.work/replay-dtwga0yx/good/ariadne-mbt",
+        "wrong-digest",
+        "/home/nzsn/.local/bin/ModelMirrors",
+        "/home/nzsn/Repos/Ariadne/mbt/.work/replay-dtwga0yx/model/AriadneReplay.tla",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/AriadneReplay.lock.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Binary.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Dump.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Loop.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Closed.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Pipeline.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Calls.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Binary.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Dump.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Loop.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Closed.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Pipeline.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/corpus/Calls.itf.json"
+      ],
+      "executableSha256": "61b9f1f3a30ab29ae40ac69de100343212f54503f013b4e5d1b408c4bf1000d2",
+      "exitCode": 0,
+      "report": {
+        "adapterId": "ariadne.machine-analysis/v1",
+        "bindingImplementation": "compiler-generated",
+        "cleanupMechanism": "Rust Drop of generated binding port",
+        "completedTraces": 0,
+        "coverageSatisfied": false,
+        "error": "register failed (interface_digest_mismatch): interface_digest_mismatch",
+        "factoryCalls": 0,
+        "fixtures": [],
+        "gatePassed": true,
+        "interfaceMatched": false,
+        "matchedActionCounts": null,
+        "matchedObservations": null,
+        "matchedPairCounts": null,
+        "mismatch": null,
+        "mode": "wrong-digest",
+        "modelMatched": false,
+        "observationsDispatched": 0,
+        "portDrops": 0,
+        "schema": "ariadne.mbt-replay/v2",
+        "semanticDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+        "status": "rejected",
+        "targetProfile": "mirrorrust-v1"
+      }
+    },
+    "llvm-ir-good": {
+      "command": [
+        "/home/nzsn/Repos/Ariadne/mbt/stage-e/target/debug/ariadne-stage-e-mbt",
+        "llvm-ir",
+        "good",
+        "/home/nzsn/.local/bin/ModelMirrors",
+        "/home/nzsn/Repos/Ariadne/mbt/stage-e/.work/check/model/LLVMIRReplay.tla",
+        "/home/nzsn/Repos/Ariadne/mbt/stage-e/corpus/LLVMIRReplay.lock.json",
+        "/home/nzsn/Repos/Ariadne/mbt/stage-e/corpus/LLVMIRReplay.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/stage-e/corpus/LLVMIRReplay.itf.json"
+      ],
+      "exitCode": 0,
+      "report": {
+        "completedTraces": 2,
+        "coverageSatisfied": true,
+        "engine": "llvm-ir",
+        "error": null,
+        "factoryCalls": 1,
+        "gatePassed": true,
+        "initializations": 2,
+        "matchedActions": {
+          "ExpandSlice": 6,
+          "FinishSlice": 2
+        },
+        "matchedObservations": 10,
+        "mode": "good",
+        "modelMatched": true,
+        "observationsDispatched": 10,
+        "portDrops": 1,
+        "schema": "ariadne.stage-e-mirrorrust-replay/v1",
+        "scope": "existing formal fixture replay; broader Stage E acceptance remains open",
+        "semanticDigest": "38287990808f96743e66126643a30df795e36074cedf7f10c989949923670176",
+        "status": "passed"
+      }
+    },
+    "llvm-ir-wrong-digest": {
+      "command": [
+        "/home/nzsn/Repos/Ariadne/mbt/stage-e/target/debug/ariadne-stage-e-mbt",
+        "llvm-ir",
+        "wrong-digest",
+        "/home/nzsn/.local/bin/ModelMirrors",
+        "/home/nzsn/Repos/Ariadne/mbt/stage-e/.work/check/model/LLVMIRReplay.tla",
+        "/home/nzsn/Repos/Ariadne/mbt/stage-e/corpus/LLVMIRReplay.lock.json",
+        "/home/nzsn/Repos/Ariadne/mbt/stage-e/corpus/LLVMIRReplay.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/stage-e/corpus/LLVMIRReplay.itf.json"
+      ],
+      "exitCode": 0,
+      "report": {
+        "completedTraces": 0,
+        "coverageSatisfied": false,
+        "engine": "llvm-ir",
+        "error": "register failed (interface_digest_mismatch): interface_digest_mismatch",
+        "factoryCalls": 0,
+        "gatePassed": true,
+        "initializations": 0,
+        "matchedActions": null,
+        "matchedObservations": null,
+        "mode": "wrong-digest",
+        "modelMatched": false,
+        "observationsDispatched": 0,
+        "portDrops": 0,
+        "schema": "ariadne.stage-e-mirrorrust-replay/v1",
+        "scope": "existing formal fixture replay; broader Stage E acceptance remains open",
+        "semanticDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+        "status": "rejected"
+      }
+    },
+    "machine-state-good": {
+      "command": [
+        "/home/nzsn/Repos/Ariadne/mbt/stage-e/target/debug/ariadne-stage-e-mbt",
+        "machine-state",
+        "good",
+        "/home/nzsn/.local/bin/ModelMirrors",
+        "/home/nzsn/Repos/Ariadne/mbt/stage-e/.work/check/model/MachineStateReplay.tla",
+        "/home/nzsn/Repos/Ariadne/mbt/stage-e/corpus/MachineStateReplay.lock.json",
+        "/home/nzsn/Repos/Ariadne/mbt/stage-e/corpus/MachineStateReplay.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/stage-e/corpus/MachineStateReplay.itf.json"
+      ],
+      "exitCode": 0,
+      "report": {
+        "completedTraces": 2,
+        "coverageSatisfied": true,
+        "engine": "machine-state",
+        "error": null,
+        "factoryCalls": 1,
+        "gatePassed": true,
+        "initializations": 2,
+        "matchedActions": {
+          "FinishStateflow": 2,
+          "Propagate": 6
+        },
+        "matchedObservations": 10,
+        "mode": "good",
+        "modelMatched": true,
+        "observationsDispatched": 10,
+        "portDrops": 1,
+        "schema": "ariadne.stage-e-mirrorrust-replay/v1",
+        "scope": "existing formal fixture replay; broader Stage E acceptance remains open",
+        "semanticDigest": "ece7b7c73cc31468ec08744cd9588170cce06b45f7cbbccc2c6689981969667b",
+        "status": "passed"
+      }
+    },
+    "machine-state-wrong-digest": {
+      "command": [
+        "/home/nzsn/Repos/Ariadne/mbt/stage-e/target/debug/ariadne-stage-e-mbt",
+        "machine-state",
+        "wrong-digest",
+        "/home/nzsn/.local/bin/ModelMirrors",
+        "/home/nzsn/Repos/Ariadne/mbt/stage-e/.work/check/model/MachineStateReplay.tla",
+        "/home/nzsn/Repos/Ariadne/mbt/stage-e/corpus/MachineStateReplay.lock.json",
+        "/home/nzsn/Repos/Ariadne/mbt/stage-e/corpus/MachineStateReplay.itf.json",
+        "/home/nzsn/Repos/Ariadne/mbt/stage-e/corpus/MachineStateReplay.itf.json"
+      ],
+      "exitCode": 0,
+      "report": {
+        "completedTraces": 0,
+        "coverageSatisfied": false,
+        "engine": "machine-state",
+        "error": "register failed (interface_digest_mismatch): interface_digest_mismatch",
+        "factoryCalls": 0,
+        "gatePassed": true,
+        "initializations": 0,
+        "matchedActions": null,
+        "matchedObservations": null,
+        "mode": "wrong-digest",
+        "modelMatched": false,
+        "observationsDispatched": 0,
+        "portDrops": 0,
+        "schema": "ariadne.stage-e-mirrorrust-replay/v1",
+        "scope": "existing formal fixture replay; broader Stage E acceptance remains open",
+        "semanticDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+        "status": "rejected"
+      }
+    }
+  },
+  "coreCorpusManifestSha256": "796648f8fff9877e40b3d1f4cab5199f3a1d4fe02ebdfd1f76c1889dbeebac67",
+  "coreEvaluatorSha256": "61b9f1f3a30ab29ae40ac69de100343212f54503f013b4e5d1b408c4bf1000d2",
+  "installedServer": {
+    "exactTagBuildProvenanceVerified": false,
+    "installedEqualsCheckoutBuild": false,
+    "path": "/home/nzsn/.local/bin/ModelMirrors",
+    "sha256": "e5eab73138ad380b039e3312f6e9d860bbd99126c13a3bb84b90f206dacb41dd",
+    "sourceCheckoutDirty": true,
+    "sourceTagCommit": "1a069cd3e34d7bfea272e3ee7e10f51acedcc7cb",
+    "sourceTagReference": "v0.0.3.1",
+    "versionOutput": "Mirrors 0.0.3"
+  },
+  "logs": "/home/nzsn/Repos/Ariadne/tmp/mirrorrust-installed-compatibility",
+  "mirrorrust": {
+    "revision": "a3f826f6590bea1bbbffe095353bf9a104c4c1d1",
+    "runtimeCodeDiffFromTag": "",
+    "sourceHashes": {
+      "Cargo.toml": "dc7529ce6edbdc1096ff935b90be2ce4ff667dd5aac4edd90f3db3a82d25a01a",
+      "src/client.rs": "c038f8eeae439e501e72f8966c31c97e76cfe5edf494d4cb536dc1948e542f87",
+      "src/json.rs": "ef20283713e020529d022fc67f8b92eef8027912f58fa78e04a897c16d739c19",
+      "src/lib.rs": "bf4bc9e52b18b931317b0c790a225a8ffdd0d3526eff240870f8205cb9576fad",
+      "src/model_interface.rs": "3d6ada4b8526fa6aa7d0ce5f2d824498160285d110b6cf53dbe77d9cd1174c6d",
+      "src/protocol.rs": "ed59ec6bc4949d4864db2a434fd4f218e4e1c1511cb38dc6cb3286c15b8226ca",
+      "src/registry.rs": "97458ada08ffd4e00392d6c630ea353bce83969048ec58da4a678e646ef0b0cf",
+      "src/spec.rs": "6a13de7cfa6fbdb7c3a572b7479b94efd1902b9514cccb192687b058cc72cd4f",
+      "src/transport.rs": "2be4e2a61c69bde3f9dc6bb29009ae652b51cbbcc2baee559f066ecc5fcdcedd"
+    },
+    "taggedClientReference": "v0.0.1.0"
+  },
+  "passed": true,
+  "recordedDate": "2026-10-01",
+  "retainedCompilerBuild": {
+    "compilerSha256": "562a271ede8cf932bd8b18a81eb772bd403703a58ff5766929a394e848df9ed3",
+    "note": "Bindings and corpora retain the prepared compiler. This check selects the installed server only.",
+    "revision": "eb5cd001b990e6ac5e9b1e9b1c5a17ffb85e25fc"
+  },
+  "schema": "ariadne.installed-modelmirrors-compatibility/v1",
+  "scope": "Installed ModelMirrors local stdio negotiated core and Stage E fixture replay, exact-digest admission, and existing five core mutations. No source-tag build-provenance, compiler migration, network transport or universal correctness claim.",
+  "stageECorpusManifestSha256": "ca359cf910773cc1da216235932dbb35c001cb60e1b908c40727274712914194",
+  "stageEEvaluatorSha256": "e28f803a079f09bbcfd0cf8b75fc43d199b5a816063b1320e32bb4e20144188b",
+  "stageEIntegrationRecordSha256": "b02ac42aa592875df67e9a8e2137fd5476c7d06277eaa7f1e9a6f91186bc5208"
+}

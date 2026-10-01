@@ -1,0 +1,81 @@
+{
+  "schema": "mirrors.model-interface/v1",
+  "interfaceVersion": "1.0.0",
+  "model": {
+    "module": "LLVMIRReplay",
+    "source": "LLVMIRReplay.tla"
+  },
+  "wire": {
+    "actionVariable": "action_taken",
+    "parameterVariable": "parameters"
+  },
+  "initializers": [
+    {
+      "id": "Initialize",
+      "wireAction": "init",
+      "wireAliases": [],
+      "inputs": []
+    }
+  ],
+  "actions": [
+    {
+      "id": "ExpandSlice",
+      "wireAction": "expandSlice",
+      "wireAliases": [],
+      "inputs": []
+    },
+    {
+      "id": "FinishSlice",
+      "wireAction": "finishSlice",
+      "wireAliases": [],
+      "inputs": []
+    }
+  ],
+  "observations": [
+    {
+      "id": "ArtifactId",
+      "wireName": "artifact_id",
+      "provenance": "implementation"
+    },
+    {
+      "id": "ModuleId",
+      "wireName": "module_id",
+      "provenance": "implementation"
+    },
+    {
+      "id": "FunctionId",
+      "wireName": "function_id",
+      "provenance": "implementation"
+    },
+    {
+      "id": "Phase",
+      "wireName": "phase",
+      "provenance": "implementation"
+    },
+    {
+      "id": "Slice",
+      "wireName": "slice",
+      "provenance": "implementation"
+    },
+    {
+      "id": "ControlGraph",
+      "wireName": "control_graph",
+      "provenance": "implementation"
+    },
+    {
+      "id": "CallGraph",
+      "wireName": "call_graph",
+      "provenance": "implementation"
+    },
+    {
+      "id": "DependencyPreds",
+      "wireName": "dependency_preds",
+      "provenance": "implementation"
+    },
+    {
+      "id": "Obligations",
+      "wireName": "obligations",
+      "provenance": "implementation"
+    }
+  ]
+}

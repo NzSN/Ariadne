@@ -80,6 +80,9 @@ example, and specification correspondence are described in
 [the implementation guide](docs/implementation.md).
 
 The [model-based test gate](mbt/README.md) uses Mirrors' generated `mirrorrust-v1`
+bindings. A separate [Stage E integration](mbt/stage-e/README.md) connects the
+machine-state and LLVM IR engines to the sibling MirrorRust client for bounded
+fixture replay. The core gate uses a generated
 binding and MirrorRust to replay TLC-generated traces against the real Rust
 analyzer, with required interface negotiation, coverage checks, and deliberate
 implementation mutations:

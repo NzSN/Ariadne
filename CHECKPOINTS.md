@@ -1,7 +1,7 @@
 # Ariadne checkpoints
 
-Updated **2026-09-30** for the Priority 4 delivery and current-source
-integration evidence. The Stage D 49-case gate remains intact at **0/49** as a
+Updated **2026-10-01** for the first Stage E MirrorRust integration, following
+the Priority 4 delivery. The Stage D 49-case gate remains intact at **0/49** as a
 long-term formal purpose. Earlier entries retain their historical,
 time-local commit and validation status.
 
@@ -26,8 +26,38 @@ flowchart TD
     Q["2026-09-29 17:27 CST · working tree<br/>Priority 1 real Chromium capture qualified"]
     R["2026-09-29 23:29 CST · working tree<br/>P2 no-change; P3 delivered; P4 measured partial"]
     S["2026-09-30 00:13 CST · source-bound<br/>19/19 integration gates; D source hashes unchanged"]
+    T["2026-10-01 · working tree<br/>Stage E typed MirrorRust ports; two-fixture replay"]
     A --> B --> C --> D --> E --> F --> G --> H --> I --> J --> K --> L --> M --> N --> O --> P --> Q --> R --> S
+    S --> T
 ```
+
+## 2026-10-01 — First Stage E MirrorRust integration
+
+The separate [Stage E harness](mbt/stage-e/README.md) now uses the sibling
+`~/Repos/MirrorRust` client through two compiler-generated typed ports.
+Deferred factories preserve exact-digest admission before port construction.
+Four complete fixture traces (the existing machine-state and LLVM IR examples
+each replayed twice) matched all 20 observations, including their declared
+derived result views. Both wrong-digest checks rejected before any factory,
+initialization or observation. Three projection tests, four Rust binding tests,
+formatting and Clippy passed. The core harness was repaired for MirrorRust's
+`NegotiatedError` API and passed its existing 12 traces, 168 matched states,
+wrong-digest rejection and five engine mutation checks.
+
+The [retained source-bound record](docs/Ariadne/stage-e-mirrorrust-integration-validation.json)
+pins client, SUT, oracle and generated artifacts. The
+[first-stage implementation plan](Plans/stage-e-mirrorrust-integration.md) is
+complete. Broader generated scenarios, Stage E engine mutants,
+recovery/native-adapter handoff coverage and report/CLI integration remain
+open; **Stage E is still partial**. No fresh 19-component overall integration
+result or universal Rust-refinement claim is made by this checkpoint.
+
+The subsequent [installed ModelMirrors compatibility check](docs/Ariadne/installed-modelmirrors-compatibility.md)
+passes all 11 runtime checks: the 168 core states, 20 Stage E observations,
+three pre-factory digest rejections and five expected core mutation mismatches.
+The actual installed binary is hash-bound; it prints `Mirrors 0.0.3`, while
+`v0.0.3.1` names the local source tag. Exact clean-tag build provenance remains
+unverified because the installed binary differs from the dirty checkout's build.
 
 ## 2026-09-30 — Priority 4 qualification and measured optimization
 

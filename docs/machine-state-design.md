@@ -6,6 +6,8 @@ fixture validation; generated model-based replay remains open. See the
 baseline: `62d7c57ac88336d1defd4bd121e9976470cf704f`.
 The [remaining implementation plan](Ariadne/remaining-implementation-plan.md)
 places this Rust module in Stage E.
+The [Stage E MirrorRust integration plan](../Plans/stage-e-mirrorrust-integration.md)
+covers its first typed replay integration stage.
 
 The specification is [AriadneMachineState.tla](../Specs/AriadneMachineState.tla),
 with shared facts in [AriadneMachineCommon.tla](../Specs/AriadneMachineCommon.tla)

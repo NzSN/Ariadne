@@ -3,6 +3,8 @@
 These are separate result families for [Stage E](remaining-implementation-plan.md#e--implement-the-other-two-formal-analysis-machines).
 They are not added to the minidump investigator CLI until their own model-based
 replay and report validation are complete.
+The [first MirrorRust integration stage](../../Plans/stage-e-mirrorrust-integration.md)
+connects these result families to separate compiler-generated replay ports.
 
 | Path | Identity and fixed input | Mutable result | Derived observations |
 | --- | --- | --- | --- |
