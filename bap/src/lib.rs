@@ -1,4 +1,5 @@
 //! Optional BAP-owned instruction lifting and conservative projection.
+mod address;
 mod ast;
 mod prepare;
 mod projection;

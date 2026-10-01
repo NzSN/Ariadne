@@ -180,3 +180,18 @@ explicit finite semantic facts bound to the prepared snapshot. It emits separate
 `machine-state` reports beside the original minidump reports. See
 [Stage E completion](../docs/Ariadne/stage-e-completion.md) for the input schema,
 model-relative feasibility and preserved recovery/preparation evidence.
+
+## Fault-address investigation question
+
+The [first investigation module](../investigation/README.md) explains per-byte
+possible address producers with captured evidence, alternatives and concrete
+missing-evidence requirements. Select an instruction and its explicit access
+index with `--explain-fault-address VA --memory-access N`; the site becomes a
+slice seed, never an entry root. `--explanation-only --format text|json|dot`
+returns its independently versioned result. Output-directory mode adds
+`explanation.txt/.json/.dot` beside the existing reports.
+
+The [contracts](../docs/Ariadne/investigation-contracts.md) and
+[qualification](../docs/Ariadne/investigation-validation.md) define the current
+scope. Partial answers retain unknown entry, call and memory alternatives;
+producer dependencies are not a historical execution trace or UAF proof.

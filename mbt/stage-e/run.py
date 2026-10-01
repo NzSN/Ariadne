@@ -36,6 +36,9 @@ def mutant(mutation, directory, shared_target):
     reports=sut/'reports';reports.mkdir()
     shutil.copytree(ROOT/'reports/src',reports/'src')
     for name in ['Cargo.toml','Cargo.lock']:shutil.copy2(ROOT/'reports'/name,reports/name)
+    (sut/'investigation').mkdir()
+    shutil.copytree(ROOT/'investigation/src',sut/'investigation/src')
+    for name in ['Cargo.toml','Cargo.lock']:shutil.copy2(ROOT/'investigation'/name,sut/'investigation'/name)
     source=sut/mutation['file'];original=source.read_text()
     if original.count(mutation['old'])!=1:raise RuntimeError(f'mutation no longer matches once: {mutation["name"]}')
     source.write_text(original.replace(mutation['old'],mutation['new'],1))
@@ -62,7 +65,7 @@ def main():
     print(f'Stage E completion logs: {work}',flush=True)
     manifest=json.loads((HERE/'corpus/manifest.json').read_text())
     paths=[*sorted((ROOT/'src').glob('*.rs')),*sorted((HERE/'src').glob('*.rs')),*sorted((HERE/'tests').glob('*.rs')),
-           *sorted((ROOT/'reports/src').glob('*.rs')),*sorted((ROOT/'reports/tests').glob('*.rs')),
+           *sorted((ROOT/'investigation/src').glob('*.rs')),ROOT/'investigation/Cargo.toml',ROOT/'investigation/Cargo.lock',*sorted((ROOT/'reports/src').glob('*.rs')),*sorted((ROOT/'reports/tests').glob('*.rs')),
            HERE/'Cargo.toml',HERE/'Cargo.lock',HERE/'run.py',HERE/'prepare.py',HERE/'cases.py',HERE/'mutations.json',HERE/'test_projection.py',ROOT/'reports/Cargo.toml',ROOT/'reports/Cargo.lock']
     source_hashes={str(path.relative_to(ROOT)):sha256(path) for path in paths}
     client=ROOT.parent/'MirrorRust'

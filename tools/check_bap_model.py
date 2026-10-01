@@ -34,9 +34,9 @@ def map_rows(value,field):
 
 def sources():
     paths=set()
-    for tree in ['src','bap/src','reports/src','native/bap']:
+    for tree in ['src','bap/src','investigation/src','reports/src','native/bap']:
         paths.update(p for p in (ROOT/tree).rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix!='.md')
-    paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','bap/Cargo.toml','bap/Cargo.lock','reports/Cargo.toml','reports/Cargo.lock','tools/check_bap_model.py','Specs/Ariadne.tla','Specs/AriadneMachineCommon.tla','Specs/AriadneTypes.tla'])
+    paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','bap/Cargo.toml','bap/Cargo.lock','investigation/Cargo.toml','investigation/Cargo.lock','reports/Cargo.toml','reports/Cargo.lock','tools/check_bap_model.py','Specs/Ariadne.tla','Specs/AriadneMachineCommon.tla','Specs/AriadneTypes.tla'])
     return {str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(paths)}
 
 def main():

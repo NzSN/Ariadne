@@ -31,16 +31,16 @@ def command(manifest,target,suite,test):
  return ['cargo','test','--offline','--locked','--release','--manifest-path',manifest,'--target-dir',target,*(['--lib'] if suite=='lib' else ['--test',suite]),test,'--','--exact','--include-ignored']
 def sources():
  paths=set()
- for tree in ['src','tests','reports/src','bap/src','bap/tests','native/bap']:
+ for tree in ['src','tests','reports/src','investigation/src','bap/src','bap/tests','native/bap']:
   paths.update(p for p in (ROOT/tree).rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix!='.md')
- paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','reports/Cargo.toml','reports/Cargo.lock','bap/Cargo.toml','bap/Cargo.lock','tools/check_bap_mutations.py'])
+ paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','reports/Cargo.toml','reports/Cargo.lock','investigation/Cargo.toml','investigation/Cargo.lock','bap/Cargo.toml','bap/Cargo.lock','tools/check_bap_mutations.py'])
  return {str(p.relative_to(ROOT)):digest(p) for p in sorted(paths)}
 def main():
  before=sources()
  work=Path(tempfile.mkdtemp(prefix='ariadne-bap-mutations-'));sut=work/'sut';sut.mkdir()
  env={**os.environ,'ARIADNE_BAP_HELPER':str(ROOT/'target/ariadne-bap-lift'),'ARIADNE_LLVM_MC':str(ROOT/'target/ariadne-llvm-mc'),'BAP_RUNTIME_ROOT':str(ROOT/'tmp/bap-setup/stable')}
- for tree in ['src','tests','reports/src','bap/src','bap/tests','native/bap']:shutil.copytree(ROOT/tree,sut/tree)
- for name in ['Cargo.toml','Cargo.lock','reports/Cargo.toml','reports/Cargo.lock','bap/Cargo.toml','bap/Cargo.lock']:shutil.copy2(ROOT/name,sut/name)
+ for tree in ['src','tests','reports/src','investigation/src','bap/src','bap/tests','native/bap']:shutil.copytree(ROOT/tree,sut/tree)
+ for name in ['Cargo.toml','Cargo.lock','reports/Cargo.toml','reports/Cargo.lock','investigation/Cargo.toml','investigation/Cargo.lock','bap/Cargo.toml','bap/Cargo.lock']:shutil.copy2(ROOT/name,sut/name)
  observers={str(p.relative_to(sut)):digest(p) for p in (sut/'bap/tests').rglob('*') if p.is_file()}
  print('Mutation artifacts:',work,flush=True);baselines=set();rows=[]
  for name,file,old,new,suite,test in MUTANTS:

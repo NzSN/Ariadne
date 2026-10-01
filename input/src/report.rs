@@ -227,7 +227,7 @@ fn site(
         "issues": site_issues(prepared, address, evidence),
     });
     if let Some(semantic) = &evidence.semantic {
-        value["semantic"] = json!({"backend":semantic.backend,"helper_sha256":semantic.helper_sha256,"runtime_sha256":semantic.runtime_sha256,"projection":semantic.projection,"status":semantic.status,"ast_sha256":semantic.ast_sha256,"fallback":semantic.fallback,"gaps":semantic.gaps});
+        value["semantic"] = json!({"backend":semantic.backend,"helper_sha256":semantic.helper_sha256,"runtime_sha256":semantic.runtime_sha256,"projection":semantic.projection,"status":semantic.status,"ast_sha256":semantic.ast_sha256,"fallback":semantic.fallback,"gaps":semantic.gaps,"memory_accesses":semantic.memory_accesses.iter().map(ariadne_investigation::AddressUse::from).collect::<Vec<_>>()});
     }
     value
 }

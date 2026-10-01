@@ -7,9 +7,9 @@ ROOT=Path(__file__).resolve().parents[1]
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def sources():
  paths=set()
- for tree in ['src','tests','input/src','input/tests','input/examples','reports/src','reports/tests','bap/src','bap/tests','bench/src','native/llvm_mc','native/bap']:
+ for tree in ['src','tests','input/src','input/tests','input/examples','reports/src','reports/tests','bap/src','investigation/src','bap/tests','bench/src','native/llvm_mc','native/bap']:
   paths.update(p for p in (ROOT/tree).rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix!='.md')
- paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','input/Cargo.toml','input/Cargo.lock','reports/Cargo.toml','reports/Cargo.lock','bap/Cargo.toml','bap/Cargo.lock','bench/Cargo.toml','bench/Cargo.lock','Specs/Ariadne.tla','Specs/AriadneMachineCommon.tla','Specs/AriadneTypes.tla','tools/check_bap_semantics.py','tools/check_bap_model.py','tools/check_bap_mutations.py','tools/measure_bap.py','tools/check_stage_e.py','tools/check_minidump.py','tools/check_minidump_mutations.py'])
+ paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','input/Cargo.toml','input/Cargo.lock','reports/Cargo.toml','reports/Cargo.lock','bap/Cargo.toml','bap/Cargo.lock','investigation/Cargo.toml','investigation/Cargo.lock','bench/Cargo.toml','bench/Cargo.lock','Specs/Ariadne.tla','Specs/AriadneMachineCommon.tla','Specs/AriadneTypes.tla','tools/check_bap_semantics.py','tools/check_bap_model.py','tools/check_bap_mutations.py','tools/measure_bap.py','tools/check_stage_e.py','tools/check_minidump.py','tools/check_minidump_mutations.py'])
  return {str(p.relative_to(ROOT)):sha(p) for p in sorted(paths)}
 def retained(path,hashkey='sourceHashes'):
  data=json.loads(path.read_text())

@@ -10,17 +10,28 @@ Neither a decoded instruction nor a successful component check is, by itself,
 a verified instruction step. Its 49-case gate does not block practical
 minidump investigations.
 
+## Investigation direction
+
+The [investigation-layer design](docs/Ariadne/investigation-layer-design.md)
+and [implementation plan](Plans/investigation-layer.md) propose domain questions
+above binary-analysis primitives. The first slice explains possible fault-address
+producers with captured evidence, alternatives and missing-evidence requirements.
+The [first fault-address delivery](docs/Ariadne/investigation-validation.md) now
+implements the question for both platform fixtures and the retained controlled
+Linux capture. Original-Windows acceptance remains partial; no historical path
+or general root-cause proof is claimed.
+BAP analysis-core migration remains separate from this product capability.
+
 ## Current checkpoint
 
 The Rust core already recovers a local instruction-level CFG, computes
 may-reaching definitions, and builds a backward data slice from fixed,
-adapter-supplied instruction summaries. An optional pinned LLVM MC adapter
-decodes caller-provided byte spans and supplies conservative control-flow
-summaries. `ByteSnapshot::prepare()` now adds structured operands and reviewed
-normal-continuation effects and reviewed control for an explicit 147-opcode registry, with byte-level
-GPR aliases, coarse memory and per-site gaps; see the
-[initial delivery record](docs/Ariadne/operand-effects-validation.md) and
-[Stage A validation](docs/Ariadne/stage-a-validation.md). The [minidump package](input/README.md) now provides captured-memory input and
+adapter-supplied instruction summaries. BAP is now the sole production
+minidump semantic backend; LLVM MC remains an independent decode/control
+reference. The semantic selector and LLVM effect fallback are removed. See the
+[current BAP-only record](docs/Ariadne/bap-only-removal-validation.md). Legacy
+LLVM effect rules and their source-bound tests remain historical/research
+reference evidence. The BAP analysis-core replacement has not started. The [minidump package](input/README.md) now provides captured-memory input and
 local-start discovery for Windows/Linux AMD64. PE/ELF image and ELF core readers
 remain deferred. A tool-produced [captured predecessor slice and versioned
 investigator CLI](docs/Ariadne/stage-b-c-validation.md) are delivered. The

@@ -38,4 +38,6 @@ _apalache-out/
 /reports/target/
 
 /bap/target/
+/investigation/target/
+/investigation/.work/
 /bap/.work/

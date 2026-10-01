@@ -8,7 +8,7 @@ use std::io::{self, Write};
 use std::path::{Path, PathBuf};
 
 fn usage() -> &'static str {
-    "usage: ariadne-minidump DUMP --decoder-reference PATH --entry VA_HEX [--entry VA_HEX ...] [--seed VA_HEX ...] [--seed-exception-rip] [--max-starts N] [--stateflow-input SEMANTICS_JSON] [--bap-helper PATH] [--bap-runtime DIR] (--format text|dot|json | --output-dir NEW_DIR)"
+    "usage: ariadne-minidump DUMP --decoder-reference PATH --entry VA_HEX [--entry VA_HEX ...] [--seed VA_HEX ...] [--seed-exception-rip] [--max-starts N] [--stateflow-input SEMANTICS_JSON] [--explain-fault-address VA --memory-access N] [--explanation-only] [--bap-helper PATH] [--bap-runtime DIR] (--format text|dot|json | --output-dir NEW_DIR)"
 }
 fn invalid(message: impl Into<String>) -> io::Error {
     io::Error::new(io::ErrorKind::InvalidInput, message.into())
@@ -41,6 +41,9 @@ struct Args {
     format: Option<ReportFormat>,
     output_dir: Option<PathBuf>,
     stateflow_input: Option<PathBuf>,
+    explain_site: Option<u64>,
+    memory_access: Option<usize>,
+    explanation_only: bool,
     bap_helper: Option<PathBuf>,
     bap_runtime: Option<PathBuf>,
 }
@@ -59,12 +62,22 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
     let mut format = None;
     let mut output_dir = None;
     let mut stateflow_input = None;
+    let mut explain_site = None;
+    let mut memory_access = None;
+    let mut explanation_only = false;
     let mut bap_helper = None;
     let mut bap_runtime = None;
     while let Some(flag) = args.next() {
         let flag = flag
             .to_str()
             .ok_or_else(|| invalid("non-UTF-8 option name"))?;
+        if flag == "--explanation-only" {
+            if explanation_only {
+                return Err(invalid("duplicate --explanation-only").into());
+            }
+            explanation_only = true;
+            continue;
+        }
         if flag == "--seed-exception-rip" {
             if exception_rip_seed {
                 return Err(invalid("duplicate --seed-exception-rip").into());
@@ -113,6 +126,21 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
             }
             "--bap-helper" if bap_helper.is_none() => bap_helper = Some(PathBuf::from(value)),
             "--bap-runtime" if bap_runtime.is_none() => bap_runtime = Some(PathBuf::from(value)),
+            "--explain-fault-address" if explain_site.is_none() => {
+                explain_site = Some(parse_va(
+                    value
+                        .to_str()
+                        .ok_or_else(|| invalid("non-UTF8 explanation VA"))?,
+                )?);
+            }
+            "--memory-access" if memory_access.is_none() => {
+                memory_access = Some(
+                    value
+                        .to_str()
+                        .ok_or_else(|| invalid("non-UTF8 memory access"))?
+                        .parse()?,
+                );
+            }
             "--stateflow-input" if stateflow_input.is_none() => {
                 stateflow_input = Some(PathBuf::from(value))
             }
@@ -121,6 +149,20 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
     }
     if entries.is_empty() || decoder.is_none() || format.is_some() == output_dir.is_some() {
         return Err(invalid(usage()).into());
+    }
+    if explain_site.is_some() != memory_access.is_some() {
+        return Err(invalid(
+            "explanation requires both --explain-fault-address and --memory-access",
+        )
+        .into());
+    }
+    if explanation_only
+        && (explain_site.is_none() || output_dir.is_some() || stateflow_input.is_some())
+    {
+        return Err(invalid(
+            "--explanation-only requires an explanation with --format and no stateflow input",
+        )
+        .into());
     }
     Ok(Args {
         dump: PathBuf::from(dump),
@@ -132,6 +174,9 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
         format,
         output_dir,
         stateflow_input,
+        explain_site,
+        memory_access,
+        explanation_only,
         bap_helper,
         bap_runtime,
     })
@@ -205,6 +250,9 @@ fn run() -> Result<(), Box<dyn Error>> {
             .ok_or_else(|| invalid("exception context has no valid RIP"))?;
         args.seeds.insert(*rip);
     }
+    if let Some(site) = args.explain_site {
+        args.seeds.insert(site);
+    }
     let query = AnalysisQuery {
         entry_points: args.entries,
         slice_seeds: args.seeds,
@@ -221,6 +269,19 @@ fn run() -> Result<(), Box<dyn Error>> {
         snapshot.prepare_with_bap(&query, &args.decoder, &config, &options, args.limits)?;
     let mut analyzer = ariadne::Analyzer::new(prepared.prepared.request.clone())?;
     while analyzer.step() {}
+    let explanation = if let Some(site) = args.explain_site {
+        let bound = ariadne_input::investigation::bind_investigation(&prepared, &analyzer)?;
+        Some(ariadne_investigation::explain_fault_address(
+            &bound,
+            ariadne_investigation::FaultAddressQuestion {
+                site,
+                memory_access: args.memory_access.unwrap(),
+            },
+            ariadne_investigation::ExplainLimits::default(),
+        )?)
+    } else {
+        None
+    };
     let mut stateflow = if let Some(path) = args.stateflow_input {
         let bytes = fs::read(path)?;
         let semantics = ariadne_reports::decode_semantics(&bytes)?;
@@ -284,9 +345,30 @@ fn run() -> Result<(), Box<dyn Error>> {
                 reports.push((name, ariadne_reports::render_report(stateflow, format)?));
             }
         }
+        if let Some(explanation) = &explanation {
+            for (name, format) in [
+                ("explanation.txt", ariadne_reports::Format::Text),
+                ("explanation.json", ariadne_reports::Format::Json),
+                ("explanation.dot", ariadne_reports::Format::Dot),
+            ] {
+                reports.push((
+                    name,
+                    ariadne_reports::render_explanation(explanation, format)?,
+                ));
+            }
+        }
         publish_all(&directory, &reports)?;
     } else {
-        let output = if let Some(stateflow) = &stateflow {
+        let output = if args.explanation_only {
+            ariadne_reports::render_explanation(
+                explanation.as_ref().unwrap(),
+                match args.format.unwrap() {
+                    ReportFormat::Text => ariadne_reports::Format::Text,
+                    ReportFormat::Dot => ariadne_reports::Format::Dot,
+                    ReportFormat::Json => ariadne_reports::Format::Json,
+                },
+            )?
+        } else if let Some(stateflow) = &stateflow {
             ariadne_reports::render_report(
                 stateflow,
                 match args.format.unwrap() {
@@ -303,6 +385,30 @@ fn run() -> Result<(), Box<dyn Error>> {
                 args.exception_rip_seed,
             )?
         };
+        let output =
+            if let Some(explanation) = explanation.as_ref().filter(|_| !args.explanation_only) {
+                match args.format.unwrap() {
+                    ReportFormat::Json => {
+                        let mut value: serde_json::Value = serde_json::from_str(&output)?;
+                        value["investigation_explanation"] =
+                            ariadne_reports::encode_explanation(explanation)?;
+                        format!("{}\n", serde_json::to_string_pretty(&value)?)
+                    }
+                    ReportFormat::Text => format!(
+                        "{output}\n{}",
+                        ariadne_reports::render_explanation(
+                            explanation,
+                            ariadne_reports::Format::Text
+                        )?
+                    ),
+                    ReportFormat::Dot => format!(
+                        "// investigation_explanation: {}\n{output}",
+                        ariadne_reports::encode_explanation(explanation)?
+                    ),
+                }
+            } else {
+                output
+            };
         io::stdout().lock().write_all(output.as_bytes())?;
     }
     Ok(())

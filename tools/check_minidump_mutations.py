@@ -54,6 +54,9 @@ def main():
             shutil.copytree(ROOT / 'reports' / tree, sut / 'reports' / tree)
         for file_name in ('Cargo.toml', 'Cargo.lock'):
             shutil.copy2(ROOT / 'reports' / file_name, sut / 'reports' / file_name)
+        (sut/'investigation').mkdir()
+        shutil.copytree(ROOT/'investigation/src',sut/'investigation/src')
+        for f in ['Cargo.toml','Cargo.lock']:shutil.copy2(ROOT/'investigation'/f,sut/'investigation'/f)
         (sut / 'bap').mkdir()
         shutil.copytree(ROOT / 'bap/src', sut / 'bap/src')
         for file_name in ('Cargo.toml', 'Cargo.lock'):

@@ -9,3 +9,5 @@ publish = false
 ariadne-analysis = { path = ".." }
 ariadne-input = { path = "../input" }
 ariadne-bap = { path = "../bap" }
+ariadne-investigation = { path = "../investigation" }
+ariadne-reports = { path = "../reports" }

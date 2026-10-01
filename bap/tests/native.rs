@@ -293,3 +293,74 @@ fn partial_self_moves_define_written_cells_and_unsupported_bil_never_falls_back(
     assert!(unsupported.evidence.rule.is_none());
     backend.finish().unwrap();
 }
+
+#[test]
+#[ignore = "requires pinned native helpers"]
+fn memory_address_evidence_distinguishes_payload_index_displacement_and_rip() {
+    let mut backend = make_backend();
+    let candidates = [
+        (0x5000, Some(bytes("488b448b08"))),
+        (0x5020, Some(bytes("488903"))),
+        (0x5040, Some(bytes("8985b8feffff"))),
+        (0x5060, Some(bytes("488b0508000000"))),
+        (0x5080, Some(bytes("c70005000000"))),
+    ]
+    .into();
+    let batch = backend
+        .prepare(
+            "address-evidence-fixture",
+            &candidates,
+            &PreparationOptions::default(),
+            DecoderTarget::LinuxAmd64,
+        )
+        .unwrap();
+    let access = |va| {
+        &batch.sites[&va]
+            .evidence
+            .semantic
+            .as_ref()
+            .unwrap()
+            .memory_accesses[0]
+    };
+    let indexed = access(0x5000);
+    let e = indexed.expression.as_ref().unwrap();
+    assert_eq!(e.constant, 8);
+    assert_eq!(
+        e.terms,
+        vec![
+            ariadne::effects::AddressTerm {
+                bank: 1,
+                coefficient: 4
+            },
+            ariadne::effects::AddressTerm {
+                bank: 3,
+                coefficient: 1
+            }
+        ]
+    );
+    assert!(indexed.address_inputs.contains("gpr:rcx:0"));
+    assert!(indexed.address_inputs.contains("gpr:rbx:0"));
+    assert!(!indexed.address_inputs.contains("gpr:rax:0"));
+    assert_eq!(
+        access(0x5020).address_inputs,
+        (0..8).map(|i| cell("rbx", i)).collect()
+    );
+    assert_eq!(
+        access(0x5040).expression.as_ref().unwrap().constant,
+        (-328i64) as u64
+    );
+    assert_eq!(
+        access(0x5040).address_inputs,
+        (0..8).map(|i| cell("rbp", i)).collect()
+    );
+    assert_eq!(
+        access(0x5060).expression.as_ref().unwrap().constant,
+        0x5060 + 7 + 8
+    );
+    assert!(access(0x5060).address_inputs.is_empty());
+    assert_eq!(
+        access(0x5080).address_inputs,
+        (0..8).map(|i| cell("rax", i)).collect()
+    );
+    backend.finish().unwrap();
+}

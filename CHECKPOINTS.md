@@ -34,6 +34,24 @@ flowchart TD
     S --> T --> U --> V --> W
 ```
 
+## 2026-10-01 — First investigation question
+
+The [I0–I4 plan](Plans/investigation-layer.md) now has an implemented bound
+fault-address explanation module, typed BIL address evidence, exact query binding,
+CLI question and strict reports. The
+[source-bound first-delivery record](docs/Ariadne/investigation-validation.json)
+passes **16 gates**, including the full **12-gate Stage E regression**, and
+**11 new actual investigation/producer mutants**. Both platform fixtures and the
+pinned controlled Chromium/Linux capture retain expected producer evidence.
+
+The [validation report](docs/Ariadne/investigation-validation.md) records about
+153 ms incremental explanation-phase median on the 34-site real query, under
+the frozen 250 ms condition. Answers retain alternatives and explicit evidence
+requirements; no executed history, UAF or general root-cause proof is inferred.
+Full original-Windows I4/2,000 ms qualification remains partial. I5–I7 and BAP
+Stage 2 remain unimplemented; Stage D stays 0/49. Validation was retained before
+the user-authorized publication.
+
 ## 2026-10-01 — LLVM semantic backend removed
 
 Following the user's removal instruction, BAP is the sole semantic producer for

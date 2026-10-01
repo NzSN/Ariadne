@@ -147,6 +147,7 @@ impl Backend {
                 ast_sha256: Some(ariadne_reports::sha256(&ast)),
                 fallback: None,
                 gaps: Vec::new(),
+                memory_accesses: Vec::new(),
             };
             if lift.status == "invalid" && site.evidence.length == 0 {
                 semantic.status = "invalid-decode".into();
@@ -275,6 +276,7 @@ impl Backend {
                             site.evidence.quality = EffectQuality::ExternalLifted;
                             site.evidence.rule = Some(PROJECTION.into());
                             semantic.status = "projected".into();
+                            semantic.memory_accesses = crate::address::extract(&lift.bil, va);
                             semantic.gaps.extend(projection.gaps);
                         }
                     }

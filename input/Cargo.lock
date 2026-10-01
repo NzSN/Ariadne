@@ -29,8 +29,19 @@ version = "0.1.0"
 dependencies = [
  "ariadne-analysis",
  "ariadne-bap",
+ "ariadne-investigation",
  "ariadne-reports",
  "minidump",
+ "serde_json",
+ "sha2",
+]
+
+[[package]]
+name = "ariadne-investigation"
+version = "0.1.0"
+dependencies = [
+ "ariadne-analysis",
+ "serde",
  "serde_json",
  "sha2",
 ]
@@ -40,6 +51,7 @@ name = "ariadne-reports"
 version = "0.1.0"
 dependencies = [
  "ariadne-analysis",
+ "ariadne-investigation",
  "serde",
  "serde_json",
  "sha2",

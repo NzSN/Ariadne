@@ -1,5 +1,6 @@
 //! Immutable Windows/Linux AMD64 minidump input. No image-file fallback.
 mod address_space;
+pub mod investigation;
 mod materialize;
 mod minidump;
 pub mod report;

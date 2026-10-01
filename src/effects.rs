@@ -1,6 +1,8 @@
 //! Reviewed normal-continuation effects, independent of full ISA-step acceptance.
+mod address;
 mod locations;
 mod rules;
+pub use address::{AddressExpression, AddressTerm, MemoryAccessEvidence, MemoryAccessRole};
 
 use crate::{Address, AnalysisRequest, ByteSource, InstructionKind, LocationSet};
 pub use locations::{Catalogue, RegisterView};
@@ -92,6 +94,7 @@ pub struct SemanticEvidence {
     pub ast_sha256: Option<String>,
     pub fallback: Option<String>,
     pub gaps: Vec<String>,
+    pub memory_accesses: Vec<MemoryAccessEvidence>,
 }
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct PreparationIdentity {

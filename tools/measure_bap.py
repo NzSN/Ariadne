@@ -13,9 +13,9 @@ def run(cmd,timeout=120):
 def summary(values):return dict(median=statistics.median(values),min=min(values),max=max(values),samples=len(values))
 def sources():
  paths=set()
- for tree in ['src','input/src','reports/src','bap/src','bench/src','native/llvm_mc','native/bap']:
+ for tree in ['src','input/src','reports/src','bap/src','investigation/src','bench/src','native/llvm_mc','native/bap']:
   paths.update(p for p in (ROOT/tree).rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix!='.md')
- paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','input/Cargo.toml','input/Cargo.lock','reports/Cargo.toml','reports/Cargo.lock','bap/Cargo.toml','bap/Cargo.lock','bench/Cargo.toml','bench/Cargo.lock','tools/measure_bap.py','docs/Ariadne/priority-1-real-capture-case.json','docs/Ariadne/priority-4-real-capture-case.json'])
+ paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','input/Cargo.toml','input/Cargo.lock','reports/Cargo.toml','reports/Cargo.lock','bap/Cargo.toml','bap/Cargo.lock','investigation/Cargo.toml','investigation/Cargo.lock','bench/Cargo.toml','bench/Cargo.lock','tools/measure_bap.py','docs/Ariadne/priority-1-real-capture-case.json','docs/Ariadne/priority-4-real-capture-case.json'])
  return {str(p.relative_to(ROOT)):sha(p) for p in sorted(paths)}
 def main():
  before=sources()

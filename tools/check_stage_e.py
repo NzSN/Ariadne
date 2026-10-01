@@ -17,9 +17,9 @@ def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 def sources():
     paths=set()
-    for directory in ['src','tests','reports/src','reports/tests','input/src','input/tests','input/examples','ir/src','ir/tests','native/llvm_mc','native/llvm_ir','mbt/stage-e','bap/src','bap/tests','native/bap']:
+    for directory in ['src','tests','reports/src','reports/tests','input/src','input/tests','input/examples','ir/src','ir/tests','native/llvm_mc','native/llvm_ir','mbt/stage-e','bap/src','investigation/src','bap/tests','native/bap']:
         paths.update(p for p in (ROOT/directory).rglob('*') if p.is_file() and p.suffix!='.md' and not set(p.parts)&{'target','.work','__pycache__','results'})
-    for name in ['Cargo.toml','Cargo.lock','reports/Cargo.toml','reports/Cargo.lock','input/Cargo.toml','input/Cargo.lock','ir/Cargo.toml','ir/Cargo.lock','bap/Cargo.toml','bap/Cargo.lock','tools/check_stage_e.py','tools/check_minidump.py','tools/check_minidump_mutations.py','Specs/AriadneMachineState.tla','Specs/AriadneLLVMIR.tla','Specs/AriadneMachineCommon.tla','Specs/AriadneTypes.tla']:
+    for name in ['Cargo.toml','Cargo.lock','reports/Cargo.toml','reports/Cargo.lock','input/Cargo.toml','input/Cargo.lock','ir/Cargo.toml','ir/Cargo.lock','bap/Cargo.toml','bap/Cargo.lock','investigation/Cargo.toml','investigation/Cargo.lock','tools/check_stage_e.py','tools/check_minidump.py','tools/check_minidump_mutations.py','Specs/AriadneMachineState.tla','Specs/AriadneLLVMIR.tla','Specs/AriadneMachineCommon.tla','Specs/AriadneTypes.tla']:
         paths.add(ROOT/name)
     return {str(p.relative_to(ROOT)):sha(p) for p in sorted(paths)}
 
