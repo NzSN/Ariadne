@@ -15,6 +15,9 @@ captured paths.
 The [Priority 4 Windows qualification stage](priority-4-workload-performance-plan.md#2026-09-30-qualification-run)
 applies that policy to eight observed forms with reviewed ordinary control
 and explicitly opaque effects.
+The [BAP integration plan, Stage 1](../../Plans/bap-integration.md#stage-1-bap-semantic-backend)
+plans an external lifting/projection backend under this effect contract;
+Stage 2 subsequently covers analysis-core migration.
 
 ## Decision
 
