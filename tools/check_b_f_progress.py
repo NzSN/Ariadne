@@ -31,6 +31,21 @@ def sources():
             for p in sorted(paths)}
 
 
+def retained_stage_e_status():
+    """Report Stage E only from its independently passing, still-current record."""
+    path=ROOT / 'docs/Ariadne/stage-e-completion-validation.json'
+    try:
+        evidence=json.loads(path.read_text())
+        if not evidence['passed'] or not evidence['sourcesStable']:
+            return 'open or stale retained evidence'
+        for relative,digest in evidence['sourceHashes'].items():
+            if hashlib.sha256((ROOT/relative).read_bytes()).hexdigest()!=digest:
+                return 'open or stale retained evidence'
+        return 'passed: finite generated conformance; see stage-e-completion-validation.json'
+    except (OSError,ValueError,KeyError):
+        return 'open or stale retained evidence'
+
+
 def main():
     out = Path(tempfile.mkdtemp(prefix='ariadne-b-f-progress-'))
     print(f'Progress artifacts: {out}', flush=True)
@@ -99,8 +114,8 @@ def main():
             'log': str(out / 'register-core-required.log'),
         },
         'rustRefinementProof': 'open',
-        'machineStateModelBasedReplay': 'open',
-        'nativeIrModelBasedReplay': 'open',
+        'machineStateModelBasedReplay': retained_stage_e_status(),
+        'nativeIrModelBasedReplay': retained_stage_e_status(),
     }
     (out / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
     print(f'Report: {out / "report.json"}', flush=True)

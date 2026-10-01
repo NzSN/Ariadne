@@ -1,10 +1,11 @@
 {
   "#meta": {
-    "description": "Created by Apalache on Thu Oct 01 08:44:10 CST 2026",
+    "description": "Created by Apalache on Thu Oct 01 10:13:43 CST 2026",
     "format": "ITF",
     "format-description": "https://apalache-mc.org/docs/adr/015adr-trace.html",
     "varTypes": {
       "action_taken": "Str",
+      "case_id": "Str",
       "feasible_edges": "Set({ dst: Int, kind: Str, src: Int })",
       "infeasible_edges": "Set({ dst: Int, kind: Str, src: Int })",
       "not_reached": "Set(Int)",
@@ -18,12 +19,17 @@
       "unknown_edges": "Set({ dst: Int, kind: Str, src: Int })"
     }
   },
+  "params": [
+    "Case"
+  ],
   "states": [
     {
       "#meta": {
         "index": 0
       },
+      "Case": "MachineStateReplay",
       "action_taken": "init",
+      "case_id": "MachineStateReplay",
       "feasible_edges": {
         "#set": [
           {
@@ -183,6 +189,7 @@
     "feasible_edges",
     "infeasible_edges",
     "not_reached",
+    "case_id",
     "obligations",
     "snapshot_id",
     "statesAt"

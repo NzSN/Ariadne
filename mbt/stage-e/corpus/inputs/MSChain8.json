@@ -1,0 +1,216 @@
+{
+  "adapter_obligations": [],
+  "catalogue": {
+    "live": {
+      "status": "running",
+      "valuation": {
+        "x": [
+          "unknown"
+        ]
+      }
+    },
+    "stop": {
+      "status": "stopped",
+      "valuation": {
+        "x": [
+          "unknown"
+        ]
+      }
+    }
+  },
+  "complete_sites": [
+    "0x000000000000000d",
+    "0x000000000000001a",
+    "0x0000000000000027",
+    "0x0000000000000034",
+    "0x0000000000000041",
+    "0x000000000000004e",
+    "0x000000000000005b",
+    "0x0000000000000068"
+  ],
+  "effects": [
+    {
+      "may_defs": [],
+      "must_defs": [],
+      "uses": [],
+      "va": "0x000000000000000d"
+    },
+    {
+      "may_defs": [],
+      "must_defs": [],
+      "uses": [],
+      "va": "0x000000000000001a"
+    },
+    {
+      "may_defs": [],
+      "must_defs": [],
+      "uses": [],
+      "va": "0x0000000000000027"
+    },
+    {
+      "may_defs": [],
+      "must_defs": [],
+      "uses": [],
+      "va": "0x0000000000000034"
+    },
+    {
+      "may_defs": [],
+      "must_defs": [],
+      "uses": [],
+      "va": "0x0000000000000041"
+    },
+    {
+      "may_defs": [],
+      "must_defs": [],
+      "uses": [],
+      "va": "0x000000000000004e"
+    },
+    {
+      "may_defs": [],
+      "must_defs": [],
+      "uses": [],
+      "va": "0x000000000000005b"
+    },
+    {
+      "may_defs": [],
+      "must_defs": [],
+      "uses": [],
+      "va": "0x0000000000000068"
+    }
+  ],
+  "entry_states": [
+    {
+      "states": [
+        "live"
+      ],
+      "va": "0x000000000000000d"
+    }
+  ],
+  "nodes": [
+    "0x000000000000000d",
+    "0x000000000000001a",
+    "0x0000000000000027",
+    "0x0000000000000034",
+    "0x0000000000000041",
+    "0x000000000000004e",
+    "0x000000000000005b",
+    "0x0000000000000068"
+  ],
+  "schema": "ariadne.machine-state-request/v1",
+  "snapshot_id": "generated-chain-8",
+  "steps": [
+    {
+      "after": "live",
+      "before": "live",
+      "edge": {
+        "dst": "0x000000000000001a",
+        "kind": "next",
+        "src": "0x000000000000000d"
+      }
+    },
+    {
+      "after": "live",
+      "before": "live",
+      "edge": {
+        "dst": "0x0000000000000027",
+        "kind": "next",
+        "src": "0x000000000000001a"
+      }
+    },
+    {
+      "after": "live",
+      "before": "live",
+      "edge": {
+        "dst": "0x0000000000000034",
+        "kind": "next",
+        "src": "0x0000000000000027"
+      }
+    },
+    {
+      "after": "live",
+      "before": "live",
+      "edge": {
+        "dst": "0x0000000000000041",
+        "kind": "next",
+        "src": "0x0000000000000034"
+      }
+    },
+    {
+      "after": "live",
+      "before": "live",
+      "edge": {
+        "dst": "0x000000000000004e",
+        "kind": "next",
+        "src": "0x0000000000000041"
+      }
+    },
+    {
+      "after": "live",
+      "before": "live",
+      "edge": {
+        "dst": "0x000000000000005b",
+        "kind": "next",
+        "src": "0x000000000000004e"
+      }
+    },
+    {
+      "after": "live",
+      "before": "live",
+      "edge": {
+        "dst": "0x0000000000000068",
+        "kind": "next",
+        "src": "0x000000000000005b"
+      }
+    }
+  ],
+  "structural_edges": [
+    {
+      "dst": "0x000000000000001a",
+      "kind": "next",
+      "src": "0x000000000000000d"
+    },
+    {
+      "dst": "0x0000000000000027",
+      "kind": "next",
+      "src": "0x000000000000001a"
+    },
+    {
+      "dst": "0x0000000000000034",
+      "kind": "next",
+      "src": "0x0000000000000027"
+    },
+    {
+      "dst": "0x0000000000000041",
+      "kind": "next",
+      "src": "0x0000000000000034"
+    },
+    {
+      "dst": "0x000000000000004e",
+      "kind": "next",
+      "src": "0x0000000000000041"
+    },
+    {
+      "dst": "0x000000000000005b",
+      "kind": "next",
+      "src": "0x000000000000004e"
+    },
+    {
+      "dst": "0x0000000000000068",
+      "kind": "next",
+      "src": "0x000000000000005b"
+    }
+  ],
+  "terminal_transitions": [
+    {
+      "after": "stop",
+      "before": "live",
+      "outcome": "stopped",
+      "site": "0x0000000000000068"
+    }
+  ],
+  "value_domain": {
+    "x": [
+      "unknown"
+    ]
+  }
+}

@@ -1,0 +1,197 @@
+{
+  "adapter_obligations": [],
+  "catalogue": {
+    "entry": {
+      "status": "running",
+      "valuation": {
+        "rax": [
+          "zero",
+          "five",
+          "other"
+        ],
+        "zf": [
+          "false",
+          "true"
+        ]
+      }
+    },
+    "rax-five": {
+      "status": "running",
+      "valuation": {
+        "rax": [
+          "five"
+        ],
+        "zf": [
+          "false",
+          "true"
+        ]
+      }
+    },
+    "returned": {
+      "status": "returned",
+      "valuation": {
+        "rax": [
+          "five"
+        ],
+        "zf": [
+          "true"
+        ]
+      }
+    },
+    "zf-true": {
+      "status": "running",
+      "valuation": {
+        "rax": [
+          "five"
+        ],
+        "zf": [
+          "true"
+        ]
+      }
+    }
+  },
+  "complete_sites": [
+    "0xfffffffffffffffb",
+    "0xfffffffffffffffc",
+    "0xfffffffffffffffd",
+    "0xfffffffffffffffe",
+    "0xffffffffffffffff"
+  ],
+  "effects": [
+    {
+      "may_defs": [
+        "rax"
+      ],
+      "must_defs": [
+        "rax"
+      ],
+      "uses": [],
+      "va": "0xfffffffffffffffb"
+    },
+    {
+      "may_defs": [
+        "zf"
+      ],
+      "must_defs": [
+        "zf"
+      ],
+      "uses": [
+        "rax"
+      ],
+      "va": "0xfffffffffffffffc"
+    },
+    {
+      "may_defs": [],
+      "must_defs": [],
+      "uses": [
+        "zf"
+      ],
+      "va": "0xfffffffffffffffd"
+    },
+    {
+      "may_defs": [],
+      "must_defs": [],
+      "uses": [],
+      "va": "0xfffffffffffffffe"
+    },
+    {
+      "may_defs": [],
+      "must_defs": [],
+      "uses": [],
+      "va": "0xffffffffffffffff"
+    }
+  ],
+  "entry_states": [
+    {
+      "states": [
+        "entry"
+      ],
+      "va": "0xfffffffffffffffb"
+    }
+  ],
+  "nodes": [
+    "0xfffffffffffffffb",
+    "0xfffffffffffffffc",
+    "0xfffffffffffffffd",
+    "0xfffffffffffffffe",
+    "0xffffffffffffffff"
+  ],
+  "schema": "ariadne.machine-state-request/v1",
+  "snapshot_id": "machine-state-snapshot/MSHighVA",
+  "steps": [
+    {
+      "after": "rax-five",
+      "before": "entry",
+      "edge": {
+        "dst": "0xfffffffffffffffc",
+        "kind": "next",
+        "src": "0xfffffffffffffffb"
+      }
+    },
+    {
+      "after": "zf-true",
+      "before": "rax-five",
+      "edge": {
+        "dst": "0xfffffffffffffffd",
+        "kind": "next",
+        "src": "0xfffffffffffffffc"
+      }
+    },
+    {
+      "after": "zf-true",
+      "before": "zf-true",
+      "edge": {
+        "dst": "0xfffffffffffffffe",
+        "kind": "taken",
+        "src": "0xfffffffffffffffd"
+      }
+    }
+  ],
+  "structural_edges": [
+    {
+      "dst": "0xfffffffffffffffc",
+      "kind": "next",
+      "src": "0xfffffffffffffffb"
+    },
+    {
+      "dst": "0xfffffffffffffffd",
+      "kind": "next",
+      "src": "0xfffffffffffffffc"
+    },
+    {
+      "dst": "0xfffffffffffffffe",
+      "kind": "taken",
+      "src": "0xfffffffffffffffd"
+    },
+    {
+      "dst": "0xffffffffffffffff",
+      "kind": "fallthrough",
+      "src": "0xfffffffffffffffd"
+    }
+  ],
+  "terminal_transitions": [
+    {
+      "after": "returned",
+      "before": "zf-true",
+      "outcome": "returned",
+      "site": "0xfffffffffffffffe"
+    },
+    {
+      "after": "returned",
+      "before": "zf-true",
+      "outcome": "returned",
+      "site": "0xffffffffffffffff"
+    }
+  ],
+  "value_domain": {
+    "rax": [
+      "zero",
+      "five",
+      "other"
+    ],
+    "zf": [
+      "false",
+      "true"
+    ]
+  }
+}

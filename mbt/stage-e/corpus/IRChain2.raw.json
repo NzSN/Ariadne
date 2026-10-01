@@ -1,0 +1,258 @@
+{
+  "#meta": {
+    "format": "ITF",
+    "varTypes": {
+      "action_taken": "Str",
+      "artifact_id": "Str",
+      "call_graph": "Set({ callee: Str, kind: Str, site: Str })",
+      "case_id": "Str",
+      "control_graph": "Set({ dst: Str, kind: Str, src: Str })",
+      "dependency_preds": "(Str -> Set(Str))",
+      "function_id": "Str",
+      "module_id": "Str",
+      "obligations": "Set({ reason: Str, site: Str })",
+      "parameters": "{ fixture: Str }",
+      "phase": "Str",
+      "slice": "Set(Str)"
+    }
+  },
+  "param_vars": [],
+  "params": [],
+  "states": [
+    {
+      "#meta": {
+        "index": 0
+      },
+      "action_taken": "init",
+      "artifact_id": "generated-ir-chain-2",
+      "call_graph": {
+        "#set": []
+      },
+      "case_id": "IRChain2",
+      "control_graph": {
+        "#set": []
+      },
+      "dependency_preds": {
+        "#map": [
+          [
+            "d0",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "d1",
+            {
+              "#set": [
+                "d0"
+              ]
+            }
+          ],
+          [
+            "ret",
+            {
+              "#set": [
+                "d1"
+              ]
+            }
+          ]
+        ]
+      },
+      "function_id": "f",
+      "module_id": "chain",
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "IRChain2"
+      },
+      "phase": "slice",
+      "slice": {
+        "#set": [
+          "ret"
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 1
+      },
+      "action_taken": "expandSlice",
+      "artifact_id": "generated-ir-chain-2",
+      "call_graph": {
+        "#set": []
+      },
+      "case_id": "IRChain2",
+      "control_graph": {
+        "#set": []
+      },
+      "dependency_preds": {
+        "#map": [
+          [
+            "d0",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "d1",
+            {
+              "#set": [
+                "d0"
+              ]
+            }
+          ],
+          [
+            "ret",
+            {
+              "#set": [
+                "d1"
+              ]
+            }
+          ]
+        ]
+      },
+      "function_id": "f",
+      "module_id": "chain",
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "IRChain2"
+      },
+      "phase": "slice",
+      "slice": {
+        "#set": [
+          "d1",
+          "ret"
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 2
+      },
+      "action_taken": "expandSlice",
+      "artifact_id": "generated-ir-chain-2",
+      "call_graph": {
+        "#set": []
+      },
+      "case_id": "IRChain2",
+      "control_graph": {
+        "#set": []
+      },
+      "dependency_preds": {
+        "#map": [
+          [
+            "d0",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "d1",
+            {
+              "#set": [
+                "d0"
+              ]
+            }
+          ],
+          [
+            "ret",
+            {
+              "#set": [
+                "d1"
+              ]
+            }
+          ]
+        ]
+      },
+      "function_id": "f",
+      "module_id": "chain",
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "IRChain2"
+      },
+      "phase": "slice",
+      "slice": {
+        "#set": [
+          "d0",
+          "d1",
+          "ret"
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 3
+      },
+      "action_taken": "finishSlice",
+      "artifact_id": "generated-ir-chain-2",
+      "call_graph": {
+        "#set": []
+      },
+      "case_id": "IRChain2",
+      "control_graph": {
+        "#set": []
+      },
+      "dependency_preds": {
+        "#map": [
+          [
+            "d0",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "d1",
+            {
+              "#set": [
+                "d0"
+              ]
+            }
+          ],
+          [
+            "ret",
+            {
+              "#set": [
+                "d1"
+              ]
+            }
+          ]
+        ]
+      },
+      "function_id": "f",
+      "module_id": "chain",
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "IRChain2"
+      },
+      "phase": "done",
+      "slice": {
+        "#set": [
+          "d0",
+          "d1",
+          "ret"
+        ]
+      }
+    }
+  ],
+  "vars": [
+    "phase",
+    "artifact_id",
+    "call_graph",
+    "function_id",
+    "dependency_preds",
+    "control_graph",
+    "action_taken",
+    "parameters",
+    "slice",
+    "module_id",
+    "case_id",
+    "obligations"
+  ]
+}

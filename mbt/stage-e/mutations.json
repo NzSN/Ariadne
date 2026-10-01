@@ -1,0 +1,122 @@
+[
+  {
+    "name": "ms-ungated-source",
+    "engine": "machine-state",
+    "file": "src/machine_state.rs",
+    "old": "if step.edge.dst == site && self.state.states_at[&step.edge.src].contains(&step.before)",
+    "new": "if step.edge.dst == site",
+    "expectedAction": "finishStateflow"
+  },
+  {
+    "name": "ms-premature-finish",
+    "engine": "machine-state",
+    "file": "src/machine_state.rs",
+    "old": "if !incoming.is_subset(&self.state.states_at[&site]) {",
+    "new": "if false {",
+    "expectedAction": "propagate"
+  },
+  {
+    "name": "ms-collapse-state-ids",
+    "engine": "machine-state",
+    "file": "src/machine_state.rs",
+    "old": "incoming.insert(step.after.clone());",
+    "new": "incoming.insert(self.request.catalogue.iter().find(|(_, state)| *state == &self.request.catalogue[&step.after]).map(|(id, _)| id.clone()).unwrap());",
+    "expectedAction": "propagate"
+  },
+  {
+    "name": "ms-uncertified-infeasibility",
+    "engine": "machine-state",
+    "file": "src/machine_state.rs",
+    "old": "self.request.complete_sites.contains(&edge.src)",
+    "new": "true",
+    "expectedAction": "finishStateflow"
+  },
+  {
+    "name": "ms-unreached-infeasibility",
+    "engine": "machine-state",
+    "file": "src/machine_state.rs",
+    "old": "&& reached_sources.contains(&edge.src)",
+    "new": "&& true",
+    "expectedAction": "finishStateflow"
+  },
+  {
+    "name": "ms-drop-terminals",
+    "engine": "machine-state",
+    "file": "src/machine_state.rs",
+    "old": "self.state.states_at[&transition.site].contains(&transition.before)",
+    "new": "false",
+    "expectedAction": "propagate"
+  },
+  {
+    "name": "ms-drop-incomplete-obligations",
+    "engine": "machine-state",
+    "file": "src/machine_state.rs",
+    "old": ".difference(&self.request.complete_sites)\n                .map(|&site| Obligation {",
+    "new": ".difference(&self.request.complete_sites)\n                .filter(|_| false)\n                .map(|&site| Obligation {",
+    "expectedAction": "init"
+  },
+  {
+    "name": "ms-ignore-summary",
+    "engine": "machine-state",
+    "file": "src/machine_state.rs",
+    "old": "if step.edge.dst == site && self.state.states_at[&step.edge.src].contains(&step.before)",
+    "new": "if step.edge.kind != crate::EdgeKind::Summary && step.edge.dst == site && self.state.states_at[&step.edge.src].contains(&step.before)",
+    "expectedAction": "propagate"
+  },
+  {
+    "name": "ir-drop-memory",
+    "engine": "llvm-ir",
+    "file": "src/llvm_ir.rs",
+    "old": "let mut result = info.memory_preds.clone();",
+    "new": "let mut result = BTreeSet::new();",
+    "expectedAction": "init"
+  },
+  {
+    "name": "ir-drop-phi",
+    "engine": "llvm-ir",
+    "file": "src/llvm_ir.rs",
+    "old": "if source.kind == ValueKind::Instruction {",
+    "new": "if source.kind == ValueKind::Instruction && !self.phi_nodes.contains(id) {",
+    "expectedAction": "init"
+  },
+  {
+    "name": "ir-premature-finish",
+    "engine": "llvm-ir",
+    "file": "src/llvm_ir.rs",
+    "old": "if predecessors.is_subset(&self.state.slice) {",
+    "new": "if true {",
+    "expectedAction": "expandSlice"
+  },
+  {
+    "name": "ir-truncate-expansion",
+    "engine": "llvm-ir",
+    "file": "src/llvm_ir.rs",
+    "old": "self.state.slice.extend(predecessors);",
+    "new": "self.state.slice.insert(predecessors.iter().next().unwrap().clone());",
+    "expectedAction": "expandSlice"
+  },
+  {
+    "name": "ir-wrong-control-kind",
+    "engine": "llvm-ir",
+    "file": "src/llvm_ir.rs",
+    "old": "kind: next.kind,",
+    "new": "kind: if next.kind == ControlEdgeKind::Next { ControlEdgeKind::Indirect } else { next.kind },",
+    "expectedAction": "init"
+  },
+  {
+    "name": "ir-drop-call-graph",
+    "engine": "llvm-ir",
+    "file": "src/llvm_ir.rs",
+    "old": "pub fn call_graph(&self) -> BTreeSet<CallEdge> {\n        self.call_sites\n            .iter()",
+    "new": "pub fn call_graph(&self) -> BTreeSet<CallEdge> {\n        self.call_sites\n            .iter().filter(|_| false)",
+    "expectedAction": "init"
+  },
+  {
+    "name": "ir-drop-call-obligations",
+    "engine": "llvm-ir",
+    "file": "src/llvm_ir.rs",
+    "old": ".difference(&self.complete_calls)\n                .map(|site| Obligation {",
+    "new": ".difference(&self.complete_calls)\n                .filter(|_| false)\n                .map(|site| Obligation {",
+    "expectedAction": "init"
+  }
+]

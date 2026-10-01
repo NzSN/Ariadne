@@ -46,6 +46,13 @@ def main():
             shutil.copytree(ROOT / tree, sut / tree)
         for file_name in ('Cargo.toml', 'Cargo.lock'):
             shutil.copy2(ROOT / file_name, sut / file_name)
+        # The input CLI now depends on the Stage E report crate. Keep that
+        # dependency in the isolated tree; a missing crate is not a killed mutant.
+        (sut / 'reports').mkdir()
+        for tree in ('src',):
+            shutil.copytree(ROOT / 'reports' / tree, sut / 'reports' / tree)
+        for file_name in ('Cargo.toml', 'Cargo.lock'):
+            shutil.copy2(ROOT / 'reports' / file_name, sut / 'reports' / file_name)
         (sut / 'input').mkdir()
         for tree in ('src', 'tests'):
             shutil.copytree(ROOT / 'input' / tree, sut / 'input' / tree)

@@ -1,0 +1,849 @@
+{
+  "#meta": {
+    "format": "ITF",
+    "varTypes": {
+      "action_taken": "Str",
+      "case_id": "Str",
+      "feasible_edges": "Set({ dst: Int, kind: Str, src: Int })",
+      "infeasible_edges": "Set({ dst: Int, kind: Str, src: Int })",
+      "not_reached": "Set(Int)",
+      "obligations": "Set({ reason: Str, site: Int })",
+      "parameters": "{ fixture: Str }",
+      "phase": "Str",
+      "snapshot_id": "Str",
+      "statesAt": "Set({ states: Set(Str), va: Int })",
+      "structural_edges": "Set({ dst: Int, kind: Str, src: Int })",
+      "terminals": "Set({ after: Str, before: Str, outcome: Str, site: Int })",
+      "unknown_edges": "Set({ dst: Int, kind: Str, src: Int })"
+    }
+  },
+  "param_vars": [],
+  "params": [],
+  "states": [
+    {
+      "#meta": {
+        "index": 0
+      },
+      "action_taken": "init",
+      "case_id": "MSSparse",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "4097"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4096"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "MSSparse"
+      },
+      "phase": "stateflow",
+      "snapshot_id": "machine-state-snapshot/MSSparse",
+      "statesAt": {
+        "#set": [
+          {
+            "states": {
+              "#set": [
+                "entry"
+              ]
+            },
+            "va": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "4097"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "4098"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "4099"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "4100"
+            }
+          }
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "4097"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4098"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4097"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4099"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "4098"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4100"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "4098"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": []
+      },
+      "unknown_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "4098"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4097"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4099"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "4098"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4100"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "4098"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 1
+      },
+      "action_taken": "propagate",
+      "case_id": "MSSparse",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "4097"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4098"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4097"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "MSSparse"
+      },
+      "phase": "stateflow",
+      "snapshot_id": "machine-state-snapshot/MSSparse",
+      "statesAt": {
+        "#set": [
+          {
+            "states": {
+              "#set": [
+                "entry"
+              ]
+            },
+            "va": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "rax-five"
+              ]
+            },
+            "va": {
+              "#bigint": "4097"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "4098"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "4099"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "4100"
+            }
+          }
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "4097"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4098"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4097"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4099"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "4098"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4100"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "4098"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": []
+      },
+      "unknown_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "4099"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "4098"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4100"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "4098"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 2
+      },
+      "action_taken": "propagate",
+      "case_id": "MSSparse",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "4097"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4098"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4097"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4099"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "4098"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "MSSparse"
+      },
+      "phase": "stateflow",
+      "snapshot_id": "machine-state-snapshot/MSSparse",
+      "statesAt": {
+        "#set": [
+          {
+            "states": {
+              "#set": [
+                "entry"
+              ]
+            },
+            "va": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "rax-five"
+              ]
+            },
+            "va": {
+              "#bigint": "4097"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "zf-true"
+              ]
+            },
+            "va": {
+              "#bigint": "4098"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "4099"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "4100"
+            }
+          }
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "4097"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4098"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4097"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4099"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "4098"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4100"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "4098"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": []
+      },
+      "unknown_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "4100"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "4098"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 3
+      },
+      "action_taken": "propagate",
+      "case_id": "MSSparse",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "4097"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4098"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4097"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4099"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "4098"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "MSSparse"
+      },
+      "phase": "stateflow",
+      "snapshot_id": "machine-state-snapshot/MSSparse",
+      "statesAt": {
+        "#set": [
+          {
+            "states": {
+              "#set": [
+                "entry"
+              ]
+            },
+            "va": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "rax-five"
+              ]
+            },
+            "va": {
+              "#bigint": "4097"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "zf-true"
+              ]
+            },
+            "va": {
+              "#bigint": "4098"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "zf-true"
+              ]
+            },
+            "va": {
+              "#bigint": "4099"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "4100"
+            }
+          }
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "4097"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4098"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4097"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4099"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "4098"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4100"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "4098"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": [
+          {
+            "after": "returned",
+            "before": "zf-true",
+            "outcome": "returned",
+            "site": {
+              "#bigint": "4099"
+            }
+          }
+        ]
+      },
+      "unknown_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "4100"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "4098"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 4
+      },
+      "action_taken": "finishStateflow",
+      "case_id": "MSSparse",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "4097"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4098"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4097"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4099"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "4098"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "4100"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "4098"
+            }
+          }
+        ]
+      },
+      "not_reached": {
+        "#set": [
+          {
+            "#bigint": "4100"
+          }
+        ]
+      },
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "MSSparse"
+      },
+      "phase": "done",
+      "snapshot_id": "machine-state-snapshot/MSSparse",
+      "statesAt": {
+        "#set": [
+          {
+            "states": {
+              "#set": [
+                "entry"
+              ]
+            },
+            "va": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "rax-five"
+              ]
+            },
+            "va": {
+              "#bigint": "4097"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "zf-true"
+              ]
+            },
+            "va": {
+              "#bigint": "4098"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "zf-true"
+              ]
+            },
+            "va": {
+              "#bigint": "4099"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "4100"
+            }
+          }
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "4097"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4096"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4098"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "4097"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4099"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "4098"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4100"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "4098"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": [
+          {
+            "after": "returned",
+            "before": "zf-true",
+            "outcome": "returned",
+            "site": {
+              "#bigint": "4099"
+            }
+          }
+        ]
+      },
+      "unknown_edges": {
+        "#set": []
+      }
+    }
+  ],
+  "vars": [
+    "phase",
+    "unknown_edges",
+    "action_taken",
+    "parameters",
+    "terminals",
+    "structural_edges",
+    "feasible_edges",
+    "infeasible_edges",
+    "not_reached",
+    "case_id",
+    "obligations",
+    "snapshot_id",
+    "statesAt"
+  ]
+}

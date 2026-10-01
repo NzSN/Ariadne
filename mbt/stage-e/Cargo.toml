@@ -6,6 +6,7 @@ publish = false
 
 [dependencies]
 ariadne-analysis = { path = "../.." }
+ariadne-reports = { path = "../../reports" }
 mirrorrust = { path = "../../../MirrorRust" }
 num-bigint = "0.4"
 serde_json = "1"

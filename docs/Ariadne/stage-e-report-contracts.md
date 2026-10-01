@@ -1,10 +1,14 @@
 # Stage E result contracts
 
 These are separate result families for [Stage E](remaining-implementation-plan.md#e--implement-the-other-two-formal-analysis-machines).
-They are not added to the minidump investigator CLI until their own model-based
-replay and report validation are complete.
+The [completed Stage E](stage-e-completion.md) adds optional stateflow input to
+the minidump investigator CLI and a separate verifier-backed IR CLI. Their
+versioned [input/report schemas](../../reports/README.md) preserve these families
+independently.
 The [first MirrorRust integration stage](../../Plans/stage-e-mirrorrust-integration.md)
 connects these result families to separate compiler-generated replay ports.
+The [Stage E completion plan](../../Plans/stage-e-completion.md) completes their
+generated replay and versioned reporting/CLI integration stage.
 
 | Path | Identity and fixed input | Mutable result | Derived observations |
 | --- | --- | --- | --- |
@@ -26,5 +30,5 @@ coarse conservative policy carrying `unknown-memory-alias` obligations.
 
 Both paths expose owned requests and results through shared-reference accessors.
 They deliberately do not share the recovery analyzer's phase or obligation
-enums. A future CLI envelope must preserve each path's identity and uncertainty
+enums. The CLI envelopes preserve each path's identity and uncertainty
 without coercing one result into the other's graph.

@@ -5,6 +5,7 @@
       "action_taken": "Str",
       "artifact_id": "Str",
       "call_graph": "Set({ callee: Str, kind: Str, site: Str })",
+      "case_id": "Str",
       "control_graph": "Set({ dst: Str, kind: Str, src: Str })",
       "dependency_preds": "(Str -> Set(Str))",
       "function_id": "Str",
@@ -33,6 +34,7 @@
           }
         ]
       },
+      "case_id": "LLVMIRReplay",
       "control_graph": {
         "#set": [
           {
@@ -186,6 +188,7 @@
           }
         ]
       },
+      "case_id": "LLVMIRReplay",
       "control_graph": {
         "#set": [
           {
@@ -340,6 +343,7 @@
           }
         ]
       },
+      "case_id": "LLVMIRReplay",
       "control_graph": {
         "#set": [
           {
@@ -496,6 +500,7 @@
           }
         ]
       },
+      "case_id": "LLVMIRReplay",
       "control_graph": {
         "#set": [
           {
@@ -657,6 +662,7 @@
           }
         ]
       },
+      "case_id": "LLVMIRReplay",
       "control_graph": {
         "#set": [
           {
@@ -815,6 +821,7 @@
     "parameters",
     "slice",
     "module_id",
+    "case_id",
     "obligations"
   ]
 }

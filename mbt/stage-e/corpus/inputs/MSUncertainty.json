@@ -1,0 +1,208 @@
+{
+  "adapter_obligations": [
+    {
+      "reason": "unknown-memory",
+      "site": "0x0000000000000005"
+    },
+    {
+      "reason": "unmodeled-exception",
+      "site": "0x0000000000000005"
+    },
+    {
+      "reason": "unmodeled-system-call",
+      "site": "0x0000000000000005"
+    },
+    {
+      "reason": "unmodeled-concurrency",
+      "site": "0x0000000000000005"
+    }
+  ],
+  "catalogue": {
+    "entry": {
+      "status": "running",
+      "valuation": {
+        "rax": [
+          "zero",
+          "five",
+          "other"
+        ],
+        "zf": [
+          "false",
+          "true"
+        ]
+      }
+    },
+    "rax-five": {
+      "status": "running",
+      "valuation": {
+        "rax": [
+          "five"
+        ],
+        "zf": [
+          "false",
+          "true"
+        ]
+      }
+    },
+    "returned": {
+      "status": "returned",
+      "valuation": {
+        "rax": [
+          "five"
+        ],
+        "zf": [
+          "true"
+        ]
+      }
+    },
+    "zf-true": {
+      "status": "running",
+      "valuation": {
+        "rax": [
+          "five"
+        ],
+        "zf": [
+          "true"
+        ]
+      }
+    }
+  },
+  "complete_sites": [],
+  "effects": [
+    {
+      "may_defs": [
+        "rax"
+      ],
+      "must_defs": [
+        "rax"
+      ],
+      "uses": [],
+      "va": "0x0000000000000001"
+    },
+    {
+      "may_defs": [
+        "zf"
+      ],
+      "must_defs": [
+        "zf"
+      ],
+      "uses": [
+        "rax"
+      ],
+      "va": "0x0000000000000002"
+    },
+    {
+      "may_defs": [],
+      "must_defs": [],
+      "uses": [
+        "zf"
+      ],
+      "va": "0x0000000000000003"
+    },
+    {
+      "may_defs": [],
+      "must_defs": [],
+      "uses": [],
+      "va": "0x0000000000000004"
+    },
+    {
+      "may_defs": [],
+      "must_defs": [],
+      "uses": [],
+      "va": "0x0000000000000005"
+    }
+  ],
+  "entry_states": [
+    {
+      "states": [
+        "entry"
+      ],
+      "va": "0x0000000000000001"
+    }
+  ],
+  "nodes": [
+    "0x0000000000000001",
+    "0x0000000000000002",
+    "0x0000000000000003",
+    "0x0000000000000004",
+    "0x0000000000000005"
+  ],
+  "schema": "ariadne.machine-state-request/v1",
+  "snapshot_id": "machine-state-snapshot/MSUncertainty",
+  "steps": [
+    {
+      "after": "rax-five",
+      "before": "entry",
+      "edge": {
+        "dst": "0x0000000000000002",
+        "kind": "next",
+        "src": "0x0000000000000001"
+      }
+    },
+    {
+      "after": "zf-true",
+      "before": "rax-five",
+      "edge": {
+        "dst": "0x0000000000000003",
+        "kind": "next",
+        "src": "0x0000000000000002"
+      }
+    },
+    {
+      "after": "zf-true",
+      "before": "zf-true",
+      "edge": {
+        "dst": "0x0000000000000004",
+        "kind": "taken",
+        "src": "0x0000000000000003"
+      }
+    }
+  ],
+  "structural_edges": [
+    {
+      "dst": "0x0000000000000002",
+      "kind": "next",
+      "src": "0x0000000000000001"
+    },
+    {
+      "dst": "0x0000000000000003",
+      "kind": "next",
+      "src": "0x0000000000000002"
+    },
+    {
+      "dst": "0x0000000000000004",
+      "kind": "taken",
+      "src": "0x0000000000000003"
+    },
+    {
+      "dst": "0x0000000000000005",
+      "kind": "fallthrough",
+      "src": "0x0000000000000003"
+    }
+  ],
+  "terminal_transitions": [
+    {
+      "after": "returned",
+      "before": "zf-true",
+      "outcome": "returned",
+      "site": "0x0000000000000004"
+    },
+    {
+      "after": "returned",
+      "before": "zf-true",
+      "outcome": "returned",
+      "site": "0x0000000000000005"
+    }
+  ],
+  "value_domain": {
+    "rax": [
+      "zero",
+      "five",
+      "other"
+    ],
+    "zf": [
+      "false",
+      "true"
+    ]
+  }
+}

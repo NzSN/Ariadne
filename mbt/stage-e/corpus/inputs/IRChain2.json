@@ -1,0 +1,63 @@
+{
+  "adapter_obligations": [],
+  "artifact_id": "generated-ir-chain-2",
+  "blocks": {
+    "entry": {
+      "kind": "ret",
+      "successors": [],
+      "terminator": "ret"
+    }
+  },
+  "call_sites": [],
+  "callees": [],
+  "complete_calls": [],
+  "entry_block": "entry",
+  "function_id": "f",
+  "instructions": {
+    "d0": {
+      "block": "entry",
+      "call_targets": [],
+      "index": 0,
+      "memory_preds": [],
+      "phi_incoming": [],
+      "uses": []
+    },
+    "d1": {
+      "block": "entry",
+      "call_targets": [],
+      "index": 1,
+      "memory_preds": [],
+      "phi_incoming": [],
+      "uses": [
+        "v0"
+      ]
+    },
+    "ret": {
+      "block": "entry",
+      "call_targets": [],
+      "index": 2,
+      "memory_preds": [],
+      "phi_incoming": [],
+      "uses": [
+        "v1"
+      ]
+    }
+  },
+  "module_id": "chain",
+  "phi_nodes": [],
+  "schema": "ariadne.llvm-ir-request/v1",
+  "slice_seeds": [
+    "ret"
+  ],
+  "values": {
+    "v0": {
+      "def_site": "d0",
+      "kind": "instruction"
+    },
+    "v1": {
+      "def_site": "d1",
+      "kind": "instruction"
+    }
+  },
+  "verified_ir": true
+}

@@ -173,7 +173,8 @@ pub fn parse_verified_output(
     if !artifact_sha256.bytes().all(|b| b.is_ascii_hexdigit()) || artifact_sha256.len() != 64 {
         return Err(protocol("invalid artifact SHA-256"));
     }
-    let root: Value = serde_json::from_slice(bytes).map_err(|e| protocol(e.to_string()))?;
+    let root: Value = ariadne_reports::strict_json_with_limit(bytes, MAX_PROTOCOL_BYTES)
+        .map_err(|e| protocol(e.to_string()))?;
     if string(&root, "schema")? != "ariadne-native-ir-v1"
         || string(&root, "llvm_version")? != "20.1.2"
         || required(&root, "verified_ir")?.as_bool() != Some(true)

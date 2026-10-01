@@ -1,0 +1,851 @@
+{
+  "#meta": {
+    "description": "Created by Apalache on Thu Oct 01 10:25:21 CST 2026",
+    "format": "ITF",
+    "format-description": "https://apalache-mc.org/docs/adr/015adr-trace.html",
+    "varTypes": {
+      "action_taken": "Str",
+      "case_id": "Str",
+      "feasible_edges": "Set({ dst: Int, kind: Str, src: Int })",
+      "infeasible_edges": "Set({ dst: Int, kind: Str, src: Int })",
+      "not_reached": "Set(Int)",
+      "obligations": "Set({ reason: Str, site: Int })",
+      "parameters": "{ fixture: Str }",
+      "phase": "Str",
+      "snapshot_id": "Str",
+      "statesAt": "(Int -> Set(Str))",
+      "structural_edges": "Set({ dst: Int, kind: Str, src: Int })",
+      "terminals": "Set({ after: Str, before: Str, outcome: Str, site: Int })",
+      "unknown_edges": "Set({ dst: Int, kind: Str, src: Int })"
+    }
+  },
+  "param_vars": [],
+  "params": [],
+  "states": [
+    {
+      "#meta": {
+        "index": 0
+      },
+      "action_taken": "init",
+      "case_id": "MSHighVA",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "18446744073709551612"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "18446744073709551611"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "MSHighVA"
+      },
+      "phase": "stateflow",
+      "snapshot_id": "machine-state-snapshot/MSHighVA",
+      "statesAt": {
+        "#map": [
+          [
+            {
+              "#bigint": "18446744073709551611"
+            },
+            {
+              "#set": [
+                "entry"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "18446744073709551612"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "18446744073709551613"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "18446744073709551614"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "18446744073709551615"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "18446744073709551612"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "18446744073709551611"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "18446744073709551613"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "18446744073709551612"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "18446744073709551614"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "18446744073709551613"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "18446744073709551615"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "18446744073709551613"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": []
+      },
+      "unknown_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "18446744073709551613"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "18446744073709551612"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "18446744073709551614"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "18446744073709551613"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "18446744073709551615"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "18446744073709551613"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 1
+      },
+      "action_taken": "propagate",
+      "case_id": "MSHighVA",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "18446744073709551612"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "18446744073709551611"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "18446744073709551613"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "18446744073709551612"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "MSHighVA"
+      },
+      "phase": "stateflow",
+      "snapshot_id": "machine-state-snapshot/MSHighVA",
+      "statesAt": {
+        "#map": [
+          [
+            {
+              "#bigint": "18446744073709551611"
+            },
+            {
+              "#set": [
+                "entry"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "18446744073709551612"
+            },
+            {
+              "#set": [
+                "rax-five"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "18446744073709551613"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "18446744073709551614"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "18446744073709551615"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "18446744073709551612"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "18446744073709551611"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "18446744073709551613"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "18446744073709551612"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "18446744073709551614"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "18446744073709551613"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "18446744073709551615"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "18446744073709551613"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": []
+      },
+      "unknown_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "18446744073709551614"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "18446744073709551613"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "18446744073709551615"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "18446744073709551613"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 2
+      },
+      "action_taken": "propagate",
+      "case_id": "MSHighVA",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "18446744073709551612"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "18446744073709551611"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "18446744073709551613"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "18446744073709551612"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "18446744073709551614"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "18446744073709551613"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "MSHighVA"
+      },
+      "phase": "stateflow",
+      "snapshot_id": "machine-state-snapshot/MSHighVA",
+      "statesAt": {
+        "#map": [
+          [
+            {
+              "#bigint": "18446744073709551611"
+            },
+            {
+              "#set": [
+                "entry"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "18446744073709551612"
+            },
+            {
+              "#set": [
+                "rax-five"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "18446744073709551613"
+            },
+            {
+              "#set": [
+                "zf-true"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "18446744073709551614"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "18446744073709551615"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "18446744073709551612"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "18446744073709551611"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "18446744073709551613"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "18446744073709551612"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "18446744073709551614"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "18446744073709551613"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "18446744073709551615"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "18446744073709551613"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": []
+      },
+      "unknown_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "18446744073709551615"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "18446744073709551613"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 3
+      },
+      "action_taken": "propagate",
+      "case_id": "MSHighVA",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "18446744073709551612"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "18446744073709551611"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "18446744073709551613"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "18446744073709551612"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "18446744073709551614"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "18446744073709551613"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "MSHighVA"
+      },
+      "phase": "stateflow",
+      "snapshot_id": "machine-state-snapshot/MSHighVA",
+      "statesAt": {
+        "#map": [
+          [
+            {
+              "#bigint": "18446744073709551611"
+            },
+            {
+              "#set": [
+                "entry"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "18446744073709551612"
+            },
+            {
+              "#set": [
+                "rax-five"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "18446744073709551613"
+            },
+            {
+              "#set": [
+                "zf-true"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "18446744073709551614"
+            },
+            {
+              "#set": [
+                "zf-true"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "18446744073709551615"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "18446744073709551612"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "18446744073709551611"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "18446744073709551613"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "18446744073709551612"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "18446744073709551614"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "18446744073709551613"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "18446744073709551615"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "18446744073709551613"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": [
+          {
+            "after": "returned",
+            "before": "zf-true",
+            "outcome": "returned",
+            "site": {
+              "#bigint": "18446744073709551614"
+            }
+          }
+        ]
+      },
+      "unknown_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "18446744073709551615"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "18446744073709551613"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 4
+      },
+      "action_taken": "finishStateflow",
+      "case_id": "MSHighVA",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "18446744073709551612"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "18446744073709551611"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "18446744073709551613"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "18446744073709551612"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "18446744073709551614"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "18446744073709551613"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "18446744073709551615"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "18446744073709551613"
+            }
+          }
+        ]
+      },
+      "not_reached": {
+        "#set": [
+          {
+            "#bigint": "18446744073709551615"
+          }
+        ]
+      },
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "MSHighVA"
+      },
+      "phase": "done",
+      "snapshot_id": "machine-state-snapshot/MSHighVA",
+      "statesAt": {
+        "#map": [
+          [
+            {
+              "#bigint": "18446744073709551611"
+            },
+            {
+              "#set": [
+                "entry"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "18446744073709551612"
+            },
+            {
+              "#set": [
+                "rax-five"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "18446744073709551613"
+            },
+            {
+              "#set": [
+                "zf-true"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "18446744073709551614"
+            },
+            {
+              "#set": [
+                "zf-true"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "18446744073709551615"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "18446744073709551612"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "18446744073709551611"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "18446744073709551613"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "18446744073709551612"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "18446744073709551614"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "18446744073709551613"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "18446744073709551615"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "18446744073709551613"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": [
+          {
+            "after": "returned",
+            "before": "zf-true",
+            "outcome": "returned",
+            "site": {
+              "#bigint": "18446744073709551614"
+            }
+          }
+        ]
+      },
+      "unknown_edges": {
+        "#set": []
+      }
+    }
+  ],
+  "vars": [
+    "phase",
+    "unknown_edges",
+    "action_taken",
+    "parameters",
+    "terminals",
+    "structural_edges",
+    "feasible_edges",
+    "infeasible_edges",
+    "not_reached",
+    "case_id",
+    "obligations",
+    "snapshot_id",
+    "statesAt"
+  ]
+}

@@ -14,12 +14,13 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def sources():
     paths = set()
-    for directory in ('src', 'tests', 'native/llvm_mc', 'input/src', 'input/tests', 'input/examples'):
+    for directory in ('src', 'tests', 'native/llvm_mc', 'input/src', 'input/tests', 'input/examples', 'reports/src'):
         paths.update(p for p in (ROOT / directory).rglob('*') if p.is_file())
     for pattern in ('Specs/AriadneInput*.tla', 'Specs/Input*.cfg', 'Specs/check-input.sh',
                     'tools/check_minidump*.py'):
         paths.update(ROOT.glob(pattern))
     paths.update(ROOT / p for p in ('Cargo.toml', 'Cargo.lock', 'input/Cargo.toml', 'input/Cargo.lock',
+                                   'reports/Cargo.toml', 'reports/Cargo.lock',
                                    'Specs/AriadneMachineCommon.tla', 'Specs/AriadneTypes.tla'))
     return {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(paths)}
 

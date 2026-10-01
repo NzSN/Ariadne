@@ -1,7 +1,7 @@
 # Ariadne checkpoints
 
-Updated **2026-10-01** for the first Stage E MirrorRust integration, following
-the Priority 4 delivery. The Stage D 49-case gate remains intact at **0/49** as a
+Updated **2026-10-01** for completed Stage E conformance, handoffs and report/CLI
+acceptance, following the first MirrorRust integration and Priority 4 delivery. The Stage D 49-case gate remains intact at **0/49** as a
 long-term formal purpose. Earlier entries retain their historical,
 time-local commit and validation status.
 
@@ -26,10 +26,36 @@ flowchart TD
     Q["2026-09-29 17:27 CST · working tree<br/>Priority 1 real Chromium capture qualified"]
     R["2026-09-29 23:29 CST · working tree<br/>P2 no-change; P3 delivered; P4 measured partial"]
     S["2026-09-30 00:13 CST · source-bound<br/>19/19 integration gates; D source hashes unchanged"]
-    T["2026-10-01 · working tree<br/>Stage E typed MirrorRust ports; two-fixture replay"]
+    T["2026-10-01 · working tree<br/>518ed9e · Stage E typed MirrorRust ports; two-fixture replay"]
     A --> B --> C --> D --> E --> F --> G --> H --> I --> J --> K --> L --> M --> N --> O --> P --> Q --> R --> S
-    S --> T
+    U["2026-10-01 · source-bound working tree<br/>Stage E complete: generated replay, mutations, reports/CLI"]
+    S --> T --> U
 ```
+
+## 2026-10-01 — Stage E completion
+
+The [completion plan](Plans/stage-e-completion.md) is delivered within its
+finite conformance/report acceptance scope. The
+[source-bound completion record](docs/Ariadne/stage-e-completion-validation.json)
+passes **12/12 gates** with stable source hashes. Its 16 machine-state and
+16 IR inputs cover joins, loops, empty/multiple roots and seeds, sparse/full-width
+addresses, equal-valued IDs, terminal alternatives, phi inputs, memory/call
+uncertainty and native text/bitcode. Repeated negotiated replay matches
+**64 complete traces and 326 observations**. All **15 mechanical engine mutants**
+fail as genuine model mismatches through unchanged observers/bindings.
+
+The optional minidump `--stateflow-input` handoff retains full recovery and
+preparation evidence, while the separate native IR CLI verifies owned artifacts
+before analysis. Their versioned text/DOT/JSON reports preserve identity,
+uncertainty and model-relative feasibility. Both command paths are checked
+with Graphviz. The existing minidump regression/mutation record passes and
+is reused only after an exact source-hash check; its isolated copies now include
+the new report-crate dependency.
+
+**Stage E is complete at this recorded tier.** Supplied transition relations
+and completeness assertions remain premises. The 0/49 Stage D instruction-step
+gate and universal Stage F Rust refinement remain open. Changes after `518ed9e`
+are currently uncommitted; no new ISA or historical-execution claim is made.
 
 ## 2026-10-01 — First Stage E MirrorRust integration
 

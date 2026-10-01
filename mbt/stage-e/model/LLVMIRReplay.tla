@@ -1,6 +1,11 @@
 ------------------------- MODULE LLVMIRReplay -------------------------
 EXTENDS AriadneTypes, Naturals, FiniteSets
+CONSTANT
+  \* @type: Str;
+  Case
 VARIABLES
+  \* @type: Str;
+  case_id,
   \* @type: Str;
   phase,
   \* @type: Set(Str);
@@ -24,53 +29,38 @@ VARIABLES
   \* @type: {fixture: Str};
   parameters
 
-Example == INSTANCE AriadneLLVMIRExample
+Inputs == INSTANCE LLVMIRCases
 Engine == INSTANCE AriadneLLVMIR WITH
-  ArtifactId <- "fixture.bc.sha256",
-  ModuleId <- "fixture-module",
-  FunctionId <- "fixture-function",
-  VerifiedIR <- TRUE,
-  Blocks <- Example!Blocks,
-  EntryBlock <- "entry",
-  Instructions <- Example!Instructions,
-  BlockOf <- Example!InstructionBlocks,
-  InstructionIndex <- Example!Indices,
-  Terminator <- Example!Terminators,
-  TermInfo <- Example!TerminatorsInfo,
-  Values <- Example!Values,
-  ValueKind <- Example!KindsOfValues,
-  DefSite <- Example!DefinitionSites,
-  Uses <- Example!InstructionUses,
-  PhiNodes <- {"join.phi"},
-  PhiIncoming <- Example!PhiInputs,
-  MemoryPreds <- Example!MemoryDependencies,
-  CallSites <- {"join.call"},
-  Callees <- {"possible.callee"},
-  CallTargets <- Example!Targets,
-  CompleteCalls <- {},
-  AdapterObligations <- Example!NoAdapterObligations,
-  SliceSeeds <- {"join.ret"}
+  ArtifactId <- Inputs!Artifact, ModuleId <- Inputs!Module, FunctionId <- Inputs!Function,
+  VerifiedIR <- Inputs!Verified, Blocks <- Inputs!Blocks, EntryBlock <- Inputs!Entry,
+  Instructions <- Inputs!Instructions, BlockOf <- Inputs!BlockOf, InstructionIndex <- Inputs!Index,
+  Terminator <- Inputs!Terminators, TermInfo <- Inputs!TermInfo, Values <- Inputs!Values,
+  ValueKind <- Inputs!ValueKind, DefSite <- Inputs!DefSite, Uses <- Inputs!Uses,
+  PhiNodes <- Inputs!PhiNodes, PhiIncoming <- Inputs!PhiIncoming, MemoryPreds <- Inputs!MemoryPreds,
+  CallSites <- Inputs!CallSites, Callees <- Inputs!Callees, CallTargets <- Inputs!CallTargets,
+  CompleteCalls <- Inputs!CompleteCalls, AdapterObligations <- Inputs!Obligations, SliceSeeds <- Inputs!Seeds
 Views ==
-  /\ artifact_id = "fixture.bc.sha256"
-  /\ module_id = "fixture-module"
-  /\ function_id = "fixture-function"
+  /\ artifact_id = Inputs!Artifact
+  /\ module_id = Inputs!Module
+  /\ function_id = Inputs!Function
   /\ control_graph = Engine!ControlGraph
   /\ call_graph = Engine!CallGraph
-  /\ dependency_preds = [i \in Example!Instructions |-> Engine!DependencyPreds(i)]
+  /\ dependency_preds = [i \in Inputs!Instructions |-> Engine!DependencyPreds(i)]
   /\ obligations = Engine!Obligations
-Init == Example!Init /\ Views /\ action_taken = "init" /\ parameters = [fixture |-> "LLVMIRReplay"]
+Init == Case \in Inputs!Cases /\ Engine!Init /\ case_id = Case /\ Views /\ action_taken = "init" /\ parameters = [fixture |-> Case]
 ExpandSlice ==
   /\ Engine!ExpandSlice /\ UNCHANGED <<artifact_id, module_id, function_id, control_graph, call_graph, dependency_preds, obligations>>
-  /\ action_taken' = "expandSlice" /\ UNCHANGED parameters
+  /\ action_taken' = "expandSlice" /\ UNCHANGED <<parameters, case_id>>
 FinishSlice ==
   /\ Engine!FinishSlice /\ UNCHANGED <<artifact_id, module_id, function_id, control_graph, call_graph, dependency_preds, obligations>>
-  /\ action_taken' = "finishSlice" /\ UNCHANGED parameters
+  /\ action_taken' = "finishSlice" /\ UNCHANGED <<parameters, case_id>>
 Next == ExpandSlice \/ FinishSlice
-vars == <<phase, slice, artifact_id, module_id, function_id, control_graph,
+vars == <<case_id, phase, slice, artifact_id, module_id, function_id, control_graph,
           call_graph, dependency_preds, obligations, action_taken, parameters>>
 Spec == Init /\ [][Next]_vars /\ WF_vars(Next)
-Safety == Example!Safety /\ Views
+Safety == Engine!TypeOK /\ Engine!CFGInvariant /\ Engine!DependencyInvariant /\ Engine!ResultInvariant /\ Views
 Terminates == <> (phase = "done")
 TraceComplete == phase # "done"
 TypeWitness == FALSE
+TypeCase == Case = "LLVMIRReplay"
 =============================================================================

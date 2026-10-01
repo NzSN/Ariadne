@@ -1,0 +1,2212 @@
+{
+  "#meta": {
+    "format": "ITF",
+    "varTypes": {
+      "action_taken": "Str",
+      "case_id": "Str",
+      "feasible_edges": "Set({ dst: Int, kind: Str, src: Int })",
+      "infeasible_edges": "Set({ dst: Int, kind: Str, src: Int })",
+      "not_reached": "Set(Int)",
+      "obligations": "Set({ reason: Str, site: Int })",
+      "parameters": "{ fixture: Str }",
+      "phase": "Str",
+      "snapshot_id": "Str",
+      "statesAt": "Set({ states: Set(Str), va: Int })",
+      "structural_edges": "Set({ dst: Int, kind: Str, src: Int })",
+      "terminals": "Set({ after: Str, before: Str, outcome: Str, site: Int })",
+      "unknown_edges": "Set({ dst: Int, kind: Str, src: Int })"
+    }
+  },
+  "param_vars": [],
+  "params": [],
+  "states": [
+    {
+      "#meta": {
+        "index": 0
+      },
+      "action_taken": "init",
+      "case_id": "MSChain8",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "26"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "13"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "MSChain8"
+      },
+      "phase": "stateflow",
+      "snapshot_id": "generated-chain-8",
+      "statesAt": {
+        "#set": [
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "91"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "104"
+            }
+          }
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "26"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "39"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "52"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "65"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "78"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "91"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "104"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "91"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": []
+      },
+      "unknown_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "39"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "52"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "65"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "78"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "91"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "104"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "91"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 1
+      },
+      "action_taken": "propagate",
+      "case_id": "MSChain8",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "26"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "39"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "26"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "MSChain8"
+      },
+      "phase": "stateflow",
+      "snapshot_id": "generated-chain-8",
+      "statesAt": {
+        "#set": [
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "91"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "104"
+            }
+          }
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "26"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "39"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "52"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "65"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "78"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "91"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "104"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "91"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": []
+      },
+      "unknown_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "52"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "65"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "78"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "91"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "104"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "91"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 2
+      },
+      "action_taken": "propagate",
+      "case_id": "MSChain8",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "26"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "39"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "52"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "39"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "MSChain8"
+      },
+      "phase": "stateflow",
+      "snapshot_id": "generated-chain-8",
+      "statesAt": {
+        "#set": [
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "91"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "104"
+            }
+          }
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "26"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "39"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "52"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "65"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "78"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "91"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "104"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "91"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": []
+      },
+      "unknown_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "65"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "78"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "91"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "104"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "91"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 3
+      },
+      "action_taken": "propagate",
+      "case_id": "MSChain8",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "26"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "39"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "52"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "65"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "52"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "MSChain8"
+      },
+      "phase": "stateflow",
+      "snapshot_id": "generated-chain-8",
+      "statesAt": {
+        "#set": [
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "91"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "104"
+            }
+          }
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "26"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "39"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "52"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "65"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "78"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "91"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "104"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "91"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": []
+      },
+      "unknown_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "78"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "91"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "104"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "91"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 4
+      },
+      "action_taken": "propagate",
+      "case_id": "MSChain8",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "26"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "39"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "52"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "65"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "78"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "65"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "MSChain8"
+      },
+      "phase": "stateflow",
+      "snapshot_id": "generated-chain-8",
+      "statesAt": {
+        "#set": [
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "91"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "104"
+            }
+          }
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "26"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "39"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "52"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "65"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "78"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "91"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "104"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "91"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": []
+      },
+      "unknown_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "91"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "104"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "91"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 5
+      },
+      "action_taken": "propagate",
+      "case_id": "MSChain8",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "26"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "39"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "52"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "65"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "78"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "91"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "78"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "MSChain8"
+      },
+      "phase": "stateflow",
+      "snapshot_id": "generated-chain-8",
+      "statesAt": {
+        "#set": [
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "91"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "104"
+            }
+          }
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "26"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "39"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "52"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "65"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "78"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "91"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "104"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "91"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": []
+      },
+      "unknown_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "104"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "91"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 6
+      },
+      "action_taken": "propagate",
+      "case_id": "MSChain8",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "26"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "39"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "52"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "65"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "78"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "91"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "104"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "91"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "MSChain8"
+      },
+      "phase": "stateflow",
+      "snapshot_id": "generated-chain-8",
+      "statesAt": {
+        "#set": [
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "91"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "104"
+            }
+          }
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "26"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "39"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "52"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "65"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "78"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "91"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "104"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "91"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": []
+      },
+      "unknown_edges": {
+        "#set": []
+      }
+    },
+    {
+      "#meta": {
+        "index": 7
+      },
+      "action_taken": "propagate",
+      "case_id": "MSChain8",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "26"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "39"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "52"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "65"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "78"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "91"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "104"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "91"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "MSChain8"
+      },
+      "phase": "stateflow",
+      "snapshot_id": "generated-chain-8",
+      "statesAt": {
+        "#set": [
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "91"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "104"
+            }
+          }
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "26"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "39"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "52"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "65"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "78"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "91"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "104"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "91"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": [
+          {
+            "after": "stop",
+            "before": "live",
+            "outcome": "stopped",
+            "site": {
+              "#bigint": "104"
+            }
+          }
+        ]
+      },
+      "unknown_edges": {
+        "#set": []
+      }
+    },
+    {
+      "#meta": {
+        "index": 8
+      },
+      "action_taken": "finishStateflow",
+      "case_id": "MSChain8",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "26"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "39"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "52"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "65"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "78"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "91"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "104"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "91"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "MSChain8"
+      },
+      "phase": "done",
+      "snapshot_id": "generated-chain-8",
+      "statesAt": {
+        "#set": [
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "91"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "live"
+              ]
+            },
+            "va": {
+              "#bigint": "104"
+            }
+          }
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "26"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "13"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "39"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "26"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "52"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "39"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "65"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "52"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "78"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "65"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "91"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "78"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "104"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "91"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": [
+          {
+            "after": "stop",
+            "before": "live",
+            "outcome": "stopped",
+            "site": {
+              "#bigint": "104"
+            }
+          }
+        ]
+      },
+      "unknown_edges": {
+        "#set": []
+      }
+    }
+  ],
+  "vars": [
+    "phase",
+    "unknown_edges",
+    "action_taken",
+    "parameters",
+    "terminals",
+    "structural_edges",
+    "feasible_edges",
+    "infeasible_edges",
+    "not_reached",
+    "case_id",
+    "obligations",
+    "snapshot_id",
+    "statesAt"
+  ]
+}

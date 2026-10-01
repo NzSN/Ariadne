@@ -15,7 +15,7 @@ fn execute() -> Result<bool, Box<dyn std::error::Error>> {
         _ => return Err("unknown Stage E engine".into()),
     };
     let mode = args[1].as_str();
-    if !["good", "wrong-digest"].contains(&mode) {
+    if !["good", "wrong-digest", "mutant"].contains(&mode) {
         return Err("unknown replay mode".into());
     }
     let lock: serde_json::Value = serde_json::from_slice(&std::fs::read(&args[4])?)?;
@@ -37,16 +37,85 @@ fn execute() -> Result<bool, Box<dyn std::error::Error>> {
                     .len())
         },
     )?;
+    let mut expected_cases = Vec::new();
+    let mut expected_actions = std::collections::BTreeMap::<String, usize>::new();
+    let mut expected_pairs = std::collections::BTreeMap::<String, usize>::new();
+    let wire = |name: &str| {
+        match name {
+            "init" => "Initialize",
+            "propagate" => "Propagate",
+            "finishStateflow" => "FinishStateflow",
+            "expandSlice" => "ExpandSlice",
+            "finishSlice" => "FinishSlice",
+            _ => "unknown",
+        }
+        .to_owned()
+    };
+    for path in &args[5..] {
+        let trace: serde_json::Value = serde_json::from_slice(&std::fs::read(path)?)?;
+        let states = trace["states"].as_array().ok_or("missing states")?;
+        expected_cases.push(
+            states[0]["case_id"]
+                .as_str()
+                .ok_or("missing case ID")?
+                .to_owned(),
+        );
+        let mut previous = None;
+        for state in states {
+            let action = wire(state["action_taken"].as_str().ok_or("missing action")?);
+            *expected_actions.entry(action.clone()).or_default() += 1;
+            if let Some(previous) = previous {
+                *expected_pairs
+                    .entry(format!("{previous}->{action}"))
+                    .or_default() += 1;
+            }
+            previous = Some(action);
+        }
+    }
     let evidence = Rc::new(RefCell::new(Evidence::default()));
+    let corpus = std::path::Path::new(&args[4])
+        .parent()
+        .ok_or("lock has no parent")?;
+    let manifest: serde_json::Value =
+        serde_json::from_slice(&std::fs::read(corpus.join("manifest.json"))?)?;
+    let model_name = match engine {
+        Engine::MachineState => "MachineStateReplay",
+        Engine::LLVMIR => "LLVMIRReplay",
+    };
+    let case_ids = manifest["engines"][model_name]
+        .as_array()
+        .ok_or("missing engine catalogue")?;
     let mut registration = match engine {
-        Engine::MachineState => integration::machine_state_registration(
-            integration::fixtures_machine::request(),
-            evidence.clone(),
-        )?,
-        Engine::LLVMIR => integration::llvm_ir_registration(
-            integration::fixtures_ir::request(),
-            evidence.clone(),
-        )?,
+        Engine::MachineState => {
+            let requests = case_ids
+                .iter()
+                .map(|id| -> Result<_, Box<dyn std::error::Error>> {
+                    let id = id.as_str().ok_or("invalid case ID")?;
+                    Ok((
+                        id.to_owned(),
+                        ariadne_reports::decode_machine_request(&std::fs::read(
+                            corpus.join("inputs").join(format!("{id}.json")),
+                        )?)?,
+                    ))
+                })
+                .collect::<Result<_, _>>()?;
+            integration::machine_state_cases_registration(requests, evidence.clone())?
+        }
+        Engine::LLVMIR => {
+            let requests = case_ids
+                .iter()
+                .map(|id| -> Result<_, Box<dyn std::error::Error>> {
+                    let id = id.as_str().ok_or("invalid case ID")?;
+                    Ok((
+                        id.to_owned(),
+                        ariadne_reports::decode_ir_request(&std::fs::read(
+                            corpus.join("inputs").join(format!("{id}.json")),
+                        )?)?,
+                    ))
+                })
+                .collect::<Result<_, _>>()?;
+            integration::llvm_ir_cases_registration(requests, evidence.clone())?
+        }
     };
     if mode == "wrong-digest" {
         metadata.semantic_digest = "0".repeat(64);
@@ -83,7 +152,23 @@ fn execute() -> Result<bool, Box<dyn std::error::Error>> {
     let coverage = actions
         .iter()
         .all(|action| e.actions.get(action).copied().unwrap_or_default() > 0);
-    let passed = if mode == "good" {
+    let mismatch = match &result {
+        Err(NegotiatedError::Legacy(Error::StepMismatch {
+            action,
+            expected,
+            actual,
+            hints,
+            ..
+        })) => Some(
+            json!({"action":action,"expected":encode_state(expected),"actual":encode_state(actual),"hints":format!("{hints:?}")}),
+        ),
+        _ => None,
+    };
+    let actual_actions: std::collections::BTreeMap<String, usize> =
+        e.actions.iter().map(|(a, n)| (a.to_string(), *n)).collect();
+    let passed = if mode == "mutant" {
+        mismatch.is_some() && e.factories == 1 && e.port_drops == 1
+    } else if mode == "good" {
         result.is_ok()
             && coverage
             && e.factories == 1
@@ -91,6 +176,9 @@ fn execute() -> Result<bool, Box<dyn std::error::Error>> {
             && e.initializations == args.len() - 5
             && e.completed == args.len() - 5
             && e.observations == expected_states
+            && e.cases == expected_cases
+            && actual_actions == expected_actions
+            && e.pairs == expected_pairs
     } else {
         rejected
             && e.factories == 0
@@ -103,14 +191,15 @@ fn execute() -> Result<bool, Box<dyn std::error::Error>> {
         json!({
             "schema": "ariadne.stage-e-mirrorrust-replay/v1", "engine": args[0], "mode": mode,
             "gatePassed": passed, "modelMatched": result.is_ok(), "semanticDigest": digest,
-            "status": if result.is_ok() { "passed" } else if rejected { "rejected" } else { "failed" },
-            "error": result.as_ref().err().map(ToString::to_string),
+            "status": if result.is_ok() { "passed" } else if rejected { "rejected" } else if mismatch.is_some() { "mismatch" } else { "failed" },
+            "error": result.as_ref().err().map(ToString::to_string),"mismatch":mismatch,
             "factoryCalls": e.factories, "portDrops": e.port_drops, "initializations": e.initializations,
             "observationsDispatched": e.observations,
             "matchedObservations": if result.is_ok() { Some(e.observations) } else { None },
             "completedTraces": e.completed, "coverageSatisfied": result.is_ok() && coverage,
             "matchedActions": if result.is_ok() { Some(&e.actions) } else { None },
-            "scope": "existing formal fixture replay; broader Stage E acceptance remains open",
+            "matchedPairs": if result.is_ok() {Some(&e.pairs)} else {None},"cases":e.cases,
+            "scope": "generated finite campaign replay; supplied semantics and universal refinement are separate boundaries",
         })
     );
     Ok(passed)

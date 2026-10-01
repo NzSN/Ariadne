@@ -1,4 +1,8 @@
-# Stage E machine-state and native LLVM IR progress
+# Stage E machine-state and native LLVM IR validation
+
+Current acceptance: [Stage E completion](stage-e-completion.md), with
+[source-bound replay, mutation, native and report evidence](stage-e-completion-validation.json).
+The sections below retain the earlier component validation.
 
 Validated **2026-09-29 10:16 CST** in the source-bound
 [B–F progress report](stage-b-f-validation.json). This is implementation and
@@ -61,17 +65,16 @@ potentially writing instructions for each memory-reading instruction, plus
 calls get an exact callee target; indirect calls remain open. There is no
 machine-code lifting or IR/machine address correspondence.
 
-## Remaining Stage E acceptance
+## Completed Stage E acceptance
 
-The [first MirrorRust integration stage](../../mbt/stage-e/README.md), added
-2026-10-01, now replays the existing machine-state and LLVM IR examples through
-separate compiler-generated ports, including all mutable fields and declared
-derived observations. Its [source-bound record](stage-e-mirrorrust-integration-validation.json)
-retains repeated initialization, exact-digest admission and port ownership.
-The broader generated model-based replay campaign remains open for both paths:
-additional scenarios and mechanical implementation mutants are still needed.
-The focused Rust fixtures and
-separate Apalache/TLC runs agree on their stated examples but are not a
-universal implementation-to-model comparison. Neither new result family is
-yet exposed through the minidump CLI. These limitations keep Stage E
-**partial** in the delivery checkpoint.
+The [completion record](stage-e-completion-validation.json) closes the scoped
+Stage E acceptance clauses. The generated campaign has 32 inputs, 64 complete
+traces and 326 matched observations. Fifteen mechanical engine mutants produce
+genuine model mismatches through the same observers and generated bindings.
+The report/CLI tests preserve identities, structural graph context, uncertainty
+and native verifier admission; Graphviz independently parses their DOT output.
+
+The earlier [first MirrorRust integration record](stage-e-mirrorrust-integration-validation.json)
+remains a historical two-fixture checkpoint. Completion is finite conformance
+and reporting acceptance relative to supplied semantic premises. It does not
+prove those premises, a universal Rust refinement or AMD64 ISA semantics.

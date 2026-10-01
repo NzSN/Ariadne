@@ -23,3 +23,15 @@ predecessor relation to 100,000 pairs. Each memory-reading instruction gets
 all possibly writing instructions as potential predecessors plus an explicit
 alias-uncertainty obligation. An indirect call retains an incomplete-target
 obligation. See the [Stage E validation](../docs/Ariadne/stage-e-validation.md).
+
+The direct investigator CLI now emits independently versioned text/DOT/JSON:
+
+```sh
+cargo build --offline --locked --manifest-path ir/Cargo.toml
+ir/target/debug/ariadne-ir ir/tests/fixtures/diamond.ll \
+  --helper target/ariadne-llvm-ir --function diamond --seed i11 \
+  --output-dir NEW_DIR
+```
+
+See [Stage E completion](../docs/Ariadne/stage-e-completion.md) for identity,
+uncertainty, native verification and transactional publication boundaries.

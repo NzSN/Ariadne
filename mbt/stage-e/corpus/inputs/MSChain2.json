@@ -1,0 +1,84 @@
+{
+  "adapter_obligations": [],
+  "catalogue": {
+    "live": {
+      "status": "running",
+      "valuation": {
+        "x": [
+          "unknown"
+        ]
+      }
+    },
+    "stop": {
+      "status": "stopped",
+      "valuation": {
+        "x": [
+          "unknown"
+        ]
+      }
+    }
+  },
+  "complete_sites": [
+    "0x000000000000000d",
+    "0x000000000000001a"
+  ],
+  "effects": [
+    {
+      "may_defs": [],
+      "must_defs": [],
+      "uses": [],
+      "va": "0x000000000000000d"
+    },
+    {
+      "may_defs": [],
+      "must_defs": [],
+      "uses": [],
+      "va": "0x000000000000001a"
+    }
+  ],
+  "entry_states": [
+    {
+      "states": [
+        "live"
+      ],
+      "va": "0x000000000000000d"
+    }
+  ],
+  "nodes": [
+    "0x000000000000000d",
+    "0x000000000000001a"
+  ],
+  "schema": "ariadne.machine-state-request/v1",
+  "snapshot_id": "generated-chain-2",
+  "steps": [
+    {
+      "after": "live",
+      "before": "live",
+      "edge": {
+        "dst": "0x000000000000001a",
+        "kind": "next",
+        "src": "0x000000000000000d"
+      }
+    }
+  ],
+  "structural_edges": [
+    {
+      "dst": "0x000000000000001a",
+      "kind": "next",
+      "src": "0x000000000000000d"
+    }
+  ],
+  "terminal_transitions": [
+    {
+      "after": "stop",
+      "before": "live",
+      "outcome": "stopped",
+      "site": "0x000000000000001a"
+    }
+  ],
+  "value_domain": {
+    "x": [
+      "unknown"
+    ]
+  }
+}

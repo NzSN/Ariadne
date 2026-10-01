@@ -1,0 +1,128 @@
+{
+  "adapter_obligations": [],
+  "catalogue": {
+    "live": {
+      "status": "running",
+      "valuation": {
+        "x": [
+          "unknown"
+        ]
+      }
+    },
+    "stop": {
+      "status": "stopped",
+      "valuation": {
+        "x": [
+          "unknown"
+        ]
+      }
+    }
+  },
+  "complete_sites": [
+    "0x000000000000000d",
+    "0x000000000000001a",
+    "0x0000000000000027",
+    "0x0000000000000034"
+  ],
+  "effects": [
+    {
+      "may_defs": [],
+      "must_defs": [],
+      "uses": [],
+      "va": "0x000000000000000d"
+    },
+    {
+      "may_defs": [],
+      "must_defs": [],
+      "uses": [],
+      "va": "0x000000000000001a"
+    },
+    {
+      "may_defs": [],
+      "must_defs": [],
+      "uses": [],
+      "va": "0x0000000000000027"
+    },
+    {
+      "may_defs": [],
+      "must_defs": [],
+      "uses": [],
+      "va": "0x0000000000000034"
+    }
+  ],
+  "entry_states": [
+    {
+      "states": [
+        "live"
+      ],
+      "va": "0x000000000000000d"
+    }
+  ],
+  "nodes": [
+    "0x000000000000000d",
+    "0x000000000000001a",
+    "0x0000000000000027",
+    "0x0000000000000034"
+  ],
+  "schema": "ariadne.machine-state-request/v1",
+  "snapshot_id": "generated-chain-4",
+  "steps": [
+    {
+      "after": "live",
+      "before": "live",
+      "edge": {
+        "dst": "0x000000000000001a",
+        "kind": "next",
+        "src": "0x000000000000000d"
+      }
+    },
+    {
+      "after": "live",
+      "before": "live",
+      "edge": {
+        "dst": "0x0000000000000027",
+        "kind": "next",
+        "src": "0x000000000000001a"
+      }
+    },
+    {
+      "after": "live",
+      "before": "live",
+      "edge": {
+        "dst": "0x0000000000000034",
+        "kind": "next",
+        "src": "0x0000000000000027"
+      }
+    }
+  ],
+  "structural_edges": [
+    {
+      "dst": "0x000000000000001a",
+      "kind": "next",
+      "src": "0x000000000000000d"
+    },
+    {
+      "dst": "0x0000000000000027",
+      "kind": "next",
+      "src": "0x000000000000001a"
+    },
+    {
+      "dst": "0x0000000000000034",
+      "kind": "next",
+      "src": "0x0000000000000027"
+    }
+  ],
+  "terminal_transitions": [
+    {
+      "after": "stop",
+      "before": "live",
+      "outcome": "stopped",
+      "site": "0x0000000000000034"
+    }
+  ],
+  "value_domain": {
+    "x": [
+      "unknown"
+    ]
+  }
+}

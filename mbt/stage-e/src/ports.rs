@@ -1,6 +1,7 @@
 use crate::{SharedEvidence, ir_binding as ib, machine_binding as mb};
 use ariadne::{EdgeKind, llvm_ir as ir, machine_state as ms};
 use mirrorrust::BindingError;
+use std::collections::BTreeMap;
 
 fn unavailable() -> BindingError {
     BindingError::new("not_initialized", "initialize must run first")
@@ -35,14 +36,19 @@ macro_rules! edges {
 }
 
 pub struct MachineStatePort {
-    request: ms::Request,
+    requests: BTreeMap<String, ms::Request>,
+    case_id: String,
     analyzer: Option<ms::Analyzer>,
     evidence: SharedEvidence,
 }
 impl MachineStatePort {
     pub fn new(request: ms::Request, evidence: SharedEvidence) -> Self {
+        Self::with_cases([("MachineStateReplay".into(), request)].into(), evidence)
+    }
+    pub fn with_cases(requests: BTreeMap<String, ms::Request>, evidence: SharedEvidence) -> Self {
         Self {
-            request,
+            requests,
+            case_id: String::new(),
             analyzer: None,
             evidence,
         }
@@ -56,32 +62,30 @@ impl MachineStatePort {
     }
 }
 impl mb::MachineStateReplayPort for MachineStatePort {
-    fn initialize(&mut self) -> Result<(), BindingError> {
+    fn initialize(&mut self, input: mb::InitializeInput) -> Result<(), BindingError> {
+        let request = self
+            .requests
+            .get(&input.case_id)
+            .ok_or_else(|| BindingError::new("unknown_case", "unknown machine case"))?;
+        self.case_id = input.case_id;
+        self.evidence.borrow_mut().cases.push(self.case_id.clone());
         self.analyzer = Some(
-            ms::Analyzer::new(self.request.clone())
+            ms::Analyzer::new(request.clone())
                 .map_err(|error| BindingError::new("invalid_request", error.to_string()))?,
         );
         self.evidence.borrow_mut().initializations += 1;
+        self.evidence.borrow_mut().previous_action = None;
+        self.evidence.borrow_mut().record_action("Initialize");
         Ok(())
     }
     fn propagate(&mut self) -> Result<(), BindingError> {
         self.advance()?;
-        *self
-            .evidence
-            .borrow_mut()
-            .actions
-            .entry("Propagate")
-            .or_default() += 1;
+        self.evidence.borrow_mut().record_action("Propagate");
         Ok(())
     }
     fn finish_stateflow(&mut self) -> Result<(), BindingError> {
         self.advance()?;
-        *self
-            .evidence
-            .borrow_mut()
-            .actions
-            .entry("FinishStateflow")
-            .or_default() += 1;
+        self.evidence.borrow_mut().record_action("FinishStateflow");
         Ok(())
     }
     fn observe(&mut self) -> Result<mb::MachineStateReplayObservation, BindingError> {
@@ -89,6 +93,7 @@ impl mb::MachineStateReplayPort for MachineStatePort {
         let state = analyzer.state();
         let views = analyzer.observations();
         let result = mb::MachineStateReplayObservation {
+            case_id: self.case_id.clone(),
             phase: match state.phase {
                 ms::Phase::Stateflow => "stateflow",
                 ms::Phase::Done => "done",
@@ -99,16 +104,16 @@ impl mb::MachineStateReplayPort for MachineStatePort {
                 state
                     .states_at
                     .iter()
-                    .map(|(&va, states)| mb::MiTypeO6Item {
+                    .map(|(&va, states)| mb::MiTypeO7Item {
                         field_0: mb::MirrorSet(states.iter().map(|id| id.0.clone()).collect()),
                         field_1: va.into(),
                     })
                     .collect(),
             ),
-            structural_edges: edges!(analyzer.request().structural_edges, MiTypeO7Item),
-            feasible_edges: edges!(views.feasible_edges, MiTypeO0Item),
-            infeasible_edges: edges!(views.provably_infeasible_edges, MiTypeO1Item),
-            unknown_edges: edges!(views.unknown_feasibility_edges, MiTypeO9Item),
+            structural_edges: edges!(analyzer.request().structural_edges, MiTypeO8Item),
+            feasible_edges: edges!(views.feasible_edges, MiTypeO1Item),
+            infeasible_edges: edges!(views.provably_infeasible_edges, MiTypeO2Item),
+            unknown_edges: edges!(views.unknown_feasibility_edges, MiTypeO10Item),
             not_reached: mb::MirrorSet(
                 views
                     .not_reached_nodes
@@ -120,7 +125,7 @@ impl mb::MachineStateReplayPort for MachineStatePort {
                 views
                     .reached_terminal_transitions
                     .iter()
-                    .map(|row| mb::MiTypeO8Item {
+                    .map(|row| mb::MiTypeO9Item {
                         field_0: row.after.0.clone(),
                         field_1: row.before.0.clone(),
                         field_2: match row.outcome {
@@ -137,7 +142,7 @@ impl mb::MachineStateReplayPort for MachineStatePort {
                 views
                     .obligations
                     .iter()
-                    .map(|row| mb::MiTypeO3Item {
+                    .map(|row| mb::MiTypeO4Item {
                         field_0: match row.reason {
                             ms::ObligationReason::IncompleteSemantics => "incomplete-semantics",
                             ms::ObligationReason::Adapter(reason) => match reason {
@@ -175,14 +180,19 @@ impl Drop for MachineStatePort {
 }
 
 pub struct LLVMIRPort {
-    request: ir::Request,
+    requests: BTreeMap<String, ir::Request>,
+    case_id: String,
     analyzer: Option<ir::Analyzer>,
     evidence: SharedEvidence,
 }
 impl LLVMIRPort {
     pub fn new(request: ir::Request, evidence: SharedEvidence) -> Self {
+        Self::with_cases([("LLVMIRReplay".into(), request)].into(), evidence)
+    }
+    pub fn with_cases(requests: BTreeMap<String, ir::Request>, evidence: SharedEvidence) -> Self {
         Self {
-            request,
+            requests,
+            case_id: String::new(),
             analyzer: None,
             evidence,
         }
@@ -211,32 +221,30 @@ fn ir_edge_kind(kind: ir::ControlEdgeKind) -> &'static str {
     }
 }
 impl ib::LLVMIRReplayPort for LLVMIRPort {
-    fn initialize(&mut self) -> Result<(), BindingError> {
+    fn initialize(&mut self, input: ib::InitializeInput) -> Result<(), BindingError> {
+        let request = self
+            .requests
+            .get(&input.case_id)
+            .ok_or_else(|| BindingError::new("unknown_case", "unknown IR case"))?;
+        self.case_id = input.case_id;
+        self.evidence.borrow_mut().cases.push(self.case_id.clone());
         self.analyzer = Some(
-            ir::Analyzer::new(self.request.clone())
+            ir::Analyzer::new(request.clone())
                 .map_err(|error| BindingError::new("invalid_request", error.to_string()))?,
         );
         self.evidence.borrow_mut().initializations += 1;
+        self.evidence.borrow_mut().previous_action = None;
+        self.evidence.borrow_mut().record_action("Initialize");
         Ok(())
     }
     fn expand_slice(&mut self) -> Result<(), BindingError> {
         self.advance()?;
-        *self
-            .evidence
-            .borrow_mut()
-            .actions
-            .entry("ExpandSlice")
-            .or_default() += 1;
+        self.evidence.borrow_mut().record_action("ExpandSlice");
         Ok(())
     }
     fn finish_slice(&mut self) -> Result<(), BindingError> {
         self.advance()?;
-        *self
-            .evidence
-            .borrow_mut()
-            .actions
-            .entry("FinishSlice")
-            .or_default() += 1;
+        self.evidence.borrow_mut().record_action("FinishSlice");
         Ok(())
     }
     fn observe(&mut self) -> Result<ib::LLVMIRReplayObservation, BindingError> {
@@ -244,6 +252,7 @@ impl ib::LLVMIRReplayPort for LLVMIRPort {
         let request = analyzer.request();
         let state = analyzer.state();
         let result = ib::LLVMIRReplayObservation {
+            case_id: self.case_id.clone(),
             artifact_id: request.artifact_id.clone(),
             module_id: request.module_id.clone(),
             function_id: request.function_id.clone(),
@@ -257,7 +266,7 @@ impl ib::LLVMIRReplayPort for LLVMIRPort {
                 request
                     .control_graph()
                     .iter()
-                    .map(|edge| ib::MiTypeO2Item {
+                    .map(|edge| ib::MiTypeO3Item {
                         field_0: edge.dst.0.clone(),
                         field_1: ir_edge_kind(edge.kind).into(),
                         field_2: edge.src.0.clone(),
@@ -297,7 +306,7 @@ impl ib::LLVMIRReplayPort for LLVMIRPort {
                 request
                     .obligations()
                     .iter()
-                    .map(|row| ib::MiTypeO6Item {
+                    .map(|row| ib::MiTypeO7Item {
                         field_0: match row.reason {
                             ir::ObligationReason::CallTargets => "call-targets",
                             ir::ObligationReason::Adapter(reason) => match reason {

@@ -1,0 +1,847 @@
+{
+  "#meta": {
+    "format": "ITF",
+    "varTypes": {
+      "action_taken": "Str",
+      "artifact_id": "Str",
+      "call_graph": "Set({ callee: Str, kind: Str, site: Str })",
+      "case_id": "Str",
+      "control_graph": "Set({ dst: Str, kind: Str, src: Str })",
+      "dependency_preds": "(Str -> Set(Str))",
+      "function_id": "Str",
+      "module_id": "Str",
+      "obligations": "Set({ reason: Str, site: Str })",
+      "parameters": "{ fixture: Str }",
+      "phase": "Str",
+      "slice": "Set(Str)"
+    }
+  },
+  "param_vars": [],
+  "params": [],
+  "states": [
+    {
+      "#meta": {
+        "index": 0
+      },
+      "action_taken": "init",
+      "artifact_id": "llvm-ir-artifact-v1:bec3302fd1aa62cc39df8dc7351efc9fe472ffa70496dd47a513ef506b2cade6",
+      "call_graph": {
+        "#set": []
+      },
+      "case_id": "IRNativeBitcode",
+      "control_graph": {
+        "#set": [
+          {
+            "dst": "b1",
+            "kind": "true",
+            "src": "b0"
+          },
+          {
+            "dst": "b2",
+            "kind": "false",
+            "src": "b0"
+          },
+          {
+            "dst": "b3",
+            "kind": "next",
+            "src": "b1"
+          },
+          {
+            "dst": "b3",
+            "kind": "next",
+            "src": "b2"
+          }
+        ]
+      },
+      "dependency_preds": {
+        "#map": [
+          [
+            "i0",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "i1",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "i10",
+            {
+              "#set": [
+                "i7",
+                "i9"
+              ]
+            }
+          ],
+          [
+            "i11",
+            {
+              "#set": [
+                "i10"
+              ]
+            }
+          ],
+          [
+            "i2",
+            {
+              "#set": [
+                "i1"
+              ]
+            }
+          ],
+          [
+            "i3",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "i4",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "i5",
+            {
+              "#set": [
+                "i4"
+              ]
+            }
+          ],
+          [
+            "i6",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "i7",
+            {
+              "#set": [
+                "i1",
+                "i4"
+              ]
+            }
+          ],
+          [
+            "i8",
+            {
+              "#set": [
+                "i2",
+                "i5",
+                "i7"
+              ]
+            }
+          ],
+          [
+            "i9",
+            {
+              "#set": [
+                "i2",
+                "i5",
+                "i8"
+              ]
+            }
+          ]
+        ]
+      },
+      "function_id": "diamond",
+      "module_id": "module:bec3302fd1aa62cc39df8dc7351efc9fe472ffa70496dd47a513ef506b2cade6",
+      "obligations": {
+        "#set": [
+          {
+            "reason": "unknown-memory-alias",
+            "site": "i8"
+          },
+          {
+            "reason": "call-targets",
+            "site": "i8"
+          },
+          {
+            "reason": "unknown-memory-alias",
+            "site": "i9"
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "IRNativeBitcode"
+      },
+      "phase": "slice",
+      "slice": {
+        "#set": [
+          "i11"
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 1
+      },
+      "action_taken": "expandSlice",
+      "artifact_id": "llvm-ir-artifact-v1:bec3302fd1aa62cc39df8dc7351efc9fe472ffa70496dd47a513ef506b2cade6",
+      "call_graph": {
+        "#set": []
+      },
+      "case_id": "IRNativeBitcode",
+      "control_graph": {
+        "#set": [
+          {
+            "dst": "b1",
+            "kind": "true",
+            "src": "b0"
+          },
+          {
+            "dst": "b2",
+            "kind": "false",
+            "src": "b0"
+          },
+          {
+            "dst": "b3",
+            "kind": "next",
+            "src": "b1"
+          },
+          {
+            "dst": "b3",
+            "kind": "next",
+            "src": "b2"
+          }
+        ]
+      },
+      "dependency_preds": {
+        "#map": [
+          [
+            "i0",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "i1",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "i10",
+            {
+              "#set": [
+                "i7",
+                "i9"
+              ]
+            }
+          ],
+          [
+            "i11",
+            {
+              "#set": [
+                "i10"
+              ]
+            }
+          ],
+          [
+            "i2",
+            {
+              "#set": [
+                "i1"
+              ]
+            }
+          ],
+          [
+            "i3",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "i4",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "i5",
+            {
+              "#set": [
+                "i4"
+              ]
+            }
+          ],
+          [
+            "i6",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "i7",
+            {
+              "#set": [
+                "i1",
+                "i4"
+              ]
+            }
+          ],
+          [
+            "i8",
+            {
+              "#set": [
+                "i2",
+                "i5",
+                "i7"
+              ]
+            }
+          ],
+          [
+            "i9",
+            {
+              "#set": [
+                "i2",
+                "i5",
+                "i8"
+              ]
+            }
+          ]
+        ]
+      },
+      "function_id": "diamond",
+      "module_id": "module:bec3302fd1aa62cc39df8dc7351efc9fe472ffa70496dd47a513ef506b2cade6",
+      "obligations": {
+        "#set": [
+          {
+            "reason": "unknown-memory-alias",
+            "site": "i8"
+          },
+          {
+            "reason": "call-targets",
+            "site": "i8"
+          },
+          {
+            "reason": "unknown-memory-alias",
+            "site": "i9"
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "IRNativeBitcode"
+      },
+      "phase": "slice",
+      "slice": {
+        "#set": [
+          "i10",
+          "i11"
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 2
+      },
+      "action_taken": "expandSlice",
+      "artifact_id": "llvm-ir-artifact-v1:bec3302fd1aa62cc39df8dc7351efc9fe472ffa70496dd47a513ef506b2cade6",
+      "call_graph": {
+        "#set": []
+      },
+      "case_id": "IRNativeBitcode",
+      "control_graph": {
+        "#set": [
+          {
+            "dst": "b1",
+            "kind": "true",
+            "src": "b0"
+          },
+          {
+            "dst": "b2",
+            "kind": "false",
+            "src": "b0"
+          },
+          {
+            "dst": "b3",
+            "kind": "next",
+            "src": "b1"
+          },
+          {
+            "dst": "b3",
+            "kind": "next",
+            "src": "b2"
+          }
+        ]
+      },
+      "dependency_preds": {
+        "#map": [
+          [
+            "i0",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "i1",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "i10",
+            {
+              "#set": [
+                "i7",
+                "i9"
+              ]
+            }
+          ],
+          [
+            "i11",
+            {
+              "#set": [
+                "i10"
+              ]
+            }
+          ],
+          [
+            "i2",
+            {
+              "#set": [
+                "i1"
+              ]
+            }
+          ],
+          [
+            "i3",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "i4",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "i5",
+            {
+              "#set": [
+                "i4"
+              ]
+            }
+          ],
+          [
+            "i6",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "i7",
+            {
+              "#set": [
+                "i1",
+                "i4"
+              ]
+            }
+          ],
+          [
+            "i8",
+            {
+              "#set": [
+                "i2",
+                "i5",
+                "i7"
+              ]
+            }
+          ],
+          [
+            "i9",
+            {
+              "#set": [
+                "i2",
+                "i5",
+                "i8"
+              ]
+            }
+          ]
+        ]
+      },
+      "function_id": "diamond",
+      "module_id": "module:bec3302fd1aa62cc39df8dc7351efc9fe472ffa70496dd47a513ef506b2cade6",
+      "obligations": {
+        "#set": [
+          {
+            "reason": "unknown-memory-alias",
+            "site": "i8"
+          },
+          {
+            "reason": "call-targets",
+            "site": "i8"
+          },
+          {
+            "reason": "unknown-memory-alias",
+            "site": "i9"
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "IRNativeBitcode"
+      },
+      "phase": "slice",
+      "slice": {
+        "#set": [
+          "i7",
+          "i9",
+          "i10",
+          "i11"
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 3
+      },
+      "action_taken": "expandSlice",
+      "artifact_id": "llvm-ir-artifact-v1:bec3302fd1aa62cc39df8dc7351efc9fe472ffa70496dd47a513ef506b2cade6",
+      "call_graph": {
+        "#set": []
+      },
+      "case_id": "IRNativeBitcode",
+      "control_graph": {
+        "#set": [
+          {
+            "dst": "b1",
+            "kind": "true",
+            "src": "b0"
+          },
+          {
+            "dst": "b2",
+            "kind": "false",
+            "src": "b0"
+          },
+          {
+            "dst": "b3",
+            "kind": "next",
+            "src": "b1"
+          },
+          {
+            "dst": "b3",
+            "kind": "next",
+            "src": "b2"
+          }
+        ]
+      },
+      "dependency_preds": {
+        "#map": [
+          [
+            "i0",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "i1",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "i10",
+            {
+              "#set": [
+                "i7",
+                "i9"
+              ]
+            }
+          ],
+          [
+            "i11",
+            {
+              "#set": [
+                "i10"
+              ]
+            }
+          ],
+          [
+            "i2",
+            {
+              "#set": [
+                "i1"
+              ]
+            }
+          ],
+          [
+            "i3",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "i4",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "i5",
+            {
+              "#set": [
+                "i4"
+              ]
+            }
+          ],
+          [
+            "i6",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "i7",
+            {
+              "#set": [
+                "i1",
+                "i4"
+              ]
+            }
+          ],
+          [
+            "i8",
+            {
+              "#set": [
+                "i2",
+                "i5",
+                "i7"
+              ]
+            }
+          ],
+          [
+            "i9",
+            {
+              "#set": [
+                "i2",
+                "i5",
+                "i8"
+              ]
+            }
+          ]
+        ]
+      },
+      "function_id": "diamond",
+      "module_id": "module:bec3302fd1aa62cc39df8dc7351efc9fe472ffa70496dd47a513ef506b2cade6",
+      "obligations": {
+        "#set": [
+          {
+            "reason": "unknown-memory-alias",
+            "site": "i8"
+          },
+          {
+            "reason": "call-targets",
+            "site": "i8"
+          },
+          {
+            "reason": "unknown-memory-alias",
+            "site": "i9"
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "IRNativeBitcode"
+      },
+      "phase": "slice",
+      "slice": {
+        "#set": [
+          "i1",
+          "i2",
+          "i4",
+          "i5",
+          "i7",
+          "i8",
+          "i9",
+          "i10",
+          "i11"
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 4
+      },
+      "action_taken": "finishSlice",
+      "artifact_id": "llvm-ir-artifact-v1:bec3302fd1aa62cc39df8dc7351efc9fe472ffa70496dd47a513ef506b2cade6",
+      "call_graph": {
+        "#set": []
+      },
+      "case_id": "IRNativeBitcode",
+      "control_graph": {
+        "#set": [
+          {
+            "dst": "b1",
+            "kind": "true",
+            "src": "b0"
+          },
+          {
+            "dst": "b2",
+            "kind": "false",
+            "src": "b0"
+          },
+          {
+            "dst": "b3",
+            "kind": "next",
+            "src": "b1"
+          },
+          {
+            "dst": "b3",
+            "kind": "next",
+            "src": "b2"
+          }
+        ]
+      },
+      "dependency_preds": {
+        "#map": [
+          [
+            "i0",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "i1",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "i10",
+            {
+              "#set": [
+                "i7",
+                "i9"
+              ]
+            }
+          ],
+          [
+            "i11",
+            {
+              "#set": [
+                "i10"
+              ]
+            }
+          ],
+          [
+            "i2",
+            {
+              "#set": [
+                "i1"
+              ]
+            }
+          ],
+          [
+            "i3",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "i4",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "i5",
+            {
+              "#set": [
+                "i4"
+              ]
+            }
+          ],
+          [
+            "i6",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "i7",
+            {
+              "#set": [
+                "i1",
+                "i4"
+              ]
+            }
+          ],
+          [
+            "i8",
+            {
+              "#set": [
+                "i2",
+                "i5",
+                "i7"
+              ]
+            }
+          ],
+          [
+            "i9",
+            {
+              "#set": [
+                "i2",
+                "i5",
+                "i8"
+              ]
+            }
+          ]
+        ]
+      },
+      "function_id": "diamond",
+      "module_id": "module:bec3302fd1aa62cc39df8dc7351efc9fe472ffa70496dd47a513ef506b2cade6",
+      "obligations": {
+        "#set": [
+          {
+            "reason": "unknown-memory-alias",
+            "site": "i8"
+          },
+          {
+            "reason": "call-targets",
+            "site": "i8"
+          },
+          {
+            "reason": "unknown-memory-alias",
+            "site": "i9"
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "IRNativeBitcode"
+      },
+      "phase": "done",
+      "slice": {
+        "#set": [
+          "i1",
+          "i2",
+          "i4",
+          "i5",
+          "i7",
+          "i8",
+          "i9",
+          "i10",
+          "i11"
+        ]
+      }
+    }
+  ],
+  "vars": [
+    "phase",
+    "artifact_id",
+    "call_graph",
+    "function_id",
+    "dependency_preds",
+    "control_graph",
+    "action_taken",
+    "parameters",
+    "slice",
+    "module_id",
+    "case_id",
+    "obligations"
+  ]
+}

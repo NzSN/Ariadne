@@ -1,0 +1,226 @@
+{
+  "adapter_obligations": [],
+  "artifact_id": "fixture.bc.sha256",
+  "blocks": {
+    "entry": {
+      "kind": "br",
+      "successors": [
+        {
+          "dst": "left",
+          "kind": "true"
+        },
+        {
+          "dst": "right",
+          "kind": "false"
+        }
+      ],
+      "terminator": "entry.br"
+    },
+    "join": {
+      "kind": "ret",
+      "successors": [],
+      "terminator": "join.ret"
+    },
+    "left": {
+      "kind": "br",
+      "successors": [
+        {
+          "dst": "join",
+          "kind": "next"
+        }
+      ],
+      "terminator": "left.br"
+    },
+    "right": {
+      "kind": "br",
+      "successors": [
+        {
+          "dst": "join",
+          "kind": "next"
+        }
+      ],
+      "terminator": "right.br"
+    }
+  },
+  "call_sites": [
+    "join.call"
+  ],
+  "callees": [
+    "possible.callee"
+  ],
+  "complete_calls": [],
+  "entry_block": "entry",
+  "function_id": "fixture-function",
+  "instructions": {
+    "entry.br": {
+      "block": "entry",
+      "call_targets": [],
+      "index": 0,
+      "memory_preds": [],
+      "phi_incoming": [],
+      "uses": [
+        "arg.cond"
+      ]
+    },
+    "join.call": {
+      "block": "join",
+      "call_targets": [
+        "possible.callee"
+      ],
+      "index": 1,
+      "memory_preds": [],
+      "phi_incoming": [],
+      "uses": [
+        "joined.value"
+      ]
+    },
+    "join.combine": {
+      "block": "join",
+      "call_targets": [],
+      "index": 3,
+      "memory_preds": [],
+      "phi_incoming": [],
+      "uses": [
+        "joined.value",
+        "loaded.value"
+      ]
+    },
+    "join.load": {
+      "block": "join",
+      "call_targets": [],
+      "index": 2,
+      "memory_preds": [
+        "left.store",
+        "right.store",
+        "join.call"
+      ],
+      "phi_incoming": [],
+      "uses": [
+        "arg.ptr"
+      ]
+    },
+    "join.phi": {
+      "block": "join",
+      "call_targets": [],
+      "index": 0,
+      "memory_preds": [],
+      "phi_incoming": [
+        {
+          "pred": "left",
+          "value": "left.value"
+        },
+        {
+          "pred": "right",
+          "value": "right.value"
+        }
+      ],
+      "uses": [
+        "left.value",
+        "right.value"
+      ]
+    },
+    "join.ret": {
+      "block": "join",
+      "call_targets": [],
+      "index": 4,
+      "memory_preds": [],
+      "phi_incoming": [],
+      "uses": [
+        "result.value"
+      ]
+    },
+    "left.br": {
+      "block": "left",
+      "call_targets": [],
+      "index": 2,
+      "memory_preds": [],
+      "phi_incoming": [],
+      "uses": []
+    },
+    "left.def": {
+      "block": "left",
+      "call_targets": [],
+      "index": 0,
+      "memory_preds": [],
+      "phi_incoming": [],
+      "uses": []
+    },
+    "left.store": {
+      "block": "left",
+      "call_targets": [],
+      "index": 1,
+      "memory_preds": [],
+      "phi_incoming": [],
+      "uses": [
+        "arg.ptr",
+        "left.value"
+      ]
+    },
+    "right.br": {
+      "block": "right",
+      "call_targets": [],
+      "index": 2,
+      "memory_preds": [],
+      "phi_incoming": [],
+      "uses": []
+    },
+    "right.def": {
+      "block": "right",
+      "call_targets": [],
+      "index": 0,
+      "memory_preds": [],
+      "phi_incoming": [],
+      "uses": []
+    },
+    "right.store": {
+      "block": "right",
+      "call_targets": [],
+      "index": 1,
+      "memory_preds": [],
+      "phi_incoming": [],
+      "uses": [
+        "arg.ptr",
+        "right.value"
+      ]
+    }
+  },
+  "module_id": "fixture-module",
+  "phi_nodes": [
+    "join.phi"
+  ],
+  "schema": "ariadne.llvm-ir-request/v1",
+  "slice_seeds": [
+    "join.ret"
+  ],
+  "values": {
+    "arg.cond": {
+      "def_site": "entry.br",
+      "kind": "argument"
+    },
+    "arg.ptr": {
+      "def_site": "entry.br",
+      "kind": "argument"
+    },
+    "joined.value": {
+      "def_site": "join.phi",
+      "kind": "instruction"
+    },
+    "left.value": {
+      "def_site": "left.def",
+      "kind": "instruction"
+    },
+    "loaded.value": {
+      "def_site": "join.load",
+      "kind": "instruction"
+    },
+    "result.value": {
+      "def_site": "join.combine",
+      "kind": "instruction"
+    },
+    "right.value": {
+      "def_site": "right.def",
+      "kind": "instruction"
+    }
+  },
+  "verified_ir": true
+}

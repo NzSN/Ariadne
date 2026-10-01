@@ -35,3 +35,4 @@ _apalache-out/
 /input/target/
 /ir/target/
 /bench/target/
+/reports/target/

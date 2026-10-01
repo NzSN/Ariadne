@@ -1,0 +1,852 @@
+{
+  "#meta": {
+    "format": "ITF",
+    "varTypes": {
+      "action_taken": "Str",
+      "artifact_id": "Str",
+      "call_graph": "Set({ callee: Str, kind: Str, site: Str })",
+      "case_id": "Str",
+      "control_graph": "Set({ dst: Str, kind: Str, src: Str })",
+      "dependency_preds": "(Str -> Set(Str))",
+      "function_id": "Str",
+      "module_id": "Str",
+      "obligations": "Set({ reason: Str, site: Str })",
+      "parameters": "{ fixture: Str }",
+      "phase": "Str",
+      "slice": "Set(Str)"
+    }
+  },
+  "param_vars": [],
+  "params": [],
+  "states": [
+    {
+      "#meta": {
+        "index": 0
+      },
+      "action_taken": "init",
+      "artifact_id": "fixture.bc.sha256/IRLoop",
+      "call_graph": {
+        "#set": [
+          {
+            "callee": "possible.callee",
+            "kind": "call",
+            "site": "join.call"
+          }
+        ]
+      },
+      "case_id": "IRLoop",
+      "control_graph": {
+        "#set": [
+          {
+            "dst": "left",
+            "kind": "true",
+            "src": "entry"
+          },
+          {
+            "dst": "join",
+            "kind": "true",
+            "src": "right"
+          },
+          {
+            "dst": "right",
+            "kind": "false",
+            "src": "entry"
+          },
+          {
+            "dst": "right",
+            "kind": "false",
+            "src": "right"
+          },
+          {
+            "dst": "join",
+            "kind": "next",
+            "src": "left"
+          }
+        ]
+      },
+      "dependency_preds": {
+        "#map": [
+          [
+            "entry.br",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "join.call",
+            {
+              "#set": [
+                "join.phi"
+              ]
+            }
+          ],
+          [
+            "join.combine",
+            {
+              "#set": [
+                "join.phi",
+                "join.load"
+              ]
+            }
+          ],
+          [
+            "join.load",
+            {
+              "#set": [
+                "left.store",
+                "right.store",
+                "join.call"
+              ]
+            }
+          ],
+          [
+            "join.phi",
+            {
+              "#set": [
+                "left.def",
+                "right.def"
+              ]
+            }
+          ],
+          [
+            "join.ret",
+            {
+              "#set": [
+                "join.combine"
+              ]
+            }
+          ],
+          [
+            "left.br",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "left.def",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "left.store",
+            {
+              "#set": [
+                "left.def"
+              ]
+            }
+          ],
+          [
+            "right.br",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "right.def",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "right.store",
+            {
+              "#set": [
+                "right.def"
+              ]
+            }
+          ]
+        ]
+      },
+      "function_id": "fixture-function",
+      "module_id": "fixture-module",
+      "obligations": {
+        "#set": [
+          {
+            "reason": "call-targets",
+            "site": "join.call"
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "IRLoop"
+      },
+      "phase": "slice",
+      "slice": {
+        "#set": [
+          "join.ret"
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 1
+      },
+      "action_taken": "expandSlice",
+      "artifact_id": "fixture.bc.sha256/IRLoop",
+      "call_graph": {
+        "#set": [
+          {
+            "callee": "possible.callee",
+            "kind": "call",
+            "site": "join.call"
+          }
+        ]
+      },
+      "case_id": "IRLoop",
+      "control_graph": {
+        "#set": [
+          {
+            "dst": "left",
+            "kind": "true",
+            "src": "entry"
+          },
+          {
+            "dst": "join",
+            "kind": "true",
+            "src": "right"
+          },
+          {
+            "dst": "right",
+            "kind": "false",
+            "src": "entry"
+          },
+          {
+            "dst": "right",
+            "kind": "false",
+            "src": "right"
+          },
+          {
+            "dst": "join",
+            "kind": "next",
+            "src": "left"
+          }
+        ]
+      },
+      "dependency_preds": {
+        "#map": [
+          [
+            "entry.br",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "join.call",
+            {
+              "#set": [
+                "join.phi"
+              ]
+            }
+          ],
+          [
+            "join.combine",
+            {
+              "#set": [
+                "join.phi",
+                "join.load"
+              ]
+            }
+          ],
+          [
+            "join.load",
+            {
+              "#set": [
+                "left.store",
+                "right.store",
+                "join.call"
+              ]
+            }
+          ],
+          [
+            "join.phi",
+            {
+              "#set": [
+                "left.def",
+                "right.def"
+              ]
+            }
+          ],
+          [
+            "join.ret",
+            {
+              "#set": [
+                "join.combine"
+              ]
+            }
+          ],
+          [
+            "left.br",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "left.def",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "left.store",
+            {
+              "#set": [
+                "left.def"
+              ]
+            }
+          ],
+          [
+            "right.br",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "right.def",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "right.store",
+            {
+              "#set": [
+                "right.def"
+              ]
+            }
+          ]
+        ]
+      },
+      "function_id": "fixture-function",
+      "module_id": "fixture-module",
+      "obligations": {
+        "#set": [
+          {
+            "reason": "call-targets",
+            "site": "join.call"
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "IRLoop"
+      },
+      "phase": "slice",
+      "slice": {
+        "#set": [
+          "join.combine",
+          "join.ret"
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 2
+      },
+      "action_taken": "expandSlice",
+      "artifact_id": "fixture.bc.sha256/IRLoop",
+      "call_graph": {
+        "#set": [
+          {
+            "callee": "possible.callee",
+            "kind": "call",
+            "site": "join.call"
+          }
+        ]
+      },
+      "case_id": "IRLoop",
+      "control_graph": {
+        "#set": [
+          {
+            "dst": "left",
+            "kind": "true",
+            "src": "entry"
+          },
+          {
+            "dst": "join",
+            "kind": "true",
+            "src": "right"
+          },
+          {
+            "dst": "right",
+            "kind": "false",
+            "src": "entry"
+          },
+          {
+            "dst": "right",
+            "kind": "false",
+            "src": "right"
+          },
+          {
+            "dst": "join",
+            "kind": "next",
+            "src": "left"
+          }
+        ]
+      },
+      "dependency_preds": {
+        "#map": [
+          [
+            "entry.br",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "join.call",
+            {
+              "#set": [
+                "join.phi"
+              ]
+            }
+          ],
+          [
+            "join.combine",
+            {
+              "#set": [
+                "join.phi",
+                "join.load"
+              ]
+            }
+          ],
+          [
+            "join.load",
+            {
+              "#set": [
+                "left.store",
+                "right.store",
+                "join.call"
+              ]
+            }
+          ],
+          [
+            "join.phi",
+            {
+              "#set": [
+                "left.def",
+                "right.def"
+              ]
+            }
+          ],
+          [
+            "join.ret",
+            {
+              "#set": [
+                "join.combine"
+              ]
+            }
+          ],
+          [
+            "left.br",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "left.def",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "left.store",
+            {
+              "#set": [
+                "left.def"
+              ]
+            }
+          ],
+          [
+            "right.br",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "right.def",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "right.store",
+            {
+              "#set": [
+                "right.def"
+              ]
+            }
+          ]
+        ]
+      },
+      "function_id": "fixture-function",
+      "module_id": "fixture-module",
+      "obligations": {
+        "#set": [
+          {
+            "reason": "call-targets",
+            "site": "join.call"
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "IRLoop"
+      },
+      "phase": "slice",
+      "slice": {
+        "#set": [
+          "join.phi",
+          "join.load",
+          "join.combine",
+          "join.ret"
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 3
+      },
+      "action_taken": "expandSlice",
+      "artifact_id": "fixture.bc.sha256/IRLoop",
+      "call_graph": {
+        "#set": [
+          {
+            "callee": "possible.callee",
+            "kind": "call",
+            "site": "join.call"
+          }
+        ]
+      },
+      "case_id": "IRLoop",
+      "control_graph": {
+        "#set": [
+          {
+            "dst": "left",
+            "kind": "true",
+            "src": "entry"
+          },
+          {
+            "dst": "join",
+            "kind": "true",
+            "src": "right"
+          },
+          {
+            "dst": "right",
+            "kind": "false",
+            "src": "entry"
+          },
+          {
+            "dst": "right",
+            "kind": "false",
+            "src": "right"
+          },
+          {
+            "dst": "join",
+            "kind": "next",
+            "src": "left"
+          }
+        ]
+      },
+      "dependency_preds": {
+        "#map": [
+          [
+            "entry.br",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "join.call",
+            {
+              "#set": [
+                "join.phi"
+              ]
+            }
+          ],
+          [
+            "join.combine",
+            {
+              "#set": [
+                "join.phi",
+                "join.load"
+              ]
+            }
+          ],
+          [
+            "join.load",
+            {
+              "#set": [
+                "left.store",
+                "right.store",
+                "join.call"
+              ]
+            }
+          ],
+          [
+            "join.phi",
+            {
+              "#set": [
+                "left.def",
+                "right.def"
+              ]
+            }
+          ],
+          [
+            "join.ret",
+            {
+              "#set": [
+                "join.combine"
+              ]
+            }
+          ],
+          [
+            "left.br",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "left.def",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "left.store",
+            {
+              "#set": [
+                "left.def"
+              ]
+            }
+          ],
+          [
+            "right.br",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "right.def",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "right.store",
+            {
+              "#set": [
+                "right.def"
+              ]
+            }
+          ]
+        ]
+      },
+      "function_id": "fixture-function",
+      "module_id": "fixture-module",
+      "obligations": {
+        "#set": [
+          {
+            "reason": "call-targets",
+            "site": "join.call"
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "IRLoop"
+      },
+      "phase": "slice",
+      "slice": {
+        "#set": [
+          "left.def",
+          "left.store",
+          "right.def",
+          "right.store",
+          "join.phi",
+          "join.call",
+          "join.load",
+          "join.combine",
+          "join.ret"
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 4
+      },
+      "action_taken": "finishSlice",
+      "artifact_id": "fixture.bc.sha256/IRLoop",
+      "call_graph": {
+        "#set": [
+          {
+            "callee": "possible.callee",
+            "kind": "call",
+            "site": "join.call"
+          }
+        ]
+      },
+      "case_id": "IRLoop",
+      "control_graph": {
+        "#set": [
+          {
+            "dst": "left",
+            "kind": "true",
+            "src": "entry"
+          },
+          {
+            "dst": "join",
+            "kind": "true",
+            "src": "right"
+          },
+          {
+            "dst": "right",
+            "kind": "false",
+            "src": "entry"
+          },
+          {
+            "dst": "right",
+            "kind": "false",
+            "src": "right"
+          },
+          {
+            "dst": "join",
+            "kind": "next",
+            "src": "left"
+          }
+        ]
+      },
+      "dependency_preds": {
+        "#map": [
+          [
+            "entry.br",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "join.call",
+            {
+              "#set": [
+                "join.phi"
+              ]
+            }
+          ],
+          [
+            "join.combine",
+            {
+              "#set": [
+                "join.phi",
+                "join.load"
+              ]
+            }
+          ],
+          [
+            "join.load",
+            {
+              "#set": [
+                "left.store",
+                "right.store",
+                "join.call"
+              ]
+            }
+          ],
+          [
+            "join.phi",
+            {
+              "#set": [
+                "left.def",
+                "right.def"
+              ]
+            }
+          ],
+          [
+            "join.ret",
+            {
+              "#set": [
+                "join.combine"
+              ]
+            }
+          ],
+          [
+            "left.br",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "left.def",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "left.store",
+            {
+              "#set": [
+                "left.def"
+              ]
+            }
+          ],
+          [
+            "right.br",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "right.def",
+            {
+              "#set": []
+            }
+          ],
+          [
+            "right.store",
+            {
+              "#set": [
+                "right.def"
+              ]
+            }
+          ]
+        ]
+      },
+      "function_id": "fixture-function",
+      "module_id": "fixture-module",
+      "obligations": {
+        "#set": [
+          {
+            "reason": "call-targets",
+            "site": "join.call"
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "IRLoop"
+      },
+      "phase": "done",
+      "slice": {
+        "#set": [
+          "left.def",
+          "left.store",
+          "right.def",
+          "right.store",
+          "join.phi",
+          "join.call",
+          "join.load",
+          "join.combine",
+          "join.ret"
+        ]
+      }
+    }
+  ],
+  "vars": [
+    "phase",
+    "artifact_id",
+    "call_graph",
+    "function_id",
+    "dependency_preds",
+    "control_graph",
+    "action_taken",
+    "parameters",
+    "slice",
+    "module_id",
+    "case_id",
+    "obligations"
+  ]
+}

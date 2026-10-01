@@ -1,78 +1,72 @@
-# Stage E MirrorRust integration
+# Stage E generated MirrorRust replay
 
-This optional package connects Ariadne's machine-state and LLVM IR analyzers
-to the local `../../../MirrorRust` checkout (`~/Repos/MirrorRust` in this
-workspace). The dependency-free core remains unchanged. The
-[design](../../docs/Ariadne/stage-e-mirrorrust-design.md) and
-[first-stage plan](../../Plans/stage-e-mirrorrust-integration.md) describe the seam.
-The [installed ModelMirrors compatibility check](../../docs/Ariadne/installed-modelmirrors-compatibility.md)
-also passes against the local installed server, with its executable identity
-recorded separately from the `v0.0.3.1` source tag.
+The optional package uses `../../../MirrorRust` (`~/Repos/MirrorRust`) and
+compiler-generated `mirrorrust-v1` ports for the two independent Stage E engines.
+The root analysis crate remains dependency-free. Application ports own actual
+Rust analyzers; generated modules own codecs, dispatch and lifecycle. Registered
+factories construct ports only after exact semantic-digest admission.
 
-Two separately compiler-generated `mirrorrust-v1` bindings own codecs,
-dispatch and lifecycle checks. Application ports own the actual Rust analyzers
-and observe their state/results. Registered deferred factories require exact
-semantic-digest admission before port construction. Initialization resets a
-fresh analyzer using the port's owned fixed request; neither expected nor
-previous model state supplies observations.
+The [completion plan](../../Plans/stage-e-completion.md) and
+[design](../../docs/Ariadne/stage-e-mirrorrust-design.md) define this stage.
+The original [first integration plan](../../Plans/stage-e-mirrorrust-integration.md)
+and its two-fixture record remain historical evidence.
 
-The existing five-node machine-state and four-block LLVM IR fixtures supply
-the first inputs. Replay wrappers instantiate the authoritative specifications
-and select Rust's lowest-enabled-address propagation schedule. Machine-state
-observations include phase, the full address/state map, structural graph,
-feasible/infeasible/unknown edges, terminal outcomes, not-reached nodes and
-obligations. IR observations include artifact/module/function identity, phase,
-slice, control/call graphs, dependency predecessors and obligations.
+## Checked campaign
 
-The machine-state map becomes explicit `{va, states}` rows with a checked
-inverse, preserving sparse addresses and empty entries. LLVM's string-keyed
-dependency map uses the native generated map codec. Generated source must
-not be hand-edited or formatted.
+`cases.py` deterministically generates 16 machine-state and 16 normalized IR
+requests, including independently verifier-produced native text/bitcode inputs.
+It never imports or executes the Rust SUT. Generated TLA input tables instantiate
+the original specifications; only the machine-state schedule selects the lowest
+enabled VA. The case-ID initializer selects an owned fixed request and resets a
+fresh analyzer. Observations use actual state, never expected/previous reports.
 
-## Run the integration gate
+The corpus covers joins, loops, multiple/empty roots and seeds, sparse/high
+addresses, equal-valued distinct state IDs, incomplete semantics, terminal
+alternatives, summary edges, phi alternatives, memory/call uncertainty and
+exception edges. Every mutable field and declared derived view is compared.
+The integer-address map uses explicit `{va, states}` rows with an exact inverse,
+including empty entries. Native IR uses string-keyed dependency maps.
 
-Use the prepared Mirrors toolchain selected by `../.work/toolchain.json`, or
-an explicitly compatible `MIRRORS_ROOT`. See the
-[core harness prerequisites](../README.md#prepare-and-run).
+TLC checks safety and fair termination and exports completion witnesses for the
+ordinary cases. Its integers cannot represent full-width u64 addresses, so the
+high-VA case uses Apalache bounded safety and a complete four-transition witness
+with exact integers. Only fixed input tables are specialized; the original
+wrapper and model actions remain unchanged. Raw witnesses and projections stay
+in `corpus/`, bound by the manifest. The type witnesses use the recorded local
+Apalache version; normal replay does not silently regenerate anything.
+
+## Run
 
 ```sh
 python3 mbt/stage-e/run.py
+python3 mbt/stage-e/run.py --mirror /path/to/ModelMirrors
 ```
 
-The gate checks frozen oracle and generated-file freshness, compiler preflight,
-three projection tests, four Rust binding tests, formatting and Clippy. It then
-replays each fixture twice over real negotiated stdio transport, compares
-every declared observation, and requires wrong-digest rejection with zero
-factories/initializations/observations. Actual port `Drop` is checked after
-successful replay. Client/SUT/oracle/generated artifacts are hash-bound and
-checked for changes during the run. Machine-specific results go to ignored
-`results/latest.json`; detailed logs are under the core harness's `.work/`.
-
-## Explicitly regenerate model artifacts
+The runtime defaults to installed `ModelMirrors` when available. Binding checks
+retain the compiler selected by the [core harness](../README.md).
+The gate checks freshness/preflight, repeats the whole corpus in one negotiated
+binding per engine, compares exact action/pair counts and reset order, checks
+pre-factory digest rejection and actual port Drop, and runs 15 mechanical
+mutants of real engine sources with unchanged observers/bindings. Only genuine
+`StepMismatch` results count; build, callback, timeout or protocol failures do
+not. Per-mutant executables are retained separately from shared Cargo caches.
 
 ```sh
+# Explicit oracle and binding regeneration; review changed locks and bytes.
 python3 mbt/stage-e/prepare.py
 python3 mbt/stage-e/prepare.py --check
+
+# Full Stage E acceptance, including native handoffs and report/CLI checks.
+python3 tools/check_stage_e.py
 ```
 
-Generation executes no Rust SUT. Apalache provides a typed initialization
-witness. TLC checks safety and fair termination, then deliberately violates
-`TraceComplete` only at completion to export a full trace. Raw type witnesses,
-TLC JSON, raw ITF and projected ITF stay in `corpus/`; the manifest binds their
-sources and bytes. Mirrors resolves the locks, emits the Rust bindings, checks
-freshness and preflights the traces. Regeneration is explicit; normal replay
-never silently repairs stale evidence. Review changed locks and bindings.
+The full gate requires pinned LLVM 20.1.2 headers/library and Graphviz. Select
+`LLVM20_INCLUDE_DIR`, `ARIADNE_DOT` and any Graphviz loader/plugin paths for a
+non-system installation. `ARIADNE_REAL_DUMPS` selects the existing Breakpad
+fixtures used by the minidump regression gate. Prepared archives in ignored
+`tmp/llvm20-headers` and `tmp/graphviz-headers` are recognized locally.
 
-## Acceptance boundary
-
-This is the first Stage E integration stage. The LLVM fixture supplies a
-normalized verifier-accepted input assumption; this gate does not launch the
-native LLVM verifier or test machine-code/IR correspondence. The existing
-native-adapter checks remain separate.
-
-The retained [integration record](../../docs/Ariadne/stage-e-mirrorrust-integration-validation.json)
-establishes bounded replay of the two existing fixtures, typed port ownership,
-reset and admission behavior. Broader generated scenarios, Stage E mechanical
-engine mutants, recovery/native-adapter handoffs, and report/CLI acceptance
-remain open. Stage E is still partial; no universal refinement or ISA claim is
-made. MirrorGate restricted execution is not exercised by this local gate.
+[Retained completion evidence](../../docs/Ariadne/stage-e-completion-validation.json)
+establishes bounded conformance and report/CLI acceptance. ISA-step acceptance,
+faithfulness of supplied semantic relations, universal Rust refinement and
+MirrorGate restricted execution are separate boundaries.

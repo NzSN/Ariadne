@@ -6,6 +6,10 @@ use mirrorrust::{ApalacheConfig, FallibleStateComputer, State, Value};
 use std::cell::RefCell;
 use std::rc::Rc;
 
+fn initial(case: &str) -> State {
+    [("case_id".into(), Value::Str(case.into()))].into()
+}
+
 fn config() -> ApalacheConfig {
     ApalacheConfig {
         spec_path: "replay.tla".into(),
@@ -26,7 +30,7 @@ fn machine_binding_resets_and_ignores_expected_or_previous_state() {
     let poisoned_previous = [("phase".into(), Value::Str("invented".into()))].into();
     for _ in 0..2 {
         let initial = binding
-            .compute("init", &State::new(), &poisoned_previous)
+            .compute("init", &initial("MachineStateReplay"), &poisoned_previous)
             .unwrap();
         assert_eq!(initial["phase"], Value::Str("stateflow".into()));
         for _ in 0..3 {
@@ -54,7 +58,7 @@ fn ir_binding_resets_and_rejects_advancing_after_completion() {
     let mut binding = ir_binding::bind_l_l_v_m_i_r_replay(port, &config()).unwrap();
     for _ in 0..2 {
         binding
-            .compute("init", &State::new(), &State::new())
+            .compute("init", &initial("LLVMIRReplay"), &State::new())
             .unwrap();
         for _ in 0..3 {
             binding
@@ -74,7 +78,7 @@ fn ir_binding_resets_and_rejects_advancing_after_completion() {
     assert_eq!(error.message, "step requested after completion");
     assert_eq!(
         binding
-            .compute("init", &State::new(), &State::new())
+            .compute("init", &initial("LLVMIRReplay"), &State::new())
             .unwrap_err()
             .code,
         "binding_poisoned"
@@ -146,7 +150,7 @@ fn machine_wire_rows_preserve_empty_entries_and_full_u64_addresses() {
     )
     .unwrap();
     let observed = binding
-        .compute("init", &State::new(), &State::new())
+        .compute("init", &initial("MachineStateReplay"), &State::new())
         .unwrap();
     let Value::Set(rows) = &observed["statesAt"] else {
         panic!("expected state rows");
@@ -158,5 +162,32 @@ fn machine_wire_rows_preserve_empty_entries_and_full_u64_addresses() {
         mirrorrust::encode_state(&observed)
             .to_string()
             .contains("18446744073709551615")
+    );
+}
+
+#[test]
+fn malformed_case_input_is_rejected_before_reset_and_poisoned() {
+    let evidence = Rc::new(RefCell::new(Evidence::default()));
+    let mut binding = machine_binding::bind_machine_state_replay(
+        MachineStatePort::new(fixtures_machine::request(), evidence.clone()),
+        &config(),
+    )
+    .unwrap();
+    let malformed = [("case_id".into(), Value::Int(7.into()))].into();
+    assert_eq!(
+        binding
+            .compute("init", &malformed, &State::new())
+            .unwrap_err()
+            .code,
+        "input_shape_mismatch"
+    );
+    assert_eq!(evidence.borrow().initializations, 0);
+    assert_eq!(evidence.borrow().observations, 0);
+    assert_eq!(
+        binding
+            .compute("init", &initial("MachineStateReplay"), &State::new())
+            .unwrap_err()
+            .code,
+        "binding_poisoned"
     );
 }

@@ -58,7 +58,22 @@ pub struct Evidence {
     pub initializations: usize,
     pub observations: usize,
     pub completed: usize,
+    pub cases: Vec<String>,
+    pub pairs: BTreeMap<String, usize>,
+    pub previous_action: Option<&'static str>,
     pub actions: BTreeMap<&'static str, usize>,
+}
+impl Evidence {
+    pub fn record_action(&mut self, action: &'static str) {
+        *self.actions.entry(action).or_default() += 1;
+        if let Some(previous) = self.previous_action {
+            *self
+                .pairs
+                .entry(format!("{previous}->{action}"))
+                .or_default() += 1;
+        }
+        self.previous_action = Some(action);
+    }
 }
 pub type SharedEvidence = Rc<RefCell<Evidence>>;
 
@@ -75,6 +90,12 @@ pub fn machine_state_registration(
     request: ariadne::machine_state::Request,
     evidence: SharedEvidence,
 ) -> Result<CompiledAdapterRegistration, mirrorrust::NegotiatedError> {
+    machine_state_cases_registration([("MachineStateReplay".into(), request)].into(), evidence)
+}
+pub fn machine_state_cases_registration(
+    requests: BTreeMap<String, ariadne::machine_state::Request>,
+    evidence: SharedEvidence,
+) -> Result<CompiledAdapterRegistration, mirrorrust::NegotiatedError> {
     let digest = SemanticDigest::from_hex(machine_binding::SEMANTIC_DIGEST)?;
     Ok(CompiledAdapterRegistration {
         key: key(Engine::MachineState, digest),
@@ -87,7 +108,7 @@ pub fn machine_state_registration(
             }
             evidence.borrow_mut().factories += 1;
             machine_binding::bind_machine_state_replay(
-                MachineStatePort::new(request.clone(), evidence.clone()),
+                MachineStatePort::with_cases(requests.clone(), evidence.clone()),
                 matched.effective_config(),
             )?
             .into_local_binding()
@@ -97,6 +118,12 @@ pub fn machine_state_registration(
 
 pub fn llvm_ir_registration(
     request: ariadne::llvm_ir::Request,
+    evidence: SharedEvidence,
+) -> Result<CompiledAdapterRegistration, mirrorrust::NegotiatedError> {
+    llvm_ir_cases_registration([("LLVMIRReplay".into(), request)].into(), evidence)
+}
+pub fn llvm_ir_cases_registration(
+    requests: BTreeMap<String, ariadne::llvm_ir::Request>,
     evidence: SharedEvidence,
 ) -> Result<CompiledAdapterRegistration, mirrorrust::NegotiatedError> {
     let digest = SemanticDigest::from_hex(ir_binding::SEMANTIC_DIGEST)?;
@@ -111,7 +138,7 @@ pub fn llvm_ir_registration(
             }
             evidence.borrow_mut().factories += 1;
             ir_binding::bind_l_l_v_m_i_r_replay(
-                LLVMIRPort::new(request.clone(), evidence.clone()),
+                LLVMIRPort::with_cases(requests.clone(), evidence.clone()),
                 matched.effective_config(),
             )?
             .into_local_binding()

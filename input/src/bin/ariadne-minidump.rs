@@ -8,7 +8,7 @@ use std::io::{self, Write};
 use std::path::{Path, PathBuf};
 
 fn usage() -> &'static str {
-    "usage: ariadne-minidump DUMP --decoder PATH --entry VA_HEX [--entry VA_HEX ...] [--seed VA_HEX ...] [--seed-exception-rip] [--max-starts N] (--format text|dot|json | --output-dir NEW_DIR)"
+    "usage: ariadne-minidump DUMP --decoder PATH --entry VA_HEX [--entry VA_HEX ...] [--seed VA_HEX ...] [--seed-exception-rip] [--max-starts N] [--stateflow-input SEMANTICS_JSON] (--format text|dot|json | --output-dir NEW_DIR)"
 }
 fn invalid(message: impl Into<String>) -> io::Error {
     io::Error::new(io::ErrorKind::InvalidInput, message.into())
@@ -40,6 +40,7 @@ struct Args {
     limits: PrepareLimits,
     format: Option<ReportFormat>,
     output_dir: Option<PathBuf>,
+    stateflow_input: Option<PathBuf>,
 }
 fn arguments() -> Result<Args, Box<dyn Error>> {
     let mut args = std::env::args_os().skip(1);
@@ -55,6 +56,7 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
     let mut max_starts_set = false;
     let mut format = None;
     let mut output_dir = None;
+    let mut stateflow_input = None;
     while let Some(flag) = args.next() {
         let flag = flag
             .to_str()
@@ -97,6 +99,9 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
                 });
             }
             "--output-dir" if output_dir.is_none() => output_dir = Some(PathBuf::from(value)),
+            "--stateflow-input" if stateflow_input.is_none() => {
+                stateflow_input = Some(PathBuf::from(value))
+            }
             _ => return Err(invalid(format!("unknown or duplicate option: {flag}")).into()),
         }
     }
@@ -112,6 +117,7 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
         limits,
         format,
         output_dir,
+        stateflow_input,
     })
 }
 
@@ -192,9 +198,34 @@ fn run() -> Result<(), Box<dyn Error>> {
         &PreparationOptions::default(),
         args.limits,
     )?;
-    let result = ariadne::analyze(prepared.prepared.request.clone())?;
+    let mut analyzer = ariadne::Analyzer::new(prepared.prepared.request.clone())?;
+    while analyzer.step() {}
+    let mut stateflow = if let Some(path) = args.stateflow_input {
+        let bytes = fs::read(path)?;
+        let semantics = ariadne_reports::decode_semantics(&bytes)?;
+        let handoff = ariadne::machine_state::prepare_from_recovery(&analyzer, semantics)?;
+        let state_result = ariadne::machine_state::analyze(handoff.request)?;
+        Some(ariadne_reports::machine_report(
+            &state_result,
+            Some(&handoff.context),
+            Some(&ariadne_reports::sha256(&bytes)),
+        )?)
+    } else {
+        None
+    };
+    let result = analyzer.finish();
+    if let Some(report) = stateflow.as_mut() {
+        // Keep the independently versioned minidump evidence beside the
+        // stateflow result; preparation gaps cannot vanish in this output mode.
+        report["minidump_report"] = serde_json::from_str(&render(
+            &prepared,
+            &result,
+            ReportFormat::Json,
+            args.exception_rip_seed,
+        )?)?;
+    }
     if let Some(directory) = args.output_dir {
-        let reports = [
+        let mut reports = vec![
             (
                 "report.txt",
                 render(
@@ -223,14 +254,34 @@ fn run() -> Result<(), Box<dyn Error>> {
                 )?,
             ),
         ];
+        if let Some(stateflow) = &stateflow {
+            for (name, format) in [
+                ("machine-state.txt", ariadne_reports::Format::Text),
+                ("machine-state.dot", ariadne_reports::Format::Dot),
+                ("machine-state.json", ariadne_reports::Format::Json),
+            ] {
+                reports.push((name, ariadne_reports::render_report(stateflow, format)?));
+            }
+        }
         publish_all(&directory, &reports)?;
     } else {
-        let output = render(
-            &prepared,
-            &result,
-            args.format.unwrap(),
-            args.exception_rip_seed,
-        )?;
+        let output = if let Some(stateflow) = &stateflow {
+            ariadne_reports::render_report(
+                stateflow,
+                match args.format.unwrap() {
+                    ReportFormat::Text => ariadne_reports::Format::Text,
+                    ReportFormat::Dot => ariadne_reports::Format::Dot,
+                    ReportFormat::Json => ariadne_reports::Format::Json,
+                },
+            )?
+        } else {
+            render(
+                &prepared,
+                &result,
+                args.format.unwrap(),
+                args.exception_rip_seed,
+            )?
+        };
         io::stdout().lock().write_all(output.as_bytes())?;
     }
     Ok(())

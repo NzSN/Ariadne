@@ -3,6 +3,7 @@
     "format": "ITF",
     "varTypes": {
       "action_taken": "Str",
+      "case_id": "Str",
       "feasible_edges": "Set({ dst: Int, kind: Str, src: Int })",
       "infeasible_edges": "Set({ dst: Int, kind: Str, src: Int })",
       "not_reached": "Set(Int)",
@@ -24,6 +25,7 @@
         "index": 0
       },
       "action_taken": "init",
+      "case_id": "MachineStateReplay",
       "feasible_edges": {
         "#set": [
           {
@@ -177,6 +179,7 @@
         "index": 1
       },
       "action_taken": "propagate",
+      "case_id": "MachineStateReplay",
       "feasible_edges": {
         "#set": [
           {
@@ -332,6 +335,7 @@
         "index": 2
       },
       "action_taken": "propagate",
+      "case_id": "MachineStateReplay",
       "feasible_edges": {
         "#set": [
           {
@@ -489,6 +493,7 @@
         "index": 3
       },
       "action_taken": "propagate",
+      "case_id": "MachineStateReplay",
       "feasible_edges": {
         "#set": [
           {
@@ -657,6 +662,7 @@
         "index": 4
       },
       "action_taken": "finishStateflow",
+      "case_id": "MachineStateReplay",
       "feasible_edges": {
         "#set": [
           {
@@ -835,6 +841,7 @@
     "feasible_edges",
     "infeasible_edges",
     "not_reached",
+    "case_id",
     "obligations",
     "snapshot_id",
     "statesAt"

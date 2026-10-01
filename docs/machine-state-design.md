@@ -1,13 +1,16 @@
 # Rust design for abstract machine-state analysis
 
-Status: the finite Rust path and recovery handoff are implemented with focused
-fixture validation; generated model-based replay remains open. See the
+Status: the finite Rust path, frozen recovery handoff, generated conformance
+replay and evidence-linked reports/CLI are implemented and checked within the
+[Stage E completion scope](Ariadne/stage-e-completion.md). See the
 [Stage E validation](Ariadne/stage-e-validation.md). Historical design source
 baseline: `62d7c57ac88336d1defd4bd121e9976470cf704f`.
 The [remaining implementation plan](Ariadne/remaining-implementation-plan.md)
 places this Rust module in Stage E.
 The [Stage E MirrorRust integration plan](../Plans/stage-e-mirrorrust-integration.md)
 covers its first typed replay integration stage.
+The [Stage E completion plan](../Plans/stage-e-completion.md) covers generated
+case replay, mutation sensitivity and the evidence-linked report/CLI handoff.
 
 The specification is [AriadneMachineState.tla](../Specs/AriadneMachineState.tla),
 with shared facts in [AriadneMachineCommon.tla](../Specs/AriadneMachineCommon.tla)

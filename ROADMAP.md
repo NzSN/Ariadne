@@ -38,7 +38,7 @@ the CLI median falls from 3,846 to 1,788 ms against the fixed 2,000 ms budget,
 with the visible schedule and report hashes preserved. The scoped performance
 stage is recorded in the [remaining implementation plan](docs/Ariadne/remaining-implementation-plan.md).
 The [machine-state and directly supplied LLVM IR Rust paths](docs/Ariadne/stage-e-validation.md)
-pass focused model fixtures; generated replay is still open. A
+pass [Stage E generated conformance and report/CLI acceptance](docs/Ariadne/stage-e-completion.md). A
 [proof-boundary and benchmark baseline](docs/Ariadne/stage-f-proof-and-performance.md)
 is recorded without a universal refinement or optimization claim.
 
@@ -60,7 +60,7 @@ remaining obligations.
 | 2. Control-flow recovery | Translate decoded control transfers into the core's instruction kinds, direct targets, fallthroughs, calls, returns, and unresolved-edge obligations. | End-to-end binary and dump fixtures exercise direct branches, calls, returns, sparse bytes, and indirect branches. Every edge has source instruction evidence; unresolved targets are visible, not silently omitted. |
 | 3. Conservative effects | Initial scoped rules and evidence are delivered; broader forms and precise aliasing remain. Supply `uses`, `may_defs`, and justified `must_defs` for the reaching-definitions and slicing core. Start with decoded operand and instruction metadata, then add reviewed rules for important register, flag, stack, and memory effects. | Slices retain every possible origin in representative crash paths. An unknown effect cannot become a definite overwrite, a no-op, or a known successor. Alias and call-summary assumptions are recorded. |
 | 4. Formal research precision | Long term: close `register-core`, then `near-control-stack` and `ram-data` case by case. Keep this acceptance track independent of investigator delivery. | Each promoted case has source-bound TLA+ and Lean evidence for legality, payload, effects, frames, faults, instruction boundary, correspondence, and conservative analysis projection. The existing milestone gate passes only at full closure. |
-| 5. Investigator output | Text, Graphviz DOT, JSON v1 and a readable per-instruction minidump overview are delivered. Separate Stage E result envelopes remain. | Pinned Linux/Windows examples and the controlled Chromium case retain matching identities, edges, possible origins and uncertainty across formats. |
+| 5. Investigator output | Text, Graphviz DOT, JSON v1 and a readable per-instruction minidump overview are delivered. The [separate Stage E result envelopes and optional CLIs](docs/Ariadne/stage-e-completion.md) are delivered. | Pinned Linux/Windows examples and the controlled Chromium case retain matching identities, edges, possible origins and uncertainty across formats. |
 
 Phases 1–3 and 5 provide a useful evidence-bounded minidump workflow without
 waiting for the 49-case formal gate. Phase 4 is an independent long-term

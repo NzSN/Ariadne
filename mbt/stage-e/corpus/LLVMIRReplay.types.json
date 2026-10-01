@@ -1,12 +1,13 @@
 {
   "#meta": {
-    "description": "Created by Apalache on Thu Oct 01 08:44:20 CST 2026",
+    "description": "Created by Apalache on Thu Oct 01 10:27:03 CST 2026",
     "format": "ITF",
     "format-description": "https://apalache-mc.org/docs/adr/015adr-trace.html",
     "varTypes": {
       "action_taken": "Str",
       "artifact_id": "Str",
       "call_graph": "Set({ callee: Str, kind: Str, site: Str })",
+      "case_id": "Str",
       "control_graph": "Set({ dst: Str, kind: Str, src: Str })",
       "dependency_preds": "(Str -> Set(Str))",
       "function_id": "Str",
@@ -17,11 +18,15 @@
       "slice": "Set(Str)"
     }
   },
+  "params": [
+    "Case"
+  ],
   "states": [
     {
       "#meta": {
         "index": 0
       },
+      "Case": "LLVMIRReplay",
       "action_taken": "init",
       "artifact_id": "fixture.bc.sha256",
       "call_graph": {
@@ -33,6 +38,7 @@
           }
         ]
       },
+      "case_id": "LLVMIRReplay",
       "control_graph": {
         "#set": [
           {
@@ -183,6 +189,7 @@
     "parameters",
     "slice",
     "module_id",
+    "case_id",
     "obligations"
   ]
 }

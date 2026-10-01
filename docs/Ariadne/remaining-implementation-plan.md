@@ -5,15 +5,15 @@ acceptance change is made by this document.** Scope follows the user's current
 decision: Windows/Linux AMD64 minidumps are enough for input. PE/ELF images and
 ELF cores remain deferred.
 
-Progress update **2026-09-29 10:16 CST**: A, B and C are delivered with
+Progress update **2026-10-01**: A, B and C are delivered with
 [source-bound B/C validation](stage-b-c-validation.md). D remains pending at
 0/49 accepted register-core cases despite the later
 [first-case D0–D3 progress](stage-d-progress.md); see its
 [acceptance audit](stage-d-acceptance-audit.md).
-E has [two implemented, fixture-validated paths](stage-e-validation.md) but
-model-based replay remains open. F has a [proof-boundary record and measured
-baseline](stage-f-proof-and-performance.md), not a Rust refinement proof or
-qualified optimization. The [19-gate progress report](stage-b-f-validation.json)
+E is [delivered within its completion scope](stage-e-completion.md): generated
+model-based replay, mechanical mutations, native/recovery handoffs and separate
+report/CLI paths pass. F retains its [open Rust proof boundary](stage-f-proof-and-performance.md);
+its scoped workload optimization is qualified in the Priority 4 record. The [19-gate progress report](stage-b-f-validation.json)
 keeps these distinctions explicit.
 
 Priority decision **2026-09-29**: the [practical assurance queue](practical-assurance-priorities.md)
@@ -44,7 +44,7 @@ flowchart TD
     A["A · Delivered: two crash forms"] --> B["B · Delivered: captured predecessor slice"]
     B --> C["C · Delivered: minidump CLI and report"]
     A --> D["D · Long-term: formal instruction-step acceptance"]
-    C --> E["E · Partial: stateflow and verified native IR"]
+    C --> E["E · Delivered: stateflow/IR replay and reports"]
     E --> F["F · Partial: proof boundary and performance baseline"]
 ```
 
@@ -59,8 +59,8 @@ boundary.
 | B | Delivered: tool-produced captured predecessor fixture | Windows/Linux pinned dumps give a decoded seed, address-producer slice and visible opaque return gap |
 | C | Delivered: minidump investigator CLI | One query publishes matching text, parsed DOT and JSON v1 with byte provenance and uncertainty |
 | D | Long-term formal research: 0/49 accepted `register-core` cases | Existing profile milestone gate passes only after all 49 source-bound cases close; it does not gate practical minidump work |
-| E | Separate optional paths: two Rust machines implemented and fixture-validated | Generated model-based replay and independent result contracts remain open before production use of these paths |
-| F | Performance path conditional on measured need; proof boundary recorded | No universal Rust-refinement claim; no solver optimization qualified yet |
+| E | Delivered: separate machine-state and native IR paths | Generated finite replay, engine mutations, versioned reports/CLI and handoff checks pass; supplied semantics remain an explicit premise |
+| F | Scoped Priority 4 performance delivered; proof boundary open | Qualified workload optimization preserves schedule and reports; no universal Rust-refinement claim |
 
 The practical priorities are tracked in the
 [assurance decision](practical-assurance-priorities.md). Standalone execution

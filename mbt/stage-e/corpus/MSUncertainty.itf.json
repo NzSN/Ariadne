@@ -1,0 +1,1124 @@
+{
+  "#meta": {
+    "format": "ITF",
+    "varTypes": {
+      "action_taken": "Str",
+      "case_id": "Str",
+      "feasible_edges": "Set({ dst: Int, kind: Str, src: Int })",
+      "infeasible_edges": "Set({ dst: Int, kind: Str, src: Int })",
+      "not_reached": "Set(Int)",
+      "obligations": "Set({ reason: Str, site: Int })",
+      "parameters": "{ fixture: Str }",
+      "phase": "Str",
+      "snapshot_id": "Str",
+      "statesAt": "Set({ states: Set(Str), va: Int })",
+      "structural_edges": "Set({ dst: Int, kind: Str, src: Int })",
+      "terminals": "Set({ after: Str, before: Str, outcome: Str, site: Int })",
+      "unknown_edges": "Set({ dst: Int, kind: Str, src: Int })"
+    }
+  },
+  "param_vars": [],
+  "params": [],
+  "states": [
+    {
+      "#meta": {
+        "index": 0
+      },
+      "action_taken": "init",
+      "case_id": "MSUncertainty",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "1"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": [
+          {
+            "reason": "incomplete-semantics",
+            "site": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "reason": "incomplete-semantics",
+            "site": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "reason": "incomplete-semantics",
+            "site": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "reason": "incomplete-semantics",
+            "site": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "reason": "unknown-memory",
+            "site": {
+              "#bigint": "5"
+            }
+          },
+          {
+            "reason": "unmodeled-exception",
+            "site": {
+              "#bigint": "5"
+            }
+          },
+          {
+            "reason": "unmodeled-system-call",
+            "site": {
+              "#bigint": "5"
+            }
+          },
+          {
+            "reason": "unmodeled-concurrency",
+            "site": {
+              "#bigint": "5"
+            }
+          },
+          {
+            "reason": "incomplete-semantics",
+            "site": {
+              "#bigint": "5"
+            }
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "MSUncertainty"
+      },
+      "phase": "stateflow",
+      "snapshot_id": "machine-state-snapshot/MSUncertainty",
+      "statesAt": {
+        "#set": [
+          {
+            "states": {
+              "#set": [
+                "entry"
+              ]
+            },
+            "va": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "5"
+            }
+          }
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": []
+      },
+      "unknown_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 1
+      },
+      "action_taken": "propagate",
+      "case_id": "MSUncertainty",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": [
+          {
+            "reason": "incomplete-semantics",
+            "site": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "reason": "incomplete-semantics",
+            "site": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "reason": "incomplete-semantics",
+            "site": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "reason": "incomplete-semantics",
+            "site": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "reason": "unknown-memory",
+            "site": {
+              "#bigint": "5"
+            }
+          },
+          {
+            "reason": "unmodeled-exception",
+            "site": {
+              "#bigint": "5"
+            }
+          },
+          {
+            "reason": "unmodeled-system-call",
+            "site": {
+              "#bigint": "5"
+            }
+          },
+          {
+            "reason": "unmodeled-concurrency",
+            "site": {
+              "#bigint": "5"
+            }
+          },
+          {
+            "reason": "incomplete-semantics",
+            "site": {
+              "#bigint": "5"
+            }
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "MSUncertainty"
+      },
+      "phase": "stateflow",
+      "snapshot_id": "machine-state-snapshot/MSUncertainty",
+      "statesAt": {
+        "#set": [
+          {
+            "states": {
+              "#set": [
+                "entry"
+              ]
+            },
+            "va": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "rax-five"
+              ]
+            },
+            "va": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "5"
+            }
+          }
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": []
+      },
+      "unknown_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 2
+      },
+      "action_taken": "propagate",
+      "case_id": "MSUncertainty",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": [
+          {
+            "reason": "incomplete-semantics",
+            "site": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "reason": "incomplete-semantics",
+            "site": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "reason": "incomplete-semantics",
+            "site": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "reason": "incomplete-semantics",
+            "site": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "reason": "unknown-memory",
+            "site": {
+              "#bigint": "5"
+            }
+          },
+          {
+            "reason": "unmodeled-exception",
+            "site": {
+              "#bigint": "5"
+            }
+          },
+          {
+            "reason": "unmodeled-system-call",
+            "site": {
+              "#bigint": "5"
+            }
+          },
+          {
+            "reason": "unmodeled-concurrency",
+            "site": {
+              "#bigint": "5"
+            }
+          },
+          {
+            "reason": "incomplete-semantics",
+            "site": {
+              "#bigint": "5"
+            }
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "MSUncertainty"
+      },
+      "phase": "stateflow",
+      "snapshot_id": "machine-state-snapshot/MSUncertainty",
+      "statesAt": {
+        "#set": [
+          {
+            "states": {
+              "#set": [
+                "entry"
+              ]
+            },
+            "va": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "rax-five"
+              ]
+            },
+            "va": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "zf-true"
+              ]
+            },
+            "va": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "5"
+            }
+          }
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": []
+      },
+      "unknown_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 3
+      },
+      "action_taken": "propagate",
+      "case_id": "MSUncertainty",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": [
+          {
+            "reason": "incomplete-semantics",
+            "site": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "reason": "incomplete-semantics",
+            "site": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "reason": "incomplete-semantics",
+            "site": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "reason": "incomplete-semantics",
+            "site": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "reason": "unknown-memory",
+            "site": {
+              "#bigint": "5"
+            }
+          },
+          {
+            "reason": "unmodeled-exception",
+            "site": {
+              "#bigint": "5"
+            }
+          },
+          {
+            "reason": "unmodeled-system-call",
+            "site": {
+              "#bigint": "5"
+            }
+          },
+          {
+            "reason": "unmodeled-concurrency",
+            "site": {
+              "#bigint": "5"
+            }
+          },
+          {
+            "reason": "incomplete-semantics",
+            "site": {
+              "#bigint": "5"
+            }
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "MSUncertainty"
+      },
+      "phase": "stateflow",
+      "snapshot_id": "machine-state-snapshot/MSUncertainty",
+      "statesAt": {
+        "#set": [
+          {
+            "states": {
+              "#set": [
+                "entry"
+              ]
+            },
+            "va": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "rax-five"
+              ]
+            },
+            "va": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "zf-true"
+              ]
+            },
+            "va": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "zf-true"
+              ]
+            },
+            "va": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "5"
+            }
+          }
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": [
+          {
+            "after": "returned",
+            "before": "zf-true",
+            "outcome": "returned",
+            "site": {
+              "#bigint": "4"
+            }
+          }
+        ]
+      },
+      "unknown_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 4
+      },
+      "action_taken": "finishStateflow",
+      "case_id": "MSUncertainty",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": [
+          {
+            "#bigint": "5"
+          }
+        ]
+      },
+      "obligations": {
+        "#set": [
+          {
+            "reason": "incomplete-semantics",
+            "site": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "reason": "incomplete-semantics",
+            "site": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "reason": "incomplete-semantics",
+            "site": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "reason": "incomplete-semantics",
+            "site": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "reason": "unknown-memory",
+            "site": {
+              "#bigint": "5"
+            }
+          },
+          {
+            "reason": "unmodeled-exception",
+            "site": {
+              "#bigint": "5"
+            }
+          },
+          {
+            "reason": "unmodeled-system-call",
+            "site": {
+              "#bigint": "5"
+            }
+          },
+          {
+            "reason": "unmodeled-concurrency",
+            "site": {
+              "#bigint": "5"
+            }
+          },
+          {
+            "reason": "incomplete-semantics",
+            "site": {
+              "#bigint": "5"
+            }
+          }
+        ]
+      },
+      "parameters": {
+        "fixture": "MSUncertainty"
+      },
+      "phase": "done",
+      "snapshot_id": "machine-state-snapshot/MSUncertainty",
+      "statesAt": {
+        "#set": [
+          {
+            "states": {
+              "#set": [
+                "entry"
+              ]
+            },
+            "va": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "rax-five"
+              ]
+            },
+            "va": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "zf-true"
+              ]
+            },
+            "va": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "states": {
+              "#set": [
+                "zf-true"
+              ]
+            },
+            "va": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "states": {
+              "#set": []
+            },
+            "va": {
+              "#bigint": "5"
+            }
+          }
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": [
+          {
+            "after": "returned",
+            "before": "zf-true",
+            "outcome": "returned",
+            "site": {
+              "#bigint": "4"
+            }
+          }
+        ]
+      },
+      "unknown_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "vars": [
+    "phase",
+    "unknown_edges",
+    "action_taken",
+    "parameters",
+    "terminals",
+    "structural_edges",
+    "feasible_edges",
+    "infeasible_edges",
+    "not_reached",
+    "case_id",
+    "obligations",
+    "snapshot_id",
+    "statesAt"
+  ]
+}

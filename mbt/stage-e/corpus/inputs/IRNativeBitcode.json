@@ -1,0 +1,261 @@
+{
+  "adapter_obligations": [
+    {
+      "reason": "unknown-memory-alias",
+      "site": "i8"
+    },
+    {
+      "reason": "unknown-memory-alias",
+      "site": "i9"
+    }
+  ],
+  "artifact_id": "llvm-ir-artifact-v1:bec3302fd1aa62cc39df8dc7351efc9fe472ffa70496dd47a513ef506b2cade6",
+  "blocks": {
+    "b0": {
+      "kind": "br",
+      "successors": [
+        {
+          "dst": "b1",
+          "kind": "true"
+        },
+        {
+          "dst": "b2",
+          "kind": "false"
+        }
+      ],
+      "terminator": "i0"
+    },
+    "b1": {
+      "kind": "br",
+      "successors": [
+        {
+          "dst": "b3",
+          "kind": "next"
+        }
+      ],
+      "terminator": "i3"
+    },
+    "b2": {
+      "kind": "br",
+      "successors": [
+        {
+          "dst": "b3",
+          "kind": "next"
+        }
+      ],
+      "terminator": "i6"
+    },
+    "b3": {
+      "kind": "ret",
+      "successors": [],
+      "terminator": "i11"
+    }
+  },
+  "call_sites": [
+    "i8"
+  ],
+  "callees": [],
+  "complete_calls": [],
+  "entry_block": "b0",
+  "function_id": "diamond",
+  "instructions": {
+    "i0": {
+      "block": "b0",
+      "call_targets": [],
+      "index": 0,
+      "memory_preds": [],
+      "phi_incoming": [],
+      "uses": [
+        "v0"
+      ]
+    },
+    "i1": {
+      "block": "b1",
+      "call_targets": [],
+      "index": 0,
+      "memory_preds": [],
+      "phi_incoming": [],
+      "uses": [
+        "v1",
+        "v2"
+      ]
+    },
+    "i10": {
+      "block": "b3",
+      "call_targets": [],
+      "index": 3,
+      "memory_preds": [],
+      "phi_incoming": [],
+      "uses": [
+        "v8",
+        "v10"
+      ]
+    },
+    "i11": {
+      "block": "b3",
+      "call_targets": [],
+      "index": 4,
+      "memory_preds": [],
+      "phi_incoming": [],
+      "uses": [
+        "v11"
+      ]
+    },
+    "i2": {
+      "block": "b1",
+      "call_targets": [],
+      "index": 1,
+      "memory_preds": [],
+      "phi_incoming": [],
+      "uses": [
+        "v3",
+        "v4"
+      ]
+    },
+    "i3": {
+      "block": "b1",
+      "call_targets": [],
+      "index": 2,
+      "memory_preds": [],
+      "phi_incoming": [],
+      "uses": []
+    },
+    "i4": {
+      "block": "b2",
+      "call_targets": [],
+      "index": 0,
+      "memory_preds": [],
+      "phi_incoming": [],
+      "uses": [
+        "v5",
+        "v6"
+      ]
+    },
+    "i5": {
+      "block": "b2",
+      "call_targets": [],
+      "index": 1,
+      "memory_preds": [],
+      "phi_incoming": [],
+      "uses": [
+        "v7",
+        "v4"
+      ]
+    },
+    "i6": {
+      "block": "b2",
+      "call_targets": [],
+      "index": 2,
+      "memory_preds": [],
+      "phi_incoming": [],
+      "uses": []
+    },
+    "i7": {
+      "block": "b3",
+      "call_targets": [],
+      "index": 0,
+      "memory_preds": [],
+      "phi_incoming": [
+        {
+          "pred": "b1",
+          "value": "v3"
+        },
+        {
+          "pred": "b2",
+          "value": "v7"
+        }
+      ],
+      "uses": [
+        "v3",
+        "v7"
+      ]
+    },
+    "i8": {
+      "block": "b3",
+      "call_targets": [],
+      "index": 1,
+      "memory_preds": [
+        "i2",
+        "i5"
+      ],
+      "phi_incoming": [],
+      "uses": [
+        "v8",
+        "v9"
+      ]
+    },
+    "i9": {
+      "block": "b3",
+      "call_targets": [],
+      "index": 2,
+      "memory_preds": [
+        "i2",
+        "i5",
+        "i8"
+      ],
+      "phi_incoming": [],
+      "uses": [
+        "v4"
+      ]
+    }
+  },
+  "module_id": "module:bec3302fd1aa62cc39df8dc7351efc9fe472ffa70496dd47a513ef506b2cade6",
+  "phi_nodes": [
+    "i7"
+  ],
+  "schema": "ariadne.llvm-ir-request/v1",
+  "slice_seeds": [
+    "i11"
+  ],
+  "values": {
+    "v0": {
+      "def_site": "i0",
+      "kind": "argument"
+    },
+    "v1": {
+      "def_site": "i0",
+      "kind": "constant"
+    },
+    "v10": {
+      "def_site": "i9",
+      "kind": "instruction"
+    },
+    "v11": {
+      "def_site": "i10",
+      "kind": "instruction"
+    },
+    "v2": {
+      "def_site": "i0",
+      "kind": "constant"
+    },
+    "v3": {
+      "def_site": "i1",
+      "kind": "instruction"
+    },
+    "v4": {
+      "def_site": "i0",
+      "kind": "argument"
+    },
+    "v5": {
+      "def_site": "i0",
+      "kind": "constant"
+    },
+    "v6": {
+      "def_site": "i0",
+      "kind": "constant"
+    },
+    "v7": {
+      "def_site": "i4",
+      "kind": "instruction"
+    },
+    "v8": {
+      "def_site": "i7",
+      "kind": "instruction"
+    },
+    "v9": {
+      "def_site": "i0",
+      "kind": "argument"
+    }
+  },
+  "verified_ir": true
+}

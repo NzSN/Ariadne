@@ -165,3 +165,9 @@ exception RIP option adds a seed only; it never invents an earlier root. The
 output directory must not exist. `--max-starts N` bounds local discovery and
 fails before publishing when exhausted. See the [Stage B/C validation](../docs/Ariadne/stage-b-c-validation.md)
 for exact fixtures, graph and output evidence.
+
+The investigator optionally accepts `--stateflow-input SEMANTICS_JSON` for
+explicit finite semantic facts bound to the prepared snapshot. It emits separate
+`machine-state` reports beside the original minidump reports. See
+[Stage E completion](../docs/Ariadne/stage-e-completion.md) for the input schema,
+model-relative feasibility and preserved recovery/preparation evidence.

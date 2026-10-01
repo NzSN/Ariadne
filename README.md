@@ -34,8 +34,8 @@ is bounded by a 34-node real capture and does not qualify larger workloads.
 The [rendering module](docs/Ariadne/result-rendering.md) now produces readable
 text and Graphviz DOT from analyzer outcomes.
 The separate [abstract machine-state and verifier-accepted native LLVM IR paths](docs/Ariadne/stage-e-validation.md)
-now have Rust implementations and focused formal-fixture checks; generated
-model-based replay remains open. Initial x86-64 instruction semantics retain
+now pass [Stage E generated replay, mutation and report/CLI acceptance](docs/Ariadne/stage-e-completion.md)
+within the recorded finite corpus. Initial x86-64 instruction semantics retain
 their distinct TLA+/Lean acceptance gate.
 
 The [long-term AMD64 formal track](docs/amd64-user64.md) targets a verified
@@ -81,8 +81,9 @@ example, and specification correspondence are described in
 
 The [model-based test gate](mbt/README.md) uses Mirrors' generated `mirrorrust-v1`
 bindings. A separate [Stage E integration](mbt/stage-e/README.md) connects the
-machine-state and LLVM IR engines to the sibling MirrorRust client for bounded
-fixture replay. The core gate uses a generated
+machine-state and LLVM IR engines to the sibling MirrorRust client for generated
+finite replay and engine mutation checks. [Stage E reports and CLIs](docs/Ariadne/stage-e-completion.md)
+now preserve each result family independently. The core gate uses a generated
 binding and MirrorRust to replay TLC-generated traces against the real Rust
 analyzer, with required interface negotiation, coverage checks, and deliberate
 implementation mutations:
@@ -245,7 +246,7 @@ state transitions, invariants, and interpretation of partial results.
 | [tests/](tests/) | Specification fixtures, transition checks, and independent generated-request oracles |
 | [docs/implementation.md](docs/implementation.md) | Rust API, model correspondence, and implementation boundaries |
 | [docs/llvm-mc-adapter.md](docs/llvm-mc-adapter.md) | Optional pinned decoder build, snapshot input contract, and validation |
-| [docs/machine-state-design.md](docs/machine-state-design.md) | Implemented Rust design for abstract machine-state propagation; generated replay still open |
+| [docs/machine-state-design.md](docs/machine-state-design.md) | Implemented Rust design for abstract stateflow with generated conformance and report/CLI acceptance |
 | [docs/x86-64-semantics.md](docs/x86-64-semantics.md) | Supported x86-64 instruction rules, stateflow composition, and validation limits |
 | [mbt/README.md](mbt/README.md) | Mirrors/MirrorRust MBT setup, checked corpus, mutation gate, and evidence |
 | [Specs/AriadneTypes.tla](Specs/AriadneTypes.tla) | Shared Apalache aliases for semantic identities, labels, states, and values |

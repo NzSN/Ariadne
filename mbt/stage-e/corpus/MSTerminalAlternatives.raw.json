@@ -1,0 +1,881 @@
+{
+  "#meta": {
+    "format": "ITF",
+    "varTypes": {
+      "action_taken": "Str",
+      "case_id": "Str",
+      "feasible_edges": "Set({ dst: Int, kind: Str, src: Int })",
+      "infeasible_edges": "Set({ dst: Int, kind: Str, src: Int })",
+      "not_reached": "Set(Int)",
+      "obligations": "Set({ reason: Str, site: Int })",
+      "parameters": "{ fixture: Str }",
+      "phase": "Str",
+      "snapshot_id": "Str",
+      "statesAt": "(Int -> Set(Str))",
+      "structural_edges": "Set({ dst: Int, kind: Str, src: Int })",
+      "terminals": "Set({ after: Str, before: Str, outcome: Str, site: Int })",
+      "unknown_edges": "Set({ dst: Int, kind: Str, src: Int })"
+    }
+  },
+  "param_vars": [],
+  "params": [],
+  "states": [
+    {
+      "#meta": {
+        "index": 0
+      },
+      "action_taken": "init",
+      "case_id": "MSTerminalAlternatives",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "1"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "MSTerminalAlternatives"
+      },
+      "phase": "stateflow",
+      "snapshot_id": "machine-state-snapshot/MSTerminalAlternatives",
+      "statesAt": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            {
+              "#set": [
+                "entry"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": []
+      },
+      "unknown_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 1
+      },
+      "action_taken": "propagate",
+      "case_id": "MSTerminalAlternatives",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "MSTerminalAlternatives"
+      },
+      "phase": "stateflow",
+      "snapshot_id": "machine-state-snapshot/MSTerminalAlternatives",
+      "statesAt": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            {
+              "#set": [
+                "entry"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            {
+              "#set": [
+                "rax-five"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": []
+      },
+      "unknown_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 2
+      },
+      "action_taken": "propagate",
+      "case_id": "MSTerminalAlternatives",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "MSTerminalAlternatives"
+      },
+      "phase": "stateflow",
+      "snapshot_id": "machine-state-snapshot/MSTerminalAlternatives",
+      "statesAt": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            {
+              "#set": [
+                "entry"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            {
+              "#set": [
+                "rax-five"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            {
+              "#set": [
+                "zf-true"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            {
+              "#set": []
+            }
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": []
+      },
+      "unknown_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 3
+      },
+      "action_taken": "propagate",
+      "case_id": "MSTerminalAlternatives",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": []
+      },
+      "not_reached": {
+        "#set": []
+      },
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "MSTerminalAlternatives"
+      },
+      "phase": "stateflow",
+      "snapshot_id": "machine-state-snapshot/MSTerminalAlternatives",
+      "statesAt": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            {
+              "#set": [
+                "entry"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            {
+              "#set": [
+                "rax-five"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            {
+              "#set": [
+                "zf-true"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            {
+              "#set": [
+                "zf-true"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": [
+          {
+            "after": "returned",
+            "before": "zf-true",
+            "outcome": "returned",
+            "site": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "after": "faulted",
+            "before": "zf-true",
+            "outcome": "faulted",
+            "site": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "after": "stopped",
+            "before": "zf-true",
+            "outcome": "stopped",
+            "site": {
+              "#bigint": "4"
+            }
+          }
+        ]
+      },
+      "unknown_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "#meta": {
+        "index": 4
+      },
+      "action_taken": "finishStateflow",
+      "case_id": "MSTerminalAlternatives",
+      "feasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      },
+      "infeasible_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      },
+      "not_reached": {
+        "#set": [
+          {
+            "#bigint": "5"
+          }
+        ]
+      },
+      "obligations": {
+        "#set": []
+      },
+      "parameters": {
+        "fixture": "MSTerminalAlternatives"
+      },
+      "phase": "done",
+      "snapshot_id": "machine-state-snapshot/MSTerminalAlternatives",
+      "statesAt": {
+        "#map": [
+          [
+            {
+              "#bigint": "1"
+            },
+            {
+              "#set": [
+                "entry"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "2"
+            },
+            {
+              "#set": [
+                "rax-five"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "3"
+            },
+            {
+              "#set": [
+                "zf-true"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "4"
+            },
+            {
+              "#set": [
+                "zf-true"
+              ]
+            }
+          ],
+          [
+            {
+              "#bigint": "5"
+            },
+            {
+              "#set": []
+            }
+          ]
+        ]
+      },
+      "structural_edges": {
+        "#set": [
+          {
+            "dst": {
+              "#bigint": "2"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "1"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "3"
+            },
+            "kind": "next",
+            "src": {
+              "#bigint": "2"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "4"
+            },
+            "kind": "taken",
+            "src": {
+              "#bigint": "3"
+            }
+          },
+          {
+            "dst": {
+              "#bigint": "5"
+            },
+            "kind": "fallthrough",
+            "src": {
+              "#bigint": "3"
+            }
+          }
+        ]
+      },
+      "terminals": {
+        "#set": [
+          {
+            "after": "returned",
+            "before": "zf-true",
+            "outcome": "returned",
+            "site": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "after": "faulted",
+            "before": "zf-true",
+            "outcome": "faulted",
+            "site": {
+              "#bigint": "4"
+            }
+          },
+          {
+            "after": "stopped",
+            "before": "zf-true",
+            "outcome": "stopped",
+            "site": {
+              "#bigint": "4"
+            }
+          }
+        ]
+      },
+      "unknown_edges": {
+        "#set": []
+      }
+    }
+  ],
+  "vars": [
+    "phase",
+    "unknown_edges",
+    "action_taken",
+    "parameters",
+    "terminals",
+    "structural_edges",
+    "feasible_edges",
+    "infeasible_edges",
+    "not_reached",
+    "case_id",
+    "obligations",
+    "snapshot_id",
+    "statesAt"
+  ]
+}

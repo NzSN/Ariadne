@@ -14,7 +14,19 @@
       "id": "Initialize",
       "wireAction": "init",
       "wireAliases": [],
-      "inputs": []
+      "inputs": [
+        {
+          "id": "CaseId",
+          "from": {
+            "root": "initialState",
+            "path": [
+              {
+                "field": "case_id"
+              }
+            ]
+          }
+        }
+      ]
     }
   ],
   "actions": [
@@ -80,6 +92,11 @@
     {
       "id": "Obligations",
       "wireName": "obligations",
+      "provenance": "implementation"
+    },
+    {
+      "id": "CaseId",
+      "wireName": "case_id",
       "provenance": "implementation"
     }
   ]
