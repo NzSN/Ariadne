@@ -1,5 +1,22 @@
 # Operand/effects delivery evidence
 
+## Context and follow-up
+
+**Status.** Historical LLVM-effects qualification.
+
+**Why this document exists.** [Completed effects plan](../../Plans/completed/operand-effects-plan.md) sets the implementation and negative-control requirements.
+
+**What this document establishes.** This record ties the original reviewed effects, alias cases, formal projection checks and detected mutations to the implementation tested at that time.
+
+**Where to go next.**
+
+- [Stage A delivery](stage-a-validation.md) — extends initial effects to the two captured memory-immediate MOV forms.
+- [BAP-only delivery](bap-only-removal-validation.md) — supersedes the old production semantic backend.
+
+**What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Later Stage A work extended that historical rule set; BAP subsequently replaced production semantics.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 This document retains the initial 137-opcode source-bound result. The later
 [Stage A delivery](stage-a-validation.md) adds two exact memory-immediate MOV
 identities under ruleset `user64-effects-v1.1` without changing this historical

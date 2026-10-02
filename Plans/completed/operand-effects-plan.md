@@ -1,5 +1,22 @@
 # Operand and effect implementation plan
 
+## Context and follow-up
+
+**Status.** Completed plan, archived; acceptance is limited to the recorded scope.
+
+**Why this document exists.** [Motivating design](../../docs/Ariadne/operand-effects-design.md) defines the problem and contract this plan implements.
+
+**What this document establishes.** This record ties the original reviewed effects, alias cases, formal projection checks and detected mutations to the implementation tested at that time.
+
+**Where to go next.**
+
+- [Delivery and follow-up](../../docs/Ariadne/operand-effects-validation.md) — records what was exercised and which limits remain.
+- [Active plan index](../README.md) — prevents completed steps from being mistaken for pending work.
+
+**What remains unresolved.** The implementation steps below are archived, not a current task list. These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Later Stage A work extended that historical rule set; BAP subsequently replaced production semantics.
+
+For the wider context, see the optional [documentation map](../../docs/documentation-map.md).
+
 > **Archived 2026-10-02: completed within its recorded scope.**
 > This is a historical plan, not an active task list. Evidence remains tied
 > to its original sources, backend and workload. See the [plan index](../README.md)

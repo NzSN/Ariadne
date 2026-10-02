@@ -1,5 +1,23 @@
 # Rust design for abstract machine-state analysis
 
+## Context and follow-up
+
+**Status.** Implemented finite stateflow design; supplied semantics remain a premise.
+
+**Why this document exists.** [Core implementation](implementation.md) recovers the structural graph that stateflow consumes.
+
+**What this document establishes.** Abstract stateflow propagates supplied finite transitions over a frozen recovered graph. It classifies edge feasibility while retaining structural alternatives and semantic uncertainty.
+
+**Where to go next.**
+
+- [Stage E completion](Ariadne/stage-e-completion.md) — records generated conformance, handoff and report acceptance.
+- [Result contracts](Ariadne/stage-e-report-contracts.md) — expose stateflow without confusing it with dependency slicing.
+- [BAP migration plan](../Plans/bap-integration.md) — tracks the separate, unstarted replacement of analysis ownership.
+
+**What remains unresolved.** Finite conformance checks do not prove the Rust implementation correct for every valid request. A universal refinement proof remains open, and adapter facts remain premises. It does not infer a historical path from crash-time observations.
+
+For the wider context, see the optional [documentation map](documentation-map.md).
+
 Status: the finite Rust path, frozen recovery handoff, generated conformance
 replay and evidence-linked reports/CLI are implemented and checked within the
 [Stage E completion scope](Ariadne/stage-e-completion.md). See the

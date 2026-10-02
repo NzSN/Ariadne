@@ -1,5 +1,22 @@
 # AMD64 memory and exception foundation
 
+## Context and follow-up
+
+**Status.** Retired ISA research; links below explain historical dependencies, not an active backlog.
+
+**Why this document exists.** State representation needs access, protection and fault contracts. The motivating contract is [Historical motivation](amd64-architectural-state.md).
+
+**What this document establishes.** The foundation specifies address/access checks, protection, faults, commit and restart contracts for later instruction bodies.
+
+**Where to go next.**
+
+- [Related historical component](amd64-page-walk.md) — refines the abstract page-map boundary.
+- [Retirement and current boundary](Ariadne/semantic-assurance.md) — ends the instruction-step objective without declaring its proof gaps solved.
+
+**What remains unresolved.** This research is retired. Missing architectural bindings or proof obligations below remain historical gaps, not active release tasks or solved claims. Production instruction effects now follow the BAP trust boundary.
+
+For the wider context, see the optional [documentation map](documentation-map.md).
+
 > **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
 > are historical reference, outside active development and qualification.
 > Milestones and commands below describe the former research track. See the

@@ -1,5 +1,22 @@
 # Stage D D1 review: MOV reg64, imm32
 
+## Context and follow-up
+
+**Status.** Retired candidate source review; no complete instruction step was accepted.
+
+**Why this document exists.** [Historical profile](../amd64-user64.md) required case-specific legality, effects and boundary evidence.
+
+**What this document establishes.** The candidate review fixes source-form identity, immediate sign extension, register effects and decoded observations for one MOV form.
+
+**Where to go next.**
+
+- [Historical foundations](../amd64-validation.md) — provides component context for this candidate.
+- [Retirement decision](semantic-assurance.md) — ends the campaign rather than treating remaining obligations as proved.
+
+**What remains unresolved.** The candidate never became a fully accepted instruction step. The campaign is retired; its remaining fault, frame and instruction-boundary obligations are historical gaps.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 > **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
 > are historical reference, outside active development and qualification.
 > Milestones and commands below describe the former research track. See the

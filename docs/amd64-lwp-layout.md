@@ -1,5 +1,22 @@
 # AMD64 Lightweight Profiling control-block layout
 
+## Context and follow-up
+
+**Status.** Retired ISA research; links below explain historical dependencies, not an active backlog.
+
+**Why this document exists.** LWP wrappers require a concrete control-block layout. The motivating contract is [Historical motivation](amd64-external.md).
+
+**What this document establishes.** The layout model describes LWP control-block fields, capabilities, sizes and validity constraints required by the associated wrappers.
+
+**Where to go next.**
+
+- [Related historical component](amd64-system-state.md) — supplies the raw controls composed with that layout.
+- [Retirement and current boundary](Ariadne/semantic-assurance.md) — ends the instruction-step objective without declaring its proof gaps solved.
+
+**What remains unresolved.** This research is retired. Missing architectural bindings or proof obligations below remain historical gaps, not active release tasks or solved claims. Production instruction effects now follow the BAP trust boundary.
+
+For the wider context, see the optional [documentation map](documentation-map.md).
+
 > **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
 > are historical reference, outside active development and qualification.
 > Milestones and commands below describe the former research track. See the

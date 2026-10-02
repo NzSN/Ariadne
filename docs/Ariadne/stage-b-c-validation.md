@@ -1,5 +1,22 @@
 # Stages B and C: captured predecessor slice and investigator report
 
+## Context and follow-up
+
+**Status.** Historical predecessor-fixture and reporting acceptance.
+
+**Why this document exists.** [Initial reader delivery](minidump-validation.md) provided capture input but did not establish a useful earlier producer slice.
+
+**What this document establishes.** The tool-produced fixtures establish an earlier possible address producer and a minidump CLI that publishes matching text, JSON and DOT evidence.
+
+**Where to go next.**
+
+- [Real-capture validation](priority-1-real-capture-validation.md) — extends the tool-produced fixture to one independently anchored Chromium capture.
+- [Report contract](stage-c-report-schema.md) — defines the published query and evidence fields.
+
+**What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. A fixture predecessor is not proof of a historical execution; the controlled real-capture delivery addresses the next evidence tier.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Validated **2026-09-29 10:16 CST** by the source-bound
 [B–F progress run](../../evidence/Ariadne/stage-b-f-validation.json). These stages implement the
 [current roadmap](../../ROADMAP.md)

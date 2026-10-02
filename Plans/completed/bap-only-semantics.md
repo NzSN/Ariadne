@@ -1,5 +1,22 @@
 # Stage 1 follow-up: remove the LLVM semantic backend
 
+## Context and follow-up
+
+**Status.** Completed plan, archived; acceptance is limited to the recorded scope.
+
+**Why this document exists.** [Motivating design](../../docs/Ariadne/bap-semantic-backend-design.md) defines the problem and contract this plan implements.
+
+**What this document establishes.** This records the removal of CLI semantic selection and automatic LLVM effect fallback. BAP became the sole minidump semantic producer while LLVM decode-reference checks remained.
+
+**Where to go next.**
+
+- [Delivery and follow-up](../../docs/Ariadne/bap-only-removal-validation.md) — records what was exercised and which limits remain.
+- [Active plan index](../README.md) — prevents completed steps from being mistaken for pending work.
+
+**What remains unresolved.** The implementation steps below are archived, not a current task list. These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Full original-Windows qualification is still open. The BAP analysis-core replacement has not started; neither selecting BAP nor passing a fixture closes those requirements.
+
+For the wider context, see the optional [documentation map](../../docs/documentation-map.md).
+
 > **Archived 2026-10-02: completed within its recorded scope.**
 > This is a historical plan, not an active task list. Evidence remains tied
 > to its original sources, backend and workload. See the [plan index](../README.md)

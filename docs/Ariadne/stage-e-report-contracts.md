@@ -1,5 +1,23 @@
 # Stage E result contracts
 
+## Context and follow-up
+
+**Status.** Current distinct stateflow and supplied-IR result families.
+
+**Why this document exists.** [Stage E design](stage-e-mirrorrust-design.md) requires results to retain machine-specific identity and semantics.
+
+**What this document establishes.** The contracts preserve separate machine-state and IR identities, semantic premises, feasibility/dependency results and uncertainty in strict result envelopes.
+
+**Where to go next.**
+
+- [Stage E delivery](stage-e-completion.md) — records CLI/report acceptance.
+- [Reports guide](modules/reports.md) — documents rendering and codec interfaces.
+- [Supplied-IR guide](modules/ir.md) — shows verifier-backed input and query construction.
+
+**What remains unresolved.** A stateflow feasibility label is relative to supplied entry facts and transitions. An IR report analyzes supplied verified IR, not reconstructed original machine-code IR.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 These are separate result families for [Stage E completion](stage-e-completion.md).
 The [completed Stage E](stage-e-completion.md) adds optional stateflow input to
 the minidump investigator CLI and a separate verifier-backed IR CLI. Their

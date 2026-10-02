@@ -1,5 +1,22 @@
 # AMD64 WB/WC memory ordering
 
+## Context and follow-up
+
+**Status.** Retired ISA research; links below explain historical dependencies, not an active backlog.
+
+**Why this document exists.** Memory type and atomicity alone do not define event ordering. The motivating contract is [Historical motivation](amd64-memory-types-atomics.md).
+
+**What this document establishes.** The bounded relation states required event-ordering and publication edges; it does not make the architectural byte store globally sequential.
+
+**Where to go next.**
+
+- [Related historical component](amd64-atomic-execution.md) — connects atomic body behavior to the surrounding contracts.
+- [Retirement and current boundary](Ariadne/semantic-assurance.md) — ends the instruction-step objective without declaring its proof gaps solved.
+
+**What remains unresolved.** This research is retired. Missing architectural bindings or proof obligations below remain historical gaps, not active release tasks or solved claims. Production instruction effects now follow the BAP trust boundary.
+
+For the wider context, see the optional [documentation map](documentation-map.md).
+
 > **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
 > are historical reference, outside active development and qualification.
 > Milestones and commands below describe the former research track. See the

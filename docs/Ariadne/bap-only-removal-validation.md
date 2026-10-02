@@ -1,5 +1,23 @@
 # LLVM semantic-backend removal
 
+## Context and follow-up
+
+**Status.** Retained backend-removal evidence; full original-Windows acceptance stays open.
+
+**Why this document exists.** [Completed removal plan](../../Plans/completed/bap-only-semantics.md) requires BAP-only production semantics without LLVM effect fallback.
+
+**What this document establishes.** This records the removal of CLI semantic selection and automatic LLVM effect fallback. BAP became the sole minidump semantic producer while LLVM decode-reference checks remained.
+
+**Where to go next.**
+
+- [Current backend guide](modules/bap.md) — shows how to use and validate the resulting path.
+- [Open integration work](../../Plans/bap-integration.md) — retains the missing workload clause and unstarted Stage 2.
+- [Investigation design](investigation-layer-design.md) — uses the resulting semantic evidence to answer a domain question.
+
+**What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Full original-Windows qualification is still open. The BAP analysis-core replacement has not started; neither selecting BAP nor passing a fixture closes those requirements.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Requested **2026-10-01**. The [Stage 1 follow-up plan](../../Plans/completed/bap-only-semantics.md)
 removes the LLVM semantic backend from the production minidump workflow.
 

@@ -1,5 +1,22 @@
 # Ariadne investigation-layer implementation plan
 
+## Context and follow-up
+
+**Status.** Active plan: first question delivered within a bounded tier; later questions remain open.
+
+**Why this document exists.** [Investigation design](../docs/Ariadne/investigation-layer-design.md) motivates question-specific explanations above graph primitives.
+
+**What this document establishes.** I0–I3 deliver typed address evidence, exact query binding, explanation and reports. I4 qualifies that question on specified artifacts; I5–I7 describe later investigation capabilities.
+
+**Where to go next.**
+
+- [Implemented contracts](../docs/Ariadne/investigation-contracts.md) — show the actual first-question interface.
+- [Delivery record](../docs/Ariadne/investigation-validation.md) — distinguishes exercised fixtures/Linux from missing full I4 acceptance.
+
+**What remains unresolved.** The first fault-address question is implemented, but full original-Windows I4 qualification remains open. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
+
+For the wider context, see the optional [documentation map](../docs/documentation-map.md).
+
 Prepared **2026-10-01**, grounded in implementation **`7de5a1e`**.
 Status: **I0–I3 implemented; I4 qualified at the exercised fixture/Linux tier.**
 Full original-Windows I4 acceptance remains partial.

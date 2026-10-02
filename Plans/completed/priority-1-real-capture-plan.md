@@ -1,5 +1,22 @@
 # Priority 1 implementation plan: a real-capture predecessor slice
 
+## Context and follow-up
+
+**Status.** Completed plan, archived; acceptance is limited to the recorded scope.
+
+**Why this document exists.** [Motivating design](../../docs/Ariadne/priority-1-real-capture-design.md) defines the problem and contract this plan implements.
+
+**What this document establishes.** The controlled Chromium/Linux case demonstrates a captured predecessor slice from an independently established earlier entry and retains a possible address producer with explicit gaps.
+
+**Where to go next.**
+
+- [Delivery and follow-up](../../docs/Ariadne/priority-1-real-capture-validation.md) — records what was exercised and which limits remain.
+- [Active plan index](../README.md) — prevents completed steps from being mistaken for pending work.
+
+**What remains unresolved.** The implementation steps below are archived, not a current task list. These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. The later investigation delivery explains the origins; it still does not establish an executed path or root cause.
+
+For the wider context, see the optional [documentation map](../../docs/documentation-map.md).
+
 > **Archived 2026-10-02: completed within its recorded scope.**
 > This is a historical plan, not an active task list. Evidence remains tied
 > to its original sources, backend and workload. See the [plan index](../README.md)

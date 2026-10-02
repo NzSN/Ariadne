@@ -1,5 +1,22 @@
 # AMD64 Lean formalization
 
+## Context and follow-up
+
+**Status.** Retired ISA proof library; component results remain historical.
+
+**Why this document exists.** [Retired semantics design](../docs/amd64-semantics-design.md) required a checked counterpart to the TLA+ research models.
+
+**What this document establishes.** The library contains the historical typed counterparts, component proofs and audits for the independent AMD64 formalization.
+
+**Where to go next.**
+
+- [Historical validation](../docs/amd64-validation.md) — states the exercised foundations and their limits.
+- [Retirement decision](../docs/Ariadne/semantic-assurance.md) — removes ISA-proof milestones from active scope.
+
+**What remains unresolved.** The ISA-proof deliverable is retired. Successful component proofs did not close all instruction-step obligations; the library is not the production semantic executor.
+
+For the wider context, see the optional [documentation map](../docs/documentation-map.md).
+
 > **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
 > are historical reference, outside active development and qualification.
 > Milestones and commands below describe the former research track. See the

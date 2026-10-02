@@ -1,5 +1,23 @@
 # Stage E completion: replay and investigator reports
 
+## Context and follow-up
+
+**Status.** Retained finite replay and report acceptance; no universal Rust proof.
+
+**Why this document exists.** [Completion plan](../../Plans/completed/stage-e-completion.md) defines validators, generated observations, mutants and handoff clauses.
+
+**What this document establishes.** The retained campaign combines generated replay, engine mutation sensitivity, native/recovery handoffs and report/CLI validation for the finite Stage E corpus.
+
+**Where to go next.**
+
+- [Replay guide](../../mbt/stage-e/README.md) — provides regeneration and rerun procedures.
+- [Remaining proof boundary](stage-f-proof-and-performance.md) — states what the finite campaign does not establish.
+- [Later core migration](../../Plans/bap-integration.md) — requires new evidence if analysis ownership changes.
+
+**What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Finite conformance checks do not prove the Rust implementation correct for every valid request. A universal refinement proof remains open, and adapter facts remain premises.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 The [completion implementation plan](../../Plans/completed/stage-e-completion.md) closes
 Stage E's validators, generated replay, mutation sensitivity, handoffs and
 independent report/CLI delivery. The
@@ -55,6 +73,7 @@ call obligations and block/instruction identities remain explicit.
 The full gate parses both CLIs' DOT output with Graphviz, checks JSON identity
 and uncertainty, exercises native text/bitcode and frozen recovery, and reruns
 the minidump regression/mutation gates. This completes finite Stage E
-conformance/report acceptance. Stage D's 0/49 instruction-step gate and Stage F's
-universal Rust refinement remain open; no historical execution or machine/IR
+conformance/report acceptance for its recorded sources. Stage F's universal Rust
+refinement remains open; the independent Stage D ISA campaign is
+[retired](semantic-assurance.md). No historical execution or machine/IR
 correspondence is claimed.

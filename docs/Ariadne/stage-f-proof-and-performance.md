@@ -1,12 +1,31 @@
 # Stage F proof boundary and measured core baseline
 
+## Context and follow-up
+
+**Status.** Open universal refinement boundary and historical benchmark baseline.
+
+**Why this document exists.** [Executable correspondence](../implementation.md) provides deterministic model actions but not a checked Rust refinement proof.
+
+**What this document establishes.** The record distinguishes executable model correspondence and finite tests from a universal Rust refinement proof, and supplies an initial repeatable cost baseline.
+
+**Where to go next.**
+
+- [Performance follow-up](priority-4-performance-validation.md) — addresses the historical real-workload measurement gap.
+- [Finite conformance checks](../../mbt/stage-e/README.md) — supply bounded evidence while universal proof remains open.
+- [Assurance decision](semantic-assurance.md) — keeps this proof boundary separate from retired ISA work.
+
+**What remains unresolved.** Finite conformance checks do not prove the Rust implementation correct for every valid request. A universal refinement proof remains open, and adapter facts remain premises. The historical workload optimization later addressed the representative-performance gap, but not the proof gap.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Recorded **2026-09-29 10:16 CST** for Stage F proof boundary.
 The [source-bound progress report](../../evidence/Ariadne/stage-b-f-validation.json) passed 19
 implementation/formal/benchmark gates. Its [raw benchmark data](../../evidence/Ariadne/stage-f-baseline.csv)
 is a baseline, not a release-scale performance guarantee or a Rust refinement
 proof.
 The [Priority 4 workload-performance implementation plan](../../Plans/completed/priority-4-workload-performance-plan.md)
-specifies the next real-capture measurement and optimize/no-change decision.
+specified the real-capture measurement and optimize/no-change decision, later
+recorded in the [historical performance delivery](priority-4-performance-validation.md).
 The [Priority 4 design](priority-4-workload-performance-design.md) defines the
 workload identity, measurement layers and decision boundary.
 
@@ -22,7 +41,9 @@ collections, plus obligations for input validation, initialization, each
 `step()` action, the deterministic schedule as an allowed TLA+ choice, result
 views and finite termination. A proof about an abstract machine does not by
 itself connect compiled Rust to that proof. The decoder, effect rules, captured
-bytes and Stage D ISA semantics remain additional trusted or open boundaries.
+bytes and semantic projection remain additional trusted or checked boundaries.
+The independent Stage D ISA campaign is [retired](semantic-assurance.md);
+retirement does not establish a proof of BAP lifting.
 **No universal Rust refinement claim is made.**
 
 ## Baseline method and observations

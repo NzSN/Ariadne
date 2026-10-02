@@ -1,5 +1,22 @@
 # Minidump input delivery and validation
 
+## Context and follow-up
+
+**Status.** Historical reader delivery evidence; use current module commands.
+
+**Why this document exists.** [Reader design](file-reader-design.md) sets the capture and preparation invariants exercised here.
+
+**What this document establishes.** This records initial acceptance of captured-memory input, address mapping and local-start preparation. It establishes the reader tier exercised then, before later predecessor and investigation deliveries.
+
+**Where to go next.**
+
+- [Stages B/C delivery](stage-b-c-validation.md) — adds predecessor discovery and evidence-linked CLI reports.
+- [Current input guide](modules/input.md) — documents the consolidated package and BAP preparation path.
+
+**What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 This document retains the initial 2026-09-26 source-bound result. The later
 [Stage A delivery](stage-a-validation.md) decodes the previously unsupported
 faulting MOV in both pinned fixtures; the zero-decoded observations below

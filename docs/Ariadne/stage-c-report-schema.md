@@ -1,5 +1,23 @@
 # Stage C minidump investigator report schema
 
+## Context and follow-up
+
+**Status.** Minidump analysis report contract; investigation and stateflow have separate extensions.
+
+**Why this document exists.** [Reader design](file-reader-design.md) supplies captured bytes and provenance that core analysis alone lacks.
+
+**What this document establishes.** This defines the minidump CLI query, evidence envelope and text/JSON/DOT publication rules. It combines captured preparation facts with core analysis without changing dataflow semantics.
+
+**Where to go next.**
+
+- [Presentation delivery](priority-3-presentation-validation.md) — makes instruction evidence easier to scan.
+- [Explanation contract](investigation-contracts.md) — adds typed fault-address claims.
+- [Stage E contracts](stage-e-report-contracts.md) — describe separate abstract-state and IR envelopes.
+
+**What remains unresolved.** A report can be complete as a publication yet contain unresolved analysis gaps. Investigation and abstract-state/IR reports have separate contracts and should not be inferred from JSON v1 alone.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Design fixed 2026-09-29 for implemented minidump report contract.
 The [file-reader design](file-reader-design.md) supplies captured bytes and
 provenance; `ariadne::render` supplies core analyzer facts. This report layer

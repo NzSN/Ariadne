@@ -1,5 +1,23 @@
 # Priority 4 design: workload-based performance decision
 
+## Context and follow-up
+
+**Status.** Measurement and equivalence criteria; each backend needs its own evidence.
+
+**Why this document exists.** [Initial baseline](stage-f-proof-and-performance.md) lacked a representative larger real-capture performance decision.
+
+**What this document establishes.** The design fixes artifact/query identity, latency budget and repeated timing before optimization. It requires preserved results and visible scheduling alongside phase and resource measurements.
+
+**Where to go next.**
+
+- [Completed historical plan](../../Plans/completed/priority-4-workload-performance-plan.md) — freezes workloads, budgets and optimization checks.
+- [Historical delivery](priority-4-performance-validation.md) — records the measured optimization.
+- [BAP qualification](../../Plans/bap-integration.md) — retains the separate current-backend Windows requirement.
+
+**What remains unresolved.** Each backend and workload needs its own qualification. A small synthetic baseline or an older LLVM-backed result cannot satisfy the current BAP original-Windows requirement.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Design decision, **2026-09-29**. The scoped
 [Priority 4 implementation plan](../../Plans/completed/priority-4-workload-performance-plan.md)
 applies this design. It builds on the current

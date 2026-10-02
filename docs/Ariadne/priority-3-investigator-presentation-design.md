@@ -1,5 +1,22 @@
 # Priority 3 design: readable minidump investigation reports
 
+## Context and follow-up
+
+**Status.** Instruction-overview and example design.
+
+**Why this document exists.** [Initial report contract](stage-c-report-schema.md) provided evidence but needed a more readable instruction view.
+
+**What this document establishes.** The design adds a scan-friendly instruction overview and platform examples while keeping JSON and DOT graph meaning stable. It separates display improvements from new semantic claims.
+
+**Where to go next.**
+
+- [Completed presentation plan](../../Plans/completed/priority-3-investigator-presentation-plan.md) — sets implementation and output-equivalence checks.
+- [Delivery record](priority-3-presentation-validation.md) — records the scan view and cross-format preservation.
+
+**What remains unresolved.** Readable instructions do not explain why an address is suspicious. The investigation layer addresses typed producer questions; incomplete capture and semantic gaps must stay visible.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Design decision, **2026-09-29**. The scoped
 [Priority 3 implementation plan](../../Plans/completed/priority-3-investigator-presentation-plan.md)
 applies this design. The existing [Stage C report schema](stage-c-report-schema.md)

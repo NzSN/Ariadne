@@ -1,5 +1,22 @@
 # Ariadne checkpoints
 
+## Context and follow-up
+
+**Status.** Chronological record; earlier entries describe their own dates.
+
+**Why this document exists.** [Roadmap](ROADMAP.md) defines the stages whose progress is recorded here.
+
+**What this document establishes.** This chronology records what was delivered, which checks were exercised and what was still open at each checkpoint. The latest scope decision supersedes earlier project commitments.
+
+**Where to go next.**
+
+- [Plan index](Plans/README.md) — identifies what is still open after the recorded deliveries.
+- [Evidence guide](evidence/Ariadne/README.md) — explains how to interpret retained results without treating them as fresh qualification.
+
+**What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Retired ISA milestones in older entries are no longer active work.
+
+For the wider context, see the optional [documentation map](docs/documentation-map.md).
+
 Updated **2026-10-02**: the independent AMD64 instruction-step/Lean track is
 retired under the [semantic assurance decision](docs/Ariadne/semantic-assurance.md).
 BAP lifting is a trusted dependency; projection, analysis and evidence validation

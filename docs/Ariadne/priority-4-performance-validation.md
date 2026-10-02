@@ -1,5 +1,22 @@
 # Priority 4: qualified workload and performance decision
 
+## Context and follow-up
+
+**Status.** Historical LLVM-backed optimization evidence; not current BAP qualification.
+
+**Why this document exists.** [Measurement design](priority-4-workload-performance-design.md) requires a fixed query, budget and preserved results.
+
+**What this document establishes.** The historical optimization reduced the selected 98-instruction Windows query below its fixed median budget while preserving the tested schedule and reports; synthetic measurements recorded broader bounded behavior.
+
+**Where to go next.**
+
+- [Benchmark guide](modules/bench.md) — documents the measurement harness.
+- [BAP workload gate](../../Plans/bap-integration.md) — tracks the missing original-Windows comparison for the replacement backend.
+
+**What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. The original capture is still required to qualify the replacement BAP path, and no worst-case performance guarantee follows.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Qualified **2026-09-30** under the
 [design](priority-4-workload-performance-design.md) and
 [implementation plan](../../Plans/completed/priority-4-workload-performance-plan.md).

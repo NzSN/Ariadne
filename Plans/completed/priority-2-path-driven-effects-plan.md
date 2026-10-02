@@ -1,5 +1,22 @@
 # Priority 2 implementation plan: effects demanded by captured paths
 
+## Context and follow-up
+
+**Status.** Completed plan, archived; acceptance is limited to the recorded scope.
+
+**Why this document exists.** [Motivating design](../../docs/Ariadne/operand-effects-design.md) defines the problem and contract this plan implements.
+
+**What this document establishes.** The selected-path review concluded that additional narrowing was not justified: opaque calls remained opaque, and the retained effects were sufficient for the scoped possible-producer result.
+
+**Where to go next.**
+
+- [Delivery and follow-up](../../docs/Ariadne/priority-2-effects-validation.md) — records what was exercised and which limits remain.
+- [Active plan index](../README.md) — prevents completed steps from being mistaken for pending work.
+
+**What remains unresolved.** The implementation steps below are archived, not a current task list. A no-change decision closes that review, not effect coverage generally. A new path or unsupported BIL form may require new source review and projection tests.
+
+For the wider context, see the optional [documentation map](../../docs/documentation-map.md).
+
 > **Archived 2026-10-02: completed within its recorded scope.**
 > This is a historical plan, not an active task list. Evidence remains tied
 > to its original sources, backend and workload. See the [plan index](../README.md)

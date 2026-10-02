@@ -1,5 +1,22 @@
 # Stage E inputs and reports
 
+## Context and follow-up
+
+**Status.** Current codecs and rendering for separate Stage E results.
+
+**Why this document exists.** [Result contracts](../stage-e-report-contracts.md) keep machine VAs and IR identities distinct.
+
+**What this document establishes.** The module validates and renders separate stateflow and IR result families, preserving identity and uncertainty across formats rather than merging their meanings.
+
+**Where to go next.**
+
+- [Report/CLI delivery](../stage-e-completion.md) — records validation and publication behavior.
+- [IR usage](ir.md) — shows one consumer of the report interfaces.
+
+**What remains unresolved.** Serialization agreement does not prove the semantic inputs true. Each producer/handoff needs its own acceptance, and claim scope must survive rendering.
+
+For the wider context, see the optional [documentation map](../../documentation-map.md).
+
 `ariadne::reports` keeps serialization out of the dependency-free analysis core.
 It supplies strict normalized request codecs for the replay harness, a semantic
 input codec for the minidump handoff, and independent machine-state/LLVM IR

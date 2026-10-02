@@ -1,5 +1,22 @@
 # Stage A source and decoder review: memory-immediate MOV
 
+## Context and follow-up
+
+**Status.** Historical source review of two LLVM MOV forms.
+
+**Why this document exists.** [Stage A plan](../../Plans/completed/stage-a-memory-immediate-mov-plan.md) identifies unsupported crash-site forms that blocked the initial dumps.
+
+**What this document establishes.** The review resolves operand-width and immediate interpretation for two memory-immediate MOV forms, including why stores must remain weak memory updates.
+
+**Where to go next.**
+
+- [Stage A validation](stage-a-validation.md) — records their implemented effects and checks.
+- [BAP review](bap-projection-source-review.md) — describes production effect derivation after backend replacement.
+
+**What remains unresolved.** This is source evidence for those exact historical bindings, not a proof that a faulting store committed. The BAP review defines the current semantic producer.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Reviewed 2026-09-28 for the [Stage A implementation plan](../../Plans/completed/stage-a-memory-immediate-mov-plan.md).
 This review authorizes only a conservative normal-continuation analyzer effect
 for two decoded AMD64 memory forms. It is not a complete instruction-step proof.

@@ -86,3 +86,11 @@ When creating or updating an implementation plan for an existing design, add
 a direct relative link to the plan in the design document in the same change.
 Name the stage if the plan covers only part of the design. Verify the link
 resolves before finishing.
+
+When editing documentation, maintain its `Context and follow-up` section:
+explain its status, motivating problem, contribution, direct next reading and
+unresolved limits in the document itself. Give direct origin and successor links
+with their purpose; the map is optional. Update older wording when later work
+resolves, supersedes or retires a question. See
+[the documentation network](docs/documentation-map.md) and run
+`python3 tools/check_doc_links.py` to check links and navigation coverage.

@@ -1,5 +1,23 @@
 # File readers and immutable address-space preparation
 
+## Context and follow-up
+
+**Status.** Input design; minidumps implemented, PE/ELF readers deferred.
+
+**Why this document exists.** [Byte-span adapter](../llvm-mc-adapter.md) leaves file parsing, address mapping and byte provenance to readers.
+
+**What this document establishes.** The design separates immutable address-space reads, byte provenance and instruction-start discovery from the analyzer. The implemented reader accepts Windows/Linux AMD64 minidumps.
+
+**Where to go next.**
+
+- [Input module](modules/input.md) — documents the implemented minidump API and limits.
+- [Predecessor-slice delivery](stage-b-c-validation.md) — shows how captured starts and reports were exercised.
+- [Roadmap](../../ROADMAP.md) — keeps PE/ELF and ELF-core formats outside current scope.
+
+**What remains unresolved.** PE/ELF image and ELF-core sections describe deferred designs. Binary fallback is not enabled in the production capture-only reader; missing bytes remain explicit.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Design proposal, 2026-09-26. Source baseline: `aee833f`.
 Scope update: the user selected **only the minidump path** for current
 implementation. Windows/Linux AMD64 minidump input is delivered in
@@ -77,16 +95,17 @@ or a second instruction-effects implementation. This is input construction;
 
 ## Module and dependency choice
 
-Place the implementation in a separate Cargo package, `input/`, exporting
-`ariadne_input`. It depends on the root `ariadne` library by path. Follow the
-existing separate-package pattern used by `mbt/`; ordinary root Cargo tests
-and the dependency-free core stay independent of reader dependencies.
+The original design used a separate `ariadne_input` package. The delivered
+[source-layout consolidation](rust-source-layout.md) supersedes that choice:
+`ariadne::input` now lives under `src/input/` in the root Cargo package, with
+optional features preserving the dependency-free core. The PE/ELF choices below
+remain deferred design, not additional implemented readers.
 
 Use maintained Rust parsers: `object` for PE and low-level ELF program-header/
 note structure access, and `minidump` for minidump streams/context metadata.
 The Linux core adapter owns the bounded interpretation of supported Linux
 notes; a generic object parser is not assumed to supply decoded Linux contexts. They expose the required image and memory
-structures. Pin compatible versions/features and a separate lockfile during
+structures. Pin compatible versions/features in the root lockfile during
 implementation; check Rust 1.85 compatibility rather than assuming the latest
 versions satisfy it. Add a standard SHA-256 implementation for artifact identity
 instead of writing a hash algorithm. No Windows DbgHelp runtime is required.

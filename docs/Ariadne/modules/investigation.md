@@ -1,5 +1,22 @@
 # Ariadne investigation module
 
+## Context and follow-up
+
+**Status.** Current first-question API.
+
+**Why this document exists.** [Contracts](../investigation-contracts.md) define exact binding and the meaning of possible producers.
+
+**What this document establishes.** The API accepts a bound completed analysis and a fault-address question, then returns possible producers, claims, gaps and concrete evidence requirements without running another dataflow solver.
+
+**Where to go next.**
+
+- [Delivery evidence](../investigation-validation.md) — shows what the implementation has exercised.
+- [Follow-up plan](../../../Plans/investigation-layer.md) — tracks missing capture acceptance and later questions.
+
+**What remains unresolved.** The first fault-address question is implemented, but full original-Windows I4 qualification remains open. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
+
+For the wider context, see the optional [documentation map](../../documentation-map.md).
+
 This module answers one higher-level question: which earlier definitions could
 contribute to a selected captured memory-address operand, what evidence supports
 them, and what prevents a stronger conclusion?

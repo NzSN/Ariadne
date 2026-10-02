@@ -1,5 +1,22 @@
 # Ariadne documentation
 
+## Context and follow-up
+
+**Status.** Current documentation entry point.
+
+**Why this document exists.** [Project overview](../../README.md) introduces the workflow these guides explain.
+
+**What this document establishes.** This index separates current usage/contracts from delivery evidence. Use the topic table to choose a component; each linked document explains its own prerequisites and successors.
+
+**Where to go next.**
+
+- [Documentation map](../documentation-map.md) — traces motivation, implementation, validation and open questions.
+- [Plan index](../../Plans/README.md) — identifies active implementation work.
+
+**What remains unresolved.** Full original-Windows qualification is still open. The BAP analysis-core replacement has not started; neither selecting BAP nor passing a fixture closes those requirements. The first fault-address question is implemented, but full original-Windows I4 qualification remains open. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Start with the current interfaces and assurance boundary. Active implementation
 work is listed in the [plan index](../../Plans/README.md); completed plans live
 under `Plans/completed/`.

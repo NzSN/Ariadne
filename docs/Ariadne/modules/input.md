@@ -1,5 +1,23 @@
 # Ariadne minidump input
 
+## Context and follow-up
+
+**Status.** Current minidump API and preparation workflow.
+
+**Why this document exists.** [Reader design](../file-reader-design.md) defines immutable storage, provenance and local-start discovery.
+
+**What this document establishes.** The module opens captured memory, retains holes/conflicts and evidence, and materializes local instruction starts from supplied entries. Seeds select analysis questions without becoming discovery roots.
+
+**Where to go next.**
+
+- [BAP module](bap.md) — supplies semantics for captured instruction prefixes.
+- [Minidump report contract](../stage-c-report-schema.md) — joins preparation evidence with analysis output.
+- [Investigation contracts](../investigation-contracts.md) — bind a fault-address question to the prepared analysis.
+
+**What remains unresolved.** A minidump cannot establish an earlier executed path by itself. Entry evidence must be supplied; unsupported instructions and missing capture may keep the result partial.
+
+For the wider context, see the optional [documentation map](../../documentation-map.md).
+
 `ariadne::input` reads **AMD64 Windows and Linux/Crashpad minidumps** into an
 immutable captured-memory snapshot, obtains bytes at discovered instruction
 starts, and prepares the existing Ariadne analysis request. The module is enabled

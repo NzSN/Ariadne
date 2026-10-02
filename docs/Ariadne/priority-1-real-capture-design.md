@@ -1,5 +1,23 @@
 # Priority 1 design: evidence-linked predecessor slice from a real minidump
 
+## Context and follow-up
+
+**Status.** Independent-entry and evidence-chain design.
+
+**Why this document exists.** [Fixture delivery](stage-b-c-validation.md) leaves the need for a representative independently anchored real capture.
+
+**What this document establishes.** A real-case claim requires a hash-pinned dump, matching companion identity, an independently anchored earlier entry and captured bytes along the analyzed path.
+
+**Where to go next.**
+
+- [Completed scoped plan](../../Plans/completed/priority-1-real-capture-plan.md) — defines the exact-case acceptance procedure.
+- [Qualified controlled case](priority-1-real-capture-validation.md) — records the resulting slice and limits.
+- [Explanation design](investigation-layer-design.md) — addresses how to interpret producers and gaps.
+
+**What remains unresolved.** Matching symbols can justify an entry witness but cannot silently fill capture holes or reconstruct actual execution. Qualification remains specific to the chosen artifact and query.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Design decision, **2026-09-29**. The scoped
 [Priority 1 implementation plan](../../Plans/completed/priority-1-real-capture-plan.md) applies this
 design. It uses the delivered Windows/Linux AMD64

@@ -1,5 +1,23 @@
 # Ariadne assurance priorities
 
+## Context and follow-up
+
+**Status.** Priority rationale with dated delivery results.
+
+**Why this document exists.** [Roadmap](../../ROADMAP.md) prioritizes useful captured investigations over independent ISA coverage.
+
+**What this document establishes.** The priority decision puts representative captures, useful effect coverage, readable output and measured performance ahead of independent ISA completeness. Dated results explain why each practical stage was chosen.
+
+**Where to go next.**
+
+- [Real-capture delivery](priority-1-real-capture-validation.md) — records the first representative investigation.
+- [Investigation direction](investigation-layer-design.md) — turns low-level evidence into domain questions.
+- [Current assurance boundary](semantic-assurance.md) — supersedes the former long-term ISA-proof commitment.
+
+**What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Current BAP workload and investigation qualification are tracked in the active plans; ISA milestones are retired.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Updated **2026-10-02**: the independent instruction-step project is retired.
 Ariadne's delivery is an evidence-bounded **Windows/Linux AMD64 minidump → local
 graph → possible value origins → backward slice → report** workflow using BAP.
@@ -44,9 +62,9 @@ Priority 4 was qualified on **2026-09-30** for a separately hash-pinned,
 measured optimization preserves the visible schedule and report bytes. The
 median meets the budget; this is not a worst-case or universal scale guarantee.
 
-The separate machine-state and directly supplied LLVM IR paths can advance
-when a concrete investigation needs them; their generated model-based replay
-and result envelopes remain independent acceptance work. A universal Rust
+The separate machine-state and directly supplied LLVM IR paths have
+[finite generated replay and report acceptance](stage-e-completion.md).
+Their supplied semantic premises remain explicit. A universal Rust
 refinement proof remains a separate research boundary. The ISA campaign is retired. PE/ELF image and ELF core readers remain deferred under the
 current minidump-only scope.
 

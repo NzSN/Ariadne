@@ -1,5 +1,22 @@
 # Ariadne plans
 
+## Context and follow-up
+
+**Status.** Plan navigation; completion and retirement are distinct.
+
+**Why this document exists.** [Roadmap](../ROADMAP.md) sets the priorities used to classify work.
+
+**What this document establishes.** Two plans remain active: BAP integration and investigation. Completed plans are archived; retired ISA work is neither pending delivery nor successfully proved.
+
+**Where to go next.**
+
+- [BAP plan](bap-integration.md) — tracks missing Windows qualification and the unstarted core migration.
+- [Investigation plan](investigation-layer.md) — tracks full I4 acceptance and later investigation questions.
+
+**What remains unresolved.** Full original-Windows qualification is still open. The BAP analysis-core replacement has not started; neither selecting BAP nor passing a fixture closes those requirements. The first fault-address question is implemented, but full original-Windows I4 qualification remains open. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
+
+For the wider context, see the optional [documentation map](../docs/documentation-map.md).
+
 Updated 2026-10-02. Completed plans live in `completed/`; their recorded results
 apply to the sources and workload originally exercised. Archiving a plan does
 not refresh qualification evidence.

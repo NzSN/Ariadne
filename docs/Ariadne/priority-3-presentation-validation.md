@@ -1,5 +1,22 @@
 # Priority 3: readable minidump reports and release examples
 
+## Context and follow-up
+
+**Status.** Historical presentation delivery and output-equivalence evidence.
+
+**Why this document exists.** [Presentation design](priority-3-investigator-presentation-design.md) requires readable instruction evidence without changing graph meaning.
+
+**What this document establishes.** The presentation delivery adds the instruction overview and Linux/Windows examples and records unchanged JSON/DOT semantics for the exercised case.
+
+**Where to go next.**
+
+- [Usage examples](minidump-investigator-examples.md) — show the delivered CLI presentation.
+- [Domain explanations](investigation-layer-design.md) — addresses questions beyond displaying raw slices.
+
+**What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. This resolves the scoped readability work, not new investigation capabilities.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Validated **2026-09-29 23:26 CST** against the
 [Priority 3 design](priority-3-investigator-presentation-design.md) and
 [implementation plan](../../Plans/completed/priority-3-investigator-presentation-plan.md). The

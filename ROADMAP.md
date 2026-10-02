@@ -1,5 +1,22 @@
 # Ariadne roadmap
 
+## Context and follow-up
+
+**Status.** Current delivery direction; dated qualifications remain scoped.
+
+**Why this document exists.** [Project overview](README.md) sets the snapshot-based crash-investigation goal.
+
+**What this document establishes.** This is the current scope and delivery sequence: captured input, BAP effects, Rust analysis, reports and investigation questions.
+
+**Where to go next.**
+
+- [Active plans](Plans/README.md) — turn remaining work into explicit implementation and qualification steps.
+- [Assurance decision](docs/Ariadne/semantic-assurance.md) — defines the BAP trust boundary and retired ISA-proof scope.
+
+**What remains unresolved.** Full original-Windows qualification is still open. The BAP analysis-core replacement has not started; neither selecting BAP nor passing a fixture closes those requirements. The first fault-address question is implemented, but full original-Windows I4 qualification remains open. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
+
+For the wider context, see the optional [documentation map](docs/documentation-map.md).
+
 Ariadne produces evidence-bounded control-flow and data-flow results for crash
 investigations using pinned BAP instruction lifting. Ariadne validates its own
 transport, semantic projection, analysis and reports. The independent AMD64

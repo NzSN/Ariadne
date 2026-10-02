@@ -1,5 +1,22 @@
 # Stage E generated MirrorRust replay
 
+## Context and follow-up
+
+**Status.** Generated Stage E replay and mutation workflow.
+
+**Why this document exists.** [Typed replay design](../../docs/Ariadne/stage-e-mirrorrust-design.md) specifies compiler-owned interfaces and independent result observations.
+
+**What this document establishes.** This guide runs the generated stateflow and IR replay/mutation corpus and documents binding freshness, observer identity and regeneration boundaries.
+
+**Where to go next.**
+
+- [Full Stage E delivery](../../docs/Ariadne/stage-e-completion.md) — combines replay with native handoff and report acceptance.
+- [Compatibility record](../../docs/Ariadne/installed-modelmirrors-compatibility.md) — provides the bounded installed-stdio evidence.
+
+**What remains unresolved.** Finite conformance checks do not prove the Rust implementation correct for every valid request. A universal refinement proof remains open, and adapter facts remain premises. Stage E qualification also includes native handoffs and reports beyond replay alone.
+
+For the wider context, see the optional [documentation map](../../docs/documentation-map.md).
+
 The optional package uses `../../../MirrorRust` (`~/Repos/MirrorRust`) and
 compiler-generated `mirrorrust-v1` ports for the two independent Stage E engines.
 The root analysis crate remains dependency-free. Application ports own actual

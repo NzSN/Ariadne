@@ -1,5 +1,22 @@
 # Installed ModelMirrors and MirrorRust compatibility
 
+## Context and follow-up
+
+**Status.** Historical installed-tool compatibility; initial fixtures are narrower than later Stage E completion.
+
+**Why this document exists.** [Replay workflow](../../mbt/README.md) depends on negotiated compiler, server and client behavior.
+
+**What this document establishes.** The recorded local stdio run checked negotiated replay, digest rejection and cleanup against exact installed-server/client identities. It was an initial fixture tier, not the later complete Stage E campaign.
+
+**Where to go next.**
+
+- [Later Stage E completion](stage-e-completion.md) — addresses the broader generated-scenario and report coverage left open here.
+- [Current replay procedure](../../mbt/stage-e/README.md) — defines how to recheck the actual toolchain.
+
+**What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Later Stage E completion addresses the broader scenario/mutation/report gap stated in the original record.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Checked **2026-10-01** against `/home/nzsn/.local/bin/ModelMirrors` and the
 MirrorRust checkout used by Ariadne's core and Stage E integration.
 The [retained validation record](../../evidence/Ariadne/installed-modelmirrors-compatibility-validation.json)
@@ -16,8 +33,10 @@ replay** path:
 | Wrong semantic digests | All three interfaces reject before any port factory or observation |
 | Five existing core engine mutants | Genuine model mismatches at the expected actions, with port cleanup |
 
-All **11 checks** pass. The Stage E fixture coverage remains bounded; its
-broader scenario/mutation/report acceptance is still open.
+All **11 checks** passed in this recorded run. Its Stage E fixture coverage
+was bounded; the broader scenario/mutation/report gap was subsequently addressed
+by [Stage E completion](stage-e-completion.md). That later campaign remains
+finite and does not broaden this installed-tool record retroactively.
 
 ## Identity and version boundary
 

@@ -1,5 +1,23 @@
 # Ariadne investigation layer
 
+## Context and follow-up
+
+**Status.** Implemented first question with later questions planned.
+
+**Why this document exists.** [Real-capture slice](priority-1-real-capture-validation.md) demonstrates useful possible origins but leaves their explanation to the investigator.
+
+**What this document establishes.** The first question selects a captured memory-address operand and explains which earlier byte definitions could contribute to it. Answers preserve alternatives, evidence references and missing premises.
+
+**Where to go next.**
+
+- [Investigation plan](../../Plans/investigation-layer.md) — organizes the first question and later I5–I7 work.
+- [Implemented contracts](investigation-contracts.md) — define query identity, claim classes and evidence requirements.
+- [First delivery](investigation-validation.md) — records the exercised tier and open Windows acceptance.
+
+**What remains unresolved.** The first fault-address question is implemented, but full original-Windows I4 qualification remains open. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered. A possible producer does not prove a UAF, actual path or general root cause.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Proposed **2026-10-01**, against implementation `7de5a1e`.
 Status: **I0–I3 implemented; I4 fixture/Linux tier qualified in the working tree.**
 The [first-delivery record](investigation-validation.md) preserves the missing

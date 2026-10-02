@@ -1,5 +1,23 @@
 # Structured operands and conservative instruction effects
 
+## Context and follow-up
+
+**Status.** Historical LLVM-effects design; its conservative summary contract remains relevant.
+
+**Why this document exists.** [Original adapter](../llvm-mc-adapter.md) provided decoding but insufficiently precise uses and definitions.
+
+**What this document establishes.** The original design introduced byte-level register locations, normalized operands, uses/may-defs/must-defs and explicit unknown effects. That core summary contract survives the switch to BAP.
+
+**Where to go next.**
+
+- [Initial effects delivery](operand-effects-validation.md) — records implementation of the reviewed projection.
+- [BAP assessment](bap-core-refactor-assessment.md) — evaluates replacing hand-maintained semantics.
+- [Production backend design](bap-semantic-backend-design.md) — defines the current BIL projection into the same core contract.
+
+**What remains unresolved.** Hand-maintained LLVM effects are historical production design. Current effect generation is defined by the BAP protocol/projection; precise memory aliasing and general call effects remain limited.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Design proposal, 2026-09-26. Source baseline: `fb7f142`.
 The initial design is implemented; see its [implementation plan and delivery
 status](../../Plans/completed/operand-effects-plan.md). The scoped memory-immediate MOV extension is
@@ -16,8 +34,8 @@ The [Priority 4 Windows qualification stage](../../Plans/completed/priority-4-wo
 applies that policy to eight observed forms with reviewed ordinary control
 and explicitly opaque effects.
 The [BAP integration plan, Stage 1](../../Plans/bap-integration.md#stage-1-bap-semantic-backend)
-plans an external lifting/projection backend under this effect contract;
-Stage 2 subsequently covers analysis-core migration.
+records the implemented external lifting/projection backend under this effect
+contract. Stage 2 remains a planned analysis-core migration.
 
 ## Decision
 

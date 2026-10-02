@@ -1,5 +1,23 @@
 # Semantic assurance and retirement of independent ISA proofs
 
+## Context and follow-up
+
+**Status.** Current scope decision: BAP is trusted and independent ISA proofs are retired.
+
+**Why this document exists.** [BAP assessment](bap-core-refactor-assessment.md) separates external semantics from ownership of analysis correctness.
+
+**What this document establishes.** The decision retires independent AMD64 instruction-step proofs and makes pinned BAP lifting an explicit trusted dependency. Ariadne still owns transport, projection, analysis and evidence validation.
+
+**Where to go next.**
+
+- [Projection contract](bap-semantic-backend-design.md) — defines the boundary Ariadne still validates.
+- [Open backend work](../../Plans/bap-integration.md) — preserves Windows qualification and unstarted core migration.
+- [Rust proof boundary](stage-f-proof-and-performance.md) — remains open independently of ISA retirement.
+
+**What remains unresolved.** Full original-Windows qualification is still open. The BAP analysis-core replacement has not started; neither selecting BAP nor passing a fixture closes those requirements. The universal Rust refinement boundary remains open; retired ISA obligations were not discharged.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Decision: **2026-10-02**, approved by the user. Ariadne retires its independent
 AMD64 instruction-step project, including the user64 milestones, Stage D, Lean
 ISA proofs and full-manual coverage objective. Retirement changes project scope;

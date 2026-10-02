@@ -1,5 +1,22 @@
 # BAP Stage 1 projection: pinned source review
 
+## Context and follow-up
+
+**Status.** Pinned source and finite-corpus review; not a universal ISA proof.
+
+**Why this document exists.** [Projection design](bap-semantic-backend-design.md) requires typed BIL, correct aliases and conservative effects.
+
+**What this document establishes.** This review binds projection assumptions to the selected legacy x86 lifter, typed C API and finite corpus. It explains alias, extraction, memory and unknown-value handling.
+
+**Where to go next.**
+
+- [Delivery record](bap-only-removal-validation.md) — reports the exercised producer and adapter checks.
+- [Trust boundary](semantic-assurance.md) — explains which lifter and projection claims remain conditional.
+
+**What remains unresolved.** The review and corpus do not establish universal lifter correctness or all-opcode projection soundness. New forms require their own justified admission and negative controls.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 **Decision question.** Which effects can Ariadne's optional AMD64 backend project from the selected BAP build into canonical byte GPR cells, flags, `memory:any`, and `state:other` without inventing semantics? This is a source review and diagnostic probe, **not** a projection acceptance or ISA proof. It applies the [Stage 1 plan](../../Plans/bap-integration.md) and [effect contract](operand-effects-design.md). The selected release is BAP `v2.5.0-alpha` at `baa9022`; its installed library reports `2.5.0-alpha` and CLI `2.5.0-alpha+baa9022`. The [official release](https://github.com/BinaryAnalysisPlatform/bap/releases/tag/v2.5.0) supplies the `libbap-dev_2.5.0.deb` C header, extracted locally at `tmp/bap-setup/stable/usr/local/include/bap.h`. Source links below pin `baa9022`.
 
 ## Provider and coverage boundary

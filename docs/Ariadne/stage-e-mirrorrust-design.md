@@ -1,5 +1,23 @@
 # Stage E typed MirrorRust integration
 
+## Context and follow-up
+
+**Status.** Typed replay and report design for the two analysis machines.
+
+**Why this document exists.** [Stateflow design](../machine-state-design.md) adds a second analysis machine requiring independent conformance evidence.
+
+**What this document establishes.** The design connects stateflow and supplied-IR engines to generated typed replay ports, then adds native handoff checks, mutations and separate report contracts.
+
+**Where to go next.**
+
+- [Initial integration plan](../../Plans/completed/stage-e-mirrorrust-integration.md) — connects typed ports to negotiated replay.
+- [Completion plan](../../Plans/completed/stage-e-completion.md) — extends fixtures to generated replay, mutations and reports.
+- [Delivery record](stage-e-completion.md) — states the resulting finite acceptance tier.
+
+**What remains unresolved.** The resulting finite campaign checks observations against supplied models. It does not verify the semantic producer or establish a universal compiled-Rust refinement proof.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 The [first-stage implementation plan](../../Plans/completed/stage-e-mirrorrust-integration.md)
 connects the existing Stage E engines to `~/Repos/MirrorRust` through the
 prepared Mirrors compiler's `mirrorrust-v1` target.
@@ -15,7 +33,8 @@ covers the generated replay, mutation, handoff and report/CLI stage. Its
 
 ## Completion interfaces
 
-The completion stage introduces an optional `reports/` crate with strict,
+The completion stage introduced strict result reporting, now consolidated into
+the root package's `ariadne::reports` module with the `reports` feature. It supplies
 versioned machine-state request/semantic-input codecs and separate machine-state
 and LLVM IR result envelopes. JSON, text and DOT derive from one validated
 owned result. Machine addresses are canonical full-width hex; IR IDs remain

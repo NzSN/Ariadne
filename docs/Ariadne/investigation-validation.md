@@ -1,5 +1,23 @@
 # First fault-address investigation delivery
 
+## Context and follow-up
+
+**Status.** Retained first-question evidence; original-Windows I4 remains partial.
+
+**Why this document exists.** [Claim contract](investigation-contracts.md) requires identity-bound alternatives and explicit evidence gaps.
+
+**What this document establishes.** The first delivery exercises identity, address extraction, alternatives, aliases, opaque effects and report publication on both platform fixtures and a controlled Linux capture.
+
+**Where to go next.**
+
+- [Remaining work](../../Plans/investigation-layer.md) — tracks full I4 and later I5–I7 instead of implying general root-cause support.
+- [CLI examples](minidump-investigator-examples.md) — provide the surrounding captured-analysis workflow.
+- [Evidence guide](../../evidence/Ariadne/README.md) — explains archive and measurement identities.
+
+**What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. The first fault-address question is implemented, but full original-Windows I4 qualification remains open. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Implemented against the working tree following **`7de5a1e`** for
 [I0–I4](../../Plans/investigation-layer.md). **I0–I3 are implemented; I4 is
 qualified for both platform fixtures and the pinned controlled Linux capture.

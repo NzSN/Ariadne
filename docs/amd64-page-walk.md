@@ -1,5 +1,22 @@
 # AMD64 page-walk certificates
 
+## Context and follow-up
+
+**Status.** Retired ISA research; links below explain historical dependencies, not an active backlog.
+
+**Why this document exists.** Effective page permissions need page-table evidence. The motivating contract is [Historical motivation](amd64-memory-exceptions.md).
+
+**What this document establishes.** The page-walk component refines an effective page-map abstraction using explicit page-table and permission evidence.
+
+**Where to go next.**
+
+- [Related historical component](amd64-machine-access.md) — composes resolved memory spans with CPU effects.
+- [Retirement and current boundary](Ariadne/semantic-assurance.md) — ends the instruction-step objective without declaring its proof gaps solved.
+
+**What remains unresolved.** This research is retired. Missing architectural bindings or proof obligations below remain historical gaps, not active release tasks or solved claims. Production instruction effects now follow the BAP trust boundary.
+
+For the wider context, see the optional [documentation map](documentation-map.md).
+
 > **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
 > are historical reference, outside active development and qualification.
 > Milestones and commands below describe the former research track. See the

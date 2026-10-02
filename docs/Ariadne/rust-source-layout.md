@@ -1,5 +1,22 @@
 # Rust source layout consolidation
 
+## Context and follow-up
+
+**Status.** Delivered source consolidation and retained equivalence evidence.
+
+**Why this document exists.** [Completed layout plan](../../Plans/completed/rust-source-layout.md) requires one Cargo package without changing analysis behavior.
+
+**What this document establishes.** The delivery consolidated Rust modules, binaries, tests and generated bindings into one root Cargo package, with isolated campaign build directories and retained output-equivalence checks.
+
+**Where to go next.**
+
+- [Implementation guide](../implementation.md) — maps the consolidated modules to their responsibilities.
+- [Repository rules](../../AGENTS.md) — preserve source layout and isolated campaign build directories.
+
+**What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Consolidation did not close the missing Windows artifact requirement or add new semantic capability.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Delivered **2026-10-02**, following the
 [source-layout plan](../../Plans/completed/rust-source-layout.md).
 

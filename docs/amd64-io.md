@@ -1,5 +1,22 @@
 # AMD64 port-I/O foundation
 
+## Context and follow-up
+
+**Status.** Retired ISA research; links below explain historical dependencies, not an active backlog.
+
+**Why this document exists.** Device access needs permission and side-effect ordering contracts. The motivating contract is [Historical motivation](amd64-memory-exceptions.md).
+
+**What this document establishes.** The IO contracts separate permissions, device-environment behavior and CPU effects for direct port access and string IO composition.
+
+**Where to go next.**
+
+- [Related historical component](amd64-strings.md) — places IO into the staged string-iteration framework.
+- [Retirement and current boundary](Ariadne/semantic-assurance.md) — ends the instruction-step objective without declaring its proof gaps solved.
+
+**What remains unresolved.** This research is retired. Missing architectural bindings or proof obligations below remain historical gaps, not active release tasks or solved claims. Production instruction effects now follow the BAP trust boundary.
+
+For the wider context, see the optional [documentation map](documentation-map.md).
+
 > **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
 > are historical reference, outside active development and qualification.
 > Milestones and commands below describe the former research track. See the

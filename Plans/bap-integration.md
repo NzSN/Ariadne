@@ -1,5 +1,23 @@
 # BAP integration plan: semantic backend, then analysis core
 
+## Context and follow-up
+
+**Status.** Active plan: Stage 1 full Windows qualification open; Stage 2 unstarted.
+
+**Why this document exists.** [BAP assessment](../docs/Ariadne/bap-core-refactor-assessment.md) motivates staged integration behind the existing Rust contract.
+
+**What this document establishes.** Stage 1 integrates pinned BAP lifting and a conservative projection into the Rust engine. Stage 2 would replace analysis ownership and must preserve the existing observable contracts.
+
+**Where to go next.**
+
+- [Backend design](../docs/Ariadne/bap-semantic-backend-design.md) — defines the implemented Stage 1 boundary.
+- [BAP-only delivery](../docs/Ariadne/bap-only-removal-validation.md) — records the authorized default change and its narrower acceptance.
+- [Backend guide](../docs/Ariadne/modules/bap.md) — provides current build and qualification entry points.
+
+**What remains unresolved.** Full original-Windows qualification is still open. The BAP analysis-core replacement has not started; neither selecting BAP nor passing a fixture closes those requirements.
+
+For the wider context, see the optional [documentation map](../docs/documentation-map.md).
+
 Prepared **2026-10-01** against Ariadne `818f93e`.
 Status: **Stage 1 implemented; final qualification awaits the pinned Windows capture. Stage 2 has not started**.
 Design basis: [BAP assessment](../docs/Ariadne/bap-core-refactor-assessment.md),

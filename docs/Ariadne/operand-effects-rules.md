@@ -1,5 +1,22 @@
 # Operand/effect rule matrix
 
+## Context and follow-up
+
+**Status.** Historical effect-rule inventory, not BAP admission coverage.
+
+**Why this document exists.** [Effects design](operand-effects-design.md) defines byte locations, may-writes and justified definite replacements.
+
+**What this document establishes.** The matrix records exact reviewed LLVM opcode shapes, alias behavior and conservative effects in the historical rule implementation. It explains the source of older effect results.
+
+**Where to go next.**
+
+- [Rule validation](operand-effects-validation.md) — records positive cases and mutation sensitivity.
+- [BAP projection review](bap-projection-source-review.md) — explains the current semantic producer and tested translation boundary.
+
+**What remains unresolved.** This table is not the BAP admission list and does not imply support for every form of a mnemonic. Consult the BAP design/source review for current projection coverage.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Initial delivery 2026-09-26 used `user64-effects-v1.0`, LLVM MC 20.1.2.
 Stage A advances the preparation identity to `user64-effects-v1.1` and adds
 two source-reviewed memory-immediate MOV effect rules.

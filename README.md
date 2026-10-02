@@ -1,5 +1,22 @@
 # Ariadne
 
+## Context and follow-up
+
+**Status.** Project entry point.
+
+**Why this document exists.** [Roadmap](ROADMAP.md) defines the crash-investigation scope and delivery direction.
+
+**What this document establishes.** Ariadne recovers local control flow and possible value origins from one captured snapshot, then presents evidence-bound crash-investigation answers.
+
+**Where to go next.**
+
+- [Documentation index](docs/Ariadne/README.md) — find the current interfaces and contracts.
+- [Plan index](Plans/README.md) — separates remaining work from completed and retired work.
+
+**What remains unresolved.** Full original-Windows qualification is still open. The BAP analysis-core replacement has not started; neither selecting BAP nor passing a fixture closes those requirements. The first fault-address question is implemented, but full original-Windows I4 qualification remains open. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
+
+For the wider context, see the optional [documentation map](docs/documentation-map.md).
+
 Ariadne is a machine-code analysis project for understanding control flow and
 data dependencies in binaries and crash dumps. Its motivating use case is
 investigating Chromium and Electron crashes: start from instructions of interest,
@@ -61,12 +78,12 @@ The project uses **Rust 2024 and one root Cargo package**. Rust sources live in
 `target/`. The core-only `--no-default-features` build has no activated external
 crate dependencies. Default features enable the minidump and supplied-IR CLIs;
 `bench` and `mbt` enable the benchmark and MirrorRust replay tools.
-The separate native decoder pins LLVM MC 20.1.2. Reviewed rules now provide
-byte-level GPR and flag effects for the scoped registry. Memory remains
-conservative, calls remain opaque, and broader effect coverage and precise
-alias analysis remain future work. Decoder metadata alone does not provide
-the complete analysis. See the [initial effects evidence](docs/Ariadne/operand-effects-validation.md)
-and the [Stage A evidence](docs/Ariadne/stage-a-validation.md).
+The independent decode reference pins LLVM MC 20.1.2. BAP supplies current
+production effects; memory remains conservative and calls remain opaque.
+Broader projection coverage and precise alias analysis remain future work.
+The [initial effects evidence](docs/Ariadne/operand-effects-validation.md) and
+[Stage A evidence](docs/Ariadne/stage-a-validation.md) describe the historical
+LLVM rule path that preceded BAP.
 
 Build and test from the repository root:
 

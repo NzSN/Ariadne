@@ -1,5 +1,22 @@
 # Stage A memory-immediate MOV delivery
 
+## Context and follow-up
+
+**Status.** Historical delivery of two memory-immediate MOV rules.
+
+**Why this document exists.** [Source review](stage-a-source-review.md) justifies exact immediate width and memory-effect behavior.
+
+**What this document establishes.** Stage A added the two reviewed MOV effect bindings that let the initial captures decode their fault sites. Its checks exercise those exact forms and their negative controls.
+
+**Where to go next.**
+
+- [Predecessor-slice delivery](stage-b-c-validation.md) — addresses the remaining need for earlier captured producers.
+- [BAP-only delivery](bap-only-removal-validation.md) — records preservation of producer fixtures with the replacement backend.
+
+**What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Decoding the fault site alone did not establish an earlier producer; Stages B/C and the real-capture case address that gap.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Validated **2026-09-28 23:49 CST** as an uncommitted change based on
 `9bde052`. This closes the analyzer-effect scope in the
 [Stage A implementation plan](../../Plans/completed/stage-a-memory-immediate-mov-plan.md). It does

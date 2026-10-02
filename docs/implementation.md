@@ -1,5 +1,23 @@
 # Rust machine-analysis implementation
 
+## Context and follow-up
+
+**Status.** Core algorithm and Rust correspondence guide; dated tests are historical.
+
+**Why this document exists.** [Formal-model guide](../Specs/README.md) defines the request contract and transition system implemented in Rust.
+
+**What this document establishes.** The core validates an immutable request, recovers local edges, propagates may-reaching definitions to a fixed point and slices backward. Calls are visible while local analysis follows summary continuations.
+
+**Where to go next.**
+
+- [Core replay guide](../mbt/README.md) — checks observable Rust transitions against generated model traces.
+- [Proof boundary](Ariadne/stage-f-proof-and-performance.md) — states what finite tests leave unproved.
+- [Source-layout delivery](Ariadne/rust-source-layout.md) — supplies current package and module organization.
+
+**What remains unresolved.** Finite conformance checks do not prove the Rust implementation correct for every valid request. A universal refinement proof remains open, and adapter facts remain premises.
+
+For the wider context, see the optional [documentation map](documentation-map.md).
+
 The [Rust source-layout consolidation plan](../Plans/completed/rust-source-layout.md)
 implements the user-requested single Cargo package with sources in `src/`, tests
 in `tests/`, and build artifacts in the root `target/`.
@@ -138,9 +156,11 @@ generates an instruction origin. Entry and instruction origins have distinct
 tags even when their address and location match. Slicing begins only at the
 fixed point and follows all uses of each included instruction.
 
-The implementation uses straightforward ordered-set propagation and scans the
-frozen edge set for predecessor queries. It provides an inspectable executable
-baseline; large-binary performance has not been benchmarked.
+The implementation uses ordered-set propagation with predecessor indices and
+cached incoming definitions invalidated when local predecessor facts grow. The
+[historical workload optimization](Ariadne/priority-4-performance-validation.md)
+records preserved scheduling and outputs for its measured cases; it does not
+establish a universal large-binary performance guarantee.
 
 ## Validation and limits
 

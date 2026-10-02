@@ -1,5 +1,23 @@
 # Rendering analyzer outcomes
 
+## Context and follow-up
+
+**Status.** Pure core text/DOT rendering interface.
+
+**Why this document exists.** [Analyzer result](../implementation.md) exposes graph, possible origins and obligations that need readable presentation.
+
+**What this document establishes.** The pure renderer turns completed core outcomes into text and DOT while preserving graph edges, possible definitions, missing seeds and recovery obligations.
+
+**Where to go next.**
+
+- [Minidump report contract](stage-c-report-schema.md) — adds capture and preparation evidence to core rendering.
+- [Instruction overview delivery](priority-3-presentation-validation.md) — addresses readability of per-instruction output.
+- [Stateflow/IR reports](stage-e-report-contracts.md) — keep additional result families distinct.
+
+**What remains unresolved.** Core rendering alone does not provide capture provenance or domain claims. The minidump report layer adds capture evidence; investigation and Stage E use their own result contracts.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Implemented 2026-09-27 on top of `712a635`. The module presents
 `AnalysisResult`, the output of the Rust implementation of `Specs/Ariadne.tla`.
 It does not modify the analyzer, request validation, ISA effects or input readers.

@@ -1,5 +1,23 @@
 # Priority 1: controlled Chromium real-capture investigation
 
+## Context and follow-up
+
+**Status.** Historical controlled Chromium/Linux capture evidence.
+
+**Why this document exists.** [Evidence-chain design](priority-1-real-capture-design.md) requires an independently established entry and captured predecessor bytes.
+
+**What this document establishes.** The controlled Chromium/Linux case demonstrates a captured predecessor slice from an independently established earlier entry and retains a possible address producer with explicit gaps.
+
+**Where to go next.**
+
+- [Effect review](priority-2-effects-validation.md) — investigates whether opaque effects on that path can be narrowed.
+- [Fault-address delivery](investigation-validation.md) — adds typed explanations to the retained Linux query.
+- [Workload measurements](priority-4-performance-validation.md) — address scale beyond this small capture under the historical backend.
+
+**What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. The later investigation delivery explains the origins; it still does not establish an executed path or root cause.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Validated **2026-09-29 17:27 CST** against the
 [Priority 1 design](priority-1-real-capture-design.md) and
 [implementation plan](../../Plans/completed/priority-1-real-capture-plan.md). The

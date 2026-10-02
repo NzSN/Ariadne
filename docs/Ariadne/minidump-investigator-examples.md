@@ -1,5 +1,22 @@
 # Minidump investigator examples
 
+## Context and follow-up
+
+**Status.** Practical CLI examples; scope follows the current BAP/input contracts.
+
+**Why this document exists.** [CLI/report contract](stage-c-report-schema.md) defines entries, seeds, formats and publication behavior.
+
+**What this document establishes.** The examples show how to select an entry and seed, invoke the CLI and read the instruction overview and graph. They make the report contract operational for investigators.
+
+**Where to go next.**
+
+- [Backend setup](modules/bap.md) — resolves native helper/runtime prerequisites.
+- [Fault-address example](investigation-validation.md) — demonstrates the additional domain-question output and its limits.
+
+**What remains unresolved.** Examples require matching helpers and available captured bytes. They illustrate usage rather than qualify a new dump or prove that a listed producer actually executed.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 These commands run from the Ariadne repository root. Build the pinned LLVM MC
 helper as described in the [input guide](modules/input.md#build-and-verification),
 then set `ARIADNE_LLVM_MC` to its executable path. The CLI selects its Windows

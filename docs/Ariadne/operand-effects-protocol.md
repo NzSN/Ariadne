@@ -1,5 +1,22 @@
 # LLVM MC protocol 2
 
+## Context and follow-up
+
+**Status.** LLVM decode protocol reference; legacy semantic rules are not the production backend.
+
+**Why this document exists.** [Effects design](operand-effects-design.md) requires typed operands and instruction facts rather than assembly text.
+
+**What this document establishes.** Protocol 2 carries lengths, control facts and structured operands across the LLVM helper boundary. These facts can validate decoding independently of BAP semantics.
+
+**Where to go next.**
+
+- [Historical rule matrix](operand-effects-rules.md) — records how decoded shapes were originally bound to effects.
+- [BAP boundary](bap-semantic-backend-design.md) — specifies which decoded facts still serve as independent reference checks.
+
+**What remains unresolved.** Decoded operand metadata alone is not a sound complete instruction-effect model. Production effect derivation belongs to the BAP projection; the old rule path is reference material.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Implemented for LLVM MC 20.1.2. Default invocation and `--version` retain
 protocol 1 behavior. `--protocol-version` must return exactly:
 

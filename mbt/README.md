@@ -1,5 +1,23 @@
 # Model-based tests for Ariadne
 
+## Context and follow-up
+
+**Status.** Core generated replay workflow and finite conformance evidence.
+
+**Why this document exists.** [Rust/model correspondence](../docs/implementation.md) needs executable checks of each observable transition.
+
+**What this document establishes.** The gate negotiates a generated interface and replays model traces against real Rust transitions, checking observations, coverage and deliberate implementation mutants.
+
+**Where to go next.**
+
+- [Installed compatibility record](../docs/Ariadne/installed-modelmirrors-compatibility.md) — bounds the exercised tool/server/client path.
+- [Stage E replay](stage-e/README.md) — extends generated conformance to stateflow and supplied IR.
+- [Proof boundary](../docs/Ariadne/stage-f-proof-and-performance.md) — explains why replay is not a universal refinement proof.
+
+**What remains unresolved.** Finite conformance checks do not prove the Rust implementation correct for every valid request. A universal refinement proof remains open, and adapter facts remain premises. Installed-server compatibility applies only to the exercised transport and tool identities.
+
+For the wider context, see the optional [documentation map](../docs/documentation-map.md).
+
 The separate [Stage E MirrorRust integration](stage-e/README.md) provides typed
 ports for machine-state and LLVM IR analysis. Its two-fixture gate is separate
 from the core replay/mutation gate below.

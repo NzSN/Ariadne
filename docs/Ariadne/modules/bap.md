@@ -1,5 +1,23 @@
 # BAP minidump semantic backend
 
+## Context and follow-up
+
+**Status.** Current semantic backend usage and lifecycle.
+
+**Why this document exists.** [Backend contract](../bap-semantic-backend-design.md) defines the helper, typed transport and admitted effects.
+
+**What this document establishes.** This guide explains backend configuration, snapshot-scoped helper lifetime, preparation, clean shutdown and per-site semantic evidence. It is the usage entry point for production lifting.
+
+**Where to go next.**
+
+- [Native helper guide](../../../native/bap/README.md) — builds the pinned external runtime boundary.
+- [Validation record](../bap-only-removal-validation.md) — states tested coverage and unresolved qualification.
+- [Integration plan](../../../Plans/bap-integration.md) — tracks work beyond the current producer.
+
+**What remains unresolved.** Full original-Windows qualification is still open. The BAP analysis-core replacement has not started; neither selecting BAP nor passing a fixture closes those requirements. Native qualification needs the pinned helper and runtime, not only ordinary Cargo tests.
+
+For the wider context, see the optional [documentation map](../../documentation-map.md).
+
 `ariadne::bap` is the sole production minidump semantic adapter. Core-only Rust
 builds have no activated external dependencies; the library forbids unsafe code.
 BAP supplies typed BIL;

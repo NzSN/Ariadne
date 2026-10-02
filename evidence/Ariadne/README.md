@@ -1,5 +1,22 @@
 # Retained Ariadne evidence
 
+## Context and follow-up
+
+**Status.** Evidence interpretation, not a new acceptance result.
+
+**Why this document exists.** [Assurance decision](../../docs/Ariadne/semantic-assurance.md) requires results to retain their premises and scope.
+
+**What this document establishes.** JSON records identify checks, inputs and source/tool hashes; CSV files retain measurement samples; archive manifests bind logs and reports to exact bytes.
+
+**Where to go next.**
+
+- [Checkpoints](../../CHECKPOINTS.md) — connect evidence to dated deliveries.
+- [Layout delivery](../../docs/Ariadne/rust-source-layout.md) — explains the regression tier before later tooling changes.
+
+**What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Embedded paths preserve the layout at the original run.
+
+For the wider context, see the optional [documentation map](../../docs/documentation-map.md).
+
 This directory contains versioned validation results, benchmark samples, pinned
 capture-case definitions and evidence archives. Human-readable guides and
 contracts live in [docs/Ariadne](../../docs/Ariadne/README.md).

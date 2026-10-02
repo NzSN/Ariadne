@@ -1,5 +1,22 @@
 # AMD64 source and coverage inventory
 
+## Context and follow-up
+
+**Status.** Historical manual/form inventory; shared manual provenance is retained.
+
+**Why this document exists.** [Retired ISA design](../../docs/amd64-semantics-design.md) required pinned manual sources and explicit coverage.
+
+**What this document establishes.** The inventory pins manual sources, instruction forms and coverage ledgers so historical semantic claims can be traced to exact source material.
+
+**Where to go next.**
+
+- [Historical profile](../../docs/amd64-user64.md) — defines the former bounded acceptance cases.
+- [Current scope](../../docs/Ariadne/semantic-assurance.md) — explains why these inventories are no longer product gates.
+
+**What remains unresolved.** The ISA coverage campaign is retired. Some manual provenance remains shared with historical effect reviews; inventory counts are not counts of supported production instructions.
+
+For the wider context, see the optional [documentation map](../../docs/documentation-map.md).
+
 > **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
 > are historical reference, outside active development and qualification.
 > Milestones and commands below describe the former research track. See the

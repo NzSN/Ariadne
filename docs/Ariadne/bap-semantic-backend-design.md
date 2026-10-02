@@ -1,5 +1,23 @@
 # Stage 1 BAP semantic backend protocol and projection
 
+## Context and follow-up
+
+**Status.** Current production semantic protocol and bounded projection.
+
+**Why this document exists.** [BAP assessment](bap-core-refactor-assessment.md) motivates an isolated provider feeding the existing analyzer.
+
+**What this document establishes.** The implemented boundary transports typed BIL from a pinned isolated helper, checks identity and decoded facts, then projects admitted operations into conservative byte/flag/memory effects.
+
+**Where to go next.**
+
+- [Pinned source review](bap-projection-source-review.md) — checks native binding details and projection assumptions.
+- [Backend delivery](bap-only-removal-validation.md) — records removal of semantic fallback and remaining Windows limits.
+- [Integration plan](../../Plans/bap-integration.md) — tracks open workload qualification and later core migration.
+
+**What remains unresolved.** Full original-Windows qualification is still open. The BAP analysis-core replacement has not started; neither selecting BAP nor passing a fixture closes those requirements. Unsupported BIL and control disagreements remain explicit gaps.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Implementation contract for [Stage 1 of the BAP plan](../../Plans/bap-integration.md#stage-1-bap-semantic-backend).
 The [assessment](bap-core-refactor-assessment.md) remains the architecture basis.
 Stage 2 analysis-core replacement is separate. The [semantic assurance

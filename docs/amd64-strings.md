@@ -1,5 +1,22 @@
 # AMD64 string and repetition foundation
 
+## Context and follow-up
+
+**Status.** Retired ISA research; links below explain historical dependencies, not an active backlog.
+
+**Why this document exists.** Repeated string operations need iteration and restart control. The motivating contract is [Historical motivation](amd64-control.md).
+
+**What this document establishes.** The string framework describes staged iteration, repetition control and restart boundaries; it does not itself close every memory, IO or instruction-form obligation.
+
+**Where to go next.**
+
+- [Related historical component](amd64-io.md) — specifies the device-side obligations of INS/OUTS.
+- [Retirement and current boundary](Ariadne/semantic-assurance.md) — ends the instruction-step objective without declaring its proof gaps solved.
+
+**What remains unresolved.** This research is retired. Missing architectural bindings or proof obligations below remain historical gaps, not active release tasks or solved claims. Production instruction effects now follow the BAP trust boundary.
+
+For the wider context, see the optional [documentation map](documentation-map.md).
+
 > **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
 > are historical reference, outside active development and qualification.
 > Milestones and commands below describe the former research track. See the

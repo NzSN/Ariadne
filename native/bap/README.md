@@ -1,5 +1,22 @@
 # Pinned BAP instruction helper
 
+## Context and follow-up
+
+**Status.** Pinned native-helper setup and validation instructions.
+
+**Why this document exists.** [Native boundary design](../../docs/Ariadne/bap-semantic-backend-design.md) isolates OCaml/BAP behind a typed process protocol.
+
+**What this document establishes.** The helper hosts the pinned BAP runtime outside Rust and transports typed lifting results. Setup locks actual archive/library/plugin identities rather than relying on a release label.
+
+**Where to go next.**
+
+- [Rust backend guide](../../docs/Ariadne/modules/bap.md) — connects the helper to minidump preparation.
+- [Binding review](../../docs/Ariadne/bap-projection-source-review.md) — explains the measured accessor and projection assumptions.
+
+**What remains unresolved.** A successful helper build does not qualify every lift or the full workload. Rust projection checks and the original-Windows acceptance clause remain separate.
+
+For the wider context, see the optional [documentation map](../../docs/documentation-map.md).
+
 This Linux AMD64 host executable lifts reader-approved Windows/Linux
 AMD64 instruction prefixes with BAP. It hosts the OCaml runtime through the
 packaged typed C API. Rust stays outside that runtime.

@@ -1,5 +1,22 @@
 # Priority 4 real-path control review
 
+## Context and follow-up
+
+**Status.** Historical LLVM control bindings for the measured Windows path.
+
+**Why this document exists.** [Workload plan](../../Plans/completed/priority-4-workload-performance-plan.md) requires the selected captured graph to be traversable before timing it.
+
+**What this document establishes.** This source review justified exact control-only bindings needed to traverse the historical Windows workload, retaining opaque effects and rejecting unsupported shapes.
+
+**Where to go next.**
+
+- [Measured delivery](priority-4-performance-validation.md) — records the qualified historical workload.
+- [BAP control boundary](bap-semantic-backend-design.md) — supersedes production effect rules and checks decoded control agreement.
+
+**What remains unresolved.** The bindings were not full effect semantics or ISA proofs. Current production uses BAP admission and decoded-control agreement instead of the historical LLVM semantic route.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Reviewed 2026-09-30 for the Windows Electron workload in the
 [qualification plan](../../Plans/completed/priority-4-workload-performance-plan.md#2026-09-30-qualification-run).
 The eight bindings below admit ordinary continuation while retaining opaque

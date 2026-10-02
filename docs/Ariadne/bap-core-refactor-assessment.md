@@ -1,5 +1,23 @@
 # Could BAP become Ariadne's core?
 
+## Context and follow-up
+
+**Status.** Architectural assessment; backend delivery followed, core migration remains unstarted.
+
+**Why this document exists.** [Effects design](operand-effects-design.md) exposes the cost and coverage limits of maintaining local instruction rules.
+
+**What this document establishes.** The assessment separates two decisions: use BAP as a semantic provider, then consider BAP ownership of CFG/dataflow analysis. The provider is now implemented; the second decision remains a separate migration.
+
+**Where to go next.**
+
+- [Two-stage plan](../../Plans/bap-integration.md) — separates semantic-provider integration from analysis-core migration.
+- [Stage 1 design](bap-semantic-backend-design.md) — turns the provider proposal into a typed protocol and projection.
+- [Assurance decision](semantic-assurance.md) — retires the separate ISA-proof objective without claiming lifter correctness.
+
+**What remains unresolved.** Full original-Windows qualification is still open. The BAP analysis-core replacement has not started; neither selecting BAP nor passing a fixture closes those requirements.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 **Assessment, 2026-10-01.** The decision is whether the [Binary Analysis Platform (BAP)](https://github.com/BinaryAnalysisPlatform/bap) should replace Ariadne's Rust recovery and analysis core, or supply an alternative binary-semantics backend. The relevant workload is source-bound x86-64 crash investigation from captured bytes, with explicit uncertainty. This is a source and API assessment, not a BAP build, integration test, or runtime acceptance record.
 
 The [two-stage BAP integration implementation plan](../../Plans/bap-integration.md)

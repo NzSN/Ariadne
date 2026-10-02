@@ -1,5 +1,23 @@
 # Fault-address investigation contracts
 
+## Context and follow-up
+
+**Status.** Current fault-address explanation contract.
+
+**Why this document exists.** [Investigation design](investigation-layer-design.md) requires claims to preserve alternatives and missing evidence.
+
+**What this document establishes.** The contract binds the exact prepared/completed query to captured evidence and defines typed observed, derived and unknown claims. Per-byte producer alternatives remain distinct from a concrete whole-pointer history.
+
+**Where to go next.**
+
+- [Module guide](modules/investigation.md) — shows binding and explanation entry points.
+- [Validation record](investigation-validation.md) — exercises identity, aliases, gaps and claim/report behavior.
+- [Remaining questions](../../Plans/investigation-layer.md) — tracks full qualification and unimplemented higher-level capabilities.
+
+**What remains unresolved.** The first fault-address question is implemented, but full original-Windows I4 qualification remains open. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered. Stronger conclusions require additional accepted lifetime, path or object evidence.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Implemented first delivery for [I0–I4](../../Plans/investigation-layer.md).
 Schema: **`ariadne.fault-address-explanation/v1`**. The request is a captured
 instruction VA and an explicit memory-access index in the prepared query.

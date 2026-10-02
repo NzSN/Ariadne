@@ -1,5 +1,23 @@
 # Learning the theory behind Ariadne's assembly analysis
 
+## Context and follow-up
+
+**Status.** Conceptual reading guide; not an implementation acceptance record.
+
+**Why this document exists.** [Crash-investigation goal](../../README.md) motivates reasoning about possible origins from incomplete captured state.
+
+**What this document establishes.** The guide explains reaching definitions, fixed points, may/must writes, call summaries and slicing using the questions a crash investigator asks. It connects theory to the actual engine.
+
+**Where to go next.**
+
+- [Concrete engine](../implementation.md) — connects fixed points and slicing to Rust.
+- [Formal contracts](../../Specs/README.md) — make the state and transition assumptions explicit.
+- [Domain questions](investigation-layer-design.md) — explains how analysis primitives support investigator-facing answers.
+
+**What remains unresolved.** Conceptual examples do not validate a particular capture or instruction lift. Use the implementation and formal contracts to identify the premises of a concrete result.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 Source review: 2026-09-27. This is a learning note, not an implementation plan.
 
 The relevant field is **static program analysis**: deriving information about

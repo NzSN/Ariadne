@@ -1,5 +1,22 @@
 # LLVM MC byte-span adapter
 
+## Context and follow-up
+
+**Status.** Legacy byte-span adapter and current decode-reference background.
+
+**Why this document exists.** [Core input contract](implementation.md) requires decoded summaries before analysis can begin.
+
+**What this document establishes.** This guide explains byte-span decoding and the original adapter boundary. Production now uses LLVM MC only as an independent decode/control reference; BAP supplies minidump effects.
+
+**Where to go next.**
+
+- [Minidump guide](Ariadne/modules/input.md) — supplies captured bytes and address mapping absent from this adapter.
+- [BAP-only delivery](Ariadne/bap-only-removal-validation.md) — supersedes LLVM semantic selection while keeping decode-reference facts.
+
+**What remains unresolved.** The adapter does not establish captured provenance or fill missing dump bytes. The input module owns capture mapping; PE/ELF readers remain deferred.
+
+For the wider context, see the optional [documentation map](documentation-map.md).
+
 The optional native decoder in `native/llvm_mc/` uses LLVM MC 20.1.2 to decode
 x86-64 instruction bytes at snapshot-scoped virtual addresses. The Rust
 `ariadne::llvm_mc::ByteSnapshot` adapter calls that decoder and constructs the
@@ -10,9 +27,10 @@ slice engine. No LLVM code is linked into the Rust crate; its offline build and
 This is a byte-span adapter. It does **not** open a PE/ELF binary or crash dump,
 map VAs to file offsets, validate image identity, or prove that a supplied span
 is from the stated snapshot. Binary/dump readers must establish those facts
-before populating `ByteSnapshot`. The [separate minidump package](Ariadne/modules/input.md) now supplies captured
-memory and local instruction-start discovery. PE/ELF image readers, ELF core
-readers and the analyzer CLI remain separate roadmap work.
+before populating `ByteSnapshot`. The [minidump module](Ariadne/modules/input.md)
+now supplies captured memory and local instruction-start discovery within the
+root Cargo package. The [investigator CLI](Ariadne/stage-c-report-schema.md) is
+delivered; PE/ELF image and ELF-core readers remain deferred.
 
 ## Build and check
 

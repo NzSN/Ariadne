@@ -1,5 +1,22 @@
 # Native LLVM IR input
 
+## Context and follow-up
+
+**Status.** Current directly supplied and verified LLVM IR path.
+
+**Why this document exists.** [IR model](../../../Specs/README.md) defines block successors, SSA/phi dependencies and conservative memory edges.
+
+**What this document establishes.** The path verifies supplied LLVM .ll/.bc, normalizes one function and analyzes explicit control flow, SSA/phi dependencies, conservative memory predecessors and separate call edges.
+
+**Where to go next.**
+
+- [IR result contract](../stage-e-report-contracts.md) — defines identity and uncertainty fields.
+- [Delivery evidence](../stage-e-completion.md) — records verifier, replay and CLI acceptance.
+
+**What remains unresolved.** It neither recovers original LLVM IR from a binary nor proves alias-analysis facts. Calls and unknown memory retain their declared obligations.
+
+For the wider context, see the optional [documentation map](../../documentation-map.md).
+
 `ariadne-ir` accepts directly supplied LLVM `.ll` or `.bc` bytes for one
 function. It hashes an owned artifact snapshot, asks the pinned LLVM 20.1.2
 helper to parse and verify those same bytes, validates the normalized block,

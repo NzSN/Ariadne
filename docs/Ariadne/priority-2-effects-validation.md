@@ -1,5 +1,22 @@
 # Priority 2: path-driven effect decision for the first real case
 
+## Context and follow-up
+
+**Status.** Historical selected-path no-change effect decision.
+
+**Why this document exists.** [Path-driven review plan](../../Plans/completed/priority-2-path-driven-effects-plan.md) asks which real-path gaps justify new effect rules.
+
+**What this document establishes.** The selected-path review concluded that additional narrowing was not justified: opaque calls remained opaque, and the retained effects were sufficient for the scoped possible-producer result.
+
+**Where to go next.**
+
+- [BAP projection review](bap-projection-source-review.md) — describes the replacement semantic source.
+- [Claim contracts](investigation-contracts.md) — explain how unresolved call and memory effects remain visible in answers.
+
+**What remains unresolved.** A no-change decision closes that review, not effect coverage generally. A new path or unsupported BIL form may require new source review and projection tests.
+
+For the wider context, see the optional [documentation map](../documentation-map.md).
+
 The first-case no-change decision below remains historical evidence. The
 2026-09-30 larger Windows workload subsequently required
 [eight source-reviewed control-only bindings](priority-4-control-source-review.md).

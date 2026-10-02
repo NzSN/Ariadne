@@ -1,5 +1,22 @@
 # AMD64 architectural CPU state
 
+## Context and follow-up
+
+**Status.** Retired ISA research; links below explain historical dependencies, not an active backlog.
+
+**Why this document exists.** The historical design requires explicit state banks and validity predicates. The motivating contract is [Historical motivation](amd64-semantics-design.md).
+
+**What this document establishes.** This component defines CPU-local state banks, mode/profile facts and validity predicates needed to state instruction contracts.
+
+**Where to go next.**
+
+- [Related historical component](amd64-operands.md) — binds decoded payloads to represented registers and values.
+- [Retirement and current boundary](Ariadne/semantic-assurance.md) — ends the instruction-step objective without declaring its proof gaps solved.
+
+**What remains unresolved.** This research is retired. Missing architectural bindings or proof obligations below remain historical gaps, not active release tasks or solved claims. Production instruction effects now follow the BAP trust boundary.
+
+For the wider context, see the optional [documentation map](documentation-map.md).
+
 > **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
 > are historical reference, outside active development and qualification.
 > Milestones and commands below describe the former research track. See the

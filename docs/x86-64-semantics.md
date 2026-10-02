@@ -1,5 +1,22 @@
 # Executable x86-64 instruction semantics
 
+## Context and follow-up
+
+**Status.** Retired initial instruction-rule research.
+
+**Why this document exists.** [Stateflow design](machine-state-design.md) requires supplied transition semantics for a frozen graph.
+
+**What this document establishes.** The initial TLA+ rules supplied a small register/immediate semantics relation for abstract stateflow and explicit unsupported behavior.
+
+**Where to go next.**
+
+- [Historical expansion](amd64-semantics-design.md) — attempted broader architectural coverage.
+- [Retirement decision](Ariadne/semantic-assurance.md) — supersedes the independent ISA objective.
+
+**What remains unresolved.** This independent ISA work is retired. Its scoped rules do not establish a production CPU executor or current BAP coverage.
+
+For the wider context, see the optional [documentation map](documentation-map.md).
+
 > **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
 > are historical reference, outside active development and qualification.
 > Milestones and commands below describe the former research track. See the

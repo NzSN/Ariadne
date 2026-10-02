@@ -1,5 +1,22 @@
 # Stage E: first MirrorRust integration stage
 
+## Context and follow-up
+
+**Status.** Completed plan, archived; acceptance is limited to the recorded scope.
+
+**Why this document exists.** [Motivating design](../../docs/Ariadne/stage-e-mirrorrust-design.md) defines the problem and contract this plan implements.
+
+**What this document establishes.** This first-stage plan delivered generated typed ports and the initial stateflow/IR fixture replay. The later Stage E completion expanded that initial integration to a broader finite acceptance campaign.
+
+**Where to go next.**
+
+- [Delivery and follow-up](../../docs/Ariadne/stage-e-completion.md) — records what was exercised and which limits remain.
+- [Active plan index](../README.md) — prevents completed steps from being mistaken for pending work.
+
+**What remains unresolved.** The implementation steps below are archived, not a current task list. These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Finite conformance checks do not prove the Rust implementation correct for every valid request. A universal refinement proof remains open, and adapter facts remain premises.
+
+For the wider context, see the optional [documentation map](../../docs/documentation-map.md).
+
 > **Archived 2026-10-02: completed within its recorded scope.**
 > This is a historical plan, not an active task list. Evidence remains tied
 > to its original sources, backend and workload. See the [plan index](../README.md)

@@ -1,5 +1,23 @@
 # Ariadne formal model
 
+## Context and follow-up
+
+**Status.** Analysis-model authority; ISA research sections are historical.
+
+**Why this document exists.** [Project overview](../README.md) motivates snapshot-scoped control flow and possible value origins.
+
+**What this document establishes.** The analysis specifications define admissible inputs, state transitions, invariants and the meaning of partial results for recovery, stateflow and supplied IR.
+
+**Where to go next.**
+
+- [Rust implementation](../docs/implementation.md) — maps model actions to executable analysis.
+- [Stateflow design](../docs/machine-state-design.md) — extends a frozen recovered CFG with supplied abstract transitions.
+- [Assurance decision](../docs/Ariadne/semantic-assurance.md) — separates active analysis models from retired ISA proofs.
+
+**What remains unresolved.** Finite conformance checks do not prove the Rust implementation correct for every valid request. A universal refinement proof remains open, and adapter facts remain premises. Independent architectural instruction-step proofs are retired.
+
+For the wider context, see the optional [documentation map](../docs/documentation-map.md).
+
 `AriadneTypes.tla` defines semantic Apalache aliases shared across the suite.
 `AriadneMachineCommon.tla` defines stateless knowledge shared by the machine
 models. `Ariadne.tla` specifies the machine-code analysis engine for binary and

@@ -1,5 +1,22 @@
 # AMD64 control-transfer foundation
 
+## Context and follow-up
+
+**Status.** Retired ISA research; links below explain historical dependencies, not an active backlog.
+
+**Why this document exists.** Value kernels leave branch targets, next-RIP and stack effects unresolved. The motivating contract is [Historical motivation](amd64-integer-semantics.md).
+
+**What this document establishes.** The control components cover conditional predicates, target formation, next-RIP and selected stack effects under explicit execution assumptions.
+
+**Where to go next.**
+
+- [Related historical component](amd64-user64.md) — records the former near-control/stack milestone and its incomplete acceptance.
+- [Retirement and current boundary](Ariadne/semantic-assurance.md) — ends the instruction-step objective without declaring its proof gaps solved.
+
+**What remains unresolved.** This research is retired. Missing architectural bindings or proof obligations below remain historical gaps, not active release tasks or solved claims. Production instruction effects now follow the BAP trust boundary.
+
+For the wider context, see the optional [documentation map](documentation-map.md).
+
 > **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
 > are historical reference, outside active development and qualification.
 > Milestones and commands below describe the former research track. See the
