@@ -1,5 +1,10 @@
 # AMD64 page-walk certificates
 
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](Ariadne/semantic-assurance.md).
+
 The page-walk component refines the effective `PageMap` abstraction from the
 memory foundation. Its authoritative operators are in
 [AMD64PageWalk.tla](../Specs/AMD64PageWalk.tla); the executable typed validator

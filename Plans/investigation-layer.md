@@ -49,7 +49,7 @@ These constraints are grounded in [materialize.rs](../src/input/materialize.rs),
 
 ## Module layout and dependencies
 
-The user-requested [source-layout consolidation](rust-source-layout.md) places
+The user-requested [source-layout consolidation](completed/rust-source-layout.md) places
 the implemented investigation in **`src/investigation/`**, with unsafe code
 forbidden. It shares the root manifest and lockfile. Core-only builds use
 `--no-default-features`; the following relationships are module dependencies.

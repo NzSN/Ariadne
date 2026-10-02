@@ -37,7 +37,7 @@ Both target profiles exercise the 137-entry frozen LLVM opcode registry.
 
 ## Acceptance evidence
 
-The final source-bound report is [minidump-validation.json](minidump-validation.json).
+The final source-bound report is [minidump-validation.json](../../evidence/Ariadne/minidump-validation.json).
 It records all command results, log locations, input/source hashes and whether
 sources stayed unchanged through the run. Its effects-regression gate also
 executes the preexisting Rust, native, effect-model, effect-mutation and core

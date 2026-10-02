@@ -1,14 +1,14 @@
 # Stage C minidump investigator report schema
 
-Design fixed 2026-09-29 for [Stage C of the implementation plan](remaining-implementation-plan.md#c--investigator-cli-and-versioned-output).
+Design fixed 2026-09-29 for implemented minidump report contract.
 The [file-reader design](file-reader-design.md) supplies captured bytes and
 provenance; `ariadne::render` supplies core analyzer facts. This report layer
 joins them without changing the dependency-free analyzer crate.
-The [Priority 1 real-capture implementation plan](priority-1-real-capture-plan.md)
+The [Priority 1 real-capture implementation plan](../../Plans/completed/priority-1-real-capture-plan.md)
 uses this unchanged schema to qualify a historical predecessor slice.
 Its [evidence-chain design](priority-1-real-capture-design.md) keeps the
 independent entry witness in a separate case manifest.
-The [Priority 3 presentation implementation plan](priority-3-investigator-presentation-plan.md)
+The [Priority 3 presentation implementation plan](../../Plans/completed/priority-3-investigator-presentation-plan.md)
 adds a readable text overview under the unchanged JSON v1 and DOT graph
 contracts; see its [design](priority-3-investigator-presentation-design.md).
 

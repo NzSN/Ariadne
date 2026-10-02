@@ -1,5 +1,10 @@
 # AMD64 foundation validation, 2026-09-22
 
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](Ariadne/semantic-assurance.md).
+
 This record covers source pinning/enumeration and the 64-bit-mode GPR storage
 kernel. It does not certify complete instruction forms, all architectural state,
 hardware conformance or whole-module TLA+/Lean equivalence.

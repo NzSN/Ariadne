@@ -6,7 +6,7 @@ identities under ruleset `user64-effects-v1.1` without changing this historical
 report's source hashes.
 
 2026-09-26; implementation in the working tree based on `fb7f142`.
-No commit or push. P0–P6 of [the plan](operand-effects-plan.md) are delivered
+No commit or push. P0–P6 of [the plan](../../Plans/completed/operand-effects-plan.md) are delivered
 within the scope below. Full instruction-step acceptance is unchanged.
 
 ## Delivered behavior
@@ -33,7 +33,7 @@ fallthrough. Undefined flags remain annotated may-writes without a must-kill.
 ## Execution evidence
 
 All gates passed in `/tmp/ariadne-effects-acceptance-n883e7y3`.
-The [retained JSON report](operand-effects-validation.json) records commands,
+The [retained JSON report](../../evidence/Ariadne/operand-effects-validation.json) records commands,
 source SHA-256 values, durations, log locations and source-stability results.
 It snapshots broader TLA+ sources conservatively; their presence in that hash
 map does not imply the full AMD64 model suite was executed.

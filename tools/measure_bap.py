@@ -16,7 +16,7 @@ def sources():
  paths=source_files()
  for tree in ['src','src/input','src/reports','src/bap','src/investigation','src/bench','native/llvm_mc','native/bap']:
   paths.update(p for p in (ROOT/tree).rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix!='.md')
- paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','tools/measure_bap.py','docs/Ariadne/priority-1-real-capture-case.json','docs/Ariadne/priority-4-real-capture-case.json'])
+ paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','tools/measure_bap.py','evidence/Ariadne/priority-1-real-capture-case.json','evidence/Ariadne/priority-4-real-capture-case.json'])
  return {str(p.relative_to(ROOT)):sha(p) for p in sorted(paths)}
 def main():
  before=sources()
@@ -26,10 +26,10 @@ def main():
  for exe in ['ariadne-minidump','bap_minidump']:
   run(['cargo','build','--offline','--locked','--release',*(['--features','bench'] if exe=='bap_minidump' else []),'--bin',exe])
  cases=[('stage-b-linux',ROOT/'tests/input/fixtures/stage_b_linux.dmp','0x401000','0x401006',False),('stage-b-windows',ROOT/'tests/input/fixtures/stage_b_windows.dmp','0x7ff700001000','0x7ff700001006',False),('controlled-not',ROOT/'tests/input/fixtures/bap_precision_linux.dmp','0x401000','0x401006',False),('real-linux-34',ROOT/'tmp/priority1/chromium-member-uaf.dmp','0x566817922dc5','0x566817922e42',True)]
- pinned_linux=json.loads((ROOT/'docs/Ariadne/priority-1-real-capture-case.json').read_text())
+ pinned_linux=json.loads((ROOT/'evidence/Ariadne/priority-1-real-capture-case.json').read_text())
  expected_linux=pinned_linux['capture']['sha256']
  if sha(cases[-1][1])!=expected_linux:raise RuntimeError('real Linux artifact hash mismatch')
- windows=json.loads((ROOT/'docs/Ariadne/priority-4-real-capture-case.json').read_text());windows_checked=args.windows_dump is not None
+ windows=json.loads((ROOT/'evidence/Ariadne/priority-4-real-capture-case.json').read_text());windows_checked=args.windows_dump is not None
  if windows_checked:
   if sha(args.windows_dump)!=windows['capture']['sha256'] or args.windows_dump.stat().st_size!=windows['capture']['bytes']:raise RuntimeError('98-instruction Windows artifact hash mismatch')
   cases.append(('real-windows-98',args.windows_dump,windows['query']['entry_va'],windows['query']['seed_va'],True))

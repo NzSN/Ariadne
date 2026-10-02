@@ -13,7 +13,7 @@ The [BAP adapter](docs/Ariadne/modules/bap.md) is now the sole production minidu
 backend. It projects a finite typed-BIL subset into byte-register, flag and
 weak-memory effects. LLVM MC 20 remains an independent decode/control reference;
 its semantic selector and automatic effect fallback have been removed.
-The [Stage 1 removal plan](Plans/bap-only-semantics.md) records the requested
+The [Stage 1 removal plan](Plans/completed/bap-only-semantics.md) records the requested
 default change. Unsupported BIL retains explicit opaque/control gaps.
 Historical [LLVM effect-rule research](docs/Ariadne/operand-effects-rules.md)
 and its formal tests remain reference evidence, distinct from production BAP.
@@ -35,31 +35,26 @@ JSON v1 and DOT graph semantics remain unchanged. The first
 is bounded by a 34-node real capture and does not qualify larger workloads.
 The [rendering module](docs/Ariadne/result-rendering.md) now produces readable
 text and Graphviz DOT from analyzer outcomes.
-The separate [abstract machine-state and verifier-accepted native LLVM IR paths](docs/Ariadne/stage-e-validation.md)
-now pass [Stage E generated replay, mutation and report/CLI acceptance](docs/Ariadne/stage-e-completion.md)
-within the recorded finite corpus. Initial x86-64 instruction semantics retain
-their distinct TLA+/Lean acceptance gate.
+The separate abstract-stateflow and supplied-IR paths pass
+[Stage E generated replay, mutation and report/CLI acceptance](docs/Ariadne/stage-e-completion.md)
+within the recorded finite corpus. Independent ISA proof artifacts are retained
+as retired historical reference.
 
-The [long-term AMD64 formal track](docs/amd64-user64.md) targets a verified
-64-bit user-mode subset, starting with 49 register/immediate form cases and
-then near control/stack and common RAM operations. Its gate remains **0/49**;
-it does not block the [practical minidump workflow](docs/Ariadne/practical-assurance-priorities.md).
-Unsupported semantics retain explicit analysis uncertainty. Full Volume 3
-general-purpose and Volume 1 state coverage remains the
-[broader design target](docs/amd64-semantics-design.md). Its
-[pinned source inventory](Specs/AMD64/README.md) and
-[TLA+/Lean foundations](lean/README.md) now include CPU-state representation,
-instruction-form validation, memory/exception contracts and integer kernels.
-The conservative default fallback foundation is accepted for the exact user64
-profile hash. Register-core acceptance remains pending: its 49 paired bodies
-are recorded separately from its zero verified instruction steps. TLA+ stays
-authoritative and the
-[task list](docs/amd64-semantics-tasks.md) tracks the proof and implementation work.
-The [roadmap](ROADMAP.md) orders minidump input, CFG recovery, conservative
-effects and investigator output while formal ISA acceptance advances separately.
+Ariadne relies on a pinned BAP lifter for AMD64 instruction semantics and
+validates its own semantic projection and analysis. Results remain conditional
+on supported lifting behavior and captured evidence. The independent AMD64
+instruction-step/Lean track is **retired**, including its user64 milestones and
+full-manual roadmap. Historical artifacts remain available for reference.
+The [semantic assurance decision](docs/Ariadne/semantic-assurance.md) defines
+this boundary. Analysis-level TLA+ specifications, replay and mutation checks
+remain active.
 The [Stage F record](docs/Ariadne/stage-f-proof-and-performance.md) states the
 remaining Rust refinement boundary and reports a repeatable performance
 baseline without claiming a proof or qualified solver optimization.
+
+The [documentation index](docs/Ariadne/README.md) links current guides and
+contracts. The [plan index](Plans/README.md) separates active work, completed
+plans and retired research.
 
 The project uses **Rust 2024 and one root Cargo package**. Rust sources live in
 `src/`, integration tests and fixtures in `tests/`, and build artifacts in
@@ -82,7 +77,7 @@ cargo clippy --offline --locked --all-features --all-targets -- -D warnings
 ```
 
 The build produces `target/release/ariadne-minidump` and
-`target/release/ariadne-ir`. The [source-layout plan](Plans/rust-source-layout.md)
+`target/release/ariadne-ir`. The [source-layout plan](Plans/completed/rust-source-layout.md)
 records the consolidation, and the [implementation guide](docs/implementation.md)
 describes the modules and validation scope.
 The [layout delivery](docs/Ariadne/rust-source-layout.md) records source and CLI

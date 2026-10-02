@@ -1,5 +1,10 @@
 # AMD64 control-transfer foundation
 
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](Ariadne/semantic-assurance.md).
+
 The control workstream owns the 21 General-Purpose Instruction Reference
 entries assigned to C3. This milestone implements checked conditional
 predicates, near-target formation, explicit next-RIP retirement, executable

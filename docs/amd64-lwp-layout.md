@@ -1,5 +1,10 @@
 # AMD64 Lightweight Profiling control-block layout
 
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](Ariadne/semantic-assurance.md).
+
 The paired layout model is in `Specs/AMD64LWPLayout.tla` and
 `lean/AMD64/LWPLayout.lean`. Its authority is AMD APM Volume 2 revision 3.45:
 LWP capability enumeration on PDF pages 535-539 and the LWPCB layout and fields

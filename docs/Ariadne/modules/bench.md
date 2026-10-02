@@ -4,7 +4,7 @@ The root package's `bench` feature enables five deterministic synthetic graph
 families and, optionally, the pinned Stage B Windows minidump path. It uses
 the root analyzer's operation counters and a benchmark-only allocation
 counter. It does not alter the analyzer's public result or fixed schedule.
-The [Priority 4 implementation plan](../priority-4-workload-performance-plan.md)
+The [Priority 4 implementation plan](../../../Plans/completed/priority-4-workload-performance-plan.md)
 sets the next captured-workload measurement and decision criteria.
 Its [measurement design](../priority-4-workload-performance-design.md)
 defines what the harness can and cannot claim.

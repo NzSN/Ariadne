@@ -1,8 +1,8 @@
 # Stages B and C: captured predecessor slice and investigator report
 
 Validated **2026-09-29 10:16 CST** by the source-bound
-[B–F progress run](stage-b-f-validation.json). These stages implement the
-[remaining plan](remaining-implementation-plan.md#b--establish-a-useful-real-dump-backward-slice)
+[B–F progress run](../../evidence/Ariadne/stage-b-f-validation.json). These stages implement the
+[current roadmap](../../ROADMAP.md)
 for the current minidump-only input scope. The two historical Breakpad dumps
 remain independently pinned Stage A crash-IP regressions.
 

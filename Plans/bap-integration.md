@@ -9,8 +9,8 @@ Design basis: [BAP assessment](../docs/Ariadne/bap-core-refactor-assessment.md),
 The requested order is Stage 1, an optional BAP semantic backend feeding the
 existing Rust engine, followed by Stage 2, BAP-owned recovery and analysis.
 Stage 2 depends on a passing Stage 1 record. Partial acceptance does not
-satisfy that dependency. Existing Stage D ISA proofs and Stage F universal
-refinement remain independent research obligations.
+satisfy that dependency. Stage D ISA proofs are [retired](../docs/Ariadne/semantic-assurance.md);
+Stage F universal refinement remains a separate research boundary.
 
 The [Stage 1 protocol/projection implementation design](../docs/Ariadne/bap-semantic-backend-design.md)
 records the selected isolated C bridge hosting BAP's OCaml runtime, actual
@@ -35,7 +35,7 @@ Keep the root analysis crate dependency-free. Proposed ownership:
 `native/bap/` for toolchain/helper/passes, `bap/` for the Rust protocol and
 backend facade, `input/` for captured input/query orchestration, `reports/`
 for output, and `mbt/` for generated replay. The
-[Stage 1 follow-up](bap-only-semantics.md) removes backend selection and LLVM
+[Stage 1 follow-up](completed/bap-only-semantics.md) removes backend selection and LLVM
 semantic fallback; BAP is the sole minidump provider. Stage 2
 paths/options remain proposals.
 
@@ -177,7 +177,7 @@ Retain separate Stage 1 and Stage 2 records under `docs/Ariadne/` with exact
 source/build/profile IDs, inputs, normalized outputs, query/host settings,
 coverage, first mismatches and unavailable checks. Existing Stage E records
 remain evidence for their pinned Rust sources and do not transfer automatically.
-Neither stage changes the meaning of Stage D's 0/49 gate or Stage F's proof goal.
+Stage D is retired; neither BAP stage establishes Stage F's universal proof goal.
 
 Resolve during S0/S1: BAP/OCaml/plugin build and lifter selection; host packaging
 for both dump target OSes; raw-byte API behavior; sparse-memory handling;
@@ -190,9 +190,8 @@ selected build.
 
 ## Stage 1 execution status
 
-The [implementation and validation report](../docs/Ariadne/bap-stage1-validation.md)
-and [machine-readable record](../docs/Ariadne/bap-stage1-validation.json)
-track the selected build. S0–S3 are implemented. S4 exercises 34 native BIL
+The [historical BAP Stage 1 validation record](../evidence/Ariadne/bap-stage1-validation.json)
+tracks the selected build. S0–S3 are implemented. S4 exercises 34 native BIL
 cases, strict transport, both platform fixtures, full-state model replay,
 15 real producer/adapter mutants, and the existing Rust/Stage E regression.
 S5 includes startup/lift/projection/analysis/render timing and a controlled

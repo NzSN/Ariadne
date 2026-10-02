@@ -2,17 +2,17 @@
 
 Design proposal, 2026-09-26. Source baseline: `fb7f142`.
 The initial design is implemented; see its [implementation plan and delivery
-status](operand-effects-plan.md). The scoped memory-immediate MOV extension is
-also implemented; see its [Stage A implementation plan](stage-a-memory-immediate-mov-plan.md)
+status](../../Plans/completed/operand-effects-plan.md). The scoped memory-immediate MOV extension is
+also implemented; see its [Stage A implementation plan](../../Plans/completed/stage-a-memory-immediate-mov-plan.md)
 and [validation record](stage-a-validation.md). Neither delivery certifies a
 complete AMD64 instruction step.
 Further exact effect rules are prioritized by the
-[practical assurance queue](practical-assurance-priorities.md), while the
-49-case formal acceptance gate remains a long-term research purpose.
-The [Priority 2 path-driven effects implementation plan](priority-2-path-driven-effects-plan.md)
+[practical assurance queue](practical-assurance-priorities.md). The independent
+instruction-step track is [retired](semantic-assurance.md).
+The [Priority 2 path-driven effects implementation plan](../../Plans/completed/priority-2-path-driven-effects-plan.md)
 limits further bindings to exact forms observed on independently rooted
 captured paths.
-The [Priority 4 Windows qualification stage](priority-4-workload-performance-plan.md#2026-09-30-qualification-run)
+The [Priority 4 Windows qualification stage](../../Plans/completed/priority-4-workload-performance-plan.md#2026-09-30-qualification-run)
 applies that policy to eight observed forms with reviewed ordinary control
 and explicitly opaque effects.
 The [BAP integration plan, Stage 1](../../Plans/bap-integration.md#stage-1-bap-semantic-backend)
@@ -27,9 +27,9 @@ effects in Rust. Feed the existing `AnalysisRequest` without changing the
 recovery, reaching-definition, or slicing algorithms.
 
 The first deliverable is useful provenance for a small, explicit set of forms.
-It does not require completing the 277-case user64 instruction-step milestone.
-An effect rule has its own source review and tests; only independently accepted
-user64 evidence can label a complete instruction step verified.
+Effect rules have their own source review and tests. Production now uses BAP
+lifting and the typed projection contract; no independent ISA-step acceptance
+is an active deliverable. The LLVM effect design below is historical reference.
 
 ```mermaid
 flowchart TD

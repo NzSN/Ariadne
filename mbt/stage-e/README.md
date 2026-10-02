@@ -6,9 +6,9 @@ The root analysis crate remains dependency-free. Application ports own actual
 Rust analyzers; generated modules own codecs, dispatch and lifecycle. Registered
 factories construct ports only after exact semantic-digest admission.
 
-The [completion plan](../../Plans/stage-e-completion.md) and
+The [completion plan](../../Plans/completed/stage-e-completion.md) and
 [design](../../docs/Ariadne/stage-e-mirrorrust-design.md) define this stage.
-The original [first integration plan](../../Plans/stage-e-mirrorrust-integration.md)
+The original [first integration plan](../../Plans/completed/stage-e-mirrorrust-integration.md)
 and its two-fixture record remain historical evidence.
 
 ## Checked campaign
@@ -66,7 +66,7 @@ non-system installation. `ARIADNE_REAL_DUMPS` selects the existing Breakpad
 fixtures used by the minidump regression gate. Prepared archives in ignored
 `tmp/llvm20-headers` and `tmp/graphviz-headers` are recognized locally.
 
-[Retained completion evidence](../../docs/Ariadne/stage-e-completion-validation.json)
+[Retained completion evidence](../../evidence/Ariadne/stage-e-completion-validation.json)
 establishes bounded conformance and report/CLI acceptance. ISA-step acceptance,
 faithfulness of supplied semantic relations, universal Rust refinement and
 MirrorGate restricted execution are separate boundaries.

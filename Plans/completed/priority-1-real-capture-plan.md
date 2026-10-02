@@ -1,15 +1,20 @@
 # Priority 1 implementation plan: a real-capture predecessor slice
 
+> **Archived 2026-10-02: completed within its recorded scope.**
+> This is a historical plan, not an active task list. Evidence remains tied
+> to its original sources, backend and workload. See the [plan index](../README.md)
+> for current work and separate qualification requirements.
+
 Plan dated **2026-09-29** for practical priority 1 in the
-[assurance queue](practical-assurance-priorities.md). It executes the
-[real-capture predecessor-slice design](priority-1-real-capture-design.md)
+[assurance queue](../../docs/Ariadne/practical-assurance-priorities.md). It executes the
+[real-capture predecessor-slice design](../../docs/Ariadne/priority-1-real-capture-design.md)
 and extends the delivered, tool-produced
-[Stage B/C fixture and CLI](stage-b-c-validation.md); that fixture
+[Stage B/C fixture and CLI](../../docs/Ariadne/stage-b-c-validation.md); that fixture
 remains a regression, not evidence of a historical execution. The relevant
-[reader design](file-reader-design.md) and [report contract](stage-c-report-schema.md)
+[reader design](../../docs/Ariadne/file-reader-design.md) and [report contract](../../docs/Ariadne/stage-c-report-schema.md)
 still limit input to Windows/Linux AMD64 minidumps and captured bytes.
 The 2026-09-29 controlled Chromium/Linux case is now
-[qualified by source-bound evidence](priority-1-real-capture-validation.md).
+[qualified by source-bound evidence](../../docs/Ariadne/priority-1-real-capture-validation.md).
 The steps below remain the acceptance procedure for that exact case or a new
 candidate; they do not license reusing its result for a changed artifact.
 

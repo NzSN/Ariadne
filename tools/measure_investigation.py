@@ -9,7 +9,7 @@ def sources():
  paths=source_files()
  for tree in ['src','src/bap','src/input','src/reports','src/investigation','src/bench','native/bap','native/llvm_mc']:
   paths.update(p for p in (ROOT/tree).rglob('*') if p.is_file() and p.suffix!='.md' and '__pycache__' not in p.parts)
- paths.update(ROOT/p for p in ['Cargo.toml', 'Cargo.lock', 'tools/measure_investigation.py', 'docs/Ariadne/priority-1-real-capture-case.json'])
+ paths.update(ROOT/p for p in ['Cargo.toml', 'Cargo.lock', 'tools/measure_investigation.py', 'evidence/Ariadne/priority-1-real-capture-case.json'])
  return {str(p.relative_to(ROOT)):sha(p) for p in sorted(paths)}
 def run(cmd):
  r=subprocess.run([str(a) for a in cmd],cwd=ROOT,text=True,capture_output=True,timeout=180)
@@ -23,8 +23,8 @@ def main():
  for b in ['ariadne-minidump','investigation']:
   run(['cargo','build','--offline','--locked','--release',*(['--features','bench'] if b=='investigation' else []),'--bin',b])
  cases=[('stage-b-linux',ROOT/'tests/input/fixtures/stage_b_linux.dmp','0x401000','0x401006',False),('stage-b-windows',ROOT/'tests/input/fixtures/stage_b_windows.dmp','0x7ff700001000','0x7ff700001006',False),('not-chain',ROOT/'tests/input/fixtures/bap_precision_linux.dmp','0x401000','0x401006',False),('real-linux',ROOT/'tmp/priority1/chromium-member-uaf.dmp','0x566817922dc5','0x566817922e42',True)]
- pin=json.loads((ROOT/'docs/Ariadne/priority-1-real-capture-case.json').read_text())
- windows=json.loads((ROOT/'docs/Ariadne/priority-4-real-capture-case.json').read_text())
+ pin=json.loads((ROOT/'evidence/Ariadne/priority-1-real-capture-case.json').read_text())
+ windows=json.loads((ROOT/'evidence/Ariadne/priority-4-real-capture-case.json').read_text())
  if args.windows_dump:
   if sha(args.windows_dump)!=windows['capture']['sha256']:raise RuntimeError('Windows capture hash mismatch')
   cases.append(('real-windows-98',args.windows_dump,windows['query']['entry_va'],windows['query']['seed_va'],True))

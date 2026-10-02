@@ -2,19 +2,19 @@
 
 Qualified **2026-09-30** under the
 [design](priority-4-workload-performance-design.md) and
-[implementation plan](priority-4-workload-performance-plan.md).
+[implementation plan](../../Plans/completed/priority-4-workload-performance-plan.md).
 **Priority 4 is complete for the frozen Windows Electron query below.**
-The [delivery record](priority-4-validation.json) retains the real-capture
+The [delivery record](../../evidence/Ariadne/priority-4-validation.json) retains the real-capture
 qualification, before/after measurements, source-bound regression evidence,
 report comparisons and remaining limits. The initial 34-node Linux
 measurement is retained separately as
-[historical evidence](priority-4-20260929-validation.json).
+[historical evidence](../../evidence/Ariadne/priority-4-20260929-validation.json).
 
 ## Qualifying captured workload
 
 The external `f13d18cd-9ade-4eff-947c-15a649b636fa.dmp` is a historical Windows
 Electron application access violation, not a generated graph fixture.
-The [case manifest](priority-4-real-capture-case.json) pins its 2,028,400 bytes
+The [case manifest](../../evidence/Ariadne/priority-4-real-capture-case.json) pins its 2,028,400 bytes
 and SHA-256 `4b3deb70134015ec227b3cf5edf82e1dac0b308b3f19ae62f79cbd4251109e86`.
 Its companion has SHA-256
 `8ed58d015ad328da011e0bc889c2fa431cc13944610a5ead8b9a353bb91fe9a9`.
@@ -33,10 +33,10 @@ The selected entry `0x7ff6451d52d0` reaches exception RIP
 `MOV64rm RCX,[RDI+0x20]` at `0x7ff6451d530b` remains a possible origin of all
 eight RCX byte cells before the seed. The query has **98 captured decoded
 instructions, 113 edges and a 19-node backward slice**, with no missing seed.
-The [qualification record](priority-4-real-capture-validation.json) checks
+The [qualification record](../../evidence/Ariadne/priority-4-real-capture-validation.json) checks
 local reachability, captured forward boundaries, cross-format agreement,
 Graphviz parsing and the seed-only negative control. The
-[identity/byte negative controls](priority-4-negative-controls.json) reject
+[identity/byte negative controls](../../evidence/Ariadne/priority-4-negative-controls.json) reject
 wrong module identity and changed captured function bytes before publication.
 
 Eight path blockers gained [source-reviewed ordinary control](priority-4-control-source-review.md)
@@ -85,17 +85,17 @@ Raw data and identities are retained for all three checkpoints:
 
 | Checkpoint | CLI CSV | Stage CSV | Synthetic CSV | Measurement record |
 | --- | --- | --- | --- | --- |
-| Before | [CSV](priority-4-20260930-before-cli.csv) | [CSV](priority-4-20260930-before-stage.csv) | [CSV](priority-4-20260930-before-synthetic.csv) | [JSON](priority-4-20260930-before-validation.json) |
-| Cache | [CSV](priority-4-20260930-solver-cli.csv) | [CSV](priority-4-20260930-solver-stage.csv) | [CSV](priority-4-20260930-solver-synthetic.csv) | [JSON](priority-4-20260930-solver-validation.json) |
-| Final | [CSV](priority-4-20260930-after-cli.csv) | [CSV](priority-4-20260930-after-stage.csv) | [CSV](priority-4-20260930-after-synthetic.csv) | [JSON](priority-4-20260930-after-validation.json) |
+| Before | [CSV](../../evidence/Ariadne/priority-4-20260930-before-cli.csv) | [CSV](../../evidence/Ariadne/priority-4-20260930-before-stage.csv) | [CSV](../../evidence/Ariadne/priority-4-20260930-before-synthetic.csv) | [JSON](../../evidence/Ariadne/priority-4-20260930-before-validation.json) |
+| Cache | [CSV](../../evidence/Ariadne/priority-4-20260930-solver-cli.csv) | [CSV](../../evidence/Ariadne/priority-4-20260930-solver-stage.csv) | [CSV](../../evidence/Ariadne/priority-4-20260930-solver-synthetic.csv) | [JSON](../../evidence/Ariadne/priority-4-20260930-solver-validation.json) |
+| Final | [CSV](../../evidence/Ariadne/priority-4-20260930-after-cli.csv) | [CSV](../../evidence/Ariadne/priority-4-20260930-after-stage.csv) | [CSV](../../evidence/Ariadne/priority-4-20260930-after-synthetic.csv) | [JSON](../../evidence/Ariadne/priority-4-20260930-after-validation.json) |
 
 ## Bounded synthetic scaling
 
 All five families completed one warm-up and five repetitions at 128, 256 and
 512 nodes after optimization. The before-change 512-node measured suite
 reached its 180-second bound; its
-[partial output](priority-4-20260930-before-synthetic-512-measured-partial.csv)
-and [outcomes](priority-4-20260930-before-synthetic-outcomes.json) remain limit
+[partial output](../../evidence/Ariadne/priority-4-20260930-before-synthetic-512-measured-partial.csv)
+and [outcomes](../../evidence/Ariadne/priority-4-20260930-before-synthetic-outcomes.json) remain limit
 evidence rather than a completed baseline. The initial September 29 timeout
 and `stage-f-baseline.csv` also remain intact.
 
@@ -113,14 +113,14 @@ larger real captures, and no speedup factor is claimed against the timed-out
 
 ## Conformance and decision
 
-The [schedule comparison](priority-4-schedule-validation.json) matches all
+The [schedule comparison](../../evidence/Ariadne/priority-4-schedule-validation.json) matches all
 277 visible transitions and the completed real-query result against the
 [frozen scanning implementation](../../tests/support/scanning_engine.rs).
 All 256 generated requests also compare every visible state with that
 reference, alongside their independent graph/path oracles. Text, DOT and JSON
 hashes are byte-identical across the three performance checkpoints.
 
-The [current integration record](current-integration-validation.json) covers
+The [current integration record](../../evidence/Ariadne/current-integration-validation.json) covers
 the existing root/input/native/formal/IR checks, MBT replay, effect and reader
 mutations, formatting and Clippy. The effect registry is exercised on both
 Windows and Linux. The new control bindings retain all possible prior origins

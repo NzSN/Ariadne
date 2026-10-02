@@ -2,8 +2,8 @@
 
 Validated **2026-09-29 23:26 CST** against the
 [Priority 3 design](priority-3-investigator-presentation-design.md) and
-[implementation plan](priority-3-investigator-presentation-plan.md). The
-[source-bound record](priority-2-3-validation.json) retains the exact
+[implementation plan](../../Plans/completed/priority-3-investigator-presentation-plan.md). The
+[source-bound record](../../evidence/Ariadne/priority-2-3-validation.json) retains the exact
 Windows/Linux example identities, format hashes, real-capture replay and
 11-gate minidump run. The [example guide](minidump-investigator-examples.md)
 contains commands for both platforms and partial-report behavior.

@@ -1,35 +1,31 @@
 # Ariadne assurance priorities
 
-Decision recorded **2026-09-29** after the first
-[Stage D checkpoint](stage-d-progress.md). Ariadne's practical delivery is an
-evidence-bounded **Windows/Linux AMD64 minidump → local graph → possible value
-origins → backward slice → report** workflow. The
-[49-case register-core acceptance plan](stage-d-register-core-implementation-plan.md)
-is retained as a **long-term formal research purpose**, not a prerequisite
-for using or improving that workflow.
+Updated **2026-10-02**: the independent instruction-step project is retired.
+Ariadne's delivery is an evidence-bounded **Windows/Linux AMD64 minidump → local
+graph → possible value origins → backward slice → report** workflow using BAP.
+The [semantic assurance decision](semantic-assurance.md) supersedes the former
+long-term Stage D commitment.
 
 ## Claims remain separate
 
 | Assurance level | What a passing result supports | What it does not support |
 | --- | --- | --- |
-| Input and decoder | Exact captured bytes, virtual addresses, provenance, pinned LLVM MC observations and explicit missing/conflicting data | Faithful CPU execution or historical path reconstruction |
-| Reviewed analyzer effects | Source-reviewed `uses`, possible writes, justified definite replacements and conservative control for exact decoded shapes, with negative controls | A complete AMD64 instruction step, fault priority or proof that a crashing store committed |
-| Formal user64 case | A source-hash-bound TLA+/Lean instruction-step claim for that exact form/profile case after all eight obligations close | Unlisted forms, a verified Rust ISA executor or automatic decoder-to-form correspondence |
+| Captured input and decode reference | Bytes, VAs, provenance and independent decode/control observations | Historical execution |
+| BAP projection | Tested typed-BIL transport, dependencies, aliases and conservative effects for the exercised corpus | Universal lifter correctness or full ISA coverage |
+| Analysis and investigation | Model-relative CFG/dataflow/slicing and evidence-bound claims | A root-cause or historical-path proof |
 
-The no-trust `UnknownInstructionFallback` remains the default for unsupported
-forms. The formal `amd64-user64-v1` profile, its 49/72/156 case inventory,
-coverage ledger, source hashes and `--require-milestone` checks keep their
-existing meaning. **0/49 accepted** is an honest formal status, not a failure
-of the delivered minidump reader, renderer or conservative analyzer.
+The practical queue below retains dated delivery results. Earlier LLVM-backed
+Windows performance evidence does not qualify the current BAP path; the original
+capture remains required for its separate workload gate.
 
 ## Practical priority queue and status
 
 | Priority | Deliverable | Acceptance evidence |
 | --- | --- | --- |
-| [1. Representative real-capture investigation](priority-1-real-capture-plan.md) — delivered for one controlled Chromium/Linux crash | Run the supported CLI on a hash-pinned real Chromium/Electron Windows or Linux minidump with an independently established earlier captured entry and crash-IP seed. Where capture lacks that path, report the gap; do not infer a function entry by decoding backward from RIP or supply executable bytes from a companion file. | The [qualified case](priority-1-real-capture-validation.md) links a possible address producer to captured bytes, a matched-build entry witness, reviewed effects and explicit uncertainty. The tool-produced Stage B fixture remains a separate regression. |
-| [2. Path-driven effect coverage](priority-2-path-driven-effects-plan.md) — delivered for the selected paths | Inventory the exact unsupported instructions that stop real investigations. Add only source-reviewed opcode/operand/prefix bindings needed on those paths, preserving weak memory updates, flags/alias uncertainty and unknown control. | The [first case review](priority-2-effects-validation.md) required no change. The larger Windows query gained [eight reviewed control-only bindings](priority-4-control-source-review.md), with opaque effects and negative controls. New paths may reopen coverage work. |
-| [3. Investigator presentation and release examples](priority-3-investigator-presentation-plan.md) — delivered | Make decoded instruction, exact bytes, normalized operands, rule quality and provenance easy to scan alongside possible origins and gaps. Retain versioned JSON as the machine contract and publish reproducible CLI examples for both platforms. | The [validation](priority-3-presentation-validation.md) confirms a readable overview, Linux/Windows [examples](minidump-investigator-examples.md), Graphviz parsing, partial-report behavior and unchanged JSON/DOT semantics. |
-| [4. Workload-sized performance decision](priority-4-workload-performance-plan.md) — delivered for one larger Windows capture | Measure larger representative captured graphs and dense aliases through the same CLI path. Optimize only a demonstrated bottleneck, such as predecessor scans, without changing the analyzer's observable schedule or result. | The [qualified measurement](priority-4-performance-validation.md) has 98 captured decoded instructions and a 19-node slice. CLI median improved from 3,846 to 1,788 ms against the fixed 2,000 ms budget. All 277 visible actions and text/DOT/JSON hashes are preserved; 128/256/512-node synthetic families complete. |
+| [1. Representative real-capture investigation](../../Plans/completed/priority-1-real-capture-plan.md) — delivered for one controlled Chromium/Linux crash | Run the supported CLI on a hash-pinned real Chromium/Electron Windows or Linux minidump with an independently established earlier captured entry and crash-IP seed. Where capture lacks that path, report the gap; do not infer a function entry by decoding backward from RIP or supply executable bytes from a companion file. | The [qualified case](priority-1-real-capture-validation.md) links a possible address producer to captured bytes, a matched-build entry witness, reviewed effects and explicit uncertainty. The tool-produced Stage B fixture remains a separate regression. |
+| [2. Path-driven effect coverage](../../Plans/completed/priority-2-path-driven-effects-plan.md) — delivered for the selected paths | Inventory the exact unsupported instructions that stop real investigations. Add only source-reviewed opcode/operand/prefix bindings needed on those paths, preserving weak memory updates, flags/alias uncertainty and unknown control. | The [first case review](priority-2-effects-validation.md) required no change. The larger Windows query gained [eight reviewed control-only bindings](priority-4-control-source-review.md), with opaque effects and negative controls. New paths may reopen coverage work. |
+| [3. Investigator presentation and release examples](../../Plans/completed/priority-3-investigator-presentation-plan.md) — delivered | Make decoded instruction, exact bytes, normalized operands, rule quality and provenance easy to scan alongside possible origins and gaps. Retain versioned JSON as the machine contract and publish reproducible CLI examples for both platforms. | The [validation](priority-3-presentation-validation.md) confirms a readable overview, Linux/Windows [examples](minidump-investigator-examples.md), Graphviz parsing, partial-report behavior and unchanged JSON/DOT semantics. |
+| [4. Workload-sized performance decision](../../Plans/completed/priority-4-workload-performance-plan.md) — delivered for one larger Windows capture | Measure larger representative captured graphs and dense aliases through the same CLI path. Optimize only a demonstrated bottleneck, such as predecessor scans, without changing the analyzer's observable schedule or result. | The [qualified measurement](priority-4-performance-validation.md) has 98 captured decoded instructions and a 19-node slice. CLI median improved from 3,846 to 1,788 ms against the fixed 2,000 ms budget. All 277 visible actions and text/DOT/JSON hashes are preserved; 128/256/512-node synthetic families complete. |
 
 The designs behind these plans are the
 [Priority 1 real-capture design](priority-1-real-capture-design.md),
@@ -51,8 +47,7 @@ median meets the budget; this is not a worst-case or universal scale guarantee.
 The separate machine-state and directly supplied LLVM IR paths can advance
 when a concrete investigation needs them; their generated model-based replay
 and result envelopes remain independent acceptance work. A universal Rust
-refinement proof and the full 49-case ISA campaign are long-term research
-objectives. PE/ELF image and ELF core readers remain deferred under the
+refinement proof remains a separate research boundary. The ISA campaign is retired. PE/ELF image and ELF core readers remain deferred under the
 current minidump-only scope.
 
 ## Initial historical-capture audit at decision time

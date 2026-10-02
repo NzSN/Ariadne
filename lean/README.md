@@ -1,5 +1,10 @@
 # AMD64 Lean formalization
 
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](../docs/Ariadne/semantic-assurance.md).
+
 This package contains the staged proof foundations of the
 [accepted AMD64 design](../docs/amd64-semantics-design.md), not a complete ISA
 formalization. It uses the pinned Lean 4.33.1 standard library and no external

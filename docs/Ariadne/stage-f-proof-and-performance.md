@@ -1,11 +1,11 @@
 # Stage F proof boundary and measured core baseline
 
-Recorded **2026-09-29 10:16 CST** for [Stage F of the remaining plan](remaining-implementation-plan.md#f--proof-boundary-and-scalability).
-The [source-bound progress report](stage-b-f-validation.json) passed 19
-implementation/formal/benchmark gates. Its [raw benchmark data](stage-f-baseline.csv)
+Recorded **2026-09-29 10:16 CST** for Stage F proof boundary.
+The [source-bound progress report](../../evidence/Ariadne/stage-b-f-validation.json) passed 19
+implementation/formal/benchmark gates. Its [raw benchmark data](../../evidence/Ariadne/stage-f-baseline.csv)
 is a baseline, not a release-scale performance guarantee or a Rust refinement
 proof.
-The [Priority 4 workload-performance implementation plan](priority-4-workload-performance-plan.md)
+The [Priority 4 workload-performance implementation plan](../../Plans/completed/priority-4-workload-performance-plan.md)
 specifies the next real-capture measurement and optimize/no-change decision.
 The [Priority 4 design](priority-4-workload-performance-design.md) defines the
 workload identity, measurement layers and decision boundary.

@@ -1,6 +1,6 @@
 # Stage A source and decoder review: memory-immediate MOV
 
-Reviewed 2026-09-28 for the [Stage A implementation plan](stage-a-memory-immediate-mov-plan.md).
+Reviewed 2026-09-28 for the [Stage A implementation plan](../../Plans/completed/stage-a-memory-immediate-mov-plan.md).
 This review authorizes only a conservative normal-continuation analyzer effect
 for two decoded AMD64 memory forms. It is not a complete instruction-step proof.
 

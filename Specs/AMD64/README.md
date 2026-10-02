@@ -1,5 +1,10 @@
 # AMD64 source and coverage inventory
 
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](../../docs/Ariadne/semantic-assurance.md).
+
 The immediate target is [the verified user64 subset](../../docs/amd64-user64.md),
 starting with the 49-case `register-core` milestone. Its form/profile progress
 and acceptance are independent of whole-manual completion. The retained

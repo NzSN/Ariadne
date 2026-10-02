@@ -1,13 +1,13 @@
 # Stage E result contracts
 
-These are separate result families for [Stage E](remaining-implementation-plan.md#e--implement-the-other-two-formal-analysis-machines).
+These are separate result families for [Stage E completion](stage-e-completion.md).
 The [completed Stage E](stage-e-completion.md) adds optional stateflow input to
 the minidump investigator CLI and a separate verifier-backed IR CLI. Their
 versioned [input/report schemas](modules/reports.md) preserve these families
 independently.
-The [first MirrorRust integration stage](../../Plans/stage-e-mirrorrust-integration.md)
+The [first MirrorRust integration stage](../../Plans/completed/stage-e-mirrorrust-integration.md)
 connects these result families to separate compiler-generated replay ports.
-The [Stage E completion plan](../../Plans/stage-e-completion.md) completes their
+The [Stage E completion plan](../../Plans/completed/stage-e-completion.md) completes their
 generated replay and versioned reporting/CLI integration stage.
 
 | Path | Identity and fixed input | Mutable result | Derived observations |

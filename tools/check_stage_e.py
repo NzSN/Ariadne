@@ -86,16 +86,13 @@ def main():
         helper_sha=sha(ROOT/'target/ariadne-llvm-ir')
         corpus=json.loads((ROOT/'mbt/stage-e/corpus/manifest.json').read_text())
         if corpus['generation']['nativeHelperSha256']!=helper_sha:raise SystemExit('native helper differs from corpus producer; regenerate explicitly')
-    profile=subprocess.run(['python3','tools/amd64_profile.py','check','--require-milestone','register-core'],cwd=ROOT,env=env,capture_output=True,text=True)
-    profile_output=profile.stdout+profile.stderr;(work/'register-core.log').write_text(profile_output)
-    pending=profile.returncode==1 and '0/49 verified' in profile_output and 'Milestone register-core is pending' in profile_output
     result={
-        'schema':'ariadne.stage-e-completion/v1','recordedUtc':datetime.now(timezone.utc).isoformat(),
-        'passed':all_passed and (pending or profile.returncode==0),'sourcesStable':stable,'sourceHashes':before,'gates':records,
+        'schema':'ariadne.stage-e-completion/v2','recordedUtc':datetime.now(timezone.utc).isoformat(),
+        'passed':all_passed,'sourcesStable':stable,'sourceHashes':before,'gates':records,
         'completionClauses':{name:all_passed for name in ['validators','generatedReplayAllObservations','mutationSensitivity','frozenRecoveryHandoff','nativeVerifiedIRHandoff','separateReportsAndCLI']},
         'replay':replay,'minidumpRegression':nested,
         'tools':{'nativeIRSha256':sha(ROOT/'target/ariadne-llvm-ir'),'nativeMCSha256':sha(ROOT/'target/ariadne-llvm-mc'),'graphvizPath':env['ARIADNE_DOT'],'graphvizSha256':sha(env['ARIADNE_DOT']),'llvmHeaders':env.get('LLVM20_INCLUDE_DIR')},
-        'registerCoreAcceptance':'pending 0/49' if pending else 'passed' if profile.returncode==0 else 'unexpected failure',
+        'instructionStepTrack':'retired; BAP lifting is a trusted dependency',
         'rustRefinementProof':'open; separate Stage F obligation',
         'scope':'Stage E finite generated conformance and report/CLI acceptance, relative to supplied semantic relations and verified native IR. No universal refinement or historical execution claim.',
     }

@@ -1,5 +1,10 @@
 # Executable x86-64 instruction semantics
 
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](Ariadne/semantic-assurance.md).
+
 Status: a checked TLA+ specification, not a Rust implementation or binary decoder.
 The new [module](../Specs/AriadneX86_64Semantics.tla) computes outcomes from decoded
 instructions and register/flag values. `StateSteps` is no longer a hand-authored

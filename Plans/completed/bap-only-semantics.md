@@ -1,7 +1,12 @@
 # Stage 1 follow-up: remove the LLVM semantic backend
 
+> **Archived 2026-10-02: completed within its recorded scope.**
+> This is a historical plan, not an active task list. Evidence remains tied
+> to its original sources, backend and workload. See the [plan index](../README.md)
+> for current work and separate qualification requirements.
+
 Requested **2026-10-01** after the Stage 1 implementation.
-Design: [BAP semantic backend](../docs/Ariadne/bap-semantic-backend-design.md).
+Design: [BAP semantic backend](../../docs/Ariadne/bap-semantic-backend-design.md).
 
 Make BAP the sole minidump semantic producer. Remove CLI backend selection,
 the normal library's LLVM preparation branch, and the BAP adapter's legacy
@@ -31,7 +36,7 @@ selection does not turn partial qualification into a pass.
    remains a separate user action.
 
 Implementation: delivered in the working tree. The
-[current validation report](../docs/Ariadne/bap-only-removal-validation.md)
+[current validation report](../../docs/Ariadne/bap-only-removal-validation.md)
 and machine-readable record distinguish removal acceptance from the still
 incomplete full Windows/Stage 1 qualification. LLVM's role is decoded-fact
 validation and historical/supplied-IR research, with no production semantic

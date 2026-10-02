@@ -1,5 +1,10 @@
 # Typed AMD64 register-view foundation
 
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](Ariadne/semantic-assurance.md).
+
 This is the checked starting point for the
 [accepted full AMD64 design](amd64-semantics-design.md). It uses Markdown and
 typed pseudocode; the actual checked definitions are in

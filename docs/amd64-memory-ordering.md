@@ -1,5 +1,10 @@
 # AMD64 WB/WC memory ordering
 
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](Ariadne/semantic-assurance.md).
+
 The authoritative bounded relation is
 [AMD64MemoryOrdering.tla](../Specs/AMD64MemoryOrdering.tla). Its typed Lean
 counterpart is [MemoryOrdering.lean](../lean/AMD64/MemoryOrdering.lean).

@@ -1,5 +1,10 @@
 # AMD64 string and repetition foundation
 
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](Ariadne/semantic-assurance.md).
+
 Status: the C4-S control and staged-iteration foundation is implemented for the
 seven assigned Volume 3 entries. No entry or form is reported complete because
 data movement, I/O behavior, form legality, and complete fault/outcome binding

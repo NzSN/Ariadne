@@ -1,16 +1,23 @@
 # Stage E completion plan
 
+> **Archived 2026-10-02: completed within its recorded scope.**
+> This is a historical plan, not an active task list. Evidence remains tied
+> to its original sources, backend and workload. See the [plan index](../README.md)
+> for current work and separate qualification requirements.
+
 Prepared 2026-10-01 against `518ed9e`. Design:
-[Stage E replay and reporting](../docs/Ariadne/stage-e-mirrorrust-design.md).
-This completes Stage E of the [remaining plan](../docs/Ariadne/remaining-implementation-plan.md#e--implement-the-other-two-formal-analysis-machines).
+[Stage E replay and reporting](../../docs/Ariadne/stage-e-mirrorrust-design.md).
+The [Stage E delivery record](../../docs/Ariadne/stage-e-completion.md) documents the result.
 
 Status **complete, 2026-10-01**, within the finite conformance/report scope.
-The [retained completion record](../docs/Ariadne/stage-e-completion-validation.json)
+The [retained completion record](../../evidence/Ariadne/stage-e-completion-validation.json)
 passes all 12 gates with stable source hashes: 32 generated inputs, 64 complete
 traces, 326 matched observations, 15 genuine engine mutation mismatches,
 verifier/recovery handoffs and independently parsed CLI reports. The minidump
 regression record is reused only after every bound source hash matches.
-All six implementation steps below are delivered. Stage D and F remain separate.
+All six implementation steps below are delivered. Scope update 2026-10-02:
+Stage D is [retired](../../docs/Ariadne/semantic-assurance.md); Stage F remains separate.
+The retained record above predates the qualification-runner changes.
 
 ## Acceptance
 
@@ -46,8 +53,8 @@ All six implementation steps below are delivered. Stage D and F remain separate.
    preserved structural edges, uncertainty and transactional publication.
 6. Run the completion gate, retain source-bound evidence, and update status in
    the design, roadmap, remaining plan and checkpoints. Completion is bounded
-   conformance/report acceptance; Stage D ISA acceptance and Stage F universal
-   Rust refinement remain separate.
+   conformance/report acceptance; Stage F universal Rust refinement remains
+   separate, and retired Stage D is outside the gate.
 
 No new ISA executor, PE/ELF reader, IR lifting, crash-history reconstruction or
 interprocedural call/return matching is introduced. Commit/push is a separate

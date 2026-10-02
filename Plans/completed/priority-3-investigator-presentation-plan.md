@@ -1,12 +1,17 @@
 # Priority 3 implementation plan: investigator presentation and examples
 
+> **Archived 2026-10-02: completed within its recorded scope.**
+> This is a historical plan, not an active task list. Evidence remains tied
+> to its original sources, backend and workload. See the [plan index](../README.md)
+> for current work and separate qualification requirements.
+
 Plan dated **2026-09-29** for practical priority 3 in the
-[assurance queue](practical-assurance-priorities.md). It executes the
-[Priority 3 design](priority-3-investigator-presentation-design.md) on the
-delivered [Stage C report layer](stage-c-report-schema.md). No analyzer,
+[assurance queue](../../docs/Ariadne/practical-assurance-priorities.md). It executes the
+[Priority 3 design](../../docs/Ariadne/priority-3-investigator-presentation-design.md) on the
+delivered [Stage C report layer](../../docs/Ariadne/stage-c-report-schema.md). No analyzer,
 decoder, effect or JSON v1 semantics change is authorized by this plan.
 The text overview and examples are
-[delivered with source-bound validation](priority-3-presentation-validation.md).
+[delivered with source-bound validation](../../docs/Ariadne/priority-3-presentation-validation.md).
 
 ## 1. Freeze the current report contract
 

@@ -2,9 +2,9 @@
 
 Validated **2026-09-29 17:27 CST** against the
 [Priority 1 design](priority-1-real-capture-design.md) and
-[implementation plan](priority-1-real-capture-plan.md). The
-[case manifest](priority-1-real-capture-case.json) pins the dump, matching
-binary, selected VAs and bytes. The [source-bound gate record](priority-1-validation.json)
+[implementation plan](../../Plans/completed/priority-1-real-capture-plan.md). The
+[case manifest](../../evidence/Ariadne/priority-1-real-capture-case.json) pins the dump, matching
+binary, selected VAs and bytes. The [source-bound gate record](../../evidence/Ariadne/priority-1-validation.json)
 contains the focused acceptance result, all 11 existing minidump gates, source
 and tool hashes, report hashes and negative controls.
 

@@ -8,9 +8,9 @@ They retain opaque effects and are covered by the
 instruction-step ledger remains unchanged.
 
 Reviewed **2026-09-29 23:26 CST** against the
-[Priority 2 plan](priority-2-path-driven-effects-plan.md) and the
+[Priority 2 plan](../../Plans/completed/priority-2-path-driven-effects-plan.md) and the
 [controlled Chromium case](priority-1-real-capture-validation.md). The
-[source-bound record](priority-2-3-validation.json) includes the exact gap
+[source-bound record](../../evidence/Ariadne/priority-2-3-validation.json) includes the exact gap
 inventory, a fresh real-capture replay and the 11-gate minidump regression.
 
 The 29 captured instruction starts before the crash-IP seed have 22 reviewed

@@ -1,7 +1,7 @@
 # Priority 4 design: workload-based performance decision
 
 Design decision, **2026-09-29**. The scoped
-[Priority 4 implementation plan](priority-4-workload-performance-plan.md)
+[Priority 4 implementation plan](../../Plans/completed/priority-4-workload-performance-plan.md)
 applies this design. It builds on the current
 [Stage F baseline](stage-f-proof-and-performance.md), the separate
 [`bench/` harness](modules/bench.md), and the supported
@@ -83,7 +83,7 @@ acceptable. Neither result asserts a universal performance bound, formal Rust
 refinement, or AMD64 instruction-step correctness.
 The first [measurement record](priority-4-performance-validation.md) is
 bounded by the initial 34-node real capture. The
-[2026-09-30 qualification and optimization stage](priority-4-workload-performance-plan.md#2026-09-30-qualification-run)
+[2026-09-30 qualification and optimization stage](../../Plans/completed/priority-4-workload-performance-plan.md#2026-09-30-qualification-run)
 uses a larger Windows Electron capture, exact control bindings, a frozen
 scanning reference and successive measurements before making the final
 performance decision.

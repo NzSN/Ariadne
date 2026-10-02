@@ -1,16 +1,15 @@
 # Verified 64-bit user-mode semantics
 
-This explicitly scoped, machine-checked semantics library is a **long-term
-formal research purpose** for Ariadne. The
-[practical assurance decision](Ariadne/practical-assurance-priorities.md)
-allows evidence-bounded minidump analysis to proceed without the 49-case gate.
-Full-manual coverage remains a still broader roadmap target. Acceptance within
-this formal profile is measured per **form/profile case**, and component
-progress is recorded independently of completed instruction steps.
-The [standalone Stage D implementation plan](Ariadne/stage-d-register-core-implementation-plan.md)
-and [first-case progress record](Ariadne/stage-d-progress.md) retain the
-[0/49 acceptance audit](Ariadne/stage-d-acceptance-audit.md) until complete
-source-bound instruction steps are checked.
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](Ariadne/semantic-assurance.md).
+
+This is the historical user64 instruction-step profile. The
+[retirement decision](Ariadne/semantic-assurance.md) ends its active milestones.
+The [Stage D validation record](../evidence/Ariadne/stage-d-progress-validation.json) and
+[coverage ledger](../Specs/AMD64/user64-coverage.json) retain the former results.
+The profile and acceptance rules below describe that retired research scope.
 
 ## Profile and milestones
 

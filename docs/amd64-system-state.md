@@ -1,5 +1,10 @@
 # AMD64 raw system controls and execution guards
 
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](Ariadne/semantic-assurance.md).
+
 `Specs/AMD64SystemState.tla` and `lean/AMD64/SystemState.lean` pair the raw
 system controls needed by instruction-entry semantics. They do not replace the
 application-visible CPU state. A complete machine composes `CPUState`, memory,

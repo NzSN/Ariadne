@@ -1,11 +1,16 @@
 # AMD64 delivery tasks
 
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](Ariadne/semantic-assurance.md).
+
 Priority update 2026-09-29: the scoped 49-case register-core gate is retained
 as a [long-term formal research purpose](Ariadne/practical-assurance-priorities.md).
 The task tables below preserve their original formal dependencies and status;
 they no longer gate the practical minidump analyzer. The
-[Stage D implementation plan](Ariadne/stage-d-register-core-implementation-plan.md)
-and [progress record](Ariadne/stage-d-progress.md) remain the formal track.
+[retirement decision](Ariadne/semantic-assurance.md) supersedes this task list;
+the [historical Stage D validation record](../evidence/Ariadne/stage-d-progress-validation.json) preserves prior results.
 
 The user approved a scoped delivery strategy: [amd64-user64-v1](amd64-user64.md)
 was the original immediate formal target; full-manual coverage is a longer

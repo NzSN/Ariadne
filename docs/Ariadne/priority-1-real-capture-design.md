@@ -1,7 +1,7 @@
 # Priority 1 design: evidence-linked predecessor slice from a real minidump
 
 Design decision, **2026-09-29**. The scoped
-[Priority 1 implementation plan](priority-1-real-capture-plan.md) applies this
+[Priority 1 implementation plan](../../Plans/completed/priority-1-real-capture-plan.md) applies this
 design. It uses the delivered Windows/Linux AMD64
 [minidump reader](file-reader-design.md),
 [Stage C report contract](stage-c-report-schema.md), and
@@ -91,7 +91,7 @@ origins, not invented producer instructions.
 
 An unsupported control form, missing byte, conflicting capture, missing seed,
 opaque effect or resource limit must remain visible with its distinct meaning.
-A partial report can guide [Priority 2 effect work](priority-2-path-driven-effects-plan.md);
+A partial report can guide [Priority 2 effect work](../../Plans/completed/priority-2-path-driven-effects-plan.md);
 it cannot satisfy the qualifying-case claim until the independently anchored,
 nontrivial producer slice is present. If no dump has a valid entry witness,
 retain the candidate audit and leave this priority open.

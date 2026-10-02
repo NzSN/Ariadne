@@ -1,5 +1,10 @@
 # Conservative unsupported-semantics analysis contract
 
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](Ariadne/semantic-assurance.md).
+
 `Specs/AMD64Unsupported.tla` and `lean/AMD64/Unsupported.lean` define the
 fallback used when an instruction is decoded but its architectural semantics
 are outside the currently verified subset. This is an analyzer knowledge

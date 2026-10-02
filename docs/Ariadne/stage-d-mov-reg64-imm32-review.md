@@ -1,10 +1,15 @@
 # Stage D D1 review: MOV reg64, imm32
 
-Reviewed **2026-09-29** for the first case in the
-[Stage D implementation plan](stage-d-register-core-implementation-plan.md).
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](semantic-assurance.md).
+
+Reviewed **2026-09-29** for the first case of the now-retired Stage D project;
+see the [retirement decision](semantic-assurance.md).
 This closes a bounded **source and decoder observation**, not any of the
 eight instruction-step obligations or the `register-core` milestone. The
-[D0 baseline](stage-d-baseline.json) and [D1 observation report](stage-d-mov-observation.json)
+[D0 baseline](../../evidence/Ariadne/stage-d-baseline.json) and [D1 observation report](../../evidence/Ariadne/stage-d-mov-observation.json)
 retain the exact hashes and positive/negative rows.
 
 ## Authority and case identity
@@ -65,7 +70,7 @@ form. `AMD64IntegerExecution.tla` and `lean/AMD64/IntegerExecution.lean`
 dispatch the reviewed form to a MOV **body**; existing checked examples cover
 one signed payload. Their fallthrough helpers advance RIP only under supplied
 fetch/event assumptions and label the result `fallthrough-applied`, not
-`retired`. The later [D2/D3 progress record](stage-d-progress.md) adds bounded
+`retired`. The later [historical Stage D validation record](../../evidence/Ariadne/stage-d-progress-validation.json) adds bounded
 fault and analyzer-projection witnesses. There is still no case-bound proof
 composing the full successful/faulting architectural boundary for all admitted
 payloads, TLA+/Lean correspondence for that composition, or the general

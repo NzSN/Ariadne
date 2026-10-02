@@ -1,5 +1,10 @@
 # AMD64 shift and rotate execution binding
 
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](Ariadne/semantic-assurance.md).
+
 This checkpoint binds all 116 pinned Volume 3 shift and rotate rows to concrete
 CPU register effects. The source evidence and grouped form IDs are recorded in
 `Specs/AMD64/integer-shift-form-supplement.json`. Original reg/mem alternatives

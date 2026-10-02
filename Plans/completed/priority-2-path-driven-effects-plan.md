@@ -1,14 +1,19 @@
 # Priority 2 implementation plan: effects demanded by captured paths
 
+> **Archived 2026-10-02: completed within its recorded scope.**
+> This is a historical plan, not an active task list. Evidence remains tied
+> to its original sources, backend and workload. See the [plan index](../README.md)
+> for current work and separate qualification requirements.
+
 Plan dated **2026-09-29** for practical priority 2 in the
-[assurance queue](practical-assurance-priorities.md). This is a narrow
-continuation of the [structured-operand/effect design](operand-effects-design.md)
-and the delivered [Stage A memory-immediate MOV rules](stage-a-validation.md).
+[assurance queue](../../docs/Ariadne/practical-assurance-priorities.md). This is a narrow
+continuation of the [structured-operand/effect design](../../docs/Ariadne/operand-effects-design.md)
+and the delivered [Stage A memory-immediate MOV rules](../../docs/Ariadne/stage-a-validation.md).
 Its input is the pinned real-capture candidate and gap list from
 [priority 1](priority-1-real-capture-plan.md), not a request to implement a
 mnemonic family or the AMD64 user64 profile.
 The first controlled Chromium case has a
-[source-bound no-change decision](priority-2-effects-validation.md): reviewed
+[source-bound no-change decision](../../docs/Ariadne/priority-2-effects-validation.md): reviewed
 forms reach the seed, while call effects remain deliberately opaque. New
 real-path blockers reopen this plan.
 

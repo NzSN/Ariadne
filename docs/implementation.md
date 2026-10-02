@@ -1,6 +1,6 @@
 # Rust machine-analysis implementation
 
-The [Rust source-layout consolidation plan](../Plans/rust-source-layout.md)
+The [Rust source-layout consolidation plan](../Plans/completed/rust-source-layout.md)
 implements the user-requested single Cargo package with sources in `src/`, tests
 in `tests/`, and build artifacts in the root `target/`.
 The [completed layout and validation](Ariadne/rust-source-layout.md) record the
@@ -9,11 +9,11 @@ current module APIs, build commands and retained regression evidence.
 The `ariadne-analysis` package exports the `ariadne` Rust library. It implements
 [Ariadne.tla](../Specs/Ariadne.tla) over an owned immutable request using the
 standard library. The separate LLVM IR and abstract machine-state models do
-now have [fixture-validated Rust paths](Ariadne/stage-e-validation.md). The
-[Stage E and F implementation plan](Ariadne/remaining-implementation-plan.md)
+now have [Stage E completion](Ariadne/stage-e-completion.md). The
+[current roadmap](../ROADMAP.md)
 and [proof-boundary record](Ariadne/stage-f-proof-and-performance.md) distinguish
 that progress from generated model-based replay or a Rust refinement proof.
-The scoped [Priority 4 workload-performance implementation plan](Ariadne/priority-4-workload-performance-plan.md)
+The scoped [Priority 4 workload-performance implementation plan](../Plans/completed/priority-4-workload-performance-plan.md)
 now qualifies a 98-instruction Windows minidump and a measured predecessor
 cache. Incoming sets are recomputed only when local predecessors change;
 the sorted one-action schedule is preserved by full-transition comparisons.

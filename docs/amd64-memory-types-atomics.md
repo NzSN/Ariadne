@@ -1,5 +1,10 @@
 # AMD64 memory types and atomic RMW foundation
 
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](Ariadne/semantic-assurance.md).
+
 `AMD64MemoryTypes` resolves explicit PAT index bits and MTRR range facts into a
 memory type. UC/CD/WC/WP/WT/WB combinations supported by the reviewed Volume 2
 table are resolved; unimplemented, overlapping, unsupported, and unknown cases stay

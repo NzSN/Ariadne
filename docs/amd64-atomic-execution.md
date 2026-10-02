@@ -1,5 +1,10 @@
 # AMD64 atomic CPU and memory execution
 
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](Ariadne/semantic-assurance.md).
+
 [AMD64AtomicExecution.tla](../Specs/AMD64AtomicExecution.tla) is the
 authoritative instruction-body relation for memory XCHG, XADD, CMPXCHG,
 CMPXCHG8B, and CMPXCHG16B. [AtomicExecution.lean](../lean/AMD64/AtomicExecution.lean)

@@ -1,5 +1,10 @@
 # AMD64 instruction-form catalogue and legality boundary
 
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](Ariadne/semantic-assurance.md).
+
 This workstream turns Volume 3 table evidence into stable form identities and
 defines how decoded instructions are checked against reviewed architectural
 constraints. It does not claim complete instruction semantics.

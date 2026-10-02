@@ -1,5 +1,10 @@
 # AMD64 port-I/O foundation
 
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](Ariadne/semantic-assurance.md).
+
 Status: IO1 provides source-grounded permission, device-environment, event,
 direct IN/OUT CPU body binding, and successful INS/OUTS contracts. Shared form
 acceptance remains open. Mixed permission/memory/device failure ordering

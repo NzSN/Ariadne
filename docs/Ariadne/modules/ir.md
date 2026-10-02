@@ -22,7 +22,7 @@ native helper bounds a function to 4,096 instructions and the coarse memory
 predecessor relation to 100,000 pairs. Each memory-reading instruction gets
 all possibly writing instructions as potential predecessors plus an explicit
 alias-uncertainty obligation. An indirect call retains an incomplete-target
-obligation. See the [Stage E validation](../stage-e-validation.md).
+obligation. See the [Stage E completion](../stage-e-completion.md).
 
 The direct investigator CLI now emits independently versioned text/DOT/JSON:
 

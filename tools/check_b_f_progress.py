@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Source-bound B/C/E/F progress gate; D acceptance is observed separately."""
+"""Source-bound B/C/E/F progress gate; independent ISA acceptance is retired."""
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -20,7 +20,9 @@ def sources():
                       'src/ir', 'tests/ir', 'native/llvm_mc', 'native/llvm_ir',
                       'src/bench', 'tools'):
         paths.update(p for p in (ROOT / directory).rglob('*') if p.is_file()
-                     and '__pycache__' not in p.parts)
+                     and '__pycache__' not in p.parts
+                     and (directory != 'tools' or not any(
+                         token in p.name for token in ('amd64', 'stage_d'))))
     for name in ('Cargo.toml', 'Cargo.lock', 'Cargo.toml', 'Cargo.lock',
                  'Cargo.toml', 'Cargo.lock', 'Cargo.toml', 'Cargo.lock',
                  'Specs/Ariadne.tla', 'Specs/AriadneMachineState.tla',
@@ -34,7 +36,7 @@ def sources():
 
 def retained_stage_e_status():
     """Report Stage E only from its independently passing, still-current record."""
-    path=ROOT / 'docs/Ariadne/stage-e-completion-validation.json'
+    path=ROOT / 'evidence/Ariadne/stage-e-completion-validation.json'
     try:
         evidence=json.loads(path.read_text())
         if not evidence['passed'] or not evidence['sourcesStable']:
@@ -72,7 +74,6 @@ def main():
         ('ir-model', [env.get('APALACHE_MC', 'apalache-mc'), f'--out-dir={out / "ir-model"}', 'check', '--init=Init', '--next=Next', '--inv=Safety', '--length=8', '--no-deadlock', 'AriadneLLVMIRExample.tla'], SPECS),
         ('machine-tlc', [env.get('TLC', 'tlc'), '-workers', '1', '-metadir', str(out / 'machine-tlc'), '-config', 'MachineState.cfg', 'AriadneMachineStateExample.tla'], SPECS),
         ('ir-tlc', [env.get('TLC', 'tlc'), '-workers', '1', '-metadir', str(out / 'ir-tlc'), '-config', 'LLVMIR.cfg', 'AriadneLLVMIRExample.tla'], SPECS),
-        ('profile-integrity', ['python3', 'tools/amd64_profile.py', 'check'], ROOT),
         ('benchmark', ['cargo', 'run', '--no-default-features', '--features', 'bench', '--offline', '--locked', '--manifest-path', 'Cargo.toml', '--release', '--bin', 'ariadne-bench', '--', '128', '3', 'minidump'], ROOT),
     ]
     records = []
@@ -92,28 +93,13 @@ def main():
                         'seconds': round(time.monotonic() - start, 3),
                         'command': command, 'log': str(log)})
         print(f'{name}: {"PASS" if code == 0 else "FAIL"} ({log})', flush=True)
-    required = subprocess.run(
-        ['python3', 'tools/amd64_profile.py', 'check', '--require-milestone', 'register-core'],
-        cwd=ROOT, env=env, capture_output=True, text=True)
-    required_output = required.stdout + required.stderr
-    (out / 'register-core-required.log').write_text(required_output)
-    expected_pending = (required.returncode == 1
-                        and 'Milestone register-core is pending' in required_output
-                        and '0/49 verified' in required_output)
-    acceptance_status = ('passed' if required.returncode == 0 else
-                         'pending' if expected_pending else 'error')
     stable = before == sources()
     report = {
         'recordedUtc': datetime.now(timezone.utc).isoformat(),
         'sourceSha256': before, 'sourcesStable': stable,
         'gates': records,
-        'passed': stable and all(r['exitCode'] == 0 for r in records)
-                  and acceptance_status != 'error',
-        'registerCoreAcceptance': {
-            'exitCode': required.returncode,
-            'status': acceptance_status,
-            'log': str(out / 'register-core-required.log'),
-        },
+        'passed': stable and all(r['exitCode'] == 0 for r in records),
+        'instructionStepTrack': 'retired; BAP lifting is a trusted dependency',
         'rustRefinementProof': 'open',
         'machineStateModelBasedReplay': retained_stage_e_status(),
         'nativeIrModelBasedReplay': retained_stage_e_status(),

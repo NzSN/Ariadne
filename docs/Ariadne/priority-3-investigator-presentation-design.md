@@ -1,7 +1,7 @@
 # Priority 3 design: readable minidump investigation reports
 
 Design decision, **2026-09-29**. The scoped
-[Priority 3 implementation plan](priority-3-investigator-presentation-plan.md)
+[Priority 3 implementation plan](../../Plans/completed/priority-3-investigator-presentation-plan.md)
 applies this design. The existing [Stage C report schema](stage-c-report-schema.md)
 remains the machine contract: one frozen query produces text, DOT and JSON v1.
 

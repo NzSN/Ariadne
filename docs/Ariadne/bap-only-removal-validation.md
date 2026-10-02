@@ -1,6 +1,6 @@
 # LLVM semantic-backend removal
 
-Requested **2026-10-01**. The [Stage 1 follow-up plan](../../Plans/bap-only-semantics.md)
+Requested **2026-10-01**. The [Stage 1 follow-up plan](../../Plans/completed/bap-only-semantics.md)
 removes the LLVM semantic backend from the production minidump workflow.
 
 BAP is now the sole provider for the CLI and ordinary `FileSnapshot::prepare`.
@@ -35,9 +35,9 @@ B platforms, short/conflicting capture, missing seeds, report/CLI publication
 and hash-pinned external crash artifacts. All **16 mechanical producer/adapter
 mutants** are detected, including lost partial self-move definitions. Independent
 TLC replay matches **99 observations across eight cases**, comparing all nine
-state fields in order. The [machine-readable removal record](bap-only-removal-validation.json)
+state fields in order. The [machine-readable removal record](../../evidence/Ariadne/bap-only-removal-validation.json)
 binds the final gates and exact current sources. The
-[derived-evidence manifest](bap-only-removal-evidence-manifest.json) binds retained
+[derived-evidence manifest](../../evidence/Ariadne/bap-only-removal-evidence-manifest.json) binds retained
 traces, logs and reports.
 
 The release workload uses one warm-up and five measured repeats, with separate
@@ -47,7 +47,7 @@ legacy semantic fallback. The real Linux query retains **34 decoded sites,
 45 edges, a 28-site slice and one obligation**. Per-site differences remain
 visible: 25 projected sites, nine opaque calls/returns, one control disagreement,
 and nine unattempted references. Samples, spread and peak RSS are recorded in
-[bap-only-cli.csv](bap-only-cli.csv) and [bap-only-stage.csv](bap-only-stage.csv).
+[bap-only-cli.csv](../../evidence/Ariadne/bap-only-cli.csv) and [bap-only-stage.csv](../../evidence/Ariadne/bap-only-stage.csv).
 
 The user's explicit removal instruction authorizes the BAP-only default.
 It does not qualify the missing original **98-instruction Windows capture**,

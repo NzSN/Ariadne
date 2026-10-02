@@ -68,7 +68,7 @@ instruction sequence or proof that the faulting memory operation committed.
 
 ## Investigation module and interface
 
-The [Rust source-layout consolidation plan](../../Plans/rust-source-layout.md)
+The [Rust source-layout consolidation plan](../../Plans/completed/rust-source-layout.md)
 places the implemented module in `src/investigation/` within the root Cargo
 package. Its initial
 interface consumes a bound normalized investigation context produced from the
@@ -173,5 +173,6 @@ in text and machine-readable output. A retained case should show an actionable
 explanation beyond the existing raw slice, with measured cost.
 
 The current [BAP-only source record](bap-only-removal-validation.md), open
-98-instruction Windows qualification, Stage D 0/49 gate and Stage 2 prerequisite
-retain their meanings. No new planning document promotes those tiers.
+98-instruction Windows qualification and Stage 2 prerequisite retain their
+meanings. Stage D is [retired](semantic-assurance.md); removing that research
+track does not promote the remaining qualification tiers.

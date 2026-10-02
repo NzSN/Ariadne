@@ -1,5 +1,10 @@
 # AMD64 memory and exception foundation
 
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](Ariadne/semantic-assurance.md).
+
 This component defines the shared address, access, protection, exception,
 commit, and restart contracts used by later general-purpose instruction rules.
 It is a foundation, not complete Volume 2 execution. The authoritative rules

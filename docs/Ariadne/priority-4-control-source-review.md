@@ -1,7 +1,7 @@
 # Priority 4 real-path control review
 
 Reviewed 2026-09-30 for the Windows Electron workload in the
-[qualification plan](priority-4-workload-performance-plan.md#2026-09-30-qualification-run).
+[qualification plan](../../Plans/completed/priority-4-workload-performance-plan.md#2026-09-30-qualification-run).
 The eight bindings below admit ordinary continuation while retaining opaque
 effects: every catalogue cell remains a possible input and write, with no
 definite replacement. They do not execute an instruction or assert fault

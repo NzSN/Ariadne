@@ -1,15 +1,17 @@
 # Stage E typed MirrorRust integration
 
-The [first-stage implementation plan](../../Plans/stage-e-mirrorrust-integration.md)
+The [first-stage implementation plan](../../Plans/completed/stage-e-mirrorrust-integration.md)
 connects the existing Stage E engines to `~/Repos/MirrorRust` through the
 prepared Mirrors compiler's `mirrorrust-v1` target.
 
 Status 2026-10-01: the first stage is implemented and its two-fixture
-[integration record](stage-e-mirrorrust-integration-validation.json) passes.
+[integration record](../../evidence/Ariadne/stage-e-mirrorrust-integration-validation.json) passes.
 Stage E completion is recorded in the [completion report](stage-e-completion.md)
-and its [source-bound evidence](stage-e-completion-validation.json).
-The [Stage E completion implementation plan](../../Plans/stage-e-completion.md)
-covers the remaining generated replay, mutation, handoff and report/CLI stage.
+and its [source-bound evidence](../../evidence/Ariadne/stage-e-completion-validation.json).
+The [Stage E completion implementation plan](../../Plans/completed/stage-e-completion.md)
+covers the generated replay, mutation, handoff and report/CLI stage. Its
+2026-10-02 scope update removes retired Stage D from qualification; the
+[semantic assurance decision](semantic-assurance.md) preserves all Stage E clauses.
 
 ## Completion interfaces
 

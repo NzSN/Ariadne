@@ -10,7 +10,7 @@ This record retains the pre-consolidation source paths. The
 [Rust source-layout delivery](rust-source-layout.md) provides the current
 source-bound regression and updated build/test paths.
 
-The [current source-bound record](investigation-validation.json) passes all
+The [current source-bound record](../../evidence/Ariadne/investigation-validation.json) passes all
 **16 gates**. Its nested **12-gate Stage E regression** passes with stable
 sources, including the full minidump/effects/native/formal pipeline and existing
 MirrorRust replay/mutations. New investigation qualification adds **11 actual
@@ -62,12 +62,12 @@ and **65.21 ms rendering**: about **153 ms combined**, below the frozen **250 ms
 incremental phase condition**. Median full CLI time is approximately **1,408 ms
 without** the explanation and **1,626 ms with** it. The low-level analysis is
 identical in both modes. Min/max, RSS, counts and output hashes are retained in
-[CLI samples](investigation-cli.csv), [phase samples](investigation-phase.csv)
+[CLI samples](../../evidence/Ariadne/investigation-cli.csv), [phase samples](../../evidence/Ariadne/investigation-phase.csv)
 and the machine-readable record. These measurements are bounded observations,
 not universal scale or worst-case guarantees.
 
-The [evidence manifest](investigation-evidence-manifest.json) binds the
-[derived evidence archive](investigation-evidence.tar.gz): complete typed
+The [evidence manifest](../../evidence/Ariadne/investigation-evidence-manifest.json) binds the
+[derived evidence archive](../../evidence/Ariadne/investigation-evidence.tar.gz): complete typed
 explanations, reports and actual test/mutation/regression logs. Raw dump bytes,
 compiler caches and native runtime archives remain ignored/external.
 

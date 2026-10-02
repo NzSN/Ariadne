@@ -3,8 +3,7 @@
 Implemented 2026-09-27 on top of `712a635`. The module presents
 `AnalysisResult`, the output of the Rust implementation of `Specs/Ariadne.tla`.
 It does not modify the analyzer, request validation, ISA effects or input readers.
-The [Stage C implementation plan](remaining-implementation-plan.md#c--investigator-cli-and-versioned-output)
-now has a [versioned minidump report layer](stage-c-report-schema.md) that
+The [versioned minidump report layer](stage-c-report-schema.md)
 joins this pure core rendering with captured-byte and preparation evidence.
 
 ## Interface and use

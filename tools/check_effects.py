@@ -17,9 +17,9 @@ def sources():
     paths = source_files()
     for directory in ('src', 'tests', 'native/llvm_mc'):
         paths.update(p for p in (ROOT / directory).rglob('*') if p.is_file())
-    for pattern in ('Specs/*.tla', 'Specs/*.cfg', 'Specs/check-effects.sh',
+    for pattern in ('Specs/Ariadne*.tla', 'Specs/*.cfg', 'Specs/check-effects.sh',
                     'tools/check_effects*.py', 'mbt/*.py', 'src/mbt/core/*.rs'):
-        paths.update(ROOT.glob(pattern))
+        paths.update(p for p in ROOT.glob(pattern) if not p.name.startswith(('AMD64', 'AriadneX86_64', 'X86_64')))
     paths.update(ROOT / p for p in ('Cargo.toml', 'Cargo.lock', 'Specs/AMD64/manuals.lock.json',
                                    'mbt/corpus/manifest.json'))
     return {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(paths)}

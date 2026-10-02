@@ -1,9 +1,9 @@
 # Stage E completion: replay and investigator reports
 
-The [completion implementation plan](../../Plans/stage-e-completion.md) closes
+The [completion implementation plan](../../Plans/completed/stage-e-completion.md) closes
 Stage E's validators, generated replay, mutation sensitivity, handoffs and
 independent report/CLI delivery. The
-[source-bound completion record](stage-e-completion-validation.json) is the
+[source-bound completion record](../../evidence/Ariadne/stage-e-completion-validation.json) is the
 acceptance authority; the earlier two-fixture integration remains historical.
 
 The campaign contains 16 machine-state and 16 IR inputs, replayed twice per

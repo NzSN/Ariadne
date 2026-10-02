@@ -174,7 +174,7 @@ documents the additive helper modes and rebuild requirement.
 
 See [the protocol](Ariadne/operand-effects-protocol.md),
 [design](Ariadne/operand-effects-design.md), and
-[implementation plan](Ariadne/operand-effects-plan.md). Run all effects gates:
+[implementation plan](../Plans/completed/operand-effects-plan.md). Run all effects gates:
 
 ```sh
 LLVM20_INCLUDE_DIR=/tmp/ariadne-llvm20/usr/include/llvm-20 \

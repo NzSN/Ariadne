@@ -47,7 +47,7 @@ python3 tools/check_bap_semantics.py
 python3 tools/measure_bap.py --windows-dump /path/to/pinned.dmp
 ```
 
-The [Stage 1 backend-removal plan](../../../Plans/bap-only-semantics.md) records the
+The [Stage 1 backend-removal plan](../../../Plans/completed/bap-only-semantics.md) records the
 user-authorized default change. The original 98-instruction Windows qualification
 and 2,000 ms condition remain pending.
 

@@ -1,5 +1,10 @@
 # AMD64 integer semantic kernels
 
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](Ariadne/semantic-assurance.md).
+
 Status: X1 kernel work in progress. These modules compute values and flag
 domains. They do not complete any instruction form. The reviewed coverage
 record is [integer-coverage.json](../Specs/AMD64/integer-coverage.json).

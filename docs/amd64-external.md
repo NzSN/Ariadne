@@ -1,5 +1,10 @@
 # AMD64 external and profile-dependent instructions
 
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](Ariadne/semantic-assurance.md).
+
 Status: paired TLA+/Lean CPU body relations exist for 21 of 27 assigned entries.
 The four LWP entries and MONITORX/MWAITX have executable TLA environment
 contracts plus Lean CPU wrappers, but no paired TLA CPU transition, so they

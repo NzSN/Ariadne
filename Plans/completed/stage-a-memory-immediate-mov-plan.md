@@ -1,9 +1,14 @@
 # Stage A implementation plan: memory-immediate MOV effects
 
+> **Archived 2026-10-02: completed within its recorded scope.**
+> This is a historical plan, not an active task list. Evidence remains tied
+> to its original sources, backend and workload. See the [plan index](../README.md)
+> for current work and separate qualification requirements.
+
 Prepared 2026-09-28 against `a9dc41a`. **Implementation delivered:** see the
-[Stage A validation record](stage-a-validation.md) for the exact source-bound
+[Stage A validation record](../../docs/Ariadne/stage-a-validation.md) for the exact source-bound
 result. This document preserves the planned steps and exit conditions. It
-expands [Stage A of the remaining plan](remaining-implementation-plan.md).
+expands [current roadmap](../../ROADMAP.md).
 No coverage-ledger promotion or instruction-step acceptance is claimed.
 The scope is two exact LLVM MC 20.1.2 forms, `MOV32mi` and `MOV64mi32`, used
 by the two retained AMD64 Windows/Linux minidump fixtures.
@@ -32,7 +37,7 @@ are still planned/pending. Neither belongs to the active 49-case
 
 Those are **candidate facts to review**, not a declaration that every encoding
 of these names is supported. The dump SHA-256 values and current zero-decoded
-baseline are pinned in [the minidump validation record](minidump-validation.md).
+baseline are pinned in [the minidump validation record](../../docs/Ariadne/minidump-validation.md).
 
 ## 0. Freeze evidence and resolve the source discrepancy
 
@@ -195,7 +200,7 @@ validated outputs and limitations. Leave `register-core` at 0/49 and the
 `ram-data` cases unaccepted unless their separate source-bound instruction-step
 gates are genuinely completed.
 
-Handoff to [Stage B](remaining-implementation-plan.md#b--establish-a-useful-real-dump-backward-slice):
+Handoff to [current roadmap](../../ROADMAP.md):
 identify an earlier captured entry and test address-producer dependencies
 through the decoded crash instruction. The reader remains minidump-only. No
 commit or push is part of this plan-authoring task.

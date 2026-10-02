@@ -1,5 +1,10 @@
 # AMD64 mul/div execution worktree checkpoint
 
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](Ariadne/semantic-assurance.md).
+
 The Lean module binds the 27 MUL, IMUL, DIV, IDIV and MULX form IDs to CPU
 register effects. It snapshots explicit and implicit operands before writes,
 orders MULX writes so an overlapping destination retains the documented upper

@@ -22,7 +22,7 @@ BAP is the sole semantic backend for `FileSnapshot::prepare` and the CLI.
 Build the [BAP helper/runtime](../../../native/bap/README.md) and LLVM MC decode reference
 first. `prepare_with_bap` accepts an explicit configuration; the ordinary method
 uses `Config::from_env`. No semantic fallback is made to LLVM. The separate
-[Stage 1 removal plan](../../../Plans/bap-only-semantics.md) defines this change.
+[Stage 1 removal plan](../../../Plans/completed/bap-only-semantics.md) defines this change.
 
 ```rust
 use ariadne::effects::PreparationOptions;

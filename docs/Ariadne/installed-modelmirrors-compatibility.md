@@ -2,7 +2,7 @@
 
 Checked **2026-10-01** against `/home/nzsn/.local/bin/ModelMirrors` and the
 MirrorRust checkout used by Ariadne's core and Stage E integration.
-The [retained validation record](installed-modelmirrors-compatibility-validation.json)
+The [retained validation record](../../evidence/Ariadne/installed-modelmirrors-compatibility-validation.json)
 contains exact commands, evaluator hashes, server/client identities and results.
 
 The installed server is compatible for the exercised **local stdio negotiated

@@ -1,5 +1,10 @@
 # AMD64 architectural CPU state
 
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](Ariadne/semantic-assurance.md).
+
 Status: S1 source routing and the S2 CPU-local representation foundation are
 implemented. This document describes their exact boundary. It does not claim
 complete AMD64 instruction semantics, memory/protection semantics, or a proved

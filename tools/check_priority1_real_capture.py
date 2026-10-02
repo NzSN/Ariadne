@@ -20,7 +20,7 @@ import sys
 
 
 ROOT = Path(__file__).resolve().parents[1]
-CASE = ROOT / "docs/Ariadne/priority-1-real-capture-case.json"
+CASE = ROOT / "evidence/Ariadne/priority-1-real-capture-case.json"
 
 
 class CheckFailure(Exception):
@@ -310,7 +310,7 @@ def source_hashes():
     paths.update(ROOT / p for p in (
         "Cargo.toml", "Cargo.lock", "Cargo.toml", "Cargo.lock",
         "tools/check_priority1_real_capture.py",
-        "docs/Ariadne/priority-1-real-capture-case.json",
+        "evidence/Ariadne/priority-1-real-capture-case.json",
     ))
     return {str(p.relative_to(ROOT)): digest(p) for p in sorted(paths)}
 

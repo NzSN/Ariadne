@@ -1,19 +1,24 @@
 # Priority 4 implementation plan: workload-sized performance decision
 
+> **Archived 2026-10-02: completed within its recorded scope.**
+> This is a historical plan, not an active task list. Evidence remains tied
+> to its original sources, backend and workload. See the [plan index](../README.md)
+> for current work and separate qualification requirements.
+
 Plan dated **2026-09-29** for practical priority 4 in the
-[assurance queue](practical-assurance-priorities.md). It executes the
-[workload-performance design](priority-4-workload-performance-design.md)
+[assurance queue](../../docs/Ariadne/practical-assurance-priorities.md). It executes the
+[workload-performance design](../../docs/Ariadne/priority-4-workload-performance-design.md)
 and specializes the performance half of
-[Stage F](remaining-implementation-plan.md#f--proof-boundary-and-scalability);
+[Stage F proof boundary](../../docs/Ariadne/stage-f-proof-and-performance.md);
 the separate Rust-refinement proof remains long-term research. The current
-[baseline](stage-f-proof-and-performance.md) covers five 128-node synthetic graphs
+[baseline](../../docs/Ariadne/stage-f-proof-and-performance.md) covers five 128-node synthetic graphs
 and a four-node tool-produced Windows minidump, not a representative real-capture
 workload.
-The first [workload measurement](priority-4-performance-validation.md)
+The first [workload measurement](../../docs/Ariadne/priority-4-performance-validation.md)
 retains a 34-node real query, five-repeat 128/256-node synthetic data and a
 bounded 512-node timeout. Its 64-node real-capture qualification remained open
 at that checkpoint.
-The later [2026-09-30 delivery](priority-4-performance-validation.md) closes
+The later [2026-09-30 delivery](../../docs/Ariadne/priority-4-performance-validation.md) closes
 that gate for a 98-instruction Windows capture, retains before/after evidence,
 and meets the unchanged 2,000 ms median budget.
 

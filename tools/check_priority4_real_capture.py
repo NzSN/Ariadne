@@ -18,7 +18,7 @@ from check_priority1_real_capture import (CheckFailure, check, digest, number,
 from measure_priority4 import source_hashes
 
 ROOT = Path(__file__).resolve().parents[1]
-CASE = ROOT / "docs/Ariadne/priority-4-real-capture-case.json"
+CASE = ROOT / "evidence/Ariadne/priority-4-real-capture-case.json"
 
 
 def raw_evidence(data, case):

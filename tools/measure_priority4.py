@@ -38,7 +38,7 @@ def source_hashes():
         "Cargo.toml", "Cargo.lock", "Cargo.toml", "Cargo.lock",
         "Cargo.toml", "Cargo.lock", "tools/measure_priority4.py",
         "tools/check_priority4_real_capture.py", "tools/check_priority1_real_capture.py",
-        "docs/Ariadne/priority-4-real-capture-case.json",
+        "evidence/Ariadne/priority-4-real-capture-case.json",
         "tests/support/scanning_engine.rs",
     ))
     return {str(p.relative_to(ROOT)): digest(p) for p in sorted(paths)}

@@ -1,5 +1,10 @@
 # AMD64 MONITORX and MWAITX
 
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](Ariadne/semantic-assurance.md).
+
 The paired model is in `Specs/AMD64Monitor.tla` and
 `lean/AMD64/Monitor.lean`. Its authority is AMD APM Volume 3 revision 3.38:
 MONITORX on PDF pages 280-281, MWAITX on pages 310-311, and CPUID function 5

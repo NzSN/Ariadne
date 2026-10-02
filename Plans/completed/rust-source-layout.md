@@ -1,8 +1,13 @@
 # Consolidate Rust sources and Cargo targets
 
+> **Archived 2026-10-02: completed within its recorded scope.**
+> This is a historical plan, not an active task list. Evidence remains tied
+> to its original sources, backend and workload. See the [plan index](../README.md)
+> for current work and separate qualification requirements.
+
 Implement the user-requested source layout without changing analysis semantics.
-The [implementation design](../docs/implementation.md) links this plan directly.
-The [delivery record](../docs/Ariadne/rust-source-layout.md) documents the
+The [implementation design](../../docs/implementation.md) links this plan directly.
+The [delivery record](../../docs/Ariadne/rust-source-layout.md) documents the
 implemented layout and source-bound validation.
 
 1. Replace the separate Rust package manifests with one root Cargo package.

@@ -1,7 +1,7 @@
 # Rust source layout consolidation
 
 Delivered **2026-10-02**, following the
-[source-layout plan](../../Plans/rust-source-layout.md).
+[source-layout plan](../../Plans/completed/rust-source-layout.md).
 
 The repository now uses one Cargo package, one root manifest and lockfile, and
 one build-artifact root. All 86 tracked Rust files are below `src/` or `tests/`.
@@ -57,7 +57,7 @@ preventing their executable names from colliding with production builds or
 other campaigns. Release CLI tests and measurements use the default production
 feature set; optional benchmark builds select their own binary explicitly.
 
-The [source-bound validation](rust-source-layout-validation.json) records all
+The [source-bound validation](../../evidence/Ariadne/rust-source-layout-validation.json) records all
 16 investigation gates and the nested 12-gate Stage E regression. Thirty
 text/JSON/DOT reports are byte-for-byte identical to the preserved previous
 executables, covering Linux/Windows fixtures, the NOT chain, the controlled
@@ -70,8 +70,8 @@ The three generated Rust bindings, captured fixtures, BAP corpus and supplied IR
 fixtures retain their original bytes. The engine/model source, formal
 specifications and root `lean/` contents are unchanged. The merged lockfile
 introduces no external package/version identities beyond the previous locks.
-The [evidence manifest](rust-source-layout-evidence-manifest.json) binds the
-[derived reports and logs](rust-source-layout-evidence.tar.gz).
+The [evidence manifest](../../evidence/Ariadne/rust-source-layout-evidence-manifest.json) binds the
+[derived reports and logs](../../evidence/Ariadne/rust-source-layout-evidence.tar.gz).
 
 Earlier validation JSON and evidence archives retain their original source
 paths and hashes as historical records. Full I4 qualification still requires

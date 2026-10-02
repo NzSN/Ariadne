@@ -1,10 +1,24 @@
 # Ariadne checkpoints
 
-Updated **2026-10-02** for the single-package Rust source layout, following
-BAP-only minidump semantics and the separate partial
-Stage 1 exit gate, following Stage E completion, MirrorRust integration and Priority 4 delivery. The Stage D 49-case gate remains intact at **0/49** as a
-long-term formal purpose. Earlier entries retain their historical,
-time-local commit and validation status.
+Updated **2026-10-02**: the independent AMD64 instruction-step/Lean track is
+retired under the [semantic assurance decision](docs/Ariadne/semantic-assurance.md).
+BAP lifting is a trusted dependency; projection, analysis and evidence validation
+remain active. Earlier entries retain their historical, time-local status and
+do not reinstate retired milestones.
+
+## 2026-10-02 — Independent ISA proof track retired
+
+Removed register-core acceptance dependencies from the B/C/E/F, Stage E and BAP
+qualification runners. Active checks retain native integration, model replay,
+mutation sensitivity and workload conditions. Historical ISA sources, tools and
+records remain in place; their documentation is marked retired. Analysis-level
+formal models and the manual lockfile used by effects provenance remain.
+
+This scope change does not refresh retained qualification records or waive the
+missing original Windows capture. Three focused tests cover eleven controlled
+runner executions and the effects source inventory; see the
+[retirement validation](docs/Ariadne/semantic-assurance.md#retirement-validation).
+Full native/formal campaigns were not rerun for this orchestration change.
 
 ```mermaid
 flowchart TD
@@ -40,7 +54,7 @@ flowchart TD
 ## 2026-10-02 — Rust source layout consolidated
 
 The [layout delivery](docs/Ariadne/rust-source-layout.md) follows the
-[source-layout plan](Plans/rust-source-layout.md): all 86 Rust files live under
+[source-layout plan](Plans/completed/rust-source-layout.md): all 86 Rust files live under
 `src/` or `tests/`, with one root Cargo manifest/lockfile and root `target/`.
 Default builds provide both CLIs. Benchmarks and MirrorRust replay use optional
 features; core-only builds retain no activated external crate dependencies.
@@ -49,7 +63,7 @@ Thirty report/explanation outputs match the prior executables byte-for-byte.
 Generated bindings and capture/IR fixtures retain their original bytes. Replay
 and mutation builds use isolated root `target/` subdirectories, and CLI
 measurement/test builds use the default production feature set. The
-[source-bound record](docs/Ariadne/rust-source-layout-validation.json) retains
+[source-bound record](evidence/Ariadne/rust-source-layout-validation.json) retains
 the exercised regression tier; the original Windows I4 capture is still absent.
 The root Lean/formal files and core engine/model source remain unchanged.
 Validation was retained before the user-authorized publication.
@@ -59,7 +73,7 @@ Validation was retained before the user-authorized publication.
 The [I0–I4 plan](Plans/investigation-layer.md) now has an implemented bound
 fault-address explanation module, typed BIL address evidence, exact query binding,
 CLI question and strict reports. The
-[source-bound first-delivery record](docs/Ariadne/investigation-validation.json)
+[source-bound first-delivery record](evidence/Ariadne/investigation-validation.json)
 passes **16 gates**, including the full **12-gate Stage E regression**, and
 **11 new actual investigation/producer mutants**. Both platform fixtures and the
 pinned controlled Chromium/Linux capture retain expected producer evidence.
@@ -79,8 +93,8 @@ normal minidump CLI/library preparation. The semantic selector and automatic
 LLVM effect fallback are removed. LLVM MC remains an independent decoded-fact
 reference, with no production uses/defs/rules from its legacy semantic layer.
 Historical effect-rule research and the separate supplied LLVM IR path remain.
-The [removal plan](Plans/bap-only-semantics.md) and
-[current record](docs/Ariadne/bap-only-removal-validation.json) identify the scope.
+The [removal plan](Plans/completed/bap-only-semantics.md) and
+[current record](evidence/Ariadne/bap-only-removal-validation.json) identify the scope.
 
 All **16 removal gates** pass against **93 stable current hashes**, including
 **12 Stage E regression gates**, **99 model observations** and **16 producer/adapter
@@ -102,7 +116,7 @@ backend feeding the existing Rust core. A hash-pinned isolated BAP helper,
 strict Rust transport, conservative BIL projection, shared captured-preparation
 seam, CLI selector and per-site reports are implemented. LLVM remains default.
 
-The [current record](docs/Ariadne/bap-stage1-validation.json) passes all
+The [current record](evidence/Ariadne/bap-stage1-validation.json) passes all
 **16 implementation gates** with **92 stable source hashes**. Its finite corpus
 contains 34 native BIL cases and 23 admitted opcode forms. Independent model
 replay compares all nine fields for **99 observations**, all **15 producer/adapter
@@ -112,16 +126,16 @@ the real 34-site Linux analysis, at a measured median cost of about 645 ms.
 
 **Stage 1's exit remains partial:** fresh BAP acceptance and timing on the
 original hash-pinned 98-instruction Windows capture are unavailable. The
-[validation report](docs/Ariadne/bap-stage1-validation.md) identifies the missing
+[historical BAP Stage 1 validation record](evidence/Ariadne/bap-stage1-validation.json) identifies the missing
 S4/S5 clause and rerun command. The 2,000 ms default-promotion target is preserved.
 Stage 2 remains unstarted and unqualified; Stage D stays **0/49**. These Stage 1
 implementation changes are uncommitted.
 
 ## 2026-10-01 — Stage E completion
 
-The [completion plan](Plans/stage-e-completion.md) is delivered within its
+The [completion plan](Plans/completed/stage-e-completion.md) is delivered within its
 finite conformance/report acceptance scope. The
-[source-bound completion record](docs/Ariadne/stage-e-completion-validation.json)
+[source-bound completion record](evidence/Ariadne/stage-e-completion-validation.json)
 passes **12/12 gates** with stable source hashes. Its 16 machine-state and
 16 IR inputs cover joins, loops, empty/multiple roots and seeds, sparse/full-width
 addresses, equal-valued IDs, terminal alternatives, phi inputs, memory/call
@@ -155,9 +169,9 @@ formatting and Clippy passed. The core harness was repaired for MirrorRust's
 `NegotiatedError` API and passed its existing 12 traces, 168 matched states,
 wrong-digest rejection and five engine mutation checks.
 
-The [retained source-bound record](docs/Ariadne/stage-e-mirrorrust-integration-validation.json)
+The [retained source-bound record](evidence/Ariadne/stage-e-mirrorrust-integration-validation.json)
 pins client, SUT, oracle and generated artifacts. The
-[first-stage implementation plan](Plans/stage-e-mirrorrust-integration.md) is
+[first-stage implementation plan](Plans/completed/stage-e-mirrorrust-integration.md) is
 complete. Broader generated scenarios, Stage E engine mutants,
 recovery/native-adapter handoff coverage and report/CLI integration remain
 open; **Stage E is still partial**. No fresh 19-component overall integration
@@ -183,7 +197,7 @@ claimed. All five synthetic families complete at 128, 256 and 512 nodes.
 
 All 277 visible actions match the frozen scanning reference, as do transitions
 on 256 generated requests. Text, DOT and JSON hashes are byte-identical across
-the performance checkpoints. The [integration record](docs/Ariadne/current-integration-validation.json)
+the performance checkpoints. The [integration record](evidence/Ariadne/current-integration-validation.json)
 has 19 passing components and 93 stable source hashes, including the fresh
 11-component minidump gate, native Windows/Linux matrix, MBT replay and
 mutation gates. It retains the rerun of an interrupted generated test artifact.
@@ -197,7 +211,7 @@ passed all 19 B/C/E/F gates with **89 stable source hashes**, including the
 11-gate nested minidump acceptance, root and IR tests, formal fixtures and
 the now explicitly selected original benchmark binary. The required
 register-core gate returned its expected **pending 0/49** result. The
-retained [Stage D component record](docs/Ariadne/stage-d-progress-validation.json)
+retained [Stage D component record](evidence/Ariadne/stage-d-progress-validation.json)
 matched all **242 source hashes** at that checkpoint; it remains a component
 checkpoint, not accepted instruction steps. A redundant Stage D rerun passed
 its first observation, AMD64 component and mutation checks before it was
@@ -232,7 +246,7 @@ captured instruction boundary 125 bytes before the exception RIP. Ariadne
 decoded 34 starts and retained a 28-node possible data slice; a reviewed RBX
 load is a possible address producer for the faulting memory read. Opaque
 calls and a later unsupported control remain visible. The
-[source-bound record](docs/Ariadne/priority-1-validation.json) contains a
+[source-bound record](evidence/Ariadne/priority-1-validation.json) contains a
 passing focused gate, three negative controls and all 11 passing minidump
 regression gates with stable sources. The raw dump stays in ignored local
 `tmp/priority1/`; no PE/ELF reader, historical execution claim or formal
@@ -257,8 +271,8 @@ or implementation behavior is claimed.
 
 ## 2026-09-29 13:43 CST — Stage D first-case progress
 
-The [standalone Stage D plan](docs/Ariadne/stage-d-register-core-implementation-plan.md)
-has begun. The source-bound [D0–D3 progress record](docs/Ariadne/stage-d-progress.md)
+The [ISA-track retirement decision](docs/Ariadne/semantic-assurance.md)
+has begun. The source-bound [historical Stage D validation record](evidence/Ariadne/stage-d-progress-validation.json)
 pins the first `MOV reg64, imm32` form and profile hashes, checks LLVM 20.1.2
 payload observations under Windows/Linux targets, and adds TLA+/Lean fixtures
 for a CPL-3 body, assumed fallthrough, LOCK #UD rollback witness and finite
@@ -267,7 +281,7 @@ RAX-byte-cell projection. Nine deliberate semantic mutations were rejected.
 The default AMD64 suite passed 70 Apalache typechecks, 33 TLC configurations,
 73 Lean build jobs, the combined axiom audit and 50 Python integrity tests on
 stable sources. Fifteen native effects tests also passed. The
-[Stage D validation report](docs/Ariadne/stage-d-progress-validation.json)
+[Stage D validation report](evidence/Ariadne/stage-d-progress-validation.json)
 records **242 stable source hashes**. The required `register-core` gate still
 reports **0/49 accepted** because the complete case-specific boundary,
 TLA+/Lean correspondence, general projection and coverage-ledger binding
@@ -293,7 +307,7 @@ See the [B/C validation](docs/Ariadne/stage-b-c-validation.md).
 **Stage D remains pending:** the default profile integrity check passes, but
 the required `register-core` gate still rejects **0/49** verified cases; the
 72 control/stack and 156 RAM cases also remain unaccepted. The
-[case audit](docs/Ariadne/stage-d-acceptance-audit.md) records an exact
+[historical user64 coverage ledger](Specs/AMD64/user64-coverage.json) records an exact
 register-MOV candidate and its open instruction-step obligations. No ledger
 status or source-form hash was promoted.
 
@@ -304,7 +318,7 @@ replay of all observable fields and CLI integration remain open. **Stage F is
 partial:** a [proof-boundary record and benchmark baseline](docs/Ariadne/stage-f-proof-and-performance.md)
 measure loops, joins, calls, dense aliases and a pinned minidump; no universal
 Rust refinement or solver optimization is claimed. The
-[19-gate source-bound report](docs/Ariadne/stage-b-f-validation.json) passed
+[19-gate source-bound report](evidence/Ariadne/stage-b-f-validation.json) passed
 with **83 stable source hashes**. This working-tree progress has not been
 committed or pushed.
 
@@ -340,7 +354,7 @@ validation report below records the working-tree status at its own time point.
 
 ## 2026-09-28 23:08 CST — remaining implementation plan begins
 
-This checkpoint starts the [remaining implementation plan](docs/Ariadne/remaining-implementation-plan.md)
+This checkpoint starts the [current roadmap](ROADMAP.md)
 from committed HEAD `a9dc41a`. The existing analyzer, LLVM MC adapter,
 Windows/Linux AMD64 minidump reader, reviewed effect registry and text/DOT
 renderer are delivered. No implementation or acceptance status changes at this
@@ -470,13 +484,13 @@ TLA+/Lean correspondence, and conservative analysis-projection obligations.
 - [AMD64 validation record](docs/amd64-validation.md)
 - [AMD64 task ledger](docs/amd64-semantics-tasks.md)
 - [Model-based testing evidence](mbt/README.md)
-- [Remaining implementation plan](docs/Ariadne/remaining-implementation-plan.md)
+- [current roadmap](ROADMAP.md)
 - [Stage A source review and validation](docs/Ariadne/stage-a-validation.md)
 - [Priority 1 real-capture validation](docs/Ariadne/priority-1-real-capture-validation.md)
 - [Priority 2 effect decision](docs/Ariadne/priority-2-effects-validation.md)
 - [Priority 3 presentation validation](docs/Ariadne/priority-3-presentation-validation.md)
 - [Priority 4 performance validation](docs/Ariadne/priority-4-performance-validation.md)
-- [Current integration gate](docs/Ariadne/current-integration-validation.json)
+- [Current integration gate](evidence/Ariadne/current-integration-validation.json)
 
 
 ## 2026-09-26 — Operand/effects working-tree delivery
@@ -492,7 +506,7 @@ TLA+/Lean correspondence, and conservative analysis-projection obligations.
   the earlier native-prerequisite failure is resolved for this session.
 - Full user64 instruction-step acceptance remains 0/277. No commit or push.
 
-[Implementation plan](docs/Ariadne/operand-effects-plan.md),
+[Implementation plan](Plans/completed/operand-effects-plan.md),
 [rule matrix](docs/Ariadne/operand-effects-rules.md),
 [validation and limitations](docs/Ariadne/operand-effects-validation.md).
 

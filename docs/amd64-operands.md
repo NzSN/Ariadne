@@ -1,5 +1,10 @@
 # AMD64 executable operands and form coupling
 
+> **Retired 2026-10-02.** This document and its ISA proof/profile artifacts
+> are historical reference, outside active development and qualification.
+> Milestones and commands below describe the former research track. See the
+> [current semantic assurance decision](Ariadne/semantic-assurance.md).
+
 `AMD64Operands.tla` and `AMD64/Operands.lean` close the representation gap
 between a decoded instruction payload and the legality-only shapes in the form
 validator. The form layer remains responsible for architectural form

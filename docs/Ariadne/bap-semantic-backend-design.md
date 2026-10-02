@@ -2,8 +2,10 @@
 
 Implementation contract for [Stage 1 of the BAP plan](../../Plans/bap-integration.md#stage-1-bap-semantic-backend).
 The [assessment](bap-core-refactor-assessment.md) remains the architecture basis.
-Stage 2 analysis-core replacement is separate. The
-[Stage 1 LLVM semantic-backend removal plan](../../Plans/bap-only-semantics.md)
+Stage 2 analysis-core replacement is separate. The [semantic assurance
+decision](semantic-assurance.md) retires independent ISA proofs; the linked Stage 1
+plan retains its BAP projection and workload requirements. The
+[Stage 1 LLVM semantic-backend removal plan](../../Plans/completed/bap-only-semantics.md)
 records the user-authorized follow-up: BAP becomes the sole minidump semantic
 producer, with LLVM MC retained only for decoded-fact validation.
 

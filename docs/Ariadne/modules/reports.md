@@ -36,5 +36,5 @@ Their IDs remain distinct from machine VAs. A verifier acceptance does not
 establish machine-address correspondence or precise memory aliasing.
 
 Run the source-bound acceptance with `python3 tools/check_stage_e.py`.
-[Completion plan](../../../Plans/stage-e-completion.md) and
+[Completion plan](../../../Plans/completed/stage-e-completion.md) and
 [report contracts](../stage-e-report-contracts.md).

@@ -1,11 +1,16 @@
 # Stage E: first MirrorRust integration stage
 
-Prepared 2026-10-01. Design: [typed replay integration](../docs/Ariadne/stage-e-mirrorrust-design.md).
+> **Archived 2026-10-02: completed within its recorded scope.**
+> This is a historical plan, not an active task list. Evidence remains tied
+> to its original sources, backend and workload. See the [plan index](../README.md)
+> for current work and separate qualification requirements.
+
+Prepared 2026-10-01. Design: [typed replay integration](../../docs/Ariadne/stage-e-mirrorrust-design.md).
 
 This stage connects the two existing Stage E Rust engines to the sibling
 `MirrorRust` checkout. It does not close the broader Stage E acceptance campaign.
 
-Completed 2026-10-01. The [retained validation record](../docs/Ariadne/stage-e-mirrorrust-integration-validation.json)
+Completed 2026-10-01. The [retained validation record](../../evidence/Ariadne/stage-e-mirrorrust-integration-validation.json)
 contains four complete Stage E fixture traces and 20 matched observations,
 both pre-factory wrong-digest rejections, seven supporting tests, formatting
 and Clippy checks. The restored core gate also passed its 12 traces,

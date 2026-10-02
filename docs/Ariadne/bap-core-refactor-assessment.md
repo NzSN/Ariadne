@@ -4,7 +4,7 @@
 
 The [two-stage BAP integration implementation plan](../../Plans/bap-integration.md)
 specifies **Stage 1: semantic backend**, followed by **Stage 2: analysis core**.
-Stage 1 is now implemented; its [current validation report](bap-stage1-validation.md)
+Stage 1 is now implemented; its [historical BAP Stage 1 validation record](../../evidence/Ariadne/bap-stage1-validation.json)
 keeps the missing historical Windows capture explicit. The subsequent
 [LLVM semantic-backend removal](bap-only-removal-validation.md) makes BAP the
 sole minidump semantic producer by user instruction. Stage 2 remains unstarted.
@@ -33,7 +33,7 @@ from this earlier source/API assessment.
 | BAP is a viable candidate **lifter or comparator** for captured x86-64 bytes. | High for capability; low for acceptance. | Official raw loader, `mc`, `Memory.create`, and disassembly APIs exist. No Ariadne corpus has been run through them in this assessment. |
 | A BAP core swap would change trusted semantics and graph construction. | High. | The [current model](../../src/model.rs) consumes fixed snapshot VAs and normalized effects; BAP's [driver](https://binaryanalysisplatform.github.io/bap/api/master/bap/Bap/Std/Disasm/Driver/index.html) performs its own classification and CFG recovery. |
 | Existing Stage E evidence would remain evidence for its **current pinned source**, not for a BAP-backed result. | High. | [Stage E](stage-e-completion.md) records 32 cases, 64 complete traces, 326 observations, and 15 mutant mismatches for the existing Rust finite models and adapters. A changed producer or model requires fresh source-bound acceptance. |
-| BAP would not automatically close Stage D's 0/49 instruction-step gate. | High. | The [Stage D audit](stage-d-acceptance-audit.md) requires decoded-form binding, effects/flags/frames, fault/commit and instruction-boundary proof, TLA–Lean correspondence, and conservative projection for each case. BAP's existence is additional trusted semantics, not those proofs. |
+| BAP would not automatically close Stage D's 0/49 instruction-step gate. | High. | The [historical user64 coverage ledger](../../Specs/AMD64/user64-coverage.json) requires decoded-form binding, effects/flags/frames, fault/commit and instruction-boundary proof, TLA–Lean correspondence, and conservative projection for each case. BAP's existence is additional trusted semantics, not those proofs. |
 | BAP can replace Ariadne's directly verified LLVM IR path without a new contract. | Low; presently unsupported. | BIR is BAP's IR. Ariadne's [LLVM IR request](../../src/llvm_ir.rs) requires independently verified LLVM IR, artifact identity, memory predecessors, and call obligations. |
 
 The captured-byte rule is particularly consequential. A minidump module record or matching executable path cannot fill missing runtime code bytes; Ariadne's [reader contract](file-reader-design.md) defaults to captured-only and forbids completing a captured prefix from file bytes. BAP's raw loader can consume a file or blob, but the caller must prove that each supplied instruction span came from the authorized snapshot. For a minidump with missing code pages, BAP cannot make those bytes known by choosing a different loader. This is a constraint on integration, not a criticism of BAP.
