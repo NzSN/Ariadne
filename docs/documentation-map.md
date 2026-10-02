@@ -88,6 +88,12 @@ the correctness of each relationship still requires editorial review.
 The catalogue below provides an entry to every document with contextual
 navigation, including completed plans and retired research.
 
+The [investigation correctness-fix plan](../Plans/completed/investigation-correctness-fixes.md)
+addresses two reviewed gaps in the first-question implementation: full Windows
+latency enforcement and valid answers when explanation limits are exhausted.
+Its [delivery record](Ariadne/investigation-correctness-validation.md) separates
+implemented repairs and exercised checks from real-Windows qualification.
+
 ### Project and active plans
 
 - [Ariadne checkpoints](../CHECKPOINTS.md).

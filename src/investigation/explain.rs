@@ -102,22 +102,9 @@ impl Builder<'_> {
         assertion: Assertion,
         classification: Classification,
         evidence_refs: Vec<String>,
-    ) {
-        if self.out.claims.len() >= self.limits.max_claims {
-            self.out.truncated = true;
-            self.gap("budget-claims", self.out.question.site, Vec::new());
-            return;
-        }
+    ) -> bool {
         let fact_id = id("fact", &self.out.scope_id, &(&assertion, &evidence_refs));
-        if !self.out.facts.iter().any(|f| f.id == fact_id) {
-            self.out.facts.push(FactRecord {
-                id: fact_id.clone(),
-                scope_id: self.out.scope_id.clone(),
-                assertion: assertion.clone(),
-                evidence_refs: evidence_refs.clone(),
-            });
-        }
-        let fact_refs = vec![fact_id];
+        let fact_refs = vec![fact_id.clone()];
         let premises = if classification == Classification::DerivedUnderPremises {
             vec![
                 PREMISE.into(),
@@ -137,17 +124,34 @@ impl Builder<'_> {
                 &premises,
             ),
         );
-        if !self.out.claims.iter().any(|c| c.id == claim_id) {
-            self.out.claims.push(Claim {
-                id: claim_id,
+        // Reusing a retained claim spends no budget. Admit its fact and claim
+        // together so callers never publish a producer with a missing fact.
+        if self.out.claims.iter().any(|c| c.id == claim_id) {
+            return true;
+        }
+        if self.out.claims.len() >= self.limits.max_claims {
+            self.out.truncated = true;
+            self.gap("budget-claims", self.out.question.site, Vec::new());
+            return false;
+        }
+        if !self.out.facts.iter().any(|f| f.id == fact_id) {
+            self.out.facts.push(FactRecord {
+                id: fact_id,
                 scope_id: self.out.scope_id.clone(),
-                classification,
-                assertion,
-                fact_refs,
-                evidence_refs,
-                premises,
+                assertion: assertion.clone(),
+                evidence_refs: evidence_refs.clone(),
             });
         }
+        self.out.claims.push(Claim {
+            id: claim_id,
+            scope_id: self.out.scope_id.clone(),
+            classification,
+            assertion,
+            fact_refs,
+            evidence_refs,
+            premises,
+        });
+        true
     }
     fn producers(
         &mut self,
@@ -162,13 +166,13 @@ impl Builder<'_> {
             .cloned()
             .collect();
         let mut result = Vec::new();
+        let has_definitions = !definitions.is_empty();
         for d in definitions {
             if self.links >= self.limits.max_origin_links {
                 self.out.truncated = true;
                 self.gap("budget-origin-links", at, Vec::new());
                 break;
             }
-            self.links += 1;
             let producer = match d.origin {
                 DefinitionOrigin::Entry => {
                     self.location_gap("entry-origin", d.site, loc, Vec::new());
@@ -179,8 +183,10 @@ impl Builder<'_> {
                     }
                 }
                 DefinitionOrigin::Instruction => {
-                    let evidence = self.evidence(d.site);
-                    pending.insert(d.site);
+                    let Some(retained) = self.evidence(d.site) else {
+                        break;
+                    };
+                    let evidence = Some(retained);
                     let gaps = self.bound.sites[&d.site].gaps.clone();
                     for gap in gaps {
                         self.location_gap(
@@ -229,14 +235,20 @@ impl Builder<'_> {
                     producer: producer.clone(),
                 }
             };
-            self.claim(
+            if !self.claim(
                 assertion,
                 Classification::DerivedUnderPremises,
                 producer.evidence_id.clone().into_iter().collect(),
-            );
+            ) {
+                break;
+            }
+            self.links += 1;
+            if d.origin == DefinitionOrigin::Instruction {
+                pending.insert(d.site);
+            }
             result.push(producer);
         }
-        if result.is_empty() {
+        if !has_definitions {
             self.gap("no-established-origin", at, Vec::new());
         }
         result
@@ -250,6 +262,21 @@ pub fn explain_fault_address(
     if !bound.request.addresses.contains(&question.site) {
         return Err(invalid("question site is outside this query"));
     }
+    // Validate the question before applying resource limits. A zero evidence
+    // budget must not turn an invalid access index into an unavailable answer.
+    let selected_address = if bound.state.decoded.contains(&question.site)
+        && !bound.sites[&question.site].accesses.is_empty()
+    {
+        Some(
+            bound.sites[&question.site]
+                .accesses
+                .get(question.memory_access)
+                .cloned()
+                .ok_or_else(|| invalid("memory-access index does not exist"))?,
+        )
+    } else {
+        None
+    };
     let mut b = Builder {
         bound,
         limits,
@@ -281,14 +308,10 @@ pub fn explain_fault_address(
         b.gap("not-reached", question.site, refs);
     } else if bound.sites[&question.site].accesses.is_empty() {
         b.gap("unsupported-address", question.site, refs);
-    } else {
-        let address = bound.sites[&question.site]
-            .accesses
-            .get(question.memory_access)
-            .cloned()
-            .ok_or_else(|| invalid("memory-access index does not exist"))?;
+    } else if !refs.is_empty() {
+        let address = selected_address.expect("validated selected address");
         b.out.address = Some(address.clone());
-        b.claim(
+        let address_claim = b.claim(
             Assertion::AddressInputs {
                 site: question.site,
                 memory_access: question.memory_access,
@@ -305,6 +328,9 @@ pub fn explain_fault_address(
             b.out.status = AnswerStatus::Explained;
             let mut pending = BTreeSet::new();
             for loc in &address.address_inputs {
+                if !address_claim || b.out.truncated {
+                    break;
+                }
                 let producers = b.producers(question.site, loc, false, &mut pending);
                 b.out.origins.push(OriginGroup {
                     location: loc.clone(),
@@ -313,6 +339,9 @@ pub fn explain_fault_address(
             }
             let mut visited = BTreeSet::new();
             while let Some(site) = pending.pop_first() {
+                if b.out.truncated {
+                    break;
+                }
                 if visited.contains(&site) {
                     continue;
                 }
@@ -329,6 +358,9 @@ pub fn explain_fault_address(
                     .collect();
                 for loc in uses {
                     b.producers(site, &loc, true, &mut pending);
+                    if b.out.truncated {
+                        break;
+                    }
                 }
             }
         }

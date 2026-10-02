@@ -60,6 +60,16 @@ dependency nodes and 65,536 claims. Exhaustion marks the answer partial/truncate
 and identifies the limit. These limits are not a scale qualification; large
 record/render costs remain subject to workload measurements and input limits.
 
+Zero is valid for each limit. An exhausted budget never relaxes reference or
+identity validation: a producer is retained only with its origin fact and any
+required instruction evidence. If the selected site's evidence cannot be kept,
+the answer is `unavailable`, `truncated=true`, with no selected address or origins
+and an explicit budget gap. When that evidence and a supported address are kept
+but expansion is incomplete, the answer is `partial`, `truncated=true`.
+Invalid question sites/access indices still fail independently of budgets.
+The [correctness-fix plan](../../Plans/completed/investigation-correctness-fixes.md) describes
+the boundary regressions and qualification repair.
+
 The question adds its instruction to slice seeds, **never entry roots**. Examples:
 
 ```sh
@@ -87,3 +97,18 @@ phase median ceiling of 250 ms for that 34-instruction query** for I4 acceptance
 this is an explanation-layer budget separate from the preserved 2,000 ms
 condition for the missing original Windows query. Neither budget is a universal
 worst-case bound.
+
+The operational workload and acceptance records use
+`ariadne.investigation-workload/v2` and
+`ariadne.investigation-first-delivery/v2`. This does not change the explanation
+schema above. Windows qualification is recomputed from identity-bound release
+CLI **explanation-mode** samples, excluding warm-up, with at least five measured
+repeats. Missing, malformed or over-budget measurements cannot grant full I4
+acceptance; base-mode or phase-only timings cannot substitute.
+
+`windows98Qualification` reports `unavailable`, `invalid`, `over-budget` or `met`,
+plus the checked/valid flags, sample count, median and fixed budget. The aggregate
+`fullI4RealCaptureAcceptance` additionally requires passing gates and source/tool
+stability. The narrower `passed` field still describes the exercised implementation
+and fixture/Linux tier. Legacy records lacking the required measurement evidence
+cannot establish full Windows acceptance.

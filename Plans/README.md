@@ -6,12 +6,13 @@
 
 **Why this document exists.** [Roadmap](../ROADMAP.md) sets the priorities used to classify work.
 
-**What this document establishes.** Two plans remain active: BAP integration and investigation. Completed plans are archived; retired ISA work is neither pending delivery nor successfully proved.
+**What this document establishes.** Active plans cover BAP integration and investigation. The reviewed qualification/truncation repairs are complete within their recorded tier. Completed plans are archived; retired ISA work is neither pending delivery nor successfully proved.
 
 **Where to go next.**
 
 - [BAP plan](bap-integration.md) — tracks missing Windows qualification and the unstarted core migration.
 - [Investigation plan](investigation-layer.md) — tracks full I4 acceptance and later investigation questions.
+- [Completed investigation repairs](completed/investigation-correctness-fixes.md) — records enforcement of the Windows timing condition and valid truncation under explanation limits.
 
 **What remains unresolved.** Full original-Windows qualification is still open. The BAP analysis-core replacement has not started; neither selecting BAP nor passing a fixture closes those requirements. The first fault-address question is implemented, but full original-Windows I4 qualification remains open. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
 
@@ -33,6 +34,7 @@ not refresh qualification evidence.
 
 | Plan | Completion boundary and evidence |
 | --- | --- |
+| [Investigation correctness fixes](completed/investigation-correctness-fixes.md) | Qualification/truncation repairs; [17-gate validation](../docs/Ariadne/investigation-correctness-validation.md). Original-Windows I4 qualification remains separate. |
 | [Rust source layout](completed/rust-source-layout.md) | Single root Cargo package and source consolidation; [delivery record](../docs/Ariadne/rust-source-layout.md). |
 | [BAP-only semantics](completed/bap-only-semantics.md) | LLVM semantic selector/fallback removed; [removal record](../docs/Ariadne/bap-only-removal-validation.md). Full BAP workload qualification remains in the active integration plan. |
 | [Stage E initial integration](completed/stage-e-mirrorrust-integration.md) | Initial typed replay ports and fixture traces; [integration record](../evidence/Ariadne/stage-e-mirrorrust-integration-validation.json). |

@@ -13,6 +13,7 @@
 - [Completed historical plan](../../Plans/completed/priority-4-workload-performance-plan.md) — freezes workloads, budgets and optimization checks.
 - [Historical delivery](priority-4-performance-validation.md) — records the measured optimization.
 - [BAP qualification](../../Plans/bap-integration.md) — retains the separate current-backend Windows requirement.
+- [Investigation qualification repair](../../Plans/completed/investigation-correctness-fixes.md#1-enforce-the-windows-i4-latency-condition) — applies the fixed Windows total-query budget to the investigation acceptance decision; see its [validation record](investigation-correctness-validation.md) for the exercised tier.
 
 **What remains unresolved.** Each backend and workload needs its own qualification. A small synthetic baseline or an older LLVM-backed result cannot satisfy the current BAP original-Windows requirement.
 

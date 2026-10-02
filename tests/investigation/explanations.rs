@@ -184,6 +184,194 @@ fn finite_limits_never_label_truncated_output_explained() {
     assert_eq!(e.status, AnswerStatus::Partial);
     assert!(e.gaps.iter().any(|g| g.code.starts_with("budget-")));
 }
+
+fn assert_bounded(e: &Explanation, limits: ExplainLimits) {
+    e.validate().unwrap();
+    assert!(e.evidence.len() <= limits.max_evidence);
+    assert!(e.claims.len() <= limits.max_claims);
+    let links = e
+        .facts
+        .iter()
+        .filter(|f| {
+            matches!(
+                f.assertion,
+                Assertion::PossibleOrigin { .. } | Assertion::Dependency { .. }
+            )
+        })
+        .count();
+    assert!(links <= limits.max_origin_links);
+    let dependency_sites: std::collections::BTreeSet<_> = e
+        .facts
+        .iter()
+        .filter_map(|f| {
+            if let Assertion::Dependency { at, .. } = f.assertion {
+                Some(at)
+            } else {
+                None
+            }
+        })
+        .collect();
+    assert!(dependency_sites.len() <= limits.max_dependency_nodes);
+    for f in &e.facts {
+        if let Assertion::PossibleOrigin { producer, .. } | Assertion::Dependency { producer, .. } =
+            &f.assertion
+        {
+            if producer.origin == OriginKind::Instruction {
+                assert!(producer.evidence_id.is_some());
+            }
+        }
+    }
+    if e.truncated {
+        assert_ne!(e.status, AnswerStatus::Explained);
+        assert!(e.gaps.iter().any(|g| g.code.starts_with("budget-")));
+    }
+    let json = serde_json::to_vec(e).unwrap();
+    let decoded: Explanation = serde_json::from_slice(&json).unwrap();
+    decoded.validate().unwrap();
+    assert_eq!(
+        serde_json::to_value(e).unwrap(),
+        serde_json::to_value(decoded).unwrap()
+    );
+    #[cfg(feature = "reports")]
+    {
+        use ariadne::reports::{Format, decode_explanation, render_explanation};
+        decode_explanation(&json).unwrap();
+        for format in [Format::Text, Format::Json, Format::Dot] {
+            render_explanation(e, format).unwrap();
+        }
+    }
+}
+
+#[test]
+fn claim_and_evidence_exhaustion_return_valid_partial_answers() {
+    let (a, r, c) = fixture();
+    let bound = BoundInvestigation::new(&a, &r, c).unwrap();
+    for limits in [
+        ExplainLimits {
+            max_claims: 1,
+            ..ExplainLimits::default()
+        },
+        ExplainLimits {
+            // Selected-site and address claims fit; the producer's evidence
+            // spends the final slot before its origin fact can be admitted.
+            max_claims: 3,
+            ..ExplainLimits::default()
+        },
+        ExplainLimits {
+            max_evidence: 0,
+            ..ExplainLimits::default()
+        },
+    ] {
+        let e = explain_fault_address(
+            &bound,
+            FaultAddressQuestion {
+                site: 0x1003,
+                memory_access: 0,
+            },
+            limits,
+        )
+        .unwrap();
+        assert!(e.truncated);
+        if limits.max_evidence == 0 {
+            assert_eq!(e.status, AnswerStatus::Unavailable);
+            assert!(e.address.is_none());
+            assert!(e.origins.is_empty());
+        } else {
+            assert_eq!(e.status, AnswerStatus::Partial);
+        }
+        assert_bounded(&e, limits);
+    }
+}
+
+#[test]
+fn limit_boundaries_and_cycles_preserve_references_and_default_answers() {
+    for cycle in [false, true] {
+        let (mut analyzer, mut request, context) = fixture();
+        if cycle {
+            request.instructions.get_mut(&0x1000).unwrap().uses = cells(0);
+            request.instructions.insert(
+                0x1006,
+                Instruction {
+                    kind: InstructionKind::Jump,
+                    targets: [0x1000].into(),
+                    complete: true,
+                    ..Instruction::default()
+                },
+            );
+            analyzer = Analyzer::new(request.clone()).unwrap();
+            while analyzer.step() {}
+        }
+        let bound = BoundInvestigation::new(&analyzer, &request, context).unwrap();
+        let question = FaultAddressQuestion {
+            site: 0x1003,
+            memory_access: 0,
+        };
+        let baseline =
+            explain_fault_address(&bound, question.clone(), ExplainLimits::default()).unwrap();
+        assert!(!baseline.truncated);
+        let exact = ExplainLimits {
+            max_evidence: baseline.evidence.len(),
+            max_claims: baseline.claims.len(),
+            max_origin_links: baseline
+                .facts
+                .iter()
+                .filter(|f| {
+                    matches!(
+                        f.assertion,
+                        Assertion::PossibleOrigin { .. } | Assertion::Dependency { .. }
+                    )
+                })
+                .count(),
+            max_dependency_nodes: 1,
+        };
+        let at_boundary = explain_fault_address(&bound, question.clone(), exact).unwrap();
+        assert!(!at_boundary.truncated);
+        assert_eq!(
+            serde_json::to_value(&baseline).unwrap(),
+            serde_json::to_value(&at_boundary).unwrap()
+        );
+        for max_evidence in [0, 1, exact.max_evidence, exact.max_evidence + 1] {
+            for max_claims in [0, 1, 2, exact.max_claims, exact.max_claims + 1] {
+                for max_origin_links in [0, 1, exact.max_origin_links, exact.max_origin_links + 1] {
+                    for max_dependency_nodes in [0, 1, 2] {
+                        let limits = ExplainLimits {
+                            max_evidence,
+                            max_claims,
+                            max_origin_links,
+                            max_dependency_nodes,
+                        };
+                        let e = explain_fault_address(&bound, question.clone(), limits).unwrap();
+                        assert_bounded(&e, limits);
+                    }
+                }
+            }
+        }
+    }
+}
+
+#[test]
+fn zero_budgets_do_not_hide_invalid_questions() {
+    let (a, r, c) = fixture();
+    let bound = BoundInvestigation::new(&a, &r, c).unwrap();
+    let limits = ExplainLimits {
+        max_evidence: 0,
+        max_claims: 0,
+        max_origin_links: 0,
+        max_dependency_nodes: 0,
+    };
+    for question in [
+        FaultAddressQuestion {
+            site: 0x1003,
+            memory_access: 1,
+        },
+        FaultAddressQuestion {
+            site: 0x9999,
+            memory_access: 0,
+        },
+    ] {
+        assert!(explain_fault_address(&bound, question, limits).is_err());
+    }
+}
 #[test]
 fn unsupported_address_missing_fact_and_unreached_site_remain_unavailable() {
     let (a, r, mut c) = fixture();

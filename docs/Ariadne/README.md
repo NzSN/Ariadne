@@ -36,6 +36,8 @@ The [source-layout record](rust-source-layout.md),
 [BAP-only delivery](bap-only-removal-validation.md),
 [investigation validation](investigation-validation.md) and
 [Stage E completion](stage-e-completion.md) explain their exercised scopes.
+The later [investigation correctness record](investigation-correctness-validation.md)
+qualifies the timing-decision and truncation repairs within the available tier.
 Validation JSON, CSV samples and evidence archives retain their original
 identities under [evidence/Ariadne](../../evidence/Ariadne/README.md).
 A historical passing record is not fresh qualification after changes.

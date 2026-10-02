@@ -21,6 +21,8 @@ M=[
  ('wrong-dump-offset','src/input/investigation.rs','file_offset: c.file_offset,','file_offset: 0,','input','investigation','both_platforms_explain_address_producer_and_preserve_dump_offsets'),
  ('invent-address-inputs','src/bap/address.rs','address_inputs: v.inputs.clone(),','address_inputs: crate::effects::Catalogue.locations(),','bap','native',ADDR),
  ('wrong-index-scale','src/bap/address.rs','let n = 1u64 << b.constant;','let n = (1u64 << b.constant).wrapping_add(1);','bap','native',ADDR),
+ ('discard-claim-budget-result','src/investigation/explain.rs','if !self.claim(\n                assertion,\n                Classification::DerivedUnderPremises,\n                producer.evidence_id.clone().into_iter().collect(),\n            ) {\n                break;\n            }','self.claim(\n                assertion,\n                Classification::DerivedUnderPremises,\n                producer.evidence_id.clone().into_iter().collect(),\n            );','investigation','explanations','claim_and_evidence_exhaustion_return_valid_partial_answers'),
+ ('publish-address-without-evidence','src/investigation/explain.rs','} else if !refs.is_empty() {','} else {','investigation','explanations','claim_and_evidence_exhaustion_return_valid_partial_answers'),
 ]
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def sources():
@@ -48,7 +50,7 @@ def main():
   try:r=run(command,env)
   finally:p.write_text(text)
   output=r.stdout+r.stderr;(work/f'{name}.log').write_text(output)
-  intended=r.returncode==101 and f'test {test} ... FAILED' in output and 'could not compile' not in output and ('assertion' in output or 'unsupported claim classification' in output or 'unbound or duplicate origin location' in output)
+  intended=r.returncode==101 and f'test {test} ... FAILED' in output and 'could not compile' not in output and any(reason in output for reason in ['assertion','unsupported claim classification','unbound or duplicate origin location','producer lacks its origin fact','selected site lacks evidence'])
   records.append(dict(mutation=name,test=test,intendedMismatch=intended,exitCode=r.returncode));print(name,':','intended mismatch' if intended else 'NOT ACCEPTED',flush=True)
   if not intended:raise SystemExit(name+': no intended mismatch')
  unchanged=all(sha(sut/p)==d for p,d in observers.items());stable=before==sources();report=dict(schema='ariadne.investigation-mutations/v1',passed=unchanged and stable,sourcesStable=stable,sourceHashes=before,observersUnchanged=unchanged,observerHashes=observers,mutants=records)

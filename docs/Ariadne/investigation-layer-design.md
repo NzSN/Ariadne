@@ -13,6 +13,7 @@
 - [Investigation plan](../../Plans/investigation-layer.md) — organizes the first question and later I5–I7 work.
 - [Implemented contracts](investigation-contracts.md) — define query identity, claim classes and evidence requirements.
 - [First delivery](investigation-validation.md) — records the exercised tier and open Windows acceptance.
+- [Investigation correctness-fix plan](../../Plans/completed/investigation-correctness-fixes.md) — scopes the limit-exhaustion and Windows I4 timing repairs; the [delivery record](investigation-correctness-validation.md) tracks implementation and validation.
 
 **What remains unresolved.** The first fault-address question is implemented, but full original-Windows I4 qualification remains open. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered. A possible producer does not prove a UAF, actual path or general root cause.
 

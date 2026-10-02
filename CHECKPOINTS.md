@@ -23,6 +23,26 @@ BAP lifting is a trusted dependency; projection, analysis and evidence validatio
 remain active. Earlier entries retain their historical, time-local status and
 do not reinstate retired milestones.
 
+## 2026-10-02 — Investigation correctness repairs
+
+Implemented the [qualification and truncation repairs](docs/Ariadne/investigation-correctness-validation.md):
+full Windows I4 acceptance now requires valid bound explanation-CLI samples with
+a median at most 2,000 ms, and exhausted explanation budgets return structurally
+valid partial/unavailable answers. Strict validators and normal query outputs
+remain intact.
+
+Fresh validation passed all 17 investigation gates with 123 stable source hashes,
+including 12 nested Stage E gates and 11 minidump gates. All 13 investigation
+mutants and two controlled Python decision mutants were detected. Default-output
+comparison preserved 24 reports byte-for-byte. The retained Linux explanation
+phase measured about 159 ms against the unchanged 250 ms condition.
+
+The [source-bound record](evidence/Ariadne/investigation-correctness-validation.json)
+and associated archive retain the exercised evidence. Full original-Windows I4
+acceptance remains false because its pinned capture is unavailable. The
+[completed fix plan](Plans/completed/investigation-correctness-fixes.md) covers
+these repairs, not later investigation capabilities or BAP core migration.
+
 ## 2026-10-02 — Independent ISA proof track retired
 
 Removed register-core acceptance dependencies from the B/C/E/F, Stage E and BAP

@@ -43,3 +43,9 @@ than editing its stored hashes or pass/fail flags.
 
 Stage D records are retired research evidence. Earlier LLVM measurements do not
 qualify the BAP backend, and absent Windows artifacts remain unmet requirements.
+
+The [investigation correctness record](investigation-correctness-validation.json)
+and [manifest](investigation-correctness-evidence-manifest.json) retain the later
+qualification/truncation repairs. Their [delivery explanation](../../docs/Ariadne/investigation-correctness-validation.md)
+distinguishes the passing 17-gate fixture/Linux tier from unavailable full Windows
+acceptance. Earlier evidence files have not been rewritten.
