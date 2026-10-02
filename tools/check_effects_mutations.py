@@ -4,6 +4,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+from rust_layout import copy_sut, source_files
 import shutil
 import subprocess
 import tempfile
@@ -63,7 +64,7 @@ def main():
     print(f"Mutation artifacts: {directory}", flush=True)
     env = {**os.environ, "ARIADNE_LLVM_MC": str(decoder)}
     # Check the identical observer first; unavailable decoder/build is not a kill.
-    baseline = subprocess.run(["cargo", "test", "--offline", "--test", "effects", "--", "--ignored"],
+    baseline = subprocess.run(['cargo', 'test', '--no-default-features', '--offline', '--test', 'effects', '--', '--ignored'],
                               cwd=ROOT, env=env, capture_output=True, text=True, timeout=120)
     (directory / "baseline.log").write_text(baseline.stdout + baseline.stderr)
     if baseline.returncode:
@@ -72,17 +73,14 @@ def main():
     for name, file, old, new, test in MUTATIONS:
         sut = directory / name
         sut.mkdir()
-        for tree in ("src", "tests"):
-            shutil.copytree(ROOT / tree, sut / tree)
-        for file_name in ("Cargo.toml", "Cargo.lock"):
-            shutil.copy2(ROOT / file_name, sut / file_name)
+        copy_sut(sut)
         path = sut / file
         original = path.read_text()
         if original.count(old) != 1:
             raise RuntimeError(f"{name}: mutation anchor must match exactly once")
         path.write_text(original.replace(old, new))
-        run = subprocess.run(["cargo", "test", "--offline", "--manifest-path", str(sut / "Cargo.toml"),
-                              "--target-dir", str(directory / "target"), "--test", "effects", test,
+        run = subprocess.run(["cargo", "test", "--no-default-features", "--offline", "--manifest-path", str(sut / "Cargo.toml"),
+                              "--target-dir", str(ROOT / 'target/effects-mutations' / directory.name), "--test", "effects", test,
                               "--", "--ignored", "--exact"], env=env, capture_output=True, text=True, timeout=120)
         log = run.stdout + run.stderr
         (sut / "run.log").write_text(log)

@@ -10,7 +10,7 @@ slice engine. No LLVM code is linked into the Rust crate; its offline build and
 This is a byte-span adapter. It does **not** open a PE/ELF binary or crash dump,
 map VAs to file offsets, validate image identity, or prove that a supplied span
 is from the stated snapshot. Binary/dump readers must establish those facts
-before populating `ByteSnapshot`. The [separate minidump package](../input/README.md) now supplies captured
+before populating `ByteSnapshot`. The [separate minidump package](Ariadne/modules/input.md) now supplies captured
 memory and local instruction-start discovery. PE/ELF image readers, ELF core
 readers and the analyzer CLI remain separate roadmap work.
 

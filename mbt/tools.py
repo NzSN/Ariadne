@@ -10,6 +10,7 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parent.parent
 MBT = ROOT / "mbt"
+WORK_ROOT = ROOT / "target/mbt-work"
 FIXTURES = ("Binary", "Dump", "Loop", "Closed", "Pipeline", "Calls")
 MODEL_FILES = (
     "Specs/Ariadne.tla", "Specs/AriadneTypes.tla", "Specs/AriadneMachineCommon.tla",
@@ -39,8 +40,8 @@ def run(command, *, cwd=ROOT, expected=(0,), log=None, timeout=120):
 
 
 def work_directory(prefix):
-    work = MBT / ".work"
-    work.mkdir(exist_ok=True)
+    work = WORK_ROOT
+    work.mkdir(parents=True, exist_ok=True)
     return Path(tempfile.mkdtemp(prefix=prefix + "-", dir=work))
 
 
@@ -53,7 +54,7 @@ def prepare_model(work):
 
 
 def mirrors_tools():
-    selected = MBT / ".work/toolchain.json"
+    selected = WORK_ROOT / "toolchain.json"
     identity = None
     if "MIRRORS_ROOT" not in os.environ and selected.is_file():
         identity = json.loads(selected.read_text())

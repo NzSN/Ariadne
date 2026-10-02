@@ -4,7 +4,7 @@ Design decision, **2026-09-29**. The scoped
 [Priority 4 implementation plan](priority-4-workload-performance-plan.md)
 applies this design. It builds on the current
 [Stage F baseline](stage-f-proof-and-performance.md), the separate
-[`bench/` harness](../../bench/README.md), and the supported
+[`bench/` harness](modules/bench.md), and the supported
 [minidump CLI/report contract](stage-c-report-schema.md). The long-term Rust
 refinement proof remains independent of this performance decision.
 

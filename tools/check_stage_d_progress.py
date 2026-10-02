@@ -61,8 +61,7 @@ def main():
                                     '--report', str(directory / 'first-form.json')], ROOT, 60),
         ('amd64-components', ['bash', 'Specs/check-amd64.sh'], ROOT, 1800),
         ('first-case-mutations', ['python3', 'tools/check_stage_d_mov_mutations.py'], ROOT, 600),
-        ('native-effects-regression', ['cargo', 'test', '--offline', '--locked',
-                                       '--test', 'effects', '--', '--ignored'], ROOT, 600),
+        ('native-effects-regression', ['cargo', 'test', '--no-default-features', '--offline', '--locked', '--test', 'effects', '--', '--ignored'], ROOT, 600),
         ('profile-integrity', ['python3', 'tools/amd64_profile.py', 'check'], ROOT, 60),
     ]
     records = [run(command, cwd, env, directory, name, timeout)

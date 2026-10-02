@@ -2,10 +2,11 @@
 """Mechanical mutations of the real BAP producer/adapter; observers stay unchanged."""
 import hashlib,json,os,shutil,subprocess,tempfile
 from pathlib import Path
+from rust_layout import copy_sut, source_files
 ROOT=Path(__file__).resolve().parents[1]
-CORPUS='projection::tests::captured_bil_matches_independent_alias_flag_address_and_memory_expectations'
-UNKNOWN='projection::tests::generic_unknown_keeps_old_origins_and_is_not_an_undefined_isa_claim'
-TRANSPORT='session::tests::malformed_batches_bind_every_site_and_poison_failed_sessions'
+CORPUS='bap::projection::tests::captured_bil_matches_independent_alias_flag_address_and_memory_expectations'
+UNKNOWN='bap::projection::tests::generic_unknown_keeps_old_origins_and_is_not_an_undefined_isa_claim'
+TRANSPORT='bap::session::tests::malformed_batches_bind_every_site_and_poison_failed_sessions'
 NEGATIVE='calls_special_empty_lifts_prefixes_and_snapshot_reset_remain_explicit'
 DISAGREE='unix::decode_length_control_and_operand_binding_disagreements_stop_without_fallback'
 MUTANTS=[
@@ -28,28 +29,27 @@ MUTANTS=[
 def digest(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def execute(cmd,env,timeout=180):return subprocess.run([str(a) for a in cmd],cwd=ROOT,env=env,text=True,capture_output=True,timeout=timeout)
 def command(manifest,target,suite,test):
- return ['cargo','test','--offline','--locked','--release','--manifest-path',manifest,'--target-dir',target,*(['--lib'] if suite=='lib' else ['--test',suite]),test,'--','--exact','--include-ignored']
+ return ['cargo','test','--offline','--locked','--release','--manifest-path',manifest,'--target-dir',target,*(['--lib'] if suite=='lib' else ['--test','bap_'+suite]),test,'--','--exact','--include-ignored']
 def sources():
- paths=set()
- for tree in ['src','tests','reports/src','investigation/src','bap/src','bap/tests','native/bap']:
+ paths=source_files()
+ for tree in ['src','tests','src/reports','src/investigation','src/bap','tests/bap','native/bap']:
   paths.update(p for p in (ROOT/tree).rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix!='.md')
- paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','reports/Cargo.toml','reports/Cargo.lock','investigation/Cargo.toml','investigation/Cargo.lock','bap/Cargo.toml','bap/Cargo.lock','tools/check_bap_mutations.py'])
+ paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','tools/check_bap_mutations.py'])
  return {str(p.relative_to(ROOT)):digest(p) for p in sorted(paths)}
 def main():
  before=sources()
  work=Path(tempfile.mkdtemp(prefix='ariadne-bap-mutations-'));sut=work/'sut';sut.mkdir()
  env={**os.environ,'ARIADNE_BAP_HELPER':str(ROOT/'target/ariadne-bap-lift'),'ARIADNE_LLVM_MC':str(ROOT/'target/ariadne-llvm-mc'),'BAP_RUNTIME_ROOT':str(ROOT/'tmp/bap-setup/stable')}
- for tree in ['src','tests','reports/src','investigation/src','bap/src','bap/tests','native/bap']:shutil.copytree(ROOT/tree,sut/tree)
- for name in ['Cargo.toml','Cargo.lock','reports/Cargo.toml','reports/Cargo.lock','investigation/Cargo.toml','investigation/Cargo.lock','bap/Cargo.toml','bap/Cargo.lock']:shutil.copy2(ROOT/name,sut/name)
- observers={str(p.relative_to(sut)):digest(p) for p in (sut/'bap/tests').rglob('*') if p.is_file()}
+ copy_sut(sut)
+ observers={str(p.relative_to(sut)):digest(p) for p in (sut/'tests/bap').rglob('*') if p.is_file()}
  print('Mutation artifacts:',work,flush=True);baselines=set();rows=[]
  for name,file,old,new,suite,test in MUTANTS:
-  cmd=command(sut/'bap/Cargo.toml',work/'target',suite,test)
+  cmd=command(sut/'Cargo.toml',ROOT/'target/bap-mutations'/work.name,suite,test)
   if (suite,test) not in baselines:
    good=execute(cmd,env);(work/f'{suite}-baseline.log').write_text(good.stdout+good.stderr)
    if good.returncode or f'test {test} ... ok' not in good.stdout:raise SystemExit(f'baseline failed: {test}')
    baselines.add((suite,test))
-  path=sut/'bap/src'/file;original=path.read_text()
+  path=sut/'src/bap'/file;original=path.read_text()
   if original.count(old)!=1:raise SystemExit(f'{name}: mutation anchor not unique ({original.count(old)})')
   path.write_text(original.replace(old,new))
   try:r=execute(cmd,env)
@@ -63,12 +63,12 @@ def main():
  path=sut/'native/bap/lift.cpp';original=path.read_text();old='std::to_string(bap_exp_extract_lobit(e))+",\\\"lo\\\":"+std::to_string(bap_exp_extract_hibit(e))'
  if original.count(old)!=1:raise SystemExit('extract getter mutation anchor not unique')
  new=old.replace('lobit','GETTER_TEMP').replace('hibit','lobit').replace('GETTER_TEMP','hibit');path.write_text(original.replace(old,new))
- build=execute(['bash',sut/'native/bap/build.sh',work/'bad-extract'],env)
+ build=execute(['bash',sut/'native/bap/build.sh',ROOT/'target/bap-mutations'/work.name/'bad-extract'],env)
  (work/'extract-build.log').write_text(build.stdout+build.stderr)
  if build.returncode:raise SystemExit('native mutant failed to build; not a detected defect')
- mutant_env={**env,'ARIADNE_BAP_HELPER':str(work/'bad-extract')}
+ mutant_env={**env,'ARIADNE_BAP_HELPER':str(ROOT/'target/bap-mutations'/work.name/'bad-extract')}
  test='aliases_zero_extension_memory_and_conditional_writes_have_independent_effect_expectations'
- r=execute(command(sut/'bap/Cargo.toml',work/'target','native',test),mutant_env);output=r.stdout+r.stderr;(work/'native-extract.log').write_text(output)
+ r=execute(command(sut/'Cargo.toml',ROOT/'target/bap-mutations'/work.name,'native',test),mutant_env);output=r.stdout+r.stderr;(work/'native-extract.log').write_text(output)
  rejected=r.returncode==101 and f'test {test} ... FAILED' in output and 'BIL extraction bounds' in output and 'could not compile' not in output
  rows.append(dict(mutation='swapped-native-extract-getters',test=test,bindingValidatorRejected=rejected,exitCode=r.returncode))
  print('swapped-native-extract-getters:', 'binding validator rejected' if rejected else 'NOT ACCEPTED',flush=True)

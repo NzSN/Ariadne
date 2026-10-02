@@ -5,6 +5,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+from rust_layout import copy_sut, source_files
 import subprocess
 import tempfile
 import time
@@ -14,14 +15,14 @@ SPECS = ROOT / 'Specs'
 
 
 def sources():
-    paths = set()
-    for directory in ('src', 'tests', 'input/src', 'input/tests', 'input/examples',
-                      'ir/src', 'ir/tests', 'native/llvm_mc', 'native/llvm_ir',
-                      'bench/src', 'tools'):
+    paths = source_files()
+    for directory in ('src', 'tests', 'src/input', 'tests/input', 'src/examples',
+                      'src/ir', 'tests/ir', 'native/llvm_mc', 'native/llvm_ir',
+                      'src/bench', 'tools'):
         paths.update(p for p in (ROOT / directory).rglob('*') if p.is_file()
                      and '__pycache__' not in p.parts)
-    for name in ('Cargo.toml', 'Cargo.lock', 'input/Cargo.toml', 'input/Cargo.lock',
-                 'ir/Cargo.toml', 'ir/Cargo.lock', 'bench/Cargo.toml', 'bench/Cargo.lock',
+    for name in ('Cargo.toml', 'Cargo.lock', 'Cargo.toml', 'Cargo.lock',
+                 'Cargo.toml', 'Cargo.lock', 'Cargo.toml', 'Cargo.lock',
                  'Specs/Ariadne.tla', 'Specs/AriadneMachineState.tla',
                  'Specs/AriadneMachineStateExample.tla', 'Specs/AriadneMachineCommon.tla',
                  'Specs/AriadneLLVMIR.tla', 'Specs/AriadneLLVMIRExample.tla',
@@ -56,15 +57,15 @@ def main():
     gates = [
         ('minidump-b-c', ['python3', 'tools/check_minidump.py'], ROOT),
         ('llvm-ir-build', ['bash', 'native/llvm_ir/build.sh'], ROOT),
-        ('root-tests', ['cargo', 'test', '--offline', '--locked'], ROOT),
+        ('root-tests', ['cargo', 'test', '--no-default-features', '--offline', '--locked'], ROOT),
         ('root-format', ['cargo', 'fmt', '--all', '--', '--check'], ROOT),
-        ('root-clippy', ['cargo', 'clippy', '--offline', '--locked', '--all-targets', '--', '-D', 'warnings'], ROOT),
-        ('ir-tests', ['cargo', 'test', '--offline', '--locked', '--manifest-path', 'ir/Cargo.toml'], ROOT),
-        ('ir-native', ['cargo', 'test', '--offline', '--locked', '--manifest-path', 'ir/Cargo.toml', '--test', 'native', '--', '--ignored'], ROOT),
-        ('ir-format', ['cargo', 'fmt', '--manifest-path', 'ir/Cargo.toml', '--', '--check'], ROOT),
-        ('ir-clippy', ['cargo', 'clippy', '--offline', '--locked', '--manifest-path', 'ir/Cargo.toml', '--all-targets', '--', '-D', 'warnings'], ROOT),
-        ('bench-format', ['cargo', 'fmt', '--manifest-path', 'bench/Cargo.toml', '--', '--check'], ROOT),
-        ('bench-clippy', ['cargo', 'clippy', '--offline', '--locked', '--manifest-path', 'bench/Cargo.toml', '--all-targets', '--', '-D', 'warnings'], ROOT),
+        ('root-clippy', ['cargo', 'clippy', '--no-default-features', '--offline', '--locked', '--all-targets', '--', '-D', 'warnings'], ROOT),
+        ('ir-tests', ['cargo', 'test', '--no-default-features', '--features', 'ir', '--offline', '--locked', '--manifest-path', 'Cargo.toml'], ROOT),
+        ('ir-native', ['cargo', 'test', '--no-default-features', '--features', 'ir', '--offline', '--locked', '--manifest-path', 'Cargo.toml', '--test', 'ir_native', '--', '--ignored'], ROOT),
+        ('ir-format', ['cargo', 'fmt', '--manifest-path', 'Cargo.toml', '--', '--check'], ROOT),
+        ('ir-clippy', ['cargo', 'clippy', '--no-default-features', '--features', 'ir', '--offline', '--locked', '--manifest-path', 'Cargo.toml', '--all-targets', '--', '-D', 'warnings'], ROOT),
+        ('bench-format', ['cargo', 'fmt', '--manifest-path', 'Cargo.toml', '--', '--check'], ROOT),
+        ('bench-clippy', ['cargo', 'clippy', '--no-default-features', '--features', 'bench', '--offline', '--locked', '--manifest-path', 'Cargo.toml', '--all-targets', '--', '-D', 'warnings'], ROOT),
         ('machine-type', [env.get('APALACHE_MC', 'apalache-mc'), f'--out-dir={out / "machine-type"}', 'typecheck', 'AriadneMachineState.tla'], SPECS),
         ('ir-type', [env.get('APALACHE_MC', 'apalache-mc'), f'--out-dir={out / "ir-type"}', 'typecheck', 'AriadneLLVMIR.tla'], SPECS),
         ('machine-model', [env.get('APALACHE_MC', 'apalache-mc'), f'--out-dir={out / "machine-model"}', 'check', '--init=Init', '--next=Next', '--inv=Safety', '--length=6', '--no-deadlock', 'AriadneMachineStateExample.tla'], SPECS),
@@ -72,7 +73,7 @@ def main():
         ('machine-tlc', [env.get('TLC', 'tlc'), '-workers', '1', '-metadir', str(out / 'machine-tlc'), '-config', 'MachineState.cfg', 'AriadneMachineStateExample.tla'], SPECS),
         ('ir-tlc', [env.get('TLC', 'tlc'), '-workers', '1', '-metadir', str(out / 'ir-tlc'), '-config', 'LLVMIR.cfg', 'AriadneLLVMIRExample.tla'], SPECS),
         ('profile-integrity', ['python3', 'tools/amd64_profile.py', 'check'], ROOT),
-        ('benchmark', ['cargo', 'run', '--offline', '--locked', '--manifest-path', 'bench/Cargo.toml', '--release', '--bin', 'ariadne-bench', '--', '128', '3', 'minidump'], ROOT),
+        ('benchmark', ['cargo', 'run', '--no-default-features', '--features', 'bench', '--offline', '--locked', '--manifest-path', 'Cargo.toml', '--release', '--bin', 'ariadne-bench', '--', '128', '3', 'minidump'], ROOT),
     ]
     records = []
     for name, command, cwd in gates:

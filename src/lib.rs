@@ -37,6 +37,21 @@
 //! # Ok::<(), ariadne::InvalidRequest>(())
 //! ```
 
+#![forbid(unsafe_code)]
+
+#[cfg(feature = "bap")]
+pub mod bap;
+#[cfg(feature = "input")]
+pub mod input;
+#[cfg(feature = "investigation")]
+pub mod investigation;
+#[cfg(feature = "ir")]
+pub mod ir;
+#[cfg(feature = "mbt")]
+pub mod mbt;
+#[cfg(feature = "reports")]
+pub mod reports;
+
 pub mod effects;
 mod engine;
 pub mod llvm_ir;
@@ -48,5 +63,5 @@ pub mod render;
 pub use engine::{Analyzer, AnalyzerMetrics, analyze};
 pub use model::*;
 
-/// Version of this dependency-free analysis package, for report identity.
+/// Version of the analysis package, for report identity.
 pub const PACKAGE_VERSION: &str = env!("CARGO_PKG_VERSION");

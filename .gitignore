@@ -20,24 +20,12 @@ _apalache-out/
 
 # Cargo build output.
 /target/
-/mbt/target/
 /mbt/.work/
 
 # Machine-specific MBT execution report.
 /mbt/results/latest.json
-/mbt/stage-e/target/
 /mbt/stage-e/.work/
 /mbt/stage-e/results/latest.json
 
 # Lean proof build artifacts (the toolchain and dependency manifest are tracked).
 /lean/.lake/
-
-/input/target/
-/ir/target/
-/bench/target/
-/reports/target/
-
-/bap/target/
-/investigation/target/
-/investigation/.work/
-/bap/.work/

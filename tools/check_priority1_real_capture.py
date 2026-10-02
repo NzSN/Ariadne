@@ -305,10 +305,10 @@ def verify_report(report, case, raw, data, companion_instructions):
 
 def source_hashes():
     paths = set()
-    for directory in ("src", "input/src", "native/llvm_mc"):
+    for directory in ("src", "src/input", "native/llvm_mc"):
         paths.update(p for p in (ROOT / directory).rglob("*") if p.is_file())
     paths.update(ROOT / p for p in (
-        "Cargo.toml", "Cargo.lock", "input/Cargo.toml", "input/Cargo.lock",
+        "Cargo.toml", "Cargo.lock", "Cargo.toml", "Cargo.lock",
         "tools/check_priority1_real_capture.py",
         "docs/Ariadne/priority-1-real-capture-case.json",
     ))
@@ -321,7 +321,7 @@ def main():
     parser.add_argument("--companion", type=Path, required=True)
     parser.add_argument("--decoder", type=Path, required=True)
     parser.add_argument("--cli", type=Path,
-                        default=ROOT / "input/target/debug/ariadne-minidump")
+                        default=ROOT / "target/debug/ariadne-minidump")
     parser.add_argument("--case", type=Path, default=CASE)
     parser.add_argument("--report-dir", type=Path, required=True)
     parser.add_argument("--validation-json", type=Path, required=True)

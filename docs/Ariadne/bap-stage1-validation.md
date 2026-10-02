@@ -23,7 +23,7 @@ acceptance records remain separate.
 ## Delivered path
 
 A [hash-pinned native helper](../../native/bap/README.md) hosts BAP's OCaml
-runtime through its typed C API. The optional [Rust adapter](../../bap/README.md)
+runtime through its typed C API. The optional [Rust adapter](modules/bap.md)
 validates bounded messages and projects a finite supported BIL subset into
 canonical byte-register, flag and weak-memory effects. The immutable minidump
 reader, query roots/seeds/limits and Rust analysis core continue to own their

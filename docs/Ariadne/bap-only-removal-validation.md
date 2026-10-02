@@ -60,8 +60,8 @@ python3 native/bap/setup.py
 bash native/bap/build.sh
 # Build the independent MC reference with the repo's matching LLVM headers.
 bash native/llvm_mc/build.sh
-cargo build --offline --locked --release --manifest-path input/Cargo.toml
-input/target/release/ariadne-minidump input/tests/fixtures/stage_b_linux.dmp \
+cargo build --offline --locked --release --manifest-path Cargo.toml
+target/release/ariadne-minidump tests/input/fixtures/stage_b_linux.dmp \
   --decoder-reference target/ariadne-llvm-mc --entry 0x401000 \
   --seed-exception-rip --output-dir tmp/bap-only-example
 ```

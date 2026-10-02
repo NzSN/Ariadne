@@ -139,18 +139,18 @@ separate; `register-core` is still **0/49**.
 
 Keep the raw dump and matching companion external to tracked files. Build the
 release CLI and benchmark binaries, plus the pinned native helper, using the
-[input build guide](../../input/README.md#build-and-verification). With the
+[input build guide](modules/input.md#build-and-verification). With the
 exact hash-pinned artifacts available:
 
 ```sh
-cargo build --offline --locked --release --manifest-path input/Cargo.toml
-cargo build --offline --locked --release --manifest-path bench/Cargo.toml
+cargo build --offline --locked --release --manifest-path Cargo.toml
+cargo build --offline --locked --release --features bench
 mkdir -p tmp/priority4
 run_dir=$(mktemp -d "$PWD/tmp/priority4/recheck-XXXXXX")
 
 python3 tools/check_priority4_real_capture.py \
   --dump "$ARIADNE_PRIORITY4_DUMP" --companion "$ARIADNE_PRIORITY4_COMPANION" \
-  --decoder target/ariadne-llvm-mc --cli input/target/release/ariadne-minidump \
+  --decoder target/ariadne-llvm-mc --cli target/release/ariadne-minidump \
   --report-dir "$run_dir/report" --validation-json "$run_dir/qualification.json"
 
 python3 tools/measure_priority4.py \

@@ -42,36 +42,38 @@ prerequisite is not waived by this plan.
 | Core origins are per location/byte, and memory is `memory:any`. | Group origins without inventing whole-pointer co-occurrence, precise aliases or object lifetime. |
 | `input/` owns the CLI, so adding a module that depends on `input/` back into that package would form a Cargo dependency cycle. | The investigation module consumes its own normalized context plus root model types. The concrete adapter belongs in `input/`. |
 
-These constraints are grounded in [materialize.rs](../input/src/materialize.rs),
+These constraints are grounded in [materialize.rs](../src/input/materialize.rs),
 [model.rs](../src/model.rs), [engine.rs](../src/engine.rs),
-[BAP preparation](../bap/src/prepare.rs), and
+[BAP preparation](../src/bap/prepare.rs), and
 [decoded operand representation](../src/llvm_mc/reference.rs).
 
 ## Module layout and dependencies
 
-Proposed new package: **`investigation/`**, with unsafe code forbidden and its
-own locked manifest. The root analysis crate remains dependency-free.
+The user-requested [source-layout consolidation](rust-source-layout.md) places
+the implemented investigation in **`src/investigation/`**, with unsafe code
+forbidden. It shares the root manifest and lockfile. Core-only builds use
+`--no-default-features`; the following relationships are module dependencies.
 
 ```text
-ariadne-analysis             → no new dependencies
-ariadne-investigation       → ariadne-analysis; minimal codec/hash dependencies
-ariadne-reports             → ariadne-analysis, ariadne-investigation
-ariadne-input               → existing dependencies, ariadne-investigation
-ariadne-bap                 → existing root/report dependencies
+analysis                    → standard library
+investigation               → analysis; codec/hash dependencies
+reports                     → analysis, investigation
+input                       → analysis, BAP, reports, investigation
+BAP                         → analysis, reports
 ```
 
-`investigation/` must not depend on `input/`, `bap/` or `reports/`. This keeps the
+`src/investigation/` must not depend on `input`, `bap` or `reports`. This keeps the
 graph acyclic and separates question logic from input acquisition/rendering.
-The diagram describes intended package relationships, not current manifests.
+The diagram describes responsibility boundaries inside the single package.
 
 | Ownership | Proposed files | Work |
 | --- | --- | --- |
-| Address evidence | `src/effects.rs`, `bap/src/projection.rs`, `bap/src/prepare.rs` | Common address-use facts and BIL extraction; no changes to reaching-definition semantics. |
-| Domain module | `investigation/src/{lib,model,validate,explain}.rs` | Small question interface, validated owned inputs, evidence IDs and explanation construction. |
-| Input adapter | `input/src/investigation.rs` | Bind completed analysis to prepared request/query/read evidence and normalize context. |
-| Serialization/rendering | `reports/src/investigation.rs`, report codecs | Versioned explanation envelope and pure renderers. |
-| Product integration | `input/src/bin/ariadne-minidump.rs`, relevant manifests | Question options and transactional publication. |
-| Qualification | `investigation/tests/`, `input/tests/investigation.rs`, `tools/check_investigation.py`, `tools/check_investigation_mutations.py` | Independent expectations, actual mutants, source binding and workload evidence. |
+| Address evidence | `src/effects.rs`, `src/bap/projection.rs`, `src/bap/prepare.rs` | Common address-use facts and BIL extraction; no changes to reaching-definition semantics. |
+| Domain module | `src/investigation/{mod,model,validate,explain}.rs` | Small question interface, validated owned inputs, evidence IDs and explanation construction. |
+| Input adapter | `src/input/investigation.rs` | Bind completed analysis to prepared request/query/read evidence and normalize context. |
+| Serialization/rendering | `src/reports/investigation.rs`, report codecs | Versioned explanation envelope and pure renderers. |
+| Product integration | `src/bin/ariadne-minidump.rs`, relevant manifests | Question options and transactional publication. |
+| Qualification | `tests/investigation/`, `tests/input/investigation.rs`, `tools/check_investigation.py`, `tools/check_investigation_mutations.py` | Independent expectations, actual mutants, source binding and workload evidence. |
 
 Keep construction helpers internal. Do not introduce a large generic query
 framework or an abstract engine interface for a hypothetical BAP-core adapter.

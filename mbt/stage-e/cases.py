@@ -133,7 +133,7 @@ def ir_cases():
     if version != "Ariadne native LLVM IR 20.1.2":
         raise RuntimeError("native case generation requires the pinned LLVM 20.1.2 helper")
     for name in ["diamond.ll", "diamond.bc"]:
-        artifact = root / "ir/tests/fixtures" / name
+        artifact = root / "tests/ir/fixtures" / name
         digest = hashlib.sha256(artifact.read_bytes()).hexdigest()
         output = subprocess.run([str(helper), str(artifact), "diamond"], capture_output=True, text=True, check=True)
         doc = json.loads(output.stdout)

@@ -3,13 +3,14 @@
 import argparse,hashlib,json,os,subprocess,tempfile,time
 from datetime import datetime,timezone
 from pathlib import Path
+from rust_layout import copy_sut, source_files
 ROOT=Path(__file__).resolve().parents[1]
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def sources():
- paths=set()
- for tree in ['src','tests','bap/src','bap/tests','input/src','input/tests','reports/src','reports/tests','investigation/src','investigation/tests','bench/src','native/bap','native/llvm_mc']:
+ paths=source_files()
+ for tree in ['src','tests','src/bap','tests/bap','src/input','tests/input','src/reports','tests/reports','src/investigation','tests/investigation','src/bench','native/bap','native/llvm_mc']:
   paths.update(p for p in (ROOT/tree).rglob('*') if p.is_file() and p.suffix!='.md' and '__pycache__' not in p.parts)
- paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock',*[f'{c}/{f}' for c in ['input','bap','reports','investigation','bench'] for f in ['Cargo.toml','Cargo.lock']],'tools/check_investigation.py','tools/check_investigation_mutations.py','tools/measure_investigation.py','tools/check_minidump.py','tools/check_minidump_mutations.py','tools/check_stage_e.py','Specs/Ariadne.tla','Specs/AriadneTypes.tla','Specs/AriadneMachineCommon.tla'])
+ paths.update(ROOT/p for p in ['Cargo.toml', 'Cargo.lock', 'tools/check_investigation.py', 'tools/check_investigation_mutations.py', 'tools/measure_investigation.py', 'tools/check_minidump.py', 'tools/check_minidump_mutations.py', 'tools/check_stage_e.py', 'Specs/Ariadne.tla', 'Specs/AriadneTypes.tla', 'Specs/AriadneMachineCommon.tla'])
  return {str(p.relative_to(ROOT)):sha(p) for p in sorted(paths)}
 def retained(path):
  r=json.loads(path.read_text())
@@ -21,19 +22,19 @@ def main():
  for name in ['mutation','workload','stage-e']:p.add_argument('--'+name+'-record',type=Path)
  args=p.parse_args();work=Path(tempfile.mkdtemp(prefix='ariadne-investigation-acceptance-'));before=sources();env={**os.environ,'ARIADNE_LLVM_MC':str(ROOT/'target/ariadne-llvm-mc'),'ARIADNE_BAP_HELPER':str(ROOT/'target/ariadne-bap-lift'),'BAP_RUNTIME_ROOT':str(ROOT/'tmp/bap-setup/stable')};print('Investigation acceptance artifacts:',work,flush=True)
  gates=[
- ('root-tests',['cargo','test','--offline','--locked']),
+ ('root-tests',['cargo', 'test', '--no-default-features', '--offline', '--locked']),
  ('root-format',['cargo','fmt','--all','--','--check']),
- ('root-clippy',['cargo','clippy','--offline','--locked','--all-targets','--','-D','warnings']),
- ('module-tests',['cargo','test','--offline','--locked','--manifest-path','investigation/Cargo.toml']),
- ('module-format',['cargo','fmt','--manifest-path','investigation/Cargo.toml','--','--check']),
- ('module-clippy',['cargo','clippy','--offline','--locked','--manifest-path','investigation/Cargo.toml','--all-targets','--','-D','warnings']),
- ('producer-addresses',['cargo','test','--offline','--locked','--release','--manifest-path','bap/Cargo.toml','--test','native','memory_address_evidence','--','--ignored']),
- ('native-cli-questions',['cargo','test','--offline','--locked','--release','--manifest-path','input/Cargo.toml','--test','investigation','--','--include-ignored']),
- ('input-format',['cargo','fmt','--manifest-path','input/Cargo.toml','--','--check']),
- ('input-clippy',['cargo','clippy','--offline','--locked','--manifest-path','input/Cargo.toml','--all-targets','--','-D','warnings']),
- ('report-tests',['cargo','test','--offline','--locked','--manifest-path','reports/Cargo.toml']),
- ('report-format',['cargo','fmt','--manifest-path','reports/Cargo.toml','--','--check']),
- ('report-clippy',['cargo','clippy','--offline','--locked','--manifest-path','reports/Cargo.toml','--all-targets','--','-D','warnings']),
+ ('root-clippy',['cargo', 'clippy', '--no-default-features', '--offline', '--locked', '--all-targets', '--', '-D', 'warnings']),
+ ('module-tests',['cargo', 'test', '--no-default-features', '--features', 'investigation', '--offline', '--locked', '--manifest-path', 'Cargo.toml']),
+ ('module-format',['cargo', 'fmt', '--manifest-path', 'Cargo.toml', '--', '--check']),
+ ('module-clippy',['cargo', 'clippy', '--no-default-features', '--features', 'investigation', '--offline', '--locked', '--manifest-path', 'Cargo.toml', '--all-targets', '--', '-D', 'warnings']),
+ ('producer-addresses',['cargo', 'test', '--no-default-features', '--features', 'bap', '--offline', '--locked', '--release', '--manifest-path', 'Cargo.toml', '--test', 'bap_native', 'memory_address_evidence', '--', '--ignored']),
+ ('native-cli-questions',['cargo', 'test', '--offline', '--locked', '--release', '--test', 'input_investigation', '--', '--include-ignored']),
+ ('input-format',['cargo', 'fmt', '--manifest-path', 'Cargo.toml', '--', '--check']),
+ ('input-clippy',['cargo', 'clippy', '--no-default-features', '--features', 'input', '--offline', '--locked', '--manifest-path', 'Cargo.toml', '--all-targets', '--', '-D', 'warnings']),
+ ('report-tests',['cargo', 'test', '--no-default-features', '--features', 'reports', '--offline', '--locked', '--manifest-path', 'Cargo.toml']),
+ ('report-format',['cargo', 'fmt', '--manifest-path', 'Cargo.toml', '--', '--check']),
+ ('report-clippy',['cargo', 'clippy', '--no-default-features', '--features', 'reports', '--offline', '--locked', '--manifest-path', 'Cargo.toml', '--all-targets', '--', '-D', 'warnings']),
  ('mutation',['python3','tools/check_investigation_mutations.py']),
  ('workload',['python3','tools/measure_investigation.py']),
  ('stage-e',['python3','tools/check_stage_e.py']),

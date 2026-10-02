@@ -68,11 +68,13 @@ instruction sequence or proof that the faulting memory operation committed.
 
 ## Investigation module and interface
 
-The proposed module is a separate `investigation/` Rust package. Its initial
+The [Rust source-layout consolidation plan](../../Plans/rust-source-layout.md)
+places the implemented module in `src/investigation/` within the root Cargo
+package. Its initial
 interface consumes a bound normalized investigation context produced from the
 validated prepared analysis and completed analyzer. The concrete adapter lives
-in `input/`; the module must not depend on `input/` or `reports/`, avoiding a
-package cycle when the CLI/reporting packages depend on it.
+in `src/input/`; investigation must not depend on input or reports. This preserves
+the responsibility boundary when CLI and reporting modules use its results.
 
 The current result stores snapshot identity without the complete query. Binding
 must compare the prepared request with the completed analyzer's original

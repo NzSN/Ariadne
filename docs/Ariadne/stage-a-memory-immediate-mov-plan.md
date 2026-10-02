@@ -114,7 +114,7 @@ existing legacy `ByteSnapshot::to_request()` behavior remains unchanged.
 ## 2. Test source interpretation through real native decoding
 
 Owner: `tests/effects.rs`, `tests/fixtures/effects-v2.tsv`,
-`input/tests/real_dumps.rs`, and focused input-native fixtures if needed.
+`tests/input/real_dumps.rs`, and focused input-native fixtures if needed.
 
 - Extend the frozen decoder observations only with actual, reviewed LLVM output
   from both Windows and Linux profiles. A golden row detects a changed LLVM

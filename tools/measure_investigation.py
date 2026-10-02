@@ -2,13 +2,14 @@
 """Source/tool-bound release measurements for the implemented explanation query."""
 import argparse,csv,hashlib,io,json,os,platform,statistics,subprocess,tempfile,time
 from pathlib import Path
+from rust_layout import copy_sut, source_files
 ROOT=Path(__file__).resolve().parents[1]
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def sources():
- paths=set()
- for tree in ['src','bap/src','input/src','reports/src','investigation/src','bench/src','native/bap','native/llvm_mc']:
+ paths=source_files()
+ for tree in ['src','src/bap','src/input','src/reports','src/investigation','src/bench','native/bap','native/llvm_mc']:
   paths.update(p for p in (ROOT/tree).rglob('*') if p.is_file() and p.suffix!='.md' and '__pycache__' not in p.parts)
- paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock',*[f'{c}/{f}' for c in ['input','bap','reports','investigation','bench'] for f in ['Cargo.toml','Cargo.lock']],'tools/measure_investigation.py','docs/Ariadne/priority-1-real-capture-case.json'])
+ paths.update(ROOT/p for p in ['Cargo.toml', 'Cargo.lock', 'tools/measure_investigation.py', 'docs/Ariadne/priority-1-real-capture-case.json'])
  return {str(p.relative_to(ROOT)):sha(p) for p in sorted(paths)}
 def run(cmd):
  r=subprocess.run([str(a) for a in cmd],cwd=ROOT,text=True,capture_output=True,timeout=180)
@@ -18,9 +19,10 @@ def run(cmd):
 def summary(xs):return dict(median=statistics.median(xs),min=min(xs),max=max(xs),samples=len(xs))
 def main():
  parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--windows-dump',type=Path,default=os.environ.get('ARIADNE_PRIORITY4_DUMP'));args=parser.parse_args()
- before=sources();work=Path(tempfile.mkdtemp(prefix='ariadne-investigation-workload-'));cli=ROOT/'input/target/release/ariadne-minidump';bench=ROOT/'bench/target/release/investigation';decoder=ROOT/'target/ariadne-llvm-mc'
- for c,b in [('input','ariadne-minidump'),('bench','investigation')]:run(['cargo','build','--offline','--locked','--release','--manifest-path',c+'/Cargo.toml','--bin',b])
- cases=[('stage-b-linux',ROOT/'input/tests/fixtures/stage_b_linux.dmp','0x401000','0x401006',False),('stage-b-windows',ROOT/'input/tests/fixtures/stage_b_windows.dmp','0x7ff700001000','0x7ff700001006',False),('not-chain',ROOT/'input/tests/fixtures/bap_precision_linux.dmp','0x401000','0x401006',False),('real-linux',ROOT/'tmp/priority1/chromium-member-uaf.dmp','0x566817922dc5','0x566817922e42',True)]
+ before=sources();work=Path(tempfile.mkdtemp(prefix='ariadne-investigation-workload-'));cli=ROOT/'target/release/ariadne-minidump';bench=ROOT/'target/release/investigation';decoder=ROOT/'target/ariadne-llvm-mc'
+ for b in ['ariadne-minidump','investigation']:
+  run(['cargo','build','--offline','--locked','--release',*(['--features','bench'] if b=='investigation' else []),'--bin',b])
+ cases=[('stage-b-linux',ROOT/'tests/input/fixtures/stage_b_linux.dmp','0x401000','0x401006',False),('stage-b-windows',ROOT/'tests/input/fixtures/stage_b_windows.dmp','0x7ff700001000','0x7ff700001006',False),('not-chain',ROOT/'tests/input/fixtures/bap_precision_linux.dmp','0x401000','0x401006',False),('real-linux',ROOT/'tmp/priority1/chromium-member-uaf.dmp','0x566817922dc5','0x566817922e42',True)]
  pin=json.loads((ROOT/'docs/Ariadne/priority-1-real-capture-case.json').read_text())
  windows=json.loads((ROOT/'docs/Ariadne/priority-4-real-capture-case.json').read_text())
  if args.windows_dump:

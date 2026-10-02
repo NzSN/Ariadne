@@ -17,7 +17,7 @@ import time
 
 
 ROOT = Path(__file__).resolve().parents[1]
-STAGE_B = ROOT / "input/tests/fixtures/stage_b_windows.dmp"
+STAGE_B = ROOT / "tests/input/fixtures/stage_b_windows.dmp"
 STAGE_B_ENTRY = "0x7ff700001000"
 STAGE_B_SEED = "0x7ff700001006"
 
@@ -32,11 +32,11 @@ def digest(path):
 
 def source_hashes():
     paths = set()
-    for directory in ("src", "input/src", "bench/src", "native/llvm_mc"):
+    for directory in ("src", "src/input", "src/bench", "native/llvm_mc"):
         paths.update(p for p in (ROOT / directory).rglob("*") if p.is_file())
     paths.update(ROOT / name for name in (
-        "Cargo.toml", "Cargo.lock", "input/Cargo.toml", "input/Cargo.lock",
-        "bench/Cargo.toml", "bench/Cargo.lock", "tools/measure_priority4.py",
+        "Cargo.toml", "Cargo.lock", "Cargo.toml", "Cargo.lock",
+        "Cargo.toml", "Cargo.lock", "tools/measure_priority4.py",
         "tools/check_priority4_real_capture.py", "tools/check_priority1_real_capture.py",
         "docs/Ariadne/priority-4-real-capture-case.json",
         "tests/support/scanning_engine.rs",
@@ -207,11 +207,11 @@ def main():
     parser.add_argument("--entry", required=True)
     parser.add_argument("--seed", required=True)
     parser.add_argument("--cli", type=Path,
-                        default=ROOT / "input/target/release/ariadne-minidump")
+                        default=ROOT / "target/release/ariadne-minidump")
     parser.add_argument("--stage-bench", type=Path,
-                        default=ROOT / "bench/target/release/real_minidump")
+                        default=ROOT / "target/release/real_minidump")
     parser.add_argument("--synthetic-bench", type=Path,
-                        default=ROOT / "bench/target/release/ariadne-bench")
+                        default=ROOT / "target/release/ariadne-bench")
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--runs", type=int, default=5)
     parser.add_argument("--warmups", type=int, default=1)

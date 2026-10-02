@@ -8,7 +8,7 @@ remain independently pinned Stage A crash-IP regressions.
 
 ## B — Independently rooted captured code
 
-[`make_stage_b.py`](../../input/tests/fixtures/make_stage_b.py) specifies a
+[`make_stage_b.py`](../../tests/input/fixtures/make_stage_b.py) specifies a
 four-instruction source program with entry VAs chosen by the fixture author,
 before writing either dump. It places the exact bytes in a minidump MemoryList
 capture and sets exception RIP to the third instruction, six bytes after the
@@ -31,13 +31,13 @@ gap**; recovery closure does not erase that limitation. A faulting store's
 possible address input is not proof that it committed.
 
 The fixture generator's `--check` mode compares committed binary bytes with
-its source. [`stage_b.rs`](../../input/tests/stage_b.rs) pins both artifact
+its source. [`stage_b.rs`](../../tests/input/stage_b.rs) pins both artifact
 hashes and tests exact VAs, decoded opcodes/lengths, captured byte provenance,
 effect reads/writes, reaching origin and unrelated-write exclusion.
 
 ## C — One query, three report formats
 
-The supported `ariadne-minidump` binary in `input/src/bin/` accepts an
+The supported `ariadne-minidump` binary in `src/input/bin/` accepts an
 explicit dump path, pinned decoder, one or more entry VAs, explicit seeds or
 `--seed-exception-rip`, and either one stdout format or `--output-dir`.
 The exception RIP never becomes an earlier entry automatically. Output-dir
@@ -59,8 +59,8 @@ outside capture yields zero decoded nodes plus typed `not_captured` and
 Example on the pinned Windows fixture from repository root:
 
 ```sh
-cargo run --offline --locked --manifest-path input/Cargo.toml \
-  --bin ariadne-minidump -- input/tests/fixtures/stage_b_windows.dmp \
+cargo run --offline --locked --manifest-path Cargo.toml \
+  --bin ariadne-minidump -- tests/input/fixtures/stage_b_windows.dmp \
   --decoder target/ariadne-llvm-mc --entry 0x7ff700001000 \
   --seed-exception-rip --output-dir /tmp/ariadne-investigation
 ```

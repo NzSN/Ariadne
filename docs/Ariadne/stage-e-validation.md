@@ -39,13 +39,13 @@ typechecking/model checking and TLC on the existing fixture passed.
 [`ariadne::llvm_ir`](../../src/llvm_ir.rs) validates and executes the separate
 `AriadneLLVMIR.tla` slice machine over block CFG, instruction SSA, predecessor-
 sensitive phi inputs, conservative memory predecessors and visible call
-obligations. The [`ariadne-ir`](../../ir/Cargo.toml) package hashes owned `.ll`
+obligations. The [`ariadne-ir`](../../Cargo.toml) package hashes owned `.ll`
 or `.bc` bytes, gives them to a secure temporary snapshot, and accepts only
 the versioned output of the **LLVM 20.1.2** native helper after that helper
 parses and verifies the module. The helper binary SHA-256 for this run was
 `c3cddb345ceec46018b1936aab65c377cc15c762b15f09dfcec59ae763f7de66`.
 
-The source [`diamond.ll`](../../ir/tests/fixtures/diamond.ll) has SHA-256
+The source [`diamond.ll`](../../tests/ir/fixtures/diamond.ll) has SHA-256
 `3dc51d62e4448958beb960afb9eea9bc7ff9484ec79a617f3637c58ed2ca6dcf`.
 Its LLVM 18-assembled backward-compatible bitcode fixture has SHA-256
 `bec3302fd1aa62cc39df8dc7351efc9fe472ffa70496dd47a513ef506b2cade6`;

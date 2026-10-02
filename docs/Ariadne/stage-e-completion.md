@@ -16,14 +16,14 @@ its safety evidence is bounded, with a complete four-transition witness.
 ## Minidump stateflow
 
 ```sh
-cargo build --offline --locked --manifest-path input/Cargo.toml
-input/target/debug/ariadne-minidump DUMP --decoder target/ariadne-llvm-mc \
+cargo build --offline --locked --manifest-path Cargo.toml
+target/debug/ariadne-minidump DUMP --decoder target/ariadne-llvm-mc \
   --entry 0x0000000000401000 --seed-exception-rip \
   --stateflow-input semantics.json --output-dir NEW_DIR
 ```
 
 `semantics.json` uses the strict
-[`ariadne.machine-state-semantics/v1` contract](../../reports/README.md).
+[`ariadne.machine-state-semantics/v1` contract](modules/reports.md).
 It supplies a finite state catalogue, entry facts, transitions and explicit
 completeness assertions bound to the dump's snapshot ID. Recovery supplies the
 frozen graph/effects; call-only edges remain in the context, not stateflow.
@@ -39,8 +39,8 @@ from captured crash-time registers; feasibility is model-relative.
 ## Direct verified IR
 
 ```sh
-cargo build --offline --locked --manifest-path ir/Cargo.toml
-ir/target/debug/ariadne-ir ir/tests/fixtures/diamond.ll \
+cargo build --offline --locked --manifest-path Cargo.toml
+target/debug/ariadne-ir tests/ir/fixtures/diamond.ll \
   --helper target/ariadne-llvm-ir --function diamond --seed i11 \
   --output-dir NEW_DIR
 ```

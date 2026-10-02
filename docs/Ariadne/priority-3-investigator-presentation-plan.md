@@ -17,7 +17,7 @@ text presentation. Preserve the existing output-directory publication rules.
 
 ## 2. Add the scan view
 
-In `input/src/report.rs`, render an Instruction overview from the frozen
+In `src/input/report.rs`, render an Instruction overview from the frozen
 `FilePreparedAnalysis` and `AnalysisResult`. Format typed operands and source
 spans without parsing LLVM's printed assembly or reconstructing bytes from a
 companion image. Show rule quality, slice membership, issues and a possible

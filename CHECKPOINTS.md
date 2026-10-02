@@ -1,6 +1,7 @@
 # Ariadne checkpoints
 
-Updated **2026-10-01** for BAP-only minidump semantics and the separate partial
+Updated **2026-10-02** for the single-package Rust source layout, following
+BAP-only minidump semantics and the separate partial
 Stage 1 exit gate, following Stage E completion, MirrorRust integration and Priority 4 delivery. The Stage D 49-case gate remains intact at **0/49** as a
 long-term formal purpose. Earlier entries retain their historical,
 time-local commit and validation status.
@@ -31,8 +32,27 @@ flowchart TD
     U["2026-10-01 · source-bound working tree<br/>Stage E complete: generated replay, mutations, reports/CLI"]
     V["2026-10-01 · working tree<br/>BAP Stage 1 implemented; Windows acceptance still required"]
     W["2026-10-01 · working tree<br/>LLVM semantic backend removed; BAP-only default"]
-    S --> T --> U --> V --> W
+    X["2026-10-01 · 25e59f3<br/>Typed fault-address investigation"]
+    Y["2026-10-02 · working tree<br/>One Cargo package; src/tests/target layout"]
+    S --> T --> U --> V --> W --> X --> Y
 ```
+
+## 2026-10-02 — Rust source layout consolidated
+
+The [layout delivery](docs/Ariadne/rust-source-layout.md) follows the
+[source-layout plan](Plans/rust-source-layout.md): all 86 Rust files live under
+`src/` or `tests/`, with one root Cargo manifest/lockfile and root `target/`.
+Default builds provide both CLIs. Benchmarks and MirrorRust replay use optional
+features; core-only builds retain no activated external crate dependencies.
+
+Thirty report/explanation outputs match the prior executables byte-for-byte.
+Generated bindings and capture/IR fixtures retain their original bytes. Replay
+and mutation builds use isolated root `target/` subdirectories, and CLI
+measurement/test builds use the default production feature set. The
+[source-bound record](docs/Ariadne/rust-source-layout-validation.json) retains
+the exercised regression tier; the original Windows I4 capture is still absent.
+The root Lean/formal files and core engine/model source remain unchanged.
+Validation was retained before the user-authorized publication.
 
 ## 2026-10-01 — First investigation question
 
@@ -369,7 +389,7 @@ evidence. Memory remains coarse and calls remain opaque. See the
 [initial effects record](docs/Ariadne/operand-effects-validation.md) and
 [Stage A validation](docs/Ariadne/stage-a-validation.md).
 
-Windows/Linux AMD64 minidump input is delivered in [input/](input/README.md).
+Windows/Linux AMD64 minidump input is delivered in [input/](docs/Ariadne/modules/input.md).
 The Stage B predecessor fixtures and Stage C minidump CLI/JSON v1 are
 delivered. PE/ELF image and ELF core readers remain deferred; broader effect
 coverage, precise aliasing and annotated assembly remain pending.
@@ -489,7 +509,7 @@ Linux and Windows target negotiation now shares the reviewed effect pipeline.
 Local-only materialization preserves original roots, keeps seeds separate, and
 returns an error rather than a partial request if resource limits are exhausted.
 
-See [minidump usage](input/README.md) and
+See [minidump usage](docs/Ariadne/modules/input.md) and
 [the source-bound validation record](docs/Ariadne/minidump-validation.md).
 No commit or push was performed for this delivery. Unrelated Lean moves/deletions
 in the working tree were preserved.

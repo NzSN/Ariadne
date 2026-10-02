@@ -2,10 +2,10 @@
 
 from pathlib import Path
 
-from tools import MBT, run, sha256
+from tools import MBT, ROOT, run, sha256
 
 TARGET = "mirrorrust-v1"
-GENERATED = MBT / "generated"
+GENERATED = ROOT / "src/mbt/core/generated"
 OWNED_FILES = (".model-interface-generated.json", "AriadneReplayMirror.generated.rs")
 
 

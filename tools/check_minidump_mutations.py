@@ -3,6 +3,7 @@
 import json
 import os
 from pathlib import Path
+from rust_layout import copy_sut, source_files
 import shutil
 import subprocess
 import tempfile
@@ -36,45 +37,21 @@ def main():
     for name, file, old, new, suite, test in MUTATIONS:
         # Baseline uses the exact same observer and environment.
         flags = ['--', '--exact'] + (['--ignored'] if suite == 'native' else [])
-        base_cmd = ['cargo', 'test', '--offline', '--locked', '--manifest-path', str(ROOT / 'input/Cargo.toml'), '--test', suite, test, *flags]
+        base_cmd = ['cargo', 'test', '--offline', '--locked', '--manifest-path', str(ROOT / 'Cargo.toml'), '--test', 'input_' + suite, test, *flags]
         good = subprocess.run(base_cmd, env=env, capture_output=True, text=True, timeout=120)
         (artifacts / f'{name}-baseline.log').write_text(good.stdout + good.stderr)
         if good.returncode:
             raise SystemExit(f'Correct implementation failed {test}; no mutation evidence')
         sut = artifacts / name
         sut.mkdir()
-        for tree in ('src', 'tests'):
-            shutil.copytree(ROOT / tree, sut / tree)
-        for file_name in ('Cargo.toml', 'Cargo.lock'):
-            shutil.copy2(ROOT / file_name, sut / file_name)
-        # The input CLI now depends on the Stage E report crate. Keep that
-        # dependency in the isolated tree; a missing crate is not a killed mutant.
-        (sut / 'reports').mkdir()
-        for tree in ('src',):
-            shutil.copytree(ROOT / 'reports' / tree, sut / 'reports' / tree)
-        for file_name in ('Cargo.toml', 'Cargo.lock'):
-            shutil.copy2(ROOT / 'reports' / file_name, sut / 'reports' / file_name)
-        (sut/'investigation').mkdir()
-        shutil.copytree(ROOT/'investigation/src',sut/'investigation/src')
-        for f in ['Cargo.toml','Cargo.lock']:shutil.copy2(ROOT/'investigation'/f,sut/'investigation'/f)
-        (sut / 'bap').mkdir()
-        shutil.copytree(ROOT / 'bap/src', sut / 'bap/src')
-        for file_name in ('Cargo.toml', 'Cargo.lock'):
-            shutil.copy2(ROOT / 'bap' / file_name, sut / 'bap' / file_name)
-        (sut / 'native/bap').mkdir(parents=True)
-        shutil.copy2(ROOT / 'native/bap/toolchain.lock.json', sut / 'native/bap/toolchain.lock.json')
-        (sut / 'input').mkdir()
-        for tree in ('src', 'tests'):
-            shutil.copytree(ROOT / 'input' / tree, sut / 'input' / tree)
-        for file_name in ('Cargo.toml', 'Cargo.lock'):
-            shutil.copy2(ROOT / 'input' / file_name, sut / 'input' / file_name)
-        path = sut / 'input/src' / file
+        copy_sut(sut)
+        path = sut / 'src/input' / file
         original = path.read_text()
         if original.count(old) != 1:
             raise SystemExit(f'{name}: mutation anchor is not unique')
         path.write_text(original.replace(old, new))
-        cmd = ['cargo', 'test', '--offline', '--locked', '--manifest-path', str(sut / 'input/Cargo.toml'),
-               '--target-dir', str(artifacts / 'target'), '--test', suite, test, *flags]
+        cmd = ['cargo', 'test', '--offline', '--locked', '--manifest-path', str(sut / 'Cargo.toml'),
+               '--target-dir', str(ROOT / 'target/minidump-mutations' / artifacts.name), '--test', 'input_' + suite, test, *flags]
         bad = subprocess.run(cmd, env=env, capture_output=True, text=True, timeout=180)
         output = bad.stdout + bad.stderr
         (sut / 'mutation.log').write_text(output)

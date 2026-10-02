@@ -28,7 +28,7 @@ bytes and Stage D ISA semantics remain additional trusted or open boundaries.
 ## Baseline method and observations
 
 The dependency-free core now exposes `AnalyzerMetrics` without changing its
-analysis state or schedule. The separate [`bench/`](../../bench/Cargo.toml)
+analysis state or schedule. The separate [`bench/`](../../Cargo.toml)
 package counts allocation calls and cumulative requested bytes with a
 benchmark-only allocator. It reports analyzer actions, incoming evaluations,
 full edge scans, applicable transfer evaluations, maximum reaching-definition

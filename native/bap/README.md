@@ -33,7 +33,7 @@ The packaged EXTRACT accessors are reversed; the encoder uses their measured
 meaning, with independent alias tests and a native binding mutant.
 
 ```sh
-python3 bap/tests/fixtures/make_corpus.py --check
+python3 tests/bap/fixtures/make_corpus.py --check
 python3 tools/check_bap_semantics.py
 ```
 

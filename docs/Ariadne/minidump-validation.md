@@ -11,7 +11,7 @@ PE/ELF images and ELF cores remain design work. No commit/push is included.
 
 ## Delivered interface
 
-The separate [`ariadne-input` package](../../input/README.md) exposes
+The separate [`ariadne-input` package](modules/input.md) exposes
 `FileSnapshot::open_minidump`, `from_minidump_bytes`, `metadata`, `read_prefix`
 and `prepare`. Its `minidump=0.26.1` and `sha2=0.10.9` dependencies have their
 own lockfile. The root core keeps its dependency-free manifest.

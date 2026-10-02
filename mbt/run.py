@@ -10,12 +10,17 @@ import sys
 from binding import GENERATED, TARGET, check_binding, generated_hashes
 from tools import (FIXTURES, MBT, ROOT, mirrors_tools, prepare_model, run,
                    sha256, verify_corpus, work_directory, write_json)
+sys.path.insert(0, str(ROOT / "tools"))
+from rust_layout import copy_sut
 
 
 def build(manifest, destination, log):
-    run(["cargo", "build", "--offline", "--locked", "--manifest-path", manifest,
-         "--target-dir", MBT / "target"], log=log, timeout=180)
-    shutil.copy2(MBT / "target/debug/ariadne-mbt", destination)
+    # A root package and its isolated mutants have the same Cargo target names.
+    # Keep each replay campaign out of production target/debug and other runs.
+    target = ROOT / "target/mbt-core-builds" / destination.parent.parent.name
+    run(["cargo", "build", "--no-default-features", "--features", "mbt", "--bin", "ariadne-mbt", "--offline", "--locked", "--manifest-path", manifest,
+         "--target-dir", target], log=log, timeout=180)
+    shutil.copy2(target / "debug/ariadne-mbt", destination)
 
 
 def replay(executable, mode, mirror, model, lock, traces, directory):
@@ -33,30 +38,17 @@ def mutant_manifest(mutation, directory):
     # Bulk mechanical mutation only in a fresh test-artifact copy. The working
     # implementation and the observer are never modified by the mutation tier.
     sut = directory / "sut"
-    sut.mkdir()
-    shutil.copytree(ROOT / "src", sut / "src")
-    for filename in ("Cargo.toml", "Cargo.lock"):
-        shutil.copyfile(ROOT / filename, sut / filename)
+    copy_sut(sut)
     engine = sut / "src/engine.rs"
     original = engine.read_text()
     if original.count(mutation["old"]) != 1:
         raise RuntimeError(f"mutation {mutation['name']} must match exactly once; review it after implementation changes")
     engine.write_text(original.replace(mutation["old"], mutation["new"], 1))
-    evaluator = directory / "evaluator"
-    evaluator.mkdir()
-    shutil.copytree(MBT / "src", evaluator / "src")
-    shutil.copytree(GENERATED, evaluator / "generated")
-    if generated_hashes(evaluator / "generated") != generated_hashes():
+    if generated_hashes(sut / "src/mbt/core/generated") != generated_hashes():
         raise RuntimeError("mutation changed the compiler-generated binding")
-    if sha256(evaluator / "src/adapter.rs") != sha256(MBT / "src/adapter.rs"):
+    if sha256(sut / "src/mbt/core/adapter.rs") != sha256(ROOT / "src/mbt/core/adapter.rs"):
         raise RuntimeError("mutation changed the actual-state observer")
-    manifest = (MBT / "Cargo.toml").read_text()
-    manifest = manifest.replace('path = ".."', f'path = {json.dumps(str(sut))}')
-    manifest = manifest.replace('path = "../../MirrorRust"',
-                                f'path = {json.dumps(str(ROOT.parent / "MirrorRust"))}')
-    (evaluator / "Cargo.toml").write_text(manifest)
-    shutil.copyfile(MBT / "Cargo.lock", evaluator / "Cargo.lock")
-    return evaluator / "Cargo.toml", sha256(engine)
+    return sut / "Cargo.toml", sha256(engine)
 
 
 def compare_baseline(report, path):
@@ -110,7 +102,7 @@ def main():
     good_dir = work / "good"
     good_dir.mkdir()
     executable = good_dir / "ariadne-mbt"
-    build(MBT / "Cargo.toml", executable, good_dir / "build.log")
+    build(ROOT / "Cargo.toml", executable, good_dir / "build.log")
     positive = replay(executable, "good", mirror, model, lock, traces, good_dir)
     expected_states = 2 * sum(manifest["traceStates"].values())
     if positive["matchedObservations"] != expected_states:
@@ -134,12 +126,12 @@ def main():
         report["engineSha256"] = engine_digest
         mutants.append(report)
         print(f"{mutation['name']}: genuine mismatch at {mutation['action']}, port Drop confirmed", flush=True)
-    identity_path = MBT / ".work/toolchain.json"
+    identity_path = ROOT / "target/mbt-work/toolchain.json"
     report = {
         "schema": "ariadne.mbt-results/v2", "passed": True,
         "scope": "local negotiated replay; no restricted-worker or author-isolation claim",
         "command": "python3 mbt/run.py", "corpusManifestSha256": sha256(MBT / "corpus/manifest.json"),
-        "observerSha256": sha256(MBT / "src/adapter.rs"),
+        "observerSha256": sha256(ROOT / "src/mbt/core/adapter.rs"),
         "generatedBinding": {"targetProfile": TARGET, "artifacts": generated_hashes(),
                              "freshnessChecked": True},
         "sutSources": {str(path.relative_to(ROOT)): sha256(path) for path in sorted((ROOT / "src").glob("*.rs"))},
@@ -148,7 +140,7 @@ def main():
                   "mirrorrustRevision": run(["git", "rev-parse", "HEAD"], cwd=ROOT.parent / "MirrorRust").stdout.strip(),
                   "mirrorgateInspectedRevision": run(["git", "rev-parse", "HEAD"], cwd=ROOT.parent / "MirrorGate").stdout.strip(),
                   "rustc": run(["rustc", "--version"]).stdout.strip(),
-                  "cargoLockSha256": sha256(MBT / "Cargo.lock"),
+                  "cargoLockSha256": sha256(ROOT / "Cargo.lock"),
                   "compatibilityBuild": json.loads(identity_path.read_text()) if identity_path.is_file() else None},
         "positive": positive, "wrongDigest": rejected, "mutants": mutants,
     }

@@ -5,6 +5,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+from rust_layout import copy_sut, source_files
 import subprocess
 import tempfile
 import time
@@ -13,11 +14,11 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def sources():
-    paths = set()
+    paths = source_files()
     for directory in ('src', 'tests', 'native/llvm_mc'):
         paths.update(p for p in (ROOT / directory).rglob('*') if p.is_file())
     for pattern in ('Specs/*.tla', 'Specs/*.cfg', 'Specs/check-effects.sh',
-                    'tools/check_effects*.py', 'mbt/*.py', 'mbt/src/*.rs'):
+                    'tools/check_effects*.py', 'mbt/*.py', 'src/mbt/core/*.rs'):
         paths.update(ROOT.glob(pattern))
     paths.update(ROOT / p for p in ('Cargo.toml', 'Cargo.lock', 'Specs/AMD64/manuals.lock.json',
                                    'mbt/corpus/manifest.json'))
@@ -30,16 +31,14 @@ def main():
     before = sources()
     env = {**os.environ, 'ARIADNE_LLVM_MC': str(ROOT / 'target/ariadne-llvm-mc')}
     gates = [
-        ('rust-tests', ['cargo', 'test', '--offline']),
+        ('rust-tests', ['cargo', 'test', '--no-default-features', '--offline']),
         ('format', ['cargo', 'fmt', '--all', '--', '--check']),
-        ('clippy', ['cargo', 'clippy', '--offline', '--all-targets', '--', '-D', 'warnings']),
+        ('clippy', ['cargo', 'clippy', '--no-default-features', '--offline', '--all-targets', '--', '-D', 'warnings']),
         ('native-v1-v2', ['bash', 'native/llvm_mc/check.sh']),
         ('projection', ['bash', 'Specs/check-effects.sh']),
         ('mutations', ['python3', 'tools/check_effects_mutations.py']),
         ('core-mbt', ['python3', 'mbt/run.py']),
-        ('measurement', ['cargo', 'test', '--offline', '--test', 'effects',
-                         'batched_preparation_preserves_every_record_and_reports_measurement',
-                         '--', '--ignored', '--exact', '--nocapture']),
+        ('measurement', ['cargo', 'test', '--no-default-features', '--offline', '--test', 'effects', 'batched_preparation_preserves_every_record_and_reports_measurement', '--', '--ignored', '--exact', '--nocapture']),
     ]
     results = []
     for name, command in gates:

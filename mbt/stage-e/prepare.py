@@ -17,6 +17,7 @@ from tools import ROOT, mirrors_tools, run, sha256, write_json  # noqa: E402
 from generate import address_map, integer, model_set, record, string  # noqa: E402
 
 MODELS = {"MachineStateReplay": "machine_state", "LLVMIRReplay": "llvm_ir"}
+GENERATED_ROOT = ROOT / "src/mbt/stage_e/generated"
 SPEC_FILES = ["AriadneTypes.tla", "AriadneMachineCommon.tla", "AriadneMachineState.tla",
               "AriadneMachineStateExample.tla", "AriadneLLVMIR.tla", "AriadneLLVMIRExample.tla"]
 
@@ -24,8 +25,8 @@ SPEC_FILES = ["AriadneTypes.tla", "AriadneMachineCommon.tla", "AriadneMachineSta
 def sources():
     return [ROOT / "Specs" / name for name in SPEC_FILES] + [
         HERE / "prepare.py", HERE / "cases.py", ROOT / "mbt/tools.py", ROOT / "mbt/generate.py",
-        ROOT / "native/llvm_ir/inspect.cpp", ROOT / "ir/tests/fixtures/diamond.ll",
-        ROOT / "ir/tests/fixtures/diamond.bc",
+        ROOT / "native/llvm_ir/inspect.cpp", ROOT / "tests/ir/fixtures/diamond.ll",
+        ROOT / "tests/ir/fixtures/diamond.bc",
         *sorted((HERE / "model").glob("*.tla")),
         *sorted(HERE.glob("*.interface.json")),
     ]
@@ -116,7 +117,7 @@ def main():
                 raise RuntimeError("generated TLA input tables are stale; regenerate explicitly")
         else:
             path.write_text(expected)
-    work = HERE / ".work" / ("check" if args.check else "prepare")
+    work = ROOT / "target/mbt-work/stage-e" / ("check" if args.check else "prepare")
     model_dir = prepare_model(work)
     manifest_path = HERE / "corpus/manifest.json"
     if args.check:
@@ -142,7 +143,7 @@ def main():
     for name, directory in MODELS.items():
         model = model_dir / f"{name}.tla"
         contract = HERE / f"{name}.interface.json"
-        destination = HERE / "generated" / directory if args.check else generated / directory
+        destination = GENERATED_ROOT / directory if args.check else generated / directory
         corpus_dir = HERE / "corpus" if args.check else corpus
         evidence = corpus_dir / f"{name}.types.json"
         lock = corpus_dir / f"{name}.lock.json"
@@ -222,7 +223,7 @@ def main():
         for base, prefix in [(corpus, "corpus"), (generated, "generated")]:
             for artifact in sorted(base.rglob("*")):
                 if artifact.is_file() and artifact.name != "manifest.json":
-                    relative = Path(prefix) / artifact.relative_to(base)
+                    relative = (Path("../../src/mbt/stage_e/generated") if prefix == "generated" else Path(prefix)) / artifact.relative_to(base)
                     artifacts[str(relative)] = sha256(artifact)
         write_json(corpus / "manifest.json", {
             "schema": "ariadne.stage-e-mirrorrust-corpus/v1",
@@ -232,7 +233,7 @@ def main():
             "generation": {**versions, "compilerSha256": sha256(compiler), "nativeHelperSha256": sha256(Path(os.environ.get("ARIADNE_LLVM_IR", ROOT / "target/ariadne-llvm-ir"))), "scope": "deterministically generated finite input families; TLC safety/termination except high-VA Apalache bounded safety/completion; no Rust SUT executed during generation"},
         })
         shutil.copytree(corpus, HERE / "corpus", dirs_exist_ok=True)
-        shutil.copytree(generated, HERE / "generated", dirs_exist_ok=True)
+        shutil.copytree(generated, GENERATED_ROOT, dirs_exist_ok=True)
 
 
 if __name__ == "__main__":

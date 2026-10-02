@@ -56,7 +56,7 @@ def main():
                      for name in ("mirror", "model_interface_gen")},
         "elaborationCheck": check.stdout.strip(),
     }
-    write_json(MBT / ".work/toolchain.json", identity)
+    write_json(ROOT / "target/mbt-work/toolchain.json", identity)
     print(json.dumps(identity, indent=2), flush=True)
 
 

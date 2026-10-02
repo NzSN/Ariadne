@@ -24,7 +24,7 @@ matching the deterministic implementation's schedule. Model expected states
 come from TLC, independently of the Rust implementation. Apalache supplies type
 evidence; Mirrors resolves the reviewed interface, preflights the corpus, and
 compares actual observations during negotiated replay. The core crate remains
-dependency-free; this separate Cargo package depends on the sibling MirrorRust
+dependency-free with `--no-default-features`; the optional `mbt` feature depends on the sibling MirrorRust
 client and has its own dependency lockfile.
 
 | Owner | Files and responsibility |
@@ -50,7 +50,7 @@ running the gate. Tested here: Rust 1.96.0, Apalache 0.61.0, and TLC revision
 
 ```sh
 # Prepare the optional MBT client's dependencies once.
-cargo fetch --locked --manifest-path mbt/Cargo.toml
+cargo fetch --locked
 
 # Required for the supplied Mirrors revision; see the compatibility note below.
 python3 mbt/prepare_mirrors.py
@@ -186,10 +186,10 @@ poisoning, generated action coverage, and ownership release. The freshness test
 alters only a temporary generated copy and requires rejection without repair:
 
 ```sh
-cargo test --offline --locked --manifest-path mbt/Cargo.toml
+cargo test --offline --locked --features mbt
 python3 mbt/test_binding.py
-cargo fmt --manifest-path mbt/Cargo.toml -- --check
-cargo clippy --offline --locked --manifest-path mbt/Cargo.toml --all-targets -- -D warnings
+cargo fmt --all -- --check
+cargo clippy --offline --locked --features mbt --all-targets -- -D warnings
 ```
 
 This is local conformance testing. MirrorGate's Rust integration was inspected

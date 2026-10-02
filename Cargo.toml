@@ -6,8 +6,172 @@ rust-version = "1.85"
 description = "Snapshot-scoped machine-code analysis from normalized instruction summaries"
 publish = false
 
+[features]
+default = ["input", "ir"]
+investigation = ["dep:serde", "dep:serde_json", "dep:sha2"]
+reports = ["investigation"]
+bap = ["reports"]
+input = ["bap", "dep:minidump"]
+ir = ["reports", "dep:tempfile"]
+bench = ["input"]
+validation = ["input", "ir"]
+mbt = ["reports", "dep:mirrorrust", "dep:num-bigint"]
+
+[dependencies]
+minidump = { version = "=0.26.1", optional = true }
+serde = { version = "1", features = ["derive"], optional = true }
+serde_json = { version = "=1.0.149", optional = true }
+sha2 = { version = "=0.10.9", optional = true }
+tempfile = { version = "=3.20.0", optional = true }
+mirrorrust = { path = "../MirrorRust", optional = true }
+num-bigint = { version = "0.4", optional = true }
+
 [lib]
 name = "ariadne"
 
 [lints.rust]
-unsafe_code = "forbid"
+unsafe_code = "deny"
+
+[[bin]]
+name = "ariadne-minidump"
+path = "src/bin/ariadne-minidump.rs"
+required-features = ["input"]
+
+[[bin]]
+name = "ariadne-ir"
+path = "src/bin/ariadne-ir.rs"
+required-features = ["ir"]
+
+[[bin]]
+name = "bap-model-case"
+path = "src/bin/bap-model-case.rs"
+required-features = ["validation"]
+
+[[bin]]
+name = "ariadne-bench"
+path = "src/bin/ariadne-bench.rs"
+required-features = ["bench"]
+
+[[bin]]
+name = "bap_minidump"
+path = "src/bin/bap_minidump.rs"
+required-features = ["bench"]
+
+[[bin]]
+name = "compare_schedule"
+path = "src/bin/compare_schedule.rs"
+required-features = ["bench"]
+
+[[bin]]
+name = "investigation"
+path = "src/bin/investigation.rs"
+required-features = ["bench"]
+
+[[bin]]
+name = "real_minidump"
+path = "src/bin/real_minidump.rs"
+required-features = ["bench"]
+
+[[bin]]
+name = "ariadne-mbt"
+path = "src/mbt/core/main.rs"
+required-features = ["mbt"]
+
+[[bin]]
+name = "ariadne-stage-e-mbt"
+path = "src/bin/ariadne-stage-e-mbt.rs"
+required-features = ["mbt"]
+
+[[example]]
+name = "inspect"
+path = "src/examples/inspect.rs"
+required-features = ["input"]
+
+[[example]]
+name = "render_minidump"
+path = "src/examples/render_minidump.rs"
+required-features = ["input"]
+
+[[example]]
+name = "render_outcome"
+path = "src/examples/render_outcome.rs"
+
+[[test]]
+name = "bap_disagreement"
+path = "tests/bap/disagreement.rs"
+required-features = ["bap"]
+
+[[test]]
+name = "bap_native"
+path = "tests/bap/native.rs"
+required-features = ["bap"]
+
+[[test]]
+name = "bap_protocol"
+path = "tests/bap/protocol.rs"
+required-features = ["bap"]
+
+[[test]]
+name = "input_bap_backend"
+path = "tests/input/bap_backend.rs"
+required-features = ["input"]
+
+[[test]]
+name = "input_investigation"
+path = "tests/input/investigation.rs"
+required-features = ["input"]
+
+[[test]]
+name = "input_native"
+path = "tests/input/native.rs"
+required-features = ["input"]
+
+[[test]]
+name = "input_reader"
+path = "tests/input/reader.rs"
+required-features = ["input"]
+
+[[test]]
+name = "input_real_dumps"
+path = "tests/input/real_dumps.rs"
+required-features = ["input"]
+
+[[test]]
+name = "input_stage_b"
+path = "tests/input/stage_b.rs"
+required-features = ["input"]
+
+[[test]]
+name = "input_stage_c"
+path = "tests/input/stage_c.rs"
+required-features = ["input"]
+
+[[test]]
+name = "input_stage_e"
+path = "tests/input/stage_e.rs"
+required-features = ["input"]
+
+[[test]]
+name = "ir_cli"
+path = "tests/ir/cli.rs"
+required-features = ["ir"]
+
+[[test]]
+name = "ir_native"
+path = "tests/ir/native.rs"
+required-features = ["ir"]
+
+[[test]]
+name = "investigation_explanations"
+path = "tests/investigation/explanations.rs"
+required-features = ["investigation"]
+
+[[test]]
+name = "reports_contracts"
+path = "tests/reports/contracts.rs"
+required-features = ["reports"]
+
+[[test]]
+name = "stage_e_bindings"
+path = "tests/mbt/stage_e/bindings.rs"
+required-features = ["mbt"]

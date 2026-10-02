@@ -31,7 +31,7 @@ minidump semantic backend; LLVM MC remains an independent decode/control
 reference. The semantic selector and LLVM effect fallback are removed. See the
 [current BAP-only record](docs/Ariadne/bap-only-removal-validation.md). Legacy
 LLVM effect rules and their source-bound tests remain historical/research
-reference evidence. The BAP analysis-core replacement has not started. The [minidump package](input/README.md) now provides captured-memory input and
+reference evidence. The BAP analysis-core replacement has not started. The [minidump package](docs/Ariadne/modules/input.md) now provides captured-memory input and
 local-start discovery for Windows/Linux AMD64. PE/ELF image and ELF core readers
 remain deferred. A tool-produced [captured predecessor slice and versioned
 investigator CLI](docs/Ariadne/stage-b-c-validation.md) are delivered. The

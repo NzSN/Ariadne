@@ -5,6 +5,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+from rust_layout import copy_sut, source_files
 import subprocess
 import tempfile
 import time
@@ -13,14 +14,14 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def sources():
-    paths = set()
-    for directory in ('src', 'tests', 'native/llvm_mc', 'input/src', 'input/tests', 'input/examples', 'reports/src', 'bap/src', 'investigation/src', 'native/bap'):
+    paths = source_files()
+    for directory in ('src', 'tests', 'native/llvm_mc', 'src/input', 'tests/input', 'src/examples', 'src/reports', 'src/bap', 'src/investigation', 'native/bap'):
         paths.update(p for p in (ROOT / directory).rglob('*') if p.is_file() and '__pycache__' not in p.parts)
     for pattern in ('Specs/AriadneInput*.tla', 'Specs/Input*.cfg', 'Specs/check-input.sh',
                     'tools/check_minidump*.py'):
         paths.update(ROOT.glob(pattern))
-    paths.update(ROOT / p for p in ('Cargo.toml', 'Cargo.lock', 'input/Cargo.toml', 'input/Cargo.lock',
-                                   'reports/Cargo.toml', 'reports/Cargo.lock', 'bap/Cargo.toml', 'bap/Cargo.lock', 'investigation/Cargo.toml', 'investigation/Cargo.lock',
+    paths.update(ROOT / p for p in ('Cargo.toml', 'Cargo.lock', 'Cargo.toml', 'Cargo.lock',
+                                   'Cargo.toml', 'Cargo.lock', 'Cargo.toml', 'Cargo.lock', 'Cargo.toml', 'Cargo.lock',
                                    'Specs/AriadneMachineCommon.tla', 'Specs/AriadneTypes.tla'))
     return {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(paths)}
 
@@ -33,14 +34,14 @@ def main():
     # The effects regression gate builds the native helper before input-native tests.
     gates = [
         ('effects-regression', ['python3', 'tools/check_effects.py']),
-        ('input-tests', ['cargo', 'test', '--offline', '--locked', '--manifest-path', 'input/Cargo.toml']),
-        ('format', ['cargo', 'fmt', '--manifest-path', 'input/Cargo.toml', '--', '--check']),
-        ('clippy', ['cargo', 'clippy', '--offline', '--locked', '--manifest-path', 'input/Cargo.toml', '--all-targets', '--', '-D', 'warnings']),
-        ('native', ['cargo', 'test', '--offline', '--locked', '--manifest-path', 'input/Cargo.toml', '--test', 'native', '--', '--ignored']),
-        ('stage-b-fixtures', ['python3', 'input/tests/fixtures/make_stage_b.py', '--check']),
-        ('stage-b-native', ['cargo', 'test', '--offline', '--locked', '--manifest-path', 'input/Cargo.toml', '--test', 'stage_b', '--', '--ignored']),
-        ('stage-c-cli', ['cargo', 'test', '--offline', '--locked', '--manifest-path', 'input/Cargo.toml', '--test', 'stage_c', '--', '--ignored']),
-        ('real-artifacts', ['cargo', 'test', '--offline', '--locked', '--manifest-path', 'input/Cargo.toml', '--test', 'real_dumps', '--', '--ignored']),
+        ('input-tests', ['cargo', 'test', '--no-default-features', '--features', 'input', '--offline', '--locked', '--manifest-path', 'Cargo.toml']),
+        ('format', ['cargo', 'fmt', '--manifest-path', 'Cargo.toml', '--', '--check']),
+        ('clippy', ['cargo', 'clippy', '--no-default-features', '--features', 'input', '--offline', '--locked', '--manifest-path', 'Cargo.toml', '--all-targets', '--', '-D', 'warnings']),
+        ('native', ['cargo', 'test', '--no-default-features', '--features', 'input', '--offline', '--locked', '--manifest-path', 'Cargo.toml', '--test', 'input_native', '--', '--ignored']),
+        ('stage-b-fixtures', ['python3', 'tests/input/fixtures/make_stage_b.py', '--check']),
+        ('stage-b-native', ['cargo', 'test', '--no-default-features', '--features', 'input', '--offline', '--locked', '--manifest-path', 'Cargo.toml', '--test', 'input_stage_b', '--', '--ignored']),
+        ('stage-c-cli', ['cargo', 'test', '--no-default-features', '--features', 'input', '--offline', '--locked', '--manifest-path', 'Cargo.toml', '--test', 'input_stage_c', '--', '--ignored']),
+        ('real-artifacts', ['cargo', 'test', '--no-default-features', '--features', 'input', '--offline', '--locked', '--manifest-path', 'Cargo.toml', '--test', 'input_real_dumps', '--', '--ignored']),
         ('formal-input', ['bash', 'Specs/check-input.sh']),
         ('mutations', ['python3', 'tools/check_minidump_mutations.py']),
     ]

@@ -6,6 +6,10 @@ qualified for both platform fixtures and the pinned controlled Linux capture.
 Full real-Windows I4 acceptance remains partial.** I5–I7 and BAP core migration
 remain separate future deliveries.
 
+This record retains the pre-consolidation source paths. The
+[Rust source-layout delivery](rust-source-layout.md) provides the current
+source-bound regression and updated build/test paths.
+
 The [current source-bound record](investigation-validation.json) passes all
 **16 gates**. Its nested **12-gate Stage E regression** passes with stable
 sources, including the full minidump/effects/native/formal pipeline and existing
@@ -23,8 +27,8 @@ requirements. Reports retain those relationships in text, strict JSON and DOT.
 The [contracts](investigation-contracts.md) describe the actual schema and limits.
 
 ```sh
-cargo build --offline --locked --release --manifest-path input/Cargo.toml
-input/target/release/ariadne-minidump input/tests/fixtures/stage_b_linux.dmp \
+cargo build --offline --locked --release --manifest-path Cargo.toml
+target/release/ariadne-minidump tests/input/fixtures/stage_b_linux.dmp \
   --decoder-reference target/ariadne-llvm-mc --entry 0x401000 \
   --explain-fault-address 0x401006 --memory-access 0 \
   --explanation-only --format json

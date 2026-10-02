@@ -36,6 +36,9 @@
     "traces": "TLC checked safety/termination, then TraceComplete counterexample (expected exit 12)",
     "typeEvidence": "Apalache length-0 TypeWitness counterexample (expected exit 12)"
   },
+  "layoutMigration": {
+    "scope": "source paths and preparation-tool paths only; original trace, lock, generated binding, TLA and fixture bytes unchanged"
+  },
   "oracleSources": {
     "Specs/Ariadne.tla": "26d3a783c43b0b86029bfbeb2e9f8bff7a56d3c7e8702493d7b502d21bf32019",
     "Specs/AriadneCalls.tla": "159d6a1cc26ee3d45368784940959cf26feb4c7bbe9a2112b5219f9d3c779be3",
@@ -47,7 +50,7 @@
     "mbt/generate.py": "fd2c499fd27c1196622151eb633578694b724c88863a33c9d7390a88a2233228",
     "mbt/model/AriadneReplay.tla": "cf750e45e3115eb66a5c587c214f7aaba582bf0a6688f11c792cf8777d2157e8",
     "mbt/projection.py": "adf53be15f9c6ca7b7d1e563f6978cac984ed3d9512e79fde789c5a775ceaa80",
-    "mbt/tools.py": "1d3a36db33e17c183f0584929704161ab8a5a0ef359c4412fc6d765c647f83d4"
+    "mbt/tools.py": "f19e2b87c14c411c358ce869445c3b98a174e2cd28211bde4266e22a1ff7be99"
   },
   "schema": "ariadne.mbt-corpus/v1",
   "traceStates": {

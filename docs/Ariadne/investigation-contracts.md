@@ -45,7 +45,7 @@ record/render costs remain subject to workload measurements and input limits.
 The question adds its instruction to slice seeds, **never entry roots**. Examples:
 
 ```sh
-input/target/release/ariadne-minidump input/tests/fixtures/stage_b_linux.dmp \
+target/release/ariadne-minidump tests/input/fixtures/stage_b_linux.dmp \
   --decoder-reference target/ariadne-llvm-mc --entry 0x401000 \
   --explain-fault-address 0x401006 --memory-access 0 \
   --explanation-only --format json

@@ -1,5 +1,9 @@
 {
   "artifacts": {
+    "../../src/mbt/stage_e/generated/llvm_ir/.model-interface-generated.json": "8373b0b06802f87fb6aa6e4226f39efe7b1d0f81231d3d65e8c9247658e8107c",
+    "../../src/mbt/stage_e/generated/llvm_ir/LLVMIRReplayMirror.generated.rs": "487a7fd700bfea3c4f371051f860413282f2aae4d4d8becba7dffde17fc4fc8a",
+    "../../src/mbt/stage_e/generated/machine_state/.model-interface-generated.json": "b6be710dae95efb990147883393c78737d7a4315298accfe8a12ae3258190720",
+    "../../src/mbt/stage_e/generated/machine_state/MachineStateReplayMirror.generated.rs": "72a26cc6c0096daf8af4593b9d50ebf8b9906323c4695843c64cd453aab064b2",
     "corpus/IRChain2.itf.json": "2ceabc0cb0e020ec2a1784e2b918d632f5faf20d796c13904d7571cd1822132a",
     "corpus/IRChain2.raw.json": "2ceabc0cb0e020ec2a1784e2b918d632f5faf20d796c13904d7571cd1822132a",
     "corpus/IRChain2.tlc.json": "e409ae0f06da83f034783fee2bbcaf8ff5248558f641c9424100836c6365ec6d",
@@ -132,11 +136,7 @@
     "corpus/inputs/MSSummary.json": "0a7955271a21911dad3cc02ad4a547086e3568dbce897b49831830208294f4ac",
     "corpus/inputs/MSTerminalAlternatives.json": "9f723cff89fe9102503843d94744428a9a6b4ebd5d4732e84f1f87d6d52e4e17",
     "corpus/inputs/MSUncertainty.json": "e9c79fb7b6478dca02669940fe0fa1b978291d44076c41cbb8f78753052da971",
-    "corpus/inputs/MachineStateReplay.json": "368557bbc9c6effc1abd556b4fe242f5bac2c79837de65e95f1a8ad30850d072",
-    "generated/llvm_ir/.model-interface-generated.json": "8373b0b06802f87fb6aa6e4226f39efe7b1d0f81231d3d65e8c9247658e8107c",
-    "generated/llvm_ir/LLVMIRReplayMirror.generated.rs": "487a7fd700bfea3c4f371051f860413282f2aae4d4d8becba7dffde17fc4fc8a",
-    "generated/machine_state/.model-interface-generated.json": "b6be710dae95efb990147883393c78737d7a4315298accfe8a12ae3258190720",
-    "generated/machine_state/MachineStateReplayMirror.generated.rs": "72a26cc6c0096daf8af4593b9d50ebf8b9906323c4695843c64cd453aab064b2"
+    "corpus/inputs/MachineStateReplay.json": "368557bbc9c6effc1abd556b4fe242f5bac2c79837de65e95f1a8ad30850d072"
   },
   "engines": {
     "LLVMIRReplay": [
@@ -188,6 +188,9 @@
       ""
     ]
   },
+  "layoutMigration": {
+    "scope": "source paths and preparation-tool paths only; original trace, lock, generated binding, TLA and fixture bytes unchanged"
+  },
   "oracleSources": {
     "Specs/AriadneLLVMIR.tla": "d67c63270444125bdef4dde1c8284d13d0b5706f14ec9cd2336c5cd7f8b04a54",
     "Specs/AriadneLLVMIRExample.tla": "c812c7638e2a9e619059cf15d700758e94872ec6cf1ec1b8949cfb3f7517f95d",
@@ -195,19 +198,19 @@
     "Specs/AriadneMachineState.tla": "7edb33e3d03e1a91c015489ef670d2d37654a7ce8a4cdec927d3a834ffec9fe7",
     "Specs/AriadneMachineStateExample.tla": "24e4b5bf4d7792d379705d0cc0bbf704178f8de40dab6e382b44d270b1e04eff",
     "Specs/AriadneTypes.tla": "3bfb36f3bf96adc324a9c714d34a12af708d0e7daaba91a5a1ae5f79f2820329",
-    "ir/tests/fixtures/diamond.bc": "bec3302fd1aa62cc39df8dc7351efc9fe472ffa70496dd47a513ef506b2cade6",
-    "ir/tests/fixtures/diamond.ll": "3dc51d62e4448958beb960afb9eea9bc7ff9484ec79a617f3637c58ed2ca6dcf",
     "mbt/generate.py": "fd2c499fd27c1196622151eb633578694b724c88863a33c9d7390a88a2233228",
     "mbt/stage-e/LLVMIRReplay.interface.json": "d47823fe82e3c8aebb0a74d62388e2f28a2aa8b162921f0ebab13f7f5458852e",
     "mbt/stage-e/MachineStateReplay.interface.json": "1bd569bb22f019b0fef6aa6d02dae140c2403f60240aa7bd1d0ee68aa78b859e",
-    "mbt/stage-e/cases.py": "409bbfaa819048c636513d9444cdd9204219c077c50d884e6e2b121c2b6213a8",
+    "mbt/stage-e/cases.py": "3b943eb87254530be07f68a011813016263afeb3bfbbe76bfd1748b7c161f169",
     "mbt/stage-e/model/LLVMIRCases.tla": "c5e74dceb477d6be6fc52a463b9bba95e2d7bd8cd8ea6b2bab7175551201ac4e",
     "mbt/stage-e/model/LLVMIRReplay.tla": "5d9aadb33ff2194001b93c24796d6ff51d17ee9b9f775d530919b89a11067972",
     "mbt/stage-e/model/MachineStateCases.tla": "efce75149e96fc36906c5f164abce7812ec2e70ad0b2a131d221783c5e8fa658",
     "mbt/stage-e/model/MachineStateReplay.tla": "051eb27886de95fcb24780b28f7cc7899a9d1ae29615b3273c5e408bb3c0562c",
-    "mbt/stage-e/prepare.py": "08c69a19ca5edde2e356ea104a566b322d3a88b25a07228379dbf69cf4fe71c6",
-    "mbt/tools.py": "1d3a36db33e17c183f0584929704161ab8a5a0ef359c4412fc6d765c647f83d4",
-    "native/llvm_ir/inspect.cpp": "1d7fd4f9bd68e4b10936f9ad05ef344d37ac677b0b602f0e5b9832f258b7fbad"
+    "mbt/stage-e/prepare.py": "ee6a376e505a7d9cb8d8a9678188a7fee4a9e652fa51a7ff75cfe2559012ccb8",
+    "mbt/tools.py": "f19e2b87c14c411c358ce869445c3b98a174e2cd28211bde4266e22a1ff7be99",
+    "native/llvm_ir/inspect.cpp": "1d7fd4f9bd68e4b10936f9ad05ef344d37ac677b0b602f0e5b9832f258b7fbad",
+    "tests/ir/fixtures/diamond.bc": "bec3302fd1aa62cc39df8dc7351efc9fe472ffa70496dd47a513ef506b2cade6",
+    "tests/ir/fixtures/diamond.ll": "3dc51d62e4448958beb960afb9eea9bc7ff9484ec79a617f3637c58ed2ca6dcf"
   },
   "schema": "ariadne.stage-e-mirrorrust-corpus/v1",
   "traceStates": {

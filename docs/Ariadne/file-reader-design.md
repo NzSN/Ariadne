@@ -3,7 +3,7 @@
 Design proposal, 2026-09-26. Source baseline: `aee833f`.
 Scope update: the user selected **only the minidump path** for current
 implementation. Windows/Linux AMD64 minidump input is delivered in
-[`input/`](../../input/README.md); PE/ELF images and ELF cores below remain design
+[`input/`](modules/input.md); PE/ELF images and ELF cores below remain design
 work. The broader initial-delivery proposal is retained for future planning,
 not used to claim implementation of those formats.
 The minidump-only [Stage C implementation plan](remaining-implementation-plan.md#c--investigator-cli-and-versioned-output)
@@ -102,14 +102,14 @@ Proposed files:
 
 | Path | Responsibility |
 | --- | --- |
-| `input/src/lib.rs` | Public snapshot and preparation interface |
-| `input/src/pe.rs` | PE validation and VA-to-file mapping |
-| `input/src/minidump.rs` | Windows/Linux minidump memory, module, thread and exception metadata |
-| `input/src/elf.rs` | Shared checked ELF64 headers/program headers and standalone image mapping |
-| `input/src/elf_core.rs` | Linux core captured segments, notes and per-thread observations |
-| `input/src/address_space.rs` | Immutable ranges, conflicts and prefix lookup |
-| `input/src/materialize.rs` | Local-successor request construction and limits |
-| `input/tests/` | Hand-authored format fixtures, native end-to-end and negative cases |
+| `src/input/mod.rs` | Public snapshot and preparation interface |
+| `src/input/pe.rs` | PE validation and VA-to-file mapping |
+| `src/input/minidump.rs` | Windows/Linux minidump memory, module, thread and exception metadata |
+| `src/input/elf.rs` | Shared checked ELF64 headers/program headers and standalone image mapping |
+| `src/input/elf_core.rs` | Linux core captured segments, notes and per-thread observations |
+| `src/input/address_space.rs` | Immutable ranges, conflicts and prefix lookup |
+| `src/input/materialize.rs` | Local-successor request construction and limits |
+| `tests/input/` | Hand-authored format fixtures, native end-to-end and negative cases |
 | Root `src/llvm_mc/` | Shared batch preparation seam; no duplicate semantic rules |
 | `Specs/AriadneInput.tla` | Proposed mapping/provenance/materialization contract |
 

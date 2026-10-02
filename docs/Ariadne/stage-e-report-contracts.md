@@ -3,7 +3,7 @@
 These are separate result families for [Stage E](remaining-implementation-plan.md#e--implement-the-other-two-formal-analysis-machines).
 The [completed Stage E](stage-e-completion.md) adds optional stateflow input to
 the minidump investigator CLI and a separate verifier-backed IR CLI. Their
-versioned [input/report schemas](../../reports/README.md) preserve these families
+versioned [input/report schemas](modules/reports.md) preserve these families
 independently.
 The [first MirrorRust integration stage](../../Plans/stage-e-mirrorrust-integration.md)
 connects these result families to separate compiler-generated replay ports.

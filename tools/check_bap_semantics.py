@@ -3,13 +3,14 @@
 import argparse,hashlib,json,os,subprocess,tempfile,time
 from datetime import datetime,timezone
 from pathlib import Path
+from rust_layout import copy_sut, source_files
 ROOT=Path(__file__).resolve().parents[1]
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def sources():
- paths=set()
- for tree in ['src','tests','input/src','input/tests','input/examples','reports/src','reports/tests','bap/src','investigation/src','bap/tests','bench/src','native/llvm_mc','native/bap']:
+ paths=source_files()
+ for tree in ['src','tests','src/input','tests/input','src/examples','src/reports','tests/reports','src/bap','src/investigation','tests/bap','src/bench','native/llvm_mc','native/bap']:
   paths.update(p for p in (ROOT/tree).rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix!='.md')
- paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','input/Cargo.toml','input/Cargo.lock','reports/Cargo.toml','reports/Cargo.lock','bap/Cargo.toml','bap/Cargo.lock','investigation/Cargo.toml','investigation/Cargo.lock','bench/Cargo.toml','bench/Cargo.lock','Specs/Ariadne.tla','Specs/AriadneMachineCommon.tla','Specs/AriadneTypes.tla','tools/check_bap_semantics.py','tools/check_bap_model.py','tools/check_bap_mutations.py','tools/measure_bap.py','tools/check_stage_e.py','tools/check_minidump.py','tools/check_minidump_mutations.py'])
+ paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Specs/Ariadne.tla','Specs/AriadneMachineCommon.tla','Specs/AriadneTypes.tla','tools/check_bap_semantics.py','tools/check_bap_model.py','tools/check_bap_mutations.py','tools/measure_bap.py','tools/check_stage_e.py','tools/check_minidump.py','tools/check_minidump_mutations.py'])
  return {str(p.relative_to(ROOT)):sha(p) for p in sorted(paths)}
 def retained(path,hashkey='sourceHashes'):
  data=json.loads(path.read_text())
@@ -23,17 +24,17 @@ def main():
  nested={};results=[];print('BAP acceptance artifacts:',work,flush=True)
  gates=[
  ('native-build',['bash','native/bap/build.sh']),
- ('native-corpus',['python3','bap/tests/fixtures/make_corpus.py','--check']),
- ('controlled-fixtures',['python3','input/tests/fixtures/make_bap.py','--check']),
- ('bap-format',['cargo','fmt','--manifest-path','bap/Cargo.toml','--','--check']),
- ('bap-clippy',['cargo','clippy','--offline','--locked','--manifest-path','bap/Cargo.toml','--all-targets','--','-D','warnings']),
- ('bap-tests-native',['cargo','test','--offline','--locked','--release','--manifest-path','bap/Cargo.toml','--','--include-ignored']),
- ('input-format',['cargo','fmt','--manifest-path','input/Cargo.toml','--','--check']),
- ('input-clippy',['cargo','clippy','--offline','--locked','--manifest-path','input/Cargo.toml','--all-targets','--','-D','warnings']),
- ('input-bap-cli',['cargo','test','--offline','--locked','--release','--manifest-path','input/Cargo.toml','--test','bap_backend','--','--include-ignored']),
- ('bench-format',['cargo','fmt','--manifest-path','bench/Cargo.toml','--','--check']),
- ('bench-clippy',['cargo','clippy','--offline','--locked','--manifest-path','bench/Cargo.toml','--all-targets','--','-D','warnings']),
- ('model-observer-build',['cargo','build','--offline','--locked','--release','--manifest-path','bap/Cargo.toml','--bin','bap-model-case']),
+ ('native-corpus',['python3','tests/bap/fixtures/make_corpus.py','--check']),
+ ('controlled-fixtures',['python3','tests/input/fixtures/make_bap.py','--check']),
+ ('bap-format',['cargo', 'fmt', '--manifest-path', 'Cargo.toml', '--', '--check']),
+ ('bap-clippy',['cargo', 'clippy', '--no-default-features', '--features', 'bap', '--offline', '--locked', '--manifest-path', 'Cargo.toml', '--all-targets', '--', '-D', 'warnings']),
+ ('bap-tests-native',['cargo', 'test', '--no-default-features', '--features', 'bap', '--offline', '--locked', '--release', '--manifest-path', 'Cargo.toml', '--', '--include-ignored']),
+ ('input-format',['cargo', 'fmt', '--manifest-path', 'Cargo.toml', '--', '--check']),
+ ('input-clippy',['cargo', 'clippy', '--no-default-features', '--features', 'input', '--offline', '--locked', '--manifest-path', 'Cargo.toml', '--all-targets', '--', '-D', 'warnings']),
+ ('input-bap-cli',['cargo', 'test', '--offline', '--locked', '--release', '--test', 'input_bap_backend', '--', '--include-ignored']),
+ ('bench-format',['cargo', 'fmt', '--manifest-path', 'Cargo.toml', '--', '--check']),
+ ('bench-clippy',['cargo', 'clippy', '--no-default-features', '--features', 'bench', '--offline', '--locked', '--manifest-path', 'Cargo.toml', '--all-targets', '--', '-D', 'warnings']),
+ ('model-observer-build',['cargo', 'build', '--no-default-features', '--features', 'validation', '--offline', '--locked', '--release', '--manifest-path', 'Cargo.toml', '--bin', 'bap-model-case']),
  ('model',['python3','tools/check_bap_model.py']),
  ('mutation',['python3','tools/check_bap_mutations.py']),
  ('workload',['python3','tools/measure_bap.py']),
@@ -44,7 +45,7 @@ def main():
   try:
    if reuse:
     data=retained(reuse);nested[name]=data;output=f'Reused exact source-hash-verified record: {reuse}\n';code=0
-    if name=='model' and data['observerSha256']!=sha(ROOT/'bap/target/release/bap-model-case'):raise RuntimeError('model observer binary changed')
+    if name=='model' and data['observerSha256']!=sha(ROOT/'target/release/bap-model-case'):raise RuntimeError('model observer binary changed')
     if name=='workload' and any(sha(ROOT/p)!=d for p,d in data['tools'].items()):raise RuntimeError('workload tools changed')
     if name=='stage-e' and (data['tools']['nativeMCSha256']!=sha(ROOT/'target/ariadne-llvm-mc') or data['tools']['nativeIRSha256']!=sha(ROOT/'target/ariadne-llvm-ir')):raise RuntimeError('Stage E native tools changed')
    else:

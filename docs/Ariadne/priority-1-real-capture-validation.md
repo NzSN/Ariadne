@@ -83,7 +83,7 @@ python3 tools/check_priority1_real_capture.py \
   --dump tmp/priority1/chromium-member-uaf.dmp \
   --companion /home/nzsn/Repos/chromium/src/out/Default/chrome \
   --decoder target/ariadne-llvm-mc \
-  --cli input/target/debug/ariadne-minidump \
+  --cli target/debug/ariadne-minidump \
   --dot /path/to/dot \
   --report-dir tmp/priority1/recheck-report \
   --validation-json tmp/priority1/recheck-validation.json

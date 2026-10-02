@@ -34,7 +34,7 @@ A retained example shows a completed partial analysis: a definition in the
 slice, an incomplete call, an unavailable continuation and an unvisited callee.
 See [text](rendering-example/result.txt), [DOT](rendering-example/result.dot)
 and [rendered SVG](rendering-example/result.svg). Regenerate these files using
-`examples/render_outcome.rs`; the SVG is illustrative output from Graphviz
+`src/examples/render_outcome.rs`; the SVG is illustrative output from Graphviz
 2.42.2, not a geometry or font-layout compatibility contract.
 
 ## Meaning of the views
@@ -84,7 +84,7 @@ not generated from metadata. Output order follows the ordered result sets/maps.
 The optional input-package example accepts distinct entry and slice-seed VAs:
 
 ```sh
-cargo run --offline --quiet --locked --manifest-path input/Cargo.toml \
+cargo run --offline --quiet --locked --manifest-path Cargo.toml \
   --example render_minidump -- crash.dmp target/ariadne-llvm-mc \
   ENTRY_VA_HEX SEED_VA_HEX dot > crash.dot 2> crash-evidence.txt
 dot -Tsvg crash.dot -o crash.svg

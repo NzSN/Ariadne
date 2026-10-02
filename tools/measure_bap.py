@@ -3,6 +3,7 @@
 import argparse,csv,hashlib,io,json,os,platform,statistics,subprocess,tempfile,time
 from datetime import datetime,timezone
 from pathlib import Path
+from rust_layout import copy_sut, source_files
 ROOT=Path(__file__).resolve().parents[1]
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def run(cmd,timeout=120):
@@ -12,18 +13,19 @@ def run(cmd,timeout=120):
 
 def summary(values):return dict(median=statistics.median(values),min=min(values),max=max(values),samples=len(values))
 def sources():
- paths=set()
- for tree in ['src','input/src','reports/src','bap/src','investigation/src','bench/src','native/llvm_mc','native/bap']:
+ paths=source_files()
+ for tree in ['src','src/input','src/reports','src/bap','src/investigation','src/bench','native/llvm_mc','native/bap']:
   paths.update(p for p in (ROOT/tree).rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix!='.md')
- paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','input/Cargo.toml','input/Cargo.lock','reports/Cargo.toml','reports/Cargo.lock','bap/Cargo.toml','bap/Cargo.lock','investigation/Cargo.toml','investigation/Cargo.lock','bench/Cargo.toml','bench/Cargo.lock','tools/measure_bap.py','docs/Ariadne/priority-1-real-capture-case.json','docs/Ariadne/priority-4-real-capture-case.json'])
+ paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','tools/measure_bap.py','docs/Ariadne/priority-1-real-capture-case.json','docs/Ariadne/priority-4-real-capture-case.json'])
  return {str(p.relative_to(ROOT)):sha(p) for p in sorted(paths)}
 def main():
  before=sources()
  p=argparse.ArgumentParser(description=__doc__);p.add_argument('--windows-dump',type=Path,default=os.environ.get('ARIADNE_PRIORITY4_DUMP'));p.add_argument('--output',type=Path);args=p.parse_args()
  work=args.output or Path(tempfile.mkdtemp(prefix='ariadne-bap-workloads-'));work.mkdir(parents=True,exist_ok=True)
- cli=ROOT/'input/target/release/ariadne-minidump';bench=ROOT/'bench/target/release/bap_minidump';decoder=ROOT/'target/ariadne-llvm-mc';helper=ROOT/'target/ariadne-bap-lift';runtime=ROOT/'tmp/bap-setup/stable'
- for manifest,exe in [('input/Cargo.toml','ariadne-minidump'),('bench/Cargo.toml','bap_minidump')]:run(['cargo','build','--offline','--locked','--release','--manifest-path',manifest,'--bin',exe])
- cases=[('stage-b-linux',ROOT/'input/tests/fixtures/stage_b_linux.dmp','0x401000','0x401006',False),('stage-b-windows',ROOT/'input/tests/fixtures/stage_b_windows.dmp','0x7ff700001000','0x7ff700001006',False),('controlled-not',ROOT/'input/tests/fixtures/bap_precision_linux.dmp','0x401000','0x401006',False),('real-linux-34',ROOT/'tmp/priority1/chromium-member-uaf.dmp','0x566817922dc5','0x566817922e42',True)]
+ cli=ROOT/'target/release/ariadne-minidump';bench=ROOT/'target/release/bap_minidump';decoder=ROOT/'target/ariadne-llvm-mc';helper=ROOT/'target/ariadne-bap-lift';runtime=ROOT/'tmp/bap-setup/stable'
+ for exe in ['ariadne-minidump','bap_minidump']:
+  run(['cargo','build','--offline','--locked','--release',*(['--features','bench'] if exe=='bap_minidump' else []),'--bin',exe])
+ cases=[('stage-b-linux',ROOT/'tests/input/fixtures/stage_b_linux.dmp','0x401000','0x401006',False),('stage-b-windows',ROOT/'tests/input/fixtures/stage_b_windows.dmp','0x7ff700001000','0x7ff700001006',False),('controlled-not',ROOT/'tests/input/fixtures/bap_precision_linux.dmp','0x401000','0x401006',False),('real-linux-34',ROOT/'tmp/priority1/chromium-member-uaf.dmp','0x566817922dc5','0x566817922e42',True)]
  pinned_linux=json.loads((ROOT/'docs/Ariadne/priority-1-real-capture-case.json').read_text())
  expected_linux=pinned_linux['capture']['sha256']
  if sha(cases[-1][1])!=expected_linux:raise RuntimeError('real Linux artifact hash mismatch')

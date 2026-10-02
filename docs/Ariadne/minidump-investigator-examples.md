@@ -1,7 +1,7 @@
 # Minidump investigator examples
 
 These commands run from the Ariadne repository root. Build the pinned LLVM MC
-helper as described in the [input guide](../../input/README.md#build-and-verification),
+helper as described in the [input guide](modules/input.md#build-and-verification),
 then set `ARIADNE_LLVM_MC` to its executable path. The CLI selects its Windows
 or Linux decoder target from the dump, independent of the host platform.
 The [Priority 3 design](priority-3-investigator-presentation-design.md) defines
@@ -13,13 +13,13 @@ export ARIADNE_LLVM_MC="$PWD/target/ariadne-llvm-mc"
 mkdir -p tmp/priority3
 report_root=$(mktemp -d tmp/priority3/run-XXXXXX)
 
-cargo run --offline --locked --manifest-path input/Cargo.toml \
-  --bin ariadne-minidump -- input/tests/fixtures/stage_b_linux.dmp \
+cargo run --offline --locked --manifest-path Cargo.toml \
+  --bin ariadne-minidump -- tests/input/fixtures/stage_b_linux.dmp \
   --decoder "$ARIADNE_LLVM_MC" --entry 0x401000 \
   --seed-exception-rip --output-dir "$report_root/linux-report"
 
-cargo run --offline --locked --manifest-path input/Cargo.toml \
-  --bin ariadne-minidump -- input/tests/fixtures/stage_b_windows.dmp \
+cargo run --offline --locked --manifest-path Cargo.toml \
+  --bin ariadne-minidump -- tests/input/fixtures/stage_b_windows.dmp \
   --decoder "$ARIADNE_LLVM_MC" --entry 0x7ff700001000 \
   --seed-exception-rip --output-dir "$report_root/windows-report"
 ```

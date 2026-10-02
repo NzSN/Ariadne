@@ -1,5 +1,11 @@
 # Rust machine-analysis implementation
 
+The [Rust source-layout consolidation plan](../Plans/rust-source-layout.md)
+implements the user-requested single Cargo package with sources in `src/`, tests
+in `tests/`, and build artifacts in the root `target/`.
+The [completed layout and validation](Ariadne/rust-source-layout.md) record the
+current module APIs, build commands and retained regression evidence.
+
 The `ariadne-analysis` package exports the `ariadne` Rust library. It implements
 [Ariadne.tla](../Specs/Ariadne.tla) over an owned immutable request using the
 standard library. The separate LLVM IR and abstract machine-state models do
@@ -17,29 +23,41 @@ separates end-to-end CLI observations from core counters.
 The optional [LLVM MC byte-span adapter](llvm-mc-adapter.md) now constructs
 requests from caller-provided x86-64 bytes using a separate native decoder.
 The core's behavior and fixed-input specification are unchanged. File parsing
-stays in separate packages. `ByteSnapshot::prepare()` now supplies
+stays in the `ariadne::input` module. `ByteSnapshot::prepare()` now supplies
 reviewed conservative effects for an explicit form registry, with byte-level
 GPR aliases and per-site evidence. This adds trusted-input preparation without
 changing the core state machine; see the [effect rule matrix](Ariadne/operand-effects-rules.md).
 
-The separate [minidump input package](../input/README.md) now supplies immutable
+The [minidump input module](Ariadne/modules/input.md) now supplies immutable
 captured memory and local instruction discovery for AMD64 Windows/Linux dumps.
-Its dependency lock is independent of the root crate. The public batch-preparation
+It shares the root manifest and lockfile. The public batch-preparation
 seam reuses this adapter's rules; it does not change the analyzer transitions.
 PE/ELF images and ELF core readers remain pending.
 
 ## Build and use
 
 The crate uses Rust 2024 with a declared minimum Rust version of 1.85. Validation
-for this implementation uses Rust/Cargo 1.96.0. There are no external crate
-dependencies, and the included Cargo lockfile permits offline builds.
+for this implementation uses Rust/Cargo 1.96.0. The default build enables input
+and IR adapters. `--no-default-features` retains the standard-library-only core;
+`bench` and `mbt` enable benchmark binaries and generated MirrorRust replay.
+One root Cargo lockfile covers all feature selections.
 
 ```sh
-cargo test --offline
+cargo build --offline --locked --release
+cargo test --offline --locked
+cargo test --offline --locked --no-default-features
 cargo fmt --all -- --check
-cargo clippy --offline --all-targets -- -D warnings
+cargo clippy --offline --locked --all-features --all-targets -- -D warnings
 cargo doc --offline --no-deps
 ```
+
+The optional adapters are `ariadne::{bap,input,ir,investigation,reports}` and the
+replay ports are `ariadne::mbt::stage_e`. Their code is in the corresponding
+`src/` modules; CLI and benchmark entry points live in `src/bin/`. Integration
+suites live in `tests/<module>/`, with unambiguous Cargo target names such as
+`input_native`, `bap_native`, `ir_native` and `investigation_explanations`.
+Examples live in `src/examples/`. Generated MirrorRust files remain compiler
+owned under `src/mbt/`; freshness checks verify their original bytes.
 
 The [crate documentation example](../src/lib.rs) constructs the sparse-address
 pipeline fixture and is executed by `cargo test`. Public API entry points are:

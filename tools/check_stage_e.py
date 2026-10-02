@@ -6,6 +6,7 @@ import argparse
 import json
 import os
 from pathlib import Path
+from rust_layout import copy_sut, source_files
 import subprocess
 import tempfile
 import time
@@ -16,10 +17,10 @@ ROOT=Path(__file__).resolve().parents[1]
 def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 def sources():
-    paths=set()
-    for directory in ['src','tests','reports/src','reports/tests','input/src','input/tests','input/examples','ir/src','ir/tests','native/llvm_mc','native/llvm_ir','mbt/stage-e','bap/src','investigation/src','bap/tests','native/bap']:
+    paths=source_files()
+    for directory in ['src','tests','src/reports','tests/reports','src/input','tests/input','src/examples','src/ir','tests/ir','native/llvm_mc','native/llvm_ir','mbt/stage-e','src/bap','src/investigation','tests/bap','native/bap']:
         paths.update(p for p in (ROOT/directory).rglob('*') if p.is_file() and p.suffix!='.md' and not set(p.parts)&{'target','.work','__pycache__','results'})
-    for name in ['Cargo.toml','Cargo.lock','reports/Cargo.toml','reports/Cargo.lock','input/Cargo.toml','input/Cargo.lock','ir/Cargo.toml','ir/Cargo.lock','bap/Cargo.toml','bap/Cargo.lock','investigation/Cargo.toml','investigation/Cargo.lock','tools/check_stage_e.py','tools/check_minidump.py','tools/check_minidump_mutations.py','Specs/AriadneMachineState.tla','Specs/AriadneLLVMIR.tla','Specs/AriadneMachineCommon.tla','Specs/AriadneTypes.tla']:
+    for name in ['Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','tools/check_stage_e.py','tools/check_minidump.py','tools/check_minidump_mutations.py','Specs/AriadneMachineState.tla','Specs/AriadneLLVMIR.tla','Specs/AriadneMachineCommon.tla','Specs/AriadneTypes.tla']:
         paths.add(ROOT/name)
     return {str(p.relative_to(ROOT)):sha(p) for p in sorted(paths)}
 
@@ -42,16 +43,16 @@ def main():
     if not env.get('ARIADNE_DOT'):raise SystemExit('Graphviz is required; set ARIADNE_DOT (not a pass)')
     gates=[
         ('native-ir-build',['bash','native/llvm_ir/build.sh']),
-        ('root-tests',['cargo','test','--offline','--locked']),
-        ('root-clippy',['cargo','clippy','--offline','--locked','--all-targets','--','-D','warnings']),
-        ('reports-tests',['cargo','test','--offline','--locked','--manifest-path','reports/Cargo.toml']),
-        ('reports-format',['cargo','fmt','--manifest-path','reports/Cargo.toml','--','--check']),
-        ('reports-clippy',['cargo','clippy','--offline','--locked','--manifest-path','reports/Cargo.toml','--all-targets','--','-D','warnings']),
+        ('root-tests',['cargo', 'test', '--no-default-features', '--offline', '--locked']),
+        ('root-clippy',['cargo', 'clippy', '--no-default-features', '--offline', '--locked', '--all-targets', '--', '-D', 'warnings']),
+        ('reports-tests',['cargo', 'test', '--no-default-features', '--features', 'reports', '--offline', '--locked', '--manifest-path', 'Cargo.toml']),
+        ('reports-format',['cargo', 'fmt', '--manifest-path', 'Cargo.toml', '--', '--check']),
+        ('reports-clippy',['cargo', 'clippy', '--no-default-features', '--features', 'reports', '--offline', '--locked', '--manifest-path', 'Cargo.toml', '--all-targets', '--', '-D', 'warnings']),
         ('minidump-regression',['python3','tools/check_minidump.py']),
-        ('minidump-stateflow-cli',['cargo','test','--offline','--locked','--manifest-path','input/Cargo.toml','--test','stage_e','--','--ignored']),
-        ('ir-tests-native-cli',['cargo','test','--offline','--locked','--manifest-path','ir/Cargo.toml','--','--include-ignored']),
-        ('ir-format',['cargo','fmt','--manifest-path','ir/Cargo.toml','--','--check']),
-        ('ir-clippy',['cargo','clippy','--offline','--locked','--manifest-path','ir/Cargo.toml','--all-targets','--','-D','warnings']),
+        ('minidump-stateflow-cli',['cargo', 'test', '--no-default-features', '--features', 'input', '--offline', '--locked', '--manifest-path', 'Cargo.toml', '--test', 'input_stage_e', '--', '--ignored']),
+        ('ir-tests-native-cli',['cargo', 'test', '--no-default-features', '--features', 'ir', '--offline', '--locked', '--manifest-path', 'Cargo.toml', '--', '--include-ignored']),
+        ('ir-format',['cargo', 'fmt', '--manifest-path', 'Cargo.toml', '--', '--check']),
+        ('ir-clippy',['cargo', 'clippy', '--no-default-features', '--features', 'ir', '--offline', '--locked', '--manifest-path', 'Cargo.toml', '--all-targets', '--', '-D', 'warnings']),
         ('generated-replay-mutations',['python3','mbt/stage-e/run.py']),
     ]
     print(f'Stage E completion artifacts: {work}',flush=True);records=[];nested=None

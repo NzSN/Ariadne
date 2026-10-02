@@ -9,7 +9,7 @@ they use.
 **Current status: Rust machine-analysis core and formal specifications.** The
 Rust library implements `Specs/Ariadne.tla`: local CFG recovery, may-reaching
 definitions, and backward data slicing from fixed adapter-supplied inputs.
-The [BAP adapter](bap/README.md) is now the sole production minidump semantic
+The [BAP adapter](docs/Ariadne/modules/bap.md) is now the sole production minidump semantic
 backend. It projects a finite typed-BIL subset into byte-register, flag and
 weak-memory effects. LLVM MC 20 remains an independent decode/control reference;
 its semantic selector and automatic effect fallback have been removed.
@@ -19,7 +19,7 @@ Historical [LLVM effect-rule research](docs/Ariadne/operand-effects-rules.md)
 and its formal tests remain reference evidence, distinct from production BAP.
 Neither backend establishes architectural instruction-step acceptance or a
 historical crash path. The original Windows workload qualification remains open.
-The separate [minidump input package](input/README.md) now reads Windows/Linux
+The [minidump input module](docs/Ariadne/modules/input.md) now reads Windows/Linux
 AMD64 captures and discovers local instruction starts. A pinned tool-produced
 [predecessor fixture](docs/Ariadne/stage-b-c-validation.md) now yields an
 address-producer slice, and its [investigator CLI](docs/Ariadne/stage-c-report-schema.md)
@@ -61,7 +61,11 @@ The [Stage F record](docs/Ariadne/stage-f-proof-and-performance.md) states the
 remaining Rust refinement boundary and reports a repeatable performance
 baseline without claiming a proof or qualified solver optimization.
 
-The core uses **Rust 2024 and Cargo**, with no external crate dependencies.
+The project uses **Rust 2024 and one root Cargo package**. Rust sources live in
+`src/`, integration tests and fixtures in `tests/`, and build artifacts in
+`target/`. The core-only `--no-default-features` build has no activated external
+crate dependencies. Default features enable the minidump and supplied-IR CLIs;
+`bench` and `mbt` enable the benchmark and MirrorRust replay tools.
 The separate native decoder pins LLVM MC 20.1.2. Reviewed rules now provide
 byte-level GPR and flag effects for the scoped registry. Memory remains
 conservative, calls remain opaque, and broader effect coverage and precise
@@ -69,12 +73,20 @@ alias analysis remain future work. Decoder metadata alone does not provide
 the complete analysis. See the [initial effects evidence](docs/Ariadne/operand-effects-validation.md)
 and the [Stage A evidence](docs/Ariadne/stage-a-validation.md).
 
-Build and test the Rust library from the repository root:
+Build and test from the repository root:
 
 ```sh
-cargo test --offline
-cargo clippy --offline --all-targets -- -D warnings
+cargo build --offline --locked --release
+cargo test --offline --locked
+cargo clippy --offline --locked --all-features --all-targets -- -D warnings
 ```
+
+The build produces `target/release/ariadne-minidump` and
+`target/release/ariadne-ir`. The [source-layout plan](Plans/rust-source-layout.md)
+records the consolidation, and the [implementation guide](docs/implementation.md)
+describes the modules and validation scope.
+The [layout delivery](docs/Ariadne/rust-source-layout.md) records source and CLI
+equivalence checks against the previous build.
 
 Use `ariadne::analyze(request)` for a completed result, or `Analyzer::step()` to
 observe individual specification transitions. The input contract, runnable
@@ -245,7 +257,7 @@ state transitions, invariants, and interpretation of partial results.
 | [src/lib.rs](src/lib.rs) | Rust library entry point and runnable API example |
 | [src/model.rs](src/model.rs) | Request validation, semantic types, state, and result views |
 | [src/engine.rs](src/engine.rs) | Executable implementation of `Specs/Ariadne.tla` |
-| [tests/](tests/) | Specification fixtures, transition checks, and independent generated-request oracles |
+| [tests/](tests) | Specification fixtures, transition checks, and independent generated-request oracles |
 | [docs/implementation.md](docs/implementation.md) | Rust API, model correspondence, and implementation boundaries |
 | [docs/llvm-mc-adapter.md](docs/llvm-mc-adapter.md) | Optional pinned decoder build, snapshot input contract, and validation |
 | [docs/machine-state-design.md](docs/machine-state-design.md) | Implemented Rust design for abstract stateflow with generated conformance and report/CLI acceptance |
