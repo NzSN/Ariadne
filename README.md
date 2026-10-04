@@ -13,7 +13,7 @@
 - [Documentation index](docs/Ariadne/README.md) — find the current interfaces and contracts.
 - [Plan index](Plans/README.md) — separates remaining work from completed and retired work.
 
-**What remains unresolved.** Full original-Windows qualification is still open. The BAP analysis-core replacement has not started; neither selecting BAP nor passing a fixture closes those requirements. The first fault-address question is implemented, but full original-Windows I4 qualification remains open. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
+**What remains unresolved.** Full original-Windows I4 and controlled real Windows I5a qualification remain open. Native BAP recovery, dataflow, slicing and finite stateflow are implemented; [Stage 2 qualification](docs/Ariadne/bap-core-qualification.md) records passing aggregate acceptance and default adoption. Possible-producer and zero-address questions are implemented; other hypothesis, object/source-context and cross-capture questions remain later work.
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
@@ -23,7 +23,7 @@ investigating Chromium and Electron crashes: start from instructions of interest
 recover their surrounding control flow, and trace possible origins of the values
 they use.
 
-**Current status: Rust machine-analysis core and formal specifications.** The
+**Current status: native BAP analysis, Rust reference and formal specifications.** The
 Rust library implements `Specs/Ariadne.tla`: local CFG recovery, may-reaching
 definitions, and backward data slicing from fixed adapter-supplied inputs.
 The [BAP adapter](docs/Ariadne/modules/bap.md) is now the sole production minidump semantic
@@ -35,7 +35,19 @@ default change. Unsupported BIL retains explicit opaque/control gaps.
 Historical [LLVM effect-rule research](docs/Ariadne/operand-effects-rules.md)
 and its formal tests remain reference evidence, distinct from production BAP.
 Neither backend establishes architectural instruction-step acceptance or a
-historical crash path. The original Windows workload qualification remains open.
+historical crash path. The [controlled Crashpad replacement](docs/Ariadne/bap-windows-repin-validation.md)
+is captured, independently inspected and pinned for replay. All 17 implementation
+gates passed in the capture campaign. The user has since selected an
+[unlimited latency policy](docs/Ariadne/bap-unlimited-validation.md); correctness
+and source/tool evidence continue to govern qualification. [Stage 2 native algorithms](docs/Ariadne/bap-core-qualification.md) are qualified on the exercised corpus and selected by default; Rust remains available explicitly.
+
+The [I5a assessment](docs/Ariadne/i5a-contracts.md) asks whether a selected Windows
+AMD64 scalar MOV access starts at zero under admitted captured-context premises.
+It retains a separate result and explicit unknowns; a zero effective address does
+not establish a null-pointer root cause. Its [delivery record](docs/Ariadne/i5a-validation.md)
+separates source/fixture validation from real Windows qualification. The later
+[Crashpad demo](docs/Ariadne/crashpad-demo-validation.md) now supplies controlled
+Windows captures and passing answers, with CLI timing still above its limit.
 The [minidump input module](docs/Ariadne/modules/input.md) now reads Windows/Linux
 AMD64 captures and discovers local instruction starts. A pinned tool-produced
 [predecessor fixture](docs/Ariadne/stage-b-c-validation.md) now yields an
@@ -99,6 +111,12 @@ records the consolidation, and the [implementation guide](docs/implementation.md
 describes the modules and validation scope.
 The [layout delivery](docs/Ariadne/rust-source-layout.md) records source and CLI
 equivalence checks against the previous build.
+
+Running the minidump CLI also requires the [BAP lifter](native/bap/README.md),
+LLVM MC decode reference and [native analysis helper](native/bap-core/README.md).
+Cargo does not build those helpers. The default analysis backend is BAP;
+`--analysis-backend rust` selects the reference analyzer. See the
+[backend setup guide](docs/Ariadne/modules/bap.md) for build and path options.
 
 Use `ariadne::analyze(request)` for a completed result, or `Analyzer::step()` to
 observe individual specification transitions. The input contract, runnable

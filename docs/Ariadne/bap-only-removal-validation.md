@@ -11,6 +11,7 @@
 **Where to go next.**
 
 - [Current backend guide](modules/bap.md) — shows how to use and validate the resulting path.
+- [Workload repair and source refresh](bap-windows-workload-validation.md) — supersedes this historical source inventory and clarifies the full-exit predicates.
 - [Open integration work](../../Plans/bap-integration.md) — retains the missing workload clause and unstarted Stage 2.
 - [Investigation design](investigation-layer-design.md) — uses the resulting semantic evidence to answer a domain question.
 
@@ -44,17 +45,17 @@ empty-BIL no-effect case. Decoded MOV operands also bind partial-register
 self-moves: writing AL/AH/AX remains a definition even if its bits retain their
 value. Stores never must-kill `memory:any`.
 
-The final source-bound removal record passes **16/16 gates** with
-**93 stable current source hashes**; its nested Stage E regression passes
+The 2026-10-01 source-bound removal record passed **16/16 gates** with
+**93 source hashes stable at that run**; its nested Stage E regression passed
 **12/12 gates** and binds 251 sources/artifacts.
 
-Current evidence includes independent native effect/binding checks, both Stage
+That historical evidence includes independent native effect/binding checks, both Stage
 B platforms, short/conflicting capture, missing seeds, report/CLI publication
 and hash-pinned external crash artifacts. All **16 mechanical producer/adapter
 mutants** are detected, including lost partial self-move definitions. Independent
 TLC replay matches **99 observations across eight cases**, comparing all nine
 state fields in order. The [machine-readable removal record](../../evidence/Ariadne/bap-only-removal-validation.json)
-binds the final gates and exact current sources. The
+binds the gates and exact sources at that delivery. The
 [derived-evidence manifest](../../evidence/Ariadne/bap-only-removal-evidence-manifest.json) binds retained
 traces, logs and reports.
 

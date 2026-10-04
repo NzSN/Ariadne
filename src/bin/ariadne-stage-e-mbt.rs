@@ -190,7 +190,7 @@ fn execute() -> Result<bool, Box<dyn std::error::Error>> {
         "{}",
         json!({
             "schema": "ariadne.stage-e-mirrorrust-replay/v1", "engine": args[0], "mode": mode,
-            "gatePassed": passed, "modelMatched": result.is_ok(), "semanticDigest": digest,
+            "gatePassed": passed, "analysisBackend": std::env::var("ARIADNE_REPLAY_BACKEND").unwrap_or_else(|_| "rust".into()), "modelMatched": result.is_ok(), "semanticDigest": digest,
             "status": if result.is_ok() { "passed" } else if rejected { "rejected" } else if mismatch.is_some() { "mismatch" } else { "failed" },
             "error": result.as_ref().err().map(ToString::to_string),"mismatch":mismatch,
             "factoryCalls": e.factories, "portDrops": e.port_drops, "initializations": e.initializations,

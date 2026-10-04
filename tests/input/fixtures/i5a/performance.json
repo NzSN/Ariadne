@@ -1,0 +1,27 @@
+{
+  "schema": "ariadne.i5a-performance-contract/v1",
+  "frozenDate": "2026-10-03",
+  "profile": "release",
+  "warmups": 1,
+  "repeats": 5,
+  "phaseMedianBudgetMs": 10,
+  "cliMedianBudgetMs": 1500,
+  "cases": [
+    "zero-store",
+    "nonzero-store",
+    "load32-zero",
+    "load64-indexed",
+    "store32-negative",
+    "store64-zero",
+    "indexed-wrap",
+    "rip-zero",
+    "missing-integer"
+  ],
+  "pilot": {
+    "case": "zero-store",
+    "combinedPhaseMedianMs": 0.990282,
+    "baseCliMedianMs": 842.740508,
+    "assessmentCliMedianMs": 791.923372
+  },
+  "scope": "Finite synthetic fixtures on the qualification host; no real-Windows or original-Windows I4 acceptance."
+}

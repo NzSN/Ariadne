@@ -113,6 +113,11 @@ fn minidump_stateflow_reports_preserve_identity_graph_and_uncertainty_on_both_pl
         let run = |output: &Path| {
             Command::new(env!("CARGO_BIN_EXE_ariadne-minidump"))
                 .arg(&dump)
+                .args([
+                    "--analysis-backend",
+                    &std::env::var("ARIADNE_TEST_ANALYSIS_BACKEND")
+                        .unwrap_or_else(|_| "rust".into()),
+                ])
                 .arg("--decoder")
                 .arg(&decoder)
                 .arg("--entry")

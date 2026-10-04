@@ -52,8 +52,10 @@ pub mod mbt;
 #[cfg(feature = "reports")]
 pub mod reports;
 
+mod analysis_view;
 pub mod effects;
 mod engine;
+pub use analysis_view::{AnalysisView, CompletedAnalysis};
 pub mod llvm_ir;
 pub mod llvm_mc;
 pub mod machine_state;

@@ -3,12 +3,11 @@ use crate::input::{FilePreparedAnalysis, ReadStop};
 use crate::investigation::{
     BoundInvestigation, Contributor, EvidenceContext, RecoveryGap, SiteEvidence, Span,
 };
-use crate::{Analyzer, ByteSource, effects::EffectQuality};
+use crate::{AnalysisView, ByteSource, effects::EffectQuality};
 use sha2::{Digest, Sha256};
-pub fn bind_investigation(
+pub(crate) fn capture_context(
     prepared: &FilePreparedAnalysis,
-    analyzer: &Analyzer,
-) -> Result<BoundInvestigation, crate::investigation::Error> {
+) -> Result<EvidenceContext, crate::investigation::Error> {
     let report = &prepared.materialization;
     let request = &prepared.prepared.request;
     if prepared.snapshot.snapshot_id != request.snapshot_id
@@ -143,24 +142,53 @@ pub fn bind_investigation(
             tool_binding
         ),
         sites,
-        recovery_gaps: analyzer
-            .state()
-            .obligations
-            .iter()
-            .map(|o| RecoveryGap {
-                site: o.site,
-                code: format!("recovery:{:?}", o.reason),
-            })
-            .chain(
-                request
-                    .slice_seeds
-                    .difference(&analyzer.state().decoded)
-                    .map(|&site| RecoveryGap {
-                        site,
-                        code: "missing-seed".into(),
-                    }),
-            )
-            .collect(),
+        recovery_gaps: Vec::new(),
     };
+    if context.sites.len() != request.addresses.len()
+        || context.sites.iter().any(|s| {
+            !request.addresses.contains(&s.va) || !crate::investigation::validate::site_valid(s)
+        })
+    {
+        return Err("capture evidence domain or shape mismatch".into());
+    }
+    Ok(context)
+}
+
+pub fn bind_investigation(
+    prepared: &FilePreparedAnalysis,
+    analyzer: &dyn AnalysisView,
+) -> Result<BoundInvestigation, crate::investigation::Error> {
+    let request = &prepared.prepared.request;
+    let mut context = capture_context(prepared)?;
+    context.recovery_gaps = analyzer
+        .state()
+        .obligations
+        .iter()
+        .map(|o| RecoveryGap {
+            site: o.site,
+            code: format!("recovery:{:?}", o.reason),
+        })
+        .chain(
+            request
+                .slice_seeds
+                .difference(&analyzer.state().decoded)
+                .map(|&site| RecoveryGap {
+                    site,
+                    code: "missing-seed".into(),
+                }),
+        )
+        .collect();
     BoundInvestigation::new(analyzer, request, context)
+}
+
+/// Bind only reader-owned fault observations to the exact completed query.
+pub fn bind_fault_context(
+    prepared: &FilePreparedAnalysis,
+    analyzer: &dyn AnalysisView,
+) -> Result<crate::investigation::BoundFaultContext, crate::investigation::Error> {
+    if prepared.snapshot.as_ref() != prepared.fault.metadata.as_ref() {
+        return Err("fault metadata changed after capture".into());
+    }
+    let analysis = bind_investigation(prepared, analyzer)?;
+    crate::investigation::BoundFaultContext::new(analysis, prepared.fault.evidence.clone())
 }

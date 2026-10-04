@@ -8,7 +8,7 @@ use std::io::{self, Write};
 use std::path::{Path, PathBuf};
 
 fn usage() -> &'static str {
-    "usage: ariadne-minidump DUMP --decoder-reference PATH --entry VA_HEX [--entry VA_HEX ...] [--seed VA_HEX ...] [--seed-exception-rip] [--max-starts N] [--stateflow-input SEMANTICS_JSON] [--explain-fault-address VA --memory-access N] [--explanation-only] [--bap-helper PATH] [--bap-runtime DIR] (--format text|dot|json | --output-dir NEW_DIR)"
+    "usage: ariadne-minidump DUMP --decoder-reference PATH --entry VA_HEX [--entry VA_HEX ...] [--seed VA_HEX ...] [--seed-exception-rip] [--max-starts N] [--stateflow-input SEMANTICS_JSON] [--explain-fault-address VA --memory-access N] [--explanation-only] [--assess-zero-address VA --memory-access N] [--assessment-only] [--analysis-backend rust|bap] [--bap-core-dir DIR] [--bap-helper PATH] [--bap-runtime DIR] (--format text|dot|json | --output-dir NEW_DIR)"
 }
 fn invalid(message: impl Into<String>) -> io::Error {
     io::Error::new(io::ErrorKind::InvalidInput, message.into())
@@ -42,10 +42,14 @@ struct Args {
     output_dir: Option<PathBuf>,
     stateflow_input: Option<PathBuf>,
     explain_site: Option<u64>,
+    assess_site: Option<u64>,
+    assessment_only: bool,
     memory_access: Option<usize>,
     explanation_only: bool,
     bap_helper: Option<PathBuf>,
     bap_runtime: Option<PathBuf>,
+    analysis_backend: String,
+    bap_core_dir: PathBuf,
 }
 fn arguments() -> Result<Args, Box<dyn Error>> {
     let mut args = std::env::args_os().skip(1);
@@ -63,14 +67,25 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
     let mut output_dir = None;
     let mut stateflow_input = None;
     let mut explain_site = None;
+    let mut assess_site = None;
+    let mut assessment_only = false;
     let mut memory_access = None;
     let mut explanation_only = false;
     let mut bap_helper = None;
     let mut bap_runtime = None;
+    let mut analysis_backend = None;
+    let mut bap_core_dir = None;
     while let Some(flag) = args.next() {
         let flag = flag
             .to_str()
             .ok_or_else(|| invalid("non-UTF-8 option name"))?;
+        if flag == "--assessment-only" {
+            if assessment_only {
+                return Err(invalid("duplicate --assessment-only").into());
+            }
+            assessment_only = true;
+            continue;
+        }
         if flag == "--explanation-only" {
             if explanation_only {
                 return Err(invalid("duplicate --explanation-only").into());
@@ -87,6 +102,14 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
         }
         let value = args.next().ok_or_else(|| invalid(usage()))?;
         match flag {
+            "--analysis-backend" if analysis_backend.is_none() => {
+                let backend = value.to_str().ok_or_else(|| invalid("non-UTF-8 backend"))?;
+                if !["rust", "bap"].contains(&backend) {
+                    return Err(invalid("unknown analysis backend").into());
+                }
+                analysis_backend = Some(backend.to_owned());
+            }
+            "--bap-core-dir" if bap_core_dir.is_none() => bap_core_dir = Some(PathBuf::from(value)),
             "--decoder-reference" | "--decoder" if decoder.is_none() => {
                 decoder = Some(PathBuf::from(value))
             }
@@ -126,6 +149,13 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
             }
             "--bap-helper" if bap_helper.is_none() => bap_helper = Some(PathBuf::from(value)),
             "--bap-runtime" if bap_runtime.is_none() => bap_runtime = Some(PathBuf::from(value)),
+            "--assess-zero-address" if assess_site.is_none() => {
+                assess_site = Some(parse_va(
+                    value
+                        .to_str()
+                        .ok_or_else(|| invalid("non-UTF8 assessment VA"))?,
+                )?);
+            }
             "--explain-fault-address" if explain_site.is_none() => {
                 explain_site = Some(parse_va(
                     value
@@ -150,9 +180,12 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
     if entries.is_empty() || decoder.is_none() || format.is_some() == output_dir.is_some() {
         return Err(invalid(usage()).into());
     }
-    if explain_site.is_some() != memory_access.is_some() {
+    if explain_site.is_some() && assess_site.is_some() {
+        return Err(invalid("choose one explanation or assessment question").into());
+    }
+    if (explain_site.is_some() || assess_site.is_some()) != memory_access.is_some() {
         return Err(invalid(
-            "explanation requires both --explain-fault-address and --memory-access",
+            "a question requires --explain-fault-address or --assess-zero-address, and --memory-access",
         )
         .into());
     }
@@ -163,6 +196,21 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
             "--explanation-only requires an explanation with --format and no stateflow input",
         )
         .into());
+    }
+    if assessment_only
+        && (assess_site.is_none() || output_dir.is_some() || stateflow_input.is_some())
+    {
+        return Err(invalid(
+            "--assessment-only requires an assessment with --format and no stateflow input",
+        )
+        .into());
+    }
+    if assess_site.is_some()
+        && (stateflow_input.is_some()
+            || explanation_only
+            || (!assessment_only && output_dir.is_none()))
+    {
+        return Err(invalid("assessment requires --assessment-only --format or --output-dir, without stateflow/explanation").into());
     }
     Ok(Args {
         dump: PathBuf::from(dump),
@@ -175,10 +223,16 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
         output_dir,
         stateflow_input,
         explain_site,
+        assess_site,
+        assessment_only,
         memory_access,
         explanation_only,
         bap_helper,
         bap_runtime,
+        analysis_backend: analysis_backend.unwrap_or_else(|| "bap".into()),
+        bap_core_dir: bap_core_dir
+            .or_else(|| std::env::var_os("ARIADNE_BAP_CORE_DIR").map(PathBuf::from))
+            .unwrap_or_else(|| PathBuf::from("target/bap-core-native")),
     })
 }
 
@@ -250,6 +304,9 @@ fn run() -> Result<(), Box<dyn Error>> {
             .ok_or_else(|| invalid("exception context has no valid RIP"))?;
         args.seeds.insert(*rip);
     }
+    if let Some(site) = args.assess_site {
+        args.seeds.insert(site);
+    }
     if let Some(site) = args.explain_site {
         args.seeds.insert(site);
     }
@@ -267,8 +324,23 @@ fn run() -> Result<(), Box<dyn Error>> {
     }
     let prepared =
         snapshot.prepare_with_bap(&query, &args.decoder, &config, &options, args.limits)?;
-    let mut analyzer = ariadne::Analyzer::new(prepared.prepared.request.clone())?;
-    while analyzer.step() {}
+    let core_config = ariadne::bap::core_session::CoreConfig::from_directory(args.bap_core_dir);
+    let (analyzer, backend_identity) = if args.analysis_backend == "bap" {
+        let native = ariadne::bap::core_adapter::NativeAnalyzer::from_capture(
+            &core_config,
+            "minidump-analysis",
+            &prepared,
+        )?;
+        let identity = native.identity().clone();
+        (native.complete()?, Some(identity))
+    } else {
+        (
+            ariadne::CompletedAnalysis::from_analyzer(ariadne::Analyzer::new(
+                prepared.prepared.request.clone(),
+            )?),
+            None,
+        )
+    };
     let explanation = if let Some(site) = args.explain_site {
         let bound = ariadne::input::investigation::bind_investigation(&prepared, &analyzer)?;
         Some(ariadne::investigation::explain_fault_address(
@@ -282,11 +354,33 @@ fn run() -> Result<(), Box<dyn Error>> {
     } else {
         None
     };
+    let assessment = if let Some(site) = args.assess_site {
+        let bound = ariadne::input::investigation::bind_fault_context(&prepared, &analyzer)?;
+        Some(ariadne::investigation::assess_zero_address(
+            &bound,
+            ariadne::investigation::FaultAddressQuestion {
+                site,
+                memory_access: args.memory_access.unwrap(),
+            },
+            ariadne::investigation::AssessmentLimits::default(),
+        )?)
+    } else {
+        None
+    };
     let mut stateflow = if let Some(path) = args.stateflow_input {
         let bytes = fs::read(path)?;
         let semantics = ariadne::reports::decode_semantics(&bytes)?;
         let handoff = ariadne::machine_state::prepare_from_recovery(&analyzer, semantics)?;
-        let state_result = ariadne::machine_state::analyze(handoff.request)?;
+        let state_result = if args.analysis_backend == "bap" {
+            ariadne::bap::stateflow_adapter::NativeStateflow::new(
+                &core_config,
+                "minidump-stateflow",
+                handoff.request,
+            )?
+            .finish()?
+        } else {
+            ariadne::machine_state::analyze(handoff.request)?
+        };
         Some(ariadne::reports::machine_report(
             &state_result,
             Some(&handoff.context),
@@ -295,7 +389,26 @@ fn run() -> Result<(), Box<dyn Error>> {
     } else {
         None
     };
-    let result = analyzer.finish();
+    let result = analyzer.into_result();
+    let render = |p: &ariadne::input::FilePreparedAnalysis,
+                  r: &ariadne::AnalysisResult,
+                  f: ReportFormat,
+                  seed: bool|
+     -> Result<String, Box<dyn Error>> {
+        let original = render(p, r, f, seed)?;
+        let Some(identity) = &backend_identity else {
+            return Ok(original);
+        };
+        Ok(match f {
+            ReportFormat::Json => {
+                let mut report: serde_json::Value = serde_json::from_str(&original)?;
+                report["analysis_backend"] = identity.clone();
+                format!("{}\n", serde_json::to_string_pretty(&report)?)
+            }
+            ReportFormat::Text => format!("{original}analysis backend: {identity}\n"),
+            ReportFormat::Dot => format!("// analysis backend: {identity}\n{original}"),
+        })
+    };
     if let Some(report) = stateflow.as_mut() {
         // Keep the independently versioned minidump evidence beside the
         // stateflow result; preparation gaps cannot vanish in this output mode.
@@ -357,9 +470,33 @@ fn run() -> Result<(), Box<dyn Error>> {
                 ));
             }
         }
+        if let Some(value) = &assessment {
+            for (name, format) in [
+                (
+                    "zero-address-assessment.txt",
+                    ariadne::reports::Format::Text,
+                ),
+                (
+                    "zero-address-assessment.json",
+                    ariadne::reports::Format::Json,
+                ),
+                ("zero-address-assessment.dot", ariadne::reports::Format::Dot),
+            ] {
+                reports.push((name, ariadne::reports::render_zero_address(value, format)?));
+            }
+        }
         publish_all(&directory, &reports)?;
     } else {
-        let output = if args.explanation_only {
+        let output = if args.assessment_only {
+            ariadne::reports::render_zero_address(
+                assessment.as_ref().unwrap(),
+                match args.format.unwrap() {
+                    ReportFormat::Text => ariadne::reports::Format::Text,
+                    ReportFormat::Json => ariadne::reports::Format::Json,
+                    ReportFormat::Dot => ariadne::reports::Format::Dot,
+                },
+            )?
+        } else if args.explanation_only {
             ariadne::reports::render_explanation(
                 explanation.as_ref().unwrap(),
                 match args.format.unwrap() {

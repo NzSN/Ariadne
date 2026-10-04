@@ -1,0 +1,145 @@
+{
+  "schema": "ariadne.bap-core-a0/v1",
+  "recordedUtc": "2026-10-03T04:35:24.531562+00:00",
+  "passed": true,
+  "sourcesStable": true,
+  "sourceHashes": {
+    "tools/check_bap_core_a0.py": "ae8052117449e8d53366f2033129acb1e3ab3e3d2aaee9b32f17f1d80e7af13c",
+    "tools/bap_core_contract.py": "1af9821398cb7b96e69dc737ae87301fc336c93c635a68498fb9824ea3962858",
+    "tools/test_bap_core_contract.py": "ea41b5b3f1a291a957153ffcc368688f04d15f666698b3a7f541b41040056774",
+    "native/bap-core/probe.cpp": "0d484727a05e8760c451672b68d9f8357a0890457c830df806afd60ba4533441",
+    "native/bap-core/build-probe.sh": "ae0483112a7106fe0cd2a119c51613b7f4316d6ba032309e8ec4fe1259e40590",
+    "native/bap/toolchain.lock.json": "23dac7be3de321d80fb806b8a9ba4cb64a51f5c75c3c20f3ede77ea348de5382",
+    "native/bap/setup.py": "7881aa7e453cda81d3f1f9ca53593dcfbd36714c51100a2ccc433579a274b3c8",
+    "src/engine.rs": "d59a6874ac3add446fc4aa3c590745c06e0e763890db7a76de43f95af687d6b1",
+    "src/model.rs": "9bccc617340450535872b43515bceef16cfd60891cbd0ebc17349f88ce586f06",
+    "src/machine_state.rs": "382078f91da9ae503be69e8485a5e5cdacdf5e2a676dce59848960349edfa3e8",
+    "Specs/Ariadne.tla": "26d3a783c43b0b86029bfbeb2e9f8bff7a56d3c7e8702493d7b502d21bf32019",
+    "Specs/AriadneMachineState.tla": "7edb33e3d03e1a91c015489ef670d2d37654a7ce8a4cdec927d3a834ffec9fe7",
+    "Specs/AriadneMachineCommon.tla": "32b60854773c7c14e06e449300a9757fefdfbfc763a0f58ef4574f1edd019947",
+    "Specs/AriadneTypes.tla": "3bfb36f3bf96adc324a9c714d34a12af708d0e7daaba91a5a1ae5f79f2820329",
+    "docs/Ariadne/bap-analysis-core-design.md": "3ecf4570c8798531c29ddd8f1751eccaec1fe5d7fd0edc5f1d873835333ec54f"
+  },
+  "stage2Started": true,
+  "stage2Qualified": false,
+  "a0ContractChecksPassed": true,
+  "nativeCapabilitiesPassed": true,
+  "a0ExitPassed": false,
+  "stage1Prerequisite": {
+    "path": "evidence/Ariadne/bap-unlimited-validation.json",
+    "sha256": "256b9dfae829557b184c0110e6f8418c2a748842a8691b4e1f5261133186f810",
+    "completeSourceInventoryMatched": true,
+    "workloadToolsMatched": true,
+    "satisfied": true
+  },
+  "gates": [
+    {
+      "gate": "contract-tests",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools",
+        "-p",
+        "test_bap_core_contract.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "gate": "native-build",
+      "command": [
+        "bash",
+        "native/bap-core/build-probe.sh",
+        "/home/nzsn/Repos/Ariadne/target/bap-core-a0/ariadne-bap-core-probe"
+      ],
+      "exitCode": 0
+    },
+    {
+      "gate": "native-probe-0",
+      "command": [
+        "/home/nzsn/Repos/Ariadne/target/bap-core-a0/ariadne-bap-core-probe",
+        "/home/nzsn/Repos/Ariadne/tmp/bap-setup/stable/usr/local/lib/bap"
+      ],
+      "exitCode": 0
+    },
+    {
+      "gate": "native-probe-1",
+      "command": [
+        "/home/nzsn/Repos/Ariadne/target/bap-core-a0/ariadne-bap-core-probe",
+        "/home/nzsn/Repos/Ariadne/tmp/bap-setup/stable/usr/local/lib/bap"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "probes": [
+    {
+      "schema": "ariadne.bap-core-capabilities/v1",
+      "passed": true,
+      "runtime": "2.5.0-alpha",
+      "stateOwner": "BAP OCaml term/graph objects",
+      "unsignedAddressRoundtrip": true,
+      "persistentTermUpdate": true,
+      "sameVaDistinctTerms": true,
+      "graphNodeCounts": [
+        0,
+        1,
+        2
+      ],
+      "parallelEdgeCount": 1,
+      "readOnlyObservation": true,
+      "freshGraphEmpty": true,
+      "customOcamlPassExercised": false,
+      "analysisAlgorithmsExercised": false,
+      "scope": "A0 runtime facilities only; no migrated solver or model conformance"
+    },
+    {
+      "schema": "ariadne.bap-core-capabilities/v1",
+      "passed": true,
+      "runtime": "2.5.0-alpha",
+      "stateOwner": "BAP OCaml term/graph objects",
+      "unsignedAddressRoundtrip": true,
+      "persistentTermUpdate": true,
+      "sameVaDistinctTerms": true,
+      "graphNodeCounts": [
+        0,
+        1,
+        2
+      ],
+      "parallelEdgeCount": 1,
+      "readOnlyObservation": true,
+      "freshGraphEmpty": true,
+      "customOcamlPassExercised": false,
+      "analysisAlgorithmsExercised": false,
+      "scope": "A0 runtime facilities only; no migrated solver or model conformance"
+    }
+  ],
+  "headerCapabilities": {
+    "bap_blk_create": true,
+    "bap_term_set_address": true,
+    "bap_tidgraph_edge_insert": true,
+    "bap_project_empty": false,
+    "bap_project_input_create": false,
+    "bap_sub_builder_result": false
+  },
+  "sdk": {
+    "runtimeCmiFiles": 0,
+    "runtimeCmxaFiles": 0,
+    "ocamlCompiler": "/home/nzsn/.opam/5.1.0/bin/ocamlopt",
+    "compatibleCustomPassBuildQualified": false
+  },
+  "tools": {
+    "probe": "b1871c8e315895aba7fb1be447e82ad7b97845c73d054cda1ee91d18c8811ed9",
+    "header": "ad54c7f8aeb4b70020c5d002acce61b2d9d3d45aca9f2bf3c8dc5cc9ef92b24e",
+    "bapLibrary": "fb03843b065556c791e909b2cd7d1a8e2ef736ed461b6d8979da3f3fd5d6612a",
+    "compilerPath": "/usr/bin/g++",
+    "compilerSha256": "1353e9bdd29a7295c7226bf6c63abccce056d8cac31f112e5cdbecc3f28c2769"
+  },
+  "implementedAlgorithms": [],
+  "missing": [
+    "Compatible isolated OCaml SDK and actual custom-pass initialize/observe transport qualification.",
+    "A1 recovery, A2 definitions/slicing, A3 stateflow, A4 replay, A5 mutation/product integration and A6 adoption."
+  ],
+  "scope": "A0 contract and pinned native term/graph facilities only. No native analysis model replay or migrated solver is claimed."
+}

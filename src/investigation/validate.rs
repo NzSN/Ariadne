@@ -1,5 +1,5 @@
 use crate::investigation::*;
-use crate::{AnalysisRequest, AnalysisState, Analyzer, Phase};
+use crate::{AnalysisRequest, AnalysisState, AnalysisView, Phase};
 use std::collections::{BTreeMap, BTreeSet};
 pub struct BoundInvestigation {
     pub(crate) request: AnalysisRequest,
@@ -103,7 +103,7 @@ pub(crate) fn site_valid(site: &SiteEvidence) -> bool {
 }
 impl BoundInvestigation {
     pub fn new(
-        analyzer: &Analyzer,
+        analyzer: &dyn AnalysisView,
         expected: &AnalysisRequest,
         context: EvidenceContext,
     ) -> Result<Self, Error> {

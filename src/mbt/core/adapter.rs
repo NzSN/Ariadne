@@ -15,8 +15,71 @@ use crate::generated::{
     MiTypeO7ItemF0Item as DefinitionRow, MirrorSet,
 };
 
+enum ReplayAnalyzer {
+    Rust(Box<Analyzer>),
+    #[cfg(feature = "bap")]
+    Native(Box<ariadne::bap::core_adapter::NativeAnalyzer>),
+}
+impl ReplayAnalyzer {
+    fn new(request: AnalysisRequest) -> Result<Self, BindingError> {
+        match std::env::var("ARIADNE_REPLAY_BACKEND")
+            .as_deref()
+            .unwrap_or("rust")
+        {
+            "rust" => Analyzer::new(request)
+                .map(|a| Self::Rust(Box::new(a)))
+                .map_err(native_error),
+            #[cfg(feature = "bap")]
+            "bap" => {
+                let directory = std::env::var_os("ARIADNE_BAP_CORE_DIR")
+                    .ok_or_else(|| native_error("ARIADNE_BAP_CORE_DIR required"))?;
+                let config =
+                    ariadne::bap::core_session::CoreConfig::from_directory(directory.into());
+                ariadne::bap::core_adapter::NativeAnalyzer::new(
+                    &config,
+                    "generated-core-replay",
+                    request,
+                )
+                .map(|a| Self::Native(Box::new(a)))
+                .map_err(native_error)
+            }
+            _ => Err(native_error("unsupported replay backend")),
+        }
+    }
+    fn advance(&mut self, _action: &str) -> Result<(), BindingError> {
+        match self {
+            Self::Rust(a) => {
+                if a.step() {
+                    Ok(())
+                } else {
+                    Err(native_error("already done"))
+                }
+            }
+            #[cfg(feature = "bap")]
+            Self::Native(a) => a.advance_named(_action).map_err(native_error),
+        }
+    }
+    fn observe(&mut self) -> Result<&AnalysisState, BindingError> {
+        match self {
+            Self::Rust(a) => Ok(a.state()),
+            #[cfg(feature = "bap")]
+            Self::Native(a) => a.observe().map_err(native_error),
+        }
+    }
+    fn close(&mut self) -> Result<(), BindingError> {
+        match self {
+            Self::Rust(_) => Ok(()),
+            #[cfg(feature = "bap")]
+            Self::Native(a) => a.close().map_err(native_error),
+        }
+    }
+}
+fn native_error(error: impl std::fmt::Display) -> BindingError {
+    BindingError::new("analysis_backend", error.to_string())
+}
+
 pub(crate) struct Adapter {
-    analyzer: Option<Analyzer>,
+    analyzer: Option<ReplayAnalyzer>,
     fixture: String,
     evidence: Rc<RefCell<Evidence>>,
 }
@@ -35,12 +98,7 @@ impl Adapter {
             .analyzer
             .as_mut()
             .ok_or_else(|| BindingError::new("not_initialized", "initialize must run first"))?;
-        if !analyzer.step() {
-            return Err(BindingError::new(
-                "already_done",
-                "step requested after completion",
-            ));
-        }
+        analyzer.advance(stable_action)?;
         self.evidence.borrow_mut().record_action(stable_action);
         Ok(())
     }
@@ -50,10 +108,10 @@ impl AriadneReplayPort for Adapter {
     fn initialize(&mut self, input: InitializeInput) -> Result<(), BindingError> {
         let request = crate::fixtures::request(&input.fixture)
             .map_err(|e| BindingError::new("invalid_fixture", e))?;
-        self.analyzer = Some(
-            Analyzer::new(request)
-                .map_err(|e| BindingError::new("invalid_request", e.to_string()))?,
-        );
+        if let Some(previous) = &mut self.analyzer {
+            previous.close()?;
+        }
+        self.analyzer = Some(ReplayAnalyzer::new(request)?);
         self.fixture = input.fixture;
         let mut evidence = self.evidence.borrow_mut();
         evidence.fixtures.push(self.fixture.clone());
@@ -83,9 +141,9 @@ impl AriadneReplayPort for Adapter {
     fn observe(&mut self) -> Result<AriadneReplayObservation, BindingError> {
         let state = self
             .analyzer
-            .as_ref()
+            .as_mut()
             .ok_or_else(|| BindingError::new("not_initialized", "initialize must run first"))?
-            .state();
+            .observe()?;
         // Application-to-model mapping only. Generated NativeCodec implementations
         // own wire keys, value encoding, and shape/uniqueness validation.
         let observation = AriadneReplayObservation {
@@ -180,6 +238,7 @@ impl AriadneReplayPort for Adapter {
         evidence.observations += 1;
         if state.phase == Phase::Done {
             evidence.completed += 1;
+            self.analyzer.as_mut().unwrap().close()?;
         }
         Ok(observation)
     }

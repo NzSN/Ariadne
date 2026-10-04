@@ -2,7 +2,7 @@
 
 ## Context and follow-up
 
-**Status.** Architectural assessment; backend delivery followed, core migration remains unstarted.
+**Status.** Current BAP integration with a user-authorized unlimited workload timing policy. Latency remains measured; Stage 2 A0 contract/probe work has started; production analysis algorithms remain in Rust.
 
 **Why this document exists.** [Effects design](operand-effects-design.md) exposes the cost and coverage limits of maintaining local instruction rules.
 
@@ -10,11 +10,21 @@
 
 **Where to go next.**
 
+- [OCaml foundation qualification](bap-ocaml-qualification.md) — records the completed A0 SDK, native state and transport gates.
+
+- [Stage 2 analysis contract](bap-analysis-core-design.md) and [A0 plan](../../Plans/bap-stage2-a0.md) — define actual analysis-state ownership and the first migration step.
+
+- [Unlimited timing policy](bap-unlimited-validation.md) — records the user-authorized removal of the BAP latency ceiling and refreshed qualification.
+
 - [Two-stage plan](../../Plans/bap-integration.md) — separates semantic-provider integration from analysis-core migration.
+- [Current execution ledger](../../Plans/bap-integration.md#current-execution-ledger) — retains previous R0–R2 evidence and tracks the replacement workload's Stage 1 decision.
+- [Windows replacement plan](../../Plans/bap-windows-repin.md) — implements the authorized active BAP S4/S5 repin.
+- [Replacement validation](bap-windows-repin-validation.md) — records the completed capture/pin, passing correctness checks and former latency condition.
+- [Previous workload delivery](bap-windows-workload-validation.md) — preserves R0–R2 evidence and the earlier full-exit decision.
 - [Stage 1 design](bap-semantic-backend-design.md) — turns the provider proposal into a typed protocol and projection.
 - [Assurance decision](semantic-assurance.md) — retires the separate ISA-proof objective without claiming lifter correctness.
 
-**What remains unresolved.** Full original-Windows qualification is still open. The BAP analysis-core replacement has not started; neither selecting BAP nor passing a fixture closes those requirements.
+**What remains unresolved.** The isolated OCaml SDK and bounded Init/Visit transport now qualify the A0 foundation. Complete A1 recovery, A2/A3 algorithms, generated helper replay and production adoption remain open. The user has removed the active BAP latency ceiling; valid capture/correctness evidence and implementation gates remain required. Historical Priority 4/I4 and controlled I5a qualification retain their separate contracts.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 
@@ -25,10 +35,33 @@ specifies **Stage 1: semantic backend**, followed by **Stage 2: analysis core**.
 Stage 1 is now implemented; its [historical BAP Stage 1 validation record](../../evidence/Ariadne/bap-stage1-validation.json)
 keeps the missing historical Windows capture explicit. The subsequent
 [LLVM semantic-backend removal](bap-only-removal-validation.md) makes BAP the
-sole minidump semantic producer by user instruction. Stage 2 remains unstarted.
+sole minidump semantic producer by user instruction. Stage 2 A0 has started; the migrated analysis algorithms remain unimplemented.
 The [Stage 1 implementation design](bap-semantic-backend-design.md) now records
-the native protocol and projection being implemented; qualification is separate
+the implemented native protocol and projection; qualification is separate
 from this earlier source/API assessment.
+
+The [previous R0–R2 delivery](bap-windows-workload-validation.md), recorded on
+2026-10-03 before the repin, followed the
+initial backend delivery: the Linux runner's Windows-minidump source-inventory
+collision is fixed, workload v2 records retain raw samples, and aggregate v3
+independently applied the shared evidence validator. R2 completed the
+available corpus, with 17/17 implementation gates, 177 stable source hashes and
+39 controlled tests. Its [retained aggregate](../../evidence/Ariadne/bap-windows-workload-validation.json)
+recorded full Stage 1 exit and the Stage 2 prerequisite as false because the
+original Windows artifact was unavailable.
+
+The user subsequently confirmed that the original dump no longer exists and
+authorized a new Crashpad capture for active BAP S4/S5. The
+[replacement plan](../../Plans/bap-windows-repin.md) now pins
+`crashpad-windows-checksum-98-v1`, a real Windows partial capture of 98 local
+instruction starts. Generation and independent inspection are complete. Current workload v4 and aggregate v5 retain exact captured-byte and RCX-producer
+evidence, source/tool integrity and repeated timing. The user removed the latency
+ceiling after the replacement's 10.67 s measurement. See the [unlimited policy](bap-unlimited-validation.md)
+for the current verdict; earlier bounded-policy records remain historical.
+Historical Priority 4/I4 and the separately authorized BAP-only selection retain
+their own scope.
+The API assessment below preserves its original scope and recommendation; current
+implementation and acceptance are tracked by the linked plan and delivery records.
 
 ## Decision in brief
 

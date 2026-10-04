@@ -2,7 +2,7 @@
 //! A trusted adapter supplies state transitions; this engine only propagates
 //! them and classifies the frozen structural graph relative to that relation.
 use crate::{
-    Address, AddressSet, Analyzer as RecoveryAnalyzer, ByteSource, Edge, EdgeSet, Location,
+    Address, AddressSet, AnalysisView as RecoveryAnalysisView, ByteSource, Edge, EdgeSet, Location,
     LocationSet, Obligation as RecoveryObligation, Phase as RecoveryPhase,
 };
 use std::collections::{BTreeMap, BTreeSet};
@@ -430,6 +430,18 @@ pub struct AnalysisResult {
     observations: Observations,
 }
 impl AnalysisResult {
+    #[cfg(feature = "bap")]
+    pub(crate) fn from_native(
+        request: Request,
+        state: AnalysisState,
+        observations: Observations,
+    ) -> Self {
+        Self {
+            request,
+            state,
+            observations,
+        }
+    }
     pub fn request(&self) -> &Request {
         &self.request
     }
@@ -485,7 +497,7 @@ impl Error for HandoffError {}
 /// Copy the decoded, endpoint-closed local graph and effects without changing
 /// the original recovery analyzer or converting its obligations into stateflow.
 pub fn prepare_from_recovery(
-    recovery: &RecoveryAnalyzer,
+    recovery: &dyn RecoveryAnalysisView,
     semantics: SemanticInputs,
 ) -> Result<RecoveryHandoff, HandoffError> {
     if recovery.state().phase == RecoveryPhase::Recover {

@@ -6,14 +6,14 @@
 
 **Why this document exists.** [Project overview](README.md) sets the snapshot-based crash-investigation goal.
 
-**What this document establishes.** This is the current scope and delivery sequence: captured input, BAP effects, Rust analysis, reports and investigation questions.
+**What this document establishes.** This is the current scope and delivery sequence: captured input, BAP effects and native analysis, Rust reference, reports and investigation questions.
 
 **Where to go next.**
 
 - [Active plans](Plans/README.md) — turn remaining work into explicit implementation and qualification steps.
 - [Assurance decision](docs/Ariadne/semantic-assurance.md) — defines the BAP trust boundary and retired ISA-proof scope.
 
-**What remains unresolved.** Full original-Windows qualification is still open. The BAP analysis-core replacement has not started; neither selecting BAP nor passing a fixture closes those requirements. The first fault-address question is implemented, but full original-Windows I4 qualification remains open. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
+**What remains unresolved.** The replacement BAP Windows capture is pinned and passes correctness. The current BAP latency policy is unlimited. Stage 2 native algorithms and capture integration are qualified on the exercised corpus; native analysis is the CLI default with explicit Rust rollback. The first fault-address question is implemented, but full original-Windows I4 qualification remains open. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
@@ -34,6 +34,16 @@ implements the question for both platform fixtures and the retained controlled
 Linux capture. Original-Windows acceptance remains partial; no historical path
 or general root-cause proof is claimed.
 BAP analysis-core migration remains separate from this product capability.
+The [OCaml foundation qualification](docs/Ariadne/bap-ocaml-qualification.md)
+records the bounded native bootstrap and full A0 decision. The [Stage 2 qualification](docs/Ariadne/bap-core-qualification.md) records the completed algorithms and passing default-adoption gate.
+The [I5a zero-address assessment](docs/Ariadne/i5a-contracts.md) now evaluates
+whether one selected scalar MOV access begins at zero under admitted Windows
+AMD64 exception-context premises. Reader-owned context, a separate strict report
+and explicit CLI modes are implemented. The [12-gate source/fixture validation](docs/Ariadne/i5a-validation.md)
+passes; controlled real Windows I5a and original-Windows I4 remain open.
+The [native Windows Crashpad demo](docs/Ariadne/crashpad-demo-validation.md) now
+supplies real partial/full captures and correct numeric answers; its CLI median
+is approximately 1.82 s against the unchanged 1.5 s I5a criterion.
 
 ## Current checkpoint
 
@@ -42,9 +52,13 @@ may-reaching definitions, and builds a backward data slice from fixed,
 adapter-supplied instruction summaries. BAP is now the sole production
 minidump semantic backend; LLVM MC remains an independent decode/control
 reference. The semantic selector and LLVM effect fallback are removed. See the
-[current BAP-only record](docs/Ariadne/bap-only-removal-validation.md). Legacy
+[historical BAP-only delivery](docs/Ariadne/bap-only-removal-validation.md) and
+[controlled Windows replacement](docs/Ariadne/bap-windows-repin-validation.md).
+The replacement passed 17 implementation gates. The subsequent
+[unlimited timing policy](docs/Ariadne/bap-unlimited-validation.md) removes latency
+as an acceptance barrier while retaining correctness and source/tool checks. Legacy
 LLVM effect rules and their source-bound tests remain historical/research
-reference evidence. The BAP analysis-core replacement has not started. The [minidump package](docs/Ariadne/modules/input.md) now provides captured-memory input and
+reference evidence. Native BAP recovery, dataflow, slicing and finite stateflow are implemented; [Stage 2 qualification](docs/Ariadne/bap-core-qualification.md) records passing aggregate acceptance and default adoption. The [minidump package](docs/Ariadne/modules/input.md) now provides captured-memory input and
 local-start discovery for Windows/Linux AMD64. PE/ELF image and ELF core readers
 remain deferred. A tool-produced [captured predecessor slice and versioned
 investigator CLI](docs/Ariadne/stage-b-c-validation.md) are delivered. The
@@ -61,7 +75,7 @@ record historical LLVM-backed qualification of a 98-instruction Windows
 Electron capture and a measured optimization:
 the CLI median falls from 3,846 to 1,788 ms against the fixed 2,000 ms budget,
 with the visible schedule and report hashes preserved. This does not qualify
-the current BAP path, whose original-Windows gate remains open. The separate abstract-stateflow and supplied-IR paths pass
+the current BAP path, whose current policy measures latency without a ceiling. The separate abstract-stateflow and supplied-IR paths pass
 [Stage E generated conformance and report/CLI acceptance](docs/Ariadne/stage-e-completion.md). A
 [proof-boundary and benchmark baseline](docs/Ariadne/stage-f-proof-and-performance.md)
 is recorded without a universal refinement or optimization claim.

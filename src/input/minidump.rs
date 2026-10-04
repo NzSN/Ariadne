@@ -411,7 +411,9 @@ pub(crate) fn parse(bytes: Vec<u8>, limits: OpenLimits) -> Result<FileSnapshot, 
         memory_info: infos,
         gaps,
     });
+    let fault = super::fault_context::capture(&bytes, metadata.clone(), selected.get(&6).copied())?;
     Ok(FileSnapshot {
+        fault,
         bytes: bytes.into(),
         metadata,
         captures,

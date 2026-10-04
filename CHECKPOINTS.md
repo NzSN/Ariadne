@@ -17,11 +17,201 @@
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
-Updated **2026-10-02**: the independent AMD64 instruction-step/Lean track is
-retired under the [semantic assurance decision](docs/Ariadne/semantic-assurance.md).
-BAP lifting is a trusted dependency; projection, analysis and evidence validation
-remain active. Earlier entries retain their historical, time-local status and
-do not reinstate retired milestones.
+Updated **2026-10-04**: complete Stage 2 is qualified for the exercised
+workspace-local corpus. Native BAP analysis is the minidump CLI default; explicit
+Rust rollback remains available. I4 original-Windows and controlled real Windows
+I5a retain their separate criteria. BAP lifting remains trusted; the independent
+ISA/Lean track remains retired. Earlier entries preserve their dated scope.
+
+## 2026-10-04 — Complete native Stage 2 qualified and adopted
+
+The [execution plan](Plans/bap-stage2-implementation.md) delivers native recovery,
+reaching definitions, slicing, finite stateflow, capture-bound integration and
+real generated helper replay. The explicit-native candidate passed 19 gates
+before adoption. The final run passes **20/20 gates**, including all root checks,
+native tests, complete Stage 1/Stage E regressions, default selection and explicit
+Rust rollback across five captured workloads.
+
+```mermaid
+flowchart LR
+  A["2026-10-03: A0 foundation qualified"] --> B["2026-10-04: A1–A5 implemented"]
+  B --> C["Explicit native candidate: 19/19 gates"]
+  C --> D["Native default and rollback: 20/20 gates"]
+  D --> E["623 source hashes; 1,345 archive entries verified"]
+```
+
+The [qualification guide](docs/Ariadne/bap-core-qualification.md) and
+[record](evidence/Ariadne/bap-core-qualification.json) bind 44 generated traces
+and 330 observations, twelve detected native algorithm mutations, boundary
+controls and five release workloads. `stage2Qualified`, `defaultNativeVerified`
+and `sourcesStable` are true. The [archive manifest](evidence/Ariadne/bap-core-evidence-manifest.json)
+verifies all 1,345 entries, including a smoke check with no backend or helper-path
+override against the exact final release executable.
+
+The pinned 98-start Windows median is **4,901.01 ms native / 2,820.26 ms Rust**.
+All JSON/text/DOT comparisons pass under the accepted unlimited timing policy.
+This is Linux-hosted, workspace-local qualification with Windows and Linux
+capture inputs; packaged release, universal refinement, ISA proof and separate
+I4/I5a acceptance are not credited by this result.
+
+## 2026-10-03 — OCaml recovery foundation qualified
+
+The [OCaml qualification plan](Plans/bap-ocaml-qualification.md) now has a
+workspace-local OCaml 4.12.1/BAP SDK, a standalone helper and Rust process
+transport. The helper owns complete recovery input admission, actual Init/Visit
+state and BAP term attribution. Its capabilities stop at Visit, observe and reset;
+production analysis remains Rust.
+
+Six explicit native test groups pass, and seven real-code mutations are detected
+without observer changes. Two clean helper builds have identical hashes. SDK
+library/compiler/lock substitutions and native protocol failures are rejected.
+The [qualification guide](docs/Ariadne/bap-ocaml-qualification.md) records the
+source-bound final decision: 199 stable source hashes and 327 verified archive
+entries. Full A0 exit now passes after the user-approved formatting-only
+MirrorRust change and fresh root, effects, minidump, Stage E, Stage 1 and A0
+checks. All required gates pass; `a0ExitPassed=true` and `stage2Qualified=false`. Complete A1–A6 is not credited by this bootstrap.
+
+## 2026-10-03 — Stage 2 A0 started
+
+Created the [Stage 2 analysis contract](docs/Ariadne/bap-analysis-core-design.md)
+and [A0 execution plan](Plans/bap-stage2-a0.md). They define immutable inputs,
+BAP-owned state, strict session/action envelopes, independent recovery/stateflow
+observations, full-width addresses and one-to-many BIR attribution. Production
+analysis remains on the existing Rust core.
+
+Seven envelope/attribution tests pass. Two fresh native probes against the pinned
+BAP runtime confirm persistent graph/term state and unsigned address attribution.
+They also show that two labels on identical TID endpoints collapse to one edge;
+the analysis must retain its typed parallel-edge relation separately.
+
+The [A0 record](evidence/Ariadne/bap-stage2-a0-validation.json) binds 15 source/design
+files and tool identities. Its `passed` covers these bounded checks;
+`a0ExitPassed=false` and `stage2Qualified=false`. The installed extraction has no
+OCaml SDK `.cmi`/`.cmxa` files, so a compatible isolated SDK and real custom-pass
+initialize/observe qualification are next. No recovery/dataflow/stateflow pass,
+model replay or mutation acceptance is claimed. See the
+[validation guide](docs/Ariadne/bap-stage2-a0-validation.md) and
+[25-entry evidence archive](evidence/Ariadne/bap-stage2-a0-evidence-manifest.json).
+
+## 2026-10-03 — BAP latency acceptance changed to unlimited
+
+Applied the user's explicit request to remove the BAP Windows workload timing
+limit. The active pin now records a null budget and an explicit unlimited policy;
+workload v4 and aggregate v5 retain finite raw samples and every correctness,
+provenance, artifact and source/tool check. The capture/query/bundle are unchanged.
+
+All **60 controlled tests** and **17 implementation gates** pass, with **178
+stable source hashes**. Fresh native and workload runs are retained; unchanged
+model/mutation and Stage E evidence was reused after complete identity checks.
+The new Windows CLI median is **3,111.33 ms**, recorded without a ceiling.
+Full Stage 1 exit and the Stage 2 prerequisite now pass under the new policy;
+Stage 2 implementation remains unstarted. Operational watchdogs remain separate.
+
+See the [policy and validation](docs/Ariadne/bap-unlimited-validation.md),
+[source-bound record](evidence/Ariadne/bap-unlimited-validation.json) and
+[evidence manifest](evidence/Ariadne/bap-unlimited-evidence-manifest.json).
+Earlier bounded-policy results below remain historical. Changes are uncommitted.
+
+## 2026-10-03 — Controlled Windows workload generated and repinned
+
+After the user confirmed that the original Windows dump no longer exists,
+completed the [replacement plan](Plans/bap-windows-repin.md). A native Windows
+`crashpad-nzsn` process generated a **217,936-byte** partial dump from a controlled
+98-instruction checksum/loop/branch workload. Independent byte, input/checksum,
+process/module and exception/context inspection passes. The original null-write
+profile also passes its capture regression; uploads remain disabled.
+
+The [new BAP pin](evidence/Ariadne/bap-windows-workload-case.json) and
+[23-entry input bundle](evidence/Ariadne/bap-windows-workload-inputs.tar.gz) retain
+the capture, matching executable and independent witnesses. The historical
+Priority 4 manifest and I4 requirement remain unchanged.
+
+Fresh validation passes **17/17 implementation gates**, **178 stable aggregate
+source hashes**, **59 controlled workload tests** and **9 inspector tests**.
+The Windows query recovers **98 starts, 99 edges, a 90-instruction slice and zero
+obligations**, with its RCX producer independently witnessed. Model/mutation and
+Stage E components were reused only after complete source/tool checks.
+
+The release CLI median is **10,667.76 ms** against **2,000 ms**. Phase medians
+identify reference decoding at **7,572.13 ms** and core analysis at **69.61 ms**;
+no optimization is included. Capture/pin delivery is complete, while full Stage 1
+and the Stage 2 prerequisite remain false due to latency. Stage 2 is unstarted.
+The [delivery guide](docs/Ariadne/bap-windows-repin-validation.md),
+[source-bound record](evidence/Ariadne/bap-windows-repin-validation.json) and
+[199-entry derived archive](evidence/Ariadne/bap-windows-repin-evidence-manifest.json)
+retain exact results and timing limitations. Changes remain uncommitted.
+
+## 2026-10-03 — BAP workload qualification repair and source refresh
+
+Completed R0–R2 of the [BAP plan](Plans/bap-integration.md). The Linux workload
+runner now preserves its source inventory through the Windows-input branch,
+requires captured preparation evidence for every decoded address and retains
+raw release samples. Workload v2 and aggregate v3 validate the evidence and
+require complete source/tool inventories. Full-exit and Stage 2 prerequisite
+decisions require the original Windows workload's median at most 2,000 ms.
+
+The [current record](evidence/Ariadne/bap-windows-workload-validation.json)
+passes all **17 implementation gates** with **177 stable source hashes**:
+39 controlled Python tests, native corpus/integration, eight model cases with
+99 matched states across all nine fields, 16 detected mutations and four
+available release workloads. Stage E's 12-gate record was reused after verifying
+all 315 source entries and its native IR/MC/Graphviz hashes. The final aggregate
+also reran native rendering after repairing its Graphviz environment.
+
+Both real Windows demo captures pass supplemental Linux BAP benchmark queries.
+They each decode two instructions and do not replace the original 98-instruction
+capture, which bounded searches did not locate. `stage1ExitPassed`,
+`stage2PrerequisiteSatisfied` and `defaultPromotionEligible` remain **false**;
+Stage 2 A0–A6 remain unstarted. See the [delivery guide](docs/Ariadne/bap-windows-workload-validation.md)
+and [238-entry archive manifest](evidence/Ariadne/bap-windows-workload-evidence-manifest.json).
+Changes remain uncommitted.
+
+## 2026-10-03 — Native Windows Crashpad demo captures
+
+Integrated `crashpad-nzsn` at `7a884c25` into a [small demo](native/crashpad-demo/README.md)
+and built it with native Windows tools. The original fork checkout stayed clean;
+recorded standalone compatibility files and a build-helper adjustment live in an
+isolated build. The demo disables uploads and deliberately faults only after
+synchronous handler registration and a flushed witness.
+
+Partial and full capture produced **225,408-byte** and **15,987,422-byte** real
+minidumps. Independent checks match process identity, exception/context, module
+and executable bytes. Both capture `mov dword ptr [rcx], 5` with `RCX=0`, and
+Ariadne returns `consistent_with_evidence` at address zero without assessment gaps.
+Missing-handler and invalid-mode controls exit before the deliberate crash.
+
+The capture-input gap is resolved for this controlled case. Its phase medians are
+under 2 ms, but CLI medians are approximately **1.82 s**, exceeding the unchanged
+**1.5 s** I5a condition. Controlled-case acceptance therefore remains partial;
+the original Windows I4 artifact/query also remains separate and unexercised.
+See the [delivery guide](docs/Ariadne/crashpad-demo-validation.md) and
+[retained record](evidence/Ariadne/crashpad-demo-validation.json). Raw dumps remain
+under ignored `tmp/crashpad-demo/20261003/`; changes are uncommitted.
+
+## 2026-10-03 — I5a zero-address source/fixture delivery
+
+Implemented the [I5a plan](Plans/i5a-zero-address.md): immutable exception/context
+evidence, exact query binding, a bounded Windows AMD64 scalar MOV zero-address
+assessment, strict independent reports and explicit CLI modes. The question adds
+a seed without becoming a discovery root; numeric conclusions retain their
+capture/lifting premises and do not assert a root cause or historical path.
+
+All 12 acceptance gates pass with 171 stable source hashes, including fresh
+17-gate investigation, 12-gate Stage E and 11-gate minidump regressions. The new
+41-case independent corpus covers six MOV forms; all 16 I5a mutants are detected,
+and 24 prior CLI reports remain byte-identical. Stage E retains 64 complete
+traces, 326 matched observations and 15 detected model mutants.
+
+Nine measured fixtures meet the frozen I5a criteria: combined phase medians are
+0.86–1.80 ms against 10 ms, and assessment CLI medians are 755–1,180 ms against
+1,500 ms. The existing Linux explanation phase remains within its separate
+250 ms condition. See the [delivery record](docs/Ariadne/i5a-validation.md),
+[source-bound acceptance](evidence/Ariadne/i5a-validation.json) and
+[verified archive manifest](evidence/Ariadne/i5a-evidence-manifest.json).
+
+Controlled real Windows I5a and original-Windows I4 acceptance remain false;
+neither fixtures nor the retained Linux case replaces those missing artifacts.
+Broader hypotheses and I6–I7 remain separate work. These changes are uncommitted.
 
 ## 2026-10-02 — Investigation correctness repairs
 
@@ -85,7 +275,10 @@ flowchart TD
     W["2026-10-01 · working tree<br/>LLVM semantic backend removed; BAP-only default"]
     X["2026-10-01 · 25e59f3<br/>Typed fault-address investigation"]
     Y["2026-10-02 · working tree<br/>One Cargo package; src/tests/target layout"]
-    S --> T --> U --> V --> W --> X --> Y
+    Z["2026-10-02 · c9eb4c5<br/>Investigation qualification/truncation repairs"]
+    AA["2026-10-03 · working tree<br/>I5a source/fixture tier: 12/12 gates"]
+    AB["2026-10-03 · working tree<br/>Windows Crashpad demo captures; I5a CLI over budget"]
+    S --> T --> U --> V --> W --> X --> Y --> Z --> AA --> AB
 ```
 
 ## 2026-10-02 — Rust source layout consolidated

@@ -10,15 +10,25 @@
 
 **Where to go next.**
 
-- [BAP plan](bap-integration.md) — tracks missing Windows qualification and the unstarted core migration.
-- [Investigation plan](investigation-layer.md) — tracks full I4 acceptance and later investigation questions.
+- [OCaml foundation qualification](../docs/Ariadne/bap-ocaml-qualification.md) — records the completed A0 SDK, native state and transport gates.
+
+- [Unlimited timing policy](../docs/Ariadne/bap-unlimited-validation.md) — records the user-authorized removal of the BAP latency ceiling and refreshed qualification.
+
+- [BAP Windows replacement](bap-windows-repin.md) — creates and pins the controlled
+  Crashpad workload authorized after the original artifact was confirmed lost.
+
+- [BAP plan](bap-integration.md) — retains previous R0–R2 evidence and tracks the active replacement workload and A0 core-migration work.
+- [Replacement validation](../docs/Ariadne/bap-windows-repin-validation.md) — records completed capture/pinning, 17 passing implementation gates and the former 2,000 ms limit.
+- [Previous BAP workload delivery](../docs/Ariadne/bap-windows-workload-validation.md) — preserves the earlier R0–R2 evidence and its original-workload decision.
+- [Investigation stage plan](investigation-layer.md) — separates delivered I0–I3, open I4 acceptance and the [implemented I5a question](../docs/Ariadne/i5a-contracts.md).
+- [I5a execution plan](i5a-zero-address.md) — sequences the Windows zero-address question from reviewed context evidence through distinct qualification tiers.
 - [Completed investigation repairs](completed/investigation-correctness-fixes.md) — records enforcement of the Windows timing condition and valid truncation under explanation limits.
 
-**What remains unresolved.** Full original-Windows qualification is still open. The BAP analysis-core replacement has not started; neither selecting BAP nor passing a fixture closes those requirements. The first fault-address question is implemented, but full original-Windows I4 qualification remains open. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
+**What remains unresolved.** The isolated OCaml SDK and bounded Init/Visit transport now qualify the A0 foundation. Complete A1–A6 now passes the [Stage 2 qualification](../docs/Ariadne/bap-core-qualification.md), including native default selection and explicit Rust rollback. The user has removed the active BAP latency ceiling; valid capture/correctness evidence and implementation gates remain required. Historical Priority 4/I4 and controlled I5a qualification retain their separate contracts.
 
 For the wider context, see the optional [documentation map](../docs/documentation-map.md).
 
-Updated 2026-10-02. Completed plans live in `completed/`; their recorded results
+Updated 2026-10-03. Archived plans live in `completed/`; their recorded results
 apply to the sources and workload originally exercised. Archiving a plan does
 not refresh qualification evidence.
 
@@ -26,14 +36,19 @@ not refresh qualification evidence.
 
 | Plan | Remaining scope |
 | --- | --- |
-| [BAP integration](bap-integration.md) | Original-Windows Stage 1 qualification; Stage 2 analysis-core migration has not started. |
-| [Investigation layer](investigation-layer.md) | Full original-Windows I4 qualification and later I5–I7 capabilities. |
+| [Stage 2 A0](bap-stage2-a0.md) | Historical probe; the successor OCaml foundation and full Stage 2 qualify their separate scopes. |
+| [Complete Stage 2 execution](bap-stage2-implementation.md) | A1–A6 implemented; 20 aggregate gates pass, native CLI default and explicit Rust rollback verified. |
+| [OCaml foundation qualification](bap-ocaml-qualification.md) | OQ0–OQ6: isolated pinned SDK, native helper/state, production transport, clean rebuild and targeted mutations; proposed, not executed. |
+| [BAP integration](bap-integration.md) | Replacement capture and pin complete; 17/17 implementation gates pass with 178 stable sources. The user subsequently removed the latency ceiling; valid correctness evidence and passing gates establish full Stage 1 and its prerequisite; the A0 foundation and complete A1–A6 are qualified on their recorded corpora. |
+| [Investigation layer](investigation-layer.md) | Full original-Windows I4 qualification; controlled real Windows I5a; broader I5 and I6–I7 capabilities remain unimplemented. |
+| [I5a zero-address assessment](i5a-zero-address.md) | H0–H5 source/fixture tier delivered with [12 passing gates](../docs/Ariadne/i5a-validation.md); [controlled Windows capture/answer checks](../docs/Ariadne/crashpad-demo-validation.md) pass, but the CLI timing condition remains open. |
 | [Roadmap](../ROADMAP.md) | Current scope and delivery direction; the [Stage F proof boundary](../docs/Ariadne/stage-f-proof-and-performance.md) remains open. |
 
 ## Completed plans
 
 | Plan | Completion boundary and evidence |
 | --- | --- |
+| [BAP Windows replacement](bap-windows-repin.md) | New native Crashpad capture, independent inspection and durable input pin delivered; 59 controlled BAP tests, nine inspector tests and 17 implementation gates pass. [Retained validation](../docs/Ariadne/bap-windows-repin-validation.md) records the 10,667.760921 ms median and former 2,000 ms condition; the later unlimited policy supersedes that timing criterion. |
 | [Investigation correctness fixes](completed/investigation-correctness-fixes.md) | Qualification/truncation repairs; [17-gate validation](../docs/Ariadne/investigation-correctness-validation.md). Original-Windows I4 qualification remains separate. |
 | [Rust source layout](completed/rust-source-layout.md) | Single root Cargo package and source consolidation; [delivery record](../docs/Ariadne/rust-source-layout.md). |
 | [BAP-only semantics](completed/bap-only-semantics.md) | LLVM semantic selector/fallback removed; [removal record](../docs/Ariadne/bap-only-removal-validation.md). Full BAP workload qualification remains in the active integration plan. |

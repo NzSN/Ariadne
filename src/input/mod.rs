@@ -1,5 +1,6 @@
 //! Immutable Windows/Linux AMD64 minidump input. No image-file fallback.
 mod address_space;
+mod fault_context;
 pub mod investigation;
 mod materialize;
 mod minidump;
@@ -122,7 +123,7 @@ pub struct MetadataGap {
     pub entry: Option<usize>,
     pub reason: String,
 }
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub struct SnapshotMetadata {
     pub snapshot_id: String,
     pub artifact_sha256: String,
@@ -141,6 +142,7 @@ pub struct SnapshotMetadata {
 #[derive(Debug)]
 pub struct FileSnapshot {
     pub(crate) bytes: Arc<[u8]>,
+    pub(crate) fault: Arc<fault_context::FaultCapture>,
     pub(crate) metadata: Arc<SnapshotMetadata>,
     pub(crate) captures: Vec<address_space::Capture>,
     pub(crate) tree: Option<Box<address_space::Node>>,

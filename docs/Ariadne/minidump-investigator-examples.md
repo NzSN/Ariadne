@@ -21,6 +21,9 @@ These commands run from the Ariadne repository root. Build the pinned LLVM MC
 helper as described in the [input guide](modules/input.md#build-and-verification),
 then set `ARIADNE_LLVM_MC` to its executable path. The CLI selects its Windows
 or Linux decoder target from the dump, independent of the host platform.
+Also build the BAP lifter and native analysis helper using the
+[backend setup guide](modules/bap.md). The CLI defaults to native BAP analysis;
+add `--analysis-backend rust` to select the reference analyzer.
 The [Priority 3 design](priority-3-investigator-presentation-design.md) defines
 the readable text overview; [JSON v1](stage-c-report-schema.md) remains the
 machine contract.

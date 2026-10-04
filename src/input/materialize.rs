@@ -46,6 +46,7 @@ pub struct MaterializationReport {
 }
 #[derive(Clone, Debug)]
 pub struct FilePreparedAnalysis {
+    pub(crate) fault: Arc<super::fault_context::FaultCapture>,
     pub prepared: PreparedAnalysis,
     pub snapshot: Arc<SnapshotMetadata>,
     pub open_limits: OpenLimits,
@@ -333,6 +334,7 @@ impl FileSnapshot {
             .validate()
             .map_err(|e| PreparationError::Decoder(AdapterError::InvalidRequest(e)))?;
         Ok(FilePreparedAnalysis {
+            fault: self.fault.clone(),
             prepared: PreparedAnalysis {
                 request,
                 instructions: evidence,

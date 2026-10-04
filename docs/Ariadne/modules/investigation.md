@@ -2,22 +2,23 @@
 
 ## Context and follow-up
 
-**Status.** Current first-question API.
+**Status.** Current producer-explanation and I5a zero-address APIs.
 
 **Why this document exists.** [Contracts](../investigation-contracts.md) define exact binding and the meaning of possible producers.
 
-**What this document establishes.** The API accepts a bound completed analysis and a fault-address question, then returns possible producers, claims, gaps and concrete evidence requirements without running another dataflow solver.
+**What this document establishes.** Bound completed analysis supports possible-producer explanations and a separate captured-context zero-address assessment. Both return typed claims, gaps and evidence requirements without running another dataflow solver.
 
 **Where to go next.**
 
 - [Delivery evidence](../investigation-validation.md) — shows what the implementation has exercised.
+- [I5a contracts](../i5a-contracts.md) — define exception-context binding and the separate numeric assessment.
 - [Follow-up plan](../../../Plans/investigation-layer.md) — tracks missing capture acceptance and later questions.
 
-**What remains unresolved.** The first fault-address question is implemented, but full original-Windows I4 qualification remains open. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
+**What remains unresolved.** Full original-Windows I4 and controlled real Windows I5a qualification remain open. Broader hypothesis, object/source-context and cross-capture questions remain later work.
 
 For the wider context, see the optional [documentation map](../../documentation-map.md).
 
-This module answers one higher-level question: which earlier definitions could
+The first question asks which earlier definitions could
 contribute to a selected captured memory-address operand, what evidence supports
 them, and what prevents a stronger conclusion?
 
@@ -34,6 +35,13 @@ explain_fault_address(bound, FaultAddressQuestion, ExplainLimits)
   -> Explanation
 ```
 
+The numeric question uses an owned `BoundFaultContext` built by
+`input::investigation::bind_fault_context`. `assess_zero_address` evaluates the
+selected access under the admitted Windows AMD64 scalar MOV profile and returns
+consistent, refuted-under-premises or unknown. Captured values apply only at the
+exception site. The [I5a contracts](../i5a-contracts.md) define evidence, limits
+and its independently versioned report.
+
 The root engine is reused; this module does not reconstruct a historical
 instruction sequence or implement a second dataflow solver. The
 [contracts](../investigation-contracts.md) define identity, bounded
@@ -45,8 +53,9 @@ The [design](../investigation-layer-design.md) and
 cargo test --offline --locked --manifest-path Cargo.toml
 cargo clippy --offline --locked --manifest-path Cargo.toml --all-targets -- -D warnings
 python3 tools/check_investigation.py
+python3 tools/check_i5a.py
 ```
 
-Later hypothesis, matched object/source and cross-capture questions remain
+Other hypothesis, matched object/source and cross-capture questions remain
 planned. Stronger lifetime/path conclusions require independently supplied
 and accepted evidence rather than a suspicious pointer or fixture label.

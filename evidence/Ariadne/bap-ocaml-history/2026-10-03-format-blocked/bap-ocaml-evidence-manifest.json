@@ -1,0 +1,1631 @@
+{
+  "archiveSha256": "e43773c4dead6d864da133fc08087b798e1cb6951ec32b67e5c33d7ee74cbee8",
+  "entries": {
+    "bap-core-native-clean-trace.log": {
+      "sha256": "440b374fbc724b1af9e3dddc68159095d50335aae0577a87de82d8a40b2681d9",
+      "bytes": 4400,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/bap-core-native-clean-trace.log"
+    },
+    "bap-core-native-clean.log": {
+      "sha256": "320cfcee0aa14e3347762e82eb7c20894d51a2a353cf1056e02b6d4ca5d9727c",
+      "bytes": 94,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/bap-core-native-clean.log"
+    },
+    "bap-core-native-clean/ariadne-bap-core": {
+      "sha256": "e1ae86c0196b751610bb5c27e8a5be667f2beb374f774291d27a5d591df170e5",
+      "bytes": 24755920,
+      "originalPath": "/home/nzsn/Repos/Ariadne/target/bap-core-native-clean/ariadne-bap-core"
+    },
+    "bap-core-native-clean/build.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "originalPath": "/home/nzsn/Repos/Ariadne/target/bap-core-native-clean/build.log"
+    },
+    "bap-core-native-clean/manifest.json": {
+      "sha256": "31089e13704d60f58ea3356d5cc86d89ad7a94026ef7e8a109e4542b2d15f9ac",
+      "bytes": 1007,
+      "originalPath": "/home/nzsn/Repos/Ariadne/target/bap-core-native-clean/manifest.json"
+    },
+    "bap-core-native-trace.log": {
+      "sha256": "440b374fbc724b1af9e3dddc68159095d50335aae0577a87de82d8a40b2681d9",
+      "bytes": 4400,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/bap-core-native-trace.log"
+    },
+    "bap-core-native.log": {
+      "sha256": "5a959f8f40a06b0d410ef806fff7a7af9949b2290f618b31c9f024c6b0547fdb",
+      "bytes": 88,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/bap-core-native.log"
+    },
+    "bap-core-native/ariadne-bap-core": {
+      "sha256": "e1ae86c0196b751610bb5c27e8a5be667f2beb374f774291d27a5d591df170e5",
+      "bytes": 24755920,
+      "originalPath": "/home/nzsn/Repos/Ariadne/target/bap-core-native/ariadne-bap-core"
+    },
+    "bap-core-native/build.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "originalPath": "/home/nzsn/Repos/Ariadne/target/bap-core-native/build.log"
+    },
+    "bap-core-native/manifest.json": {
+      "sha256": "31089e13704d60f58ea3356d5cc86d89ad7a94026ef7e8a109e4542b2d15f9ac",
+      "bytes": 1007,
+      "originalPath": "/home/nzsn/Repos/Ariadne/target/bap-core-native/manifest.json"
+    },
+    "bap-core-sdk-smoke/build.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "originalPath": "/home/nzsn/Repos/Ariadne/target/bap-core-sdk-smoke/build.log"
+    },
+    "bap-core-sdk-smoke/ldd.log": {
+      "sha256": "43e8de16e4c812cbd5437d489277a84917d6749a4c2058d8df37aefc104e2ecf",
+      "bytes": 514,
+      "originalPath": "/home/nzsn/Repos/Ariadne/target/bap-core-sdk-smoke/ldd.log"
+    },
+    "bap-core-sdk-smoke/report.json": {
+      "sha256": "45d75ca2ef353de48452443078d259cc5f1b341ddc3ab280949f0c2fa96c5ef4",
+      "bytes": 1335,
+      "originalPath": "/home/nzsn/Repos/Ariadne/target/bap-core-sdk-smoke/report.json"
+    },
+    "bap-core-sdk-smoke/run.log": {
+      "sha256": "57fcfcd92ceb218e1e090c058309a720364976b7932b7bd8a38692b10d4ce7e2",
+      "bytes": 37,
+      "originalPath": "/home/nzsn/Repos/Ariadne/target/bap-core-sdk-smoke/run.log"
+    },
+    "bap-core-sdk-smoke/sdk-smoke": {
+      "sha256": "17cc5c91698f553b660b6044975758b9ff80aea75fccdb3ffbf862d89b864726",
+      "bytes": 24367144,
+      "originalPath": "/home/nzsn/Repos/Ariadne/target/bap-core-sdk-smoke/sdk-smoke"
+    },
+    "core-only-tests.log": {
+      "sha256": "04fb7e537f2f833f0cb326819e92ae394dba250154326179863a90fb0a8cdaf7",
+      "bytes": 8014,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/core-only-tests.log"
+    },
+    "documentation.log": {
+      "sha256": "c9af470fdf0d659b4bd553498834a490e7dac7002503da996a5a67f0071619d6",
+      "bytes": 181,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/documentation.log"
+    },
+    "duplicate-envelope-key.log": {
+      "sha256": "ce576cfbbf9fd2fd3ab69bad8a64f955ad0c248c4e4ffcd611e8f41dee20be59",
+      "bytes": 1339,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/duplicate-envelope-key.log"
+    },
+    "duplicate-input-key.log": {
+      "sha256": "aaa74ee1cf1cbbd0381cbe689d3d26343afa559586901f7d721649e14dfcc723",
+      "bytes": 698,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/duplicate-input-key.log"
+    },
+    "entry-a0.json": {
+      "sha256": "309d541d16ef257672ab9ae7715b1aea9422c3c0c8e6a4b49029726036b9c51b",
+      "bytes": 5538,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/entry-a0.json"
+    },
+    "entry-baseline.json": {
+      "sha256": "2c96a01b0f120626e21e9b234ed7e94f5a244692dc45dbc41a3874376a92b66a",
+      "bytes": 905,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/entry-baseline.json"
+    },
+    "locked-inputs/bap-source.tar.gz": {
+      "sha256": "b0f28f00e78958f671d84de918f36be8b068ea2ec4459dc72c6f7fe3a0ecf428",
+      "bytes": 1447474,
+      "originalPath": "/home/nzsn/Repos/Ariadne/tmp/bap-setup/bap-source.tar.gz"
+    },
+    "locked-inputs/installed.export": {
+      "sha256": "b82792ea34ed6ac9d2b4dc31ae5a6beda787af2a68066b1f17a65d9aef1a7d7c",
+      "bytes": 173614,
+      "originalPath": "/home/nzsn/Repos/Ariadne/target/bap-core-sdk/installed.export"
+    },
+    "locked-inputs/repository-snapshot.tar.gz": {
+      "sha256": "a5eeecf4923b0e6feb34ae6a6fd6f4c4a5c1738256f53a44b5c7dd8116262dea",
+      "bytes": 4378704,
+      "originalPath": "/home/nzsn/Repos/Ariadne/target/bap-core-sdk/repository-snapshot.tar.gz"
+    },
+    "locked-inputs/sdk-manifest.json": {
+      "sha256": "9ffecdd7ce96c79170d9c1153411139973a212f34f0317a2f972f737086e64e4",
+      "bytes": 1039529,
+      "originalPath": "/home/nzsn/Repos/Ariadne/target/bap-core-sdk/sdk-manifest.json"
+    },
+    "malformed.log": {
+      "sha256": "b7f7dd923fed1e52a58556ce3bc80bc7aadc78fd072e6c63528d051d6105e9a6",
+      "bytes": 735,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/malformed.log"
+    },
+    "mutations/baseline.log": {
+      "sha256": "480383acb077854781a2797a71745cc47b45c98c331e2001b91a3009cafab13c",
+      "bytes": 531,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/baseline.log"
+    },
+    "mutations/collapse-parallel-edges/assertion.log": {
+      "sha256": "69fb2e1c54c17a6bc8840ed0f2f423d65183fc2f9eef8a7d3358b3bb281756ac",
+      "bytes": 2344,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/collapse-parallel-edges/assertion.log"
+    },
+    "mutations/collapse-parallel-edges/build/build.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/collapse-parallel-edges/build/build.log"
+    },
+    "mutations/collapse-parallel-edges/build/manifest.json": {
+      "sha256": "92de7df3026d83292b91059f24fee5885ccd4aad8ba931b77a6083b0a5b5d529",
+      "bytes": 1007,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/collapse-parallel-edges/build/manifest.json"
+    },
+    "mutations/collapse-parallel-edges/compile.log": {
+      "sha256": "171d981c6c4dd79174f682d7351aaeca7c100ccbef3ae81b4ba8b218035a60a2",
+      "bytes": 134,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/collapse-parallel-edges/compile.log"
+    },
+    "mutations/collapse-parallel-edges/mutation.diff": {
+      "sha256": "ac2dae47288091bb4dd10f95a40ef4272d669004c0060d2a710330e8f578a07c",
+      "bytes": 574,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/collapse-parallel-edges/mutation.diff"
+    },
+    "mutations/observe-mutates/assertion.log": {
+      "sha256": "4e9574d17e0c09283238ad778e6e76fe26292484babdd6e8186e5343a30ac92f",
+      "bytes": 2237,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/observe-mutates/assertion.log"
+    },
+    "mutations/observe-mutates/build/build.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/observe-mutates/build/build.log"
+    },
+    "mutations/observe-mutates/build/manifest.json": {
+      "sha256": "7c278dd70430b35e792c2513b26370691604323e398bb710523133c6c1f77cc3",
+      "bytes": 1007,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/observe-mutates/build/manifest.json"
+    },
+    "mutations/observe-mutates/compile.log": {
+      "sha256": "1287bc9e281c66c79fbf29282a8b6d61733cf5976ce16e5565a4dc390f6668aa",
+      "bytes": 126,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/observe-mutates/compile.log"
+    },
+    "mutations/observe-mutates/mutation.diff": {
+      "sha256": "fcc6fccffd8ce024b6f6457864313bd75db690e1ad4df4e5fc6d67160d25d027",
+      "bytes": 444,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/observe-mutates/mutation.diff"
+    },
+    "mutations/omit-visit/assertion.log": {
+      "sha256": "a66632e61512a3cb53bb3c33e18486b396cc7d69b6220bd57b0bd415e19459ca",
+      "bytes": 2251,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/omit-visit/assertion.log"
+    },
+    "mutations/omit-visit/build/build.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/omit-visit/build/build.log"
+    },
+    "mutations/omit-visit/build/manifest.json": {
+      "sha256": "6d332b529b33a57cab2cbcb1098ab55106a426d3c32847bd49d39aa4308635a6",
+      "bytes": 1007,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/omit-visit/build/manifest.json"
+    },
+    "mutations/omit-visit/compile.log": {
+      "sha256": "7677b184e4193a78ae6c7175820b574f28c6df4b3d7adcc9c220f6c23a950dd3",
+      "bytes": 121,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/omit-visit/compile.log"
+    },
+    "mutations/omit-visit/mutation.diff": {
+      "sha256": "05d1234648f0bb970638a00c7c475ea7db3e61e9bb9baf0a9c33ead3bbcab105",
+      "bytes": 443,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/omit-visit/mutation.diff"
+    },
+    "mutations/previous-observation/assertion.log": {
+      "sha256": "1c1d22f37fb125cc27923935ec26091efaf2d811914258a3985356b14aab8238",
+      "bytes": 2137,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/previous-observation/assertion.log"
+    },
+    "mutations/previous-observation/build/build.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/previous-observation/build/build.log"
+    },
+    "mutations/previous-observation/build/manifest.json": {
+      "sha256": "c2259355e3842424476be80547af4cec1339555f3f16f1702c3f7d00f681f200",
+      "bytes": 1007,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/previous-observation/build/manifest.json"
+    },
+    "mutations/previous-observation/compile.log": {
+      "sha256": "58c686160902860a639c82323086309a41718e4ee599922c2ffd6289b3259c65",
+      "bytes": 131,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/previous-observation/compile.log"
+    },
+    "mutations/previous-observation/mutation.diff": {
+      "sha256": "3662ea80cf0298895dec1cec3f45f8cf23c204531bcabc34ba06f04f9b02900f",
+      "bytes": 541,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/previous-observation/mutation.diff"
+    },
+    "mutations/report.json": {
+      "sha256": "942800b0f09b92d9f61b3fb9b47b6a1907fd22a5dc2cf1a320c1e7d714fb2cc0",
+      "bytes": 3623,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/report.json"
+    },
+    "mutations/reset-preserves-state/assertion.log": {
+      "sha256": "81cbb56a336701520b9dbeca9aae9a380f0936bcc442d7c5c1735e3458ea0baa",
+      "bytes": 2177,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/reset-preserves-state/assertion.log"
+    },
+    "mutations/reset-preserves-state/build/build.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/reset-preserves-state/build/build.log"
+    },
+    "mutations/reset-preserves-state/build/manifest.json": {
+      "sha256": "91367d9f559008c4cfcdae8ee2e6405b6b5e03809f633f606dd2ecb3d97439a5",
+      "bytes": 1007,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/reset-preserves-state/build/manifest.json"
+    },
+    "mutations/reset-preserves-state/compile.log": {
+      "sha256": "f434cca7499f929b9256343b82934b8fcba188f734127f1ea11411ad5d0cea1a",
+      "bytes": 132,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/reset-preserves-state/compile.log"
+    },
+    "mutations/reset-preserves-state/mutation.diff": {
+      "sha256": "0ff7dcbcf0476f004674ff79de1b46cfa2472c731a24342cd62a08be92ab46f4",
+      "bytes": 1278,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/reset-preserves-state/mutation.diff"
+    },
+    "mutations/signed-address-order/assertion.log": {
+      "sha256": "e2e52f54216cb0761620352db8aad1da60f20661076307d29bd985226293fd97",
+      "bytes": 672,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/signed-address-order/assertion.log"
+    },
+    "mutations/signed-address-order/build/build.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/signed-address-order/build/build.log"
+    },
+    "mutations/signed-address-order/build/manifest.json": {
+      "sha256": "5981bf91f8041296f57ee0f3cf2c6e24243f5267a31a4e9b04122179a7d8f145",
+      "bytes": 1007,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/signed-address-order/build/manifest.json"
+    },
+    "mutations/signed-address-order/compile.log": {
+      "sha256": "c09c6f5b9f0d33c609a061cd84ef7e21e2a52d7da8d47695429b7951918efa94",
+      "bytes": 131,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/signed-address-order/compile.log"
+    },
+    "mutations/signed-address-order/mutation.diff": {
+      "sha256": "a0425cbca2d50bc63fc7d4706f0325bd9ad7d761a48bb589b5bf4c243d20692d",
+      "bytes": 588,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/signed-address-order/mutation.diff"
+    },
+    "mutations/stale-sequence.diff": {
+      "sha256": "b5a2fe3b9d1091e020e230baeab0e5932c8f8b78255043417864961da9394db8",
+      "bytes": 567,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/stale-sequence.diff"
+    },
+    "mutations/stale-sequence.log": {
+      "sha256": "bc2a0839d2519f430aa79fb5e2d0ebae2aad23c4b6e9e8499770e5184f298dc1",
+      "bytes": 2688,
+      "originalPath": "target/bap-core-mutations/run-pbe3tdmk/stale-sequence.log"
+    },
+    "native-controls.json": {
+      "sha256": "8fee4285abeb8df5cd51c10b79e46e027a90b04efe0232d47c354528839df77f",
+      "bytes": 1043,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/native-controls.json"
+    },
+    "native-rust-transport.log": {
+      "sha256": "10997de5ff48bbb0ee0a62ebb5ad7eaec3f3433349d0541c66f4baa7d9d1a716",
+      "bytes": 532,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/native-rust-transport.log"
+    },
+    "nonfinite.log": {
+      "sha256": "e987ed014d75b26943f515980d536e78f08090a708f07c6071af750963bec6c0",
+      "bytes": 701,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/nonfinite.log"
+    },
+    "oversized.log": {
+      "sha256": "d9c475893a86ce8ac5865a6a356c22ec3d82547e65fe0a21d1782b72c8a6b240",
+      "bytes": 692,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/oversized.log"
+    },
+    "package-format.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/package-format.log"
+    },
+    "partial.log": {
+      "sha256": "4135fe697d0724b8309f0e7b512e3b9ba74bc522c76b2013abb39abdd76b81f5",
+      "bytes": 674,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/partial.log"
+    },
+    "regression-artifacts/ariadne-bap-acceptance-xd3rz41t/bap-clippy.log": {
+      "sha256": "a7638fb4d7621c013bc222ecb955a80b9750d084c226465bdf8209c629eb41ef",
+      "bytes": 136,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/bap-clippy.log"
+    },
+    "regression-artifacts/ariadne-bap-acceptance-xd3rz41t/bap-format.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/bap-format.log"
+    },
+    "regression-artifacts/ariadne-bap-acceptance-xd3rz41t/bap-tests-native.log": {
+      "sha256": "9ec9616ceb6ca53779f1fabadc3bf73c1481ce710e661a59a6f73c16dddaf5c3",
+      "bytes": 10220,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/bap-tests-native.log"
+    },
+    "regression-artifacts/ariadne-bap-acceptance-xd3rz41t/bench-clippy.log": {
+      "sha256": "0d84922282d0fdaa2538a2e256025ce9d899ebc32a4dc509502585c8c67d3ec2",
+      "bytes": 136,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/bench-clippy.log"
+    },
+    "regression-artifacts/ariadne-bap-acceptance-xd3rz41t/bench-format.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/bench-format.log"
+    },
+    "regression-artifacts/ariadne-bap-acceptance-xd3rz41t/controlled-fixtures.log": {
+      "sha256": "f5df3e20ac3ee08fa3b8d4bbb374906ae1165a005b83bf7940b6e431f56227a4",
+      "bytes": 60,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/controlled-fixtures.log"
+    },
+    "regression-artifacts/ariadne-bap-acceptance-xd3rz41t/input-bap-cli.log": {
+      "sha256": "48d92cd73f1be19ac2fcad0eb6c52587079050432199a12ac4251f3ff158a9db",
+      "bytes": 774,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/input-bap-cli.log"
+    },
+    "regression-artifacts/ariadne-bap-acceptance-xd3rz41t/input-clippy.log": {
+      "sha256": "02c68289721d588371dc19c507647cfe869d0677d177cdc26f73be1af9ac97fc",
+      "bytes": 136,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/input-clippy.log"
+    },
+    "regression-artifacts/ariadne-bap-acceptance-xd3rz41t/input-format.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/input-format.log"
+    },
+    "regression-artifacts/ariadne-bap-acceptance-xd3rz41t/model-observer-build.log": {
+      "sha256": "0b8d1563a8108fcd7d0314723edf44237baa41abda234c237fb2bf8d9520da52",
+      "bytes": 127,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/model-observer-build.log"
+    },
+    "regression-artifacts/ariadne-bap-acceptance-xd3rz41t/model.log": {
+      "sha256": "6975d803f85896a49ea7624788feda2983f22cfdec5f7393b412fd304046997b",
+      "bytes": 402,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/model.log"
+    },
+    "regression-artifacts/ariadne-bap-acceptance-xd3rz41t/mutation.log": {
+      "sha256": "f3f09f37b14808d910f7b673f74562efb7e4b3df316a449181720e7c9b222c02",
+      "bytes": 950,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/mutation.log"
+    },
+    "regression-artifacts/ariadne-bap-acceptance-xd3rz41t/native-build.log": {
+      "sha256": "68a24e9bfd8b14bdbafa20bd12a742fd9afbbde2b720cf68e7e3ac0828c2bcf7",
+      "bytes": 121,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/native-build.log"
+    },
+    "regression-artifacts/ariadne-bap-acceptance-xd3rz41t/native-corpus.log": {
+      "sha256": "49044533ea9e3c43d8362edcf5d12d3b59fe0f10b3ac0b8f1311d5410fda02cf",
+      "bytes": 41,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/native-corpus.log"
+    },
+    "regression-artifacts/ariadne-bap-acceptance-xd3rz41t/report.json": {
+      "sha256": "a6c8dc1bd504d3d18b4e3e5da143684444fc009be1d49f50b931e942f28d7876",
+      "bytes": 181225,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/report.json"
+    },
+    "regression-artifacts/ariadne-bap-acceptance-xd3rz41t/stage-e.log": {
+      "sha256": "9e64ed4b179be73e8db2a3e4c1d7186ae3dbdae7321c197c9877bd9d176ee734",
+      "bytes": 397,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/stage-e.log"
+    },
+    "regression-artifacts/ariadne-bap-acceptance-xd3rz41t/workload-runner-regressions.log": {
+      "sha256": "e561b544fb2cc592d2afb99a5fde024111c69bfaee20245820af7cad9bf23316",
+      "bytes": 159,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/workload-runner-regressions.log"
+    },
+    "regression-artifacts/ariadne-bap-acceptance-xd3rz41t/workload.log": {
+      "sha256": "b908a9b3b6f93c0dfd2922466e7d7d74da9613e29fd8e99ca243205bd82ff051",
+      "bytes": 767,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/workload.log"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/alias/Ariadne.tla": {
+      "sha256": "26d3a783c43b0b86029bfbeb2e9f8bff7a56d3c7e8702493d7b502d21bf32019",
+      "bytes": 29274,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/alias/Ariadne.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/alias/AriadneMachineCommon.tla": {
+      "sha256": "32b60854773c7c14e06e449300a9757fefdfbfc763a0f58ef4574f1edd019947",
+      "bytes": 1828,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/alias/AriadneMachineCommon.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/alias/AriadneTypes.tla": {
+      "sha256": "3bfb36f3bf96adc324a9c714d34a12af708d0e7daaba91a5a1ae5f79f2820329",
+      "bytes": 1161,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/alias/AriadneTypes.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/alias/BapModel.cfg": {
+      "sha256": "b1293d69de640b20eae53fc79506295c62cfd108b14474bf3da827759a804798",
+      "bytes": 73,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/alias/BapModel.cfg"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/alias/BapModel.tla": {
+      "sha256": "13e434ec3fd2a737c2564208d7def75a23003e8cb9c53f7ff6f7648f3c38b1fa",
+      "bytes": 7129,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/alias/BapModel.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/alias/actual.json": {
+      "sha256": "c5a3414ad86a01f974441c15c8b42d6af6eaf147f35df4970b48d34b7dbe1040",
+      "bytes": 397723,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/alias/actual.json"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/alias/trace.json": {
+      "sha256": "1125251d9d33d80159de71abed5665635c9465743608066cc643fbab609fa988",
+      "bytes": 432571,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/alias/trace.json"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/branch/Ariadne.tla": {
+      "sha256": "26d3a783c43b0b86029bfbeb2e9f8bff7a56d3c7e8702493d7b502d21bf32019",
+      "bytes": 29274,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/branch/Ariadne.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/branch/AriadneMachineCommon.tla": {
+      "sha256": "32b60854773c7c14e06e449300a9757fefdfbfc763a0f58ef4574f1edd019947",
+      "bytes": 1828,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/branch/AriadneMachineCommon.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/branch/AriadneTypes.tla": {
+      "sha256": "3bfb36f3bf96adc324a9c714d34a12af708d0e7daaba91a5a1ae5f79f2820329",
+      "bytes": 1161,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/branch/AriadneTypes.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/branch/BapModel.cfg": {
+      "sha256": "b1293d69de640b20eae53fc79506295c62cfd108b14474bf3da827759a804798",
+      "bytes": 73,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/branch/BapModel.cfg"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/branch/BapModel.tla": {
+      "sha256": "a11e2f1cc1957bca8af4e059cf5bc72b0b9a057763ea1b62e9e02a995bb28dcc",
+      "bytes": 7137,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/branch/BapModel.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/branch/actual.json": {
+      "sha256": "a4413528f771f0cfb8ec26863862d9002557d087d2d86f251eb81ef5b26d3828",
+      "bytes": 329734,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/branch/actual.json"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/branch/trace.json": {
+      "sha256": "4d7ff10d6664bb558939dfbbdf13500179518bece7ca368c0f100b186be8b3a9",
+      "bytes": 351346,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/branch/trace.json"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/conditional/Ariadne.tla": {
+      "sha256": "26d3a783c43b0b86029bfbeb2e9f8bff7a56d3c7e8702493d7b502d21bf32019",
+      "bytes": 29274,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/conditional/Ariadne.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/conditional/AriadneMachineCommon.tla": {
+      "sha256": "32b60854773c7c14e06e449300a9757fefdfbfc763a0f58ef4574f1edd019947",
+      "bytes": 1828,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/conditional/AriadneMachineCommon.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/conditional/AriadneTypes.tla": {
+      "sha256": "3bfb36f3bf96adc324a9c714d34a12af708d0e7daaba91a5a1ae5f79f2820329",
+      "bytes": 1161,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/conditional/AriadneTypes.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/conditional/BapModel.cfg": {
+      "sha256": "b1293d69de640b20eae53fc79506295c62cfd108b14474bf3da827759a804798",
+      "bytes": 73,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/conditional/BapModel.cfg"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/conditional/BapModel.tla": {
+      "sha256": "c3203250f09b03289209dc9b06ea4f8a43bea210dfe9f6e3735fed471b2f6af5",
+      "bytes": 6969,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/conditional/BapModel.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/conditional/actual.json": {
+      "sha256": "74cb9cc93b454352c0324ecac1ae5e256a32cfea1c64e3d0fc2cf22da57fdcb4",
+      "bytes": 283119,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/conditional/actual.json"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/conditional/trace.json": {
+      "sha256": "20a8790d78a86a1156c716d98475b1d1e0f64aa3682f6cd77744a968866a726a",
+      "bytes": 303248,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/conditional/trace.json"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/indirect/Ariadne.tla": {
+      "sha256": "26d3a783c43b0b86029bfbeb2e9f8bff7a56d3c7e8702493d7b502d21bf32019",
+      "bytes": 29274,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/indirect/Ariadne.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/indirect/AriadneMachineCommon.tla": {
+      "sha256": "32b60854773c7c14e06e449300a9757fefdfbfc763a0f58ef4574f1edd019947",
+      "bytes": 1828,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/indirect/AriadneMachineCommon.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/indirect/AriadneTypes.tla": {
+      "sha256": "3bfb36f3bf96adc324a9c714d34a12af708d0e7daaba91a5a1ae5f79f2820329",
+      "bytes": 1161,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/indirect/AriadneTypes.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/indirect/BapModel.cfg": {
+      "sha256": "b1293d69de640b20eae53fc79506295c62cfd108b14474bf3da827759a804798",
+      "bytes": 73,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/indirect/BapModel.cfg"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/indirect/BapModel.tla": {
+      "sha256": "a5e8e496ff39ae5b1864d0b992f90c87876e25f0fb848f43e4f80e858b63d259",
+      "bytes": 6511,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/indirect/BapModel.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/indirect/actual.json": {
+      "sha256": "78a6b18d03daf16a38935622fa337c85937aac684a18849bad7a7430ce93cb31",
+      "bytes": 64117,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/indirect/actual.json"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/indirect/trace.json": {
+      "sha256": "0fb08eae878f70e86f88c207a2157ab8cb588dc0b5f3094bf1819b1644a7c2f5",
+      "bytes": 57954,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/indirect/trace.json"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/loop/Ariadne.tla": {
+      "sha256": "26d3a783c43b0b86029bfbeb2e9f8bff7a56d3c7e8702493d7b502d21bf32019",
+      "bytes": 29274,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/loop/Ariadne.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/loop/AriadneMachineCommon.tla": {
+      "sha256": "32b60854773c7c14e06e449300a9757fefdfbfc763a0f58ef4574f1edd019947",
+      "bytes": 1828,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/loop/AriadneMachineCommon.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/loop/AriadneTypes.tla": {
+      "sha256": "3bfb36f3bf96adc324a9c714d34a12af708d0e7daaba91a5a1ae5f79f2820329",
+      "bytes": 1161,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/loop/AriadneTypes.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/loop/BapModel.cfg": {
+      "sha256": "b1293d69de640b20eae53fc79506295c62cfd108b14474bf3da827759a804798",
+      "bytes": 73,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/loop/BapModel.cfg"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/loop/BapModel.tla": {
+      "sha256": "cabaef5fa94aac61fca5ac5e0524b29bc6607c2b61fbb6bda8ae7941d1a8d350",
+      "bytes": 7640,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/loop/BapModel.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/loop/actual.json": {
+      "sha256": "591fbbb09183bec10ce13c15e6769a1e9f3296fee7052a8dd537604cec1c9ce7",
+      "bytes": 691367,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/loop/actual.json"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/loop/trace.json": {
+      "sha256": "e06fdee50adadce7310f801bbfac6aeee6e3ded82250c074dbe82175bdfdc13c",
+      "bytes": 774808,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/loop/trace.json"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/opaque-call/Ariadne.tla": {
+      "sha256": "26d3a783c43b0b86029bfbeb2e9f8bff7a56d3c7e8702493d7b502d21bf32019",
+      "bytes": 29274,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/opaque-call/Ariadne.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/opaque-call/AriadneMachineCommon.tla": {
+      "sha256": "32b60854773c7c14e06e449300a9757fefdfbfc763a0f58ef4574f1edd019947",
+      "bytes": 1828,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/opaque-call/AriadneMachineCommon.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/opaque-call/AriadneTypes.tla": {
+      "sha256": "3bfb36f3bf96adc324a9c714d34a12af708d0e7daaba91a5a1ae5f79f2820329",
+      "bytes": 1161,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/opaque-call/AriadneTypes.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/opaque-call/BapModel.cfg": {
+      "sha256": "b1293d69de640b20eae53fc79506295c62cfd108b14474bf3da827759a804798",
+      "bytes": 73,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/opaque-call/BapModel.cfg"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/opaque-call/BapModel.tla": {
+      "sha256": "7701e98f1a2f8bf8c4df5e980097bc273de29d47e93be70a97d42c40b26cbf47",
+      "bytes": 9905,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/opaque-call/BapModel.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/opaque-call/actual.json": {
+      "sha256": "73e4ed5ec3cd3ab1a126921cfd497c87285a2e857abf65c8ef1ed2f51a9b13cc",
+      "bytes": 439290,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/opaque-call/actual.json"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/opaque-call/trace.json": {
+      "sha256": "ae7cbc671ee52235d70895e190c26770bb71f7e235985425eb6071f24c32a5e7",
+      "bytes": 481137,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/opaque-call/trace.json"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/pipeline/Ariadne.tla": {
+      "sha256": "26d3a783c43b0b86029bfbeb2e9f8bff7a56d3c7e8702493d7b502d21bf32019",
+      "bytes": 29274,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/pipeline/Ariadne.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/pipeline/AriadneMachineCommon.tla": {
+      "sha256": "32b60854773c7c14e06e449300a9757fefdfbfc763a0f58ef4574f1edd019947",
+      "bytes": 1828,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/pipeline/AriadneMachineCommon.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/pipeline/AriadneTypes.tla": {
+      "sha256": "3bfb36f3bf96adc324a9c714d34a12af708d0e7daaba91a5a1ae5f79f2820329",
+      "bytes": 1161,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/pipeline/AriadneTypes.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/pipeline/BapModel.cfg": {
+      "sha256": "b1293d69de640b20eae53fc79506295c62cfd108b14474bf3da827759a804798",
+      "bytes": 73,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/pipeline/BapModel.cfg"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/pipeline/BapModel.tla": {
+      "sha256": "fb739e1f5cde8613b3715890826c612dd48eca25001d992b4cca992a34627f2f",
+      "bytes": 7384,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/pipeline/BapModel.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/pipeline/actual.json": {
+      "sha256": "6dfb6d552c096eb360a62e8356458c1ccc3aca5c1e1abb850b014f3104bd110e",
+      "bytes": 467062,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/pipeline/actual.json"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/pipeline/trace.json": {
+      "sha256": "7efd90ab4af8e89e6e99aad0183b39537ab1967777b6b92ecf56d4d039401742",
+      "bytes": 514714,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/pipeline/trace.json"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/report.json": {
+      "sha256": "9e4319639b4d3a46303668f8ade7d92ce51a77e9a8d8cc777d0b4c288909824c",
+      "bytes": 18432,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/report.json"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/weak-store/Ariadne.tla": {
+      "sha256": "26d3a783c43b0b86029bfbeb2e9f8bff7a56d3c7e8702493d7b502d21bf32019",
+      "bytes": 29274,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/weak-store/Ariadne.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/weak-store/AriadneMachineCommon.tla": {
+      "sha256": "32b60854773c7c14e06e449300a9757fefdfbfc763a0f58ef4574f1edd019947",
+      "bytes": 1828,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/weak-store/AriadneMachineCommon.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/weak-store/AriadneTypes.tla": {
+      "sha256": "3bfb36f3bf96adc324a9c714d34a12af708d0e7daaba91a5a1ae5f79f2820329",
+      "bytes": 1161,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/weak-store/AriadneTypes.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/weak-store/BapModel.cfg": {
+      "sha256": "b1293d69de640b20eae53fc79506295c62cfd108b14474bf3da827759a804798",
+      "bytes": 73,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/weak-store/BapModel.cfg"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/weak-store/BapModel.tla": {
+      "sha256": "34a75ebff0653cff17b32a0562f515a66a432cb3212ba0036f4be36e11ff3d24",
+      "bytes": 7734,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/weak-store/BapModel.tla"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/weak-store/actual.json": {
+      "sha256": "2a1aaefce8fe8589340e5cd839b5f10d57c8ba5bcf867a8daec65e3713876ad4",
+      "bytes": 541727,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/weak-store/actual.json"
+    },
+    "regression-artifacts/ariadne-bap-model-hqa131ek/weak-store/trace.json": {
+      "sha256": "326a9f5c5b58c77de4d40fafae9bc5a05578c405d15e943bdd698cefab4f648e",
+      "bytes": 594976,
+      "originalPath": "/tmp/ariadne-bap-model-hqa131ek/weak-store/trace.json"
+    },
+    "regression-artifacts/ariadne-bap-mutations-ks87w94_/conditional-kill.log": {
+      "sha256": "c8b0debd597a7c7519a757f708320b66dd5727895d654ef378db32046b858a15",
+      "bytes": 1199,
+      "originalPath": "/tmp/ariadne-bap-mutations-ks87w94_/conditional-kill.log"
+    },
+    "regression-artifacts/ariadne-bap-mutations-ks87w94_/cross-snapshot-reuse.log": {
+      "sha256": "028b9fdce7ea294d1d2d5752e95c3be31f9b20e006c8c6252f7fdf91513d68c6",
+      "bytes": 1061,
+      "originalPath": "/tmp/ariadne-bap-mutations-ks87w94_/cross-snapshot-reuse.log"
+    },
+    "regression-artifacts/ariadne-bap-mutations-ks87w94_/disagreement-baseline.log": {
+      "sha256": "d5aa942b5fe9c529758f3491fc924b3dd297987455beba4ba1874ad47588678f",
+      "bytes": 490,
+      "originalPath": "/tmp/ariadne-bap-mutations-ks87w94_/disagreement-baseline.log"
+    },
+    "regression-artifacts/ariadne-bap-mutations-ks87w94_/drop-unknown.log": {
+      "sha256": "3269be37dafa9e994b33fcb68c7a6d9fb054fd41d719e6c3efd2fe787388dec6",
+      "bytes": 1032,
+      "originalPath": "/tmp/ariadne-bap-mutations-ks87w94_/drop-unknown.log"
+    },
+    "regression-artifacts/ariadne-bap-mutations-ks87w94_/empty-lift-is-noop.log": {
+      "sha256": "b3b1f5b2e6f969f29308e859c890f994b7e3551d0760dc7d9bf90e0c714dfce9",
+      "bytes": 1071,
+      "originalPath": "/tmp/ariadne-bap-mutations-ks87w94_/empty-lift-is-noop.log"
+    },
+    "regression-artifacts/ariadne-bap-mutations-ks87w94_/extract-build.log": {
+      "sha256": "68a24e9bfd8b14bdbafa20bd12a742fd9afbbde2b720cf68e7e3ac0828c2bcf7",
+      "bytes": 121,
+      "originalPath": "/tmp/ariadne-bap-mutations-ks87w94_/extract-build.log"
+    },
+    "regression-artifacts/ariadne-bap-mutations-ks87w94_/fabricated-call-preservation.log": {
+      "sha256": "7d942c8caf68fce528c6d64ba00d666f0bab72f589e22529f7107da64bca0045",
+      "bytes": 4371,
+      "originalPath": "/tmp/ariadne-bap-mutations-ks87w94_/fabricated-call-preservation.log"
+    },
+    "regression-artifacts/ariadne-bap-mutations-ks87w94_/lib-baseline.log": {
+      "sha256": "34e0d1838ceff5da6a706952da227039cafaa6502594f683c3b219abc47c8958",
+      "bytes": 473,
+      "originalPath": "/tmp/ariadne-bap-mutations-ks87w94_/lib-baseline.log"
+    },
+    "regression-artifacts/ariadne-bap-mutations-ks87w94_/memory-wide-kill.log": {
+      "sha256": "a1488c44c75b1012acf64c85de4752d2bf237807fff993b93d05ee9f2573d1ec",
+      "bytes": 1110,
+      "originalPath": "/tmp/ariadne-bap-mutations-ks87w94_/memory-wide-kill.log"
+    },
+    "regression-artifacts/ariadne-bap-mutations-ks87w94_/missing-operand-binding-check.log": {
+      "sha256": "550483d3dc2389affc67a885d5a449e9c3f812e6ae21f608196ea8373a767d42",
+      "bytes": 1077,
+      "originalPath": "/tmp/ariadne-bap-mutations-ks87w94_/missing-operand-binding-check.log"
+    },
+    "regression-artifacts/ariadne-bap-mutations-ks87w94_/native-baseline.log": {
+      "sha256": "224025ec7a6b691f6d1028aa259cdbdfecacd64148c1cc3d8a7445c9970e170d",
+      "bytes": 464,
+      "originalPath": "/tmp/ariadne-bap-mutations-ks87w94_/native-baseline.log"
+    },
+    "regression-artifacts/ariadne-bap-mutations-ks87w94_/native-extract.log": {
+      "sha256": "e64f7704fedf7c7fc2f474c1c1bb1bd192e613206c65261441d8f672867c2ad1",
+      "bytes": 1103,
+      "originalPath": "/tmp/ariadne-bap-mutations-ks87w94_/native-extract.log"
+    },
+    "regression-artifacts/ariadne-bap-mutations-ks87w94_/omit-address-read.log": {
+      "sha256": "194eeb0d9c45bd7bf8dd92ec61d1e5f9122246e7cd30dd9c50a2a8f574219368",
+      "bytes": 1771,
+      "originalPath": "/tmp/ariadne-bap-mutations-ks87w94_/omit-address-read.log"
+    },
+    "regression-artifacts/ariadne-bap-mutations-ks87w94_/omit-carry-read.log": {
+      "sha256": "0cc96c303017562c4fecd89c54a98fbbb24d57359266803e4a58a480d21f9a4a",
+      "bytes": 1514,
+      "originalPath": "/tmp/ariadne-bap-mutations-ks87w94_/omit-carry-read.log"
+    },
+    "regression-artifacts/ariadne-bap-mutations-ks87w94_/partial-frame-kills-upper.log": {
+      "sha256": "da5859d51373eb5ac08e5a984194e292551e9d160759d1d2c65960b05f4ad3e2",
+      "bytes": 1207,
+      "originalPath": "/tmp/ariadne-bap-mutations-ks87w94_/partial-frame-kills-upper.log"
+    },
+    "regression-artifacts/ariadne-bap-mutations-ks87w94_/partial-self-move-loses-definition.log": {
+      "sha256": "175cdc7edce313e74d9c395d05aefa060ac05da95a0c3641129d3b039b0d4c68",
+      "bytes": 2762,
+      "originalPath": "/tmp/ariadne-bap-mutations-ks87w94_/partial-self-move-loses-definition.log"
+    },
+    "regression-artifacts/ariadne-bap-mutations-ks87w94_/report.json": {
+      "sha256": "d8f0a8039080e39634b79bf28ebbccf30b50c9a5cac34ac803340ab5c0ea3d85",
+      "bytes": 21355,
+      "originalPath": "/tmp/ariadne-bap-mutations-ks87w94_/report.json"
+    },
+    "regression-artifacts/ariadne-bap-mutations-ks87w94_/wrong-byte-binding.log": {
+      "sha256": "c6dcb96cf9140bacbb02397f175e8ed42da3d12351eb7c02aa3e13fce47d6f8c",
+      "bytes": 983,
+      "originalPath": "/tmp/ariadne-bap-mutations-ks87w94_/wrong-byte-binding.log"
+    },
+    "regression-artifacts/ariadne-bap-mutations-ks87w94_/wrong-consumption-agreement.log": {
+      "sha256": "c9f59e357b5fb819629a40f2e7050d4afe713a150213ce43ffb3ad687ccdef47",
+      "bytes": 1077,
+      "originalPath": "/tmp/ariadne-bap-mutations-ks87w94_/wrong-consumption-agreement.log"
+    },
+    "regression-artifacts/ariadne-bap-mutations-ks87w94_/wrong-control-agreement.log": {
+      "sha256": "c44330decadc8e31faab489bb4a3f80b13716d1286d3f6f9005c4068e088cea6",
+      "bytes": 1078,
+      "originalPath": "/tmp/ariadne-bap-mutations-ks87w94_/wrong-control-agreement.log"
+    },
+    "regression-artifacts/ariadne-bap-mutations-ks87w94_/wrong-va-binding.log": {
+      "sha256": "d7ce0f4802b78c0775d6264a62add5d1ac5982ebd8c159aa0d387fbcd7bc0eaf",
+      "bytes": 980,
+      "originalPath": "/tmp/ariadne-bap-mutations-ks87w94_/wrong-va-binding.log"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/cli.csv": {
+      "sha256": "103b085d827ce2c6c9b4ab39997f71e45537759841452c28754e9e4a0eda0407",
+      "bytes": 1780,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/cli.csv"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/controlled-not-bap-0/report.json": {
+      "sha256": "cc58abe8915dc8825493ebf335b2f2b52376781a5b15bcef75325b24d515b2ed",
+      "bytes": 83507,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/controlled-not-bap-0/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/controlled-not-bap-0/report.txt": {
+      "sha256": "8cf53bf643c800a24d9ba8b0a01fedf433f90ee5dedf4e779dfc2f1cb165aa9f",
+      "bytes": 32197,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/controlled-not-bap-0/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/controlled-not-bap-1/report.json": {
+      "sha256": "cc58abe8915dc8825493ebf335b2f2b52376781a5b15bcef75325b24d515b2ed",
+      "bytes": 83507,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/controlled-not-bap-1/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/controlled-not-bap-1/report.txt": {
+      "sha256": "8cf53bf643c800a24d9ba8b0a01fedf433f90ee5dedf4e779dfc2f1cb165aa9f",
+      "bytes": 32197,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/controlled-not-bap-1/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/controlled-not-bap-2/report.json": {
+      "sha256": "cc58abe8915dc8825493ebf335b2f2b52376781a5b15bcef75325b24d515b2ed",
+      "bytes": 83507,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/controlled-not-bap-2/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/controlled-not-bap-2/report.txt": {
+      "sha256": "8cf53bf643c800a24d9ba8b0a01fedf433f90ee5dedf4e779dfc2f1cb165aa9f",
+      "bytes": 32197,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/controlled-not-bap-2/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/controlled-not-bap-3/report.json": {
+      "sha256": "cc58abe8915dc8825493ebf335b2f2b52376781a5b15bcef75325b24d515b2ed",
+      "bytes": 83507,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/controlled-not-bap-3/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/controlled-not-bap-3/report.txt": {
+      "sha256": "8cf53bf643c800a24d9ba8b0a01fedf433f90ee5dedf4e779dfc2f1cb165aa9f",
+      "bytes": 32197,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/controlled-not-bap-3/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/controlled-not-bap-4/report.json": {
+      "sha256": "cc58abe8915dc8825493ebf335b2f2b52376781a5b15bcef75325b24d515b2ed",
+      "bytes": 83507,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/controlled-not-bap-4/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/controlled-not-bap-4/report.txt": {
+      "sha256": "8cf53bf643c800a24d9ba8b0a01fedf433f90ee5dedf4e779dfc2f1cb165aa9f",
+      "bytes": 32197,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/controlled-not-bap-4/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/controlled-not-bap-5/report.json": {
+      "sha256": "cc58abe8915dc8825493ebf335b2f2b52376781a5b15bcef75325b24d515b2ed",
+      "bytes": 83507,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/controlled-not-bap-5/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/controlled-not-bap-5/report.txt": {
+      "sha256": "8cf53bf643c800a24d9ba8b0a01fedf433f90ee5dedf4e779dfc2f1cb165aa9f",
+      "bytes": 32197,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/controlled-not-bap-5/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/crashpad-windows-checksum-98-v1-bap-0/report.json": {
+      "sha256": "5206ff1b04c45ab0f2650893a8ae46bc6b3e160b11a2586adb840b36a87e6fd5",
+      "bytes": 2132623,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/crashpad-windows-checksum-98-v1-bap-0/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/crashpad-windows-checksum-98-v1-bap-0/report.txt": {
+      "sha256": "9950311c29f2e7af8776f285aba632894e71d9dcf31b862c7abb8f8a1111b87f",
+      "bytes": 808783,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/crashpad-windows-checksum-98-v1-bap-0/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/crashpad-windows-checksum-98-v1-bap-1/report.json": {
+      "sha256": "5206ff1b04c45ab0f2650893a8ae46bc6b3e160b11a2586adb840b36a87e6fd5",
+      "bytes": 2132623,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/crashpad-windows-checksum-98-v1-bap-1/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/crashpad-windows-checksum-98-v1-bap-1/report.txt": {
+      "sha256": "9950311c29f2e7af8776f285aba632894e71d9dcf31b862c7abb8f8a1111b87f",
+      "bytes": 808783,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/crashpad-windows-checksum-98-v1-bap-1/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/crashpad-windows-checksum-98-v1-bap-2/report.json": {
+      "sha256": "5206ff1b04c45ab0f2650893a8ae46bc6b3e160b11a2586adb840b36a87e6fd5",
+      "bytes": 2132623,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/crashpad-windows-checksum-98-v1-bap-2/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/crashpad-windows-checksum-98-v1-bap-2/report.txt": {
+      "sha256": "9950311c29f2e7af8776f285aba632894e71d9dcf31b862c7abb8f8a1111b87f",
+      "bytes": 808783,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/crashpad-windows-checksum-98-v1-bap-2/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/crashpad-windows-checksum-98-v1-bap-3/report.json": {
+      "sha256": "5206ff1b04c45ab0f2650893a8ae46bc6b3e160b11a2586adb840b36a87e6fd5",
+      "bytes": 2132623,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/crashpad-windows-checksum-98-v1-bap-3/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/crashpad-windows-checksum-98-v1-bap-3/report.txt": {
+      "sha256": "9950311c29f2e7af8776f285aba632894e71d9dcf31b862c7abb8f8a1111b87f",
+      "bytes": 808783,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/crashpad-windows-checksum-98-v1-bap-3/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/crashpad-windows-checksum-98-v1-bap-4/report.json": {
+      "sha256": "5206ff1b04c45ab0f2650893a8ae46bc6b3e160b11a2586adb840b36a87e6fd5",
+      "bytes": 2132623,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/crashpad-windows-checksum-98-v1-bap-4/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/crashpad-windows-checksum-98-v1-bap-4/report.txt": {
+      "sha256": "9950311c29f2e7af8776f285aba632894e71d9dcf31b862c7abb8f8a1111b87f",
+      "bytes": 808783,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/crashpad-windows-checksum-98-v1-bap-4/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/crashpad-windows-checksum-98-v1-bap-5/report.json": {
+      "sha256": "5206ff1b04c45ab0f2650893a8ae46bc6b3e160b11a2586adb840b36a87e6fd5",
+      "bytes": 2132623,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/crashpad-windows-checksum-98-v1-bap-5/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/crashpad-windows-checksum-98-v1-bap-5/report.txt": {
+      "sha256": "9950311c29f2e7af8776f285aba632894e71d9dcf31b862c7abb8f8a1111b87f",
+      "bytes": 808783,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/crashpad-windows-checksum-98-v1-bap-5/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/real-linux-34-bap-0/report.json": {
+      "sha256": "b19f2a2d82e13e6e01ff075b9ae5f69fab153b55e57adb317cea336f334a98c9",
+      "bytes": 2459442,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/real-linux-34-bap-0/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/real-linux-34-bap-0/report.txt": {
+      "sha256": "801c027e47507cb2580c007d35bc33d4cc89880ab566ceb9de94a09bfcdae573",
+      "bytes": 912816,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/real-linux-34-bap-0/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/real-linux-34-bap-1/report.json": {
+      "sha256": "b19f2a2d82e13e6e01ff075b9ae5f69fab153b55e57adb317cea336f334a98c9",
+      "bytes": 2459442,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/real-linux-34-bap-1/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/real-linux-34-bap-1/report.txt": {
+      "sha256": "801c027e47507cb2580c007d35bc33d4cc89880ab566ceb9de94a09bfcdae573",
+      "bytes": 912816,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/real-linux-34-bap-1/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/real-linux-34-bap-2/report.json": {
+      "sha256": "b19f2a2d82e13e6e01ff075b9ae5f69fab153b55e57adb317cea336f334a98c9",
+      "bytes": 2459442,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/real-linux-34-bap-2/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/real-linux-34-bap-2/report.txt": {
+      "sha256": "801c027e47507cb2580c007d35bc33d4cc89880ab566ceb9de94a09bfcdae573",
+      "bytes": 912816,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/real-linux-34-bap-2/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/real-linux-34-bap-3/report.json": {
+      "sha256": "b19f2a2d82e13e6e01ff075b9ae5f69fab153b55e57adb317cea336f334a98c9",
+      "bytes": 2459442,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/real-linux-34-bap-3/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/real-linux-34-bap-3/report.txt": {
+      "sha256": "801c027e47507cb2580c007d35bc33d4cc89880ab566ceb9de94a09bfcdae573",
+      "bytes": 912816,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/real-linux-34-bap-3/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/real-linux-34-bap-4/report.json": {
+      "sha256": "b19f2a2d82e13e6e01ff075b9ae5f69fab153b55e57adb317cea336f334a98c9",
+      "bytes": 2459442,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/real-linux-34-bap-4/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/real-linux-34-bap-4/report.txt": {
+      "sha256": "801c027e47507cb2580c007d35bc33d4cc89880ab566ceb9de94a09bfcdae573",
+      "bytes": 912816,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/real-linux-34-bap-4/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/real-linux-34-bap-5/report.json": {
+      "sha256": "b19f2a2d82e13e6e01ff075b9ae5f69fab153b55e57adb317cea336f334a98c9",
+      "bytes": 2459442,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/real-linux-34-bap-5/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/real-linux-34-bap-5/report.txt": {
+      "sha256": "801c027e47507cb2580c007d35bc33d4cc89880ab566ceb9de94a09bfcdae573",
+      "bytes": 912816,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/real-linux-34-bap-5/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/report.json": {
+      "sha256": "399fb081abfa93d33f35cc209d432c95140f9f11c1e019d91b78dbcdc4ccbc62",
+      "bytes": 39513,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/stage-b-linux-bap-0/report.json": {
+      "sha256": "2b5123834bb63a9b156f320219cf848021014ffb42b7a231a4f467d6fa437c7a",
+      "bytes": 83578,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/stage-b-linux-bap-0/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/stage-b-linux-bap-0/report.txt": {
+      "sha256": "0e648a637c42dfaa1724c7180d782a829b8f1c72c297a3754cf122bf75254f84",
+      "bytes": 32258,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/stage-b-linux-bap-0/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/stage-b-linux-bap-1/report.json": {
+      "sha256": "2b5123834bb63a9b156f320219cf848021014ffb42b7a231a4f467d6fa437c7a",
+      "bytes": 83578,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/stage-b-linux-bap-1/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/stage-b-linux-bap-1/report.txt": {
+      "sha256": "0e648a637c42dfaa1724c7180d782a829b8f1c72c297a3754cf122bf75254f84",
+      "bytes": 32258,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/stage-b-linux-bap-1/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/stage-b-linux-bap-2/report.json": {
+      "sha256": "2b5123834bb63a9b156f320219cf848021014ffb42b7a231a4f467d6fa437c7a",
+      "bytes": 83578,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/stage-b-linux-bap-2/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/stage-b-linux-bap-2/report.txt": {
+      "sha256": "0e648a637c42dfaa1724c7180d782a829b8f1c72c297a3754cf122bf75254f84",
+      "bytes": 32258,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/stage-b-linux-bap-2/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/stage-b-linux-bap-3/report.json": {
+      "sha256": "2b5123834bb63a9b156f320219cf848021014ffb42b7a231a4f467d6fa437c7a",
+      "bytes": 83578,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/stage-b-linux-bap-3/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/stage-b-linux-bap-3/report.txt": {
+      "sha256": "0e648a637c42dfaa1724c7180d782a829b8f1c72c297a3754cf122bf75254f84",
+      "bytes": 32258,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/stage-b-linux-bap-3/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/stage-b-linux-bap-4/report.json": {
+      "sha256": "2b5123834bb63a9b156f320219cf848021014ffb42b7a231a4f467d6fa437c7a",
+      "bytes": 83578,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/stage-b-linux-bap-4/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/stage-b-linux-bap-4/report.txt": {
+      "sha256": "0e648a637c42dfaa1724c7180d782a829b8f1c72c297a3754cf122bf75254f84",
+      "bytes": 32258,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/stage-b-linux-bap-4/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/stage-b-linux-bap-5/report.json": {
+      "sha256": "2b5123834bb63a9b156f320219cf848021014ffb42b7a231a4f467d6fa437c7a",
+      "bytes": 83578,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/stage-b-linux-bap-5/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/stage-b-linux-bap-5/report.txt": {
+      "sha256": "0e648a637c42dfaa1724c7180d782a829b8f1c72c297a3754cf122bf75254f84",
+      "bytes": 32258,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/stage-b-linux-bap-5/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/stage-b-windows-bap-0/report.json": {
+      "sha256": "ce44979a09f306f6a22a1dde53c58aed23379d97725baf4dcb47298d8891d5ad",
+      "bytes": 83610,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/stage-b-windows-bap-0/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/stage-b-windows-bap-0/report.txt": {
+      "sha256": "e7c3ff768c1fc1fa77e4dc3ada1d2ceb4d891c7e96e699d9190ea3ac3602c5b1",
+      "bytes": 32290,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/stage-b-windows-bap-0/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/stage-b-windows-bap-1/report.json": {
+      "sha256": "ce44979a09f306f6a22a1dde53c58aed23379d97725baf4dcb47298d8891d5ad",
+      "bytes": 83610,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/stage-b-windows-bap-1/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/stage-b-windows-bap-1/report.txt": {
+      "sha256": "e7c3ff768c1fc1fa77e4dc3ada1d2ceb4d891c7e96e699d9190ea3ac3602c5b1",
+      "bytes": 32290,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/stage-b-windows-bap-1/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/stage-b-windows-bap-2/report.json": {
+      "sha256": "ce44979a09f306f6a22a1dde53c58aed23379d97725baf4dcb47298d8891d5ad",
+      "bytes": 83610,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/stage-b-windows-bap-2/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/stage-b-windows-bap-2/report.txt": {
+      "sha256": "e7c3ff768c1fc1fa77e4dc3ada1d2ceb4d891c7e96e699d9190ea3ac3602c5b1",
+      "bytes": 32290,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/stage-b-windows-bap-2/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/stage-b-windows-bap-3/report.json": {
+      "sha256": "ce44979a09f306f6a22a1dde53c58aed23379d97725baf4dcb47298d8891d5ad",
+      "bytes": 83610,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/stage-b-windows-bap-3/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/stage-b-windows-bap-3/report.txt": {
+      "sha256": "e7c3ff768c1fc1fa77e4dc3ada1d2ceb4d891c7e96e699d9190ea3ac3602c5b1",
+      "bytes": 32290,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/stage-b-windows-bap-3/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/stage-b-windows-bap-4/report.json": {
+      "sha256": "ce44979a09f306f6a22a1dde53c58aed23379d97725baf4dcb47298d8891d5ad",
+      "bytes": 83610,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/stage-b-windows-bap-4/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/stage-b-windows-bap-4/report.txt": {
+      "sha256": "e7c3ff768c1fc1fa77e4dc3ada1d2ceb4d891c7e96e699d9190ea3ac3602c5b1",
+      "bytes": 32290,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/stage-b-windows-bap-4/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/stage-b-windows-bap-5/report.json": {
+      "sha256": "ce44979a09f306f6a22a1dde53c58aed23379d97725baf4dcb47298d8891d5ad",
+      "bytes": 83610,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/stage-b-windows-bap-5/report.json"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/stage-b-windows-bap-5/report.txt": {
+      "sha256": "e7c3ff768c1fc1fa77e4dc3ada1d2ceb4d891c7e96e699d9190ea3ac3602c5b1",
+      "bytes": 32290,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/stage-b-windows-bap-5/report.txt"
+    },
+    "regression-artifacts/ariadne-bap-workloads-ds8v70ne/stage.csv": {
+      "sha256": "54abcea7d90a16c12997fc1c9617cc3dc9bebc83af18ec65e26d8f88171ad2ea",
+      "bytes": 6851,
+      "originalPath": "/tmp/ariadne-bap-workloads-ds8v70ne/stage.csv"
+    },
+    "regression-artifacts/ariadne-effects-acceptance-_3c7v4_x/clippy.log": {
+      "sha256": "99f71393b9903dca098310bb446022a4bdee195ea9996f351a787195555210a6",
+      "bytes": 72,
+      "originalPath": "/tmp/ariadne-effects-acceptance-_3c7v4_x/clippy.log"
+    },
+    "regression-artifacts/ariadne-effects-acceptance-_3c7v4_x/core-mbt.log": {
+      "sha256": "772c3894fa42958887f2bb7b76e44a6d4e87add72ea6fb0b744233815448e1dc",
+      "bytes": 624,
+      "originalPath": "/tmp/ariadne-effects-acceptance-_3c7v4_x/core-mbt.log"
+    },
+    "regression-artifacts/ariadne-effects-acceptance-_3c7v4_x/format.log": {
+      "sha256": "477428d6bcd5cc76294a00a65b7ba564547e55a1b4b15879601397c1a7dd477b",
+      "bytes": 5329,
+      "originalPath": "/tmp/ariadne-effects-acceptance-_3c7v4_x/format.log"
+    },
+    "regression-artifacts/ariadne-effects-acceptance-_3c7v4_x/measurement.log": {
+      "sha256": "fba4b73a8495321d343b545fcc2dd59ef6b9934440c8a33e626a117660aa8dbf",
+      "bytes": 413,
+      "originalPath": "/tmp/ariadne-effects-acceptance-_3c7v4_x/measurement.log"
+    },
+    "regression-artifacts/ariadne-effects-acceptance-_3c7v4_x/mutations.log": {
+      "sha256": "87d489ae3852b1559e8a786d9f908740da128dc8e88165e253435763c1bd15e6",
+      "bytes": 668,
+      "originalPath": "/tmp/ariadne-effects-acceptance-_3c7v4_x/mutations.log"
+    },
+    "regression-artifacts/ariadne-effects-acceptance-_3c7v4_x/native-v1-v2.log": {
+      "sha256": "ee0e29e0ccc6d0845cdb6398747e61a6905bcd6f42d24cc2974e167075ee6b1a",
+      "bytes": 2139,
+      "originalPath": "/tmp/ariadne-effects-acceptance-_3c7v4_x/native-v1-v2.log"
+    },
+    "regression-artifacts/ariadne-effects-acceptance-_3c7v4_x/projection.log": {
+      "sha256": "f3fe939e8dbc6e0f1c2f0cdb101417d3e96b7ecade579ab3c05032d7d31100a2",
+      "bytes": 3321,
+      "originalPath": "/tmp/ariadne-effects-acceptance-_3c7v4_x/projection.log"
+    },
+    "regression-artifacts/ariadne-effects-acceptance-_3c7v4_x/report.json": {
+      "sha256": "d11a50ecc871685ca816d1264ed7c5d92b6e2549c1ccbf5031048954f2aff4ec",
+      "bytes": 23236,
+      "originalPath": "/tmp/ariadne-effects-acceptance-_3c7v4_x/report.json"
+    },
+    "regression-artifacts/ariadne-effects-acceptance-_3c7v4_x/rust-tests.log": {
+      "sha256": "3c1e282b1ccb4fbe24b1b076d69c6119dacbe237bed49a60399e2af7eaf0fb42",
+      "bytes": 8014,
+      "originalPath": "/tmp/ariadne-effects-acceptance-_3c7v4_x/rust-tests.log"
+    },
+    "regression-artifacts/ariadne-minidump-acceptance-l57dc06x/clippy.log": {
+      "sha256": "a5f4c585ee974ca44916ac30a98bbc189e067a7e0a6bc6d2e8d6bc525be724af",
+      "bytes": 72,
+      "originalPath": "/tmp/ariadne-minidump-acceptance-l57dc06x/clippy.log"
+    },
+    "regression-artifacts/ariadne-minidump-acceptance-l57dc06x/effects-regression.log": {
+      "sha256": "5c7a513cfdca9abdbfaeb5105afb72a5fa62ebe30d9183667d577c720136e740",
+      "bytes": 708,
+      "originalPath": "/tmp/ariadne-minidump-acceptance-l57dc06x/effects-regression.log"
+    },
+    "regression-artifacts/ariadne-minidump-acceptance-l57dc06x/formal-input.log": {
+      "sha256": "96c8c9f203552a36f7ba8353fbc99d6e431e0c74455d309735a414e8ffb334aa",
+      "bytes": 1049,
+      "originalPath": "/tmp/ariadne-minidump-acceptance-l57dc06x/formal-input.log"
+    },
+    "regression-artifacts/ariadne-minidump-acceptance-l57dc06x/format.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "originalPath": "/tmp/ariadne-minidump-acceptance-l57dc06x/format.log"
+    },
+    "regression-artifacts/ariadne-minidump-acceptance-l57dc06x/input-tests.log": {
+      "sha256": "06d1d0f50356202a9c93633ba9c84438eec193ebe2c58b480461830da5fb69b9",
+      "bytes": 18476,
+      "originalPath": "/tmp/ariadne-minidump-acceptance-l57dc06x/input-tests.log"
+    },
+    "regression-artifacts/ariadne-minidump-acceptance-l57dc06x/mutations.log": {
+      "sha256": "590affe6a7020bc06d9fa9111505f8e4f053d0314d704769c0e6f85d093ec4f0",
+      "bytes": 320,
+      "originalPath": "/tmp/ariadne-minidump-acceptance-l57dc06x/mutations.log"
+    },
+    "regression-artifacts/ariadne-minidump-acceptance-l57dc06x/native.log": {
+      "sha256": "9436561be843cec567ac5d38df97122d23dd4cf267cb9c50f23ec8cbd52f3179",
+      "bytes": 720,
+      "originalPath": "/tmp/ariadne-minidump-acceptance-l57dc06x/native.log"
+    },
+    "regression-artifacts/ariadne-minidump-acceptance-l57dc06x/real-artifacts.log": {
+      "sha256": "a8252e13ce52fd7e5fdc602be3c917ec9e1b13cbc9de3de404651b66ccbcc49a",
+      "bytes": 370,
+      "originalPath": "/tmp/ariadne-minidump-acceptance-l57dc06x/real-artifacts.log"
+    },
+    "regression-artifacts/ariadne-minidump-acceptance-l57dc06x/report.json": {
+      "sha256": "499a5fff5df5802ae6175617687f6c3f0561123a137a2c20c376953e2bee1cbc",
+      "bytes": 22411,
+      "originalPath": "/tmp/ariadne-minidump-acceptance-l57dc06x/report.json"
+    },
+    "regression-artifacts/ariadne-minidump-acceptance-l57dc06x/stage-b-fixtures.log": {
+      "sha256": "453292261cebbf14b4396e39b67ce9949e906f3b6c2e6b1381f32f1a6ba0d578",
+      "bytes": 164,
+      "originalPath": "/tmp/ariadne-minidump-acceptance-l57dc06x/stage-b-fixtures.log"
+    },
+    "regression-artifacts/ariadne-minidump-acceptance-l57dc06x/stage-b-native.log": {
+      "sha256": "e545b4ae025bccb71e8dab5f5430e74f48869b627615952f7444d3c8f06c6eea",
+      "bytes": 359,
+      "originalPath": "/tmp/ariadne-minidump-acceptance-l57dc06x/stage-b-native.log"
+    },
+    "regression-artifacts/ariadne-minidump-acceptance-l57dc06x/stage-c-cli.log": {
+      "sha256": "aecabdb565234661f1d7f3358bbd88e7f134c00ecfeb7c85c7f8661b5607ea69",
+      "bytes": 520,
+      "originalPath": "/tmp/ariadne-minidump-acceptance-l57dc06x/stage-c-cli.log"
+    },
+    "regression-artifacts/ariadne-stage-e-completion-2j7h7gz4/generated-replay-mutations.log": {
+      "sha256": "6442dff4fec8b95be6401d5e427e193bd9f6a7279c60e3a92dd6e759297e1feb",
+      "bytes": 1143,
+      "originalPath": "/tmp/ariadne-stage-e-completion-2j7h7gz4/generated-replay-mutations.log"
+    },
+    "regression-artifacts/ariadne-stage-e-completion-2j7h7gz4/ir-clippy.log": {
+      "sha256": "63abf97e9260f3d8e93a8c19008ea86c1d01204424d70b65d0aa619925e0f6b4",
+      "bytes": 136,
+      "originalPath": "/tmp/ariadne-stage-e-completion-2j7h7gz4/ir-clippy.log"
+    },
+    "regression-artifacts/ariadne-stage-e-completion-2j7h7gz4/ir-format.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "originalPath": "/tmp/ariadne-stage-e-completion-2j7h7gz4/ir-format.log"
+    },
+    "regression-artifacts/ariadne-stage-e-completion-2j7h7gz4/ir-tests-native-cli.log": {
+      "sha256": "87671aa45e23c02223e243c81494289b7b31be9b06534c0bf9b887ca2140c64c",
+      "bytes": 9041,
+      "originalPath": "/tmp/ariadne-stage-e-completion-2j7h7gz4/ir-tests-native-cli.log"
+    },
+    "regression-artifacts/ariadne-stage-e-completion-2j7h7gz4/minidump-regression.log": {
+      "sha256": "0aced981070e4d328105076ac0000ca4461ad24f4b3bc8b800a42ef67340d37e",
+      "bytes": 988,
+      "originalPath": "/tmp/ariadne-stage-e-completion-2j7h7gz4/minidump-regression.log"
+    },
+    "regression-artifacts/ariadne-stage-e-completion-2j7h7gz4/minidump-stateflow-cli.log": {
+      "sha256": "c708e1ee3bae35661daa8bf4211607fbf363c7c414c51c0efb5cbe6120797204",
+      "bytes": 497,
+      "originalPath": "/tmp/ariadne-stage-e-completion-2j7h7gz4/minidump-stateflow-cli.log"
+    },
+    "regression-artifacts/ariadne-stage-e-completion-2j7h7gz4/native-ir-build.log": {
+      "sha256": "54cc07130949ccb0c79a8db95771c433a6d8eb690fbce9b1414c8ab6b9cb2552",
+      "bytes": 30,
+      "originalPath": "/tmp/ariadne-stage-e-completion-2j7h7gz4/native-ir-build.log"
+    },
+    "regression-artifacts/ariadne-stage-e-completion-2j7h7gz4/report.json": {
+      "sha256": "60d53d4bd4ff2e8e693b7e974021e915451e77913a17409be5aebc73440bd468",
+      "bytes": 63645,
+      "originalPath": "/tmp/ariadne-stage-e-completion-2j7h7gz4/report.json"
+    },
+    "regression-artifacts/ariadne-stage-e-completion-2j7h7gz4/reports-clippy.log": {
+      "sha256": "cf54e642eccb0b27155cd12582cc5fe7d9056a51da8e7aa0ea1c1b76d8e24a1f",
+      "bytes": 136,
+      "originalPath": "/tmp/ariadne-stage-e-completion-2j7h7gz4/reports-clippy.log"
+    },
+    "regression-artifacts/ariadne-stage-e-completion-2j7h7gz4/reports-format.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "originalPath": "/tmp/ariadne-stage-e-completion-2j7h7gz4/reports-format.log"
+    },
+    "regression-artifacts/ariadne-stage-e-completion-2j7h7gz4/reports-tests.log": {
+      "sha256": "a98f249f2fed1efca0e10541b48174b222ff89d5b488d2d5696391b8b29d19bd",
+      "bytes": 9446,
+      "originalPath": "/tmp/ariadne-stage-e-completion-2j7h7gz4/reports-tests.log"
+    },
+    "regression-artifacts/ariadne-stage-e-completion-2j7h7gz4/root-clippy.log": {
+      "sha256": "28d174155e40013b78e34e015c8262bc7f28cd7a921e5413f30d938330c7b584",
+      "bytes": 136,
+      "originalPath": "/tmp/ariadne-stage-e-completion-2j7h7gz4/root-clippy.log"
+    },
+    "regression-artifacts/ariadne-stage-e-completion-2j7h7gz4/root-tests.log": {
+      "sha256": "dceb378bdacab4a93c25cf86b7f3e33e0496f88ac37705f72aea54c083015077",
+      "bytes": 8014,
+      "originalPath": "/tmp/ariadne-stage-e-completion-2j7h7gz4/root-tests.log"
+    },
+    "report.json": {
+      "sha256": "47ca553e5a95b1e125f835ac0d23b0bfed27b1539cc8e7195fe0a2cec5b53d5d",
+      "bytes": 226665,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/report.json"
+    },
+    "root-clippy.log": {
+      "sha256": "c92508a29848820f033cd2ea015c85dde0953c88b07cc967ce34b7c08f610549",
+      "bytes": 72,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/root-clippy.log"
+    },
+    "root-format.log": {
+      "sha256": "477428d6bcd5cc76294a00a65b7ba564547e55a1b4b15879601397c1a7dd477b",
+      "bytes": 5329,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/root-format.log"
+    },
+    "root-tests.log": {
+      "sha256": "a55ff6b3a4489d9387cca9d2b79a525131115da3614d554f56fc4be1affc312b",
+      "bytes": 19477,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/root-tests.log"
+    },
+    "rust-layout.log": {
+      "sha256": "bba0fe586663a9eec54574e20a3e24e8af2ed1e2956dadd383ab81e8fe85d14c",
+      "bytes": 78,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/rust-layout.log"
+    },
+    "sdk-compiler.log": {
+      "sha256": "2b559d5365421fa6f77b5dbfb7c5987833cad6e96eaa93405e70bb822bfdefa6",
+      "bytes": 32,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/sdk-compiler.log"
+    },
+    "sdk-inventory.log": {
+      "sha256": "c56edb5a29f677b4787b904229e45322e6d95ae35afc680cc05b6bf041c42127",
+      "bytes": 23,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/sdk-inventory.log"
+    },
+    "sdk-library.log": {
+      "sha256": "331fb4bd0378afd2992ad41037fe0922db011e86b37a5d2097c645365d8fcba4",
+      "bytes": 36,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/sdk-library.log"
+    },
+    "sdk-lock.log": {
+      "sha256": "bf6203966b32d16c35e743d5107ed2172d751992ef9a4db8e5ace48851905328",
+      "bytes": 18,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/sdk-lock.log"
+    },
+    "sdk-logs/compiler-install.log": {
+      "sha256": "33f51918c1db33a0ac8f93dbcb4784449c068285899b09a0cb1d7ba666cdb276",
+      "bytes": 85,
+      "originalPath": "/home/nzsn/Repos/Ariadne/target/bap-core-sdk/logs/compiler-install.log"
+    },
+    "sdk-logs/compiler.log": {
+      "sha256": "ea7c1e42ee8beb06f8ed38101de2485e3c82aae4e7fd21ec43b93f130ce87bbb",
+      "bytes": 647,
+      "originalPath": "/home/nzsn/Repos/Ariadne/target/bap-core-sdk/logs/compiler.log"
+    },
+    "sdk-logs/opam-init.log": {
+      "sha256": "6bc7f02a83ecc3aa61800e1782bc2a185ff7265a81911d5ac478e80b49a5f495",
+      "bytes": 415,
+      "originalPath": "/home/nzsn/Repos/Ariadne/target/bap-core-sdk/logs/opam-init.log"
+    },
+    "sdk-logs/sdk-export.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "originalPath": "/home/nzsn/Repos/Ariadne/target/bap-core-sdk/logs/sdk-export.log"
+    },
+    "sdk-logs/sdk-install.log": {
+      "sha256": "e737f1678a14aed678f7709dde790730512889edac8fff44cf5e91383ec7c4c8",
+      "bytes": 15,
+      "originalPath": "/home/nzsn/Repos/Ariadne/target/bap-core-sdk/logs/sdk-install.log"
+    },
+    "sdk-logs/sdk-list.log": {
+      "sha256": "28c267bb945daec213cd4e2aa1c9a7411f8e3ef0cc0148c3faf0e16626d8a961",
+      "bytes": 4087,
+      "originalPath": "/home/nzsn/Repos/Ariadne/target/bap-core-sdk/logs/sdk-list.log"
+    },
+    "sdk-logs/sdk-plan.log": {
+      "sha256": "fa0d877840c44e254536be8475828b52286014be789e3c84e3c51c515e5cf5ee",
+      "bytes": 143,
+      "originalPath": "/home/nzsn/Repos/Ariadne/target/bap-core-sdk/logs/sdk-plan.log"
+    },
+    "sdk-smoke.log": {
+      "sha256": "e6add11f83729a5a24f59ad95026a4e2d620de8b5c73350a216e5926850cefe8",
+      "bytes": 60,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/sdk-smoke.log"
+    },
+    "sequence--1.log": {
+      "sha256": "5c7037024403e9b4b02db37da71327a64e052f4d631e0f52ce1a17aaa8ce5867",
+      "bytes": 1357,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/sequence--1.log"
+    },
+    "sequence-0.log": {
+      "sha256": "5c7037024403e9b4b02db37da71327a64e052f4d631e0f52ce1a17aaa8ce5867",
+      "bytes": 1357,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/sequence-0.log"
+    },
+    "sequence-2.log": {
+      "sha256": "5c7037024403e9b4b02db37da71327a64e052f4d631e0f52ce1a17aaa8ce5867",
+      "bytes": 1357,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/sequence-2.log"
+    },
+    "sources/Cargo.lock": {
+      "sha256": "30a3fa3787d44fcbd6fd96a5681259c7201ae61932014ffe2bc22c6dfff6e67a",
+      "bytes": 25373,
+      "originalPath": "/home/nzsn/Repos/Ariadne/Cargo.lock"
+    },
+    "sources/Cargo.toml": {
+      "sha256": "32ac68856faa2c560f903c8e7e56d94aad5f5c55b51eeb735b8c5164c14289c0",
+      "bytes": 4039,
+      "originalPath": "/home/nzsn/Repos/Ariadne/Cargo.toml"
+    },
+    "sources/Specs/Ariadne.tla": {
+      "sha256": "26d3a783c43b0b86029bfbeb2e9f8bff7a56d3c7e8702493d7b502d21bf32019",
+      "bytes": 29274,
+      "originalPath": "/home/nzsn/Repos/Ariadne/Specs/Ariadne.tla"
+    },
+    "sources/Specs/AriadneMachineCommon.tla": {
+      "sha256": "32b60854773c7c14e06e449300a9757fefdfbfc763a0f58ef4574f1edd019947",
+      "bytes": 1828,
+      "originalPath": "/home/nzsn/Repos/Ariadne/Specs/AriadneMachineCommon.tla"
+    },
+    "sources/Specs/AriadneTypes.tla": {
+      "sha256": "3bfb36f3bf96adc324a9c714d34a12af708d0e7daaba91a5a1ae5f79f2820329",
+      "bytes": 1161,
+      "originalPath": "/home/nzsn/Repos/Ariadne/Specs/AriadneTypes.tla"
+    },
+    "sources/native/bap-core/README.md": {
+      "sha256": "1dd3abdbb368ccd347429b196e99d978b9bd2caa28a62e78c626fe4365da6b0d",
+      "bytes": 4094,
+      "originalPath": "/home/nzsn/Repos/Ariadne/native/bap-core/README.md"
+    },
+    "sources/native/bap-core/build-probe.sh": {
+      "sha256": "ae0483112a7106fe0cd2a119c51613b7f4316d6ba032309e8ec4fe1259e40590",
+      "bytes": 571,
+      "originalPath": "/home/nzsn/Repos/Ariadne/native/bap-core/build-probe.sh"
+    },
+    "sources/native/bap-core/build.py": {
+      "sha256": "015114a89ce4e674db944509d67a8b38924e935fa82b1a44f7061c738e6e789d",
+      "bytes": 2819,
+      "originalPath": "/home/nzsn/Repos/Ariadne/native/bap-core/build.py"
+    },
+    "sources/native/bap-core/build.sh": {
+      "sha256": "1545044d15e7812af316ac94f845014e4ecda42b8c334bfe2f871c1a564a62bf",
+      "bytes": 63,
+      "originalPath": "/home/nzsn/Repos/Ariadne/native/bap-core/build.sh"
+    },
+    "sources/native/bap-core/check-sdk.py": {
+      "sha256": "c98fca801c40ee4857b65cff4296edd25af8f6c3ee6a7a105ca79814ebc12683",
+      "bytes": 2480,
+      "originalPath": "/home/nzsn/Repos/Ariadne/native/bap-core/check-sdk.py"
+    },
+    "sources/native/bap-core/main.ml": {
+      "sha256": "30707516471c6285eb4f84e34d65f94e4646fc120a90712fb8d445d1800b3d6c",
+      "bytes": 3765,
+      "originalPath": "/home/nzsn/Repos/Ariadne/native/bap-core/main.ml"
+    },
+    "sources/native/bap-core/probe.cpp": {
+      "sha256": "0d484727a05e8760c451672b68d9f8357a0890457c830df806afd60ba4533441",
+      "bytes": 5068,
+      "originalPath": "/home/nzsn/Repos/Ariadne/native/bap-core/probe.cpp"
+    },
+    "sources/native/bap-core/project_state.ml": {
+      "sha256": "eb14e352a4708a64f5e9151f56dca7a3ca55a37959584c0899adcd7d8bf64e65",
+      "bytes": 2350,
+      "originalPath": "/home/nzsn/Repos/Ariadne/native/bap-core/project_state.ml"
+    },
+    "sources/native/bap-core/recovery.ml": {
+      "sha256": "c2d05c1546c23f86b2027fa28eb79e9eb84ac1e7615ce525ace34f08d434ea6a",
+      "bytes": 7869,
+      "originalPath": "/home/nzsn/Repos/Ariadne/native/bap-core/recovery.ml"
+    },
+    "sources/native/bap-core/sdk-packages.export": {
+      "sha256": "b82792ea34ed6ac9d2b4dc31ae5a6beda787af2a68066b1f17a65d9aef1a7d7c",
+      "bytes": 173614,
+      "originalPath": "/home/nzsn/Repos/Ariadne/native/bap-core/sdk-packages.export"
+    },
+    "sources/native/bap-core/sdk.lock.json": {
+      "sha256": "6f6bd3235ffcdc565ad4ab7e687d6238b85caceee0532f54c56570cbee61992f",
+      "bytes": 1357,
+      "originalPath": "/home/nzsn/Repos/Ariadne/native/bap-core/sdk.lock.json"
+    },
+    "sources/native/bap-core/sdk_smoke.ml": {
+      "sha256": "1a90ce4fb3f7175a3684e6af2f42e69dd0ef5eb0909ab1113910c34984195ded",
+      "bytes": 1010,
+      "originalPath": "/home/nzsn/Repos/Ariadne/native/bap-core/sdk_smoke.ml"
+    },
+    "sources/native/bap-core/setup-sdk.py": {
+      "sha256": "b8db28b043f9a42b04ff030093e8ef1f28c3aaac7b19f08674c814c43d7e0146",
+      "bytes": 6616,
+      "originalPath": "/home/nzsn/Repos/Ariadne/native/bap-core/setup-sdk.py"
+    },
+    "sources/src/bap/core_protocol.rs": {
+      "sha256": "cf10ae425bbd0ce76d1deaf96026254b42d67b19bbc59906e6c02b484b254bf9",
+      "bytes": 3437,
+      "originalPath": "/home/nzsn/Repos/Ariadne/src/bap/core_protocol.rs"
+    },
+    "sources/src/bap/core_session.rs": {
+      "sha256": "2158e5af61ed5da16e13b8f47d0b9c0cc46b40ceda4df732695508772ffab2df",
+      "bytes": 9540,
+      "originalPath": "/home/nzsn/Repos/Ariadne/src/bap/core_session.rs"
+    },
+    "sources/tests/bap/core_bootstrap.rs": {
+      "sha256": "de28e6f0cd91d8fa4249af4e1db6af1dc799ab6c226529a76a4425451d3d791f",
+      "bytes": 20332,
+      "originalPath": "/home/nzsn/Repos/Ariadne/tests/bap/core_bootstrap.rs"
+    },
+    "sources/tools/bap_ocaml_controls.py": {
+      "sha256": "0c7f09e7916c21d336bfad8698a73d43da69671a3a2fe9a284035f54a29022db",
+      "bytes": 5499,
+      "originalPath": "/home/nzsn/Repos/Ariadne/tools/bap_ocaml_controls.py"
+    },
+    "sources/tools/check_bap_ocaml.py": {
+      "sha256": "6a20bab4129bc6b34a6572ba7c2eb1225b53443a538a10991195bba2e10e819a",
+      "bytes": 12613,
+      "originalPath": "/home/nzsn/Repos/Ariadne/tools/check_bap_ocaml.py"
+    },
+    "sources/tools/check_bap_ocaml_mutations.py": {
+      "sha256": "3ec7a730b3098c90f3c878fcef6121d56a86a211c6f46591beec4b5b10397a57",
+      "bytes": 7080,
+      "originalPath": "/home/nzsn/Repos/Ariadne/tools/check_bap_ocaml_mutations.py"
+    },
+    "stage1/bap-clippy.log": {
+      "sha256": "a7638fb4d7621c013bc222ecb955a80b9750d084c226465bdf8209c629eb41ef",
+      "bytes": 136,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/bap-clippy.log"
+    },
+    "stage1/bap-format.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/bap-format.log"
+    },
+    "stage1/bap-tests-native.log": {
+      "sha256": "9ec9616ceb6ca53779f1fabadc3bf73c1481ce710e661a59a6f73c16dddaf5c3",
+      "bytes": 10220,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/bap-tests-native.log"
+    },
+    "stage1/bench-clippy.log": {
+      "sha256": "0d84922282d0fdaa2538a2e256025ce9d899ebc32a4dc509502585c8c67d3ec2",
+      "bytes": 136,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/bench-clippy.log"
+    },
+    "stage1/bench-format.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/bench-format.log"
+    },
+    "stage1/controlled-fixtures.log": {
+      "sha256": "f5df3e20ac3ee08fa3b8d4bbb374906ae1165a005b83bf7940b6e431f56227a4",
+      "bytes": 60,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/controlled-fixtures.log"
+    },
+    "stage1/input-bap-cli.log": {
+      "sha256": "48d92cd73f1be19ac2fcad0eb6c52587079050432199a12ac4251f3ff158a9db",
+      "bytes": 774,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/input-bap-cli.log"
+    },
+    "stage1/input-clippy.log": {
+      "sha256": "02c68289721d588371dc19c507647cfe869d0677d177cdc26f73be1af9ac97fc",
+      "bytes": 136,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/input-clippy.log"
+    },
+    "stage1/input-format.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/input-format.log"
+    },
+    "stage1/model-observer-build.log": {
+      "sha256": "0b8d1563a8108fcd7d0314723edf44237baa41abda234c237fb2bf8d9520da52",
+      "bytes": 127,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/model-observer-build.log"
+    },
+    "stage1/model.log": {
+      "sha256": "6975d803f85896a49ea7624788feda2983f22cfdec5f7393b412fd304046997b",
+      "bytes": 402,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/model.log"
+    },
+    "stage1/mutation.log": {
+      "sha256": "f3f09f37b14808d910f7b673f74562efb7e4b3df316a449181720e7c9b222c02",
+      "bytes": 950,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/mutation.log"
+    },
+    "stage1/native-build.log": {
+      "sha256": "68a24e9bfd8b14bdbafa20bd12a742fd9afbbde2b720cf68e7e3ac0828c2bcf7",
+      "bytes": 121,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/native-build.log"
+    },
+    "stage1/native-corpus.log": {
+      "sha256": "49044533ea9e3c43d8362edcf5d12d3b59fe0f10b3ac0b8f1311d5410fda02cf",
+      "bytes": 41,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/native-corpus.log"
+    },
+    "stage1/report.json": {
+      "sha256": "a6c8dc1bd504d3d18b4e3e5da143684444fc009be1d49f50b931e942f28d7876",
+      "bytes": 181225,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/report.json"
+    },
+    "stage1/stage-e.log": {
+      "sha256": "9e64ed4b179be73e8db2a3e4c1d7186ae3dbdae7321c197c9877bd9d176ee734",
+      "bytes": 397,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/stage-e.log"
+    },
+    "stage1/workload-runner-regressions.log": {
+      "sha256": "e561b544fb2cc592d2afb99a5fde024111c69bfaee20245820af7cad9bf23316",
+      "bytes": 159,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/workload-runner-regressions.log"
+    },
+    "stage1/workload.log": {
+      "sha256": "b908a9b3b6f93c0dfd2922466e7d7d74da9613e29fd8e99ca243205bd82ff051",
+      "bytes": 767,
+      "originalPath": "/tmp/ariadne-bap-acceptance-xd3rz41t/workload.log"
+    },
+    "wrong-family.log": {
+      "sha256": "f3481f6d84eb10078886c2aa1fb79877a3b18ef1d6ce3ca025e9929a8c2a52aa",
+      "bytes": 1355,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/wrong-family.log"
+    },
+    "wrong-query.log": {
+      "sha256": "7d1c8a92486959a93a75990c88947afee10a6557b89075c37c83766fd22d3b40",
+      "bytes": 1354,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/wrong-query.log"
+    },
+    "wrong-session.log": {
+      "sha256": "a323d60aada40be0abbc09bba21c88389f7c90657482e0318b0a70a976463ca9",
+      "bytes": 1356,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/wrong-session.log"
+    },
+    "wrong-snapshot.log": {
+      "sha256": "849f3ad30e0fe48b8d0afff9356971b9aa031bb296aa4aa3b9690e8450140fe7",
+      "bytes": 1357,
+      "originalPath": "/tmp/ariadne-bap-ocaml-4td6bgas/wrong-snapshot.log"
+    }
+  },
+  "verified": true
+}

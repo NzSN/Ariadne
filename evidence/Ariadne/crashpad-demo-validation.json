@@ -1,0 +1,1192 @@
+{
+  "schema": "ariadne.crashpad-demo-delivery/v1",
+  "recordedUtc": "2026-10-03T01:42:27.920630+00:00",
+  "integrationPassed": true,
+  "controlledWindowsCapturesPassed": true,
+  "i5aAnswerChecksPassed": true,
+  "controlledRealWindowsI5aAcceptancePassed": false,
+  "originalWindowsI4AcceptancePassed": false,
+  "forkCheckoutUnchanged": true,
+  "forkRevision": "7a884c25c84c46352fc6f16ef0a798ece2b77e84",
+  "sourceHashes": {
+    "Cargo.lock": "30a3fa3787d44fcbd6fd96a5681259c7201ae61932014ffe2bc22c6dfff6e67a",
+    "Cargo.toml": "6b0710ad1f26fde9ec6618eb36eecc01d40d824977542c04636d37ee48102ca6",
+    "native/bap/build.sh": "f72aded5f3f758d5d13aa3b931eb0674486df8d638c76e4e236464126943c748",
+    "native/bap/lift.cpp": "a5654006059aeefa83dbb9156853b2cec56bfdfadd9b8029700db333d54c9fba",
+    "native/bap/setup.py": "7881aa7e453cda81d3f1f9ca53593dcfbd36714c51100a2ccc433579a274b3c8",
+    "native/bap/toolchain.lock.json": "23dac7be3de321d80fb806b8a9ba4cb64a51f5c75c3c20f3ede77ea348de5382",
+    "native/llvm_mc/build.sh": "07eca5b34dc5409a2d5e7cc91ca69df701f10eb3690b17388ec75bc95f72ad4c",
+    "native/llvm_mc/check.sh": "66876c8bc92ca67b41e86067df5d3be9522f42c8f41106d87e141baabf7c6f25",
+    "native/llvm_mc/decode.cpp": "862fa9396102f9dfa8529b2718fc7663cefab9e3c1a5706710bb52b0fac043e5",
+    "src/bap/address.rs": "a6e5f8ed3534c9a41f57ca16f27b5b6fe62c2cc3d77f126c368e10cb78cc35d2",
+    "src/bap/ast.rs": "e03169007ec2469ad0a006faf044d956aeacf468a2ad19ce810e9153a52ccafb",
+    "src/bap/mod.rs": "c218655d66a86baed998ef95827c27835acc7f9a608e259982be0ec9fb0c7c76",
+    "src/bap/prepare.rs": "0d9d8d1792e541e2fa57ff00c83184a359bf7273e36b7ac30a363dac61de50be",
+    "src/bap/projection.rs": "836ee084c0885563d19b5f5e61b196a494929117194a8f30dadc96424bc59488",
+    "src/bap/session.rs": "3110b22b5ec1ca04cd3f911287ba6c5341b97e7767c0f4c27ca362fe64bc3123",
+    "src/bin/ariadne-bench.rs": "721a82ca3872f560ab5938f7b2d812cb3e607a86497f475063e2afdc90a19f9e",
+    "src/bin/ariadne-ir.rs": "8978b7619db676da6f91fa27ad9887efe8448ff1ab5a23290d9916b3bb74d7e9",
+    "src/bin/ariadne-minidump.rs": "92ac5a97b3e2a1e063258b37c5167e79fa798ddd932d62da61d7f5b4ed5f51c5",
+    "src/bin/ariadne-stage-e-mbt.rs": "101f85a0772b8233569cf6ad048de2904b09b079b5f0d5b75644782c7e4d9cea",
+    "src/bin/bap-model-case.rs": "c1a37696aa89b2c7fadc806d2f2a9dd3712168c27f9fb0419e65c7acf39f0869",
+    "src/bin/bap_minidump.rs": "3802656bc0e17d1b3c1fbc54f58a63c89610fb14ef090e41a516f6d51db1b31c",
+    "src/bin/compare_schedule.rs": "c3402aad331b4d01d19704610a5d7b3cddcfe716a930f244ad998f6419dc3c80",
+    "src/bin/i5a.rs": "942ad64ad1db35327491cf15ed7af6f6ea761ee3a0fa4374a008089cd0c9dc94",
+    "src/bin/investigation.rs": "084501b36516719466fbfed47ff2571dc1ea9d65960e98e3b04bbb681ecfba26",
+    "src/bin/real_minidump.rs": "77917f0c3b9d62dd158f45888faa525982a664fc2a41b019b4cdf41f7a082d7f",
+    "src/effects/address.rs": "8caba33c4d8010f11d588dd79ddf35b66025ee1d6f2389900632b831f18703a2",
+    "src/effects/forms.txt": "1185f64112ac129678d17edd61324c3badb02a63de4c60b1131e5ec0ff000581",
+    "src/effects/locations.rs": "b890a4895a4b48841b075d4c11e17ed3ba8cd63d5bd2f1f83d777df64df8c2f4",
+    "src/effects/rules.rs": "bfcfa0a4d8b9c301089faf81148cee24465ee9a606d17ca3edb0ff806b837dd9",
+    "src/effects.rs": "9b71e842f5554d8510f644a6ccb748fcb26e83431d52519c268e915d61cc0813",
+    "src/engine.rs": "d59a6874ac3add446fc4aa3c590745c06e0e763890db7a76de43f95af687d6b1",
+    "src/examples/inspect.rs": "d4cfc450f194fff6f186463f5279208e5618246befaabd977ba6b2b4eaf11d17",
+    "src/examples/render_minidump.rs": "acd053243b398c79241307f55346e1f7f7e0d11527ef164e3b22f1a70de28405",
+    "src/examples/render_outcome.rs": "53f7ab65a56484f880b822dc01edd6225e2d183bbf85029107e4b91eaccc8754",
+    "src/input/address_space.rs": "2f771d32ac92860dade746028937a562dda1751c4c3acb875734208af6b49341",
+    "src/input/fault_context.rs": "199f1a72194415f2c0d6458b229c552bb0016efc1569124c02991adb0b8ed171",
+    "src/input/investigation.rs": "b89d58c72b1ee2c43d36d1429625574dcbc72859bb6e181486da8b1d6295c0b4",
+    "src/input/materialize.rs": "94e2407854baadef4c5b1ffb10180b4ee9326269d977f9b2a9ad750a7feaaa84",
+    "src/input/minidump.rs": "b22270a422d8035aa430b5c4cb4c7f66d3e953b356821d9fb0d98278ebfd8d00",
+    "src/input/mod.rs": "9bb4f471b8b4e8cf4e6291b2ba5c89ba156fea7cb6781bc580b558a1c979376b",
+    "src/input/report.rs": "53dc1a3cae646541dcf6d38d02715938e5a78632b3689fecef8f28ccaa6bbbe0",
+    "src/investigation/explain.rs": "193dbb894b839aec632a92eff309622086e68b5cd07acc8ba8daa8fe3f19c678",
+    "src/investigation/fault_context.rs": "5a87d4a265c4b82fbe8dd0c7435da5934425244f45e4ef5df00d7a9d1afee2d9",
+    "src/investigation/mod.rs": "be535885694e608814f83e2a9c418f9dabcea66c913919672d3970069daca6ef",
+    "src/investigation/model.rs": "37484a661b15863d9fb18193c65af053372d180c0ffae74fbb43b7e61256c0a9",
+    "src/investigation/validate.rs": "ef9b6f7ac5d04d23d7bc4c060a4de5e6a9b8d36380e85b31e0d8393d2d222c71",
+    "src/investigation/zero_address.rs": "2972182bcaa66b15752137a0a5d824c3bad104dc997180a7f6d022b59704fd49",
+    "src/ir/mod.rs": "d55a9e7c4bddd15e724b0d85f9ecdfeeee104b93612e6f6f96bf6ca118fbb1e1",
+    "src/lib.rs": "213b5e199dcce176dc6f6c793afcaa8b36e7080683680ce87d635dd7627c48ab",
+    "src/llvm_ir.rs": "c5b173605bab60001b04b829258519412f94d92d0c4c558eee6f4d2618914e93",
+    "src/llvm_mc/prepare.rs": "ce51456d0f00bfe7bed7467fe5bb838108ff2b3a03fcc622a54905b4e47871cb",
+    "src/llvm_mc/protocol.rs": "cab3edab316a6d9ff2b6f3dea67fdd5f4f2213e4b481f7afa769cf22b2ee53b4",
+    "src/llvm_mc/reference.rs": "8bac03c52a91985b30c8223d6c85014684e9e8066de5934a1bb467da150ad859",
+    "src/llvm_mc.rs": "59bc6b524d52ded98718344ade9b8c3912c58fc84f9caab679044b976e6b2df9",
+    "src/machine_state.rs": "382078f91da9ae503be69e8485a5e5cdacdf5e2a676dce59848960349edfa3e8",
+    "src/mbt/core/adapter.rs": "557b20c2fc86359cf3af5092c29a07802367c12121ae0dfbcc034e1097431e25",
+    "src/mbt/core/fixtures.rs": "199e1bd17f5e5e4b6df28600b8057926c084b3f1e186f1952bea012d11d010d2",
+    "src/mbt/core/generated/.model-interface-generated.json": "f77c728d10519958aff05105c2720b9962c769463d312d2964cc5a54143100d8",
+    "src/mbt/core/generated/AriadneReplayMirror.generated.rs": "b7a17b9f982e9e438ae80113e12f5befc3b2cffbe98390e8b28d4825f708bc00",
+    "src/mbt/core/main.rs": "e7cf82de424d465be2a3bed8b4c05ba358c5e3930e3987fcb2ab3c2f1b8210f7",
+    "src/mbt/mod.rs": "7f99f426f881e058755b39fa1d58da835b3e287c49fe9fd94de0fd65a1442963",
+    "src/mbt/stage_e/fixtures_ir.rs": "5c48d728cc92408bc3ab5b999f4d7c3c7ae2398c2e3c3bca8be3c6de81d9bddd",
+    "src/mbt/stage_e/fixtures_machine.rs": "a754f1909b5466f242ec291378c45490f705af7b5fda7ecb0d413ef2a4a74bcb",
+    "src/mbt/stage_e/generated/llvm_ir/.model-interface-generated.json": "8373b0b06802f87fb6aa6e4226f39efe7b1d0f81231d3d65e8c9247658e8107c",
+    "src/mbt/stage_e/generated/llvm_ir/LLVMIRReplayMirror.generated.rs": "487a7fd700bfea3c4f371051f860413282f2aae4d4d8becba7dffde17fc4fc8a",
+    "src/mbt/stage_e/generated/machine_state/.model-interface-generated.json": "b6be710dae95efb990147883393c78737d7a4315298accfe8a12ae3258190720",
+    "src/mbt/stage_e/generated/machine_state/MachineStateReplayMirror.generated.rs": "72a26cc6c0096daf8af4593b9d50ebf8b9906323c4695843c64cd453aab064b2",
+    "src/mbt/stage_e/mod.rs": "8194071211ad28f8cd3492f672ea91bdb2fd5c57052486eccaf1261d500c821e",
+    "src/mbt/stage_e/ports.rs": "35ef3920f79b19379c0af73bfd0a7e336d1663c6d34f19b67dde8454fb379384",
+    "src/model.rs": "9bccc617340450535872b43515bceef16cfd60891cbd0ebc17349f88ce586f06",
+    "src/render.rs": "9d153e2653d7b6cd6e57ece17605f7e395bb2018498f43006750909f2e96fbbf",
+    "src/reports/codecs.rs": "a5b458104fe54a13a22355365e818d10c4580eef2bddcf9a1f671356defec1da",
+    "src/reports/investigation.rs": "88e689f8c1239c43ea90f17bd6129bfc1ef2c3863ad89f87f0792e6ed747bdce",
+    "src/reports/mod.rs": "a572fc8364d95ed200f9b0d036d3c2a0ce3df28de43891d7c8a6ea593db8ae1d",
+    "src/reports/render.rs": "95a44088a14d76aec1091125052fa6af815fdc754aa8e9ee68b605d9890370c8",
+    "src/reports/zero_address.rs": "078344c07f6087b02f20488a4c94a5c8670b9133dda3844364a4035eafea620d",
+    "tests/bap/disagreement.rs": "8330eca760ff48634e3195380cdbcab450c679eaed23276a368f8472fecfc7a5",
+    "tests/bap/fixtures/corpus.json": "e84e58f40d93a3c336cfac6d326613e7f5a038b1f09ed6b816dae909a87bcd92",
+    "tests/bap/fixtures/make_corpus.py": "092b6de6196a1f65cdc5d5ff2f07e8efb5e66a3ff2849d3eacc95984415f57d4",
+    "tests/bap/native.rs": "ee269b655615dc35b6de3e3d619c6589e154acdca49ac631d213d8c0556ecc12",
+    "tests/bap/protocol.rs": "3b9d94f4df2db8fc505f2ad19c1fba2ba7945ec9bf820cd849fab6fd14e90d1b",
+    "tests/common/mod.rs": "435b020cc3e77185229f8556ff14bd00e3b3aefa29b99600331300086f79fcb5",
+    "tests/conformance.rs": "7c8e71ff80a04bc57940f6a275ad0e9aabac5250cc28930f1de73f7e01f3f86c",
+    "tests/effects.rs": "cfbba958a85e5e5a4db22bd25ae5e984f244601e318b0ebf266dd3874068ba42",
+    "tests/effects_protocol.rs": "f90814bb527622a3c3dd0b5a6fb386d3d8d46dd954788aaa32670889f647704a",
+    "tests/fixtures/effects-v2.tsv": "6ef430507db79306d21e1dd70f9a7019a825d09e86d0dfbc3024f118c437eb30",
+    "tests/generated.rs": "11ab52556ba6ad2439e5ce22b94cde98e3a09f8b7ffd6e74815cc8a3dba92ff1",
+    "tests/input/bap_backend.rs": "72d4e2488ee62941bc8f80a12c23436f5e3d4eae56a0123006bdcb1285f44a31",
+    "tests/input/common/mod.rs": "af6b41728e969e022a5b72206ac0471982be367f84f693254f06b17ab3c26ea4",
+    "tests/input/fixtures/bap_precision_linux.dmp": "eca38ca3ef5abf5e3dde9ecc8c64463b476cdbe82fa370c4fa1cae8f2ca743c5",
+    "tests/input/fixtures/bap_precision_windows.dmp": "0cab1e7a03f41939260e873d599226dd3fdc03570f2bd52191517ce9977f5749",
+    "tests/input/fixtures/i5a/address-size.dmp": "e6607b99b5f4ee0c6992d12e9dc68e5d7875a5565bc0e1490ccd7b9f72d5d824",
+    "tests/input/fixtures/i5a/cross-low-range.dmp": "5d19184fcbe974b1aecfae5f4b12c79337be64b3a44e952006b1045a398b7b85",
+    "tests/input/fixtures/i5a/excluded-range.dmp": "d0d6ebb3219f488661b59b2609c9fbc27d1ceaf3433c3a2583413e67f091b82d",
+    "tests/input/fixtures/i5a/execute.dmp": "22358b3109e9ed71345762cf84251a2fb624acbdb4a47a3046c3d020b2d47a19",
+    "tests/input/fixtures/i5a/indexed-wrap.dmp": "1cb4f287c6847df81a3b0a5ecd72d812a0220837bdd456ae7621370349fa0b4e",
+    "tests/input/fixtures/i5a/last-access-byte.dmp": "a328aeaadae88355e45cff9ef6fb4144a7e947cae04dc3c645bc84f351f32623",
+    "tests/input/fixtures/i5a/linux.dmp": "95ccfc46b5253f22d6f17e3d1d3849076a187a067bb363976a6d2b4d47dfbf31",
+    "tests/input/fixtures/i5a/load32-zero.dmp": "9ffed128d3fc108ed28d2fc0175815341f06ce4fa78d5624b51d6bf7589853cb",
+    "tests/input/fixtures/i5a/load64-indexed.dmp": "93751687684804b72c0f5e9d7f1c3a0e445100a12316992a6239cf89280f3ce2",
+    "tests/input/fixtures/i5a/lock.dmp": "c4a98b0f9029d9c245de2916a1b01d3e483173427d625420f471c3dad7e5abd4",
+    "tests/input/fixtures/i5a/low-range-edge.dmp": "a72e41763f04640c3a208bdadca516af1919b9a21ec35b39c039681483ddf82c",
+    "tests/input/fixtures/i5a/manifest.json": "b8c8a62cdccbd25db9aa0ca773bc9c5e03adf6cb604614b96e0f4dbc0057ffc3",
+    "tests/input/fixtures/i5a/missing-control.dmp": "98d4eb75cb6bba00dc6c2311e2a416442a67803a5b6a42e176d685fa29cb4c84",
+    "tests/input/fixtures/i5a/missing-integer.dmp": "92441a239d6bc1af38e4bdcac59d322a2977e5639b128ba0b66703d5d42e978b",
+    "tests/input/fixtures/i5a/nested.dmp": "233b6f69c9a2a91c3c3baf8037b9182617ada7f642767536fe44ecc08e291176",
+    "tests/input/fixtures/i5a/no-context.dmp": "5a024c562c9a3934a456717d74fc3c7eb19e156a5d8192edf3b402c62c2f3d37",
+    "tests/input/fixtures/i5a/no-exception.dmp": "27efe3383452649f0412753364e883de3d9bf23f2ae530d68071a00ed360b53e",
+    "tests/input/fixtures/i5a/no-parameters.dmp": "53714272ed22e317a3048e79304c8fb11af39dc64afbb8fff42a5cd551368679",
+    "tests/input/fixtures/i5a/noncontinuable.dmp": "934c72863ef4f87c3807525dff8baf0a07f730e1d0ffd8fa48c5843f64f63d3e",
+    "tests/input/fixtures/i5a/nonzero-store.dmp": "4a01442f078b5a92b16b0f464acab16d71c089d5ab4ae5397ecbebf91955c42c",
+    "tests/input/fixtures/i5a/null-base-offset.dmp": "0c807aefed303ce0c4a1cf1106c56d298b1ba297b59fefc6fcc5df74bdf5c008",
+    "tests/input/fixtures/i5a/one-parameter.dmp": "4935beef304dc69ddd0fdcd5c93e50fc5eb207d82a5c770fe1d734886039d96f",
+    "tests/input/fixtures/i5a/past-access-span.dmp": "e3c3459f1a1ab9cd774b7f3817077063684a989af332a923243058babff39448",
+    "tests/input/fixtures/i5a/performance.json": "bab859d3046d3080a3047acdaf39460958a86b2f01e12872d648f0da8c206347",
+    "tests/input/fixtures/i5a/repeat.dmp": "df4160ecc295251949951fe54b241ee4a2939325cba1a75ceb2be41610d788c6",
+    "tests/input/fixtures/i5a/rip-control-only.dmp": "a88f46f3244a31c7bd086d0ea7889b76aaf3bb268508def6fe58149ddcf43de9",
+    "tests/input/fixtures/i5a/rip-load.dmp": "c5c0e3983f6959cbf2533f23a085a50eea920a2fff6258c23d180ae05483ce77",
+    "tests/input/fixtures/i5a/rip-zero.dmp": "847bcce0e805290a410e5fcc86acc82e3a78c0ae710dfadb4a4db465dc0087f7",
+    "tests/input/fixtures/i5a/rsp-control-only.dmp": "31d1523d3ad5a941c2b4b5f4935fa720cc5f65d3e931907af504282cfb6558e9",
+    "tests/input/fixtures/i5a/segment.dmp": "c6c66f471576e035aee5eab100fc459a4afc828160159cc0f7798f85d9f922ce",
+    "tests/input/fixtures/i5a/span-wrap.dmp": "689a5fedbb909f4d8a7f1d0f6ff79fc3d746a891e2190c78e8867e085b5bb1a1",
+    "tests/input/fixtures/i5a/stack.dmp": "a88d3ec41ec557911e90a0c4348efc7f0d635710ea6090150fd063f6f4a79f6a",
+    "tests/input/fixtures/i5a/store32-negative.dmp": "ddacbf8a7410ecc3567648d47a62742c8c679dc4e8cbd5dd18ec9316e8addc23",
+    "tests/input/fixtures/i5a/store64-zero.dmp": "6d09750701cdc4e413b0d61b6b583b7e7b8e30dac037b286429c867f9ef18ed6",
+    "tests/input/fixtures/i5a/thread-fallback.dmp": "e95596e738faa4bcf6234969773731daa44cf74010dbccedcd4b2ab0f8b9e892",
+    "tests/input/fixtures/i5a/unknown-flags.dmp": "2b70010f36395d62cfe988583a9a01044bab791f935e287e7706128ae704549c",
+    "tests/input/fixtures/i5a/wrong-context-architecture.dmp": "5fbb02fd221c63801ef72c2eb8315d1296244e61119430a90d15a25f8b13e59a",
+    "tests/input/fixtures/i5a/wrong-data-address.dmp": "2ebff2bdbe68ec022296258b1dcd8e768ed6f7d35a48ca18deec30410c1ad2a9",
+    "tests/input/fixtures/i5a/wrong-kind.dmp": "fa9db9d4a7cb681b1968454005c266b3e97f7386a7f786e78a39c3c54cbc67a7",
+    "tests/input/fixtures/i5a/wrong-operation.dmp": "5c7e1846f6c98b1bee2085e5a0729ed77712c92e90d6113e6a4ce078ff37a4fc",
+    "tests/input/fixtures/i5a/wrong-pc.dmp": "7429420146e1f3bb8e3ecb9b918ea524d053db825bcfb1a5da77602961949231",
+    "tests/input/fixtures/i5a/wrong-rip.dmp": "306563a84b3510b6e307c76e267b3712a80344248523be7b1c2aed86151adb89",
+    "tests/input/fixtures/i5a/zero-store.dmp": "41721f8bbdba551183ac0e7be571449f04ae852950090a542cbda9369d06cb27",
+    "tests/input/fixtures/make_bap.py": "2e39e6e81a485deda85d4f9534e246816a4cd876e05abb19847057ba5933655e",
+    "tests/input/fixtures/make_i5a.py": "b527e82438ddf7c38ede8d00faa0095234eaf7096cf0adaafd7bb4cc5e4c5648",
+    "tests/input/fixtures/make_stage_b.py": "8433813d2d31c7bc3ca1dd01e498f548817ed5ff2efd5eeed55532e3761bafa9",
+    "tests/input/fixtures/stage_b_linux.dmp": "7e71f4926e615789815299b98e3c3c725180ed4dce4065937fa533beb1018824",
+    "tests/input/fixtures/stage_b_windows.dmp": "f3a0407bff881356c0128e7587c03ea9f143dbd5fee59abbe8fc5edb75ad30bf",
+    "tests/input/i5a.rs": "92a1641f38de13c905b3d0fd2111d68b316425896b168fd0511c9170576db06a",
+    "tests/input/investigation.rs": "3bf867c3b82db7ee031d309d55e4a1096d852a283c3414ff2df97e99b32f9db2",
+    "tests/input/native.rs": "c6cc5b15b30eec20abd9d4a3574c1ca97f2f2c8bfe771ee0addc7db8656984ab",
+    "tests/input/reader.rs": "554bfdd9a56754653f74109c59e5a4d8848ed16ac5943e2e8d30c2c88528d3f7",
+    "tests/input/real_dumps.rs": "ca9bad206392cacd2c2ee829257c819db3be565cdeb87ff3223a0e2666dbdb5d",
+    "tests/input/stage_b.rs": "73fd6465862845ea82e5c4a5cf7dab332807271a0b836f0d3c0a2e585821032e",
+    "tests/input/stage_c.rs": "21930ad75c1188ec976d3fbadb2fc8d9cf3d69611c3a05407756fdfa3b0abfd5",
+    "tests/input/stage_e.rs": "9061596bb324d9ba709929b987b99164b5cf56e4427250f1056348a807b7673b",
+    "tests/investigation/explanations.rs": "1a655a416713a99035458ce3dfc0de172e13567708f347e0961bcde61598f923",
+    "tests/ir/cli.rs": "9dd4b1aa1c6c95fbbd877d6868c5c922425ce7fa3356640c3e38066cca72395d",
+    "tests/ir/fixtures/diamond.bc": "bec3302fd1aa62cc39df8dc7351efc9fe472ffa70496dd47a513ef506b2cade6",
+    "tests/ir/fixtures/diamond.ll": "3dc51d62e4448958beb960afb9eea9bc7ff9484ec79a617f3637c58ed2ca6dcf",
+    "tests/ir/native.rs": "53d676c811f9472e4fe461513f6dcb7708826b34f671bc88db05f6772ae1678e",
+    "tests/llvm_ir.rs": "ad5e89773f14dc651e54a5861ba6f66aa475493657bfffc1a3a7d0da05e6f424",
+    "tests/llvm_mc.rs": "bfa76f6371cb5b998e86caf27b0e59c80eb75226423798098be0357709651584",
+    "tests/machine_state.rs": "1ab11d807428256387e725add044afe548e6e181fb7bbe662bce9f3c4bd8f2d5",
+    "tests/mbt/core/unit.rs": "cfab2ff6b83d79148adab92e564b949a1f7c7745e49971930ae8516d64e1bb11",
+    "tests/mbt/stage_e/bindings.rs": "1c694a9c0bd79b641e698381a992665799ae573139a892dcd33368ef175337e4",
+    "tests/render.rs": "72d0cd571e7157b177063c6a91684bd955d0f78ad86f0176dbc72447a9e82117",
+    "tests/reports/contracts.rs": "beb63c3b169254c3170662a849fbf682068e086614590f5d4727f35c09166da1",
+    "tests/support/scanning_engine.rs": "0a96bfb4d76df3417951a1f628619f6ba866c4427fb22ef6a11d0d1e2469acf5",
+    "tools/check_i5a.py": "fa031fea9a06df8f5e73dc99931a639e9b9a79cae4a445037532709747b5800d",
+    "tools/check_i5a_mutations.py": "cf8330318bc7c426d7621892a932e29005fe547e5673c609c7478b272aba178a",
+    "tools/check_investigation.py": "5bbe84d6e4a78cf5603e34a32cf5104a5d90045c2ff13ebcdf0f1774aea03598",
+    "tools/check_investigation_mutations.py": "5c9b87e89ff0e3074cce59665235c3720ed248f9e539e96476955d10d5e483cc",
+    "tools/check_rust_layout.py": "b6e8ce311459f6b23fd575147a6faf7e59a08e304469ea91bb652c16c1af9df7",
+    "tools/compare_i5a_cli.py": "7d739ad93cb811944df4b65a48a9294da4fa1d197811d7d616e06aeb9840e618",
+    "tools/investigation_budget.py": "324ac166541210ca801642724aef34d208a746f42e334edf69498b87d25ab76e",
+    "tools/measure_i5a.py": "ccb67da5fdc63eded8374e3f57ad99e6df63cc3718663344761aeadb5fcfcd92",
+    "tools/measure_investigation.py": "51f8d4e15d4bb5f21c659e416e71a9ebcdaec4c21dbc14e58dcaa0013d284685",
+    "tools/rust_layout.py": "644d68374527616b561a318dd968f50819a283f5f3f3f62535b567e9e445f8c5",
+    "tools/test_investigation_budget.py": "c948412b312b7b0252dc9ef2c5776b6fc93389a6dbfaa4222c42847d87b426e4",
+    "native/crashpad-demo/build_windows.py": "07d70775efc6f2bab768d621f00c0f61a03b69b99b81ca9c20b86b1f324c7e49",
+    "native/crashpad-demo/standalone_ostream_operators.h": "799ecc9e7aeffe50cef3ad99611fe7374936a210a8ad2a0b3c3a715c4366a981",
+    "native/crashpad-demo/assess.py": "bdf7064e899a0d64caa73039b441cca9812fe66a0a2eae9ef3eb26a697ac7b8d",
+    "native/crashpad-demo/run_windows.py": "94590c18721ea97a1924d3e3bab7c3d202c706603a46411e5103fb53440daff8",
+    "native/crashpad-demo/fault.cc": "e8b44b53edcb544aac7d8944c02f86d780e6ad847597f60efa10e7eebabaa3ad",
+    "native/crashpad-demo/inspect_capture.py": "3cf2644391ab51c6634b9cf1a7b05436ce195247ef34aafc77e0a20941f43b37",
+    "native/crashpad-demo/prepare.py": "1b5d02ac0fd74c4b984c53c27bf32af4477ffb83bdfd4424384744d73b59c079",
+    "native/crashpad-demo/standalone_rand_util.h": "cafb1d07485fbd5ad528c4ee634a003eff8e6c016244664b3c8189969ac9afb5",
+    "native/crashpad-demo/standalone_logging_settings.h": "18c26f089e677a418d302c937336162fc8370f728827413d0a8cae2f0441df54",
+    "native/crashpad-demo/BUILD.gn": "455bce8906d9c67af082ff4938abecb61343263df3e99fa46f2a3b14908b20d5",
+    "native/crashpad-demo/crash_demo.cc": "714c7b24834c152d361e35aa06d3f8359ca606f2edb350a690673a9ed6bea992"
+  },
+  "sourcesStable": true,
+  "tools": {
+    "target/release/ariadne-minidump": "2f8eb1b72754fa56dfea2beb94d45f6b24e1d044c1fbdc063cb075322aef9a40",
+    "target/release/i5a": "a6ac3a8a390ca8c4fcb4ab713b855b0c9ad72f564db1956b5b01afc901a0e187",
+    "target/ariadne-llvm-mc": "45dad913d912aed489a99a150edc846389877ef72cb9218b46b8e2e555ad813c",
+    "target/ariadne-bap-lift": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+    "tmp/bap-setup/stable/usr/local/lib/libbap.so.2.5.0": "fb03843b065556c791e909b2cd7d1a8e2ef736ed461b6d8979da3f3fd5d6612a"
+  },
+  "toolsStable": true,
+  "build": {
+    "schema": "ariadne.crashpad-demo-windows-build/v1",
+    "passed": true,
+    "recordedUtc": "2026-10-03T01:29:57.369298+00:00",
+    "host": "Windows-11-10.0.26200-SP0",
+    "buildScriptSha256": "07d70775efc6f2bab768d621f00c0f61a03b69b99b81ca9c20b86b1f324c7e49",
+    "inputs": {
+      "sourceArchiveSha256": "f7fdf00d7fb54195ad28f20d2c0f1407ff5d7f8b7f8f4e4178b1cf08a6f4cb14",
+      "inputsSha256": "232702aebdf13139dbd7f0bb23548ac59639fdfb9b73fdc748f8c20a578bd9a2"
+    },
+    "crashpadRevision": "7a884c25c84c46352fc6f16ef0a798ece2b77e84",
+    "buildOnlyAdjustments": {
+      "reason": "Pinned helper probes ARM64 even for x64; this demo exposes only installed x86/x64 toolchains and rejects other Windows targets.",
+      "files": [
+        {
+          "path": "third_party/mini_chromium/mini_chromium/build/win_helper.py",
+          "upstreamSha256": "efab24ae793a93d65bafb0709d6524420281f01acbdce96c9bff156dd6528bc1",
+          "preparedSha256": "ab725417d6673c827dae6142514d7dff34cae231e48a25616c1dc894c1025cb2"
+        },
+        {
+          "path": "third_party/mini_chromium/mini_chromium/build/config/BUILD.gn",
+          "upstreamSha256": "c5df57bd9f3677db903de978bd5747348a823fe998fc18b4ca6f0b1a94085da5",
+          "preparedSha256": "86fb0f30f5e0f71f063790d342000ebc839a23174f82ba9b4965f0f6cf1ed6ee"
+        }
+      ],
+      "preparationScriptSha256": "1b5d02ac0fd74c4b984c53c27bf32af4477ffb83bdfd4424384744d73b59c079"
+    },
+    "architecture": "x64",
+    "compiler": "fork-pinned Clang with installed Windows SDK/MSVC libraries",
+    "windowsSdkVersions": [
+      "10.0.28000.0"
+    ],
+    "msvcLibraryVersions": [
+      "14.51.36231"
+    ],
+    "toolchainEnvironmentSha256": "3981d30e64a85802c467ed6aee99c7295dbc17d6a1afcdbc4ca7a498372d33d1",
+    "sourcesStable": true,
+    "stableGnRegeneration": true,
+    "unsupportedArm64Rejected": true,
+    "toolHashes": {
+      "gn.exe": "fa111680baf435088415ebedf4cdd41d07db8651c482d944c841e0f7d46ca580",
+      "ninja.exe": "5e25e8fa872204e831e19e1eb73dbb7802ca97d339b89b22ae2ec0d0fb5fb352",
+      "python.exe": "4942b86a6597e5aee0128daa00050ed79bc21f6e709a78eb19cbfeb0c2f39ac9",
+      "clang-cl.exe": "b79edbeef7a88a63ae8b76957baabf95250fdc4b646fa1a8ae4ab12d7ecdd0b6",
+      "lld-link.exe": "c19013d769d4538717c8a9b66f595b06d185acdd02ec027e8cd7cc2ddfb687a1"
+    },
+    "gnVersion": "2077 (5e19d2fb166f)",
+    "ninjaVersion": "1.8.2",
+    "clangVersion": "clang version 20.0.0git (https://chromium.googlesource.com/a/external/github.com/llvm/llvm-project 29ed6000d21edd1a88b2daad242e1f356cafbaca)\nTarget: x86_64-pc-windows-msvc\nThread model: posix\nInstalledDir: C:\\Users\\ayden\\AppData\\Local\\Temp\\ariadne-crashpad-demo-20261003-final\\source\\third_party\\windows\\clang\\win-amd64\\bin",
+    "binaryHashes": {
+      "ariadne_crash_demo.exe": "3cdecb008c12baedd9e57b7a27c086c14cf4ee4c6088a48997b1f5f57648b532",
+      "crashpad_handler.exe": "86ebe95f04d0cd3121da545f1ae3ab08363a2b29e554ef013395ef16af485acf",
+      "crashpad_database_util.exe": "e5594989c3669b859b319db9800f512e36b4d7e43739d56cb5845a2d058fc235"
+    },
+    "binaryDirectory": "C:\\Users\\ayden\\AppData\\Local\\Temp\\ariadne-crashpad-demo-20261003-final\\source\\out\\Release",
+    "scope": "Native Windows x64 build only; capture must be exercised separately."
+  },
+  "cases": {
+    "partial": {
+      "capture": {
+        "schema": "ariadne.crashpad-demo-capture/v1",
+        "recordedUtc": "2026-10-03T01:30:32.630914+00:00",
+        "captureCreated": true,
+        "host": "native Windows",
+        "mode": "partial",
+        "processId": 34464,
+        "exitCode": "0xc0000005",
+        "uploadsEnabled": false,
+        "buildRecordSha256": "cf61e7245582452ff17e376964e72654200d5a253675b139d1e35ae9462fe396",
+        "crashpadRevision": "7a884c25c84c46352fc6f16ef0a798ece2b77e84",
+        "handlerSha256": "86ebe95f04d0cd3121da545f1ae3ab08363a2b29e554ef013395ef16af485acf",
+        "dump": {
+          "path": "C:\\Users\\ayden\\AppData\\Local\\Temp\\ariadne-crashpad-demo-20261003-final\\captures\\partial\\capture.dmp",
+          "sha256": "5c5b29bb0d5aaf08bfef64eca8fffd217ac4fe692ae3498318786539b83305d6",
+          "bytes": 225408
+        },
+        "witnessSha256": "d6c22980119906d4901280b5a8483266593cfd80ef8a91b1a03c13d1379e18b7",
+        "executableSha256": "3cdecb008c12baedd9e57b7a27c086c14cf4ee4c6088a48997b1f5f57648b532",
+        "setupFailures": {
+          "missing-handler": {
+            "exitCode": 1,
+            "noWitness": true,
+            "noDump": true
+          },
+          "invalid-mode": {
+            "exitCode": 1,
+            "noWitness": true,
+            "noDump": true
+          }
+        },
+        "scope": "Owned demo crashed and Crashpad wrote a minidump. Raw exception/context/code verification is a separate check."
+      },
+      "inspection": {
+        "schema": "ariadne.crashpad-demo-capture-inspection/v1",
+        "passed": true,
+        "scope": "Independent raw inspection of one controlled Windows AMD64 null-write capture; not I5 release qualification.",
+        "inputs": {
+          "dump": {
+            "path": "/home/nzsn/Repos/Ariadne/tmp/crashpad-demo/20261003/partial/capture.dmp",
+            "size_bytes": 225408,
+            "sha256": "5c5b29bb0d5aaf08bfef64eca8fffd217ac4fe692ae3498318786539b83305d6"
+          },
+          "witness": {
+            "path": "/home/nzsn/Repos/Ariadne/tmp/crashpad-demo/20261003/partial/witness.json",
+            "size_bytes": 418,
+            "sha256": "d6c22980119906d4901280b5a8483266593cfd80ef8a91b1a03c13d1379e18b7"
+          },
+          "executable": {
+            "path": "/home/nzsn/Repos/Ariadne/tmp/crashpad-demo/20261003/partial/ariadne_crash_demo.exe",
+            "size_bytes": 424448,
+            "sha256": "3cdecb008c12baedd9e57b7a27c086c14cf4ee4c6088a48997b1f5f57648b532"
+          }
+        },
+        "system": {
+          "processor_architecture": 9,
+          "platform_id": 2,
+          "architecture": "AMD64",
+          "platform": "Windows NT"
+        },
+        "process_id": 34464,
+        "dump_header": {
+          "version": "0xa793",
+          "checksum": 0,
+          "timestamp": 1790991032,
+          "flags": "0x0",
+          "mini_dump_with_full_memory": false
+        },
+        "requested_dump_mode": "partial",
+        "memory_stream_types": [
+          "MemoryList"
+        ],
+        "stream_inventory": [
+          {
+            "type": 7,
+            "name": "SystemInfo",
+            "file_offset": 140,
+            "size_bytes": 56
+          },
+          {
+            "type": 15,
+            "name": "MiscInfo",
+            "file_offset": 212,
+            "size_bytes": 832
+          },
+          {
+            "type": 3,
+            "name": "ThreadList",
+            "file_offset": 1044,
+            "size_bytes": 196
+          },
+          {
+            "type": 6,
+            "name": "Exception",
+            "file_offset": 6176,
+            "size_bytes": 168
+          },
+          {
+            "type": 4,
+            "name": "ModuleList",
+            "file_offset": 7584,
+            "size_bytes": 1408
+          },
+          {
+            "type": 1129316353,
+            "name": "uninterpreted",
+            "file_offset": 10684,
+            "size_bytes": 64
+          },
+          {
+            "type": 16,
+            "name": "uninterpreted",
+            "file_offset": 10856,
+            "size_bytes": 8752
+          },
+          {
+            "type": 12,
+            "name": "uninterpreted",
+            "file_offset": 19608,
+            "size_bytes": 2768
+          },
+          {
+            "type": 5,
+            "name": "MemoryList",
+            "file_offset": 22712,
+            "size_bytes": 3524
+          }
+        ],
+        "exception": {
+          "thread_id": 22884,
+          "code": "0xc0000005",
+          "flags": 0,
+          "chain": "0x0",
+          "instruction_address": "0x7ff6d63c3ae0",
+          "parameter_count": 2,
+          "access_parameter": 1,
+          "data_address": "0x0",
+          "context": {
+            "file_offset": 6352,
+            "size_bytes": 1232,
+            "flags": "0x10001f",
+            "registers": {
+              "rax": "0x1",
+              "rcx": "0x0",
+              "rdx": "0x0",
+              "rbx": "0x1",
+              "rsp": "0xd35c53f948",
+              "rbp": "0x6c616974726170",
+              "rsi": "0xd35c53fb00",
+              "rdi": "0x0",
+              "r8": "0xd35c53f1e8",
+              "r9": "0x0",
+              "r10": "0x0",
+              "r11": "0x246",
+              "r12": "0xd35c53fa10",
+              "r13": "0x20f965440b0",
+              "r14": "0xd35c53f9d0",
+              "r15": "0xd35c53f9b0",
+              "rip": "0x7ff6d63c3ae0"
+            }
+          }
+        },
+        "module": {
+          "index": 0,
+          "name": "C:\\Users\\ayden\\AppData\\Local\\Temp\\ariadne-crashpad-demo-20261003-final\\source\\out\\Release\\ariadne_crash_demo.exe",
+          "base_address": "0x7ff6d63c0000",
+          "size_of_image": 458752,
+          "timestamp": 1790990996,
+          "checksum": 0,
+          "preferred_pe_image_base": "0x140000000",
+          "entry_rva": "0x3ae0",
+          "fault_rva": "0x3ae0"
+        },
+        "query": {
+          "entry_points": [
+            "0x7ff6d63c3ae0"
+          ],
+          "slice_seeds": [
+            "0x7ff6d63c3ae0"
+          ],
+          "fault_instruction": "0x7ff6d63c3ae0",
+          "memory_access_index": 0
+        },
+        "fault_instruction": {
+          "bytes_hex": "c70105000000",
+          "size_bytes": 6,
+          "reviewed_form": "mov dword ptr [rcx], 5",
+          "address_register": "rcx",
+          "captured_address_register_value": "0x0",
+          "access": "write",
+          "width_bytes": 4,
+          "store_value": 5
+        },
+        "code_capture": {
+          "address": "0x7ff6d63c3ae0",
+          "size_bytes": 256,
+          "bytes_hex": "c70105000000c3cccccccccccccccccc4889c80f57c00f110148c741100000000048c74118070000000f114120c3cccc564883ec204889ce488b49284885c9740de89a0c010048c7462800000000488b4e204885c9740de8e40a010048c7462000000000488b46184883f8087237488b0e488d1445020000004881fa00100000721e4c8b41f84883c1f84c29c14883f920732d4801c04883c0294889c24c89c1e89b84010048c746100000000048c746180700000066c70600004883c4205ec30f0bcccccccccccccccccccccccccccc4157415641554154565755534881ec080200000f29b424f00100004c894c24484c8944244048895424384889ce488b05",
+          "fully_captured": true,
+          "holes": [],
+          "conflicts": [],
+          "contributors": [
+            {
+              "source": "MemoryList",
+              "descriptor_index": 70,
+              "address": "0x7ff6d63c3ae0",
+              "size_bytes": 256,
+              "file_offset": 145008
+            }
+          ]
+        },
+        "pe_comparison": {
+          "section": ".text",
+          "rva": "0x3ae0",
+          "file_offset": 12000,
+          "size_bytes": 6,
+          "captured_bytes_hex": "c70105000000",
+          "pe_bytes_hex": "c70105000000",
+          "equal": true
+        },
+        "independently_observed_premises": [
+          "Windows NT AMD64 SystemInfo and valid exception CONTROL/INTEGER context",
+          "Raw access-violation record reports a write to zero with no exception chain",
+          "ExceptionAddress equals captured RIP; MiscInfo process ID equals witness process ID",
+          "Witness entry and fault site belong to the named demo module and bounded code extent",
+          "Module timestamp and SizeOfImage match the supplied PE; captured entry-to-fault bytes match its executable section",
+          "Entire declared code extent is captured with no holes or conflicting contributors",
+          "Reviewed six-byte immediate store uses captured RCX=0, width 4, value 5",
+          "Dump header and memory stream selection agree with the requested pinned-fork mode"
+        ],
+        "limits": [
+          "Witness is an independent caller declaration, not authenticated proof of executed history",
+          "Matching module metadata and compared code bytes do not prove whole-image identity",
+          "Only the two explicitly listed store encodings are interpreted; preceding instructions are byte-compared only",
+          "A full-memory flag and Memory64List do not establish completeness of all process memory",
+          "Local source hashes record inspector inputs; they do not prove executable build provenance"
+        ],
+        "local_source_files": {
+          "inspect_capture.py": {
+            "path": "/home/nzsn/Repos/Ariadne/native/crashpad-demo/inspect_capture.py",
+            "size_bytes": 27706,
+            "sha256": "3cf2644391ab51c6634b9cf1a7b05436ce195247ef34aafc77e0a20941f43b37"
+          },
+          "crash_demo.cc": {
+            "path": "/home/nzsn/Repos/Ariadne/native/crashpad-demo/crash_demo.cc",
+            "size_bytes": 9191,
+            "sha256": "714c7b24834c152d361e35aa06d3f8359ca606f2edb350a690673a9ed6bea992"
+          },
+          "fault.cc": {
+            "path": "/home/nzsn/Repos/Ariadne/native/crashpad-demo/fault.cc",
+            "size_bytes": 1122,
+            "sha256": "e8b44b53edcb544aac7d8944c02f86d780e6ad847597f60efa10e7eebabaa3ad"
+          }
+        }
+      },
+      "assessmentConclusion": "consistent_with_evidence",
+      "assessmentSha256": "d875a6c79f5e727925374e2558159c682b2fe2257a319a85226904fb06a88289",
+      "localDumpPath": "tmp/crashpad-demo/20261003/partial/capture.dmp"
+    },
+    "full": {
+      "capture": {
+        "schema": "ariadne.crashpad-demo-capture/v1",
+        "recordedUtc": "2026-10-03T01:31:16.375699+00:00",
+        "captureCreated": true,
+        "host": "native Windows",
+        "mode": "full",
+        "processId": 22504,
+        "exitCode": "0xc0000005",
+        "uploadsEnabled": false,
+        "buildRecordSha256": "cf61e7245582452ff17e376964e72654200d5a253675b139d1e35ae9462fe396",
+        "crashpadRevision": "7a884c25c84c46352fc6f16ef0a798ece2b77e84",
+        "handlerSha256": "86ebe95f04d0cd3121da545f1ae3ab08363a2b29e554ef013395ef16af485acf",
+        "dump": {
+          "path": "C:\\Users\\ayden\\AppData\\Local\\Temp\\ariadne-crashpad-demo-20261003-final\\captures\\full\\capture.dmp",
+          "sha256": "f588d0f574c09d17e6578a05d23299b9e827c1282af4b7c2a3c20af8362c2807",
+          "bytes": 15987422
+        },
+        "witnessSha256": "778b2efb31124671ee78da2c879b54916ff18911be00da30b91e41ef4b2d9246",
+        "executableSha256": "3cdecb008c12baedd9e57b7a27c086c14cf4ee4c6088a48997b1f5f57648b532",
+        "setupFailures": {},
+        "scope": "Owned demo crashed and Crashpad wrote a minidump. Raw exception/context/code verification is a separate check."
+      },
+      "inspection": {
+        "schema": "ariadne.crashpad-demo-capture-inspection/v1",
+        "passed": true,
+        "scope": "Independent raw inspection of one controlled Windows AMD64 null-write capture; not I5 release qualification.",
+        "inputs": {
+          "dump": {
+            "path": "/home/nzsn/Repos/Ariadne/tmp/crashpad-demo/20261003/full/capture.dmp",
+            "size_bytes": 15987422,
+            "sha256": "f588d0f574c09d17e6578a05d23299b9e827c1282af4b7c2a3c20af8362c2807"
+          },
+          "witness": {
+            "path": "/home/nzsn/Repos/Ariadne/tmp/crashpad-demo/20261003/full/witness.json",
+            "size_bytes": 415,
+            "sha256": "778b2efb31124671ee78da2c879b54916ff18911be00da30b91e41ef4b2d9246"
+          },
+          "executable": {
+            "path": "/home/nzsn/Repos/Ariadne/tmp/crashpad-demo/20261003/full/ariadne_crash_demo.exe",
+            "size_bytes": 424448,
+            "sha256": "3cdecb008c12baedd9e57b7a27c086c14cf4ee4c6088a48997b1f5f57648b532"
+          }
+        },
+        "system": {
+          "processor_architecture": 9,
+          "platform_id": 2,
+          "architecture": "AMD64",
+          "platform": "Windows NT"
+        },
+        "process_id": 22504,
+        "dump_header": {
+          "version": "0xa793",
+          "checksum": 0,
+          "timestamp": 1790991076,
+          "flags": "0x2",
+          "mini_dump_with_full_memory": true
+        },
+        "requested_dump_mode": "full",
+        "memory_stream_types": [
+          "Memory64List"
+        ],
+        "stream_inventory": [
+          {
+            "type": 7,
+            "name": "SystemInfo",
+            "file_offset": 140,
+            "size_bytes": 56
+          },
+          {
+            "type": 15,
+            "name": "MiscInfo",
+            "file_offset": 212,
+            "size_bytes": 832
+          },
+          {
+            "type": 3,
+            "name": "ThreadList",
+            "file_offset": 1044,
+            "size_bytes": 148
+          },
+          {
+            "type": 6,
+            "name": "Exception",
+            "file_offset": 4896,
+            "size_bytes": 168
+          },
+          {
+            "type": 4,
+            "name": "ModuleList",
+            "file_offset": 6304,
+            "size_bytes": 1300
+          },
+          {
+            "type": 1129316353,
+            "name": "uninterpreted",
+            "file_offset": 9192,
+            "size_bytes": 64
+          },
+          {
+            "type": 16,
+            "name": "uninterpreted",
+            "file_offset": 9364,
+            "size_bytes": 8224
+          },
+          {
+            "type": 12,
+            "name": "uninterpreted",
+            "file_offset": 17588,
+            "size_bytes": 2672
+          },
+          {
+            "type": 9,
+            "name": "Memory64List",
+            "file_offset": 57472,
+            "size_bytes": 11616
+          }
+        ],
+        "exception": {
+          "thread_id": 14256,
+          "code": "0xc0000005",
+          "flags": 0,
+          "chain": "0x0",
+          "instruction_address": "0x7ff6d63c3ae0",
+          "parameter_count": 2,
+          "access_parameter": 1,
+          "data_address": "0x0",
+          "context": {
+            "file_offset": 5072,
+            "size_bytes": 1232,
+            "flags": "0x10001f",
+            "registers": {
+              "rax": "0x1",
+              "rcx": "0x0",
+              "rdx": "0x0",
+              "rbx": "0x1",
+              "rsp": "0x743efaf568",
+              "rbp": "0x6c6c7566",
+              "rsi": "0x743efaf720",
+              "rdi": "0x0",
+              "r8": "0x743efaee08",
+              "r9": "0x0",
+              "r10": "0x0",
+              "r11": "0x246",
+              "r12": "0x743efaf630",
+              "r13": "0x203955ed880",
+              "r14": "0x743efaf5f0",
+              "r15": "0x743efaf5d0",
+              "rip": "0x7ff6d63c3ae0"
+            }
+          }
+        },
+        "module": {
+          "index": 0,
+          "name": "C:\\Users\\ayden\\AppData\\Local\\Temp\\ariadne-crashpad-demo-20261003-final\\source\\out\\Release\\ariadne_crash_demo.exe",
+          "base_address": "0x7ff6d63c0000",
+          "size_of_image": 458752,
+          "timestamp": 1790990996,
+          "checksum": 0,
+          "preferred_pe_image_base": "0x140000000",
+          "entry_rva": "0x3ae0",
+          "fault_rva": "0x3ae0"
+        },
+        "query": {
+          "entry_points": [
+            "0x7ff6d63c3ae0"
+          ],
+          "slice_seeds": [
+            "0x7ff6d63c3ae0"
+          ],
+          "fault_instruction": "0x7ff6d63c3ae0",
+          "memory_access_index": 0
+        },
+        "fault_instruction": {
+          "bytes_hex": "c70105000000",
+          "size_bytes": 6,
+          "reviewed_form": "mov dword ptr [rcx], 5",
+          "address_register": "rcx",
+          "captured_address_register_value": "0x0",
+          "access": "write",
+          "width_bytes": 4,
+          "store_value": 5
+        },
+        "code_capture": {
+          "address": "0x7ff6d63c3ae0",
+          "size_bytes": 256,
+          "bytes_hex": "c70105000000c3cccccccccccccccccc4889c80f57c00f110148c741100000000048c74118070000000f114120c3cccc564883ec204889ce488b49284885c9740de89a0c010048c7462800000000488b4e204885c9740de8e40a010048c7462000000000488b46184883f8087237488b0e488d1445020000004881fa00100000721e4c8b41f84883c1f84c29c14883f920732d4801c04883c0294889c24c89c1e89b84010048c746100000000048c746180700000066c70600004883c4205ec30f0bcccccccccccccccccccccccccccc4157415641554154565755534881ec080200000f29b424f00100004c894c24484c8944244048895424384889ce488b05",
+          "fully_captured": true,
+          "holes": [],
+          "conflicts": [],
+          "contributors": [
+            {
+              "source": "Memory64List",
+              "descriptor_index": 353,
+              "address": "0x7ff6d63c3ae0",
+              "size_bytes": 256,
+              "file_offset": 2167316
+            },
+            {
+              "source": "Memory64List",
+              "descriptor_index": 355,
+              "address": "0x7ff6d63c3ae0",
+              "size_bytes": 256,
+              "file_offset": 2464180
+            },
+            {
+              "source": "Memory64List",
+              "descriptor_index": 356,
+              "address": "0x7ff6d63c3ae0",
+              "size_bytes": 256,
+              "file_offset": 2464692
+            },
+            {
+              "source": "Memory64List",
+              "descriptor_index": 357,
+              "address": "0x7ff6d63c3ae0",
+              "size_bytes": 256,
+              "file_offset": 2465204
+            },
+            {
+              "source": "Memory64List",
+              "descriptor_index": 358,
+              "address": "0x7ff6d63c3ae0",
+              "size_bytes": 256,
+              "file_offset": 2465716
+            },
+            {
+              "source": "Memory64List",
+              "descriptor_index": 359,
+              "address": "0x7ff6d63c3ae0",
+              "size_bytes": 256,
+              "file_offset": 2466228
+            },
+            {
+              "source": "Memory64List",
+              "descriptor_index": 360,
+              "address": "0x7ff6d63c3ae0",
+              "size_bytes": 256,
+              "file_offset": 2466740
+            },
+            {
+              "source": "Memory64List",
+              "descriptor_index": 361,
+              "address": "0x7ff6d63c3ae0",
+              "size_bytes": 256,
+              "file_offset": 2467124
+            }
+          ]
+        },
+        "pe_comparison": {
+          "section": ".text",
+          "rva": "0x3ae0",
+          "file_offset": 12000,
+          "size_bytes": 6,
+          "captured_bytes_hex": "c70105000000",
+          "pe_bytes_hex": "c70105000000",
+          "equal": true
+        },
+        "independently_observed_premises": [
+          "Windows NT AMD64 SystemInfo and valid exception CONTROL/INTEGER context",
+          "Raw access-violation record reports a write to zero with no exception chain",
+          "ExceptionAddress equals captured RIP; MiscInfo process ID equals witness process ID",
+          "Witness entry and fault site belong to the named demo module and bounded code extent",
+          "Module timestamp and SizeOfImage match the supplied PE; captured entry-to-fault bytes match its executable section",
+          "Entire declared code extent is captured with no holes or conflicting contributors",
+          "Reviewed six-byte immediate store uses captured RCX=0, width 4, value 5",
+          "Dump header and memory stream selection agree with the requested pinned-fork mode"
+        ],
+        "limits": [
+          "Witness is an independent caller declaration, not authenticated proof of executed history",
+          "Matching module metadata and compared code bytes do not prove whole-image identity",
+          "Only the two explicitly listed store encodings are interpreted; preceding instructions are byte-compared only",
+          "A full-memory flag and Memory64List do not establish completeness of all process memory",
+          "Local source hashes record inspector inputs; they do not prove executable build provenance"
+        ],
+        "local_source_files": {
+          "inspect_capture.py": {
+            "path": "/home/nzsn/Repos/Ariadne/native/crashpad-demo/inspect_capture.py",
+            "size_bytes": 27706,
+            "sha256": "3cf2644391ab51c6634b9cf1a7b05436ce195247ef34aafc77e0a20941f43b37"
+          },
+          "crash_demo.cc": {
+            "path": "/home/nzsn/Repos/Ariadne/native/crashpad-demo/crash_demo.cc",
+            "size_bytes": 9191,
+            "sha256": "714c7b24834c152d361e35aa06d3f8359ca606f2edb350a690673a9ed6bea992"
+          },
+          "fault.cc": {
+            "path": "/home/nzsn/Repos/Ariadne/native/crashpad-demo/fault.cc",
+            "size_bytes": 1122,
+            "sha256": "e8b44b53edcb544aac7d8944c02f86d780e6ad847597f60efa10e7eebabaa3ad"
+          }
+        }
+      },
+      "assessmentConclusion": "consistent_with_evidence",
+      "assessmentSha256": "0baaba7ec005da377efcb4f9a46852f08eca82c61d5fb9cea44ce9934c108cdb",
+      "localDumpPath": "tmp/crashpad-demo/20261003/full/capture.dmp"
+    }
+  },
+  "assessmentMeasurements": {
+    "schema": "ariadne.crashpad-demo-assessment/v1",
+    "recordedUtc": "2026-10-03T01:36:06.185881+00:00",
+    "passed": false,
+    "controlledWindowsCasePassed": false,
+    "originalWindowsI4AcceptancePassed": false,
+    "sourceFixtureRecordSha256": "3fd91ebcd35e4b3edf35bea328fdba1f6ebb65dc6942f3de40d394a9024c9d57",
+    "sourceHashes": {
+      "Cargo.lock": "30a3fa3787d44fcbd6fd96a5681259c7201ae61932014ffe2bc22c6dfff6e67a",
+      "Cargo.toml": "6b0710ad1f26fde9ec6618eb36eecc01d40d824977542c04636d37ee48102ca6",
+      "native/bap/build.sh": "f72aded5f3f758d5d13aa3b931eb0674486df8d638c76e4e236464126943c748",
+      "native/bap/lift.cpp": "a5654006059aeefa83dbb9156853b2cec56bfdfadd9b8029700db333d54c9fba",
+      "native/bap/setup.py": "7881aa7e453cda81d3f1f9ca53593dcfbd36714c51100a2ccc433579a274b3c8",
+      "native/bap/toolchain.lock.json": "23dac7be3de321d80fb806b8a9ba4cb64a51f5c75c3c20f3ede77ea348de5382",
+      "native/llvm_mc/build.sh": "07eca5b34dc5409a2d5e7cc91ca69df701f10eb3690b17388ec75bc95f72ad4c",
+      "native/llvm_mc/check.sh": "66876c8bc92ca67b41e86067df5d3be9522f42c8f41106d87e141baabf7c6f25",
+      "native/llvm_mc/decode.cpp": "862fa9396102f9dfa8529b2718fc7663cefab9e3c1a5706710bb52b0fac043e5",
+      "src/bap/address.rs": "a6e5f8ed3534c9a41f57ca16f27b5b6fe62c2cc3d77f126c368e10cb78cc35d2",
+      "src/bap/ast.rs": "e03169007ec2469ad0a006faf044d956aeacf468a2ad19ce810e9153a52ccafb",
+      "src/bap/mod.rs": "c218655d66a86baed998ef95827c27835acc7f9a608e259982be0ec9fb0c7c76",
+      "src/bap/prepare.rs": "0d9d8d1792e541e2fa57ff00c83184a359bf7273e36b7ac30a363dac61de50be",
+      "src/bap/projection.rs": "836ee084c0885563d19b5f5e61b196a494929117194a8f30dadc96424bc59488",
+      "src/bap/session.rs": "3110b22b5ec1ca04cd3f911287ba6c5341b97e7767c0f4c27ca362fe64bc3123",
+      "src/bin/ariadne-bench.rs": "721a82ca3872f560ab5938f7b2d812cb3e607a86497f475063e2afdc90a19f9e",
+      "src/bin/ariadne-ir.rs": "8978b7619db676da6f91fa27ad9887efe8448ff1ab5a23290d9916b3bb74d7e9",
+      "src/bin/ariadne-minidump.rs": "92ac5a97b3e2a1e063258b37c5167e79fa798ddd932d62da61d7f5b4ed5f51c5",
+      "src/bin/ariadne-stage-e-mbt.rs": "101f85a0772b8233569cf6ad048de2904b09b079b5f0d5b75644782c7e4d9cea",
+      "src/bin/bap-model-case.rs": "c1a37696aa89b2c7fadc806d2f2a9dd3712168c27f9fb0419e65c7acf39f0869",
+      "src/bin/bap_minidump.rs": "3802656bc0e17d1b3c1fbc54f58a63c89610fb14ef090e41a516f6d51db1b31c",
+      "src/bin/compare_schedule.rs": "c3402aad331b4d01d19704610a5d7b3cddcfe716a930f244ad998f6419dc3c80",
+      "src/bin/i5a.rs": "942ad64ad1db35327491cf15ed7af6f6ea761ee3a0fa4374a008089cd0c9dc94",
+      "src/bin/investigation.rs": "084501b36516719466fbfed47ff2571dc1ea9d65960e98e3b04bbb681ecfba26",
+      "src/bin/real_minidump.rs": "77917f0c3b9d62dd158f45888faa525982a664fc2a41b019b4cdf41f7a082d7f",
+      "src/effects/address.rs": "8caba33c4d8010f11d588dd79ddf35b66025ee1d6f2389900632b831f18703a2",
+      "src/effects/forms.txt": "1185f64112ac129678d17edd61324c3badb02a63de4c60b1131e5ec0ff000581",
+      "src/effects/locations.rs": "b890a4895a4b48841b075d4c11e17ed3ba8cd63d5bd2f1f83d777df64df8c2f4",
+      "src/effects/rules.rs": "bfcfa0a4d8b9c301089faf81148cee24465ee9a606d17ca3edb0ff806b837dd9",
+      "src/effects.rs": "9b71e842f5554d8510f644a6ccb748fcb26e83431d52519c268e915d61cc0813",
+      "src/engine.rs": "d59a6874ac3add446fc4aa3c590745c06e0e763890db7a76de43f95af687d6b1",
+      "src/examples/inspect.rs": "d4cfc450f194fff6f186463f5279208e5618246befaabd977ba6b2b4eaf11d17",
+      "src/examples/render_minidump.rs": "acd053243b398c79241307f55346e1f7f7e0d11527ef164e3b22f1a70de28405",
+      "src/examples/render_outcome.rs": "53f7ab65a56484f880b822dc01edd6225e2d183bbf85029107e4b91eaccc8754",
+      "src/input/address_space.rs": "2f771d32ac92860dade746028937a562dda1751c4c3acb875734208af6b49341",
+      "src/input/fault_context.rs": "199f1a72194415f2c0d6458b229c552bb0016efc1569124c02991adb0b8ed171",
+      "src/input/investigation.rs": "b89d58c72b1ee2c43d36d1429625574dcbc72859bb6e181486da8b1d6295c0b4",
+      "src/input/materialize.rs": "94e2407854baadef4c5b1ffb10180b4ee9326269d977f9b2a9ad750a7feaaa84",
+      "src/input/minidump.rs": "b22270a422d8035aa430b5c4cb4c7f66d3e953b356821d9fb0d98278ebfd8d00",
+      "src/input/mod.rs": "9bb4f471b8b4e8cf4e6291b2ba5c89ba156fea7cb6781bc580b558a1c979376b",
+      "src/input/report.rs": "53dc1a3cae646541dcf6d38d02715938e5a78632b3689fecef8f28ccaa6bbbe0",
+      "src/investigation/explain.rs": "193dbb894b839aec632a92eff309622086e68b5cd07acc8ba8daa8fe3f19c678",
+      "src/investigation/fault_context.rs": "5a87d4a265c4b82fbe8dd0c7435da5934425244f45e4ef5df00d7a9d1afee2d9",
+      "src/investigation/mod.rs": "be535885694e608814f83e2a9c418f9dabcea66c913919672d3970069daca6ef",
+      "src/investigation/model.rs": "37484a661b15863d9fb18193c65af053372d180c0ffae74fbb43b7e61256c0a9",
+      "src/investigation/validate.rs": "ef9b6f7ac5d04d23d7bc4c060a4de5e6a9b8d36380e85b31e0d8393d2d222c71",
+      "src/investigation/zero_address.rs": "2972182bcaa66b15752137a0a5d824c3bad104dc997180a7f6d022b59704fd49",
+      "src/ir/mod.rs": "d55a9e7c4bddd15e724b0d85f9ecdfeeee104b93612e6f6f96bf6ca118fbb1e1",
+      "src/lib.rs": "213b5e199dcce176dc6f6c793afcaa8b36e7080683680ce87d635dd7627c48ab",
+      "src/llvm_ir.rs": "c5b173605bab60001b04b829258519412f94d92d0c4c558eee6f4d2618914e93",
+      "src/llvm_mc/prepare.rs": "ce51456d0f00bfe7bed7467fe5bb838108ff2b3a03fcc622a54905b4e47871cb",
+      "src/llvm_mc/protocol.rs": "cab3edab316a6d9ff2b6f3dea67fdd5f4f2213e4b481f7afa769cf22b2ee53b4",
+      "src/llvm_mc/reference.rs": "8bac03c52a91985b30c8223d6c85014684e9e8066de5934a1bb467da150ad859",
+      "src/llvm_mc.rs": "59bc6b524d52ded98718344ade9b8c3912c58fc84f9caab679044b976e6b2df9",
+      "src/machine_state.rs": "382078f91da9ae503be69e8485a5e5cdacdf5e2a676dce59848960349edfa3e8",
+      "src/mbt/core/adapter.rs": "557b20c2fc86359cf3af5092c29a07802367c12121ae0dfbcc034e1097431e25",
+      "src/mbt/core/fixtures.rs": "199e1bd17f5e5e4b6df28600b8057926c084b3f1e186f1952bea012d11d010d2",
+      "src/mbt/core/generated/.model-interface-generated.json": "f77c728d10519958aff05105c2720b9962c769463d312d2964cc5a54143100d8",
+      "src/mbt/core/generated/AriadneReplayMirror.generated.rs": "b7a17b9f982e9e438ae80113e12f5befc3b2cffbe98390e8b28d4825f708bc00",
+      "src/mbt/core/main.rs": "e7cf82de424d465be2a3bed8b4c05ba358c5e3930e3987fcb2ab3c2f1b8210f7",
+      "src/mbt/mod.rs": "7f99f426f881e058755b39fa1d58da835b3e287c49fe9fd94de0fd65a1442963",
+      "src/mbt/stage_e/fixtures_ir.rs": "5c48d728cc92408bc3ab5b999f4d7c3c7ae2398c2e3c3bca8be3c6de81d9bddd",
+      "src/mbt/stage_e/fixtures_machine.rs": "a754f1909b5466f242ec291378c45490f705af7b5fda7ecb0d413ef2a4a74bcb",
+      "src/mbt/stage_e/generated/llvm_ir/.model-interface-generated.json": "8373b0b06802f87fb6aa6e4226f39efe7b1d0f81231d3d65e8c9247658e8107c",
+      "src/mbt/stage_e/generated/llvm_ir/LLVMIRReplayMirror.generated.rs": "487a7fd700bfea3c4f371051f860413282f2aae4d4d8becba7dffde17fc4fc8a",
+      "src/mbt/stage_e/generated/machine_state/.model-interface-generated.json": "b6be710dae95efb990147883393c78737d7a4315298accfe8a12ae3258190720",
+      "src/mbt/stage_e/generated/machine_state/MachineStateReplayMirror.generated.rs": "72a26cc6c0096daf8af4593b9d50ebf8b9906323c4695843c64cd453aab064b2",
+      "src/mbt/stage_e/mod.rs": "8194071211ad28f8cd3492f672ea91bdb2fd5c57052486eccaf1261d500c821e",
+      "src/mbt/stage_e/ports.rs": "35ef3920f79b19379c0af73bfd0a7e336d1663c6d34f19b67dde8454fb379384",
+      "src/model.rs": "9bccc617340450535872b43515bceef16cfd60891cbd0ebc17349f88ce586f06",
+      "src/render.rs": "9d153e2653d7b6cd6e57ece17605f7e395bb2018498f43006750909f2e96fbbf",
+      "src/reports/codecs.rs": "a5b458104fe54a13a22355365e818d10c4580eef2bddcf9a1f671356defec1da",
+      "src/reports/investigation.rs": "88e689f8c1239c43ea90f17bd6129bfc1ef2c3863ad89f87f0792e6ed747bdce",
+      "src/reports/mod.rs": "a572fc8364d95ed200f9b0d036d3c2a0ce3df28de43891d7c8a6ea593db8ae1d",
+      "src/reports/render.rs": "95a44088a14d76aec1091125052fa6af815fdc754aa8e9ee68b605d9890370c8",
+      "src/reports/zero_address.rs": "078344c07f6087b02f20488a4c94a5c8670b9133dda3844364a4035eafea620d",
+      "tests/bap/disagreement.rs": "8330eca760ff48634e3195380cdbcab450c679eaed23276a368f8472fecfc7a5",
+      "tests/bap/fixtures/corpus.json": "e84e58f40d93a3c336cfac6d326613e7f5a038b1f09ed6b816dae909a87bcd92",
+      "tests/bap/fixtures/make_corpus.py": "092b6de6196a1f65cdc5d5ff2f07e8efb5e66a3ff2849d3eacc95984415f57d4",
+      "tests/bap/native.rs": "ee269b655615dc35b6de3e3d619c6589e154acdca49ac631d213d8c0556ecc12",
+      "tests/bap/protocol.rs": "3b9d94f4df2db8fc505f2ad19c1fba2ba7945ec9bf820cd849fab6fd14e90d1b",
+      "tests/common/mod.rs": "435b020cc3e77185229f8556ff14bd00e3b3aefa29b99600331300086f79fcb5",
+      "tests/conformance.rs": "7c8e71ff80a04bc57940f6a275ad0e9aabac5250cc28930f1de73f7e01f3f86c",
+      "tests/effects.rs": "cfbba958a85e5e5a4db22bd25ae5e984f244601e318b0ebf266dd3874068ba42",
+      "tests/effects_protocol.rs": "f90814bb527622a3c3dd0b5a6fb386d3d8d46dd954788aaa32670889f647704a",
+      "tests/fixtures/effects-v2.tsv": "6ef430507db79306d21e1dd70f9a7019a825d09e86d0dfbc3024f118c437eb30",
+      "tests/generated.rs": "11ab52556ba6ad2439e5ce22b94cde98e3a09f8b7ffd6e74815cc8a3dba92ff1",
+      "tests/input/bap_backend.rs": "72d4e2488ee62941bc8f80a12c23436f5e3d4eae56a0123006bdcb1285f44a31",
+      "tests/input/common/mod.rs": "af6b41728e969e022a5b72206ac0471982be367f84f693254f06b17ab3c26ea4",
+      "tests/input/fixtures/bap_precision_linux.dmp": "eca38ca3ef5abf5e3dde9ecc8c64463b476cdbe82fa370c4fa1cae8f2ca743c5",
+      "tests/input/fixtures/bap_precision_windows.dmp": "0cab1e7a03f41939260e873d599226dd3fdc03570f2bd52191517ce9977f5749",
+      "tests/input/fixtures/i5a/address-size.dmp": "e6607b99b5f4ee0c6992d12e9dc68e5d7875a5565bc0e1490ccd7b9f72d5d824",
+      "tests/input/fixtures/i5a/cross-low-range.dmp": "5d19184fcbe974b1aecfae5f4b12c79337be64b3a44e952006b1045a398b7b85",
+      "tests/input/fixtures/i5a/excluded-range.dmp": "d0d6ebb3219f488661b59b2609c9fbc27d1ceaf3433c3a2583413e67f091b82d",
+      "tests/input/fixtures/i5a/execute.dmp": "22358b3109e9ed71345762cf84251a2fb624acbdb4a47a3046c3d020b2d47a19",
+      "tests/input/fixtures/i5a/indexed-wrap.dmp": "1cb4f287c6847df81a3b0a5ecd72d812a0220837bdd456ae7621370349fa0b4e",
+      "tests/input/fixtures/i5a/last-access-byte.dmp": "a328aeaadae88355e45cff9ef6fb4144a7e947cae04dc3c645bc84f351f32623",
+      "tests/input/fixtures/i5a/linux.dmp": "95ccfc46b5253f22d6f17e3d1d3849076a187a067bb363976a6d2b4d47dfbf31",
+      "tests/input/fixtures/i5a/load32-zero.dmp": "9ffed128d3fc108ed28d2fc0175815341f06ce4fa78d5624b51d6bf7589853cb",
+      "tests/input/fixtures/i5a/load64-indexed.dmp": "93751687684804b72c0f5e9d7f1c3a0e445100a12316992a6239cf89280f3ce2",
+      "tests/input/fixtures/i5a/lock.dmp": "c4a98b0f9029d9c245de2916a1b01d3e483173427d625420f471c3dad7e5abd4",
+      "tests/input/fixtures/i5a/low-range-edge.dmp": "a72e41763f04640c3a208bdadca516af1919b9a21ec35b39c039681483ddf82c",
+      "tests/input/fixtures/i5a/manifest.json": "b8c8a62cdccbd25db9aa0ca773bc9c5e03adf6cb604614b96e0f4dbc0057ffc3",
+      "tests/input/fixtures/i5a/missing-control.dmp": "98d4eb75cb6bba00dc6c2311e2a416442a67803a5b6a42e176d685fa29cb4c84",
+      "tests/input/fixtures/i5a/missing-integer.dmp": "92441a239d6bc1af38e4bdcac59d322a2977e5639b128ba0b66703d5d42e978b",
+      "tests/input/fixtures/i5a/nested.dmp": "233b6f69c9a2a91c3c3baf8037b9182617ada7f642767536fe44ecc08e291176",
+      "tests/input/fixtures/i5a/no-context.dmp": "5a024c562c9a3934a456717d74fc3c7eb19e156a5d8192edf3b402c62c2f3d37",
+      "tests/input/fixtures/i5a/no-exception.dmp": "27efe3383452649f0412753364e883de3d9bf23f2ae530d68071a00ed360b53e",
+      "tests/input/fixtures/i5a/no-parameters.dmp": "53714272ed22e317a3048e79304c8fb11af39dc64afbb8fff42a5cd551368679",
+      "tests/input/fixtures/i5a/noncontinuable.dmp": "934c72863ef4f87c3807525dff8baf0a07f730e1d0ffd8fa48c5843f64f63d3e",
+      "tests/input/fixtures/i5a/nonzero-store.dmp": "4a01442f078b5a92b16b0f464acab16d71c089d5ab4ae5397ecbebf91955c42c",
+      "tests/input/fixtures/i5a/null-base-offset.dmp": "0c807aefed303ce0c4a1cf1106c56d298b1ba297b59fefc6fcc5df74bdf5c008",
+      "tests/input/fixtures/i5a/one-parameter.dmp": "4935beef304dc69ddd0fdcd5c93e50fc5eb207d82a5c770fe1d734886039d96f",
+      "tests/input/fixtures/i5a/past-access-span.dmp": "e3c3459f1a1ab9cd774b7f3817077063684a989af332a923243058babff39448",
+      "tests/input/fixtures/i5a/performance.json": "bab859d3046d3080a3047acdaf39460958a86b2f01e12872d648f0da8c206347",
+      "tests/input/fixtures/i5a/repeat.dmp": "df4160ecc295251949951fe54b241ee4a2939325cba1a75ceb2be41610d788c6",
+      "tests/input/fixtures/i5a/rip-control-only.dmp": "a88f46f3244a31c7bd086d0ea7889b76aaf3bb268508def6fe58149ddcf43de9",
+      "tests/input/fixtures/i5a/rip-load.dmp": "c5c0e3983f6959cbf2533f23a085a50eea920a2fff6258c23d180ae05483ce77",
+      "tests/input/fixtures/i5a/rip-zero.dmp": "847bcce0e805290a410e5fcc86acc82e3a78c0ae710dfadb4a4db465dc0087f7",
+      "tests/input/fixtures/i5a/rsp-control-only.dmp": "31d1523d3ad5a941c2b4b5f4935fa720cc5f65d3e931907af504282cfb6558e9",
+      "tests/input/fixtures/i5a/segment.dmp": "c6c66f471576e035aee5eab100fc459a4afc828160159cc0f7798f85d9f922ce",
+      "tests/input/fixtures/i5a/span-wrap.dmp": "689a5fedbb909f4d8a7f1d0f6ff79fc3d746a891e2190c78e8867e085b5bb1a1",
+      "tests/input/fixtures/i5a/stack.dmp": "a88d3ec41ec557911e90a0c4348efc7f0d635710ea6090150fd063f6f4a79f6a",
+      "tests/input/fixtures/i5a/store32-negative.dmp": "ddacbf8a7410ecc3567648d47a62742c8c679dc4e8cbd5dd18ec9316e8addc23",
+      "tests/input/fixtures/i5a/store64-zero.dmp": "6d09750701cdc4e413b0d61b6b583b7e7b8e30dac037b286429c867f9ef18ed6",
+      "tests/input/fixtures/i5a/thread-fallback.dmp": "e95596e738faa4bcf6234969773731daa44cf74010dbccedcd4b2ab0f8b9e892",
+      "tests/input/fixtures/i5a/unknown-flags.dmp": "2b70010f36395d62cfe988583a9a01044bab791f935e287e7706128ae704549c",
+      "tests/input/fixtures/i5a/wrong-context-architecture.dmp": "5fbb02fd221c63801ef72c2eb8315d1296244e61119430a90d15a25f8b13e59a",
+      "tests/input/fixtures/i5a/wrong-data-address.dmp": "2ebff2bdbe68ec022296258b1dcd8e768ed6f7d35a48ca18deec30410c1ad2a9",
+      "tests/input/fixtures/i5a/wrong-kind.dmp": "fa9db9d4a7cb681b1968454005c266b3e97f7386a7f786e78a39c3c54cbc67a7",
+      "tests/input/fixtures/i5a/wrong-operation.dmp": "5c7e1846f6c98b1bee2085e5a0729ed77712c92e90d6113e6a4ce078ff37a4fc",
+      "tests/input/fixtures/i5a/wrong-pc.dmp": "7429420146e1f3bb8e3ecb9b918ea524d053db825bcfb1a5da77602961949231",
+      "tests/input/fixtures/i5a/wrong-rip.dmp": "306563a84b3510b6e307c76e267b3712a80344248523be7b1c2aed86151adb89",
+      "tests/input/fixtures/i5a/zero-store.dmp": "41721f8bbdba551183ac0e7be571449f04ae852950090a542cbda9369d06cb27",
+      "tests/input/fixtures/make_bap.py": "2e39e6e81a485deda85d4f9534e246816a4cd876e05abb19847057ba5933655e",
+      "tests/input/fixtures/make_i5a.py": "b527e82438ddf7c38ede8d00faa0095234eaf7096cf0adaafd7bb4cc5e4c5648",
+      "tests/input/fixtures/make_stage_b.py": "8433813d2d31c7bc3ca1dd01e498f548817ed5ff2efd5eeed55532e3761bafa9",
+      "tests/input/fixtures/stage_b_linux.dmp": "7e71f4926e615789815299b98e3c3c725180ed4dce4065937fa533beb1018824",
+      "tests/input/fixtures/stage_b_windows.dmp": "f3a0407bff881356c0128e7587c03ea9f143dbd5fee59abbe8fc5edb75ad30bf",
+      "tests/input/i5a.rs": "92a1641f38de13c905b3d0fd2111d68b316425896b168fd0511c9170576db06a",
+      "tests/input/investigation.rs": "3bf867c3b82db7ee031d309d55e4a1096d852a283c3414ff2df97e99b32f9db2",
+      "tests/input/native.rs": "c6cc5b15b30eec20abd9d4a3574c1ca97f2f2c8bfe771ee0addc7db8656984ab",
+      "tests/input/reader.rs": "554bfdd9a56754653f74109c59e5a4d8848ed16ac5943e2e8d30c2c88528d3f7",
+      "tests/input/real_dumps.rs": "ca9bad206392cacd2c2ee829257c819db3be565cdeb87ff3223a0e2666dbdb5d",
+      "tests/input/stage_b.rs": "73fd6465862845ea82e5c4a5cf7dab332807271a0b836f0d3c0a2e585821032e",
+      "tests/input/stage_c.rs": "21930ad75c1188ec976d3fbadb2fc8d9cf3d69611c3a05407756fdfa3b0abfd5",
+      "tests/input/stage_e.rs": "9061596bb324d9ba709929b987b99164b5cf56e4427250f1056348a807b7673b",
+      "tests/investigation/explanations.rs": "1a655a416713a99035458ce3dfc0de172e13567708f347e0961bcde61598f923",
+      "tests/ir/cli.rs": "9dd4b1aa1c6c95fbbd877d6868c5c922425ce7fa3356640c3e38066cca72395d",
+      "tests/ir/fixtures/diamond.bc": "bec3302fd1aa62cc39df8dc7351efc9fe472ffa70496dd47a513ef506b2cade6",
+      "tests/ir/fixtures/diamond.ll": "3dc51d62e4448958beb960afb9eea9bc7ff9484ec79a617f3637c58ed2ca6dcf",
+      "tests/ir/native.rs": "53d676c811f9472e4fe461513f6dcb7708826b34f671bc88db05f6772ae1678e",
+      "tests/llvm_ir.rs": "ad5e89773f14dc651e54a5861ba6f66aa475493657bfffc1a3a7d0da05e6f424",
+      "tests/llvm_mc.rs": "bfa76f6371cb5b998e86caf27b0e59c80eb75226423798098be0357709651584",
+      "tests/machine_state.rs": "1ab11d807428256387e725add044afe548e6e181fb7bbe662bce9f3c4bd8f2d5",
+      "tests/mbt/core/unit.rs": "cfab2ff6b83d79148adab92e564b949a1f7c7745e49971930ae8516d64e1bb11",
+      "tests/mbt/stage_e/bindings.rs": "1c694a9c0bd79b641e698381a992665799ae573139a892dcd33368ef175337e4",
+      "tests/render.rs": "72d0cd571e7157b177063c6a91684bd955d0f78ad86f0176dbc72447a9e82117",
+      "tests/reports/contracts.rs": "beb63c3b169254c3170662a849fbf682068e086614590f5d4727f35c09166da1",
+      "tests/support/scanning_engine.rs": "0a96bfb4d76df3417951a1f628619f6ba866c4427fb22ef6a11d0d1e2469acf5",
+      "tools/check_i5a.py": "fa031fea9a06df8f5e73dc99931a639e9b9a79cae4a445037532709747b5800d",
+      "tools/check_i5a_mutations.py": "cf8330318bc7c426d7621892a932e29005fe547e5673c609c7478b272aba178a",
+      "tools/check_investigation.py": "5bbe84d6e4a78cf5603e34a32cf5104a5d90045c2ff13ebcdf0f1774aea03598",
+      "tools/check_investigation_mutations.py": "5c9b87e89ff0e3074cce59665235c3720ed248f9e539e96476955d10d5e483cc",
+      "tools/check_rust_layout.py": "b6e8ce311459f6b23fd575147a6faf7e59a08e304469ea91bb652c16c1af9df7",
+      "tools/compare_i5a_cli.py": "7d739ad93cb811944df4b65a48a9294da4fa1d197811d7d616e06aeb9840e618",
+      "tools/investigation_budget.py": "324ac166541210ca801642724aef34d208a746f42e334edf69498b87d25ab76e",
+      "tools/measure_i5a.py": "ccb67da5fdc63eded8374e3f57ad99e6df63cc3718663344761aeadb5fcfcd92",
+      "tools/measure_investigation.py": "51f8d4e15d4bb5f21c659e416e71a9ebcdaec4c21dbc14e58dcaa0013d284685",
+      "tools/rust_layout.py": "644d68374527616b561a318dd968f50819a283f5f3f3f62535b567e9e445f8c5",
+      "tools/test_investigation_budget.py": "c948412b312b7b0252dc9ef2c5776b6fc93389a6dbfaa4222c42847d87b426e4",
+      "native/crashpad-demo/build_windows.py": "07d70775efc6f2bab768d621f00c0f61a03b69b99b81ca9c20b86b1f324c7e49",
+      "native/crashpad-demo/standalone_ostream_operators.h": "799ecc9e7aeffe50cef3ad99611fe7374936a210a8ad2a0b3c3a715c4366a981",
+      "native/crashpad-demo/assess.py": "bdf7064e899a0d64caa73039b441cca9812fe66a0a2eae9ef3eb26a697ac7b8d",
+      "native/crashpad-demo/run_windows.py": "94590c18721ea97a1924d3e3bab7c3d202c706603a46411e5103fb53440daff8",
+      "native/crashpad-demo/fault.cc": "e8b44b53edcb544aac7d8944c02f86d780e6ad847597f60efa10e7eebabaa3ad",
+      "native/crashpad-demo/inspect_capture.py": "3cf2644391ab51c6634b9cf1a7b05436ce195247ef34aafc77e0a20941f43b37",
+      "native/crashpad-demo/prepare.py": "1b5d02ac0fd74c4b984c53c27bf32af4477ffb83bdfd4424384744d73b59c079",
+      "native/crashpad-demo/standalone_rand_util.h": "cafb1d07485fbd5ad528c4ee634a003eff8e6c016244664b3c8189969ac9afb5",
+      "native/crashpad-demo/standalone_logging_settings.h": "18c26f089e677a418d302c937336162fc8370f728827413d0a8cae2f0441df54",
+      "native/crashpad-demo/BUILD.gn": "455bce8906d9c67af082ff4938abecb61343263df3e99fa46f2a3b14908b20d5",
+      "native/crashpad-demo/crash_demo.cc": "714c7b24834c152d361e35aa06d3f8359ca606f2edb350a690673a9ed6bea992"
+    },
+    "sourcesStable": true,
+    "tools": {
+      "target/release/ariadne-minidump": "2f8eb1b72754fa56dfea2beb94d45f6b24e1d044c1fbdc063cb075322aef9a40",
+      "target/release/i5a": "a6ac3a8a390ca8c4fcb4ab713b855b0c9ad72f564db1956b5b01afc901a0e187",
+      "target/ariadne-llvm-mc": "45dad913d912aed489a99a150edc846389877ef72cb9218b46b8e2e555ad813c",
+      "target/ariadne-bap-lift": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+      "tmp/bap-setup/stable/usr/local/lib/libbap.so.2.5.0": "fb03843b065556c791e909b2cd7d1a8e2ef736ed461b6d8979da3f3fd5d6612a"
+    },
+    "toolsStable": true,
+    "performanceCriteria": {
+      "warmups": 1,
+      "repeats": 5,
+      "phaseMedianBudgetMs": 10,
+      "cliMedianBudgetMs": 1500
+    },
+    "records": [
+      {
+        "capture": "partial",
+        "dumpSha256": "5c5b29bb0d5aaf08bfef64eca8fffd217ac4fe692ae3498318786539b83305d6",
+        "inspectionSha256": "e95f180a8ad09d62a8bb9e117747fa0c19f9e139fd4a9b79e3a59201c377f00a",
+        "captureRecordSha256": "36f7d17b421c371a9029482fbcfce50c7ddc94e1d6cf16ffe5d424e05d602334",
+        "query": {
+          "entry_points": [
+            "0x7ff6d63c3ae0"
+          ],
+          "slice_seeds": [
+            "0x7ff6d63c3ae0"
+          ],
+          "fault_instruction": "0x7ff6d63c3ae0",
+          "memory_access_index": 0
+        },
+        "phaseSamplesMs": [
+          1.59506,
+          5.786843,
+          1.695101,
+          5.806849,
+          1.719594
+        ],
+        "phaseMedianMs": 1.719594,
+        "measurements": {
+          "base": {
+            "samplesMs": [
+              1902.805572,
+              2032.891357,
+              1730.096769,
+              1791.757958,
+              2054.159726
+            ],
+            "medianMs": 1902.805572,
+            "minMs": 1730.096769,
+            "maxMs": 2054.159726,
+            "outputHashes": {
+              "report.json": "a8c82a53d9ac0435c564ba8a6a754a901f45de20af6e4f53ebf330ce846ca69e",
+              "report.txt": "38caa6eb1e065388d4ef711d384c7f74498f69a42d2f002c039b96d0896a37bd",
+              "report.dot": "3604a2c888af79a4cc01e833159283999b3ab55236a31f737ac6807fb7e48c04"
+            }
+          },
+          "assessment": {
+            "samplesMs": [
+              1764.8408,
+              1742.791034,
+              1835.757496,
+              1820.298972,
+              1853.440931
+            ],
+            "medianMs": 1820.298972,
+            "minMs": 1742.791034,
+            "maxMs": 1853.440931,
+            "outputHashes": {
+              "zero-address-assessment.json": "d875a6c79f5e727925374e2558159c682b2fe2257a319a85226904fb06a88289",
+              "report.json": "a8c82a53d9ac0435c564ba8a6a754a901f45de20af6e4f53ebf330ce846ca69e",
+              "report.txt": "38caa6eb1e065388d4ef711d384c7f74498f69a42d2f002c039b96d0896a37bd",
+              "zero-address-assessment.dot": "0ed98b47f4dc8e82b2771c41b2e2dd5facf13dd5cb24824f1d24abe4e7d76fc3",
+              "zero-address-assessment.txt": "db16e3ef5a8a5e117e5617628085ba3302c5d3ee4d41056bb4bf8497c95b2ce9",
+              "report.dot": "3604a2c888af79a4cc01e833159283999b3ab55236a31f737ac6807fb7e48c04"
+            }
+          }
+        },
+        "passed": false
+      },
+      {
+        "capture": "full",
+        "dumpSha256": "f588d0f574c09d17e6578a05d23299b9e827c1282af4b7c2a3c20af8362c2807",
+        "inspectionSha256": "8725aa5873f413615bc9edc911cc0eadaa06a59e92d9de5d85368f8f56aa1782",
+        "captureRecordSha256": "66fcf3cd5e51a96a2aa172b93a6e47aca5734fb4a03d6ba5c502ff8e24935e79",
+        "query": {
+          "entry_points": [
+            "0x7ff6d63c3ae0"
+          ],
+          "slice_seeds": [
+            "0x7ff6d63c3ae0"
+          ],
+          "fault_instruction": "0x7ff6d63c3ae0",
+          "memory_access_index": 0
+        },
+        "phaseSamplesMs": [
+          1.624515,
+          5.920086,
+          1.942743,
+          1.595153,
+          1.581358
+        ],
+        "phaseMedianMs": 1.624515,
+        "measurements": {
+          "base": {
+            "samplesMs": [
+              1712.49142,
+              1779.264153,
+              1876.162902,
+              1898.579048,
+              1965.883673
+            ],
+            "medianMs": 1876.162902,
+            "minMs": 1712.49142,
+            "maxMs": 1965.883673,
+            "outputHashes": {
+              "report.json": "da7caad48c8b7be17a400684f9366c4e888a63b0263b241feabfd0252a206425",
+              "report.txt": "076888cca6d750b2eb00f15d35c4ca717c7742c018f838327e6f1d6cf5bec084",
+              "report.dot": "aed28ef6e57dd9b1cff7ef37d8affc342acc2a4f5fd7ffd06224145048e96b7f"
+            }
+          },
+          "assessment": {
+            "samplesMs": [
+              2056.831816,
+              1904.342183,
+              1823.658038,
+              1804.609042,
+              1824.49551
+            ],
+            "medianMs": 1824.49551,
+            "minMs": 1804.609042,
+            "maxMs": 2056.831816,
+            "outputHashes": {
+              "zero-address-assessment.json": "0baaba7ec005da377efcb4f9a46852f08eca82c61d5fb9cea44ce9934c108cdb",
+              "report.json": "da7caad48c8b7be17a400684f9366c4e888a63b0263b241feabfd0252a206425",
+              "report.txt": "076888cca6d750b2eb00f15d35c4ca717c7742c018f838327e6f1d6cf5bec084",
+              "zero-address-assessment.dot": "7ef17eed219c143e1737df45f4fd7a985c8d21571698e159dab98f8a67211f65",
+              "zero-address-assessment.txt": "b1113b0dd677f235b76cfd1545905cd1320caf487a5bebdd1bef9db2c27c17a5",
+              "report.dot": "aed28ef6e57dd9b1cff7ef37d8affc342acc2a4f5fd7ffd06224145048e96b7f"
+            }
+          }
+        },
+        "passed": false
+      }
+    ],
+    "sampleHashes": {
+      "cli.csv": "42e11819ed62d9f6596e288fa8daf40d99cbd3d583c839c3c5b6c04362597740",
+      "phase.csv": "ae100fe96be775a02f6d1440f4743bee49951b75c04454978fcd253e24dbbd04"
+    },
+    "scope": "One controlled native Windows null-write demo, captured in partial/full mode, assessed on the Linux host. No original Windows I4, root-cause inference, or general Windows workload claim."
+  },
+  "graphviz": {
+    "passed": true,
+    "toolSha256": "da690d0c28520a98e311cdb3577c22953b5ccfbd9f9e4219a0d031a1f15961d6",
+    "reports": [
+      {
+        "path": "tmp/crashpad-demo/20261003/partial/ariadne/zero-address-assessment.dot",
+        "sha256": "0ed98b47f4dc8e82b2771c41b2e2dd5facf13dd5cb24824f1d24abe4e7d76fc3"
+      },
+      {
+        "path": "tmp/crashpad-demo/20261003/partial/ariadne/report.dot",
+        "sha256": "3604a2c888af79a4cc01e833159283999b3ab55236a31f737ac6807fb7e48c04"
+      },
+      {
+        "path": "tmp/crashpad-demo/20261003/full/ariadne/zero-address-assessment.dot",
+        "sha256": "7ef17eed219c143e1737df45f4fd7a985c8d21571698e159dab98f8a67211f65"
+      },
+      {
+        "path": "tmp/crashpad-demo/20261003/full/ariadne/report.dot",
+        "sha256": "aed28ef6e57dd9b1cff7ef37d8affc342acc2a4f5fd7ffd06224145048e96b7f"
+      }
+    ]
+  },
+  "disassembly": {
+    "sha256": "6c410e20f04f7db62f55c413d0b67bdde8fbddd8bdc2f73e8740aa1dfd6d067e",
+    "toolSha256": "943e3dcc9b1a6c0df179b1e77aaa0ae122e5bfd3772e48db085314639f476650"
+  },
+  "missing": [
+    "Partial and full assessment CLI medians exceed the unchanged 1500 ms condition.",
+    "Original hash-pinned Windows I4 capture/query remains a separate unexercised requirement."
+  ],
+  "scope": "One owned native Windows x64 null-write demo using crashpad-nzsn, partial/full capture and Linux-hosted Ariadne answers. No complete Windows workload, root-cause inference, or complete-memory qualification."
+}

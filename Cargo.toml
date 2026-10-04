@@ -112,6 +112,21 @@ path = "tests/bap/protocol.rs"
 required-features = ["bap"]
 
 [[test]]
+name = "bap_core_bootstrap"
+path = "tests/bap/core_bootstrap.rs"
+required-features = ["bap"]
+
+[[test]]
+name = "bap_core_analysis"
+path = "tests/bap/core_analysis.rs"
+required-features = ["bap"]
+
+[[test]]
+name = "bap_core_stateflow"
+path = "tests/bap/core_stateflow.rs"
+required-features = ["bap"]
+
+[[test]]
 name = "input_bap_backend"
 path = "tests/input/bap_backend.rs"
 required-features = ["input"]
@@ -175,3 +190,18 @@ required-features = ["reports"]
 name = "stage_e_bindings"
 path = "tests/mbt/stage_e/bindings.rs"
 required-features = ["mbt"]
+
+[[test]]
+name = "input_i5a"
+path = "tests/input/i5a.rs"
+required-features = ["input"]
+
+[[bin]]
+name = "i5a"
+path = "src/bin/i5a.rs"
+required-features = ["bench"]
+
+[[test]]
+name = "input_bap_core"
+path = "tests/input/bap_core.rs"
+required-features = ["input"]

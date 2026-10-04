@@ -35,10 +35,93 @@ macro_rules! edges {
     };
 }
 
+enum MachineAnalyzer {
+    Rust(Box<ms::Analyzer>),
+    #[cfg(feature = "bap")]
+    Native(Box<crate::bap::stateflow_adapter::NativeStateflow>),
+}
+fn backend_error(error: impl std::fmt::Display) -> BindingError {
+    BindingError::new("analysis_backend", error.to_string())
+}
+impl MachineAnalyzer {
+    fn new(request: ms::Request) -> Result<Self, BindingError> {
+        match std::env::var("ARIADNE_REPLAY_BACKEND")
+            .as_deref()
+            .unwrap_or("rust")
+        {
+            "rust" => ms::Analyzer::new(request)
+                .map(|a| Self::Rust(Box::new(a)))
+                .map_err(backend_error),
+            #[cfg(feature = "bap")]
+            "bap" => {
+                let directory = std::env::var_os("ARIADNE_BAP_CORE_DIR")
+                    .ok_or_else(|| backend_error("ARIADNE_BAP_CORE_DIR required"))?;
+                let config = crate::bap::core_session::CoreConfig::from_directory(directory.into());
+                crate::bap::stateflow_adapter::NativeStateflow::new(
+                    &config,
+                    "generated-stateflow-replay",
+                    request,
+                )
+                .map(|a| Self::Native(Box::new(a)))
+                .map_err(backend_error)
+            }
+            _ => Err(backend_error("unsupported replay backend")),
+        }
+    }
+    fn advance(&mut self, _action: &str) -> Result<(), BindingError> {
+        match self {
+            Self::Rust(a) => {
+                if a.step() {
+                    Ok(())
+                } else {
+                    Err(finished())
+                }
+            }
+            #[cfg(feature = "bap")]
+            Self::Native(a) => a.advance_named(_action).map_err(backend_error),
+        }
+    }
+    fn refresh(&mut self) -> Result<(), BindingError> {
+        match self {
+            Self::Rust(_) => Ok(()),
+            #[cfg(feature = "bap")]
+            Self::Native(a) => a.observe().map_err(backend_error),
+        }
+    }
+    fn request(&self) -> &ms::Request {
+        match self {
+            Self::Rust(a) => a.request(),
+            #[cfg(feature = "bap")]
+            Self::Native(a) => a.request(),
+        }
+    }
+    fn state(&self) -> &ms::AnalysisState {
+        match self {
+            Self::Rust(a) => a.state(),
+            #[cfg(feature = "bap")]
+            Self::Native(a) => a.state(),
+        }
+    }
+    fn observations(&self) -> ms::Observations {
+        match self {
+            Self::Rust(a) => a.observations(),
+            #[cfg(feature = "bap")]
+            Self::Native(a) => a.observations().clone(),
+        }
+    }
+    fn close(&mut self) -> Result<(), BindingError> {
+        match self {
+            Self::Rust(_) => Ok(()),
+            #[cfg(feature = "bap")]
+            Self::Native(a) => a.close().map_err(backend_error),
+        }
+    }
+}
+
 pub struct MachineStatePort {
     requests: BTreeMap<String, ms::Request>,
     case_id: String,
-    analyzer: Option<ms::Analyzer>,
+    analyzer: Option<MachineAnalyzer>,
     evidence: SharedEvidence,
 }
 impl MachineStatePort {
@@ -53,12 +136,11 @@ impl MachineStatePort {
             evidence,
         }
     }
-    fn advance(&mut self) -> Result<(), BindingError> {
-        if self.analyzer.as_mut().ok_or_else(unavailable)?.step() {
-            Ok(())
-        } else {
-            Err(finished())
-        }
+    fn advance(&mut self, action: &str) -> Result<(), BindingError> {
+        self.analyzer
+            .as_mut()
+            .ok_or_else(unavailable)?
+            .advance(action)
     }
 }
 impl mb::MachineStateReplayPort for MachineStatePort {
@@ -69,27 +151,28 @@ impl mb::MachineStateReplayPort for MachineStatePort {
             .ok_or_else(|| BindingError::new("unknown_case", "unknown machine case"))?;
         self.case_id = input.case_id;
         self.evidence.borrow_mut().cases.push(self.case_id.clone());
-        self.analyzer = Some(
-            ms::Analyzer::new(request.clone())
-                .map_err(|error| BindingError::new("invalid_request", error.to_string()))?,
-        );
+        if let Some(previous) = &mut self.analyzer {
+            previous.close()?;
+        }
+        self.analyzer = Some(MachineAnalyzer::new(request.clone())?);
         self.evidence.borrow_mut().initializations += 1;
         self.evidence.borrow_mut().previous_action = None;
         self.evidence.borrow_mut().record_action("Initialize");
         Ok(())
     }
     fn propagate(&mut self) -> Result<(), BindingError> {
-        self.advance()?;
+        self.advance("Propagate")?;
         self.evidence.borrow_mut().record_action("Propagate");
         Ok(())
     }
     fn finish_stateflow(&mut self) -> Result<(), BindingError> {
-        self.advance()?;
+        self.advance("FinishStateflow")?;
         self.evidence.borrow_mut().record_action("FinishStateflow");
         Ok(())
     }
     fn observe(&mut self) -> Result<mb::MachineStateReplayObservation, BindingError> {
-        let analyzer = self.analyzer.as_ref().ok_or_else(unavailable)?;
+        let analyzer = self.analyzer.as_mut().ok_or_else(unavailable)?;
+        analyzer.refresh()?;
         let state = analyzer.state();
         let views = analyzer.observations();
         let result = mb::MachineStateReplayObservation {
@@ -168,6 +251,7 @@ impl mb::MachineStateReplayPort for MachineStatePort {
         evidence.observations += 1;
         if state.phase == ms::Phase::Done {
             evidence.completed += 1;
+            self.analyzer.as_mut().unwrap().close()?;
         }
         Ok(result)
     }

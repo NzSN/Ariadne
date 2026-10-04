@@ -11,8 +11,11 @@
 **Where to go next.**
 
 - [BAP module](bap.md) — supplies semantics for captured instruction prefixes.
+- [Native analysis qualification](../bap-core-qualification.md) — validates the
+  capture-bound native analyzer, report equivalence and backend selection.
 - [Minidump report contract](../stage-c-report-schema.md) — joins preparation evidence with analysis output.
 - [Investigation contracts](../investigation-contracts.md) — bind a fault-address question to the prepared analysis.
+- [I5a contracts](../i5a-contracts.md) — bind retained exception-context observations to a zero-address assessment.
 
 **What remains unresolved.** A minidump cannot establish an earlier executed path by itself. Entry evidence must be supplied; unsupported instructions and missing capture may keep the result partial.
 
@@ -213,3 +216,12 @@ The [contracts](../investigation-contracts.md) and
 [qualification](../investigation-validation.md) define the current
 scope. Partial answers retain unknown entry, call and memory alternatives;
 producer dependencies are not a historical execution trace or UAF proof.
+
+The separate [I5a assessment](../i5a-contracts.md) retains reader-owned raw
+exception/context fields, source spans and valid register observations behind
+the ordinary metadata view. `bind_fault_context` rejects changed public metadata
+and binds the same completed analysis. Use `--assess-zero-address VA --memory-access N`
+with `--assessment-only --format text|json|dot` or a new output
+directory. It admits only the reviewed Windows AMD64 scalar MOV profile and
+returns unknown for absent or contradictory prerequisites. Old report formats
+and Stage B fixture bytes are unchanged.

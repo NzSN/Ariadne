@@ -14,7 +14,7 @@
 - [Open backend work](../../Plans/bap-integration.md) — preserves Windows qualification and unstarted core migration.
 - [Rust proof boundary](stage-f-proof-and-performance.md) — remains open independently of ISA retirement.
 
-**What remains unresolved.** Full original-Windows qualification is still open. The BAP analysis-core replacement has not started; neither selecting BAP nor passing a fixture closes those requirements. The universal Rust refinement boundary remains open; retired ISA obligations were not discharged.
+**What remains unresolved.** Full original-Windows qualification is still open. The native analysis-core replacement is implemented; its [qualification](bap-core-qualification.md) is separate from those product criteria. The universal Rust refinement boundary remains open; retired ISA obligations were not discharged.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 

@@ -13,7 +13,7 @@
 - [Documentation map](../documentation-map.md) — traces motivation, implementation, validation and open questions.
 - [Plan index](../../Plans/README.md) — identifies active implementation work.
 
-**What remains unresolved.** Full original-Windows qualification is still open. The BAP analysis-core replacement has not started; neither selecting BAP nor passing a fixture closes those requirements. The first fault-address question is implemented, but full original-Windows I4 qualification remains open. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
+**What remains unresolved.** Full original-Windows I4 and controlled real Windows I5a qualification remain open. Native BAP recovery, dataflow, slicing and finite stateflow are implemented; [Stage 2 qualification](bap-core-qualification.md) records passing aggregate acceptance and default adoption. Possible-producer and zero-address questions are implemented; other hypothesis, object/source-context and cross-capture questions remain later work.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 
@@ -25,7 +25,7 @@ under `Plans/completed/`.
 | --- | --- |
 | Minidump input and CLI | [Input guide](modules/input.md), [examples](minidump-investigator-examples.md), [report schema](stage-c-report-schema.md) |
 | BAP semantics | [Backend guide](modules/bap.md), [protocol and projection design](bap-semantic-backend-design.md), [source review](bap-projection-source-review.md) |
-| Fault-address investigation | [Module guide](modules/investigation.md), [contracts](investigation-contracts.md), [design](investigation-layer-design.md) |
+| Fault-address investigation | [Module guide](modules/investigation.md), [producer contracts](investigation-contracts.md), [I5a zero-address contracts](i5a-contracts.md), [design](investigation-layer-design.md). |
 | Stateflow and supplied LLVM IR | [Stage E contracts](stage-e-report-contracts.md), [IR guide](modules/ir.md), [report guide](modules/reports.md) |
 | Rendering and analysis concepts | [Rendering](result-rendering.md), [static-analysis learning guide](static-analysis-learning.md) |
 | Assurance and scope | [Semantic assurance](semantic-assurance.md), [roadmap](../../ROADMAP.md), [checkpoints](../../CHECKPOINTS.md) |
@@ -34,10 +34,18 @@ under `Plans/completed/`.
 
 The [source-layout record](rust-source-layout.md),
 [BAP-only delivery](bap-only-removal-validation.md),
+[workload qualification repair](bap-windows-workload-validation.md),
+[controlled Windows replacement](bap-windows-repin-validation.md),
+[unlimited BAP timing policy](bap-unlimited-validation.md),
+[Stage 2 A0 start](bap-stage2-a0-validation.md),
 [investigation validation](investigation-validation.md) and
 [Stage E completion](stage-e-completion.md) explain their exercised scopes.
 The later [investigation correctness record](investigation-correctness-validation.md)
 qualifies the timing-decision and truncation repairs within the available tier.
+The [I5a delivery record](i5a-validation.md) documents the new numeric question's
+corpus, measurements and separate Windows capture requirements.
+The later [Crashpad Windows demo](crashpad-demo-validation.md) provides real
+capture/answer evidence, with CLI performance still over its criterion.
 Validation JSON, CSV samples and evidence archives retain their original
 identities under [evidence/Ariadne](../../evidence/Ariadne/README.md).
 A historical passing record is not fresh qualification after changes.

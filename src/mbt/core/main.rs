@@ -170,7 +170,7 @@ fn execute() -> Result<bool, Box<dyn std::error::Error>> {
     println!(
         "{}",
         json!({
-            "schema": "ariadne.mbt-replay/v2", "mode": mode, "gatePassed": passed,
+            "schema": "ariadne.mbt-replay/v2", "mode": mode, "gatePassed": passed, "analysisBackend": std::env::var("ARIADNE_REPLAY_BACKEND").unwrap_or_else(|_| "rust".into()),
             "modelMatched": result.is_ok(), "interfaceMatched": e.factories == 1,
             "status": if result.is_ok() {"passed"} else if mismatch.is_some() {"mismatch"} else if rejection {"rejected"} else {"failed"},
             "error": result.as_ref().err().map(ToString::to_string), "mismatch": mismatch,

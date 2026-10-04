@@ -1,0 +1,37 @@
+# Copyright 2026 The Crashpad Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Staged by the demo bootstrap at //examples/ariadne_demo in the Crashpad tree.
+import("//build/crashpad_buildconfig.gni")
+
+assert(crashpad_is_win || crashpad_is_linux,
+       "The Ariadne Crashpad demo supports Windows and Linux.")
+
+crashpad_executable("ariadne_crash_demo") {
+  sources = [
+    "crash_demo.cc",
+    "fault.cc",
+  ]
+
+  if (crashpad_is_win) {
+    assert(current_cpu == "x64", "The controlled workload requires Windows x64.")
+    sources += [ "bap_workload.asm" ]
+  }
+
+  deps = [ "//client:client" ]
+  data_deps = [
+    "//handler:crashpad_handler",
+    "//tools:crashpad_database_util",
+  ]
+}
