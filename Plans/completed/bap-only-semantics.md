@@ -10,10 +10,13 @@
 
 **Where to go next.**
 
+
+- [Native analysis successor](../../docs/Ariadne/bap-core-qualification.md) — records completed native algorithms and default adoption after this historical semantics-only change.
+
 - [Delivery and follow-up](../../docs/Ariadne/bap-only-removal-validation.md) — records what was exercised and which limits remain.
 - [Active plan index](../README.md) — prevents completed steps from being mistaken for pending work.
 
-**What remains unresolved.** The implementation steps below are archived, not a current task list. These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Full original-Windows qualification is still open. The BAP analysis-core replacement has not started; neither selecting BAP nor passing a fixture closes those requirements.
+**What remains unresolved.** The implementation steps below are archived, not a current task list. These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. The later [native Stage 2 qualification](../../docs/Ariadne/bap-core-qualification.md) independently establishes algorithm and default-adoption acceptance. The [active Windows I4 replacement](../../docs/Ariadne/i4-windows-repin-validation.md) closes the missing-artifact gap but exceeds its unchanged CLI budget. Earlier records below retain their original scope and flags.
 
 For the wider context, see the optional [documentation map](../../docs/documentation-map.md).
 

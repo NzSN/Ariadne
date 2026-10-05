@@ -7,6 +7,7 @@ import json
 import os
 from pathlib import Path
 from rust_layout import copy_sut, source_files
+from with_mirrorrust_snapshot import active_identity
 import subprocess
 import tempfile
 import time
@@ -18,6 +19,7 @@ def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 def sources():
     paths=source_files()
+    paths.add(ROOT/'tools/with_mirrorrust_snapshot.py')
     for directory in ['src','tests','src/reports','tests/reports','src/input','tests/input','src/examples','src/ir','tests/ir','native/llvm_mc','native/llvm_ir','mbt/stage-e','src/bap','src/investigation','tests/bap','native/bap']:
         paths.update(p for p in (ROOT/directory).rglob('*') if p.is_file() and p.suffix!='.md' and not set(p.parts)&{'target','.work','__pycache__','results'})
     for name in ['Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','tools/check_stage_e.py','tools/check_minidump.py','tools/check_minidump_mutations.py','Specs/AriadneMachineState.tla','Specs/AriadneLLVMIR.tla','Specs/AriadneMachineCommon.tla','Specs/AriadneTypes.tla']:
@@ -88,6 +90,7 @@ def main():
         if corpus['generation']['nativeHelperSha256']!=helper_sha:raise SystemExit('native helper differs from corpus producer; regenerate explicitly')
     result={
         'schema':'ariadne.stage-e-completion/v2','recordedUtc':datetime.now(timezone.utc).isoformat(),
+        'qualificationEnvironment':active_identity(),
         'passed':all_passed,'sourcesStable':stable,'sourceHashes':before,'gates':records,
         'completionClauses':{name:all_passed for name in ['validators','generatedReplayAllObservations','mutationSensitivity','frozenRecoveryHandoff','nativeVerifiedIRHandoff','separateReportsAndCLI']},
         'replay':replay,'minidumpRegression':nested,

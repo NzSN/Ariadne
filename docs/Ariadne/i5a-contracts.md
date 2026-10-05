@@ -3,8 +3,9 @@
 ## Context and follow-up
 
 **Status.** Implemented and source/fixture-qualified in the working tree on
-2026-10-03. A controlled Windows case now passes capture/answer checks; its CLI
-timing remains over the separate acceptance limit.
+2026-10-03. Controlled Windows capture/answer checks pass. The later
+[native refresh](i5a-native-qualification.md) qualifies both timing budgets and
+both controlled capture modes under a read-only dependency snapshot.
 
 **Why this document exists.** The [I5a design](i5a-zero-address-design.md) needs
 valid fault-time observations to distinguish a zero access start from unknown
@@ -16,7 +17,9 @@ strict report, resource behavior and CLI modes for one numeric hypothesis.
 **Where to go next.**
 
 - [Native Windows demo](crashpad-demo-validation.md) supplies real partial/full
-  captures and records the remaining CLI timing condition.
+  captures and records its historical CLI timing miss.
+- [Native qualification](i5a-native-qualification.md) records the passing native
+  gates, controlled-capture acceptance and dependency-snapshot scope.
 - [Delivery and validation](i5a-validation.md) records the exercised corpus,
   measurements and independently reported qualification tiers.
 - [Source review](i5a-source-review.md) explains field layouts and the independent
@@ -26,8 +29,7 @@ strict report, resource behavior and CLI modes for one numeric hypothesis.
 - [First-question contracts](investigation-contracts.md) retain the distinct
   meaning of possible producers and their uncertainty.
 
-**What remains unresolved.** The controlled Windows demo exceeds the 1,500 ms CLI
-condition. Original-Windows I4 acceptance remains open. Linux numeric
+**What remains unresolved.** The [active Windows I4 re-pin](i4-windows-repin-validation.md) remains over its unchanged CLI budget. Linux numeric
 admission, root-cause/lifetime assertions and other hypotheses are not implemented.
 
 The [documentation map](../documentation-map.md) is optional navigation.
@@ -136,4 +138,4 @@ Native checks require the pinned BAP/LLVM helpers and Graphviz. The
 [fixture measurement contract](../../tests/input/fixtures/i5a/performance.json)
 freezes one warm-up/five repeats, a 10 ms combined phase median and a 1,500 ms
 assessment-CLI median for its small synthetic workloads. These are separate from
-the unchanged original I4 conditions; they make no universal scale claim.
+the unchanged I4 timing conditions on its independently re-pinned case; they make no universal scale claim.

@@ -3,7 +3,9 @@
 ## Context and follow-up
 
 **Status.** Implemented in the working tree on 2026-10-03, following the design
-based on `c9eb4c5`. Source/fixture qualification passes. Scope is
+based on `c9eb4c5`. Historical source/fixture qualification passes; the current
+[native refresh](i5a-native-qualification.md) qualifies both source/fixture and
+controlled Windows tiers under its pinned dependency snapshot. Scope is
 Windows AMD64 scalar MOV access violations; Linux and other hypotheses are deferred.
 
 **Why this document exists.** The [first investigation question](investigation-layer-design.md)
@@ -19,8 +21,13 @@ reconstructing an executed path or implementing another ISA model.
 
 **Where to go next.**
 
+- [Native-default qualification plan](../../Plans/i5a-native-qualification.md)
+  refreshes phase measurements, backend identities and controlled Windows
+  acceptance after Stage 2 adoption.
+- [Native qualification guide](i5a-native-qualification.md) records the refreshed
+  result and its limits separately from historical measurements.
 - [Native Windows demo](crashpad-demo-validation.md) supplies controlled capture
-  evidence while retaining the unmet performance condition.
+  evidence and preserves its historical performance result.
 - [Delivery and validation](i5a-validation.md) records the exercised implementation
   and the remaining Windows capture requirements.
 - [Implemented I5a contracts](i5a-contracts.md) describe the working-tree
@@ -31,7 +38,7 @@ reconstructing an executed path or implementing another ISA model.
   review, exception evidence, assessment, reports and qualification for this
   first Windows zero-address question and records its delivery status.
 - [Investigation stage plan, I5a](../../Plans/investigation-layer.md#i5a--zero-address-consistency)
-  places this design after the delivered first question and keeps original-Windows
+  places this design after the delivered first question and keeps active Windows
   I4 qualification separate.
 - [Input module](modules/input.md) describes the snapshot reader that retains
   the exception evidence.
@@ -42,7 +49,7 @@ reconstructing an executed path or implementing another ISA model.
 
 **What remains unresolved.** The controlled Windows demo has valid capture and
 answer evidence, but exceeds the frozen CLI latency condition. The finite
-admitted forms do not establish whole-ISA coverage. Original-Windows I4 remains open.
+admitted forms do not establish whole-ISA coverage. The [active I4 replacement](i4-windows-repin-validation.md) passes correctness but exceeds its fixed CLI budget.
 
 The [documentation map](../documentation-map.md) is optional navigation.
 

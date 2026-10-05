@@ -10,6 +10,9 @@
 
 **Where to go next.**
 
+
+- [Native analysis replay and qualification](../docs/Ariadne/bap-core-qualification.md) — records native-helper observations, mutation sensitivity and CLI ownership separately from the retained Rust replay; neither finite campaign is a universal proof.
+
 - [Installed compatibility record](../docs/Ariadne/installed-modelmirrors-compatibility.md) — bounds the exercised tool/server/client path.
 - [Stage E replay](stage-e/README.md) — extends generated conformance to stateflow and supplied IR.
 - [Proof boundary](../docs/Ariadne/stage-f-proof-and-performance.md) — explains why replay is not a universal refinement proof.

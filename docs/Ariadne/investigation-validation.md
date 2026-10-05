@@ -2,7 +2,7 @@
 
 ## Context and follow-up
 
-**Status.** Retained first-question evidence; original-Windows I4 remains partial.
+**Status.** Historical first-question evidence; current [I4 replacement qualification](i4-windows-repin-validation.md) passes correctness and remains over its fixed CLI budget.
 
 **Why this document exists.** [Claim contract](investigation-contracts.md) requires identity-bound alternatives and explicit evidence gaps.
 
@@ -10,11 +10,14 @@
 
 **Where to go next.**
 
+
+- [2026-10-05 Windows I4 replacement](i4-windows-repin-validation.md) — supersedes the older missing-artifact obligation with an independently inspected active case; correctness passes and the unchanged CLI budget remains unmet.
+
 - [Remaining work](../../Plans/investigation-layer.md) — tracks full I4 and later I5–I7 instead of implying general root-cause support.
 - [CLI examples](minidump-investigator-examples.md) — provide the surrounding captured-analysis workflow.
 - [Evidence guide](../../evidence/Ariadne/README.md) — explains archive and measurement identities.
 
-**What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. The first fault-address question is implemented, but full original-Windows I4 qualification remains open. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
+**What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. The first fault-address question is implemented. The [active I4 replacement](i4-windows-repin-validation.md) closes its lost-artifact gap and passes correctness; full acceptance remains false because its Windows CLI median exceeds the unchanged budget. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 
@@ -89,19 +92,25 @@ The [evidence manifest](../../evidence/Ariadne/investigation-evidence-manifest.j
 explanations, reports and actual test/mutation/regression logs. Raw dump bytes,
 compiler caches and native runtime archives remain ignored/external.
 
-**Remaining full-I4 clause:** the original 2,028,400-byte Windows artifact with
+**Historical remaining full-I4 clause at this delivery:** the original 2,028,400-byte Windows artifact with
 SHA-256 `4b3deb70134015ec227b3cf5edf82e1dac0b308b3f19ae62f79cbd4251109e86`
 is unavailable for a fresh question acceptance and normal CLI measurement.
 The existing 2,000 ms median condition remains unchanged. Windows synthetic
 fixtures do not replace this historical-capture requirement. The passing
 `passed` field credits the explicitly exercised tier; `fullI4RealCaptureAcceptance`
 is false and the missing clause is retained. This does not qualify BAP Stage 2
-or accept an AMD64 ISA step; Stage D stays **0/49**.
+or accept an AMD64 ISA step; the recorded Stage D count was **0/49**.
+The independent ISA track is now [retired](semantic-assurance.md).
+
+The current runner materializes the active replacement automatically; the
+old original-dump environment variable no longer selects its Windows case.
+Use the [snapshot wrapper](i4-windows-repin-validation.md#reproduction-and-retained-evidence)
+for these current commands:
 
 ```sh
 python3 tools/check_investigation.py
-# Supply the missing historical artifact for that additional qualification tier:
-ARIADNE_PRIORITY4_DUMP=/path/to/pinned.dmp python3 tools/check_investigation.py
+# Optional exact matching copy of the active replacement:
+ARIADNE_I4_WINDOWS_DUMP=/path/to/active-pinned.dmp python3 tools/check_investigation.py
 ```
 
 Validation and derived evidence were retained before the user-authorized

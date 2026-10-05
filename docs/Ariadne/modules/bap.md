@@ -18,10 +18,10 @@
 - [Validation record](../bap-only-removal-validation.md) — states tested coverage and unresolved qualification.
 - [Previous workload repair](../bap-windows-workload-validation.md) — retains the earlier evidence decisions and available-corpus refresh.
 - [Replacement workload validation](../bap-windows-repin-validation.md) — records the new captured Windows input, passing implementation gates and its historical timing condition.
-- [Replacement plan](../../../Plans/bap-windows-repin.md) — defines the authorized active BAP pin and unchanged timing limit.
+- [Replacement plan](../../../Plans/bap-windows-repin.md) — preserves the authorized capture recipe and its former bounded timing contract; the later unlimited policy controls BAP qualification.
 - [Integration plan](../../../Plans/bap-integration.md) — tracks work beyond the current producer.
 
-**What remains unresolved.** The isolated OCaml SDK and bounded Init/Visit transport now qualify the A0 foundation. Complete native recovery, dataflow, slicing, finite stateflow and generated replay are implemented; the [Stage 2 qualification](../bap-core-qualification.md) records passing aggregate acceptance and default adoption. The user has removed the active BAP latency ceiling; valid capture/correctness evidence and implementation gates remain required. Historical Priority 4/I4 and controlled I5a qualification retain their separate contracts.
+**What remains unresolved.** The isolated OCaml SDK and bounded Init/Visit transport now qualify the A0 foundation. Complete native recovery, dataflow, slicing, finite stateflow and generated replay are implemented; the [Stage 2 qualification](../bap-core-qualification.md) records passing aggregate acceptance and default adoption. The user has removed the active BAP latency ceiling; valid capture/correctness evidence and implementation gates remain required. Historical Priority 4, active re-pinned I4 and controlled I5a qualification retain their separate contracts.
 
 For the wider context, see the optional [documentation map](../../documentation-map.md).
 
@@ -109,10 +109,11 @@ Missing, skipped or malformed evidence cannot qualify. The earlier replacement
 record's 10.67 s median and false exit flags remain historical results under its
 former 2 s policy.
 
-Separate phase medians place reference decoding at 7,572.131181 ms, helper
-startup at 1,178.301727 ms and core analysis at 69.614232 ms. Reference decoding
-is the first area for further latency investigation; no performance fix is
-included in the completed capture/pin delivery.
+The historical bounded capture campaign measured reference decoding at
+7,572.131181 ms, helper startup at 1,178.301727 ms and Rust core analysis at
+69.614232 ms. Those phase samples describe that earlier pipeline; they do not
+diagnose the current native-default I4 timing failure. The [active I4 result](../i4-windows-repin-validation.md)
+retains its own samples and needs a fresh measured diagnosis before optimization.
 
 To use an explicit copy of the same pin, or deliberately run only the available
 implementation workloads:
@@ -126,8 +127,9 @@ python3 tools/measure_bap.py --skip-windows --output /new/implementation-directo
 ```
 
 `ARIADNE_PRIORITY4_DUMP` no longer selects BAP's workload. The old Priority 4
-manifest and I4 investigation prerequisites remain bound to the original
-Electron capture; this authorized BAP replacement does not repin them.
+manifest remains historical. That earlier BAP authorization did not repin I4;
+the later [I4-specific replacement](../i4-windows-repin-validation.md) now uses
+the same raw 98-instruction capture with an independent bounded timing contract.
 
 The [Stage 1 backend-removal plan](../../../Plans/completed/bap-only-semantics.md) records the
 user-authorized default change. The [replacement plan](../../../Plans/bap-windows-repin.md)

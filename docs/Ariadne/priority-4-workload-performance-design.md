@@ -10,12 +10,15 @@
 
 **Where to go next.**
 
+
+- [Active investigation performance](i4-windows-repin-validation.md) — binds the new 98-start Windows question to its preserved 2,000 ms CLI limit and measured failure.
+
 - [Completed historical plan](../../Plans/completed/priority-4-workload-performance-plan.md) — freezes workloads, budgets and optimization checks.
 - [Historical delivery](priority-4-performance-validation.md) — records the measured optimization.
-- [BAP qualification](../../Plans/bap-integration.md) — retains the separate current-backend Windows requirement.
+- [BAP qualification](../../Plans/bap-integration.md) — records the separately qualified native backend and its unlimited timing policy.
 - [Investigation qualification repair](../../Plans/completed/investigation-correctness-fixes.md#1-enforce-the-windows-i4-latency-condition) — applies the fixed Windows total-query budget to the investigation acceptance decision; see its [validation record](investigation-correctness-validation.md) for the exercised tier.
 
-**What remains unresolved.** Each backend and workload needs its own qualification. A small synthetic baseline or an older LLVM-backed result cannot satisfy the current BAP original-Windows requirement.
+**What remains unresolved.** Each backend and workload needs its own qualification. Each result stays bound to its original backend and query. [Native BAP qualification](bap-core-qualification.md) measures its own corpus under an unlimited timing policy. The separately [re-pinned Windows I4 question](i4-windows-repin-validation.md) retains its fixed 2,000 ms limit and remains over budget.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 

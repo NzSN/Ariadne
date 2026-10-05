@@ -4,8 +4,11 @@
 
 **Status.** Both profiles were built and run on native Windows x64 on 2026-10-03.
 The original partial/full null-write captures pass independent inspection and
-Ariadne's zero-address assessment; their 1,500 ms assessment-CLI condition is not
-met. The new BAP profile has a separately inspected and pinned partial capture.
+Ariadne's zero-address assessment. Their historical assessment-CLI medians
+exceeded 1,500 ms. The 2026-10-05 native-default qualification passes all 14 fixture gates and
+both controlled capture modes under the unchanged CLI and phase budgets, using
+the recorded read-only dependency snapshot. The BAP profile has a separately inspected and
+pinned partial capture.
 
 **Why this document exists.** The [I5a design](../../docs/Ariadne/i5a-zero-address-design.md)
 needed an independently controlled Windows capture in addition to synthetic fixtures.
@@ -19,18 +22,20 @@ isolated build, capture and independent verification.
 **Where to go next.**
 
 - [Delivery and evidence](../../docs/Ariadne/crashpad-demo-validation.md) gives
-  actual captures, checks, source identities and measurements.
+  the original captures, checks, source identities and historical measurements.
+- [Native I5a qualification](../../docs/Ariadne/i5a-native-qualification.md)
+  records the passing native measurements, aggregate gates and selected dependency snapshot.
 - [BAP workload replacement](../../docs/Ariadne/bap-windows-repin-validation.md)
   records the separate 98-instruction capture and active BAP pin.
 - [I5a contracts](../../docs/Ariadne/i5a-contracts.md) explain what the resulting
   assessment can conclude.
 - [Input guide](../../docs/Ariadne/modules/input.md) describes captured-byte provenance.
 
-**What remains unresolved.** These are bounded controlled cases. Their respective
-CLI timing conditions require separate measurements; the original Windows I4
-capture is separate.
-The Linux source path has not been built or run in this delivery. Full-dump flags
-do not prove every process-memory read succeeded.
+**What remains unresolved.** Active Windows I4 performance and the separate BAP workload
+retain their own contracts. Native I5a acceptance covers the recorded dependency
+snapshot and captures; later changes need new qualification. The Linux source
+path of this demo has not been built or run in this delivery. Full-dump flags do
+not prove every process-memory read succeeded.
 
 ## Program and integration
 
@@ -139,7 +144,9 @@ checksum calculation, plus raw minidump/PE parsing. It checks every instruction
 boundary and short-branch target, full captured code, inputs, process/module
 identity and fault context. It does not derive expected results from Ariadne or
 BAP. The [replacement plan](../../Plans/bap-windows-repin.md) defines the pin and
-unchanged 2,000 ms qualification limit.
+its historical 2,000 ms criterion; the later
+[unlimited BAP policy](../../docs/Ariadne/bap-unlimited-validation.md) supersedes
+that timing ceiling. I5a keeps its separate 1,500 ms CLI criterion.
 
 ## Inspect and analyze
 
@@ -148,11 +155,15 @@ The inspector uses the Python standard library and an explicit byte oracle;
 it does not obtain its expected conclusion from Ariadne or BAP.
 
 ```sh
-python3 native/crashpad-demo/inspect_capture.py \
-  --dump tmp/crashpad-demo/20261003/partial/capture.dmp \
-  --witness tmp/crashpad-demo/20261003/partial/witness.json \
-  --executable tmp/crashpad-demo/20261003/partial/ariadne_crash_demo.exe \
-  --output tmp/crashpad-demo/20261003/partial/inspection-recheck.json
+mkdir -p target/crashpad-demo/inspection-recheck/partial \
+  target/crashpad-demo/inspection-recheck/full
+for mode in partial full; do
+  python3 native/crashpad-demo/inspect_capture.py \
+    --dump "tmp/crashpad-demo/20261003/$mode/capture.dmp" \
+    --witness "tmp/crashpad-demo/20261003/$mode/witness.json" \
+    --executable "tmp/crashpad-demo/20261003/$mode/ariadne_crash_demo.exe" \
+    --output "target/crashpad-demo/inspection-recheck/$mode/inspection.json"
+done
 ```
 
 It checks Windows/AMD64 identity, access-violation parameters, valid exception
@@ -160,16 +171,53 @@ registers, process identity, module/PE agreement and unambiguous captured code.
 Its `query` provides explicit entry and fault-site addresses for the regular
 `ariadne-minidump --assess-zero-address` command. It accepts only the reviewed
 `[rax]` and `[rcx]` six-byte store encodings used by this demo recipe.
+Choose a new inspection directory for each rerun. Preserve the original
+`partial/inspection.json`, `full/inspection.json`, build and capture records.
+The new inspection records bind the current inspector; their nearby source-file
+metadata does not identify the source that produced the historical executable.
 
 With `build/`, `partial/` and `full/` records copied into one local directory,
-the existing source/fixture-qualified analysis binaries can be exercised with:
+first select the read-only dependency snapshot used for qualification, following
+[the snapshot procedure](../../Plans/i5a-native-qualification.md#reproduce-with-a-stable-dependency-snapshot).
+Use its path and the digest printed when it was created for all commands:
 
 ```sh
-python3 native/crashpad-demo/assess.py \
-  --captures tmp/crashpad-demo/20261003 \
-  --output tmp/crashpad-demo/20261003/measurements-recheck
+qualification_snapshot=target/qualification-deps/mirrorrust-recheck
+qualification_sha=REPLACE_WITH_PRINTED_MANIFEST_SHA256
+qualify() {
+  python3 tools/with_mirrorrust_snapshot.py run \
+    --snapshot "$qualification_snapshot" --sha256 "$qualification_sha" -- "$@"
+}
 ```
 
-This checks unchanged base reports, exact identities, repeatable assessments,
-one warm-up/five repeats and the existing I5a timing criteria. An over-budget
-run records its samples and exits nonzero; a valid capture is not thereby lost.
+Then produce a fresh source/fixture qualification:
+
+```sh
+qualify python3 tools/check_i5a.py
+```
+
+Continue only after that command succeeds and its printed `Report:` path names
+a passing `ariadne.i5a-acceptance/v2` record with the exact current source/tool
+inventory. The historical 12/14-gate partial record and the older v1 pass are ineligible.
+The accepted native record uses the pinned environment; reruns must use the same
+snapshot or obtain new matching evidence. Use the passing v2 path below:
+
+```sh
+i5a_fixture_record=/absolute/path/to/fresh/passing/report.json
+qualify python3 native/crashpad-demo/assess.py \
+  --captures tmp/crashpad-demo/20261003 \
+  --source-fixture-record "$i5a_fixture_record" \
+  --inspection-dir target/crashpad-demo/inspection-recheck \
+  --output target/crashpad-demo/native-assessment-recheck
+```
+
+Both `--source-fixture-record` and `--inspection-dir` are required. This checks
+historical build/capture links, fresh inspection identities, unchanged base
+reports, native backend receipts
+and repeatable assessments. Separate untimed default/explicit-native runs must
+match all reports. One warm-up/five repeats retain the 10 ms combined phase and
+1,500 ms assessment-CLI median limits. Both capture modes and source/tool/input
+stability must pass. An over-budget run records its samples and exits nonzero;
+the historical original-Windows I4 flag remains false in every I5a result.
+The [separate active I4 re-pin](../../docs/Ariadne/i4-windows-repin-validation.md)
+uses the 98-instruction workload and remains over its fixed CLI budget.

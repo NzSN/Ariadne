@@ -4,7 +4,9 @@
 
 **Status.** Implemented and validated on 2026-10-02 within the recorded
 fixture/Linux tier. All 17 investigation gates passed with 123 stable source
-hashes. Full original-Windows I4 qualification remains unavailable.
+hashes. Full original-Windows I4 qualification was unavailable at that run.
+The [later re-pin](i4-windows-repin-validation.md) passes active Windows
+correctness while remaining over its unchanged CLI limit.
 
 **Why this document exists.** Review of the first-question implementation found
 two failures in the [investigation contract](investigation-contracts.md): full
@@ -18,6 +20,9 @@ and regression criteria; this record distinguishes exercised checks from full
 real-Windows acceptance.
 
 **Where to go next.**
+
+
+- [2026-10-05 Windows I4 replacement](i4-windows-repin-validation.md) — supersedes the older missing-artifact obligation with an independently inspected active case; correctness passes and the unchanged CLI budget remains unmet.
 
 - [Updated contracts](investigation-contracts.md) describe zero budgets,
   unavailable/partial truncation and the operational v2 qualification records.

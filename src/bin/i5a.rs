@@ -1,11 +1,16 @@
 //! Bound, repeatable I5a binding/assessment/render measurements.
+use ariadne::bap::{core_adapter::NativeAnalyzer, core_session::CoreConfig};
 use ariadne::effects::PreparationOptions;
 use ariadne::input::{
     AnalysisQuery, FileSnapshot, OpenLimits, PrepareLimits, investigation::bind_fault_context,
 };
 use ariadne::investigation::{AssessmentLimits, FaultAddressQuestion, assess_zero_address};
 use ariadne::reports::{Format, render_zero_address};
-use std::{error::Error, path::Path, time::Instant};
+use std::{
+    error::Error,
+    path::{Path, PathBuf},
+    time::Instant,
+};
 fn main() -> Result<(), Box<dyn Error>> {
     let args: Vec<_> = std::env::args().collect();
     if args.len() != 6 {
@@ -28,14 +33,38 @@ fn main() -> Result<(), Box<dyn Error>> {
         &PreparationOptions::default(),
         PrepareLimits::default(),
     )?;
-    let mut a = ariadne::Analyzer::new(p.prepared.request.clone())?;
-    while a.step() {}
+    let core_directory = std::env::var_os("ARIADNE_BAP_CORE_DIR")
+        .map(PathBuf::from)
+        .unwrap_or_else(|| PathBuf::from("target/bap-core-native"));
+    let native = NativeAnalyzer::from_capture(
+        &CoreConfig::from_directory(core_directory),
+        "i5a-measurement",
+        &p,
+    )?;
+    let receipt = native.identity().clone();
+    let manifest_sha256 = ariadne::reports::sha256(&serde_json::to_vec(&receipt["build"])?);
+    // Complete the same native capture path used by the CLI before measuring
+    // the existing binding + assessment + all-format rendering interval.
+    let completed = native.complete()?;
+    let a: &dyn ariadne::AnalysisView = &completed;
+    let field = |name: &str| {
+        receipt[name]
+            .as_str()
+            .ok_or("missing backend identity field")
+    };
+    let backend = field("backend")?;
+    let profile = field("profile")?;
+    let family = field("family")?;
+    let backend_query = field("query")?;
+    let helper_sha256 = receipt["build"]["helper_sha256"]
+        .as_str()
+        .ok_or("missing helper identity")?;
     println!(
-        "artifact_sha256,run,binding_ns,assessment_ns,render_ns,total_ns,evidence,claims,conclusion,output_sha256"
+        "artifact_sha256,run,binding_ns,assessment_ns,render_ns,total_ns,evidence,claims,conclusion,output_sha256,analysis_backend,analysis_profile,analysis_family,snapshot_id,query_id,backend_query,helper_sha256,manifest_sha256,entry,site,memory_access"
     );
     for run in 0..runs {
         let start = Instant::now();
-        let bound = bind_fault_context(&p, &a)?;
+        let bound = bind_fault_context(&p, a)?;
         let binding = start.elapsed().as_nanos();
         let start = Instant::now();
         let result = assess_zero_address(
@@ -54,13 +83,15 @@ fn main() -> Result<(), Box<dyn Error>> {
         }
         let render = start.elapsed().as_nanos();
         println!(
-            "{},{run},{binding},{assessment},{render},{},{},{},{:?},{}",
+            "{},{run},{binding},{assessment},{render},{},{},{},{:?},{},{backend},{profile},{family},{},{},{backend_query},{helper_sha256},{manifest_sha256},0x{entry:016x},0x{site:016x},0",
             result.identity.artifact_sha256,
             binding + assessment + render,
             result.evidence.len(),
             result.claims.len(),
             result.conclusion,
-            ariadne::reports::sha256(output.as_bytes())
+            ariadne::reports::sha256(output.as_bytes()),
+            result.identity.snapshot_id,
+            result.identity.query_id,
         );
     }
     Ok(())

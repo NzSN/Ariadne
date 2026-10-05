@@ -58,6 +58,7 @@ class BapWorkloadGateTests(unittest.TestCase):
                 {"source": "before"}, {"source": "before" if stable else "after"},
             ]), patch.object(gate, "workload_sources", return_value=current_sources, create=True), \
                  patch.object(gate, "WINDOWS_CASE_PATH", manifest), \
+                 patch.object(gate, "active_identity", return_value=None), \
                  patch.object(gate, "sha", return_value="c" * 64), \
                  patch.object(gate.subprocess, "run", side_effect=run) as commands, \
                  patch.object(gate.tempfile, "mkdtemp", return_value=str(work)), \

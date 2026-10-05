@@ -10,6 +10,9 @@
 
 **Where to go next.**
 
+
+- [Native analysis replay and qualification](../docs/Ariadne/bap-core-qualification.md) — records native-helper observations, mutation sensitivity and CLI ownership separately from the retained Rust replay; neither finite campaign is a universal proof.
+
 - [Rust implementation](../docs/implementation.md) — maps model actions to executable analysis.
 - [Stateflow design](../docs/machine-state-design.md) — extends a frozen recovered CFG with supplied abstract transitions.
 - [Assurance decision](../docs/Ariadne/semantic-assurance.md) — separates active analysis models from retired ISA proofs.

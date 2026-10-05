@@ -24,6 +24,7 @@ class ActiveQualificationTests(unittest.TestCase):
             work.mkdir()
             for relative, data in {
                 "native/bap/toolchain.lock.json": {},
+                "evidence/Ariadne/bap-windows-workload-case.json": {},
                 "mbt/stage-e/results/latest.json": {"sourceHashes": {}},
                 "mbt/stage-e/corpus/manifest.json": {
                     "generation": {"nativeHelperSha256": "test-digest"}
@@ -60,6 +61,18 @@ class ActiveQualificationTests(unittest.TestCase):
                 stack.enter_context(patch.object(module, "sources", side_effect=[before, after]))
                 if hasattr(module, "sha"):
                     stack.enter_context(patch.object(module, "sha", return_value="test-digest"))
+                if hasattr(module, "active_identity"):
+                    stack.enter_context(patch.object(module, "active_identity", return_value=None))
+                # This test owns orchestration, not workload admission. The
+                # workload suites separately exercise complete raw evidence,
+                # inventory checks and the real qualification predicate.
+                if hasattr(module, "validate_workload_bindings"):
+                    stack.enter_context(patch.object(module, "validate_workload_bindings"))
+                    stack.enter_context(patch.object(module, "windows_qualification",
+                                                     return_value={"targetMet": windows,
+                                                                   "reason": "controlled prerequisite"}))
+                    stack.enter_context(patch.object(module, "WINDOWS_CASE_PATH",
+                                                     root / "evidence/Ariadne/bap-windows-workload-case.json"))
                 stack.enter_context(patch.object(module.subprocess, "run", side_effect=run))
                 stack.enter_context(patch.object(module.tempfile, "mkdtemp", return_value=str(work)))
                 stack.enter_context(patch.dict("os.environ", {"ARIADNE_DOT": str(root / "dot")}))

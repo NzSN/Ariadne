@@ -14,8 +14,10 @@
 
 - [Checkpoints](../../CHECKPOINTS.md) — connect evidence to dated deliveries.
 - [Layout delivery](../../docs/Ariadne/rust-source-layout.md) — explains the regression tier before later tooling changes.
-- [I5a delivery](../../docs/Ariadne/i5a-validation.md) — distinguishes the zero-address source/fixture tier from unexercised real Windows acceptance.
-- [BAP workload repair](../../docs/Ariadne/bap-windows-workload-validation.md) — separates implementation evidence from the original Windows Stage 1 prerequisite.
+- [Historical I5a delivery](../../docs/Ariadne/i5a-validation.md) — distinguishes its original source/fixture result from the separately qualified native and controlled Windows successors.
+- [Windows I4 re-pin](../../docs/Ariadne/i4-windows-repin-validation.md) — independent 98-start capture checks and the remaining fixed CLI performance gap.
+- [Native I5a qualification](../../docs/Ariadne/i5a-native-qualification.md) — records accepted native measurements and the snapshot repair, while preserving earlier failures.
+- [Historical BAP workload repair](../../docs/Ariadne/bap-windows-workload-validation.md) — preserves the original missing-artifact checkpoint before later replacement and native qualification.
 - [Controlled BAP replacement](../../docs/Ariadne/bap-windows-repin-validation.md) — records the new active pin, durable input bundle and its own measured qualification.
 
 **What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Embedded paths preserve the layout at the original run.
@@ -68,10 +70,28 @@ for the exercised scope and remaining clauses.
 The later [Crashpad demo record](crashpad-demo-validation.json),
 [manifest](crashpad-demo-evidence-manifest.json) and [archive](crashpad-demo-evidence.tar.gz)
 retain a native Windows build, partial/full real captures, independent field/code
-checks and passing zero-address answers. The unchanged CLI timing condition is
-not met, so controlled-case I5a acceptance remains false. Raw dumps and executables
+checks and passing zero-address answers. That historical run did not meet the
+CLI timing condition, so its controlled-case flag remains false. Raw dumps and executables
 stay external under ignored local artifact directories. The [delivery guide](../../docs/Ariadne/crashpad-demo-validation.md)
-describes the resolved capture gap and remaining performance requirement.
+describes the original capture gap and links the later passing native qualification.
+
+## Native I5a refresh progress (2026-10-04)
+
+The [progress summary](i5a-native-progress/progress.json),
+[archive](i5a-native-progress-evidence.tar.gz) and
+[manifest](i5a-native-progress-evidence-manifest.json) retain new native
+measurements, raw samples, output bundles, mutation results and rejected aggregate
+attempts. This records the earlier incomplete qualification: nine measured fixtures and
+sixteen mutants passed; controlled diagnostics met both budgets, but that I5a
+aggregate was 12/14 and investigation was 16/17. The failed formatting gate was
+in the changing sibling MirrorRust checkout. The first Stage 2 refresh also
+rejected its final dependency-identity check despite twenty passing components.
+
+Original records retain their exact bytes and pass/fail flags. The archive's
+path map connects temporary runner paths to retained entries. Real Windows dumps
+and executables remain external and hash-pinned. The older I5a, Crashpad and
+Stage 2 accepted records remain unchanged historical evidence; this progress
+archive does not supersede them with a new acceptance result.
 
 ## OCaml recovery foundation
 
@@ -85,19 +105,57 @@ See the [qualification guide](../../docs/Ariadne/bap-ocaml-qualification.md) for
 coverage, the resolved prerequisite and the successor A1–A6 work. Earlier Stage 1/A0
 records remain historical and have not been rebound to replacement source hashes.
 
-## Complete native Stage 2 qualification (2026-10-04)
+## Native I5a accepted under the dependency snapshot (2026-10-05)
+
+The [source/fixture record](i5a-native-fixture-validation.json) passes all 14 gates;
+the separate [controlled record](i5a-native-controlled-validation.json) qualifies
+partial/full Windows captures under the unchanged 1,500 ms CLI and 10 ms phase
+criteria. Active Windows I4 correctness passes but its fixed CLI budget remains unmet. The [archive](i5a-native-evidence.tar.gz)
+and [manifest](i5a-native-evidence-manifest.json) retain 1,969 verified entries,
+216 source hashes, exact producer records, raw samples, report bundles and
+historical capture metadata. Real dump/executable bytes remain external.
+
+Qualification uses the manifest-selected, read-only MirrorRust view described
+in the [guide](../../docs/Ariadne/i5a-native-qualification.md). The Stage 2 archive
+contains `dependencies/mirrorrust-snapshot.json`, including exact source bytes.
+This qualifies that dependency snapshot; live-checkout changes have their own
+identities. Earlier failed records retain their original flags and bytes.
+
+## Complete native Stage 2 refresh (2026-10-05)
 
 [bap-core-qualification.json](bap-core-qualification.json) records 20 passing
-aggregate gates, 623 stable source hashes, `stage2Qualified=true` and verified
+aggregate gates, 632 stable source hashes, `stage2Qualified=true` and verified
 default-native selection with explicit Rust rollback. The
 [archive](bap-core-evidence.tar.gz) and [manifest](bap-core-evidence-manifest.json)
-retain 1,345 verified entries, including the default-helper-path smoke check.
+retain 1,355 verified entries, including the default-helper-path smoke check.
 The [qualification guide](../../docs/Ariadne/bap-core-qualification.md) explains
 the 44 generated traces/330 observations, twelve native algorithm mutations,
 five measured workloads and separate proof/release limits. Earlier Stage 1 and
-A0 records remain historical evidence for their exact source sets.
+A0 records remain historical evidence for their exact source sets. The original
+623-source/1,345-entry adoption record and archive are preserved under
+[bap-core-history/2026-10-04-adoption](bap-core-history/2026-10-04-adoption/bap-core-qualification.json).
+
+The [pre-I4 core refresh](bap-core-history/2026-10-05-before-i4-repin/bap-core-qualification.json)
+and [pre-I4 I5a bundle](i5a-native-history/2026-10-05-before-i4-repin/i5a-native-evidence-manifest.json)
+remain byte-identical historical evidence.
 
 The complete Stage 2 archive is stored with Git LFS. After cloning, run
 `git lfs pull --include="evidence/Ariadne/bap-core-evidence.tar.gz"` to materialize
-the archive before checking its manifest hash or extracting it. The LFS object
+the archive before checking its manifest hash or extracting it. The historical
+adoption archive is also tracked with Git LFS at its history path. The LFS object
 preserves the exact qualified archive bytes; a Git pointer is not the archive.
+
+## Active Windows I4 re-pin (2026-10-05)
+
+The [new case](investigation-windows-workload-case.json) pins the independently
+inspected 98-start native Windows Crashpad capture and exact entry/fault/producer
+query. Its [inspection](i4-windows-capture-inspection.json),
+[validation record](i4-windows-repin-validation.json),
+[archive](i4-windows-repin-evidence.tar.gz) and
+[verified manifest](i4-windows-repin-evidence-manifest.json) retain the complete
+identity and measured result: 17 gates pass, five explanation-CLI samples have
+a 4,774.451 ms median, and full I4 acceptance is false against the unchanged
+2,000 ms limit. The archive contains 865 verified entries (18,012,236 bytes).
+Raw input bytes remain in the unchanged [23-entry input bundle](bap-windows-workload-inputs.tar.gz),
+which is also retained with the I4 source inventory. The original Electron
+manifest and prior acceptance flags retain their historical meaning.

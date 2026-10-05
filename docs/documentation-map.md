@@ -39,18 +39,21 @@ flowchart TD
     Core --> Effects[Conservative effects]
     Effects --> BAP[BAP assessment and backend design]
     BAP --> Projection[Typed projection and source review]
-    Projection --> Delivery[BAP-only delivery]
-    Delivery --> Windows[Open: original-Windows qualification]
+    Projection --> Delivery[BAP-only semantic delivery]
+    Delivery --> Native[Native recovery, definitions, slice and stateflow]
+    Native --> Windows[Qualified: native default and Rust rollback]
     Input --> Capture[Independent real-capture entry and slice]
     Capture --> Explain[Fault-address question and contracts]
     Explain --> Evidence[First-question delivery evidence]
-    Evidence --> Later[Open: full I4 and later questions]
+    Evidence --> Repin[Active Windows I4 replacement]
+    Repin --> Budget[Open: 4.774 s CLI against 2 s]
+    Budget --> Later[Later: broader I5 and I6/I7]
     Core --> State[Abstract stateflow and supplied IR]
     State --> Replay[Stage E generated replay and reports]
     Replay --> Proof[Open: universal Rust refinement]
     Capture --> Measure[Workload measurement design]
     Measure --> Perf[Historical optimization evidence]
-    Perf --> Windows
+    Perf --> Historical[Evidence for its original backend and query]
     BAP --> Scope[Decision: retire independent ISA proofs]
 ```
 
@@ -58,13 +61,13 @@ flowchart TD
 | --- | --- | --- | --- |
 | How can captured instructions reveal possible value origins? | [Project overview](../README.md), [analysis model](../Specs/README.md) | [Rust implementation](implementation.md), [core replay](../mbt/README.md) | [Universal refinement boundary](Ariadne/stage-f-proof-and-performance.md) |
 | Where do trustworthy bytes and instruction starts come from? | [Byte-span adapter limitations](llvm-mc-adapter.md), [reader design](Ariadne/file-reader-design.md) | [Input module](Ariadne/modules/input.md), [predecessor fixture delivery](Ariadne/stage-b-c-validation.md) | PE/ELF image and ELF-core input remain deferred in the [roadmap](../ROADMAP.md). |
-| How are register and memory dependencies derived? | [Original effects contract](Ariadne/operand-effects-design.md), [BAP assessment](Ariadne/bap-core-refactor-assessment.md) | [Backend design](Ariadne/bap-semantic-backend-design.md), [source review](Ariadne/bap-projection-source-review.md), [BAP-only delivery](Ariadne/bap-only-removal-validation.md) | Unsupported BIL stays explicit; full Windows qualification and core migration remain in the [BAP plan](../Plans/bap-integration.md). |
+| How are register and memory dependencies derived? | [Original effects contract](Ariadne/operand-effects-design.md), [BAP assessment](Ariadne/bap-core-refactor-assessment.md) | [Backend design](Ariadne/bap-semantic-backend-design.md), [source review](Ariadne/bap-projection-source-review.md), [BAP-only delivery](Ariadne/bap-only-removal-validation.md) | Unsupported BIL stays explicit. [Native Stage 2 qualification](Ariadne/bap-core-qualification.md) passes on its recorded corpus; universal refinement, lifter correctness and packaged release qualification remain separate. |
 | Does a real capture contain an earlier possible producer? | [Independent-entry evidence design](Ariadne/priority-1-real-capture-design.md) | [Controlled Chromium/Linux case](Ariadne/priority-1-real-capture-validation.md) | One case does not establish historical execution or universal coverage. |
-| Which definitions may contribute to this fault address? | [Investigation design](Ariadne/investigation-layer-design.md) | [Contracts](Ariadne/investigation-contracts.md), [API](Ariadne/modules/investigation.md), [first delivery](Ariadne/investigation-validation.md) | Full original-Windows I4, broader I5 and I6–I7 remain in the [investigation plan](../Plans/investigation-layer.md). |
-| Does the selected access begin at address zero under captured exception context? | [I5a design](Ariadne/i5a-zero-address-design.md) | [Implemented contracts](Ariadne/i5a-contracts.md), [source review](Ariadne/i5a-source-review.md), [H0–H5 execution plan](../Plans/i5a-zero-address.md). | Controlled real Windows I5a and original-Windows I4 remain separate; see the [current I5a stage](../Plans/investigation-layer.md#i5a--zero-address-consistency). |
+| Which definitions may contribute to this fault address? | [Investigation design](Ariadne/investigation-layer-design.md) | [Contracts](Ariadne/investigation-contracts.md), [API](Ariadne/modules/investigation.md), [first delivery](Ariadne/investigation-validation.md) | [Re-pinned Windows I4 performance](Ariadne/i4-windows-repin-validation.md), broader I5 and I6–I7 remain in the [investigation plan](../Plans/investigation-layer.md). |
+| Does the selected access begin at address zero under captured exception context? | [I5a design](Ariadne/i5a-zero-address-design.md) | [Implemented contracts](Ariadne/i5a-contracts.md), [source review](Ariadne/i5a-source-review.md), [H0–H5 execution plan](../Plans/i5a-zero-address.md). | Qualified controlled Windows I5a and over-budget active Windows I4 remain separate; see the [current I5a stage](../Plans/investigation-layer.md#i5a--zero-address-consistency). |
 | How can an investigator read and consume the output? | [Core rendering](Ariadne/result-rendering.md), [presentation design](Ariadne/priority-3-investigator-presentation-design.md) | [Minidump report contract](Ariadne/stage-c-report-schema.md), [presentation delivery](Ariadne/priority-3-presentation-validation.md), [examples](Ariadne/minidump-investigator-examples.md) | Additional result families retain [separate contracts](Ariadne/stage-e-report-contracts.md). |
 | What about abstract states and supplied LLVM IR? | [Stateflow design](machine-state-design.md), [typed replay design](Ariadne/stage-e-mirrorrust-design.md) | [Stage E completion](Ariadne/stage-e-completion.md), [IR usage](Ariadne/modules/ir.md), [replay guide](../mbt/stage-e/README.md) | Supplied semantics remain premises; Stage E does not reconstruct original IR from machine code. |
-| Does the tool meet a realistic performance budget? | [Baseline](Ariadne/stage-f-proof-and-performance.md), [workload design](Ariadne/priority-4-workload-performance-design.md) | [Historical LLVM-backed optimization](Ariadne/priority-4-performance-validation.md), [benchmark guide](Ariadne/modules/bench.md) | That measurement does not qualify the current BAP backend; see the [BAP plan](../Plans/bap-integration.md). |
+| Does the tool meet a realistic performance budget? | [Baseline](Ariadne/stage-f-proof-and-performance.md), [workload design](Ariadne/priority-4-workload-performance-design.md) | [Historical LLVM-backed optimization](Ariadne/priority-4-performance-validation.md), [benchmark guide](Ariadne/modules/bench.md) | [Native core qualification](Ariadne/bap-core-qualification.md) uses its own unlimited policy; [active Windows I4](Ariadne/i4-windows-repin-validation.md) exceeds its unchanged 2 s limit; [controlled I5a](Ariadne/i5a-native-qualification.md) passes its fixed budgets. |
 | Why is there an AMD64/Lean tree if BAP supplies semantics? | [Historical ISA design](amd64-semantics-design.md), [former profile](amd64-user64.md) | [Retirement and trust-boundary decision](Ariadne/semantic-assurance.md) | The research is retired. BAP lifter correctness remains a trust assumption, not a discharged ISA proof. |
 
 ## Maintaining the network
@@ -97,7 +100,9 @@ implemented repairs and exercised checks from real-Windows qualification.
 
 ### Project and active plans
 
+- [Windows I4 replacement plan](../Plans/i4-windows-repin.md).
 - [I5a zero-address implementation plan](../Plans/i5a-zero-address.md).
+- [Native I5a qualification plan](../Plans/i5a-native-qualification.md).
 
 - [Ariadne checkpoints](../CHECKPOINTS.md).
 - [Ariadne plans](../Plans/README.md).
@@ -112,6 +117,7 @@ implemented repairs and exercised checks from real-Windows qualification.
 - [I5a implemented contracts](Ariadne/i5a-contracts.md).
 - [I5a source and finite admission review](Ariadne/i5a-source-review.md).
 - [I5a source/fixture delivery and validation](Ariadne/i5a-validation.md).
+- [Native I5a qualification and dependency isolation](Ariadne/i5a-native-qualification.md).
 - [Native Windows capture with crashpad-nzsn](Ariadne/crashpad-demo-validation.md).
 - [Crashpad demo build and capture recipe](../native/crashpad-demo/README.md).
 
@@ -133,6 +139,7 @@ implemented repairs and exercised checks from real-Windows qualification.
 - [Stage 1 BAP semantic backend protocol and projection](Ariadne/bap-semantic-backend-design.md).
 - [File readers and immutable address-space preparation](Ariadne/file-reader-design.md).
 - [Installed ModelMirrors and MirrorRust compatibility](Ariadne/installed-modelmirrors-compatibility.md).
+- [Windows I4 replacement validation](Ariadne/i4-windows-repin-validation.md).
 - [Fault-address investigation contracts](Ariadne/investigation-contracts.md).
 - [Ariadne investigation layer](Ariadne/investigation-layer-design.md).
 - [First fault-address investigation delivery](Ariadne/investigation-validation.md).

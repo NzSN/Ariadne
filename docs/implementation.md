@@ -10,6 +10,9 @@
 
 **Where to go next.**
 
+
+- [Native default and Rust reference](Ariadne/bap-core-qualification.md) — records the production native minidump owner and exact finite replay/rollback scope; this guide explains the Rust reference implementation.
+
 - [Core replay guide](../mbt/README.md) — checks observable Rust transitions against generated model traces.
 - [Proof boundary](Ariadne/stage-f-proof-and-performance.md) — states what finite tests leave unproved.
 - [Source-layout delivery](Ariadne/rust-source-layout.md) — supplies current package and module organization.
@@ -32,8 +35,9 @@ now have [Stage E completion](Ariadne/stage-e-completion.md). The
 and [proof-boundary record](Ariadne/stage-f-proof-and-performance.md) distinguish
 that progress from generated model-based replay or a Rust refinement proof.
 The scoped [Priority 4 workload-performance implementation plan](../Plans/completed/priority-4-workload-performance-plan.md)
-now qualifies a 98-instruction Windows minidump and a measured predecessor
-cache. Incoming sets are recomputed only when local predecessors change;
+historically qualified its original 98-instruction Windows minidump and a
+measured predecessor cache under the earlier LLVM-backed pipeline. That result
+does not qualify the current native backend or the re-pinned I4 query. Incoming sets are recomputed only when local predecessors change;
 the sorted one-action schedule is preserved by full-transition comparisons.
 Its [performance design](Ariadne/priority-4-workload-performance-design.md)
 separates end-to-end CLI observations from core counters.

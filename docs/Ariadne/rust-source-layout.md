@@ -10,6 +10,9 @@
 
 **Where to go next.**
 
+
+- [2026-10-05 Windows I4 replacement](i4-windows-repin-validation.md) — supersedes the older missing-artifact obligation with an independently inspected active case; correctness passes and the unchanged CLI budget remains unmet.
+
 - [Implementation guide](../implementation.md) — maps the consolidated modules to their responsibilities.
 - [Repository rules](../../AGENTS.md) — preserve source layout and isolated campaign build directories.
 
@@ -91,6 +94,7 @@ The [evidence manifest](../../evidence/Ariadne/rust-source-layout-evidence-manif
 [derived reports and logs](../../evidence/Ariadne/rust-source-layout-evidence.tar.gz).
 
 Earlier validation JSON and evidence archives retain their original source
-paths and hashes as historical records. Full I4 qualification still requires
-the unavailable original Windows capture; this consolidation adds no ISA-step
+paths and hashes as historical records. At that layout checkpoint, full I4 qualification still required
+the unavailable original Windows capture. The [later re-pin](i4-windows-repin-validation.md)
+closes that gap and retains an unmet fixed timing condition; this consolidation adds no ISA-step
 acceptance, execution-history proof or root-cause capability.

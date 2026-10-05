@@ -14,7 +14,7 @@
 - [I5a contracts](../i5a-contracts.md) — define exception-context binding and the separate numeric assessment.
 - [Follow-up plan](../../../Plans/investigation-layer.md) — tracks missing capture acceptance and later questions.
 
-**What remains unresolved.** Full original-Windows I4 and controlled real Windows I5a qualification remain open. Broader hypothesis, object/source-context and cross-capture questions remain later work.
+**What remains unresolved.** Active Windows I4 correctness passes after the [98-instruction re-pin](../i4-windows-repin-validation.md); its 4.774 s CLI median exceeds the unchanged 2 s limit. Controlled Windows I5a is [qualified under its pinned native setup](../i5a-native-qualification.md). Broader hypothesis, object/source-context and cross-capture questions remain later work.
 
 For the wider context, see the optional [documentation map](../../documentation-map.md).
 

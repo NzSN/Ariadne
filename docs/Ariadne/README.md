@@ -10,10 +10,13 @@
 
 **Where to go next.**
 
+
+- [Active Windows I4 qualification](i4-windows-repin-validation.md) — exact replacement capture, passing correctness and remaining fixed CLI budget.
+
 - [Documentation map](../documentation-map.md) — traces motivation, implementation, validation and open questions.
 - [Plan index](../../Plans/README.md) — identifies active implementation work.
 
-**What remains unresolved.** Full original-Windows I4 and controlled real Windows I5a qualification remain open. Native BAP recovery, dataflow, slicing and finite stateflow are implemented; [Stage 2 qualification](bap-core-qualification.md) records passing aggregate acceptance and default adoption. Possible-producer and zero-address questions are implemented; other hypothesis, object/source-context and cross-capture questions remain later work.
+**What remains unresolved.** Active Windows I4 correctness passes after the [98-instruction re-pin](i4-windows-repin-validation.md); its 4.774 s CLI median exceeds the unchanged 2 s limit. Controlled Windows I5a is [qualified under the pinned dependency snapshot](i5a-native-qualification.md). Native BAP recovery, dataflow, slicing and finite stateflow are implemented; [Stage 2 qualification](bap-core-qualification.md) records passing aggregate acceptance and default adoption. Other hypothesis, object/source-context and cross-capture questions remain later work.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 
@@ -45,13 +48,16 @@ qualifies the timing-decision and truncation repairs within the available tier.
 The [I5a delivery record](i5a-validation.md) documents the new numeric question's
 corpus, measurements and separate Windows capture requirements.
 The later [Crashpad Windows demo](crashpad-demo-validation.md) provides real
-capture/answer evidence, with CLI performance still over its criterion.
+capture/answer evidence. Its historical timing miss is followed by
+[native qualification](i5a-native-qualification.md): all 14 source/fixture gates
+and both controlled capture modes pass with a read-only dependency snapshot.
 Validation JSON, CSV samples and evidence archives retain their original
 identities under [evidence/Ariadne](../../evidence/Ariadne/README.md).
 A historical passing record is not fresh qualification after changes.
 
 Older priority, effect-rule and source-review documents remain evidence for their
-original backend and workload. The original Windows capture requirement and
-the [universal Rust proof boundary](stage-f-proof-and-performance.md) remain open.
+original backend and workload. The [active Windows I4 re-pin](i4-windows-repin-validation.md) closes the missing
+artifact gap but remains over its fixed CLI budget. The
+[universal Rust proof boundary](stage-f-proof-and-performance.md) remains open.
 The independent ISA proof project is retired. Obsolete plan/status Markdown is
 removed; Git retains its history.

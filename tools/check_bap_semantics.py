@@ -5,12 +5,14 @@ from datetime import datetime,timezone
 from pathlib import Path
 from rust_layout import copy_sut, source_files
 from bap_workload_contract import windows_qualification
+from with_mirrorrust_snapshot import active_identity
 from measure_bap import WINDOWS_ARCHIVE_RELATIVE, WINDOWS_CASE_PATH, sources as workload_sources
 ROOT=Path(__file__).resolve().parents[1]
 WORKLOAD_TOOLS=('target/release/ariadne-minidump','target/release/bap_minidump','target/ariadne-llvm-mc','target/ariadne-bap-lift','native/bap/toolchain.lock.json','tools/measure_bap.py')
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def sources():
  paths=source_files()
+ paths.add(ROOT/'tools/with_mirrorrust_snapshot.py')
  for tree in ['src','tests','src/input','tests/input','src/examples','src/reports','tests/reports','src/bap','src/investigation','tests/bap','src/bench','native/llvm_mc','native/bap']:
   paths.update(p for p in (ROOT/tree).rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix!='.md')
  paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Specs/Ariadne.tla','Specs/AriadneMachineCommon.tla','Specs/AriadneTypes.tla','tools/check_bap_semantics.py','tools/check_bap_model.py','tools/check_bap_mutations.py','tools/measure_bap.py','tools/test_bap_workload.py','tools/bap_workload_contract.py','tools/test_bap_workload_contract.py','tools/test_bap_workload_gate.py','tools/check_stage_e.py','tools/check_minidump.py','tools/check_minidump_mutations.py'])
@@ -63,6 +65,7 @@ def main():
     nested[name]=data;output=f'Reused exact source-hash-verified record: {reuse}\n';code=0
     if name=='model' and data['observerSha256']!=sha(ROOT/'target/release/bap-model-case'):raise RuntimeError('model observer binary changed')
     if name=='stage-e' and (data['tools']['nativeMCSha256']!=sha(ROOT/'target/ariadne-llvm-mc') or data['tools']['nativeIRSha256']!=sha(ROOT/'target/ariadne-llvm-ir')):raise RuntimeError('Stage E native tools changed')
+    if name=='stage-e' and data.get('qualificationEnvironment')!=active_identity():raise RuntimeError('Stage E qualification dependency differs')
    else:
     r=subprocess.run(cmd,cwd=ROOT,env=env,capture_output=True,text=True,timeout=1200);code=r.returncode;output=r.stdout+r.stderr
     for line in output.splitlines():
@@ -80,6 +83,7 @@ def main():
  if not implemented:missing.append('Required implementation/regression gates or source stability did not pass.')
  record=dict(schema='ariadne.bap-only-removal/v5',recordedUtc=datetime.now(timezone.utc).isoformat(),passed=implemented,implementationGatesPassed=implemented,stage1ExitPassed=full_stage1,sourcesStable=stable,sourceHashes=before,gates=results,records=nested,tools={str(p.relative_to(ROOT)):sha(p) for p in [ROOT/'target/ariadne-bap-lift',ROOT/'target/ariadne-llvm-mc',ROOT/'native/bap/toolchain.lock.json']},selectedToolchain=json.loads((ROOT/'native/bap/toolchain.lock.json').read_text()),nativeCorpusCases=41,admittedOpcodeForms=30,semanticBackend="bap-only",llvmSemanticSelector=False,llvmSemanticFallback=False,llvmRole="independent decoded-fact reference; separate supplied-IR path remains",defaultSelectionAuthorizedBy="explicit user instruction to remove LLVM semantic backend",instructionStepTrack='retired; BAP lifting is a trusted dependency',stage2Started=False,stage2Qualified=False,stage2PrerequisiteSatisfied=full_stage1,defaultPromotionEligible=full_stage1,windowsWorkloadQualification=windows,qualificationPolicy='Full Stage 1 exit and the Stage 2 prerequisite require valid pinned controlled Windows evidence under the user-authorized unlimited timing policy; latency is measured but does not gate acceptance; existing default selection remains separately authorized.',missing=missing,scope='Sole BAP minidump semantic producer into the existing Rust core; finite tested projection and model-relative solver conformance, no ISA-step proof or BAP-owned analysis core')
  if env.get('ARIADNE_DOT') and Path(env['ARIADNE_DOT']).is_file():record['graphviz']={'path':env['ARIADNE_DOT'],'sha256':sha(env['ARIADNE_DOT'])}
+ record['qualificationEnvironment']=active_identity()
  (work/'report.json').write_text(json.dumps(record,indent=2)+'\n');print('Report:',work/'report.json',flush=True)
  raise SystemExit(0 if record['passed'] else 1)
 if __name__=='__main__':main()

@@ -17,11 +17,146 @@
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
-Updated **2026-10-04**: complete Stage 2 is qualified for the exercised
-workspace-local corpus. Native BAP analysis is the minidump CLI default; explicit
-Rust rollback remains available. I4 original-Windows and controlled real Windows
-I5a retain their separate criteria. BAP lifting remains trusted; the independent
-ISA/Lean track remains retired. Earlier entries preserve their dated scope.
+Updated **2026-10-05**: native BAP remains the CLI default, and controlled
+Windows I5a is qualified under a read-only, hash-pinned MirrorRust dependency
+snapshot. The latest retained records pass 20 Stage 2 gates, 17 investigation gates,
+14 I5a source/fixture gates and both controlled capture modes. Active Windows
+I4 is re-pinned and passes correctness; its fixed 2-second CLI limit remains unmet. BAP lifting stays trusted and the independent ISA track retired.
+
+## 2026-10-05 — Documentation and plan status synchronized
+
+Current entry points, module guides, historical delivery contexts and plan
+ledgers now agree with the implemented native-default pipeline and retained
+evidence. The [plan index](Plans/README.md) separates remaining investigation
+work from delivered native, foundation, capture and qualification plans. The
+[documentation network](docs/documentation-map.md) links historical results
+to their accepted successors without promoting old failed flags.
+
+Stale descriptions of unstarted Stage 2, Rust-owned production minidump analysis
+and the lost Electron dump as an active I4 prerequisite are superseded. Current
+usage names the BAP workload v4 / aggregate v5 schemas and the separate I4 v3
+workload schema, bundled inputs and exact-copy environment overrides. Historical
+reference-decoding phase timings are labeled as evidence for their earlier
+pipeline, not a diagnosis of the current native I4 performance failure.
+
+The [I4 plan](Plans/i4-windows-repin.md#remaining-i4-performance-qualification)
+now gives the remaining measured-diagnosis and fixed-budget qualification steps.
+The active result remains 17 passing correctness gates and **4,774.451 ms**
+against **2,000 ms**, so full I4 acceptance is false. Native core 20-gate and
+I5a 14-gate/controlled-capture records retain their separate passing scope.
+
+This synchronization changes Markdown only. Source/tool/dependency inventories
+and retained archive contents are checked against the existing records; the
+source-bound Stage 2 contract/execution-plan bytes and historical evidence
+remain unchanged. Navigation/context and whitespace checks pass. No new
+runtime campaign, optimization, threshold change or release claim is recorded.
+
+## 2026-10-05 — Windows I4 re-pinned; correctness passes, CLI over budget
+
+The user authorized replacing the unavailable original Electron capture. The
+[completed plan](Plans/i4-windows-repin.md) and
+[delivery guide](docs/Ariadne/i4-windows-repin-validation.md) bind the existing
+independently inspected real Windows AMD64 Crashpad capture with 98 instruction
+starts. The new active I4 case uses entry `0x00007ff7382f4840`, fault/seed
+`0x00007ff7382f49b4`, producer `0x00007ff7382f49b1` and access index zero.
+The original manifest and older records remain unchanged historical evidence.
+
+All 17 investigation gates pass. Five native-default explanation-CLI samples
+after warm-up yield **4,774.451 ms**, exceeding the unchanged **2,000 ms** ceiling.
+Re-pin and correctness succeed; `fullI4RealCaptureAcceptance=false` remains an
+explicit performance failure. BAP's unlimited timing policy does not waive I4.
+The [I4 record](evidence/Ariadne/i4-windows-repin-validation.json) and verified
+865-entry archive retain source/tool identities, exact samples and reports.
+
+The complete source refresh passes 20 core gates with 632 stable sources and
+1,355 verified archive entries. Native I5a passes 14 gates with 216 sources; both
+controlled capture modes pass the unchanged 1,500 ms CLI / 10 ms phase criteria
+(partial 869.642 / 1.067 ms; full 873.537 / 1.032 ms). Its archive verifies 1,969
+entries. Both use the same read-only dependency snapshot. Previous accepted
+[core](evidence/Ariadne/bap-core-history/2026-10-05-before-i4-repin/bap-core-qualification.json)
+and [I5a](evidence/Ariadne/i5a-native-history/2026-10-05-before-i4-repin/i5a-native-evidence-manifest.json)
+bundles are preserved byte-for-byte before the source refresh.
+
+## 2026-10-05 — Dependency isolation repairs and native I5a accepted
+
+The [native qualification plan](Plans/i5a-native-qualification.md) is complete
+for its recorded scope. Live MirrorRust edits first invalidated dependency hashes
+and formatting. Formatting-only changes repaired the immediate failure, but
+continued edits required an isolated dependency view. The new
+[snapshot wrapper](tools/with_mirrorrust_snapshot.py) captures all non-ignored
+worktree inputs, formats the copy, and mounts it read-only at the normal dependency
+path. Manifest hashes and mount/source checks bind every qualification record;
+reuse across snapshots is rejected. The live checkout remains editable.
+
+All **183 Python qualification tests** pass. The final aggregates pass
+**20/20 Stage 2**, **17/17 investigation**, and **14/14 I5a** gates with current
+source/tool identities under the selected snapshot. The native 41-case corpus,
+16 I5a mutants, default/reference comparisons and both controlled modes pass.
+No production performance patch or timing-budget change was needed.
+
+| Controlled capture | Assessment CLI median | Native phase median | Fixed criteria |
+| --- | ---: | ---: | --- |
+| Partial | 811.713 ms | 1.014 ms | 1,500 ms CLI / 10 ms phases: pass |
+| Full | 843.215 ms | 1.108 ms | 1,500 ms CLI / 10 ms phases: pass |
+
+```mermaid
+flowchart LR
+  A["Live dependency edits invalidate evidence"] --> B["Format and seal dependency snapshot"]
+  B --> C["20 / 17 / 14 aggregate gates pass"]
+  C --> D["Partial and full captures meet both budgets"]
+  D --> E["Source-bound archives verified; original I4 remains separate"]
+```
+
+The [qualification guide](docs/Ariadne/i5a-native-qualification.md),
+[fixture record](evidence/Ariadne/i5a-native-history/2026-10-05-before-i4-repin/i5a-native-fixture-validation.json) and
+[controlled record](evidence/Ariadne/i5a-native-history/2026-10-05-before-i4-repin/i5a-native-controlled-validation.json)
+keep the tiers separate. The native I5a archive verifies **1,894 entries** and
+211 source hashes. The refreshed Stage 2 archive verifies **1,350 entries** and
+627 Ariadne sources, and retains the complete dependency snapshot manifest.
+The earlier rejected progress archive and the
+[original adoption record](evidence/Ariadne/bap-core-history/2026-10-04-adoption/bap-core-qualification.json)
+remain byte-identical historical evidence. Original-Windows I4, packaged release,
+broader hypotheses and universal refinement are not credited by this result.
+
+## 2026-10-04 — Native I5a measurements pass; aggregate refresh blocked
+
+This earlier block is resolved by the [2026-10-05 native qualification](docs/Ariadne/i5a-native-qualification.md). The following numbers and failed decisions retain their historical meaning.
+
+The [native qualification plan](Plans/i5a-native-qualification.md) now has a
+completed-native-analysis phase benchmark, exact backend/query/build receipts,
+current source/tool inventories and historical capture-provenance checks.
+Twelve native contract controls and 28 controlled-capture controls pass. The
+native corpus exercises all 41 independent cases; all sixteen I5a mutants are
+detected. No production performance change was needed.
+
+Nine measured fixtures pass the unchanged 1,500 ms CLI and 10 ms incremental
+phase criteria. The retained Windows partial/full diagnostic CLI medians are
+**804.201 / 811.943 ms**; their native phase medians are **0.967 / 0.994 ms**.
+These diagnostics do not constitute controlled-case acceptance.
+
+The [progress record](evidence/Ariadne/i5a-native-progress/progress.json) keeps
+the failed decisions explicit. The first Stage 2 refresh passed all twenty
+component gates but rejected final tool stability after the sibling MirrorRust
+sources changed. A rerun then failed `cargo fmt --all -- --check` in that
+dependency. Investigation passed **16/17** gates; I5a passed **12/14**, with
+formatting and the resulting nonpassing investigation prerequisite unresolved.
+Further MirrorRust changes also invalidate reuse of the completed Stage E
+dependency inventory. Ariadne's 626 aggregate source hashes remained stable.
+
+```mermaid
+flowchart LR
+  A["Native benchmark and qualification tooling"] --> B["9 fixture measurements; 16 mutants pass"]
+  B --> C["Partial/full Windows diagnostics meet both budgets"]
+  C --> D["Aggregate blocked: MirrorRust changes and formatting"]
+  D --> E["Next: stable dependency, fresh gates, controlled acceptance"]
+```
+
+The [qualification guide](docs/Ariadne/i5a-native-qualification.md) gives the
+retained samples and resumption sequence. Finish the independent MirrorRust
+work and its formatting, then refresh Stage 2/Stage E and investigation, run the
+fourteen I5a gates, and finally run controlled partial/full qualification with
+the passing native v2 fixture record. Preserve the older accepted records and
+these rejected attempts; do not rebind their hashes or promote their flags.
 
 ## 2026-10-04 — Complete native Stage 2 qualified and adopted
 
@@ -41,10 +176,10 @@ flowchart LR
 ```
 
 The [qualification guide](docs/Ariadne/bap-core-qualification.md) and
-[record](evidence/Ariadne/bap-core-qualification.json) bind 44 generated traces
+[record](evidence/Ariadne/bap-core-history/2026-10-04-adoption/bap-core-qualification.json) bind 44 generated traces
 and 330 observations, twelve detected native algorithm mutations, boundary
 controls and five release workloads. `stage2Qualified`, `defaultNativeVerified`
-and `sourcesStable` are true. The [archive manifest](evidence/Ariadne/bap-core-evidence-manifest.json)
+and `sourcesStable` are true. The [archive manifest](evidence/Ariadne/bap-core-history/2026-10-04-adoption/bap-core-evidence-manifest.json)
 verifies all 1,345 entries, including a smoke check with no backend or helper-path
 override against the exact final release executable.
 

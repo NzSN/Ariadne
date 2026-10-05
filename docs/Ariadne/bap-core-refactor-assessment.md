@@ -2,13 +2,16 @@
 
 ## Context and follow-up
 
-**Status.** Current BAP integration with a user-authorized unlimited workload timing policy. Latency remains measured; Stage 2 A0 contract/probe work has started; production analysis algorithms remain in Rust.
+**Status.** Historical source/API assessment with current delivery links. Both BAP semantic integration and native analysis-core migration are implemented; [Stage 2 qualification](bap-core-qualification.md) records default adoption. The assessment below describes the earlier decision, not current unfinished work.
 
 **Why this document exists.** [Effects design](operand-effects-design.md) exposes the cost and coverage limits of maintaining local instruction rules.
 
-**What this document establishes.** The assessment separates two decisions: use BAP as a semantic provider, then consider BAP ownership of CFG/dataflow analysis. The provider is now implemented; the second decision remains a separate migration.
+**What this document establishes.** The assessment separates two decisions: use BAP as a semantic provider, then consider BAP ownership of CFG/dataflow analysis. Both decisions have delivered implementations and independent qualification records; the original API assessment remains historical.
 
 **Where to go next.**
+
+
+- [Complete Stage 2 qualification](bap-core-qualification.md) — records native default adoption, explicit Rust rollback, exact source/tool scope and the passing aggregate.
 
 - [OCaml foundation qualification](bap-ocaml-qualification.md) — records the completed A0 SDK, native state and transport gates.
 
@@ -24,7 +27,7 @@
 - [Stage 1 design](bap-semantic-backend-design.md) — turns the provider proposal into a typed protocol and projection.
 - [Assurance decision](semantic-assurance.md) — retires the separate ISA-proof objective without claiming lifter correctness.
 
-**What remains unresolved.** The isolated OCaml SDK and bounded Init/Visit transport now qualify the A0 foundation. Complete A1 recovery, A2/A3 algorithms, generated helper replay and production adoption remain open. The user has removed the active BAP latency ceiling; valid capture/correctness evidence and implementation gates remain required. Historical Priority 4/I4 and controlled I5a qualification retain their separate contracts.
+**What remains unresolved.** Native recovery, reaching definitions, slicing, finite stateflow and generated replay are implemented and [qualified on the exercised corpus](bap-core-qualification.md). The minidump CLI selects native BAP analysis by default with explicit Rust rollback. BAP lifting remains trusted; universal refinement and packaged cross-platform release qualification remain open. BAP timing is unlimited, while the [active Windows I4 pin](i4-windows-repin-validation.md) keeps its unmet 2,000 ms CLI ceiling and [controlled Windows I5a](i5a-native-qualification.md) passes its separate fixed budgets.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 
@@ -35,7 +38,7 @@ specifies **Stage 1: semantic backend**, followed by **Stage 2: analysis core**.
 Stage 1 is now implemented; its [historical BAP Stage 1 validation record](../../evidence/Ariadne/bap-stage1-validation.json)
 keeps the missing historical Windows capture explicit. The subsequent
 [LLVM semantic-backend removal](bap-only-removal-validation.md) makes BAP the
-sole minidump semantic producer by user instruction. Stage 2 A0 has started; the migrated analysis algorithms remain unimplemented.
+sole minidump semantic producer by user instruction. The later [Stage 2 delivery](bap-core-qualification.md) implements and qualifies native analysis; its acceptance is separate from the original assessment.
 The [Stage 1 implementation design](bap-semantic-backend-design.md) now records
 the implemented native protocol and projection; qualification is separate
 from this earlier source/API assessment.
@@ -58,12 +61,13 @@ instruction starts. Generation and independent inspection are complete. Current 
 evidence, source/tool integrity and repeated timing. The user removed the latency
 ceiling after the replacement's 10.67 s measurement. See the [unlimited policy](bap-unlimited-validation.md)
 for the current verdict; earlier bounded-policy records remain historical.
-Historical Priority 4/I4 and the separately authorized BAP-only selection retain
-their own scope.
+Historical Priority 4 retains its original scope. The later
+[I4-specific replacement](i4-windows-repin-validation.md) retires its missing
+artifact obligation and keeps its fixed budget, which the measured CLI exceeds.
 The API assessment below preserves its original scope and recommendation; current
 implementation and acceptance are tracked by the linked plan and delivery records.
 
-## Decision in brief
+## Historical assessment decision (2026-10-01)
 
 **Technically possible in part; a core replacement is not justified yet.** BAP exposes raw-byte disassembly, instruction lifting, CFG reconstruction, BIL, BIR, and analysis passes. Those are credible inputs to a semantics comparison. They do not establish that BAP's output satisfies Ariadne's snapshot, effect, control, fault, and formal-evidence contracts. The lowest-risk decision is a **staged, pinned BAP backend experiment** behind Ariadne's existing request boundary. Retain the current core as the reference until representative captured cases and obligations have been compared. This recommendation is an architectural inference from the cited interfaces and local contracts, not a claim that the integration already works.
 

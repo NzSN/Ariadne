@@ -17,7 +17,13 @@ remains a separate historical facility check.
 
 **Where to go next.**
 
-- [A0 plan](../../Plans/bap-stage2-a0.md) — defines delivery and remaining clauses.
+
+- [Windows I4 timing gap](../../docs/Ariadne/i4-windows-repin-validation.md) — records the active 98-start explanation workload and its unchanged 2-second limit, independent of the unlimited core policy.
+
+
+- [Snapshot-based native qualification](../../docs/Ariadne/i5a-native-qualification.md) — explains the read-only MirrorRust dependency environment used by current core and controlled-I5a records.
+
+- [A0 plan](../../Plans/bap-stage2-a0.md) — preserves the historical capability probe; the later OCaml foundation closed its SDK/state-exchange gap.
 - [Analysis contract](../../docs/Ariadne/bap-analysis-core-design.md) — specifies
   the custom-pass interface and formal observation mapping.
 - [Existing lifter](../bap/README.md) — remains the production lifting module.

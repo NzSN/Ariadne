@@ -16,6 +16,9 @@ It is not instruction-step verification or real Windows acceptance.
 
 **Where to go next.**
 
+
+- [2026-10-05 Windows I4 replacement](i4-windows-repin-validation.md) — supersedes the older missing-artifact obligation with an independently inspected active case; correctness passes and the unchanged CLI budget remains unmet.
+
 - [Delivery and validation](i5a-validation.md) records native checks, mutation
   sensitivity and the separate acceptance tiers.
 - [Implemented contracts](i5a-contracts.md) show how these facts are bound and
@@ -30,7 +33,9 @@ It is not instruction-step verification or real Windows acceptance.
 **What remains unresolved.** Matching this finite corpus is not universal form
 coverage. The source/fixture tier passes. A later [controlled Windows demo](crashpad-demo-validation.md)
 supplies capture/answer evidence but exceeds its CLI timing limit. Original-Windows
-I4 remains a separate unexercised tier.
+At that source-review checkpoint, I4 remained a separate unexercised tier.
+The [later I4 re-pin](i4-windows-repin-validation.md) passes correctness and
+remains over its separate fixed CLI budget.
 
 The [documentation map](../documentation-map.md) is optional navigation.
 

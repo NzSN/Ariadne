@@ -5,7 +5,7 @@
 **Status.** OQ0–OQ6 completed and checked on 2026-10-03. The isolated SDK,
 bounded native state and Rust transport qualify the full A0 foundation; the [qualification guide](../docs/Ariadne/bap-ocaml-qualification.md)
 and retained record report the exercised gates and final decision. This plan
-closes the remaining A0 foundation before complete A1.
+closed the A0 foundation before the later [complete Stage 2 delivery](../docs/Ariadne/bap-core-qualification.md).
 
 **Why this document exists.** The [A0 delivery](../docs/Ariadne/bap-stage2-a0-validation.md)
 qualified contract admission and packaged-runtime graph facilities, but did not

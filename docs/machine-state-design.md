@@ -12,7 +12,7 @@
 
 - [Stage E completion](Ariadne/stage-e-completion.md) — records generated conformance, handoff and report acceptance.
 - [Result contracts](Ariadne/stage-e-report-contracts.md) — expose stateflow without confusing it with dependency slicing.
-- [BAP migration plan](../Plans/bap-integration.md) — tracks the separate, unstarted replacement of analysis ownership.
+- [Native BAP qualification](Ariadne/bap-core-qualification.md) — records the completed finite-stateflow migration and default CLI ownership; the Rust engine remains the reference. Supplied LLVM IR still uses its separate Rust path.
 
 **What remains unresolved.** Finite conformance checks do not prove the Rust implementation correct for every valid request. A universal refinement proof remains open, and adapter facts remain premises. It does not infer a historical path from crash-time observations.
 

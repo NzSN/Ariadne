@@ -10,10 +10,13 @@
 
 **Where to go next.**
 
-- [Benchmark guide](modules/bench.md) — documents the measurement harness.
-- [BAP workload gate](../../Plans/bap-integration.md) — tracks the missing original-Windows comparison for the replacement backend.
 
-**What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. The original capture is still required to qualify the replacement BAP path, and no worst-case performance guarantee follows.
+- [Active Windows I4 result](i4-windows-repin-validation.md) — records the separate replacement query and its unmet unchanged 2,000 ms ceiling.
+
+- [Benchmark guide](modules/bench.md) — documents the measurement harness.
+- [Native BAP qualification](bap-core-qualification.md) — measures and qualifies the later backend on its own corpus; this historical LLVM result supplies no native performance acceptance.
+
+**What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. The original capture remains historical; it does not qualify the later [native BAP backend](bap-core-qualification.md). The separately [re-pinned Windows I4 question](i4-windows-repin-validation.md) exceeds its unchanged CLI budget. No worst-case performance guarantee follows.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 

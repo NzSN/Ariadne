@@ -12,6 +12,7 @@ import tarfile
 import time
 import check_bap_semantics as stage1
 from check_bap_ocaml import tool_identities
+from with_mirrorrust_snapshot import active_identity
 
 ROOT=Path(__file__).resolve().parents[1]
 def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
@@ -21,6 +22,7 @@ def sources():
   paths.update(p for p in (ROOT/tree).rglob('*') if p.is_file() and p.suffix!='.md'
                and not set(p.parts)&{'target','.work','__pycache__','results','states','_apalache-out'})
  paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','docs/Ariadne/bap-analysis-core-design.md','Plans/bap-stage2-implementation.md'])
+ paths.update(ROOT/p for p in ['evidence/Ariadne/investigation-windows-workload-case.json','evidence/Ariadne/i4-windows-capture-inspection.json','evidence/Ariadne/bap-windows-workload-inputs.tar.gz'])
  return {str(p.relative_to(ROOT)):sha(p) for p in sorted(paths)}
 def tools_inventory():
  result=tool_identities()
@@ -28,6 +30,7 @@ def tools_inventory():
   result[name]=sha(ROOT/name)
  client=ROOT.parent/'MirrorRust'
  result['mirrorrust']={str(p.relative_to(client)):sha(p) for p in [client/'Cargo.toml',*sorted((client/'src').rglob('*.rs'))]}
+ result['qualificationEnvironment']=active_identity()
  return result
 
 def main():
@@ -78,6 +81,7 @@ def main():
   if args.stage1_record:
    record=stage1.retained(args.stage1_record)
    if record['sourceHashes']!=stage1.sources() or not record['stage1ExitPassed']:raise RuntimeError('incomplete Stage 1 regression reuse')
+   if record['records']['stage-e'].get('qualificationEnvironment')!=active_identity():raise RuntimeError('Stage 1 qualification dependency differs')
    stage1.validate_workload_bindings(record['records']['workload'])
    for p,d in record['tools'].items():
     if sha(ROOT/p)!=d:raise RuntimeError('Stage 1 tools changed')
@@ -107,6 +111,8 @@ def main():
    entries[name]=sha(path);tar.add(path,arcname=name,recursive=False)
   for p in before:add(ROOT/p,'sources/'+p)
   for filename in ['ariadne-bap-core','manifest.json','build.log']:add(helper/filename,'helper/'+filename)
+  if tools_before['qualificationEnvironment']:
+   add(Path(tools_before['qualificationEnvironment']['manifestPath']),'dependencies/mirrorrust-snapshot.json')
   for index,directory in enumerate(dict.fromkeys(artifact_roots)):
    for p in sorted(directory.rglob('*')):
     if p.is_file() and p!=archive and not set(p.parts)&{'rust-build','debug','release','__pycache__'} and (p.suffix in ['.json','.log','.diff','.ml','.txt','.dot','.csv','.stderr','.stdout','.time'] or p.name=='ariadne-bap-core'):

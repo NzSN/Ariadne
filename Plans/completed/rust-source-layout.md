@@ -43,5 +43,6 @@ implemented layout and source-bound validation.
 
 All tracked Rust files must be below `src/` or `tests/`; there must be one tracked
 Cargo manifest and lockfile. Formal specifications and native helpers retain
-their existing locations. The missing original Windows capture continues to
-limit full I4 qualification.
+their existing locations. The original Windows capture was missing at this layout checkpoint. The
+later [I4 replacement](../../docs/Ariadne/i4-windows-repin-validation.md) closes
+that artifact gap and records the remaining fixed-budget failure.

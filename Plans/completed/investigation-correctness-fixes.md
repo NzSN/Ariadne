@@ -4,7 +4,7 @@
 
 **Status.** Completed within the recorded fixture/Linux tier, 2026-10-02,
 following the review of `12150b9`. All 17 investigation gates passed with stable
-source hashes; the original-Windows qualification remains unavailable. The
+source hashes; original-Windows qualification was unavailable at that run. The
 [delivery record](../../docs/Ariadne/investigation-correctness-validation.md)
 tracks exercised checks separately from full original-Windows qualification.
 
@@ -19,6 +19,9 @@ the distinction between implementation checks and real-workload qualification.
 
 **Where to go next.**
 
+
+- [Active Windows I4 replacement](../../docs/Ariadne/i4-windows-repin-validation.md) — records the user-authorized successor pin and timing failure without changing this historical repair evidence.
+
 - [Investigation contracts](../../docs/Ariadne/investigation-contracts.md) define the
   result invariants, limit behavior and timing requirements to preserve.
 - [Workload design](../../docs/Ariadne/priority-4-workload-performance-design.md)
@@ -28,8 +31,11 @@ the distinction between implementation checks and real-workload qualification.
 - [Fix delivery](../../docs/Ariadne/investigation-correctness-validation.md) records
   implementation behavior, regression results and any unexercised tiers.
 
-**What remains unresolved.** The original pinned Windows capture is still
-required for fresh full I4 qualification. Synthetic regression tests can prove
+**What remains unresolved.** The [later I4 replacement](../../docs/Ariadne/i4-windows-repin-validation.md)
+retires the lost Electron artifact as an active obligation. Its independent
+98-start capture passes correctness and exceeds the unchanged 2,000 ms CLI
+ceiling. The historical repair below requires identity-bound timing evidence.
+Synthetic regression tests can prove
 the decision logic rejects invalid acceptance; they cannot qualify that workload.
 
 The [documentation map](../../docs/documentation-map.md) is optional navigation.
@@ -165,5 +171,7 @@ unexercised tier explicitly instead of treating focused tests as a full pass.
 Retain fresh fix-validation evidence under `evidence/Ariadne/` with source/tool
 identities and exact exercised tiers. Update the contracts, design follow-up,
 checkpoint and plan status only to the level actually validated. Keep the full
-original-Windows condition open until its real capture is exercised successfully.
+original-Windows condition open at that repair checkpoint. The later
+[I4 re-pin](../../docs/Ariadne/i4-windows-repin-validation.md) supersedes its
+missing-artifact obligation and records the remaining performance failure.
 Commit and push require a separate user instruction.

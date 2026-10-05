@@ -11,10 +11,11 @@
 **Where to go next.**
 
 - [Module guide](modules/investigation.md) — shows binding and explanation entry points.
+- [Current Windows re-pin](i4-windows-repin-validation.md) — exact active capture, independent inspection and measured timing failure.
 - [Validation record](investigation-validation.md) — exercises identity, aliases, gaps and claim/report behavior.
 - [Remaining questions](../../Plans/investigation-layer.md) — tracks full qualification and unimplemented higher-level capabilities.
 
-**What remains unresolved.** The first fault-address question is implemented, but full original-Windows I4 qualification remains open. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered. Stronger conclusions require additional accepted lifetime, path or object evidence.
+**What remains unresolved.** The first fault-address question is implemented. Active Windows I4 correctness passes after the [98-instruction re-pin](i4-windows-repin-validation.md); its 4.774 s CLI median exceeds the unchanged 2 s limit. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered. Stronger conclusions require additional accepted lifetime, path or object evidence.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 
@@ -95,13 +96,19 @@ both platform fixtures, the controlled NOT chain and the retained 34-instruction
 Linux case using one warm-up/five release repeats. Freeze an **incremental
 phase median ceiling of 250 ms for that 34-instruction query** for I4 acceptance;
 this is an explanation-layer budget separate from the preserved 2,000 ms
-condition for the missing original Windows query. Neither budget is a universal
+condition for the active real Windows query. The user-authorized
+[replacement](i4-windows-repin-validation.md) retires the missing original Electron
+artifact as an active obligation while preserving its historical records. The
+Linux phase benchmark uses the Rust reference analysis; active Windows CLI
+qualification verifies native BAP receipts and 98 decoded starts. Neither budget is a universal
 worst-case bound.
 
 The operational workload and acceptance records use
-`ariadne.investigation-workload/v2` and
+`ariadne.investigation-workload/v3` and
 `ariadne.investigation-first-delivery/v2`. This does not change the explanation
-schema above. Windows qualification is recomputed from identity-bound release
+schema above. The active case ID/digest, complete source/tool inventory and
+qualification environment must match; older workload records cannot qualify the
+replacement. Windows qualification is recomputed from identity-bound release
 CLI **explanation-mode** samples, excluding warm-up, with at least five measured
 repeats. Missing, malformed or over-budget measurements cannot grant full I4
 acceptance; base-mode or phase-only timings cannot substitute.

@@ -5,7 +5,7 @@ use ariadne::input::{
 };
 use ariadne::investigation::*;
 use ariadne::llvm_mc::{PreparedBatch, PreparedSite};
-use ariadne::{Analyzer, ByteSource, Instruction, InstructionKind};
+use ariadne::{AnalysisView, Analyzer, ByteSource, Instruction, InstructionKind};
 use serde_json::Value;
 use std::{collections::BTreeMap, path::PathBuf, sync::Arc};
 fn root() -> PathBuf {
@@ -180,7 +180,7 @@ fn prepare(row: &Value, native: bool) -> (FilePreparedAnalysis, Analyzer) {
 }
 fn assess(
     p: &FilePreparedAnalysis,
-    a: &Analyzer,
+    a: &dyn AnalysisView,
     limits: AssessmentLimits,
 ) -> ZeroAddressAssessment {
     let bound = bind_fault_context(p, a).unwrap();
@@ -260,12 +260,41 @@ fn independent_context_and_arithmetic_corpus() {
     }
 }
 #[test]
-#[ignore = "requires pinned BAP and LLVM helpers"]
+#[ignore = "requires pinned BAP lifting, LLVM and native analysis helpers"]
 fn native_i5a_corpus_matches_independent_context_and_address_expectations() {
+    use ariadne::bap::{core_adapter::NativeAnalyzer, core_session::CoreConfig};
+    let directory = std::env::var_os("ARIADNE_BAP_CORE_DIR")
+        .map(PathBuf::from)
+        .unwrap_or_else(|| root().join("target/bap-core-native"));
+    let manifest: Value =
+        serde_json::from_slice(&std::fs::read(directory.join("manifest.json")).unwrap()).unwrap();
+    let config = CoreConfig::from_directory(directory);
     for row in cases() {
         let (p, a) = prepare(&row, true);
         let e = assess(&p, &a, AssessmentLimits::default());
         expected(&row, &e);
+        let native = NativeAnalyzer::from_capture(&config, "i5a-corpus", &p).unwrap();
+        assert_eq!(native.identity()["backend"], "bap");
+        assert_eq!(native.identity()["profile"], "captured-fixed-input/v1");
+        assert_eq!(native.identity()["build"], manifest);
+        let native = native.complete().unwrap();
+        let actual = assess(&p, &native, AssessmentLimits::default());
+        expected(&row, &actual);
+        assert_eq!(
+            serde_json::to_value(actual).unwrap(),
+            serde_json::to_value(e).unwrap()
+        );
+        if row["name"] == "zero-store" {
+            check_budgets_and_invalid_questions(&bind_fault_context(&p, &native).unwrap());
+            let mut changed = p;
+            Arc::make_mut(&mut changed.snapshot)
+                .exception
+                .as_mut()
+                .unwrap()
+                .registers
+                .insert("rax".into(), 17);
+            assert!(bind_fault_context(&changed, &native).is_err());
+        }
     }
 }
 #[test]
@@ -302,10 +331,13 @@ fn budgets_preserve_valid_unknown_results_and_invalid_questions_stay_errors() {
     let row = cases().remove(0);
     let (p, a) = prepare(&row, false);
     let bound = bind_fault_context(&p, &a).unwrap();
+    check_budgets_and_invalid_questions(&bound);
+}
+fn check_budgets_and_invalid_questions(bound: &BoundFaultContext) {
     for max_evidence in [0, 1, 2, 3, 16, 31, 32, 33] {
         for max_claims in [0, 1, 2, 16, 31, 32, 33] {
             let e = assess_zero_address(
-                &bound,
+                bound,
                 FaultAddressQuestion {
                     site: 0x401000,
                     memory_access: 0,
@@ -339,7 +371,7 @@ fn budgets_preserve_valid_unknown_results_and_invalid_questions_stay_errors() {
     ] {
         assert!(
             assess_zero_address(
-                &bound,
+                bound,
                 question,
                 AssessmentLimits {
                     max_evidence: 0,

@@ -1,0 +1,185 @@
+{
+  "schema": "ariadne.i5a-native-diagnostic/v1",
+  "scope": "fresh timing and answer diagnostic; not source/fixture or complete controlled qualification",
+  "timingPassed": true,
+  "cliSha256": "86305a9c44d9f515625545f7b02161881f85b61d4eee7048944bad67ee6b1d1d",
+  "helperManifest": {
+    "schema": "ariadne.bap-core-build/v1",
+    "handshake": {
+      "schema": "ariadne.bap-core-ready/v1",
+      "abi": 2,
+      "compiler": "4.12.1",
+      "bap_revision": "baa902209ee4be975bdd8db7d1160b0a0ec2831f",
+      "sdk_manifest_sha256": "9ffecdd7ce96c79170d9c1153411139973a212f34f0317a2f972f737086e64e4",
+      "source_hashes": {
+        "recovery.ml": "a05ca62fb895f31d5fbf06d663a5db4c0074d86a9a400e726f02f8bca2d796af",
+        "stateflow.ml": "2d6a39f261bad1267a022049bbff68ae7b88cdeb044699ff1d085da7b8008b46",
+        "capture.ml": "aa4a3432f44c961a1fe2bac99e60c3ac68baca8c1034e5eb06bbe87eb0ac0a34",
+        "project_state.ml": "9cc366a55c4d5fdd74b6689ce172ae4eba823d016c6736af0f2c27438f8c35a9",
+        "main.ml": "29b9f5fc5e9c33dc0eb9d9a9af1f8ef7a81b209e50af1b14846b6347826602cb"
+      },
+      "families": [
+        "recovery",
+        "stateflow"
+      ],
+      "profiles": [
+        "normalized-fixed-input/v1",
+        "captured-fixed-input/v1"
+      ],
+      "operations": [
+        "initialize",
+        "advance:Visit",
+        "advance:FinishRecovery",
+        "advance:Propagate",
+        "advance:FinishDataflow",
+        "advance:ExpandSlice",
+        "advance:FinishSlice",
+        "advance:FinishStateflow",
+        "step",
+        "observe",
+        "finish",
+        "reset"
+      ],
+      "max_frame_bytes": 8388608,
+      "max_addresses": 65536
+    },
+    "helper_sha256": "340850347d9df2c4e8868dcb87cc69b300e65e0234964d15cbe1270a1933d154",
+    "lock_sha256": "6f6bd3235ffcdc565ad4ab7e687d6238b85caceee0532f54c56570cbee61992f"
+  },
+  "records": [
+    {
+      "capture": "partial",
+      "mode": "base",
+      "warmupMs": 805.634453,
+      "samplesMs": [
+        801.241398,
+        797.463947,
+        796.779474,
+        813.854108,
+        799.141428
+      ],
+      "medianMs": 799.141428,
+      "outputHashes": {
+        "report.json": "d3d69d6fda1716a6e74d100789a259a674ec8f4223f023b7747c2c3f5f2881f6",
+        "report.txt": "4ca0b7d8378dd5f4d885c1d608854d018ddebfdbbc6236379471764faf6375c1",
+        "report.dot": "40ee75bfe7cfa04ea5fb1db7fab35dee9edee1ecd3e60902594fd159099768cc"
+      },
+      "command": [
+        "/home/nzsn/Repos/Ariadne/target/release/ariadne-minidump",
+        "/home/nzsn/Repos/Ariadne/tmp/crashpad-demo/20261003/partial/capture.dmp",
+        "--decoder-reference",
+        "/home/nzsn/Repos/Ariadne/target/ariadne-llvm-mc",
+        "--entry",
+        "0x7ff6d63c3ae0",
+        "--seed",
+        "0x7ff6d63c3ae0",
+        "--output-dir",
+        "/home/nzsn/Repos/Ariadne/target/i5a-native-baseline-v2/partial-base-5"
+      ]
+    },
+    {
+      "capture": "partial",
+      "mode": "assessment",
+      "warmupMs": 798.043925,
+      "samplesMs": [
+        800.582519,
+        811.834114,
+        808.385765,
+        803.927602,
+        804.201279
+      ],
+      "medianMs": 804.201279,
+      "outputHashes": {
+        "zero-address-assessment.json": "d875a6c79f5e727925374e2558159c682b2fe2257a319a85226904fb06a88289",
+        "report.json": "d3d69d6fda1716a6e74d100789a259a674ec8f4223f023b7747c2c3f5f2881f6",
+        "report.txt": "4ca0b7d8378dd5f4d885c1d608854d018ddebfdbbc6236379471764faf6375c1",
+        "zero-address-assessment.dot": "0ed98b47f4dc8e82b2771c41b2e2dd5facf13dd5cb24824f1d24abe4e7d76fc3",
+        "zero-address-assessment.txt": "db16e3ef5a8a5e117e5617628085ba3302c5d3ee4d41056bb4bf8497c95b2ce9",
+        "report.dot": "40ee75bfe7cfa04ea5fb1db7fab35dee9edee1ecd3e60902594fd159099768cc"
+      },
+      "command": [
+        "/home/nzsn/Repos/Ariadne/target/release/ariadne-minidump",
+        "/home/nzsn/Repos/Ariadne/tmp/crashpad-demo/20261003/partial/capture.dmp",
+        "--decoder-reference",
+        "/home/nzsn/Repos/Ariadne/target/ariadne-llvm-mc",
+        "--entry",
+        "0x7ff6d63c3ae0",
+        "--seed",
+        "0x7ff6d63c3ae0",
+        "--output-dir",
+        "/home/nzsn/Repos/Ariadne/target/i5a-native-baseline-v2/partial-assessment-5",
+        "--assess-zero-address",
+        "0x7ff6d63c3ae0",
+        "--memory-access",
+        "0"
+      ]
+    },
+    {
+      "capture": "full",
+      "mode": "base",
+      "warmupMs": 835.120503,
+      "samplesMs": [
+        880.679397,
+        811.871056,
+        828.529097,
+        825.281078,
+        820.452528
+      ],
+      "medianMs": 825.281078,
+      "outputHashes": {
+        "report.json": "ccc4004daeb7661ae21b4aa09862c5a1b04cf9a5727ce295a8e6fc3c82168eab",
+        "report.txt": "efe0ca83307f7e1d76d7807d8e93f6b7bb974ed26b9a0b7cb92479551516dc7e",
+        "report.dot": "919e6f0a9a66522cfd6e43402cabc2f90c16b9c8c58b53f70aef6f433b7d66cb"
+      },
+      "command": [
+        "/home/nzsn/Repos/Ariadne/target/release/ariadne-minidump",
+        "/home/nzsn/Repos/Ariadne/tmp/crashpad-demo/20261003/full/capture.dmp",
+        "--decoder-reference",
+        "/home/nzsn/Repos/Ariadne/target/ariadne-llvm-mc",
+        "--entry",
+        "0x7ff6d63c3ae0",
+        "--seed",
+        "0x7ff6d63c3ae0",
+        "--output-dir",
+        "/home/nzsn/Repos/Ariadne/target/i5a-native-baseline-v2/full-base-5"
+      ]
+    },
+    {
+      "capture": "full",
+      "mode": "assessment",
+      "warmupMs": 847.583191,
+      "samplesMs": [
+        826.309208,
+        810.361699,
+        826.774044,
+        811.943491,
+        800.568107
+      ],
+      "medianMs": 811.943491,
+      "outputHashes": {
+        "zero-address-assessment.json": "0baaba7ec005da377efcb4f9a46852f08eca82c61d5fb9cea44ce9934c108cdb",
+        "report.json": "ccc4004daeb7661ae21b4aa09862c5a1b04cf9a5727ce295a8e6fc3c82168eab",
+        "report.txt": "efe0ca83307f7e1d76d7807d8e93f6b7bb974ed26b9a0b7cb92479551516dc7e",
+        "zero-address-assessment.dot": "7ef17eed219c143e1737df45f4fd7a985c8d21571698e159dab98f8a67211f65",
+        "zero-address-assessment.txt": "b1113b0dd677f235b76cfd1545905cd1320caf487a5bebdd1bef9db2c27c17a5",
+        "report.dot": "919e6f0a9a66522cfd6e43402cabc2f90c16b9c8c58b53f70aef6f433b7d66cb"
+      },
+      "command": [
+        "/home/nzsn/Repos/Ariadne/target/release/ariadne-minidump",
+        "/home/nzsn/Repos/Ariadne/tmp/crashpad-demo/20261003/full/capture.dmp",
+        "--decoder-reference",
+        "/home/nzsn/Repos/Ariadne/target/ariadne-llvm-mc",
+        "--entry",
+        "0x7ff6d63c3ae0",
+        "--seed",
+        "0x7ff6d63c3ae0",
+        "--output-dir",
+        "/home/nzsn/Repos/Ariadne/target/i5a-native-baseline-v2/full-assessment-5",
+        "--assess-zero-address",
+        "0x7ff6d63c3ae0",
+        "--memory-access",
+        "0"
+      ]
+    }
+  ]
+}

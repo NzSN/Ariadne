@@ -2,8 +2,10 @@
 
 ## Context and follow-up
 
-**Status.** Started on 2026-10-03 after the user requested Stage 2. The retained
-Stage 1 prerequisite is checked before this work; A1–A6 remain separate stages.
+**Status.** Historical A0 contract/capability probe from 2026-10-03. The
+[OCaml foundation](../docs/Ariadne/bap-ocaml-qualification.md) subsequently closed
+its SDK/state-exchange gaps; [complete Stage 2 qualification](../docs/Ariadne/bap-core-qualification.md)
+records delivered A1–A6 and native default adoption.
 
 **Why this document exists.** The [integration plan](bap-integration.md#stage-2-bap-analysis-core)
 requires real BAP-owned recovery, dataflow, slicing and stateflow, preserving
@@ -26,9 +28,10 @@ checks and a pinned-runtime capability probe make the design reviewable.
   the source-bound prerequisite under the authorized unlimited timing policy.
 
 **What remains unresolved.** The [OCaml successor](../docs/Ariadne/bap-ocaml-qualification.md)
-now implements the isolated SDK and bounded Init/Visit state exchange. Its full
-A0 decision requires all OQ gates; complete A1 recovery, dataflow/stateflow and
-production adoption remain separate. The packaged runtime is not the SDK.
+qualified the isolated SDK and bounded Init/Visit state exchange with
+all OQ gates passing. The later [complete Stage 2 result](../docs/Ariadne/bap-core-qualification.md)
+independently qualifies recovery, dataflow, slicing, stateflow and production
+adoption. This earlier capability probe does not supply those claims.
 
 For the wider context, see the [documentation map](../docs/documentation-map.md).
 
@@ -58,5 +61,8 @@ now passes OQ0–OQ6: isolated SDK, actual Init/Visit state, Rust transport,
 clean rebuild and mutation sensitivity. Full A0 exit is qualified against
 fresh Stage 1 prerequisites. The earlier facility-only record stays historical.
 
-Complete A1 recovery, A2/A3 algorithms, generated helper replay, product
-integration and adoption remain open. Production analysis still uses Rust.
+Complete A1–A6 were delivered by the [Stage 2 execution plan](bap-stage2-implementation.md).
+The [native qualification](../docs/Ariadne/bap-core-qualification.md) records
+passing algorithm, generated replay, product and default-adoption acceptance.
+The production minidump CLI now uses native BAP analysis; Rust is the explicit
+reference/rollback. This earlier probe record retains its limited claims.

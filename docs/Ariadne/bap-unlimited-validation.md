@@ -2,9 +2,10 @@
 
 ## Context and follow-up
 
-**Status.** The user authorized an unlimited BAP Windows workload timing limit
-on 2026-10-03. All 17 implementation gates and 60 controlled tests pass. Full Stage 1 exit
-and the Stage 2 prerequisite are satisfied under this policy.
+**Status.** Historical policy delivery on 2026-10-03; its unlimited BAP workload
+timing policy remains active. That record passes 17 gates and 60 controls, with
+full Stage 1 exit and the Stage 2 prerequisite satisfied. The later
+[Stage 2 qualification](bap-core-qualification.md) records native adoption.
 
 **Why this document exists.** The [replacement capture delivery](bap-windows-repin-validation.md)
 measured a 10.67 s CLI median under the former 2 s condition. The user explicitly
@@ -17,15 +18,21 @@ remain qualification requirements.
 
 **Where to go next.**
 
+
+- [Native Stage 2 qualification](bap-core-qualification.md) — records the later completed native implementation and current retained acceptance.
+
 - [BAP integration plan](../../Plans/bap-integration.md) — applies the new Stage 1
   exit and Stage 2 prerequisite policy.
 - [Active workload pin](../../evidence/Ariadne/bap-windows-workload-case.json) —
   records `windowsBudgetMs: null` and `timingPolicy: unlimited`.
 - [BAP module guide](modules/bap.md) — provides the native qualification commands.
 
-**What remains unresolved.** Stage 2 implementation is unstarted. Unlimited
-qualification does not establish a performance bound. The separate historical
-I4 and controlled I5a conditions are unchanged.
+**What remains unresolved.** Unlimited qualification establishes no performance bound. Native
+Stage 2 is now [qualified](bap-core-qualification.md) within its exercised corpus.
+The [active Windows I4 replacement](i4-windows-repin-validation.md) retains its
+unmet 2,000 ms CLI ceiling; [controlled Windows I5a](i5a-native-qualification.md)
+passes separate 1,500 ms CLI and 10 ms phase limits. This policy does not waive
+either investigation budget.
 
 For the wider context, see the [documentation map](../documentation-map.md).
 
@@ -61,6 +68,7 @@ by this policy update. Earlier runs retain their own measurements; no performanc
 optimization is claimed.
 
 `stage1ExitPassed=true`, `stage2PrerequisiteSatisfied=true` and
-`stage2Started=false`. The [evidence manifest](../../evidence/Ariadne/bap-unlimited-evidence-manifest.json)
+`stage2Started=false` in that historical policy record. The later native
+Stage 2 result remains a separate qualification. The [evidence manifest](../../evidence/Ariadne/bap-unlimited-evidence-manifest.json)
 binds the raw samples, reports, logs and source copies. Earlier evidence archives
 remain unchanged.

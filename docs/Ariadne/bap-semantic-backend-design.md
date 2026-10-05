@@ -2,13 +2,19 @@
 
 ## Context and follow-up
 
-**Status.** Current BAP integration with a user-authorized unlimited workload timing policy. Latency remains measured; Stage 2 A0 contract/probe work has started; production analysis algorithms remain in Rust.
+**Status.** Current Stage 1 lifting/transport/projection contract. Native Stage 2
+analysis is [qualified](bap-core-qualification.md) and selected by default;
+Rust remains the reference and explicit rollback. BAP workload timing is
+unlimited, with investigation budgets qualified separately.
 
 **Why this document exists.** [BAP assessment](bap-core-refactor-assessment.md) motivates an isolated provider feeding the existing analyzer.
 
 **What this document establishes.** The implemented boundary transports typed BIL from a pinned isolated helper, checks identity and decoded facts, then projects admitted operations into conservative byte/flag/memory effects.
 
 **Where to go next.**
+
+
+- [Complete Stage 2 qualification](bap-core-qualification.md) — records native default adoption, explicit Rust rollback, exact source/tool scope and the passing aggregate.
 
 - [OCaml foundation qualification](bap-ocaml-qualification.md) — records the completed A0 SDK, native state and transport gates.
 
@@ -25,7 +31,7 @@
 - [Integration plan](../../Plans/bap-integration.md) — tracks open workload qualification and later core migration.
 - [Current execution ledger](../../Plans/bap-integration.md#current-execution-ledger) — retains completed R0–R2 evidence and tracks replacement qualification before the separate Stage 2 migration.
 
-**What remains unresolved.** The isolated OCaml SDK and bounded Init/Visit transport now qualify the A0 foundation. Complete A1 recovery, A2/A3 algorithms, generated helper replay and production adoption remain open. The user has removed the active BAP latency ceiling; valid capture/correctness evidence and implementation gates remain required. Historical Priority 4/I4 and controlled I5a qualification retain their separate contracts.
+**What remains unresolved.** Native recovery, reaching definitions, slicing, finite stateflow and generated replay are implemented and [qualified on the exercised corpus](bap-core-qualification.md). The minidump CLI selects native BAP analysis by default with explicit Rust rollback. BAP lifting remains trusted; universal refinement and packaged cross-platform release qualification remain open. BAP timing is unlimited, while the [active Windows I4 pin](i4-windows-repin-validation.md) keeps its unmet 2,000 ms CLI ceiling and [controlled Windows I5a](i5a-native-qualification.md) passes its separate fixed budgets.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 
@@ -52,7 +58,9 @@ captured preparation evidence and the independent RCX producer. The user has
 removed the latency ceiling; all implementation gates, one warm-up and at least
 five valid measured samples remain required. The [unlimited policy](bap-unlimited-validation.md)
 supersedes the historical replacement record's 2,000 ms condition. Historical
-Priority 4 and I4 are not repinned or requalified by this change.
+Priority 4 and I4 were not repinned or requalified by this Stage 1 change.
+The later [I4-specific replacement](i4-windows-repin-validation.md) separately
+changes the active investigation pin and records its remaining fixed-budget gap.
 
 ## Selected native boundary
 
@@ -132,7 +140,10 @@ lift is not presumed a no-op; only a reviewed exact no-effect case can receive
 that interpretation. Undefined architectural flags remain a separately reviewed
 label rather than being inferred from a generic BIL unknown string.
 
-The existing request validator and Rust engine consume admitted summaries.
+The request validator freezes admitted summaries for the native-default
+analysis helper and the independent Rust reference/rollback engine. Rust owns
+capture preparation and transport/result validation; the native helper owns
+production recovery, dataflow, slicing and supplied finite stateflow.
 Report per-site semantic backend/build, AST identity, projection ruleset,
 quality and disagreements separately from architectural ISA acceptance.
 BAP is now the sole minidump provider by explicit user instruction. The

@@ -14,6 +14,12 @@ qualification. A controlled replacement does not recreate the old crash.
 
 **Where to go next.**
 
+
+- [Separate Windows I4 replacement](i4-windows-repin-validation.md) — binds this capture to the active investigation question under its unchanged timing ceiling.
+
+
+- [Native Stage 2 qualification](bap-core-qualification.md) — records the completed successor analysis and its source-bound default-adoption evidence.
+
 - [Unlimited timing policy](bap-unlimited-validation.md) — supersedes this campaign's former 2,000 ms condition by explicit user instruction.
 
 - [Replacement plan](../../Plans/bap-windows-repin.md) — freezes the 98-instruction
@@ -23,7 +29,7 @@ qualification. A controlled replacement does not recreate the old crash.
 - [BAP integration plan](../../Plans/bap-integration.md) — records the resulting
   Stage 1 decision and the separate Stage 2 prerequisite.
 
-**What remains unresolved.** Stage 2 implementation is unstarted. Historical Priority 4/I4 remain separate. Latency remains measured, while the current BAP policy no longer imposes a timing ceiling.
+**What remains unresolved.** This capture campaign did not implement Stage 2. The later [native Stage 2 delivery](bap-core-qualification.md) qualifies recovery, dataflow, slicing, stateflow and default adoption. Its BAP timing policy is unlimited. The separately authorized [active I4 replacement](i4-windows-repin-validation.md) uses this 98-start capture and remains above its unchanged 2,000 ms explanation-CLI limit. Historical Priority 4 records retain their original scope.
 
 For the wider context, see the [documentation map](../documentation-map.md).
 
@@ -35,8 +41,9 @@ analyzed on Linux. The capture is a real Crashpad output from a deliberately
 faulting application; it is not a manually edited minidump.
 
 The original `priority-4-real-capture-case.json` remains unchanged. Historical
-Priority 4 measurements and I4 investigation prerequisites retain their own
-meaning. BAP uses a separate manifest and `ARIADNE_BAP_WINDOWS_DUMP` override.
+Priority 4 measurements and earlier I4 records retain their own meaning. The
+later [I4 re-pin](i4-windows-repin-validation.md) has its own manifest and
+`ARIADNE_I4_WINDOWS_DUMP` override; its bounded timing policy is separate. BAP uses a separate manifest and `ARIADNE_BAP_WINDOWS_DUMP` override.
 Its bundled input supplies the default reproducible workload after hash checks.
 
 The new function has 98 local instruction starts: setup, eight input checksum
@@ -130,7 +137,8 @@ acceptance records are unchanged historical results.
 The final flags are `implementationGatesPassed=true`,
 `windowsWorkloadQualification.valid=true`, `targetMet=false`,
 `stage1ExitPassed=false` and `stage2PrerequisiteSatisfied=false`.
-Stage 2 remains unstarted.
+Stage 2 was unstarted at this historical capture checkpoint; its later
+[qualification](bap-core-qualification.md) is a separate accepted record.
 
 The bundled workload runs without an external dump path:
 

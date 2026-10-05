@@ -13,7 +13,7 @@
 - [Delivery and follow-up](../../docs/Ariadne/priority-4-performance-validation.md) — records what was exercised and which limits remain.
 - [Active plan index](../README.md) — prevents completed steps from being mistaken for pending work.
 
-**What remains unresolved.** The implementation steps below are archived, not a current task list. These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. The original capture is still required to qualify the replacement BAP path, and no worst-case performance guarantee follows.
+**What remains unresolved.** The implementation steps below are archived, not a current task list. These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. The original capture remains historical; it does not qualify the later [native BAP backend](../../docs/Ariadne/bap-core-qualification.md). The separately [re-pinned Windows I4 question](../../docs/Ariadne/i4-windows-repin-validation.md) exceeds its unchanged CLI budget. No worst-case performance guarantee follows.
 
 For the wider context, see the optional [documentation map](../../docs/documentation-map.md).
 

@@ -11,17 +11,20 @@ from unittest.mock import patch
 
 import check_investigation as gate
 import measure_investigation as measurement
+from investigation_windows_case import load_case, case_digest
 
 
-CASE = json.loads((gate.ROOT / "evidence/Ariadne/priority-4-real-capture-case.json").read_text())
+CASE = load_case()
 LINUX = json.loads((gate.ROOT / "evidence/Ariadne/priority-1-real-capture-case.json").read_text())
 
 
 def workload(median=1999):
     return {
-        "schema": "ariadne.investigation-workload/v2",
+        "schema": "ariadne.investigation-workload/v3",
         "passed": True,
         "sourcesStable": True,
+        "toolsStable": True, "analysisBackend": "bap",
+        "windowsCaseId": CASE["id"], "windowsCaseDigest": case_digest(CASE),
         "profile": "release",
         "warmups": 1,
         "repeats": 5,
@@ -29,6 +32,7 @@ def workload(median=1999):
         "windows98BudgetMs": 2000,
         "records": [{
             "workload": "real-windows-98", "mode": "explanation",
+            "analysisBackend": "bap", "decodedStarts": 98,
             "artifactSha256": CASE["capture"]["sha256"],
             "identity": {"artifact_sha256": CASE["capture"]["sha256"], "query_id": "a" * 64},
             "query": {"entries": [CASE["query"]["entry_va"]], "seeds": [CASE["query"]["seed_va"]]},
@@ -55,6 +59,7 @@ class InvestigationBudgetTests(unittest.TestCase):
                 return subprocess.CompletedProcess(command, code, f"Report: {record}\n", "")
 
             with patch.object(gate, "sources", side_effect=[{"source": "before"}, {"source": "before" if stable else "after"}]), \
+                 patch.object(gate, "active_identity", return_value=None), \
                  patch.object(gate, "sha", return_value="c" * 64), \
                  patch.object(gate.subprocess, "run", side_effect=run), \
                  patch.object(gate.tempfile, "mkdtemp", return_value=str(work)), \
@@ -87,6 +92,7 @@ class InvestigationBudgetTests(unittest.TestCase):
         old["schema"] = "ariadne.investigation-workload/v1"
         variants.append(old)
         for field, value in (("mode", "base"), ("workload", "stage-b-windows"),
+                             ("analysisBackend", "rust"), ("decodedStarts", 2),
                              ("artifactSha256", "0" * 64), ("elapsedSamplesMs", [1] * 4),
                              ("elapsedSamplesMs", [-1] * 5), ("elapsedSamplesMs", [float("nan")] * 5),
                              ("elapsedSamplesMs", [float("inf")] * 5),
@@ -96,7 +102,9 @@ class InvestigationBudgetTests(unittest.TestCase):
             data["records"][0][field] = value
             variants.append(data)
         for field, value in (("profile", "debug"), ("warmups", 0), ("repeats", 4),
-                             ("windows98BudgetMs", 10000), ("sourcesStable", False)):
+                             ("windows98BudgetMs", 10000), ("sourcesStable", False),
+                             ("toolsStable", False), ("windowsCaseId", "original-electron"),
+                             ("windowsCaseDigest", "0" * 64)):
             data = workload()
             data[field] = value
             variants.append(data)
@@ -159,7 +167,7 @@ class InvestigationBudgetTests(unittest.TestCase):
                         Path(args[4]).write_text("9,1024\n")
                         identity = {"artifact_sha256": sha(capture), "query_id": "a" * 64}
                         query = {"entries": [f"0x{int(entry, 16):016x}"], "seeds": [f"0x{int(site, 16):016x}"]}
-                        (output / "report.json").write_text(json.dumps({"identity": identity, "query": query, "analysis": {}}))
+                        (output / "report.json").write_text(json.dumps({"identity": identity, "query": query, "analysis": {"decoded": ["0x0"] * (98 if capture==dump else 4)}, "analysis_backend": {"backend": "bap"}}))
                         if "--explain-fault-address" in args:
                             producer = (CASE if capture == dump else LINUX)["query"]["producer_va"] if capture == dump or capture.name == "chromium-member-uaf.dmp" else f"0x{int(entry, 16) + (3 if capture.name == 'bap_precision_linux.dmp' else 0):016x}"
                             (output / "explanation.json").write_text(json.dumps({"identity": identity, "question": {"site": query["seeds"][0], "memory_access": 0}, "origins": [{"producers": [{"site": producer}]}], "claims": []}))
@@ -170,6 +178,10 @@ class InvestigationBudgetTests(unittest.TestCase):
 
                 ticks = iter(n * median * 1_000_000 for n in range(120))
                 with patch.object(measurement, "sources", return_value={"source": "digest"}), \
+                     patch.object(measurement, "materialize", return_value=dump), \
+                     patch.object(measurement, "native_manifest", return_value={"schema": "test"}), \
+                     patch.object(measurement, "validate_backend_receipt"), \
+                     patch.object(measurement, "active_identity", return_value=None), \
                      patch.object(measurement, "sha", side_effect=sha), \
                      patch.object(measurement, "run", side_effect=run), \
                      patch.object(measurement.time, "perf_counter_ns", side_effect=lambda: next(ticks)), \
@@ -178,7 +190,7 @@ class InvestigationBudgetTests(unittest.TestCase):
                      redirect_stdout(io.StringIO()):
                     measurement.main()
                 report = json.loads((work / "report.json").read_text())
-                self.assertEqual(report["schema"], "ariadne.investigation-workload/v2")
+                self.assertEqual(report["schema"], "ariadne.investigation-workload/v3")
                 self.assertEqual(report["windows98Qualification"]["targetMet"], expected)
                 self.assertEqual(report["windows98Qualification"]["medianMs"], median)
                 self.assertEqual(self.acceptance(report)["fullI4RealCaptureAcceptance"], expected)

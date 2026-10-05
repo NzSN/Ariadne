@@ -2,11 +2,13 @@
 
 ## Context and follow-up
 
-**Status.** Stage 2 A1–A6 is implemented and qualified on 2026-10-04 for the
-exercised workspace-local scope. All 20 aggregate gates pass; `stage2Qualified`,
-`defaultNativeVerified` and `sourcesStable` are true. The CLI defaults to native
-BAP analysis, with explicit Rust rollback. The archive verifies 1,345 entries
-and binds 623 current source hashes.
+**Status.** Stage 2 A1–A6 and native default adoption were qualified on
+2026-10-04. Qualification was refreshed on 2026-10-05 after the I5a tooling and
+dependency-isolation changes, then refreshed for the Windows I4 re-pin.
+All 20 gates pass with 632 stable Ariadne sources, 1,355 verified archive entries, and exact tool identities under the selected
+read-only MirrorRust snapshot. Native BAP remains the CLI default, with explicit
+Rust rollback. [Native I5a qualification](i5a-native-qualification.md) separately
+qualifies its fixed budgets and controlled captures.
 
 **Why this document exists.** The [analysis design](bap-analysis-core-design.md)
 and [execution plan](../../Plans/bap-stage2-implementation.md) require evidence
@@ -26,8 +28,9 @@ qualifies its own bounded bootstrap only.
 **What remains unresolved.** These checks do not prove universal refinement or
 ISA semantics. BAP lifting is trusted. Supplied LLVM IR uses the separate Rust
 engine. This is workspace-local Linux-hosted qualification, including captured
-Windows inputs, not a packaged cross-platform release qualification. Original
-Windows I4 and controlled real Windows I5a retain their own acceptance criteria.
+Windows inputs, not a packaged cross-platform release qualification. The [active Windows I4 re-pin](i4-windows-repin-validation.md) remains over its separate fixed CLI budget; controlled Windows I5a has its own passing
+[native qualification](i5a-native-qualification.md). The live MirrorRust checkout
+is outside the pinned dependency view used by this record.
 
 For the wider context, see the [documentation map](../documentation-map.md).
 
@@ -59,8 +62,15 @@ is unlimited; measurements are still retained.
 ```sh
 python3 native/bap-core/setup-sdk.py --check
 python3 native/bap-core/build.py --output target/bap-core-native
-python3 tools/check_bap_core.py --output target/bap-stage2-qualification
+python3 tools/check_bap_core.py --output target/bap-stage2-recheck
 ```
+
+For the recorded dependency view, run the aggregate command through the
+[snapshot wrapper](../../tools/with_mirrorrust_snapshot.py) and the manifest digest
+shown in the [I5a qualification guide](i5a-native-qualification.md#reproduction-and-retained-evidence).
+Use the same wrapper for evidence verification and select a new output directory
+for each run. The dependency manifest, including exact source bytes, is retained
+as `dependencies/mirrorrust-snapshot.json` in the Stage 2 archive.
 
 The aggregate checker also builds a second clean helper, checks root tests and
 Clippy, runs native kernels/capture/stateflow tests, generated replay and mutation
@@ -80,9 +90,12 @@ entry and bind the exact report. Source/tool changes invalidate that decision.
   [verified manifest](../../evidence/Ariadne/bap-core-evidence-manifest.json) —
   sources, helper, observations, mutation records, logs and product reports.
 
-The explicit-native candidate passed 19 gates before the default changed. The
-final run refreshed all regressions after that change and added the seven-test
-contract-checker gate. Root default/core-only tests, all-feature Clippy, native
+The explicit-native candidate passed 19 gates before adoption. The
+[original adoption record](../../evidence/Ariadne/bap-core-history/2026-10-04-adoption/bap-core-qualification.json)
+and its archive/manifest remain byte-identical in that history directory.
+The [pre-I4 refresh](../../evidence/Ariadne/bap-core-history/2026-10-05-before-i4-repin/bap-core-qualification.json)
+and its archive/manifest are also preserved byte-for-byte. The current refresh uses thirteen protocol/snapshot controls and a verified
+current Stage 1/Stage E record under the same dependency snapshot. Root default/core-only tests, all-feature Clippy, native
 capture/investigation/stateflow tests and Stage 1/Stage E regressions pass.
 Stage 1 workload measurements explicitly select Rust; their nested records do
 not decide Stage 2 acceptance.
@@ -107,11 +120,11 @@ warm-up per backend:
 
 | Captured workload | Rust reference | Native BAP |
 | --- | ---: | ---: |
-| Linux fixture (4 starts) | 861.21 | 902.57 |
-| Windows fixture (4 starts) | 871.56 | 920.86 |
-| NOT precision fixture (4 starts) | 855.80 | 907.47 |
-| Retained Linux capture (34 starts) | 1455.56 | 2108.74 |
-| Pinned Windows capture (98 starts) | 2820.26 | 4901.01 |
+| Linux fixture (4 starts) | 895.39 | 964.30 |
+| Windows fixture (4 starts) | 921.57 | 957.16 |
+| NOT precision fixture (4 starts) | 900.27 | 964.70 |
+| Retained Linux capture (34 starts) | 1566.21 | 2248.97 |
+| Pinned Windows capture (98 starts) | 2967.88 | 5020.08 |
 
 Native analysis is slower on these workloads. Correctness and identity checks
 pass under the accepted unlimited timing policy; these measurements do not

@@ -2,10 +2,10 @@
 
 ## Context and follow-up
 
-**Status.** Historical R0–R2 delivery on 2026-10-03, superseded for active qualification by the [controlled replacement](bap-windows-repin-validation.md): repairs and all 17 current
-implementation gates pass with 177 stable source hashes. Full Stage 1 exit and
-the Stage 2 prerequisite remain unmet because the original Windows workload is
-unavailable. BAP-owned analysis has not started.
+**Status.** Historical R0–R2 delivery on 2026-10-03, superseded for active qualification by the [controlled replacement](bap-windows-repin-validation.md): repairs and all 17 implementation gates passed with 177 stable source hashes.
+At that run, full Stage 1 exit and its Stage 2 prerequisite were unmet because
+the original workload was unavailable. Later [unlimited-policy acceptance](bap-unlimited-validation.md)
+and [native Stage 2 qualification](bap-core-qualification.md) resolve those stages.
 
 **Why this document exists.** The [integration plan](../../Plans/bap-integration.md)
 identified a Linux benchmark bookkeeping defect and inconsistent qualification
@@ -18,20 +18,25 @@ from full workload qualification.
 
 **Where to go next.**
 
+
+- [Native analysis successor](bap-core-qualification.md) — records completed native algorithms and adoption after replacement-workload qualification.
+
 - [Authorized replacement](bap-windows-repin-validation.md) — records the new
   controlled Crashpad workload requested after the original artifact was
   confirmed unavailable; the result below remains historical.
 
-- [Integration plan](../../Plans/bap-integration.md#original-windows-input-and-commands)
-  — supplies the pinned artifact/query and commands for the remaining S4/S5 run.
+- [Integration plan](../../Plans/bap-integration.md#active-windows-input-and-commands)
+  — supplies the replacement input/query and current qualification commands.
 - [BAP module guide](modules/bap.md) — describes the Linux analysis pipeline and
   its native prerequisites.
 - [Controlled Windows demo](crashpad-demo-validation.md) — explains the separate
   real partial/full captures used for supplemental smoke coverage.
 
-**What remains unresolved.** For this historical record, Neither controlled decision tests nor the small
-Windows demo replaces the original 98-instruction capture. The unchanged
-2,000 ms original-workload condition is unexercised. Stage 2 A0–A6 remain gated.
+**What remains unresolved.** At this historical run, controlled tests and the small demo could not
+qualify the unavailable original 98-start capture. The later BAP replacement and
+unlimited policy resolve Stage 1; native Stage 2 has its own passing record.
+The [I4-specific replacement](i4-windows-repin-validation.md) separately closes
+its artifact gap but remains over the unchanged 2,000 ms explanation-CLI ceiling.
 
 For the wider context, see the [documentation map](../documentation-map.md).
 
@@ -120,7 +125,7 @@ The final record reports `implementationGatesPassed=true`,
 `stage1ExitPassed=false`, `stage2PrerequisiteSatisfied=false` and
 `defaultPromotionEligible=false`. Its Windows status is `unavailable`.
 
-## Remaining original-Windows requirement
+## Historical original-Windows requirement
 
 The [pinned case](../../evidence/Ariadne/priority-4-real-capture-case.json) is
 `f13d18cd-9ade-4eff-947c-15a649b636fa.dmp`, 2,028,400 bytes, SHA-256

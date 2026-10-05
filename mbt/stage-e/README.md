@@ -10,6 +10,9 @@
 
 **Where to go next.**
 
+
+- [Native analysis replay and qualification](../../docs/Ariadne/bap-core-qualification.md) — records native-helper observations, mutation sensitivity and CLI ownership separately from the retained Rust replay; neither finite campaign is a universal proof.
+
 - [Full Stage E delivery](../../docs/Ariadne/stage-e-completion.md) — combines replay with native handoff and report acceptance.
 - [Compatibility record](../../docs/Ariadne/installed-modelmirrors-compatibility.md) — provides the bounded installed-stdio evidence.
 

@@ -4,8 +4,8 @@
 
 **Status.** H0–H5 delivered at the source/fixture tier in the working tree on
 2026-10-03, following the 2026-10-02 plan based on `c9eb4c5`. All 12 acceptance
-gates pass with retained evidence. Controlled real Windows and original-Windows
-I4 remain open; this plan stays active for those qualification requirements.
+gates passed with retained evidence. The later native refresh qualifies controlled
+Windows I5a; active Windows I4 performance remains separate and open.
 
 **Why this document exists.** The [I5a design](../docs/Ariadne/i5a-zero-address-design.md)
 asks whether one selected memory access starts at zero under admitted captured
@@ -26,15 +26,19 @@ the starting point.
 - [Delivery and validation](../docs/Ariadne/i5a-validation.md) records the
   exercised source/fixture scope and remaining capture requirements.
 - [Controlled Windows demo](../docs/Ariadne/crashpad-demo-validation.md) supplies
-  actual partial/full captures and identifies the remaining CLI timing gap.
+  actual partial/full captures and records its historical CLI timing gap.
+- [Native qualification refresh](i5a-native-qualification.md) records completed
+  native measurements, controlled acceptance and the repaired dependency boundary.
 - [Investigation stage plan](investigation-layer.md) retains the overall I0–I7
-  status and the separate original-Windows I4 obligation.
+  status and the separate active Windows I4 performance obligation.
 - [Implemented contracts](../docs/Ariadne/investigation-contracts.md) describe
   current identity, limits and first-question behavior to preserve.
 
-**What remains unresolved.** The controlled Windows demo's capture/answer checks
-pass, but its approximately 1.82 s CLI median exceeds 1.5 s. The original Windows
-I4 capture remains a separate unexercised requirement. Broader hypotheses and
+**What remains unresolved.** The controlled Windows demo's historical CLI median
+was approximately 1.82 s. The [current native result](../docs/Ariadne/i5a-native-qualification.md)
+qualifies both budgets and capture modes under its pinned dependency snapshot. The [active Windows I4 re-pin](../docs/Ariadne/i4-windows-repin-validation.md)
+passes correctness but exceeds its separate 2-second CLI budget. The original
+Electron case is preserved as historical evidence. Broader hypotheses and
 Linux numeric admission remain separate work.
 
 The [documentation map](../docs/documentation-map.md) is optional navigation.
@@ -47,8 +51,9 @@ access begin at address zero under the admitted exception context?** Begin with
 reviewed form/addressing matrix. Preserve the distinction between zero effective
 address, a zero base register and a null-pointer root cause.
 
-Use one immutable snapshot, the existing BAP preparation and completed Rust
-analysis. Questions add seeds, never roots. Fault-time values apply only at the
+Use one immutable snapshot, the existing BAP preparation and completed analysis.
+The original delivery used Rust; the native refresh consumes the completed BAP
+result through `AnalysisView`. Questions add seeds, never roots. Fault-time values apply only at the
 selected exception instruction; they must not prune earlier CFG edges, replace
 reaching definitions or select an actually executed producer alternative.
 
@@ -89,7 +94,9 @@ bound assessment interface, without adding a generic hypothesis/provider framewo
 
 The [delivery record](../docs/Ariadne/i5a-validation.md) gives the exercised
 scope and measurements. The remaining sections preserve each step's acceptance
-contract. Controlled real Windows I5a and original-Windows I4 are still open.
+contract. Controlled Windows I5a was open at that delivery and is now qualified
+by the [native successor](../docs/Ariadne/i5a-native-qualification.md).
+Active Windows I4 remains over its fixed CLI budget.
 
 ## H0 — Freeze exact admission and independent fixtures
 
@@ -294,7 +301,7 @@ CLI path with/without assessment: one warm-up and at least five measured repeats
 identity-bound outputs, median/spread and resource outcomes. Freeze an I5a latency
 criterion after the H2 pilot and before the qualification campaign; report pilot
 measurements as observations. Never weaken or substitute for the existing I4
-250 ms incremental or 2,000 ms original-Windows conditions.
+250 ms incremental or 2,000 ms active real-Windows conditions.
 
 Run focused reader/domain/report/CLI tests and the applicable root checks:
 
@@ -319,14 +326,16 @@ under `docs/Ariadne/`. Raw real captures stay external/hash-pinned.
 | --- | --- | --- |
 | Source/fixture I5a acceptance | H0–H5 source/fixture checks: native coverage, independent oracles, mutations, output equivalence, stable identities and the frozen fixture measurement criterion | Supports the finite admitted profile/corpus. It does not qualify a real Windows capture. |
 | Controlled real-Windows I5a acceptance | A separately pinned real case with independently established site/context/access evidence, successful question/report checks and the frozen I5a measurement criterion | Qualifies that I5a case only; no historical-path/root-cause claim. |
-| Original-Windows I4 acceptance | The original artifact, exact original query and unchanged I4 gate/budgets | Remains separate and cannot be replaced by either I5a tier. |
+| Active Windows I4 acceptance | The separately pinned 98-start capture, exact query and unchanged I4 gate/budgets | [Re-pinned correctness passes; CLI budget unmet](../docs/Ariadne/i4-windows-repin-validation.md). Neither I5a tier satisfies it. |
 
 Report the tiers with separate named outcomes and missing clauses; a fixture pass
 must not become a full I5a or I4 pass through one aggregate boolean. If a required
 real artifact/tool is unavailable, complete and record the independent work, then
-state the unexercised tier. No real-capture qualification is implied by this plan.
+state the unexercised tier. Acceptance comes from records, not the plan alone;
+the [current native result](../docs/Ariadne/i5a-native-qualification.md) separately
+qualifies the source/fixture and both controlled Windows tiers.
 
-After implementation, update this plan, its design and the stage ledger to the
-actual exercised scope. Broader I5 hypotheses, Linux context admission, I6/I7 and
-BAP-owned analysis remain separate deliveries. Commit/push is a separate user
-action.
+The plan, design and stage ledger now record the exercised native and
+controlled tiers. Broader I5 hypotheses, Linux numeric admission and I6/I7
+remain later work. BAP-owned analysis has separate
+[qualified native records](../docs/Ariadne/bap-core-qualification.md).

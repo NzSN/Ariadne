@@ -2,9 +2,10 @@
 import math
 import re
 import statistics
+from investigation_windows_case import case_digest, validate_case
 
 WINDOWS_BUDGET_MS = 2000
-WORKLOAD_SCHEMA = "ariadne.investigation-workload/v2"
+WORKLOAD_SCHEMA = "ariadne.investigation-workload/v3"
 
 
 def _timing(value):
@@ -28,7 +29,8 @@ def windows_qualification(workload, case):
     """
     result = dict(checked=workload.get("windows98Checked") is True, status="unavailable",
                   valid=False, samples=0, medianMs=None, budgetMs=WINDOWS_BUDGET_MS,
-                  targetMet=False, reason="Original pinned Windows capture has not been exercised; full I4 remains partial.")
+                  caseId=case.get("id"), captureKind=case.get("captureKind"),
+                  targetMet=False, reason="Active pinned Windows I4 capture has not been exercised.")
     if not result["checked"]:
         return result
 
@@ -36,10 +38,19 @@ def windows_qualification(workload, case):
         result.update(status="invalid", reason="Windows timing evidence invalid or incomplete: " + reason)
         return result
 
+    try:
+        validate_case(case)
+    except (ValueError, KeyError, TypeError):
+        return invalid("active Windows I4 case is malformed")
+
     if workload.get("schema") != WORKLOAD_SCHEMA:
-        return invalid("a v2 workload record with raw CLI samples is required")
+        return invalid("a v3 workload record with raw CLI samples is required")
+    if workload.get("windowsCaseDigest") != case_digest(case) or workload.get("windowsCaseId") != case["id"]:
+        return invalid("Windows workload belongs to another capture pin")
     if workload.get("passed") is not True or workload.get("sourcesStable") is not True:
         return invalid("workload checks and source stability must pass")
+    if workload.get("analysisBackend") != "bap" or workload.get("toolsStable") is not True:
+        return invalid("native BAP selection and stable measured tools are required")
     if workload.get("profile") != "release" or workload.get("windows98BudgetMs") != WINDOWS_BUDGET_MS:
         return invalid("release profile and the fixed 2000 ms budget are required")
     repeats, warmups = workload.get("repeats"), workload.get("warmups")
@@ -53,6 +64,8 @@ def windows_qualification(workload, case):
     if len(selected) != 1:
         return invalid("exactly one real-windows-98 explanation-CLI record is required")
     record = selected[0]
+    if record.get("analysisBackend") != "bap" or record.get("decodedStarts") != 98:
+        return invalid("the active native 98-instruction explanation workload is required")
     identity, query = record.get("identity"), record.get("query")
     question = record.get("question")
     if not isinstance(identity, dict) or not isinstance(query, dict):

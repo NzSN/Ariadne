@@ -3,8 +3,9 @@
 ## Context and follow-up
 
 **Status.** Native Windows x64 integration and two real captures demonstrated on
-2026-10-03. Independent checks and I5a answers pass. Full controlled-case I5a
-acceptance remains open because CLI timing exceeds the frozen 1,500 ms condition.
+2026-10-03. This historical record passes independent checks and I5a answers,
+but its CLI medians exceed the frozen 1,500 ms condition. The [2026-10-05 native successor](i5a-native-qualification.md) qualifies both
+capture modes under the unchanged budgets and its pinned dependency snapshot.
 
 **Why this document exists.** The [first I5a delivery](i5a-validation.md) had
 source/fixture evidence but no controlled real Windows capture. This experiment
@@ -18,15 +19,17 @@ and supply the context and bytes needed for Ariadne's conditional zero-address a
 
 - [Demo and reproduction commands](../../native/crashpad-demo/README.md) describe
   the program, isolated dependency preparation and Windows scripts.
+- [Native qualification successor](i5a-native-qualification.md) records fresh
+  native-default measurements, passing gates and the selected dependency snapshot.
 - [Retained record](../../evidence/Ariadne/crashpad-demo-validation.json) and
   [archive manifest](../../evidence/Ariadne/crashpad-demo-evidence-manifest.json)
   retain exact build, capture, inspection, answer and timing evidence.
 - [I5a contracts](i5a-contracts.md) define the assessment and its premises.
 - [I5a plan](../../Plans/i5a-zero-address.md) retains the independent qualification tiers.
 
-**What remains unresolved.** The controlled-case CLI median is over budget.
-The original Windows I4 artifact/query is still separate and unexercised. This
-one function does not establish broad Windows workload, instruction coverage,
+**What remains unresolved.** The historical original Windows I4 artifact/query remains
+separate and unexercised. The native successor qualifies these two captures;
+this function does not establish broad Windows workload, instruction coverage,
 Linux integration or complete process-memory capture.
 
 The [documentation map](../documentation-map.md) is optional navigation.
@@ -81,32 +84,54 @@ In both real captures:
   independently reports access operation write and inaccessible data address zero.
 - Context flags are `0x10001f`, with the required validity groups present.
 
-The regular Linux-hosted Ariadne CLI, using its existing Windows decode target
-and pinned BAP provider, returns `consistent_with_evidence`, evaluated address
+In the original run, the Linux-hosted Ariadne CLI, using its Windows decode target
+and pinned BAP semantic provider, returned `consistent_with_evidence`, evaluated address
 zero and no assessment gaps for both dumps. Base reports remain byte-identical
 when assessment is enabled. Text/JSON/DOT are retained; both DOT families parse
 with Graphviz. These are conditional numeric results, not inferred crash history
 or a general root-cause diagnosis.
 
-## Measurement and qualification
+## Historical measurement and qualification
 
-The [assessment runner](../../native/crashpad-demo/assess.py) first checks the
-existing source/fixture acceptance record and exact current source/tool hashes.
-It performs one warm-up and five measured repeats per base/assessment mode,
-plus separate bound-assessment phases. The original criteria remain unchanged.
+The original 2026-10-03 assessment runner checked that run's source/fixture
+acceptance record and source/tool hashes. It performed one warm-up and five
+measured repeats per base/assessment mode, plus separate bound-assessment phases.
+These measurements predate adoption of the native analysis default; they do not
+qualify its performance. The original criteria remain unchanged.
 
 | Capture | Combined phase median | Assessment CLI median | Assessment CLI range |
 | --- | ---: | ---: | ---: |
 | Partial | 1.720 ms | 1,820.299 ms | 1,742.791–1,853.441 ms |
 | Full | 1.625 ms | 1,824.496 ms | 1,804.609–2,056.832 ms |
 
-Both phase medians meet 10 ms. Both CLI medians exceed 1,500 ms, so the measured
-controlled-case acceptance result is false. Capture generation and numeric
-correctness remain demonstrated. Source/tool identities stayed stable; output
+Both historical phase medians meet 10 ms. Both historical CLI medians exceed
+1,500 ms, so that controlled-case acceptance result is false. Capture generation
+and numeric correctness remain demonstrated. Source/tool identities stayed stable; output
 hashes repeat. The differences between base and assessment timings do not
 establish a speedup or identify the cause of the CLI cost.
 
-The capture-availability gap is therefore resolved for this new case. Remaining
-work is performance qualification or an explicitly revised, separately justified
-contract. The original Windows I4 98-instruction query and 2,000 ms condition
-cannot be satisfied by this new two-instruction demo.
+## Native successor qualification
+
+The original dump, witness, executable, capture and build records are preserved.
+Fresh independent inspections use separate files and retain the original
+producer identities. Current inspector source metadata does not replace the
+historical build's source identities.
+
+The [2026-10-05 native successor](i5a-native-qualification.md) passes all 14
+source/fixture gates, 17 investigation gates and both controlled capture modes
+under a read-only MirrorRust dependency snapshot. Fresh assessment CLI medians
+are 869.642 ms for partial and 873.537 ms for full; native phase medians are
+1.067 ms and 1.032 ms after the I4 source refresh. Both unchanged criteria pass. No production performance
+patch was needed. Earlier diagnostics and rejected aggregates remain unchanged
+in the [progress record](../../evidence/Ariadne/i5a-native-progress/progress.json).
+
+The [assessment runner](../../native/crashpad-demo/assess.py) requires a current
+passing `ariadne.i5a-acceptance/v2` record through `--source-fixture-record`,
+separate fresh partial/full inspections through `--inspection-dir`, and the
+matching qualification environment. It rejects historical partial and v1
+prerequisites. The [reproduction commands](../../native/crashpad-demo/README.md#inspect-and-analyze)
+explain the snapshot wrapper and default/explicit-native report checks.
+
+The [separately re-pinned Windows I4](i4-windows-repin-validation.md) uses the
+98-instruction capture and retains the 2,000 ms condition. Correctness passes;
+its CLI median is over budget. This two-instruction I5a demo does not qualify I4.

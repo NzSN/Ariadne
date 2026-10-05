@@ -13,7 +13,7 @@
 - [Documentation index](docs/Ariadne/README.md) — find the current interfaces and contracts.
 - [Plan index](Plans/README.md) — separates remaining work from completed and retired work.
 
-**What remains unresolved.** Full original-Windows I4 and controlled real Windows I5a qualification remain open. Native BAP recovery, dataflow, slicing and finite stateflow are implemented; [Stage 2 qualification](docs/Ariadne/bap-core-qualification.md) records passing aggregate acceptance and default adoption. Possible-producer and zero-address questions are implemented; other hypothesis, object/source-context and cross-capture questions remain later work.
+**What remains unresolved.** Active Windows I4 is [re-pinned and correctness-checked](docs/Ariadne/i4-windows-repin-validation.md); its CLI median exceeds the unchanged 2-second limit. Controlled Windows I5a is [qualified with the pinned dependency snapshot](docs/Ariadne/i5a-native-qualification.md). Native BAP recovery, dataflow, slicing and finite stateflow are implemented; [Stage 2 qualification](docs/Ariadne/bap-core-qualification.md) records passing aggregate acceptance and default adoption. Other hypothesis, object/source-context and cross-capture questions remain later work.
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
@@ -46,8 +46,10 @@ AMD64 scalar MOV access starts at zero under admitted captured-context premises.
 It retains a separate result and explicit unknowns; a zero effective address does
 not establish a null-pointer root cause. Its [delivery record](docs/Ariadne/i5a-validation.md)
 separates source/fixture validation from real Windows qualification. The later
-[Crashpad demo](docs/Ariadne/crashpad-demo-validation.md) now supplies controlled
-Windows captures and passing answers, with CLI timing still above its limit.
+[Crashpad demo](docs/Ariadne/crashpad-demo-validation.md) supplies controlled
+Windows captures and passing answers. Fresh [native I5a measurements](docs/Ariadne/i5a-native-qualification.md)
+meet both timing budgets, with 14 passing source/fixture gates and separate
+partial/full controlled-capture acceptance under the pinned dependency snapshot.
 The [minidump input module](docs/Ariadne/modules/input.md) now reads Windows/Linux
 AMD64 captures and discovers local instruction starts. A pinned tool-produced
 [predecessor fixture](docs/Ariadne/stage-b-c-validation.md) now yields an
@@ -59,9 +61,11 @@ now reaches a faulting memory read from an independently established captured
 entry and retains a possible address producer with explicit opaque-call gaps.
 The CLI text report now has a [scan-friendly instruction overview and
 Linux/Windows examples](docs/Ariadne/priority-3-presentation-validation.md);
-JSON v1 and DOT graph semantics remain unchanged. The first
-[performance measurement](docs/Ariadne/priority-4-performance-validation.md)
-is bounded by a 34-node real capture and does not qualify larger workloads.
+JSON v1 and DOT graph semantics remain unchanged. The [historical Priority 4 measurement](docs/Ariadne/priority-4-performance-validation.md)
+qualified its original 98-start Electron query under the earlier LLVM-backed
+pipeline. Its result does not qualify the later native backend or the active
+[I4 replacement](docs/Ariadne/i4-windows-repin-validation.md), whose fixed
+Windows CLI budget remains unmet.
 The [rendering module](docs/Ariadne/result-rendering.md) now produces readable
 text and Graphviz DOT from analyzer outcomes.
 The separate abstract-stateflow and supplied-IR paths pass

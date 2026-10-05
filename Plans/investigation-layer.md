@@ -2,10 +2,12 @@
 
 ## Context and follow-up
 
-**Status.** Current stage/status plan as of 2026-10-03, including the I5a working tree.
+**Status.** Current stage/status plan as of 2026-10-05, including the native I5a refresh and Windows I4 re-pin.
 I0–I3 are implemented. I4 is validated for the recorded fixture/Linux tier, with
-full original-Windows qualification still open. I5a is implemented and passes
-source/fixture qualification. Remaining I5 and I6–I7 are unimplemented.
+active real-Windows correctness passing and the fixed CLI budget unmet. I5a is implemented and passes
+its historical source/fixture qualification. The native refresh qualifies its source/fixture and controlled Windows tiers
+under the recorded dependency snapshot. Remaining I5 and
+I6–I7 are unimplemented.
 
 **Why this document exists.** The [investigation design](../docs/Ariadne/investigation-layer-design.md)
 turns possible-producer analysis into questions an investigator can audit. This
@@ -20,20 +22,26 @@ implementation, exercised qualification and future capabilities.
 
 - [Implemented contracts](../docs/Ariadne/investigation-contracts.md) define the
   actual interfaces, schema, limits and error behavior.
+- [Windows I4 re-pin](../docs/Ariadne/i4-windows-repin-validation.md) records the
+  replacement identity, passing correctness gates and remaining 2-second budget gap.
 - [Latest correctness validation](../docs/Ariadne/investigation-correctness-validation.md)
   records the qualification/truncation repairs and their 17 passing gates.
 - [I5a zero-address design](../docs/Ariadne/i5a-zero-address-design.md) scopes the
   first numeric address hypothesis and the context evidence it requires.
 - [I5a execution plan](i5a-zero-address.md) assigns H0–H5 work and separate
   source/fixture and real-capture qualification tiers.
+- [Native qualification](../docs/Ariadne/i5a-native-qualification.md)
+  records complete native gates, passing controlled timings and the dependency snapshot.
 - [I5a contracts](../docs/Ariadne/i5a-contracts.md) describe the implemented
   interface, strict schema and CLI.
 - [First-delivery evidence](../docs/Ariadne/investigation-validation.md) explains
   the original supported query and fixture/Linux acceptance.
 
-**What remains unresolved.** The original pinned Windows artifact has not been
-exercised for full I4 acceptance. The [controlled Windows I5a demo](../docs/Ariadne/crashpad-demo-validation.md)
-passes capture/answer checks but exceeds its CLI budget. Object/lifetime,
+**What remains unresolved.** The active Windows I4 capture passes correctness but measures
+4,774.451 ms against its unchanged 2,000 ms CLI limit. The original Electron
+artifact is historical after the user-authorized re-pin. The [controlled Windows I5a demo](../docs/Ariadne/crashpad-demo-validation.md)
+passes capture/answer checks. Its native successor now qualifies both budgets and capture modes using a
+read-only dependency snapshot. Object/lifetime,
 source-context and cross-capture capabilities remain later work.
 
 The [documentation map](../docs/documentation-map.md) is optional navigation.
@@ -46,8 +54,8 @@ The [documentation map](../docs/documentation-map.md) is optional navigation.
 | I1 — Address-expression evidence | Implemented within the admitted BIL subset | Typed memory-access expressions, input bytes and AST attribution are retained by [BAP address extraction](../src/bap/address.rs). Unsupported shapes keep gaps. |
 | I2 — Explanation module | Implemented; truncation repaired | Per-byte possible producers, alternatives, premises and evidence requirements; [repair validation](../docs/Ariadne/investigation-correctness-validation.md). |
 | I3 — CLI and reports | Implemented | Explicit question/index selection and transactional text/JSON/DOT publication; [first delivery](../docs/Ariadne/investigation-validation.md). |
-| I4 — Qualification | Recorded fixture/Linux tier passes; full original-Windows tier open | Preserve the missing artifact clause and enforce the 2,000 ms Windows explanation-CLI condition. |
-| I5a — Zero-address consistency | Implemented; source/fixture tier passes | [12-gate validation](../docs/Ariadne/i5a-validation.md) qualifies the finite profile; [H0–H5](i5a-zero-address.md) retains separate real Windows acceptance. |
+| I4 — Qualification | 17 gates and active 98-start Windows correctness pass; full tier over budget | [Re-pin record](../docs/Ariadne/i4-windows-repin-validation.md): 4,774.451 ms against the unchanged 2,000 ms explanation-CLI ceiling. |
+| I5a — Zero-address consistency | Qualified for source/fixture and controlled Windows tiers | [Native qualification](../docs/Ariadne/i5a-native-qualification.md): 14 passing gates and both controlled capture modes under the selected snapshot; [H0–H5](i5a-zero-address.md) preserves the criteria. |
 | Remaining I5 hypotheses | Unspecified beyond roadmap | Each needs its own evidence, support/refutation criteria and negative controls. |
 | I6 — Matched source/object context | Unimplemented | Define build/symbol/ABI/layout matching before making context or lifetime claims. |
 | I7 — Cross-capture comparison | Unimplemented | Define explicit correspondence and preserve separate snapshot provenance. |
@@ -55,9 +63,9 @@ The [documentation map](../docs/documentation-map.md) is optional navigation.
 ```mermaid
 flowchart LR
     Delivered["I0–I3 implemented"] --> Tier["I4 fixture/Linux tier validated"]
-    Tier --> Windows["Open: original-Windows I4 qualification"]
+    Tier --> Windows["Open: Windows I4 CLI performance"]
     Tier --> I5["I5a: zero-address consistency implemented"]
-    I5 --> I5Windows["Open: controlled real Windows I5a qualification"]
+    I5 --> I5Windows["Qualified: controlled Windows I5a on pinned native setup"]
     I5 -. "later separate deliveries" .-> I6["I6: matched context"]
     I6 -.-> I7["I7: cross-capture comparison"]
 ```
@@ -65,8 +73,9 @@ flowchart LR
 This diagram separates the open qualification obligations from implementation;
 it does not mark full I4 complete. Any I5 execution plan must state the I4 tier
 on which it relies and separately qualify its new context-dependent conclusions.
-The missing original-Windows condition and the
-[BAP Stage 2 prerequisite](bap-integration.md#stage-2-bap-analysis-core) remain intact.
+The active I4 performance condition remains open. The separately qualified
+[BAP Stage 2](bap-integration.md#stage-2-bap-analysis-core) uses its own unlimited
+timing policy and cannot waive I4.
 
 ## Implemented module ownership
 
@@ -175,16 +184,21 @@ absent/conflicting capture, cross-query/snapshot rejection, malformed reports
 and finite resource exhaustion. Compile failures and tool timeouts receive no
 mutation-sensitivity credit.
 
-**Remaining full-original-Windows clause:** acquire the original pinned artifact
-specified in the [case manifest](../evidence/Ariadne/priority-4-real-capture-case.json)
-and run the normal release explanation CLI on its exact query. Keep at least
-five measured repeats after warm-up and the unchanged 2,000 ms median ceiling.
-The corrected v2 records distinguish checked, invalid, over-budget and met
-measurements. Base-mode and phase-only timings cannot substitute.
+**Current Windows clause:** the user-authorized
+[active case](../evidence/Ariadne/investigation-windows-workload-case.json) replaces
+the unavailable Electron artifact with an independently inspected real Windows
+98-instruction Crashpad capture. The [fresh record](../evidence/Ariadne/i4-windows-repin-validation.json)
+passes all 17 implementation gates and capture/query checks. One warm-up and five
+measured native-default explanation-CLI repeats yield **4,774.451 ms**, exceeding
+the unchanged **2,000 ms** ceiling. Full I4 acceptance remains false solely on
+this performance clause. Workload v3 records bind the active case ID/digest,
+complete source/tool inventories, native receipts and qualification environment.
+Base-mode and phase-only timings cannot substitute. The original manifest and
+older results remain unchanged historical evidence.
 
 The retained controlled Linux query separately meets the frozen 250 ms
 binding/explanation/rendering phase condition. Passing it or a synthetic Windows
-fixture does not satisfy the missing real-Windows clause. Fresh qualification
+fixture does not satisfy the real-Windows CLI budget. Fresh qualification
 requires current source/tool identities and the appropriate regressions; older
 records remain historical after changes.
 
@@ -206,9 +220,11 @@ The [I5a execution plan](i5a-zero-address.md) records the H0–H5 sequence. A ne
 fixtures remain unchanged and return unknown. The [contracts](../docs/Ariadne/i5a-contracts.md)
 define the separate schema and `--assess-zero-address` CLI modes. All 12
 [source/fixture gates](../docs/Ariadne/i5a-validation.md) pass. The later controlled
-Windows demo resolves the capture gap; its approximately 1.82 s CLI median remains
-above 1.5 s. Original-Windows I4 remains unexercised, and the BAP core-migration
-prerequisite also remains in force.
+Windows demo resolves the capture gap; its approximately 1.82 s CLI median is a
+historical result. The [native refresh](../docs/Ariadne/i5a-native-qualification.md)
+now qualifies both timing limits and both captures, with all 14 gates passing
+under the selected read-only MirrorRust snapshot. Active Windows I4 remains over budget; its original Electron case is historical. Stage 2
+adoption has its own retained qualification and current refresh obligation.
 
 ## Later I5, I6 and I7 deliveries
 

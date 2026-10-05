@@ -13,7 +13,7 @@
 - [Active plans](Plans/README.md) — turn remaining work into explicit implementation and qualification steps.
 - [Assurance decision](docs/Ariadne/semantic-assurance.md) — defines the BAP trust boundary and retired ISA-proof scope.
 
-**What remains unresolved.** The replacement BAP Windows capture is pinned and passes correctness. The current BAP latency policy is unlimited. Stage 2 native algorithms and capture integration are qualified on the exercised corpus; native analysis is the CLI default with explicit Rust rollback. The first fault-address question is implemented, but full original-Windows I4 qualification remains open. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
+**What remains unresolved.** The replacement BAP Windows capture is pinned and passes correctness. The current BAP latency policy is unlimited. Stage 2 native algorithms and capture integration are qualified on the exercised corpus; native analysis is the CLI default with explicit Rust rollback. The first fault-address question is implemented, but [active re-pinned Windows I4](docs/Ariadne/i4-windows-repin-validation.md) remains over its unchanged 2-second CLI limit. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
@@ -31,8 +31,11 @@ above binary-analysis primitives. The first slice explains possible fault-addres
 producers with captured evidence, alternatives and missing-evidence requirements.
 The [first fault-address delivery](docs/Ariadne/investigation-validation.md) now
 implements the question for both platform fixtures and the retained controlled
-Linux capture. Original-Windows acceptance remains partial; no historical path
-or general root-cause proof is claimed.
+Linux capture. The later [Windows I4 re-pin](docs/Ariadne/i4-windows-repin-validation.md)
+adds independently inspected real Windows producer evidence. All 17 gates pass,
+but its 4,774.451 ms CLI median exceeds the unchanged 2,000 ms ceiling. The
+original Electron manifest remains historical; no executed path or root cause
+is established.
 BAP analysis-core migration remains separate from this product capability.
 The [OCaml foundation qualification](docs/Ariadne/bap-ocaml-qualification.md)
 records the bounded native bootstrap and full A0 decision. The [Stage 2 qualification](docs/Ariadne/bap-core-qualification.md) records the completed algorithms and passing default-adoption gate.
@@ -40,16 +43,20 @@ The [I5a zero-address assessment](docs/Ariadne/i5a-contracts.md) now evaluates
 whether one selected scalar MOV access begins at zero under admitted Windows
 AMD64 exception-context premises. Reader-owned context, a separate strict report
 and explicit CLI modes are implemented. The [12-gate source/fixture validation](docs/Ariadne/i5a-validation.md)
-passes; controlled real Windows I5a and original-Windows I4 remain open.
-The [native Windows Crashpad demo](docs/Ariadne/crashpad-demo-validation.md) now
-supplies real partial/full captures and correct numeric answers; its CLI median
-is approximately 1.82 s against the unchanged 1.5 s I5a criterion.
+passes for its historical sources. The native successor qualifies controlled
+Windows I5a; active Windows I4 remains over budget; the original Electron case is historical.
+The [native Windows Crashpad demo](docs/Ariadne/crashpad-demo-validation.md)
+supplies real partial/full captures and correct numeric answers. Its historical
+CLI median was approximately 1.82 s. The [native I5a refresh](docs/Ariadne/i5a-native-qualification.md)
+now qualifies both timing budgets and both capture modes. A read-only dependency
+snapshot prevents concurrent MirrorRust edits from invalidating qualification.
 
 ## Current checkpoint
 
-The Rust core already recovers a local instruction-level CFG, computes
-may-reaching definitions, and builds a backward data slice from fixed,
-adapter-supplied instruction summaries. BAP is now the sole production
+Native BAP now owns production minidump recovery, may-reaching definitions,
+slicing and supplied finite stateflow; Rust retains capture preparation,
+transport/projection validation, questions and reports. The Rust analyzers
+remain independent references and explicit rollback implementations. BAP is now the sole production
 minidump semantic backend; LLVM MC remains an independent decode/control
 reference. The semantic selector and LLVM effect fallback are removed. See the
 [historical BAP-only delivery](docs/Ariadne/bap-only-removal-validation.md) and
@@ -86,12 +93,13 @@ is recorded without a universal refinement or optimization claim.
 | --- | --- | --- |
 | 1. Input and decode | The pinned LLVM MC adapter and Windows/Linux minidump reader are delivered; PE/ELF images and ELF cores remain deferred by the current input scope. Readers must provide one immutable address-space snapshot, VA mapping, and verified byte provenance. | The same known bytes decode consistently from binary and dump views; missing or conflicting bytes remain explicit. VAs are never confused with file offsets. |
 | 2. Control-flow recovery | Translate decoded control transfers into the core's instruction kinds, direct targets, fallthroughs, calls, returns, and unresolved-edge obligations. | End-to-end binary and dump fixtures exercise direct branches, calls, returns, sparse bytes, and indirect branches. Every edge has source instruction evidence; unresolved targets are visible, not silently omitted. |
-| 3. Conservative effects | Initial scoped rules and evidence are delivered; broader forms and precise aliasing remain. Supply `uses`, `may_defs`, and justified `must_defs` for the reaching-definitions and slicing core. Start with decoded operand and instruction metadata, then add reviewed rules for important register, flag, stack, and memory effects. | Slices retain every possible origin in representative crash paths. An unknown effect cannot become a definite overwrite, a no-op, or a known successor. Alias and call-summary assumptions are recorded. |
+| 3. Conservative effects | Typed BAP projection supplies `uses`, `may_defs` and justified `must_defs` to the native analysis. The independent LLVM reference checks decoding/control facts; unsupported BIL, memory and call effects stay explicit. Broader admitted semantics and alias precision require scoped evidence. | Slices retain every possible origin in representative crash paths. An unknown effect cannot become a definite overwrite, a no-op, or a known successor. Alias and call-summary assumptions are recorded. |
 | 5. Investigator output | Text, Graphviz DOT, JSON v1 and a readable per-instruction minidump overview are delivered. The [separate Stage E result envelopes and optional CLIs](docs/Ariadne/stage-e-completion.md) are delivered. | Pinned Linux/Windows examples and the controlled Chromium case retain matching identities, edges, possible origins and uncertainty across formats. |
 
 Phases 1–3 and 5 define the practical minidump workflow. The former Phase 4
-instruction-step project is retired. The existing Rust core and its
-[input contract](docs/implementation.md) remain the integration boundary.
+instruction-step project is retired. The immutable [analysis contract](docs/Ariadne/bap-analysis-core-design.md)
+and [Rust reference](docs/implementation.md) remain the correspondence boundary.
+The CLI consumes completed native analysis through the shared `AnalysisView`.
 
 ## Scope and priority rules
 
@@ -99,9 +107,9 @@ instruction-step project is retired. The existing Rust core and its
   paths of representative Chromium/Electron crashes. Direct control transfers,
   stack operations, common data movement, arithmetic, comparisons, and ordinary
   RAM accesses have immediate value; coverage grows with supported investigations.
-- Use LLVM MC for decoding and available branch/operand metadata. Metadata is
-  a starting point for conservative summaries, not proof of exact architectural
-  effects. Keep indirect targets and uncertain memory aliases as obligations.
+- Use LLVM MC as the independent byte/length/control reference and pinned BAP
+  BIL as the production semantic input. Project only admitted expressions and
+  keep unsupported effects, indirect targets and uncertain memory explicit.
 - Preserve conservative unsupported-operation behavior: no invented successful
   step, architectural fault, definite write or known successor. Keep unavailable
   captured data distinct from unsupported BIL and architectural undefinedness.

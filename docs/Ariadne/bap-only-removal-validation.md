@@ -2,7 +2,7 @@
 
 ## Context and follow-up
 
-**Status.** Retained backend-removal evidence; full original-Windows acceptance stays open.
+**Status.** Historical backend-removal evidence from 2026-10-01. Later BAP workload and native Stage 2 qualification supersede its implementation checkpoint; active Windows I4 remains over its separate fixed CLI budget.
 
 **Why this document exists.** [Completed removal plan](../../Plans/completed/bap-only-semantics.md) requires BAP-only production semantics without LLVM effect fallback.
 
@@ -12,10 +12,10 @@
 
 - [Current backend guide](modules/bap.md) — shows how to use and validate the resulting path.
 - [Workload repair and source refresh](bap-windows-workload-validation.md) — supersedes this historical source inventory and clarifies the full-exit predicates.
-- [Open integration work](../../Plans/bap-integration.md) — retains the missing workload clause and unstarted Stage 2.
+- [Integration ledger](../../Plans/bap-integration.md) — records completed Stage 1 and native Stage 2 qualification, with remaining proof and release limits.
 - [Investigation design](investigation-layer-design.md) — uses the resulting semantic evidence to answer a domain question.
 
-**What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Full original-Windows qualification is still open. The BAP analysis-core replacement has not started; neither selecting BAP nor passing a fixture closes those requirements.
+**What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. The later [native Stage 2 record](bap-core-qualification.md) qualifies its separate algorithms and adoption. The [active I4 replacement](i4-windows-repin-validation.md) closes the missing-artifact gap while remaining over its fixed CLI budget. Universal refinement and packaged release qualification remain open.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 
@@ -35,8 +35,9 @@ and rule-shape comparison are removed. Unsupported or inconsistent lifts
 stop with opaque effects and explicit gaps; their `fallback` field is null.
 Calls and returns retain opaque all-location effects and no definite kills.
 The root LLVM effect-rule research/oracle and the separate supplied LLVM IR
-path remain independent of production minidump semantics. Rust still owns
-recovery, reaching definitions and slicing; this is not Stage 2 core migration.
+path remain independent of production minidump semantics. Rust owned recovery, reaching definitions and slicing at this delivery.
+The later [Stage 2 migration](bap-core-qualification.md) moves production minidump
+analysis into the native helper; explicit Rust remains the reference/rollback.
 
 The BIL corpus now contains **41 exact byte cases** and **30 admitted opcode
 forms**, including source-reviewed immediate stores, dword load/store and TEST
@@ -85,6 +86,8 @@ target/release/ariadne-minidump tests/input/fixtures/stage_b_linux.dmp \
   --seed-exception-rip --output-dir tmp/bap-only-example
 ```
 
-Use `python3 tools/check_bap_semantics.py` for the current removal gate, and
-supply `ARIADNE_PRIORITY4_DUMP` for the still-required Windows acceptance.
-A passing removal record and a passing full Stage 1 exit remain distinct fields.
+Current qualification uses `python3 tools/check_bap_semantics.py`, which
+materializes the active 98-start [bundled workload](bap-windows-repin-validation.md).
+`ARIADNE_BAP_WINDOWS_DUMP` selects an exact matching copy; the old
+`ARIADNE_PRIORITY4_DUMP` no longer selects this workload. Implementation gates
+and full Stage 1 exit remain distinct fields. I4 has its own separate pin and runner.

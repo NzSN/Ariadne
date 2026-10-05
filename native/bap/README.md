@@ -2,7 +2,10 @@
 
 ## Context and follow-up
 
-**Status.** Current BAP integration with a user-authorized unlimited workload timing policy. Latency remains measured; Stage 2 A0 contract/probe work has started; production analysis algorithms remain in Rust.
+**Status.** Pinned production instruction-lifting helper. BAP workload timing
+is unlimited. The separate [native analysis helper](../bap-core/README.md)
+owns default minidump recovery, dataflow, slicing and finite stateflow;
+Rust retains preparation, validation, reports and explicit reference/rollback.
 
 **Why this document exists.** [Native boundary design](../../docs/Ariadne/bap-semantic-backend-design.md) isolates OCaml/BAP behind a typed process protocol.
 
@@ -17,7 +20,12 @@
 - [Active Windows replacement](../../Plans/bap-windows-repin.md) — defines the authorized workload pin and independent capture evidence.
 - [Replacement validation](../../docs/Ariadne/bap-windows-repin-validation.md) — records completed capture/pinning, passing implementation checks and the former latency limit.
 
-**What remains unresolved.** BAP analysis-core replacement has begun with A0 contracts and a native capability probe. A compatible custom-pass build remains unqualified. The user has removed the active BAP latency ceiling; valid capture/correctness evidence and implementation gates remain required. Historical Priority 4/I4 and controlled I5a qualification retain their separate contracts.
+**What remains unresolved.** The [native core qualification](../../docs/Ariadne/bap-core-qualification.md)
+records passing clean-build, algorithm, replay and default-adoption checks on
+the exercised corpus. Pinned lifting remains trusted; universal refinement and
+packaged cross-platform release qualification remain open. The
+[active I4 question](../../docs/Ariadne/i4-windows-repin-validation.md) remains
+over its fixed CLI budget; controlled I5a has separate passing records.
 
 For the wider context, see the optional [documentation map](../../docs/documentation-map.md).
 
@@ -79,7 +87,9 @@ python3 tools/measure_bap.py --skip-windows --output /new/implementation-directo
 ```
 
 Explicit paths must match the active pin. `--skip-windows` requests an
-implementation-only run and cannot qualify the workload. Workload v3 and
-aggregate v4 use `windowsWorkload*` fields. The former `ARIADNE_PRIORITY4_DUMP`
-selector is not used by BAP; historical Priority 4/I4 keep their original artifact.
-The authorized repin does not establish performance acceptance or begin Stage 2.
+implementation-only run and cannot qualify the workload. Workload v4 and
+aggregate v5 use `windowsWorkload*` fields. The former `ARIADNE_PRIORITY4_DUMP`
+selector is not used by BAP. Historical Priority 4 retains its original artifact;
+the later I4-specific re-pin has its own manifest and bounded timing contract.
+The earlier BAP capture campaign did not implement Stage 2; the later
+[native core qualification](../../docs/Ariadne/bap-core-qualification.md) does.

@@ -1,0 +1,178 @@
+{
+  "schema": "ariadne.investigation-windows-workload-case/v1",
+  "id": "crashpad-windows-checksum-98-i4-v1",
+  "captureKind": "controlled-crashpad-windows",
+  "description": "Active I4 fault-address producer explanation case: independently inspected native Windows AMD64 Crashpad checksum/loop/branch workload.",
+  "recordedUtc": "2026-10-04T23:48:36.123216+00:00",
+  "replacement": {
+    "authorized": "User requested re-pin to a new capture for Windows I4 on 2026-10-05.",
+    "scope": "Active Windows I4 qualification only; the original Electron case remains immutable historical evidence, and BAP timing policy is unchanged.",
+    "historicalManifest": "evidence/Ariadne/priority-4-real-capture-case.json",
+    "historicalManifestSha256": "ea70456ee1e5b5c052a1fc525ef7293931963716040fa9130a93d6c00195b22f",
+    "historicalArtifactSha256": "4b3deb70134015ec227b3cf5edf82e1dac0b308b3f19ae62f79cbd4251109e86",
+    "sourceCaptureManifest": "evidence/Ariadne/bap-windows-workload-case.json",
+    "sourceCaptureManifestSha256": "ed3f06ab1a14ec813122681914aa3f99e91d19c5b8522bddc30e755957da0cbd"
+  },
+  "capture": {
+    "sha256": "1bd80af7a739471a7026776bfb37cbbe5953d01ad122e7cf7db0392f84da0b0a",
+    "bytes": 217936,
+    "platform": "windows",
+    "architecture": "amd64",
+    "dumpMode": "partial",
+    "processId": 11192,
+    "exceptionThread": 2764,
+    "exceptionCode": "0xc0000005",
+    "codeCapture": {
+      "address": "0x00007ff7382f4840",
+      "size_bytes": 379,
+      "bytes_hex": "4989ca4989d3498b0241b9000000004d8b024c01c048f7d0488d400148894424084c8b4424084b8d04404c01c0488d40034d8b42084c01c048f7d0488d400248894424084c8b4424084b8d4440014c01c0488d40044d8b42104c01c048f7d0488d400348894424084c8b4424084b8d4440024c01c0488d40054d8b42184c01c048f7d0488d400448894424084c8b4424084b8d4440034c01c0488d40064d8b42204c01c048f7d0488d400548894424084c8b4424084b8d4440044c01c0488d40074d8b42284c01c048f7d0488d400648894424084c8b4424084b8d4440054c01c0488d40084d8b42304c01c048f7d0488d400748894424084c8b4424084b8d4440064c01c0488d40094d8b42384c01c048f7d0488d400848894424084c8b4424084b8d4440074c01c0488d400a4f8b04ca4c01c049ffc141b8040000004d39c175eb41b8010000004c85c07506488d4007eb04488d400b48894424104c8b4424104d8d401149f7d049ffc04d01d84c89c04889c1c70105000000c3",
+      "sha256": "9561b2a084bbbec07af11d5d80a9505b82d9354a4afd59813d6d00093835e00b",
+      "fully_captured": true,
+      "holes": [],
+      "conflicts": [],
+      "contributors": [
+        {
+          "source": "MemoryList",
+          "descriptor_index": 74,
+          "address": "0x7ff7382f4840",
+          "size_bytes": 256,
+          "file_offset": 138560
+        },
+        {
+          "source": "MemoryList",
+          "descriptor_index": 74,
+          "address": "0x7ff7382f4940",
+          "size_bytes": 123,
+          "file_offset": 138816
+        }
+      ]
+    },
+    "inputCapture": {
+      "address": "0x00007ff73833d050",
+      "size_bytes": 64,
+      "bytes_hex": "0300000000000000050000000000000008000000000000000d000000000000001500000000000000220000000000000037000000000000005900000000000000",
+      "sha256": "040b868b63b191cb467d7378a2b7d2997e091449b3e4eb544cbf432619ab9ab3",
+      "fully_captured": true,
+      "holes": [],
+      "conflicts": [],
+      "contributors": [
+        {
+          "source": "MemoryList",
+          "descriptor_index": 87,
+          "address": "0x7ff73833d050",
+          "size_bytes": 64,
+          "file_offset": 145936
+        }
+      ]
+    }
+  },
+  "query": {
+    "entry_va": "0x00007ff7382f4840",
+    "seed_va": "0x00007ff7382f49b4",
+    "producer_va": "0x00007ff7382f49b1",
+    "memory_access_index": 0
+  },
+  "expectations": {
+    "decodedStarts": 98,
+    "functionBytes": 379,
+    "addressRegister": "rcx",
+    "producerInstruction": "mov rcx, rax",
+    "faultInstruction": "mov dword ptr [rcx], 5",
+    "faultDataAddress": "0x0",
+    "checksum": "0x4bea2",
+    "windowsBudgetMs": 2000,
+    "correctnessPremise": "Reviewed byte recipe and independent input/checksum/capture inspection; no executed-history claim.",
+    "timingPolicy": "bounded",
+    "timingPolicyAuthorization": "Preserved I4 2000 ms explanation-CLI median, one warm-up and five measured repeats; the BAP unlimited policy does not apply."
+  },
+  "companion": {
+    "sha256": "00906b04af5dfcfff66b15657e81c08152f3e49479820bf084123c41286fc89e",
+    "bytes": 428032,
+    "module": {
+      "index": 0,
+      "name": "C:\\Users\\ayden\\AppData\\Local\\Temp\\ariadne-crashpad-bap-workload-v2-20261003\\source\\out\\Release\\ariadne_crash_demo.exe",
+      "base_address": "0x00007ff7382f0000",
+      "size_of_image": 462848,
+      "timestamp": 1790998960,
+      "checksum": 0,
+      "preferred_pe_image_base": "0x0000000140000000",
+      "entry_rva": "0x0000000000004840",
+      "fault_rva": "0x00000000000049b4"
+    },
+    "functionBoundaries": {
+      "entry": "0x00007ff7382f4840",
+      "producer": "0x00007ff7382f49b1",
+      "fault": "0x00007ff7382f49b4",
+      "end": "0x00007ff7382f49bb"
+    },
+    "identityScope": "Exact supplied executable digest plus captured whole-function comparison; no fallback."
+  },
+  "provenance": {
+    "crashpadRevision": "7a884c25c84c46352fc6f16ef0a798ece2b77e84",
+    "buildRecordSha256": "ce5188154af6b6170b0fa7e9dbd617044720dae155deb6a74639b68f95cffc85",
+    "inspectionSha256": "9da4d00aa9b7523114e0b3d73a65ce955ea69b3229d94bfeef55e62bac773931",
+    "witnessSha256": "b408eaa7e8700127ca41ec9aee85a7d8241b8c1314cd785d2c83347f373605b2",
+    "captureRecordSha256": "cd77bcc49a973def237e660b623cf1d62fa24821c6611e42cf688d1dcdab18c9",
+    "demoSourceHashes": {
+      "BUILD.gn": "2ca4ab592cacd9b755c68d013b7fa055523351a155548815f66062cdd7bfc2b0",
+      "crash_demo.cc": "0bf17828c9f4ec798e6f907c2371dfdb5e8378d7e988da922e9fc7f82507ebe2",
+      "fault.cc": "e8b44b53edcb544aac7d8944c02f86d780e6ad847597f60efa10e7eebabaa3ad",
+      "bap_workload.asm": "2ba627db393b0df820e6d0368e0a4ff45d4f6fa7528fa27bc3de0db8be217861"
+    },
+    "inspectorSourceHashes": {
+      "inspect_workload.py": "9e82d0094c6988b5ecc999e55d01e6b60232e0782b92e520724222c15ee89553",
+      "inspect_capture.py": "3cf2644391ab51c6634b9cf1a7b05436ce195247ef34aafc77e0a20941f43b37",
+      "crash_demo.cc": "0bf17828c9f4ec798e6f907c2371dfdb5e8378d7e988da922e9fc7f82507ebe2",
+      "bap_workload.asm": "2ba627db393b0df820e6d0368e0a4ff45d4f6fa7528fa27bc3de0db8be217861"
+    },
+    "childEnvironmentPolicy": {
+      "policy": "minimal-windows/v1",
+      "keys": [
+        "PATH",
+        "SystemRoot",
+        "TEMP",
+        "TMP",
+        "WINDIR"
+      ]
+    },
+    "uploadsEnabled": false
+  },
+  "inputArchive": {
+    "path": "evidence/Ariadne/bap-windows-workload-inputs.tar.gz",
+    "sha256": "8ef47d751829680caa4d9a852e3b9c9d6f2906150a7d9bfec8f96b3487f63222",
+    "bytes": 399636,
+    "captureMember": "capture.dmp",
+    "companionMember": "ariadne_crash_demo.exe",
+    "entries": {
+      "README.txt": "c94bf33b1e0530089f7b970bae4e2786d2804180ac27592a2df60326e74ac84a",
+      "ariadne_crash_demo.exe": "00906b04af5dfcfff66b15657e81c08152f3e49479820bf084123c41286fc89e",
+      "build/build-inputs.json": "5909893fe91345873547499a69dd02d57972f17db8224b6de4fa61df83a3a942",
+      "build/build.json": "ce5188154af6b6170b0fa7e9dbd617044720dae155deb6a74639b68f95cffc85",
+      "build/owner.json": "b7b86b77db25ef23b6913e7384f5051d63ae116d78a6edb4b541da52a8ff82fc",
+      "build/tools.ensure": "285281a3763b28475eff23724a1406aa2450b21f69ef9a5e2c2ad94121d2f466",
+      "capture.dmp": "1bd80af7a739471a7026776bfb37cbbe5953d01ad122e7cf7db0392f84da0b0a",
+      "capture.json": "cd77bcc49a973def237e660b623cf1d62fa24821c6611e42cf688d1dcdab18c9",
+      "inspection.json": "9da4d00aa9b7523114e0b3d73a65ce955ea69b3229d94bfeef55e62bac773931",
+      "sources/BUILD.gn": "2ca4ab592cacd9b755c68d013b7fa055523351a155548815f66062cdd7bfc2b0",
+      "sources/assess.py": "bdf7064e899a0d64caa73039b441cca9812fe66a0a2eae9ef3eb26a697ac7b8d",
+      "sources/bap_workload.asm": "2ba627db393b0df820e6d0368e0a4ff45d4f6fa7528fa27bc3de0db8be217861",
+      "sources/build_windows.py": "78291a5ea5c037232ad5a6f9df13b6c1eaf78edc28b516436e6828fb6de8814f",
+      "sources/crash_demo.cc": "0bf17828c9f4ec798e6f907c2371dfdb5e8378d7e988da922e9fc7f82507ebe2",
+      "sources/fault.cc": "e8b44b53edcb544aac7d8944c02f86d780e6ad847597f60efa10e7eebabaa3ad",
+      "sources/inspect_capture.py": "3cf2644391ab51c6634b9cf1a7b05436ce195247ef34aafc77e0a20941f43b37",
+      "sources/inspect_workload.py": "9e82d0094c6988b5ecc999e55d01e6b60232e0782b92e520724222c15ee89553",
+      "sources/prepare.py": "4af92937e99e46519e17264c832724143fe73ca44239aaa0e87b5fb37704cb7b",
+      "sources/run_windows.py": "024f536880a28403298b14496a43c01728cd24eb7fc34fae5416609bfde28bc2",
+      "sources/standalone_logging_settings.h": "18c26f089e677a418d302c937336162fc8370f728827413d0a8cae2f0441df54",
+      "sources/standalone_ostream_operators.h": "799ecc9e7aeffe50cef3ad99611fe7374936a210a8ad2a0b3c3a715c4366a981",
+      "sources/standalone_rand_util.h": "cafb1d07485fbd5ad528c4ee634a003eff8e6c016244664b3c8189969ac9afb5",
+      "witness.json": "b408eaa7e8700127ca41ec9aee85a7d8241b8c1314cd785d2c83347f373605b2"
+    }
+  },
+  "independentInspection": {
+    "path": "evidence/Ariadne/i4-windows-capture-inspection.json",
+    "sha256": "34b65d952de2b9ea2028ff23748ee79ec789ebc8d939d1c03b6faa0f3729013b",
+    "schema": "ariadne.crashpad-bap-workload-inspection/v1",
+    "decodedStarts": 98
+  }
+}

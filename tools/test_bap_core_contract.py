@@ -1,8 +1,15 @@
-"""A0 protocol admission tests, not BAP analysis conformance."""
+"""Native protocol and qualification admission tests, not analysis conformance."""
+import base64
 import copy
 import json
+import os
+from pathlib import Path
+import shutil
+import tempfile
 import unittest
+from unittest import mock
 from bap_core_contract import ContractError, SCHEMA, decode_request, validate_attribution
+import with_mirrorrust_snapshot as snapshot
 
 IDENTITY = dict(session="session-a", snapshot="snapshot-a", query="a" * 64, family="recovery")
 
@@ -80,6 +87,85 @@ class AttributionTests(unittest.TestCase):
             rows[index][key] = value
             with self.subTest(key=key, value=value), self.assertRaises(ContractError):
                 validate_attribution(rows, "s", {self.site})
+
+
+class DependencySnapshotTests(unittest.TestCase):
+    def setUp(self):
+        temp = tempfile.TemporaryDirectory()
+        self.addCleanup(temp.cleanup)
+        self.root = Path(temp.name)
+        self.directory = self.root / "pin"
+        self.client = self.directory / "MirrorRust"
+        (self.client / "src").mkdir(parents=True)
+        (self.client / "Cargo.toml").write_text('[package]\nname = "mirrorrust"\n')
+        (self.client / "src/lib.rs").write_text("pub fn example() {}\n")
+        (self.client / "capabilities.json").write_text('{"version": 1}\n')
+        files = snapshot.inventory(self.client)
+        contents = {name: base64.b64encode((self.client / name).read_bytes()).decode()
+                    for name in files}
+        self.record = {"schema": snapshot.SCHEMA, "originRevision": "a" * 40,
+                       "files": files, "contentsBase64": contents,
+                       "inputFiles": files, "inputContentsBase64": contents}
+        self.manifest = self.directory / "manifest.json"
+        self.manifest.write_text(json.dumps(self.record))
+        self.digest = snapshot.sha(self.manifest)
+        patch = mock.patch.object(snapshot, "revision", return_value="a" * 40)
+        patch.start()
+        self.addCleanup(patch.stop)
+
+    def test_snapshot_remains_valid_after_original_source_changes(self):
+        original = self.root / "live"
+        shutil.copytree(self.client, original)
+        (original / "src/lib.rs").write_text("pub fn changed() {}\n")
+        self.assertEqual(snapshot.validate_snapshot(self.directory, self.digest), self.record)
+
+    def test_modified_added_and_removed_snapshot_files_rejected(self):
+        source = self.client / "src/lib.rs"
+        source.write_text("pub fn changed() {}\n")
+        with self.assertRaises(ValueError):
+            snapshot.validate_snapshot(self.directory, self.digest)
+        source.write_text("pub fn example() {}\n")
+        added = self.client / "src/extra.rs"
+        added.write_text("// extra\n")
+        with self.assertRaises(ValueError):
+            snapshot.validate_snapshot(self.directory, self.digest)
+        added.unlink()
+        source.unlink()
+        with self.assertRaises(ValueError):
+            snapshot.validate_snapshot(self.directory, self.digest)
+
+    def test_manifest_selection_and_retained_bytes_are_bound(self):
+        with self.assertRaises(ValueError):
+            snapshot.validate_snapshot(self.directory, "0" * 64)
+        self.record["contentsBase64"]["src/lib.rs"] = base64.b64encode(b"changed").decode()
+        self.manifest.write_text(json.dumps(self.record))
+        with self.assertRaises(ValueError):
+            snapshot.validate_snapshot(self.directory, snapshot.sha(self.manifest))
+
+    def test_root_level_compile_input_is_bound(self):
+        self.assertIn("capabilities.json", self.record["files"])
+        (self.client / "capabilities.json").write_text('{"version": 2}\n')
+        with self.assertRaises(ValueError):
+            snapshot.validate_snapshot(self.directory, self.digest)
+
+    def test_symlink_cannot_reintroduce_a_live_dependency(self):
+        source = self.client / "src/lib.rs"
+        source.unlink()
+        source.symlink_to(self.root / "live.rs")
+        with self.assertRaises(ValueError):
+            snapshot.validate_snapshot(self.directory, self.digest)
+
+    def test_environment_without_read_only_mount_is_rejected(self):
+        env = {"ARIADNE_MIRRORRUST_SNAPSHOT": str(self.directory),
+               "ARIADNE_MIRRORRUST_SNAPSHOT_SHA256": self.digest}
+        with mock.patch.dict(os.environ, env), mock.patch.object(os, "statvfs") as stat:
+            stat.return_value.f_flag = 0
+            with self.assertRaisesRegex(ValueError, "active read-only view"):
+                snapshot.active_identity()
+            stat.return_value.f_flag = os.ST_RDONLY
+            with mock.patch.object(os.path, "samefile", return_value=False):
+                with self.assertRaisesRegex(ValueError, "active read-only view"):
+                    snapshot.active_identity()
 
 
 if __name__ == "__main__":

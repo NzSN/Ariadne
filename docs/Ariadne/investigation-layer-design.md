@@ -3,8 +3,8 @@
 ## Context and follow-up
 
 **Status.** First question implemented and repaired through `c9eb4c5`; I5a is
-implemented in the 2026-10-03 working tree. I4 remains qualified only at the
-recorded fixture/Linux tier. Broader I5 and I6–I7 remain unimplemented.
+implemented in the 2026-10-03 working tree. The [Windows I4 re-pin](i4-windows-repin-validation.md) passes correctness
+but exceeds the unchanged CLI budget. Broader I5 and I6–I7 remain unimplemented.
 
 **Why this document exists.** [Real-capture slice](priority-1-real-capture-validation.md) demonstrates useful possible origins but leaves their explanation to the investigator.
 
@@ -12,21 +12,25 @@ recorded fixture/Linux tier. Broader I5 and I6–I7 remain unimplemented.
 
 **Where to go next.**
 
+- [Windows I4 replacement plan](../../Plans/i4-windows-repin.md) — replaces the
+  unavailable original capture with the controlled 98-instruction case while
+  preserving the separate timing and correctness criteria.
+
 - [Current stage plan](../../Plans/investigation-layer.md) — separates delivered I0–I3, open I4 qualification and later I5–I7 work.
 - [I5a zero-address design](i5a-zero-address-design.md) — defines the implemented numeric hypothesis, its required exception context and its limited conclusions; [contracts](i5a-contracts.md) document the interface.
 - [Implemented contracts](investigation-contracts.md) — define query identity, claim classes and evidence requirements.
 - [First delivery](investigation-validation.md) — records the exercised tier and open Windows acceptance.
 - [Investigation correctness-fix plan](../../Plans/completed/investigation-correctness-fixes.md) — scopes the limit-exhaustion and Windows I4 timing repairs; the [delivery record](investigation-correctness-validation.md) tracks implementation and validation.
 
-**What remains unresolved.** Full original-Windows I4 and controlled real Windows I5a qualification remain open. Other hypothesis, object/source-context and cross-capture questions remain later work. A possible producer or a zero effective address does not prove a UAF, actual path or general root cause.
+**What remains unresolved.** Active Windows I4 correctness passes after the [98-instruction re-pin](i4-windows-repin-validation.md); its 4.774 s CLI median exceeds the unchanged 2 s limit. Controlled Windows I5a is [qualified under its pinned native setup](i5a-native-qualification.md). Other hypothesis, object/source-context and cross-capture questions remain later work. A possible producer or a zero effective address does not prove a UAF, actual path or general root cause.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 
 Originally proposed **2026-10-01** against `7de5a1e`; status refreshed
 **2026-10-02** against `c9eb4c5`. I0–I3 are implemented, and the
 [latest qualification/truncation repair record](investigation-correctness-validation.md)
-retains the exercised fixture/Linux tier. The original-Windows I4 clause is
-still unmet. The [stage plan](../../Plans/investigation-layer.md) now treats
+retains the exercised fixture/Linux tier. The [active Windows replacement](i4-windows-repin-validation.md)
+passes correctness while its 2,000 ms CLI clause remains unmet. The [stage plan](../../Plans/investigation-layer.md) now treats
 I0–I4 requirements as delivered regression criteria plus an open qualification
 obligation, not an instruction to begin implementation again at I0.
 
@@ -176,7 +180,7 @@ External context must record its match evidence and role.
 
 | Question | Additional evidence or implementation needed |
 | --- | --- |
-| Does the selected access start at virtual address zero? | The [implemented I5a contract](i5a-contracts.md) binds validated exception-context operands and exact site/access association under the admitted scalar MOV profile. Controlled real Windows acceptance remains open. No null-pointer root-cause claim. |
+| Does the selected access start at virtual address zero? | The [implemented I5a contract](i5a-contracts.md) binds validated exception-context operands and exact site/access association under the admitted scalar MOV profile. Controlled Windows acceptance is recorded in the [native qualification](i5a-native-qualification.md). No null-pointer root-cause claim. |
 | What about null-derived offsets, invalid arithmetic or noncanonical addresses? | Separate later hypotheses with their own definitions and architectural/context premises; I5a does not answer them. |
 | Which possible producers and inputs contribute to the selected address operand? | Delivered by the [first-question contract](investigation-contracts.md). Selecting the actually executed alternative still needs additional evidence. |
 | Is a use-after-free or object-lifetime violation supported? | Object identity and lifetime evidence such as retained allocator/runtime events; a suspicious pointer or slice alone is insufficient. |
