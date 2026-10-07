@@ -2,12 +2,14 @@
 
 ## Context and follow-up
 
-**Status.** Current stage/status plan as of 2026-10-05, including the native I5a refresh and Windows I4 re-pin.
+**Status.** Current stage/status plan as of 2026-10-07, including the selected I5b design, native I5a refresh and Windows I4 re-pin.
 I0–I3 are implemented. I4 is validated for the recorded fixture/Linux tier, with
 active real-Windows correctness passing and the fixed CLI budget unmet. I5a is implemented and passes
 its historical source/fixture qualification. The native refresh qualifies its source/fixture and controlled Windows tiers
-under the recorded dependency snapshot. Remaining I5 and
-I6–I7 are unimplemented.
+under the recorded dependency snapshot. I5b zero-base-plus-displacement has B0–B5
+implemented and qualified for the recorded source/fixture and controlled partial/
+full Windows tiers. Other I5
+hypotheses and I6–I7 remain unimplemented.
 
 **Why this document exists.** The [investigation design](../docs/Ariadne/investigation-layer-design.md)
 turns possible-producer analysis into questions an investigator can audit. This
@@ -15,11 +17,16 @@ plan identifies which parts are delivered and which evidence or design work is
 still needed; completed steps are no longer the starting task list.
 
 **What this document establishes.** The current stage ledger, preserved acceptance
-criteria for I0–I4, and the bounded numeric question delivered by I5a. It distinguishes
+criteria for I0–I4, the bounded numeric question delivered by I5a, and the selected
+I5b design/implementation sequence. It distinguishes
 implementation, exercised qualification and future capabilities.
 
 **Where to go next.**
 
+- [I5b design](../docs/Ariadne/i5b-zero-base-offset-design.md) and
+  [B0–B5 implementation plan](i5b-zero-base-offset.md) scope the selected
+  zero-base-plus-nonzero-displacement question; [actual contracts](../docs/Ariadne/i5b-contracts.md)
+  and [qualification](../docs/Ariadne/i5b-validation.md) separate implementation from acceptance.
 - [Implemented contracts](../docs/Ariadne/investigation-contracts.md) define the
   actual interfaces, schema, limits and error behavior.
 - [Windows I4 re-pin](../docs/Ariadne/i4-windows-repin-validation.md) records the
@@ -41,8 +48,9 @@ implementation, exercised qualification and future capabilities.
 4,774.451 ms against its unchanged 2,000 ms CLI limit. The original Electron
 artifact is historical after the user-authorized re-pin. The [controlled Windows I5a demo](../docs/Ariadne/crashpad-demo-validation.md)
 passes capture/answer checks. Its native successor now qualifies both budgets and capture modes using a
-read-only dependency snapshot. Object/lifetime,
-source-context and cross-capture capabilities remain later work.
+read-only dependency snapshot. I5b now has [18-gate source/tool-bound qualification](../docs/Ariadne/i5b-validation.md);
+later changes need fresh or exact-inventory-verified acceptance. Other hypotheses, object/lifetime, source-context
+and cross-capture capabilities remain later work.
 
 The [documentation map](../docs/documentation-map.md) is optional navigation.
 
@@ -56,7 +64,8 @@ The [documentation map](../docs/documentation-map.md) is optional navigation.
 | I3 — CLI and reports | Implemented | Explicit question/index selection and transactional text/JSON/DOT publication; [first delivery](../docs/Ariadne/investigation-validation.md). |
 | I4 — Qualification | 17 gates and active 98-start Windows correctness pass; full tier over budget | [Re-pin record](../docs/Ariadne/i4-windows-repin-validation.md): 4,774.451 ms against the unchanged 2,000 ms explanation-CLI ceiling. |
 | I5a — Zero-address consistency | Qualified for source/fixture and controlled Windows tiers | [Native qualification](../docs/Ariadne/i5a-native-qualification.md): 14 passing gates and both controlled capture modes under the selected snapshot; [H0–H5](i5a-zero-address.md) preserves the criteria. |
-| Remaining I5 hypotheses | Unspecified beyond roadmap | Each needs its own evidence, support/refutation criteria and negative controls. |
+| I5b — Zero base plus nonzero displacement | B0–B5 implemented and corpus-qualified | [Contracts](../docs/Ariadne/i5b-contracts.md) and [validation](../docs/Ariadne/i5b-validation.md): encoded GPR-base receipt, valid fault context and separate source/fixture/controlled-Windows gates. |
+| Other I5 hypotheses | Unspecified beyond roadmap | Each needs its own evidence, support/refutation criteria and negative controls. |
 | I6 — Matched source/object context | Unimplemented | Define build/symbol/ABI/layout matching before making context or lifetime claims. |
 | I7 — Cross-capture comparison | Unimplemented | Define explicit correspondence and preserve separate snapshot provenance. |
 
@@ -66,6 +75,7 @@ flowchart LR
     Tier --> Windows["Open: Windows I4 CLI performance"]
     Tier --> I5["I5a: zero-address consistency implemented"]
     I5 --> I5Windows["Qualified: controlled Windows I5a on pinned native setup"]
+    I5 --> I5b["I5b: finite source/fixture + controlled Windows qualified"]
     I5 -. "later separate deliveries" .-> I6["I6: matched context"]
     I6 -.-> I7["I7: cross-capture comparison"]
 ```
@@ -226,11 +236,29 @@ now qualifies both timing limits and both captures, with all 14 gates passing
 under the selected read-only MirrorRust snapshot. Active Windows I4 remains over budget; its original Electron case is historical. Stage 2
 adoption has its own retained qualification and current refresh obligation.
 
-## Later I5, I6 and I7 deliveries
+## Selected I5b — Zero base plus nonzero displacement
+
+The selected [I5b design](../docs/Ariadne/i5b-zero-base-offset-design.md) asks
+whether the encoded GPR base is zero and its signed displacement is nonzero
+at the selected exception instruction. The [B0–B5 plan](i5b-zero-base-offset.md)
+defines source ownership, a finite six-MOV base/displacement matrix, strict
+result/CLI modes and independent acceptance tiers. B0–B5 are implemented and
+[qualified](../docs/Ariadne/i5b-validation.md) with 18 passing gates, 15 detected
+mutants, stable source/tool identities and separate controlled Windows tiers. This is machine-code bug debugging
+at the exact captured site, with physical register/displacement evidence.
+
+The first profile excludes indexes and requires independently decoded base-role
+evidence to agree with BAP's affine expression. Existing normalized terms alone
+cannot identify an encoded base. Missing/conflicting evidence yields unknown;
+only complete admitted premises permit consistency or refutation. This does
+not assess historical null derivation, object lifetime or actual branch history.
+The design is distinct from I5a zero-start, and neither delivery closes I4.
+
+## Other I5, I6 and I7 deliveries
 
 | Stage | Capability | Required additional work |
 | --- | --- | --- |
-| Remaining I5 | Other address hypotheses and model-relative discrimination | Separate support/refutation criteria and valid context. Lifetime hypotheses require matched allocation/free evidence; branch discrimination requires accepted transitions/completeness. |
+| Other I5 | Arithmetic/noncanonical hypotheses and model-relative discrimination beyond I5b | Separate support/refutation criteria and valid context. Lifetime hypotheses require matched allocation/free evidence; branch discrimination requires accepted transitions/completeness. |
 | I6 | Matched source/function/object context | Explicit build/symbol/ABI/layout matches. Context can annotate identities; it cannot supply missing runtime bytes or observed execution. |
 | I7 | Cross-capture comparison | Explicit correspondence across independently qualified captures, with no joins by naked VA and no assumed chronology. |
 

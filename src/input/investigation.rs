@@ -192,3 +192,35 @@ pub fn bind_fault_context(
     let analysis = bind_investigation(prepared, analyzer)?;
     crate::investigation::BoundFaultContext::new(analysis, prepared.fault.evidence.clone())
 }
+
+/// Bind the selected decoded base receipt without another decoder/solver launch.
+pub fn bind_zero_base_offset(
+    prepared: &FilePreparedAnalysis,
+    analyzer: &dyn AnalysisView,
+    question: crate::investigation::FaultAddressQuestion,
+) -> Result<crate::investigation::BoundZeroBaseOffsetContext, crate::investigation::Error> {
+    let fault = bind_fault_context(prepared, analyzer)?;
+    let site = prepared
+        .prepared
+        .instructions
+        .get(&question.site)
+        .ok_or("question site is outside this query")?;
+    if let Some(r) = &site.decoded_address {
+        if Some(r.raw_record.as_str()) != site.decoder_record.as_deref()
+            || r.length != site.length
+            || r.bytes_hex
+                != site
+                    .bytes
+                    .iter()
+                    .map(|b| format!("{b:02x}"))
+                    .collect::<String>()
+        {
+            return Err("decoded receipt differs from preparation".into());
+        }
+    }
+    crate::investigation::BoundZeroBaseOffsetContext::new(
+        fault,
+        question,
+        site.decoded_address.clone(),
+    )
+}

@@ -10,6 +10,10 @@
 
 **Where to go next.**
 
+- [I5b qualification](i5b-qualification.json), [verified evidence manifest](i5b-evidence-manifest.json)
+  and [controlled case pins](i5b-controlled-cases.json) — new source/fixture and
+  real Windows machine-code debugging acceptance; see the
+  [validation guide](../../docs/Ariadne/i5b-validation.md) for scope and timings.
 - [Unlimited BAP timing policy](../../docs/Ariadne/bap-unlimited-validation.md) — distinguishes current qualification from earlier bounded-policy measurements.
 
 - [Checkpoints](../../CHECKPOINTS.md) — connect evidence to dated deliveries.

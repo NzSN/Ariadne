@@ -2,7 +2,8 @@
 
 ## Context and follow-up
 
-**Status.** Current producer-explanation and I5a zero-address APIs.
+**Status.** Current producer-explanation, I5a zero-address and implemented I5b
+zero-base-plus-displacement interfaces. I5b has source/tool-bound finite-corpus qualification.
 
 **Why this document exists.** [Contracts](../investigation-contracts.md) define exact binding and the meaning of possible producers.
 
@@ -10,6 +11,8 @@
 
 **Where to go next.**
 
+- [I5b contracts](../i5b-contracts.md) — exact machine-code bytes, decoded base
+  role, captured context, bounded result and actual product modes.
 - [Delivery evidence](../investigation-validation.md) — shows what the implementation has exercised.
 - [I5a contracts](../i5a-contracts.md) — define exception-context binding and the separate numeric assessment.
 - [Follow-up plan](../../../Plans/investigation-layer.md) — tracks missing capture acceptance and later questions.
@@ -59,3 +62,15 @@ python3 tools/check_i5a.py
 Other hypothesis, matched object/source and cross-capture questions remain
 planned. Stronger lifetime/path conclusions require independently supplied
 and accepted evidence rather than a suspicious pointer or fixture label.
+
+The I5b machine-code debugging question has its own bound value:
+
+```text
+bind_zero_base_offset(prepared, completed, question) -> BoundZeroBaseOffsetContext
+assess_zero_base_offset(bound, ZeroBaseOffsetLimits) -> ZeroBaseOffsetAssessment
+```
+
+It joins independently decoded base/displacement roles with BAP address facts and
+the same sealed fault context, using completed analysis once. It does not infer
+historical null provenance. See [I5b qualification](../i5b-validation.md)
+for the exercised finite corpus, passing 18 gates and separate controlled Windows tiers.

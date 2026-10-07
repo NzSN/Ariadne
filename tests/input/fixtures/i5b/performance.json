@@ -1,0 +1,12 @@
+{
+  "schema": "ariadne.i5b-performance-contract/v1",
+  "frozenDate": "2026-10-07",
+  "maxPhaseMedianMs": 10,
+  "maxCliMedianMs": 1500,
+  "warmups": 1,
+  "measuredRepeats": 5,
+  "maxEvidence": 64,
+  "maxClaims": 64,
+  "fixtureCases": ["mov32mi-positive", "mov64mi32-positive", "mov32rm-positive", "mov64rm-positive", "mov32mr-positive", "mov64mr-positive", "effective-zero-nonzero-base", "index-only", "missing-integer"],
+  "scope": "Small finite fixture and separately declared controlled-Windows corpora; no I4/I5a threshold change or universal bound."
+}

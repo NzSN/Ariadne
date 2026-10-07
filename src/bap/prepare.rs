@@ -24,6 +24,7 @@ pub struct Metrics {
 pub struct Backend {
     config: Config,
     decoder: PathBuf,
+    decoder_hash: String,
     session: Option<Session>,
     snapshot: Option<String>,
     target: Option<DecoderTarget>,
@@ -59,6 +60,11 @@ impl Backend {
         self.metrics
     }
     pub fn finish(mut self) -> Result<(), Error> {
+        if crate::reports::sha256(&std::fs::read(&self.decoder)?) != self.decoder_hash {
+            return Err(invalid(
+                "decode reference changed during snapshot preparation",
+            ));
+        }
         if let Some(s) = self.session.take() {
             s.finish()?;
         }
@@ -73,6 +79,7 @@ impl Backend {
         let helper_hash = crate::bap::helper_identity(&config.helper)?;
         Ok(Self {
             config,
+            decoder_hash: crate::reports::sha256(&std::fs::read(decoder)?),
             decoder: decoder.into(),
             session: None,
             snapshot: None,
@@ -104,6 +111,9 @@ impl Backend {
         let start = Instant::now();
         let mut batch =
             decode_captured_batch(snapshot, candidates, &self.decoder, options, target)?;
+        if crate::reports::sha256(&std::fs::read(&self.decoder)?) != self.decoder_hash {
+            return Err(invalid("decode reference changed between snapshot batches"));
+        }
         self.metrics.reference_decode += start.elapsed();
         batch.identity.ruleset = PROJECTION.into();
         let available: BTreeMap<_, _> = candidates

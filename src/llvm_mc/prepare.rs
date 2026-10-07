@@ -149,6 +149,7 @@ impl ByteSnapshot {
                 quality: EffectQuality::Unavailable,
                 undefined_flags: LocationSet::new(),
                 decoder_record: Some(raw.record.clone()),
+                decoded_address: None,
                 decoder_control: d.kind,
                 semantic: None,
             };
@@ -238,6 +239,7 @@ impl ByteSnapshot {
                     quality: EffectQuality::Unavailable,
                     undefined_flags: LocationSet::new(),
                     decoder_record: None,
+                    decoded_address: None,
                     decoder_control: None,
                     semantic: None,
                 }

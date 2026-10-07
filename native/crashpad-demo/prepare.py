@@ -38,7 +38,7 @@ DEPENDENCIES = {
 GN_REVISION = "5e19d2fb166fbd4f6f32147fbb2f497091a54ad8"
 CLANG_ARCHIVE = "clang-llvmorg-20-init-17108-g29ed6000-2.tar.xz"
 CLANG_SHA256 = "1c71efd923a91480480d4f31c2fd5f1369e01e14f15776a9454abbce0bc13548"
-DEMO_FILES = ("BUILD.gn", "crash_demo.cc", "fault.cc", "bap_workload.asm")
+DEMO_FILES = ("BUILD.gn", "crash_demo.cc", "fault.cc", "bap_workload.asm", "zero_base_offset.asm")
 
 
 def output(command, cwd=None):

@@ -1,0 +1,2112 @@
+{
+  "cases": [
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "mov32mi-positive",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "consistent_with_evidence",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "0c807aefed303ce0c4a1cf1106c56d298b1ba297b59fefc6fcc5df74bdf5c008",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 4104,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "mov32mi-nonzero",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "refuted_under_premises",
+      "parameters": [
+        1,
+        4104
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 4096
+      },
+      "rip": 4198400,
+      "sha256": "9d9690b2ada86edb287cf8567d996e3a3d99293a8fd0469181bb4cdb6f5c57cd",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 0,
+      "base": "rax",
+      "bytes": 1551,
+      "chain": 0,
+      "code": "c70005000000",
+      "constant": 0,
+      "displacement": 0,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "mov32mi-no-displacement",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 115,
+        "exception_offset": 1347
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "refuted_under_premises",
+      "parameters": [
+        1,
+        0
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "41721f8bbdba551183ac0e7be571449f04ae852950090a542cbda9369d06cb27",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 64,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1553,
+      "chain": 0,
+      "code": "48c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "mov64mi32-positive",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 117,
+        "exception_offset": 1349
+      },
+      "opcode": "MOV64mi32",
+      "operation": 1,
+      "outcome": "consistent_with_evidence",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "4656ace78944a4c7260979c9cb8f4097ace59c564e93f57f6ac6d54d188a8a27",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 64,
+      "address": 4104,
+      "base": "rax",
+      "bytes": 1553,
+      "chain": 0,
+      "code": "48c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "mov64mi32-nonzero",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 117,
+        "exception_offset": 1349
+      },
+      "opcode": "MOV64mi32",
+      "operation": 1,
+      "outcome": "refuted_under_premises",
+      "parameters": [
+        1,
+        4104
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 4096
+      },
+      "rip": 4198400,
+      "sha256": "3404ae59bbe4fbe6cad22a154dd93d1dcee2b9d6fe9971bdc45f28ae05811079",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 64,
+      "address": 0,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "48c70005000000",
+      "constant": 0,
+      "displacement": 0,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "mov64mi32-no-displacement",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV64mi32",
+      "operation": 1,
+      "outcome": "refuted_under_premises",
+      "parameters": [
+        1,
+        0
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "7acd51e6677254c2db1d2d926c7838d3b2aeb73101696cd9c8bff17a01cc70a3",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1548,
+      "chain": 0,
+      "code": "8b4008",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "mov32rm-positive",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 112,
+        "exception_offset": 1344
+      },
+      "opcode": "MOV32rm",
+      "operation": 0,
+      "outcome": "consistent_with_evidence",
+      "parameters": [
+        0,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "ffd018e5c5a7f7bc40166b78246216d6beaebec5ff8905d0facb6ba9715226b5",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 4104,
+      "base": "rax",
+      "bytes": 1548,
+      "chain": 0,
+      "code": "8b4008",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "mov32rm-nonzero",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 112,
+        "exception_offset": 1344
+      },
+      "opcode": "MOV32rm",
+      "operation": 0,
+      "outcome": "refuted_under_premises",
+      "parameters": [
+        0,
+        4104
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 4096
+      },
+      "rip": 4198400,
+      "sha256": "c77a77cbf14109c22a84e30aca286a4c2ce8693c97da89ff3022833f0945197f",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 0,
+      "base": "rax",
+      "bytes": 1547,
+      "chain": 0,
+      "code": "8b00",
+      "constant": 0,
+      "displacement": 0,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "mov32rm-no-displacement",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 111,
+        "exception_offset": 1343
+      },
+      "opcode": "MOV32rm",
+      "operation": 0,
+      "outcome": "refuted_under_premises",
+      "parameters": [
+        0,
+        0
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "7d2b8f87ab7472e0221f0a0fb1316b63860ce84e2b1c2b6f19c46586c7692d82",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 64,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1549,
+      "chain": 0,
+      "code": "488b4008",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "mov64rm-positive",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 113,
+        "exception_offset": 1345
+      },
+      "opcode": "MOV64rm",
+      "operation": 0,
+      "outcome": "consistent_with_evidence",
+      "parameters": [
+        0,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "ff05349f49e4924241c61f540e3851114cce9f91e30405443bc886b0689e78f1",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 64,
+      "address": 4104,
+      "base": "rax",
+      "bytes": 1549,
+      "chain": 0,
+      "code": "488b4008",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "mov64rm-nonzero",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 113,
+        "exception_offset": 1345
+      },
+      "opcode": "MOV64rm",
+      "operation": 0,
+      "outcome": "refuted_under_premises",
+      "parameters": [
+        0,
+        4104
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 4096
+      },
+      "rip": 4198400,
+      "sha256": "75f271734aa323697314c4c7b3d2f22d51a4443cb3e333d8fea8c9db40d91a96",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 64,
+      "address": 0,
+      "base": "rax",
+      "bytes": 1548,
+      "chain": 0,
+      "code": "488b00",
+      "constant": 0,
+      "displacement": 0,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "mov64rm-no-displacement",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 112,
+        "exception_offset": 1344
+      },
+      "opcode": "MOV64rm",
+      "operation": 0,
+      "outcome": "refuted_under_premises",
+      "parameters": [
+        0,
+        0
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "fa49368e6b724b7316ac005ec42d06d39c450be66875b3798af11b93c58c0f37",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1548,
+      "chain": 0,
+      "code": "894008",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "mov32mr-positive",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 112,
+        "exception_offset": 1344
+      },
+      "opcode": "MOV32mr",
+      "operation": 1,
+      "outcome": "consistent_with_evidence",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "93f20a519ace6dc12aee4a7c49c27ea1ff573772dd17fbb50b6e8ea294af85c8",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 4104,
+      "base": "rax",
+      "bytes": 1548,
+      "chain": 0,
+      "code": "894008",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "mov32mr-nonzero",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 112,
+        "exception_offset": 1344
+      },
+      "opcode": "MOV32mr",
+      "operation": 1,
+      "outcome": "refuted_under_premises",
+      "parameters": [
+        1,
+        4104
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 4096
+      },
+      "rip": 4198400,
+      "sha256": "c99a2f3007291bc01e37a43286b6259adc1b954006942280abbd8e055edb5efe",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 0,
+      "base": "rax",
+      "bytes": 1547,
+      "chain": 0,
+      "code": "8900",
+      "constant": 0,
+      "displacement": 0,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "mov32mr-no-displacement",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 111,
+        "exception_offset": 1343
+      },
+      "opcode": "MOV32mr",
+      "operation": 1,
+      "outcome": "refuted_under_premises",
+      "parameters": [
+        1,
+        0
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "3076f05591d92688d30e93e6ad407b3a198583b864a10aade278f86e1f04ee55",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 64,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1549,
+      "chain": 0,
+      "code": "48894008",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "mov64mr-positive",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 113,
+        "exception_offset": 1345
+      },
+      "opcode": "MOV64mr",
+      "operation": 1,
+      "outcome": "consistent_with_evidence",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "f7d2b25661ba785d21970974afc07c75d1ea8124ddceaec958fa49106dd2bd66",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 64,
+      "address": 4104,
+      "base": "rax",
+      "bytes": 1549,
+      "chain": 0,
+      "code": "48894008",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "mov64mr-nonzero",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 113,
+        "exception_offset": 1345
+      },
+      "opcode": "MOV64mr",
+      "operation": 1,
+      "outcome": "refuted_under_premises",
+      "parameters": [
+        1,
+        4104
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 4096
+      },
+      "rip": 4198400,
+      "sha256": "e98be152904ec40f902f5c2de3d81cefc0bbb053274b81a8f4d19afa48ee0b1c",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 64,
+      "address": 0,
+      "base": "rax",
+      "bytes": 1548,
+      "chain": 0,
+      "code": "488900",
+      "constant": 0,
+      "displacement": 0,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "mov64mr-no-displacement",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 112,
+        "exception_offset": 1344
+      },
+      "opcode": "MOV64mr",
+      "operation": 1,
+      "outcome": "refuted_under_premises",
+      "parameters": [
+        1,
+        0
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "d4b7b62e98c6270fe7a73b4c975229969e4024b1dec1fb568b4d7fc1b7d768b6",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 0,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "effective-zero-nonzero-base",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "refuted_under_premises",
+      "parameters": [
+        1,
+        0
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 18446744073709551608
+      },
+      "rip": 4198400,
+      "sha256": "21ecd0816bd00f591a2ed6bb489e881429752179465fb21781741891d323b51a",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 264,
+      "base": "rax",
+      "bytes": 1555,
+      "chain": 0,
+      "code": "c7800801000005000000",
+      "constant": 264,
+      "displacement": 264,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "disp32-positive",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 119,
+        "exception_offset": 1351
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "consistent_with_evidence",
+      "parameters": [
+        1,
+        264
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "21f61d858b112a46db78366273145aaa7808f9ce383de23d0a046613df89b1e8",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 4088,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "c740f805000000",
+      "constant": 18446744073709551608,
+      "displacement": -8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "negative-disp8",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "refuted_under_premises",
+      "parameters": [
+        1,
+        4088
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 4096
+      },
+      "rip": 4198400,
+      "sha256": "5300bfcb92ed5fc66702c02daf9ba66f83cc636829f8331b699ddafd0a01bbfc",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 3768,
+      "base": "rax",
+      "bytes": 1555,
+      "chain": 0,
+      "code": "c780b8feffff05000000",
+      "constant": 18446744073709551288,
+      "displacement": -328,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "negative-disp32",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 119,
+        "exception_offset": 1351
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "refuted_under_premises",
+      "parameters": [
+        1,
+        3768
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 4096
+      },
+      "rip": 4198400,
+      "sha256": "1aec9fcb76c7132c0d803a02e8334d07de5454150cff4ab610926408e418cac5",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 18446744073709551608,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "c740f805000000",
+      "constant": 18446744073709551608,
+      "displacement": -8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "zero-base-negative",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        1,
+        18446744073709551608
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "1d32c4930436f6948eb288336fc3e27901e7f47a0a021d2948e6dd750205f6a3",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rsp",
+      "bytes": 1553,
+      "chain": 0,
+      "code": "c744240805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048577,
+      "name": "rsp-sib",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 117,
+        "exception_offset": 1349
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "consistent_with_evidence",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rsp": 0
+      },
+      "rip": 4198400,
+      "sha256": "22a06cede6b7643eff98d965ddac69d5a1344dc4ac23c8c1a5abc5265db1a654",
+      "site": 4198400,
+      "terms": {
+        "rsp": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rbp",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "c7450805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "rbp-disp8",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "consistent_with_evidence",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rbp": 0
+      },
+      "rip": 4198400,
+      "sha256": "364a2d789810de176cee09e8bab010e077f9e37b3a11816bca6d4305eeec5638",
+      "site": 4198400,
+      "terms": {
+        "rbp": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "r12",
+      "bytes": 1554,
+      "chain": 0,
+      "code": "41c744240805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "r12-sib",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 118,
+        "exception_offset": 1350
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "consistent_with_evidence",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "r12": 0
+      },
+      "rip": 4198400,
+      "sha256": "6f29ef021d1b71ce7281c7b90132174db6bc99885ad32e60322694c390037a06",
+      "site": 4198400,
+      "terms": {
+        "r12": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "r13",
+      "bytes": 1553,
+      "chain": 0,
+      "code": "41c7450805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "r13-disp8",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 117,
+        "exception_offset": 1349
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "consistent_with_evidence",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "r13": 0
+      },
+      "rip": 4198400,
+      "sha256": "85a2502e310fe65b570327466b36945f0f69d323af1162c69d0fcada249dc5a3",
+      "site": 4198400,
+      "terms": {
+        "r13": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1553,
+      "chain": 0,
+      "code": "c744480805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "indexed",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 117,
+        "exception_offset": 1349
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0,
+        "rcx": 0
+      },
+      "rip": 4198400,
+      "sha256": "5e4272dcece7dba289a57a7f2f0d0d9a09edd783897e15ad7a43e0da26e30269",
+      "site": 4198400,
+      "terms": {
+        "rax": 1,
+        "rcx": 2
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1556,
+      "chain": 0,
+      "code": "c704050800000005000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "index-only",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 120,
+        "exception_offset": 1352
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "4558ef30ab6d8880178a75a9e29e303bc06b7067faf5e90439367535c788121e",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1556,
+      "chain": 0,
+      "code": "c704250800000005000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "absolute",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 120,
+        "exception_offset": 1352
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "919a739d585d2c59e26e9fa686170ca70f3f6a0563870e370f5d08100b6414c2",
+      "site": 4198400,
+      "terms": {}
+    },
+    {
+      "access_width": 64,
+      "address": 4198415,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "488b0508000000",
+      "constant": 4198415,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "rip-relative",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV64rm",
+      "operation": 0,
+      "outcome": "unknown",
+      "parameters": [
+        0,
+        4198415
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "bb294136eabd71dacab0db74172a934731013ba8fb0225eb35fc532c316806a9",
+      "site": 4198400,
+      "terms": {}
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1553,
+      "chain": 0,
+      "code": "c744000805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "merged-base-index",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 117,
+        "exception_offset": 1349
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "07f6ec57112e930fbbf872dc61a10f2ac6d8aa7385edb5e8884f599eab2f85a7",
+      "site": 4198400,
+      "terms": {
+        "rax": 2
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "c7400800000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "payload-zero",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "consistent_with_evidence",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "be05a46e05eb94e4a005e691896d1ced34e945fc141133288135de2c86ba91f0",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "last-access-byte",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "consistent_with_evidence",
+      "parameters": [
+        1,
+        11
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "69588021e9ac4bfcb5fcbbc9b27c8afe6c6ee845f6f8564ede6a97c15dd16f7e",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "past-access-span",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        1,
+        12
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "b472a852e164a2b50e289a439a1027d3cd680dd257133030972864de962bda7f",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048577,
+      "name": "missing-integer",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "212a51b3a96d82cdef1e328279dbefc0918c9df1aa5b600d403557cc2d0b07dd",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048578,
+      "name": "missing-control",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "af4432e40f297007bdc3ef728a284a37ce558147ce2e3505ce889fdd57cbc9ee",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "no-parameters",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "0d633582f8c081614ae6b74ba4fe1332b54110bbf02289d41afce491d44b2d76",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "one-parameter",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        1
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "ddbe225e35368cc8177fca9562834ff9140ce88fa818767220d6cfc81d856de0",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 2147483651,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "wrong-kind",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "bb449ff62d2d7ece51e9e063a43b4f2376ee40fae0fd5369eadfcaeaaf20c21c",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "execute",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        8,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "90865e2b5bcdf0a86eea882412de99e033e860f6c57c1dad7422bfb567a0bca7",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 4660,
+      "code": "c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "nested",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "cb0b35fa35429aaed9b106b55ca3c4056fe7b6f541839765673e542429afb15d",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 256,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "unknown-flags",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "acf024c39e2d5d2360c278709ff2844dcbb5e57a5a7edd31f17e620f566ba764",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198401,
+      "flags": 1048579,
+      "name": "wrong-pc",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "da81e1e0c6e390372eae8b01f86ce164f5af359e715372d9563273be3e91cfeb",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "wrong-rip",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198401,
+      "sha256": "4c8f2683404622b9cc7f7dc6a2245d7da2194c4fb1e62f57565d23de5cabc8b8",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "wrong-operation",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        0,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "aede5bd152c39cf94fea7e37dbecad6266eed8f6ee772790185125a7f40fab39",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "wrong-data-address",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        1,
+        4096
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "0f216b035f1021435011403e3c4fc521ebee2faee5be6f20464e00e6490db4f1",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "linux",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 33281,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "8c2393971f5afa27aac6ed5897514dfa346f7c5d96ef896f1407809034acea68",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1553,
+      "chain": 0,
+      "code": "64c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "segment",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 117,
+        "exception_offset": 1349
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "cd5a6156ad8e1243239b9b94031d8230fbb7a361c06f26d6e71b465f2cb65d4e",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1553,
+      "chain": 0,
+      "code": "67c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "address-size",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 117,
+        "exception_offset": 1349
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "b2267ff721af7701b5ad2b6f801faca11d037fcc3517138a240eba64947326cb",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1553,
+      "chain": 0,
+      "code": "f3c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "repeat",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 117,
+        "exception_offset": 1349
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "0858f667edbb033c24700cf72b063ac92a6abcbb70b4c5c52bed9a7157389e37",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1553,
+      "chain": 0,
+      "code": "f0c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "lock",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 117,
+        "exception_offset": 1349
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "3b7e4bb11cbac29d7ffd3cc3408d1a5458a7a3c8cdc83fc915fbce33f46609db",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 140737488355336,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "excluded-range",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        1,
+        140737488355336
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 140737488355328
+      },
+      "rip": 4198400,
+      "sha256": "8853780634d48bc4951e06d2a8afbb0d487d0d47f68ca66e2deb09c23748ac45",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 18446744073709551615,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "span-wrap",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        1,
+        18446744073709551615
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 18446744073709551607
+      },
+      "rip": 4198400,
+      "sha256": "1a7b31e73a3d39a0ac585b0230a04f6a324f42c3eaac30e6bf4257969ddebb4f",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1552,
+      "chain": 0,
+      "code": "c7400805000000",
+      "constant": 8,
+      "context_absent": true,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "no-context",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 1348
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "3cdfa2f2b806976fa291e8acf3ea456a9a1c95ad83192238c4eb175eed6dccdf",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 1372,
+      "chain": 0,
+      "code": "c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_absent": true,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048579,
+      "name": "no-exception",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": null
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "e8bad4ca72a1bd56abed19483267dcd757073f0d54551132103d7a168bddf075",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      }
+    },
+    {
+      "access_width": 32,
+      "address": 8,
+      "base": "rax",
+      "bytes": 2848,
+      "chain": 0,
+      "code": "c7400805000000",
+      "constant": 8,
+      "displacement": 8,
+      "exception_code": 3221225477,
+      "exception_flags": 0,
+      "exception_location": 4198400,
+      "flags": 1048577,
+      "name": "thread-fallback",
+      "offsets": {
+        "code_offset": 88,
+        "context_offset": 116,
+        "exception_offset": 2632
+      },
+      "opcode": "MOV32mi",
+      "operation": 1,
+      "outcome": "unknown",
+      "parameters": [
+        1,
+        8
+      ],
+      "platform": 2,
+      "registers": {
+        "rax": 0
+      },
+      "rip": 4198400,
+      "sha256": "d8b917ddc52152cd098f0d3400a13e614061c2dee98d3f83a6bee95a80b6040b",
+      "site": 4198400,
+      "terms": {
+        "rax": 1
+      },
+      "thread_list_context": true
+    }
+  ],
+  "schema": "ariadne.i5b-fixtures/v1",
+  "scope": "Independent synthetic cases; no real Windows acceptance"
+}

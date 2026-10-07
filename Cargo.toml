@@ -196,9 +196,19 @@ name = "input_i5a"
 path = "tests/input/i5a.rs"
 required-features = ["input"]
 
+[[test]]
+name = "input_i5b"
+path = "tests/input/i5b.rs"
+required-features = ["input"]
+
 [[bin]]
 name = "i5a"
 path = "src/bin/i5a.rs"
+required-features = ["bench"]
+
+[[bin]]
+name = "i5b"
+path = "src/bin/i5b.rs"
 required-features = ["bench"]
 
 [[test]]

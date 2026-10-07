@@ -4,6 +4,7 @@ mod fault_context;
 mod model;
 pub(crate) mod validate;
 mod zero_address;
+mod zero_base_offset;
 pub use explain::explain_fault_address;
 pub use fault_context::{
     BoundFaultContext, FaultDatum, FaultMetadata, FaultObservation, FaultSpan,
@@ -16,6 +17,11 @@ pub use zero_address::{
     AssessedValue, AssessmentLimits, ZERO_ADDRESS_PROFILE, ZERO_ADDRESS_SCHEMA,
     ZeroAddressAssertion, ZeroAddressAssessment, ZeroAddressClaim, ZeroAddressConclusion,
     ZeroAddressEvidence, ZeroAddressEvidenceData, assess_zero_address,
+};
+pub use zero_base_offset::{
+    BoundZeroBaseOffsetContext, ZERO_BASE_OFFSET_PROFILE, ZERO_BASE_OFFSET_SCHEMA,
+    ZeroBaseOffsetAssertion, ZeroBaseOffsetAssessment, ZeroBaseOffsetClaim, ZeroBaseOffsetEvidence,
+    ZeroBaseOffsetEvidenceData, ZeroBaseOffsetLimits, assess_zero_base_offset,
 };
 pub type Error = Box<dyn std::error::Error>;
 pub(crate) fn invalid(s: impl Into<String>) -> Error {

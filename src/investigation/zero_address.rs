@@ -112,11 +112,11 @@ pub struct ZeroAddressAssessment {
     pub truncated: bool,
 }
 #[derive(Default)]
-struct Decision {
-    evaluated: Option<u64>,
-    reported: Option<u64>,
-    used: Vec<String>,
-    gaps: BTreeSet<String>,
+pub(super) struct Decision {
+    pub(super) evaluated: Option<u64>,
+    pub(super) reported: Option<u64>,
+    pub(super) used: Vec<String>,
+    pub(super) gaps: BTreeSet<String>,
 }
 fn instruction(evidence: &[ZeroAddressEvidence]) -> Option<(&SiteEvidence, bool)> {
     evidence.iter().find_map(|e| {
@@ -162,7 +162,7 @@ fn guarded_prefix(bytes: &str) -> bool {
     }
     false
 }
-fn decide(
+pub(super) fn decide(
     context: &FaultMetadata,
     question: &FaultAddressQuestion,
     evidence: &[ZeroAddressEvidence],

@@ -123,6 +123,7 @@ fn prepare(row: &Value, native: bool) -> (FilePreparedAnalysis, Analyzer) {
                                     quality: EffectQuality::ExternalLifted,
                                     undefined_flags: Default::default(),
                                     decoder_record: None,
+                                    decoded_address: None,
                                     decoder_control: Some(kind),
                                     semantic: Some(SemanticEvidence {
                                         backend: "bap-x86-legacy".into(),

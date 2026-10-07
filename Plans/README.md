@@ -2,7 +2,9 @@
 
 ## Context and follow-up
 
-**Status.** Current plan navigation as of 2026-10-05. Native BAP analysis and
+**Status.** Current plan navigation as of 2026-10-07. I5b has a selected design
+and detailed B0–B5 implementation plan; all stages are implemented and qualified
+within the recorded finite source/fixture and controlled Windows corpora. Native BAP analysis and
 controlled Windows I5a are qualified within their recorded scopes. The Windows
 I4 re-pin is complete; its unchanged CLI budget remains unmet.
 
@@ -15,6 +17,8 @@ keeping a plan outside `completed/` does not make its completed steps pending.
 
 **Where to go next.**
 
+- [I5b implementation plan](i5b-zero-base-offset.md) — selected zero-base-plus-
+  displacement assessment, missing decoded-role evidence and independent gates.
 - [Investigation ledger](investigation-layer.md) — tracks active Windows I4
   performance, delivered I5a and later hypothesis/object/cross-capture work.
 - [I4 replacement result](../docs/Ariadne/i4-windows-repin-validation.md) — records
@@ -28,7 +32,7 @@ keeping a plan outside `completed/` does not make its completed steps pending.
   failed progress records and fresh qualification after changes.
 
 **What remains unresolved.** Full Windows I4 acceptance needs an explanation-CLI
-median at most 2,000 ms on the active 98-start case. Broader I5 hypotheses, Linux
+median at most 2,000 ms on the active 98-start case. Other I5 hypotheses, Linux
 numeric admission, I6/I7, PE/ELF image and ELF-core inputs, universal refinement
 and packaged cross-platform release qualification remain outside the delivered
 scope. BAP's unlimited timing policy does not waive I4 or I5a budgets.
@@ -39,7 +43,8 @@ For the wider context, see the [documentation map](../docs/documentation-map.md)
 
 | Plan | Current state and next work |
 | --- | --- |
-| [Investigation layer](investigation-layer.md) | I0–I3 and active Windows producer correctness pass. I4 remains over its fixed CLI budget; I5a is qualified, while broader I5 and I6/I7 remain later work. |
+| [Investigation layer](investigation-layer.md) | I0–I3 and active Windows producer correctness pass. I4 remains over its fixed CLI budget; I5a is qualified, I5b is corpus-qualified, and other I5/I6/I7 remain later work. |
+| [I5b zero base plus displacement](i5b-zero-base-offset.md) | B0–B5 implemented and corpus-qualified: 18 passing gates, 15 detected mutants, stable source/tool identities and six controlled Windows captures. |
 | [BAP integration](bap-integration.md) | Stage 1 and native A0–A6 are qualified on their exercised corpora. Maintain source/tool-bound regressions after changes; universal proof and packaged release acceptance remain separate. |
 | [Roadmap](../ROADMAP.md) | Current input and product direction, deferred readers and the [Stage F proof boundary](../docs/Ariadne/stage-f-proof-and-performance.md). |
 

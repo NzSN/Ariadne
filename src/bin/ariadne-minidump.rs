@@ -8,7 +8,7 @@ use std::io::{self, Write};
 use std::path::{Path, PathBuf};
 
 fn usage() -> &'static str {
-    "usage: ariadne-minidump DUMP --decoder-reference PATH --entry VA_HEX [--entry VA_HEX ...] [--seed VA_HEX ...] [--seed-exception-rip] [--max-starts N] [--stateflow-input SEMANTICS_JSON] [--explain-fault-address VA --memory-access N] [--explanation-only] [--assess-zero-address VA --memory-access N] [--assessment-only] [--analysis-backend rust|bap] [--bap-core-dir DIR] [--bap-helper PATH] [--bap-runtime DIR] (--format text|dot|json | --output-dir NEW_DIR)"
+    "usage: ariadne-minidump DUMP --decoder-reference PATH --entry VA_HEX [--entry VA_HEX ...] [--seed VA_HEX ...] [--seed-exception-rip] [--max-starts N] [--stateflow-input SEMANTICS_JSON] [--explain-fault-address VA --memory-access N] [--explanation-only] [--assess-zero-address VA --memory-access N] [--assess-zero-base-offset VA --memory-access N] [--assessment-only] [--analysis-backend rust|bap] [--bap-core-dir DIR] [--bap-helper PATH] [--bap-runtime DIR] (--format text|dot|json | --output-dir NEW_DIR)"
 }
 fn invalid(message: impl Into<String>) -> io::Error {
     io::Error::new(io::ErrorKind::InvalidInput, message.into())
@@ -43,6 +43,7 @@ struct Args {
     stateflow_input: Option<PathBuf>,
     explain_site: Option<u64>,
     assess_site: Option<u64>,
+    assess_offset_site: Option<u64>,
     assessment_only: bool,
     memory_access: Option<usize>,
     explanation_only: bool,
@@ -68,6 +69,7 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
     let mut stateflow_input = None;
     let mut explain_site = None;
     let mut assess_site = None;
+    let mut assess_offset_site = None;
     let mut assessment_only = false;
     let mut memory_access = None;
     let mut explanation_only = false;
@@ -156,6 +158,13 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
                         .ok_or_else(|| invalid("non-UTF8 assessment VA"))?,
                 )?);
             }
+            "--assess-zero-base-offset" if assess_offset_site.is_none() => {
+                assess_offset_site = Some(parse_va(
+                    value
+                        .to_str()
+                        .ok_or_else(|| invalid("non-UTF8 assessment VA"))?,
+                )?);
+            }
             "--explain-fault-address" if explain_site.is_none() => {
                 explain_site = Some(parse_va(
                     value
@@ -180,10 +189,16 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
     if entries.is_empty() || decoder.is_none() || format.is_some() == output_dir.is_some() {
         return Err(invalid(usage()).into());
     }
-    if explain_site.is_some() && assess_site.is_some() {
+    if usize::from(explain_site.is_some())
+        + usize::from(assess_site.is_some())
+        + usize::from(assess_offset_site.is_some())
+        > 1
+    {
         return Err(invalid("choose one explanation or assessment question").into());
     }
-    if (explain_site.is_some() || assess_site.is_some()) != memory_access.is_some() {
+    if (explain_site.is_some() || assess_site.is_some() || assess_offset_site.is_some())
+        != memory_access.is_some()
+    {
         return Err(invalid(
             "a question requires --explain-fault-address or --assess-zero-address, and --memory-access",
         )
@@ -198,14 +213,16 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
         .into());
     }
     if assessment_only
-        && (assess_site.is_none() || output_dir.is_some() || stateflow_input.is_some())
+        && (assess_site.is_none() && assess_offset_site.is_none()
+            || output_dir.is_some()
+            || stateflow_input.is_some())
     {
         return Err(invalid(
             "--assessment-only requires an assessment with --format and no stateflow input",
         )
         .into());
     }
-    if assess_site.is_some()
+    if (assess_site.is_some() || assess_offset_site.is_some())
         && (stateflow_input.is_some()
             || explanation_only
             || (!assessment_only && output_dir.is_none()))
@@ -224,6 +241,7 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
         stateflow_input,
         explain_site,
         assess_site,
+        assess_offset_site,
         assessment_only,
         memory_access,
         explanation_only,
@@ -307,6 +325,9 @@ fn run() -> Result<(), Box<dyn Error>> {
     if let Some(site) = args.assess_site {
         args.seeds.insert(site);
     }
+    if let Some(site) = args.assess_offset_site {
+        args.seeds.insert(site);
+    }
     if let Some(site) = args.explain_site {
         args.seeds.insert(site);
     }
@@ -363,6 +384,22 @@ fn run() -> Result<(), Box<dyn Error>> {
                 memory_access: args.memory_access.unwrap(),
             },
             ariadne::investigation::AssessmentLimits::default(),
+        )?)
+    } else {
+        None
+    };
+    let offset_assessment = if let Some(site) = args.assess_offset_site {
+        let bound = ariadne::input::investigation::bind_zero_base_offset(
+            &prepared,
+            &analyzer,
+            ariadne::investigation::FaultAddressQuestion {
+                site,
+                memory_access: args.memory_access.unwrap(),
+            },
+        )?;
+        Some(ariadne::investigation::assess_zero_base_offset(
+            &bound,
+            ariadne::investigation::ZeroBaseOffsetLimits::default(),
         )?)
     } else {
         None
@@ -485,17 +522,40 @@ fn run() -> Result<(), Box<dyn Error>> {
                 reports.push((name, ariadne::reports::render_zero_address(value, format)?));
             }
         }
+        if let Some(value) = &offset_assessment {
+            for (name, format) in [
+                (
+                    "zero-base-offset-assessment.txt",
+                    ariadne::reports::Format::Text,
+                ),
+                (
+                    "zero-base-offset-assessment.json",
+                    ariadne::reports::Format::Json,
+                ),
+                (
+                    "zero-base-offset-assessment.dot",
+                    ariadne::reports::Format::Dot,
+                ),
+            ] {
+                reports.push((
+                    name,
+                    ariadne::reports::render_zero_base_offset(value, format)?,
+                ));
+            }
+        }
         publish_all(&directory, &reports)?;
     } else {
         let output = if args.assessment_only {
-            ariadne::reports::render_zero_address(
-                assessment.as_ref().unwrap(),
-                match args.format.unwrap() {
-                    ReportFormat::Text => ariadne::reports::Format::Text,
-                    ReportFormat::Json => ariadne::reports::Format::Json,
-                    ReportFormat::Dot => ariadne::reports::Format::Dot,
-                },
-            )?
+            let format = match args.format.unwrap() {
+                ReportFormat::Text => ariadne::reports::Format::Text,
+                ReportFormat::Json => ariadne::reports::Format::Json,
+                ReportFormat::Dot => ariadne::reports::Format::Dot,
+            };
+            if let Some(value) = &offset_assessment {
+                ariadne::reports::render_zero_base_offset(value, format)?
+            } else {
+                ariadne::reports::render_zero_address(assessment.as_ref().unwrap(), format)?
+            }
         } else if args.explanation_only {
             ariadne::reports::render_explanation(
                 explanation.as_ref().unwrap(),

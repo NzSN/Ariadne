@@ -65,6 +65,7 @@ flowchart TD
 | Does a real capture contain an earlier possible producer? | [Independent-entry evidence design](Ariadne/priority-1-real-capture-design.md) | [Controlled Chromium/Linux case](Ariadne/priority-1-real-capture-validation.md) | One case does not establish historical execution or universal coverage. |
 | Which definitions may contribute to this fault address? | [Investigation design](Ariadne/investigation-layer-design.md) | [Contracts](Ariadne/investigation-contracts.md), [API](Ariadne/modules/investigation.md), [first delivery](Ariadne/investigation-validation.md) | [Re-pinned Windows I4 performance](Ariadne/i4-windows-repin-validation.md), broader I5 and I6–I7 remain in the [investigation plan](../Plans/investigation-layer.md). |
 | Does the selected access begin at address zero under captured exception context? | [I5a design](Ariadne/i5a-zero-address-design.md) | [Implemented contracts](Ariadne/i5a-contracts.md), [source review](Ariadne/i5a-source-review.md), [H0–H5 execution plan](../Plans/i5a-zero-address.md). | Qualified controlled Windows I5a and over-budget active Windows I4 remain separate; see the [current I5a stage](../Plans/investigation-layer.md#i5a--zero-address-consistency). |
+| Is the encoded base zero with a nonzero displacement at the fault site? | [I5b design](Ariadne/i5b-zero-base-offset-design.md) | [Implemented contracts](Ariadne/i5b-contracts.md), [source review](Ariadne/i5b-source-review.md), [B0–B5 plan](../Plans/i5b-zero-base-offset.md). | [Aggregate qualification](Ariadne/i5b-validation.md) passes within the declared finite corpus; indexed, Linux and historical-provenance questions remain outside its first profile. |
 | How can an investigator read and consume the output? | [Core rendering](Ariadne/result-rendering.md), [presentation design](Ariadne/priority-3-investigator-presentation-design.md) | [Minidump report contract](Ariadne/stage-c-report-schema.md), [presentation delivery](Ariadne/priority-3-presentation-validation.md), [examples](Ariadne/minidump-investigator-examples.md) | Additional result families retain [separate contracts](Ariadne/stage-e-report-contracts.md). |
 | What about abstract states and supplied LLVM IR? | [Stateflow design](machine-state-design.md), [typed replay design](Ariadne/stage-e-mirrorrust-design.md) | [Stage E completion](Ariadne/stage-e-completion.md), [IR usage](Ariadne/modules/ir.md), [replay guide](../mbt/stage-e/README.md) | Supplied semantics remain premises; Stage E does not reconstruct original IR from machine code. |
 | Does the tool meet a realistic performance budget? | [Baseline](Ariadne/stage-f-proof-and-performance.md), [workload design](Ariadne/priority-4-workload-performance-design.md) | [Historical LLVM-backed optimization](Ariadne/priority-4-performance-validation.md), [benchmark guide](Ariadne/modules/bench.md) | [Native core qualification](Ariadne/bap-core-qualification.md) uses its own unlimited policy; [active Windows I4](Ariadne/i4-windows-repin-validation.md) exceeds its unchanged 2 s limit; [controlled I5a](Ariadne/i5a-native-qualification.md) passes its fixed budgets. |
@@ -100,6 +101,7 @@ implemented repairs and exercised checks from real-Windows qualification.
 
 ### Project and active plans
 
+- [I5b zero-base-plus-displacement implementation plan](../Plans/i5b-zero-base-offset.md).
 - [Windows I4 replacement plan](../Plans/i4-windows-repin.md).
 - [I5a zero-address implementation plan](../Plans/i5a-zero-address.md).
 - [Native I5a qualification plan](../Plans/i5a-native-qualification.md).
@@ -113,6 +115,10 @@ implemented repairs and exercised checks from real-Windows qualification.
 
 ### Analysis, interfaces and delivery documents
 
+- [Selected I5b zero-base-plus-displacement design](Ariadne/i5b-zero-base-offset-design.md).
+- [I5b source and independent admission review](Ariadne/i5b-source-review.md).
+- [I5b implemented contracts](Ariadne/i5b-contracts.md).
+- [I5b qualification](Ariadne/i5b-validation.md).
 - [I5a zero-address consistency](Ariadne/i5a-zero-address-design.md).
 - [I5a implemented contracts](Ariadne/i5a-contracts.md).
 - [I5a source and finite admission review](Ariadne/i5a-source-review.md).

@@ -1,6 +1,7 @@
 //! Snapshot byte spans to `AnalysisRequest` through the pinned native LLVM MC decoder.
 //! The native tool is an explicit dependency of this adapter, never of the core.
 
+pub mod address_reference;
 mod prepare;
 mod reference;
 pub use reference::decode_captured_batch;

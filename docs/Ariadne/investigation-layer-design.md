@@ -4,7 +4,9 @@
 
 **Status.** First question implemented and repaired through `c9eb4c5`; I5a is
 implemented in the 2026-10-03 working tree. The [Windows I4 re-pin](i4-windows-repin-validation.md) passes correctness
-but exceeds the unchanged CLI budget. Broader I5 and I6–I7 remain unimplemented.
+but exceeds the unchanged CLI budget. I5b has a selected design and detailed plan
+as of 2026-10-07; B0–B5 are implemented and corpus-qualified.
+Other I5 hypotheses and I6–I7 remain pending.
 
 **Why this document exists.** [Real-capture slice](priority-1-real-capture-validation.md) demonstrates useful possible origins but leaves their explanation to the investigator.
 
@@ -12,6 +14,9 @@ but exceeds the unchanged CLI budget. Broader I5 and I6–I7 remain unimplemente
 
 **Where to go next.**
 
+- [I5b zero-base-plus-displacement design](i5b-zero-base-offset-design.md) and
+  [B0–B5 implementation plan](../../Plans/i5b-zero-base-offset.md) define the
+  selected next hypothesis, including the missing decoded-base receipt.
 - [Windows I4 replacement plan](../../Plans/i4-windows-repin.md) — replaces the
   unavailable original capture with the controlled 98-instruction case while
   preserving the separate timing and correctness criteria.
@@ -22,7 +27,7 @@ but exceeds the unchanged CLI budget. Broader I5 and I6–I7 remain unimplemente
 - [First delivery](investigation-validation.md) — records the exercised tier and open Windows acceptance.
 - [Investigation correctness-fix plan](../../Plans/completed/investigation-correctness-fixes.md) — scopes the limit-exhaustion and Windows I4 timing repairs; the [delivery record](investigation-correctness-validation.md) tracks implementation and validation.
 
-**What remains unresolved.** Active Windows I4 correctness passes after the [98-instruction re-pin](i4-windows-repin-validation.md); its 4.774 s CLI median exceeds the unchanged 2 s limit. Controlled Windows I5a is [qualified under its pinned native setup](i5a-native-qualification.md). Other hypothesis, object/source-context and cross-capture questions remain later work. A possible producer or a zero effective address does not prove a UAF, actual path or general root cause.
+**What remains unresolved.** Active Windows I4 correctness passes after the [98-instruction re-pin](i4-windows-repin-validation.md); its 4.774 s CLI median exceeds the unchanged 2 s limit. Controlled Windows I5a is [qualified under its pinned native setup](i5a-native-qualification.md). I5b has [source/tool-bound qualification](i5b-validation.md) for its finite corpus; other hypothesis, object/source-context and cross-capture questions remain later work. A possible producer or a zero effective address does not prove a UAF, actual path or general root cause.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 
@@ -54,21 +59,21 @@ mechanisms as they become accepted for the captured workload.
 
 ```mermaid
 flowchart TD
-    Capture["Immutable dump + explicit entry evidence"] --> Current["Current BAP lifting + Rust analysis"]
+    Capture["Immutable dump + explicit entry evidence"] --> Current["BAP lifting + native-default analysis / Rust reference"]
     Current --> Facts["Validated analysis and captured evidence"]
     Facts --> Investigation["Investigation module"]
     Question["Investigator question"] --> Investigation
     FaultContext["I5a: validated exception context"] --> Investigation
     Context["Later matched source/object/cross-capture context"] -.-> Investigation
-    Future["Future qualified BAP-owned analysis"] -.-> Facts
+    BaseRole["I5b: bound decoded base role"] --> Investigation
     Investigation --> Explanation["Typed answer + evidence + premises + gaps"]
 ```
 
-The current first-question implementation consumes the BAP/Rust pipeline's
+The current first-question implementation consumes the native-default or Rust-reference pipeline's
 completed facts. Dashed inputs in the diagram are proposed capabilities.
 The separate [Stage 2 migration](../../Plans/bap-integration.md#stage-2-bap-analysis-core)
-may later move low-level computation into BAP. Moving that computation is
-infrastructure work; it does not itself add an investigation capability.
+now supplies the default native analysis. Moving that computation is
+infrastructure work; the selected I5b question is a separate domain capability.
 
 ## First question: explain a fault-address operand
 
@@ -181,7 +186,8 @@ External context must record its match evidence and role.
 | Question | Additional evidence or implementation needed |
 | --- | --- |
 | Does the selected access start at virtual address zero? | The [implemented I5a contract](i5a-contracts.md) binds validated exception-context operands and exact site/access association under the admitted scalar MOV profile. Controlled Windows acceptance is recorded in the [native qualification](i5a-native-qualification.md). No null-pointer root-cause claim. |
-| What about null-derived offsets, invalid arithmetic or noncanonical addresses? | Separate later hypotheses with their own definitions and architectural/context premises; I5a does not answer them. |
+| Is the fault-time encoded base zero with a nonzero displacement? | Implemented [I5b contracts](i5b-contracts.md), [design](i5b-zero-base-offset-design.md) and [B0–B5 plan](../../Plans/i5b-zero-base-offset.md); simple base/displacement profile, decoded-role evidence and valid context. [Aggregate qualification](i5b-validation.md) passes within the declared finite corpus; historical null derivation is outside its claim. |
+| What about historical null derivation, invalid arithmetic or noncanonical addresses? | Separate later hypotheses with their own definitions and architectural/context premises; neither I5a nor the selected I5b design answers them. |
 | Which possible producers and inputs contribute to the selected address operand? | Delivered by the [first-question contract](investigation-contracts.md). Selecting the actually executed alternative still needs additional evidence. |
 | Is a use-after-free or object-lifetime violation supported? | Object identity and lifetime evidence such as retained allocator/runtime events; a suspicious pointer or slice alone is insufficient. |
 | Which branch alternatives remain possible under known facts? | Accepted transition relations and completeness premises; retain unknown feasibility where these are absent. |

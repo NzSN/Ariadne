@@ -79,6 +79,8 @@ pub struct InstructionEvidence {
     pub undefined_flags: LocationSet,
     /// Raw LLVM facts are retained for inspection; they do not justify kills.
     pub decoder_record: Option<String>,
+    /// Independent decoded roles retained for question-specific binding only.
+    pub decoded_address: Option<crate::llvm_mc::address_reference::DecodedAddressReference>,
     /// Typed decoded control facts, independent of reviewed semantic coverage.
     pub decoder_control: Option<InstructionKind>,
     pub semantic: Option<SemanticEvidence>,

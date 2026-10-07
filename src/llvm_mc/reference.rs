@@ -38,7 +38,19 @@ pub fn decode_captured_batch(
         .iter()
         .map(|(a, b)| format!("{a} {}\n", hex(b)))
         .collect();
+    #[cfg(feature = "investigation")]
+    let decoder_digest = Some(crate::investigation::sha(&std::fs::read(decoder)?));
+    #[cfg(not(feature = "investigation"))]
+    let decoder_digest = None;
     let rows = protocol::invoke(decoder, input, available.len(), target)?;
+    #[cfg(feature = "investigation")]
+    if decoder_digest.as_deref()
+        != Some(crate::investigation::sha(&std::fs::read(decoder)?).as_str())
+    {
+        return Err(AdapterError::DecoderProtocol(
+            "decoder executable changed during preparation".into(),
+        ));
+    }
     let mut sites = BTreeMap::new();
     for raw in rows {
         let a = raw.decoded.address;
@@ -92,6 +104,16 @@ pub fn decode_captured_batch(
             Instruction::default()
         };
         let operands = decoded_operands(&raw, bytes);
+        let decoded_address = if valid {
+            super::address_reference::DecodedAddressReference::from_raw(
+                &raw,
+                &bytes[..d.length as usize],
+                decoder_digest.clone(),
+                target.triple(),
+            )?
+        } else {
+            None
+        };
         let short = d.status == "invalid" && bytes.len() < 15;
         let gaps = if valid {
             Vec::new()
@@ -131,6 +153,7 @@ pub fn decode_captured_batch(
                     },
                     undefined_flags: BTreeSet::new(),
                     decoder_record: Some(raw.record),
+                    decoded_address,
                     decoder_control: d.kind,
                     semantic: None,
                 },
@@ -159,6 +182,7 @@ pub fn decode_captured_batch(
                 quality: EffectQuality::Unavailable,
                 undefined_flags: BTreeSet::new(),
                 decoder_record: None,
+                decoded_address: None,
                 decoder_control: None,
                 semantic: None,
             },

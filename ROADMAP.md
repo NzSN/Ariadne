@@ -10,6 +10,9 @@
 
 **Where to go next.**
 
+- [Selected I5b design](docs/Ariadne/i5b-zero-base-offset-design.md) and
+  [implementation plan](Plans/i5b-zero-base-offset.md) — the next bounded
+  zero-base-plus-displacement hypothesis, with B0–B5 implemented and corpus-qualified.
 - [Active plans](Plans/README.md) — turn remaining work into explicit implementation and qualification steps.
 - [Assurance decision](docs/Ariadne/semantic-assurance.md) — defines the BAP trust boundary and retired ISA-proof scope.
 
@@ -45,6 +48,14 @@ AMD64 exception-context premises. Reader-owned context, a separate strict report
 and explicit CLI modes are implemented. The [12-gate source/fixture validation](docs/Ariadne/i5a-validation.md)
 passes for its historical sources. The native successor qualifies controlled
 Windows I5a; active Windows I4 remains over budget; the original Electron case is historical.
+The selected [I5b design](docs/Ariadne/i5b-zero-base-offset-design.md) and
+[B0–B5 plan](Plans/i5b-zero-base-offset.md) define a distinct fault-time question:
+is the encoded GPR base zero with a nonzero signed displacement? Its first
+profile requires reviewed simple base/displacement decoded facts to agree with
+BAP address evidence. B0–B5 are implemented, with [actual contracts](docs/Ariadne/i5b-contracts.md)
+for machine-code debugging; [qualification](docs/Ariadne/i5b-validation.md) passes all
+18 gates and separate source/fixture/controlled Windows timing criteria.
+historical null derivation and other hypotheses remain later work.
 The [native Windows Crashpad demo](docs/Ariadne/crashpad-demo-validation.md)
 supplies real partial/full captures and correct numeric answers. Its historical
 CLI median was approximately 1.82 s. The [native I5a refresh](docs/Ariadne/i5a-native-qualification.md)

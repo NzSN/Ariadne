@@ -34,6 +34,9 @@
 #include "util/misc/tri_state.h"
 
 #if BUILDFLAG(IS_WIN)
+extern "C" void AriadneCrashDemoZeroBaseOffset(volatile uint32_t* base);
+extern "C" void AriadneCrashDemoZeroBaseOffsetIndexed(volatile uint32_t* base,
+                                                    uintptr_t index);
 #include <windows.h>
 
 #include "client/simple_address_range_bag.h"
@@ -169,7 +172,9 @@ bool WriteWitness(const base::FilePath& path,
                   uintptr_t function_entry,
                   size_t code_extent_bytes,
                   const std::string& mode,
-                  bool bap_workload) {
+                  bool bap_workload,
+                  bool zero_base_offset,
+                  bool indexed_offset) {
 #if BUILDFLAG(IS_WIN)
   const uint64_t process_id = GetCurrentProcessId();
   constexpr char kExplicitRangeRegistered[] = "true";
@@ -226,7 +231,7 @@ bool WriteWitness(const base::FilePath& path,
       "  \"schema_version\": 1,\n"
       "  \"process_id\": %" PRIu64 ",\n"
       "  \"fault_function_entry\": \"0x%" PRIxPTR "\",\n"
-      "  \"expected_data_address\": \"0x0\",\n"
+      "  \"expected_data_address\": \"%s\",\n"
       "  \"expected_access\": \"write\",\n"
       "  \"expected_width_bytes\": 4,\n"
       "  \"expected_store_value\": 5,\n"
@@ -238,8 +243,12 @@ bool WriteWitness(const base::FilePath& path,
       "}\n",
       process_id,
       function_entry,
+      zero_base_offset ? "0x8" : "0x0",
       mode.c_str(),
-      bap_workload ? kBapIntegrationProfile : kIntegrationProfile,
+      bap_workload ? kBapIntegrationProfile : zero_base_offset
+          ? indexed_offset ? "ariadne-crashpad-zero-base-offset-indexed-v1"
+                           : "ariadne-crashpad-zero-base-offset-v1"
+          : kIntegrationProfile,
       function_entry,
       code_extent_bytes,
       kExplicitRangeRegistered,
@@ -278,7 +287,7 @@ int CrashDemoMain(int argc, base::FilePath::CharType* argv[]) {
   if (argc < 4 || argc > 6) {
     fprintf(stderr,
             "Usage: ariadne_crash_demo HANDLER NEW_DATABASE WITNESS_JSON "
-            "[partial|full] [null-write|bap-workload]\n"
+            "[partial|full] [null-write|bap-workload|zero-base-offset|zero-base-offset-indexed]\n"
             "The database and witness must not already exist. This demo "
             "deliberately crashes its own process after setup.\n");
     return EXIT_FAILURE;
@@ -305,12 +314,14 @@ int CrashDemoMain(int argc, base::FilePath::CharType* argv[]) {
       argc == 6 ? argv[5] : FILE_PATH_LITERAL("null-write");
   const bool bap_workload =
       requested_profile == FILE_PATH_LITERAL("bap-workload");
-  if (!bap_workload && requested_profile != FILE_PATH_LITERAL("null-write")) {
-    fprintf(stderr, "Profile must be null-write or bap-workload.\n");
+  const bool indexed_offset = requested_profile == FILE_PATH_LITERAL("zero-base-offset-indexed");
+  const bool zero_base_offset = indexed_offset || requested_profile == FILE_PATH_LITERAL("zero-base-offset");
+  if (!bap_workload && !zero_base_offset && requested_profile != FILE_PATH_LITERAL("null-write")) {
+    fprintf(stderr, "Unsupported controlled profile.\n");
     return EXIT_FAILURE;
   }
 #if !BUILDFLAG(IS_WIN)
-  if (bap_workload) {
+  if (bap_workload || zero_base_offset) {
     fprintf(stderr, "The bap-workload profile is supported only on Windows.\n");
     return EXIT_FAILURE;
   }
@@ -336,6 +347,9 @@ int CrashDemoMain(int argc, base::FilePath::CharType* argv[]) {
 #if BUILDFLAG(IS_WIN)
   if (bap_workload) {
     function_entry = reinterpret_cast<uintptr_t>(&AriadneCrashDemoBapWorkload);
+  } else if (zero_base_offset) {
+    function_entry = indexed_offset ? reinterpret_cast<uintptr_t>(&AriadneCrashDemoZeroBaseOffsetIndexed)
+                                   : reinterpret_cast<uintptr_t>(&AriadneCrashDemoZeroBaseOffset);
   }
 #endif
   size_t code_extent_bytes;
@@ -346,7 +360,10 @@ int CrashDemoMain(int argc, base::FilePath::CharType* argv[]) {
   CrashpadClient client;
   const std::map<std::string, std::string> annotations = {
       {"integration_profile",
-       bap_workload ? kBapIntegrationProfile : kIntegrationProfile},
+       bap_workload ? kBapIntegrationProfile : zero_base_offset
+           ? indexed_offset ? "ariadne-crashpad-zero-base-offset-indexed-v1"
+                            : "ariadne-crashpad-zero-base-offset-v1"
+           : kIntegrationProfile},
       {"dump_mode", mode},
   };
   const std::vector<std::string> arguments = {
@@ -380,7 +397,8 @@ int CrashDemoMain(int argc, base::FilePath::CharType* argv[]) {
 #endif
 
   if (!WriteWitness(
-          witness_path, function_entry, code_extent_bytes, mode, bap_workload)) {
+          witness_path, function_entry, code_extent_bytes, mode, bap_workload,
+          zero_base_offset, indexed_offset)) {
     fprintf(stderr, "Cannot persist the witness; exiting normally.\n");
     return EXIT_FAILURE;
   }
@@ -388,6 +406,9 @@ int CrashDemoMain(int argc, base::FilePath::CharType* argv[]) {
 #if BUILDFLAG(IS_WIN)
   if (bap_workload) {
     AriadneCrashDemoBapWorkload(kWorkloadInputs, kExpectedWorkloadChecksum);
+  } else if (zero_base_offset) {
+    if (indexed_offset) { AriadneCrashDemoZeroBaseOffsetIndexed(nullptr, 0); }
+    else { AriadneCrashDemoZeroBaseOffset(nullptr); }
   } else {
     AriadneCrashDemoFault(nullptr);
   }

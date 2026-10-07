@@ -22,9 +22,11 @@ def main():
     parser.add_argument("--build", type=Path, required=True, help="build.json from build_windows.py")
     parser.add_argument("--output", type=Path, required=True, help="new capture directory")
     parser.add_argument("--mode", choices=["partial", "full"], default="partial")
-    parser.add_argument("--profile", choices=["null-write", "bap-workload"],
+    parser.add_argument("--profile", choices=["null-write", "bap-workload", "zero-base-offset", "zero-base-offset-indexed"],
                         default="null-write")
     parser.add_argument("--check-failures", action="store_true")
+    parser.add_argument("--minimal-environment", action="store_true",
+                        help="use only Windows system keys for the owned captured process")
     args = parser.parse_args()
     if sys.platform != "win32":
         parser.error("run using native Windows Python")
@@ -45,7 +47,7 @@ def main():
     failures = {}
     demo_environment = None
     environment_policy = {"policy": "inherited"}
-    if args.profile == "bap-workload":
+    if args.profile != "null-write" or args.minimal_environment:
         # This owned partial dump is retained as test evidence. Do not copy
         # developer credentials or tokens into the captured process environment.
         windows = Path(os.environ.get("SystemRoot", r"C:\Windows"))
@@ -106,6 +108,8 @@ def main():
     expected_profile = {
         "null-write": "ariadne-crashpad-null-write-v1",
         "bap-workload": "ariadne-crashpad-bap-workload-v1",
+        "zero-base-offset": "ariadne-crashpad-zero-base-offset-v1",
+        "zero-base-offset-indexed": "ariadne-crashpad-zero-base-offset-indexed-v1",
     }[args.profile]
     if (observation["process_id"] != process.pid
             or observation["dump_mode"] != args.mode

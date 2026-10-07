@@ -17,11 +17,63 @@
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
-Updated **2026-10-05**: native BAP remains the CLI default, and controlled
+Updated **2026-10-07**: I5b zero-base-plus-displacement has B0–B5 implemented and
+qualified for its recorded finite source/fixture and controlled Windows tiers. The product intent
+is debugging bugs at the machine-code level using captured instruction/context evidence.
+Native BAP remains the CLI default, and controlled
 Windows I5a is qualified under a read-only, hash-pinned MirrorRust dependency
 snapshot. The latest retained records pass 20 Stage 2 gates, 17 investigation gates,
 14 I5a source/fixture gates and both controlled capture modes. Active Windows
 I4 is re-pinned and passes correctness; its fixed 2-second CLI limit remains unmet. BAP lifting stays trusted and the independent ISA track retired.
+
+## 2026-10-07 — I5b machine-code debugging question qualified
+
+[B0–B5](Plans/i5b-zero-base-offset.md) are implemented and qualified for the
+finite Windows AMD64 scalar MOV base/displacement profile. The
+[validation guide](docs/Ariadne/i5b-validation.md) and
+[aggregate](evidence/Ariadne/i5b-qualification.json) record **18/18 gates**, 57
+independent fixtures plus one auxiliary call case, all 15 detected real-code
+mutants, stable 294-source/11-tool inventories and separately passing partial/
+full controlled Windows tiers under the sealed MirrorRust snapshot.
+
+The debugger-facing answer binds exact captured opcode/bytes, encoded base and
+signed displacement, valid fault-context base value, effective address and
+reported inaccessible byte. Six real positive/refuted/indexed-unknown controls
+are independently inspected against raw dump/context and supplied PE bytes.
+Their largest CLI median is **900.772 ms / 1,500 ms**; largest binding/assessment/
+all-format phase median is **1.422 ms / 10 ms**. All nine frozen fixture workloads
+also pass. This supports the exact declared question, not historical null
+provenance, executed paths, object lifetime or a general root cause.
+
+All 246 old I5a assessment outputs and 24 old base/explanation reports remain
+byte-exact. Refreshed I5a 14-gate, investigation/minidump/Stage E and native-core
+20-gate regressions pass. The [new evidence manifest](evidence/Ariadne/i5b-evidence-manifest.json)
+verifies 2,005 entries in the retained archive; [case pins](evidence/Ariadne/i5b-controlled-cases.json)
+preserve exact per-capture identities/questions. Historical records and the
+source-bound Stage 2 design/plan remain unchanged. I4's separate over-budget
+Windows criterion and other I5/I6/I7 work remain open.
+
+## 2026-10-07 — I5b hypothesis selected and detailed plan written
+
+The user selected the zero-base-plus-offset hypothesis. The
+[design](docs/Ariadne/i5b-zero-base-offset-design.md) scopes its first profile to
+Windows AMD64 scalar MOV accesses with an encoded GPR base, no index and a
+signed displacement. Its predicate is captured base zero and displacement
+nonzero, distinct from I5a's zero effective address. The
+[B0–B5 plan](Plans/i5b-zero-base-offset.md) gives source ownership, exact role/
+expression agreement, independent fixtures, strict reports/CLI, mutation and
+separate source/fixture/controlled-Windows acceptance criteria.
+
+Source inspection found that affine BIL evidence loses encoded base/index roles,
+while the existing bound question evidence does not retain those decoded roles.
+The plan requires a new decoded-fact receipt during existing preparation and a
+question-specific sealed binding. LLVM remains the independent decode reference;
+BAP remains the semantic producer. Missing/conflicting prerequisites remain
+unknown and no historical null provenance is asserted.
+
+This is a documentation-only delivery. Every I5b implementation stage remains
+pending. Existing qualification records retain their historical scope; no new
+capture, runtime campaign, threshold change for I4/I5a or release claim is made.
 
 ## 2026-10-05 — Documentation and plan status synchronized
 

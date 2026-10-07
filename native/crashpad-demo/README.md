@@ -21,6 +21,10 @@ isolated build, capture and independent verification.
 
 **Where to go next.**
 
+- [I5b machine-code debugging contracts](../../docs/Ariadne/i5b-contracts.md) and
+  [qualification](../../docs/Ariadne/i5b-validation.md) — new isolated
+  zero-base-plus-eight, zero-displacement refuted and indexed-unknown controls;
+  aggregate acceptance remains separate from capture creation.
 - [Delivery and evidence](../../docs/Ariadne/crashpad-demo-validation.md) gives
   the original captures, checks, source identities and historical measurements.
 - [Native I5a qualification](../../docs/Ariadne/i5a-native-qualification.md)

@@ -10,6 +10,9 @@
 
 **Where to go next.**
 
+- [I5b machine-code debugging contracts](docs/Ariadne/i5b-contracts.md) and
+  [qualification](docs/Ariadne/i5b-validation.md) — exact zero-base-plus-displacement
+  assessment, retained capture evidence and its finite acceptance scope.
 - [Documentation index](docs/Ariadne/README.md) — find the current interfaces and contracts.
 - [Plan index](Plans/README.md) — separates remaining work from completed and retired work.
 
@@ -68,6 +71,14 @@ pipeline. Its result does not qualify the later native backend or the active
 Windows CLI budget remains unmet.
 The [rendering module](docs/Ariadne/result-rendering.md) now produces readable
 text and Graphviz DOT from analyzer outcomes.
+
+The [I5b assessment](docs/Ariadne/i5b-contracts.md) supports debugging bugs at the
+machine-code level: select an access and inspect exact instruction bytes, encoded
+base/displacement, captured base value and reported fault address. Its
+[qualification](docs/Ariadne/i5b-validation.md) passes 18 aggregate gates and
+separate source/fixture/controlled partial/full Windows tiers. This profile
+answers zero base plus nonzero displacement; it preserves unknowns for indexed
+or unsupported evidence and does not infer historical null-pointer causation.
 The separate abstract-stateflow and supplied-IR paths pass
 [Stage E generated replay, mutation and report/CLI acceptance](docs/Ariadne/stage-e-completion.md)
 within the recorded finite corpus. Independent ISA proof artifacts are retained

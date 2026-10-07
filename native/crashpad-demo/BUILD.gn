@@ -26,7 +26,7 @@ crashpad_executable("ariadne_crash_demo") {
 
   if (crashpad_is_win) {
     assert(current_cpu == "x64", "The controlled workload requires Windows x64.")
-    sources += [ "bap_workload.asm" ]
+    sources += [ "bap_workload.asm", "zero_base_offset.asm" ]
   }
 
   deps = [ "//client:client" ]

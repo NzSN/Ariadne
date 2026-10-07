@@ -1,0 +1,146 @@
+{
+  "schema": "ariadne.i5b-controlled-cases/v1",
+  "qualification": "i5b-qualification.json",
+  "archive": "i5b-evidence.tar.gz",
+  "archiveSha256": "4b256fc48a5b18c0a929b8f64adeefcc57f58ff042cb31766e0113348bc6229c",
+  "cases": [
+    {
+      "case": "positive-partial",
+      "mode": "partial",
+      "profile": "ariadne-crashpad-zero-base-offset-v1",
+      "expectedConclusion": "consistent_with_evidence",
+      "query": {
+        "entry": "0x00007ff732604b50",
+        "site": "0x00007ff732604b50",
+        "memory_access": 0
+      },
+      "dump": {
+        "entry": "captures/positive-partial/capture.dmp",
+        "sha256": "3c7407329dde4a247bbbad75a203c7767ebafe5dd92410a878415afd8e73489e"
+      },
+      "executable": {
+        "entry": "captures/positive-partial/ariadne_crash_demo.exe",
+        "sha256": "1e74fc1f3a05df686a947c6458136f63f523b2108c3b91359ff601dab8220f51"
+      },
+      "witness": {
+        "entry": "captures/positive-partial/witness.json",
+        "sha256": "37b399c5dc5832a1184b6ba26fa6889a8fba2f927591d16bf5e79db0c1c4f4bc"
+      }
+    },
+    {
+      "case": "positive-full",
+      "mode": "full",
+      "profile": "ariadne-crashpad-zero-base-offset-v1",
+      "expectedConclusion": "consistent_with_evidence",
+      "query": {
+        "entry": "0x00007ff732604b50",
+        "site": "0x00007ff732604b50",
+        "memory_access": 0
+      },
+      "dump": {
+        "entry": "captures/positive-full/capture.dmp",
+        "sha256": "bd021e5f6bd43ad9ad21037274530de7a291234ec679f84973c12db5d8bae1b3"
+      },
+      "executable": {
+        "entry": "captures/positive-full/ariadne_crash_demo.exe",
+        "sha256": "1e74fc1f3a05df686a947c6458136f63f523b2108c3b91359ff601dab8220f51"
+      },
+      "witness": {
+        "entry": "captures/positive-full/witness.json",
+        "sha256": "86315f8248644f15c33a86e9d161f161f53f4d8a9090b8c767b07f1151adec13"
+      }
+    },
+    {
+      "case": "refuted-partial",
+      "mode": "partial",
+      "profile": "ariadne-crashpad-null-write-v1",
+      "expectedConclusion": "refuted_under_premises",
+      "query": {
+        "entry": "0x00007ff7326049c0",
+        "site": "0x00007ff7326049c0",
+        "memory_access": 0
+      },
+      "dump": {
+        "entry": "captures/refuted-partial/capture.dmp",
+        "sha256": "8ca76cea4e5b14a8f3cbda8700115e36493404f64f161e64e5d39544e3b22802"
+      },
+      "executable": {
+        "entry": "captures/refuted-partial/ariadne_crash_demo.exe",
+        "sha256": "1e74fc1f3a05df686a947c6458136f63f523b2108c3b91359ff601dab8220f51"
+      },
+      "witness": {
+        "entry": "captures/refuted-partial/witness.json",
+        "sha256": "ca371cf2cbbc9d1aaf16082affa1965b3ea13d9622df000f29883d69d3e9eee9"
+      }
+    },
+    {
+      "case": "refuted-full",
+      "mode": "full",
+      "profile": "ariadne-crashpad-null-write-v1",
+      "expectedConclusion": "refuted_under_premises",
+      "query": {
+        "entry": "0x00007ff7326049c0",
+        "site": "0x00007ff7326049c0",
+        "memory_access": 0
+      },
+      "dump": {
+        "entry": "captures/refuted-full/capture.dmp",
+        "sha256": "3545bb0233fd02c99aaef00578039c3803209fe14def10e00c7a46701849ebcd"
+      },
+      "executable": {
+        "entry": "captures/refuted-full/ariadne_crash_demo.exe",
+        "sha256": "1e74fc1f3a05df686a947c6458136f63f523b2108c3b91359ff601dab8220f51"
+      },
+      "witness": {
+        "entry": "captures/refuted-full/witness.json",
+        "sha256": "5070f9e964b440e54bc03f80d93a5c37c8bf3dce56a0af949b683299c250c657"
+      }
+    },
+    {
+      "case": "unknown-partial",
+      "mode": "partial",
+      "profile": "ariadne-crashpad-zero-base-offset-indexed-v1",
+      "expectedConclusion": "unknown",
+      "query": {
+        "entry": "0x00007ff732604b58",
+        "site": "0x00007ff732604b58",
+        "memory_access": 0
+      },
+      "dump": {
+        "entry": "captures/unknown-partial/capture.dmp",
+        "sha256": "1e36cf1ade4a444c1bd0e92deb0f70e9517cc13b26e090b13a3496fe7ea78c8e"
+      },
+      "executable": {
+        "entry": "captures/unknown-partial/ariadne_crash_demo.exe",
+        "sha256": "1e74fc1f3a05df686a947c6458136f63f523b2108c3b91359ff601dab8220f51"
+      },
+      "witness": {
+        "entry": "captures/unknown-partial/witness.json",
+        "sha256": "e229b15b9700b64d88cd817ef03025f5e501c6eb941907db1a50d346569cf956"
+      }
+    },
+    {
+      "case": "unknown-full",
+      "mode": "full",
+      "profile": "ariadne-crashpad-zero-base-offset-indexed-v1",
+      "expectedConclusion": "unknown",
+      "query": {
+        "entry": "0x00007ff732604b58",
+        "site": "0x00007ff732604b58",
+        "memory_access": 0
+      },
+      "dump": {
+        "entry": "captures/unknown-full/capture.dmp",
+        "sha256": "63c96a2b0a8c2758dcf516d3f555d79ee13522cb62f4f8c446837eb9b1f16bfc"
+      },
+      "executable": {
+        "entry": "captures/unknown-full/ariadne_crash_demo.exe",
+        "sha256": "1e74fc1f3a05df686a947c6458136f63f523b2108c3b91359ff601dab8220f51"
+      },
+      "witness": {
+        "entry": "captures/unknown-full/witness.json",
+        "sha256": "57a39909a1db7915800e21b7f479510d1336c7595b7459cf8d9df2b079c955b0"
+      }
+    }
+  ]
+}

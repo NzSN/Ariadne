@@ -10,6 +10,10 @@
 
 **Where to go next.**
 
+- [I5b question-level decision model](AriadneZeroBaseOffset.tla) — admission,
+  output availability and zero-base/nonzero-displacement conclusions; the
+  [source review](../docs/Ariadne/i5b-source-review.md) separates finite checking
+  from Rust/native and hardware evidence.
 
 - [Native analysis replay and qualification](../docs/Ariadne/bap-core-qualification.md) — records native-helper observations, mutation sensitivity and CLI ownership separately from the retained Rust replay; neither finite campaign is a universal proof.
 
