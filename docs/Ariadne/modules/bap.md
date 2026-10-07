@@ -67,8 +67,11 @@ using LLVM effect rules. `--decoder` is retained as an alias for the explicit
 `--decoder-reference` option; it cannot select a semantic backend.
 
 `Backend::prepare` consumes captured batches and checks LLVM decoded facts only.
-One backend belongs to one snapshot/target. Call `Backend::finish` before
-publishing a query to require a clean helper exit; drop also kills and reaps
+One backend belongs to one snapshot/target. It reuses one checked LLVM reference
+process across captured batches; the standalone LLVM adapter remains one-shot.
+Runtime validation hashes every compiled pinned file using bounded streaming
+workers and retains both constructor and helper-start checks. Call `Backend::finish` before
+publishing a query to require clean lifter and reference-decoder exits; drop also kills and reaps
 an abandoned process. A fresh backend creates a fresh knowledge-base lifetime.
 `Metrics` separates runtime validation, reference decoding, helper startup,
 lift/transport validation and projection. The benchmark also times shutdown,
@@ -112,8 +115,9 @@ former 2 s policy.
 The historical bounded capture campaign measured reference decoding at
 7,572.131181 ms, helper startup at 1,178.301727 ms and Rust core analysis at
 69.614232 ms. Those phase samples describe that earlier pipeline; they do not
-diagnose the current native-default I4 timing failure. The [active I4 result](../i4-windows-repin-validation.md)
-retains its own samples and needs a fresh measured diagnosis before optimization.
+diagnose the later native-default I4 timing failure. The [active I4 result](../i4-windows-repin-validation.md)
+retains its historical samples. The later [performance design](../i4-performance-design.md)
+and [qualification](../i4-performance-validation.md) measure and close this exact-query timing clause.
 
 To use an explicit copy of the same pin, or deliberately run only the available
 implementation workloads:

@@ -18,7 +18,7 @@
 - [BAP qualification](../../Plans/bap-integration.md) — records the separately qualified native backend and its unlimited timing policy.
 - [Investigation qualification repair](../../Plans/completed/investigation-correctness-fixes.md#1-enforce-the-windows-i4-latency-condition) — applies the fixed Windows total-query budget to the investigation acceptance decision; see its [validation record](investigation-correctness-validation.md) for the exercised tier.
 
-**What remains unresolved.** Each backend and workload needs its own qualification. Each result stays bound to its original backend and query. [Native BAP qualification](bap-core-qualification.md) measures its own corpus under an unlimited timing policy. The separately [re-pinned Windows I4 question](i4-windows-repin-validation.md) retains its fixed 2,000 ms limit and remains over budget.
+**What remains unresolved.** Each backend and workload needs its own qualification. Each result stays bound to its original backend and query. [Native BAP qualification](bap-core-qualification.md) measures its own corpus under an unlimited timing policy. The separately [re-pinned Windows I4 question](i4-windows-repin-validation.md) retains its fixed 2,000 ms limit and has a later [passing native performance qualification](i4-performance-validation.md).
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 

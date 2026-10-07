@@ -21,6 +21,89 @@ fn make_backend() -> Backend {
 
 #[test]
 #[ignore = "requires pinned BAP/LLVM native helpers"]
+fn independent_decoder_process_is_reused_across_snapshot_batches() {
+    let mut backend = make_backend();
+    let options = PreparationOptions::default();
+    for (address, code) in [
+        (0x401000, "c7400805000000"),
+        (0x401007, "c3"),
+        (0x402000, "488b4008"),
+    ] {
+        let candidates = [(address, Some(bytes(code)))].into();
+        let result = backend
+            .prepare(
+                "single-decoder-snapshot",
+                &candidates,
+                &options,
+                DecoderTarget::WindowsAmd64,
+            )
+            .unwrap();
+        assert!(result.sites[&address].decodable);
+        assert_eq!(result.sites[&address].evidence.bytes, bytes(code));
+    }
+    assert_eq!(
+        backend.metrics().reference_processes,
+        1,
+        "one independent decoder process must serve this snapshot"
+    );
+    let candidates = (0..128)
+        .map(|n| (0x403000 + n * 16, Some(bytes("c7400805000000"))))
+        .collect();
+    let batch = backend
+        .prepare(
+            "single-decoder-snapshot",
+            &candidates,
+            &options,
+            DecoderTarget::WindowsAmd64,
+        )
+        .unwrap();
+    assert_eq!(batch.sites.len(), 128);
+    assert_eq!(backend.metrics().reference_processes, 1);
+    backend.finish().unwrap();
+}
+
+#[test]
+#[cfg(unix)]
+#[ignore = "requires pinned BAP runtime"]
+fn every_pinned_runtime_file_is_checked_before_preparation() {
+    use std::os::unix::fs::symlink;
+    let config = Config::from_env();
+    config.validate().unwrap();
+    let lock: serde_json::Value =
+        serde_json::from_str(include_str!("../../native/bap/toolchain.lock.json")).unwrap();
+    let files = lock["files"].as_object().unwrap();
+    for (index, damaged) in files.keys().enumerate() {
+        let directory = std::env::temp_dir().join(format!(
+            "ariadne-runtime-control-{}-{index}",
+            std::process::id()
+        ));
+        std::fs::create_dir(&directory).unwrap();
+        for relative in files.keys() {
+            let dest = directory.join(relative);
+            std::fs::create_dir_all(dest.parent().unwrap()).unwrap();
+            if relative == damaged {
+                std::fs::write(dest, b"changed runtime bytes").unwrap();
+            } else {
+                symlink(config.runtime.join(relative), dest).unwrap();
+            }
+        }
+        let changed = Config::new(config.helper.clone(), directory.clone());
+        assert!(
+            changed
+                .validate()
+                .unwrap_err()
+                .to_string()
+                .contains(damaged),
+            "{damaged}"
+        );
+        let decoder = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("target/ariadne-llvm-mc");
+        assert!(Backend::new(changed, &decoder).is_err());
+        std::fs::remove_dir_all(directory).unwrap();
+    }
+}
+
+#[test]
+#[ignore = "requires pinned BAP/LLVM native helpers"]
 fn unavailable_batches_high_addresses_short_bytes_and_query_ownership_are_checked() {
     let mut backend = make_backend();
     let options = PreparationOptions::default();

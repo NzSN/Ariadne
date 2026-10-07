@@ -19,6 +19,57 @@ pub fn decode_captured_batch(
     options: &PreparationOptions,
     target: DecoderTarget,
 ) -> Result<PreparedBatch, AdapterError> {
+    decode_using(
+        snapshot,
+        candidates,
+        decoder,
+        options,
+        target,
+        |input, count| protocol::invoke(decoder, input, count, target),
+    )
+}
+
+#[cfg(feature = "bap")]
+pub(crate) fn decode_with_session(
+    snapshot: &str,
+    candidates: &BTreeMap<Address, Option<Vec<u8>>>,
+    decoder: &Path,
+    options: &PreparationOptions,
+    target: DecoderTarget,
+    session: &mut Option<protocol::ReferenceSession>,
+) -> Result<PreparedBatch, AdapterError> {
+    decode_using(
+        snapshot,
+        candidates,
+        decoder,
+        options,
+        target,
+        |input, count| {
+            if count == 0 {
+                return Ok(Vec::new());
+            }
+            if session.is_none() {
+                *session = Some(protocol::ReferenceSession::start(decoder, target)?);
+            }
+            session
+                .as_mut()
+                .expect("initialized decoder")
+                .batch(input, count)
+        },
+    )
+}
+
+fn decode_using<F>(
+    snapshot: &str,
+    candidates: &BTreeMap<Address, Option<Vec<u8>>>,
+    decoder: &Path,
+    options: &PreparationOptions,
+    target: DecoderTarget,
+    invoke: F,
+) -> Result<PreparedBatch, AdapterError>
+where
+    F: FnOnce(String, usize) -> Result<Vec<protocol::Raw>, AdapterError>,
+{
     if snapshot.is_empty()
         || candidates.is_empty()
         || candidates
@@ -41,8 +92,11 @@ pub fn decode_captured_batch(
     #[cfg(feature = "investigation")]
     let decoder_digest = Some(crate::investigation::sha(&std::fs::read(decoder)?));
     #[cfg(not(feature = "investigation"))]
-    let decoder_digest = None;
-    let rows = protocol::invoke(decoder, input, available.len(), target)?;
+    let decoder_digest = {
+        let _ = decoder;
+        None
+    };
+    let rows = invoke(input, available.len())?;
     #[cfg(feature = "investigation")]
     if decoder_digest.as_deref()
         != Some(crate::investigation::sha(&std::fs::read(decoder)?).as_str())

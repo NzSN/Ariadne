@@ -29,7 +29,7 @@ strict report, resource behavior and CLI modes for one numeric hypothesis.
 - [First-question contracts](investigation-contracts.md) retain the distinct
   meaning of possible producers and their uncertainty.
 
-**What remains unresolved.** The [active Windows I4 re-pin](i4-windows-repin-validation.md) remains over its unchanged CLI budget. Linux numeric
+**What remains unresolved.** The [active Windows I4 re-pin](i4-windows-repin-validation.md) has a later [passing performance qualification](i4-performance-validation.md) under its unchanged CLI budget. Linux numeric
 admission, root-cause/lifetime assertions and other hypotheses are not implemented.
 
 The [documentation map](../documentation-map.md) is optional navigation.

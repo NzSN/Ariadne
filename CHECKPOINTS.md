@@ -24,7 +24,37 @@ Native BAP remains the CLI default, and controlled
 Windows I5a is qualified under a read-only, hash-pinned MirrorRust dependency
 snapshot. The latest retained records pass 20 Stage 2 gates, 17 investigation gates,
 14 I5a source/fixture gates and both controlled capture modes. Active Windows
-I4 is re-pinned and passes correctness; its fixed 2-second CLI limit remains unmet. BAP lifting stays trusted and the independent ISA track retired.
+I4 is re-pinned and the native performance follow-up meets its fixed 2-second
+CLI limit at 1,692.696 ms for the exact controlled query. BAP lifting stays trusted
+and the independent ISA track retired.
+
+## 2026-10-07 — Native I4 performance follow-up qualified
+
+[D0–D3](Plans/i4-performance-implementation.md) are complete for the unchanged
+98-start Windows fault-address explanation query. The normal native-default
+release CLI measures **1,692.696 ms / 2,000 ms**, one warm-up/five measured repeats.
+The separate 34-start Linux reference binding/explanation/rendering phase sum
+is **182.924 ms / 250 ms**. The [validation guide](docs/Ariadne/i4-performance-validation.md)
+records exact samples, backend/query identity and finite acceptance scope.
+
+Decoder process reuse, native derived-flow and immutable response caches,
+Rust validated-row/frame reuse and parallel streaming runtime hashing preserve
+full observations, 216 model actions, possible origins and explicit uncertainty.
+All 18 I5b, 20 native-core, 14 I5a and nested investigation/Stage 1 gates pass,
+including affected native tests, replay, mutations, normal CLI and old-output
+comparisons. No fixed budget, capture pin or source-bound Stage 2 design/plan
+was changed.
+
+Completion rechecks the existing campaign against current 712-source/12-tool
+inventories and the sealed MirrorRust dependency identity. This is exact-source
+verified reuse of the recorded tests, with a new archive/current-inventory audit;
+it is not a second runtime campaign. The [retained manifest](evidence/Ariadne/i4-performance-evidence-manifest.json)
+verifies all 3,625 archive entries and the nested 919-entry regression / 1,432-entry
+core archives. Both earlier failed phase/timing attempts are retained separately.
+Historical re-pin and I5 records remain byte-identical. Full I4 acceptance is
+true for the recorded controlled capture/query; original Electron, general
+latency, universal refinement and packaged-release qualification remain outside
+this result.
 
 ## 2026-10-07 — I5b machine-code debugging question qualified
 

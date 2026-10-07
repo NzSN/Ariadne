@@ -5,7 +5,7 @@ use crate::{
     effects::{
         EffectQuality, GapReason, Operand, PreparationGap, PreparationOptions, SemanticEvidence,
     },
-    llvm_mc::{DecoderTarget, PreparedBatch, PreparedSite, decode_captured_batch},
+    llvm_mc::{DecoderTarget, PreparedBatch, PreparedSite, decode_with_session},
 };
 use std::{
     collections::BTreeMap,
@@ -15,6 +15,7 @@ use std::{
 const PROJECTION: &str = "bap-bit-provenance-v2";
 #[derive(Clone, Copy, Debug, Default)]
 pub struct Metrics {
+    pub reference_processes: u64,
     pub runtime_validation: Duration,
     pub reference_decode: Duration,
     pub helper_startup: Duration,
@@ -25,6 +26,7 @@ pub struct Backend {
     config: Config,
     decoder: PathBuf,
     decoder_hash: String,
+    decoder_session: Option<crate::llvm_mc::protocol::ReferenceSession>,
     session: Option<Session>,
     snapshot: Option<String>,
     target: Option<DecoderTarget>,
@@ -68,19 +70,20 @@ impl Backend {
         if let Some(s) = self.session.take() {
             s.finish()?;
         }
+        if let Some(s) = self.decoder_session.take() {
+            s.finish()?;
+        }
         Ok(())
     }
     pub fn new(config: Config, decoder: &Path) -> Result<Self, Error> {
         let start = Instant::now();
-        config.validate()?;
-        let runtime_hash = crate::reports::sha256(&std::fs::read(
-            config.runtime.join("usr/local/lib/libbap.so.2.5.0"),
-        )?);
+        let runtime_hash = config.validate_runtime()?;
         let helper_hash = crate::bap::helper_identity(&config.helper)?;
         Ok(Self {
             config,
             decoder_hash: crate::reports::sha256(&std::fs::read(decoder)?),
             decoder: decoder.into(),
+            decoder_session: None,
             session: None,
             snapshot: None,
             target: None,
@@ -109,8 +112,17 @@ impl Backend {
         self.snapshot = Some(snapshot.into());
         self.target = Some(target);
         let start = Instant::now();
-        let mut batch =
-            decode_captured_batch(snapshot, candidates, &self.decoder, options, target)?;
+        if self.decoder_session.is_none() && candidates.values().any(Option::is_some) {
+            self.metrics.reference_processes += 1;
+        }
+        let mut batch = decode_with_session(
+            snapshot,
+            candidates,
+            &self.decoder,
+            options,
+            target,
+            &mut self.decoder_session,
+        )?;
         if crate::reports::sha256(&std::fs::read(&self.decoder)?) != self.decoder_hash {
             return Err(invalid("decode reference changed between snapshot batches"));
         }

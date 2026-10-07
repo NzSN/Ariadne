@@ -20,6 +20,8 @@ qualifies its own bounded bootstrap only.
 
 **Where to go next.**
 
+- [Native I4 performance qualification](i4-performance-validation.md) — later 20-gate core refresh, exact-current source/tool verification and fixed-budget product acceptance; this guide retains its earlier dated corpus counts.
+
 - [Native module](../../native/bap-core/README.md) — SDK, helper build and selection.
 - [Integration plan](../../Plans/bap-integration.md#stage-2-bap-analysis-core) — milestone acceptance clauses.
 - [Assurance boundary](semantic-assurance.md) — trusted lifting and independent proof limits.
@@ -28,7 +30,7 @@ qualifies its own bounded bootstrap only.
 **What remains unresolved.** These checks do not prove universal refinement or
 ISA semantics. BAP lifting is trusted. Supplied LLVM IR uses the separate Rust
 engine. This is workspace-local Linux-hosted qualification, including captured
-Windows inputs, not a packaged cross-platform release qualification. The [active Windows I4 re-pin](i4-windows-repin-validation.md) remains over its separate fixed CLI budget; controlled Windows I5a has its own passing
+Windows inputs, not a packaged cross-platform release qualification. The [active Windows I4 re-pin](i4-windows-repin-validation.md) has a later [passing performance qualification](i4-performance-validation.md) under its separate fixed CLI budget; controlled Windows I5a has its own passing
 [native qualification](i5a-native-qualification.md). The live MirrorRust checkout
 is outside the pinned dependency view used by this record.
 

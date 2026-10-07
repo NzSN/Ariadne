@@ -17,7 +17,7 @@ zero-base-plus-displacement interfaces. I5b has source/tool-bound finite-corpus 
 - [I5a contracts](../i5a-contracts.md) — define exception-context binding and the separate numeric assessment.
 - [Follow-up plan](../../../Plans/investigation-layer.md) — tracks missing capture acceptance and later questions.
 
-**What remains unresolved.** Active Windows I4 correctness passes after the [98-instruction re-pin](../i4-windows-repin-validation.md); its 4.774 s CLI median exceeds the unchanged 2 s limit. Controlled Windows I5a is [qualified under its pinned native setup](../i5a-native-qualification.md). Broader hypothesis, object/source-context and cross-capture questions remain later work.
+**What remains unresolved.** Active Windows I4 correctness passes after the [98-instruction re-pin](../i4-windows-repin-validation.md); the later [performance qualification](../i4-performance-validation.md) meets the unchanged 2 s limit at 1,692.696 ms. Controlled Windows I5a is [qualified under its pinned native setup](../i5a-native-qualification.md). Broader hypothesis, object/source-context and cross-capture questions remain later work.
 
 For the wider context, see the optional [documentation map](../../documentation-map.md).
 

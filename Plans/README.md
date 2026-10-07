@@ -6,7 +6,8 @@
 and detailed B0–B5 implementation plan; all stages are implemented and qualified
 within the recorded finite source/fixture and controlled Windows corpora. Native BAP analysis and
 controlled Windows I5a are qualified within their recorded scopes. The Windows
-I4 re-pin is complete; its unchanged CLI budget remains unmet.
+I4 re-pin and D0–D3 performance follow-up are complete for the exact controlled
+case; its qualified CLI median is 1,692.696 ms against 2,000 ms.
 
 **Why this document exists.** The [roadmap](../ROADMAP.md) sets the priorities
 used to distinguish current work, delivered plans and retired research.
@@ -22,7 +23,8 @@ keeping a plan outside `completed/` does not make its completed steps pending.
 - [Investigation ledger](investigation-layer.md) — tracks active Windows I4
   performance, delivered I5a and later hypothesis/object/cross-capture work.
 - [I4 replacement result](../docs/Ariadne/i4-windows-repin-validation.md) — records
-  the exact active capture, 17 passing gates and 4,774.451 ms against 2,000 ms.
+  the exact active capture and historical over-budget baseline; the later
+  [performance qualification](../docs/Ariadne/i4-performance-validation.md) meets both fixed budgets.
 - [BAP integration ledger](bap-integration.md) — records completed semantic and
   analysis migration with remaining proof, source/tool and release limits.
 - [Native core qualification](../docs/Ariadne/bap-core-qualification.md) and
@@ -31,8 +33,9 @@ keeping a plan outside `completed/` does not make its completed steps pending.
 - [Evidence guide](../evidence/Ariadne/README.md) — distinguishes retained results,
   failed progress records and fresh qualification after changes.
 
-**What remains unresolved.** Full Windows I4 acceptance needs an explanation-CLI
-median at most 2,000 ms on the active 98-start case. Other I5 hypotheses, Linux
+**What remains unresolved.** I4 acceptance passes for its recorded source/tool/
+dependency identities and exact 98-start case; future changes require renewed
+qualification. Other I5 hypotheses, Linux
 numeric admission, I6/I7, PE/ELF image and ELF-core inputs, universal refinement
 and packaged cross-platform release qualification remain outside the delivered
 scope. BAP's unlimited timing policy does not waive I4 or I5a budgets.
@@ -43,7 +46,7 @@ For the wider context, see the [documentation map](../docs/documentation-map.md)
 
 | Plan | Current state and next work |
 | --- | --- |
-| [Investigation layer](investigation-layer.md) | I0–I3 and active Windows producer correctness pass. I4 remains over its fixed CLI budget; I5a is qualified, I5b is corpus-qualified, and other I5/I6/I7 remain later work. |
+| [Investigation layer](investigation-layer.md) | I0–I3 and active Windows producer correctness pass. I4 meets its fixed budgets in the [native performance result](../docs/Ariadne/i4-performance-validation.md); I5a is qualified, I5b is corpus-qualified, and other I5/I6/I7 remain later work. |
 | [I5b zero base plus displacement](i5b-zero-base-offset.md) | B0–B5 implemented and corpus-qualified: 18 passing gates, 15 detected mutants, stable source/tool identities and six controlled Windows captures. |
 | [BAP integration](bap-integration.md) | Stage 1 and native A0–A6 are qualified on their exercised corpora. Maintain source/tool-bound regressions after changes; universal proof and packaged release acceptance remain separate. |
 | [Roadmap](../ROADMAP.md) | Current input and product direction, deferred readers and the [Stage F proof boundary](../docs/Ariadne/stage-f-proof-and-performance.md). |
@@ -55,7 +58,8 @@ For the wider context, see the [documentation map](../docs/documentation-map.md)
 | [Complete Stage 2 execution](bap-stage2-implementation.md) | Native recovery, definitions, slicing, finite stateflow, generated replay and adoption delivered; [20-gate qualification](../docs/Ariadne/bap-core-qualification.md) verifies default selection and explicit Rust rollback. |
 | [OCaml foundation qualification](bap-ocaml-qualification.md) | OQ0–OQ6 qualified the pinned SDK, bounded native state exchange, transport, clean rebuild and mutations; [foundation record](../docs/Ariadne/bap-ocaml-qualification.md). |
 | [Stage 2 A0](bap-stage2-a0.md) | Historical interface/capability probe; the foundation and complete Stage 2 successors independently close its implementation gaps. |
-| [Windows I4 replacement](i4-windows-repin.md) | Capture/pin delivery complete with 17 passing gates; [validation](../docs/Ariadne/i4-windows-repin-validation.md) retains the unmet 2,000 ms CLI clause. This does not mark full I4 complete. |
+| [Native I4 performance](i4-performance-implementation.md) | D0–D3 complete: 1,692.696 ms Windows CLI / 2,000 ms, 182.924 ms Linux phases / 250 ms; [verified qualification](../docs/Ariadne/i4-performance-validation.md). |
+| [Windows I4 replacement](i4-windows-repin.md) | Capture/pin delivery complete with 17 passing gates; [validation](../docs/Ariadne/i4-windows-repin-validation.md) retains the unmet 2,000 ms CLI clause. The later native performance follow-up closes that clause for its recorded identities. |
 | [I5a zero-address assessment](i5a-zero-address.md) | H0–H5 delivered; [12-gate historical source/fixture result](../docs/Ariadne/i5a-validation.md) precedes the separately qualified native/controlled tiers. |
 | [Native I5a qualification](i5a-native-qualification.md) | [Native result](../docs/Ariadne/i5a-native-qualification.md): 14 source/fixture gates, 17 investigation gates and both controlled captures pass under the selected dependency snapshot and unchanged budgets. |
 | [BAP Windows replacement](bap-windows-repin.md) | New real Crashpad capture, independent inspection and durable input pin delivered; [historical validation](../docs/Ariadne/bap-windows-repin-validation.md) preserves the former bounded-policy failure. The [later unlimited policy](../docs/Ariadne/bap-unlimited-validation.md) supersedes that BAP timing criterion. |

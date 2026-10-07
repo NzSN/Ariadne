@@ -11,7 +11,7 @@
 **Where to go next.**
 
 
-- [2026-10-05 Windows I4 replacement](i4-windows-repin-validation.md) — supersedes the older missing-artifact obligation with an independently inspected active case; correctness passes and the unchanged CLI budget remains unmet.
+- [2026-10-05 Windows I4 replacement](i4-windows-repin-validation.md) — supersedes the older missing-artifact obligation with an independently inspected active case; correctness passes; the later [native performance qualification](i4-performance-validation.md) meets the unchanged CLI budget.
 
 - [Implementation guide](../implementation.md) — maps the consolidated modules to their responsibilities.
 - [Repository rules](../../AGENTS.md) — preserve source layout and isolated campaign build directories.

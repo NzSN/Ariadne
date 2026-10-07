@@ -27,7 +27,7 @@ Other I5 hypotheses and I6–I7 remain pending.
 - [First delivery](investigation-validation.md) — records the exercised tier and open Windows acceptance.
 - [Investigation correctness-fix plan](../../Plans/completed/investigation-correctness-fixes.md) — scopes the limit-exhaustion and Windows I4 timing repairs; the [delivery record](investigation-correctness-validation.md) tracks implementation and validation.
 
-**What remains unresolved.** Active Windows I4 correctness passes after the [98-instruction re-pin](i4-windows-repin-validation.md); its 4.774 s CLI median exceeds the unchanged 2 s limit. Controlled Windows I5a is [qualified under its pinned native setup](i5a-native-qualification.md). I5b has [source/tool-bound qualification](i5b-validation.md) for its finite corpus; other hypothesis, object/source-context and cross-capture questions remain later work. A possible producer or a zero effective address does not prove a UAF, actual path or general root cause.
+**What remains unresolved.** Active Windows I4 correctness passes after the [98-instruction re-pin](i4-windows-repin-validation.md); the later [performance qualification](i4-performance-validation.md) meets the unchanged 2 s limit at 1,692.696 ms. Controlled Windows I5a is [qualified under its pinned native setup](i5a-native-qualification.md). I5b has [source/tool-bound qualification](i5b-validation.md) for its finite corpus; other hypothesis, object/source-context and cross-capture questions remain later work. A possible producer or a zero effective address does not prove a UAF, actual path or general root cause.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 

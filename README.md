@@ -16,7 +16,7 @@
 - [Documentation index](docs/Ariadne/README.md) — find the current interfaces and contracts.
 - [Plan index](Plans/README.md) — separates remaining work from completed and retired work.
 
-**What remains unresolved.** Active Windows I4 is [re-pinned and correctness-checked](docs/Ariadne/i4-windows-repin-validation.md); its CLI median exceeds the unchanged 2-second limit. Controlled Windows I5a is [qualified with the pinned dependency snapshot](docs/Ariadne/i5a-native-qualification.md). Native BAP recovery, dataflow, slicing and finite stateflow are implemented; [Stage 2 qualification](docs/Ariadne/bap-core-qualification.md) records passing aggregate acceptance and default adoption. Other hypothesis, object/source-context and cross-capture questions remain later work.
+**What remains unresolved.** Active Windows I4 is [re-pinned and correctness-checked](docs/Ariadne/i4-windows-repin-validation.md); the later [performance qualification](docs/Ariadne/i4-performance-validation.md) meets the unchanged 2-second limit at 1,692.696 ms. Controlled Windows I5a is [qualified with the pinned dependency snapshot](docs/Ariadne/i5a-native-qualification.md). Native BAP recovery, dataflow, slicing and finite stateflow are implemented; [Stage 2 qualification](docs/Ariadne/bap-core-qualification.md) records passing aggregate acceptance and default adoption. Other hypothesis, object/source-context and cross-capture questions remain later work.
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 

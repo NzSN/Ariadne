@@ -44,7 +44,7 @@ pub struct FamilySession<O: FamilyObservation> {
     timeout: Duration,
     closed: bool,
     identity: Value,
-    last_observation: Option<O>,
+    last_observation: Option<Vec<u8>>,
 }
 impl<O: FamilyObservation> FamilySession<O> {
     pub fn identity(&self) -> &Value {
@@ -219,7 +219,8 @@ impl<O: FamilyObservation> FamilySession<O> {
             .recv_timeout(self.timeout)
             .map_err(|e| invalid(format!("core write: {e}")))?
             .map_err(invalid)?;
-        let response: FamilyResponse<O> = serde_json::from_slice(&self.read()?)?;
+        let raw = self.read()?;
+        let response: FamilyResponse<O> = serde_json::from_slice(&raw)?;
         if response.schema != "ariadne.bap-core/v1"
             || response.session != self.session
             || response.snapshot != self.snapshot
@@ -237,15 +238,18 @@ impl<O: FamilyObservation> FamilySession<O> {
         }
         let state = &response.observation;
         state.validate_shape()?;
-        if !changed
-            && self
-                .last_observation
-                .as_ref()
-                .is_some_and(|old| old != state)
-        {
-            return Err(invalid(
-                "read-only or rejected operation mutated native state",
-            ));
+        // Retain the exact previously validated frame, avoiding a deep clone of
+        // every definition string after every action. Read-only responses still
+        // undergo the same complete semantic equality check.
+        if !changed {
+            if let Some(old) = &self.last_observation {
+                let old: FamilyResponse<O> = serde_json::from_slice(old)?;
+                if &old.observation != state {
+                    return Err(invalid(
+                        "read-only or rejected operation mutated native state",
+                    ));
+                }
+            }
         }
         if O::FAMILY == "stateflow" && !response.attribution.is_empty() {
             return Err(invalid("stateflow cannot invent machine term attribution"));
@@ -267,7 +271,7 @@ impl<O: FamilyObservation> FamilySession<O> {
         } else if response.result.is_some() {
             return Err(invalid("unsolicited core result"));
         }
-        self.last_observation = Some(response.observation.clone());
+        self.last_observation = Some(raw);
         self.sequence += 1;
         self.action_index = expected_index;
         if operation == "reset" && response.error.is_none() {

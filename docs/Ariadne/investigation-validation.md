@@ -2,7 +2,7 @@
 
 ## Context and follow-up
 
-**Status.** Historical first-question evidence; current [I4 replacement qualification](i4-windows-repin-validation.md) passes correctness and remains over its fixed CLI budget.
+**Status.** Historical first-question evidence; the later [native I4 performance qualification](i4-performance-validation.md) meets both fixed budgets on the active replacement query.
 
 **Why this document exists.** [Claim contract](investigation-contracts.md) requires identity-bound alternatives and explicit evidence gaps.
 
@@ -11,21 +11,22 @@
 **Where to go next.**
 
 
-- [2026-10-05 Windows I4 replacement](i4-windows-repin-validation.md) — supersedes the older missing-artifact obligation with an independently inspected active case; correctness passes and the unchanged CLI budget remains unmet.
+- [2026-10-05 Windows I4 replacement](i4-windows-repin-validation.md) — supersedes the older missing-artifact obligation with an independently inspected active case; correctness passes; the later [native performance qualification](i4-performance-validation.md) meets the unchanged CLI budget.
 
 - [Remaining work](../../Plans/investigation-layer.md) — tracks full I4 and later I5–I7 instead of implying general root-cause support.
 - [CLI examples](minidump-investigator-examples.md) — provide the surrounding captured-analysis workflow.
 - [Evidence guide](../../evidence/Ariadne/README.md) — explains archive and measurement identities.
 
-**What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. The first fault-address question is implemented. The [active I4 replacement](i4-windows-repin-validation.md) closes its lost-artifact gap and passes correctness; full acceptance remains false because its Windows CLI median exceeds the unchanged budget. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
+**What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. The first fault-address question is implemented. The [active I4 replacement](i4-windows-repin-validation.md) closes its lost-artifact gap and passes correctness; the later [native performance qualification](i4-performance-validation.md) closes its fixed CLI timing clause. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 
 Implemented against the working tree following **`7de5a1e`** for
 [I0–I4](../../Plans/investigation-layer.md). **I0–I3 are implemented; I4 is
 qualified for both platform fixtures and the pinned controlled Linux capture.
-Full real-Windows I4 acceptance remains partial.** I5–I7 and BAP core migration
-remain separate future deliveries.
+Full real-Windows I4 acceptance was partial at this delivery.** The later
+[native performance qualification](i4-performance-validation.md) closes the
+replacement-query clause; subsequent I5a/I5b and BAP migration have separate records.
 
 This record retains the pre-consolidation source paths. The
 [Rust source-layout delivery](rust-source-layout.md) provides the current

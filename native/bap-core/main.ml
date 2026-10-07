@@ -41,9 +41,11 @@ let read_frame () =
       require (Buffer.length buf < max_frame - 1) "frame budget";
       Buffer.add_char buf c; loop ()
     end in loop ()
-let send j = let text = Yojson.Safe.to_string j in
-  require (String.length text < max_frame) "response budget";
-  print_endline text; flush stdout
+let send_chunks chunks =
+  let size = List.fold_left (fun size chunk -> size + String.length chunk) 0 chunks in
+  require (size < max_frame) "response budget";
+  List.iter (output_string stdout) chunks; output_char stdout '\n'; flush stdout
+let send j = send_chunks [Yojson.Safe.to_string j]
 let () =
   try
     require (Array.length Sys.argv = 5) "expected session snapshot query family";
@@ -56,13 +58,24 @@ let () =
     let sequence = ref 0 and action_index = ref 0 and owned = ref None in
     let identity seq = ["schema",js "ariadne.bap-core/v1"; "session",js session;
       "snapshot",js snapshot; "query",js query; "family",js family; "sequence",`Int seq] in
+    let observation_cache = Recovery.observation_cache () in
+    let attribution_cache = ref None in
     let response seq changed error result =
       let observation, attribution = match !owned with
-        | None -> `Null, `List []
-        | Some state -> observe_owned snapshot state in
-      `Assoc (identity seq @ ["generation",`Int 1; "action_index",`Int !action_index;
-        "changed",`Bool changed; "observation",observation; "attribution",attribution;
-        "error",error; "result",result]) in
+        | None -> ["null"], "[]"
+        | Some (Core (i,s,p)) ->
+          let attribution = match !attribution_cache with
+            | Some (old,text) when old == p -> text
+            | _ -> let text = Yojson.Safe.to_string (Project_state.attribution p snapshot) in
+              attribution_cache := Some (p,text); text in
+          Recovery.observe_chunks observation_cache i s, attribution
+        | Some (Flow (i,s,_)) -> [Yojson.Safe.to_string (Stateflow.observe i s)], "[]" in
+      let fields = identity seq @ ["generation",`Int 1; "action_index",`Int !action_index;
+        "changed",`Bool changed] in
+      let encode (k,v) = Yojson.Safe.to_string (js k) ^ ":" ^ Yojson.Safe.to_string v in
+      ["{" ^ String.concat "," (List.map encode fields) ^ ",\"observation\":"] @
+      observation @ [",\"attribution\":"; attribution;
+        "," ^ encode ("error",error) ^ "," ^ encode ("result",result) ^ "}"] in
     let rec loop () =
       let raw = read_frame () in
       let request = Yojson.Safe.from_string raw in
@@ -90,7 +103,7 @@ let () =
             Flow (input, Stateflow.init input, Project_state.create snapshot input_json)
           end in
         owned := Some state;
-        send (response seq false `Null `Null); loop ()
+        send_chunks (response seq false `Null `Null); loop ()
       end else begin
         let reset = ref false in
         let result = ref `Null in
@@ -107,7 +120,7 @@ let () =
           end;
           (operation = "advance" || operation = "step"), `Null
         with Invalid reason -> false, `Assoc ["kind",js "semantic";"message",js reason] in
-        send (response seq changed error !result);
+        send_chunks (response seq changed error !result);
         if not !reset then loop ()
       end in
     loop ()

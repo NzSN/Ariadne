@@ -19,7 +19,8 @@
 - [Checkpoints](../../CHECKPOINTS.md) — connect evidence to dated deliveries.
 - [Layout delivery](../../docs/Ariadne/rust-source-layout.md) — explains the regression tier before later tooling changes.
 - [Historical I5a delivery](../../docs/Ariadne/i5a-validation.md) — distinguishes its original source/fixture result from the separately qualified native and controlled Windows successors.
-- [Windows I4 re-pin](../../docs/Ariadne/i4-windows-repin-validation.md) — independent 98-start capture checks and the remaining fixed CLI performance gap.
+- [Windows I4 re-pin](../../docs/Ariadne/i4-windows-repin-validation.md) — independent 98-start capture checks and historical timing failure;
+  [native performance qualification](../../docs/Ariadne/i4-performance-validation.md) closes the fixed CLI clause.
 - [Native I5a qualification](../../docs/Ariadne/i5a-native-qualification.md) — records accepted native measurements and the snapshot repair, while preserving earlier failures.
 - [Historical BAP workload repair](../../docs/Ariadne/bap-windows-workload-validation.md) — preserves the original missing-artifact checkpoint before later replacement and native qualification.
 - [Controlled BAP replacement](../../docs/Ariadne/bap-windows-repin-validation.md) — records the new active pin, durable input bundle and its own measured qualification.
@@ -114,7 +115,8 @@ records remain historical and have not been rebound to replacement source hashes
 The [source/fixture record](i5a-native-fixture-validation.json) passes all 14 gates;
 the separate [controlled record](i5a-native-controlled-validation.json) qualifies
 partial/full Windows captures under the unchanged 1,500 ms CLI and 10 ms phase
-criteria. Active Windows I4 correctness passes but its fixed CLI budget remains unmet. The [archive](i5a-native-evidence.tar.gz)
+criteria. Active Windows I4 correctness passes; the later
+[native performance qualification](../../docs/Ariadne/i4-performance-validation.md) meets its fixed CLI budget. The [archive](i5a-native-evidence.tar.gz)
 and [manifest](i5a-native-evidence-manifest.json) retain 1,969 verified entries,
 216 source hashes, exact producer records, raw samples, report bundles and
 historical capture metadata. Real dump/executable bytes remain external.
@@ -163,3 +165,31 @@ a 4,774.451 ms median, and full I4 acceptance is false against the unchanged
 Raw input bytes remain in the unchanged [23-entry input bundle](bap-windows-workload-inputs.tar.gz),
 which is also retained with the I4 source inventory. The original Electron
 manifest and prior acceptance flags retain their historical meaning.
+
+## Native I4 performance accepted (2026-10-07)
+
+The [qualification record](i4-performance-qualification.json) and
+[validation guide](../../docs/Ariadne/i4-performance-validation.md) close the
+active exact-query timing clause: 1,692.696 ms Windows explanation CLI against
+2,000 ms, and 182.924 ms Linux incremental phases against 250 ms. The original
+re-pin's over-budget flag above remains historical. Capture/query pins and all
+fixed budgets remain unchanged.
+
+The [archive](i4-performance-evidence.tar.gz) and
+[manifest](i4-performance-evidence-manifest.json) retain 3,625 verified members,
+712 source inputs, 12 tool identities and complete nested 18-gate I5b / 20-gate
+native-core / 14-gate I5a regressions. The [completion audit](i4-performance-audit.json)
+rechecks current source/tool/dependency inventories and every archive member;
+it distinguishes that new verification from the retained runtime campaign.
+[CLI](i4-performance-cli.csv), [phase](i4-performance-phase.csv) and
+[native profile](i4-performance-native-phases.csv) samples are byte-exact copies.
+The archive uses Git LFS; materialize it before hash verification. The separately
+[controlled I5a record](i4-performance-i5a-controlled.json) also passes current
+identity checks and both existing timing budgets for partial/full captures.
+
+Both [rejected attempts](i4-performance-history/2026-10-07-rejected/evidence-manifest.json)
+retain their original failed reports, raw timings and output bundles. Their
+results cannot supply acceptance credit. The 2026-10-05 re-pin, older Stage 2,
+I5a and I5b records remain unchanged. This is finite workspace-local controlled
+capture qualification under the sealed dependency view, with no original
+Electron, universal proof, general latency or packaged-release claim.

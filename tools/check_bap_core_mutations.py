@@ -14,7 +14,7 @@ MUTATIONS=[
  ('seed-becomes-root','core','recovery.ml','pending=input.roots','pending=S.union input.roots input.seeds'),
  ('drop-call-edge','core','recovery.ml','add "call" ins.targets (add "summary" ins.fall E.empty)','add "summary" ins.fall E.empty'),
  ('traverse-call-edge','core','recovery.ml','if k = "call" then acc else S.add b acc','S.add b acc'),
- ('early-completion','core','recovery.ml','| FinishRecovery -> {s with phase="dataflow"}','| FinishRecovery -> {s with phase="done"}'),
+ ('early-completion','core','recovery.ml','let next = {s with phase="dataflow"}','let next = {s with phase="done"}'),
  ('possible-write-kills','core','recovery.ml','not (S.mem loc ins.must)','not (S.mem loc ins.may)'),
  ('drop-propagation','core','recovery.ml','reaching=M.add a (D.union (M.find a s.reaching) (incoming i s a)) s.reaching','reaching=M.add a D.empty s.reaching'),
  ('drop-slice-seeds','core','recovery.ml','slice=S.inter i.seeds s.decoded','slice=S.empty'),

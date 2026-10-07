@@ -96,7 +96,8 @@ The [delivery record](../docs/Ariadne/i5a-validation.md) gives the exercised
 scope and measurements. The remaining sections preserve each step's acceptance
 contract. Controlled Windows I5a was open at that delivery and is now qualified
 by the [native successor](../docs/Ariadne/i5a-native-qualification.md).
-Active Windows I4 remains over its fixed CLI budget.
+The later [native I4 performance qualification](../docs/Ariadne/i4-performance-validation.md)
+meets its separate fixed CLI budget.
 
 ## H0 — Freeze exact admission and independent fixtures
 
@@ -326,7 +327,7 @@ under `docs/Ariadne/`. Raw real captures stay external/hash-pinned.
 | --- | --- | --- |
 | Source/fixture I5a acceptance | H0–H5 source/fixture checks: native coverage, independent oracles, mutations, output equivalence, stable identities and the frozen fixture measurement criterion | Supports the finite admitted profile/corpus. It does not qualify a real Windows capture. |
 | Controlled real-Windows I5a acceptance | A separately pinned real case with independently established site/context/access evidence, successful question/report checks and the frozen I5a measurement criterion | Qualifies that I5a case only; no historical-path/root-cause claim. |
-| Active Windows I4 acceptance | The separately pinned 98-start capture, exact query and unchanged I4 gate/budgets | [Re-pinned correctness passes; CLI budget unmet](../docs/Ariadne/i4-windows-repin-validation.md). Neither I5a tier satisfies it. |
+| Active Windows I4 acceptance | The separately pinned 98-start capture, exact query and unchanged I4 gate/budgets | [Native I4 performance qualification passes](../docs/Ariadne/i4-performance-validation.md). Neither I5a tier substitutes for it. |
 
 Report the tiers with separate named outcomes and missing clauses; a fixture pass
 must not become a full I5a or I4 pass through one aggregate boolean. If a required

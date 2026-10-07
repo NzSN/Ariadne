@@ -35,6 +35,9 @@ impl Config {
         }
     }
     pub fn validate(&self) -> Result<(), Error> {
+        self.validate_runtime().map(|_| ())
+    }
+    pub(crate) fn validate_runtime(&self) -> Result<String, Error> {
         let helper = std::fs::metadata(&self.helper)?;
         if !helper.is_file() {
             return Err(invalid("BAP helper must be a file"));
@@ -48,18 +51,50 @@ impl Config {
         }
         let lock: serde_json::Value =
             serde_json::from_str(include_str!("../../native/bap/toolchain.lock.json"))?;
-        for (relative, digest) in lock["files"]
+        let files = lock["files"]
             .as_object()
-            .ok_or_else(|| invalid("invalid BAP lock"))?
-        {
-            let bytes = std::fs::read(self.runtime.join(relative))?;
-            if crate::reports::sha256(&bytes) != digest.as_str().unwrap_or("") {
-                return Err(invalid(format!(
-                    "BAP runtime identity mismatch: {relative}"
-                )));
-            }
-        }
-        Ok(())
+            .ok_or_else(|| invalid("invalid BAP lock"))?;
+        let hashes = std::thread::scope(|scope| {
+            let jobs: Vec<_> = files
+                .iter()
+                .map(|(relative, expected)| {
+                    let path = self.runtime.join(relative);
+                    let job = scope.spawn(move || -> std::io::Result<String> {
+                        use sha2::{Digest, Sha256};
+                        let mut file = std::fs::File::open(path)?;
+                        let mut hash = Sha256::new();
+                        let mut bytes = [0u8; 64 * 1024];
+                        loop {
+                            let count = file.read(&mut bytes)?;
+                            if count == 0 {
+                                break;
+                            }
+                            hash.update(&bytes[..count]);
+                        }
+                        Ok(format!("{:x}", hash.finalize()))
+                    });
+                    (relative, expected, job)
+                })
+                .collect();
+            jobs.into_iter()
+                .map(|(relative, expected, job)| {
+                    let actual = job
+                        .join()
+                        .map_err(|_| invalid("runtime hash worker panicked"))??;
+                    if Some(actual.as_str()) != expected.as_str() {
+                        return Err(invalid(format!(
+                            "BAP runtime identity mismatch: {relative}"
+                        )));
+                    }
+                    Ok((relative, actual))
+                })
+                .collect::<Result<BTreeMap<_, _>, Error>>()
+        })?;
+        let runtime_hash = hashes
+            .get(&"usr/local/lib/libbap.so.2.5.0".to_string())
+            .ok_or_else(|| invalid("BAP runtime library absent from lock"))?
+            .clone();
+        Ok(runtime_hash)
     }
 }
 #[derive(Deserialize)]

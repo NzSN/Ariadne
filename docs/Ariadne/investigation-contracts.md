@@ -15,7 +15,7 @@
 - [Validation record](investigation-validation.md) — exercises identity, aliases, gaps and claim/report behavior.
 - [Remaining questions](../../Plans/investigation-layer.md) — tracks full qualification and unimplemented higher-level capabilities.
 
-**What remains unresolved.** The first fault-address question is implemented. Active Windows I4 correctness passes after the [98-instruction re-pin](i4-windows-repin-validation.md); its 4.774 s CLI median exceeds the unchanged 2 s limit. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered. Stronger conclusions require additional accepted lifetime, path or object evidence.
+**What remains unresolved.** The first fault-address question is implemented. Active Windows I4 correctness passes after the [98-instruction re-pin](i4-windows-repin-validation.md); the later [performance qualification](i4-performance-validation.md) meets the unchanged 2 s limit at 1,692.696 ms. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered. Stronger conclusions require additional accepted lifetime, path or object evidence.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 

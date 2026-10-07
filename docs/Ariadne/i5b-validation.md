@@ -16,7 +16,7 @@
 - [Evidence manifest](../../evidence/Ariadne/i5b-evidence-manifest.json) and [controlled case pins](../../evidence/Ariadne/i5b-controlled-cases.json) — archive digests, individual retained bytes and exact per-capture questions.
 - [Investigation ledger](../../Plans/investigation-layer.md) — other hypotheses and I4.
 
-**What remains unresolved.** Indexed, Linux, historical null provenance and object lifetime are outside this profile. Full process-memory capture, hardware origin, executed history and root cause are not inferred. The independent I4 CLI budget remains open. Later source/tool changes require fresh or exact-inventory-verified qualification; this record does not automatically qualify a later checkout.
+**What remains unresolved.** Indexed, Linux, historical null provenance and object lifetime are outside this profile. Full process-memory capture, hardware origin, executed history and root cause are not inferred. The independent I4 CLI budget is met by the later [performance qualification](i4-performance-validation.md). Later source/tool changes require fresh or exact-inventory-verified qualification; this record does not automatically qualify a later checkout.
 
 ## Delivered machine-code question
 

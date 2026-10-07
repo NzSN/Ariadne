@@ -16,7 +16,7 @@
 - [Active plans](Plans/README.md) — turn remaining work into explicit implementation and qualification steps.
 - [Assurance decision](docs/Ariadne/semantic-assurance.md) — defines the BAP trust boundary and retired ISA-proof scope.
 
-**What remains unresolved.** The replacement BAP Windows capture is pinned and passes correctness. The current BAP latency policy is unlimited. Stage 2 native algorithms and capture integration are qualified on the exercised corpus; native analysis is the CLI default with explicit Rust rollback. The first fault-address question is implemented, but [active re-pinned Windows I4](docs/Ariadne/i4-windows-repin-validation.md) remains over its unchanged 2-second CLI limit. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
+**What remains unresolved.** The replacement BAP Windows capture is pinned and passes correctness. The current BAP latency policy is unlimited. Stage 2 native algorithms and capture integration are qualified on the exercised corpus; native analysis is the CLI default with explicit Rust rollback. The first fault-address question is implemented, and [native I4 performance qualification](docs/Ariadne/i4-performance-validation.md) meets the unchanged 2-second CLI limit for the exact re-pinned case. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
@@ -36,7 +36,9 @@ The [first fault-address delivery](docs/Ariadne/investigation-validation.md) now
 implements the question for both platform fixtures and the retained controlled
 Linux capture. The later [Windows I4 re-pin](docs/Ariadne/i4-windows-repin-validation.md)
 adds independently inspected real Windows producer evidence. All 17 gates pass,
-but its 4,774.451 ms CLI median exceeds the unchanged 2,000 ms ceiling. The
+while its historical 4,774.451 ms CLI median exceeded the unchanged 2,000 ms ceiling.
+The [later native performance result](docs/Ariadne/i4-performance-validation.md)
+meets that ceiling at 1,692.696 ms with the same capture/query. The
 original Electron manifest remains historical; no executed path or root cause
 is established.
 BAP analysis-core migration remains separate from this product capability.
@@ -47,7 +49,7 @@ whether one selected scalar MOV access begins at zero under admitted Windows
 AMD64 exception-context premises. Reader-owned context, a separate strict report
 and explicit CLI modes are implemented. The [12-gate source/fixture validation](docs/Ariadne/i5a-validation.md)
 passes for its historical sources. The native successor qualifies controlled
-Windows I5a; active Windows I4 remains over budget; the original Electron case is historical.
+Windows I5a; the later [I4 performance result](docs/Ariadne/i4-performance-validation.md) meets its independent fixed budget; the original Electron case is historical.
 The selected [I5b design](docs/Ariadne/i5b-zero-base-offset-design.md) and
 [B0–B5 plan](Plans/i5b-zero-base-offset.md) define a distinct fault-time question:
 is the encoded GPR base zero with a nonzero signed displacement? Its first

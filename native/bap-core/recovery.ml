@@ -95,11 +95,18 @@ module E = Set.Make(struct type t = string * string * string let compare = compa
 module O = Set.Make(struct type t = string * string let compare = compare end)
 module D = Set.Make(struct type t = string * string * string let compare = compare end)
 type state = { phase:string; pending:S.t; visited:S.t; decoded:S.t; provenance:string M.t;
-               edges:E.t; obligations:O.t; reaching:D.t M.t; slice:S.t }
+               edges:E.t; obligations:O.t; reaching:D.t M.t; slice:S.t;
+               (* Derived per-state flow facts; never part of the observation. *)
+               flow_out:D.t M.t; flow_in:S.t M.t; entry_defs:D.t M.t; flow_values:D.t M.t; flow_enabled:S.t }
+let generated a origin locations =
+  S.fold (fun loc -> D.add (loc,a,origin)) locations D.empty
 let init input = {phase="recover"; pending=input.roots; visited=S.empty; decoded=S.empty;
                   provenance=S.fold (fun a -> M.add a "unavailable") input.addresses M.empty;
                   edges=E.empty; obligations=O.empty; slice=S.empty;
-                  reaching=S.fold (fun a -> M.add a D.empty) input.addresses M.empty}
+                  reaching=S.fold (fun a -> M.add a D.empty) input.addresses M.empty;
+                  flow_out=M.empty;
+                  flow_in=M.empty; flow_values=M.empty; flow_enabled=S.empty;
+                  entry_defs=M.empty}
 let source i a =
   if i.binary then (if S.mem a i.files then "file" else "unavailable")
   else if S.mem a i.captured then "captured"
@@ -130,20 +137,33 @@ let visit i s a =
      decoded=S.add a s.decoded; provenance=M.add a provenance s.provenance;
      edges=E.union s.edges edges; obligations}
 
-let generated a origin locations =
-  S.fold (fun loc -> D.add (loc,a,origin)) locations D.empty
-let outgoing i s a =
-  let ins = M.find a i.instructions in
-  D.union (D.filter (fun (loc,_,_) -> not (S.mem loc ins.must)) (M.find a s.reaching))
-    (generated a "instruction" ins.may)
-let incoming i s a =
-  let entry = if S.mem a i.roots then generated a "entry" i.locations else D.empty in
-  E.fold (fun (src,dst,kind) defs ->
-      if dst = a && kind <> "call" && S.mem src s.decoded
-      then D.union defs (outgoing i s src) else defs) s.edges entry
-let enabled_propagation i s =
-  List.find_opt (fun a -> not (D.subset (incoming i s a) (M.find a s.reaching)))
-    (S.elements s.decoded)
+let outgoing _i s a = M.find a s.flow_out
+let compute_incoming _i s a =
+  let entry = match M.find_opt a s.entry_defs with Some defs -> defs | None -> D.empty in
+  let sources = match M.find_opt a s.flow_in with Some srcs -> srcs | None -> S.empty in
+  S.fold (fun src defs -> D.union defs (outgoing _i s src)) sources entry
+let flow_index s =
+  E.fold (fun (src,dst,kind) index ->
+      if kind = "call" || not (S.mem src s.decoded) then index else
+      let old = match M.find_opt dst index with Some srcs -> srcs | None -> S.empty in
+      M.add dst (S.add src old) index) s.edges M.empty
+let incoming _i s a = M.find a s.flow_values
+let enabled_at s a = not (D.subset (M.find a s.flow_values) (M.find a s.reaching))
+let initialize_flow i s =
+  let next = {s with flow_in=flow_index s;
+      flow_out=S.fold (fun a -> M.add a (generated a "instruction" (M.find a i.instructions).may)) s.decoded M.empty;
+      entry_defs=S.fold (fun a -> M.add a (generated a "entry" i.locations)) (S.inter i.roots s.decoded) M.empty} in
+  let next = {next with flow_values=S.fold (fun a -> M.add a (compute_incoming i next a)) s.decoded M.empty} in
+  {next with flow_enabled=S.filter (enabled_at next) next.decoded}
+let refresh_flow i s changed =
+  let destinations = E.fold (fun (src,dst,kind) acc ->
+      if src = changed && kind <> "call" && S.mem dst s.decoded then S.add dst acc else acc) s.edges S.empty in
+  let next = {s with flow_values=S.fold (fun dst -> M.add dst (compute_incoming i s dst)) destinations s.flow_values} in
+  let enabled = S.fold (fun a enabled ->
+      if S.mem a next.decoded && enabled_at next a then S.add a enabled else S.remove a enabled)
+      (S.add changed destinations) next.flow_enabled in
+  {next with flow_enabled=enabled}
+let enabled_propagation _i s = S.min_elt_opt s.flow_enabled
 let predecessors i s =
   S.fold (fun a sites ->
       let uses = (M.find a i.instructions).uses in
@@ -165,8 +185,14 @@ let advance i s action =
   require (next_action i s = Some action) "action phase/guard/schedule";
   match action with
   | Visit a -> visit i s a
-  | FinishRecovery -> {s with phase="dataflow"}
-  | Propagate a -> {s with reaching=M.add a (D.union (M.find a s.reaching) (incoming i s a)) s.reaching}
+  | FinishRecovery ->
+    let next = {s with phase="dataflow"} in initialize_flow i next
+  | Propagate a ->
+    let next = {s with reaching=M.add a (D.union (M.find a s.reaching) (incoming i s a)) s.reaching} in
+    let ins = M.find a i.instructions in
+    let defs = D.union (D.filter (fun (loc,_,_) -> not (S.mem loc ins.must)) (M.find a next.reaching))
+        (generated a "instruction" ins.may) in
+    refresh_flow i {next with flow_out=M.add a defs s.flow_out} a
   | FinishDataflow -> {s with phase="slice"; slice=S.inter i.seeds s.decoded}
   | ExpandSlice -> {s with slice=S.union s.slice (predecessors i s)}
   | FinishSlice -> {s with phase="done"}
@@ -198,3 +224,31 @@ let observe i s = `Assoc [
         `List (List.map (fun (loc,site,origin) -> `Assoc ["loc",js loc;"site",js site;"origin",js origin])
                  (D.elements (M.find a s.reaching)))]) (S.elements i.addresses));
     "slice", jsset s.slice]
+
+(* Query-owned serialization cache. Every response still carries the complete
+   observation; only unchanged immutable definition rows avoid re-encoding. *)
+type observation_cache = (D.t * string) M.t ref
+let observation_cache () = ref M.empty
+let observe_chunks cache i s =
+  let rows = S.elements i.addresses |> List.map (fun a ->
+      let defs = M.find a s.reaching in
+      match M.find_opt a !cache with
+      | Some (old,text) when old == defs -> text
+      | _ ->
+        let row = `Assoc ["address",js a;"definitions",`List
+            (List.map (fun (loc,site,origin) -> `Assoc
+                 ["loc",js loc;"site",js site;"origin",js origin]) (D.elements defs))] in
+        let text = Yojson.Safe.to_string row in
+        cache := M.add a (defs,text) !cache; text) in
+  (* The other fields are small. Avoid constructing the uncached reaching rows. *)
+  let fields = [
+    "phase",js s.phase; "pending",jsset s.pending; "visited",jsset s.visited;
+    "decoded",jsset s.decoded;
+    "provenance",`List (List.map (fun (a,p) -> `Assoc ["address",js a;"source",js p]) (M.bindings s.provenance));
+    "edges",`List (List.map (fun (a,b,k) -> `Assoc ["src",js a;"dst",js b;"kind",js k]) (E.elements s.edges));
+    "obligations",`List (List.map (fun (a,r) -> `Assoc ["site",js a;"reason",js r]) (O.elements s.obligations))] in
+  let encoded = List.map (fun (k,v) -> Yojson.Safe.to_string (js k) ^ ":" ^ Yojson.Safe.to_string v) fields in
+  let separated = List.fold_right (fun row chunks ->
+      if chunks = [] then [row] else row :: "," :: chunks) rows [] in
+  ["{" ^ String.concat "," encoded ^ ",\"reaching\":["] @ separated @
+    ["],\"slice\":" ^ Yojson.Safe.to_string (jsset s.slice) ^ "}"]

@@ -22,6 +22,196 @@ fn error(message: &str) -> AdapterError {
     AdapterError::DecoderProtocol(message.into())
 }
 
+#[cfg(feature = "bap")]
+pub(crate) struct ReferenceSession {
+    child: std::process::Child,
+    writes: Option<std::sync::mpsc::SyncSender<Vec<u8>>>,
+    written: std::sync::mpsc::Receiver<Result<(), String>>,
+    lines: Option<std::sync::mpsc::Receiver<Result<Vec<u8>, String>>>,
+    workers: Vec<std::thread::JoinHandle<()>>,
+    closed: bool,
+    timeout: Duration,
+}
+#[cfg(feature = "bap")]
+impl ReferenceSession {
+    pub(crate) fn start(path: &Path, target: super::DecoderTarget) -> Result<Self, AdapterError> {
+        Self::start_with_timeout(path, target, Duration::from_secs(30))
+    }
+    fn start_with_timeout(
+        path: &Path,
+        target: super::DecoderTarget,
+        timeout: Duration,
+    ) -> Result<Self, AdapterError> {
+        use std::io::{BufRead, BufReader};
+        use std::sync::mpsc;
+        let (arg, header) = match target {
+            super::DecoderTarget::WindowsAmd64 => (
+                "--protocol=2-checked",
+                "ariadne-llvm-mc 20.1.2 protocol 2\n",
+            ),
+            super::DecoderTarget::LinuxAmd64 => (
+                "--protocol=2-checked-linux",
+                "ariadne-llvm-mc 20.1.2 protocol 2 target x86_64-unknown-linux-gnu\n",
+            ),
+        };
+        let mut child = Command::new(path)
+            .arg(arg)
+            .stdin(Stdio::piped())
+            .stdout(Stdio::piped())
+            .stderr(Stdio::null())
+            .spawn()?;
+        let mut stdin = child.stdin.take().expect("piped");
+        let stdout = child.stdout.take().expect("piped");
+        let (writes, requests) = mpsc::sync_channel::<Vec<u8>>(1);
+        let (result_tx, written) = mpsc::sync_channel(1);
+        let writer = std::thread::spawn(move || {
+            while let Ok(bytes) = requests.recv() {
+                let result = stdin
+                    .write_all(&bytes)
+                    .and_then(|_| stdin.flush())
+                    .map_err(|e| e.to_string());
+                let failed = result.is_err();
+                if result_tx.try_send(result).is_err() || failed {
+                    break;
+                }
+            }
+        });
+        let (sender, lines) = mpsc::sync_channel(2);
+        let reader = std::thread::spawn(move || {
+            let mut reader = BufReader::new(stdout);
+            loop {
+                let mut bytes = Vec::new();
+                let result = match reader
+                    .by_ref()
+                    .take((MAX_RECORD + 1) as u64)
+                    .read_until(b'\n', &mut bytes)
+                {
+                    Ok(0) => Err("decoder EOF".into()),
+                    Ok(_) if bytes.len() > MAX_RECORD => Err("decoder row oversized".into()),
+                    Ok(_) if bytes.last() != Some(&b'\n') => Err("decoder partial row".into()),
+                    Ok(_) => Ok(bytes),
+                    Err(e) => Err(e.to_string()),
+                };
+                let failed = result.is_err();
+                if sender.send(result).is_err() || failed {
+                    break;
+                }
+            }
+        });
+        let session = Self {
+            child,
+            writes: Some(writes),
+            written,
+            lines: Some(lines),
+            workers: vec![writer, reader],
+            closed: false,
+            timeout,
+        };
+        let ready = session.read_line()?;
+        if ready != header.as_bytes() {
+            return Err(error("expected LLVM 20.1.2 checked streaming header"));
+        }
+        Ok(session)
+    }
+    fn read_line(&self) -> Result<Vec<u8>, AdapterError> {
+        self.lines
+            .as_ref()
+            .ok_or_else(|| error("decoder session closed"))?
+            .recv_timeout(self.timeout)
+            .map_err(|_| error("decoder stream timeout/disconnect"))?
+            .map_err(AdapterError::DecoderProtocol)
+    }
+    pub(crate) fn batch(&mut self, input: String, count: usize) -> Result<Vec<Raw>, AdapterError> {
+        if self.closed {
+            return Err(error("decoder session closed/poisoned"));
+        }
+        let result = self.exchange(input, count);
+        if result.is_err() {
+            self.terminate();
+        }
+        result
+    }
+    fn exchange(&mut self, input: String, count: usize) -> Result<Vec<Raw>, AdapterError> {
+        self.writes
+            .as_ref()
+            .ok_or_else(|| error("decoder session closed"))?
+            .try_send(input.into_bytes())
+            .map_err(|_| error("decoder write queue unavailable"))?;
+        let mut rows = Vec::new();
+        for _ in 0..count {
+            let bytes = self.read_line()?;
+            let row = std::str::from_utf8(&bytes).map_err(|_| error("non-UTF-8 decoder output"))?;
+            rows.push(parse(
+                row.strip_suffix('\n')
+                    .ok_or_else(|| error("unterminated decoder row"))?,
+            )?);
+        }
+        self.written
+            .recv_timeout(self.timeout)
+            .map_err(|_| error("decoder write timeout/disconnect"))?
+            .map_err(AdapterError::DecoderProtocol)?;
+        Ok(rows)
+    }
+    pub(crate) fn finish(mut self) -> Result<(), AdapterError> {
+        self.writes.take();
+        let start = std::time::Instant::now();
+        let mut eof = false;
+        loop {
+            while let Ok(row) = self.lines.as_ref().expect("open decoder").try_recv() {
+                match row {
+                    Err(s) if s == "decoder EOF" => eof = true,
+                    _ => return Err(error("decoder unsolicited/partial trailing output")),
+                }
+            }
+            if let Some(status) = self.child.try_wait()? {
+                if !status.success() {
+                    return Err(error("decoder did not exit cleanly"));
+                }
+                break;
+            }
+            if start.elapsed() >= self.timeout {
+                return Err(error("decoder exit timeout"));
+            }
+            std::thread::sleep(Duration::from_millis(1));
+        }
+        if !eof {
+            match self
+                .lines
+                .as_ref()
+                .expect("open decoder")
+                .recv_timeout(self.timeout)
+            {
+                Ok(Err(s)) if s == "decoder EOF" => {}
+                _ => return Err(error("decoder unsolicited/partial trailing output")),
+            }
+        }
+        self.lines.take();
+        for worker in self.workers.drain(..) {
+            let _ = worker.join();
+        }
+        self.closed = true;
+        Ok(())
+    }
+    fn terminate(&mut self) {
+        self.closed = true;
+        self.writes.take();
+        self.lines.take();
+        let _ = self.child.kill();
+        let _ = self.child.wait();
+        for worker in self.workers.drain(..) {
+            let _ = worker.join();
+        }
+    }
+}
+#[cfg(feature = "bap")]
+impl Drop for ReferenceSession {
+    fn drop(&mut self) {
+        if !self.closed {
+            self.terminate();
+        }
+    }
+}
+
 // All streams are drained concurrently. Any limit/error kills and reaps the
 // child; stdout and stderr cannot block each other after one reader exits.
 fn exchange(path: &Path, arg: &str, input: String, cap: usize) -> Result<String, AdapterError> {
@@ -263,5 +453,95 @@ mod tests {
         ] {
             assert!(parse(&broken).is_err(), "{broken}");
         }
+    }
+}
+
+#[cfg(all(test, feature = "bap", unix))]
+mod streaming_tests {
+    use super::*;
+    use std::os::unix::fs::PermissionsExt;
+    use std::sync::atomic::{AtomicU64, Ordering};
+    static NEXT: AtomicU64 = AtomicU64::new(0);
+    struct Helper(std::path::PathBuf);
+    impl Helper {
+        fn new(body: &str) -> Self {
+            let dir = std::env::temp_dir().join(format!(
+                "ariadne-reference-stream-{}-{}",
+                std::process::id(),
+                NEXT.fetch_add(1, Ordering::Relaxed)
+            ));
+            std::fs::create_dir(&dir).unwrap();
+            let file = dir.join("helper.py");
+            std::fs::write(
+                &file,
+                format!("#!/usr/bin/env python3\nimport sys,time\n{body}\n"),
+            )
+            .unwrap();
+            std::fs::set_permissions(&file, std::fs::Permissions::from_mode(0o700)).unwrap();
+            Self(file)
+        }
+        fn start(&self) -> Result<ReferenceSession, AdapterError> {
+            ReferenceSession::start_with_timeout(
+                &self.0,
+                super::super::DecoderTarget::WindowsAmd64,
+                Duration::from_millis(500),
+            )
+        }
+    }
+    impl Drop for Helper {
+        fn drop(&mut self) {
+            let _ = std::fs::remove_dir_all(self.0.parent().unwrap());
+        }
+    }
+    const HEADER: &str = "print('ariadne-llvm-mc 20.1.2 protocol 2',flush=True)";
+    const ROW: &str = "v2 MOV64rr 2 r:RAX r:RBX 1 0 0 0 -1 -1 4096 ok 3 ordinary -";
+    #[test]
+    fn checked_stream_rejects_bad_header_and_bounded_failures() {
+        for body in [
+            "print('wrong',flush=True)",
+            "print('ariadne-llvm-mc 20.1.2 protocol 2 target x86_64-unknown-linux-gnu',flush=True)",
+            "time.sleep(5)",
+        ] {
+            let helper = Helper::new(body);
+            assert!(helper.start().is_err());
+        }
+        for bad in [
+            "print('malformed',flush=True)".to_string(),
+            "print('x'*4097,flush=True)".into(),
+            "sys.stdout.write('partial');sys.stdout.flush()".into(),
+            "sys.exit(0)".into(),
+            "time.sleep(5)".into(),
+        ] {
+            let helper = Helper::new(&format!("{HEADER}\nsys.stdin.readline()\n{bad}"));
+            let mut session = helper.start().unwrap();
+            assert!(session.batch("4096 4889d8\n".into(), 1).is_err());
+            assert!(session.closed);
+            assert!(session.child.try_wait().unwrap().is_some());
+            assert!(session.batch("4096 4889d8\n".into(), 1).is_err());
+        }
+    }
+    #[test]
+    fn checked_stream_requires_clean_shutdown_without_trailing_rows() {
+        for tail in [
+            "print('extra',flush=True)",
+            "sys.stdout.write('partial');sys.stdout.flush()",
+            "sys.exit(7)",
+            "time.sleep(5)",
+        ] {
+            let helper = Helper::new(&format!(
+                "{HEADER}\nsys.stdin.readline()\nprint({ROW:?},flush=True)\nsys.stdin.read()\n{tail}"
+            ));
+            let mut session = helper.start().unwrap();
+            assert_eq!(session.batch("4096 4889d8\n".into(), 1).unwrap().len(), 1);
+            assert!(session.finish().is_err());
+        }
+        let helper = Helper::new(&format!(
+            "{HEADER}\nfor line in sys.stdin:\n print({ROW:?},flush=True)"
+        ));
+        let mut session = helper.start().unwrap();
+        for _ in 0..3 {
+            assert_eq!(session.batch("4096 4889d8\n".into(), 1).unwrap().len(), 1);
+        }
+        session.finish().unwrap();
     }
 }

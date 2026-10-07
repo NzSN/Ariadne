@@ -211,6 +211,11 @@ name = "i5b"
 path = "src/bin/i5b.rs"
 required-features = ["bench"]
 
+[[bin]]
+name = "i4_profile"
+path = "src/bin/i4_profile.rs"
+required-features = ["bench"]
+
 [[test]]
 name = "input_bap_core"
 path = "tests/input/bap_core.rs"

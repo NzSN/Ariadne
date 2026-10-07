@@ -5,8 +5,9 @@
 **Status.** User-authorized replacement on 2026-10-05. The independently inspected
 Windows Crashpad case is pinned and independently inspected for I4. All 17
 investigation gates pass. Five measured native-default explanation-CLI repeats
-have a 4,774.451 ms median against the unchanged 2,000 ms ceiling, so full I4
-acceptance remains false. Source/tool identities and retained archives verify.
+had a 4,774.451 ms median against the unchanged 2,000 ms ceiling. That historical
+re-pin record remains over budget; the later [performance qualification](../docs/Ariadne/i4-performance-validation.md)
+closes the fixed clause at 1,692.696 ms with current source/tool/dependency checks.
 
 **Why this document exists.** The [investigation design](../docs/Ariadne/investigation-layer-design.md)
 left I4 tied to an unavailable original Electron dump. The user now authorizes
@@ -20,8 +21,11 @@ I4 verdict. The original manifest and older records remain historical, and the
 
 **Where to go next.**
 
+- [Native performance design](../docs/Ariadne/i4-performance-design.md) and
+  [D0–D3 implementation plan](i4-performance-implementation.md) — measured
+  decoder/native costs and the current exact-query performance follow-up.
 - [Delivery and validation](../docs/Ariadne/i4-windows-repin-validation.md) —
-  completed re-pin, exact samples, evidence and remaining performance gap.
+  completed re-pin, historical samples and its accepted performance successor.
 
 - [Active case](../evidence/Ariadne/investigation-windows-workload-case.json) — exact
   capture, query, provenance and fixed timing contract.
@@ -34,9 +38,9 @@ I4 verdict. The original manifest and older records remain historical, and the
 - [Capture recipe](../native/crashpad-demo/README.md) — native Windows producer and
   existing independently inspected 98-instruction input bundle.
 
-**What remains unresolved.** The qualified five-sample median exceeds the preserved 2,000 ms limit.
-Correct capture/pin success does not imply full I4 performance acceptance. The
-replacement does not reconstruct the original crash or establish an executed
+**What remains unresolved.** The later D0–D3 performance campaign closes this
+exact capture/query timing clause. Later source/tool changes require refreshed
+qualification. The replacement does not reconstruct the original crash or establish an executed
 history, UAF, object lifetime or general root cause.
 
 ## Frozen replacement contract
@@ -70,8 +74,9 @@ change, if needed, must follow a measured diagnosis and its own validation.
 
 ## Remaining I4 performance qualification
 
-Re-pin work is complete. The remaining acceptance task is measured diagnosis
-and, if justified, a performance change on the same native-default query:
+This follow-up is now complete through the [D0–D3 plan](i4-performance-implementation.md)
+and [qualification](../docs/Ariadne/i4-performance-validation.md). The steps below
+preserve the original resumption contract for the same native-default query:
 
 1. Retain the accepted five-sample baseline and current report identities.
 2. Measure the current pipeline's decode/lifting, transport/projection, native
@@ -87,4 +92,4 @@ and, if justified, a performance change on the same native-default query:
 
 No performance implementation or budget change is part of the completed re-pin
 or the documentation synchronization. The [current result](../docs/Ariadne/i4-windows-repin-validation.md)
-remains the baseline for that separate follow-up.
+remains the historical baseline for that now-completed separate follow-up.

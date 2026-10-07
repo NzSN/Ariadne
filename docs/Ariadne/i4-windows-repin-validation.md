@@ -2,10 +2,11 @@
 
 ## Context and follow-up
 
-**Status.** Re-pinned on 2026-10-05 after the user authorized a replacement for
-the unavailable original Electron dump. Independent capture checks and all 17
-investigation gates pass. The measured explanation CLI exceeds the unchanged
-2,000 ms limit; `fullI4RealCaptureAcceptance=false`.
+**Status.** Historical re-pin result from 2026-10-05. Independent capture checks
+and all 17 investigation gates pass; that run exceeded the 2,000 ms CLI limit.
+The later [native performance qualification](i4-performance-validation.md)
+closes the same fixed-budget clause at 1,692.696 ms. The original record and
+its `fullI4RealCaptureAcceptance=false` flag remain unchanged.
 
 **Why this document exists.** The [investigation design](investigation-layer-design.md)
 required a real Windows 98-instruction workload, but its original artifact was
@@ -19,6 +20,7 @@ workload timing policy and the separate I5a numeric question.
 
 **Where to go next.**
 
+- [Completed native performance follow-up](i4-performance-validation.md) — meets both fixed budgets with preserved capture/query identity and verified regression evidence.
 - [Active case](../../evidence/Ariadne/investigation-windows-workload-case.json) —
   exact inputs, query, replacement authorization and frozen timing contract.
 - [Independent inspection](../../evidence/Ariadne/i4-windows-capture-inspection.json)
@@ -32,8 +34,9 @@ workload timing policy and the separate I5a numeric question.
 - [Capture recipe](../../native/crashpad-demo/README.md) — Windows producer,
   independent inspection and distinction from the small I5a capture.
 
-**What remains unresolved.** Full I4 acceptance needs measured Windows CLI
-performance within 2,000 ms on this exact case. The replacement does not qualify
+**What remains unresolved.** The later performance campaign qualifies this
+exact case within 2,000 ms. Future source/tool changes need fresh or exact-identity
+verified evidence. The replacement does not qualify
 the original Electron crash, reconstruct executed history, establish a lifetime
 or root cause, or qualify a packaged cross-platform release. BAP lifting remains
 trusted. Any performance change needs a measured diagnosis and fresh validation.
@@ -70,7 +73,7 @@ The [original manifest](../../evidence/Ariadne/priority-4-real-capture-case.json
 remains byte-identical history. Its missing artifact is retired as an active I4
 obligation by this user-authorized replacement, without retroactive acceptance.
 
-## Fresh result
+## Recorded re-pin result (2026-10-05)
 
 The native-default release explanation CLI ran one warm-up and five measured
 repeats on the exact query. Native receipts verify the captured BAP backend and

@@ -22,7 +22,7 @@ real-Windows acceptance.
 **Where to go next.**
 
 
-- [2026-10-05 Windows I4 replacement](i4-windows-repin-validation.md) — supersedes the older missing-artifact obligation with an independently inspected active case; correctness passes and the unchanged CLI budget remains unmet.
+- [2026-10-05 Windows I4 replacement](i4-windows-repin-validation.md) — supersedes the older missing-artifact obligation with an independently inspected active case; correctness passes; the later [native performance qualification](i4-performance-validation.md) meets the unchanged CLI budget.
 
 - [Updated contracts](investigation-contracts.md) describe zero budgets,
   unavailable/partial truncation and the operational v2 qualification records.

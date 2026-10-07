@@ -5,6 +5,7 @@ from datetime import datetime,timezone
 import hashlib
 import json
 from pathlib import Path
+import shutil
 import subprocess
 import tarfile
 import time
@@ -19,12 +20,58 @@ def checked_record(path):
     return record
 
 
+def retained_aggregate(path, name):
+    """Compose complete current records without rerunning unrelated gates."""
+    from i5a_native_contract import GATES, native_manifest, tool_hashes
+    record = checked_record(path)
+    environment_identity = (record.get('tools', {}).get('qualificationEnvironment')
+                            if name == 'native-core-stage-e-input-bap-regressions'
+                            else record.get('qualificationEnvironment'))
+    if environment_identity != active_identity():
+        raise ValueError('retained qualification dependency differs')
+    if not record.get('toolsStable', True) or not all(g['exitCode'] == 0 for g in record['gates']):
+        raise ValueError('retained aggregate has failed/unstable gates')
+    if name == 'i5a-regression':
+        import check_i5a
+        valid = (record.get('sourceFixtureAcceptancePassed') is True
+                 and record.get('defaultNativeVerified') is True
+                 and len(record['gates']) == len(GATES)
+                 and {g['gate'] for g in record['gates']} == GATES
+                 and record['sourceHashes'] == check_i5a.sources()
+                 and record['tools'] == tool_hashes()
+                 and record['helperManifest'] == native_manifest())
+    elif name == 'native-core-stage-e-input-bap-regressions':
+        import check_bap_core
+        expected = {'sdk-inventory','sdk-smoke','helper-build','helper-clean-build',
+                    'format','root-tests','core-only-tests','all-feature-clippy','rust-layout',
+                    'documentation','contract-regressions','native-kernels','capture-investigation-cli',
+                    'native-stateflow-cli','native-generated-replay','native-algorithm-mutations',
+                    'native-boundary-mutations','stage1-regression','release-build','native-product-workloads'}
+        valid = (record.get('stage2Qualified') is True
+                 and record.get('defaultNativeVerified') is True
+                 and record.get('candidateOnly') is False
+                 and len(record['gates']) == len(expected)
+                 and {g['gate'] for g in record['gates']} == expected
+                 and record['sourceHashes'] == check_bap_core.sources()
+                 and record['tools'] == check_bap_core.tools_inventory()
+                 and record['records']['generatedReplay']['helperManifest'] == native_manifest())
+    else:
+        raise ValueError('unsupported retained aggregate: '+name)
+    if not valid:
+        raise ValueError('incomplete/stale retained aggregate: '+str(path))
+    return record
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--captures',type=Path,required=True)
     parser.add_argument('--baseline',type=Path,required=True)
     parser.add_argument('--mutations-record',type=Path)
+    parser.add_argument('--i5a-record',type=Path,
+                        help='reuse only a complete exact current source/tool/environment I5a record')
+    parser.add_argument('--native-core-record',type=Path,
+                        help='reuse only a complete exact current source/tool/environment native adoption record')
     args=parser.parse_args();work=args.output.resolve();work.mkdir(parents=True,exist_ok=False)
     before=sources();env=environment()
     graph=ROOT/'tmp/graphviz-headers/root'
@@ -61,7 +108,40 @@ def main():
         (work/(name+'.log')).write_text(output)
         rows.append(dict(gate=name,command=[str(x) for x in command],exitCode=code,seconds=time.monotonic()-start))
         print(name,'PASS' if code==0 else 'FAIL',flush=True)
-    for name,command in gates:gate(name,command)
+    for name,command in gates:
+        reuse = {'i5a-regression': args.i5a_record,
+                 'native-core-stage-e-input-bap-regressions': args.native_core_record}.get(name)
+        if reuse:
+            start = time.monotonic()
+            try:
+                nested[name] = retained_aggregate(reuse, name)
+                destination = work/'retained'/name
+                destination.mkdir(parents=True)
+                shutil.copyfile(reuse,destination/'report.json')
+                if name == 'native-core-stage-e-input-bap-regressions':
+                    manifest_path = reuse.parent/'evidence-manifest.json'
+                    archive_path = reuse.parent/'evidence.tar.gz'
+                    manifest = json.loads(manifest_path.read_text())
+                    if (manifest.get('verified') is not True
+                        or manifest['qualificationReportSha256'] != sha(reuse)
+                        or manifest['archiveSha256'] != sha(archive_path)):
+                        raise ValueError('retained native evidence archive differs')
+                    shutil.copyfile(manifest_path,destination/'evidence-manifest.json')
+                    shutil.copyfile(archive_path,destination/'evidence.tar.gz')
+                for g in nested[name]['gates']:
+                    if 'log' in g:
+                        shutil.copyfile(g['log'],destination/(g['gate']+'.log'))
+                output = 'Reused complete current source/tool/environment record: '+str(reuse)+'\n'
+                code = 0
+            except (OSError, KeyError, ValueError) as error:
+                output, code = str(error), -1
+            (work/(name+'.log')).write_text(output)
+            rows.append(dict(gate=name, command=['verified-record',str(reuse)],
+                             recordSha256=sha(reuse) if reuse.is_file() else None,
+                             exitCode=code,seconds=time.monotonic()-start))
+            print(name,'PASS' if code == 0 else 'FAIL',flush=True)
+        else:
+            gate(name,command)
     # Make the precise normal CLI and benchmark binaries current before freezing
     # their identities. Feature-specific nested builds cannot qualify other bytes.
     gate('build-i5b',['cargo','build','--offline','--locked','--release','--features','bench','--bin','i5b'])

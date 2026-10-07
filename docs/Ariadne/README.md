@@ -15,12 +15,12 @@
   fault-time machine-code debugging assessment; [implemented contracts](i5b-contracts.md)
   and [qualification](i5b-validation.md) distinguish its current tiers.
 
-- [Active Windows I4 qualification](i4-windows-repin-validation.md) — exact replacement capture, passing correctness and remaining fixed CLI budget.
+- [Active Windows I4 qualification](i4-windows-repin-validation.md) — exact replacement capture and historical baseline; [native performance qualification](i4-performance-validation.md) meets the fixed CLI budget.
 
 - [Documentation map](../documentation-map.md) — traces motivation, implementation, validation and open questions.
 - [Plan index](../../Plans/README.md) — identifies active implementation work.
 
-**What remains unresolved.** Active Windows I4 correctness passes after the [98-instruction re-pin](i4-windows-repin-validation.md); its 4.774 s CLI median exceeds the unchanged 2 s limit. Controlled Windows I5a is [qualified under the pinned dependency snapshot](i5a-native-qualification.md). Native BAP recovery, dataflow, slicing and finite stateflow are implemented; [Stage 2 qualification](bap-core-qualification.md) records passing aggregate acceptance and default adoption. Other hypothesis, object/source-context and cross-capture questions remain later work.
+**What remains unresolved.** Active Windows I4 correctness passes after the [98-instruction re-pin](i4-windows-repin-validation.md); the later [performance qualification](i4-performance-validation.md) meets the unchanged 2 s limit at 1,692.696 ms. Controlled Windows I5a is [qualified under the pinned dependency snapshot](i5a-native-qualification.md). Native BAP recovery, dataflow, slicing and finite stateflow are implemented; [Stage 2 qualification](bap-core-qualification.md) records passing aggregate acceptance and default adoption. Other hypothesis, object/source-context and cross-capture questions remain later work.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 
@@ -62,7 +62,7 @@ A historical passing record is not fresh qualification after changes.
 
 Older priority, effect-rule and source-review documents remain evidence for their
 original backend and workload. The [active Windows I4 re-pin](i4-windows-repin-validation.md) closes the missing
-artifact gap but remains over its fixed CLI budget. The
+artifact gap; [native performance qualification](i4-performance-validation.md) later meets its fixed CLI budget. The
 [universal Rust proof boundary](stage-f-proof-and-performance.md) remains open.
 The independent ISA proof project is retired. Obsolete plan/status Markdown is
 removed; Git retains its history.

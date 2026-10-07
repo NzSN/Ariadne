@@ -2,7 +2,7 @@
 
 ## Context and follow-up
 
-**Status.** Historical backend-removal evidence from 2026-10-01. Later BAP workload and native Stage 2 qualification supersede its implementation checkpoint; active Windows I4 remains over its separate fixed CLI budget.
+**Status.** Historical backend-removal evidence from 2026-10-01. Later BAP workload and native Stage 2 qualification supersede its implementation checkpoint; the later [native I4 performance qualification](i4-performance-validation.md) meets its separate fixed CLI budget.
 
 **Why this document exists.** [Completed removal plan](../../Plans/completed/bap-only-semantics.md) requires BAP-only production semantics without LLVM effect fallback.
 
@@ -15,7 +15,7 @@
 - [Integration ledger](../../Plans/bap-integration.md) — records completed Stage 1 and native Stage 2 qualification, with remaining proof and release limits.
 - [Investigation design](investigation-layer-design.md) — uses the resulting semantic evidence to answer a domain question.
 
-**What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. The later [native Stage 2 record](bap-core-qualification.md) qualifies its separate algorithms and adoption. The [active I4 replacement](i4-windows-repin-validation.md) closes the missing-artifact gap while remaining over its fixed CLI budget. Universal refinement and packaged release qualification remain open.
+**What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. The later [native Stage 2 record](bap-core-qualification.md) qualifies its separate algorithms and adoption. The [active I4 replacement](i4-windows-repin-validation.md) closes the missing-artifact gap; the later [performance qualification](i4-performance-validation.md) meets its fixed CLI budget. Universal refinement and packaged release qualification remain open.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 

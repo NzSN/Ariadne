@@ -5,6 +5,8 @@ pub mod address_reference;
 mod prepare;
 mod reference;
 pub use reference::decode_captured_batch;
+#[cfg(feature = "bap")]
+pub(crate) use reference::decode_with_session;
 pub(crate) mod protocol;
 
 use std::collections::{BTreeMap, BTreeSet};

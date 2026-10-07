@@ -11,13 +11,13 @@
 **Where to go next.**
 
 
-- [Active Windows I4 qualification](i4-windows-repin-validation.md) — keeps producer correctness and the unmet fixed CLI timing condition distinct from the lifter trust decision.
+- [Active Windows I4 qualification](i4-windows-repin-validation.md) — keeps producer correctness and the separately qualified fixed CLI timing condition distinct from the lifter trust decision.
 
 - [Projection contract](bap-semantic-backend-design.md) — defines the boundary Ariadne still validates.
 - [Backend delivery ledger](../../Plans/bap-integration.md) — records qualified native migration and the remaining proof, workload and release limits.
 - [Rust proof boundary](stage-f-proof-and-performance.md) — remains open independently of ISA retirement.
 
-**What remains unresolved.** The [active Windows I4 replacement](i4-windows-repin-validation.md) passes correctness but exceeds its unchanged CLI budget; the original Electron case is historical. The native analysis-core replacement is implemented; its [qualification](bap-core-qualification.md) is separate from those product criteria. The universal Rust refinement boundary remains open; retired ISA obligations were not discharged.
+**What remains unresolved.** The [active Windows I4 replacement](i4-windows-repin-validation.md) passes correctness; the later [native performance qualification](i4-performance-validation.md) meets its unchanged CLI budget; the original Electron case is historical. The native analysis-core replacement is implemented; its [qualification](bap-core-qualification.md) is separate from those product criteria. The universal Rust refinement boundary remains open; retired ISA obligations were not discharged.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 

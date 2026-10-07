@@ -26,7 +26,7 @@ report compatibility, mutation controls and separate acceptance tiers.
 - [Selected design](../docs/Ariadne/i5b-zero-base-offset-design.md) — predicate,
   admission profile, implemented interface and explicit limits.
 - [Investigation ledger](investigation-layer.md) — selected I5b versus other
-  deferred hypotheses and the open I4 performance obligation.
+  deferred hypotheses and the separately completed I4 performance qualification.
 - [I5a contracts](../docs/Ariadne/i5a-contracts.md) and [execution plan](i5a-zero-address.md)
   — reusable context acquisition and the old behavior that must be preserved.
 - [Native qualification](../docs/Ariadne/i5a-native-qualification.md) and

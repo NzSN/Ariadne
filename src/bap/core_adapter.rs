@@ -51,6 +51,16 @@ fn set(values: &[String], domain: &AddressSet) -> Result<AddressSet, Error> {
     Ok(result)
 }
 pub fn decode_state(r: &AnalysisRequest, o: &Observation) -> Result<AnalysisState, Error> {
+    decode_state_cached(r, o, None)
+}
+fn decode_state_cached(
+    r: &AnalysisRequest,
+    o: &Observation,
+    previous: Option<(
+        &BTreeMap<Address, super::core_protocol::Reaching>,
+        &AnalysisState,
+    )>,
+) -> Result<AnalysisState, Error> {
     let phase = match o.phase.as_str() {
         "recover" => Phase::Recover,
         "dataflow" => Phase::Dataflow,
@@ -116,11 +126,18 @@ pub fn decode_state(r: &AnalysisRequest, o: &Observation) -> Result<AnalysisStat
             return Err(invalid("native obligation domain/duplicate"));
         }
     }
+    let previous = previous.filter(|(_, state)| state.decoded.is_subset(&decoded));
     let mut reaching = BTreeMap::new();
     for row in &o.reaching {
         let a = address(&row.address)?;
-        let mut defs = DefinitionSet::new();
-        for d in &row.definitions {
+        let cached = previous.and_then(|(rows, state)| {
+            rows.get(&a)
+                .is_some_and(|old| old.definitions == row.definitions)
+                .then(|| state.reaching.get(&a))
+                .flatten()
+        });
+        let mut defs = cached.cloned().unwrap_or_default();
+        for d in row.definitions.iter().filter(|_| cached.is_none()) {
             let site = address(&d.site)?;
             let origin = match d.origin.as_str() {
                 "entry" => DefinitionOrigin::Entry,
@@ -227,6 +244,7 @@ pub struct NativeAnalyzer {
     session: CoreSession,
     actions: u64,
     evidence: BTreeMap<String, Value>,
+    reaching_rows: BTreeMap<Address, super::core_protocol::Reaching>,
     closed: bool,
 }
 impl NativeAnalyzer {
@@ -273,6 +291,12 @@ impl NativeAnalyzer {
             session,
             actions: 0,
             evidence,
+            reaching_rows: response
+                .observation
+                .reaching
+                .into_iter()
+                .map(|row| Ok((address(&row.address)?, row)))
+                .collect::<Result<_, Error>>()?,
             closed: false,
         })
     }
@@ -319,6 +343,10 @@ impl NativeAnalyzer {
     pub fn identity(&self) -> &Value {
         self.session.identity()
     }
+    /// Native process identity for external diagnostic/resource measurements.
+    pub fn process_id(&self) -> u32 {
+        self.session.process_id()
+    }
     pub fn request(&self) -> &AnalysisRequest {
         &self.request
     }
@@ -345,7 +373,18 @@ impl NativeAnalyzer {
         if let Some(error) = response.error {
             return Err(invalid(error.message));
         }
-        self.state = decode_state(&self.request, &response.observation)?;
+        let state = decode_state_cached(
+            &self.request,
+            &response.observation,
+            Some((&self.reaching_rows, &self.state)),
+        )?;
+        self.reaching_rows = response
+            .observation
+            .reaching
+            .into_iter()
+            .map(|row| Ok((address(&row.address)?, row)))
+            .collect::<Result<_, Error>>()?;
+        self.state = state;
         validate_attribution(
             &self.request,
             &self.state,
@@ -417,5 +456,51 @@ impl NativeAnalyzer {
             state,
             missing_slice_seeds: missing,
         })
+    }
+}
+
+#[cfg(test)]
+mod cache_tests {
+    use super::*;
+    #[test]
+    fn reaching_cache_revalidates_changed_rows_and_shrinking_decoded_domain() {
+        let request = AnalysisRequest {
+            addresses: [0x10, 0x20].into(),
+            locations: ["rax".into()].into(),
+            entry_points: [0x10].into(),
+            ..AnalysisRequest::default()
+        };
+        let observation: Observation = serde_json::from_value(json!({
+            "phase":"dataflow","pending":[],"visited":[hex(0x10),hex(0x20)],"decoded":[hex(0x10),hex(0x20)],
+            "provenance":[{"address":hex(0x10),"source":"captured"},{"address":hex(0x20),"source":"captured"}],
+            "edges":[],"obligations":[],"slice":[],
+            "reaching":[{"address":hex(0x10),"definitions":[]},{"address":hex(0x20),"definitions":[{"loc":"rax","site":hex(0x10),"origin":"instruction"}]}]
+        })).unwrap();
+        let state = decode_state(&request, &observation).unwrap();
+        let rows = observation
+            .reaching
+            .iter()
+            .cloned()
+            .map(|r| (address(&r.address).unwrap(), r))
+            .collect();
+        let previous = Some((&rows, &state));
+        assert_eq!(
+            decode_state_cached(&request, &observation, previous).unwrap(),
+            state
+        );
+        let mut changed = observation.clone();
+        changed.reaching[1].definitions[0].loc = "unknown".into();
+        assert!(decode_state_cached(&request, &changed, previous).is_err());
+        let mut changed = observation.clone();
+        let duplicate = changed.reaching[1].definitions[0].clone();
+        changed.reaching[1].definitions.push(duplicate);
+        assert!(decode_state_cached(&request, &changed, previous).is_err());
+        let mut changed = observation.clone();
+        changed.decoded.remove(0);
+        changed.provenance[0].source = "unavailable".into();
+        assert!(decode_state_cached(&request, &changed, previous).is_err());
+        let mut changed = observation.clone();
+        changed.reaching[1].definitions[0].site = hex(0x30);
+        assert!(decode_state_cached(&request, &changed, previous).is_err());
     }
 }

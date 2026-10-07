@@ -1,0 +1,94 @@
+{
+  "schema": "ariadne.i4-performance-completion-audit/v1",
+  "recordedUtc": "2026-10-07T14:15:19.995948+00:00",
+  "passed": true,
+  "evidenceKind": "current-inventory and retained-archive verification; runtime campaigns were not rerun",
+  "qualificationReportSha256": "97f343fc2139a2a9760e16045b12e8cca36c450a9a364c006bd40bebdcc0cf69",
+  "sourcesMatched": true,
+  "sourceCount": 712,
+  "toolsMatched": true,
+  "toolCount": 12,
+  "qualificationEnvironment": {
+    "schema": "ariadne.mirrorrust-qualification-snapshot/v1",
+    "manifestPath": "/home/nzsn/Repos/Ariadne/target/i5b-dependency-snapshot/manifest.json",
+    "manifestSha256": "a087ecfb136795d30f6c3861d9e4003f0ed9f457db2b17561f0417551bf97854",
+    "originRevision": "08d189f18a76845dc15dd23b79424809ae27f406",
+    "readOnly": true,
+    "wrapperSha256": "f47d8216081465a932bf44499ab95420e35c24dce1e04ff78a5b5fccca67ea9e"
+  },
+  "windows98Qualification": {
+    "checked": true,
+    "status": "met",
+    "valid": true,
+    "samples": 5,
+    "medianMs": 1692.696108,
+    "budgetMs": 2000,
+    "caseId": "crashpad-windows-checksum-98-i4-v1",
+    "captureKind": "controlled-crashpad-windows",
+    "targetMet": true,
+    "reason": ""
+  },
+  "linuxIncrementalPhaseMedianSumMs": 182.924127,
+  "linuxIncrementalPhaseBudgetMs": 250,
+  "nativeScheduleActions": 216,
+  "baselineReportsMatched": true,
+  "archives": [
+    {
+      "path": "evidence/Ariadne/i4-performance-evidence.tar.gz",
+      "sha256": "4a5f05ea02317a3a21a56ad177796f794f87661a3a143694ce80e5d0ea5039d8",
+      "entries": 3625,
+      "allMemberHashesVerified": true
+    },
+    {
+      "path": "evidence/Ariadne/i4-performance-history/2026-10-07-rejected/evidence.tar.gz",
+      "sha256": "2ad2e8b800e24acc253c9c40acf26181f76768931b74b2bff2c4ac6a9a31e6ad",
+      "entries": 720,
+      "allMemberHashesVerified": true
+    }
+  ],
+  "nestedArchives": [
+    {
+      "path": "regressions/evidence.tar.gz",
+      "entries": 919,
+      "allMemberHashesVerified": true
+    },
+    {
+      "path": "regressions/retained/native-core-stage-e-input-bap-regressions/evidence.tar.gz",
+      "entries": 1432,
+      "allMemberHashesVerified": true
+    }
+  ],
+  "historicalFileHashes": {
+    "evidence/Ariadne/i4-windows-repin-validation.json": "799d3fda76b5f24b0b1afcfe6882b84606d1395a2b57b75726ecde879d6bb74b",
+    "evidence/Ariadne/i4-windows-repin-evidence-manifest.json": "047028b12bf47f4f59defdf300bb23b42f49c0b5aa7e0323046d96bb77330f3d",
+    "evidence/Ariadne/i4-windows-repin-evidence.tar.gz": "65f2ea4e4b4db2f6103d08fb2dcb24f8e2dd885efcca2447a3f8cbe5d2bf6503",
+    "evidence/Ariadne/investigation-windows-workload-case.json": "bff00fad2b6bbb2a31240d191c15bf1cb9a90bbf8b019e68c75ecfe32ede1522",
+    "evidence/Ariadne/i4-windows-capture-inspection.json": "34b65d952de2b9ea2028ff23748ee79ec789ebc8d939d1c03b6faa0f3729013b",
+    "evidence/Ariadne/bap-windows-workload-inputs.tar.gz": "8ef47d751829680caa4d9a852e3b9c9d6f2906150a7d9bfec8f96b3487f63222",
+    "evidence/Ariadne/i5b-qualification.json": "5dd7b6f5cd455e0149b352be6e44416469fb971040619ee52f6e1ab69833b64f",
+    "evidence/Ariadne/i5b-evidence-manifest.json": "853906f48a81d85cddb564b4d4dd2d5b27ba9ca4ea98ee3dc5e379fdc7170a2d",
+    "docs/Ariadne/bap-analysis-core-design.md": "5c919c9b9bd57709301294c7baf40bc66419cea6872129071e67d8a87aef49eb",
+    "Plans/bap-stage2-implementation.md": "91d706e3868cc3a50e4290d44e471b032ddc8ca99a9c085a65431b8163fa1ba9"
+  },
+  "scope": "Exact controlled 98-start Windows machine-code fault-address dependency query; native full observations, independent replay/mutations, I5 regressions and separate Linux phase; no executed-history, ISA-step, original Electron crash or general root-cause claim.",
+  "controlledI5a": {
+    "record": "evidence/Ariadne/i4-performance-i5a-controlled.json",
+    "recordSha256": "374246fe7ed17ad5687ad915f7b811a2f96f9dbdf0119dbbc2719f8495fa9feb",
+    "sourcesToolsDependencyInputsAndSamplesMatched": true,
+    "sourceFixtureRecordSha256": "42adf7e38ca18240018eb33221d36509f558f322eedc46d68d19cf8b309f8a63",
+    "cases": [
+      {
+        "capture": "partial",
+        "assessmentCliMedianMs": 417.977901,
+        "phaseMedianMs": 1.043959,
+        "passed": true
+      },
+      {
+        "capture": "full",
+        "assessmentCliMedianMs": 457.632953,
+        "phaseMedianMs": 1.067568,
+        "passed": true
+      }
+    ]
+  }
+}
