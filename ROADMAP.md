@@ -10,8 +10,12 @@
 
 **Where to go next.**
 
+- [Selected I5c address-wrap design](docs/Ariadne/i5c-address-wrap-design.md) and
+  [W0–W5 plan](Plans/i5c-address-wrap.md) — the next fault-time arithmetic
+  question; documentation is written, all implementation/qualification pending.
+
 - [Selected I5b design](docs/Ariadne/i5b-zero-base-offset-design.md) and
-  [implementation plan](Plans/i5b-zero-base-offset.md) — the next bounded
+  [implementation plan](Plans/i5b-zero-base-offset.md) — the delivered bounded
   zero-base-plus-displacement hypothesis, with B0–B5 implemented and corpus-qualified.
 - [Active plans](Plans/README.md) — turn remaining work into explicit implementation and qualification steps.
 - [Assurance decision](docs/Ariadne/semantic-assurance.md) — defines the BAP trust boundary and retired ISA-proof scope.
@@ -57,7 +61,13 @@ profile requires reviewed simple base/displacement decoded facts to agree with
 BAP address evidence. B0–B5 are implemented, with [actual contracts](docs/Ariadne/i5b-contracts.md)
 for machine-code debugging; [qualification](docs/Ariadne/i5b-validation.md) passes all
 18 gates and separate source/fixture/controlled Windows timing criteria.
-historical null derivation and other hypotheses remain later work.
+Historical null derivation and other hypotheses remain later work.
+The next selected [I5c design](docs/Ariadne/i5c-address-wrap-design.md) and
+[W0–W5 plan](Plans/i5c-address-wrap.md) assess the unsigned base plus signed
+encoded displacement before modular reduction. All implementation stages are
+pending. The first profile preserves lower-range fault admission, so it can
+qualify upper-wrap/no-wrap cases while mathematical underflow remains unknown.
+It introduces no historical-path, canonicality or root-cause claim.
 The [native Windows Crashpad demo](docs/Ariadne/crashpad-demo-validation.md)
 supplies real partial/full captures and correct numeric answers. Its historical
 CLI median was approximately 1.82 s. The [native I5a refresh](docs/Ariadne/i5a-native-qualification.md)

@@ -10,6 +10,11 @@
 
 **Where to go next.**
 
+- [Selected I5c design](../docs/Ariadne/i5c-address-wrap-design.md) and
+  [W0 model/oracle stage](../Plans/i5c-address-wrap.md#w0--freeze-semantics-and-independent-expectations)
+  — proposed address-wrap decision model; no new specification/check result
+  exists yet, and model authority must precede runtime implementation.
+
 - [I5b question-level decision model](AriadneZeroBaseOffset.tla) — admission,
   output availability and zero-base/nonzero-displacement conclusions; the
   [source review](../docs/Ariadne/i5b-source-review.md) separates finite checking

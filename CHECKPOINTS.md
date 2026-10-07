@@ -17,8 +17,11 @@
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
-Updated **2026-10-07**: I5b zero-base-plus-displacement has B0–B5 implemented and
-qualified for its recorded finite source/fixture and controlled Windows tiers. The product intent
+Updated **2026-10-07**: I5c address wrap has a selected design and W0–W5 plan,
+with every implementation/qualification stage pending. The next executable
+stage is W0: freeze the source/oracle contract and check the new decision model.
+I5b zero-base-plus-displacement has B0–B5 implemented and qualified for its
+recorded finite source/fixture and controlled Windows tiers. The product intent
 is debugging bugs at the machine-code level using captured instruction/context evidence.
 Native BAP remains the CLI default, and controlled
 Windows I5a is qualified under a read-only, hash-pinned MirrorRust dependency
@@ -27,6 +30,54 @@ snapshot. The latest retained records pass 20 Stage 2 gates, 17 investigation ga
 I4 is re-pinned and the native performance follow-up meets its fixed 2-second
 CLI limit at 1,692.696 ms for the exact controlled query. BAP lifting stays trusted
 and the independent ISA track retired.
+
+## 2026-10-07 — I5c address-wrap design and plan selected
+
+The user selected the next fault-time arithmetic assessment. The
+[design](docs/Ariadne/i5c-address-wrap-design.md) and
+[W0–W5 plan](Plans/i5c-address-wrap.md) define `T = unsigned base + signed encoded
+displacement` before 64-bit reduction, with an independent model/oracle first,
+sealed binding and a small question-specific interface.
+
+Source review confirms that I5a already computes modular EA and I5b retains
+encoded roles; the new question needs a wide sum and explicit wrap classification.
+A two's-complement displacement-bit carry is not the predicate. The inherited
+lower-range access policy admits upper wraps into that range and no-wrap cases;
+mathematical underflow remains unknown for v1 fault assessment. Conditional
+arithmetic facts do not override missing fault-admission premises.
+
+This is documentation only. No new source, model, fixture, capture, CLI or
+measurement is delivered. W0–W5 remain pending; old contracts, capture pins,
+fixed budgets and retained acceptance evidence remain unchanged. Six design
+arithmetic/range examples and four candidate recipe decodings are checked;
+these provide no implementation, model or hardware/capture acceptance credit.
+The design links directly to its implementation plan, and the plan/roadmap/
+documentation entry points name its unresolved scope.
+
+| I5c stage | Checkpoint status | Next required evidence |
+| --- | --- | --- |
+| Design and linked plan | Delivered as documentation | [Selected contract](docs/Ariadne/i5c-address-wrap-design.md) and [W0–W5 ownership/exits](Plans/i5c-address-wrap.md). |
+| W0 — Contract/model/oracle | Pending | Freeze the independent full-width case inventory, source review and budgets; create and check the authoritative question-level TLA+ model. |
+| W1 — Binding/admission reuse | Pending | Sealed question-specific binding and shared finite receipt facts, with legacy output bytes preserved. |
+| W2 — First vertical slice | Pending | Native MOV32mi wrap/no-wrap/unknown/error/budget tests through the caller interface. |
+| W3 — Complete matrix/result | Pending | All six reviewed forms, mandatory controls and strict all-format recomputation. |
+| W4 — CLI and captures | Pending | Explicit product modes and eight independently inspected owned partial/full Windows cases. |
+| W5 — Qualification/evidence | Pending | Separate fixture/controlled tiers, mutations, old-output checks, fixed timing budgets and a verified archive. |
+
+```mermaid
+flowchart LR
+    I5b["2026-10-07: I5b finite corpora qualified"] --> I4["2026-10-07: native I4 fixed budgets qualified"]
+    I4 --> Design["2026-10-07: I5c design and plan delivered"]
+    Design --> W0["Pending: W0 model and independent oracle"]
+    W0 --> Runtime["Pending: W1–W4 binding, assessment, reports and captures"]
+    Runtime --> Evidence["Pending: W5 source-bound qualification"]
+```
+
+The dates identify recorded delivery milestones; the design arithmetic/decode
+checks above are their own narrower validation. This graph grants no acceptance
+credit to pending stages. Documentation link/navigation and whitespace checks
+pass; Rust behavior and capture campaigns were not rerun for this Markdown-only
+change. Resume at W0 rather than treating the design probes as its exit evidence.
 
 ## 2026-10-07 — Native I4 performance follow-up qualified
 

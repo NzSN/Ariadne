@@ -2,15 +2,16 @@
 
 ## Context and follow-up
 
-**Status.** Current stage/status plan as of 2026-10-07, including the selected I5b design, native I5a refresh and Windows I4 re-pin.
+**Status.** Current stage/status plan as of 2026-10-07. I5c fault-time address
+wrap is selected with a linked W0–W5 plan; all its runtime/model/capture/acceptance
+stages remain pending. Existing I5a/I5b and native I4 deliveries retain their scope.
 I0–I3 are implemented. I4 is validated for the recorded fixture/Linux tier, with
 active real-Windows correctness and both fixed budgets passing in the
 [native performance qualification](../docs/Ariadne/i4-performance-validation.md). I5a is implemented and passes
 its historical source/fixture qualification. The native refresh qualifies its source/fixture and controlled Windows tiers
 under the recorded dependency snapshot. I5b zero-base-plus-displacement has B0–B5
 implemented and qualified for the recorded source/fixture and controlled partial/
-full Windows tiers. Other I5
-hypotheses and I6–I7 remain unimplemented.
+full Windows tiers. I5c and other I5 hypotheses and I6–I7 remain unimplemented.
 
 **Why this document exists.** The [investigation design](../docs/Ariadne/investigation-layer-design.md)
 turns possible-producer analysis into questions an investigator can audit. This
@@ -23,6 +24,10 @@ I5b design/implementation sequence. It distinguishes
 implementation, exercised qualification and future capabilities.
 
 **Where to go next.**
+
+- [I5c design](../docs/Ariadne/i5c-address-wrap-design.md) and
+  [W0–W5 implementation plan](i5c-address-wrap.md) select the next fault-time
+  arithmetic question; no model, assessor or new capture is implemented yet.
 
 - [I5b design](../docs/Ariadne/i5b-zero-base-offset-design.md) and
   [B0–B5 implementation plan](i5b-zero-base-offset.md) scope the selected
@@ -68,6 +73,7 @@ The [documentation map](../docs/documentation-map.md) is optional navigation.
 | I4 — Qualification | Exact active 98-start Windows and separate Linux tiers pass | [Native performance result](../docs/Ariadne/i4-performance-validation.md): 1,692.696 ms / 2,000 ms CLI and 182.924 ms / 250 ms phases, with current-inventory regressions and verified archives. |
 | I5a — Zero-address consistency | Qualified for source/fixture and controlled Windows tiers | [Native qualification](../docs/Ariadne/i5a-native-qualification.md): 14 passing gates and both controlled capture modes under the selected snapshot; [H0–H5](i5a-zero-address.md) preserves the criteria. |
 | I5b — Zero base plus nonzero displacement | B0–B5 implemented and corpus-qualified | [Contracts](../docs/Ariadne/i5b-contracts.md) and [validation](../docs/Ariadne/i5b-validation.md): encoded GPR-base receipt, valid fault context and separate source/fixture/controlled-Windows gates. |
+| I5c — Fault-time address wrap | Selected design and W0–W5 plan; implementation pending | [Design](../docs/Ariadne/i5c-address-wrap-design.md) defines unsigned base plus signed encoded displacement, wide sum and inherited fault admission; [plan](i5c-address-wrap.md) starts with the model/oracle. |
 | Other I5 hypotheses | Unspecified beyond roadmap | Each needs its own evidence, support/refutation criteria and negative controls. |
 | I6 — Matched source/object context | Unimplemented | Define build/symbol/ABI/layout matching before making context or lifetime claims. |
 | I7 — Cross-capture comparison | Unimplemented | Define explicit correspondence and preserve separate snapshot provenance. |
@@ -79,6 +85,7 @@ flowchart LR
     Tier --> I5["I5a: zero-address consistency implemented"]
     I5 --> I5Windows["Qualified: controlled Windows I5a on pinned native setup"]
     I5 --> I5b["I5b: finite source/fixture + controlled Windows qualified"]
+    I5b --> I5c["I5c: address-wrap design selected; implementation pending"]
     I5 -. "later separate deliveries" .-> I6["I6: matched context"]
     I6 -.-> I7["I7: cross-capture comparison"]
 ```
@@ -266,11 +273,31 @@ only complete admitted premises permit consistency or refutation. This does
 not assess historical null derivation, object lifetime or actual branch history.
 The design is distinct from I5a zero-start, and neither delivery closes I4.
 
+## Selected I5c — Fault-time address wrap
+
+The [selected design](../docs/Ariadne/i5c-address-wrap-design.md) asks whether the
+selected instruction's unsigned base plus signed encoded displacement leaves
+`[0, 2^64-1]` before reduction. The [W0–W5 plan](i5c-address-wrap.md) owns its
+question-level model, exact binding, finite MOV matrix, strict result/product
+modes and separate fixture/controlled-capture qualification. Every stage remains
+pending; this is a documentation delivery.
+
+The first profile retains the current lower-range fault-access admission.
+Upper wrap into that range can support the assessment; ordinary no-wrap cases
+can refute it under complete premises. Mathematical underflow produces an
+upper-range EA and keeps the fault assessment unknown, even when conditional
+arithmetic facts can be retained. Unsigned carry from the two's-complement
+bits of a negative displacement is not the selected predicate.
+
+This does not diagnose earlier executed arithmetic, general noncanonical
+addresses, object lifetime or root cause. I4/I5a/I5b budgets, capture pins and
+historical acceptance records are unchanged.
+
 ## Other I5, I6 and I7 deliveries
 
 | Stage | Capability | Required additional work |
 | --- | --- | --- |
-| Other I5 | Arithmetic/noncanonical hypotheses and model-relative discrimination beyond I5b | Separate support/refutation criteria and valid context. Lifetime hypotheses require matched allocation/free evidence; branch discrimination requires accepted transitions/completeness. |
+| Other I5 | Earlier arithmetic/noncanonical hypotheses and model-relative discrimination beyond the selected I5c profile | Separate support/refutation criteria and valid context. Lifetime hypotheses require matched allocation/free evidence; branch discrimination requires accepted transitions/completeness. |
 | I6 | Matched source/function/object context | Explicit build/symbol/ABI/layout matches. Context can annotate identities; it cannot supply missing runtime bytes or observed execution. |
 | I7 | Cross-capture comparison | Explicit correspondence across independently qualified captures, with no joins by naked VA and no assumed chronology. |
 

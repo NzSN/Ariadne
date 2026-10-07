@@ -10,6 +10,10 @@
 
 **Where to go next.**
 
+- [Selected I5c address-wrap design](i5c-address-wrap-design.md) and
+  [W0–W5 plan](../../Plans/i5c-address-wrap.md) — the next arithmetic question;
+  implementation, model and controlled-capture qualification remain pending.
+
 - [Selected I5b design](i5b-zero-base-offset-design.md) and
   [implementation plan](../../Plans/i5b-zero-base-offset.md) — delivered
   fault-time machine-code debugging assessment; [implemented contracts](i5b-contracts.md)
@@ -33,6 +37,7 @@ under `Plans/completed/`.
 | Minidump input and CLI | [Input guide](modules/input.md), [examples](minidump-investigator-examples.md), [report schema](stage-c-report-schema.md) |
 | BAP semantics | [Backend guide](modules/bap.md), [protocol and projection design](bap-semantic-backend-design.md), [source review](bap-projection-source-review.md) |
 | Fault-address investigation | [Module guide](modules/investigation.md), [producer contracts](investigation-contracts.md), [I5a zero-address contracts](i5a-contracts.md), [design](investigation-layer-design.md). |
+| Planned address-wrap assessment | [I5c design](i5c-address-wrap-design.md) and [W0–W5 plan](../../Plans/i5c-address-wrap.md); no implemented interface or acceptance yet. |
 | Zero-base-plus-displacement assessment | [I5b contracts](i5b-contracts.md), [source review](i5b-source-review.md), [validation](i5b-validation.md), [B0–B5 plan](../../Plans/i5b-zero-base-offset.md). |
 | Stateflow and supplied LLVM IR | [Stage E contracts](stage-e-report-contracts.md), [IR guide](modules/ir.md), [report guide](modules/reports.md) |
 | Rendering and analysis concepts | [Rendering](result-rendering.md), [static-analysis learning guide](static-analysis-learning.md) |

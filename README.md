@@ -10,6 +10,10 @@
 
 **Where to go next.**
 
+- [I5c address-wrap design](docs/Ariadne/i5c-address-wrap-design.md) and
+  [implementation plan](Plans/i5c-address-wrap.md) — selected next fault-time
+  arithmetic assessment; all runtime/model/capture qualification is pending.
+
 - [I5b machine-code debugging contracts](docs/Ariadne/i5b-contracts.md) and
   [qualification](docs/Ariadne/i5b-validation.md) — exact zero-base-plus-displacement
   assessment, retained capture evidence and its finite acceptance scope.

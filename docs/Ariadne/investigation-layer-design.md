@@ -3,10 +3,13 @@
 ## Context and follow-up
 
 **Status.** First question implemented and repaired through `c9eb4c5`; I5a is
-implemented in the 2026-10-03 working tree. The [Windows I4 re-pin](i4-windows-repin-validation.md) passes correctness
-but exceeds the unchanged CLI budget. I5b has a selected design and detailed plan
+implemented in the 2026-10-03 working tree. The [Windows I4 re-pin](i4-windows-repin-validation.md) passes correctness;
+the later [performance qualification](i4-performance-validation.md) meets its
+unchanged CLI budget. I5b has a selected design and detailed plan
 as of 2026-10-07; B0–B5 are implemented and corpus-qualified.
-Other I5 hypotheses and I6–I7 remain pending.
+I5c address wrap has a [selected design](i5c-address-wrap-design.md) and
+[W0–W5 plan](../../Plans/i5c-address-wrap.md); all its implementation stages,
+other I5 hypotheses and I6–I7 remain pending.
 
 **Why this document exists.** [Real-capture slice](priority-1-real-capture-validation.md) demonstrates useful possible origins but leaves their explanation to the investigator.
 
@@ -14,14 +17,18 @@ Other I5 hypotheses and I6–I7 remain pending.
 
 **Where to go next.**
 
+- [I5c address-wrap design](i5c-address-wrap-design.md) and
+  [W0–W5 implementation plan](../../Plans/i5c-address-wrap.md) — exact next
+  arithmetic predicate, inherited range admission and pending qualification.
+
 - [I5b zero-base-plus-displacement design](i5b-zero-base-offset-design.md) and
   [B0–B5 implementation plan](../../Plans/i5b-zero-base-offset.md) define the
-  selected next hypothesis, including the missing decoded-base receipt.
+  delivered zero-base hypothesis, including its retained decoded-base receipt.
 - [Windows I4 replacement plan](../../Plans/i4-windows-repin.md) — replaces the
   unavailable original capture with the controlled 98-instruction case while
   preserving the separate timing and correctness criteria.
 
-- [Current stage plan](../../Plans/investigation-layer.md) — separates delivered I0–I3, open I4 qualification and later I5–I7 work.
+- [Current stage plan](../../Plans/investigation-layer.md) — separates qualified I0–I4 and I5a/I5b, selected I5c and later I5–I7 work.
 - [I5a zero-address design](i5a-zero-address-design.md) — defines the implemented numeric hypothesis, its required exception context and its limited conclusions; [contracts](i5a-contracts.md) document the interface.
 - [Implemented contracts](investigation-contracts.md) — define query identity, claim classes and evidence requirements.
 - [First delivery](investigation-validation.md) — records the exercised tier and open Windows acceptance.
@@ -187,7 +194,8 @@ External context must record its match evidence and role.
 | --- | --- |
 | Does the selected access start at virtual address zero? | The [implemented I5a contract](i5a-contracts.md) binds validated exception-context operands and exact site/access association under the admitted scalar MOV profile. Controlled Windows acceptance is recorded in the [native qualification](i5a-native-qualification.md). No null-pointer root-cause claim. |
 | Is the fault-time encoded base zero with a nonzero displacement? | Implemented [I5b contracts](i5b-contracts.md), [design](i5b-zero-base-offset-design.md) and [B0–B5 plan](../../Plans/i5b-zero-base-offset.md); simple base/displacement profile, decoded-role evidence and valid context. [Aggregate qualification](i5b-validation.md) passes within the declared finite corpus; historical null derivation is outside its claim. |
-| What about historical null derivation, invalid arithmetic or noncanonical addresses? | Separate later hypotheses with their own definitions and architectural/context premises; neither I5a nor the selected I5b design answers them. |
+| Did the selected base-plus-signed-displacement calculation wrap? | Selected [I5c design](i5c-address-wrap-design.md) and [W0–W5 plan](../../Plans/i5c-address-wrap.md), with all implementation/model/capture stages pending. Lower-range fault admission limits v1 definite answers to upper wrap and no wrap. |
+| What about historical null derivation, earlier arithmetic errors or noncanonical addresses? | Separate later hypotheses with their own definitions and architectural/context premises; the selected I5c question does not establish historical execution or general canonicality. |
 | Which possible producers and inputs contribute to the selected address operand? | Delivered by the [first-question contract](investigation-contracts.md). Selecting the actually executed alternative still needs additional evidence. |
 | Is a use-after-free or object-lifetime violation supported? | Object identity and lifetime evidence such as retained allocator/runtime events; a suspicious pointer or slice alone is insufficient. |
 | Which branch alternatives remain possible under known facts? | Accepted transition relations and completeness premises; retain unknown feasibility where these are absent. |
