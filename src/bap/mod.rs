@@ -1,5 +1,6 @@
 //! Optional BAP-owned instruction lifting and conservative projection.
 mod address;
+mod admission;
 mod ast;
 pub mod core_adapter;
 pub mod core_protocol;

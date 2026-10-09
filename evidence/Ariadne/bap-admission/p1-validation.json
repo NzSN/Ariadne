@@ -1,0 +1,32 @@
+{
+  "schema": "ariadne.bap-admission-p1/v1",
+  "passed": true,
+  "scope": "Four observed forms and thirteen frozen boundary encodings; pre-P2 source snapshot, not full P4 acceptance.",
+  "projection": "bap-bit-provenance-v3",
+  "corpusCases": 54,
+  "initialEncodings": 13,
+  "targets": [
+    "windows-amd64",
+    "linux-amd64"
+  ],
+  "checks": [
+    "two independent corpus/unknown library tests",
+    "installed-provider exact effects/address/undefined-flag expectations",
+    "native producer/prefix/alias controls",
+    "hostile transport",
+    "decode/control/operand disagreements"
+  ],
+  "sourceHashes": {
+    "src/bap/projection.rs": "68656074dd2e008a61e61bfb850c4aa45104df610bbbe7de80752d5b1351e908",
+    "src/bap/prepare.rs": "1953d07b9e8d9ecd016c7a403710e80a2228b29981198c7c97d6ef0160fb1623",
+    "src/investigation/zero_address.rs": "95fb3f1015de3d284fc6c799737dbb46d8440d24f8f6eb0435b93eec62f0d740",
+    "tests/bap/native.rs": "13a117d06161180b9b122b6047ed49663cd18472000e6a9beeb35b6dbe413373",
+    "tests/bap/fixtures/corpus.json": "fcf42088942ad647c2d6f920c8c0acec796b81baef5e1d0426a7d67e43a0e522"
+  },
+  "contractSha256": "6e34d4283c9529e00e5059642220c15ac3ae5cc27f8c08dad73848ad7aa9ad4b",
+  "remaining": [
+    "P2 capability admission",
+    "P3 opaque ordinary continuation",
+    "P4 full regression/measurement/capture qualification"
+  ]
+}

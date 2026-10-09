@@ -2,10 +2,12 @@
 
 ## Context and follow-up
 
-**Status.** Current Stage 1 lifting/transport/projection contract. Native Stage 2
-analysis is [qualified](bap-core-qualification.md) and selected by default;
-Rust remains the reference and explicit rollback. BAP workload timing is
-unlimited, with investigation budgets qualified separately.
+**Status.** V3 capability admission and conservative ordinary continuation are
+implemented. The [execution checkpoint](bap-admission-checkpoint.md) records
+focused P0–P3 passes and incomplete P4 acceptance; older v2 source-bound
+qualification does not qualify this changed snapshot. Native analysis remains
+the CLI default with explicit Rust rollback. BAP timing remains unlimited;
+investigation budgets retain their separate criteria.
 
 **Why this document exists.** [BAP assessment](bap-core-refactor-assessment.md) motivates an isolated provider feeding the existing analyzer.
 
@@ -13,9 +15,11 @@ unlimited, with investigation budgets qualified separately.
 
 **Where to go next.**
 
+- [V3 admission contract](bap-admission-contract.md) — implemented capability/continuation rules; P4 qualification remains separate from the frozen P0 and focused P1–P3 checks.
+
 - [Projection admission and coverage plan](../../Plans/bap-projection-admission.md) —
-  pending P0–P4 work to admit the observed parser forms, replace opcode-name
-  restrictions and retain conservative ordinary continuation.
+  records delivered P0–P3 and remaining mutation/aggregate/measurement/external
+  qualification clauses in P4.
 
 
 - [Complete Stage 2 qualification](bap-core-qualification.md) — records native default adoption, explicit Rust rollback, exact source/tool scope and the passing aggregate.
@@ -123,22 +127,27 @@ address/value dependencies, only may-define `memory:any`, and never must-kill
 that alias cell. Unsupported operations, unknown outputs, unfamiliar state
 and unresolved control retain gaps; calls retain opaque all-location effects.
 
-The finite whitelist admits the 30 opcode forms exercised by the 41-case
-corpus: scalar register/immediate moves, selected loads/stores/extensions,
-LEA, ADD/ADC/CMP/INC, NOT, CMOV, PUSH/POP, short Jcc/JMP, register JMP
-and selected shifts. LOCK, REP, segment and address-size overrides are
-guarded. The plain `90` NOP is the separately reviewed empty-BIL no-effect
-case. Other unsupported forms stop conservatively, without semantic fallback. This list is exercised projection
-scope rather than architectural instruction-step acceptance.
+Production admission now uses `bap-bit-provenance-v3`. Supported typed BIL,
+architectural namespace, widths, virtual bindings, prefixes and compatible
+control/operand facts replace generic opcode-name membership. The current
+finite regression corpus has 58 exact cases and 37 projected forms, including
+the four observed parser forms and paired short/long control encodings. These
+are exercised cases, not a new exhaustive permission list or an ISA proof.
 
-**Planned successor, not current behavior.** The
-[admission and coverage plan](../../Plans/bap-projection-admission.md) first
-validates SUB64ri8, MOVZX32rm8, XOR64rr and CMP8mi. It then replaces opcode-name
-membership with typed BIL capability, operand/control and effect checks. A
-separate stage retains structural continuation for validated ordinary control
-with unknown data effects, while preserving gaps and no definite kills. Empty
-semantics, malformed inputs and unresolved control do not gain invented
-fallthrough. All P0–P4 implementation and qualification remains pending.
+LOCK, REP, segment/address-size overrides, unmodeled architectural state and
+control/special/loop semantics remain explicit exclusions. The exact `90` NOP
+is the reviewed empty-BIL exception. Empty CLC remains unsupported despite its
+known hardware effect. Malformed type/width/binding and resource failures abort
+the query; unavailable/control-uncertain semantics stop conservatively.
+
+When validated ordinary control and typed data-only BIL have unknown effects,
+preparation retains the structural next edge, all tracked uses/may-defs, no
+must-defs and `opaque-ordinary` / `unsupported-data-effects` diagnostics. Rust
+and native capture admission validate that outcome; all-format reports retain
+the gaps. No LLVM effect fallback is introduced. The
+[v3 contract](bap-admission-contract.md) freezes the failure matrix and profile
+migration. [P4 qualification remains incomplete](bap-admission-checkpoint.md);
+focused passes do not inherit the earlier aggregate's source identity.
 
 LLVM MC remains the decoded control/operand reference. Admission requires
 matching consumed bytes/length and compatible typed control facts. The

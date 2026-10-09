@@ -2,8 +2,15 @@
 
 ## Context and follow-up
 
-**Status.** P0–P4 plan written on 2026-10-09 against `e648055`. All implementation
-and qualification stages are pending. This document changes no runtime policy.
+**Status.** Execution checkpoint, 2026-10-10. P0–P3 are implemented and pass
+focused independent, installed-provider and native-continuation checks. Production
+now uses `bap-bit-provenance-v3`, typed capability admission and conservative
+ordinary continuation. P4 aggregate acceptance is **not complete**: its first
+prefix mutant was behaviorally rejected but was not credited by the harness.
+That classifier and the post-commit v2 source pin are repaired and checked
+against retained evidence; the full mutation/workload/aggregate must be rerun.
+The external Electron capture/query tier is unexercised; its artifact path was
+requested. The original plan was written on 2026-10-09 against `e648055`.
 
 **Why this document exists.** The current [BAP projection contract](../docs/Ariadne/bap-semantic-backend-design.md#projection)
 rejects forms outside a finite opcode whitelist before interpreting their BIL.
@@ -19,6 +26,11 @@ data effects are unknown. Each change has its own source-bound acceptance gates.
 
 **Where to go next.**
 
+- [V3 admission contract](../docs/Ariadne/bap-admission-contract.md) — frozen
+  independent expectations, failure classes and the explicit profile migration.
+- [Execution checkpoint](../docs/Ariadne/bap-admission-checkpoint.md) — exercised
+  checks, retained partial evidence and the exact remaining P4 work.
+
 - [Backend design](../docs/Ariadne/bap-semantic-backend-design.md) — current
   protocol, projection invariants and the explicitly pending admission extension.
 - [Pinned binding review](../docs/Ariadne/bap-projection-source-review.md) —
@@ -30,13 +42,51 @@ data effects are unknown. Each change has its own source-bound acceptance gates.
   [plan index](README.md) — distinguish this pending extension from delivered
   Stage 1/Stage 2 qualification.
 
-**What remains unresolved.** No new forms, generic admission, diagnostic policy
-or ordinary opaque continuation are implemented or qualified here. Broader BIL
-coverage does not establish an executed path, a correct saved-slot lifetime,
-all indirect targets, precise memory aliases or the cause of the bad RSI value.
-Universal lifter/ISA correctness and analysis refinement remain separate limits.
+**What remains unresolved.** P4 has no passing aggregate/native-default delivery
+record for this changed source snapshot. Its mutation classifier, remaining
+aggregate gates, fixed-budget measurements and external Electron query need
+completion. Focused passes and historical v2 qualification do not establish
+full P4 acceptance. Broader BIL coverage does not establish an executed path,
+a correct saved-slot lifetime, all indirect targets, precise memory aliases or
+the cause of the bad RSI value. Universal lifter/ISA correctness and analysis
+refinement remain separate limits.
 
 For the wider context, see the [documentation map](../docs/documentation-map.md).
+
+## Execution ledger (2026-10-10)
+
+| Stage | Current state | Evidence / next action |
+| --- | --- | --- |
+| P0 | Completed contract/baseline freeze before runtime edits. | [Independent contract](../tests/bap/fixtures/admission/contract.json), [freeze receipt](../evidence/Ariadne/bap-admission/p0-contract-freeze.json) and actual four-form rejection reports. |
+| P1 | Four observed forms and thirteen boundary encodings pass independent effects/address/flag checks on both targets. | [Bounded P1 record](../evidence/Ariadne/bap-admission/p1-validation.json); retained results qualify their earlier source hashes. |
+| P2 | Generic opcode whitelist removed; typed BIL/namespace/width/control/operand checks implemented. | [Bounded P2 record](../evidence/Ariadne/bap-admission/p2-validation.json); current corpus has 58 cases and 37 projected forms. Empty CLC remains a recorded lifter gap. |
+| P3 | Ordinary data-only unknowns continue with all-location possible effects, no definite kills and visible gaps. Rust/native capture admission and report binding enforce the outcome. | Producer–opaque–consumer, direct native tampering, malformed/resource and hidden-control tests pass. Earlier and opaque origins both survive. |
+| P4 | In progress; aggregate acceptance not achieved. | Root checks, 330 native replay observations, 12 algorithm mutants and 8 boundary mutants pass. The first run stopped at an uncredited prefix assertion; classifier and baseline pin repairs still need full requalification. External capture is unavailable. |
+
+The v3 profile intentionally changes semantic/content identities. A frozen v2
+source build reproduces all 24 historical output hashes; the explicit v3
+migration comparison passes with only declared profile/derived-ID changes.
+This is not a claim that v3 bytes are unchanged historical v2 outputs.
+
+### Resume order
+
+1. Preserve the [failed aggregate](../evidence/Ariadne/bap-admission/p4-rejected/report.json)
+   and prefix receipt. The classifier now recognizes the exact observed assertion
+   without changing expected rejection or crediting compilation/timeouts; verify
+   it in a fresh complete campaign.
+2. The v2 comparison is pinned to `ebb2e534e8da339f498f20d0a9e1e0b8506a3bdd`
+   and matches all five P0 source hashes. Reproduce all 24 historical outputs
+   using that source pin again; never use the new implementation HEAD as v2.
+3. Run the complete 25-case producer/adapter/native-capture mutation campaign
+   and the source-frozen [P4 runner](../tools/check_bap_admission.py). Refresh
+   stale nested records; retain failures with `passed=false`.
+4. Complete fixed I4/I5 measurements and the owned query measurements, including
+   preparation/analysis/render phases, limits and report sizes. No budget waiver
+   follows from the unlimited BAP timing policy.
+5. Locate the original Electron artifact or independently bound scoped derivative
+   and its Scanner/PreParser root/query witnesses. Preserve original/derivative
+   hashes, copied context and per-range equality; raw customer files remain external.
+6. Update this ledger only to the exercised tiers and seal the final evidence.
 
 ## Delivery intent and preserved boundaries
 
@@ -267,10 +317,10 @@ evidence. Update design, guides and ledgers only to the stage actually achieved.
 
 ## Completion checklist
 
-- [ ] P0 admission, effect and diagnostic contract frozen with independent cases.
-- [ ] P1 four observed forms and boundary/negative controls qualified.
-- [ ] P2 opcode-name whitelist removed; capability/operand/control checks qualified.
-- [ ] P3 conservative ordinary continuation and visible gaps qualified.
+- [x] P0 admission, effect and diagnostic contract frozen with independent cases.
+- [x] P1 four observed forms and boundary/negative controls qualified.
+- [x] P2 opcode-name whitelist removed; capability/operand/control checks qualified.
+- [x] P3 conservative ordinary continuation and visible gaps qualified.
 - [ ] P4 source/fixture and Rust release-runtime tiers qualified.
 - [ ] P4 native parity/default tier qualified, or explicitly retained as pending.
 - [ ] Electron captured-query results and subsequent coverage gaps preserved.

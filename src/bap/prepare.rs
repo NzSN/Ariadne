@@ -12,7 +12,7 @@ use std::{
     path::{Path, PathBuf},
     time::{Duration, Instant},
 };
-const PROJECTION: &str = "bap-bit-provenance-v2";
+const PROJECTION: &str = "bap-bit-provenance-v3";
 #[derive(Clone, Copy, Debug, Default)]
 pub struct Metrics {
     pub reference_processes: u64,
@@ -236,7 +236,7 @@ impl Backend {
                     reason: GapReason::OpaqueEffects,
                 });
             } else {
-                let opcode = lift.opcode.as_deref().unwrap_or("");
+                let opcode = site.evidence.opcode.as_deref().unwrap_or("");
                 let registers: Vec<_> = site
                     .evidence
                     .operands
@@ -249,7 +249,7 @@ impl Backend {
                         }
                     })
                     .collect();
-                let destination = registers.first().copied();
+                let destination = crate::bap::admission::decoded_destination(&site.evidence);
                 match crate::bap::projection::project_with_destination(
                     &lift.bil,
                     opcode,
@@ -271,7 +271,14 @@ impl Backend {
                             || (registers.len() == 2
                                 && projection.uses.is_superset(&registers[1].reads())
                                 && projection.may_defs == registers[0].replacements());
-                        if actual.iter().any(|a| !allowed.contains(a)) {
+                        if actual.iter().any(|a| !allowed.contains(a))
+                            || (kind == InstructionKind::Ordinary && !projection.targets.is_empty())
+                            || (matches!(
+                                kind,
+                                InstructionKind::Conditional | InstructionKind::Jump
+                            ) && (projection.targets.is_empty()
+                                || projection.targets.iter().any(Option::is_none)))
+                        {
                             semantic.status = "control-disagreement".into();
                             semantic.gaps.push("control-disagreement".into());
                             stop(site, options, va);
@@ -285,7 +292,7 @@ impl Backend {
                             site.instruction.uses = projection.uses;
                             site.instruction.may_defs = projection.may_defs;
                             site.instruction.must_defs = projection.must_defs;
-                            if ["TEST64rr", "TEST8rr"].contains(&opcode) {
+                            if ["TEST64rr", "TEST8rr", "XOR64rr"].contains(&opcode) {
                                 // Separately reviewed logical-instruction AF undefinedness;
                                 // the generic BIL Unknown alone establishes no ISA label.
                                 site.evidence.undefined_flags.insert("flag:af".into());
@@ -303,8 +310,31 @@ impl Backend {
                         }
                     }
                     Err(e) => {
+                        if crate::bap::admission::fatal(&e) {
+                            return Err(e);
+                        }
                         semantic.gaps.push(e.to_string());
-                        stop(site, options, va);
+                        if kind == InstructionKind::Ordinary
+                            && crate::bap::admission::ordinary_unknown(
+                                &lift.bil,
+                                &site.evidence.bytes,
+                                &e,
+                            )
+                        {
+                            semantic.status = "opaque-ordinary".into();
+                            semantic.gaps.push("unsupported-data-effects".into());
+                            site.instruction.uses = options.catalogue.locations();
+                            site.instruction.may_defs = options.catalogue.locations();
+                            site.instruction.must_defs.clear();
+                            site.evidence.quality = EffectQuality::Opaque;
+                            site.evidence.rule = Some("bap-opaque-ordinary-v3".into());
+                            site.gaps.push(PreparationGap {
+                                address: va,
+                                reason: GapReason::OpaqueEffects,
+                            });
+                        } else {
+                            stop(site, options, va);
+                        }
                     }
                 }
             }

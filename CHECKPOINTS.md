@@ -36,6 +36,19 @@ I4 is re-pinned and the native performance follow-up meets its fixed 2-second
 CLI limit at 1,692.696 ms for the exact controlled query. BAP lifting stays trusted
 and the independent ISA track retired.
 
+## 2026-10-10 — V3 admission implemented; P4 aggregate incomplete
+
+Executed P0–P3 of the [projection-admission plan](Plans/bap-projection-admission.md):
+four-form projection, typed capability admission, no generic opcode whitelist,
+ordinary data-only continuation with all-location possible effects/no kills and
+Rust/native/report contract checks. The [checkpoint](docs/Ariadne/bap-admission-checkpoint.md)
+retains 58 cases/37 forms, 104 independent numeric comparisons, root checks,
+330 native observations, twelve algorithm and eight boundary rejections.
+P4 is not accepted: the first prefix mutant is rejected by the test but its
+custom assertion text is not credited by the harness. Final mutation/aggregate,
+fixed-budget/phase and bound external Electron qualification remain unfinished.
+Older v2 evidence remains historical; no root-cause or release claim is made.
+
 ## 2026-10-09 — BAP documentation synchronized with current implementation
 
 Audited BAP plans, helper/module guides, assurance and consumer documentation

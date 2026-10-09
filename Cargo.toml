@@ -48,6 +48,11 @@ path = "src/bin/bap-model-case.rs"
 required-features = ["validation"]
 
 [[bin]]
+name = "bap-admission-validate"
+path = "src/bin/bap_admission_validate.rs"
+required-features = ["validation"]
+
+[[bin]]
 name = "ariadne-bench"
 path = "src/bin/ariadne-bench.rs"
 required-features = ["bench"]

@@ -30,12 +30,16 @@ def retained(path, name):
         raise RuntimeError("stale, incomplete, or nonpassing retained record: " + str(path))
     if name in {"measurements", "equivalence"}:
         schema = {"measurements": "ariadne.i5a-fixture-measurements/v2",
-                  "equivalence": "ariadne.i5a-cli-equivalence/v2"}[name]
+                  "equivalence": "ariadne.i5a-cli-equivalence/v3"}[name]
         if (data.get("schema") != schema or data.get("analysisBackend") != "bap"
                 or data.get("analysisProfile") != PROFILE or data.get("defaultNativeVerified") is not True
                 or data.get("toolsStable") is not True or data.get("tools") != tool_hashes()
                 or data.get("helperManifest") != native_manifest()):
             raise RuntimeError("retained record lacks exact native source/tool binding: " + str(path))
+        if name == "equivalence" and (data.get("historicalOracleVerified") is not True
+                or data.get("projectionMigrationVerified") is not True
+                or data.get("validatorSha256") != sha(ROOT / "target/release/bap-admission-validate")):
+            raise RuntimeError("retained equivalence lacks validated profile migration")
     elif name == "investigation":
         if data.get("qualificationEnvironment") != active_identity():
             raise RuntimeError("retained investigation qualification dependency differs")

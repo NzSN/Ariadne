@@ -1,0 +1,4 @@
+core-good: passed; 168 observations
+core-wrong-digest: rejected; 0 observations
+machine-state-good: passed; 162 observations
+machine-state-wrong-digest: rejected; 0 observations

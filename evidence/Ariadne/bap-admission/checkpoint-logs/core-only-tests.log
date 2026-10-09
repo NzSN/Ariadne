@@ -1,0 +1,129 @@
+
+running 3 tests
+test llvm_mc::protocol::tests::rejects_malformed_records ... ok
+test effects::rules::stage_a_tests::memory_immediate_rule_rejects_invalid_payload_and_width_claims ... ok
+test effects::rules::priority4_tests::control_only_bindings_reject_unreviewed_shapes_and_prefixes ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 18 tests
+test captured_decode_failure_does_not_use_file_fallback ... ok
+test captured_jit_bytes_need_no_file_and_binary_ignores_capture ... ok
+test calls_fixture_keeps_graph_visibility_discovery_and_dataflow_distinct ... ok
+test closed_recovery_can_have_missing_slice_seeds ... ok
+test empty_locations_and_seeds_are_valid ... ok
+test binary_fixture ... ok
+test closed_fixture ... ok
+test entry_values_do_not_become_producer_instructions ... ok
+test dump_fixture ... ok
+test empty_targets_need_obligations_only_when_uncertified ... ok
+test full_u64_addresses_are_preserved_without_arithmetic ... ok
+test owned_request_and_result_are_independent_of_caller_mutations ... ok
+test malformed_requests_are_rejected_before_analysis ... ok
+test may_writes_preserve_origins_and_must_writes_kill_them ... ok
+test pipeline_fixture_and_eight_transition_witness ... ok
+test two_labels_to_one_destination_are_distinct_edges ... ok
+test loop_fixture ... ok
+test self_loop_terminates_and_entry_and_instruction_origins_do_not_collide ... ok
+
+test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 18 tests
+test arithmetic_matrix_checks_widths_flags_ties_and_immediates ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test batched_preparation_preserves_every_record_and_reports_measurement ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test carry_dependency_survives_increment_and_cmp_does_not_write_registers ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test control_flags_calls_and_unrecognized_control_have_distinct_evidence ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test dump_provenance_and_missing_targets_survive_preparation ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test extended_register_views_and_immediate_widths_are_preserved ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test frozen_opcode_matrix_has_real_native_evidence_and_no_unexercised_rules ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test memory_address_sizes_rip_and_prefix_rejections ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test memory_immediate_mov_preserves_signed_payload_and_address_size ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test memory_immediate_mov_uses_address_registers_and_only_may_writes_memory ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test memory_immediate_rule_rejects_unreviewed_prefixes_without_stealing_register_mov ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test memory_immediate_store_keeps_address_producers_and_weak_memory_origins ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test memory_keeps_possible_aliases_and_address_dependencies_lea_does_not_read_memory ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test mov_slice_excludes_unrelated_instruction_and_preserves_legacy_behavior ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test opaque_control_forms_preserve_prior_origins_and_expose_uncertainty ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test partial_writes_preserve_other_bytes_and_dword_replaces_upper_half ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test catalogue_is_disjoint_and_views_distinguish_reads_from_writes ... ok
+test prepare_rejects_independent_overlapping_locations_before_decoder_launch ... ok
+
+test result: ok. 2 passed; 0 failed; 16 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test checked_batch_rejects_wrong_version_target_and_absent_header ... ok
+test preparation_bounds_both_output_streams_and_reports_process_failure ... ok
+test preparation_rejects_missing_duplicate_unexpected_and_contradictory_rows ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+
+running 1 test
+test generated_requests_match_independent_graph_and_path_oracles ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.11s
+
+
+running 4 tests
+test four_block_phi_memory_and_call_fixture_matches_the_model ... ok
+test multiple_phi_nodes_are_valid_before_non_phi_instructions ... ok
+test empty_seed_and_unaccepted_memory_predecessors_remain_explicit ... ok
+test verifier_phi_predecessors_and_memory_domains_are_contract_checks ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 5 tests
+test binary_control_flow_and_unknown_effects ... ignored, requires the pinned LLVM MC decoder; run native/llvm_mc/check.sh
+test dump_capture_wins_and_failed_capture_does_not_fall_back ... ignored, requires the pinned LLVM MC decoder; run native/llvm_mc/check.sh
+test identical_bytes_from_binary_and_trusted_dump_have_identical_summaries ... ignored, requires the pinned LLVM MC decoder; run native/llvm_mc/check.sh
+test indirect_call_retains_summary_and_unknown_target ... ignored, requires the pinned LLVM MC decoder; run native/llvm_mc/check.sh
+test system_and_transactional_transfers_do_not_invent_fallthrough ... ignored, requires the pinned LLVM MC decoder; run native/llvm_mc/check.sh
+
+test result: ok. 0 passed; 0 failed; 5 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 5 tests
+test formal_five_node_fixture_matches_stateflow_schedule_and_observations ... ok
+test incomplete_and_unreached_sources_keep_unwitnessed_edges_unknown ... ok
+test joins_loops_and_equal_valuations_keep_distinct_state_id_paths ... ok
+test invalid_domains_frames_edges_and_terminal_states_are_rejected_before_analysis ... ok
+test recovery_handoff_keeps_summary_edge_and_separate_call_obligation ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 8 tests
+test graphviz_parses_escaped_labels_without_extra_nodes_or_edges ... ignored, requires Graphviz; set ARIADNE_DOT to the dot executable
+test initial_and_intermediate_state_fields_are_not_labeled_done ... ok
+test metadata_is_quoted_and_cannot_create_output_records ... ok
+test missing_seed_does_not_become_a_recovery_failure_or_disappear ... ok
+test every_recovery_gap_and_captured_provenance_survives_rendering ... ok
+test complete_result_is_readable_deterministic_and_unchanged ... ok
+test parallel_control_labels_survive_and_reaching_facts_do_not_invent_edges ... ok
+test unvisited_callee_and_failed_continuation_are_distinguished ... ok
+
+test result: ok. 7 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 2 tests
+test src/render.rs - render (line 5) ... ok
+test src/lib.rs - (line 7) ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+all doctests ran in 0.47s; merged doctests compilation took 0.46s
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.05s
+     Running unittests src/lib.rs (target/debug/deps/ariadne-0ead5ac9b504791c)
+     Running tests/conformance.rs (target/debug/deps/conformance-140c2cb06043adb3)
+     Running tests/effects.rs (target/debug/deps/effects-09519736934c8c1d)
+     Running tests/effects_protocol.rs (target/debug/deps/effects_protocol-8ce18e299aac0f71)
+     Running tests/generated.rs (target/debug/deps/generated-b5448657a0640c3c)
+     Running tests/llvm_ir.rs (target/debug/deps/llvm_ir-5b2ea3f4433867dd)
+     Running tests/llvm_mc.rs (target/debug/deps/llvm_mc-96cc6aaf7dd45723)
+     Running tests/machine_state.rs (target/debug/deps/machine_state-371516833c28d3ba)
+     Running tests/render.rs (target/debug/deps/render-ec00c75e4950f8b8)
+   Doc-tests ariadne

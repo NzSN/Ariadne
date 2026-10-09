@@ -1,0 +1,54 @@
+{
+  "schema": "ariadne.admission-controlled-fixtures/v1",
+  "captureKind": "synthetic tool-produced minidump; not external Electron capture",
+  "rows": [
+    {
+      "name": "opaque-windows.dmp",
+      "entry": "0x00007ff700001000",
+      "seed": "0x00007ff700001005",
+      "sha256": "46c52960a7fcd3441491b2d85c7fab695be3a2f5874d466534b18f2248051b4d",
+      "kind": "opaque",
+      "expectedDecoded": 4
+    },
+    {
+      "name": "opaque-linux.dmp",
+      "entry": "0x0000000000401000",
+      "seed": "0x0000000000401005",
+      "sha256": "8d7642e77995c8ab228e8686026a41d186ba1ff89f0448455999596a87b562fd",
+      "kind": "opaque",
+      "expectedDecoded": 4
+    },
+    {
+      "name": "observed-windows.dmp",
+      "entry": "0x00007ff700001000",
+      "seed": "0x00007ff70000100b",
+      "sha256": "2a5a7dbf9de9ac33e09c7506acee44a025ff671ad6705228469e06915e7b30a8",
+      "kind": "observed",
+      "expectedDecoded": 5
+    },
+    {
+      "name": "observed-linux.dmp",
+      "entry": "0x0000000000401000",
+      "seed": "0x000000000040100b",
+      "sha256": "95d8c7ee92ada324a64643c02bc43e616befdd7e1b1cb5717f3676615eefeb83",
+      "kind": "observed",
+      "expectedDecoded": 5
+    },
+    {
+      "name": "empty-windows.dmp",
+      "entry": "0x00007ff700001000",
+      "seed": "0x00007ff700001004",
+      "sha256": "fea7e5829e8388cb8a736d3169873a3870038b3210b7d82c9b9839d6a242e523",
+      "kind": "empty",
+      "expectedDecoded": 1
+    },
+    {
+      "name": "empty-linux.dmp",
+      "entry": "0x0000000000401000",
+      "seed": "0x0000000000401004",
+      "sha256": "ec52ad32d17b7c4a263e67f49cb233e04f88e61a50455351acf2791f416e0800",
+      "kind": "empty",
+      "expectedDecoded": 1
+    }
+  ]
+}

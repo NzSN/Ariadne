@@ -1,0 +1,6 @@
+stage-b-linux bap 308.19 ms {'decoded': 4, 'edges': 3, 'slice': 2, 'obligations': 0} {'projected': 3, 'opaque-call-return': 1}
+stage-b-windows bap 323.86 ms {'decoded': 4, 'edges': 3, 'slice': 2, 'obligations': 0} {'projected': 3, 'opaque-call-return': 1}
+controlled-not bap 346.06 ms {'decoded': 4, 'edges': 3, 'slice': 3, 'obligations': 0} {'projected': 3, 'opaque-call-return': 1}
+real-linux-34 bap 559.76 ms {'decoded': 34, 'edges': 45, 'slice': 28, 'obligations': 1} {'unattempted': 9, 'projected': 25, 'opaque-call-return': 9, 'control-disagreement': 1}
+crashpad-windows-checksum-98-v1 bap 657.39 ms {'decoded': 98, 'edges': 99, 'slice': 90, 'obligations': 0} {'projected': 97, 'opaque-call-return': 1}
+Report: /tmp/ariadne-bap-workloads-two6uhzj/report.json

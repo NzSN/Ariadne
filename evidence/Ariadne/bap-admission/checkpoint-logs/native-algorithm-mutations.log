@@ -1,0 +1,12 @@
+seed-becomes-root: behavioral mismatch at init
+drop-call-edge: behavioral mismatch at visit
+traverse-call-edge: behavioral mismatch at visit
+early-completion: behavioral mismatch at finishRecovery
+possible-write-kills: behavioral mismatch at propagate
+drop-propagation: behavioral mismatch at propagate
+drop-slice-seeds: behavioral mismatch at finishDataflow
+drop-slice-expansion: behavioral mismatch at expandSlice
+drop-state-propagation: behavioral mismatch at propagate
+collapse-state-ids: behavioral mismatch at propagate
+drop-incomplete-obligations: behavioral mismatch at init
+drop-terminal-relation: behavioral mismatch at propagate

@@ -1,0 +1,1387 @@
+{
+  "schema": "ariadne.bap-admission-contract/v1",
+  "projection": "bap-bit-provenance-v3",
+  "numericOracle": "Python unbounded integers, explicit modulo and independent scalar flag equations",
+  "cases": [
+    {
+      "name": "sub-rsp-observed",
+      "bytes": "4883ec58",
+      "expected": {
+        "uses": [
+          "gpr:rsp:0",
+          "gpr:rsp:1",
+          "gpr:rsp:2",
+          "gpr:rsp:3",
+          "gpr:rsp:4",
+          "gpr:rsp:5",
+          "gpr:rsp:6",
+          "gpr:rsp:7"
+        ],
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rsp:0",
+          "gpr:rsp:1",
+          "gpr:rsp:2",
+          "gpr:rsp:3",
+          "gpr:rsp:4",
+          "gpr:rsp:5",
+          "gpr:rsp:6",
+          "gpr:rsp:7"
+        ],
+        "must_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rsp:0",
+          "gpr:rsp:1",
+          "gpr:rsp:2",
+          "gpr:rsp:3",
+          "gpr:rsp:4",
+          "gpr:rsp:5",
+          "gpr:rsp:6",
+          "gpr:rsp:7"
+        ]
+      }
+    },
+    {
+      "name": "sub-rax-zero",
+      "bytes": "4883e800",
+      "expected": {
+        "uses": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "must_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ]
+      }
+    },
+    {
+      "name": "sub-rax-positive-limit",
+      "bytes": "4883e87f",
+      "expected": {
+        "uses": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "must_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ]
+      }
+    },
+    {
+      "name": "sub-rax-negative-limit",
+      "bytes": "4883e880",
+      "expected": {
+        "uses": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "must_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ]
+      }
+    },
+    {
+      "name": "sub-rax-negative-one",
+      "bytes": "4883e8ff",
+      "expected": {
+        "uses": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "must_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ]
+      }
+    },
+    {
+      "name": "movzx-eax-observed",
+      "bytes": "0fb64038",
+      "expected": {
+        "uses": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7",
+          "memory:any"
+        ],
+        "may_defs": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "must_defs": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "access": {
+          "role": "load",
+          "width": 8,
+          "base": "rax",
+          "index": null,
+          "scale": 1,
+          "displacement": 56
+        }
+      }
+    },
+    {
+      "name": "movzx-r14d-observed",
+      "bytes": "440fb67038",
+      "expected": {
+        "uses": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7",
+          "memory:any"
+        ],
+        "may_defs": [
+          "gpr:r14:0",
+          "gpr:r14:1",
+          "gpr:r14:2",
+          "gpr:r14:3",
+          "gpr:r14:4",
+          "gpr:r14:5",
+          "gpr:r14:6",
+          "gpr:r14:7"
+        ],
+        "must_defs": [
+          "gpr:r14:0",
+          "gpr:r14:1",
+          "gpr:r14:2",
+          "gpr:r14:3",
+          "gpr:r14:4",
+          "gpr:r14:5",
+          "gpr:r14:6",
+          "gpr:r14:7"
+        ],
+        "access": {
+          "role": "load",
+          "width": 8,
+          "base": "rax",
+          "index": null,
+          "scale": 1,
+          "displacement": 56
+        }
+      }
+    },
+    {
+      "name": "movzx-index-negative",
+      "bytes": "0fb6448bf8",
+      "expected": {
+        "uses": [
+          "gpr:rbx:0",
+          "gpr:rbx:1",
+          "gpr:rbx:2",
+          "gpr:rbx:3",
+          "gpr:rbx:4",
+          "gpr:rbx:5",
+          "gpr:rbx:6",
+          "gpr:rbx:7",
+          "gpr:rcx:0",
+          "gpr:rcx:1",
+          "gpr:rcx:2",
+          "gpr:rcx:3",
+          "gpr:rcx:4",
+          "gpr:rcx:5",
+          "gpr:rcx:6",
+          "gpr:rcx:7",
+          "memory:any"
+        ],
+        "may_defs": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "must_defs": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "access": {
+          "role": "load",
+          "width": 8,
+          "base": "rbx",
+          "index": "rcx",
+          "scale": 4,
+          "displacement": -8
+        }
+      }
+    },
+    {
+      "name": "xor-distinct-observed",
+      "bytes": "4831e0",
+      "expected": {
+        "uses": [
+          "flag:af",
+          "flag:cf",
+          "flag:df",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:r10:0",
+          "gpr:r10:1",
+          "gpr:r10:2",
+          "gpr:r10:3",
+          "gpr:r10:4",
+          "gpr:r10:5",
+          "gpr:r10:6",
+          "gpr:r10:7",
+          "gpr:r11:0",
+          "gpr:r11:1",
+          "gpr:r11:2",
+          "gpr:r11:3",
+          "gpr:r11:4",
+          "gpr:r11:5",
+          "gpr:r11:6",
+          "gpr:r11:7",
+          "gpr:r12:0",
+          "gpr:r12:1",
+          "gpr:r12:2",
+          "gpr:r12:3",
+          "gpr:r12:4",
+          "gpr:r12:5",
+          "gpr:r12:6",
+          "gpr:r12:7",
+          "gpr:r13:0",
+          "gpr:r13:1",
+          "gpr:r13:2",
+          "gpr:r13:3",
+          "gpr:r13:4",
+          "gpr:r13:5",
+          "gpr:r13:6",
+          "gpr:r13:7",
+          "gpr:r14:0",
+          "gpr:r14:1",
+          "gpr:r14:2",
+          "gpr:r14:3",
+          "gpr:r14:4",
+          "gpr:r14:5",
+          "gpr:r14:6",
+          "gpr:r14:7",
+          "gpr:r15:0",
+          "gpr:r15:1",
+          "gpr:r15:2",
+          "gpr:r15:3",
+          "gpr:r15:4",
+          "gpr:r15:5",
+          "gpr:r15:6",
+          "gpr:r15:7",
+          "gpr:r8:0",
+          "gpr:r8:1",
+          "gpr:r8:2",
+          "gpr:r8:3",
+          "gpr:r8:4",
+          "gpr:r8:5",
+          "gpr:r8:6",
+          "gpr:r8:7",
+          "gpr:r9:0",
+          "gpr:r9:1",
+          "gpr:r9:2",
+          "gpr:r9:3",
+          "gpr:r9:4",
+          "gpr:r9:5",
+          "gpr:r9:6",
+          "gpr:r9:7",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7",
+          "gpr:rbp:0",
+          "gpr:rbp:1",
+          "gpr:rbp:2",
+          "gpr:rbp:3",
+          "gpr:rbp:4",
+          "gpr:rbp:5",
+          "gpr:rbp:6",
+          "gpr:rbp:7",
+          "gpr:rbx:0",
+          "gpr:rbx:1",
+          "gpr:rbx:2",
+          "gpr:rbx:3",
+          "gpr:rbx:4",
+          "gpr:rbx:5",
+          "gpr:rbx:6",
+          "gpr:rbx:7",
+          "gpr:rcx:0",
+          "gpr:rcx:1",
+          "gpr:rcx:2",
+          "gpr:rcx:3",
+          "gpr:rcx:4",
+          "gpr:rcx:5",
+          "gpr:rcx:6",
+          "gpr:rcx:7",
+          "gpr:rdi:0",
+          "gpr:rdi:1",
+          "gpr:rdi:2",
+          "gpr:rdi:3",
+          "gpr:rdi:4",
+          "gpr:rdi:5",
+          "gpr:rdi:6",
+          "gpr:rdi:7",
+          "gpr:rdx:0",
+          "gpr:rdx:1",
+          "gpr:rdx:2",
+          "gpr:rdx:3",
+          "gpr:rdx:4",
+          "gpr:rdx:5",
+          "gpr:rdx:6",
+          "gpr:rdx:7",
+          "gpr:rsi:0",
+          "gpr:rsi:1",
+          "gpr:rsi:2",
+          "gpr:rsi:3",
+          "gpr:rsi:4",
+          "gpr:rsi:5",
+          "gpr:rsi:6",
+          "gpr:rsi:7",
+          "gpr:rsp:0",
+          "gpr:rsp:1",
+          "gpr:rsp:2",
+          "gpr:rsp:3",
+          "gpr:rsp:4",
+          "gpr:rsp:5",
+          "gpr:rsp:6",
+          "gpr:rsp:7",
+          "memory:any",
+          "state:other"
+        ],
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "must_defs": [
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "undefined_flags": [
+          "flag:af"
+        ]
+      }
+    },
+    {
+      "name": "xor-self",
+      "bytes": "4831c0",
+      "expected": {
+        "uses": [
+          "flag:af",
+          "flag:cf",
+          "flag:df",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:r10:0",
+          "gpr:r10:1",
+          "gpr:r10:2",
+          "gpr:r10:3",
+          "gpr:r10:4",
+          "gpr:r10:5",
+          "gpr:r10:6",
+          "gpr:r10:7",
+          "gpr:r11:0",
+          "gpr:r11:1",
+          "gpr:r11:2",
+          "gpr:r11:3",
+          "gpr:r11:4",
+          "gpr:r11:5",
+          "gpr:r11:6",
+          "gpr:r11:7",
+          "gpr:r12:0",
+          "gpr:r12:1",
+          "gpr:r12:2",
+          "gpr:r12:3",
+          "gpr:r12:4",
+          "gpr:r12:5",
+          "gpr:r12:6",
+          "gpr:r12:7",
+          "gpr:r13:0",
+          "gpr:r13:1",
+          "gpr:r13:2",
+          "gpr:r13:3",
+          "gpr:r13:4",
+          "gpr:r13:5",
+          "gpr:r13:6",
+          "gpr:r13:7",
+          "gpr:r14:0",
+          "gpr:r14:1",
+          "gpr:r14:2",
+          "gpr:r14:3",
+          "gpr:r14:4",
+          "gpr:r14:5",
+          "gpr:r14:6",
+          "gpr:r14:7",
+          "gpr:r15:0",
+          "gpr:r15:1",
+          "gpr:r15:2",
+          "gpr:r15:3",
+          "gpr:r15:4",
+          "gpr:r15:5",
+          "gpr:r15:6",
+          "gpr:r15:7",
+          "gpr:r8:0",
+          "gpr:r8:1",
+          "gpr:r8:2",
+          "gpr:r8:3",
+          "gpr:r8:4",
+          "gpr:r8:5",
+          "gpr:r8:6",
+          "gpr:r8:7",
+          "gpr:r9:0",
+          "gpr:r9:1",
+          "gpr:r9:2",
+          "gpr:r9:3",
+          "gpr:r9:4",
+          "gpr:r9:5",
+          "gpr:r9:6",
+          "gpr:r9:7",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7",
+          "gpr:rbp:0",
+          "gpr:rbp:1",
+          "gpr:rbp:2",
+          "gpr:rbp:3",
+          "gpr:rbp:4",
+          "gpr:rbp:5",
+          "gpr:rbp:6",
+          "gpr:rbp:7",
+          "gpr:rbx:0",
+          "gpr:rbx:1",
+          "gpr:rbx:2",
+          "gpr:rbx:3",
+          "gpr:rbx:4",
+          "gpr:rbx:5",
+          "gpr:rbx:6",
+          "gpr:rbx:7",
+          "gpr:rcx:0",
+          "gpr:rcx:1",
+          "gpr:rcx:2",
+          "gpr:rcx:3",
+          "gpr:rcx:4",
+          "gpr:rcx:5",
+          "gpr:rcx:6",
+          "gpr:rcx:7",
+          "gpr:rdi:0",
+          "gpr:rdi:1",
+          "gpr:rdi:2",
+          "gpr:rdi:3",
+          "gpr:rdi:4",
+          "gpr:rdi:5",
+          "gpr:rdi:6",
+          "gpr:rdi:7",
+          "gpr:rdx:0",
+          "gpr:rdx:1",
+          "gpr:rdx:2",
+          "gpr:rdx:3",
+          "gpr:rdx:4",
+          "gpr:rdx:5",
+          "gpr:rdx:6",
+          "gpr:rdx:7",
+          "gpr:rsi:0",
+          "gpr:rsi:1",
+          "gpr:rsi:2",
+          "gpr:rsi:3",
+          "gpr:rsi:4",
+          "gpr:rsi:5",
+          "gpr:rsi:6",
+          "gpr:rsi:7",
+          "gpr:rsp:0",
+          "gpr:rsp:1",
+          "gpr:rsp:2",
+          "gpr:rsp:3",
+          "gpr:rsp:4",
+          "gpr:rsp:5",
+          "gpr:rsp:6",
+          "gpr:rsp:7",
+          "memory:any",
+          "state:other"
+        ],
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "must_defs": [
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "undefined_flags": [
+          "flag:af"
+        ]
+      }
+    },
+    {
+      "name": "cmp-byte-observed",
+      "bytes": "80783876",
+      "expected": {
+        "uses": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7",
+          "memory:any"
+        ],
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf"
+        ],
+        "must_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf"
+        ],
+        "access": {
+          "role": "load",
+          "width": 8,
+          "base": "rax",
+          "index": null,
+          "scale": 1,
+          "displacement": 56
+        }
+      }
+    },
+    {
+      "name": "cmp-byte-zero",
+      "bytes": "803800",
+      "expected": {
+        "uses": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7",
+          "memory:any"
+        ],
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf"
+        ],
+        "must_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf"
+        ],
+        "access": {
+          "role": "load",
+          "width": 8,
+          "base": "rax",
+          "index": null,
+          "scale": 1,
+          "displacement": 0
+        }
+      }
+    },
+    {
+      "name": "cmp-byte-negative",
+      "bytes": "8078f8ff",
+      "expected": {
+        "uses": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7",
+          "memory:any"
+        ],
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf"
+        ],
+        "must_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf"
+        ],
+        "access": {
+          "role": "load",
+          "width": 8,
+          "base": "rax",
+          "index": null,
+          "scale": 1,
+          "displacement": -8
+        }
+      }
+    },
+    {
+      "name": "add-immediate",
+      "bytes": "4883c008",
+      "expected": {
+        "uses": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "must_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ]
+      }
+    },
+    {
+      "name": "jne-long",
+      "bytes": "0f8502000000",
+      "expected": {
+        "uses": [
+          "flag:zf"
+        ],
+        "may_defs": [],
+        "must_defs": []
+      }
+    },
+    {
+      "name": "jmp-long",
+      "bytes": "e902000000",
+      "expected": {
+        "uses": [],
+        "may_defs": [],
+        "must_defs": []
+      }
+    },
+    {
+      "name": "clc-capability",
+      "bytes": "f8",
+      "expected": {
+        "uses": [],
+        "may_defs": [
+          "flag:cf"
+        ],
+        "must_defs": [
+          "flag:cf"
+        ]
+      }
+    }
+  ],
+  "numericCases": [
+    {
+      "op": "sub",
+      "width": 64,
+      "a": 0,
+      "b": 0,
+      "expected": {
+        "result": 0,
+        "flags": {
+          "cf": 0,
+          "of": 0,
+          "af": 0,
+          "pf": 1,
+          "sf": 0,
+          "zf": 1
+        }
+      }
+    },
+    {
+      "op": "sub",
+      "width": 64,
+      "a": 0,
+      "b": 1,
+      "expected": {
+        "result": 18446744073709551615,
+        "flags": {
+          "cf": 1,
+          "of": 0,
+          "af": 1,
+          "pf": 1,
+          "sf": 1,
+          "zf": 0
+        }
+      }
+    },
+    {
+      "op": "sub",
+      "width": 64,
+      "a": 1,
+      "b": 1,
+      "expected": {
+        "result": 0,
+        "flags": {
+          "cf": 0,
+          "of": 0,
+          "af": 0,
+          "pf": 1,
+          "sf": 0,
+          "zf": 1
+        }
+      }
+    },
+    {
+      "op": "sub",
+      "width": 64,
+      "a": 9223372036854775807,
+      "b": -1,
+      "expected": {
+        "result": 9223372036854775808,
+        "flags": {
+          "cf": 1,
+          "of": 1,
+          "af": 0,
+          "pf": 1,
+          "sf": 1,
+          "zf": 0
+        }
+      }
+    },
+    {
+      "op": "sub",
+      "width": 64,
+      "a": 9223372036854775808,
+      "b": 1,
+      "expected": {
+        "result": 9223372036854775807,
+        "flags": {
+          "cf": 0,
+          "of": 1,
+          "af": 1,
+          "pf": 1,
+          "sf": 0,
+          "zf": 0
+        }
+      }
+    },
+    {
+      "op": "sub",
+      "width": 64,
+      "a": 18446744073709551615,
+      "b": 0,
+      "expected": {
+        "result": 18446744073709551615,
+        "flags": {
+          "cf": 0,
+          "of": 0,
+          "af": 0,
+          "pf": 1,
+          "sf": 1,
+          "zf": 0
+        }
+      }
+    },
+    {
+      "op": "sub",
+      "width": 64,
+      "a": 18446744073709551615,
+      "b": 127,
+      "expected": {
+        "result": 18446744073709551488,
+        "flags": {
+          "cf": 0,
+          "of": 0,
+          "af": 0,
+          "pf": 0,
+          "sf": 1,
+          "zf": 0
+        }
+      }
+    },
+    {
+      "op": "sub",
+      "width": 64,
+      "a": 0,
+      "b": -128,
+      "expected": {
+        "result": 128,
+        "flags": {
+          "cf": 1,
+          "of": 0,
+          "af": 0,
+          "pf": 0,
+          "sf": 0,
+          "zf": 0
+        }
+      }
+    },
+    {
+      "op": "cmp",
+      "width": 8,
+      "a": 0,
+      "b": 0,
+      "expected": {
+        "result": 0,
+        "flags": {
+          "cf": 0,
+          "of": 0,
+          "af": 0,
+          "pf": 1,
+          "sf": 0,
+          "zf": 1
+        }
+      }
+    },
+    {
+      "op": "cmp",
+      "width": 8,
+      "a": 0,
+      "b": 1,
+      "expected": {
+        "result": 255,
+        "flags": {
+          "cf": 1,
+          "of": 0,
+          "af": 1,
+          "pf": 1,
+          "sf": 1,
+          "zf": 0
+        }
+      }
+    },
+    {
+      "op": "cmp",
+      "width": 8,
+      "a": 1,
+      "b": 1,
+      "expected": {
+        "result": 0,
+        "flags": {
+          "cf": 0,
+          "of": 0,
+          "af": 0,
+          "pf": 1,
+          "sf": 0,
+          "zf": 1
+        }
+      }
+    },
+    {
+      "op": "cmp",
+      "width": 8,
+      "a": 127,
+      "b": -1,
+      "expected": {
+        "result": 128,
+        "flags": {
+          "cf": 1,
+          "of": 1,
+          "af": 0,
+          "pf": 0,
+          "sf": 1,
+          "zf": 0
+        }
+      }
+    },
+    {
+      "op": "cmp",
+      "width": 8,
+      "a": 128,
+      "b": 1,
+      "expected": {
+        "result": 127,
+        "flags": {
+          "cf": 0,
+          "of": 1,
+          "af": 1,
+          "pf": 0,
+          "sf": 0,
+          "zf": 0
+        }
+      }
+    },
+    {
+      "op": "cmp",
+      "width": 8,
+      "a": 255,
+      "b": 0,
+      "expected": {
+        "result": 255,
+        "flags": {
+          "cf": 0,
+          "of": 0,
+          "af": 0,
+          "pf": 1,
+          "sf": 1,
+          "zf": 0
+        }
+      }
+    },
+    {
+      "op": "cmp",
+      "width": 8,
+      "a": 255,
+      "b": 127,
+      "expected": {
+        "result": 128,
+        "flags": {
+          "cf": 0,
+          "of": 0,
+          "af": 0,
+          "pf": 0,
+          "sf": 1,
+          "zf": 0
+        }
+      }
+    },
+    {
+      "op": "cmp",
+      "width": 8,
+      "a": 0,
+      "b": -128,
+      "expected": {
+        "result": 128,
+        "flags": {
+          "cf": 1,
+          "of": 1,
+          "af": 0,
+          "pf": 0,
+          "sf": 1,
+          "zf": 0
+        }
+      }
+    },
+    {
+      "op": "xor",
+      "width": 64,
+      "a": 0,
+      "b": 0,
+      "expected": {
+        "result": 0,
+        "flags": {
+          "cf": 0,
+          "of": 0,
+          "af": null,
+          "pf": 1,
+          "sf": 0,
+          "zf": 1
+        }
+      }
+    },
+    {
+      "op": "xor",
+      "width": 64,
+      "a": 0,
+      "b": 1,
+      "expected": {
+        "result": 1,
+        "flags": {
+          "cf": 0,
+          "of": 0,
+          "af": null,
+          "pf": 0,
+          "sf": 0,
+          "zf": 0
+        }
+      }
+    },
+    {
+      "op": "xor",
+      "width": 64,
+      "a": 1,
+      "b": 1,
+      "expected": {
+        "result": 0,
+        "flags": {
+          "cf": 0,
+          "of": 0,
+          "af": null,
+          "pf": 1,
+          "sf": 0,
+          "zf": 1
+        }
+      }
+    },
+    {
+      "op": "xor",
+      "width": 64,
+      "a": 9223372036854775807,
+      "b": -1,
+      "expected": {
+        "result": 9223372036854775808,
+        "flags": {
+          "cf": 0,
+          "of": 0,
+          "af": null,
+          "pf": 1,
+          "sf": 1,
+          "zf": 0
+        }
+      }
+    },
+    {
+      "op": "xor",
+      "width": 64,
+      "a": 9223372036854775808,
+      "b": 1,
+      "expected": {
+        "result": 9223372036854775809,
+        "flags": {
+          "cf": 0,
+          "of": 0,
+          "af": null,
+          "pf": 0,
+          "sf": 1,
+          "zf": 0
+        }
+      }
+    },
+    {
+      "op": "xor",
+      "width": 64,
+      "a": 18446744073709551615,
+      "b": 0,
+      "expected": {
+        "result": 18446744073709551615,
+        "flags": {
+          "cf": 0,
+          "of": 0,
+          "af": null,
+          "pf": 1,
+          "sf": 1,
+          "zf": 0
+        }
+      }
+    },
+    {
+      "op": "xor",
+      "width": 64,
+      "a": 18446744073709551615,
+      "b": 127,
+      "expected": {
+        "result": 18446744073709551488,
+        "flags": {
+          "cf": 0,
+          "of": 0,
+          "af": null,
+          "pf": 0,
+          "sf": 1,
+          "zf": 0
+        }
+      }
+    },
+    {
+      "op": "xor",
+      "width": 64,
+      "a": 0,
+      "b": -128,
+      "expected": {
+        "result": 18446744073709551488,
+        "flags": {
+          "cf": 0,
+          "of": 0,
+          "af": null,
+          "pf": 0,
+          "sf": 1,
+          "zf": 0
+        }
+      }
+    }
+  ],
+  "decisions": {
+    "supported_typed_bil": "projected",
+    "ordinary_unsupported_data": "opaque-ordinary with all uses/may-defs and no must-defs",
+    "empty_except_exact_90": "opaque-unsupported stop",
+    "unknown_control_or_namespace": "opaque-unsupported stop",
+    "guarded_prefix": "opaque-unsupported stop",
+    "malformed_type_or_operand_binding": "fail or explicit disagreement stop; never continuation",
+    "budget": "query error"
+  },
+  "exclusions": [
+    "LOCK",
+    "REP",
+    "FS/GS",
+    "address-size override",
+    "SIMD/x87/system state",
+    "BIL While/Special/Exception",
+    "invented indirect targets"
+  ],
+  "premises": [
+    "normal continuation only",
+    "captured bytes and independent control match",
+    "unknown AF retains old origins",
+    "memory:any never must-killed",
+    "source and payload excluded from address inputs"
+  ]
+}

@@ -23,7 +23,9 @@
 - [Assurance decision](docs/Ariadne/semantic-assurance.md) — defines the BAP trust boundary and retired ISA-proof scope.
 
 **What remains unresolved.** The [projection-admission extension](Plans/bap-projection-admission.md)
-is planned only: v2 opcode admission and opaque-stop behavior remain implemented.
+has P0–P3 implemented: v3 capabilities and conservative ordinary continuation.
+Its [P4 aggregate/external acceptance](docs/Ariadne/bap-admission-checkpoint.md)
+is incomplete; older v2 qualification does not transfer to the changed source.
 The replacement BAP Windows capture is pinned and passes correctness. The current BAP latency policy is unlimited. Stage 2 native algorithms and capture integration are qualified on the exercised corpus; native analysis is the CLI default with explicit Rust rollback. The first fault-address question is implemented, and [native I4 performance qualification](docs/Ariadne/i4-performance-validation.md) meets the unchanged 2-second CLI limit for the exact re-pinned case. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).

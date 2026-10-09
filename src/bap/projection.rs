@@ -304,13 +304,15 @@ fn eval(expr: &Expr, state: &mut State, va: u64, depth: usize) -> Result<Value, 
         }
         Expr::Ite { condition, yes, no } => {
             let condition = child(condition)?;
-            if let Some(c) = condition.constant() {
+            let output = if let Some(c) = condition.constant() {
                 if c == 0 { child(no)? } else { child(yes)? }
             } else {
                 let y = child(yes)?;
                 let n = child(no)?;
                 join(&condition, y, n)?
-            }
+            };
+            state.forced_uses.extend(condition.deps());
+            output
         }
         Expr::Unop { op, arg } => {
             let value = child(arg)?;
@@ -501,7 +503,10 @@ fn run(
             }
         }
         if next.len() > 32 {
-            return Err(invalid("BIL path limit"));
+            return Err(crate::bap::admission::failure(
+                crate::bap::admission::FailureKind::Resource,
+                "BIL path limit",
+            ));
         }
         states = next;
     }
@@ -514,40 +519,6 @@ pub(crate) struct Projection {
     pub must_defs: LocationSet,
     pub gaps: Vec<String>,
     pub targets: Vec<Option<u64>>,
-}
-fn supported(opcode: &str) -> bool {
-    matches!(
-        opcode,
-        "MOV64rr"
-            | "MOV8rr"
-            | "MOV16rr"
-            | "MOV32rr"
-            | "MOV32ri"
-            | "MOV64rm"
-            | "MOV32rm"
-            | "MOV64mr"
-            | "MOV32mr"
-            | "MOV32mi"
-            | "MOV64mi32"
-            | "CMOV64rr"
-            | "NOT64r"
-            | "MOVSX64rr8"
-            | "MOVZX32rr8"
-            | "LEA64r"
-            | "ADD64rr"
-            | "ADC64rr"
-            | "CMP64rr"
-            | "TEST64rr"
-            | "TEST8rr"
-            | "INC64r"
-            | "PUSH64r"
-            | "POP64r"
-            | "JCC_1"
-            | "JMP_1"
-            | "JMP64r"
-            | "SHL64ri"
-            | "SHL64rCL"
-    )
 }
 #[cfg(test)]
 pub(crate) fn project(
@@ -565,18 +536,8 @@ pub(crate) fn project_with_destination(
     va: u64,
     destination: Option<&crate::effects::RegisterView>,
 ) -> Result<Projection, Error> {
-    let mut guarded_prefix = false;
-    for byte in bytes {
-        if [0xf0, 0xf2, 0xf3, 0x26, 0x2e, 0x36, 0x3e, 0x64, 0x65, 0x67].contains(byte) {
-            guarded_prefix = true;
-            break;
-        }
-        if *byte == 0x66 || *byte == 0x67 || (0x40..=0x4f).contains(byte) {
-            continue;
-        }
-        break;
-    }
-    if statements.is_empty() && opcode == "NOOP" && bytes == [0x90] {
+    crate::bap::admission::admit(statements, opcode, bytes)?;
+    if statements.is_empty() {
         return Ok(Projection {
             uses: LocationSet::new(),
             may_defs: LocationSet::new(),
@@ -585,22 +546,24 @@ pub(crate) fn project_with_destination(
             targets: Vec::new(),
         });
     }
-    if statements.is_empty() || !supported(opcode) || guarded_prefix {
-        return Err(invalid("unsupported lift/form/prefix"));
-    }
     let states = run(statements, vec![State::default()], va, 0)?;
     let mut uses = LocationSet::new();
     let mut may_defs = LocationSet::new();
     let mut must_defs: Option<LocationSet> = None;
     let mut gaps = Vec::new();
     let mut targets = Vec::new();
-    let partial_destination = if ["MOV8rr", "MOV16rr"].contains(&opcode) {
+    let partial_destination = if ["MOV8rr", "MOV16rr", "MOV32rr"].contains(&opcode) {
         destination.map(|d| d.replacements()).unwrap_or_default()
     } else {
         LocationSet::new()
     };
+    let possible_destination = destination.map(|d| d.replacements()).unwrap_or_default();
     for state in states {
         uses.extend(state.forced_uses);
+        // A decoded destination can be written even when its BIL value equals
+        // the old value. This only adds possible writes; definite kills still
+        // require the independently reviewed partial-MOV rule or BIL evidence.
+        may_defs.extend(possible_destination.clone());
         let mut definite = LocationSet::new();
         for (key, var) in &state.arch {
             let value = state
@@ -620,7 +583,7 @@ pub(crate) fn project_with_destination(
                     || parts
                         .iter()
                         .any(|(i, b)| b.original.as_ref() != Some(&(key.clone(), *i)));
-                if changed {
+                if changed || possible_destination.contains(&cell) {
                     may_defs.insert(cell.clone());
                     for (_, bit) in &parts {
                         uses.extend(bit.deps.clone());
@@ -688,6 +651,16 @@ mod tests {
         for row in corpus["rows"].as_array().unwrap() {
             let lift: crate::bap::ast::Lift = serde_json::from_value(row["lift"].clone()).unwrap();
             lift.validate_ast().unwrap();
+            if lift
+                .properties
+                .as_ref()
+                .is_some_and(|p| p.call || p.return_)
+            {
+                // Production binds the opaque call/return policy before invoking
+                // the data projector; the native corpus tests exercise it.
+                assert_eq!(row["expect"]["reject"], true);
+                continue;
+            }
             let hex = row["prefix"].as_str().unwrap();
             let bytes: Vec<u8> = (0..hex.len())
                 .step_by(2)

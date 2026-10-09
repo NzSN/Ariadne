@@ -1,0 +1,9 @@
+pipeline 14 matched states, all nine fields
+alias 13 matched states, all nine fields
+conditional 11 matched states, all nine fields
+branch 12 matched states, all nine fields
+loop 17 matched states, all nine fields
+weak-store 15 matched states, all nine fields
+opaque-call 11 matched states, all nine fields
+indirect 6 matched states, all nine fields
+Report: /tmp/ariadne-bap-model-0a_fn2vq/report.json

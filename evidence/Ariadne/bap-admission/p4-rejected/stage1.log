@@ -1,0 +1,19 @@
+BAP acceptance artifacts: /tmp/ariadne-bap-acceptance-nu7_whum
+workload-runner-regressions : PASS
+native-build : PASS
+native-corpus : PASS
+controlled-fixtures : PASS
+bap-format : PASS
+bap-clippy : PASS
+bap-tests-native : PASS
+input-format : PASS
+input-clippy : PASS
+input-bap-cli : PASS
+bench-format : PASS
+bench-clippy : PASS
+model-observer-build : PASS
+model : PASS
+mutation : FAIL
+workload : PASS
+stage-e : FAIL
+Report: /tmp/ariadne-bap-acceptance-nu7_whum/report.json

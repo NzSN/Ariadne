@@ -2,7 +2,9 @@
 
 ## Context and follow-up
 
-**Status.** Source-first documentation audit on 2026-10-09. Current BAP
+**Status.** Historical source-first documentation audit on 2026-10-09, before
+the [v3 execution checkpoint](bap-admission-checkpoint.md). The inventory and
+current-implementation table below describe that earlier v2 snapshot. Current BAP
 ownership, CLI defaults, projection limits and retained qualification identities
 are checked separately. This change updates documentation and adds an audit
 receipt; it does not rerun native/model/mutation/workload qualification.

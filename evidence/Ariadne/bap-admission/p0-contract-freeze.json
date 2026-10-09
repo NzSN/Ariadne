@@ -1,0 +1,29 @@
+{
+  "schema": "ariadne.bap-admission-p0/v1",
+  "baselineProjection": "bap-bit-provenance-v2",
+  "proposedProjection": "bap-bit-provenance-v3",
+  "baselineSourceHashes": {
+    "src/bap/projection.rs": "836ee084c0885563d19b5f5e61b196a494929117194a8f30dadc96424bc59488",
+    "src/bap/prepare.rs": "b7a5eb08024b3d21c39a5daa3419354607caa90f2c5ed7629189aad8ea556d2a",
+    "src/bap/ast.rs": "e03169007ec2469ad0a006faf044d956aeacf468a2ad19ce810e9153a52ccafb",
+    "src/investigation/zero_address.rs": "bcb75de73f078b97f330fbd42406923ca2c57a5aa8248db4b88caaafc5bf85dc",
+    "native/bap-core/capture.ml": "aa4a3432f44c961a1fe2bac99e60c3ac68baca8c1034e5eb06bbe87eb0ac0a34"
+  },
+  "independentContractSha256": "6e34d4283c9529e00e5059642220c15ac3ae5cc27f8c08dad73848ad7aa9ad4b",
+  "oracleSha256": "9ba5366bdd3c2c6b45d411c067bc8389c518858a069ff6c6cc7c4f4f0b0b08b5",
+  "helperSha256": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+  "runtimeSha256": "fb03843b065556c791e909b2cd7d1a8e2ef736ed461b6d8979da3f3fd5d6612a",
+  "observedRejectedForms": [
+    "SUB64ri8",
+    "MOVZX32rm8",
+    "XOR64rr",
+    "CMP8mi"
+  ],
+  "rejectedCondition": "projection.rs supported(opcode) finite membership, before interpreting nonempty BIL",
+  "contractFrozenBeforeRuntimeChanges": true,
+  "nonemptyObservedLifts": true,
+  "nativeBilSha256": "0f39463ea55b60aefde4e7e9b25fb98d9b8120f513d689cf2b3f562640a93066",
+  "referenceSha256": "6dec210c5c73da69528f3760820105d137d1e3f7d2b0f49b74caed2a5fcdfb58",
+  "baselineCliSha256": "80e88048352afa8afbf30265e0488913419fe7b9a4a2c3f5bc3d6f6541bed613",
+  "baselineQueriesSha256": "fcc92a81a4c77240d05804e7f91e5b646ce90cc72c68351f6d0e51171a06a7fb"
+}

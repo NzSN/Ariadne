@@ -5,9 +5,53 @@ use crate::investigation::{
 };
 use crate::{AnalysisView, ByteSource, effects::EffectQuality};
 use sha2::{Digest, Sha256};
+pub(crate) fn validate_opaque_ordinary(
+    prepared: &FilePreparedAnalysis,
+) -> Result<(), crate::investigation::Error> {
+    let request = &prepared.prepared.request;
+    for (&va, e) in &prepared.prepared.instructions {
+        if let Some(s) = &e.semantic
+            && (s.status == "opaque-ordinary"
+                || e.rule.as_deref() == Some("bap-opaque-ordinary-v3")
+                || s.gaps.iter().any(|g| g == "unsupported-data-effects"))
+        {
+            let instruction = request
+                .instructions
+                .get(&va)
+                .ok_or("missing opaque summary")?;
+            let next = va
+                .checked_add(u64::from(e.length))
+                .ok_or("opaque next VA overflow")?;
+            if s.status != "opaque-ordinary"
+                || s.projection != "bap-bit-provenance-v3"
+                || s.ast_sha256.is_none()
+                || s.fallback.is_some()
+                || e.quality != EffectQuality::Opaque
+                || e.rule.as_deref() != Some("bap-opaque-ordinary-v3")
+                || e.length == 0
+                || !request.decodable.contains(&va)
+                || instruction.kind != crate::InstructionKind::Ordinary
+                || instruction.fall != [next].into()
+                || !instruction.targets.is_empty()
+                || !instruction.complete
+                || instruction.uses != request.locations
+                || instruction.may_defs != request.locations
+                || !instruction.must_defs.is_empty()
+                || !s.gaps.iter().any(|g| g == "unsupported-data-effects")
+                || !prepared.prepared.gaps.iter().any(|g| {
+                    g.address == va && g.reason == crate::effects::GapReason::OpaqueEffects
+                })
+            {
+                return Err("invalid opaque ordinary evidence/summary binding".into());
+            }
+        }
+    }
+    Ok(())
+}
 pub(crate) fn capture_context(
     prepared: &FilePreparedAnalysis,
 ) -> Result<EvidenceContext, crate::investigation::Error> {
+    validate_opaque_ordinary(prepared)?;
     let report = &prepared.materialization;
     let request = &prepared.prepared.request;
     if prepared.snapshot.snapshot_id != request.snapshot_id

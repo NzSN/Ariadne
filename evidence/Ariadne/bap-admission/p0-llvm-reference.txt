@@ -1,0 +1,18 @@
+ariadne-llvm-mc 20.1.2 protocol 2
+v2 SUB64ri8 3 r:RSP r:RSP i:88 1 0 0 1 EFLAGS -1 0 -1 4198400 ok 4 ordinary -
+v2 SUB64ri8 3 r:RAX r:RAX i:0 1 0 0 1 EFLAGS -1 0 -1 4198432 ok 4 ordinary -
+v2 SUB64ri8 3 r:RAX r:RAX i:127 1 0 0 1 EFLAGS -1 0 -1 4198464 ok 4 ordinary -
+v2 SUB64ri8 3 r:RAX r:RAX i:-128 1 0 0 1 EFLAGS -1 0 -1 4198496 ok 4 ordinary -
+v2 SUB64ri8 3 r:RAX r:RAX i:-1 1 0 0 1 EFLAGS -1 0 -1 4198528 ok 4 ordinary -
+v2 MOVZX32rm8 6 r:EAX r:RAX i:1 r:NONE i:56 r:NONE 1 1 0 0 -1 -1 -1 -1 -1 -1 4198560 ok 4 ordinary -
+v2 MOVZX32rm8 6 r:R14D r:RAX i:1 r:NONE i:56 r:NONE 1 1 0 0 -1 -1 -1 -1 -1 -1 4198592 ok 5 ordinary -
+v2 MOVZX32rm8 6 r:EAX r:RBX i:4 r:RCX i:-8 r:NONE 1 1 0 0 -1 -1 -1 -1 -1 -1 4198624 ok 5 ordinary -
+v2 XOR64rr 3 r:RAX r:RAX r:RSP 1 0 0 1 EFLAGS -1 0 -1 4198656 ok 3 ordinary -
+v2 XOR64rr 3 r:RAX r:RAX r:RAX 1 0 0 1 EFLAGS -1 0 -1 4198688 ok 3 ordinary -
+v2 CMP8mi 6 r:RAX i:1 r:NONE i:56 r:NONE i:118 0 1 0 1 EFLAGS -1 -1 -1 -1 -1 -1 4198720 ok 4 ordinary -
+v2 CMP8mi 6 r:RAX i:1 r:NONE i:0 r:NONE i:0 0 1 0 1 EFLAGS -1 -1 -1 -1 -1 -1 4198752 ok 3 ordinary -
+v2 CMP8mi 6 r:RAX i:1 r:NONE i:-8 r:NONE i:-1 0 1 0 1 EFLAGS -1 -1 -1 -1 -1 -1 4198784 ok 4 ordinary -
+v2 ADD64ri8 3 r:RAX r:RAX i:8 1 0 0 1 EFLAGS -1 0 -1 4198816 ok 4 ordinary -
+v2 JCC_4 2 i:2 i:5 0 0 1 EFLAGS 0 -1 -1 4198848 ok 6 conditional 4198856
+v2 JMP_4 1 i:2 0 0 0 0 -1 4198880 ok 5 jump 4198887
+v2 CLC 0 0 4 1 EFLAGS 1 EFLAGS 4198912 ok 1 ordinary -

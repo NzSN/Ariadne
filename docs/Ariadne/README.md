@@ -10,6 +10,8 @@
 
 **Where to go next.**
 
+- [BAP v3 execution checkpoint](bap-admission-checkpoint.md) — P0–P3 implementation and incomplete P4/external qualification.
+
 - [BAP documentation audit](bap-documentation-sync.md) — source-first synchronization, exact current evidence and pending admission coverage.
 
 - [Selected I5c address-wrap design](i5c-address-wrap-design.md) and

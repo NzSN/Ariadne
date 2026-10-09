@@ -1,0 +1,8 @@
+lost-term-snapshot rejected
+omit-visit rejected
+previous-observation rejected
+signed-address-order rejected
+collapse-parallel-edges rejected
+observe-mutates rejected
+reset-preserves-state rejected
+Report: /home/nzsn/Repos/Ariadne/target/bap-core-mutations/run-drze9yc8/report.json

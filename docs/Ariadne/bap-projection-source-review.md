@@ -3,7 +3,7 @@
 ## Context and follow-up
 
 **Status.** Historical provider/accessor assessment with current implementation
-links. Production selects the pinned legacy lifter and finite v2 projection;
+links. Production selects the pinned legacy lifter and v3 capability projection;
 this review is supporting evidence, not a universal ISA proof.
 
 **Why this document exists.** [Projection design](bap-semantic-backend-design.md) requires typed BIL, correct aliases and conservative effects.
@@ -14,7 +14,7 @@ this review is supporting evidence, not a universal ISA proof.
 
 - [Historical delivery record](bap-only-removal-validation.md) — reports the original producer and adapter checks.
 - [Current backend](modules/bap.md) and [documentation audit](bap-documentation-sync.md) — current selection, finite admission and matching retained refresh.
-- [Projection-admission plan](../../Plans/bap-projection-admission.md) — pending four-form and capability/continuation work; this review does not qualify it.
+- [Projection-admission plan](../../Plans/bap-projection-admission.md) and [execution checkpoint](bap-admission-checkpoint.md) — delivered P0–P3 and remaining P4/external acceptance; this historical review does not qualify the changed source.
 - [Trust boundary](semantic-assurance.md) — explains which lifter and projection claims remain conditional.
 
 **What remains unresolved.** The review and corpus do not establish universal lifter correctness or all-opcode projection soundness. New forms require their own justified admission and negative controls.
@@ -74,6 +74,7 @@ BIL and independent expectations, including negative controls. The
 separately from this original review.
 
 Next work is the [P0–P4 admission extension](../../Plans/bap-projection-admission.md).
-The four observed forms, generic capability admission and ordinary opaque
-continuation remain pending. Preserve source/build/plugin/profile identities
+The four observed forms, capability admission and ordinary opaque continuation
+are implemented with focused checks. The [checkpoint](bap-admission-checkpoint.md)
+retains incomplete aggregate/external acceptance. Preserve source/build/plugin/profile identities
 and independent positive/negative expectations for each newly admitted scope.

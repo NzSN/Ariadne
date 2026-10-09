@@ -20,8 +20,8 @@ refresh against current inventories; older standalone records remain historical.
 - [BAP documentation audit](../docs/Ariadne/bap-documentation-sync.md) — checks current ownership/admission and the later nested Stage 1/Stage 2 evidence, while preserving historical records.
 
 - [Projection admission and coverage](bap-projection-admission.md) — pending
-  P0–P4 follow-up for observed unadmitted forms, BIL capability admission and
-  conservative continuation; existing Stage 1/Stage 2 records remain historical
+  P0–P3 implementation for observed forms, BIL capability admission and
+  conservative continuation, with P4 aggregate/external acceptance incomplete; existing Stage 1/Stage 2 records remain historical
   evidence for their own source and exercised corpus.
 
 - [Stage 2 qualification](../docs/Ariadne/bap-core-qualification.md) — records all 20 passing gates, native default adoption, Rust rollback and the exercised scope.
@@ -40,7 +40,9 @@ refresh against current inventories; older standalone records remain historical.
 - [Controlled Windows demo](../docs/Ariadne/crashpad-demo-validation.md) — documents the separate two-instruction I5a/smoke capture.
 
 **What remains unresolved.** The projection admission/coverage extension
-is planned only; no new form or recovery policy is qualified by this ledger.
+is implemented through P3 and focused-tested; its [P4 checkpoint](../docs/Ariadne/bap-admission-checkpoint.md)
+has incomplete aggregate/external acceptance. This older integration ledger
+does not qualify the changed v3 source.
 The qualified native analysis does not establish universal refinement, ISA/lifter correctness or packaged cross-platform release qualification. Source/tool changes require fresh qualification. The active BAP policy has no latency ceiling, while historical Priority 4, active re-pinned I4 and controlled I5a retain their separate contracts. The [native I5a refresh](../docs/Ariadne/i5a-native-qualification.md) now independently qualifies both controlled captures under its fixed budgets and pinned dependency snapshot; that acceptance comes from its own records.
 
 For the wider context, see the optional [documentation map](../docs/documentation-map.md).

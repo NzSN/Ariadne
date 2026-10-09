@@ -1,0 +1,822 @@
+[
+  {
+    "name": "sub",
+    "artifactSha256": "24bb3f42887c1049d441fc7b0cbf0f7a0d0450cffae5f0f359518b4ff5aab2ff",
+    "report": {
+      "analysis": {
+        "decoded": [],
+        "edges": [],
+        "missing_slice_seeds": [
+          "0x0000000000401000"
+        ],
+        "obligations": [
+          {
+            "reason": "decode_failed",
+            "va": "0x0000000000401000"
+          }
+        ],
+        "pending": [],
+        "phase": "done",
+        "provenance": [
+          {
+            "byte_source": "unavailable",
+            "va": "0x0000000000401000"
+          }
+        ],
+        "reaching": [
+          {
+            "before": "0x0000000000401000",
+            "definitions": []
+          }
+        ],
+        "scope_closed": false,
+        "scope_note": "recovery only; relative to supplied inputs",
+        "slice": [],
+        "visited": [
+          "0x0000000000401000"
+        ]
+      },
+      "identity": {
+        "artifact_sha256": "24bb3f42887c1049d441fc7b0cbf0f7a0d0450cffae5f0f359518b4ff5aab2ff",
+        "core_package_version": "0.1.0",
+        "decoder_build": "LLVM MC 20.1.2 (decode reference)",
+        "decoder_protocol": 2,
+        "decoder_target": "x86_64-pc-windows-msvc",
+        "effects_ruleset": "bap-bit-provenance-v2",
+        "input_package_version": "0.1.0",
+        "location_catalogue": "gpr-bytes-status-df-memory-other-v1",
+        "platform": "windows",
+        "query_id": "90fe71c85ed7d1d752edb3b028b429912127e87e419e402e11203986627fe339",
+        "snapshot_id": "minidump-captured-amd64-v1:24bb3f42887c1049d441fc7b0cbf0f7a0d0450cffae5f0f359518b4ff5aab2ff"
+      },
+      "input": {
+        "artifact_bytes": 1548,
+        "attempted": [
+          "0x0000000000401000"
+        ],
+        "decoder_batches": 1,
+        "exception": {
+          "code": 3221225477,
+          "registers": {
+            "rflags": "0x0000000000000000",
+            "rip": "0x0000000000401006",
+            "rsp": "0x0000000000000000"
+          },
+          "reported_address": "0x0000000000000000",
+          "thread_id": 17
+        },
+        "memory_info": [],
+        "metadata_gaps": [],
+        "modules": [],
+        "open_limits": {
+          "max_capture_ranges": 131072,
+          "max_file_bytes": 268435456,
+          "max_metadata_bytes": 16777216,
+          "max_overlap": 64,
+          "max_read_bytes": 65536,
+          "max_records": 131072,
+          "max_streams": 1024
+        },
+        "overlapping_starts": [],
+        "prefix_bytes": 4,
+        "prepare_limits": {
+          "batch_size": 128,
+          "max_candidates": 8192,
+          "max_decoder_batches": 4096,
+          "max_prefix_bytes": 61440,
+          "max_starts": 4096
+        },
+        "reads": [
+          {
+            "bytes_hex": "4883ec58",
+            "conflict_sources": [],
+            "spans": [
+              {
+                "contributors": [
+                  {
+                    "entry": 0,
+                    "file_offset": "0x0000000000000058",
+                    "stream": 5
+                  }
+                ],
+                "length": 4,
+                "va": "0x0000000000401000"
+              }
+            ],
+            "stop": {
+              "kind": "not_captured",
+              "va": "0x0000000000401004"
+            },
+            "va": "0x0000000000401000"
+          }
+        ],
+        "referenced": [
+          "0x0000000000401000"
+        ],
+        "streams": [
+          {
+            "file_offset": "0x0000000000000020",
+            "kind": 7,
+            "size": "0x0000000000000038",
+            "supported": true
+          },
+          {
+            "file_offset": "0x000000000000005c",
+            "kind": 5,
+            "size": "0x0000000000000014",
+            "supported": true
+          },
+          {
+            "file_offset": "0x0000000000000540",
+            "kind": 6,
+            "size": "0x00000000000000a8",
+            "supported": true
+          }
+        ],
+        "threads": [],
+        "unvisited_references": []
+      },
+      "preparation": {
+        "gaps": [
+          {
+            "reason": "unsupported_control",
+            "va": "0x0000000000401000"
+          }
+        ],
+        "sites": [
+          {
+            "byte_source": "captured",
+            "bytes_hex": "4883ec58",
+            "control": "stop",
+            "decoder_record": "v2 SUB64ri8 3 r:RSP r:RSP i:88 1 0 0 1 EFLAGS -1 0 -1 4198400 ok 4 ordinary -",
+            "issues": [
+              "unsupported_semantics"
+            ],
+            "length": 4,
+            "opcode": "SUB64ri8",
+            "operands": [
+              {
+                "kind": "register",
+                "view": {
+                  "bank": 4,
+                  "bit_offset": 0,
+                  "width": 64
+                }
+              },
+              {
+                "kind": "register",
+                "view": {
+                  "bank": 4,
+                  "bit_offset": 0,
+                  "width": 64
+                }
+              }
+            ],
+            "quality": "opaque",
+            "rule": null,
+            "semantic": {
+              "ast_sha256": "577b0617de25cfbd5565bb310fc0578b834cfd1a79837fe04d0adf13814bca31",
+              "backend": "bap-x86-legacy",
+              "fallback": null,
+              "gaps": [
+                "unsupported lift/form/prefix"
+              ],
+              "helper_sha256": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+              "memory_accesses": [],
+              "projection": "bap-bit-provenance-v2",
+              "runtime_sha256": "fb03843b065556c791e909b2cd7d1a8e2ef736ed461b6d8979da3f3fd5d6612a",
+              "status": "opaque-unsupported"
+            },
+            "undefined_flags": [],
+            "va": "0x0000000000401000"
+          }
+        ]
+      },
+      "query": {
+        "entries": [
+          "0x0000000000401000"
+        ],
+        "exception_rip_seed": false,
+        "seeds": [
+          "0x0000000000401000"
+        ]
+      },
+      "schema": "ariadne-minidump-report-v1"
+    }
+  },
+  {
+    "name": "movzx",
+    "artifactSha256": "3dfbb5631b70a97d880e40da010c7aee79e55a9f0e98fc75021398180598efd2",
+    "report": {
+      "analysis": {
+        "decoded": [],
+        "edges": [],
+        "missing_slice_seeds": [
+          "0x0000000000401000"
+        ],
+        "obligations": [
+          {
+            "reason": "decode_failed",
+            "va": "0x0000000000401000"
+          }
+        ],
+        "pending": [],
+        "phase": "done",
+        "provenance": [
+          {
+            "byte_source": "unavailable",
+            "va": "0x0000000000401000"
+          }
+        ],
+        "reaching": [
+          {
+            "before": "0x0000000000401000",
+            "definitions": []
+          }
+        ],
+        "scope_closed": false,
+        "scope_note": "recovery only; relative to supplied inputs",
+        "slice": [],
+        "visited": [
+          "0x0000000000401000"
+        ]
+      },
+      "identity": {
+        "artifact_sha256": "3dfbb5631b70a97d880e40da010c7aee79e55a9f0e98fc75021398180598efd2",
+        "core_package_version": "0.1.0",
+        "decoder_build": "LLVM MC 20.1.2 (decode reference)",
+        "decoder_protocol": 2,
+        "decoder_target": "x86_64-pc-windows-msvc",
+        "effects_ruleset": "bap-bit-provenance-v2",
+        "input_package_version": "0.1.0",
+        "location_catalogue": "gpr-bytes-status-df-memory-other-v1",
+        "platform": "windows",
+        "query_id": "f2a233a9f48f46110b75a3af80a79586a7c272088a690e23a38c9170ff0c7ec7",
+        "snapshot_id": "minidump-captured-amd64-v1:3dfbb5631b70a97d880e40da010c7aee79e55a9f0e98fc75021398180598efd2"
+      },
+      "input": {
+        "artifact_bytes": 1548,
+        "attempted": [
+          "0x0000000000401000"
+        ],
+        "decoder_batches": 1,
+        "exception": {
+          "code": 3221225477,
+          "registers": {
+            "rflags": "0x0000000000000000",
+            "rip": "0x0000000000401006",
+            "rsp": "0x0000000000000000"
+          },
+          "reported_address": "0x0000000000000000",
+          "thread_id": 17
+        },
+        "memory_info": [],
+        "metadata_gaps": [],
+        "modules": [],
+        "open_limits": {
+          "max_capture_ranges": 131072,
+          "max_file_bytes": 268435456,
+          "max_metadata_bytes": 16777216,
+          "max_overlap": 64,
+          "max_read_bytes": 65536,
+          "max_records": 131072,
+          "max_streams": 1024
+        },
+        "overlapping_starts": [],
+        "prefix_bytes": 4,
+        "prepare_limits": {
+          "batch_size": 128,
+          "max_candidates": 8192,
+          "max_decoder_batches": 4096,
+          "max_prefix_bytes": 61440,
+          "max_starts": 4096
+        },
+        "reads": [
+          {
+            "bytes_hex": "0fb64038",
+            "conflict_sources": [],
+            "spans": [
+              {
+                "contributors": [
+                  {
+                    "entry": 0,
+                    "file_offset": "0x0000000000000058",
+                    "stream": 5
+                  }
+                ],
+                "length": 4,
+                "va": "0x0000000000401000"
+              }
+            ],
+            "stop": {
+              "kind": "not_captured",
+              "va": "0x0000000000401004"
+            },
+            "va": "0x0000000000401000"
+          }
+        ],
+        "referenced": [
+          "0x0000000000401000"
+        ],
+        "streams": [
+          {
+            "file_offset": "0x0000000000000020",
+            "kind": 7,
+            "size": "0x0000000000000038",
+            "supported": true
+          },
+          {
+            "file_offset": "0x000000000000005c",
+            "kind": 5,
+            "size": "0x0000000000000014",
+            "supported": true
+          },
+          {
+            "file_offset": "0x0000000000000540",
+            "kind": 6,
+            "size": "0x00000000000000a8",
+            "supported": true
+          }
+        ],
+        "threads": [],
+        "unvisited_references": []
+      },
+      "preparation": {
+        "gaps": [
+          {
+            "reason": "unsupported_control",
+            "va": "0x0000000000401000"
+          }
+        ],
+        "sites": [
+          {
+            "byte_source": "captured",
+            "bytes_hex": "0fb64038",
+            "control": "stop",
+            "decoder_record": "v2 MOVZX32rm8 6 r:EAX r:RAX i:1 r:NONE i:56 r:NONE 1 1 0 0 -1 -1 -1 -1 -1 -1 4198400 ok 4 ordinary -",
+            "issues": [
+              "unsupported_semantics"
+            ],
+            "length": 4,
+            "opcode": "MOVZX32rm8",
+            "operands": [
+              {
+                "kind": "register",
+                "view": {
+                  "bank": 0,
+                  "bit_offset": 0,
+                  "width": 32
+                }
+              },
+              {
+                "kind": "register",
+                "view": {
+                  "bank": 0,
+                  "bit_offset": 0,
+                  "width": 64
+                }
+              }
+            ],
+            "quality": "opaque",
+            "rule": null,
+            "semantic": {
+              "ast_sha256": "c161920575087e2ced1105ef594ca5f574bc359fcab74480dd69c9d4b1de2ad1",
+              "backend": "bap-x86-legacy",
+              "fallback": null,
+              "gaps": [
+                "unsupported lift/form/prefix"
+              ],
+              "helper_sha256": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+              "memory_accesses": [],
+              "projection": "bap-bit-provenance-v2",
+              "runtime_sha256": "fb03843b065556c791e909b2cd7d1a8e2ef736ed461b6d8979da3f3fd5d6612a",
+              "status": "opaque-unsupported"
+            },
+            "undefined_flags": [],
+            "va": "0x0000000000401000"
+          }
+        ]
+      },
+      "query": {
+        "entries": [
+          "0x0000000000401000"
+        ],
+        "exception_rip_seed": false,
+        "seeds": [
+          "0x0000000000401000"
+        ]
+      },
+      "schema": "ariadne-minidump-report-v1"
+    }
+  },
+  {
+    "name": "xor",
+    "artifactSha256": "6e7877e4172b2666ad73da9b4fa1c0a0c2c9c5f86185b4ea7c936205d31c9501",
+    "report": {
+      "analysis": {
+        "decoded": [],
+        "edges": [],
+        "missing_slice_seeds": [
+          "0x0000000000401000"
+        ],
+        "obligations": [
+          {
+            "reason": "decode_failed",
+            "va": "0x0000000000401000"
+          }
+        ],
+        "pending": [],
+        "phase": "done",
+        "provenance": [
+          {
+            "byte_source": "unavailable",
+            "va": "0x0000000000401000"
+          }
+        ],
+        "reaching": [
+          {
+            "before": "0x0000000000401000",
+            "definitions": []
+          }
+        ],
+        "scope_closed": false,
+        "scope_note": "recovery only; relative to supplied inputs",
+        "slice": [],
+        "visited": [
+          "0x0000000000401000"
+        ]
+      },
+      "identity": {
+        "artifact_sha256": "6e7877e4172b2666ad73da9b4fa1c0a0c2c9c5f86185b4ea7c936205d31c9501",
+        "core_package_version": "0.1.0",
+        "decoder_build": "LLVM MC 20.1.2 (decode reference)",
+        "decoder_protocol": 2,
+        "decoder_target": "x86_64-pc-windows-msvc",
+        "effects_ruleset": "bap-bit-provenance-v2",
+        "input_package_version": "0.1.0",
+        "location_catalogue": "gpr-bytes-status-df-memory-other-v1",
+        "platform": "windows",
+        "query_id": "7c7b43197a7d35dec9975efb4ad5a15a898df74236b1727902320327d0e2c9a5",
+        "snapshot_id": "minidump-captured-amd64-v1:6e7877e4172b2666ad73da9b4fa1c0a0c2c9c5f86185b4ea7c936205d31c9501"
+      },
+      "input": {
+        "artifact_bytes": 1547,
+        "attempted": [
+          "0x0000000000401000"
+        ],
+        "decoder_batches": 1,
+        "exception": {
+          "code": 3221225477,
+          "registers": {
+            "rflags": "0x0000000000000000",
+            "rip": "0x0000000000401006",
+            "rsp": "0x0000000000000000"
+          },
+          "reported_address": "0x0000000000000000",
+          "thread_id": 17
+        },
+        "memory_info": [],
+        "metadata_gaps": [],
+        "modules": [],
+        "open_limits": {
+          "max_capture_ranges": 131072,
+          "max_file_bytes": 268435456,
+          "max_metadata_bytes": 16777216,
+          "max_overlap": 64,
+          "max_read_bytes": 65536,
+          "max_records": 131072,
+          "max_streams": 1024
+        },
+        "overlapping_starts": [],
+        "prefix_bytes": 3,
+        "prepare_limits": {
+          "batch_size": 128,
+          "max_candidates": 8192,
+          "max_decoder_batches": 4096,
+          "max_prefix_bytes": 61440,
+          "max_starts": 4096
+        },
+        "reads": [
+          {
+            "bytes_hex": "4831e0",
+            "conflict_sources": [],
+            "spans": [
+              {
+                "contributors": [
+                  {
+                    "entry": 0,
+                    "file_offset": "0x0000000000000058",
+                    "stream": 5
+                  }
+                ],
+                "length": 3,
+                "va": "0x0000000000401000"
+              }
+            ],
+            "stop": {
+              "kind": "not_captured",
+              "va": "0x0000000000401003"
+            },
+            "va": "0x0000000000401000"
+          }
+        ],
+        "referenced": [
+          "0x0000000000401000"
+        ],
+        "streams": [
+          {
+            "file_offset": "0x0000000000000020",
+            "kind": 7,
+            "size": "0x0000000000000038",
+            "supported": true
+          },
+          {
+            "file_offset": "0x000000000000005b",
+            "kind": 5,
+            "size": "0x0000000000000014",
+            "supported": true
+          },
+          {
+            "file_offset": "0x000000000000053f",
+            "kind": 6,
+            "size": "0x00000000000000a8",
+            "supported": true
+          }
+        ],
+        "threads": [],
+        "unvisited_references": []
+      },
+      "preparation": {
+        "gaps": [
+          {
+            "reason": "unsupported_control",
+            "va": "0x0000000000401000"
+          }
+        ],
+        "sites": [
+          {
+            "byte_source": "captured",
+            "bytes_hex": "4831e0",
+            "control": "stop",
+            "decoder_record": "v2 XOR64rr 3 r:RAX r:RAX r:RSP 1 0 0 1 EFLAGS -1 0 -1 4198400 ok 3 ordinary -",
+            "issues": [
+              "unsupported_semantics"
+            ],
+            "length": 3,
+            "opcode": "XOR64rr",
+            "operands": [
+              {
+                "kind": "register",
+                "view": {
+                  "bank": 0,
+                  "bit_offset": 0,
+                  "width": 64
+                }
+              },
+              {
+                "kind": "register",
+                "view": {
+                  "bank": 0,
+                  "bit_offset": 0,
+                  "width": 64
+                }
+              },
+              {
+                "kind": "register",
+                "view": {
+                  "bank": 4,
+                  "bit_offset": 0,
+                  "width": 64
+                }
+              }
+            ],
+            "quality": "opaque",
+            "rule": null,
+            "semantic": {
+              "ast_sha256": "75a7d0c9e170f56c501427f69f69b4c6add81f962385d48b062dfa8c6b30e93c",
+              "backend": "bap-x86-legacy",
+              "fallback": null,
+              "gaps": [
+                "unsupported lift/form/prefix"
+              ],
+              "helper_sha256": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+              "memory_accesses": [],
+              "projection": "bap-bit-provenance-v2",
+              "runtime_sha256": "fb03843b065556c791e909b2cd7d1a8e2ef736ed461b6d8979da3f3fd5d6612a",
+              "status": "opaque-unsupported"
+            },
+            "undefined_flags": [],
+            "va": "0x0000000000401000"
+          }
+        ]
+      },
+      "query": {
+        "entries": [
+          "0x0000000000401000"
+        ],
+        "exception_rip_seed": false,
+        "seeds": [
+          "0x0000000000401000"
+        ]
+      },
+      "schema": "ariadne-minidump-report-v1"
+    }
+  },
+  {
+    "name": "cmp",
+    "artifactSha256": "57ce89fe5ade6abfa879a27da5afb91dbbd3dfe48980fb123b0c5a8efdff5233",
+    "report": {
+      "analysis": {
+        "decoded": [],
+        "edges": [],
+        "missing_slice_seeds": [
+          "0x0000000000401000"
+        ],
+        "obligations": [
+          {
+            "reason": "decode_failed",
+            "va": "0x0000000000401000"
+          }
+        ],
+        "pending": [],
+        "phase": "done",
+        "provenance": [
+          {
+            "byte_source": "unavailable",
+            "va": "0x0000000000401000"
+          }
+        ],
+        "reaching": [
+          {
+            "before": "0x0000000000401000",
+            "definitions": []
+          }
+        ],
+        "scope_closed": false,
+        "scope_note": "recovery only; relative to supplied inputs",
+        "slice": [],
+        "visited": [
+          "0x0000000000401000"
+        ]
+      },
+      "identity": {
+        "artifact_sha256": "57ce89fe5ade6abfa879a27da5afb91dbbd3dfe48980fb123b0c5a8efdff5233",
+        "core_package_version": "0.1.0",
+        "decoder_build": "LLVM MC 20.1.2 (decode reference)",
+        "decoder_protocol": 2,
+        "decoder_target": "x86_64-pc-windows-msvc",
+        "effects_ruleset": "bap-bit-provenance-v2",
+        "input_package_version": "0.1.0",
+        "location_catalogue": "gpr-bytes-status-df-memory-other-v1",
+        "platform": "windows",
+        "query_id": "ab54a6ce7cd2e4a0f1f815e0f0111ed883f301b3bb9e28261a562d2e1ce508ad",
+        "snapshot_id": "minidump-captured-amd64-v1:57ce89fe5ade6abfa879a27da5afb91dbbd3dfe48980fb123b0c5a8efdff5233"
+      },
+      "input": {
+        "artifact_bytes": 1548,
+        "attempted": [
+          "0x0000000000401000"
+        ],
+        "decoder_batches": 1,
+        "exception": {
+          "code": 3221225477,
+          "registers": {
+            "rflags": "0x0000000000000000",
+            "rip": "0x0000000000401006",
+            "rsp": "0x0000000000000000"
+          },
+          "reported_address": "0x0000000000000000",
+          "thread_id": 17
+        },
+        "memory_info": [],
+        "metadata_gaps": [],
+        "modules": [],
+        "open_limits": {
+          "max_capture_ranges": 131072,
+          "max_file_bytes": 268435456,
+          "max_metadata_bytes": 16777216,
+          "max_overlap": 64,
+          "max_read_bytes": 65536,
+          "max_records": 131072,
+          "max_streams": 1024
+        },
+        "overlapping_starts": [],
+        "prefix_bytes": 4,
+        "prepare_limits": {
+          "batch_size": 128,
+          "max_candidates": 8192,
+          "max_decoder_batches": 4096,
+          "max_prefix_bytes": 61440,
+          "max_starts": 4096
+        },
+        "reads": [
+          {
+            "bytes_hex": "80783876",
+            "conflict_sources": [],
+            "spans": [
+              {
+                "contributors": [
+                  {
+                    "entry": 0,
+                    "file_offset": "0x0000000000000058",
+                    "stream": 5
+                  }
+                ],
+                "length": 4,
+                "va": "0x0000000000401000"
+              }
+            ],
+            "stop": {
+              "kind": "not_captured",
+              "va": "0x0000000000401004"
+            },
+            "va": "0x0000000000401000"
+          }
+        ],
+        "referenced": [
+          "0x0000000000401000"
+        ],
+        "streams": [
+          {
+            "file_offset": "0x0000000000000020",
+            "kind": 7,
+            "size": "0x0000000000000038",
+            "supported": true
+          },
+          {
+            "file_offset": "0x000000000000005c",
+            "kind": 5,
+            "size": "0x0000000000000014",
+            "supported": true
+          },
+          {
+            "file_offset": "0x0000000000000540",
+            "kind": 6,
+            "size": "0x00000000000000a8",
+            "supported": true
+          }
+        ],
+        "threads": [],
+        "unvisited_references": []
+      },
+      "preparation": {
+        "gaps": [
+          {
+            "reason": "unsupported_control",
+            "va": "0x0000000000401000"
+          }
+        ],
+        "sites": [
+          {
+            "byte_source": "captured",
+            "bytes_hex": "80783876",
+            "control": "stop",
+            "decoder_record": "v2 CMP8mi 6 r:RAX i:1 r:NONE i:56 r:NONE i:118 0 1 0 1 EFLAGS -1 -1 -1 -1 -1 -1 4198400 ok 4 ordinary -",
+            "issues": [
+              "unsupported_semantics"
+            ],
+            "length": 4,
+            "opcode": "CMP8mi",
+            "operands": [
+              {
+                "kind": "register",
+                "view": {
+                  "bank": 0,
+                  "bit_offset": 0,
+                  "width": 64
+                }
+              }
+            ],
+            "quality": "opaque",
+            "rule": null,
+            "semantic": {
+              "ast_sha256": "df08835dd342dae1389e4d7e04a2e3886aa369202b56a87cd47783a8a102d86f",
+              "backend": "bap-x86-legacy",
+              "fallback": null,
+              "gaps": [
+                "unsupported lift/form/prefix"
+              ],
+              "helper_sha256": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+              "memory_accesses": [],
+              "projection": "bap-bit-provenance-v2",
+              "runtime_sha256": "fb03843b065556c791e909b2cd7d1a8e2ef736ed461b6d8979da3f3fd5d6612a",
+              "status": "opaque-unsupported"
+            },
+            "undefined_flags": [],
+            "va": "0x0000000000401000"
+          }
+        ]
+      },
+      "query": {
+        "entries": [
+          "0x0000000000401000"
+        ],
+        "exception_rip_seed": false,
+        "seeds": [
+          "0x0000000000401000"
+        ]
+      },
+      "schema": "ariadne-minidump-report-v1"
+    }
+  }
+]

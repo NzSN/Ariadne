@@ -171,6 +171,99 @@ fn bytes(hex: &str) -> Vec<u8> {
 fn cell(bank: &str, index: usize) -> String {
     format!("gpr:{bank}:{index}")
 }
+
+#[test]
+#[ignore = "requires pinned BAP/LLVM helpers; independent P0 contract"]
+fn observed_admission_forms_match_frozen_effects_and_address_footprints() {
+    let contract: serde_json::Value =
+        serde_json::from_str(include_str!("fixtures/admission/contract.json")).unwrap();
+    let rows = &contract["cases"].as_array().unwrap()[..16];
+    for target in [DecoderTarget::LinuxAmd64, DecoderTarget::WindowsAmd64] {
+        let mut backend = make_backend();
+        let candidates = rows
+            .iter()
+            .enumerate()
+            .map(|(i, row)| {
+                (
+                    0x401000 + i as u64 * 32,
+                    Some(bytes(row["bytes"].as_str().unwrap())),
+                )
+            })
+            .collect();
+        let batch = backend
+            .prepare(
+                "admission-independent-contract",
+                &candidates,
+                &PreparationOptions::default(),
+                target,
+            )
+            .unwrap();
+        for (i, row) in rows.iter().enumerate() {
+            let site = &batch.sites[&(0x401000 + i as u64 * 32)];
+            let expected = &row["expected"];
+            for (key, actual) in [
+                ("uses", &site.instruction.uses),
+                ("may_defs", &site.instruction.may_defs),
+                ("must_defs", &site.instruction.must_defs),
+            ] {
+                let wanted: ariadne::LocationSet = expected[key]
+                    .as_array()
+                    .unwrap()
+                    .iter()
+                    .map(|v| v.as_str().unwrap().into())
+                    .collect();
+                assert_eq!(*actual, wanted, "{} {key}", row["name"]);
+            }
+            let semantic = site.evidence.semantic.as_ref().unwrap();
+            assert_eq!(semantic.status, "projected", "{}", row["name"]);
+            assert_eq!(semantic.projection, "bap-bit-provenance-v3");
+            assert!(semantic.fallback.is_none());
+            if site.instruction.kind != ariadne::InstructionKind::Jump {
+                assert_eq!(
+                    site.instruction.fall,
+                    [0x401000 + i as u64 * 32 + site.evidence.length as u64].into()
+                );
+            } else {
+                assert!(site.instruction.fall.is_empty());
+            }
+            let flags: ariadne::LocationSet = expected["undefined_flags"]
+                .as_array()
+                .map(|a| a.iter().map(|v| v.as_str().unwrap().into()).collect())
+                .unwrap_or_default();
+            assert_eq!(site.evidence.undefined_flags, flags);
+            if let Some(access) = expected.get("access") {
+                // CMP BIL repeats its one decoded operand in several flag expressions.
+                // Preserve every attributed expression and check each footprint.
+                assert!(!semantic.memory_accesses.is_empty(), "{}", row["name"]);
+                for actual in &semantic.memory_accesses {
+                    assert_eq!(
+                        actual.access_width as u64,
+                        access["width"].as_u64().unwrap()
+                    );
+                    assert_eq!(actual.address_width, 64);
+                    assert!(matches!(
+                        actual.role,
+                        ariadne::effects::MemoryAccessRole::Load
+                    ));
+                    let expression = actual.expression.as_ref().unwrap();
+                    assert_eq!(
+                        expression.constant,
+                        access["displacement"].as_i64().unwrap() as u64
+                    );
+                    let inputs = actual.address_inputs.clone();
+                    let bank = access["base"].as_str().unwrap();
+                    let mut wanted: ariadne::LocationSet = (0..8).map(|n| cell(bank, n)).collect();
+                    if let Some(bank) = access["index"].as_str() {
+                        wanted.extend((0..8).map(|n| cell(bank, n)));
+                    }
+                    assert_eq!(inputs, wanted, "{} address inputs", row["name"]);
+                    assert!(!inputs.contains("memory:any"));
+                }
+            }
+        }
+        backend.finish().unwrap();
+    }
+}
 #[test]
 #[ignore = "requires pinned BAP/LLVM native helpers"]
 fn aliases_zero_extension_memory_and_conditional_writes_have_independent_effect_expectations() {
@@ -329,6 +422,8 @@ fn partial_self_moves_define_written_cells_and_unsupported_bil_never_falls_back(
         (0x1000, Some(bytes("88c0"))),
         (0x1020, Some(bytes("88e4"))),
         (0x1040, Some(bytes("6689c0"))),
+        (0x1050, Some(bytes("89c0"))),
+        (0x1058, Some(bytes("480f44c0"))),
         (0x1060, Some(bytes("f8"))),
     ]
     .into();
@@ -344,14 +439,35 @@ fn partial_self_moves_define_written_cells_and_unsupported_bil_never_falls_back(
         (0x1000, vec![cell("rax", 0)]),
         (0x1020, vec![cell("rax", 1)]),
         (0x1040, vec![cell("rax", 0), cell("rax", 1)]),
+        (0x1050, (0..8).map(|i| cell("rax", i)).collect()),
     ] {
         let site = &batch.sites[&va];
         let expected: std::collections::BTreeSet<_> = cells.into_iter().collect();
         assert_eq!(site.instruction.may_defs, expected);
         assert_eq!(site.instruction.must_defs, expected);
-        assert_eq!(site.instruction.uses, expected);
+        assert_eq!(
+            site.instruction.uses,
+            if va == 0x1050 {
+                (0..4).map(|i| cell("rax", i)).collect()
+            } else {
+                expected
+            }
+        );
         assert_eq!(site.evidence.semantic.as_ref().unwrap().status, "projected");
     }
+    let conditional = &batch.sites[&0x1058];
+    assert_eq!(
+        conditional.instruction.may_defs,
+        (0..8).map(|i| cell("rax", i)).collect()
+    );
+    assert!(conditional.instruction.must_defs.is_empty());
+    assert_eq!(
+        conditional.instruction.uses,
+        (0..8)
+            .map(|i| cell("rax", i))
+            .chain(["flag:zf".into()])
+            .collect()
+    );
     let unsupported = &batch.sites[&0x1060];
     assert!(!unsupported.decodable);
     assert_eq!(unsupported.instruction.kind, ariadne::InstructionKind::Stop);

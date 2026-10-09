@@ -6868,6 +6868,5716 @@
       "expect": {
         "reject": true
       }
+    },
+    {
+      "name": "sub-rsp-observed",
+      "prefix": "4883ec58",
+      "lift": {
+        "schema": "ariadne.bap-site/v1",
+        "batch": 0,
+        "snapshot": "d3f1db96af7c7eed100e0674fa6da86c16df48eb603427701241a04f6452f25f",
+        "va": "0x0000000000001520",
+        "status": "decoded",
+        "length": 4,
+        "bytes": "4883ec58",
+        "opcode": "SUB64ri8",
+        "properties": {
+          "jump": false,
+          "conditional": false,
+          "indirect": false,
+          "call": false,
+          "return": false,
+          "control": false
+        },
+        "bil": [
+          {
+            "kind": "move",
+            "var": {
+              "name": "#12582887",
+              "index": 0,
+              "virtual": true,
+              "width": 64,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "var",
+              "var": {
+                "name": "RSP",
+                "index": 0,
+                "virtual": false,
+                "width": 64,
+                "type": "imm"
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "#12582886",
+              "index": 0,
+              "virtual": true,
+              "width": 64,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "int",
+              "value": "0x58:64u"
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "RSP",
+              "index": 0,
+              "virtual": false,
+              "width": 64,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 17,
+              "lhs": {
+                "kind": "var",
+                "var": {
+                  "name": "RSP",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              },
+              "rhs": {
+                "kind": "int",
+                "value": "0x58:64u"
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "CF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 3,
+              "lhs": {
+                "kind": "var",
+                "var": {
+                  "name": "#12582887",
+                  "index": 0,
+                  "virtual": true,
+                  "width": 64,
+                  "type": "imm"
+                }
+              },
+              "rhs": {
+                "kind": "var",
+                "var": {
+                  "name": "#12582886",
+                  "index": 0,
+                  "virtual": true,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "OF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "cast",
+              "op": 1,
+              "width": 1,
+              "arg": {
+                "kind": "binop",
+                "op": 8,
+                "lhs": {
+                  "kind": "binop",
+                  "op": 6,
+                  "lhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582887",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  },
+                  "rhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582886",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  }
+                },
+                "rhs": {
+                  "kind": "binop",
+                  "op": 6,
+                  "lhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582887",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  },
+                  "rhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "RSP",
+                      "index": 0,
+                      "virtual": false,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "AF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 5,
+              "lhs": {
+                "kind": "int",
+                "value": "0x10:64u"
+              },
+              "rhs": {
+                "kind": "binop",
+                "op": 8,
+                "lhs": {
+                  "kind": "int",
+                  "value": "0x10:64u"
+                },
+                "rhs": {
+                  "kind": "binop",
+                  "op": 6,
+                  "lhs": {
+                    "kind": "binop",
+                    "op": 6,
+                    "lhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "RSP",
+                        "index": 0,
+                        "virtual": false,
+                        "width": 64,
+                        "type": "imm"
+                      }
+                    },
+                    "rhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "#12582887",
+                        "index": 0,
+                        "virtual": true,
+                        "width": 64,
+                        "type": "imm"
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582886",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "PF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "unop",
+              "op": 0,
+              "arg": {
+                "kind": "cast",
+                "op": 0,
+                "width": 1,
+                "arg": {
+                  "kind": "let",
+                  "var": {
+                    "name": "#12582885",
+                    "index": 0,
+                    "virtual": true,
+                    "width": 64,
+                    "type": "imm"
+                  },
+                  "value": {
+                    "kind": "binop",
+                    "op": 6,
+                    "lhs": {
+                      "kind": "binop",
+                      "op": 10,
+                      "lhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "RSP",
+                          "index": 0,
+                          "virtual": false,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "int",
+                        "value": "4:64u"
+                      }
+                    },
+                    "rhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "RSP",
+                        "index": 0,
+                        "virtual": false,
+                        "width": 64,
+                        "type": "imm"
+                      }
+                    }
+                  },
+                  "body": {
+                    "kind": "let",
+                    "var": {
+                      "name": "#12582885",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    },
+                    "value": {
+                      "kind": "binop",
+                      "op": 6,
+                      "lhs": {
+                        "kind": "binop",
+                        "op": 10,
+                        "lhs": {
+                          "kind": "var",
+                          "var": {
+                            "name": "#12582885",
+                            "index": 0,
+                            "virtual": true,
+                            "width": 64,
+                            "type": "imm"
+                          }
+                        },
+                        "rhs": {
+                          "kind": "int",
+                          "value": "2:64u"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "#12582885",
+                          "index": 0,
+                          "virtual": true,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      }
+                    },
+                    "body": {
+                      "kind": "binop",
+                      "op": 6,
+                      "lhs": {
+                        "kind": "binop",
+                        "op": 10,
+                        "lhs": {
+                          "kind": "var",
+                          "var": {
+                            "name": "#12582885",
+                            "index": 0,
+                            "virtual": true,
+                            "width": 64,
+                            "type": "imm"
+                          }
+                        },
+                        "rhs": {
+                          "kind": "int",
+                          "value": "1:64u"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "#12582885",
+                          "index": 0,
+                          "virtual": true,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "SF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "cast",
+              "op": 1,
+              "width": 1,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "RSP",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "ZF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 5,
+              "lhs": {
+                "kind": "int",
+                "value": "0:64u"
+              },
+              "rhs": {
+                "kind": "var",
+                "var": {
+                  "name": "RSP",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "expect": {
+        "uses": [
+          "gpr:rsp:0",
+          "gpr:rsp:1",
+          "gpr:rsp:2",
+          "gpr:rsp:3",
+          "gpr:rsp:4",
+          "gpr:rsp:5",
+          "gpr:rsp:6",
+          "gpr:rsp:7"
+        ],
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rsp:0",
+          "gpr:rsp:1",
+          "gpr:rsp:2",
+          "gpr:rsp:3",
+          "gpr:rsp:4",
+          "gpr:rsp:5",
+          "gpr:rsp:6",
+          "gpr:rsp:7"
+        ],
+        "must_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rsp:0",
+          "gpr:rsp:1",
+          "gpr:rsp:2",
+          "gpr:rsp:3",
+          "gpr:rsp:4",
+          "gpr:rsp:5",
+          "gpr:rsp:6",
+          "gpr:rsp:7"
+        ]
+      }
+    },
+    {
+      "name": "sub-rax-zero",
+      "prefix": "4883e800",
+      "lift": {
+        "schema": "ariadne.bap-site/v1",
+        "batch": 0,
+        "snapshot": "d3f1db96af7c7eed100e0674fa6da86c16df48eb603427701241a04f6452f25f",
+        "va": "0x0000000000001540",
+        "status": "decoded",
+        "length": 4,
+        "bytes": "4883e800",
+        "opcode": "SUB64ri8",
+        "properties": {
+          "jump": false,
+          "conditional": false,
+          "indirect": false,
+          "call": false,
+          "return": false,
+          "control": false
+        },
+        "bil": [
+          {
+            "kind": "move",
+            "var": {
+              "name": "#12582884",
+              "index": 0,
+              "virtual": true,
+              "width": 64,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "var",
+              "var": {
+                "name": "RAX",
+                "index": 0,
+                "virtual": false,
+                "width": 64,
+                "type": "imm"
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "#12582883",
+              "index": 0,
+              "virtual": true,
+              "width": 64,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "int",
+              "value": "0:64u"
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "RAX",
+              "index": 0,
+              "virtual": false,
+              "width": 64,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "var",
+              "var": {
+                "name": "RAX",
+                "index": 0,
+                "virtual": false,
+                "width": 64,
+                "type": "imm"
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "CF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 3,
+              "lhs": {
+                "kind": "var",
+                "var": {
+                  "name": "#12582884",
+                  "index": 0,
+                  "virtual": true,
+                  "width": 64,
+                  "type": "imm"
+                }
+              },
+              "rhs": {
+                "kind": "var",
+                "var": {
+                  "name": "#12582883",
+                  "index": 0,
+                  "virtual": true,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "OF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "cast",
+              "op": 1,
+              "width": 1,
+              "arg": {
+                "kind": "binop",
+                "op": 8,
+                "lhs": {
+                  "kind": "binop",
+                  "op": 6,
+                  "lhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582884",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  },
+                  "rhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582883",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  }
+                },
+                "rhs": {
+                  "kind": "binop",
+                  "op": 6,
+                  "lhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582884",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  },
+                  "rhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "RAX",
+                      "index": 0,
+                      "virtual": false,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "AF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 5,
+              "lhs": {
+                "kind": "int",
+                "value": "0x10:64u"
+              },
+              "rhs": {
+                "kind": "binop",
+                "op": 8,
+                "lhs": {
+                  "kind": "int",
+                  "value": "0x10:64u"
+                },
+                "rhs": {
+                  "kind": "binop",
+                  "op": 6,
+                  "lhs": {
+                    "kind": "binop",
+                    "op": 6,
+                    "lhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "RAX",
+                        "index": 0,
+                        "virtual": false,
+                        "width": 64,
+                        "type": "imm"
+                      }
+                    },
+                    "rhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "#12582884",
+                        "index": 0,
+                        "virtual": true,
+                        "width": 64,
+                        "type": "imm"
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582883",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "PF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "unop",
+              "op": 0,
+              "arg": {
+                "kind": "cast",
+                "op": 0,
+                "width": 1,
+                "arg": {
+                  "kind": "let",
+                  "var": {
+                    "name": "#12582882",
+                    "index": 0,
+                    "virtual": true,
+                    "width": 64,
+                    "type": "imm"
+                  },
+                  "value": {
+                    "kind": "binop",
+                    "op": 6,
+                    "lhs": {
+                      "kind": "binop",
+                      "op": 10,
+                      "lhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "RAX",
+                          "index": 0,
+                          "virtual": false,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "int",
+                        "value": "4:64u"
+                      }
+                    },
+                    "rhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "RAX",
+                        "index": 0,
+                        "virtual": false,
+                        "width": 64,
+                        "type": "imm"
+                      }
+                    }
+                  },
+                  "body": {
+                    "kind": "let",
+                    "var": {
+                      "name": "#12582882",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    },
+                    "value": {
+                      "kind": "binop",
+                      "op": 6,
+                      "lhs": {
+                        "kind": "binop",
+                        "op": 10,
+                        "lhs": {
+                          "kind": "var",
+                          "var": {
+                            "name": "#12582882",
+                            "index": 0,
+                            "virtual": true,
+                            "width": 64,
+                            "type": "imm"
+                          }
+                        },
+                        "rhs": {
+                          "kind": "int",
+                          "value": "2:64u"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "#12582882",
+                          "index": 0,
+                          "virtual": true,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      }
+                    },
+                    "body": {
+                      "kind": "binop",
+                      "op": 6,
+                      "lhs": {
+                        "kind": "binop",
+                        "op": 10,
+                        "lhs": {
+                          "kind": "var",
+                          "var": {
+                            "name": "#12582882",
+                            "index": 0,
+                            "virtual": true,
+                            "width": 64,
+                            "type": "imm"
+                          }
+                        },
+                        "rhs": {
+                          "kind": "int",
+                          "value": "1:64u"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "#12582882",
+                          "index": 0,
+                          "virtual": true,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "SF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "cast",
+              "op": 1,
+              "width": 1,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "ZF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 5,
+              "lhs": {
+                "kind": "int",
+                "value": "0:64u"
+              },
+              "rhs": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "expect": {
+        "uses": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "must_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ]
+      }
+    },
+    {
+      "name": "sub-rax-positive-limit",
+      "prefix": "4883e87f",
+      "lift": {
+        "schema": "ariadne.bap-site/v1",
+        "batch": 0,
+        "snapshot": "d3f1db96af7c7eed100e0674fa6da86c16df48eb603427701241a04f6452f25f",
+        "va": "0x0000000000001560",
+        "status": "decoded",
+        "length": 4,
+        "bytes": "4883e87f",
+        "opcode": "SUB64ri8",
+        "properties": {
+          "jump": false,
+          "conditional": false,
+          "indirect": false,
+          "call": false,
+          "return": false,
+          "control": false
+        },
+        "bil": [
+          {
+            "kind": "move",
+            "var": {
+              "name": "#12582881",
+              "index": 0,
+              "virtual": true,
+              "width": 64,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "var",
+              "var": {
+                "name": "RAX",
+                "index": 0,
+                "virtual": false,
+                "width": 64,
+                "type": "imm"
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "#12582880",
+              "index": 0,
+              "virtual": true,
+              "width": 64,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "int",
+              "value": "0x7F:64u"
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "RAX",
+              "index": 0,
+              "virtual": false,
+              "width": 64,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 17,
+              "lhs": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              },
+              "rhs": {
+                "kind": "int",
+                "value": "0x7F:64u"
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "CF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 3,
+              "lhs": {
+                "kind": "var",
+                "var": {
+                  "name": "#12582881",
+                  "index": 0,
+                  "virtual": true,
+                  "width": 64,
+                  "type": "imm"
+                }
+              },
+              "rhs": {
+                "kind": "var",
+                "var": {
+                  "name": "#12582880",
+                  "index": 0,
+                  "virtual": true,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "OF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "cast",
+              "op": 1,
+              "width": 1,
+              "arg": {
+                "kind": "binop",
+                "op": 8,
+                "lhs": {
+                  "kind": "binop",
+                  "op": 6,
+                  "lhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582881",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  },
+                  "rhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582880",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  }
+                },
+                "rhs": {
+                  "kind": "binop",
+                  "op": 6,
+                  "lhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582881",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  },
+                  "rhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "RAX",
+                      "index": 0,
+                      "virtual": false,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "AF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 5,
+              "lhs": {
+                "kind": "int",
+                "value": "0x10:64u"
+              },
+              "rhs": {
+                "kind": "binop",
+                "op": 8,
+                "lhs": {
+                  "kind": "int",
+                  "value": "0x10:64u"
+                },
+                "rhs": {
+                  "kind": "binop",
+                  "op": 6,
+                  "lhs": {
+                    "kind": "binop",
+                    "op": 6,
+                    "lhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "RAX",
+                        "index": 0,
+                        "virtual": false,
+                        "width": 64,
+                        "type": "imm"
+                      }
+                    },
+                    "rhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "#12582881",
+                        "index": 0,
+                        "virtual": true,
+                        "width": 64,
+                        "type": "imm"
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582880",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "PF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "unop",
+              "op": 0,
+              "arg": {
+                "kind": "cast",
+                "op": 0,
+                "width": 1,
+                "arg": {
+                  "kind": "let",
+                  "var": {
+                    "name": "#12582879",
+                    "index": 0,
+                    "virtual": true,
+                    "width": 64,
+                    "type": "imm"
+                  },
+                  "value": {
+                    "kind": "binop",
+                    "op": 6,
+                    "lhs": {
+                      "kind": "binop",
+                      "op": 10,
+                      "lhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "RAX",
+                          "index": 0,
+                          "virtual": false,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "int",
+                        "value": "4:64u"
+                      }
+                    },
+                    "rhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "RAX",
+                        "index": 0,
+                        "virtual": false,
+                        "width": 64,
+                        "type": "imm"
+                      }
+                    }
+                  },
+                  "body": {
+                    "kind": "let",
+                    "var": {
+                      "name": "#12582879",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    },
+                    "value": {
+                      "kind": "binop",
+                      "op": 6,
+                      "lhs": {
+                        "kind": "binop",
+                        "op": 10,
+                        "lhs": {
+                          "kind": "var",
+                          "var": {
+                            "name": "#12582879",
+                            "index": 0,
+                            "virtual": true,
+                            "width": 64,
+                            "type": "imm"
+                          }
+                        },
+                        "rhs": {
+                          "kind": "int",
+                          "value": "2:64u"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "#12582879",
+                          "index": 0,
+                          "virtual": true,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      }
+                    },
+                    "body": {
+                      "kind": "binop",
+                      "op": 6,
+                      "lhs": {
+                        "kind": "binop",
+                        "op": 10,
+                        "lhs": {
+                          "kind": "var",
+                          "var": {
+                            "name": "#12582879",
+                            "index": 0,
+                            "virtual": true,
+                            "width": 64,
+                            "type": "imm"
+                          }
+                        },
+                        "rhs": {
+                          "kind": "int",
+                          "value": "1:64u"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "#12582879",
+                          "index": 0,
+                          "virtual": true,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "SF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "cast",
+              "op": 1,
+              "width": 1,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "ZF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 5,
+              "lhs": {
+                "kind": "int",
+                "value": "0:64u"
+              },
+              "rhs": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "expect": {
+        "uses": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "must_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ]
+      }
+    },
+    {
+      "name": "sub-rax-negative-limit",
+      "prefix": "4883e880",
+      "lift": {
+        "schema": "ariadne.bap-site/v1",
+        "batch": 0,
+        "snapshot": "d3f1db96af7c7eed100e0674fa6da86c16df48eb603427701241a04f6452f25f",
+        "va": "0x0000000000001580",
+        "status": "decoded",
+        "length": 4,
+        "bytes": "4883e880",
+        "opcode": "SUB64ri8",
+        "properties": {
+          "jump": false,
+          "conditional": false,
+          "indirect": false,
+          "call": false,
+          "return": false,
+          "control": false
+        },
+        "bil": [
+          {
+            "kind": "move",
+            "var": {
+              "name": "#12582878",
+              "index": 0,
+              "virtual": true,
+              "width": 64,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "var",
+              "var": {
+                "name": "RAX",
+                "index": 0,
+                "virtual": false,
+                "width": 64,
+                "type": "imm"
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "#12582877",
+              "index": 0,
+              "virtual": true,
+              "width": 64,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "int",
+              "value": "0xFFFFFFFFFFFFFF80:64u"
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "RAX",
+              "index": 0,
+              "virtual": false,
+              "width": 64,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 17,
+              "lhs": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              },
+              "rhs": {
+                "kind": "int",
+                "value": "0xFFFFFFFFFFFFFF80:64u"
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "CF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 3,
+              "lhs": {
+                "kind": "var",
+                "var": {
+                  "name": "#12582878",
+                  "index": 0,
+                  "virtual": true,
+                  "width": 64,
+                  "type": "imm"
+                }
+              },
+              "rhs": {
+                "kind": "var",
+                "var": {
+                  "name": "#12582877",
+                  "index": 0,
+                  "virtual": true,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "OF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "cast",
+              "op": 1,
+              "width": 1,
+              "arg": {
+                "kind": "binop",
+                "op": 8,
+                "lhs": {
+                  "kind": "binop",
+                  "op": 6,
+                  "lhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582878",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  },
+                  "rhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582877",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  }
+                },
+                "rhs": {
+                  "kind": "binop",
+                  "op": 6,
+                  "lhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582878",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  },
+                  "rhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "RAX",
+                      "index": 0,
+                      "virtual": false,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "AF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 5,
+              "lhs": {
+                "kind": "int",
+                "value": "0x10:64u"
+              },
+              "rhs": {
+                "kind": "binop",
+                "op": 8,
+                "lhs": {
+                  "kind": "int",
+                  "value": "0x10:64u"
+                },
+                "rhs": {
+                  "kind": "binop",
+                  "op": 6,
+                  "lhs": {
+                    "kind": "binop",
+                    "op": 6,
+                    "lhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "RAX",
+                        "index": 0,
+                        "virtual": false,
+                        "width": 64,
+                        "type": "imm"
+                      }
+                    },
+                    "rhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "#12582878",
+                        "index": 0,
+                        "virtual": true,
+                        "width": 64,
+                        "type": "imm"
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582877",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "PF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "unop",
+              "op": 0,
+              "arg": {
+                "kind": "cast",
+                "op": 0,
+                "width": 1,
+                "arg": {
+                  "kind": "let",
+                  "var": {
+                    "name": "#12582876",
+                    "index": 0,
+                    "virtual": true,
+                    "width": 64,
+                    "type": "imm"
+                  },
+                  "value": {
+                    "kind": "binop",
+                    "op": 6,
+                    "lhs": {
+                      "kind": "binop",
+                      "op": 10,
+                      "lhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "RAX",
+                          "index": 0,
+                          "virtual": false,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "int",
+                        "value": "4:64u"
+                      }
+                    },
+                    "rhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "RAX",
+                        "index": 0,
+                        "virtual": false,
+                        "width": 64,
+                        "type": "imm"
+                      }
+                    }
+                  },
+                  "body": {
+                    "kind": "let",
+                    "var": {
+                      "name": "#12582876",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    },
+                    "value": {
+                      "kind": "binop",
+                      "op": 6,
+                      "lhs": {
+                        "kind": "binop",
+                        "op": 10,
+                        "lhs": {
+                          "kind": "var",
+                          "var": {
+                            "name": "#12582876",
+                            "index": 0,
+                            "virtual": true,
+                            "width": 64,
+                            "type": "imm"
+                          }
+                        },
+                        "rhs": {
+                          "kind": "int",
+                          "value": "2:64u"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "#12582876",
+                          "index": 0,
+                          "virtual": true,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      }
+                    },
+                    "body": {
+                      "kind": "binop",
+                      "op": 6,
+                      "lhs": {
+                        "kind": "binop",
+                        "op": 10,
+                        "lhs": {
+                          "kind": "var",
+                          "var": {
+                            "name": "#12582876",
+                            "index": 0,
+                            "virtual": true,
+                            "width": 64,
+                            "type": "imm"
+                          }
+                        },
+                        "rhs": {
+                          "kind": "int",
+                          "value": "1:64u"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "#12582876",
+                          "index": 0,
+                          "virtual": true,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "SF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "cast",
+              "op": 1,
+              "width": 1,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "ZF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 5,
+              "lhs": {
+                "kind": "int",
+                "value": "0:64u"
+              },
+              "rhs": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "expect": {
+        "uses": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "must_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ]
+      }
+    },
+    {
+      "name": "sub-rax-negative-one",
+      "prefix": "4883e8ff",
+      "lift": {
+        "schema": "ariadne.bap-site/v1",
+        "batch": 0,
+        "snapshot": "d3f1db96af7c7eed100e0674fa6da86c16df48eb603427701241a04f6452f25f",
+        "va": "0x00000000000015a0",
+        "status": "decoded",
+        "length": 4,
+        "bytes": "4883e8ff",
+        "opcode": "SUB64ri8",
+        "properties": {
+          "jump": false,
+          "conditional": false,
+          "indirect": false,
+          "call": false,
+          "return": false,
+          "control": false
+        },
+        "bil": [
+          {
+            "kind": "move",
+            "var": {
+              "name": "#12582875",
+              "index": 0,
+              "virtual": true,
+              "width": 64,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "var",
+              "var": {
+                "name": "RAX",
+                "index": 0,
+                "virtual": false,
+                "width": 64,
+                "type": "imm"
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "#12582874",
+              "index": 0,
+              "virtual": true,
+              "width": 64,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "int",
+              "value": "0xFFFFFFFFFFFFFFFF:64u"
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "RAX",
+              "index": 0,
+              "virtual": false,
+              "width": 64,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 17,
+              "lhs": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              },
+              "rhs": {
+                "kind": "int",
+                "value": "0xFFFFFFFFFFFFFFFF:64u"
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "CF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 3,
+              "lhs": {
+                "kind": "var",
+                "var": {
+                  "name": "#12582875",
+                  "index": 0,
+                  "virtual": true,
+                  "width": 64,
+                  "type": "imm"
+                }
+              },
+              "rhs": {
+                "kind": "var",
+                "var": {
+                  "name": "#12582874",
+                  "index": 0,
+                  "virtual": true,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "OF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "cast",
+              "op": 1,
+              "width": 1,
+              "arg": {
+                "kind": "binop",
+                "op": 8,
+                "lhs": {
+                  "kind": "binop",
+                  "op": 6,
+                  "lhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582875",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  },
+                  "rhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582874",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  }
+                },
+                "rhs": {
+                  "kind": "binop",
+                  "op": 6,
+                  "lhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582875",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  },
+                  "rhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "RAX",
+                      "index": 0,
+                      "virtual": false,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "AF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 5,
+              "lhs": {
+                "kind": "int",
+                "value": "0x10:64u"
+              },
+              "rhs": {
+                "kind": "binop",
+                "op": 8,
+                "lhs": {
+                  "kind": "int",
+                  "value": "0x10:64u"
+                },
+                "rhs": {
+                  "kind": "binop",
+                  "op": 6,
+                  "lhs": {
+                    "kind": "binop",
+                    "op": 6,
+                    "lhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "RAX",
+                        "index": 0,
+                        "virtual": false,
+                        "width": 64,
+                        "type": "imm"
+                      }
+                    },
+                    "rhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "#12582875",
+                        "index": 0,
+                        "virtual": true,
+                        "width": 64,
+                        "type": "imm"
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582874",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "PF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "unop",
+              "op": 0,
+              "arg": {
+                "kind": "cast",
+                "op": 0,
+                "width": 1,
+                "arg": {
+                  "kind": "let",
+                  "var": {
+                    "name": "#12582873",
+                    "index": 0,
+                    "virtual": true,
+                    "width": 64,
+                    "type": "imm"
+                  },
+                  "value": {
+                    "kind": "binop",
+                    "op": 6,
+                    "lhs": {
+                      "kind": "binop",
+                      "op": 10,
+                      "lhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "RAX",
+                          "index": 0,
+                          "virtual": false,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "int",
+                        "value": "4:64u"
+                      }
+                    },
+                    "rhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "RAX",
+                        "index": 0,
+                        "virtual": false,
+                        "width": 64,
+                        "type": "imm"
+                      }
+                    }
+                  },
+                  "body": {
+                    "kind": "let",
+                    "var": {
+                      "name": "#12582873",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    },
+                    "value": {
+                      "kind": "binop",
+                      "op": 6,
+                      "lhs": {
+                        "kind": "binop",
+                        "op": 10,
+                        "lhs": {
+                          "kind": "var",
+                          "var": {
+                            "name": "#12582873",
+                            "index": 0,
+                            "virtual": true,
+                            "width": 64,
+                            "type": "imm"
+                          }
+                        },
+                        "rhs": {
+                          "kind": "int",
+                          "value": "2:64u"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "#12582873",
+                          "index": 0,
+                          "virtual": true,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      }
+                    },
+                    "body": {
+                      "kind": "binop",
+                      "op": 6,
+                      "lhs": {
+                        "kind": "binop",
+                        "op": 10,
+                        "lhs": {
+                          "kind": "var",
+                          "var": {
+                            "name": "#12582873",
+                            "index": 0,
+                            "virtual": true,
+                            "width": 64,
+                            "type": "imm"
+                          }
+                        },
+                        "rhs": {
+                          "kind": "int",
+                          "value": "1:64u"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "#12582873",
+                          "index": 0,
+                          "virtual": true,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "SF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "cast",
+              "op": 1,
+              "width": 1,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "ZF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 5,
+              "lhs": {
+                "kind": "int",
+                "value": "0:64u"
+              },
+              "rhs": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "expect": {
+        "uses": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "must_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ]
+      }
+    },
+    {
+      "name": "movzx-eax-observed",
+      "prefix": "0fb64038",
+      "lift": {
+        "schema": "ariadne.bap-site/v1",
+        "batch": 0,
+        "snapshot": "d3f1db96af7c7eed100e0674fa6da86c16df48eb603427701241a04f6452f25f",
+        "va": "0x00000000000015c0",
+        "status": "decoded",
+        "length": 4,
+        "bytes": "0fb64038",
+        "opcode": "MOVZX32rm8",
+        "properties": {
+          "jump": false,
+          "conditional": false,
+          "indirect": false,
+          "call": false,
+          "return": false,
+          "control": false
+        },
+        "bil": [
+          {
+            "kind": "move",
+            "var": {
+              "name": "RAX",
+              "index": 0,
+              "virtual": false,
+              "width": 64,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "cast",
+              "op": 3,
+              "width": 64,
+              "arg": {
+                "kind": "cast",
+                "op": 3,
+                "width": 32,
+                "arg": {
+                  "kind": "load",
+                  "width": 8,
+                  "mem": {
+                    "kind": "var",
+                    "var": {
+                      "name": "mem",
+                      "index": 0,
+                      "virtual": false,
+                      "width": 0,
+                      "type": "mem"
+                    }
+                  },
+                  "addr": {
+                    "kind": "binop",
+                    "op": 18,
+                    "lhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "RAX",
+                        "index": 0,
+                        "virtual": false,
+                        "width": 64,
+                        "type": "imm"
+                      }
+                    },
+                    "rhs": {
+                      "kind": "int",
+                      "value": "0x38:64u"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "expect": {
+        "uses": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7",
+          "memory:any"
+        ],
+        "may_defs": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "must_defs": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "access": {
+          "role": "load",
+          "width": 8,
+          "base": "rax",
+          "index": null,
+          "scale": 1,
+          "displacement": 56
+        }
+      }
+    },
+    {
+      "name": "movzx-r14d-observed",
+      "prefix": "440fb67038",
+      "lift": {
+        "schema": "ariadne.bap-site/v1",
+        "batch": 0,
+        "snapshot": "d3f1db96af7c7eed100e0674fa6da86c16df48eb603427701241a04f6452f25f",
+        "va": "0x00000000000015e0",
+        "status": "decoded",
+        "length": 5,
+        "bytes": "440fb67038",
+        "opcode": "MOVZX32rm8",
+        "properties": {
+          "jump": false,
+          "conditional": false,
+          "indirect": false,
+          "call": false,
+          "return": false,
+          "control": false
+        },
+        "bil": [
+          {
+            "kind": "move",
+            "var": {
+              "name": "R14",
+              "index": 0,
+              "virtual": false,
+              "width": 64,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "cast",
+              "op": 3,
+              "width": 64,
+              "arg": {
+                "kind": "cast",
+                "op": 3,
+                "width": 32,
+                "arg": {
+                  "kind": "load",
+                  "width": 8,
+                  "mem": {
+                    "kind": "var",
+                    "var": {
+                      "name": "mem",
+                      "index": 0,
+                      "virtual": false,
+                      "width": 0,
+                      "type": "mem"
+                    }
+                  },
+                  "addr": {
+                    "kind": "binop",
+                    "op": 18,
+                    "lhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "RAX",
+                        "index": 0,
+                        "virtual": false,
+                        "width": 64,
+                        "type": "imm"
+                      }
+                    },
+                    "rhs": {
+                      "kind": "int",
+                      "value": "0x38:64u"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "expect": {
+        "uses": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7",
+          "memory:any"
+        ],
+        "may_defs": [
+          "gpr:r14:0",
+          "gpr:r14:1",
+          "gpr:r14:2",
+          "gpr:r14:3",
+          "gpr:r14:4",
+          "gpr:r14:5",
+          "gpr:r14:6",
+          "gpr:r14:7"
+        ],
+        "must_defs": [
+          "gpr:r14:0",
+          "gpr:r14:1",
+          "gpr:r14:2",
+          "gpr:r14:3",
+          "gpr:r14:4",
+          "gpr:r14:5",
+          "gpr:r14:6",
+          "gpr:r14:7"
+        ],
+        "access": {
+          "role": "load",
+          "width": 8,
+          "base": "rax",
+          "index": null,
+          "scale": 1,
+          "displacement": 56
+        }
+      }
+    },
+    {
+      "name": "movzx-index-negative",
+      "prefix": "0fb6448bf8",
+      "lift": {
+        "schema": "ariadne.bap-site/v1",
+        "batch": 0,
+        "snapshot": "d3f1db96af7c7eed100e0674fa6da86c16df48eb603427701241a04f6452f25f",
+        "va": "0x0000000000001600",
+        "status": "decoded",
+        "length": 5,
+        "bytes": "0fb6448bf8",
+        "opcode": "MOVZX32rm8",
+        "properties": {
+          "jump": false,
+          "conditional": false,
+          "indirect": false,
+          "call": false,
+          "return": false,
+          "control": false
+        },
+        "bil": [
+          {
+            "kind": "move",
+            "var": {
+              "name": "RAX",
+              "index": 0,
+              "virtual": false,
+              "width": 64,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "cast",
+              "op": 3,
+              "width": 64,
+              "arg": {
+                "kind": "cast",
+                "op": 3,
+                "width": 32,
+                "arg": {
+                  "kind": "load",
+                  "width": 8,
+                  "mem": {
+                    "kind": "var",
+                    "var": {
+                      "name": "mem",
+                      "index": 0,
+                      "virtual": false,
+                      "width": 0,
+                      "type": "mem"
+                    }
+                  },
+                  "addr": {
+                    "kind": "binop",
+                    "op": 18,
+                    "lhs": {
+                      "kind": "binop",
+                      "op": 18,
+                      "lhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "RBX",
+                          "index": 0,
+                          "virtual": false,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "binop",
+                        "op": 11,
+                        "lhs": {
+                          "kind": "var",
+                          "var": {
+                            "name": "RCX",
+                            "index": 0,
+                            "virtual": false,
+                            "width": 64,
+                            "type": "imm"
+                          }
+                        },
+                        "rhs": {
+                          "kind": "int",
+                          "value": "2:64u"
+                        }
+                      }
+                    },
+                    "rhs": {
+                      "kind": "int",
+                      "value": "0xFFFFFFFFFFFFFFF8:64u"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      "expect": {
+        "uses": [
+          "gpr:rbx:0",
+          "gpr:rbx:1",
+          "gpr:rbx:2",
+          "gpr:rbx:3",
+          "gpr:rbx:4",
+          "gpr:rbx:5",
+          "gpr:rbx:6",
+          "gpr:rbx:7",
+          "gpr:rcx:0",
+          "gpr:rcx:1",
+          "gpr:rcx:2",
+          "gpr:rcx:3",
+          "gpr:rcx:4",
+          "gpr:rcx:5",
+          "gpr:rcx:6",
+          "gpr:rcx:7",
+          "memory:any"
+        ],
+        "may_defs": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "must_defs": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "access": {
+          "role": "load",
+          "width": 8,
+          "base": "rbx",
+          "index": "rcx",
+          "scale": 4,
+          "displacement": -8
+        }
+      }
+    },
+    {
+      "name": "xor-distinct-observed",
+      "prefix": "4831e0",
+      "lift": {
+        "schema": "ariadne.bap-site/v1",
+        "batch": 0,
+        "snapshot": "d3f1db96af7c7eed100e0674fa6da86c16df48eb603427701241a04f6452f25f",
+        "va": "0x0000000000001620",
+        "status": "decoded",
+        "length": 3,
+        "bytes": "4831e0",
+        "opcode": "XOR64rr",
+        "properties": {
+          "jump": false,
+          "conditional": false,
+          "indirect": false,
+          "call": false,
+          "return": false,
+          "control": false
+        },
+        "bil": [
+          {
+            "kind": "move",
+            "var": {
+              "name": "RAX",
+              "index": 0,
+              "virtual": false,
+              "width": 64,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 6,
+              "lhs": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              },
+              "rhs": {
+                "kind": "var",
+                "var": {
+                  "name": "RSP",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "OF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "int",
+              "value": "0:1u"
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "CF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "int",
+              "value": "0:1u"
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "AF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "unknown",
+              "reason": "AF is undefined after xor"
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "PF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "unop",
+              "op": 0,
+              "arg": {
+                "kind": "cast",
+                "op": 0,
+                "width": 1,
+                "arg": {
+                  "kind": "let",
+                  "var": {
+                    "name": "#12582872",
+                    "index": 0,
+                    "virtual": true,
+                    "width": 64,
+                    "type": "imm"
+                  },
+                  "value": {
+                    "kind": "binop",
+                    "op": 6,
+                    "lhs": {
+                      "kind": "binop",
+                      "op": 10,
+                      "lhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "RAX",
+                          "index": 0,
+                          "virtual": false,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "int",
+                        "value": "4:64u"
+                      }
+                    },
+                    "rhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "RAX",
+                        "index": 0,
+                        "virtual": false,
+                        "width": 64,
+                        "type": "imm"
+                      }
+                    }
+                  },
+                  "body": {
+                    "kind": "let",
+                    "var": {
+                      "name": "#12582872",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    },
+                    "value": {
+                      "kind": "binop",
+                      "op": 6,
+                      "lhs": {
+                        "kind": "binop",
+                        "op": 10,
+                        "lhs": {
+                          "kind": "var",
+                          "var": {
+                            "name": "#12582872",
+                            "index": 0,
+                            "virtual": true,
+                            "width": 64,
+                            "type": "imm"
+                          }
+                        },
+                        "rhs": {
+                          "kind": "int",
+                          "value": "2:64u"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "#12582872",
+                          "index": 0,
+                          "virtual": true,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      }
+                    },
+                    "body": {
+                      "kind": "binop",
+                      "op": 6,
+                      "lhs": {
+                        "kind": "binop",
+                        "op": 10,
+                        "lhs": {
+                          "kind": "var",
+                          "var": {
+                            "name": "#12582872",
+                            "index": 0,
+                            "virtual": true,
+                            "width": 64,
+                            "type": "imm"
+                          }
+                        },
+                        "rhs": {
+                          "kind": "int",
+                          "value": "1:64u"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "#12582872",
+                          "index": 0,
+                          "virtual": true,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "SF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "cast",
+              "op": 1,
+              "width": 1,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "ZF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 5,
+              "lhs": {
+                "kind": "int",
+                "value": "0:64u"
+              },
+              "rhs": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "expect": {
+        "uses": [
+          "flag:af",
+          "flag:cf",
+          "flag:df",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:r10:0",
+          "gpr:r10:1",
+          "gpr:r10:2",
+          "gpr:r10:3",
+          "gpr:r10:4",
+          "gpr:r10:5",
+          "gpr:r10:6",
+          "gpr:r10:7",
+          "gpr:r11:0",
+          "gpr:r11:1",
+          "gpr:r11:2",
+          "gpr:r11:3",
+          "gpr:r11:4",
+          "gpr:r11:5",
+          "gpr:r11:6",
+          "gpr:r11:7",
+          "gpr:r12:0",
+          "gpr:r12:1",
+          "gpr:r12:2",
+          "gpr:r12:3",
+          "gpr:r12:4",
+          "gpr:r12:5",
+          "gpr:r12:6",
+          "gpr:r12:7",
+          "gpr:r13:0",
+          "gpr:r13:1",
+          "gpr:r13:2",
+          "gpr:r13:3",
+          "gpr:r13:4",
+          "gpr:r13:5",
+          "gpr:r13:6",
+          "gpr:r13:7",
+          "gpr:r14:0",
+          "gpr:r14:1",
+          "gpr:r14:2",
+          "gpr:r14:3",
+          "gpr:r14:4",
+          "gpr:r14:5",
+          "gpr:r14:6",
+          "gpr:r14:7",
+          "gpr:r15:0",
+          "gpr:r15:1",
+          "gpr:r15:2",
+          "gpr:r15:3",
+          "gpr:r15:4",
+          "gpr:r15:5",
+          "gpr:r15:6",
+          "gpr:r15:7",
+          "gpr:r8:0",
+          "gpr:r8:1",
+          "gpr:r8:2",
+          "gpr:r8:3",
+          "gpr:r8:4",
+          "gpr:r8:5",
+          "gpr:r8:6",
+          "gpr:r8:7",
+          "gpr:r9:0",
+          "gpr:r9:1",
+          "gpr:r9:2",
+          "gpr:r9:3",
+          "gpr:r9:4",
+          "gpr:r9:5",
+          "gpr:r9:6",
+          "gpr:r9:7",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7",
+          "gpr:rbp:0",
+          "gpr:rbp:1",
+          "gpr:rbp:2",
+          "gpr:rbp:3",
+          "gpr:rbp:4",
+          "gpr:rbp:5",
+          "gpr:rbp:6",
+          "gpr:rbp:7",
+          "gpr:rbx:0",
+          "gpr:rbx:1",
+          "gpr:rbx:2",
+          "gpr:rbx:3",
+          "gpr:rbx:4",
+          "gpr:rbx:5",
+          "gpr:rbx:6",
+          "gpr:rbx:7",
+          "gpr:rcx:0",
+          "gpr:rcx:1",
+          "gpr:rcx:2",
+          "gpr:rcx:3",
+          "gpr:rcx:4",
+          "gpr:rcx:5",
+          "gpr:rcx:6",
+          "gpr:rcx:7",
+          "gpr:rdi:0",
+          "gpr:rdi:1",
+          "gpr:rdi:2",
+          "gpr:rdi:3",
+          "gpr:rdi:4",
+          "gpr:rdi:5",
+          "gpr:rdi:6",
+          "gpr:rdi:7",
+          "gpr:rdx:0",
+          "gpr:rdx:1",
+          "gpr:rdx:2",
+          "gpr:rdx:3",
+          "gpr:rdx:4",
+          "gpr:rdx:5",
+          "gpr:rdx:6",
+          "gpr:rdx:7",
+          "gpr:rsi:0",
+          "gpr:rsi:1",
+          "gpr:rsi:2",
+          "gpr:rsi:3",
+          "gpr:rsi:4",
+          "gpr:rsi:5",
+          "gpr:rsi:6",
+          "gpr:rsi:7",
+          "gpr:rsp:0",
+          "gpr:rsp:1",
+          "gpr:rsp:2",
+          "gpr:rsp:3",
+          "gpr:rsp:4",
+          "gpr:rsp:5",
+          "gpr:rsp:6",
+          "gpr:rsp:7",
+          "memory:any",
+          "state:other"
+        ],
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "must_defs": [
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "undefined_flags": [
+          "flag:af"
+        ]
+      }
+    },
+    {
+      "name": "xor-self",
+      "prefix": "4831c0",
+      "lift": {
+        "schema": "ariadne.bap-site/v1",
+        "batch": 0,
+        "snapshot": "d3f1db96af7c7eed100e0674fa6da86c16df48eb603427701241a04f6452f25f",
+        "va": "0x0000000000001640",
+        "status": "decoded",
+        "length": 3,
+        "bytes": "4831c0",
+        "opcode": "XOR64rr",
+        "properties": {
+          "jump": false,
+          "conditional": false,
+          "indirect": false,
+          "call": false,
+          "return": false,
+          "control": false
+        },
+        "bil": [
+          {
+            "kind": "move",
+            "var": {
+              "name": "RAX",
+              "index": 0,
+              "virtual": false,
+              "width": 64,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "int",
+              "value": "0:64u"
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "AF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "unknown",
+              "reason": "AF is undefined after xor"
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "ZF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "int",
+              "value": "1:1u"
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "PF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "int",
+              "value": "1:1u"
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "OF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "int",
+              "value": "0:1u"
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "CF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "int",
+              "value": "0:1u"
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "SF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "int",
+              "value": "0:1u"
+            }
+          }
+        ]
+      },
+      "expect": {
+        "uses": [
+          "flag:af",
+          "flag:cf",
+          "flag:df",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:r10:0",
+          "gpr:r10:1",
+          "gpr:r10:2",
+          "gpr:r10:3",
+          "gpr:r10:4",
+          "gpr:r10:5",
+          "gpr:r10:6",
+          "gpr:r10:7",
+          "gpr:r11:0",
+          "gpr:r11:1",
+          "gpr:r11:2",
+          "gpr:r11:3",
+          "gpr:r11:4",
+          "gpr:r11:5",
+          "gpr:r11:6",
+          "gpr:r11:7",
+          "gpr:r12:0",
+          "gpr:r12:1",
+          "gpr:r12:2",
+          "gpr:r12:3",
+          "gpr:r12:4",
+          "gpr:r12:5",
+          "gpr:r12:6",
+          "gpr:r12:7",
+          "gpr:r13:0",
+          "gpr:r13:1",
+          "gpr:r13:2",
+          "gpr:r13:3",
+          "gpr:r13:4",
+          "gpr:r13:5",
+          "gpr:r13:6",
+          "gpr:r13:7",
+          "gpr:r14:0",
+          "gpr:r14:1",
+          "gpr:r14:2",
+          "gpr:r14:3",
+          "gpr:r14:4",
+          "gpr:r14:5",
+          "gpr:r14:6",
+          "gpr:r14:7",
+          "gpr:r15:0",
+          "gpr:r15:1",
+          "gpr:r15:2",
+          "gpr:r15:3",
+          "gpr:r15:4",
+          "gpr:r15:5",
+          "gpr:r15:6",
+          "gpr:r15:7",
+          "gpr:r8:0",
+          "gpr:r8:1",
+          "gpr:r8:2",
+          "gpr:r8:3",
+          "gpr:r8:4",
+          "gpr:r8:5",
+          "gpr:r8:6",
+          "gpr:r8:7",
+          "gpr:r9:0",
+          "gpr:r9:1",
+          "gpr:r9:2",
+          "gpr:r9:3",
+          "gpr:r9:4",
+          "gpr:r9:5",
+          "gpr:r9:6",
+          "gpr:r9:7",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7",
+          "gpr:rbp:0",
+          "gpr:rbp:1",
+          "gpr:rbp:2",
+          "gpr:rbp:3",
+          "gpr:rbp:4",
+          "gpr:rbp:5",
+          "gpr:rbp:6",
+          "gpr:rbp:7",
+          "gpr:rbx:0",
+          "gpr:rbx:1",
+          "gpr:rbx:2",
+          "gpr:rbx:3",
+          "gpr:rbx:4",
+          "gpr:rbx:5",
+          "gpr:rbx:6",
+          "gpr:rbx:7",
+          "gpr:rcx:0",
+          "gpr:rcx:1",
+          "gpr:rcx:2",
+          "gpr:rcx:3",
+          "gpr:rcx:4",
+          "gpr:rcx:5",
+          "gpr:rcx:6",
+          "gpr:rcx:7",
+          "gpr:rdi:0",
+          "gpr:rdi:1",
+          "gpr:rdi:2",
+          "gpr:rdi:3",
+          "gpr:rdi:4",
+          "gpr:rdi:5",
+          "gpr:rdi:6",
+          "gpr:rdi:7",
+          "gpr:rdx:0",
+          "gpr:rdx:1",
+          "gpr:rdx:2",
+          "gpr:rdx:3",
+          "gpr:rdx:4",
+          "gpr:rdx:5",
+          "gpr:rdx:6",
+          "gpr:rdx:7",
+          "gpr:rsi:0",
+          "gpr:rsi:1",
+          "gpr:rsi:2",
+          "gpr:rsi:3",
+          "gpr:rsi:4",
+          "gpr:rsi:5",
+          "gpr:rsi:6",
+          "gpr:rsi:7",
+          "gpr:rsp:0",
+          "gpr:rsp:1",
+          "gpr:rsp:2",
+          "gpr:rsp:3",
+          "gpr:rsp:4",
+          "gpr:rsp:5",
+          "gpr:rsp:6",
+          "gpr:rsp:7",
+          "memory:any",
+          "state:other"
+        ],
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "must_defs": [
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "undefined_flags": [
+          "flag:af"
+        ]
+      }
+    },
+    {
+      "name": "cmp-byte-observed",
+      "prefix": "80783876",
+      "lift": {
+        "schema": "ariadne.bap-site/v1",
+        "batch": 0,
+        "snapshot": "d3f1db96af7c7eed100e0674fa6da86c16df48eb603427701241a04f6452f25f",
+        "va": "0x0000000000001660",
+        "status": "decoded",
+        "length": 4,
+        "bytes": "80783876",
+        "opcode": "CMP8mi",
+        "properties": {
+          "jump": false,
+          "conditional": false,
+          "indirect": false,
+          "call": false,
+          "return": false,
+          "control": false
+        },
+        "bil": [
+          {
+            "kind": "move",
+            "var": {
+              "name": "#12582871",
+              "index": 0,
+              "virtual": true,
+              "width": 8,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 17,
+              "lhs": {
+                "kind": "load",
+                "width": 8,
+                "mem": {
+                  "kind": "var",
+                  "var": {
+                    "name": "mem",
+                    "index": 0,
+                    "virtual": false,
+                    "width": 0,
+                    "type": "mem"
+                  }
+                },
+                "addr": {
+                  "kind": "binop",
+                  "op": 18,
+                  "lhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "RAX",
+                      "index": 0,
+                      "virtual": false,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  },
+                  "rhs": {
+                    "kind": "int",
+                    "value": "0x38:64u"
+                  }
+                }
+              },
+              "rhs": {
+                "kind": "int",
+                "value": "0x76:8u"
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "CF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 3,
+              "lhs": {
+                "kind": "load",
+                "width": 8,
+                "mem": {
+                  "kind": "var",
+                  "var": {
+                    "name": "mem",
+                    "index": 0,
+                    "virtual": false,
+                    "width": 0,
+                    "type": "mem"
+                  }
+                },
+                "addr": {
+                  "kind": "binop",
+                  "op": 18,
+                  "lhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "RAX",
+                      "index": 0,
+                      "virtual": false,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  },
+                  "rhs": {
+                    "kind": "int",
+                    "value": "0x38:64u"
+                  }
+                }
+              },
+              "rhs": {
+                "kind": "int",
+                "value": "0x76:8u"
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "OF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "cast",
+              "op": 1,
+              "width": 1,
+              "arg": {
+                "kind": "binop",
+                "op": 8,
+                "lhs": {
+                  "kind": "binop",
+                  "op": 6,
+                  "lhs": {
+                    "kind": "load",
+                    "width": 8,
+                    "mem": {
+                      "kind": "var",
+                      "var": {
+                        "name": "mem",
+                        "index": 0,
+                        "virtual": false,
+                        "width": 0,
+                        "type": "mem"
+                      }
+                    },
+                    "addr": {
+                      "kind": "binop",
+                      "op": 18,
+                      "lhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "RAX",
+                          "index": 0,
+                          "virtual": false,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "int",
+                        "value": "0x38:64u"
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "kind": "int",
+                    "value": "0x76:8u"
+                  }
+                },
+                "rhs": {
+                  "kind": "binop",
+                  "op": 6,
+                  "lhs": {
+                    "kind": "load",
+                    "width": 8,
+                    "mem": {
+                      "kind": "var",
+                      "var": {
+                        "name": "mem",
+                        "index": 0,
+                        "virtual": false,
+                        "width": 0,
+                        "type": "mem"
+                      }
+                    },
+                    "addr": {
+                      "kind": "binop",
+                      "op": 18,
+                      "lhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "RAX",
+                          "index": 0,
+                          "virtual": false,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "int",
+                        "value": "0x38:64u"
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582871",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 8,
+                      "type": "imm"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "AF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 5,
+              "lhs": {
+                "kind": "int",
+                "value": "0x10:8u"
+              },
+              "rhs": {
+                "kind": "binop",
+                "op": 8,
+                "lhs": {
+                  "kind": "int",
+                  "value": "0x10:8u"
+                },
+                "rhs": {
+                  "kind": "binop",
+                  "op": 6,
+                  "lhs": {
+                    "kind": "binop",
+                    "op": 6,
+                    "lhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "#12582871",
+                        "index": 0,
+                        "virtual": true,
+                        "width": 8,
+                        "type": "imm"
+                      }
+                    },
+                    "rhs": {
+                      "kind": "load",
+                      "width": 8,
+                      "mem": {
+                        "kind": "var",
+                        "var": {
+                          "name": "mem",
+                          "index": 0,
+                          "virtual": false,
+                          "width": 0,
+                          "type": "mem"
+                        }
+                      },
+                      "addr": {
+                        "kind": "binop",
+                        "op": 18,
+                        "lhs": {
+                          "kind": "var",
+                          "var": {
+                            "name": "RAX",
+                            "index": 0,
+                            "virtual": false,
+                            "width": 64,
+                            "type": "imm"
+                          }
+                        },
+                        "rhs": {
+                          "kind": "int",
+                          "value": "0x38:64u"
+                        }
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "kind": "int",
+                    "value": "0x76:8u"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "PF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "unop",
+              "op": 0,
+              "arg": {
+                "kind": "cast",
+                "op": 0,
+                "width": 1,
+                "arg": {
+                  "kind": "let",
+                  "var": {
+                    "name": "#12582870",
+                    "index": 0,
+                    "virtual": true,
+                    "width": 8,
+                    "type": "imm"
+                  },
+                  "value": {
+                    "kind": "binop",
+                    "op": 6,
+                    "lhs": {
+                      "kind": "binop",
+                      "op": 10,
+                      "lhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "#12582871",
+                          "index": 0,
+                          "virtual": true,
+                          "width": 8,
+                          "type": "imm"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "int",
+                        "value": "4:8u"
+                      }
+                    },
+                    "rhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "#12582871",
+                        "index": 0,
+                        "virtual": true,
+                        "width": 8,
+                        "type": "imm"
+                      }
+                    }
+                  },
+                  "body": {
+                    "kind": "let",
+                    "var": {
+                      "name": "#12582870",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 8,
+                      "type": "imm"
+                    },
+                    "value": {
+                      "kind": "binop",
+                      "op": 6,
+                      "lhs": {
+                        "kind": "binop",
+                        "op": 10,
+                        "lhs": {
+                          "kind": "var",
+                          "var": {
+                            "name": "#12582870",
+                            "index": 0,
+                            "virtual": true,
+                            "width": 8,
+                            "type": "imm"
+                          }
+                        },
+                        "rhs": {
+                          "kind": "int",
+                          "value": "2:8u"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "#12582870",
+                          "index": 0,
+                          "virtual": true,
+                          "width": 8,
+                          "type": "imm"
+                        }
+                      }
+                    },
+                    "body": {
+                      "kind": "binop",
+                      "op": 6,
+                      "lhs": {
+                        "kind": "binop",
+                        "op": 10,
+                        "lhs": {
+                          "kind": "var",
+                          "var": {
+                            "name": "#12582870",
+                            "index": 0,
+                            "virtual": true,
+                            "width": 8,
+                            "type": "imm"
+                          }
+                        },
+                        "rhs": {
+                          "kind": "int",
+                          "value": "1:8u"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "#12582870",
+                          "index": 0,
+                          "virtual": true,
+                          "width": 8,
+                          "type": "imm"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "SF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "cast",
+              "op": 1,
+              "width": 1,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "#12582871",
+                  "index": 0,
+                  "virtual": true,
+                  "width": 8,
+                  "type": "imm"
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "ZF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 5,
+              "lhs": {
+                "kind": "int",
+                "value": "0:8u"
+              },
+              "rhs": {
+                "kind": "var",
+                "var": {
+                  "name": "#12582871",
+                  "index": 0,
+                  "virtual": true,
+                  "width": 8,
+                  "type": "imm"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "expect": {
+        "uses": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7",
+          "memory:any"
+        ],
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf"
+        ],
+        "must_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf"
+        ],
+        "access": {
+          "role": "load",
+          "width": 8,
+          "base": "rax",
+          "index": null,
+          "scale": 1,
+          "displacement": 56
+        }
+      }
+    },
+    {
+      "name": "cmp-byte-zero",
+      "prefix": "803800",
+      "lift": {
+        "schema": "ariadne.bap-site/v1",
+        "batch": 0,
+        "snapshot": "d3f1db96af7c7eed100e0674fa6da86c16df48eb603427701241a04f6452f25f",
+        "va": "0x0000000000001680",
+        "status": "decoded",
+        "length": 3,
+        "bytes": "803800",
+        "opcode": "CMP8mi",
+        "properties": {
+          "jump": false,
+          "conditional": false,
+          "indirect": false,
+          "call": false,
+          "return": false,
+          "control": false
+        },
+        "bil": [
+          {
+            "kind": "move",
+            "var": {
+              "name": "#12582869",
+              "index": 0,
+              "virtual": true,
+              "width": 8,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "load",
+              "width": 8,
+              "mem": {
+                "kind": "var",
+                "var": {
+                  "name": "mem",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 0,
+                  "type": "mem"
+                }
+              },
+              "addr": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "CF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 3,
+              "lhs": {
+                "kind": "load",
+                "width": 8,
+                "mem": {
+                  "kind": "var",
+                  "var": {
+                    "name": "mem",
+                    "index": 0,
+                    "virtual": false,
+                    "width": 0,
+                    "type": "mem"
+                  }
+                },
+                "addr": {
+                  "kind": "var",
+                  "var": {
+                    "name": "RAX",
+                    "index": 0,
+                    "virtual": false,
+                    "width": 64,
+                    "type": "imm"
+                  }
+                }
+              },
+              "rhs": {
+                "kind": "int",
+                "value": "0:8u"
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "OF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "cast",
+              "op": 1,
+              "width": 1,
+              "arg": {
+                "kind": "binop",
+                "op": 8,
+                "lhs": {
+                  "kind": "load",
+                  "width": 8,
+                  "mem": {
+                    "kind": "var",
+                    "var": {
+                      "name": "mem",
+                      "index": 0,
+                      "virtual": false,
+                      "width": 0,
+                      "type": "mem"
+                    }
+                  },
+                  "addr": {
+                    "kind": "var",
+                    "var": {
+                      "name": "RAX",
+                      "index": 0,
+                      "virtual": false,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  }
+                },
+                "rhs": {
+                  "kind": "binop",
+                  "op": 6,
+                  "lhs": {
+                    "kind": "load",
+                    "width": 8,
+                    "mem": {
+                      "kind": "var",
+                      "var": {
+                        "name": "mem",
+                        "index": 0,
+                        "virtual": false,
+                        "width": 0,
+                        "type": "mem"
+                      }
+                    },
+                    "addr": {
+                      "kind": "var",
+                      "var": {
+                        "name": "RAX",
+                        "index": 0,
+                        "virtual": false,
+                        "width": 64,
+                        "type": "imm"
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582869",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 8,
+                      "type": "imm"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "AF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 5,
+              "lhs": {
+                "kind": "int",
+                "value": "0x10:8u"
+              },
+              "rhs": {
+                "kind": "binop",
+                "op": 8,
+                "lhs": {
+                  "kind": "int",
+                  "value": "0x10:8u"
+                },
+                "rhs": {
+                  "kind": "binop",
+                  "op": 6,
+                  "lhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582869",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 8,
+                      "type": "imm"
+                    }
+                  },
+                  "rhs": {
+                    "kind": "load",
+                    "width": 8,
+                    "mem": {
+                      "kind": "var",
+                      "var": {
+                        "name": "mem",
+                        "index": 0,
+                        "virtual": false,
+                        "width": 0,
+                        "type": "mem"
+                      }
+                    },
+                    "addr": {
+                      "kind": "var",
+                      "var": {
+                        "name": "RAX",
+                        "index": 0,
+                        "virtual": false,
+                        "width": 64,
+                        "type": "imm"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "PF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "unop",
+              "op": 0,
+              "arg": {
+                "kind": "cast",
+                "op": 0,
+                "width": 1,
+                "arg": {
+                  "kind": "let",
+                  "var": {
+                    "name": "#12582868",
+                    "index": 0,
+                    "virtual": true,
+                    "width": 8,
+                    "type": "imm"
+                  },
+                  "value": {
+                    "kind": "binop",
+                    "op": 6,
+                    "lhs": {
+                      "kind": "binop",
+                      "op": 10,
+                      "lhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "#12582869",
+                          "index": 0,
+                          "virtual": true,
+                          "width": 8,
+                          "type": "imm"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "int",
+                        "value": "4:8u"
+                      }
+                    },
+                    "rhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "#12582869",
+                        "index": 0,
+                        "virtual": true,
+                        "width": 8,
+                        "type": "imm"
+                      }
+                    }
+                  },
+                  "body": {
+                    "kind": "let",
+                    "var": {
+                      "name": "#12582868",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 8,
+                      "type": "imm"
+                    },
+                    "value": {
+                      "kind": "binop",
+                      "op": 6,
+                      "lhs": {
+                        "kind": "binop",
+                        "op": 10,
+                        "lhs": {
+                          "kind": "var",
+                          "var": {
+                            "name": "#12582868",
+                            "index": 0,
+                            "virtual": true,
+                            "width": 8,
+                            "type": "imm"
+                          }
+                        },
+                        "rhs": {
+                          "kind": "int",
+                          "value": "2:8u"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "#12582868",
+                          "index": 0,
+                          "virtual": true,
+                          "width": 8,
+                          "type": "imm"
+                        }
+                      }
+                    },
+                    "body": {
+                      "kind": "binop",
+                      "op": 6,
+                      "lhs": {
+                        "kind": "binop",
+                        "op": 10,
+                        "lhs": {
+                          "kind": "var",
+                          "var": {
+                            "name": "#12582868",
+                            "index": 0,
+                            "virtual": true,
+                            "width": 8,
+                            "type": "imm"
+                          }
+                        },
+                        "rhs": {
+                          "kind": "int",
+                          "value": "1:8u"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "#12582868",
+                          "index": 0,
+                          "virtual": true,
+                          "width": 8,
+                          "type": "imm"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "SF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "cast",
+              "op": 1,
+              "width": 1,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "#12582869",
+                  "index": 0,
+                  "virtual": true,
+                  "width": 8,
+                  "type": "imm"
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "ZF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 5,
+              "lhs": {
+                "kind": "int",
+                "value": "0:8u"
+              },
+              "rhs": {
+                "kind": "var",
+                "var": {
+                  "name": "#12582869",
+                  "index": 0,
+                  "virtual": true,
+                  "width": 8,
+                  "type": "imm"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "expect": {
+        "uses": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7",
+          "memory:any"
+        ],
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf"
+        ],
+        "must_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf"
+        ],
+        "access": {
+          "role": "load",
+          "width": 8,
+          "base": "rax",
+          "index": null,
+          "scale": 1,
+          "displacement": 0
+        }
+      }
+    },
+    {
+      "name": "cmp-byte-negative",
+      "prefix": "8078f8ff",
+      "lift": {
+        "schema": "ariadne.bap-site/v1",
+        "batch": 0,
+        "snapshot": "d3f1db96af7c7eed100e0674fa6da86c16df48eb603427701241a04f6452f25f",
+        "va": "0x00000000000016a0",
+        "status": "decoded",
+        "length": 4,
+        "bytes": "8078f8ff",
+        "opcode": "CMP8mi",
+        "properties": {
+          "jump": false,
+          "conditional": false,
+          "indirect": false,
+          "call": false,
+          "return": false,
+          "control": false
+        },
+        "bil": [
+          {
+            "kind": "move",
+            "var": {
+              "name": "#12582867",
+              "index": 0,
+              "virtual": true,
+              "width": 8,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 17,
+              "lhs": {
+                "kind": "load",
+                "width": 8,
+                "mem": {
+                  "kind": "var",
+                  "var": {
+                    "name": "mem",
+                    "index": 0,
+                    "virtual": false,
+                    "width": 0,
+                    "type": "mem"
+                  }
+                },
+                "addr": {
+                  "kind": "binop",
+                  "op": 18,
+                  "lhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "RAX",
+                      "index": 0,
+                      "virtual": false,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  },
+                  "rhs": {
+                    "kind": "int",
+                    "value": "0xFFFFFFFFFFFFFFF8:64u"
+                  }
+                }
+              },
+              "rhs": {
+                "kind": "int",
+                "value": "0xFF:8u"
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "CF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 3,
+              "lhs": {
+                "kind": "load",
+                "width": 8,
+                "mem": {
+                  "kind": "var",
+                  "var": {
+                    "name": "mem",
+                    "index": 0,
+                    "virtual": false,
+                    "width": 0,
+                    "type": "mem"
+                  }
+                },
+                "addr": {
+                  "kind": "binop",
+                  "op": 18,
+                  "lhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "RAX",
+                      "index": 0,
+                      "virtual": false,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  },
+                  "rhs": {
+                    "kind": "int",
+                    "value": "0xFFFFFFFFFFFFFFF8:64u"
+                  }
+                }
+              },
+              "rhs": {
+                "kind": "int",
+                "value": "0xFF:8u"
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "OF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "cast",
+              "op": 1,
+              "width": 1,
+              "arg": {
+                "kind": "binop",
+                "op": 8,
+                "lhs": {
+                  "kind": "binop",
+                  "op": 6,
+                  "lhs": {
+                    "kind": "load",
+                    "width": 8,
+                    "mem": {
+                      "kind": "var",
+                      "var": {
+                        "name": "mem",
+                        "index": 0,
+                        "virtual": false,
+                        "width": 0,
+                        "type": "mem"
+                      }
+                    },
+                    "addr": {
+                      "kind": "binop",
+                      "op": 18,
+                      "lhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "RAX",
+                          "index": 0,
+                          "virtual": false,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "int",
+                        "value": "0xFFFFFFFFFFFFFFF8:64u"
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "kind": "int",
+                    "value": "0xFF:8u"
+                  }
+                },
+                "rhs": {
+                  "kind": "binop",
+                  "op": 6,
+                  "lhs": {
+                    "kind": "load",
+                    "width": 8,
+                    "mem": {
+                      "kind": "var",
+                      "var": {
+                        "name": "mem",
+                        "index": 0,
+                        "virtual": false,
+                        "width": 0,
+                        "type": "mem"
+                      }
+                    },
+                    "addr": {
+                      "kind": "binop",
+                      "op": 18,
+                      "lhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "RAX",
+                          "index": 0,
+                          "virtual": false,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "int",
+                        "value": "0xFFFFFFFFFFFFFFF8:64u"
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582867",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 8,
+                      "type": "imm"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "AF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 5,
+              "lhs": {
+                "kind": "int",
+                "value": "0x10:8u"
+              },
+              "rhs": {
+                "kind": "binop",
+                "op": 8,
+                "lhs": {
+                  "kind": "int",
+                  "value": "0x10:8u"
+                },
+                "rhs": {
+                  "kind": "binop",
+                  "op": 6,
+                  "lhs": {
+                    "kind": "binop",
+                    "op": 6,
+                    "lhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "#12582867",
+                        "index": 0,
+                        "virtual": true,
+                        "width": 8,
+                        "type": "imm"
+                      }
+                    },
+                    "rhs": {
+                      "kind": "load",
+                      "width": 8,
+                      "mem": {
+                        "kind": "var",
+                        "var": {
+                          "name": "mem",
+                          "index": 0,
+                          "virtual": false,
+                          "width": 0,
+                          "type": "mem"
+                        }
+                      },
+                      "addr": {
+                        "kind": "binop",
+                        "op": 18,
+                        "lhs": {
+                          "kind": "var",
+                          "var": {
+                            "name": "RAX",
+                            "index": 0,
+                            "virtual": false,
+                            "width": 64,
+                            "type": "imm"
+                          }
+                        },
+                        "rhs": {
+                          "kind": "int",
+                          "value": "0xFFFFFFFFFFFFFFF8:64u"
+                        }
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "kind": "int",
+                    "value": "0xFF:8u"
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "PF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "unop",
+              "op": 0,
+              "arg": {
+                "kind": "cast",
+                "op": 0,
+                "width": 1,
+                "arg": {
+                  "kind": "let",
+                  "var": {
+                    "name": "#12582866",
+                    "index": 0,
+                    "virtual": true,
+                    "width": 8,
+                    "type": "imm"
+                  },
+                  "value": {
+                    "kind": "binop",
+                    "op": 6,
+                    "lhs": {
+                      "kind": "binop",
+                      "op": 10,
+                      "lhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "#12582867",
+                          "index": 0,
+                          "virtual": true,
+                          "width": 8,
+                          "type": "imm"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "int",
+                        "value": "4:8u"
+                      }
+                    },
+                    "rhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "#12582867",
+                        "index": 0,
+                        "virtual": true,
+                        "width": 8,
+                        "type": "imm"
+                      }
+                    }
+                  },
+                  "body": {
+                    "kind": "let",
+                    "var": {
+                      "name": "#12582866",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 8,
+                      "type": "imm"
+                    },
+                    "value": {
+                      "kind": "binop",
+                      "op": 6,
+                      "lhs": {
+                        "kind": "binop",
+                        "op": 10,
+                        "lhs": {
+                          "kind": "var",
+                          "var": {
+                            "name": "#12582866",
+                            "index": 0,
+                            "virtual": true,
+                            "width": 8,
+                            "type": "imm"
+                          }
+                        },
+                        "rhs": {
+                          "kind": "int",
+                          "value": "2:8u"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "#12582866",
+                          "index": 0,
+                          "virtual": true,
+                          "width": 8,
+                          "type": "imm"
+                        }
+                      }
+                    },
+                    "body": {
+                      "kind": "binop",
+                      "op": 6,
+                      "lhs": {
+                        "kind": "binop",
+                        "op": 10,
+                        "lhs": {
+                          "kind": "var",
+                          "var": {
+                            "name": "#12582866",
+                            "index": 0,
+                            "virtual": true,
+                            "width": 8,
+                            "type": "imm"
+                          }
+                        },
+                        "rhs": {
+                          "kind": "int",
+                          "value": "1:8u"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "#12582866",
+                          "index": 0,
+                          "virtual": true,
+                          "width": 8,
+                          "type": "imm"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "SF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "cast",
+              "op": 1,
+              "width": 1,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "#12582867",
+                  "index": 0,
+                  "virtual": true,
+                  "width": 8,
+                  "type": "imm"
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "ZF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 5,
+              "lhs": {
+                "kind": "int",
+                "value": "0:8u"
+              },
+              "rhs": {
+                "kind": "var",
+                "var": {
+                  "name": "#12582867",
+                  "index": 0,
+                  "virtual": true,
+                  "width": 8,
+                  "type": "imm"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "expect": {
+        "uses": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7",
+          "memory:any"
+        ],
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf"
+        ],
+        "must_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf"
+        ],
+        "access": {
+          "role": "load",
+          "width": 8,
+          "base": "rax",
+          "index": null,
+          "scale": 1,
+          "displacement": -8
+        }
+      }
+    },
+    {
+      "name": "add-immediate",
+      "prefix": "4883c008",
+      "lift": {
+        "schema": "ariadne.bap-site/v1",
+        "batch": 0,
+        "snapshot": "d3f1db96af7c7eed100e0674fa6da86c16df48eb603427701241a04f6452f25f",
+        "va": "0x00000000000016c0",
+        "status": "decoded",
+        "length": 4,
+        "bytes": "4883c008",
+        "opcode": "ADD64ri8",
+        "properties": {
+          "jump": false,
+          "conditional": false,
+          "indirect": false,
+          "call": false,
+          "return": false,
+          "control": false
+        },
+        "bil": [
+          {
+            "kind": "move",
+            "var": {
+              "name": "#12582865",
+              "index": 0,
+              "virtual": true,
+              "width": 64,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "var",
+              "var": {
+                "name": "RAX",
+                "index": 0,
+                "virtual": false,
+                "width": 64,
+                "type": "imm"
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "#12582864",
+              "index": 0,
+              "virtual": true,
+              "width": 64,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "int",
+              "value": "8:64u"
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "RAX",
+              "index": 0,
+              "virtual": false,
+              "width": 64,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 18,
+              "lhs": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              },
+              "rhs": {
+                "kind": "var",
+                "var": {
+                  "name": "#12582864",
+                  "index": 0,
+                  "virtual": true,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "CF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 3,
+              "lhs": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              },
+              "rhs": {
+                "kind": "var",
+                "var": {
+                  "name": "#12582865",
+                  "index": 0,
+                  "virtual": true,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "OF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 8,
+              "lhs": {
+                "kind": "binop",
+                "op": 5,
+                "lhs": {
+                  "kind": "cast",
+                  "op": 1,
+                  "width": 1,
+                  "arg": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582865",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  }
+                },
+                "rhs": {
+                  "kind": "cast",
+                  "op": 1,
+                  "width": 1,
+                  "arg": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582864",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  }
+                }
+              },
+              "rhs": {
+                "kind": "binop",
+                "op": 6,
+                "lhs": {
+                  "kind": "cast",
+                  "op": 1,
+                  "width": 1,
+                  "arg": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582865",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  }
+                },
+                "rhs": {
+                  "kind": "cast",
+                  "op": 1,
+                  "width": 1,
+                  "arg": {
+                    "kind": "var",
+                    "var": {
+                      "name": "RAX",
+                      "index": 0,
+                      "virtual": false,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "AF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 5,
+              "lhs": {
+                "kind": "int",
+                "value": "0x10:64u"
+              },
+              "rhs": {
+                "kind": "binop",
+                "op": 8,
+                "lhs": {
+                  "kind": "int",
+                  "value": "0x10:64u"
+                },
+                "rhs": {
+                  "kind": "binop",
+                  "op": 6,
+                  "lhs": {
+                    "kind": "binop",
+                    "op": 6,
+                    "lhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "RAX",
+                        "index": 0,
+                        "virtual": false,
+                        "width": 64,
+                        "type": "imm"
+                      }
+                    },
+                    "rhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "#12582865",
+                        "index": 0,
+                        "virtual": true,
+                        "width": 64,
+                        "type": "imm"
+                      }
+                    }
+                  },
+                  "rhs": {
+                    "kind": "var",
+                    "var": {
+                      "name": "#12582864",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "PF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "unop",
+              "op": 0,
+              "arg": {
+                "kind": "cast",
+                "op": 0,
+                "width": 1,
+                "arg": {
+                  "kind": "let",
+                  "var": {
+                    "name": "#12582863",
+                    "index": 0,
+                    "virtual": true,
+                    "width": 64,
+                    "type": "imm"
+                  },
+                  "value": {
+                    "kind": "binop",
+                    "op": 6,
+                    "lhs": {
+                      "kind": "binop",
+                      "op": 10,
+                      "lhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "RAX",
+                          "index": 0,
+                          "virtual": false,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "int",
+                        "value": "4:64u"
+                      }
+                    },
+                    "rhs": {
+                      "kind": "var",
+                      "var": {
+                        "name": "RAX",
+                        "index": 0,
+                        "virtual": false,
+                        "width": 64,
+                        "type": "imm"
+                      }
+                    }
+                  },
+                  "body": {
+                    "kind": "let",
+                    "var": {
+                      "name": "#12582863",
+                      "index": 0,
+                      "virtual": true,
+                      "width": 64,
+                      "type": "imm"
+                    },
+                    "value": {
+                      "kind": "binop",
+                      "op": 6,
+                      "lhs": {
+                        "kind": "binop",
+                        "op": 10,
+                        "lhs": {
+                          "kind": "var",
+                          "var": {
+                            "name": "#12582863",
+                            "index": 0,
+                            "virtual": true,
+                            "width": 64,
+                            "type": "imm"
+                          }
+                        },
+                        "rhs": {
+                          "kind": "int",
+                          "value": "2:64u"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "#12582863",
+                          "index": 0,
+                          "virtual": true,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      }
+                    },
+                    "body": {
+                      "kind": "binop",
+                      "op": 6,
+                      "lhs": {
+                        "kind": "binop",
+                        "op": 10,
+                        "lhs": {
+                          "kind": "var",
+                          "var": {
+                            "name": "#12582863",
+                            "index": 0,
+                            "virtual": true,
+                            "width": 64,
+                            "type": "imm"
+                          }
+                        },
+                        "rhs": {
+                          "kind": "int",
+                          "value": "1:64u"
+                        }
+                      },
+                      "rhs": {
+                        "kind": "var",
+                        "var": {
+                          "name": "#12582863",
+                          "index": 0,
+                          "virtual": true,
+                          "width": 64,
+                          "type": "imm"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "SF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "cast",
+              "op": 1,
+              "width": 1,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          },
+          {
+            "kind": "move",
+            "var": {
+              "name": "ZF",
+              "index": 0,
+              "virtual": false,
+              "width": 1,
+              "type": "imm"
+            },
+            "value": {
+              "kind": "binop",
+              "op": 5,
+              "lhs": {
+                "kind": "int",
+                "value": "0:64u"
+              },
+              "rhs": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "expect": {
+        "uses": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "must_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ]
+      }
+    },
+    {
+      "name": "jne-long",
+      "prefix": "0f8502000000",
+      "lift": {
+        "schema": "ariadne.bap-site/v1",
+        "batch": 0,
+        "snapshot": "d3f1db96af7c7eed100e0674fa6da86c16df48eb603427701241a04f6452f25f",
+        "va": "0x00000000000016e0",
+        "status": "decoded",
+        "length": 6,
+        "bytes": "0f8502000000",
+        "opcode": "JCC_4",
+        "properties": {
+          "jump": true,
+          "conditional": true,
+          "indirect": false,
+          "call": false,
+          "return": false,
+          "control": true
+        },
+        "bil": [
+          {
+            "kind": "if",
+            "condition": {
+              "kind": "unop",
+              "op": 0,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "ZF",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 1,
+                  "type": "imm"
+                }
+              }
+            },
+            "yes": [
+              {
+                "kind": "jump",
+                "target": {
+                  "kind": "int",
+                  "value": "0x16E8:64u"
+                }
+              }
+            ],
+            "no": []
+          }
+        ]
+      },
+      "expect": {
+        "uses": [
+          "flag:zf"
+        ],
+        "may_defs": [],
+        "must_defs": []
+      }
+    },
+    {
+      "name": "jmp-long",
+      "prefix": "e902000000",
+      "lift": {
+        "schema": "ariadne.bap-site/v1",
+        "batch": 0,
+        "snapshot": "d3f1db96af7c7eed100e0674fa6da86c16df48eb603427701241a04f6452f25f",
+        "va": "0x0000000000001700",
+        "status": "decoded",
+        "length": 5,
+        "bytes": "e902000000",
+        "opcode": "JMP_4",
+        "properties": {
+          "jump": true,
+          "conditional": false,
+          "indirect": false,
+          "call": false,
+          "return": false,
+          "control": true
+        },
+        "bil": [
+          {
+            "kind": "jump",
+            "target": {
+              "kind": "int",
+              "value": "0x1707:64u"
+            }
+          }
+        ]
+      },
+      "expect": {
+        "uses": [],
+        "may_defs": [],
+        "must_defs": []
+      }
+    },
+    {
+      "name": "clc-empty",
+      "prefix": "f8",
+      "lift": {
+        "schema": "ariadne.bap-site/v1",
+        "batch": 0,
+        "snapshot": "d3f1db96af7c7eed100e0674fa6da86c16df48eb603427701241a04f6452f25f",
+        "va": "0x0000000000001720",
+        "status": "decoded",
+        "length": 1,
+        "bytes": "f8",
+        "opcode": "CLC",
+        "properties": {
+          "jump": false,
+          "conditional": false,
+          "indirect": false,
+          "call": false,
+          "return": false,
+          "control": false
+        },
+        "bil": []
+      },
+      "expect": {
+        "reject": true
+      }
     }
   ]
 }

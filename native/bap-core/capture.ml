@@ -30,6 +30,19 @@ let admit j snapshot =
       end;
       if get row "status"=`String "projected" then
         require (get row "ast_sha256"<>`Null && string row "quality"="external_lift") "projected AST identity";
+      if get row "status"=`String "opaque-ordinary" then begin
+        let instruction=M.find a i.instructions in
+        let next=Printf.sprintf "0x%016Lx" (Int64.add (Int64.of_string a)
+            (Int64.of_int (String.length bytes / 2))) in
+        require (get row "projection"=`String "bap-bit-provenance-v3"
+                 && get row "ast_sha256"<>`Null && string row "quality"="opaque"
+                 && S.mem a i.decodable && instruction.kind="ordinary"
+                 && S.equal instruction.fall (S.singleton next)
+                 && S.is_empty instruction.targets && instruction.complete
+                 && S.equal instruction.uses i.locations
+                 && S.equal instruction.may i.locations && S.is_empty instruction.must)
+          "opaque ordinary capture contract"
+      end;
       let start=Int64.of_string a in
       let length=String.length bytes / 2 in
       let covered=ref 0 in

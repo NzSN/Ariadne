@@ -547,6 +547,8 @@ pub fn render(
     format: ReportFormat,
     exception_rip_seed: bool,
 ) -> Result<String, ReportError> {
+    crate::input::investigation::validate_opaque_ordinary(prepared)
+        .map_err(|_| ReportError::IdentityMismatch)?;
     if prepared.snapshot.snapshot_id != result.snapshot_id
         || prepared.prepared.request.snapshot_id != result.snapshot_id
     {

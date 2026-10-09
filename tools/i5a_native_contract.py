@@ -58,6 +58,7 @@ def source_inventory():
     paths.update((ROOT / "tools").glob("*i5a*.py"))
     paths.update(ROOT / name for name in (
         "tools/test_crashpad_assessment.py", "tools/check_rust_layout.py",
+        "tools/bap_profile_migration.py", "tools/test_bap_profile_migration.py",
         "tools/check_investigation.py", "tools/check_investigation_mutations.py",
         "tools/measure_investigation.py", "tools/investigation_budget.py",
         "tools/test_investigation_budget.py",

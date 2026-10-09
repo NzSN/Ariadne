@@ -1,0 +1,29 @@
+
+running 2 tests
+test native_complete_state_actions_match_reference_and_independent_origins ... ok
+test native_loops_calls_parallel_edges_and_failed_starts_match_full_reference ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.00s
+
+
+running 6 tests
+test transport_failure_controls ... ok
+test rust_reference_crosscheck ... ok
+test native_full_observations ... ok
+test native_rejections_and_fresh_sessions ... ok
+test native_failures_and_unsigned_schedule ... ok
+test native_input_admission ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 9.79s
+
+
+running 2 tests
+test native_stateflow_matches_every_state_and_derived_observation ... ok
+test native_stateflow_rejects_invalid_finite_contracts ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 9.20s
+
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.09s
+     Running tests/bap/core_analysis.rs (target/debug/deps/bap_core_analysis-250754fc36f2d43a)
+     Running tests/bap/core_bootstrap.rs (target/debug/deps/bap_core_bootstrap-07daaf5c4c4f8ca0)
+     Running tests/bap/core_stateflow.rs (target/debug/deps/bap_core_stateflow-d09307c58f80e3be)

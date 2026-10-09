@@ -222,7 +222,10 @@ pub(super) fn decide(
     }
     if site.semantic_status.as_deref() != Some("projected")
         || site.quality != "external_lift"
-        || site.projection.as_deref() != Some("bap-bit-provenance-v2")
+        || !matches!(
+            site.projection.as_deref(),
+            Some("bap-bit-provenance-v2" | "bap-bit-provenance-v3")
+        )
         || site.helper_sha256.is_none()
         || site.runtime_sha256.is_none()
         || site.ast_sha256.is_none()

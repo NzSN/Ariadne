@@ -2,7 +2,11 @@
 
 ## Context and follow-up
 
-**Status.** Current BAP integration with a user-authorized unlimited workload timing policy. Latency remains measured; native Stage 2 analysis algorithms are implemented, with aggregate acceptance tracked in the [qualification guide](../bap-core-qualification.md).
+**Status.** V3 projection/admission and ordinary opaque continuation are
+implemented. The [execution checkpoint](../bap-admission-checkpoint.md) records
+P0–P3 checks and incomplete P4/external qualification. Native analysis remains
+default; historical v2 qualification is source-bound to its earlier snapshots.
+BAP latency remains measured under the unlimited policy.
 
 **Why this document exists.** [Backend contract](../bap-semantic-backend-design.md) defines the helper, typed transport and admitted effects.
 
@@ -65,8 +69,10 @@ schemas. A failed native session produces an error without automatic fallback.
 The [Stage 2 qualification](../bap-core-qualification.md) records default-adoption
 acceptance and exact tested workloads.
 `external_lift` denotes exercised external semantics, not ISA-step acceptance.
-Calls and returns stay opaque. Unsupported lifts stop conservatively without
-using LLVM effect rules. `--decoder` is retained as an alias for the explicit
+Calls and returns stay opaque. Unsupported control, empty lifts and guarded/unmodeled semantics stop
+conservatively. Valid ordinary data-only gaps retain opaque continuation,
+all-location possible effects and no definite kills; diagnostics remain visible.
+Neither outcome uses LLVM effect rules. `--decoder` is retained as an alias for the explicit
 `--decoder-reference` option; it cannot select a semantic backend.
 
 `Backend::prepare` consumes captured batches and checks LLVM decoded facts only.
@@ -82,14 +88,14 @@ analysis and all three report formats.
 
 The [design](../bap-semantic-backend-design.md) and
 [Stage 1 plan](../../../Plans/bap-integration.md#stage-1-bap-semantic-backend) define
-admission and exit. The retained corpus has 41 exact byte cases with independent
+admission and exit. The current corpus has 58 exact byte cases with independent
 effect expectations. It is deliberately finite: supported opcode names and
 prefix guards do not imply universal ISA coverage. The native API source
-review is [here](../bap-projection-source-review.md). Production still uses
-`bap-bit-provenance-v2` and a finite opcode whitelist. SUB64ri8, MOVZX32rm8,
-XOR64rr and CMP8mi remain outside admission even when the lifter returns
-nonempty BIL. The [P0–P4 plan](../../../Plans/bap-projection-admission.md) proposes
-capability admission and opaque ordinary continuation; neither is implemented.
+review is [here](../bap-projection-source-review.md). Production uses
+`bap-bit-provenance-v3` and typed capability admission. SUB64ri8, MOVZX32rm8,
+XOR64rr and CMP8mi pass focused checks. The [P0–P4 ledger](../../../Plans/bap-projection-admission.md)
+tracks implementation and remaining qualification separately; P4 has no passing
+aggregate for this changed source snapshot.
 
 ```sh
 cargo test --offline --locked --release --manifest-path Cargo.toml -- --include-ignored

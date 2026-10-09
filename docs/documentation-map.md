@@ -154,6 +154,8 @@ implemented repairs and exercised checks from real-Windows qualification.
 - [BAP Windows workload replacement plan](../Plans/bap-windows-repin.md).
 - [BAP Stage 1 projection: pinned source review](Ariadne/bap-projection-source-review.md).
 - [Stage 1 BAP semantic backend protocol and projection](Ariadne/bap-semantic-backend-design.md).
+- [BAP v3 admission contract](Ariadne/bap-admission-contract.md) — frozen independent expectations, typed capability admission, ordinary opaque continuation and explicit profile migration.
+- [BAP admission execution checkpoint](Ariadne/bap-admission-checkpoint.md) — P0–P3 implementation, actual passing checks and incomplete P4/external acceptance.
 - [File readers and immutable address-space preparation](Ariadne/file-reader-design.md).
 - [Installed ModelMirrors and MirrorRust compatibility](Ariadne/installed-modelmirrors-compatibility.md).
 - [Windows I4 replacement validation](Ariadne/i4-windows-repin-validation.md).

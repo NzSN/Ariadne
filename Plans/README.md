@@ -3,8 +3,8 @@
 ## Context and follow-up
 
 **Status.** Current plan navigation as of 2026-10-09. The BAP projection
-admission/coverage P0–P4 follow-up is planned; implementation and qualification
-are pending. I5c fault-time address wrap
+admission/coverage P0–P3 implementation passes focused checks; P4 aggregate
+and external-capture qualification remain incomplete. I5c fault-time address wrap
 has a selected design and W0–W5 plan; implementation and qualification remain
 pending. I5b has a selected design
 and detailed B0–B5 implementation plan; all stages are implemented and qualified
@@ -46,8 +46,8 @@ keeping a plan outside `completed/` does not make its completed steps pending.
 - [Evidence guide](../evidence/Ariadne/README.md) — distinguishes retained results,
   failed progress records and fresh qualification after changes.
 
-**What remains unresolved.** The new projection admission and coverage
-stages are pending and do not inherit old BAP qualification. I4 acceptance
+**What remains unresolved.** V3 admission/continuation is implemented, but P4
+acceptance is incomplete and does not inherit old BAP qualification. I4 acceptance
 passes for its recorded source/tool/dependency identities and exact 98-start case; future changes require renewed
 qualification. I5c implementation/qualification, other I5 hypotheses, Linux
 numeric admission, I6/I7, PE/ELF image and ELF-core inputs, universal refinement
@@ -60,7 +60,7 @@ For the wider context, see the [documentation map](../docs/documentation-map.md)
 
 | Plan | Current state and next work |
 | --- | --- |
-| [BAP projection admission](bap-projection-admission.md) | P0–P4 planned: four-form validation, capability-based admission, conservative ordinary continuation and fresh capture/backend qualification. All runtime work is pending. |
+| [BAP projection admission](bap-projection-admission.md) | P0–P3 implemented and focused-tested: four-form validation, capability admission and conservative ordinary continuation. P4 aggregate/mutation/measurement/external acceptance is incomplete; see the [checkpoint](../docs/Ariadne/bap-admission-checkpoint.md). |
 | [Investigation layer](investigation-layer.md) | I0–I3 and active Windows producer correctness pass. I4 meets its fixed budgets in the [native performance result](../docs/Ariadne/i4-performance-validation.md); I5a is qualified, I5b is corpus-qualified, and other I5/I6/I7 remain later work. |
 | [I5c address wrap](i5c-address-wrap.md) | Selected design and W0–W5 plan written; all implementation/qualification pending. Upper-wrap/no-wrap assessment uses the inherited lower-range profile; underflow remains unknown. |
 | [I5b zero base plus displacement](i5b-zero-base-offset.md) | B0–B5 implemented and corpus-qualified: 18 passing gates, 15 detected mutants, stable source/tool identities and six controlled Windows captures. |

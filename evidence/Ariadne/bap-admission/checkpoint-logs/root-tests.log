@@ -1,0 +1,369 @@
+
+running 13 tests
+test bap::admission::tests::admission_has_no_generic_opcode_membership_gate_but_preserves_prefix_and_empty_controls ... ok
+test bap::admission::tests::malformed_alternatives_cannot_hide_behind_unsupported_data_or_constant_conditions ... ok
+test bap::admission::tests::capabilities_validate_composed_scalar_widths_and_virtual_bindings ... ok
+test bap::admission::tests::ordinary_opaque_requires_known_namespace_and_no_control_construct ... ok
+test bap::session::tests::malformed_batches_bind_every_site_and_poison_failed_sessions ... ignored, requires hash-pinned runtime; invokes adversarial helper fixtures
+test bap::core_adapter::cache_tests::reaching_cache_revalidates_changed_rows_and_shrinking_decoded_domain ... ok
+test bap::projection::tests::generic_unknown_keeps_old_origins_and_is_not_an_undefined_isa_claim ... ok
+test llvm_mc::protocol::tests::rejects_malformed_records ... ok
+test effects::rules::stage_a_tests::memory_immediate_rule_rejects_invalid_payload_and_width_claims ... ok
+test effects::rules::priority4_tests::control_only_bindings_reject_unreviewed_shapes_and_prefixes ... ok
+test bap::projection::tests::captured_bil_matches_independent_alias_flag_address_and_memory_expectations ... ok
+test llvm_mc::protocol::streaming_tests::checked_stream_requires_clean_shutdown_without_trailing_rows ... ok
+test llvm_mc::protocol::streaming_tests::checked_stream_rejects_bad_header_and_bounded_failures ... ok
+
+test result: ok. 12 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 1.09s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 2 tests
+test native_complete_state_actions_match_reference_and_independent_origins ... ignored, requires explicitly built Stage 2 native helper
+test native_loops_calls_parallel_edges_and_failed_starts_match_full_reference ... ignored, requires explicitly built Stage 2 native helper
+
+test result: ok. 0 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 6 tests
+test native_failures_and_unsigned_schedule ... ignored, requires explicitly built isolated OCaml helper
+test native_full_observations ... ignored, requires explicitly built isolated OCaml helper
+test native_input_admission ... ignored, requires explicitly built isolated OCaml helper
+test native_rejections_and_fresh_sessions ... ignored, requires explicitly built isolated OCaml helper
+test rust_reference_crosscheck ... ignored, requires explicitly built isolated OCaml helper
+test transport_failure_controls ... ignored, requires the qualified helper manifest and Python failure fixtures
+
+test result: ok. 0 passed; 0 failed; 6 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 2 tests
+test native_stateflow_matches_every_state_and_derived_observation ... ignored, requires explicitly built Stage 2 native helper
+test native_stateflow_rejects_invalid_finite_contracts ... ignored, requires explicitly built Stage 2 native helper
+
+test result: ok. 0 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test unix::decode_length_control_and_operand_binding_disagreements_stop_without_fallback ... ignored, requires pinned runtime and LLVM decoded-fact reference
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 8 tests
+test aliases_zero_extension_memory_and_conditional_writes_have_independent_effect_expectations ... ignored, requires pinned BAP/LLVM native helpers
+test calls_special_empty_lifts_prefixes_and_snapshot_reset_remain_explicit ... ignored, requires pinned BAP/LLVM native helpers
+test every_pinned_runtime_file_is_checked_before_preparation ... ignored, requires pinned BAP runtime
+test independent_decoder_process_is_reused_across_snapshot_batches ... ignored, requires pinned BAP/LLVM native helpers
+test memory_address_evidence_distinguishes_payload_index_displacement_and_rip ... ignored, requires pinned native helpers
+test observed_admission_forms_match_frozen_effects_and_address_footprints ... ignored, requires pinned BAP/LLVM helpers; independent P0 contract
+test partial_self_moves_define_written_cells_and_unsupported_bil_never_falls_back ... ignored, requires pinned helpers; checks BAP-only behavior
+test unavailable_batches_high_addresses_short_bytes_and_query_ownership_are_checked ... ignored, requires pinned BAP/LLVM native helpers
+
+test result: ok. 0 passed; 0 failed; 8 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test unix::malformed_wrong_version_and_missing_helper_fail_before_a_session_is_admitted ... ignored, requires pinned BAP runtime
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 18 tests
+test captured_decode_failure_does_not_use_file_fallback ... ok
+test captured_jit_bytes_need_no_file_and_binary_ignores_capture ... ok
+test closed_recovery_can_have_missing_slice_seeds ... ok
+test calls_fixture_keeps_graph_visibility_discovery_and_dataflow_distinct ... ok
+test empty_locations_and_seeds_are_valid ... ok
+test binary_fixture ... ok
+test closed_fixture ... ok
+test empty_targets_need_obligations_only_when_uncertified ... ok
+test dump_fixture ... ok
+test entry_values_do_not_become_producer_instructions ... ok
+test full_u64_addresses_are_preserved_without_arithmetic ... ok
+test owned_request_and_result_are_independent_of_caller_mutations ... ok
+test malformed_requests_are_rejected_before_analysis ... ok
+test loop_fixture ... ok
+test may_writes_preserve_origins_and_must_writes_kill_them ... ok
+test self_loop_terminates_and_entry_and_instruction_origins_do_not_collide ... ok
+test pipeline_fixture_and_eight_transition_witness ... ok
+test two_labels_to_one_destination_are_distinct_edges ... ok
+
+test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 18 tests
+test arithmetic_matrix_checks_widths_flags_ties_and_immediates ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test batched_preparation_preserves_every_record_and_reports_measurement ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test carry_dependency_survives_increment_and_cmp_does_not_write_registers ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test control_flags_calls_and_unrecognized_control_have_distinct_evidence ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test dump_provenance_and_missing_targets_survive_preparation ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test extended_register_views_and_immediate_widths_are_preserved ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test frozen_opcode_matrix_has_real_native_evidence_and_no_unexercised_rules ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test memory_address_sizes_rip_and_prefix_rejections ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test memory_immediate_mov_preserves_signed_payload_and_address_size ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test memory_immediate_mov_uses_address_registers_and_only_may_writes_memory ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test memory_immediate_rule_rejects_unreviewed_prefixes_without_stealing_register_mov ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test memory_immediate_store_keeps_address_producers_and_weak_memory_origins ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test memory_keeps_possible_aliases_and_address_dependencies_lea_does_not_read_memory ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test mov_slice_excludes_unrelated_instruction_and_preserves_legacy_behavior ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test opaque_control_forms_preserve_prior_origins_and_expose_uncertainty ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test partial_writes_preserve_other_bytes_and_dword_replaces_upper_half ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test catalogue_is_disjoint_and_views_distinguish_reads_from_writes ... ok
+test prepare_rejects_independent_overlapping_locations_before_decoder_launch ... ok
+
+test result: ok. 2 passed; 0 failed; 16 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test checked_batch_rejects_wrong_version_target_and_absent_header ... ok
+test preparation_bounds_both_output_streams_and_reports_process_failure ... ok
+test preparation_rejects_missing_duplicate_unexpected_and_contradictory_rows ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+
+running 1 test
+test generated_requests_match_independent_graph_and_path_oracles ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.11s
+
+
+running 5 tests
+test bap_materialization_preserves_conflicts_missing_seeds_and_call_only_discovery ... ignored, requires pinned BAP and LLVM native helpers
+test controlled_not_fixture_demonstrates_coverage_and_keeps_all_report_formats_bound ... ignored, requires pinned BAP and LLVM native helpers
+test default_bap_and_explicit_runtime_preserve_captured_producer_slice_without_fallback ... ignored, requires pinned BAP and LLVM native helpers
+test removed_llvm_and_bap_selectors_cannot_select_a_semantic_backend ... ok
+test bap_options_and_infrastructure_failures_do_not_publish_complete_reports ... ok
+
+test result: ok. 2 passed; 0 failed; 3 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 5 tests
+test captured_native_results_and_explanations_match_reference_and_reject_tampering ... ignored, requires pinned lifting, MC and native analysis helpers
+test native_cli_assessment_and_explanation_preserve_reference_output ... ignored, requires pinned native helpers
+test native_rejects_opaque_contract_tampering_directly ... ignored, requires current native capture helper; bypasses Rust prevalidation
+test observed_chain_recovers_from_one_root_and_empty_lifts_still_stop ... ignored, requires pinned helpers and v3 native capture admission
+test opaque_ordinary_keeps_old_and_unknown_origins_and_all_format_gaps ... ignored, requires pinned helpers and v3 native capture admission
+
+test result: ok. 0 passed; 0 failed; 5 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 11 tests
+test assessment_cli_modes_publish_atomically_and_never_add_entry_roots ... ignored, requires pinned BAP/MC and Graphviz; executes normal CLI publication
+test legacy_stage_b_fixtures_remain_unknown_for_i5a ... ignored, requires pinned BAP/LLVM; prior fixtures lack the new evidence
+test native_i5a_corpus_matches_independent_context_and_address_expectations ... ignored, requires pinned BAP lifting, LLVM and native analysis helpers
+test malformed_fault_extents_and_parameter_counts_are_rejected_before_binding ... ok
+test fault_binding_is_owned_and_rejects_metadata_or_query_substitution ... ok
+test numeric_question_does_not_rewrite_prior_analysis_or_producer_uncertainty ... ok
+test serialized_observation_and_conclusion_tampering_is_rejected ... ok
+test unadmitted_access_shapes_cannot_produce_numeric_claims ... ok
+test strict_assessment_formats_preserve_scope_and_reject_extra_or_duplicate_fields ... ok
+test budgets_preserve_valid_unknown_results_and_invalid_questions_stay_errors ... ok
+test independent_context_and_arithmetic_corpus ... ok
+
+test result: ok. 8 passed; 0 failed; 3 ignored; 0 measured; 0 filtered out; finished in 0.45s
+
+
+running 7 tests
+test cli_modes_publish_atomically_and_never_promote_question_roots ... ignored, requires native BAP/LLVM, CLI and OCaml helper
+test native_corpus_and_reference_match_independent_oracle ... ignored, requires pinned BAP/LLVM and OCaml helper
+test opaque_upstream_call_keeps_producers_partial_but_numeric_site_admitted ... ignored, requires native BAP/LLVM
+test decoded_bil_disagreement_and_missing_receipt_are_unknown ... ok
+test pilot_decisions_use_base_and_displacement_not_effective_zero ... ok
+test budgets_binding_and_strict_decoding_preserve_unknown_or_errors ... ok
+test independent_corpus_covers_six_forms_and_admission_negatives ... ok
+
+test result: ok. 4 passed; 0 failed; 3 ignored; 0 measured; 0 filtered out; finished in 2.11s
+
+
+running 5 tests
+test aliases_joins_calls_and_weak_memory_keep_alternatives ... ignored, requires pinned native helpers
+test both_platforms_explain_address_producer_and_preserve_dump_offsets ... ignored, requires pinned BAP/MC helpers
+test exact_query_binding_and_unavailable_conflict_are_retained ... ignored, requires pinned native helpers
+test not_chain_reports_are_versioned_strict_and_transactionally_published ... ignored, requires pinned native helpers
+test malformed_question_flags_do_not_publish ... ok
+
+test result: ok. 1 passed; 0 failed; 4 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 6 tests
+test both_platforms_discover_interior_starts_and_produce_precise_slices ... ignored, requires pinned decoder
+test budgets_fail_without_publishing_partial_requests ... ignored, requires pinned decoder
+test calls_and_seeds_do_not_discover_callees_but_explicit_roots_do ... ignored, requires pinned decoder
+test complete_short_prefix_conflict_and_unsupported_control_remain_distinct ... ignored, requires pinned decoder
+test linux_and_windows_reference_facts_match_the_frozen_decoder_corpus ... ignored, requires pinned decoder
+test loops_conditional_paths_and_overlapping_starts_are_preserved ... ignored, requires pinned decoder
+
+test result: ok. 0 passed; 0 failed; 6 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 8 tests
+test adjacent_and_identical_overlaps_compose_but_conflicts_are_localized ... ok
+test immutable_identity_limits_empty_reads_and_last_virtual_byte ... ok
+test memory_lists_and_packed_memory64_preserve_virtual_addresses_and_file_offsets ... ok
+test malformed_ranges_duplicates_counts_and_architecture_are_rejected ... ok
+test metadata_and_unknown_streams_never_supply_memory ... ok
+test sparse_memory_info_is_metadata_and_does_not_become_capture ... ok
+test thread_capture_and_valid_register_groups_are_retained_without_using_crash_values ... ok
+test bounded_corruptions_do_not_panic_or_publish_out_of_bounds_ranges ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+
+
+running 1 test
+test real_windows_and_linux_crash_artifacts_preserve_bytes_and_report_semantic_gaps ... ignored, requires ARIADNE_REAL_DUMPS and pinned decoder
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 2 tests
+test captured_predecessor_path_yields_address_producer_slice_on_both_platforms ... ignored, requires pinned LLVM decoder
+test pinned_fixture_source_entry_and_capture_are_independent_of_exception_rip ... ok
+
+test result: ok. 1 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test absent_entry_yields_typed_partial_report_with_unvisited_seed ... ignored, requires pinned LLVM decoder
+test bad_options_missing_decoder_and_existing_output_do_not_publish_a_report ... ignored, requires pinned LLVM decoder
+test one_query_publishes_consistent_text_dot_and_versioned_json_on_both_platforms ... ignored, requires pinned LLVM decoder
+
+test result: ok. 0 passed; 0 failed; 3 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test minidump_stateflow_reports_preserve_identity_graph_and_uncertainty_on_both_platforms ... ignored, requires pinned native decoder
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 9 tests
+test finite_limits_never_label_truncated_output_explained ... ok
+test zero_budgets_do_not_hide_invalid_questions ... ok
+test same_snapshot_wrong_query_and_different_snapshot_are_rejected ... ok
+test unsupported_address_missing_fact_and_unreached_site_remain_unavailable ... ok
+test evidence_scope_and_address_input_tampering_are_rejected ... ok
+test producer_claims_retain_byte_origins_entry_alternatives_and_capture_references ... ok
+test serialized_dangling_refs_history_classes_and_root_cause_variants_are_rejected ... ok
+test claim_and_evidence_exhaustion_return_valid_partial_answers ... ok
+test limit_boundaries_and_cycles_preserve_references_and_default_answers ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.20s
+
+
+running 1 test
+test ir_cli_reports_verified_text_and_bitcode_and_rejects_unverified_output ... ignored, requires pinned LLVM IR helper
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test verified_function_with_two_phi_nodes_keeps_both_dependencies ... ignored, requires pinned LLVM 20 IR helper
+test verified_text_and_bitcode_have_the_same_normalized_slice_and_distinct_artifact_ids ... ignored, requires pinned LLVM 20 IR helper
+test verifier_failure_and_protocol_corruptions_fail_before_analysis ... ignored, requires pinned LLVM 20 IR helper
+
+test result: ok. 0 passed; 0 failed; 3 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 4 tests
+test four_block_phi_memory_and_call_fixture_matches_the_model ... ok
+test multiple_phi_nodes_are_valid_before_non_phi_instructions ... ok
+test empty_seed_and_unaccepted_memory_predecessors_remain_explicit ... ok
+test verifier_phi_predecessors_and_memory_domains_are_contract_checks ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 5 tests
+test binary_control_flow_and_unknown_effects ... ignored, requires the pinned LLVM MC decoder; run native/llvm_mc/check.sh
+test dump_capture_wins_and_failed_capture_does_not_fall_back ... ignored, requires the pinned LLVM MC decoder; run native/llvm_mc/check.sh
+test identical_bytes_from_binary_and_trusted_dump_have_identical_summaries ... ignored, requires the pinned LLVM MC decoder; run native/llvm_mc/check.sh
+test indirect_call_retains_summary_and_unknown_target ... ignored, requires the pinned LLVM MC decoder; run native/llvm_mc/check.sh
+test system_and_transactional_transfers_do_not_invent_fallthrough ... ignored, requires the pinned LLVM MC decoder; run native/llvm_mc/check.sh
+
+test result: ok. 0 passed; 0 failed; 5 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 5 tests
+test formal_five_node_fixture_matches_stateflow_schedule_and_observations ... ok
+test incomplete_and_unreached_sources_keep_unwitnessed_edges_unknown ... ok
+test invalid_domains_frames_edges_and_terminal_states_are_rejected_before_analysis ... ok
+test recovery_handoff_keeps_summary_edge_and_separate_call_obligation ... ok
+test joins_loops_and_equal_valuations_keep_distinct_state_id_paths ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 8 tests
+test graphviz_parses_escaped_labels_without_extra_nodes_or_edges ... ignored, requires Graphviz; set ARIADNE_DOT to the dot executable
+test initial_and_intermediate_state_fields_are_not_labeled_done ... ok
+test metadata_is_quoted_and_cannot_create_output_records ... ok
+test complete_result_is_readable_deterministic_and_unchanged ... ok
+test every_recovery_gap_and_captured_provenance_survives_rendering ... ok
+test parallel_control_labels_survive_and_reaching_facts_do_not_invent_edges ... ok
+test missing_seed_does_not_become_a_recovery_failure_or_disappear ... ok
+test unvisited_callee_and_failed_continuation_are_distinguished ... ok
+
+test result: ok. 7 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 4 tests
+test recovery_report_rejects_wrong_identity_and_retains_call_context ... ok
+test request_round_trip_preserves_high_addresses_and_explicit_uncertainty ... ok
+test strict_inputs_reject_duplicate_unknown_numeric_and_noncanonical_fields ... ok
+test publication_rejects_reuse_and_invalid_filename_without_partial_output ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 2 tests
+test src/lib.rs - (line 7) ... ok
+test src/render.rs - render (line 5) ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+all doctests ran in 0.73s; merged doctests compilation took 0.71s
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 14.27s
+     Running unittests src/lib.rs (target/debug/deps/ariadne-30a1fc32cccfc7e4)
+     Running unittests src/bin/ariadne-ir.rs (target/debug/deps/ariadne_ir-c1001579e854e801)
+     Running unittests src/bin/ariadne-minidump.rs (target/debug/deps/ariadne_minidump-1ae390eb95bb30b6)
+     Running tests/bap/core_analysis.rs (target/debug/deps/bap_core_analysis-250754fc36f2d43a)
+     Running tests/bap/core_bootstrap.rs (target/debug/deps/bap_core_bootstrap-07daaf5c4c4f8ca0)
+     Running tests/bap/core_stateflow.rs (target/debug/deps/bap_core_stateflow-d09307c58f80e3be)
+     Running tests/bap/disagreement.rs (target/debug/deps/bap_disagreement-046ae31d909ed6a5)
+     Running tests/bap/native.rs (target/debug/deps/bap_native-40ba65f3a045911f)
+     Running tests/bap/protocol.rs (target/debug/deps/bap_protocol-e0de2765980d1f48)
+     Running tests/conformance.rs (target/debug/deps/conformance-cb3004334b4c9f2c)
+     Running tests/effects.rs (target/debug/deps/effects-d5e1b1726b3e4a9a)
+     Running tests/effects_protocol.rs (target/debug/deps/effects_protocol-883812e2c831e18f)
+     Running tests/generated.rs (target/debug/deps/generated-4ad2587f8897f585)
+     Running tests/input/bap_backend.rs (target/debug/deps/input_bap_backend-a06bec45083bdc77)
+     Running tests/input/bap_core.rs (target/debug/deps/input_bap_core-0b447580561dcdea)
+     Running tests/input/i5a.rs (target/debug/deps/input_i5a-1981f8d69c6cec59)
+     Running tests/input/i5b.rs (target/debug/deps/input_i5b-346f48e2c99ca05a)
+     Running tests/input/investigation.rs (target/debug/deps/input_investigation-2d4cb5ec1bd7234a)
+     Running tests/input/native.rs (target/debug/deps/input_native-2924a6466be9370a)
+     Running tests/input/reader.rs (target/debug/deps/input_reader-93a3e0fa2a81408a)
+     Running tests/input/real_dumps.rs (target/debug/deps/input_real_dumps-7374a2050e5b83c7)
+     Running tests/input/stage_b.rs (target/debug/deps/input_stage_b-d699db38c1510018)
+     Running tests/input/stage_c.rs (target/debug/deps/input_stage_c-8e413ba2abf2dd1e)
+     Running tests/input/stage_e.rs (target/debug/deps/input_stage_e-7c3e40dd3ce80b5c)
+     Running tests/investigation/explanations.rs (target/debug/deps/investigation_explanations-6484f137b3966514)
+     Running tests/ir/cli.rs (target/debug/deps/ir_cli-46cd1f5ba828dc62)
+     Running tests/ir/native.rs (target/debug/deps/ir_native-430504e9fd36eb70)
+     Running tests/llvm_ir.rs (target/debug/deps/llvm_ir-e392ac3a12795852)
+     Running tests/llvm_mc.rs (target/debug/deps/llvm_mc-dfa8c45fb907d9da)
+     Running tests/machine_state.rs (target/debug/deps/machine_state-ba5afa6dfe81256b)
+     Running tests/render.rs (target/debug/deps/render-6d59561f02007e09)
+     Running tests/reports/contracts.rs (target/debug/deps/reports_contracts-af057e77c2ea484b)
+   Doc-tests ariadne

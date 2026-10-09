@@ -1,0 +1,8 @@
+
+running 1 test
+test minidump_stateflow_reports_preserve_identity_graph_and_uncertainty_on_both_platforms ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 30.85s
+
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.05s
+     Running tests/input/stage_e.rs (target/debug/deps/input_stage_e-7c3e40dd3ce80b5c)

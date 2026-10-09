@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Retain actual native BIL with independently specified effect expectations."""
-import argparse,hashlib,json,os,subprocess
+import argparse,hashlib,json,os,subprocess,sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[3]
 def cells(bank,n=8):return [f'gpr:{bank}:{i}' for i in range(n)]
@@ -44,6 +44,13 @@ CASES=[
  ('lock','f00118',dict(reject=True)),('rep','f3a4',dict(reject=True)),
  ('segment','64488b03',dict(reject=True)),('address-size','67488b03',dict(reject=True)),
 ]
+sys.path.insert(0, str(Path(__file__).with_name("admission")))
+from oracle import CASES as ADMISSION_CASES
+CASES.extend(ADMISSION_CASES[:16])
+# The pinned producer has empty CLC BIL; its independent CF=0 expectation
+# cannot supply missing semantics. Preserve this discovered negative control.
+CASES.append(("clc-empty", "f8", dict(reject=True)))
+
 def main():
  p=argparse.ArgumentParser();p.add_argument('--check',action='store_true');a=p.parse_args()
  runtime=ROOT/'tmp/bap-setup/stable';helper=ROOT/'target/ariadne-bap-lift'

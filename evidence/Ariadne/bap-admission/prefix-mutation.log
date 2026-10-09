@@ -1,0 +1,22 @@
+
+running 1 test
+test bap::projection::tests::captured_bil_matches_independent_alias_flag_address_and_memory_expectations ... FAILED
+
+failures:
+
+---- bap::projection::tests::captured_bil_matches_independent_alias_flag_address_and_memory_expectations stdout ----
+
+thread 'bap::projection::tests::captured_bil_matches_independent_alias_flag_address_and_memory_expectations' (42297) panicked at src/bap/projection.rs:676:17:
+"lock"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    bap::projection::tests::captured_bil_matches_independent_alias_flag_address_and_memory_expectations
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 12 filtered out; finished in 0.02s
+
+   Compiling ariadne-analysis v0.1.0 (/tmp/ariadne-bap-mutations-0622cys2/sut)
+    Finished `release` profile [optimized] target(s) in 7.65s
+     Running unittests src/lib.rs (target/bap-mutations/ariadne-bap-mutations-0622cys2/release/deps/ariadne-eac5fde57d2ca545)
+error: test failed, to rerun pass `--lib`

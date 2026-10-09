@@ -22,7 +22,15 @@ mod unix {
         std::fs::create_dir_all(&folder).unwrap();
         let corpus: serde_json::Value =
             serde_json::from_str(include_str!("fixtures/corpus.json")).unwrap();
-        for mode in ["length", "control", "effect"] {
+        for mode in [
+            "length",
+            "control",
+            "effect",
+            "malformed",
+            "opaque",
+            "hidden-jump",
+            "path-budget",
+        ] {
             let name = if mode == "control" { "jne" } else { "mov64" };
             let row = corpus["rows"]
                 .as_array()
@@ -40,6 +48,12 @@ b=sys.stdin.readline().split();r=sys.stdin.readline().split();value.update(snaps
 if mode=='length':value['length']=2;value['bytes']=value['bytes'][:4]
 if mode=='control':value['properties']['conditional']=False
 if mode=='effect':value['bil'][0]['value']=dict(kind='int',value='0:64u')
+if mode=='malformed':value['bil'][0]['value']=dict(kind='int',value='0:32u')
+if mode=='opaque':value['bil'][0]['value']=dict(kind='unsupported')
+if mode=='hidden-jump':value['bil'].append(dict(kind='jump',target=dict(kind='int',value=str(int(r[0],16)+3)+':64u')))
+if mode=='path-budget':
+ condition=dict(kind='var',var={'name':'CF','index':0,'virtual':False,'width':1,'type':'imm'})
+ value['bil'] += [dict(kind='if',condition=condition,yes=[],no=[]) for _ in range(6)]
 print(json.dumps(value),flush=True);print(json.dumps(dict(schema='ariadne.bap-batch/v1',batch=int(b[1]),count=1)),flush=True)
 for _ in sys.stdin:pass
 "#;
@@ -59,18 +73,46 @@ for _ in sys.stdin:pass
                 .step_by(2)
                 .map(|i| u8::from_str_radix(&hex[i..i + 2], 16).unwrap())
                 .collect();
-            let batch = backend
-                .prepare(
-                    "fixture",
-                    &[(va, Some(bytes))].into(),
-                    &PreparationOptions::default(),
-                    DecoderTarget::LinuxAmd64,
-                )
-                .unwrap();
+            let batch = backend.prepare(
+                "fixture",
+                &[(va, Some(bytes))].into(),
+                &PreparationOptions::default(),
+                DecoderTarget::LinuxAmd64,
+            );
+            if ["malformed", "path-budget"].contains(&mode) {
+                assert!(
+                    batch.is_err(),
+                    "invalid type/resource failure was published"
+                );
+                let error = batch.err().unwrap();
+                assert!(error.to_string().contains(if mode == "malformed" {
+                    "width"
+                } else {
+                    "limit"
+                }));
+                backend.finish().unwrap();
+                continue;
+            }
+            let batch = batch.unwrap();
             let site = &batch.sites[&va];
             let semantic = site.evidence.semantic.as_ref().unwrap();
             assert_ne!(semantic.status, "projected", "{mode}");
-            if mode == "length" {
+            if mode == "opaque" {
+                assert_eq!(semantic.status, "opaque-ordinary");
+                assert!(site.decodable);
+                assert_eq!(site.instruction.kind, InstructionKind::Ordinary);
+                assert_eq!(site.instruction.fall, [va + 3].into());
+                assert_eq!(site.instruction.uses, Catalogue.locations());
+                assert_eq!(site.instruction.may_defs, Catalogue.locations());
+                assert!(site.instruction.must_defs.is_empty());
+                assert!(
+                    semantic
+                        .gaps
+                        .iter()
+                        .any(|g| g == "unsupported-data-effects")
+                );
+                assert!(semantic.fallback.is_none());
+            } else if mode == "length" {
                 assert_eq!(semantic.status, "decode-disagreement");
                 assert_eq!(site.instruction.kind, InstructionKind::Stop);
                 assert!(!site.decodable);
