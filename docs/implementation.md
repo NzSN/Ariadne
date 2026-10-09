@@ -52,8 +52,11 @@ changing the core state machine; see the [effect rule matrix](Ariadne/operand-ef
 
 The [minidump input module](Ariadne/modules/input.md) now supplies immutable
 captured memory and local instruction discovery for AMD64 Windows/Linux dumps.
-It shares the root manifest and lockfile. The public batch-preparation
-seam reuses this adapter's rules; it does not change the analyzer transitions.
+It shares the root manifest and lockfile. Production minidump preparation uses
+[BAP projection](Ariadne/modules/bap.md) and LLVM decoded facts; it does not
+reuse the legacy LLVM effect-rule preparer. The CLI defaults to the native
+helper, while this guide's `Analyzer` API describes the explicit Rust reference.
+Preparation freezes inputs before either analyzer runs.
 PE/ELF images and ELF core readers remain pending.
 
 ## Build and use

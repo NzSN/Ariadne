@@ -22,11 +22,15 @@ helper and a bounded native state/protocol slice.
 - [A0 plan](bap-stage2-a0.md) — receives the foundation qualification result.
 - [Stage 2 sequence](bap-integration.md#stage-2-bap-analysis-core) — continues with
   complete A1 recovery, A2 definitions/slicing and A3 stateflow.
-- [Native experimental module](../native/bap-core/README.md) — keeps the new work
-  separate from production lifting and the existing Rust analyzer.
+- [Native analysis module](../native/bap-core/README.md) — current helper setup,
+  completed Stage 2 and historical foundation commands.
 
-**What remains unresolved.** This completed foundation does not qualify the
-complete Stage 2 analyzer, generated helper replay, product integration or adoption.
+**What remains unresolved.** This completed foundation itself does not qualify
+the complete analyzer, generated helper replay, product integration or adoption.
+The later [Stage 2 result](../docs/Ariadne/bap-core-qualification.md) supplies
+those separate claims; the [documentation audit](../docs/Ariadne/bap-documentation-sync.md)
+identifies its matching source-bound refresh. The bootstrap sequence below is
+historical, not a list of missing current capabilities.
 
 For the wider context, see the [documentation map](../docs/documentation-map.md).
 
@@ -225,16 +229,17 @@ ocamlopt` through `build.py`/`build.sh`, rather than Dune:
 | --- | --- |
 | `native/bap-core/sdk.lock.json` | Exact compiler, BAP, package-repository and native dependency identities. |
 | `native/bap-core/setup-sdk.py` | Isolated acquisition/build and strict check-only mode. |
-| `native/bap-core/dune-project`, `dune`, `*.ml`/`*.mli` | Helper, owned state, input admission and direct observation. |
+| `native/bap-core/recovery.ml`, `project_state.ml`, `main.ml` | Delivered bootstrap state, project attribution, admission and observation; later Stage 2 also adds `stateflow.ml` and `capture.ml`. |
 | `native/bap-core/build.sh` | Locked helper build with explicit SDK/output arguments. |
 | `src/bap/core_protocol.rs`, `core_session.rs` | Typed framing, identity checks and process lifecycle. |
 | `tests/bap/core_bootstrap.rs` | Real native transport and independent state assertions. |
 | `tools/check_bap_ocaml.py` | Ordered OQ gates and source/tool-bound evidence. |
 | `tools/check_bap_ocaml_mutations.py` | Separate native/transport mutation builds and expected mismatches. |
 
-Choose the concrete build tool after source compatibility is verified; a Dune
-helper does not imply the selected BAP source itself uses Dune. Keep SDK, clean
-rebuild, replay and mutation outputs in distinct directories under `target/`.
+The delivered build uses `build.py` and `ocamlfind ocamlopt`; no Dune helper
+files were delivered. The selected BAP SDK retains its own pinned build system.
+Keep SDK, clean rebuild, replay and mutation outputs in distinct directories
+under `target/`.
 
 Existing checks available now remain:
 

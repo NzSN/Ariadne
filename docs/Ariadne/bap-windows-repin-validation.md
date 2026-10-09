@@ -29,7 +29,7 @@ qualification. A controlled replacement does not recreate the old crash.
 - [BAP integration plan](../../Plans/bap-integration.md) — records the resulting
   Stage 1 decision and the separate Stage 2 prerequisite.
 
-**What remains unresolved.** This capture campaign did not implement Stage 2. The later [native Stage 2 delivery](bap-core-qualification.md) qualifies recovery, dataflow, slicing, stateflow and default adoption. Its BAP timing policy is unlimited. The separately authorized [active I4 replacement](i4-windows-repin-validation.md) uses this 98-start capture and remains above its unchanged 2,000 ms explanation-CLI limit. Historical Priority 4 records retain their original scope.
+**What remains unresolved.** This capture campaign did not implement Stage 2. The later [native Stage 2 delivery](bap-core-qualification.md) qualifies recovery, dataflow, slicing, stateflow and default adoption. Its BAP timing policy is unlimited. The separately authorized [active I4 replacement](i4-windows-repin-validation.md) uses this 98-start capture. Its later [performance qualification](i4-performance-validation.md) meets the unchanged 2,000 ms explanation-CLI limit. The earlier over-budget verdict below remains historical. Historical Priority 4 records retain their original scope.
 
 For the wider context, see the [documentation map](../documentation-map.md).
 

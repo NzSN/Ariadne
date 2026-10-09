@@ -13,6 +13,8 @@ Rust retains preparation, validation, reports and explicit reference/rollback.
 
 **Where to go next.**
 
+- [BAP documentation audit](../../docs/Ariadne/bap-documentation-sync.md) — current projection limits and exact retained source/tool bindings.
+
 - [Unlimited timing policy](../../docs/Ariadne/bap-unlimited-validation.md) — records the user-authorized removal of the BAP latency ceiling and refreshed qualification.
 
 - [Rust backend guide](../../docs/Ariadne/modules/bap.md) — connects the helper to minidump preparation.
@@ -24,8 +26,8 @@ Rust retains preparation, validation, reports and explicit reference/rollback.
 records passing clean-build, algorithm, replay and default-adoption checks on
 the exercised corpus. Pinned lifting remains trusted; universal refinement and
 packaged cross-platform release qualification remain open. The
-[active I4 question](../../docs/Ariadne/i4-windows-repin-validation.md) remains
-over its fixed CLI budget; controlled I5a has separate passing records.
+[active I4 question](../../docs/Ariadne/i4-windows-repin-validation.md) meets
+its fixed CLI budget in the later [performance qualification](../../docs/Ariadne/i4-performance-validation.md); controlled I5a has separate passing records.
 
 For the wider context, see the optional [documentation map](../../docs/documentation-map.md).
 

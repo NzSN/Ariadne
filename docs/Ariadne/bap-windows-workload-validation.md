@@ -36,7 +36,7 @@ from full workload qualification.
 qualify the unavailable original 98-start capture. The later BAP replacement and
 unlimited policy resolve Stage 1; native Stage 2 has its own passing record.
 The [I4-specific replacement](i4-windows-repin-validation.md) separately closes
-its artifact gap but remains over the unchanged 2,000 ms explanation-CLI ceiling.
+its artifact gap; the later [performance qualification](i4-performance-validation.md) meets the unchanged 2,000 ms explanation-CLI ceiling.
 
 For the wider context, see the [documentation map](../documentation-map.md).
 
@@ -72,8 +72,9 @@ boundary requires complete current source and tool inventories. The fixed
 | Valid original evidence above 2,000 ms | May pass for correctness | False |
 | Valid original evidence at or below 2,000 ms, all implementation gates pass | Pass | True |
 
-This is the conservative current interpretation of the plan's full-exit
-condition. Existing BAP-only default selection was separately authorized; it
+This was the qualification policy for the retained R0–R2 run. The later
+[unlimited policy](bap-unlimited-validation.md) governs the active replacement's
+Stage 1 exit and Stage 2 prerequisite. Existing BAP-only default selection was separately authorized; it
 does not establish qualification or waive the workload condition.
 
 ## Validation and retention

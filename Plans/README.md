@@ -22,6 +22,8 @@ keeping a plan outside `completed/` does not make its completed steps pending.
 
 **Where to go next.**
 
+- [BAP documentation audit](../docs/Ariadne/bap-documentation-sync.md) — matches BAP ledgers and pending stages to current source and retained evidence.
+
 - [BAP projection admission and coverage](bap-projection-admission.md) —
   remove opcode-name restrictions through validated BIL capabilities, beginning
   with four observed parser forms; keep unknown effects and control explicit.

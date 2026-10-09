@@ -22,7 +22,7 @@ unlimited, with investigation budgets qualified separately.
 
 - [OCaml foundation qualification](bap-ocaml-qualification.md) — records the completed A0 SDK, native state and transport gates.
 
-- [Stage 2 analysis contract](bap-analysis-core-design.md) and [A0 plan](../../Plans/bap-stage2-a0.md) — begin the user-authorized analysis-core migration.
+- [Stage 2 analysis contract](bap-analysis-core-design.md) and [A0 plan](../../Plans/bap-stage2-a0.md) — preserve the delivered analysis contract and historical A0 migration step.
 
 - [Unlimited timing policy](bap-unlimited-validation.md) — records the user-authorized removal of the BAP latency ceiling and refreshed qualification.
 
@@ -32,10 +32,10 @@ unlimited, with investigation budgets qualified separately.
 - [Backend delivery](bap-only-removal-validation.md) — records removal of semantic fallback and remaining Windows limits.
 - [Previous workload delivery](bap-windows-workload-validation.md) — retains the R0–R2 repair/refresh evidence and its original-capture limit.
 - [Replacement validation](bap-windows-repin-validation.md) — records the inspected capture, durable bundle and former latency condition.
-- [Integration plan](../../Plans/bap-integration.md) — tracks open workload qualification and later core migration.
+- [Integration plan](../../Plans/bap-integration.md) — records completed Stage 1/Stage 2 and the pending projection-admission follow-up.
 - [Current execution ledger](../../Plans/bap-integration.md#current-execution-ledger) — retains completed R0–R2 evidence and tracks replacement qualification before the separate Stage 2 migration.
 
-**What remains unresolved.** Native recovery, reaching definitions, slicing, finite stateflow and generated replay are implemented and [qualified on the exercised corpus](bap-core-qualification.md). The minidump CLI selects native BAP analysis by default with explicit Rust rollback. BAP lifting remains trusted; universal refinement and packaged cross-platform release qualification remain open. BAP timing is unlimited, while the [active Windows I4 pin](i4-windows-repin-validation.md) keeps its unmet 2,000 ms CLI ceiling and [controlled Windows I5a](i5a-native-qualification.md) passes its separate fixed budgets.
+**What remains unresolved.** Native recovery, reaching definitions, slicing, finite stateflow and generated replay are implemented and [qualified on the exercised corpus](bap-core-qualification.md). The minidump CLI selects native BAP analysis by default with explicit Rust rollback. BAP lifting remains trusted; universal refinement and packaged cross-platform release qualification remain open. BAP timing is unlimited. The [active Windows I4 pin](i4-windows-repin-validation.md) meets its unchanged 2,000 ms CLI ceiling in the later [performance qualification](i4-performance-validation.md); [controlled Windows I5a](i5a-native-qualification.md) passes its separate fixed budgets. The [documentation audit](bap-documentation-sync.md) identifies the latest source-bound BAP refresh and the pending projection extension.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 
@@ -64,7 +64,7 @@ five valid measured samples remain required. The [unlimited policy](bap-unlimite
 supersedes the historical replacement record's 2,000 ms condition. Historical
 Priority 4 and I4 were not repinned or requalified by this Stage 1 change.
 The later [I4-specific replacement](i4-windows-repin-validation.md) separately
-changes the active investigation pin and records its remaining fixed-budget gap.
+changes the active investigation pin; the later [performance qualification](i4-performance-validation.md) closes its fixed-budget gap for that exact query.
 
 ## Selected native boundary
 

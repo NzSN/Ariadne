@@ -2,13 +2,15 @@
 
 ## Context and follow-up
 
-**Status.** Stage 2 A1–A6 and native default adoption were qualified on
-2026-10-04. Qualification was refreshed on 2026-10-05 after the I5a tooling and
-dependency-isolation changes, then refreshed for the Windows I4 re-pin.
-All 20 gates pass with 632 stable Ariadne sources, 1,355 verified archive entries, and exact tool identities under the selected
-read-only MirrorRust snapshot. Native BAP remains the CLI default, with explicit
-Rust rollback. [Native I5a qualification](i5a-native-qualification.md) separately
-qualifies its fixed budgets and controlled captures.
+**Status.** Stage 2 A1–A6 and native default adoption are implemented. The
+standalone record linked below retains the 2026-10-05 I4 re-pin refresh: 20
+passing gates, 632 stable sources and 1,355 verified archive entries at that run.
+The later [2026-10-07 performance qualification](i4-performance-validation.md)
+contains a newer native-core refresh with 20 passing gates and 712 source
+identities. The [documentation audit](bap-documentation-sync.md) verifies that
+later record against this checkout; the older standalone inventory has drifted.
+Native BAP remains the CLI default, with explicit Rust rollback. Controlled
+I5a and I4 retain their separately qualified fixed budgets.
 
 **Why this document exists.** The [analysis design](bap-analysis-core-design.md)
 and [execution plan](../../Plans/bap-stage2-implementation.md) require evidence
@@ -20,7 +22,8 @@ qualifies its own bounded bootstrap only.
 
 **Where to go next.**
 
-- [Native I4 performance qualification](i4-performance-validation.md) — later 20-gate core refresh, exact-current source/tool verification and fixed-budget product acceptance; this guide retains its earlier dated corpus counts.
+- [Native I4 performance qualification](i4-performance-validation.md) — later 20-gate core refresh and fixed-budget product acceptance.
+- [Documentation/source audit](bap-documentation-sync.md) — identifies the matching nested record, verified archive and current implementation limits.
 
 - [Native module](../../native/bap-core/README.md) — SDK, helper build and selection.
 - [Integration plan](../../Plans/bap-integration.md#stage-2-bap-analysis-core) — milestone acceptance clauses.
@@ -86,6 +89,21 @@ entry and bind the exact report. Source/tool changes invalidate that decision.
 
 ## Retained result
 
+The standalone files in this section are historical snapshots. The latest
+matching native-core record is nested at
+`records.regressions.records.native-core-stage-e-input-bap-regressions` in the
+[I4 performance record](../../evidence/Ariadne/i4-performance-qualification.json).
+Its Stage 1 refresh is `records.stage1-regression` within that core record.
+Those records qualify their own inventories, not the obsolete standalone
+source lists. The [audit](bap-documentation-sync.md) checks them separately.
+
+The [analysis contract](bap-analysis-core-design.md) and
+[Stage 2 execution plan](../../Plans/bap-stage2-implementation.md) retain their
+accepted source-bound bytes. The plan's candidate-stage directions describe the
+historical sequence; its completed A6 checkbox and this guide's adoption record
+state the delivered result. The design's implemented ABI 2 section governs the
+current helper beyond the earlier A0 proposal.
+
 - [Qualification report](../../evidence/Ariadne/bap-core-qualification.json) —
   20 passing gates, complete source/tool identities and nested regression records.
 - [Evidence archive](../../evidence/Ariadne/bap-core-evidence.tar.gz) and
@@ -96,7 +114,8 @@ The explicit-native candidate passed 19 gates before adoption. The
 [original adoption record](../../evidence/Ariadne/bap-core-history/2026-10-04-adoption/bap-core-qualification.json)
 and its archive/manifest remain byte-identical in that history directory.
 The [pre-I4 refresh](../../evidence/Ariadne/bap-core-history/2026-10-05-before-i4-repin/bap-core-qualification.json)
-and its archive/manifest are also preserved byte-for-byte. The current refresh uses thirteen protocol/snapshot controls and a verified
+and its archive/manifest are also preserved byte-for-byte. The retained
+2026-10-05 refresh uses thirteen protocol/snapshot controls and a verified
 current Stage 1/Stage E record under the same dependency snapshot. Root default/core-only tests, all-feature Clippy, native
 capture/investigation/stateflow tests and Stage 1/Stage E regressions pass.
 Stage 1 workload measurements explicitly select Rust; their nested records do
@@ -117,8 +136,8 @@ selection across all five workloads and all three report formats.
 | A5 | Twelve algorithm mutants produce intended mismatches; boundary controls and product differentials pass. |
 | A6 | Two clean helper builds agree; all 20 gates, default selection, Rust rollback and archive verification pass. |
 
-Final release medians, in milliseconds, from five measured samples after one
-warm-up per backend:
+Historical 2026-10-05 release medians, in milliseconds, from five measured
+samples after one warm-up per backend:
 
 | Captured workload | Rust reference | Native BAP |
 | --- | ---: | ---: |
@@ -128,6 +147,9 @@ warm-up per backend:
 | Retained Linux capture (34 starts) | 1566.21 | 2248.97 |
 | Pinned Windows capture (98 starts) | 2967.88 | 5020.08 |
 
-Native analysis is slower on these workloads. Correctness and identity checks
-pass under the accepted unlimited timing policy; these measurements do not
+Native analysis was slower on these recorded 2026-10-05 workloads. The later
+[performance qualification](i4-performance-validation.md) changes preparation
+and native transport/core costs; this table is not a current performance
+comparison. Correctness and identity checks passed under the accepted unlimited
+timing policy; these measurements do not
 establish a general performance guarantee or qualify the separate I5a budget.

@@ -1,0 +1,990 @@
+{
+  "schema": "ariadne.bap-documentation-audit/v1",
+  "recordedUtc": "2026-10-09T14:32:42.863356+00:00",
+  "gitHead": "109fbef6cb9dca19e05f73ed413ca233b2bdd554",
+  "scope": "Documentation synchronization and retained identity/archive verification; no runtime campaign or release qualification rerun.",
+  "freshRuntimeQualification": false,
+  "sourceChanges": false,
+  "documentationInventory": {
+    "AGENTS.md": {
+      "sha256": "38d6dcfdc1e188a47c8631a04f7d965849076e0ccf9ae6608caa42a842e2c218",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "CHECKPOINTS.md": {
+      "sha256": "1cb4e4a37d9e4e342d7b1c941ac543ca59cec32c9a32b7d6ac2cd0caf6f59556",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "Plans/README.md": {
+      "sha256": "b9f29a37f9e3a665af35493c025cb6fc94f181778a05bad3a53238927a42b34f",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "Plans/bap-integration.md": {
+      "sha256": "cf6b004b94ae4d73b664f6282adad02745abfe339a915b1397c50e3ca43f83c6",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "Plans/bap-ocaml-qualification.md": {
+      "sha256": "1b5cfcf3ce7cf76bcf45d1efbb60472953efac30d378329d13a2c0beb6c6084c",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "Plans/bap-projection-admission.md": {
+      "sha256": "fd5dda26024a73e0dc1a5e8cc6891e393fda7030a6284f4fea6b9ff7fdb48a6f",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "Plans/bap-stage2-a0.md": {
+      "sha256": "1c60d5cae13e130b434d04d2de0b72ce93d98388f18fd19ba265ebdc38768691",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "Plans/bap-stage2-implementation.md": {
+      "sha256": "91d706e3868cc3a50e4290d44e471b032ddc8ca99a9c085a65431b8163fa1ba9",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "Plans/bap-windows-repin.md": {
+      "sha256": "6760f6394ef754d4f5414cb6048d2762c2de80df22639dc33fc6d65aa423cc56",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "Plans/completed/bap-only-semantics.md": {
+      "sha256": "2c087a4f47ad61aa9eefa7feeb0d683367297b3ac4c8d428d287f1ee994ebb68",
+      "reviewScope": "historical plan"
+    },
+    "Plans/completed/operand-effects-plan.md": {
+      "sha256": "da7aa7f485bb111118090c6757e286208576c39abc0ec511e137ef2bb0b91b24",
+      "reviewScope": "historical plan"
+    },
+    "Plans/completed/priority-4-workload-performance-plan.md": {
+      "sha256": "9376c3e1551f426323e0db587edd7e37243afe7156e1b888e8d09123656505f5",
+      "reviewScope": "historical plan"
+    },
+    "Plans/completed/rust-source-layout.md": {
+      "sha256": "34745c7c3c7ac1b59c3bff8fbcecf7ee744695eed4d48ad7474eff396ee918f1",
+      "reviewScope": "historical plan"
+    },
+    "Plans/i4-performance-implementation.md": {
+      "sha256": "e4739a1a0f3b36427185e191d0b74640ccb2670f103a5d75ed525e7b5f9c306f",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "Plans/i4-windows-repin.md": {
+      "sha256": "5fed79175cd7348c73ba6f51706ad146b41db01566791113e52eec0b464cc7b7",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "Plans/i5a-native-qualification.md": {
+      "sha256": "6b1892d337b1bcdff90b72a48669e4b5a5d0c0aa3a5f70126a43d575284ee166",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "Plans/i5a-zero-address.md": {
+      "sha256": "58956ae45dda1122d5b145eb4713cad6e645ce5959c60a89131cedbfb88b0d66",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "Plans/i5b-zero-base-offset.md": {
+      "sha256": "1334182a5b6404610d0c3a5ccfbfc256ff2f7aad5445c9bebf6a9da891a3ac19",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "Plans/i5c-address-wrap.md": {
+      "sha256": "c35837ff77aabed1d1ed6d50d8de28c823ce0d3a6ece4e91b771301c6513c3b6",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "Plans/investigation-layer.md": {
+      "sha256": "9bf9925771527c1ab1fe7fb41409ebbf7ca552d25b76f7fb308acd6d85f3171b",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "README.md": {
+      "sha256": "b24974672ba661eff490cb5cb194af1a68b998d7aec7a710cf2927f7c60a70cf",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "ROADMAP.md": {
+      "sha256": "0fc0612944d6e313b47cabf42711c6ca3d6b9859368cd94c93a64f44aad4ee13",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "Specs/README.md": {
+      "sha256": "04c102d5f3de7d562119285f4ee5da821a5632ab3753ee29185dcaea286eecd8",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/README.md": {
+      "sha256": "01ae83f8d0b955140ecb2a8596ec8685838edab0f9040ef5c02d54ac32b4c953",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/bap-analysis-core-design.md": {
+      "sha256": "5c919c9b9bd57709301294c7baf40bc66419cea6872129071e67d8a87aef49eb",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/bap-core-qualification.md": {
+      "sha256": "f4d7a578262b721a64a9653b2739ce4b59d8010cb5070b6ed3d4076bc2905159",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/bap-core-refactor-assessment.md": {
+      "sha256": "89fe6f3a77aafa7aa5a1e78ee00b1fb0bd0c773bf406620da475e862b8322ecb",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/bap-documentation-sync.md": {
+      "sha256": "c0aed13ffd50764c7b9b5774a4223a687fe200e74e0118895fa84df2e0bb949d",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/bap-ocaml-qualification.md": {
+      "sha256": "cfebefb4bc03c6c5a23e828b08fbe758b7c471a077fbd9ce42f1403abfb51a96",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/bap-only-removal-validation.md": {
+      "sha256": "937ef8593a7c214d24d2eb06a0042b54d9c0c7053e1af5bfd7de14b8f76875b4",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/bap-projection-source-review.md": {
+      "sha256": "505e9398b576a8a6f51e278f6cffeba77640726821876b6c5beceec6e2755c93",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/bap-semantic-backend-design.md": {
+      "sha256": "de6830db4652d19c58a04c68641ba2540a317d9b8e3cdbf13ea1f614952492b0",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/bap-stage2-a0-validation.md": {
+      "sha256": "71124238f195c1cbd3687a260f14a4f0e1d62460ac58fd4124bb0faaf27b0c50",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/bap-unlimited-validation.md": {
+      "sha256": "dc634b886a7ae02b5b617b61261c7d7f4163dd09ef64fbe1cf2e6922169d93a1",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/bap-windows-repin-validation.md": {
+      "sha256": "d75d6155fe8c10f24af9d0a0b5f4e6bbe6ba5a722c33fd9eeb534524cb11f694",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/bap-windows-workload-validation.md": {
+      "sha256": "a4227436adb50da97a81d0e753e245a81fa4712a9b4919f4016b895744241b2e",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/crashpad-demo-validation.md": {
+      "sha256": "7a9ea191e8f917e5c8ec5cd4fc0eb1df948a548b5146c551bf9173ee875494e6",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/i4-performance-design.md": {
+      "sha256": "6a38e917d86741f95be8124a1da4fc5672b66823748a9e6caa33d77388583b88",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/i4-performance-validation.md": {
+      "sha256": "c64be2f012aa129544c07dc3fcbcb9d8aa19bac56d796a1db55a400874a6792b",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/i4-windows-repin-validation.md": {
+      "sha256": "a3c3acfd5c051608766271d521cff93f160f46e341a6bf36b1788dadeb15f1bc",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/i5a-contracts.md": {
+      "sha256": "d146f57f40f58ab4dc640aff7d2e3ef46f5f8af9f3c56a513b92d582b54c10e4",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/i5a-native-qualification.md": {
+      "sha256": "c60802f9eae5e6f87e15940d8ff62cca2cc1d5c32d9cec7fa374dab5fa49e273",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/i5a-source-review.md": {
+      "sha256": "e9d701c5e093873f204997750070e9d8c56fbd18488c3cfca2466ec0e834912c",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/i5a-validation.md": {
+      "sha256": "e1119957539586eb7b9c53d787a119a68166456ee892c01f6501a8d9d95c40ab",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/i5a-zero-address-design.md": {
+      "sha256": "0f97594ea60fb4cd541df02f338d3d79c549b9b0279c1dcfb4dc5ca43b02637d",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/i5b-contracts.md": {
+      "sha256": "9361b58e6a1f77532a961da336a973b6899a9e844e110ae9f98886c58a01ff37",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/i5b-source-review.md": {
+      "sha256": "ec35da8477ea0b20161750f05768515d0452b82b6cfa315f4236da92ad65f8f1",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/i5b-validation.md": {
+      "sha256": "c5ee7b665dbe8e3ad45e3b9c8bed08bffe191a3f83f73c3ce1610c4bdd1660ac",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/i5b-zero-base-offset-design.md": {
+      "sha256": "da85508330399359e91305cfd4f817ecc6ad3bf3c26d588e2d8320b9b44ec4ea",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/i5c-address-wrap-design.md": {
+      "sha256": "bf5bc64b7a08cdb80482ef033ad77b609eb6b28a84e638e45248ea3a8556b336",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/investigation-contracts.md": {
+      "sha256": "c40f89cfc627b829b063840734c16b661ed1550916ae543911227fe26b7b1c9f",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/investigation-layer-design.md": {
+      "sha256": "b91e1f0fcb1add789532fb7d83191f98b71a905523aa0335f92415f781140718",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/investigation-validation.md": {
+      "sha256": "b62c113365c9d0bddaf236a08a2c4b479032d963baa19ee31df8189cb37f4c74",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/minidump-investigator-examples.md": {
+      "sha256": "ea799b99aa9ddf6069832d72c754085c8d0b30509d79949eb8909786a5ca4e92",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/minidump-validation.md": {
+      "sha256": "ea109f90cb980b92820972be25b04325a3eedac8755ee6b3365e88cd1fcd9021",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/modules/bap.md": {
+      "sha256": "762451d03682e82c2719b990a825f35cfb6b8d8a6c05a061603b90de71f746a5",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/modules/bench.md": {
+      "sha256": "4634fbaf7d6705a7df9c1f61633f399cb52d98096bb9d5a9de3f93f2a96bd3bd",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/modules/input.md": {
+      "sha256": "02a433de50f53d006edd04df259338d05907d5dac17faa69b30c3a3a2f483a7d",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/modules/investigation.md": {
+      "sha256": "cf75bbc5e229fab8f0509d655fedcb143d2b03a1ace1bab717817f25b652352a",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/operand-effects-design.md": {
+      "sha256": "7031134246d23b8e05ceac0e19005664f54d1acd59532408cbe93d0b16cde2e5",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/operand-effects-protocol.md": {
+      "sha256": "981647b79c2579f1be9ce1125f4615485a0a3f669bee3a151028c2091fa6753f",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/operand-effects-rules.md": {
+      "sha256": "b34def3b994cb23a9e1410bce33c8a2ae1705c1b28bbea4f1106c665a815f0ed",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/operand-effects-validation.md": {
+      "sha256": "f719257f76d54e7900b6dbc2ac0e0657dea4b474e90f10cc86b10eeeae687427",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/practical-assurance-priorities.md": {
+      "sha256": "e843ec2cf1c144ef43ffaa44bfa1ce3cedaa76d9522807f47933da2d1ac332f3",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/priority-2-effects-validation.md": {
+      "sha256": "f1635a98b32e535f059086530edf8f4af706d9d8408929e58c9ee81f64345d22",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/priority-4-control-source-review.md": {
+      "sha256": "de76fe59a1f6eeadb5da64127e40df0f4cb66ec3e11b89782face321b22ea185",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/priority-4-performance-validation.md": {
+      "sha256": "552af89085ba792ed77f2ff19017c77a3488945a7d8485c4305fdecb67723a47",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/priority-4-workload-performance-design.md": {
+      "sha256": "dbd8f8f6db3f0f100b72f48adc35ad88c86927484f6abe7178e422a04f0d21ba",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/rust-source-layout.md": {
+      "sha256": "329cc88dec0939d40d64bdc6755ae753a0fa9ce3e2fb65966784d8945baa1cb3",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/semantic-assurance.md": {
+      "sha256": "9a461638f9549de9aa54cb7d0f359aa8a40fcc0142b09d3da8ed49f0b8380d9f",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/stage-a-source-review.md": {
+      "sha256": "f10a65ee9b375c65745b639f1353cd79f4a181ec5299a53b7a124e5f7ae4ade3",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/stage-a-validation.md": {
+      "sha256": "392b641beb968ccabc66aaaf73bc61d8b341bcb2b90cb93361afae981798cdcc",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/stage-e-completion.md": {
+      "sha256": "ac61515b04eee852251ea511472167353fa9d4284bbe11022c654307dc0f9ec6",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/Ariadne/stage-f-proof-and-performance.md": {
+      "sha256": "6b7d3718ecde6448206016e11c3f8049bafb8d90a78802e250aa5e738a2541cd",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/amd64-architectural-state.md": {
+      "sha256": "49b11a3246dc97e2c52adfee5ee3e7d6dd4656835f86b3e71ff354407df3806e",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/amd64-atomic-execution.md": {
+      "sha256": "b6984173dcdf62e24811afbdbafa8fdf698ce24a223816315d79cf0a10ec7d40",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/amd64-concrete-memory.md": {
+      "sha256": "d589e9b67b5add088f22f1fb38a587c46977d33f7296f92f79c6e9fd2ef482ac",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/amd64-control.md": {
+      "sha256": "c555344d83aae48ab2e91ba42792f4e881c6f98a13d5665bfd27edecdf1acabb",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/amd64-external.md": {
+      "sha256": "5cdfe556467ddd28887cdf819a61cf753a8e720ef15c0d4e7dafdae16c359d7c",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/amd64-instruction-forms.md": {
+      "sha256": "c0855878c5ed4fd8cea1bb24479dd731cba32b0290fde05346d64aa1ada423e6",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/amd64-integer-muldiv-execution.md": {
+      "sha256": "e36368f7637799103c52cf401c13333b2fd676edec2819240c2093121bce6c40",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/amd64-integer-semantics.md": {
+      "sha256": "2e6b56d58719c0ffeff141eda0fe449807802df7a1cb45a8333fd00e4ce806f8",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/amd64-integer-shift-execution.md": {
+      "sha256": "df5ea2be3c61c2db5a0a3dc2f4b95b764ddc1ead73b8a80f05fd61ca7228b8b5",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/amd64-io.md": {
+      "sha256": "a37c47f876d12a0ddeb23731d8dffe9d98766eff572d4d429fa34ffee879d3c5",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/amd64-lwp-layout.md": {
+      "sha256": "2833635cfb5d3799621e43ab966eb1e1c9bb808cd2595089e0770b23ea6a6a3c",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/amd64-machine-access.md": {
+      "sha256": "5473ec7313879e86cc7ca2d62dd8a1d29c256c32ff9595e3766a4fcd40908aab",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/amd64-memory-exceptions.md": {
+      "sha256": "6d32a981fb685be9a369ca535d6d0b0bf26ad788bdd439a4720e850574ee7374",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/amd64-memory-ordering.md": {
+      "sha256": "7f79a3d5c8d2696efa18a70c4813f88c4ed3dabdce7fef5c002ff261d0631139",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/amd64-memory-types-atomics.md": {
+      "sha256": "459f7ccb84a0c1170e1083f478bda83147738e8ce262670dd2d3d026f0235e18",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/amd64-monitor.md": {
+      "sha256": "0bdf4261df0399662b12de6b07e13ab44e210a9fe1c02965ce2bc13ddc90f723",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/amd64-operands.md": {
+      "sha256": "63246c600e5f50dec7666e0c7c556a25b493bcd507b2c6c5ed30bcdb8ffb1550",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/amd64-page-walk.md": {
+      "sha256": "7e44a43a9fef26736366353cc5d0b2cebcaa793e11c82c67bfdd2c6c4589d83b",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/amd64-semantics-design.md": {
+      "sha256": "3adf22fb527420af12d7923f1efd8444460ff4cceb73846d2fff3f8f5b15dc37",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/amd64-semantics-tasks.md": {
+      "sha256": "10067d2796d99f7ede4768f574e8c247ba85c033cc62a9e8791ac08f1946a63a",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/amd64-strings.md": {
+      "sha256": "aa343ec1b2632c855d366c5ec8ec5148d7631e127e2551b536d09620edccb702",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/amd64-system-state.md": {
+      "sha256": "cd2fd1016d6058a6c58fe62c434734b4e8c18f4fc2cadf106dc5f549ad278c99",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/amd64-typed-foundation.md": {
+      "sha256": "9193213a9e29aaa3753411c6a65cd31b15ad28dab74ed7b652ea7c3cc602c05c",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/amd64-unsupported.md": {
+      "sha256": "f35c5c5f76d57fd6b756a7348fa1e82b0b07583940c7aa172e742ee4cba24226",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/amd64-user64.md": {
+      "sha256": "6e3558dfd9992c28a57056b8a760f9f7d8f6cd78231be36380e93f1242fb3537",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/amd64-validation.md": {
+      "sha256": "e38a441fa07a615e19e3b8fa84f20eb003838317fa5cd3c1250c23b42f7f729a",
+      "reviewScope": "retired ISA reference"
+    },
+    "docs/documentation-map.md": {
+      "sha256": "31e5ceaa85e58bc3eb97dba573682ce92a87a22a44274de4a8b5801b0a6e7caa",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/implementation.md": {
+      "sha256": "7459f3419ee77707b831141d394f0d15b9ee26dabf2e8e23b884e3649cf4b452",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/llvm-mc-adapter.md": {
+      "sha256": "30eb10fe83d667ad6dcabd316dd8fe962295829e58fe140afcd8992935f59953",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/machine-state-design.md": {
+      "sha256": "09ee106464663de660ced188e75a5350f171f75a7ea140123252e0303e1b03c3",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "docs/x86-64-semantics.md": {
+      "sha256": "6a714351a1cca0cb90797726c3ae94e5e45c714b86a9ff5230904bc359ae7167",
+      "reviewScope": "retired ISA reference"
+    },
+    "evidence/Ariadne/README.md": {
+      "sha256": "86ca711b0741932bcec7039f52c5c645f5886d379364e9e06b08fc26d4d4fc17",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "mbt/README.md": {
+      "sha256": "b51a4cad025d8e4704bdf626d758244de919daa36ad74e739b761d14e4a3a7d3",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "mbt/stage-e/README.md": {
+      "sha256": "18bc959c504422b64f29931034e648f5b25d6ad42ebca9e5c2255ef80e8feeed",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "native/bap-core/README.md": {
+      "sha256": "ad7b77204b8853e876133b59daeeb825d7b05365ff2f32691e56c1b8b2d6587c",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "native/bap/README.md": {
+      "sha256": "a6848abfe6e181cd0d3dd41f4026fbe9f4d37ad3179ed01ec1c3734890d9a2c1",
+      "reviewScope": "BAP implementation and consumer documentation"
+    },
+    "native/crashpad-demo/README.md": {
+      "sha256": "28cab82edde7577c44ee369d8fa103fbac7208c205256cc8d63bd48c553b2514",
+      "reviewScope": "BAP implementation and consumer documentation"
+    }
+  },
+  "documentationCount": 111,
+  "qualificationReport": {
+    "path": "evidence/Ariadne/i4-performance-qualification.json",
+    "sha256": "97f343fc2139a2a9760e16045b12e8cca36c450a9a364c006bd40bebdcc0cf69",
+    "coreRecordPath": "records.regressions.records.native-core-stage-e-input-bap-regressions",
+    "stage1RecordPath": "records.regressions.records.native-core-stage-e-input-bap-regressions.records.stage1-regression"
+  },
+  "verifiedInventories": [
+    {
+      "name": "I4 performance",
+      "sourceCount": 712,
+      "gateCount": 5,
+      "sourceInventoryMatches": true,
+      "toolInventoryMatches": true
+    },
+    {
+      "name": "native core",
+      "sourceCount": 712,
+      "gateCount": 20,
+      "sourceInventoryMatches": true,
+      "toolInventoryMatches": true
+    },
+    {
+      "name": "Stage 1",
+      "sourceCount": 255,
+      "gateCount": 17,
+      "sourceInventoryMatches": true,
+      "toolInventoryMatches": true
+    },
+    {
+      "name": "I5b regressions",
+      "sourceCount": 295,
+      "gateCount": 18,
+      "sourceInventoryMatches": true,
+      "toolInventoryMatches": true
+    },
+    {
+      "name": "I5a regressions",
+      "sourceCount": 286,
+      "gateCount": 14,
+      "sourceInventoryMatches": true,
+      "toolInventoryMatches": true
+    },
+    {
+      "name": "I4 workloads",
+      "sourceCount": 262,
+      "gateCount": null,
+      "sourceInventoryMatches": true,
+      "toolInventoryMatches": true
+    }
+  ],
+  "qualificationEnvironment": {
+    "schema": "ariadne.mirrorrust-qualification-snapshot/v1",
+    "manifestPath": "/home/nzsn/Repos/Ariadne/target/i5b-dependency-snapshot/manifest.json",
+    "manifestSha256": "a087ecfb136795d30f6c3861d9e4003f0ed9f457db2b17561f0417551bf97854",
+    "originRevision": "08d189f18a76845dc15dd23b79424809ae27f406",
+    "readOnly": true,
+    "wrapperSha256": "f47d8216081465a932bf44499ab95420e35c24dce1e04ff78a5b5fccca67ea9e"
+  },
+  "installedNativeManifest": {
+    "schema": "ariadne.bap-core-build/v1",
+    "handshake": {
+      "schema": "ariadne.bap-core-ready/v1",
+      "abi": 2,
+      "compiler": "4.12.1",
+      "bap_revision": "baa902209ee4be975bdd8db7d1160b0a0ec2831f",
+      "sdk_manifest_sha256": "9ffecdd7ce96c79170d9c1153411139973a212f34f0317a2f972f737086e64e4",
+      "source_hashes": {
+        "recovery.ml": "6cd6c69ebbff23435e3a75031a8a62f9d1b0a7e9f2848d812934f465d81c18ce",
+        "stateflow.ml": "2d6a39f261bad1267a022049bbff68ae7b88cdeb044699ff1d085da7b8008b46",
+        "capture.ml": "aa4a3432f44c961a1fe2bac99e60c3ac68baca8c1034e5eb06bbe87eb0ac0a34",
+        "project_state.ml": "9cc366a55c4d5fdd74b6689ce172ae4eba823d016c6736af0f2c27438f8c35a9",
+        "main.ml": "73a00219a30fc0441817ab1ec09e0f2d80da9859122ee6bb511d112f9b5bbee5"
+      },
+      "families": [
+        "recovery",
+        "stateflow"
+      ],
+      "profiles": [
+        "normalized-fixed-input/v1",
+        "captured-fixed-input/v1"
+      ],
+      "operations": [
+        "initialize",
+        "advance:Visit",
+        "advance:FinishRecovery",
+        "advance:Propagate",
+        "advance:FinishDataflow",
+        "advance:ExpandSlice",
+        "advance:FinishSlice",
+        "advance:FinishStateflow",
+        "step",
+        "observe",
+        "finish",
+        "reset"
+      ],
+      "max_frame_bytes": 8388608,
+      "max_addresses": 65536
+    },
+    "helper_sha256": "8e4bae2e77ce95739c1b62b0cb7c5f6851546c89cc0e18152be0375791d6142e",
+    "lock_sha256": "6f6bd3235ffcdc565ad4ab7e687d6238b85caceee0532f54c56570cbee61992f"
+  },
+  "compiledRuntimePinsVerified": 8,
+  "archive": {
+    "path": "evidence/Ariadne/i4-performance-evidence.tar.gz",
+    "sha256": "4a5f05ea02317a3a21a56ad177796f794f87661a3a143694ce80e5d0ea5039d8",
+    "memberCount": 3625,
+    "everyMemberVerified": true
+  },
+  "historicalStandaloneRecords": [
+    {
+      "path": "evidence/Ariadne/bap-stage1-validation.json",
+      "recordSha256": "146ee936576dcafee4671a4811f17ec5e0110ffb6ba50b42b3cfef27f0fe71e5",
+      "recordedUtc": "2026-10-01T08:04:24.114028+00:00",
+      "sourceCount": 92,
+      "changedSources": [
+        "Cargo.lock",
+        "Cargo.toml",
+        "src/effects.rs",
+        "src/lib.rs",
+        "src/llvm_mc/prepare.rs",
+        "src/llvm_mc/protocol.rs",
+        "src/llvm_mc.rs",
+        "src/machine_state.rs",
+        "tools/check_bap_model.py",
+        "tools/check_bap_mutations.py",
+        "tools/check_bap_semantics.py",
+        "tools/check_minidump.py",
+        "tools/check_minidump_mutations.py",
+        "tools/check_stage_e.py",
+        "tools/measure_bap.py"
+      ],
+      "missingSources": [
+        "bap/Cargo.lock",
+        "bap/Cargo.toml",
+        "bap/src/ast.rs",
+        "bap/src/bin/bap-model-case.rs",
+        "bap/src/lib.rs",
+        "bap/src/prepare.rs",
+        "bap/src/projection.rs",
+        "bap/src/session.rs",
+        "bap/tests/disagreement.rs",
+        "bap/tests/fixtures/corpus.json",
+        "bap/tests/fixtures/make_corpus.py",
+        "bap/tests/native.rs",
+        "bap/tests/protocol.rs",
+        "bench/Cargo.lock",
+        "bench/Cargo.toml",
+        "bench/src/bin/bap_minidump.rs",
+        "bench/src/bin/compare_schedule.rs",
+        "bench/src/bin/real_minidump.rs",
+        "bench/src/main.rs",
+        "input/Cargo.lock",
+        "input/Cargo.toml",
+        "input/examples/inspect.rs",
+        "input/examples/render_minidump.rs",
+        "input/src/address_space.rs",
+        "input/src/bin/ariadne-minidump.rs",
+        "input/src/lib.rs",
+        "input/src/materialize.rs",
+        "input/src/minidump.rs",
+        "input/src/report.rs",
+        "input/tests/bap_backend.rs",
+        "input/tests/common/mod.rs",
+        "input/tests/fixtures/bap_precision_linux.dmp",
+        "input/tests/fixtures/bap_precision_windows.dmp",
+        "input/tests/fixtures/make_bap.py",
+        "input/tests/fixtures/make_stage_b.py",
+        "input/tests/fixtures/stage_b_linux.dmp",
+        "input/tests/fixtures/stage_b_windows.dmp",
+        "input/tests/native.rs",
+        "input/tests/reader.rs",
+        "input/tests/real_dumps.rs",
+        "input/tests/stage_b.rs",
+        "input/tests/stage_c.rs",
+        "input/tests/stage_e.rs",
+        "reports/Cargo.lock",
+        "reports/Cargo.toml",
+        "reports/src/codecs.rs",
+        "reports/src/lib.rs",
+        "reports/src/render.rs",
+        "reports/tests/contracts.rs"
+      ],
+      "currentInventoryMatches": false
+    },
+    {
+      "path": "evidence/Ariadne/bap-only-removal-validation.json",
+      "recordSha256": "10e8f6826ba8a13e860ec1fa368db76d715e6bcf791c9f7d3beba300d2abd9a8",
+      "recordedUtc": "2026-10-01T09:33:02.656498+00:00",
+      "sourceCount": 93,
+      "changedSources": [
+        "Cargo.lock",
+        "Cargo.toml",
+        "src/effects.rs",
+        "src/lib.rs",
+        "src/llvm_mc/prepare.rs",
+        "src/llvm_mc/protocol.rs",
+        "src/llvm_mc/reference.rs",
+        "src/llvm_mc.rs",
+        "src/machine_state.rs",
+        "tools/check_bap_model.py",
+        "tools/check_bap_mutations.py",
+        "tools/check_bap_semantics.py",
+        "tools/check_minidump.py",
+        "tools/check_minidump_mutations.py",
+        "tools/check_stage_e.py",
+        "tools/measure_bap.py"
+      ],
+      "missingSources": [
+        "bap/Cargo.lock",
+        "bap/Cargo.toml",
+        "bap/src/ast.rs",
+        "bap/src/bin/bap-model-case.rs",
+        "bap/src/lib.rs",
+        "bap/src/prepare.rs",
+        "bap/src/projection.rs",
+        "bap/src/session.rs",
+        "bap/tests/disagreement.rs",
+        "bap/tests/fixtures/corpus.json",
+        "bap/tests/fixtures/make_corpus.py",
+        "bap/tests/native.rs",
+        "bap/tests/protocol.rs",
+        "bench/Cargo.lock",
+        "bench/Cargo.toml",
+        "bench/src/bin/bap_minidump.rs",
+        "bench/src/bin/compare_schedule.rs",
+        "bench/src/bin/real_minidump.rs",
+        "bench/src/main.rs",
+        "input/Cargo.lock",
+        "input/Cargo.toml",
+        "input/examples/inspect.rs",
+        "input/examples/render_minidump.rs",
+        "input/src/address_space.rs",
+        "input/src/bin/ariadne-minidump.rs",
+        "input/src/lib.rs",
+        "input/src/materialize.rs",
+        "input/src/minidump.rs",
+        "input/src/report.rs",
+        "input/tests/bap_backend.rs",
+        "input/tests/common/mod.rs",
+        "input/tests/fixtures/bap_precision_linux.dmp",
+        "input/tests/fixtures/bap_precision_windows.dmp",
+        "input/tests/fixtures/make_bap.py",
+        "input/tests/fixtures/make_stage_b.py",
+        "input/tests/fixtures/stage_b_linux.dmp",
+        "input/tests/fixtures/stage_b_windows.dmp",
+        "input/tests/native.rs",
+        "input/tests/reader.rs",
+        "input/tests/real_dumps.rs",
+        "input/tests/stage_b.rs",
+        "input/tests/stage_c.rs",
+        "input/tests/stage_e.rs",
+        "reports/Cargo.lock",
+        "reports/Cargo.toml",
+        "reports/src/codecs.rs",
+        "reports/src/lib.rs",
+        "reports/src/render.rs",
+        "reports/tests/contracts.rs"
+      ],
+      "currentInventoryMatches": false
+    },
+    {
+      "path": "evidence/Ariadne/bap-windows-workload-validation.json",
+      "recordSha256": "82085979151b30db4f17b05a93245d2ce7b96a1d33cf9136534da8d8f0069cc9",
+      "recordedUtc": "2026-10-03T03:19:08.351986+00:00",
+      "sourceCount": 177,
+      "changedSources": [
+        "Cargo.toml",
+        "src/bap/mod.rs",
+        "src/bap/prepare.rs",
+        "src/bap/session.rs",
+        "src/bin/ariadne-minidump.rs",
+        "src/bin/ariadne-stage-e-mbt.rs",
+        "src/bin/i5a.rs",
+        "src/effects.rs",
+        "src/input/investigation.rs",
+        "src/input/materialize.rs",
+        "src/investigation/mod.rs",
+        "src/investigation/validate.rs",
+        "src/investigation/zero_address.rs",
+        "src/lib.rs",
+        "src/llvm_mc/prepare.rs",
+        "src/llvm_mc/protocol.rs",
+        "src/llvm_mc/reference.rs",
+        "src/llvm_mc.rs",
+        "src/machine_state.rs",
+        "src/mbt/core/adapter.rs",
+        "src/mbt/core/main.rs",
+        "src/mbt/stage_e/ports.rs",
+        "src/reports/mod.rs",
+        "tests/bap/native.rs",
+        "tests/input/i5a.rs",
+        "tests/input/stage_e.rs",
+        "tools/bap_workload_contract.py",
+        "tools/check_bap_semantics.py",
+        "tools/check_stage_e.py",
+        "tools/measure_bap.py",
+        "tools/test_bap_workload.py",
+        "tools/test_bap_workload_contract.py",
+        "tools/test_bap_workload_gate.py"
+      ],
+      "missingSources": [],
+      "currentInventoryMatches": false
+    },
+    {
+      "path": "evidence/Ariadne/bap-windows-repin-validation.json",
+      "recordSha256": "3e7438044c8e7afa4e1a0670eec64e88c0c798b65b516fa75a38841f71406eaa",
+      "recordedUtc": "2026-10-03T03:52:21.216838+00:00",
+      "sourceCount": 192,
+      "changedSources": [
+        "Cargo.toml",
+        "evidence/Ariadne/bap-windows-workload-case.json",
+        "native/crashpad-demo/BUILD.gn",
+        "native/crashpad-demo/assess.py",
+        "native/crashpad-demo/crash_demo.cc",
+        "native/crashpad-demo/prepare.py",
+        "native/crashpad-demo/run_windows.py",
+        "src/bap/mod.rs",
+        "src/bap/prepare.rs",
+        "src/bap/session.rs",
+        "src/bin/ariadne-minidump.rs",
+        "src/bin/ariadne-stage-e-mbt.rs",
+        "src/bin/i5a.rs",
+        "src/effects.rs",
+        "src/input/investigation.rs",
+        "src/input/materialize.rs",
+        "src/investigation/mod.rs",
+        "src/investigation/validate.rs",
+        "src/investigation/zero_address.rs",
+        "src/lib.rs",
+        "src/llvm_mc.rs",
+        "src/llvm_mc/prepare.rs",
+        "src/llvm_mc/protocol.rs",
+        "src/llvm_mc/reference.rs",
+        "src/machine_state.rs",
+        "src/mbt/core/adapter.rs",
+        "src/mbt/core/main.rs",
+        "src/mbt/stage_e/ports.rs",
+        "src/reports/mod.rs",
+        "tests/bap/native.rs",
+        "tests/input/i5a.rs",
+        "tests/input/stage_e.rs",
+        "tools/bap_workload_contract.py",
+        "tools/check_bap_semantics.py",
+        "tools/check_stage_e.py",
+        "tools/measure_bap.py",
+        "tools/test_bap_workload.py",
+        "tools/test_bap_workload_contract.py",
+        "tools/test_bap_workload_gate.py"
+      ],
+      "missingSources": [],
+      "currentInventoryMatches": false
+    },
+    {
+      "path": "evidence/Ariadne/bap-unlimited-validation.json",
+      "recordSha256": "256b9dfae829557b184c0110e6f8418c2a748842a8691b4e1f5261133186f810",
+      "recordedUtc": "2026-10-03T04:09:11.084904+00:00",
+      "sourceCount": 178,
+      "changedSources": [
+        "Cargo.toml",
+        "src/bap/mod.rs",
+        "src/bap/prepare.rs",
+        "src/bap/session.rs",
+        "src/bin/ariadne-minidump.rs",
+        "src/bin/ariadne-stage-e-mbt.rs",
+        "src/bin/i5a.rs",
+        "src/effects.rs",
+        "src/input/investigation.rs",
+        "src/input/materialize.rs",
+        "src/investigation/mod.rs",
+        "src/investigation/validate.rs",
+        "src/investigation/zero_address.rs",
+        "src/lib.rs",
+        "src/llvm_mc/prepare.rs",
+        "src/llvm_mc/protocol.rs",
+        "src/llvm_mc/reference.rs",
+        "src/llvm_mc.rs",
+        "src/machine_state.rs",
+        "src/mbt/core/adapter.rs",
+        "src/mbt/core/main.rs",
+        "src/mbt/stage_e/ports.rs",
+        "src/reports/mod.rs",
+        "tests/bap/native.rs",
+        "tests/input/i5a.rs",
+        "tests/input/stage_e.rs",
+        "tools/check_bap_semantics.py",
+        "tools/check_stage_e.py",
+        "tools/measure_bap.py",
+        "tools/test_bap_workload_gate.py"
+      ],
+      "missingSources": [],
+      "currentInventoryMatches": false
+    },
+    {
+      "path": "evidence/Ariadne/bap-stage2-a0-validation.json",
+      "recordSha256": "b80ec337f3ee774d44a06ee88fdeba7c996c294bb416231b66b0a9650862cdc6",
+      "recordedUtc": "2026-10-03T04:35:24.531562+00:00",
+      "sourceCount": 15,
+      "changedSources": [
+        "tools/check_bap_core_a0.py",
+        "tools/test_bap_core_contract.py",
+        "src/machine_state.rs",
+        "docs/Ariadne/bap-analysis-core-design.md"
+      ],
+      "missingSources": [],
+      "currentInventoryMatches": false
+    },
+    {
+      "path": "evidence/Ariadne/bap-ocaml-qualification.json",
+      "recordSha256": "82c525f707bdece6d89946abc1f4b93f38118f5a7c41f9053450c966dbbc1f90",
+      "recordedUtc": "2026-10-03T15:46:22.630634+00:00",
+      "sourceCount": 199,
+      "changedSources": [
+        "Cargo.toml",
+        "docs/Ariadne/bap-analysis-core-design.md",
+        "native/bap-core/README.md",
+        "native/bap-core/build.py",
+        "native/bap-core/main.ml",
+        "native/bap-core/project_state.ml",
+        "native/bap-core/recovery.ml",
+        "src/bap/core_protocol.rs",
+        "src/bap/core_session.rs",
+        "src/bap/mod.rs",
+        "src/bap/prepare.rs",
+        "src/bap/session.rs",
+        "src/bin/ariadne-minidump.rs",
+        "src/bin/ariadne-stage-e-mbt.rs",
+        "src/bin/i5a.rs",
+        "src/effects.rs",
+        "src/input/investigation.rs",
+        "src/input/materialize.rs",
+        "src/investigation/mod.rs",
+        "src/investigation/validate.rs",
+        "src/investigation/zero_address.rs",
+        "src/lib.rs",
+        "src/llvm_mc.rs",
+        "src/llvm_mc/prepare.rs",
+        "src/llvm_mc/protocol.rs",
+        "src/llvm_mc/reference.rs",
+        "src/machine_state.rs",
+        "src/mbt/core/adapter.rs",
+        "src/mbt/core/main.rs",
+        "src/mbt/stage_e/ports.rs",
+        "src/reports/mod.rs",
+        "tests/bap/core_bootstrap.rs",
+        "tests/bap/native.rs",
+        "tests/input/i5a.rs",
+        "tests/input/stage_e.rs",
+        "tools/check_bap_ocaml_mutations.py",
+        "tools/check_bap_semantics.py",
+        "tools/check_stage_e.py",
+        "tools/measure_bap.py",
+        "tools/test_bap_workload_gate.py"
+      ],
+      "missingSources": [],
+      "currentInventoryMatches": false
+    },
+    {
+      "path": "evidence/Ariadne/bap-core-qualification.json",
+      "recordSha256": "18c10bb7cfbe07584c9752fa37e3acf8ef845d6802aea983fdbebe5c391b5d17",
+      "recordedUtc": "2026-10-05T00:21:23.108462+00:00",
+      "sourceCount": 632,
+      "changedSources": [
+        "Cargo.toml",
+        "native/bap-core/main.ml",
+        "native/bap-core/recovery.ml",
+        "native/crashpad-demo/BUILD.gn",
+        "native/crashpad-demo/crash_demo.cc",
+        "native/crashpad-demo/prepare.py",
+        "native/crashpad-demo/run_windows.py",
+        "src/bap/core_adapter.rs",
+        "src/bap/core_session.rs",
+        "src/bap/prepare.rs",
+        "src/bap/session.rs",
+        "src/bin/ariadne-minidump.rs",
+        "src/effects.rs",
+        "src/input/investigation.rs",
+        "src/input/materialize.rs",
+        "src/investigation/mod.rs",
+        "src/investigation/zero_address.rs",
+        "src/llvm_mc/prepare.rs",
+        "src/llvm_mc/protocol.rs",
+        "src/llvm_mc/reference.rs",
+        "src/llvm_mc.rs",
+        "src/reports/mod.rs",
+        "tests/bap/native.rs",
+        "tests/input/i5a.rs",
+        "tools/check_bap_core_mutations.py",
+        "tools/check_bap_ocaml_mutations.py"
+      ],
+      "missingSources": [],
+      "currentInventoryMatches": false
+    }
+  ],
+  "protectedContractDocuments": {
+    "docs/Ariadne/bap-analysis-core-design.md": "5c919c9b9bd57709301294c7baf40bc66419cea6872129071e67d8a87aef49eb",
+    "Plans/bap-stage2-implementation.md": "91d706e3868cc3a50e4290d44e471b032ddc8ca99a9c085a65431b8163fa1ba9"
+  },
+  "currentProjectionProfile": "bap-bit-provenance-v2",
+  "projectionAdmissionFollowup": "P0-P4 pending; opcode whitelist and conservative stop still implemented",
+  "documentationChecks": [
+    {
+      "command": [
+        "python3",
+        "tools/check_doc_links.py"
+      ],
+      "exitCode": 0,
+      "output": "Documentation PASS: 133 connected documents, 132 context sections, 2360 local links (including section anchors).\nRelationship meaning and historical scope require editorial review.\n"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0,
+      "output": ""
+    },
+    {
+      "command": [
+        "python3",
+        "tests/bap/fixtures/make_corpus.py",
+        "--check"
+      ],
+      "exitCode": 0,
+      "output": "41 native BIL cases retained and matched\n"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_rust_layout.py"
+      ],
+      "exitCode": 0,
+      "output": "Rust layout PASS: 107 Rust files in src/tests; one manifest/lock; root target.\n"
+    }
+  ]
+}

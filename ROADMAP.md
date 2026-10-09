@@ -10,6 +10,8 @@
 
 **Where to go next.**
 
+- [BAP documentation audit](docs/Ariadne/bap-documentation-sync.md) — checks implemented BAP scope and the matching retained qualification.
+
 - [Selected I5c address-wrap design](docs/Ariadne/i5c-address-wrap-design.md) and
   [W0–W5 plan](Plans/i5c-address-wrap.md) — the next fault-time arithmetic
   question; documentation is written, all implementation/qualification pending.
@@ -20,7 +22,9 @@
 - [Active plans](Plans/README.md) — turn remaining work into explicit implementation and qualification steps.
 - [Assurance decision](docs/Ariadne/semantic-assurance.md) — defines the BAP trust boundary and retired ISA-proof scope.
 
-**What remains unresolved.** The replacement BAP Windows capture is pinned and passes correctness. The current BAP latency policy is unlimited. Stage 2 native algorithms and capture integration are qualified on the exercised corpus; native analysis is the CLI default with explicit Rust rollback. The first fault-address question is implemented, and [native I4 performance qualification](docs/Ariadne/i4-performance-validation.md) meets the unchanged 2-second CLI limit for the exact re-pinned case. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
+**What remains unresolved.** The [projection-admission extension](Plans/bap-projection-admission.md)
+is planned only: v2 opcode admission and opaque-stop behavior remain implemented.
+The replacement BAP Windows capture is pinned and passes correctness. The current BAP latency policy is unlimited. Stage 2 native algorithms and capture integration are qualified on the exercised corpus; native analysis is the CLI default with explicit Rust rollback. The first fault-address question is implemented, and [native I4 performance qualification](docs/Ariadne/i4-performance-validation.md) meets the unchanged 2-second CLI limit for the exact re-pinned case. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 

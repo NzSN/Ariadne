@@ -224,4 +224,5 @@ match all reports. One warm-up/five repeats retain the 10 ms combined phase and
 stability must pass. An over-budget run records its samples and exits nonzero;
 the historical original-Windows I4 flag remains false in every I5a result.
 The [separate active I4 re-pin](../../docs/Ariadne/i4-windows-repin-validation.md)
-uses the 98-instruction workload and remains over its fixed CLI budget.
+uses the 98-instruction workload. Its later [performance qualification](../../docs/Ariadne/i4-performance-validation.md)
+meets the fixed CLI budget independently of the two-instruction I5a captures.

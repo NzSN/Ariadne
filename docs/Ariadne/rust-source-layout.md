@@ -96,5 +96,6 @@ The [evidence manifest](../../evidence/Ariadne/rust-source-layout-evidence-manif
 Earlier validation JSON and evidence archives retain their original source
 paths and hashes as historical records. At that layout checkpoint, full I4 qualification still required
 the unavailable original Windows capture. The [later re-pin](i4-windows-repin-validation.md)
-closes that gap and retains an unmet fixed timing condition; this consolidation adds no ISA-step
+closes that gap; the later [native performance qualification](i4-performance-validation.md)
+meets its fixed timing condition. This consolidation itself adds no ISA-step
 acceptance, execution-history proof or root-cause capability.

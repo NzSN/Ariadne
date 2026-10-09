@@ -27,7 +27,7 @@
 - [Stage 1 design](bap-semantic-backend-design.md) — turns the provider proposal into a typed protocol and projection.
 - [Assurance decision](semantic-assurance.md) — retires the separate ISA-proof objective without claiming lifter correctness.
 
-**What remains unresolved.** Native recovery, reaching definitions, slicing, finite stateflow and generated replay are implemented and [qualified on the exercised corpus](bap-core-qualification.md). The minidump CLI selects native BAP analysis by default with explicit Rust rollback. BAP lifting remains trusted; universal refinement and packaged cross-platform release qualification remain open. BAP timing is unlimited, while the [active Windows I4 pin](i4-windows-repin-validation.md) keeps its unmet 2,000 ms CLI ceiling and [controlled Windows I5a](i5a-native-qualification.md) passes its separate fixed budgets.
+**What remains unresolved.** Native recovery, reaching definitions, slicing, finite stateflow and generated replay are implemented and [qualified on the exercised corpus](bap-core-qualification.md). The minidump CLI selects native BAP analysis by default with explicit Rust rollback. BAP lifting remains trusted; universal refinement and packaged cross-platform release qualification remain open. BAP timing is unlimited. The [active Windows I4 pin](i4-windows-repin-validation.md) meets its unchanged 2,000 ms CLI ceiling in the later [performance qualification](i4-performance-validation.md); [controlled Windows I5a](i5a-native-qualification.md) passes its separate fixed budgets. The [documentation audit](bap-documentation-sync.md) identifies the latest source-bound BAP refresh and the pending projection extension.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 
@@ -63,7 +63,7 @@ ceiling after the replacement's 10.67 s measurement. See the [unlimited policy](
 for the current verdict; earlier bounded-policy records remain historical.
 Historical Priority 4 retains its original scope. The later
 [I4-specific replacement](i4-windows-repin-validation.md) retires its missing
-artifact obligation and keeps its fixed budget, which the measured CLI exceeds.
+artifact obligation and keeps its fixed budget. The later [performance qualification](i4-performance-validation.md) meets that budget for the exact replacement query.
 The API assessment below preserves its original scope and recommendation; current
 implementation and acceptance are tracked by the linked plan and delivery records.
 

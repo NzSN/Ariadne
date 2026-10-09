@@ -90,7 +90,7 @@ under both targets.
 
 ## Checked batch invocation
 
-Rust preparation now uses `--protocol=2-checked` or
+The checked one-shot preparation mode uses `--protocol=2-checked` or
 `--protocol=2-checked-linux`. A single invocation emits the exact version/target
 line above, followed by the unchanged protocol-2 records. The parser requires
 that header before accepting any rows. This replaces a separate version
@@ -98,3 +98,18 @@ process for each batch; legacy version and decode modes remain available.
 Raw per-instruction records, evidence identities and row/error bounds keep
 their existing meaning. Rebuild the helper together with the updated Rust
 adapter; an older helper lacking the checked mode is rejected.
+
+
+## Snapshot-owned production reference session
+
+The BAP production backend now reuses one checked LLVM reference process across
+batches for one snapshot/target. It uses the same checked header and unchanged
+protocol-2 rows; each batch must return exactly its requested addresses before
+its deadline. Malformed, duplicate, unsolicited, missing or trailing rows poison
+the session. Shutdown closes input, requires clean EOF/exit and reaps the child.
+Reference-executable digests are checked across the preparation lifetime.
+
+The standalone LLVM byte-span/effect adapter remains one-shot. This process
+reuse adds no LLVM effect fallback. The [I4 performance delivery](i4-performance-validation.md)
+qualifies the changed BAP preparation, and the [current backend guide](modules/bap.md)
+describes ownership and shutdown.

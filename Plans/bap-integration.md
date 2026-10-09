@@ -2,13 +2,22 @@
 
 ## Context and follow-up
 
-**Status.** Stage 1 exit and the Stage 2 prerequisite pass under the user-authorized unlimited timing policy: 17 implementation gates and 60 controlled tests pass. The Stage 2 A0 foundation is qualified. Complete native analysis is qualified by the [Stage 2 record](../docs/Ariadne/bap-core-qualification.md): all 20 gates pass, native analysis is the CLI default and explicit Rust rollback is verified.
+**Status.** Stage 1 and Stage 2 are implemented and qualified on their recorded
+corpora. The 2026-10-03 unlimited-policy record passes 17 implementation gates
+and 60 controlled tests; the A0 foundation is completed. The latest retained
+refresh is nested in the [2026-10-07 I4 performance record](../docs/Ariadne/i4-performance-validation.md):
+17 Stage 1 gates and 20 native-core gates pass, native analysis is the CLI
+default and explicit Rust rollback is verified. The
+[documentation audit](../docs/Ariadne/bap-documentation-sync.md) checks that
+refresh against current inventories; older standalone records remain historical.
 
 **Why this document exists.** [BAP assessment](../docs/Ariadne/bap-core-refactor-assessment.md) motivates staged integration behind the existing Rust contract.
 
 **What this document establishes.** Current implementation ownership, the completed Stage 1 qualification policy, and the acceptance criteria for the delivered A0–A6 migration. Stage 2 owns native analysis while preserving the existing observable contracts; each retained record qualifies its exact source/tool snapshot.
 
 **Where to go next.**
+
+- [BAP documentation audit](../docs/Ariadne/bap-documentation-sync.md) — checks current ownership/admission and the later nested Stage 1/Stage 2 evidence, while preserving historical records.
 
 - [Projection admission and coverage](bap-projection-admission.md) — pending
   P0–P4 follow-up for observed unadmitted forms, BIL capability admission and
@@ -138,7 +147,7 @@ cannot reuse stale instruction semantics.
 | Scope | Current state | Remaining action |
 | --- | --- | --- |
 | S0–S3: selected runtime, lifting, projection and product integration | Implemented; BAP-only production preparation | Preserve current identities, explicit unsupported results and capture-only input. |
-| S4: BAP correctness qualification | Refreshed aggregate passes 17/17 implementation gates with 178 stable sources; replacement correctness and evidence checks pass | Preserve this exact capture/source/tool binding in further work. |
+| S4: BAP correctness qualification | Historical unlimited-policy aggregate passed 17/17 gates with 178 sources; latest nested refresh passes 17/17 with 255 sources | Use the [matching evidence inventory](../docs/Ariadne/bap-documentation-sync.md); preserve exact capture/source/tool binding. |
 | S5: workload acceptance | Active capture is pinned; timing policy is unlimited | Retain valid finite raw measurements and all correctness/source/tool checks. |
 | A0: migration contract | Qualified: all OQ0–OQ6 gates pass | Retain the source-bound [OCaml qualification](../docs/Ariadne/bap-ocaml-qualification.md) as the completed foundation for the later A1–A6 result. |
 | A1–A6: BAP analysis core | Qualified: 20 aggregate gates pass, default native selection and Rust rollback verified | Follow the [complete execution plan](bap-stage2-implementation.md). |
@@ -436,10 +445,13 @@ historical record has false exit/prerequisite fields. Its
 [manifest](../evidence/Ariadne/bap-windows-repin-evidence-manifest.json) binds the
 [evidence archive](../evidence/Ariadne/bap-windows-repin-evidence.tar.gz).
 
-The separate phase benchmark measures reference decoding at 7,572.131181 ms,
+The historical replacement phase benchmark measured reference decoding at 7,572.131181 ms,
 helper startup at 1,178.301727 ms and core analysis at 69.614232 ms (medians).
-These measurements identify reference decoding as the first area for further
-investigation; no performance fix was implemented. The replacement task is
+These historical measurements motivated later investigation. No performance
+fix was implemented in the replacement campaign. The subsequent
+[I4 performance delivery](../docs/Ariadne/i4-performance-validation.md) implements
+snapshot-owned decoder reuse, runtime-hash streaming and native core/transport
+caches; it qualifies its exact query independently of these old samples. The replacement task is
 complete; the user subsequently removed that timing limit. The earlier false decision remains historical
 evidence for its original workload. That earlier workload task did not start Stage 2; the subsequent A0 work is recorded above.
 Commit/push remains a separate publication action.

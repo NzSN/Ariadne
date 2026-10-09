@@ -42,9 +42,10 @@ Originally proposed **2026-10-01** against `7de5a1e`; status refreshed
 **2026-10-02** against `c9eb4c5`. I0–I3 are implemented, and the
 [latest qualification/truncation repair record](investigation-correctness-validation.md)
 retains the exercised fixture/Linux tier. The [active Windows replacement](i4-windows-repin-validation.md)
-passes correctness while its 2,000 ms CLI clause remains unmet. The [stage plan](../../Plans/investigation-layer.md) now treats
-I0–I4 requirements as delivered regression criteria plus an open qualification
-obligation, not an instruction to begin implementation again at I0.
+passes correctness; the later [performance qualification](i4-performance-validation.md)
+meets its 2,000 ms CLI clause. The [stage plan](../../Plans/investigation-layer.md)
+records I0–I4 as delivered and corpus-qualified, with broader questions tracked
+separately.
 
 ## Product position
 

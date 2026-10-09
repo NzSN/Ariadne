@@ -17,7 +17,12 @@
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
-Updated **2026-10-07**: I5c address wrap has a selected design and W0–W5 plan,
+Updated **2026-10-09**: the [BAP documentation audit](docs/Ariadne/bap-documentation-sync.md)
+synchronizes guides with the native-default implementation and latest retained
+refresh. The [projection-admission P0–P4 plan](Plans/bap-projection-admission.md)
+is written; all runtime and qualification stages remain pending.
+
+The **2026-10-07** product checkpoint remains: I5c address wrap has a selected design and W0–W5 plan,
 with every implementation/qualification stage pending. The next executable
 stage is W0: freeze the source/oracle contract and check the new decision model.
 I5b zero-base-plus-displacement has B0–B5 implemented and qualified for its
@@ -30,6 +35,18 @@ snapshot. The latest retained records pass 20 Stage 2 gates, 17 investigation ga
 I4 is re-pinned and the native performance follow-up meets its fixed 2-second
 CLI limit at 1,692.696 ms for the exact controlled query. BAP lifting stays trusted
 and the independent ISA track retired.
+
+## 2026-10-09 — BAP documentation synchronized with current implementation
+
+Audited BAP plans, helper/module guides, assurance and consumer documentation
+against the current lifter, projection, native passes, CLI and qualification
+inventories. The [audit guide](docs/Ariadne/bap-documentation-sync.md) and
+[identity record](evidence/Ariadne/bap-documentation-audit.json) distinguish the
+matching October 7 nested refresh from stale standalone snapshots. Current
+projection remains v2 with its finite whitelist and conservative stop policy;
+P0–P4 remains planned. Stale I4 timing gaps, helper prerequisites and historical
+provider/bootstrap wording are corrected. This is documentation and retained
+evidence verification, not a new runtime or release qualification campaign.
 
 ## 2026-10-07 — I5c address-wrap design and plan selected
 

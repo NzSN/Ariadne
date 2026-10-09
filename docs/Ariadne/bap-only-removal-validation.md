@@ -75,9 +75,14 @@ meet its **2,000 ms median condition**, satisfy Stage 2's prerequisite, or accep
 an architectural ISA step. Stage D remains **0/49**. Earlier Stage 1 records
 retain their historical source snapshots and rollout decisions.
 
+For the current native-default CLI, build the analysis helper as well as the
+lifter/reference. The original removal campaign used Rust analysis.
+
 ```sh
 python3 native/bap/setup.py
 bash native/bap/build.sh
+python3 native/bap-core/setup-sdk.py
+python3 native/bap-core/build.py --output target/bap-core-native
 # Build the independent MC reference with the repo's matching LLVM headers.
 bash native/llvm_mc/build.sh
 cargo build --offline --locked --release --manifest-path Cargo.toml

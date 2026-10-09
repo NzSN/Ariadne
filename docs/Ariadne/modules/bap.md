@@ -10,16 +10,19 @@
 
 **Where to go next.**
 
+- [BAP documentation audit](../bap-documentation-sync.md) — current implementation/evidence inventory and the pending projection-admission stages.
+
 - [OCaml foundation qualification](../bap-ocaml-qualification.md) — records the completed A0 SDK, native state and transport gates.
 
 - [Unlimited timing policy](../bap-unlimited-validation.md) — records the user-authorized removal of the BAP latency ceiling and refreshed qualification.
 
 - [Native helper guide](../../../native/bap/README.md) — builds the pinned external runtime boundary.
-- [Validation record](../bap-only-removal-validation.md) — states tested coverage and unresolved qualification.
+- [Historical removal record](../bap-only-removal-validation.md) — records the original semantics-only delivery and its bounded corpus.
+- [Native qualification](../bap-core-qualification.md) — identifies the delivered Stage 2 scope and later source-bound refresh.
 - [Previous workload repair](../bap-windows-workload-validation.md) — retains the earlier evidence decisions and available-corpus refresh.
 - [Replacement workload validation](../bap-windows-repin-validation.md) — records the new captured Windows input, passing implementation gates and its historical timing condition.
 - [Replacement plan](../../../Plans/bap-windows-repin.md) — preserves the authorized capture recipe and its former bounded timing contract; the later unlimited policy controls BAP qualification.
-- [Integration plan](../../../Plans/bap-integration.md) — tracks work beyond the current producer.
+- [Integration plan](../../../Plans/bap-integration.md) — separates completed migration from the pending projection-admission extension.
 
 **What remains unresolved.** The isolated OCaml SDK and bounded Init/Visit transport now qualify the A0 foundation. Complete native recovery, dataflow, slicing, finite stateflow and generated replay are implemented; the [Stage 2 qualification](../bap-core-qualification.md) records passing aggregate acceptance and default adoption. The user has removed the active BAP latency ceiling; valid capture/correctness evidence and implementation gates remain required. Historical Priority 4, active re-pinned I4 and controlled I5a qualification retain their separate contracts.
 
@@ -82,7 +85,11 @@ The [design](../bap-semantic-backend-design.md) and
 admission and exit. The retained corpus has 41 exact byte cases with independent
 effect expectations. It is deliberately finite: supported opcode names and
 prefix guards do not imply universal ISA coverage. The native API source
-review is [here](../bap-projection-source-review.md).
+review is [here](../bap-projection-source-review.md). Production still uses
+`bap-bit-provenance-v2` and a finite opcode whitelist. SUB64ri8, MOVZX32rm8,
+XOR64rr and CMP8mi remain outside admission even when the lifter returns
+nonempty BIL. The [P0–P4 plan](../../../Plans/bap-projection-admission.md) proposes
+capability admission and opaque ordinary continuation; neither is implemented.
 
 ```sh
 cargo test --offline --locked --release --manifest-path Cargo.toml -- --include-ignored

@@ -30,8 +30,10 @@ algorithm or performance patch was needed.
 - [Investigation ledger](../../Plans/investigation-layer.md) — separate active
   Windows I4 and later hypothesis/object/cross-capture work.
 
-**What remains unresolved.** The [active Windows I4 re-pin](i4-windows-repin-validation.md) passes correctness
-but exceeds its separate 2-second CLI budget. The missing original Electron
+**What remains unresolved.** The [active Windows I4 re-pin](i4-windows-repin-validation.md) passes correctness;
+the later [performance qualification](i4-performance-validation.md) meets its
+separate 2-second CLI budget and retains refreshed BAP/I5a regressions. The
+measurements below belong to the earlier native-I5a snapshot. The missing original Electron
 case is historical following the user-authorized replacement. These results cover Linux-hosted analysis of the
 recorded Windows-origin captures, not native Windows execution of Ariadne or a
 packaged cross-platform release. Broader hypotheses, historical execution,

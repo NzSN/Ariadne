@@ -41,9 +41,16 @@ show the Linux/Windows CLI commands and the readable instruction overview.
 
 BAP is the sole semantic backend for `FileSnapshot::prepare` and the CLI.
 Build the [BAP helper/runtime](../../../native/bap/README.md) and LLVM MC decode reference
-first. `prepare_with_bap` accepts an explicit configuration; the ordinary method
+first. The CLI additionally requires the [native analysis helper](../../../native/bap-core/README.md)
+by default; preparation itself does not run either solver. `prepare_with_bap`
+accepts an explicit configuration; the ordinary method
 uses `Config::from_env`. No semantic fallback is made to LLVM. The separate
 [Stage 1 removal plan](../../../Plans/completed/bap-only-semantics.md) defines this change.
+
+The following library example deliberately selects the Rust reference with
+`ariadne::analyze`; it does not illustrate the CLI's native default. Native
+callers use `NativeAnalyzer::from_capture(&core_config, session, &prepared)?.complete()`
+with a manifest-bound `CoreConfig`, as in the [CLI](../../../src/bin/ariadne-minidump.rs).
 
 ```rust
 use ariadne::effects::PreparationOptions;
@@ -136,16 +143,19 @@ preparation precision, coherent process capture or complete ISA semantics.
 
 ## Build and verification
 
-Dependencies are locked separately and declared Rust 1.85-compatible; execution
-validation currently uses Rust 1.96.0. Root offline tests do not need this package.
+The module shares the root Cargo manifest and lockfile, with declared Rust
+1.85 compatibility; recorded execution used Rust 1.96.0. Ordinary root tests
+exercise portable input behavior, while ignored native tests require helpers.
 
 ```sh
 cargo test --offline --locked --manifest-path Cargo.toml
 cargo clippy --offline --locked --manifest-path Cargo.toml --all-targets -- -D warnings
 
-# Build both the BAP provider and the independent LLVM decode reference.
+# Build the BAP provider, default analysis helper and independent decode reference.
 python3 native/bap/setup.py
 bash native/bap/build.sh
+python3 native/bap-core/setup-sdk.py
+python3 native/bap-core/build.py --output target/bap-core-native
 # See the LLVM guide for matching headers/runtime setup.
 LLVM20_INCLUDE_DIR=/tmp/ariadne-llvm20/usr/include/llvm-20 \
   bash native/llvm_mc/build.sh

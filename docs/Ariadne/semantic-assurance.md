@@ -83,10 +83,18 @@ the pre-retirement state at `2ba80a9`.
 
 ## Qualification limits preserved
 
-The original pinned Windows capture and its workload condition remain required
-for full BAP Stage 1 and investigation qualification. Retiring ISA proofs does
-not waive those clauses, admit additional opcode forms, qualify BAP-owned
-analysis-core replacement, or refresh old source-bound validation records.
+The user separately authorized a [controlled BAP Windows replacement](bap-windows-repin-validation.md)
+and an [unlimited BAP timing policy](bap-unlimited-validation.md). Active Stage 1
+requires that replacement's valid captured evidence, measured finite samples and
+passing implementation gates. Investigation I4 uses its own
+[re-pinned query](i4-windows-repin-validation.md) and unchanged fixed budget, met
+by the later [performance qualification](i4-performance-validation.md). The
+missing original Electron capture remains historical.
+
+Retiring ISA proofs did not deliver those changes or waive their evidence
+clauses. Native Stage 2 has [separate analysis qualification](bap-core-qualification.md).
+The [projection-admission extension](../../Plans/bap-projection-admission.md) is
+still pending; retirement admits no new forms and refreshes no old records.
 
 The [roadmap](../../ROADMAP.md),
 [agent instructions](../../AGENTS.md) and

@@ -31,11 +31,12 @@ It is not instruction-step verification or real Windows acceptance.
   synthetic artifacts and their expected conclusions.
 
 **What remains unresolved.** Matching this finite corpus is not universal form
-coverage. The source/fixture tier passes. A later [controlled Windows demo](crashpad-demo-validation.md)
-supplies capture/answer evidence but exceeds its CLI timing limit. Original-Windows
-At that source-review checkpoint, I4 remained a separate unexercised tier.
-The [later I4 re-pin](i4-windows-repin-validation.md) passes correctness and
-remains over its separate fixed CLI budget.
+coverage. The [native I5a successor](i5a-native-qualification.md) qualifies the
+source/fixture and both controlled Windows tiers; the earlier
+[demo timing miss](crashpad-demo-validation.md) remains historical. At the
+source-review checkpoint, original-Windows I4 was unexercised. The
+[later I4 re-pin](i4-windows-repin-validation.md) passes correctness, and its
+[performance successor](i4-performance-validation.md) meets the separate fixed CLI budget.
 
 The [documentation map](../documentation-map.md) is optional navigation.
 

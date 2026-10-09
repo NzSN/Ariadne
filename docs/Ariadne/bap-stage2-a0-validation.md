@@ -21,8 +21,8 @@ delivered. The record distinguishes these checks from a migrated analyzer.
 - [A0 plan](../../Plans/bap-stage2-a0.md) — tracks completed and remaining clauses.
 - [Analysis contract](bap-analysis-core-design.md) — defines ownership, messages,
   both formal observation mappings and required typed-edge preservation.
-- [Native experimental module](../../native/bap-core/README.md) — runs the probe
-  and source-bound qualification utility.
+- [Native analysis module](../../native/bap-core/README.md) — current helper and
+  the separately labeled historical capability probe.
 
 **What remains unresolved.** This first record does not qualify a custom OCaml
 pass. The OCaml successor supplies that bounded foundation. The later
@@ -34,8 +34,10 @@ For the wider context, see the [documentation map](../documentation-map.md).
 
 ## Exercised evidence
 
-The Stage 1 prerequisite's full 178-entry source inventory and workload tool
-hashes still match. A0's experimental files are isolated from that production
+At the 2026-10-03 probe run, the Stage 1 prerequisite's full 178-entry source
+inventory and workload tool hashes matched. Those old inventories no longer
+match the current implementation; the [documentation audit](bap-documentation-sync.md)
+identifies the later matching refresh. A0's experimental files are isolated from that production
 build; no Rust algorithm, model or existing lifter source changed.
 
 Seven tests exercise initialization/operation envelopes, family-specific action

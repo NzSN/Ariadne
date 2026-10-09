@@ -134,4 +134,5 @@ explain the snapshot wrapper and default/explicit-native report checks.
 
 The [separately re-pinned Windows I4](i4-windows-repin-validation.md) uses the
 98-instruction capture and retains the 2,000 ms condition. Correctness passes;
-its CLI median is over budget. This two-instruction I5a demo does not qualify I4.
+the later [performance qualification](i4-performance-validation.md) meets that
+CLI budget. This two-instruction I5a demo supplies no I4 acceptance credit.

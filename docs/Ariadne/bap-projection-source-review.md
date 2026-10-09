@@ -2,7 +2,9 @@
 
 ## Context and follow-up
 
-**Status.** Pinned source and finite-corpus review; not a universal ISA proof.
+**Status.** Historical provider/accessor assessment with current implementation
+links. Production selects the pinned legacy lifter and finite v2 projection;
+this review is supporting evidence, not a universal ISA proof.
 
 **Why this document exists.** [Projection design](bap-semantic-backend-design.md) requires typed BIL, correct aliases and conservative effects.
 
@@ -10,14 +12,16 @@
 
 **Where to go next.**
 
-- [Delivery record](bap-only-removal-validation.md) — reports the exercised producer and adapter checks.
+- [Historical delivery record](bap-only-removal-validation.md) — reports the original producer and adapter checks.
+- [Current backend](modules/bap.md) and [documentation audit](bap-documentation-sync.md) — current selection, finite admission and matching retained refresh.
+- [Projection-admission plan](../../Plans/bap-projection-admission.md) — pending four-form and capability/continuation work; this review does not qualify it.
 - [Trust boundary](semantic-assurance.md) — explains which lifter and projection claims remain conditional.
 
 **What remains unresolved.** The review and corpus do not establish universal lifter correctness or all-opcode projection soundness. New forms require their own justified admission and negative controls.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 
-**Decision question.** Which effects can Ariadne's optional AMD64 backend project from the selected BAP build into canonical byte GPR cells, flags, `memory:any`, and `state:other` without inventing semantics? This is a source review and diagnostic probe, **not** a projection acceptance or ISA proof. It applies the [Stage 1 plan](../../Plans/bap-integration.md) and [effect contract](operand-effects-design.md). The selected release is BAP `v2.5.0-alpha` at `baa9022`; its installed library reports `2.5.0-alpha` and CLI `2.5.0-alpha+baa9022`. The [official release](https://github.com/BinaryAnalysisPlatform/bap/releases/tag/v2.5.0) supplies the `libbap-dev_2.5.0.deb` C header, extracted locally at `tmp/bap-setup/stable/usr/local/include/bap.h`. Source links below pin `baa9022`.
+**Decision question.** Which effects can Ariadne's BAP AMD64 backend project from the selected BAP build into canonical byte GPR cells, flags, `memory:any`, and `state:other` without inventing semantics? This is a source review and diagnostic probe, **not** a projection acceptance or ISA proof. It applies the [Stage 1 plan](../../Plans/bap-integration.md) and [effect contract](operand-effects-design.md). The selected release is BAP `v2.5.0-alpha` at `baa9022`; its installed library reports `2.5.0-alpha` and CLI `2.5.0-alpha+baa9022`. The [official release](https://github.com/BinaryAnalysisPlatform/bap/releases/tag/v2.5.0) supplies the `libbap-dev_2.5.0.deb` C header, extracted locally at `tmp/bap-setup/stable/usr/local/include/bap.h`. Source links below pin `baa9022`.
 
 ## Provider and coverage boundary
 
@@ -59,4 +63,17 @@ Further legacy negative probes make the escape hatches concrete: `0f05` SYSCALL 
 
 ## Decision and next evidence
 
-The evidence supports a tagged BIL walker. Legacy is the stronger **candidate** for the intended Stage 1 arithmetic/control corpus; source and diagnostics do not yet qualify it or make it the committed default. Modern remains useful as an earlier narrow-coverage comparison. Next retain a selected-build fixture record with bytes, VA, decoder name/length, raw BIL, getter outputs, projected effects/control, and independent expectations, including unsupported and prefixed negative cases. Carry source, build, plugin, and projection identity with every result.
+The original diagnostics supported a tagged BIL walker and favored legacy over
+the sampled modern configuration. The later
+[backend delivery](bap-only-removal-validation.md) selected legacy and implemented
+the getter/alias rules in [the helper](../../native/bap/lift.cpp) and
+[projection](../../src/bap/projection.rs). The
+[41-case corpus](../../tests/bap/fixtures/corpus.json) retains exact bytes, typed
+BIL and independent expectations, including negative controls. The
+[latest source-bound refresh](bap-documentation-sync.md) supplies acceptance
+separately from this original review.
+
+Next work is the [P0–P4 admission extension](../../Plans/bap-projection-admission.md).
+The four observed forms, generic capability admission and ordinary opaque
+continuation remain pending. Preserve source/build/plugin/profile identities
+and independent positive/negative expectations for each newly admitted scope.

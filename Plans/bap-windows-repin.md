@@ -32,7 +32,7 @@ replacement contract. Correct capture and performance acceptance remain separate
 - [Integration plan](bap-integration.md) — receives the final Stage 1 decision;
   Stage 2 implementation is outside this replacement task.
 
-**What remains unresolved.** This capture campaign did not implement Stage 2. The later [native Stage 2 delivery](../docs/Ariadne/bap-core-qualification.md) qualifies recovery, dataflow, slicing, stateflow and default adoption. Its BAP timing policy is unlimited. The separately authorized [active I4 replacement](../docs/Ariadne/i4-windows-repin-validation.md) uses this 98-start capture and remains above its unchanged 2,000 ms explanation-CLI limit. Historical Priority 4 records retain their original scope.
+**What remains unresolved.** This capture campaign did not implement Stage 2. The later [native Stage 2 delivery](../docs/Ariadne/bap-core-qualification.md) qualifies recovery, dataflow, slicing, stateflow and default adoption. Its BAP timing policy is unlimited. The separately authorized [active I4 replacement](../docs/Ariadne/i4-windows-repin-validation.md) uses this 98-start capture. Its later [performance qualification](../docs/Ariadne/i4-performance-validation.md) meets the unchanged 2,000 ms explanation-CLI limit. The earlier over-budget verdict below remains historical. Historical Priority 4 records retain their original scope.
 
 For the wider context, see the [documentation map](../docs/documentation-map.md).
 

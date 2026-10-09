@@ -10,6 +10,8 @@
 
 **Where to go next.**
 
+- [BAP documentation audit](bap-documentation-sync.md) — source-first synchronization, exact current evidence and pending admission coverage.
+
 - [Selected I5c address-wrap design](i5c-address-wrap-design.md) and
   [W0–W5 plan](../../Plans/i5c-address-wrap.md) — the next arithmetic question;
   implementation, model and controlled-capture qualification remain pending.
@@ -35,7 +37,7 @@ under `Plans/completed/`.
 | Topic | Current documentation |
 | --- | --- |
 | Minidump input and CLI | [Input guide](modules/input.md), [examples](minidump-investigator-examples.md), [report schema](stage-c-report-schema.md) |
-| BAP semantics | [Backend guide](modules/bap.md), [protocol and projection design](bap-semantic-backend-design.md), [source review](bap-projection-source-review.md) |
+| BAP semantics and native analysis | [Backend guide](modules/bap.md), [projection design](bap-semantic-backend-design.md), [source review](bap-projection-source-review.md), [native qualification](bap-core-qualification.md), [current audit](bap-documentation-sync.md), [pending admission plan](../../Plans/bap-projection-admission.md) |
 | Fault-address investigation | [Module guide](modules/investigation.md), [producer contracts](investigation-contracts.md), [I5a zero-address contracts](i5a-contracts.md), [design](investigation-layer-design.md). |
 | Planned address-wrap assessment | [I5c design](i5c-address-wrap-design.md) and [W0–W5 plan](../../Plans/i5c-address-wrap.md); no implemented interface or acceptance yet. |
 | Zero-base-plus-displacement assessment | [I5b contracts](i5b-contracts.md), [source review](i5b-source-review.md), [validation](i5b-validation.md), [B0–B5 plan](../../Plans/i5b-zero-base-offset.md). |

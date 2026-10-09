@@ -46,7 +46,8 @@ its recorded CLI timing limit. The native successor resolves those qualification
 dependency snapshot and passing aggregate records.
 The [user-authorized I4 replacement](i4-windows-repin-validation.md) now uses a
 separate independently inspected 98-start Windows capture. Its correctness
-checks pass and its fixed CLI budget remains unmet. The original Electron
+checks pass, and the later [performance qualification](i4-performance-validation.md)
+meets its fixed CLI budget. The original Electron
 query remains unexercised historical evidence. Broader hypotheses and Linux numeric admission remain
 outside this delivery.
 

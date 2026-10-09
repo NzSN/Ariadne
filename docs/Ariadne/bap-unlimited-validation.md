@@ -19,7 +19,7 @@ remain qualification requirements.
 **Where to go next.**
 
 
-- [Native Stage 2 qualification](bap-core-qualification.md) — records the later completed native implementation and current retained acceptance.
+- [Native Stage 2 qualification](bap-core-qualification.md) — records native adoption and links the later source-bound refresh; the [documentation audit](bap-documentation-sync.md) verifies which inventories match this checkout.
 
 - [BAP integration plan](../../Plans/bap-integration.md) — applies the new Stage 1
   exit and Stage 2 prerequisite policy.
@@ -30,7 +30,7 @@ remain qualification requirements.
 **What remains unresolved.** Unlimited qualification establishes no performance bound. Native
 Stage 2 is now [qualified](bap-core-qualification.md) within its exercised corpus.
 The [active Windows I4 replacement](i4-windows-repin-validation.md) retains its
-unmet 2,000 ms CLI ceiling; [controlled Windows I5a](i5a-native-qualification.md)
+2,000 ms CLI ceiling, met by the later [performance qualification](i4-performance-validation.md); [controlled Windows I5a](i5a-native-qualification.md)
 passes separate 1,500 ms CLI and 10 ms phase limits. This policy does not waive
 either investigation budget.
 

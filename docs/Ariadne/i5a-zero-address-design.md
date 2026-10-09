@@ -47,9 +47,12 @@ reconstructing an executed path or implementing another ISA model.
 - [Semantic assurance](semantic-assurance.md) retains BAP as a trusted semantic
   provider; this design does not revive independent instruction-step proofs.
 
-**What remains unresolved.** The controlled Windows demo has valid capture and
-answer evidence, but exceeds the frozen CLI latency condition. The finite
-admitted forms do not establish whole-ISA coverage. The [active I4 replacement](i4-windows-repin-validation.md) passes correctness but exceeds its fixed CLI budget.
+**What remains unresolved.** The [native I5a successor](i5a-native-qualification.md)
+qualifies both controlled Windows captures under the unchanged criteria; the
+earlier demo timing miss remains historical. The finite admitted forms do not
+establish whole-ISA coverage. The [active I4 replacement](i4-windows-repin-validation.md)
+meets its fixed CLI budget in the later [performance qualification](i4-performance-validation.md).
+Broader hypotheses, executed history and root cause remain outside this profile.
 
 The [documentation map](../documentation-map.md) is optional navigation.
 

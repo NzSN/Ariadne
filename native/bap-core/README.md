@@ -18,7 +18,8 @@ remains a separate historical facility check.
 **Where to go next.**
 
 
-- [Windows I4 timing gap](../../docs/Ariadne/i4-windows-repin-validation.md) — records the active 98-start explanation workload and its unchanged 2-second limit, independent of the unlimited core policy.
+- [Windows I4 performance qualification](../../docs/Ariadne/i4-performance-validation.md) — records the later native-core refresh and passing 98-start explanation workload under the unchanged 2-second limit, independent of the unlimited BAP policy.
+- [BAP documentation audit](../../docs/Ariadne/bap-documentation-sync.md) — current implementation, retained evidence identities and pending projection coverage.
 
 
 - [Snapshot-based native qualification](../../docs/Ariadne/i5a-native-qualification.md) — explains the read-only MirrorRust dependency environment used by current core and controlled-I5a records.

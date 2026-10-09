@@ -10,6 +10,8 @@
 
 **Where to go next.**
 
+- [BAP documentation audit](docs/Ariadne/bap-documentation-sync.md) — current native/lifting ownership, verified evidence and pending projection-admission work.
+
 - [I5c address-wrap design](docs/Ariadne/i5c-address-wrap-design.md) and
   [implementation plan](Plans/i5c-address-wrap.md) — selected next fault-time
   arithmetic assessment; all runtime/model/capture qualification is pending.
@@ -71,8 +73,9 @@ Linux/Windows examples](docs/Ariadne/priority-3-presentation-validation.md);
 JSON v1 and DOT graph semantics remain unchanged. The [historical Priority 4 measurement](docs/Ariadne/priority-4-performance-validation.md)
 qualified its original 98-start Electron query under the earlier LLVM-backed
 pipeline. Its result does not qualify the later native backend or the active
-[I4 replacement](docs/Ariadne/i4-windows-repin-validation.md), whose fixed
-Windows CLI budget remains unmet.
+[I4 replacement](docs/Ariadne/i4-windows-repin-validation.md). The later
+[native performance qualification](docs/Ariadne/i4-performance-validation.md)
+meets that replacement query's fixed Windows CLI budget.
 The [rendering module](docs/Ariadne/result-rendering.md) now produces readable
 text and Graphviz DOT from analyzer outcomes.
 
