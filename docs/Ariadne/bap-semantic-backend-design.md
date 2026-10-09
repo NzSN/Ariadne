@@ -13,6 +13,10 @@ unlimited, with investigation budgets qualified separately.
 
 **Where to go next.**
 
+- [Projection admission and coverage plan](../../Plans/bap-projection-admission.md) —
+  pending P0–P4 work to admit the observed parser forms, replace opcode-name
+  restrictions and retain conservative ordinary continuation.
+
 
 - [Complete Stage 2 qualification](bap-core-qualification.md) — records native default adoption, explicit Rust rollback, exact source/tool scope and the passing aggregate.
 
@@ -126,6 +130,15 @@ and selected shifts. LOCK, REP, segment and address-size overrides are
 guarded. The plain `90` NOP is the separately reviewed empty-BIL no-effect
 case. Other unsupported forms stop conservatively, without semantic fallback. This list is exercised projection
 scope rather than architectural instruction-step acceptance.
+
+**Planned successor, not current behavior.** The
+[admission and coverage plan](../../Plans/bap-projection-admission.md) first
+validates SUB64ri8, MOVZX32rm8, XOR64rr and CMP8mi. It then replaces opcode-name
+membership with typed BIL capability, operand/control and effect checks. A
+separate stage retains structural continuation for validated ordinary control
+with unknown data effects, while preserving gaps and no definite kills. Empty
+semantics, malformed inputs and unresolved control do not gain invented
+fallthrough. All P0–P4 implementation and qualification remains pending.
 
 LLVM MC remains the decoded control/operand reference. Admission requires
 matching consumed bytes/length and compatible typed control facts. The

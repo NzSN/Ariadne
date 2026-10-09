@@ -10,6 +10,11 @@
 
 **Where to go next.**
 
+- [Projection admission and coverage](bap-projection-admission.md) — pending
+  P0–P4 follow-up for observed unadmitted forms, BIL capability admission and
+  conservative continuation; existing Stage 1/Stage 2 records remain historical
+  evidence for their own source and exercised corpus.
+
 - [Stage 2 qualification](../docs/Ariadne/bap-core-qualification.md) — records all 20 passing gates, native default adoption, Rust rollback and the exercised scope.
 - [Stage 2 execution plan](bap-stage2-implementation.md) and [contract](../docs/Ariadne/bap-analysis-core-design.md) — explain the delivered native algorithms and their acceptance criteria.
 - [Stage 2 A0 plan](bap-stage2-a0.md) — preserves the completed migration foundation and its earlier bounded scope.
@@ -25,7 +30,9 @@
 - [Backend guide](../docs/Ariadne/modules/bap.md) — provides current build and qualification entry points.
 - [Controlled Windows demo](../docs/Ariadne/crashpad-demo-validation.md) — documents the separate two-instruction I5a/smoke capture.
 
-**What remains unresolved.** The qualified native analysis does not establish universal refinement, ISA/lifter correctness or packaged cross-platform release qualification. Source/tool changes require fresh qualification. The active BAP policy has no latency ceiling, while historical Priority 4, active re-pinned I4 and controlled I5a retain their separate contracts. The [native I5a refresh](../docs/Ariadne/i5a-native-qualification.md) now independently qualifies both controlled captures under its fixed budgets and pinned dependency snapshot; that acceptance comes from its own records.
+**What remains unresolved.** The projection admission/coverage extension
+is planned only; no new form or recovery policy is qualified by this ledger.
+The qualified native analysis does not establish universal refinement, ISA/lifter correctness or packaged cross-platform release qualification. Source/tool changes require fresh qualification. The active BAP policy has no latency ceiling, while historical Priority 4, active re-pinned I4 and controlled I5a retain their separate contracts. The [native I5a refresh](../docs/Ariadne/i5a-native-qualification.md) now independently qualifies both controlled captures under its fixed budgets and pinned dependency snapshot; that acceptance comes from its own records.
 
 For the wider context, see the optional [documentation map](../docs/documentation-map.md).
 

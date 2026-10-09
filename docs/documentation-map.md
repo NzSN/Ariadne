@@ -102,6 +102,10 @@ implemented repairs and exercised checks from real-Windows qualification.
 
 ### Project and active plans
 
+- [BAP projection admission and coverage plan](../Plans/bap-projection-admission.md) —
+  pending form validation, removal of opcode-name gates and conservative ordinary
+  continuation, with separate source/fixture and capture/backend exits.
+
 - [I5c address-wrap implementation plan](../Plans/i5c-address-wrap.md).
 - [I4 native performance implementation](../Plans/i4-performance-implementation.md).
 - [I5b zero-base-plus-displacement implementation plan](../Plans/i5b-zero-base-offset.md).
