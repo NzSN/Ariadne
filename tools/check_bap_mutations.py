@@ -28,7 +28,9 @@ MUTANTS=[
  ('wrong-consumption-agreement','prepare.rs','|| lift.length != site.evidence.length\n                || lift.bytes\n                    != site\n                        .evidence\n                        .bytes\n                        .iter()\n                        .map(|b| format!("{b:02x}"))\n                        .collect::<String>()','|| false','disagreement',DISAGREE),
  ('wrong-control-agreement','prepare.rs','if !compatible {','if false && !compatible {','disagreement',DISAGREE),
  ('missing-operand-binding-check','prepare.rs','} else if !move_binding {','} else if false && !move_binding {','disagreement',DISAGREE),
- ('partial-self-move-loses-definition','projection.rs','let changed = partial_destination.contains(&cell)','let changed = false','native','partial_self_moves_define_written_cells_and_unsupported_bil_never_falls_back'),
+ # V3's possible-destination guard still enters the output path when `changed`
+ # is false. Remove the actual partial-MOV definite-write justification instead.
+ ('partial-self-move-loses-definition','projection.rs','&& (partial_destination.contains(&cell)','&& (false','native','partial_self_moves_define_written_cells_and_unsupported_bil_never_falls_back'),
  ('cross-snapshot-reuse','prepare.rs','self.snapshot.as_deref().is_some_and(|id| id != snapshot)','false','native',NEGATIVE),
  ('fabricated-call-preservation','prepare.rs','site.evidence.rule = Some("bap-opaque-call-return-v1".into());','site.evidence.rule = Some("bap-opaque-call-return-v1".into()); site.instruction.may_defs.retain(|l| !l.starts_with("gpr:rbx:"));','native',NEGATIVE),
 ]

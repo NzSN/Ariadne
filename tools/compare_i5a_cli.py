@@ -6,6 +6,7 @@ import subprocess
 import tempfile
 
 from bap_profile_migration import legacy_source_build, compare_directories
+import real_capture_workload as real_case
 
 from i5a_native_contract import (
     PROFILE, environment, native_manifest, sha, source_inventory, strict_json,
@@ -13,7 +14,8 @@ from i5a_native_contract import (
 )
 
 ROOT = Path(__file__).resolve().parents[1]
-sources = source_inventory
+def sources():
+    return {**source_inventory(), **{str(p.relative_to(ROOT)): sha(p) for p in real_case.source_paths()}}
 
 
 def without_verified_receipt(report, text, dot, manifest):
@@ -50,10 +52,12 @@ def main():
     legacy_cli, legacy_build = legacy_source_build(ROOT/"target"/(work.name+"-legacy"))
     env, manifest = environment(), native_manifest()
     tools_before = tool_hashes()
+    active_case = real_case.load_case()
+    active_dump = real_case.selected_dump(active_case)
     cases = [("linux", "tests/input/fixtures/stage_b_linux.dmp", "401000", "401006"),
              ("windows", "tests/input/fixtures/stage_b_windows.dmp", "7ff700001000", "7ff700001006"),
              ("not", "tests/input/fixtures/bap_precision_linux.dmp", "401000", "401006"),
-             ("real-linux", "tmp/priority1/chromium-member-uaf.dmp", "566817922dc5", "566817922e42")]
+             ("real-capture", active_dump, active_case["query"]["entry_va"], active_case["query"]["seed_va"])]
     actual, native_hashes, explicit_hashes, receipts, bindings = {}, {}, {}, {}, {}
     comparisons = 0
     legacy_hashes, migrations = {}, {}
@@ -73,6 +77,9 @@ def main():
             directories[backend] = out
         hashes = {backend: {p.name: sha(p) for p in out.iterdir() if p.is_file()}
                   for backend, out in directories.items()}
+        if label == "real-capture":
+            for report in [strict_json((out / "report.json").read_text()) for out in directories.values()]:
+                real_case.validate_report(report, active_case)
         actual[label], native_hashes[label], explicit_hashes[label] = (
             hashes["rust"], hashes["default"], hashes["bap"])
         if hashes["default"] != hashes["bap"]:
@@ -104,22 +111,23 @@ def main():
         for name in ["explanation.txt", "explanation.json", "explanation.dot"]:
             if (native / name).read_bytes() != (reference / name).read_bytes():
                 raise RuntimeError("native/reference explanation bytes differ: " + label + "/" + name)
-        legacy = work / f"{label}-legacy-v2"
-        command = [legacy_cli, ROOT / dump, "--decoder-reference", ROOT / "target/ariadne-llvm-mc",
-                   "--entry", entry, "--explain-fault-address", site, "--memory-access", "0",
-                   "--output-dir", legacy, "--analysis-backend", "rust"]
-        old = subprocess.run([str(x) for x in command], cwd=ROOT, env=env, capture_output=True, text=True, timeout=120)
-        if old.returncode:
-            raise RuntimeError("frozen legacy source failed: " + old.stderr)
-        legacy_hashes[label] = {p.name: sha(p) for p in legacy.iterdir() if p.is_file()}
-        if legacy_hashes[label] != expected[label]:
-            raise RuntimeError("frozen v2 source does not match historical byte oracle: " + label)
-        migrations[label] = compare_directories(legacy, reference)
+        if label in expected:
+            legacy = work / f"{label}-legacy-v2"
+            command = [legacy_cli, ROOT / dump, "--decoder-reference", ROOT / "target/ariadne-llvm-mc",
+                       "--entry", entry, "--explain-fault-address", site, "--memory-access", "0",
+                       "--output-dir", legacy, "--analysis-backend", "rust"]
+            old = subprocess.run([str(x) for x in command], cwd=ROOT, env=env, capture_output=True, text=True, timeout=120)
+            if old.returncode:
+                raise RuntimeError("frozen legacy source failed: " + old.stderr)
+            legacy_hashes[label] = {p.name: sha(p) for p in legacy.iterdir() if p.is_file()}
+            if legacy_hashes[label] != expected[label]:
+                raise RuntimeError("frozen v2 source does not match historical byte oracle: " + label)
+            migrations[label] = compare_directories(legacy, reference)
         comparisons += len(expected_names)
     stable, tools_after = before == sources(), tool_hashes()
     report_count = sum(map(len, actual.values()))
-    passed = stable and tools_before == tools_after and legacy_hashes == expected and all(r["profileMigrationVerified"] for r in migrations.values()) and report_count == comparisons == 24
-    result = dict(schema="ariadne.i5a-cli-equivalence/v3", passed=passed,
+    passed = stable and tools_before == tools_after and legacy_hashes == {k: v for k, v in expected.items() if k != "real-linux"} and all(r["profileMigrationVerified"] for r in migrations.values()) and report_count == comparisons == 24
+    result = dict(schema="ariadne.i5a-cli-equivalence/v4", passed=passed,
                   sourcesStable=stable, toolsStable=tools_before == tools_after,
                   sourceHashes=before, tools=tools_after, analysisBackend="bap", analysisProfile=PROFILE,
                   defaultNativeVerified=True, helperManifest=manifest, nativeBackendReceipts=receipts,
@@ -127,12 +135,16 @@ def main():
                   legacyComparisonBackend="rust", baselineUsedAsCurrentAcceptance=False,
                   expected=expected, actual=actual, reports=report_count,
                   legacyReportsUnchanged=actual == expected, historicalOracleVerified=legacy_hashes == expected,
+                  availableHistoricalOracleVerified=legacy_hashes == {k: v for k, v in expected.items() if k != "real-linux"},
+                  historicalReportsExercised=18, fullHistorical24Acceptance=False,
+                  historicalLinuxCaptureExercised=False, activeRealCaptureCase=active_case,
+                  replacementBaseline=actual["real-capture"],
                   legacyBuild=legacy_build, legacyOutputHashes=legacy_hashes,
                   projectionMigrationVerified=True, projectionMigration=migrations,
                   validatorSha256=sha(ROOT/"target/release/bap-admission-validate"),
                   nativeOutputHashes=native_hashes, explicitBapOutputHashes=explicit_hashes,
                   nativeReferenceComparisons=comparisons, byteExactExplanationComparisons=12,
-                  scope="24 historical v2 hashes verified through frozen pre-change sources; v3 comparison permits only validated profile metadata and derived content IDs. Current native/reference core comparisons and explanations remain byte-exact. Historical bytes are not relabeled as unchanged v3 output.")
+                  scope="18 available historical v2 hashes verified through frozen pre-change sources; the old six Linux hashes remain unexercised. A distinct Windows replacement establishes six new v3 output baselines; available historical v3 comparison permits only validated profile metadata and derived content IDs. Current native/reference core comparisons and explanations remain byte-exact. Historical bytes are not relabeled as unchanged v3 output.")
     (work / "report.json").write_text(json.dumps(result, indent=2) + "\n")
     print("Report:", work / "report.json", flush=True)
     if not passed:

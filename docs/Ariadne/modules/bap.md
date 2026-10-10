@@ -4,7 +4,10 @@
 
 **Status.** V3 projection/admission and ordinary opaque continuation are
 implemented. The [execution checkpoint](../bap-admission-checkpoint.md) records
-P0–P3 checks and incomplete P4/external qualification. Native analysis remains
+the original P0–P3 checks; the [replacement record](../real-capture-repin-79938.md)
+and [user decision](../../../evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
+accept active-corpus P4 with remaining historical real-Linux clauses excluded.
+Native analysis remains
 default; historical v2 qualification is source-bound to its earlier snapshots.
 BAP latency remains measured under the unlimited policy.
 
@@ -14,7 +17,10 @@ BAP latency remains measured under the unlimited policy.
 
 **Where to go next.**
 
-- [BAP documentation audit](../bap-documentation-sync.md) — current implementation/evidence inventory and the pending projection-admission stages.
+- [Accepted v3 qualification](../real-capture-repin-79938.md) — current native,
+  parity and fixed-budget evidence, with excluded historical real-Linux clauses.
+- [Historical BAP documentation audit](../bap-documentation-sync.md) — earlier
+  v2 implementation/evidence inventory and links to its successor.
 
 - [OCaml foundation qualification](../bap-ocaml-qualification.md) — records the completed A0 SDK, native state and transport gates.
 
@@ -26,7 +32,7 @@ BAP latency remains measured under the unlimited policy.
 - [Previous workload repair](../bap-windows-workload-validation.md) — retains the earlier evidence decisions and available-corpus refresh.
 - [Replacement workload validation](../bap-windows-repin-validation.md) — records the new captured Windows input, passing implementation gates and its historical timing condition.
 - [Replacement plan](../../../Plans/bap-windows-repin.md) — preserves the authorized capture recipe and its former bounded timing contract; the later unlimited policy controls BAP qualification.
-- [Integration plan](../../../Plans/bap-integration.md) — separates completed migration from the pending projection-admission extension.
+- [Integration plan](../../../Plans/bap-integration.md) — separates earlier migration from the current v3 admission qualification.
 
 **What remains unresolved.** The isolated OCaml SDK and bounded Init/Visit transport now qualify the A0 foundation. Complete native recovery, dataflow, slicing, finite stateflow and generated replay are implemented; the [Stage 2 qualification](../bap-core-qualification.md) records passing aggregate acceptance and default adoption. The user has removed the active BAP latency ceiling; valid capture/correctness evidence and implementation gates remain required. Historical Priority 4, active re-pinned I4 and controlled I5a qualification retain their separate contracts.
 
@@ -68,6 +74,11 @@ receipt; explanation-only and assessment-only modes retain their existing
 schemas. A failed native session produces an error without automatic fallback.
 The [Stage 2 qualification](../bap-core-qualification.md) records default-adoption
 acceptance and exact tested workloads.
+The [later completion transport](../../../Plans/bap-completion-pages.md) uses
+bounded native action batches and final-result pages; per-action replay remains
+separate. Its [remote resume](../bap-admission-resume.md) records current checks
+and the selected Windows successor that closes active-corpus P4; the old
+Linux coverage/oracle remains historical and unexercised.
 `external_lift` denotes exercised external semantics, not ISA-step acceptance.
 Calls and returns stay opaque. Unsupported control, empty lifts and guarded/unmodeled semantics stop
 conservatively. Valid ordinary data-only gaps retain opaque continuation,
@@ -94,8 +105,8 @@ prefix guards do not imply universal ISA coverage. The native API source
 review is [here](../bap-projection-source-review.md). Production uses
 `bap-bit-provenance-v3` and typed capability admission. SUB64ri8, MOVZX32rm8,
 XOR64rr and CMP8mi pass focused checks. The [P0–P4 ledger](../../../Plans/bap-projection-admission.md)
-tracks implementation and remaining qualification separately; P4 has no passing
-aggregate for this changed source snapshot.
+tracks implementation and qualification separately; P4 passes remotely on the
+selected replacement corpus with exact source/tool/capture identities.
 
 ```sh
 cargo test --offline --locked --release --manifest-path Cargo.toml -- --include-ignored

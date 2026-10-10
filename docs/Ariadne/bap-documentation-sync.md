@@ -4,10 +4,12 @@
 
 **Status.** Historical source-first documentation audit on 2026-10-09, before
 the [v3 execution checkpoint](bap-admission-checkpoint.md). The inventory and
-current-implementation table below describe that earlier v2 snapshot. Current BAP
-ownership, CLI defaults, projection limits and retained qualification identities
-are checked separately. This change updates documentation and adds an audit
-receipt; it does not rerun native/model/mutation/workload qualification.
+implementation table below describe that earlier v2 snapshot. The
+[accepted v3 successor](real-capture-repin-79938.md) and
+[user decision](../../evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
+supply current qualification and exclude remaining historical real-Linux clauses.
+The original audit updated documentation and added a receipt; it did not rerun
+native/model/mutation/workload qualification.
 
 **Why this document exists.** The [integration ledger](../../Plans/bap-integration.md)
 records completed Stage 1/Stage 2, but several BAP and consumer documents still
@@ -15,8 +17,8 @@ described the older I4 timing gap, experimental provider selection or incomplete
 helper setup. Older standalone qualification files also differ from current
 sources despite a later matching refresh nested in the I4 performance record.
 
-**What this document establishes.** The current implemented boundary, corrected
-documentation, exact reusable evidence and pending projection work. The
+**What this document establishes.** The implemented boundary, corrected
+documentation, verified evidence and pending projection work at the audit date. The
 [audit receipt](../../evidence/Ariadne/bap-documentation-audit.json) inventories
 every repository Markdown file mentioning BAP, including historical/retired
 references, and records the source/tool/dependency/archive checks.
@@ -31,13 +33,16 @@ references, and records the source/tool/dependency/archive checks.
 - [Native qualification guide](bap-core-qualification.md) and
   [I4 performance successor](i4-performance-validation.md) — original adoption,
   later refresh and independently fixed product budgets.
-- [Projection admission plan](../../Plans/bap-projection-admission.md) — pending
-  P0–P4 implementation and qualification; broader lifting is not delivered here.
+- [Accepted projection admission plan](../../Plans/bap-projection-admission.md)
+  and [replacement qualification](real-capture-repin-79938.md) — later P0–P4
+  delivery and remote evidence; historical real-Linux remaining clauses are excluded.
 - [Assurance boundary](semantic-assurance.md) — trusted lifting, active analysis
   models and retired architectural instruction-step proofs.
 
 **What remains unresolved.** Generic BIL capability admission, the four observed
-parser forms and ordinary opaque continuation remain pending. Finite retained
+parser forms and ordinary opaque continuation were pending at this audit date;
+they are delivered in the accepted v3 successor. No required P4 work remains in
+that decision's scope. Finite retained
 qualification does not establish universal lifter correctness, analysis
 refinement, general latency, executed history, a crash root cause or a packaged
 cross-platform release. Later source/tool/dependency changes require a new
@@ -47,7 +52,12 @@ See the [documentation map](../documentation-map.md) for wider navigation.
 
 ## Current implementation
 
-| Boundary | Current owner and behavior | Source |
+This table records the implementation current on **2026-10-09**, before v3.
+Its v2 whitelist and stop policy are historical. For current behavior, read the
+[backend design](bap-semantic-backend-design.md) and
+[accepted replacement](real-capture-repin-79938.md).
+
+| Boundary | Owner and behavior at the audit date | Source |
 | --- | --- | --- |
 | Capture | Rust reader preserves snapshot identity, captured-only bytes, holes/conflicts, entry roots and separate seeds. Executables supply no fallback bytes. | [Input materializer](../../src/input/materialize.rs) |
 | Lifting | Pinned packaged BAP legacy x86 lifter in a C++ process; selected library/plugins and exact consumed bytes are validated. | [Lifter](../../native/bap/lift.cpp), [runtime configuration](../../src/bap/session.rs) |
@@ -58,16 +68,16 @@ See the [documentation map](../documentation-map.md) for wider navigation.
 | CLI and results | Native `bap` analysis is the default; `--analysis-backend rust` explicitly selects rollback while retaining BAP lifting. Rust validates native results and renders investigations through completed `AnalysisView` facts. Failed sessions have no automatic rollback. | [CLI](../../src/bin/ariadne-minidump.rs), [native facade](../../src/bap/core_adapter.rs) |
 | Independent paths | Rust fixed-input analysis and directly supplied LLVM IR retain their own contracts. Analysis-level TLA+, replay and mutations stay active; ISA/Lean instruction-step research is retired. | [Implementation guide](../implementation.md), [model guide](../../Specs/README.md), [assurance decision](semantic-assurance.md) |
 
-The implemented corpus remains 41 exact BIL cases and 30 admitted forms. These
-counts are finite exercised coverage; the Stage 1 checker still records them
-explicitly. SUB64ri8, MOVZX32rm8, XOR64rr and CMP8mi are outside the production
-whitelist. Nonempty BIL does not by itself admit them. The proposed v3 profile,
-capability admission and conservative ordinary continuation belong to the
-pending P0–P4 plan.
+The audited v2 corpus had 41 exact BIL cases and 30 admitted forms. These
+counts describe finite historical coverage. At that date SUB64ri8, MOVZX32rm8,
+XOR64rr and CMP8mi were outside the production whitelist. The later v3 profile
+admits all four under typed capability checks and adds conservative ordinary
+continuation. Its current finite corpus has 58 exact cases and 37 projected
+forms; acceptance comes from the later qualification, not this audit.
 
 ## Matching retained evidence
 
-The latest matching aggregate is the
+At the audit date, the latest matching aggregate was the
 [2026-10-07 I4 performance record](../../evidence/Ariadne/i4-performance-qualification.json),
 not the older standalone `bap-core-qualification.json`. Its nested record paths
 are:
@@ -82,7 +92,7 @@ are:
 Stage 1's own `stage2Qualified=false` field limits that producer campaign's
 scope. It does not override the separate native-core adoption decision.
 
-The audit compares complete inventories using the current qualification tools,
+The audit compared complete inventories using its then-current qualification tools,
 checks installed helper manifests and their OCaml source receipts, verifies
 every compiled Stage 1 runtime pin, and uses the selected read-only MirrorRust
 view. The I4 aggregate's 12 installed tool hashes match. Its dependency manifest
@@ -108,8 +118,8 @@ adoption record.
 
 ## Corrections and remaining work
 
-Current BAP guides, historical delivery follow-ups and consumer documentation
-now distinguish the passing I4 performance successor from the earlier
+At the audit date, BAP guides, historical delivery follow-ups and consumer documentation
+were updated to distinguish the passing I4 performance successor from the earlier
 over-budget re-pin. The exact controlled Windows I4 query records
 **1,692.696 ms** against its unchanged **2,000 ms** CLI limit; the Linux reference
 phase criterion records **182.924 ms** against **250 ms**. BAP's unlimited policy
@@ -124,10 +134,11 @@ the input library example explicitly selects Rust rather than implying that
 preparation alone chooses an analyzer. LLVM protocol documentation distinguishes
 the reused production reference session from the standalone one-shot adapter.
 
-The next BAP implementation work is [P0–P4](../../Plans/bap-projection-admission.md).
-The existing native migration is completed. New admitted forms, recovery policy
-or profile changes need independent expectations and fresh affected evidence;
-they receive no qualification credit from this documentation audit.
+At the audit date, the next BAP work was [P0–P4](../../Plans/bap-projection-admission.md).
+That extension and native migration are now accepted within their recorded scopes.
+Future admitted forms, recovery policies or profile changes still require
+independent expectations and fresh affected evidence; this historical audit
+supplies no qualification credit for them.
 
 ## Verification scope
 

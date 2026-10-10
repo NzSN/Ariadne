@@ -1,0 +1,60 @@
+{
+  "query": {
+    "entries": [
+      "0x00007ff7744033a0"
+    ],
+    "exception_rip_seed": false,
+    "seeds": [
+      "0x00007ff7744048a0"
+    ]
+  },
+  "identity": {
+    "artifact_sha256": "ed82b433501162828460ccbf067476e4683a52157372b27040f0269d2b3949c5",
+    "core_package_version": "0.1.0",
+    "decoder_build": "LLVM MC 20.1.2 (decode reference)",
+    "decoder_protocol": 2,
+    "decoder_target": "x86_64-pc-windows-msvc",
+    "effects_ruleset": "bap-bit-provenance-v3",
+    "input_package_version": "0.1.0",
+    "location_catalogue": "gpr-bytes-status-df-memory-other-v1",
+    "platform": "windows",
+    "query_id": "103fefe97a11f45a2719460f3f60c3d677412874bf4228e335105a2501f6fd56",
+    "snapshot_id": "minidump-captured-amd64-v1:ed82b433501162828460ccbf067476e4683a52157372b27040f0269d2b3949c5"
+  },
+  "analysisBackend": "rust",
+  "decoded": 9,
+  "edges": 9,
+  "slice": 0,
+  "missingSeeds": [
+    "0x00007ff7744048a0"
+  ],
+  "obligations": [
+    {
+      "reason": "decode_failed",
+      "va": "0x00007ff7744033b3"
+    }
+  ],
+  "rejection": [
+    {
+      "va": "0x00007ff7744033b3",
+      "opcode": "MOVAPSmr",
+      "semantic": {
+        "ast_sha256": "fe37ab3c15e9e498522eb0cf192ed93706ea1e2dcc7339a9305434adaa10757a",
+        "backend": "bap-x86-legacy",
+        "fallback": null,
+        "gaps": [
+          "unmodeled architectural namespace/type: YMM6"
+        ],
+        "helper_sha256": "80e32c1d21d447969beb99398008cf5a259e5cd10507524c8b2f639c5f0fe57c",
+        "memory_accesses": [],
+        "projection": "bap-bit-provenance-v3",
+        "runtime_sha256": "fb03843b065556c791e909b2cd7d1a8e2ef736ed461b6d8979da3f3fd5d6612a",
+        "status": "opaque-unsupported"
+      }
+    }
+  ],
+  "limit": {
+    "max_starts": 256
+  },
+  "fullExternalQualification": false
+}

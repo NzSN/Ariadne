@@ -68,6 +68,8 @@ def source_inventory():
         "evidence/Ariadne/i4-windows-capture-inspection.json",
         "evidence/Ariadne/bap-windows-workload-inputs.tar.gz",
     ))
+    import real_capture_workload
+    paths.update(real_capture_workload.source_paths())
     return {str(p.relative_to(ROOT)): sha(p) for p in sorted(paths)}
 
 

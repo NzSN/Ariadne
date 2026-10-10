@@ -89,7 +89,7 @@ fn one_query_publishes_consistent_text_dot_and_versioned_json_on_both_platforms(
         assert_eq!(json["preparation"]["sites"][2]["bytes_hex"], "c70005000000");
         assert_eq!(
             json["preparation"]["sites"][2]["rule"],
-            "bap-bit-provenance-v2"
+            "bap-bit-provenance-v3"
         );
         assert_eq!(
             json["preparation"]["sites"][3]["issues"],
@@ -114,7 +114,7 @@ fn one_query_publishes_consistent_text_dot_and_versioned_json_on_both_platforms(
             assert!(rendered.contains(seed));
             assert!(rendered.contains(artifact));
             assert!(rendered.contains("c70005000000"));
-            assert!(rendered.contains("bap-bit-provenance-v2"));
+            assert!(rendered.contains("bap-bit-provenance-v3"));
             assert!(rendered.contains("opaque_effects"));
         }
         assert!(text.contains("Reaching definitions (possible origins BEFORE each address)"));

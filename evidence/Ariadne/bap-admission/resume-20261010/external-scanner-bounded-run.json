@@ -1,0 +1,22 @@
+{
+  "command": [
+    "/home/nzsn/Repos/Ariadne/target/release/ariadne-minidump",
+    "/home/nzsn/Workspace/Electron_SRC/.analysis/dump_03958DA4FCA844A786262A1053/ariadne/exception-thread-projection.dmp",
+    "--decoder-reference",
+    "/home/nzsn/Repos/Ariadne/target/ariadne-llvm-mc",
+    "--analysis-backend",
+    "rust",
+    "--entry",
+    "0x7ff77443d960",
+    "--seed",
+    "0x7ff77443dd6e",
+    "--max-starts",
+    "256",
+    "--output-dir",
+    "/home/nzsn/Repos/Ariadne/target/bap-admission-resume-20261010/external-scanner-bounded"
+  ],
+  "exitCode": 1,
+  "seconds": 2.220508532001986,
+  "diagnosticOnly": true,
+  "fullExternalQualification": false
+}

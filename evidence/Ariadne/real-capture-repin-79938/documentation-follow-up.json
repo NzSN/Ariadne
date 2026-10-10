@@ -1,0 +1,39 @@
+{
+  "schema": "ariadne.qualification-documentation-followup/v1",
+  "recordedUtc": "2026-10-10T06:34:21.355740+00:00",
+  "qualificationRecordSha256": "9099bd1e33704c2ae61e43e1fa0914032c2a0e4fc52d5c475a05b3d6090ab420",
+  "documentationOnly": true,
+  "qualifiedCodeAndFixtureHashesVerified": true,
+  "matchedCodeAndFixtureFiles": 719,
+  "qualifiedInventoryDocumentationChanges": {
+    "docs/Ariadne/bap-analysis-core-design.md": {
+      "qualifiedSha256": "7c1e2eedf924e63e710fa37174baae833e696ebcacc4a5d7922fdb0892376ce2",
+      "currentSha256": "4bc3e58f9c2170a1d7b557f223ba611a2c6ac6f5bae5233a5e50d051ece19dc5"
+    }
+  },
+  "documentationHashes": {
+    "CHECKPOINTS.md": "25cb3d936fbc93c206e5c62335c29e4ba4ba0bca6055a4a71734bee162311ca0",
+    "Plans/README.md": "baa74a473967a1bc9f1abe22b0bb2ff226ce80cbc14da5b4f54bd1388e537628",
+    "Plans/bap-completion-pages.md": "7a4f46a49feca197798ae756ee80b8b19d4e73f1169f0c89f3c32b0d37520376",
+    "Plans/bap-projection-admission.md": "90a7f33bd7b02b1b18122e89251ba0b26b9bb7e17cc5d14f9c8713698bbe8678",
+    "Plans/real-capture-repin-79938.md": "b44a6f53f96025072397007318059e83476dc5653d4b3746a0dd44a1cdfd603d",
+    "ROADMAP.md": "8bf2f51fb6f7cb1f796f9888e58dc0dbedf6f9a202ea4e7bd4beba890fde5b3b",
+    "docs/Ariadne/README.md": "4cc5d230fb46b71f4d107b8583ad5bbce10bc8885baf6a234944038ebfc236f4",
+    "docs/Ariadne/bap-admission-checkpoint.md": "bf671f499ccf238e1739a884af79111821e11df8742166470e8c7048d3418d6f",
+    "docs/Ariadne/bap-admission-resume.md": "2b6c22b81377bfdb6b111a49f9a39a8bffb39a662d76c6fd8129e3cacd7f0b41",
+    "docs/Ariadne/bap-analysis-core-design.md": "4bc3e58f9c2170a1d7b557f223ba611a2c6ac6f5bae5233a5e50d051ece19dc5",
+    "docs/Ariadne/modules/bap.md": "e83952bc61a15bf7bd01e52629be77ccfe92ddb82d5ed8458df6788a53212034",
+    "docs/Ariadne/priority-1-real-capture-design.md": "a0a852f239528509f61b822b304352a3dfae5f8a52faa154767e14ee5feece14",
+    "docs/Ariadne/priority-1-real-capture-validation.md": "852b2516af03fc4d35257c0358254dee442e092904d51851f0432962bbd312b7",
+    "docs/Ariadne/real-capture-repin-79938.md": "ecb3552e107ede87f00db64c414838c94abb5c767a3acc0578b3891f32236dac",
+    "docs/documentation-map.md": "fbafff083babd5afa8fc9aba30d2c8adef0585bcc4ea1b6aa7334ad6aa7b20d0",
+    "evidence/Ariadne/README.md": "ef38916fcc9185f5208db3ed8b342b05fa2f116ebdaff13ab6dcd27545d8dffa",
+    "mbt/README.md": "74ac1ee3e6c4306e085b0b2d5d6cc7ace39611b0c3301aa5315d858ced1035bd",
+    "native/bap-core/README.md": "5e93c77c9c31867261c0dd0fcd7299d268da2209b541084c3286613af8479b9d"
+  },
+  "scope": "Runtime/model/mutation and capture receipts remain bound to the remote frozen source snapshot. Later status/navigation edits change documentation only; all qualified implementation and fixture hashes match. Local work was limited to bounded hashes, Python mock controls and documentation checks.",
+  "retrievedEvidenceFilesVerified": 14,
+  "localArchiveValidation": "Bounded streaming SHA-256 only; archive member verification ran remotely.",
+  "remoteVerifiedQualificationArchiveMembers": 3435,
+  "remoteVerifiedInvestigationArchiveMembers": 169
+}

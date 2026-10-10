@@ -1,0 +1,19 @@
+Investigation acceptance artifacts: /tmp/ariadne-investigation-acceptance-ckp40l9_
+qualification-regressions : PASS
+root-tests : PASS
+root-format : PASS
+root-clippy : PASS
+module-tests : PASS
+module-format : PASS
+module-clippy : PASS
+producer-addresses : PASS
+native-cli-questions : PASS
+input-format : PASS
+input-clippy : PASS
+report-tests : PASS
+report-format : PASS
+report-clippy : PASS
+mutation : PASS
+workload : PASS
+stage-e : PASS
+Report: /tmp/ariadne-investigation-acceptance-ckp40l9_/report.json

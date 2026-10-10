@@ -16,6 +16,9 @@ from investigation_windows_case import load_case, case_digest
 
 CASE = load_case()
 LINUX = json.loads((gate.ROOT / "evidence/Ariadne/priority-1-real-capture-case.json").read_text())
+ACTIVE_HISTORICAL = {"id": "historical-test-double", "capture": {**LINUX["capture"], "platform": "linux"},
+                     "query": LINUX["query"], "expectations": {"decodedStarts": 34, "phaseBudgetMs": 250}}
+
 
 
 def workload(median=1999):
@@ -177,7 +180,10 @@ class InvestigationBudgetTests(unittest.TestCase):
                     return subprocess.CompletedProcess(args, 0, header + body, "")
 
                 ticks = iter(n * median * 1_000_000 for n in range(120))
-                with patch.object(measurement, "sources", return_value={"source": "digest"}), \
+                with patch.object(measurement.real_case, "load_case", return_value=ACTIVE_HISTORICAL), \
+                     patch.object(measurement.real_case, "selected_dump", return_value=measurement.ROOT / "tmp/priority1/chromium-member-uaf.dmp"), \
+                     patch.object(measurement.real_case, "validate_report"), \
+                     patch.object(measurement, "sources", return_value={"source": "digest"}), \
                      patch.object(measurement, "materialize", return_value=dump), \
                      patch.object(measurement, "native_manifest", return_value={"schema": "test"}), \
                      patch.object(measurement, "validate_backend_receipt"), \

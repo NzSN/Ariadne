@@ -10,6 +10,16 @@
 
 **Where to go next.**
 
+- [P4 acceptance decision](bap-admission/p4-acceptance-20261010.json) — user
+  acceptance with remaining historical real-Linux clauses excluded; original
+  qualification flags and incomplete optional campaigns remain unchanged.
+- [Post-acceptance documentation refresh](bap-admission/p4-documentation-followup-20261010.json)
+  — updated guide hashes and verification that qualified implementation/fixture
+  identities still match; earlier decisions and evidence remain unchanged.
+- [Selected real-capture record](real-capture-repin-79938/report.json) and
+  [verified manifest](real-capture-repin-79938/evidence-manifest.json) — current
+  P4/I4 qualification under the user-selected Windows pin; its
+  [guide](../../docs/Ariadne/real-capture-repin-79938.md) preserves Linux limits.
 - [I5b qualification](i5b-qualification.json), [verified evidence manifest](i5b-evidence-manifest.json)
   and [controlled case pins](i5b-controlled-cases.json) — new source/fixture and
   real Windows machine-code debugging acceptance; see the

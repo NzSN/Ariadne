@@ -17,10 +17,14 @@
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
-Updated **2026-10-09**: the [BAP documentation audit](docs/Ariadne/bap-documentation-sync.md)
-synchronizes guides with the native-default implementation and latest retained
-refresh. The [projection-admission P0–P4 plan](Plans/bap-projection-admission.md)
-is written; all runtime and qualification stages remain pending.
+Updated **2026-10-10**: the [projection-admission plan](Plans/bap-projection-admission.md)
+has P0–P4 accepted on the qualified real Windows replacement. The
+[user decision](evidence/Ariadne/bap-admission/p4-acceptance-20261010.json) excludes
+the remaining historical real-Linux clauses; no required P4 work remains.
+Bounded native completion pages allow the Scanner query to complete. The
+[replacement record](docs/Ariadne/real-capture-repin-79938.md) binds the fresh
+corpus and fixed budgets; old Linux coverage and six historical hashes remain
+unexercised.
 
 The **2026-10-07** product checkpoint remains: I5c address wrap has a selected design and W0–W5 plan,
 with every implementation/qualification stage pending. The next executable
@@ -36,7 +40,68 @@ I4 is re-pinned and the native performance follow-up meets its fixed 2-second
 CLI limit at 1,692.696 ms for the exact controlled query. BAP lifting stays trusted
 and the independent ISA track retired.
 
-## 2026-10-10 — V3 admission implemented; P4 aggregate incomplete
+## 2026-10-10 — User accepts P4 with historical real-Linux clauses excluded
+
+The user accepted P4 after excluding the remaining absent controlled Linux
+capture, its six historical output comparisons and real-Linux capture/phase
+qualification. The [acceptance decision](evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
+binds the passing Windows replacement and retained external evidence, verified
+implementation/fixture hashes and the exact exclusions. Existing Linux fixture
+checks remain part of the passing finite corpus.
+
+No required P4 work remains in the accepted scope. Generic-runner ingestion of
+separate external evidence and old Scanner Rust timing repetitions are optional
+follow-ups. Historical failure/unexercised flags stay unchanged; acceptance adds
+no executed-history, actor, universal ISA/refinement or packaged-release claim.
+This records a user decision and documentation only; no new heavy campaign ran.
+
+## 2026-10-10 — Selected real Windows capture closes active P4 gates
+
+The [replacement](docs/Ariadne/real-capture-repin-79938.md) independently binds
+`dump_79938FAE443F4021A4F7B6C215`, its 516,256-byte capture-only derivative and
+matched PE/PDB entry. Default native and Rust reference recover 29 starts,
+31 edges and a 10-site slice containing the earlier R8 producer. The answer
+remains partial; no execution history or actor is established.
+
+All 20 native-core gates, Stage 1/Stage E/input/effects/models, 330 replay
+observations, 12 algorithm/eight boundary/25 admission mutations and product
+parity pass. All 17 investigation gates pass with source/tool-verified reuse.
+Eighteen frozen historical hashes reproduce and six distinct replacement outputs
+pass exact current native/reference/default comparison. The explanation-phase
+sum of medians is 2.870 ms against 250 ms; Windows-98 is
+475.664 ms against 2,000 ms and I5a
+fixture budgets pass. The [sealed record](evidence/Ariadne/real-capture-repin-79938/report.json)
+retains sources, tools and scope; heavy work ran remotely.
+
+The previous original-corpus acceptance remains false. The six old Linux hashes
+and real-Linux capture coverage remain unexercised. Retained Scanner/PreParser
+implementation/helper identities match; the interrupted Rust-repeat campaign
+receives no new completion credit.
+
+## 2026-10-10 — Remote completion transport and available P4 tiers pass
+
+The [remote evidence](evidence/Ariadne/bap-admission/remote-20261010/report.json)
+binds the restored SDK, clean helpers, current root/native/Stage E/minidump gates,
+25 admission mutations, 330 native observations, 12 algorithm and eight boundary
+mutations. Active input/effects models and eight-case BAP TLA replay pass.
+Paging retains the 8 MiB frame limit and retrieves one validated final result;
+large-result parity and twelve hostile page/lifecycle cases pass.
+
+The exact external derivative is independently regenerated remotely. Scanner
+completes with 768 starts, 895 edges and 19 slice sites; PreParser retains the
+SIMD stop and missing consumer. All four requested forms are projected. Two
+complete Rust-reference samples match native raw base-report hashes; remaining
+Rust repeats were stopped and receive no complete-repeat credit. No historical
+execution or bad-RSI producer is established.
+
+Owned native/reference and nine I5a fixture measurements pass. Quiet scoped
+Windows I4 is 480.236 ms against the unchanged 2,000 ms budget. Eighteen historical
+hashes reproduce; six, Linux I4 and full aggregate/product clauses require the
+absent controlled Linux capture. The [2,959-member archive](evidence/Ariadne/bap-admission/remote-20261010/evidence-manifest.json)
+is remotely verified. Heavy local work is stopped; the remote workspace remains
+available for resumption. Full P4 and full native-default qualification remain false.
+
+## 2026-10-10 — Initial v3 admission checkpoint; P4 aggregate incomplete
 
 Executed P0–P3 of the [projection-admission plan](Plans/bap-projection-admission.md):
 four-form projection, typed capability admission, no generic opcode whitelist,

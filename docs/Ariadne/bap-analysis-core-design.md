@@ -18,6 +18,9 @@ authoritative TLA+ machines. Contract validation does not prove a pass correct.
 
 **Where to go next.**
 
+- [P4 bounded completion transport plan](../../Plans/bap-completion-pages.md) —
+  adds action batches and paged final-result retrieval while retaining the
+  per-frame budget, complete observations and unchanged core transitions.
 - [Qualification guide](bap-core-qualification.md) — current aggregate decision and adoption evidence.
 
 - [Complete Stage 2 execution plan](../../Plans/bap-stage2-implementation.md) — implements and qualifies A1–A6 on the completed A0 foundation.
@@ -35,6 +38,14 @@ authoritative TLA+ machines. Contract validation does not prove a pass correct.
 aggregate record and its verified source/tool archive. BAP lifting remains trusted; finite
 model replay is not a universal refinement or ISA-step proof. Richer BIR
 transformations are separate future contracts.
+The recovered Scanner query exceeds the ordinary per-action 8 MiB response
+budget. The implemented [P4 transport extension](../../Plans/bap-completion-pages.md)
+completes it through bounded batches/pages without dropping definitions or raising
+that frame limit. The [selected real-capture replacement](real-capture-repin-79938.md)
+qualifies P4 source/fixture and native-default gates remotely. The
+[user decision](../../evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
+accepts that scope with remaining historical real-Linux clauses excluded; their
+coverage and six output hashes remain unexercised.
 
 For the wider context, see the [documentation map](../documentation-map.md).
 
@@ -137,8 +148,11 @@ leaves every state field, action index and generation unchanged.
 | `initialize` | Sequence zero only, admits one immutable family input and returns actual `Init` observation at action index zero. Reinitialization in an active process is rejected. |
 | `advance` | Payload selects exactly one named model action and its address when applicable. Check phase, guard and deterministic selected address before changing state. Exactly one successful action increments the action index. |
 | `observe` | Read-only serialization of current pass state; repeated reads are equal. It cannot advance, normalize away differences or consult expected/reference results. |
-| `finish` | Returns an owned result only from `done`; it does not secretly execute remaining actions. Drives-to-completion orchestration loops over `advance`. |
+| `finish` | Returns an owned result only from `done`; it does not secretly execute remaining actions. Per-action replay retains this operation. |
 | `reset` | Acknowledges shutdown and closes the helper process. A fresh process/session is required even for the same VA set; OCaml knowledge-base caches never cross snapshots. |
+| `run-batch` | Recovery completion only: runs at most 64 existing scheduled actions and reports progress; the one-million-action limit remains. |
+| `result-page` | Retrieves ordered hex pages of one immutable final envelope, at most 256 KiB decoded bytes each and 256 MiB total. No partial result is published. |
+| `result-close` | Requires complete transfer, acknowledges the bound result and exits cleanly. The client validates identities, counters, checksum, final state and exit before publication. |
 
 The runtime handshake must report helper/pass ABI, pinned SDK/compiler/library
 identities, supported family/profile, implemented operations and limits. Negotiated
@@ -239,6 +253,11 @@ checks the supplied address. `observe`, `finish` and `reset` are read-only;
 finish requires done and reset acknowledges before a clean process exit.
 The frame limit is 8 MiB; address, location and potential typed-edge sets are
 bounded at 65,536 entries. JSON nesting is bounded at 64 levels.
+Production recovery completion uses the batch/page extension above. Generated
+per-action replay and stateflow retain their original observation path. The
+transport checksum checks consistency; existing SHA-256 request/helper identities
+retain their trust roles. Overflow, malformed pages and failed exits poison the
+session without automatic Rust fallback.
 
 Instruction map rows contain `address` plus the instruction fields above.
 Provenance rows are `{address, source}`; reaching rows are

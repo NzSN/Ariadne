@@ -13,8 +13,8 @@ this review is supporting evidence, not a universal ISA proof.
 **Where to go next.**
 
 - [Historical delivery record](bap-only-removal-validation.md) — reports the original producer and adapter checks.
-- [Current backend](modules/bap.md) and [documentation audit](bap-documentation-sync.md) — current selection, finite admission and matching retained refresh.
-- [Projection-admission plan](../../Plans/bap-projection-admission.md) and [execution checkpoint](bap-admission-checkpoint.md) — delivered P0–P3 and remaining P4/external acceptance; this historical review does not qualify the changed source.
+- [Current backend](modules/bap.md) and [accepted replacement](real-capture-repin-79938.md) — current selection, finite admission and source-bound qualification.
+- [Accepted projection-admission plan](../../Plans/bap-projection-admission.md) and [initial checkpoint](bap-admission-checkpoint.md) — current P0–P4 decision and preserved earlier failures; this historical review does not itself qualify v3.
 - [Trust boundary](semantic-assurance.md) — explains which lifter and projection claims remain conditional.
 
 **What remains unresolved.** The review and corpus do not establish universal lifter correctness or all-opcode projection soundness. New forms require their own justified admission and negative controls.
@@ -68,13 +68,15 @@ the sampled modern configuration. The later
 [backend delivery](bap-only-removal-validation.md) selected legacy and implemented
 the getter/alias rules in [the helper](../../native/bap/lift.cpp) and
 [projection](../../src/bap/projection.rs). The
-[41-case corpus](../../tests/bap/fixtures/corpus.json) retains exact bytes, typed
-BIL and independent expectations, including negative controls. The
-[latest source-bound refresh](bap-documentation-sync.md) supplies acceptance
+[current regression corpus](../../tests/bap/fixtures/corpus.json) extends the
+original 41 cases to 58 exact cases and 37 projected forms, with independent
+expectations and negative controls. The
+[selected v3 qualification](real-capture-repin-79938.md) supplies evidence
 separately from this original review.
 
-Next work is the [P0–P4 admission extension](../../Plans/bap-projection-admission.md).
-The four observed forms, capability admission and ordinary opaque continuation
-are implemented with focused checks. The [checkpoint](bap-admission-checkpoint.md)
-retains incomplete aggregate/external acceptance. Preserve source/build/plugin/profile identities
-and independent positive/negative expectations for each newly admitted scope.
+The [P0–P4 admission extension](../../Plans/bap-projection-admission.md) is now
+accepted for the selected finite corpus, with remaining historical real-Linux
+clauses excluded. The four observed forms, capability admission and ordinary
+opaque continuation pass the later remote gates. Future admitted scope still
+requires source/build/plugin/profile identities and independent positive and
+negative expectations. The initial checkpoint retains its earlier failures.

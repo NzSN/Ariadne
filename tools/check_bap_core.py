@@ -13,6 +13,7 @@ import time
 import check_bap_semantics as stage1
 from check_bap_ocaml import tool_identities
 from with_mirrorrust_snapshot import active_identity
+import real_capture_workload as real_case
 
 ROOT=Path(__file__).resolve().parents[1]
 def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
@@ -23,6 +24,7 @@ def sources():
                and not set(p.parts)&{'target','.work','__pycache__','results','states','_apalache-out'})
  paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','docs/Ariadne/bap-analysis-core-design.md','Plans/bap-stage2-implementation.md'])
  paths.update(ROOT/p for p in ['evidence/Ariadne/investigation-windows-workload-case.json','evidence/Ariadne/i4-windows-capture-inspection.json','evidence/Ariadne/bap-windows-workload-inputs.tar.gz'])
+ paths.update(real_case.source_paths())
  return {str(p.relative_to(ROOT)):sha(p) for p in sorted(paths)}
 def tools_inventory():
  result=tool_identities()
@@ -44,7 +46,7 @@ def main():
       'ARIADNE_LLVM_IR':str(ROOT/'target/ariadne-llvm-ir'),'ARIADNE_BAP_HELPER':str(ROOT/'target/ariadne-bap-lift'),
       'BAP_RUNTIME_ROOT':str(ROOT/'tmp/bap-setup/stable'),'ARIADNE_REPLAY_BACKEND':'rust'}
  graph=ROOT/'tmp/graphviz-headers/root';env.update(ARIADNE_DOT=str(graph/'usr/bin/dot'),GVBINDIR=str(graph/'usr/lib/x86_64-linux-gnu/graphviz'),LD_LIBRARY_PATH=str(graph/'usr/lib/x86_64-linux-gnu'))
- env['ARIADNE_REAL_DUMPS']=str(ROOT.parent/'chromium/src/third_party/breakpad/breakpad/src/processor/testdata')
+ env.setdefault('ARIADNE_REAL_DUMPS',str(ROOT.parent/'chromium/src/third_party/breakpad/breakpad/src/processor/testdata'))
  env['LLVM20_INCLUDE_DIR']=str(ROOT/'tmp/llvm20-headers/root/usr/include/llvm-20')
  def run(name,command,extra=None,timeout=7200):
   print('Gate:',name,flush=True);start=time.monotonic()

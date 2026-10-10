@@ -165,7 +165,9 @@ failed attempts expose dispatch counts without claiming matched coverage.
 The 27 input-contract rejection cases and generated-request tests remain in the
 ordinary Rust test suite; this MBT corpus exercises the six specified fixtures.
 
-On 2026-09-19, [the complete gate passed](results/latest.json):
+The [retained handwritten baseline](results/handwritten-baseline.json) records
+the complete gate's historical results below. Fresh runs write ignored
+`results/latest.json`; the retained baseline supplies no current qualification:
 
 | Check | Result |
 | --- | --- |

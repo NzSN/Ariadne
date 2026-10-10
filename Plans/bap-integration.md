@@ -4,12 +4,15 @@
 
 **Status.** Stage 1 and Stage 2 are implemented and qualified on their recorded
 corpora. The 2026-10-03 unlimited-policy record passes 17 implementation gates
-and 60 controlled tests; the A0 foundation is completed. The latest retained
+and 60 controlled tests; the A0 foundation is completed. An earlier retained
 refresh is nested in the [2026-10-07 I4 performance record](../docs/Ariadne/i4-performance-validation.md):
 17 Stage 1 gates and 20 native-core gates pass, native analysis is the CLI
 default and explicit Rust rollback is verified. The
-[documentation audit](../docs/Ariadne/bap-documentation-sync.md) checks that
-refresh against current inventories; older standalone records remain historical.
+[historical documentation audit](../docs/Ariadne/bap-documentation-sync.md)
+checked that refresh against its v2 inventories. The
+[accepted v3 successor](../docs/Ariadne/real-capture-repin-79938.md) supplies the
+later remote qualification; the user excluded remaining historical real-Linux
+clauses. Older standalone records retain their original scope.
 
 **Why this document exists.** [BAP assessment](../docs/Ariadne/bap-core-refactor-assessment.md) motivates staged integration behind the existing Rust contract.
 
@@ -17,12 +20,13 @@ refresh against current inventories; older standalone records remain historical.
 
 **Where to go next.**
 
-- [BAP documentation audit](../docs/Ariadne/bap-documentation-sync.md) — checks current ownership/admission and the later nested Stage 1/Stage 2 evidence, while preserving historical records.
+- [Historical BAP documentation audit](../docs/Ariadne/bap-documentation-sync.md) — checks the earlier v2 ownership and nested Stage 1/Stage 2 evidence.
 
-- [Projection admission and coverage](bap-projection-admission.md) — pending
-  P0–P3 implementation for observed forms, BIL capability admission and
-  conservative continuation, with P4 aggregate/external acceptance incomplete; existing Stage 1/Stage 2 records remain historical
-  evidence for their own source and exercised corpus.
+- [Accepted projection admission and coverage](bap-projection-admission.md) —
+  delivered P0–P4, observed-form validation, BIL capability admission and
+  conservative continuation. The selected Windows corpus qualifies current
+  root/native/model/mutation, parity and fixed-budget gates; remaining historical
+  real-Linux clauses are excluded.
 
 - [Stage 2 qualification](../docs/Ariadne/bap-core-qualification.md) — records all 20 passing gates, native default adoption, Rust rollback and the exercised scope.
 - [Stage 2 execution plan](bap-stage2-implementation.md) and [contract](../docs/Ariadne/bap-analysis-core-design.md) — explain the delivered native algorithms and their acceptance criteria.
@@ -39,10 +43,11 @@ refresh against current inventories; older standalone records remain historical.
 - [Backend guide](../docs/Ariadne/modules/bap.md) — provides current build and qualification entry points.
 - [Controlled Windows demo](../docs/Ariadne/crashpad-demo-validation.md) — documents the separate two-instruction I5a/smoke capture.
 
-**What remains unresolved.** The projection admission/coverage extension
-is implemented through P3 and focused-tested; its [P4 checkpoint](../docs/Ariadne/bap-admission-checkpoint.md)
-has incomplete aggregate/external acceptance. This older integration ledger
-does not qualify the changed v3 source.
+**What remains unresolved.** No required P4 work remains in the
+[accepted scope](../evidence/Ariadne/bap-admission/p4-acceptance-20261010.json).
+Historical real-Linux clauses are excluded, not exercised. Generic-runner
+external-evidence ingestion and the old Scanner Rust timing repetitions remain
+optional follow-ups. Earlier integration records do not qualify v3 by themselves.
 The qualified native analysis does not establish universal refinement, ISA/lifter correctness or packaged cross-platform release qualification. Source/tool changes require fresh qualification. The active BAP policy has no latency ceiling, while historical Priority 4, active re-pinned I4 and controlled I5a retain their separate contracts. The [native I5a refresh](../docs/Ariadne/i5a-native-qualification.md) now independently qualifies both controlled captures under its fixed budgets and pinned dependency snapshot; that acceptance comes from its own records.
 
 For the wider context, see the optional [documentation map](../docs/documentation-map.md).
@@ -149,7 +154,7 @@ cannot reuse stale instruction semantics.
 | Scope | Current state | Remaining action |
 | --- | --- | --- |
 | S0–S3: selected runtime, lifting, projection and product integration | Implemented; BAP-only production preparation | Preserve current identities, explicit unsupported results and capture-only input. |
-| S4: BAP correctness qualification | Historical unlimited-policy aggregate passed 17/17 gates with 178 sources; latest nested refresh passes 17/17 with 255 sources | Use the [matching evidence inventory](../docs/Ariadne/bap-documentation-sync.md); preserve exact capture/source/tool binding. |
+| S4: BAP correctness qualification | Historical unlimited-policy and October 7 v2 refresh passed their 17/17 gates; current v3 P4 is accepted | Use the [selected qualification](../docs/Ariadne/real-capture-repin-79938.md); earlier inventories stay historical. Preserve exact source/tool/capture binding. |
 | S5: workload acceptance | Active capture is pinned; timing policy is unlimited | Retain valid finite raw measurements and all correctness/source/tool checks. |
 | A0: migration contract | Qualified: all OQ0–OQ6 gates pass | Retain the source-bound [OCaml qualification](../docs/Ariadne/bap-ocaml-qualification.md) as the completed foundation for the later A1–A6 result. |
 | A1–A6: BAP analysis core | Qualified: 20 aggregate gates pass, default native selection and Rust rollback verified | Follow the [complete execution plan](bap-stage2-implementation.md). |

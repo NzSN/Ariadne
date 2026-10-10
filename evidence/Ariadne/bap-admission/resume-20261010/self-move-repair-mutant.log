@@ -1,0 +1,24 @@
+
+running 1 test
+test partial_self_moves_define_written_cells_and_unsupported_bil_never_falls_back ... FAILED
+
+failures:
+
+---- partial_self_moves_define_written_cells_and_unsupported_bil_never_falls_back stdout ----
+
+thread 'partial_self_moves_define_written_cells_and_unsupported_bil_never_falls_back' (393) panicked at tests/bap/native.rs:447:9:
+assertion `left == right` failed
+  left: {}
+ right: {"gpr:rax:0"}
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    partial_self_moves_define_written_cells_and_unsupported_bil_never_falls_back
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.34s
+
+   Compiling ariadne-analysis v0.1.0 (/tmp/ariadne-bap-mutations-s2549rm9/sut)
+    Finished `release` profile [optimized] target(s) in 37.96s
+     Running tests/bap/native.rs (target/bap-mutations/ariadne-bap-mutations-s2549rm9/release/deps/bap_native-af8385ed4be0562d)
+error: test failed, to rerun pass `--test bap_native`

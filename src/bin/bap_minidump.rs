@@ -3,16 +3,30 @@ use ariadne::input::{
     AnalysisQuery, FileSnapshot, OpenLimits, PreparationError, PrepareLimits,
     report::{ReportFormat, render},
 };
-use ariadne::{Analyzer, effects::PreparationOptions};
-use std::{error::Error, path::Path, time::Instant};
+use ariadne::{Analyzer, CompletedAnalysis, effects::PreparationOptions};
+use std::{
+    error::Error,
+    path::{Path, PathBuf},
+    time::Instant,
+};
 fn va(s: &str) -> Result<u64, Box<dyn Error>> {
     Ok(u64::from_str_radix(s.trim_start_matches("0x"), 16)?)
 }
 fn main() -> Result<(), Box<dyn Error>> {
-    let args: Vec<String> = std::env::args().skip(1).collect();
+    let mut args: Vec<String> = std::env::args().skip(1).collect();
+    let analysis_backend = if args.len() >= 2 && args[args.len() - 2] == "--analysis-backend" {
+        let selected = args.pop().unwrap();
+        args.pop();
+        if !matches!(selected.as_str(), "rust" | "bap") {
+            return Err("analysis backend must be rust or bap".into());
+        }
+        selected
+    } else {
+        "rust".into()
+    };
     if args.len() != 5 && args.len() != 7 {
         return Err(
-            "usage: bap_minidump DUMP DECODER_REFERENCE ENTRY SEED RUNS [HELPER RUNTIME]".into(),
+            "usage: bap_minidump DUMP DECODER_REFERENCE ENTRY SEED RUNS [HELPER RUNTIME] [--analysis-backend rust|bap]".into(),
         );
     }
     let backend = "bap";
@@ -21,7 +35,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         return Err("RUNS must be positive".into());
     }
     println!(
-        "backend,artifact_sha256,run,open_ns,backend_setup_ns,prepare_ns,shutdown_ns,analysis_ns,render_ns,total_ns,runtime_validation_ns,reference_decode_ns,helper_startup_ns,lift_and_protocol_ns,projection_ns,decoded,edges,slice,obligations,output_bytes"
+        "backend,artifact_sha256,run,open_ns,backend_setup_ns,prepare_ns,shutdown_ns,analysis_ns,render_ns,total_ns,runtime_validation_ns,reference_decode_ns,helper_startup_ns,lift_and_protocol_ns,projection_ns,decoded,edges,slice,obligations,output_bytes,analysis_backend,analysis_helper_sha256,output_sha256"
     );
     for run in 0..runs {
         let start = Instant::now();
@@ -54,9 +68,30 @@ fn main() -> Result<(), Box<dyn Error>> {
         let metrics = provider.metrics();
         provider.finish()?;
         let shutdown_ns = start.elapsed().as_nanos() - open_ns - backend_setup_ns - prepare_ns;
-        let mut analyzer = Analyzer::new(prepared.prepared.request.clone())?;
-        while analyzer.step() {}
-        let result = analyzer.finish();
+        let (analyzer, analysis_helper_sha256) = if analysis_backend == "bap" {
+            let directory = std::env::var_os("ARIADNE_BAP_CORE_DIR")
+                .map(PathBuf::from)
+                .unwrap_or_else(|| {
+                    Path::new(env!("CARGO_MANIFEST_DIR")).join("target/bap-core-native")
+                });
+            let core = ariadne::bap::core_session::CoreConfig::from_directory(directory);
+            let native = ariadne::bap::core_adapter::NativeAnalyzer::from_capture(
+                &core,
+                "minidump-phase-benchmark",
+                &prepared,
+            )?;
+            let helper = native.identity()["build"]["helper_sha256"]
+                .as_str()
+                .ok_or("missing native helper identity")?
+                .to_owned();
+            (native.complete()?, helper)
+        } else {
+            (
+                CompletedAnalysis::from_analyzer(Analyzer::new(prepared.prepared.request.clone())?),
+                String::new(),
+            )
+        };
+        let result = analyzer.into_result();
         let analysis_ns =
             start.elapsed().as_nanos() - open_ns - backend_setup_ns - prepare_ns - shutdown_ns;
         let outputs = [ReportFormat::Text, ReportFormat::Dot, ReportFormat::Json]
@@ -68,7 +103,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         let render_ns =
             total_ns - open_ns - backend_setup_ns - prepare_ns - shutdown_ns - analysis_ns;
         println!(
-            "{backend},{},{run},{open_ns},{backend_setup_ns},{prepare_ns},{shutdown_ns},{analysis_ns},{render_ns},{total_ns},{},{},{},{},{},{},{},{},{},{output_bytes}",
+            "{backend},{},{run},{open_ns},{backend_setup_ns},{prepare_ns},{shutdown_ns},{analysis_ns},{render_ns},{total_ns},{},{},{},{},{},{},{},{},{},{output_bytes},{analysis_backend},{analysis_helper_sha256},{}",
             snapshot.metadata().artifact_sha256,
             metrics.runtime_validation.as_nanos(),
             metrics.reference_decode.as_nanos(),
@@ -78,7 +113,8 @@ fn main() -> Result<(), Box<dyn Error>> {
             result.state.decoded.len(),
             result.state.edges.len(),
             result.state.slice.len(),
-            result.state.obligations.len()
+            result.state.obligations.len(),
+            ariadne::reports::sha256(outputs.concat().as_bytes())
         );
         std::hint::black_box(outputs);
     }

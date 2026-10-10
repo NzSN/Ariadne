@@ -10,9 +10,11 @@
 
 **Where to go next.**
 
-- [BAP v3 execution checkpoint](bap-admission-checkpoint.md) — P0–P3 implementation and incomplete P4/external qualification.
+- [Accepted P4 real-capture replacement](real-capture-repin-79938.md) — current Windows corpus, distinct baseline, unchanged fixed budgets and excluded historical real-Linux clauses.
+- [BAP v3 resume record](bap-admission-resume.md) — recovered tools, preserved earlier failures and the selected successor.
+- [Historical BAP v3 execution checkpoint](bap-admission-checkpoint.md) — initial P0–P3 checks and failures before the accepted P4 successor.
 
-- [BAP documentation audit](bap-documentation-sync.md) — source-first synchronization, exact current evidence and pending admission coverage.
+- [Historical BAP documentation audit](bap-documentation-sync.md) — earlier v2 source/evidence synchronization and its current successors.
 
 - [Selected I5c address-wrap design](i5c-address-wrap-design.md) and
   [W0–W5 plan](../../Plans/i5c-address-wrap.md) — the next arithmetic question;
@@ -39,7 +41,7 @@ under `Plans/completed/`.
 | Topic | Current documentation |
 | --- | --- |
 | Minidump input and CLI | [Input guide](modules/input.md), [examples](minidump-investigator-examples.md), [report schema](stage-c-report-schema.md) |
-| BAP semantics and native analysis | [Backend guide](modules/bap.md), [projection design](bap-semantic-backend-design.md), [source review](bap-projection-source-review.md), [native qualification](bap-core-qualification.md), [current audit](bap-documentation-sync.md), [pending admission plan](../../Plans/bap-projection-admission.md) |
+| BAP semantics and native analysis | [Backend guide](modules/bap.md), [projection design](bap-semantic-backend-design.md), [source review](bap-projection-source-review.md), [native qualification](bap-core-qualification.md), [current audit](bap-documentation-sync.md), [admission delivery plan](../../Plans/bap-projection-admission.md) |
 | Fault-address investigation | [Module guide](modules/investigation.md), [producer contracts](investigation-contracts.md), [I5a zero-address contracts](i5a-contracts.md), [design](investigation-layer-design.md). |
 | Planned address-wrap assessment | [I5c design](i5c-address-wrap-design.md) and [W0–W5 plan](../../Plans/i5c-address-wrap.md); no implemented interface or acceptance yet. |
 | Zero-base-plus-displacement assessment | [I5b contracts](i5b-contracts.md), [source review](i5b-source-review.md), [validation](i5b-validation.md), [B0–B5 plan](../../Plans/i5b-zero-base-offset.md). |

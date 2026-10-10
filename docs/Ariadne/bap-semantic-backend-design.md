@@ -3,9 +3,12 @@
 ## Context and follow-up
 
 **Status.** V3 capability admission and conservative ordinary continuation are
-implemented. The [execution checkpoint](bap-admission-checkpoint.md) records
-focused P0–P3 passes and incomplete P4 acceptance; older v2 source-bound
-qualification does not qualify this changed snapshot. Native analysis remains
+implemented and P0–P4 are accepted on the selected finite corpus. The
+[replacement qualification](real-capture-repin-79938.md) and
+[acceptance decision](../../evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
+bind the remote gates and excluded historical real-Linux clauses. The
+[initial checkpoint](bap-admission-checkpoint.md) preserves earlier failures;
+older v2 qualification retains its original source scope. Native analysis remains
 the CLI default with explicit Rust rollback. BAP timing remains unlimited;
 investigation budgets retain their separate criteria.
 
@@ -15,11 +18,11 @@ investigation budgets retain their separate criteria.
 
 **Where to go next.**
 
-- [V3 admission contract](bap-admission-contract.md) — implemented capability/continuation rules; P4 qualification remains separate from the frozen P0 and focused P1–P3 checks.
+- [V3 admission contract](bap-admission-contract.md) — implemented capability/continuation rules and original independent expectations; current acceptance is bound to the later qualification.
 
 - [Projection admission and coverage plan](../../Plans/bap-projection-admission.md) —
-  records delivered P0–P3 and remaining mutation/aggregate/measurement/external
-  qualification clauses in P4.
+  records accepted P0–P4, remote qualification, excluded historical real-Linux
+  clauses and nonblocking follow-ups.
 
 
 - [Complete Stage 2 qualification](bap-core-qualification.md) — records native default adoption, explicit Rust rollback, exact source/tool scope and the passing aggregate.
@@ -36,10 +39,10 @@ investigation budgets retain their separate criteria.
 - [Backend delivery](bap-only-removal-validation.md) — records removal of semantic fallback and remaining Windows limits.
 - [Previous workload delivery](bap-windows-workload-validation.md) — retains the R0–R2 repair/refresh evidence and its original-capture limit.
 - [Replacement validation](bap-windows-repin-validation.md) — records the inspected capture, durable bundle and former latency condition.
-- [Integration plan](../../Plans/bap-integration.md) — records completed Stage 1/Stage 2 and the pending projection-admission follow-up.
+- [Integration plan](../../Plans/bap-integration.md) — records delivered Stage 1/Stage 2 and the accepted v3 admission successor.
 - [Current execution ledger](../../Plans/bap-integration.md#current-execution-ledger) — retains completed R0–R2 evidence and tracks replacement qualification before the separate Stage 2 migration.
 
-**What remains unresolved.** Native recovery, reaching definitions, slicing, finite stateflow and generated replay are implemented and [qualified on the exercised corpus](bap-core-qualification.md). The minidump CLI selects native BAP analysis by default with explicit Rust rollback. BAP lifting remains trusted; universal refinement and packaged cross-platform release qualification remain open. BAP timing is unlimited. The [active Windows I4 pin](i4-windows-repin-validation.md) meets its unchanged 2,000 ms CLI ceiling in the later [performance qualification](i4-performance-validation.md); [controlled Windows I5a](i5a-native-qualification.md) passes its separate fixed budgets. The [documentation audit](bap-documentation-sync.md) identifies the latest source-bound BAP refresh and the pending projection extension.
+**What remains unresolved.** Native recovery, reaching definitions, slicing, finite stateflow and generated replay are implemented and [qualified on the exercised corpus](bap-core-qualification.md). The minidump CLI selects native BAP analysis by default with explicit Rust rollback. BAP lifting remains trusted; universal refinement and packaged cross-platform release qualification remain open. BAP timing is unlimited. The [active Windows I4 pin](i4-windows-repin-validation.md) meets its unchanged 2,000 ms CLI ceiling in the later [performance qualification](i4-performance-validation.md); [controlled Windows I5a](i5a-native-qualification.md) passes its separate fixed budgets. The [selected replacement](real-capture-repin-79938.md) records current v3 qualification; the [documentation audit](bap-documentation-sync.md) preserves the earlier v2 inventory.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 
@@ -146,8 +149,10 @@ must-defs and `opaque-ordinary` / `unsupported-data-effects` diagnostics. Rust
 and native capture admission validate that outcome; all-format reports retain
 the gaps. No LLVM effect fallback is introduced. The
 [v3 contract](bap-admission-contract.md) freezes the failure matrix and profile
-migration. [P4 qualification remains incomplete](bap-admission-checkpoint.md);
-focused passes do not inherit the earlier aggregate's source identity.
+migration. [P4 is accepted on the selected corpus](real-capture-repin-79938.md)
+with source-bound root/native/model/mutation checks, exact parity and unchanged
+fixed budgets. Historical real-Linux clauses are excluded; older aggregate
+identities and failed flags are preserved.
 
 LLVM MC remains the decoded control/operand reference. Admission requires
 matching consumed bytes/length and compatible typed control facts. The

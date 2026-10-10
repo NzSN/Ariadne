@@ -1,0 +1,50 @@
+{
+  "schema": "ariadne.real-capture-workload-case/v1",
+  "id": "electron-translated-frame-79938-v1",
+  "captureKind": "production-windows-scoped-minidump",
+  "authorization": "User requested re-pin to dump_79938FAE443F4021A4F7B6C215 on 2026-10-10",
+  "sourceUrl": "https://192.168.150.219:4080/dumps/dump_79938FAE443F4021A4F7B6C215",
+  "historicalCase": "evidence/Ariadne/priority-1-real-capture-case.json",
+  "historicalCaseSha256": "e29c9c7b0534a0eab52082490525aa709033b61e15a0bc57341d555aae03cedd",
+  "original": {
+    "path": "/mnt/d/Services/dump-ledger-runtime/data/vault/dump_79938FAE443F4021A4F7B6C215/original.dmp",
+    "sha256": "342084c90b6e361ab94fb91a920f871581eba970810f99384d5dce00ee6d7353",
+    "bytes": 1690277882,
+    "platform": "windows",
+    "thread": "0x97f4"
+  },
+  "capture": {
+    "path": "tmp/real-capture/dump79938-scoped.dmp",
+    "sha256": "0333e29bfed1608ac877395d191642947aacc58dd81d0b786e0fd0df1a131f90",
+    "bytes": 516256,
+    "platform": "windows",
+    "architecture": "amd64"
+  },
+  "query": {
+    "entry_va": "0x00007ff63cba6c50",
+    "seed_va": "0x00007ff63cba6c94",
+    "producer_va": "0x00007ff63cba6c53",
+    "memory_access_index": 0,
+    "address_register": "r8"
+  },
+  "expectations": {
+    "decodedStarts": 29,
+    "edges": 31,
+    "producerBytesHex": "4c8b4108",
+    "faultBytesHex": "458a10",
+    "phaseBudgetMs": 250,
+    "scopeClosed": true
+  },
+  "independentInspection": {
+    "path": "evidence/Ariadne/real-capture-repin-79938/inspection.json",
+    "sha256": "cae6fff28c7d67141118091d482c108398c09f98ef70285216af29e6d1a0975e",
+    "entryWitnessPath": "evidence/Ariadne/real-capture-repin-79938/entry-witness.log",
+    "entryWitnessSha256": "9d3a3f3d6c4bdb0d30ffb6b916627acf0bd4ed36f7eea01945d73f248a29652c"
+  },
+  "limits": [
+    "Windows replacement does not establish real Linux capture coverage",
+    "Old Linux six-output oracle is historical and remains unexercised",
+    "Scoped derivative has its own snapshot identity",
+    "Possible producer is not an executed instruction or root cause"
+  ]
+}

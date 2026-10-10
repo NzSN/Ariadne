@@ -1,0 +1,72 @@
+{
+  "schema": "ariadne.bap-admission-profile-migration-partial/v1",
+  "sameToolFixtureComparisonsPassed": true,
+  "historicalOracleVerified": false,
+  "full24ReportAcceptance": false,
+  "records": [
+    {
+      "case": "linux",
+      "historicalHashesMatch": false,
+      "actualV2Hashes": {
+        "report.json": "374aae8beeac803b3981a5fc8f1e9a8bcfaf73039fe92c29651c1d72d6d93204",
+        "report.dot": "82eb1533fc879c3046dbc7c8a6b8c7ccb360d8adaf861b62b206bfbc10e82a6e",
+        "report.txt": "ff530c15813abeaf1c13baf812353403400fc32964642e117ab8ff9bc2c189d2",
+        "explanation.json": "af8428ac89afa2a9aa37734b7be8a2d9724594c614114f0dce6d90a2cf5e117f",
+        "explanation.txt": "1e08d38b27b65f4676be858b00cd7f1ae69c1d55a9d4a9324734c8bc3f6a5b2f",
+        "explanation.dot": "f90e6df66bb434117007e829fb3d94a80f9155ea6da0a6b616d29d070d5b61d7"
+      },
+      "profileMigrationVerified": true,
+      "reports": 6,
+      "allowedChanges": [
+        "projection labels",
+        "validated semantic-profile binding",
+        "resolved scope/evidence/fact/claim IDs"
+      ]
+    },
+    {
+      "case": "windows",
+      "historicalHashesMatch": false,
+      "actualV2Hashes": {
+        "report.json": "4490b02547b4543fa4b159db33bc4a567e6b4e5501231930a5cde9aa14297f33",
+        "report.dot": "450fa378c8db7c7d6a7dc5291c8d7df8c22bb459911c16c2689e6f6a5a447671",
+        "report.txt": "54c3efde917fcc770c9d83e851bad076e7e3b3b0fec09267b926bc3c2c7b6c64",
+        "explanation.json": "310086dabacef783d8620e76b2f51d3f588fb4fa38e19cd7784088f2f3fa0fe0",
+        "explanation.txt": "2ed07b5f800d1beddbef7cae4b8403011a32c922cb0995bc610463606a1bff08",
+        "explanation.dot": "01a09fb8b955380ddc548a455a0e3b041225381966c1c683ce3d7957a2010c30"
+      },
+      "profileMigrationVerified": true,
+      "reports": 6,
+      "allowedChanges": [
+        "projection labels",
+        "validated semantic-profile binding",
+        "resolved scope/evidence/fact/claim IDs"
+      ]
+    },
+    {
+      "case": "not",
+      "historicalHashesMatch": false,
+      "actualV2Hashes": {
+        "report.json": "ac464a68b2e58fef1cc4e112cf8e66ea60cd40d46938ff54f6ff6637acb96ed4",
+        "report.dot": "8a836b3dd0420aafbd3b8d1ef9f65d624af3f24dc43e61b354f25393e5125762",
+        "report.txt": "86a56e6376654dd68fb13aabe1fc78ef03c55645d766f29acc49b3279a442ae8",
+        "explanation.json": "13dc112fcd5fb64791834d6a4e572186a7f87bbb79dbac147e1e597d7aa5e863",
+        "explanation.txt": "a511bc2d4d62f04122095695c21d11197380e2c8a88858063315396b23cfa98c",
+        "explanation.dot": "37038a4fbf21d9d2e2fc4930d9e33dbfe6b5c49147b4fc96ca618c56b34d61ae"
+      },
+      "profileMigrationVerified": true,
+      "reports": 6,
+      "allowedChanges": [
+        "projection labels",
+        "validated semantic-profile binding",
+        "resolved scope/evidence/fact/claim IDs"
+      ]
+    }
+  ],
+  "missingCase": "real-linux: tmp/priority1/chromium-member-uaf.dmp is absent",
+  "analysisBackend": "rust",
+  "nativeReferenceParityExercised": false,
+  "baselineRevision": "ebb2e534e8da339f498f20d0a9e1e0b8506a3bdd",
+  "historicalHelperSha256": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+  "currentHelperSha256": "80e32c1d21d447969beb99398008cf5a259e5cd10507524c8b2f639c5f0fe57c",
+  "scope": "Only v2/v3 projection-profile migration under the same currently available helper; no historical-byte or native-default qualification."
+}

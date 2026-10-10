@@ -1,0 +1,24 @@
+
+running 1 test
+test unix::decode_length_control_and_operand_binding_disagreements_stop_without_fallback ... FAILED
+
+failures:
+
+---- unix::decode_length_control_and_operand_binding_disagreements_stop_without_fallback stdout ----
+
+thread 'unix::decode_length_control_and_operand_binding_disagreements_stop_without_fallback' (4652) panicked at tests/bap/disagreement.rs:99:13:
+assertion `left != right` failed: control
+  left: "projected"
+ right: "projected"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    unix::decode_length_control_and_operand_binding_disagreements_stop_without_fallback
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.34s
+
+   Compiling ariadne-analysis v0.1.0 (/tmp/ariadne-bap-mutations-s2549rm9/sut)
+    Finished `release` profile [optimized] target(s) in 33.38s
+     Running tests/bap/disagreement.rs (target/bap-mutations/ariadne-bap-mutations-s2549rm9/release/deps/bap_disagreement-0426d6b7cb330b70)
+error: test failed, to rerun pass `--test bap_disagreement`

@@ -88,7 +88,7 @@ fn real_windows_and_linux_crash_artifacts_preserve_bytes_and_report_semantic_gap
         assert!(p.prepared.request.decodable.contains(&rip));
         assert!(!p.prepared.gaps.iter().any(|gap| gap.address == rip));
         assert_eq!(p.materialization.entry_points, [rip].into());
-        let r = ariadne::analyze(p.prepared.request).unwrap();
+        let r = ariadne::analyze(p.prepared.request.clone()).unwrap();
         assert!(r.state.decoded.contains(&rip));
         assert_eq!(r.state.provenance[&rip], ByteSource::Captured);
         assert!(r.state.slice.contains(&rip));
@@ -96,8 +96,8 @@ fn real_windows_and_linux_crash_artifacts_preserve_bytes_and_report_semantic_gap
         assert!(!r.state.obligations.iter().any(|gap| gap.site == rip));
         // A normal-continuation effect says nothing about whether the crash-time
         // store retired. Reviewed POP control closes this Linux local graph,
-        // while POP/RET effects remain explicitly opaque. Windows still stops
-        // at an unreviewed XOR encoding after the seed.
+        // while RET effects remain explicitly opaque. V3 admits the captured
+        // Windows self-XOR and retains its undefined-AF diagnostic.
         if platform == Platform::Linux {
             assert_eq!(r.state.decoded, [rip, rip + 6, rip + 7].into());
             assert!(r.state.obligations.is_empty());
@@ -120,8 +120,42 @@ fn real_windows_and_linux_crash_artifacts_preserve_bytes_and_report_semantic_gap
                 );
             }
         } else {
-            assert!(r.state.obligations.iter().any(|gap| gap.site == rip + 18));
-            assert!(!r.scope_closed());
+            let xor = rip + 18;
+            let evidence = &p.prepared.instructions[&xor];
+            assert_eq!(evidence.bytes, [0x33, 0xc0]); // xor eax, eax
+            assert_eq!(evidence.opcode.as_deref(), Some("XOR32rr_REV"));
+            assert_eq!(evidence.quality, EffectQuality::ExternalLifted);
+            assert_eq!(evidence.rule.as_deref(), Some("bap-bit-provenance-v3"));
+            let semantic = evidence.semantic.as_ref().unwrap();
+            assert_eq!(semantic.status, "projected");
+            assert!(semantic.fallback.is_none());
+            assert!(
+                semantic
+                    .gaps
+                    .iter()
+                    .any(|gap| gap.contains("AF is undefined"))
+            );
+            // The self-XOR defines all eight RAX bytes, including the upper
+            // bytes zeroed by a 32-bit write; no prior RAX origin survives it.
+            let summary = &p.prepared.request.instructions[&xor];
+            assert_eq!(summary.fall, [xor + 2].into());
+            for loc in RegisterView::new(0, 0, 64).unwrap().reads() {
+                assert!(summary.must_defs.contains(&loc));
+                let definitions: Vec<_> = r.state.reaching[&(xor + 2)]
+                    .iter()
+                    .filter(|definition| definition.loc == loc)
+                    .collect();
+                assert_eq!(definitions.len(), 1);
+                assert_eq!(definitions[0].site, xor);
+            }
+            assert_eq!(
+                r.state.decoded,
+                [0, 8, 13, 18, 20, 28, 31, 36, 43]
+                    .map(|offset| rip + offset)
+                    .into()
+            );
+            assert!(r.state.obligations.is_empty());
+            assert!(r.scope_closed());
         }
     }
 }

@@ -1,0 +1,151 @@
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+Deferred                                       SRV*d:\symcache-dump79938-20261008*https://192.168.150.219:4080/symbols
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.000 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.203 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 46
+
+Microsoft (R) Windows Debugger Version 10.0.29617.1000 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+
+Loading Dump File [D:\Services\dump-ledger-runtime\data\vault\dump_79938FAE443F4021A4F7B6C215\original.dmp]
+User Mini Dump File with Full Memory : Only application data is available
+
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+Deferred                                       SRV*d:\symcache-dump79938-20261008*https://192.168.150.219:4080/symbols
+Symbol search path is: SRV*d:\symcache-dump79938-20261008*https://192.168.150.219:4080/symbols
+Executable search path is: 
+Windows 10 Version 26200 (9168) MP (32 procs) Free x64
+Product: WinNt
+Edition build lab: Windows NT 10.0.26200.9168
+Debug session time: Mon Sep  7 11:20:49.000 2026 (UTC + 8:00)
+System Uptime: 0 days 19:24:25.167
+Process Uptime: 0 days 0:04:16.000
+............................
+*** WARNING: Unable to verify checksum for ntdll.dll
+
+************* Symbol Loading Error Summary **************
+Module name            Error
+ntdll                  The system cannot find the file specified
+
+You can troubleshoot most symbol related issues by turning on symbol loading diagnostics (!sym noisy) and repeating the command that caused symbols to be loaded.
+You should also verify that your symbol search path (.sympath) is correct.
+This dump file has an exception of interest stored in it.
+The stored exception information can be accessed via .ecxr
+(a098.97f4): Access violation - code c0000005 (first/second chance not available)
+
++------------------------------------------------------------------------+
+| This target supports Hardware-enforced Stack Protection. A HW based    |
+| "Shadow Stack" may be available to assist in debugging and analysis.   |
+| See aka.ms/userhsp for more info.                                      |
+|                                                                        |
+| dps @ssp                                                               |
+|                                                                        |
++------------------------------------------------------------------------+
+
+For analysis of this file, run !analyze -v
+ntdll+0x160a04:
+00007ffa`2ee20a04 c3              ret
+0:000> cdb: Reading initial command '!lmi lceda_pro; .ecxr; r; x lceda_pro!*TranslatedFrame*AdvanceIterator*; u 00007ff63cba6c50 00007ff63cba6cae; .fnent 00007ff63cba6c50; q'
+Loaded Module Info: [lceda_pro] 
+         Module: lceda-pro
+   Base Address: 00007ff63bae0000
+     Image Name: lceda-pro.exe
+   Machine Type: 34404 (X64)
+     Time Stamp: 6a87c949 Fri Aug 21 11:43:05 2026
+           Size: d708000
+       CheckSum: 0
+Characteristics: 22  
+Debug Data Dirs: Type  Size     VA  Pointer
+             CODEVIEW    29, ccb007c, ccaec7c RSDS - GUID: {A7877FFB-94F2-DB3E-4C4C-44205044422E}
+               Age: 1, Pdb: electron.exe.pdb
+    Symbol Type: DEFERRED - No error - symbol load deferred
+    Load Report: no symbols loaded
+*** WARNING: Unable to verify checksum for lceda-pro.exe
+rax=0000000000000001 rbx=0000757c0018e718 rcx=00000064ce9fd188
+rdx=0000000000000000 rsi=00000064ce9fd188 rdi=00000064ce9fd3e8
+rip=00007ff63cba6c94 rsp=00000064ce9fd0b8 rbp=0000757c14ec0320
+ r8=0000000000000001  r9=0000757c1fc35920 r10=0000000000000000
+r11=0000000000000000 r12=0000757c0018e6b0 r13=a0a0a0a0a0a0a0a1
+r14=000000000e1fa200 r15=0000757c0018e6a8
+iopl=0         nv up ei pl nz na po nc
+cs=0033  ss=0000  ds=0000  es=0000  fs=0053  gs=002b             efl=00010202
+lceda_pro!v8::internal::TranslatedValue::kind [inlined in lceda_pro!v8::internal::TranslatedFrame::AdvanceIterator+0x44]:
+00007ff6`3cba6c94 458a10          mov     r10b,byte ptr [r8] ds:00000000`00000001=??
+Last set context:
+rax=0000000000000001 rbx=0000757c0018e718 rcx=00000064ce9fd188
+rdx=0000000000000000 rsi=00000064ce9fd188 rdi=00000064ce9fd3e8
+rip=00007ff63cba6c94 rsp=00000064ce9fd0b8 rbp=0000757c14ec0320
+ r8=0000000000000001  r9=0000757c1fc35920 r10=0000000000000000
+r11=0000000000000000 r12=0000757c0018e6b0 r13=a0a0a0a0a0a0a0a1
+r14=000000000e1fa200 r15=0000757c0018e6a8
+iopl=0         nv up ei pl nz na po nc
+cs=0033  ss=0000  ds=0000  es=0000  fs=0053  gs=002b             efl=00010202
+lceda_pro!v8::internal::TranslatedValue::kind [inlined in lceda_pro!v8::internal::TranslatedFrame::AdvanceIterator+0x44]:
+00007ff6`3cba6c94 458a10          mov     r10b,byte ptr [r8] ds:00000000`00000001=??
+00007ff6`3cba6c50 lceda_pro!v8::internal::TranslatedFrame::AdvanceIterator (class std::__Cr::__deque_iterator<v8::internal::TranslatedValue,v8::internal::TranslatedValue *,v8::internal::TranslatedValue &,v8::internal::TranslatedValue **,long long,102> *)
+lceda_pro!v8::internal::TranslatedFrame::AdvanceIterator:
+00007ff6`3cba6c50 488b11          mov     rdx,qword ptr [rcx]
+00007ff6`3cba6c53 4c8b4108        mov     r8,qword ptr [rcx+8]
+00007ff6`3cba6c57 b801000000      mov     eax,1
+00007ff6`3cba6c5c eb36            jmp     lceda_pro!v8::internal::TranslatedFrame::AdvanceIterator+0x44 (00007ff6`3cba6c94)
+00007ff6`3cba6c5e 458b481c        mov     r9d,dword ptr [r8+1Ch]
+00007ff6`3cba6c62 4983c028        add     r8,28h
+00007ff6`3cba6c66 4c894108        mov     qword ptr [rcx+8],r8
+00007ff6`3cba6c6a 4d89c2          mov     r10,r8
+00007ff6`3cba6c6d 4c2b12          sub     r10,qword ptr [rdx]
+00007ff6`3cba6c70 4981faf00f0000  cmp     r10,0FF0h
+00007ff6`3cba6c77 7512            jne     lceda_pro!v8::internal::TranslatedFrame::AdvanceIterator+0x3b (00007ff6`3cba6c8b)
+00007ff6`3cba6c79 4c8d5208        lea     r10,[rdx+8]
+00007ff6`3cba6c7d 4c8911          mov     qword ptr [rcx],r10
+00007ff6`3cba6c80 4c8b4208        mov     r8,qword ptr [rdx+8]
+00007ff6`3cba6c84 4c894108        mov     qword ptr [rcx+8],r8
+00007ff6`3cba6c88 4c89d2          mov     rdx,r10
+00007ff6`3cba6c8b ffc8            dec     eax
+00007ff6`3cba6c8d 4401c8          add     eax,r9d
+00007ff6`3cba6c90 85c0            test    eax,eax
+00007ff6`3cba6c92 7e19            jle     lceda_pro!v8::internal::TranslatedFrame::AdvanceIterator+0x5d (00007ff6`3cba6cad)
+00007ff6`3cba6c94 458a10          mov     r10b,byte ptr [r8]
+00007ff6`3cba6c97 4180fa0d        cmp     r10b,0Dh
+00007ff6`3cba6c9b 74c1            je      lceda_pro!v8::internal::TranslatedFrame::AdvanceIterator+0xe (00007ff6`3cba6c5e)
+00007ff6`3cba6c9d 4531c9          xor     r9d,r9d
+00007ff6`3cba6ca0 4180fa0f        cmp     r10b,0Fh
+00007ff6`3cba6ca4 410f94c1        sete    r9b
+00007ff6`3cba6ca8 4501c9          add     r9d,r9d
+00007ff6`3cba6cab ebb5            jmp     lceda_pro!v8::internal::TranslatedFrame::AdvanceIterator+0x12 (00007ff6`3cba6c62)
+00007ff6`3cba6cad c3              ret
+00007ff6`3cba6cae cc              int     3
+No function entry for 00007ff6`3cba6c50
+quit:
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2606.22001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2606.22001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2606.22001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2606.22001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2606.22001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2606.22001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2606.22001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2606.22001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2606.22001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2606.22001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2606.22001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\winrt.natvis'

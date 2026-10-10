@@ -9,6 +9,7 @@ import statistics
 import subprocess
 import time
 from measure_bap import materialize_windows_capture, WINDOWS_CASE_PATH
+import real_capture_workload as real_case
 
 ROOT=Path(__file__).resolve().parents[1]
 def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
@@ -24,13 +25,13 @@ def main():
  parser.add_argument('--helper-dir',type=Path,default=ROOT/'target/bap-core-stage2');parser.add_argument('--expect-default',action='store_true')
  args=parser.parse_args();work=args.output.resolve();work.mkdir(parents=True,exist_ok=True)
  pin=read(WINDOWS_CASE_PATH.read_text());windows=materialize_windows_capture(pin,work)
+ real_pin=real_case.load_case()
  cases=[('linux',ROOT/'tests/input/fixtures/stage_b_linux.dmp','0x401000','0x401006',4),
  ('windows',ROOT/'tests/input/fixtures/stage_b_windows.dmp','0x7ff700001000','0x7ff700001006',4),
  ('not',ROOT/'tests/input/fixtures/bap_precision_linux.dmp','0x401000','0x401006',4),
- ('real-linux',ROOT/'tmp/priority1/chromium-member-uaf.dmp','0x566817922dc5','0x566817922e42',34),
+ ('real-capture',real_case.selected_dump(real_pin),real_pin['query']['entry_va'],real_pin['query']['seed_va'],real_pin['expectations']['decodedStarts']),
  ('windows98',windows,pin['query']['entry_va'],pin['query']['seed_va'],98)]
- linux_pin=read((ROOT/'evidence/Ariadne/priority-1-real-capture-case.json').read_text())
- assert sha(cases[3][1])==linux_pin['capture']['sha256']
+ assert sha(cases[3][1])==real_pin['capture']['sha256']
  assert sha(windows)==pin['capture']['sha256']
  executable=ROOT/'target/release/ariadne-minidump';manifest=read((args.helper_dir/'manifest.json').read_text())
  env={**os.environ,'ARIADNE_BAP_CORE_DIR':str(args.helper_dir.resolve())}
@@ -57,6 +58,7 @@ def main():
     assert read(next(line[10:] for line in text.splitlines() if line.startswith('identity: ')))==identity
     assert read(next(line[13:] for line in dot.splitlines() if line.startswith('// identity: ')))==identity
     assert 'digraph' in dot
+    if name=='real-capture':real_case.validate_report(report,real_pin)
     if backend=='bap':
      receipt=report.pop('analysis_backend');assert receipt['schema']=='ariadne.analysis-backend/v1' and receipt['backend']=='bap'
      assert receipt['profile']=='captured-fixed-input/v1' and receipt['build']==manifest and receipt['snapshot']==identity['snapshot_id']
@@ -83,6 +85,6 @@ def main():
    r=subprocess.run([str(x) for x in command],cwd=ROOT,env=env,capture_output=True,timeout=600)
    assert r.returncode==0,r.stderr
    assert all((out/f).read_bytes()==(native_outputs/f).read_bytes() for f in ['report.json','report.txt','report.dot'])
- record={'schema':'ariadne.bap-core-product/v1','passed':True,'timingPolicy':'unlimited','samples':rows,'defaultNativeVerified':args.expect_default,'executableSha256':sha(executable),'helperManifest':manifest,'windowsPinSha256':sha(WINDOWS_CASE_PATH),'scope':'five captured release workloads; one warm-up and five measured samples per backend; complete report equality after verified backend receipt removal'}
+ record={'activeRealCaptureCase':real_pin,'realLinuxCaptureExercised':real_pin['capture']['platform']=='linux','historicalLinuxCaptureExercised':False,'schema':'ariadne.bap-core-product/v1','passed':True,'timingPolicy':'unlimited','samples':rows,'defaultNativeVerified':args.expect_default,'executableSha256':sha(executable),'helperManifest':manifest,'windowsPinSha256':sha(WINDOWS_CASE_PATH),'scope':'five captured release workloads; one warm-up and five measured samples per backend; complete report equality after verified backend receipt removal'}
  (work/'result.json').write_text(json.dumps(record,indent=2)+'\n')
 if __name__=='__main__':main()

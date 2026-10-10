@@ -10,7 +10,12 @@
 
 **Where to go next.**
 
-- [BAP documentation audit](docs/Ariadne/bap-documentation-sync.md) — current native/lifting ownership, verified evidence and pending projection-admission work.
+- [Accepted BAP v3 admission plan](Plans/bap-projection-admission.md) and
+  [selected capture qualification](docs/Ariadne/real-capture-repin-79938.md) —
+  completed P0–P4, native parity, fixed budgets and the explicit exclusion of
+  remaining historical real-Linux clauses.
+- [Historical BAP documentation audit](docs/Ariadne/bap-documentation-sync.md) —
+  earlier v2 ownership/evidence inventory and links to its v3 successor.
 
 - [I5c address-wrap design](docs/Ariadne/i5c-address-wrap-design.md) and
   [implementation plan](Plans/i5c-address-wrap.md) — selected next fault-time
@@ -40,7 +45,11 @@ backend. It projects a finite typed-BIL subset into byte-register, flag and
 weak-memory effects. LLVM MC 20 remains an independent decode/control reference;
 its semantic selector and automatic effect fallback have been removed.
 The [Stage 1 removal plan](Plans/completed/bap-only-semantics.md) records the requested
-default change. Unsupported BIL retains explicit opaque/control gaps.
+default change. V3 capability admission replaces generic opcode-name membership.
+Validated ordinary instructions with unknown data effects retain conservative
+continuation and visible gaps; unsupported control or architectural state stops
+explicitly. The [accepted P0–P4 plan](Plans/bap-projection-admission.md) binds the
+current finite qualification and its excluded historical real-Linux clauses.
 Historical [LLVM effect-rule research](docs/Ariadne/operand-effects-rules.md)
 and its formal tests remain reference evidence, distinct from production BAP.
 Neither backend establishes architectural instruction-step acceptance or a
@@ -65,9 +74,13 @@ AMD64 captures and discovers local instruction starts. A pinned tool-produced
 address-producer slice, and its [investigator CLI](docs/Ariadne/stage-c-report-schema.md)
 publishes evidence-linked text, DOT and JSON v1. PE/ELF image and ELF core
 readers remain deferred under the current input scope.
-A separate [controlled Chromium real-capture case](docs/Ariadne/priority-1-real-capture-validation.md)
-now reaches a faulting memory read from an independently established captured
-entry and retains a possible address producer with explicit opaque-call gaps.
+The [selected Windows real-capture case](docs/Ariadne/real-capture-repin-79938.md)
+recovers 29 starts, 31 edges and a 10-site slice from an independently matched
+function entry. It retains the earlier R8 load as a possible fault-address
+producer with explicit memory/entry uncertainty. The older
+[controlled Chromium/Linux case](docs/Ariadne/priority-1-real-capture-validation.md)
+remains historical; its absent capture and six output comparisons are excluded
+from accepted P4. Neither case establishes executed history or a root cause.
 The CLI text report now has a [scan-friendly instruction overview and
 Linux/Windows examples](docs/Ariadne/priority-3-presentation-validation.md);
 JSON v1 and DOT graph semantics remain unchanged. The [historical Priority 4 measurement](docs/Ariadne/priority-4-performance-validation.md)

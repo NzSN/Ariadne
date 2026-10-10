@@ -2,9 +2,12 @@
 
 ## Context and follow-up
 
-**Status.** Current plan navigation as of 2026-10-09. The BAP projection
-admission/coverage P0–P3 implementation passes focused checks; P4 aggregate
-and external-capture qualification remain incomplete. I5c fault-time address wrap
+**Status.** Current plan navigation as of 2026-10-10. BAP projection admission
+P0–P4 and completion transport are accepted on the selected Windows replacement.
+The [acceptance decision](../evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
+excludes the remaining historical real-Linux clauses; their evidence stays
+unexercised. Exact external queries are preserved.
+I5c fault-time address wrap
 has a selected design and W0–W5 plan; implementation and qualification remain
 pending. I5b has a selected design
 and detailed B0–B5 implementation plan; all stages are implemented and qualified
@@ -22,11 +25,13 @@ keeping a plan outside `completed/` does not make its completed steps pending.
 
 **Where to go next.**
 
-- [BAP documentation audit](../docs/Ariadne/bap-documentation-sync.md) — matches BAP ledgers and pending stages to current source and retained evidence.
+- [Historical BAP documentation audit](../docs/Ariadne/bap-documentation-sync.md) — preserves the earlier v2 inventory and links to accepted v3 delivery.
 
 - [BAP projection admission and coverage](bap-projection-admission.md) —
-  remove opcode-name restrictions through validated BIL capabilities, beginning
-  with four observed parser forms; keep unknown effects and control explicit.
+  accepted P0–P4 replaces opcode-name restrictions with validated BIL capabilities
+  and preserves explicit unknown effects/control under the selected corpus.
+- [Completed P4 real-capture re-pin](real-capture-repin-79938.md) — selected
+  Windows replacement, its distinct baseline and preserved historical Linux scope.
 
 - [I5c address-wrap plan](i5c-address-wrap.md) and
   [design](../docs/Ariadne/i5c-address-wrap-design.md) — the selected next
@@ -46,8 +51,10 @@ keeping a plan outside `completed/` does not make its completed steps pending.
 - [Evidence guide](../evidence/Ariadne/README.md) — distinguishes retained results,
   failed progress records and fresh qualification after changes.
 
-**What remains unresolved.** V3 admission/continuation is implemented, but P4
-acceptance is incomplete and does not inherit old BAP qualification. I4 acceptance
+**What remains unresolved.** V3 admission/continuation and active-corpus P4
+are accepted on their qualified source/tool/capture identities. No required P4
+work remains. The historical real-Linux oracle and coverage remain unexercised
+and excluded from P4 acceptance. I4 acceptance
 passes for its recorded source/tool/dependency identities and exact 98-start case; future changes require renewed
 qualification. I5c implementation/qualification, other I5 hypotheses, Linux
 numeric admission, I6/I7, PE/ELF image and ELF-core inputs, universal refinement
@@ -60,7 +67,7 @@ For the wider context, see the [documentation map](../docs/documentation-map.md)
 
 | Plan | Current state and next work |
 | --- | --- |
-| [BAP projection admission](bap-projection-admission.md) | P0–P3 implemented and focused-tested: four-form validation, capability admission and conservative ordinary continuation. P4 aggregate/mutation/measurement/external acceptance is incomplete; see the [checkpoint](../docs/Ariadne/bap-admission-checkpoint.md). |
+| [BAP projection admission](bap-projection-admission.md) | P0–P4 accepted on the active real Windows replacement; remaining historical real-Linux clauses excluded: capability admission, conservative continuation, bounded completion, fresh root/native/model/mutation, parity and fixed-budget checks. See the [replacement record](../docs/Ariadne/real-capture-repin-79938.md); six historical Linux outputs remain unexercised. |
 | [Investigation layer](investigation-layer.md) | I0–I3 and active Windows producer correctness pass. I4 meets its fixed budgets in the [native performance result](../docs/Ariadne/i4-performance-validation.md); I5a is qualified, I5b is corpus-qualified, and other I5/I6/I7 remain later work. |
 | [I5c address wrap](i5c-address-wrap.md) | Selected design and W0–W5 plan written; all implementation/qualification pending. Upper-wrap/no-wrap assessment uses the inherited lower-range profile; underflow remains unknown. |
 | [I5b zero base plus displacement](i5b-zero-base-offset.md) | B0–B5 implemented and corpus-qualified: 18 passing gates, 15 detected mutants, stable source/tool identities and six controlled Windows captures. |

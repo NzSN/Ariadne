@@ -421,16 +421,12 @@ impl NativeAnalyzer {
         Ok(CompletedAnalysis::from_native(request, result))
     }
     pub fn finish(mut self) -> Result<AnalysisResult, Error> {
-        while self.step()? {}
-        let response = self.session.request("finish", json!({}))?;
+        let response = self.session.finish_paged()?;
         if let Some(error) = response.error {
             return Err(invalid(error.message));
         }
         let state = decode_state(&self.request, &response.observation)?;
         validate_attribution(&self.request, &state, &response.attribution, &self.evidence)?;
-        if state != self.state {
-            return Err(invalid("native finish mutated state"));
-        }
         let result = response
             .result
             .ok_or_else(|| invalid("missing native completed result"))?;
@@ -450,7 +446,7 @@ impl NativeAnalyzer {
         {
             return Err(invalid("native missing seed binding"));
         }
-        self.session.request("reset", json!({}))?;
+        self.closed = true;
         Ok(AnalysisResult {
             snapshot_id: self.request.snapshot_id,
             state,

@@ -1,0 +1,30 @@
+{
+  "command": [
+    "/home/nzsn/Repos/Ariadne/target/release/ariadne-minidump",
+    "/home/nzsn/Workspace/Electron_SRC/.analysis/dump_03958DA4FCA844A786262A1053/ariadne/exception-thread-projection.dmp",
+    "--decoder-reference",
+    "/home/nzsn/Repos/Ariadne/target/ariadne-llvm-mc",
+    "--bap-helper",
+    "/home/nzsn/Repos/Ariadne/target/ariadne-bap-lift",
+    "--bap-runtime",
+    "/home/nzsn/Repos/Ariadne/tmp/bap-setup/stable",
+    "--analysis-backend",
+    "rust",
+    "--entry",
+    "0x7ff77443d960",
+    "--seed",
+    "0x7ff77443dd6e",
+    "--explain-fault-address",
+    "0x7ff77443dd6e",
+    "--memory-access",
+    "0",
+    "--output-dir",
+    "/home/nzsn/Repos/Ariadne/target/bap-admission-resume-20261010/external-scanner"
+  ],
+  "exitCode": -1,
+  "seconds": 300.12278405501274,
+  "analysisBackend": "rust",
+  "releaseExecutableSha256": "94616fec41fd321dc09e17a6a3ef7809bdcce5d2ece0f6b18ba4c29338024a59",
+  "captureVerificationSha256": "1f4e9c120edcaca39b66b5f0a7d6803cf768e31ed4a824270fe820ba759e806b",
+  "timingScope": "diagnostic run concurrent with compilation, no fixed-budget credit"
+}

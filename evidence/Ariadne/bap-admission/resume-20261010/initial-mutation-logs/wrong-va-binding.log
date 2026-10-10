@@ -1,0 +1,22 @@
+
+running 1 test
+test bap::session::tests::malformed_batches_bind_every_site_and_poison_failed_sessions ... FAILED
+
+failures:
+
+---- bap::session::tests::malformed_batches_bind_every_site_and_poison_failed_sessions stdout ----
+
+thread 'bap::session::tests::malformed_batches_bind_every_site_and_poison_failed_sessions' (4109) panicked at src/bap/session.rs:457:17:
+va: invalid batch was accepted
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    bap::session::tests::malformed_batches_bind_every_site_and_poison_failed_sessions
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 12 filtered out; finished in 0.42s
+
+   Compiling ariadne-analysis v0.1.0 (/tmp/ariadne-bap-mutations-s2549rm9/sut)
+    Finished `release` profile [optimized] target(s) in 12.37s
+     Running unittests src/lib.rs (target/bap-mutations/ariadne-bap-mutations-s2549rm9/release/deps/ariadne-afb8e1db3661b3e0)
+error: test failed, to rerun pass `--lib`

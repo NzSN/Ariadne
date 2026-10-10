@@ -10,7 +10,7 @@
 
 **Where to go next.**
 
-- [BAP documentation audit](docs/Ariadne/bap-documentation-sync.md) — checks implemented BAP scope and the matching retained qualification.
+- [Accepted P4 qualification](docs/Ariadne/real-capture-repin-79938.md) — current v3 corpus and user scope decision; the [historical audit](docs/Ariadne/bap-documentation-sync.md) preserves its earlier v2 inventory.
 
 - [Selected I5c address-wrap design](docs/Ariadne/i5c-address-wrap-design.md) and
   [W0–W5 plan](Plans/i5c-address-wrap.md) — the next fault-time arithmetic
@@ -23,9 +23,16 @@
 - [Assurance decision](docs/Ariadne/semantic-assurance.md) — defines the BAP trust boundary and retired ISA-proof scope.
 
 **What remains unresolved.** The [projection-admission extension](Plans/bap-projection-admission.md)
-has P0–P3 implemented: v3 capabilities and conservative ordinary continuation.
-Its [P4 aggregate/external acceptance](docs/Ariadne/bap-admission-checkpoint.md)
-is incomplete; older v2 qualification does not transfer to the changed source.
+has P0–P4 accepted: v3 capabilities, conservative ordinary continuation and
+source-bound qualification of the selected finite corpus.
+Its [current replacement record](docs/Ariadne/real-capture-repin-79938.md) qualifies
+P4 source/fixture, Rust release-runtime and native-default tiers remotely with
+completion transport, exact parity and unchanged fixed budgets. The user
+[accepted P4](evidence/Ariadne/bap-admission/p4-acceptance-20261010.json) with its
+remaining historical real-Linux clauses excluded. No required P4 work remains.
+The selected
+Windows pin has its own baseline; the old six Linux hashes and real-Linux capture
+coverage remain unexercised. Earlier v2 qualification retains its historical scope.
 The replacement BAP Windows capture is pinned and passes correctness. The current BAP latency policy is unlimited. Stage 2 native algorithms and capture integration are qualified on the exercised corpus; native analysis is the CLI default with explicit Rust rollback. The first fault-address question is implemented, and [native I4 performance qualification](docs/Ariadne/i4-performance-validation.md) meets the unchanged 2-second CLI limit for the exact re-pinned case. Later hypothesis, object/source-context and cross-capture questions are planned, not delivered.
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).

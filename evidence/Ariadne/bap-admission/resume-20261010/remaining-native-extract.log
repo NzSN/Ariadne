@@ -1,0 +1,22 @@
+
+running 1 test
+test aliases_zero_extension_memory_and_conditional_writes_have_independent_effect_expectations ... FAILED
+
+failures:
+
+---- aliases_zero_extension_memory_and_conditional_writes_have_independent_effect_expectations stdout ----
+
+thread 'aliases_zero_extension_memory_and_conditional_writes_have_independent_effect_expectations' (836) panicked at tests/bap/native.rs:299:14:
+called `Result::unwrap()` on an `Err` value: Custom { kind: InvalidData, error: "BIL extraction bounds" }
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    aliases_zero_extension_memory_and_conditional_writes_have_independent_effect_expectations
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.59s
+
+   Compiling ariadne-analysis v0.1.0 (/tmp/ariadne-bap-mutations-s2549rm9/sut)
+    Finished `release` profile [optimized] target(s) in 43.36s
+     Running tests/bap/native.rs (target/bap-mutations/ariadne-bap-mutations-s2549rm9/release/deps/bap_native-af8385ed4be0562d)
+error: test failed, to rerun pass `--test bap_native`

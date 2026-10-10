@@ -1,0 +1,22 @@
+
+running 1 test
+test bap::projection::tests::generic_unknown_keeps_old_origins_and_is_not_an_undefined_isa_claim ... FAILED
+
+failures:
+
+---- bap::projection::tests::generic_unknown_keeps_old_origins_and_is_not_an_undefined_isa_claim stdout ----
+
+thread 'bap::projection::tests::generic_unknown_keeps_old_origins_and_is_not_an_undefined_isa_claim' (3695) panicked at src/bap/projection.rs:642:9:
+assertion failed: p.must_defs.is_empty()
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    bap::projection::tests::generic_unknown_keeps_old_origins_and_is_not_an_undefined_isa_claim
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 12 filtered out; finished in 0.00s
+
+   Compiling ariadne-analysis v0.1.0 (/tmp/ariadne-bap-mutations-s2549rm9/sut)
+    Finished `release` profile [optimized] target(s) in 11.94s
+     Running unittests src/lib.rs (target/bap-mutations/ariadne-bap-mutations-s2549rm9/release/deps/ariadne-afb8e1db3661b3e0)
+error: test failed, to rerun pass `--lib`

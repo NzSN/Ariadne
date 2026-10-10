@@ -46,6 +46,18 @@ let send_chunks chunks =
   require (size < max_frame) "response budget";
   List.iter (output_string stdout) chunks; output_char stdout '\n'; flush stdout
 let send j = send_chunks [Yojson.Safe.to_string j]
+let max_result = 256 * 1024 * 1024
+let page_bytes = 256 * 1024
+let checksum text =
+  let value = ref 0xcbf29ce484222325L in
+  String.iter (fun c -> value := Int64.mul
+      (Int64.logxor !value (Int64.of_int (Char.code c))) 0x100000001b3L) text;
+  Printf.sprintf "%016Lx" !value
+let hex_bytes text offset length =
+  let digits="0123456789abcdef" in
+  String.init (length * 2) (fun n ->
+      let byte=Char.code text.[offset + n / 2] in
+      digits.[if n mod 2 = 0 then byte lsr 4 else byte land 15])
 let () =
   try
     require (Array.length Sys.argv = 5) "expected session snapshot query family";
@@ -56,6 +68,7 @@ let () =
                (fun c -> (c >= '0' && c <= '9') || (c >= 'a' && c <= 'f')) query) "query digest";
     send (Yojson.Safe.from_string Build_identity.handshake);
     let sequence = ref 0 and action_index = ref 0 and owned = ref None in
+    let completed = ref None and completion_mode = ref false and page_offset = ref 0 in
     let identity seq = ["schema",js "ariadne.bap-core/v1"; "session",js session;
       "snapshot",js snapshot; "query",js query; "family",js family; "sequence",`Int seq] in
     let observation_cache = Recovery.observation_cache () in
@@ -104,7 +117,59 @@ let () =
           end in
         owned := Some state;
         send_chunks (response seq false `Null `Null); loop ()
+      end else if List.mem operation ["run-batch";"result-page";"result-close"] then begin
+        require (family="recovery") "completion family";
+        let advanced = ref 0 and closed = ref false in
+        let offset = ref 0 and data = ref "" in
+        let error = try
+          begin match operation with
+          | "run-batch" ->
+            exact payload ["steps"];
+            let steps = match get payload "steps" with `Int n -> n | _ -> raise (Invalid "batch steps") in
+            require (steps > 0 && steps <= 64 && !completed=None) "batch guard";
+            completion_mode := true;
+            let rec advance n = if n > 0 then match Option.get !owned with
+              | Core (i,s,_) when s.phase<>"done" ->
+                require (!action_index < 1000000) "action budget";
+                let next=advance_owned "step" (`Assoc []) snapshot (Option.get !owned) in
+                owned := Some next; incr action_index; incr advanced; advance (n-1)
+              | _ -> () in
+            advance steps;
+            begin match Option.get !owned with
+            | Core (_,s,_) when s.phase="done" ->
+              let chunks=response seq false `Null (finish_owned snapshot (Option.get !owned)) in
+              let total=List.fold_left (fun n text -> n + String.length text) 0 chunks in
+              require (total <= max_result) "completed result budget";
+              let text=String.concat "" chunks in
+              completed := Some (text,checksum text,seq)
+            | _ -> () end
+          | "result-page" ->
+            exact payload ["offset"];
+            let requested=match get payload "offset" with `Int n -> n | _ -> raise (Invalid "page offset") in
+            let text,_,_=match !completed with Some x -> x | None -> raise (Invalid "result not done") in
+            require (requested = !page_offset && requested < String.length text) "page order";
+            let length=min page_bytes (String.length text - requested) in
+            offset := requested; data := hex_bytes text requested length;
+            page_offset := requested + length
+          | "result-close" ->
+            exact payload [];
+            let text,_,_=match !completed with Some x -> x | None -> raise (Invalid "result not done") in
+            require (!page_offset = String.length text) "incomplete result transfer";
+            ignore (finish_owned snapshot (Option.get !owned)); closed := true
+          | _ -> assert false end;
+          `Null
+        with Invalid reason -> `Assoc ["kind",js "semantic";"message",js reason] in
+        let total,digest,result_sequence=match !completed with
+          | None -> 0,"",0 | Some (text,digest,seq) -> String.length text,digest,seq in
+        send (`Assoc ["schema",js "ariadne.bap-core-completion/v1";
+          "session",js session;"snapshot",js snapshot;"query",js query;"family",js family;
+          "sequence",`Int seq;"generation",`Int 1;"action_index",`Int !action_index;
+          "advanced",`Int !advanced;"done",`Bool (!completed<>None);"closed",`Bool !closed;
+          "offset",`Int !offset;"total_bytes",`Int total;"checksum",js digest;
+          "result_sequence",`Int result_sequence;"data_hex",js !data;"error",error]);
+        if not !closed && error=`Null then loop ()
       end else begin
+        require (not !completion_mode) "completion session cannot return to step mode";
         let reset = ref false in
         let result = ref `Null in
         let changed, error = try

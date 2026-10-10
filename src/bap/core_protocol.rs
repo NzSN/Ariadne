@@ -20,7 +20,41 @@ pub const RECOVERY_OPERATIONS: &[&str] = &[
     "observe",
     "finish",
     "reset",
+    "run-batch",
+    "result-page",
+    "result-close",
 ];
+pub const MAX_COMPLETED_BYTES: usize = 256 * 1024 * 1024;
+pub const COMPLETION_PAGE_BYTES: usize = 256 * 1024;
+
+#[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct CompletionResponse {
+    pub schema: String,
+    pub session: String,
+    pub snapshot: String,
+    pub query: String,
+    pub family: String,
+    pub sequence: u64,
+    pub generation: u64,
+    pub action_index: u64,
+    pub advanced: u64,
+    pub done: bool,
+    pub closed: bool,
+    pub offset: usize,
+    pub total_bytes: usize,
+    pub checksum: String,
+    pub result_sequence: u64,
+    pub data_hex: String,
+    pub error: Option<SemanticError>,
+}
+
+pub(crate) fn completion_checksum(bytes: &[u8]) -> String {
+    let hash = bytes.iter().fold(0xcbf29ce484222325_u64, |hash, byte| {
+        (hash ^ u64::from(*byte)).wrapping_mul(0x100000001b3)
+    });
+    format!("{hash:016x}")
+}
 
 /// Canonical query identity. Arrays in this profile are sets or map-row sets.
 pub fn query_digest(snapshot: &str, input: &Value) -> Result<String, Error> {

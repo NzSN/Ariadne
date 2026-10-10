@@ -1,0 +1,9 @@
+
+running 1 test
+test partial_self_moves_define_written_cells_and_unsupported_bil_never_falls_back ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.35s
+
+   Compiling ariadne-analysis v0.1.0 (/tmp/ariadne-bap-mutations-s2549rm9/sut)
+    Finished `release` profile [optimized] target(s) in 38.93s
+     Running tests/bap/native.rs (target/bap-mutations/ariadne-bap-mutations-s2549rm9/release/deps/bap_native-af8385ed4be0562d)

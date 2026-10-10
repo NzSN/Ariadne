@@ -201,7 +201,7 @@ impl<O: FamilyObservation> FamilySession<O> {
         }
         result
     }
-    fn exchange(&mut self, operation: &str, payload: Value) -> Result<FamilyResponse<O>, Error> {
+    fn exchange_frame(&self, operation: &str, payload: Value) -> Result<Vec<u8>, Error> {
         let request = json!({"schema":"ariadne.bap-core/v1", "session":self.session,
             "snapshot":self.snapshot,"query":self.query,"family":O::FAMILY,
             "sequence":self.sequence,"operation":operation,"payload":payload});
@@ -219,7 +219,10 @@ impl<O: FamilyObservation> FamilySession<O> {
             .recv_timeout(self.timeout)
             .map_err(|e| invalid(format!("core write: {e}")))?
             .map_err(invalid)?;
-        let raw = self.read()?;
+        self.read()
+    }
+    fn exchange(&mut self, operation: &str, payload: Value) -> Result<FamilyResponse<O>, Error> {
+        let raw = self.exchange_frame(operation, payload)?;
         let response: FamilyResponse<O> = serde_json::from_slice(&raw)?;
         if response.schema != "ariadne.bap-core/v1"
             || response.session != self.session
@@ -307,6 +310,136 @@ impl<O: FamilyObservation> FamilySession<O> {
         for worker in self.workers.drain(..) {
             let _ = worker.join();
         }
+    }
+}
+impl FamilySession<Observation> {
+    fn completion_request(
+        &mut self,
+        operation: &str,
+        payload: Value,
+    ) -> Result<super::core_protocol::CompletionResponse, Error> {
+        if self.closed {
+            return Err(invalid("core session closed/poisoned"));
+        }
+        let raw = self.exchange_frame(operation, payload)?;
+        let response: super::core_protocol::CompletionResponse = serde_json::from_slice(&raw)?;
+        if response.schema != "ariadne.bap-core-completion/v1"
+            || response.session != self.session
+            || response.snapshot != self.snapshot
+            || response.query != self.query
+            || response.family != "recovery"
+            || response.sequence != self.sequence
+            || response.generation != 1
+            || response.advanced > 64
+            || (operation != "run-batch" && response.advanced != 0)
+            || response.action_index != self.action_index + response.advanced
+            || response.action_index > 1_000_000
+            || response.closed != (operation == "result-close")
+            || response.total_bytes > super::core_protocol::MAX_COMPLETED_BYTES
+        {
+            return Err(invalid("completion identity/counter/budget mismatch"));
+        }
+        if let Some(error) = &response.error {
+            return Err(invalid(error.message.clone()));
+        }
+        self.sequence += 1;
+        self.action_index = response.action_index;
+        Ok(response)
+    }
+    /// Executes the same scheduled actions natively and retrieves one immutable
+    /// final envelope through bounded pages. No partial observation is exposed.
+    pub fn finish_paged(&mut self) -> Result<FamilyResponse<Observation>, Error> {
+        let result = self.finish_paged_inner();
+        if result.is_err() {
+            self.terminate();
+        }
+        result
+    }
+    fn finish_paged_inner(&mut self) -> Result<FamilyResponse<Observation>, Error> {
+        use super::core_protocol::{COMPLETION_PAGE_BYTES, completion_checksum};
+        let metadata = loop {
+            let response = self.completion_request("run-batch", json!({"steps":64}))?;
+            if !response.data_hex.is_empty() || response.offset != 0 {
+                return Err(invalid("unsolicited completion data"));
+            }
+            if response.done {
+                if response.total_bytes == 0
+                    || response.checksum.len() != 16
+                    || response.result_sequence.checked_add(1) != Some(self.sequence)
+                {
+                    return Err(invalid("invalid completed result metadata"));
+                }
+                break response;
+            }
+            if response.advanced == 0
+                || response.total_bytes != 0
+                || response.result_sequence != 0
+                || !response.checksum.is_empty()
+            {
+                return Err(invalid("invalid completion progress"));
+            }
+        };
+        let mut bytes = Vec::with_capacity(metadata.total_bytes);
+        while bytes.len() < metadata.total_bytes {
+            let page = self.completion_request("result-page", json!({"offset":bytes.len()}))?;
+            if !page.done
+                || page.offset != bytes.len()
+                || page.total_bytes != metadata.total_bytes
+                || page.checksum != metadata.checksum
+                || page.result_sequence != metadata.result_sequence
+                || page.action_index != metadata.action_index
+                || page.data_hex.is_empty()
+                || page.data_hex.len() % 2 != 0
+                || page.data_hex.len() > COMPLETION_PAGE_BYTES * 2
+                || page.data_hex.len() / 2 > metadata.total_bytes - bytes.len()
+            {
+                return Err(invalid("completion page order/size/binding mismatch"));
+            }
+            for pair in page.data_hex.as_bytes().chunks_exact(2) {
+                let nibble = |byte| match byte {
+                    b'0'..=b'9' => Ok(byte - b'0'),
+                    b'a'..=b'f' => Ok(byte - b'a' + 10),
+                    _ => Err(invalid("noncanonical completion hex")),
+                };
+                bytes.push(nibble(pair[0])? * 16 + nibble(pair[1])?);
+            }
+        }
+        if completion_checksum(&bytes) != metadata.checksum {
+            return Err(invalid("completed result checksum mismatch"));
+        }
+        let response: FamilyResponse<Observation> = serde_json::from_slice(&bytes)?;
+        if response.schema != "ariadne.bap-core/v1"
+            || response.session != self.session
+            || response.snapshot != self.snapshot
+            || response.query != self.query
+            || response.family != "recovery"
+            || response.sequence != metadata.result_sequence
+            || response.generation != 1
+            || response.action_index != metadata.action_index
+            || response.changed
+            || response.error.is_some()
+            || response.observation.phase != "done"
+            || response
+                .result
+                .as_ref()
+                .is_none_or(|result| result.snapshot != self.snapshot)
+        {
+            return Err(invalid("completed envelope identity/state mismatch"));
+        }
+        response.observation.validate_shape()?;
+        let closed = self.completion_request("result-close", json!({}))?;
+        if !closed.done
+            || closed.offset != 0
+            || closed.total_bytes != metadata.total_bytes
+            || closed.checksum != metadata.checksum
+            || closed.result_sequence != metadata.result_sequence
+            || !closed.data_hex.is_empty()
+            || closed.action_index != metadata.action_index
+        {
+            return Err(invalid("completion close binding mismatch"));
+        }
+        self.wait_clean()?;
+        Ok(response)
     }
 }
 impl<O: FamilyObservation> Drop for FamilySession<O> {

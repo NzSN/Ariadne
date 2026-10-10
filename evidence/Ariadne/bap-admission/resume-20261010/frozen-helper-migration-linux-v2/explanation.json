@@ -1,0 +1,1004 @@
+{
+  "schema": "ariadne.fault-address-explanation/v1",
+  "identity": {
+    "snapshot_id": "minidump-captured-amd64-v1:7e71f4926e615789815299b98e3c3c725180ed4dce4065937fa533beb1018824",
+    "artifact_sha256": "7e71f4926e615789815299b98e3c3c725180ed4dce4065937fa533beb1018824",
+    "query_id": "f514123250ee29e1387a3acfff19cb963f3011b6be229e5e33479ab3e82ce81e",
+    "request_sha256": "aca646a23316c3a9d613b2fcfbf129150ed264822e78392f51d8f6f4a7c7f157",
+    "semantic_profile": "x86_64-unknown-linux-gnu:LLVM MC 20.1.2 (decode reference):2:bap-bit-provenance-v2:gpr-bytes-status-df-memory-other-v1:e0dc2cb57c942aa171272a9b13e37c6e75aff35e14491b34802176eec592ada6"
+  },
+  "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+  "question": {
+    "site": "0x0000000000401006",
+    "memory_access": 0
+  },
+  "status": "partial",
+  "address": {
+    "index": 0,
+    "role": "store",
+    "access_width": 32,
+    "address_width": 64,
+    "expression": {
+      "width": 64,
+      "terms": [
+        {
+          "bank": 0,
+          "coefficient": "0x0000000000000001"
+        }
+      ],
+      "constant": "0x0000000000000000"
+    },
+    "address_inputs": [
+      "gpr:rax:0",
+      "gpr:rax:1",
+      "gpr:rax:2",
+      "gpr:rax:3",
+      "gpr:rax:4",
+      "gpr:rax:5",
+      "gpr:rax:6",
+      "gpr:rax:7"
+    ],
+    "attribution": "bil.0.value",
+    "gaps": []
+  },
+  "origins": [
+    {
+      "location": "gpr:rax:0",
+      "producers": [
+        {
+          "site": "0x0000000000401000",
+          "origin": "instruction",
+          "evidence_id": "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+        }
+      ]
+    },
+    {
+      "location": "gpr:rax:1",
+      "producers": [
+        {
+          "site": "0x0000000000401000",
+          "origin": "instruction",
+          "evidence_id": "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+        }
+      ]
+    },
+    {
+      "location": "gpr:rax:2",
+      "producers": [
+        {
+          "site": "0x0000000000401000",
+          "origin": "instruction",
+          "evidence_id": "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+        }
+      ]
+    },
+    {
+      "location": "gpr:rax:3",
+      "producers": [
+        {
+          "site": "0x0000000000401000",
+          "origin": "instruction",
+          "evidence_id": "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+        }
+      ]
+    },
+    {
+      "location": "gpr:rax:4",
+      "producers": [
+        {
+          "site": "0x0000000000401000",
+          "origin": "instruction",
+          "evidence_id": "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+        }
+      ]
+    },
+    {
+      "location": "gpr:rax:5",
+      "producers": [
+        {
+          "site": "0x0000000000401000",
+          "origin": "instruction",
+          "evidence_id": "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+        }
+      ]
+    },
+    {
+      "location": "gpr:rax:6",
+      "producers": [
+        {
+          "site": "0x0000000000401000",
+          "origin": "instruction",
+          "evidence_id": "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+        }
+      ]
+    },
+    {
+      "location": "gpr:rax:7",
+      "producers": [
+        {
+          "site": "0x0000000000401000",
+          "origin": "instruction",
+          "evidence_id": "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "evidence:c75b08f9790835897a7814b8aa74e56fc23fbc120a1cc140e59565406510ca22",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "instruction": {
+        "va": "0x0000000000401006",
+        "bytes_hex": "c70005000000",
+        "captured": true,
+        "opcode": "MOV32mi",
+        "quality": "external_lift",
+        "semantic_status": "projected",
+        "helper_sha256": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+        "runtime_sha256": "fb03843b065556c791e909b2cd7d1a8e2ef736ed461b6d8979da3f3fd5d6612a",
+        "ast_sha256": "7f73bfebb79bc6c4bcc5f01627aaafa31a3150f28a5820ddac582c1dcca81e06",
+        "projection": "bap-bit-provenance-v2",
+        "accesses": [
+          {
+            "index": 0,
+            "role": "store",
+            "access_width": 32,
+            "address_width": 64,
+            "expression": {
+              "width": 64,
+              "terms": [
+                {
+                  "bank": 0,
+                  "coefficient": "0x0000000000000001"
+                }
+              ],
+              "constant": "0x0000000000000000"
+            },
+            "address_inputs": [
+              "gpr:rax:0",
+              "gpr:rax:1",
+              "gpr:rax:2",
+              "gpr:rax:3",
+              "gpr:rax:4",
+              "gpr:rax:5",
+              "gpr:rax:6",
+              "gpr:rax:7"
+            ],
+            "attribution": "bil.0.value",
+            "gaps": []
+          }
+        ],
+        "spans": [
+          {
+            "va": "0x0000000000401006",
+            "length": 7,
+            "contributors": [
+              {
+                "stream": 5,
+                "entry": 0,
+                "file_offset": "0x000000000000005e"
+              }
+            ]
+          }
+        ],
+        "gaps": []
+      }
+    },
+    {
+      "id": "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "instruction": {
+        "va": "0x0000000000401000",
+        "bytes_hex": "4889d8",
+        "captured": true,
+        "opcode": "MOV64rr",
+        "quality": "external_lift",
+        "semantic_status": "projected",
+        "helper_sha256": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+        "runtime_sha256": "fb03843b065556c791e909b2cd7d1a8e2ef736ed461b6d8979da3f3fd5d6612a",
+        "ast_sha256": "56a38e1cd3a65a3ba9727a747aece2aa8602a8c1fb1ca4591f77a0f606532405",
+        "projection": "bap-bit-provenance-v2",
+        "accesses": [],
+        "spans": [
+          {
+            "va": "0x0000000000401000",
+            "length": 13,
+            "contributors": [
+              {
+                "stream": 5,
+                "entry": 0,
+                "file_offset": "0x0000000000000058"
+              }
+            ]
+          }
+        ],
+        "gaps": []
+      }
+    }
+  ],
+  "facts": [
+    {
+      "id": "fact:0ae49eca9e848ef484b93e2f15ac0bc7eba950cf155b60881d8678369e09c307",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "assertion": {
+        "kind": "captured_instruction",
+        "site": "0x0000000000401006"
+      },
+      "evidence_refs": [
+        "evidence:c75b08f9790835897a7814b8aa74e56fc23fbc120a1cc140e59565406510ca22"
+      ]
+    },
+    {
+      "id": "fact:bad61a13c8cb3c6cc04d90966a9254c8270c15726d0264a760c639c064331d09",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "assertion": {
+        "kind": "address_inputs",
+        "site": "0x0000000000401006",
+        "memory_access": 0
+      },
+      "evidence_refs": [
+        "evidence:c75b08f9790835897a7814b8aa74e56fc23fbc120a1cc140e59565406510ca22"
+      ]
+    },
+    {
+      "id": "fact:a95cc288bc716771e52d88effaad017c19b39cdeb2f4f34878f1f69b541cdc00",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "assertion": {
+        "kind": "captured_instruction",
+        "site": "0x0000000000401000"
+      },
+      "evidence_refs": [
+        "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+      ]
+    },
+    {
+      "id": "fact:f878dcbb8f2e3d13ffbfb76b26573e5bd33304b163cf247497cd5b64d6482127",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "assertion": {
+        "kind": "possible_origin",
+        "at": "0x0000000000401006",
+        "location": "gpr:rax:0",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "instruction",
+          "evidence_id": "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+        }
+      },
+      "evidence_refs": [
+        "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+      ]
+    },
+    {
+      "id": "fact:2fa0177d8338a5a44c5f91fc8d11c0145f18e276c0f30fc7b8c164f211b395a8",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "assertion": {
+        "kind": "possible_origin",
+        "at": "0x0000000000401006",
+        "location": "gpr:rax:1",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "instruction",
+          "evidence_id": "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+        }
+      },
+      "evidence_refs": [
+        "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+      ]
+    },
+    {
+      "id": "fact:92b131916f62f0ae8de74b8d97d571c2fa53ec4d2abae662160be16125e3506f",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "assertion": {
+        "kind": "possible_origin",
+        "at": "0x0000000000401006",
+        "location": "gpr:rax:2",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "instruction",
+          "evidence_id": "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+        }
+      },
+      "evidence_refs": [
+        "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+      ]
+    },
+    {
+      "id": "fact:b44ec510221f7c6928cbf07a966349423dcc6289affa81af777ff59913c89d92",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "assertion": {
+        "kind": "possible_origin",
+        "at": "0x0000000000401006",
+        "location": "gpr:rax:3",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "instruction",
+          "evidence_id": "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+        }
+      },
+      "evidence_refs": [
+        "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+      ]
+    },
+    {
+      "id": "fact:af767b5a3b3b060d5fae21ecdcc221ee617aaa25ecd2f1bc44363e3976d9affe",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "assertion": {
+        "kind": "possible_origin",
+        "at": "0x0000000000401006",
+        "location": "gpr:rax:4",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "instruction",
+          "evidence_id": "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+        }
+      },
+      "evidence_refs": [
+        "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+      ]
+    },
+    {
+      "id": "fact:5f9211fe3a79fcbfdd6dca2970529ee8569035fa61e047e9358368adf60174eb",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "assertion": {
+        "kind": "possible_origin",
+        "at": "0x0000000000401006",
+        "location": "gpr:rax:5",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "instruction",
+          "evidence_id": "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+        }
+      },
+      "evidence_refs": [
+        "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+      ]
+    },
+    {
+      "id": "fact:fa264f0f503511c1cca9ecd0740a41485c201d9392073aaa07085917c8218261",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "assertion": {
+        "kind": "possible_origin",
+        "at": "0x0000000000401006",
+        "location": "gpr:rax:6",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "instruction",
+          "evidence_id": "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+        }
+      },
+      "evidence_refs": [
+        "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+      ]
+    },
+    {
+      "id": "fact:b13f28bdfd312ea52c752f132b2ca2c2fb07a2e618a23abb915efd1d67943ab6",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "assertion": {
+        "kind": "possible_origin",
+        "at": "0x0000000000401006",
+        "location": "gpr:rax:7",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "instruction",
+          "evidence_id": "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+        }
+      },
+      "evidence_refs": [
+        "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+      ]
+    },
+    {
+      "id": "fact:1b19f68fafaf74c2894904f6c4509cf0e67b89df38a260445ca6face42d45400",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "assertion": {
+        "kind": "dependency",
+        "at": "0x0000000000401000",
+        "location": "gpr:rbx:0",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "entry",
+          "evidence_id": null
+        }
+      },
+      "evidence_refs": []
+    },
+    {
+      "id": "fact:65d1a546edb9c4ebc6d77f422b52487f5173d2660b1fb23a0587d213ebf7f3d5",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "assertion": {
+        "kind": "dependency",
+        "at": "0x0000000000401000",
+        "location": "gpr:rbx:1",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "entry",
+          "evidence_id": null
+        }
+      },
+      "evidence_refs": []
+    },
+    {
+      "id": "fact:78bad73563e2e6d820c96a5d1d92f9a4316a15337db16162bf8f136bc5bbbce5",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "assertion": {
+        "kind": "dependency",
+        "at": "0x0000000000401000",
+        "location": "gpr:rbx:2",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "entry",
+          "evidence_id": null
+        }
+      },
+      "evidence_refs": []
+    },
+    {
+      "id": "fact:32c7997c3f1685408965f4c9582cc9d05fa9078608f001f95fbd5aa26fe7f5a6",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "assertion": {
+        "kind": "dependency",
+        "at": "0x0000000000401000",
+        "location": "gpr:rbx:3",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "entry",
+          "evidence_id": null
+        }
+      },
+      "evidence_refs": []
+    },
+    {
+      "id": "fact:8d5e2051df449375e0261032ba36aa2dea6b82beb2efa090f86ce437f4ced3b4",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "assertion": {
+        "kind": "dependency",
+        "at": "0x0000000000401000",
+        "location": "gpr:rbx:4",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "entry",
+          "evidence_id": null
+        }
+      },
+      "evidence_refs": []
+    },
+    {
+      "id": "fact:e9917286a37148d51f8dc6f99d108595f078f3de3b8651121caba0aeeeecd114",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "assertion": {
+        "kind": "dependency",
+        "at": "0x0000000000401000",
+        "location": "gpr:rbx:5",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "entry",
+          "evidence_id": null
+        }
+      },
+      "evidence_refs": []
+    },
+    {
+      "id": "fact:5c0ea5b0d02a4eb5ea7e14b19662d6ac6609388d4804a54c191d17234d38f14e",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "assertion": {
+        "kind": "dependency",
+        "at": "0x0000000000401000",
+        "location": "gpr:rbx:6",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "entry",
+          "evidence_id": null
+        }
+      },
+      "evidence_refs": []
+    },
+    {
+      "id": "fact:a1c383a752d9968ce36adec6111f00e3caf7890fe5d952c152dd08246f5fae2f",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "assertion": {
+        "kind": "dependency",
+        "at": "0x0000000000401000",
+        "location": "gpr:rbx:7",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "entry",
+          "evidence_id": null
+        }
+      },
+      "evidence_refs": []
+    },
+    {
+      "id": "fact:c9b9758a7224ed3b1b2c27d0c9b40347218d2e49431bcdc4cc30f72078c67229",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "assertion": {
+        "kind": "uncertainty",
+        "code": "entry-origin",
+        "site": "0x0000000000401000"
+      },
+      "evidence_refs": []
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim:bf6177a568f13b43088d8de84518167fa626980a9517700cc43e202dbe9f2ae7",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "classification": "observed",
+      "assertion": {
+        "kind": "captured_instruction",
+        "site": "0x0000000000401006"
+      },
+      "fact_refs": [
+        "fact:0ae49eca9e848ef484b93e2f15ac0bc7eba950cf155b60881d8678369e09c307"
+      ],
+      "evidence_refs": [
+        "evidence:c75b08f9790835897a7814b8aa74e56fc23fbc120a1cc140e59565406510ca22"
+      ],
+      "premises": []
+    },
+    {
+      "id": "claim:18b5a37ee9dea772a5adbf6a1ef14d2f490e3b64253d3b2e07461fdde2738a2e",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "classification": "derived_under_premises",
+      "assertion": {
+        "kind": "address_inputs",
+        "site": "0x0000000000401006",
+        "memory_access": 0
+      },
+      "fact_refs": [
+        "fact:bad61a13c8cb3c6cc04d90966a9254c8270c15726d0264a760c639c064331d09"
+      ],
+      "evidence_refs": [
+        "evidence:c75b08f9790835897a7814b8aa74e56fc23fbc120a1cc140e59565406510ca22"
+      ],
+      "premises": [
+        "possible dependencies; historical execution is not established",
+        "captured-only local graph and admitted semantic summaries"
+      ]
+    },
+    {
+      "id": "claim:73e2cad28579341fc16afce0a216d36f3e6de3f4cf89cd5defb48ad7aa89ebe3",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "classification": "observed",
+      "assertion": {
+        "kind": "captured_instruction",
+        "site": "0x0000000000401000"
+      },
+      "fact_refs": [
+        "fact:a95cc288bc716771e52d88effaad017c19b39cdeb2f4f34878f1f69b541cdc00"
+      ],
+      "evidence_refs": [
+        "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+      ],
+      "premises": []
+    },
+    {
+      "id": "claim:c51a426d3682c8e51c51b0382d8356c5e2ca37cd53d3745540c6a0899c16eed8",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "classification": "derived_under_premises",
+      "assertion": {
+        "kind": "possible_origin",
+        "at": "0x0000000000401006",
+        "location": "gpr:rax:0",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "instruction",
+          "evidence_id": "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+        }
+      },
+      "fact_refs": [
+        "fact:f878dcbb8f2e3d13ffbfb76b26573e5bd33304b163cf247497cd5b64d6482127"
+      ],
+      "evidence_refs": [
+        "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+      ],
+      "premises": [
+        "possible dependencies; historical execution is not established",
+        "captured-only local graph and admitted semantic summaries"
+      ]
+    },
+    {
+      "id": "claim:2945be580fa3148e1f034a257f8dacd41ae8e917938c84b0da568f72d78354a7",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "classification": "derived_under_premises",
+      "assertion": {
+        "kind": "possible_origin",
+        "at": "0x0000000000401006",
+        "location": "gpr:rax:1",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "instruction",
+          "evidence_id": "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+        }
+      },
+      "fact_refs": [
+        "fact:2fa0177d8338a5a44c5f91fc8d11c0145f18e276c0f30fc7b8c164f211b395a8"
+      ],
+      "evidence_refs": [
+        "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+      ],
+      "premises": [
+        "possible dependencies; historical execution is not established",
+        "captured-only local graph and admitted semantic summaries"
+      ]
+    },
+    {
+      "id": "claim:fa3a57bb8743cbff9ea2fe4f5d091236e0d100462bbf5372d67ed5be4eb27ae5",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "classification": "derived_under_premises",
+      "assertion": {
+        "kind": "possible_origin",
+        "at": "0x0000000000401006",
+        "location": "gpr:rax:2",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "instruction",
+          "evidence_id": "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+        }
+      },
+      "fact_refs": [
+        "fact:92b131916f62f0ae8de74b8d97d571c2fa53ec4d2abae662160be16125e3506f"
+      ],
+      "evidence_refs": [
+        "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+      ],
+      "premises": [
+        "possible dependencies; historical execution is not established",
+        "captured-only local graph and admitted semantic summaries"
+      ]
+    },
+    {
+      "id": "claim:c41a89afbd639a89ffa39194de0e9ebc8dd8ff50171e7fa478dbb7bd00d632e9",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "classification": "derived_under_premises",
+      "assertion": {
+        "kind": "possible_origin",
+        "at": "0x0000000000401006",
+        "location": "gpr:rax:3",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "instruction",
+          "evidence_id": "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+        }
+      },
+      "fact_refs": [
+        "fact:b44ec510221f7c6928cbf07a966349423dcc6289affa81af777ff59913c89d92"
+      ],
+      "evidence_refs": [
+        "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+      ],
+      "premises": [
+        "possible dependencies; historical execution is not established",
+        "captured-only local graph and admitted semantic summaries"
+      ]
+    },
+    {
+      "id": "claim:ee9f98ef9ddfca1e14eb7e9dfc796be1f8b529385f37e42fc3c7ca9c25f17ae9",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "classification": "derived_under_premises",
+      "assertion": {
+        "kind": "possible_origin",
+        "at": "0x0000000000401006",
+        "location": "gpr:rax:4",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "instruction",
+          "evidence_id": "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+        }
+      },
+      "fact_refs": [
+        "fact:af767b5a3b3b060d5fae21ecdcc221ee617aaa25ecd2f1bc44363e3976d9affe"
+      ],
+      "evidence_refs": [
+        "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+      ],
+      "premises": [
+        "possible dependencies; historical execution is not established",
+        "captured-only local graph and admitted semantic summaries"
+      ]
+    },
+    {
+      "id": "claim:c5bb4cc5141861958b0a8c7dbafd479923fb101abc5a885c895f28ebbac6ac41",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "classification": "derived_under_premises",
+      "assertion": {
+        "kind": "possible_origin",
+        "at": "0x0000000000401006",
+        "location": "gpr:rax:5",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "instruction",
+          "evidence_id": "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+        }
+      },
+      "fact_refs": [
+        "fact:5f9211fe3a79fcbfdd6dca2970529ee8569035fa61e047e9358368adf60174eb"
+      ],
+      "evidence_refs": [
+        "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+      ],
+      "premises": [
+        "possible dependencies; historical execution is not established",
+        "captured-only local graph and admitted semantic summaries"
+      ]
+    },
+    {
+      "id": "claim:215c314f89f449945e14b8e920353880fc1bee06d1e0febea866cf7134d7022a",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "classification": "derived_under_premises",
+      "assertion": {
+        "kind": "possible_origin",
+        "at": "0x0000000000401006",
+        "location": "gpr:rax:6",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "instruction",
+          "evidence_id": "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+        }
+      },
+      "fact_refs": [
+        "fact:fa264f0f503511c1cca9ecd0740a41485c201d9392073aaa07085917c8218261"
+      ],
+      "evidence_refs": [
+        "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+      ],
+      "premises": [
+        "possible dependencies; historical execution is not established",
+        "captured-only local graph and admitted semantic summaries"
+      ]
+    },
+    {
+      "id": "claim:a6678037e2964508a102232f6c229de67e12b481acf5a1914e8d7681e32c3892",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "classification": "derived_under_premises",
+      "assertion": {
+        "kind": "possible_origin",
+        "at": "0x0000000000401006",
+        "location": "gpr:rax:7",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "instruction",
+          "evidence_id": "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+        }
+      },
+      "fact_refs": [
+        "fact:b13f28bdfd312ea52c752f132b2ca2c2fb07a2e618a23abb915efd1d67943ab6"
+      ],
+      "evidence_refs": [
+        "evidence:c183fa372a90b9f12e5e5ce67e9b8ca04b3781950d9cb869777eb9c91e8d5d22"
+      ],
+      "premises": [
+        "possible dependencies; historical execution is not established",
+        "captured-only local graph and admitted semantic summaries"
+      ]
+    },
+    {
+      "id": "claim:4512a243058af5f274d6e2b5a81f7696ba1168f941cb0d3ee9a5def6959c2f7f",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "classification": "derived_under_premises",
+      "assertion": {
+        "kind": "dependency",
+        "at": "0x0000000000401000",
+        "location": "gpr:rbx:0",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "entry",
+          "evidence_id": null
+        }
+      },
+      "fact_refs": [
+        "fact:1b19f68fafaf74c2894904f6c4509cf0e67b89df38a260445ca6face42d45400"
+      ],
+      "evidence_refs": [],
+      "premises": [
+        "possible dependencies; historical execution is not established",
+        "captured-only local graph and admitted semantic summaries"
+      ]
+    },
+    {
+      "id": "claim:e9fd655740b3b848611c7375c701d88ebe6ad5e4fdeba62b44cd533b4f4408dd",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "classification": "derived_under_premises",
+      "assertion": {
+        "kind": "dependency",
+        "at": "0x0000000000401000",
+        "location": "gpr:rbx:1",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "entry",
+          "evidence_id": null
+        }
+      },
+      "fact_refs": [
+        "fact:65d1a546edb9c4ebc6d77f422b52487f5173d2660b1fb23a0587d213ebf7f3d5"
+      ],
+      "evidence_refs": [],
+      "premises": [
+        "possible dependencies; historical execution is not established",
+        "captured-only local graph and admitted semantic summaries"
+      ]
+    },
+    {
+      "id": "claim:031ee9c42c5793fe41beb9c03a95a7eb3d58fc8d884824deda07903ae0d250e6",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "classification": "derived_under_premises",
+      "assertion": {
+        "kind": "dependency",
+        "at": "0x0000000000401000",
+        "location": "gpr:rbx:2",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "entry",
+          "evidence_id": null
+        }
+      },
+      "fact_refs": [
+        "fact:78bad73563e2e6d820c96a5d1d92f9a4316a15337db16162bf8f136bc5bbbce5"
+      ],
+      "evidence_refs": [],
+      "premises": [
+        "possible dependencies; historical execution is not established",
+        "captured-only local graph and admitted semantic summaries"
+      ]
+    },
+    {
+      "id": "claim:a139f740f328644284c274e4a787fe91f405d4ed3f0e9e302f25379926cb1d4a",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "classification": "derived_under_premises",
+      "assertion": {
+        "kind": "dependency",
+        "at": "0x0000000000401000",
+        "location": "gpr:rbx:3",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "entry",
+          "evidence_id": null
+        }
+      },
+      "fact_refs": [
+        "fact:32c7997c3f1685408965f4c9582cc9d05fa9078608f001f95fbd5aa26fe7f5a6"
+      ],
+      "evidence_refs": [],
+      "premises": [
+        "possible dependencies; historical execution is not established",
+        "captured-only local graph and admitted semantic summaries"
+      ]
+    },
+    {
+      "id": "claim:ea48e200023557724165fcc33e67c2d77b499001ca847d80a517b992d084111f",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "classification": "derived_under_premises",
+      "assertion": {
+        "kind": "dependency",
+        "at": "0x0000000000401000",
+        "location": "gpr:rbx:4",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "entry",
+          "evidence_id": null
+        }
+      },
+      "fact_refs": [
+        "fact:8d5e2051df449375e0261032ba36aa2dea6b82beb2efa090f86ce437f4ced3b4"
+      ],
+      "evidence_refs": [],
+      "premises": [
+        "possible dependencies; historical execution is not established",
+        "captured-only local graph and admitted semantic summaries"
+      ]
+    },
+    {
+      "id": "claim:204b1185ed69f130aec7c12ee98a3917ce395b72a8ff2e1fff76da6f78fb26af",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "classification": "derived_under_premises",
+      "assertion": {
+        "kind": "dependency",
+        "at": "0x0000000000401000",
+        "location": "gpr:rbx:5",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "entry",
+          "evidence_id": null
+        }
+      },
+      "fact_refs": [
+        "fact:e9917286a37148d51f8dc6f99d108595f078f3de3b8651121caba0aeeeecd114"
+      ],
+      "evidence_refs": [],
+      "premises": [
+        "possible dependencies; historical execution is not established",
+        "captured-only local graph and admitted semantic summaries"
+      ]
+    },
+    {
+      "id": "claim:23e5f2ab31a32175c06a82b5825cb86a59ca176ac377ced21e84810480c55034",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "classification": "derived_under_premises",
+      "assertion": {
+        "kind": "dependency",
+        "at": "0x0000000000401000",
+        "location": "gpr:rbx:6",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "entry",
+          "evidence_id": null
+        }
+      },
+      "fact_refs": [
+        "fact:5c0ea5b0d02a4eb5ea7e14b19662d6ac6609388d4804a54c191d17234d38f14e"
+      ],
+      "evidence_refs": [],
+      "premises": [
+        "possible dependencies; historical execution is not established",
+        "captured-only local graph and admitted semantic summaries"
+      ]
+    },
+    {
+      "id": "claim:efb463db765df14853e2387973a607775228e63aead5b9403ae5137f6c8d4f7a",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "classification": "derived_under_premises",
+      "assertion": {
+        "kind": "dependency",
+        "at": "0x0000000000401000",
+        "location": "gpr:rbx:7",
+        "producer": {
+          "site": "0x0000000000401000",
+          "origin": "entry",
+          "evidence_id": null
+        }
+      },
+      "fact_refs": [
+        "fact:a1c383a752d9968ce36adec6111f00e3caf7890fe5d952c152dd08246f5fae2f"
+      ],
+      "evidence_refs": [],
+      "premises": [
+        "possible dependencies; historical execution is not established",
+        "captured-only local graph and admitted semantic summaries"
+      ]
+    },
+    {
+      "id": "claim:524b3711288f84592ad31cc2d8559f6d0710c6c764bb4b44a545a3eaac8f971a",
+      "scope_id": "81aa4f495fb262bbf6142b32d2667b20ba32dc9eeffbf3d9393f600da6cb6051",
+      "classification": "unknown",
+      "assertion": {
+        "kind": "uncertainty",
+        "code": "entry-origin",
+        "site": "0x0000000000401000"
+      },
+      "fact_refs": [
+        "fact:c9b9758a7224ed3b1b2c27d0c9b40347218d2e49431bcdc4cc30f72078c67229"
+      ],
+      "evidence_refs": [],
+      "premises": []
+    }
+  ],
+  "gaps": [
+    {
+      "code": "entry-origin",
+      "site": "0x0000000000401000",
+      "evidence_refs": []
+    }
+  ],
+  "evidence_requirements": [
+    {
+      "code": "entry-origin",
+      "locations": [
+        "gpr:rbx:0",
+        "gpr:rbx:1",
+        "gpr:rbx:2",
+        "gpr:rbx:3",
+        "gpr:rbx:4",
+        "gpr:rbx:5",
+        "gpr:rbx:6",
+        "gpr:rbx:7"
+      ],
+      "site": "0x0000000000401000",
+      "observation": "Provide an independently anchored earlier entry or observed input provenance for this location."
+    }
+  ],
+  "assumptions": [
+    "possible byte origins are alternatives, not jointly observed values",
+    "the dependency relation is not a historical execution trace",
+    "no object lifetime, store retirement or root cause is inferred"
+  ],
+  "truncated": false
+}

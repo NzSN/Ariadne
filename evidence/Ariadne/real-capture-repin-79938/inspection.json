@@ -1,0 +1,135 @@
+{
+  "schema": "ariadne.repin-candidate-inspection/v1",
+  "original": {
+    "path": "/mnt/d/Services/dump-ledger-runtime/data/vault/dump_79938FAE443F4021A4F7B6C215/original.dmp",
+    "sha256": "342084c90b6e361ab94fb91a920f871581eba970810f99384d5dce00ee6d7353",
+    "bytes": 1690277882,
+    "platform": "windows",
+    "thread": "0x97f4"
+  },
+  "derivative": {
+    "path": "/home/jlc/ariadne-p4-20261010/work/repin-79938/capture.dmp",
+    "sha256": "0333e29bfed1608ac877395d191642947aacc58dd81d0b786e0fd0df1a131f90",
+    "bytes": 516256,
+    "prefixBytes": 335188,
+    "publishedStreams": [
+      3,
+      4,
+      6,
+      7,
+      9,
+      16
+    ],
+    "ranges": [
+      {
+        "name": "thread-stack",
+        "address": "0x64ce9d4000",
+        "bytes": 180224,
+        "projectionOffset": 335320,
+        "sha256": "348b65d0de34b93e7aa9e2a22a6799360a4bd1dac0ca64deb87d50bfd35a3a67",
+        "contributors": [
+          {
+            "address": "0x64ce9d4000",
+            "size": 180224,
+            "fileOffset": 20809218,
+            "selectedOffset": 20809218,
+            "selectedStart": "0x64ce9d4000",
+            "selectedBytes": 180224
+          }
+        ]
+      },
+      {
+        "name": "first-values",
+        "address": "0x757c1f0ce000",
+        "bytes": 512,
+        "projectionOffset": 515544,
+        "sha256": "74f39b2bd0699ffea0a7a66272f8c674c070dae6b08904ce255c5eacfe35042d",
+        "contributors": [
+          {
+            "address": "0x757c1f0cc000",
+            "size": 61440,
+            "fileOffset": 1269294594,
+            "selectedOffset": 1269302786,
+            "selectedStart": "0x757c1f0ce000",
+            "selectedBytes": 512
+          }
+        ]
+      },
+      {
+        "name": "iterator-map",
+        "address": "0x757c1fc35920",
+        "bytes": 32,
+        "projectionOffset": 516056,
+        "sha256": "1feef9fb8ad9f2224c392bb189d9b56aab3a194646b6e4e00ae29a76bcff9118",
+        "contributors": [
+          {
+            "address": "0x757c1fc30000",
+            "size": 65536,
+            "fileOffset": 1277302274,
+            "selectedOffset": 1277325090,
+            "selectedStart": "0x757c1fc35920",
+            "selectedBytes": 32
+          },
+          {
+            "address": "0x757c1fc358a0",
+            "size": 512,
+            "fileOffset": 1690276346,
+            "selectedOffset": 1690276474,
+            "selectedStart": "0x757c1fc35920",
+            "selectedBytes": 32
+          }
+        ]
+      },
+      {
+        "name": "AdvanceIterator",
+        "address": "0x7ff63cba6c50",
+        "bytes": 94,
+        "projectionOffset": 516088,
+        "sha256": "150e30797ede3ec3104b9ad626c597c908e9fc9b13611eeff68a48feea83a60f",
+        "contributors": [
+          {
+            "address": "0x7ff63bae1000",
+            "size": 182693888,
+            "fileOffset": 1376142850,
+            "selectedOffset": 1393730130,
+            "selectedStart": "0x7ff63cba6c50",
+            "selectedBytes": 94
+          },
+          {
+            "address": "0x7ff63cba6c14",
+            "size": 512,
+            "fileOffset": 1690274810,
+            "selectedOffset": 1690274870,
+            "selectedStart": "0x7ff63cba6c50",
+            "selectedBytes": 94
+          }
+        ]
+      }
+    ]
+  },
+  "companion": {
+    "path": "/mnt/d/symcache-dump79938-20261008/lceda-pro.exe/6A87C949d708000/lceda-pro.exe",
+    "sha256": "b537ad7b96136655b6cf640bd5a715a62a132dde6196acc925bf739164a1be3b",
+    "timestamp": "0x6a87c949",
+    "imageSize": "0x0d708000",
+    "imageBase": "0x00007ff63bae0000",
+    "pdbSha256": "eab012ef555c641b2e10d314e58f02d01baa277b28f9ad5442e31c918c920ed9",
+    "pdbGuid": "a7877ffb-94f2-db3e-4c4c-44205044422e",
+    "pdbAge": 1
+  },
+  "query": {
+    "entry": "0x00007ff63cba6c50",
+    "seed": "0x00007ff63cba6c94",
+    "producer": "0x00007ff63cba6c53",
+    "memory_access": 0
+  },
+  "code": {
+    "bytesHex": "488b114c8b4108b801000000eb36458b481c4983c0284c8941084d89c24c2b124981faf00f000075124c8d52084c89114c8b42084c8941084c89d2ffc84401c885c07e19458a104180fa0d74c14531c94180fa0f410f94c14501c9ebb5c3",
+    "sha256": "150e30797ede3ec3104b9ad626c597c908e9fc9b13611eeff68a48feea83a60f",
+    "matchesCompanion": true
+  },
+  "metadataAndContextsIdentical": true,
+  "threadContextMatchesException": false,
+  "selectedOverlapsAgree": true,
+  "scope": "selected capture-only Windows function/stack/map/values; no earlier execution or root-cause assertion"
+}

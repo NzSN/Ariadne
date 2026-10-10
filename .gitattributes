@@ -5,3 +5,8 @@ evidence/Ariadne/bap-core-history/2026-10-05-before-i4-repin/bap-core-evidence.t
 # Preserve the pinned opam export, including upstream package description text.
 native/bap-core/sdk-packages.export whitespace=-blank-at-eol
 evidence/Ariadne/i4-performance-evidence.tar.gz filter=lfs diff=lfs merge=lfs -text
+evidence/Ariadne/bap-admission/remote-20261010/evidence.tar.gz filter=lfs diff=lfs merge=lfs -text
+evidence/Ariadne/real-capture-repin-79938/qualification-evidence.tar.gz filter=lfs diff=lfs merge=lfs -text
+# Preserve hash-bound debugger and validation logs byte-for-byte.
+evidence/Ariadne/real-capture-repin-79938/entry-witness.log whitespace=-blank-at-eol
+evidence/Ariadne/bap-admission/resume-20261010/self-move-repair-recheck.log whitespace=-blank-at-eof

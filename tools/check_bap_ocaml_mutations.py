@@ -102,9 +102,11 @@ def main():
     manifest = copy_sut(sut)
     path = sut / "src/bap/core_session.rs"
     original = path.read_text()
-    old = "|| response.sequence != self.sequence"
+    # Completion paging also checks sequence identity. This mutation targets the
+    # original per-action exchange exercised by the unchanged bootstrap observer.
+    old = "|| response.family != O::FAMILY\n            || response.sequence != self.sequence"
     assert original.count(old) == 1
-    mutated = original.replace(old, "|| false")
+    mutated = original.replace(old, old.replace("response.sequence != self.sequence", "false"))
     path.write_text(mutated)
     (work / "stale-sequence.diff").write_text("".join(difflib.unified_diff(
         original.splitlines(True), mutated.splitlines(True), fromfile=str(path), tofile=str(path))))

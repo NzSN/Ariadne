@@ -6,6 +6,7 @@ from pathlib import Path
 from rust_layout import copy_sut, source_files
 from bap_workload_contract import windows_qualification
 from with_mirrorrust_snapshot import active_identity
+import real_capture_workload as real_case
 from measure_bap import WINDOWS_ARCHIVE_RELATIVE, WINDOWS_CASE_PATH, sources as workload_sources
 ROOT=Path(__file__).resolve().parents[1]
 WORKLOAD_TOOLS=('target/release/ariadne-minidump','target/release/bap_minidump','target/ariadne-llvm-mc','target/ariadne-bap-lift','native/bap/toolchain.lock.json','tools/measure_bap.py')
@@ -17,6 +18,7 @@ def sources():
   paths.update(p for p in (ROOT/tree).rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix!='.md')
  paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Specs/Ariadne.tla','Specs/AriadneMachineCommon.tla','Specs/AriadneTypes.tla','tools/check_bap_semantics.py','tools/check_bap_model.py','tools/check_bap_mutations.py','tools/measure_bap.py','tools/test_bap_workload.py','tools/bap_workload_contract.py','tools/test_bap_workload_contract.py','tools/test_bap_workload_gate.py','tools/check_stage_e.py','tools/check_minidump.py','tools/check_minidump_mutations.py'])
  paths.update(ROOT/p for p in ['evidence/Ariadne/priority-1-real-capture-case.json','evidence/Ariadne/bap-windows-workload-case.json',WINDOWS_ARCHIVE_RELATIVE])
+ paths.update(real_case.source_paths())
  return {str(p.relative_to(ROOT)):sha(p) for p in sorted(paths)}
 def validate_workload_bindings(data):
  if not isinstance(data,dict) or data.get('passed') is not True or data.get('sourcesStable') is not True:raise RuntimeError('workload record must pass with stable sources')

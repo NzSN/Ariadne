@@ -1,0 +1,38 @@
+{
+  "schema": "ariadne.bap-p4-documentation-followup/v1",
+  "recordedUtc": "2026-10-10T06:50:21.787919+00:00",
+  "acceptanceDecision": "evidence/Ariadne/bap-admission/p4-acceptance-20261010.json",
+  "acceptanceDecisionSha256": "fe1feadad8e0a1022d91fd135bf3d30cfe6e50ed8ea83390ad43cfb6109e02b9",
+  "documentationOnly": true,
+  "acceptedScopeUnchanged": true,
+  "qualifiedImplementationAndFixtureHashesVerified": true,
+  "matchedImplementationAndFixtureFiles": 719,
+  "originalEvidenceHashesVerified": true,
+  "documentationHashes": {
+    "README.md": "6fe39975a282623588f3055b1940eafd9b89855a4686cf829e94751ede08d1c5",
+    "ROADMAP.md": "049998c98a2f3ce0179b7a3bd6b385b171e05580535f4a9599d01fcd00eedcda",
+    "Plans/README.md": "778cd9e87b73ba3c8d9fd590249a39d0af2c1470249e983912e9b6fd9ec34d5c",
+    "Plans/bap-integration.md": "44dad8c4e0677204cb950372840f80d20390b433f7e295f7972d4a8ccbfbdcc4",
+    "docs/documentation-map.md": "0ad041a8d424174745c406a9927fe21649a6c14f501313143a49aab6272477b5",
+    "docs/Ariadne/README.md": "93a810f12b1e2b4c084865a008dd7ee851f83b45abf0898c5a9920627b80bac7",
+    "docs/Ariadne/bap-semantic-backend-design.md": "8baa3833f50d1c14bc9c7a12d2e52010c502025484b029d6e0dfd27acffdbba0",
+    "docs/Ariadne/bap-admission-contract.md": "430ad3906b9b3fb3ffcc447d5ade4526a79684322a506384906a1bf7a3d6cf59",
+    "docs/Ariadne/bap-documentation-sync.md": "60ba56755809b1d1f61b2f152f7b884b8c60f815cc4ae7b833902fc5e534bf50",
+    "docs/Ariadne/bap-projection-source-review.md": "bc00d6bc4a2036fd0a944014bf00cbf576b7fe68ea8528348287e2c255c59113",
+    "docs/Ariadne/bap-admission-checkpoint.md": "26a78fd53fdcbb901a1582315382e2ba05ca85524e3b7381284688a3993c1568",
+    "docs/Ariadne/bap-admission-resume.md": "d297c02adcf35d05d72c19ac2adad8fe78935d8e161cf9c2afda10a3fde70922",
+    "docs/Ariadne/bap-core-refactor-assessment.md": "61b2e8c12be1e623a9ddd5a8d9be1b51210c285f8df01727eceed5805d62cbbf",
+    "docs/Ariadne/bap-analysis-core-design.md": "a0fbd91b6818a62900f412fd9b7e3bf63000e77bd253401518e12945eb085ce7",
+    "docs/Ariadne/real-capture-repin-79938.md": "b6d6fa70a80171b56250df4ecd9d567f074269f6110ec2b9f765979c296d9c41",
+    "docs/Ariadne/modules/bap.md": "136d33fe36d0e1635cca89d1fff876551d09286af6dea57502a9f2dbe9992ffb",
+    "native/bap-core/README.md": "d080d36c5c54d4c501fd9379c6dad68db1ef868848d63d48e2b29001b8275f5b",
+    "evidence/Ariadne/README.md": "6b09d0830bc93a2605f7662a5e412f9dc6f531c78b5b0415255e1c1e2c3a8c3b"
+  },
+  "qualificationInventoryDocumentationDifferences": {
+    "docs/Ariadne/bap-analysis-core-design.md": {
+      "qualifiedSha256": "7c1e2eedf924e63e710fa37174baae833e696ebcacc4a5d7922fdb0892376ce2",
+      "currentSha256": "a0fbd91b6818a62900f412fd9b7e3bf63000e77bd253401518e12945eb085ce7"
+    }
+  },
+  "scope": "Align current entry points, backend/integration guides and historical successor notes with user-accepted P4. Only remaining historical real-Linux clauses are excluded; existing Linux fixtures retain their exercised scope. Historical qualification records and optional incomplete campaigns are unchanged. No heavy build/model/mutation/analysis campaign ran for these documentation edits."
+}

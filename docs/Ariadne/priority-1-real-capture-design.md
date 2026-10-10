@@ -12,6 +12,8 @@
 
 - [Completed scoped plan](../../Plans/completed/priority-1-real-capture-plan.md) — defines the exact-case acceptance procedure.
 - [Qualified controlled case](priority-1-real-capture-validation.md) — records the resulting slice and limits.
+- [P4 real-capture re-pin plan](../../Plans/real-capture-repin-79938.md) — applies
+  this entry/evidence contract to the user-selected Windows replacement stage.
 - [Explanation design](investigation-layer-design.md) — addresses how to interpret producers and gaps.
 
 **What remains unresolved.** Matching symbols can justify an entry witness but cannot silently fill capture holes or reconstruct actual execution. Qualification remains specific to the chosen artifact and query.

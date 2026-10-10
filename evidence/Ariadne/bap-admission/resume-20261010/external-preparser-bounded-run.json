@@ -1,0 +1,23 @@
+{
+  "command": [
+    "/home/nzsn/Repos/Ariadne/target/release/ariadne-minidump",
+    "/home/nzsn/Workspace/Electron_SRC/.analysis/dump_03958DA4FCA844A786262A1053/ariadne/exception-thread-projection.dmp",
+    "--decoder-reference",
+    "/home/nzsn/Repos/Ariadne/target/ariadne-llvm-mc",
+    "--analysis-backend",
+    "rust",
+    "--entry",
+    "0x7ff7744033a0",
+    "--seed",
+    "0x7ff7744048a0",
+    "--max-starts",
+    "256",
+    "--output-dir",
+    "/home/nzsn/Repos/Ariadne/target/bap-admission-resume-20261010/external-preparser-bounded"
+  ],
+  "exitCode": 0,
+  "seconds": 0.9740515659941593,
+  "diagnosticOnly": true,
+  "fullExternalQualification": false,
+  "scope": "Independent function root and RSI-consumer seed under an explicit 256-start resource limit; no entry injection across unsupported instructions."
+}

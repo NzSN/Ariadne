@@ -1,0 +1,116 @@
+{
+  "schema": "ariadne.bap-p4-acceptance/v1",
+  "recordedUtc": "2026-10-10T06:44:32.361702+00:00",
+  "stage": "P4",
+  "decision": "accepted",
+  "accepted": true,
+  "acceptedBy": "user",
+  "authorization": [
+    "ignore those linux parts of P4 remains, then so anything else in P4 ?",
+    "then so accept."
+  ],
+  "fullPlanAcceptanceForDeclaredScope": true,
+  "acceptedScope": [
+    "V3 projection/admission and conservative ordinary continuation",
+    "Bounded native completion transport",
+    "Existing Linux/Windows platform fixtures and owned finite corpora",
+    "Selected Windows real-capture workload electron-translated-frame-79938-v1",
+    "Native/reference/default product and output parity",
+    "Root, model, replay, mutation and investigation qualification",
+    "Unchanged I4/I5 fixed budgets",
+    "Source/helper-bound retained Scanner/PreParser evidence and sealed artifacts"
+  ],
+  "excludedClauses": [
+    {
+      "clause": "Missing original controlled real-Linux capture",
+      "disposition": "excluded-by-user",
+      "exercised": false
+    },
+    {
+      "clause": "Six historical real-Linux output comparisons",
+      "disposition": "excluded-by-user",
+      "exercised": false
+    },
+    {
+      "clause": "Historical real-Linux capture and I4 phase qualification",
+      "disposition": "excluded-by-user",
+      "exercised": false
+    }
+  ],
+  "requiredP4WorkRemaining": [],
+  "nonBlockingFollowups": [
+    "Automatically consume separate external evidence in the generic runner",
+    "Complete the old Scanner Rust timing repetition campaign"
+  ],
+  "historicalFlagsPreserved": {
+    "originalRunnerFullPlanAcceptance": false,
+    "historicalFull24Acceptance": false,
+    "realLinuxCaptureExercised": false,
+    "scannerReferenceRepeatCampaignPassed": false
+  },
+  "evidenceSha256": {
+    "evidence/Ariadne/real-capture-repin-79938/report.json": "9099bd1e33704c2ae61e43e1fa0914032c2a0e4fc52d5c475a05b3d6090ab420",
+    "evidence/Ariadne/real-capture-repin-79938/evidence-manifest.json": "005f8b481f5f5b7d6954eb8c3321ffe7c08d91edd5f0e6f08db34fd6344132f0",
+    "evidence/Ariadne/real-capture-repin-79938/documentation-follow-up.json": "6619fa08eeeb179736989b0797fbfe70a1ecc46786574561dbd4210ad41a3bc6",
+    "evidence/Ariadne/real-capture-workload-case.json": "c8b7f4f2da6ee21f29d79e228d43badadc6b4802c61735f02b775fc85bb28453",
+    "evidence/Ariadne/bap-admission/remote-20261010/report.json": "2fb149a6a3bab565f981a10bdbf70f6e33e97e789e20d21d3d8222bd3834c50a"
+  },
+  "qualifiedImplementationAndFixtureHashesVerified": true,
+  "matchedImplementationAndFixtureFiles": 719,
+  "retainedExternalImplementationHashesVerified": true,
+  "documentationOnly": true,
+  "heavyValidationRunForThisDecision": false,
+  "documentationHashes": {
+    "Plans/bap-projection-admission.md": "70f70f054111a483fbe1355d5b3fd1c75987f3552a895358990c35940ed463e4",
+    "Plans/real-capture-repin-79938.md": "fed5879e3285dae31ae26a51d1c556895c0aa3eac81b3f408876acac977c4081",
+    "Plans/bap-completion-pages.md": "e337470f6d4728f7163d3781ca4667e002cef73171cfe65b839e43224a0a576b",
+    "Plans/README.md": "d3f64dc4b8433b81153fc3aa2671e872372f6d33b1539bd7d1da2504c18b9697",
+    "CHECKPOINTS.md": "c90677e641764bfafbe293c5946abe5dcd3577a49d165df314542f32c30c3088",
+    "ROADMAP.md": "85875f3e01ad6c8da2ad0dfbd0079da7d76ac4f216af49ef07c4b86145a465a4",
+    "docs/Ariadne/real-capture-repin-79938.md": "a388b48045cb4e17027ee04dd0a7db11f5789e0d197cd474d893386373d7c1f7",
+    "docs/Ariadne/bap-admission-resume.md": "5eceec1efbe6af78e833d919057edaf121b0aa6b0a3a078350f30cea5b15e3da"
+  },
+  "documentationChangesSincePriorFollowup": {
+    "Plans/bap-projection-admission.md": {
+      "priorSha256": "90a7f33bd7b02b1b18122e89251ba0b26b9bb7e17cc5d14f9c8713698bbe8678",
+      "currentSha256": "70f70f054111a483fbe1355d5b3fd1c75987f3552a895358990c35940ed463e4"
+    },
+    "Plans/real-capture-repin-79938.md": {
+      "priorSha256": "b44a6f53f96025072397007318059e83476dc5653d4b3746a0dd44a1cdfd603d",
+      "currentSha256": "fed5879e3285dae31ae26a51d1c556895c0aa3eac81b3f408876acac977c4081"
+    },
+    "Plans/bap-completion-pages.md": {
+      "priorSha256": "7a4f46a49feca197798ae756ee80b8b19d4e73f1169f0c89f3c32b0d37520376",
+      "currentSha256": "e337470f6d4728f7163d3781ca4667e002cef73171cfe65b839e43224a0a576b"
+    },
+    "Plans/README.md": {
+      "priorSha256": "baa74a473967a1bc9f1abe22b0bb2ff226ce80cbc14da5b4f54bd1388e537628",
+      "currentSha256": "d3f64dc4b8433b81153fc3aa2671e872372f6d33b1539bd7d1da2504c18b9697"
+    },
+    "CHECKPOINTS.md": {
+      "priorSha256": "25cb3d936fbc93c206e5c62335c29e4ba4ba0bca6055a4a71734bee162311ca0",
+      "currentSha256": "c90677e641764bfafbe293c5946abe5dcd3577a49d165df314542f32c30c3088"
+    },
+    "ROADMAP.md": {
+      "priorSha256": "8bf2f51fb6f7cb1f796f9888e58dc0dbedf6f9a202ea4e7bd4beba890fde5b3b",
+      "currentSha256": "85875f3e01ad6c8da2ad0dfbd0079da7d76ac4f216af49ef07c4b86145a465a4"
+    },
+    "docs/Ariadne/real-capture-repin-79938.md": {
+      "priorSha256": "ecb3552e107ede87f00db64c414838c94abb5c767a3acc0578b3891f32236dac",
+      "currentSha256": "a388b48045cb4e17027ee04dd0a7db11f5789e0d197cd474d893386373d7c1f7"
+    },
+    "docs/Ariadne/bap-admission-resume.md": {
+      "priorSha256": "2b6c22b81377bfdb6b111a49f9a39a8bffb39a662d76c6fd8129e3cacd7f0b41",
+      "currentSha256": "5eceec1efbe6af78e833d919057edaf121b0aa6b0a3a078350f30cea5b15e3da"
+    }
+  },
+  "qualificationEnvironment": {
+    "schema": "ariadne.mirrorrust-qualification-snapshot/v1",
+    "manifestPath": "/home/nzsn/Repos/Ariadne/target/i5b-dependency-snapshot/manifest.json",
+    "manifestSha256": "a087ecfb136795d30f6c3861d9e4003f0ed9f457db2b17561f0417551bf97854",
+    "originRevision": "08d189f18a76845dc15dd23b79424809ae27f406",
+    "readOnly": true,
+    "wrapperSha256": "f47d8216081465a932bf44499ab95420e35c24dce1e04ff78a5b5fccca67ea9e"
+  },
+  "scope": "User acceptance of P4 for the declared repinned finite corpus with only the remaining historical real-Linux clauses excluded. Historical qualification records and failed/unexercised flags are unchanged. Existing Linux fixture coverage is retained. No executed-history, actor, root-cause, universal ISA/refinement or packaged-release claim. No commit or push is implied."
+}

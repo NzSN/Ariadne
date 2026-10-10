@@ -1,0 +1,24 @@
+
+running 1 test
+test unix::decode_length_control_and_operand_binding_disagreements_stop_without_fallback ... FAILED
+
+failures:
+
+---- unix::decode_length_control_and_operand_binding_disagreements_stop_without_fallback stdout ----
+
+thread 'unix::decode_length_control_and_operand_binding_disagreements_stop_without_fallback' (2283) panicked at tests/bap/disagreement.rs:105:17:
+assertion `left == right` failed
+  left: {}
+ right: {"flag:af", "flag:cf", "flag:df", "flag:of", "flag:pf", "flag:sf", "flag:zf", "gpr:r10:0", "gpr:r10:1", "gpr:r10:2", "gpr:r10:3", "gpr:r10:4", "gpr:r10:5", "gpr:r10:6", "gpr:r10:7", "gpr:r11:0", "gpr:r11:1", "gpr:r11:2", "gpr:r11:3", "gpr:r11:4", "gpr:r11:5", "gpr:r11:6", "gpr:r11:7", "gpr:r12:0", "gpr:r12:1", "gpr:r12:2", "gpr:r12:3", "gpr:r12:4", "gpr:r12:5", "gpr:r12:6", "gpr:r12:7", "gpr:r13:0", "gpr:r13:1", "gpr:r13:2", "gpr:r13:3", "gpr:r13:4", "gpr:r13:5", "gpr:r13:6", "gpr:r13:7", "gpr:r14:0", "gpr:r14:1", "gpr:r14:2", "gpr:r14:3", "gpr:r14:4", "gpr:r14:5", "gpr:r14:6", "gpr:r14:7", "gpr:r15:0", "gpr:r15:1", "gpr:r15:2", "gpr:r15:3", "gpr:r15:4", "gpr:r15:5", "gpr:r15:6", "gpr:r15:7", "gpr:r8:0", "gpr:r8:1", "gpr:r8:2", "gpr:r8:3", "gpr:r8:4", "gpr:r8:5", "gpr:r8:6", "gpr:r8:7", "gpr:r9:0", "gpr:r9:1", "gpr:r9:2", "gpr:r9:3", "gpr:r9:4", "gpr:r9:5", "gpr:r9:6", "gpr:r9:7", "gpr:rax:0", "gpr:rax:1", "gpr:rax:2", "gpr:rax:3", "gpr:rax:4", "gpr:rax:5", "gpr:rax:6", "gpr:rax:7", "gpr:rbp:0", "gpr:rbp:1", "gpr:rbp:2", "gpr:rbp:3", "gpr:rbp:4", "gpr:rbp:5", "gpr:rbp:6", "gpr:rbp:7", "gpr:rbx:0", "gpr:rbx:1", "gpr:rbx:2", "gpr:rbx:3", "gpr:rbx:4", "gpr:rbx:5", "gpr:rbx:6", "gpr:rbx:7", "gpr:rcx:0", "gpr:rcx:1", "gpr:rcx:2", "gpr:rcx:3", "gpr:rcx:4", "gpr:rcx:5", "gpr:rcx:6", "gpr:rcx:7", "gpr:rdi:0", "gpr:rdi:1", "gpr:rdi:2", "gpr:rdi:3", "gpr:rdi:4", "gpr:rdi:5", "gpr:rdi:6", "gpr:rdi:7", "gpr:rdx:0", "gpr:rdx:1", "gpr:rdx:2", "gpr:rdx:3", "gpr:rdx:4", "gpr:rdx:5", "gpr:rdx:6", "gpr:rdx:7", "gpr:rsi:0", "gpr:rsi:1", "gpr:rsi:2", "gpr:rsi:3", "gpr:rsi:4", "gpr:rsi:5", "gpr:rsi:6", "gpr:rsi:7", "gpr:rsp:0", "gpr:rsp:1", "gpr:rsp:2", "gpr:rsp:3", "gpr:rsp:4", "gpr:rsp:5", "gpr:rsp:6", "gpr:rsp:7", "memory:any", "state:other"}
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    unix::decode_length_control_and_operand_binding_disagreements_stop_without_fallback
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.59s
+
+   Compiling ariadne-analysis v0.1.0 (/tmp/ariadne-bap-mutations-s2549rm9/sut)
+    Finished `release` profile [optimized] target(s) in 1m 09s
+     Running tests/bap/disagreement.rs (target/bap-mutations/ariadne-bap-mutations-s2549rm9/release/deps/bap_disagreement-0426d6b7cb330b70)
+error: test failed, to rerun pass `--test bap_disagreement`

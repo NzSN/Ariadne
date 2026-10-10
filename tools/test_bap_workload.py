@@ -23,6 +23,9 @@ from test_bap_workload_contract import CASE as WINDOWS
 
 
 LINUX = json.loads((measurement.ROOT / "evidence/Ariadne/priority-1-real-capture-case.json").read_text())
+ACTIVE_HISTORICAL = {"id": "historical-test-double", "capture": {**LINUX["capture"], "platform": "linux"},
+                     "query": LINUX["query"], "expectations": {"decodedStarts": 34, "phaseBudgetMs": 250}}
+
 
 
 class ControlledBapWorkloadTests(unittest.TestCase):
@@ -168,7 +171,10 @@ class ControlledBapWorkloadTests(unittest.TestCase):
         environment = {"ARIADNE_PRIORITY4_DUMP": str(self.work / "unavailable-legacy-capture.dmp"),
                        "ARIADNE_BAP_WINDOWS_DUMP": "", **(environment or {})}
         ticks = itertools.count(step=int(self.elapsed_ms * 1_000_000))
-        with patch.object(measurement, "sources", side_effect=lambda: dict(self.current_sources)), \
+        with patch.object(measurement.real_case, "load_case", return_value=ACTIVE_HISTORICAL), \
+             patch.object(measurement.real_case, "selected_dump", return_value=measurement.ROOT / "tmp/priority1/chromium-member-uaf.dmp"), \
+             patch.object(measurement.real_case, "validate_report"), \
+             patch.object(measurement, "sources", side_effect=lambda: dict(self.current_sources)), \
              patch.object(measurement, "WINDOWS_CASE_PATH", self.case_path), \
              patch.object(measurement, "WINDOWS_ARCHIVE_PATH", self.archive_path), \
              patch.object(measurement, "sha", side_effect=self._sha), \
@@ -224,7 +230,7 @@ class ControlledBapWorkloadTests(unittest.TestCase):
         self.assertTrue(record["sourcesStable"])
         self.assertEqual(record["sourceHashes"], self.initial_sources)
         self.assertEqual([row["workload"] for row in record["records"]], [
-            "stage-b-linux", "stage-b-windows", "controlled-not", "real-linux-34",
+            "stage-b-linux", "stage-b-windows", "controlled-not", "real-capture",
         ])
         self.assertFalse(record["windowsWorkloadChecked"])
         self.assertFalse(record["windowsWorkloadTargetMet"])

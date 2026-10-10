@@ -5,8 +5,10 @@
 **Status.** P0 contract frozen before runtime edits on 2026-10-09. The
 [freeze receipt](../../evidence/Ariadne/bap-admission/p0-contract-freeze.json)
 binds the original projection sources, installed provider and independent
-expectations. The [execution checkpoint](bap-admission-checkpoint.md) records delivered P0–P3
-and the incomplete P4 aggregate/external tiers separately.
+expectations. The [initial execution checkpoint](bap-admission-checkpoint.md)
+preserves P0–P3 checks and earlier P4 failures. The
+[accepted successor](real-capture-repin-79938.md) supplies current remote
+qualification with remaining historical real-Linux clauses excluded.
 
 **Why this document exists.** The [P0–P4 plan](../../Plans/bap-projection-admission.md)
 addresses nonempty lifts rejected solely by an opcode whitelist and recovery
@@ -19,7 +21,7 @@ an opcode whitelist changes producer coverage, not the core transfer equations.
 **Where to go next.**
 
 - [Implementation plan](../../Plans/bap-projection-admission.md) — P1–P4 delivery
-  and separate release-runtime, native and external-capture gates.
+  and accepted release-runtime, native and external-capture scope.
 - [Backend design](bap-semantic-backend-design.md) — transport, capture and
   projection invariants preserved by this extension.
 - [Independent contract](../../tests/bap/fixtures/admission/contract.json) and

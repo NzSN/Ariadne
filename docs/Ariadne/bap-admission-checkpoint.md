@@ -2,9 +2,12 @@
 
 ## Context and follow-up
 
-**Status.** Implementation checkpoint on 2026-10-10. P0–P3 are delivered with
-focused checks. P4 aggregate acceptance is incomplete, and the external Electron
-tier is unexercised. This checkpoint is not release qualification.
+**Status.** Historical initial implementation checkpoint on 2026-10-10. P0–P3 are delivered with
+focused checks. P4 aggregate acceptance was incomplete, and the external Electron
+tier was unexercised at this checkpoint. The [later resume record](bap-admission-resume.md)
+records fresh checks, environment recovery and scoped external attempts.
+The [selected successor](real-capture-repin-79938.md) now records accepted P4
+with its own Windows pin and remaining historical real-Linux clauses excluded. These are scoped checks, not release qualification.
 
 **Why this document exists.** The user requested execution of the
 [projection-admission plan](../../Plans/bap-projection-admission.md), followed
@@ -16,6 +19,8 @@ remaining acceptance boundary.
 
 **Where to go next.**
 
+- [Later resume record](bap-admission-resume.md) — fresh results, repaired self-move
+  mutation, recovered external capture and remaining prerequisite gaps.
 - [Plan execution ledger](../../Plans/bap-projection-admission.md#execution-ledger-2026-10-10)
   and [resume order](../../Plans/bap-projection-admission.md#resume-order) — complete
   the outstanding harness, aggregate, measurements and external-query work.
@@ -26,11 +31,10 @@ remaining acceptance boundary.
 - [Backend design](bap-semantic-backend-design.md) and [backend guide](modules/bap.md)
   — production ownership, configuration and capture-only invariants.
 
-**What remains unresolved.** There is no passing P4 aggregate for this changed
-snapshot. The mutation classifier and frozen source pin are repaired against
-retained evidence, but their fresh extended campaign must finish. The v2 baseline is pinned to the verified pre-change source revision;
-post-commit reproduction still needs a complete fresh run. Fixed-budget and owned-query phase/size/limit
-measurements and the original/scoped Electron query still require completion.
+**What remains unresolved.** This historical checkpoint did not qualify P4.
+The [later replacement](real-capture-repin-79938.md) closes active-corpus
+aggregate/native-default and fixed-budget gates while preserving the earlier
+failures. Six old Linux hashes and real-Linux capture coverage remain unexercised.
 No executed path, bad-RSI cause, universal refinement or ISA proof follows.
 
 See the [documentation map](../documentation-map.md) for wider navigation.
@@ -78,7 +82,7 @@ their separate attribution while matching one decoded byte-operand footprint.
 | Producer corpus/model | 58 retained BIL cases match; eight model cases match all nine fields over 99 states. |
 | Controlled workload decisions | Sixty producer/validator/aggregate Python controls pass. |
 | V2/v3 migration | Earlier focused comparison reproduces 24 historical v2 hashes and verifies only declared profile/derived-ID changes; final source-bound refresh remains part of P4. |
-| Full P4 / external Electron | **Not accepted.** Remaining clauses are listed in the plan. |
+| Full P4 / external Electron | **Not accepted at this initial checkpoint.** The [selected successor](real-capture-repin-79938.md) records later qualification and user acceptance. |
 
 Stage 1's refreshed release samples measured the controlled 98-start Windows
 Rust-reference CLI at **657.39 ms** under the unlimited BAP policy. Its 98 starts,
@@ -98,8 +102,9 @@ and [checkpoint receipt](../../evidence/Ariadne/bap-admission/checkpoint.json)
 preserve that distinction. This is a recognition defect in the campaign, not a
 passing mutation gate. Repair the classifier against this exact assertion
 without weakening the test or accepting compile failures/timeouts as sensitivity.
-The repair now recognizes that exact retained assertion; it has not yet been
-accepted by a fresh complete mutation campaign. The v2 source pin is fixed at
+The repair now recognizes that exact retained assertion. A [later resumed campaign](bap-admission-resume.md#mutation-campaign-and-repair)
+recognized it and stopped at a separate self-move mutant; no fresh complete
+mutation campaign is accepted. The v2 source pin is fixed at
 `ebb2e534e8da339f498f20d0a9e1e0b8506a3bdd`, with all five frozen P0 hashes checked.
 
 The independent producer/adapter/native-capture mutation campaign is intended

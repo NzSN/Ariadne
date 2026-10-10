@@ -34,7 +34,8 @@ def main():
                  "operations": ["initialize", "advance:Visit", "advance:FinishRecovery",
                                 "advance:Propagate", "advance:FinishDataflow",
                                 "advance:ExpandSlice", "advance:FinishSlice", "advance:FinishStateflow",
-                                "step", "observe", "finish", "reset"],
+                                "step", "observe", "finish", "reset",
+                                "run-batch", "result-page", "result-close"],
                  "max_frame_bytes": 8 * 1024 * 1024, "max_addresses": 65536}
     encoded = json.dumps(handshake, sort_keys=True, separators=(",", ":"))
     (output / "build_identity.ml").write_text("let handshake = {identity|" + encoded + "|identity}\n")

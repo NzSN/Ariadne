@@ -72,10 +72,11 @@ fn preparation_rejects_missing_duplicate_unexpected_and_contradictory_rows() {
         format!("{ONE}\n{TWO}"),
         format!("{ONE}\n{}\n", TWO.replace("ok 1", "ok 2")),
     ] {
-        assert!(matches!(
-            Helper::new(&format!("printf '%s' '{output}'")).run(),
-            Err(AdapterError::DecoderProtocol(_))
-        ));
+        let result = Helper::new(&format!("printf '%s' '{output}'")).run();
+        assert!(
+            matches!(result, Err(AdapterError::DecoderProtocol(_))),
+            "output {output:?}: {result:?}"
+        );
     }
 }
 #[test]

@@ -1,0 +1,635 @@
+{
+  "schema": "ariadne.bap-independent-scalar-oracle/v1",
+  "passed": true,
+  "comparisons": 104,
+  "contractSha256": "6e34d4283c9529e00e5059642220c15ac3ae5cc27f8c08dad73848ad7aa9ad4b",
+  "typedBilSha256": "0f39463ea55b60aefde4e7e9b25fb98d9b8120f513d689cf2b3f562640a93066",
+  "oracleSourceSha256": "4ad19a74ff613e1db3de69835a3e3e470fbdf1b34f1efcaa9253d3481f81e64a",
+  "rows": [
+    {
+      "case": "sub-rsp-observed",
+      "input": 0,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rsp-observed",
+      "input": 1,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rsp-observed",
+      "input": 127,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rsp-observed",
+      "input": 128,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rsp-observed",
+      "input": 255,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rsp-observed",
+      "input": 9223372036854775807,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rsp-observed",
+      "input": 9223372036854775808,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rsp-observed",
+      "input": 18446744073709551615,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-zero",
+      "input": 0,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-zero",
+      "input": 1,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-zero",
+      "input": 127,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-zero",
+      "input": 128,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-zero",
+      "input": 255,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-zero",
+      "input": 9223372036854775807,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-zero",
+      "input": 9223372036854775808,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-zero",
+      "input": 18446744073709551615,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-positive-limit",
+      "input": 0,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-positive-limit",
+      "input": 1,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-positive-limit",
+      "input": 127,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-positive-limit",
+      "input": 128,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-positive-limit",
+      "input": 255,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-positive-limit",
+      "input": 9223372036854775807,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-positive-limit",
+      "input": 9223372036854775808,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-positive-limit",
+      "input": 18446744073709551615,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-negative-limit",
+      "input": 0,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-negative-limit",
+      "input": 1,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-negative-limit",
+      "input": 127,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-negative-limit",
+      "input": 128,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-negative-limit",
+      "input": 255,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-negative-limit",
+      "input": 9223372036854775807,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-negative-limit",
+      "input": 9223372036854775808,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-negative-limit",
+      "input": 18446744073709551615,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-negative-one",
+      "input": 0,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-negative-one",
+      "input": 1,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-negative-one",
+      "input": 127,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-negative-one",
+      "input": 128,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-negative-one",
+      "input": 255,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-negative-one",
+      "input": 9223372036854775807,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-negative-one",
+      "input": 9223372036854775808,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "sub-rax-negative-one",
+      "input": 18446744073709551615,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "movzx-eax-observed",
+      "input": 0,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "movzx-eax-observed",
+      "input": 1,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "movzx-eax-observed",
+      "input": 127,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "movzx-eax-observed",
+      "input": 128,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "movzx-eax-observed",
+      "input": 255,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "movzx-eax-observed",
+      "input": 9223372036854775807,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "movzx-eax-observed",
+      "input": 9223372036854775808,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "movzx-eax-observed",
+      "input": 18446744073709551615,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "movzx-r14d-observed",
+      "input": 0,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "movzx-r14d-observed",
+      "input": 1,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "movzx-r14d-observed",
+      "input": 127,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "movzx-r14d-observed",
+      "input": 128,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "movzx-r14d-observed",
+      "input": 255,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "movzx-r14d-observed",
+      "input": 9223372036854775807,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "movzx-r14d-observed",
+      "input": 9223372036854775808,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "movzx-r14d-observed",
+      "input": 18446744073709551615,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "movzx-index-negative",
+      "input": 0,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "movzx-index-negative",
+      "input": 1,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "movzx-index-negative",
+      "input": 127,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "movzx-index-negative",
+      "input": 128,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "movzx-index-negative",
+      "input": 255,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "movzx-index-negative",
+      "input": 9223372036854775807,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "movzx-index-negative",
+      "input": 9223372036854775808,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "movzx-index-negative",
+      "input": 18446744073709551615,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "xor-distinct-observed",
+      "input": 0,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "xor-distinct-observed",
+      "input": 1,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "xor-distinct-observed",
+      "input": 127,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "xor-distinct-observed",
+      "input": 128,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "xor-distinct-observed",
+      "input": 255,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "xor-distinct-observed",
+      "input": 9223372036854775807,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "xor-distinct-observed",
+      "input": 9223372036854775808,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "xor-distinct-observed",
+      "input": 18446744073709551615,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "xor-self",
+      "input": 0,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "xor-self",
+      "input": 1,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "xor-self",
+      "input": 127,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "xor-self",
+      "input": 128,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "xor-self",
+      "input": 255,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "xor-self",
+      "input": 9223372036854775807,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "xor-self",
+      "input": 9223372036854775808,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "xor-self",
+      "input": 18446744073709551615,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "cmp-byte-observed",
+      "input": 0,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "cmp-byte-observed",
+      "input": 1,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "cmp-byte-observed",
+      "input": 127,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "cmp-byte-observed",
+      "input": 128,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "cmp-byte-observed",
+      "input": 255,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "cmp-byte-observed",
+      "input": 9223372036854775807,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "cmp-byte-observed",
+      "input": 9223372036854775808,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "cmp-byte-observed",
+      "input": 18446744073709551615,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "cmp-byte-zero",
+      "input": 0,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "cmp-byte-zero",
+      "input": 1,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "cmp-byte-zero",
+      "input": 127,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "cmp-byte-zero",
+      "input": 128,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "cmp-byte-zero",
+      "input": 255,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "cmp-byte-zero",
+      "input": 9223372036854775807,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "cmp-byte-zero",
+      "input": 9223372036854775808,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "cmp-byte-zero",
+      "input": 18446744073709551615,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "cmp-byte-negative",
+      "input": 0,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "cmp-byte-negative",
+      "input": 1,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "cmp-byte-negative",
+      "input": 127,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "cmp-byte-negative",
+      "input": 128,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "cmp-byte-negative",
+      "input": 255,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "cmp-byte-negative",
+      "input": 9223372036854775807,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "cmp-byte-negative",
+      "input": 9223372036854775808,
+      "resultMatches": true,
+      "flagsMatch": true
+    },
+    {
+      "case": "cmp-byte-negative",
+      "input": 18446744073709551615,
+      "resultMatches": true,
+      "flagsMatch": true
+    }
+  ],
+  "scope": "Pinned producer arithmetic/flags/zero-extension for thirteen independently specified encodings; no Ariadne provenance evaluator or hardware executor used."
+}

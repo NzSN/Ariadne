@@ -2,18 +2,20 @@
 
 ## Context and follow-up
 
-**Status.** Execution checkpoint, 2026-10-10. P0–P3 are implemented and pass
-focused independent, installed-provider and native-continuation checks. Production
-now uses `bap-bit-provenance-v3`, typed capability admission and conservative
-ordinary continuation. P4 aggregate acceptance is **not complete**: its first
-prefix mutant was behaviorally rejected but was not credited by the harness.
-That classifier and the post-commit v2 source pin are repaired and checked
-against retained evidence; the full mutation/workload/aggregate must be rerun.
-The external Electron capture/query tier is unexercised; its artifact path was
-requested. The original plan was written on 2026-10-09 against `e648055`.
+**Status.** P0–P4 accepted by the user on 2026-10-10 for the selected active
+corpus, with the remaining historical real-Linux clauses excluded. The
+[acceptance decision](../evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
+preserves the original qualification records and flags. V3 typed admission,
+conservative ordinary continuation and bounded
+completion transport pass remote source/fixture, Rust release-runtime and
+native-default checks. The [replacement record](../docs/Ariadne/real-capture-repin-79938.md)
+binds the fresh Windows workload, output baseline and fixed budgets. The
+[earlier resume](../docs/Ariadne/bap-admission-resume.md) preserves failed
+prerequisites and mutation repairs. Heavy work remains remote. The original
+plan was written on 2026-10-09 against `e648055`.
 
-**Why this document exists.** The current [BAP projection contract](../docs/Ariadne/bap-semantic-backend-design.md#projection)
-rejects forms outside a finite opcode whitelist before interpreting their BIL.
+**Why this document exists.** The earlier [BAP projection contract](../docs/Ariadne/bap-semantic-backend-design.md#projection)
+rejected forms outside a finite opcode whitelist before interpreting their BIL.
 An Electron Scanner/PreParser investigation encountered nonempty BAP lifts for
 SUB64ri8, MOVZX32rm8, XOR64rr and CMP8mi, yet recovery stopped at each form.
 The [assurance boundary](../docs/Ariadne/semantic-assurance.md) assigns projection
@@ -26,32 +28,52 @@ data effects are unknown. Each change has its own source-bound acceptance gates.
 
 **Where to go next.**
 
+- [P4 bounded completion transport](bap-completion-pages.md) — handles the
+  recovered Scanner query's oversized native response without changing analysis
+  semantics or the per-frame budget.
+- [Resume record](../docs/Ariadne/bap-admission-resume.md) — fresh checks, mutation
+  repair, recovered dependencies/capture and the selected successor.
 - [V3 admission contract](../docs/Ariadne/bap-admission-contract.md) — frozen
   independent expectations, failure classes and the explicit profile migration.
 - [Execution checkpoint](../docs/Ariadne/bap-admission-checkpoint.md) — exercised
-  checks, retained partial evidence and the exact remaining P4 work.
+  checks, retained partial evidence and the original incomplete P4 state.
 
 - [Backend design](../docs/Ariadne/bap-semantic-backend-design.md) — current
-  protocol, projection invariants and the explicitly pending admission extension.
+  protocol, projection invariants and implemented capability admission.
 - [Pinned binding review](../docs/Ariadne/bap-projection-source-review.md) —
   getter/extraction mapping, register aliases and defined/undefined flag limits.
 - [Input guide](../docs/Ariadne/modules/input.md) and
   [investigation contracts](../docs/Ariadne/investigation-contracts.md) —
   discovery roots, captured evidence, unknowns and explanation completeness.
 - [BAP integration ledger](bap-integration.md) and
-  [plan index](README.md) — distinguish this pending extension from delivered
+  [plan index](README.md) — distinguish the v3 extension from earlier delivered
   Stage 1/Stage 2 qualification.
 
-**What remains unresolved.** P4 has no passing aggregate/native-default delivery
-record for this changed source snapshot. Its mutation classifier, remaining
-aggregate gates, fixed-budget measurements and external Electron query need
-completion. Focused passes and historical v2 qualification do not establish
-full P4 acceptance. Broader BIL coverage does not establish an executed path,
-a correct saved-slot lifetime, all indirect targets, precise memory aliases or
-the cause of the bad RSI value. Universal lifter/ISA correctness and analysis
-refinement remain separate limits.
+**What remains unresolved.** No required P4 work remains in the accepted scope.
+The old Linux capture, its six historical outputs and real-Linux capture/phase
+qualification are excluded by the user's decision and remain unexercised.
+The original-corpus full-24 oracle remains false. Scanner/PreParser
+results retain their explicit gaps and interrupted Rust-repeat limit. Broader
+BIL coverage does not identify an executed path, precise memory aliases or the
+bad-RSI cause. Universal ISA/refinement and packaged release qualification remain
+separate. Heavy build/model/mutation/large-query work must run remotely.
 
 For the wider context, see the [documentation map](../docs/documentation-map.md).
+
+## Acceptance decision (2026-10-10)
+
+The user accepted P4 after excluding its remaining historical real-Linux
+clauses. The selected Windows capture, existing platform fixtures, current
+native/reference/default parity, model/mutation checks, fixed budgets and sealed
+evidence constitute the accepted scope. Existing Linux fixture checks remain
+part of the passing finite corpus.
+
+The [decision record](../evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
+binds the retained qualification and current implementation hashes. It records
+acceptance separately from the historical generic runner's
+`fullPlanAcceptance=false` flag. Automatic ingestion of the separate external
+evidence and completion of the old Scanner Rust timing repetitions are optional
+follow-ups, not acceptance gates. No release or causal-attribution claim follows.
 
 ## Execution ledger (2026-10-10)
 
@@ -61,32 +83,32 @@ For the wider context, see the [documentation map](../docs/documentation-map.md)
 | P1 | Four observed forms and thirteen boundary encodings pass independent effects/address/flag checks on both targets. | [Bounded P1 record](../evidence/Ariadne/bap-admission/p1-validation.json); retained results qualify their earlier source hashes. |
 | P2 | Generic opcode whitelist removed; typed BIL/namespace/width/control/operand checks implemented. | [Bounded P2 record](../evidence/Ariadne/bap-admission/p2-validation.json); current corpus has 58 cases and 37 projected forms. Empty CLC remains a recorded lifter gap. |
 | P3 | Ordinary data-only unknowns continue with all-location possible effects, no definite kills and visible gaps. Rust/native capture admission and report binding enforce the outcome. | Producer–opaque–consumer, direct native tampering, malformed/resource and hidden-control tests pass. Earlier and opaque origins both survive. |
-| P4 | In progress; aggregate acceptance not achieved. | Root checks, 330 native replay observations, 12 algorithm mutants and 8 boundary mutants pass. The first run stopped at an uncredited prefix assertion; classifier and baseline pin repairs still need full requalification. External capture is unavailable. |
+| P4 | Accepted by the user; historical real-Linux remaining clauses excluded. | [Joined scope record](../evidence/Ariadne/real-capture-repin-79938/report.json): 20 native-core gates, Stage 1/Stage E/input/model checks, 25 admission, 12 algorithm and eight boundary mutants, 330 replay observations, product/output parity and unchanged I4/I5 budgets pass. Eighteen historical hashes and six new replacement outputs pass; the old six Linux hashes remain unexercised. Retained Scanner/PreParser implementation/helper identities match. |
 
-The v3 profile intentionally changes semantic/content identities. A frozen v2
-source build reproduces all 24 historical output hashes; the explicit v3
-migration comparison passes with only declared profile/derived-ID changes.
+The v3 profile intentionally changes semantic/content identities. The original
+focused comparison reproduced all 24 historical output hashes. The later resume
+reproduces 18 available outputs with the frozen source/tool identities; six need
+the absent controlled Linux capture. The available v3 migration comparisons pass
+with only declared profile/derived-ID changes.
 This is not a claim that v3 bytes are unchanged historical v2 outputs.
 
 ### Resume order
 
-1. Preserve the [failed aggregate](../evidence/Ariadne/bap-admission/p4-rejected/report.json)
-   and prefix receipt. The classifier now recognizes the exact observed assertion
-   without changing expected rejection or crediting compilation/timeouts; verify
-   it in a fresh complete campaign.
-2. The v2 comparison is pinned to `ebb2e534e8da339f498f20d0a9e1e0b8506a3bdd`
-   and matches all five P0 source hashes. Reproduce all 24 historical outputs
-   using that source pin again; never use the new implementation HEAD as v2.
-3. Run the complete 25-case producer/adapter/native-capture mutation campaign
-   and the source-frozen [P4 runner](../tools/check_bap_admission.py). Refresh
-   stale nested records; retain failures with `passed=false`.
-4. Complete fixed I4/I5 measurements and the owned query measurements, including
-   preparation/analysis/render phases, limits and report sizes. No budget waiver
-   follows from the unlimited BAP timing policy.
-5. Locate the original Electron artifact or independently bound scoped derivative
-   and its Scanner/PreParser root/query witnesses. Preserve original/derivative
-   hashes, copied context and per-range equality; raw customer files remain external.
-6. Update this ledger only to the exercised tiers and seal the final evidence.
+The active P4 campaign is complete under the
+[selected replacement plan](real-capture-repin-79938.md). For future continuation:
+
+1. Preserve failed and passing historical records, the frozen v2 source/tool pin
+   and the [new verified bundle](../evidence/Ariadne/real-capture-repin-79938/evidence-manifest.json).
+2. Use the isolated remote SDK/helper and read-only dependency snapshot. Heavy
+   local work remains stopped.
+3. Resolve the active artifact through the validated manifest or
+   `ARIADNE_REAL_CAPTURE_DUMP`; check its exact bytes before workload credit.
+4. After source/tool changes, run the source-frozen P4 and applicable investigation
+   gates. Keep fixed I4/I5 budgets, native/reference parity and explicit gaps.
+5. Recover the original Linux artifact only when exercising its historical six
+   hashes or real-Linux tier. Do not relabel the replacement's six new outputs.
+6. Broader consumer recovery, causal attribution and release packaging need their
+   own additional evidence; the retained partial results do not establish them.
 
 ## Delivery intent and preserved boundaries
 
@@ -321,10 +343,10 @@ evidence. Update design, guides and ledgers only to the stage actually achieved.
 - [x] P1 four observed forms and boundary/negative controls qualified.
 - [x] P2 opcode-name whitelist removed; capability/operand/control checks qualified.
 - [x] P3 conservative ordinary continuation and visible gaps qualified.
-- [ ] P4 source/fixture and Rust release-runtime tiers qualified.
-- [ ] P4 native parity/default tier qualified, or explicitly retained as pending.
-- [ ] Electron captured-query results and subsequent coverage gaps preserved.
-- [ ] New evidence identities, schema/profile changes and navigation verified.
+- [x] P4 source/fixture and Rust release-runtime tiers qualified on the active replacement corpus.
+- [x] P4 native parity/default tier qualified on the active replacement corpus.
+- [x] Electron captured-query results and subsequent coverage gaps preserved.
+- [x] New evidence identities, schema/profile changes and navigation verified.
 
 No checked item in this plan implies that the historical bad RSI producer has
 been identified. That conclusion requires its own captured causal evidence.

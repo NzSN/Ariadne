@@ -1,0 +1,16 @@
+{
+  "command": [
+    "cargo",
+    "test",
+    "--offline",
+    "--locked",
+    "--test",
+    "bap_native",
+    "--test",
+    "bap_disagreement",
+    "--",
+    "--include-ignored"
+  ],
+  "exitCode": 0,
+  "seconds": 133.01678833400365
+}

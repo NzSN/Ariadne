@@ -1,0 +1,20 @@
+
+running 1 test
+test partial_self_moves_define_written_cells_and_unsupported_bil_never_falls_back ... FAILED
+
+failures:
+
+---- partial_self_moves_define_written_cells_and_unsupported_bil_never_falls_back stdout ----
+
+thread 'partial_self_moves_define_written_cells_and_unsupported_bil_never_falls_back' (6) panicked at tests/bap/native.rs:447:9:
+assertion `left == right` failed
+  left: {}
+ right: {"gpr:rax:0"}
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    partial_self_moves_define_written_cells_and_unsupported_bil_never_falls_back
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.39s
+

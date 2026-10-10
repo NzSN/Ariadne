@@ -17,7 +17,7 @@ def main():
  if identity is None:raise SystemExit('sealed dependency snapshot required')
  env={**os.environ,'ARIADNE_BAP_CORE_DIR':str(ROOT/'target/bap-core-native'),'ARIADNE_LLVM_MC':str(ROOT/'target/ariadne-llvm-mc'),'ARIADNE_BAP_HELPER':str(ROOT/'target/ariadne-bap-lift'),'BAP_RUNTIME_ROOT':str(ROOT/'tmp/bap-setup/stable')}
  graph=ROOT/'tmp/graphviz-headers/root';env.update(ARIADNE_DOT=str(graph/'usr/bin/dot'),GVBINDIR=str(graph/'usr/lib/x86_64-linux-gnu/graphviz'),LD_LIBRARY_PATH=str(graph/'usr/lib/x86_64-linux-gnu'))
- env['ARIADNE_REAL_DUMPS']=str(ROOT.parent/'chromium/src/third_party/breakpad/breakpad/src/processor/testdata')
+ env.setdefault('ARIADNE_REAL_DUMPS',str(ROOT.parent/'chromium/src/third_party/breakpad/breakpad/src/processor/testdata'))
  env['LLVM20_INCLUDE_DIR']=str(ROOT/'tmp/llvm20-headers/root/usr/include/llvm-20')
  gates=[];nested={};artifact_roots=[out]
  def run(name,command,timeout=14400):

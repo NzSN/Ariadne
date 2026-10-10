@@ -10,6 +10,8 @@
 
 **Where to go next.**
 
+- [Current Windows replacement](real-capture-repin-79938.md) — active P4 workload
+  with a distinct identity and baseline; this Linux result remains historical.
 - [Effect review](priority-2-effects-validation.md) — investigates whether opaque effects on that path can be narrowed.
 - [Fault-address delivery](investigation-validation.md) — adds typed explanations to the retained Linux query.
 - [Workload measurements](priority-4-performance-validation.md) — address scale beyond this small capture under the historical backend.
