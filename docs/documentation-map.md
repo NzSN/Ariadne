@@ -103,8 +103,8 @@ implemented repairs and exercised checks from real-Windows qualification.
 ### Project and active plans
 
 - [BAP projection admission and coverage plan](../Plans/bap-projection-admission.md) —
-  pending form validation, removal of opcode-name gates and conservative ordinary
-  continuation, with separate source/fixture and capture/backend exits.
+  accepted form validation, capability admission and conservative ordinary
+  continuation, with qualified finite-corpus exits and excluded historical real-Linux clauses.
 
 - [I5c address-wrap implementation plan](../Plans/i5c-address-wrap.md).
 - [I4 native performance implementation](../Plans/i4-performance-implementation.md).
@@ -122,6 +122,7 @@ implemented repairs and exercised checks from real-Windows qualification.
 
 ### Analysis, interfaces and delivery documents
 
+- [Ariadne architecture](Ariadne/architecture.md) — main pipeline, native helpers, completed-analysis binding and separate IR/stateflow paths.
 - [Selected I5c address-wrap design](Ariadne/i5c-address-wrap-design.md).
 - [I4 native performance design](Ariadne/i4-performance-design.md).
 - [I4 native performance qualification](Ariadne/i4-performance-validation.md).

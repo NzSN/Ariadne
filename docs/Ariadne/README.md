@@ -10,6 +10,8 @@
 
 **Where to go next.**
 
+- [Architecture overview](architecture.md) — block diagrams, Rust/native ownership, main minidump flow and separate IR/stateflow paths.
+
 - [Accepted P4 real-capture replacement](real-capture-repin-79938.md) — current Windows corpus, distinct baseline, unchanged fixed budgets and excluded historical real-Linux clauses.
 - [BAP v3 resume record](bap-admission-resume.md) — recovered tools, preserved earlier failures and the selected successor.
 - [Historical BAP v3 execution checkpoint](bap-admission-checkpoint.md) — initial P0–P3 checks and failures before the accepted P4 successor.
@@ -40,6 +42,7 @@ under `Plans/completed/`.
 
 | Topic | Current documentation |
 | --- | --- |
+| Architecture and process boundaries | [Architecture overview](architecture.md) |
 | Minidump input and CLI | [Input guide](modules/input.md), [examples](minidump-investigator-examples.md), [report schema](stage-c-report-schema.md) |
 | BAP semantics and native analysis | [Backend guide](modules/bap.md), [projection design](bap-semantic-backend-design.md), [source review](bap-projection-source-review.md), [native qualification](bap-core-qualification.md), [current audit](bap-documentation-sync.md), [admission delivery plan](../../Plans/bap-projection-admission.md) |
 | Fault-address investigation | [Module guide](modules/investigation.md), [producer contracts](investigation-contracts.md), [I5a zero-address contracts](i5a-contracts.md), [design](investigation-layer-design.md). |
