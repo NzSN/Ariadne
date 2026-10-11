@@ -6,19 +6,23 @@
 original overview was source-reviewed on 2026-10-10 at `9b7615d`; development
 and retained-history references were consolidated on 2026-10-11. Native BAP
 analysis is the minidump CLI default; Rust remains the explicit reference.
+Diagram-to-module mappings were checked against the source layout on 2026-10-11.
 
 **Why this document exists.** The [project overview](../../README.md) and
 [roadmap](../../ROADMAP.md) describe snapshot-based machine-code investigation.
 This guide places the reader, instruction semantics, analysis passes and
-investigation questions in one diagram.
+investigation questions in diagrams linked to their actual source owners.
 
 **What this document establishes.** Runtime data flow, Rust/native process
-ownership, the distinction between BAP lifting and BAP analysis, the separate
-supplied-IR/stateflow paths, analysis equations, source layout and development
-checks. Dated layout/tool records retain their original qualification scopes.
+ownership and module paths for each diagram block, the distinction between BAP
+lifting and BAP analysis, the separate supplied-IR/stateflow paths, analysis
+equations, source layout and development checks. Dated layout/tool records retain
+their original qualification scopes.
 
 **Where to go next.**
 
+- [Terminology convention](../terminology.md) — exact meanings of backend,
+  analysis state, origins and evidence/acceptance claims.
 - [Input design and usage](file-reader-design.md) — capture indexing, provenance and local-start discovery.
 - [BAP design and usage](bap-analysis-core-design.md) — lifting, admission,
   native state ownership, checked transport and completed results.
@@ -51,45 +55,61 @@ Ariadne has a **Rust host that manages captured evidence and reports**, with
 separate native helpers for decoding, instruction semantics and analysis.
 The arrows below show logical data dependencies; the preparation stage exchanges
 bounded instruction batches with its helpers while discovering candidate starts.
+Each implementation block names its module/API and principal source file.
+`AnalysisRequest` and `CompletedAnalysis` are data/API boundaries rather than
+additional solvers. The linked table below expands grouped source ownership.
+Internal submodule names describe code ownership; public APIs may be re-exported
+from [the library root](../../src/lib.rs).
 
 ```mermaid
 flowchart TB
     D["Windows / Linux AMD64 minidump"]
-    Q["User query<br/>Entry points + slice seeds"]
+    Q["Query arguments<br/>Entry points + slice seeds"]
 
     subgraph Rust["Ariadne Rust host"]
-        R["Capture reader<br/>Immutable snapshot, bytes, contexts, provenance"]
-        P["Preparation<br/>Discover local starts<br/>Validate and project instruction effects"]
-        F["Frozen analysis request<br/>Control successors + uses / may-defs / must-defs"]
-        REF["Rust reference analyzer<br/>Explicit alternative"]
-        V["Validate native results<br/>Identity, state, attribution, clean completion"]
-        A["Completed AnalysisView<br/>CFG + reaching origins + backward slice"]
-        I["Investigation layer<br/>Fault-address dependencies<br/>Zero-address / zero-base assessments"]
-        O["Reports<br/>Text, JSON, Graphviz DOT"]
+        CLI["ariadne-minidump<br/>src/bin/ariadne-minidump.rs<br/>CLI orchestration"]
+        R["ariadne::input<br/>src/input/mod.rs<br/>Immutable captured snapshot"]
+        P["input::materialize<br/>src/input/materialize.rs<br/>Entry-driven preparation"]
+        B["ariadne::bap::Backend<br/>src/bap/prepare.rs<br/>BIL admission and projection"]
+        F["Data: AnalysisRequest<br/>src/model.rs<br/>Frozen control and effects"]
+        REF["ariadne::Analyzer<br/>src/engine.rs<br/>Rust reference analysis"]
+        V["bap::core_adapter<br/>src/bap/core_adapter.rs<br/>Native transport and result validation"]
+        A["Data/API: CompletedAnalysis / AnalysisView<br/>src/analysis_view.rs<br/>Bound request and completed state"]
+        IB["ariadne::input::investigation<br/>src/input/investigation.rs<br/>Capture and query binding"]
+        I["ariadne::investigation<br/>src/investigation/<br/>Explain dependencies and assess addresses"]
+        O["input::report + ariadne::reports<br/>src/input/report.rs + src/reports/<br/>Text, JSON and DOT"]
     end
 
     subgraph Helpers["Separate native helper processes"]
-        MC["LLVM MC helper<br/>Instruction length, operands, control facts"]
-        L["C++ BAP lifting helper<br/>Pinned BAP library to typed BIL"]
-        C["OCaml analysis helper + BAP SDK<br/>CFG recovery<br/>Reaching definitions<br/>Backward slicing"]
+        MC["LLVM MC decoder<br/>native/llvm_mc/decode.cpp<br/>Length, operands and control facts"]
+        L["BAP lifting helper<br/>native/bap/lift.cpp<br/>C++ host of pinned BAP to typed BIL"]
+        C["BAP native analysis<br/>native/bap-core/recovery.ml<br/>OCaml recovery, dataflow and slice"]
     end
 
     D --> R
+    Q --> CLI
+    CLI -.->|"Open capture"| R
+    CLI -->|"Query and preparation options"| P
     R --> P
-    Q --> P
-    P -->|"Captured instruction bytes"| MC
-    MC -->|"Independent decode facts"| P
-    P -->|"Captured instruction bytes"| L
-    L -->|"Typed instruction semantics"| P
+    P -->|"Candidate byte batches"| B
+    B -->|"llvm_mc reference / protocol"| MC
+    MC -->|"Independent decoded facts"| B
+    B -->|"bap::Session"| L
+    L -->|"Typed BIL"| B
+    B -->|"Normalized site facts and evidence"| P
     P --> F
-    F -->|"Default backend"| C
-    C -->|"Checked protocol + result pages"| V
+    F -->|"Default: NativeAnalyzer::from_capture"| V
+    P -->|"Capture admission evidence"| V
+    V -->|"core_session / core_protocol"| C
+    C -->|"Observations and final result pages"| V
     V --> A
     F -.->|"Explicit Rust selection"| REF
     REF --> A
-    A --> I
-    R -->|"Captured context and evidence"| I
+    A --> IB
+    P -->|"Retained preparation and capture evidence"| IB
+    IB --> I
     A --> O
+    P -->|"Input and preparation report context"| O
     I --> O
 ```
 
@@ -110,7 +130,7 @@ flowchart TB
 4. **Validate completion.** Rust checks native identities, state domains,
    attribution, missing seeds and clean process completion. Bounded frames and
    immutable final-result pages transport large results. It exposes the completed
-   request/state through the shared `AnalysisView` interface.
+   request/state in `CompletedAnalysis` through the shared `AnalysisView` interface.
 5. **Explain and render.** Investigation binds that completed analysis to the
    exact prepared query and captured evidence. It produces possible address
    origins, alternatives, gaps and evidence requirements. Fault-time assessments
@@ -119,15 +139,25 @@ flowchart TB
 
 ## Ownership and process boundaries
 
-| Component | Implementation and principal source | Responsibility |
+The block IDs correspond to the Mermaid diagram above. Input artifacts `D` and
+`Q` are supplied data; all other blocks have the source owners listed here.
+
+| Block and module/API | Linked source owners | Responsibility |
 | --- | --- | --- |
-| CLI and input | Rust: [CLI](../../src/bin/ariadne-minidump.rs), [input module](../../src/input/mod.rs) | Select query/backend, parse the capture, preserve provenance and prepare immutable input. |
-| Instruction lifting | C++ helper: [lifter](../../native/bap/lift.cpp) | Call the pinned BAP library and serialize typed BIL for supplied captured prefixes. |
-| Independent decoding | Native LLVM helper: [guide](../llvm-mc-adapter.md) | Supply decode/control/operand facts for binding checks. It supplies no production minidump effects. |
-| Projection and admission | Rust: [projection](../../src/bap/projection.rs), [admission](../../src/bap/admission.rs) | Derive `uses`, `may_defs`, justified `must_defs`, address evidence and semantic gaps. |
-| Native analysis | OCaml helper: [recovery](../../native/bap-core/recovery.ml), [capture admission](../../native/bap-core/capture.ml) | Admit capture-bound input and own recovery, reaching definitions and slicing transitions. |
-| Native transport and result access | Rust: [session](../../src/bap/core_session.rs), [adapter](../../src/bap/core_adapter.rs), [analysis view](../../src/analysis_view.rs) | Validate helper identity, request/result binding, transport and completion. |
-| Investigation and reports | Rust: [binding](../../src/input/investigation.rs), [explanation](../../src/investigation/explain.rs), [report module](../../src/reports/mod.rs) | Reuse completed analysis, validate claims and render evidence-linked outputs. |
+| `CLI`: `ariadne-minidump` | [Binary](../../src/bin/ariadne-minidump.rs) | Select query/backend, call preparation and analysis, construct optional questions and publish outputs. |
+| `R`: `ariadne::input` / `FileSnapshot` | [Module/API](../../src/input/mod.rs), [minidump parsing](../../src/input/minidump.rs), [address-space reads](../../src/input/address_space.rs), [fault observations](../../src/input/fault_context.rs) | Own immutable artifact bytes, capture indexes, source spans, metadata and context validity. |
+| `P`: `input::materialize` / `FileSnapshot::prepare_with_bap` | [Materialization](../../src/input/materialize.rs), [prepared types](../../src/effects.rs) | Discover local starts from entries, request bounded site batches and freeze `FilePreparedAnalysis` with its request and retained evidence. |
+| `B`: `ariadne::bap::Backend` and internal admission/projection | [Preparation](../../src/bap/prepare.rs), [admission](../../src/bap/admission.rs), [projection](../../src/bap/projection.rs), [address evidence](../../src/bap/address.rs), [location catalogue](../../src/effects/locations.rs) | Check decode/lift agreement; derive `uses`, `may_defs`, justified `must_defs`, address evidence and gaps. |
+| `MC`: `ariadne::llvm_mc` bridge and decoder process | [Reference adapter](../../src/llvm_mc/reference.rs), [protocol/session](../../src/llvm_mc/protocol.rs), [native decoder](../../native/llvm_mc/decode.cpp) | Supply independent decode/control/operand facts. This path supplies no production minidump effects. |
+| `L`: `ariadne::bap::Session` and lifting process | [Rust session](../../src/bap/session.rs), [typed AST](../../src/bap/ast.rs), [C++ lifter](../../native/bap/lift.cpp) | Call pinned BAP on captured prefixes and validate/transport typed BIL. |
+| `F`: `AnalysisRequest` | [Core model types and validation](../../src/model.rs) | Own the immutable instruction domain, roots/seeds and normalized control/effect facts. This block is a data contract. |
+| `V`: `bap::core_adapter::NativeAnalyzer` | [Adapter](../../src/bap/core_adapter.rs), [session](../../src/bap/core_session.rs), [protocol](../../src/bap/core_protocol.rs) | Admit capture-bound requests, orchestrate actual native actions, validate state/attribution and require complete transfer and clean exit. |
+| `C`: native `Main`, `Recovery`, `Capture`, `Project_state` | [Main/lifecycle](../../native/bap-core/main.ml), [recovery/dataflow/slice](../../native/bap-core/recovery.ml), [capture admission](../../native/bap-core/capture.ml), [BIR attribution](../../native/bap-core/project_state.ml) | Own the production analysis state and transitions in the OCaml process. |
+| `REF`: `ariadne::Analyzer` | [Rust engine](../../src/engine.rs), [shared model types](../../src/model.rs) | Independently implement recovery, reaching definitions and slicing over the same frozen request. |
+| `A`: `CompletedAnalysis` / `AnalysisView` | [Read-only view and completed owner](../../src/analysis_view.rs), [result types](../../src/model.rs) | Retain the request/result used for query binding and reporting; this block is an API/data boundary. |
+| `IB`: `ariadne::input::investigation` | [Capture adapter](../../src/input/investigation.rs), [domain binding validation](../../src/investigation/validate.rs) | Bind completed request/state to exact preparation, instruction evidence and reader-owned fault context. |
+| `I`: `ariadne::investigation` | [Public exports](../../src/investigation/mod.rs), [explanation](../../src/investigation/explain.rs), [zero address](../../src/investigation/zero_address.rs), [zero base/displacement](../../src/investigation/zero_base_offset.rs), [fault binding](../../src/investigation/fault_context.rs) | Reuse bound analysis for possible dependencies and separately scoped fault-time assessments. |
+| `O`: `input::report`, `ariadne::render`, `ariadne::reports` | [Minidump reports](../../src/input/report.rs), [core text/DOT](../../src/render.rs), [question renderers](../../src/reports/mod.rs), [publication](../../src/reports/render.rs) | Render validated owned results and capture context; the CLI chooses output mode and calls publication. |
 
 **BAP lifting and BAP analysis are different helpers.** The C++ helper uses
 BAP's instruction-lifting library. The OCaml helper links the BAP SDK and
@@ -144,16 +174,61 @@ its standard-library-only Rust API.
 
 ## Separate IR and stateflow paths
 
+These are separate result families, with their own normalized requests and
+schemas. `CFG` denotes a recovery view from block `A` above; the remaining
+processing blocks name the actual adapter, solver and reporting modules.
+
 ```mermaid
 flowchart LR
-    IR["Supplied LLVM .ll / .bc"] --> VERIFY["LLVM IR helper<br/>Parse and verify"]
-    VERIFY --> IRA["Rust LLVM IR analysis"]
-    IRA --> OUT["Reports"]
+    subgraph IRPath["Directly supplied LLVM IR"]
+        IR["LLVM .ll / .bc + function + seeds"]
+        IRCLI["ariadne-ir<br/>src/bin/ariadne-ir.rs"]
+        IRAD["ariadne::ir::open_verified_ir<br/>src/ir/mod.rs<br/>Own bytes and validate normalized rows"]
+        VERIFY["LLVM IR helper process<br/>native/llvm_ir/inspect.cpp<br/>Parse and verify exact IR bytes"]
+        IRA["ariadne::llvm_ir<br/>src/llvm_ir.rs<br/>SSA / phi / memory dependency slice"]
+        IR --> IRCLI
+        IRCLI --> IRAD
+        IRAD -->|"Owned artifact"| VERIFY
+        VERIFY -->|"Verified rows"| IRAD
+        IRAD -->|"llvm_ir::Request"| IRA
+    end
 
-    CFG["Recovered CFG"] --> STATE["Abstract stateflow analysis<br/>Native BAP or explicit Rust reference"]
-    SEM["Caller-supplied abstract semantics"] --> STATE
-    STATE --> OUT
+    subgraph StatePath["Post-recovery abstract stateflow"]
+        CFG["Data/API: recovery AnalysisView<br/>src/analysis_view.rs"]
+        SEM["Caller-supplied semantic-input JSON"]
+        CODEC["ariadne::reports::decode_semantics<br/>src/reports/codecs.rs"]
+        HAND["machine_state::prepare_from_recovery<br/>src/machine_state.rs<br/>Frozen CFG + supplied transitions"]
+        NATIVE["bap::stateflow_adapter::NativeStateflow<br/>src/bap/stateflow_adapter.rs<br/>Native session and result validation"]
+        FLOW["OCaml Stateflow process module<br/>native/bap-core/stateflow.ml<br/>Actual propagation and observations"]
+        STATE["machine_state::Analyzer<br/>src/machine_state.rs<br/>Rust reference propagation"]
+        CFG --> HAND
+        SEM --> CODEC
+        CODEC --> HAND
+        HAND -->|"Default native request"| NATIVE
+        NATIVE -->|"core_session / core_protocol"| FLOW
+        FLOW -->|"Actual stateflow result"| NATIVE
+        HAND -.->|"Explicit Rust selection"| STATE
+    end
+
+    OUT["ariadne::reports<br/>src/reports/render.rs<br/>Separate IR and stateflow envelopes"]
+    IRA -->|"IR result"| OUT
+    NATIVE -->|"Validated machine-state result"| OUT
+    STATE -->|"Reference machine-state result"| OUT
 ```
+
+| Block and module/API | Linked source owners | Responsibility |
+| --- | --- | --- |
+| `IRCLI`: `ariadne-ir` | [Binary](../../src/bin/ariadne-ir.rs) | Select artifact/function/seeds, invoke the adapter and solver, then render/publish the IR family. |
+| `IRAD`: `ariadne::ir` | [Owned-IR adapter](../../src/ir/mod.rs) | Hash owned bytes, invoke the helper and validate normalized request rows and identities. |
+| `VERIFY`: LLVM IR helper | [Native inspector](../../native/llvm_ir/inspect.cpp) | Parse/verify exact supplied bytes and emit block/value/phi/memory/call facts. |
+| `IRA`: `ariadne::llvm_ir` | [IR model and analyzer](../../src/llvm_ir.rs) | Validate the request and compute its instruction-ID dependency slice, control graph and obligations. |
+| `CFG`: `AnalysisView` | [Recovery view](../../src/analysis_view.rs) | Supply frozen recovery nodes, local edges, effects and retained context; it is an input API boundary. |
+| `CODEC`: `ariadne::reports::decode_semantics` | [Semantic-input codec](../../src/reports/codecs.rs) | Decode separately supplied state catalogue, entry facts, transitions and completeness assertions. |
+| `HAND`: `machine_state::prepare_from_recovery` | [Handoff construction](../../src/machine_state.rs) | Combine frozen recovery facts with supplied semantics, validate the stateflow request and retain full recovery context. |
+| `NATIVE`: `bap::stateflow_adapter::NativeStateflow` | [Stateflow adapter](../../src/bap/stateflow_adapter.rs), [shared native session](../../src/bap/core_session.rs), [wire schema](../../src/bap/core_protocol.rs) | Transport typed stateflow inputs/actions and validate actual helper observations and completion. |
+| `FLOW`: native `Main` / `Stateflow` | [Family dispatcher](../../native/bap-core/main.ml), [stateflow passes](../../native/bap-core/stateflow.ml), [project attribution](../../native/bap-core/project_state.ml) | Own stateflow propagation and model-relative edge/terminal observations in the separate native process. |
+| `STATE`: `ariadne::machine_state::Analyzer` | [Rust stateflow reference](../../src/machine_state.rs) | Propagate the same finite supplied semantics as an explicit Rust alternative. |
+| `OUT`: `ariadne::reports` | [Family envelopes/rendering/publication](../../src/reports/render.rs), [public exports](../../src/reports/mod.rs) | Build separate `ir_report` and `machine_report` envelopes and publish text/JSON/DOT without merging family identities. |
 
 The [LLVM IR path](typed-replay-design.md#direct-verified-ir) verifies a directly supplied function and
 analyzes its block successors, SSA/phi dependencies and conservative memory
