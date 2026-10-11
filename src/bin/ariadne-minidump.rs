@@ -8,7 +8,7 @@ use std::io::{self, Write};
 use std::path::{Path, PathBuf};
 
 fn usage() -> &'static str {
-    "usage: ariadne-minidump DUMP --decoder-reference PATH --entry VA_HEX [--entry VA_HEX ...] [--seed VA_HEX ...] [--seed-exception-rip] [--max-starts N] [--stateflow-input SEMANTICS_JSON] [--explain-fault-address VA --memory-access N] [--explanation-only] [--assess-zero-address VA --memory-access N] [--assess-zero-base-offset VA --memory-access N] [--assessment-only] [--analysis-backend rust|bap] [--bap-core-dir DIR] [--bap-helper PATH] [--bap-runtime DIR] (--format text|dot|json | --output-dir NEW_DIR)"
+    "usage: ariadne-minidump DUMP --decoder-reference PATH --entry VA_HEX [--entry VA_HEX ...] [--seed VA_HEX ...] [--seed-exception-rip] [--max-starts N] [--stateflow-input SEMANTICS_JSON] [--explain-fault-address VA --memory-access N] [--explanation-only] [--assess-zero-address VA --memory-access N] [--assess-zero-base-offset VA --memory-access N] [--assess-memory-provenance LOAD_VA --memory-access N] [--assessment-only] [--analysis-backend rust|bap] [--bap-core-dir DIR] [--bap-helper PATH] [--bap-runtime DIR] (--format text|dot|json | --output-dir NEW_DIR)"
 }
 fn invalid(message: impl Into<String>) -> io::Error {
     io::Error::new(io::ErrorKind::InvalidInput, message.into())
@@ -44,6 +44,7 @@ struct Args {
     explain_site: Option<u64>,
     assess_site: Option<u64>,
     assess_offset_site: Option<u64>,
+    memory_provenance_site: Option<u64>,
     assessment_only: bool,
     memory_access: Option<usize>,
     explanation_only: bool,
@@ -70,6 +71,7 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
     let mut explain_site = None;
     let mut assess_site = None;
     let mut assess_offset_site = None;
+    let mut memory_provenance_site = None;
     let mut assessment_only = false;
     let mut memory_access = None;
     let mut explanation_only = false;
@@ -165,6 +167,13 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
                         .ok_or_else(|| invalid("non-UTF8 assessment VA"))?,
                 )?);
             }
+            "--assess-memory-provenance" if memory_provenance_site.is_none() => {
+                memory_provenance_site = Some(parse_va(
+                    value
+                        .to_str()
+                        .ok_or_else(|| invalid("non-UTF8 memory provenance VA"))?,
+                )?);
+            }
             "--explain-fault-address" if explain_site.is_none() => {
                 explain_site = Some(parse_va(
                     value
@@ -192,11 +201,15 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
     if usize::from(explain_site.is_some())
         + usize::from(assess_site.is_some())
         + usize::from(assess_offset_site.is_some())
+        + usize::from(memory_provenance_site.is_some())
         > 1
     {
         return Err(invalid("choose one explanation or assessment question").into());
     }
-    if (explain_site.is_some() || assess_site.is_some() || assess_offset_site.is_some())
+    if (explain_site.is_some()
+        || assess_site.is_some()
+        || assess_offset_site.is_some()
+        || memory_provenance_site.is_some())
         != memory_access.is_some()
     {
         return Err(invalid(
@@ -213,7 +226,9 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
         .into());
     }
     if assessment_only
-        && (assess_site.is_none() && assess_offset_site.is_none()
+        && (assess_site.is_none()
+            && assess_offset_site.is_none()
+            && memory_provenance_site.is_none()
             || output_dir.is_some()
             || stateflow_input.is_some())
     {
@@ -222,7 +237,7 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
         )
         .into());
     }
-    if (assess_site.is_some() || assess_offset_site.is_some())
+    if (assess_site.is_some() || assess_offset_site.is_some() || memory_provenance_site.is_some())
         && (stateflow_input.is_some()
             || explanation_only
             || (!assessment_only && output_dir.is_none()))
@@ -242,6 +257,7 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
         explain_site,
         assess_site,
         assess_offset_site,
+        memory_provenance_site,
         assessment_only,
         memory_access,
         explanation_only,
@@ -343,8 +359,17 @@ fn run() -> Result<(), Box<dyn Error>> {
     if let Some(runtime) = args.bap_runtime {
         config.runtime = runtime;
     }
-    let prepared =
-        snapshot.prepare_with_bap(&query, &args.decoder, &config, &options, args.limits)?;
+    let prepared = if args.memory_provenance_site.is_some() {
+        snapshot.prepare_with_bap_refinement(
+            &query,
+            &args.decoder,
+            &config,
+            &options,
+            args.limits,
+        )?
+    } else {
+        snapshot.prepare_with_bap(&query, &args.decoder, &config, &options, args.limits)?
+    };
     let core_config = ariadne::bap::core_session::CoreConfig::from_directory(args.bap_core_dir);
     let (analyzer, backend_identity) = if args.analysis_backend == "bap" {
         let native = ariadne::bap::core_adapter::NativeAnalyzer::from_capture(
@@ -400,6 +425,19 @@ fn run() -> Result<(), Box<dyn Error>> {
         Some(ariadne::investigation::assess_zero_base_offset(
             &bound,
             ariadne::investigation::ZeroBaseOffsetLimits::default(),
+        )?)
+    } else {
+        None
+    };
+    let memory_assessment = if let Some(site) = args.memory_provenance_site {
+        let bound = ariadne::input::investigation::bind_memory_refinement(&prepared, &analyzer)?;
+        Some(ariadne::investigation::assess_memory_origins(
+            &bound,
+            ariadne::investigation::FaultAddressQuestion {
+                site,
+                memory_access: args.memory_access.unwrap(),
+            },
+            ariadne::investigation::MemoryRefinementLimits::default(),
         )?)
     } else {
         None
@@ -543,6 +581,18 @@ fn run() -> Result<(), Box<dyn Error>> {
                 ));
             }
         }
+        if let Some(value) = &memory_assessment {
+            for (name, format) in [
+                ("memory-provenance.txt", ariadne::reports::Format::Text),
+                ("memory-provenance.json", ariadne::reports::Format::Json),
+                ("memory-provenance.dot", ariadne::reports::Format::Dot),
+            ] {
+                reports.push((
+                    name,
+                    ariadne::reports::render_memory_provenance(value, format)?,
+                ));
+            }
+        }
         publish_all(&directory, &reports)?;
     } else {
         let output = if args.assessment_only {
@@ -551,7 +601,9 @@ fn run() -> Result<(), Box<dyn Error>> {
                 ReportFormat::Json => ariadne::reports::Format::Json,
                 ReportFormat::Dot => ariadne::reports::Format::Dot,
             };
-            if let Some(value) = &offset_assessment {
+            if let Some(value) = &memory_assessment {
+                ariadne::reports::render_memory_provenance(value, format)?
+            } else if let Some(value) = &offset_assessment {
                 ariadne::reports::render_zero_base_offset(value, format)?
             } else {
                 ariadne::reports::render_zero_address(assessment.as_ref().unwrap(), format)?

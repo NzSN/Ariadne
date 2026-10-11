@@ -1,0 +1,15 @@
+{
+  "schema": "ariadne.memory-refinement-contract-freeze/v1",
+  "base": "8007236724dbdbea994421f49bc5b258fec1dac9",
+  "range_cases": 784,
+  "inverse_cases": 1280,
+  "hashes": {
+    "Specs/AriadneMemoryRefinement.tla": "5a8c31888a077d77b3a47db67ec8cbb00d20b8b0b4ebc9ea4335659a6a0913fd",
+    "Specs/MemoryRefinement.cfg": "ad0cbba66696cd5a8ae7b1d4be992fadae04bf5cb6b015c7b2f6eec106135ffe",
+    "tests/investigation/fixtures/memory_refinement_oracle.py": "100d12c50cb8d4ceca85fb1d62ef223d19f09637a503ebc1e2720a37505690be",
+    "tests/investigation/fixtures/memory_refinement_oracle.json": "ac8bc8a95c0c99b7d13b4f5bab946a7c9543ab55328d4ddff07cd42e8a559979"
+  },
+  "model_exercised": false,
+  "model_prerequisite": "Remote model checker connection pending",
+  "scope": "Independent pre-runtime expectations; no new runtime or qualification claim"
+}

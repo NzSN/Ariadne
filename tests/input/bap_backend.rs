@@ -5,6 +5,145 @@ fn fixture(name: &str) -> PathBuf {
         .join("tests/input/fixtures")
         .join(name)
 }
+
+#[test]
+#[ignore = "requires installed pinned BAP and LLVM helpers; finite five-node probe"]
+fn memory_provenance_opt_in_preserves_default_reports_and_binds_receipts() {
+    let root = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+    let binary = env!("CARGO_BIN_EXE_ariadne-minidump");
+    let command = || {
+        let mut c = Command::new(binary);
+        c.arg(fixture("admission/observed-windows.dmp"))
+            .arg("--decoder-reference")
+            .arg(root.join("target/ariadne-llvm-mc"))
+            .args([
+                "--entry",
+                "0x7ff700001000",
+                "--seed",
+                "0x7ff70000100b",
+                "--analysis-backend",
+                "rust",
+            ]);
+        c
+    };
+    let baseline = command().args(["--format", "json"]).output().unwrap();
+    assert!(
+        baseline.status.success(),
+        "{}",
+        String::from_utf8_lossy(&baseline.stderr)
+    );
+    let tmp = root
+        .join("target")
+        .join(format!("memory-refinement-probe-{}", std::process::id()));
+    if tmp.exists() {
+        std::fs::remove_dir_all(&tmp).unwrap();
+    }
+    let output = command()
+        .args([
+            "--assess-memory-provenance",
+            "0x7ff70000100b",
+            "--memory-access",
+            "0",
+            "--output-dir",
+        ])
+        .arg(&tmp)
+        .output()
+        .unwrap();
+    assert!(
+        output.status.success(),
+        "{}",
+        String::from_utf8_lossy(&output.stderr)
+    );
+    assert_eq!(
+        std::fs::read(tmp.join("report.json")).unwrap(),
+        baseline.stdout
+    );
+    let assessment = ariadne::reports::decode_memory_provenance(
+        &std::fs::read(tmp.join("memory-provenance.json")).unwrap(),
+    )
+    .unwrap();
+    assert!(assessment.available);
+    assert_eq!(assessment.original_candidate_count, 1);
+    assert!(
+        assessment
+            .candidates
+            .iter()
+            .all(|c| c.disposition != "excluded_within_scope")
+    );
+    assert!(
+        assessment
+            .diagnostics
+            .iter()
+            .any(|d| d.kind == "unknown-output-dependency")
+    );
+    assert!(
+        assessment
+            .diagnostics
+            .iter()
+            .any(|d| d.kind == "memory-load-provenance")
+    );
+    std::fs::remove_dir_all(tmp).unwrap();
+}
+
+#[test]
+#[ignore = "requires pinned lifter, LLVM and retained native core; one-site capture"]
+fn memory_provenance_fault_seeds_match_native_and_rust() {
+    let root = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+    let mut results = Vec::new();
+    let core = std::env::var_os("ARIADNE_BAP_CORE_DIR")
+        .map(PathBuf::from)
+        .unwrap_or_else(|| root.join("target/bap-core-native"));
+    for backend in ["rust", "bap"] {
+        let output = Command::new(env!("CARGO_BIN_EXE_ariadne-minidump"))
+            .arg(fixture("i5a/load64-indexed.dmp"))
+            .arg("--decoder-reference")
+            .arg(root.join("target/ariadne-llvm-mc"))
+            .args([
+                "--entry",
+                "0x401000",
+                "--seed",
+                "0x401000",
+                "--assess-memory-provenance",
+                "0x401000",
+                "--memory-access",
+                "0",
+                "--assessment-only",
+                "--format",
+                "json",
+                "--analysis-backend",
+                backend,
+                "--bap-core-dir",
+            ])
+            .arg(&core)
+            .output()
+            .unwrap();
+        assert!(
+            output.status.success(),
+            "{}",
+            String::from_utf8_lossy(&output.stderr)
+        );
+        let value = ariadne::reports::decode_memory_provenance(&output.stdout).unwrap();
+        assert!(value.available);
+        assert!(value.numerical.iter().any(|n| n.register == "rbx"
+            && n.value
+                == ariadne::investigation::BackwardValue::Exact {
+                    width: 64,
+                    value: 4096
+                }));
+        assert!(value.numerical.iter().any(|n| n.register == "rcx"
+            && n.value
+                == ariadne::investigation::BackwardValue::Exact {
+                    width: 64,
+                    value: 2
+                }));
+        assert!(
+            value.numerical.iter().all(|n| n.classification
+                == ariadne::investigation::Classification::DerivedUnderPremises)
+        );
+        results.push(value);
+    }
+    assert_eq!(results[0], results[1]);
+}
 #[test]
 #[ignore = "requires pinned BAP and LLVM native helpers"]
 fn default_bap_and_explicit_runtime_preserve_captured_producer_slice_without_fallback() {

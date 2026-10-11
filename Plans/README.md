@@ -25,6 +25,10 @@ keeping a plan outside `completed/` does not make its completed steps pending.
 
 **Where to go next.**
 
+- [Memory provenance refinement](memory-provenance-refinement.md) — source/CLI
+  implementation and finite probes pass; remote model, mutation and full Scanner
+  qualification remain pending.
+
 - [Historical BAP documentation audit](../docs/Ariadne/bap-analysis-core-design.md#documentation-audit) — preserves the earlier v2 inventory and links to accepted v3 delivery.
 
 - [BAP projection admission and coverage](bap-projection-admission.md) —

@@ -10,6 +10,11 @@
 
 **Where to go next.**
 
+- [Memory refinement model](AriadneMemoryRefinement.tla) and
+  [implementation ledger](../Plans/memory-provenance-refinement.md) — specified
+  candidate-preservation and backward-value contract; model qualification is
+  pending despite passing source/root and finite-runtime probes.
+
 - [Selected I5c design](../docs/Ariadne/address-wrap-design.md) and
   [W0 model/oracle stage](../Plans/i5c-address-wrap.md#w0--freeze-semantics-and-independent-expectations)
   — proposed address-wrap decision model; no new specification/check result

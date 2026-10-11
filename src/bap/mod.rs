@@ -1,12 +1,13 @@
 //! Optional BAP-owned instruction lifting and conservative projection.
-mod address;
+pub(crate) mod address;
 mod admission;
-mod ast;
+pub(crate) mod ast;
 pub mod core_adapter;
 pub mod core_protocol;
 pub mod core_session;
 mod prepare;
 mod projection;
+pub(crate) mod refinement;
 mod session;
 pub mod stateflow_adapter;
 pub use prepare::{Backend, Metrics};

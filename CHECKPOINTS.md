@@ -17,6 +17,28 @@
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
+## 2026-10-11 — Memory refinement source and finite-runtime checkpoint
+
+The [memory design](docs/Ariadne/memory-provenance-refinement.md) and
+[M0–M4 plan](Plans/memory-provenance-refinement.md) now have an independent
+oracle, TLA+ source, opt-in BIL transfer evidence, immutable candidate assessment,
+bounded scalar preimages/worklist, strict separate report and explicit CLI mode.
+Original roots, effects, memory origins and default reports remain the baseline.
+
+The [source-bound record](evidence/Ariadne/memory-refinement/source-validation.json)
+retains 784 range/1,280 inverse cases, source regressions, 103 passing default
+tests (81 ignored), 45 core-only tests (22 ignored), all-feature/all-target
+Clippy under the frozen read-only dependency snapshot, layout/format/docs checks,
+five-node pinned-lifter report-byte parity and one-site captured-register/native
+reference parity. The accepted helper was restored from sealed evidence after
+the older cached helper failed its completion-capability handshake.
+
+Full design acceptance remains false. Remote Apalache/TLC, real-code mutations
+and the complete Scanner candidate table remain pending; recorded SSH endpoints
+close the connection. No large local campaign, historical-path or root-cause
+claim is credited. The model annotation correction is bound by a new revision
+record while the original pre-runtime freeze remains unchanged.
+
 Updated **2026-10-10**: the [projection-admission plan](Plans/bap-projection-admission.md)
 has P0–P4 accepted on the qualified real Windows replacement. The
 [user decision](evidence/Ariadne/bap-admission/p4-acceptance-20261010.json) excludes

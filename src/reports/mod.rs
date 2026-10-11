@@ -1,6 +1,12 @@
 //! Strict Stage E inputs and identity-preserving result envelopes.
 mod codecs;
 mod investigation;
+#[cfg(feature = "bap")]
+mod memory_provenance;
+#[cfg(feature = "bap")]
+pub use memory_provenance::{
+    decode_memory_provenance, encode_memory_provenance, render_memory_provenance,
+};
 mod render;
 mod zero_address;
 mod zero_base_offset;

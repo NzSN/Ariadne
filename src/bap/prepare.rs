@@ -33,6 +33,9 @@ pub struct Backend {
     runtime_hash: String,
     helper_hash: String,
     metrics: Metrics,
+    retain_refinement: bool,
+    refinement: BTreeMap<Address, super::refinement::TransferReceipt>,
+    refinement_bytes: usize,
 }
 fn stop(site: &mut PreparedSite, options: &PreparationOptions, va: Address) {
     site.instruction.uses = options.catalogue.locations();
@@ -58,6 +61,14 @@ fn stop(site: &mut PreparedSite, options: &PreparationOptions, va: Address) {
     }
 }
 impl Backend {
+    pub(crate) fn enable_refinement(&mut self) {
+        self.retain_refinement = true;
+    }
+    pub(crate) fn take_refinement(
+        &mut self,
+    ) -> BTreeMap<Address, super::refinement::TransferReceipt> {
+        std::mem::take(&mut self.refinement)
+    }
     pub fn metrics(&self) -> Metrics {
         self.metrics
     }
@@ -93,6 +104,9 @@ impl Backend {
                 runtime_validation: start.elapsed(),
                 ..Metrics::default()
             },
+            retain_refinement: false,
+            refinement: BTreeMap::new(),
+            refinement_bytes: 0,
         })
     }
     pub fn prepare(
@@ -305,6 +319,16 @@ impl Backend {
                             site.evidence.quality = EffectQuality::ExternalLifted;
                             site.evidence.rule = Some(PROJECTION.into());
                             semantic.status = "projected".into();
+                            if self.retain_refinement {
+                                let receipt =
+                                    super::refinement::extract(&lift.bil, va, lift.bytes.clone())?;
+                                self.refinement_bytes = self
+                                    .refinement_bytes
+                                    .checked_add(receipt.ast.len())
+                                    .filter(|n| *n <= 64 * 1024 * 1024)
+                                    .ok_or_else(|| invalid("refinement sidecar byte budget"))?;
+                                self.refinement.insert(va, receipt);
+                            }
                             semantic.memory_accesses = crate::bap::address::extract(&lift.bil, va);
                             semantic.gaps.extend(projection.gaps);
                         }

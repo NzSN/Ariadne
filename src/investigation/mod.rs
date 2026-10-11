@@ -1,10 +1,20 @@
 //! Evidence-bound domain explanations above the normalized analysis result.
+mod backward_values;
 mod explain;
 mod fault_context;
-mod model;
+#[cfg(feature = "bap")]
+mod memory_refinement;
+pub(crate) mod model;
+#[cfg(feature = "bap")]
+pub use memory_refinement::{
+    BoundMemoryRefinement, MEMORY_PROVENANCE_PROFILE, MEMORY_PROVENANCE_SCHEMA, MemoryCandidate,
+    MemoryDependencyDiagnostic, MemoryPair, MemoryProvenanceAssessment, MemoryRefinementLimits,
+    NumericalBoundary, assess_memory_origins, modular_memory_overlap,
+};
 pub(crate) mod validate;
 mod zero_address;
 mod zero_base_offset;
+pub use backward_values::{BackwardStep, BackwardValue, ScalarTransfer, backward_preimage};
 pub use explain::explain_fault_address;
 pub use fault_context::{
     BoundFaultContext, FaultDatum, FaultMetadata, FaultObservation, FaultSpan,

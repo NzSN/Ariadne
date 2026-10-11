@@ -27,8 +27,9 @@ supporting narrative. [Plans](../../Plans/README.md) own execution stages;
   binding, reporting and completeness contracts.
 - [Documentation map](../documentation-map.md) — models, plans and related guides.
 
-**What remains unresolved.** Address-wrap and memory-provenance refinement remain
-proposed. A retained passing result applies to its recorded source/tool/corpus
+**What remains unresolved.** Address-wrap remains proposed. Memory-provenance
+refinement has source implementation and finite probes; full model, mutation
+and Scanner qualification remain pending. A retained passing result applies to its recorded source/tool/corpus
 identities; consolidating its description supplies no new runtime qualification.
 
 ## Canonical designs
@@ -42,7 +43,7 @@ identities; consolidating its description supplies no new runtime qualification.
 | Fault-time zero address | [Zero-address assessment](zero-address-design.md) | Predicate, admission, CLI, source review and controlled-capture qualification. |
 | Fault-time zero base plus displacement | [Zero-base-offset assessment](zero-base-offset-design.md) | Decoded/BAP agreement, result contract, source review and qualification. |
 | Fault-time address wrap | [Address-wrap assessment](address-wrap-design.md) | Selected design; model, implementation and qualification pending. |
-| Memory provenance | [Memory refinement](memory-provenance-refinement.md) | Proposed bounded refinement of Scanner's unknown-memory dependencies. |
+| Memory provenance | [Memory refinement](memory-provenance-refinement.md) | Implemented bounded writer assessment and backward scalar inference; full qualification pending. |
 | Rendering and minidump reports | [Result rendering](result-rendering.md) | Text/DOT/JSON, schema, examples and presentation history. |
 | Typed replay and separate IR/stateflow paths | [Typed replay](typed-replay-design.md) | Generated ports, IR CLI, result schemas, replay and finite validation. |
 | Workload performance | [Performance](workload-performance-design.md) | Benchmark usage, investigation optimizations, fixed budgets and dated measurements. |

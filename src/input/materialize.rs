@@ -46,6 +46,7 @@ pub struct MaterializationReport {
 }
 #[derive(Clone, Debug)]
 pub struct FilePreparedAnalysis {
+    pub(crate) refinement: BTreeMap<Address, crate::bap::refinement::TransferReceipt>,
     pub(crate) fault: Arc<super::fault_context::FaultCapture>,
     pub prepared: PreparedAnalysis,
     pub snapshot: Arc<SnapshotMetadata>,
@@ -157,13 +158,41 @@ impl FileSnapshot {
         options: &PreparationOptions,
         limits: PrepareLimits,
     ) -> Result<FilePreparedAnalysis, PreparationError> {
+        self.prepare_bap(query, decoder, config, options, limits, false)
+    }
+
+    /// Opt-in transfer evidence; discovery, query identity and effects are unchanged.
+    pub fn prepare_with_bap_refinement(
+        &self,
+        query: &AnalysisQuery,
+        decoder: &Path,
+        config: &crate::bap::Config,
+        options: &PreparationOptions,
+        limits: PrepareLimits,
+    ) -> Result<FilePreparedAnalysis, PreparationError> {
+        self.prepare_bap(query, decoder, config, options, limits, true)
+    }
+
+    fn prepare_bap(
+        &self,
+        query: &AnalysisQuery,
+        decoder: &Path,
+        config: &crate::bap::Config,
+        options: &PreparationOptions,
+        limits: PrepareLimits,
+        refinement: bool,
+    ) -> Result<FilePreparedAnalysis, PreparationError> {
         let mut backend = crate::bap::Backend::new(config.clone(), decoder)
             .map_err(|e| PreparationError::Backend(e.to_string()))?;
-        let prepared = self.prepare_with_preparer(query, options, limits, |s, c, o, t| {
+        if refinement {
+            backend.enable_refinement();
+        }
+        let mut prepared = self.prepare_with_preparer(query, options, limits, |s, c, o, t| {
             backend
                 .prepare(s, c, o, t)
                 .map_err(|e| PreparationError::Backend(e.to_string()))
         })?;
+        prepared.refinement = backend.take_refinement();
         backend
             .finish()
             .map_err(|e| PreparationError::Backend(e.to_string()))?;
@@ -335,6 +364,7 @@ impl FileSnapshot {
             .validate()
             .map_err(|e| PreparationError::Decoder(AdapterError::InvalidRequest(e)))?;
         Ok(FilePreparedAnalysis {
+            refinement: BTreeMap::new(),
             fault: self.fault.clone(),
             prepared: PreparedAnalysis {
                 request,

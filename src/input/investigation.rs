@@ -225,6 +225,17 @@ pub fn bind_investigation(
     BoundInvestigation::new(analyzer, request, context)
 }
 
+pub fn bind_memory_refinement(
+    prepared: &FilePreparedAnalysis,
+    analyzer: &dyn AnalysisView,
+) -> Result<crate::investigation::BoundMemoryRefinement, crate::investigation::Error> {
+    crate::investigation::BoundMemoryRefinement::new(
+        bind_investigation(prepared, analyzer)?,
+        prepared.refinement.clone(),
+        Some(prepared.fault.evidence.clone()),
+    )
+}
+
 /// Bind only reader-owned fault observations to the exact completed query.
 pub fn bind_fault_context(
     prepared: &FilePreparedAnalysis,
