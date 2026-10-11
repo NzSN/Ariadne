@@ -2,6 +2,11 @@
 
 ## Context and follow-up
 
+> **Specification removal (2026-10-11).** The ISA specifications, coverage
+> inventories and associated checkers described here have been removed.
+> Their links point to an immutable Git archive; the commands below require
+> that historical checkout. See the [current assurance boundary](Ariadne/semantic-assurance.md#dependency-audit-and-retained-references).
+
 **Status.** Retired ISA research; links below explain historical dependencies, not an active backlog.
 
 **Why this document exists.** Effective page permissions need page-table evidence. The motivating contract is [Historical motivation](amd64-memory-exceptions.md).
@@ -24,7 +29,7 @@ For the wider context, see the optional [documentation map](documentation-map.md
 
 The page-walk component refines the effective `PageMap` abstraction from the
 memory foundation. Its authoritative operators are in
-[AMD64PageWalk.tla](../Specs/AMD64PageWalk.tla); the executable typed validator
+[AMD64PageWalk.tla](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64PageWalk.tla); the executable typed validator
 and general proofs are in [PageWalk.lean](../lean/AMD64/PageWalk.lean).
 
 The source baseline is AMD Volume 2 revision 3.45, July 2026. The primary

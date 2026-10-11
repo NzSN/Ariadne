@@ -3,7 +3,8 @@
 ## Context and follow-up
 
 **Status.** Current assurance contract: BAP lifting is trusted, independent ISA
-proofs are retired, and universal Rust refinement remains open.
+proofs are retired and their specifications/checkers were removed on 2026-10-11.
+Universal Rust refinement remains open.
 
 **Why this document exists.** [BAP assessment](bap-analysis-core-design.md#architectural-rationale) separates external semantics from ownership of analysis correctness.
 
@@ -98,24 +99,40 @@ workload aggregates use v5 and Stage E completion retains v2. The
 retirement status remains explicit in their successors; historical JSON files retain
 their original fields and bytes. The B/C/E/F report remains unversioned.
 
-The effects gate still binds `Specs/AMD64/manuals.lock.json` as source-review
-provenance. Keep that lockfile. ISA-only TLA/config files and retired research
-tools are excluded from the active effects/progress source inventories where
-they were included through broad globs.
+On **2026-10-11**, the user requested removal of the retired specifications.
+The checkout now omits 73 ISA-only TLA+ modules, 38 configurations, ten shell
+checkers, the AMD64 source/coverage inventory directory and fifteen obsolete
+Python tools/tests. This includes the initial `AriadneX86_64Semantics` research
+and its integration fixtures. Active analysis and question-level model bodies
+remain unchanged, including memory refinement and frame paths.
 
-Retired research remains in place to preserve historical source paths, links,
-coverage ledgers and evidence interpretation:
+The effects gate still binds the AMD manual pin as source-review provenance.
+Its exact bytes moved from `Specs/AMD64/manuals.lock.json` to
+[amd-manuals.lock.json](../../evidence/Ariadne/amd-manuals.lock.json), with SHA-256
+`eb8e6fea525e43a1f2740e97f4bff0dede564cac1fda64c5a5e2e9a46a6699f3`.
+This file identifies reviewed sources; it is not an ISA specification or coverage
+claim. Active effects/progress inventories continue to exclude retired models.
 
-- `Specs/AMD64*.tla`, `Specs/AMD64*.cfg` and `Specs/AMD64/`.
-- `lean/`, `Specs/check-amd64*.sh`, `tools/*amd64*.py` and `tools/check_stage_d*.py`.
-- Initial `AriadneX86_64Semantics` instruction-rule research and its fixtures.
-- AMD64 reference documents and machine-readable Stage D evidence. Obsolete
-  Stage D plan/status Markdown has been removed; Git retains the original text.
+The [last retained specification tree](https://github.com/NzSN/Ariadne/tree/01ae404e8c8556966e219118945082ff8e213f7e/Specs)
+and [obsolete tooling](https://github.com/NzSN/Ariadne/tree/01ae404e8c8556966e219118945082ff8e213f7e/tools)
+remain available at an immutable Git revision. Historical documentation links
+to removed files use that revision; old commands require that historical checkout.
+The pre-retirement state also remains at `2ba80a9`.
 
-These files are reference material, not an active backlog or release requirement.
-Their old checks may be run explicitly for historical research; active product
-gates must not depend on their success or expected failure. Git also preserves
-the pre-retirement state at `2ba80a9`.
+The root [Lean library](../../lean/README.md), historical AMD64 reference
+documents and machine-readable Stage D evidence remain for interpretation of
+earlier results. Recorded evidence keeps its original bytes, source paths and
+pass flags; the moved manual pin does not rebind any previous qualification.
+Retirement and removal leave former proof obligations unresolved. Active product
+gates depend on BAP projection and analysis contracts.
+
+Fresh cleanup validation passes the three active-qualification tests, SANY
+parsing of all 17 remaining TLA+ modules, documentation links and Rust layout.
+The qualification test's stale mock checkout now supplies the corpus file read
+by the BAP runner; the original HEAD test independently reproduced that fixture
+failure. A hash audit confirms 677 existing implementation/fixture/model/Lean/
+raw-evidence files retain their pre-cleanup bytes, as does the relocated manual
+pin. These are cleanup checks, not model exploration, native or release qualification.
 
 ## Qualification limits preserved
 

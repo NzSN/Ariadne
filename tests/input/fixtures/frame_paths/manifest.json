@@ -1,0 +1,75 @@
+{
+  "scope": "independent synthetic PE/unwind/stack fixtures",
+  "cases": [
+    {
+      "name": "diamond",
+      "sha256": "6a33a749b77386305e041048d1bfa16ec4af3b8658588cff4acdc4ae91d78bd5",
+      "bytes": 6138
+    },
+    {
+      "name": "recursive",
+      "sha256": "1310581f7709624f1a8b5608bf61e75ea876de2d9e37425476a82f683cdb0bc4",
+      "bytes": 6138
+    },
+    {
+      "name": "control-only",
+      "sha256": "34bd20e3351d52f7db55086929f711dde92decf2289d2a505645dc44091cbf37",
+      "bytes": 6138
+    },
+    {
+      "name": "missing-control",
+      "sha256": "618f6109742786e75504b7aba97d23894d5b038a65e158844742d8d8f3c0014b",
+      "bytes": 6138
+    },
+    {
+      "name": "prologue",
+      "sha256": "d141c424e64e8ecb969a889619c91b74b2c4966cf73555087bcd826ae88e13bb",
+      "bytes": 6138
+    },
+    {
+      "name": "epilogue",
+      "sha256": "8cd5330bb31f599e6c767465c9ed969842b1056f1c58ea0c4224de043251813d",
+      "bytes": 6138
+    },
+    {
+      "name": "chained",
+      "sha256": "c1dbe7db3c8ffa8bdf03c0fc2ce0b4cb2df5993345569e657915e90e5c043e03",
+      "bytes": 6138
+    },
+    {
+      "name": "unsorted-table",
+      "sha256": "027035b7dc0a2cd259b7f62755af60faa59ecec1a6ca9c53d5bf8aba9a8862b6",
+      "bytes": 6138
+    },
+    {
+      "name": "missing-table-bytes",
+      "sha256": "529878e3f89871071c66b4d9f94cebb150275dd5e66a27196e6344fc93582d58",
+      "bytes": 6138
+    },
+    {
+      "name": "large-alloc-16",
+      "sha256": "bad2d868dacbf921b20e7ea541c041097dd350c94b8d7d35d7adf16adbdd5b8a",
+      "bytes": 6138
+    },
+    {
+      "name": "large-alloc-32",
+      "sha256": "43790c0a5f6f3c145f1977df9ccb1978cbf1a6f3446d5de4b54e9004ed5c26e2",
+      "bytes": 6138
+    },
+    {
+      "name": "push-rbx",
+      "sha256": "f8c350d84c9c2138816c58f977a58fcb17f2c3152ff528fff37ac0f128c34d5f",
+      "bytes": 6138
+    },
+    {
+      "name": "save-rbp",
+      "sha256": "6a2efe3b138ef867119117995f7ef4b18af75bf8d2277a31eab02c8d1f637813",
+      "bytes": 6138
+    },
+    {
+      "name": "frame-pointer",
+      "sha256": "b28763946b766d6a0493be45240d65a56ef3603ebcdb93fce207ef20c1cea512",
+      "bytes": 6138
+    }
+  ]
+}

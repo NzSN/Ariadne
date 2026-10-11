@@ -2,6 +2,17 @@
 mod backward_values;
 mod explain;
 mod fault_context;
+mod frame_paths;
+pub(crate) mod frame_unwind;
+pub use frame_paths::{
+    BoundFramePaths, FRAME_PATH_SCHEMA, FramePathCounters, FramePathEdge, FramePathEdgeKind,
+    FramePathLimits, FramePathListing, FramePathNode, FramePathQuestion, ListedFramePath,
+    active_frame_entry, bind_frame_paths, list_frame_paths,
+};
+pub use frame_unwind::{
+    CapturedFrameChain, FRAME_UNWIND_PROFILE, FrameMemoryEvidence, FrameRecoveryLimits,
+    FrameRegisterEvidence, RecoveredFrame,
+};
 #[cfg(feature = "bap")]
 mod memory_refinement;
 pub(crate) mod model;

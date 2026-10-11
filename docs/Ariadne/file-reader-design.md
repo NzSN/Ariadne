@@ -65,9 +65,12 @@ the reference path. Production preparation has no LLVM semantic fallback.
 Windows and Linux minidump support share the capture/read contract, but each
 qualification record names its exercised corpus and unexercised prerequisites.
 Mach-O, kernel dumps/vmcore, ELF32/x32, WoW64/ARM contexts, rebased PE images,
-full loader/relocation emulation, automatic symbol loading, unwinding and
+full loader/relocation emulation, automatic symbol loading, general unwinding and
 image-backed reconstruction remain outside delivery. External symbol witnesses
-have the narrower role defined below. For any future ELF-core reader,
+have the narrower role defined below. A finite opt-in
+[Windows AMD64 frame adapter](investigation-design.md#frame-path-implementation-checkpoint-2026-10-11)
+now supplies captured unwind evidence for bounded path questions; it does not
+expand general image or unwind support. For any future ELF-core reader,
 compressed/systemd-coredump archives must first be exported to an ordinary
 ELF core; the exported artifact is the one hashed and analyzed.
 

@@ -2,6 +2,11 @@
 
 ## Context and follow-up
 
+> **Specification removal (2026-10-11).** The ISA specifications, coverage
+> inventories and associated checkers described here have been removed.
+> Their links point to an immutable Git archive; the commands below require
+> that historical checkout. See the [current assurance boundary](Ariadne/semantic-assurance.md#dependency-audit-and-retained-references).
+
 **Status.** Retired ISA research; links below explain historical dependencies, not an active backlog.
 
 **Why this document exists.** Architectural storage must remain distinct from finite captured knowledge. The motivating contract is [Historical motivation](amd64-memory-exceptions.md).
@@ -23,7 +28,7 @@ For the wider context, see the optional [documentation map](documentation-map.md
 > [current semantic assurance decision](Ariadne/semantic-assurance.md).
 
 The architectural memory layer is defined in
-[AMD64ConcreteMemory.tla](../Specs/AMD64ConcreteMemory.tla) and
+[AMD64ConcreteMemory.tla](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64ConcreteMemory.tla) and
 [ConcreteMemory.lean](../lean/AMD64/ConcreteMemory.lean). It separates a total
 architectural byte store from the finite bytes known to an analyzer.
 

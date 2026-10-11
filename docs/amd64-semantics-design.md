@@ -2,6 +2,11 @@
 
 ## Context and follow-up
 
+> **Specification removal (2026-10-11).** The ISA specifications, coverage
+> inventories and associated checkers described here have been removed.
+> Their links point to an immutable Git archive; the commands below require
+> that historical checkout. See the [current assurance boundary](Ariadne/semantic-assurance.md#dependency-audit-and-retained-references).
+
 **Status.** Retired ISA research; links below explain historical dependencies, not an active backlog.
 
 **Why this document exists.** Register-view foundations motivated a broader semantics design. The motivating contract is [Historical motivation](amd64-typed-foundation.md).
@@ -70,7 +75,7 @@ environment callbacks.
 ## Pinned authority and coverage evidence
 
 The live AMD document API superseded the older URLs found by search. The
-[source lock](../Specs/AMD64/manuals.lock.json) records exact downloaded PDF
+[source lock](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64/manuals.lock.json) records exact downloaded PDF
 hashes, byte lengths, revision dates, and public URLs. The baseline is Volume 1
 3.25 (May 2026), Volume 2 3.45 (July 2026), and Volume 3 3.38 (July 2026).
 PDFs and extracted prose stay in a local cache, not in git. Replacing a source

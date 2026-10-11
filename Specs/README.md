@@ -2,13 +2,19 @@
 
 ## Context and follow-up
 
-**Status.** Analysis-model authority; ISA research sections are historical.
+**Status.** Active analysis-model authority. Retired AMD64/x86-64 ISA specifications,
+coverage inventories and their checkers were removed on 2026-10-11.
 
 **Why this document exists.** [Project overview](../README.md) motivates snapshot-scoped control flow and possible value origins.
 
 **What this document establishes.** The analysis specifications define admissible inputs, state transitions, invariants and the meaning of partial results for recovery, stateflow and supplied IR.
 
 **Where to go next.**
+
+- [Frame-path model](AriadneFramePaths.tla) and
+  [F0–F4 plan](../Plans/frame-path-enumeration.md) — strict output count, valid
+  structural paths, bounded work and preservation of memory writers; checking
+  and implementation qualification remain separate tiers.
 
 - [Memory refinement model](AriadneMemoryRefinement.tla) and
   [implementation ledger](../Plans/memory-provenance-refinement.md) — specified
@@ -42,18 +48,17 @@ crash-dump inputs, while `AriadneMachineState.tla` consumes its frozen local CFG
 `AriadneLLVMIR.tla` separately specifies analysis of verified LLVM IR supplied
 directly as `.ll` or `.bc`. The [Rust library](../src/lib.rs), built with Cargo,
 implements the `Ariadne.tla` machine-analysis core. The LLVM IR and abstract
-machine-state models also have Rust implementations and finite generated replay. `AriadneX86_64Semantics.tla`
-adds executable TLA+ instruction rules for an initial register/immediate x86-64
-subset, also without a Rust implementation. See the
+machine-state models also have Rust implementations and finite generated replay. See the
 [implementation guide](../docs/implementation.md) for the Rust correspondence
 and validation boundary.
 
-The independent [AMD64 expansion](AMD64/README.md), initial instruction rules
-and [Lean counterparts](../lean/README.md) are retired reference material.
-Their component scripts and profile ledgers preserve historical research;
-they are outside active qualification. The
-[semantic assurance decision](../docs/Ariadne/semantic-assurance.md) records
-BAP's trusted role and the retained analysis-model boundary.
+The independent ISA specifications, initial instruction rules and coverage
+inventories are available in Git history. Their removal leaves the active CFG,
+dataflow, slicing, input/effects, stateflow, supplied-IR, memory-refinement,
+frame-path and question-level models in this directory. The
+[semantic assurance decision](../docs/Ariadne/semantic-assurance.md#dependency-audit-and-retained-references)
+records the archive location, retained [Lean reference](../lean/README.md),
+BAP's trusted role and the analysis-model boundary.
 
 ## Shared semantic types
 
@@ -65,8 +70,6 @@ functions, blocks, instructions, values, value kinds, terminator kinds, and
 callees. Analysis phases and obligation reasons are shared where their role is
 representation-independent.
 
-Architecture-private aliases for decoded instructions and bit-vector states are
-declared in `AriadneX86_64Semantics.tla`; the original shared catalogue is unchanged.
 Every semantic string position uses a meaningful `$alias` in Snowcat
 annotations. `Str` remains only as the underlying representation in alias
 declarations. These aliases are documentary and transparent, not nominal
@@ -142,8 +145,8 @@ through one instruction and one existing structural edge to a running
 after-state. `TerminalTransitions` records faults, returns, and stops. Every
 transition must preserve locations outside the instruction's `MayDefs`; the
 model checks this frame property but does not prove the supplied transitions
-faithfully implement an ISA. It can now be derived by the separate x86-64 module
-for that module's supported forms, without changing this generic contract.
+faithfully implement an ISA. The relation is supplied under its adapter contract;
+the retired x86-64 instruction-rule bridge is archived with the removed ISA models.
 
 Entry states are attached only to declared entry points. Propagation repeatedly
 adds after-states along local structural edges until a fixed point. The graph is
@@ -160,30 +163,6 @@ Additional adapter obligations preserve unknown memory, unmodeled exceptions,
 system calls, and concurrency. A crash-time state may seed its exact captured
 instruction; the model does not authorize treating it as an earlier state or
 using it to rewrite the structural CFG.
-
-## Executable x86-64 instruction semantics
-
-`AriadneX86_64Semantics.tla` defines `Execute(instruction, state)` for an initial
-32/64-bit register/immediate subset: MOV, ADD/SUB/CMP, AND/OR/XOR/TEST, NOP,
-direct JMP, the 16 flag-based Jcc conditions, and a terminal pre-delivery UD2
-fault. It calculates register/flag values and selected destinations, instead of
-accepting a supplied instruction transition table. All 64 bits are modeled.
-
-Its finite catalogue bridge derives running/terminal transitions, effect sets,
-reporting valuations, and completeness certificates for `AriadneMachineState`.
-Unsupported forms, missing result IDs, and missing labeled CFG edges cannot
-silently become completeness certificates. The original generic stateflow and
-recovery contracts remain unchanged.
-
-This is not a full ISA, decoder, memory model, or Rust interpreter. Completeness
-is relative to the supplied exact projected states and the documented execution
-environment. The supported forms, preconditions, Intel references, and
-composition rules are in [the semantics guide](../docs/x86-64-semantics.md).
-
-```sh
-# From the repository root: three Apalache typechecks and five TLC fixtures.
-bash Specs/check-x86-64.sh
-```
 
 ## Scope and abstraction boundary
 
@@ -208,8 +187,9 @@ The preserved information is instruction identity, typed local and call
 edges, byte provenance, reads, may-writes, must-writes, and
 explicit unresolved obligations. Concrete bytes, instruction widths, numeric
 register values, flag equations, memory contents, thread scheduling, and timing
-are abstracted away by the core model. The separate x86-64 module now adds a
-scoped instruction/value semantics; it does not change those recovery inputs.
+are abstracted away by the core model. Supplied abstract stateflow and separate
+question-level assessments retain their own evidence and semantic contracts;
+they do not change those recovery inputs.
 
 The graph has one node per decoded instruction. Edges may also reference
 unavailable/invalid local targets or callees outside local discovery. Local
@@ -665,23 +645,8 @@ LLVM IR through eight. All eight TLC configurations passed with unchanged state
 counts; as expected, Snowcat aliases change annotations rather than untyped
 TLA+ behavior.
 
-### x86-64 instruction-semantics validation (2026-09-19)
+### Retired ISA validation archive
 
-Apalache 0.61.0 typechecked `AriadneX86_64Semantics.tla` and its two fixtures.
-TLC revision `1476e7f` passed `X86_64Semantics.cfg` plus all four integration
-configurations, including fair stateflow termination:
-
-| Configuration | Generated / distinct states | Search depth |
-| --- | ---: | ---: |
-| `X86_64Semantics.cfg` | 2 / 2 | 2 |
-| `X86_64Stateflow.cfg` | 5 / 5 | 5 |
-| `X86_64Unsupported.cfg` | 3 / 3 | 3 |
-| `X86_64MissingState.cfg` | 2 / 2 | 2 |
-| `X86_64MissingEdge.cfg` | 4 / 4 | 4 |
-
-The semantic invariant checks hundreds of input vectors and all flag-condition
-combinations within those two driver states; this count is not the number of
-CPU states tested. Four isolated semantic mutations were rejected by invariant
-violations. The existing Rust test suite also passed, and the recorded generated
-MBT corpus hashes remained unchanged. No x86-64 Rust implementation or new
-Rust/semantic MBT result is claimed; see the guide for exact coverage and limits.
+The removed instruction-semantics models and their 2026-09-19 validation
+summary remain in the [archived formal-model guide](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/README.md#x86-64-instruction-semantics-validation-2026-09-19).
+Those component results are historical and do not qualify the active analyzer.

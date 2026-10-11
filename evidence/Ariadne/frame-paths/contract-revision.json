@@ -1,0 +1,17 @@
+{
+  "schema": "ariadne.frame-path-contract-revision/v1",
+  "originalFreezeSha256": "44095a6b450a8683e7ae5c58174527f6763631b8a2c1192d83f43fc047138adf",
+  "previousHashes": {
+    "Specs/AriadneFramePaths.tla": "53fd01abd70ded58cbf865f631704f1eb7975bee96086592a55eef96f2693b0f",
+    "Specs/FramePaths.cfg": "fbc693dd7ab28a17e13bc0140caadcc5bf863f3b59eec40a35a2ff3bc83f1038",
+    "tests/investigation/fixtures/frame_paths_oracle.py": "d311085ef047f423c15de8454454dc00defb2667e7d36f3fb108c7b3d74d928a",
+    "tests/investigation/fixtures/frame_paths_oracle.json": "1ba48a7661db214f1a94e3bcb27df788a610a6b11eefbc5a1982a64487130192"
+  },
+  "currentModelHashes": {
+    "Specs/AriadneFramePaths.tla": "8515a4675fc71a763e542a06876eb147392623955a7abf9f7b6c8039fec3abc4",
+    "Specs/FramePaths.cfg": "2ee23cdf7999922887073aa8298adcce0155a9f68e6de7cd292101c57249947e"
+  },
+  "change": "Move tuple-valued fixture into a TLA definition accepted by TLC configuration parser; disable deadlock checking at intentional terminal state; mathematical path rules unchanged",
+  "oracleUnchanged": true,
+  "modelChecked": false
+}

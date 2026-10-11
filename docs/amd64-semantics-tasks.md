@@ -2,6 +2,11 @@
 
 ## Context and follow-up
 
+> **Specification removal (2026-10-11).** The ISA specifications, coverage
+> inventories and associated checkers described here have been removed.
+> Their links point to an immutable Git archive; the commands below require
+> that historical checkout. See the [current assurance boundary](Ariadne/semantic-assurance.md#dependency-audit-and-retained-references).
+
 **Status.** Retired ISA research; links below explain historical dependencies, not an active backlog.
 
 **Why this document exists.** The broad design required explicit work and coverage accounting. The motivating contract is [Historical motivation](amd64-semantics-design.md).
@@ -139,7 +144,7 @@ report proposed shared interfaces early and do not edit another owner's files.
 All preexisting uncommitted work is preserved. Dispatch evidence and acceptance
 results are recorded as implementation progresses.
 
-The machine-readable [work assignments](../Specs/AMD64/work-assignments.json)
+The machine-readable [work assignments](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64/work-assignments.json)
 cover all 154 source entries exactly once for execution: X2 has 82, C3 has 21,
 C4 has 7, D1 has 17, and D2 has 27. All entries also retain the instruction-form
 review owner. The inventory integrity check rejects dropped assignments,

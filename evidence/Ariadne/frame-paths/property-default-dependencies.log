@@ -1,0 +1,102 @@
+ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne)
+├── minidump v0.26.1
+│   ├── debugid v0.8.0
+│   │   └── uuid v1.26.1
+│   ├── encoding_rs v0.8.35
+│   │   └── cfg-if v1.0.5
+│   ├── memmap2 v0.9.11
+│   │   └── libc v0.2.189
+│   ├── minidump-common v0.26.1
+│   │   ├── bitflags v2.13.2
+│   │   ├── debugid v0.8.0 (*)
+│   │   ├── num-derive v0.4.2 (proc-macro)
+│   │   │   ├── proc-macro2 v1.0.107
+│   │   │   │   └── unicode-ident v1.0.26
+│   │   │   ├── quote v1.0.47
+│   │   │   │   └── proc-macro2 v1.0.107 (*)
+│   │   │   └── syn v2.0.119
+│   │   │       ├── proc-macro2 v1.0.107 (*)
+│   │   │       ├── quote v1.0.47 (*)
+│   │   │       └── unicode-ident v1.0.26
+│   │   ├── num-traits v0.2.19
+│   │   ├── range-map v0.2.0
+│   │   │   └── num-traits v0.2.19
+│   │   ├── scroll v0.12.0
+│   │   │   └── scroll_derive v0.12.1 (proc-macro)
+│   │   │       ├── proc-macro2 v1.0.107 (*)
+│   │   │       ├── quote v1.0.47 (*)
+│   │   │       └── syn v2.0.119 (*)
+│   │   └── smart-default v0.7.1 (proc-macro)
+│   │       ├── proc-macro2 v1.0.107 (*)
+│   │       ├── quote v1.0.47 (*)
+│   │       └── syn v2.0.119 (*)
+│   ├── num-traits v0.2.19
+│   ├── procfs-core v0.17.0
+│   │   ├── bitflags v2.13.2
+│   │   └── hex v0.4.3
+│   ├── prost v0.13.5
+│   │   ├── bytes v1.12.1
+│   │   └── prost-derive v0.13.5 (proc-macro)
+│   │       ├── anyhow v1.0.104
+│   │       ├── itertools v0.14.0
+│   │       │   └── either v1.18.0
+│   │       ├── proc-macro2 v1.0.107 (*)
+│   │       ├── quote v1.0.47 (*)
+│   │       └── syn v2.0.119 (*)
+│   ├── range-map v0.2.0 (*)
+│   ├── scroll v0.12.0 (*)
+│   ├── thiserror v2.0.21
+│   │   └── thiserror-impl v2.0.21 (proc-macro)
+│   │       ├── proc-macro2 v1.0.107 (*)
+│   │       ├── quote v1.0.47 (*)
+│   │       └── syn v3.0.6
+│   │           ├── proc-macro2 v1.0.107 (*)
+│   │           ├── quote v1.0.47 (*)
+│   │           └── unicode-ident v1.0.26
+│   ├── time v0.3.45
+│   │   ├── deranged v0.5.8
+│   │   │   └── powerfmt v0.2.0
+│   │   ├── itoa v1.0.18
+│   │   ├── num-conv v0.1.0
+│   │   ├── powerfmt v0.2.0
+│   │   └── time-core v0.1.7
+│   ├── tracing v0.1.44
+│   │   ├── log v0.4.34
+│   │   ├── pin-project-lite v0.2.17
+│   │   ├── tracing-attributes v0.1.31 (proc-macro)
+│   │   │   ├── proc-macro2 v1.0.107 (*)
+│   │   │   ├── quote v1.0.47 (*)
+│   │   │   └── syn v2.0.119 (*)
+│   │   └── tracing-core v0.1.36
+│   │       └── once_cell v1.21.4
+│   └── uuid v1.26.1
+├── serde v1.0.229
+│   ├── serde_core v1.0.229
+│   └── serde_derive v1.0.229 (proc-macro)
+│       ├── proc-macro2 v1.0.107 (*)
+│       ├── quote v1.0.47 (*)
+│       └── syn v3.0.6 (*)
+├── serde_json v1.0.149
+│   ├── itoa v1.0.18
+│   ├── memchr v2.8.3
+│   ├── serde_core v1.0.229
+│   └── zmij v1.0.23
+├── sha2 v0.10.9
+│   ├── cfg-if v1.0.5
+│   ├── cpufeatures v0.2.17
+│   └── digest v0.10.7
+│       ├── block-buffer v0.10.4
+│       │   └── generic-array v0.14.7
+│       │       └── typenum v1.20.1
+│       └── crypto-common v0.1.7
+│           ├── generic-array v0.14.7 (*)
+│           └── typenum v1.20.1
+└── tempfile v3.20.0
+    ├── fastrand v2.5.0
+    ├── getrandom v0.3.4
+    │   ├── cfg-if v1.0.5
+    │   └── libc v0.2.189
+    ├── once_cell v1.21.4
+    └── rustix v1.1.4
+        ├── bitflags v2.13.2
+        └── linux-raw-sys v0.12.1

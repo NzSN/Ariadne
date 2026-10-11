@@ -1,6 +1,8 @@
 //! Immutable Windows/Linux AMD64 minidump input. No image-file fallback.
 mod address_space;
 mod fault_context;
+mod frame_paths;
+pub use frame_paths::FramePreparation;
 pub mod investigation;
 mod materialize;
 mod minidump;

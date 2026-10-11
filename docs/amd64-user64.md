@@ -2,6 +2,11 @@
 
 ## Context and follow-up
 
+> **Specification removal (2026-10-11).** The ISA specifications, coverage
+> inventories and associated checkers described here have been removed.
+> Their links point to an immutable Git archive; the commands below require
+> that historical checkout. See the [current assurance boundary](Ariadne/semantic-assurance.md#dependency-audit-and-retained-references).
+
 **Status.** Retired ISA research; links below explain historical dependencies, not an active backlog.
 
 **Why this document exists.** Full-manual ambitions needed a bounded form/profile scope. The motivating contract is [Historical motivation](amd64-semantics-design.md).
@@ -25,13 +30,13 @@ For the wider context, see the optional [documentation map](documentation-map.md
 This is the historical user64 instruction-step profile. The
 [retirement decision](Ariadne/semantic-assurance.md) ends its active milestones.
 The [Stage D validation record](../evidence/Ariadne/stage-d-progress-validation.json) and
-[coverage ledger](../Specs/AMD64/user64-coverage.json) retain the former results.
+[coverage ledger](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64/user64-coverage.json) retain the former results.
 The profile and acceptance rules below describe that retired research scope.
 
 ## Profile and milestones
 
 The machine-readable definition is
-[`user64-profile.json`](../Specs/AMD64/user64-profile.json). Its exact form IDs
+[`user64-profile.json`](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64/user64-profile.json). Its exact form IDs
 and operand projections are fixed in the manifest; editing the profile
 invalidates prior profile-bound acceptance evidence.
 
@@ -92,7 +97,7 @@ it does not claim that a production decoder/runtime adapter has been shipped.
 
 ## Progress and acceptance
 
-[`user64-coverage.json`](../Specs/AMD64/user64-coverage.json) records targeted
+[`user64-coverage.json`](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64/user64-coverage.json) records targeted
 cases, source review, implementation stage, open obligations and semantic
 acceptance references. Initially, 49 register cases have paired body bindings;
 none is automatically promoted to a verified instruction step. Planned and

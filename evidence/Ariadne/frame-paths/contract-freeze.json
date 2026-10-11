@@ -1,0 +1,12 @@
+{
+  "schema": "ariadne.frame-path-contract-freeze/v1",
+  "graphCases": 64,
+  "hashes": {
+    "Specs/AriadneFramePaths.tla": "53fd01abd70ded58cbf865f631704f1eb7975bee96086592a55eef96f2693b0f",
+    "Specs/FramePaths.cfg": "fbc693dd7ab28a17e13bc0140caadcc5bf863f3b59eec40a35a2ff3bc83f1038",
+    "tests/investigation/fixtures/frame_paths_oracle.py": "d311085ef047f423c15de8454454dc00defb2667e7d36f3fb108c7b3d74d928a",
+    "tests/investigation/fixtures/frame_paths_oracle.json": "1ba48a7661db214f1a94e3bcb27df788a610a6b11eefbc5a1982a64487130192"
+  },
+  "modelChecked": false,
+  "runtimeImplemented": false
+}

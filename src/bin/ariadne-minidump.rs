@@ -8,7 +8,7 @@ use std::io::{self, Write};
 use std::path::{Path, PathBuf};
 
 fn usage() -> &'static str {
-    "usage: ariadne-minidump DUMP --decoder-reference PATH --entry VA_HEX [--entry VA_HEX ...] [--seed VA_HEX ...] [--seed-exception-rip] [--max-starts N] [--stateflow-input SEMANTICS_JSON] [--explain-fault-address VA --memory-access N] [--explanation-only] [--assess-zero-address VA --memory-access N] [--assess-zero-base-offset VA --memory-access N] [--assess-memory-provenance LOAD_VA --memory-access N] [--assessment-only] [--analysis-backend rust|bap] [--bap-core-dir DIR] [--bap-helper PATH] [--bap-runtime DIR] (--format text|dot|json | --output-dir NEW_DIR)"
+    "usage: ariadne-minidump DUMP --decoder-reference PATH --entry VA_HEX [--entry VA_HEX ...] [--seed VA_HEX ...] [--seed-exception-rip] [--max-starts N] [--list-frame-paths N:M --path-count-bound NP [--thread-id ID] [--frame-path-limits JSON]] [--stateflow-input SEMANTICS_JSON] [--explain-fault-address VA --memory-access N] [--explanation-only] [--assess-zero-address VA --memory-access N] [--assess-zero-base-offset VA --memory-access N] [--assess-memory-provenance LOAD_VA --memory-access N] [--assessment-only] [--analysis-backend rust|bap] [--bap-core-dir DIR] [--bap-helper PATH] [--bap-runtime DIR] (--format text|dot|json | --output-dir NEW_DIR)"
 }
 fn invalid(message: impl Into<String>) -> io::Error {
     io::Error::new(io::ErrorKind::InvalidInput, message.into())
@@ -45,6 +45,10 @@ struct Args {
     assess_site: Option<u64>,
     assess_offset_site: Option<u64>,
     memory_provenance_site: Option<u64>,
+    frame_pair: Option<(usize, usize)>,
+    path_count_bound: Option<usize>,
+    frame_thread: Option<u32>,
+    frame_limits: Option<PathBuf>,
     assessment_only: bool,
     memory_access: Option<usize>,
     explanation_only: bool,
@@ -72,6 +76,10 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
     let mut assess_site = None;
     let mut assess_offset_site = None;
     let mut memory_provenance_site = None;
+    let mut frame_pair = None;
+    let mut path_count_bound = None;
+    let mut frame_thread = None;
+    let mut frame_limits = None;
     let mut assessment_only = false;
     let mut memory_access = None;
     let mut explanation_only = false;
@@ -167,6 +175,33 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
                         .ok_or_else(|| invalid("non-UTF8 assessment VA"))?,
                 )?);
             }
+            "--list-frame-paths" if frame_pair.is_none() => {
+                let pair = value
+                    .to_str()
+                    .ok_or_else(|| invalid("non-UTF8 frame indices"))?;
+                let (n, m) = pair
+                    .split_once(':')
+                    .ok_or_else(|| invalid("frame query requires N:M"))?;
+                frame_pair = Some((parse_index(n)?, parse_index(m)?));
+            }
+            "--path-count-bound" if path_count_bound.is_none() => {
+                path_count_bound = Some(parse_index(
+                    value.to_str().ok_or_else(|| invalid("non-UTF8 NP"))?,
+                )?);
+            }
+            "--thread-id" if frame_thread.is_none() => {
+                frame_thread = Some(
+                    u32::try_from(parse_index(
+                        value
+                            .to_str()
+                            .ok_or_else(|| invalid("non-UTF8 thread id"))?,
+                    )?)
+                    .map_err(|_| invalid("thread id overflow"))?,
+                );
+            }
+            "--frame-path-limits" if frame_limits.is_none() => {
+                frame_limits = Some(PathBuf::from(value));
+            }
             "--assess-memory-provenance" if memory_provenance_site.is_none() => {
                 memory_provenance_site = Some(parse_va(
                     value
@@ -195,16 +230,49 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
             _ => return Err(invalid(format!("unknown or duplicate option: {flag}")).into()),
         }
     }
-    if entries.is_empty() || decoder.is_none() || format.is_some() == output_dir.is_some() {
+    if (entries.is_empty() && frame_pair.is_none())
+        || decoder.is_none()
+        || format.is_some() == output_dir.is_some()
+    {
         return Err(invalid(usage()).into());
     }
     if usize::from(explain_site.is_some())
         + usize::from(assess_site.is_some())
         + usize::from(assess_offset_site.is_some())
         + usize::from(memory_provenance_site.is_some())
+        + usize::from(frame_pair.is_some())
         > 1
     {
         return Err(invalid("choose one explanation or assessment question").into());
+    }
+    if frame_pair.is_some() != path_count_bound.is_some()
+        || (frame_pair.is_none() && (frame_thread.is_some() || frame_limits.is_some()))
+    {
+        return Err(invalid(
+            "frame options require --list-frame-paths N:M and --path-count-bound NP",
+        )
+        .into());
+    }
+    if let Some((n, m)) = frame_pair {
+        if n < m
+            || path_count_bound == Some(0)
+            || path_count_bound.is_some_and(|np| np > 4097)
+            || n >= 64
+        {
+            return Err(
+                invalid("invalid frame ordering/count bound or frame profile limit").into(),
+            );
+        }
+        if !entries.is_empty()
+            || !seeds.is_empty()
+            || exception_rip_seed
+            || stateflow_input.is_some()
+            || assessment_only
+            || explanation_only
+            || memory_access.is_some()
+        {
+            return Err(invalid("frame query uses explicit per-frame roots; cannot combine with entry/seed/stateflow/other question modes").into());
+        }
     }
     if (explain_site.is_some()
         || assess_site.is_some()
@@ -258,6 +326,10 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
         assess_site,
         assess_offset_site,
         memory_provenance_site,
+        frame_pair,
+        path_count_bound,
+        frame_thread,
+        frame_limits,
         assessment_only,
         memory_access,
         explanation_only,
@@ -326,9 +398,137 @@ fn publish_all(directory: &Path, reports: &[(&str, String)]) -> Result<(), Box<d
     Ok(())
 }
 
+fn parse_index(s: &str) -> Result<usize, Box<dyn Error>> {
+    let value = if let Some(s) = s.strip_prefix("0x") {
+        usize::from_str_radix(s, 16)
+    } else {
+        s.parse()
+    };
+    Ok(value.map_err(|_| invalid("invalid unsigned frame/count/thread number"))?)
+}
+fn frame_query(args: &Args, snapshot: &FileSnapshot) -> Result<(), Box<dyn Error>> {
+    use ariadne::investigation::{
+        FramePathLimits, FramePathQuestion, FrameRecoveryLimits, active_frame_entry,
+        bind_frame_paths, list_frame_paths,
+    };
+    let (n, m) = args
+        .frame_pair
+        .ok_or_else(|| invalid("missing frame question"))?;
+    let thread = args
+        .frame_thread
+        .or_else(|| snapshot.metadata().exception.as_ref().map(|e| e.thread_id))
+        .ok_or_else(|| invalid("--thread-id required without an exception thread"))?;
+    let limits = if let Some(path) = &args.frame_limits {
+        if fs::metadata(path)?.len() > 8192 {
+            return Err(invalid("frame limit input byte budget").into());
+        }
+        ariadne::reports::decode_frame_path_limits(&fs::read(path)?)?
+    } else {
+        FramePathLimits::default()
+    };
+    let chain = snapshot.recover_thread_frames(
+        thread,
+        FrameRecoveryLimits {
+            max_frames: (n + 2).min(64),
+            ..FrameRecoveryLimits::default()
+        },
+    )?;
+    let mut config = ariadne::bap::Config::from_env();
+    if let Some(helper) = &args.bap_helper {
+        config.helper = helper.clone();
+    }
+    if let Some(runtime) = &args.bap_runtime {
+        config.runtime = runtime.clone();
+    }
+    let options = PreparationOptions::default();
+    let setup = ariadne::input::FramePreparation {
+        decoder: &args.decoder,
+        config: &config,
+        options: &options,
+        limits: args.limits.clone(),
+    };
+    let mut queries = Vec::new();
+    if n < chain.frames.len() {
+        for index in (0..=n).rev() {
+            let entry = if let Some(entry) = chain.frames[index].function_begin {
+                entry
+            } else if let Some((parent_index, parent)) = queries.last() {
+                if *parent_index != index + 1 {
+                    break;
+                }
+                match active_frame_entry(&chain, index, parent) {
+                    Ok(entry) => entry,
+                    Err(_) => break,
+                }
+            } else if index == 0 && n == m {
+                chain.frames[0].pc
+            } else {
+                break;
+            };
+            let prepared = snapshot.prepare_frame_with_bap(&chain, index, entry, &setup)?;
+            let completed = if args.analysis_backend == "bap" {
+                let native = ariadne::bap::core_adapter::NativeAnalyzer::from_capture(
+                    &ariadne::bap::core_session::CoreConfig::from_directory(
+                        args.bap_core_dir.clone(),
+                    ),
+                    &format!("frame-path-{index}"),
+                    &prepared,
+                )?;
+                native.complete()?
+            } else {
+                ariadne::CompletedAnalysis::from_analyzer(ariadne::Analyzer::new(
+                    prepared.prepared.request.clone(),
+                )?)
+            };
+            queries.push((
+                index,
+                ariadne::input::investigation::bind_investigation(&prepared, &completed)?,
+            ));
+        }
+    }
+    let bound = bind_frame_paths(chain, queries)?;
+    let listing = list_frame_paths(
+        &bound,
+        FramePathQuestion {
+            from_frame: n,
+            to_frame: m,
+            np: args.path_count_bound.unwrap(),
+        },
+        limits,
+    )?;
+    if let Some(directory) = &args.output_dir {
+        let files = [
+            ("frame-paths.txt", ariadne::reports::Format::Text),
+            ("frame-paths.json", ariadne::reports::Format::Json),
+            ("frame-paths.dot", ariadne::reports::Format::Dot),
+        ]
+        .map(|(name, format)| {
+            Ok((
+                name,
+                ariadne::reports::render_frame_paths(&listing, format)?,
+            ))
+        })
+        .into_iter()
+        .collect::<Result<Vec<_>, Box<dyn Error>>>()?;
+        publish_all(directory, &files)?;
+    } else {
+        let format = match args.format.as_ref().unwrap() {
+            ReportFormat::Text => ariadne::reports::Format::Text,
+            ReportFormat::Json => ariadne::reports::Format::Json,
+            ReportFormat::Dot => ariadne::reports::Format::Dot,
+        };
+        io::stdout()
+            .lock()
+            .write_all(ariadne::reports::render_frame_paths(&listing, format)?.as_bytes())?;
+    }
+    Ok(())
+}
 fn run() -> Result<(), Box<dyn Error>> {
     let mut args = arguments()?;
     let snapshot = FileSnapshot::open_minidump(&args.dump, OpenLimits::default())?;
+    if args.frame_pair.is_some() {
+        return frame_query(&args, &snapshot);
+    }
     if args.exception_rip_seed {
         let rip = snapshot
             .metadata()

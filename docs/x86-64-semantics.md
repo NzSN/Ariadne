@@ -2,6 +2,11 @@
 
 ## Context and follow-up
 
+> **Specification removal (2026-10-11).** The ISA specifications, coverage
+> inventories and associated checkers described here have been removed.
+> Their links point to an immutable Git archive; the commands below require
+> that historical checkout. See the [current assurance boundary](Ariadne/semantic-assurance.md#dependency-audit-and-retained-references).
+
 **Status.** Retired initial instruction-rule research.
 
 **Why this document exists.** [Stateflow design](machine-state-design.md) requires supplied transition semantics for a frozen graph.
@@ -23,13 +28,13 @@ For the wider context, see the optional [documentation map](documentation-map.md
 > [current semantic assurance decision](Ariadne/semantic-assurance.md).
 
 Status: a checked TLA+ specification, not a Rust implementation or binary decoder.
-The new [module](../Specs/AriadneX86_64Semantics.tla) computes outcomes from decoded
+The new [module](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AriadneX86_64Semantics.tla) computes outcomes from decoded
 instructions and register/flag values. `StateSteps` is no longer a hand-authored
 input when using its bridge to `AriadneMachineState`.
 
 The [accepted AMD64 expansion](amd64-semantics-design.md) covers the full
 general-purpose instruction reference and application-visible state, with a
-Lean formalization. Its [source inventory and first foundation](../Specs/AMD64/README.md)
+Lean formalization. Its [source inventory and first foundation](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64/README.md)
 are separate from the register-only evaluator documented here. The wider scope
 is a delivery target, not a claim that this module already implements it.
 

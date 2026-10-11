@@ -581,7 +581,7 @@ semantic/provenance gaps or qualify separate investigation budgets.
 The earlier [finite-model delivery](typed-replay-design.md#finite-corpus-and-claim-boundary) recorded 32 cases,
 64 complete traces, 326 observations and 15 mutant mismatches for its pinned
 Rust models/adapters. Those records do not qualify a changed producer/native
-solver. The [historical instruction-step ledger](../../Specs/AMD64/user64-coverage.json)
+solver. The [historical instruction-step ledger](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64/user64-coverage.json)
 recorded an unclosed 0/49 gate with decoded-form, flags/frame, fault/commit,
 instruction-boundary, TLA–Lean and projection obligations. The
 [assurance decision](semantic-assurance.md) retired that ISA/Lean track;

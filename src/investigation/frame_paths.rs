@@ -1,0 +1,689 @@
+//! Bounded structural alternatives between validated captured activations.
+use super::{BoundInvestigation, CapturedFrameChain, Error, Identity, SiteEvidence, invalid, sha};
+use crate::{EdgeKind, InstructionKind};
+use serde::{Deserialize, Serialize};
+use std::collections::{BTreeMap, BTreeSet};
+use std::time::Instant;
+pub const FRAME_PATH_SCHEMA: &str = "ariadne.frame-paths/v1";
+
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct FramePathQuestion {
+    pub from_frame: usize,
+    pub to_frame: usize,
+    pub np: usize,
+}
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct FramePathLimits {
+    pub max_graph_nodes: usize,
+    pub max_graph_edges: usize,
+    pub max_search_states: usize,
+    pub max_scanned_edges: usize,
+    pub max_path_steps: usize,
+    pub max_node_visits: usize,
+    pub max_frontier_bytes: usize,
+    pub max_output_bytes: usize,
+    pub deadline_ms: u64,
+}
+impl Default for FramePathLimits {
+    fn default() -> Self {
+        Self {
+            max_graph_nodes: 8192,
+            max_graph_edges: 32768,
+            max_search_states: 4096,
+            max_scanned_edges: 16384,
+            max_path_steps: 256,
+            max_node_visits: 2,
+            max_frontier_bytes: 4 * 1024 * 1024,
+            max_output_bytes: 4 * 1024 * 1024,
+            deadline_ms: 1000,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum FramePathEdgeKind {
+    Next,
+    Taken,
+    Fallthrough,
+    Jump,
+    Indirect,
+    Summary,
+    Call,
+}
+impl From<EdgeKind> for FramePathEdgeKind {
+    fn from(k: EdgeKind) -> Self {
+        match k {
+            EdgeKind::Next => Self::Next,
+            EdgeKind::Taken => Self::Taken,
+            EdgeKind::Fallthrough => Self::Fallthrough,
+            EdgeKind::Jump => Self::Jump,
+            EdgeKind::Indirect => Self::Indirect,
+            EdgeKind::Summary => Self::Summary,
+            EdgeKind::Call => Self::Call,
+        }
+    }
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct FramePathNode {
+    pub frame: usize,
+    #[serde(with = "super::model::va")]
+    pub site: u64,
+}
+#[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct FramePathEdge {
+    pub src: FramePathNode,
+    pub dst: FramePathNode,
+    pub kind: FramePathEdgeKind,
+}
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct GraphNode {
+    evidence: SiteEvidence,
+    call: bool,
+    #[serde(with = "super::frame_unwind::address_list")]
+    fall: Vec<u64>,
+    #[serde(with = "super::frame_unwind::address_list")]
+    targets: Vec<u64>,
+}
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct FrameGraph {
+    frame: usize,
+    identity: Identity,
+    #[serde(with = "super::model::va")]
+    entry: u64,
+    nodes: Vec<GraphNode>,
+    edges: Vec<FramePathEdge>,
+    gaps: Vec<String>,
+}
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct Input {
+    chain: CapturedFrameChain,
+    graphs: Vec<FrameGraph>,
+}
+pub struct BoundFramePaths {
+    input: Input,
+}
+
+fn call_target(node: &GraphNode, return_pc: u64) -> Option<u64> {
+    let s = &node.evidence;
+    if !node.call
+        || !s.captured
+        || !super::validate::site_valid(s)
+        || s.bytes_hex.len() != 10
+        || !s.bytes_hex.starts_with("e8")
+    {
+        return None;
+    }
+    let b = super::frame_unwind::unhex(&s.bytes_hex).ok()?;
+    let next = s.va.checked_add(5)?;
+    let target = next.wrapping_add_signed(i64::from(i32::from_le_bytes(b[1..5].try_into().ok()?)));
+    (next == return_pc && node.fall == [next] && node.targets == [target]).then_some(target)
+}
+/// Entry of a leaf activation is supplied only by its verified active direct call.
+pub fn active_frame_entry(
+    chain: &CapturedFrameChain,
+    child: usize,
+    parent: &BoundInvestigation,
+) -> Result<u64, Error> {
+    chain.validate()?;
+    let younger = chain
+        .frames
+        .get(child)
+        .ok_or_else(|| invalid("child frame outside chain"))?;
+    let older = chain
+        .frames
+        .get(child + 1)
+        .ok_or_else(|| invalid("caller frame unavailable"))?;
+    if parent.identity.snapshot_id != chain.snapshot_id
+        || parent.identity.artifact_sha256 != chain.artifact_sha256
+    {
+        return Err(invalid("caller query belongs to another snapshot"));
+    }
+    let candidates: Vec<_> = parent
+        .state
+        .decoded
+        .iter()
+        .filter_map(|site| {
+            let i = &parent.request.instructions[site];
+            let n = GraphNode {
+                evidence: parent.sites.get(site)?.clone(),
+                call: i.kind == InstructionKind::Call,
+                fall: i.fall.iter().copied().collect(),
+                targets: i.targets.iter().copied().collect(),
+            };
+            call_target(&n, older.pc)
+                .filter(|target| younger.function_begin.is_none_or(|begin| begin == *target))
+        })
+        .collect();
+    if candidates.len() != 1 {
+        return Err(invalid("missing-or-ambiguous-active-direct-call"));
+    }
+    Ok(candidates[0])
+}
+pub fn bind_frame_paths(
+    chain: CapturedFrameChain,
+    analyses: Vec<(usize, BoundInvestigation)>,
+) -> Result<BoundFramePaths, Error> {
+    chain.validate()?;
+    let mut graphs = Vec::new();
+    let mut count = 0usize;
+    let mut edge_count = 0usize;
+    if analyses.len() > 64 {
+        return Err(invalid("frame graph count budget"));
+    }
+    for (frame, bound) in analyses {
+        let f = chain
+            .frames
+            .get(frame)
+            .ok_or_else(|| invalid("graph frame outside recovered chain"))?;
+        if bound.identity.snapshot_id != chain.snapshot_id
+            || bound.identity.artifact_sha256 != chain.artifact_sha256
+            || bound.request.entry_points.len() != 1
+        {
+            return Err(invalid("frame graph identity or root mismatch"));
+        }
+        let entry = *bound.request.entry_points.first().expect("one root");
+        if f.function_begin.is_some_and(|begin| begin != entry) {
+            return Err(invalid("graph entry disagrees with frame function"));
+        }
+        count = count
+            .checked_add(bound.state.decoded.len())
+            .filter(|v| *v <= 8192)
+            .ok_or_else(|| invalid("frame graph admission node budget"))?;
+        edge_count = edge_count
+            .checked_add(bound.state.edges.len())
+            .filter(|v| *v <= 32768)
+            .ok_or_else(|| invalid("frame graph admission edge budget"))?;
+        let in_function = |site: u64| {
+            f.function_begin.is_none_or(|b| site >= b) && f.function_end.is_none_or(|e| site < e)
+        };
+        let nodes = bound
+            .state
+            .decoded
+            .iter()
+            .filter(|site| in_function(**site))
+            .map(|site| {
+                let i = &bound.request.instructions[site];
+                Ok(GraphNode {
+                    evidence: bound
+                        .sites
+                        .get(site)
+                        .ok_or_else(|| invalid("frame node evidence missing"))?
+                        .clone(),
+                    call: i.kind == InstructionKind::Call,
+                    fall: i.fall.iter().copied().collect(),
+                    targets: i.targets.iter().copied().collect(),
+                })
+            })
+            .collect::<Result<Vec<_>, Error>>()?;
+        let edges = bound
+            .state
+            .edges
+            .iter()
+            .filter(|e| {
+                e.kind.is_local()
+                    && bound.state.decoded.contains(&e.src)
+                    && bound.state.decoded.contains(&e.dst)
+                    && in_function(e.src)
+                    && in_function(e.dst)
+            })
+            .map(|e| FramePathEdge {
+                src: FramePathNode { frame, site: e.src },
+                dst: FramePathNode { frame, site: e.dst },
+                kind: e.kind.into(),
+            })
+            .collect();
+        let mut gaps: Vec<_> = bound
+            .context
+            .recovery_gaps
+            .iter()
+            .map(|g| format!("0x{:016x}:{}", g.site, g.code))
+            .collect();
+        gaps.extend(bound.state.obligations.iter().map(|g| format!("{:?}", g)));
+        if bound
+            .state
+            .edges
+            .iter()
+            .any(|e| e.kind.is_local() && in_function(e.src) && !in_function(e.dst))
+        {
+            gaps.push("local-edge-outside-frame-function".into());
+        }
+        graphs.push(FrameGraph {
+            frame,
+            identity: bound.identity,
+            entry,
+            nodes,
+            edges,
+            gaps,
+        });
+    }
+    graphs.sort_by_key(|g| g.frame);
+    let input = Input { chain, graphs };
+    validate_input(&input)?;
+    Ok(BoundFramePaths { input })
+}
+fn validate_input(input: &Input) -> Result<(), Error> {
+    input.chain.validate()?;
+    let mut frames = BTreeSet::new();
+    let mut total = 0;
+    let mut edges = 0;
+    for g in &input.graphs {
+        let f = input
+            .chain
+            .frames
+            .get(g.frame)
+            .ok_or_else(|| invalid("invalid graph frame"))?;
+        total += g.nodes.len();
+        edges += g.edges.len();
+        if !frames.insert(g.frame)
+            || total > 8192
+            || edges > 32768
+            || g.identity.snapshot_id != input.chain.snapshot_id
+            || g.identity.artifact_sha256 != input.chain.artifact_sha256
+            || !super::validate::digest(&g.identity.query_id)
+            || !super::validate::digest(&g.identity.request_sha256)
+            || f.function_begin.is_some_and(|v| v != g.entry)
+        {
+            return Err(invalid("frame graph identity/size invalid"));
+        }
+        let nodes: BTreeSet<_> = g.nodes.iter().map(|n| n.evidence.va).collect();
+        if nodes.len() != g.nodes.len()
+            || g.nodes.iter().any(|n| {
+                !n.evidence.captured
+                    || !super::validate::site_valid(&n.evidence)
+                    || f.function_begin.is_some_and(|b| n.evidence.va < b)
+                    || f.function_end.is_some_and(|e| {
+                        u128::from(n.evidence.va) + (n.evidence.bytes_hex.len() / 2) as u128
+                            > u128::from(e)
+                    })
+            })
+            || g.edges.iter().any(|e| {
+                e.src.frame != g.frame
+                    || e.dst.frame != g.frame
+                    || e.kind == FramePathEdgeKind::Call
+                    || !nodes.contains(&e.src.site)
+                    || !nodes.contains(&e.dst.site)
+            })
+            || g.edges.iter().collect::<BTreeSet<_>>().len() != g.edges.len()
+        {
+            return Err(invalid("invalid frame graph evidence/edges"));
+        }
+    }
+    Ok(())
+}
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ListedFramePath {
+    pub path_id: String,
+    pub nodes: Vec<FramePathNode>,
+    pub edges: Vec<FramePathEdge>,
+    pub contains_opaque_summary: bool,
+}
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct FramePathCounters {
+    pub expanded_states: usize,
+    pub scanned_edges: usize,
+    pub peak_frontier_bytes: usize,
+    pub retained_path_bytes: usize,
+}
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct FramePathListing {
+    pub schema: String,
+    pub scope_id: String,
+    pub question: FramePathQuestion,
+    pub limits: FramePathLimits,
+    pub available: bool,
+    pub coverage: String,
+    pub truncated: bool,
+    pub enumeration_exhausted: bool,
+    pub stop_reason: String,
+    pub gaps: Vec<String>,
+    pub returned_count: usize,
+    pub paths: Vec<ListedFramePath>,
+    pub counters: FramePathCounters,
+    pub frontier_count: usize,
+    pub elapsed_ms: u64,
+    pub premises: Vec<String>,
+    input: Input,
+}
+fn compose(
+    input: &Input,
+    q: &FramePathQuestion,
+) -> Result<
+    (
+        FramePathNode,
+        FramePathNode,
+        Vec<FramePathEdge>,
+        Vec<String>,
+    ),
+    Error,
+> {
+    let graphs: BTreeMap<_, _> = input.graphs.iter().map(|g| (g.frame, g)).collect();
+    let mut anchors = BTreeMap::new();
+    let mut edges = Vec::new();
+    let mut gaps = Vec::new();
+    for frame in q.to_frame..=q.from_frame {
+        let g = *graphs
+            .get(&frame)
+            .ok_or_else(|| invalid("missing-frame-query"))?;
+        gaps.extend(g.gaps.iter().map(|v| format!("frame-{frame}:{v}")));
+        for n in &g.nodes {
+            if !n.evidence.gaps.is_empty() {
+                gaps.extend(
+                    n.evidence
+                        .gaps
+                        .iter()
+                        .map(|v| format!("frame-{frame}:0x{:016x}:{v}", n.evidence.va)),
+                );
+            }
+        }
+        let anchor = if frame == 0 {
+            input.chain.frames[0].pc
+        } else {
+            let child = graphs.get(&(frame - 1));
+            let expected = input.chain.frames[frame - 1]
+                .function_begin
+                .or(child.map(|g| g.entry));
+            let calls: Vec<_> = g
+                .nodes
+                .iter()
+                .filter(|n| {
+                    call_target(n, input.chain.frames[frame].pc)
+                        .is_some_and(|target| expected == Some(target))
+                })
+                .collect();
+            if calls.len() != 1 {
+                return Err(invalid("missing-or-ambiguous-active-call-anchor"));
+            }
+            let call = calls[0];
+            if frame > q.to_frame {
+                let child = child.ok_or_else(|| invalid("missing-child-query"))?;
+                if !child.nodes.iter().any(|n| n.evidence.va == child.entry) {
+                    return Err(invalid("child-entry-not-reached"));
+                }
+                edges.push(FramePathEdge {
+                    src: FramePathNode {
+                        frame,
+                        site: call.evidence.va,
+                    },
+                    dst: FramePathNode {
+                        frame: frame - 1,
+                        site: child.entry,
+                    },
+                    kind: FramePathEdgeKind::Call,
+                });
+            }
+            call.evidence.va
+        };
+        if !g.nodes.iter().any(|n| n.evidence.va == anchor) {
+            return Err(invalid("frame-endpoint-not-reached"));
+        }
+        anchors.insert(frame, anchor);
+        edges.extend(
+            g.edges
+                .iter()
+                .filter(|e| e.src.site != anchor || frame == q.to_frame)
+                .cloned(),
+        );
+    }
+    edges.sort();
+    edges.dedup();
+    gaps.sort();
+    gaps.dedup();
+    Ok((
+        FramePathNode {
+            frame: q.from_frame,
+            site: anchors[&q.from_frame],
+        },
+        FramePathNode {
+            frame: q.to_frame,
+            site: anchors[&q.to_frame],
+        },
+        edges,
+        gaps,
+    ))
+}
+fn list(
+    input: Input,
+    q: FramePathQuestion,
+    limits: FramePathLimits,
+    replay_deadline: Option<usize>,
+) -> Result<FramePathListing, Error> {
+    if q.np == 0 || q.np > 4097 || q.from_frame < q.to_frame {
+        return Err(invalid("invalid NP or frame indices"));
+    }
+    validate_input(&input)?;
+    let started = Instant::now();
+    let scope_id = sha(&serde_json::to_vec(&(&input, &q, &limits))?);
+    let mut result=FramePathListing{schema:FRAME_PATH_SCHEMA.into(),scope_id,question:q.clone(),limits:limits.clone(),available:true,coverage:"partial".into(),truncated:false,enumeration_exhausted:false,stop_reason:String::new(),gaps:Vec::new(),returned_count:0,paths:Vec::new(),counters:FramePathCounters{expanded_states:0,scanned_edges:0,peak_frontier_bytes:0,retained_path_bytes:0},frontier_count:0,elapsed_ms:0,premises:vec!["Structural alternatives under captured frame, decoded-control and unwind/Windows ABI premises; no executed history or selected writer".into(),"Opaque summary steps retain unknown callee interiors; an incomplete path list never excludes a memory writer".into()],input};
+    let payload = serde_json::to_vec(&result)?.len();
+    if payload > limits.max_output_bytes {
+        return Err(invalid("frame-output-input-byte-budget"));
+    }
+    if q.from_frame >= result.input.chain.frames.len() {
+        if result.input.chain.stop_reason == "zero-return-boundary" {
+            return Err(invalid("frame index outside complete recovered chain"));
+        }
+        result.available = false;
+        result.coverage = "unavailable".into();
+        result.truncated = result.input.chain.truncated;
+        result.stop_reason = "requested-frame-not-recovered".into();
+        result.gaps.push(result.input.chain.stop_reason.clone());
+        return Ok(result);
+    }
+    let composed = compose(&result.input, &q);
+    let (start, end, edges, gaps) = match composed {
+        Ok(v) => v,
+        Err(e) => {
+            result.available = false;
+            result.coverage = "unavailable".into();
+            result.stop_reason = e.to_string();
+            result.gaps.push(result.stop_reason.clone());
+            return Ok(result);
+        }
+    };
+    result.gaps = gaps;
+    if result
+        .input
+        .graphs
+        .iter()
+        .map(|g| g.nodes.len())
+        .sum::<usize>()
+        > limits.max_graph_nodes
+        || edges.len() > limits.max_graph_edges
+    {
+        result.truncated = true;
+        result.stop_reason = "frame-graph-budget".into();
+        return Ok(result);
+    }
+    if limits.max_path_steps == 0 || limits.max_node_visits == 0 {
+        result.truncated = true;
+        result.stop_reason = "path-or-visit-budget".into();
+        return Ok(result);
+    }
+    let mut outgoing: BTreeMap<FramePathNode, Vec<FramePathEdge>> = BTreeMap::new();
+    for e in edges {
+        outgoing.entry(e.src).or_default().push(e);
+    }
+    let first = (vec![start], Vec::<FramePathEdge>::new());
+    let size = |p: &(Vec<FramePathNode>, Vec<FramePathEdge>)| {
+        p.0.len() * std::mem::size_of::<FramePathNode>()
+            + p.1.len() * std::mem::size_of::<FramePathEdge>()
+    };
+    let mut frontier = vec![first];
+    let mut bytes = size(&frontier[0]);
+    let mut blocked = false;
+    if bytes > limits.max_frontier_bytes {
+        result.truncated = true;
+        result.stop_reason = "frontier-byte-budget".into();
+        result.frontier_count = 1;
+        return Ok(result);
+    }
+    result.counters.peak_frontier_bytes = bytes;
+    while !frontier.is_empty() {
+        let reason = if result.paths.len() >= q.np - 1 {
+            Some("path-count-budget")
+        } else if result.counters.expanded_states >= limits.max_search_states {
+            Some("search-state-budget")
+        } else if replay_deadline.is_some_and(|at| at == result.counters.expanded_states)
+            || (replay_deadline.is_none()
+                && started.elapsed().as_millis() >= u128::from(limits.deadline_ms))
+        {
+            Some("deadline-budget")
+        } else {
+            None
+        };
+        if let Some(reason) = reason {
+            result.stop_reason = reason.into();
+            result.truncated = true;
+            break;
+        }
+        let current = frontier.pop().expect("nonempty");
+        bytes -= size(&current);
+        result.counters.expanded_states += 1;
+        let here = *current.0.last().expect("path has start");
+        if here == end {
+            let contains_opaque_summary = current
+                .1
+                .iter()
+                .any(|e| e.kind == FramePathEdgeKind::Summary);
+            let path = ListedFramePath {
+                path_id: sha(&serde_json::to_vec(&(&result.scope_id, &current))?),
+                nodes: current.0,
+                edges: current.1,
+                contains_opaque_summary,
+            };
+            let path_bytes = serde_json::to_vec(&path)?.len();
+            if payload
+                .checked_add(result.counters.retained_path_bytes)
+                .and_then(|v| v.checked_add(path_bytes))
+                .and_then(|v| v.checked_add(1024))
+                .is_none_or(|v| v > limits.max_output_bytes)
+            {
+                result.truncated = true;
+                result.stop_reason = "output-byte-budget".into();
+                blocked = true;
+                break;
+            }
+            result.counters.retained_path_bytes += path_bytes;
+            result.paths.push(path);
+            continue;
+        }
+        if current.0.len() >= limits.max_path_steps {
+            blocked = true;
+            result.gaps.push("path-step-budget".into());
+            continue;
+        }
+        if let Some(next) = outgoing.get(&here) {
+            for edge in next.iter().rev() {
+                if result.counters.scanned_edges >= limits.max_scanned_edges {
+                    blocked = true;
+                    result.gaps.push("scanned-edge-budget".into());
+                    break;
+                }
+                result.counters.scanned_edges += 1;
+                if current.0.iter().filter(|n| **n == edge.dst).count() >= limits.max_node_visits {
+                    blocked = true;
+                    result.gaps.push("loop-visit-budget".into());
+                    continue;
+                }
+                let extra =
+                    std::mem::size_of::<FramePathNode>() + std::mem::size_of::<FramePathEdge>();
+                let addition = size(&current) + extra;
+                if bytes
+                    .checked_add(addition)
+                    .is_none_or(|v| v > limits.max_frontier_bytes)
+                {
+                    blocked = true;
+                    result.gaps.push("frontier-byte-budget".into());
+                    break;
+                }
+                let mut nodes = current.0.clone();
+                nodes.push(edge.dst);
+                let mut path_edges = current.1.clone();
+                path_edges.push(edge.clone());
+                frontier.push((nodes, path_edges));
+                bytes += addition;
+                result.counters.peak_frontier_bytes =
+                    result.counters.peak_frontier_bytes.max(bytes);
+            }
+        }
+    }
+    result.returned_count = result.paths.len();
+    result.frontier_count = frontier.len();
+    result.enumeration_exhausted = frontier.is_empty() && !blocked && result.stop_reason.is_empty();
+    result.truncated |= blocked;
+    if result.stop_reason.is_empty() {
+        result.stop_reason = if blocked {
+            "search-restriction"
+        } else {
+            "frontier-exhausted"
+        }
+        .into();
+    }
+    if result.enumeration_exhausted && result.gaps.is_empty() {
+        result.coverage = "complete_within_declared_scope".into();
+    }
+    result.gaps.sort();
+    result.gaps.dedup();
+    result.elapsed_ms = started.elapsed().as_millis().min(u128::from(u64::MAX)) as u64;
+    Ok(result)
+}
+pub fn list_frame_paths(
+    bound: &BoundFramePaths,
+    question: FramePathQuestion,
+    limits: FramePathLimits,
+) -> Result<FramePathListing, Error> {
+    list(bound.input.clone(), question, limits, None)
+}
+impl FramePathListing {
+    pub fn frame_chain(&self) -> &CapturedFrameChain {
+        &self.input.chain
+    }
+    pub fn validate(&self) -> Result<(), Error> {
+        let deadline = if self.stop_reason == "deadline-budget" {
+            if self.elapsed_ms < self.limits.deadline_ms {
+                return Err(invalid("invalid deadline receipt"));
+            }
+            Some(self.counters.expanded_states)
+        } else {
+            Some(usize::MAX)
+        };
+        let mut expected = list(
+            self.input.clone(),
+            self.question.clone(),
+            self.limits.clone(),
+            deadline,
+        )?;
+        expected.elapsed_ms = self.elapsed_ms;
+        if expected != *self {
+            return Err(invalid("frame path recomputation mismatch"));
+        }
+        if serde_json::to_vec(self)?.len() > self.limits.max_output_bytes {
+            return Err(invalid("frame output exceeds byte budget"));
+        }
+        Ok(())
+    }
+    pub fn validate_for(&self, bound: &BoundFramePaths) -> Result<(), Error> {
+        if self.input != bound.input {
+            return Err(invalid("frame path binding changed"));
+        }
+        self.validate()
+    }
+}
+
+#[cfg(all(test, feature = "input"))]
+#[path = "../../tests/investigation/frame_paths_unit.rs"]
+mod tests;
+
+#[cfg(all(test, feature = "property-tests"))]
+#[path = "../../tests/investigation/frame_paths_properties.rs"]
+mod properties;

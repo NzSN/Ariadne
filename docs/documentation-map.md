@@ -130,7 +130,8 @@ implemented repairs and exercised checks from real-Windows qualification.
 
 ### Formal-model, native-tool and evidence guides
 
-- [AMD64 source and coverage inventory](../Specs/AMD64/README.md).
+- [Archived AMD64 source and coverage inventory](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64/README.md)
+  — removed from the checkout; see the [removal and retained-reference policy](Ariadne/semantic-assurance.md#dependency-audit-and-retained-references).
 - [Ariadne formal model](../Specs/README.md).
 - [Retained Ariadne evidence](../evidence/Ariadne/README.md).
 - [AMD64 Lean formalization](../lean/README.md).

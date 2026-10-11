@@ -39,7 +39,7 @@ identities; consolidating its description supplies no new runtime qualification.
 | Architecture and development | [Architecture](architecture.md) | Process ownership, analysis equations, learning references, source layout and development checks. |
 | Captured input | [File readers](file-reader-design.md) | Reader API, CLI, immutable capture evidence, independent entries and retained real cases. |
 | Instruction semantics and native analysis | [BAP integration](bap-analysis-core-design.md) | Setup, lift/projection/admission and analysis contracts, source review, replay and qualification history. |
-| Fault-address dependencies | [Investigation](investigation-design.md) | Bound completed analysis, possible origins, explanation API and validation history. |
+| Fault-address dependencies | [Investigation](investigation-design.md) | Bound completed analysis, possible origins, explanation API, validation history and the bounded frame-path implementation and its finite qualification scope. |
 | Fault-time zero address | [Zero-address assessment](zero-address-design.md) | Predicate, admission, CLI, source review and controlled-capture qualification. |
 | Fault-time zero base plus displacement | [Zero-base-offset assessment](zero-base-offset-design.md) | Decoded/BAP agreement, result contract, source review and qualification. |
 | Fault-time address wrap | [Address-wrap assessment](address-wrap-design.md) | Selected design; model, implementation and qualification pending. |

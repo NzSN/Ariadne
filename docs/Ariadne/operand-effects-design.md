@@ -369,7 +369,8 @@ Sources: pinned AMD Volume 3 revision 3.38, SHA-256
 `e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee`;
 Volume 1 revision 3.25 (GPR aliases and 32-bit zero extension), SHA-256
 `aed9236b718ae86cdb49f7d628f4ebb1a4bdce1a012df6cf6aad6735776c8a38`.
-References use the stable IDs in [the source inventory](../../Specs/AMD64/instruction-source.json).
+References use the stable IDs in [the archived source inventory](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64/instruction-source.json),
+removed from the checkout with the retired ISA specifications on 2026-10-11.
 
 All rows are exercised with real decoded bytes by the frozen-matrix test.
 The raw snapshots establish decoder layout compatibility. Independent effect,
@@ -706,7 +707,9 @@ Reviewed **2026-09-28** for the exact normal-continuation memory forms; no compl
   `7257d41d3584822edb7934e2c630c7d3865eea30c0ab95b8de4e546088d5ea9a`,
   PDF page 93 for long-mode REX and operand-size precedence.
 - Both PDFs were fetched through `tools/amd64_inventory.py fetch`, verified
-  against `Specs/AMD64/manuals.lock.json`, and independently hash-checked.
+  against the original `Specs/AMD64/manuals.lock.json`, and independently
+  hash-checked. That source pin now retains the same bytes at
+  [amd-manuals.lock.json](../../evidence/Ariadne/amd-manuals.lock.json).
 - The native helper was rebuilt against exact LLVM 20.1.2 headers; its binary
   SHA-256 for this review is
   `dca617ca3e4ad50aef0f795b7793b73a6dae10cf04eebd695b030f8ba82ac7b7`.
@@ -750,8 +753,8 @@ history is inferred here.
 
 ### Source-form representation decision
 
-`Specs/AMD64/forms.json` retains `AMD64-F-0502` and `AMD64-F-0503` as
-**table-reconciled** records with pending semantic review. `F-0503` currently
+The archived `Specs/AMD64/forms.json` records `AMD64-F-0502` and `AMD64-F-0503` as
+**table-reconciled** records with pending semantic review. `F-0503` then
 records its imm32 as semantic width 32 with extension `none`. The sibling
 reviewed register-only variant `AMD64-F-0503-R` records encoded width 32,
 semantic width 64 and sign extension. Volume 3's prose confirms the signed
@@ -817,14 +820,14 @@ Both produced the same relevant rows:
 | `f048c7c0ffffffff` | `LOCK_PREFIX` at length 1 | Never accept as this case; the manual, not LLVM's prefix row, supplies the #UD claim |
 | `48c7c8ffffffff` | Invalid encoding | No candidate payload |
 
-The [observation checker](../../tools/check_stage_d_mov_binding.py) validates
+The [observation checker](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/tools/check_stage_d_mov_binding.py) validates
 all pinned manual bytes, the form/profile/case identity and these rows under
 both target profiles. An LLVM opcode name is **not** a proof of legal prefixes,
 architectural values, faults or instruction retirement.
 
 ### Historical formal components and open boundary
 
-`Specs/AMD64InstructionFormsCore.tla` and
+The archived `Specs/AMD64InstructionFormsCore.tla` and retained
 `lean/AMD64/InstructionFormsCore.lean` define the signed 32-to-64 register
 form. `AMD64IntegerExecution.tla` and `lean/AMD64/IntegerExecution.lean`
 dispatch the reviewed form to a MOV **body**; existing checked examples cover

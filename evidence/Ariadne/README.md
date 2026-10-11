@@ -51,6 +51,7 @@ contracts live in [docs/Ariadne](../../docs/Ariadne/README.md).
 | `bap-windows-workload-case.json` and `bap-windows-workload-inputs.tar.gz` | Active controlled Crashpad workload pin and hash-verified replay inputs, including the generated partial dump and matching executable |
 | Mutation, negative-control and outcome JSON | Observed behavior and sensitivity to intentionally incorrect implementations/inputs |
 | `*.csv` | Individual performance samples, phase timings, memory usage and graph sizes |
+| [amd-manuals.lock.json](amd-manuals.lock.json) | Original AMD source-review pin, moved byte-for-byte from the retired ISA inventory; retained by the active effects gate |
 
 These artifacts moved from `docs/Ariadne/` on 2026-10-02 without changing their
 bytes: 46 JSON files, 20 CSV files and four evidence archives. Manifest archive
@@ -66,6 +67,10 @@ than editing its stored hashes or pass/fail flags.
 
 Stage D records are retired research evidence. Earlier LLVM measurements do not
 qualify the BAP backend, and absent Windows artifacts remain unmet requirements.
+
+The [ISA specification removal](../../docs/Ariadne/semantic-assurance.md#dependency-audit-and-retained-references)
+on 2026-10-11 leaves those raw records unchanged. Their removed specification
+and tooling paths refer to the archived Git revision, rather than current files.
 
 The [investigation correctness record](investigation-correctness-validation.json)
 and [manifest](investigation-correctness-evidence-manifest.json) retain the later

@@ -8,7 +8,11 @@
 98-instruction replacement query under their recorded source/tool/dependency
 identities. The distinct zero-address and zero-base-plus-displacement questions
 are implemented within their finite profiles; address-wrap remains selected,
-with implementation and qualification pending.
+with implementation and qualification pending. On 2026-10-11, the user relaxed
+the frame-to-frame question to listing fewer than `NP` possible paths. The
+bounded frame-path contract below now has source implementation for a finite
+Windows AMD64 captured-unwind profile, separate API/report/CLI and finite native
+parity checks. Remote model/mutation and real full-dump qualification remain pending.
 
 **Why this document exists.** The [real-capture slice](file-reader-design.md#historical-controlled-chromium-capture)
 provides possible origins but leaves their explanation to the investigator.
@@ -16,15 +20,19 @@ provides possible origins but leaves their explanation to the investigator.
 **What this document establishes.** The design and implemented contract for
 selecting a captured memory-address operand and explaining its possible earlier
 byte definitions. Query identity, claims, report fields, publication, limits
-and qualification preserve alternatives and missing premises.
+and qualification preserve alternatives and missing premises. The frame-path question adds bounded structural alternatives with frame evidence.
 
 **Where to go next.**
 
 - [Implementation ledger](../../Plans/investigation-layer.md) — delivery stages,
   selected address-wrap work and later questions.
-- [Memory provenance refinement](memory-provenance-refinement.md) — proposed
-  clearer Scanner diagnostics and bounded access-pair assessments over completed
-  analysis; implementation remains pending.
+- [Memory provenance refinement](memory-provenance-refinement.md) — implemented
+  Scanner diagnostic separation, bounded writer assessment and backward scalar
+  inference; full model/mutation/Scanner qualification remains pending.
+- [Frame-path ledger](../../Plans/investigation-layer.md#bounded-frame-path-question)
+  — the selected strict path-count bound, frame anchors and resource limits.
+- [Frame-path implementation plan](../../Plans/frame-path-enumeration.md)
+  — F0–F4 contract, captured unwind profile, bounded enumeration and validation.
 - [Zero-address design](zero-address-design.md) and
   [zero-base-plus-displacement design](zero-base-offset-design.md) — distinct
   delivered numeric predicates, evidence and contracts.
@@ -46,7 +54,10 @@ Windows zero-address is [qualified under its pinned setup](zero-address-design.m
 and zero-base-plus-displacement has [finite corpus qualification](zero-base-offset-design.md#retained-qualification).
 Later source/tool changes require renewed or complete identity-verified evidence.
 Object/source context, historical execution and cross-capture questions remain
-open. Possible producers and numeric conclusions do not prove a UAF, executed
+open. The bounded frame-path implementation admits a finite captured-unwind profile
+and separately bound instruction graphs; general unwinding and broader capture
+qualification remain open. Full-memory capture alone does not supply a trace.
+Possible producers and numeric conclusions do not prove a UAF, executed
 path or general root cause.
 
 For wider navigation, see the [documentation map](../documentation-map.md).
@@ -314,12 +325,155 @@ cannot establish full Windows acceptance.
 | Which possible producers and inputs contribute to the selected address operand? | Delivered by the [first-question contract](#binding-and-result-contract). Selecting the actually executed alternative still needs additional evidence. |
 | Is a use-after-free or object-lifetime violation supported? | Object identity and lifetime evidence such as retained allocator/runtime events; a suspicious pointer or slice alone is insufficient. |
 | Which branch alternatives remain possible under known facts? | Accepted transition relations and completeness premises; retain unknown feasibility where these are absent. |
+| Can fewer than `NP` possible paths be listed from frame N toward frame M, with `N >= M >= 0`? | Implemented [bounded frame-path contract](#bounded-frame-to-frame-path-listing) within the finite Windows AMD64 captured-unwind/direct-call profile. Source/fixture and finite native parity checks pass; remote model/mutation and real full-dump qualification remain pending. |
 | What differs between two captures of the same investigation? | Explicit build/symbol/snapshot matching; no joins by naked address or assumed chronology. |
 | What evidence would distinguish two explanations? | Concrete unresolved predicates and their required observations, not an invented historical trace. |
 
 This roadmap adds domain questions above existing analyses. It does not claim
 automatic root-cause proof, backward execution reconstruction or unbounded
 cross-thread reasoning. Those require separately supported evidence and models.
+
+## Bounded frame-to-frame path listing
+
+### Selected question and count bound
+
+The user-selected relaxation on 2026-10-11 asks:
+
+> For one captured thread, list a bounded set of possible instruction paths
+> from frame N toward frame M, where `N >= M >= 0`, returning fewer than `NP`
+> paths and reporting the scope and reasons for incomplete enumeration.
+
+`N` and `M` are frame indices, optionally displayed in hexadecimal, rather than
+instruction VAs. Frame 0 is the selected thread's innermost captured frame;
+larger indices identify older caller activations. Bind both indices to the same
+snapshot, thread and validated frame chain. Equal function addresses in recursive
+activations do not identify the same frame.
+
+`NP` is a positive integer and a strict upper bound on the returned list:
+
+```text
+0 <= returned_count < NP
+max_returned_paths = NP - 1
+```
+
+For `NP = 10`, return at most nine paths. `NP = 1` allows a zero-capacity list;
+it cannot establish that no paths exist. Reject `NP = 0`, invalid frame ordering
+or out-of-range frame indices before budget handling. The count bound limits
+retained distinct paths, not the total number of program paths or search steps.
+The explicit CLI mode is `--list-frame-paths N:M --path-count-bound NP`.
+Frame indices outside a recovered prefix remain unavailable when unwinding
+stopped on missing evidence or a budget; they are rejected as out of range
+only when the declared chain boundary is established.
+
+### Frame evidence and instruction anchors
+
+A frame chain is derived from captured thread/exception context, stack bytes
+and accepted unwind information. Full-memory capture may provide more bytes,
+but does not supply historical contexts for every frame. Each frame record must
+retain its unwind method, validity, stack slots, source spans and module/build
+identity. Missing unwind data, corrupt return addresses, unsupported tail-call,
+inline or exceptional frames remain explicit gaps rather than guessed links.
+The [reader scope](file-reader-design.md#decision-and-supported-scope) now includes
+a finite opt-in Windows AMD64 captured-unwind adapter. General unwinding remains
+outside delivery. It reads captured PE32+ headers, complete sorted runtime tables,
+v1 ordinary-body PUSH_NONVOL, ALLOC_SMALL/LARGE, SET_FPREG and SAVE_NONVOL/FAR
+recipes and stack slots. Prologues, epilogues, chained/handler/XMM/machine-frame
+recipes and unmatched/JIT modules stop explicitly. Unannotated leaf recovery
+uses the stated Windows ABI and complete-table premises. Essential missing
+thread/context records are input prerequisites, not zero-valued frames.
+
+For `N > M`, the default start anchor is frame N's verified call site
+that created frame N-1. The end anchor is the selected captured PC when `M = 0`,
+or frame M's verified active call site toward M-1 when `M > 0`. Call-site anchors
+are before the call instruction; a path ending there does not include its call
+into the younger frame. A saved caller return address is a resume address after
+the active call, so it must not be treated as a forward-execution start point.
+For `N = M`, identical validated anchors may yield one zero-edge path, subject
+to the count bound; different endpoints require an explicit within-frame query.
+
+Bind each call site to captured decoded bytes and its return continuation;
+do not guess a fixed instruction length or resolve an indirect target from a
+return address alone. An unknown call site or missing endpoint evidence makes
+that question unavailable, with the required evidence recorded. External
+symbol/unwind artifacts need the reader's explicit matching/trust contract;
+they cannot replace missing captured instruction bytes automatically.
+
+### Meaning of a listed path
+
+A listed path is a structural instruction sequence through activation-scoped
+graphs, with typed edges and validated active call transitions N to N-1 through
+M. Its steps use `(frame identity, instruction VA, edge kind)` so recursion and
+parallel structural edges remain distinct. Preserve the endpoints, intermediate
+frame constraints, instruction evidence, unresolved premises and path identity.
+
+The current core treats call-only edges as visible context and follows local
+summary edges. Cross-frame enumeration therefore needs a separate, evidence-bound
+composition layer; it cannot silently reinterpret the existing core graph as
+an executed interprocedural trace. Reuse completed local facts, and identify any
+additional per-frame preparation as a separate bound query with explicit roots.
+Other calls may remain explicit opaque summary steps. Such a path does not list
+the instructions inside those callees or prove that the call returned.
+
+Structural alternatives with unknown feasibility remain eligible. Refute a
+branch only using accepted, correctly scoped semantics and observations;
+crash-time flags or GPRs cannot be substituted for earlier branch inputs.
+Recoverable saved registers carry per-register provenance and validity, not a
+complete historical register file. A listed path is `derived_under_premises`,
+and is not an observed executed path or proof of a particular memory writer.
+
+### Enumeration and resource limits
+
+Use deterministic bounded traversal with a declared edge order and distinct
+path identities. Check budgets before expansion or allocation. Independently
+bound expanded search states, scanned edges, steps per path, visits to a node
+within one activation, retained frontier bytes, output bytes and elapsed time.
+Preparation, frame validation and graph construction need their own input/work
+limits; the final path-count cap cannot protect those earlier stages.
+
+Stop at the first applicable boundary: exhausted frontier, `NP - 1` retained
+paths, search/edge/depth/loop budget, byte limit, deadline or missing evidence.
+Record cyclic frontiers without unrolling indefinitely. A loop-visit cap is a
+declared search restriction, not evidence that additional loop executions were
+impossible. Numerical information loss stops the affected value inference;
+structural path search may continue within its independent budgets.
+
+The separate `ariadne.frame-paths/v1` result retains:
+
+- Exact snapshot/thread/frame-chain, query, anchor, graph and evidence identities.
+- `NP`, all search/retention limits and the explicit loop/summary scope.
+- The listed paths and `returned_count`, satisfying the strict count bound.
+- Search counters, whether enumeration was exhausted, `truncated`, stop reason,
+  unresolved frontier summaries and evidence gaps.
+- Whether coverage is complete within the declared scope, partial or unavailable.
+
+A total path count is known only after exhaustive enumeration within a closed,
+declared scope. Reaching the list cap does not establish that another path exists
+without a witness, or that no more paths exist. Missing control targets and
+opaque-call interiors prevent claims about all concrete instruction paths.
+Partial or unavailable empty lists never imply that the frames are disconnected.
+
+### Relationship to memory-writer assessment
+
+Frame evidence can restrict active call contexts and support additional scoped
+register relations. The displayed paths are a bounded sample of alternatives;
+a writer absent from that list must not be excluded merely because its path was
+not retained. A writer exclusion still needs a proof covering every represented
+relevant access/instance, including unresolved paths, under the
+[memory-refinement contract](memory-provenance-refinement.md#assess-access-pairs-over-the-completed-analysis).
+
+### Implementation and acceptance boundary
+
+The [F0–F4 implementation plan](../../Plans/frame-path-enumeration.md) records
+the implemented model source, finite captured unwind profile, API/CLI and
+validation work without extending an existing report schema. The
+[source-bound validation record](../../evidence/Ariadne/frame-paths/source-validation.json)
+separates passing finite tiers from pending full qualification;
+the [investigation ledger](../../Plans/investigation-layer.md#bounded-frame-path-question)
+records that prerequisite. Independent controls must cover a two-way diamond,
+insufficient list capacity, `NP = 1`, malformed `NP`/frame indices, equal endpoints,
+recursive activations, loops, uncertain indirect calls, opaque summaries, missing
+unwind/bytes and each independent resource boundary. In particular, a truncated
+path list must never justify deleting a possible memory writer.
 
 ## Acceptance
 
@@ -441,3 +595,97 @@ an exact matching copy. The former original-dump variable no longer selects the
 Windows case. Numeric assessment runners belong to the separate
 [zero-address](zero-address-design.md#qualification-entry-points) and
 [zero-base-offset](zero-base-offset-design.md#acceptance-scope) contracts.
+
+## Frame-path implementation checkpoint (2026-10-11)
+
+The source interfaces are `FileSnapshot::recover_thread_frames`,
+`validate_thread_frames` and `prepare_frame_with_bap`, followed by
+`bind_frame_paths` and `list_frame_paths`. Capture binding rechecks raw context,
+unwind and stack receipts against the owning snapshot. Standalone decoding
+recomputes the chain and path list under their recorded evidence premises;
+`validate_for` additionally requires the same live bound inputs. Per-register
+records distinguish top-frame observed context from caller values derived via
+saved slots, preserved nonvolatile registers and unwind arithmetic. Earlier
+volatile RAX/RCX values are not copied from the top context.
+
+```sh
+target/debug/ariadne-minidump DUMP --decoder-reference target/ariadne-llvm-mc \
+  --list-frame-paths 0x2:0x0 --path-count-bound 10 --format json
+```
+
+`--thread-id ID` selects a thread; omission selects the captured exception thread.
+`--frame-path-limits JSON` supplies strict `FramePathLimits`. The mode owns
+explicit per-frame preparation roots and cannot combine with entry/seed,
+stateflow, memory-access or another question mode. The selected analysis backend
+remains native BAP by default, with `--analysis-backend rust` as the reference.
+Output-directory mode writes `frame-paths.txt`, `.json` and `.dot`; ordinary
+minidump output behavior remains separate. Frame indices are bounded to 0..63
+and positive NP to 1..4097 in this initial profile.
+
+Defaults are 8,192 graph nodes, 32,768 composed edges, 4,096 search states,
+16,384 scanned edges, 256 instruction nodes per path, two visits per activation
+node, 4 MiB frontier/output payload and a cooperative 1,000 ms search deadline.
+Frame recovery separately bounds 64 frames, 4,096 runtime records per module
+and 1 MiB requested read evidence. Opening/preparation and helper timeouts
+remain separate bounds. These limits do not constitute a process RSS or
+hard real-time guarantee. Too-small output budgets reject publication, including
+formatted output larger than its byte cap.
+
+The independent pre-runtime freeze covers 64 graph instances and exhaustive
+sequence oracles. Fourteen synthetic PE/unwind/stack encodings cover recursion,
+allocation widths, saved registers, frame pointers, missing bytes and unsupported
+recipes. Source regressions also cover a captured null PC, metadata shape versus
+budget stops, live rejection of a self-consistent context-offset forgery, typed
+parallel edges, each work boundary, NP=1 and strict report tampering. The finite
+pinned-runtime probe returns two alternatives on both diamond and recursive
+fixtures with native/Rust report parity after removing observed elapsed time.
+
+Model source and TLC configuration parse successfully without state exploration.
+The [contract revision](../../evidence/Ariadne/frame-paths/contract-revision.json)
+preserves the original freeze and corrects tuple-valued TLC configuration syntax
+and terminal deadlock policy. Five real-code mutation seams are specified and
+checked for unique applicability; their remote campaign is unexercised. Remote
+model/mutation and actual full-dump qualification remain pending. General
+unwinding, jointly reconstructed historical states and executed paths remain
+outside the accepted claim.
+
+## Frame-path property-based coverage
+
+The opt-in `property-tests` Cargo feature adds pinned Proptest 1.9.0 with
+automatic shrinking and persisted regression seeds. It is absent from default
+and core-only dependency activation. These generated tests extend the finite
+fixture checks; they do not qualify real full dumps, executed histories or the
+pending remote model/mutation campaign.
+
+Ten graph properties generate two to five nodes, up to eight typed edges,
+cycles, parallel edges, path/visit limits and NP values. An independent oracle
+constructs Cartesian words over edge IDs and filters them for connectivity,
+endpoints and visit bounds; it does not reuse the engine's DFS/worklist. The
+properties check exact bounded path sets, strict NP, capacity/work prefix
+preservation, soundness under resource limits, input-order independence,
+query-scoped IDs/live binding, nested/recursive frame composition, output byte
+caps, report tampering and strict codec round trips.
+These are normalized-graph contracts, not instruction-decoding conformance.
+
+Three capture properties generate stack allocations from 8 to 128 bytes across
+small and both large unwind encodings, full-width register values and context
+validity groups. Independent on-disk layout and stack arithmetic establish the
+expected return slots/caller SPs. They check volatile-register removal, observed
+versus derived evidence, bounded recovery prefixes/read budgets and tampered
+receipts against the live owning capture.
+
+Each property runs 128 reproducible generated cases, for 1,664 cases in the
+initial run. Graph and unwind seeds are fixed separately; failing cases shrink
+for up to 4,096 iterations and persist under `tests/investigation/` and
+`tests/input/` as `*.proptest-regressions` files for replay. Run:
+
+```sh
+cargo test --offline --locked --features property-tests --lib frame_paths::properties -- --test-threads=1
+cargo test --offline --locked --features property-tests --test frame_unwind_properties -- --test-threads=1
+```
+
+The [property validation record](../../evidence/Ariadne/frame-paths/property-validation.json)
+binds the generated suite and applicable root checks to their sources. Earlier
+[frame-path validation](../../evidence/Ariadne/frame-paths/source-validation.json)
+retains its original hashes and native/synthetic scope; adding properties does
+not rewrite that historical evidence or grant full design acceptance.

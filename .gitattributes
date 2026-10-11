@@ -10,3 +10,4 @@ evidence/Ariadne/real-capture-repin-79938/qualification-evidence.tar.gz filter=l
 # Preserve hash-bound debugger and validation logs byte-for-byte.
 evidence/Ariadne/real-capture-repin-79938/entry-witness.log whitespace=-blank-at-eol
 evidence/Ariadne/bap-admission/resume-20261010/self-move-repair-recheck.log whitespace=-blank-at-eof
+evidence/Ariadne/frame-paths/native-final.log whitespace=-blank-at-eof

@@ -25,6 +25,9 @@ keeping a plan outside `completed/` does not make its completed steps pending.
 
 **Where to go next.**
 
+- [Frame-path enumeration](frame-path-enumeration.md) — F0–F4 implementation of
+  fewer than `NP` frame-constrained paths with independent resource budgets.
+
 - [Memory provenance refinement](memory-provenance-refinement.md) — source/CLI
   implementation and finite probes pass; remote model, mutation and full Scanner
   qualification remain pending.
@@ -113,5 +116,7 @@ and workload exercised at the original run. Archiving does not refresh evidence.
 ## Retired work
 
 Stage D and the independent AMD64/Lean instruction-step track are retired;
-their obligations were not discharged. Their sources and historical records
-remain under the [semantic assurance decision](../docs/Ariadne/semantic-assurance.md).
+their obligations were not discharged. ISA specifications, coverage inventories
+and obsolete checkers were removed on 2026-10-11. Git archives, retained Lean
+sources and historical records are described by the
+[semantic assurance decision](../docs/Ariadne/semantic-assurance.md#dependency-audit-and-retained-references).

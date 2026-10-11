@@ -1,0 +1,181 @@
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 42.47s
+     Running unittests src/lib.rs (target/debug/deps/ariadne-30a1fc32cccfc7e4)
+
+running 33 tests
+test bap::admission::tests::malformed_alternatives_cannot_hide_behind_unsupported_data_or_constant_conditions ... ok
+test bap::admission::tests::admission_has_no_generic_opcode_membership_gate_but_preserves_prefix_and_empty_controls ... ok
+test bap::admission::tests::capabilities_validate_composed_scalar_widths_and_virtual_bindings ... ok
+test bap::admission::tests::ordinary_opaque_requires_known_namespace_and_no_control_construct ... ok
+test bap::session::tests::malformed_batches_bind_every_site_and_poison_failed_sessions ... ignored, requires hash-pinned runtime; invokes adversarial helper fixtures
+test bap::core_adapter::cache_tests::reaching_cache_revalidates_changed_rows_and_shrinking_decoded_domain ... ok
+test bap::projection::tests::generic_unknown_keeps_old_origins_and_is_not_an_undefined_isa_claim ... ok
+test effects::rules::stage_a_tests::memory_immediate_rule_rejects_invalid_payload_and_width_claims ... ok
+test investigation::memory_refinement::tests::information_erasure_and_partial_constraints_stop_independently ... ok
+test effects::rules::priority4_tests::control_only_bindings_reject_unreviewed_shapes_and_prefixes ... ok
+test investigation::memory_refinement::tests::receipt_namespace_maps_all_sixteen_gpr_banks_independently ... ok
+test investigation::memory_refinement::tests::altered_transfer_ast_and_footprint_claims_fail_rebinding ... ok
+test llvm_mc::protocol::tests::rejects_malformed_records ... ok
+test investigation::memory_refinement::tests::numerical_loops_and_budgets_retain_the_last_established_fact ... ok
+test investigation::memory_refinement::tests::numerical_worklist_keeps_independent_values_across_a_load_barrier ... ok
+test investigation::memory_refinement::tests::budgets_preserve_candidate_universe_and_validate_questions_first ... ok
+test investigation::memory_refinement::tests::loops_and_absent_receipts_do_not_gain_precise_aliases ... ok
+test investigation::memory_refinement::tests::partial_overlap_is_retained_and_recovery_gaps_block_equal_base_exclusion ... ok
+test investigation::memory_refinement::tests::constant_and_preserved_base_exclusions_keep_entry_memory ... ok
+test investigation::frame_paths::tests::opaque_summaries_are_labeled_and_loops_keep_incomplete_coverage ... ok
+test investigation::frame_paths::tests::typed_parallel_edges_are_distinct_alternatives ... ok
+test investigation::memory_refinement::tests::report_codec_recomputes_and_rejects_forged_exclusions ... ok
+test investigation::memory_refinement::tests::modular_ranges_match_784_independent_integer_cases ... ok
+test investigation::memory_refinement::tests::inverse_rules_match_1280_exhaustive_predecessor_sets ... ok
+test investigation::frame_paths::tests::invalid_questions_and_evidence_never_pass_under_zero_work_budgets ... ok
+test investigation::frame_paths::tests::closed_no_path_and_missing_frame_evidence_are_distinct ... ok
+test investigation::frame_paths::tests::strict_np_and_equal_frame_cases_preserve_empty_list_meaning ... ok
+test investigation::frame_paths::tests::active_call_witnesses_and_strict_reports_reject_forgery ... ok
+test bap::projection::tests::captured_bil_matches_independent_alias_flag_address_and_memory_expectations ... ok
+test investigation::frame_paths::tests::every_search_work_and_retention_boundary_stays_explicit ... ok
+test llvm_mc::protocol::streaming_tests::checked_stream_requires_clean_shutdown_without_trailing_rows ... ok
+test investigation::frame_paths::tests::enumerated_paths_match_64_independent_cartesian_oracles ... ok
+test llvm_mc::protocol::streaming_tests::checked_stream_rejects_bad_header_and_bounded_failures ... ok
+
+test result: ok. 32 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 1.10s
+
+     Running unittests src/bin/ariadne-ir.rs (target/debug/deps/ariadne_ir-c1001579e854e801)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/ariadne-minidump.rs (target/debug/deps/ariadne_minidump-1ae390eb95bb30b6)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/bap/core_analysis.rs (target/debug/deps/bap_core_analysis-250754fc36f2d43a)
+
+running 4 tests
+test completion_rejects_page_and_lifecycle_tampering ... ignored, requires native helper; hostile completion proxy must not publish
+test native_complete_state_actions_match_reference_and_independent_origins ... ignored, requires explicitly built Stage 2 native helper
+test native_completion_pages_preserve_large_final_state ... ignored, requires source-bound native helper with completion pages
+test native_loops_calls_parallel_edges_and_failed_starts_match_full_reference ... ignored, requires explicitly built Stage 2 native helper
+
+test result: ok. 0 passed; 0 failed; 4 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/bap/core_bootstrap.rs (target/debug/deps/bap_core_bootstrap-07daaf5c4c4f8ca0)
+
+running 6 tests
+test native_failures_and_unsigned_schedule ... ignored, requires explicitly built isolated OCaml helper
+test native_full_observations ... ignored, requires explicitly built isolated OCaml helper
+test native_input_admission ... ignored, requires explicitly built isolated OCaml helper
+test native_rejections_and_fresh_sessions ... ignored, requires explicitly built isolated OCaml helper
+test rust_reference_crosscheck ... ignored, requires explicitly built isolated OCaml helper
+test transport_failure_controls ... ignored, requires the qualified helper manifest and Python failure fixtures
+
+test result: ok. 0 passed; 0 failed; 6 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/bap/core_stateflow.rs (target/debug/deps/bap_core_stateflow-d09307c58f80e3be)
+
+running 2 tests
+test native_stateflow_matches_every_state_and_derived_observation ... ignored, requires explicitly built Stage 2 native helper
+test native_stateflow_rejects_invalid_finite_contracts ... ignored, requires explicitly built Stage 2 native helper
+
+test result: ok. 0 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/bap/disagreement.rs (target/debug/deps/bap_disagreement-046ae31d909ed6a5)
+
+running 1 test
+test unix::decode_length_control_and_operand_binding_disagreements_stop_without_fallback ... ignored, requires pinned runtime and LLVM decoded-fact reference
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/bap/native.rs (target/debug/deps/bap_native-40ba65f3a045911f)
+
+running 8 tests
+test aliases_zero_extension_memory_and_conditional_writes_have_independent_effect_expectations ... ignored, requires pinned BAP/LLVM native helpers
+test calls_special_empty_lifts_prefixes_and_snapshot_reset_remain_explicit ... ignored, requires pinned BAP/LLVM native helpers
+test every_pinned_runtime_file_is_checked_before_preparation ... ignored, requires pinned BAP runtime
+test independent_decoder_process_is_reused_across_snapshot_batches ... ignored, requires pinned BAP/LLVM native helpers
+test memory_address_evidence_distinguishes_payload_index_displacement_and_rip ... ignored, requires pinned native helpers
+test observed_admission_forms_match_frozen_effects_and_address_footprints ... ignored, requires pinned BAP/LLVM helpers; independent P0 contract
+test partial_self_moves_define_written_cells_and_unsupported_bil_never_falls_back ... ignored, requires pinned helpers; checks BAP-only behavior
+test unavailable_batches_high_addresses_short_bytes_and_query_ownership_are_checked ... ignored, requires pinned BAP/LLVM native helpers
+
+test result: ok. 0 passed; 0 failed; 8 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/bap/protocol.rs (target/debug/deps/bap_protocol-e0de2765980d1f48)
+
+running 1 test
+test unix::malformed_wrong_version_and_missing_helper_fail_before_a_session_is_admitted ... ignored, requires pinned BAP runtime
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/conformance.rs (target/debug/deps/conformance-cb3004334b4c9f2c)
+
+running 18 tests
+test captured_decode_failure_does_not_use_file_fallback ... ok
+test calls_fixture_keeps_graph_visibility_discovery_and_dataflow_distinct ... ok
+test captured_jit_bytes_need_no_file_and_binary_ignores_capture ... ok
+test closed_recovery_can_have_missing_slice_seeds ... ok
+test empty_locations_and_seeds_are_valid ... ok
+test binary_fixture ... ok
+test closed_fixture ... ok
+test entry_values_do_not_become_producer_instructions ... ok
+test full_u64_addresses_are_preserved_without_arithmetic ... ok
+test empty_targets_need_obligations_only_when_uncertified ... ok
+test owned_request_and_result_are_independent_of_caller_mutations ... ok
+test malformed_requests_are_rejected_before_analysis ... ok
+test dump_fixture ... ok
+test pipeline_fixture_and_eight_transition_witness ... ok
+test may_writes_preserve_origins_and_must_writes_kill_them ... ok
+test loop_fixture ... ok
+test self_loop_terminates_and_entry_and_instruction_origins_do_not_collide ... ok
+test two_labels_to_one_destination_are_distinct_edges ... ok
+
+test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/effects.rs (target/debug/deps/effects-d5e1b1726b3e4a9a)
+
+running 18 tests
+test arithmetic_matrix_checks_widths_flags_ties_and_immediates ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test batched_preparation_preserves_every_record_and_reports_measurement ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test carry_dependency_survives_increment_and_cmp_does_not_write_registers ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test control_flags_calls_and_unrecognized_control_have_distinct_evidence ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test dump_provenance_and_missing_targets_survive_preparation ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test extended_register_views_and_immediate_widths_are_preserved ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test frozen_opcode_matrix_has_real_native_evidence_and_no_unexercised_rules ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test memory_address_sizes_rip_and_prefix_rejections ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test memory_immediate_mov_preserves_signed_payload_and_address_size ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test memory_immediate_mov_uses_address_registers_and_only_may_writes_memory ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test memory_immediate_rule_rejects_unreviewed_prefixes_without_stealing_register_mov ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test memory_immediate_store_keeps_address_producers_and_weak_memory_origins ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test memory_keeps_possible_aliases_and_address_dependencies_lea_does_not_read_memory ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test mov_slice_excludes_unrelated_instruction_and_preserves_legacy_behavior ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test opaque_control_forms_preserve_prior_origins_and_expose_uncertainty ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test partial_writes_preserve_other_bytes_and_dword_replaces_upper_half ... ignored, requires pinned LLVM; run native/llvm_mc/check.sh
+test catalogue_is_disjoint_and_views_distinguish_reads_from_writes ... ok
+test prepare_rejects_independent_overlapping_locations_before_decoder_launch ... ok
+
+test result: ok. 2 passed; 0 failed; 16 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/effects_protocol.rs (target/debug/deps/effects_protocol-883812e2c831e18f)
+
+running 3 tests
+test preparation_bounds_both_output_streams_and_reports_process_failure ... FAILED
+test checked_batch_rejects_wrong_version_target_and_absent_header ... ok
+test preparation_rejects_missing_duplicate_unexpected_and_contradictory_rows ... ok
+
+failures:
+
+---- preparation_bounds_both_output_streams_and_reports_process_failure stdout ----
+
+thread 'preparation_bounds_both_output_streams_and_reports_process_failure' (154842) panicked at tests/effects_protocol.rs:86:9:
+Err(DecoderIo(Os { code: 26, kind: ExecutableFileBusy, message: "Text file busy" }))
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    preparation_bounds_both_output_streams_and_reports_process_failure
+
+test result: FAILED. 2 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+error: test failed, to rerun pass `--test effects_protocol`

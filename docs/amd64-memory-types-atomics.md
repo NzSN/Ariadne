@@ -2,6 +2,11 @@
 
 ## Context and follow-up
 
+> **Specification removal (2026-10-11).** The ISA specifications, coverage
+> inventories and associated checkers described here have been removed.
+> Their links point to an immutable Git archive; the commands below require
+> that historical checkout. See the [current assurance boundary](Ariadne/semantic-assurance.md#dependency-audit-and-retained-references).
+
 **Status.** Retired ISA research; links below explain historical dependencies, not an active backlog.
 
 **Why this document exists.** Accesses need explicit memory types and atomic-operation contracts. The motivating contract is [Historical motivation](amd64-memory-exceptions.md).
@@ -66,6 +71,6 @@ coherency, or general AMD ordering. Those relations remain D1 follow-up work.
 
 Authority: AMD Volume 2 revision 3.45 sections 7.3-7.8 and the pinned Volume 3
 XCHG/XADD/CMPXCHG entries. The source-reviewed facts and stable form IDs are
-recorded in [atomic-form-supplement.json](../Specs/AMD64/atomic-form-supplement.json).
+recorded in [atomic-form-supplement.json](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64/atomic-form-supplement.json).
 The shared form inventory still marks these entries pending; the supplement
 does not by itself make an unvalidated decoded instruction executable.

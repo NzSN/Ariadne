@@ -2,6 +2,11 @@
 
 ## Context and follow-up
 
+> **Specification removal (2026-10-11).** The ISA specifications, coverage
+> inventories and associated checkers described here have been removed.
+> Their links point to an immutable Git archive; the commands below require
+> that historical checkout. See the [current assurance boundary](Ariadne/semantic-assurance.md#dependency-audit-and-retained-references).
+
 **Status.** Retired ISA research; links below explain historical dependencies, not an active backlog.
 
 **Why this document exists.** Instruction bodies need width-correct values and flag domains. The motivating contract is [Historical motivation](amd64-operands.md).
@@ -24,7 +29,7 @@ For the wider context, see the optional [documentation map](documentation-map.md
 
 Status: X1 kernel work in progress. These modules compute values and flag
 domains. They do not complete any instruction form. The reviewed coverage
-record is [integer-coverage.json](../Specs/AMD64/integer-coverage.json).
+record is [integer-coverage.json](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64/integer-coverage.json).
 
 ## Authority and boundary
 

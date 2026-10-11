@@ -2,6 +2,11 @@
 
 ## Context and follow-up
 
+> **Specification removal (2026-10-11).** The ISA specifications, coverage
+> inventories and associated checkers described here have been removed.
+> Their links point to an immutable Git archive; the commands below require
+> that historical checkout. See the [current assurance boundary](Ariadne/semantic-assurance.md#dependency-audit-and-retained-references).
+
 **Status.** Retired ISA research; links below explain historical dependencies, not an active backlog.
 
 **Why this document exists.** State representation needs access, protection and fault contracts. The motivating contract is [Historical motivation](amd64-architectural-state.md).
@@ -25,15 +30,15 @@ For the wider context, see the optional [documentation map](documentation-map.md
 This component defines the shared address, access, protection, exception,
 commit, and restart contracts used by later general-purpose instruction rules.
 It is a foundation, not complete Volume 2 execution. The authoritative rules
-are in [AMD64Memory.tla](../Specs/AMD64Memory.tla) and
-[AMD64Exceptions.tla](../Specs/AMD64Exceptions.tla). Lean provides typed
+are in [AMD64Memory.tla](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64Memory.tla) and
+[AMD64Exceptions.tla](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64Exceptions.tla). Lean provides typed
 definitions, general proofs, and a reviewed transcription boundary in
 [Memory.lean](../lean/AMD64/Memory.lean) and
 [Exceptions.lean](../lean/AMD64/Exceptions.lean).
 
 The complete dependency inventory is machine-readable in
-[system-dependencies.json](../Specs/AMD64/system-dependencies.json). Its source
-IDs refer to [source-sections.json](../Specs/AMD64/source-sections.json), whose
+[system-dependencies.json](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64/system-dependencies.json). Its source
+IDs refer to [source-sections.json](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64/source-sections.json), whose
 page numbers are one-based PDF pages in the pinned manuals. The relevant source
 baseline is AMD Volume 1 revision 3.25 from May 2026, Volume 2 revision 3.45
 from July 2026, and Volume 3 revision 3.38 from July 2026.
@@ -251,7 +256,7 @@ correspondence, rollback correspondence, full-width carry behavior, view/base
 properties, and commit/restart laws. They are not a verified TLA+ parser.
 
 The executable fixture
-[AMD64MemoryExceptionsChecks.tla](../Specs/AMD64MemoryExceptionsChecks.tla)
+[AMD64MemoryExceptionsChecks.tla](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64MemoryExceptionsChecks.tla)
 covers positive and negative cases for:
 
 - legal and illegal submode/address-size pairs;

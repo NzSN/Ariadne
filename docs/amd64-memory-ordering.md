@@ -2,6 +2,11 @@
 
 ## Context and follow-up
 
+> **Specification removal (2026-10-11).** The ISA specifications, coverage
+> inventories and associated checkers described here have been removed.
+> Their links point to an immutable Git archive; the commands below require
+> that historical checkout. See the [current assurance boundary](Ariadne/semantic-assurance.md#dependency-audit-and-retained-references).
+
 **Status.** Retired ISA research; links below explain historical dependencies, not an active backlog.
 
 **Why this document exists.** Memory type and atomicity alone do not define event ordering. The motivating contract is [Historical motivation](amd64-memory-types-atomics.md).
@@ -23,7 +28,7 @@ For the wider context, see the optional [documentation map](documentation-map.md
 > [current semantic assurance decision](Ariadne/semantic-assurance.md).
 
 The authoritative bounded relation is
-[AMD64MemoryOrdering.tla](../Specs/AMD64MemoryOrdering.tla). Its typed Lean
+[AMD64MemoryOrdering.tla](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64MemoryOrdering.tla). Its typed Lean
 counterpart is [MemoryOrdering.lean](../lean/AMD64/MemoryOrdering.lean).
 This component models required ordering and publication edges between events;
 it does not turn concrete bytes into a globally sequential store.
@@ -137,7 +142,7 @@ cross-language instruction-body correspondence.
 the source-backed edges implemented by this bounded tranche. It is a necessary
 ordering/publication contract, not a characterization of every allowed AMD
 execution. In particular, locked RMWs are not yet placed in a global coherence
-or serialization order here; [AMD64AtomicOrdering.tla](../Specs/AMD64AtomicOrdering.tla)
+or serialization order here; [AMD64AtomicOrdering.tla](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64AtomicOrdering.tla)
 has only a separate two-increment locked-RMW fixture. The two models must be
 composed before claiming a complete atomicity or multiprocessor proof.
 

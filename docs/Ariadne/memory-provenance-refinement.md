@@ -32,6 +32,9 @@ proposed types, algorithms, limits and report validation.
 
 - [Investigation contracts](investigation-design.md) — exact query binding,
   before-instruction address expressions and permitted explanation claims.
+- [Bounded frame-path query](investigation-design.md#bounded-frame-to-frame-path-listing)
+  — frame evidence and fewer than `NP` listed alternatives; an incomplete path
+  list cannot justify excluding a memory writer.
 - [BAP projection contract](bap-analysis-core-design.md#projection) — current
   load/store effects and the prohibition on killing the whole memory cell.
 - [Analysis model](../../Specs/Ariadne.tla) and

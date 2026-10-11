@@ -15,6 +15,7 @@ input = ["bap", "dep:minidump"]
 ir = ["reports", "dep:tempfile"]
 bench = ["input"]
 validation = ["input", "ir"]
+property-tests = ["input", "dep:proptest"]
 mbt = ["reports", "dep:mirrorrust", "dep:num-bigint"]
 
 [dependencies]
@@ -25,6 +26,7 @@ sha2 = { version = "=0.10.9", optional = true }
 tempfile = { version = "=3.20.0", optional = true }
 mirrorrust = { path = "../MirrorRust", optional = true }
 num-bigint = { version = "0.4", optional = true }
+proptest = { version = "=1.9.0", default-features = false, features = ["std"], optional = true }
 
 [lib]
 name = "ariadne"
@@ -225,3 +227,13 @@ required-features = ["bench"]
 name = "input_bap_core"
 path = "tests/input/bap_core.rs"
 required-features = ["input"]
+
+[[test]]
+name = "input_frame_paths"
+path = "tests/input/frame_paths.rs"
+required-features = ["input"]
+
+[[test]]
+name = "frame_unwind_properties"
+path = "tests/input/frame_unwind_properties.rs"
+required-features = ["property-tests"]

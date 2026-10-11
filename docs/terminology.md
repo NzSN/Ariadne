@@ -245,6 +245,9 @@ Correspondences: [question/result types](../src/investigation/model.rs) and
 | **Analysis fact** | Derived graph, effect, address or origin fact bound to its producer, projection, query and premises. It is not a captured observation. |
 | **Claim / premise** | Question-specific assertion and the assumptions on which it depends. Stable evidence/fact references make the claim auditable, not automatically true of past execution. |
 | **Alternative** | A candidate explanation not eliminated by admitted evidence. Independently merged byte origins need not co-occur as one pointer or feasible path. |
+| **Captured frame chain / register evidence** | Reader-bound `CapturedFrameChain` under the finite Windows AMD64 unwind profile. Top-frame context values are observed; caller register values are derived under stack-slot and unwind/ABI premises, with validity/provenance retained. It does not supply complete historical machine states. |
+| **Frame identity / frame index** | A validated activation in one snapshot/thread/frame chain. Index 0 is the innermost captured frame; larger indices are older callers. An index is not an instruction VA, and recursive activations remain distinct. |
+| **Bounded frame-path question / listed path** | Implemented finite-profile [frame-to-frame query](Ariadne/investigation-design.md#bounded-frame-to-frame-path-listing), with `N >= M >= 0` and fewer than positive `NP` retained paths. A listed path is a structural alternative under explicit frame, graph and feasibility premises, possibly containing opaque summary steps; it is not an observed executed trace. |
 | **Gap** | Missing, conflicting, unsupported or incomplete evidence/semantics limiting an answer. Identify the affected site/location and reason where known. |
 | **Evidence requirement** | Concrete observation, artifact or semantic refinement needed to strengthen or distinguish an answer. Avoid a generic “more information needed” when the missing premise can be named. |
 | **Truncation** | Expansion or retention limited by the answer budget (`truncated`). It is separate from semantic uncertainty; retained references must remain valid. |
@@ -402,7 +405,7 @@ into active validation.
 
 | Canonical term | Historical meaning and present boundary |
 | --- | --- |
-| **Independent instruction-step track** | Retired AMD64 execution/TLA+/Lean project, including Stage D and user64 milestones. Retirement changes scope; it does not discharge old proof obligations. |
+| **Independent instruction-step track** | Retired AMD64 execution/TLA+/Lean project, including Stage D and user64 milestones. ISA specifications, inventories and checkers were removed on 2026-10-11; retained Lean and evidence remain historical. Retirement/removal do not discharge old proof obligations. |
 | **Architectural CPU state** | Mode/profile, register banks, flags, segments and application-visible processor state in the ISA models. It is not the finite recovery/dataflow algorithm state. |
 | **Architectural machine state / concrete memory** | Composed execution state with a total physical-byte store (`ConcreteMemory`). A chosen default concrete byte is part of modeled state, not a value inferred from absent capture. |
 | **Captured memory knowledge** | Finite `MemoryState` availability/observations constraining possible concrete stores. Missing knowledge is neither an architectural byte nor an architectural fault. |
@@ -445,6 +448,10 @@ scanned the **15 plain-text report/decode artifacts** and the separate
 `src/effects/forms.txt` form registry for emitted spellings. Build output,
 scratch `tmp/`, Git internals and archived binary payloads are outside the prose
 corpus. This document is additional to those 86 documents.
+
+These counts describe the original terminology scan. The later ISA cleanup
+removed `Specs/AMD64/README.md`; its inventory is now an archive reference,
+as recorded in the [removal policy](Ariadne/semantic-assurance.md#dependency-audit-and-retained-references).
 
 | Scanned group | Markdown documents | Reading purpose |
 | --- | ---: | --- |

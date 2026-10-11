@@ -2,7 +2,10 @@
 
 ## Context and follow-up
 
-**Status.** Current stage/status plan as of 2026-10-07. I5c fault-time address
+**Status.** Current stage/status plan updated on 2026-10-11. The bounded frame-path
+question now requests fewer than `NP` possible paths. Its finite Windows AMD64
+source/API/CLI and fixture/native parity checks are implemented; remote
+model/mutation and real full-dump qualification remain pending. I5c fault-time address
 wrap is selected with a linked W0–W5 plan; all its runtime/model/capture/acceptance
 stages remain pending. Existing I5a/I5b and native I4 deliveries retain their scope.
 I0–I3 are implemented. I4 is validated for the recorded fixture/Linux tier, with
@@ -24,6 +27,11 @@ I5b design/implementation sequence. It distinguishes
 implementation, exercised qualification and future capabilities.
 
 **Where to go next.**
+
+- [Bounded frame-path contract](../docs/Ariadne/investigation-design.md#bounded-frame-to-frame-path-listing)
+  — strict count bound, frame anchors, coverage and independent resource budgets;
+  [F0–F4 execution plan](frame-path-enumeration.md) records implemented source
+  and finite checks separately from pending full qualification.
 
 - [I5c design](../docs/Ariadne/address-wrap-design.md) and
   [W0–W5 implementation plan](i5c-address-wrap.md) select the next fault-time
@@ -292,6 +300,22 @@ bits of a negative displacement is not the selected predicate.
 This does not diagnose earlier executed arithmetic, general noncanonical
 addresses, object lifetime or root cause. I4/I5a/I5b budgets, capture pins and
 historical acceptance records are unchanged.
+
+## Bounded frame-path question
+
+The user-selected query on 2026-10-11 lists possible paths from frame N toward
+frame M in one captured thread, with `N >= M >= 0` and `returned_count < NP`.
+Its [owning contract](../docs/Ariadne/investigation-design.md#bounded-frame-to-frame-path-listing)
+defines activation identity, verified call-site endpoints, explicit summary
+steps and partial results. `NP - 1` is the output capacity; independent search,
+loop, depth, byte and deadline budgets are required to bound the work.
+
+The [F0–F4 execution plan](frame-path-enumeration.md) now records source
+implementation of a finite captured frame adapter, bounded graph composition,
+separate API/report/CLI and fixture/native parity checks. Remote model/mutation
+and actual full-dump qualification remain pending. Existing fault-address and memory-refinement schemas and
+qualification records do not establish this new capability. Preserve the original
+memory-writer universe when an enumerated path list is incomplete.
 
 ## Other I5, I6 and I7 deliveries
 

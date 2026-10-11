@@ -2,6 +2,11 @@
 
 ## Context and follow-up
 
+> **Specification removal (2026-10-11).** The ISA specifications, coverage
+> inventories and associated checkers described here have been removed.
+> Their links point to an immutable Git archive; the commands below require
+> that historical checkout. See the [current assurance boundary](Ariadne/semantic-assurance.md#dependency-audit-and-retained-references).
+
 **Status.** Retired ISA research; links below explain historical dependencies, not an active backlog.
 
 **Why this document exists.** Register views provide the representation base. The motivating contract is [Historical motivation](amd64-semantics-design.md).
@@ -29,7 +34,7 @@ typed pseudocode; the actual checked definitions are in
 
 ## Representation and abstraction boundary
 
-The authoritative [TLA+ kernel](../Specs/AMD64RegisterViews.tla) stores a word as
+The authoritative [TLA+ kernel](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64RegisterViews.tla) stores a word as
 a Boolean function whose domain is `1..64`. The typed representation changes
 the indexing convention but preserves every physical bit:
 

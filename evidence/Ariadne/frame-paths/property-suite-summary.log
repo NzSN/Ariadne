@@ -1,0 +1,4 @@
+Generated graph properties: 10 passed, 128 cases each, 18.34s.
+Generated unwind properties: 3 passed, 128 cases each, 2.45s.
+Total successful generated cases: 1664.
+Source: completed tool-returned test observations from this session; no new native/model/mutation qualification.

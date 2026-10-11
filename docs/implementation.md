@@ -67,6 +67,11 @@ and IR adapters. `--no-default-features` retains the standard-library-only core;
 `bench` and `mbt` enable benchmark binaries and generated MirrorRust replay.
 One root Cargo lockfile covers all feature selections.
 
+The optional `property-tests` feature enables pinned Proptest only for the
+[frame-path generated properties](Ariadne/investigation-design.md#frame-path-property-based-coverage).
+Default and core-only builds do not activate it; use the documented feature
+commands to exercise shrinking graph and synthetic-capture properties.
+
 ```sh
 cargo build --offline --locked --release
 cargo test --offline --locked

@@ -17,6 +17,68 @@
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
+## 2026-10-11 — Retired ISA specifications removed
+
+The [assurance contract](docs/Ariadne/semantic-assurance.md#dependency-audit-and-retained-references)
+now removes the retired AMD64/x86-64 specification track: 73 TLA+ modules,
+38 configurations, ten shell checkers, its source/coverage inventory directory
+and fifteen obsolete Python tools/tests. The manual source pin moves byte-for-byte
+to [amd-manuals.lock.json](evidence/Ariadne/amd-manuals.lock.json) for active effects
+provenance. Historical links point to immutable Git archives. Active models,
+the root Lean library, existing implementation and raw evidence are preserved.
+
+Fresh checks pass all three active-qualification tests, parsing of the 17
+remaining TLA+ modules, documentation navigation, Rust layout and diff hygiene.
+The existing orchestration test's missing mock corpus was reproduced from HEAD
+and repaired; no production runner behavior changed. The preservation audit
+checks 677 existing source/fixture/model/Lean/evidence identities. This cleanup
+does not refresh native, model-exploration or release qualification.
+
+## 2026-10-11 — Frame-path property-based tests
+
+The [generated coverage contract](docs/Ariadne/investigation-design.md#frame-path-property-based-coverage)
+and [separate property record](evidence/Ariadne/frame-paths/property-validation.json)
+add 13 Proptest properties with shrinking and persisted regression seeds.
+All 1,664 fixed-seed generated cases pass: ten properties cover independent
+typed edge-word expectations, loops/parallel edges, strict NP and work/byte
+budgets, nested/recursive activations, ordering, scoped IDs and strict evidence/
+codec integrity; three generate unwind allocations, validity groups, register
+values, bounded prefixes and altered receipts over synthetic captures.
+
+The optional `property-tests` feature pins cached Proptest 1.9.0. Default and
+core-only builds do not activate it; core-only dependency activation remains
+empty. Fresh 117-test default and 45-test core-only suites and final all-feature/
+all-target Clippy pass. The record binds 162 source/fixture hashes. Production
+frame-path logic is unchanged; earlier native/model/source records retain their
+original identities and scope. No new native, remote model/mutation, actual
+full-dump or release qualification is claimed.
+
+## 2026-10-11 — Bounded frame-path source and finite-runtime checkpoint
+
+The [investigation contract](docs/Ariadne/investigation-design.md#bounded-frame-to-frame-path-listing)
+and [F0–F4 plan](Plans/frame-path-enumeration.md) now implement fewer than positive
+`NP` listed paths from frame N toward M with `N >= M >= 0`. The first Windows
+AMD64 profile reads captured PE/runtime/unwind/stack evidence, verifies active
+direct calls, distinguishes recursive activations and separately bounds path
+count, graph/work/loop/payload and cooperative search time. Per-register evidence
+distinguishes top-context observations from derived caller values. An incomplete
+list never excludes a possible memory writer.
+
+The [source-bound record](evidence/Ariadne/frame-paths/source-validation.json)
+pins 160 source/fixture hashes, 64 independent graph oracles, 14 synthetic
+capture encodings, 117 default tests (82 ignored), 45 core-only tests (22 ignored),
+all-feature/all-target Clippy under the read-only dependency snapshot and final
+native/Rust parity on diamond and recursive fixtures. A transient `Text file busy`
+failure in an unchanged protocol-test helper is retained; its isolated rerun and
+the full serial root rerun pass. Source/TLC-configuration parsing passes after a
+revision preserving the original freeze; no model exploration is credited.
+
+Full design acceptance remains false. Remote model exploration, five isolated
+real-code mutations and independently inspected actual full-dump qualification
+remain pending. General unwind, indirect/tail/JIT/inline/exceptional frame
+support and historical executed paths are outside this finite profile. Existing
+local core effects, default reports and raw historical evidence are retained.
+
 ## 2026-10-11 — Memory refinement source and finite-runtime checkpoint
 
 The [memory design](docs/Ariadne/memory-provenance-refinement.md) and
@@ -922,7 +984,7 @@ See the [B/C validation](docs/Ariadne/file-reader-design.md#captured-predecessor
 **Stage D remains pending:** the default profile integrity check passes, but
 the required `register-core` gate still rejects **0/49** verified cases; the
 72 control/stack and 156 RAM cases also remain unaccepted. The
-[historical user64 coverage ledger](Specs/AMD64/user64-coverage.json) records an exact
+[historical user64 coverage ledger](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64/user64-coverage.json) records an exact
 register-MOV candidate and its open instruction-step obligations. No ledger
 status or source-form hash was promoted.
 

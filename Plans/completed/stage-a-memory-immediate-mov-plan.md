@@ -39,10 +39,10 @@ unblocks a seed at the crash IP; it does **not** establish a predecessor slice
 from an earlier entry (Stage B), prove the faulting store committed, deliver a
 synchronous-fault transition, or certify a complete AMD64 instruction step.
 
-The [source inventory](../../Specs/AMD64/forms.json) associates the relevant
+The [source inventory](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64/forms.json) associates the relevant
 memory alternatives with `AMD64-F-0502` (`MOV reg/mem32, imm32`) and
 `AMD64-F-0503` (`MOV reg/mem64, imm32`), both derived from Volume 3 PDF page
-283. The matching [`ram-data` case records](../../Specs/AMD64/user64-coverage.json)
+283. The matching [`ram-data` case records](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64/user64-coverage.json)
 are still planned/pending. Neither belongs to the active 49-case
 `register-core` milestone. The pinned manual revision is
 [AMD Volume 3, revision 3.38](https://docs.amd.com/v/u/en-US/24594_3.38_APM_Vol3_PUB).

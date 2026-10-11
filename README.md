@@ -103,14 +103,16 @@ answers zero base plus nonzero displacement; it preserves unknowns for indexed
 or unsupported evidence and does not infer historical null-pointer causation.
 The separate abstract-stateflow and supplied-IR paths pass
 [Stage E generated replay, mutation and report/CLI acceptance](docs/Ariadne/typed-replay-design.md#finite-corpus-and-claim-boundary)
-within the recorded finite corpus. Independent ISA proof artifacts are retained
-as retired historical reference.
+within the recorded finite corpus. Independent ISA proof records remain
+historical; the removed specification sources are archived in Git.
 
 Ariadne relies on a pinned BAP lifter for AMD64 instruction semantics and
 validates its own semantic projection and analysis. Results remain conditional
 on supported lifting behavior and captured evidence. The independent AMD64
 instruction-step/Lean track is **retired**, including its user64 milestones and
-full-manual roadmap. Historical artifacts remain available for reference.
+full-manual roadmap. Its ISA specifications, coverage inventories and obsolete
+checkers were removed on 2026-10-11. Historical artifacts remain in Git;
+the root Lean reference and recorded evidence are retained.
 The [semantic assurance decision](docs/Ariadne/semantic-assurance.md) defines
 this boundary. Analysis-level TLA+ specifications, replay and mutation checks
 remain active.
@@ -297,10 +299,10 @@ cross-location correlations, while valuations expose finite per-location value
 sets. It does not reconstruct historical execution, prove ISA semantics, or
 justify applying a crash-time observation to an earlier program point.
 
-`AriadneX86_64Semantics.tla` now supplies executable rules for a register/immediate
-subset of x86-64 and derives inputs for the state-propagation model. See the
-[supported forms and assumptions](docs/x86-64-semantics.md). It is not a complete
-ISA model, a decoder, or a Rust implementation.
+The independent x86-64 instruction-rule research is retired and its
+specifications were removed. The [historical forms and assumptions](docs/x86-64-semantics.md)
+remain as reference; active supplied stateflow and BAP lifting retain their
+separate contracts.
 
 The slice follows all modeled inputs of each included instruction. It does not
 yet select individual operands, include control dependencies, or establish which
@@ -328,7 +330,7 @@ state transitions, invariants, and interpretation of partial results.
 | [docs/implementation.md](docs/implementation.md) | Rust API, model correspondence, and implementation boundaries |
 | [docs/llvm-mc-adapter.md](docs/llvm-mc-adapter.md) | Optional pinned decoder build, snapshot input contract, and validation |
 | [docs/machine-state-design.md](docs/machine-state-design.md) | Implemented Rust design for abstract stateflow with generated conformance and report/CLI acceptance |
-| [docs/x86-64-semantics.md](docs/x86-64-semantics.md) | Supported x86-64 instruction rules, stateflow composition, and validation limits |
+| [docs/x86-64-semantics.md](docs/x86-64-semantics.md) | Historical instruction-rule research and archive references; specifications removed |
 | [mbt/README.md](mbt/README.md) | Mirrors/MirrorRust MBT setup, checked corpus, mutation gate, and evidence |
 | [Specs/AriadneTypes.tla](Specs/AriadneTypes.tla) | Shared Apalache aliases for semantic identities, labels, states, and values |
 | [Specs/AriadneMachineCommon.tla](Specs/AriadneMachineCommon.tla) | Stateless machine address, local-edge, and effect contracts shared by machine models |
@@ -340,10 +342,6 @@ state transitions, invariants, and interpretation of partial results.
 | [Specs/AriadneLLVMIRExample.tla](Specs/AriadneLLVMIRExample.tla) | Branch/phi, memory-dependency, and incomplete-call IR fixture |
 | [Specs/AriadneMachineState.tla](Specs/AriadneMachineState.tla) | Post-recovery finite abstract machine-state propagation and edge classification |
 | [Specs/AriadneMachineStateExample.tla](Specs/AriadneMachineStateExample.tla) | Constant/flag propagation and branch-feasibility fixture |
-| [Specs/AriadneX86_64Semantics.tla](Specs/AriadneX86_64Semantics.tla) | Executable register/immediate x86-64 subset and finite-state bridge |
-| [Specs/AriadneX86_64SemanticsChecks.tla](Specs/AriadneX86_64SemanticsChecks.tla) | Arithmetic, flags, operand, branch, and bridge regression checks |
-| [Specs/AriadneX86_64SemanticsExample.tla](Specs/AriadneX86_64SemanticsExample.tla) | Instruction-derived stateflow with complete and incomplete inputs |
-| [Specs/check-x86-64.sh](Specs/check-x86-64.sh) | x86-64 Apalache typechecks and executable TLC checks |
 | [Specs/check-apalache.sh](Specs/check-apalache.sh) | Typechecking and bounded safety checks |
 | [Specs/README.md](Specs/README.md) | Checking commands, assumptions, and recorded validation results |
 
@@ -371,7 +369,7 @@ To select another installation, set `APALACHE_MC` to its absolute executable pat
 APALACHE_MC=/absolute/path/to/apalache-mc bash Specs/check-apalache.sh
 ```
 
-The script typechecks all ten modules, checks the four general scenarios and
+The script discovers and typechecks the remaining `.tla` modules, checks the four general scenarios and
 the call regression through six transitions, and checks the pipeline through
 eight transitions. The native LLVM IR fixture is also checked through eight
 transitions, and the machine-state fixture through six. Artifacts go to a fresh

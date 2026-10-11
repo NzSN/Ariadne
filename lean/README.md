@@ -3,6 +3,7 @@
 ## Context and follow-up
 
 **Status.** Retired ISA proof library; component results remain historical.
+Its TLA+ counterparts, inventories and combined checkers were removed on 2026-10-11.
 
 **Why this document exists.** [Retired semantics design](../docs/amd64-semantics-design.md) required a checked counterpart to the TLA+ research models.
 
@@ -52,9 +53,10 @@ is not profile acceptance.
 
 Follow-up operand, page-walk and string modules are developed under the same
 package. The [task list](../docs/amd64-semantics-tasks.md) records their state.
-`bash Specs/check-amd64.sh` from the repository root discovers and builds every
-module, audits their combined namespace, and runs TLA+ component checks. It can
-expose in-progress failures and is not a full-coverage certificate.
+The [archived combined checker](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/check-amd64.sh)
+formerly built every module, audited their combined namespace and ran TLA+
+component checks. Reproducing that combined research requires the historical
+checkout. The retained Lean package can still be built and audited separately:
 
 ```sh
 cd lean
@@ -81,14 +83,12 @@ originating in AMD64 modules, including private helpers/examples and otherwise
 unused axioms. Only Lean's usual logical axioms
 `propext`, `Quot.sound`, and `Classical.choice` are permitted. The audit rejects
 admitted proofs and native-computation proof axioms. `lake build` alone does not
-run the audit; the combined foundation script always runs both.
+run the audit; run the separate audit command shown above.
 
-The TLA+ source and Lean transcription are pinned in
-`Specs/AMD64/correspondence.lock.json`. Hash checking detects changes requiring
-review; it does not prove semantic equivalence to the source text. After a
-source change, review the operator mapping, recheck the proofs and TLA+ fixtures,
-then deliberately update the hashes. Do not automatically refresh the lock as
-part of a check.
+The historical TLA+ source and Lean transcription were pinned in the
+[archived correspondence lock](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64/correspondence.lock.json).
+Those hashes belong to that historical checkout. Hash checking detects changes
+requiring review; it does not prove semantic equivalence to the source text.
 
 The long-term target includes complete typed architectural state, instruction
 relations, environment contracts, and refinement to Ariadne's analysis model.

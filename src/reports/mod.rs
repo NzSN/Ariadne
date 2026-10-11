@@ -1,6 +1,10 @@
 //! Strict Stage E inputs and identity-preserving result envelopes.
 mod codecs;
+mod frame_paths;
 mod investigation;
+pub use frame_paths::{
+    decode_frame_path_limits, decode_frame_paths, encode_frame_paths, render_frame_paths,
+};
 #[cfg(feature = "bap")]
 mod memory_provenance;
 #[cfg(feature = "bap")]

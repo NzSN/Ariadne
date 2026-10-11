@@ -24,6 +24,10 @@ class ActiveQualificationTests(unittest.TestCase):
             work.mkdir()
             for relative, data in {
                 "native/bap/toolchain.lock.json": {},
+                "tests/bap/fixtures/corpus.json": {"rows": [
+                    {"lift": {"opcode": "TEST_FORM"}, "expect": {}},
+                    {"expect": {"reject": True}},
+                ]},
                 "evidence/Ariadne/bap-windows-workload-case.json": {},
                 "mbt/stage-e/results/latest.json": {"sourceHashes": {}},
                 "mbt/stage-e/corpus/manifest.json": {
@@ -86,6 +90,9 @@ class ActiveQualificationTests(unittest.TestCase):
             self.assertEqual(report["passed"], expected)
             self.assertNotIn("registerCoreAcceptance", report)
             self.assertIn("retired", report["instructionStepTrack"])
+            if name == "check_bap_semantics":
+                self.assertEqual(report["nativeCorpusCases"], 2)
+                self.assertEqual(report["admittedOpcodeForms"], 1)
             self.assertTrue(calls)
             return report
 
@@ -112,7 +119,7 @@ class ActiveQualificationTests(unittest.TestCase):
         sources = check_effects.sources()
         for path in ("Specs/Ariadne.tla", "Specs/AriadneEffects.tla",
                      "Specs/AriadneTypes.tla", "Specs/AriadneMachineCommon.tla",
-                     "Specs/Effects.cfg", "Specs/AMD64/manuals.lock.json"):
+                     "Specs/Effects.cfg", "evidence/Ariadne/amd-manuals.lock.json"):
             self.assertIn(path, sources)
         self.assertFalse(any(Path(path).name.startswith(
             ("AMD64", "AriadneX86_64", "X86_64")) for path in sources))
