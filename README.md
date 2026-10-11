@@ -25,6 +25,8 @@
   [qualification](docs/Ariadne/zero-base-offset-design.md#retained-qualification) — exact zero-base-plus-displacement
   assessment, retained capture evidence and its finite acceptance scope.
 - [Documentation index](docs/Ariadne/README.md) — find the current interfaces and contracts.
+- [Terminology convention](docs/terminology.md) — shared vocabulary, required
+  qualifiers and evidence/acceptance wording.
 - [Plan index](Plans/README.md) — separates remaining work from completed and retired work.
 
 **What remains unresolved.** Active Windows I4 is [re-pinned and correctness-checked](docs/Ariadne/workload-performance-design.md#windows-investigation-replacement); the later [performance qualification](docs/Ariadne/workload-performance-design.md#native-investigation-qualification) meets the unchanged 2-second limit at 1,692.696 ms. Controlled Windows I5a is [qualified with the pinned dependency snapshot](docs/Ariadne/zero-address-design.md#native-qualification). Native BAP recovery, dataflow, slicing and finite stateflow are implemented; [Stage 2 qualification](docs/Ariadne/bap-analysis-core-design.md#native-qualification) records passing aggregate acceptance and default adoption. Other hypothesis, object/source-context and cross-capture questions remain later work.

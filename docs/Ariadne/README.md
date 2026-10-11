@@ -16,6 +16,8 @@ supporting narrative. [Plans](../../Plans/README.md) own execution stages;
 
 **Where to go next.**
 
+- [Terminology convention](../terminology.md) — canonical repository vocabulary
+  and the distinctions between analysis, evidence and acceptance claims.
 - [Architecture and development](architecture.md) — pipeline, analysis concepts,
   source layout, build checks and historical tool compatibility.
 - [Input](file-reader-design.md) — reader API, CLI setup and captured-case evidence.

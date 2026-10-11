@@ -10,6 +10,9 @@ Each document's **Context and follow-up** section explains its status,
 motivating problem, contribution, direct next reading and unresolved limits.
 Readers can follow the subject without returning to this map.
 
+The [terminology convention](terminology.md) defines shared words and required
+qualifiers across active contracts, reports, plans and retired research.
+
 ## Main problem-to-delivery paths
 
 ```mermaid
@@ -114,6 +117,7 @@ implemented repairs and exercised checks from real-Windows qualification.
 
 ### Implementation and runtime references
 
+- [Repository terminology convention](terminology.md).
 - [Crashpad demo build and capture recipe](../native/crashpad-demo/README.md).
 - [Complete Stage 2 execution plan](../Plans/bap-stage2-implementation.md).
 - [Stage 2 A0 plan](../Plans/bap-stage2-a0.md).
