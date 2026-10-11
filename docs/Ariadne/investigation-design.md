@@ -26,6 +26,9 @@ and qualification preserve alternatives and missing premises. The frame-path que
 
 - [Implementation ledger](../../Plans/investigation-layer.md) — delivery stages,
   selected address-wrap work and later questions.
+- [Scanner partial-explanation follow-up plan](../../Plans/scanner-partial-explanation.md)
+  — S0–S4 case-specific baseline, memory qualification, recovery-obligation and
+  entry-origin review; preserves the existing answer-status contract.
 - [Memory provenance refinement](memory-provenance-refinement.md) — implemented
   Scanner diagnostic separation, bounded writer assessment and backward scalar
   inference; full model/mutation/Scanner qualification remains pending.

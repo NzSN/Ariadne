@@ -32,6 +32,10 @@ keeping a plan outside `completed/` does not make its completed steps pending.
   implementation and finite probes pass; remote model, mutation and full Scanner
   qualification remain pending.
 
+- [Scanner partial-explanation follow-up](scanner-partial-explanation.md) —
+  retained 28-gap inventory and S0–S4 case-specific work; coordinates the
+  existing memory-refinement qualification with control/decode and entry review.
+
 - [Historical BAP documentation audit](../docs/Ariadne/bap-analysis-core-design.md#documentation-audit) — preserves the earlier v2 inventory and links to accepted v3 delivery.
 
 - [BAP projection admission and coverage](bap-projection-admission.md) —
@@ -74,6 +78,7 @@ For the wider context, see the [documentation map](../docs/documentation-map.md)
 
 | Plan | Current state and next work |
 | --- | --- |
+| [Scanner partial explanation](scanner-partial-explanation.md) | Retained baseline inspected; S1–S4 follow-up pending for memory qualification, twenty recovery obligations, entry provenance and source-bound publication. A qualified result may remain partial. |
 | [BAP projection admission](bap-projection-admission.md) | P0–P4 accepted on the active real Windows replacement; remaining historical real-Linux clauses excluded: capability admission, conservative continuation, bounded completion, fresh root/native/model/mutation, parity and fixed-budget checks. See the [replacement record](../docs/Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query); six historical Linux outputs remain unexercised. |
 | [Investigation layer](investigation-layer.md) | I0–I3 and active Windows producer correctness pass. I4 meets its fixed budgets in the [native performance result](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification); I5a is qualified, I5b is corpus-qualified, and other I5/I6/I7 remain later work. |
 | [I5c address wrap](i5c-address-wrap.md) | Selected design and W0–W5 plan written; all implementation/qualification pending. Upper-wrap/no-wrap assessment uses the inherited lower-range profile; underflow remains unknown. |
