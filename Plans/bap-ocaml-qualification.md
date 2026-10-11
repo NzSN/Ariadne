@@ -3,11 +3,11 @@
 ## Context and follow-up
 
 **Status.** OQ0–OQ6 completed and checked on 2026-10-03. The isolated SDK,
-bounded native state and Rust transport qualify the full A0 foundation; the [qualification guide](../docs/Ariadne/bap-ocaml-qualification.md)
+bounded native state and Rust transport qualify the full A0 foundation; the [qualification guide](../docs/Ariadne/bap-analysis-core-design.md#ocaml-foundation-qualification)
 and retained record report the exercised gates and final decision. This plan
-closed the A0 foundation before the later [complete Stage 2 delivery](../docs/Ariadne/bap-core-qualification.md).
+closed the A0 foundation before the later [complete Stage 2 delivery](../docs/Ariadne/bap-analysis-core-design.md#native-qualification).
 
-**Why this document exists.** The [A0 delivery](../docs/Ariadne/bap-stage2-a0-validation.md)
+**Why this document exists.** The [A0 delivery](../docs/Ariadne/bap-analysis-core-design.md#a0-capability-evidence)
 qualified contract admission and packaged-runtime graph facilities, but did not
 build our own OCaml pass or exercise its real initialize/observe transport.
 
@@ -27,8 +27,8 @@ helper and a bounded native state/protocol slice.
 
 **What remains unresolved.** This completed foundation itself does not qualify
 the complete analyzer, generated helper replay, product integration or adoption.
-The later [Stage 2 result](../docs/Ariadne/bap-core-qualification.md) supplies
-those separate claims; the [documentation audit](../docs/Ariadne/bap-documentation-sync.md)
+The later [Stage 2 result](../docs/Ariadne/bap-analysis-core-design.md#native-qualification) supplies
+those separate claims; the [documentation audit](../docs/Ariadne/bap-analysis-core-design.md#documentation-audit)
 identifies its matching source-bound refresh. The bootstrap sequence below is
 historical, not a list of missing current capabilities.
 

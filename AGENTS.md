@@ -12,12 +12,12 @@ possible value origins and explain captured fault-address dependencies.
   and [the formal-model guide](Specs/README.md). TLA+ is authoritative for the
   modeled contract; Rust conformance tests and replay are separate evidence.
 - For minidump or semantic-adapter changes, read the
-  [input](docs/Ariadne/modules/input.md) and [BAP](docs/Ariadne/modules/bap.md)
+  [input](docs/Ariadne/file-reader-design.md#public-interface) and [BAP](docs/Ariadne/bap-analysis-core-design.md#backend-usage)
   module guides. BAP supplies production minidump semantics; LLVM MC supplies
   independent decode/control reference facts. Preserve explicit unsupported
   semantics instead of reintroducing automatic LLVM effect fallback.
 - For fault-address explanations, read
-  [investigation contracts](docs/Ariadne/investigation-contracts.md).
+  [investigation design and contracts](docs/Ariadne/investigation-design.md).
   Reuse the completed core analysis and bind claims to the exact query and
   captured evidence.
 
@@ -81,6 +81,11 @@ trusted dependency; Ariadne owns transport, projection, analysis and evidence
 validation. Keep analysis-level TLA+ models, replay and mutation checks active.
 
 ## Design and implementation plans
+
+Maintain one canonical document per feature design in `docs/Ariadne/`.
+Keep its usage, contracts, source-review findings and dated validation summaries
+in that document. Keep stage execution in `Plans/` and raw qualification evidence
+under `evidence/Ariadne/`; preserve original evidence identities and scope.
 
 When creating or updating an implementation plan for an existing design, add
 a direct relative link to the plan in the design document in the same change.

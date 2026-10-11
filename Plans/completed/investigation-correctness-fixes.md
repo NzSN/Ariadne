@@ -5,10 +5,10 @@
 **Status.** Completed within the recorded fixture/Linux tier, 2026-10-02,
 following the review of `12150b9`. All 17 investigation gates passed with stable
 source hashes; original-Windows qualification was unavailable at that run. The
-[delivery record](../../docs/Ariadne/investigation-correctness-validation.md)
+[delivery record](../../docs/Ariadne/investigation-design.md#qualification-and-truncation-repairs)
 tracks exercised checks separately from full original-Windows qualification.
 
-**Why this document exists.** The [investigation design](../../docs/Ariadne/investigation-layer-design.md)
+**Why this document exists.** The [investigation design](../../docs/Ariadne/investigation-design.md)
 requires evidence-bound answers and explicit partial results. Review found that
 claim-budget exhaustion can break result validity, and that full Windows I4
 acceptance does not enforce its documented total-query latency budget.
@@ -20,18 +20,18 @@ the distinction between implementation checks and real-workload qualification.
 **Where to go next.**
 
 
-- [Active Windows I4 replacement](../../docs/Ariadne/i4-windows-repin-validation.md) — records the user-authorized successor pin and timing failure without changing this historical repair evidence.
+- [Active Windows I4 replacement](../../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement) — records the user-authorized successor pin and timing failure without changing this historical repair evidence.
 
-- [Investigation contracts](../../docs/Ariadne/investigation-contracts.md) define the
+- [Investigation contracts](../../docs/Ariadne/investigation-design.md) define the
   result invariants, limit behavior and timing requirements to preserve.
-- [Workload design](../../docs/Ariadne/priority-4-workload-performance-design.md)
+- [Workload design](../../docs/Ariadne/workload-performance-design.md)
   explains why a budget result must refer to the exact artifact and query.
 - [Broader investigation plan](../investigation-layer.md) tracks full I4 acceptance
   and later capabilities beyond these repairs.
-- [Fix delivery](../../docs/Ariadne/investigation-correctness-validation.md) records
+- [Fix delivery](../../docs/Ariadne/investigation-design.md#qualification-and-truncation-repairs) records
   implementation behavior, regression results and any unexercised tiers.
 
-**What remains unresolved.** The [later I4 replacement](../../docs/Ariadne/i4-windows-repin-validation.md)
+**What remains unresolved.** The [later I4 replacement](../../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement)
 retires the lost Electron artifact as an active obligation. Its independent
 98-start capture passes correctness and exceeds the unchanged 2,000 ms CLI
 ceiling. The historical repair below requires identity-bound timing evidence.
@@ -172,6 +172,6 @@ Retain fresh fix-validation evidence under `evidence/Ariadne/` with source/tool
 identities and exact exercised tiers. Update the contracts, design follow-up,
 checkpoint and plan status only to the level actually validated. Keep the full
 original-Windows condition open at that repair checkpoint. The later
-[I4 re-pin](../../docs/Ariadne/i4-windows-repin-validation.md) supersedes its
+[I4 re-pin](../../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement) supersedes its
 missing-artifact obligation and records the remaining performance failure.
 Commit and push require a separate user instruction.

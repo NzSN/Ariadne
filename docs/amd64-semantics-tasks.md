@@ -23,7 +23,7 @@ For the wider context, see the optional [documentation map](documentation-map.md
 > [current semantic assurance decision](Ariadne/semantic-assurance.md).
 
 Priority update 2026-09-29: the scoped 49-case register-core gate is retained
-as a [long-term formal research purpose](Ariadne/practical-assurance-priorities.md).
+as a [long-term formal research purpose](Ariadne/semantic-assurance.md#practical-assurance-priorities).
 The task tables below preserve their original formal dependencies and status;
 they no longer gate the practical minidump analyzer. The
 [retirement decision](Ariadne/semantic-assurance.md) supersedes this task list;

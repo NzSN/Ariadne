@@ -10,17 +10,17 @@
 
 **Where to go next.**
 
-- [Selected I5c design](../docs/Ariadne/i5c-address-wrap-design.md) and
+- [Selected I5c design](../docs/Ariadne/address-wrap-design.md) and
   [W0 model/oracle stage](../Plans/i5c-address-wrap.md#w0--freeze-semantics-and-independent-expectations)
   — proposed address-wrap decision model; no new specification/check result
   exists yet, and model authority must precede runtime implementation.
 
 - [I5b question-level decision model](AriadneZeroBaseOffset.tla) — admission,
   output availability and zero-base/nonzero-displacement conclusions; the
-  [source review](../docs/Ariadne/i5b-source-review.md) separates finite checking
+  [source review](../docs/Ariadne/zero-base-offset-design.md#decoded-record-and-independent-oracle) separates finite checking
   from Rust/native and hardware evidence.
 
-- [Native analysis replay and qualification](../docs/Ariadne/bap-core-qualification.md) — records native-helper observations, mutation sensitivity and CLI ownership separately from the retained Rust replay; neither finite campaign is a universal proof.
+- [Native analysis replay and qualification](../docs/Ariadne/bap-analysis-core-design.md#native-qualification) — records native-helper observations, mutation sensitivity and CLI ownership separately from the retained Rust replay; neither finite campaign is a universal proof.
 
 - [Rust implementation](../docs/implementation.md) — maps model actions to executable analysis.
 - [Stateflow design](../docs/machine-state-design.md) — extends a frozen recovered CFG with supplied abstract transitions.

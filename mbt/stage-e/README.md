@@ -4,17 +4,17 @@
 
 **Status.** Generated Stage E replay and mutation workflow.
 
-**Why this document exists.** [Typed replay design](../../docs/Ariadne/stage-e-mirrorrust-design.md) specifies compiler-owned interfaces and independent result observations.
+**Why this document exists.** [Typed replay design](../../docs/Ariadne/typed-replay-design.md) specifies compiler-owned interfaces and independent result observations.
 
 **What this document establishes.** This guide runs the generated stateflow and IR replay/mutation corpus and documents binding freshness, observer identity and regeneration boundaries.
 
 **Where to go next.**
 
 
-- [Native analysis replay and qualification](../../docs/Ariadne/bap-core-qualification.md) — records native-helper observations, mutation sensitivity and CLI ownership separately from the retained Rust replay; neither finite campaign is a universal proof.
+- [Native analysis replay and qualification](../../docs/Ariadne/bap-analysis-core-design.md#native-qualification) — records native-helper observations, mutation sensitivity and CLI ownership separately from the retained Rust replay; neither finite campaign is a universal proof.
 
-- [Full Stage E delivery](../../docs/Ariadne/stage-e-completion.md) — combines replay with native handoff and report acceptance.
-- [Compatibility record](../../docs/Ariadne/installed-modelmirrors-compatibility.md) — provides the bounded installed-stdio evidence.
+- [Full Stage E delivery](../../docs/Ariadne/typed-replay-design.md#finite-corpus-and-claim-boundary) — combines replay with native handoff and report acceptance.
+- [Compatibility record](../../docs/Ariadne/architecture.md#installed-tool-compatibility-2026-10-01) — provides the bounded installed-stdio evidence.
 
 **What remains unresolved.** Finite conformance checks do not prove the Rust implementation correct for every valid request. A universal refinement proof remains open, and adapter facts remain premises. Stage E qualification also includes native handoffs and reports beyond replay alone.
 
@@ -27,7 +27,7 @@ Rust analyzers; generated modules own codecs, dispatch and lifecycle. Registered
 factories construct ports only after exact semantic-digest admission.
 
 The [completion plan](../../Plans/completed/stage-e-completion.md) and
-[design](../../docs/Ariadne/stage-e-mirrorrust-design.md) define this stage.
+[design](../../docs/Ariadne/typed-replay-design.md) define this stage.
 The original [first integration plan](../../Plans/completed/stage-e-mirrorrust-integration.md)
 and its two-fixture record remain historical evidence.
 

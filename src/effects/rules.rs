@@ -157,7 +157,7 @@ pub(crate) fn summarize(raw: &Raw, bytes: &[u8]) -> Option<Summary> {
     let code = raw.opcode.as_str();
     // Eight exact forms needed by the Priority 4 Windows capture. The source
     // review establishes ordinary continuation only; effects stay opaque.
-    // See docs/Ariadne/priority-4-control-source-review.md.
+    // See docs/Ariadne/operand-effects-design.md#path-driven-control-review.
     if matches!(
         code,
         "PUSH64r"

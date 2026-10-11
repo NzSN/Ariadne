@@ -4,16 +4,16 @@
 
 **Status.** Completed plan, archived; acceptance is limited to the recorded scope.
 
-**Why this document exists.** [Motivating design](../../docs/Ariadne/priority-4-workload-performance-design.md) defines the problem and contract this plan implements.
+**Why this document exists.** [Motivating design](../../docs/Ariadne/workload-performance-design.md) defines the problem and contract this plan implements.
 
 **What this document establishes.** The historical optimization reduced the selected 98-instruction Windows query below its fixed median budget while preserving the tested schedule and reports; synthetic measurements recorded broader bounded behavior.
 
 **Where to go next.**
 
-- [Delivery and follow-up](../../docs/Ariadne/priority-4-performance-validation.md) — records what was exercised and which limits remain.
+- [Delivery and follow-up](../../docs/Ariadne/workload-performance-design.md#historical-llvm-workload-qualification) — records what was exercised and which limits remain.
 - [Active plan index](../README.md) — prevents completed steps from being mistaken for pending work.
 
-**What remains unresolved.** The implementation steps below are archived, not a current task list. These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. The original capture remains historical; it does not qualify the later [native BAP backend](../../docs/Ariadne/bap-core-qualification.md). The separately [re-pinned Windows I4 question](../../docs/Ariadne/i4-windows-repin-validation.md) exceeds its unchanged CLI budget. No worst-case performance guarantee follows.
+**What remains unresolved.** The implementation steps below are archived, not a current task list. These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. The original capture remains historical; it does not qualify the later [native BAP backend](../../docs/Ariadne/bap-analysis-core-design.md#native-qualification). The separately [re-pinned Windows I4 question](../../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement) exceeds its unchanged CLI budget. No worst-case performance guarantee follows.
 
 For the wider context, see the optional [documentation map](../../docs/documentation-map.md).
 
@@ -23,19 +23,19 @@ For the wider context, see the optional [documentation map](../../docs/documenta
 > for current work and separate qualification requirements.
 
 Plan dated **2026-09-29** for practical priority 4 in the
-[assurance queue](../../docs/Ariadne/practical-assurance-priorities.md). It executes the
-[workload-performance design](../../docs/Ariadne/priority-4-workload-performance-design.md)
+[assurance queue](../../docs/Ariadne/semantic-assurance.md#practical-assurance-priorities). It executes the
+[workload-performance design](../../docs/Ariadne/workload-performance-design.md)
 and specializes the performance half of
-[Stage F proof boundary](../../docs/Ariadne/stage-f-proof-and-performance.md);
+[Stage F proof boundary](../../docs/Ariadne/semantic-assurance.md#universal-rust-refinement-boundary);
 the separate Rust-refinement proof remains long-term research. The current
-[baseline](../../docs/Ariadne/stage-f-proof-and-performance.md) covers five 128-node synthetic graphs
+[baseline](../../docs/Ariadne/semantic-assurance.md#universal-rust-refinement-boundary) covers five 128-node synthetic graphs
 and a four-node tool-produced Windows minidump, not a representative real-capture
 workload.
-The first [workload measurement](../../docs/Ariadne/priority-4-performance-validation.md)
+The first [workload measurement](../../docs/Ariadne/workload-performance-design.md#historical-llvm-workload-qualification)
 retains a 34-node real query, five-repeat 128/256-node synthetic data and a
 bounded 512-node timeout. Its 64-node real-capture qualification remained open
 at that checkpoint.
-The later [2026-09-30 delivery](../../docs/Ariadne/priority-4-performance-validation.md) closes
+The later [2026-09-30 delivery](../../docs/Ariadne/workload-performance-design.md#historical-llvm-workload-qualification) closes
 that gate for a 98-instruction Windows capture, retains before/after evidence,
 and meets the unchanged 2,000 ms median budget.
 

@@ -10,7 +10,7 @@
 
 **Where to go next.**
 
-- [Delivery and follow-up](../../docs/Ariadne/operand-effects-validation.md) — records what was exercised and which limits remain.
+- [Delivery and follow-up](../../docs/Ariadne/operand-effects-design.md#historical-effect-qualification) — records what was exercised and which limits remain.
 - [Active plan index](../README.md) — prevents completed steps from being mistaken for pending work.
 
 **What remains unresolved.** The implementation steps below are archived, not a current task list. These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Later Stage A work extended that historical rule set; BAP subsequently replaced production semantics.
@@ -24,7 +24,7 @@ For the wider context, see the optional [documentation map](../../docs/documenta
 
 Prepared 2026-09-26 against `fb7f142`.
 Status: P0–P6 implemented and checked on 2026-09-26 in the working tree.
-See the [delivery evidence](../../docs/Ariadne/operand-effects-validation.md) and
+See the [delivery evidence](../../docs/Ariadne/operand-effects-design.md#historical-effect-qualification) and
 [source-bound gate report](../../evidence/Ariadne/operand-effects-validation.json). No commit/push
 has been performed. The sequence below is retained as the implementation plan.
 

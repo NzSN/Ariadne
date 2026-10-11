@@ -11,11 +11,11 @@
 **Where to go next.**
 
 
-- [Native default and Rust reference](Ariadne/bap-core-qualification.md) — records the production native minidump owner and exact finite replay/rollback scope; this guide explains the Rust reference implementation.
+- [Native default and Rust reference](Ariadne/bap-analysis-core-design.md#native-qualification) — records the production native minidump owner and exact finite replay/rollback scope; this guide explains the Rust reference implementation.
 
 - [Core replay guide](../mbt/README.md) — checks observable Rust transitions against generated model traces.
-- [Proof boundary](Ariadne/stage-f-proof-and-performance.md) — states what finite tests leave unproved.
-- [Source-layout delivery](Ariadne/rust-source-layout.md) — supplies current package and module organization.
+- [Proof boundary](Ariadne/semantic-assurance.md#universal-rust-refinement-boundary) — states what finite tests leave unproved.
+- [Source-layout delivery](Ariadne/architecture.md#source-layout-and-development) — supplies current package and module organization.
 
 **What remains unresolved.** Finite conformance checks do not prove the Rust implementation correct for every valid request. A universal refinement proof remains open, and adapter facts remain premises.
 
@@ -24,22 +24,22 @@ For the wider context, see the optional [documentation map](documentation-map.md
 The [Rust source-layout consolidation plan](../Plans/completed/rust-source-layout.md)
 implements the user-requested single Cargo package with sources in `src/`, tests
 in `tests/`, and build artifacts in the root `target/`.
-The [completed layout and validation](Ariadne/rust-source-layout.md) record the
+The [completed layout and validation](Ariadne/architecture.md#source-layout-and-development) record the
 current module APIs, build commands and retained regression evidence.
 
 The `ariadne-analysis` package exports the `ariadne` Rust library. It implements
 [Ariadne.tla](../Specs/Ariadne.tla) over an owned immutable request using the
 standard library. The separate LLVM IR and abstract machine-state models do
-now have [Stage E completion](Ariadne/stage-e-completion.md). The
+now have [Stage E completion](Ariadne/typed-replay-design.md#finite-corpus-and-claim-boundary). The
 [current roadmap](../ROADMAP.md)
-and [proof-boundary record](Ariadne/stage-f-proof-and-performance.md) distinguish
+and [proof-boundary record](Ariadne/semantic-assurance.md#universal-rust-refinement-boundary) distinguish
 that progress from generated model-based replay or a Rust refinement proof.
 The scoped [Priority 4 workload-performance implementation plan](../Plans/completed/priority-4-workload-performance-plan.md)
 historically qualified its original 98-instruction Windows minidump and a
 measured predecessor cache under the earlier LLVM-backed pipeline. That result
 does not qualify the current native backend or the re-pinned I4 query. Incoming sets are recomputed only when local predecessors change;
 the sorted one-action schedule is preserved by full-transition comparisons.
-Its [performance design](Ariadne/priority-4-workload-performance-design.md)
+Its [performance design](Ariadne/workload-performance-design.md)
 separates end-to-end CLI observations from core counters.
 
 The optional [LLVM MC byte-span adapter](llvm-mc-adapter.md) now constructs
@@ -48,12 +48,12 @@ The core's behavior and fixed-input specification are unchanged. File parsing
 stays in the `ariadne::input` module. `ByteSnapshot::prepare()` now supplies
 reviewed conservative effects for an explicit form registry, with byte-level
 GPR aliases and per-site evidence. This adds trusted-input preparation without
-changing the core state machine; see the [effect rule matrix](Ariadne/operand-effects-rules.md).
+changing the core state machine; see the [effect rule matrix](Ariadne/operand-effects-design.md#historical-rule-matrix).
 
-The [minidump input module](Ariadne/modules/input.md) now supplies immutable
+The [minidump input module](Ariadne/file-reader-design.md#public-interface) now supplies immutable
 captured memory and local instruction discovery for AMD64 Windows/Linux dumps.
 It shares the root manifest and lockfile. Production minidump preparation uses
-[BAP projection](Ariadne/modules/bap.md) and LLVM decoded facts; it does not
+[BAP projection](Ariadne/bap-analysis-core-design.md#backend-usage) and LLVM decoded facts; it does not
 reuse the legacy LLVM effect-rule preparer. The CLI defaults to the native
 helper, while this guide's `Analyzer` API describes the explicit Rust reference.
 Preparation freezes inputs before either analyzer runs.
@@ -165,7 +165,7 @@ fixed point and follows all uses of each included instruction.
 
 The implementation uses ordered-set propagation with predecessor indices and
 cached incoming definitions invalidated when local predecessor facts grow. The
-[historical workload optimization](Ariadne/priority-4-performance-validation.md)
+[historical workload optimization](Ariadne/workload-performance-design.md#historical-llvm-workload-qualification)
 records preserved scheduling and outputs for its measured cases; it does not
 establish a universal large-binary performance guarantee.
 

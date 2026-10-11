@@ -7,27 +7,27 @@ is unlimited. The separate [native analysis helper](../bap-core/README.md)
 owns default minidump recovery, dataflow, slicing and finite stateflow;
 Rust retains preparation, validation, reports and explicit reference/rollback.
 
-**Why this document exists.** [Native boundary design](../../docs/Ariadne/bap-semantic-backend-design.md) isolates OCaml/BAP behind a typed process protocol.
+**Why this document exists.** [Native boundary design](../../docs/Ariadne/bap-analysis-core-design.md) isolates OCaml/BAP behind a typed process protocol.
 
 **What this document establishes.** The helper hosts the pinned BAP runtime outside Rust and transports typed lifting results. Setup locks actual archive/library/plugin identities rather than relying on a release label.
 
 **Where to go next.**
 
-- [BAP documentation audit](../../docs/Ariadne/bap-documentation-sync.md) — current projection limits and exact retained source/tool bindings.
+- [BAP documentation audit](../../docs/Ariadne/bap-analysis-core-design.md#documentation-audit) — current projection limits and exact retained source/tool bindings.
 
-- [Unlimited timing policy](../../docs/Ariadne/bap-unlimited-validation.md) — records the user-authorized removal of the BAP latency ceiling and refreshed qualification.
+- [Unlimited timing policy](../../docs/Ariadne/bap-analysis-core-design.md#unlimited-timing-policy) — records the user-authorized removal of the BAP latency ceiling and refreshed qualification.
 
-- [Rust backend guide](../../docs/Ariadne/modules/bap.md) — connects the helper to minidump preparation.
-- [Binding review](../../docs/Ariadne/bap-projection-source-review.md) — explains the measured accessor and projection assumptions.
+- [Rust backend guide](../../docs/Ariadne/bap-analysis-core-design.md#backend-usage) — connects the helper to minidump preparation.
+- [Binding review](../../docs/Ariadne/bap-analysis-core-design.md#pinned-projection-source-review) — explains the measured accessor and projection assumptions.
 - [Active Windows replacement](../../Plans/bap-windows-repin.md) — defines the authorized workload pin and independent capture evidence.
-- [Replacement validation](../../docs/Ariadne/bap-windows-repin-validation.md) — records completed capture/pinning, passing implementation checks and the former latency limit.
+- [Replacement validation](../../docs/Ariadne/bap-analysis-core-design.md#windows-workload-replacement) — records completed capture/pinning, passing implementation checks and the former latency limit.
 
-**What remains unresolved.** The [native core qualification](../../docs/Ariadne/bap-core-qualification.md)
+**What remains unresolved.** The [native core qualification](../../docs/Ariadne/bap-analysis-core-design.md#native-qualification)
 records passing clean-build, algorithm, replay and default-adoption checks on
 the exercised corpus. Pinned lifting remains trusted; universal refinement and
 packaged cross-platform release qualification remain open. The
-[active I4 question](../../docs/Ariadne/i4-windows-repin-validation.md) meets
-its fixed CLI budget in the later [performance qualification](../../docs/Ariadne/i4-performance-validation.md); controlled I5a has separate passing records.
+[active I4 question](../../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement) meets
+its fixed CLI budget in the later [performance qualification](../../docs/Ariadne/workload-performance-design.md#native-investigation-qualification); controlled I5a has separate passing records.
 
 For the wider context, see the optional [documentation map](../../docs/documentation-map.md).
 
@@ -57,7 +57,7 @@ passed through BAP's configuration argv. Other installed plugins are outside
 the selected configuration.
 
 The production entry point is `ariadne-bap-lift PLUGIN_DIR`; `--version`
-probes the helper protocol. The [Stage 1 design](../../docs/Ariadne/bap-semantic-backend-design.md)
+probes the helper protocol. The [Stage 1 design](../../docs/Ariadne/bap-analysis-core-design.md)
 defines the bounded request stream, typed JSON AST, strict adapter and conservative
 projection. No dump/executable paths or discovery policy enter this helper.
 The packaged EXTRACT accessors are reversed; the encoder uses their measured
@@ -75,7 +75,7 @@ the native Windows partial dump. The active query requires exactly 98 decoded
 starts with captured provenance and the independent RCX-producer witness.
 Full Stage 1 exit and the Stage 2 prerequisite require valid release samples
 (one warm-up and five measurements), complete source/tool bindings and passing
-implementation gates. The [current policy](../../docs/Ariadne/bap-unlimited-validation.md)
+implementation gates. The [current policy](../../docs/Ariadne/bap-analysis-core-design.md#unlimited-timing-policy)
 has no latency ceiling. The earlier 10.67 s result remains a historical
 measurement under its former 2 s condition.
 
@@ -94,4 +94,4 @@ aggregate v5 use `windowsWorkload*` fields. The former `ARIADNE_PRIORITY4_DUMP`
 selector is not used by BAP. Historical Priority 4 retains its original artifact;
 the later I4-specific re-pin has its own manifest and bounded timing contract.
 The earlier BAP capture campaign did not implement Stage 2; the later
-[native core qualification](../../docs/Ariadne/bap-core-qualification.md) does.
+[native core qualification](../../docs/Ariadne/bap-analysis-core-design.md#native-qualification) does.

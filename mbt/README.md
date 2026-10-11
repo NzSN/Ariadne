@@ -11,11 +11,11 @@
 **Where to go next.**
 
 
-- [Native analysis replay and qualification](../docs/Ariadne/bap-core-qualification.md) — records native-helper observations, mutation sensitivity and CLI ownership separately from the retained Rust replay; neither finite campaign is a universal proof.
+- [Native analysis replay and qualification](../docs/Ariadne/bap-analysis-core-design.md#native-qualification) — records native-helper observations, mutation sensitivity and CLI ownership separately from the retained Rust replay; neither finite campaign is a universal proof.
 
-- [Installed compatibility record](../docs/Ariadne/installed-modelmirrors-compatibility.md) — bounds the exercised tool/server/client path.
+- [Installed compatibility record](../docs/Ariadne/architecture.md#installed-tool-compatibility-2026-10-01) — bounds the exercised tool/server/client path.
 - [Stage E replay](stage-e/README.md) — extends generated conformance to stateflow and supplied IR.
-- [Proof boundary](../docs/Ariadne/stage-f-proof-and-performance.md) — explains why replay is not a universal refinement proof.
+- [Proof boundary](../docs/Ariadne/semantic-assurance.md#universal-rust-refinement-boundary) — explains why replay is not a universal refinement proof.
 
 **What remains unresolved.** Finite conformance checks do not prove the Rust implementation correct for every valid request. A universal refinement proof remains open, and adapter facts remain premises. Installed-server compatibility applies only to the exercised transport and tool identities.
 
@@ -24,7 +24,7 @@ For the wider context, see the optional [documentation map](../docs/documentatio
 The separate [Stage E MirrorRust integration](stage-e/README.md) provides typed
 ports for machine-state and LLVM IR analysis. Its two-fixture gate is separate
 from the core replay/mutation gate below.
-The [installed-server compatibility record](../docs/Ariadne/installed-modelmirrors-compatibility.md)
+The [installed-server compatibility record](../docs/Ariadne/architecture.md#installed-tool-compatibility-2026-10-01)
 checks the current local ModelMirrors executable with the integrated MirrorRust
 client, independently of the prepared toolchain used by the normal runner.
 

@@ -2,81 +2,67 @@
 
 ## Context and follow-up
 
-**Status.** Current documentation entry point.
+**Status.** Compact feature documentation, consolidated on 2026-10-11.
 
-**Why this document exists.** [Project overview](../../README.md) introduces the workflow these guides explain.
+**Why this document exists.** The [project overview](../../README.md) introduces
+snapshot-based machine-code investigation. This index locates each feature's
+single document, including its usage, design, source review and qualification
+history.
 
-**What this document establishes.** This index separates current usage/contracts from delivery evidence. Use the topic table to choose a component; each linked document explains its own prerequisites and successors.
+**What this document establishes.** Feature documents own their contracts and
+supporting narrative. [Plans](../../Plans/README.md) own execution stages;
+[checkpoints](../../CHECKPOINTS.md) own chronology; immutable evidence stays in
+[evidence/Ariadne](../../evidence/Ariadne/README.md).
 
 **Where to go next.**
 
-- [Architecture overview](architecture.md) — block diagrams, Rust/native ownership, main minidump flow and separate IR/stateflow paths.
+- [Architecture and development](architecture.md) — pipeline, analysis concepts,
+  source layout, build checks and historical tool compatibility.
+- [Input](file-reader-design.md) — reader API, CLI setup and captured-case evidence.
+- [BAP integration](bap-analysis-core-design.md) — semantic/native setup,
+  projection, analysis, source review and qualification.
+- [Investigation](investigation-design.md) — possible-origin questions and their
+  binding, reporting and completeness contracts.
+- [Documentation map](../documentation-map.md) — models, plans and related guides.
 
-- [Accepted P4 real-capture replacement](real-capture-repin-79938.md) — current Windows corpus, distinct baseline, unchanged fixed budgets and excluded historical real-Linux clauses.
-- [BAP v3 resume record](bap-admission-resume.md) — recovered tools, preserved earlier failures and the selected successor.
-- [Historical BAP v3 execution checkpoint](bap-admission-checkpoint.md) — initial P0–P3 checks and failures before the accepted P4 successor.
+**What remains unresolved.** Address-wrap and memory-provenance refinement remain
+proposed. A retained passing result applies to its recorded source/tool/corpus
+identities; consolidating its description supplies no new runtime qualification.
 
-- [Historical BAP documentation audit](bap-documentation-sync.md) — earlier v2 source/evidence synchronization and its current successors.
+## Canonical designs
 
-- [Selected I5c address-wrap design](i5c-address-wrap-design.md) and
-  [W0–W5 plan](../../Plans/i5c-address-wrap.md) — the next arithmetic question;
-  implementation, model and controlled-capture qualification remain pending.
+| Feature | Read | Contents |
+| --- | --- | --- |
+| Architecture and development | [Architecture](architecture.md) | Process ownership, analysis equations, learning references, source layout and development checks. |
+| Captured input | [File readers](file-reader-design.md) | Reader API, CLI, immutable capture evidence, independent entries and retained real cases. |
+| Instruction semantics and native analysis | [BAP integration](bap-analysis-core-design.md) | Setup, lift/projection/admission and analysis contracts, source review, replay and qualification history. |
+| Fault-address dependencies | [Investigation](investigation-design.md) | Bound completed analysis, possible origins, explanation API and validation history. |
+| Fault-time zero address | [Zero-address assessment](zero-address-design.md) | Predicate, admission, CLI, source review and controlled-capture qualification. |
+| Fault-time zero base plus displacement | [Zero-base-offset assessment](zero-base-offset-design.md) | Decoded/BAP agreement, result contract, source review and qualification. |
+| Fault-time address wrap | [Address-wrap assessment](address-wrap-design.md) | Selected design; model, implementation and qualification pending. |
+| Memory provenance | [Memory refinement](memory-provenance-refinement.md) | Proposed bounded refinement of Scanner's unknown-memory dependencies. |
+| Rendering and minidump reports | [Result rendering](result-rendering.md) | Text/DOT/JSON, schema, examples and presentation history. |
+| Typed replay and separate IR/stateflow paths | [Typed replay](typed-replay-design.md) | Generated ports, IR CLI, result schemas, replay and finite validation. |
+| Workload performance | [Performance](workload-performance-design.md) | Benchmark usage, investigation optimizations, fixed budgets and dated measurements. |
+| Legacy effects and decode reference | [Operand effects](operand-effects-design.md) | LLVM decode protocol, historical effect rules, source reviews and retired candidates. |
+| Assurance | [Semantic assurance](semantic-assurance.md) | Trusted-lifter boundary, proof limits, practical priorities and retirement policy. |
 
-- [Selected I5b design](i5b-zero-base-offset-design.md) and
-  [implementation plan](../../Plans/i5b-zero-base-offset.md) — delivered
-  fault-time machine-code debugging assessment; [implemented contracts](i5b-contracts.md)
-  and [qualification](i5b-validation.md) distinguish its current tiers.
+The separate [core stateflow design](../machine-state-design.md),
+[Rust implementation guide](../implementation.md), [formal models](../../Specs/README.md)
+and [replay procedures](../../mbt/README.md) explain their own repository-wide
+contracts. The feature documents above link directly to applicable plans and
+raw qualification records.
 
-- [Active Windows I4 qualification](i4-windows-repin-validation.md) — exact replacement capture and historical baseline; [native performance qualification](i4-performance-validation.md) meets the fixed CLI budget.
+## Maintaining the compact structure
 
-- [Documentation map](../documentation-map.md) — traces motivation, implementation, validation and open questions.
-- [Plan index](../../Plans/README.md) — identifies active implementation work.
+Extend the owning feature document for usage, design decisions, contracts,
+source-review findings and dated validation summaries. Keep distinct features
+separate; use sections and direct section links for stages of the same feature.
+Retain source/tool/corpus identities, failed results and successor boundaries
+when summarizing older campaigns. Preserve raw evidence bytes and inventories.
 
-**What remains unresolved.** Active Windows I4 correctness passes after the [98-instruction re-pin](i4-windows-repin-validation.md); the later [performance qualification](i4-performance-validation.md) meets the unchanged 2 s limit at 1,692.696 ms. Controlled Windows I5a is [qualified under the pinned dependency snapshot](i5a-native-qualification.md). Native BAP recovery, dataflow, slicing and finite stateflow are implemented; [Stage 2 qualification](bap-core-qualification.md) records passing aggregate acceptance and default adoption. Other hypothesis, object/source-context and cross-capture questions remain later work.
-
-For the wider context, see the optional [documentation map](../documentation-map.md).
-
-Start with the current interfaces and assurance boundary. Active implementation
-work is listed in the [plan index](../../Plans/README.md); completed plans live
-under `Plans/completed/`.
-
-| Topic | Current documentation |
-| --- | --- |
-| Architecture and process boundaries | [Architecture overview](architecture.md) |
-| Minidump input and CLI | [Input guide](modules/input.md), [examples](minidump-investigator-examples.md), [report schema](stage-c-report-schema.md) |
-| BAP semantics and native analysis | [Backend guide](modules/bap.md), [projection design](bap-semantic-backend-design.md), [source review](bap-projection-source-review.md), [native qualification](bap-core-qualification.md), [current audit](bap-documentation-sync.md), [admission delivery plan](../../Plans/bap-projection-admission.md) |
-| Fault-address investigation | [Module guide](modules/investigation.md), [producer contracts](investigation-contracts.md), [I5a zero-address contracts](i5a-contracts.md), [design](investigation-layer-design.md). |
-| Planned address-wrap assessment | [I5c design](i5c-address-wrap-design.md) and [W0–W5 plan](../../Plans/i5c-address-wrap.md); no implemented interface or acceptance yet. |
-| Zero-base-plus-displacement assessment | [I5b contracts](i5b-contracts.md), [source review](i5b-source-review.md), [validation](i5b-validation.md), [B0–B5 plan](../../Plans/i5b-zero-base-offset.md). |
-| Stateflow and supplied LLVM IR | [Stage E contracts](stage-e-report-contracts.md), [IR guide](modules/ir.md), [report guide](modules/reports.md) |
-| Rendering and analysis concepts | [Rendering](result-rendering.md), [static-analysis learning guide](static-analysis-learning.md) |
-| Assurance and scope | [Semantic assurance](semantic-assurance.md), [roadmap](../../ROADMAP.md), [checkpoints](../../CHECKPOINTS.md) |
-
-## Delivery evidence
-
-The [source-layout record](rust-source-layout.md),
-[BAP-only delivery](bap-only-removal-validation.md),
-[workload qualification repair](bap-windows-workload-validation.md),
-[controlled Windows replacement](bap-windows-repin-validation.md),
-[unlimited BAP timing policy](bap-unlimited-validation.md),
-[Stage 2 A0 start](bap-stage2-a0-validation.md),
-[investigation validation](investigation-validation.md) and
-[Stage E completion](stage-e-completion.md) explain their exercised scopes.
-The later [investigation correctness record](investigation-correctness-validation.md)
-qualifies the timing-decision and truncation repairs within the available tier.
-The [I5a delivery record](i5a-validation.md) documents the new numeric question's
-corpus, measurements and separate Windows capture requirements.
-The later [Crashpad Windows demo](crashpad-demo-validation.md) provides real
-capture/answer evidence. Its historical timing miss is followed by
-[native qualification](i5a-native-qualification.md): all 14 source/fixture gates
-and both controlled capture modes pass with a read-only dependency snapshot.
-Validation JSON, CSV samples and evidence archives retain their original
-identities under [evidence/Ariadne](../../evidence/Ariadne/README.md).
-A historical passing record is not fresh qualification after changes.
-
-Older priority, effect-rule and source-review documents remain evidence for their
-original backend and workload. The [active Windows I4 re-pin](i4-windows-repin-validation.md) closes the missing
-artifact gap; [native performance qualification](i4-performance-validation.md) later meets its fixed CLI budget. The
-[universal Rust proof boundary](stage-f-proof-and-performance.md) remains open.
-The independent ISA proof project is retired. Obsolete plan/status Markdown is
-removed; Git retains its history.
+When absorbing a page, preserve its unique contracts, remove the old file and
+redirect live references. Historical inventories keep their original paths and
+hashes; Git retains those document revisions. Every feature document maintains
+its Context and follow-up section and direct implementation-plan links. Run
+`python3 tools/check_doc_links.py` after navigation changes.

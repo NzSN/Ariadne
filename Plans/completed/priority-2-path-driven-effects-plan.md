@@ -10,7 +10,7 @@
 
 **Where to go next.**
 
-- [Delivery and follow-up](../../docs/Ariadne/priority-2-effects-validation.md) — records what was exercised and which limits remain.
+- [Delivery and follow-up](../../docs/Ariadne/operand-effects-design.md#selected-path-no-change-decision-2026-09-29) — records what was exercised and which limits remain.
 - [Active plan index](../README.md) — prevents completed steps from being mistaken for pending work.
 
 **What remains unresolved.** The implementation steps below are archived, not a current task list. A no-change decision closes that review, not effect coverage generally. A new path or unsupported BIL form may require new source review and projection tests.
@@ -23,14 +23,14 @@ For the wider context, see the optional [documentation map](../../docs/documenta
 > for current work and separate qualification requirements.
 
 Plan dated **2026-09-29** for practical priority 2 in the
-[assurance queue](../../docs/Ariadne/practical-assurance-priorities.md). This is a narrow
+[assurance queue](../../docs/Ariadne/semantic-assurance.md#practical-assurance-priorities). This is a narrow
 continuation of the [structured-operand/effect design](../../docs/Ariadne/operand-effects-design.md)
-and the delivered [Stage A memory-immediate MOV rules](../../docs/Ariadne/stage-a-validation.md).
+and the delivered [Stage A memory-immediate MOV rules](../../docs/Ariadne/operand-effects-design.md#memory-immediate-mov-delivery-2026-09-28).
 Its input is the pinned real-capture candidate and gap list from
 [priority 1](priority-1-real-capture-plan.md), not a request to implement a
 mnemonic family or the AMD64 user64 profile.
 The first controlled Chromium case has a
-[source-bound no-change decision](../../docs/Ariadne/priority-2-effects-validation.md): reviewed
+[source-bound no-change decision](../../docs/Ariadne/operand-effects-design.md#selected-path-no-change-decision-2026-09-29): reviewed
 forms reach the seed, while call effects remain deliberately opaque. New
 real-path blockers reopen this plan.
 

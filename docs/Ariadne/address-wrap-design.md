@@ -1,15 +1,15 @@
-# I5c: fault-time address-wrap assessment
+# Fault-time address-wrap assessment design
 
 ## Context and follow-up
 
 **Status.** Selected design on 2026-10-07, source-reviewed against `1344c99`.
-This document names the next question I5c. The linked W0–W5 implementation plan
+The implementation ledger identifies this question as I5c. The linked W0–W5 implementation plan
 is written; every implementation and qualification stage remains pending.
 No new assessment interface, CLI option, model or capture is delivered here.
 
-**Why this document exists.** The [investigation design](investigation-layer-design.md#higher-level-questions-after-the-first-slice)
-leaves arithmetic hypotheses open. [I5a](i5a-contracts.md) computes an effective
-address and asks whether it starts at zero. [I5b](i5b-contracts.md) asks whether
+**Why this document exists.** The [investigation design](investigation-design.md#higher-level-questions-after-the-first-slice)
+leaves arithmetic hypotheses open. [I5a](zero-address-design.md) computes an effective
+address and asks whether it starts at zero. [I5b](zero-base-offset-design.md) asks whether
 the encoded base is zero with a nonzero displacement. Neither makes the
 before-reduction address calculation and wrapping predicate a separate result.
 
@@ -22,9 +22,9 @@ Wrap describes conditional address arithmetic, not a programming error.
 
 - [I5c implementation plan](../../Plans/i5c-address-wrap.md) — W0–W5 ownership,
   mandatory controls, model contract, preservation and qualification exits.
-- [I5b source review](i5b-source-review.md) — reviewed encoded base/displacement
+- [I5b source review](zero-base-offset-design.md#decoded-record-and-independent-oracle) — reviewed encoded base/displacement
   roles, six MOV forms and the existing independent decode/BAP agreement checks.
-- [I5a contracts](i5a-contracts.md) — sealed fault observations, site/operation
+- [I5a contracts](zero-address-design.md) — sealed fault observations, site/operation
   association, validity groups and the existing narrow access-range policy.
 - [Investigation ledger](../../Plans/investigation-layer.md) — I5c is selected,
   I5a/I5b are delivered, and other arithmetic/history/lifetime questions remain open.

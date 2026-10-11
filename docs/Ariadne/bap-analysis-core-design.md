@@ -1,53 +1,337 @@
-# BAP-owned analysis: Stage 2 contract
+# BAP semantic and analysis integration
 
 ## Context and follow-up
 
-**Status.** Native recovery, reaching definitions, slicing, finite stateflow,
-generated replay and capture-bound integration are implemented. The CLI selects
-BAP analysis by default and retains explicit Rust rollback. The
-[qualification guide](bap-core-qualification.md) records acceptance for the exact
-sources; the [execution plan](../../Plans/bap-stage2-implementation.md) records delivery.
+**Status.** BAP is the sole production minidump semantic provider. Typed-BIL v3
+capability admission, conservative ordinary continuation, native recovery,
+reaching definitions, slicing, finite stateflow, generated replay and bounded
+completion transport are implemented. The CLI selects native BAP analysis by
+default and retains explicit Rust analysis rollback. P0–P4 admission is accepted
+for the selected finite corpus, with the excluded historical real-Linux clauses
+preserved in the [acceptance decision](../../evidence/Ariadne/bap-admission/p4-acceptance-20261010.json).
+Implementation contracts, source/API review and source-bound qualification are
+separate evidence; this consolidated design does not renew qualification.
 
-**Why this document exists.** The [BAP assessment](bap-core-refactor-assessment.md)
-and [integration plan](../../Plans/bap-integration.md#stage-2-bap-analysis-core)
-require moving actual analysis state and computation into BAP-owned passes.
+**Why this document exists.** The [effect design](operand-effects-design.md)
+exposes the coverage and maintenance costs of local instruction rules. BAP
+integration first introduced a pinned semantic provider, then moved actual
+analysis computation into BAP-owned passes while preserving Ariadne's snapshot,
+control, origin and reporting contracts. The integration plan records the
+[semantic-provider stage](../../Plans/bap-integration.md#stage-1-bap-semantic-backend)
+and [native-analysis stage](../../Plans/bap-integration.md#stage-2-bap-analysis-core)
+as delivery steps of this design.
 
-**What this document establishes.** Ownership, immutable inputs, actions, full
-observations, BIR attribution, error semantics and the correspondence to the
-authoritative TLA+ machines. Contract validation does not prove a pass correct.
+**What this document establishes.** One integration design covers native lifting,
+typed projection and admission, immutable analysis requests, full observations,
+BIR attribution, error semantics and correspondence to the authoritative TLA+
+machines, together with setup, source review and the retained qualification
+scopes. Contract validation does not prove an arbitrary lifter or pass correct.
 
 **Where to go next.**
 
-- [P4 bounded completion transport plan](../../Plans/bap-completion-pages.md) —
-  adds action batches and paged final-result retrieval while retaining the
-  per-frame budget, complete observations and unchanged core transitions.
-- [Qualification guide](bap-core-qualification.md) — current aggregate decision and adoption evidence.
+- [Integration plan](../../Plans/bap-integration.md) and its
+  [execution ledger](../../Plans/bap-integration.md#current-execution-ledger) —
+  delivery order and retained semantic-provider/analysis-core decisions.
+- [Projection admission plan](../../Plans/bap-projection-admission.md) — accepted
+  P0–P4 scope, remote qualification, exclusions and nonblocking follow-ups.
+- [Bounded completion transport plan](../../Plans/bap-completion-pages.md) —
+  action batches and paged final results within unchanged frame limits.
+- [Native analysis implementation plan](../../Plans/bap-stage2-implementation.md) —
+  delivered A1–A6 analysis and adoption work.
+- [A0 implementation plan](../../Plans/bap-stage2-a0.md) and
+  [OCaml foundation plan](../../Plans/bap-ocaml-qualification.md) — completed
+  contract, SDK, helper-state and transport foundation.
+- [Windows workload replacement plan](../../Plans/bap-windows-repin.md) —
+  authorized replacement of the unavailable capture for active BAP S4/S5.
+- [Completed BAP-only semantics plan](../../Plans/completed/bap-only-semantics.md) —
+  removal of the LLVM semantic fallback while retaining decoded-fact validation.
+- [Native helper setup](../../native/bap/README.md) and
+  [analysis SDK setup](../../native/bap-core/README.md) — pinned build and runtime
+  prerequisites; [lifter source](../../native/bap/lift.cpp) and
+  [projection source](../../src/bap/projection.rs) implement the reviewed boundary.
+- [Retained native refresh](../../evidence/Ariadne/i4-performance-qualification.json),
+  [OCaml foundation record](../../evidence/Ariadne/bap-ocaml-qualification.json) and
+  [selected replacement qualification](file-reader-design.md#windows-replacement-capture-and-bounded-query) — separate
+  source/tool/corpus decisions and adoption evidence.
+- [Core model](../../Specs/Ariadne.tla),
+  [effects model](../../Specs/AriadneEffects.tla),
+  [stateflow model](../../Specs/AriadneMachineState.tla) and
+  [Rust correspondence](../implementation.md) — authoritative modeled behavior
+  and its separate reference implementation.
 
-- [Complete Stage 2 execution plan](../../Plans/bap-stage2-implementation.md) — implements and qualifies A1–A6 on the completed A0 foundation.
+**What remains unresolved.** BAP lifting remains trusted under the
+[semantic assurance decision](semantic-assurance.md); finite replay is not a
+universal refinement or ISA-step proof. Packaged cross-platform release
+qualification, richer BIR transformations, general memory-alias precision,
+indirect-target enumeration and historical execution reconstruction remain
+outside this delivered contract. Prefix/system/SIMD/x87/loop semantics retain
+explicit unsupported outcomes. External Electron acceptance requires its exact
+capture bytes. The selected replacement acceptance excludes historical
+real-Linux coverage and its six output hashes; their unexercised/failed records
+remain historical. BAP timing is unlimited, while investigation contracts keep
+their separate fixed budgets. The evidence boundaries below retain those scopes;
+the [documentation map](../documentation-map.md) connects the related work.
 
-- [OCaml foundation qualification plan](../../Plans/bap-ocaml-qualification.md) — closes the remaining A0 SDK, helper-state and transport clauses before A1.
+## Reading map
 
-- [A0 implementation plan](../../Plans/bap-stage2-a0.md) — scopes this first stage
-  and its executable contract/capability checks.
-- [Core model](../../Specs/Ariadne.tla) — defines recovery, definitions and slicing.
-- [Stateflow model](../../Specs/AriadneMachineState.tla) — defines finite relational
-  propagation and feasibility on a frozen structural graph.
-- [Rust correspondence](../implementation.md) — provides the reference implementation.
+- [Setup and use](#backend-usage), then [reproduction](#reproduction) for qualified runs.
+- [Projection](#projection) and [admission matrix](#decision-matrix) for semantic scope;
+  [immutable inputs](#immutable-requests-and-finite-domains) and
+  [native lifecycle](#versioned-interface-and-lifecycle) for the analysis contract.
+- [Pinned source review](#pinned-projection-source-review) for provider/getter facts,
+  kept distinct from [native qualification](#native-qualification).
+- [Evidence boundaries](#evidence-boundaries), [delivery history](#bap-only-delivery),
+  [admission repairs](#mutation-campaign-and-repair) and
+  [latest accepted scope](#selected-replacement-acceptance) for dated decisions.
 
-**What remains unresolved.** Stage 2 acceptance is valid only for the passing
-aggregate record and its verified source/tool archive. BAP lifting remains trusted; finite
-model replay is not a universal refinement or ISA-step proof. Richer BIR
-transformations are separate future contracts.
-The recovered Scanner query exceeds the ordinary per-action 8 MiB response
-budget. The implemented [P4 transport extension](../../Plans/bap-completion-pages.md)
-completes it through bounded batches/pages without dropping definitions or raising
-that frame limit. The [selected real-capture replacement](real-capture-repin-79938.md)
-qualifies P4 source/fixture and native-default gates remotely. The
-[user decision](../../evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
-accepts that scope with remaining historical real-Linux clauses excluded; their
-coverage and six output hashes remain unexercised.
+## Architectural rationale
 
-For the wider context, see the [documentation map](../documentation-map.md).
+The original 2026-10-01 assessment was a source/API review, with no BAP corpus
+run. It recommended a bounded, pinned lifting experiment before core replacement;
+subsequent implementation and qualification supersede that delivery decision.
+The useful architectural distinctions remain:
+
+| Capability or choice | Integration consequence |
+| --- | --- |
+| Raw-byte lifting through `bap mc`, `Memory.create`, `Disasm.of_mem` and a custom `Disasm.Driver.scan` | These APIs admit a captured-byte boundary but do not establish snapshot identity, sparse-hole handling or per-instruction evidence. Default root selection and the speculative driver can discover beyond known paths, so the integration supplies its own frozen, entry-driven instruction domain. |
+| BIL, BIR and LLVM IR | BIL carries instruction expressions/statements; BIR provides program/subroutine/block/definition/phi/jump terms and optional SSA. An LLVM-backed BAP decoder does not produce LLVM IR. The [direct LLVM IR path](typed-replay-design.md#finite-corpus-and-claim-boundary) still accepts independently verified `.ll`/`.bc`; replacing it with BIR would require a different input and acceptance contract. |
+| BIL dataflow and unknown values | BAP's documented constant-propagation and dead-virtual passes do not track memory locations. `Unknown`, `Special`, assignments and phi nodes do not establish complete effects, fault/commit behavior or definite replacement. Ariadne must project GPR bytes, individual flags, `memory:any` and `state:other` conservatively. |
+| BIR control forms | Direct/indirect labels and call/goto/return/interrupt forms can carry distinctions but do not prove complete target enumeration or callee behavior. Local traversal follows summary edges; unresolved control and opaque effects remain obligations. Supplied finite stateflow needs its own trusted transition relation and terminal outcomes. |
+| Keep only the earlier LLVM MC/Rust path | Preserves its own exercised contract but retains local-rule coverage and alias limits. The later BAP-only semantic decision superseded this option. |
+| Isolated pinned helper | Supports strict machine-readable schema, byte identity, completeness and error boundaries. A diagnostic CLI dump is insufficient. Rust/OCaml FFI would additionally own runtime and ABI compatibility. |
+| Native analysis ownership | Requires fresh graph, state, attribution, replay and report qualification; prior Rust measurements cannot qualify the replacement. The Rust engines remain independent reference/rollback implementations. |
+
+The reviewed interfaces are documented in the [BAP README](https://github.com/BinaryAnalysisPlatform/bap),
+[Memory API](https://binaryanalysisplatform.github.io/bap/api/master/bap/Bap/Std/Memory/index.html),
+[disassembly API](https://binaryanalysisplatform.github.io/bap/api/master/bap/Bap/Std/Disasm/index.html),
+[driver algorithm](https://binaryanalysisplatform.github.io/bap/api/master/bap/Bap/Std/Disasm/Driver/index.html),
+[BIL API](https://binaryanalysisplatform.github.io/bap/api/master/bap/Bap/Std/Bil/index.html),
+[BIR overview](https://binaryanalysisplatform.github.io/bap/api/master/bap/Bap/Std/index.html)
+and [project/pass API](https://binaryanalysisplatform.github.io/bap/api/master/bap/Bap/Std/Project/index.html).
+Public master API pages, including since-2.6.0 annotations, do not establish the
+facilities of the pinned v2.5.0 artifacts. The earlier review recorded v2.5.0's
+LLVM 13/14 compatibility notes and later source LLVM 16/17 fixes; compatibility
+with Ariadne's independent LLVM MC 20.1.2 must be measured rather than inferred.
+The runtime/source locks below bind the actual selected builds.
+
+The [reader contract](file-reader-design.md) remains decisive: a module record
+or matching executable cannot supply missing runtime instruction bytes or finish
+a captured prefix. Changing loaders cannot remove that requirement. The original
+assessment proposed a corpus covering aliases and zero extension,
+defined/undefined flags, loads/stores, direct/indirect control, calls, unreadable
+holes and fault candidates. It required future provenance and cost observations;
+that assessment itself ran no corpus trial. Its adoption recommendation required
+better supported coverage without unsound kills, constrained discovery and
+explicit unsupported outcomes. Later qualification records provide their own
+measured evidence.
+
+## Selected native boundary
+
+Host BAP's OCaml runtime in a separate C++ helper through the packaged typed
+`bap-api` C interface. Rust never links OCaml or uses unsafe FFI. This changes
+the helper's host language, not its semantic provider: all instruction lifts
+come from BAP's x86 legacy lifter. The official v2.5.0 artifacts report
+prerelease fingerprints; `native/bap/toolchain.lock.json` records actual
+versions, source reference, plugin/library/header and archive hashes rather
+than claiming clean stable-tag provenance.
+
+Initialize only `llvm` and `x86` providers, with `--x86-lifter=legacy` passed
+through the actual BAP configuration argv. This avoids unrelated symbolic
+executor plugins. A fresh process owns one snapshot/target and one BAP
+knowledge-base lifetime. Reuse it for bounded batches within that snapshot,
+then terminate it; never reuse semantic caches across snapshots.
+
+## Versioned stream
+
+The native executable supports a version probe and a stream mode. Requests
+are bounded ASCII lines: an initialization header with protocol version,
+target (`windows-amd64` or `linux-amd64`) and SHA-256 snapshot token; then
+`batch ID COUNT` followed by unique canonical full-width VA and captured hex
+prefix rows (1–15 bytes). The helper sees no dump/executable paths and performs
+one basic decode per requested site, without recursive discovery or synthetic
+byte filling. A batch ends with a matching ID/count marker.
+
+Responses are bounded JSON lines containing schema, batch/snapshot identity,
+VA, status, length, exact consumed bytes, opcode and control-property facts,
+and a recursively tagged BIL AST. Expressions preserve variable name, width,
+virtual/architectural distinction, integer width/value, operation, child
+expressions, load/store width and extraction/cast bounds. Statements preserve
+move, branch, jump, exception, special and loop forms. Pretty BIL/assembly may
+be diagnostic evidence; projection consumes only typed fields.
+
+Rust validates identities, counts, duplicate/unknown fields, canonical addresses,
+consumed bytes/length, AST depth/node/width limits, version and helper exit.
+Timeout/transport/version failures invalidate the selected query before output.
+Unavailable capture remains distinct from decoder/lifter failure. Retain
+unsupported constructs and generic unknown values conservatively.
+
+## Projection
+
+Use a bounded abstract bit-provenance interpreter for supported BIL nodes.
+Initial architectural bits refer to canonical GPR byte/flag cells; virtual
+variables hold intermediate values and never become user locations. Constants,
+extract/concat and casts preserve bit identity where justified. Supported
+arithmetic produces new bits with conservatively collected input dependencies.
+Track alternatives for conditional writes; combine possible effects while
+requiring definite replacement on every alternative for `must_defs`.
+
+Preserved original bits are not killed by whole-register IR assignment.
+EAX zero-extension replaces upper RAX cells; partial AL/AH/AX writes preserve
+untouched cells. Loads use `memory:any` plus address dependencies. Stores use
+address/value dependencies, only may-define `memory:any`, and never must-kill
+that alias cell. Unsupported operations, unknown outputs, unfamiliar state
+and unresolved control retain gaps; calls retain opaque all-location effects.
+
+Production admission now uses `bap-bit-provenance-v3`. Supported typed BIL,
+architectural namespace, widths, virtual bindings, prefixes and compatible
+control/operand facts replace generic opcode-name membership. The current
+finite regression corpus has 58 exact cases and 37 projected forms, including
+the four observed parser forms and paired short/long control encodings. These
+are exercised cases, not a new exhaustive permission list or an ISA proof.
+
+LOCK, REP, segment/address-size overrides, unmodeled architectural state and
+control/special/loop semantics remain explicit exclusions. The exact `90` NOP
+is the reviewed empty-BIL exception. Empty CLC remains unsupported despite its
+known hardware effect. Malformed type/width/binding and resource failures abort
+the query; unavailable/control-uncertain semantics stop conservatively.
+
+When validated ordinary control and typed data-only BIL have unknown effects,
+preparation retains the structural next edge, all tracked uses/may-defs, no
+must-defs and `opaque-ordinary` / `unsupported-data-effects` diagnostics. Rust
+and native capture admission validate that outcome; all-format reports retain
+the gaps. No LLVM effect fallback is introduced. The [admission decision matrix](#decision-matrix) and
+[historical-output migration](#historical-output-profile-migration) below freeze
+the failure classes and profile transition. [P4 is accepted on the selected corpus](file-reader-design.md#windows-replacement-capture-and-bounded-query)
+with source-bound root/native/model/mutation checks, exact parity and unchanged
+fixed budgets. Historical real-Linux clauses are excluded; older aggregate
+identities and failed flags are preserved.
+
+LLVM MC remains the decoded control/operand reference. Admission requires
+matching consumed bytes/length and compatible typed control facts. The
+reference boundary constructs no reviewed uses/defs/rules and never calls the
+legacy effect preparer. BAP alone supplies reads and replacements. Decoded
+register operands bind MOV source/destination footprints, including AL/AH/AX
+self-moves whose unchanged value still constitutes a definition. Control or
+operand disagreement stops with opaque effects and no assumed fallthrough.
+Generic unknowns keep conservative dependencies and cannot establish kills. Direct BIL jump
+targets are checked against decoded successors where applicable. An empty
+lift is not presumed a no-op; only a reviewed exact no-effect case can receive
+that interpretation. Undefined architectural flags remain a separately reviewed
+label rather than being inferred from a generic BIL unknown string.
+
+The request validator freezes admitted summaries for the native-default
+analysis helper and the independent Rust reference/rollback engine. Rust owns
+capture preparation and transport/result validation; the native helper owns
+production recovery, dataflow, slicing and supplied finite stateflow.
+Report per-site semantic backend/build, AST identity, projection ruleset,
+quality and disagreements separately from architectural ISA acceptance.
+BAP is now the sole minidump provider by explicit user instruction. The
+semantic selector is removed and `fallback` is always null. Fresh validation
+qualifies each changed source tier. The active workload replacement has its own
+capture and timing contract; default selection does not establish that result.
+
+## Admission order and identity
+
+1. Validate protocol identity, exact consumed bytes/length and typed AST budgets.
+2. Require compatible independent decoded control and applicable prefixes.
+3. Check architectural namespace, scalar/memory types, widths, extraction/cast
+   bounds and virtual binding. Validate all alternatives before evaluation.
+4. Interpret supported BIL capabilities without an opcode membership gate.
+5. Bind instruction-specific obligations: decoded MOV footprints, conditional
+   preservation, reviewed undefined flags and direct/indirect control targets.
+
+The implemented producer profile is `bap-bit-provenance-v3`. Existing report envelopes
+can carry it and the new `opaque-ordinary` semantic status without a schema
+change. Query/semantic identities already bind projection profile and evidence.
+I5a must explicitly admit v3 for its unchanged six scalar MOV forms; it must
+continue rejecting opaque or unsupported semantics. Earlier v2 reports remain
+historical and are never rewritten to obtain v3 acceptance.
+
+Opcode strings are descriptive metadata and may select a reviewed exceptional
+obligation; they are not a generic permission list. The exact `90` NOP exception
+remains byte-bound. Calls and returns retain the separate opaque all-location
+policy rather than deriving callee behavior from their BIL.
+
+## Decision matrix
+
+| Input | Outcome |
+| --- | --- |
+| Valid supported BIL and compatible control/operands | Projected effects; unknown output values retain dependencies, possible writes and explicit gaps. |
+| Valid ordinary control, known architectural namespace and typed data-only BIL with an unsupported scalar operation | `opaque-ordinary`; keep the decoded structural continuation, all tracked uses/may-defs, no must-defs and a data-effect gap. |
+| Empty lift except exact `90` | Stop with an unavailable-semantics gap. |
+| Unmodeled architectural state, RIP assignment, jump/exception/special/loop uncertainty or control disagreement | Stop; no ordinary continuation. |
+| Guarded LOCK/REP/segment/address-size semantics | Stop with a specific prefix gap. |
+| Malformed AST/type/width, unbound virtual read or invalid extraction | Query failure; no incomplete result publication. |
+| Operand or consumed-byte disagreement | Explicit disagreement stop; never opaque ordinary continuation. |
+| AST/path/resource exhaustion | Query failure; an operational failure is not an unknown data-effect result. |
+
+Both the ordinary classification and the absence of unmodeled control must be
+established. LLVM classification alone cannot turn an empty, malformed or
+control-bearing BIL program into fallthrough. A `Special` is not a pure scalar
+operation. Unknown architectural namespaces remain excluded even if their
+printed instruction looks ordinary.
+
+## Effects and independent expectations
+
+The [P0 freeze receipt](../../evidence/Ariadne/bap-admission/p0-contract-freeze.json)
+binds the original projection sources, installed provider and independent
+expectations, frozen before runtime edits on 2026-10-09. The
+[independent contract](../../tests/bap/fixtures/admission/contract.json) and
+[oracle](../../tests/bap/fixtures/admission/oracle.py) retain exact initial
+encodings, byte-cell effects, access footprints and unbounded-integer flag
+equations. The frozen contract covers the four observed forms and boundary encodings:
+SUB64ri8 sign-extended immediate limits, MOVZX32rm8 REX/index/negative displacement,
+distinct/self XOR64rr and CMP8mi byte boundaries. Python arithmetic computes
+result/CF/OF/AF/PF/SF/ZF independently of Ariadne's provenance evaluator.
+Self-XOR's numeric result is zero; a generic unknown AF still retains all
+possible input origins and cannot establish a definite flag kill.
+
+MOVZX memory addresses use the base/index/displacement and `memory:any`; a
+32-bit destination replaces all eight destination bytes by zero extension.
+CMP writes flags, not a GPR. Address-access evidence excludes store payload
+dependencies. Stores never must-kill `memory:any`.
+
+P2 paired real encodings include short/long Jcc/JMP and immediate arithmetic.
+Generated BIL cases cover composition, typed scalar/memory distinctions and
+conditional writes; opcode spoofing is not producer acceptance evidence.
+
+## Core, native and report compatibility
+
+The existing `Ariadne.tla` and effects contracts already admit an ordinary
+summary with all uses/may-defs and empty must-defs. No new core action or transfer
+rule is introduced. The producer must supply the structural next edge and retain
+its preparation/semantic gap. Active model replay therefore remains required,
+while an instruction-step ISA/Lean model is not revived.
+
+Native capture admission must bind `opaque-ordinary` to the v3 profile, captured
+bytes, ordinary normalized control, all-location possible effects and empty
+definite writes. Rust report binding must reject mutated classifications or
+effects. Text/JSON/DOT retain the semantic status and data-effect gap. Consumers
+and explanations remain partial where an opaque predecessor is relevant.
+
+A producer–opaque–consumer regression must retain both the earlier producer and
+the opaque alternative. Native/reference comparison uses the same immutable
+request and an available source-bound native helper. Failed builds/timeouts do
+not count as mutation sensitivity or native parity.
+
+
+## Historical-output profile migration
+
+The existing pre-I5a byte oracle remains unchanged. A separate comparison first
+builds the frozen pre-change sources in an isolated target directory and requires
+all 24 historical output hashes to match that oracle. The v3 outputs then differ
+only by the explicit projection-profile labels, the resulting semantic-profile
+binding and content-addressed scope/evidence/fact/claim identifiers. All captured
+bytes, operands, control, effects, graph/state/slice fields, address uses, claims,
+premises and gaps must otherwise match. Native/reference comparisons remain
+byte-exact after removing only validated native backend receipts.
+
+The comparison record advances to `ariadne.i5a-cli-equivalence/v3` and reports
+`legacyReportsUnchanged` separately from `projectionMigrationVerified`. It does
+not relabel changed v3 bytes as the historical v2 outputs. Unsupported ordinary
+continuation is tested on its new owned corpus, not normalized away in this
+legacy comparison. Mutated effects, claims, capture/tool hashes or unresolved
+references must fail the migration comparison.
 
 ## Ownership and implementation selection
 
@@ -59,7 +343,7 @@ passes must implement the actual transitions. Rust's existing `Analyzer` and
 Neither an observer nor a transport adapter may call the Rust solver to construct
 the purported BAP state.
 
-The first implementation target is an isolated OCaml executable linked against
+Native analysis runs in an isolated OCaml executable linked against
 a pinned BAP SDK and run as one process per snapshot/query/family. Its `Project`
 is constructed from an empty target plus explicitly admitted instruction terms;
 default image loading, recursive discovery and speculative scans are forbidden.
@@ -71,7 +355,7 @@ It is not a sufficient SDK for this design's custom OCaml passes.
 Do not load a plugin built by either installed OCaml compiler into the packaged
 runtime without verified compiler/library compatibility. The isolated pinned SDK/executable now freezes source/compiler/library
 identities and exercises startup, real Init/Visit state changes and process
-cleanup. The [qualification record](bap-ocaml-qualification.md) separately decides
+cleanup. The [qualification record](#ocaml-foundation-qualification) separately decides
 whether every required A0 gate passed before complete A1 recovery.
 No user opam switch is modified by A0. The native capability probe is explicitly
 not a production analysis helper or an OCaml-pass qualification.
@@ -123,7 +407,7 @@ holes/conflicts remain failed premises, never zero-filled or repaired from a PE.
 
 ## Versioned interface and lifecycle
 
-The proposed stream is UTF-8 JSON Lines, schema `ariadne.bap-core/v1`, one request
+The implemented stream is UTF-8 JSON Lines, schema `ariadne.bap-core/v1`, one request
 and exactly one response at a time. Reject duplicate JSON keys, unknown fields,
 nonfinite numbers, noncanonical identities and frames over 8 MiB before admission.
 The implementation must also enforce per-request node/edge/location/state/term
@@ -282,3 +566,593 @@ The SDK uses OCaml 4.12.1 and the full BAP revision in
 [`sdk.lock.json`](../../native/bap-core/sdk.lock.json), with a frozen opam export.
 The source revision matches the selected Stage 1 source archive; binary/plugin
 ABI equivalence to the packaged runtime is not claimed.
+
+## Evidence boundaries
+
+Source/API assessment, implementation checks and runtime qualification answer
+separate questions. The sections below preserve their dated decisions and
+original JSON/archive links; moving documentation does not refresh a source
+inventory. The [initial integration record](../../evidence/Ariadne/bap-stage1-validation.json)
+retains its missing original Windows capture. Later selected Windows P4 acceptance
+excludes the remaining real-Linux clauses without changing their failed flags.
+Default selection, unlimited timing and transport completion do not resolve
+semantic/provenance gaps or qualify separate investigation budgets.
+
+The earlier [finite-model delivery](typed-replay-design.md#finite-corpus-and-claim-boundary) recorded 32 cases,
+64 complete traces, 326 observations and 15 mutant mismatches for its pinned
+Rust models/adapters. Those records do not qualify a changed producer/native
+solver. The [historical instruction-step ledger](../../Specs/AMD64/user64-coverage.json)
+recorded an unclosed 0/49 gate with decoded-form, flags/frame, fault/commit,
+instruction-boundary, TLA–Lean and projection obligations. The
+[assurance decision](semantic-assurance.md) retired that ISA/Lean track;
+analysis-level TLA+ replay and mutation checks remain active.
+
+## Backend usage
+
+`ariadne::bap` is the sole production minidump semantic adapter. Core-only Rust
+builds activate no external dependencies and the library forbids unsafe code.
+Follow the [lifter setup](../../native/bap/README.md) and
+[isolated analysis SDK guide](../../native/bap-core/README.md); build the independent
+MC reference with matching LLVM headers. The normal Linux-hosted setup is:
+
+```sh
+python3 native/bap/setup.py
+bash native/bap/build.sh
+bash native/llvm_mc/build.sh
+python3 native/bap-core/setup-sdk.py
+python3 native/bap-core/build.py --output target/bap-core-native
+cargo build --offline --locked --release --manifest-path Cargo.toml
+target/release/ariadne-minidump tests/input/fixtures/stage_b_linux.dmp \
+  --decoder-reference target/ariadne-llvm-mc --entry 0x401000 --seed-exception-rip \
+  --bap-helper target/ariadne-bap-lift --bap-runtime tmp/bap-setup/stable \
+  --output-dir tmp/bap-example
+```
+
+| Setting | Meaning and precedence |
+| --- | --- |
+| `--bap-helper`, `--bap-runtime` | Override `ARIADNE_BAP_HELPER` and `BAP_RUNTIME_ROOT`, then repository build/extraction defaults. |
+| `--analysis-backend bap` | Native default; `--bap-core-dir` overrides `ARIADNE_BAP_CORE_DIR`, otherwise `target/bap-core-native`. |
+| `--analysis-backend rust` | Independent reference/rollback analysis using the same BAP semantics. Failure never selects it automatically. |
+| `--decoder-reference` / `--decoder` | Independent LLVM decoded-fact checker; the latter remains an argument alias. Neither selects instruction semantics. |
+| `--semantics-backend llvm\|bap` | Removed; rejected with an explicit diagnostic. The compatibility report field `fallback` is always null. |
+
+Native base reports include a validated backend/build receipt; explanation-only
+and assessment-only modes retain their schemas. Every attempted lift records
+provider/helper/runtime/AST identities, projection, quality and gaps in text,
+JSON and DOT. `external_lift` means exercised external semantics, not ISA-step
+acceptance. Calls/returns remain opaque; ordinary data-only gaps and control
+stops follow the decision matrix above.
+
+`Backend::prepare` consumes captured batches. One backend belongs to one
+snapshot/target and reuses one checked LLVM reference process; standalone LLVM
+preparation remains one-shot. Runtime validation uses bounded streaming workers
+to hash every pinned compiled file at construction and helper startup.
+`Backend::finish` must require clean lifter and decoder exits before publication;
+drop kills and reaps an abandoned process. A new backend creates a new knowledge
+base. `Metrics` separates runtime validation, reference decoding, startup,
+lift/transport validation and projection; benchmarks additionally time shutdown,
+analysis and all report formats.
+
+## Pinned projection source review
+
+This is the historical source review and diagnostic evidence that motivated the
+implemented walker. It is separate from finite corpus qualification. The selected
+BAP source is `baa9022` (full SDK revision below); the installed library reports
+`2.5.0-alpha` and CLI `2.5.0-alpha+baa9022`. The
+[release header](https://github.com/BinaryAnalysisPlatform/bap/releases/tag/v2.5.0)
+was extracted to `tmp/bap-setup/stable/usr/local/include/bap.h`.
+The pinned [x86 option](https://github.com/BinaryAnalysisPlatform/bap/blob/baa9022/plugins/x86/x86_main.ml)
+defaults to `merge`; production explicitly selects `legacy`.
+The [modern target fallback](https://github.com/BinaryAnalysisPlatform/bap/blob/baa9022/plugins/x86/x86_targets.ml)
+and [dispatcher](https://github.com/BinaryAnalysisPlatform/bap/blob/baa9022/plugins/x86/x86_backend.ml),
+and legacy `No_semantics` in
+[x86_lifter.ml](https://github.com/BinaryAnalysisPlatform/bap/blob/baa9022/plugins/x86/x86_lifter.ml),
+can return `Ok []`. A successful decode with empty BIL therefore proves neither
+no effect nor ordinary continuation. The modern
+[MOV plugin](https://github.com/BinaryAnalysisPlatform/bap/blob/baa9022/plugins/x86/x86_mov.ml)
+and [x86-64 Lisp file](https://github.com/BinaryAnalysisPlatform/bap/blob/baa9022/plugins/x86/semantics/x86-64.lisp)
+do not establish general instruction coverage.
+
+Both mode probes used `bap_init2`, explicit `--x86-lifter`, only `llvm`/`x86`,
+and `bap_disasm_basic_next` at `0x401000`:
+
+| Diagnostic | Exact observations |
+| --- | --- |
+| Modern nonempty | `4889d8` MOV64rr, `88d8` MOV8rr AL, `88dc` MOV8rr AH, `b878563412` MOV32ri, `488b448b08` MOV64rm, `488903` MOV64mr. |
+| Modern empty | `480fbec0` MOVSX, `0fb6c0` MOVZX, `4801d8` ADD, `4839d8` CMP, `4811d8` ADC, `480f45c3` CMOV, `488d4308` LEA, `50` PUSH, `58` POP, `7502` Jcc, `e800000000` direct CALL, `ffd0` indirect CALL, `c3` RET, `f00118` LOCK ADD, `f3a4` REP MOVSB. |
+| Explicit legacy | Every preceding modern-negative form produced nonempty BIL; so did `48d1e0` SHL RAX,1, `48d3e8` SHR RAX,CL and `48f7d0` NOT RAX. Broader sample coverage did not prove correctness or authorize guarded forms. |
+
+The pinned [AST](https://github.com/BinaryAnalysisPlatform/bap/blob/baa9022/lib/bap_types/bap_bil.ml)
+defines `Load(mem,idx,endian,size)`, `Store(mem,idx,value,endian,size)`,
+`Let(var,definition,body)`, `Ite(condition,then,else)`, statement `If` and `While`.
+Constructed-node probes against the matching header/library established:
+
+| Tag | Observed C getters | Required traversal |
+| --- | --- | --- |
+| `LET` | `var` binder, `rhs` definition, `exp` body; `lhs` null | Bind scope; visit definition and body. |
+| `ITE` | `exp` condition, `lhs` then, `rhs` else | Read condition; join alternatives. |
+| `BINOP`, `CONCAT` | `lhs`, `rhs` | Visit both operands. |
+| `UNOP`, `CAST`, `EXTRACT` | `exp` operand | Preserve justified bit ranges. |
+| `STORE` | `mem`, `addr`, `rhs` payload; `exp` null | Visit address/data; preserve earlier memory origins. |
+| Statement `IF` | `exp`, `true_stmts`, `false_stmts`; `stmts` null | Traverse both branches; `stmts` belongs to `WHILE`. |
+| Statement `JMP` | `jmp` target; `exp` null | Read indirect target and retain control. |
+
+Lifted CMOV/Jcc/SHL/CALL/RET/REP nodes confirmed `ITE`/`IF`/`JMP`/`WHILE`
+accessors. Using `bap_exp_lhs` for `LET` or `bap_stmt_stmts` for `IF` loses
+inputs. These are facts about this pinned binary, not every BAP release.
+
+**EXTRACT uses swapped numeric getter positions in this packaged C ABI.**
+The AST is `Extract(hi,lo,exp)` and the
+[printer](https://github.com/BinaryAnalysisPlatform/bap/blob/baa9022/lib/bap_types/bap_exp.ml)
+prints `hi:lo[exp]`. Lifted `88dc` prints `63:16[RAX]` but returns
+`hibit=16,lobit=63`; its `7:0[RAX]` child returns `hibit=0,lobit=7`.
+Constructing `bap_exp_create_extract(8,15,var)` prints `15:8[var]` and reports
+`hibit=8,lobit=15`; arguments `(15,8,var)` print invalid `8:15[var]`.
+Use `actual_hi = bap_exp_extract_lobit(e)` and
+`actual_lo = bap_exp_extract_hibit(e)`, then enforce
+`0 <= actual_lo <= actual_hi < operand_width`. This is not endianness. Reject
+invalid ranges or changed binding identity; never repair with `min/max`.
+These ranges were observed by the historical diagnostic probes. The source
+review recommended dedicated fixtures for both lifted ranges and the
+constructed range; that recommendation alone does not establish regression
+coverage of constructed nodes.
+
+Alias rules in modern
+[x86_tools_reg.ml](https://github.com/BinaryAnalysisPlatform/bap/blob/baa9022/plugins/x86/x86_tools_reg.ml)
+and legacy `assn_s` preserve untouched AL/AH/AX bytes and zero-extend EAX.
+Independent original expectations were:
+
+| Bytes | Expected effects |
+| --- | --- |
+| `4889d8` | Read all RBX bytes; replace all RAX bytes. |
+| `88d8`, `88dc` | Read BL; replace RAX byte 0 or byte 1 respectively. |
+| `b878563412` | Replace all RAX bytes, zeroing the upper four. |
+| `488b448b08` | Read RBX/RCX address bytes and `memory:any`; replace all RAX bytes. |
+| `488903` | Read RBX address/RAX payload; may-write memory with no memory must-kill. |
+
+Unsigned and signed casts respectively zero-extend or depend on the sign bit.
+Modern [memory construction](https://github.com/BinaryAnalysisPlatform/bap/blob/baa9022/plugins/x86/x86_tools_mem.ml)
+uses base, scaled index, displacement and applicable FS/GS base; the legacy
+admitted address forms require independent review. Generic `Unknown`/`Special`
+do not prove no effect. [Flag construction](https://github.com/BinaryAnalysisPlatform/bap/blob/baa9022/plugins/x86/x86_tools_flags.ml)
+and [bit-test semantics](https://github.com/BinaryAnalysisPlatform/bap/blob/baa9022/plugins/x86/x86_btx.ml)
+show why a flag assignment alone does not establish a defined value.
+
+Legacy observations retain these precise limits: MOVSX sampled
+`RAX := extend:64[low:8[RAX]]`; MOVZX nested zero padding; ADD/CMP wrote
+CF/OF/AF/PF/SF/ZF; ADC read CF, while INC/DEC preserve CF. LEA used no memory;
+NOT wrote no flags. CMOVNE's `Ite(~ZF,RBX,RAX)` reads ZF and permits a write
+without unconditional origin removal. Variable-count SHR reads RCX, preserves
+flags at count zero and emits `Unknown[after-shift]` for AF and sometimes OF;
+undefined-flag labels require reviewed forms. PUSH/POP use RSP/memory; Jcc is
+an `If` containing `Jmp`; CALL pushes a return address but supplies no callee
+summary; RET reads the stack target. LOCK ADD printed ordinary ADD BIL and REP
+MOVSB contained `While`, so neither can bypass prefix/control guards.
+`0f05` SYSCALL produced `Special call(syscall)`; `0fa2` CPUID wrote unknown
+GPR values; `0f0b` UD2/TRAP had empty BIL. No concrete CPUID value or TRAP
+fallthrough follows. These diagnostics supported later fixtures; current
+admission still follows the explicit failure matrix.
+
+## Reproduction
+
+Native tests are ignored until the pinned lifter/reference/SDK are available;
+qualification invokes them and treats missing prerequisites as failures. Existing
+Graphviz, TLC, MirrorRust and required captured artifacts must match their pins.
+The Linux qualification runner configures a local Graphviz bundle when present;
+otherwise supply `ARIADNE_DOT` and its required library/plugin environment.
+A Windows workload means a Windows-origin dump, not a Windows-hosted Ariadne run.
+
+```sh
+python3 native/bap-core/setup-sdk.py --check
+python3 native/bap-core/build.py --output target/bap-core-native
+cargo test --offline --locked --release --manifest-path Cargo.toml -- --include-ignored
+python3 tools/check_bap_semantics.py
+python3 tools/measure_bap.py --output /new/workload-directory
+python3 tools/check_bap_core.py --output target/bap-stage2-recheck
+```
+
+The core checker builds a second clean helper, runs root/Clippy/native kernels,
+capture/stateflow tests, replay, mutations and producer/Stage E regressions.
+A native decision requires `passed`, `stage2Qualified`, `defaultNativeVerified`
+and `sourcesStable` all true, plus a verified manifest binding its report.
+Use new output directories and separate replay/mutation build trees. Source,
+tool or dependency changes require fresh applicable checks; a matching binary
+name does not suffice. Run aggregate and evidence verification under the recorded
+[snapshot wrapper](../../tools/with_mirrorrust_snapshot.py):
+
+```sh
+python3 tools/with_mirrorrust_snapshot.py run \
+  --snapshot target/i5b-dependency-snapshot \
+  --sha256 a087ecfb136795d30f6c3861d9e4003f0ed9f457db2b17561f0417551bf97854 -- \
+  python3 tools/check_bap_admission.py --output target/bap-admission-new-run
+```
+
+The native archive retains exact dependency bytes in
+`dependencies/mirrorrust-snapshot.json`; the live sibling checkout is separate.
+For a matching copy of the controlled checksum pin or an explicitly reduced run:
+
+```sh
+ARIADNE_BAP_WINDOWS_DUMP=/absolute/path/to/replacement.dmp \
+  python3 tools/check_bap_semantics.py
+python3 tools/measure_bap.py --windows-dump /absolute/path/to/replacement.dmp \
+  --output /new/explicit-workload-directory
+python3 tools/measure_bap.py --skip-windows --output /new/implementation-directory
+python3 tools/check_bap_semantics.py --workload-record /new/workload-directory/report.json
+```
+
+The default benchmark verifies and materializes the
+[checksum input bundle](../../evidence/Ariadne/bap-windows-workload-case.json).
+`ARIADNE_PRIORITY4_DUMP` no longer selects it; I4 has its own
+`ARIADNE_I4_WINDOWS_DUMP` override. Skipped or malformed workload evidence cannot
+satisfy full acceptance. Active P4's separately selected 29-start replacement
+and excluded Linux clauses remain defined by its plan and acceptance decision.
+
+## BAP-only delivery
+
+The [2026-10-01 removal record](../../evidence/Ariadne/bap-only-removal-validation.json)
+and [manifest](../../evidence/Ariadne/bap-only-removal-evidence-manifest.json)
+retain 16/16 gates, 93 stable sources, 16 detected producer/adapter mutants
+(including partial self-move definitions), and eight TLC cases/99 observations
+comparing all nine fields. Its nested Stage E run passed 12 gates over 251
+sources/artifacts. That release used Rust analysis and the v2 corpus of 41 exact
+cases/30 admitted forms, including immediate stores, dword loads/stores and TEST.
+Both Stage B inputs and NOT retained their producer slices. The real Linux query
+had 34 starts, 45 edges, a 28-site slice and one obligation: 25 projected sites,
+nine opaque calls/returns, one control disagreement and nine unattempted
+references. [CLI samples](../../evidence/Ariadne/bap-only-cli.csv) and
+[phase samples](../../evidence/Ariadne/bap-only-stage.csv) retain one warm-up,
+five release repeats, spread, RSS and startup/reference/lift/projection/analysis/
+render timings. These checks did not qualify the absent original Windows pin or
+its former 2,000 ms condition. BAP default selection was separately authorized.
+
+## Workload evidence repair
+
+The 2026-10-03 R0–R2 repair fixed `measure_bap.py` reusing `before` for both the
+source inventory and seed-definition list, which falsely marked stable Windows
+runs unstable and serialized the wrong `sourceHashes` type. Separate
+`source_hashes_before` and `seed_definitions` preserve both values.
+Workload v2 retained raw warm-up/measured samples, one captured preparation per
+decoded site and the independent address producer. The shared validator checked
+artifact/query, target/release/provider, output hashes, counts, samples and
+recomputed medians, rejecting old/malformed/nonfinite/negative evidence.
+Aggregate v3 independently derived the result rather than trusting stored flags;
+reuse required complete current source/tool inventories. Under its historical
+inclusive 2,000 ms policy, absent/invalid/over-budget evidence could never satisfy
+full exit even when implementation gates passed.
+
+The [repair record](../../evidence/Ariadne/bap-windows-workload-validation.json)
+and [238-entry manifest](../../evidence/Ariadne/bap-windows-workload-evidence-manifest.json)
+retain 17/17 implementation gates and 177 stable sources:
+
+| Tier | Historical exercised result |
+| --- | --- |
+| Controlled Python | 39 checks: 15 real producer-entry, 14 validator and 10 aggregate-entry tests, with native subprocess/evidence stubs. |
+| Native | 41 byte cases/30 forms, helper/projection/transport/CLI/rendering checks. |
+| Fresh model / mutations | Eight cases/99 nine-field states with 162 sources; all 16 intended mutations with 159 sources and unchanged observers. |
+| Fresh workloads | Stage B Linux/Windows, NOT and real Linux; one warm-up/five repeats, phase samples, 167 sources and six tools. Medians 1,027.67 / 1,072.66 / 1,027.82 / 1,830.96 ms. |
+| Reused Stage E | Twelve gates, all 315 source identities and native IR/MC/Graphviz hashes verified; not freshly run here. |
+| Supplemental Windows | Controlled partial/full captures: two starts, one-site slice; phase medians 1,932.24 / 1,925.79 ms. These are separate from the original pin and I5a numeric phase. |
+
+A missing Graphviz environment failed the initial aggregate; the harness adopted
+Stage E's local-bundle configuration. After repair, native/controlled gates reran
+and independently stable model/mutation/workload results were reused by identity.
+The initial failure and source changes remain diagnostic evidence; raw customer
+dumps/executables were excluded. The final original-corpus flags remain
+`implementationGatesPassed=true`, `stage1ExitPassed=false`,
+`stage2PrerequisiteSatisfied=false`, `defaultPromotionEligible=false`, Windows
+status `unavailable`.
+The [original pin](../../evidence/Ariadne/priority-4-real-capture-case.json) was
+`f13d18cd-9ade-4eff-947c-15a649b636fa.dmp`, 2,028,400 bytes, SHA-256
+`4b3deb70134015ec227b3cf5edf82e1dac0b308b3f19ae62f79cbd4251109e86`;
+entry/seed/producer `0x7ff6451d52d0` / `0x7ff6451d530f` / `0x7ff6451d530b`.
+The user confirmed its loss and authorized the replacement below.
+
+## Windows workload replacement
+
+The controlled `crashpad-windows-checksum-98-v1` is a real Windows AMD64 Crashpad
+capture analyzed on Linux, not a manually edited dump or reconstruction of the
+old crash. Its [recipe](../../native/crashpad-demo/README.md) and
+[replacement plan](../../Plans/bap-windows-repin.md) freeze 98 starts: setup,
+eight checksum rounds, indexed loop, conditional diamond, spill/reload and RCX
+producer before a four-byte null write. All rounds feed the address computation.
+
+| Bound item | Value |
+| --- | --- |
+| [Active checksum pin](../../evidence/Ariadne/bap-windows-workload-case.json) | [Input archive](../../evidence/Ariadne/bap-windows-workload-inputs.tar.gz): 399,636 bytes, 23 verified entries. |
+| Partial dump | 217,936 bytes; SHA-256 `1bd80af7a739471a7026776bfb37cbbe5953d01ad122e7cf7db0392f84da0b0a`. |
+| Entry / fault seed / RCX producer | `0x00007ff7382f4840` / `0x00007ff7382f49b4` / `0x00007ff7382f49b1`. |
+| Function / handler | 379 bytes, 98 reviewed starts; Crashpad revision `7a884c25c84c46352fc6f16ef0a798ece2b77e84`. |
+
+Pinned Clang/`llvm-ml`, Windows SDK/MSVC libraries and an isolated compatibility
+setup built the process; uploads were disabled and the environment minimal.
+Missing-handler/mode/profile controls exited before witness creation; the default
+null-write profile also passed its independent inspector. The inspector checks
+all captured function bytes against both the PE and byte oracle, branch targets,
+four labels, input/checksum, PID/module and exception/context: a four-byte write
+to zero with RAX/RCX zero. The PE supplies comparison only, never fallback bytes.
+
+The [replacement record](../../evidence/Ariadne/bap-windows-repin-validation.json)
+and [manifest](../../evidence/Ariadne/bap-windows-repin-evidence-manifest.json)
+retain 17/17 implementation gates, 178 stable aggregate sources, 59 decision
+controls, nine inspector controls, native integration and five fresh release
+workloads. Result: 98 starts/99 edges/90-site slice/zero obligations, no missing
+seed and all eight RCX origins at the independent producer. Model (162 sources),
+16-mutant (159 sources) and 12-gate Stage E (315 sources) results were reused by
+full source/applicable tool checks; the workload bound 168 sources/six tools.
+The archive verifies 199 entries and the delivery's 192-source inventory.
+
+Its then-active workload v3/aggregate v4 required median ≤2,000 ms. One warm-up
+and five repeats measured 10,667.76 ms (10,408.02–10,821.89), so
+`implementationGatesPassed=true` and `valid=true` coexisted with
+`targetMet=false`, `stage1ExitPassed=false`, `stage2PrerequisiteSatisfied=false`.
+Separate phase medians were reference 7,572.13 ms, startup 1,178.30 ms, Rust
+analysis 69.61 ms and reports 397.33 ms; they are not an additive CLI decomposition.
+Monotonic `perf_counter_ns` determined eligibility. Ancillary GNU `time` differed
+by about 0.70/0.73 s on two samples; both readings still failed the budget.
+The later policy changed acceptance, not these historical measurements.
+Historical Priority 4 remained unchanged; I4 separately repinned this capture
+and retained its own fixed budget.
+
+## Unlimited timing policy
+
+The user-authorized 2026-10-03 policy remains active for BAP workload qualification.
+Workload `ariadne.bap-workloads/v4` requires
+`windowsWorkloadTimingPolicy: unlimited` and `windowsWorkloadBudgetMs: null`;
+aggregate `ariadne.bap-only-removal/v5` applies the same rule. Missing fields,
+a numeric budget or infinity are rejected. Release measurements still need one
+warm-up, at least five finite nonnegative raw samples and a matching recomputed
+summary. Valid evidence reports status `unlimited`, `valid=true`, `targetMet=true`
+while retaining its median. Invalid evidence or implementation failure still
+blocks full exit; operational timeouts/resource limits remain separate.
+
+The [policy record](../../evidence/Ariadne/bap-unlimited-validation.json) and
+[manifest](../../evidence/Ariadne/bap-unlimited-evidence-manifest.json) retain
+17 gates, 60 controls and 178 stable sources. Native integration/five workloads
+reran; model/mutation/Stage E records were reused only after complete source/tool
+checks. The new median was 3,111.33 ms with unchanged analysis binaries: no
+optimization was claimed. Its `stage1ExitPassed=true`,
+`stage2PrerequisiteSatisfied=true`, `stage2Started=false` are historical scopes.
+The frozen dump/query/bundle remained unchanged. I4's 2,000 ms CLI ceiling and
+I5a's 1,500 ms CLI/10 ms phase limits are separate and were not waived.
+
+## A0 capability evidence
+
+The first 2026-10-03 [A0 record](../../evidence/Ariadne/bap-stage2-a0-validation.json)
+and [manifest](../../evidence/Ariadne/bap-stage2-a0-evidence-manifest.json) bind
+15 contract/probe files and compiler/helper/header/library identities. At that
+run the prerequisite's 178-source/tool inventory matched. Seven admission tests
+covered envelopes/actions, identity/sequence, unsigned canonical addresses,
+duplicate JSON keys, frame/nonfinite/overflow bounds, same-VA terms and invalid
+synthetic/cyclic ancestry. They did not implement an analyzer.
+Two fresh C++ probe processes observed identical high-VA `0xfffffffffffffff0`
+round-trips, persistent TIDs, multiple terms for one VA, graph versions with
+0/1/2 nodes, read-only observations, and an empty fresh graph. Two parallel labels
+collapsed to one edge, requiring Ariadne's separate typed relation.
+The exact C header lacked `bap_project_empty`, custom-input construction and a
+sub-builder result accessor; extraction had zero `.cmi`/`.cmxa` SDK files.
+`passed=true` covered these checks only: `a0ExitPassed=false`,
+`stage2Started=true`, `stage2Qualified=false`, `implementedAlgorithms=[]`.
+No nonexistent solver received replay/mutation credit.
+
+## OCaml foundation qualification
+
+The separate SDK uses OCaml 4.12.1 and BAP
+`baa902209ee4be975bdd8db7d1160b0a0ec2831f`, with metadata/export pins distinct
+from its installed inventory. It does not load plugins into or claim ABI
+compatibility with the packaged lifter. Historical OQ0–OQ6 implemented validated
+immutable recovery input, nine-field Init, unsigned-lowest Visit and real BAP
+term attribution; the handshake exposed only `initialize`, `advance:Visit`,
+`observe`, `reset`. Reset required a clean exit. There was no completion or
+production-native selection at this foundation stage.
+
+The [qualified foundation](../../evidence/Ariadne/bap-ocaml-qualification.json)
+and [327-entry manifest](../../evidence/Ariadne/bap-ocaml-evidence-manifest.json)
+bind 199 stable sources, two equal helper builds/observations and seven actual
+code mutations rejected by intended assertions. Six native test groups cover
+ordinary/conditional/call/jump/self-loop/indirect/terminal input, missing/decode
+failure, high addresses, captured/file provenance, non-root seeds, attribution,
+rejected actions, fresh/concurrent sessions and process/identity/sequence faults.
+Rust reference comparisons occur only in external tests. Refresh with
+`python3 tools/check_bap_ocaml.py`; ignored native tests require `--ignored`.
+Separate `sdkQualified`, `helperBuildQualified`, `nativeStateExchangeQualified`,
+`transportLifecycleQualified`, `bootstrapMutationChecksPassed` and stability
+compose `a0ExitPassed=true`; `stage2Qualified=false` remained correct.
+
+The [earlier formatting-blocked record](../../evidence/Ariadne/bap-ocaml-history/2026-10-03-format-blocked/bap-ocaml-qualification.json)
+is preserved. After explicit user approval, only MirrorRust's
+`tests/protocol.rs` was formatted with Rust 2021; fresh root/effects/minidump/
+Stage E/producer/A0 checks then passed. The failed aggregate was not relabeled.
+
+## Native qualification
+
+Native A1–A6 qualification covers reader-scoped recovery/capture attribution,
+origin/slice passes, finite stateflow/terminal classification, 12 recovery traces
+with 168 observations and 32 stateflow traces with 162 observations. Wrong
+query digests dispatch zero observations. Twelve native algorithm mutants must
+produce real observation mismatches; boundary mutations are a separate tier.
+Five historical workloads were Linux/Windows/NOT fixtures, 34-start Linux and
+98-start Windows; each backend received one warm-up/five release measurements.
+Text/JSON/DOT match after validating and removing only the native receipt.
+Default output matches explicit BAP, while explicit Rust remains functional.
+
+| Retained record | Scope |
+| --- | --- |
+| [2026-10-04 adoption](../../evidence/Ariadne/bap-core-history/2026-10-04-adoption/bap-core-qualification.json) | Explicit-native candidate first passed 19 gates; adoption and its archive/manifest remain byte-identical in history. |
+| [Pre-I4 refresh](../../evidence/Ariadne/bap-core-history/2026-10-05-before-i4-repin/bap-core-qualification.json) | Original archive/manifest preserved before the I4 pin refresh. |
+| [2026-10-05 standalone](../../evidence/Ariadne/bap-core-qualification.json), [archive](../../evidence/Ariadne/bap-core-evidence.tar.gz), [manifest](../../evidence/Ariadne/bap-core-evidence-manifest.json) | Twenty gates, 632 stable sources, 1,355 verified entries; 13 protocol/snapshot controls, two equal clean builds, native/capture/investigation/stateflow/root/Clippy and producer/Stage E regressions. Its inventory is historical. |
+| [2026-10-07 I4 aggregate](../../evidence/Ariadne/i4-performance-qualification.json) | Newer 20-gate/712-source native refresh at `records.regressions.records.native-core-stage-e-input-bap-regressions`; its `records.stage1-regression` is the separate producer refresh. |
+
+`artifacts/0/default-path-smoke-check.json` binds a successful no-backend-flag,
+no-helper-directory-override invocation to the same final release executable
+and both clean helper manifests. Product comparisons cover all five workloads
+and three report formats. Nested producer timings explicitly select Rust and do
+not establish native acceptance. Historical 2026-10-05 Rust/native medians (ms)
+were Linux fixture 895.39/964.30, Windows fixture 921.57/957.16, NOT 900.27/964.70,
+real Linux 1,566.21/2,248.97 and Windows 2,967.88/5,020.08. They establish no
+current performance comparison; later preparation/transport changes have their
+own evidence. This is Linux-hosted workspace qualification including Windows
+captures, not packaged cross-platform release or universal refinement.
+See the [evidence guide](../../evidence/Ariadne/README.md) for archive interpretation.
+
+## Documentation audit
+
+The [2026-10-09 audit receipt](../../evidence/Ariadne/bap-documentation-audit.json)
+is a retained identity/documentation check, not fresh runtime qualification.
+It inventoried 111 BAP-related Markdown files; navigation then covered 133
+connected documents/2,360 links. The 41-case corpus and 107-file Rust layout
+checks passed. At that pre-v3 snapshot, projection used a finite whitelist and
+unsupported data stopped recovery; SUB64ri8/MOVZX32rm8/XOR64rr/CMP8mi were not
+admitted. Current v3's 58 cases/37 forms and opaque ordinary continuation come
+from the later campaign, not this audit.
+
+The audit found matching nested native/producer/I5b/I5a records at the paths
+above: respectively 20 gates/712 sources, 17/255, 18/295 and 14/286. Producer
+`stage2Qualified=false` limits that campaign and does not override native adoption.
+Twelve installed tool hashes and compiled provider pins matched; dependency
+manifest was `a087ecfb136795d30f6c3861d9e4003f0ed9f457db2b17561f0417551bf97854`.
+The [I4 archive](../../evidence/Ariadne/i4-performance-evidence.tar.gz) and
+[manifest](../../evidence/Ariadne/i4-performance-evidence-manifest.json) verified
+all 3,625 members including exact compressed nested archives. Older standalone
+inventories remained historical despite matching helper binaries.
+
+Corrected guides named explicit legacy selection, the real `ocamlfind ocamlopt`
+build instead of proposed Dune files, complete ABI 2 beyond Init/Visit, explicit
+Rust selection in library examples and reused production LLVM sessions versus
+one-shot standalone decoding. The then-current I4 result was 1,692.696 ms against
+2,000 ms and Linux phase 182.924 ms against 250 ms; separate I5a budgets remained.
+The audit changed no runtime/model/fixture/qualification-record bytes. Its checks
+(`python3 tools/check_doc_links.py`, `git diff --check`,
+`python3 tests/bap/fixtures/make_corpus.py --check`,
+`python3 tools/check_rust_layout.py`) supplied documentation/corpus/layout evidence
+only. Later source/profile changes need their own exact identity checks and
+applicable qualification; this consolidated guide is not a frozen source record.
+
+## Admission checkpoint
+
+The [initial 2026-10-10 checkpoint](../../evidence/Ariadne/bap-admission/checkpoint.json)
+retains P0–P3 delivery and **unaccepted P4**. The installed runtime/bridge and
+isolated SDK were reused without rebuilding BAP or installing another SDK.
+The four new forms had 13 boundary encodings on Linux/Windows, 104 independent
+numeric/flag/zero-extension comparisons and 58 exact cases/37 projected forms.
+CLC remained an empty-lift gap; repeated CMP BIL loads kept separate attribution
+while matching one decoded byte-operand footprint. Opaque producer–consumer
+checks retained both earlier and opaque origins and partial text/JSON/DOT gaps;
+direct native tampering bypassed Rust prevalidation.
+
+| Initial tier | Exercised result |
+| --- | --- |
+| Contract / admission | Frozen P0, four retained rejected queries, composition/hostile namespace/type/control/prefix/resource checks, eight producer tests and expanded protocol/disagreement controls. |
+| Native / model | Five ignored capture/parity/report/tampering tests and stateflow CLI; 330 replay observations with zero wrong-digest dispatches; 12 algorithm and eight boundary mutants; eight model cases/99 nine-field states. |
+| Root / decisions | Default/core-only/fmt/Clippy/layout checks (109 Rust files), 60 controlled producer/validator/aggregate tests. |
+| Migration / workloads | Earlier focused comparison reproduced 24 v2 hashes and declared profile/ID changes; 98-start/99-edge/90-slice/zero-obligation Windows Rust median 657.39 ms under unlimited timing. This did not qualify native I4 budgets. |
+| Acceptance | Complete admission mutation campaign and source-bound P4 refresh were not accepted here; later selected replacement supplied its own decision. |
+
+The [plan execution ledger](../../Plans/bap-projection-admission.md#execution-ledger-2026-10-10)
+and [resume order](../../Plans/bap-projection-admission.md#resume-order) distinguish
+these historical checks from the later accepted scope. Failed run paths such as
+`target/bap-admission-qualification-20261010` identify the original environment,
+not a promise that temporary files persist.
+
+## Mutation campaign and repair
+
+The first extended mutant removed the prefix guard. The unchanged corpus failed
+at the LOCK rejection (exit 101, successful compile), but its custom message was
+only `"lock"`; the harness required literal `assertion`. The
+[prefix failure log](../../evidence/Ariadne/bap-admission/prefix-mutation.log)
+and checkpoint retain `NOT ACCEPTED`. The classifier was repaired for that exact
+assertion without crediting build failure or timeout.
+The resumed campaign then rejected its first 18 mutants and correctly stopped
+when `partial-self-move-loses-definition` survived. It removed `changed`'s
+partial-MOV case, but v3 still entered via `possible_destination` and the real
+definite-write predicate retained the justification. The repaired mutation removes
+that actual predicate case; the unchanged producer test rejects the compiled
+mutant because `gpr:rax:0` is missing from `must_defs` (exit 101). The focused
+receipt binds inventory, unchanged observers, build log and executable digest;
+it alone is not full campaign acceptance.
+
+Focused cross-snapshot, fabricated-call-preservation and swapped-extraction
+mutants also failed their intended checks; the latter compiled successfully
+before binding validation rejected the extraction. Initially three native
+capture-validator mutations were unexercised for lack of SDK. After restoration,
+the full 25-case producer/adapter/native-capture campaign passed with stable
+sources/observers. Paging introduced a second sequence predicate, so the boundary
+mutant was retargeted to the original per-action predicate through family context;
+the unchanged bootstrap observer rejected it. Completion now checks overflow-safe
+counters and close offsets, with twelve hostile page/lifecycle modes.
+A stale Windows `33 c0` whitelist-stop test became exact self-XOR continuation,
+all eight RAX origins and preserved undefined-AF checks. These were real test/
+mutation repairs; earlier failed receipts remain failures.
+
+## Admission resume
+
+The [local resume report](../../evidence/Ariadne/bap-admission/resume-20261010/report.json),
+[later remote report](../../evidence/Ariadne/bap-admission/remote-20261010/report.json),
+[2,959-member manifest](../../evidence/Ariadne/bap-admission/remote-20261010/evidence-manifest.json)
+and [documentation-only follow-up](../../evidence/Ariadne/bap-admission/remote-20261010/documentation-follow-up.json)
+retain separate attempts and identities. Source-only transfers and ten named
+tool/manifest files were hash-verified; customer captures stayed external.
+
+| Prerequisite or attempt | Observed result and boundary |
+| --- | --- |
+| MirrorRust | Recovered manifest `a087ecfb136795d30f6c3861d9e4003f0ed9f457db2b17561f0417551bf97854`, revision `08d189f18a76845dc15dd23b79424809ae27f406`; verified source bytes/read-only view without editing the live sibling. |
+| Lifter bridge | Initially `80e32c1d21d447969beb99398008cf5a259e5cd10507524c8b2f639c5f0fe57c`, which could not reproduce old hashes. Rebuilding only the bridge reproduced P0 `6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf`; earlier mismatches remain diagnostic. |
+| SDK initial inventory | 6,134 matching, 3,345 missing and 40 changed files, including absent BAP libraries; the native gate failed. No stale helper or relaxed inventory supplied acceptance. |
+| Missing capture | Controlled Linux `tmp/priority1/chromium-member-uaf.dmp`, SHA-256 `31481f3f080b0b165cc0d0c70f555f127f882556b34129055e80b082225a45c9`, remained absent. Initially headers and Breakpad inputs were also missing. |
+| Frozen output migration | Revision `ebb2e534e8da339f498f20d0a9e1e0b8506a3bdd`, all five P0 hashes verified, rebuilt in an isolated target tree. Verified bridge reproduced 18 Linux/Windows/NOT fixture hashes and strict v3 content-ID/profile migration; six real-Linux outputs remained missing. |
+| Early owned measurements | Six captures, one warm-up/five Rust samples including phases/output sizes and explicit limits; concurrent compilation prevented fixed-budget/native-parity credit. |
+| Restored native environment | SDK inventory/smoke/build, matching headers, two upstream Breakpad captures and historical Mirrors binaries recovered in isolated copies. Native root/Clippy/layout, 13 contracts, kernels, five capture tests, 330 observations, 12 algorithm/eight boundary mutants passed. Nested producer failure still exposed old TLC flags, stale v2 assertion, missing Breakpad path, malformed-row control and absent Linux capture. |
+| Completion transport trigger | Scanner hit `response budget`, reproduced by 20 nodes/1,000 locations in under one second. Four native tests initially passed exact large-result parity and ten hostile modes; later controls expanded to twelve. Limits remained 8 MiB frames, 64 actions/batch and 256 KiB pages. |
+| Early budget failure | Windows I4 median 2,502.747 ms exceeded 2,000 ms while other work ran. Fixture-only I5a passed with controlled-real flags false. Neither was full acceptance. |
+| Remote qualification | Ubuntu 24.04 task-private rootfs via rootless bubblewrap on WSL2 (host 22.04 could not run pinned tools; about 58 GiB available). SDK, LLVM 20.1.2, Graphviz, TLC, Apalache/dependencies and two equal clean builds passed; no live sibling/user switch changes. |
+| Remote available tiers | Root/default/core-only/Clippy/layout/docs/native/capture/stateflow; 330 replay observations, 12 algorithm/eight boundary/25 admission mutants and eight-case TLA replay passed. Stage E/minidump gates included both exact Breakpad captures. Aggregate retained `passed=false` solely for missing Linux workload. |
+| Remote owned/I4/I5a | Six owned captures passed native/reference CLI and phase parity; nine I5a fixture cases met fixed contracts, with real-Windows flags separate. Quiet checksum I4 median 480.236 ms met 2,000 ms after one warm-up/five samples; Linux phase remained unexercised. |
+
+Old TLC flags, the stale report assertion and Breakpad path were repaired; the
+malformed-row control passed focused reruns and later broad remote refresh.
+Pre-sealing results under `target/bap-admission-completion-20261010/` were not
+credited as a sealed P4 delivery. Heavy campaigns moved remotely because the
+initial local environment could not support them. Archive compression/member
+verification ran remotely; local retrieval checked bounded-memory report/archive
+hashes. The old report's failed aggregate remains bound to its original corpus.
+
+### Scanner and PreParser captured queries
+
+The original external Electron dump is 962,600,678 bytes, SHA-256
+`9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab`.
+The thread-`0x5c74` derivative is 571,636 bytes, SHA-256
+`ed82b433501162828460ccbf067476e4683a52157372b27040f0269d2b3949c5`.
+Independent binary parsing matched all 50 memory ranges and overlapping
+contributors, stack/thread/exception contexts and module/system/exception/
+MemoryInfo bytes. A later independent generator reproduced the exact derivative.
+It has a distinct snapshot and omits unselected memory. Retained CDB roots and
+consumer witnesses matched the prior manifest; raw dumps/customer sources were
+not added to the evidence archive.
+
+| Query or phase | Retained result |
+| --- | --- |
+| Scanner root `0x7ff77443d960`, fault `0x7ff77443dd6e`, early Rust/default limits | Diagnostic timeout at 300 s: no accepted output; that limit was not a BAP latency ceiling. |
+| Scanner explicit 256-start bound | `materialization limit: instruction starts`; no partial report published. |
+| PreParser root `0x7ff7744033a0`, consumer seed `0x7ff7744048a0` | Nine starts/nine edges; `MOVAPSmr` at `0x7ff7744033b3` stops with `unmodeled architectural namespace/type: YMM6`. Consumer remains missing and answer unavailable. |
+| Completed native Scanner | 16.546 s, 768 starts/895 edges/19-site slice; four requested forms projected at 30 sites, no fallback. Partial, not truncated: eight call, two indirect-target and ten decode obligations plus memory/flag uncertainty. |
+| Sampling and parity | Six native Scanner phase samples and six native/reference PreParser samples completed. Two complete Scanner Rust samples matched every native raw base-report hash; first took 257.003 s. Remaining long Rust repeats were terminated, so the interrupted six-repeat campaign remains incomplete. |
+
+Native phase/render samples cover base text/DOT/JSON; explanation-CLI timings
+are separate. No executed path, actor or cause of the bad RSI follows. Unsupported
+SIMD never receives invented continuation. Selected replacement acceptance reused
+Scanner/PreParser only after all 120 implementation/manifest hashes and the native
+helper identity matched; it did not credit the interrupted Rust repetitions.
+
+### Selected replacement acceptance
+
+The later user-selected `dump_79938FAE443F4021A4F7B6C215` Windows derivative has
+29 starts/31 edges, a reached fault seed and a ten-site slice containing the R8
+producer. Its [qualification](file-reader-design.md#windows-replacement-capture-and-bounded-query) closes the active
+source/fixture, Rust release-runtime, native-default, product and fixed-budget
+clauses with a distinct six-output baseline; all 17 investigation gates pass.
+The [2026-10-10 user decision](../../evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
+accepts that scope and excludes remaining real-Linux clauses. Eighteen historical
+hashes reproduce, while the six old Linux hashes/capture tier stay false or
+unexercised. Optional full Scanner Rust repetitions and automatic external
+evidence ingestion remain separate follow-ups. No required P4 work remains
+within the accepted scope; universal lifting/refinement and release claims do
+not follow.

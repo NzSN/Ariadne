@@ -4,13 +4,13 @@
 
 **Status.** Completed plan, archived; acceptance is limited to the recorded scope.
 
-**Why this document exists.** [Motivating design](../../docs/Ariadne/priority-3-investigator-presentation-design.md) defines the problem and contract this plan implements.
+**Why this document exists.** [Motivating design](../../docs/Ariadne/result-rendering.md#instruction-overview-contract) defines the problem and contract this plan implements.
 
 **What this document establishes.** The presentation delivery adds the instruction overview and Linux/Windows examples and records unchanged JSON/DOT semantics for the exercised case.
 
 **Where to go next.**
 
-- [Delivery and follow-up](../../docs/Ariadne/priority-3-presentation-validation.md) — records what was exercised and which limits remain.
+- [Delivery and follow-up](../../docs/Ariadne/result-rendering.md#presentation-acceptance) — records what was exercised and which limits remain.
 - [Active plan index](../README.md) — prevents completed steps from being mistaken for pending work.
 
 **What remains unresolved.** The implementation steps below are archived, not a current task list. These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. This resolves the scoped readability work, not new investigation capabilities.
@@ -23,12 +23,12 @@ For the wider context, see the optional [documentation map](../../docs/documenta
 > for current work and separate qualification requirements.
 
 Plan dated **2026-09-29** for practical priority 3 in the
-[assurance queue](../../docs/Ariadne/practical-assurance-priorities.md). It executes the
-[Priority 3 design](../../docs/Ariadne/priority-3-investigator-presentation-design.md) on the
-delivered [Stage C report layer](../../docs/Ariadne/stage-c-report-schema.md). No analyzer,
+[assurance queue](../../docs/Ariadne/semantic-assurance.md#practical-assurance-priorities). It executes the
+[Priority 3 design](../../docs/Ariadne/result-rendering.md#instruction-overview-contract) on the
+delivered [Stage C report layer](../../docs/Ariadne/result-rendering.md#json-v1). No analyzer,
 decoder, effect or JSON v1 semantics change is authorized by this plan.
 The text overview and examples are
-[delivered with source-bound validation](../../docs/Ariadne/priority-3-presentation-validation.md).
+[delivered with source-bound validation](../../docs/Ariadne/result-rendering.md#presentation-acceptance).
 
 ## 1. Freeze the current report contract
 

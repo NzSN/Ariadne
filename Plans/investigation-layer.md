@@ -7,13 +7,13 @@ wrap is selected with a linked W0–W5 plan; all its runtime/model/capture/accep
 stages remain pending. Existing I5a/I5b and native I4 deliveries retain their scope.
 I0–I3 are implemented. I4 is validated for the recorded fixture/Linux tier, with
 active real-Windows correctness and both fixed budgets passing in the
-[native performance qualification](../docs/Ariadne/i4-performance-validation.md). I5a is implemented and passes
+[native performance qualification](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification). I5a is implemented and passes
 its historical source/fixture qualification. The native refresh qualifies its source/fixture and controlled Windows tiers
 under the recorded dependency snapshot. I5b zero-base-plus-displacement has B0–B5
 implemented and qualified for the recorded source/fixture and controlled partial/
 full Windows tiers. I5c and other I5 hypotheses and I6–I7 remain unimplemented.
 
-**Why this document exists.** The [investigation design](../docs/Ariadne/investigation-layer-design.md)
+**Why this document exists.** The [investigation design](../docs/Ariadne/investigation-design.md)
 turns possible-producer analysis into questions an investigator can audit. This
 plan identifies which parts are delivered and which evidence or design work is
 still needed; completed steps are no longer the starting task list.
@@ -25,38 +25,38 @@ implementation, exercised qualification and future capabilities.
 
 **Where to go next.**
 
-- [I5c design](../docs/Ariadne/i5c-address-wrap-design.md) and
+- [I5c design](../docs/Ariadne/address-wrap-design.md) and
   [W0–W5 implementation plan](i5c-address-wrap.md) select the next fault-time
   arithmetic question; no model, assessor or new capture is implemented yet.
 
-- [I5b design](../docs/Ariadne/i5b-zero-base-offset-design.md) and
+- [I5b design](../docs/Ariadne/zero-base-offset-design.md) and
   [B0–B5 implementation plan](i5b-zero-base-offset.md) scope the selected
-  zero-base-plus-nonzero-displacement question; [actual contracts](../docs/Ariadne/i5b-contracts.md)
-  and [qualification](../docs/Ariadne/i5b-validation.md) separate implementation from acceptance.
-- [Implemented contracts](../docs/Ariadne/investigation-contracts.md) define the
+  zero-base-plus-nonzero-displacement question; [actual contracts](../docs/Ariadne/zero-base-offset-design.md)
+  and [qualification](../docs/Ariadne/zero-base-offset-design.md#retained-qualification) separate implementation from acceptance.
+- [Implemented contracts](../docs/Ariadne/investigation-design.md) define the
   actual interfaces, schema, limits and error behavior.
-- [Windows I4 re-pin](../docs/Ariadne/i4-windows-repin-validation.md) records the
+- [Windows I4 re-pin](../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement) records the
   replacement identity and historical baseline; the later
-  [performance qualification](../docs/Ariadne/i4-performance-validation.md) closes its 2-second budget clause.
-- [Latest correctness validation](../docs/Ariadne/investigation-correctness-validation.md)
+  [performance qualification](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification) closes its 2-second budget clause.
+- [Latest correctness validation](../docs/Ariadne/investigation-design.md#qualification-and-truncation-repairs)
   records the qualification/truncation repairs and their 17 passing gates.
-- [I5a zero-address design](../docs/Ariadne/i5a-zero-address-design.md) scopes the
+- [I5a zero-address design](../docs/Ariadne/zero-address-design.md) scopes the
   first numeric address hypothesis and the context evidence it requires.
 - [I5a execution plan](i5a-zero-address.md) assigns H0–H5 work and separate
   source/fixture and real-capture qualification tiers.
-- [Native qualification](../docs/Ariadne/i5a-native-qualification.md)
+- [Native qualification](../docs/Ariadne/zero-address-design.md#native-qualification)
   records complete native gates, passing controlled timings and the dependency snapshot.
-- [I5a contracts](../docs/Ariadne/i5a-contracts.md) describe the implemented
+- [I5a contracts](../docs/Ariadne/zero-address-design.md) describe the implemented
   interface, strict schema and CLI.
-- [First-delivery evidence](../docs/Ariadne/investigation-validation.md) explains
+- [First-delivery evidence](../docs/Ariadne/investigation-design.md#retained-delivery-evidence) explains
   the original supported query and fixture/Linux acceptance.
 
 **What remains unresolved.** The exact Windows I4 capture/query is qualified at
 1,692.696 ms against its unchanged 2,000 ms CLI limit; later source/tool changes
 require fresh or exact-inventory-verified acceptance. The original Electron
-artifact is historical after the user-authorized re-pin. The [controlled Windows I5a demo](../docs/Ariadne/crashpad-demo-validation.md)
+artifact is historical after the user-authorized re-pin. The [controlled Windows I5a demo](../docs/Ariadne/zero-address-design.md#controlled-windows-capture)
 passes capture/answer checks. Its native successor now qualifies both budgets and capture modes using a
-read-only dependency snapshot. I5b now has [18-gate source/tool-bound qualification](../docs/Ariadne/i5b-validation.md);
+read-only dependency snapshot. I5b now has [18-gate source/tool-bound qualification](../docs/Ariadne/zero-base-offset-design.md#retained-qualification);
 later changes need fresh or exact-inventory-verified acceptance. Other hypotheses, object/lifetime, source-context
 and cross-capture capabilities remain later work.
 
@@ -66,14 +66,14 @@ The [documentation map](../docs/documentation-map.md) is optional navigation.
 
 | Stage | Current state | Evidence or next action |
 | --- | --- | --- |
-| I0 — Contracts and identity | Implemented | Exact prepared/analyzer binding, typed claims and strict v1 explanation schema; see [contracts](../docs/Ariadne/investigation-contracts.md). |
+| I0 — Contracts and identity | Implemented | Exact prepared/analyzer binding, typed claims and strict v1 explanation schema; see [contracts](../docs/Ariadne/investigation-design.md). |
 | I1 — Address-expression evidence | Implemented within the admitted BIL subset | Typed memory-access expressions, input bytes and AST attribution are retained by [BAP address extraction](../src/bap/address.rs). Unsupported shapes keep gaps. |
-| I2 — Explanation module | Implemented; truncation repaired | Per-byte possible producers, alternatives, premises and evidence requirements; [repair validation](../docs/Ariadne/investigation-correctness-validation.md). |
-| I3 — CLI and reports | Implemented | Explicit question/index selection and transactional text/JSON/DOT publication; [first delivery](../docs/Ariadne/investigation-validation.md). |
-| I4 — Qualification | Exact active 98-start Windows and separate Linux tiers pass | [Native performance result](../docs/Ariadne/i4-performance-validation.md): 1,692.696 ms / 2,000 ms CLI and 182.924 ms / 250 ms phases, with current-inventory regressions and verified archives. |
-| I5a — Zero-address consistency | Qualified for source/fixture and controlled Windows tiers | [Native qualification](../docs/Ariadne/i5a-native-qualification.md): 14 passing gates and both controlled capture modes under the selected snapshot; [H0–H5](i5a-zero-address.md) preserves the criteria. |
-| I5b — Zero base plus nonzero displacement | B0–B5 implemented and corpus-qualified | [Contracts](../docs/Ariadne/i5b-contracts.md) and [validation](../docs/Ariadne/i5b-validation.md): encoded GPR-base receipt, valid fault context and separate source/fixture/controlled-Windows gates. |
-| I5c — Fault-time address wrap | Selected design and W0–W5 plan; implementation pending | [Design](../docs/Ariadne/i5c-address-wrap-design.md) defines unsigned base plus signed encoded displacement, wide sum and inherited fault admission; [plan](i5c-address-wrap.md) starts with the model/oracle. |
+| I2 — Explanation module | Implemented; truncation repaired | Per-byte possible producers, alternatives, premises and evidence requirements; [repair validation](../docs/Ariadne/investigation-design.md#qualification-and-truncation-repairs). |
+| I3 — CLI and reports | Implemented | Explicit question/index selection and transactional text/JSON/DOT publication; [first delivery](../docs/Ariadne/investigation-design.md#retained-delivery-evidence). |
+| I4 — Qualification | Exact active 98-start Windows and separate Linux tiers pass | [Native performance result](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification): 1,692.696 ms / 2,000 ms CLI and 182.924 ms / 250 ms phases, with current-inventory regressions and verified archives. |
+| I5a — Zero-address consistency | Qualified for source/fixture and controlled Windows tiers | [Native qualification](../docs/Ariadne/zero-address-design.md#native-qualification): 14 passing gates and both controlled capture modes under the selected snapshot; [H0–H5](i5a-zero-address.md) preserves the criteria. |
+| I5b — Zero base plus nonzero displacement | B0–B5 implemented and corpus-qualified | [Contracts](../docs/Ariadne/zero-base-offset-design.md) and [validation](../docs/Ariadne/zero-base-offset-design.md#retained-qualification): encoded GPR-base receipt, valid fault context and separate source/fixture/controlled-Windows gates. |
+| I5c — Fault-time address wrap | Selected design and W0–W5 plan; implementation pending | [Design](../docs/Ariadne/address-wrap-design.md) defines unsigned base plus signed encoded displacement, wide sum and inherited fault admission; [plan](i5c-address-wrap.md) starts with the model/oracle. |
 | Other I5 hypotheses | Unspecified beyond roadmap | Each needs its own evidence, support/refutation criteria and negative controls. |
 | I6 — Matched source/object context | Unimplemented | Define build/symbol/ABI/layout matching before making context or lifetime claims. |
 | I7 — Cross-capture comparison | Unimplemented | Define explicit correspondence and preserve separate snapshot provenance. |
@@ -94,7 +94,7 @@ This diagram separates exact-corpus qualification from later product capabilitie
 I4 is complete for the recorded capture/query and source/tool/dependency identities. Any I5 execution plan must state the I4 tier
 on which it relies and separately qualify its new context-dependent conclusions.
 The active I4 performance condition is met in the separate
-[native performance result](../docs/Ariadne/i4-performance-validation.md). The separately qualified
+[native performance result](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification). The separately qualified
 [BAP Stage 2](bap-integration.md#stage-2-bap-analysis-core) uses its own unlimited
 timing policy and cannot waive I4.
 
@@ -220,7 +220,7 @@ older results remain unchanged historical evidence.
 **Completed Windows clause:** the [native D0–D3 follow-up](i4-performance-implementation.md)
 qualifies the same exact query at 1,692.696 ms with one warm-up/five release
 explanation-CLI repeats. Native replay, mutations and I5 regressions pass with
-matching source/tool/dependency inventories; the [validation](../docs/Ariadne/i4-performance-validation.md)
+matching source/tool/dependency inventories; the [validation](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification)
 retains the 3,625-entry verified archive. Full I4 acceptance passes for those
 recorded identities.
 
@@ -232,7 +232,7 @@ records remain historical after changes.
 
 ## I5a — Zero-address consistency
 
-The [I5a design](../docs/Ariadne/i5a-zero-address-design.md) selects one hypothesis:
+The [I5a design](../docs/Ariadne/zero-address-design.md) selects one hypothesis:
 whether a selected scalar memory operand begins its access at virtual address
 zero under a valid captured exception context. It defines eligible evidence,
 three bounded conclusions and independent negative controls.
@@ -245,24 +245,24 @@ possible producers and structural control flow.
 
 The [I5a execution plan](i5a-zero-address.md) records the H0–H5 sequence. A new
 41-case corpus covers six reviewed forms and admission negatives; old Stage B
-fixtures remain unchanged and return unknown. The [contracts](../docs/Ariadne/i5a-contracts.md)
+fixtures remain unchanged and return unknown. The [contracts](../docs/Ariadne/zero-address-design.md)
 define the separate schema and `--assess-zero-address` CLI modes. All 12
-[source/fixture gates](../docs/Ariadne/i5a-validation.md) pass. The later controlled
+[source/fixture gates](../docs/Ariadne/zero-address-design.md#historical-source-and-fixture-qualification) pass. The later controlled
 Windows demo resolves the capture gap; its approximately 1.82 s CLI median is a
-historical result. The [native refresh](../docs/Ariadne/i5a-native-qualification.md)
+historical result. The [native refresh](../docs/Ariadne/zero-address-design.md#native-qualification)
 now qualifies both timing limits and both captures, with all 14 gates passing
 under the selected read-only MirrorRust snapshot. Active Windows I4 now meets its fixed budget in the
-[performance qualification](../docs/Ariadne/i4-performance-validation.md); its original Electron case is historical. Stage 2
+[performance qualification](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification); its original Electron case is historical. Stage 2
 adoption has its own retained qualification and current refresh obligation.
 
 ## Selected I5b — Zero base plus nonzero displacement
 
-The selected [I5b design](../docs/Ariadne/i5b-zero-base-offset-design.md) asks
+The selected [I5b design](../docs/Ariadne/zero-base-offset-design.md) asks
 whether the encoded GPR base is zero and its signed displacement is nonzero
 at the selected exception instruction. The [B0–B5 plan](i5b-zero-base-offset.md)
 defines source ownership, a finite six-MOV base/displacement matrix, strict
 result/CLI modes and independent acceptance tiers. B0–B5 are implemented and
-[qualified](../docs/Ariadne/i5b-validation.md) with 18 passing gates, 15 detected
+[qualified](../docs/Ariadne/zero-base-offset-design.md#retained-qualification) with 18 passing gates, 15 detected
 mutants, stable source/tool identities and separate controlled Windows tiers. This is machine-code bug debugging
 at the exact captured site, with physical register/displacement evidence.
 
@@ -275,7 +275,7 @@ The design is distinct from I5a zero-start, and neither delivery closes I4.
 
 ## Selected I5c — Fault-time address wrap
 
-The [selected design](../docs/Ariadne/i5c-address-wrap-design.md) asks whether the
+The [selected design](../docs/Ariadne/address-wrap-design.md) asks whether the
 selected instruction's unsigned base plus signed encoded displacement leaves
 `[0, 2^64-1]` before reduction. The [W0–W5 plan](i5c-address-wrap.md) owns its
 question-level model, exact binding, finite MOV matrix, strict result/product

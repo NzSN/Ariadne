@@ -8,13 +8,13 @@ corpus, with the remaining historical real-Linux clauses excluded. The
 preserves the original qualification records and flags. V3 typed admission,
 conservative ordinary continuation and bounded
 completion transport pass remote source/fixture, Rust release-runtime and
-native-default checks. The [replacement record](../docs/Ariadne/real-capture-repin-79938.md)
+native-default checks. The [replacement record](../docs/Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query)
 binds the fresh Windows workload, output baseline and fixed budgets. The
-[earlier resume](../docs/Ariadne/bap-admission-resume.md) preserves failed
+[earlier resume](../docs/Ariadne/bap-analysis-core-design.md#admission-resume) preserves failed
 prerequisites and mutation repairs. Heavy work remains remote. The original
 plan was written on 2026-10-09 against `e648055`.
 
-**Why this document exists.** The earlier [BAP projection contract](../docs/Ariadne/bap-semantic-backend-design.md#projection)
+**Why this document exists.** The earlier [BAP projection contract](../docs/Ariadne/bap-analysis-core-design.md#projection)
 rejected forms outside a finite opcode whitelist before interpreting their BIL.
 An Electron Scanner/PreParser investigation encountered nonempty BAP lifts for
 SUB64ri8, MOVZX32rm8, XOR64rr and CMP8mi, yet recovery stopped at each form.
@@ -31,19 +31,19 @@ data effects are unknown. Each change has its own source-bound acceptance gates.
 - [P4 bounded completion transport](bap-completion-pages.md) — handles the
   recovered Scanner query's oversized native response without changing analysis
   semantics or the per-frame budget.
-- [Resume record](../docs/Ariadne/bap-admission-resume.md) — fresh checks, mutation
+- [Resume record](../docs/Ariadne/bap-analysis-core-design.md#admission-resume) — fresh checks, mutation
   repair, recovered dependencies/capture and the selected successor.
-- [V3 admission contract](../docs/Ariadne/bap-admission-contract.md) — frozen
+- [V3 admission contract](../docs/Ariadne/bap-analysis-core-design.md#admission-order-and-identity) — frozen
   independent expectations, failure classes and the explicit profile migration.
-- [Execution checkpoint](../docs/Ariadne/bap-admission-checkpoint.md) — exercised
+- [Execution checkpoint](../docs/Ariadne/bap-analysis-core-design.md#admission-checkpoint) — exercised
   checks, retained partial evidence and the original incomplete P4 state.
 
-- [Backend design](../docs/Ariadne/bap-semantic-backend-design.md) — current
+- [Backend design](../docs/Ariadne/bap-analysis-core-design.md) — current
   protocol, projection invariants and implemented capability admission.
-- [Pinned binding review](../docs/Ariadne/bap-projection-source-review.md) —
+- [Pinned binding review](../docs/Ariadne/bap-analysis-core-design.md#pinned-projection-source-review) —
   getter/extraction mapping, register aliases and defined/undefined flag limits.
-- [Input guide](../docs/Ariadne/modules/input.md) and
-  [investigation contracts](../docs/Ariadne/investigation-contracts.md) —
+- [Input guide](../docs/Ariadne/file-reader-design.md#public-interface) and
+  [investigation contracts](../docs/Ariadne/investigation-design.md) —
   discovery roots, captured evidence, unknowns and explanation completeness.
 - [BAP integration ledger](bap-integration.md) and
   [plan index](README.md) — distinguish the v3 extension from earlier delivered

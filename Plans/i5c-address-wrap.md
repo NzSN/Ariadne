@@ -6,7 +6,7 @@
 design is delivered as documentation; all implementation, model, capture,
 measurement and acceptance stages remain pending.
 
-**Why this document exists.** The [selected design](../docs/Ariadne/i5c-address-wrap-design.md)
+**Why this document exists.** The [selected design](../docs/Ariadne/address-wrap-design.md)
 defines a distinct fault-time address-wrap question. Existing I5a/I5b calculate
 modular EA but do not report its signed-displacement sum before reduction as a
 separate assessment. A staged plan must preserve their existing contracts.
@@ -17,12 +17,12 @@ preservation and separately gated source/fixture and controlled Windows tiers.
 
 **Where to go next.**
 
-- [Design and predicate](../docs/Ariadne/i5c-address-wrap-design.md#exact-selected-question)
+- [Design and predicate](../docs/Ariadne/address-wrap-design.md#exact-selected-question)
   — unsigned B, signed encoded D, exact T and inherited range limit.
-- [Source-origin table](../docs/Ariadne/i5c-address-wrap-design.md#source-grounded-reuse-and-new-work)
+- [Source-origin table](../docs/Ariadne/address-wrap-design.md#source-grounded-reuse-and-new-work)
   — existing binding/admission/receipt code and the specific new calculation.
-- [I5b contracts](../docs/Ariadne/i5b-contracts.md) and
-  [source review](../docs/Ariadne/i5b-source-review.md) — reusable finite forms
+- [I5b contracts](../docs/Ariadne/zero-base-offset-design.md) and
+  [source review](../docs/Ariadne/zero-base-offset-design.md#decoded-record-and-independent-oracle) — reusable finite forms
   and decoded/BAP agreement with source-bound old outputs.
 - [Investigation ledger](investigation-layer.md) — selected I5c and the other
   history, canonicality, lifetime and cross-capture questions still deferred.
@@ -70,7 +70,7 @@ Implement stages sequentially; a partial matrix or partial tier remains partial.
 
 ## W0 — Freeze semantics and independent expectations
 
-Read the [I5b source review](../docs/Ariadne/i5b-source-review.md),
+Read the [I5b source review](../docs/Ariadne/zero-base-offset-design.md#decoded-record-and-independent-oracle),
 [receipt implementation](../src/llvm_mc/address_reference.rs),
 [I5a decision](../src/investigation/zero_address.rs) and
 [fault-field validation](../src/investigation/fault_context.rs).

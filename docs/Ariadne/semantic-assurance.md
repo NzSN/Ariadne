@@ -1,23 +1,30 @@
-# Semantic assurance and retirement of independent ISA proofs
+# Semantic assurance and proof boundaries
 
 ## Context and follow-up
 
-**Status.** Current scope decision: BAP is trusted and independent ISA proofs are retired.
+**Status.** Current assurance contract: BAP lifting is trusted, independent ISA
+proofs are retired, and universal Rust refinement remains open.
 
-**Why this document exists.** [BAP assessment](bap-core-refactor-assessment.md) separates external semantics from ownership of analysis correctness.
+**Why this document exists.** [BAP assessment](bap-analysis-core-design.md#architectural-rationale) separates external semantics from ownership of analysis correctness.
 
-**What this document establishes.** The decision retires independent AMD64 instruction-step proofs and makes pinned BAP lifting an explicit trusted dependency. Ariadne still owns transport, projection, analysis and evidence validation.
+**What this document establishes.** Pinned BAP lifting is an explicit trusted
+dependency. Ariadne owns transport, projection, analysis and evidence validation.
+The contract distinguishes finite conformance, the open universal Rust
+refinement boundary, retirement of the independent AMD64 instruction-step
+proof track, and the practical priorities that shaped the delivered workflow.
 
 **Where to go next.**
 
-
-- [Active Windows I4 qualification](i4-windows-repin-validation.md) — keeps producer correctness and the separately qualified fixed CLI timing condition distinct from the lifter trust decision.
-
-- [Projection contract](bap-semantic-backend-design.md) — defines the boundary Ariadne still validates.
+- [Active Windows I4 qualification](workload-performance-design.md#windows-investigation-replacement) — keeps producer correctness and the separately qualified fixed CLI timing condition distinct from the lifter trust decision.
+- [Projection contract](bap-analysis-core-design.md) — defines the boundary Ariadne still validates.
 - [Backend delivery ledger](../../Plans/bap-integration.md) — records qualified native migration and the remaining proof, workload and release limits.
-- [Rust proof boundary](stage-f-proof-and-performance.md) — remains open independently of ISA retirement.
+- [Typed replay](typed-replay-design.md) — finite conformance for the stateflow
+  and supplied-IR machines, distinct from universal refinement.
+- [Workload performance design](workload-performance-design.md#historical-baseline-2026-09-29)
+  — preserves the initial measured baseline and links its later qualification
+  successors; performance acceptance does not discharge a proof obligation.
 
-**What remains unresolved.** The [active Windows I4 replacement](i4-windows-repin-validation.md) passes correctness; the later [native performance qualification](i4-performance-validation.md) meets its unchanged CLI budget; the original Electron case is historical. The native analysis-core replacement is implemented; its [qualification](bap-core-qualification.md) is separate from those product criteria. The universal Rust refinement boundary remains open; retired ISA obligations were not discharged.
+**What remains unresolved.** The [active Windows I4 replacement](workload-performance-design.md#windows-investigation-replacement) passes correctness; the later [native performance qualification](workload-performance-design.md#native-investigation-qualification) meets its unchanged CLI budget; the original Electron case is historical. The native analysis-core replacement is implemented; its [qualification](bap-analysis-core-design.md#native-qualification) is separate from those product criteria. The universal Rust refinement boundary remains open; retired ISA obligations were not discharged.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 
@@ -35,7 +42,7 @@ on supported lifting behavior and captured evidence.
 The selected backend uses BAP's legacy x86 lifter and typed BIL. A formal
 semantics for BIL does not itself prove that every AMD64 lift matches hardware.
 The pinned helper/runtime identities and supported projection scope remain part
-of the [backend contract](bap-semantic-backend-design.md).
+of the [backend contract](bap-analysis-core-design.md).
 
 Ariadne owns validation of the helper protocol, exact bytes and identities,
 typed AST transport, register aliases, uses/may-defs/must-defs projection,
@@ -48,6 +55,35 @@ effects specifications remain active. The Rust implementations and their
 finite replay checks remain model-relative evidence; a universal refinement
 proof is a separate open boundary. This decision adds no execution-history or
 root-cause guarantee.
+
+## Universal Rust refinement boundary
+
+The Rust `Analyzer` executes the transition phases of `Specs/Ariadne.tla` on
+validated, owned inputs. The 2026-09-29
+[source-bound progress report](../../evidence/Ariadne/stage-b-f-validation.json)
+rechecked generated-request regressions and the then six-fixture MBT gate
+(12 complete traces, 168 matched states, five engine mutants) within the effects
+regression. Those are dated finite conformance results, not a universal proof.
+The later [typed replay campaign](typed-replay-design.md) expands bounded
+stateflow and IR evidence without changing this proof boundary.
+
+TLA+ and Rust still need an explicit proved representation relation from finite TLA+ addresses/sets/maps to `u64` and ordered Rust
+collections, plus obligations for input validation, initialization, each
+`step()` action, the deterministic schedule as an allowed TLA+ choice, result
+views and finite termination. A proof about an abstract machine does not by
+itself connect compiled Rust to that proof. The decoder, effect rules, captured
+bytes and semantic projection remain additional trusted or checked boundaries.
+The independent ISA campaign is retired under the scope decision above;
+retirement does not establish a proof of BAP lifting.
+**No universal Rust refinement claim is made.**
+
+The baseline originally published beside this boundary is preserved in the
+[workload performance design](workload-performance-design.md#historical-baseline-2026-09-29).
+Its [later LLVM qualification](workload-performance-design.md#historical-llvm-workload-qualification),
+[native BAP qualification](bap-analysis-core-design.md#native-qualification) and
+[fixed-budget investigation qualification](workload-performance-design.md#native-investigation-qualification) answer
+separate measured performance and finite correctness questions. None establishes
+a universal implementation refinement proof.
 
 ## Dependency audit and retained references
 
@@ -83,33 +119,91 @@ the pre-retirement state at `2ba80a9`.
 
 ## Qualification limits preserved
 
-The user separately authorized a [controlled BAP Windows replacement](bap-windows-repin-validation.md)
-and an [unlimited BAP timing policy](bap-unlimited-validation.md). Active Stage 1
+The user separately authorized a [controlled BAP Windows replacement](bap-analysis-core-design.md#windows-workload-replacement)
+and an [unlimited BAP timing policy](bap-analysis-core-design.md#unlimited-timing-policy). Active Stage 1
 requires that replacement's valid captured evidence, measured finite samples and
 passing implementation gates. Investigation I4 uses its own
-[re-pinned query](i4-windows-repin-validation.md) and unchanged fixed budget, met
-by the later [performance qualification](i4-performance-validation.md). The
+[re-pinned query](workload-performance-design.md#windows-investigation-replacement) and unchanged fixed budget, met
+by the later [performance qualification](workload-performance-design.md#native-investigation-qualification). The
 missing original Electron capture remains historical.
 
 Retiring ISA proofs did not deliver those changes or waive their evidence
-clauses. Native Stage 2 has [separate analysis qualification](bap-core-qualification.md).
-The [projection-admission extension](../../Plans/bap-projection-admission.md) is
-still pending; retirement admits no new forms and refreshes no old records.
+clauses. Native Stage 2 has [separate analysis qualification](bap-analysis-core-design.md#native-qualification).
+The [projection-admission extension](../../Plans/bap-projection-admission.md)
+was separately accepted on 2026-10-10 for its selected Windows replacement
+corpus and declared tiers. Its [acceptance record](file-reader-design.md#windows-replacement-capture-and-bounded-query)
+retains the excluded historical real-Linux capture/phase clauses and report
+hashes. Retirement itself admitted no new forms and refreshed no old records;
+later admission acceptance does not establish a universal or release proof.
 
 The [roadmap](../../ROADMAP.md),
 [agent instructions](../../AGENTS.md) and
-[assurance priorities](practical-assurance-priorities.md) describe active scope.
+[practical priorities](#practical-assurance-priorities) describe active scope.
 
-## Retirement validation
+<a id="retirement-validation"></a>
+
+## Historical retirement validation (2026-10-02)
 
 `python3 -m unittest discover -s tools -p test_active_qualification.py -v`
-passes three tests. Controlled subprocess fixtures exercise all three runners
+passed three tests in the retirement delivery. Controlled subprocess fixtures
+exercised all three runners
 without ISA files, gate failures, source-hash changes and both outcomes of the
 Windows workload condition: eleven runner executions in total. An inventory
-check confirms that effects qualification retains the analysis specifications
+check confirmed that effects qualification retained the analysis specifications
 and manual provenance while excluding retired ISA models.
 
-The Rust layout check and documentation link/diff checks also pass. These are
+The Rust layout check and documentation link/diff checks also passed. These were
 focused orchestration and documentation checks, not fresh native execution,
 model replay, mutation campaigns or release qualification. Production Rust,
-native helper code, formal model bodies and retained JSON evidence are unchanged.
+native helper code, formal model bodies and retained JSON evidence were unchanged
+in that retirement delivery.
+
+## Practical assurance priorities
+
+The delivery is **Windows/Linux AMD64 minidump → local graph → possible value
+origins → backward slice → report** using BAP. The 2026-10-02 retirement decision
+superseded the original long-term independent ISA-proof commitment. The
+[roadmap](../../ROADMAP.md) now prioritizes captured investigations under explicit
+premises. Passing results support different claims:
+
+| Assurance level | Supported claim | Remaining boundary |
+| --- | --- | --- |
+| Captured input and decode reference | Bytes, VAs, provenance, independent decode/control observations | Historical execution is not established |
+| BAP projection | Exercised typed-BIL transport, dependencies, aliases and conservative effects | No universal lifter correctness/full ISA coverage |
+| Analysis and investigation | Model-relative CFG/dataflow/slicing and evidence-bound claims | No root-cause or historical-path proof |
+
+The practical priorities were delivered at these dated scopes:
+
+| Priority / completed plan | Decision and evidence |
+| --- | --- |
+| [Representative capture](../../Plans/completed/priority-1-real-capture-plan.md) | 2026-09-29 controlled Chromium/Linux case used a hash-pinned dump, independently established earlier captured entry and crash-IP seed. Its [capture design/evidence](file-reader-design.md#independent-entry-and-real-capture-evidence) binds matched-build entry evidence and a possible producer. Backward decoding and companion executable bytes cannot invent missing capture. |
+| [Path-driven effects](../../Plans/completed/priority-2-path-driven-effects-plan.md) | The first path required no change; the later Windows path needed eight ordinary-control bindings with opaque effects. [Effect/source review](operand-effects-design.md#path-driven-control-review) preserves weak memory, flags/alias uncertainty and unknown control. New paths can reopen coverage. |
+| [Investigator presentation](../../Plans/completed/priority-3-investigator-presentation-plan.md) | [Rendering design](result-rendering.md#instruction-overview-contract) brings exact bytes, typed operands, rule quality, provenance, possible origins and gaps together; versioned JSON and DOT meanings remain stable. |
+| [Measured workload performance](../../Plans/completed/priority-4-workload-performance-plan.md) | 2026-09-30 [historical LLVM result](workload-performance-design.md#historical-llvm-workload-qualification) used 98 captured instructions and a 19-node slice; median 3,845.7 → 1,787.6 ms met 2,000 ms while all 277 actions and report hashes stayed equal. Bounded 128/256/512-node families completed; no worst-case claim follows. |
+
+Earlier LLVM timings do not qualify BAP. The missing original Electron capture
+was separately replaced by the authorized
+[Windows investigation pin](workload-performance-design.md#windows-investigation-replacement);
+its failed timing record and later passing performance successor remain distinct.
+Other BAP workload/corpus acceptances retain their own source and policy scope.
+
+[Typed replay and reports](typed-replay-design.md) qualify supplied machine-state
+and directly supplied LLVM IR at a finite tier with explicit semantic premises.
+Universal Rust refinement remains open. PE/ELF image and ELF core readers remain
+deferred under the minidump-only input scope.
+
+### Initial historical-capture audit
+
+Both older hash-pinned Breakpad dumps had a 256-byte MemoryList capture around
+RIP, including **128 contiguous bytes before RIP**:
+
+| Dump | Crash RIP | Captured code range | Module-relative RIP |
+| --- | --- | --- | --- |
+| Linux `linux_null_dereference.dmp` | `0x401f26` | `0x401ea6`–`0x401fa5` | `driver` + `0x1f26` |
+| Windows `write_av_non_canonical.dmp` | `0x7ff738721331` | `0x7ff7387212b1`–`0x7ff7387213b0` | `crash.exe` + `0x1331` |
+
+This byte availability did not establish an earlier instruction boundary. No
+matching symbol artifact was found beside those fixtures at decision time.
+A module filename or backward decode from RIP is insufficient entry evidence.
+Companions must match build identity and cannot fill missing dump bytes; the
+later controlled Chromium case supplied a separate exact-matched companion.

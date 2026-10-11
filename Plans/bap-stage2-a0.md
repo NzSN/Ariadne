@@ -3,8 +3,8 @@
 ## Context and follow-up
 
 **Status.** Historical A0 contract/capability probe from 2026-10-03. The
-[OCaml foundation](../docs/Ariadne/bap-ocaml-qualification.md) subsequently closed
-its SDK/state-exchange gaps; [complete Stage 2 qualification](../docs/Ariadne/bap-core-qualification.md)
+[OCaml foundation](../docs/Ariadne/bap-analysis-core-design.md#ocaml-foundation-qualification) subsequently closed
+its SDK/state-exchange gaps; [complete Stage 2 qualification](../docs/Ariadne/bap-analysis-core-design.md#native-qualification)
 records delivered A1–A6 and native default adoption.
 
 **Why this document exists.** The [integration plan](bap-integration.md#stage-2-bap-analysis-core)
@@ -19,17 +19,17 @@ checks and a pinned-runtime capability probe make the design reviewable.
 
 - [OCaml qualification plan](bap-ocaml-qualification.md) — records the completed SDK, real state exchange and transport gates.
 
-- [A0 validation](../docs/Ariadne/bap-stage2-a0-validation.md) — distinguishes passing contract/probe checks from the remaining full-exit clause.
+- [A0 validation](../docs/Ariadne/bap-analysis-core-design.md#a0-capability-evidence) — distinguishes passing contract/probe checks from the remaining full-exit clause.
 
 - [Stage 2 contract](../docs/Ariadne/bap-analysis-core-design.md) — defines the
   interface and exact mappings to both analysis specifications.
 - [Integration plan](bap-integration.md) — sequences A1 recovery through A6 adoption.
-- [Stage 1 prerequisite](../docs/Ariadne/bap-unlimited-validation.md) — records
+- [Stage 1 prerequisite](../docs/Ariadne/bap-analysis-core-design.md#unlimited-timing-policy) — records
   the source-bound prerequisite under the authorized unlimited timing policy.
 
-**What remains unresolved.** The [OCaml successor](../docs/Ariadne/bap-ocaml-qualification.md)
+**What remains unresolved.** The [OCaml successor](../docs/Ariadne/bap-analysis-core-design.md#ocaml-foundation-qualification)
 qualified the isolated SDK and bounded Init/Visit state exchange with
-all OQ gates passing. The later [complete Stage 2 result](../docs/Ariadne/bap-core-qualification.md)
+all OQ gates passing. The later [complete Stage 2 result](../docs/Ariadne/bap-analysis-core-design.md#native-qualification)
 independently qualifies recovery, dataflow, slicing, stateflow and production
 adoption. This earlier capability probe does not supply those claims.
 
@@ -56,13 +56,13 @@ No analysis algorithms are duplicated into a transport validator or observer.
 
 The seven envelope/attribution tests and fresh native probes pass. The native
 TID graph collapses parallel labels, so the implementation retains a separate
-typed edge relation. The [OCaml successor](../docs/Ariadne/bap-ocaml-qualification.md)
+typed edge relation. The [OCaml successor](../docs/Ariadne/bap-analysis-core-design.md#ocaml-foundation-qualification)
 now passes OQ0–OQ6: isolated SDK, actual Init/Visit state, Rust transport,
 clean rebuild and mutation sensitivity. Full A0 exit is qualified against
 fresh Stage 1 prerequisites. The earlier facility-only record stays historical.
 
 Complete A1–A6 were delivered by the [Stage 2 execution plan](bap-stage2-implementation.md).
-The [native qualification](../docs/Ariadne/bap-core-qualification.md) records
+The [native qualification](../docs/Ariadne/bap-analysis-core-design.md#native-qualification) records
 passing algorithm, generated replay, product and default-adoption acceptance.
 The production minidump CLI now uses native BAP analysis; Rust is the explicit
 reference/rollback. This earlier probe record retains its limited claims.

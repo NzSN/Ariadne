@@ -4,12 +4,12 @@
 
 **Status.** Executing on 2026-10-07 after selection of this machine-code debugging
 hypothesis. B0–B5 are implemented and qualified for the recorded finite source/
-fixture and controlled partial/full Windows tiers. [Contracts](../docs/Ariadne/i5b-contracts.md)
-describe the actual interface; [validation](../docs/Ariadne/i5b-validation.md) and
+fixture and controlled partial/full Windows tiers. [Contracts](../docs/Ariadne/zero-base-offset-design.md)
+describe the actual interface; [validation](../docs/Ariadne/zero-base-offset-design.md#retained-qualification) and
 the [aggregate](../evidence/Ariadne/i5b-qualification.json) bind all 18 gates to
 exact source/tool/dependency identity.
 
-**Why this document exists.** The [I5b design](../docs/Ariadne/i5b-zero-base-offset-design.md)
+**Why this document exists.** The [I5b design](../docs/Ariadne/zero-base-offset-design.md)
 defines a fault-time zero-base/nonzero-displacement question. Existing I5a
 evidence binds valid context but lacks the encoded-role receipt needed for an
 auditable base assertion.
@@ -20,16 +20,16 @@ report compatibility, mutation controls and separate acceptance tiers.
 
 **Where to go next.**
 
-- [Source review](../docs/Ariadne/i5b-source-review.md),
-  [implemented contracts](../docs/Ariadne/i5b-contracts.md) and
-  [validation progress](../docs/Ariadne/i5b-validation.md) — actual B0–B4 outputs.
-- [Selected design](../docs/Ariadne/i5b-zero-base-offset-design.md) — predicate,
+- [Source review](../docs/Ariadne/zero-base-offset-design.md#decoded-record-and-independent-oracle),
+  [implemented contracts](../docs/Ariadne/zero-base-offset-design.md) and
+  [validation progress](../docs/Ariadne/zero-base-offset-design.md#retained-qualification) — actual B0–B4 outputs.
+- [Selected design](../docs/Ariadne/zero-base-offset-design.md) — predicate,
   admission profile, implemented interface and explicit limits.
 - [Investigation ledger](investigation-layer.md) — selected I5b versus other
   deferred hypotheses and the separately completed I4 performance qualification.
-- [I5a contracts](../docs/Ariadne/i5a-contracts.md) and [execution plan](i5a-zero-address.md)
+- [I5a contracts](../docs/Ariadne/zero-address-design.md) and [execution plan](i5a-zero-address.md)
   — reusable context acquisition and the old behavior that must be preserved.
-- [Native qualification](../docs/Ariadne/i5a-native-qualification.md) and
+- [Native qualification](../docs/Ariadne/zero-address-design.md#native-qualification) and
   [dependency snapshot runner](../tools/with_mirrorrust_snapshot.py) — reproducible
   native/reference qualification without a moving sibling dependency.
 - [Formal-model guide](../Specs/README.md) — authoritative modeled contracts and
@@ -89,9 +89,9 @@ reported independently and requires actual retained captures.
 
 ## B0 — Admission review and independent oracle
 
-Read the [input guide](../docs/Ariadne/modules/input.md),
-[BAP guide](../docs/Ariadne/modules/bap.md),
-[I5a source review](../docs/Ariadne/i5a-source-review.md) and
+Read the [input guide](../docs/Ariadne/file-reader-design.md#public-interface),
+[BAP guide](../docs/Ariadne/bap-analysis-core-design.md#backend-usage),
+[I5a source review](../docs/Ariadne/zero-address-design.md#source-and-finite-admission-review) and
 [LLVM reference projection](../src/llvm_mc/reference.rs). Review exact LLVM 20
 raw operand rows for MOV32mi, MOV64mi32, MOV32rm, MOV64rm, MOV32mr and MOV64mr.
 Record the memory tuple's position, no-register sentinel, base/index bank mapping,

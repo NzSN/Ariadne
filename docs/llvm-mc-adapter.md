@@ -10,8 +10,8 @@
 
 **Where to go next.**
 
-- [Minidump guide](Ariadne/modules/input.md) — supplies captured bytes and address mapping absent from this adapter.
-- [BAP-only delivery](Ariadne/bap-only-removal-validation.md) — supersedes LLVM semantic selection while keeping decode-reference facts.
+- [Minidump guide](Ariadne/file-reader-design.md#public-interface) — supplies captured bytes and address mapping absent from this adapter.
+- [BAP-only delivery](Ariadne/bap-analysis-core-design.md#bap-only-delivery) — supersedes LLVM semantic selection while keeping decode-reference facts.
 
 **What remains unresolved.** The adapter does not establish captured provenance or fill missing dump bytes. The input module owns capture mapping; PE/ELF readers remain deferred.
 
@@ -27,9 +27,9 @@ slice engine. No LLVM code is linked into the Rust crate; its offline build and
 This is a byte-span adapter. It does **not** open a PE/ELF binary or crash dump,
 map VAs to file offsets, validate image identity, or prove that a supplied span
 is from the stated snapshot. Binary/dump readers must establish those facts
-before populating `ByteSnapshot`. The [minidump module](Ariadne/modules/input.md)
+before populating `ByteSnapshot`. The [minidump module](Ariadne/file-reader-design.md#public-interface)
 now supplies captured memory and local instruction-start discovery within the
-root Cargo package. The [investigator CLI](Ariadne/stage-c-report-schema.md) is
+root Cargo package. The [investigator CLI](Ariadne/result-rendering.md#json-v1) is
 delivered; PE/ELF image and ELF-core readers remain deferred.
 
 ## Build and check
@@ -168,7 +168,7 @@ vocabulary. Untracked state is not certified preserved. Effects concern normal
 long64 user-mode continuation with ordinary RAM and CET disabled, without
 exception-handler, asynchronous or concurrent-interference paths.
 
-The [rule matrix](Ariadne/operand-effects-rules.md) lists 137 exact LLVM opcode
+The [rule matrix](Ariadne/operand-effects-design.md#historical-rule-matrix) lists 137 exact LLVM opcode
 identities and additional shape/prefix restrictions. MOV, LEA, selected integer
 operations and branches gain useful GPR/flag effects. Memory uses one coarse
 alias cell; stores never kill all memory. Calls, RET and control-only CLC/STC
@@ -185,12 +185,12 @@ candidate evidence from visited instructions.
 
 Priority 4 adds eight exact, shape-checked control-only forms, with opaque
 effects, under `user64-effects-v1.2`; see the
-[source review](Ariadne/priority-4-control-source-review.md). The preparation
+[source review](Ariadne/operand-effects-design.md#eight-ordinary-control-bindings-2026-09-30). The preparation
 transport now obtains the checked version/target header and raw rows from one
-helper invocation per batch. The [protocol guide](Ariadne/operand-effects-protocol.md#checked-batch-invocation)
+helper invocation per batch. The [protocol guide](Ariadne/operand-effects-design.md#checked-batch-invocation)
 documents the additive helper modes and rebuild requirement.
 
-See [the protocol](Ariadne/operand-effects-protocol.md),
+See [the protocol](Ariadne/operand-effects-design.md#llvm-mc-protocol-2),
 [design](Ariadne/operand-effects-design.md), and
 [implementation plan](../Plans/completed/operand-effects-plan.md). Run all effects gates:
 

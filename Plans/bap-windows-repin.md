@@ -2,7 +2,7 @@
 
 ## Context and follow-up
 
-**Status.** Completed capture/repin campaign, retained as historical evidence. Its 2,000 ms timing condition was later superseded by the user-authorized [unlimited policy](../docs/Ariadne/bap-unlimited-validation.md). Measurements and original verdicts below retain their historical meaning.
+**Status.** Completed capture/repin campaign, retained as historical evidence. Its 2,000 ms timing condition was later superseded by the user-authorized [unlimited policy](../docs/Ariadne/bap-analysis-core-design.md#unlimited-timing-policy). Measurements and original verdicts below retain their historical meaning.
 
 **Why this document exists.** The user confirmed that the original pinned
 Windows dump no longer exists and requested a new Crashpad capture and pin.
@@ -16,23 +16,23 @@ replacement contract. Correct capture and performance acceptance remain separate
 **Where to go next.**
 
 
-- [Separate Windows I4 replacement](../docs/Ariadne/i4-windows-repin-validation.md) — binds this capture to the active investigation question under its unchanged timing ceiling.
+- [Separate Windows I4 replacement](../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement) — binds this capture to the active investigation question under its unchanged timing ceiling.
 
 
-- [Native Stage 2 qualification](../docs/Ariadne/bap-core-qualification.md) — records the completed successor analysis and its source-bound default-adoption evidence.
+- [Native Stage 2 qualification](../docs/Ariadne/bap-analysis-core-design.md#native-qualification) — records the completed successor analysis and its source-bound default-adoption evidence.
 
-- [Unlimited timing policy](../docs/Ariadne/bap-unlimited-validation.md) — supersedes this campaign's former 2,000 ms condition by explicit user instruction.
+- [Unlimited timing policy](../docs/Ariadne/bap-analysis-core-design.md#unlimited-timing-policy) — supersedes this campaign's former 2,000 ms condition by explicit user instruction.
 
-- [Backend design](../docs/Ariadne/bap-semantic-backend-design.md) — defines the
+- [Backend design](../docs/Ariadne/bap-analysis-core-design.md) — defines the
   semantic boundary exercised by the new workload.
-- [Replacement validation](../docs/Ariadne/bap-windows-repin-validation.md) — records
+- [Replacement validation](../docs/Ariadne/bap-analysis-core-design.md#windows-workload-replacement) — records
   the captured artifact and observed acceptance result.
 - [Crashpad demo](../native/crashpad-demo/README.md) — provides the existing
   isolated native Windows build and owned-process capture mechanism.
 - [Integration plan](bap-integration.md) — receives the final Stage 1 decision;
   Stage 2 implementation is outside this replacement task.
 
-**What remains unresolved.** This capture campaign did not implement Stage 2. The later [native Stage 2 delivery](../docs/Ariadne/bap-core-qualification.md) qualifies recovery, dataflow, slicing, stateflow and default adoption. Its BAP timing policy is unlimited. The separately authorized [active I4 replacement](../docs/Ariadne/i4-windows-repin-validation.md) uses this 98-start capture. Its later [performance qualification](../docs/Ariadne/i4-performance-validation.md) meets the unchanged 2,000 ms explanation-CLI limit. The earlier over-budget verdict below remains historical. Historical Priority 4 records retain their original scope.
+**What remains unresolved.** This capture campaign did not implement Stage 2. The later [native Stage 2 delivery](../docs/Ariadne/bap-analysis-core-design.md#native-qualification) qualifies recovery, dataflow, slicing, stateflow and default adoption. Its BAP timing policy is unlimited. The separately authorized [active I4 replacement](../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement) uses this 98-start capture. Its later [performance qualification](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification) meets the unchanged 2,000 ms explanation-CLI limit. The earlier over-budget verdict below remains historical. Historical Priority 4 records retain their original scope.
 
 For the wider context, see the [documentation map](../docs/documentation-map.md).
 
@@ -100,7 +100,7 @@ No executable bytes may fill a hole in captured memory.
 5. Retain the new campaign separately, update the active documentation and record
    the observed Stage 1/prerequisite result. Historical evidence remains intact.
 
-All five steps are complete. The [delivery record](../docs/Ariadne/bap-windows-repin-validation.md)
+All five steps are complete. The [delivery record](../docs/Ariadne/bap-analysis-core-design.md#windows-workload-replacement)
 retains 17 passing implementation gates, 68 controlled tests across both tiers,
 the exact 98/99/90/0 result and the failed timing condition. The next performance
 investigation should keep this pin fixed and examine the measured reference-decode

@@ -11,23 +11,23 @@
 **Where to go next.**
 
 - [Accepted BAP v3 admission plan](Plans/bap-projection-admission.md) and
-  [selected capture qualification](docs/Ariadne/real-capture-repin-79938.md) —
+  [selected capture qualification](docs/Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query) —
   completed P0–P4, native parity, fixed budgets and the explicit exclusion of
   remaining historical real-Linux clauses.
-- [Historical BAP documentation audit](docs/Ariadne/bap-documentation-sync.md) —
+- [Historical BAP documentation audit](docs/Ariadne/bap-analysis-core-design.md#documentation-audit) —
   earlier v2 ownership/evidence inventory and links to its v3 successor.
 
-- [I5c address-wrap design](docs/Ariadne/i5c-address-wrap-design.md) and
+- [I5c address-wrap design](docs/Ariadne/address-wrap-design.md) and
   [implementation plan](Plans/i5c-address-wrap.md) — selected next fault-time
   arithmetic assessment; all runtime/model/capture qualification is pending.
 
-- [I5b machine-code debugging contracts](docs/Ariadne/i5b-contracts.md) and
-  [qualification](docs/Ariadne/i5b-validation.md) — exact zero-base-plus-displacement
+- [I5b machine-code debugging contracts](docs/Ariadne/zero-base-offset-design.md) and
+  [qualification](docs/Ariadne/zero-base-offset-design.md#retained-qualification) — exact zero-base-plus-displacement
   assessment, retained capture evidence and its finite acceptance scope.
 - [Documentation index](docs/Ariadne/README.md) — find the current interfaces and contracts.
 - [Plan index](Plans/README.md) — separates remaining work from completed and retired work.
 
-**What remains unresolved.** Active Windows I4 is [re-pinned and correctness-checked](docs/Ariadne/i4-windows-repin-validation.md); the later [performance qualification](docs/Ariadne/i4-performance-validation.md) meets the unchanged 2-second limit at 1,692.696 ms. Controlled Windows I5a is [qualified with the pinned dependency snapshot](docs/Ariadne/i5a-native-qualification.md). Native BAP recovery, dataflow, slicing and finite stateflow are implemented; [Stage 2 qualification](docs/Ariadne/bap-core-qualification.md) records passing aggregate acceptance and default adoption. Other hypothesis, object/source-context and cross-capture questions remain later work.
+**What remains unresolved.** Active Windows I4 is [re-pinned and correctness-checked](docs/Ariadne/workload-performance-design.md#windows-investigation-replacement); the later [performance qualification](docs/Ariadne/workload-performance-design.md#native-investigation-qualification) meets the unchanged 2-second limit at 1,692.696 ms. Controlled Windows I5a is [qualified with the pinned dependency snapshot](docs/Ariadne/zero-address-design.md#native-qualification). Native BAP recovery, dataflow, slicing and finite stateflow are implemented; [Stage 2 qualification](docs/Ariadne/bap-analysis-core-design.md#native-qualification) records passing aggregate acceptance and default adoption. Other hypothesis, object/source-context and cross-capture questions remain later work.
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
@@ -40,7 +40,7 @@ they use.
 **Current status: native BAP analysis, Rust reference and formal specifications.** The
 Rust library implements `Specs/Ariadne.tla`: local CFG recovery, may-reaching
 definitions, and backward data slicing from fixed adapter-supplied inputs.
-The [BAP adapter](docs/Ariadne/modules/bap.md) is now the sole production minidump semantic
+The [BAP adapter](docs/Ariadne/bap-analysis-core-design.md#backend-usage) is now the sole production minidump semantic
 backend. It projects a finite typed-BIL subset into byte-register, flag and
 weak-memory effects. LLVM MC 20 remains an independent decode/control reference;
 its semantic selector and automatic effect fallback have been removed.
@@ -50,57 +50,57 @@ Validated ordinary instructions with unknown data effects retain conservative
 continuation and visible gaps; unsupported control or architectural state stops
 explicitly. The [accepted P0–P4 plan](Plans/bap-projection-admission.md) binds the
 current finite qualification and its excluded historical real-Linux clauses.
-Historical [LLVM effect-rule research](docs/Ariadne/operand-effects-rules.md)
+Historical [LLVM effect-rule research](docs/Ariadne/operand-effects-design.md#historical-rule-matrix)
 and its formal tests remain reference evidence, distinct from production BAP.
 Neither backend establishes architectural instruction-step acceptance or a
-historical crash path. The [controlled Crashpad replacement](docs/Ariadne/bap-windows-repin-validation.md)
+historical crash path. The [controlled Crashpad replacement](docs/Ariadne/bap-analysis-core-design.md#windows-workload-replacement)
 is captured, independently inspected and pinned for replay. All 17 implementation
 gates passed in the capture campaign. The user has since selected an
-[unlimited latency policy](docs/Ariadne/bap-unlimited-validation.md); correctness
-and source/tool evidence continue to govern qualification. [Stage 2 native algorithms](docs/Ariadne/bap-core-qualification.md) are qualified on the exercised corpus and selected by default; Rust remains available explicitly.
+[unlimited latency policy](docs/Ariadne/bap-analysis-core-design.md#unlimited-timing-policy); correctness
+and source/tool evidence continue to govern qualification. [Stage 2 native algorithms](docs/Ariadne/bap-analysis-core-design.md#native-qualification) are qualified on the exercised corpus and selected by default; Rust remains available explicitly.
 
-The [I5a assessment](docs/Ariadne/i5a-contracts.md) asks whether a selected Windows
+The [I5a assessment](docs/Ariadne/zero-address-design.md) asks whether a selected Windows
 AMD64 scalar MOV access starts at zero under admitted captured-context premises.
 It retains a separate result and explicit unknowns; a zero effective address does
-not establish a null-pointer root cause. Its [delivery record](docs/Ariadne/i5a-validation.md)
+not establish a null-pointer root cause. Its [delivery record](docs/Ariadne/zero-address-design.md#historical-source-and-fixture-qualification)
 separates source/fixture validation from real Windows qualification. The later
-[Crashpad demo](docs/Ariadne/crashpad-demo-validation.md) supplies controlled
-Windows captures and passing answers. Fresh [native I5a measurements](docs/Ariadne/i5a-native-qualification.md)
+[Crashpad demo](docs/Ariadne/zero-address-design.md#controlled-windows-capture) supplies controlled
+Windows captures and passing answers. Fresh [native I5a measurements](docs/Ariadne/zero-address-design.md#native-qualification)
 meet both timing budgets, with 14 passing source/fixture gates and separate
 partial/full controlled-capture acceptance under the pinned dependency snapshot.
-The [minidump input module](docs/Ariadne/modules/input.md) now reads Windows/Linux
+The [minidump input module](docs/Ariadne/file-reader-design.md#public-interface) now reads Windows/Linux
 AMD64 captures and discovers local instruction starts. A pinned tool-produced
-[predecessor fixture](docs/Ariadne/stage-b-c-validation.md) now yields an
-address-producer slice, and its [investigator CLI](docs/Ariadne/stage-c-report-schema.md)
+[predecessor fixture](docs/Ariadne/file-reader-design.md#captured-predecessor-fixtures) now yields an
+address-producer slice, and its [investigator CLI](docs/Ariadne/result-rendering.md#json-v1)
 publishes evidence-linked text, DOT and JSON v1. PE/ELF image and ELF core
 readers remain deferred under the current input scope.
-The [selected Windows real-capture case](docs/Ariadne/real-capture-repin-79938.md)
+The [selected Windows real-capture case](docs/Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query)
 recovers 29 starts, 31 edges and a 10-site slice from an independently matched
 function entry. It retains the earlier R8 load as a possible fault-address
 producer with explicit memory/entry uncertainty. The older
-[controlled Chromium/Linux case](docs/Ariadne/priority-1-real-capture-validation.md)
+[controlled Chromium/Linux case](docs/Ariadne/file-reader-design.md#historical-controlled-chromium-capture)
 remains historical; its absent capture and six output comparisons are excluded
 from accepted P4. Neither case establishes executed history or a root cause.
 The CLI text report now has a [scan-friendly instruction overview and
-Linux/Windows examples](docs/Ariadne/priority-3-presentation-validation.md);
-JSON v1 and DOT graph semantics remain unchanged. The [historical Priority 4 measurement](docs/Ariadne/priority-4-performance-validation.md)
+Linux/Windows examples](docs/Ariadne/result-rendering.md#presentation-acceptance);
+JSON v1 and DOT graph semantics remain unchanged. The [historical Priority 4 measurement](docs/Ariadne/workload-performance-design.md#historical-llvm-workload-qualification)
 qualified its original 98-start Electron query under the earlier LLVM-backed
 pipeline. Its result does not qualify the later native backend or the active
-[I4 replacement](docs/Ariadne/i4-windows-repin-validation.md). The later
-[native performance qualification](docs/Ariadne/i4-performance-validation.md)
+[I4 replacement](docs/Ariadne/workload-performance-design.md#windows-investigation-replacement). The later
+[native performance qualification](docs/Ariadne/workload-performance-design.md#native-investigation-qualification)
 meets that replacement query's fixed Windows CLI budget.
 The [rendering module](docs/Ariadne/result-rendering.md) now produces readable
 text and Graphviz DOT from analyzer outcomes.
 
-The [I5b assessment](docs/Ariadne/i5b-contracts.md) supports debugging bugs at the
+The [I5b assessment](docs/Ariadne/zero-base-offset-design.md) supports debugging bugs at the
 machine-code level: select an access and inspect exact instruction bytes, encoded
 base/displacement, captured base value and reported fault address. Its
-[qualification](docs/Ariadne/i5b-validation.md) passes 18 aggregate gates and
+[qualification](docs/Ariadne/zero-base-offset-design.md#retained-qualification) passes 18 aggregate gates and
 separate source/fixture/controlled partial/full Windows tiers. This profile
 answers zero base plus nonzero displacement; it preserves unknowns for indexed
 or unsupported evidence and does not infer historical null-pointer causation.
 The separate abstract-stateflow and supplied-IR paths pass
-[Stage E generated replay, mutation and report/CLI acceptance](docs/Ariadne/stage-e-completion.md)
+[Stage E generated replay, mutation and report/CLI acceptance](docs/Ariadne/typed-replay-design.md#finite-corpus-and-claim-boundary)
 within the recorded finite corpus. Independent ISA proof artifacts are retained
 as retired historical reference.
 
@@ -112,7 +112,7 @@ full-manual roadmap. Historical artifacts remain available for reference.
 The [semantic assurance decision](docs/Ariadne/semantic-assurance.md) defines
 this boundary. Analysis-level TLA+ specifications, replay and mutation checks
 remain active.
-The [Stage F record](docs/Ariadne/stage-f-proof-and-performance.md) states the
+The [Stage F record](docs/Ariadne/semantic-assurance.md#universal-rust-refinement-boundary) states the
 remaining Rust refinement boundary and reports a repeatable performance
 baseline without claiming a proof or qualified solver optimization.
 
@@ -128,8 +128,8 @@ crate dependencies. Default features enable the minidump and supplied-IR CLIs;
 The independent decode reference pins LLVM MC 20.1.2. BAP supplies current
 production effects; memory remains conservative and calls remain opaque.
 Broader projection coverage and precise alias analysis remain future work.
-The [initial effects evidence](docs/Ariadne/operand-effects-validation.md) and
-[Stage A evidence](docs/Ariadne/stage-a-validation.md) describe the historical
+The [initial effects evidence](docs/Ariadne/operand-effects-design.md#historical-effect-qualification) and
+[Stage A evidence](docs/Ariadne/operand-effects-design.md#memory-immediate-mov-delivery-2026-09-28) describe the historical
 LLVM rule path that preceded BAP.
 
 Build and test from the repository root:
@@ -144,14 +144,14 @@ The build produces `target/release/ariadne-minidump` and
 `target/release/ariadne-ir`. The [source-layout plan](Plans/completed/rust-source-layout.md)
 records the consolidation, and the [implementation guide](docs/implementation.md)
 describes the modules and validation scope.
-The [layout delivery](docs/Ariadne/rust-source-layout.md) records source and CLI
+The [layout delivery](docs/Ariadne/architecture.md#source-layout-and-development) records source and CLI
 equivalence checks against the previous build.
 
 Running the minidump CLI also requires the [BAP lifter](native/bap/README.md),
 LLVM MC decode reference and [native analysis helper](native/bap-core/README.md).
 Cargo does not build those helpers. The default analysis backend is BAP;
 `--analysis-backend rust` selects the reference analyzer. See the
-[backend setup guide](docs/Ariadne/modules/bap.md) for build and path options.
+[backend setup guide](docs/Ariadne/bap-analysis-core-design.md#backend-usage) for build and path options.
 
 Use `ariadne::analyze(request)` for a completed result, or `Analyzer::step()` to
 observe individual specification transitions. The input contract, runnable
@@ -161,7 +161,7 @@ example, and specification correspondence are described in
 The [model-based test gate](mbt/README.md) uses Mirrors' generated `mirrorrust-v1`
 bindings. A separate [Stage E integration](mbt/stage-e/README.md) connects the
 machine-state and LLVM IR engines to the sibling MirrorRust client for generated
-finite replay and engine mutation checks. [Stage E reports and CLIs](docs/Ariadne/stage-e-completion.md)
+finite replay and engine mutation checks. [Stage E reports and CLIs](docs/Ariadne/typed-replay-design.md#finite-corpus-and-claim-boundary)
 now preserve each result family independently. The core gate uses a generated
 binding and MirrorRust to replay TLC-generated traces against the real Rust
 analyzer, with required interface negotiation, coverage checks, and deliberate

@@ -10,7 +10,7 @@ both controlled capture modes under the unchanged CLI and phase budgets, using
 the recorded read-only dependency snapshot. The BAP profile has a separately inspected and
 pinned partial capture.
 
-**Why this document exists.** The [I5a design](../../docs/Ariadne/i5a-zero-address-design.md)
+**Why this document exists.** The [I5a design](../../docs/Ariadne/zero-address-design.md)
 needed an independently controlled Windows capture in addition to synthetic fixtures.
 
 **What this document establishes.** A small application embeds the `nzsn` fork's
@@ -21,19 +21,19 @@ isolated build, capture and independent verification.
 
 **Where to go next.**
 
-- [I5b machine-code debugging contracts](../../docs/Ariadne/i5b-contracts.md) and
-  [qualification](../../docs/Ariadne/i5b-validation.md) — new isolated
+- [I5b machine-code debugging contracts](../../docs/Ariadne/zero-base-offset-design.md) and
+  [qualification](../../docs/Ariadne/zero-base-offset-design.md#retained-qualification) — new isolated
   zero-base-plus-eight, zero-displacement refuted and indexed-unknown controls;
   aggregate acceptance remains separate from capture creation.
-- [Delivery and evidence](../../docs/Ariadne/crashpad-demo-validation.md) gives
+- [Delivery and evidence](../../docs/Ariadne/zero-address-design.md#controlled-windows-capture) gives
   the original captures, checks, source identities and historical measurements.
-- [Native I5a qualification](../../docs/Ariadne/i5a-native-qualification.md)
+- [Native I5a qualification](../../docs/Ariadne/zero-address-design.md#native-qualification)
   records the passing native measurements, aggregate gates and selected dependency snapshot.
-- [BAP workload replacement](../../docs/Ariadne/bap-windows-repin-validation.md)
+- [BAP workload replacement](../../docs/Ariadne/bap-analysis-core-design.md#windows-workload-replacement)
   records the separate 98-instruction capture and active BAP pin.
-- [I5a contracts](../../docs/Ariadne/i5a-contracts.md) explain what the resulting
+- [I5a contracts](../../docs/Ariadne/zero-address-design.md) explain what the resulting
   assessment can conclude.
-- [Input guide](../../docs/Ariadne/modules/input.md) describes captured-byte provenance.
+- [Input guide](../../docs/Ariadne/file-reader-design.md#public-interface) describes captured-byte provenance.
 
 **What remains unresolved.** Active Windows I4 performance and the separate BAP workload
 retain their own contracts. Native I5a acceptance covers the recorded dependency
@@ -149,7 +149,7 @@ boundary and short-branch target, full captured code, inputs, process/module
 identity and fault context. It does not derive expected results from Ariadne or
 BAP. The [replacement plan](../../Plans/bap-windows-repin.md) defines the pin and
 its historical 2,000 ms criterion; the later
-[unlimited BAP policy](../../docs/Ariadne/bap-unlimited-validation.md) supersedes
+[unlimited BAP policy](../../docs/Ariadne/bap-analysis-core-design.md#unlimited-timing-policy) supersedes
 that timing ceiling. I5a keeps its separate 1,500 ms CLI criterion.
 
 ## Inspect and analyze
@@ -223,6 +223,6 @@ match all reports. One warm-up/five repeats retain the 10 ms combined phase and
 1,500 ms assessment-CLI median limits. Both capture modes and source/tool/input
 stability must pass. An over-budget run records its samples and exits nonzero;
 the historical original-Windows I4 flag remains false in every I5a result.
-The [separate active I4 re-pin](../../docs/Ariadne/i4-windows-repin-validation.md)
-uses the 98-instruction workload. Its later [performance qualification](../../docs/Ariadne/i4-performance-validation.md)
+The [separate active I4 re-pin](../../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement)
+uses the 98-instruction workload. Its later [performance qualification](../../docs/Ariadne/workload-performance-design.md#native-investigation-qualification)
 meets the fixed CLI budget independently of the two-instruction I5a captures.

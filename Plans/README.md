@@ -25,7 +25,7 @@ keeping a plan outside `completed/` does not make its completed steps pending.
 
 **Where to go next.**
 
-- [Historical BAP documentation audit](../docs/Ariadne/bap-documentation-sync.md) — preserves the earlier v2 inventory and links to accepted v3 delivery.
+- [Historical BAP documentation audit](../docs/Ariadne/bap-analysis-core-design.md#documentation-audit) — preserves the earlier v2 inventory and links to accepted v3 delivery.
 
 - [BAP projection admission and coverage](bap-projection-admission.md) —
   accepted P0–P4 replaces opcode-name restrictions with validated BIL capabilities
@@ -34,19 +34,19 @@ keeping a plan outside `completed/` does not make its completed steps pending.
   Windows replacement, its distinct baseline and preserved historical Linux scope.
 
 - [I5c address-wrap plan](i5c-address-wrap.md) and
-  [design](../docs/Ariadne/i5c-address-wrap-design.md) — the selected next
+  [design](../docs/Ariadne/address-wrap-design.md) — the selected next
   arithmetic assessment, exact signed-displacement predicate and pending W0–W5 exits.
 - [I5b implementation plan](i5b-zero-base-offset.md) — delivered zero-base-plus-
   displacement assessment, decoded-role evidence and independent qualification.
 - [Investigation ledger](investigation-layer.md) — tracks active Windows I4
   performance, delivered I5a and later hypothesis/object/cross-capture work.
-- [I4 replacement result](../docs/Ariadne/i4-windows-repin-validation.md) — records
+- [I4 replacement result](../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement) — records
   the exact active capture and historical over-budget baseline; the later
-  [performance qualification](../docs/Ariadne/i4-performance-validation.md) meets both fixed budgets.
+  [performance qualification](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification) meets both fixed budgets.
 - [BAP integration ledger](bap-integration.md) — records completed semantic and
   analysis migration with remaining proof, source/tool and release limits.
-- [Native core qualification](../docs/Ariadne/bap-core-qualification.md) and
-  [native I5a qualification](../docs/Ariadne/i5a-native-qualification.md) — bind
+- [Native core qualification](../docs/Ariadne/bap-analysis-core-design.md#native-qualification) and
+  [native I5a qualification](../docs/Ariadne/zero-address-design.md#native-qualification) — bind
   accepted corpora, helper identities and the read-only dependency snapshot.
 - [Evidence guide](../evidence/Ariadne/README.md) — distinguishes retained results,
   failed progress records and fresh qualification after changes.
@@ -67,25 +67,25 @@ For the wider context, see the [documentation map](../docs/documentation-map.md)
 
 | Plan | Current state and next work |
 | --- | --- |
-| [BAP projection admission](bap-projection-admission.md) | P0–P4 accepted on the active real Windows replacement; remaining historical real-Linux clauses excluded: capability admission, conservative continuation, bounded completion, fresh root/native/model/mutation, parity and fixed-budget checks. See the [replacement record](../docs/Ariadne/real-capture-repin-79938.md); six historical Linux outputs remain unexercised. |
-| [Investigation layer](investigation-layer.md) | I0–I3 and active Windows producer correctness pass. I4 meets its fixed budgets in the [native performance result](../docs/Ariadne/i4-performance-validation.md); I5a is qualified, I5b is corpus-qualified, and other I5/I6/I7 remain later work. |
+| [BAP projection admission](bap-projection-admission.md) | P0–P4 accepted on the active real Windows replacement; remaining historical real-Linux clauses excluded: capability admission, conservative continuation, bounded completion, fresh root/native/model/mutation, parity and fixed-budget checks. See the [replacement record](../docs/Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query); six historical Linux outputs remain unexercised. |
+| [Investigation layer](investigation-layer.md) | I0–I3 and active Windows producer correctness pass. I4 meets its fixed budgets in the [native performance result](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification); I5a is qualified, I5b is corpus-qualified, and other I5/I6/I7 remain later work. |
 | [I5c address wrap](i5c-address-wrap.md) | Selected design and W0–W5 plan written; all implementation/qualification pending. Upper-wrap/no-wrap assessment uses the inherited lower-range profile; underflow remains unknown. |
 | [I5b zero base plus displacement](i5b-zero-base-offset.md) | B0–B5 implemented and corpus-qualified: 18 passing gates, 15 detected mutants, stable source/tool identities and six controlled Windows captures. |
 | [BAP integration](bap-integration.md) | Stage 1 and native A0–A6 are qualified on their exercised corpora. Maintain source/tool-bound regressions after changes; universal proof and packaged release acceptance remain separate. |
-| [Roadmap](../ROADMAP.md) | Current input and product direction, deferred readers and the [Stage F proof boundary](../docs/Ariadne/stage-f-proof-and-performance.md). |
+| [Roadmap](../ROADMAP.md) | Current input and product direction, deferred readers and the [Stage F proof boundary](../docs/Ariadne/semantic-assurance.md#universal-rust-refinement-boundary). |
 
 ## Delivered implementation and qualification plans
 
 | Plan | Completion boundary and evidence |
 | --- | --- |
-| [Complete Stage 2 execution](bap-stage2-implementation.md) | Native recovery, definitions, slicing, finite stateflow, generated replay and adoption delivered; [20-gate qualification](../docs/Ariadne/bap-core-qualification.md) verifies default selection and explicit Rust rollback. |
-| [OCaml foundation qualification](bap-ocaml-qualification.md) | OQ0–OQ6 qualified the pinned SDK, bounded native state exchange, transport, clean rebuild and mutations; [foundation record](../docs/Ariadne/bap-ocaml-qualification.md). |
+| [Complete Stage 2 execution](bap-stage2-implementation.md) | Native recovery, definitions, slicing, finite stateflow, generated replay and adoption delivered; [20-gate qualification](../docs/Ariadne/bap-analysis-core-design.md#native-qualification) verifies default selection and explicit Rust rollback. |
+| [OCaml foundation qualification](bap-ocaml-qualification.md) | OQ0–OQ6 qualified the pinned SDK, bounded native state exchange, transport, clean rebuild and mutations; [foundation record](../docs/Ariadne/bap-analysis-core-design.md#ocaml-foundation-qualification). |
 | [Stage 2 A0](bap-stage2-a0.md) | Historical interface/capability probe; the foundation and complete Stage 2 successors independently close its implementation gaps. |
-| [Native I4 performance](i4-performance-implementation.md) | D0–D3 complete: 1,692.696 ms Windows CLI / 2,000 ms, 182.924 ms Linux phases / 250 ms; [verified qualification](../docs/Ariadne/i4-performance-validation.md). |
-| [Windows I4 replacement](i4-windows-repin.md) | Capture/pin delivery complete with 17 passing gates; [validation](../docs/Ariadne/i4-windows-repin-validation.md) retains the unmet 2,000 ms CLI clause. The later native performance follow-up closes that clause for its recorded identities. |
-| [I5a zero-address assessment](i5a-zero-address.md) | H0–H5 delivered; [12-gate historical source/fixture result](../docs/Ariadne/i5a-validation.md) precedes the separately qualified native/controlled tiers. |
-| [Native I5a qualification](i5a-native-qualification.md) | [Native result](../docs/Ariadne/i5a-native-qualification.md): 14 source/fixture gates, 17 investigation gates and both controlled captures pass under the selected dependency snapshot and unchanged budgets. |
-| [BAP Windows replacement](bap-windows-repin.md) | New real Crashpad capture, independent inspection and durable input pin delivered; [historical validation](../docs/Ariadne/bap-windows-repin-validation.md) preserves the former bounded-policy failure. The [later unlimited policy](../docs/Ariadne/bap-unlimited-validation.md) supersedes that BAP timing criterion. |
+| [Native I4 performance](i4-performance-implementation.md) | D0–D3 complete: 1,692.696 ms Windows CLI / 2,000 ms, 182.924 ms Linux phases / 250 ms; [verified qualification](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification). |
+| [Windows I4 replacement](i4-windows-repin.md) | Capture/pin delivery complete with 17 passing gates; [validation](../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement) retains the unmet 2,000 ms CLI clause. The later native performance follow-up closes that clause for its recorded identities. |
+| [I5a zero-address assessment](i5a-zero-address.md) | H0–H5 delivered; [12-gate historical source/fixture result](../docs/Ariadne/zero-address-design.md#historical-source-and-fixture-qualification) precedes the separately qualified native/controlled tiers. |
+| [Native I5a qualification](i5a-native-qualification.md) | [Native result](../docs/Ariadne/zero-address-design.md#native-qualification): 14 source/fixture gates, 17 investigation gates and both controlled captures pass under the selected dependency snapshot and unchanged budgets. |
+| [BAP Windows replacement](bap-windows-repin.md) | New real Crashpad capture, independent inspection and durable input pin delivered; [historical validation](../docs/Ariadne/bap-analysis-core-design.md#windows-workload-replacement) preserves the former bounded-policy failure. The [later unlimited policy](../docs/Ariadne/bap-analysis-core-design.md#unlimited-timing-policy) supersedes that BAP timing criterion. |
 
 ## Archived completed plans
 
@@ -94,17 +94,17 @@ and workload exercised at the original run. Archiving does not refresh evidence.
 
 | Plan | Completion boundary and successor |
 | --- | --- |
-| [Investigation correctness fixes](completed/investigation-correctness-fixes.md) | Timing enforcement and valid truncation; [17-gate repair record](../docs/Ariadne/investigation-correctness-validation.md). The later active I4 re-pin retains its separate performance failure. |
-| [Rust source layout](completed/rust-source-layout.md) | Single root Cargo package and source consolidation; [delivery](../docs/Ariadne/rust-source-layout.md). |
-| [BAP-only semantics](completed/bap-only-semantics.md) | LLVM semantic selector/fallback removed; [historical removal](../docs/Ariadne/bap-only-removal-validation.md). Later Stage 1 and native Stage 2 records qualify their own scopes. |
+| [Investigation correctness fixes](completed/investigation-correctness-fixes.md) | Timing enforcement and valid truncation; [17-gate repair record](../docs/Ariadne/investigation-design.md#qualification-and-truncation-repairs). The later active I4 re-pin retains its separate performance failure. |
+| [Rust source layout](completed/rust-source-layout.md) | Single root Cargo package and source consolidation; [delivery](../docs/Ariadne/architecture.md#source-layout-and-development). |
+| [BAP-only semantics](completed/bap-only-semantics.md) | LLVM semantic selector/fallback removed; [historical removal](../docs/Ariadne/bap-analysis-core-design.md#bap-only-delivery). Later Stage 1 and native Stage 2 records qualify their own scopes. |
 | [Stage E initial integration](completed/stage-e-mirrorrust-integration.md) | Initial typed replay ports and fixture traces; [record](../evidence/Ariadne/stage-e-mirrorrust-integration-validation.json). |
-| [Stage E completion](completed/stage-e-completion.md) | Finite generated replay, mutations and report/CLI acceptance; [completion](../docs/Ariadne/stage-e-completion.md). |
-| [Operand/effects implementation](completed/operand-effects-plan.md) | Historical LLVM effect preparation; [validation](../docs/Ariadne/operand-effects-validation.md). Production minidump semantics use BAP. |
-| [Stage A MOV effects](completed/stage-a-memory-immediate-mov-plan.md) | Two scoped immediate-store rules; [validation](../docs/Ariadne/stage-a-validation.md). |
-| [Priority 1 real capture](completed/priority-1-real-capture-plan.md) | One controlled Chromium/Linux predecessor slice; [validation](../docs/Ariadne/priority-1-real-capture-validation.md). |
-| [Priority 2 path effects](completed/priority-2-path-driven-effects-plan.md) | Selected-path review and no-change decision; [validation](../docs/Ariadne/priority-2-effects-validation.md). New gaps need new scoped work. |
-| [Priority 3 presentation](completed/priority-3-investigator-presentation-plan.md) | Instruction overview and platform examples; [validation](../docs/Ariadne/priority-3-presentation-validation.md). |
-| [Priority 4 performance](completed/priority-4-workload-performance-plan.md) | Historical LLVM-backed workload optimization; [validation](../docs/Ariadne/priority-4-performance-validation.md). It does not qualify native BAP or the active I4 query. |
+| [Stage E completion](completed/stage-e-completion.md) | Finite generated replay, mutations and report/CLI acceptance; [completion](../docs/Ariadne/typed-replay-design.md#finite-corpus-and-claim-boundary). |
+| [Operand/effects implementation](completed/operand-effects-plan.md) | Historical LLVM effect preparation; [validation](../docs/Ariadne/operand-effects-design.md#historical-effect-qualification). Production minidump semantics use BAP. |
+| [Stage A MOV effects](completed/stage-a-memory-immediate-mov-plan.md) | Two scoped immediate-store rules; [validation](../docs/Ariadne/operand-effects-design.md#memory-immediate-mov-delivery-2026-09-28). |
+| [Priority 1 real capture](completed/priority-1-real-capture-plan.md) | One controlled Chromium/Linux predecessor slice; [validation](../docs/Ariadne/file-reader-design.md#historical-controlled-chromium-capture). |
+| [Priority 2 path effects](completed/priority-2-path-driven-effects-plan.md) | Selected-path review and no-change decision; [validation](../docs/Ariadne/operand-effects-design.md#selected-path-no-change-decision-2026-09-29). New gaps need new scoped work. |
+| [Priority 3 presentation](completed/priority-3-investigator-presentation-plan.md) | Instruction overview and platform examples; [validation](../docs/Ariadne/result-rendering.md#presentation-acceptance). |
+| [Priority 4 performance](completed/priority-4-workload-performance-plan.md) | Historical LLVM-backed workload optimization; [validation](../docs/Ariadne/workload-performance-design.md#historical-llvm-workload-qualification). It does not qualify native BAP or the active I4 query. |
 
 ## Retired work
 

@@ -10,9 +10,9 @@
 
 **Where to go next.**
 
-- [Stage E completion](Ariadne/stage-e-completion.md) — records generated conformance, handoff and report acceptance.
-- [Result contracts](Ariadne/stage-e-report-contracts.md) — expose stateflow without confusing it with dependency slicing.
-- [Native BAP qualification](Ariadne/bap-core-qualification.md) — records the completed finite-stateflow migration and default CLI ownership; the Rust engine remains the reference. Supplied LLVM IR still uses its separate Rust path.
+- [Stage E completion](Ariadne/typed-replay-design.md#finite-corpus-and-claim-boundary) — records generated conformance, handoff and report acceptance.
+- [Result contracts](Ariadne/typed-replay-design.md#result-families) — expose stateflow without confusing it with dependency slicing.
+- [Native BAP qualification](Ariadne/bap-analysis-core-design.md#native-qualification) — records the completed finite-stateflow migration and default CLI ownership; the Rust engine remains the reference. Supplied LLVM IR still uses its separate Rust path.
 
 **What remains unresolved.** Finite conformance checks do not prove the Rust implementation correct for every valid request. A universal refinement proof remains open, and adapter facts remain premises. It does not infer a historical path from crash-time observations.
 
@@ -20,8 +20,8 @@ For the wider context, see the optional [documentation map](documentation-map.md
 
 Status: the finite Rust path, frozen recovery handoff, generated conformance
 replay and evidence-linked reports/CLI are implemented and checked within the
-[Stage E completion scope](Ariadne/stage-e-completion.md). See the
-[Stage E completion](Ariadne/stage-e-completion.md). Historical design source
+[Stage E completion scope](Ariadne/typed-replay-design.md#finite-corpus-and-claim-boundary). See the
+[Stage E completion](Ariadne/typed-replay-design.md#finite-corpus-and-claim-boundary). Historical design source
 baseline: `62d7c57ac88336d1defd4bd121e9976470cf704f`.
 The [current roadmap](../ROADMAP.md)
 places this Rust module in Stage E.

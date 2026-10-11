@@ -19,21 +19,21 @@
 - [Selected real-capture record](real-capture-repin-79938/report.json) and
   [verified manifest](real-capture-repin-79938/evidence-manifest.json) — current
   P4/I4 qualification under the user-selected Windows pin; its
-  [guide](../../docs/Ariadne/real-capture-repin-79938.md) preserves Linux limits.
+  [guide](../../docs/Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query) preserves Linux limits.
 - [I5b qualification](i5b-qualification.json), [verified evidence manifest](i5b-evidence-manifest.json)
   and [controlled case pins](i5b-controlled-cases.json) — new source/fixture and
   real Windows machine-code debugging acceptance; see the
-  [validation guide](../../docs/Ariadne/i5b-validation.md) for scope and timings.
-- [Unlimited BAP timing policy](../../docs/Ariadne/bap-unlimited-validation.md) — distinguishes current qualification from earlier bounded-policy measurements.
+  [validation guide](../../docs/Ariadne/zero-base-offset-design.md#retained-qualification) for scope and timings.
+- [Unlimited BAP timing policy](../../docs/Ariadne/bap-analysis-core-design.md#unlimited-timing-policy) — distinguishes current qualification from earlier bounded-policy measurements.
 
 - [Checkpoints](../../CHECKPOINTS.md) — connect evidence to dated deliveries.
-- [Layout delivery](../../docs/Ariadne/rust-source-layout.md) — explains the regression tier before later tooling changes.
-- [Historical I5a delivery](../../docs/Ariadne/i5a-validation.md) — distinguishes its original source/fixture result from the separately qualified native and controlled Windows successors.
-- [Windows I4 re-pin](../../docs/Ariadne/i4-windows-repin-validation.md) — independent 98-start capture checks and historical timing failure;
-  [native performance qualification](../../docs/Ariadne/i4-performance-validation.md) closes the fixed CLI clause.
-- [Native I5a qualification](../../docs/Ariadne/i5a-native-qualification.md) — records accepted native measurements and the snapshot repair, while preserving earlier failures.
-- [Historical BAP workload repair](../../docs/Ariadne/bap-windows-workload-validation.md) — preserves the original missing-artifact checkpoint before later replacement and native qualification.
-- [Controlled BAP replacement](../../docs/Ariadne/bap-windows-repin-validation.md) — records the new active pin, durable input bundle and its own measured qualification.
+- [Layout delivery](../../docs/Ariadne/architecture.md#source-layout-and-development) — explains the regression tier before later tooling changes.
+- [Historical I5a delivery](../../docs/Ariadne/zero-address-design.md#historical-source-and-fixture-qualification) — distinguishes its original source/fixture result from the separately qualified native and controlled Windows successors.
+- [Windows I4 re-pin](../../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement) — independent 98-start capture checks and historical timing failure;
+  [native performance qualification](../../docs/Ariadne/workload-performance-design.md#native-investigation-qualification) closes the fixed CLI clause.
+- [Native I5a qualification](../../docs/Ariadne/zero-address-design.md#native-qualification) — records accepted native measurements and the snapshot repair, while preserving earlier failures.
+- [Historical BAP workload repair](../../docs/Ariadne/bap-analysis-core-design.md#workload-evidence-repair) — preserves the original missing-artifact checkpoint before later replacement and native qualification.
+- [Controlled BAP replacement](../../docs/Ariadne/bap-analysis-core-design.md#windows-workload-replacement) — records the new active pin, durable input bundle and its own measured qualification.
 
 **What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Embedded paths preserve the layout at the original run.
 
@@ -69,7 +69,7 @@ qualify the BAP backend, and absent Windows artifacts remain unmet requirements.
 
 The [investigation correctness record](investigation-correctness-validation.json)
 and [manifest](investigation-correctness-evidence-manifest.json) retain the later
-qualification/truncation repairs. Their [delivery explanation](../../docs/Ariadne/investigation-correctness-validation.md)
+qualification/truncation repairs. Their [delivery explanation](../../docs/Ariadne/investigation-design.md#qualification-and-truncation-repairs)
 distinguishes the passing 17-gate fixture/Linux tier from unavailable full Windows
 acceptance. Earlier evidence files have not been rewritten.
 
@@ -79,7 +79,7 @@ The [I5a acceptance record](i5a-validation.json),
 41 independent fixtures, 16 I5a mutants, unchanged reports and frozen measurements.
 The archive includes a source snapshot and derived outputs; real captures remain
 external. Controlled real Windows I5a and original-Windows I4 are explicitly false
-in the acceptance record. See the [delivery explanation](../../docs/Ariadne/i5a-validation.md)
+in the acceptance record. See the [delivery explanation](../../docs/Ariadne/zero-address-design.md#historical-source-and-fixture-qualification)
 for the exercised scope and remaining clauses.
 
 The later [Crashpad demo record](crashpad-demo-validation.json),
@@ -87,7 +87,7 @@ The later [Crashpad demo record](crashpad-demo-validation.json),
 retain a native Windows build, partial/full real captures, independent field/code
 checks and passing zero-address answers. That historical run did not meet the
 CLI timing condition, so its controlled-case flag remains false. Raw dumps and executables
-stay external under ignored local artifact directories. The [delivery guide](../../docs/Ariadne/crashpad-demo-validation.md)
+stay external under ignored local artifact directories. The [delivery guide](../../docs/Ariadne/zero-address-design.md#controlled-windows-capture)
 describes the original capture gap and links the later passing native qualification.
 
 ## Native I5a refresh progress (2026-10-04)
@@ -116,7 +116,7 @@ SDK, Init/Visit, transport and mutation checks. All OQ gates and full A0 exit
 now pass after the approved formatting-only MirrorRust change and fresh
 regression checks. The previous partial record/archive is preserved under
 `bap-ocaml-history/2026-10-03-format-blocked/`. That bounded A0 record does not qualify complete Stage 2.
-See the [qualification guide](../../docs/Ariadne/bap-ocaml-qualification.md) for
+See the [qualification guide](../../docs/Ariadne/bap-analysis-core-design.md#ocaml-foundation-qualification) for
 coverage, the resolved prerequisite and the successor A1–A6 work. Earlier Stage 1/A0
 records remain historical and have not been rebound to replacement source hashes.
 
@@ -126,13 +126,13 @@ The [source/fixture record](i5a-native-fixture-validation.json) passes all 14 ga
 the separate [controlled record](i5a-native-controlled-validation.json) qualifies
 partial/full Windows captures under the unchanged 1,500 ms CLI and 10 ms phase
 criteria. Active Windows I4 correctness passes; the later
-[native performance qualification](../../docs/Ariadne/i4-performance-validation.md) meets its fixed CLI budget. The [archive](i5a-native-evidence.tar.gz)
+[native performance qualification](../../docs/Ariadne/workload-performance-design.md#native-investigation-qualification) meets its fixed CLI budget. The [archive](i5a-native-evidence.tar.gz)
 and [manifest](i5a-native-evidence-manifest.json) retain 1,969 verified entries,
 216 source hashes, exact producer records, raw samples, report bundles and
 historical capture metadata. Real dump/executable bytes remain external.
 
 Qualification uses the manifest-selected, read-only MirrorRust view described
-in the [guide](../../docs/Ariadne/i5a-native-qualification.md). The Stage 2 archive
+in the [guide](../../docs/Ariadne/zero-address-design.md#native-qualification). The Stage 2 archive
 contains `dependencies/mirrorrust-snapshot.json`, including exact source bytes.
 This qualifies that dependency snapshot; live-checkout changes have their own
 identities. Earlier failed records retain their original flags and bytes.
@@ -144,7 +144,7 @@ aggregate gates, 632 stable source hashes, `stage2Qualified=true` and verified
 default-native selection with explicit Rust rollback. The
 [archive](bap-core-evidence.tar.gz) and [manifest](bap-core-evidence-manifest.json)
 retain 1,355 verified entries, including the default-helper-path smoke check.
-The [qualification guide](../../docs/Ariadne/bap-core-qualification.md) explains
+The [qualification guide](../../docs/Ariadne/bap-analysis-core-design.md#native-qualification) explains
 the 44 generated traces/330 observations, twelve native algorithm mutations,
 five measured workloads and separate proof/release limits. Earlier Stage 1 and
 A0 records remain historical evidence for their exact source sets. The original
@@ -179,7 +179,7 @@ manifest and prior acceptance flags retain their historical meaning.
 ## Native I4 performance accepted (2026-10-07)
 
 The [qualification record](i4-performance-qualification.json) and
-[validation guide](../../docs/Ariadne/i4-performance-validation.md) close the
+[validation guide](../../docs/Ariadne/workload-performance-design.md#native-investigation-qualification) close the
 active exact-query timing clause: 1,692.696 ms Windows explanation CLI against
 2,000 ms, and 182.924 ms Linux incremental phases against 250 ms. The original
 re-pin's over-budget flag above remains historical. Capture/query pins and all

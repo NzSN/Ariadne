@@ -5,22 +5,22 @@
 **Status.** Stage 1 and Stage 2 are implemented and qualified on their recorded
 corpora. The 2026-10-03 unlimited-policy record passes 17 implementation gates
 and 60 controlled tests; the A0 foundation is completed. An earlier retained
-refresh is nested in the [2026-10-07 I4 performance record](../docs/Ariadne/i4-performance-validation.md):
+refresh is nested in the [2026-10-07 I4 performance record](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification):
 17 Stage 1 gates and 20 native-core gates pass, native analysis is the CLI
 default and explicit Rust rollback is verified. The
-[historical documentation audit](../docs/Ariadne/bap-documentation-sync.md)
+[historical documentation audit](../docs/Ariadne/bap-analysis-core-design.md#documentation-audit)
 checked that refresh against its v2 inventories. The
-[accepted v3 successor](../docs/Ariadne/real-capture-repin-79938.md) supplies the
+[accepted v3 successor](../docs/Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query) supplies the
 later remote qualification; the user excluded remaining historical real-Linux
 clauses. Older standalone records retain their original scope.
 
-**Why this document exists.** [BAP assessment](../docs/Ariadne/bap-core-refactor-assessment.md) motivates staged integration behind the existing Rust contract.
+**Why this document exists.** [BAP assessment](../docs/Ariadne/bap-analysis-core-design.md#architectural-rationale) motivates staged integration behind the existing Rust contract.
 
 **What this document establishes.** Current implementation ownership, the completed Stage 1 qualification policy, and the acceptance criteria for the delivered A0–A6 migration. Stage 2 owns native analysis while preserving the existing observable contracts; each retained record qualifies its exact source/tool snapshot.
 
 **Where to go next.**
 
-- [Historical BAP documentation audit](../docs/Ariadne/bap-documentation-sync.md) — checks the earlier v2 ownership and nested Stage 1/Stage 2 evidence.
+- [Historical BAP documentation audit](../docs/Ariadne/bap-analysis-core-design.md#documentation-audit) — checks the earlier v2 ownership and nested Stage 1/Stage 2 evidence.
 
 - [Accepted projection admission and coverage](bap-projection-admission.md) —
   delivered P0–P4, observed-form validation, BIL capability admission and
@@ -28,35 +28,35 @@ clauses. Older standalone records retain their original scope.
   root/native/model/mutation, parity and fixed-budget gates; remaining historical
   real-Linux clauses are excluded.
 
-- [Stage 2 qualification](../docs/Ariadne/bap-core-qualification.md) — records all 20 passing gates, native default adoption, Rust rollback and the exercised scope.
+- [Stage 2 qualification](../docs/Ariadne/bap-analysis-core-design.md#native-qualification) — records all 20 passing gates, native default adoption, Rust rollback and the exercised scope.
 - [Stage 2 execution plan](bap-stage2-implementation.md) and [contract](../docs/Ariadne/bap-analysis-core-design.md) — explain the delivered native algorithms and their acceptance criteria.
 - [Stage 2 A0 plan](bap-stage2-a0.md) — preserves the completed migration foundation and its earlier bounded scope.
 
-- [Unlimited timing policy](../docs/Ariadne/bap-unlimited-validation.md) — records the user-authorized removal of the BAP latency ceiling and refreshed qualification.
+- [Unlimited timing policy](../docs/Ariadne/bap-analysis-core-design.md#unlimited-timing-policy) — records the user-authorized removal of the BAP latency ceiling and refreshed qualification.
 
 - [Windows workload replacement](bap-windows-repin.md) — follows the user's authorization to generate and repin a new controlled Crashpad capture for Stage 1.
 
-- [Backend design](../docs/Ariadne/bap-semantic-backend-design.md) — defines the implemented Stage 1 boundary.
-- [BAP-only delivery](../docs/Ariadne/bap-only-removal-validation.md) — records the authorized default change and its narrower acceptance.
-- [Previous workload delivery](../docs/Ariadne/bap-windows-workload-validation.md) — retains the R0–R2 repair and refresh evidence before the workload replacement.
-- [Replacement validation](../docs/Ariadne/bap-windows-repin-validation.md) — records the completed capture/pin, passing implementation gates and former latency limit.
-- [Backend guide](../docs/Ariadne/modules/bap.md) — provides current build and qualification entry points.
-- [Controlled Windows demo](../docs/Ariadne/crashpad-demo-validation.md) — documents the separate two-instruction I5a/smoke capture.
+- [Backend design](../docs/Ariadne/bap-analysis-core-design.md) — defines the implemented Stage 1 boundary.
+- [BAP-only delivery](../docs/Ariadne/bap-analysis-core-design.md#bap-only-delivery) — records the authorized default change and its narrower acceptance.
+- [Previous workload delivery](../docs/Ariadne/bap-analysis-core-design.md#workload-evidence-repair) — retains the R0–R2 repair and refresh evidence before the workload replacement.
+- [Replacement validation](../docs/Ariadne/bap-analysis-core-design.md#windows-workload-replacement) — records the completed capture/pin, passing implementation gates and former latency limit.
+- [Backend guide](../docs/Ariadne/bap-analysis-core-design.md#backend-usage) — provides current build and qualification entry points.
+- [Controlled Windows demo](../docs/Ariadne/zero-address-design.md#controlled-windows-capture) — documents the separate two-instruction I5a/smoke capture.
 
 **What remains unresolved.** No required P4 work remains in the
 [accepted scope](../evidence/Ariadne/bap-admission/p4-acceptance-20261010.json).
 Historical real-Linux clauses are excluded, not exercised. Generic-runner
 external-evidence ingestion and the old Scanner Rust timing repetitions remain
 optional follow-ups. Earlier integration records do not qualify v3 by themselves.
-The qualified native analysis does not establish universal refinement, ISA/lifter correctness or packaged cross-platform release qualification. Source/tool changes require fresh qualification. The active BAP policy has no latency ceiling, while historical Priority 4, active re-pinned I4 and controlled I5a retain their separate contracts. The [native I5a refresh](../docs/Ariadne/i5a-native-qualification.md) now independently qualifies both controlled captures under its fixed budgets and pinned dependency snapshot; that acceptance comes from its own records.
+The qualified native analysis does not establish universal refinement, ISA/lifter correctness or packaged cross-platform release qualification. Source/tool changes require fresh qualification. The active BAP policy has no latency ceiling, while historical Priority 4, active re-pinned I4 and controlled I5a retain their separate contracts. The [native I5a refresh](../docs/Ariadne/zero-address-design.md#native-qualification) now independently qualifies both controlled captures under its fixed budgets and pinned dependency snapshot; that acceptance comes from its own records.
 
 For the wider context, see the optional [documentation map](../docs/documentation-map.md).
 
 Originally prepared **2026-10-01** against `818f93e`; the execution ledger below
 supersedes its optional-backend rollout and former crate-layout proposals.
-Design basis: [BAP assessment](../docs/Ariadne/bap-core-refactor-assessment.md),
+Design basis: [BAP assessment](../docs/Ariadne/bap-analysis-core-design.md#architectural-rationale),
 [current effect contract](../docs/Ariadne/operand-effects-design.md), and
-[Stage E contracts](../docs/Ariadne/stage-e-report-contracts.md).
+[Stage E contracts](../docs/Ariadne/typed-replay-design.md#result-families).
 
 The requested order remains Stage 1, BAP lifting/projection feeding the existing
 Rust engine, followed by Stage 2, BAP-owned recovery and analysis. The completed
@@ -66,7 +66,7 @@ Stage 2 depends on a passing Stage 1 record. Partial acceptance does not
 satisfy that dependency. Stage D ISA proofs are [retired](../docs/Ariadne/semantic-assurance.md);
 Stage F universal refinement remains a separate research boundary.
 
-The [Stage 1 protocol/projection implementation design](../docs/Ariadne/bap-semantic-backend-design.md)
+The [Stage 1 protocol/projection implementation design](../docs/Ariadne/bap-analysis-core-design.md)
 records the selected isolated C bridge hosting BAP's OCaml runtime, actual
 release-asset fingerprints and conservative admission policy. S0 uses pinned
 official assets rather than modifying the user's existing OCaml switches.
@@ -103,7 +103,7 @@ no activated external dependencies.
 | Investigation and rendering | `src/investigation/`, `src/reports/` |
 | Benchmarks and generated replay | `src/bin/`, `src/mbt/`, `tests/mbt/`, `mbt/` |
 
-The [Stage 2 qualification](../docs/Ariadne/bap-core-qualification.md) checks actual
+The [Stage 2 qualification](../docs/Ariadne/bap-analysis-core-design.md#native-qualification) checks actual
 native recovery/analysis state and transitions through helper replay, mutations
 and product comparisons. Its evidence is separate from Stage 1 BIL producer
 checks and Rust replay.
@@ -154,18 +154,18 @@ cannot reuse stale instruction semantics.
 | Scope | Current state | Remaining action |
 | --- | --- | --- |
 | S0–S3: selected runtime, lifting, projection and product integration | Implemented; BAP-only production preparation | Preserve current identities, explicit unsupported results and capture-only input. |
-| S4: BAP correctness qualification | Historical unlimited-policy and October 7 v2 refresh passed their 17/17 gates; current v3 P4 is accepted | Use the [selected qualification](../docs/Ariadne/real-capture-repin-79938.md); earlier inventories stay historical. Preserve exact source/tool/capture binding. |
+| S4: BAP correctness qualification | Historical unlimited-policy and October 7 v2 refresh passed their 17/17 gates; current v3 P4 is accepted | Use the [selected qualification](../docs/Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query); earlier inventories stay historical. Preserve exact source/tool/capture binding. |
 | S5: workload acceptance | Active capture is pinned; timing policy is unlimited | Retain valid finite raw measurements and all correctness/source/tool checks. |
-| A0: migration contract | Qualified: all OQ0–OQ6 gates pass | Retain the source-bound [OCaml qualification](../docs/Ariadne/bap-ocaml-qualification.md) as the completed foundation for the later A1–A6 result. |
+| A0: migration contract | Qualified: all OQ0–OQ6 gates pass | Retain the source-bound [OCaml qualification](../docs/Ariadne/bap-analysis-core-design.md#ocaml-foundation-qualification) as the completed foundation for the later A1–A6 result. |
 | A1–A6: BAP analysis core | Qualified: 20 aggregate gates pass, default native selection and Rust rollback verified | Follow the [complete execution plan](bap-stage2-implementation.md). |
 
 The `bap-stage1-validation.json` and `bap-only-removal-validation.json` records
 contain changed source hashes and obsolete pre-consolidation paths. Matching
 native helper hashes alone does not make those records current. The newer I5a
 record contains the nested Stage E regression reused after full source/tool
-verification in the [previous BAP record](../docs/Ariadne/bap-windows-workload-validation.md).
+verification in the [previous BAP record](../docs/Ariadne/bap-analysis-core-design.md#workload-evidence-repair).
 That record qualifies its source snapshot and available corpus. The
-[replacement campaign](../docs/Ariadne/bap-windows-repin-validation.md) separately
+[replacement campaign](../docs/Ariadne/bap-analysis-core-design.md#windows-workload-replacement) separately
 binds its new manifest, input archive and consumer changes in the retained result.
 
 ### Next execution order
@@ -174,14 +174,14 @@ binds its new manifest, input archive and consumer changes in the retained resul
 | --- | --- | --- |
 | R0. Repair Windows-input bookkeeping | Complete | [measure_bap.py](../tools/measure_bap.py) keeps `source_hashes_before` separate from `seed_definitions`; a stable Windows run preserves the source-hash map, while a changed inventory fails. Existing artifact, query, producer and captured-byte checks remain enforced. |
 | R1. Make qualification decisions explicit | Complete in the previous delivery | Workload v2 and aggregate v3 introduced raw CLI samples and independent decisions. The active replacement now uses workload v4, aggregate v5 and `windowsWorkload*` fields through the shared [validator](../tools/bap_workload_contract.py). |
-| R2. Refresh current source/corpus evidence | Complete for the previous available corpus | The 2026-10-03 [delivery record](../docs/Ariadne/bap-windows-workload-validation.md) retains 17 passing implementation gates, 177 stable sources, 99 matched model states, 16 detected mutations and four available release workloads. Stage E was reused after complete identity checks. |
+| R2. Refresh current source/corpus evidence | Complete for the previous available corpus | The 2026-10-03 [delivery record](../docs/Ariadne/bap-analysis-core-design.md#workload-evidence-repair) retains 17 passing implementation gates, 177 stable sources, 99 matched model states, 16 detected mutations and four available release workloads. Stage E was reused after complete identity checks. |
 | R3. Replace and measure the Windows S4/S5 case | Complete under the former bounded policy | The [replacement plan](bap-windows-repin.md) delivered the capture, pin and exact 98-instruction evidence. The observed CLI median is 10,667.760921 ms against the former 2,000 ms limit. |
-| R4. Record the full Stage 1 decision | Complete: full exit and prerequisite true | Use the [current policy validation](../docs/Ariadne/bap-unlimited-validation.md). Valid captured evidence and passing implementation gates establish the prerequisite; the A0 foundation is qualified; complete A1–A6 is qualified by the later Stage 2 record. |
+| R4. Record the full Stage 1 decision | Complete: full exit and prerequisite true | Use the [current policy validation](../docs/Ariadne/bap-analysis-core-design.md#unlimited-timing-policy). Valid captured evidence and passing implementation gates establish the prerequisite; the A0 foundation is qualified; complete A1–A6 is qualified by the later Stage 2 record. |
 
 The previous R0–R2 delivery retains 39 passing controlled tests across the runner, shared validator and
 aggregate checker, including complete source/tool inventories and captured
 preparation evidence for every decoded Windows address. The
-[delivery record](../docs/Ariadne/bap-windows-workload-validation.md) separates
+[delivery record](../docs/Ariadne/bap-analysis-core-design.md#workload-evidence-repair) separates
 those stubbed decision tests from fresh native/model/mutation/workload evidence
 and retained Stage E reuse. The replacement now passes 59 controlled BAP tests
 and nine independent-inspector tests. Its fresh aggregate separately passes
@@ -193,7 +193,7 @@ slice with zero obligations and no missing seeds. All eight RCX producer-byte
 witnesses pass. Five measured release CLI samples have a **10,667.760921 ms**
 median, minimum 10,408.020862 ms and maximum 10,821.892755 ms. The evidence is valid
 under the former **2,000 ms** policy the limit was unmet and both exit fields
-were false. The [unlimited policy](../docs/Ariadne/bap-unlimited-validation.md)
+were false. The [unlimited policy](../docs/Ariadne/bap-analysis-core-design.md#unlimited-timing-policy)
 supersedes that timing condition.
 
 The **current user-authorized qualification policy** requires passing implementation
@@ -213,7 +213,7 @@ historical case.
 
 The user subsequently removed the BAP latency ceiling. The replacement changed the
 active BAP S4/S5 input; historical Priority 4 retains the original manifest.
-The later [I4-specific re-pin](../docs/Ariadne/i4-windows-repin-validation.md)
+The later [I4-specific re-pin](../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement)
 uses the same capture under its unchanged 2,000 ms investigation budget. BAP-only default selection retains its separate explicit authorization.
 
 The existing two-instruction Crashpad demo remains a separate I5a/smoke case.
@@ -267,7 +267,7 @@ python3 tools/measure_bap.py --skip-windows --output /new/implementation-directo
 
 `ARIADNE_PRIORITY4_DUMP` no longer selects either active BAP or I4 workloads.
 BAP uses its bundled pin or `ARIADNE_BAP_WINDOWS_DUMP`; the separately
-[re-pinned I4 runner](../docs/Ariadne/i4-windows-repin-validation.md) uses its
+[re-pinned I4 runner](../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement) uses its
 own bundle contract or `ARIADNE_I4_WINDOWS_DUMP`. Explicit `--skip-windows`
 leaves the corresponding Windows qualification predicates false.
 
@@ -346,12 +346,12 @@ A partial Stage 1 cannot qualify Stage 2.
 
 Stage 2 began on 2026-10-03. The [A0 plan](bap-stage2-a0.md),
 [analysis contract](../docs/Ariadne/bap-analysis-core-design.md) and
-[validation](../docs/Ariadne/bap-stage2-a0-validation.md) retain seven contract
+[validation](../docs/Ariadne/bap-analysis-core-design.md#a0-capability-evidence) retain seven contract
 tests and native graph/term observations. The subsequent
-[OCaml foundation](../docs/Ariadne/bap-ocaml-qualification.md) implements an isolated
+[OCaml foundation](../docs/Ariadne/bap-analysis-core-design.md#ocaml-foundation-qualification) implements an isolated
 SDK, real Init/Visit state and Rust transport. Its recorded OQ decision controls
 full A0 exit. Complete A1–A6 and default adoption subsequently pass the
-[Stage 2 qualification](../docs/Ariadne/bap-core-qualification.md).
+[Stage 2 qualification](../docs/Ariadne/bap-analysis-core-design.md#native-qualification).
 
 The delivered Stage 2 helper owns scoped project/graph and mutable analysis
 state. Rust retains captured input, validated orchestration and reports, and
@@ -403,9 +403,9 @@ Stage D is retired; neither BAP stage establishes Stage F's universal proof goal
 
 S0/S1 selected and implemented the current packaged runtime, helper lifecycle,
 target configuration, raw-byte protocol and admitted BIL subset. The
-[A0 qualification](../docs/Ariadne/bap-ocaml-qualification.md) resolved the isolated
+[A0 qualification](../docs/Ariadne/bap-analysis-core-design.md#ocaml-foundation-qualification) resolved the isolated
 runtime/pass build and bounded native observations. The subsequent
-[Stage 2 qualification](../docs/Ariadne/bap-core-qualification.md) covers complete
+[Stage 2 qualification](../docs/Ariadne/bap-analysis-core-design.md#native-qualification) covers complete
 native analysis and per-action observations under its pinned SDK and transport
 contract. Broader LLVM/runtime interoperability remains outside that result.
 The [official release](https://github.com/BinaryAnalysisPlatform/bap/releases/tag/v2.5.0)
@@ -422,7 +422,7 @@ cases, strict transport, both platform fixtures, full-state model replay,
 S5 includes startup/lift/projection/analysis/render timing and a controlled
 coverage benefit, with one warm-up and five release-build repeats.
 
-The [previous R0–R2 delivery](../docs/Ariadne/bap-windows-workload-validation.md),
+The [previous R0–R2 delivery](../docs/Ariadne/bap-analysis-core-design.md#workload-evidence-repair),
 recorded on 2026-10-03 before the replacement,
 records the repaired runner and shared evidence validator. R0–R2 are complete
 for the available corpus. The [retained aggregate](../evidence/Ariadne/bap-windows-workload-validation.json)
@@ -440,7 +440,7 @@ and its native IR, MC and Graphviz tool hashes. The
 binds the [retained archive](../evidence/Ariadne/bap-windows-workload-evidence.tar.gz),
 whose 238 entries were verified.
 
-The [replacement delivery](../docs/Ariadne/bap-windows-repin-validation.md)
+The [replacement delivery](../docs/Ariadne/bap-analysis-core-design.md#windows-workload-replacement)
 records a new native Crashpad capture and active BAP pin under the user's
 authorization. Capture generation and independent inspection are complete;
 59 controlled BAP tests and nine inspector tests pass. The
@@ -456,7 +456,7 @@ The historical replacement phase benchmark measured reference decoding at 7,572.
 helper startup at 1,178.301727 ms and core analysis at 69.614232 ms (medians).
 These historical measurements motivated later investigation. No performance
 fix was implemented in the replacement campaign. The subsequent
-[I4 performance delivery](../docs/Ariadne/i4-performance-validation.md) implements
+[I4 performance delivery](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification) implements
 snapshot-owned decoder reuse, runtime-hash streaming and native core/transport
 caches; it qualifies its exact query independently of these old samples. The replacement task is
 complete; the user subsequently removed that timing limit. The earlier false decision remains historical

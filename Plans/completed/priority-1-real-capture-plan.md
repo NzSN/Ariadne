@@ -4,13 +4,13 @@
 
 **Status.** Completed plan, archived; acceptance is limited to the recorded scope.
 
-**Why this document exists.** [Motivating design](../../docs/Ariadne/priority-1-real-capture-design.md) defines the problem and contract this plan implements.
+**Why this document exists.** [Motivating design](../../docs/Ariadne/file-reader-design.md#independent-entry-and-real-capture-evidence) defines the problem and contract this plan implements.
 
 **What this document establishes.** The controlled Chromium/Linux case demonstrates a captured predecessor slice from an independently established earlier entry and retains a possible address producer with explicit gaps.
 
 **Where to go next.**
 
-- [Delivery and follow-up](../../docs/Ariadne/priority-1-real-capture-validation.md) — records what was exercised and which limits remain.
+- [Delivery and follow-up](../../docs/Ariadne/file-reader-design.md#historical-controlled-chromium-capture) — records what was exercised and which limits remain.
 - [Active plan index](../README.md) — prevents completed steps from being mistaken for pending work.
 
 **What remains unresolved.** The implementation steps below are archived, not a current task list. These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. The later investigation delivery explains the origins; it still does not establish an executed path or root cause.
@@ -23,15 +23,15 @@ For the wider context, see the optional [documentation map](../../docs/documenta
 > for current work and separate qualification requirements.
 
 Plan dated **2026-09-29** for practical priority 1 in the
-[assurance queue](../../docs/Ariadne/practical-assurance-priorities.md). It executes the
-[real-capture predecessor-slice design](../../docs/Ariadne/priority-1-real-capture-design.md)
+[assurance queue](../../docs/Ariadne/semantic-assurance.md#practical-assurance-priorities). It executes the
+[real-capture predecessor-slice design](../../docs/Ariadne/file-reader-design.md#independent-entry-and-real-capture-evidence)
 and extends the delivered, tool-produced
-[Stage B/C fixture and CLI](../../docs/Ariadne/stage-b-c-validation.md); that fixture
+[Stage B/C fixture and CLI](../../docs/Ariadne/file-reader-design.md#captured-predecessor-fixtures); that fixture
 remains a regression, not evidence of a historical execution. The relevant
-[reader design](../../docs/Ariadne/file-reader-design.md) and [report contract](../../docs/Ariadne/stage-c-report-schema.md)
+[reader design](../../docs/Ariadne/file-reader-design.md) and [report contract](../../docs/Ariadne/result-rendering.md#json-v1)
 still limit input to Windows/Linux AMD64 minidumps and captured bytes.
 The 2026-09-29 controlled Chromium/Linux case is now
-[qualified by source-bound evidence](../../docs/Ariadne/priority-1-real-capture-validation.md).
+[qualified by source-bound evidence](../../docs/Ariadne/file-reader-design.md#historical-controlled-chromium-capture).
 The steps below remain the acceptance procedure for that exact case or a new
 candidate; they do not license reusing its result for a changed artifact.
 

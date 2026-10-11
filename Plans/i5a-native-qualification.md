@@ -8,7 +8,7 @@ passes 17, refreshed Stage 2 passes 20, and both retained controlled Windows
 capture modes meet the unchanged timing criteria. Qualification uses the
 recorded read-only MirrorRust snapshot.
 
-**Why this document exists.** The [I5a design](../docs/Ariadne/i5a-zero-address-design.md)
+**Why this document exists.** The [I5a design](../docs/Ariadne/zero-address-design.md)
 requires evidence for the selected analysis backend. The historical controlled
 runner used an older fixture record, and its phase benchmark exercised Rust
 analysis while the product CLI had moved to native BAP.
@@ -20,15 +20,15 @@ No production performance patch was needed.
 
 **Where to go next.**
 
-- [Qualification guide](../docs/Ariadne/i5a-native-qualification.md) — accepted
+- [Qualification guide](../docs/Ariadne/zero-address-design.md#native-qualification) — accepted
   records, measurements, snapshot identity and limits.
 - [I5a implementation plan](i5a-zero-address.md) — frozen admission, reports,
   budgets and independently reported qualification tiers.
-- [Historical capture evidence](../docs/Ariadne/crashpad-demo-validation.md) —
+- [Historical capture evidence](../docs/Ariadne/zero-address-design.md#controlled-windows-capture) —
   original Windows producer and preserved partial/full inputs.
-- [Stage 2 qualification](../docs/Ariadne/bap-core-qualification.md) — native
+- [Stage 2 qualification](../docs/Ariadne/bap-analysis-core-design.md#native-qualification) — native
   analysis evidence refreshed after the qualification tooling changes.
-- [Investigation contracts](../docs/Ariadne/investigation-contracts.md) — exact
+- [Investigation contracts](../docs/Ariadne/investigation-design.md) — exact
   query/evidence binding and the separate active Windows I4 timing obligation.
 
 **What remains unresolved.** Active Windows I4 performance, packaged release qualification,
@@ -94,7 +94,7 @@ The [fixture record](../evidence/Ariadne/i5a-native-fixture-validation.json)
 qualifies the source/fixture tier; its controlled-case flag remains false by
 scope. The separate [controlled record](../evidence/Ariadne/i5a-native-controlled-validation.json)
 qualifies both real Windows capture modes. Its historical original-Windows I4
-flag stays false in both records. The [separate active I4 re-pin](../docs/Ariadne/i4-windows-repin-validation.md)
+flag stays false in both records. The [separate active I4 re-pin](../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement)
 passes correctness but exceeds its fixed budget. The [verified archive](../evidence/Ariadne/i5a-native-evidence-manifest.json)
 binds retained files and maps their original runner paths.
 

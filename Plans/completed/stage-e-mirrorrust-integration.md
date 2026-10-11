@@ -4,13 +4,13 @@
 
 **Status.** Completed plan, archived; acceptance is limited to the recorded scope.
 
-**Why this document exists.** [Motivating design](../../docs/Ariadne/stage-e-mirrorrust-design.md) defines the problem and contract this plan implements.
+**Why this document exists.** [Motivating design](../../docs/Ariadne/typed-replay-design.md) defines the problem and contract this plan implements.
 
 **What this document establishes.** This first-stage plan delivered generated typed ports and the initial stateflow/IR fixture replay. The later Stage E completion expanded that initial integration to a broader finite acceptance campaign.
 
 **Where to go next.**
 
-- [Delivery and follow-up](../../docs/Ariadne/stage-e-completion.md) — records what was exercised and which limits remain.
+- [Delivery and follow-up](../../docs/Ariadne/typed-replay-design.md#finite-corpus-and-claim-boundary) — records what was exercised and which limits remain.
 - [Active plan index](../README.md) — prevents completed steps from being mistaken for pending work.
 
 **What remains unresolved.** The implementation steps below are archived, not a current task list. These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Finite conformance checks do not prove the Rust implementation correct for every valid request. A universal refinement proof remains open, and adapter facts remain premises.
@@ -22,7 +22,7 @@ For the wider context, see the optional [documentation map](../../docs/documenta
 > to its original sources, backend and workload. See the [plan index](../README.md)
 > for current work and separate qualification requirements.
 
-Prepared 2026-10-01. Design: [typed replay integration](../../docs/Ariadne/stage-e-mirrorrust-design.md).
+Prepared 2026-10-01. Design: [typed replay integration](../../docs/Ariadne/typed-replay-design.md).
 
 This stage connects the two existing Stage E Rust engines to the sibling
 `MirrorRust` checkout. It does not close the broader Stage E acceptance campaign.

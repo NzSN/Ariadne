@@ -10,7 +10,7 @@ The [qualification record](../evidence/Ariadne/real-capture-repin-79938/report.j
 binds independent inspection, fresh output identity, native-default/product
 qualification and unchanged fixed budgets.
 
-**Why this document exists.** The [P4 resume](../docs/Ariadne/bap-admission-resume.md)
+**Why this document exists.** The [P4 resume](../docs/Ariadne/bap-analysis-core-design.md#admission-resume)
 cannot recover its original Linux capture. The user selected a different
 DumpLedger capture for the active real-capture clause.
 
@@ -20,9 +20,9 @@ relabeled and no real-Linux acceptance is inferred from this Windows case.
 
 **Where to go next.**
 
-- [Entry/evidence design](../docs/Ariadne/priority-1-real-capture-design.md) —
+- [Entry/evidence design](../docs/Ariadne/file-reader-design.md#independent-entry-and-real-capture-evidence) —
   requires independently established earlier entries and capture-only bytes.
-- [Replacement record](../docs/Ariadne/real-capture-repin-79938.md) — selected
+- [Replacement record](../docs/Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query) — selected
   identity, boundaries, validation and unresolved scope.
 - [Active manifest](../evidence/Ariadne/real-capture-workload-case.json) — exact
   metadata and resource/budget premises for every active workload consumer.

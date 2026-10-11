@@ -22,7 +22,7 @@ has P0–P4 accepted on the qualified real Windows replacement. The
 [user decision](evidence/Ariadne/bap-admission/p4-acceptance-20261010.json) excludes
 the remaining historical real-Linux clauses; no required P4 work remains.
 Bounded native completion pages allow the Scanner query to complete. The
-[replacement record](docs/Ariadne/real-capture-repin-79938.md) binds the fresh
+[replacement record](docs/Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query) binds the fresh
 corpus and fixed budgets; old Linux coverage and six historical hashes remain
 unexercised.
 
@@ -57,7 +57,7 @@ This records a user decision and documentation only; no new heavy campaign ran.
 
 ## 2026-10-10 — Selected real Windows capture closes active P4 gates
 
-The [replacement](docs/Ariadne/real-capture-repin-79938.md) independently binds
+The [replacement](docs/Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query) independently binds
 `dump_79938FAE443F4021A4F7B6C215`, its 516,256-byte capture-only derivative and
 matched PE/PDB entry. Default native and Rust reference recover 29 starts,
 31 edges and a 10-site slice containing the earlier R8 producer. The answer
@@ -106,7 +106,7 @@ available for resumption. Full P4 and full native-default qualification remain f
 Executed P0–P3 of the [projection-admission plan](Plans/bap-projection-admission.md):
 four-form projection, typed capability admission, no generic opcode whitelist,
 ordinary data-only continuation with all-location possible effects/no kills and
-Rust/native/report contract checks. The [checkpoint](docs/Ariadne/bap-admission-checkpoint.md)
+Rust/native/report contract checks. The [checkpoint](docs/Ariadne/bap-analysis-core-design.md#admission-checkpoint)
 retains 58 cases/37 forms, 104 independent numeric comparisons, root checks,
 330 native observations, twelve algorithm and eight boundary rejections.
 P4 is not accepted: the first prefix mutant is rejected by the test but its
@@ -118,7 +118,7 @@ Older v2 evidence remains historical; no root-cause or release claim is made.
 
 Audited BAP plans, helper/module guides, assurance and consumer documentation
 against the current lifter, projection, native passes, CLI and qualification
-inventories. The [audit guide](docs/Ariadne/bap-documentation-sync.md) and
+inventories. The [audit guide](docs/Ariadne/bap-analysis-core-design.md#documentation-audit) and
 [identity record](evidence/Ariadne/bap-documentation-audit.json) distinguish the
 matching October 7 nested refresh from stale standalone snapshots. Current
 projection remains v2 with its finite whitelist and conservative stop policy;
@@ -129,7 +129,7 @@ evidence verification, not a new runtime or release qualification campaign.
 ## 2026-10-07 — I5c address-wrap design and plan selected
 
 The user selected the next fault-time arithmetic assessment. The
-[design](docs/Ariadne/i5c-address-wrap-design.md) and
+[design](docs/Ariadne/address-wrap-design.md) and
 [W0–W5 plan](Plans/i5c-address-wrap.md) define `T = unsigned base + signed encoded
 displacement` before 64-bit reduction, with an independent model/oracle first,
 sealed binding and a small question-specific interface.
@@ -151,7 +151,7 @@ documentation entry points name its unresolved scope.
 
 | I5c stage | Checkpoint status | Next required evidence |
 | --- | --- | --- |
-| Design and linked plan | Delivered as documentation | [Selected contract](docs/Ariadne/i5c-address-wrap-design.md) and [W0–W5 ownership/exits](Plans/i5c-address-wrap.md). |
+| Design and linked plan | Delivered as documentation | [Selected contract](docs/Ariadne/address-wrap-design.md) and [W0–W5 ownership/exits](Plans/i5c-address-wrap.md). |
 | W0 — Contract/model/oracle | Pending | Freeze the independent full-width case inventory, source review and budgets; create and check the authoritative question-level TLA+ model. |
 | W1 — Binding/admission reuse | Pending | Sealed question-specific binding and shared finite receipt facts, with legacy output bytes preserved. |
 | W2 — First vertical slice | Pending | Native MOV32mi wrap/no-wrap/unknown/error/budget tests through the caller interface. |
@@ -180,7 +180,7 @@ change. Resume at W0 rather than treating the design probes as its exit evidence
 98-start Windows fault-address explanation query. The normal native-default
 release CLI measures **1,692.696 ms / 2,000 ms**, one warm-up/five measured repeats.
 The separate 34-start Linux reference binding/explanation/rendering phase sum
-is **182.924 ms / 250 ms**. The [validation guide](docs/Ariadne/i4-performance-validation.md)
+is **182.924 ms / 250 ms**. The [validation guide](docs/Ariadne/workload-performance-design.md#native-investigation-qualification)
 records exact samples, backend/query identity and finite acceptance scope.
 
 Decoder process reuse, native derived-flow and immutable response caches,
@@ -206,7 +206,7 @@ this result.
 
 [B0–B5](Plans/i5b-zero-base-offset.md) are implemented and qualified for the
 finite Windows AMD64 scalar MOV base/displacement profile. The
-[validation guide](docs/Ariadne/i5b-validation.md) and
+[validation guide](docs/Ariadne/zero-base-offset-design.md#retained-qualification) and
 [aggregate](evidence/Ariadne/i5b-qualification.json) record **18/18 gates**, 57
 independent fixtures plus one auxiliary call case, all 15 detected real-code
 mutants, stable 294-source/11-tool inventories and separately passing partial/
@@ -232,7 +232,7 @@ Windows criterion and other I5/I6/I7 work remain open.
 ## 2026-10-07 — I5b hypothesis selected and detailed plan written
 
 The user selected the zero-base-plus-offset hypothesis. The
-[design](docs/Ariadne/i5b-zero-base-offset-design.md) scopes its first profile to
+[design](docs/Ariadne/zero-base-offset-design.md) scopes its first profile to
 Windows AMD64 scalar MOV accesses with an encoded GPR base, no index and a
 signed displacement. Its predicate is captured base zero and displacement
 nonzero, distinct from I5a's zero effective address. The
@@ -283,7 +283,7 @@ runtime campaign, optimization, threshold change or release claim is recorded.
 
 The user authorized replacing the unavailable original Electron capture. The
 [completed plan](Plans/i4-windows-repin.md) and
-[delivery guide](docs/Ariadne/i4-windows-repin-validation.md) bind the existing
+[delivery guide](docs/Ariadne/workload-performance-design.md#windows-investigation-replacement) bind the existing
 independently inspected real Windows AMD64 Crashpad capture with 98 instruction
 starts. The new active I4 case uses entry `0x00007ff7382f4840`, fault/seed
 `0x00007ff7382f49b4`, producer `0x00007ff7382f49b1` and access index zero.
@@ -335,7 +335,7 @@ flowchart LR
   D --> E["Source-bound archives verified; original I4 remains separate"]
 ```
 
-The [qualification guide](docs/Ariadne/i5a-native-qualification.md),
+The [qualification guide](docs/Ariadne/zero-address-design.md#native-qualification),
 [fixture record](evidence/Ariadne/i5a-native-history/2026-10-05-before-i4-repin/i5a-native-fixture-validation.json) and
 [controlled record](evidence/Ariadne/i5a-native-history/2026-10-05-before-i4-repin/i5a-native-controlled-validation.json)
 keep the tiers separate. The native I5a archive verifies **1,894 entries** and
@@ -348,7 +348,7 @@ broader hypotheses and universal refinement are not credited by this result.
 
 ## 2026-10-04 — Native I5a measurements pass; aggregate refresh blocked
 
-This earlier block is resolved by the [2026-10-05 native qualification](docs/Ariadne/i5a-native-qualification.md). The following numbers and failed decisions retain their historical meaning.
+This earlier block is resolved by the [2026-10-05 native qualification](docs/Ariadne/zero-address-design.md#native-qualification). The following numbers and failed decisions retain their historical meaning.
 
 The [native qualification plan](Plans/i5a-native-qualification.md) now has a
 completed-native-analysis phase benchmark, exact backend/query/build receipts,
@@ -379,7 +379,7 @@ flowchart LR
   D --> E["Next: stable dependency, fresh gates, controlled acceptance"]
 ```
 
-The [qualification guide](docs/Ariadne/i5a-native-qualification.md) gives the
+The [qualification guide](docs/Ariadne/zero-address-design.md#native-qualification) gives the
 retained samples and resumption sequence. Finish the independent MirrorRust
 work and its formatting, then refresh Stage 2/Stage E and investigation, run the
 fourteen I5a gates, and finally run controlled partial/full qualification with
@@ -403,7 +403,7 @@ flowchart LR
   D --> E["623 source hashes; 1,345 archive entries verified"]
 ```
 
-The [qualification guide](docs/Ariadne/bap-core-qualification.md) and
+The [qualification guide](docs/Ariadne/bap-analysis-core-design.md#native-qualification) and
 [record](evidence/Ariadne/bap-core-history/2026-10-04-adoption/bap-core-qualification.json) bind 44 generated traces
 and 330 observations, twelve detected native algorithm mutations, boundary
 controls and five release workloads. `stage2Qualified`, `defaultNativeVerified`
@@ -428,7 +428,7 @@ production analysis remains Rust.
 Six explicit native test groups pass, and seven real-code mutations are detected
 without observer changes. Two clean helper builds have identical hashes. SDK
 library/compiler/lock substitutions and native protocol failures are rejected.
-The [qualification guide](docs/Ariadne/bap-ocaml-qualification.md) records the
+The [qualification guide](docs/Ariadne/bap-analysis-core-design.md#ocaml-foundation-qualification) records the
 source-bound final decision: 199 stable source hashes and 327 verified archive
 entries. Full A0 exit now passes after the user-approved formatting-only
 MirrorRust change and fresh root, effects, minidump, Stage E, Stage 1 and A0
@@ -453,7 +453,7 @@ files and tool identities. Its `passed` covers these bounded checks;
 OCaml SDK `.cmi`/`.cmxa` files, so a compatible isolated SDK and real custom-pass
 initialize/observe qualification are next. No recovery/dataflow/stateflow pass,
 model replay or mutation acceptance is claimed. See the
-[validation guide](docs/Ariadne/bap-stage2-a0-validation.md) and
+[validation guide](docs/Ariadne/bap-analysis-core-design.md#a0-capability-evidence) and
 [25-entry evidence archive](evidence/Ariadne/bap-stage2-a0-evidence-manifest.json).
 
 ## 2026-10-03 — BAP latency acceptance changed to unlimited
@@ -470,7 +470,7 @@ The new Windows CLI median is **3,111.33 ms**, recorded without a ceiling.
 Full Stage 1 exit and the Stage 2 prerequisite now pass under the new policy;
 Stage 2 implementation remains unstarted. Operational watchdogs remain separate.
 
-See the [policy and validation](docs/Ariadne/bap-unlimited-validation.md),
+See the [policy and validation](docs/Ariadne/bap-analysis-core-design.md#unlimited-timing-policy),
 [source-bound record](evidence/Ariadne/bap-unlimited-validation.json) and
 [evidence manifest](evidence/Ariadne/bap-unlimited-evidence-manifest.json).
 Earlier bounded-policy results below remain historical. Changes are uncommitted.
@@ -499,7 +499,7 @@ The release CLI median is **10,667.76 ms** against **2,000 ms**. Phase medians
 identify reference decoding at **7,572.13 ms** and core analysis at **69.61 ms**;
 no optimization is included. Capture/pin delivery is complete, while full Stage 1
 and the Stage 2 prerequisite remain false due to latency. Stage 2 is unstarted.
-The [delivery guide](docs/Ariadne/bap-windows-repin-validation.md),
+The [delivery guide](docs/Ariadne/bap-analysis-core-design.md#windows-workload-replacement),
 [source-bound record](evidence/Ariadne/bap-windows-repin-validation.json) and
 [199-entry derived archive](evidence/Ariadne/bap-windows-repin-evidence-manifest.json)
 retain exact results and timing limitations. Changes remain uncommitted.
@@ -525,7 +525,7 @@ Both real Windows demo captures pass supplemental Linux BAP benchmark queries.
 They each decode two instructions and do not replace the original 98-instruction
 capture, which bounded searches did not locate. `stage1ExitPassed`,
 `stage2PrerequisiteSatisfied` and `defaultPromotionEligible` remain **false**;
-Stage 2 A0–A6 remain unstarted. See the [delivery guide](docs/Ariadne/bap-windows-workload-validation.md)
+Stage 2 A0–A6 remain unstarted. See the [delivery guide](docs/Ariadne/bap-analysis-core-design.md#workload-evidence-repair)
 and [238-entry archive manifest](evidence/Ariadne/bap-windows-workload-evidence-manifest.json).
 Changes remain uncommitted.
 
@@ -547,7 +547,7 @@ The capture-input gap is resolved for this controlled case. Its phase medians ar
 under 2 ms, but CLI medians are approximately **1.82 s**, exceeding the unchanged
 **1.5 s** I5a condition. Controlled-case acceptance therefore remains partial;
 the original Windows I4 artifact/query also remains separate and unexercised.
-See the [delivery guide](docs/Ariadne/crashpad-demo-validation.md) and
+See the [delivery guide](docs/Ariadne/zero-address-design.md#controlled-windows-capture) and
 [retained record](evidence/Ariadne/crashpad-demo-validation.json). Raw dumps remain
 under ignored `tmp/crashpad-demo/20261003/`; changes are uncommitted.
 
@@ -568,7 +568,7 @@ traces, 326 matched observations and 15 detected model mutants.
 Nine measured fixtures meet the frozen I5a criteria: combined phase medians are
 0.86–1.80 ms against 10 ms, and assessment CLI medians are 755–1,180 ms against
 1,500 ms. The existing Linux explanation phase remains within its separate
-250 ms condition. See the [delivery record](docs/Ariadne/i5a-validation.md),
+250 ms condition. See the [delivery record](docs/Ariadne/zero-address-design.md#historical-source-and-fixture-qualification),
 [source-bound acceptance](evidence/Ariadne/i5a-validation.json) and
 [verified archive manifest](evidence/Ariadne/i5a-evidence-manifest.json).
 
@@ -578,7 +578,7 @@ Broader hypotheses and I6–I7 remain separate work. These changes are uncommitt
 
 ## 2026-10-02 — Investigation correctness repairs
 
-Implemented the [qualification and truncation repairs](docs/Ariadne/investigation-correctness-validation.md):
+Implemented the [qualification and truncation repairs](docs/Ariadne/investigation-design.md#qualification-and-truncation-repairs):
 full Windows I4 acceptance now requires valid bound explanation-CLI samples with
 a median at most 2,000 ms, and exhausted explanation budgets return structurally
 valid partial/unavailable answers. Strict validators and normal query outputs
@@ -646,7 +646,7 @@ flowchart TD
 
 ## 2026-10-02 — Rust source layout consolidated
 
-The [layout delivery](docs/Ariadne/rust-source-layout.md) follows the
+The [layout delivery](docs/Ariadne/architecture.md#source-layout-and-development) follows the
 [source-layout plan](Plans/completed/rust-source-layout.md): all 86 Rust files live under
 `src/` or `tests/`, with one root Cargo manifest/lockfile and root `target/`.
 Default builds provide both CLIs. Benchmarks and MirrorRust replay use optional
@@ -671,7 +671,7 @@ passes **16 gates**, including the full **12-gate Stage E regression**, and
 **11 new actual investigation/producer mutants**. Both platform fixtures and the
 pinned controlled Chromium/Linux capture retain expected producer evidence.
 
-The [validation report](docs/Ariadne/investigation-validation.md) records about
+The [validation report](docs/Ariadne/investigation-design.md#retained-delivery-evidence) records about
 153 ms incremental explanation-phase median on the 34-site real query, under
 the frozen 250 ms condition. Answers retain alternatives and explicit evidence
 requirements; no executed history, UAF or general root-cause proof is inferred.
@@ -694,7 +694,7 @@ All **16 removal gates** pass against **93 stable current hashes**, including
 mutants**. BIL-only immediate-store coverage preserves both platform producer
 fixtures; partial-register self-move definitions remain explicit. The retained
 real Linux query still has 34 decoded instructions, 45 edges and a 28-site slice.
-The [validation report](docs/Ariadne/bap-only-removal-validation.md) records
+The [validation report](docs/Ariadne/bap-analysis-core-design.md#bap-only-delivery) records
 remaining gaps and workload samples.
 
 The explicit default change does not complete the missing original Windows
@@ -770,7 +770,7 @@ recovery/native-adapter handoff coverage and report/CLI integration remain
 open; **Stage E is still partial**. No fresh 19-component overall integration
 result or universal Rust-refinement claim is made by this checkpoint.
 
-The subsequent [installed ModelMirrors compatibility check](docs/Ariadne/installed-modelmirrors-compatibility.md)
+The subsequent [installed ModelMirrors compatibility check](docs/Ariadne/architecture.md#installed-tool-compatibility-2026-10-01)
 passes all 11 runtime checks: the 168 core states, 20 Stage E observations,
 three pre-factory digest rejections and five expected core mutation mismatches.
 The actual installed binary is hash-bound; it prints `Mirrors 0.0.3`, while
@@ -779,7 +779,7 @@ unverified because the installed binary differs from the dirty checkout's build.
 
 ## 2026-09-30 — Priority 4 qualification and measured optimization
 
-The [qualified Windows Electron workload](docs/Ariadne/priority-4-performance-validation.md)
+The [qualified Windows Electron workload](docs/Ariadne/workload-performance-design.md#historical-llvm-workload-qualification)
 has 98 captured decoded instructions, 113 edges and a 19-node predecessor
 slice. A matching PE runtime-function entry and 101 forward byte matches
 anchor the query independently of RIP. Eight exact control-only bindings
@@ -812,16 +812,16 @@ stopped; that incomplete run is not counted as a new acceptance result.
 
 ## 2026-09-29 23:29 CST — practical priorities 2–4
 
-The [Priority 2 review](docs/Ariadne/priority-2-effects-validation.md)
+The [Priority 2 review](docs/Ariadne/operand-effects-design.md#selected-path-no-change-decision-2026-09-29)
 found no exact source-reviewable instruction effect needed to reach the
 possible address producer in the first real Chromium case. Seven pre-seed
 calls remain deliberately opaque; no ABI preservation or instruction-step
-claim was added. [Priority 3](docs/Ariadne/priority-3-presentation-validation.md)
+claim was added. [Priority 3](docs/Ariadne/result-rendering.md#presentation-acceptance)
 delivers a readable instruction overview and reproducible Linux/Windows CLI
 examples. The controlled real case retained byte-identical JSON and DOT
 outputs after this text-only change.
 
-[Priority 4 measurements](docs/Ariadne/priority-4-performance-validation.md)
+[Priority 4 measurements](docs/Ariadne/workload-performance-design.md#historical-llvm-workload-qualification)
 put the 34-node real query at a 1,299 ms median against a predeclared
 2,000 ms local budget. Five-repeat 128/256-node synthetic measurements passed;
 the 512-node suite hit its 180-second bound. No production optimization was
@@ -833,7 +833,7 @@ ignored and external to tracked files.
 
 ## 2026-09-29 17:27 CST — Priority 1 real-capture acceptance
 
-The [controlled Chromium/Linux case](docs/Ariadne/priority-1-real-capture-validation.md)
+The [controlled Chromium/Linux case](docs/Ariadne/file-reader-design.md#historical-controlled-chromium-capture)
 uses an exact matching-build function symbol and forward decoding to select a
 captured instruction boundary 125 bytes before the exception RIP. Ariadne
 decoded 34 starts and retained a 28-node possible data slice; a reviewed RBX
@@ -847,7 +847,7 @@ case acceptance was added. Priorities 2–4 remain open.
 
 ## 2026-09-29 14:11 CST — assurance priorities
 
-The [assurance decision](docs/Ariadne/practical-assurance-priorities.md)
+The [assurance decision](docs/Ariadne/semantic-assurance.md#practical-assurance-priorities)
 places the unchanged **49-case Stage D acceptance gate** in the long-term
 formal research track. It remains **0/49**; no profile, form, coverage ledger,
 fallback or checker rule was weakened or promoted. Practical Windows/Linux
@@ -895,7 +895,7 @@ crash-IP regressions.
 DOT and JSON v1 from one frozen query, with artifact/source offsets, decoder
 identity, operand/effect evidence, CFG, origins and typed uncertainty. It
 rejects malformed or exhausted runs without publishing a complete report.
-See the [B/C validation](docs/Ariadne/stage-b-c-validation.md).
+See the [B/C validation](docs/Ariadne/file-reader-design.md#captured-predecessor-fixtures).
 
 **Stage D remains pending:** the default profile integrity check passes, but
 the required `register-core` gate still rejects **0/49** verified cases; the
@@ -908,7 +908,7 @@ status or source-form hash was promoted.
 now pass their focused TLA+ fixtures, contract negatives, Apalache/TLC checks,
 and LLVM 20.1.2 verifier-backed `.ll`/`.bc` tests. Generated model-based
 replay of all observable fields and CLI integration remain open. **Stage F is
-partial:** a [proof-boundary record and benchmark baseline](docs/Ariadne/stage-f-proof-and-performance.md)
+partial:** a [proof-boundary record and benchmark baseline](docs/Ariadne/semantic-assurance.md#universal-rust-refinement-boundary)
 measure loops, joins, calls, dense aliases and a pinned minidump; no universal
 Rust refinement or solver optimization is claimed. The
 [19-gate source-bound report](evidence/Ariadne/stage-b-f-validation.json) passed
@@ -935,7 +935,7 @@ the Windows fixture three. Each still has one later unresolved obligation;
 neither run establishes earlier address producers or the actual faulting
 store's commit behavior. That predecessor slice remains Stage B work.
 
-The [Stage A validation](docs/Ariadne/stage-a-validation.md) records the pinned
+The [Stage A validation](docs/Ariadne/operand-effects-design.md#memory-immediate-mov-delivery-2026-09-28) records the pinned
 AMD/LLVM source review, all eight passing source-bound acceptance gates,
 ten rejected effect mutations, six rejected input mutations and the
 unchanged 12-trace/168-state core MBT replay. The generic `AMD64-F-0503`
@@ -993,10 +993,10 @@ do not certify precise architectural effects or verified instruction steps.
 `ByteSnapshot::prepare()` now supplies reviewed normal-continuation summaries
 for 139 exact LLVM opcode identities, byte-level register aliases, and per-site
 evidence. Memory remains coarse and calls remain opaque. See the
-[initial effects record](docs/Ariadne/operand-effects-validation.md) and
-[Stage A validation](docs/Ariadne/stage-a-validation.md).
+[initial effects record](docs/Ariadne/operand-effects-design.md#historical-effect-qualification) and
+[Stage A validation](docs/Ariadne/operand-effects-design.md#memory-immediate-mov-delivery-2026-09-28).
 
-Windows/Linux AMD64 minidump input is delivered in [input/](docs/Ariadne/modules/input.md).
+Windows/Linux AMD64 minidump input is delivered in [input/](docs/Ariadne/file-reader-design.md#public-interface).
 The Stage B predecessor fixtures and Stage C minidump CLI/JSON v1 are
 delivered. PE/ELF image and ELF core readers remain deferred; broader effect
 coverage, precise aliasing and annotated assembly remain pending.
@@ -1078,11 +1078,11 @@ TLA+/Lean correspondence, and conservative analysis-projection obligations.
 - [AMD64 task ledger](docs/amd64-semantics-tasks.md)
 - [Model-based testing evidence](mbt/README.md)
 - [current roadmap](ROADMAP.md)
-- [Stage A source review and validation](docs/Ariadne/stage-a-validation.md)
-- [Priority 1 real-capture validation](docs/Ariadne/priority-1-real-capture-validation.md)
-- [Priority 2 effect decision](docs/Ariadne/priority-2-effects-validation.md)
-- [Priority 3 presentation validation](docs/Ariadne/priority-3-presentation-validation.md)
-- [Priority 4 performance validation](docs/Ariadne/priority-4-performance-validation.md)
+- [Stage A source review and validation](docs/Ariadne/operand-effects-design.md#memory-immediate-mov-delivery-2026-09-28)
+- [Priority 1 real-capture validation](docs/Ariadne/file-reader-design.md#historical-controlled-chromium-capture)
+- [Priority 2 effect decision](docs/Ariadne/operand-effects-design.md#selected-path-no-change-decision-2026-09-29)
+- [Priority 3 presentation validation](docs/Ariadne/result-rendering.md#presentation-acceptance)
+- [Priority 4 performance validation](docs/Ariadne/workload-performance-design.md#historical-llvm-workload-qualification)
 - [Current integration gate](evidence/Ariadne/current-integration-validation.json)
 
 
@@ -1100,8 +1100,8 @@ TLA+/Lean correspondence, and conservative analysis-projection obligations.
 - Full user64 instruction-step acceptance remains 0/277. No commit or push.
 
 [Implementation plan](Plans/completed/operand-effects-plan.md),
-[rule matrix](docs/Ariadne/operand-effects-rules.md),
-[validation and limitations](docs/Ariadne/operand-effects-validation.md).
+[rule matrix](docs/Ariadne/operand-effects-design.md#historical-rule-matrix),
+[validation and limitations](docs/Ariadne/operand-effects-design.md#historical-effect-qualification).
 
 
 ## 2026-09-26 — Minidump-only delivery
@@ -1116,8 +1116,8 @@ Linux and Windows target negotiation now shares the reviewed effect pipeline.
 Local-only materialization preserves original roots, keeps seeds separate, and
 returns an error rather than a partial request if resource limits are exhausted.
 
-See [minidump usage](docs/Ariadne/modules/input.md) and
-[the source-bound validation record](docs/Ariadne/minidump-validation.md).
+See [minidump usage](docs/Ariadne/file-reader-design.md#public-interface) and
+[the source-bound validation record](docs/Ariadne/file-reader-design.md#qualification-records).
 No commit or push was performed for this delivery. Unrelated Lean moves/deletions
 in the working tree were preserved.
 

@@ -4,19 +4,19 @@
 
 **Status.** Completed plan, archived; acceptance is limited to the recorded scope.
 
-**Why this document exists.** [Motivating design](../../docs/Ariadne/bap-semantic-backend-design.md) defines the problem and contract this plan implements.
+**Why this document exists.** [Motivating design](../../docs/Ariadne/bap-analysis-core-design.md) defines the problem and contract this plan implements.
 
 **What this document establishes.** This records the removal of CLI semantic selection and automatic LLVM effect fallback. BAP became the sole minidump semantic producer while LLVM decode-reference checks remained.
 
 **Where to go next.**
 
 
-- [Native analysis successor](../../docs/Ariadne/bap-core-qualification.md) — records completed native algorithms and default adoption after this historical semantics-only change.
+- [Native analysis successor](../../docs/Ariadne/bap-analysis-core-design.md#native-qualification) — records completed native algorithms and default adoption after this historical semantics-only change.
 
-- [Delivery and follow-up](../../docs/Ariadne/bap-only-removal-validation.md) — records what was exercised and which limits remain.
+- [Delivery and follow-up](../../docs/Ariadne/bap-analysis-core-design.md#bap-only-delivery) — records what was exercised and which limits remain.
 - [Active plan index](../README.md) — prevents completed steps from being mistaken for pending work.
 
-**What remains unresolved.** The implementation steps below are archived, not a current task list. These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. The later [native Stage 2 qualification](../../docs/Ariadne/bap-core-qualification.md) independently establishes algorithm and default-adoption acceptance. The [active Windows I4 replacement](../../docs/Ariadne/i4-windows-repin-validation.md) closes the missing-artifact gap; the later [performance qualification](../../docs/Ariadne/i4-performance-validation.md) meets its unchanged CLI budget. Earlier records below retain their original scope and flags.
+**What remains unresolved.** The implementation steps below are archived, not a current task list. These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. The later [native Stage 2 qualification](../../docs/Ariadne/bap-analysis-core-design.md#native-qualification) independently establishes algorithm and default-adoption acceptance. The [active Windows I4 replacement](../../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement) closes the missing-artifact gap; the later [performance qualification](../../docs/Ariadne/workload-performance-design.md#native-investigation-qualification) meets its unchanged CLI budget. Earlier records below retain their original scope and flags.
 
 For the wider context, see the optional [documentation map](../../docs/documentation-map.md).
 
@@ -26,7 +26,7 @@ For the wider context, see the optional [documentation map](../../docs/documenta
 > for current work and separate qualification requirements.
 
 Requested **2026-10-01** after the Stage 1 implementation.
-Design: [BAP semantic backend](../../docs/Ariadne/bap-semantic-backend-design.md).
+Design: [BAP semantic backend](../../docs/Ariadne/bap-analysis-core-design.md).
 
 Make BAP the sole minidump semantic producer. Remove CLI backend selection,
 the normal library's LLVM preparation branch, and the BAP adapter's legacy
@@ -56,7 +56,7 @@ selection does not turn partial qualification into a pass.
    remains a separate user action.
 
 Implementation: delivered in the working tree. The
-[current validation report](../../docs/Ariadne/bap-only-removal-validation.md)
+[current validation report](../../docs/Ariadne/bap-analysis-core-design.md#bap-only-delivery)
 and machine-readable record distinguish removal acceptance from the still
 incomplete full Windows/Stage 1 qualification. LLVM's role is decoded-fact
 validation and historical/supplied-IR research, with no production semantic

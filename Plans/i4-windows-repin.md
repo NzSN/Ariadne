@@ -6,10 +6,10 @@
 Windows Crashpad case is pinned and independently inspected for I4. All 17
 investigation gates pass. Five measured native-default explanation-CLI repeats
 had a 4,774.451 ms median against the unchanged 2,000 ms ceiling. That historical
-re-pin record remains over budget; the later [performance qualification](../docs/Ariadne/i4-performance-validation.md)
+re-pin record remains over budget; the later [performance qualification](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification)
 closes the fixed clause at 1,692.696 ms with current source/tool/dependency checks.
 
-**Why this document exists.** The [investigation design](../docs/Ariadne/investigation-layer-design.md)
+**Why this document exists.** The [investigation design](../docs/Ariadne/investigation-design.md)
 left I4 tied to an unavailable original Electron dump. The user now authorizes
 replacing the active case instead of retaining that missing artifact as an active
 obligation. This replacement keeps a real 98-instruction Windows workload.
@@ -21,17 +21,17 @@ I4 verdict. The original manifest and older records remain historical, and the
 
 **Where to go next.**
 
-- [Native performance design](../docs/Ariadne/i4-performance-design.md) and
+- [Native performance design](../docs/Ariadne/workload-performance-design.md#investigation-performance) and
   [D0–D3 implementation plan](i4-performance-implementation.md) — measured
   decoder/native costs and the current exact-query performance follow-up.
-- [Delivery and validation](../docs/Ariadne/i4-windows-repin-validation.md) —
+- [Delivery and validation](../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement) —
   completed re-pin, historical samples and its accepted performance successor.
 
 - [Active case](../evidence/Ariadne/investigation-windows-workload-case.json) — exact
   capture, query, provenance and fixed timing contract.
 - [Independent inspection](../evidence/Ariadne/i4-windows-capture-inspection.json)
   — raw captured bytes, PE equality and producer/fault witness.
-- [Investigation contracts](../docs/Ariadne/investigation-contracts.md) — meaning
+- [Investigation contracts](../docs/Ariadne/investigation-design.md) — meaning
   of possible producers, uncertainty and exact-query acceptance.
 - [Original case](../evidence/Ariadne/priority-4-real-capture-case.json) — preserved
   historical identity, not retroactively qualified by this replacement.
@@ -75,7 +75,7 @@ change, if needed, must follow a measured diagnosis and its own validation.
 ## Remaining I4 performance qualification
 
 This follow-up is now complete through the [D0–D3 plan](i4-performance-implementation.md)
-and [qualification](../docs/Ariadne/i4-performance-validation.md). The steps below
+and [qualification](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification). The steps below
 preserve the original resumption contract for the same native-default query:
 
 1. Retain the accepted five-sample baseline and current report identities.
@@ -91,5 +91,5 @@ preserve the original resumption contract for the same native-default query:
    substitute for explanation-mode CLI timing.
 
 No performance implementation or budget change is part of the completed re-pin
-or the documentation synchronization. The [current result](../docs/Ariadne/i4-windows-repin-validation.md)
+or the documentation synchronization. The [current result](../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement)
 remains the historical baseline for that now-completed separate follow-up.

@@ -4,7 +4,7 @@
 
 **Status.** A1–A6 implementation is complete. The explicit-native candidate
 passed all 19 aggregate gates on 2026-10-04 with stable source/tool identities
-and a verified archive. The [qualification guide](../docs/Ariadne/bap-core-qualification.md)
+and a verified archive. The [qualification guide](../docs/Ariadne/bap-analysis-core-design.md#native-qualification)
 records the final default-adoption verdict for the exact implemented sources.
 
 **Why this document exists.** The [whole integration plan](bap-integration.md#stage-2-bap-analysis-core)
@@ -18,9 +18,9 @@ validation and the adoption gate for the [analysis design](../docs/Ariadne/bap-a
 - [Native module](../native/bap-core/README.md) — isolated SDK/build entry point.
 - [Core model](../Specs/Ariadne.tla) and [stateflow model](../Specs/AriadneMachineState.tla)
   — authoritative input, action, observation and result contracts.
-- [A0 qualification](../docs/Ariadne/bap-ocaml-qualification.md) — historical entry evidence.
+- [A0 qualification](../docs/Ariadne/bap-analysis-core-design.md#ocaml-foundation-qualification) — historical entry evidence.
 - [Integration plan](bap-integration.md) — receives the final A1–A6 verdict.
-- [Qualification guide](../docs/Ariadne/bap-core-qualification.md) — final acceptance record, measured workloads and limits.
+- [Qualification guide](../docs/Ariadne/bap-analysis-core-design.md#native-qualification) — final acceptance record, measured workloads and limits.
 
 **What remains unresolved.** The final aggregate record must independently
 qualify default native selection and explicit Rust rollback. Implemented checks

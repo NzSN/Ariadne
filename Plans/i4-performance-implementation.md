@@ -4,7 +4,7 @@
 
 **Status.** D0–D3 complete for the exact controlled capture on 2026-10-07. The qualified Windows explanation-CLI median is 1,692.696 ms / 2,000 ms; the separate Linux incremental phase sum is 182.924 ms / 250 ms. Current source/tool/dependency inventories and retained archives were rechecked before completion.
 
-**Why this document exists.** The [performance design](../docs/Ariadne/i4-performance-design.md)
+**Why this document exists.** The [performance design](../docs/Ariadne/workload-performance-design.md#investigation-performance)
 identifies repeated decoder launches and native analysis/transport as measured
 costs on the exact machine-code fault-address explanation query.
 
@@ -13,11 +13,11 @@ semantic equivalence and full I4 qualification requirements.
 
 **Where to go next.**
 
-- [Completed qualification](../docs/Ariadne/i4-performance-validation.md) — exact samples, verified archives and remaining scope limits.
-- [Design](../docs/Ariadne/i4-performance-design.md) — evidence and predictions.
+- [Completed qualification](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification) — exact samples, verified archives and remaining scope limits.
+- [Design](../docs/Ariadne/workload-performance-design.md#investigation-performance) — evidence and predictions.
 - [Original follow-up](i4-windows-repin.md#remaining-i4-performance-qualification)
   — unchanged active capture and timing obligation.
-- [Investigation contracts](../docs/Ariadne/investigation-contracts.md) — exact
+- [Investigation contracts](../docs/Ariadne/investigation-design.md) — exact
   query identity, possible producers and separate phase/CLI requirements.
 
 **What remains unresolved.** The recorded exact-query acceptance passes. Later source/tool/dependency changes require fresh or complete identity-verified qualification. This finite controlled-capture result does not qualify the original Electron crash, a packaged release, universal refinement or a general performance bound.
@@ -115,5 +115,5 @@ including all members of that archive and the nested regression/core archives.
 The [rejected attempts](../evidence/Ariadne/i4-performance-history/2026-10-07-rejected/evidence-manifest.json)
 retain both earlier phase-budget failures and their raw samples. Historical
 records, fixed budgets, capture pins and source-bound Stage 2 design/plan bytes
-remain unchanged. The [validation guide](../docs/Ariadne/i4-performance-validation.md)
+remain unchanged. The [validation guide](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification)
 provides reproduction and separates source-bound reuse from fresh tests.

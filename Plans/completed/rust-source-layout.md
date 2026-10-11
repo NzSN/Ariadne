@@ -10,7 +10,7 @@
 
 **Where to go next.**
 
-- [Delivery and follow-up](../../docs/Ariadne/rust-source-layout.md) — records what was exercised and which limits remain.
+- [Delivery and follow-up](../../docs/Ariadne/architecture.md#source-layout-and-development) — records what was exercised and which limits remain.
 - [Active plan index](../README.md) — prevents completed steps from being mistaken for pending work.
 
 **What remains unresolved.** The implementation steps below are archived, not a current task list. These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Consolidation did not close the missing Windows artifact requirement or add new semantic capability.
@@ -24,7 +24,7 @@ For the wider context, see the optional [documentation map](../../docs/documenta
 
 Implement the user-requested source layout without changing analysis semantics.
 The [implementation design](../../docs/implementation.md) links this plan directly.
-The [delivery record](../../docs/Ariadne/rust-source-layout.md) documents the
+The [delivery record](../../docs/Ariadne/architecture.md#source-layout-and-development) documents the
 implemented layout and source-bound validation.
 
 1. Replace the separate Rust package manifests with one root Cargo package.
@@ -44,5 +44,5 @@ implemented layout and source-bound validation.
 All tracked Rust files must be below `src/` or `tests/`; there must be one tracked
 Cargo manifest and lockfile. Formal specifications and native helpers retain
 their existing locations. The original Windows capture was missing at this layout checkpoint. The
-later [I4 replacement](../../docs/Ariadne/i4-windows-repin-validation.md) closes
-that artifact gap. The later [native performance qualification](../../docs/Ariadne/i4-performance-validation.md) meets the separate fixed budget; the consolidation record retains its historical scope.
+later [I4 replacement](../../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement) closes
+that artifact gap. The later [native performance qualification](../../docs/Ariadne/workload-performance-design.md#native-investigation-qualification) meets the separate fixed budget; the consolidation record retains its historical scope.

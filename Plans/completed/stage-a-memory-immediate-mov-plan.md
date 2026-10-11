@@ -10,7 +10,7 @@
 
 **Where to go next.**
 
-- [Delivery and follow-up](../../docs/Ariadne/stage-a-validation.md) — records what was exercised and which limits remain.
+- [Delivery and follow-up](../../docs/Ariadne/operand-effects-design.md#memory-immediate-mov-delivery-2026-09-28) — records what was exercised and which limits remain.
 - [Active plan index](../README.md) — prevents completed steps from being mistaken for pending work.
 
 **What remains unresolved.** The implementation steps below are archived, not a current task list. These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Decoding the fault site alone did not establish an earlier producer; Stages B/C and the real-capture case address that gap.
@@ -23,7 +23,7 @@ For the wider context, see the optional [documentation map](../../docs/documenta
 > for current work and separate qualification requirements.
 
 Prepared 2026-09-28 against `a9dc41a`. **Implementation delivered:** see the
-[Stage A validation record](../../docs/Ariadne/stage-a-validation.md) for the exact source-bound
+[Stage A validation record](../../docs/Ariadne/operand-effects-design.md#memory-immediate-mov-delivery-2026-09-28) for the exact source-bound
 result. This document preserves the planned steps and exit conditions. It
 expands [current roadmap](../../ROADMAP.md).
 No coverage-ledger promotion or instruction-step acceptance is claimed.
@@ -54,7 +54,7 @@ are still planned/pending. Neither belongs to the active 49-case
 
 Those are **candidate facts to review**, not a declaration that every encoding
 of these names is supported. The dump SHA-256 values and current zero-decoded
-baseline are pinned in [the minidump validation record](../../docs/Ariadne/minidump-validation.md).
+baseline are pinned in [the minidump validation record](../../docs/Ariadne/file-reader-design.md#qualification-records).
 
 ## 0. Freeze evidence and resolve the source discrepancy
 

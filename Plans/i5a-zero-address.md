@@ -7,7 +7,7 @@
 gates passed with retained evidence. The later native refresh qualifies controlled
 Windows I5a; active Windows I4 performance remains separate and open.
 
-**Why this document exists.** The [I5a design](../docs/Ariadne/i5a-zero-address-design.md)
+**Why this document exists.** The [I5a design](../docs/Ariadne/zero-address-design.md)
 asks whether one selected memory access starts at zero under admitted captured
 context. The existing producer explanation cannot answer that numeric question:
 it does not bind the required exception parameters and register observations.
@@ -19,24 +19,24 @@ the starting point.
 
 **Where to go next.**
 
-- [I5a design](../docs/Ariadne/i5a-zero-address-design.md) defines the hypothesis,
+- [I5a design](../docs/Ariadne/zero-address-design.md) defines the hypothesis,
   premises and meanings of consistent, refuted-under-premises and unknown.
-- [I5a contracts](../docs/Ariadne/i5a-contracts.md) document the implemented
+- [I5a contracts](../docs/Ariadne/zero-address-design.md) document the implemented
   binding, report schema, limits and CLI.
-- [Delivery and validation](../docs/Ariadne/i5a-validation.md) records the
+- [Delivery and validation](../docs/Ariadne/zero-address-design.md#historical-source-and-fixture-qualification) records the
   exercised source/fixture scope and remaining capture requirements.
-- [Controlled Windows demo](../docs/Ariadne/crashpad-demo-validation.md) supplies
+- [Controlled Windows demo](../docs/Ariadne/zero-address-design.md#controlled-windows-capture) supplies
   actual partial/full captures and records its historical CLI timing gap.
 - [Native qualification refresh](i5a-native-qualification.md) records completed
   native measurements, controlled acceptance and the repaired dependency boundary.
 - [Investigation stage plan](investigation-layer.md) retains the overall I0–I7
   status and the separate active Windows I4 performance obligation.
-- [Implemented contracts](../docs/Ariadne/investigation-contracts.md) describe
+- [Implemented contracts](../docs/Ariadne/investigation-design.md) describe
   current identity, limits and first-question behavior to preserve.
 
 **What remains unresolved.** The controlled Windows demo's historical CLI median
-was approximately 1.82 s. The [current native result](../docs/Ariadne/i5a-native-qualification.md)
-qualifies both budgets and capture modes under its pinned dependency snapshot. The [active Windows I4 re-pin](../docs/Ariadne/i4-windows-repin-validation.md)
+was approximately 1.82 s. The [current native result](../docs/Ariadne/zero-address-design.md#native-qualification)
+qualifies both budgets and capture modes under its pinned dependency snapshot. The [active Windows I4 re-pin](../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement)
 passes correctness but exceeds its separate 2-second CLI budget. The original
 Electron case is preserved as historical evidence. Broader hypotheses and
 Linux numeric admission remain separate work.
@@ -85,18 +85,18 @@ bound assessment interface, without adding a generic hypothesis/provider framewo
 
 | Step | Delivered evidence |
 | --- | --- |
-| H0 | [Source review](../docs/Ariadne/i5a-source-review.md), 41 deterministic independent fixtures and six reviewed MOV forms. |
+| H0 | [Source review](../docs/Ariadne/zero-address-design.md#source-and-finite-admission-review), 41 deterministic independent fixtures and six reviewed MOV forms. |
 | H1 | Reader-owned exception fields/context with raw spans, validity groups and immutable binding; legacy metadata/report bytes preserved. |
 | H2 | Bound assessment API, strict recomputation, 32/32 default output limits and the first-form pilot. |
 | H3 | Native finite corpus, additional unsupported-shape/malformed-input checks, 56 budget combinations and 16 detected implementation mutants. |
 | H4 | Separate JSON/text/DOT schema, explicit CLI modes and atomic publication; 24 prior reports remain byte-identical. |
 | H5 | All 12 acceptance gates pass, including the full investigation/Stage E/minidump regressions. Nine measured fixtures meet the frozen criteria; [source-bound evidence](../evidence/Ariadne/i5a-validation.json) and its [manifest](../evidence/Ariadne/i5a-evidence-manifest.json) are retained. |
 
-The [delivery record](../docs/Ariadne/i5a-validation.md) gives the exercised
+The [delivery record](../docs/Ariadne/zero-address-design.md#historical-source-and-fixture-qualification) gives the exercised
 scope and measurements. The remaining sections preserve each step's acceptance
 contract. Controlled Windows I5a was open at that delivery and is now qualified
-by the [native successor](../docs/Ariadne/i5a-native-qualification.md).
-The later [native I4 performance qualification](../docs/Ariadne/i4-performance-validation.md)
+by the [native successor](../docs/Ariadne/zero-address-design.md#native-qualification).
+The later [native I4 performance qualification](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification)
 meets its separate fixed CLI budget.
 
 ## H0 — Freeze exact admission and independent fixtures
@@ -327,16 +327,16 @@ under `docs/Ariadne/`. Raw real captures stay external/hash-pinned.
 | --- | --- | --- |
 | Source/fixture I5a acceptance | H0–H5 source/fixture checks: native coverage, independent oracles, mutations, output equivalence, stable identities and the frozen fixture measurement criterion | Supports the finite admitted profile/corpus. It does not qualify a real Windows capture. |
 | Controlled real-Windows I5a acceptance | A separately pinned real case with independently established site/context/access evidence, successful question/report checks and the frozen I5a measurement criterion | Qualifies that I5a case only; no historical-path/root-cause claim. |
-| Active Windows I4 acceptance | The separately pinned 98-start capture, exact query and unchanged I4 gate/budgets | [Native I4 performance qualification passes](../docs/Ariadne/i4-performance-validation.md). Neither I5a tier substitutes for it. |
+| Active Windows I4 acceptance | The separately pinned 98-start capture, exact query and unchanged I4 gate/budgets | [Native I4 performance qualification passes](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification). Neither I5a tier substitutes for it. |
 
 Report the tiers with separate named outcomes and missing clauses; a fixture pass
 must not become a full I5a or I4 pass through one aggregate boolean. If a required
 real artifact/tool is unavailable, complete and record the independent work, then
 state the unexercised tier. Acceptance comes from records, not the plan alone;
-the [current native result](../docs/Ariadne/i5a-native-qualification.md) separately
+the [current native result](../docs/Ariadne/zero-address-design.md#native-qualification) separately
 qualifies the source/fixture and both controlled Windows tiers.
 
 The plan, design and stage ledger now record the exercised native and
 controlled tiers. Broader I5 hypotheses, Linux numeric admission and I6/I7
 remain later work. BAP-owned analysis has separate
-[qualified native records](../docs/Ariadne/bap-core-qualification.md).
+[qualified native records](../docs/Ariadne/bap-analysis-core-design.md#native-qualification).

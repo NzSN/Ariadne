@@ -1,93 +1,69 @@
 # Ariadne documentation network
 
-This map connects the questions behind the documents to designs, implementations,
-delivery evidence and remaining work. Each document has a **Context and follow-up**
-section near its beginning. That section explains the document's own problem,
-contribution and remaining limits, with direct links to its origin and successors.
-You can follow the subject without returning to this map.
+Designs are organized by feature: one canonical document owns each design's
+decisions and contracts. Implementation stages live in [Plans](../Plans/README.md);
+source-review and validation summaries stay with their owning feature, while
+raw evidence retains its original identities and scope. Use the
+[design index](Ariadne/README.md#canonical-designs) to find the canonical owner.
 
-## Reading the relationships
-
-- **Status** distinguishes current contracts, historical delivery evidence,
-  completed plans and retired research. A retired objective was dropped from
-  scope; its obligations were not proved by retirement.
-- **Why this document exists** explains the problem or prerequisite locally and
-  links directly to its origin. This is a conceptual relationship, not necessarily
-  a claim about publication order.
-- **What this document establishes** states the contribution and its scope before
-  asking the reader to open another document.
-- **Where to go next** links directly to implementation, validation, replacement
-  decisions or active plans, explaining what each destination contributes.
-- **What remains unresolved** distinguishes current open requirements from
-  historical gaps or retired obligations. A linked plan is not a completed result.
-
-Use the [documentation index](Ariadne/README.md) for APIs and usage, the
-[plan index](../Plans/README.md) for pending work, and the
-[evidence guide](../evidence/Ariadne/README.md) for recorded tests and measurements.
-Dates, source hashes and qualification limits in older records retain their
-original meaning.
+Each document's **Context and follow-up** section explains its status,
+motivating problem, contribution, direct next reading and unresolved limits.
+Readers can follow the subject without returning to this map.
 
 ## Main problem-to-delivery paths
 
-The arrows show how a question leads to another document or workstream; they
-do not assert that every destination is complete.
-
 ```mermaid
 flowchart TD
-    Goal[Crash-investigation goal] --> Core[Snapshot analysis contract]
-    Core --> Input[Captured input and provenance]
-    Core --> Effects[Conservative effects]
-    Effects --> BAP[BAP assessment and backend design]
-    BAP --> Projection[Typed projection and source review]
-    Projection --> Delivery[BAP-only semantic delivery]
-    Delivery --> Native[Native recovery, definitions, slice and stateflow]
-    Native --> Windows[Qualified: native default and Rust rollback]
-    Input --> Capture[Independent real-capture entry and slice]
-    Capture --> Explain[Fault-address question and contracts]
-    Explain --> Evidence[First-question delivery evidence]
-    Evidence --> Repin[Active Windows I4 replacement]
-    Repin --> Budget[Qualified: 1.693 s CLI against 2 s]
-    Budget --> Later[Later: broader I5 and I6/I7]
-    Core --> State[Abstract stateflow and supplied IR]
-    State --> Replay[Stage E generated replay and reports]
-    Replay --> Proof[Open: universal Rust refinement]
-    Capture --> Measure[Workload measurement design]
-    Measure --> Perf[Historical optimization evidence]
-    Perf --> Historical[Evidence for its original backend and query]
-    BAP --> Scope[Decision: retire independent ISA proofs]
+    Goal[Snapshot crash investigation] --> Input[Captured input and entry evidence]
+    Input --> BAP[BAP semantics and native analysis]
+    BAP --> Explain[Fault-address investigation]
+    Explain --> Numeric[Separate fault-time numeric questions]
+    Explain --> Memory[Proposed memory provenance refinement]
+    BAP --> Reports[Rendering and minidump reports]
+    BAP --> Replay[Typed replay and separate stateflow / IR contracts]
+    Explain --> Performance[Investigation performance]
+    Performance --> Workload[Workload measurement contract]
+    BAP --> Assurance[Trust and proof boundaries]
+    Numeric --> Evidence[Source-bound qualification records]
+    Replay --> Evidence
+    Workload --> Evidence
 ```
 
-| Question | Motivation and design | Where the question is addressed | What remains |
+| Question | Canonical design or contract | Implementation and evidence | Remaining boundary |
 | --- | --- | --- | --- |
-| How can captured instructions reveal possible value origins? | [Project overview](../README.md), [analysis model](../Specs/README.md) | [Rust implementation](implementation.md), [core replay](../mbt/README.md) | [Universal refinement boundary](Ariadne/stage-f-proof-and-performance.md) |
-| Where do trustworthy bytes and instruction starts come from? | [Byte-span adapter limitations](llvm-mc-adapter.md), [reader design](Ariadne/file-reader-design.md) | [Input module](Ariadne/modules/input.md), [predecessor fixture delivery](Ariadne/stage-b-c-validation.md) | PE/ELF image and ELF-core input remain deferred in the [roadmap](../ROADMAP.md). |
-| How are register and memory dependencies derived? | [Original effects contract](Ariadne/operand-effects-design.md), [BAP assessment](Ariadne/bap-core-refactor-assessment.md) | [Backend design](Ariadne/bap-semantic-backend-design.md), [source review](Ariadne/bap-projection-source-review.md), [BAP-only delivery](Ariadne/bap-only-removal-validation.md) | Unsupported BIL stays explicit. The [admission/coverage extension](../Plans/bap-projection-admission.md) is accepted with current remote evidence on the [selected Windows corpus](Ariadne/real-capture-repin-79938.md); remaining historical real-Linux clauses are excluded. The [documentation audit](Ariadne/bap-documentation-sync.md) preserves its earlier v2 inventory. [Native Stage 2 qualification](Ariadne/bap-core-qualification.md) passes on its recorded corpus; universal refinement, lifter correctness and packaged release qualification remain separate. |
-| Does a real capture contain an earlier possible producer? | [Independent-entry evidence design](Ariadne/priority-1-real-capture-design.md) | [Selected Windows replacement](Ariadne/real-capture-repin-79938.md), [historical Chromium/Linux case](Ariadne/priority-1-real-capture-validation.md) | P4 is accepted with remaining historical real-Linux clauses excluded. Possible producers do not establish executed history or universal coverage. |
-| Which definitions may contribute to this fault address? | [Investigation design](Ariadne/investigation-layer-design.md) | [Contracts](Ariadne/investigation-contracts.md), [API](Ariadne/modules/investigation.md), [first delivery](Ariadne/investigation-validation.md) | [Native I4 performance qualification](Ariadne/i4-performance-validation.md) passes for its exact query; broader I5 and I6–I7 remain in the [investigation plan](../Plans/investigation-layer.md). |
-| Does the selected access begin at address zero under captured exception context? | [I5a design](Ariadne/i5a-zero-address-design.md) | [Implemented contracts](Ariadne/i5a-contracts.md), [source review](Ariadne/i5a-source-review.md), [H0–H5 execution plan](../Plans/i5a-zero-address.md). | Qualified controlled Windows I5a and fixed-budget native I4 remain separate; see the [current I5a stage](../Plans/investigation-layer.md#i5a--zero-address-consistency). |
-| Did the selected base-plus-signed-displacement address calculation wrap? | [I5c design](Ariadne/i5c-address-wrap-design.md) | [W0–W5 plan](../Plans/i5c-address-wrap.md) specifies the next implementation and independent oracle/model work. | Every stage is pending; the first profile keeps mathematical underflow unknown under lower-range fault admission. |
-| Is the encoded base zero with a nonzero displacement at the fault site? | [I5b design](Ariadne/i5b-zero-base-offset-design.md) | [Implemented contracts](Ariadne/i5b-contracts.md), [source review](Ariadne/i5b-source-review.md), [B0–B5 plan](../Plans/i5b-zero-base-offset.md). | [Aggregate qualification](Ariadne/i5b-validation.md) passes within the declared finite corpus; indexed, Linux and historical-provenance questions remain outside its first profile. |
-| How can an investigator read and consume the output? | [Core rendering](Ariadne/result-rendering.md), [presentation design](Ariadne/priority-3-investigator-presentation-design.md) | [Minidump report contract](Ariadne/stage-c-report-schema.md), [presentation delivery](Ariadne/priority-3-presentation-validation.md), [examples](Ariadne/minidump-investigator-examples.md) | Additional result families retain [separate contracts](Ariadne/stage-e-report-contracts.md). |
-| What about abstract states and supplied LLVM IR? | [Stateflow design](machine-state-design.md), [typed replay design](Ariadne/stage-e-mirrorrust-design.md) | [Stage E completion](Ariadne/stage-e-completion.md), [IR usage](Ariadne/modules/ir.md), [replay guide](../mbt/stage-e/README.md) | Supplied semantics remain premises; Stage E does not reconstruct original IR from machine code. |
-| Does the tool meet a realistic performance budget? | [Baseline](Ariadne/stage-f-proof-and-performance.md), [workload design](Ariadne/priority-4-workload-performance-design.md) | [Historical LLVM-backed optimization](Ariadne/priority-4-performance-validation.md), [benchmark guide](Ariadne/modules/bench.md) | [Native core qualification](Ariadne/bap-core-qualification.md) uses its own unlimited policy; [native Windows I4](Ariadne/i4-performance-validation.md) meets its unchanged 2 s limit; [controlled I5a](Ariadne/i5a-native-qualification.md) passes its fixed budgets. |
-| Why is there an AMD64/Lean tree if BAP supplies semantics? | [Historical ISA design](amd64-semantics-design.md), [former profile](amd64-user64.md) | [Retirement and trust-boundary decision](Ariadne/semantic-assurance.md) | The research is retired. BAP lifter correctness remains a trust assumption, not a discharged ISA proof. |
+| How do captured instructions yield possible origins? | [Analysis model](../Specs/README.md), [BAP design](Ariadne/bap-analysis-core-design.md) | [Rust reference](implementation.md), [native qualification](Ariadne/bap-analysis-core-design.md#native-qualification) | [Universal refinement and trusted lifting](Ariadne/semantic-assurance.md). |
+| Which bytes and instruction entries are justified? | [File-reader design](Ariadne/file-reader-design.md) | [Input guide](Ariadne/file-reader-design.md#public-interface), [selected capture](Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query) | Capture-only production reader; further file formats remain deferred. |
+| How are instruction dependencies projected? | [BAP projection](Ariadne/bap-analysis-core-design.md#projection) | [Pinned source review](Ariadne/bap-analysis-core-design.md#pinned-projection-source-review), [accepted admission plan](../Plans/bap-projection-admission.md) | Unsupported semantics remain explicit; the accepted corpus is finite. |
+| Which definitions contribute to a fault address? | [Investigation design](Ariadne/investigation-design.md) | [API](Ariadne/investigation-design.md#investigation-module-and-interface), [validation](Ariadne/investigation-design.md#retained-delivery-evidence) | Possible dependencies do not establish execution or a root cause. |
+| Can a memory writer be narrowed to the selected load? | [Memory provenance proposal](Ariadne/memory-provenance-refinement.md) | [Retained Scanner query](Ariadne/bap-analysis-core-design.md#admission-resume) | Bounded alias assessment and output-specific refinements remain proposed. |
+| Does the fault-time access begin at zero? | [Zero-address design](Ariadne/zero-address-design.md) | [Source review](Ariadne/zero-address-design.md#source-and-finite-admission-review), [native qualification](Ariadne/zero-address-design.md#native-qualification) | Captured-context and finite admission premises apply. |
+| Is the encoded base zero with a nonzero displacement? | [Zero-base-offset design](Ariadne/zero-base-offset-design.md) | [Source review](Ariadne/zero-base-offset-design.md#decoded-record-and-independent-oracle), [qualification](Ariadne/zero-base-offset-design.md#retained-qualification) | First-profile forms and source-bound acceptance remain distinct from historical provenance. |
+| Did base plus signed displacement wrap? | [Address-wrap design](Ariadne/address-wrap-design.md) | [Implementation plan](../Plans/i5c-address-wrap.md) | Model, implementation and qualification remain pending. |
+| How are analysis results presented? | [Rendering and minidump report design](Ariadne/result-rendering.md) | [Presentation validation](Ariadne/result-rendering.md#presentation-acceptance), [examples](Ariadne/result-rendering.md#investigator-cli-examples) | Each result family retains its own meaning and completeness rules. |
+| How do replay, supplied IR and stateflow fit? | [Typed replay](Ariadne/typed-replay-design.md), [stateflow](machine-state-design.md) | [Replay guide](../mbt/stage-e/README.md), [completion evidence](Ariadne/typed-replay-design.md#finite-corpus-and-claim-boundary), [IR guide](Ariadne/typed-replay-design.md#direct-verified-ir) | Supplied semantics remain premises; binary input does not reconstruct original LLVM IR. |
+| How is performance assessed and improved? | [Workload measurement](Ariadne/workload-performance-design.md), [investigation optimization](Ariadne/workload-performance-design.md#investigation-performance) | [Native investigation qualification](Ariadne/workload-performance-design.md#native-investigation-qualification), [historical workload result](Ariadne/workload-performance-design.md#historical-llvm-workload-qualification) | Budgets and measurements apply to their exact backend, host and workload. |
+| Why are old ISA models retained? | [Semantic assurance](Ariadne/semantic-assurance.md) | [Retired ISA reference](amd64-semantics-design.md), [retained evidence](../evidence/Ariadne/README.md) | The independent ISA proof track is retired; its obligations were not proved by retirement. |
 
 ## Maintaining the network
 
-When changing a document's scope or completing a stage, update its local
-explanations and the upstream document that previously left the question open.
-Link a design to its plan and a completed plan to its delivery record. Preserve
-the distinction between an implemented feature, exercised qualification and an
-open requirement. Archived documents should point to their successor without
-rewriting old validation results.
-
-The context links in individual documents are the detailed relationships.
-This map is an optional overview; it does not replace local explanations,
-contracts, plans or evidence. An origin or next-step link must lead directly to
-the relevant document, not send the reader back here to search again.
-Run `python3 tools/check_doc_links.py` after changing navigation. The check verifies
-local link destinations and section anchors, context-section coverage and reachability from this map;
-the correctness of each relationship still requires editorial review.
+- Extend the canonical feature design when later work changes its decisions or
+  contracts. Keep stage execution in its linked plan and dated progress in
+  [checkpoints](../CHECKPOINTS.md).
+- Give every design a direct origin link and useful next readings. A map link
+  supplements these relationships; it does not replace them.
+- State whether a document describes implemented behavior, a proposal, a
+  historical result or retired work. Preserve source/tool/corpus qualifications.
+- Preserve unique contracts when removing an absorbed document, and redirect
+  live references to the canonical owner. Do not leave a stage-design stub.
+- Fold module usage, source reviews and dated validation narratives into the
+  owning feature document. Preserve recorded evidence bytes, source hashes,
+  timestamps and pass flags.
+  Historical inventory paths refer to their original Git revisions, even when
+  live design paths have been consolidated.
+- Link new implementation plans from their owning design in the same change.
+- Run `python3 tools/check_doc_links.py` after navigation changes. The check
+  verifies local paths, anchors, context fields and reachability; editorial
+  review still establishes whether the relationships are meaningful.
 
 ## Document catalogue
 
@@ -97,7 +73,7 @@ navigation, including completed plans and retired research.
 The [investigation correctness-fix plan](../Plans/completed/investigation-correctness-fixes.md)
 addresses two reviewed gaps in the first-question implementation: full Windows
 latency enforcement and valid answers when explanation limits are exhausted.
-Its [delivery record](Ariadne/investigation-correctness-validation.md) separates
+Its [delivery record](Ariadne/investigation-design.md#qualification-and-truncation-repairs) separates
 implemented repairs and exercised checks from real-Windows qualification.
 
 ### Project and active plans
@@ -120,85 +96,30 @@ implemented repairs and exercised checks from real-Windows qualification.
 - [Ariadne](../README.md).
 - [Ariadne roadmap](../ROADMAP.md).
 
-### Analysis, interfaces and delivery documents
+### Feature documents
 
-- [Ariadne architecture](Ariadne/architecture.md) — main pipeline, native helpers, completed-analysis binding and separate IR/stateflow paths.
-- [Selected I5c address-wrap design](Ariadne/i5c-address-wrap-design.md).
-- [I4 native performance design](Ariadne/i4-performance-design.md).
-- [I4 native performance qualification](Ariadne/i4-performance-validation.md).
-- [Selected I5b zero-base-plus-displacement design](Ariadne/i5b-zero-base-offset-design.md).
-- [I5b source and independent admission review](Ariadne/i5b-source-review.md).
-- [I5b implemented contracts](Ariadne/i5b-contracts.md).
-- [I5b qualification](Ariadne/i5b-validation.md).
-- [I5a zero-address consistency](Ariadne/i5a-zero-address-design.md).
-- [I5a implemented contracts](Ariadne/i5a-contracts.md).
-- [I5a source and finite admission review](Ariadne/i5a-source-review.md).
-- [I5a source/fixture delivery and validation](Ariadne/i5a-validation.md).
-- [Native I5a qualification and dependency isolation](Ariadne/i5a-native-qualification.md).
-- [Native Windows capture with crashpad-nzsn](Ariadne/crashpad-demo-validation.md).
+- [Ariadne architecture](Ariadne/architecture.md).
+- [File readers and immutable address-space preparation](Ariadne/file-reader-design.md).
+- [BAP semantic and analysis integration](Ariadne/bap-analysis-core-design.md).
+- [Fault-address investigation design](Ariadne/investigation-design.md).
+- [Zero-address assessment design](Ariadne/zero-address-design.md).
+- [Zero-base-plus-displacement assessment design](Ariadne/zero-base-offset-design.md).
+- [Fault-time address-wrap assessment design](Ariadne/address-wrap-design.md).
+- [Memory provenance refinement for Scanner](Ariadne/memory-provenance-refinement.md).
+- [Analysis result rendering and minidump reports](Ariadne/result-rendering.md).
+- [Typed replay and analysis result contracts](Ariadne/typed-replay-design.md).
+- [Workload performance design](Ariadne/workload-performance-design.md).
+- [Structured operands and conservative instruction effects](Ariadne/operand-effects-design.md).
+- [Semantic assurance and proof boundaries](Ariadne/semantic-assurance.md).
+
+### Implementation and runtime references
+
 - [Crashpad demo build and capture recipe](../native/crashpad-demo/README.md).
-
-- [Ariadne documentation](Ariadne/README.md).
-- [Could BAP become Ariadne's core?](Ariadne/bap-core-refactor-assessment.md).
-- [LLVM semantic-backend removal](Ariadne/bap-only-removal-validation.md).
-- [BAP workload qualification repair and source refresh](Ariadne/bap-windows-workload-validation.md).
-- [Controlled Crashpad replacement for the BAP Windows workload](Ariadne/bap-windows-repin-validation.md).
-- [BAP workload qualification with unlimited latency](Ariadne/bap-unlimited-validation.md).
-- [BAP-owned analysis: Stage 2 contract](Ariadne/bap-analysis-core-design.md).
-- [Complete Stage 2 qualification](Ariadne/bap-core-qualification.md) — native default, rollback, exact corpus and retained evidence.
 - [Complete Stage 2 execution plan](../Plans/bap-stage2-implementation.md).
 - [Stage 2 A0 plan](../Plans/bap-stage2-a0.md).
 - [OCaml foundation qualification plan](../Plans/bap-ocaml-qualification.md).
-- [Stage 2 A0 validation](Ariadne/bap-stage2-a0-validation.md).
 - [Native BAP analysis core](../native/bap-core/README.md) — default algorithms and separately labeled historical A0 probe.
-- [Historical BAP documentation synchronization](Ariadne/bap-documentation-sync.md) — earlier v2 source/evidence audit and its accepted v3 successor.
 - [BAP Windows workload replacement plan](../Plans/bap-windows-repin.md).
-- [BAP Stage 1 projection: pinned source review](Ariadne/bap-projection-source-review.md).
-- [Stage 1 BAP semantic backend protocol and projection](Ariadne/bap-semantic-backend-design.md).
-- [BAP v3 admission contract](Ariadne/bap-admission-contract.md) — frozen independent expectations, typed capability admission, ordinary opaque continuation and explicit profile migration.
-- [Historical BAP admission execution checkpoint](Ariadne/bap-admission-checkpoint.md) — initial P0–P3 checks and P4 failures before the accepted successor.
-- [BAP admission resume record](Ariadne/bap-admission-resume.md) — recovered dependencies, preserved failures and progression to accepted P4.
-- [File readers and immutable address-space preparation](Ariadne/file-reader-design.md).
-- [Installed ModelMirrors and MirrorRust compatibility](Ariadne/installed-modelmirrors-compatibility.md).
-- [Windows I4 replacement validation](Ariadne/i4-windows-repin-validation.md).
-- [Fault-address investigation contracts](Ariadne/investigation-contracts.md).
-- [Ariadne investigation layer](Ariadne/investigation-layer-design.md).
-- [First fault-address investigation delivery](Ariadne/investigation-validation.md).
-- [Minidump investigator examples](Ariadne/minidump-investigator-examples.md).
-- [Minidump input delivery and validation](Ariadne/minidump-validation.md).
-- [BAP minidump semantic backend](Ariadne/modules/bap.md).
-- [Analyzer baseline benchmark](Ariadne/modules/bench.md).
-- [Ariadne minidump input](Ariadne/modules/input.md).
-- [Ariadne investigation module](Ariadne/modules/investigation.md).
-- [Native LLVM IR input](Ariadne/modules/ir.md).
-- [Stage E inputs and reports](Ariadne/modules/reports.md).
-- [Structured operands and conservative instruction effects](Ariadne/operand-effects-design.md).
-- [LLVM MC protocol 2](Ariadne/operand-effects-protocol.md).
-- [Operand/effect rule matrix](Ariadne/operand-effects-rules.md).
-- [Operand/effects delivery evidence](Ariadne/operand-effects-validation.md).
-- [Ariadne assurance priorities](Ariadne/practical-assurance-priorities.md).
-- [Priority 1 design: evidence-linked predecessor slice from a real minidump](Ariadne/priority-1-real-capture-design.md).
-- [Accepted P4 real-capture replacement](Ariadne/real-capture-repin-79938.md) — exact Windows pin, remote gates, fixed budgets and excluded historical real-Linux clauses.
-- [Priority 1: controlled Chromium real-capture investigation](Ariadne/priority-1-real-capture-validation.md).
-- [Priority 2: path-driven effect decision for the first real case](Ariadne/priority-2-effects-validation.md).
-- [Priority 3 design: readable minidump investigation reports](Ariadne/priority-3-investigator-presentation-design.md).
-- [Priority 3: readable minidump reports and release examples](Ariadne/priority-3-presentation-validation.md).
-- [Priority 4 real-path control review](Ariadne/priority-4-control-source-review.md).
-- [Priority 4: qualified workload and performance decision](Ariadne/priority-4-performance-validation.md).
-- [Priority 4 design: workload-based performance decision](Ariadne/priority-4-workload-performance-design.md).
-- [Rendering analyzer outcomes](Ariadne/result-rendering.md).
-- [Rust source layout consolidation](Ariadne/rust-source-layout.md).
-- [Semantic assurance and retirement of independent ISA proofs](Ariadne/semantic-assurance.md).
-- [Stage A source and decoder review: memory-immediate MOV](Ariadne/stage-a-source-review.md).
-- [Stage A memory-immediate MOV delivery](Ariadne/stage-a-validation.md).
-- [Stages B and C: captured predecessor slice and investigator report](Ariadne/stage-b-c-validation.md).
-- [Stage C minidump investigator report schema](Ariadne/stage-c-report-schema.md).
-- [Stage D D1 review: MOV reg64, imm32](Ariadne/stage-d-mov-reg64-imm32-review.md).
-- [Stage E completion: replay and investigator reports](Ariadne/stage-e-completion.md).
-- [Stage E typed MirrorRust integration](Ariadne/stage-e-mirrorrust-design.md).
-- [Stage E result contracts](Ariadne/stage-e-report-contracts.md).
-- [Stage F proof boundary and measured core baseline](Ariadne/stage-f-proof-and-performance.md).
-- [Learning the theory behind Ariadne's assembly analysis](Ariadne/static-analysis-learning.md).
 - [Rust machine-analysis implementation](implementation.md).
 - [LLVM MC byte-span adapter](llvm-mc-adapter.md).
 - [Rust design for abstract machine-state analysis](machine-state-design.md).

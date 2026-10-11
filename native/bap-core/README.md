@@ -4,11 +4,11 @@
 
 **Status.** ABI 2 native recovery, dataflow, slicing and finite stateflow are
 implemented and selected by default in the minidump CLI. The
-[Stage 2 qualification](../../docs/Ariadne/bap-core-qualification.md) records all
+[Stage 2 qualification](../../docs/Ariadne/bap-analysis-core-design.md#native-qualification) records all
 20 passing gates, rollback acceptance and the verified source-bound archive.
-The later [P4 resume](../../docs/Ariadne/bap-admission-resume.md) records bounded
+The later [P4 resume](../../docs/Ariadne/bap-analysis-core-design.md#admission-resume) records bounded
 completion pages and current remote checks. The
-[selected replacement](../../docs/Ariadne/real-capture-repin-79938.md) qualifies
+[selected replacement](../../docs/Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query) qualifies
 active-corpus P4. The [user decision](../../evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
 accepts that scope and excludes the remaining historical real-Linux clauses;
 old coverage and six historical outputs remain unexercised.
@@ -25,11 +25,11 @@ remains a separate historical facility check.
 **Where to go next.**
 
 
-- [Windows I4 performance qualification](../../docs/Ariadne/i4-performance-validation.md) — records the later native-core refresh and passing 98-start explanation workload under the unchanged 2-second limit, independent of the unlimited BAP policy.
-- [Historical BAP documentation audit](../../docs/Ariadne/bap-documentation-sync.md) — earlier v2 inventory; the accepted v3 successor supplies current projection qualification.
+- [Windows I4 performance qualification](../../docs/Ariadne/workload-performance-design.md#native-investigation-qualification) — records the later native-core refresh and passing 98-start explanation workload under the unchanged 2-second limit, independent of the unlimited BAP policy.
+- [Historical BAP documentation audit](../../docs/Ariadne/bap-analysis-core-design.md#documentation-audit) — earlier v2 inventory; the accepted v3 successor supplies current projection qualification.
 
 
-- [Snapshot-based native qualification](../../docs/Ariadne/i5a-native-qualification.md) — explains the read-only MirrorRust dependency environment used by current core and controlled-I5a records.
+- [Snapshot-based native qualification](../../docs/Ariadne/zero-address-design.md#native-qualification) — explains the read-only MirrorRust dependency environment used by current core and controlled-I5a records.
 
 - [A0 plan](../../Plans/bap-stage2-a0.md) — preserves the historical capability probe; the later OCaml foundation closed its SDK/state-exchange gap.
 - [Analysis contract](../../docs/Ariadne/bap-analysis-core-design.md) — specifies

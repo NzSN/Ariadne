@@ -25,7 +25,7 @@ pages for the complete final response. No intermediate result is published.
 
 - [Native-core design](../docs/Ariadne/bap-analysis-core-design.md) — unchanged
   input, action, observation, attribution and clean-exit contracts.
-- [Admission resume record](../docs/Ariadne/bap-admission-resume.md) — earlier
+- [Admission resume record](../docs/Ariadne/bap-analysis-core-design.md#admission-resume) — earlier
   prerequisite recovery and incomplete acceptance.
 - [Admission plan](bap-projection-admission.md#p4--qualification-and-the-electron-investigation)
   — full qualification, fixed budgets and external-query acceptance.
