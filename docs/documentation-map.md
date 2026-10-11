@@ -81,6 +81,9 @@ implemented repairs and exercised checks from real-Windows qualification.
 
 ### Project and active plans
 
+- [Active specification synchronization](../Plans/specification-sync.md) —
+  source/model audit, preserved replay bindings and qualification boundaries.
+
 - [BAP projection admission and coverage plan](../Plans/bap-projection-admission.md) —
   accepted form validation, capability admission and conservative ordinary
   continuation, with qualified finite-corpus exits and excluded historical real-Linux clauses.

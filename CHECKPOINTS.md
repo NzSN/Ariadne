@@ -17,6 +17,26 @@
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
+## 2026-10-11 — Active specifications synchronized
+
+The [model ownership audit](Specs/README.md#current-model-ownership) and
+[S0–S3 ledger](Plans/specification-sync.md) cover 17 active and five replay
+modules. Core/stateflow/IR and replay contracts remain current and byte-identical.
+Memory refinement now models constrained facts, representation/cap stops and
+unavailable/candidate preservation. Frame paths now retain typed parallel edges,
+DFS state, scan/work/visit/step guards and conservative partial/exhausted results.
+Effects producer wording and shared/specialized checking entry points are updated.
+
+The [source-bound record](evidence/Ariadne/specification-sync-20261011/report.json)
+retains parsing of 22 modules/19 configurations, 13 bounded frame traces and
+22 scalar probes plus candidate/wrap controls, stub-tool checker dispatch and
+failure propagation, 117 default/45 core tests and all 13 property tests.
+The audit preserves 934 existing runtime/native/corpus/Lean/evidence/architecture
+bindings and both replay oracle inventories. S0–S2 are complete; S3 remote
+Apalache typechecking and exhaustive TLC safety/liveness remain pending.
+Historical evidence, native/release qualification and the separate architecture
+edit remain unchanged.
+
 ## 2026-10-11 — Retired ISA specifications removed
 
 The [assurance contract](docs/Ariadne/semantic-assurance.md#dependency-audit-and-retained-references)

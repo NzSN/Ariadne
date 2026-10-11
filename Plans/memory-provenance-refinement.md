@@ -33,6 +33,11 @@ oracle and source work can continue without claiming a remote tier.
 
 ## Execution ledger
 
+The [specification synchronization](specification-sync.md) updates M0's finite
+component model for represented constrained values, expression-cap boundaries
+and unavailable/candidate preservation. It preserves the original freeze and
+receipts; remote qualification must bind the revised model's own hashes.
+
 | Stage | Work | Acceptance |
 | --- | --- | --- |
 | M0 — independent contract | 784 range / 1,280 inverse expectations frozen; TLA+ source and remote check command specified. | Oracle passes. Remote Apalache/TLC checks remain unexercised. |

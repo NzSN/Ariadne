@@ -39,4 +39,20 @@ done
   --init=Init --next=Next --inv=Safety --length=8 --no-deadlock AriadneLLVMIRExample.tla
 "$checker" --out-dir="$run_root/MachineState" check \
   --init=Init --next=Next --inv=Safety --length=6 --no-deadlock AriadneMachineStateExample.tla
-printf 'Scenario and call-policy safety checks passed through bound %s; pipeline and LLVM IR through 8; machine state through 6.\n' "$bound"
+for scenario in Input InputLimit; do
+  "$checker" --out-dir="$run_root/$scenario" check \
+    --config="$scenario.cfg" --init=Init --next=Next --inv=Safety \
+    --length=6 --no-deadlock AriadneInputChecks.tla
+done
+"$checker" --out-dir="$run_root/Effects" check \
+  --init=Init --next=Next --inv=Safety --length=1 --no-deadlock AriadneEffectsChecks.tla
+for module in AriadneMemoryRefinement AriadneZeroBaseOffset; do
+  "$checker" --out-dir="$run_root/$module-safety" check \
+    --init=Init --next=Next --inv=Safety --length=1 --no-deadlock "$module.tla"
+done
+for scenario in FramePaths FramePathsComplete FramePathsCountOne FramePathsScanLimit FramePathsZeroVisits FramePathsExternalStop; do
+  "$checker" --out-dir="$run_root/$scenario" check \
+    --config="$scenario.cfg" --init=Init --next=Next --inv=Safety \
+    --length=32 --no-deadlock AriadneFramePaths.tla
+done
+printf 'Core scenarios/calls through %s; pipeline/IR through 8; stateflow/input through 6; effects/decisions through 1; six frame-path scenarios through 32.\n' "$bound"

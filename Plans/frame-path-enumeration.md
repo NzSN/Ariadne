@@ -93,6 +93,11 @@ substitute for that tier.
 
 ## Property-based extension
 
+The [specification synchronization](specification-sync.md) updates F0's search
+model to typed-edge DFS, scan counters and conservative partial results. The
+original freeze and source/property receipts remain historical; the revised
+model has a separate audit record and still requires remote qualification.
+
 The [owning coverage contract](../docs/Ariadne/investigation-design.md#frame-path-property-based-coverage)
 now adds ten shrinking graph properties and three generated capture properties
 under optional `property-tests`. Fixed-seed 128-case runs cover independent

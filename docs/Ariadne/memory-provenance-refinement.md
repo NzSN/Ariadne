@@ -27,6 +27,9 @@ proposed types, algorithms, limits and report validation.
 
 **Where to go next.**
 
+- [Active specification synchronization](../../Plans/specification-sync.md) —
+  current finite scalar/alias model and its separate remote-check boundary.
+
 - [Implementation plan](../../Plans/memory-provenance-refinement.md) — M0–M4
   contract, symbolic assessment, backward values, product and qualification.
 

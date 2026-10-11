@@ -4,6 +4,8 @@
 
 **Status.** Active analysis-model authority. Retired AMD64/x86-64 ISA specifications,
 coverage inventories and their checkers were removed on 2026-10-11.
+The [specification synchronization ledger](../Plans/specification-sync.md)
+records the subsequent source audit and separate qualification limits.
 
 **Why this document exists.** [Project overview](../README.md) motivates snapshot-scoped control flow and possible value origins.
 
@@ -59,6 +61,40 @@ frame-path and question-level models in this directory. The
 [semantic assurance decision](../docs/Ariadne/semantic-assurance.md#dependency-audit-and-retained-references)
 records the archive location, retained [Lean reference](../lean/README.md),
 BAP's trusted role and the analysis-model boundary.
+
+## Current model ownership
+
+The 2026-10-11 source audit covers **17 active modules and five replay modules**.
+The [synchronization plan](../Plans/specification-sync.md) separates source
+corrections and bounded local evidence from remote qualification. A model's
+age alone does not imply drift; unchanged executable contracts retain their
+original bytes and replay bindings.
+
+| Models | Current source/contract owner | Audit result and boundary |
+| --- | --- | --- |
+| [Types](AriadneTypes.tla), [common machine facts](AriadneMachineCommon.tla) | `src/model.rs`, `src/machine_state.rs`, `src/llvm_ir.rs` | Current shared vocabulary and normalized request constraints; transparent aliases and mathematical integers remain representation abstractions. |
+| [Core](Ariadne.tla), [general examples](AriadneExample.tla), [calls](AriadneCalls.tla), [pipeline](AriadnePipeline.tla) | `src/engine.rs`, `native/bap-core/recovery.ml` | Current recovery/dataflow/slicing phases. Native indexes, transport, batching and limits have separate contracts; neither adapter adds CPU execution to this model. |
+| [Abstract stateflow](AriadneMachineState.tla), [example](AriadneMachineStateExample.tla) | `src/machine_state.rs`, `native/bap-core/stateflow.ml` | Current supplied finite semantics and structural edge classification. Captured registers do not establish earlier branch outcomes. |
+| [Supplied IR](AriadneLLVMIR.tla), [example](AriadneLLVMIRExample.tla) | `src/llvm_ir.rs`, `src/ir/`, `native/llvm_ir/` | Current instruction dependencies and separate block CFG; no binary-to-IR reconstruction. |
+| [Input](AriadneInput.tla), [checks](AriadneInputChecks.tla) | `src/input/address_space.rs`, `src/input/materialize.rs` | Current byte agreement, file-offset correspondence and local discovery closure. Actual parser limits, context validity and unwind admission remain reader contracts. |
+| [Effects](AriadneEffects.tla), [checks](AriadneEffectsChecks.tla) | `src/effects/`, `src/bap/projection.rs` | Executable projection contract unchanged; producer wording now names trusted BAP lifting and independent LLVM facts. No hardware/ISA proof. |
+| [Zero base/displacement](AriadneZeroBaseOffset.tla) | `src/investigation/zero_base_offset.rs` | Current question-level reduction over admitted coherent evidence and result budgets. Context/decode/BIL admission and full-width arithmetic have separate source/capture tests. |
+| [Memory refinement](AriadneMemoryRefinement.tla) | `src/investigation/backward_values.rs`, `src/investigation/memory_refinement.rs` | Updated exact/constrained/unknown meanings, composition/cap stops, conflict distinction and unavailable/candidate preservation. Four-bit words and two-operation chains are finite representatives; worklist and receipt validation remain outside this component model. |
+| [Frame paths](AriadneFramePaths.tla) | `src/investigation/frame_paths.rs`, `src/investigation/frame_unwind.rs` | Updated typed-edge DFS, strict NP, work/scan/visit/step guards, fair termination and conservative exhaustion. Activation-qualified node IDs and a bound composed graph are premises. External resource stops abstract byte/graph limits; they do not prove concrete payload sizing or RSS. |
+| [Core replay](../mbt/model/AriadneReplay.tla), [stateflow replay](../mbt/stage-e/model/MachineStateReplay.tla) and [cases](../mbt/stage-e/model/MachineStateCases.tla), [IR replay](../mbt/stage-e/model/LLVMIRReplay.tla) and [cases](../mbt/stage-e/model/LLVMIRCases.tla) | `mbt/`, `src/mbt/`, native replay observers | Current deterministic schedules and observation projections; retained corpus/source bindings are preserved. Replay remains finite conformance evidence. |
+
+Address-wrap W0 is still an unimplemented design stage, not an outdated existing
+specification. Retired ISA models and historical Lean research are outside this
+audit. Earlier source-bound records retain their hashes and qualification scope;
+changing a model or its comments does not refresh those records.
+
+The [synchronization record](../evidence/Ariadne/specification-sync-20261011/report.json)
+and [artifact manifest](../evidence/Ariadne/specification-sync-20261011/evidence-manifest.json)
+retain source hashes and bounded local checks: all 22 modules and 19
+configurations parse; 13 selected frame traces and 22 scalar probes pass;
+checker dispatch/failure tests use stub tools; default/core/property tests pass.
+These checks are separate from pending remote Apalache typechecking and
+exhaustive TLC safety/liveness qualification. Historical receipts are unchanged.
 
 ## Shared semantic types
 
@@ -385,11 +421,13 @@ Run the compatibility checks from the repository root:
 bash Specs/check-apalache.sh
 ```
 
-The script typechecks all ten modules, checks each larger machine scenario through
+The script discovers every remaining `Specs/*.tla` module, checks each larger machine scenario through
 six transitions, checks `AriadnePipeline.tla` through eight transitions, and
 checks `AriadneCalls.tla` through the same configurable bound (six by default).
 It checks `AriadneLLVMIRExample.tla` through eight transitions and
-`AriadneMachineStateExample.tla` through six. It writes all artifacts to a fresh
+`AriadneMachineStateExample.tla` through six. It also registers input closure and
+budget scenarios through six, effects and scalar/question decisions through
+one, and six typed-edge frame-path scenarios through thirty-two. It writes all artifacts to a fresh
 temporary directory and prints its path. Set `APALACHE_MC` to select an
 executable. To change the bound for the larger scenarios or select one scenario:
 
@@ -481,6 +519,19 @@ the safety checks exit with code 0. The TLC results below were rechecked after
 the unified call-edge change; all five original scenarios retain their state counts.
 
 ### TLC
+
+Current additional entry points are:
+
+| Command | Finite scenarios and limits |
+| --- | --- |
+| `bash Specs/check-input.sh` | `Input.cfg` and `InputLimit.cfg`: byte agreement, mapping, local closure and preparation-budget termination. |
+| `bash Specs/check-effects.sh` | `Effects.cfg`: conservative normalized effects, register cells, memory weak writes and opaque effects. |
+| `bash Specs/check-zero-base-offset.sh` | `ZeroBaseOffset.cfg`: admitted/coherent result decisions and evidence/claim budgets. |
+| `bash Specs/check-memory-refinement.sh` | `MemoryRefinement.cfg`: mathematical and represented scalar preimages, retained facts at boundaries and candidate preservation; four-bit/two-operation representatives. |
+| `bash Specs/check-frame-paths.sh` | Six `FramePaths*.cfg` scenarios: typed parallel paths/loops, acyclic exhaustion, strict NP=1, zero scan/visit budgets and external partial stops; invariants and fair termination. |
+
+The source audit and local probes above do not claim those revised remote gates
+have run. The older results below belong to their stated source revisions.
 
 `AriadneExample.tla` instantiates the engine with seven candidate addresses and
 two abstract locations. Its configurations exercise:

@@ -24,6 +24,9 @@ and qualification preserve alternatives and missing premises. The frame-path que
 
 **Where to go next.**
 
+- [Active specification synchronization](../../Plans/specification-sync.md) —
+  typed-edge frame-path model, bounded stops and preserved historical receipts.
+
 - [Implementation ledger](../../Plans/investigation-layer.md) — delivery stages,
   selected address-wrap work and later questions.
 - [Scanner partial-explanation follow-up plan](../../Plans/scanner-partial-explanation.md)

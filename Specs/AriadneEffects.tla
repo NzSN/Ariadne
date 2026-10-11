@@ -2,7 +2,8 @@
 EXTENDS AriadneMachineCommon
 
 \* Abstract projection only: architectural atoms/continuations are supplied
-\* evidence. This module does not prove LLVM or AMD manual interpretation.
+\* evidence. Production BAP lifting and independent LLVM decoded facts are
+\* admitted premises; this module does not prove lifter or hardware correctness.
 \* @type: (Set($location), Set({reads: Set($location), writes: Set($location), replaced: Set($location)}), Set($location), Set($location), Set($location)) => Bool;
 Sound(L, outcomes, uses, mayDefs, mustDefs) ==
   /\ outcomes # {}

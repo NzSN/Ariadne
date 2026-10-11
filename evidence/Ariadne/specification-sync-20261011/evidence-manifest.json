@@ -1,0 +1,7 @@
+{
+  "schema": "ariadne.specification-sync-evidence/v1",
+  "files": {
+    "bounded-checks.tar.gz": "f513e4b5104fd0b808738791c90b38468287782818423512ed46b428d9730e77",
+    "report.json": "0b0d5fb8fbdb119a4c55d79a1595d988c2741a929ba57ce21d6d8a99d334f20e"
+  }
+}

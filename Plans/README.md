@@ -25,6 +25,9 @@ keeping a plan outside `completed/` does not make its completed steps pending.
 
 **Where to go next.**
 
+- [Active specification synchronization](specification-sync.md) — current
+  source/model audit, extension corrections and separately pending remote checks.
+
 - [Frame-path enumeration](frame-path-enumeration.md) — F0–F4 implementation of
   fewer than `NP` frame-constrained paths with independent resource budgets.
 
