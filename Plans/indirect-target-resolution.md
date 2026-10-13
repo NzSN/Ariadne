@@ -3,12 +3,14 @@
 ## Context and follow-up
 
 **Status.** R0–R5 implemented for the finite pointer-slot/signed-32 table profile;
-2026-10-13 review corrections pass portable/root checks, with remote qualification
-pending. The [correction record](../evidence/Ariadne/indirect-target-resolution/review-corrections-20261013/report.json)
-binds the revised sources. The initial R6
+2026-10-13 review corrections are committed at `b5d56b7`. The
+[original-dump retry](../evidence/Ariadne/indirect-target-resolution/dump-retry-b5d56b7-20261013/report.json)
+passes pinned native resolver tests, full native/Rust state parity and the
+single-sample CLI timing criterion. The [correction record](../evidence/Ariadne/indirect-target-resolution/review-corrections-20261013/report.json)
+retains portable/root checks. Full mutation/replay qualification remains pending. The initial R6
 correctness claim was too broad: its mutation campaign omitted required seams.
-Native CLI performance acceptance also remains open against the unchanged 60 s
-criterion. The [initial qualification record](../evidence/Ariadne/indirect-target-resolution/qualification-20261013/report.json)
+Earlier native CLI samples exceeded the unchanged 60 s criterion; the retry's
+38.61 s native / 19.92 s Rust samples pass individually. The [initial qualification record](../evidence/Ariadne/indirect-target-resolution/qualification-20261013/report.json)
 binds historical sources, fixtures, models, helpers and results. The original
 2026-10-12 dump inspection remains motivation with its original identity.
 
@@ -33,9 +35,9 @@ constraints, acceptance gates and the evidence required for the initial profile.
 - [Motivating capture](../docs/Ariadne/indirect-target-resolution.md#motivating-windows-capture)
   — exact original artifact, 58 entries, 45 destinations and retained limits.
 
-**What remains unresolved.** R6 native timing is over budget; the original
-qualification host is contended by an unrelated build. The expanded
-original-dump explanation remains
+**What remains unresolved.** Full R6 mutation/replay and release qualification
+remain pending. The retry met the individual CLI timing criterion; earlier
+over-budget samples remain historical. The expanded original-dump explanation remains
 partial; 45 witnessed destinations are not exhaustive incoming-state coverage.
 Real Linux full-dump and packaged release qualification are not credited.
 General indirect calls, mutable dispatch data, broad value-set
@@ -272,11 +274,11 @@ the disabled preparation contract. The canonical design records the
 Initial review-fix validation: 144 default tests, 46 core-only tests, format, all-feature/
 all-target Clippy, Rust layout and documentation navigation pass. Four mutation
 observer tests and every required mutation anchor pass. The revised campaign has
-fourteen Rust mutants and one native mutant; its execution and four pinned native
-target-resolution tests remain pending. Automatic approval review rejected the
-prepared private source archive transfer to `windows-dev`, requiring explicit
-payload/destination authorization. This gate does not undo the local fixes or
-turn unexecuted native/mutation clauses into passes.
+fourteen Rust mutants and one native mutant. At that checkpoint, its execution
+and four pinned native target-resolution tests were pending after automatic
+approval review rejected the private source archive transfer to `windows-dev`.
+The [later retry](#original-dump-retry) resolved transfer and pinned-native
+execution; the full mutation/replay aggregate remains pending.
 
 ### Second review corrections
 
@@ -288,5 +290,21 @@ turn unexecuted native/mutation clauses into passes.
 
 See the [canonical correction contracts](../docs/Ariadne/indirect-target-resolution.md#second-review-corrections)
 and [source-bound correction record](../evidence/Ariadne/indirect-target-resolution/review-corrections-20261013/report.json).
-The earlier review-fix record remains historical. Pinned native and full mutation
-execution retain their pending status until the remote transfer is authorized.
+At this correction checkpoint, pinned native and full mutation execution were
+pending remote transfer authorization. The [later retry](#original-dump-retry)
+resolved the pinned-native and individual timing-sample clauses. Full
+mutation/replay and release qualification remain pending.
+
+### Original-dump retry
+
+The [b5d56b7 retry](../evidence/Ariadne/indirect-target-resolution/dump-retry-b5d56b7-20261013/report.json)
+resolves the pinned-native and dump-rerun blockers above. Published sources
+were verified, the pinned helper rebuilt, and all 26 resolver tests passed.
+The original dump retains 45 witnessed targets and exact native/Rust full-state
+and CLI-explanation parity. Individual native/Rust CLI samples pass the original
+60 s ceiling; explanation output still reaches its 32,768-origin-link limit and
+remains partial. The complete core state is compared without dropping definitions.
+
+Remaining R6 work: the fifteen-mutant campaign with unmodified controls and
+fresh aggregate replay/mutation receipts for the rebuilt helper. Historical
+records retain their identities; full acceptance is false.

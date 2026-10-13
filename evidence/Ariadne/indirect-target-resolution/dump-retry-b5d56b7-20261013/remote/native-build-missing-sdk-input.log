@@ -1,0 +1,24 @@
+Traceback (most recent call last):
+  File "/home/nzsn/Repos/Ariadne-dump-retry-b5d56b7/native/bap-core/setup-sdk.py", line 138, in <module>
+    main()
+  File "/home/nzsn/Repos/Ariadne-dump-retry-b5d56b7/native/bap-core/setup-sdk.py", line 58, in main
+    if sha(ROOT / lock[key]["path"]) != lock[key]["sha256"]:
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nzsn/Repos/Ariadne-dump-retry-b5d56b7/native/bap-core/setup-sdk.py", line 22, in sha
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1021, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/nzsn/Repos/Ariadne-dump-retry-b5d56b7/tmp/bap-setup/bap-source.tar.gz'
+Traceback (most recent call last):
+  File "/home/nzsn/Repos/Ariadne-dump-retry-b5d56b7/native/bap-core/build.py", line 62, in <module>
+    main()
+  File "/home/nzsn/Repos/Ariadne-dump-retry-b5d56b7/native/bap-core/build.py", line 21, in main
+    subprocess.run(["python3", str(HERE / "setup-sdk.py"), "--check"], check=True)
+  File "/usr/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python3', '/home/nzsn/Repos/Ariadne-dump-retry-b5d56b7/native/bap-core/setup-sdk.py', '--check']' returned non-zero exit status 1.

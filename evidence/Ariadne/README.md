@@ -14,9 +14,13 @@
   — original partial-analysis and 58-entry/45-target table inspection artifacts;
   the [resolver design](../../docs/Ariadne/indirect-target-resolution.md#motivating-windows-capture)
   distinguishes this motivation from subsequent resolver qualification.
+- [Original-dump retry at b5d56b7](indirect-target-resolution/dump-retry-b5d56b7-20261013/report.json)
+  — rebuilt pinned helper, 26 resolver tests, exact native/Rust full-state and
+  explanation parity, and passing individual CLI timing samples. The explanation
+  remains partial/truncated; full mutation/replay qualification remains pending.
 - [Indirect-target review corrections](indirect-target-resolution/review-corrections-20261013/report.json)
-  — current source-bound portable/root and native source-level checks; pinned
-  native, mutation and full R6 qualification remain pending.
+  — earlier source-bound portable/root and native source-level checks; the retry
+  above supplies the previously pending pinned-native and original-dump tiers.
 - [Historical indirect-target qualification](indirect-target-resolution/qualification-20261013/report.json)
   — original model/oracle/native/capture/replay/mutation checks, full-dump parity
   and CLI timing; review corrections supersede its broad correctness claim.

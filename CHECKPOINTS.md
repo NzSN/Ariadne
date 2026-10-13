@@ -17,6 +17,23 @@
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
+## 2026-10-13 — Original dump retried at b5d56b7
+
+The [retry record](evidence/Ariadne/indirect-target-resolution/dump-retry-b5d56b7-20261013/report.json)
+binds the committed sources, rebuilt pinned helper and unchanged original dump.
+All 26 resolver tests passed, including four previously pending native cases.
+Native and Rust retain the same 45 dispatch targets and exact historical full
+state: 3,977 decoded starts, 4,819 edges, a 392-site slice and 10,744,212 definition
+links. Production CLI explanations are byte-identical; their individual timing
+samples are 38.61 s / 19.92 s, below the unchanged 60 s criterion.
+
+The explanation remains `Partial` and `truncated=true` at its existing
+32,768-origin-link limit; incomplete dispatch coverage, unknown origins/effects
+and 13 decode failures remain explicit. The core state comparison is complete.
+The prior remote source-transfer block was resolved by verifying and transferring
+only the publicly published commit. The fifteen-mutant campaign and full
+revised-helper replay/mutation aggregate remain pending; full R6 is not accepted.
+
 ## 2026-10-13 — Follow-up resolver review corrections
 
 The [second review corrections](docs/Ariadne/indirect-target-resolution.md#second-review-corrections)

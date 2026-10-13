@@ -1,0 +1,13 @@
+Phase: verify original dump and capture environment
+/work/dump048B/original.dmp: OK
+Phase: rebuild native helper from published sources
+Phase: verify original dump and capture environment
+/work/dump048B/original.dmp: OK
+Phase: rebuild native helper from published sources
+Phase: build current release library and CLI
+Phase: exercise all portable and pinned target-resolution tests
+Phase: compile bounded diagnostic driver for complete native/Rust state comparison
+Phase: compare complete native/Rust states on the original full dump
+Phase: measure current native CLI explanation
+Phase: measure current Rust CLI explanation
+Phase: validate oracle, state and CLI parity; seal artifacts

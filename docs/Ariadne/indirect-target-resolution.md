@@ -2,10 +2,13 @@
 
 ## Context and follow-up
 
-**Status.** The finite `captured-indirect-targets/v1` implementation and its
-2026-10-13 review corrections pass portable regression and root checks. The
+**Status.** The finite `captured-indirect-targets/v1` implementation and review
+corrections are committed at `b5d56b7`. The [original-dump retry](../../evidence/Ariadne/indirect-target-resolution/dump-retry-b5d56b7-20261013/report.json)
+passes 26 resolver tests including the pinned native cases, full native/Rust
+state comparison and byte-identical CLI explanations. Native/Rust individual
+CLI samples are 38.61 s / 19.92 s against the unchanged 60 s criterion. The
 [correction record](../../evidence/Ariadne/indirect-target-resolution/review-corrections-20261013/report.json)
-binds the revised sources and leaves pinned native and mutation execution pending.
+retains the earlier portable/root checks; the full mutation aggregate remains pending.
 The [R0–R6 ledger](../../Plans/indirect-target-resolution.md) separates those
 fixes from full qualification. The [initial source-bound record](../../evidence/Ariadne/indirect-target-resolution/qualification-20261013/report.json)
 is historical evidence for its original sources and exercised corpus, not
@@ -33,7 +36,8 @@ bounded discovery integration and qualification requirements.
 - [Inspection evidence](../../evidence/Ariadne/indirect-target-resolution/dump048B-20261012/jump-table-inspection.json)
   — the captured table that motivates the first relative-table profile.
 
-**What remains unresolved.** R6 native CLI timing remains over budget. The
+**What remains unresolved.** Full R6 mutation/replay and release qualification
+remain open; passing single CLI samples do not establish a latency distribution. The
 selected full-dump explanation remains partial;
 its 45 witnessed targets do not certify all incoming paths. General value-set analysis,
 mutable heap tables, arbitrary indirect calls, JIT/self-modifying code and
@@ -44,8 +48,8 @@ validated incoming-state coverage and an explicit captured-memory premise.
 
 The initial 2026-10-12 source review used commit
 `50f3e9ce64bb21ec8e0805d51c3d1a038b618650`. These baseline contracts motivated
-the extension; the current uncommitted implementation is bound by file hashes
-in the qualification record, rather than attributed to that earlier commit:
+the extension. The extension and review corrections are committed at `b5d56b7`,
+with source/tool/artifact identities bound by the later retry record:
 
 1. [BAP projection](../../src/bap/projection.rs) derives effects from one
    instruction's typed BIL. A load contributes address dependencies and
@@ -450,14 +454,15 @@ plan. Passing its nine selected mutants did not complete that R6 clause.
 The revised runner defines fourteen Rust mutants and one native mutant, requires
 each expected named runtime-test failure, and rejects compilation or unrelated
 failures as evidence. Four observer tests and all mutation-anchor checks pass.
-The [review-fix record](../../evidence/Ariadne/indirect-target-resolution/review-fixes-20261013/report.json)
-records 144 passing default tests, 46 passing core-only tests, format, Clippy,
+At that checkpoint, the [review-fix record](../../evidence/Ariadne/indirect-target-resolution/review-fixes-20261013/report.json)
+recorded 144 passing default tests, 46 passing core-only tests, format, Clippy,
 layout and documentation checks. Four target-resolution native tests and the
-fifteen-mutant campaign still require remote execution. Automatic approval
-review rejected the prepared source-archive transfer to the existing
+fifteen-mutant campaign still required remote execution. Automatic approval
+review had rejected the prepared source-archive transfer to the existing
 `windows-dev` qualification workspace pending explicit payload/destination
-authorization. The original record and raw evidence retain their identities;
-full R6 acceptance remains open, including the original performance criterion.
+authorization. The original record and raw evidence retain their identities.
+The [later retry](#original-dump-retry-at-b5d56b7) resolved the pinned-native and
+individual timing-sample clauses; the full mutation/replay aggregate remains open.
 That first review-fix record is historical; the subsequent corrections below
 have a separate source binding.
 
@@ -484,9 +489,38 @@ The [correction record](../../evidence/Ariadne/indirect-target-resolution/review
 binds fresh root/portable checks, nine observer/runner/checker tests and six
 native source-level frontier cases. The latter compile the actual recovery and
 capture modules with local OCaml 5.1 and do not qualify the pinned SDK/helper.
-Four pinned native tests and the complete fifteen-mutant campaign remain pending
-the already-requested remote archive-transfer authorization. Full R6 and its
-unchanged performance criterion remain open.
+At the correction checkpoint, four pinned native tests and the complete
+fifteen-mutant campaign were pending remote archive-transfer authorization.
+The [later retry](#original-dump-retry-at-b5d56b7) completed the pinned-native tests
+and met the individual timing criterion. Full mutation/replay qualification
+remains pending.
+
+### Original-dump retry at b5d56b7
+
+The [retry record](../../evidence/Ariadne/indirect-target-resolution/dump-retry-b5d56b7-20261013/report.json)
+supersedes the preceding pinned-native and dump-rerun blockers. Anonymous Git
+access verified the published commit before its source-only archive was sent
+to the existing qualification workspace; the original dump stayed on that host.
+The native helper was rebuilt after validating the existing pinned SDK inputs.
+All 26 resolver tests passed, including the four previously unexercised native
+cases, actual Windows/Linux synthetic captures and direct receipt controls.
+
+The unchanged original 1,305,482,568-byte dump recovered all 45 independently
+expected dispatch targets. Full states agree with each other and the historical
+digest `4b5c6d947ac8622932e63d8731733e4cf328b7d7401302fcc68ffa0d2ffcf30c`:
+3,977 decoded starts, 4,819 edges, a 392-site slice and 10,744,212 definition
+links. The diagnostic driver changes only the public response timeout to 60 s;
+the production CLI separately uses its explicit 30 s response deadline.
+
+Native/Rust CLI samples completed in 38.61 s / 19.92 s, both below 60 s;
+resolver passes were below 38 ms. Explanations are byte-identical with SHA-256
+`e3ef3ce6c3e0b515fdcf00ab8e8b797e136712427fe34a9c06d83c35cb1d8ab0`.
+The full core state is retained, while the explanation remains `Partial` and
+`truncated=true` after its existing 32,768-origin-link limit. Incomplete dispatch
+coverage, entry origins, unknown memory/call effects and 13 decode failures
+remain explicit. Captured control data remains a stated premise; no executed
+path or root cause follows. The fifteen-mutant campaign and full revised-helper
+R6 aggregate are still pending, so full plan acceptance remains false.
 
 2026-10-12: design and plan written from source review and the separately retained
 table inspection. Documentation checking passes with 88 connected documents,
@@ -494,8 +528,11 @@ table inspection. Documentation checking passes with 88 connected documents,
 inspection/baseline artifacts retain their original byte hashes, including the
 three table artifacts in the original inspection validation record.
 
-2026-10-13: R0–R5 implemented; R6 correctness tiers pass for the declared finite
-profile, while the native CLI timing criterion remains unmet. The
+Initial qualification run on 2026-10-13: R0–R5 were implemented, and the record
+reported passing R6 correctness tiers for its declared finite corpus while the
+native CLI timing criterion was unmet. The later implementation review found
+that the mutation coverage was incomplete; the [retry](#original-dump-retry-at-b5d56b7)
+subsequently met the individual timing criterion. The historical
 [source-bound record](../../evidence/Ariadne/indirect-target-resolution/qualification-20261013/report.json)
 retains Apalache typechecking, five TLC safety/fair-termination scenarios,
 independent integer/table oracles, pinned-lifter Windows/Linux fixtures,
@@ -507,13 +544,13 @@ starts, 4,819 edges, 392 slice sites and 10,744,212 reaching-definition links;
 the dispatch has 45 indirect edges. Its final certificate is incomplete because
 expanded incoming routes include cycles/unknown states. The fault explanation
 remains `Partial`, including the incoming-RDX boundary. Earlier native/Rust CLI samples of 46.87 s / 27.74 s are retained as historical
-results before the later completion/ownership changes. Current default-runtime
-native samples complete with the explicitly declared 30 s response deadline,
-but the local native sample is 68.34 s (Rust: 51.06 s), and a contended
-Windows/WSL native sample is 123.79 s,
+results before the later completion/ownership changes. At the initial
+qualification run, default-runtime native samples completed with the explicitly
+declared 30 s response deadline, but the local native sample was 68.34 s
+(Rust: 51.06 s), and a contended Windows/WSL native sample was 123.79 s,
 above 60 s. The Windows host was also running an unrelated Clang/Ninja build.
-Diagnostic runs with a longer library deadline establish full-state equality;
-they do not satisfy the production CLI timing gate. An experimental range
+Those diagnostic runs with a longer library deadline established full-state
+equality; they did not satisfy the production CLI timing gate. An experimental range
 codec and GC configuration did not improve the gate and were discarded.
 No latency distribution or packaged release qualification is claimed.
 

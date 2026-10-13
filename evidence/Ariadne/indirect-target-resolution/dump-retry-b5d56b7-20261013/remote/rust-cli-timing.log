@@ -1,0 +1,25 @@
+resolver pass_elapsed_us=922 instructions=332 reads=58 stop=None
+resolver pass_elapsed_us=35814 instructions=3990 reads=58 stop=None
+	Command being timed: "target/retry-build/release/ariadne-minidump /work/dump048B/original.dmp --decoder-reference target/ariadne-llvm-mc --entry 0x00007ff640079640 --seed 0x00007ff640079670 --resolve-indirect-targets --max-artifact-bytes 2147483648 --analysis-backend rust --explain-fault-address 0x00007ff640079670 --memory-access 0 --explanation-only --format json"
+	User time (seconds): 16.12
+	System time (seconds): 4.01
+	Percent of CPU this job got: 101%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:19.92
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 4743904
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 1522543
+	Voluntary context switches: 11912
+	Involuntary context switches: 48
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 179072
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

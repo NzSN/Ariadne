@@ -1,0 +1,7 @@
+Linux DESKTOP-6DKB5JD 6.6.87.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun  5 18:30:46 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+rustc 1.96.0 (ac68faa20 2026-05-25)
+cargo 1.96.0 (30a34c682 2026-05-25)
+ 06:42:24 up 1 min,  0 user,  load average: 0.64, 0.18, 0.06
+               total        used        free      shared  buff/cache   available
+Mem:           60266        1406       57362           3        2018       58859
+Swap:          15360           0       15360

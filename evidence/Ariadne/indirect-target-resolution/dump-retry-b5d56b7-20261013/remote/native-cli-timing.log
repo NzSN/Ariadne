@@ -1,0 +1,30 @@
+resolver pass_elapsed_us=969 instructions=332 reads=58 stop=None
+resolver pass_elapsed_us=37407 instructions=3990 reads=58 stop=None
+native kernel_cpu_s=19.343 serialization_cpu_s=4.694 actions=116199
+completion compute_ms=25794 encoded_bytes=59256199
+completion transfer_ms=2403
+completion expansion_ms=1287
+completion state_decode_ms=2363
+	Command being timed: "target/retry-build/release/ariadne-minidump /work/dump048B/original.dmp --decoder-reference target/ariadne-llvm-mc --entry 0x00007ff640079640 --seed 0x00007ff640079670 --resolve-indirect-targets --max-artifact-bytes 2147483648 --bap-core-response-timeout-ms 30000 --explain-fault-address 0x00007ff640079670 --memory-access 0 --explanation-only --format json"
+	User time (seconds): 32.86
+	System time (seconds): 5.95
+	Percent of CPU this job got: 100%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:38.61
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 4343220
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 2098303
+	Voluntary context switches: 27611
+	Involuntary context switches: 94
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 179080
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

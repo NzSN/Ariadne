@@ -4,8 +4,9 @@
 
 **Status.** Current plan navigation as of 2026-10-13. Captured indirect-target
 resolution R0–R5 and review corrections are implemented. Current portable/root
-checks pass; pinned native and mutation reruns remain pending, and the original
-native timing criterion remains unmet. Earlier synthetic Windows/Linux and
+checks and the current pinned-native/original-dump retry pass. Mutation/replay
+qualification remains pending; individual native/Rust timing samples now meet
+the original criterion. Earlier synthetic Windows/Linux and
 original Windows full-dump results retain their historical scope. BAP projection admission
 P0–P4 and completion transport are accepted on the selected Windows replacement.
 The [acceptance decision](../evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
@@ -89,7 +90,7 @@ For the wider context, see the [documentation map](../docs/documentation-map.md)
 
 | Plan | Current state and next work |
 | --- | --- |
-| [Captured indirect-target resolution](indirect-target-resolution.md) | R0–R5 and review corrections implemented; portable/root checks pass. Pinned native/mutation reruns and R6 performance remain open. Historical full-state parity retained 45 original-dump targets and a partial explanation; current-source full-dump and release qualification remain pending. |
+| [Captured indirect-target resolution](indirect-target-resolution.md) | R0–R5 and corrections committed at b5d56b7. Portable/root checks, pinned native tests and original-dump retry pass: 45 targets, full-state/CLI parity and 38.61 s / 19.92 s samples. Explanation remains partial and reporting is truncated; full mutation/replay and release qualification remain pending. |
 | [Scanner partial explanation](scanner-partial-explanation.md) | Retained baseline inspected; S1–S4 follow-up pending for memory qualification, twenty recovery obligations, entry provenance and source-bound publication. A qualified result may remain partial. |
 | [BAP projection admission](bap-projection-admission.md) | P0–P4 accepted on the active real Windows replacement; remaining historical real-Linux clauses excluded: capability admission, conservative continuation, bounded completion, fresh root/native/model/mutation, parity and fixed-budget checks. See the [replacement record](../docs/Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query); six historical Linux outputs remain unexercised. |
 | [Investigation layer](investigation-layer.md) | I0–I3 and active Windows producer correctness pass. I4 meets its fixed budgets in the [native performance result](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification); I5a is qualified, I5b is corpus-qualified, and other I5/I6/I7 remain later work. |

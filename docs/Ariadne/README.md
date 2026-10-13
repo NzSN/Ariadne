@@ -38,7 +38,7 @@ identities; consolidating its description supplies no new runtime qualification.
 | --- | --- | --- |
 | Architecture and development | [Architecture](architecture.md) | Process ownership, analysis equations, learning references, source layout and development checks. |
 | Captured input | [File readers](file-reader-design.md) | Reader API, CLI, immutable capture evidence, independent entries and retained real cases. |
-| Captured indirect control targets | [Indirect-target resolution](indirect-target-resolution.md) | Implemented opt-in pointer-slot/table resolver and review corrections, conditional completeness and bounded discovery. Portable/root checks pass; pinned native/mutation qualification and CLI timing remain open. |
+| Captured indirect control targets | [Indirect-target resolution](indirect-target-resolution.md) | Opt-in pointer-slot/table resolver and corrections; portable/root, pinned-native and original-dump retry pass with full-state/CLI parity. Individual timing samples pass; full mutation/replay qualification remains open, and explanation output stays partial/truncated. |
 | Instruction semantics and native analysis | [BAP integration](bap-analysis-core-design.md) | Setup, lift/projection/admission and analysis contracts, source review, replay and qualification history. |
 | Fault-address dependencies | [Investigation](investigation-design.md) | Bound completed analysis, possible origins, explanation API, validation history and the bounded frame-path implementation and its finite qualification scope. |
 | Fault-time zero address | [Zero-address assessment](zero-address-design.md) | Predicate, admission, CLI, source review and controlled-capture qualification. |
