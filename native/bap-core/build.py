@@ -30,7 +30,7 @@ def main():
                  "compiler": "4.12.1", "bap_revision": lock["bapSourceRevision"],
                  "sdk_manifest_sha256": sdk.sha(sdk.BASE / "sdk-manifest.json"),
                  "source_hashes": source_hashes, "families": ["recovery", "stateflow"],
-                 "profiles": ["normalized-fixed-input/v1", "captured-fixed-input/v1"],
+                 "profiles": ["normalized-fixed-input/v1", "captured-fixed-input/v1", "captured-indirect-targets/v1"],
                  "operations": ["initialize", "advance:Visit", "advance:FinishRecovery",
                                 "advance:Propagate", "advance:FinishDataflow",
                                 "advance:ExpandSlice", "advance:FinishSlice", "advance:FinishStateflow",

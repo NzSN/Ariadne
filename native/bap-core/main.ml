@@ -49,10 +49,17 @@ let send j = send_chunks [Yojson.Safe.to_string j]
 let max_result = 256 * 1024 * 1024
 let page_bytes = 256 * 1024
 let checksum text =
-  let value = ref 0xcbf29ce484222325L in
-  String.iter (fun c -> value := Int64.mul
-      (Int64.logxor !value (Int64.of_int (Char.code c))) 0x100000001b3L) text;
-  Printf.sprintf "%016Lx" !value
+  (* The pinned AMD64 SDK has 63-bit machine integers. Two 32-bit halves
+     implement exactly the same FNV-1a modulo 2^64 without boxed Int64
+     allocation for each byte of a large completion envelope. *)
+  require (Sys.word_size=64) "checksum requires the pinned 64-bit SDK";
+  let low=ref 0x84222325 and high=ref 0xcbf29ce4 in
+  String.iter (fun c ->
+    let x= !low lxor Char.code c in
+    let product=x * 435 in
+    high := (!high * 435 + x * 256 + (product lsr 32)) land 0xffffffff;
+    low := product land 0xffffffff) text;
+  Printf.sprintf "%08x%08x" !high !low
 let hex_bytes text offset length =
   let digits="0123456789abcdef" in
   String.init (length * 2) (fun n ->
@@ -69,6 +76,8 @@ let () =
     send (Yojson.Safe.from_string Build_identity.handshake);
     let sequence = ref 0 and action_index = ref 0 and owned = ref None in
     let completed = ref None and completion_mode = ref false and page_offset = ref 0 in
+    let target_profile=ref false in
+    let computation_cpu=ref 0. in
     let identity seq = ["schema",js "ariadne.bap-core/v1"; "session",js session;
       "snapshot",js snapshot; "query",js query; "family",js family; "sequence",`Int seq] in
     let observation_cache = Recovery.observation_cache () in
@@ -81,9 +90,10 @@ let () =
             | Some (old,text) when old == p -> text
             | _ -> let text = Yojson.Safe.to_string (Project_state.attribution p snapshot) in
               attribution_cache := Some (p,text); text in
-          Recovery.observe_chunks observation_cache i s, attribution
+          (if !target_profile && !completion_mode && s.phase="done" then [Yojson.Safe.to_string (Recovery.observe_dictionary i s)] else Recovery.observe_chunks observation_cache i s), attribution
         | Some (Flow (i,s,_)) -> [Yojson.Safe.to_string (Stateflow.observe i s)], "[]" in
-      let fields = identity seq @ ["generation",`Int 1; "action_index",`Int !action_index;
+      let compact= !target_profile && !completion_mode && (match !owned with Some (Core (_,s,_)) -> s.phase="done" | _ -> false) in
+      let fields = (List.map (fun (k,v) -> if k="schema" && compact then k,js "ariadne.bap-core-dictionary/v1" else k,v) (identity seq)) @ ["generation",`Int 1; "action_index",`Int !action_index;
         "changed",`Bool changed] in
       let encode (k,v) = Yojson.Safe.to_string (js k) ^ ":" ^ Yojson.Safe.to_string v in
       ["{" ^ String.concat "," (List.map encode fields) ^ ",\"observation\":"] @
@@ -103,12 +113,17 @@ let () =
         require (seq = 0 && operation = "initialize") "initialize must be first";
         exact payload ["profile";"input"];
         let profile=string payload "profile" in
-        require (List.mem profile ["normalized-fixed-input/v1";"captured-fixed-input/v1"])
+        target_profile := profile="captured-indirect-targets/v1";
+        require (List.mem profile ["normalized-fixed-input/v1";"captured-fixed-input/v1";"captured-indirect-targets/v1"])
           "unsupported profile";
         require (family="recovery" || profile="normalized-fixed-input/v1") "stateflow profile";
+        (* Large captured graphs allocate many short-lived persistent-tree nodes.
+           This is a private target-profile allocation policy, not an analysis rule. *)
+        if !target_profile then Gc.set {(Gc.get ()) with minor_heap_size=2097152};
         let input_json = get payload "input" in
         let state = if family="recovery" then begin
-            let input,sites=if profile="captured-fixed-input/v1" then Capture.admit input_json snapshot
+            let input,sites=if profile="captured-indirect-targets/v1" then Capture.admit_resolved input_json snapshot
+              else if profile="captured-fixed-input/v1" then Capture.admit input_json snapshot
               else Recovery.admit input_json snapshot,M.empty in
             Core (input, Recovery.init input, Project_state.create ~sites snapshot input_json)
           end else begin
@@ -134,14 +149,17 @@ let () =
                 let next=advance_owned "step" (`Assoc []) snapshot (Option.get !owned) in
                 owned := Some next; incr action_index; incr advanced; advance (n-1)
               | _ -> () in
-            advance steps;
+            let before=Sys.time () in advance steps;computation_cpu := !computation_cpu +. Sys.time () -. before;
             begin match Option.get !owned with
             | Core (_,s,_) when s.phase="done" ->
+              let before=Sys.time () in
               let chunks=response seq false `Null (finish_owned snapshot (Option.get !owned)) in
               let total=List.fold_left (fun n text -> n + String.length text) 0 chunks in
               require (total <= max_result) "completed result budget";
               let text=String.concat "" chunks in
-              completed := Some (text,checksum text,seq)
+              completed := Some (text,checksum text,seq);
+              if Sys.getenv_opt "ARIADNE_TARGET_DIAGNOSTICS"<>None then
+                Printf.eprintf "native kernel_cpu_s=%.3f serialization_cpu_s=%.3f actions=%d\n%!" !computation_cpu (Sys.time () -. before) !action_index
             | _ -> () end
           | "result-page" ->
             exact payload ["offset"];

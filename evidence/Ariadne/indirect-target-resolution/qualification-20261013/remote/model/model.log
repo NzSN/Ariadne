@@ -1,0 +1,17 @@
+Target-resolution model artifacts: /tmp/ariadne-target-resolution.p54KtZtq
+# Usage statistics is OFF. We care about your privacy.
+# If you want to help our project, consider enabling statistics with config --enable-stats=true.
+
+Output directory: /tmp/ariadne-target-resolution.p54KtZtq/typecheck/AriadneTargetResolution.tla/2026-10-12T06-01-12_896343240457749212
+# APALACHE version: 0.58.0 | build: 711dce6                       I@06:01:12.133
+Type checking AriadneTargetResolution.tla                         I@06:01:12.147
+PASS #0: SanyParser                                               I@06:01:12.275
+PASS #1: TypeCheckerSnowcat                                       I@06:01:12.460
+ > Running Snowcat .::.                                           I@06:01:12.460
+[AriadneTargetResolution.tla:38:12-38:26]: Annotation required. Found 2 matching operator signatures ((a113, a114, a115, a116) => <<a113, a114, a115, a116>>) or ((a113, a113, a113, a113) => Seq(a113)) for arguments Int and Int and Int and Int E@06:01:12.555
+[AriadneTargetResolution.tla:38:1-38:26]: Error when computing the type of Offsets E@06:01:12.557
+ > Snowcat asks you to fix the types. Meow.                       I@06:01:12.558
+Type checker [FAILED]                                             I@06:01:12.577
+It took me 0 days  0 hours  0 min  0 sec                          I@06:01:12.577
+Total time: 0.442 sec                                             I@06:01:12.577
+EXITCODE: ERROR (120)

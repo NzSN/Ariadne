@@ -1,0 +1,95 @@
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.26
+   Compiling version_check v0.9.5
+   Compiling libc v0.2.189
+   Compiling generic-array v0.14.7
+   Compiling autocfg v1.5.1
+   Compiling anyhow v1.0.104
+   Compiling bitflags v2.13.2
+   Compiling cfg-if v1.0.5
+   Compiling num-traits v0.2.19
+   Compiling typenum v1.20.1
+   Compiling syn v2.0.119
+   Compiling syn v3.0.6
+   Compiling once_cell v1.21.4
+   Compiling serde_core v1.0.229
+   Compiling either v1.18.0
+   Compiling itertools v0.14.0
+   Compiling itoa v1.0.18
+   Compiling uuid v1.26.1
+   Compiling rustix v1.1.4
+   Compiling zmij v1.0.23
+   Compiling getrandom v0.3.4
+   Compiling thiserror v2.0.21
+   Compiling powerfmt v0.2.0
+   Compiling deranged v0.5.8
+   Compiling debugid v0.8.0
+   Compiling thiserror-impl v2.0.21
+   Compiling range-map v0.2.0
+   Compiling tracing-core v0.1.36
+   Compiling scroll_derive v0.12.1
+   Compiling tracing-attributes v0.1.31
+   Compiling prost-derive v0.13.5
+   Compiling scroll v0.12.0
+   Compiling num-derive v0.4.2
+   Compiling smart-default v0.7.1
+   Compiling crypto-common v0.1.7
+   Compiling block-buffer v0.10.4
+   Compiling num-conv v0.1.0
+   Compiling time-core v0.1.7
+   Compiling bytes v1.12.1
+   Compiling pin-project-lite v0.2.17
+   Compiling linux-raw-sys v0.12.1
+   Compiling serde_json v1.0.149
+   Compiling hex v0.4.3
+   Compiling serde v1.0.229
+   Compiling log v0.4.34
+   Compiling tracing v0.1.44
+   Compiling procfs-core v0.17.0
+   Compiling prost v0.13.5
+   Compiling minidump-common v0.26.1
+   Compiling time v0.3.45
+   Compiling digest v0.10.7
+   Compiling serde_derive v1.0.229
+   Compiling memmap2 v0.9.11
+   Compiling encoding_rs v0.8.35
+   Compiling fastrand v2.5.0
+   Compiling memchr v2.8.3
+   Compiling cpufeatures v0.2.17
+   Compiling sha2 v0.10.9
+   Compiling minidump v0.26.1
+   Compiling tempfile v3.20.0
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-target-resolution-20261012/target/target-resolution-mutations-delivery/no-graph-binding/sut)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 38.46s
+     Running unittests src/lib.rs (/home/nzsn/Repos/Ariadne-target-resolution-20261012/target/target-resolution-mutations-delivery/no-graph-binding/build/debug/deps/ariadne-30a1fc32cccfc7e4)
+
+running 15 tests
+test input::materialize::target_resolution_tests::actual_bap_lifts_and_native_rust_results_agree_on_both_capture_platforms ... ignored, requires pinned BAP/LLVM and rebuilt native target-resolution helper
+test bap::target_resolution::tests::independent_oracle_covers_signed_offsets_duplicates_lower_bounds_and_wrap ... ok
+test input::materialize::target_resolution_tests::captured_pointer_slot_resolves_even_when_destination_code_is_missing ... ignored, requires pinned BAP/LLVM and rebuilt native target-resolution helper
+test bap::target_resolution::tests::unknown_outputs_do_not_alias_an_unrelated_guarded_value ... ok
+test input::materialize::target_resolution_tests::native_rejects_resolver_receipt_tampering_directly ... ignored, requires pinned helpers; bypasses Rust receipt prevalidation
+test bap::target_resolution::tests::missing_entry_keeps_other_destinations_and_unresolved_alternative ... ok
+test bap::target_resolution::tests::newly_admitted_guard_bypass_downgrades_coverage_but_preserves_candidates ... ok
+test bap::target_resolution::tests::opaque_call_clobber_does_not_inherit_an_earlier_register_value ... ok
+test bap::target_resolution::tests::distinct_target_and_read_caps_do_not_charge_duplicates_twice ... ok
+test bap::target_resolution::tests::admitted_capture_dispatch_enumerates_all_45_targets_and_replays_coverage ... ok
+test bap::target_resolution::tests::zero_budgets_never_create_a_complete_target_certificate ... ok
+
+thread 'bap::target_resolution::tests::forged_source_expression_premise_and_graph_are_rejected' (42716) panicked at src/bap/../../tests/bap/target_resolution_unit.rs:281:9:
+mutation 4
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test bap::target_resolution::tests::forged_source_expression_premise_and_graph_are_rejected ... FAILED
+test input::materialize::target_resolution_tests::zero_rounds_yields_a_valid_partial_report ... ok
+test input::materialize::target_resolution_tests::disabled_mode_keeps_the_original_query_and_unresolved_jump ... ok
+test input::materialize::target_resolution_tests::both_platforms_expand_targets_without_promoting_seeds_to_roots ... ok
+
+failures:
+
+failures:
+    bap::target_resolution::tests::forged_source_expression_premise_and_graph_are_rejected
+
+test result: FAILED. 11 passed; 1 failed; 3 ignored; 0 measured; 36 filtered out; finished in 1.18s
+
+error: test failed, to rerun pass `--lib`

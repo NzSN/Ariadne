@@ -18,6 +18,10 @@ mechanisms, and source-bound results with failures and successors preserved.
 
 **Where to go next.**
 
+- [Indirect-target resolver R4–R6](../../Plans/indirect-target-resolution.md#r4-and-r5-evidence-and-product-integration)
+  — expanded-query completion interning and native/Rust delta caches; its
+  [dated result](indirect-target-resolution.md#dated-validation) binds individual
+  CLI samples and full-state/schedule parity to the original capture.
 - [Completed original workload plan](../../Plans/completed/priority-4-workload-performance-plan.md)
   — historical LLVM query, budget and equivalence checks.
 - [Windows replacement plan](../../Plans/i4-windows-repin.md) — independent capture

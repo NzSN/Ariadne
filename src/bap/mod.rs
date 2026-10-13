@@ -7,9 +7,12 @@ pub mod core_protocol;
 pub mod core_session;
 mod prepare;
 mod projection;
+#[cfg(test)]
+pub(crate) use projection::project as test_project;
 pub(crate) mod refinement;
 mod session;
 pub mod stateflow_adapter;
+pub mod target_resolution;
 pub use prepare::{Backend, Metrics};
 pub use session::{Config, Session, helper_identity};
 pub type Error = Box<dyn std::error::Error>;

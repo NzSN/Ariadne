@@ -6,6 +6,7 @@ use sha2::{Digest, Sha256};
 
 pub const MAX_FRAME: usize = 8 * 1024 * 1024;
 pub const CAPTURED_PROFILE: &str = "captured-fixed-input/v1";
+pub const TARGET_PROFILE: &str = "captured-indirect-targets/v1";
 pub const PROFILE: &str = "normalized-fixed-input/v1";
 pub const RECOVERY_OPERATIONS: &[&str] = &[
     "initialize",
@@ -87,7 +88,13 @@ pub fn profile_query_digest(
             _ => value.clone(),
         })
     }
-    let canonical = normalize(input)?.to_string();
+    // Resolution receipts contain ordered edge words and repeated booleans.
+    // Their strict validator owns set uniqueness; never reorder proof sequences.
+    let canonical = if profile == TARGET_PROFILE {
+        input.to_string()
+    } else {
+        normalize(input)?.to_string()
+    };
     let mut digest = Sha256::new();
     digest.update(b"ariadne.bap-core-query/v1\0");
     for part in [snapshot, family, profile, &canonical] {
@@ -142,6 +149,85 @@ pub struct DefinitionRow {
     pub site: String,
     pub origin: String,
 }
+
+#[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct DictionaryReaching {
+    address: String,
+    definitions_ref: usize,
+}
+#[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct DictionaryObservation {
+    phase: String,
+    pending: Vec<String>,
+    visited: Vec<String>,
+    decoded: Vec<String>,
+    provenance: Vec<Provenance>,
+    edges: Vec<Edge>,
+    obligations: Vec<Obligation>,
+    slice: Vec<String>,
+    reaching: Vec<DictionaryReaching>,
+    definition_dictionary: Vec<DefinitionRow>,
+    definition_sets: Vec<Vec<usize>>,
+}
+impl DictionaryObservation {
+    pub(crate) fn expand(self) -> Result<Observation, Error> {
+        use std::collections::BTreeSet;
+        let mut dictionary = BTreeSet::new();
+        for d in &self.definition_dictionary {
+            if !dictionary.insert((&d.loc, &d.site, &d.origin)) {
+                return Err(invalid("duplicate completed definition"));
+            }
+        }
+        let mut sets = BTreeSet::new();
+        for set in &self.definition_sets {
+            if !sets.insert(set)
+                || set.windows(2).any(|w| w[0] >= w[1])
+                || set.iter().any(|n| *n >= self.definition_dictionary.len())
+            {
+                return Err(invalid("invalid completed definition set"));
+            }
+        }
+        let mut links = 0usize;
+        for row in &self.reaching {
+            let set = self
+                .definition_sets
+                .get(row.definitions_ref)
+                .ok_or_else(|| invalid("completed set index"))?;
+            links = links
+                .checked_add(set.len())
+                .filter(|n| *n <= 16 * 1024 * 1024)
+                .ok_or_else(|| invalid("expanded completed definition budget"))?;
+        }
+        let reaching = self
+            .reaching
+            .into_iter()
+            .map(|row| Reaching {
+                address: row.address,
+                definitions: self.definition_sets[row.definitions_ref]
+                    .iter()
+                    .map(|n| self.definition_dictionary[*n].clone())
+                    .collect(),
+            })
+            .collect();
+        Ok(Observation {
+            phase: self.phase,
+            pending: self.pending,
+            visited: self.visited,
+            decoded: self.decoded,
+            provenance: self.provenance,
+            edges: self.edges,
+            obligations: self.obligations,
+            reaching,
+            slice: self.slice,
+        })
+    }
+}
+
+#[cfg(test)]
+#[path = "../../tests/bap/completion_dictionary_unit.rs"]
+mod dictionary_tests;
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq)]
 #[serde(deny_unknown_fields)]
 pub struct Attribution {

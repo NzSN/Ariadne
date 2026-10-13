@@ -477,10 +477,12 @@ fn partial_overlap_is_retained_and_recovery_gaps_block_equal_base_exclusion() {
     assert_eq!(r.candidates[1].disposition, "retained");
     assert_eq!(r.candidates[1].pairs[0].relation, "overlapping");
     let (mut bound, load) = fixture(false, false, true);
-    bound.analysis.state.obligations.insert(crate::Obligation {
-        site: 0x1000,
-        reason: crate::ObligationReason::CallTargets,
-    });
+    std::sync::Arc::make_mut(&mut bound.analysis.state)
+        .obligations
+        .insert(crate::Obligation {
+            site: 0x1000,
+            reason: crate::ObligationReason::CallTargets,
+        });
     let r =
         assess_memory_origins(&bound, question(load), MemoryRefinementLimits::default()).unwrap();
     assert!(

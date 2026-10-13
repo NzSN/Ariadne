@@ -36,6 +36,8 @@ pub struct Backend {
     retain_refinement: bool,
     refinement: BTreeMap<Address, super::refinement::TransferReceipt>,
     refinement_bytes: usize,
+    retain_targets: bool,
+    target_transfers: BTreeMap<Address, super::target_resolution::Transfer>,
 }
 fn stop(site: &mut PreparedSite, options: &PreparationOptions, va: Address) {
     site.instruction.uses = options.catalogue.locations();
@@ -61,6 +63,14 @@ fn stop(site: &mut PreparedSite, options: &PreparationOptions, va: Address) {
     }
 }
 impl Backend {
+    pub(crate) fn enable_target_resolution(&mut self) {
+        self.retain_targets = true;
+    }
+    pub(crate) fn take_target_transfers(
+        &mut self,
+    ) -> BTreeMap<Address, super::target_resolution::Transfer> {
+        std::mem::take(&mut self.target_transfers)
+    }
     pub(crate) fn enable_refinement(&mut self) {
         self.retain_refinement = true;
     }
@@ -107,6 +117,8 @@ impl Backend {
             retain_refinement: false,
             refinement: BTreeMap::new(),
             refinement_bytes: 0,
+            retain_targets: false,
+            target_transfers: BTreeMap::new(),
         })
     }
     pub fn prepare(
@@ -319,6 +331,16 @@ impl Backend {
                             site.evidence.quality = EffectQuality::ExternalLifted;
                             site.evidence.rule = Some(PROJECTION.into());
                             semantic.status = "projected".into();
+                            if self.retain_targets {
+                                self.target_transfers.insert(
+                                    va,
+                                    super::target_resolution::extract(
+                                        &lift.bil,
+                                        va,
+                                        &site.evidence.bytes,
+                                    )?,
+                                );
+                            }
                             if self.retain_refinement {
                                 let receipt =
                                     super::refinement::extract(&lift.bil, va, lift.bytes.clone())?;

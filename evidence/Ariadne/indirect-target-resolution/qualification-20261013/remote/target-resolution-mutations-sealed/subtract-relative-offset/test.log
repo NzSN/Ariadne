@@ -1,0 +1,115 @@
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.26
+   Compiling quote v1.0.47
+   Compiling version_check v0.9.5
+   Compiling libc v0.2.189
+   Compiling generic-array v0.14.7
+   Compiling autocfg v1.5.1
+   Compiling typenum v1.20.1
+   Compiling bitflags v2.13.2
+   Compiling num-traits v0.2.19
+   Compiling anyhow v1.0.104
+   Compiling cfg-if v1.0.5
+   Compiling syn v2.0.119
+   Compiling syn v3.0.6
+   Compiling once_cell v1.21.4
+   Compiling serde_core v1.0.229
+   Compiling either v1.18.0
+   Compiling itertools v0.14.0
+   Compiling uuid v1.26.1
+   Compiling rustix v1.1.4
+   Compiling zmij v1.0.23
+   Compiling itoa v1.0.18
+   Compiling powerfmt v0.2.0
+   Compiling getrandom v0.3.4
+   Compiling thiserror v2.0.21
+   Compiling deranged v0.5.8
+   Compiling debugid v0.8.0
+   Compiling thiserror-impl v2.0.21
+   Compiling range-map v0.2.0
+   Compiling tracing-core v0.1.36
+   Compiling crypto-common v0.1.7
+   Compiling block-buffer v0.10.4
+   Compiling log v0.4.34
+   Compiling scroll_derive v0.12.1
+   Compiling prost-derive v0.13.5
+   Compiling num-derive v0.4.2
+   Compiling scroll v0.12.0
+   Compiling smart-default v0.7.1
+   Compiling tracing-attributes v0.1.31
+   Compiling serde_json v1.0.149
+   Compiling bytes v1.12.1
+   Compiling num-conv v0.1.0
+   Compiling serde v1.0.229
+   Compiling hex v0.4.3
+   Compiling pin-project-lite v0.2.17
+   Compiling linux-raw-sys v0.12.1
+   Compiling time-core v0.1.7
+   Compiling procfs-core v0.17.0
+   Compiling time v0.3.45
+   Compiling tracing v0.1.44
+   Compiling prost v0.13.5
+   Compiling minidump-common v0.26.1
+   Compiling digest v0.10.7
+   Compiling serde_derive v1.0.229
+   Compiling memmap2 v0.9.11
+   Compiling encoding_rs v0.8.35
+   Compiling cpufeatures v0.2.17
+   Compiling memchr v2.8.3
+   Compiling fastrand v2.5.0
+   Compiling tempfile v3.20.0
+   Compiling sha2 v0.10.9
+   Compiling minidump v0.26.1
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-target-resolution-20261012/target/target-resolution-mutations-sealed/subtract-relative-offset/sut)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 42.13s
+     Running unittests src/lib.rs (/home/nzsn/Repos/Ariadne-target-resolution-20261012/target/target-resolution-mutations-sealed/subtract-relative-offset/build/debug/deps/ariadne-30a1fc32cccfc7e4)
+
+running 15 tests
+test bap::target_resolution::tests::independent_oracle_covers_signed_offsets_duplicates_lower_bounds_and_wrap ... ok
+test input::materialize::target_resolution_tests::actual_bap_lifts_and_native_rust_results_agree_on_both_capture_platforms ... ignored, requires pinned BAP/LLVM and rebuilt native target-resolution helper
+test input::materialize::target_resolution_tests::captured_pointer_slot_resolves_even_when_destination_code_is_missing ... ignored, requires pinned BAP/LLVM and rebuilt native target-resolution helper
+test input::materialize::target_resolution_tests::native_rejects_resolver_receipt_tampering_directly ... ignored, requires pinned helpers; bypasses Rust receipt prevalidation
+test bap::target_resolution::tests::unknown_outputs_do_not_alias_an_unrelated_guarded_value ... ok
+
+thread 'bap::target_resolution::tests::missing_entry_keeps_other_destinations_and_unresolved_alternative' (655169) panicked at src/bap/../../tests/bap/target_resolution_unit.rs:147:5:
+assertion failed: !report.resolutions[0].targets.is_empty()
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test bap::target_resolution::tests::missing_entry_keeps_other_destinations_and_unresolved_alternative ... FAILED
+
+thread 'bap::target_resolution::tests::newly_admitted_guard_bypass_downgrades_coverage_but_preserves_candidates' (655170) panicked at src/bap/../../tests/bap/target_resolution_unit.rs:117:5:
+assertion `left == right` failed
+  left: 1
+ right: 45
+test bap::target_resolution::tests::newly_admitted_guard_bypass_downgrades_coverage_but_preserves_candidates ... FAILED
+test bap::target_resolution::tests::opaque_call_clobber_does_not_inherit_an_earlier_register_value ... ok
+
+thread 'bap::target_resolution::tests::admitted_capture_dispatch_enumerates_all_45_targets_and_replays_coverage' (655165) panicked at src/bap/../../tests/bap/target_resolution_unit.rs:94:5:
+assertion `left == right` failed
+  left: 1
+ right: 45
+test bap::target_resolution::tests::admitted_capture_dispatch_enumerates_all_45_targets_and_replays_coverage ... FAILED
+
+thread 'bap::target_resolution::tests::distinct_target_and_read_caps_do_not_charge_duplicates_twice' (655166) panicked at src/bap/../../tests/bap/target_resolution_unit.rs:329:5:
+assertion failed: r.resolutions[0].complete
+test bap::target_resolution::tests::distinct_target_and_read_caps_do_not_charge_duplicates_twice ... FAILED
+test bap::target_resolution::tests::zero_budgets_never_create_a_complete_target_certificate ... ok
+test bap::target_resolution::tests::forged_source_expression_premise_and_graph_are_rejected ... ok
+test input::materialize::target_resolution_tests::zero_rounds_yields_a_valid_partial_report ... ok
+
+thread 'input::materialize::target_resolution_tests::both_platforms_expand_targets_without_promoting_seeds_to_roots' (655174) panicked at src/input/../../tests/input/target_resolution_unit.rs:174:9:
+assertion failed: row.complete
+test input::materialize::target_resolution_tests::both_platforms_expand_targets_without_promoting_seeds_to_roots ... FAILED
+test input::materialize::target_resolution_tests::disabled_mode_keeps_the_original_query_and_unresolved_jump ... ok
+
+failures:
+
+failures:
+    bap::target_resolution::tests::admitted_capture_dispatch_enumerates_all_45_targets_and_replays_coverage
+    bap::target_resolution::tests::distinct_target_and_read_caps_do_not_charge_duplicates_twice
+    bap::target_resolution::tests::missing_entry_keeps_other_destinations_and_unresolved_alternative
+    bap::target_resolution::tests::newly_admitted_guard_bypass_downgrades_coverage_but_preserves_candidates
+    input::materialize::target_resolution_tests::both_platforms_expand_targets_without_promoting_seeds_to_roots
+
+test result: FAILED. 7 passed; 5 failed; 3 ignored; 0 measured; 35 filtered out; finished in 0.35s
+
+error: test failed, to rerun pass `--lib`

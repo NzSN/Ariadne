@@ -1,0 +1,233 @@
+{
+  "dump_id": "dump_048B10C302A4460D8A1FC75088",
+  "original_filename": "d6196d6a-0b59-4321-8b1e-4e52c43a050d.dmp",
+  "original_bytes": 1305482568,
+  "sha256": "5fea4ca614706fe0040ed3231efee0edf9ce4004a51d902bb581025b48bade08",
+  "entry": [
+    "0x00007ff640079640"
+  ],
+  "fault_site": {
+    "site": "0x00007ff640079670",
+    "memory_access": 0
+  },
+  "query_id": "597c609f87a480b74bd8968096b9fc2364e355df1caad58c6af6d70b944eb44e",
+  "status": "partial",
+  "decoded_starts": 329,
+  "edges": 388,
+  "slice_sites": 15,
+  "missing_slice_seeds": [],
+  "scope_closed": false,
+  "obligations": [
+    {
+      "reason": "decode_failed",
+      "va": "0x00007ff63cd8cc92"
+    },
+    {
+      "reason": "decode_failed",
+      "va": "0x00007ff63cd8cc95"
+    },
+    {
+      "reason": "decode_failed",
+      "va": "0x00007ff63cd8ccc9"
+    },
+    {
+      "reason": "indirect_targets",
+      "va": "0x00007ff64007968b"
+    }
+  ],
+  "explanation_gaps": [
+    {
+      "code": "entry-origin",
+      "site": "0x00007ff640079640",
+      "evidence_refs": []
+    },
+    {
+      "code": "recovery:DecodeFailed",
+      "site": "0x00007ff63cd8cc92",
+      "evidence_refs": []
+    },
+    {
+      "code": "recovery:DecodeFailed",
+      "site": "0x00007ff63cd8cc95",
+      "evidence_refs": []
+    },
+    {
+      "code": "recovery:DecodeFailed",
+      "site": "0x00007ff63cd8ccc9",
+      "evidence_refs": []
+    },
+    {
+      "code": "recovery:IndirectTargets",
+      "site": "0x00007ff64007968b",
+      "evidence_refs": []
+    }
+  ],
+  "truncated": false,
+  "address": {
+    "index": 0,
+    "role": "load",
+    "access_width": 32,
+    "address_width": 64,
+    "expression": {
+      "width": 64,
+      "terms": [
+        {
+          "bank": 3,
+          "coefficient": "0x0000000000000001"
+        }
+      ],
+      "constant": "0x0000000000000004"
+    },
+    "address_inputs": [
+      "gpr:rbx:0",
+      "gpr:rbx:1",
+      "gpr:rbx:2",
+      "gpr:rbx:3",
+      "gpr:rbx:4",
+      "gpr:rbx:5",
+      "gpr:rbx:6",
+      "gpr:rbx:7"
+    ],
+    "attribution": "bil.0.value.cast",
+    "gaps": []
+  },
+  "possible_producers": [
+    {
+      "location": "gpr:rbx:0",
+      "producers": [
+        {
+          "site": "0x00007ff640079650",
+          "origin": "instruction",
+          "evidence_id": "evidence:8618436c246c6c2e95f54764cda89a3535c984f09b8d9545637f194f91198429"
+        }
+      ]
+    },
+    {
+      "location": "gpr:rbx:1",
+      "producers": [
+        {
+          "site": "0x00007ff640079650",
+          "origin": "instruction",
+          "evidence_id": "evidence:8618436c246c6c2e95f54764cda89a3535c984f09b8d9545637f194f91198429"
+        }
+      ]
+    },
+    {
+      "location": "gpr:rbx:2",
+      "producers": [
+        {
+          "site": "0x00007ff640079650",
+          "origin": "instruction",
+          "evidence_id": "evidence:8618436c246c6c2e95f54764cda89a3535c984f09b8d9545637f194f91198429"
+        }
+      ]
+    },
+    {
+      "location": "gpr:rbx:3",
+      "producers": [
+        {
+          "site": "0x00007ff640079650",
+          "origin": "instruction",
+          "evidence_id": "evidence:8618436c246c6c2e95f54764cda89a3535c984f09b8d9545637f194f91198429"
+        }
+      ]
+    },
+    {
+      "location": "gpr:rbx:4",
+      "producers": [
+        {
+          "site": "0x00007ff640079650",
+          "origin": "instruction",
+          "evidence_id": "evidence:8618436c246c6c2e95f54764cda89a3535c984f09b8d9545637f194f91198429"
+        }
+      ]
+    },
+    {
+      "location": "gpr:rbx:5",
+      "producers": [
+        {
+          "site": "0x00007ff640079650",
+          "origin": "instruction",
+          "evidence_id": "evidence:8618436c246c6c2e95f54764cda89a3535c984f09b8d9545637f194f91198429"
+        }
+      ]
+    },
+    {
+      "location": "gpr:rbx:6",
+      "producers": [
+        {
+          "site": "0x00007ff640079650",
+          "origin": "instruction",
+          "evidence_id": "evidence:8618436c246c6c2e95f54764cda89a3535c984f09b8d9545637f194f91198429"
+        }
+      ]
+    },
+    {
+      "location": "gpr:rbx:7",
+      "producers": [
+        {
+          "site": "0x00007ff640079650",
+          "origin": "instruction",
+          "evidence_id": "evidence:8618436c246c6c2e95f54764cda89a3535c984f09b8d9545637f194f91198429"
+        }
+      ]
+    }
+  ],
+  "fault_context": {
+    "exception_code": "0xc0000005",
+    "operation": "read",
+    "rip": "0x00007ff640079670",
+    "rbx": "0x0000089b001c18a2",
+    "rdx": "0x0000089b001c18a2",
+    "exception_fault_address": "0x0000089b001c18a6",
+    "access_width_bits": 32
+  },
+  "symbol_identity": [
+    {
+      "base": "0x7ff63bae0000",
+      "size": "0xd708000",
+      "timestamp": "0x6a87c949",
+      "pdb_guid": "a7877ffb-94f2-db3e-4c4c-44205044422e",
+      "pdb_age": 1,
+      "debug_id": "A7877FFB94F2DB3E4C4C44205044422E1",
+      "pdb_path": "electron.exe.pdb"
+    }
+  ],
+  "runtime_scope": "Existing remote Ariadne P4 runtime from 2026-10-10; not a build or qualification of current local HEAD. BAP native source hashes match current local sources. Diagnostic frontend only increases OpenLimits.max_file_bytes from 256 MiB to 2 GiB. Original dump bytes retained with matching hash.",
+  "stock_cli_result": {
+    "exit": 1,
+    "error": "ariadne-minidump: input limit: artifact bytes"
+  },
+  "query_command": [
+    "/work/dump048B/ariadne-dump048b",
+    "/work/dump048B/original.dmp",
+    "--decoder-reference",
+    "target/ariadne-llvm-mc",
+    "--entry",
+    "0x00007ff640079640",
+    "--seed-exception-rip",
+    "--explain-fault-address",
+    "0x00007ff640079670",
+    "--memory-access",
+    "0",
+    "--max-starts",
+    "512",
+    "--output-dir",
+    "/work/dump048B/native-report"
+  ],
+  "limitations": [
+    "Incoming RDX origins before selected entry are not established.",
+    "Indirect jump target at 0x00007ff64007968b remains unresolved.",
+    "Three unsupported_control preparation gaps become decode_failed core obligations.",
+    "Possible value dependencies do not prove execution history, object type/lifetime, pointer corruption writer, or root cause.",
+    "Invalid read address is not included in the captured ranges; its historical mapping/lifetime cannot be inferred."
+  ],
+  "parity": {
+    "native_rust_explanation_equal": true,
+    "snapshot_sha256": "5fea4ca614706fe0040ed3231efee0edf9ce4004a51d902bb581025b48bade08",
+    "query_id": "597c609f87a480b74bd8968096b9fc2364e355df1caad58c6af6d70b944eb44e",
+    "status": "partial",
+    "truncated": false,
+    "diagnostic_binary_sha256": "484dcc00a3e017dabaf727f69211eab588b649ad20873a9cb5f0b92da657249c"
+  }
+}

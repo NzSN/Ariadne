@@ -1,0 +1,9 @@
+test_compile_error_and_unrelated_failure_do_not_qualify (test_target_resolution_mutations.MutationObserverTests.test_compile_error_and_unrelated_failure_do_not_qualify) ... ok
+test_mutation_is_unique_within_its_declared_scope (test_target_resolution_mutations.MutationObserverTests.test_mutation_is_unique_within_its_declared_scope) ... ok
+test_named_failure_in_captured_and_serial_nocapture_output (test_target_resolution_mutations.MutationObserverTests.test_named_failure_in_captured_and_serial_nocapture_output) ... ok
+test_test_name_in_panic_text_is_not_a_failed_test (test_target_resolution_mutations.MutationObserverTests.test_test_name_in_panic_text_is_not_a_failed_test) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK

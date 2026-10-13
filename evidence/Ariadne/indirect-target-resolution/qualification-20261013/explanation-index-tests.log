@@ -1,0 +1,27 @@
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 12.96s
+     Running tests/investigation/explanations.rs (target/debug/deps/investigation_explanations-fedabae1dfeacc9e)
+
+running 9 tests
+test claim_and_evidence_exhaustion_return_valid_partial_answers ... ok
+test evidence_scope_and_address_input_tampering_are_rejected ... ok
+test finite_limits_never_label_truncated_output_explained ... ok
+test limit_boundaries_and_cycles_preserve_references_and_default_answers ... ok
+test producer_claims_retain_byte_origins_entry_alternatives_and_capture_references ... ok
+test same_snapshot_wrong_query_and_different_snapshot_are_rejected ... ok
+test serialized_dangling_refs_history_classes_and_root_cause_variants_are_rejected ... ok
+test unsupported_address_missing_fact_and_unreached_site_remain_unavailable ... ok
+test zero_budgets_do_not_hide_invalid_questions ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.11s
+
+     Running tests/reports/contracts.rs (target/debug/deps/reports_contracts-e82223c784030577)
+
+running 4 tests
+test publication_rejects_reuse_and_invalid_filename_without_partial_output ... ok
+test recovery_report_rejects_wrong_identity_and_retains_call_context ... ok
+test request_round_trip_preserves_high_addresses_and_explicit_uncertainty ... ok
+test strict_inputs_reject_duplicate_unknown_numeric_and_noncanonical_fields ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+

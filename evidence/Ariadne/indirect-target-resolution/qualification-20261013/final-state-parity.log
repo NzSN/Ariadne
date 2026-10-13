@@ -1,0 +1,10 @@
+resolver pass_elapsed_us=2540 instructions=332 reads=58 stop=None
+resolver pass_elapsed_us=173428 instructions=3990 reads=58 stop=None
+prepared_ms=17864; table targets=45; complete=false
+native kernel_cpu_s=74.949 serialization_cpu_s=17.997 actions=116199
+completion compute_ms=96627 encoded_bytes=59256201
+completion transfer_ms=5514
+completion expansion_ms=4676
+completion state_decode_ms=8478
+{"analysis_ms":118652,"answer":"Partial","backend":"bap","decoded":3977,"definition_links":10744212,"edges":4819,"prepare_ms":17864,"slice":392,"state_sha256":"4b5c6d947ac8622932e63d8731733e4cf328b7d7401302fcc68ffa0d2ffcf30c","table_edges":45}
+{"analysis_ms":30207,"answer":"Partial","backend":"rust","decoded":3977,"definition_links":10744212,"edges":4819,"prepare_ms":17864,"slice":392,"state_sha256":"4b5c6d947ac8622932e63d8731733e4cf328b7d7401302fcc68ffa0d2ffcf30c","table_edges":45}

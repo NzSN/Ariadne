@@ -141,7 +141,7 @@ pub struct SnapshotMetadata {
 
 /// Owns the exact bytes whose digest identifies this snapshot. No live file or
 /// module-path lookup is retained. All memory contributors remain inspectable.
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 pub struct FileSnapshot {
     pub(crate) bytes: Arc<[u8]>,
     pub(crate) fault: Arc<fault_context::FaultCapture>,

@@ -11,3 +11,6 @@ evidence/Ariadne/real-capture-repin-79938/qualification-evidence.tar.gz filter=l
 evidence/Ariadne/real-capture-repin-79938/entry-witness.log whitespace=-blank-at-eol
 evidence/Ariadne/bap-admission/resume-20261010/self-move-repair-recheck.log whitespace=-blank-at-eof
 evidence/Ariadne/frame-paths/native-final.log whitespace=-blank-at-eof
+# Keep resolver debugger/model/runtime evidence bound to its original bytes.
+evidence/Ariadne/indirect-target-resolution/** -text
+evidence/Ariadne/indirect-target-resolution/**/*.log whitespace=-blank-at-eol,-blank-at-eof

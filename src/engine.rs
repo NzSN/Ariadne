@@ -24,7 +24,8 @@ pub struct Analyzer {
     local_successors: BTreeMap<Address, AddressSet>,
     incoming_cache: BTreeMap<Address, DefinitionSet>,
     dirty_incoming: AddressSet,
-    dataflow_order: Vec<Address>,
+    outgoing_cache: BTreeMap<Address, DefinitionSet>,
+    enabled_dataflow: AddressSet,
 }
 
 impl Analyzer {
@@ -52,7 +53,8 @@ impl Analyzer {
             local_successors: BTreeMap::new(),
             incoming_cache: BTreeMap::new(),
             dirty_incoming: AddressSet::new(),
-            dataflow_order: Vec::new(),
+            outgoing_cache: BTreeMap::new(),
+            enabled_dataflow: AddressSet::new(),
         })
     }
 
@@ -97,37 +99,77 @@ impl Analyzer {
                         }
                     }
                     self.dirty_incoming = self.state.decoded.clone();
-                    self.dataflow_order = self.state.decoded.iter().copied().collect();
+                    for &address in &self.state.decoded {
+                        let instruction = &self.request.instructions[&address];
+                        self.outgoing_cache.insert(
+                            address,
+                            instruction
+                                .may_defs
+                                .iter()
+                                .map(|loc| Definition {
+                                    loc: loc.clone(),
+                                    site: address,
+                                    origin: DefinitionOrigin::Instruction,
+                                })
+                                .collect(),
+                        );
+                    }
                     self.state.phase = Phase::Dataflow; // FinishRecovery
                 }
             }
             Phase::Dataflow => {
-                for index in 0..self.dataflow_order.len() {
-                    let address = self.dataflow_order[index];
-                    // Incoming depends only on the immutable entry facts and
-                    // local predecessors' reaching sets. A predecessor growth
-                    // invalidates its successors, including itself on a loop.
-                    if self.dirty_incoming.remove(&address) {
-                        let incoming = self.incoming(address);
-                        self.incoming_cache.insert(address, incoming);
+                while let Some(address) = self.dirty_incoming.pop_first() {
+                    let incoming = self.incoming(address);
+                    if !incoming.is_subset(&self.state.reaching[&address]) {
+                        self.enabled_dataflow.insert(address);
+                    } else {
+                        self.enabled_dataflow.remove(&address);
                     }
-                    let incoming = &self.incoming_cache[&address];
-                    let reaching = self
-                        .state
-                        .reaching
+                    self.incoming_cache.insert(address, incoming);
+                }
+                if let Some(address) = self.enabled_dataflow.pop_first() {
+                    let (mut delta, size) = {
+                        let incoming = &self.incoming_cache[&address];
+                        let reaching = self
+                            .state
+                            .reaching
+                            .get_mut(&address)
+                            .expect("validated domain");
+                        let delta: DefinitionSet = incoming.difference(reaching).cloned().collect();
+                        reaching.extend(delta.iter().cloned());
+                        (delta, reaching.len())
+                    };
+                    let instruction = &self.request.instructions[&address];
+                    delta.retain(|d| {
+                        !instruction.must_defs.contains(&d.loc)
+                            && !self.outgoing_cache[&address].contains(d)
+                    });
+                    self.outgoing_cache
                         .get_mut(&address)
-                        .expect("validated domain");
-                    if !incoming.is_subset(reaching) {
-                        reaching.extend(incoming.iter().cloned()); // Propagate
-                        if let Some(successors) = self.local_successors.get(&address) {
-                            self.dirty_incoming.extend(successors.iter().copied());
+                        .expect("decoded outgoing cache")
+                        .extend(delta.iter().cloned());
+                    let mut metrics = self.metrics.get();
+                    metrics.max_reaching_definitions_at_site =
+                        metrics.max_reaching_definitions_at_site.max(size);
+                    if let Some(successors) = self.local_successors.get(&address) {
+                        for &destination in successors.intersection(&self.state.decoded) {
+                            if delta
+                                .iter()
+                                .any(|d| !self.state.reaching[&destination].contains(d))
+                            {
+                                self.enabled_dataflow.insert(destination);
+                            }
+                            self.incoming_cache
+                                .get_mut(&destination)
+                                .expect("decoded incoming cache")
+                                .extend(delta.iter().cloned());
+                            metrics.incoming_evaluations += 1;
+                            metrics.transfer_evaluations += 1;
+                            metrics.edge_scans += 1;
                         }
-                        let mut metrics = self.metrics.get();
-                        metrics.max_reaching_definitions_at_site =
-                            metrics.max_reaching_definitions_at_site.max(reaching.len());
-                        self.metrics.set(metrics);
-                        return true;
                     }
+                    self.metrics.set(metrics);
+                    return true;
                 }
                 // Bottom initialization and monotone union maintain
                 // reaching[a] subseteq Incoming(a). No growth means equality.
@@ -266,18 +308,7 @@ impl Analyzer {
                 continue;
             }
             metrics.transfer_evaluations += 1;
-            let predecessor = &self.request.instructions[&edge.src];
-            incoming.extend(
-                self.state.reaching[&edge.src]
-                    .iter()
-                    .filter(|definition| !predecessor.must_defs.contains(&definition.loc))
-                    .cloned(),
-            );
-            incoming.extend(predecessor.may_defs.iter().map(|loc| Definition {
-                loc: loc.clone(),
-                site: edge.src,
-                origin: DefinitionOrigin::Instruction,
-            }));
+            incoming.extend(self.outgoing_cache[&edge.src].iter().cloned());
         }
         self.metrics.set(metrics);
         incoming

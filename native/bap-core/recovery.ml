@@ -97,15 +97,22 @@ module D = Set.Make(struct type t = string * string * string let compare = compa
 type state = { phase:string; pending:S.t; visited:S.t; decoded:S.t; provenance:string M.t;
                edges:E.t; obligations:O.t; reaching:D.t M.t; slice:S.t;
                (* Derived per-state flow facts; never part of the observation. *)
-               flow_out:D.t M.t; flow_in:S.t M.t; entry_defs:D.t M.t; flow_values:D.t M.t; flow_enabled:S.t }
+               flow_out:D.t M.t; flow_in:S.t M.t; flow_next:S.t M.t; entry_defs:D.t M.t; flow_values:D.t M.t; flow_delta:D.t M.t; flow_enabled:S.t }
 let generated a origin locations =
   S.fold (fun loc -> D.add (loc,a,origin)) locations D.empty
+(* Definitions are ordered by location first. Removing one definite location
+   can split out its whole group without scanning every unrelated origin. *)
+let remove_locations locations definitions =
+  S.fold (fun loc defs ->
+    let below,_,rest=D.split (loc,"","") defs in
+    let _,_,above=D.split (loc,"\255","\255") rest in D.union below above
+  ) locations definitions
 let init input = {phase="recover"; pending=input.roots; visited=S.empty; decoded=S.empty;
                   provenance=S.fold (fun a -> M.add a "unavailable") input.addresses M.empty;
                   edges=E.empty; obligations=O.empty; slice=S.empty;
                   reaching=S.fold (fun a -> M.add a D.empty) input.addresses M.empty;
                   flow_out=M.empty;
-                  flow_in=M.empty; flow_values=M.empty; flow_enabled=S.empty;
+                  flow_in=M.empty; flow_next=M.empty; flow_values=M.empty; flow_delta=M.empty; flow_enabled=S.empty;
                   entry_defs=M.empty}
 let source i a =
   if i.binary then (if S.mem a i.files then "file" else "unavailable")
@@ -148,17 +155,23 @@ let flow_index s =
       let old = match M.find_opt dst index with Some srcs -> srcs | None -> S.empty in
       M.add dst (S.add src old) index) s.edges M.empty
 let incoming _i s a = M.find a s.flow_values
-let enabled_at s a = not (D.subset (M.find a s.flow_values) (M.find a s.reaching))
+let enabled_at s a = not (D.is_empty (M.find a s.flow_delta))
 let initialize_flow i s =
-  let next = {s with flow_in=flow_index s;
+  let incoming_index=flow_index s in
+  let successors=M.fold (fun dst sources out -> S.fold (fun src out ->
+      let old=Option.value ~default:S.empty (M.find_opt src out) in M.add src (S.add dst old) out) sources out) incoming_index M.empty in
+  let next = {s with flow_in=incoming_index;flow_next=successors;
       flow_out=S.fold (fun a -> M.add a (generated a "instruction" (M.find a i.instructions).may)) s.decoded M.empty;
       entry_defs=S.fold (fun a -> M.add a (generated a "entry" i.locations)) (S.inter i.roots s.decoded) M.empty} in
   let next = {next with flow_values=S.fold (fun a -> M.add a (compute_incoming i next a)) s.decoded M.empty} in
+  let next={next with flow_delta=next.flow_values} in
   {next with flow_enabled=S.filter (enabled_at next) next.decoded}
-let refresh_flow i s changed =
-  let destinations = E.fold (fun (src,dst,kind) acc ->
-      if src = changed && kind <> "call" && S.mem dst s.decoded then S.add dst acc else acc) s.edges S.empty in
-  let next = {s with flow_values=S.fold (fun dst -> M.add dst (compute_incoming i s dst)) destinations s.flow_values} in
+let refresh_flow _i s changed delta =
+  let destinations = Option.value ~default:S.empty (M.find_opt changed s.flow_next) |> S.filter (fun dst -> S.mem dst s.decoded) in
+  let next = {s with flow_values=S.fold (fun dst -> M.add dst (D.union (M.find dst s.flow_values) delta)) destinations s.flow_values} in
+  let next={next with flow_delta=S.fold (fun dst ->
+      let novel=D.diff delta (M.find dst next.reaching) in
+      M.add dst (D.union (M.find dst next.flow_delta) novel)) destinations next.flow_delta} in
   let enabled = S.fold (fun a enabled ->
       if S.mem a next.decoded && enabled_at next a then S.add a enabled else S.remove a enabled)
       (S.add changed destinations) next.flow_enabled in
@@ -188,11 +201,13 @@ let advance i s action =
   | FinishRecovery ->
     let next = {s with phase="dataflow"} in initialize_flow i next
   | Propagate a ->
-    let next = {s with reaching=M.add a (D.union (M.find a s.reaching) (incoming i s a)) s.reaching} in
+    let delta = M.find a s.flow_delta in
+    let next = {s with reaching=M.add a (D.union (M.find a s.reaching) delta) s.reaching;
+                       flow_delta=M.add a D.empty s.flow_delta} in
     let ins = M.find a i.instructions in
-    let defs = D.union (D.filter (fun (loc,_,_) -> not (S.mem loc ins.must)) (M.find a next.reaching))
-        (generated a "instruction" ins.may) in
-    refresh_flow i {next with flow_out=M.add a defs s.flow_out} a
+    let outgoing_delta = D.diff (remove_locations ins.must delta) (M.find a s.flow_out) in
+    let defs = D.union (M.find a s.flow_out) outgoing_delta in
+    refresh_flow i {next with flow_out=M.add a defs s.flow_out} a outgoing_delta
   | FinishDataflow -> {s with phase="slice"; slice=S.inter i.seeds s.decoded}
   | ExpandSlice -> {s with slice=S.union s.slice (predecessors i s)}
   | FinishSlice -> {s with phase="done"}
@@ -252,3 +267,26 @@ let observe_chunks cache i s =
       if chunks = [] then [row] else row :: "," :: chunks) rows [] in
   ["{" ^ String.concat "," encoded ^ ",\"reaching\":["] @ separated @
     ["],\"slice\":" ^ Yojson.Safe.to_string (jsset s.slice) ^ "}"]
+
+(* Completion-only lossless interning; it changes no analysis state. *)
+let observe_dictionary i s =
+  let all=M.fold (fun _ defs acc -> D.union defs acc) s.reaching D.empty |> D.elements in
+  let ids=Hashtbl.create (List.length all) in
+  List.iteri (fun n d -> Hashtbl.add ids d n) all;
+  (* Hash the complete integer sequence, then compare every candidate exactly.
+     The default shallow polymorphic hash would collide on shared prefixes. *)
+  let sets=Hashtbl.create (S.cardinal i.addresses) and definitions=ref [] and count=ref 0 in
+  let rows=S.elements i.addresses |> List.map (fun a ->
+    let indices=D.elements (M.find a s.reaching) |> List.map (fun d -> Hashtbl.find ids d) in
+    let hash=List.fold_left (fun hash n -> ((hash * 65599) lxor n) land max_int) 0 indices in
+    let bucket=Option.value ~default:[] (Hashtbl.find_opt sets hash) in
+    let index=match List.find_opt (fun (previous,_) -> previous=indices) bucket with
+      | Some (_,n) -> n
+      | None -> let n= !count in incr count;
+        Hashtbl.replace sets hash ((indices,n)::bucket);
+        definitions:=`List (List.map (fun n -> `Int n) indices):: !definitions;n in
+    `Assoc ["address",js a;"definitions_ref",`Int index]) in
+  let fields=match observe {i with addresses=S.empty} s with `Assoc fields -> fields | _ -> assert false in
+  `Assoc (List.filter (fun (k,_) -> k<>"reaching") fields @
+    ["definition_dictionary",`List (List.map (fun (loc,site,origin) -> `Assoc ["loc",js loc;"site",js site;"origin",js origin]) all);
+     "definition_sets",`List (List.rev !definitions);"reaching",`List rows])

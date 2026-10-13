@@ -1,0 +1,6377 @@
+{
+  "schema": "ariadne.bap-core-mutations/v1",
+  "passed": true,
+  "mutants": [
+    {
+      "mutation": "seed-becomes-root",
+      "family": "core",
+      "sourceSha256": "7a1d49827146200679550097e62604cfb8d221be0e2325adbee7eaca70b28245",
+      "helperManifest": {
+        "schema": "ariadne.bap-core-build/v1",
+        "handshake": {
+          "schema": "ariadne.bap-core-ready/v1",
+          "abi": 2,
+          "compiler": "4.12.1",
+          "bap_revision": "baa902209ee4be975bdd8db7d1160b0a0ec2831f",
+          "sdk_manifest_sha256": "ba8eb693feb66fd77e6b536cce89314fc1e80ef563ac0f720a730557ff392838",
+          "source_hashes": {
+            "recovery.ml": "7a1d49827146200679550097e62604cfb8d221be0e2325adbee7eaca70b28245",
+            "stateflow.ml": "2d6a39f261bad1267a022049bbff68ae7b88cdeb044699ff1d085da7b8008b46",
+            "capture.ml": "d017153ea34574ce74c0f04cf4c355d798a2d9228fa4935656d87e82a3fd0c86",
+            "project_state.ml": "9cc366a55c4d5fdd74b6689ce172ae4eba823d016c6736af0f2c27438f8c35a9",
+            "main.ml": "281dbfbbd42f1650e0ebdb976b6960ccb681634ed738eef3cf51f3c5ec8459ea"
+          },
+          "families": [
+            "recovery",
+            "stateflow"
+          ],
+          "profiles": [
+            "normalized-fixed-input/v1",
+            "captured-fixed-input/v1",
+            "captured-indirect-targets/v1"
+          ],
+          "operations": [
+            "initialize",
+            "advance:Visit",
+            "advance:FinishRecovery",
+            "advance:Propagate",
+            "advance:FinishDataflow",
+            "advance:ExpandSlice",
+            "advance:FinishSlice",
+            "advance:FinishStateflow",
+            "step",
+            "observe",
+            "finish",
+            "reset",
+            "run-batch",
+            "result-page",
+            "result-close"
+          ],
+          "max_frame_bytes": 8388608,
+          "max_addresses": 65536
+        },
+        "helper_sha256": "cff703531879251caf60af6375704385473cfeaa77e5aa83f0af957824888959",
+        "lock_sha256": "6f6bd3235ffcdc565ad4ab7e687d6238b85caceee0532f54c56570cbee61992f"
+      },
+      "mismatch": {
+        "action": "init",
+        "actual": {
+          "decoded": {
+            "#set": []
+          },
+          "edges": {
+            "#set": []
+          },
+          "fixture_id": "Binary",
+          "obligations": {
+            "#set": []
+          },
+          "pending": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              }
+            ]
+          },
+          "phase": "recover",
+          "provenance": {
+            "#set": [
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": []
+          },
+          "visited": {
+            "#set": []
+          }
+        },
+        "expected": {
+          "decoded": {
+            "#set": []
+          },
+          "edges": {
+            "#set": []
+          },
+          "fixture_id": "Binary",
+          "obligations": {
+            "#set": []
+          },
+          "pending": {
+            "#set": [
+              {
+                "#bigint": "1"
+              }
+            ]
+          },
+          "phase": "recover",
+          "provenance": {
+            "#set": [
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": []
+          },
+          "visited": {
+            "#set": []
+          }
+        },
+        "hints": "[ExtraElem { path: [Field(\"pending\")], actual: Int(4) }, ExtraElem { path: [Field(\"pending\")], actual: Int(5) }]"
+      },
+      "observations": 1
+    },
+    {
+      "mutation": "drop-call-edge",
+      "family": "core",
+      "sourceSha256": "d516f7349e0ec8db86d3a87b6719d0d8a181a9552e97aa511fef286120eda32d",
+      "helperManifest": {
+        "schema": "ariadne.bap-core-build/v1",
+        "handshake": {
+          "schema": "ariadne.bap-core-ready/v1",
+          "abi": 2,
+          "compiler": "4.12.1",
+          "bap_revision": "baa902209ee4be975bdd8db7d1160b0a0ec2831f",
+          "sdk_manifest_sha256": "ba8eb693feb66fd77e6b536cce89314fc1e80ef563ac0f720a730557ff392838",
+          "source_hashes": {
+            "recovery.ml": "d516f7349e0ec8db86d3a87b6719d0d8a181a9552e97aa511fef286120eda32d",
+            "stateflow.ml": "2d6a39f261bad1267a022049bbff68ae7b88cdeb044699ff1d085da7b8008b46",
+            "capture.ml": "d017153ea34574ce74c0f04cf4c355d798a2d9228fa4935656d87e82a3fd0c86",
+            "project_state.ml": "9cc366a55c4d5fdd74b6689ce172ae4eba823d016c6736af0f2c27438f8c35a9",
+            "main.ml": "281dbfbbd42f1650e0ebdb976b6960ccb681634ed738eef3cf51f3c5ec8459ea"
+          },
+          "families": [
+            "recovery",
+            "stateflow"
+          ],
+          "profiles": [
+            "normalized-fixed-input/v1",
+            "captured-fixed-input/v1",
+            "captured-indirect-targets/v1"
+          ],
+          "operations": [
+            "initialize",
+            "advance:Visit",
+            "advance:FinishRecovery",
+            "advance:Propagate",
+            "advance:FinishDataflow",
+            "advance:ExpandSlice",
+            "advance:FinishSlice",
+            "advance:FinishStateflow",
+            "step",
+            "observe",
+            "finish",
+            "reset",
+            "run-batch",
+            "result-page",
+            "result-close"
+          ],
+          "max_frame_bytes": 8388608,
+          "max_addresses": 65536
+        },
+        "helper_sha256": "a560f8710875900dc8de841c47afe47297cda06fafda277847d62f56245829f1",
+        "lock_sha256": "6f6bd3235ffcdc565ad4ab7e687d6238b85caceee0532f54c56570cbee61992f"
+      },
+      "mismatch": {
+        "action": "visit",
+        "actual": {
+          "decoded": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              }
+            ]
+          },
+          "edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "7"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "summary",
+                "src": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "fixture_id": "Binary",
+          "obligations": {
+            "#set": [
+              {
+                "reason": "indirect-targets",
+                "site": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "reason": "call-targets",
+                "site": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "pending": {
+            "#set": [
+              {
+                "#bigint": "5"
+              },
+              {
+                "#bigint": "6"
+              },
+              {
+                "#bigint": "7"
+              }
+            ]
+          },
+          "phase": "recover",
+          "provenance": {
+            "#set": [
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": []
+          },
+          "visited": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              }
+            ]
+          }
+        },
+        "expected": {
+          "decoded": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              }
+            ]
+          },
+          "edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "7"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "summary",
+                "src": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "call",
+                "src": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "fixture_id": "Binary",
+          "obligations": {
+            "#set": [
+              {
+                "reason": "indirect-targets",
+                "site": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "reason": "call-targets",
+                "site": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "pending": {
+            "#set": [
+              {
+                "#bigint": "5"
+              },
+              {
+                "#bigint": "6"
+              },
+              {
+                "#bigint": "7"
+              }
+            ]
+          },
+          "phase": "recover",
+          "provenance": {
+            "#set": [
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": []
+          },
+          "visited": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              }
+            ]
+          }
+        },
+        "hints": "[MissingElem { path: [Field(\"edges\")], expected: Record({\"dst\": Int(6), \"kind\": Str(\"call\"), \"src\": Int(4)}) }]"
+      },
+      "observations": 5
+    },
+    {
+      "mutation": "traverse-call-edge",
+      "family": "core",
+      "sourceSha256": "e8393540380a990f1954f3dd6d6f977d0d59e39ae39e8dd12fc501569b35e39f",
+      "helperManifest": {
+        "schema": "ariadne.bap-core-build/v1",
+        "handshake": {
+          "schema": "ariadne.bap-core-ready/v1",
+          "abi": 2,
+          "compiler": "4.12.1",
+          "bap_revision": "baa902209ee4be975bdd8db7d1160b0a0ec2831f",
+          "sdk_manifest_sha256": "ba8eb693feb66fd77e6b536cce89314fc1e80ef563ac0f720a730557ff392838",
+          "source_hashes": {
+            "recovery.ml": "e8393540380a990f1954f3dd6d6f977d0d59e39ae39e8dd12fc501569b35e39f",
+            "stateflow.ml": "2d6a39f261bad1267a022049bbff68ae7b88cdeb044699ff1d085da7b8008b46",
+            "capture.ml": "d017153ea34574ce74c0f04cf4c355d798a2d9228fa4935656d87e82a3fd0c86",
+            "project_state.ml": "9cc366a55c4d5fdd74b6689ce172ae4eba823d016c6736af0f2c27438f8c35a9",
+            "main.ml": "281dbfbbd42f1650e0ebdb976b6960ccb681634ed738eef3cf51f3c5ec8459ea"
+          },
+          "families": [
+            "recovery",
+            "stateflow"
+          ],
+          "profiles": [
+            "normalized-fixed-input/v1",
+            "captured-fixed-input/v1",
+            "captured-indirect-targets/v1"
+          ],
+          "operations": [
+            "initialize",
+            "advance:Visit",
+            "advance:FinishRecovery",
+            "advance:Propagate",
+            "advance:FinishDataflow",
+            "advance:ExpandSlice",
+            "advance:FinishSlice",
+            "advance:FinishStateflow",
+            "step",
+            "observe",
+            "finish",
+            "reset",
+            "run-batch",
+            "result-page",
+            "result-close"
+          ],
+          "max_frame_bytes": 8388608,
+          "max_addresses": 65536
+        },
+        "helper_sha256": "ce2f176aef536788185d3c606660156f344c5adf24bd7401e67f1e2d9ead6fce",
+        "lock_sha256": "6f6bd3235ffcdc565ad4ab7e687d6238b85caceee0532f54c56570cbee61992f"
+      },
+      "mismatch": {
+        "action": "visit",
+        "actual": {
+          "decoded": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              }
+            ]
+          },
+          "edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "summary",
+                "src": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "call",
+                "src": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "fixture_id": "Closed",
+          "obligations": {
+            "#set": []
+          },
+          "pending": {
+            "#set": [
+              {
+                "#bigint": "5"
+              },
+              {
+                "#bigint": "6"
+              }
+            ]
+          },
+          "phase": "recover",
+          "provenance": {
+            "#set": [
+              {
+                "source": "captured",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "captured",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "captured",
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": []
+          },
+          "visited": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              }
+            ]
+          }
+        },
+        "expected": {
+          "decoded": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              }
+            ]
+          },
+          "edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "summary",
+                "src": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "call",
+                "src": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "fixture_id": "Closed",
+          "obligations": {
+            "#set": []
+          },
+          "pending": {
+            "#set": [
+              {
+                "#bigint": "5"
+              }
+            ]
+          },
+          "phase": "recover",
+          "provenance": {
+            "#set": [
+              {
+                "source": "captured",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "captured",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "captured",
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": []
+          },
+          "visited": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              }
+            ]
+          }
+        },
+        "hints": "[ExtraElem { path: [Field(\"pending\")], actual: Int(6) }]"
+      },
+      "observations": 54
+    },
+    {
+      "mutation": "early-completion",
+      "family": "core",
+      "sourceSha256": "e7d4b5456b988b4d0ae37068113cb31df5ddf69bbbe48bb153a9e7700cb5f024",
+      "helperManifest": {
+        "schema": "ariadne.bap-core-build/v1",
+        "handshake": {
+          "schema": "ariadne.bap-core-ready/v1",
+          "abi": 2,
+          "compiler": "4.12.1",
+          "bap_revision": "baa902209ee4be975bdd8db7d1160b0a0ec2831f",
+          "sdk_manifest_sha256": "ba8eb693feb66fd77e6b536cce89314fc1e80ef563ac0f720a730557ff392838",
+          "source_hashes": {
+            "recovery.ml": "e7d4b5456b988b4d0ae37068113cb31df5ddf69bbbe48bb153a9e7700cb5f024",
+            "stateflow.ml": "2d6a39f261bad1267a022049bbff68ae7b88cdeb044699ff1d085da7b8008b46",
+            "capture.ml": "d017153ea34574ce74c0f04cf4c355d798a2d9228fa4935656d87e82a3fd0c86",
+            "project_state.ml": "9cc366a55c4d5fdd74b6689ce172ae4eba823d016c6736af0f2c27438f8c35a9",
+            "main.ml": "281dbfbbd42f1650e0ebdb976b6960ccb681634ed738eef3cf51f3c5ec8459ea"
+          },
+          "families": [
+            "recovery",
+            "stateflow"
+          ],
+          "profiles": [
+            "normalized-fixed-input/v1",
+            "captured-fixed-input/v1",
+            "captured-indirect-targets/v1"
+          ],
+          "operations": [
+            "initialize",
+            "advance:Visit",
+            "advance:FinishRecovery",
+            "advance:Propagate",
+            "advance:FinishDataflow",
+            "advance:ExpandSlice",
+            "advance:FinishSlice",
+            "advance:FinishStateflow",
+            "step",
+            "observe",
+            "finish",
+            "reset",
+            "run-batch",
+            "result-page",
+            "result-close"
+          ],
+          "max_frame_bytes": 8388608,
+          "max_addresses": 65536
+        },
+        "helper_sha256": "0a42c62e0c0fefbfc897babf8bb18c3827d3128fe77495fd4c54656b1ff09c81",
+        "lock_sha256": "6f6bd3235ffcdc565ad4ab7e687d6238b85caceee0532f54c56570cbee61992f"
+      },
+      "mismatch": {
+        "action": "finishRecovery",
+        "actual": {
+          "decoded": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              }
+            ]
+          },
+          "edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "7"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "summary",
+                "src": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "call",
+                "src": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "fixture_id": "Binary",
+          "obligations": {
+            "#set": [
+              {
+                "reason": "indirect-targets",
+                "site": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "reason": "call-targets",
+                "site": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "reason": "unavailable",
+                "site": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "reason": "decode-failed",
+                "site": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "pending": {
+            "#set": []
+          },
+          "phase": "done",
+          "provenance": {
+            "#set": [
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": []
+          },
+          "visited": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              },
+              {
+                "#bigint": "6"
+              },
+              {
+                "#bigint": "7"
+              }
+            ]
+          }
+        },
+        "expected": {
+          "decoded": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              }
+            ]
+          },
+          "edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "7"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "summary",
+                "src": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "call",
+                "src": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "fixture_id": "Binary",
+          "obligations": {
+            "#set": [
+              {
+                "reason": "indirect-targets",
+                "site": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "reason": "call-targets",
+                "site": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "reason": "unavailable",
+                "site": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "reason": "decode-failed",
+                "site": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "pending": {
+            "#set": []
+          },
+          "phase": "dataflow",
+          "provenance": {
+            "#set": [
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": []
+          },
+          "visited": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              },
+              {
+                "#bigint": "6"
+              },
+              {
+                "#bigint": "7"
+              }
+            ]
+          }
+        },
+        "hints": "[ValueMismatch { path: [Field(\"phase\")], expected: Str(\"dataflow\"), actual: Str(\"done\") }]"
+      },
+      "observations": 9
+    },
+    {
+      "mutation": "possible-write-kills",
+      "family": "core",
+      "sourceSha256": "c5ba07f245b9164751f139c126be314e1ee793a6f13060e9c2997c2c0d9e3f27",
+      "helperManifest": {
+        "schema": "ariadne.bap-core-build/v1",
+        "handshake": {
+          "schema": "ariadne.bap-core-ready/v1",
+          "abi": 2,
+          "compiler": "4.12.1",
+          "bap_revision": "baa902209ee4be975bdd8db7d1160b0a0ec2831f",
+          "sdk_manifest_sha256": "ba8eb693feb66fd77e6b536cce89314fc1e80ef563ac0f720a730557ff392838",
+          "source_hashes": {
+            "recovery.ml": "c5ba07f245b9164751f139c126be314e1ee793a6f13060e9c2997c2c0d9e3f27",
+            "stateflow.ml": "2d6a39f261bad1267a022049bbff68ae7b88cdeb044699ff1d085da7b8008b46",
+            "capture.ml": "d017153ea34574ce74c0f04cf4c355d798a2d9228fa4935656d87e82a3fd0c86",
+            "project_state.ml": "9cc366a55c4d5fdd74b6689ce172ae4eba823d016c6736af0f2c27438f8c35a9",
+            "main.ml": "281dbfbbd42f1650e0ebdb976b6960ccb681634ed738eef3cf51f3c5ec8459ea"
+          },
+          "families": [
+            "recovery",
+            "stateflow"
+          ],
+          "profiles": [
+            "normalized-fixed-input/v1",
+            "captured-fixed-input/v1",
+            "captured-indirect-targets/v1"
+          ],
+          "operations": [
+            "initialize",
+            "advance:Visit",
+            "advance:FinishRecovery",
+            "advance:Propagate",
+            "advance:FinishDataflow",
+            "advance:ExpandSlice",
+            "advance:FinishSlice",
+            "advance:FinishStateflow",
+            "step",
+            "observe",
+            "finish",
+            "reset",
+            "run-batch",
+            "result-page",
+            "result-close"
+          ],
+          "max_frame_bytes": 8388608,
+          "max_addresses": 65536
+        },
+        "helper_sha256": "ca373ad0a7c31617703eeb6d4cdc8e578939adc5f4016cb7c9a8f44ec5a8b8d4",
+        "lock_sha256": "6f6bd3235ffcdc565ad4ab7e687d6238b85caceee0532f54c56570cbee61992f"
+      },
+      "mismatch": {
+        "action": "propagate",
+        "actual": {
+          "decoded": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              }
+            ]
+          },
+          "edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "7"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "summary",
+                "src": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "call",
+                "src": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "fixture_id": "Binary",
+          "obligations": {
+            "#set": [
+              {
+                "reason": "indirect-targets",
+                "site": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "reason": "call-targets",
+                "site": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "reason": "unavailable",
+                "site": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "reason": "decode-failed",
+                "site": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "pending": {
+            "#set": []
+          },
+          "phase": "dataflow",
+          "provenance": {
+            "#set": [
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "2"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "target",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "4"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "4"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": []
+          },
+          "visited": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              },
+              {
+                "#bigint": "6"
+              },
+              {
+                "#bigint": "7"
+              }
+            ]
+          }
+        },
+        "expected": {
+          "decoded": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              }
+            ]
+          },
+          "edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "7"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "summary",
+                "src": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "call",
+                "src": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "fixture_id": "Binary",
+          "obligations": {
+            "#set": [
+              {
+                "reason": "indirect-targets",
+                "site": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "reason": "call-targets",
+                "site": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "reason": "unavailable",
+                "site": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "reason": "decode-failed",
+                "site": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "pending": {
+            "#set": []
+          },
+          "phase": "dataflow",
+          "provenance": {
+            "#set": [
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "2"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "2"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "4"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "4"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": []
+          },
+          "visited": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              },
+              {
+                "#bigint": "6"
+              },
+              {
+                "#bigint": "7"
+              }
+            ]
+          }
+        },
+        "hints": "[MissingElem { path: [Field(\"reaching\")], expected: Record({\"definitions\": Set([Record({\"loc\": Str(\"x\"), \"origin\": Str(\"entry\"), \"site\": Int(1)}), Record({\"loc\": Str(\"target\"), \"origin\": Str(\"entry\"), \"site\": Int(1)}), Record({\"loc\": Str(\"x\"), \"origin\": Str(\"instruction\"), \"site\": Int(2)}), Record({\"loc\": Str(\"x\"), \"origin\": Str(\"instruction\"), \"site\": Int(4)}), Record({\"loc\": Str(\"target\"), \"origin\": Str(\"instruction\"), \"site\": Int(4)})]), \"va\": Int(5)}) }, ExtraElem { path: [Field(\"reaching\")], actual: Record({\"definitions\": Set([Record({\"loc\": Str(\"target\"), \"origin\": Str(\"instruction\"), \"site\": Int(4)}), Record({\"loc\": Str(\"x\"), \"origin\": Str(\"instruction\"), \"site\": Int(4)})]), \"va\": Int(5)}) }]"
+      },
+      "observations": 14
+    },
+    {
+      "mutation": "drop-propagation",
+      "family": "core",
+      "sourceSha256": "9af56859f8fc51359f0b3b9d2cf1ae0b07be00f55b58736f73e06bc94047c3b3",
+      "helperManifest": {
+        "schema": "ariadne.bap-core-build/v1",
+        "handshake": {
+          "schema": "ariadne.bap-core-ready/v1",
+          "abi": 2,
+          "compiler": "4.12.1",
+          "bap_revision": "baa902209ee4be975bdd8db7d1160b0a0ec2831f",
+          "sdk_manifest_sha256": "ba8eb693feb66fd77e6b536cce89314fc1e80ef563ac0f720a730557ff392838",
+          "source_hashes": {
+            "recovery.ml": "9af56859f8fc51359f0b3b9d2cf1ae0b07be00f55b58736f73e06bc94047c3b3",
+            "stateflow.ml": "2d6a39f261bad1267a022049bbff68ae7b88cdeb044699ff1d085da7b8008b46",
+            "capture.ml": "d017153ea34574ce74c0f04cf4c355d798a2d9228fa4935656d87e82a3fd0c86",
+            "project_state.ml": "9cc366a55c4d5fdd74b6689ce172ae4eba823d016c6736af0f2c27438f8c35a9",
+            "main.ml": "281dbfbbd42f1650e0ebdb976b6960ccb681634ed738eef3cf51f3c5ec8459ea"
+          },
+          "families": [
+            "recovery",
+            "stateflow"
+          ],
+          "profiles": [
+            "normalized-fixed-input/v1",
+            "captured-fixed-input/v1",
+            "captured-indirect-targets/v1"
+          ],
+          "operations": [
+            "initialize",
+            "advance:Visit",
+            "advance:FinishRecovery",
+            "advance:Propagate",
+            "advance:FinishDataflow",
+            "advance:ExpandSlice",
+            "advance:FinishSlice",
+            "advance:FinishStateflow",
+            "step",
+            "observe",
+            "finish",
+            "reset",
+            "run-batch",
+            "result-page",
+            "result-close"
+          ],
+          "max_frame_bytes": 8388608,
+          "max_addresses": 65536
+        },
+        "helper_sha256": "ffa2228fdf7b889fc37ff44195d58f218ae94e08ecbabce285d3aca215cdaa47",
+        "lock_sha256": "6f6bd3235ffcdc565ad4ab7e687d6238b85caceee0532f54c56570cbee61992f"
+      },
+      "mismatch": {
+        "action": "propagate",
+        "actual": {
+          "decoded": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              }
+            ]
+          },
+          "edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "7"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "summary",
+                "src": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "call",
+                "src": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "fixture_id": "Binary",
+          "obligations": {
+            "#set": [
+              {
+                "reason": "indirect-targets",
+                "site": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "reason": "call-targets",
+                "site": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "reason": "unavailable",
+                "site": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "reason": "decode-failed",
+                "site": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "pending": {
+            "#set": []
+          },
+          "phase": "dataflow",
+          "provenance": {
+            "#set": [
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": []
+          },
+          "visited": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              },
+              {
+                "#bigint": "6"
+              },
+              {
+                "#bigint": "7"
+              }
+            ]
+          }
+        },
+        "expected": {
+          "decoded": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              }
+            ]
+          },
+          "edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "7"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "summary",
+                "src": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "call",
+                "src": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "fixture_id": "Binary",
+          "obligations": {
+            "#set": [
+              {
+                "reason": "indirect-targets",
+                "site": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "reason": "call-targets",
+                "site": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "reason": "unavailable",
+                "site": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "reason": "decode-failed",
+                "site": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "pending": {
+            "#set": []
+          },
+          "phase": "dataflow",
+          "provenance": {
+            "#set": [
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": []
+          },
+          "visited": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              },
+              {
+                "#bigint": "6"
+              },
+              {
+                "#bigint": "7"
+              }
+            ]
+          }
+        },
+        "hints": "[MissingElem { path: [Field(\"reaching\")], expected: Record({\"definitions\": Set([Record({\"loc\": Str(\"x\"), \"origin\": Str(\"entry\"), \"site\": Int(1)}), Record({\"loc\": Str(\"target\"), \"origin\": Str(\"entry\"), \"site\": Int(1)})]), \"va\": Int(1)}) }, ExtraElem { path: [Field(\"reaching\")], actual: Record({\"definitions\": Set([]), \"va\": Int(1)}) }]"
+      },
+      "observations": 10
+    },
+    {
+      "mutation": "drop-slice-seeds",
+      "family": "core",
+      "sourceSha256": "158c8fb297288bec95105526f2cf4037b89a47e696f14abce065982f54907f3a",
+      "helperManifest": {
+        "schema": "ariadne.bap-core-build/v1",
+        "handshake": {
+          "schema": "ariadne.bap-core-ready/v1",
+          "abi": 2,
+          "compiler": "4.12.1",
+          "bap_revision": "baa902209ee4be975bdd8db7d1160b0a0ec2831f",
+          "sdk_manifest_sha256": "ba8eb693feb66fd77e6b536cce89314fc1e80ef563ac0f720a730557ff392838",
+          "source_hashes": {
+            "recovery.ml": "158c8fb297288bec95105526f2cf4037b89a47e696f14abce065982f54907f3a",
+            "stateflow.ml": "2d6a39f261bad1267a022049bbff68ae7b88cdeb044699ff1d085da7b8008b46",
+            "capture.ml": "d017153ea34574ce74c0f04cf4c355d798a2d9228fa4935656d87e82a3fd0c86",
+            "project_state.ml": "9cc366a55c4d5fdd74b6689ce172ae4eba823d016c6736af0f2c27438f8c35a9",
+            "main.ml": "281dbfbbd42f1650e0ebdb976b6960ccb681634ed738eef3cf51f3c5ec8459ea"
+          },
+          "families": [
+            "recovery",
+            "stateflow"
+          ],
+          "profiles": [
+            "normalized-fixed-input/v1",
+            "captured-fixed-input/v1",
+            "captured-indirect-targets/v1"
+          ],
+          "operations": [
+            "initialize",
+            "advance:Visit",
+            "advance:FinishRecovery",
+            "advance:Propagate",
+            "advance:FinishDataflow",
+            "advance:ExpandSlice",
+            "advance:FinishSlice",
+            "advance:FinishStateflow",
+            "step",
+            "observe",
+            "finish",
+            "reset",
+            "run-batch",
+            "result-page",
+            "result-close"
+          ],
+          "max_frame_bytes": 8388608,
+          "max_addresses": 65536
+        },
+        "helper_sha256": "08de71fe376d5c4149e1d9c5743eb439249b265eed9b93d02be76d6418fccf3f",
+        "lock_sha256": "6f6bd3235ffcdc565ad4ab7e687d6238b85caceee0532f54c56570cbee61992f"
+      },
+      "mismatch": {
+        "action": "finishDataflow",
+        "actual": {
+          "decoded": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              }
+            ]
+          },
+          "edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "7"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "summary",
+                "src": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "call",
+                "src": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "fixture_id": "Binary",
+          "obligations": {
+            "#set": [
+              {
+                "reason": "indirect-targets",
+                "site": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "reason": "call-targets",
+                "site": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "reason": "unavailable",
+                "site": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "reason": "decode-failed",
+                "site": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "pending": {
+            "#set": []
+          },
+          "phase": "slice",
+          "provenance": {
+            "#set": [
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "2"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "4"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "2"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "4"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": []
+          },
+          "visited": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              },
+              {
+                "#bigint": "6"
+              },
+              {
+                "#bigint": "7"
+              }
+            ]
+          }
+        },
+        "expected": {
+          "decoded": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              }
+            ]
+          },
+          "edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "7"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "summary",
+                "src": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "call",
+                "src": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "fixture_id": "Binary",
+          "obligations": {
+            "#set": [
+              {
+                "reason": "indirect-targets",
+                "site": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "reason": "call-targets",
+                "site": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "reason": "unavailable",
+                "site": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "reason": "decode-failed",
+                "site": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "pending": {
+            "#set": []
+          },
+          "phase": "slice",
+          "provenance": {
+            "#set": [
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "2"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "2"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "4"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "4"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": [
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              }
+            ]
+          },
+          "visited": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              },
+              {
+                "#bigint": "6"
+              },
+              {
+                "#bigint": "7"
+              }
+            ]
+          }
+        },
+        "hints": "[MissingElem { path: [Field(\"slice\")], expected: Int(4) }, MissingElem { path: [Field(\"slice\")], expected: Int(5) }]"
+      },
+      "observations": 15
+    },
+    {
+      "mutation": "drop-slice-expansion",
+      "family": "core",
+      "sourceSha256": "a04fe229b29caa4d356b5393769ec9622145dc27b5014c62b8ee80a1b4532683",
+      "helperManifest": {
+        "schema": "ariadne.bap-core-build/v1",
+        "handshake": {
+          "schema": "ariadne.bap-core-ready/v1",
+          "abi": 2,
+          "compiler": "4.12.1",
+          "bap_revision": "baa902209ee4be975bdd8db7d1160b0a0ec2831f",
+          "sdk_manifest_sha256": "ba8eb693feb66fd77e6b536cce89314fc1e80ef563ac0f720a730557ff392838",
+          "source_hashes": {
+            "recovery.ml": "a04fe229b29caa4d356b5393769ec9622145dc27b5014c62b8ee80a1b4532683",
+            "stateflow.ml": "2d6a39f261bad1267a022049bbff68ae7b88cdeb044699ff1d085da7b8008b46",
+            "capture.ml": "d017153ea34574ce74c0f04cf4c355d798a2d9228fa4935656d87e82a3fd0c86",
+            "project_state.ml": "9cc366a55c4d5fdd74b6689ce172ae4eba823d016c6736af0f2c27438f8c35a9",
+            "main.ml": "281dbfbbd42f1650e0ebdb976b6960ccb681634ed738eef3cf51f3c5ec8459ea"
+          },
+          "families": [
+            "recovery",
+            "stateflow"
+          ],
+          "profiles": [
+            "normalized-fixed-input/v1",
+            "captured-fixed-input/v1",
+            "captured-indirect-targets/v1"
+          ],
+          "operations": [
+            "initialize",
+            "advance:Visit",
+            "advance:FinishRecovery",
+            "advance:Propagate",
+            "advance:FinishDataflow",
+            "advance:ExpandSlice",
+            "advance:FinishSlice",
+            "advance:FinishStateflow",
+            "step",
+            "observe",
+            "finish",
+            "reset",
+            "run-batch",
+            "result-page",
+            "result-close"
+          ],
+          "max_frame_bytes": 8388608,
+          "max_addresses": 65536
+        },
+        "helper_sha256": "c98719cec2abe1a1139cc43d7ccaaeafc3de04cfb434cb92bf52763594f13796",
+        "lock_sha256": "6f6bd3235ffcdc565ad4ab7e687d6238b85caceee0532f54c56570cbee61992f"
+      },
+      "mismatch": {
+        "action": "expandSlice",
+        "actual": {
+          "decoded": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              }
+            ]
+          },
+          "edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "7"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "summary",
+                "src": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "call",
+                "src": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "fixture_id": "Binary",
+          "obligations": {
+            "#set": [
+              {
+                "reason": "indirect-targets",
+                "site": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "reason": "call-targets",
+                "site": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "reason": "unavailable",
+                "site": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "reason": "decode-failed",
+                "site": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "pending": {
+            "#set": []
+          },
+          "phase": "slice",
+          "provenance": {
+            "#set": [
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "2"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "4"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "2"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "4"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": [
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              }
+            ]
+          },
+          "visited": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              },
+              {
+                "#bigint": "6"
+              },
+              {
+                "#bigint": "7"
+              }
+            ]
+          }
+        },
+        "expected": {
+          "decoded": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              }
+            ]
+          },
+          "edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "7"
+                },
+                "kind": "indirect",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "summary",
+                "src": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "6"
+                },
+                "kind": "call",
+                "src": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "fixture_id": "Binary",
+          "obligations": {
+            "#set": [
+              {
+                "reason": "indirect-targets",
+                "site": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "reason": "call-targets",
+                "site": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "reason": "unavailable",
+                "site": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "reason": "decode-failed",
+                "site": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "pending": {
+            "#set": []
+          },
+          "phase": "slice",
+          "provenance": {
+            "#set": [
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "source": "file",
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "source": "unavailable",
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "reaching": {
+            "#set": [
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "2"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": [
+                    {
+                      "loc": "x",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "entry",
+                      "site": {
+                        "#bigint": "1"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "2"
+                      }
+                    },
+                    {
+                      "loc": "x",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "4"
+                      }
+                    },
+                    {
+                      "loc": "target",
+                      "origin": "instruction",
+                      "site": {
+                        "#bigint": "4"
+                      }
+                    }
+                  ]
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "6"
+                }
+              },
+              {
+                "definitions": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "7"
+                }
+              }
+            ]
+          },
+          "slice": {
+            "#set": [
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              }
+            ]
+          },
+          "visited": {
+            "#set": [
+              {
+                "#bigint": "1"
+              },
+              {
+                "#bigint": "2"
+              },
+              {
+                "#bigint": "3"
+              },
+              {
+                "#bigint": "4"
+              },
+              {
+                "#bigint": "5"
+              },
+              {
+                "#bigint": "6"
+              },
+              {
+                "#bigint": "7"
+              }
+            ]
+          }
+        },
+        "hints": "[MissingElem { path: [Field(\"slice\")], expected: Int(2) }]"
+      },
+      "observations": 16
+    },
+    {
+      "mutation": "drop-state-propagation",
+      "family": "machine-state",
+      "sourceSha256": "3b659d4500037d1c501d531b69464255c832f4fdf0b3266b2ea44354cba113d7",
+      "helperManifest": {
+        "schema": "ariadne.bap-core-build/v1",
+        "handshake": {
+          "schema": "ariadne.bap-core-ready/v1",
+          "abi": 2,
+          "compiler": "4.12.1",
+          "bap_revision": "baa902209ee4be975bdd8db7d1160b0a0ec2831f",
+          "sdk_manifest_sha256": "ba8eb693feb66fd77e6b536cce89314fc1e80ef563ac0f720a730557ff392838",
+          "source_hashes": {
+            "recovery.ml": "7cc392975ef197c41cea9aa5a40842fba3b12fba970200eaa83db251856d859d",
+            "stateflow.ml": "3b659d4500037d1c501d531b69464255c832f4fdf0b3266b2ea44354cba113d7",
+            "capture.ml": "d017153ea34574ce74c0f04cf4c355d798a2d9228fa4935656d87e82a3fd0c86",
+            "project_state.ml": "9cc366a55c4d5fdd74b6689ce172ae4eba823d016c6736af0f2c27438f8c35a9",
+            "main.ml": "281dbfbbd42f1650e0ebdb976b6960ccb681634ed738eef3cf51f3c5ec8459ea"
+          },
+          "families": [
+            "recovery",
+            "stateflow"
+          ],
+          "profiles": [
+            "normalized-fixed-input/v1",
+            "captured-fixed-input/v1",
+            "captured-indirect-targets/v1"
+          ],
+          "operations": [
+            "initialize",
+            "advance:Visit",
+            "advance:FinishRecovery",
+            "advance:Propagate",
+            "advance:FinishDataflow",
+            "advance:ExpandSlice",
+            "advance:FinishSlice",
+            "advance:FinishStateflow",
+            "step",
+            "observe",
+            "finish",
+            "reset",
+            "run-batch",
+            "result-page",
+            "result-close"
+          ],
+          "max_frame_bytes": 8388608,
+          "max_addresses": 65536
+        },
+        "helper_sha256": "51c86c0df9a634a22fa0dca5a9b868741be169f448ce2b6b77db070c9cc19e44",
+        "lock_sha256": "6f6bd3235ffcdc565ad4ab7e687d6238b85caceee0532f54c56570cbee61992f"
+      },
+      "mismatch": {
+        "action": "propagate",
+        "actual": {
+          "case_id": "MachineStateReplay",
+          "feasible_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "1"
+                }
+              }
+            ]
+          },
+          "infeasible_edges": {
+            "#set": []
+          },
+          "not_reached": {
+            "#set": []
+          },
+          "obligations": {
+            "#set": []
+          },
+          "phase": "stateflow",
+          "snapshot_id": "machine-state-snapshot",
+          "statesAt": {
+            "#set": [
+              {
+                "states": {
+                  "#set": [
+                    "entry"
+                  ]
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              }
+            ]
+          },
+          "structural_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "3"
+                }
+              }
+            ]
+          },
+          "terminals": {
+            "#set": []
+          },
+          "unknown_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "3"
+                }
+              }
+            ]
+          }
+        },
+        "expected": {
+          "case_id": "MachineStateReplay",
+          "feasible_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              }
+            ]
+          },
+          "infeasible_edges": {
+            "#set": []
+          },
+          "not_reached": {
+            "#set": []
+          },
+          "obligations": {
+            "#set": []
+          },
+          "phase": "stateflow",
+          "snapshot_id": "machine-state-snapshot",
+          "statesAt": {
+            "#set": [
+              {
+                "states": {
+                  "#set": [
+                    "entry"
+                  ]
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "states": {
+                  "#set": [
+                    "rax-five"
+                  ]
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              }
+            ]
+          },
+          "structural_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "3"
+                }
+              }
+            ]
+          },
+          "terminals": {
+            "#set": []
+          },
+          "unknown_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "3"
+                }
+              }
+            ]
+          }
+        },
+        "hints": "[MissingElem { path: [Field(\"feasible_edges\")], expected: Record({\"dst\": Int(3), \"kind\": Str(\"next\"), \"src\": Int(2)}) }, MissingElem { path: [Field(\"statesAt\")], expected: Record({\"states\": Set([Str(\"rax-five\")]), \"va\": Int(2)}) }, ExtraElem { path: [Field(\"statesAt\")], actual: Record({\"states\": Set([]), \"va\": Int(2)}) }, ExtraElem { path: [Field(\"unknown_edges\")], actual: Record({\"dst\": Int(3), \"kind\": Str(\"next\"), \"src\": Int(2)}) }]"
+      },
+      "observations": 2
+    },
+    {
+      "mutation": "collapse-state-ids",
+      "family": "machine-state",
+      "sourceSha256": "496c685a1db0e96457d3b85f014efba6fa3a3a8a901af356af9579da44ca51ac",
+      "helperManifest": {
+        "schema": "ariadne.bap-core-build/v1",
+        "handshake": {
+          "schema": "ariadne.bap-core-ready/v1",
+          "abi": 2,
+          "compiler": "4.12.1",
+          "bap_revision": "baa902209ee4be975bdd8db7d1160b0a0ec2831f",
+          "sdk_manifest_sha256": "ba8eb693feb66fd77e6b536cce89314fc1e80ef563ac0f720a730557ff392838",
+          "source_hashes": {
+            "recovery.ml": "7cc392975ef197c41cea9aa5a40842fba3b12fba970200eaa83db251856d859d",
+            "stateflow.ml": "496c685a1db0e96457d3b85f014efba6fa3a3a8a901af356af9579da44ca51ac",
+            "capture.ml": "d017153ea34574ce74c0f04cf4c355d798a2d9228fa4935656d87e82a3fd0c86",
+            "project_state.ml": "9cc366a55c4d5fdd74b6689ce172ae4eba823d016c6736af0f2c27438f8c35a9",
+            "main.ml": "281dbfbbd42f1650e0ebdb976b6960ccb681634ed738eef3cf51f3c5ec8459ea"
+          },
+          "families": [
+            "recovery",
+            "stateflow"
+          ],
+          "profiles": [
+            "normalized-fixed-input/v1",
+            "captured-fixed-input/v1",
+            "captured-indirect-targets/v1"
+          ],
+          "operations": [
+            "initialize",
+            "advance:Visit",
+            "advance:FinishRecovery",
+            "advance:Propagate",
+            "advance:FinishDataflow",
+            "advance:ExpandSlice",
+            "advance:FinishSlice",
+            "advance:FinishStateflow",
+            "step",
+            "observe",
+            "finish",
+            "reset",
+            "run-batch",
+            "result-page",
+            "result-close"
+          ],
+          "max_frame_bytes": 8388608,
+          "max_addresses": 65536
+        },
+        "helper_sha256": "a0416c7a1cad05e90347d4f6a812ef89ee83556f93c12de85a2093ae32ed907a",
+        "lock_sha256": "6f6bd3235ffcdc565ad4ab7e687d6238b85caceee0532f54c56570cbee61992f"
+      },
+      "mismatch": {
+        "action": "propagate",
+        "actual": {
+          "case_id": "MSEqualValuations",
+          "feasible_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "3"
+                }
+              }
+            ]
+          },
+          "infeasible_edges": {
+            "#set": []
+          },
+          "not_reached": {
+            "#set": []
+          },
+          "obligations": {
+            "#set": []
+          },
+          "phase": "stateflow",
+          "snapshot_id": "machine-state-snapshot/MSEqualValuations",
+          "statesAt": {
+            "#set": [
+              {
+                "states": {
+                  "#set": [
+                    "entry"
+                  ]
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "states": {
+                  "#set": [
+                    "rax-five"
+                  ]
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "states": {
+                  "#set": [
+                    "twin"
+                  ]
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              }
+            ]
+          },
+          "structural_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "3"
+                }
+              }
+            ]
+          },
+          "terminals": {
+            "#set": []
+          },
+          "unknown_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "3"
+                }
+              }
+            ]
+          }
+        },
+        "expected": {
+          "case_id": "MSEqualValuations",
+          "feasible_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "3"
+                }
+              }
+            ]
+          },
+          "infeasible_edges": {
+            "#set": []
+          },
+          "not_reached": {
+            "#set": []
+          },
+          "obligations": {
+            "#set": []
+          },
+          "phase": "stateflow",
+          "snapshot_id": "machine-state-snapshot/MSEqualValuations",
+          "statesAt": {
+            "#set": [
+              {
+                "states": {
+                  "#set": [
+                    "entry"
+                  ]
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "states": {
+                  "#set": [
+                    "rax-five"
+                  ]
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "states": {
+                  "#set": [
+                    "zf-true",
+                    "twin"
+                  ]
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              }
+            ]
+          },
+          "structural_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "3"
+                }
+              }
+            ]
+          },
+          "terminals": {
+            "#set": []
+          },
+          "unknown_edges": {
+            "#set": []
+          }
+        },
+        "hints": "[MissingElem { path: [Field(\"feasible_edges\")], expected: Record({\"dst\": Int(4), \"kind\": Str(\"taken\"), \"src\": Int(3)}) }, MissingElem { path: [Field(\"statesAt\")], expected: Record({\"states\": Set([Str(\"zf-true\"), Str(\"twin\")]), \"va\": Int(3)}) }, ExtraElem { path: [Field(\"statesAt\")], actual: Record({\"states\": Set([Str(\"twin\")]), \"va\": Int(3)}) }, ExtraElem { path: [Field(\"unknown_edges\")], actual: Record({\"dst\": Int(4), \"kind\": Str(\"taken\"), \"src\": Int(3)}) }]"
+      },
+      "observations": 36
+    },
+    {
+      "mutation": "drop-incomplete-obligations",
+      "family": "machine-state",
+      "sourceSha256": "0717993dad1da8fdf11c9b0d14d35382e70ed4b40891f4deb936c2378d07a568",
+      "helperManifest": {
+        "schema": "ariadne.bap-core-build/v1",
+        "handshake": {
+          "schema": "ariadne.bap-core-ready/v1",
+          "abi": 2,
+          "compiler": "4.12.1",
+          "bap_revision": "baa902209ee4be975bdd8db7d1160b0a0ec2831f",
+          "sdk_manifest_sha256": "ba8eb693feb66fd77e6b536cce89314fc1e80ef563ac0f720a730557ff392838",
+          "source_hashes": {
+            "recovery.ml": "7cc392975ef197c41cea9aa5a40842fba3b12fba970200eaa83db251856d859d",
+            "stateflow.ml": "0717993dad1da8fdf11c9b0d14d35382e70ed4b40891f4deb936c2378d07a568",
+            "capture.ml": "d017153ea34574ce74c0f04cf4c355d798a2d9228fa4935656d87e82a3fd0c86",
+            "project_state.ml": "9cc366a55c4d5fdd74b6689ce172ae4eba823d016c6736af0f2c27438f8c35a9",
+            "main.ml": "281dbfbbd42f1650e0ebdb976b6960ccb681634ed738eef3cf51f3c5ec8459ea"
+          },
+          "families": [
+            "recovery",
+            "stateflow"
+          ],
+          "profiles": [
+            "normalized-fixed-input/v1",
+            "captured-fixed-input/v1",
+            "captured-indirect-targets/v1"
+          ],
+          "operations": [
+            "initialize",
+            "advance:Visit",
+            "advance:FinishRecovery",
+            "advance:Propagate",
+            "advance:FinishDataflow",
+            "advance:ExpandSlice",
+            "advance:FinishSlice",
+            "advance:FinishStateflow",
+            "step",
+            "observe",
+            "finish",
+            "reset",
+            "run-batch",
+            "result-page",
+            "result-close"
+          ],
+          "max_frame_bytes": 8388608,
+          "max_addresses": 65536
+        },
+        "helper_sha256": "a00f056f7264f04350199947341a4eae691426e2c7ef5ad2f7289c0a188e5100",
+        "lock_sha256": "6f6bd3235ffcdc565ad4ab7e687d6238b85caceee0532f54c56570cbee61992f"
+      },
+      "mismatch": {
+        "action": "init",
+        "actual": {
+          "case_id": "MSIncomplete",
+          "feasible_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "1"
+                }
+              }
+            ]
+          },
+          "infeasible_edges": {
+            "#set": []
+          },
+          "not_reached": {
+            "#set": []
+          },
+          "obligations": {
+            "#set": []
+          },
+          "phase": "stateflow",
+          "snapshot_id": "machine-state-snapshot/MSIncomplete",
+          "statesAt": {
+            "#set": [
+              {
+                "states": {
+                  "#set": [
+                    "entry"
+                  ]
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              }
+            ]
+          },
+          "structural_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "3"
+                }
+              }
+            ]
+          },
+          "terminals": {
+            "#set": []
+          },
+          "unknown_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "3"
+                }
+              }
+            ]
+          }
+        },
+        "expected": {
+          "case_id": "MSIncomplete",
+          "feasible_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "1"
+                }
+              }
+            ]
+          },
+          "infeasible_edges": {
+            "#set": []
+          },
+          "not_reached": {
+            "#set": []
+          },
+          "obligations": {
+            "#set": [
+              {
+                "reason": "incomplete-semantics",
+                "site": {
+                  "#bigint": "3"
+                }
+              }
+            ]
+          },
+          "phase": "stateflow",
+          "snapshot_id": "machine-state-snapshot/MSIncomplete",
+          "statesAt": {
+            "#set": [
+              {
+                "states": {
+                  "#set": [
+                    "entry"
+                  ]
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              }
+            ]
+          },
+          "structural_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "3"
+                }
+              }
+            ]
+          },
+          "terminals": {
+            "#set": []
+          },
+          "unknown_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "3"
+                }
+              }
+            ]
+          }
+        },
+        "hints": "[MissingElem { path: [Field(\"obligations\")], expected: Record({\"reason\": Str(\"incomplete-semantics\"), \"site\": Int(3)}) }]"
+      },
+      "observations": 6
+    },
+    {
+      "mutation": "drop-terminal-relation",
+      "family": "machine-state",
+      "sourceSha256": "a69a0f28684ef6454d976042d1753a01f8c540b1baa29d32399dab0bd531b82e",
+      "helperManifest": {
+        "schema": "ariadne.bap-core-build/v1",
+        "handshake": {
+          "schema": "ariadne.bap-core-ready/v1",
+          "abi": 2,
+          "compiler": "4.12.1",
+          "bap_revision": "baa902209ee4be975bdd8db7d1160b0a0ec2831f",
+          "sdk_manifest_sha256": "ba8eb693feb66fd77e6b536cce89314fc1e80ef563ac0f720a730557ff392838",
+          "source_hashes": {
+            "recovery.ml": "7cc392975ef197c41cea9aa5a40842fba3b12fba970200eaa83db251856d859d",
+            "stateflow.ml": "a69a0f28684ef6454d976042d1753a01f8c540b1baa29d32399dab0bd531b82e",
+            "capture.ml": "d017153ea34574ce74c0f04cf4c355d798a2d9228fa4935656d87e82a3fd0c86",
+            "project_state.ml": "9cc366a55c4d5fdd74b6689ce172ae4eba823d016c6736af0f2c27438f8c35a9",
+            "main.ml": "281dbfbbd42f1650e0ebdb976b6960ccb681634ed738eef3cf51f3c5ec8459ea"
+          },
+          "families": [
+            "recovery",
+            "stateflow"
+          ],
+          "profiles": [
+            "normalized-fixed-input/v1",
+            "captured-fixed-input/v1",
+            "captured-indirect-targets/v1"
+          ],
+          "operations": [
+            "initialize",
+            "advance:Visit",
+            "advance:FinishRecovery",
+            "advance:Propagate",
+            "advance:FinishDataflow",
+            "advance:ExpandSlice",
+            "advance:FinishSlice",
+            "advance:FinishStateflow",
+            "step",
+            "observe",
+            "finish",
+            "reset",
+            "run-batch",
+            "result-page",
+            "result-close"
+          ],
+          "max_frame_bytes": 8388608,
+          "max_addresses": 65536
+        },
+        "helper_sha256": "00890270115fb130a6ebc63b4baeb05f582ca13de33b70e96bae5dfb82da654c",
+        "lock_sha256": "6f6bd3235ffcdc565ad4ab7e687d6238b85caceee0532f54c56570cbee61992f"
+      },
+      "mismatch": {
+        "action": "propagate",
+        "actual": {
+          "case_id": "MachineStateReplay",
+          "feasible_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "3"
+                }
+              }
+            ]
+          },
+          "infeasible_edges": {
+            "#set": []
+          },
+          "not_reached": {
+            "#set": []
+          },
+          "obligations": {
+            "#set": []
+          },
+          "phase": "stateflow",
+          "snapshot_id": "machine-state-snapshot",
+          "statesAt": {
+            "#set": [
+              {
+                "states": {
+                  "#set": [
+                    "entry"
+                  ]
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "states": {
+                  "#set": [
+                    "rax-five"
+                  ]
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "states": {
+                  "#set": [
+                    "zf-true"
+                  ]
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "states": {
+                  "#set": [
+                    "zf-true"
+                  ]
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              }
+            ]
+          },
+          "structural_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "3"
+                }
+              }
+            ]
+          },
+          "terminals": {
+            "#set": []
+          },
+          "unknown_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "3"
+                }
+              }
+            ]
+          }
+        },
+        "expected": {
+          "case_id": "MachineStateReplay",
+          "feasible_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "3"
+                }
+              }
+            ]
+          },
+          "infeasible_edges": {
+            "#set": []
+          },
+          "not_reached": {
+            "#set": []
+          },
+          "obligations": {
+            "#set": []
+          },
+          "phase": "stateflow",
+          "snapshot_id": "machine-state-snapshot",
+          "statesAt": {
+            "#set": [
+              {
+                "states": {
+                  "#set": [
+                    "entry"
+                  ]
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "states": {
+                  "#set": [
+                    "rax-five"
+                  ]
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "states": {
+                  "#set": [
+                    "zf-true"
+                  ]
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "states": {
+                  "#set": [
+                    "zf-true"
+                  ]
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              }
+            ]
+          },
+          "structural_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "3"
+                }
+              }
+            ]
+          },
+          "terminals": {
+            "#set": [
+              {
+                "after": "returned",
+                "before": "zf-true",
+                "outcome": "returned",
+                "site": {
+                  "#bigint": "4"
+                }
+              }
+            ]
+          },
+          "unknown_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "3"
+                }
+              }
+            ]
+          }
+        },
+        "hints": "[MissingElem { path: [Field(\"terminals\")], expected: Record({\"after\": Str(\"returned\"), \"before\": Str(\"zf-true\"), \"outcome\": Str(\"returned\"), \"site\": Int(4)}) }]"
+      },
+      "observations": 4
+    }
+  ],
+  "observerHashes": {
+    "src/mbt/core/adapter.rs": "d86f71604ba443b94c05412116f38bace95f290f29ef50b698d9f2550cd40d9b",
+    "src/mbt/stage_e/ports.rs": "8e39e3cba1ab5959b9cdf5b80feb761c63273c2a7761e17e8504afedb19c17f8",
+    "src/mbt/core/generated/AriadneReplayMirror.generated.rs": "b7a17b9f982e9e438ae80113e12f5befc3b2cffbe98390e8b28d4825f708bc00",
+    "src/mbt/stage_e/generated/machine_state/MachineStateReplayMirror.generated.rs": "72a26cc6c0096daf8af4593b9d50ebf8b9906323c4695843c64cd453aab064b2",
+    "src/mbt/stage_e/generated/llvm_ir/LLVMIRReplayMirror.generated.rs": "487a7fd700bfea3c4f371051f860413282f2aae4d4d8becba7dffde17fc4fc8a"
+  }
+}

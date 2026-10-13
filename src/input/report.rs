@@ -547,6 +547,9 @@ pub fn render(
     format: ReportFormat,
     exception_rip_seed: bool,
 ) -> Result<String, ReportError> {
+    prepared
+        .validate_target_resolution()
+        .map_err(|_| ReportError::IdentityMismatch)?;
     crate::input::investigation::validate_opaque_ordinary(prepared)
         .map_err(|_| ReportError::IdentityMismatch)?;
     if prepared.snapshot.snapshot_id != result.snapshot_id
@@ -568,15 +571,41 @@ pub fn render(
     {
         return Err(ReportError::InvalidExceptionSeed);
     }
-    let value = json_report(prepared, result, exception_rip_seed);
+    let mut value = json_report(prepared, result, exception_rip_seed);
+    let schema = if prepared.target_resolution.is_some() {
+        "ariadne-minidump-report-v2"
+    } else {
+        SCHEMA
+    };
     match format {
-        ReportFormat::Json => Ok(format!(
-            "{}\n",
-            serde_json::to_string_pretty(&value).map_err(ReportError::Json)?
-        )),
+        ReportFormat::Json => {
+            if let Some(resolution) = &prepared.target_resolution {
+                value["schema"] = serde_json::json!(schema);
+                value["target_resolution"] = serde_json::json!(resolution);
+            }
+            Ok(format!(
+                "{}\n",
+                serde_json::to_string_pretty(&value).map_err(ReportError::Json)?
+            ))
+        }
         ReportFormat::Text => {
             let mut out = String::new();
-            writeln!(out, "Ariadne minidump report ({SCHEMA})").unwrap();
+            writeln!(out, "Ariadne minidump report ({schema})").unwrap();
+            if let Some(resolution) = &prepared.target_resolution {
+                writeln!(out,"Indirect target profile: {}; premise: {} (captured control data is interpreted as frozen; no historical memory stability is inferred)",resolution.profile,resolution.memory_premise).unwrap();
+                for row in &resolution.resolutions {
+                    writeln!(
+                        out,
+                        "Indirect {}: {} targets; complete={}; unresolved={:?}",
+                        row.site,
+                        row.targets.len(),
+                        row.complete,
+                        row.unresolved
+                    )
+                    .unwrap();
+                }
+                writeln!(out, "Resolution stop: {:?}", resolution.stop).unwrap();
+            }
             writeln!(out, "identity: {}", value["identity"]).unwrap();
             writeln!(out, "query: {}", value["query"]).unwrap();
             out.push_str(&instruction_overview(prepared, result));
@@ -603,7 +632,10 @@ pub fn render(
             Ok(out)
         }
         ReportFormat::Dot => {
-            let mut out = format!("// {SCHEMA}\n");
+            let mut out = format!("// {schema}\n");
+            if let Some(r) = &prepared.target_resolution {
+                writeln!(out, "// {} under {}", r.profile, r.memory_premise).unwrap();
+            }
             for key in ["identity", "query"] {
                 writeln!(out, "// {key}: {}", value[key]).unwrap();
             }

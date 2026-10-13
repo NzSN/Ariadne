@@ -13,6 +13,11 @@ records the subsequent source audit and separate qualification limits.
 
 **Where to go next.**
 
+- [Indirect-target model](AriadneTargetResolution.tla) and
+  [R0–R6 ledger](../Plans/indirect-target-resolution.md) — finite captured-table
+  candidates, residuals, incoming-coverage invalidation and resource stops;
+  five model scenarios and implementation qualification have separate records.
+
 - [Frame-path model](AriadneFramePaths.tla) and
   [F0–F4 plan](../Plans/frame-path-enumeration.md) — strict output count, valid
   structural paths, bounded work and preservation of memory writers; checking
@@ -64,7 +69,9 @@ BAP's trusted role and the analysis-model boundary.
 
 ## Current model ownership
 
-The 2026-10-11 source audit covers **17 active modules and five replay modules**.
+The historical 2026-10-11 source audit covers **17 active modules and five replay modules**.
+The indirect-target extension adds one active module and five configurations on
+2026-10-13, with its own source-bound qualification below.
 The [synchronization plan](../Plans/specification-sync.md) separates source
 corrections and bounded local evidence from remote qualification. A model's
 age alone does not imply drift; unchanged executable contracts retain their
@@ -81,6 +88,7 @@ original bytes and replay bindings.
 | [Zero base/displacement](AriadneZeroBaseOffset.tla) | `src/investigation/zero_base_offset.rs` | Current question-level reduction over admitted coherent evidence and result budgets. Context/decode/BIL admission and full-width arithmetic have separate source/capture tests. |
 | [Memory refinement](AriadneMemoryRefinement.tla) | `src/investigation/backward_values.rs`, `src/investigation/memory_refinement.rs` | Updated exact/constrained/unknown meanings, composition/cap stops, conflict distinction and unavailable/candidate preservation. Four-bit words and two-operation chains are finite representatives; worklist and receipt validation remain outside this component model. |
 | [Frame paths](AriadneFramePaths.tla) | `src/investigation/frame_paths.rs`, `src/investigation/frame_unwind.rs` | Updated typed-edge DFS, strict NP, work/scan/visit/step guards, fair termination and conservative exhaustion. Activation-qualified node IDs and a bound composed graph are premises. External resource stops abstract byte/graph limits; they do not prove concrete payload sizing or RSS. |
+| [Indirect targets](AriadneTargetResolution.tla) | `src/bap/target_resolution.rs`, `src/input/materialize.rs`, native `capture.ml` | Added 2026-10-13: frozen captured-control-data premise, signed-offset candidates, unknown alternatives, coverage invalidation and bounded fair termination. Byte/BIL decoding and machine-width expression recognition are producer premises; five finite scenarios do not establish universal refinement. |
 | [Core replay](../mbt/model/AriadneReplay.tla), [stateflow replay](../mbt/stage-e/model/MachineStateReplay.tla) and [cases](../mbt/stage-e/model/MachineStateCases.tla), [IR replay](../mbt/stage-e/model/LLVMIRReplay.tla) and [cases](../mbt/stage-e/model/LLVMIRCases.tla) | `mbt/`, `src/mbt/`, native replay observers | Current deterministic schedules and observation projections; retained corpus/source bindings are preserved. Replay remains finite conformance evidence. |
 
 Address-wrap W0 is still an unimplemented design stage, not an outdated existing
@@ -95,6 +103,16 @@ configurations parse; 13 selected frame traces and 22 scalar probes pass;
 checker dispatch/failure tests use stub tools; default/core/property tests pass.
 These checks are separate from pending remote Apalache typechecking and
 exhaustive TLC safety/liveness qualification. Historical receipts are unchanged.
+
+## Indirect-target qualification
+
+Run `Specs/check-target-resolution.sh` with the pinned Apalache and TLC tools.
+It typechecks `AriadneTargetResolution.tla` and explores the full, partial-table,
+new-incoming, untrusted-memory and zero-budget configurations with one worker.
+The [qualification record](../evidence/Ariadne/indirect-target-resolution/qualification-20261013/report.json)
+retains the five safety/fair-termination results and separate oracle, native,
+replay and mutation evidence. These new checks do not refresh the older
+specification-synchronization campaign or its pending remote clauses.
 
 ## Shared semantic types
 

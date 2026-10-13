@@ -29,6 +29,9 @@ scopes. Contract validation does not prove an arbitrary lifter or pass correct.
 
 **Where to go next.**
 
+- [Captured indirect-target resolution](indirect-target-resolution.md) and
+  [R0–R6 plan](../../Plans/indirect-target-resolution.md) — implemented BAP-based
+  target expressions, completeness receipts and preparation integration.
 - [Integration plan](../../Plans/bap-integration.md) and its
   [execution ledger](../../Plans/bap-integration.md#current-execution-ledger) —
   delivery order and retained semantic-provider/analysis-core decisions.
@@ -63,8 +66,10 @@ scopes. Contract validation does not prove an arbitrary lifter or pass correct.
 [semantic assurance decision](semantic-assurance.md); finite replay is not a
 universal refinement or ISA-step proof. Packaged cross-platform release
 qualification, richer BIR transformations, general memory-alias precision,
-indirect-target enumeration and historical execution reconstruction remain
-outside this delivered contract. Prefix/system/SIMD/x87/loop semantics retain
+general indirect-target enumeration and historical execution reconstruction
+remain outside this delivered contract. The [finite target resolver](indirect-target-resolution.md)
+implements opt-in pointer-slot/table work and records its separate named-corpus
+qualification, new capture profile and compact completion encoding. Prefix/system/SIMD/x87/loop semantics retain
 explicit unsupported outcomes. External Electron acceptance requires its exact
 capture bytes. The selected replacement acceptance excludes historical
 real-Linux coverage and its six output hashes; their unexercised/failed records

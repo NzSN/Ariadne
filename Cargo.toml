@@ -55,6 +55,11 @@ path = "src/bin/bap_admission_validate.rs"
 required-features = ["validation"]
 
 [[bin]]
+name = "target-resolution-validate"
+path = "src/bin/target_resolution_validate.rs"
+required-features = ["validation"]
+
+[[bin]]
 name = "ariadne-bench"
 path = "src/bin/ariadne-bench.rs"
 required-features = ["bench"]
@@ -151,6 +156,11 @@ required-features = ["input"]
 [[test]]
 name = "input_reader"
 path = "tests/input/reader.rs"
+required-features = ["input"]
+
+[[test]]
+name = "input_target_resolution_cli"
+path = "tests/input/target_resolution_cli.rs"
 required-features = ["input"]
 
 [[test]]

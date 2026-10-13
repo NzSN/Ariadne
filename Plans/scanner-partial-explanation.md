@@ -182,6 +182,10 @@ Any proposed semantic or recovery change must first extend the owning design
 and model contract, then receive its own focused implementation and regression
 gate. Preserve unchanged obligations explicitly. Slice relevance may clarify
 presentation; it does not remove a query-wide gap under the existing schema.
+The [captured indirect-target resolver design](../docs/Ariadne/indirect-target-resolution.md)
+and [R0–R6 plan](indirect-target-resolution.md) now implement and qualify that separate finite
+extension for finite pointer/table forms. They do not resolve or qualify this
+Scanner query's indirect sites by themselves.
 
 ### S3 — review entry-origin limits
 

@@ -10,6 +10,16 @@
 
 **Where to go next.**
 
+- [Captured indirect-target inspection manifest](indirect-target-resolution/dump048B-20261012/manifest.json)
+  — original partial-analysis and 58-entry/45-target table inspection artifacts;
+  the [resolver design](../../docs/Ariadne/indirect-target-resolution.md#motivating-windows-capture)
+  distinguishes this motivation from subsequent resolver qualification.
+- [Indirect-target review corrections](indirect-target-resolution/review-corrections-20261013/report.json)
+  — current source-bound portable/root and native source-level checks; pinned
+  native, mutation and full R6 qualification remain pending.
+- [Historical indirect-target qualification](indirect-target-resolution/qualification-20261013/report.json)
+  — original model/oracle/native/capture/replay/mutation checks, full-dump parity
+  and CLI timing; review corrections supersede its broad correctness claim.
 - [P4 acceptance decision](bap-admission/p4-acceptance-20261010.json) — user
   acceptance with remaining historical real-Linux clauses excluded; original
   qualification flags and incomplete optional campaigns remain unchanged.

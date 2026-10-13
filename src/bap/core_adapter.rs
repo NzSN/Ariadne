@@ -329,16 +329,16 @@ impl NativeAnalyzer {
                 "contributors":p.contributors.iter().map(|c| json!({"stream":c.stream,"entry":c.entry,"file_offset":c.file_offset.to_string()})).collect::<Vec<_>>()
             })).collect::<Vec<_>>()
         })).collect::<Vec<_>>();
-        let input = json!({"normalized":encode_request(&request)?, "capture":{
+        let mut input = json!({"normalized":encode_request(&request)?, "capture":{
             "snapshot":context.snapshot_id,"artifact_sha256":context.artifact_sha256,
             "query_id":context.query_id,"semantic_profile":context.semantic_profile,"sites":sites}});
-        Self::start(
-            config,
-            token,
-            request,
-            super::core_protocol::CAPTURED_PROFILE,
-            input,
-        )
+        let profile = if let Some(report) = prepared.target_resolution() {
+            input["target_resolution"] = serde_json::to_value(report)?;
+            super::core_protocol::TARGET_PROFILE
+        } else {
+            super::core_protocol::CAPTURED_PROFILE
+        };
+        Self::start(config, token, request, profile, input)
     }
     pub fn identity(&self) -> &Value {
         self.session.identity()
@@ -425,7 +425,14 @@ impl NativeAnalyzer {
         if let Some(error) = response.error {
             return Err(invalid(error.message));
         }
+        let decoded = std::time::Instant::now();
         let state = decode_state(&self.request, &response.observation)?;
+        if std::env::var_os("ARIADNE_TARGET_DIAGNOSTICS").is_some() {
+            eprintln!(
+                "completion state_decode_ms={}",
+                decoded.elapsed().as_millis()
+            );
+        }
         validate_attribution(&self.request, &state, &response.attribution, &self.evidence)?;
         let result = response
             .result

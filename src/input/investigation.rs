@@ -4,7 +4,6 @@ use crate::investigation::{
     BoundInvestigation, Contributor, EvidenceContext, RecoveryGap, SiteEvidence, Span,
 };
 use crate::{AnalysisView, ByteSource, effects::EffectQuality};
-use sha2::{Digest, Sha256};
 pub(crate) fn validate_opaque_ordinary(
     prepared: &FilePreparedAnalysis,
 ) -> Result<(), crate::investigation::Error> {
@@ -52,6 +51,7 @@ pub(crate) fn capture_context(
     prepared: &FilePreparedAnalysis,
 ) -> Result<EvidenceContext, crate::investigation::Error> {
     validate_opaque_ordinary(prepared)?;
+    prepared.validate_target_resolution()?;
     let report = &prepared.materialization;
     let request = &prepared.prepared.request;
     if prepared.snapshot.snapshot_id != request.snapshot_id
@@ -60,26 +60,16 @@ pub(crate) fn capture_context(
     {
         return Err("prepared query metadata mismatch".into());
     }
-    let mut digest = Sha256::new();
-    digest.update(b"ariadne-minidump-query-v1\0");
-    digest.update(request.snapshot_id.as_bytes());
-    for set in [&report.entry_points, &report.slice_seeds] {
-        digest.update((set.len() as u64).to_le_bytes());
-        for a in set {
-            digest.update(a.to_le_bytes());
-        }
-    }
-    let l = &report.limits;
-    for n in [
-        l.max_starts,
-        l.max_candidates,
-        l.max_prefix_bytes,
-        l.max_decoder_batches,
-        l.batch_size,
-    ] {
-        digest.update((n as u64).to_le_bytes());
-    }
-    if format!("{:x}", digest.finalize()) != report.query_identity {
+    let expected_query = super::materialize::query_identity(
+        &request.snapshot_id,
+        &super::AnalysisQuery {
+            entry_points: report.entry_points.clone(),
+            slice_seeds: report.slice_seeds.clone(),
+        },
+        &report.limits,
+        prepared.target_resolution.as_ref().map(|r| &r.limits),
+    )?;
+    if expected_query != report.query_identity {
         return Err("query identity or resource limits changed".into());
     }
     let mut sites = Vec::new();
@@ -177,13 +167,22 @@ pub(crate) fn capture_context(
         artifact_sha256: prepared.snapshot.artifact_sha256.clone(),
         query_id: report.query_identity.clone(),
         semantic_profile: format!(
-            "{}:{}:{}:{}:{}:{}",
+            "{}:{}:{}:{}:{}:{}{}",
             identity.target,
             identity.decoder,
             identity.protocol,
             identity.ruleset,
             identity.catalogue,
-            tool_binding
+            tool_binding,
+            if prepared.target_resolution.is_some() {
+                format!(
+                    ":{}:{}",
+                    crate::bap::target_resolution::PROFILE,
+                    crate::bap::target_resolution::MEMORY_PREMISE
+                )
+            } else {
+                String::new()
+            }
         ),
         sites,
         recovery_gaps: Vec::new(),

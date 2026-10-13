@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/home/nzsn/Repos/Ariadne-target-resolution-20261012/tools/check_bap_core_replay.py", line 76, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/home/nzsn/Repos/Ariadne-target-resolution-20261012/tools/check_bap_core_replay.py", line 45, in main
+    if sha256(base/path)!=digest: raise RuntimeError(f'stale stage E artifact {path}')
+       ^^^^^^^^^^^^^^^^^
+  File "/home/nzsn/Repos/Ariadne-target-resolution-20261012/mbt/tools.py", line 24, in sha256
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1021, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/nzsn/Repos/Ariadne-target-resolution-20261012/native/llvm_ir/inspect.cpp'

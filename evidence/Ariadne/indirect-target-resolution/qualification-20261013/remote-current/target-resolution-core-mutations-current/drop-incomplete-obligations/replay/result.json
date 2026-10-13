@@ -1,0 +1,388 @@
+{
+  "schema": "ariadne.bap-core-replay/v1",
+  "passed": true,
+  "reports": {
+    "machine-state-mutant": {
+      "analysisBackend": "bap",
+      "cases": [
+        "MachineStateReplay",
+        "MSIncomplete"
+      ],
+      "completedTraces": 1,
+      "coverageSatisfied": false,
+      "engine": "machine-state",
+      "error": "step mismatch on action \"init\": expected {\"case_id\":\"MSIncomplete\",\"feasible_edges\":[{\"dst\":2,\"kind\":\"next\",\"src\":1}],\"infeasible_edges\":[],\"not_reached\":[],\"obligations\":[{\"reason\":\"incomplete-semantics\",\"site\":3}],\"phase\":\"stateflow\",\"snapshot_id\":\"machine-state-snapshot/MSIncomplete\",\"statesAt\":[{\"states\":[\"entry\"],\"va\":1},{\"states\":[],\"va\":2},{\"states\":[],\"va\":3},{\"states\":[],\"va\":4},{\"states\":[],\"va\":5}],\"structural_edges\":[{\"dst\":2,\"kind\":\"next\",\"src\":1},{\"dst\":3,\"kind\":\"next\",\"src\":2},{\"dst\":4,\"kind\":\"taken\",\"src\":3},{\"dst\":5,\"kind\":\"fallthrough\",\"src\":3}],\"terminals\":[],\"unknown_edges\":[{\"dst\":3,\"kind\":\"next\",\"src\":2},{\"dst\":4,\"kind\":\"taken\",\"src\":3},{\"dst\":5,\"kind\":\"fallthrough\",\"src\":3}]}, got {\"case_id\":\"MSIncomplete\",\"feasible_edges\":[{\"dst\":2,\"kind\":\"next\",\"src\":1}],\"infeasible_edges\":[],\"not_reached\":[],\"obligations\":[],\"phase\":\"stateflow\",\"snapshot_id\":\"machine-state-snapshot/MSIncomplete\",\"statesAt\":[{\"states\":[\"entry\"],\"va\":1},{\"states\":[],\"va\":2},{\"states\":[],\"va\":3},{\"states\":[],\"va\":4},{\"states\":[],\"va\":5}],\"structural_edges\":[{\"dst\":2,\"kind\":\"next\",\"src\":1},{\"dst\":3,\"kind\":\"next\",\"src\":2},{\"dst\":4,\"kind\":\"taken\",\"src\":3},{\"dst\":5,\"kind\":\"fallthrough\",\"src\":3}],\"terminals\":[],\"unknown_edges\":[{\"dst\":3,\"kind\":\"next\",\"src\":2},{\"dst\":4,\"kind\":\"taken\",\"src\":3},{\"dst\":5,\"kind\":\"fallthrough\",\"src\":3}]}",
+      "factoryCalls": 1,
+      "gatePassed": true,
+      "initializations": 2,
+      "matchedActions": null,
+      "matchedObservations": null,
+      "matchedPairs": null,
+      "mismatch": {
+        "action": "init",
+        "actual": {
+          "case_id": "MSIncomplete",
+          "feasible_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "1"
+                }
+              }
+            ]
+          },
+          "infeasible_edges": {
+            "#set": []
+          },
+          "not_reached": {
+            "#set": []
+          },
+          "obligations": {
+            "#set": []
+          },
+          "phase": "stateflow",
+          "snapshot_id": "machine-state-snapshot/MSIncomplete",
+          "statesAt": {
+            "#set": [
+              {
+                "states": {
+                  "#set": [
+                    "entry"
+                  ]
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              }
+            ]
+          },
+          "structural_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "3"
+                }
+              }
+            ]
+          },
+          "terminals": {
+            "#set": []
+          },
+          "unknown_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "3"
+                }
+              }
+            ]
+          }
+        },
+        "expected": {
+          "case_id": "MSIncomplete",
+          "feasible_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "1"
+                }
+              }
+            ]
+          },
+          "infeasible_edges": {
+            "#set": []
+          },
+          "not_reached": {
+            "#set": []
+          },
+          "obligations": {
+            "#set": [
+              {
+                "reason": "incomplete-semantics",
+                "site": {
+                  "#bigint": "3"
+                }
+              }
+            ]
+          },
+          "phase": "stateflow",
+          "snapshot_id": "machine-state-snapshot/MSIncomplete",
+          "statesAt": {
+            "#set": [
+              {
+                "states": {
+                  "#set": [
+                    "entry"
+                  ]
+                },
+                "va": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "4"
+                }
+              },
+              {
+                "states": {
+                  "#set": []
+                },
+                "va": {
+                  "#bigint": "5"
+                }
+              }
+            ]
+          },
+          "structural_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "2"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "1"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "3"
+                }
+              }
+            ]
+          },
+          "terminals": {
+            "#set": []
+          },
+          "unknown_edges": {
+            "#set": [
+              {
+                "dst": {
+                  "#bigint": "3"
+                },
+                "kind": "next",
+                "src": {
+                  "#bigint": "2"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "4"
+                },
+                "kind": "taken",
+                "src": {
+                  "#bigint": "3"
+                }
+              },
+              {
+                "dst": {
+                  "#bigint": "5"
+                },
+                "kind": "fallthrough",
+                "src": {
+                  "#bigint": "3"
+                }
+              }
+            ]
+          }
+        },
+        "hints": "[MissingElem { path: [Field(\"obligations\")], expected: Record({\"reason\": Str(\"incomplete-semantics\"), \"site\": Int(3)}) }]"
+      },
+      "mode": "mutant",
+      "modelMatched": false,
+      "observationsDispatched": 6,
+      "portDrops": 1,
+      "schema": "ariadne.stage-e-mirrorrust-replay/v1",
+      "scope": "generated finite campaign replay; supplied semantics and universal refinement are separate boundaries",
+      "semanticDigest": "0ed6eb1bc87bd8abe44c0dd403fb7522c6f6ccf03bbbb12908b5f80150f44245",
+      "status": "mismatch",
+      "executableSha256": "4f299e3da8dcecf8876597b6c5a20592c0032ad484572ce33c4eaf7690b18704"
+    }
+  },
+  "helperManifest": {
+    "schema": "ariadne.bap-core-build/v1",
+    "handshake": {
+      "schema": "ariadne.bap-core-ready/v1",
+      "abi": 2,
+      "compiler": "4.12.1",
+      "bap_revision": "baa902209ee4be975bdd8db7d1160b0a0ec2831f",
+      "sdk_manifest_sha256": "ba8eb693feb66fd77e6b536cce89314fc1e80ef563ac0f720a730557ff392838",
+      "source_hashes": {
+        "recovery.ml": "756d0035c79d946dc2ac2260b49e5c242e452894d3a08d87301a606a264c5c2b",
+        "stateflow.ml": "0717993dad1da8fdf11c9b0d14d35382e70ed4b40891f4deb936c2378d07a568",
+        "capture.ml": "d017153ea34574ce74c0f04cf4c355d798a2d9228fa4935656d87e82a3fd0c86",
+        "project_state.ml": "9cc366a55c4d5fdd74b6689ce172ae4eba823d016c6736af0f2c27438f8c35a9",
+        "main.ml": "699287b78d200966825bcf5ec8cd724d560462a11a1f46feece0219dafaa8c78"
+      },
+      "families": [
+        "recovery",
+        "stateflow"
+      ],
+      "profiles": [
+        "normalized-fixed-input/v1",
+        "captured-fixed-input/v1",
+        "captured-indirect-targets/v1"
+      ],
+      "operations": [
+        "initialize",
+        "advance:Visit",
+        "advance:FinishRecovery",
+        "advance:Propagate",
+        "advance:FinishDataflow",
+        "advance:ExpandSlice",
+        "advance:FinishSlice",
+        "advance:FinishStateflow",
+        "step",
+        "observe",
+        "finish",
+        "reset",
+        "run-batch",
+        "result-page",
+        "result-close"
+      ],
+      "max_frame_bytes": 8388608,
+      "max_addresses": 65536
+    },
+    "helper_sha256": "3b4dc2cd30d790d57af9dbbccb0e03bd1154678d4a6aa32af1be08ee0fea1fab",
+    "lock_sha256": "6f6bd3235ffcdc565ad4ab7e687d6238b85caceee0532f54c56570cbee61992f"
+  },
+  "mirrorSha256": "60219ddae47e9b5764fe91cc3d0b6c86b68d4d3d201c66bedb4e6129b4537f00",
+  "compilerSha256": "562a271ede8cf932bd8b18a81eb772bd403703a58ff5766929a394e848df9ed3",
+  "coreCorpusSha256": "f2172997e54388375b2281b5c28c85c7e7ce7e2cf7dbe72c2e06940afd4980e3",
+  "stateflowCorpusSha256": "a066e40645ba22d2328ba431c7a716172fe453561c0634706a515cedb277f3a1"
+}

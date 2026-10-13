@@ -7,6 +7,8 @@ struct Builder<'a> {
     out: Explanation,
     limits: ExplainLimits,
     evidence: BTreeMap<u64, String>,
+    fact_ids: BTreeSet<String>,
+    claim_ids: BTreeSet<String>,
     links: usize,
 }
 impl Builder<'_> {
@@ -126,7 +128,7 @@ impl Builder<'_> {
         );
         // Reusing a retained claim spends no budget. Admit its fact and claim
         // together so callers never publish a producer with a missing fact.
-        if self.out.claims.iter().any(|c| c.id == claim_id) {
+        if self.claim_ids.contains(&claim_id) {
             return true;
         }
         if self.out.claims.len() >= self.limits.max_claims {
@@ -134,7 +136,7 @@ impl Builder<'_> {
             self.gap("budget-claims", self.out.question.site, Vec::new());
             return false;
         }
-        if !self.out.facts.iter().any(|f| f.id == fact_id) {
+        if self.fact_ids.insert(fact_id.clone()) {
             self.out.facts.push(FactRecord {
                 id: fact_id,
                 scope_id: self.out.scope_id.clone(),
@@ -142,6 +144,7 @@ impl Builder<'_> {
                 evidence_refs: evidence_refs.clone(),
             });
         }
+        self.claim_ids.insert(claim_id.clone());
         self.out.claims.push(Claim {
             id: claim_id,
             scope_id: self.out.scope_id.clone(),
@@ -160,9 +163,20 @@ impl Builder<'_> {
         dependency: bool,
         pending: &mut BTreeSet<u64>,
     ) -> Vec<Producer> {
+        // Definition ordering groups one location's origins contiguously.
+        // Query that group without scanning every unrelated register origin.
         let definitions: Vec<_> = self.bound.state.reaching[&at]
-            .iter()
-            .filter(|d| d.loc == loc)
+            .range(
+                crate::Definition {
+                    loc: loc.into(),
+                    site: 0,
+                    origin: DefinitionOrigin::Entry,
+                }..=crate::Definition {
+                    loc: loc.into(),
+                    site: u64::MAX,
+                    origin: DefinitionOrigin::Instruction,
+                },
+            )
             .cloned()
             .collect();
         let mut result = Vec::new();
@@ -281,6 +295,8 @@ pub fn explain_fault_address(
         bound,
         limits,
         evidence: Default::default(),
+        fact_ids: Default::default(),
+        claim_ids: Default::default(),
         links: 0,
         out: Explanation {
             schema: "ariadne.fault-address-explanation/v1".into(),
@@ -303,6 +319,13 @@ pub fn explain_fault_address(
             truncated: false,
         },
     };
+    if bound
+        .identity
+        .semantic_profile
+        .contains(":captured-indirect-targets/v1:")
+    {
+        b.out.assumptions.push("FrozenCapturedControlData: covered control-data loads use the named captured bytes; target coverage is relative to that snapshot model, not historical memory stability".into());
+    }
     let refs: Vec<_> = b.evidence(question.site).into_iter().collect();
     if !bound.state.decoded.contains(&question.site) {
         b.gap("not-reached", question.site, refs);

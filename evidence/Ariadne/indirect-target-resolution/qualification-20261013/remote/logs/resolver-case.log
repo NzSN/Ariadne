@@ -1,0 +1,8 @@
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-target-resolution-20261012)
+    Finished `release` profile [optimized] target(s) in 18.23s
+Traceback (most recent call last):
+  File "/work/dump048B/resolver-case.py", line 11, in <module>
+    assert r.returncode==0,r.stderr
+           ^^^^^^^^^^^^^^^
+AssertionError: ariadne-minidump: completed result budget
+

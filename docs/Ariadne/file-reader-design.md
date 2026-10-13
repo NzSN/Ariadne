@@ -19,6 +19,9 @@ entry, matching module/build identity and retained instruction evidence.
 
 **Where to go next.**
 
+- [Captured indirect-target resolution](indirect-target-resolution.md) —
+  implemented opt-in captured pointer/table evidence, bounded discovery and
+  finite qualification; the reader stays capture-only.
 - [Completed real-capture plan](../../Plans/completed/priority-1-real-capture-plan.md)
   and controlled-case validation —
   preserve the initial exact-case acceptance and its limits.
@@ -29,7 +32,9 @@ entry, matching module/build identity and retained instruction evidence.
 - [Roadmap](../../ROADMAP.md) — keeps PE/ELF and ELF-core formats outside current scope.
 
 **What remains unresolved.** PE/ELF image and ELF-core sections describe deferred
-designs. Production minidump reads remain capture-only. Matching symbols may
+designs. The [target-resolution extension](indirect-target-resolution.md) adds
+opt-in captured-control-data enumeration to preparation under explicit premises.
+Production minidump reads remain capture-only. Matching symbols may
 justify an entry boundary; they cannot fill capture holes or establish actual
 execution. Qualification remains specific to its artifact, source and query.
 

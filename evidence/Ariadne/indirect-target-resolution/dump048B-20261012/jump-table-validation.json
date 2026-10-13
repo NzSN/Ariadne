@@ -1,0 +1,16 @@
+{
+  "snapshot_sha256": "5fea4ca614706fe0040ed3231efee0edf9ce4004a51d902bb581025b48bade08",
+  "table_sha256": "b4a75eabad91c95274ff5ee828ced7e62e0688b70d3f75dfd545486b659431bf",
+  "entry_count": 58,
+  "unique_targets": 45,
+  "all_three_capture_contributors_agree": true,
+  "cdb_words_match_capture_parser": true,
+  "all_target_prefixes_captured": true,
+  "baseline_ariadne_report_unchanged": true,
+  "automatic_jump_table_resolution_implemented": false,
+  "artifacts": {
+    "jump-table-inspection.json": "fd6f98dbbc9f11e2e3a5143a287ddb2a1cbfcf19422862b557e5aa7e23ba9008",
+    "jump-table.bin": "b4a75eabad91c95274ff5ee828ced7e62e0688b70d3f75dfd545486b659431bf",
+    "cdb-jump-table.log": "fb4f3944119cf1ac82412dbcd64dc020b792c4e5883ab98452416a097fd245e9"
+  }
+}

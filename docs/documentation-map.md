@@ -36,6 +36,7 @@ flowchart TD
 | --- | --- | --- | --- |
 | How do captured instructions yield possible origins? | [Analysis model](../Specs/README.md), [BAP design](Ariadne/bap-analysis-core-design.md) | [Rust reference](implementation.md), [native qualification](Ariadne/bap-analysis-core-design.md#native-qualification) | [Universal refinement and trusted lifting](Ariadne/semantic-assurance.md). |
 | Which bytes and instruction entries are justified? | [File-reader design](Ariadne/file-reader-design.md) | [Input guide](Ariadne/file-reader-design.md#public-interface), [selected capture](Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query) | Capture-only production reader; further file formats remain deferred. |
+| Can captured data resolve an indirect jump? | [Indirect-target resolution](Ariadne/indirect-target-resolution.md) | [R0–R6 plan](../Plans/indirect-target-resolution.md), [captured table inspection](Ariadne/indirect-target-resolution.md#motivating-windows-capture) | Implemented finite profile with source-bound qualification; incoming-state coverage and captured-memory premises remain explicit. |
 | How are instruction dependencies projected? | [BAP projection](Ariadne/bap-analysis-core-design.md#projection) | [Pinned source review](Ariadne/bap-analysis-core-design.md#pinned-projection-source-review), [accepted admission plan](../Plans/bap-projection-admission.md) | Unsupported semantics remain explicit; the accepted corpus is finite. |
 | Which definitions contribute to a fault address? | [Investigation design](Ariadne/investigation-design.md) | [API](Ariadne/investigation-design.md#investigation-module-and-interface), [validation](Ariadne/investigation-design.md#retained-delivery-evidence) | Possible dependencies do not establish execution or a root cause. |
 | Can a memory writer be narrowed to the selected load? | [Memory provenance proposal](Ariadne/memory-provenance-refinement.md) | [Retained Scanner query](Ariadne/bap-analysis-core-design.md#admission-resume) | Bounded alias assessment and output-specific refinements remain proposed. |
@@ -81,6 +82,9 @@ implemented repairs and exercised checks from real-Windows qualification.
 
 ### Project and active plans
 
+- [Captured indirect-target resolver plan](../Plans/indirect-target-resolution.md)
+  — R0–R6 contract, evidence, discovery, native admission and qualification.
+
 - [Active specification synchronization](../Plans/specification-sync.md) —
   source/model audit, preserved replay bindings and qualification boundaries.
 
@@ -106,6 +110,7 @@ implemented repairs and exercised checks from real-Windows qualification.
 
 - [Ariadne architecture](Ariadne/architecture.md).
 - [File readers and immutable address-space preparation](Ariadne/file-reader-design.md).
+- [Captured indirect control target resolution](Ariadne/indirect-target-resolution.md).
 - [BAP semantic and analysis integration](Ariadne/bap-analysis-core-design.md).
 - [Fault-address investigation design](Ariadne/investigation-design.md).
 - [Zero-address assessment design](Ariadne/zero-address-design.md).

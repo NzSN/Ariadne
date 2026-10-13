@@ -152,6 +152,11 @@ defaults to the native BAP analysis backend; `--analysis-backend rust` selects
 the reference analyzer. See the [backend setup](bap-analysis-core-design.md#backend-usage) and
 [investigator examples](#investigator-cli-examples) for helper configuration.
 
+The opt-in [indirect-target extension](indirect-target-resolution.md#evidence-and-product-contract)
+uses base JSON v2 with a separate resolver receipt; disabled mode retains the
+v1 contract below. Its explanation schema remains unchanged and lists the
+captured-control-data premise.
+
 ## JSON v1
 
 The top-level `schema` value is `ariadne-minidump-report-v1`. All semantic

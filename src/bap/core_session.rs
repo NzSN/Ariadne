@@ -1,7 +1,7 @@
 //! Process-per-query transport for the experimental OCaml recovery bootstrap.
 use super::core_protocol::{
     CAPTURED_PROFILE, FamilyObservation, FamilyResponse, MAX_FRAME, Observation, PROFILE,
-    StateflowObservation, profile_query_digest,
+    StateflowObservation, TARGET_PROFILE, profile_query_digest,
 };
 use super::{Error, invalid};
 use serde_json::{Value, json};
@@ -39,6 +39,7 @@ pub struct FamilySession<O: FamilyObservation> {
     snapshot: String,
     query: String,
     session: String,
+    profile: String,
     sequence: u64,
     action_index: u64,
     timeout: Duration,
@@ -65,7 +66,7 @@ impl<O: FamilyObservation> FamilySession<O> {
         profile: &str,
         input: &Value,
     ) -> Result<(Self, FamilyResponse<O>), Error> {
-        if ![PROFILE, CAPTURED_PROFILE].contains(&profile)
+        if ![PROFILE, CAPTURED_PROFILE, TARGET_PROFILE].contains(&profile)
             || (O::FAMILY != "recovery" && profile != PROFILE)
         {
             return Err(invalid("unsupported core input profile"));
@@ -83,11 +84,20 @@ impl<O: FamilyObservation> FamilySession<O> {
         if handshake["schema"] != "ariadne.bap-core-ready/v1"
             || handshake["abi"] != 2
             || handshake["families"] != json!(["recovery", "stateflow"])
-            || handshake["profiles"] != json!([PROFILE, CAPTURED_PROFILE])
+            || (handshake["profiles"] != json!([PROFILE, CAPTURED_PROFILE])
+                && handshake["profiles"] != json!([PROFILE, CAPTURED_PROFILE, TARGET_PROFILE]))
             || handshake["operations"] != json!(super::core_protocol::RECOVERY_OPERATIONS)
             || handshake["max_frame_bytes"] != MAX_FRAME
         {
             return Err(invalid("unsupported core handshake capabilities"));
+        }
+        if !handshake["profiles"]
+            .as_array()
+            .is_some_and(|p| p.contains(&json!(profile)))
+        {
+            return Err(invalid(
+                "native helper lacks the requested input profile; rebuild the helper",
+            ));
         }
         let query = profile_query_digest(snapshot, O::FAMILY, profile, input)?;
         let mut command = Command::new(&config.helper);
@@ -109,7 +119,13 @@ impl<O: FamilyObservation> FamilySession<O> {
             .args([session, snapshot, &query, O::FAMILY])
             .stdin(Stdio::piped())
             .stdout(Stdio::piped())
-            .stderr(Stdio::null())
+            .stderr(
+                if std::env::var_os("ARIADNE_TARGET_DIAGNOSTICS").is_some() {
+                    Stdio::inherit()
+                } else {
+                    Stdio::null()
+                },
+            )
             .spawn()?;
         let mut stdin = child
             .stdin
@@ -164,6 +180,7 @@ impl<O: FamilyObservation> FamilySession<O> {
             snapshot: snapshot.into(),
             query: query.clone(),
             session: session.into(),
+            profile: profile.into(),
             sequence: 0,
             action_index: 0,
             timeout: config.timeout,
@@ -357,6 +374,8 @@ impl FamilySession<Observation> {
     }
     fn finish_paged_inner(&mut self) -> Result<FamilyResponse<Observation>, Error> {
         use super::core_protocol::{COMPLETION_PAGE_BYTES, completion_checksum};
+        let diagnostic = std::env::var_os("ARIADNE_TARGET_DIAGNOSTICS").is_some();
+        let started = Instant::now();
         let metadata = loop {
             let response = self.completion_request("run-batch", json!({"steps":64}))?;
             if !response.data_hex.is_empty() || response.offset != 0 {
@@ -380,6 +399,14 @@ impl FamilySession<Observation> {
             }
         };
         let mut bytes = Vec::with_capacity(metadata.total_bytes);
+        if diagnostic {
+            eprintln!(
+                "completion compute_ms={} encoded_bytes={}",
+                started.elapsed().as_millis(),
+                metadata.total_bytes
+            );
+        }
+        let transferred = Instant::now();
         while bytes.len() < metadata.total_bytes {
             let page = self.completion_request("result-page", json!({"offset":bytes.len()}))?;
             if !page.done
@@ -407,7 +434,55 @@ impl FamilySession<Observation> {
         if completion_checksum(&bytes) != metadata.checksum {
             return Err(invalid("completed result checksum mismatch"));
         }
-        let response: FamilyResponse<Observation> = serde_json::from_slice(&bytes)?;
+        if diagnostic {
+            eprintln!(
+                "completion transfer_ms={}",
+                transferred.elapsed().as_millis()
+            );
+        }
+        // The full immutable envelope is buffered and checksum-bound. Release
+        // the native heap before expanding its dictionary on the Rust side.
+        // Envelope and observation validation still precede returning any result.
+        let closed = self.completion_request("result-close", json!({}))?;
+        if !closed.done
+            || closed.offset != 0
+            || closed.total_bytes != metadata.total_bytes
+            || closed.checksum != metadata.checksum
+            || closed.result_sequence != metadata.result_sequence
+            || !closed.data_hex.is_empty()
+            || closed.action_index != metadata.action_index
+        {
+            return Err(invalid("completion close binding mismatch"));
+        }
+        self.wait_clean()?;
+        let decoded = Instant::now();
+        let response: FamilyResponse<Observation> = if self.profile == TARGET_PROFILE {
+            let compact: FamilyResponse<super::core_protocol::DictionaryObservation> =
+                serde_json::from_slice(&bytes)?;
+            if compact.schema != "ariadne.bap-core-dictionary/v1" {
+                return Err(invalid("completed dictionary schema"));
+            }
+            FamilyResponse {
+                schema: "ariadne.bap-core/v1".into(),
+                session: compact.session,
+                snapshot: compact.snapshot,
+                query: compact.query,
+                family: compact.family,
+                sequence: compact.sequence,
+                generation: compact.generation,
+                action_index: compact.action_index,
+                changed: compact.changed,
+                observation: compact.observation.expand()?,
+                attribution: compact.attribution,
+                error: compact.error,
+                result: compact.result,
+            }
+        } else {
+            serde_json::from_slice(&bytes)?
+        };
+        if diagnostic {
+            eprintln!("completion expansion_ms={}", decoded.elapsed().as_millis());
+        }
         if response.schema != "ariadne.bap-core/v1"
             || response.session != self.session
             || response.snapshot != self.snapshot
@@ -427,18 +502,6 @@ impl FamilySession<Observation> {
             return Err(invalid("completed envelope identity/state mismatch"));
         }
         response.observation.validate_shape()?;
-        let closed = self.completion_request("result-close", json!({}))?;
-        if !closed.done
-            || closed.offset != 0
-            || closed.total_bytes != metadata.total_bytes
-            || closed.checksum != metadata.checksum
-            || closed.result_sequence != metadata.result_sequence
-            || !closed.data_hex.is_empty()
-            || closed.action_index != metadata.action_index
-        {
-            return Err(invalid("completion close binding mismatch"));
-        }
-        self.wait_clean()?;
         Ok(response)
     }
 }

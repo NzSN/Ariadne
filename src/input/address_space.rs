@@ -35,7 +35,7 @@ pub(crate) struct Capture {
     pub offset: usize,
     pub source: CaptureSource,
 }
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 pub(crate) struct Node {
     index: usize,
     end: u128,

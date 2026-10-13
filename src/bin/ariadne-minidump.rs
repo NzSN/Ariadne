@@ -8,7 +8,7 @@ use std::io::{self, Write};
 use std::path::{Path, PathBuf};
 
 fn usage() -> &'static str {
-    "usage: ariadne-minidump DUMP --decoder-reference PATH --entry VA_HEX [--entry VA_HEX ...] [--seed VA_HEX ...] [--seed-exception-rip] [--max-starts N] [--list-frame-paths N:M --path-count-bound NP [--thread-id ID] [--frame-path-limits JSON]] [--stateflow-input SEMANTICS_JSON] [--explain-fault-address VA --memory-access N] [--explanation-only] [--assess-zero-address VA --memory-access N] [--assess-zero-base-offset VA --memory-access N] [--assess-memory-provenance LOAD_VA --memory-access N] [--assessment-only] [--analysis-backend rust|bap] [--bap-core-dir DIR] [--bap-helper PATH] [--bap-runtime DIR] (--format text|dot|json | --output-dir NEW_DIR)"
+    "usage: ariadne-minidump DUMP --decoder-reference PATH --entry VA_HEX [--entry VA_HEX ...] [--seed VA_HEX ...] [--seed-exception-rip] [--max-starts N] [--max-artifact-bytes N] [--resolve-indirect-targets [--target-resolution-limits JSON]] [--list-frame-paths N:M --path-count-bound NP [--thread-id ID] [--frame-path-limits JSON]] [--stateflow-input SEMANTICS_JSON] [--explain-fault-address VA --memory-access N] [--explanation-only] [--assess-zero-address VA --memory-access N] [--assess-zero-base-offset VA --memory-access N] [--assess-memory-provenance LOAD_VA --memory-access N] [--assessment-only] [--analysis-backend rust|bap] [--bap-core-dir DIR] [--bap-core-response-timeout-ms N] [--bap-helper PATH] [--bap-runtime DIR] (--format text|dot|json | --output-dir NEW_DIR)"
 }
 fn invalid(message: impl Into<String>) -> io::Error {
     io::Error::new(io::ErrorKind::InvalidInput, message.into())
@@ -33,6 +33,9 @@ fn parse_va(text: &str) -> Result<u64, Box<dyn Error>> {
 
 struct Args {
     dump: PathBuf,
+    resolve_indirect: bool,
+    target_limits: Option<PathBuf>,
+    max_artifact_bytes: usize,
     decoder: PathBuf,
     entries: ariadne::AddressSet,
     seeds: ariadne::AddressSet,
@@ -56,6 +59,7 @@ struct Args {
     bap_runtime: Option<PathBuf>,
     analysis_backend: String,
     bap_core_dir: PathBuf,
+    bap_response_timeout_ms: u64,
 }
 fn arguments() -> Result<Args, Box<dyn Error>> {
     let mut args = std::env::args_os().skip(1);
@@ -63,6 +67,10 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
     if dump.to_string_lossy().starts_with("--") {
         return Err(invalid(usage()).into());
     }
+    let mut resolve_indirect = false;
+    let mut target_limits = None;
+    let mut max_artifact_bytes = None;
+    let mut bap_response_timeout_ms = None;
     let mut decoder = None;
     let mut entries = ariadne::AddressSet::new();
     let mut seeds = ariadne::AddressSet::new();
@@ -91,6 +99,13 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
         let flag = flag
             .to_str()
             .ok_or_else(|| invalid("non-UTF-8 option name"))?;
+        if flag == "--resolve-indirect-targets" {
+            if resolve_indirect {
+                return Err(invalid("duplicate --resolve-indirect-targets").into());
+            }
+            resolve_indirect = true;
+            continue;
+        }
         if flag == "--assessment-only" {
             if assessment_only {
                 return Err(invalid("duplicate --assessment-only").into());
@@ -114,6 +129,29 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
         }
         let value = args.next().ok_or_else(|| invalid(usage()))?;
         match flag {
+            "--bap-core-response-timeout-ms" if bap_response_timeout_ms.is_none() => {
+                let timeout: u64 = value
+                    .to_str()
+                    .ok_or_else(|| invalid("non-UTF8 response timeout"))?
+                    .parse()?;
+                if timeout == 0 || timeout > 60000 {
+                    return Err(invalid("response timeout must be 1..60000 ms").into());
+                }
+                bap_response_timeout_ms = Some(timeout);
+            }
+            "--target-resolution-limits" if target_limits.is_none() => {
+                target_limits = Some(PathBuf::from(value))
+            }
+            "--max-artifact-bytes" if max_artifact_bytes.is_none() => {
+                let count: usize = value
+                    .to_str()
+                    .ok_or_else(|| invalid("non-UTF8 artifact limit"))?
+                    .parse()?;
+                if count == 0 || count > 2 * 1024 * 1024 * 1024 {
+                    return Err(invalid("artifact limit must be positive and at most 2 GiB").into());
+                }
+                max_artifact_bytes = Some(count);
+            }
             "--analysis-backend" if analysis_backend.is_none() => {
                 let backend = value.to_str().ok_or_else(|| invalid("non-UTF-8 backend"))?;
                 if !["rust", "bap"].contains(&backend) {
@@ -312,7 +350,21 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
     {
         return Err(invalid("assessment requires --assessment-only --format or --output-dir, without stateflow/explanation").into());
     }
+    if target_limits.is_some() && !resolve_indirect {
+        return Err(
+            invalid("--target-resolution-limits requires --resolve-indirect-targets").into(),
+        );
+    }
+    if resolve_indirect
+        && (frame_pair.is_some() || stateflow_input.is_some() || memory_provenance_site.is_some())
+    {
+        return Err(invalid("target resolution cannot combine with frame-path, supplied-stateflow or memory-refinement modes in this profile").into());
+    }
     Ok(Args {
+        resolve_indirect,
+        target_limits,
+        max_artifact_bytes: max_artifact_bytes
+            .unwrap_or_else(|| OpenLimits::default().max_file_bytes),
         dump: PathBuf::from(dump),
         decoder: decoder.unwrap(),
         entries,
@@ -339,6 +391,7 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
         bap_core_dir: bap_core_dir
             .or_else(|| std::env::var_os("ARIADNE_BAP_CORE_DIR").map(PathBuf::from))
             .unwrap_or_else(|| PathBuf::from("target/bap-core-native")),
+        bap_response_timeout_ms: bap_response_timeout_ms.unwrap_or(10000),
     })
 }
 
@@ -468,9 +521,12 @@ fn frame_query(args: &Args, snapshot: &FileSnapshot) -> Result<(), Box<dyn Error
             let prepared = snapshot.prepare_frame_with_bap(&chain, index, entry, &setup)?;
             let completed = if args.analysis_backend == "bap" {
                 let native = ariadne::bap::core_adapter::NativeAnalyzer::from_capture(
-                    &ariadne::bap::core_session::CoreConfig::from_directory(
-                        args.bap_core_dir.clone(),
-                    ),
+                    &ariadne::bap::core_session::CoreConfig {
+                        timeout: std::time::Duration::from_millis(args.bap_response_timeout_ms),
+                        ..ariadne::bap::core_session::CoreConfig::from_directory(
+                            args.bap_core_dir.clone(),
+                        )
+                    },
                     &format!("frame-path-{index}"),
                     &prepared,
                 )?;
@@ -525,7 +581,13 @@ fn frame_query(args: &Args, snapshot: &FileSnapshot) -> Result<(), Box<dyn Error
 }
 fn run() -> Result<(), Box<dyn Error>> {
     let mut args = arguments()?;
-    let snapshot = FileSnapshot::open_minidump(&args.dump, OpenLimits::default())?;
+    let snapshot = FileSnapshot::open_minidump(
+        &args.dump,
+        OpenLimits {
+            max_file_bytes: args.max_artifact_bytes,
+            ..OpenLimits::default()
+        },
+    )?;
     if args.frame_pair.is_some() {
         return frame_query(&args, &snapshot);
     }
@@ -559,7 +621,24 @@ fn run() -> Result<(), Box<dyn Error>> {
     if let Some(runtime) = args.bap_runtime {
         config.runtime = runtime;
     }
-    let prepared = if args.memory_provenance_site.is_some() {
+    let prepared = if args.resolve_indirect {
+        let target_limits = if let Some(path) = &args.target_limits {
+            if fs::metadata(path)?.len() > 8192 {
+                return Err(invalid("target resolution limits byte budget").into());
+            }
+            serde_json::from_value(ariadne::reports::strict_json(&fs::read(path)?)?)?
+        } else {
+            ariadne::bap::target_resolution::Limits::default()
+        };
+        snapshot.prepare_with_bap_target_resolution(
+            &query,
+            &args.decoder,
+            &config,
+            &options,
+            args.limits,
+            target_limits,
+        )?
+    } else if args.memory_provenance_site.is_some() {
         snapshot.prepare_with_bap_refinement(
             &query,
             &args.decoder,
@@ -570,7 +649,8 @@ fn run() -> Result<(), Box<dyn Error>> {
     } else {
         snapshot.prepare_with_bap(&query, &args.decoder, &config, &options, args.limits)?
     };
-    let core_config = ariadne::bap::core_session::CoreConfig::from_directory(args.bap_core_dir);
+    let mut core_config = ariadne::bap::core_session::CoreConfig::from_directory(args.bap_core_dir);
+    core_config.timeout = std::time::Duration::from_millis(args.bap_response_timeout_ms);
     let (analyzer, backend_identity) = if args.analysis_backend == "bap" {
         let native = ariadne::bap::core_adapter::NativeAnalyzer::from_capture(
             &core_config,

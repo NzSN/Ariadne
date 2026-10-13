@@ -1,0 +1,21 @@
+{
+  "rust": {
+    "unsigned-offset": "admitted_capture_dispatch_enumerates_all_45_targets_and_replays_coverage",
+    "big-endian-offset": "admitted_capture_dispatch_enumerates_all_45_targets_and_replays_coverage",
+    "unknown-is-complete": "newly_admitted_guard_bypass_downgrades_coverage_but_preserves_candidates",
+    "lost-clobber": "opaque_call_clobber_does_not_inherit_an_earlier_register_value",
+    "no-graph-binding": "forged_source_expression_premise_and_graph_are_rejected",
+    "subtract-relative-offset": "admitted_capture_dispatch_enumerates_all_45_targets_and_replays_coverage",
+    "seed-becomes-root": "both_platforms_expand_targets_without_promoting_seeds_to_roots",
+    "discard-incoming-alternative": "newly_admitted_guard_bypass_downgrades_coverage_but_preserves_candidates",
+    "wrong-table-scale": "admitted_capture_dispatch_enumerates_all_45_targets_and_replays_coverage",
+    "ignored-guard": "admitted_capture_dispatch_enumerates_all_45_targets_and_replays_coverage",
+    "dropped-missing-entry": "missing_entry_keeps_other_destinations_and_unresolved_alternative",
+    "filtered-unavailable-target": "captured_table_targets_remain_edges_when_destination_code_is_missing",
+    "skipped-premise": "forged_source_expression_premise_and_graph_are_rejected",
+    "skipped-source-identity": "prepared_target_resolution_rejects_changed_semantic_source"
+  },
+  "native": {
+    "native-unsigned-offset": "actual_bap_lifts_and_native_rust_results_agree_on_both_capture_platforms"
+  }
+}

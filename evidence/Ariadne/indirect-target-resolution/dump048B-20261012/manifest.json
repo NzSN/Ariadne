@@ -1,0 +1,48 @@
+{
+  "schema": "ariadne.indirect-target-inspection-manifest/v1",
+  "recorded_date": "2026-10-12",
+  "scope": "Supplementary inspection and retained original partial explanation; not resolver implementation or qualification. Original artifacts are copied byte-for-byte with names below.",
+  "snapshot_sha256": "5fea4ca614706fe0040ed3231efee0edf9ce4004a51d902bb581025b48bade08",
+  "artifacts": {
+    "jump-table-inspection.json": {
+      "original_name": "jump-table-inspection.json",
+      "sha256": "fd6f98dbbc9f11e2e3a5143a287ddb2a1cbfcf19422862b557e5aa7e23ba9008",
+      "bytes": 24868
+    },
+    "jump-table-validation.json": {
+      "original_name": "jump-table-validation.json",
+      "sha256": "b0e7bd85f60b43f170c490f86c14ca3b0eeae5aa73c0c43efa3b0c83290fa9cf",
+      "bytes": 761
+    },
+    "jump-table.bin": {
+      "original_name": "jump-table.bin",
+      "sha256": "b4a75eabad91c95274ff5ee828ced7e62e0688b70d3f75dfd545486b659431bf",
+      "bytes": 232
+    },
+    "cdb-jump-table.log": {
+      "original_name": "cdb-jump-table.log",
+      "sha256": "fb4f3944119cf1ac82412dbcd64dc020b792c4e5883ab98452416a097fd245e9",
+      "bytes": 15629
+    },
+    "baseline-summary.json": {
+      "original_name": "summary.json",
+      "sha256": "54fe952fa65175e3bbdce63c6558eb92a69d8cf5bdb774e779c98ef3c5e8690f",
+      "bytes": 6528
+    },
+    "baseline-explanation.json": {
+      "original_name": "native-report/explanation.json",
+      "sha256": "7750b863d1a18f96954f4007d04176828a81d2b204b795b47b23fc4ae7268867",
+      "bytes": 39737
+    },
+    "baseline-runtime-provenance.json": {
+      "original_name": "runtime-provenance.json",
+      "sha256": "155f8cddf94da93c426cf6777175bf1e7e8ac68349e4867aa0908e1070afd25a",
+      "bytes": 1634
+    },
+    "baseline-parity.json": {
+      "original_name": "parity.json",
+      "sha256": "b825c467479ef3e6f989ba546a61d0f7b5d7beaae8d54de8879d9d7d76ef2335",
+      "bytes": 358
+    }
+  }
+}

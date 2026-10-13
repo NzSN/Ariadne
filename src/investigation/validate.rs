@@ -3,7 +3,7 @@ use crate::{AnalysisRequest, AnalysisState, AnalysisView, Phase};
 use std::collections::{BTreeMap, BTreeSet};
 pub struct BoundInvestigation {
     pub(crate) request: AnalysisRequest,
-    pub(crate) state: AnalysisState,
+    pub(crate) state: std::sync::Arc<AnalysisState>,
     pub(crate) context: EvidenceContext,
     pub(crate) identity: Identity,
     pub(crate) scope: String,
@@ -146,7 +146,7 @@ impl BoundInvestigation {
         let scope = sha(&serde_json::to_vec(&identity)?);
         Ok(Self {
             request: expected.clone(),
-            state: analyzer.state().clone(),
+            state: analyzer.shared_state(),
             sites,
             context,
             identity,

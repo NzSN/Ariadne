@@ -17,6 +17,67 @@
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
+## 2026-10-13 — Follow-up resolver review corrections
+
+The [second review corrections](docs/Ariadne/indirect-target-resolution.md#second-review-corrections)
+align frontier admission with the producer's complete pending stack, require
+passing unmodified mutation controls and the native arithmetic diagnostic, and
+propagate invalid proof data from budget-fitting retention merges. The
+[correction record](evidence/Ariadne/indirect-target-resolution/review-corrections-20261013/report.json)
+binds root/portable checks, nine mutation observer/runner/checker tests and six
+native source-level frontier cases. Those OCaml 5.1 diagnostics are separate
+from pinned SDK/helper qualification. Four native tests, fifteen mutant runs
+and full R6 qualification remain pending; remote source transfer still requires
+the previously requested explicit authorization. Earlier records retain their
+source identities and scope.
+
+## 2026-10-13 — Indirect-target implementation review fixes
+
+The [review follow-up](docs/Ariadne/indirect-target-resolution.md#implementation-review-follow-up)
+fixes bounded-revalidation witness loss, path-combination completeness, actual
+receipt budget admission, repeated charging of shared destinations and duplicate
+JSON construction. Preparation modes and resolver convergence now have explicit
+private types. Regression tests reproduce the two correctness failures and
+verify conservative outcomes after the fixes.
+
+The [review-fix record](evidence/Ariadne/indirect-target-resolution/review-fixes-20261013/report.json)
+binds 144 passing default tests, 46 core-only tests, format, Clippy, layout,
+documentation and four mutation-observer tests. The mutation runner now requires
+fourteen Rust mutants and one native mutant with expected named runtime failures.
+Pinned native and mutation execution remain pending after automatic approval
+review rejected the private source-archive transfer to `windows-dev` until its
+payload and destination are explicitly authorized. The initial qualification
+record below is historical; its R6 correctness claim omitted required mutations,
+and the original native performance gate remains open.
+
+## 2026-10-13 — Captured indirect control targets
+
+The [canonical resolver design](docs/Ariadne/indirect-target-resolution.md) and
+[R0–R6 ledger](Plans/indirect-target-resolution.md) deliver opt-in AMD64 pointer-slot
+and bounded signed-32 relative-table near jumps. Admitted BIL and immutable
+capture reads produce target receipts under `FrozenCapturedControlData`;
+new local destinations expand discovery without making slice seeds roots.
+Both cores retain unknown alternatives and validate final incoming coverage.
+
+The [source-bound record](evidence/Ariadne/indirect-target-resolution/qualification-20261013/report.json)
+retains five Apalache/TLC scenarios, independent oracles, synthetic Windows/Linux
+captures, direct hostile receipt controls, root/native regressions, 330 generated
+replay observations and detection of 9 resolver plus 12 core/stateflow mutants.
+The original 1,305,482,568-byte Windows dump recovers all 45 witnessed dispatch
+edges. Full native/Rust states agree on 3,977 starts, 4,819 edges, a 392-site slice
+and 10,744,212 reaching-definition links. Earlier 46.87 s native / 27.74 s Rust samples remain historical. Current
+native runs complete with an explicit response deadline but exceed the frozen
+60 s CLI criterion; performance acceptance remains open. Lossless native
+completion interning and private delta caches preserve the analysis contract.
+
+R0–R5 are implemented and R6 correctness passes for the named finite corpus;
+the current native CLI timing gate remains unmet. The fault explanation remains
+`Partial`, including incoming RDX and incomplete coverage after graph expansion.
+Real Linux full-dump, full base-report rendering in all formats and packaged
+release qualification are unexercised. Failed earlier trials and the original
+inspection/baseline artifacts retain their identities. No executed-path or root
+cause claim follows.
+
 ## 2026-10-11 — Active specifications synchronized
 
 The [model ownership audit](Specs/README.md#current-model-ownership) and
