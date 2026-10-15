@@ -1,0 +1,10 @@
+﻿{
+    "account":  "win10",
+    "subject":  "CN=DESKTOP-6DKB5JD",
+    "thumbprint_sha1":  "EF945675BA9553B3366C11F4D66FBBD3EAEE3F4A",
+    "fingerprint_sha256":  "4f4490e5d47d2cdf316cc02306c5d8895108b0aab3e67dd77be2054c3f6766ff",
+    "current_user_root":  true,
+    "local_machine_root":  false,
+    "not_after":  "2036-09-08T10:28:57.0000000Z",
+    "endpoint":  "https://192.168.150.219:4080/symbols"
+}

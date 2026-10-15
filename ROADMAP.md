@@ -17,12 +17,12 @@
   question; documentation is written, all implementation/qualification pending.
 
 - [Selected I5b design](docs/Ariadne/zero-base-offset-design.md) and
-  [implementation plan](Plans/i5b-zero-base-offset.md) — the delivered bounded
+  [implementation plan](Plans/completed/i5b-zero-base-offset.md) — the delivered bounded
   zero-base-plus-displacement hypothesis, with B0–B5 implemented and corpus-qualified.
 - [Active plans](Plans/README.md) — turn remaining work into explicit implementation and qualification steps.
 - [Assurance decision](docs/Ariadne/semantic-assurance.md) — defines the BAP trust boundary and retired ISA-proof scope.
 
-**What remains unresolved.** The [projection-admission extension](Plans/bap-projection-admission.md)
+**What remains unresolved.** The [projection-admission extension](Plans/completed/bap-projection-admission.md)
 has P0–P4 accepted: v3 capabilities, conservative ordinary continuation and
 source-bound qualification of the selected finite corpus.
 Its [current replacement record](docs/Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query) qualifies
@@ -42,6 +42,10 @@ investigations using pinned BAP instruction lifting. Ariadne validates its own
 transport, semantic projection, analysis and reports. The independent AMD64
 instruction-step/Lean project and full-manual coverage goal are retired under
 the [semantic assurance decision](docs/Ariadne/semantic-assurance.md).
+
+## Guarded captured-target composition — scoped loop closure delivered
+
+The [design](docs/Ariadne/guarded-target-resolution-design.md), [composition plan](Plans/completed/guarded-target-resolution.md) and [loop plan](Plans/completed/loop-aware-target-resolution.md) deliver paired guarded/target preparation, versioned legacy replay and checked local-region induction. [Qualification dated 2026-10-15](evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) closes DA09 and DADD, all nine original incoming-coverage certificates and all 51 missing-start gates, with full native/Rust parity for both completed queries. The loop rule supplies coverage for already witnessed table entries. Regional guard coverage, the active call anchor and successful frame paths remain separate open work.
 
 ## Investigation direction
 
@@ -68,7 +72,7 @@ and explicit CLI modes are implemented. The [12-gate source/fixture validation](
 passes for its historical sources. The native successor qualifies controlled
 Windows I5a; the later [I4 performance result](docs/Ariadne/workload-performance-design.md#native-investigation-qualification) meets its independent fixed budget; the original Electron case is historical.
 The selected [I5b design](docs/Ariadne/zero-base-offset-design.md) and
-[B0–B5 plan](Plans/i5b-zero-base-offset.md) define a distinct fault-time question:
+[B0–B5 plan](Plans/completed/i5b-zero-base-offset.md) define a distinct fault-time question:
 is the encoded GPR base zero with a nonzero signed displacement? Its first
 profile requires reviewed simple base/displacement decoded facts to agree with
 BAP address evidence. B0–B5 are implemented, with [actual contracts](docs/Ariadne/zero-base-offset-design.md)
@@ -86,6 +90,12 @@ supplies real partial/full captures and correct numeric answers. Its historical
 CLI median was approximately 1.82 s. The [native I5a refresh](docs/Ariadne/zero-address-design.md#native-qualification)
 now qualifies both timing budgets and both capture modes. A read-only dependency
 snapshot prevents concurrent MirrorRust edits from invalidating qualification.
+
+The [proof-gated MOVAPS delivery](docs/Ariadne/justified-branch-pruning-design.md)
+adds opt-in Windows function-entry alignment premises, candidate closure and
+versioned proof validation. G0–G4 finite remote checks pass; default v4 is
+unchanged. Its original dump retry remains unavailable at later XORPS width
+admission, so it does not qualify full-dump frame-path enumeration.
 
 ## Current checkpoint
 

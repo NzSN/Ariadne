@@ -1,0 +1,7 @@
+{
+  "src/bap/core_session.rs": "c8aebd4d3a22dc4bc063bc79cd8816c0c10a00b3d68c3c0388dd7a2f71a6fb92",
+  "src/bap/core_protocol.rs": "4b058d47ff48ef410e179d2953377a8c0498a6512dbbc69fd8bbfa0d5f8a6c7e",
+  "native/bap-core/main.ml": "87144eda122952421bab7749f6f52ec6e9597aa97b70a4afb03de97a4992a51f",
+  "native/bap-core/build.py": "569215eff49614141d3660a1eb6ffa55f8cd74f1cef95b613d419a833dc9ce42",
+  "src/bin/ariadne-minidump.rs": "7b56769f5fd3900f9ac2487c87f90e7d3de611e7ff5b50725a76bff0a4ae98fb"
+}

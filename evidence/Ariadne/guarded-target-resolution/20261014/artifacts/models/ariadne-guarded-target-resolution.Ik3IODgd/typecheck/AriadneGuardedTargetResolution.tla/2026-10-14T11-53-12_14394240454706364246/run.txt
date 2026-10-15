@@ -1,0 +1,1 @@
+ typecheck --out-dir=/tmp/ariadne-guarded-target-resolution.Ik3IODgd/typecheck AriadneGuardedTargetResolution.tla

@@ -24,9 +24,9 @@ mechanisms, and source-bound results with failures and successors preserved.
   CLI samples and full-state/schedule parity to the original capture.
 - [Completed original workload plan](../../Plans/completed/priority-4-workload-performance-plan.md)
   — historical LLVM query, budget and equivalence checks.
-- [Windows replacement plan](../../Plans/i4-windows-repin.md) — independent capture
+- [Windows replacement plan](../../Plans/completed/i4-windows-repin.md) — independent capture
   identity and retained timing failure.
-- [Investigation performance plan](../../Plans/i4-performance-implementation.md)
+- [Investigation performance plan](../../Plans/completed/i4-performance-implementation.md)
   — D0–D3 measured optimizations and exact-query qualification.
 - [Investigation qualification repair](../../Plans/completed/investigation-correctness-fixes.md#1-enforce-the-windows-i4-latency-condition)
   — enforcement of the Windows total-query budget.
@@ -157,7 +157,7 @@ operation counts describe less work while the visible schedule remains equal.
 
 ## Investigation performance
 
-The [D0–D3 plan](../../Plans/i4-performance-implementation.md) was implemented
+The [D0–D3 plan](../../Plans/completed/i4-performance-implementation.md) was implemented
 from baseline `44413f8` and qualified on **2026-10-07** for the exact 98-start
 Windows query below. The dump, entry/fault/access, checksum producer, weak
 memory/call alternatives, report meaning and budgets stayed fixed. Captured
@@ -231,7 +231,7 @@ source-level invariants exercised by replay, not universal refinement proofs.
 The **2026-10-05** re-pin selected an existing partial Windows AMD64 Crashpad
 capture as `crashpad-windows-checksum-98-i4-v1`; no new host crash was generated.
 It replaces the unavailable original Electron artifact as the active I4
-obligation under the [replacement plan](../../Plans/i4-windows-repin.md).
+obligation under the [replacement plan](../../Plans/completed/i4-windows-repin.md).
 The original manifest and failed flags remain unchanged.
 
 | Input/query | Exact pin |

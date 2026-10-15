@@ -26,7 +26,7 @@ records while retaining LLVM's current independent decode/control role.
   — selected-path no-change and later bounded control bindings.
 - [Completed Windows workload stage](../../Plans/completed/priority-4-workload-performance-plan.md#2026-09-30-qualification-run)
   — eight observed forms and measured use of their opaque summaries.
-- [BAP integration plan](../../Plans/bap-integration.md#stage-1-bap-semantic-backend)
+- [BAP integration plan](../../Plans/completed/bap-integration.md#stage-1-bap-semantic-backend)
   — replacement lifting backend under the surviving summary contract.
 - [Semantic assurance](semantic-assurance.md) — trusted lifting, finite conformance
   and retirement of independent instruction-step proofs.

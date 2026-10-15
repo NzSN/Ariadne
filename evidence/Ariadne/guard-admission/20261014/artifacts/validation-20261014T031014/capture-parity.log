@@ -1,0 +1,44 @@
+    Finished `test` profile [unoptimized] target(s) in 0.03s
+     Running tests/input/bap_core.rs (target/guard-build/debug/deps/input_bap_core-bf21726b95b40f73)
+
+running 7 tests
+native kernel_cpu_s=0.001 serialization_cpu_s=0.000 actions=12
+native kernel_cpu_s=0.001 serialization_cpu_s=0.000 actions=15
+native kernel_cpu_s=0.001 serialization_cpu_s=0.001 actions=12
+guarded native admission rejected: guard normal read summary: actual=gpr:rsp:0,gpr:rsp:1,gpr:rsp:2,gpr:rsp:3,gpr:rsp:4,gpr:rsp:5,gpr:rsp:6,gpr:rsp:7,state:other
+test guarded_frame_capture_has_native_parity_and_rejects_direct_proof_tampering ... FAILED
+native kernel_cpu_s=0.001 serialization_cpu_s=0.000 actions=12
+fatal: Recovery.Invalid("opaque ordinary capture contract")
+fatal: Recovery.Invalid("opaque ordinary capture contract")
+fatal: Recovery.Invalid("opaque ordinary capture contract")
+fatal: Recovery.Invalid("opaque ordinary capture contract")
+fatal: Recovery.Invalid("opaque ordinary capture contract")
+native kernel_cpu_s=0.001 serialization_cpu_s=0.000 actions=12
+native kernel_cpu_s=0.001 serialization_cpu_s=0.000 actions=12
+test captured_native_results_and_explanations_match_reference_and_reject_tampering ... ok
+test opaque_ordinary_keeps_old_and_unknown_origins_and_all_format_gaps ... ok
+native kernel_cpu_s=0.000 serialization_cpu_s=0.000 actions=6
+native kernel_cpu_s=0.001 serialization_cpu_s=0.000 actions=12
+test vector_capture_has_native_reference_parity_and_keeps_prior_vector_origins ... ok
+fatal: Recovery.Invalid("opaque ordinary capture contract")
+test native_rejects_opaque_contract_tampering_directly ... ok
+native kernel_cpu_s=0.001 serialization_cpu_s=0.000 actions=15
+native kernel_cpu_s=0.000 serialization_cpu_s=0.000 actions=6
+test observed_chain_recovers_from_one_root_and_empty_lifts_still_stop ... ok
+test native_cli_assessment_and_explanation_preserve_reference_output ... ok
+
+failures:
+
+---- guarded_frame_capture_has_native_parity_and_rejects_direct_proof_tampering stdout ----
+
+thread 'guarded_frame_capture_has_native_parity_and_rejects_direct_proof_tampering' (31827) panicked at tests/input/bap_core.rs:529:10:
+called `Result::unwrap()` on an `Err` value: Custom { kind: InvalidData, error: "native guarded initialize rejected: guard normal read summary: actual=gpr:rsp:0,gpr:rsp:1,gpr:rsp:2,gpr:rsp:3,gpr:rsp:4,gpr:rsp:5,gpr:rsp:6,gpr:rsp:7,state:other" }
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    guarded_frame_capture_has_native_parity_and_rejects_direct_proof_tampering
+
+test result: FAILED. 6 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 31.12s
+
+error: test failed, to rerun pass `--test input_bap_core`

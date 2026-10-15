@@ -1,0 +1,8 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.03s
+     Running tests/bap/disagreement.rs (target/vector-build/debug/deps/bap_disagreement-046ae31d909ed6a5)
+
+running 1 test
+test unix::decode_length_control_and_operand_binding_disagreements_stop_without_fallback ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 15.19s
+

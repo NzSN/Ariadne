@@ -1,0 +1,226 @@
+[
+  {
+    "name": "format-apply",
+    "command": [
+      "cargo",
+      "fmt",
+      "--all"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.6423334999999994
+  },
+  {
+    "name": "composition-oracle",
+    "command": [
+      "python3",
+      "tests/bap/fixtures/composition/oracle.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.03690280000000001
+  },
+  {
+    "name": "guard-oracle",
+    "command": [
+      "python3",
+      "tests/bap/fixtures/guards/oracle.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.044914200000000015
+  },
+  {
+    "name": "format",
+    "command": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.4624587999999994
+  },
+  {
+    "name": "guard-units",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--lib",
+      "bap::guard_admission_tests"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 7.7271052
+  },
+  {
+    "name": "default-tests",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 22.730482984999995
+  },
+  {
+    "name": "core-only",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--no-default-features"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.38671739000000116
+  },
+  {
+    "name": "clippy",
+    "command": [
+      "cargo",
+      "clippy",
+      "--offline",
+      "--locked",
+      "--all-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 6.653268709999999
+  },
+  {
+    "name": "layout",
+    "command": [
+      "python3",
+      "tools/check_rust_layout.py"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.050907571000003315
+  },
+  {
+    "name": "native-build",
+    "command": [
+      "python3",
+      "native/bap-core/build.py",
+      "--output",
+      "target/composed-native"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 5.439104731999997
+  },
+  {
+    "name": "native-frontier",
+    "command": [
+      "python3",
+      "target/guarded-target-resolution-20261014/run-native-frontier.py",
+      "--native-dir",
+      "target/composed-native",
+      "--output",
+      "target/composition-frontier-controls"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.2506669699999975
+  },
+  {
+    "name": "native-conditional-write",
+    "command": [
+      "python3",
+      "target/guarded-target-resolution-20261014/run-native-frontier.py",
+      "--native-dir",
+      "target/composed-native",
+      "--test-file",
+      "tests/bap/conditional_write.ml",
+      "--cases",
+      "3",
+      "--output",
+      "target/conditional-write-native-controls"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.2507574700000035
+  },
+  {
+    "name": "native-kernels",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--test",
+      "bap_core_bootstrap",
+      "--test",
+      "bap_core_analysis",
+      "--test",
+      "bap_core_stateflow",
+      "--",
+      "--ignored"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 17.242631403999994
+  },
+  {
+    "name": "native-capture",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--test",
+      "input_bap_core",
+      "--",
+      "--ignored"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 30.765138713
+  },
+  {
+    "name": "native-composed",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--lib",
+      "actual_bap_pending_store_targets_and_native_rust_results_agree",
+      "--",
+      "--ignored"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 11.827743690000005
+  },
+  {
+    "name": "native-composition-controls",
+    "command": [
+      "python3",
+      "tests/bap/composition_native_controls.py",
+      "--helper",
+      "target/composed-native/ariadne-bap-core",
+      "--input",
+      "/work/guarded-target-resolution-20261014/validation-20261014T101408/passing-combined-wire.json",
+      "--output",
+      "/work/guarded-target-resolution-20261014/validation-20261014T101408/native-controls.json"
+    ],
+    "exit_code": 1,
+    "passed": false,
+    "seconds": 0.04929741000000831
+  }
+]

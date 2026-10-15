@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/home/nzsn/Repos/Ariadne-composed-20261014/tests/bap/fixtures/composition/oracle.py", line 232, in <module>
+    main()
+  File "/home/nzsn/Repos/Ariadne-composed-20261014/tests/bap/fixtures/composition/oracle.py", line 228, in main
+    print(json.dumps(check(contract), sort_keys=True))
+                     ^^^^^^^^^^^^^^^
+  File "/home/nzsn/Repos/Ariadne-composed-20261014/tests/bap/fixtures/composition/oracle.py", line 199, in check
+    raise AssertionError(f"{case['name']}: {actual} != {case['expected']}")
+AssertionError: wrong-guard-snapshot: target-binding != guard-binding

@@ -27,6 +27,10 @@ bounded discovery integration and qualification requirements.
 
 **Where to go next.**
 
+- [Guarded target-resolution composition](guarded-target-resolution-design.md) and its [C0–C6 plan](../../Plans/completed/guarded-target-resolution.md) — proposed integration of resolver discovery and guard proof closure for the nine captured table dispatches.
+
+- [Dump03958 table witness](../../evidence/Ariadne/indirect-target-resolution/dump03958-table-witness-20261014/README.md) — fresh captured reads for nine bounded relative jump tables; numerical candidates are separate from a resolver/guard completion certificate.
+
 - [R0–R6 implementation plan](../../Plans/indirect-target-resolution.md) —
   stage ownership, acceptance gates and execution order for this design.
 - [Core model](../../Specs/Ariadne.tla) and [formal-model guide](../../Specs/README.md)

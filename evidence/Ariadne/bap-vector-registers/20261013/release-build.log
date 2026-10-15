@@ -1,0 +1,2 @@
+error: target `bap-admission-validate` in package `ariadne-analysis` requires the features: `validation`
+Consider enabling them by passing, e.g., `--features="validation"`

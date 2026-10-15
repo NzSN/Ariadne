@@ -37,7 +37,8 @@ flowchart TD
 | How do captured instructions yield possible origins? | [Analysis model](../Specs/README.md), [BAP design](Ariadne/bap-analysis-core-design.md) | [Rust reference](implementation.md), [native qualification](Ariadne/bap-analysis-core-design.md#native-qualification) | [Universal refinement and trusted lifting](Ariadne/semantic-assurance.md). |
 | Which bytes and instruction entries are justified? | [File-reader design](Ariadne/file-reader-design.md) | [Input guide](Ariadne/file-reader-design.md#public-interface), [selected capture](Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query) | Capture-only production reader; further file formats remain deferred. |
 | Can captured data resolve an indirect jump? | [Indirect-target resolution](Ariadne/indirect-target-resolution.md) | [R0–R6 plan](../Plans/indirect-target-resolution.md), [captured table inspection](Ariadne/indirect-target-resolution.md#motivating-windows-capture) | Implemented finite profile with source-bound qualification; incoming-state coverage and captured-memory premises remain explicit. |
-| How are instruction dependencies projected? | [BAP projection](Ariadne/bap-analysis-core-design.md#projection) | [Pinned source review](Ariadne/bap-analysis-core-design.md#pinned-projection-source-review), [accepted admission plan](../Plans/bap-projection-admission.md) | Unsupported semantics remain explicit; the accepted corpus is finite. |
+| Can a pointer-changing loop have complete captured-table targets? | [Guarded target composition and loop-closure design](Ariadne/guarded-target-resolution-design.md#proposed-stable-base-invariant-follow-up) | [C0–C6 delivery ledger](../Plans/completed/guarded-target-resolution.md), [L0–L6 loop-aware plan](../Plans/completed/loop-aware-target-resolution.md) | Composition and local-region induction are qualified within their captured-table scope; DA09/DADD and all nine original certificates close. Full frame paths remain separate. |
+| How are instruction dependencies projected? | [BAP projection](Ariadne/bap-analysis-core-design.md#projection) | [Pinned source review](Ariadne/bap-analysis-core-design.md#pinned-projection-source-review), [accepted admission plan](../Plans/completed/bap-projection-admission.md) | Unsupported semantics remain explicit; the accepted corpus is finite. |
 | Which definitions contribute to a fault address? | [Investigation design](Ariadne/investigation-design.md) | [API](Ariadne/investigation-design.md#investigation-module-and-interface), [validation](Ariadne/investigation-design.md#retained-delivery-evidence) | Possible dependencies do not establish execution or a root cause. |
 | Can a memory writer be narrowed to the selected load? | [Memory provenance proposal](Ariadne/memory-provenance-refinement.md) | [Retained Scanner query](Ariadne/bap-analysis-core-design.md#admission-resume) | Bounded alias assessment and output-specific refinements remain proposed. |
 | Does the fault-time access begin at zero? | [Zero-address design](Ariadne/zero-address-design.md) | [Source review](Ariadne/zero-address-design.md#source-and-finite-admission-review), [native qualification](Ariadne/zero-address-design.md#native-qualification) | Captured-context and finite admission premises apply. |
@@ -88,20 +89,20 @@ implemented repairs and exercised checks from real-Windows qualification.
 - [Active specification synchronization](../Plans/specification-sync.md) —
   source/model audit, preserved replay bindings and qualification boundaries.
 
-- [BAP projection admission and coverage plan](../Plans/bap-projection-admission.md) —
+- [BAP projection admission and coverage plan](../Plans/completed/bap-projection-admission.md) —
   accepted form validation, capability admission and conservative ordinary
   continuation, with qualified finite-corpus exits and excluded historical real-Linux clauses.
 
 - [I5c address-wrap implementation plan](../Plans/i5c-address-wrap.md).
-- [I4 native performance implementation](../Plans/i4-performance-implementation.md).
-- [I5b zero-base-plus-displacement implementation plan](../Plans/i5b-zero-base-offset.md).
-- [Windows I4 replacement plan](../Plans/i4-windows-repin.md).
-- [I5a zero-address implementation plan](../Plans/i5a-zero-address.md).
-- [Native I5a qualification plan](../Plans/i5a-native-qualification.md).
+- [I4 native performance implementation](../Plans/completed/i4-performance-implementation.md).
+- [I5b zero-base-plus-displacement implementation plan](../Plans/completed/i5b-zero-base-offset.md).
+- [Windows I4 replacement plan](../Plans/completed/i4-windows-repin.md).
+- [I5a zero-address implementation plan](../Plans/completed/i5a-zero-address.md).
+- [Native I5a qualification plan](../Plans/completed/i5a-native-qualification.md).
 
 - [Ariadne checkpoints](../CHECKPOINTS.md).
 - [Ariadne plans](../Plans/README.md).
-- [BAP integration plan: semantic backend, then analysis core](../Plans/bap-integration.md).
+- [BAP integration plan: semantic backend, then analysis core](../Plans/completed/bap-integration.md).
 - [Ariadne investigation-layer implementation plan](../Plans/investigation-layer.md).
 - [Ariadne](../README.md).
 - [Ariadne roadmap](../ROADMAP.md).
@@ -127,11 +128,11 @@ implemented repairs and exercised checks from real-Windows qualification.
 
 - [Repository terminology convention](terminology.md).
 - [Crashpad demo build and capture recipe](../native/crashpad-demo/README.md).
-- [Complete Stage 2 execution plan](../Plans/bap-stage2-implementation.md).
-- [Stage 2 A0 plan](../Plans/bap-stage2-a0.md).
-- [OCaml foundation qualification plan](../Plans/bap-ocaml-qualification.md).
+- [Complete Stage 2 execution plan](../Plans/completed/bap-stage2-implementation.md).
+- [Stage 2 A0 plan](../Plans/completed/bap-stage2-a0.md).
+- [OCaml foundation qualification plan](../Plans/completed/bap-ocaml-qualification.md).
 - [Native BAP analysis core](../native/bap-core/README.md) — default algorithms and separately labeled historical A0 probe.
-- [BAP Windows workload replacement plan](../Plans/bap-windows-repin.md).
+- [BAP Windows workload replacement plan](../Plans/completed/bap-windows-repin.md).
 - [Rust machine-analysis implementation](implementation.md).
 - [LLVM MC byte-span adapter](llvm-mc-adapter.md).
 - [Rust design for abstract machine-state analysis](machine-state-design.md).

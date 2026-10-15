@@ -25,7 +25,7 @@ entry, matching module/build identity and retained instruction evidence.
 - [Completed real-capture plan](../../Plans/completed/priority-1-real-capture-plan.md)
   and controlled-case validation —
   preserve the initial exact-case acceptance and its limits.
-- [Real-capture re-pin plan](../../Plans/real-capture-repin-79938.md) — applies
+- [Real-capture re-pin plan](../../Plans/completed/real-capture-repin-79938.md) — applies
   this entry/evidence contract to the accepted Windows replacement corpus.
 - [Investigation design](investigation-design.md) — turns a bound query,
   possible producers and retained gaps into a fault-address explanation.
@@ -488,7 +488,7 @@ each of two Breakpad fixtures, without identifying matching `driver` or
 `crash.exe` symbol artifacts beside them. That historical observation showed
 byte availability, not independently witnessed predecessor paths. The
 [controlled-case validation](#historical-controlled-chromium-capture) and later
-[replacement plan](../../Plans/real-capture-repin-79938.md) retain their own
+[replacement plan](../../Plans/completed/real-capture-repin-79938.md) retain their own
 artifact-specific entry evidence.
 
 ### Evidence chain
@@ -540,7 +540,7 @@ possible-producer slice can still have unresolved dependencies; it does not
 claim a complete execution history or root cause.
 
 The [completed real-capture plan](../../Plans/completed/priority-1-real-capture-plan.md)
-and [Windows replacement plan](../../Plans/real-capture-repin-79938.md) define
+and [Windows replacement plan](../../Plans/completed/real-capture-repin-79938.md) define
 their acceptance scopes. This contract adds no executable-file fallback,
 reverse-from-RIP boundary heuristic, historical execution reconstruction,
 interprocedural return matching or fault/commit semantics. The independent

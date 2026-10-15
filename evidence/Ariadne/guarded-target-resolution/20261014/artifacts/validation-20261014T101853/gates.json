@@ -1,0 +1,106 @@
+[
+  {
+    "name": "native-composition-controls",
+    "command": [
+      "python3",
+      "tests/bap/composition_native_controls.py",
+      "--helper",
+      "target/composed-native/ariadne-bap-core",
+      "--input",
+      "/work/guarded-target-resolution-20261014/validation-20261014T101853/passing-combined-wire.json",
+      "--output",
+      "/work/guarded-target-resolution-20261014/validation-20261014T101853/native-controls.json"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.3521736000000004
+  },
+  {
+    "name": "native-composition-mutations",
+    "command": [
+      "python3",
+      "target/guarded-target-resolution-20261014/run-native-mutations.py",
+      "--helper",
+      "target/composed-native/ariadne-bap-core",
+      "--input",
+      "/work/guarded-target-resolution-20261014/validation-20261014T101853/passing-combined-wire.json",
+      "--output",
+      "target/native-composition-mutants",
+      "--drop-derived-builds"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 14.4052985
+  },
+  {
+    "name": "native-frame-path",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--test",
+      "input_frame_paths",
+      "--",
+      "--ignored"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 29.853200451
+  },
+  {
+    "name": "contract-tools",
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools",
+      "-p",
+      "test_bap_core_contract.py"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.11702934800000264
+  },
+  {
+    "name": "guard-mutation-seams",
+    "command": [
+      "python3",
+      "tools/check_guard_admission_mutations.py",
+      "--check-seams"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.026962595999997063
+  },
+  {
+    "name": "release-build",
+    "command": [
+      "cargo",
+      "build",
+      "--offline",
+      "--locked",
+      "--release",
+      "--features",
+      "validation",
+      "--lib",
+      "--bin",
+      "ariadne-minidump"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 22.087060965999996
+  },
+  {
+    "name": "composition-model",
+    "command": [
+      "bash",
+      "Specs/check-guarded-target-resolution.sh"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 9.456551621000003
+  }
+]

@@ -1,8 +1,8 @@
-"""Strict v2-to-v3 metadata migration; preserve the historical byte oracle."""
+"""Strict v2-to-current metadata migration; preserve the historical byte oracle."""
 import copy,hashlib,io,json,subprocess,tarfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-V2='bap-bit-provenance-v2';V3='bap-bit-provenance-v3'
+V2='bap-bit-provenance-v2';V3='bap-bit-provenance-v3';V4='bap-bit-provenance-v4';V6='bap-bit-provenance-v6'
 # P0's pre-runtime source snapshot; verified against all frozen source hashes.
 BASELINE_REVISION='ebb2e534e8da339f498f20d0a9e1e0b8506a3bdd'
 def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
@@ -38,7 +38,7 @@ def profile_binding(report,explanation):
 def replacements(report,explanation):
  """Normalize only declared profile metadata and its resolved content graph IDs."""
  profile=report['identity']['effects_ruleset']
- if profile not in (V2,V3):raise ValueError('unexpected comparison profile')
+ if profile not in (V2,V3,V4,V6):raise ValueError('unexpected comparison profile')
  profile_binding(report,explanation)
  values={profile:'bap-bit-provenance-profile-migration',explanation['identity']['semantic_profile']:'validated-projection-profile-migration',
          explanation['scope_id']:'validated-projection-scope-migration'}

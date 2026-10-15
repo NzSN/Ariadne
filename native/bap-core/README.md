@@ -92,8 +92,8 @@ the [analysis contract](../../docs/Ariadne/bap-analysis-core-design.md).
 shutdown. Observations come from this state; the Rust reference is used only
 by external acceptance tests. Normalized summary terms do not claim new lifting.
 `NativeAnalyzer::finish` drives recovery through batches of at most 64 existing
-actions, then validates ordered final-result pages and clean shutdown. Each frame
-remains below 8 MiB; final results are bounded at 256 MiB. Ordinary per-action
+actions, then validates ordered final-result pages and clean shutdown. Response frames
+remain bounded at 8 MiB; final results are bounded at 256 MiB. Request frames default to 8 MiB and accept a positive caller-selected budget through `CoreConfig.max_request_bytes` or CLI `--bap-core-max-request-bytes N`, with exact host/native startup negotiation. See the [request contract](../../docs/Ariadne/bap-analysis-core-design.md#configurable-native-request-limit). Ordinary per-action
 replay and finite stateflow keep their original operation path.
 
 The qualification checker runs source-bound native tests, hostile protocol and

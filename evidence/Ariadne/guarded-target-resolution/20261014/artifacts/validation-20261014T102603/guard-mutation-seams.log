@@ -1,0 +1,55 @@
+{
+  "seamsUnique": true,
+  "cargoInvoked": false,
+  "mutations": [
+    {
+      "name": "empty-or-top-proves-alignment",
+      "source": "src/bap/guard_admission.rs",
+      "tests": [
+        "bap::guard_admission_tests::direct_guard_verdicts_match_frozen_independent_product_graph",
+        "bap::guard_admission_tests::barriers_limits_and_unreached_facts_never_admit_a_normal_outcome"
+      ],
+      "contract": "Empty and top cannot justify normal admission."
+    },
+    {
+      "name": "omit-candidate-predecessor-replay",
+      "source": "src/bap/guard_admission.rs",
+      "tests": [
+        "bap::guard_admission_tests::replay_rejects_omitted_roots_candidate_predecessors_and_tampering"
+      ],
+      "contract": "Replay must identify an omitted candidate predecessor before verdict validation."
+    },
+    {
+      "name": "ignore-source-control-barrier",
+      "source": "src/bap/guard_admission.rs",
+      "tests": [
+        "bap::guard_admission_tests::unreviewed_source_control_is_a_barrier_even_with_forged_ordinary_metadata"
+      ],
+      "contract": "A later RSP reset cannot certify unknown source control."
+    },
+    {
+      "name": "omit-actual-premise-identities",
+      "source": "src/bap/guard_admission.rs",
+      "tests": [
+        "bap::guard_admission_tests::final_identity_binds_actual_premises_and_request_without_hash_cycles"
+      ],
+      "contract": "Actual premise instances belong to intent and receipt identities; policy alone is insufficient."
+    },
+    {
+      "name": "pending-transfer-needs-normal-projection",
+      "source": "src/bap/guard_admission.rs",
+      "tests": [
+        "bap::guard_admission_tests::joined_paths_and_changing_loops_prevent_false_alignment"
+      ],
+      "contract": "The checked candidate RSP relation precedes normal selection and permits identity-loop closure."
+    },
+    {
+      "name": "normal-store-kills-old-memory",
+      "source": "src/bap/projection.rs",
+      "tests": [
+        "bap::guard_admission_tests::selected_normal_store_retains_weak_memory_definition_and_original_source"
+      ],
+      "contract": "Selecting the normal store retains its empty memory must-def set."
+    }
+  ]
+}

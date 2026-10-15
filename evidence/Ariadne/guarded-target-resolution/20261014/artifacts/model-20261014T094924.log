@@ -1,0 +1,550 @@
+Guarded-target composition model artifacts: /tmp/ariadne-guarded-target-resolution.rTGeqceE
+{"captured_reference": {"entries": 370, "tables": 9, "targets": 64}, "epoch_cases": 5, "frontier_cases": 4, "graph_cases": 15, "numeric_cases": 12, "receipt_cases": 32, "schema": "ariadne.guarded-target-composition-oracle-result/v1", "status": "pass"}
+Model checking completed. No error has been found.
+  Estimates of the probability that TLC did not check all reachable states
+  because two distinct states had the same fingerprint:
+  calculated (optimistic):  val = 6.7E-17
+72 states generated, 44 distinct states found, 0 states left on queue.
+The depth of the complete state graph search is 23.
+The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 3 and the 95th percentile is 3).
+Finished in 00s at (2026-10-14 09:49:31)
+Model checking completed. No error has been found.
+  Estimates of the probability that TLC did not check all reachable states
+  because two distinct states had the same fingerprint:
+  calculated (optimistic):  val = 8.2E-17
+79 states generated, 47 distinct states found, 0 states left on queue.
+The depth of the complete state graph search is 23.
+The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 3 and the 95th percentile is 3).
+Finished in 00s at (2026-10-14 09:49:31)
+Model checking completed. No error has been found.
+  Estimates of the probability that TLC did not check all reachable states
+  because two distinct states had the same fingerprint:
+  calculated (optimistic):  val = 4.5E-17
+58 states generated, 33 distinct states found, 0 states left on queue.
+The depth of the complete state graph search is 15.
+The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 3 and the 95th percentile is 3).
+Finished in 00s at (2026-10-14 09:49:31)
+Model checking completed. No error has been found.
+  Estimates of the probability that TLC did not check all reachable states
+  because two distinct states had the same fingerprint:
+  calculated (optimistic):  val = 1.5E-16
+109 states generated, 69 distinct states found, 0 states left on queue.
+The depth of the complete state graph search is 28.
+The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 3 and the 95th percentile is 2).
+Finished in 00s at (2026-10-14 09:49:32)
+Model checking completed. No error has been found.
+  Estimates of the probability that TLC did not check all reachable states
+  because two distinct states had the same fingerprint:
+  calculated (optimistic):  val = 4.5E-17
+58 states generated, 33 distinct states found, 0 states left on queue.
+The depth of the complete state graph search is 15.
+The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 3 and the 95th percentile is 3).
+Finished in 00s at (2026-10-14 09:49:32)
+Model checking completed. No error has been found.
+  Estimates of the probability that TLC did not check all reachable states
+  because two distinct states had the same fingerprint:
+  calculated (optimistic):  val = 6.7E-17
+72 states generated, 44 distinct states found, 0 states left on queue.
+The depth of the complete state graph search is 23.
+The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 3 and the 95th percentile is 3).
+Finished in 00s at (2026-10-14 09:49:33)
+Model checking completed. No error has been found.
+  Estimates of the probability that TLC did not check all reachable states
+  because two distinct states had the same fingerprint:
+  calculated (optimistic):  val = 4.3E-17
+57 states generated, 32 distinct states found, 0 states left on queue.
+The depth of the complete state graph search is 14.
+The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 3 and the 95th percentile is 3).
+Finished in 00s at (2026-10-14 09:49:33)
+Model checking completed. No error has been found.
+  Estimates of the probability that TLC did not check all reachable states
+  because two distinct states had the same fingerprint:
+  calculated (optimistic):  val = 4.5E-17
+58 states generated, 33 distinct states found, 0 states left on queue.
+The depth of the complete state graph search is 15.
+The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 3 and the 95th percentile is 3).
+Finished in 00s at (2026-10-14 09:49:34)
+Model checking completed. No error has been found.
+  Estimates of the probability that TLC did not check all reachable states
+  because two distinct states had the same fingerprint:
+  calculated (optimistic):  val = 0.0
+31 states generated, 31 distinct states found, 0 states left on queue.
+The depth of the complete state graph search is 11.
+The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 3 and the 95th percentile is 1).
+Finished in 00s at (2026-10-14 09:49:34)
+Model checking completed. No error has been found.
+  Estimates of the probability that TLC did not check all reachable states
+  because two distinct states had the same fingerprint:
+  calculated (optimistic):  val = 3.3E-17
+50 states generated, 30 distinct states found, 0 states left on queue.
+The depth of the complete state graph search is 15.
+The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 3 and the 95th percentile is 3).
+Finished in 00s at (2026-10-14 09:49:35)
+Model checking completed. No error has been found.
+  Estimates of the probability that TLC did not check all reachable states
+  because two distinct states had the same fingerprint:
+  calculated (optimistic):  val = 5.8E-17
+66 states generated, 37 distinct states found, 0 states left on queue.
+The depth of the complete state graph search is 16.
+The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 3 and the 95th percentile is 3).
+Finished in 00s at (2026-10-14 09:49:35)
+Model checking completed. No error has been found.
+  Estimates of the probability that TLC did not check all reachable states
+  because two distinct states had the same fingerprint:
+  calculated (optimistic):  val = 6.7E-17
+72 states generated, 44 distinct states found, 0 states left on queue.
+The depth of the complete state graph search is 23.
+The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 3 and the 95th percentile is 3).
+Finished in 00s at (2026-10-14 09:49:36)
+Model checking completed. No error has been found.
+  Estimates of the probability that TLC did not check all reachable states
+  because two distinct states had the same fingerprint:
+  calculated (optimistic):  val = 4.5E-17
+58 states generated, 33 distinct states found, 0 states left on queue.
+The depth of the complete state graph search is 15.
+The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 3 and the 95th percentile is 3).
+Finished in 00s at (2026-10-14 09:49:36)
+Model checking completed. No error has been found.
+  Estimates of the probability that TLC did not check all reachable states
+  because two distinct states had the same fingerprint:
+  calculated (optimistic):  val = 0.0
+1 states generated, 1 distinct states found, 0 states left on queue.
+The depth of the complete state graph search is 1.
+The average outdegree of the complete state graph is 0 (minimum is 0, the maximum 0 and the 95th percentile is 0).
+Finished in 00s at (2026-10-14 09:49:37)
+Model checking completed. No error has been found.
+  Estimates of the probability that TLC did not check all reachable states
+  because two distinct states had the same fingerprint:
+  calculated (optimistic):  val = 0.0
+1 states generated, 1 distinct states found, 0 states left on queue.
+The depth of the complete state graph search is 1.
+The average outdegree of the complete state graph is 0 (minimum is 0, the maximum 0 and the 95th percentile is 0).
+Finished in 00s at (2026-10-14 09:49:37)
+TLC2 Version 2026.10.06.014338 (rev: 94d0c50)
+Running breadth-first search Model-Checking with fp 115 and seed -3382586856517975342 with 1 worker on 32 cores with 13394MB heap and 64MB offheap memory [pid: 3808] (Linux 6.6.87.2-microsoft-standard-WSL2 amd64, Ubuntu 21.0.12.1 64bit, MSBDiskFPSet, DiskStateQueue).
+Parsing file /home/nzsn/Repos/Ariadne-composed-20261014/Specs/AriadneGuardedTargetResolution.tla
+Parsing file /tmp/tlc-6507059110294406961/Integers.tla (jar:file:/home/nzsn/Repos/Ariadne/tmp/qualification-packages/tla2tools-v1.8.0.jar!/tla2sany/StandardModules/Integers.tla)
+Parsing file /tmp/tlc-6507059110294406961/FiniteSets.tla (jar:file:/home/nzsn/Repos/Ariadne/tmp/qualification-packages/tla2tools-v1.8.0.jar!/tla2sany/StandardModules/FiniteSets.tla)
+Parsing file /tmp/tlc-6507059110294406961/Sequences.tla (jar:file:/home/nzsn/Repos/Ariadne/tmp/qualification-packages/tla2tools-v1.8.0.jar!/tla2sany/StandardModules/Sequences.tla)
+Parsing file /tmp/tlc-6507059110294406961/_TLCTrace.tla (jar:file:/home/nzsn/Repos/Ariadne/tmp/qualification-packages/tla2tools-v1.8.0.jar!/tla2sany/StandardModules/_TLCTrace.tla)
+Parsing file /tmp/tlc-6507059110294406961/Naturals.tla (jar:file:/home/nzsn/Repos/Ariadne/tmp/qualification-packages/tla2tools-v1.8.0.jar!/tla2sany/StandardModules/Naturals.tla)
+Parsing file /tmp/tlc-6507059110294406961/TLC.tla (jar:file:/home/nzsn/Repos/Ariadne/tmp/qualification-packages/tla2tools-v1.8.0.jar!/tla2sany/StandardModules/TLC.tla)
+Parsing file /tmp/tlc-6507059110294406961/TLCExt.tla (jar:file:/home/nzsn/Repos/Ariadne/tmp/qualification-packages/tla2tools-v1.8.0.jar!/tla2sany/StandardModules/TLCExt.tla)
+Semantic processing of module Naturals
+Semantic processing of module Integers
+Semantic processing of module Sequences
+Semantic processing of module FiniteSets
+Semantic processing of module TLC
+Semantic processing of module TLCExt
+Semantic processing of module _TLCTrace
+Semantic processing of module AriadneGuardedTargetResolution
+Linting of module TLCExt
+Linting of module _TLCTrace
+Linting of module AriadneGuardedTargetResolution
+Starting... (2026-10-14 09:49:38)
+Implied-temporal checking--satisfiability problem has 1 branches.
+Computing initial states...
+Finished computing initial states: 1 distinct state generated at 2026-10-14 09:49:38.
+Error: TLC threw an unexpected exception.
+This was probably caused by an error in the spec or model.
+See the User Output or TLC Console for clues to what happened.
+The exception was a java.lang.RuntimeException
+: In evaluation, the identifier scope is either undefined or not an operator.
+line 147, col 30 to line 147, col 34 of module AriadneGuardedTargetResolution
+Error: The behavior up to this point is:
+State 1: <Initial predicate>
+/\ phase = "discover"
+/\ epoch = 0
+/\ decision = "pending"
+/\ normalStore = FALSE
+/\ guardExhausted = FALSE
+/\ sites = {1, 2, 3, 6}
+/\ opaque = {}
+/\ sealed = FALSE
+/\ extraEdges = {}
+/\ receiptGraph = [ scope |->
+      [ snapshot |-> 1,
+        intent |-> 1,
+        activation |-> 1,
+        roots |-> {1},
+        seeds |-> {6},
+        premises |->
+            {"checked-windows-call-entry", "frozen-captured-control-data"} ],
+  sites |-> {1, 2, 3, 6},
+  barriers |-> {},
+  opaque |-> {},
+  covered |-> TRUE,
+  complete |-> FALSE,
+  epoch |-> 0,
+  original |-> {[src |-> 1, dst |-> 2]},
+  pending |-> {[src |-> 2, dst |-> 3]},
+  augmentation |-> {},
+  frontier |-> {},
+  frontierCovered |-> TRUE ]
+/\ remaining = 0..2
+/\ guardVerdict = "none"
+/\ updates = 0
+/\ covered = TRUE
+/\ lateChecked = TRUE
+/\ targets = {}
+/\ targetReceiptEpoch = -1
+/\ finalEdges = {}
+/\ targetReceiptComplete = FALSE
+/\ barriers = {}
+/\ spent = 0
+/\ pendingSites = {}
+/\ scope = [ snapshot |-> 1,
+  intent |-> 1,
+  activation |-> 1,
+  roots |-> {1},
+  seeds |-> {6},
+  premises |-> {"checked-windows-call-entry", "frozen-captured-control-data"} ]
+/\ facts = <<{8}, {}, {}, {}, {}, {}>>
+/\ complete = FALSE
+/\ guardReceiptEpoch = -1
+/\ inspected = {}
+
+State 2: <Next line 301, col 10 to line 301, col 36 of module AriadneGuardedTargetResolution>
+/\ phase = "discover"
+/\ epoch = 1
+/\ decision = "pending"
+/\ normalStore = FALSE
+/\ guardExhausted = FALSE
+/\ sites = {1, 2, 3, 6}
+/\ opaque = {}
+/\ sealed = FALSE
+/\ extraEdges = {}
+/\ receiptGraph = [ scope |->
+      [ snapshot |-> 1,
+        intent |-> 1,
+        activation |-> 1,
+        roots |-> {1},
+        seeds |-> {6},
+        premises |->
+            {"checked-windows-call-entry", "frozen-captured-control-data"} ],
+  sites |-> {1, 2, 3, 6},
+  barriers |-> {},
+  opaque |-> {},
+  covered |-> TRUE,
+  complete |-> FALSE,
+  epoch |-> 0,
+  original |-> {[src |-> 1, dst |-> 2]},
+  pending |-> {[src |-> 2, dst |-> 3]},
+  augmentation |-> {},
+  frontier |-> {},
+  frontierCovered |-> TRUE ]
+/\ remaining = {1, 2}
+/\ guardVerdict = "none"
+/\ updates = 0
+/\ covered = TRUE
+/\ lateChecked = TRUE
+/\ targets = {4}
+/\ targetReceiptEpoch = -1
+/\ finalEdges = {}
+/\ targetReceiptComplete = FALSE
+/\ barriers = {}
+/\ spent = 1
+/\ pendingSites = {4}
+/\ scope = [ snapshot |-> 1,
+  intent |-> 1,
+  activation |-> 1,
+  roots |-> {1},
+  seeds |-> {6},
+  premises |-> {"checked-windows-call-entry", "frozen-captured-control-data"} ]
+/\ facts = <<{8}, {}, {}, {}, {}, {}>>
+/\ complete = FALSE
+/\ guardReceiptEpoch = -1
+/\ inspected = {0}
+
+State 3: <Next line 301, col 10 to line 301, col 36 of module AriadneGuardedTargetResolution>
+/\ phase = "discover"
+/\ epoch = 2
+/\ decision = "pending"
+/\ normalStore = FALSE
+/\ guardExhausted = FALSE
+/\ sites = {1, 2, 3, 6}
+/\ opaque = {}
+/\ sealed = FALSE
+/\ extraEdges = {}
+/\ receiptGraph = [ scope |->
+      [ snapshot |-> 1,
+        intent |-> 1,
+        activation |-> 1,
+        roots |-> {1},
+        seeds |-> {6},
+        premises |->
+            {"checked-windows-call-entry", "frozen-captured-control-data"} ],
+  sites |-> {1, 2, 3, 6},
+  barriers |-> {},
+  opaque |-> {},
+  covered |-> TRUE,
+  complete |-> FALSE,
+  epoch |-> 0,
+  original |-> {[src |-> 1, dst |-> 2]},
+  pending |-> {[src |-> 2, dst |-> 3]},
+  augmentation |-> {},
+  frontier |-> {},
+  frontierCovered |-> TRUE ]
+/\ remaining = {2}
+/\ guardVerdict = "none"
+/\ updates = 0
+/\ covered = TRUE
+/\ lateChecked = TRUE
+/\ targets = {4, 5}
+/\ targetReceiptEpoch = -1
+/\ finalEdges = {}
+/\ targetReceiptComplete = FALSE
+/\ barriers = {}
+/\ spent = 2
+/\ pendingSites = {4, 5}
+/\ scope = [ snapshot |-> 1,
+  intent |-> 1,
+  activation |-> 1,
+  roots |-> {1},
+  seeds |-> {6},
+  premises |-> {"checked-windows-call-entry", "frozen-captured-control-data"} ]
+/\ facts = <<{8}, {}, {}, {}, {}, {}>>
+/\ complete = FALSE
+/\ guardReceiptEpoch = -1
+/\ inspected = {0, 1}
+
+State 4: <Next line 301, col 10 to line 301, col 36 of module AriadneGuardedTargetResolution>
+/\ phase = "discover"
+/\ epoch = 3
+/\ decision = "pending"
+/\ normalStore = FALSE
+/\ guardExhausted = FALSE
+/\ sites = {1, 2, 3, 6}
+/\ opaque = {}
+/\ sealed = FALSE
+/\ extraEdges = {}
+/\ receiptGraph = [ scope |->
+      [ snapshot |-> 1,
+        intent |-> 1,
+        activation |-> 1,
+        roots |-> {1},
+        seeds |-> {6},
+        premises |->
+            {"checked-windows-call-entry", "frozen-captured-control-data"} ],
+  sites |-> {1, 2, 3, 6},
+  barriers |-> {},
+  opaque |-> {},
+  covered |-> TRUE,
+  complete |-> FALSE,
+  epoch |-> 0,
+  original |-> {[src |-> 1, dst |-> 2]},
+  pending |-> {[src |-> 2, dst |-> 3]},
+  augmentation |-> {},
+  frontier |-> {},
+  frontierCovered |-> TRUE ]
+/\ remaining = {}
+/\ guardVerdict = "none"
+/\ updates = 0
+/\ covered = TRUE
+/\ lateChecked = TRUE
+/\ targets = {4, 5}
+/\ targetReceiptEpoch = -1
+/\ finalEdges = {}
+/\ targetReceiptComplete = FALSE
+/\ barriers = {}
+/\ spent = 3
+/\ pendingSites = {4, 5}
+/\ scope = [ snapshot |-> 1,
+  intent |-> 1,
+  activation |-> 1,
+  roots |-> {1},
+  seeds |-> {6},
+  premises |-> {"checked-windows-call-entry", "frozen-captured-control-data"} ]
+/\ facts = <<{8}, {}, {}, {}, {}, {}>>
+/\ complete = FALSE
+/\ guardReceiptEpoch = -1
+/\ inspected = {0, 1, 2}
+
+State 5: <Next line 301, col 43 to line 301, col 76 of module AriadneGuardedTargetResolution>
+/\ phase = "discover"
+/\ epoch = 4
+/\ decision = "pending"
+/\ normalStore = FALSE
+/\ guardExhausted = FALSE
+/\ sites = {1, 2, 3, 4, 6}
+/\ opaque = {}
+/\ sealed = FALSE
+/\ extraEdges = {}
+/\ receiptGraph = [ scope |->
+      [ snapshot |-> 1,
+        intent |-> 1,
+        activation |-> 1,
+        roots |-> {1},
+        seeds |-> {6},
+        premises |->
+            {"checked-windows-call-entry", "frozen-captured-control-data"} ],
+  sites |-> {1, 2, 3, 6},
+  barriers |-> {},
+  opaque |-> {},
+  covered |-> TRUE,
+  complete |-> FALSE,
+  epoch |-> 0,
+  original |-> {[src |-> 1, dst |-> 2]},
+  pending |-> {[src |-> 2, dst |-> 3]},
+  augmentation |-> {},
+  frontier |-> {},
+  frontierCovered |-> TRUE ]
+/\ remaining = {}
+/\ guardVerdict = "none"
+/\ updates = 0
+/\ covered = TRUE
+/\ lateChecked = TRUE
+/\ targets = {4, 5}
+/\ targetReceiptEpoch = -1
+/\ finalEdges = {}
+/\ targetReceiptComplete = FALSE
+/\ barriers = {}
+/\ spent = 3
+/\ pendingSites = {5}
+/\ scope = [ snapshot |-> 1,
+  intent |-> 1,
+  activation |-> 1,
+  roots |-> {1},
+  seeds |-> {6},
+  premises |-> {"checked-windows-call-entry", "frozen-captured-control-data"} ]
+/\ facts = <<{8}, {}, {}, {}, {}, {}>>
+/\ complete = FALSE
+/\ guardReceiptEpoch = -1
+/\ inspected = {0, 1, 2}
+
+State 6: <Next line 301, col 43 to line 301, col 76 of module AriadneGuardedTargetResolution>
+/\ phase = "discover"
+/\ epoch = 5
+/\ decision = "pending"
+/\ normalStore = FALSE
+/\ guardExhausted = FALSE
+/\ sites = {1, 2, 3, 4, 5, 6}
+/\ opaque = {}
+/\ sealed = FALSE
+/\ extraEdges = {}
+/\ receiptGraph = [ scope |->
+      [ snapshot |-> 1,
+        intent |-> 1,
+        activation |-> 1,
+        roots |-> {1},
+        seeds |-> {6},
+        premises |->
+            {"checked-windows-call-entry", "frozen-captured-control-data"} ],
+  sites |-> {1, 2, 3, 6},
+  barriers |-> {},
+  opaque |-> {},
+  covered |-> TRUE,
+  complete |-> FALSE,
+  epoch |-> 0,
+  original |-> {[src |-> 1, dst |-> 2]},
+  pending |-> {[src |-> 2, dst |-> 3]},
+  augmentation |-> {},
+  frontier |-> {},
+  frontierCovered |-> TRUE ]
+/\ remaining = {}
+/\ guardVerdict = "none"
+/\ updates = 0
+/\ covered = TRUE
+/\ lateChecked = TRUE
+/\ targets = {4, 5}
+/\ targetReceiptEpoch = -1
+/\ finalEdges = {}
+/\ targetReceiptComplete = FALSE
+/\ barriers = {}
+/\ spent = 3
+/\ pendingSites = {}
+/\ scope = [ snapshot |-> 1,
+  intent |-> 1,
+  activation |-> 1,
+  roots |-> {1},
+  seeds |-> {6},
+  premises |-> {"checked-windows-call-entry", "frozen-captured-control-data"} ]
+/\ facts = <<{8}, {}, {}, {}, {}, {}>>
+/\ complete = FALSE
+/\ guardReceiptEpoch = -1
+/\ inspected = {0, 1, 2}
+
+State 7: <FinishDiscovery line 217, col 3 to line 224, col 64 of module AriadneGuardedTargetResolution>
+/\ phase = "propagate"
+/\ epoch = 6
+/\ decision = "pending"
+/\ normalStore = FALSE
+/\ guardExhausted = FALSE
+/\ sites = {1, 2, 3, 4, 5, 6}
+/\ opaque = {}
+/\ sealed = FALSE
+/\ extraEdges = {}
+/\ receiptGraph = [ scope |->
+      [ snapshot |-> 1,
+        intent |-> 1,
+        activation |-> 1,
+        roots |-> {1},
+        seeds |-> {6},
+        premises |->
+            {"checked-windows-call-entry", "frozen-captured-control-data"} ],
+  sites |-> {1, 2, 3, 6},
+  barriers |-> {},
+  opaque |-> {},
+  covered |-> TRUE,
+  complete |-> FALSE,
+  epoch |-> 0,
+  original |-> {[src |-> 1, dst |-> 2]},
+  pending |-> {[src |-> 2, dst |-> 3]},
+  augmentation |-> {},
+  frontier |-> {},
+  frontierCovered |-> TRUE ]
+/\ remaining = {}
+/\ guardVerdict = "none"
+/\ updates = 0
+/\ covered = TRUE
+/\ lateChecked = TRUE
+/\ targets = {4, 5}
+/\ targetReceiptEpoch = -1
+/\ finalEdges = {}
+/\ targetReceiptComplete = FALSE
+/\ barriers = {}
+/\ spent = 3
+/\ pendingSites = {}
+/\ scope = [ snapshot |-> 1,
+  intent |-> 1,
+  activation |-> 1,
+  roots |-> {1},
+  seeds |-> {6},
+  premises |-> {"checked-windows-call-entry", "frozen-captured-control-data"} ]
+/\ facts = <<{8}, {}, {}, {}, {}, {}>>
+/\ complete = TRUE
+/\ guardReceiptEpoch = -1
+/\ inspected = {0, 1, 2}
+
+Error: The error occurred when TLC was evaluating the nested
+expressions at the following positions:
+0. Line 304, column 42 to line 304, column 45 in AriadneGuardedTargetResolution
+1. Line 301, column 9 to line 303, column 48 in AriadneGuardedTargetResolution
+2. Line 301, column 9 to line 303, column 37 in AriadneGuardedTargetResolution
+3. Line 303, column 28 to line 303, column 37 in AriadneGuardedTargetResolution
+4. Line 275, column 3 to line 286, column 67 in AriadneGuardedTargetResolution
+5. Line 275, column 6 to line 275, column 60 in AriadneGuardedTargetResolution
+6. Line 275, column 6 to line 275, column 34 in AriadneGuardedTargetResolution
+7. Line 275, column 6 to line 275, column 24 in AriadneGuardedTargetResolution
+8. Line 275, column 29 to line 275, column 34 in AriadneGuardedTargetResolution
+9. Line 275, column 39 to line 275, column 60 in AriadneGuardedTargetResolution
+10. Line 276, column 6 to line 276, column 67 in AriadneGuardedTargetResolution
+11. Line 276, column 6 to line 276, column 49 in AriadneGuardedTargetResolution
+12. Line 276, column 6 to line 276, column 20 in AriadneGuardedTargetResolution
+13. Line 276, column 25 to line 276, column 49 in AriadneGuardedTargetResolution
+14. Line 276, column 54 to line 276, column 67 in AriadneGuardedTargetResolution
+15. Line 277, column 6 to line 277, column 27 in AriadneGuardedTargetResolution
+16. Line 278, column 6 to line 278, column 40 in AriadneGuardedTargetResolution
+17. Line 279, column 6 to line 279, column 42 in AriadneGuardedTargetResolution
+18. Line 280, column 6 to line 280, column 64 in AriadneGuardedTargetResolution
+19. Line 281, column 6 to line 281, column 36 in AriadneGuardedTargetResolution
+20. Line 281, column 22 to line 281, column 36 in AriadneGuardedTargetResolution
+21. Line 281, column 22 to line 281, column 35 in AriadneGuardedTargetResolution
+22. Line 147, column 19 to line 151, column 78 in AriadneGuardedTargetResolution
+23. Line 147, column 30 to line 147, column 34 in AriadneGuardedTargetResolution
+
+
+44 states generated, 22 distinct states found, 0 states left on queue.
+The depth of the complete state graph search is 7.
+Finished in 00s at (2026-10-14 09:49:38)
+Trace exploration spec path: ./AriadneGuardedTargetResolution_TTrace_1791971377.tla

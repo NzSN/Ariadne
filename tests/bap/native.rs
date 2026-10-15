@@ -21,6 +21,78 @@ fn make_backend() -> Backend {
 
 #[test]
 #[ignore = "requires pinned BAP/LLVM native helpers"]
+fn vector_producer_tracks_coarse_state_and_retains_alignment_refusal() {
+    let mut backend = make_backend();
+    let cases = [
+        (0x401000, "0f11b42440020000", "store"), // movups [rsp+240h],xmm6
+        (0x402000, "0f10b42440020000", "load"),  // movups xmm6,[rsp+240h]
+        (0x403000, "0f28c6", "register"),        // movaps xmm0,xmm6
+        (0x404000, "0f29b42440020000", "aligned"), // movaps [rsp+240h],xmm6
+        (0x405000, "c5f810f7", "register"),      // vmovups xmm6,xmm7 (VEX low half)
+        (0x406000, "c5fc10f7", "register"),      // vmovups ymm6,ymm7 (256 bits)
+        (0x407000, "0f57c0", "xorps"),           // captured XORPS xmm0,xmm0
+    ];
+    for (va, hex, case) in cases {
+        let batch = backend
+            .prepare(
+                "vector-producer",
+                &[(va, Some(bytes(hex)))].into(),
+                &PreparationOptions::default(),
+                DecoderTarget::WindowsAmd64,
+            )
+            .unwrap();
+        let site = &batch.sites[&va];
+        let semantic = site.evidence.semantic.as_ref().unwrap();
+        assert_eq!(semantic.projection, "bap-bit-provenance-v6");
+        assert!(semantic.fallback.is_none());
+        assert!(!site.instruction.must_defs.contains("state:other"));
+        if case == "aligned" {
+            assert!(!site.decodable);
+            assert_eq!(semantic.status, "opaque-unsupported");
+            assert!(
+                semantic
+                    .gaps
+                    .iter()
+                    .any(|g| g == "unmodeled BIL control/special/loop semantics")
+            );
+            assert!(!semantic.gaps.iter().any(|g| g.contains("namespace")));
+            continue;
+        }
+        assert!(site.decodable, "{case}: {:?}", semantic.gaps);
+        assert_eq!(semantic.status, "projected");
+        assert_eq!(
+            site.instruction.fall,
+            [va + site.evidence.length as u64].into()
+        );
+        assert!(
+            semantic
+                .gaps
+                .contains(&"vector-state-coarsened:state:other".into())
+        );
+        if case == "store" {
+            assert!(site.instruction.uses.contains("state:other"));
+            assert_eq!(site.instruction.may_defs, ["memory:any".into()].into());
+            assert_eq!(semantic.memory_accesses.len(), 1);
+            assert_eq!(semantic.memory_accesses[0].access_width, 128);
+            assert!(
+                !semantic.memory_accesses[0]
+                    .address_inputs
+                    .contains("state:other")
+            );
+        } else {
+            assert_eq!(site.instruction.may_defs, ["state:other".into()].into());
+            assert!(site.instruction.uses.contains(if case == "load" {
+                "memory:any"
+            } else {
+                "state:other"
+            }));
+        }
+    }
+    backend.finish().unwrap();
+}
+
+#[test]
+#[ignore = "requires pinned BAP/LLVM native helpers"]
 fn independent_decoder_process_is_reused_across_snapshot_batches() {
     let mut backend = make_backend();
     let options = PreparationOptions::default();
@@ -216,7 +288,7 @@ fn observed_admission_forms_match_frozen_effects_and_address_footprints() {
             }
             let semantic = site.evidence.semantic.as_ref().unwrap();
             assert_eq!(semantic.status, "projected", "{}", row["name"]);
-            assert_eq!(semantic.projection, "bap-bit-provenance-v3");
+            assert_eq!(semantic.projection, "bap-bit-provenance-v6");
             assert!(semantic.fallback.is_none());
             if site.instruction.kind != ariadne::InstructionKind::Jump {
                 assert_eq!(

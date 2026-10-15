@@ -1,0 +1,65 @@
+[
+  {
+    "name": "format",
+    "command": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 1.0716545999999987
+  },
+  {
+    "name": "loop-fixtures",
+    "command": [
+      "python3",
+      "tests/bap/fixtures/loop-closure/extract.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 1.5128880000000002
+  },
+  {
+    "name": "loop-oracle",
+    "command": [
+      "python3",
+      "tests/bap/fixtures/loop-closure/oracle.py",
+      "--check",
+      "--output",
+      "/loop-work/evidence/validation-20261015T044254/oracle.json"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.09868230000000011
+  },
+  {
+    "name": "loop-tests",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--lib",
+      "bap::target_resolution::loop_tests"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 10.463689492999997
+  },
+  {
+    "name": "default-tests",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked"
+    ],
+    "exit_code": 101,
+    "passed": false,
+    "seconds": 28.471245276
+  }
+]

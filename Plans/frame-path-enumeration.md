@@ -5,6 +5,8 @@
 **Status.** Source/API/CLI implementation and finite fixture/native checks added
 on 2026-10-11 for the strict `returned_count < NP` question. Full model, mutation
 and actual full-dump qualification remain pending.
+The [2026-10-13 dump03958 application attempt](../evidence/Ariadne/frame-paths/dump03958-20261013/report.md)
+ran the CLI and an explicitly larger-budget API probe; both returned unavailable.
 
 **Why this document exists.** The [owning investigation design](../docs/Ariadne/investigation-design.md#bounded-frame-to-frame-path-listing)
 relaxes historical-path reconstruction to a bounded list of structural alternatives
@@ -26,8 +28,9 @@ memory-writer candidates remain the compatibility baseline.
 **What remains unresolved.** General Windows/Linux unwinding, JIT/inline/tail-call
 recovery, exception handlers and actual executed history are outside the initial
 profile. Model/mutation and real full-dump qualification require their own records.
-Previously recorded remote SSH endpoints are unavailable; retain unexercised
-remote gates rather than substituting a local heavy campaign.
+Remote endpoints were unavailable at the initial checkpoint. The 2026-10-13
+application used windows-dev successfully; model/mutation gates were not run
+in that task and remain unexercised.
 
 ## Stages and ownership
 
@@ -90,6 +93,18 @@ target/frame-path-mutations-current`. The independent non-building seam check is
 qualification needs externally retained captured artifacts, independent frame
 inspection and named byte/query/tool identities; synthetic minidumps cannot
 substitute for that tier.
+
+On 2026-10-13, the [real-dump attempt](../evidence/Ariadne/frame-paths/dump03958-20261013/report.md)
+preserved the default runtime-table refusal and a distinct larger-budget public
+API probe. Two physical frames were recovered in the latter; unsupported
+caller vector semantics prevented active-call binding, while an XMM unwind
+recipe stopped older recovery. Neither attempt enumerated paths or satisfies
+the successful full-dump acceptance gate. Broader runtime/read budgets, vector
+alignment-exception admission and XMM unwind support remain separate follow-up decisions.
+The [later finite vector namespace extension](completed/bap-vector-registers.md) admits
+XMM/YMM and its [source-bound retry](../evidence/Ariadne/bap-vector-registers/20261013/report.md)
+advances the semantic refusal to MOVAPS's alignment-exception branch. Namespace
+support is delivered; the caller graph and unavailable frame-path answer remain.
 
 ## Property-based extension
 

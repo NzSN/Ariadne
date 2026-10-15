@@ -1,4 +1,5 @@
 //! BAP is the sole semantic producer. LLVM supplies decoded facts only.
+use super::{OPAQUE_ORDINARY_RULE, PROJECTION};
 use crate::bap::{Config, Error, Session, invalid};
 use crate::{
     Address, InstructionKind,
@@ -12,10 +13,10 @@ use std::{
     path::{Path, PathBuf},
     time::{Duration, Instant},
 };
-const PROJECTION: &str = "bap-bit-provenance-v3";
 #[derive(Clone, Copy, Debug, Default)]
 pub struct Metrics {
     pub reference_processes: u64,
+    pub helper_processes: u64,
     pub runtime_validation: Duration,
     pub reference_decode: Duration,
     pub helper_startup: Duration,
@@ -38,8 +39,17 @@ pub struct Backend {
     refinement_bytes: usize,
     retain_targets: bool,
     target_transfers: BTreeMap<Address, super::target_resolution::Transfer>,
+    retain_guards: bool,
+    guard_sites: BTreeMap<Address, super::guard_admission::CandidateSite>,
+    query_total: usize,
+    query_limit: usize,
 }
-fn stop(site: &mut PreparedSite, options: &PreparationOptions, va: Address) {
+pub(crate) struct GuardNormalProjection {
+    pub instruction: crate::Instruction,
+    pub memory_accesses: Vec<crate::effects::MemoryAccessEvidence>,
+    pub gaps: Vec<String>,
+}
+pub(crate) fn stop(site: &mut PreparedSite, options: &PreparationOptions, va: Address) {
     site.instruction.uses = options.catalogue.locations();
     site.instruction.may_defs = options.catalogue.locations();
     site.instruction.must_defs.clear();
@@ -63,6 +73,91 @@ fn stop(site: &mut PreparedSite, options: &PreparationOptions, va: Address) {
     }
 }
 impl Backend {
+    pub(crate) fn guard_normal_projection(
+        ast: &str,
+        opcode: &str,
+        bytes: &[u8],
+        va: Address,
+    ) -> Result<GuardNormalProjection, Error> {
+        let bil: Vec<super::ast::Stmt> = serde_json::from_str(ast)?;
+        let projection =
+            super::projection::project_with_destination(&bil, opcode, bytes, va, None)?;
+        if !projection.targets.is_empty() {
+            return Err(invalid("guard normal selection changes control"));
+        }
+        Ok(GuardNormalProjection {
+            instruction: crate::Instruction {
+                kind: InstructionKind::Ordinary,
+                fall: [va
+                    .checked_add(bytes.len() as u64)
+                    .ok_or_else(|| invalid("guard next address overflow"))?]
+                .into(),
+                targets: Default::default(),
+                complete: true,
+                uses: projection.uses,
+                may_defs: projection.may_defs,
+                must_defs: projection.must_defs,
+            },
+            memory_accesses: super::address::extract(&bil, va),
+            gaps: projection.gaps,
+        })
+    }
+    pub(crate) fn guard_producer(&self) -> super::guard_admission::Producer {
+        super::guard_admission::Producer {
+            helper_sha256: self.helper_hash.clone(),
+            runtime_sha256: self.runtime_hash.clone(),
+            decoder_sha256: self.decoder_hash.clone(),
+            projection: super::guard_admission::PRODUCER_PROFILE.into(),
+        }
+    }
+    /// Apply only a selection replayed over the frozen candidate graph.
+    pub(crate) fn finalize_guard(
+        site: &mut PreparedSite,
+        va: Address,
+        normal_ast: Option<&str>,
+        residual: &str,
+        options: &PreparationOptions,
+    ) -> Result<(), Error> {
+        let semantic = site
+            .evidence
+            .semantic
+            .as_mut()
+            .ok_or_else(|| invalid("guard semantic source absent"))?;
+        semantic
+            .gaps
+            .retain(|g| g != "normal-or-alignment-fault-pending");
+        if let Some(ast) = normal_ast {
+            let projection = Self::guard_normal_projection(
+                ast,
+                site.evidence.opcode.as_deref().unwrap_or(""),
+                &site.evidence.bytes,
+                va,
+            )?;
+            site.instruction = projection.instruction;
+            site.evidence.quality = EffectQuality::ExternalLifted;
+            site.evidence.rule = Some(super::guard_admission::PRODUCER_PROFILE.into());
+            let semantic = site.evidence.semantic.as_mut().expect("checked semantic");
+            semantic.status = "projected".into();
+            semantic.memory_accesses = projection.memory_accesses;
+            semantic.gaps.extend(projection.gaps);
+            semantic
+                .gaps
+                .push("alignment-normal-under-recorded-premises".into());
+        } else {
+            semantic.status = "guard-not-admitted".into();
+            semantic.gaps.push(residual.into());
+            stop(site, options, va);
+        }
+        Ok(())
+    }
+    pub(crate) fn enable_guard_admission(&mut self) {
+        self.retain_guards = true;
+    }
+    pub(crate) fn take_guard_sites(
+        &mut self,
+    ) -> BTreeMap<Address, super::guard_admission::CandidateSite> {
+        std::mem::take(&mut self.guard_sites)
+    }
     pub(crate) fn enable_target_resolution(&mut self) {
         self.retain_targets = true;
     }
@@ -81,6 +176,17 @@ impl Backend {
     }
     pub fn metrics(&self) -> Metrics {
         self.metrics
+    }
+    /// Immutable aggregate bound selected by the owning captured-query builder.
+    /// A child process keeps its independent fixed protocol capacity.
+    pub(crate) fn set_query_site_limit(&mut self, limit: usize) -> Result<(), Error> {
+        if self.snapshot.is_some() || self.query_total != 0 {
+            return Err(invalid(
+                "BAP query site limit cannot change after preparation starts",
+            ));
+        }
+        self.query_limit = limit;
+        Ok(())
     }
     pub fn finish(mut self) -> Result<(), Error> {
         if crate::reports::sha256(&std::fs::read(&self.decoder)?) != self.decoder_hash {
@@ -119,6 +225,10 @@ impl Backend {
             refinement_bytes: 0,
             retain_targets: false,
             target_transfers: BTreeMap::new(),
+            retain_guards: false,
+            guard_sites: BTreeMap::new(),
+            query_total: 0,
+            query_limit: super::session::MAX_SESSION_SITES,
         })
     }
     pub fn prepare(
@@ -153,7 +263,12 @@ impl Backend {
             return Err(invalid("decode reference changed between snapshot batches"));
         }
         self.metrics.reference_decode += start.elapsed();
-        batch.identity.ruleset = PROJECTION.into();
+        let profile = if self.retain_guards {
+            super::guard_admission::PRODUCER_PROFILE
+        } else {
+            PROJECTION
+        };
+        batch.identity.ruleset = profile.into();
         let available: BTreeMap<_, _> = candidates
             .iter()
             .filter_map(|(&a, b)| b.as_ref().map(|b| (a, b.clone())))
@@ -161,20 +276,47 @@ impl Backend {
         if available.is_empty() {
             return Ok(batch);
         }
+        if available.len() > 256 {
+            return Err(invalid("invalid BAP batch size"));
+        }
+        let query_total = self
+            .query_total
+            .checked_add(available.len())
+            .filter(|n| *n <= self.query_limit)
+            .ok_or_else(|| invalid("BAP query site budget exceeded"))?;
+        if self
+            .session
+            .as_ref()
+            .is_some_and(|s| s.remaining_sites() < available.len())
+        {
+            // Rotation changes transport lifetime only. Aggregate evidence,
+            // query identity, source hashes and selected budgets remain owned
+            // by this backend; no child may exceed its fixed protocol cap.
+            self.session
+                .take()
+                .expect("capacity checked session")
+                .finish()?;
+        }
         if self.session.is_none() {
             let start = Instant::now();
-            self.session = Some(Session::start(
+            let session = Session::start(
                 &self.config,
                 snapshot,
                 match target {
                     DecoderTarget::WindowsAmd64 => "windows-amd64",
                     DecoderTarget::LinuxAmd64 => "linux-amd64",
                 },
-            )?);
+            )?;
+            if session.helper_hash != self.helper_hash {
+                return Err(invalid("BAP helper changed during query initialization"));
+            }
+            self.session = Some(session);
+            self.metrics.helper_processes += 1;
             self.metrics.helper_startup += start.elapsed();
         }
         let start = Instant::now();
         let lifts = self.session.as_mut().unwrap().lift(&available)?;
+        self.query_total = query_total;
         if self.session.as_ref().unwrap().helper_hash != self.helper_hash {
             return Err(invalid("BAP helper changed during query initialization"));
         }
@@ -190,7 +332,7 @@ impl Backend {
                 backend: "bap-x86-legacy".into(),
                 helper_sha256: self.helper_hash.clone(),
                 runtime_sha256: self.runtime_hash.clone(),
-                projection: PROJECTION.into(),
+                projection: profile.into(),
                 status: "opaque-unsupported".into(),
                 ast_sha256: Some(crate::reports::sha256(&ast)),
                 fallback: None,
@@ -202,6 +344,10 @@ impl Backend {
                 semantic
                     .gaps
                     .push("invalid-or-short-captured-prefix".into());
+                if self.retain_guards {
+                    self.guard_sites
+                        .insert(va, guard_source(site, va, &ast, true)?);
+                }
                 site.evidence.semantic = Some(semantic);
                 continue;
             }
@@ -218,6 +364,10 @@ impl Backend {
                 semantic.status = "decode-disagreement".into();
                 semantic.gaps.push("decode-disagreement".into());
                 stop(site, options, va);
+                if self.retain_guards {
+                    self.guard_sites
+                        .insert(va, guard_source(site, va, &ast, true)?);
+                }
                 site.evidence.semantic = Some(semantic);
                 continue;
             }
@@ -226,6 +376,7 @@ impl Backend {
                 .as_ref()
                 .ok_or_else(|| invalid("missing decoded BAP control facts"))?;
             let kind = site.instruction.kind;
+            let raw_control = site.instruction.clone();
             let compatible = match kind {
                 InstructionKind::Ordinary => {
                     !p.jump && !p.conditional && !p.indirect && !p.control && !p.call && !p.return_
@@ -261,6 +412,43 @@ impl Backend {
                     address: va,
                     reason: GapReason::OpaqueEffects,
                 });
+            } else if self.retain_guards
+                && super::guard_admission::recognize_pending(
+                    &super::guard_admission::CandidateSite {
+                        site: format!("0x{va:016x}"),
+                        bytes_hex: lift.bytes.clone(),
+                        ast: String::from_utf8(ast.clone())?,
+                        control: super::guard_admission::CandidateControl::from_instruction(
+                            &raw_control,
+                        ),
+                        opaque: true,
+                    },
+                )?
+                .is_some()
+            {
+                // This graph-only continuation commits no normal effects. Its
+                // independent residue relation is checked again after closure.
+                site.instruction.uses.clear();
+                site.instruction.may_defs.clear();
+                site.instruction.must_defs.clear();
+                site.evidence.quality = EffectQuality::Opaque;
+                site.evidence.rule = None;
+                semantic.status = "guard-pending".into();
+                semantic
+                    .gaps
+                    .push("normal-or-alignment-fault-pending".into());
+                if self.retain_targets {
+                    // Recognition above constrains this to the reviewed
+                    // memory-only store. Extract original BIL scalar flow on
+                    // its candidate normal continuation, without selecting the
+                    // normal AST or committing the store to final effects.
+                    let transfer =
+                        super::target_resolution::extract(&lift.bil, va, &site.evidence.bytes)?;
+                    if !transfer.is_scalar_identity() {
+                        return Err(invalid("pending guard scalar transfer changed"));
+                    }
+                    self.target_transfers.insert(va, transfer);
+                }
             } else {
                 let opcode = site.evidence.opcode.as_deref().unwrap_or("");
                 let registers: Vec<_> = site
@@ -329,7 +517,7 @@ impl Backend {
                                 });
                             }
                             site.evidence.quality = EffectQuality::ExternalLifted;
-                            site.evidence.rule = Some(PROJECTION.into());
+                            site.evidence.rule = Some(profile.into());
                             semantic.status = "projected".into();
                             if self.retain_targets {
                                 self.target_transfers.insert(
@@ -373,7 +561,7 @@ impl Backend {
                             site.instruction.may_defs = options.catalogue.locations();
                             site.instruction.must_defs.clear();
                             site.evidence.quality = EffectQuality::Opaque;
-                            site.evidence.rule = Some("bap-opaque-ordinary-v3".into());
+                            site.evidence.rule = Some(OPAQUE_ORDINARY_RULE.into());
                             site.gaps.push(PreparationGap {
                                 address: va,
                                 reason: GapReason::OpaqueEffects,
@@ -384,9 +572,35 @@ impl Backend {
                     }
                 }
             }
+            if self.retain_guards {
+                self.guard_sites.insert(
+                    va,
+                    guard_source(site, va, &ast, semantic.status != "projected")?,
+                );
+            }
             site.evidence.semantic = Some(semantic);
         }
         self.metrics.projection += start.elapsed();
         Ok(batch)
     }
+}
+
+fn guard_source(
+    site: &PreparedSite,
+    va: Address,
+    ast: &[u8],
+    opaque: bool,
+) -> Result<super::guard_admission::CandidateSite, Error> {
+    Ok(super::guard_admission::CandidateSite {
+        site: format!("0x{va:016x}"),
+        bytes_hex: site
+            .evidence
+            .bytes
+            .iter()
+            .map(|b| format!("{b:02x}"))
+            .collect(),
+        ast: std::str::from_utf8(ast)?.into(),
+        control: super::guard_admission::CandidateControl::from_instruction(&site.instruction),
+        opaque,
+    })
 }

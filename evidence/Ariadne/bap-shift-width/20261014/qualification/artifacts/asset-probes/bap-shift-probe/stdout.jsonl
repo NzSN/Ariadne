@@ -1,0 +1,1 @@
+{"schema":"ariadne.bap-shift-probe-ready/v1","version":"2.5.0-alpha","loaded_library":"/home/nzsn/Repos/Ariadne/tmp/bap-setup/stable/usr/local/lib/libbap.so.2.5.0","initialization_argv":["/home/nzsn/Repos/Ariadne-bap-shift-count-20261014/target/bap-shift-probe/ariadne-bap-shift-probe"],"required_plugins":[],"static_typing_api_exercised":false}

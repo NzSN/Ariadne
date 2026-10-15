@@ -65,6 +65,45 @@ pub fn render_explanation(e: &Explanation, format: Format) -> Result<String, Err
     }
     writeln!(out, "Ariadne fault-address explanation ({})", e.schema).unwrap();
     writeln!(out,"Snapshot: {}\nArtifact: {}\nQuery: {}\nStatus: {:?}\nInstruction: 0x{:016x}; memory access: {}",e.identity.snapshot_id,e.identity.artifact_sha256,e.identity.query_id,e.status,e.question.site,e.question.memory_access).unwrap();
+    #[cfg(feature = "bap")]
+    if let Some(composition) = &e.composition {
+        writeln!(out, "Composition: {}", serde_json::to_string(composition)?).unwrap();
+        writeln!(
+            out,
+            "Target resolution: {}",
+            serde_json::to_string(&e.target_resolution)?
+        )
+        .unwrap();
+        writeln!(
+            out,
+            "Guard admission: {}",
+            serde_json::to_string(&e.guard_admission)?
+        )
+        .unwrap();
+        writeln!(
+            out,
+            "Final normalized request: {}",
+            serde_json::to_string(&e.guard_request)?
+        )
+        .unwrap();
+        writeln!(
+            out,
+            "Original capture sources: {}",
+            serde_json::to_string(&e.guard_sources)?
+        )
+        .unwrap();
+    }
+    if e.identity
+        .semantic_profile
+        .contains(":bap-guard-admission-v1:")
+    {
+        writeln!(
+            out,
+            "Guard scope and assumptions: {}",
+            e.identity.semantic_profile
+        )
+        .unwrap();
+    }
     if let Some(a) = &e.address {
         writeln!(
             out,

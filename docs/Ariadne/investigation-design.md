@@ -13,6 +13,12 @@ the frame-to-frame question to listing fewer than `NP` possible paths. The
 bounded frame-path contract below now has source implementation for a finite
 Windows AMD64 captured-unwind profile, separate API/report/CLI and finite native
 parity checks. Remote model/mutation and real full-dump qualification remain pending.
+The [2026-10-13 full-dump application attempt](../../evidence/Ariadne/frame-paths/dump03958-20261013/report.md)
+returned unavailable for physical frames 1→0: a runtime-table budget and then
+unsupported vector semantics prevented an admitted active-call anchor.
+The [later vector admission validation](../../evidence/Ariadne/bap-vector-registers/20261013/report.md)
+resolves the namespace refusal; the same instruction still stops at its
+unmodeled alignment-exception branch, leaving the query unavailable.
 
 **Why this document exists.** The [real-capture slice](file-reader-design.md#historical-controlled-chromium-capture)
 provides possible origins but leaves their explanation to the investigator.
@@ -39,6 +45,8 @@ and qualification preserve alternatives and missing premises. The frame-path que
   — the selected strict path-count bound, frame anchors and resource limits.
 - [Frame-path implementation plan](../../Plans/frame-path-enumeration.md)
   — F0–F4 contract, captured unwind profile, bounded enumeration and validation.
+- [Justified branch pruning design](justified-branch-pruning-design.md) — proposed
+  instruction-point alignment facts and proof receipts for the remaining MOVAPS stop.
 - [Zero-address design](zero-address-design.md) and
   [zero-base-plus-displacement design](zero-base-offset-design.md) — distinct
   delivered numeric predicates, evidence and contracts.
@@ -49,7 +57,7 @@ and qualification preserve alternatives and missing premises. The frame-path que
   correctness repairs — historical
   source/fixture evidence and the limit-exhaustion repairs, with the
   [completed repair plan](../../Plans/completed/investigation-correctness-fixes.md).
-- [Windows replacement plan](../../Plans/i4-windows-repin.md),
+- [Windows replacement plan](../../Plans/completed/i4-windows-repin.md),
   [performance design](workload-performance-design.md#investigation-performance) and
   [qualification](workload-performance-design.md#native-investigation-qualification) — active exact-query correctness
   and independent timing clauses.
@@ -104,7 +112,7 @@ flowchart TD
 
 The current first-question implementation consumes the native-default or Rust-reference pipeline's
 completed facts. Dashed inputs in the diagram are proposed capabilities.
-The separate [Stage 2 migration](../../Plans/bap-integration.md#stage-2-bap-analysis-core)
+The separate [Stage 2 migration](../../Plans/completed/bap-integration.md#stage-2-bap-analysis-core)
 now supplies the default native analysis. Moving that computation is
 infrastructure work; the delivered zero-base-plus-displacement question is a separate domain capability.
 
@@ -325,7 +333,7 @@ cannot establish full Windows acceptance.
 | Question | Additional evidence or implementation needed |
 | --- | --- |
 | Does the selected access start at virtual address zero? | The [implemented I5a contract](zero-address-design.md) binds validated exception-context operands and exact site/access association under the admitted scalar MOV profile. Controlled Windows acceptance is recorded in the [native qualification](zero-address-design.md#native-qualification). No null-pointer root-cause claim. |
-| Is the fault-time encoded base zero with a nonzero displacement? | Implemented [zero-base-plus-displacement design and contract](zero-base-offset-design.md) and [B0–B5 plan](../../Plans/i5b-zero-base-offset.md); simple base/displacement profile, decoded-role evidence and valid context. [Aggregate qualification](zero-base-offset-design.md#retained-qualification) passes within the declared finite corpus; historical null derivation is outside its claim. |
+| Is the fault-time encoded base zero with a nonzero displacement? | Implemented [zero-base-plus-displacement design and contract](zero-base-offset-design.md) and [B0–B5 plan](../../Plans/completed/i5b-zero-base-offset.md); simple base/displacement profile, decoded-role evidence and valid context. [Aggregate qualification](zero-base-offset-design.md#retained-qualification) passes within the declared finite corpus; historical null derivation is outside its claim. |
 | Did the selected base-plus-signed-displacement calculation wrap? | Selected [I5c design](address-wrap-design.md) and [W0–W5 plan](../../Plans/i5c-address-wrap.md), with all implementation/model/capture stages pending. Lower-range fault admission limits v1 definite answers to upper wrap and no wrap. |
 | What about historical null derivation, earlier arithmetic errors or noncanonical addresses? | Separate later hypotheses with their own definitions and architectural/context premises; the selected I5c question does not establish historical execution or general canonicality. |
 | Which possible producers and inputs contribute to the selected address operand? | Delivered by the [first-question contract](#binding-and-result-contract). Selecting the actually executed alternative still needs additional evidence. |
@@ -480,6 +488,32 @@ insufficient list capacity, `NP = 1`, malformed `NP`/frame indices, equal endpoi
 recursive activations, loops, uncertain indirect calls, opaque summaries, missing
 unwind/bytes and each independent resource boundary. In particular, a truncated
 path list must never justify deleting a possible memory writer.
+
+### Full-dump application attempt, 2026-10-13
+
+The [dump03958 attempt record](../../evidence/Ariadne/frame-paths/dump03958-20261013/report.md)
+binds the original dump, matching private Electron PDB, independent CDB frames,
+captured disassembly, source/tool hashes and two separate frame-path reports.
+The selected question was physical caller frame 1 (`ParsePrimaryExpression`)
+toward fault frame 0 (`Scanner::Next`), exception thread 23668, `NP = 10`.
+Inline CDB annotations were not counted as activations.
+
+The CLI returned `unavailable` with `runtime-table-budget`: Electron has 440,520
+runtime entries against the finite 4,096-entry default. An explicit public-API
+probe with larger capture/runtime/output budgets recovered two frames, but its
+caller graph admitted only nine instructions before stopping at
+`0x00007ff7744033b3` (`movaps [rsp+0x240],xmm6`). BAP projection reported
+`unmodeled architectural namespace/type: YMM6`; the graph could not establish
+the active call at `0x00007ff774404108`, independently observed in CDB. The
+caller unwind recipe also includes unsupported `UWOP_SAVE_XMM128`, preventing
+older-frame recovery. Both reports returned zero paths without starting search.
+This is missing admitted evidence, not proof of no path. The attempt exercises
+real-capture refusal behavior and does not pass F4 full-dump qualification.
+The subsequent [finite vector admission extension](bap-analysis-core-design.md#vector-register-admission)
+admits YMM6 and re-runs the same query. Its
+[fresh record](../../evidence/Ariadne/bap-vector-registers/20261013/report.md)
+preserves the unchanged BIL identity and shows the remaining alignment-exception
+refusal, unchanged caller graph and unavailable active-call anchor.
 
 ## Acceptance
 
@@ -695,3 +729,15 @@ binds the generated suite and applicable root checks to their sources. Earlier
 [frame-path validation](../../evidence/Ariadne/frame-paths/source-validation.json)
 retains its original hashes and native/synthetic scope; adding properties does
 not rewrite that historical evidence or grant full design acceptance.
+
+## Guarded capture evidence
+
+The [proof-gated MOVAPS design](justified-branch-pruning-design.md#usage-and-implemented-contracts)
+adds an explicit Windows normal-call entry assumption for validated physical
+frame activations. Guarded frame listings and fault-address explanations use v2
+with the complete normalized request, original captured proof sources and
+actual premise instances; ordinary v1 reports are unchanged. These validators
+replay proof/source/effect/request bindings and do not interpret an assumed
+entry residue as a captured historical RSP value. Guarded minidump v3 rendering
+uses `input::report::render_bound` with a sealed completed analysis view.
+The design's dated qualification states the finite exercised scope.

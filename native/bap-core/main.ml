@@ -33,12 +33,16 @@ let advance_owned operation payload snapshot = function
       end in
     Flow (i,Stateflow.advance i s action,p)
 let max_frame = 8 * 1024 * 1024
-let read_frame () =
+let read_frame max_request_bytes =
   let buf = Buffer.create 4096 in
+  let max_content_bytes = Int64.sub max_request_bytes 1L in
   let rec loop () =
     let c = input_char stdin in
     if c = '\n' then Buffer.contents buf else begin
-      require (Buffer.length buf < max_frame - 1) "frame budget";
+      (* The limit includes the final newline. Keep the budget unsigned so
+         a caller's finite uint64 limit never becomes a signed OCaml ceiling. *)
+      require (Int64.unsigned_compare (Int64.of_int (Buffer.length buf))
+                 max_content_bytes < 0) "frame budget";
       Buffer.add_char buf c; loop ()
     end in loop ()
 let send_chunks chunks =
@@ -67,13 +71,24 @@ let hex_bytes text offset length =
       digits.[if n mod 2 = 0 then byte lsr 4 else byte land 15])
 let () =
   try
-    require (Array.length Sys.argv = 5) "expected session snapshot query family";
+    require (Array.length Sys.argv = 5 || Array.length Sys.argv = 7)
+      "expected session snapshot query family [--max-request-bytes decimal]";
     let session = Sys.argv.(1) and snapshot = Sys.argv.(2)
     and query = Sys.argv.(3) and family = Sys.argv.(4) in
     require (session <> "" && snapshot <> "" && List.mem family ["recovery";"stateflow"]) "identity/family";
     require (String.length query = 64 && string_all
                (fun c -> (c >= '0' && c <= '9') || (c >= 'a' && c <= 'f')) query) "query digest";
-    send (Yojson.Safe.from_string Build_identity.handshake);
+    let handshake = Yojson.Safe.from_string Build_identity.handshake in
+    let max_request_bytes =
+      if Array.length Sys.argv = 5 then Capture.uint (get handshake "max_request_bytes")
+      else begin
+        require (Sys.argv.(5)="--max-request-bytes") "unsupported launch option";
+        Capture.uint (`Intlit Sys.argv.(6))
+      end in
+    require (max_request_bytes<>0L) "positive request byte limit required";
+    send (`Assoc (List.map (fun (key,value) ->
+        if key="max_request_bytes" then key,`Intlit (Printf.sprintf "%Lu" max_request_bytes)
+        else key,value) (fields handshake)));
     let sequence = ref 0 and action_index = ref 0 and owned = ref None in
     let completed = ref None and completion_mode = ref false and page_offset = ref 0 in
     let target_profile=ref false in
@@ -100,7 +115,7 @@ let () =
       observation @ [",\"attribution\":"; attribution;
         "," ^ encode ("error",error) ^ "," ^ encode ("result",result) ^ "}"] in
     let rec loop () =
-      let raw = read_frame () in
+      let raw = read_frame max_request_bytes in
       let request = Yojson.Safe.from_string raw in
       json_shape 0 request;
       exact request ["schema";"session";"snapshot";"query";"family";"sequence";"operation";"payload"];
@@ -113,25 +128,51 @@ let () =
         require (seq = 0 && operation = "initialize") "initialize must be first";
         exact payload ["profile";"input"];
         let profile=string payload "profile" in
-        target_profile := profile="captured-indirect-targets/v1";
-        require (List.mem profile ["normalized-fixed-input/v1";"captured-fixed-input/v1";"captured-indirect-targets/v1"])
+        target_profile := profile="captured-indirect-targets/v1" ||
+          profile="captured-guarded-input/v1" || profile="captured-guarded-targets/v1" ||
+          profile="captured-guarded-targets/v2";
+        require (List.mem profile ["normalized-fixed-input/v1";"captured-fixed-input/v1";"captured-indirect-targets/v1";"captured-guarded-input/v1";"captured-guarded-targets/v1";"captured-guarded-targets/v2"])
           "unsupported profile";
         require (family="recovery" || profile="normalized-fixed-input/v1") "stateflow profile";
         (* Large captured graphs allocate many short-lived persistent-tree nodes.
            This is a private target-profile allocation policy, not an analysis rule. *)
         if !target_profile then Gc.set {(Gc.get ()) with minor_heap_size=2097152};
         let input_json = get payload "input" in
-        let state = if family="recovery" then begin
-            let input,sites=if profile="captured-indirect-targets/v1" then Capture.admit_resolved input_json snapshot
+        let state = try Some (if family="recovery" then begin
+            let input,sites=if profile="captured-guarded-targets/v1" ||
+                profile="captured-guarded-targets/v2" then begin
+                require(string(get input_json "composition")"profile"=profile)
+                  "composition transport profile binding";
+                require (Composition.transport_query snapshot input_json=query)
+                  "composition session query identity";
+                Composition.admit input_json snapshot
+              end
+              else if profile="captured-guarded-input/v1" then Guard.admit input_json snapshot
+              else if profile="captured-indirect-targets/v1" then Capture.admit_resolved input_json snapshot
               else if profile="captured-fixed-input/v1" then Capture.admit input_json snapshot
               else Recovery.admit input_json snapshot,M.empty in
             Core (input, Recovery.init input, Project_state.create ~sites snapshot input_json)
           end else begin
             let input=Stateflow.admit input_json snapshot in
             Flow (input, Stateflow.init input, Project_state.create snapshot input_json)
-          end in
-        owned := Some state;
-        send_chunks (response seq false `Null `Null); loop ()
+          end) with Invalid reason when profile="captured-guarded-input/v1" ||
+              profile="captured-guarded-targets/v1" || profile="captured-guarded-targets/v2" ->
+            if Sys.getenv_opt "ARIADNE_TARGET_DIAGNOSTICS"<>None then
+              Printf.eprintf "guarded native admission rejected: %s\n%!" reason;
+            let empty=`Assoc ["phase",js "recover";"pending",`List [];
+              "visited",`List [];"decoded",`List [];"provenance",`List [];
+              "edges",`List [];"obligations",`List [];"reaching",`List [];
+              "slice",`List []] in
+            send (`Assoc ((identity seq) @ ["generation",`Int 1;
+              "action_index",`Int 0;"changed",`Bool false;
+              "observation",empty;"attribution",`List [];
+              "error",`Assoc ["kind",js "semantic";"message",js reason];
+              "result",`Null]));
+            None in
+        (match state with
+        | Some state -> owned := Some state;
+          send_chunks (response seq false `Null `Null); loop ()
+        | None -> ())
       end else if List.mem operation ["run-batch";"result-page";"result-close"] then begin
         require (family="recovery") "completion family";
         let advanced = ref 0 and closed = ref false in

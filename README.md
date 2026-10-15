@@ -10,7 +10,7 @@
 
 **Where to go next.**
 
-- [Accepted BAP v3 admission plan](Plans/bap-projection-admission.md) and
+- [Accepted BAP v3 admission plan](Plans/completed/bap-projection-admission.md) and
   [selected capture qualification](docs/Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query) —
   completed P0–P4, native parity, fixed budgets and the explicit exclusion of
   remaining historical real-Linux clauses.
@@ -50,7 +50,7 @@ The [Stage 1 removal plan](Plans/completed/bap-only-semantics.md) records the re
 default change. V3 capability admission replaces generic opcode-name membership.
 Validated ordinary instructions with unknown data effects retain conservative
 continuation and visible gaps; unsupported control or architectural state stops
-explicitly. The [accepted P0–P4 plan](Plans/bap-projection-admission.md) binds the
+explicitly. The [accepted P0–P4 plan](Plans/completed/bap-projection-admission.md) binds the
 current finite qualification and its excluded historical real-Linux clauses.
 Historical [LLVM effect-rule research](docs/Ariadne/operand-effects-design.md#historical-rule-matrix)
 and its formal tests remain reference evidence, distinct from production BAP.

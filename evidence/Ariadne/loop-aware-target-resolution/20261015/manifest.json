@@ -1,0 +1,14 @@
+{
+  "archive": "evidence.tar.gz",
+  "archive_bytes": 67498136,
+  "archive_sha256": "aa89248a75a5d9371236e57010541f953d50ed3b2ba379ad9cf71351bc9a76dc",
+  "claim_boundary": "collection completeness only; per-attempt results remain authoritative",
+  "collection_sha256": "740296ce2e2e8f1006b9097624c6850bebe066c553dbe1f4d3316cf44af1df8e",
+  "files": 663,
+  "host_output": "/mnt/d/ariadne-loop-aware-20261015/exports/evidence-20261015T051742.923698Z-94479926",
+  "inside_output": "/loop-work/exports/evidence-20261015T051742.923698Z-94479926",
+  "schema": "ariadne.loop-target-closure.evidence-export/v1",
+  "source_archive_sha256": "5cd406c5181d131679a60af15f53edcabecfe056144e40b5785bc37ce1d010ee",
+  "source_files_verified": 877,
+  "tool_identities_sha256": "3c52496364ad4203a4e67fd138ba5e431cbe6270c2c80c6ee3ce21dd4efd3457"
+}

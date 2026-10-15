@@ -9,6 +9,7 @@ mod minidump;
 pub mod report;
 
 use crate::Address;
+pub use crate::bap::guard_admission::Limits as GuardAdmissionLimits;
 use crate::llvm_mc::DecoderTarget;
 pub use address_space::{ByteRead, CaptureSource, ReadSpan, ReadStop};
 pub use materialize::{

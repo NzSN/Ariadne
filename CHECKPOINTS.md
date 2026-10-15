@@ -17,6 +17,63 @@
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
+## 2026-10-15 — Inductive loop-target closure
+
+The [loop-aware extension](docs/Ariadne/guarded-target-resolution-design.md#proposed-stable-base-invariant-follow-up) is implemented and [qualified remotely](evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) within its coverage-only captured-table scope. Source-bound root/native/model checks, eight behavioral mutants, actual legacy semantic replay and 330 generated observations pass. An original-dump publication failure exposed omitted referenced Stop endpoints; the corrected coordinator binds the complete represented graph before producing proofs.
+
+Fresh probe `051409` completes DA09 and DADD with four targets each and independently accepted induction receipts. All nine original table sites are complete, all 64 destinations and 51 formerly missing starts reconcile, and native/Rust full requests and states match for both frames. The parent ninth C5 clause is closed. Caller guard coverage still has 30 barriers, MOVAPS remains unknown and NP10 listing remains unavailable because its active call anchor is missing or ambiguous. Full frame-path and universal-refinement gates remain separate.
+
+## 2026-10-14 — Guarded captured-target composition
+
+The [composition design](docs/Ariadne/guarded-target-resolution-design.md) and
+[active C0–C6 ledger](Plans/completed/guarded-target-resolution.md) now compose guarded
+preparation and target recovery on one source-bound candidate graph. Original
+control, effect-free pending continuations, paired replay, shared epochs and
+final effect selection remain distinct. Symbolic byte/short loads and bounded
+infeasible contexts retain unknown writes and feasible cycles. Snapshot queries
+use their declared finite start budget across bounded BAP child sessions.
+
+[Remote qualification](evidence/Ariadne/guarded-target-resolution/20261014/README.md)
+records 218 default tests, 46 core-only, native capture/kernel/report controls,
+19 finite model configurations and 330 generated replay observations. Both
+completed dump03958 frame queries agree exactly between native and Rust. Nine
+original candidate sets match all 64 destinations; all 51 formerly absent starts
+were attempted. Eight certificates are complete; DA09 and the newly exposed
+DADD retain cyclic coverage residuals. Whole-candidate coverage still leaves the
+initial MOVAPS unknown and NP10 frame paths unavailable. Full closure remains
+open, and the plan is not archived as full acceptance.
+
+## 2026-10-14 — Captured XORPS shift-count correction
+
+The [shift-count design](docs/Ariadne/bap-shift-count-design.md) and
+[X0–X4 execution](Plans/completed/bap-shift-counts.md) correct Ariadne's blanket binary
+operand-width rule: pinned BAP permits independent shift counts and left-width
+results. Full unsigned counts and justified XOR equality preserve conservative
+origins. Default v6/guarded v7 distinguish new semantics; older identities remain.
+[Remote qualification](evidence/Ariadne/bap-shift-width/20261014/validation.json)
+records 186 default/46 core-only tests, exact-asset and independent numeric
+controls, affected native suites, six mutants, 27 models and 330 replay
+observations. The original XORPS now projects; the full captured guarded query
+remains unavailable at the existing 4 MiB evidence limit. No ISA, universal
+proof, full-dump paths or general vector-value precision is claimed.
+
+## 2026-10-14 — Proof-gated MOVAPS normal admission
+
+The [guard design](docs/Ariadne/justified-branch-pruning-design.md) and
+[G0–G4 plan](Plans/completed/justified-branch-pruning.md) are implemented with opt-in
+Windows normal-call entry premises, full candidate closure, finite residue
+proofs, versioned native capture and query-bound reports. Default v4 remains.
+[Fresh remote evidence](evidence/Ariadne/guard-admission/20261014/validation.json)
+binds root/native checks, 27 predicate-model configurations, independent oracle,
+six guard mutants and 330 existing native replay observations.
+
+The byte-identical dump03958 frame pair still returns unavailable/zero paths:
+guarded candidate discovery passes MOVAPS but hits a typed operand-width
+mismatch at XORPS `0x00007ff7744075b3` before final proof/query publication.
+General exception graphs, SIMD width compatibility, XMM unwind and full-dump
+path qualification remain separate. This is finite implementation evidence,
+not universal refinement, hardware semantics, executed history or root cause.
+
 ## 2026-10-13 — Original dump retried at b5d56b7
 
 The [retry record](evidence/Ariadne/indirect-target-resolution/dump-retry-b5d56b7-20261013/report.json)
@@ -199,7 +256,7 @@ close the connection. No large local campaign, historical-path or root-cause
 claim is credited. The model annotation correction is bound by a new revision
 record while the original pre-runtime freeze remains unchanged.
 
-Updated **2026-10-10**: the [projection-admission plan](Plans/bap-projection-admission.md)
+Updated **2026-10-10**: the [projection-admission plan](Plans/completed/bap-projection-admission.md)
 has P0–P4 accepted on the qualified real Windows replacement. The
 [user decision](evidence/Ariadne/bap-admission/p4-acceptance-20261010.json) excludes
 the remaining historical real-Linux clauses; no required P4 work remains.
@@ -285,7 +342,7 @@ available for resumption. Full P4 and full native-default qualification remain f
 
 ## 2026-10-10 — Initial v3 admission checkpoint; P4 aggregate incomplete
 
-Executed P0–P3 of the [projection-admission plan](Plans/bap-projection-admission.md):
+Executed P0–P3 of the [projection-admission plan](Plans/completed/bap-projection-admission.md):
 four-form projection, typed capability admission, no generic opcode whitelist,
 ordinary data-only continuation with all-location possible effects/no kills and
 Rust/native/report contract checks. The [checkpoint](docs/Ariadne/bap-analysis-core-design.md#admission-checkpoint)
@@ -358,7 +415,7 @@ change. Resume at W0 rather than treating the design probes as its exit evidence
 
 ## 2026-10-07 — Native I4 performance follow-up qualified
 
-[D0–D3](Plans/i4-performance-implementation.md) are complete for the unchanged
+[D0–D3](Plans/completed/i4-performance-implementation.md) are complete for the unchanged
 98-start Windows fault-address explanation query. The normal native-default
 release CLI measures **1,692.696 ms / 2,000 ms**, one warm-up/five measured repeats.
 The separate 34-start Linux reference binding/explanation/rendering phase sum
@@ -386,7 +443,7 @@ this result.
 
 ## 2026-10-07 — I5b machine-code debugging question qualified
 
-[B0–B5](Plans/i5b-zero-base-offset.md) are implemented and qualified for the
+[B0–B5](Plans/completed/i5b-zero-base-offset.md) are implemented and qualified for the
 finite Windows AMD64 scalar MOV base/displacement profile. The
 [validation guide](docs/Ariadne/zero-base-offset-design.md#retained-qualification) and
 [aggregate](evidence/Ariadne/i5b-qualification.json) record **18/18 gates**, 57
@@ -418,7 +475,7 @@ The user selected the zero-base-plus-offset hypothesis. The
 Windows AMD64 scalar MOV accesses with an encoded GPR base, no index and a
 signed displacement. Its predicate is captured base zero and displacement
 nonzero, distinct from I5a's zero effective address. The
-[B0–B5 plan](Plans/i5b-zero-base-offset.md) gives source ownership, exact role/
+[B0–B5 plan](Plans/completed/i5b-zero-base-offset.md) gives source ownership, exact role/
 expression agreement, independent fixtures, strict reports/CLI, mutation and
 separate source/fixture/controlled-Windows acceptance criteria.
 
@@ -449,7 +506,7 @@ workload schema, bundled inputs and exact-copy environment overrides. Historical
 reference-decoding phase timings are labeled as evidence for their earlier
 pipeline, not a diagnosis of the current native I4 performance failure.
 
-The [I4 plan](Plans/i4-windows-repin.md#remaining-i4-performance-qualification)
+The [I4 plan](Plans/completed/i4-windows-repin.md#remaining-i4-performance-qualification)
 now gives the remaining measured-diagnosis and fixed-budget qualification steps.
 The active result remains 17 passing correctness gates and **4,774.451 ms**
 against **2,000 ms**, so full I4 acceptance is false. Native core 20-gate and
@@ -464,7 +521,7 @@ runtime campaign, optimization, threshold change or release claim is recorded.
 ## 2026-10-05 — Windows I4 re-pinned; correctness passes, CLI over budget
 
 The user authorized replacing the unavailable original Electron capture. The
-[completed plan](Plans/i4-windows-repin.md) and
+[completed plan](Plans/completed/i4-windows-repin.md) and
 [delivery guide](docs/Ariadne/workload-performance-design.md#windows-investigation-replacement) bind the existing
 independently inspected real Windows AMD64 Crashpad capture with 98 instruction
 starts. The new active I4 case uses entry `0x00007ff7382f4840`, fault/seed
@@ -489,7 +546,7 @@ bundles are preserved byte-for-byte before the source refresh.
 
 ## 2026-10-05 — Dependency isolation repairs and native I5a accepted
 
-The [native qualification plan](Plans/i5a-native-qualification.md) is complete
+The [native qualification plan](Plans/completed/i5a-native-qualification.md) is complete
 for its recorded scope. Live MirrorRust edits first invalidated dependency hashes
 and formatting. Formatting-only changes repaired the immediate failure, but
 continued edits required an isolated dependency view. The new
@@ -532,7 +589,7 @@ broader hypotheses and universal refinement are not credited by this result.
 
 This earlier block is resolved by the [2026-10-05 native qualification](docs/Ariadne/zero-address-design.md#native-qualification). The following numbers and failed decisions retain their historical meaning.
 
-The [native qualification plan](Plans/i5a-native-qualification.md) now has a
+The [native qualification plan](Plans/completed/i5a-native-qualification.md) now has a
 completed-native-analysis phase benchmark, exact backend/query/build receipts,
 current source/tool inventories and historical capture-provenance checks.
 Twelve native contract controls and 28 controlled-capture controls pass. The
@@ -570,7 +627,7 @@ these rejected attempts; do not rebind their hashes or promote their flags.
 
 ## 2026-10-04 — Complete native Stage 2 qualified and adopted
 
-The [execution plan](Plans/bap-stage2-implementation.md) delivers native recovery,
+The [execution plan](Plans/completed/bap-stage2-implementation.md) delivers native recovery,
 reaching definitions, slicing, finite stateflow, capture-bound integration and
 real generated helper replay. The explicit-native candidate passed 19 gates
 before adoption. The final run passes **20/20 gates**, including all root checks,
@@ -601,7 +658,7 @@ I4/I5a acceptance are not credited by this result.
 
 ## 2026-10-03 — OCaml recovery foundation qualified
 
-The [OCaml qualification plan](Plans/bap-ocaml-qualification.md) now has a
+The [OCaml qualification plan](Plans/completed/bap-ocaml-qualification.md) now has a
 workspace-local OCaml 4.12.1/BAP SDK, a standalone helper and Rust process
 transport. The helper owns complete recovery input admission, actual Init/Visit
 state and BAP term attribution. Its capabilities stop at Visit, observe and reset;
@@ -619,7 +676,7 @@ checks. All required gates pass; `a0ExitPassed=true` and `stage2Qualified=false`
 ## 2026-10-03 — Stage 2 A0 started
 
 Created the [Stage 2 analysis contract](docs/Ariadne/bap-analysis-core-design.md)
-and [A0 execution plan](Plans/bap-stage2-a0.md). They define immutable inputs,
+and [A0 execution plan](Plans/completed/bap-stage2-a0.md). They define immutable inputs,
 BAP-owned state, strict session/action envelopes, independent recovery/stateflow
 observations, full-width addresses and one-to-many BIR attribution. Production
 analysis remains on the existing Rust core.
@@ -660,7 +717,7 @@ Earlier bounded-policy results below remain historical. Changes are uncommitted.
 ## 2026-10-03 — Controlled Windows workload generated and repinned
 
 After the user confirmed that the original Windows dump no longer exists,
-completed the [replacement plan](Plans/bap-windows-repin.md). A native Windows
+completed the [replacement plan](Plans/completed/bap-windows-repin.md). A native Windows
 `crashpad-nzsn` process generated a **217,936-byte** partial dump from a controlled
 98-instruction checksum/loop/branch workload. Independent byte, input/checksum,
 process/module and exception/context inspection passes. The original null-write
@@ -688,7 +745,7 @@ retain exact results and timing limitations. Changes remain uncommitted.
 
 ## 2026-10-03 — BAP workload qualification repair and source refresh
 
-Completed R0–R2 of the [BAP plan](Plans/bap-integration.md). The Linux workload
+Completed R0–R2 of the [BAP plan](Plans/completed/bap-integration.md). The Linux workload
 runner now preserves its source inventory through the Windows-input branch,
 requires captured preparation evidence for every decoded address and retains
 raw release samples. Workload v2 and aggregate v3 validate the evidence and
@@ -735,7 +792,7 @@ under ignored `tmp/crashpad-demo/20261003/`; changes are uncommitted.
 
 ## 2026-10-03 — I5a zero-address source/fixture delivery
 
-Implemented the [I5a plan](Plans/i5a-zero-address.md): immutable exception/context
+Implemented the [I5a plan](Plans/completed/i5a-zero-address.md): immutable exception/context
 evidence, exact query binding, a bounded Windows AMD64 scalar MOV zero-address
 assessment, strict independent reports and explicit CLI modes. The question adds
 a seed without becoming a discovery root; numeric conclusions retain their
@@ -886,7 +943,7 @@ before the user-authorized commit.
 
 ## 2026-10-01 — BAP Stage 1 implementation
 
-The [BAP integration plan](Plans/bap-integration.md) now has an optional semantic
+The [BAP integration plan](Plans/completed/bap-integration.md) now has an optional semantic
 backend feeding the existing Rust core. A hash-pinned isolated BAP helper,
 strict Rust transport, conservative BIL projection, shared captured-preparation
 seam, CLI selector and per-site reports are implemented. LLVM remains default.

@@ -24,6 +24,19 @@ def decode(value, sequence=1, initialized=True, identity=IDENTITY):
 
 
 class EnvelopeTests(unittest.TestCase):
+    def test_configured_request_budget_includes_newline_and_has_no_default_ceiling(self):
+        raw = (json.dumps(request()) + "\n").encode()
+        decode_request(raw, IDENTITY, 1, True, len(raw))
+        with self.assertRaises(ContractError):
+            decode_request(raw, IDENTITY, 1, True, len(raw) - 1)
+        large = raw[:-1] + b" " * (8 * 1024 * 1024) + b"\n"
+        with self.assertRaises(ContractError):
+            decode_request(large, IDENTITY, 1, True)
+        decode_request(large, IDENTITY, 1, True, 32 * 1024 * 1024)
+        for limit in (0, -1, True, 1.5, None, 2**64):
+            with self.subTest(limit=limit), self.assertRaises(ContractError):
+                decode_request(raw, IDENTITY, 1, True, limit)
+
     def test_lifecycle_and_both_action_families(self):
         decode(request("initialize", {"profile": "normalized-fixed-input/v1", "input": {}}, 0), 0, False)
         for operation in ("observe", "finish", "reset"):

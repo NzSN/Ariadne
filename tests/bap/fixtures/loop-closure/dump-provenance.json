@@ -1,0 +1,78 @@
+{
+  "schema": "ariadne.loop-closure-dump-provenance/v1",
+  "scope": "Retained 2026-10-14 qualified baseline, not fresh loop-closure qualification.",
+  "snapshot": "minidump-captured-amd64-v1:9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+  "artifact_sha256": "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+  "candidate_epoch": 610,
+  "candidate_sha256": "50b54d681fe01f9488da4cf2c90948afe52cb2ab13dad2e960bad55648122a3f",
+  "query_scope_sha256": "b4ed757104b47052b3bede15728b55e6f6f50bdbf0750785c4e9b72820d778ed",
+  "composition_binding_sha256": "a6bd1f9a83a729f61dea9b13368ebb62a6b79f6ffb79f9027b417e8f87f5da39",
+  "composition_checker_sha256": "c36c8876810e35ed10b7e366e650d7854958b0ad7b07d33084039d39b68e9580",
+  "composition_model_sha256": "e142a6fd22d78044c444c26211b7c659a56fedb5f9e555aa20e3aa1be23e8b10",
+  "target_report_sha256": "ccde9dcf0117902362a5dafa0179f9048d83e05e9fd06d2d30a0dd1515bfd562",
+  "guard_report_sha256": "3f36e5dc5e855dc61daeaf05c114f54b84023b12131e8f004ba789e3b2845f4d",
+  "frame_entry_points": [
+    "0x00007ff7744033a0"
+  ],
+  "guard_producer": {
+    "decoder_sha256": "45dad913d912aed489a99a150edc846389877ef72cb9218b46b8e2e555ad813c",
+    "helper_sha256": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+    "projection": "bap-bit-provenance-v7",
+    "runtime_sha256": "fb03843b065556c791e909b2cd7d1a8e2ef736ed461b6d8979da3f3fd5d6612a"
+  },
+  "legacy_source_manifest": "legacy-manifest.json",
+  "retained_artifacts": [
+    {
+      "path": "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/minidump-rust.json.gz",
+      "sha256": "b63387a98d5466fffd7bd689480441c92a9213dcbcf9fb9441133e39e44c9d93",
+      "bytes": 3841748,
+      "uncompressed_sha256": "d308a9dd1c5b4ddbd3cf43b2f856a5b4c2c5671668134de8c4c3a14069fa613a",
+      "uncompressed_bytes": 90113251
+    },
+    {
+      "path": "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/composition-report.json.gz",
+      "sha256": "f5ae123b0c8a4e864ac1e18b34f1a58f5dd3faee54ef38862e72245bef5c3dbc",
+      "bytes": 351191,
+      "uncompressed_sha256": "222b192f23c9cdd4beb78231ca9c0522f9f0c3dddf639f682a40f9b130d6826a",
+      "uncompressed_bytes": 15177573
+    },
+    {
+      "path": "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/guard-report.json.gz",
+      "sha256": "0157bdce6fb43cbbc0a91e5c5b8d284b9b24fd45ac4b577e0ea4914a9f7c09d1",
+      "bytes": 1245477,
+      "uncompressed_sha256": "2c35bbbbe56ed67f1e83e83a3857bb025508b3055031df9987be46f48bcdef04",
+      "uncompressed_bytes": 21448250
+    },
+    {
+      "path": "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/target-report.json",
+      "sha256": "fc50a5fc83c028a464feea4be8df6f41474f229d98ddf1c151aeec36c275f31c",
+      "bytes": 592582
+    },
+    {
+      "path": "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/delivery/source-files.json",
+      "sha256": "4061744c473e9b0244ff8e7d0e52cae917e6a0028cbf6a35974c558ce502f1d2",
+      "bytes": 77013
+    },
+    {
+      "path": "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/delivery/tools.json",
+      "sha256": "a8665e2b081dc9a73e5041f9b914bb7d9eca71cd3fb3af930cecf7d8a9080af1",
+      "bytes": 1190
+    },
+    {
+      "path": "evidence/Ariadne/guarded-target-resolution/20261014/qualification.json",
+      "sha256": "de470c9f459fcf76e8c43a3e64363495d59b8539fa29928942aea0e3bc8fe503",
+      "bytes": 11701
+    },
+    {
+      "path": "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/validation-20261014T120753/passing-combined-wire.json",
+      "sha256": "8d342a7d8f900c70cb6313450fedb09daa566c9055c927cc166593449d5efc17",
+      "bytes": 37030
+    }
+  ],
+  "legacy_replay": {
+    "wire": "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/validation-20261014T120753/passing-combined-wire.json",
+    "dump_report": "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/minidump-rust.json.gz",
+    "target_report": "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/target-report.json",
+    "note": "Use retained complete inputs for legacy replay; compact regions are evidence projections, not standalone legacy composition requests."
+  }
+}

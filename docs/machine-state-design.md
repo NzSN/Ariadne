@@ -29,7 +29,7 @@ The [Stage E MirrorRust integration plan](../Plans/completed/stage-e-mirrorrust-
 covers its first typed replay integration stage.
 The [Stage E completion plan](../Plans/completed/stage-e-completion.md) covers generated
 case replay, mutation sensitivity and the evidence-linked report/CLI handoff.
-The [BAP integration plan, Stage 2](../Plans/bap-integration.md#stage-2-bap-analysis-core)
+The [BAP integration plan, Stage 2](../Plans/completed/bap-integration.md#stage-2-bap-analysis-core)
 plans migration of this finite stateflow computation into BAP-owned passes.
 
 The specification is [AriadneMachineState.tla](../Specs/AriadneMachineState.tla),

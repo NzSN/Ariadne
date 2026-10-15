@@ -1,0 +1,4 @@
+
+thread 'main' (1040) panicked at /work/bap-shift-width-20261014/repro.rs:7:43:
+captured XORPS 0f57c0 must project, admission failed: BIL operand type/width mismatch
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

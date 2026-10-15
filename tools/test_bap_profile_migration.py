@@ -1,6 +1,6 @@
 """Negative controls for narrowly declared profile metadata normalization."""
 import copy,hashlib,json,unittest
-from bap_profile_migration import V2,V3,canonical,replacements,normalize_text
+from bap_profile_migration import V2,V3,V4,V6,canonical,replacements,normalize_text
 class MigrationTests(unittest.TestCase):
  def documents(self,profile):
   semantic=dict(helper_sha256='a'*64,runtime_sha256='b'*64,ast_sha256='c'*64,projection=profile)
@@ -22,6 +22,26 @@ class MigrationTests(unittest.TestCase):
    self.assertNotEqual(self.normalized(*old),self.normalized(*bad))
   bad=copy.deepcopy(new);bad[0]['analysis']['slice']=[]
   self.assertNotEqual(self.normalized(*old),self.normalized(*bad))
+ def test_v4_migration_preserves_scalar_effects_and_captured_evidence(self):
+  old=self.documents(V2);new=self.documents(V4)
+  self.assertEqual(self.normalized(*old),self.normalized(*new))
+  for part,field,value in [
+   (0,'analysis',dict(slice=[])),
+   (1,'evidence',[dict(new[1]['evidence'][0],instruction=dict(new[1]['evidence'][0]['instruction'],gaps=['lost-data']))]),
+  ]:
+   bad=copy.deepcopy(new);bad[part][field]=value
+   self.assertNotEqual(self.normalized(*old),self.normalized(*bad))
+  bad=copy.deepcopy(new);bad[0]['preparation']['sites'][0]['semantic']['projection']=V3
+  with self.assertRaisesRegex(ValueError,'semantic profile does not bind exact site/tool facts'):
+   self.normalized(*bad)
+ def test_v6_migration_preserves_scalar_effects_and_rejects_unlisted_changes(self):
+  old=self.documents(V2);new=self.documents(V6)
+  self.assertEqual(self.normalized(*old),self.normalized(*new))
+  bad=copy.deepcopy(new);bad[0]['analysis']['slice']=[]
+  self.assertNotEqual(self.normalized(*old),self.normalized(*bad))
+  bad=copy.deepcopy(new);bad[0]['preparation']['sites'][0]['semantic']['projection']=V4
+  with self.assertRaisesRegex(ValueError,'semantic profile does not bind exact site/tool facts'):
+   self.normalized(*bad)
  def test_invalid_binding_scope_and_unresolved_references_are_rejected(self):
   report,explanation=self.documents(V3)
   for mutation in ['binding','scope','reference','profile']:
@@ -29,6 +49,6 @@ class MigrationTests(unittest.TestCase):
    if mutation=='binding':e['identity']['semantic_profile']='unbound'
    if mutation=='scope':e['evidence'][0]['scope_id']='bad'
    if mutation=='reference':e['origins'][0]['evidence_id']='evidence:missing'
-   if mutation=='profile':r['identity']['effects_ruleset']='v4'
+   if mutation=='profile':r['identity']['effects_ruleset']='unreviewed'
    with self.assertRaises(ValueError):self.normalized(r,e)
 if __name__=='__main__':unittest.main()

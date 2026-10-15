@@ -13,6 +13,19 @@ records the subsequent source audit and separate qualification limits.
 
 **Where to go next.**
 
+- [Loop-target closure model](AriadneLoopTargetClosure.tla) and
+  [L0–L6 extension plan](../Plans/completed/loop-aware-target-resolution.md) — local-region
+  entrance initialization, induction over original edges, fresh selector loads
+  and the checked coverage premise consumed by target/composition admission.
+  The component interface section below separates
+  executable premise checks from model-to-model refinement, which is not proved.
+
+- [Guarded target composition model](AriadneGuardedTargetResolution.tla) and
+  [C0–C6 plan](../Plans/completed/guarded-target-resolution.md) — immutable query scope,
+  original/candidate/final graph layering, a shared epoch, paired receipt
+  invalidation and proof-only final effects. The 2026-10-14 source-bound
+  qualification is retained; the new loop component has its own acceptance gate.
+
 - [Indirect-target model](AriadneTargetResolution.tla) and
   [R0–R6 ledger](../Plans/indirect-target-resolution.md) — finite captured-table
   candidates, residuals, incoming-coverage invalidation and resource stops;
@@ -72,6 +85,8 @@ BAP's trusted role and the analysis-model boundary.
 The historical 2026-10-11 source audit covers **17 active modules and five replay modules**.
 The indirect-target extension adds one active module and five configurations on
 2026-10-13, with its own source-bound qualification below.
+The loop-target extension adds a component module and 25 configurations on
+2026-10-15, with a separate premise interface and qualification scope below.
 The [synchronization plan](../Plans/specification-sync.md) separates source
 corrections and bounded local evidence from remote qualification. A model's
 age alone does not imply drift; unchanged executable contracts retain their
@@ -89,6 +104,8 @@ original bytes and replay bindings.
 | [Memory refinement](AriadneMemoryRefinement.tla) | `src/investigation/backward_values.rs`, `src/investigation/memory_refinement.rs` | Updated exact/constrained/unknown meanings, composition/cap stops, conflict distinction and unavailable/candidate preservation. Four-bit words and two-operation chains are finite representatives; worklist and receipt validation remain outside this component model. |
 | [Frame paths](AriadneFramePaths.tla) | `src/investigation/frame_paths.rs`, `src/investigation/frame_unwind.rs` | Updated typed-edge DFS, strict NP, work/scan/visit/step guards, fair termination and conservative exhaustion. Activation-qualified node IDs and a bound composed graph are premises. External resource stops abstract byte/graph limits; they do not prove concrete payload sizing or RSS. |
 | [Indirect targets](AriadneTargetResolution.tla) | `src/bap/target_resolution.rs`, `src/input/materialize.rs`, native `capture.ml` | Added 2026-10-13: frozen captured-control-data premise, signed-offset candidates, unknown alternatives, coverage invalidation and bounded fair termination. Byte/BIL decoding and machine-width expression recognition are producer premises; five finite scenarios do not establish universal refinement. |
+| [Loop-target closure](AriadneLoopTargetClosure.tla) | Private Rust `src/bap/target_resolution/loop_closure.rs`, native `loop_closure.ml`, target/composition validators | Added 2026-10-15: finite local-phase entrance, induction, dispatch-domain and epoch contract. Twenty-five scenarios and an independent concrete oracle exercise this component; accepted receipts supply the coverage premise through the interface below. No mechanically checked inter-model refinement is claimed. |
+| [Guarded target composition](AriadneGuardedTargetResolution.tla) | Combined `src/input/materialize.rs`, BAP guard/target validators and native capture | C0 authority added 2026-10-14: fixed scope, source/candidate/final layering, shared epochs and paired receipts. The 2026-10-14 record retains 19 finite remote configurations and its runtime scope; the new loop component is qualified separately. Structural identities abstract concrete hash/codec validation. |
 | [Core replay](../mbt/model/AriadneReplay.tla), [stateflow replay](../mbt/stage-e/model/MachineStateReplay.tla) and [cases](../mbt/stage-e/model/MachineStateCases.tla), [IR replay](../mbt/stage-e/model/LLVMIRReplay.tla) and [cases](../mbt/stage-e/model/LLVMIRCases.tla) | `mbt/`, `src/mbt/`, native replay observers | Current deterministic schedules and observation projections; retained corpus/source bindings are preserved. Replay remains finite conformance evidence. |
 
 Address-wrap W0 is still an unimplemented design stage, not an outdated existing
@@ -113,6 +130,115 @@ The [qualification record](../evidence/Ariadne/indirect-target-resolution/qualif
 retains the five safety/fair-termination results and separate oracle, native,
 replay and mutation evidence. These new checks do not refresh the older
 specification-synchronization campaign or its pending remote clauses.
+
+## Guarded target composition qualification
+
+Run `Specs/check-guarded-target-resolution.sh` on the authorized remote WSL host
+with the pinned Apalache and TLC launchers. The checker runs the independent
+[composition oracle](../tests/bap/fixtures/composition/oracle.py), typechecks
+[AriadneGuardedTargetResolution.tla](AriadneGuardedTargetResolution.tla), and
+checks 19 finite scenarios for safety and fair termination. Cases cover complete
+and partial reads, unavailable destination code, a late bypass/backedge,
+completeness/barrier/transfer changes without new destinations, pending transfer
+havoc, opaque calls, wrong immutable scope, bounded symbolic frontiers and budget exhaustion.
+
+Once the candidate graph can be frozen, finite guard-work exhaustion may publish
+paired partial receipts and a stopped final request; it never justifies normal
+store effects. Failure to materialize a candidate graph still publishes no query.
+A bounded reverse symbolic frontier quantifies over arbitrary register inputs
+and every reverse-prefix context; it never becomes a root or entry point.
+The infeasible-frontier scenario independently tests a universally empty branch
+conjunction without a known table base; its changed-load negative case retains
+unknown alternatives and every structural backedge. Ten width-8 oracle cases
+require stable symbolic-load identity under the frozen-control-data premise;
+address/index changes, unknown writes, opaque calls, unknown subjects or mutable
+memory keep independent values. The empty-context receipt uses the explicit
+`infeasible` frontier form with zero base and empty indices/entries; original
+expressions and guards still require independent replay.
+
+Structural records abstract cryptographic identities. The scope/source to
+candidate seal to receipts to final-request ordering has no digest cycle;
+model results do not qualify the concrete codecs or captured BIL/table reads.
+The [frozen independent cases](../tests/bap/fixtures/composition/contract.json)
+also exercise unsigned machine-width arithmetic and tampered identities without
+calling the production Rust or native solver. Two independent width-8/16
+conditional-write cases enumerate one decrement followed by its taken condition
+and a later upper bound: correct indices are `{1,2,3}`; substituting the update
+again into an already post-transfer condition incorrectly gives `{0,2,3}`.
+This is a finite guard-normalization contract, not an instruction-step proof.
+The [source-bound qualification](../evidence/Ariadne/guarded-target-resolution/20261014/README.md) now records remote typechecking, all 19 finite model cases, Rust/native controls and 330 generated replay observations. All nine original candidate sets and all 51 missing starts are recovered; the ninth incoming-state certificate remains incomplete. The [canonical design](../docs/Ariadne/guarded-target-resolution-design.md) records that scoped result and the open full-closure clause.
+
+## Loop-target closure component interface
+
+The [canonical loop design](../docs/Ariadne/guarded-target-resolution-design.md#proposed-stable-base-invariant-follow-up)
+extends the current resolver with a whole-dispatch induction receipt. The
+[loop model](AriadneLoopTargetClosure.tla) defines the additional coverage
+obligations; the existing target and composition models continue to abstract
+an accepted coverage proof as a premise. Their transition systems are unchanged
+by this extension. This is an explicit component contract, not a TLA+
+`INSTANCE`, a proved refinement mapping or a mechanically checked composition
+of the three models.
+
+The interface is the following conditional judgment:
+
+```text
+original source and captured reads bound to query Q and candidate revision e
+  + whole-dispatch receipt independently accepted at e
+  + e still current when the paired request is sealed
+  => the dispatch's incoming-coverage obligation is discharged in Q at e
+```
+
+The receipt is one alternative to existing prefix-tree coverage. The choice
+applies to the entire dispatch obligation; it does not merge arbitrary reverse
+prefixes. Retained path/table witnesses still require their ordinary replay.
+Coverage of one dispatch does not establish coverage of another dispatch,
+caller guard admission, an active call anchor or frame-path availability.
+
+| Component obligation | Executable discharge | Target/composition premise supplied |
+| --- | --- | --- |
+| `EntranceHolds(revision)` | Independently enumerate region entrances and roots; replay each source base-reset corridor from arbitrary prior values; reject every uncovered bypass. | Every represented entrance at this dispatch satisfies the invariant. |
+| `Preservation` | Replay original BIL and each typed edge predicate; check inclusion in the destination assertion. Fresh loads introduce arbitrary values, and flag relations retain their same-iteration definitions. | All finite iterations reaching the dispatch are covered; a repeated instruction address alone closes nothing. |
+| `DispatchDomain` and complete edge inventory | Derive the bounded selector domain and captured relative-32 arithmetic; compare all internal, entrance, exit and table-successor edges with the current graph. | Target enumeration covers the dispatch domain without relying on its existing `complete` bit. |
+| `EffectsSafe`, `MemoryPremise`, `ScopeBound` | Check original effects, capture contributors, frozen-control-data premise and immutable source/query binding. | The scalar/table proof applies only to the bound capture, source, activation and admitted premises. |
+| `inspected`, `Readable`, `targets` | Validate every required table slot; retain known targets when a read or coverage obligation remains unresolved. | Existing target-read and candidate-retention clauses still apply; coverage alone cannot repair a missing table read. |
+| `certificateRevision = revision` | Invalidate and replay after graph, source, entrance or completeness changes; seal paired evidence only on the current candidate epoch. | Existing stale-receipt and paired-epoch policies remain mandatory, including changes that add no destination. |
+| `spent`, `Budget`, `Terminates` | Charge bounded proposal/replay work and return partial on exhaustion. | Analyzer termination and conservative partial publication; no claim that the analyzed loop terminates. |
+
+In [the target model](AriadneTargetResolution.tla), `incomingCovered` abstracts
+the accepted coverage premise; reads, memory trust and revision validation
+remain separate requirements for `complete`. In
+[the composition model](AriadneGuardedTargetResolution.tla), `covered` abstracts
+the required coverage of its modeled dispatch. The production coordinator must
+retain all other site/guard obligations and take their required conjunction;
+it cannot set global coverage from one successful loop receipt. Both models
+continue to retain targets while invalidating completeness after new evidence.
+
+The concrete bridge is source reviewed and replayed in the
+[Rust loop checker](../src/bap/target_resolution/loop_closure.rs),
+[Rust target validator](../src/bap/target_resolution.rs),
+[native loop checker](../native/bap-core/loop_closure.ml), and
+[native composition admission](../native/bap-core/composition.ml).
+Model/engine/profile identities bind the new contract. Legacy saved combined
+reports select their separately frozen checker/model contract; these identities
+must not authorize the new coverage fields.
+
+Run `bash Specs/check-loop-target-closure.sh` on remote `windows-dev` WSL. It
+executes the independent [concrete oracle](../tests/bap/fixtures/loop-closure/oracle.py),
+typechecks the component and checks 25 finite scenarios for safety, expected
+outcome and fair termination. The oracle's
+[29 cases and four arithmetic controls](../tests/bap/fixtures/loop-closure/oracle-cases.json)
+enumerate concrete four-bit scalar/flag transitions independently of production
+matching and invariant synthesis. Separate 64-bit arithmetic controls distinguish
+signed32 extension, which four-bit target arithmetic alone cannot distinguish.
+
+The finite scope preserves the nine-node local phase, ten internal edges,
+four exits and changing pointer/selector values. It erases full AMD64 widths
+from the transition state, detailed BIL syntax, physical memory layout,
+cryptographic encoding and unrestricted CFGs. Trusted lifting, exact source
+transport, concrete budgets and those erased representation obligations still
+need Rust/native controls and source-bound replay. Fresh qualification under
+the [L0–L6 plan](../Plans/completed/loop-aware-target-resolution.md) records those tiers
+separately; none of them is a universal implementation or inter-model proof.
 
 ## Shared semantic types
 
@@ -719,3 +845,21 @@ TLA+ behavior.
 The removed instruction-semantics models and their 2026-09-19 validation
 summary remain in the [archived formal-model guide](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/README.md#x86-64-instruction-semantics-validation-2026-09-19).
 Those component results are historical and do not qualify the active analyzer.
+
+## Predicate admission model
+
+[AriadnePredicateAdmission.tla](AriadnePredicateAdmission.tla) is the analysis-level
+authority for proof-gated MOVAPS normal admission. It models residue joins and
+transfers, qualified entry premises, candidate-graph closure, invalidation after
+new incoming evidence, receipt replay and publication. It excludes full ISA
+semantics and general exception graphs.
+
+The [canonical design](../docs/Ariadne/justified-branch-pruning-design.md) explains
+the captured-source contract; its [execution plan](../Plans/completed/justified-branch-pruning.md)
+separates G0 model/oracle freeze from runtime and remote qualification. Run
+`bash Specs/check-predicate-admission.sh` on the authorized remote WSL host:
+Apalache typechecks the model and TLC checks all 27 `PredicateAdmission*.cfg`
+scenarios for safety and fair termination. The independent Python oracle has
+56 graph/premise cases, three closure histories, 33 receipt controls and
+720 finite numeric transfer checks. These finite instances are not a universal
+Rust refinement proof or an external-lifter qualification.

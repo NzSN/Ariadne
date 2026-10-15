@@ -1,0 +1,16 @@
+# Usage statistics is OFF. We care about your privacy.
+# If you want to help our project, consider enabling statistics with config --enable-stats=true.
+
+Output directory: /loop-work/tmp/ariadne-loop-target-closure.3Mc1RGsK/typecheck/AriadneLoopTargetClosure.tla/2026-10-15T04-23-38_637964494479115326
+# APALACHE version: 0.58.0 | build: 711dce6                       I@04:23:38.557
+Type checking AriadneLoopTargetClosure.tla                        I@04:23:38.691
+PASS #0: SanyParser                                               I@04:23:39.021
+PASS #1: TypeCheckerSnowcat                                       I@04:23:41.412
+ > Running Snowcat .::.                                           I@04:23:41.418
+[AriadneLoopTargetClosure.tla:52:12-52:52]: Annotation required. Found 2 matching operator signatures ((a453, a454, a455, a456, a457, a458, a459, a460, a461, a462) => <<a453, a454, a455, a456, a457, a458, a459, a460, a461, a462>>) or ((a453, a453, a453, a453, a453, a453, a453, a453, a453, a453) => Seq(a453)) for arguments Int and Int and Int and Int and Int and Int and Int and Int and Int and Int E@04:23:42.519
+[AriadneLoopTargetClosure.tla:52:1-52:52]: Error when computing the type of Offsets E@04:23:42.553
+ > Snowcat asks you to fix the types. Meow.                       I@04:23:42.571
+Type checker [FAILED]                                             I@04:23:42.740
+It took me 0 days  0 hours  0 min  4 sec                          I@04:23:42.741
+Total time: 4.177 sec                                             I@04:23:42.741
+EXITCODE: ERROR (120)

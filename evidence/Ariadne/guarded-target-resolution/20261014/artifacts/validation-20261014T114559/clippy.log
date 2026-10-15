@@ -1,0 +1,16 @@
+    Checking ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-composed-20261014)
+error: this boolean expression can be simplified
+    --> src/bap/target_resolution.rs:1501:24
+     |
+1501 |   ...|| (!path_seen.insert(parent)
+     |  _______^
+1502 | | ...    && !(local && path.form == "infeasible" && path.frontier))
+     | |_________________________________________________________________^ help: try: `!(path_seen.insert(parent) || local && path.form == "infeasible" && path.frontier)`
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.96.0/index.html#nonminimal_bool
+     = note: `-D clippy::nonminimal-bool` implied by `-D warnings`
+     = help: to override `-D warnings` add `#[allow(clippy::nonminimal_bool)]`
+
+error: could not compile `ariadne-analysis` (lib) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `ariadne-analysis` (lib test) due to 1 previous error

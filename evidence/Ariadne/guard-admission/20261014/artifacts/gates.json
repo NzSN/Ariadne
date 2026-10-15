@@ -1,0 +1,172 @@
+[
+  {
+    "name": "native-build",
+    "command": [
+      "python3",
+      "native/bap-core/build.py",
+      "--output",
+      "target/guard-native"
+    ],
+    "exit_code": 0,
+    "seconds": 5.5478405100000145
+  },
+  {
+    "name": "guard-native-parity",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--test",
+      "input_bap_core",
+      "guarded_frame_capture_has_native_parity_and_rejects_direct_proof_tampering",
+      "--",
+      "--ignored",
+      "--nocapture"
+    ],
+    "exit_code": 101,
+    "seconds": 5.784416839999949
+  },
+  {
+    "name": "format",
+    "command": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit_code": 1,
+    "seconds": 0.4151708879999205
+  },
+  {
+    "name": "oracle",
+    "command": [
+      "python3",
+      "tests/bap/fixtures/guards/oracle.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.045114887999943676
+  },
+  {
+    "name": "guard-fixture",
+    "command": [
+      "python3",
+      "tests/input/fixtures/make_guard_frame.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.018952595000087058
+  },
+  {
+    "name": "default-tests",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked"
+    ],
+    "exit_code": 0,
+    "seconds": 8.057944755999983
+  },
+  {
+    "name": "core-only-tests",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--no-default-features"
+    ],
+    "exit_code": 0,
+    "seconds": 0.3388672400000132
+  },
+  {
+    "name": "clippy",
+    "command": [
+      "cargo",
+      "clippy",
+      "--offline",
+      "--locked",
+      "--all-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "seconds": 7.262293779000061
+  },
+  {
+    "name": "layout",
+    "command": [
+      "python3",
+      "tools/check_rust_layout.py"
+    ],
+    "exit_code": 0,
+    "seconds": 0.04221689999997125
+  },
+  {
+    "name": "native-producer",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--test",
+      "bap_native",
+      "--",
+      "--ignored"
+    ],
+    "exit_code": 0,
+    "seconds": 18.710912689999986
+  },
+  {
+    "name": "capture-parity",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--test",
+      "input_bap_core",
+      "--",
+      "--ignored"
+    ],
+    "exit_code": 101,
+    "seconds": 30.27186343199992
+  },
+  {
+    "name": "frame-path-native",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--test",
+      "input_frame_paths",
+      "--",
+      "--ignored"
+    ],
+    "exit_code": 0,
+    "seconds": 29.972339353999928
+  },
+  {
+    "name": "release-build",
+    "command": [
+      "cargo",
+      "build",
+      "--offline",
+      "--locked",
+      "--release",
+      "--features",
+      "validation",
+      "--lib",
+      "--bin",
+      "ariadne-minidump"
+    ],
+    "exit_code": 0,
+    "seconds": 19.458230415999992
+  }
+]

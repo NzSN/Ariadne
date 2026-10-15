@@ -144,7 +144,7 @@ def main():
                   validatorSha256=sha(ROOT/"target/release/bap-admission-validate"),
                   nativeOutputHashes=native_hashes, explicitBapOutputHashes=explicit_hashes,
                   nativeReferenceComparisons=comparisons, byteExactExplanationComparisons=12,
-                  scope="18 available historical v2 hashes verified through frozen pre-change sources; the old six Linux hashes remain unexercised. A distinct Windows replacement establishes six new v3 output baselines; available historical v3 comparison permits only validated profile metadata and derived content IDs. Current native/reference core comparisons and explanations remain byte-exact. Historical bytes are not relabeled as unchanged v3 output.")
+                  scope="18 available historical v2 hashes verified through frozen pre-change sources; the old six Linux hashes remain unexercised. A distinct Windows replacement establishes six current output baselines; available historical comparison permits only validated v4 profile metadata and derived content IDs. Current native/reference core comparisons and explanations remain byte-exact. Historical bytes are not relabeled as unchanged v4 output.")
     (work / "report.json").write_text(json.dumps(result, indent=2) + "\n")
     print("Report:", work / "report.json", flush=True)
     if not passed:

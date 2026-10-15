@@ -1,0 +1,46 @@
+use ariadne::input::{FileSnapshot,OpenLimits,FramePreparation,PrepareLimits};
+use ariadne::investigation::{FrameRecoveryLimits,FramePathLimits,FramePathQuestion,active_frame_entry,bind_frame_paths,list_frame_paths};
+use std::{error::Error,path::PathBuf,time::Instant};
+fn main()->Result<(),Box<dyn Error>> {
+ let args:Vec<_>=std::env::args().skip(1).collect();let out=PathBuf::from(&args[1]);std::fs::create_dir_all(&out)?;
+ let start=Instant::now();let snapshot=FileSnapshot::open_minidump(&args[0],OpenLimits{max_file_bytes:2*1024*1024*1024,max_read_bytes:16*1024*1024,..Default::default()})?;
+ let metadata=snapshot.metadata();let thread=metadata.exception.as_ref().ok_or("exception absent")?.thread_id;
+ std::fs::write(out.join("metadata.json"),serde_json::to_vec_pretty(&serde_json::json!({"snapshot_id":metadata.snapshot_id,"artifact_sha256":metadata.artifact_sha256,"thread_id":thread,"module_count":metadata.modules.len()}))?)?;
+ let module=metadata.modules.iter().find(|m|m.name.to_lowercase().ends_with("electron.exe")).ok_or("electron module absent")?;
+ let header=snapshot.read_prefix(module.base,4096)?;let h=&header.bytes;let u32at=|at:usize|u32::from_le_bytes(h[at..at+4].try_into().unwrap());
+ let nt=u32at(60) as usize;let opt=nt+24;let _runtime_rva=u32at(opt+136);let runtime_bytes=u32at(opt+140) as usize;let entries=runtime_bytes/12;
+ println!("thread={thread}; module=0x{:x}; runtime entries={entries}; bytes={runtime_bytes}",module.base);
+ let default=snapshot.recover_thread_frames(thread,FrameRecoveryLimits{max_frames:4,..Default::default()})?;
+ std::fs::write(out.join("frames-default.json"),serde_json::to_vec_pretty(&default)?)?;
+ println!("default frames={}; stop={}",default.frames.len(),default.stop_reason);
+ let recovery=FrameRecoveryLimits{max_frames:6,max_runtime_entries:entries,max_read_bytes:runtime_bytes+1024*1024,..Default::default()};
+ let chain=snapshot.recover_thread_frames(thread,recovery)?;snapshot.validate_thread_frames(&chain)?;
+ std::fs::write(out.join("frames-expanded-budget.json"),serde_json::to_vec_pretty(&chain)?)?;
+ println!("expanded frames={}; stop={}",chain.frames.len(),chain.stop_reason);
+ let root=PathBuf::from(env!("CARGO_MANIFEST_DIR"));let cfg=ariadne::bap::Config::from_env();let opts=ariadne::effects::PreparationOptions::default();
+ let setup=FramePreparation{decoder:&root.join("target/ariadne-llvm-mc"),config:&cfg,options:&opts,limits:PrepareLimits::default()};
+ let n=1;let mut queries=Vec::new();let mut errors=Vec::new();
+ if n<chain.frames.len() {
+  for index in (0..=n).rev() {
+   let entry=if let Some(e)=chain.frames[index].function_begin {e} else if let Some((_,parent))=queries.last(){match active_frame_entry(&chain,index,parent){Ok(e)=>e,Err(e)=>{errors.push(format!("frame {index} entry: {e}"));break;}}} else {errors.push(format!("frame {index}: no bound function entry"));break;};
+   println!("preparing frame {index}, entry=0x{entry:x}");
+   let result=if args.get(2).is_some_and(|s|s=="default"){snapshot.prepare_frame_with_bap(&chain,index,entry,&setup)}else{snapshot.prepare_frame_with_bap_assuming_windows_call_entry(&chain,index,entry,&setup,ariadne::bap::guard_admission::Limits::default())};
+   let prepared=match result{Ok(p)=>p,Err(e)=>{errors.push(format!("frame {index} preparation: {e}"));break;}};
+   if let Some(report)=prepared.guard_admission() {
+    std::fs::write(out.join(format!("frame-{index}-guard-report.json")),serde_json::to_vec_pretty(report)?)?;
+    for decision in &report.guards {println!("guard {}: {:?}, residues={:#06x}, residual={}",decision.site,decision.verdict,decision.input_residues,decision.residual);}
+   }
+   let completed=ariadne::CompletedAnalysis::from_analyzer(ariadne::Analyzer::new(prepared.prepared.request.clone())?);
+   println!("frame {index}: decoded={}",ariadne::AnalysisView::state(&completed).decoded.len());
+   let bound=ariadne::input::investigation::bind_investigation(&prepared,&completed)?;queries.push((index,bound));
+  }
+ }
+ let bound=bind_frame_paths(chain,queries)?;
+ let mut limits=FramePathLimits::default();limits.max_output_bytes=32*1024*1024;
+ let listing=list_frame_paths(&bound,FramePathQuestion{from_frame:1,to_frame:0,np:10},limits)?;
+ for (name,format) in [("frame-paths.json",ariadne::reports::Format::Json),("frame-paths.txt",ariadne::reports::Format::Text),("frame-paths.dot",ariadne::reports::Format::Dot)] {
+  std::fs::write(out.join(name),ariadne::reports::render_frame_paths(&listing,format)?)?;
+ }
+ std::fs::write(out.join("probe-summary.json"),serde_json::to_vec_pretty(&serde_json::json!({"dump_sha256":metadata.artifact_sha256,"thread_id":thread,"runtime_entries":entries,"runtime_bytes":runtime_bytes,"backend":"rust reference, explicit","preparation_errors":errors,"elapsed_ms":start.elapsed().as_millis(),"scope":"API probe raises captured-read/runtime-table/output byte budgets; explicit windows-amd64-normal-call-entry/v1 premise; no image fallback, symbol bytes or additional discovery roots are used"}))?)?;
+ println!("probe done in {}ms",start.elapsed().as_millis());Ok(())
+}

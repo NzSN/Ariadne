@@ -1,0 +1,22 @@
+{
+  "schema": "ariadne.native-frontier-controls/v1",
+  "source_sha256": "20fd21317e8bcdd4ac8efe23e42e86263d1876b67c349da8c4489f00af7797b0",
+  "native_manifest_sha256": "70d7a8ee8a6c3d30b214349208524676b1038dd9544c5f225def51a2b68c2798",
+  "source_cases": 12,
+  "build_command": [
+    "/home/nzsn/Repos/Ariadne-composed-20261014/target/bap-core-sdk/prefix/_opam/bin/ocamlfind",
+    "ocamlopt",
+    "-linkpkg",
+    "-package",
+    "bap,yojson",
+    "-I",
+    "/home/nzsn/Repos/Ariadne-composed-20261014/target/composed-native",
+    "/home/nzsn/Repos/Ariadne-composed-20261014/target/composed-native/recovery.cmx",
+    "/home/nzsn/Repos/Ariadne-composed-20261014/target/composed-native/capture.cmx",
+    "infeasible_loop.ml",
+    "-o",
+    "frontier-controls"
+  ],
+  "build_exit": 0,
+  "run_exit": 0
+}

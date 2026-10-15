@@ -1,0 +1,9 @@
+use std::{error::Error,path::PathBuf};
+use ariadne::input::{FileSnapshot,OpenLimits,AnalysisQuery,PrepareLimits};
+fn main()->Result<(),Box<dyn Error>>{
+ let args:Vec<_>=std::env::args().skip(1).collect();let root=PathBuf::from(env!("CARGO_MANIFEST_DIR"));let snap=FileSnapshot::open_minidump(&args[0],OpenLimits{max_file_bytes:2*1024*1024*1024,..Default::default()})?;
+ let va=0x7ff7744033b3;
+ let p=snap.prepare_with_bap(&AnalysisQuery{entry_points:[va].into(),slice_seeds:Default::default()},&root.join("target/ariadne-llvm-mc"),&ariadne::bap::Config::from_env(),&ariadne::effects::PreparationOptions::default(),PrepareLimits::default())?;
+ let result=ariadne::analyze(p.prepared.request.clone())?;
+ std::fs::write(&args[1],ariadne::input::report::render(&p,&result,ariadne::input::report::ReportFormat::Json,false)?)?;Ok(())
+}

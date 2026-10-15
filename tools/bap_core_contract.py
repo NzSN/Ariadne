@@ -49,13 +49,15 @@ def finite_float(value):
     return result
 
 
-def decode_request(raw, identity, next_sequence, initialized):
+def decode_request(raw, identity, next_sequence, initialized, max_request_bytes=MAX_FRAME_BYTES):
     """Validate one request; callers retain all state and sequence ownership.
 
     Initialization payload semantics and enabled-action guards belong to the
     future native pass. Success here MUST NOT publish an admitted analysis.
     """
-    require(type(raw) is bytes and 0 < len(raw) <= MAX_FRAME_BYTES, "frame size/type")
+    require(type(max_request_bytes) is int and 0 < max_request_bytes < 2**64,
+            "invalid request byte budget")
+    require(type(raw) is bytes and 0 < len(raw) <= max_request_bytes, "frame size/type")
     require(raw.endswith(b"\n") and b"\n" not in raw[:-1], "exactly one JSON line required")
     require(type(next_sequence) is int and 0 <= next_sequence < 2**64, "invalid expected sequence")
     require(type(initialized) is bool, "invalid initialization state")

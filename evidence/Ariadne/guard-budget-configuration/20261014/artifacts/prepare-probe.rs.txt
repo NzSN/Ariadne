@@ -1,0 +1,23 @@
+use ariadne::input::{FileSnapshot,OpenLimits,FramePreparation,PrepareLimits,PreparationError};
+use ariadne::investigation::FrameRecoveryLimits;
+use std::{error::Error,path::PathBuf,time::Instant};
+fn main()->Result<(),Box<dyn Error>> {
+ let args:Vec<_>=std::env::args().skip(1).collect();let out=PathBuf::from(&args[1]);std::fs::create_dir_all(&out)?;
+ let started=Instant::now();let snapshot=FileSnapshot::open_minidump(&args[0],OpenLimits{max_file_bytes:2*1024*1024*1024,max_read_bytes:16*1024*1024,..Default::default()})?;
+ let md=snapshot.metadata();let thread=md.exception.as_ref().ok_or("exception absent")?.thread_id;
+ let chain=snapshot.recover_thread_frames(thread,FrameRecoveryLimits{max_frames:6,max_runtime_entries:440520,max_read_bytes:6334816,..Default::default()})?;snapshot.validate_thread_frames(&chain)?;
+ let expanded=args.get(2).is_some_and(|s|s=="expanded");
+ let prep=if expanded{PrepareLimits{max_starts:8192,max_candidates:16384,max_prefix_bytes:8192*15,max_decoder_batches:8192,..Default::default()}}else{PrepareLimits::default()};
+ let guard=if expanded{ariadne::bap::guard_admission::Limits{max_sites:8192,max_edges:32768,max_residue_updates:262144,max_transfer_evaluations:1048576,max_evidence_bytes:32*1024*1024,max_elapsed_ms:10000,..Default::default()}}else{ariadne::bap::guard_admission::Limits{max_evidence_bytes:32*1024*1024,..Default::default()}};
+ let root=PathBuf::from(env!("CARGO_MANIFEST_DIR"));let config=ariadne::bap::Config::from_env();let options=ariadne::effects::PreparationOptions::default();
+ let setup=FramePreparation{decoder:&root.join("target/ariadne-llvm-mc"),config:&config,options:&options,limits:prep.clone()};let entry=chain.frames[1].function_begin.ok_or("caller entry absent")?;
+ let mut result=serde_json::json!({"dump_sha256":md.artifact_sha256,"thread_id":thread,"frames_recovered":chain.frames.len(),"unwind_stop":chain.stop_reason,"caller_entry":format!("0x{entry:016x}"),"mode":if expanded{"expanded"}else{"original-discovery"},"preparation_limits":prep,"guard_limits":guard,"scope":"captured-only original rooted caller; samevalidated frame/ABI premise; preparation and native initialization check only; no core steps/path enumeration"});
+ match snapshot.prepare_frame_with_bap_assuming_windows_call_entry(&chain,1,entry,&setup,guard) {
+  Ok(p)=>{let report=p.guard_admission().ok_or("guard report absent")?;result["status"]=serde_json::json!("prepared");result["guard_stop"]=serde_json::json!(report.stop);result["attempted_starts"]=serde_json::json!(p.materialization.attempted.len());result["candidate_sites"]=serde_json::json!(report.input.sites.len());result["guard_input_bytes"]=serde_json::json!(serde_json::to_vec(&report.input)?.len());result["guard_report_bytes"]=serde_json::json!(serde_json::to_vec(report)?.len());result["raw_ast_bytes"]=serde_json::json!(report.input.sites.iter().map(|s|s.ast.len()).sum::<usize>());result["decodable_sites"]=serde_json::json!(p.prepared.request.decodable.len());result["guards"]=serde_json::json!(report.guards.iter().map(|g|serde_json::json!({"site":g.site,"verdict":g.verdict,"residual":g.residual})).collect::<Vec<_>>());std::fs::write(out.join("guard-report.json"),serde_json::to_vec(report)?)?;
+   let native_config=ariadne::bap::core_session::CoreConfig::from_directory(root.join("target/guard-budget-native"));
+   result["native_initialization"]=match ariadne::bap::core_adapter::NativeAnalyzer::from_capture(&native_config,"guard-budget-dump-probe",&p) {Ok(_)=>serde_json::json!({"status":"accepted-no-analysis-steps"}),Err(e)=>serde_json::json!({"status":"rejected","error":e.to_string()})};
+  }
+  Err(e)=>{result["status"]=serde_json::json!("preparation-failed");result["error"]=serde_json::json!(e.to_string());if let Some(PreparationError::LimitReached{reason,progress})=e.downcast_ref::<PreparationError>(){result["limit_reason"]=serde_json::json!(reason);result["attempted_starts"]=serde_json::json!(progress.attempted.len());result["prefix_bytes"]=serde_json::json!(progress.prefix_bytes);result["completed_batches"]=serde_json::json!(progress.decoder_batches);}}
+ }
+ result["elapsed_ms"]=serde_json::json!(started.elapsed().as_millis());std::fs::write(out.join("preparation-outcome.json"),serde_json::to_vec_pretty(&result)?)?;println!("{}",serde_json::to_string_pretty(&result)?);Ok(())
+}

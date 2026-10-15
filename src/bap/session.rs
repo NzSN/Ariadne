@@ -9,6 +9,8 @@ use std::process::{Child, ChildStdin, Command, Stdio};
 use std::sync::mpsc::{self, Receiver};
 use std::time::Duration;
 
+pub(crate) const MAX_SESSION_SITES: usize = 8192;
+
 #[derive(Clone, Debug)]
 pub struct Config {
     pub helper: PathBuf,
@@ -141,6 +143,9 @@ fn command(config: &Config) -> Command {
     command
 }
 impl Session {
+    pub(crate) fn remaining_sites(&self) -> usize {
+        MAX_SESSION_SITES.saturating_sub(self.total)
+    }
     pub fn start(config: &Config, snapshot_id: &str, target: &str) -> Result<Self, Error> {
         config.validate()?;
         if snapshot_id.is_empty() || !["windows-amd64", "linux-amd64"].contains(&target) {
@@ -246,7 +251,7 @@ impl Session {
         if candidates.is_empty() || candidates.len() > 256 {
             return Err(invalid("invalid BAP batch size"));
         }
-        if self.total + candidates.len() > 8192 {
+        if candidates.len() > self.remaining_sites() {
             return Err(invalid("BAP query site budget exceeded"));
         }
         for (&va, bytes) in candidates {

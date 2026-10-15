@@ -60,6 +60,8 @@ pub(super) fn input(edges: &[(usize, usize)]) -> Input {
         semantic_profile: "independent-normalized-graph-fixture".into(),
     };
     let graph = FrameGraph {
+        #[cfg(feature = "bap")]
+        guard_admission: None,
         frame: 0,
         identity: identity(0),
         entry: map[0],
@@ -84,6 +86,8 @@ pub(super) fn input(edges: &[(usize, usize)]) -> Input {
         gaps: vec![],
     };
     let parent = FrameGraph {
+        #[cfg(feature = "bap")]
+        guard_admission: None,
         frame: 1,
         identity: identity(1),
         entry: 0x400300,

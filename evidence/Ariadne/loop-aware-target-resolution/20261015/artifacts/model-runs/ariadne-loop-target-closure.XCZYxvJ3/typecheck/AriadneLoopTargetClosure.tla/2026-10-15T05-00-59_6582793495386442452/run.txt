@@ -1,0 +1,1 @@
+ typecheck --out-dir=/loop-work/tmp/ariadne-loop-target-closure.XCZYxvJ3/typecheck AriadneLoopTargetClosure.tla

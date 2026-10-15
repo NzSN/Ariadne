@@ -2,139 +2,86 @@
 
 ## Context and follow-up
 
-**Status.** Current plan navigation as of 2026-10-13. Captured indirect-target
-resolution R0–R5 and review corrections are implemented. Current portable/root
-checks and the current pinned-native/original-dump retry pass. Mutation/replay
-qualification remains pending; individual native/Rust timing samples now meet
-the original criterion. Earlier synthetic Windows/Linux and
-original Windows full-dump results retain their historical scope. BAP projection admission
-P0–P4 and completion transport are accepted on the selected Windows replacement.
-The [acceptance decision](../evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
-excludes the remaining historical real-Linux clauses; their evidence stays
-unexercised. Exact external queries are preserved.
-I5c fault-time address wrap
-has a selected design and W0–W5 plan; implementation and qualification remain
-pending. I5b has a selected design
-and detailed B0–B5 implementation plan; all stages are implemented and qualified
-within the recorded finite source/fixture and controlled Windows corpora. Native BAP analysis and
-controlled Windows I5a are qualified within their recorded scopes. The Windows
-I4 re-pin and D0–D3 performance follow-up are complete for the exact controlled
-case; its qualified CLI median is 1,692.696 ms against 2,000 ms.
+**Status.** The active ledgers below retain unfinished work after the 2026-10-15 loop delivery. Guarded target composition and its bounded loop-aware follow-up are complete within their recorded captured-table scope.
+Thirty-one completed or superseded records live in `completed/`. Archiving
+preserves each record's original scope and does not refresh its qualification.
 
-**Why this document exists.** The [roadmap](../ROADMAP.md) sets the priorities
-used to distinguish current work, delivered plans and retired research.
+**Why this document exists.** The [roadmap](../ROADMAP.md) separates remaining
+project work from delivered capabilities and historical evidence.
 
-**What this document establishes.** The stage ledgers below identify remaining
-work. Delivered plans preserve their implementation and acceptance contracts;
-keeping a plan outside `completed/` does not make its completed steps pending.
+**What this document establishes.** A compact index of unfinished work and
+archived execution records. Canonical feature contracts, usage and validation
+summaries remain in the [design documentation](../docs/documentation-map.md).
 
 **Where to go next.**
 
-- [Captured indirect-target resolution](indirect-target-resolution.md) —
-  implemented pointer-slot/table resolver, coverage certificates, bounded
-  preparation integration and source-bound finite qualification.
+- [Investigation ledger](investigation-layer.md) — current question stages and
+  remaining hypothesis, source-context and cross-capture capabilities.
+- [Checkpoint history](../CHECKPOINTS.md) — dated deliveries and their evidence.
+- [Semantic assurance](../docs/Ariadne/semantic-assurance.md) — trusted lifting,
+  finite conformance and the open universal refinement boundary.
 
-- [Active specification synchronization](specification-sync.md) — current
-  source/model audit, extension corrections and separately pending remote checks.
-
-- [Frame-path enumeration](frame-path-enumeration.md) — F0–F4 implementation of
-  fewer than `NP` frame-constrained paths with independent resource budgets.
-
-- [Memory provenance refinement](memory-provenance-refinement.md) — source/CLI
-  implementation and finite probes pass; remote model, mutation and full Scanner
-  qualification remain pending.
-
-- [Scanner partial-explanation follow-up](scanner-partial-explanation.md) —
-  retained 28-gap inventory and S0–S4 case-specific work; coordinates the
-  existing memory-refinement qualification with control/decode and entry review.
-
-- [Historical BAP documentation audit](../docs/Ariadne/bap-analysis-core-design.md#documentation-audit) — preserves the earlier v2 inventory and links to accepted v3 delivery.
-
-- [BAP projection admission and coverage](bap-projection-admission.md) —
-  accepted P0–P4 replaces opcode-name restrictions with validated BIL capabilities
-  and preserves explicit unknown effects/control under the selected corpus.
-- [Completed P4 real-capture re-pin](real-capture-repin-79938.md) — selected
-  Windows replacement, its distinct baseline and preserved historical Linux scope.
-
-- [I5c address-wrap plan](i5c-address-wrap.md) and
-  [design](../docs/Ariadne/address-wrap-design.md) — the selected next
-  arithmetic assessment, exact signed-displacement predicate and pending W0–W5 exits.
-- [I5b implementation plan](i5b-zero-base-offset.md) — delivered zero-base-plus-
-  displacement assessment, decoded-role evidence and independent qualification.
-- [Investigation ledger](investigation-layer.md) — tracks active Windows I4
-  performance, delivered I5a and later hypothesis/object/cross-capture work.
-- [I4 replacement result](../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement) — records
-  the exact active capture and historical over-budget baseline; the later
-  [performance qualification](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification) meets both fixed budgets.
-- [BAP integration ledger](bap-integration.md) — records completed semantic and
-  analysis migration with remaining proof, source/tool and release limits.
-- [Native core qualification](../docs/Ariadne/bap-analysis-core-design.md#native-qualification) and
-  [native I5a qualification](../docs/Ariadne/zero-address-design.md#native-qualification) — bind
-  accepted corpora, helper identities and the read-only dependency snapshot.
-- [Evidence guide](../evidence/Ariadne/README.md) — distinguishes retained results,
-  failed progress records and fresh qualification after changes.
-
-**What remains unresolved.** V3 admission/continuation and active-corpus P4
-are accepted on their qualified source/tool/capture identities. No required P4
-work remains. The historical real-Linux oracle and coverage remain unexercised
-and excluded from P4 acceptance. I4 acceptance
-passes for its recorded source/tool/dependency identities and exact 98-start case; future changes require renewed
-qualification. I5c implementation/qualification, other I5 hypotheses, Linux
-numeric admission, I6/I7, PE/ELF image and ELF-core inputs, universal refinement
-and packaged cross-platform release qualification remain outside the delivered
-scope. BAP's unlimited timing policy does not waive I4 or I5a budgets.
-
-For the wider context, see the [documentation map](../docs/documentation-map.md).
+**What remains unresolved.** The active ledgers below retain their unmet gates.
+Archived Windows scopes do not qualify excluded Linux, full-dump, release or
+universal-proof clauses. A partial result is not a completed acceptance gate.
 
 ## Current work and delivery ledgers
 
-| Plan | Current state and next work |
+| Active plan | Remaining work |
 | --- | --- |
-| [Captured indirect-target resolution](indirect-target-resolution.md) | R0–R5 and corrections committed at b5d56b7. Portable/root checks, pinned native tests and original-dump retry pass: 45 targets, full-state/CLI parity and 38.61 s / 19.92 s samples. Explanation remains partial and reporting is truncated; full mutation/replay and release qualification remain pending. |
-| [Scanner partial explanation](scanner-partial-explanation.md) | Retained baseline inspected; S1–S4 follow-up pending for memory qualification, twenty recovery obligations, entry provenance and source-bound publication. A qualified result may remain partial. |
-| [BAP projection admission](bap-projection-admission.md) | P0–P4 accepted on the active real Windows replacement; remaining historical real-Linux clauses excluded: capability admission, conservative continuation, bounded completion, fresh root/native/model/mutation, parity and fixed-budget checks. See the [replacement record](../docs/Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query); six historical Linux outputs remain unexercised. |
-| [Investigation layer](investigation-layer.md) | I0–I3 and active Windows producer correctness pass. I4 meets its fixed budgets in the [native performance result](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification); I5a is qualified, I5b is corpus-qualified, and other I5/I6/I7 remain later work. |
-| [I5c address wrap](i5c-address-wrap.md) | Selected design and W0–W5 plan written; all implementation/qualification pending. Upper-wrap/no-wrap assessment uses the inherited lower-range profile; underflow remains unknown. |
-| [I5b zero base plus displacement](i5b-zero-base-offset.md) | B0–B5 implemented and corpus-qualified: 18 passing gates, 15 detected mutants, stable source/tool identities and six controlled Windows captures. |
-| [BAP integration](bap-integration.md) | Stage 1 and native A0–A6 are qualified on their exercised corpora. Maintain source/tool-bound regressions after changes; universal proof and packaged release acceptance remain separate. |
-| [Roadmap](../ROADMAP.md) | Current input and product direction, deferred readers and the [Stage F proof boundary](../docs/Ariadne/semantic-assurance.md#universal-rust-refinement-boundary). |
+| [Frame-path enumeration](frame-path-enumeration.md) | Remote model/mutation and successful full-dump qualification. The original dump retry remains unavailable. |
+| [I5c address wrap](i5c-address-wrap.md) | W0–W5 model, runtime, capture and qualification stages. |
+| [Indirect-target resolution](indirect-target-resolution.md) | Full R6 mutation/replay qualification; retain the narrower completed native/dump retry. |
+| [Investigation layer](investigation-layer.md) | I5c, other hypotheses, I6/I7 and remaining frame-path qualification. |
+| [Memory provenance refinement](memory-provenance-refinement.md) | M4 remote model/mutation and complete Scanner qualification. |
+| [Scanner partial explanation](scanner-partial-explanation.md) | S1–S4 memory, recovery, entry-provenance and publication follow-up. |
+| [Specification synchronization](specification-sync.md) | S3 remote qualification of the audited model suite. |
 
 ## Delivered implementation and qualification plans
 
-| Plan | Completion boundary and evidence |
-| --- | --- |
-| [Complete Stage 2 execution](bap-stage2-implementation.md) | Native recovery, definitions, slicing, finite stateflow, generated replay and adoption delivered; [20-gate qualification](../docs/Ariadne/bap-analysis-core-design.md#native-qualification) verifies default selection and explicit Rust rollback. |
-| [OCaml foundation qualification](bap-ocaml-qualification.md) | OQ0–OQ6 qualified the pinned SDK, bounded native state exchange, transport, clean rebuild and mutations; [foundation record](../docs/Ariadne/bap-analysis-core-design.md#ocaml-foundation-qualification). |
-| [Stage 2 A0](bap-stage2-a0.md) | Historical interface/capability probe; the foundation and complete Stage 2 successors independently close its implementation gaps. |
-| [Native I4 performance](i4-performance-implementation.md) | D0–D3 complete: 1,692.696 ms Windows CLI / 2,000 ms, 182.924 ms Linux phases / 250 ms; [verified qualification](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification). |
-| [Windows I4 replacement](i4-windows-repin.md) | Capture/pin delivery complete with 17 passing gates; [validation](../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement) retains the unmet 2,000 ms CLI clause. The later native performance follow-up closes that clause for its recorded identities. |
-| [I5a zero-address assessment](i5a-zero-address.md) | H0–H5 delivered; [12-gate historical source/fixture result](../docs/Ariadne/zero-address-design.md#historical-source-and-fixture-qualification) precedes the separately qualified native/controlled tiers. |
-| [Native I5a qualification](i5a-native-qualification.md) | [Native result](../docs/Ariadne/zero-address-design.md#native-qualification): 14 source/fixture gates, 17 investigation gates and both controlled captures pass under the selected dependency snapshot and unchanged budgets. |
-| [BAP Windows replacement](bap-windows-repin.md) | New real Crashpad capture, independent inspection and durable input pin delivered; [historical validation](../docs/Ariadne/bap-analysis-core-design.md#windows-workload-replacement) preserves the former bounded-policy failure. The [later unlimited policy](../docs/Ariadne/bap-analysis-core-design.md#unlimited-timing-policy) supersedes that BAP timing criterion. |
+Completed execution records have moved to the archive below. Their canonical
+designs own current usage and contracts. The vector plan's former path remains
+a compatibility link for its retained qualification report; use the archived
+path for new references.
 
 ## Archived completed plans
 
-Archived plans live in `completed/`; their records apply to the source, backend
-and workload exercised at the original run. Archiving does not refresh evidence.
-
-| Plan | Completion boundary and successor |
+| Record | Completion boundary |
 | --- | --- |
-| [Investigation correctness fixes](completed/investigation-correctness-fixes.md) | Timing enforcement and valid truncation; [17-gate repair record](../docs/Ariadne/investigation-design.md#qualification-and-truncation-repairs). The later active I4 re-pin retains its separate performance failure. |
-| [Rust source layout](completed/rust-source-layout.md) | Single root Cargo package and source consolidation; [delivery](../docs/Ariadne/architecture.md#source-layout-and-development). |
-| [BAP-only semantics](completed/bap-only-semantics.md) | LLVM semantic selector/fallback removed; [historical removal](../docs/Ariadne/bap-analysis-core-design.md#bap-only-delivery). Later Stage 1 and native Stage 2 records qualify their own scopes. |
-| [Stage E initial integration](completed/stage-e-mirrorrust-integration.md) | Initial typed replay ports and fixture traces; [record](../evidence/Ariadne/stage-e-mirrorrust-integration-validation.json). |
-| [Stage E completion](completed/stage-e-completion.md) | Finite generated replay, mutations and report/CLI acceptance; [completion](../docs/Ariadne/typed-replay-design.md#finite-corpus-and-claim-boundary). |
-| [Operand/effects implementation](completed/operand-effects-plan.md) | Historical LLVM effect preparation; [validation](../docs/Ariadne/operand-effects-design.md#historical-effect-qualification). Production minidump semantics use BAP. |
-| [Stage A MOV effects](completed/stage-a-memory-immediate-mov-plan.md) | Two scoped immediate-store rules; [validation](../docs/Ariadne/operand-effects-design.md#memory-immediate-mov-delivery-2026-09-28). |
-| [Priority 1 real capture](completed/priority-1-real-capture-plan.md) | One controlled Chromium/Linux predecessor slice; [validation](../docs/Ariadne/file-reader-design.md#historical-controlled-chromium-capture). |
-| [Priority 2 path effects](completed/priority-2-path-driven-effects-plan.md) | Selected-path review and no-change decision; [validation](../docs/Ariadne/operand-effects-design.md#selected-path-no-change-decision-2026-09-29). New gaps need new scoped work. |
-| [Priority 3 presentation](completed/priority-3-investigator-presentation-plan.md) | Instruction overview and platform examples; [validation](../docs/Ariadne/result-rendering.md#presentation-acceptance). |
-| [Priority 4 performance](completed/priority-4-workload-performance-plan.md) | Historical LLVM-backed workload optimization; [validation](../docs/Ariadne/workload-performance-design.md#historical-llvm-workload-qualification). It does not qualify native BAP or the active I4 query. |
+| [Loop-aware target resolution](completed/loop-aware-target-resolution.md) | L0–L6 captured-table coverage: DA09/DADD induction, all-nine completeness, native/Rust parity; frame paths remain unavailable. |
+| [Guarded target resolution](completed/guarded-target-resolution.md) | C0–C6 scoped composition delivery; the loop successor closes the former ninth C5 clause. |
+| [Native request budget](completed/native-request-budget.md) | T0–T4 finite transport configuration; original larger caller initializes, with candidate coverage unresolved. |
+| [Configurable guard budgets](completed/guard-budget-configuration.md) | G5 finite configuration/CLI/native delivery; larger caller retains coverage and transport limits. |
+| [BAP shift-count compatibility](completed/bap-shift-counts.md) | X0–X4 finite correction; subsequent budget configuration has its own qualification. |
+| [Proof-gated MOVAPS admission](completed/justified-branch-pruning.md) | G0–G4 finite MOVAPS delivery; subsequent shift/budget corrections have separate records. |
+| [Vector-register admission](completed/bap-vector-registers.md) | V0–V2 finite XMM/YMM namespace and coarse vector effects; general SIMD excluded. |
+| [BAP integration](completed/bap-integration.md) | Stage 1 and native Stage 2 qualified on their recorded corpora. |
+| [OCaml foundation](completed/bap-ocaml-qualification.md) | OQ0–OQ6 SDK/state/transport qualification. |
+| [Stage 2 A0 probe](completed/bap-stage2-a0.md) | Historical probe superseded by independently qualified foundation/Stage 2 successors. |
+| [Stage 2 implementation](completed/bap-stage2-implementation.md) | A1–A6 algorithms, replay and default adoption. |
+| [Projection admission](completed/bap-projection-admission.md) | User-accepted P0–P4 Windows scope; historical Linux clauses excluded. |
+| [Completion paging](completed/bap-completion-pages.md) | Finite P4 completion-transport clause. |
+| [Real-capture replacement](completed/real-capture-repin-79938.md) | Five replacement stages and accepted Windows P4 scope. |
+| [BAP Windows re-pin](completed/bap-windows-repin.md) | Capture/pin campaign; historical timing verdict preserved. |
+| [I4 Windows re-pin](completed/i4-windows-repin.md) | Replacement delivery; separate performance successor. |
+| [I4 performance](completed/i4-performance-implementation.md) | D0–D3 exact controlled-workload qualification. |
+| [I5a zero address](completed/i5a-zero-address.md) | H0–H5 source/fixture delivery; later native qualification is separate. |
+| [I5a native qualification](completed/i5a-native-qualification.md) | Exercised native and controlled Windows tiers. |
+| [I5b zero base/nonzero displacement](completed/i5b-zero-base-offset.md) | B0–B5 finite source/fixture and controlled Windows qualification. |
+| [Investigation correctness fixes](completed/investigation-correctness-fixes.md) | Historical qualification/truncation repairs. |
+| [Rust source layout](completed/rust-source-layout.md) | Single root Cargo package and source consolidation. |
+| [BAP-only semantics](completed/bap-only-semantics.md) | Removal of production LLVM effect fallback. |
+| [Stage E initial integration](completed/stage-e-mirrorrust-integration.md) | Initial typed replay ports and fixtures. |
+| [Stage E completion](completed/stage-e-completion.md) | Finite generated replay, mutations and report/CLI checks. |
+| [Operand/effects implementation](completed/operand-effects-plan.md) | Historical LLVM effect preparation. |
+| [Stage A MOV effects](completed/stage-a-memory-immediate-mov-plan.md) | Two scoped immediate-store rules. |
+| [Priority 1 real capture](completed/priority-1-real-capture-plan.md) | Controlled Chromium/Linux predecessor slice. |
+| [Priority 2 path effects](completed/priority-2-path-driven-effects-plan.md) | Selected-path review and no-change decision. |
+| [Priority 3 presentation](completed/priority-3-investigator-presentation-plan.md) | Instruction overview and platform examples. |
+| [Priority 4 performance](completed/priority-4-workload-performance-plan.md) | Historical LLVM workload optimization; no replacement-backend qualification. |
 
 ## Retired work
 
-Stage D and the independent AMD64/Lean instruction-step track are retired;
-their obligations were not discharged. ISA specifications, coverage inventories
-and obsolete checkers were removed on 2026-10-11. Git archives, retained Lean
-sources and historical records are described by the
-[semantic assurance decision](../docs/Ariadne/semantic-assurance.md#dependency-audit-and-retained-references).
+The independent AMD64 instruction-step/Lean track is retired. Its obligations
+were not discharged; the [assurance decision](../docs/Ariadne/semantic-assurance.md#dependency-audit-and-retained-references)
+records removed specifications and retained historical evidence.

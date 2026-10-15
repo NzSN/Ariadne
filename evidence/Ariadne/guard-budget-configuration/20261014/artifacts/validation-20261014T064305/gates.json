@@ -1,0 +1,222 @@
+[
+  {
+    "name": "format-apply",
+    "command": [
+      "cargo",
+      "fmt",
+      "--all"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.6310591999999993
+  },
+  {
+    "name": "guard-oracle",
+    "command": [
+      "python3",
+      "tests/bap/fixtures/guards/oracle.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.04999909999999996
+  },
+  {
+    "name": "format",
+    "command": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.440995
+  },
+  {
+    "name": "guard-units",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--lib",
+      "bap::guard_admission_tests"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 7.3289608
+  },
+  {
+    "name": "default-tests",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 22.911513338
+  },
+  {
+    "name": "core-only",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--no-default-features"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.3981000770000023
+  },
+  {
+    "name": "clippy",
+    "command": [
+      "cargo",
+      "clippy",
+      "--offline",
+      "--locked",
+      "--all-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 6.650214737000006
+  },
+  {
+    "name": "layout",
+    "command": [
+      "python3",
+      "tools/check_rust_layout.py"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.0507144480000008
+  },
+  {
+    "name": "native-build",
+    "command": [
+      "python3",
+      "native/bap-core/build.py",
+      "--output",
+      "target/guard-budget-native"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 5.2345233380000025
+  },
+  {
+    "name": "native-kernels",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--test",
+      "bap_core_bootstrap",
+      "--test",
+      "bap_core_analysis",
+      "--test",
+      "bap_core_stateflow",
+      "--",
+      "--ignored"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 17.205056596999995
+  },
+  {
+    "name": "native-capture",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--test",
+      "input_bap_core",
+      "--",
+      "--ignored"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 30.666435068
+  },
+  {
+    "name": "native-frame-path",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--test",
+      "input_frame_paths",
+      "--",
+      "--ignored"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 29.64330547200001
+  },
+  {
+    "name": "contract-tools",
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools",
+      "-p",
+      "test_bap_core_contract.py"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.09974439399999824
+  },
+  {
+    "name": "guard-mutation-seams",
+    "command": [
+      "python3",
+      "tools/check_guard_admission_mutations.py",
+      "--check-seams"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.0257472990000025
+  },
+  {
+    "name": "release-build",
+    "command": [
+      "cargo",
+      "build",
+      "--offline",
+      "--locked",
+      "--release",
+      "--features",
+      "validation",
+      "--lib",
+      "--bin",
+      "ariadne-minidump"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 19.593658947999998
+  },
+  {
+    "name": "predicate-model",
+    "command": [
+      "bash",
+      "Specs/check-predicate-admission.sh"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 12.904739785000004
+  }
+]

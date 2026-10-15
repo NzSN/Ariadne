@@ -1,0 +1,14 @@
+[
+  {
+    "original_path": "artifacts/dump-probe.rs",
+    "stored_path": "artifacts/dump-probe.rs.txt",
+    "sha256": "5dc79cd29783dd97b668d5af25d827b879226f16b355bb15b073e4d0f95175ea",
+    "reason": "qualification source text retained outside Rust implementation layout"
+  },
+  {
+    "original_path": "reproduce/dump-probe.rs",
+    "stored_path": "reproduce/dump-probe.rs.txt",
+    "sha256": "5dc79cd29783dd97b668d5af25d827b879226f16b355bb15b073e4d0f95175ea",
+    "reason": "qualification source text retained outside Rust implementation layout"
+  }
+]

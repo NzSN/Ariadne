@@ -216,6 +216,43 @@ class NativeContractTests(unittest.TestCase):
                 with self.assertRaises(RuntimeError):
                     check_i5a.retained(path, "mutations")
 
+    def test_retained_equivalence_requires_current_schema_and_exact_bindings(self):
+        validator_digest = "3" * 64
+        record = {
+            "schema": "ariadne.i5a-cli-equivalence/v4", "passed": True,
+            "sourcesStable": True, "sourceHashes": self.sources,
+            "analysisBackend": "bap", "analysisProfile": contract.PROFILE,
+            "defaultNativeVerified": True, "toolsStable": True,
+            "tools": self.tools, "helperManifest": self.manifest,
+            "historicalOracleVerified": True, "projectionMigrationVerified": True,
+            "validatorSha256": validator_digest,
+        }
+        producer = SimpleNamespace(sources=lambda: self.sources)
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "record.json"
+            with (patch.object(check_i5a.importlib, "import_module", return_value=producer),
+                  patch.object(check_i5a, "tool_hashes", return_value=self.tools),
+                  patch.object(check_i5a, "native_manifest", return_value=self.manifest),
+                  patch.object(check_i5a, "sha", return_value=validator_digest)):
+                path.write_text(json.dumps(record))
+                self.assertEqual(check_i5a.retained(path, "equivalence"), record)
+                for field, value in [
+                    ("schema", "ariadne.i5a-cli-equivalence/v3"),
+                    ("schema", "ariadne.i5a-cli-equivalence/v5"),
+                    ("sourceHashes", {**self.sources, "unexpected": "f" * 64}),
+                    ("tools", {**self.tools, "unexpected": "f" * 64}),
+                    ("helperManifest", {**self.manifest, "helper_sha256": "f" * 64}),
+                    ("validatorSha256", "f" * 64),
+                    ("historicalOracleVerified", False),
+                    ("projectionMigrationVerified", False),
+                ]:
+                    with self.subTest(field=field, value=value):
+                        broken = copy.deepcopy(record)
+                        broken[field] = value
+                        path.write_text(json.dumps(broken))
+                        with self.assertRaises(RuntimeError):
+                            check_i5a.retained(path, "equivalence")
+
     def test_native_manifest_checks_source_helper_and_sdk_linkage(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

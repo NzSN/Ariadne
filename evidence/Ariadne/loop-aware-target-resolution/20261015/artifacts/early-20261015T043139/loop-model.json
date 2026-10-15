@@ -1,0 +1,9 @@
+{
+  "name": "loop-model",
+  "command": [
+    "bash",
+    "Specs/check-loop-target-closure.sh"
+  ],
+  "exit_code": 0,
+  "seconds": 16.410011621000002
+}

@@ -1,0 +1,8 @@
+{
+  "schema": "ariadne.guard-local-materialization/v1",
+  "scope": "Original archive member identities and bytes remain unchanged; raw diagnostic Rust source copies use .rs.txt locally to preserve repository source layout.",
+  "members": {
+    "frame_probe.rs": "artifacts/frame_probe.rs.txt",
+    "blocker_probe.rs": "artifacts/blocker_probe.rs.txt"
+  }
+}

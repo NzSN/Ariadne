@@ -1,0 +1,5 @@
+thread=23668; module=0x7ff76fbc0000; runtime entries=440520; bytes=5286240
+default frames=1; stop=runtime-table-budget
+expanded frames=2; stop=unsupported-unwind-operation
+preparing frame 1, entry=0x7ff7744033a0
+probe done in 3529ms

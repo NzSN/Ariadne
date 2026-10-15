@@ -1,0 +1,13 @@
+2026-10-15T04:23:38,557 [main] INFO  a.f.a.t.Tool$ - # APALACHE version: 0.58.0 | build: 711dce6
+2026-10-15T04:23:38,691 [main] INFO  a.f.a.t.t.o.TypeCheckCmd - Type checking AriadneLoopTargetClosure.tla
+2026-10-15T04:23:39,021 [main] INFO  a.f.a.i.p.PassChainExecutor - PASS #0: SanyParser
+2026-10-15T04:23:41,412 [main] DEBUG a.f.a.i.p.PassChainExecutor - PASS #0: SanyParser [OK]
+2026-10-15T04:23:41,412 [main] INFO  a.f.a.i.p.PassChainExecutor - PASS #1: TypeCheckerSnowcat
+2026-10-15T04:23:41,418 [main] INFO  a.f.a.t.p.t.EtcTypeCheckerPassImpl -  > Running Snowcat .::.
+2026-10-15T04:23:42,519 [main] ERROR a.f.a.t.p.t.LoggingTypeCheckerListener - [AriadneLoopTargetClosure.tla:52:12-52:52]: Annotation required. Found 2 matching operator signatures ((a453, a454, a455, a456, a457, a458, a459, a460, a461, a462) => <<a453, a454, a455, a456, a457, a458, a459, a460, a461, a462>>) or ((a453, a453, a453, a453, a453, a453, a453, a453, a453, a453) => Seq(a453)) for arguments Int and Int and Int and Int and Int and Int and Int and Int and Int and Int
+2026-10-15T04:23:42,553 [main] ERROR a.f.a.t.p.t.LoggingTypeCheckerListener - [AriadneLoopTargetClosure.tla:52:1-52:52]: Error when computing the type of Offsets
+2026-10-15T04:23:42,571 [main] INFO  a.f.a.t.p.t.EtcTypeCheckerPassImpl -  > Snowcat asks you to fix the types. Meow.
+2026-10-15T04:23:42,739 [main] DEBUG a.f.a.i.p.PassChainExecutor - PASS #1: TypeCheckerSnowcat [FAIL]
+2026-10-15T04:23:42,740 [main] INFO  a.f.a.t.Tool$ - Type checker [FAILED]
+2026-10-15T04:23:42,741 [main] INFO  a.f.a.t.Tool$ - It took me 0 days  0 hours  0 min  4 sec
+2026-10-15T04:23:42,741 [main] INFO  a.f.a.t.Tool$ - Total time: 4.177 sec

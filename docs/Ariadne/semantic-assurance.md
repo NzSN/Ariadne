@@ -18,7 +18,7 @@ proof track, and the practical priorities that shaped the delivered workflow.
 
 - [Active Windows I4 qualification](workload-performance-design.md#windows-investigation-replacement) — keeps producer correctness and the separately qualified fixed CLI timing condition distinct from the lifter trust decision.
 - [Projection contract](bap-analysis-core-design.md) — defines the boundary Ariadne still validates.
-- [Backend delivery ledger](../../Plans/bap-integration.md) — records qualified native migration and the remaining proof, workload and release limits.
+- [Backend delivery ledger](../../Plans/completed/bap-integration.md) — records qualified native migration and the remaining proof, workload and release limits.
 - [Typed replay](typed-replay-design.md) — finite conformance for the stateflow
   and supplied-IR machines, distinct from universal refinement.
 - [Workload performance design](workload-performance-design.md#historical-baseline-2026-09-29)
@@ -146,7 +146,7 @@ missing original Electron capture remains historical.
 
 Retiring ISA proofs did not deliver those changes or waive their evidence
 clauses. Native Stage 2 has [separate analysis qualification](bap-analysis-core-design.md#native-qualification).
-The [projection-admission extension](../../Plans/bap-projection-admission.md)
+The [projection-admission extension](../../Plans/completed/bap-projection-admission.md)
 was separately accepted on 2026-10-10 for its selected Windows replacement
 corpus and declared tiers. Its [acceptance record](file-reader-design.md#windows-replacement-capture-and-bounded-query)
 retains the excluded historical real-Linux capture/phase clauses and report

@@ -4,11 +4,11 @@ use ariadne::input::report::{ReportFormat, render};
 use ariadne::input::{AnalysisQuery, FileSnapshot, OpenLimits, PrepareLimits};
 use std::error::Error;
 use std::fs::{self, OpenOptions};
-use std::io::{self, Write};
+use std::io::{self, Read, Write};
 use std::path::{Path, PathBuf};
 
 fn usage() -> &'static str {
-    "usage: ariadne-minidump DUMP --decoder-reference PATH --entry VA_HEX [--entry VA_HEX ...] [--seed VA_HEX ...] [--seed-exception-rip] [--max-starts N] [--max-artifact-bytes N] [--resolve-indirect-targets [--target-resolution-limits JSON]] [--list-frame-paths N:M --path-count-bound NP [--thread-id ID] [--frame-path-limits JSON]] [--stateflow-input SEMANTICS_JSON] [--explain-fault-address VA --memory-access N] [--explanation-only] [--assess-zero-address VA --memory-access N] [--assess-zero-base-offset VA --memory-access N] [--assess-memory-provenance LOAD_VA --memory-access N] [--assessment-only] [--analysis-backend rust|bap] [--bap-core-dir DIR] [--bap-core-response-timeout-ms N] [--bap-helper PATH] [--bap-runtime DIR] (--format text|dot|json | --output-dir NEW_DIR)"
+    "usage: ariadne-minidump DUMP --decoder-reference PATH --entry VA_HEX [--entry VA_HEX ...] [--seed VA_HEX ...] [--seed-exception-rip] [--max-starts N] [--max-artifact-bytes N] [--resolve-indirect-targets [--target-resolution-limits JSON]] [--list-frame-paths N:M --path-count-bound NP [--thread-id ID] [--frame-path-limits JSON] [--assume-windows-call-entry [--guard-admission-limits JSON]]] [--stateflow-input SEMANTICS_JSON] [--explain-fault-address VA --memory-access N] [--explanation-only] [--assess-zero-address VA --memory-access N] [--assess-zero-base-offset VA --memory-access N] [--assess-memory-provenance LOAD_VA --memory-access N] [--assessment-only] [--analysis-backend rust|bap] [--bap-core-dir DIR] [--bap-core-response-timeout-ms N] [--bap-core-max-request-bytes N] [--bap-helper PATH] [--bap-runtime DIR] (--format text|dot|json | --output-dir NEW_DIR)"
 }
 fn invalid(message: impl Into<String>) -> io::Error {
     io::Error::new(io::ErrorKind::InvalidInput, message.into())
@@ -29,6 +29,23 @@ fn parse_va(text: &str) -> Result<u64, Box<dyn Error>> {
         return Err(invalid(format!("invalid hexadecimal VA: {text}")).into());
     }
     Ok(u64::from_str_radix(digits, 16)?)
+}
+
+fn read_guard_admission_limits(
+    path: &Path,
+) -> Result<ariadne::bap::guard_admission::Limits, Box<dyn Error>> {
+    let mut bytes = Vec::new();
+    fs::File::open(path)?.take(8193).read_to_end(&mut bytes)?;
+    if bytes.len() > 8192 {
+        return Err(invalid("guard admission limits input byte budget").into());
+    }
+    let value = ariadne::reports::strict_json(&bytes)?;
+    if !value.is_object() {
+        return Err(invalid("guard admission limits expects a JSON object").into());
+    }
+    let limits: ariadne::bap::guard_admission::Limits = serde_json::from_value(value)?;
+    limits.validate()?;
+    Ok(limits)
 }
 
 struct Args {
@@ -52,6 +69,8 @@ struct Args {
     path_count_bound: Option<usize>,
     frame_thread: Option<u32>,
     frame_limits: Option<PathBuf>,
+    assume_windows_call_entry: bool,
+    guard_admission_limits: Option<ariadne::bap::guard_admission::Limits>,
     assessment_only: bool,
     memory_access: Option<usize>,
     explanation_only: bool,
@@ -60,6 +79,7 @@ struct Args {
     analysis_backend: String,
     bap_core_dir: PathBuf,
     bap_response_timeout_ms: u64,
+    bap_core_max_request_bytes: usize,
 }
 fn arguments() -> Result<Args, Box<dyn Error>> {
     let mut args = std::env::args_os().skip(1);
@@ -71,6 +91,7 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
     let mut target_limits = None;
     let mut max_artifact_bytes = None;
     let mut bap_response_timeout_ms = None;
+    let mut bap_core_max_request_bytes = None;
     let mut decoder = None;
     let mut entries = ariadne::AddressSet::new();
     let mut seeds = ariadne::AddressSet::new();
@@ -88,6 +109,8 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
     let mut path_count_bound = None;
     let mut frame_thread = None;
     let mut frame_limits = None;
+    let mut assume_windows_call_entry = false;
+    let mut guard_admission_limits = None;
     let mut assessment_only = false;
     let mut memory_access = None;
     let mut explanation_only = false;
@@ -104,6 +127,13 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
                 return Err(invalid("duplicate --resolve-indirect-targets").into());
             }
             resolve_indirect = true;
+            continue;
+        }
+        if flag == "--assume-windows-call-entry" {
+            if assume_windows_call_entry {
+                return Err(invalid("duplicate --assume-windows-call-entry").into());
+            }
+            assume_windows_call_entry = true;
             continue;
         }
         if flag == "--assessment-only" {
@@ -129,6 +159,25 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
         }
         let value = args.next().ok_or_else(|| invalid(usage()))?;
         match flag {
+            "--bap-core-max-request-bytes" if bap_core_max_request_bytes.is_none() => {
+                let text = value.to_str().ok_or_else(|| {
+                    invalid("--bap-core-max-request-bytes expects a positive unsigned byte count")
+                })?;
+                let count: usize = text.parse().map_err(|_| {
+                    invalid("--bap-core-max-request-bytes expects a positive unsigned byte count")
+                })?;
+                if text.is_empty()
+                    || !text.bytes().all(|byte| byte.is_ascii_digit())
+                    || count == 0
+                    || u64::try_from(count).is_err()
+                {
+                    return Err(invalid(
+                        "--bap-core-max-request-bytes expects a positive unsigned byte count",
+                    )
+                    .into());
+                }
+                bap_core_max_request_bytes = Some(count);
+            }
             "--bap-core-response-timeout-ms" if bap_response_timeout_ms.is_none() => {
                 let timeout: u64 = value
                     .to_str()
@@ -240,6 +289,9 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
             "--frame-path-limits" if frame_limits.is_none() => {
                 frame_limits = Some(PathBuf::from(value));
             }
+            "--guard-admission-limits" if guard_admission_limits.is_none() => {
+                guard_admission_limits = Some(PathBuf::from(value));
+            }
             "--assess-memory-provenance" if memory_provenance_site.is_none() => {
                 memory_provenance_site = Some(parse_va(
                     value
@@ -283,8 +335,14 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
     {
         return Err(invalid("choose one explanation or assessment question").into());
     }
+    if guard_admission_limits.is_some() && !assume_windows_call_entry {
+        return Err(
+            invalid("--guard-admission-limits requires --assume-windows-call-entry").into(),
+        );
+    }
     if frame_pair.is_some() != path_count_bound.is_some()
-        || (frame_pair.is_none() && (frame_thread.is_some() || frame_limits.is_some()))
+        || (frame_pair.is_none()
+            && (frame_thread.is_some() || frame_limits.is_some() || assume_windows_call_entry))
     {
         return Err(invalid(
             "frame options require --list-frame-paths N:M and --path-count-bound NP",
@@ -355,10 +413,11 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
             invalid("--target-resolution-limits requires --resolve-indirect-targets").into(),
         );
     }
-    if resolve_indirect
-        && (frame_pair.is_some() || stateflow_input.is_some() || memory_provenance_site.is_some())
-    {
-        return Err(invalid("target resolution cannot combine with frame-path, supplied-stateflow or memory-refinement modes in this profile").into());
+    if resolve_indirect && frame_pair.is_some() && !assume_windows_call_entry {
+        return Err(invalid("frame target resolution requires --assume-windows-call-entry").into());
+    }
+    if resolve_indirect && (stateflow_input.is_some() || memory_provenance_site.is_some()) {
+        return Err(invalid("target resolution cannot combine with supplied-stateflow or memory-refinement modes in this profile").into());
     }
     Ok(Args {
         resolve_indirect,
@@ -382,6 +441,11 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
         path_count_bound,
         frame_thread,
         frame_limits,
+        assume_windows_call_entry,
+        guard_admission_limits: guard_admission_limits
+            .as_deref()
+            .map(read_guard_admission_limits)
+            .transpose()?,
         assessment_only,
         memory_access,
         explanation_only,
@@ -392,6 +456,8 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
             .or_else(|| std::env::var_os("ARIADNE_BAP_CORE_DIR").map(PathBuf::from))
             .unwrap_or_else(|| PathBuf::from("target/bap-core-native")),
         bap_response_timeout_ms: bap_response_timeout_ms.unwrap_or(10000),
+        bap_core_max_request_bytes: bap_core_max_request_bytes
+            .unwrap_or(ariadne::bap::core_protocol::DEFAULT_MAX_REQUEST_BYTES),
     })
 }
 
@@ -479,6 +545,15 @@ fn frame_query(args: &Args, snapshot: &FileSnapshot) -> Result<(), Box<dyn Error
     } else {
         FramePathLimits::default()
     };
+    let guard_limits = args.guard_admission_limits.clone().unwrap_or_default();
+    let target_limits = if let Some(path) = &args.target_limits {
+        if fs::metadata(path)?.len() > 8192 {
+            return Err(invalid("target resolution limits byte budget").into());
+        }
+        serde_json::from_value(ariadne::reports::strict_json(&fs::read(path)?)?)?
+    } else {
+        ariadne::bap::target_resolution::Limits::default()
+    };
     let chain = snapshot.recover_thread_frames(
         thread,
         FrameRecoveryLimits {
@@ -518,11 +593,31 @@ fn frame_query(args: &Args, snapshot: &FileSnapshot) -> Result<(), Box<dyn Error
             } else {
                 break;
             };
-            let prepared = snapshot.prepare_frame_with_bap(&chain, index, entry, &setup)?;
+            let prepared = if args.assume_windows_call_entry && args.resolve_indirect {
+                snapshot.prepare_frame_with_bap_assuming_windows_call_entry_and_target_resolution(
+                    &chain,
+                    index,
+                    entry,
+                    &setup,
+                    guard_limits.clone(),
+                    target_limits.clone(),
+                )?
+            } else if args.assume_windows_call_entry {
+                snapshot.prepare_frame_with_bap_assuming_windows_call_entry(
+                    &chain,
+                    index,
+                    entry,
+                    &setup,
+                    guard_limits.clone(),
+                )?
+            } else {
+                snapshot.prepare_frame_with_bap(&chain, index, entry, &setup)?
+            };
             let completed = if args.analysis_backend == "bap" {
                 let native = ariadne::bap::core_adapter::NativeAnalyzer::from_capture(
                     &ariadne::bap::core_session::CoreConfig {
                         timeout: std::time::Duration::from_millis(args.bap_response_timeout_ms),
+                        max_request_bytes: args.bap_core_max_request_bytes,
                         ..ariadne::bap::core_session::CoreConfig::from_directory(
                             args.bap_core_dir.clone(),
                         )
@@ -651,6 +746,7 @@ fn run() -> Result<(), Box<dyn Error>> {
     };
     let mut core_config = ariadne::bap::core_session::CoreConfig::from_directory(args.bap_core_dir);
     core_config.timeout = std::time::Duration::from_millis(args.bap_response_timeout_ms);
+    core_config.max_request_bytes = args.bap_core_max_request_bytes;
     let (analyzer, backend_identity) = if args.analysis_backend == "bap" {
         let native = ariadne::bap::core_adapter::NativeAnalyzer::from_capture(
             &core_config,

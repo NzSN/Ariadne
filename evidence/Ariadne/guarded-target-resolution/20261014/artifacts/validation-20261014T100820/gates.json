@@ -1,0 +1,62 @@
+[
+  {
+    "name": "format-apply",
+    "command": [
+      "cargo",
+      "fmt",
+      "--all"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.6484104999999998
+  },
+  {
+    "name": "composition-oracle",
+    "command": [
+      "python3",
+      "tests/bap/fixtures/composition/oracle.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.036641700000000554
+  },
+  {
+    "name": "guard-oracle",
+    "command": [
+      "python3",
+      "tests/bap/fixtures/guards/oracle.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.045842300000000336
+  },
+  {
+    "name": "format",
+    "command": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.5017696999999997
+  },
+  {
+    "name": "guard-units",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--lib",
+      "bap::guard_admission_tests"
+    ],
+    "exit_code": 101,
+    "passed": false,
+    "seconds": 4.451740900000001
+  }
+]

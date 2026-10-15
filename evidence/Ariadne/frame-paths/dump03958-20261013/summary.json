@@ -1,0 +1,157 @@
+{
+  "schema": "ariadne.frame-path-dump-attempt/v1",
+  "date": "2026-10-13",
+  "status": "unavailable",
+  "qualification": "attempt only; does not pass F4 full-dump gate",
+  "dump": {
+    "id": "dump_03958DA4FCA844A786262A1053",
+    "url": "https://192.168.150.219:4080/dumps/dump_03958DA4FCA844A786262A1053",
+    "bytes": 962600678,
+    "sha256": "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab"
+  },
+  "current_source_commit": "da7308aecda19b45c9257a5414b7d405fcd8a7dd",
+  "compiled_source_commit": "b5d56b7",
+  "source_verification": {
+    "files": 104,
+    "mismatches": [],
+    "scope": "all files in remote manifest under src and native/bap-core; no implementation changes since compiled revision"
+  },
+  "question": {
+    "from_frame": 1,
+    "to_frame": 0,
+    "np": 10
+  },
+  "thread_id": 23668,
+  "attempts": {
+    "cli-default": {
+      "scope_id": "7e1704fa9582b6bfbb65880f644874ea8c9bb3996400ece176a3fdb7a74e8041",
+      "available": false,
+      "coverage": "unavailable",
+      "truncated": true,
+      "enumeration_exhausted": false,
+      "stop_reason": "requested-frame-not-recovered",
+      "gaps": [
+        "runtime-table-budget"
+      ],
+      "returned_count": 0,
+      "limits": {
+        "max_graph_nodes": 8192,
+        "max_graph_edges": 32768,
+        "max_search_states": 4096,
+        "max_scanned_edges": 16384,
+        "max_path_steps": 256,
+        "max_node_visits": 2,
+        "max_frontier_bytes": 4194304,
+        "max_output_bytes": 4194304,
+        "deadline_ms": 1000
+      },
+      "counters": {
+        "expanded_states": 0,
+        "scanned_edges": 0,
+        "peak_frontier_bytes": 0,
+        "retained_path_bytes": 0
+      }
+    },
+    "api-expanded-budget": {
+      "scope_id": "82ff910d075f827711338da616def4abce7a7062eaeedbb6ae0b6eb7e41b364f",
+      "available": false,
+      "coverage": "unavailable",
+      "truncated": false,
+      "enumeration_exhausted": false,
+      "stop_reason": "missing-or-ambiguous-active-call-anchor",
+      "gaps": [
+        "missing-or-ambiguous-active-call-anchor"
+      ],
+      "returned_count": 0,
+      "limits": {
+        "max_graph_nodes": 8192,
+        "max_graph_edges": 32768,
+        "max_search_states": 4096,
+        "max_scanned_edges": 16384,
+        "max_path_steps": 256,
+        "max_node_visits": 2,
+        "max_frontier_bytes": 4194304,
+        "max_output_bytes": 33554432,
+        "deadline_ms": 1000
+      },
+      "counters": {
+        "expanded_states": 0,
+        "scanned_edges": 0,
+        "peak_frontier_bytes": 0,
+        "retained_path_bytes": 0
+      }
+    }
+  },
+  "frames": [
+    {
+      "index": 0,
+      "pc": "0x00007ff77443dd6e",
+      "sp": "0x000000bea89fa890",
+      "function_begin": "0x00007ff77443d960",
+      "function_end": "0x00007ff774442634",
+      "return_slot": "0x000000bea89fa928",
+      "return_pc": "0x00007ff77440410d"
+    },
+    {
+      "index": 1,
+      "pc": "0x00007ff77440410d",
+      "sp": "0x000000bea89fa930",
+      "function_begin": "0x00007ff7744033a0",
+      "function_end": "0x00007ff77440deba",
+      "return_slot": null,
+      "return_pc": null
+    }
+  ],
+  "chain_stop": "unsupported-unwind-operation",
+  "graphs": [
+    {
+      "frame": 0,
+      "identity": {
+        "snapshot_id": "minidump-captured-amd64-v1:9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+        "artifact_sha256": "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+        "query_id": "32afa0efe71167db134c64d48f6bfb80f3d4eb05cf1f086887c06e94888be9c1",
+        "request_sha256": "e0db1fe3a30df849808f3a3f7629e681e5769d70d4c4b381d8993ff18c856df6",
+        "semantic_profile": "x86_64-pc-windows-msvc:LLVM MC 20.1.2 (decode reference):2:bap-bit-provenance-v3:gpr-bytes-status-df-memory-other-v1:1193aa8bbd86244f097879eb69d64c75b8180fb9d47acd7868cf422634c42670"
+      },
+      "entry": "0x00007ff77443d960",
+      "decoded_nodes": 768,
+      "active_call_present": false
+    },
+    {
+      "frame": 1,
+      "identity": {
+        "snapshot_id": "minidump-captured-amd64-v1:9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+        "artifact_sha256": "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+        "query_id": "1150b02077a2db7021d672c5ebe559152e56dec7d1bdc139fe34ddfe34739a58",
+        "request_sha256": "d220b0a35a80c9a87682f5db44b4d749aa9efae55642de4f58eebc94de0b5fb1",
+        "semantic_profile": "x86_64-pc-windows-msvc:LLVM MC 20.1.2 (decode reference):2:bap-bit-provenance-v3:gpr-bytes-status-df-memory-other-v1:918aec75f6e36547b0e5a6b47f20c2efad0cde046ce73a604425bb5a6629158a"
+      },
+      "entry": "0x00007ff7744033a0",
+      "decoded_nodes": 9,
+      "active_call_present": false
+    }
+  ],
+  "independent_call_witness": {
+    "tool": "CDB matched private PDB; captured disassembly and stack",
+    "site": "0x00007ff774404108",
+    "bytes_hex": "e853980300",
+    "target": "0x00007ff77443d960",
+    "continuation": "0x00007ff77440410d",
+    "return_slot": "0x000000bea89fa928"
+  },
+  "blocker": {
+    "site": "0x00007ff7744033b3",
+    "bytes_hex": "0f29b42440020000",
+    "instruction": "movaps [rsp+0x240],xmm6",
+    "semantic_gap": "unmodeled architectural namespace/type: YMM6",
+    "llvm_reference_control": "ordinary",
+    "admitted_control": "stop",
+    "semantic_status": "opaque-unsupported",
+    "fallback": null
+  },
+  "archive_transfer": {
+    "sha256": "7cf2cb9d9bf840ac6c59dc97d954c4be732cd8d4fb27639d6deb3de145caccd7",
+    "bytes": 6331396
+  },
+  "limits_note": "CLI raises artifact size to 2 GiB. API raises one-read budget to 16 MiB, runtime entries to 440520, aggregate unwind evidence to 6334816 bytes, max frames to 6, and enumeration output to 32 MiB; other search limits unchanged. Probe uses explicit Rust reference core with pinned BAP preparation."
+}

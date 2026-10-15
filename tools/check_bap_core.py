@@ -22,7 +22,7 @@ def sources():
  for tree in ['src','tests','native','Specs','mbt','tools']:
   paths.update(p for p in (ROOT/tree).rglob('*') if p.is_file() and p.suffix!='.md'
                and not set(p.parts)&{'target','.work','__pycache__','results','states','_apalache-out'})
- paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','docs/Ariadne/bap-analysis-core-design.md','Plans/bap-stage2-implementation.md'])
+ paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','docs/Ariadne/bap-analysis-core-design.md','Plans/completed/bap-stage2-implementation.md'])
  paths.update(ROOT/p for p in ['evidence/Ariadne/investigation-windows-workload-case.json','evidence/Ariadne/i4-windows-capture-inspection.json','evidence/Ariadne/bap-windows-workload-inputs.tar.gz'])
  paths.update(real_case.source_paths())
  return {str(p.relative_to(ROOT)):sha(p) for p in sorted(paths)}
@@ -72,6 +72,7 @@ def main():
   run('core-only-tests',['cargo','test','--offline','--locked','--no-default-features'])
   run('all-feature-clippy',['cargo','clippy','--offline','--locked','--all-features','--all-targets','--','-D','warnings'])
   run('rust-layout',['python3','tools/check_rust_layout.py'])
+  run('vector-fixtures',['python3','tests/input/fixtures/make_vector.py','--check'])
   run('documentation',['python3','tools/check_doc_links.py'])
   run('contract-regressions',['python3','-m','unittest','discover','-s','tools','-p','test_bap_core_contract.py'])
   run('native-kernels',['cargo','test','--offline','--locked','--test','bap_core_bootstrap','--test','bap_core_analysis','--test','bap_core_stateflow','--','--ignored'])

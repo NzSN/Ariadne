@@ -1,4 +1,6 @@
-use ariadne::bap::core_protocol::{Observation, Response};
+use ariadne::bap::core_protocol::{
+    DEFAULT_MAX_REQUEST_BYTES, Observation, PROFILE, Response, query_digest,
+};
 use ariadne::bap::core_session::{CoreConfig, CoreSession};
 use serde_json::{Value, json};
 use std::path::PathBuf;
@@ -70,6 +72,164 @@ fn reset(session: &mut CoreSession) {
         "owned child not reaped"
     );
     assert!(session.request("observe", json!({})).is_err());
+}
+
+fn request_bytes(query: &str, sequence: u64, operation: &str, payload: Value) -> Vec<u8> {
+    let mut bytes = serde_json::to_vec(&json!({
+        "schema":"ariadne.bap-core/v1", "session":"request-boundary",
+        "snapshot":"snapshot-one", "query":query, "family":"recovery",
+        "sequence":sequence, "operation":operation, "payload":payload,
+    }))
+    .unwrap();
+    bytes.push(b'\n');
+    bytes
+}
+
+fn initialize_bytes(input: &Value) -> (String, Vec<u8>) {
+    let query = query_digest("snapshot-one", input).unwrap();
+    let bytes = request_bytes(
+        &query,
+        0,
+        "initialize",
+        json!({"profile":PROFILE,"input":input}),
+    );
+    (query, bytes)
+}
+
+#[test]
+#[ignore = "requires explicitly built isolated OCaml helper"]
+fn native_host_request_byte_boundaries() {
+    let input = fixture("return");
+    let (_, bytes) = initialize_bytes(&input);
+    let mut exact = config();
+    exact.max_request_bytes = bytes.len();
+    let (mut session, initialized) =
+        CoreSession::start(&exact, "request-boundary", "snapshot-one", &input).unwrap();
+    assert_eq!(
+        initialized.observation,
+        expected(&[A], &[], &[], json!([]), json!([]))
+    );
+    assert_eq!(
+        session.identity()["transport"]["max_request_bytes"],
+        bytes.len()
+    );
+    reset(&mut session);
+
+    exact.max_request_bytes = bytes.len() - 1;
+    let rejected = CoreSession::start(&exact, "request-boundary", "snapshot-one", &input)
+        .err()
+        .expect("one byte beyond the host request limit was admitted");
+    assert!(rejected.to_string().contains("core request oversized"));
+}
+
+// Launch the real reader directly: these controls do not pass through the host
+// request-size check. Initialize plus reset gives accepted controls a clean exit.
+fn direct_native_initialize(
+    limit: &str,
+    query: &str,
+    bytes: &[u8],
+) -> (Value, Vec<Value>, std::process::ExitStatus, String) {
+    use std::io::{BufRead, BufReader, Read, Write};
+    use std::process::{Command, Stdio};
+    let mut child = Command::new(config().helper)
+        .args([
+            "request-boundary",
+            "snapshot-one",
+            query,
+            "recovery",
+            "--max-request-bytes",
+            limit,
+        ])
+        .stdin(Stdio::piped())
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped())
+        .spawn()
+        .unwrap();
+    let mut stdout = BufReader::new(child.stdout.take().unwrap());
+    let mut ready = String::new();
+    stdout.read_line(&mut ready).unwrap();
+    let ready = serde_json::from_str(&ready).unwrap();
+    let mut stdin = child.stdin.take().unwrap();
+    // A reader rejecting the first frame may close its pipe before reset.
+    let _ = stdin
+        .write_all(bytes)
+        .and_then(|()| stdin.write_all(&request_bytes(query, 1, "reset", json!({}))));
+    drop(stdin);
+    let mut responses = String::new();
+    stdout.read_to_string(&mut responses).unwrap();
+    let output = child.wait_with_output().unwrap();
+    let responses = responses
+        .lines()
+        .map(|line| serde_json::from_str(line).unwrap())
+        .collect();
+    (
+        ready,
+        responses,
+        output.status,
+        String::from_utf8(output.stderr).unwrap(),
+    )
+}
+
+#[test]
+#[ignore = "requires explicitly built isolated OCaml helper"]
+fn native_reader_request_byte_boundaries() {
+    let (query, bytes) = initialize_bytes(&fixture("return"));
+    let (ready, responses, status, stderr) =
+        direct_native_initialize(&bytes.len().to_string(), &query, &bytes);
+    assert!(status.success(), "exact request limit rejected: {stderr}");
+    assert_eq!(ready["max_request_bytes"], bytes.len());
+    assert_eq!(responses.len(), 2);
+    assert_eq!(responses[0]["error"], Value::Null);
+    assert_eq!(responses[0]["observation"]["pending"], json!([A]));
+
+    let (_, responses, status, stderr) =
+        direct_native_initialize(&(bytes.len() - 1).to_string(), &query, &bytes);
+    assert!(
+        !status.success(),
+        "native reader admitted one byte over its limit"
+    );
+    assert!(
+        responses.is_empty(),
+        "oversized initialization published a response"
+    );
+    assert!(stderr.contains("frame budget"), "wrong rejection: {stderr}");
+}
+
+#[test]
+#[ignore = "requires explicitly built isolated OCaml helper"]
+fn native_request_limit_launch_validation() {
+    use std::process::Command;
+    let (query, bytes) = initialize_bytes(&fixture("return"));
+    for limit in ["0", "-1", "+1", "1.0", "1x", "", "18446744073709551616"] {
+        let output = Command::new(config().helper)
+            .args([
+                "request-boundary",
+                "snapshot-one",
+                &query,
+                "recovery",
+                "--max-request-bytes",
+                limit,
+            ])
+            .output()
+            .unwrap();
+        assert!(
+            !output.status.success(),
+            "invalid launch limit accepted: {limit:?}"
+        );
+        assert!(
+            output.stdout.is_empty(),
+            "invalid launch limit published ready: {limit:?}"
+        );
+    }
+    let (ready, responses, status, stderr) =
+        direct_native_initialize("18446744073709551615", &query, &bytes);
+    assert!(
+        status.success(),
+        "unsigned maximum request limit rejected: {stderr}"
+    );
+    assert_eq!(ready["max_request_bytes"].as_u64(), Some(u64::MAX));
+    assert_eq!(responses.len(), 2);
+    assert_eq!(responses[0]["error"], Value::Null);
 }
 
 #[test]
@@ -380,6 +540,174 @@ for line in sys.stdin:
             assert!(session.request("observe", json!({})).is_err());
         } else {
             assert!(started.is_err(), "accepted transport fault: {mode}");
+        }
+    }
+    std::fs::remove_dir_all(root).unwrap();
+}
+
+#[cfg(unix)]
+#[test]
+#[ignore = "requires the qualified helper manifest and Python transport fixtures"]
+fn configurable_request_budget_handshake_controls() {
+    use std::os::unix::fs::PermissionsExt;
+    use std::time::Duration;
+    let root = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("target/bap-core-request-budget-fixtures")
+        .join(std::process::id().to_string());
+    std::fs::create_dir_all(&root).unwrap();
+    let real_manifest: Value =
+        serde_json::from_slice(&std::fs::read(config().manifest).unwrap()).unwrap();
+    let observation =
+        serde_json::to_string(&expected(&[A], &[], &[], json!([]), json!([]))).unwrap();
+    for mode in [
+        "capable-raised",
+        "capable-raised-oversized-response",
+        "ready-mismatch",
+        "legacy-default",
+        "legacy-raised",
+        "missing-flag",
+        "missing-limit",
+        "false-flag",
+        "wrong-default-limit",
+    ] {
+        let directory = root.join(mode);
+        std::fs::create_dir_all(&directory).unwrap();
+        let helper = directory.join("ariadne-bap-core");
+        let marker = directory.join("child.pid");
+        let mut manifest = real_manifest.clone();
+        let handshake = manifest["handshake"].as_object_mut().unwrap();
+        if mode.starts_with("legacy") {
+            handshake.remove("configurable_request_bytes");
+            handshake.remove("max_request_bytes");
+        } else {
+            handshake.insert("configurable_request_bytes".into(), json!(true));
+            handshake.insert("max_request_bytes".into(), json!(DEFAULT_MAX_REQUEST_BYTES));
+            match mode {
+                "missing-flag" => {
+                    handshake.remove("configurable_request_bytes");
+                }
+                "missing-limit" => {
+                    handshake.remove("max_request_bytes");
+                }
+                "false-flag" => {
+                    handshake.insert("configurable_request_bytes".into(), json!(false));
+                }
+                "wrong-default-limit" => {
+                    handshake.insert(
+                        "max_request_bytes".into(),
+                        json!(DEFAULT_MAX_REQUEST_BYTES + 1),
+                    );
+                }
+                _ => {}
+            }
+        }
+        let source = format!(
+            r#"#!/usr/bin/python3
+import json,sys,os
+mode={mode:?}
+with open({marker:?},'w') as f: f.write(str(os.getpid()))
+ready=json.loads({ready:?})
+if mode.startswith('capable-raised'):
+    assert sys.argv[5]=='--max-request-bytes'
+    ready['max_request_bytes']=int(sys.argv[6])
+if mode=='legacy-default': assert len(sys.argv)==5
+print(json.dumps(ready),flush=True)
+for line in sys.stdin:
+    q=json.loads(line)
+    if mode=='capable-raised-oversized-response':
+        sys.stdout.write('x'*(8*1024*1024+1));sys.stdout.flush();sys.exit(0)
+    response={{k:q[k] for k in ['schema','session','snapshot','query','family','sequence']}}
+    response.update(generation=1,action_index=0,changed=False,
+        observation=json.loads({observation:?}),attribution=[],error=None,result=None)
+    print(json.dumps(response),flush=True)
+    if q['operation']=='reset': sys.exit(0)
+"#,
+            marker = marker.to_string_lossy(),
+            ready = manifest["handshake"].to_string(),
+        );
+        std::fs::write(&helper, source).unwrap();
+        std::fs::set_permissions(&helper, std::fs::Permissions::from_mode(0o755)).unwrap();
+        manifest["helper_sha256"] =
+            json!(ariadne::reports::sha256(&std::fs::read(&helper).unwrap()));
+        std::fs::write(directory.join("manifest.json"), manifest.to_string()).unwrap();
+        let mut config = CoreConfig::from_directory(directory);
+        config.timeout = Duration::from_secs(2);
+        if mode != "legacy-default" {
+            config.max_request_bytes = DEFAULT_MAX_REQUEST_BYTES + 1;
+        }
+        if mode == "capable-raised-oversized-response" {
+            config.max_request_bytes = 32 * 1024 * 1024;
+            config.timeout = Duration::from_secs(10);
+        }
+        let started = CoreSession::start(&config, "capability", "snapshot-one", &fixture("return"));
+        match mode {
+            "capable-raised" | "legacy-default" => {
+                let (mut session, _) = started.unwrap();
+                assert_eq!(
+                    session.identity()["build"],
+                    manifest,
+                    "recorded manifest mutated"
+                );
+                assert_eq!(
+                    session.identity()["transport"]["max_request_bytes"],
+                    config.max_request_bytes
+                );
+                assert_eq!(
+                    session.identity()["transport"]["max_response_bytes"],
+                    ariadne::bap::core_protocol::MAX_FRAME
+                );
+                reset(&mut session);
+            }
+            "ready-mismatch" => {
+                let rejected = started.err().expect("unnegotiated ready budget accepted");
+                assert!(
+                    rejected
+                        .to_string()
+                        .contains("core handshake identity mismatch")
+                );
+                let pid = std::fs::read_to_string(&marker).unwrap();
+                assert!(
+                    !PathBuf::from(format!("/proc/{pid}")).exists(),
+                    "ready mismatch child not reaped"
+                );
+            }
+            "legacy-raised" => {
+                let rejected = started
+                    .err()
+                    .expect("legacy helper accepted nondefault budget");
+                assert!(
+                    rejected
+                        .to_string()
+                        .contains("lacks configurable request bytes")
+                );
+                assert!(!marker.exists(), "unsupported legacy helper launched");
+            }
+            "missing-flag" | "missing-limit" | "false-flag" | "wrong-default-limit" => {
+                let rejected = started
+                    .err()
+                    .expect("malformed request capability accepted");
+                assert!(
+                    rejected
+                        .to_string()
+                        .contains("unsupported core request budget capability")
+                );
+                assert!(
+                    !marker.exists(),
+                    "malformed capability helper launched: {mode}"
+                );
+            }
+            "capable-raised-oversized-response" => {
+                let rejected = started
+                    .err()
+                    .expect("raised request limit enlarged the response limit");
+                assert!(rejected.to_string().contains("core frame oversized"));
+                let pid = std::fs::read_to_string(&marker).unwrap();
+                assert!(
+                    !PathBuf::from(format!("/proc/{pid}")).exists(),
+                    "oversized response child not reaped"
+                );
+            }
+            _ => unreachable!(),
         }
     }
     std::fs::remove_dir_all(root).unwrap();

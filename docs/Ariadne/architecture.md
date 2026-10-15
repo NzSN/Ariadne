@@ -39,7 +39,7 @@ ISA or analysis-refinement proof. A dump supplies captured evidence, not an
 execution trace. Missing bytes, unsupported semantics, uncertain memory aliases
 and unresolved control targets can keep results partial. PE/ELF image and ELF
 core readers remain deferred. Qualification is specific to its recorded sources,
-tools and corpus; see the [accepted P4 scope](../../Plans/bap-projection-admission.md).
+tools and corpus; see the [accepted P4 scope](../../Plans/completed/bap-projection-admission.md).
 
 ## Reading this guide
 

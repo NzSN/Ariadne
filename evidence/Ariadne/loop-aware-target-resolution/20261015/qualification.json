@@ -1,0 +1,60 @@
+{
+  "schema": "ariadne.loop-target-closure.qualification/v1",
+  "status": "accepted",
+  "scope": "L0-L6 coverage-only captured-relative32 loop closure; parent ninth incoming-coverage clause closed",
+  "base_commit": "da7308aecda19b45c9257a5414b7d405fcd8a7dd",
+  "qualified_source_archive_sha256": "5cd406c5181d131679a60af15f53edcabecfe056144e40b5785bc37ce1d010ee",
+  "qualified_source_files": 877,
+  "main_validation": "artifacts/validation-20261015T050857/complete.json",
+  "counts": {
+    "default_tests": 227,
+    "core_only_tests": 46,
+    "focused_loop_tests": 7,
+    "publication_regressions": 1,
+    "native_loop_controls": 41,
+    "behavioral_mutant_credits": 8,
+    "target_model_configs": 5,
+    "composition_model_configs": 19,
+    "loop_model_configs": 25,
+    "oracle_induction_controls": 29,
+    "oracle_arithmetic_controls": 4,
+    "core_replay_observations": 168,
+    "stateflow_replay_observations": 162,
+    "wrong_digest_observations": 0
+  },
+  "replay": "artifacts/generated-replay-20261015T050942Z/qualification.json",
+  "legacy_capability_supplement": "artifacts/legacy-capability-20261015T052319/result.json",
+  "legacy_capability_source_binding": "artifacts/legacy-capability-20261015T052319/source-binding.json",
+  "original_dump": "artifacts/dump-20261015T051409/probe-summary.json",
+  "original_dump_acceptance": {
+    "all_51_formerly_missing_starts_attempted": true,
+    "all_nine_original_sites_complete": true,
+    "all_original_table_sets_equal": true,
+    "both_targeted_loop_receipts_complete_and_bound": true,
+    "frame_path_coverage": "unavailable",
+    "frame_path_stop_reason": "missing-or-ambiguous-active-call-anchor",
+    "frame_paths_available": false,
+    "frames_with_full_native_rust_parity": [
+      1,
+      0
+    ],
+    "paired_native_accepted_loop_receipts": true,
+    "scope": "Loop closure, candidate recovery, guard coverage, completed-core parity and path availability are separate claims; unavailable paths never establish no possible path."
+  },
+  "main_archive_manifest": "manifest.json",
+  "additional_artifact_manifest": "delivery-supplement.json",
+  "main_archive_sha256": "aa89248a75a5d9371236e57010541f953d50ed3b2ba379ad9cf71351bc9a76dc",
+  "retained_failed_original_dump": "artifacts/dump-20261015T050210/probe-summary.json",
+  "unmet_or_excluded": [
+    "available full frame paths",
+    "regional MOVAPS normal admission and complete guard coverage",
+    "general loop synthesis and arbitrary prefix summaries",
+    "new loop-only targets or table witnesses",
+    "universal Rust or inter-model refinement"
+  ],
+  "execution_hosts": {
+    "compilation_models_native_replay_dump": "remote windows-dev WSL",
+    "final_documentation_links_and_layout": "local complete checkout; no compilation"
+  },
+  "documentation_reconciliation": "Documentation/plan archival after qualification preserves every qualified behavior-source hash; see import-verification.json."
+}

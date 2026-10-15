@@ -1,0 +1,24 @@
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-bap-shift-count-20261014/target/shift-mutations-v2-20261014/truncate-shift-count-to-64-bits/sut)
+    Finished `release` profile [optimized] target(s) in 28.43s
+     Running unittests src/lib.rs (/home/nzsn/Repos/Ariadne-bap-shift-count-20261014/target/shift-mutations-v2-20261014/truncate-shift-count-to-64-bits/build/release/deps/ariadne-eac5fde57d2ca545)
+
+running 1 test
+test bap::shift_projection_tests::full_unsigned_counts_and_boundary_fills_match_the_independent_integer_oracle ... FAILED
+
+failures:
+
+---- bap::shift_projection_tests::full_unsigned_counts_and_boundary_fills_match_the_independent_integer_oracle stdout ----
+
+thread 'bap::shift_projection_tests::full_unsigned_counts_and_boundary_fills_match_the_independent_integer_oracle' (5108) panicked at src/bap/../../tests/bap/shift_projection_unit.rs:242:13:
+assertion `left == right` failed: op=10 data=1:0x1 count=65:0x10000000000000000 probe=0
+  left: {"gpr:rbx:0", "gpr:rbx:1", "gpr:rbx:2", "gpr:rbx:3", "gpr:rbx:4", "gpr:rbx:5", "gpr:rbx:6", "gpr:rbx:7"}
+ right: {"gpr:rcx:0", "gpr:rcx:1", "gpr:rcx:2", "gpr:rcx:3", "gpr:rcx:4", "gpr:rcx:5", "gpr:rcx:6", "gpr:rcx:7"}
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    bap::shift_projection_tests::full_unsigned_counts_and_boundary_fills_match_the_independent_integer_oracle
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 102 filtered out; finished in 0.04s
+
+error: test failed, to rerun pass `--lib`

@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-14",
+  "source_hashes_exact": 686,
+  "archive_members_exact": 86,
+  "native_checker_and_model_source_identity_exact": true,
+  "all_final_remote_gates_passed": true,
+  "completed_plan_links_resolve": true,
+  "doc_links": "PASS:94 connected documents,93contexts,2214local links",
+  "rust_layout": "PASS:135Rust files in src/tests;root manifest/lock/target",
+  "diff_check": "PASS",
+  "documentation_files": {
+    "docs/Ariadne/justified-branch-pruning-design.md": "1018f4310e3f5add15ea2ac4e73d2d61e28b2a65f89316cf26b14a0cbbc887e3",
+    "docs/Ariadne/bap-shift-count-design.md": "bcf7f152d4735000f617c6be441e721e7aafb9ba7d4b7393c2955223779af2a4",
+    "Plans/README.md": "aad0a4537e360677189103e16a8920b6910d76d28c4fde589d16f58c2be982a7",
+    "Plans/completed/guard-budget-configuration.md": "6f71261d748723150185490423eaf8b92a224a760f6785801b26e1f907b4cdfa"
+  }
+}

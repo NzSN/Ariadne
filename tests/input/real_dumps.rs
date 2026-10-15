@@ -125,7 +125,7 @@ fn real_windows_and_linux_crash_artifacts_preserve_bytes_and_report_semantic_gap
             assert_eq!(evidence.bytes, [0x33, 0xc0]); // xor eax, eax
             assert_eq!(evidence.opcode.as_deref(), Some("XOR32rr_REV"));
             assert_eq!(evidence.quality, EffectQuality::ExternalLifted);
-            assert_eq!(evidence.rule.as_deref(), Some("bap-bit-provenance-v3"));
+            assert_eq!(evidence.rule.as_deref(), Some("bap-bit-provenance-v6"));
             let semantic = evidence.semantic.as_ref().unwrap();
             assert_eq!(semantic.status, "projected");
             assert!(semantic.fallback.is_none());

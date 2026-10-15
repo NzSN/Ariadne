@@ -1,0 +1,11 @@
+{
+  "name": "native-build",
+  "command": [
+    "python3",
+    "native/bap-core/build.py",
+    "--output",
+    "target/loop-aware-native"
+  ],
+  "exit_code": 0,
+  "seconds": 12.079809650000001
+}

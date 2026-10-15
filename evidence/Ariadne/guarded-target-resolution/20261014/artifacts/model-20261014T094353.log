@@ -1,0 +1,18 @@
+Guarded-target composition model artifacts: /tmp/ariadne-guarded-target-resolution.sjlZSeRa
+{"captured_reference": {"entries": 370, "tables": 9, "targets": 64}, "epoch_cases": 5, "frontier_cases": 4, "graph_cases": 15, "numeric_cases": 12, "receipt_cases": 32, "schema": "ariadne.guarded-target-composition-oracle-result/v1", "status": "pass"}
+# Usage statistics is OFF. We care about your privacy.
+# If you want to help our project, consider enabling statistics with config --enable-stats=true.
+
+Output directory: /tmp/ariadne-guarded-target-resolution.sjlZSeRa/typecheck/AriadneGuardedTargetResolution.tla/2026-10-14T09-43-54_12886804337372868736
+# APALACHE version: 0.58.0 | build: 711dce6                       I@09:43:54.434
+Type checking AriadneGuardedTargetResolution.tla                  I@09:43:54.448
+PASS #0: SanyParser                                               I@09:43:54.576
+PASS #1: TypeCheckerSnowcat                                       I@09:43:54.852
+ > Running Snowcat .::.                                           I@09:43:54.852
+[AriadneGuardedTargetResolution.tla:62:12-62:20]: Annotation required. Found 2 matching operator signatures ((a709, a710, a711) => <<a709, a710, a711>>) or ((a709, a709, a709) => Seq(a709)) for arguments Int and Int and Int E@09:43:55.043
+[AriadneGuardedTargetResolution.tla:62:1-62:20]: Error when computing the type of Offsets E@09:43:55.055
+ > Snowcat asks you to fix the types. Meow.                       I@09:43:55.061
+Type checker [FAILED]                                             I@09:43:55.083
+It took me 0 days  0 hours  0 min  0 sec                          I@09:43:55.083
+Total time: 0.647 sec                                             I@09:43:55.084
+EXITCODE: ERROR (120)

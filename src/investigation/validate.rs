@@ -2,6 +2,12 @@ use crate::investigation::*;
 use crate::{AnalysisRequest, AnalysisState, AnalysisView, Phase};
 use std::collections::{BTreeMap, BTreeSet};
 pub struct BoundInvestigation {
+    #[cfg(feature = "bap")]
+    pub(crate) composition: Option<crate::bap::composition::Report>,
+    #[cfg(feature = "bap")]
+    pub(crate) target_resolution: Option<crate::bap::target_resolution::Report>,
+    #[cfg(feature = "bap")]
+    pub(crate) guard_admission: Option<crate::bap::guard_admission::Report>,
     pub(crate) request: AnalysisRequest,
     pub(crate) state: std::sync::Arc<AnalysisState>,
     pub(crate) context: EvidenceContext,
@@ -17,6 +23,25 @@ pub(crate) fn digest(s: &str) -> bool {
     s.len() == 64
         && s.bytes()
             .all(|c| c.is_ascii_digit() || (b'a'..=b'f').contains(&c))
+}
+#[cfg(feature = "bap")]
+pub(crate) fn guard_assumptions(report: &crate::bap::guard_admission::Report) -> Vec<String> {
+    let mut assumptions = Vec::new();
+    for premise in &report.input.premises {
+        assumptions.push(format!(
+            "guard-premise {:?}: {} at root {} and point {}, frame {}; RSP residues 0x{:04x}; assumed or observed only at that point, never backward from the crash",
+            premise.origin, premise.policy, premise.root, premise.point,
+            premise.activation.frame_activation, premise.rsp_residues,
+        ));
+    }
+    for decision in &report.guards {
+        assumptions.push(format!(
+            "guard-decision {}: {:?}, residue mask 0x{:04x}, residual {}; proof {}; structural paths are not executed history",
+            decision.site, decision.verdict, decision.address_residues,
+            decision.residual, decision.receipt_sha256,
+        ));
+    }
+    assumptions
 }
 pub(crate) fn site_valid(site: &SiteEvidence) -> bool {
     if site.bytes_hex.len() > 30
@@ -145,6 +170,12 @@ impl BoundInvestigation {
         };
         let scope = sha(&serde_json::to_vec(&identity)?);
         Ok(Self {
+            #[cfg(feature = "bap")]
+            guard_admission: None,
+            #[cfg(feature = "bap")]
+            composition: None,
+            #[cfg(feature = "bap")]
+            target_resolution: None,
             request: expected.clone(),
             state: analyzer.shared_state(),
             sites,
@@ -159,7 +190,42 @@ impl BoundInvestigation {
 }
 impl Explanation {
     pub fn validate(&self) -> Result<(), Error> {
-        if self.schema != "ariadne.fault-address-explanation/v1"
+        #[cfg(feature = "bap")]
+        let schema_ok = match &self.guard_admission {
+            Some(report) => {
+                validate_guarded_explanation(self, report)?;
+                if let Some(composition) = &self.composition {
+                    self.schema
+                        == if crate::bap::composition::is_legacy(composition) {
+                            "ariadne.fault-address-explanation/v3"
+                        } else {
+                            "ariadne.fault-address-explanation/v4"
+                        }
+                } else {
+                    self.schema == "ariadne.fault-address-explanation/v2"
+                        && self.target_resolution.is_none()
+                        && self.guard_sources.is_none()
+                        && !crate::bap::composition::contains_profile(
+                            &self.identity.semantic_profile,
+                        )
+                }
+            }
+            None => {
+                self.schema == "ariadne.fault-address-explanation/v1"
+                    && self.guard_request.is_none()
+                    && self.composition.is_none()
+                    && self.target_resolution.is_none()
+                    && self.guard_sources.is_none()
+                    && !crate::bap::composition::contains_profile(&self.identity.semantic_profile)
+                    && !self
+                        .identity
+                        .semantic_profile
+                        .contains(":bap-guard-admission-v1:")
+            }
+        };
+        #[cfg(not(feature = "bap"))]
+        let schema_ok = self.schema == "ariadne.fault-address-explanation/v1";
+        if !schema_ok
             || self.scope_id != sha(&serde_json::to_vec(&self.identity)?)
             || ![
                 &self.identity.artifact_sha256,
@@ -289,4 +355,211 @@ impl Explanation {
         }
         Ok(())
     }
+}
+
+#[cfg(feature = "bap")]
+fn validate_guarded_explanation(
+    explanation: &Explanation,
+    report: &crate::bap::guard_admission::Report,
+) -> Result<(), Error> {
+    use crate::bap::guard_admission as guard;
+    let normalized = explanation
+        .guard_request
+        .as_ref()
+        .ok_or_else(|| invalid("guarded explanation normalized request absent"))?;
+    let request = super::frame_paths::decode_guard_request(normalized)?;
+    let (query, semantic_suffix, candidate) = super::proof_binding(
+        explanation.composition.as_ref(),
+        explanation.target_resolution.as_ref(),
+        report,
+        &request,
+    )?;
+    let roots: Vec<_> = request
+        .entry_points
+        .iter()
+        .map(|a| format!("0x{a:016x}"))
+        .collect();
+    let seeds: Vec<_> = request
+        .slice_seeds
+        .iter()
+        .map(|a| format!("0x{a:016x}"))
+        .collect();
+    if query != explanation.identity.query_id
+        || report.input.snapshot != explanation.identity.snapshot_id
+        || report.input.artifact_sha256 != explanation.identity.artifact_sha256
+        || request.snapshot_id != explanation.identity.snapshot_id
+        || request_fingerprint(&request) != explanation.identity.request_sha256
+        || request.input_kind != crate::InputKind::Dump
+        || !request.file_backed.is_empty()
+        || !request.trusted_fallback.is_empty()
+        || report
+            .input
+            .roots
+            .iter()
+            .map(|r| r.site.clone())
+            .collect::<Vec<_>>()
+            != roots
+        || report.input.seeds != seeds
+        || !explanation
+            .identity
+            .semantic_profile
+            .ends_with(&semantic_suffix)
+        || !guard_assumptions(report)
+            .iter()
+            .all(|p| explanation.assumptions.contains(p))
+    {
+        return Err(invalid(
+            "guarded explanation request or premise binding changed",
+        ));
+    }
+    let sources: BTreeMap<_, _> = report
+        .input
+        .sites
+        .iter()
+        .map(|s| Ok((crate::bap::core_adapter::address(&s.site)?, s)))
+        .collect::<Result<_, Error>>()?;
+    for &va in &request.decodable {
+        if !sources.contains_key(&va) {
+            return Err(invalid("guarded explanation decoded source absent"));
+        }
+    }
+    for (&va, source) in &sources {
+        let actual = request
+            .instructions
+            .get(&va)
+            .ok_or_else(|| invalid("guarded explanation candidate summary absent"))?;
+        if guard::recognize_pending(source)?.is_some() {
+            if let Some(ast) = report.normal_selection(va) {
+                let projection = crate::bap::Backend::guard_normal_projection(
+                    ast,
+                    "MOVAPSmr",
+                    &super::frame_unwind::unhex(&source.bytes_hex)?,
+                    va,
+                )?;
+                if projection.instruction != *actual || !request.decodable.contains(&va) {
+                    return Err(invalid(
+                        "guarded explanation selected normal summary changed",
+                    ));
+                }
+            } else if actual.kind != crate::InstructionKind::Stop
+                || !actual.fall.is_empty()
+                || !actual.targets.is_empty()
+                || actual.complete
+                || !actual.must_defs.is_empty()
+                || actual.uses != request.locations
+                || actual.may_defs != request.locations
+                || request.decodable.contains(&va)
+            {
+                return Err(invalid("guarded explanation unadmitted normal effects"));
+            }
+        } else if guard::CandidateControl::from_instruction(actual)
+            != candidate
+                .as_ref()
+                .and_then(|r| r.instructions.get(&va))
+                .map(guard::CandidateControl::from_instruction)
+                .unwrap_or_else(|| source.control.clone())
+        {
+            return Err(invalid("guarded explanation candidate control changed"));
+        }
+    }
+    let mut retained = BTreeMap::new();
+    if let Some(composition) = &explanation.composition {
+        let full = explanation
+            .guard_sources
+            .as_ref()
+            .ok_or_else(|| invalid("composed explanation full capture sources absent"))?;
+        super::validate_composition_capture(
+            &explanation.identity.semantic_profile,
+            composition,
+            explanation
+                .target_resolution
+                .as_ref()
+                .ok_or_else(|| invalid("composed explanation target proof absent"))?,
+            report,
+            full,
+        )?;
+        for site in full {
+            if !site_valid(site) || retained.insert(site.va, site).is_some() {
+                return Err(invalid(
+                    "composed explanation duplicate or invalid capture source",
+                ));
+            }
+        }
+        if retained.keys().copied().collect::<BTreeSet<_>>() != request.addresses {
+            return Err(invalid(
+                "composed explanation capture source domain changed",
+            ));
+        }
+        for record in &explanation.evidence {
+            if retained.get(&record.instruction.va).copied() != Some(&record.instruction) {
+                return Err(invalid(
+                    "composed explanation evidence differs from full capture source",
+                ));
+            }
+        }
+        let premise = "FrozenCapturedControlData: covered control-data loads use the named captured bytes; target coverage is relative to that snapshot model, not historical memory stability";
+        if !explanation.assumptions.iter().any(|p| p == premise) {
+            return Err(invalid(
+                "composed explanation captured control data premise absent",
+            ));
+        }
+    }
+    for site in retained
+        .values()
+        .copied()
+        .chain(explanation.evidence.iter().map(|r| &r.instruction))
+    {
+        if !request.addresses.contains(&site.va) {
+            return Err(invalid("guarded explanation evidence outside request"));
+        }
+        let Some(source) = sources.get(&site.va) else {
+            if site.captured || !site.bytes_hex.is_empty() {
+                return Err(invalid("guarded explanation captured source absent"));
+            }
+            continue;
+        };
+        if site.bytes_hex != source.bytes_hex
+            || (!source.bytes_hex.is_empty()
+                && (!site.captured
+                    || site.ast_sha256.as_deref() != Some(sha(source.ast.as_bytes()).as_str())
+                    || site.helper_sha256.as_ref() != Some(&report.input.producer.helper_sha256)
+                    || site.runtime_sha256.as_ref() != Some(&report.input.producer.runtime_sha256)
+                    || site.projection.as_ref() != Some(&report.input.producer.projection)))
+        {
+            return Err(invalid(
+                "guarded explanation captured bytes or original AST changed",
+            ));
+        }
+        if guard::recognize_pending(source)?.is_some() {
+            if let Some(ast) = report.normal_selection(site.va) {
+                let projection = crate::bap::Backend::guard_normal_projection(
+                    ast,
+                    site.opcode.as_deref().unwrap_or(""),
+                    &super::frame_unwind::unhex(&source.bytes_hex)?,
+                    site.va,
+                )?;
+                if site.quality != "external_lift"
+                    || site.semantic_status.as_deref() != Some("projected")
+                    || site.accesses
+                        != projection
+                            .memory_accesses
+                            .iter()
+                            .map(AddressUse::from)
+                            .collect::<Vec<_>>()
+                {
+                    return Err(invalid(
+                        "guarded explanation selected normal access changed",
+                    ));
+                }
+            } else if site.quality != "opaque"
+                || site.semantic_status.as_deref() != Some("guard-not-admitted")
+                || !site.accesses.is_empty()
+            {
+                return Err(invalid(
+                    "guarded explanation stopped guard has normal access",
+                ));
+            }
+        }
+    }
+    Ok(())
 }

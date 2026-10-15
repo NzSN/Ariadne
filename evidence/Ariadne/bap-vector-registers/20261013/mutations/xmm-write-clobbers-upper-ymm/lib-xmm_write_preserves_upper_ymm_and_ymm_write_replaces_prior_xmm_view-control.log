@@ -1,0 +1,9 @@
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-vector-registers-20261013/target/vector-mutations-release-20261013/xmm-write-clobbers-upper-ymm/sut)
+    Finished `release` profile [optimized] target(s) in 13.60s
+     Running unittests src/lib.rs (/home/nzsn/Repos/Ariadne-vector-registers-20261013/target/vector-mutations-release-20261013/xmm-write-clobbers-upper-ymm/build/lib-xmm_write_preserves_upper_ymm_and_ymm_write_replaces_prior_xmm_view/release/deps/ariadne-eac5fde57d2ca545)
+
+running 1 test
+test bap::vector_projection_tests::xmm_write_preserves_upper_ymm_and_ymm_write_replaces_prior_xmm_view ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 68 filtered out; finished in 0.00s
+

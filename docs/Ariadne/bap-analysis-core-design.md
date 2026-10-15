@@ -11,14 +11,17 @@ for the selected finite corpus, with the excluded historical real-Linux clauses
 preserved in the [acceptance decision](../../evidence/Ariadne/bap-admission/p4-acceptance-20261010.json).
 Implementation contracts, source/API review and source-bound qualification are
 separate evidence; this consolidated design does not renew qualification.
+The [vector admission extension](../../Plans/completed/bap-vector-registers.md) implements
+a finite XMM/YMM namespace under producer profile v4; its fresh validation is
+separate from the accepted v3 records.
 
 **Why this document exists.** The [effect design](operand-effects-design.md)
 exposes the coverage and maintenance costs of local instruction rules. BAP
 integration first introduced a pinned semantic provider, then moved actual
 analysis computation into BAP-owned passes while preserving Ariadne's snapshot,
 control, origin and reporting contracts. The integration plan records the
-[semantic-provider stage](../../Plans/bap-integration.md#stage-1-bap-semantic-backend)
-and [native-analysis stage](../../Plans/bap-integration.md#stage-2-bap-analysis-core)
+[semantic-provider stage](../../Plans/completed/bap-integration.md#stage-1-bap-semantic-backend)
+and [native-analysis stage](../../Plans/completed/bap-integration.md#stage-2-bap-analysis-core)
 as delivery steps of this design.
 
 **What this document establishes.** One integration design covers native lifting,
@@ -29,22 +32,30 @@ scopes. Contract validation does not prove an arbitrary lifter or pass correct.
 
 **Where to go next.**
 
+- [Completed native request-budget plan](../../Plans/completed/native-request-budget.md) records caller-selected inbound frames, paired capability checks and fresh native qualification.
+
+- [BIL shift-count compatibility](bap-shift-count-design.md) — captured XORPS diagnosis, independent count widths and versioned correction.
+
 - [Captured indirect-target resolution](indirect-target-resolution.md) and
   [R0–R6 plan](../../Plans/indirect-target-resolution.md) — implemented BAP-based
   target expressions, completeness receipts and preparation integration.
-- [Integration plan](../../Plans/bap-integration.md) and its
-  [execution ledger](../../Plans/bap-integration.md#current-execution-ledger) —
+- [Integration plan](../../Plans/completed/bap-integration.md) and its
+  [execution ledger](../../Plans/completed/bap-integration.md#current-execution-ledger) —
   delivery order and retained semantic-provider/analysis-core decisions.
-- [Projection admission plan](../../Plans/bap-projection-admission.md) — accepted
+- [Projection admission plan](../../Plans/completed/bap-projection-admission.md) — accepted
   P0–P4 scope, remote qualification, exclusions and nonblocking follow-ups.
-- [Bounded completion transport plan](../../Plans/bap-completion-pages.md) —
+- [Vector admission plan](../../Plans/completed/bap-vector-registers.md) — finite XMM/YMM
+  aliases, conservative aggregate-state projection and dated finite validation.
+- [Justified branch pruning design](justified-branch-pruning-design.md) — proposed
+  alignment premises, all-path receipts and proof-gated MOVAPS normal admission.
+- [Bounded completion transport plan](../../Plans/completed/bap-completion-pages.md) —
   action batches and paged final results within unchanged frame limits.
-- [Native analysis implementation plan](../../Plans/bap-stage2-implementation.md) —
+- [Native analysis implementation plan](../../Plans/completed/bap-stage2-implementation.md) —
   delivered A1–A6 analysis and adoption work.
-- [A0 implementation plan](../../Plans/bap-stage2-a0.md) and
-  [OCaml foundation plan](../../Plans/bap-ocaml-qualification.md) — completed
+- [A0 implementation plan](../../Plans/completed/bap-stage2-a0.md) and
+  [OCaml foundation plan](../../Plans/completed/bap-ocaml-qualification.md) — completed
   contract, SDK, helper-state and transport foundation.
-- [Windows workload replacement plan](../../Plans/bap-windows-repin.md) —
+- [Windows workload replacement plan](../../Plans/completed/bap-windows-repin.md) —
   authorized replacement of the unavailable capture for active BAP S4/S5.
 - [Completed BAP-only semantics plan](../../Plans/completed/bap-only-semantics.md) —
   removal of the LLVM semantic fallback while retaining decoded-fact validation.
@@ -69,7 +80,8 @@ qualification, richer BIR transformations, general memory-alias precision,
 general indirect-target enumeration and historical execution reconstruction
 remain outside this delivered contract. The [finite target resolver](indirect-target-resolution.md)
 implements opt-in pointer-slot/table work and records its separate named-corpus
-qualification, new capture profile and compact completion encoding. Prefix/system/SIMD/x87/loop semantics retain
+qualification, new capture profile and compact completion encoding. Prefix/system,
+SIMD beyond the finite XMM/YMM extension, x87 and loop semantics retain
 explicit unsupported outcomes. External Electron acceptance requires its exact
 capture bytes. The selected replacement acceptance excludes historical
 real-Linux coverage and its six output hashes; their unexercised/failed records
@@ -173,7 +185,8 @@ unsupported constructs and generic unknown values conservatively.
 ## Projection
 
 Use a bounded abstract bit-provenance interpreter for supported BIL nodes.
-Initial architectural bits refer to canonical GPR byte/flag cells; virtual
+Initial architectural bits refer to canonical GPR byte/flag cells and the
+coarse `state:other` vector location; virtual
 variables hold intermediate values and never become user locations. Constants,
 extract/concat and casts preserve bit identity where justified. Supported
 arithmetic produces new bits with conservatively collected input dependencies.
@@ -187,9 +200,10 @@ address/value dependencies, only may-define `memory:any`, and never must-kill
 that alias cell. Unsupported operations, unknown outputs, unfamiliar state
 and unresolved control retain gaps; calls retain opaque all-location effects.
 
-Production admission now uses `bap-bit-provenance-v3`. Supported typed BIL,
+The retained vector delivery used `bap-bit-provenance-v4`, extending v3 with the
+[finite vector namespace](#vector-register-admission). Supported typed BIL,
 architectural namespace, widths, virtual bindings, prefixes and compatible
-control/operand facts replace generic opcode-name membership. The current
+control/operand facts replace generic opcode-name membership. The earlier v3
 finite regression corpus has 58 exact cases and 37 projected forms, including
 the four observed parser forms and paired short/long control encodings. These
 are exercised cases, not a new exhaustive permission list or an ISA proof.
@@ -235,6 +249,50 @@ semantic selector is removed and `fallback` is always null. Fresh validation
 qualifies each changed source tier. The active workload replacement has its own
 capture and timing contract; default selection does not establish that result.
 
+## Vector-register admission
+
+The [V0–V2 vector admission plan](../../Plans/completed/bap-vector-registers.md) selects
+XMM0–15/YMM0–15, exact 128/256-bit widths, canonical YMM backing and low-half
+XMM aliases. Vector effects use the existing coarse `state:other` location:
+reads retain that dependency and writes may-define it, but never must-kill the
+aggregate FP/vector/opmask state. Typed 128/256-bit memory effects retain address
+and payload dependencies. This is producer profile `bap-bit-provenance-v4`;
+earlier v3 qualification remains historical. General SIMD coverage,
+ZMM/opmask state, XMM unwind recipes and
+alignment-exception admission remain outside this finite extension.
+The [proposed predicate design](justified-branch-pruning-design.md) supplies the
+next contract for that exception boundary; it has no runtime qualification yet.
+
+XMM aliases share a 256-bit YMM backing value within each BIL interpretation;
+an XMM assignment preserves its high half, while a YMM assignment expresses
+the producer's full-width write, including VEX zeroing when present. Separate
+register banks remain distinct internally despite the shared public location.
+Every vector write adds a possible definition of `state:other`, and no individual vector write
+can establish its definite replacement. Reports retain
+`vector-state-coarsened:state:other` as the precision limit.
+
+The decoded destination must match its original protocol register token before
+using a filtered public GPR operand. Vector operands are absent from that GPR
+list; without this binding, a vector load could incorrectly mark its `RSP`
+address base as a possible destination. Native regression and a dedicated mutant
+cover this source-review repair. V4 scalar consumers and the strict profile
+migration checker accept the declared profile without erasing effect changes.
+
+On 2026-10-13, the [source-bound validation record](../../evidence/Ariadne/bap-vector-registers/20261013/report.md)
+passes all applicable root checks in isolated remote WSL, nine pinned native
+producer tests, disagreement checks, six native/capture parity tests, finite
+frame-path native checking, model replay and six vector mutants with seven
+intended assertion rejections. The native producer exercises SSE loads/stores
+and register moves, plus VEX 128/256-bit register moves. Synthetic Windows/Linux
+captures establish native/reference parity and preservation of entry origins.
+
+The same Electron frame query remains unavailable after namespace admission:
+the captured MOVAPS lift now stops on its explicit alignment-exception branch
+(`unmodeled BIL control/special/loop semantics`), rather than `YMM6`. Its caller
+graph still has nine nodes and lacks the active call anchor. This finite
+extension does not qualify general SIMD, exception handling, XMM unwinding,
+the full-dump enumeration gate or replacement-backend performance.
+
 ## Admission order and identity
 
 1. Validate protocol identity, exact consumed bytes/length and typed AST budgets.
@@ -245,12 +303,12 @@ capture and timing contract; default selection does not establish that result.
 5. Bind instruction-specific obligations: decoded MOV footprints, conditional
    preservation, reviewed undefined flags and direct/indirect control targets.
 
-The implemented producer profile is `bap-bit-provenance-v3`. Existing report envelopes
+The implemented producer profile is `bap-bit-provenance-v4`. Existing report envelopes
 can carry it and the new `opaque-ordinary` semantic status without a schema
 change. Query/semantic identities already bind projection profile and evidence.
-I5a must explicitly admit v3 for its unchanged six scalar MOV forms; it must
+I5a explicitly admits v3/v4 for its unchanged six scalar MOV forms; it must
 continue rejecting opaque or unsupported semantics. Earlier v2 reports remain
-historical and are never rewritten to obtain v3 acceptance.
+historical and are never rewritten to obtain later-profile acceptance.
 
 Opcode strings are descriptive metadata and may select a reviewed exceptional
 obligation; they are not a generic permission list. The exact `90` NOP exception
@@ -414,7 +472,7 @@ holes/conflicts remain failed premises, never zero-filled or repaired from a PE.
 
 The implemented stream is UTF-8 JSON Lines, schema `ariadne.bap-core/v1`, one request
 and exactly one response at a time. Reject duplicate JSON keys, unknown fields,
-nonfinite numbers, noncanonical identities and frames over 8 MiB before admission.
+nonfinite numbers, noncanonical identities and requests over the selected positive byte budget before admission. The default request budget and fixed response frame limit are 8 MiB; the configurable request contract is below.
 The implementation must also enforce per-request node/edge/location/state/term
 budgets before allocation. Both families have native admission. The production
 `captured-fixed-input/v1` recovery profile wraps `normalized` premises and a
@@ -540,13 +598,23 @@ Propagate and FinishStateflow. `step` chooses one actual native enabled action;
 its optional action name must match that selection. `advance` additionally
 checks the supplied address. `observe`, `finish` and `reset` are read-only;
 finish requires done and reset acknowledges before a clean process exit.
-The frame limit is 8 MiB; address, location and potential typed-edge sets are
+The default request and fixed response frame limits are 8 MiB; address, location and potential typed-edge sets are
 bounded at 65,536 entries. JSON nesting is bounded at 64 levels.
 Production recovery completion uses the batch/page extension above. Generated
 per-action replay and stateflow retain their original observation path. The
 transport checksum checks consistency; existing SHA-256 request/helper identities
 retain their trust roles. Overflow, malformed pages and failed exits poison the
 session without automatic Rust fallback.
+
+## Configurable native request limit
+
+The [T0–T4 execution plan](../../Plans/completed/native-request-budget.md) implements the user-authorized configurable request limit, following the [G5 captured retry](../../evidence/Ariadne/guard-budget-configuration/20261014/README.md). Guard proof budgets and transport request budgets are independent; the larger captured report reached the previous fixed inbound 8 MiB limit.
+
+`CoreConfig.max_request_bytes` defaults to 8 MiB and accepts caller-selected positive finite values without a default-based ceiling. The CLI option is `--bap-core-max-request-bytes N`. Host enforcement and native input reading both count the complete JSON line including its newline. Native launch receives a nondefault value through `--max-request-bytes DECIMAL`, parsed with checked unsigned-64 arithmetic. Zero, malformed and overflowing values are rejected. The chosen budget does not become an allocation reservation.
+
+ABI 2 adds `configurable_request_bytes: true` and the default `max_request_bytes` to the source-bound build manifest's handshake. Runtime ready declares the exact effective request budget. The host validates that declaration against its chosen configuration and all retained build capabilities. Legacy helpers remain usable with the default; selecting a nondefault budget requires the new capability. Keep the immutable build manifest in backend identity and record the selected request budget separately. Transport configuration does not change semantic input/query digests or model actions.
+
+Responses remain limited to 8 MiB through `MAX_FRAME` and the native outbound reader/writer contract. Completion paging, aggregate result budgets, JSON depth, normalized input constraints, proof validation and protocol poisoning retain their existing behavior. Raising request capacity does not justify incomplete candidate coverage or promise a successful full-dump path query. Exact boundary, capability, malformed-input and larger-request native controls qualify this extension separately from historical 8 MiB transport evidence.
 
 Instruction map rows contain `address` plus the instruction fields above.
 Provenance rows are `{address, source}`; reaching rows are
@@ -857,7 +925,7 @@ The user confirmed its loss and authorized the replacement below.
 The controlled `crashpad-windows-checksum-98-v1` is a real Windows AMD64 Crashpad
 capture analyzed on Linux, not a manually edited dump or reconstruction of the
 old crash. Its [recipe](../../native/crashpad-demo/README.md) and
-[replacement plan](../../Plans/bap-windows-repin.md) freeze 98 starts: setup,
+[replacement plan](../../Plans/completed/bap-windows-repin.md) freeze 98 starts: setup,
 eight checksum rounds, indexed loop, conditional diamond, spill/reload and RCX
 producer before a four-byte null write. All rounds feed the address computation.
 
@@ -1052,8 +1120,8 @@ direct native tampering bypassed Rust prevalidation.
 | Migration / workloads | Earlier focused comparison reproduced 24 v2 hashes and declared profile/ID changes; 98-start/99-edge/90-slice/zero-obligation Windows Rust median 657.39 ms under unlimited timing. This did not qualify native I4 budgets. |
 | Acceptance | Complete admission mutation campaign and source-bound P4 refresh were not accepted here; later selected replacement supplied its own decision. |
 
-The [plan execution ledger](../../Plans/bap-projection-admission.md#execution-ledger-2026-10-10)
-and [resume order](../../Plans/bap-projection-admission.md#resume-order) distinguish
+The [plan execution ledger](../../Plans/completed/bap-projection-admission.md#execution-ledger-2026-10-10)
+and [resume order](../../Plans/completed/bap-projection-admission.md#resume-order) distinguish
 these historical checks from the later accepted scope. Failed run paths such as
 `target/bap-admission-qualification-20261010` identify the original environment,
 not a promise that temporary files persist.
@@ -1161,3 +1229,39 @@ unexercised. Optional full Scanner Rust repetitions and automatic external
 evidence ingestion remain separate follow-ups. No required P4 work remains
 within the accepted scope; universal lifting/refinement and release claims do
 not follow.
+
+## Proof-gated normal admission
+
+The opt-in [MOVAPS guard design](justified-branch-pruning-design.md) and its
+[G0–G4 plan](../../Plans/completed/justified-branch-pruning.md) add producer
+`bap-bit-provenance-v5` and native capture profile `captured-guarded-input/v1`.
+The preparation coordinator freezes full candidate control and residue proof
+evidence before selecting the reviewed normal BIL. Unknown, refuted and
+budget-stopped guards retain explicit stops and residuals. V4 remains the default.
+
+Native guard validation checks the actual premise instances, source/transfer
+receipts, candidate predecessor coverage, selected ordinary successor/effects
+and final normalized request identity. This is an analysis-level proof contract
+under the pinned BAP trust boundary; general exception graphs remain outside
+its scope. The canonical design owns usage, review corrections and dated
+qualification results.
+
+## Shift-count compatibility
+
+[Independent BIL count widths](bap-shift-count-design.md) are implemented with
+default producer v6 and guarded producer v7. Only BIL ARSHIFT/RSHIFT/LSHIFT
+permit different immediate widths and retain the left result width. Counts are
+full unsigned bitvectors with bounded overshift fill; other binary typing stays
+strict. Provenance equality does not imply computed value equality. Existing
+opaque summary effects keep rule v4, and historical v4/v5 identities remain
+explicit. The canonical design records analysis, usage, review, qualification
+and the original retry's subsequent guard-evidence limit.
+
+
+## Request-budget validation, 2026-10-14
+
+The [completed T0–T4 ledger](../../Plans/completed/native-request-budget.md) and [source-bound qualification](../../evidence/Ariadne/native-request-budget/20261014/README.md) retain 686 matching source/tool/document hashes and 35 archived files. Fresh remote WSL checks pass: 191 default/46 core-only tests, format/Clippy/layout, 17 native kernels, nine capture and two frame-path tests, plus 14 Python contract controls. Five new transport tests exercise exact newline-inclusive host/direct-native bounds, malformed/overflow/full-unsigned launches, legacy compatibility, invalid capabilities/ready, child cleanup, unchanged response limits and a valid request above 8 MiB. Independent read-only review found no concrete issue. Model bodies remain unchanged and their retained G5 hashes are verified; no fresh model/mutation, release/performance or universal refinement campaign is credited.
+
+The [original caller comparison](../../evidence/Ariadne/native-request-budget/20261014/artifacts/probe-expanded/preparation-outcome.json) initializes its 4,764-site capture and 9,001,701-byte guard report successfully with `max_request_bytes=33554432`; the default still rejects it with `core request oversized`. Responses remain bounded at 8 MiB. The report retains incomplete candidate coverage and unknown MOVAPS alignment. The retry performs native initialization only, so it does not qualify core/path results.
+
+For a 32 MiB request budget, add `--bap-core-max-request-bytes 33554432` to the native CLI command, or set `CoreConfig.max_request_bytes = 32 * 1024 * 1024` before initialization. Guard evidence, discovery and frame recovery budgets remain independent and must describe the actual captured query. The immutable build identity remains source-bound; its runtime budget is separately negotiated and recorded.

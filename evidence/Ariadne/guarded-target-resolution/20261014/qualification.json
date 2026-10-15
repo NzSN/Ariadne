@@ -1,0 +1,476 @@
+{
+  "schema": "ariadne.guarded-target-resolution-qualification/v1",
+  "date": "2026-10-14",
+  "status": "candidate-recovery-qualified-full-closure-partial",
+  "source_files": "artifacts/delivery/source-files.json",
+  "source_file_count": 711,
+  "tools": "artifacts/delivery/tools.json",
+  "primary_gate_run": "artifacts/validation-20261014T120753",
+  "all_recorded_gates_pass": true,
+  "gates": [
+    {
+      "name": "format-apply",
+      "command": [
+        "cargo",
+        "fmt",
+        "--all"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 0.6774854000000001
+    },
+    {
+      "name": "composition-oracle",
+      "command": [
+        "python3",
+        "tests/bap/fixtures/composition/oracle.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 0.050582399999999694
+    },
+    {
+      "name": "guard-oracle",
+      "command": [
+        "python3",
+        "tests/bap/fixtures/guards/oracle.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 0.04558540000000022
+    },
+    {
+      "name": "format",
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 0.4962230999999999
+    },
+    {
+      "name": "guard-units",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--lib",
+        "bap::guard_admission_tests"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 7.967929300000001
+    },
+    {
+      "name": "default-tests",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 23.128929911999997
+    },
+    {
+      "name": "core-only",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--no-default-features"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 0.3934880040000053
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--offline",
+        "--locked",
+        "--all-features",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 6.7614270770000005
+    },
+    {
+      "name": "layout",
+      "command": [
+        "python3",
+        "tools/check_rust_layout.py"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 0.04965641300000101
+    },
+    {
+      "name": "native-build",
+      "command": [
+        "python3",
+        "native/bap-core/build.py",
+        "--output",
+        "target/composed-native"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 5.306189478999997
+    },
+    {
+      "name": "native-frontier",
+      "command": [
+        "python3",
+        "target/guarded-target-resolution-20261014/run-native-frontier.py",
+        "--native-dir",
+        "target/composed-native",
+        "--output",
+        "target/composition-frontier-controls"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 0.25287154800000167
+    },
+    {
+      "name": "native-conditional-write",
+      "command": [
+        "python3",
+        "target/guarded-target-resolution-20261014/run-native-frontier.py",
+        "--native-dir",
+        "target/composed-native",
+        "--test-file",
+        "tests/bap/conditional_write.ml",
+        "--cases",
+        "3",
+        "--output",
+        "target/conditional-write-native-controls"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 0.26799592000000416
+    },
+    {
+      "name": "native-infeasible-loop",
+      "command": [
+        "python3",
+        "target/guarded-target-resolution-20261014/run-native-frontier.py",
+        "--native-dir",
+        "target/composed-native",
+        "--test-file",
+        "tests/bap/infeasible_loop.ml",
+        "--cases",
+        "12",
+        "--output",
+        "target/infeasible-loop-native-controls"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 0.25333532999999875
+    },
+    {
+      "name": "actual-infeasible-replay-1",
+      "command": [
+        "python3",
+        "target/guarded-target-resolution-20261014/run-native-frontier.py",
+        "--native-dir",
+        "target/composed-native",
+        "--test-file",
+        "tests/bap/infeasible_replay_probe.ml",
+        "--cases",
+        "2",
+        "--arg",
+        "/work/guarded-target-resolution-20261014/actual-replay-1.json",
+        "--output",
+        "target/actual-infeasible-replay-1"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 0.5939574009999973
+    },
+    {
+      "name": "actual-infeasible-replay-0",
+      "command": [
+        "python3",
+        "target/guarded-target-resolution-20261014/run-native-frontier.py",
+        "--native-dir",
+        "target/composed-native",
+        "--test-file",
+        "tests/bap/infeasible_replay_probe.ml",
+        "--cases",
+        "271",
+        "--arg",
+        "/work/guarded-target-resolution-20261014/actual-replay-0.json",
+        "--output",
+        "target/actual-infeasible-replay-0"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 5.546824080999997
+    },
+    {
+      "name": "native-kernels",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--test",
+        "bap_core_bootstrap",
+        "--test",
+        "bap_core_analysis",
+        "--test",
+        "bap_core_stateflow",
+        "--",
+        "--ignored"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 17.065591911999995
+    },
+    {
+      "name": "native-capture",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--test",
+        "input_bap_core",
+        "--",
+        "--ignored"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 30.62993159899999
+    },
+    {
+      "name": "native-composed",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--lib",
+        "actual_bap_pending_store_targets_and_native_rust_results_agree",
+        "--",
+        "--ignored"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 11.856893833
+    },
+    {
+      "name": "native-query-rotation",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--lib",
+        "native_query_rotation_obeys_selected_aggregate_budget_and_pinned_capture_identity",
+        "--",
+        "--ignored"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 14.208690505000007
+    },
+    {
+      "name": "native-composition-controls",
+      "command": [
+        "python3",
+        "tests/bap/composition_native_controls.py",
+        "--helper",
+        "target/composed-native/ariadne-bap-core",
+        "--input",
+        "/work/guarded-target-resolution-20261014/validation-20261014T120753/passing-combined-wire.json",
+        "--output",
+        "/work/guarded-target-resolution-20261014/validation-20261014T120753/native-controls.json"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 0.3101801389999821
+    },
+    {
+      "name": "native-composition-mutations",
+      "command": [
+        "python3",
+        "target/guarded-target-resolution-20261014/run-native-mutations.py",
+        "--helper",
+        "target/composed-native/ariadne-bap-core",
+        "--input",
+        "/work/guarded-target-resolution-20261014/validation-20261014T120753/passing-combined-wire.json",
+        "--output",
+        "target/native-composition-mutants",
+        "--drop-derived-builds"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 11.428783038000006
+    },
+    {
+      "name": "native-frame-path",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--test",
+        "input_frame_paths",
+        "--",
+        "--ignored"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 29.91544277899999
+    },
+    {
+      "name": "contract-tools",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools",
+        "-p",
+        "test_bap_core_contract.py"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 0.11955261600002132
+    },
+    {
+      "name": "guard-mutation-seams",
+      "command": [
+        "python3",
+        "tools/check_guard_admission_mutations.py",
+        "--check-seams"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 0.024488203000004205
+    },
+    {
+      "name": "release-build",
+      "command": [
+        "cargo",
+        "build",
+        "--offline",
+        "--locked",
+        "--release",
+        "--features",
+        "validation",
+        "--lib",
+        "--bin",
+        "ariadne-minidump"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 21.21189550699998
+    },
+    {
+      "name": "composition-model",
+      "command": [
+        "bash",
+        "Specs/check-guarded-target-resolution.sh"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 10.528460853000013
+    }
+  ],
+  "test_counts": {
+    "default-tests": 218,
+    "core-only": 46,
+    "native-kernels": 17,
+    "native-capture": 9,
+    "native-composed": 1,
+    "native-query-rotation": 1,
+    "native-frame-path": 4
+  },
+  "model_configs": 19,
+  "native_admission_controls": 12,
+  "native_infeasible_controls": 12,
+  "actual_infeasible_receipts_replayed": 273,
+  "native_source_mutants_attempted": 4,
+  "native_source_mutants_credited": 3,
+  "dump_sha256": "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+  "dump_run": "artifacts/dump-20261014T121127",
+  "table_reconciliation": {
+    "tables": 9,
+    "entries": 370,
+    "destinations": 64,
+    "all_table_sets_equal": true,
+    "formerly_missing_starts": 51,
+    "formerly_missing_attempted": 51,
+    "complete_original_sites": 8,
+    "incomplete_original_sites": [
+      {
+        "site": "0x00007ff77440da09",
+        "targets": [
+          "0x00007ff77440a451",
+          "0x00007ff77440d9eb",
+          "0x00007ff77440da0c",
+          "0x00007ff77440da19"
+        ],
+        "unresolved": [
+          "cyclic-incoming-state"
+        ]
+      }
+    ]
+  },
+  "native_rust_parity": [
+    {
+      "frame": 1,
+      "request_equal": true,
+      "full_state_equal": true,
+      "decoded": 9
+    },
+    {
+      "frame": 0,
+      "request_equal": true,
+      "full_state_equal": true,
+      "decoded": 768
+    }
+  ],
+  "frame_paths": {
+    "available": false,
+    "coverage": "unavailable",
+    "returned_count": 0,
+    "stop_reason": "missing-or-ambiguous-active-call-anchor"
+  },
+  "unmet_gates": [
+    "complete incoming-state closure of ninth original dispatch",
+    "complete closure of newly exposed cyclic dispatch",
+    "whole-candidate guard coverage and initial MOVAPS admission",
+    "available frame-to-frame path enumeration"
+  ],
+  "generated_replay": {
+    "record": "artifacts/generated-replay-20261014T122223/campaign/result.json",
+    "passed": true,
+    "observations": 330,
+    "wrong_digest_dispatches": [
+      0,
+      0
+    ]
+  },
+  "archive_sha256": "6ae39caffbea0207a94b2dac6b7c21675f02c7e46dbea9267fbb7b1309c6494a",
+  "claim_boundary": "Finite source/tool-bound snapshot candidate recovery and native/reference agreement; not full closure, root cause, executed history or whole ISA assurance.",
+  "supplement_archive_sha256": "e40478286427087f92e484ee818b20d243f957f7d01684443cfbf5f345922f4b"
+}

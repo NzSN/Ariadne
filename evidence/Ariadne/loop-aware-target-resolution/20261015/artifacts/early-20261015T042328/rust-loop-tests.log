@@ -1,0 +1,118 @@
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.26
+   Compiling version_check v0.9.5
+   Compiling libc v0.2.189
+   Compiling generic-array v0.14.7
+   Compiling autocfg v1.5.1
+   Compiling bitflags v2.13.2
+   Compiling typenum v1.20.1
+   Compiling num-traits v0.2.19
+   Compiling cfg-if v1.0.5
+   Compiling anyhow v1.0.104
+   Compiling syn v2.0.119
+   Compiling syn v3.0.6
+   Compiling either v1.18.0
+   Compiling serde_core v1.0.229
+   Compiling once_cell v1.21.4
+   Compiling itertools v0.14.0
+   Compiling getrandom v0.3.4
+   Compiling itoa v1.0.18
+   Compiling zmij v1.0.23
+   Compiling scroll_derive v0.12.1
+   Compiling uuid v1.26.1
+   Compiling rustix v1.1.4
+   Compiling thiserror v2.0.21
+   Compiling powerfmt v0.2.0
+   Compiling deranged v0.5.8
+   Compiling scroll v0.12.0
+   Compiling debugid v0.8.0
+   Compiling smart-default v0.7.1
+   Compiling prost-derive v0.13.5
+   Compiling tracing-attributes v0.1.31
+   Compiling num-derive v0.4.2
+   Compiling range-map v0.2.0
+   Compiling thiserror-impl v2.0.21
+   Compiling tracing-core v0.1.36
+   Compiling crypto-common v0.1.7
+   Compiling block-buffer v0.10.4
+   Compiling hex v0.4.3
+   Compiling bytes v1.12.1
+   Compiling pin-project-lite v0.2.17
+   Compiling log v0.4.34
+   Compiling num-conv v0.1.0
+   Compiling time-core v0.1.7
+   Compiling linux-raw-sys v0.12.1
+   Compiling serde_json v1.0.149
+   Compiling serde v1.0.229
+   Compiling time v0.3.45
+   Compiling tracing v0.1.44
+   Compiling prost v0.13.5
+   Compiling digest v0.10.7
+   Compiling procfs-core v0.17.0
+   Compiling minidump-common v0.26.1
+   Compiling serde_derive v1.0.229
+   Compiling memmap2 v0.9.11
+   Compiling encoding_rs v0.8.35
+   Compiling memchr v2.8.3
+   Compiling fastrand v2.5.0
+   Compiling cpufeatures v0.2.17
+   Compiling sha2 v0.10.9
+   Compiling tempfile v3.20.0
+   Compiling minidump v0.26.1
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-loop-aware-20261015)
+error[E0308]: mismatched types
+    --> src/bap/target_resolution.rs:1356:86
+     |
+1356 | ... { receipt });
+     |       ^^^^^^^ expected `LoopClosureReceipt`, found `Box<LoopClosureReceipt>`
+     |
+     = note: expected struct `LoopClosureReceipt`
+                found struct `Box<...>`
+     = note: the full name for the type has been written to '/home/nzsn/Repos/Ariadne-loop-aware-20261015/target/loop-aware-build/debug/deps/ariadne-ee964763ae0b7713.long-type-6268646638263145716.txt'
+     = note: consider using `--verbose` to print the full type name to the console
+help: consider unboxing the value
+     |
+1356 |                         result.coverage = Some(CoverageEvidence::InductiveDispatch { receipt: *receipt });
+     |                                                                                      ++++++++++
+
+error[E0277]: the trait bound `Instruction: serde::Serialize` is not satisfied
+    --> src/bap/../../tests/bap/loop_closure_unit.rs:143:43
+     |
+ 143 | ...   serde...retty(&graph).u...
+     |       -----...----- ^^^^^^ unsatisfied trait bound
+     |       |
+     |       required by a bound introduced by this call
+     |
+help: the trait `ast::_::_serde::Serialize` is not implemented for `Instruction`
+    --> src/model.rs:99:1
+     |
+  99 | pub s...ction {
+     | ^^^^^...^^^^^
+     = note: for local types consider adding `#[derive(serde::Serialize)]` to your `Instruction` type
+     = note: for types from other crates check whether the crate offers a `serde` feature flag
+     = help: the following other types implement trait `Serialize`:
+               &...
+               &mut ...
+               ()
+               (...,)
+               (..., ...)
+               (..., ..., ...)
+               (..., ..., ..., ...)
+               (..., ..., ..., ..., ...)
+             and 256 others
+     = note: required for `BTreeMap<u64, ...>` to implement `Serialize`
+note: required by a bound in `to_vec_pretty`
+    --> /work/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/ser.rs:2231:17
+     |
+2229 | ...fn to_vec_pretty<T>(valu...
+     |       ------------- required by a bound in this function
+2230 | ...e
+2231 | ...T: ?Sized + Serialize,
+     |                ^^^^^^^^^ required by this bound in `to_vec_pretty`
+     = note: the full name for the type has been written to '/home/nzsn/Repos/Ariadne-loop-aware-20261015/target/loop-aware-build/debug/deps/ariadne-ee964763ae0b7713.long-type-11167747957330857209.txt'
+     = note: consider using `--verbose` to print the full type name to the console
+
+Some errors have detailed explanations: E0277, E0308.
+For more information about an error, try `rustc --explain E0277`.
+error: could not compile `ariadne-analysis` (lib test) due to 2 previous errors

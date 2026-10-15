@@ -1,0 +1,12 @@
+{
+  "backend": "rust reference, explicit",
+  "dump_sha256": "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+  "elapsed_ms": 4527,
+  "preparation_errors": [
+    "frame 1 preparation: materialization limit: guard evidence bytes"
+  ],
+  "runtime_bytes": 5286240,
+  "runtime_entries": 440520,
+  "scope": "API probe raises captured-read/runtime-table/output byte budgets; explicit windows-amd64-normal-call-entry/v1 premise; no image fallback, symbol bytes or additional discovery roots are used",
+  "thread_id": 23668
+}

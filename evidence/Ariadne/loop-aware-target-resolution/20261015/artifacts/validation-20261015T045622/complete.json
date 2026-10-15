@@ -1,0 +1,319 @@
+{
+  "all_gates_pass": true,
+  "gates": [
+    {
+      "name": "format",
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 1.0401916
+    },
+    {
+      "name": "loop-fixtures",
+      "command": [
+        "python3",
+        "tests/bap/fixtures/loop-closure/extract.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 1.528204500000001
+    },
+    {
+      "name": "loop-oracle",
+      "command": [
+        "python3",
+        "tests/bap/fixtures/loop-closure/oracle.py",
+        "--check",
+        "--output",
+        "/loop-work/evidence/validation-20261015T045622/oracle.json"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 0.08882320000000021
+    },
+    {
+      "name": "loop-tests",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--lib",
+        "bap::target_resolution::loop_tests"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 10.270412698999998
+    },
+    {
+      "name": "default-tests",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 17.821138218
+    },
+    {
+      "name": "core-only",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--no-default-features"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 0.9975081669999994
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--offline",
+        "--locked",
+        "--all-features",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 8.558763845999998
+    },
+    {
+      "name": "layout",
+      "command": [
+        "python3",
+        "tools/check_rust_layout.py"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 0.4791638629999966
+    },
+    {
+      "name": "native-build",
+      "command": [
+        "python3",
+        "native/bap-core/build.py",
+        "--output",
+        "target/loop-aware-native"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 11.117078524999997
+    },
+    {
+      "name": "native-loop-controls",
+      "command": [
+        "python3",
+        "tests/bap/newloop_native_controls.py",
+        "--native-dir",
+        "target/loop-aware-native",
+        "--receipt-dir",
+        "/loop-work/evidence/validation-20261015T045622/loop-receipts",
+        "--output",
+        "target/loop-aware-native-controls-validation-20261015T045622",
+        "--mutations"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 11.833173560999995
+    },
+    {
+      "name": "legacy-combined-replay",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--test",
+        "input_frame_paths",
+        "retained_combined_v1_minidump_and_frame_reports_replay_after_upgrade",
+        "--",
+        "--ignored"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 53.46227627500001
+    },
+    {
+      "name": "native-targets",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--lib",
+        "input::materialize::target_resolution_tests",
+        "--",
+        "--ignored"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 15.798140800999988
+    },
+    {
+      "name": "native-kernels",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--test",
+        "bap_core_bootstrap",
+        "--test",
+        "bap_core_analysis",
+        "--test",
+        "bap_core_stateflow",
+        "--",
+        "--ignored"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 20.96767436899998
+    },
+    {
+      "name": "native-capture",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--test",
+        "input_bap_core",
+        "--",
+        "--ignored"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 38.65808355799999
+    },
+    {
+      "name": "native-composition",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--lib",
+        "actual_bap_pending_store_targets_and_native_rust_results_agree",
+        "--",
+        "--ignored"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 14.58092954
+    },
+    {
+      "name": "native-composition-controls",
+      "command": [
+        "python3",
+        "tests/bap/composition_native_controls.py",
+        "--helper",
+        "target/loop-aware-native/ariadne-bap-core",
+        "--input",
+        "/loop-work/evidence/validation-20261015T045622/passing-combined-wire.json",
+        "--output",
+        "/loop-work/evidence/validation-20261015T045622/native-composition-controls.json"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 0.8087281950000147
+    },
+    {
+      "name": "native-frame-reports",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--test",
+        "input_frame_paths",
+        "--",
+        "--ignored"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 53.33651254099996
+    },
+    {
+      "name": "target-model",
+      "command": [
+        "bash",
+        "Specs/check-target-resolution.sh"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 3.036772834999965
+    },
+    {
+      "name": "composition-model",
+      "command": [
+        "bash",
+        "Specs/check-guarded-target-resolution.sh"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 10.874660746000018
+    },
+    {
+      "name": "loop-model",
+      "command": [
+        "bash",
+        "Specs/check-loop-target-closure.sh"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 15.265369444000044
+    },
+    {
+      "name": "contract-tools",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools",
+        "-p",
+        "test_bap_core_contract.py"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 0.572990950000019
+    },
+    {
+      "name": "release-build",
+      "command": [
+        "cargo",
+        "build",
+        "--offline",
+        "--locked",
+        "--release",
+        "--features",
+        "validation",
+        "--lib",
+        "--bin",
+        "ariadne-minidump"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 33.974579364999954
+    }
+  ],
+  "source_files": 877
+}

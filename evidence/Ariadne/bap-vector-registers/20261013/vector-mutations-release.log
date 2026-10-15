@@ -1,0 +1,7 @@
+aggregate-vector-must-kill: 2 expected assertion rejection(s)
+collapse-vector-banks: 1 expected assertion rejection(s)
+read-upper-half-as-xmm: 1 expected assertion rejection(s)
+xmm-write-clobbers-upper-ymm: 1 expected assertion rejection(s)
+vector-payload-as-stack-address: 1 expected assertion rejection(s)
+filtered-gpr-as-vector-destination: 1 expected assertion rejection(s)
+Report: /home/nzsn/Repos/Ariadne-vector-registers-20261013/target/vector-mutations-release-20261013/report.json

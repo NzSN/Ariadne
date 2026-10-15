@@ -280,8 +280,17 @@ impl NativeAnalyzer {
             .unwrap_or_default();
         let (session, response) =
             CoreSession::start_profile(config, token, &request.snapshot_id, profile, &input)?;
-        if response.error.is_some() {
-            return Err(invalid("native initialize rejected"));
+        if let Some(error) = response.error {
+            return Err(invalid(
+                if profile == super::core_protocol::GUARDED_PROFILE
+                    || profile == super::core_protocol::LEGACY_COMPOSED_PROFILE
+                    || profile == super::core_protocol::COMPOSED_PROFILE
+                {
+                    format!("native guarded initialize rejected: {}", error.message)
+                } else {
+                    "native initialize rejected".into()
+                },
+            ));
         }
         let state = decode_state(&request, &response.observation)?;
         validate_attribution(&request, &state, &response.attribution, &evidence)?;
@@ -332,12 +341,48 @@ impl NativeAnalyzer {
         let mut input = json!({"normalized":encode_request(&request)?, "capture":{
             "snapshot":context.snapshot_id,"artifact_sha256":context.artifact_sha256,
             "query_id":context.query_id,"semantic_profile":context.semantic_profile,"sites":sites}});
-        let profile = if let Some(report) = prepared.target_resolution() {
+        let profile = if let Some(composition) = prepared.composition() {
+            let guards = prepared
+                .guard_admission()
+                .ok_or_else(|| invalid("composition guard proof absent"))?;
+            let targets = prepared
+                .target_resolution()
+                .ok_or_else(|| invalid("composition target proof absent"))?;
+            super::composition::validate(composition, targets, guards, &request)?;
+            prepared.validate_guard_admission()?;
+            prepared.validate_target_resolution()?;
+            input["composition"] = serde_json::to_value(composition)?;
+            input["guard_admission"] = serde_json::to_value(guards)?;
+            input["target_resolution"] = serde_json::to_value(targets)?;
+            if super::composition::is_legacy(composition) {
+                super::core_protocol::LEGACY_COMPOSED_PROFILE
+            } else {
+                super::core_protocol::COMPOSED_PROFILE
+            }
+        } else if let Some(report) = prepared.guard_admission() {
+            if prepared.target_resolution().is_some() {
+                return Err(invalid(
+                    "guard and target profiles cannot share one capture input",
+                ));
+            }
+            prepared.validate_guard_admission()?;
+            input["guard_admission"] = serde_json::to_value(report)?;
+            super::core_protocol::GUARDED_PROFILE
+        } else if let Some(report) = prepared.target_resolution() {
             input["target_resolution"] = serde_json::to_value(report)?;
             super::core_protocol::TARGET_PROFILE
         } else {
             super::core_protocol::CAPTURED_PROFILE
         };
+        #[cfg(test)]
+        if prepared.composition().is_some()
+            && prepared
+                .guard_admission()
+                .is_some_and(|r| r.guards.iter().any(|g| g.normal_ast.is_some()))
+            && let Some(path) = std::env::var_os("ARIADNE_COMPOSITION_WIRE")
+        {
+            std::fs::write(path, serde_json::to_vec(&input)?)?;
+        }
         Self::start(config, token, request, profile, input)
     }
     pub fn identity(&self) -> &Value {

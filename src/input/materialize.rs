@@ -1,3 +1,4 @@
+use crate::bap::guard_admission as guard;
 use crate::effects::{EffectQuality, InstructionEvidence, PreparationOptions, PreparedAnalysis};
 use crate::input::*;
 use crate::llvm_mc::AdapterError;
@@ -14,9 +15,18 @@ pub struct AnalysisQuery {
 }
 
 #[cfg(test)]
+#[path = "../../tests/input/common/mod.rs"]
+mod common;
+#[cfg(test)]
+#[path = "../../tests/input/composition.rs"]
+mod composition_tests;
+#[cfg(test)]
+#[path = "../../tests/input/guard_admission.rs"]
+mod guard_admission_tests;
+#[cfg(test)]
 #[path = "../../tests/input/target_resolution_unit.rs"]
 mod target_resolution_tests;
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, serde::Serialize)]
 pub struct PrepareLimits {
     pub max_starts: usize,
     pub max_candidates: usize,
@@ -50,8 +60,13 @@ pub struct MaterializationReport {
 }
 #[derive(Clone, Debug)]
 pub struct FilePreparedAnalysis {
+    guard_input: Option<Arc<guard::GuardInput>>,
+    guard_snapshot: Option<Arc<FileSnapshot>>,
+    original_controls: Option<Arc<BTreeMap<Address, guard::CandidateControl>>>,
+    pub(crate) guard_admission: Option<guard::Report>,
     pub(crate) target_snapshot: Option<Arc<FileSnapshot>>,
     pub(crate) target_resolution: Option<crate::bap::target_resolution::Report>,
+    pub(crate) composition: Option<crate::bap::composition::Report>,
     pub(crate) refinement: BTreeMap<Address, crate::bap::refinement::TransferReceipt>,
     pub(crate) fault: Arc<super::fault_context::FaultCapture>,
     pub prepared: PreparedAnalysis,
@@ -61,11 +76,230 @@ pub struct FilePreparedAnalysis {
     pub materialization: MaterializationReport,
 }
 impl FilePreparedAnalysis {
+    pub fn composition(&self) -> Option<&crate::bap::composition::Report> {
+        self.composition.as_ref()
+    }
+    pub(crate) fn validate_composition(&self) -> Result<(), crate::bap::Error> {
+        if let Some(composition) = &self.composition {
+            let original = self
+                .original_controls
+                .as_ref()
+                .ok_or("composition original control capture absent")?;
+            let supplied: BTreeMap<_, _> = composition
+                .original_controls
+                .iter()
+                .map(|row| {
+                    Ok((
+                        crate::bap::core_adapter::address(&row.site)?,
+                        row.control.clone(),
+                    ))
+                })
+                .collect::<Result<_, crate::bap::Error>>()?;
+            if supplied.len() != composition.original_controls.len() || supplied != **original {
+                return Err("composition original control capture changed".into());
+            }
+            crate::bap::composition::validate(
+                composition,
+                self.target_resolution
+                    .as_ref()
+                    .ok_or("composition targets absent")?,
+                self.guard_admission
+                    .as_ref()
+                    .ok_or("composition guards absent")?,
+                &self.prepared.request,
+            )?;
+            if crate::bap::composition::analysis_id(composition)?
+                != self.materialization.query_identity
+            {
+                return Err("composition analysis identity changed".into());
+            }
+        } else if self.original_controls.is_some()
+            || (self.guard_admission.is_some() && self.target_resolution.is_some())
+        {
+            return Err("paired preparation has no composition seal".into());
+        }
+        Ok(())
+    }
+    pub fn guard_admission(&self) -> Option<&guard::Report> {
+        self.guard_admission.as_ref()
+    }
+    pub(crate) fn validate_guard_admission(&self) -> Result<(), crate::bap::Error> {
+        let Some(report) = &self.guard_admission else {
+            if self.guard_input.is_some()
+                || self.guard_snapshot.is_some()
+                || self.prepared.identity.ruleset == guard::PRODUCER_PROFILE
+            {
+                return Err("guard profile has no proof evidence".into());
+            }
+            return Ok(());
+        };
+        let input = self
+            .guard_input
+            .as_ref()
+            .ok_or("guard original input absent")?;
+        let snapshot = self
+            .guard_snapshot
+            .as_ref()
+            .ok_or("guard immutable capture absent")?;
+        if **input != report.input
+            || input.snapshot != self.snapshot.snapshot_id
+            || input.artifact_sha256 != self.snapshot.artifact_sha256
+            || self.prepared.identity.ruleset != guard::PRODUCER_PROFILE
+        {
+            return Err("guard original source or snapshot changed".into());
+        }
+        let request = &self.prepared.request;
+        let roots: Vec<_> = request
+            .entry_points
+            .iter()
+            .map(|a| format!("0x{a:016x}"))
+            .collect();
+        let seeds: Vec<_> = request
+            .slice_seeds
+            .iter()
+            .map(|a| format!("0x{a:016x}"))
+            .collect();
+        if input
+            .roots
+            .iter()
+            .map(|r| r.site.clone())
+            .collect::<Vec<_>>()
+            != roots
+            || input.seeds != seeds
+            || input.preparation_sha256
+                != preparation_digest(
+                    &self.materialization.limits,
+                    &request.locations,
+                    &self.open_limits,
+                )?
+            || input.query_scope_sha256
+                != guard_query_scope(
+                    &request.snapshot_id,
+                    &AnalysisQuery {
+                        entry_points: request.entry_points.clone(),
+                        slice_seeds: request.slice_seeds.clone(),
+                    },
+                    &self.materialization.limits,
+                    &input.activation,
+                    &input.roots,
+                )?
+        {
+            return Err("guard query or preparation premises changed".into());
+        }
+        let options = PreparationOptions::default();
+        if options.catalogue.locations() != request.locations {
+            return Err("guard catalogue changed".into());
+        }
+        for source in &input.sites {
+            let va = crate::bap::core_adapter::address(&source.site)?;
+            let evidence = self
+                .prepared
+                .instructions
+                .get(&va)
+                .ok_or("guard site evidence absent")?;
+            let captured = snapshot.read_prefix(va, 15)?;
+            let semantic_source = evidence.semantic.as_ref();
+            if self.reads.get(&va) != Some(&captured)
+                || source.bytes_hex
+                    != evidence
+                        .bytes
+                        .iter()
+                        .map(|b| format!("{b:02x}"))
+                        .collect::<String>()
+                || !captured.bytes.starts_with(&evidence.bytes)
+                || (!source.bytes_hex.is_empty() && semantic_source.is_none())
+                || semantic_source.is_some_and(|s| {
+                    s.backend != "bap-x86-legacy" || s.fallback.is_some() || s.ast_sha256.is_none()
+                })
+                || evidence
+                    .semantic
+                    .as_ref()
+                    .and_then(|s| s.ast_sha256.as_ref())
+                    .is_some_and(|hash| *hash != crate::reports::sha256(source.ast.as_bytes()))
+                || evidence.semantic.as_ref().is_some_and(|s| {
+                    s.projection != input.producer.projection
+                        || s.helper_sha256 != input.producer.helper_sha256
+                        || s.runtime_sha256 != input.producer.runtime_sha256
+                })
+            {
+                return Err("guard captured bytes or original BIL changed".into());
+            }
+            let actual = request
+                .instructions
+                .get(&va)
+                .ok_or("guard summary absent")?;
+            if let Some(pending) = guard::recognize_pending(source)? {
+                let decision = report.guards.iter().find(|g| g.site == pending.site);
+                let residual = decision
+                    .map(|d| d.residual.as_str())
+                    .or(report.stop.as_deref())
+                    .ok_or("guard decision absent")?;
+                let mut expected = crate::llvm_mc::PreparedSite {
+                    instruction: actual.clone(),
+                    evidence: evidence.clone(),
+                    gaps: Vec::new(),
+                    decodable: true,
+                    complete_capture: true,
+                };
+                expected.instruction.kind = InstructionKind::Ordinary;
+                expected.instruction.fall = source
+                    .control
+                    .fall
+                    .iter()
+                    .map(|s| crate::bap::core_adapter::address(s))
+                    .collect::<Result<_, _>>()?;
+                expected.instruction.targets.clear();
+                expected.instruction.complete = source.control.complete;
+                crate::bap::Backend::finalize_guard(
+                    &mut expected,
+                    va,
+                    decision.and_then(|d| d.normal_ast.as_deref()),
+                    residual,
+                    &options,
+                )?;
+                if expected.instruction != *actual
+                    || expected.decodable != request.decodable.contains(&va)
+                    || expected.evidence.quality != evidence.quality
+                    || expected.evidence.rule != evidence.rule
+                    || expected.evidence.control != evidence.control
+                    || evidence.decoder_control != Some(InstructionKind::Ordinary)
+                    || expected
+                        .evidence
+                        .semantic
+                        .as_ref()
+                        .map(|s| (&s.status, &s.memory_accesses))
+                        != evidence
+                            .semantic
+                            .as_ref()
+                            .map(|s| (&s.status, &s.memory_accesses))
+                {
+                    return Err("guard normal selection or stopped effects changed".into());
+                }
+            } else if guard::CandidateControl::from_instruction(actual) != source.control {
+                return Err("guard candidate control changed".into());
+            }
+        }
+        guard::replay_report(input, report)?;
+        let hash = normalized_request_digest(request)?;
+        let mut checked = report.clone();
+        guard::bind_final_request(input, &mut checked, &hash)?;
+        let analysis_id = guard::analysis_id(&checked)?;
+        if checked != *report
+            || (self.composition.is_none() && analysis_id != self.materialization.query_identity)
+        {
+            return Err("guard final request or analysis identity changed".into());
+        }
+        self.validate_composition()?;
+        Ok(())
+    }
     pub fn target_resolution(&self) -> Option<&crate::bap::target_resolution::Report> {
         self.target_resolution.as_ref()
     }
     pub(crate) fn validate_target_resolution(&self) -> Result<(), crate::bap::Error> {
         let Some(report) = &self.target_resolution else {
+            if self.composition.is_some() {
+                return Err("composition target report absent".into());
+            }
             return Ok(());
         };
         if report.snapshot != self.snapshot.snapshot_id
@@ -105,10 +339,16 @@ impl FilePreparedAnalysis {
                 return Err("resolver semantic source mismatch".into());
             }
         }
+        let candidate = self
+            .composition
+            .as_ref()
+            .map(crate::bap::composition::candidate_request)
+            .transpose()?;
+        let replay = candidate.as_ref().unwrap_or(&self.prepared.request);
         crate::bap::target_resolution::validate(
             report,
-            &self.prepared.request.instructions,
-            &self.prepared.request.entry_points,
+            &replay.instructions,
+            &replay.entry_points,
         )?;
         for row in &report.resolutions {
             let va = u64::from_str_radix(row.site.trim_start_matches("0x"), 16)?;
@@ -130,6 +370,7 @@ impl FilePreparedAnalysis {
                 return Err("resolver normalized target mismatch".into());
             }
         }
+        self.validate_composition()?;
         Ok(())
     }
 }
@@ -289,6 +530,150 @@ enum PreparationExtension {
     None,
     Refinement,
     TargetResolution(crate::bap::target_resolution::Limits),
+    GuardAdmission(GuardPreparation),
+    GuardAndTargets(GuardPreparation, crate::bap::target_resolution::Limits),
+}
+
+pub(crate) struct GuardPreparation {
+    pub limits: guard::Limits,
+    pub activation: guard::Activation,
+    pub roots: Vec<guard::Root>,
+    pub premises: Vec<guard::Premise>,
+    pub query_scope_sha256: String,
+    pub producer: Option<guard::Producer>,
+}
+
+pub(crate) fn guard_query_scope(
+    snapshot: &str,
+    query: &AnalysisQuery,
+    limits: &PrepareLimits,
+    activation: &guard::Activation,
+    roots: &[guard::Root],
+) -> Result<String, PreparationError> {
+    let old = query_identity(snapshot, query, limits, None)?;
+    Ok(crate::reports::sha256(
+        &serde_json::to_vec(&(old, activation, roots))
+            .map_err(|e| PreparationError::Backend(e.to_string()))?,
+    ))
+}
+
+fn preparation_digest(
+    limits: &PrepareLimits,
+    locations: &LocationSet,
+    open_limits: &OpenLimits,
+) -> Result<String, crate::bap::Error> {
+    Ok(crate::reports::sha256(&serde_json::to_vec(
+        &serde_json::json!({
+            "limits": limits, "locations": locations,
+            "open_limits": {
+                "max_file_bytes": open_limits.max_file_bytes,
+                "max_streams": open_limits.max_streams,
+                "max_records": open_limits.max_records,
+                "max_metadata_bytes": open_limits.max_metadata_bytes,
+                "max_capture_ranges": open_limits.max_capture_ranges,
+                "max_overlap": open_limits.max_overlap,
+                "max_read_bytes": open_limits.max_read_bytes,
+            },
+            "profile": guard::PROFILE,
+        }),
+    )?))
+}
+
+fn normalized_request_digest(request: &AnalysisRequest) -> Result<String, crate::bap::Error> {
+    Ok(crate::reports::sha256(&serde_json::to_vec(
+        &crate::bap::core_adapter::encode_request(request)?,
+    )?))
+}
+
+fn request_from_sites(
+    snapshot: &str,
+    query: &AnalysisQuery,
+    referenced: &AddressSet,
+    options: &PreparationOptions,
+    sites: &BTreeMap<Address, crate::llvm_mc::PreparedSite>,
+) -> AnalysisRequest {
+    let mut request = AnalysisRequest {
+        snapshot_id: snapshot.into(),
+        addresses: referenced.clone(),
+        locations: options.catalogue.locations(),
+        entry_points: query.entry_points.clone(),
+        slice_seeds: query.slice_seeds.clone(),
+        input_kind: InputKind::Dump,
+        ..AnalysisRequest::default()
+    };
+    for (&va, site) in sites {
+        request.instructions.insert(va, site.instruction.clone());
+        if site.decodable {
+            request.decodable.insert(va);
+        }
+        if site.complete_capture {
+            request.captured.insert(va);
+        }
+    }
+    for &va in referenced {
+        request.instructions.entry(va).or_default();
+    }
+    request
+}
+
+/// Includes completeness, barriers and transfer facts rather than merely
+/// newly added edges. The immutable scope is checked separately by its owner.
+fn candidate_fingerprint(
+    sites: &BTreeMap<Address, crate::llvm_mc::PreparedSite>,
+    sources: &BTreeMap<Address, guard::CandidateSite>,
+    transfers: Option<&BTreeMap<Address, crate::bap::target_resolution::Transfer>>,
+) -> Result<String, PreparationError> {
+    let rows: Vec<_> = sites
+        .iter()
+        .map(|(&va, site)| {
+            let i = &site.instruction;
+            serde_json::json!({
+                "site": format!("0x{va:016x}"),
+                "control": guard::CandidateControl::from_instruction(i),
+                "uses": i.uses, "may_defs": i.may_defs, "must_defs": i.must_defs,
+                "decodable": site.decodable, "captured": site.complete_capture,
+                "bytes": site.evidence.bytes,
+                "ast_sha256": site.evidence.semantic.as_ref().and_then(|s| s.ast_sha256.as_ref()),
+            })
+        })
+        .collect();
+    let bytes = serde_json::to_vec(&(rows, sources, transfers))
+        .map_err(|e| PreparationError::Backend(e.to_string()))?;
+    Ok(crate::reports::sha256(&bytes))
+}
+
+fn advance_candidate_epoch(
+    fingerprint: String,
+    previous: &mut Option<String>,
+    epoch: &mut u64,
+) -> Result<(), PreparationError> {
+    if previous.as_ref() != Some(&fingerprint) {
+        *epoch = epoch
+            .checked_add(1)
+            .ok_or(PreparationError::InvalidQuery("candidate epoch overflow"))?;
+        *previous = Some(fingerprint);
+    }
+    Ok(())
+}
+
+fn check_guard_graph_limits(
+    sites: &BTreeMap<Address, crate::llvm_mc::PreparedSite>,
+    setup: &GuardPreparation,
+    report: &MaterializationReport,
+) -> Result<(), PreparationError> {
+    if sites.len() > setup.limits.max_sites {
+        return Err(limit("guard candidate sites", report));
+    }
+    let edge_count = sites
+        .values()
+        .try_fold(0usize, |n, site| {
+            n.checked_add(edges(&site.instruction).len())
+        })
+        .ok_or_else(|| limit("guard candidate edges", report))?;
+    if edge_count > setup.limits.max_edges {
+        return Err(limit("guard candidate edges", report));
+    }
+    Ok(())
 }
 
 /// Own the resolver's fixed point separately from instruction-byte discovery.
@@ -299,6 +684,7 @@ struct TargetResolutionCoordinator<'a> {
     transfers: BTreeMap<Address, crate::bap::target_resolution::Transfer>,
     report: Option<crate::bap::target_resolution::Report>,
     rounds: usize,
+    candidate_mode: bool,
 }
 
 impl<'a> TargetResolutionCoordinator<'a> {
@@ -308,6 +694,7 @@ impl<'a> TargetResolutionCoordinator<'a> {
             transfers: BTreeMap::new(),
             report: None,
             rounds: 0,
+            candidate_mode: false,
         }
     }
 
@@ -320,10 +707,16 @@ impl<'a> TargetResolutionCoordinator<'a> {
         materialization: &mut MaterializationReport,
     ) -> Result<bool, PreparationError> {
         use crate::bap::target_resolution as resolver;
-        let instructions: BTreeMap<_, _> = sites
+        let mut instructions: BTreeMap<_, _> = sites
             .iter()
             .map(|(&a, s)| (a, s.instruction.clone()))
             .collect();
+        // The published request retains every represented endpoint, including
+        // non-followed call targets and slice seeds that are not discovery
+        // roots. Bind target proofs to that same domain from the outset.
+        for &address in &materialization.referenced {
+            instructions.entry(address).or_default();
+        }
         let round_limit = self.rounds >= self.limits.max_rounds;
         let mut resolved = if round_limit && self.report.is_some() {
             self.report.take().expect("previous report checked")
@@ -332,7 +725,12 @@ impl<'a> TargetResolutionCoordinator<'a> {
             if round_limit {
                 limits.max_steps = 0;
             }
-            resolver::resolve(
+            let resolve = if self.candidate_mode {
+                resolver::resolve_candidate
+            } else {
+                resolver::resolve
+            };
+            resolve(
                 &snapshot.metadata.snapshot_id,
                 &snapshot.metadata.artifact_sha256,
                 &instructions,
@@ -356,11 +754,15 @@ impl<'a> TargetResolutionCoordinator<'a> {
                 resolved = Self::retain_witnesses(previous, resolved, &instructions, roots)?;
             }
         }
-        resolved.graph_sha256 = resolver::graph_digest(&instructions, roots)
+        resolved.graph_sha256 = resolver::report_graph_digest(&resolved, &instructions, roots)
             .map_err(|e| PreparationError::Backend(e.to_string()))?;
         resolver::validate(&resolved, &instructions, roots)
             .map_err(|e| PreparationError::Backend(e.to_string()))?;
         let stopped = round_limit || resolved.stop.is_some();
+        let before: BTreeMap<_, _> = sites
+            .iter()
+            .map(|(&va, site)| (va, site.instruction.clone()))
+            .collect();
         if stopped {
             for site in sites.values_mut() {
                 if site.instruction.kind == InstructionKind::Indirect {
@@ -368,7 +770,6 @@ impl<'a> TargetResolutionCoordinator<'a> {
                 }
             }
         }
-        let mut changed = false;
         for row in &resolved.resolutions {
             let address = parse_target_address(&row.site)?;
             let site = sites
@@ -377,7 +778,7 @@ impl<'a> TargetResolutionCoordinator<'a> {
             site.instruction.complete = row.complete;
             for value in &row.targets {
                 let target = parse_target_address(value)?;
-                changed |= site.instruction.targets.insert(target);
+                site.instruction.targets.insert(target);
                 materialization.referenced.insert(target);
                 if materialization.referenced.len() > materialization.limits.max_candidates {
                     return Err(limit("candidate addresses", materialization));
@@ -387,11 +788,19 @@ impl<'a> TargetResolutionCoordinator<'a> {
                 }
             }
         }
+        // Completeness downgrades/upgrades are proof-relevant even when no
+        // destination is added. Such changes require another closure round.
+        let changed = before.iter().any(|(va, old)| sites[va].instruction != *old);
         self.report = Some(resolved);
-        Ok(stopped || (!changed && pending.is_empty()))
+        Ok(if self.candidate_mode {
+            pending.is_empty() && (stopped || !changed)
+        } else {
+            stopped || (!changed && pending.is_empty())
+        })
     }
 
     fn downgrade(report: &mut crate::bap::target_resolution::Report, reason: &str) {
+        crate::bap::target_resolution::invalidate_loop_coverage(report, reason);
         report.stop = Some(reason.into());
         for row in &mut report.resolutions {
             row.complete = false;
@@ -420,6 +829,7 @@ impl<'a> TargetResolutionCoordinator<'a> {
         // New candidates are admitted atomically with their complete receipts.
         // If their union does not fit, retain the previously admitted payload
         // and stop without adding edges that would lack a surviving witness.
+        resolver::invalidate_loop_coverage(&mut previous, "loop-coverage-graph-changed");
         previous.graph_sha256 = current.graph_sha256.clone();
         Self::downgrade(&mut previous, "resolution-retention-limit");
         if current.stop.is_none() {
@@ -430,6 +840,12 @@ impl<'a> TargetResolutionCoordinator<'a> {
                         continue;
                     }
                     new.complete = false;
+                    // A merged prefix domain needs fresh coverage evidence.
+                    if new.coverage.is_some() {
+                        new.coverage = Some(resolver::CoverageEvidence::ExistingPrefixTree {
+                            path_receipt_refs: Vec::new(),
+                        });
+                    }
                     for old_path in &old.paths {
                         if let Some(path) = new.paths.iter_mut().find(|path| {
                             path.root == old_path.root
@@ -461,6 +877,13 @@ impl<'a> TargetResolutionCoordinator<'a> {
                 }
             }
             current.resolutions.sort_by(|a, b| a.site.cmp(&b.site));
+            for row in &mut current.resolutions {
+                if let Some(resolver::CoverageEvidence::ExistingPrefixTree { path_receipt_refs }) =
+                    &mut row.coverage
+                {
+                    *path_receipt_refs = (0..row.paths.len()).collect();
+                }
+            }
             for read in &previous.data_reads {
                 if !current.data_reads.contains(read) {
                     current.data_reads.push(read.clone());
@@ -570,6 +993,107 @@ impl FileSnapshot {
         )
     }
 
+    /// Opt-in predicate checking with no entry residue assumptions. Each root
+    /// starts at top; selecting this profile alone cannot prove alignment.
+    pub fn prepare_with_bap_guard_admission(
+        &self,
+        query: &AnalysisQuery,
+        decoder: &Path,
+        config: &crate::bap::Config,
+        options: &PreparationOptions,
+        limits: PrepareLimits,
+        guard_limits: guard::Limits,
+    ) -> Result<FilePreparedAnalysis, PreparationError> {
+        let activation = guard::Activation {
+            thread_id: 0,
+            frame_activation: "explicit-local-query/v1".into(),
+        };
+        let roots: Vec<_> = query
+            .entry_points
+            .iter()
+            .map(|a| guard::Root {
+                site: format!("0x{a:016x}"),
+                function_entry: false,
+                anchor_sha256: crate::reports::sha256(
+                    format!("explicit-root/v1:{}:{a:016x}", self.metadata.snapshot_id).as_bytes(),
+                ),
+            })
+            .collect();
+        let query_scope_sha256 = guard_query_scope(
+            &self.metadata.snapshot_id,
+            query,
+            &limits,
+            &activation,
+            &roots,
+        )?;
+        self.prepare_bap_guarded(
+            query,
+            decoder,
+            config,
+            options,
+            limits,
+            GuardPreparation {
+                limits: guard_limits,
+                activation,
+                roots,
+                premises: Vec::new(),
+                query_scope_sha256,
+                producer: None,
+            },
+        )
+    }
+
+    pub(crate) fn prepare_bap_guarded(
+        &self,
+        query: &AnalysisQuery,
+        decoder: &Path,
+        config: &crate::bap::Config,
+        options: &PreparationOptions,
+        limits: PrepareLimits,
+        guard: GuardPreparation,
+    ) -> Result<FilePreparedAnalysis, PreparationError> {
+        guard
+            .limits
+            .validate()
+            .map_err(|e| PreparationError::Backend(e.to_string()))?;
+        self.prepare_bap(
+            query,
+            decoder,
+            config,
+            options,
+            limits,
+            PreparationExtension::GuardAdmission(guard),
+        )
+    }
+
+    #[allow(clippy::too_many_arguments)]
+    pub(crate) fn prepare_bap_guarded_targets(
+        &self,
+        query: &AnalysisQuery,
+        decoder: &Path,
+        config: &crate::bap::Config,
+        options: &PreparationOptions,
+        limits: PrepareLimits,
+        guard: GuardPreparation,
+        target_limits: crate::bap::target_resolution::Limits,
+    ) -> Result<FilePreparedAnalysis, PreparationError> {
+        guard
+            .limits
+            .validate()
+            .map_err(|e| PreparationError::Backend(e.to_string()))?;
+        target_limits
+            .validate()
+            .map_err(|e| PreparationError::Backend(e.to_string()))?;
+        self.prepare_bap(
+            query,
+            decoder,
+            config,
+            options,
+            limits,
+            PreparationExtension::GuardAndTargets(guard, target_limits),
+        )
+    }
+
     /// Opt-in captured control data semantics; roots and slice seeds are unchanged.
     pub fn prepare_with_bap_target_resolution(
         &self,
@@ -602,12 +1126,19 @@ impl FileSnapshot {
         limits: PrepareLimits,
         extension: PreparationExtension,
     ) -> Result<FilePreparedAnalysis, PreparationError> {
-        let (refinement, target_limits) = match extension {
-            PreparationExtension::None => (false, None),
-            PreparationExtension::Refinement => (true, None),
-            PreparationExtension::TargetResolution(limits) => (false, Some(limits)),
+        let (refinement, target_limits, mut guard_setup) = match extension {
+            PreparationExtension::None => (false, None, None),
+            PreparationExtension::Refinement => (true, None, None),
+            PreparationExtension::TargetResolution(limits) => (false, Some(limits), None),
+            PreparationExtension::GuardAdmission(setup) => (false, None, Some(setup)),
+            PreparationExtension::GuardAndTargets(setup, limits) => {
+                (false, Some(limits), Some(setup))
+            }
         };
         let mut backend = crate::bap::Backend::new(config.clone(), decoder)
+            .map_err(|e| PreparationError::Backend(e.to_string()))?;
+        backend
+            .set_query_site_limit(limits.max_starts)
             .map_err(|e| PreparationError::Backend(e.to_string()))?;
         if refinement {
             backend.enable_refinement();
@@ -615,21 +1146,36 @@ impl FileSnapshot {
         if target_limits.is_some() {
             backend.enable_target_resolution();
         }
-        let mut prepared = self.prepare_materialization(
+        if let Some(setup) = &mut guard_setup {
+            backend.enable_guard_admission();
+            setup.producer = Some(backend.guard_producer());
+        }
+        let mut prepared = self.prepare_materialization_guarded(
             query,
             options,
             limits,
             target_limits.as_ref(),
+            guard_setup.as_ref(),
             |s, c, o, t| {
                 let batch = backend
                     .prepare(s, c, o, t)
                     .map_err(|e| PreparationError::Backend(e.to_string()))?;
-                Ok((batch, backend.take_target_transfers()))
+                Ok((
+                    batch,
+                    backend.take_target_transfers(),
+                    backend.take_guard_sites(),
+                ))
             },
         )?;
         prepared.refinement = backend.take_refinement();
         backend
             .finish()
+            .map_err(|e| PreparationError::Backend(e.to_string()))?;
+        prepared
+            .validate_target_resolution()
+            .map_err(|e| PreparationError::Backend(e.to_string()))?;
+        prepared
+            .validate_guard_admission()
             .map_err(|e| PreparationError::Backend(e.to_string()))?;
         Ok(prepared)
     }
@@ -678,6 +1224,42 @@ impl FileSnapshot {
             PreparationError,
         >,
     {
+        self.prepare_materialization_guarded(
+            query,
+            options,
+            limits,
+            target_limits,
+            None,
+            |s, c, o, t| {
+                preparer(s, c, o, t).map(|(batch, transfers)| (batch, transfers, BTreeMap::new()))
+            },
+        )
+    }
+
+    fn prepare_materialization_guarded<F>(
+        &self,
+        query: &AnalysisQuery,
+        options: &PreparationOptions,
+        limits: PrepareLimits,
+        target_limits: Option<&crate::bap::target_resolution::Limits>,
+        guard_setup: Option<&GuardPreparation>,
+        mut preparer: F,
+    ) -> Result<FilePreparedAnalysis, PreparationError>
+    where
+        F: FnMut(
+            &str,
+            &BTreeMap<Address, Option<Vec<u8>>>,
+            &PreparationOptions,
+            crate::llvm_mc::DecoderTarget,
+        ) -> Result<
+            (
+                crate::llvm_mc::PreparedBatch,
+                BTreeMap<Address, crate::bap::target_resolution::Transfer>,
+                BTreeMap<Address, guard::CandidateSite>,
+            ),
+            PreparationError,
+        >,
+    {
         if query.entry_points.is_empty() || limits.batch_size == 0 {
             return Err(PreparationError::InvalidQuery(
                 "nonempty roots and positive batch_size required",
@@ -686,6 +1268,20 @@ impl FileSnapshot {
         if self.limits.max_read_bytes < 15 {
             return Err(PreparationError::InvalidQuery(
                 "snapshot read limit must allow 15 instruction bytes",
+            ));
+        }
+        if let Some(setup) = guard_setup
+            && setup.query_scope_sha256
+                != guard_query_scope(
+                    &self.metadata.snapshot_id,
+                    query,
+                    &limits,
+                    &setup.activation,
+                    &setup.roots,
+                )?
+        {
+            return Err(PreparationError::InvalidQuery(
+                "guard premise scope differs from actual query or limits",
             ));
         }
         let query_identity =
@@ -708,20 +1304,39 @@ impl FileSnapshot {
         let mut pending = query.entry_points.clone();
         let mut reads = BTreeMap::new();
         let mut sites = BTreeMap::new();
+        let mut guard_sites = BTreeMap::new();
+        let mut guard_bytes = 0usize;
         let mut identity = None;
         let mut resolver = target_limits.map(TargetResolutionCoordinator::new);
+        let combined = target_limits.is_some() && guard_setup.is_some();
+        if let Some(resolver) = &mut resolver {
+            resolver.candidate_mode = combined;
+        }
+        let mut candidate_epoch = 0u64;
+        let mut candidate_state = None;
         loop {
             if pending.is_empty() {
                 let Some(resolver) = &mut resolver else {
                     break;
                 };
-                if resolver.advance(
+                let closed = resolver.advance(
                     self,
                     &query.entry_points,
                     &mut sites,
                     &mut pending,
                     &mut report,
-                )? {
+                )?;
+                if let Some(setup) = guard_setup {
+                    check_guard_graph_limits(&sites, setup, &report)?;
+                }
+                if combined {
+                    advance_candidate_epoch(
+                        candidate_fingerprint(&sites, &guard_sites, Some(&resolver.transfers))?,
+                        &mut candidate_state,
+                        &mut candidate_epoch,
+                    )?;
+                }
+                if closed {
                     break;
                 }
                 if pending.is_empty() {
@@ -753,7 +1368,7 @@ impl FileSnapshot {
                 reads.insert(a, read);
                 report.attempted.insert(a);
             }
-            let (prepared, batch_transfers) = preparer(
+            let (prepared, batch_transfers, batch_guards) = preparer(
                 &self.metadata.snapshot_id,
                 &candidates,
                 options,
@@ -761,6 +1376,20 @@ impl FileSnapshot {
             )?;
             if let Some(resolver) = &mut resolver {
                 resolver.transfers.extend(batch_transfers);
+            }
+            if let Some(setup) = guard_setup {
+                for (va, source) in batch_guards {
+                    if !prepared.sites.contains_key(&va) || guard_sites.contains_key(&va) {
+                        return Err(PreparationError::InvalidQuery(
+                            "guard source outside batch or duplicate",
+                        ));
+                    }
+                    guard_bytes = guard_bytes
+                        .checked_add(source.ast.len())
+                        .filter(|n| *n <= setup.limits.max_evidence_bytes)
+                        .ok_or_else(|| limit("guard evidence bytes", &report))?;
+                    guard_sites.insert(va, source);
+                }
             }
             report.decoder_batches += 1;
             if identity.as_ref().is_some_and(|i| *i != prepared.identity) {
@@ -783,36 +1412,155 @@ impl FileSnapshot {
                 }
                 sites.insert(a, site);
             }
+            if let Some(setup) = guard_setup {
+                check_guard_graph_limits(&sites, setup, &report)?;
+            }
+            if combined {
+                advance_candidate_epoch(
+                    candidate_fingerprint(
+                        &sites,
+                        &guard_sites,
+                        resolver.as_ref().map(|r| &r.transfers),
+                    )?,
+                    &mut candidate_state,
+                    &mut candidate_epoch,
+                )?;
+            }
+        }
+        let candidate = combined.then(|| {
+            request_from_sites(
+                &self.metadata.snapshot_id,
+                query,
+                &report.referenced,
+                options,
+                &sites,
+            )
+        });
+        let mut original_controls = BTreeMap::new();
+        let mut guard_admission = None;
+        let mut guard_input = None;
+        if let Some(setup) = guard_setup {
+            let mut barriers = BTreeSet::new();
+            for (&va, site) in &sites {
+                let source = guard_sites
+                    .entry(va)
+                    .or_insert_with(|| guard::CandidateSite {
+                        site: format!("0x{va:016x}"),
+                        bytes_hex: site
+                            .evidence
+                            .bytes
+                            .iter()
+                            .map(|b| format!("{b:02x}"))
+                            .collect(),
+                        ast: "[]".into(),
+                        control: guard::CandidateControl::from_instruction(&site.instruction),
+                        opaque: true,
+                    });
+                if combined {
+                    original_controls.insert(va, source.control.clone());
+                    // Resolver augmentation is a separately retained receipt.
+                    // Guard flow uses the stable effective candidate graph.
+                    source.control = guard::CandidateControl::from_instruction(&site.instruction);
+                }
+                if !site.decodable
+                    || site.instruction.kind == InstructionKind::Stop
+                    || (site.instruction.kind == InstructionKind::Indirect
+                        && !site.instruction.complete)
+                {
+                    barriers.insert(source.site.clone());
+                }
+            }
+            let input = guard::GuardInput {
+                snapshot: self.metadata.snapshot_id.clone(),
+                artifact_sha256: self.metadata.artifact_sha256.clone(),
+                query_scope_sha256: setup.query_scope_sha256.clone(),
+                preparation_sha256: preparation_digest(
+                    &limits,
+                    &options.catalogue.locations(),
+                    &self.limits,
+                )
+                .map_err(|e| PreparationError::Backend(e.to_string()))?,
+                platform: match self.metadata.platform {
+                    Platform::Windows => "windows-amd64",
+                    Platform::Linux => "linux-amd64",
+                }
+                .into(),
+                roots: setup.roots.clone(),
+                seeds: query
+                    .slice_seeds
+                    .iter()
+                    .map(|a| format!("0x{a:016x}"))
+                    .collect(),
+                activation: setup.activation.clone(),
+                premises: setup.premises.clone(),
+                producer: setup
+                    .producer
+                    .clone()
+                    .ok_or(PreparationError::InvalidQuery("guard producer absent"))?,
+                policy: guard::PROFILE.into(),
+                model_version: guard::MODEL_VERSION.into(),
+                model_sha256: guard::model_identity(),
+                limits: setup.limits.clone(),
+                candidate_epoch: if combined { candidate_epoch } else { 1 },
+                closure_complete: true,
+                barriers: barriers.into_iter().collect(),
+                sites: guard_sites.into_values().collect(),
+            };
+            let mut certified = guard::certify_guards(&input)
+                .map_err(|e| PreparationError::Backend(e.to_string()))?;
+            guard::replay_report(&input, &certified)
+                .map_err(|e| PreparationError::Backend(e.to_string()))?;
+            for source in &input.sites {
+                if guard::recognize_pending(source)
+                    .map_err(|e| PreparationError::Backend(e.to_string()))?
+                    .is_none()
+                {
+                    continue;
+                }
+                let decision = certified.guards.iter().find(|g| g.site == source.site);
+                let residual = decision
+                    .map(|d| d.residual.as_str())
+                    .or(certified.stop.as_deref())
+                    .ok_or(PreparationError::InvalidQuery("guard decision absent"))?;
+                let va = crate::bap::core_adapter::address(&source.site)
+                    .map_err(|e| PreparationError::Backend(e.to_string()))?;
+                let site = sites
+                    .get_mut(&va)
+                    .ok_or(PreparationError::InvalidQuery("guard site absent"))?;
+                crate::bap::Backend::finalize_guard(
+                    site,
+                    va,
+                    decision.and_then(|d| d.normal_ast.as_deref()),
+                    residual,
+                    options,
+                )
+                .map_err(|e| PreparationError::Backend(e.to_string()))?;
+            }
+            // The final normalized request is built next. Receipts bind that
+            // request before its distinct analysis identity is published.
+            certified.final_request_sha256 = None;
+            guard_input = Some(Arc::new(input));
+            guard_admission = Some(certified);
         }
         report.unattempted_references = report
             .referenced
             .difference(&report.attempted)
             .copied()
             .collect();
-        let mut request = AnalysisRequest {
-            snapshot_id: self.metadata.snapshot_id.clone(),
-            addresses: report.referenced.clone(),
-            locations: options.catalogue.locations(),
-            entry_points: query.entry_points.clone(),
-            slice_seeds: query.slice_seeds.clone(),
-            input_kind: InputKind::Dump,
-            ..AnalysisRequest::default()
-        };
+        let request = request_from_sites(
+            &self.metadata.snapshot_id,
+            query,
+            &report.referenced,
+            options,
+            &sites,
+        );
         let mut evidence = BTreeMap::new();
         let mut gaps = Vec::new();
         for (a, site) in sites {
-            if site.decodable {
-                request.decodable.insert(a);
-            }
-            if site.complete_capture {
-                request.captured.insert(a);
-            }
-            request.instructions.insert(a, site.instruction);
             evidence.insert(a, site.evidence);
             gaps.extend(site.gaps);
         }
         for &a in &request.addresses {
-            request.instructions.entry(a).or_default();
             evidence.entry(a).or_insert_with(placeholder);
         }
         for &a in &request.decodable {
@@ -831,15 +1579,71 @@ impl FileSnapshot {
             .map_err(|e| PreparationError::Decoder(AdapterError::InvalidRequest(e)))?;
         let mut target_resolution = resolver.and_then(|resolver| resolver.report);
         if let Some(resolved) = &mut target_resolution {
-            resolved.graph_sha256 = crate::bap::target_resolution::graph_digest(
-                &request.instructions,
-                &request.entry_points,
+            let replay = candidate.as_ref().unwrap_or(&request);
+            let graph = crate::bap::target_resolution::report_graph_digest(
+                resolved,
+                &replay.instructions,
+                &replay.entry_points,
+            )
+            .map_err(|e| PreparationError::Backend(e.to_string()))?;
+            if graph != resolved.graph_sha256 && resolved.resolutions.iter().any(|r| {
+                matches!(
+                    r.coverage,
+                    Some(crate::bap::target_resolution::CoverageEvidence::InductiveDispatch { .. })
+                )
+            }) {
+                return Err(PreparationError::InvalidQuery(
+                    "loop coverage graph changed before publication",
+                ));
+            }
+            resolved.graph_sha256 = graph;
+            crate::bap::target_resolution::validate(
+                resolved,
+                &replay.instructions,
+                &replay.entry_points,
             )
             .map_err(|e| PreparationError::Backend(e.to_string()))?;
         }
+        if let Some(certified) = &mut guard_admission {
+            let hash = normalized_request_digest(&request)
+                .map_err(|e| PreparationError::Backend(e.to_string()))?;
+            guard::bind_final_request(guard_input.as_ref().expect("guard input"), certified, &hash)
+                .map_err(|e| PreparationError::Backend(e.to_string()))?;
+            report.query_identity = guard::analysis_id(certified)
+                .map_err(|e| PreparationError::Backend(e.to_string()))?;
+        }
+        let composition = if let Some(candidate) = &candidate {
+            let composed = crate::bap::composition::seal(
+                candidate,
+                &original_controls,
+                candidate_epoch,
+                target_resolution
+                    .as_ref()
+                    .ok_or(PreparationError::InvalidQuery(
+                        "combined target report absent",
+                    ))?,
+                guard_admission
+                    .as_ref()
+                    .ok_or(PreparationError::InvalidQuery(
+                        "combined guard report absent",
+                    ))?,
+                &request,
+            )
+            .map_err(|e| PreparationError::Backend(e.to_string()))?;
+            report.query_identity = crate::bap::composition::analysis_id(&composed)
+                .map_err(|e| PreparationError::Backend(e.to_string()))?;
+            Some(composed)
+        } else {
+            None
+        };
         Ok(FilePreparedAnalysis {
+            guard_input,
+            guard_snapshot: guard_setup.map(|_| Arc::new(self.clone())),
+            original_controls: combined.then(|| Arc::new(original_controls)),
+            guard_admission,
             target_snapshot: target_limits.map(|_| Arc::new(self.clone())),
             target_resolution,
+            composition,
             refinement: BTreeMap::new(),
             fault: self.fault.clone(),
             prepared: PreparedAnalysis {

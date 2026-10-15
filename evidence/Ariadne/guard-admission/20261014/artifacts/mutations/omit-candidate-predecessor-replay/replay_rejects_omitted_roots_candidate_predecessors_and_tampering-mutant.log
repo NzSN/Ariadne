@@ -1,0 +1,23 @@
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-guard-admission-20261014/target/guard-mutations-20261014/omit-candidate-predecessor-replay/sut)
+    Finished `release` profile [optimized] target(s) in 28.02s
+     Running unittests src/lib.rs (/home/nzsn/Repos/Ariadne-guard-admission-20261014/target/guard-mutations-20261014/omit-candidate-predecessor-replay/build/release/deps/ariadne-eac5fde57d2ca545)
+
+running 1 test
+test bap::guard_admission_tests::replay_rejects_omitted_roots_candidate_predecessors_and_tampering ... FAILED
+
+failures:
+
+---- bap::guard_admission_tests::replay_rejects_omitted_roots_candidate_predecessors_and_tampering stdout ----
+
+thread 'bap::guard_admission_tests::replay_rejects_omitted_roots_candidate_predecessors_and_tampering' (56273) panicked at src/bap/../../tests/bap/guard_admission_unit.rs:679:5:
+assertion failed: replay_report(&looped,
+                &omitted).unwrap_err().to_string().contains("candidate predecessor")
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    bap::guard_admission_tests::replay_rejects_omitted_roots_candidate_predecessors_and_tampering
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 91 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--lib`

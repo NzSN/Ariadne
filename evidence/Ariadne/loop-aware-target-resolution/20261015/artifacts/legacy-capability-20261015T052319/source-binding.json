@@ -1,0 +1,30 @@
+{
+  "schema": "ariadne.legacy-combined-capability-source-binding/v1",
+  "source_archive_sha256": "5cd406c5181d131679a60af15f53edcabecfe056144e40b5785bc37ce1d010ee",
+  "source_manifest_sha256": "7e16611a5fb938916209c34f2c8d73e58b267e50f64e0ebb84ce5735a8287e90",
+  "source_files_verified": 877,
+  "sources_unchanged": true,
+  "release_library_sha256": "9351a0e9e3d56a33088e8f50334eb0a711e3316f1983cd111e3b41a3fd8937a3",
+  "serde_json_library_sha256": "536308274fbc56cf511a66b3c030d86566328a86d725c8c14210a09966fb4bb4",
+  "retained_helper_sha256": "cc9ff8718659af45e3d86ba0949915615f8bdb64822638597522af63dba0c0f8",
+  "retained_manifest_sha256": "70d7a8ee8a6c3d30b214349208524676b1038dd9544c5f225def51a2b68c2798",
+  "driver_sha256": "123892f68f772fbbccf307a557face5ef02c8ea71c3e01eb7e1066712d1775b7",
+  "driver_binary_sha256": "35267a9d5610a42a017baa4baed27e787ef7ad19e7e34bfef0db7e2f8a0c0635",
+  "runner_sha256": "291f3641aba7eda7cb6b6cda62de4f870ff1935cbe313b0b4e12637097844e2b",
+  "compile_command": [
+    "rustc",
+    "--edition=2024",
+    "/loop-work/legacy-capability-probe.rs",
+    "-O",
+    "-L",
+    "dependency=/home/nzsn/Repos/Ariadne-loop-aware-20261015/target/loop-aware-build/release/deps",
+    "--extern",
+    "ariadne=/home/nzsn/Repos/Ariadne-loop-aware-20261015/target/loop-aware-build/release/libariadne.rlib",
+    "--extern",
+    "serde_json=/home/nzsn/Repos/Ariadne-loop-aware-20261015/target/loop-aware-build/release/deps/libserde_json-540ae372bafb180c.rlib",
+    "-o",
+    "/loop-work/evidence/legacy-capability-20261015T052319/legacy-capability-probe"
+  ],
+  "rustc": "rustc 1.96.0 (ac68faa20 2026-05-25)\nbinary: rustc\ncommit-hash: ac68faa20c58cbccd01ee7208bf3b6e93a7d7f96\ncommit-date: 2026-05-25\nhost: x86_64-unknown-linux-gnu\nrelease: 1.96.0\nLLVM version: 22.1.2\n",
+  "scope": "Supplemental old-helper capability rejection; qualified production source/library bytes unchanged; old helper is not launched."
+}

@@ -1,0 +1,12 @@
+2026-10-15T05:13:06,493 [main] INFO  a.f.a.t.Tool$ - # APALACHE version: 0.58.0 | build: 711dce6
+2026-10-15T05:13:06,505 [main] INFO  a.f.a.t.t.o.TypeCheckCmd - Type checking AriadneGuardedTargetResolution.tla
+2026-10-15T05:13:06,586 [main] INFO  a.f.a.i.p.PassChainExecutor - PASS #0: SanyParser
+2026-10-15T05:13:06,827 [main] DEBUG a.f.a.i.p.PassChainExecutor - PASS #0: SanyParser [OK]
+2026-10-15T05:13:06,827 [main] INFO  a.f.a.i.p.PassChainExecutor - PASS #1: TypeCheckerSnowcat
+2026-10-15T05:13:06,828 [main] INFO  a.f.a.t.p.t.EtcTypeCheckerPassImpl -  > Running Snowcat .::.
+2026-10-15T05:13:07,403 [main] INFO  a.f.a.t.p.t.EtcTypeCheckerPassImpl -  > Your types are purrfect!
+2026-10-15T05:13:07,404 [main] INFO  a.f.a.t.p.t.EtcTypeCheckerPassImpl -  > All expressions are typed
+2026-10-15T05:13:07,404 [main] DEBUG a.f.a.i.p.PassChainExecutor - PASS #1: TypeCheckerSnowcat [OK]
+2026-10-15T05:13:07,404 [main] INFO  a.f.a.t.Tool$ - Type checker [OK]
+2026-10-15T05:13:07,404 [main] INFO  a.f.a.t.Tool$ - It took me 0 days  0 hours  0 min  0 sec
+2026-10-15T05:13:07,405 [main] INFO  a.f.a.t.Tool$ - Total time: 0.909 sec

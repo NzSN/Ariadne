@@ -1,0 +1,22 @@
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-vector-registers-20261013/target/vector-mutations-release-20261013/aggregate-vector-must-kill/sut)
+    Finished `release` profile [optimized] target(s) in 17.98s
+     Running tests/bap/native.rs (/home/nzsn/Repos/Ariadne-vector-registers-20261013/target/vector-mutations-release-20261013/aggregate-vector-must-kill/build/native-vector_producer_tracks_coarse_state_and_retains_alignment_refusal/release/deps/bap_native-1a3184265b314ea4)
+
+running 1 test
+test vector_producer_tracks_coarse_state_and_retains_alignment_refusal ... FAILED
+
+failures:
+
+---- vector_producer_tracks_coarse_state_and_retains_alignment_refusal stdout ----
+
+thread 'vector_producer_tracks_coarse_state_and_retains_alignment_refusal' (3897) panicked at tests/bap/native.rs:47:9:
+assertion failed: !site.instruction.must_defs.contains("state:other")
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    vector_producer_tracks_coarse_state_and_retains_alignment_refusal
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 8 filtered out; finished in 0.21s
+
+error: test failed, to rerun pass `--test bap_native`

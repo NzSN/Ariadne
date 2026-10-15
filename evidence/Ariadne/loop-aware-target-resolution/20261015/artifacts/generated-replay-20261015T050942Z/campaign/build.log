@@ -1,0 +1,156 @@
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling generic-array v0.14.7
+   Compiling libc v0.2.189
+   Compiling ring v0.17.14
+   Compiling serde_core v1.0.229
+   Compiling getrandom v0.2.17
+   Compiling num-traits v0.2.19
+   Compiling zmij v1.0.23
+   Compiling syn v3.0.6
+   Compiling syn v2.0.119
+   Compiling crypto-common v0.1.7
+   Compiling block-buffer v0.10.4
+   Compiling serde_json v1.0.149
+   Compiling thiserror v1.0.69
+   Compiling serde v1.0.229
+   Compiling digest v0.10.7
+   Compiling thiserror-impl v1.0.69
+   Compiling serde_derive v1.0.229
+   Compiling num-integer v0.1.47
+   Compiling sha2 v0.10.9
+   Compiling num-bigint v0.4.8
+   Compiling rustls v0.23.45
+   Compiling rustls-webpki v0.103.15
+   Compiling mirrorrust v1.0.0 (/home/nzsn/Repos/MirrorRust)
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-loop-aware-20261015)
+warning: field `gaps` is never read
+  --> src/bap/prepare.rs:50:9
+   |
+47 | ...rate) struct Guard...ction {
+   |                 -----...----- field in this struct
+...
+50 | ...ub gaps: Vec<String>,
+   |       ^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: multiple associated items are never used
+   --> src/bap/prepare.rs:105:19
+    |
+ 75 | impl Backend {
+    | ------------ associated items in this implementation
+...
+105 |     pub(crate) fn guard...ducer(&self) -> su...
+    |                   ^^^^^...^^^^^
+...
+114 |     pub(crate) fn final...guard(
+    |                   ^^^^^...^^^^^
+...
+153 |     pub(crate) fn enabl...ssion(&mut...
+    |                   ^^^^^...^^^^^
+...
+156 |     pub(crate) fn take_...sites(
+    |                   ^^^^^...^^^^^
+...
+161 |     pub(crate) fn enabl...ution(&m...
+    |                   ^^^^^...^^^^^
+...
+164 |     pub(crate) fn take_...sfers(
+    |                   ^^^^^...^^^^^
+...
+169 |     pub(crate) fn enabl...ement(&mut self) {
+    |                   ^^^^^...^^^^^
+...
+172 |     pub(crate) fn take_...ement(
+    |                   ^^^^^...^^^^^
+...
+182 |     pub(crate) fn set_q...limit(&mut s...
+    |                   ^^^^^...^^^^^
+
+warning: function `invalidate_loop_coverage` is never used
+   --> src/bap/target_resolution.rs:590:15
+    |
+590 | ...fn inval...erage(re...
+    |       ^^^^^...^^^^^
+
+warning: function `resolve` is never used
+    --> src/bap/target_resolution.rs:1011:15
+     |
+1011 | ...fn resolve<F>(
+     |       ^^^^^^^
+
+warning: function `resolve_candidate` is never used
+    --> src/bap/target_resolution.rs:1034:15
+     |
+1034 | ...fn resol...idate<F>(
+     |       ^^^^^...^^^^^
+
+warning: function `resolve_inner` is never used
+    --> src/bap/target_resolution.rs:1058:4
+     |
+1058 | fn resolve_inner<F>(
+     |    ^^^^^^^^^^^^^
+
+warning: function `within_evidence_budget` is never used
+    --> src/bap/target_resolution.rs:1434:15
+     |
+1434 | ...fn withi...udget(re...
+     |       ^^^^^...^^^^^
+
+warning: method `join` is never used
+   --> src/bap/target_resolution/loop_closure.rs:229:8
+    |
+107 | impl ...omain {
+    | -----...----- method in this implementation
+...
+229 |     fn join(&self,...
+    |        ^^^^
+
+warning: methods `assertion` and `join` are never used
+   --> src/bap/target_resolution/loop_closure.rs:256:8
+    |
+245 | impl State {
+    | ---------- methods in this implementation
+...
+256 |     fn assertion(&s...
+    |        ^^^^^^^^^
+...
+300 |     fn join(&self, ...
+    |        ^^^^
+
+warning: function `corridors` is never used
+   --> src/bap/target_resolution/loop_closure.rs:747:4
+    |
+747 | fn corridors(
+    |    ^^^^^^^^^
+
+warning: enum `Attempt` is never used
+    --> src/bap/target_resolution/loop_closure.rs:1233:17
+     |
+1233 | ...um Attempt {
+     |       ^^^^^^^
+
+warning: function `propose` is never used
+    --> src/bap/target_resolution/loop_closure.rs:1239:15
+     |
+1239 | ...fn propose<F>(
+     |       ^^^^^^^
+
+warning: function `hex` is never used
+   --> src/investigation/frame_unwind.rs:126:15
+    |
+126 | ...fn hex(b:...
+    |       ^^^
+
+warning: associated function `new` is never used
+   --> src/investigation/memory_refinement.rs:131:19
+    |
+123 | impl ...ement {
+    | -----...----- associated function in this implementation
+...
+131 |     pub(crate) fn new(
+    |                   ^^^
+
+warning: `ariadne-analysis` (lib) generated 14 warnings
+    Finished `dev` profile [unoptimized] target(s) in 16.39s

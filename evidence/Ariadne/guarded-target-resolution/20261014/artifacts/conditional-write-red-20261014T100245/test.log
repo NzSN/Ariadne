@@ -1,0 +1,24 @@
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-composed-20261014)
+    Finished `test` profile [unoptimized] target(s) in 7.86s
+     Running unittests src/lib.rs (target/composed-build/debug/deps/ariadne-ee964763ae0b7713)
+
+running 1 test
+test bap::target_resolution::tests::conditional_write_predicate_is_not_rewritten_twice ... FAILED
+
+failures:
+
+---- bap::target_resolution::tests::conditional_write_predicate_is_not_rewritten_twice stdout ----
+
+thread 'bap::target_resolution::tests::conditional_write_predicate_is_not_rewritten_twice' (1154) panicked at src/bap/../../tests/bap/target_resolution_unit.rs:1057:9:
+assertion `left == right` failed: conditional write applied twice
+  left: [0, 2, 3]
+ right: [1, 2, 3]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    bap::target_resolution::tests::conditional_write_predicate_is_not_rewritten_twice
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 123 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--lib`

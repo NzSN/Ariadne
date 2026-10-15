@@ -1,0 +1,24 @@
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-vector-registers-20261013/target/vector-mutations-release-20261013/filtered-gpr-as-vector-destination/sut)
+    Finished `release` profile [optimized] target(s) in 18.31s
+     Running tests/bap/native.rs (/home/nzsn/Repos/Ariadne-vector-registers-20261013/target/vector-mutations-release-20261013/filtered-gpr-as-vector-destination/build/native-vector_producer_tracks_coarse_state_and_retains_alignment_refusal/release/deps/bap_native-1a3184265b314ea4)
+
+running 1 test
+test vector_producer_tracks_coarse_state_and_retains_alignment_refusal ... FAILED
+
+failures:
+
+---- vector_producer_tracks_coarse_state_and_retains_alignment_refusal stdout ----
+
+thread 'vector_producer_tracks_coarse_state_and_retains_alignment_refusal' (8979) panicked at tests/bap/native.rs:82:13:
+assertion `left == right` failed
+  left: {"gpr:rsp:0", "gpr:rsp:1", "gpr:rsp:2", "gpr:rsp:3", "gpr:rsp:4", "gpr:rsp:5", "gpr:rsp:6", "gpr:rsp:7", "state:other"}
+ right: {"state:other"}
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    vector_producer_tracks_coarse_state_and_retains_alignment_refusal
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 8 filtered out; finished in 0.21s
+
+error: test failed, to rerun pass `--test bap_native`

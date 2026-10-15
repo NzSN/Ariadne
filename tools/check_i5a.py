@@ -30,7 +30,7 @@ def retained(path, name):
         raise RuntimeError("stale, incomplete, or nonpassing retained record: " + str(path))
     if name in {"measurements", "equivalence"}:
         schema = {"measurements": "ariadne.i5a-fixture-measurements/v2",
-                  "equivalence": "ariadne.i5a-cli-equivalence/v3"}[name]
+                  "equivalence": "ariadne.i5a-cli-equivalence/v4"}[name]
         if (data.get("schema") != schema or data.get("analysisBackend") != "bap"
                 or data.get("analysisProfile") != PROFILE or data.get("defaultNativeVerified") is not True
                 or data.get("toolsStable") is not True or data.get("tools") != tool_hashes()

@@ -1,0 +1,1 @@
+{"captured_reference": {"entries": 370, "tables": 9, "targets": 64}, "epoch_cases": 5, "frontier_cases": 4, "graph_cases": 15, "numeric_cases": 12, "receipt_cases": 32, "schema": "ariadne.guarded-target-composition-oracle-result/v1", "status": "pass"}

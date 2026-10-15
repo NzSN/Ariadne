@@ -1,0 +1,5 @@
+disable-original-binder: behavioral-kill
+disable-paired-source-binding: survived-or-invalid-control-no-credit
+disable-pending-effects-check: behavioral-kill
+disable-epoch-binding: behavioral-kill
+native source campaign: 3/4 behavioral kills

@@ -1,0 +1,547 @@
+{
+  "schema": "ariadne.loop-target-closure.oracle-cases/v1",
+  "scope": "Independent finite concrete transitions; arithmetic controls separately exercise signed32-to-word64 extension.",
+  "cases": [
+    {
+      "name": "advancing-pointer-fresh-selector",
+      "enumerate_reachable": true,
+      "expected": {
+        "accepted": true,
+        "reason": "accepted",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ],
+        "fresh_loop_witness": true
+      }
+    },
+    {
+      "name": "completeness-only-epoch-freshly-replayed",
+      "source": {
+        "epoch": 1,
+        "input_complete": true
+      },
+      "receipt": {
+        "epoch": 1
+      },
+      "enumerate_reachable": true,
+      "expected": {
+        "accepted": true,
+        "reason": "accepted",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ],
+        "fresh_loop_witness": true
+      }
+    },
+    {
+      "name": "uninitialized-alternate-entry",
+      "source": {
+        "entry_base": 13
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "entrance-initialization",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ],
+        "fresh_loop_witness": false
+      }
+    },
+    {
+      "name": "prior-complete-bit-does-not-initialize-base",
+      "source": {
+        "entry_base": 13,
+        "input_complete": true
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "entrance-initialization",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ],
+        "fresh_loop_witness": false
+      }
+    },
+    {
+      "name": "base-clobber-on-loopback",
+      "source": {
+        "backedge_base_clobber": true
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "inductive-preservation",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ]
+      }
+    },
+    {
+      "name": "unsigned-guard-bypassed",
+      "source": {
+        "guard": "bypass"
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "inductive-preservation",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ]
+      }
+    },
+    {
+      "name": "compare-flags-clobbered",
+      "source": {
+        "flag_clobber": true
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "inductive-preservation",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ],
+        "fresh_loop_witness": true
+      }
+    },
+    {
+      "name": "wrong-branch-polarity",
+      "source": {
+        "guard": "wrong-polarity"
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "inductive-preservation",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ]
+      }
+    },
+    {
+      "name": "signed-guard-is-not-unsigned-bound",
+      "source": {
+        "guard": "signed"
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "inductive-preservation",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ]
+      }
+    },
+    {
+      "name": "selector-written-after-compare",
+      "source": {
+        "selector_clobber": true
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "inductive-preservation",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ]
+      }
+    },
+    {
+      "name": "original-store",
+      "source": {
+        "effects": [
+          "store"
+        ]
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "unsupported-original-effect",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ],
+        "fresh_loop_witness": true
+      }
+    },
+    {
+      "name": "pending-store-projected-as-identity",
+      "source": {
+        "effects": [
+          "original-pending-store"
+        ]
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "unsupported-original-effect",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ],
+        "fresh_loop_witness": true
+      }
+    },
+    {
+      "name": "opaque-call",
+      "source": {
+        "effects": [
+          "opaque-call"
+        ]
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "unsupported-original-effect",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ],
+        "fresh_loop_witness": true
+      }
+    },
+    {
+      "name": "unknown-memory-effect",
+      "source": {
+        "effects": [
+          "unknown-memory"
+        ]
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "unsupported-original-effect",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ],
+        "fresh_loop_witness": true
+      }
+    },
+    {
+      "name": "omitted-null-exit",
+      "receipt": {
+        "omit_exit": true
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "edge-inventory",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ],
+        "fresh_loop_witness": true
+      }
+    },
+    {
+      "name": "omitted-table-loop-target",
+      "receipt": {
+        "omit_target": true
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "edge-inventory",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ],
+        "fresh_loop_witness": true
+      }
+    },
+    {
+      "name": "hidden-corridor-bypass",
+      "source": {
+        "extra_entrances": [
+          [
+            14,
+            6
+          ]
+        ]
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "entrance-inventory",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ],
+        "fresh_loop_witness": true
+      }
+    },
+    {
+      "name": "root-inside-region",
+      "source": {
+        "root_inside": true
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "uninitialized-region-root",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ],
+        "fresh_loop_witness": true
+      }
+    },
+    {
+      "name": "selector-invariant-illegally-shared",
+      "receipt": {
+        "shared_selector": true
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "inductive-preservation",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ],
+        "fresh_loop_witness": true
+      }
+    },
+    {
+      "name": "cross-iteration-load-equality",
+      "receipt": {
+        "iteration_values_equal": true
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "unjustified-load-equality",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ],
+        "fresh_loop_witness": true
+      }
+    },
+    {
+      "name": "missing-captured-slot",
+      "source": {
+        "missing_indices": [
+          3
+        ]
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "captured-table-unavailable",
+        "known_targets": [
+          9,
+          10,
+          11
+        ]
+      }
+    },
+    {
+      "name": "conflicting-captured-slot",
+      "source": {
+        "conflicting_indices": [
+          2
+        ]
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "captured-table-unavailable",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ],
+        "fresh_loop_witness": true
+      }
+    },
+    {
+      "name": "mutable-control-data",
+      "source": {
+        "memory_premise": false
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "memory-premise",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ],
+        "fresh_loop_witness": true
+      }
+    },
+    {
+      "name": "stale-after-completeness-only-change",
+      "source": {
+        "epoch": 1,
+        "input_complete": true
+      },
+      "receipt": {
+        "epoch": 0
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "stale-epoch",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ],
+        "fresh_loop_witness": true
+      }
+    },
+    {
+      "name": "wrong-activation",
+      "receipt": {
+        "wrong_scope": true
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "source-or-scope-binding",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ],
+        "fresh_loop_witness": true
+      }
+    },
+    {
+      "name": "wrong-source-commitment",
+      "receipt": {
+        "wrong_source": true
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "source-or-scope-binding",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ],
+        "fresh_loop_witness": true
+      }
+    },
+    {
+      "name": "wrong-table-sign-rule",
+      "receipt": {
+        "table_sign": "unsigned"
+      },
+      "expected": {
+        "accepted": false,
+        "reason": "table-domain-or-arithmetic",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ],
+        "fresh_loop_witness": true
+      }
+    },
+    {
+      "name": "zero-work-budget",
+      "budget": 0,
+      "expected": {
+        "accepted": false,
+        "reason": "work-budget",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ],
+        "fresh_loop_witness": true
+      }
+    },
+    {
+      "name": "finite-work-exhaustion",
+      "budget": 7,
+      "expected": {
+        "accepted": false,
+        "reason": "work-budget",
+        "known_targets": [
+          0,
+          9,
+          10,
+          11
+        ],
+        "fresh_loop_witness": true
+      }
+    }
+  ],
+  "arithmetic_cases": [
+    {
+      "name": "negative-signed32-offset",
+      "base": 4096,
+      "bytes_hex": "fdffffff",
+      "address_width": 64,
+      "expected_offset": -3,
+      "expected_target": 4093
+    },
+    {
+      "name": "minimum-signed32-offset",
+      "base": 4294967296,
+      "bytes_hex": "00000080",
+      "address_width": 64,
+      "expected_offset": -2147483648,
+      "expected_target": 2147483648
+    },
+    {
+      "name": "negative-wrap64",
+      "base": 1,
+      "bytes_hex": "fdffffff",
+      "address_width": 64,
+      "expected_offset": -3,
+      "expected_target": 18446744073709551614
+    },
+    {
+      "name": "positive-wrap64",
+      "base": 18446744073709551614,
+      "bytes_hex": "04000000",
+      "address_width": 64,
+      "expected_offset": 4,
+      "expected_target": 2
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+empty-or-top-proves-alignment: 2 exact assertion rejection(s)
+omit-candidate-predecessor-replay: 1 exact assertion rejection(s)
+ignore-source-control-barrier: 1 exact assertion rejection(s)
+omit-actual-premise-identities: 1 exact assertion rejection(s)
+pending-transfer-needs-normal-projection: 1 exact assertion rejection(s)
+normal-store-kills-old-memory: 1 exact assertion rejection(s)
+Report: /home/nzsn/Repos/Ariadne-guard-admission-20261014/target/guard-mutations-20261014/report.json

@@ -1,0 +1,330 @@
+[
+  {
+    "name": "format-apply",
+    "command": [
+      "cargo",
+      "fmt",
+      "--all"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.6474910999999999
+  },
+  {
+    "name": "composition-oracle",
+    "command": [
+      "python3",
+      "tests/bap/fixtures/composition/oracle.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.03681230000000024
+  },
+  {
+    "name": "guard-oracle",
+    "command": [
+      "python3",
+      "tests/bap/fixtures/guards/oracle.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.0448385
+  },
+  {
+    "name": "format",
+    "command": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.45636710000000047
+  },
+  {
+    "name": "guard-units",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--lib",
+      "bap::guard_admission_tests"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 7.8769327
+  },
+  {
+    "name": "default-tests",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 23.132672834
+  },
+  {
+    "name": "core-only",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--no-default-features"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.3958806819999978
+  },
+  {
+    "name": "clippy",
+    "command": [
+      "cargo",
+      "clippy",
+      "--offline",
+      "--locked",
+      "--all-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 6.703299391999998
+  },
+  {
+    "name": "layout",
+    "command": [
+      "python3",
+      "tools/check_rust_layout.py"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.050208385000004796
+  },
+  {
+    "name": "native-build",
+    "command": [
+      "python3",
+      "native/bap-core/build.py",
+      "--output",
+      "target/composed-native"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 5.337606190999999
+  },
+  {
+    "name": "native-frontier",
+    "command": [
+      "python3",
+      "target/guarded-target-resolution-20261014/run-native-frontier.py",
+      "--native-dir",
+      "target/composed-native",
+      "--output",
+      "target/composition-frontier-controls"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.25379182300000025
+  },
+  {
+    "name": "native-conditional-write",
+    "command": [
+      "python3",
+      "target/guarded-target-resolution-20261014/run-native-frontier.py",
+      "--native-dir",
+      "target/composed-native",
+      "--test-file",
+      "tests/bap/conditional_write.ml",
+      "--cases",
+      "3",
+      "--output",
+      "target/conditional-write-native-controls"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.24691752500000064
+  },
+  {
+    "name": "native-kernels",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--test",
+      "bap_core_bootstrap",
+      "--test",
+      "bap_core_analysis",
+      "--test",
+      "bap_core_stateflow",
+      "--",
+      "--ignored"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 17.331555065000003
+  },
+  {
+    "name": "native-capture",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--test",
+      "input_bap_core",
+      "--",
+      "--ignored"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 31.113186365999994
+  },
+  {
+    "name": "native-composed",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--lib",
+      "actual_bap_pending_store_targets_and_native_rust_results_agree",
+      "--",
+      "--ignored"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 11.604584830999997
+  },
+  {
+    "name": "native-query-rotation",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--lib",
+      "native_query_rotation_obeys_selected_aggregate_budget_and_pinned_capture_identity",
+      "--",
+      "--ignored"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 14.019275011000005
+  },
+  {
+    "name": "native-composition-controls",
+    "command": [
+      "python3",
+      "tests/bap/composition_native_controls.py",
+      "--helper",
+      "target/composed-native/ariadne-bap-core",
+      "--input",
+      "/work/guarded-target-resolution-20261014/validation-20261014T104438/passing-combined-wire.json",
+      "--output",
+      "/work/guarded-target-resolution-20261014/validation-20261014T104438/native-controls.json"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.29619816800000365
+  },
+  {
+    "name": "native-composition-mutations",
+    "command": [
+      "python3",
+      "target/guarded-target-resolution-20261014/run-native-mutations.py",
+      "--helper",
+      "target/composed-native/ariadne-bap-core",
+      "--input",
+      "/work/guarded-target-resolution-20261014/validation-20261014T104438/passing-combined-wire.json",
+      "--output",
+      "target/native-composition-mutants",
+      "--drop-derived-builds"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 11.47741550900001
+  },
+  {
+    "name": "native-frame-path",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--test",
+      "input_frame_paths",
+      "--",
+      "--ignored"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 29.881753691
+  },
+  {
+    "name": "contract-tools",
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools",
+      "-p",
+      "test_bap_core_contract.py"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.11882479700000204
+  },
+  {
+    "name": "guard-mutation-seams",
+    "command": [
+      "python3",
+      "tools/check_guard_admission_mutations.py",
+      "--check-seams"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.02500459899999896
+  },
+  {
+    "name": "release-build",
+    "command": [
+      "cargo",
+      "build",
+      "--offline",
+      "--locked",
+      "--release",
+      "--features",
+      "validation",
+      "--lib",
+      "--bin",
+      "ariadne-minidump"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 20.80555140300001
+  },
+  {
+    "name": "composition-model",
+    "command": [
+      "bash",
+      "Specs/check-guarded-target-resolution.sh"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 9.601972504999992
+  }
+]

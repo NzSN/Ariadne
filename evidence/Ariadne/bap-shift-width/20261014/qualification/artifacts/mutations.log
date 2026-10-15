@@ -1,0 +1,3 @@
+restore-equal-width-shift-gate: expected named runtime rejection
+Report: /home/nzsn/Repos/Ariadne-bap-shift-count-20261014/target/shift-mutations-20261014/report.json
+allow-unequal-nonshift-operands: expected named runtime rejection absent

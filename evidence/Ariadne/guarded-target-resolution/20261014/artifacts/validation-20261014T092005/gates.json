@@ -1,0 +1,24 @@
+[
+  {
+    "name": "format-apply",
+    "command": [
+      "cargo",
+      "fmt",
+      "--all"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 3.1837647259999997
+  },
+  {
+    "name": "composition-oracle",
+    "command": [
+      "python3",
+      "tests/bap/fixtures/composition/oracle.py",
+      "--check"
+    ],
+    "exit_code": 1,
+    "passed": false,
+    "seconds": 0.12172748400000444
+  }
+]

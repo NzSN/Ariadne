@@ -32,6 +32,7 @@ def main():
  try:
   run('independent-contract',['python3','tests/bap/fixtures/admission/oracle.py','--check'])
   run('owned-fixtures',['python3','tests/input/fixtures/make_admission.py','--check'])
+  run('vector-fixtures',['python3','tests/input/fixtures/make_vector.py','--check'])
   run('numeric-producer-oracle',['python3','tools/check_bap_admission_oracle.py','--output',out/'scalar-oracle.json'])
   run('profile-migration-controls',['python3','-m','unittest','discover','-s','tools','-p','test_bap_profile_migration.py'])
   run('native-core-stage1-stage-e',['python3','tools/check_bap_core.py','--output',out/'native-core'])
@@ -52,7 +53,7 @@ def main():
  except Exception as failure:error=str(failure);print(error,flush=True)
  external=dict(exercised=False,qualified=False,requiredArtifactSha256='9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab',thread='0x5c74',reason='external original/scoped derivative and Scanner/PreParser root/query witness not available; path requested')
  core=nested.get('native-core-stage1-stage-e',{})
- report=dict(schema='ariadne.bap-admission-qualification/v1',recordedUtc=datetime.now(timezone.utc).isoformat(),passed=passed,sourceFixtureTierQualified=passed,rustReleaseRuntimeTierQualified=passed,nativeDefaultTierQualified=passed,externalCaptureTier=external,fullPlanAcceptance=False,sourcesStable=before==check_bap_core.sources(),sourceHashes=before,qualificationEnvironment=identity,gates=gates,records=nested,error=error,projection='bap-bit-provenance-v3',scope='finite v3 projection/normal-continuation and native/model/mutation/owned-capture qualification; external Electron tier separate, no root-cause or universal ISA/refinement proof')
+ report=dict(schema='ariadne.bap-admission-qualification/v1',recordedUtc=datetime.now(timezone.utc).isoformat(),passed=passed,sourceFixtureTierQualified=passed,rustReleaseRuntimeTierQualified=passed,nativeDefaultTierQualified=passed,externalCaptureTier=external,fullPlanAcceptance=False,sourcesStable=before==check_bap_core.sources(),sourceHashes=before,qualificationEnvironment=identity,gates=gates,records=nested,error=error,projection='bap-bit-provenance-v6',scope='finite v6 vector/scalar projection and shift-count compatibility with native/model/mutation/owned-capture qualification; external Electron tier separate, no root-cause or universal ISA/refinement proof')
  (out/'report.json').write_text(json.dumps(report,indent=2)+'\n');print('Report:',out/'report.json',flush=True)
  if not passed:raise SystemExit(1)
  archive=out/'evidence.tar.gz';entries={}

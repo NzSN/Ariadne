@@ -1,0 +1,65 @@
+{
+  "schema": "ariadne.bap-core-build/v1",
+  "handshake": {
+    "schema": "ariadne.bap-core-ready/v1",
+    "abi": 2,
+    "compiler": "4.12.1",
+    "bap_revision": "baa902209ee4be975bdd8db7d1160b0a0ec2831f",
+    "sdk_manifest_sha256": "ba8eb693feb66fd77e6b536cce89314fc1e80ef563ac0f720a730557ff392838",
+    "source_hashes": {
+      "recovery.ml": "756d0035c79d946dc2ac2260b49e5c242e452894d3a08d87301a606a264c5c2b",
+      "stateflow.ml": "2d6a39f261bad1267a022049bbff68ae7b88cdeb044699ff1d085da7b8008b46",
+      "legacy_capture.ml": "ca17d97ade1e8acac9a11098d5eb26bbff693b3d29f30e7665d983db672d430c",
+      "capture.ml": "6d1b7dcdc361a611fba79056b36516a8fa5889334456d1795d2ee07fec906db8",
+      "guard.ml": "258f0662ee5211ef04e7b6b40cfe14a7464d3375494faa8abf5a7e871b0812df",
+      "legacy_composition.ml": "2a7fa1be5b7fff4386dc258ec18fb115b4610ed049033fa11178e8beb616deff",
+      "loop_closure.ml": "18dea6f4d2b0a0304e13622fb3a76cd8a6babba2dfba3b7c801d1cbe8bb8572a",
+      "composition.ml": "34d7290b7957d464b890324b2b914932b0cc44f8b02dbb6e5ff321750004fc49",
+      "project_state.ml": "9cc366a55c4d5fdd74b6689ce172ae4eba823d016c6736af0f2c27438f8c35a9",
+      "main.ml": "6bd3b7c86e945832446920d2c2cf3f07e9387b904a4343c8d6b9a9b1ca5dcae1"
+    },
+    "families": [
+      "recovery",
+      "stateflow"
+    ],
+    "guard_model_sha256": "10e870b21691946cd7985ff7d33819a8a58e4fea202ae6d2e771214b997f5bc9",
+    "guard_engine_sha256": "076b8a3fb6f776e53ea99336854c1a793b8658874c153f4ddd2e32c54128ce7d",
+    "composition_model_sha256": "605fb57d42e755b7fee75511f66e6ad864a16c303bbf5ffb5bad8855c7d05675",
+    "composition_engine_sha256": "dd277b844376234cce199ecae9e7bc9eee04dfa69390d2320c2349b4f11b6cb4",
+    "legacy_composition_model_sha256": "e142a6fd22d78044c444c26211b7c659a56fedb5f9e555aa20e3aa1be23e8b10",
+    "legacy_composition_engine_sha256": "c36c8876810e35ed10b7e366e650d7854958b0ad7b07d33084039d39b68e9580",
+    "loop_model_sha256": "876f6331bc1e7fc4e70864c486b589df66ffd5894bc659d6c1dfdbc4d1ed105d",
+    "loop_engine_sha256": "afc1b4b991a2bdf402dc8036eb0cfba0d0232505ea5dab31a6e2e2d267a15d95",
+    "profiles": [
+      "normalized-fixed-input/v1",
+      "captured-fixed-input/v1",
+      "captured-indirect-targets/v1",
+      "captured-guarded-input/v1",
+      "captured-guarded-targets/v1",
+      "captured-guarded-targets/v2"
+    ],
+    "operations": [
+      "initialize",
+      "advance:Visit",
+      "advance:FinishRecovery",
+      "advance:Propagate",
+      "advance:FinishDataflow",
+      "advance:ExpandSlice",
+      "advance:FinishSlice",
+      "advance:FinishStateflow",
+      "step",
+      "observe",
+      "finish",
+      "reset",
+      "run-batch",
+      "result-page",
+      "result-close"
+    ],
+    "max_frame_bytes": 8388608,
+    "max_request_bytes": 8388608,
+    "configurable_request_bytes": true,
+    "max_addresses": 65536
+  },
+  "helper_sha256": "7f8030820b486dc5a7ec055433d5a7540496c3aaa85fb04c3d91cbdc9e6ec1dd",
+  "lock_sha256": "6f6bd3235ffcdc565ad4ab7e687d6238b85caceee0532f54c56570cbee61992f"
+}

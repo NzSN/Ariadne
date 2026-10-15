@@ -1,0 +1,3519 @@
+{
+  "schema": "ariadne.guarded-target-composition-contract/v1",
+  "model": "ariadne.guarded-target-resolution/v1",
+  "scope": "Finite analysis semantics and independent arithmetic/binding checks; BIL recognition, native codecs and runtime qualification remain separate.",
+  "identity_order": [
+    "immutable-scope-and-source",
+    "candidate-seal",
+    "paired-receipts",
+    "final-transformation"
+  ],
+  "captured_reference": {
+    "path": "evidence/Ariadne/indirect-target-resolution/dump03958-table-witness-20261014/tables.json",
+    "sha256": "1390abca21bb7e2db9cde9a07067f60f5493498a7866fb648dcb103994674baf",
+    "tables": 9,
+    "entries": 370,
+    "targets": 64,
+    "scope": "Checks preserved signed offsets, target arithmetic and witness identity; no new dump read or production completeness proof."
+  },
+  "numeric_cases": [
+    {
+      "name": "duplicate-relative32",
+      "input": {
+        "bytes": "020000000300000003000000",
+        "base": 2,
+        "address_width": 4,
+        "indices": [
+          0,
+          1,
+          2
+        ],
+        "conflicting_indices": [],
+        "incoming_covered": true,
+        "memory_premise": true,
+        "inspected_all_indices": true,
+        "code_available": [
+          4,
+          5
+        ]
+      },
+      "expected": {
+        "entries": [
+          [
+            0,
+            2,
+            4
+          ],
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            3,
+            5
+          ]
+        ],
+        "targets": [
+          4,
+          5
+        ],
+        "complete": true,
+        "residuals": [],
+        "missing_code_endpoints": []
+      }
+    },
+    {
+      "name": "negative-wrap64",
+      "input": {
+        "bytes": "e0ffffff",
+        "base": 16,
+        "address_width": 64,
+        "indices": [
+          0
+        ],
+        "conflicting_indices": [],
+        "incoming_covered": true,
+        "memory_premise": true,
+        "inspected_all_indices": true,
+        "code_available": [
+          18446744073709551600
+        ]
+      },
+      "expected": {
+        "entries": [
+          [
+            0,
+            -32,
+            18446744073709551600
+          ]
+        ],
+        "targets": [
+          18446744073709551600
+        ],
+        "complete": true,
+        "residuals": [],
+        "missing_code_endpoints": []
+      }
+    },
+    {
+      "name": "positive-wrap64",
+      "input": {
+        "bytes": "20000000",
+        "base": 18446744073709551600,
+        "address_width": 64,
+        "indices": [
+          0
+        ],
+        "conflicting_indices": [],
+        "incoming_covered": true,
+        "memory_premise": true,
+        "inspected_all_indices": true,
+        "code_available": [
+          16
+        ]
+      },
+      "expected": {
+        "entries": [
+          [
+            0,
+            32,
+            16
+          ]
+        ],
+        "targets": [
+          16
+        ],
+        "complete": true,
+        "residuals": [],
+        "missing_code_endpoints": []
+      }
+    },
+    {
+      "name": "minimum-signed32",
+      "input": {
+        "bytes": "00000080",
+        "base": 4294967297,
+        "address_width": 64,
+        "indices": [
+          0
+        ],
+        "conflicting_indices": [],
+        "incoming_covered": true,
+        "memory_premise": true,
+        "inspected_all_indices": true,
+        "code_available": [
+          2147483649
+        ]
+      },
+      "expected": {
+        "entries": [
+          [
+            0,
+            -2147483648,
+            2147483649
+          ]
+        ],
+        "targets": [
+          2147483649
+        ],
+        "complete": true,
+        "residuals": [],
+        "missing_code_endpoints": []
+      }
+    },
+    {
+      "name": "maximum-signed32",
+      "input": {
+        "bytes": "ffffff7f",
+        "base": 2,
+        "address_width": 64,
+        "indices": [
+          0
+        ],
+        "conflicting_indices": [],
+        "incoming_covered": true,
+        "memory_premise": true,
+        "inspected_all_indices": true,
+        "code_available": [
+          2147483649
+        ]
+      },
+      "expected": {
+        "entries": [
+          [
+            0,
+            2147483647,
+            2147483649
+          ]
+        ],
+        "targets": [
+          2147483649
+        ],
+        "complete": true,
+        "residuals": [],
+        "missing_code_endpoints": []
+      }
+    },
+    {
+      "name": "guard-narrowed-index",
+      "input": {
+        "bytes": "020000000300000003000000",
+        "base": 2,
+        "address_width": 4,
+        "indices": [
+          1,
+          2
+        ],
+        "conflicting_indices": [],
+        "incoming_covered": true,
+        "memory_premise": true,
+        "inspected_all_indices": true,
+        "code_available": [
+          5
+        ]
+      },
+      "expected": {
+        "entries": [
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            3,
+            5
+          ]
+        ],
+        "targets": [
+          5
+        ],
+        "complete": true,
+        "residuals": [],
+        "missing_code_endpoints": []
+      }
+    },
+    {
+      "name": "conflicting-entry",
+      "input": {
+        "bytes": "020000000300000003000000",
+        "base": 2,
+        "address_width": 4,
+        "indices": [
+          0,
+          1,
+          2
+        ],
+        "conflicting_indices": [
+          1
+        ],
+        "incoming_covered": true,
+        "memory_premise": true,
+        "inspected_all_indices": true,
+        "code_available": [
+          4,
+          5
+        ]
+      },
+      "expected": {
+        "entries": [
+          [
+            0,
+            2,
+            4
+          ],
+          [
+            2,
+            3,
+            5
+          ]
+        ],
+        "targets": [
+          4,
+          5
+        ],
+        "complete": false,
+        "residuals": [
+          [
+            1,
+            "conflict"
+          ]
+        ],
+        "missing_code_endpoints": []
+      }
+    },
+    {
+      "name": "partial-final-entry",
+      "input": {
+        "bytes": "02000000030000000300",
+        "base": 2,
+        "address_width": 4,
+        "indices": [
+          0,
+          1,
+          2
+        ],
+        "conflicting_indices": [],
+        "incoming_covered": true,
+        "memory_premise": true,
+        "inspected_all_indices": true,
+        "code_available": [
+          4,
+          5
+        ]
+      },
+      "expected": {
+        "entries": [
+          [
+            0,
+            2,
+            4
+          ],
+          [
+            1,
+            3,
+            5
+          ]
+        ],
+        "targets": [
+          4,
+          5
+        ],
+        "complete": false,
+        "residuals": [
+          [
+            2,
+            "missing-bytes"
+          ]
+        ],
+        "missing_code_endpoints": []
+      }
+    },
+    {
+      "name": "new-incoming-keeps-known-targets",
+      "input": {
+        "bytes": "020000000300000003000000",
+        "base": 2,
+        "address_width": 4,
+        "indices": [
+          0,
+          1,
+          2
+        ],
+        "conflicting_indices": [],
+        "incoming_covered": false,
+        "memory_premise": true,
+        "inspected_all_indices": true,
+        "code_available": [
+          4,
+          5
+        ]
+      },
+      "expected": {
+        "entries": [
+          [
+            0,
+            2,
+            4
+          ],
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            3,
+            5
+          ]
+        ],
+        "targets": [
+          4,
+          5
+        ],
+        "complete": false,
+        "residuals": [],
+        "missing_code_endpoints": []
+      }
+    },
+    {
+      "name": "untrusted-memory-no-completeness",
+      "input": {
+        "bytes": "020000000300000003000000",
+        "base": 2,
+        "address_width": 4,
+        "indices": [
+          0,
+          1,
+          2
+        ],
+        "conflicting_indices": [],
+        "incoming_covered": true,
+        "memory_premise": false,
+        "inspected_all_indices": true,
+        "code_available": [
+          4,
+          5
+        ]
+      },
+      "expected": {
+        "entries": [
+          [
+            0,
+            2,
+            4
+          ],
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            3,
+            5
+          ]
+        ],
+        "targets": [
+          4,
+          5
+        ],
+        "complete": false,
+        "residuals": [],
+        "missing_code_endpoints": []
+      }
+    },
+    {
+      "name": "missing-destination-code",
+      "input": {
+        "bytes": "020000000300000003000000",
+        "base": 2,
+        "address_width": 4,
+        "indices": [
+          0,
+          1,
+          2
+        ],
+        "conflicting_indices": [],
+        "incoming_covered": true,
+        "memory_premise": true,
+        "inspected_all_indices": true,
+        "code_available": [
+          4
+        ]
+      },
+      "expected": {
+        "entries": [
+          [
+            0,
+            2,
+            4
+          ],
+          [
+            1,
+            3,
+            5
+          ],
+          [
+            2,
+            3,
+            5
+          ]
+        ],
+        "targets": [
+          4,
+          5
+        ],
+        "complete": true,
+        "residuals": [],
+        "missing_code_endpoints": [
+          5
+        ]
+      }
+    },
+    {
+      "name": "read-budget-keeps-subset",
+      "input": {
+        "bytes": "020000000300000003000000",
+        "base": 2,
+        "address_width": 4,
+        "indices": [
+          0
+        ],
+        "conflicting_indices": [],
+        "incoming_covered": true,
+        "memory_premise": true,
+        "inspected_all_indices": false,
+        "code_available": [
+          4
+        ]
+      },
+      "expected": {
+        "entries": [
+          [
+            0,
+            2,
+            4
+          ]
+        ],
+        "targets": [
+          4
+        ],
+        "complete": false,
+        "residuals": [],
+        "missing_code_endpoints": []
+      }
+    }
+  ],
+  "graph_cases": [
+    {
+      "name": "closed-aligned-candidate",
+      "input": {
+        "scope": {
+          "snapshot": "snapshot-a",
+          "intent": "intent-a",
+          "activation": "activation-a",
+          "roots": [
+            1
+          ],
+          "seeds": [
+            6
+          ],
+          "premises": [
+            "FrozenCapturedControlData",
+            "WindowsNormalCallEntry"
+          ]
+        },
+        "epoch": 1,
+        "source_hash": "source-reviewed-bil-a",
+        "original": [
+          [
+            1,
+            2
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "pending": [
+          [
+            2,
+            3
+          ]
+        ],
+        "augmentation": [
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ]
+        ],
+        "targets": [
+          4,
+          5
+        ],
+        "target_complete": true,
+        "guard": 2,
+        "entry_residues": [
+          8
+        ],
+        "barriers": [],
+        "covered": true,
+        "product_budget": 128,
+        "transfers": {
+          "1": {
+            "kind": "add",
+            "delta": -8
+          },
+          "2": {
+            "kind": "identity"
+          },
+          "3": {
+            "kind": "identity"
+          },
+          "4": {
+            "kind": "identity"
+          },
+          "5": {
+            "kind": "identity"
+          },
+          "6": {
+            "kind": "identity"
+          }
+        }
+      },
+      "expected": {
+        "guard_residues": [
+          0
+        ],
+        "verdict": "aligned",
+        "normal_store": true,
+        "final_edges": [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "product_states": 6
+      }
+    },
+    {
+      "name": "partial-targets-unknown",
+      "input": {
+        "scope": {
+          "snapshot": "snapshot-a",
+          "intent": "intent-a",
+          "activation": "activation-a",
+          "roots": [
+            1
+          ],
+          "seeds": [
+            6
+          ],
+          "premises": [
+            "FrozenCapturedControlData",
+            "WindowsNormalCallEntry"
+          ]
+        },
+        "epoch": 1,
+        "source_hash": "source-reviewed-bil-a",
+        "original": [
+          [
+            1,
+            2
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "pending": [
+          [
+            2,
+            3
+          ]
+        ],
+        "augmentation": [
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ]
+        ],
+        "targets": [
+          4,
+          5
+        ],
+        "target_complete": false,
+        "guard": 2,
+        "entry_residues": [
+          8
+        ],
+        "barriers": [],
+        "covered": false,
+        "product_budget": 128,
+        "transfers": {
+          "1": {
+            "kind": "add",
+            "delta": -8
+          },
+          "2": {
+            "kind": "identity"
+          },
+          "3": {
+            "kind": "identity"
+          },
+          "4": {
+            "kind": "identity"
+          },
+          "5": {
+            "kind": "identity"
+          },
+          "6": {
+            "kind": "identity"
+          }
+        }
+      },
+      "expected": {
+        "guard_residues": [
+          0
+        ],
+        "verdict": "unknown",
+        "normal_store": false,
+        "final_edges": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "product_states": 6
+      }
+    },
+    {
+      "name": "missing-code-endpoint",
+      "input": {
+        "scope": {
+          "snapshot": "snapshot-a",
+          "intent": "intent-a",
+          "activation": "activation-a",
+          "roots": [
+            1
+          ],
+          "seeds": [
+            6
+          ],
+          "premises": [
+            "FrozenCapturedControlData",
+            "WindowsNormalCallEntry"
+          ]
+        },
+        "epoch": 1,
+        "source_hash": "source-reviewed-bil-a",
+        "original": [
+          [
+            1,
+            2
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "pending": [
+          [
+            2,
+            3
+          ]
+        ],
+        "augmentation": [
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ]
+        ],
+        "targets": [
+          4,
+          5
+        ],
+        "target_complete": true,
+        "guard": 2,
+        "entry_residues": [
+          8
+        ],
+        "barriers": [
+          5
+        ],
+        "covered": true,
+        "product_budget": 128,
+        "transfers": {
+          "1": {
+            "kind": "add",
+            "delta": -8
+          },
+          "2": {
+            "kind": "identity"
+          },
+          "3": {
+            "kind": "identity"
+          },
+          "4": {
+            "kind": "identity"
+          },
+          "5": {
+            "kind": "identity"
+          },
+          "6": {
+            "kind": "identity"
+          }
+        }
+      },
+      "expected": {
+        "guard_residues": [
+          0
+        ],
+        "verdict": "unknown",
+        "normal_store": false,
+        "final_edges": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "product_states": 36
+      }
+    },
+    {
+      "name": "late-backedge-keeps-candidates",
+      "input": {
+        "scope": {
+          "snapshot": "snapshot-a",
+          "intent": "intent-a",
+          "activation": "activation-a",
+          "roots": [
+            1
+          ],
+          "seeds": [
+            6
+          ],
+          "premises": [
+            "FrozenCapturedControlData",
+            "WindowsNormalCallEntry"
+          ]
+        },
+        "epoch": 2,
+        "source_hash": "source-reviewed-bil-a",
+        "original": [
+          [
+            1,
+            2
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "pending": [
+          [
+            2,
+            3
+          ]
+        ],
+        "augmentation": [
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            5,
+            3
+          ]
+        ],
+        "targets": [
+          4,
+          5
+        ],
+        "target_complete": false,
+        "guard": 2,
+        "entry_residues": [
+          8
+        ],
+        "barriers": [],
+        "covered": false,
+        "product_budget": 128,
+        "transfers": {
+          "1": {
+            "kind": "add",
+            "delta": -8
+          },
+          "2": {
+            "kind": "identity"
+          },
+          "3": {
+            "kind": "identity"
+          },
+          "4": {
+            "kind": "identity"
+          },
+          "5": {
+            "kind": "identity"
+          },
+          "6": {
+            "kind": "identity"
+          }
+        }
+      },
+      "expected": {
+        "guard_residues": [
+          0
+        ],
+        "verdict": "unknown",
+        "normal_store": false,
+        "final_edges": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            3
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "product_states": 6
+      }
+    },
+    {
+      "name": "late-bypass-to-pending-guard",
+      "input": {
+        "scope": {
+          "snapshot": "snapshot-a",
+          "intent": "intent-a",
+          "activation": "activation-a",
+          "roots": [
+            1
+          ],
+          "seeds": [
+            6
+          ],
+          "premises": [
+            "FrozenCapturedControlData",
+            "WindowsNormalCallEntry"
+          ]
+        },
+        "epoch": 2,
+        "source_hash": "source-reviewed-bil-a",
+        "original": [
+          [
+            1,
+            2
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "pending": [
+          [
+            2,
+            3
+          ]
+        ],
+        "augmentation": [
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            6,
+            2
+          ]
+        ],
+        "targets": [
+          4,
+          5
+        ],
+        "target_complete": false,
+        "guard": 2,
+        "entry_residues": [
+          8
+        ],
+        "barriers": [],
+        "covered": false,
+        "product_budget": 128,
+        "transfers": {
+          "1": {
+            "kind": "add",
+            "delta": -8
+          },
+          "2": {
+            "kind": "identity"
+          },
+          "3": {
+            "kind": "identity"
+          },
+          "4": {
+            "kind": "identity"
+          },
+          "5": {
+            "kind": "identity"
+          },
+          "6": {
+            "kind": "add",
+            "delta": 8
+          }
+        }
+      },
+      "expected": {
+        "guard_residues": [
+          0,
+          8
+        ],
+        "verdict": "unknown",
+        "normal_store": false,
+        "final_edges": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            6,
+            2
+          ]
+        ],
+        "product_states": 11
+      }
+    },
+    {
+      "name": "pending-identity-not-source-checked",
+      "input": {
+        "scope": {
+          "snapshot": "snapshot-a",
+          "intent": "intent-a",
+          "activation": "activation-a",
+          "roots": [
+            1
+          ],
+          "seeds": [
+            6
+          ],
+          "premises": [
+            "FrozenCapturedControlData",
+            "WindowsNormalCallEntry"
+          ]
+        },
+        "epoch": 1,
+        "source_hash": "source-reviewed-bil-a",
+        "original": [
+          [
+            1,
+            2
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "pending": [
+          [
+            2,
+            3
+          ]
+        ],
+        "augmentation": [
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            5,
+            2
+          ]
+        ],
+        "targets": [
+          4,
+          5
+        ],
+        "target_complete": true,
+        "guard": 2,
+        "entry_residues": [
+          8
+        ],
+        "barriers": [],
+        "covered": true,
+        "product_budget": 128,
+        "transfers": {
+          "1": {
+            "kind": "add",
+            "delta": -8
+          },
+          "2": {
+            "kind": "havoc"
+          },
+          "3": {
+            "kind": "identity"
+          },
+          "4": {
+            "kind": "identity"
+          },
+          "5": {
+            "kind": "identity"
+          },
+          "6": {
+            "kind": "identity"
+          }
+        }
+      },
+      "expected": {
+        "guard_residues": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "verdict": "unknown",
+        "normal_store": false,
+        "final_edges": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "product_states": 81
+      }
+    },
+    {
+      "name": "opaque-call-does-not-become-identity",
+      "input": {
+        "scope": {
+          "snapshot": "snapshot-a",
+          "intent": "intent-a",
+          "activation": "activation-a",
+          "roots": [
+            1
+          ],
+          "seeds": [
+            6
+          ],
+          "premises": [
+            "FrozenCapturedControlData",
+            "WindowsNormalCallEntry"
+          ]
+        },
+        "epoch": 1,
+        "source_hash": "source-reviewed-bil-a",
+        "original": [
+          [
+            1,
+            2
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "pending": [
+          [
+            2,
+            3
+          ]
+        ],
+        "augmentation": [
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ]
+        ],
+        "targets": [
+          4,
+          5
+        ],
+        "target_complete": false,
+        "guard": 2,
+        "entry_residues": [
+          8
+        ],
+        "barriers": [],
+        "covered": true,
+        "product_budget": 128,
+        "transfers": {
+          "1": {
+            "kind": "opaque-call"
+          },
+          "2": {
+            "kind": "identity"
+          },
+          "3": {
+            "kind": "identity"
+          },
+          "4": {
+            "kind": "identity"
+          },
+          "5": {
+            "kind": "identity"
+          },
+          "6": {
+            "kind": "identity"
+          }
+        }
+      },
+      "expected": {
+        "guard_residues": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "verdict": "unknown",
+        "normal_store": false,
+        "final_edges": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "product_states": 81
+      }
+    },
+    {
+      "name": "misaligned-stops-normal",
+      "input": {
+        "scope": {
+          "snapshot": "snapshot-a",
+          "intent": "intent-a",
+          "activation": "activation-a",
+          "roots": [
+            1
+          ],
+          "seeds": [
+            6
+          ],
+          "premises": [
+            "FrozenCapturedControlData",
+            "WindowsNormalCallEntry"
+          ]
+        },
+        "epoch": 1,
+        "source_hash": "source-reviewed-bil-a",
+        "original": [
+          [
+            1,
+            2
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "pending": [
+          [
+            2,
+            3
+          ]
+        ],
+        "augmentation": [
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ]
+        ],
+        "targets": [
+          4,
+          5
+        ],
+        "target_complete": true,
+        "guard": 2,
+        "entry_residues": [
+          8
+        ],
+        "barriers": [],
+        "covered": true,
+        "product_budget": 128,
+        "transfers": {
+          "1": {
+            "kind": "identity"
+          },
+          "2": {
+            "kind": "identity"
+          },
+          "3": {
+            "kind": "identity"
+          },
+          "4": {
+            "kind": "identity"
+          },
+          "5": {
+            "kind": "identity"
+          },
+          "6": {
+            "kind": "identity"
+          }
+        }
+      },
+      "expected": {
+        "guard_residues": [
+          8
+        ],
+        "verdict": "misaligned",
+        "normal_store": false,
+        "final_edges": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "product_states": 6
+      }
+    },
+    {
+      "name": "unreached-is-not-aligned",
+      "input": {
+        "scope": {
+          "snapshot": "snapshot-a",
+          "intent": "intent-a",
+          "activation": "activation-a",
+          "roots": [
+            1
+          ],
+          "seeds": [
+            6
+          ],
+          "premises": [
+            "FrozenCapturedControlData",
+            "WindowsNormalCallEntry"
+          ]
+        },
+        "epoch": 1,
+        "source_hash": "source-reviewed-bil-a",
+        "original": [
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "pending": [
+          [
+            2,
+            3
+          ]
+        ],
+        "augmentation": [
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ]
+        ],
+        "targets": [
+          4,
+          5
+        ],
+        "target_complete": true,
+        "guard": 2,
+        "entry_residues": [
+          8
+        ],
+        "barriers": [],
+        "covered": true,
+        "product_budget": 128,
+        "transfers": {
+          "1": {
+            "kind": "add",
+            "delta": -8
+          },
+          "2": {
+            "kind": "identity"
+          },
+          "3": {
+            "kind": "identity"
+          },
+          "4": {
+            "kind": "identity"
+          },
+          "5": {
+            "kind": "identity"
+          },
+          "6": {
+            "kind": "identity"
+          }
+        }
+      },
+      "expected": {
+        "guard_residues": [],
+        "verdict": "unreached",
+        "normal_store": false,
+        "final_edges": [
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "product_states": 1
+      }
+    },
+    {
+      "name": "zero-budget-no-store",
+      "input": {
+        "scope": {
+          "snapshot": "snapshot-a",
+          "intent": "intent-a",
+          "activation": "activation-a",
+          "roots": [
+            1
+          ],
+          "seeds": [
+            6
+          ],
+          "premises": [
+            "FrozenCapturedControlData",
+            "WindowsNormalCallEntry"
+          ]
+        },
+        "epoch": 1,
+        "source_hash": "source-reviewed-bil-a",
+        "original": [
+          [
+            1,
+            2
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "pending": [
+          [
+            2,
+            3
+          ]
+        ],
+        "augmentation": [
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ]
+        ],
+        "targets": [
+          4,
+          5
+        ],
+        "target_complete": true,
+        "guard": 2,
+        "entry_residues": [
+          8
+        ],
+        "barriers": [],
+        "covered": true,
+        "product_budget": 0,
+        "transfers": {
+          "1": {
+            "kind": "add",
+            "delta": -8
+          },
+          "2": {
+            "kind": "identity"
+          },
+          "3": {
+            "kind": "identity"
+          },
+          "4": {
+            "kind": "identity"
+          },
+          "5": {
+            "kind": "identity"
+          },
+          "6": {
+            "kind": "identity"
+          }
+        }
+      },
+      "expected": {
+        "guard_residues": [],
+        "verdict": "budget-stop",
+        "normal_store": false,
+        "final_edges": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "product_states": 0
+      }
+    },
+    {
+      "name": "budget-after-guard-no-store",
+      "input": {
+        "scope": {
+          "snapshot": "snapshot-a",
+          "intent": "intent-a",
+          "activation": "activation-a",
+          "roots": [
+            1
+          ],
+          "seeds": [
+            6
+          ],
+          "premises": [
+            "FrozenCapturedControlData",
+            "WindowsNormalCallEntry"
+          ]
+        },
+        "epoch": 1,
+        "source_hash": "source-reviewed-bil-a",
+        "original": [
+          [
+            1,
+            2
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "pending": [
+          [
+            2,
+            3
+          ]
+        ],
+        "augmentation": [
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ]
+        ],
+        "targets": [
+          4,
+          5
+        ],
+        "target_complete": true,
+        "guard": 2,
+        "entry_residues": [
+          8
+        ],
+        "barriers": [],
+        "covered": true,
+        "product_budget": 2,
+        "transfers": {
+          "1": {
+            "kind": "add",
+            "delta": -8
+          },
+          "2": {
+            "kind": "identity"
+          },
+          "3": {
+            "kind": "identity"
+          },
+          "4": {
+            "kind": "identity"
+          },
+          "5": {
+            "kind": "identity"
+          },
+          "6": {
+            "kind": "identity"
+          }
+        }
+      },
+      "expected": {
+        "guard_residues": [
+          0
+        ],
+        "verdict": "budget-stop",
+        "normal_store": false,
+        "final_edges": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "product_states": 2
+      }
+    },
+    {
+      "name": "completeness-change-no-new-edge",
+      "input": {
+        "scope": {
+          "snapshot": "snapshot-a",
+          "intent": "intent-a",
+          "activation": "activation-a",
+          "roots": [
+            1
+          ],
+          "seeds": [
+            6
+          ],
+          "premises": [
+            "FrozenCapturedControlData",
+            "WindowsNormalCallEntry"
+          ]
+        },
+        "epoch": 2,
+        "source_hash": "source-reviewed-bil-a",
+        "original": [
+          [
+            1,
+            2
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "pending": [
+          [
+            2,
+            3
+          ]
+        ],
+        "augmentation": [
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ]
+        ],
+        "targets": [
+          4,
+          5
+        ],
+        "target_complete": false,
+        "guard": 2,
+        "entry_residues": [
+          8
+        ],
+        "barriers": [],
+        "covered": false,
+        "product_budget": 128,
+        "transfers": {
+          "1": {
+            "kind": "add",
+            "delta": -8
+          },
+          "2": {
+            "kind": "identity"
+          },
+          "3": {
+            "kind": "identity"
+          },
+          "4": {
+            "kind": "identity"
+          },
+          "5": {
+            "kind": "identity"
+          },
+          "6": {
+            "kind": "identity"
+          }
+        }
+      },
+      "expected": {
+        "guard_residues": [
+          0
+        ],
+        "verdict": "unknown",
+        "normal_store": false,
+        "final_edges": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "product_states": 6
+      }
+    },
+    {
+      "name": "barrier-change-no-new-edge",
+      "input": {
+        "scope": {
+          "snapshot": "snapshot-a",
+          "intent": "intent-a",
+          "activation": "activation-a",
+          "roots": [
+            1
+          ],
+          "seeds": [
+            6
+          ],
+          "premises": [
+            "FrozenCapturedControlData",
+            "WindowsNormalCallEntry"
+          ]
+        },
+        "epoch": 2,
+        "source_hash": "source-reviewed-bil-a",
+        "original": [
+          [
+            1,
+            2
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "pending": [
+          [
+            2,
+            3
+          ]
+        ],
+        "augmentation": [
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ]
+        ],
+        "targets": [
+          4,
+          5
+        ],
+        "target_complete": true,
+        "guard": 2,
+        "entry_residues": [
+          8
+        ],
+        "barriers": [
+          6
+        ],
+        "covered": true,
+        "product_budget": 128,
+        "transfers": {
+          "1": {
+            "kind": "add",
+            "delta": -8
+          },
+          "2": {
+            "kind": "identity"
+          },
+          "3": {
+            "kind": "identity"
+          },
+          "4": {
+            "kind": "identity"
+          },
+          "5": {
+            "kind": "identity"
+          },
+          "6": {
+            "kind": "identity"
+          }
+        }
+      },
+      "expected": {
+        "guard_residues": [
+          0
+        ],
+        "verdict": "unknown",
+        "normal_store": false,
+        "final_edges": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "product_states": 21
+      }
+    },
+    {
+      "name": "bounded-symbolic-frontier-keeps-root",
+      "input": {
+        "scope": {
+          "snapshot": "snapshot-a",
+          "intent": "intent-a",
+          "activation": "activation-a",
+          "roots": [
+            1
+          ],
+          "seeds": [
+            6
+          ],
+          "premises": [
+            "FrozenCapturedControlData",
+            "WindowsNormalCallEntry"
+          ]
+        },
+        "epoch": 1,
+        "source_hash": "source-reviewed-bil-a",
+        "original": [
+          [
+            1,
+            2
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "pending": [
+          [
+            2,
+            3
+          ]
+        ],
+        "augmentation": [
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ]
+        ],
+        "targets": [
+          4,
+          5
+        ],
+        "target_complete": true,
+        "guard": 2,
+        "entry_residues": [
+          8
+        ],
+        "barriers": [],
+        "covered": true,
+        "product_budget": 128,
+        "transfers": {
+          "1": {
+            "kind": "add",
+            "delta": -8
+          },
+          "2": {
+            "kind": "identity"
+          },
+          "3": {
+            "kind": "identity"
+          },
+          "4": {
+            "kind": "identity"
+          },
+          "5": {
+            "kind": "identity"
+          },
+          "6": {
+            "kind": "identity"
+          }
+        },
+        "frontier": {
+          "node": 3,
+          "arbitrary_scalar_inputs": true,
+          "all_prefixes_covered": true
+        }
+      },
+      "expected": {
+        "guard_residues": [
+          0
+        ],
+        "verdict": "aligned",
+        "normal_store": true,
+        "final_edges": [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "product_states": 6
+      }
+    },
+    {
+      "name": "uncovered-prefix-keeps-frontier-partial",
+      "input": {
+        "scope": {
+          "snapshot": "snapshot-a",
+          "intent": "intent-a",
+          "activation": "activation-a",
+          "roots": [
+            1
+          ],
+          "seeds": [
+            6
+          ],
+          "premises": [
+            "FrozenCapturedControlData",
+            "WindowsNormalCallEntry"
+          ]
+        },
+        "epoch": 1,
+        "source_hash": "source-reviewed-bil-a",
+        "original": [
+          [
+            1,
+            2
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "pending": [
+          [
+            2,
+            3
+          ]
+        ],
+        "augmentation": [
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ]
+        ],
+        "targets": [
+          4,
+          5
+        ],
+        "target_complete": false,
+        "guard": 2,
+        "entry_residues": [
+          8
+        ],
+        "barriers": [],
+        "covered": false,
+        "product_budget": 128,
+        "transfers": {
+          "1": {
+            "kind": "add",
+            "delta": -8
+          },
+          "2": {
+            "kind": "identity"
+          },
+          "3": {
+            "kind": "identity"
+          },
+          "4": {
+            "kind": "identity"
+          },
+          "5": {
+            "kind": "identity"
+          },
+          "6": {
+            "kind": "identity"
+          }
+        },
+        "frontier": {
+          "node": 3,
+          "arbitrary_scalar_inputs": true,
+          "all_prefixes_covered": false
+        }
+      },
+      "expected": {
+        "guard_residues": [
+          0
+        ],
+        "verdict": "unknown",
+        "normal_store": false,
+        "final_edges": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ],
+        "product_states": 6
+      }
+    }
+  ],
+  "receipt_cases": [
+    {
+      "name": "paired-receipts-accepted",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "accepted"
+    },
+    {
+      "name": "partial-paired-receipts-accepted",
+      "graph_case": "partial-targets-unknown",
+      "expected": "accepted"
+    },
+    {
+      "name": "missing-target",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "missing-proof",
+      "mutation": {
+        "action": "delete",
+        "path": [
+          "target"
+        ]
+      }
+    },
+    {
+      "name": "stale-target-epoch",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "target-binding",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "target",
+          "epoch"
+        ],
+        "value": 0
+      }
+    },
+    {
+      "name": "wrong-target-snapshot",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "target-binding",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "target",
+          "scope",
+          "snapshot"
+        ],
+        "value": "snapshot-b"
+      }
+    },
+    {
+      "name": "wrong-target-activation",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "target-binding",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "target",
+          "scope",
+          "activation"
+        ],
+        "value": "activation-b"
+      }
+    },
+    {
+      "name": "wrong-target-intent",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "target-binding",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "target",
+          "scope",
+          "intent"
+        ],
+        "value": "intent-b"
+      }
+    },
+    {
+      "name": "wrong-target-roots",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "target-binding",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "target",
+          "scope",
+          "roots"
+        ],
+        "value": [
+          1,
+          4
+        ]
+      }
+    },
+    {
+      "name": "wrong-target-source",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "target-binding",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "target",
+          "source"
+        ],
+        "value": "source-other"
+      }
+    },
+    {
+      "name": "wrong-target-candidate",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "target-binding",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "target",
+          "graph"
+        ],
+        "value": "wrong-candidate-digest"
+      }
+    },
+    {
+      "name": "missing-guard",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "missing-proof",
+      "mutation": {
+        "action": "delete",
+        "path": [
+          "guard"
+        ]
+      }
+    },
+    {
+      "name": "stale-guard-epoch",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "guard-binding",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "guard",
+          "epoch"
+        ],
+        "value": 0
+      }
+    },
+    {
+      "name": "wrong-guard-snapshot",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "guard-binding",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "guard",
+          "scope",
+          "snapshot"
+        ],
+        "value": "snapshot-b"
+      }
+    },
+    {
+      "name": "wrong-guard-activation",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "guard-binding",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "guard",
+          "scope",
+          "activation"
+        ],
+        "value": "activation-b"
+      }
+    },
+    {
+      "name": "wrong-guard-intent",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "guard-binding",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "guard",
+          "scope",
+          "intent"
+        ],
+        "value": "intent-b"
+      }
+    },
+    {
+      "name": "wrong-guard-roots",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "guard-binding",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "guard",
+          "scope",
+          "roots"
+        ],
+        "value": [
+          1,
+          4
+        ]
+      }
+    },
+    {
+      "name": "wrong-guard-source",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "guard-binding",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "guard",
+          "source"
+        ],
+        "value": "source-other"
+      }
+    },
+    {
+      "name": "wrong-guard-candidate",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "guard-binding",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "guard",
+          "graph"
+        ],
+        "value": "wrong-candidate-digest"
+      }
+    },
+    {
+      "name": "remove-memory-premise",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "candidate-binding",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "graph",
+          "scope",
+          "premises"
+        ],
+        "value": [
+          "WindowsNormalCallEntry"
+        ]
+      }
+    },
+    {
+      "name": "remove-call-premise",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "candidate-binding",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "graph",
+          "scope",
+          "premises"
+        ],
+        "value": [
+          "FrozenCapturedControlData"
+        ]
+      }
+    },
+    {
+      "name": "original-source-edge-tamper",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "candidate-binding",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "graph",
+          "original"
+        ],
+        "value": []
+      }
+    },
+    {
+      "name": "omit-known-target",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "target-binding",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "target",
+          "targets"
+        ],
+        "value": [
+          4
+        ]
+      }
+    },
+    {
+      "name": "forge-completeness",
+      "graph_case": "partial-targets-unknown",
+      "expected": "target-binding",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "target",
+          "complete"
+        ],
+        "value": true
+      }
+    },
+    {
+      "name": "candidate-normal-used-as-final",
+      "graph_case": "partial-targets-unknown",
+      "expected": "final-transformation",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "final",
+          "normal_store"
+        ],
+        "value": true
+      }
+    },
+    {
+      "name": "extra-final-edge",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "final-transformation",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "final",
+          "edges"
+        ],
+        "value": [
+          [
+            1,
+            2
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ],
+          [
+            6,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "name": "normal-effects-without-pending-edge",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "final-transformation",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "final",
+          "edges"
+        ],
+        "value": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
+        ]
+      }
+    },
+    {
+      "name": "wrong-final-request-digest",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "final-digest",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "final_digest"
+        ],
+        "value": "wrong-final"
+      }
+    },
+    {
+      "name": "target-proof-dropped-from-final",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "final-transformation",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "final",
+          "target_proof"
+        ],
+        "value": ""
+      }
+    },
+    {
+      "name": "guard-proof-dropped-from-final",
+      "graph_case": "closed-aligned-candidate",
+      "expected": "final-transformation",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "final",
+          "guard_proof"
+        ],
+        "value": ""
+      }
+    },
+    {
+      "name": "sealed-guard-zero-budget-stopped-request",
+      "graph_case": "zero-budget-no-store",
+      "expected": "accepted"
+    },
+    {
+      "name": "sealed-target-partial-budget-stopped-request",
+      "graph_case": "partial-targets-unknown",
+      "expected": "accepted"
+    },
+    {
+      "name": "bounded-cut-root-immutable",
+      "graph_case": "bounded-symbolic-frontier-keeps-root",
+      "mutation": {
+        "action": "set",
+        "path": [
+          "target",
+          "scope",
+          "roots"
+        ],
+        "value": [
+          1,
+          3
+        ]
+      },
+      "expected": "target-binding"
+    }
+  ],
+  "epoch_cases": [
+    {
+      "name": "new-incoming-edge",
+      "field": "augmentation",
+      "value": [
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "expected": "target-binding"
+    },
+    {
+      "name": "completeness-only",
+      "field": "target_complete",
+      "value": false,
+      "expected": "target-binding"
+    },
+    {
+      "name": "coverage-only",
+      "field": "covered",
+      "value": false,
+      "expected": "target-binding"
+    },
+    {
+      "name": "barrier-only",
+      "field": "barriers",
+      "value": [
+        6
+      ],
+      "expected": "target-binding"
+    },
+    {
+      "name": "transfer-only",
+      "field": "transfers",
+      "value": {
+        "1": {
+          "kind": "opaque-call"
+        },
+        "2": {
+          "kind": "identity"
+        },
+        "3": {
+          "kind": "identity"
+        },
+        "4": {
+          "kind": "identity"
+        },
+        "5": {
+          "kind": "identity"
+        },
+        "6": {
+          "kind": "identity"
+        }
+      },
+      "expected": "target-binding"
+    }
+  ],
+  "frontier_cases": [
+    {
+      "name": "bounded-cut-for-arbitrary-register-inputs",
+      "input": {
+        "register_width": 8,
+        "table_indices": [
+          0,
+          1,
+          2
+        ],
+        "roots": [
+          1
+        ],
+        "original_roots": [
+          1
+        ],
+        "frontier": 3,
+        "all_prefixes_covered": true,
+        "contexts": [
+          {
+            "mask": 3,
+            "upper_guard": 2
+          },
+          {
+            "mask": 3,
+            "upper_guard": 2
+          }
+        ]
+      },
+      "expected": {
+        "indices": [
+          0,
+          1,
+          2
+        ],
+        "complete": true,
+        "roots": [
+          1
+        ],
+        "frontier_is_root": false,
+        "unknown_indices": [],
+        "uncovered_prefix": false
+      }
+    },
+    {
+      "name": "one-reverse-prefix-bypasses-index-guard",
+      "input": {
+        "register_width": 8,
+        "table_indices": [
+          0,
+          1,
+          2
+        ],
+        "roots": [
+          1
+        ],
+        "original_roots": [
+          1
+        ],
+        "frontier": 3,
+        "all_prefixes_covered": true,
+        "contexts": [
+          {
+            "mask": 3,
+            "upper_guard": 2
+          },
+          {
+            "mask": 3,
+            "upper_guard": null
+          }
+        ]
+      },
+      "expected": {
+        "indices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "complete": false,
+        "roots": [
+          1
+        ],
+        "frontier_is_root": false,
+        "unknown_indices": [
+          3
+        ],
+        "uncovered_prefix": false
+      }
+    },
+    {
+      "name": "uncovered-reverse-prefix-no-completeness",
+      "input": {
+        "register_width": 8,
+        "table_indices": [
+          0,
+          1,
+          2
+        ],
+        "roots": [
+          1
+        ],
+        "original_roots": [
+          1
+        ],
+        "frontier": 3,
+        "all_prefixes_covered": false,
+        "contexts": [
+          {
+            "mask": 3,
+            "upper_guard": 2
+          },
+          {
+            "mask": 3,
+            "upper_guard": 2
+          }
+        ]
+      },
+      "expected": {
+        "indices": [
+          0,
+          1,
+          2
+        ],
+        "complete": false,
+        "roots": [
+          1
+        ],
+        "frontier_is_root": false,
+        "unknown_indices": [],
+        "uncovered_prefix": true
+      }
+    },
+    {
+      "name": "frontier-promoted-root-is-rejected",
+      "input": {
+        "register_width": 8,
+        "table_indices": [
+          0,
+          1,
+          2
+        ],
+        "roots": [
+          1,
+          3
+        ],
+        "original_roots": [
+          1
+        ],
+        "frontier": 3,
+        "all_prefixes_covered": true,
+        "contexts": [
+          {
+            "mask": 3,
+            "upper_guard": 2
+          },
+          {
+            "mask": 3,
+            "upper_guard": 2
+          }
+        ]
+      },
+      "expected": {
+        "indices": [
+          0,
+          1,
+          2
+        ],
+        "complete": false,
+        "roots": [
+          1,
+          3
+        ],
+        "frontier_is_root": true,
+        "unknown_indices": [],
+        "uncovered_prefix": false
+      }
+    }
+  ],
+  "conditional_write_cases": [
+    {
+      "name": "loop-decrement-branch-post-state-width8",
+      "scope": "Finite bit-vector guard normalization representative; one state update, no hardware execution claim.",
+      "input": {
+        "width": 8,
+        "later_upper_bound": 3,
+        "transfer": "after=(before-1) mod 2^width",
+        "taken_condition": "after!=0",
+        "later_condition": "after<=3"
+      },
+      "expected": {
+        "correct_indices": [
+          1,
+          2,
+          3
+        ],
+        "incorrect_double_applied_indices": [
+          0,
+          2,
+          3
+        ],
+        "correct_source_inputs": [
+          2,
+          3,
+          4
+        ],
+        "wrongly_included_indices": [
+          0
+        ],
+        "wrongly_excluded_indices": [
+          1
+        ]
+      }
+    },
+    {
+      "name": "loop-decrement-branch-post-state-width16",
+      "scope": "Finite bit-vector guard normalization representative; one state update, no hardware execution claim.",
+      "input": {
+        "width": 16,
+        "later_upper_bound": 3,
+        "transfer": "after=(before-1) mod 2^width",
+        "taken_condition": "after!=0",
+        "later_condition": "after<=3"
+      },
+      "expected": {
+        "correct_indices": [
+          1,
+          2,
+          3
+        ],
+        "incorrect_double_applied_indices": [
+          0,
+          2,
+          3
+        ],
+        "correct_source_inputs": [
+          2,
+          3,
+          4
+        ],
+        "wrongly_included_indices": [
+          0
+        ],
+        "wrongly_excluded_indices": [
+          1
+        ]
+      }
+    }
+  ],
+  "infeasible_context_cases": [
+    {
+      "name": "stable-symbolic-load-exit-and-prior-backedge-contradict",
+      "scope": "Finite branch conjunction and symbolic-load identity; frozen memory is a premise, not captured execution history.",
+      "input": {
+        "load_width": 8,
+        "first_address_identity": "same-activation:base_rcx_plus_field",
+        "second_address_identity": "same-activation:base_rcx_plus_field",
+        "index_definition_unchanged": true,
+        "frozen_control_data": true,
+        "unknown_memory_write": false,
+        "backedge_bound": 9,
+        "exit_bound": 9,
+        "prefix_replayed": true,
+        "all_prefixes_covered": true,
+        "table_base_known": false,
+        "roots": [
+          1
+        ],
+        "frontier": 3,
+        "nonunknown_symbolic_subject": true,
+        "cycle_has_opaque_call": false
+      },
+      "expected": {
+        "same_symbol_justified": true,
+        "feasible_assignments": 0,
+        "possible_indices": [],
+        "universally_infeasible": true,
+        "may_cut_without_known_table_base": true,
+        "complete_with_all_other_prefixes_covered": true,
+        "roots": [
+          1
+        ],
+        "frontier_is_root": false,
+        "receipt_form": "infeasible"
+      }
+    },
+    {
+      "name": "stable-infeasible-prefix-but-another-prefix-uncovered",
+      "scope": "Finite branch conjunction and symbolic-load identity; frozen memory is a premise, not captured execution history.",
+      "input": {
+        "load_width": 8,
+        "first_address_identity": "same-activation:base_rcx_plus_field",
+        "second_address_identity": "same-activation:base_rcx_plus_field",
+        "index_definition_unchanged": true,
+        "frozen_control_data": true,
+        "unknown_memory_write": false,
+        "backedge_bound": 9,
+        "exit_bound": 9,
+        "prefix_replayed": true,
+        "all_prefixes_covered": false,
+        "table_base_known": false,
+        "roots": [
+          1
+        ],
+        "frontier": 3,
+        "nonunknown_symbolic_subject": true,
+        "cycle_has_opaque_call": false
+      },
+      "expected": {
+        "same_symbol_justified": true,
+        "feasible_assignments": 0,
+        "possible_indices": [],
+        "universally_infeasible": true,
+        "may_cut_without_known_table_base": true,
+        "complete_with_all_other_prefixes_covered": false,
+        "roots": [
+          1
+        ],
+        "frontier_is_root": false,
+        "receipt_form": "infeasible"
+      }
+    },
+    {
+      "name": "contradiction-not-replayed-cannot-cut",
+      "scope": "Finite branch conjunction and symbolic-load identity; frozen memory is a premise, not captured execution history.",
+      "input": {
+        "load_width": 8,
+        "first_address_identity": "same-activation:base_rcx_plus_field",
+        "second_address_identity": "same-activation:base_rcx_plus_field",
+        "index_definition_unchanged": true,
+        "frozen_control_data": true,
+        "unknown_memory_write": false,
+        "backedge_bound": 9,
+        "exit_bound": 9,
+        "prefix_replayed": false,
+        "all_prefixes_covered": true,
+        "table_base_known": false,
+        "roots": [
+          1
+        ],
+        "frontier": 3,
+        "nonunknown_symbolic_subject": true,
+        "cycle_has_opaque_call": false
+      },
+      "expected": {
+        "same_symbol_justified": true,
+        "feasible_assignments": 0,
+        "possible_indices": [],
+        "universally_infeasible": true,
+        "may_cut_without_known_table_base": false,
+        "complete_with_all_other_prefixes_covered": false,
+        "roots": [
+          1
+        ],
+        "frontier_is_root": false,
+        "receipt_form": null
+      }
+    },
+    {
+      "name": "changed-load-address-keeps-independent-values",
+      "scope": "Finite branch conjunction and symbolic-load identity; frozen memory is a premise, not captured execution history.",
+      "input": {
+        "load_width": 8,
+        "first_address_identity": "same-activation:base_rcx_plus_field",
+        "second_address_identity": "same-activation:different_base_plus_field",
+        "index_definition_unchanged": true,
+        "frozen_control_data": true,
+        "unknown_memory_write": false,
+        "backedge_bound": 9,
+        "exit_bound": 9,
+        "prefix_replayed": true,
+        "all_prefixes_covered": true,
+        "table_base_known": false,
+        "roots": [
+          1
+        ],
+        "frontier": 3,
+        "nonunknown_symbolic_subject": true,
+        "cycle_has_opaque_call": false
+      },
+      "expected": {
+        "same_symbol_justified": false,
+        "feasible_assignments": 2460,
+        "possible_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "universally_infeasible": false,
+        "may_cut_without_known_table_base": false,
+        "complete_with_all_other_prefixes_covered": false,
+        "roots": [
+          1
+        ],
+        "frontier_is_root": false,
+        "receipt_form": null
+      }
+    },
+    {
+      "name": "changed-index-definition-keeps-independent-values",
+      "scope": "Finite branch conjunction and symbolic-load identity; frozen memory is a premise, not captured execution history.",
+      "input": {
+        "load_width": 8,
+        "first_address_identity": "same-activation:base_rcx_plus_field",
+        "second_address_identity": "same-activation:base_rcx_plus_field",
+        "index_definition_unchanged": false,
+        "frozen_control_data": true,
+        "unknown_memory_write": false,
+        "backedge_bound": 9,
+        "exit_bound": 9,
+        "prefix_replayed": true,
+        "all_prefixes_covered": true,
+        "table_base_known": false,
+        "roots": [
+          1
+        ],
+        "frontier": 3,
+        "nonunknown_symbolic_subject": true,
+        "cycle_has_opaque_call": false
+      },
+      "expected": {
+        "same_symbol_justified": false,
+        "feasible_assignments": 2460,
+        "possible_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "universally_infeasible": false,
+        "may_cut_without_known_table_base": false,
+        "complete_with_all_other_prefixes_covered": false,
+        "roots": [
+          1
+        ],
+        "frontier_is_root": false,
+        "receipt_form": null
+      }
+    },
+    {
+      "name": "mutable-memory-keeps-independent-values",
+      "scope": "Finite branch conjunction and symbolic-load identity; frozen memory is a premise, not captured execution history.",
+      "input": {
+        "load_width": 8,
+        "first_address_identity": "same-activation:base_rcx_plus_field",
+        "second_address_identity": "same-activation:base_rcx_plus_field",
+        "index_definition_unchanged": true,
+        "frozen_control_data": false,
+        "unknown_memory_write": false,
+        "backedge_bound": 9,
+        "exit_bound": 9,
+        "prefix_replayed": true,
+        "all_prefixes_covered": true,
+        "table_base_known": false,
+        "roots": [
+          1
+        ],
+        "frontier": 3,
+        "nonunknown_symbolic_subject": true,
+        "cycle_has_opaque_call": false
+      },
+      "expected": {
+        "same_symbol_justified": false,
+        "feasible_assignments": 2460,
+        "possible_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "universally_infeasible": false,
+        "may_cut_without_known_table_base": false,
+        "complete_with_all_other_prefixes_covered": false,
+        "roots": [
+          1
+        ],
+        "frontier_is_root": false,
+        "receipt_form": null
+      }
+    },
+    {
+      "name": "unknown-memory-write-keeps-independent-values",
+      "scope": "Finite branch conjunction and symbolic-load identity; frozen memory is a premise, not captured execution history.",
+      "input": {
+        "load_width": 8,
+        "first_address_identity": "same-activation:base_rcx_plus_field",
+        "second_address_identity": "same-activation:base_rcx_plus_field",
+        "index_definition_unchanged": true,
+        "frozen_control_data": true,
+        "unknown_memory_write": true,
+        "backedge_bound": 9,
+        "exit_bound": 9,
+        "prefix_replayed": true,
+        "all_prefixes_covered": true,
+        "table_base_known": false,
+        "roots": [
+          1
+        ],
+        "frontier": 3,
+        "nonunknown_symbolic_subject": true,
+        "cycle_has_opaque_call": false
+      },
+      "expected": {
+        "same_symbol_justified": false,
+        "feasible_assignments": 2460,
+        "possible_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "universally_infeasible": false,
+        "may_cut_without_known_table_base": false,
+        "complete_with_all_other_prefixes_covered": false,
+        "roots": [
+          1
+        ],
+        "frontier_is_root": false,
+        "receipt_form": null
+      }
+    },
+    {
+      "name": "different-guard-bounds-can-be-feasible",
+      "scope": "Finite branch conjunction and symbolic-load identity; frozen memory is a premise, not captured execution history.",
+      "input": {
+        "load_width": 8,
+        "first_address_identity": "same-activation:base_rcx_plus_field",
+        "second_address_identity": "same-activation:base_rcx_plus_field",
+        "index_definition_unchanged": true,
+        "frozen_control_data": true,
+        "unknown_memory_write": false,
+        "backedge_bound": 9,
+        "exit_bound": 10,
+        "prefix_replayed": true,
+        "all_prefixes_covered": true,
+        "table_base_known": false,
+        "roots": [
+          1
+        ],
+        "frontier": 3,
+        "nonunknown_symbolic_subject": true,
+        "cycle_has_opaque_call": false
+      },
+      "expected": {
+        "same_symbol_justified": true,
+        "feasible_assignments": 1,
+        "possible_indices": [
+          10
+        ],
+        "universally_infeasible": false,
+        "may_cut_without_known_table_base": false,
+        "complete_with_all_other_prefixes_covered": false,
+        "roots": [
+          1
+        ],
+        "frontier_is_root": false,
+        "receipt_form": null
+      }
+    },
+    {
+      "name": "unknown-subject-cannot-share-identity",
+      "scope": "Finite branch conjunction and symbolic-load identity; frozen memory is a premise, not captured execution history.",
+      "input": {
+        "load_width": 8,
+        "first_address_identity": "same-activation:base_rcx_plus_field",
+        "second_address_identity": "same-activation:base_rcx_plus_field",
+        "index_definition_unchanged": true,
+        "frozen_control_data": true,
+        "unknown_memory_write": false,
+        "backedge_bound": 9,
+        "exit_bound": 9,
+        "prefix_replayed": true,
+        "all_prefixes_covered": true,
+        "table_base_known": false,
+        "roots": [
+          1
+        ],
+        "frontier": 3,
+        "nonunknown_symbolic_subject": false,
+        "cycle_has_opaque_call": false
+      },
+      "expected": {
+        "same_symbol_justified": false,
+        "feasible_assignments": 2460,
+        "possible_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "universally_infeasible": false,
+        "may_cut_without_known_table_base": false,
+        "complete_with_all_other_prefixes_covered": false,
+        "roots": [
+          1
+        ],
+        "frontier_is_root": false,
+        "receipt_form": null
+      }
+    },
+    {
+      "name": "opaque-call-cycle-cannot-share-load",
+      "scope": "Finite branch conjunction and symbolic-load identity; frozen memory is a premise, not captured execution history.",
+      "input": {
+        "load_width": 8,
+        "first_address_identity": "same-activation:base_rcx_plus_field",
+        "second_address_identity": "same-activation:base_rcx_plus_field",
+        "index_definition_unchanged": true,
+        "frozen_control_data": true,
+        "unknown_memory_write": false,
+        "backedge_bound": 9,
+        "exit_bound": 9,
+        "prefix_replayed": true,
+        "all_prefixes_covered": true,
+        "table_base_known": false,
+        "roots": [
+          1
+        ],
+        "frontier": 3,
+        "nonunknown_symbolic_subject": true,
+        "cycle_has_opaque_call": true
+      },
+      "expected": {
+        "same_symbol_justified": false,
+        "feasible_assignments": 2460,
+        "possible_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "universally_infeasible": false,
+        "may_cut_without_known_table_base": false,
+        "complete_with_all_other_prefixes_covered": false,
+        "roots": [
+          1
+        ],
+        "frontier_is_root": false,
+        "receipt_form": null
+      }
+    }
+  ],
+  "infeasible_context_receipt_contract": {
+    "profile": "captured-local-indirect-targets/v1",
+    "form": "infeasible",
+    "frontier": true,
+    "base": "0x0000000000000000",
+    "indices": [],
+    "entries": [],
+    "requirements": [
+      "Exact original expression and guards retained for independent replay",
+      "Universally false conjunction on a nonunknown stable symbolic subject",
+      "One final repeated predecessor requires no memory writes, calls or address/index clobber in the cycle",
+      "Every other incoming reverse-prefix context covered before complete=true",
+      "Snapshot, activation, roots and premises remain immutable; cut is never an entry root"
+    ],
+    "scope": "Analysis-level empty-context certificate; concrete BIL recognition and native/Rust receipt schema checks require separate qualification."
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "scope": "independent synthetic captured PE/unwind/stack fixture",
+  "sha256": "99ecd5a3c334d249912b6bd40eab2e6c27e251957ac8eae22ed68ac11984efd8",
+  "bytes": 6138,
+  "thread_id": 17,
+  "entry": "0x0000000000400200",
+  "guard": "0x0000000000400204",
+  "premise": "windows-amd64-normal-call-entry/v1",
+  "entry_rsp_residue": 8
+}

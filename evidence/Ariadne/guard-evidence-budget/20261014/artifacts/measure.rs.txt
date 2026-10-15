@@ -1,0 +1,22 @@
+#![allow(dead_code)]
+mod bap {
+ pub type Error=ariadne::bap::Error;
+ pub fn invalid(message:impl Into<String>)->Error {std::io::Error::new(std::io::ErrorKind::InvalidData,message.into()).into()}
+}
+#[path="/home/nzsn/Repos/Ariadne-bap-shift-count-20261014/src/bap/ast.rs"] mod ast;
+use std::{error::Error,io::BufRead};
+fn main()->Result<(),Box<dyn Error>> {
+ let input=std::fs::File::open(std::env::args().nth(1).unwrap())?;
+ let mut rows=Vec::new();let mut total=0usize;let cap=4194304usize;let mut crossing=None;
+ for line in std::io::BufReader::new(input).lines(){
+  let raw:serde_json::Value=serde_json::from_str(&line?)?;
+  if raw["schema"]!="ariadne.bap-site/v1" {continue;}
+  let lift:ast::Lift=serde_json::from_value(raw)?;lift.validate_ast()?;
+  let bytes=serde_json::to_vec(&lift.bil)?;let before=total;total+=bytes.len();
+  let row=serde_json::json!({"site":lift.va,"batch":lift.batch,"opcode":lift.opcode,"bytes_hex":lift.bytes,"ast_bytes":bytes.len(),"ast_sha256":ariadne::reports::sha256(&bytes),"statements":lift.bil.len(),"cumulative_ast_bytes":total});
+  if crossing.is_none() && total>cap {crossing=Some(serde_json::json!({"ordinal":rows.len()+1,"bytes_before":before,"bytes_after":total,"site":row}));}
+  rows.push(row);
+ }
+ std::fs::write(std::env::args().nth(2).unwrap(),serde_json::to_vec_pretty(&serde_json::json!({"cap":cap,"responses":rows.len(),"response_ast_bytes":total,"first_crossing":crossing,"rows":rows}))?)?;
+ Ok(())
+}

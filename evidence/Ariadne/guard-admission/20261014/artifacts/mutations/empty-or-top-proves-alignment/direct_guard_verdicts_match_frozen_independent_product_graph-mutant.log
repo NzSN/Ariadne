@@ -1,0 +1,24 @@
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-guard-admission-20261014/target/guard-mutations-20261014/empty-or-top-proves-alignment/sut)
+    Finished `release` profile [optimized] target(s) in 28.14s
+     Running unittests src/lib.rs (/home/nzsn/Repos/Ariadne-guard-admission-20261014/target/guard-mutations-20261014/empty-or-top-proves-alignment/build/release/deps/ariadne-eac5fde57d2ca545)
+
+running 1 test
+test bap::guard_admission_tests::direct_guard_verdicts_match_frozen_independent_product_graph ... FAILED
+
+failures:
+
+---- bap::guard_admission_tests::direct_guard_verdicts_match_frozen_independent_product_graph stdout ----
+
+thread 'bap::guard_admission_tests::direct_guard_verdicts_match_frozen_independent_product_graph' (51344) panicked at src/bap/../../tests/bap/guard_admission_unit.rs:167:5:
+assertion `left == right` failed
+  left: Aligned
+ right: Unknown
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    bap::guard_admission_tests::direct_guard_verdicts_match_frozen_independent_product_graph
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 91 filtered out; finished in 0.01s
+
+error: test failed, to rerun pass `--lib`

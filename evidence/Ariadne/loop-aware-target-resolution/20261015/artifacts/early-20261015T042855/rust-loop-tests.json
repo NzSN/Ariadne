@@ -1,0 +1,13 @@
+{
+  "name": "rust-loop-tests",
+  "command": [
+    "cargo",
+    "test",
+    "--offline",
+    "--locked",
+    "--lib",
+    "loop_closure"
+  ],
+  "exit_code": 0,
+  "seconds": 18.476541140999984
+}

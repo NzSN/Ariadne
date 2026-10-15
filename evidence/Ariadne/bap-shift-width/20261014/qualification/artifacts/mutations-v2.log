@@ -1,0 +1,7 @@
+restore-equal-width-shift-gate: expected named runtime rejection
+allow-unequal-nonshift-operands: expected named runtime rejection
+mask-shift-count-modulo-value-width: expected named runtime rejection
+truncate-shift-count-to-64-bits: expected named runtime rejection
+cancel-xor-from-abstract-metadata-equality: expected named runtime rejection
+native-restore-equal-width-shift-gate: expected named runtime rejection
+Report: /home/nzsn/Repos/Ariadne-bap-shift-count-20261014/target/shift-mutations-v2-20261014/report.json

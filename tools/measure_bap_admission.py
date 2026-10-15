@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Owned v3 query measurements: explicit roots, opaque gaps and native parity."""
+"""Owned current-profile query measurements: explicit roots, opaque gaps and native parity."""
 import argparse,csv,hashlib,io,json,os,statistics,subprocess,time
 from pathlib import Path
 from compare_i5a_cli import without_verified_receipt

@@ -1,6 +1,7 @@
 //! Process-per-query transport for the experimental OCaml recovery bootstrap.
 use super::core_protocol::{
-    CAPTURED_PROFILE, FamilyObservation, FamilyResponse, MAX_FRAME, Observation, PROFILE,
+    CAPTURED_PROFILE, COMPOSED_PROFILE, DEFAULT_MAX_REQUEST_BYTES, FamilyObservation,
+    FamilyResponse, GUARDED_PROFILE, LEGACY_COMPOSED_PROFILE, MAX_FRAME, Observation, PROFILE,
     StateflowObservation, TARGET_PROFILE, profile_query_digest,
 };
 use super::{Error, invalid};
@@ -17,6 +18,8 @@ pub struct CoreConfig {
     pub helper: PathBuf,
     pub manifest: PathBuf,
     pub timeout: Duration,
+    /// Maximum serialized request bytes, including the terminating newline.
+    pub max_request_bytes: usize,
 }
 impl CoreConfig {
     pub fn from_directory(directory: PathBuf) -> Self {
@@ -24,6 +27,7 @@ impl CoreConfig {
             helper: directory.join("ariadne-bap-core"),
             manifest: directory.join("manifest.json"),
             timeout: Duration::from_secs(10),
+            max_request_bytes: DEFAULT_MAX_REQUEST_BYTES,
         }
     }
 }
@@ -43,6 +47,7 @@ pub struct FamilySession<O: FamilyObservation> {
     sequence: u64,
     action_index: u64,
     timeout: Duration,
+    max_request_bytes: usize,
     closed: bool,
     identity: Value,
     last_observation: Option<Vec<u8>>,
@@ -66,7 +71,18 @@ impl<O: FamilyObservation> FamilySession<O> {
         profile: &str,
         input: &Value,
     ) -> Result<(Self, FamilyResponse<O>), Error> {
-        if ![PROFILE, CAPTURED_PROFILE, TARGET_PROFILE].contains(&profile)
+        if config.max_request_bytes == 0 || u64::try_from(config.max_request_bytes).is_err() {
+            return Err(invalid("invalid core request byte budget"));
+        }
+        if ![
+            PROFILE,
+            CAPTURED_PROFILE,
+            TARGET_PROFILE,
+            GUARDED_PROFILE,
+            LEGACY_COMPOSED_PROFILE,
+            COMPOSED_PROFILE,
+        ]
+        .contains(&profile)
             || (O::FAMILY != "recovery" && profile != PROFILE)
         {
             return Err(invalid("unsupported core input profile"));
@@ -85,11 +101,51 @@ impl<O: FamilyObservation> FamilySession<O> {
             || handshake["abi"] != 2
             || handshake["families"] != json!(["recovery", "stateflow"])
             || (handshake["profiles"] != json!([PROFILE, CAPTURED_PROFILE])
-                && handshake["profiles"] != json!([PROFILE, CAPTURED_PROFILE, TARGET_PROFILE]))
+                && handshake["profiles"] != json!([PROFILE, CAPTURED_PROFILE, TARGET_PROFILE])
+                && handshake["profiles"]
+                    != json!([PROFILE, CAPTURED_PROFILE, TARGET_PROFILE, GUARDED_PROFILE])
+                && handshake["profiles"]
+                    != json!([
+                        PROFILE,
+                        CAPTURED_PROFILE,
+                        TARGET_PROFILE,
+                        GUARDED_PROFILE,
+                        LEGACY_COMPOSED_PROFILE
+                    ])
+                && handshake["profiles"]
+                    != json!([
+                        PROFILE,
+                        CAPTURED_PROFILE,
+                        TARGET_PROFILE,
+                        GUARDED_PROFILE,
+                        LEGACY_COMPOSED_PROFILE,
+                        COMPOSED_PROFILE
+                    ]))
             || handshake["operations"] != json!(super::core_protocol::RECOVERY_OPERATIONS)
             || handshake["max_frame_bytes"] != MAX_FRAME
         {
             return Err(invalid("unsupported core handshake capabilities"));
+        }
+        let configurable_request_bytes = match (
+            handshake.get("configurable_request_bytes"),
+            handshake.get("max_request_bytes"),
+        ) {
+            (None, None) => false,
+            (Some(Value::Bool(true)), Some(limit))
+                if limit.as_u64() == Some(DEFAULT_MAX_REQUEST_BYTES as u64) =>
+            {
+                true
+            }
+            _ => return Err(invalid("unsupported core request budget capability")),
+        };
+        if !configurable_request_bytes && config.max_request_bytes != DEFAULT_MAX_REQUEST_BYTES {
+            return Err(invalid(
+                "native helper lacks configurable request bytes; rebuild the helper",
+            ));
+        }
+        let mut expected_ready = handshake.clone();
+        if configurable_request_bytes {
+            expected_ready["max_request_bytes"] = json!(config.max_request_bytes);
         }
         if !handshake["profiles"]
             .as_array()
@@ -115,8 +171,11 @@ impl<O: FamilyObservation> FamilySession<O> {
         ] {
             command.env_remove(key);
         }
+        command.args([session, snapshot, &query, O::FAMILY]);
+        if config.max_request_bytes != DEFAULT_MAX_REQUEST_BYTES {
+            command.args(["--max-request-bytes", &config.max_request_bytes.to_string()]);
+        }
         let mut child = command
-            .args([session, snapshot, &query, O::FAMILY])
             .stdin(Stdio::piped())
             .stdout(Stdio::piped())
             .stderr(
@@ -184,14 +243,16 @@ impl<O: FamilyObservation> FamilySession<O> {
             sequence: 0,
             action_index: 0,
             timeout: config.timeout,
+            max_request_bytes: config.max_request_bytes,
             closed: false,
             last_observation: None,
             identity: json!({"schema":"ariadne.analysis-backend/v1","backend":"bap",
                 "snapshot":snapshot,"query":query,"family":O::FAMILY,"profile":profile,
-                "build":manifest}),
+                "build":manifest,"transport":{"max_request_bytes":config.max_request_bytes,
+                "max_response_bytes":MAX_FRAME}}),
         };
         let ready: Value = serde_json::from_slice(&this.read()?)?;
-        if &ready != handshake {
+        if ready != expected_ready {
             return Err(invalid("core handshake identity mismatch"));
         }
         let response = this.request("initialize", json!({"profile":profile,"input":input}))?;
@@ -224,7 +285,7 @@ impl<O: FamilyObservation> FamilySession<O> {
             "sequence":self.sequence,"operation":operation,"payload":payload});
         let mut bytes = serde_json::to_vec(&request)?;
         bytes.push(b'\n');
-        if bytes.len() > MAX_FRAME {
+        if bytes.len() > self.max_request_bytes {
             return Err(invalid("core request oversized"));
         }
         self.writes
@@ -456,7 +517,11 @@ impl FamilySession<Observation> {
         }
         self.wait_clean()?;
         let decoded = Instant::now();
-        let response: FamilyResponse<Observation> = if self.profile == TARGET_PROFILE {
+        let response: FamilyResponse<Observation> = if self.profile == TARGET_PROFILE
+            || self.profile == GUARDED_PROFILE
+            || self.profile == LEGACY_COMPOSED_PROFILE
+            || self.profile == COMPOSED_PROFILE
+        {
             let compact: FamilyResponse<super::core_protocol::DictionaryObservation> =
                 serde_json::from_slice(&bytes)?;
             if compact.schema != "ariadne.bap-core-dictionary/v1" {

@@ -1,0 +1,119 @@
+[
+  {
+    "name": "format",
+    "command": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 1.0493015999999997
+  },
+  {
+    "name": "loop-fixtures",
+    "command": [
+      "python3",
+      "tests/bap/fixtures/loop-closure/extract.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 1.5526854000000014
+  },
+  {
+    "name": "loop-oracle",
+    "command": [
+      "python3",
+      "tests/bap/fixtures/loop-closure/oracle.py",
+      "--check",
+      "--output",
+      "/loop-work/evidence/validation-20261015T050735/oracle.json"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.09443639999999931
+  },
+  {
+    "name": "loop-tests",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--lib",
+      "bap::target_resolution::loop_tests"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 10.326363206
+  },
+  {
+    "name": "loop-publication-regression",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--lib",
+      "loop_publication_binds_unattempted_seed_and_nonlocal_call_endpoints"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.8864942649999996
+  },
+  {
+    "name": "default-tests",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 34.59161951
+  },
+  {
+    "name": "core-only",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--no-default-features"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 1.007677189000006
+  },
+  {
+    "name": "clippy",
+    "command": [
+      "cargo",
+      "clippy",
+      "--offline",
+      "--locked",
+      "--all-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 12.303686565000007
+  },
+  {
+    "name": "layout",
+    "command": [
+      "python3",
+      "tools/check_rust_layout.py"
+    ],
+    "exit_code": 0,
+    "passed": true,
+    "seconds": 0.5356403420000078
+  }
+]

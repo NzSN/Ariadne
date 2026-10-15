@@ -1,0 +1,25 @@
+    Finished `test` profile [unoptimized] target(s) in 0.98s
+     Running unittests src/lib.rs (target/loop-aware-build/debug/deps/ariadne-ee964763ae0b7713)
+
+running 5 tests
+test bap::target_resolution::loop_tests::loop_rule_declines_changed_original_guard_effects_and_explicit_zero_budgets ... FAILED
+test bap::target_resolution::loop_tests::loop_closure_keeps_legacy_path_prohibition_and_retains_candidates_after_invalidation ... ok
+test bap::target_resolution::loop_tests::loop_closure_rejects_root_bypass_clobbers_and_missing_preexisting_witnesses ... ok
+test bap::target_resolution::loop_tests::captured_pointer_changing_phase_regions_close_with_independent_edge_replay ... ok
+test bap::target_resolution::loop_tests::loop_receipt_tampering_cannot_hide_entrance_edges_domains_or_original_sources ... ok
+
+failures:
+
+---- bap::target_resolution::loop_tests::loop_rule_declines_changed_original_guard_effects_and_explicit_zero_budgets stdout ----
+
+thread 'bap::target_resolution::loop_tests::loop_rule_declines_changed_original_guard_effects_and_explicit_zero_budgets' (1228) panicked at src/bap/../../tests/bap/loop_closure_unit.rs:304:14:
+called `Option::unwrap()` on a `None` value
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    bap::target_resolution::loop_tests::loop_rule_declines_changed_original_guard_effects_and_explicit_zero_budgets
+
+test result: FAILED. 4 passed; 1 failed; 0 ignored; 0 measured; 132 filtered out; finished in 0.13s
+
+error: test failed, to rerun pass `--lib`

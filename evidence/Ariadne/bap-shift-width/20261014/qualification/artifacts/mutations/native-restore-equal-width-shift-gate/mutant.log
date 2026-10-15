@@ -1,0 +1,21 @@
+    Finished `release` profile [optimized] target(s) in 0.05s
+     Running tests/input/bap_core.rs (/home/nzsn/Repos/Ariadne-bap-shift-count-20261014/target/shift-mutations-v2-20261014/native-restore-equal-width-shift-gate/build/release/deps/input_bap_core-5d93c65602a837f6)
+
+running 1 test
+test captured_xorps_shift_width_has_guarded_native_parity_and_rejects_rehashed_nonshift ... FAILED
+
+failures:
+
+---- captured_xorps_shift_width_has_guarded_native_parity_and_rejects_rehashed_nonshift stdout ----
+
+thread 'captured_xorps_shift_width_has_guarded_native_parity_and_rejects_rehashed_nonshift' (7265) panicked at tests/input/bap_core.rs:998:10:
+called `Result::unwrap()` on an `Err` value: Custom { kind: InvalidData, error: "native guarded initialize rejected: guard coverage/stop mismatch" }
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    captured_xorps_shift_width_has_guarded_native_parity_and_rejects_rehashed_nonshift
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 7 filtered out; finished in 0.27s
+
+error: test failed, to rerun pass `--test input_bap_core`

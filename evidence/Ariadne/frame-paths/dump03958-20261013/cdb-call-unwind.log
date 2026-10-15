@@ -1,0 +1,181 @@
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+Deferred                                       SRV*d:\symcache-dump03958-20261009*https://192.168.150.219:4080/symbols
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.000 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.000 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 46
+
+Microsoft (R) Windows Debugger Version 10.0.29617.1000 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+
+Loading Dump File [D:\Services\dump-ledger-runtime\data\vault\dump_03958DA4FCA844A786262A1053\original.dmp]
+User Mini Dump File with Full Memory : Only application data is available
+
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+Deferred                                       SRV*d:\symcache-dump03958-20261009*https://192.168.150.219:4080/symbols
+Symbol search path is: SRV*d:\symcache-dump03958-20261009*https://192.168.150.219:4080/symbols
+Executable search path is: 
+Windows 10 Version 19045 (6466) MP (32 procs) Free x64
+Product: WinNt
+Edition build lab: Windows NT 10.0.19045.6466
+Debug session time: Fri Sep 11 13:55:40.000 2026 (UTC + 8:00)
+System Uptime: 0 days 0:38:22.023
+Process Uptime: 0 days 0:00:41.000
+................................
+*** WARNING: Unable to verify checksum for ntdll.dll
+
+************* Symbol Loading Error Summary **************
+Module name            Error
+ntdll                  The system cannot find the file specified
+
+You can troubleshoot most symbol related issues by turning on symbol loading diagnostics (!sym noisy) and repeating the command that caused symbols to be loaded.
+You should also verify that your symbol search path (.sympath) is correct.
+This dump file has an exception of interest stored in it.
+The stored exception information can be accessed via .ecxr
+(670c.5c74): Access violation - code c0000005 (first/second chance not available)
+
++------------------------------------------------------------------------+
+| This target supports Hardware-enforced Stack Protection. A HW based    |
+| "Shadow Stack" may be available to assist in debugging and analysis.   |
+| See aka.ms/userhsp for more info.                                      |
+|                                                                        |
+| dps @ssp                                                               |
+|                                                                        |
++------------------------------------------------------------------------+
+
+For analysis of this file, run !analyze -v
+ntdll!NtDelayExecution+0x14:
+00007ffb`bfc6dc24 ??              ???
+0:048> !sym noisy
+noisy mode - symbol prompts off
+0:048> .reload /f electron.exe
+DBGHELP: Module is not fully loaded into memory.
+DBGHELP: Searching for symbols using debugger-provided data.
+SYMSRV:  BYINDEX: 0x2
+         d:\symcache-dump03958-20261009*https://192.168.150.219:4080/symbols
+         electron.exe.pdb
+         A7877FFB94F2DB3E4C4C44205044422E1
+SYMSRV:  UNC: d:\symcache-dump03958-20261009\electron.exe.pdb\A7877FFB94F2DB3E4C4C44205044422E1\msfz0\electron.exe.pdb - path not found
+SYMSRV:  PATH: d:\symcache-dump03958-20261009\electron.exe.pdb\A7877FFB94F2DB3E4C4C44205044422E1\electron.exe.pdb
+SYMSRV:  RESULT: 0x00000000
+*** WARNING: Unable to verify checksum for electron.exe
+DBGHELP: electron - private symbols & lines 
+        d:\symcache-dump03958-20261009\electron.exe.pdb\A7877FFB94F2DB3E4C4C44205044422E1\electron.exe.pdb
+0:048> .ecxr
+rax=0000001100000020 rbx=0000000000221bce rcx=00006d8c0d393018
+rdx=00000000ffffffa6 rsi=00006d8c0d393018 rdi=00006d8c17e72c80
+rip=00007ff77443dd6e rsp=000000bea89fa890 rbp=0000000000000000
+ r8=00006d8c0d393018  r9=0000000000000007 r10=000000bea89fd180
+r11=00006d8c0d392de0 r12=000000bea89fac80 r13=000000000000005f
+r14=00000000ffffffff r15=00221bd600221bcf
+iopl=0         nv up ei ng nz ac po cy
+cs=0033  ss=0000  ds=0000  es=0000  fs=0053  gs=002b             efl=00010293
+electron!v8::internal::Scanner::Next+0x40e:
+00007ff7`7443dd6e 80783876        cmp     byte ptr [rax+38h],76h ds:00000011`00000058=??
+0:048> .fnent 00007ff77440410c
+Debugger function entry 00000175`6e450c90 for:
+(00007ff7`744033a0)   electron!v8::internal::ParserBase<v8::internal::PreParser>::ParsePrimaryExpression+0xd6c   |  (00007ff7`7440dec0)   electron!v8::internal::ArrowHeadParsingScope<v8::internal::ParserTypes<v8::internal::PreParser> >::ValidateAndCreateScope
+
+BeginAddress      = 00000000`048433a0
+EndAddress        = 00000000`0484deba
+UnwindInfoAddress = 00000000`0cdbac88
+
+Unwind info at 00007ff7`7c97ac88, 1c bytes
+  version 1, flags 0, prolog 1b, codes c
+  00: offs 1b, unwind op 8, op info 6	UWOP_SAVE_XMM128 FrameOffset: 240 reg: xmm6.
+  02: offs 13, unwind op 1, op info 0	UWOP_ALLOC_LARGE FrameOffset: 258.
+  04: offs c, unwind op 0, op info 3	UWOP_PUSH_NONVOL reg: rbx.
+  05: offs b, unwind op 0, op info 5	UWOP_PUSH_NONVOL reg: rbp.
+  06: offs a, unwind op 0, op info 7	UWOP_PUSH_NONVOL reg: rdi.
+  07: offs 9, unwind op 0, op info 6	UWOP_PUSH_NONVOL reg: rsi.
+  08: offs 8, unwind op 0, op info c	UWOP_PUSH_NONVOL reg: r12.
+  09: offs 6, unwind op 0, op info d	UWOP_PUSH_NONVOL reg: r13.
+  0a: offs 4, unwind op 0, op info e	UWOP_PUSH_NONVOL reg: r14.
+  0b: offs 2, unwind op 0, op info f	UWOP_PUSH_NONVOL reg: r15.
+0:048> u 00007ff7744033a0 L 0x20
+electron!v8::internal::ParserBase<v8::internal::PreParser>::ParsePrimaryExpression:
+00007ff7`744033a0 4157            push    r15
+00007ff7`744033a2 4156            push    r14
+00007ff7`744033a4 4155            push    r13
+00007ff7`744033a6 4154            push    r12
+00007ff7`744033a8 56              push    rsi
+00007ff7`744033a9 57              push    rdi
+00007ff7`744033aa 55              push    rbp
+00007ff7`744033ab 53              push    rbx
+00007ff7`744033ac 4881ec58020000  sub     rsp,258h
+00007ff7`744033b3 0f29b42440020000 movaps  xmmword ptr [rsp+240h],xmm6
+00007ff7`744033bb 4989d4          mov     r12,rdx
+00007ff7`744033be 4889cf          mov     rdi,rcx
+00007ff7`744033c1 488b0578ec5a08  mov     rax,qword ptr [electron!__security_cookie (00007ff7`7c9b2040)]
+00007ff7`744033c8 4831e0          xor     rax,rsp
+00007ff7`744033cb 4889842438020000 mov     qword ptr [rsp+238h],rax
+00007ff7`744033d3 e8f84a0b00      call    electron!v8::internal::GetCurrentStackPosition (00007ff7`744b7ed0)
+00007ff7`744033d8 483b4770        cmp     rax,qword ptr [rdi+70h]
+00007ff7`744033dc 0f82877c0000    jb      electron!v8::internal::ParserBase<v8::internal::PreParser>::ParsePrimaryExpression+0x7cc9 (00007ff7`7440b069)
+00007ff7`744033e2 488db7c0000000  lea     rsi,[rdi+0C0h]
+00007ff7`744033e9 488b8fc0000000  mov     rcx,qword ptr [rdi+0C0h]
+00007ff7`744033f0 488b4118        mov     rax,qword ptr [rcx+18h]
+00007ff7`744033f4 8b18            mov     ebx,dword ptr [rax]
+00007ff7`744033f6 440fb67038      movzx   r14d,byte ptr [rax+38h]
+00007ff7`744033fb 418d46a1        lea     eax,[r14-5Fh]
+00007ff7`744033ff 3c0c            cmp     al,0Ch
+00007ff7`74403401 0f87f3010000    ja      electron!v8::internal::ParserBase<v8::internal::PreParser>::ParsePrimaryExpression+0x25a (00007ff7`744035fa)
+00007ff7`74403407 e854a50300      call    electron!v8::internal::Scanner::Next (00007ff7`7443d960)
+00007ff7`7440340c 4c8b06          mov     r8,qword ptr [rsi]
+00007ff7`7440340f 40b501          mov     bpl,1
+00007ff7`74403412 4180fe65        cmp     r14b,65h
+00007ff7`74403416 0f84fc690000    je      electron!v8::internal::ParserBase<v8::internal::PreParser>::ParsePrimaryExpression+0x6a78 (00007ff7`74409e18)
+00007ff7`7440341c 31c0            xor     eax,eax
+0:048> ub 00007ff77440410d L 0x8
+electron!v8::internal::`anonymous namespace'::GetIdentifierHelper+0x43 [inlined in electron!v8::internal::ParserBase<v8::internal::PreParser>::ParsePrimaryExpression+0xd4c]:
+00007ff7`744040ec 0f84fa4d0000    je      electron!v8::internal::ParserBase<v8::internal::PreParser>::ParsePrimaryExpression+0x5b4c (00007ff7`74408eec)
+00007ff7`744040f2 b101            mov     cl,1
+00007ff7`744040f4 eb48            jmp     electron!v8::internal::ParserBase<v8::internal::PreParser>::ParsePrimaryExpression+0xd9e (00007ff7`7440413e)
+00007ff7`744040f6 83f803          cmp     eax,3
+00007ff7`744040f9 0f84a2550000    je      electron!v8::internal::ParserBase<v8::internal::PreParser>::ParsePrimaryExpression+0x6301 (00007ff7`744096a1)
+00007ff7`744040ff 83f80a          cmp     eax,0Ah
+00007ff7`74404102 0f847e5a0000    je      electron!v8::internal::ParserBase<v8::internal::PreParser>::ParsePrimaryExpression+0x67e6 (00007ff7`74409b86)
+00007ff7`74404108 e853980300      call    electron!v8::internal::Scanner::Next (00007ff7`7443d960)
+0:048> u 00007ff774404108 L 0x3
+electron!v8::internal::ParserBase<v8::internal::PreParser>::Next [inlined in electron!v8::internal::ParserBase<v8::internal::PreParser>::ParsePrimaryExpression+0xd68]:
+00007ff7`74404108 e853980300      call    electron!v8::internal::Scanner::Next (00007ff7`7443d960)
+00007ff7`7440410d 3c78            cmp     al,78h
+00007ff7`7440410f 0f83cb6f0000    jae     electron!v8::internal::ParserBase<v8::internal::PreParser>::ParsePrimaryExpression+0x7d40 (00007ff7`7440b0e0)
+0:048> dq 000000bea89fa918 L 0x6
+000000be`a89fa918  00000000`ffffffff 00221bd6`00221bcf
+000000be`a89fa928  00007ff7`7440410d 00006d8c`17e72d40
+000000be`a89fa938  0000119f`d47f6732 00000000`00000000
+0:048> q
+quit:
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2606.22001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2606.22001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2606.22001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2606.22001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2606.22001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2606.22001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2606.22001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2606.22001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2606.22001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2606.22001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2606.22001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\winrt.natvis'

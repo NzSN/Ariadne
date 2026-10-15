@@ -1,0 +1,29 @@
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-bap-shift-count-20261014)
+    Finished `test` profile [unoptimized] target(s) in 40.30s
+     Running unittests src/lib.rs (target/shift-build/debug/deps/ariadne-ee964763ae0b7713)
+
+running 11 tests
+test bap::shift_projection_tests::mixed_width_shift_adds_no_scalar_refinement_or_target_precision ... ok
+test bap::shift_projection_tests::independent_count_width_is_valid_but_nonshift_width_mismatches_stay_invalid ... ok
+test bap::shift_projection_tests::signed_spelling_does_not_turn_a_count_bitvector_into_a_negative_count ... ok
+test bap::shift_projection_tests::equal_abstract_metadata_does_not_prove_computed_values_equal ... ok
+test bap::shift_projection_tests::zero_count_preserves_source_bit_identity_even_when_the_count_is_wide ... ok
+test bap::shift_projection_tests::a_known_oversized_count_erases_data_origins_without_modulo_reduction ... ok
+
+thread 'bap::shift_projection_tests::unknown_shift_counts_and_distinct_shifts_keep_their_possible_origins' (1148) panicked at src/bap/../../tests/bap/shift_projection_unit.rs:43:70:
+called `Result::unwrap()` on an `Err` value: Failure { kind: UnsupportedData, reason: "unsupported typed BIL data capability" }
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test bap::shift_projection_tests::captured_xorps_retains_legacy_upper_half_and_coarse_old_origins ... ok
+test bap::shift_projection_tests::unknown_shift_counts_and_distinct_shifts_keep_their_possible_origins ... FAILED
+test bap::shift_projection_tests::admitted_rsp_shifts_stay_top_in_the_guard_numerical_domain ... ok
+test bap::shift_projection_tests::all_value_count_width_pairs_return_the_left_type ... ok
+test bap::shift_projection_tests::full_unsigned_counts_and_boundary_fills_match_the_independent_integer_oracle ... ok
+
+failures:
+
+failures:
+    bap::shift_projection_tests::unknown_shift_counts_and_distinct_shifts_keep_their_possible_origins
+
+test result: FAILED. 10 passed; 1 failed; 0 ignored; 0 measured; 92 filtered out; finished in 22.26s
+
+error: test failed, to rerun pass `--lib`

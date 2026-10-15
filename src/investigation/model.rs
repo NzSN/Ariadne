@@ -256,6 +256,25 @@ pub struct EvidenceRequirement {
 #[serde(deny_unknown_fields)]
 pub struct Explanation {
     pub schema: String,
+    /// Paired v3 composition proof; omitted from earlier explanation schemas.
+    #[cfg(feature = "bap")]
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub composition: Option<crate::bap::composition::Report>,
+    #[cfg(feature = "bap")]
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub target_resolution: Option<crate::bap::target_resolution::Report>,
+    /// Complete original capture domain for paired offline replay.
+    #[cfg(feature = "bap")]
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub guard_sources: Option<Vec<SiteEvidence>>,
+    /// Versioned v2 only; omitted from historical v1 explanations.
+    #[cfg(feature = "bap")]
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub guard_admission: Option<crate::bap::guard_admission::Report>,
+    /// Canonical complete normalized query retained for v2 proof replay.
+    #[cfg(feature = "bap")]
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub guard_request: Option<serde_json::Value>,
     pub identity: Identity,
     pub scope_id: String,
     pub question: FaultAddressQuestion,

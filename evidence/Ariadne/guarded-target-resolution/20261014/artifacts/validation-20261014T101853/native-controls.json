@@ -1,0 +1,104 @@
+[
+  {
+    "case": "original",
+    "passed": true,
+    "error": null,
+    "returncode": 0
+  },
+  {
+    "case": "unsigned-resolver-budgets",
+    "passed": true,
+    "error": null,
+    "returncode": 0
+  },
+  {
+    "case": "scalar-output-forgery",
+    "passed": true,
+    "error": {
+      "kind": "semantic",
+      "message": "resolver transfer BIL replay"
+    },
+    "returncode": 0
+  },
+  {
+    "case": "unknown-bil-field",
+    "passed": true,
+    "error": {
+      "kind": "semantic",
+      "message": "unexpected/missing/duplicate fields"
+    },
+    "returncode": 0
+  },
+  {
+    "case": "original-control-change",
+    "passed": true,
+    "error": {
+      "kind": "semantic",
+      "message": "composition unauthorized control change"
+    },
+    "returncode": 0
+  },
+  {
+    "case": "raw-indirect-invented-targets",
+    "passed": true,
+    "error": {
+      "kind": "semantic",
+      "message": "composition raw indirect invented targets"
+    },
+    "returncode": 0
+  },
+  {
+    "case": "register-jump-direct-relabel",
+    "passed": true,
+    "error": {
+      "kind": "semantic",
+      "message": "composition direct source targets mismatch"
+    },
+    "returncode": 0
+  },
+  {
+    "case": "pending-memory-effect",
+    "passed": true,
+    "error": {
+      "kind": "semantic",
+      "message": "composition pending continuation committed effects"
+    },
+    "returncode": 0
+  },
+  {
+    "case": "target-expression-forgery",
+    "passed": true,
+    "error": {
+      "kind": "semantic",
+      "message": "resolver path semantic replay"
+    },
+    "returncode": 0
+  },
+  {
+    "case": "stale-epoch",
+    "passed": true,
+    "error": {
+      "kind": "semantic",
+      "message": "guard capture proof binding"
+    },
+    "returncode": 0
+  },
+  {
+    "case": "missing-original-source",
+    "passed": true,
+    "error": {
+      "kind": "semantic",
+      "message": "composition original control totality"
+    },
+    "returncode": 0
+  },
+  {
+    "case": "session-query-swap",
+    "passed": true,
+    "error": {
+      "kind": "semantic",
+      "message": "composition session query identity"
+    },
+    "returncode": 0
+  }
+]

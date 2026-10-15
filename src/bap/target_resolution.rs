@@ -8,6 +8,19 @@ use std::collections::{BTreeMap, BTreeSet};
 use std::time::Instant;
 
 pub const PROFILE: &str = "captured-indirect-targets/v1";
+pub const LEGACY_LOCAL_PROFILE: &str = "captured-local-indirect-targets/v1";
+pub const LOCAL_PROFILE: &str = "captured-local-indirect-targets/v2";
+#[path = "target_resolution/loop_closure.rs"]
+mod loop_closure;
+pub use loop_closure::{CoverageEvidence, LoopClosureReceipt};
+
+pub(crate) fn loop_engine_identity() -> String {
+    let resolver = crate::reports::sha256(include_bytes!("target_resolution.rs"));
+    let closure = crate::reports::sha256(include_bytes!("target_resolution/loop_closure.rs"));
+    crate::reports::sha256(
+        format!("ariadne.loop-target-engine/v1\n{resolver}\n{closure}\n").as_bytes(),
+    )
+}
 pub const MEMORY_PREMISE: &str = "FrozenCapturedControlData";
 const BANKS: [&str; 16] = [
     "RAX", "RCX", "RDX", "RBX", "RSP", "RBP", "RSI", "RDI", "R8", "R9", "R10", "R11", "R12", "R13",
@@ -43,20 +56,19 @@ impl Default for Limits {
     }
 }
 impl Limits {
-    /// The first qualified profile permits tightening, not unbounded increases.
+    /// Caller-selected finite budgets are independent of their defaults.
     pub fn validate(&self) -> Result<(), Error> {
-        let d = Self::default();
-        if self.max_entries > d.max_entries
-            || self.max_targets > d.max_targets
-            || self.max_read_bytes > d.max_read_bytes
-            || self.max_evidence_bytes > d.max_evidence_bytes
-            || self.max_values > d.max_values
-            || self.max_steps > d.max_steps
-            || self.max_path_steps > d.max_path_steps
-            || self.max_rounds > d.max_rounds
-            || self.max_elapsed_ms > d.max_elapsed_ms
-        {
-            return Err(invalid("target-resolution profile limit exceeded"));
+        for n in [
+            self.max_entries,
+            self.max_targets,
+            self.max_read_bytes,
+            self.max_evidence_bytes,
+            self.max_values,
+            self.max_steps,
+            self.max_path_steps,
+            self.max_rounds,
+        ] {
+            u64::try_from(n).map_err(|_| invalid("resolver unsigned budget representation"))?;
         }
         Ok(())
     }
@@ -180,6 +192,12 @@ impl Term {
             && width == inner.width
         {
             return *inner.clone();
+        }
+        if op == 3
+            && let TermKind::Cast { op: 3, arg: inner } = &arg.kind
+            && width >= arg.width
+        {
+            return Self::cast(3, width, *inner.clone());
         }
         if let Some(n) = arg.number() {
             let value = match op {
@@ -373,7 +391,7 @@ fn lift_expr(e: &Expr, env: &BTreeMap<String, Term>, site: u64, depth: usize) ->
             Term::binary(*op, child(lhs), child(rhs))
         }
         Expr::Unop { op, arg } if matches!(op, 0 | 1) => Term::unary(*op, child(arg)),
-        Expr::Load { width, addr, .. } if matches!(width, 32 | 64) => Term {
+        Expr::Load { width, addr, .. } if matches!(width, 8 | 16 | 32 | 64) => Term {
             width: *width as u8,
             kind: TermKind::Load {
                 site: hex(site),
@@ -398,6 +416,11 @@ pub(crate) struct Transfer {
     outputs: BTreeMap<String, Term>,
     jump: Option<Term>,
     condition: Option<Term>,
+}
+impl Transfer {
+    pub(crate) fn is_scalar_identity(&self) -> bool {
+        self.outputs.is_empty() && self.jump.is_none() && self.condition.is_none()
+    }
 }
 pub(crate) fn extract(statements: &[Stmt], site: u64, bytes: &[u8]) -> Result<Transfer, Error> {
     let mut env = BTreeMap::new();
@@ -468,6 +491,9 @@ pub struct Entry {
 #[serde(deny_unknown_fields)]
 pub struct PathReceipt {
     pub root: String,
+    /// Unconstrained register state at a bounded local cut, never a new root.
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub frontier: bool,
     pub reverse_path: Vec<String>,
     pub reverse_edges: Vec<bool>,
     pub form: String,
@@ -486,7 +512,21 @@ pub struct Resolution {
     pub complete: bool,
     pub paths: Vec<PathReceipt>,
     pub unresolved: BTreeSet<String>,
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "deserialize_coverage"
+    )]
+    pub coverage: Option<CoverageEvidence>,
 }
+// Absence preserves the frozen legacy wire. A present field must contain a
+// coverage variant; JSON null is not an alternate spelling of omission.
+fn deserialize_coverage<'de, D: serde::Deserializer<'de>>(
+    deserializer: D,
+) -> Result<Option<CoverageEvidence>, D::Error> {
+    CoverageEvidence::deserialize(deserializer).map(Some)
+}
+
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Report {
@@ -502,7 +542,7 @@ pub struct Report {
     pub(crate) transfers: Vec<Transfer>,
     pub stop: Option<String>,
 }
-pub(crate) fn graph_digest(
+pub(crate) fn legacy_graph_digest(
     instructions: &BTreeMap<Address, Instruction>,
     roots: &AddressSet,
 ) -> Result<String, Error> {
@@ -522,6 +562,46 @@ pub(crate) fn graph_digest(
         .collect();
     Ok(crate::reports::sha256(&serde_json::to_vec(&(roots, rows))?))
 }
+pub(crate) fn graph_digest(
+    instructions: &BTreeMap<Address, Instruction>,
+    roots: &AddressSet,
+) -> Result<String, Error> {
+    let legacy = legacy_graph_digest(instructions, roots)?;
+    let completeness: Vec<_> = instructions
+        .iter()
+        .map(|(a, i)| (hex(*a), i.complete))
+        .collect();
+    Ok(crate::reports::sha256(&serde_json::to_vec(&(
+        legacy,
+        completeness,
+    ))?))
+}
+pub(crate) fn report_graph_digest(
+    report: &Report,
+    instructions: &BTreeMap<Address, Instruction>,
+    roots: &AddressSet,
+) -> Result<String, Error> {
+    if report.schema == "ariadne.indirect-target-resolution/v3" {
+        graph_digest(instructions, roots)
+    } else {
+        legacy_graph_digest(instructions, roots)
+    }
+}
+pub(crate) fn invalidate_loop_coverage(report: &mut Report, reason: &str) {
+    for row in &mut report.resolutions {
+        if matches!(
+            row.coverage,
+            Some(CoverageEvidence::InductiveDispatch { .. })
+        ) {
+            row.coverage = Some(CoverageEvidence::ExistingPrefixTree {
+                path_receipt_refs: (0..row.paths.len()).collect(),
+            });
+            row.complete = false;
+            row.unresolved.insert(reason.to_owned());
+        }
+    }
+}
+
 fn successors(i: &Instruction) -> Vec<(u64, bool)> {
     let mut out = Vec::new();
     if matches!(
@@ -546,6 +626,9 @@ fn values(t: &Term, cap: usize, depth: usize) -> Option<BTreeSet<u64>> {
         return Some([n].into());
     }
     match &t.kind {
+        TermKind::Load { .. } if t.width <= 16 && (1usize << t.width) <= cap => {
+            Some((0..(1u64 << t.width)).collect())
+        }
         TermKind::Unary { op, arg } => Some(
             values(arg, cap, depth + 1)?
                 .into_iter()
@@ -623,6 +706,11 @@ fn evaluate(t: &Term, index: &Term, value: u64, depth: usize) -> Option<u64> {
         _ => None,
     }
 }
+fn same_unsigned_index(term: &Term, index: &Term) -> bool {
+    term == index
+        || matches!(&term.kind,
+        TermKind::Cast { op: 3, arg } if term.width >= arg.width && same_unsigned_index(arg, index))
+}
 fn range(t: &Term, taken: bool, index: &Term) -> (u64, u64) {
     let full = (0, mask(index.width));
     match &t.kind {
@@ -637,7 +725,7 @@ fn range(t: &Term, taken: bool, index: &Term) -> (u64, u64) {
             }
         }
         TermKind::Binary { op, left, right }
-            if left.as_ref() == index && right.number().is_some() =>
+            if same_unsigned_index(left, index) && right.number().is_some() =>
         {
             let k = right.number().unwrap();
             let max = mask(index.width);
@@ -653,7 +741,7 @@ fn range(t: &Term, taken: bool, index: &Term) -> (u64, u64) {
             }
         }
         TermKind::Binary { op: 5, left, right }
-            if right.as_ref() == index && left.number().is_some() =>
+            if same_unsigned_index(right, index) && left.number().is_some() =>
         {
             range(
                 &Term::binary(5, *right.clone(), *left.clone()),
@@ -727,6 +815,185 @@ fn has_unknown(t: &Term) -> bool {
         _ => false,
     }
 }
+fn bounded_form(term: &Term, guards: &[Guard], limits: &Limits) -> bool {
+    if let Some((_, index)) = relative(term) {
+        if values(&index, limits.max_values, 0).is_some() {
+            return true;
+        }
+        let (low, high) = guards.iter().fold((0, mask(index.width)), |a, g| {
+            let b = range(&g.expression, g.taken, &index);
+            (a.0.max(b.0), a.1.min(b.1))
+        });
+        high.checked_sub(low)
+            .is_some_and(|n| n < limits.max_entries as u64)
+    } else {
+        matches!(&term.kind, TermKind::Load { address, .. }
+            if term.width == 64 && address.number().is_some())
+    }
+}
+/// Relational subjects retain definition/read identity; Unsupported Unknown
+/// is never a common symbolic value and cannot justify a contradiction.
+fn guard_subjects(term: &Term, depth: usize, out: &mut Vec<Term>) {
+    if depth > 32 {
+        return;
+    }
+    match &term.kind {
+        TermKind::Binary { op, left, right } => {
+            if *op <= 5 {
+                for subject in [left.as_ref(), right.as_ref()] {
+                    if subject.number().is_none() && !has_unknown(subject) && !out.contains(subject)
+                    {
+                        out.push(subject.clone());
+                    }
+                }
+            }
+            guard_subjects(left, depth + 1, out);
+            guard_subjects(right, depth + 1, out);
+        }
+        TermKind::Unary { arg, .. } | TermKind::Cast { arg, .. } => {
+            guard_subjects(arg, depth + 1, out)
+        }
+        TermKind::Load { address, .. } => guard_subjects(address, depth + 1, out),
+        _ => {}
+    }
+}
+fn guards_infeasible(guards: &[Guard], limits: &Limits) -> bool {
+    let mut subjects = Vec::new();
+    for guard in guards {
+        guard_subjects(&guard.expression, 0, &mut subjects);
+    }
+    subjects.iter().any(|subject| {
+        let (low, high) = guards
+            .iter()
+            .fold((0, mask(subject.width)), |(low, high), guard| {
+                let (a, b) = range(&guard.expression, guard.taken, subject);
+                (low.max(a), high.min(b))
+            });
+        low > high
+            || high.checked_sub(low).is_some_and(|distance| {
+                distance < limits.max_values as u64
+                    && (low..=high).all(|value| {
+                        guards.iter().any(|guard| {
+                            evaluate(&guard.expression, subject, value, 0)
+                                .is_some_and(|v| (v != 0) != guard.taken)
+                        })
+                    })
+            })
+    })
+}
+fn memory_write_expr(expr: &Expr) -> bool {
+    match expr {
+        Expr::Store { .. } => true,
+        Expr::Load { mem, addr, .. }
+        | Expr::Binop {
+            lhs: mem,
+            rhs: addr,
+            ..
+        }
+        | Expr::Concat {
+            lhs: mem,
+            rhs: addr,
+        } => memory_write_expr(mem) || memory_write_expr(addr),
+        Expr::Unop { arg, .. } | Expr::Cast { arg, .. } | Expr::Extract { arg, .. } => {
+            memory_write_expr(arg)
+        }
+        Expr::Ite { condition, yes, no } => {
+            memory_write_expr(condition) || memory_write_expr(yes) || memory_write_expr(no)
+        }
+        Expr::Let { value, body, .. } => memory_write_expr(value) || memory_write_expr(body),
+        _ => false,
+    }
+}
+fn memory_write_bil(statements: &[Stmt]) -> bool {
+    statements.iter().any(|stmt| match stmt {
+        Stmt::Move { var, value } => var.type_ == "mem" || memory_write_expr(value),
+        Stmt::Jump { target } => memory_write_expr(target),
+        Stmt::If { condition, yes, no } => {
+            memory_write_expr(condition) || memory_write_bil(yes) || memory_write_bil(no)
+        }
+        _ => true,
+    })
+}
+fn writes_address_bil(statements: &[Stmt], keys: &BTreeSet<String>) -> bool {
+    statements.iter().any(|stmt| match stmt {
+        Stmt::Move { var, .. } => !var.virtual_ && keys.contains(&var.key()),
+        Stmt::If { yes, no, .. } => writes_address_bil(yes, keys) || writes_address_bil(no, keys),
+        _ => false,
+    })
+}
+fn address_inputs(term: &Term, inside: bool, out: &mut BTreeSet<String>) {
+    match &term.kind {
+        TermKind::Input { key } if inside => {
+            out.insert(key.clone());
+        }
+        TermKind::Load { address, .. } => address_inputs(address, true, out),
+        TermKind::Binary { left, right, .. } => {
+            address_inputs(left, inside, out);
+            address_inputs(right, inside, out);
+        }
+        TermKind::Unary { arg, .. } | TermKind::Cast { arg, .. } => {
+            address_inputs(arg, inside, out)
+        }
+        _ => {}
+    }
+}
+/// At most one observed simple cycle is unfolded, preserving its edge word.
+/// Only the first repeated edge may differ (exit versus closing cycle edge).
+fn cycle_window(path: &[(u64, bool)]) -> Option<(usize, usize)> {
+    let mut seen: BTreeMap<u64, usize> = BTreeMap::new();
+    let mut cycle: Option<(usize, usize)> = None;
+    for (at, &(site, taken)) in path.iter().enumerate() {
+        if let Some((first, repeated)) = cycle {
+            let relative = at - repeated;
+            if relative >= repeated - first
+                || path[first + relative].0 != site
+                || (relative > 0 && path[first + relative].1 != taken)
+            {
+                return None;
+            }
+        } else if let Some(&first) = seen.get(&site) {
+            cycle = Some((first, at));
+        } else {
+            seen.insert(site, at);
+        }
+    }
+    cycle
+}
+fn stable_cycle(
+    path: &[(u64, bool)],
+    instructions: &BTreeMap<u64, Instruction>,
+    transfers: &BTreeMap<u64, Transfer>,
+    term: &Term,
+    guards: &[Guard],
+) -> bool {
+    let Some((first, repeated)) = cycle_window(path) else {
+        return false;
+    };
+    let mut keys = BTreeSet::new();
+    address_inputs(term, false, &mut keys);
+    for guard in guards {
+        address_inputs(&guard.expression, false, &mut keys);
+    }
+    path[first..repeated].iter().all(|(site, _)| {
+        let instruction = &instructions[site];
+        let Some(transfer) = transfers.get(site) else {
+            return false;
+        };
+        let Ok(bil) = serde_json::from_str::<Vec<Stmt>>(&transfer.ast) else {
+            return false;
+        };
+        instruction.kind != InstructionKind::Call
+            && !instruction.may_defs.contains("memory:any")
+            && !memory_write_bil(&bil)
+            && !writes_address_bil(&bil, &keys)
+            && !keys.iter().any(|key| clobbered(key, &instruction.may_defs))
+    })
+}
+fn has_repeat(path: &[(u64, bool)]) -> bool {
+    let mut seen = BTreeSet::new();
+    path.iter().any(|(site, _)| !seen.insert(*site))
+}
+
 fn decode_bytes(s: &str) -> Option<Vec<u8>> {
     if s.len() % 2 != 0
         || !s
@@ -748,6 +1015,54 @@ pub(crate) fn resolve<F>(
     roots: &AddressSet,
     transfers: &BTreeMap<u64, Transfer>,
     limits: &Limits,
+    read: F,
+) -> Result<Report, Error>
+where
+    F: FnMut(u64, usize) -> Result<DataRead, Error>,
+{
+    resolve_inner(
+        snapshot,
+        artifact,
+        instructions,
+        roots,
+        transfers,
+        limits,
+        false,
+        read,
+    )
+}
+pub(crate) fn resolve_candidate<F>(
+    snapshot: &str,
+    artifact: &str,
+    instructions: &BTreeMap<u64, Instruction>,
+    roots: &AddressSet,
+    transfers: &BTreeMap<u64, Transfer>,
+    limits: &Limits,
+    read: F,
+) -> Result<Report, Error>
+where
+    F: FnMut(u64, usize) -> Result<DataRead, Error>,
+{
+    resolve_inner(
+        snapshot,
+        artifact,
+        instructions,
+        roots,
+        transfers,
+        limits,
+        true,
+        read,
+    )
+}
+#[allow(clippy::too_many_arguments)]
+fn resolve_inner<F>(
+    snapshot: &str,
+    artifact: &str,
+    instructions: &BTreeMap<u64, Instruction>,
+    roots: &AddressSet,
+    transfers: &BTreeMap<u64, Transfer>,
+    limits: &Limits,
+    local: bool,
     mut read: F,
 ) -> Result<Report, Error>
 where
@@ -778,6 +1093,9 @@ where
             complete: true,
             paths: Vec::new(),
             unresolved: BTreeSet::new(),
+            coverage: local.then(|| CoverageEvidence::ExistingPrefixTree {
+                path_receipt_refs: Vec::new(),
+            }),
         };
         let Some(jump) = transfers.get(&site).and_then(|t| t.jump.clone()) else {
             result.complete = false;
@@ -802,9 +1120,32 @@ where
                 continue;
             }
             steps -= 1;
-            if roots.contains(&cursor) {
+            if local
+                && !roots.contains(&cursor)
+                && guards_infeasible(&guards, limits)
+                && (!has_repeat(&path)
+                    || stable_cycle(&path, instructions, transfers, &term, &guards))
+            {
+                result.paths.push(PathReceipt {
+                    root: hex(cursor),
+                    frontier: true,
+                    reverse_path: path.iter().map(|(v, _)| hex(*v)).collect(),
+                    reverse_edges: path.iter().map(|(_, v)| *v).collect(),
+                    form: "infeasible".into(),
+                    base: hex(0),
+                    indices: Vec::new(),
+                    entries: Vec::new(),
+                    expression: term,
+                    guards,
+                });
+                continue;
+            }
+            let frontier =
+                local && !roots.contains(&cursor) && bounded_form(&term, &guards, limits);
+            if roots.contains(&cursor) || frontier {
                 let mut certificate = PathReceipt {
                     root: hex(cursor),
+                    frontier,
                     reverse_path: path.iter().map(|(v, _)| hex(*v)).collect(),
                     reverse_edges: path.iter().map(|(_, v)| *v).collect(),
                     form: String::new(),
@@ -875,6 +1216,7 @@ where
                                     break;
                                 }
                                 let r = read(slot, width)?;
+                                validate_data_read(&r)?;
                                 if r.address != hex(slot) || r.requested != width {
                                     return Err(invalid("resolver captured read identity"));
                                 }
@@ -928,6 +1270,12 @@ where
                         .unresolved
                         .insert("unsupported-or-unknown-target".into());
                 }
+                if frontier {
+                    // This witness quantifies over arbitrary incoming registers
+                    // at the cut. Its local branch constraints already bound
+                    // the table; older definitions cannot narrow the claim.
+                    continue;
+                }
             }
             let incoming = predecessors.get(&cursor).cloned().unwrap_or_default();
             if incoming.is_empty() && !roots.contains(&cursor) {
@@ -935,35 +1283,30 @@ where
                 result.unresolved.insert("unanchored-incoming-state".into());
             }
             for (parent, taken) in incoming {
-                if path.iter().any(|(v, _)| *v == parent) || parent == site {
+                let mut path = path.clone();
+                path.push((parent, taken));
+                if parent == site
+                    || (has_repeat(&path)
+                        && (!local
+                            || !stable_cycle(&path, instructions, transfers, &term, &guards)))
+                {
                     result.complete = false;
                     result.unresolved.insert("cyclic-incoming-state".into());
                     continue;
                 }
-                let mut path = path.clone();
-                path.push((parent, taken));
                 let instruction = &instructions[&parent];
                 let transfer = transfers.get(&parent);
                 if transfer.is_some() {
                     used.insert(parent);
                 }
                 let outputs = transfer.map(|v| &v.outputs).cloned().unwrap_or_default();
-                let mut guards = guards.clone();
-                if instruction.kind == InstructionKind::Conditional {
-                    if let Some(condition) = transfer.and_then(|v| v.condition.clone()) {
-                        guards.push(Guard {
-                            expression: condition,
-                            taken,
-                        });
-                    }
-                }
                 let Some(next) = term.rewrite(&outputs, &instruction.may_defs, &mut steps) else {
                     result.complete = false;
                     result.unresolved.insert("expression-work-limit".into());
                     continue;
                 };
                 let rewritten: Option<Vec<_>> = guards
-                    .into_iter()
+                    .iter()
                     .map(|g| {
                         g.expression
                             .rewrite(&outputs, &instruction.may_defs, &mut steps)
@@ -973,7 +1316,19 @@ where
                             })
                     })
                     .collect();
-                if let Some(guards) = rewritten {
+                if let Some(mut guards) = rewritten {
+                    // extract() has already expanded this instruction's
+                    // condition into its pre-state. Only downstream guards
+                    // cross the write; applying outputs here again would
+                    // decrement a LOOP-style counter twice.
+                    if instruction.kind == InstructionKind::Conditional
+                        && let Some(condition) = transfer.and_then(|v| v.condition.clone())
+                    {
+                        guards.push(Guard {
+                            expression: condition,
+                            taken,
+                        });
+                    }
                     if pending.len() >= limits.max_values {
                         result.complete = false;
                         result.unresolved.insert("resolution-frontier-limit".into());
@@ -990,18 +1345,62 @@ where
             result.complete = false;
         }
         result.targets = targets.into_iter().map(hex).collect();
+        if local {
+            result.coverage = Some(CoverageEvidence::ExistingPrefixTree {
+                path_receipt_refs: (0..result.paths.len()).collect(),
+            });
+            if result.unresolved.contains("cyclic-incoming-state") {
+                match loop_closure::propose(
+                    snapshot,
+                    artifact,
+                    instructions,
+                    roots,
+                    transfers,
+                    limits,
+                    &mut steps,
+                    &start,
+                    &mut read,
+                    &mut reads,
+                    &mut read_bytes,
+                    site,
+                    &result,
+                )? {
+                    loop_closure::Attempt::Candidate(receipt) => {
+                        for source in &receipt.source_refs {
+                            used.insert(address(&source.site)?);
+                        }
+                        result.coverage = Some(CoverageEvidence::InductiveDispatch { receipt });
+                        result.unresolved.clear();
+                        result.complete = true;
+                    }
+                    loop_closure::Attempt::Partial(reason) => {
+                        result.unresolved.insert(reason);
+                    }
+                    loop_closure::Attempt::NotApplicable => {}
+                }
+            }
+        }
         if !result.unresolved.is_empty() {
             result.complete = false;
         }
         results.push(result);
     }
     let mut report = Report {
-        schema: "ariadne.indirect-target-resolution/v1".into(),
-        profile: PROFILE.into(),
+        schema: if local {
+            "ariadne.indirect-target-resolution/v3"
+        } else {
+            "ariadne.indirect-target-resolution/v1"
+        }
+        .into(),
+        profile: if local { LOCAL_PROFILE } else { PROFILE }.into(),
         memory_premise: MEMORY_PREMISE.into(),
         snapshot: snapshot.into(),
         artifact_sha256: artifact.into(),
-        graph_sha256: graph_digest(instructions, roots)?,
+        graph_sha256: if local {
+            graph_digest(instructions, roots)?
+        } else {
+            legacy_graph_digest(instructions, roots)?
+        },
         limits: limits.clone(),
         resolutions: results,
         data_reads: reads.into_values().collect(),
@@ -1046,6 +1445,50 @@ pub(crate) fn within_evidence_budget(report: &Report) -> Result<bool, Error> {
 struct CoveragePrefix {
     children: BTreeMap<(u64, bool), usize>,
     terminal: bool,
+    frontier: bool,
+}
+
+/// Validate the captured-read wire contract without reopening its artifact.
+/// A full prefix cannot hide a conflict or a hole behind nonempty metadata.
+fn validate_data_read(read: &DataRead) -> Result<(), Error> {
+    let start = address(&read.address)?;
+    let bytes = decode_bytes(&read.bytes_hex)
+        .ok_or_else(|| invalid("resolver captured read byte encoding"))?;
+    if !matches!(read.requested, 4 | 8) || bytes.len() > read.requested {
+        return Err(invalid("resolver captured read width or prefix length"));
+    }
+    if bytes.len() != read.requested {
+        // An explicit partial prefix cannot support a table entry. Preserve
+        // its holes/conflicts rather than claiming complete captured bytes.
+        return Ok(());
+    }
+    if read.stop != "RequestedLength" || !read.conflict_sources.is_empty() {
+        return Err(invalid("resolver ambiguous full captured read"));
+    }
+    let mut covered = 0usize;
+    for span in &read.spans {
+        let low = address(&span.address)?;
+        if span.length == 0 || span.contributors.is_empty() {
+            return Err(invalid("resolver captured read contributor coverage"));
+        }
+        let current = start
+            .checked_add(covered as u64)
+            .ok_or_else(|| invalid("resolver captured read address overflow"))?;
+        if low > current {
+            return Err(invalid("resolver captured read span hole"));
+        }
+        let delta = current - low;
+        let length = u64::try_from(span.length)
+            .map_err(|_| invalid("resolver captured span representation"))?;
+        if delta < length {
+            covered += usize::try_from((length - delta).min((read.requested - covered) as u64))
+                .map_err(|_| invalid("resolver captured span representation"))?;
+        }
+    }
+    if covered != read.requested {
+        return Err(invalid("resolver incomplete captured read coverage"));
+    }
+    Ok(())
 }
 
 pub(crate) fn validate(
@@ -1053,10 +1496,15 @@ pub(crate) fn validate(
     instructions: &BTreeMap<u64, Instruction>,
     roots: &AddressSet,
 ) -> Result<(), Error> {
-    if report.schema != "ariadne.indirect-target-resolution/v1"
-        || report.profile != PROFILE
+    let new_local =
+        report.schema == "ariadne.indirect-target-resolution/v3" && report.profile == LOCAL_PROFILE;
+    let legacy_local = report.schema == "ariadne.indirect-target-resolution/v2"
+        && report.profile == LEGACY_LOCAL_PROFILE;
+    let local = new_local || legacy_local;
+    if !(local
+        || (report.schema == "ariadne.indirect-target-resolution/v1" && report.profile == PROFILE))
         || report.memory_premise != MEMORY_PREMISE
-        || report.graph_sha256 != graph_digest(instructions, roots)?
+        || report.graph_sha256 != report_graph_digest(report, instructions, roots)?
     {
         return Err(invalid("resolver profile or graph binding"));
     }
@@ -1101,6 +1549,7 @@ pub(crate) fn validate(
     let mut reads = BTreeMap::new();
     let mut read_bytes = 0usize;
     for r in &report.data_reads {
+        validate_data_read(r)?;
         let key = (address(&r.address)?, r.requested);
         if reads.insert(key, r.clone()).is_some() {
             return Err(invalid("duplicate resolver read"));
@@ -1127,6 +1576,29 @@ pub(crate) fn validate(
         {
             return Err(invalid("resolver site domain"));
         }
+        if new_local != row.coverage.is_some() {
+            return Err(invalid("resolver coverage version"));
+        }
+        let inductive = matches!(
+            row.coverage,
+            Some(CoverageEvidence::InductiveDispatch { .. })
+        );
+        if let Some(CoverageEvidence::ExistingPrefixTree { path_receipt_refs }) = &row.coverage {
+            if *path_receipt_refs != (0..row.paths.len()).collect::<Vec<_>>() {
+                return Err(invalid("resolver prefix receipt references"));
+            }
+        }
+        if let Some(CoverageEvidence::InductiveDispatch { receipt }) = &row.coverage {
+            loop_closure::validate(
+                receipt,
+                report,
+                instructions,
+                roots,
+                &transfers,
+                &reads,
+                row,
+            )?;
+        }
         if row.complete
             && (!row.unresolved.is_empty() || report.stop.is_some() || row.paths.is_empty())
         {
@@ -1152,14 +1624,17 @@ pub(crate) fn validate(
                 .get(&site)
                 .and_then(|t| t.jump.clone())
                 .ok_or_else(|| invalid("resolver jump evidence missing"))?;
-            let mut guards = Vec::new();
+            let mut guards: Vec<Guard> = Vec::new();
             let mut cursor = site;
             let mut path_seen = BTreeSet::new();
             let mut work = report.limits.max_steps;
             let mut prefix = 0;
             for (parent, taken) in path.reverse_path.iter().zip(&path.reverse_edges) {
                 let parent = address(parent)?;
-                if !path_seen.insert(parent) || parent == site {
+                if parent == site
+                    || !(path_seen.insert(parent)
+                        || (local && path.form == "infeasible" && path.frontier))
+                {
                     return Err(invalid("resolver path cycle"));
                 }
                 let instruction = instructions
@@ -1180,14 +1655,6 @@ pub(crate) fn validate(
                 };
                 let transfer = transfers.get(&parent);
                 let outputs = transfer.map(|t| t.outputs.clone()).unwrap_or_default();
-                if instruction.kind == InstructionKind::Conditional
-                    && let Some(condition) = transfer.and_then(|t| t.condition.clone())
-                {
-                    guards.push(Guard {
-                        expression: condition,
-                        taken: *taken,
-                    });
-                }
                 term = term
                     .rewrite(&outputs, &instruction.may_defs, &mut work)
                     .ok_or_else(|| invalid("resolver proof work limit"))?;
@@ -1203,10 +1670,30 @@ pub(crate) fn validate(
                             .ok_or_else(|| invalid("resolver guard proof limit"))
                     })
                     .collect::<Result<_, _>>()?;
+                // The current branch predicate is already a pre-state term;
+                // replay only the downstream guards through its outputs.
+                if instruction.kind == InstructionKind::Conditional
+                    && let Some(condition) = transfer.and_then(|t| t.condition.clone())
+                {
+                    guards.push(Guard {
+                        expression: condition,
+                        taken: *taken,
+                    });
+                }
                 cursor = parent;
             }
             if cursor != address(&path.root)?
-                || !roots.contains(&cursor)
+                || (if path.frontier {
+                    !local
+                        || roots.contains(&cursor)
+                        || !(if path.form == "infeasible" {
+                            guards_infeasible(&guards, &report.limits)
+                        } else {
+                            bounded_form(&term, &guards, &report.limits)
+                        })
+                } else {
+                    !roots.contains(&cursor)
+                })
                 || term != path.expression
                 || guards != path.guards
             {
@@ -1216,6 +1703,27 @@ pub(crate) fn validate(
                 return Err(invalid("duplicate resolver path"));
             }
             prefixes[prefix].terminal = true;
+            prefixes[prefix].frontier = path.frontier;
+            if path.form == "infeasible" {
+                let word = path
+                    .reverse_path
+                    .iter()
+                    .zip(&path.reverse_edges)
+                    .map(|(a, taken)| Ok((address(a)?, *taken)))
+                    .collect::<Result<Vec<_>, Error>>()?;
+                if !local
+                    || !path.frontier
+                    || path.base != hex(0)
+                    || !path.indices.is_empty()
+                    || !path.entries.is_empty()
+                    || !guards_infeasible(&guards, &report.limits)
+                    || (has_repeat(&word)
+                        && !stable_cycle(&word, instructions, &transfers, &term, &guards))
+                {
+                    return Err(invalid("resolver infeasible context proof"));
+                }
+                continue;
+            }
             let (form, base, index, width) = if let Some((base, index)) = relative(&term) {
                 ("relative32", base, Some(index), 4)
             } else if let TermKind::Load { address, .. } = &term.kind {
@@ -1307,7 +1815,7 @@ pub(crate) fn validate(
         if row.targets != targets.into_iter().collect::<Vec<_>>() {
             return Err(invalid("resolver target witness set"));
         }
-        if row.complete {
+        if row.complete && !inductive {
             // Replay the producer's ascending predecessor pushes and LIFO pops.
             // A per-node fanout bound misses siblings already on the frontier.
             let mut pending = vec![0];
@@ -1315,8 +1823,11 @@ pub(crate) fn validate(
                 let prefix = &prefixes[index];
                 let cursor = prefix_sites[index];
                 let incoming = predecessors.get(&cursor).cloned().unwrap_or_default();
-                if prefix.children.keys().copied().collect::<BTreeSet<_>>() != incoming
-                    || prefix.terminal != roots.contains(&cursor)
+                let cut = local && prefix.frontier;
+                if (cut && !prefix.children.is_empty())
+                    || (!cut
+                        && (prefix.children.keys().copied().collect::<BTreeSet<_>>() != incoming
+                            || prefix.terminal != roots.contains(&cursor)))
                 {
                     return Err(invalid("resolver uncovered incoming path"));
                 }
@@ -1333,6 +1844,9 @@ pub(crate) fn validate(
     Ok(())
 }
 
+#[cfg(test)]
+#[path = "../../tests/bap/loop_closure_unit.rs"]
+mod loop_tests;
 #[cfg(test)]
 #[path = "../../tests/bap/target_resolution_unit.rs"]
 mod tests;

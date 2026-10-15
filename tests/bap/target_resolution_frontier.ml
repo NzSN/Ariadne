@@ -36,4 +36,18 @@ let () =
      freeing its stack entry before the a branch needs its two slots. *)
   let asymmetric = incoming ["site", ["b"; "a"]; "a", ["y"; "x"]] in
   assert (accepts ["b"; "x"; "y"] asymmetric 2 [["b"]; ["a"; "x"]; ["a"; "y"]]);
-  print_endline "Native source frontier checks PASS: six boundary/coverage/order cases."
+  (* A checked v2 bounded symbolic terminal quantifies over arbitrary input
+     state at p, so its predecessor contexts need no additional root receipt. *)
+  let local = incoming ["site", ["p"]; "p", ["r"]] in
+  let cut = receipts [["p"]] in
+  let terminal = Hashtbl.find cut.children ("p", false) in
+  terminal.frontier <- true;
+  require_path_coverage (S.singleton "r") local 1 "site" cut;
+  terminal.frontier <- false;
+  assert (try require_path_coverage (S.singleton "r") local 1 "site" cut; false
+          with Invalid _ -> true);
+  terminal.frontier <- true;
+  Hashtbl.add terminal.children ("r", false) (path_context ());
+  assert (try require_path_coverage (S.singleton "r") local 1 "site" cut; false
+          with Invalid _ -> true);
+  print_endline "Native source frontier checks PASS: nine boundary/coverage/order/cut cases."

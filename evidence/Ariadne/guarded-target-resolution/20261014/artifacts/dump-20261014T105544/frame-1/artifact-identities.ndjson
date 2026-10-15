@@ -1,0 +1,7 @@
+{"bytes":21430748,"original":"guard-report.json","sha256":"566e31226223a18a14e5181c6e198edeffa9e767792ad5e528cfc6cc3928ad9e","stored":"guard-report.json.gz"}
+{"bytes":1140032,"original":"target-report.json","sha256":"b4dee7bd4b374add59cfb2d2c519bf4afd5233fd25994416b2145c367ac217c2","stored":"target-report.json.gz"}
+{"bytes":15171501,"original":"composition-report.json","sha256":"172229d604fda6424564fe50a4737cfa865ccd316a66c1c59d797fad6b3a2c8f","stored":"composition-report.json.gz"}
+{"bytes":19696665,"original":"prepared-full.json","sha256":"481bf9ac57155f6270dbf0b433723e9894a553749fca5d7585bb0707df5d8432","stored":"prepared-full.json.gz"}
+{"bytes":90612791,"original":"minidump-native.json","sha256":"aeffbd610f0d54669b28f29d40f07b48cb4697868bc88e59206ae13c3b6d2bdf","stored":"minidump-native.json.gz"}
+{"bytes":90612791,"original":"minidump-rust.json","sha256":"aeffbd610f0d54669b28f29d40f07b48cb4697868bc88e59206ae13c3b6d2bdf","stored":"minidump-rust.json.gz"}
+{"bytes":5367,"original":"outcome.json","sha256":"51daead0bef501c1f266cc5b593fa01685b9a8b2783695a8d826f7be83b4c39b","stored":"outcome.json"}

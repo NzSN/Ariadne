@@ -11,8 +11,8 @@ NEGATIVE='calls_special_empty_lifts_prefixes_and_snapshot_reset_remain_explicit'
 DISAGREE='unix::decode_length_control_and_operand_binding_disagreements_stop_without_fallback'
 MUTANTS=[
  ('ignored-capability-prefix','admission.rs','if guarded_prefix(bytes) {','if false && guarded_prefix(bytes) {','lib',CORPUS),
- ('opaque-must-kill','prepare.rs','site.evidence.rule = Some("bap-opaque-ordinary-v3".into());','site.evidence.rule = Some("bap-opaque-ordinary-v3".into()); site.instruction.must_defs = options.catalogue.locations();','disagreement',DISAGREE),
- ('opaque-no-effect','prepare.rs','site.evidence.rule = Some("bap-opaque-ordinary-v3".into());','site.evidence.rule = Some("bap-opaque-ordinary-v3".into()); site.instruction.uses.clear(); site.instruction.may_defs.clear();','disagreement',DISAGREE),
+ ('opaque-must-kill','prepare.rs','site.evidence.rule = Some(OPAQUE_ORDINARY_RULE.into());','site.evidence.rule = Some(OPAQUE_ORDINARY_RULE.into()); site.instruction.must_defs = options.catalogue.locations();','disagreement',DISAGREE),
+ ('opaque-no-effect','prepare.rs','site.evidence.rule = Some(OPAQUE_ORDINARY_RULE.into());','site.evidence.rule = Some(OPAQUE_ORDINARY_RULE.into()); site.instruction.uses.clear(); site.instruction.may_defs.clear();','disagreement',DISAGREE),
  ('opaque-gap-erased','prepare.rs','semantic.gaps.push("unsupported-data-effects".into());','/* mutant omits data-effect gap */','disagreement',DISAGREE),
  ('malformed-published','prepare.rs','if crate::bap::admission::fatal(&e) {','if false && crate::bap::admission::fatal(&e) {','disagreement',DISAGREE),
  ('invent-ordinary-control','prepare.rs','|| (kind == InstructionKind::Ordinary && !projection.targets.is_empty())','|| false','disagreement',DISAGREE),
@@ -92,7 +92,7 @@ def main():
  native_mutants=[
   ('native-opaque-kill-accepted','&& S.is_empty instruction.must)','&& true)'),
   ('native-opaque-footprint-lost','&& S.equal instruction.uses i.locations','&& true'),
-  ('native-opaque-profile-ignored','get row "projection"=`String "bap-bit-provenance-v3"','true'),
+  ('native-opaque-profile-ignored','List.mem (get row "projection") [`String "bap-bit-provenance-v3"; `String "bap-bit-provenance-v4"; `String "bap-bit-provenance-v5"; `String "bap-bit-provenance-v6"; `String "bap-bit-provenance-v7"]','true'),
  ]
  for name,old,new in native_mutants:
   path=native_source/'capture.ml';original=path.read_text()

@@ -1,0 +1,2722 @@
+{
+  "schema": "ariadne.loop-closure-dump-region-fixture/v1",
+  "id": "dadd",
+  "provenance": "dump-provenance.json",
+  "scope": "Captured candidate local phase; loop closure is not yet proved by this fixture.",
+  "dispatch": "0x00007ff77440dadd",
+  "header": "0x00007ff77440dacb",
+  "region_sites": [
+    "0x00007ff77440dabf",
+    "0x00007ff77440dac2",
+    "0x00007ff77440dac5",
+    "0x00007ff77440dacb",
+    "0x00007ff77440dad0",
+    "0x00007ff77440dad4",
+    "0x00007ff77440dad6",
+    "0x00007ff77440dada",
+    "0x00007ff77440dadd"
+  ],
+  "entrance_corridor_sites": [
+    "0x00007ff77440daaa",
+    "0x00007ff77440daad",
+    "0x00007ff77440dab0",
+    "0x00007ff77440dab6",
+    "0x00007ff77440dabd"
+  ],
+  "base_initializer": "0x00007ff77440dab6",
+  "table_base": "0x00007ff77ba909d0",
+  "incoming_edges": [
+    {
+      "src": "0x00007ff77440dabd",
+      "dst": "0x00007ff77440dacb",
+      "taken": true
+    }
+  ],
+  "internal_edges": [
+    {
+      "src": "0x00007ff77440dabf",
+      "dst": "0x00007ff77440dac2",
+      "taken": false
+    },
+    {
+      "src": "0x00007ff77440dac2",
+      "dst": "0x00007ff77440dac5",
+      "taken": false
+    },
+    {
+      "src": "0x00007ff77440dac5",
+      "dst": "0x00007ff77440dacb",
+      "taken": false
+    },
+    {
+      "src": "0x00007ff77440dacb",
+      "dst": "0x00007ff77440dad0",
+      "taken": false
+    },
+    {
+      "src": "0x00007ff77440dad0",
+      "dst": "0x00007ff77440dad4",
+      "taken": false
+    },
+    {
+      "src": "0x00007ff77440dad4",
+      "dst": "0x00007ff77440dac2",
+      "taken": true
+    },
+    {
+      "src": "0x00007ff77440dad4",
+      "dst": "0x00007ff77440dad6",
+      "taken": false
+    },
+    {
+      "src": "0x00007ff77440dad6",
+      "dst": "0x00007ff77440dada",
+      "taken": false
+    },
+    {
+      "src": "0x00007ff77440dada",
+      "dst": "0x00007ff77440dadd",
+      "taken": false
+    },
+    {
+      "src": "0x00007ff77440dadd",
+      "dst": "0x00007ff77440dabf",
+      "taken": true
+    }
+  ],
+  "outgoing_edges": [
+    {
+      "src": "0x00007ff77440dac5",
+      "dst": "0x00007ff77440bc0d",
+      "taken": true
+    },
+    {
+      "src": "0x00007ff77440dadd",
+      "dst": "0x00007ff77440a5df",
+      "taken": true
+    },
+    {
+      "src": "0x00007ff77440dadd",
+      "dst": "0x00007ff77440dae0",
+      "taken": true
+    },
+    {
+      "src": "0x00007ff77440dadd",
+      "dst": "0x00007ff77440daed",
+      "taken": true
+    }
+  ],
+  "corridor_edges": [
+    {
+      "src": "0x00007ff77440daaa",
+      "dst": "0x00007ff77440daad",
+      "taken": false
+    },
+    {
+      "src": "0x00007ff77440daad",
+      "dst": "0x00007ff77440dab0",
+      "taken": false
+    },
+    {
+      "src": "0x00007ff77440dab0",
+      "dst": "0x00007ff77440bc0d",
+      "taken": true
+    },
+    {
+      "src": "0x00007ff77440dab0",
+      "dst": "0x00007ff77440dab6",
+      "taken": false
+    },
+    {
+      "src": "0x00007ff77440dab6",
+      "dst": "0x00007ff77440dabd",
+      "taken": false
+    },
+    {
+      "src": "0x00007ff77440dabd",
+      "dst": "0x00007ff77440dacb",
+      "taken": true
+    }
+  ],
+  "corridor_incoming_edges": [
+    {
+      "src": "0x00007ff77440da9f",
+      "dst": "0x00007ff77440daaa",
+      "taken": true
+    },
+    {
+      "src": "0x00007ff77440daa8",
+      "dst": "0x00007ff77440daaa",
+      "taken": false
+    }
+  ],
+  "sources": [
+    {
+      "site": "0x00007ff77440daaa",
+      "bytes_hex": "488b0f",
+      "bytes_sha256": "49de2135ecddf679a94ba055e68cb77456161ce9697bb1ce3188ed7f1a05f173",
+      "length": 3,
+      "opcode": "MOV64rm",
+      "decoder_record": "v2 MOV64rm 6 r:RCX r:RDI i:1 r:NONE i:0 r:NONE 1 1 0 0 -1 -1 -1 -1 -1 -1 140700784057002 ok 3 ordinary -",
+      "ast": "[{\"kind\":\"move\",\"var\":{\"name\":\"RCX\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"},\"value\":{\"kind\":\"load\",\"width\":64,\"mem\":{\"kind\":\"var\",\"var\":{\"name\":\"mem\",\"index\":0,\"virtual\":false,\"width\":0,\"type\":\"mem\"}},\"addr\":{\"kind\":\"var\",\"var\":{\"name\":\"RDI\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}}}}]",
+      "ast_sha256": "9b073d1f83070f5e44e3358ccffdd4ac5604da56d4c4f09544986421dfa64fce",
+      "original_control": {
+        "complete": true,
+        "fall": [
+          "0x00007ff77440daad"
+        ],
+        "kind": "ordinary",
+        "targets": []
+      },
+      "candidate_instruction": {
+        "address": "0x00007ff77440daaa",
+        "fall": [
+          "0x00007ff77440daad"
+        ],
+        "kind": "ordinary",
+        "may_defs": [
+          "gpr:rcx:0",
+          "gpr:rcx:1",
+          "gpr:rcx:2",
+          "gpr:rcx:3",
+          "gpr:rcx:4",
+          "gpr:rcx:5",
+          "gpr:rcx:6",
+          "gpr:rcx:7"
+        ],
+        "must_defs": [
+          "gpr:rcx:0",
+          "gpr:rcx:1",
+          "gpr:rcx:2",
+          "gpr:rcx:3",
+          "gpr:rcx:4",
+          "gpr:rcx:5",
+          "gpr:rcx:6",
+          "gpr:rcx:7"
+        ],
+        "targets": [],
+        "targets_complete": true,
+        "uses": [
+          "gpr:rdi:0",
+          "gpr:rdi:1",
+          "gpr:rdi:2",
+          "gpr:rdi:3",
+          "gpr:rdi:4",
+          "gpr:rdi:5",
+          "gpr:rdi:6",
+          "gpr:rdi:7",
+          "memory:any"
+        ]
+      },
+      "capture_spans": [
+        {
+          "contributors": [
+            {
+              "entry": 2218,
+              "file_offset": "0x000000002c880888",
+              "stream": 9
+            }
+          ],
+          "length": 15,
+          "va": "0x00007ff77440daaa"
+        }
+      ],
+      "legacy_transfer": null
+    },
+    {
+      "site": "0x00007ff77440daad",
+      "bytes_hex": "4885c9",
+      "bytes_sha256": "1c31ee798a68c636396f73ac9646201424aaa544860de0a57454c10b8f0ee3f4",
+      "length": 3,
+      "opcode": "TEST64rr",
+      "decoder_record": "v2 TEST64rr 2 r:RCX r:RCX 0 0 0 1 EFLAGS -1 -1 140700784057005 ok 3 ordinary -",
+      "ast": "[{\"kind\":\"move\",\"var\":{\"name\":\"#12580085\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"},\"value\":{\"kind\":\"var\",\"var\":{\"name\":\"RCX\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}}},{\"kind\":\"move\",\"var\":{\"name\":\"OF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"},\"value\":{\"kind\":\"int\",\"value\":\"0:1u\"}},{\"kind\":\"move\",\"var\":{\"name\":\"CF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"},\"value\":{\"kind\":\"int\",\"value\":\"0:1u\"}},{\"kind\":\"move\",\"var\":{\"name\":\"AF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"},\"value\":{\"kind\":\"unknown\",\"reason\":\"AF is undefined after and\"}},{\"kind\":\"move\",\"var\":{\"name\":\"PF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"},\"value\":{\"kind\":\"unop\",\"op\":0,\"arg\":{\"kind\":\"cast\",\"op\":0,\"width\":1,\"arg\":{\"kind\":\"let\",\"var\":{\"name\":\"#12580084\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"},\"value\":{\"kind\":\"binop\",\"op\":6,\"lhs\":{\"kind\":\"binop\",\"op\":10,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580085\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"int\",\"value\":\"4:64u\"}},\"rhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580085\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}}},\"body\":{\"kind\":\"let\",\"var\":{\"name\":\"#12580084\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"},\"value\":{\"kind\":\"binop\",\"op\":6,\"lhs\":{\"kind\":\"binop\",\"op\":10,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580084\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"int\",\"value\":\"2:64u\"}},\"rhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580084\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}}},\"body\":{\"kind\":\"binop\",\"op\":6,\"lhs\":{\"kind\":\"binop\",\"op\":10,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580084\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"int\",\"value\":\"1:64u\"}},\"rhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580084\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}}}}}}}},{\"kind\":\"move\",\"var\":{\"name\":\"SF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"},\"value\":{\"kind\":\"cast\",\"op\":1,\"width\":1,\"arg\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580085\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}}}},{\"kind\":\"move\",\"var\":{\"name\":\"ZF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"},\"value\":{\"kind\":\"binop\",\"op\":5,\"lhs\":{\"kind\":\"int\",\"value\":\"0:64u\"},\"rhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580085\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}}}}]",
+      "ast_sha256": "fe6fbde0aaeeb37acbf5fe8c901af47f47237d3da4d3bde7f3137e0037710810",
+      "original_control": {
+        "complete": true,
+        "fall": [
+          "0x00007ff77440dab0"
+        ],
+        "kind": "ordinary",
+        "targets": []
+      },
+      "candidate_instruction": {
+        "address": "0x00007ff77440daad",
+        "fall": [
+          "0x00007ff77440dab0"
+        ],
+        "kind": "ordinary",
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf"
+        ],
+        "must_defs": [
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf"
+        ],
+        "targets": [],
+        "targets_complete": true,
+        "uses": [
+          "flag:af",
+          "flag:cf",
+          "flag:df",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:r10:0",
+          "gpr:r10:1",
+          "gpr:r10:2",
+          "gpr:r10:3",
+          "gpr:r10:4",
+          "gpr:r10:5",
+          "gpr:r10:6",
+          "gpr:r10:7",
+          "gpr:r11:0",
+          "gpr:r11:1",
+          "gpr:r11:2",
+          "gpr:r11:3",
+          "gpr:r11:4",
+          "gpr:r11:5",
+          "gpr:r11:6",
+          "gpr:r11:7",
+          "gpr:r12:0",
+          "gpr:r12:1",
+          "gpr:r12:2",
+          "gpr:r12:3",
+          "gpr:r12:4",
+          "gpr:r12:5",
+          "gpr:r12:6",
+          "gpr:r12:7",
+          "gpr:r13:0",
+          "gpr:r13:1",
+          "gpr:r13:2",
+          "gpr:r13:3",
+          "gpr:r13:4",
+          "gpr:r13:5",
+          "gpr:r13:6",
+          "gpr:r13:7",
+          "gpr:r14:0",
+          "gpr:r14:1",
+          "gpr:r14:2",
+          "gpr:r14:3",
+          "gpr:r14:4",
+          "gpr:r14:5",
+          "gpr:r14:6",
+          "gpr:r14:7",
+          "gpr:r15:0",
+          "gpr:r15:1",
+          "gpr:r15:2",
+          "gpr:r15:3",
+          "gpr:r15:4",
+          "gpr:r15:5",
+          "gpr:r15:6",
+          "gpr:r15:7",
+          "gpr:r8:0",
+          "gpr:r8:1",
+          "gpr:r8:2",
+          "gpr:r8:3",
+          "gpr:r8:4",
+          "gpr:r8:5",
+          "gpr:r8:6",
+          "gpr:r8:7",
+          "gpr:r9:0",
+          "gpr:r9:1",
+          "gpr:r9:2",
+          "gpr:r9:3",
+          "gpr:r9:4",
+          "gpr:r9:5",
+          "gpr:r9:6",
+          "gpr:r9:7",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7",
+          "gpr:rbp:0",
+          "gpr:rbp:1",
+          "gpr:rbp:2",
+          "gpr:rbp:3",
+          "gpr:rbp:4",
+          "gpr:rbp:5",
+          "gpr:rbp:6",
+          "gpr:rbp:7",
+          "gpr:rbx:0",
+          "gpr:rbx:1",
+          "gpr:rbx:2",
+          "gpr:rbx:3",
+          "gpr:rbx:4",
+          "gpr:rbx:5",
+          "gpr:rbx:6",
+          "gpr:rbx:7",
+          "gpr:rcx:0",
+          "gpr:rcx:1",
+          "gpr:rcx:2",
+          "gpr:rcx:3",
+          "gpr:rcx:4",
+          "gpr:rcx:5",
+          "gpr:rcx:6",
+          "gpr:rcx:7",
+          "gpr:rdi:0",
+          "gpr:rdi:1",
+          "gpr:rdi:2",
+          "gpr:rdi:3",
+          "gpr:rdi:4",
+          "gpr:rdi:5",
+          "gpr:rdi:6",
+          "gpr:rdi:7",
+          "gpr:rdx:0",
+          "gpr:rdx:1",
+          "gpr:rdx:2",
+          "gpr:rdx:3",
+          "gpr:rdx:4",
+          "gpr:rdx:5",
+          "gpr:rdx:6",
+          "gpr:rdx:7",
+          "gpr:rsi:0",
+          "gpr:rsi:1",
+          "gpr:rsi:2",
+          "gpr:rsi:3",
+          "gpr:rsi:4",
+          "gpr:rsi:5",
+          "gpr:rsi:6",
+          "gpr:rsi:7",
+          "gpr:rsp:0",
+          "gpr:rsp:1",
+          "gpr:rsp:2",
+          "gpr:rsp:3",
+          "gpr:rsp:4",
+          "gpr:rsp:5",
+          "gpr:rsp:6",
+          "gpr:rsp:7",
+          "memory:any",
+          "state:other"
+        ]
+      },
+      "capture_spans": [
+        {
+          "contributors": [
+            {
+              "entry": 2218,
+              "file_offset": "0x000000002c88088b",
+              "stream": 9
+            }
+          ],
+          "length": 15,
+          "va": "0x00007ff77440daad"
+        }
+      ],
+      "legacy_transfer": null
+    },
+    {
+      "site": "0x00007ff77440dab0",
+      "bytes_hex": "0f8457e1ffff",
+      "bytes_sha256": "408dc77307cdc2780607b0d8101536a0056bfe0b47b4e6d68e1ba88a8b06b8c5",
+      "length": 6,
+      "opcode": "JCC_4",
+      "decoder_record": "v2 JCC_4 2 i:-7849 i:4 0 0 1 EFLAGS 0 -1 -1 140700784057008 ok 6 conditional 140700784049165",
+      "ast": "[{\"kind\":\"if\",\"condition\":{\"kind\":\"var\",\"var\":{\"name\":\"ZF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"}},\"yes\":[{\"kind\":\"jump\",\"target\":{\"kind\":\"int\",\"value\":\"0x7FF77440BC0D:64u\"}}],\"no\":[]}]",
+      "ast_sha256": "a278565a1a2c2bd29798dcd6c38e8aad48252789869a16882077c3343ebc0573",
+      "original_control": {
+        "complete": true,
+        "fall": [
+          "0x00007ff77440dab6"
+        ],
+        "kind": "conditional",
+        "targets": [
+          "0x00007ff77440bc0d"
+        ]
+      },
+      "candidate_instruction": {
+        "address": "0x00007ff77440dab0",
+        "fall": [
+          "0x00007ff77440dab6"
+        ],
+        "kind": "conditional",
+        "may_defs": [],
+        "must_defs": [],
+        "targets": [
+          "0x00007ff77440bc0d"
+        ],
+        "targets_complete": true,
+        "uses": [
+          "flag:zf"
+        ]
+      },
+      "capture_spans": [
+        {
+          "contributors": [
+            {
+              "entry": 2218,
+              "file_offset": "0x000000002c88088e",
+              "stream": 9
+            }
+          ],
+          "length": 15,
+          "va": "0x00007ff77440dab0"
+        }
+      ],
+      "legacy_transfer": null
+    },
+    {
+      "site": "0x00007ff77440dab6",
+      "bytes_hex": "488d15132f6807",
+      "bytes_sha256": "088a4c826c50e45f9601278be46afcf05b21d7b961c9c95b0a653aa2172180d8",
+      "length": 7,
+      "opcode": "LEA64r",
+      "decoder_record": "v2 LEA64r 6 r:RDX r:RIP i:1 r:NONE i:124268307 r:NONE 1 0 0 0 -1 -1 -1 -1 -1 -1 140700784057014 ok 7 ordinary -",
+      "ast": "[{\"kind\":\"move\",\"var\":{\"name\":\"RDX\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"},\"value\":{\"kind\":\"cast\",\"op\":0,\"width\":64,\"arg\":{\"kind\":\"int\",\"value\":\"0x7FF77BA909D0:64u\"}}}]",
+      "ast_sha256": "776e54baf705cf2c2f3836d495f18a778a6df6a3f54e46003c1c9528be662ac3",
+      "original_control": {
+        "complete": true,
+        "fall": [
+          "0x00007ff77440dabd"
+        ],
+        "kind": "ordinary",
+        "targets": []
+      },
+      "candidate_instruction": {
+        "address": "0x00007ff77440dab6",
+        "fall": [
+          "0x00007ff77440dabd"
+        ],
+        "kind": "ordinary",
+        "may_defs": [
+          "gpr:rdx:0",
+          "gpr:rdx:1",
+          "gpr:rdx:2",
+          "gpr:rdx:3",
+          "gpr:rdx:4",
+          "gpr:rdx:5",
+          "gpr:rdx:6",
+          "gpr:rdx:7"
+        ],
+        "must_defs": [
+          "gpr:rdx:0",
+          "gpr:rdx:1",
+          "gpr:rdx:2",
+          "gpr:rdx:3",
+          "gpr:rdx:4",
+          "gpr:rdx:5",
+          "gpr:rdx:6",
+          "gpr:rdx:7"
+        ],
+        "targets": [],
+        "targets_complete": true,
+        "uses": []
+      },
+      "capture_spans": [
+        {
+          "contributors": [
+            {
+              "entry": 2218,
+              "file_offset": "0x000000002c880894",
+              "stream": 9
+            }
+          ],
+          "length": 15,
+          "va": "0x00007ff77440dab6"
+        }
+      ],
+      "legacy_transfer": {
+        "ast_sha256": "776e54baf705cf2c2f3836d495f18a778a6df6a3f54e46003c1c9528be662ac3",
+        "bytes_hex": "488d15132f6807",
+        "condition": null,
+        "jump": null,
+        "outputs": {
+          "RDX:0:false": {
+            "kind": {
+              "kind": "constant",
+              "value": "0x00007ff77ba909d0"
+            },
+            "width": 64
+          }
+        },
+        "site": "0x00007ff77440dab6"
+      }
+    },
+    {
+      "site": "0x00007ff77440dabd",
+      "bytes_hex": "eb0c",
+      "bytes_sha256": "4802a5f804ee2374dbb6beb0745c8993f0b46ef3c4b63306ec66399a692d3d35",
+      "length": 2,
+      "opcode": "JMP_1",
+      "decoder_record": "v2 JMP_1 1 i:12 0 0 0 0 -1 140700784057021 ok 2 jump 140700784057035",
+      "ast": "[{\"kind\":\"jump\",\"target\":{\"kind\":\"int\",\"value\":\"0x7FF77440DACB:64u\"}}]",
+      "ast_sha256": "7f5699501fe0dc28255158a3ac2556808f73fcafd4dd173c1dc1d8202fd5b6cd",
+      "original_control": {
+        "complete": true,
+        "fall": [],
+        "kind": "jump",
+        "targets": [
+          "0x00007ff77440dacb"
+        ]
+      },
+      "candidate_instruction": {
+        "address": "0x00007ff77440dabd",
+        "fall": [],
+        "kind": "jump",
+        "may_defs": [],
+        "must_defs": [],
+        "targets": [
+          "0x00007ff77440dacb"
+        ],
+        "targets_complete": true,
+        "uses": []
+      },
+      "capture_spans": [
+        {
+          "contributors": [
+            {
+              "entry": 2218,
+              "file_offset": "0x000000002c88089b",
+              "stream": 9
+            }
+          ],
+          "length": 15,
+          "va": "0x00007ff77440dabd"
+        }
+      ],
+      "legacy_transfer": {
+        "ast_sha256": "7f5699501fe0dc28255158a3ac2556808f73fcafd4dd173c1dc1d8202fd5b6cd",
+        "bytes_hex": "eb0c",
+        "condition": null,
+        "jump": {
+          "kind": {
+            "kind": "constant",
+            "value": "0x00007ff77440dacb"
+          },
+          "width": 64
+        },
+        "outputs": {},
+        "site": "0x00007ff77440dabd"
+      }
+    },
+    {
+      "site": "0x00007ff77440dabf",
+      "bytes_hex": "488b09",
+      "bytes_sha256": "3e9f8f5989e3001a4f3eba6814373c5f31de1ef943e13d0dcfa76104811b496e",
+      "length": 3,
+      "opcode": "MOV64rm",
+      "decoder_record": "v2 MOV64rm 6 r:RCX r:RCX i:1 r:NONE i:0 r:NONE 1 1 0 0 -1 -1 -1 -1 -1 -1 140700784057023 ok 3 ordinary -",
+      "ast": "[{\"kind\":\"move\",\"var\":{\"name\":\"RCX\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"},\"value\":{\"kind\":\"load\",\"width\":64,\"mem\":{\"kind\":\"var\",\"var\":{\"name\":\"mem\",\"index\":0,\"virtual\":false,\"width\":0,\"type\":\"mem\"}},\"addr\":{\"kind\":\"var\",\"var\":{\"name\":\"RCX\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}}}}]",
+      "ast_sha256": "93fab92527e7dcb41f8c320d154b14222d188279ebd15bea69c236cfbf407420",
+      "original_control": {
+        "complete": true,
+        "fall": [
+          "0x00007ff77440dac2"
+        ],
+        "kind": "ordinary",
+        "targets": []
+      },
+      "candidate_instruction": {
+        "address": "0x00007ff77440dabf",
+        "fall": [
+          "0x00007ff77440dac2"
+        ],
+        "kind": "ordinary",
+        "may_defs": [
+          "gpr:rcx:0",
+          "gpr:rcx:1",
+          "gpr:rcx:2",
+          "gpr:rcx:3",
+          "gpr:rcx:4",
+          "gpr:rcx:5",
+          "gpr:rcx:6",
+          "gpr:rcx:7"
+        ],
+        "must_defs": [
+          "gpr:rcx:0",
+          "gpr:rcx:1",
+          "gpr:rcx:2",
+          "gpr:rcx:3",
+          "gpr:rcx:4",
+          "gpr:rcx:5",
+          "gpr:rcx:6",
+          "gpr:rcx:7"
+        ],
+        "targets": [],
+        "targets_complete": true,
+        "uses": [
+          "gpr:rcx:0",
+          "gpr:rcx:1",
+          "gpr:rcx:2",
+          "gpr:rcx:3",
+          "gpr:rcx:4",
+          "gpr:rcx:5",
+          "gpr:rcx:6",
+          "gpr:rcx:7",
+          "memory:any"
+        ]
+      },
+      "capture_spans": [
+        {
+          "contributors": [
+            {
+              "entry": 2218,
+              "file_offset": "0x000000002c88089d",
+              "stream": 9
+            }
+          ],
+          "length": 15,
+          "va": "0x00007ff77440dabf"
+        }
+      ],
+      "legacy_transfer": {
+        "ast_sha256": "93fab92527e7dcb41f8c320d154b14222d188279ebd15bea69c236cfbf407420",
+        "bytes_hex": "488b09",
+        "condition": null,
+        "jump": null,
+        "outputs": {
+          "RCX:0:false": {
+            "kind": {
+              "address": {
+                "kind": {
+                  "key": "RCX:0:false",
+                  "kind": "input"
+                },
+                "width": 64
+              },
+              "kind": "load",
+              "site": "0x00007ff77440dabf"
+            },
+            "width": 64
+          }
+        },
+        "site": "0x00007ff77440dabf"
+      }
+    },
+    {
+      "site": "0x00007ff77440dac2",
+      "bytes_hex": "4885c9",
+      "bytes_sha256": "1c31ee798a68c636396f73ac9646201424aaa544860de0a57454c10b8f0ee3f4",
+      "length": 3,
+      "opcode": "TEST64rr",
+      "decoder_record": "v2 TEST64rr 2 r:RCX r:RCX 0 0 0 1 EFLAGS -1 -1 140700784057026 ok 3 ordinary -",
+      "ast": "[{\"kind\":\"move\",\"var\":{\"name\":\"#12580037\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"},\"value\":{\"kind\":\"var\",\"var\":{\"name\":\"RCX\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}}},{\"kind\":\"move\",\"var\":{\"name\":\"OF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"},\"value\":{\"kind\":\"int\",\"value\":\"0:1u\"}},{\"kind\":\"move\",\"var\":{\"name\":\"CF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"},\"value\":{\"kind\":\"int\",\"value\":\"0:1u\"}},{\"kind\":\"move\",\"var\":{\"name\":\"AF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"},\"value\":{\"kind\":\"unknown\",\"reason\":\"AF is undefined after and\"}},{\"kind\":\"move\",\"var\":{\"name\":\"PF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"},\"value\":{\"kind\":\"unop\",\"op\":0,\"arg\":{\"kind\":\"cast\",\"op\":0,\"width\":1,\"arg\":{\"kind\":\"let\",\"var\":{\"name\":\"#12580036\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"},\"value\":{\"kind\":\"binop\",\"op\":6,\"lhs\":{\"kind\":\"binop\",\"op\":10,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580037\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"int\",\"value\":\"4:64u\"}},\"rhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580037\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}}},\"body\":{\"kind\":\"let\",\"var\":{\"name\":\"#12580036\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"},\"value\":{\"kind\":\"binop\",\"op\":6,\"lhs\":{\"kind\":\"binop\",\"op\":10,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580036\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"int\",\"value\":\"2:64u\"}},\"rhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580036\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}}},\"body\":{\"kind\":\"binop\",\"op\":6,\"lhs\":{\"kind\":\"binop\",\"op\":10,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580036\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"int\",\"value\":\"1:64u\"}},\"rhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580036\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}}}}}}}},{\"kind\":\"move\",\"var\":{\"name\":\"SF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"},\"value\":{\"kind\":\"cast\",\"op\":1,\"width\":1,\"arg\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580037\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}}}},{\"kind\":\"move\",\"var\":{\"name\":\"ZF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"},\"value\":{\"kind\":\"binop\",\"op\":5,\"lhs\":{\"kind\":\"int\",\"value\":\"0:64u\"},\"rhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580037\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}}}}]",
+      "ast_sha256": "94ed7fe3b2deecd458d75de166385b67793ef7e938d26b335ac8088397b02df6",
+      "original_control": {
+        "complete": true,
+        "fall": [
+          "0x00007ff77440dac5"
+        ],
+        "kind": "ordinary",
+        "targets": []
+      },
+      "candidate_instruction": {
+        "address": "0x00007ff77440dac2",
+        "fall": [
+          "0x00007ff77440dac5"
+        ],
+        "kind": "ordinary",
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf"
+        ],
+        "must_defs": [
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf"
+        ],
+        "targets": [],
+        "targets_complete": true,
+        "uses": [
+          "flag:af",
+          "flag:cf",
+          "flag:df",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:r10:0",
+          "gpr:r10:1",
+          "gpr:r10:2",
+          "gpr:r10:3",
+          "gpr:r10:4",
+          "gpr:r10:5",
+          "gpr:r10:6",
+          "gpr:r10:7",
+          "gpr:r11:0",
+          "gpr:r11:1",
+          "gpr:r11:2",
+          "gpr:r11:3",
+          "gpr:r11:4",
+          "gpr:r11:5",
+          "gpr:r11:6",
+          "gpr:r11:7",
+          "gpr:r12:0",
+          "gpr:r12:1",
+          "gpr:r12:2",
+          "gpr:r12:3",
+          "gpr:r12:4",
+          "gpr:r12:5",
+          "gpr:r12:6",
+          "gpr:r12:7",
+          "gpr:r13:0",
+          "gpr:r13:1",
+          "gpr:r13:2",
+          "gpr:r13:3",
+          "gpr:r13:4",
+          "gpr:r13:5",
+          "gpr:r13:6",
+          "gpr:r13:7",
+          "gpr:r14:0",
+          "gpr:r14:1",
+          "gpr:r14:2",
+          "gpr:r14:3",
+          "gpr:r14:4",
+          "gpr:r14:5",
+          "gpr:r14:6",
+          "gpr:r14:7",
+          "gpr:r15:0",
+          "gpr:r15:1",
+          "gpr:r15:2",
+          "gpr:r15:3",
+          "gpr:r15:4",
+          "gpr:r15:5",
+          "gpr:r15:6",
+          "gpr:r15:7",
+          "gpr:r8:0",
+          "gpr:r8:1",
+          "gpr:r8:2",
+          "gpr:r8:3",
+          "gpr:r8:4",
+          "gpr:r8:5",
+          "gpr:r8:6",
+          "gpr:r8:7",
+          "gpr:r9:0",
+          "gpr:r9:1",
+          "gpr:r9:2",
+          "gpr:r9:3",
+          "gpr:r9:4",
+          "gpr:r9:5",
+          "gpr:r9:6",
+          "gpr:r9:7",
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7",
+          "gpr:rbp:0",
+          "gpr:rbp:1",
+          "gpr:rbp:2",
+          "gpr:rbp:3",
+          "gpr:rbp:4",
+          "gpr:rbp:5",
+          "gpr:rbp:6",
+          "gpr:rbp:7",
+          "gpr:rbx:0",
+          "gpr:rbx:1",
+          "gpr:rbx:2",
+          "gpr:rbx:3",
+          "gpr:rbx:4",
+          "gpr:rbx:5",
+          "gpr:rbx:6",
+          "gpr:rbx:7",
+          "gpr:rcx:0",
+          "gpr:rcx:1",
+          "gpr:rcx:2",
+          "gpr:rcx:3",
+          "gpr:rcx:4",
+          "gpr:rcx:5",
+          "gpr:rcx:6",
+          "gpr:rcx:7",
+          "gpr:rdi:0",
+          "gpr:rdi:1",
+          "gpr:rdi:2",
+          "gpr:rdi:3",
+          "gpr:rdi:4",
+          "gpr:rdi:5",
+          "gpr:rdi:6",
+          "gpr:rdi:7",
+          "gpr:rdx:0",
+          "gpr:rdx:1",
+          "gpr:rdx:2",
+          "gpr:rdx:3",
+          "gpr:rdx:4",
+          "gpr:rdx:5",
+          "gpr:rdx:6",
+          "gpr:rdx:7",
+          "gpr:rsi:0",
+          "gpr:rsi:1",
+          "gpr:rsi:2",
+          "gpr:rsi:3",
+          "gpr:rsi:4",
+          "gpr:rsi:5",
+          "gpr:rsi:6",
+          "gpr:rsi:7",
+          "gpr:rsp:0",
+          "gpr:rsp:1",
+          "gpr:rsp:2",
+          "gpr:rsp:3",
+          "gpr:rsp:4",
+          "gpr:rsp:5",
+          "gpr:rsp:6",
+          "gpr:rsp:7",
+          "memory:any",
+          "state:other"
+        ]
+      },
+      "capture_spans": [
+        {
+          "contributors": [
+            {
+              "entry": 2218,
+              "file_offset": "0x000000002c8808a0",
+              "stream": 9
+            }
+          ],
+          "length": 15,
+          "va": "0x00007ff77440dac2"
+        }
+      ],
+      "legacy_transfer": {
+        "ast_sha256": "94ed7fe3b2deecd458d75de166385b67793ef7e938d26b335ac8088397b02df6",
+        "bytes_hex": "4885c9",
+        "condition": null,
+        "jump": null,
+        "outputs": {
+          "CF:0:false": {
+            "kind": {
+              "kind": "constant",
+              "value": "0x0000000000000000"
+            },
+            "width": 1
+          },
+          "ZF:0:false": {
+            "kind": {
+              "kind": "binary",
+              "left": {
+                "kind": {
+                  "kind": "constant",
+                  "value": "0x0000000000000000"
+                },
+                "width": 64
+              },
+              "op": 5,
+              "right": {
+                "kind": {
+                  "key": "RCX:0:false",
+                  "kind": "input"
+                },
+                "width": 64
+              }
+            },
+            "width": 1
+          }
+        },
+        "site": "0x00007ff77440dac2"
+      }
+    },
+    {
+      "site": "0x00007ff77440dac5",
+      "bytes_hex": "0f8442e1ffff",
+      "bytes_sha256": "4edb99115b85c0c8a49a5cfebe623e2bebed50e1a4281c00d6303d96d609ac0f",
+      "length": 6,
+      "opcode": "JCC_4",
+      "decoder_record": "v2 JCC_4 2 i:-7870 i:4 0 0 1 EFLAGS 0 -1 -1 140700784057029 ok 6 conditional 140700784049165",
+      "ast": "[{\"kind\":\"if\",\"condition\":{\"kind\":\"var\",\"var\":{\"name\":\"ZF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"}},\"yes\":[{\"kind\":\"jump\",\"target\":{\"kind\":\"int\",\"value\":\"0x7FF77440BC0D:64u\"}}],\"no\":[]}]",
+      "ast_sha256": "a278565a1a2c2bd29798dcd6c38e8aad48252789869a16882077c3343ebc0573",
+      "original_control": {
+        "complete": true,
+        "fall": [
+          "0x00007ff77440dacb"
+        ],
+        "kind": "conditional",
+        "targets": [
+          "0x00007ff77440bc0d"
+        ]
+      },
+      "candidate_instruction": {
+        "address": "0x00007ff77440dac5",
+        "fall": [
+          "0x00007ff77440dacb"
+        ],
+        "kind": "conditional",
+        "may_defs": [],
+        "must_defs": [],
+        "targets": [
+          "0x00007ff77440bc0d"
+        ],
+        "targets_complete": true,
+        "uses": [
+          "flag:zf"
+        ]
+      },
+      "capture_spans": [
+        {
+          "contributors": [
+            {
+              "entry": 2218,
+              "file_offset": "0x000000002c8808a3",
+              "stream": 9
+            }
+          ],
+          "length": 15,
+          "va": "0x00007ff77440dac5"
+        }
+      ],
+      "legacy_transfer": {
+        "ast_sha256": "a278565a1a2c2bd29798dcd6c38e8aad48252789869a16882077c3343ebc0573",
+        "bytes_hex": "0f8442e1ffff",
+        "condition": {
+          "kind": {
+            "key": "ZF:0:false",
+            "kind": "input"
+          },
+          "width": 1
+        },
+        "jump": null,
+        "outputs": {},
+        "site": "0x00007ff77440dac5"
+      }
+    },
+    {
+      "site": "0x00007ff77440dacb",
+      "bytes_hex": "440fb64178",
+      "bytes_sha256": "93b6381425012f55954b3de252329b5fcc85c9d42a992e8908a758318185f7df",
+      "length": 5,
+      "opcode": "MOVZX32rm8",
+      "decoder_record": "v2 MOVZX32rm8 6 r:R8D r:RCX i:1 r:NONE i:120 r:NONE 1 1 0 0 -1 -1 -1 -1 -1 -1 140700784057035 ok 5 ordinary -",
+      "ast": "[{\"kind\":\"move\",\"var\":{\"name\":\"R8\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"},\"value\":{\"kind\":\"cast\",\"op\":3,\"width\":64,\"arg\":{\"kind\":\"cast\",\"op\":3,\"width\":32,\"arg\":{\"kind\":\"load\",\"width\":8,\"mem\":{\"kind\":\"var\",\"var\":{\"name\":\"mem\",\"index\":0,\"virtual\":false,\"width\":0,\"type\":\"mem\"}},\"addr\":{\"kind\":\"binop\",\"op\":18,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"RCX\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"int\",\"value\":\"0x78:64u\"}}}}}}]",
+      "ast_sha256": "0b7d4de52daa7fd92001a456e937a2d83280c5ae6e2fcf0b1c38a26d6a9e0b7c",
+      "original_control": {
+        "complete": true,
+        "fall": [
+          "0x00007ff77440dad0"
+        ],
+        "kind": "ordinary",
+        "targets": []
+      },
+      "candidate_instruction": {
+        "address": "0x00007ff77440dacb",
+        "fall": [
+          "0x00007ff77440dad0"
+        ],
+        "kind": "ordinary",
+        "may_defs": [
+          "gpr:r8:0",
+          "gpr:r8:1",
+          "gpr:r8:2",
+          "gpr:r8:3",
+          "gpr:r8:4",
+          "gpr:r8:5",
+          "gpr:r8:6",
+          "gpr:r8:7"
+        ],
+        "must_defs": [
+          "gpr:r8:0",
+          "gpr:r8:1",
+          "gpr:r8:2",
+          "gpr:r8:3",
+          "gpr:r8:4",
+          "gpr:r8:5",
+          "gpr:r8:6",
+          "gpr:r8:7"
+        ],
+        "targets": [],
+        "targets_complete": true,
+        "uses": [
+          "gpr:rcx:0",
+          "gpr:rcx:1",
+          "gpr:rcx:2",
+          "gpr:rcx:3",
+          "gpr:rcx:4",
+          "gpr:rcx:5",
+          "gpr:rcx:6",
+          "gpr:rcx:7",
+          "memory:any"
+        ]
+      },
+      "capture_spans": [
+        {
+          "contributors": [
+            {
+              "entry": 2218,
+              "file_offset": "0x000000002c8808a9",
+              "stream": 9
+            }
+          ],
+          "length": 15,
+          "va": "0x00007ff77440dacb"
+        }
+      ],
+      "legacy_transfer": {
+        "ast_sha256": "0b7d4de52daa7fd92001a456e937a2d83280c5ae6e2fcf0b1c38a26d6a9e0b7c",
+        "bytes_hex": "440fb64178",
+        "condition": null,
+        "jump": null,
+        "outputs": {
+          "R8:0:false": {
+            "kind": {
+              "arg": {
+                "kind": {
+                  "address": {
+                    "kind": {
+                      "kind": "binary",
+                      "left": {
+                        "kind": {
+                          "key": "RCX:0:false",
+                          "kind": "input"
+                        },
+                        "width": 64
+                      },
+                      "op": 18,
+                      "right": {
+                        "kind": {
+                          "kind": "constant",
+                          "value": "0x0000000000000078"
+                        },
+                        "width": 64
+                      }
+                    },
+                    "width": 64
+                  },
+                  "kind": "load",
+                  "site": "0x00007ff77440dacb"
+                },
+                "width": 8
+              },
+              "kind": "cast",
+              "op": 3
+            },
+            "width": 64
+          }
+        },
+        "site": "0x00007ff77440dacb"
+      }
+    },
+    {
+      "site": "0x00007ff77440dad0",
+      "bytes_hex": "4983f809",
+      "bytes_sha256": "62ca10aec8bb0213e45be05c42995335c6c3ca252a459d0e73ccd57a02fd2fe1",
+      "length": 4,
+      "opcode": "CMP64ri8",
+      "decoder_record": "v2 CMP64ri8 2 r:R8 i:9 0 0 0 1 EFLAGS -1 -1 140700784057040 ok 4 ordinary -",
+      "ast": "[{\"kind\":\"move\",\"var\":{\"name\":\"#12580055\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"},\"value\":{\"kind\":\"binop\",\"op\":17,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"R8\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"int\",\"value\":\"9:64u\"}}},{\"kind\":\"move\",\"var\":{\"name\":\"CF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"},\"value\":{\"kind\":\"binop\",\"op\":3,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"R8\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"int\",\"value\":\"9:64u\"}}},{\"kind\":\"move\",\"var\":{\"name\":\"OF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"},\"value\":{\"kind\":\"cast\",\"op\":1,\"width\":1,\"arg\":{\"kind\":\"binop\",\"op\":8,\"lhs\":{\"kind\":\"binop\",\"op\":6,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"R8\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"int\",\"value\":\"9:64u\"}},\"rhs\":{\"kind\":\"binop\",\"op\":6,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"R8\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580055\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}}}}}},{\"kind\":\"move\",\"var\":{\"name\":\"AF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"},\"value\":{\"kind\":\"binop\",\"op\":5,\"lhs\":{\"kind\":\"int\",\"value\":\"0x10:64u\"},\"rhs\":{\"kind\":\"binop\",\"op\":8,\"lhs\":{\"kind\":\"int\",\"value\":\"0x10:64u\"},\"rhs\":{\"kind\":\"binop\",\"op\":6,\"lhs\":{\"kind\":\"binop\",\"op\":6,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580055\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"var\",\"var\":{\"name\":\"R8\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}}},\"rhs\":{\"kind\":\"int\",\"value\":\"9:64u\"}}}}},{\"kind\":\"move\",\"var\":{\"name\":\"PF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"},\"value\":{\"kind\":\"unop\",\"op\":0,\"arg\":{\"kind\":\"cast\",\"op\":0,\"width\":1,\"arg\":{\"kind\":\"let\",\"var\":{\"name\":\"#12580054\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"},\"value\":{\"kind\":\"binop\",\"op\":6,\"lhs\":{\"kind\":\"binop\",\"op\":10,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580055\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"int\",\"value\":\"4:64u\"}},\"rhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580055\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}}},\"body\":{\"kind\":\"let\",\"var\":{\"name\":\"#12580054\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"},\"value\":{\"kind\":\"binop\",\"op\":6,\"lhs\":{\"kind\":\"binop\",\"op\":10,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580054\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"int\",\"value\":\"2:64u\"}},\"rhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580054\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}}},\"body\":{\"kind\":\"binop\",\"op\":6,\"lhs\":{\"kind\":\"binop\",\"op\":10,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580054\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"int\",\"value\":\"1:64u\"}},\"rhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580054\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}}}}}}}},{\"kind\":\"move\",\"var\":{\"name\":\"SF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"},\"value\":{\"kind\":\"cast\",\"op\":1,\"width\":1,\"arg\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580055\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}}}},{\"kind\":\"move\",\"var\":{\"name\":\"ZF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"},\"value\":{\"kind\":\"binop\",\"op\":5,\"lhs\":{\"kind\":\"int\",\"value\":\"0:64u\"},\"rhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580055\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}}}}]",
+      "ast_sha256": "d65bb1a1d00bcfda68641f5d11c386c58dc331c2631926e8125e54437f05f16a",
+      "original_control": {
+        "complete": true,
+        "fall": [
+          "0x00007ff77440dad4"
+        ],
+        "kind": "ordinary",
+        "targets": []
+      },
+      "candidate_instruction": {
+        "address": "0x00007ff77440dad0",
+        "fall": [
+          "0x00007ff77440dad4"
+        ],
+        "kind": "ordinary",
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf"
+        ],
+        "must_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf"
+        ],
+        "targets": [],
+        "targets_complete": true,
+        "uses": [
+          "gpr:r8:0",
+          "gpr:r8:1",
+          "gpr:r8:2",
+          "gpr:r8:3",
+          "gpr:r8:4",
+          "gpr:r8:5",
+          "gpr:r8:6",
+          "gpr:r8:7"
+        ]
+      },
+      "capture_spans": [
+        {
+          "contributors": [
+            {
+              "entry": 2218,
+              "file_offset": "0x000000002c8808ae",
+              "stream": 9
+            }
+          ],
+          "length": 15,
+          "va": "0x00007ff77440dad0"
+        }
+      ],
+      "legacy_transfer": {
+        "ast_sha256": "d65bb1a1d00bcfda68641f5d11c386c58dc331c2631926e8125e54437f05f16a",
+        "bytes_hex": "4983f809",
+        "condition": null,
+        "jump": null,
+        "outputs": {
+          "CF:0:false": {
+            "kind": {
+              "kind": "binary",
+              "left": {
+                "kind": {
+                  "key": "R8:0:false",
+                  "kind": "input"
+                },
+                "width": 64
+              },
+              "op": 3,
+              "right": {
+                "kind": {
+                  "kind": "constant",
+                  "value": "0x0000000000000009"
+                },
+                "width": 64
+              }
+            },
+            "width": 1
+          },
+          "ZF:0:false": {
+            "kind": {
+              "kind": "binary",
+              "left": {
+                "kind": {
+                  "key": "R8:0:false",
+                  "kind": "input"
+                },
+                "width": 64
+              },
+              "op": 5,
+              "right": {
+                "kind": {
+                  "kind": "constant",
+                  "value": "0x0000000000000009"
+                },
+                "width": 64
+              }
+            },
+            "width": 1
+          }
+        },
+        "site": "0x00007ff77440dad0"
+      }
+    },
+    {
+      "site": "0x00007ff77440dad4",
+      "bytes_hex": "77ec",
+      "bytes_sha256": "a15d24518ad3aae0798b219e4ce7bd38a39f6a3f011d5b31ed6230024d9e0bed",
+      "length": 2,
+      "opcode": "JCC_1",
+      "decoder_record": "v2 JCC_1 2 i:-20 i:7 0 0 1 EFLAGS 0 -1 -1 140700784057044 ok 2 conditional 140700784057026",
+      "ast": "[{\"kind\":\"if\",\"condition\":{\"kind\":\"unop\",\"op\":0,\"arg\":{\"kind\":\"binop\",\"op\":7,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"CF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"var\",\"var\":{\"name\":\"ZF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"}}}},\"yes\":[{\"kind\":\"jump\",\"target\":{\"kind\":\"int\",\"value\":\"0x7FF77440DAC2:64u\"}}],\"no\":[]}]",
+      "ast_sha256": "d4ad285a0a3e5adff4a2a343741e19a753f652554a13a7a6c03ba88923547a1a",
+      "original_control": {
+        "complete": true,
+        "fall": [
+          "0x00007ff77440dad6"
+        ],
+        "kind": "conditional",
+        "targets": [
+          "0x00007ff77440dac2"
+        ]
+      },
+      "candidate_instruction": {
+        "address": "0x00007ff77440dad4",
+        "fall": [
+          "0x00007ff77440dad6"
+        ],
+        "kind": "conditional",
+        "may_defs": [],
+        "must_defs": [],
+        "targets": [
+          "0x00007ff77440dac2"
+        ],
+        "targets_complete": true,
+        "uses": [
+          "flag:cf",
+          "flag:zf"
+        ]
+      },
+      "capture_spans": [
+        {
+          "contributors": [
+            {
+              "entry": 2218,
+              "file_offset": "0x000000002c8808b2",
+              "stream": 9
+            }
+          ],
+          "length": 15,
+          "va": "0x00007ff77440dad4"
+        }
+      ],
+      "legacy_transfer": {
+        "ast_sha256": "d4ad285a0a3e5adff4a2a343741e19a753f652554a13a7a6c03ba88923547a1a",
+        "bytes_hex": "77ec",
+        "condition": {
+          "kind": {
+            "arg": {
+              "kind": {
+                "kind": "binary",
+                "left": {
+                  "kind": {
+                    "key": "CF:0:false",
+                    "kind": "input"
+                  },
+                  "width": 1
+                },
+                "op": 7,
+                "right": {
+                  "kind": {
+                    "key": "ZF:0:false",
+                    "kind": "input"
+                  },
+                  "width": 1
+                }
+              },
+              "width": 1
+            },
+            "kind": "unary",
+            "op": 0
+          },
+          "width": 1
+        },
+        "jump": null,
+        "outputs": {},
+        "site": "0x00007ff77440dad4"
+      }
+    },
+    {
+      "site": "0x00007ff77440dad6",
+      "bytes_hex": "4e630482",
+      "bytes_sha256": "75b3f183013aa77c496ffdc98e017e022172ebfa3e13df6a300ea25fe7b46343",
+      "length": 4,
+      "opcode": "MOVSX64rm32",
+      "decoder_record": "v2 MOVSX64rm32 6 r:R8 r:RDX i:4 r:R8 i:0 r:NONE 1 1 0 0 -1 -1 -1 -1 -1 -1 140700784057046 ok 4 ordinary -",
+      "ast": "[{\"kind\":\"move\",\"var\":{\"name\":\"R8\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"},\"value\":{\"kind\":\"cast\",\"op\":2,\"width\":64,\"arg\":{\"kind\":\"load\",\"width\":32,\"mem\":{\"kind\":\"var\",\"var\":{\"name\":\"mem\",\"index\":0,\"virtual\":false,\"width\":0,\"type\":\"mem\"}},\"addr\":{\"kind\":\"binop\",\"op\":18,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"RDX\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"binop\",\"op\":11,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"R8\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"int\",\"value\":\"2:64u\"}}}}}}]",
+      "ast_sha256": "8ef5aeb3bcae9071e3f5771954e038b2f6cfbf40cf53a9e4beafc5024625ce20",
+      "original_control": {
+        "complete": true,
+        "fall": [
+          "0x00007ff77440dada"
+        ],
+        "kind": "ordinary",
+        "targets": []
+      },
+      "candidate_instruction": {
+        "address": "0x00007ff77440dad6",
+        "fall": [
+          "0x00007ff77440dada"
+        ],
+        "kind": "ordinary",
+        "may_defs": [
+          "gpr:r8:0",
+          "gpr:r8:1",
+          "gpr:r8:2",
+          "gpr:r8:3",
+          "gpr:r8:4",
+          "gpr:r8:5",
+          "gpr:r8:6",
+          "gpr:r8:7"
+        ],
+        "must_defs": [
+          "gpr:r8:0",
+          "gpr:r8:1",
+          "gpr:r8:2",
+          "gpr:r8:3",
+          "gpr:r8:4",
+          "gpr:r8:5",
+          "gpr:r8:6",
+          "gpr:r8:7"
+        ],
+        "targets": [],
+        "targets_complete": true,
+        "uses": [
+          "gpr:r8:0",
+          "gpr:r8:1",
+          "gpr:r8:2",
+          "gpr:r8:3",
+          "gpr:r8:4",
+          "gpr:r8:5",
+          "gpr:r8:6",
+          "gpr:r8:7",
+          "gpr:rdx:0",
+          "gpr:rdx:1",
+          "gpr:rdx:2",
+          "gpr:rdx:3",
+          "gpr:rdx:4",
+          "gpr:rdx:5",
+          "gpr:rdx:6",
+          "gpr:rdx:7",
+          "memory:any"
+        ]
+      },
+      "capture_spans": [
+        {
+          "contributors": [
+            {
+              "entry": 2218,
+              "file_offset": "0x000000002c8808b4",
+              "stream": 9
+            }
+          ],
+          "length": 15,
+          "va": "0x00007ff77440dad6"
+        }
+      ],
+      "legacy_transfer": {
+        "ast_sha256": "8ef5aeb3bcae9071e3f5771954e038b2f6cfbf40cf53a9e4beafc5024625ce20",
+        "bytes_hex": "4e630482",
+        "condition": null,
+        "jump": null,
+        "outputs": {
+          "R8:0:false": {
+            "kind": {
+              "arg": {
+                "kind": {
+                  "address": {
+                    "kind": {
+                      "kind": "binary",
+                      "left": {
+                        "kind": {
+                          "key": "RDX:0:false",
+                          "kind": "input"
+                        },
+                        "width": 64
+                      },
+                      "op": 18,
+                      "right": {
+                        "kind": {
+                          "kind": "binary",
+                          "left": {
+                            "kind": {
+                              "key": "R8:0:false",
+                              "kind": "input"
+                            },
+                            "width": 64
+                          },
+                          "op": 11,
+                          "right": {
+                            "kind": {
+                              "kind": "constant",
+                              "value": "0x0000000000000002"
+                            },
+                            "width": 64
+                          }
+                        },
+                        "width": 64
+                      }
+                    },
+                    "width": 64
+                  },
+                  "kind": "load",
+                  "site": "0x00007ff77440dad6"
+                },
+                "width": 32
+              },
+              "kind": "cast",
+              "op": 2
+            },
+            "width": 64
+          }
+        },
+        "site": "0x00007ff77440dad6"
+      }
+    },
+    {
+      "site": "0x00007ff77440dada",
+      "bytes_hex": "4901d0",
+      "bytes_sha256": "f2e7b123d9a18723940376436243a5c8097ddccaf1cb47c1e692e0491df9ccae",
+      "length": 3,
+      "opcode": "ADD64rr",
+      "decoder_record": "v2 ADD64rr 3 r:R8 r:R8 r:RDX 1 0 0 1 EFLAGS -1 0 -1 140700784057050 ok 3 ordinary -",
+      "ast": "[{\"kind\":\"move\",\"var\":{\"name\":\"#12580026\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"},\"value\":{\"kind\":\"var\",\"var\":{\"name\":\"R8\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}}},{\"kind\":\"move\",\"var\":{\"name\":\"#12580025\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"},\"value\":{\"kind\":\"var\",\"var\":{\"name\":\"RDX\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}}},{\"kind\":\"move\",\"var\":{\"name\":\"R8\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"},\"value\":{\"kind\":\"binop\",\"op\":18,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"R8\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580025\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}}}},{\"kind\":\"move\",\"var\":{\"name\":\"CF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"},\"value\":{\"kind\":\"binop\",\"op\":3,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"R8\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580026\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}}}},{\"kind\":\"move\",\"var\":{\"name\":\"OF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"},\"value\":{\"kind\":\"binop\",\"op\":8,\"lhs\":{\"kind\":\"binop\",\"op\":5,\"lhs\":{\"kind\":\"cast\",\"op\":1,\"width\":1,\"arg\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580026\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}}},\"rhs\":{\"kind\":\"cast\",\"op\":1,\"width\":1,\"arg\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580025\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}}}},\"rhs\":{\"kind\":\"binop\",\"op\":6,\"lhs\":{\"kind\":\"cast\",\"op\":1,\"width\":1,\"arg\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580026\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}}},\"rhs\":{\"kind\":\"cast\",\"op\":1,\"width\":1,\"arg\":{\"kind\":\"var\",\"var\":{\"name\":\"R8\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}}}}}},{\"kind\":\"move\",\"var\":{\"name\":\"AF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"},\"value\":{\"kind\":\"binop\",\"op\":5,\"lhs\":{\"kind\":\"int\",\"value\":\"0x10:64u\"},\"rhs\":{\"kind\":\"binop\",\"op\":8,\"lhs\":{\"kind\":\"int\",\"value\":\"0x10:64u\"},\"rhs\":{\"kind\":\"binop\",\"op\":6,\"lhs\":{\"kind\":\"binop\",\"op\":6,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"R8\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580026\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}}},\"rhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580025\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}}}}}},{\"kind\":\"move\",\"var\":{\"name\":\"PF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"},\"value\":{\"kind\":\"unop\",\"op\":0,\"arg\":{\"kind\":\"cast\",\"op\":0,\"width\":1,\"arg\":{\"kind\":\"let\",\"var\":{\"name\":\"#12580024\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"},\"value\":{\"kind\":\"binop\",\"op\":6,\"lhs\":{\"kind\":\"binop\",\"op\":10,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"R8\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"int\",\"value\":\"4:64u\"}},\"rhs\":{\"kind\":\"var\",\"var\":{\"name\":\"R8\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}}},\"body\":{\"kind\":\"let\",\"var\":{\"name\":\"#12580024\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"},\"value\":{\"kind\":\"binop\",\"op\":6,\"lhs\":{\"kind\":\"binop\",\"op\":10,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580024\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"int\",\"value\":\"2:64u\"}},\"rhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580024\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}}},\"body\":{\"kind\":\"binop\",\"op\":6,\"lhs\":{\"kind\":\"binop\",\"op\":10,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580024\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"int\",\"value\":\"1:64u\"}},\"rhs\":{\"kind\":\"var\",\"var\":{\"name\":\"#12580024\",\"index\":0,\"virtual\":true,\"width\":64,\"type\":\"imm\"}}}}}}}},{\"kind\":\"move\",\"var\":{\"name\":\"SF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"},\"value\":{\"kind\":\"cast\",\"op\":1,\"width\":1,\"arg\":{\"kind\":\"var\",\"var\":{\"name\":\"R8\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}}}},{\"kind\":\"move\",\"var\":{\"name\":\"ZF\",\"index\":0,\"virtual\":false,\"width\":1,\"type\":\"imm\"},\"value\":{\"kind\":\"binop\",\"op\":5,\"lhs\":{\"kind\":\"int\",\"value\":\"0:64u\"},\"rhs\":{\"kind\":\"var\",\"var\":{\"name\":\"R8\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}}}}]",
+      "ast_sha256": "3a5907841e558ed39d21331baff09bccbd820e1758b0995c8cfe820df2e5694b",
+      "original_control": {
+        "complete": true,
+        "fall": [
+          "0x00007ff77440dadd"
+        ],
+        "kind": "ordinary",
+        "targets": []
+      },
+      "candidate_instruction": {
+        "address": "0x00007ff77440dada",
+        "fall": [
+          "0x00007ff77440dadd"
+        ],
+        "kind": "ordinary",
+        "may_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:r8:0",
+          "gpr:r8:1",
+          "gpr:r8:2",
+          "gpr:r8:3",
+          "gpr:r8:4",
+          "gpr:r8:5",
+          "gpr:r8:6",
+          "gpr:r8:7"
+        ],
+        "must_defs": [
+          "flag:af",
+          "flag:cf",
+          "flag:of",
+          "flag:pf",
+          "flag:sf",
+          "flag:zf",
+          "gpr:r8:0",
+          "gpr:r8:1",
+          "gpr:r8:2",
+          "gpr:r8:3",
+          "gpr:r8:4",
+          "gpr:r8:5",
+          "gpr:r8:6",
+          "gpr:r8:7"
+        ],
+        "targets": [],
+        "targets_complete": true,
+        "uses": [
+          "gpr:r8:0",
+          "gpr:r8:1",
+          "gpr:r8:2",
+          "gpr:r8:3",
+          "gpr:r8:4",
+          "gpr:r8:5",
+          "gpr:r8:6",
+          "gpr:r8:7",
+          "gpr:rdx:0",
+          "gpr:rdx:1",
+          "gpr:rdx:2",
+          "gpr:rdx:3",
+          "gpr:rdx:4",
+          "gpr:rdx:5",
+          "gpr:rdx:6",
+          "gpr:rdx:7"
+        ]
+      },
+      "capture_spans": [
+        {
+          "contributors": [
+            {
+              "entry": 2218,
+              "file_offset": "0x000000002c8808b8",
+              "stream": 9
+            }
+          ],
+          "length": 15,
+          "va": "0x00007ff77440dada"
+        }
+      ],
+      "legacy_transfer": {
+        "ast_sha256": "3a5907841e558ed39d21331baff09bccbd820e1758b0995c8cfe820df2e5694b",
+        "bytes_hex": "4901d0",
+        "condition": null,
+        "jump": null,
+        "outputs": {
+          "CF:0:false": {
+            "kind": {
+              "kind": "binary",
+              "left": {
+                "kind": {
+                  "kind": "binary",
+                  "left": {
+                    "kind": {
+                      "key": "R8:0:false",
+                      "kind": "input"
+                    },
+                    "width": 64
+                  },
+                  "op": 18,
+                  "right": {
+                    "kind": {
+                      "key": "RDX:0:false",
+                      "kind": "input"
+                    },
+                    "width": 64
+                  }
+                },
+                "width": 64
+              },
+              "op": 3,
+              "right": {
+                "kind": {
+                  "key": "R8:0:false",
+                  "kind": "input"
+                },
+                "width": 64
+              }
+            },
+            "width": 1
+          },
+          "R8:0:false": {
+            "kind": {
+              "kind": "binary",
+              "left": {
+                "kind": {
+                  "key": "R8:0:false",
+                  "kind": "input"
+                },
+                "width": 64
+              },
+              "op": 18,
+              "right": {
+                "kind": {
+                  "key": "RDX:0:false",
+                  "kind": "input"
+                },
+                "width": 64
+              }
+            },
+            "width": 64
+          },
+          "ZF:0:false": {
+            "kind": {
+              "kind": "binary",
+              "left": {
+                "kind": {
+                  "kind": "constant",
+                  "value": "0x0000000000000000"
+                },
+                "width": 64
+              },
+              "op": 5,
+              "right": {
+                "kind": {
+                  "kind": "binary",
+                  "left": {
+                    "kind": {
+                      "key": "R8:0:false",
+                      "kind": "input"
+                    },
+                    "width": 64
+                  },
+                  "op": 18,
+                  "right": {
+                    "kind": {
+                      "key": "RDX:0:false",
+                      "kind": "input"
+                    },
+                    "width": 64
+                  }
+                },
+                "width": 64
+              }
+            },
+            "width": 1
+          }
+        },
+        "site": "0x00007ff77440dada"
+      }
+    },
+    {
+      "site": "0x00007ff77440dadd",
+      "bytes_hex": "41ffe0",
+      "bytes_sha256": "4614c1a8ceb8b24d2c50c494ddde0e9b3202dee74f1096afdb3d45cabe481c87",
+      "length": 3,
+      "opcode": "JMP64r",
+      "decoder_record": "v2 JMP64r 1 r:R8 0 0 0 0 -1 140700784057053 ok 3 indirect -",
+      "ast": "[{\"kind\":\"jump\",\"target\":{\"kind\":\"var\",\"var\":{\"name\":\"R8\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}}}]",
+      "ast_sha256": "962c4ab951f67b95433fef76f30a3137742ad70b398cdf8fe2dd98dccd1277d8",
+      "original_control": {
+        "complete": false,
+        "fall": [],
+        "kind": "indirect",
+        "targets": [
+          "0x00007ff77440a5df",
+          "0x00007ff77440dabf",
+          "0x00007ff77440dae0",
+          "0x00007ff77440daed"
+        ]
+      },
+      "candidate_instruction": {
+        "address": "0x00007ff77440dadd",
+        "fall": [],
+        "kind": "indirect",
+        "may_defs": [],
+        "must_defs": [],
+        "targets": [
+          "0x00007ff77440a5df",
+          "0x00007ff77440dabf",
+          "0x00007ff77440dae0",
+          "0x00007ff77440daed"
+        ],
+        "targets_complete": false,
+        "uses": [
+          "gpr:r8:0",
+          "gpr:r8:1",
+          "gpr:r8:2",
+          "gpr:r8:3",
+          "gpr:r8:4",
+          "gpr:r8:5",
+          "gpr:r8:6",
+          "gpr:r8:7"
+        ]
+      },
+      "capture_spans": [
+        {
+          "contributors": [
+            {
+              "entry": 2218,
+              "file_offset": "0x000000002c8808bb",
+              "stream": 9
+            }
+          ],
+          "length": 15,
+          "va": "0x00007ff77440dadd"
+        }
+      ],
+      "legacy_transfer": {
+        "ast_sha256": "962c4ab951f67b95433fef76f30a3137742ad70b398cdf8fe2dd98dccd1277d8",
+        "bytes_hex": "41ffe0",
+        "condition": null,
+        "jump": {
+          "kind": {
+            "key": "R8:0:false",
+            "kind": "input"
+          },
+          "width": 64
+        },
+        "outputs": {},
+        "site": "0x00007ff77440dadd"
+      }
+    }
+  ],
+  "table_entries": [
+    {
+      "bytes_hex": "0f9c97f8",
+      "index": "0x0000000000000000",
+      "slot": "0x00007ff77ba909d0",
+      "target": "0x00007ff77440a5df"
+    },
+    {
+      "bytes_hex": "0f9c97f8",
+      "index": "0x0000000000000001",
+      "slot": "0x00007ff77ba909d4",
+      "target": "0x00007ff77440a5df"
+    },
+    {
+      "bytes_hex": "1dd197f8",
+      "index": "0x0000000000000002",
+      "slot": "0x00007ff77ba909d8",
+      "target": "0x00007ff77440daed"
+    },
+    {
+      "bytes_hex": "efd097f8",
+      "index": "0x0000000000000003",
+      "slot": "0x00007ff77ba909dc",
+      "target": "0x00007ff77440dabf"
+    },
+    {
+      "bytes_hex": "10d197f8",
+      "index": "0x0000000000000004",
+      "slot": "0x00007ff77ba909e0",
+      "target": "0x00007ff77440dae0"
+    },
+    {
+      "bytes_hex": "0f9c97f8",
+      "index": "0x0000000000000005",
+      "slot": "0x00007ff77ba909e4",
+      "target": "0x00007ff77440a5df"
+    },
+    {
+      "bytes_hex": "1dd197f8",
+      "index": "0x0000000000000006",
+      "slot": "0x00007ff77ba909e8",
+      "target": "0x00007ff77440daed"
+    },
+    {
+      "bytes_hex": "1dd197f8",
+      "index": "0x0000000000000007",
+      "slot": "0x00007ff77ba909ec",
+      "target": "0x00007ff77440daed"
+    },
+    {
+      "bytes_hex": "1dd197f8",
+      "index": "0x0000000000000008",
+      "slot": "0x00007ff77ba909f0",
+      "target": "0x00007ff77440daed"
+    },
+    {
+      "bytes_hex": "1dd197f8",
+      "index": "0x0000000000000009",
+      "slot": "0x00007ff77ba909f4",
+      "target": "0x00007ff77440daed"
+    }
+  ],
+  "table_reads": [
+    {
+      "address": "0x00007ff77ba909d0",
+      "bytes_hex": "0f9c97f8",
+      "conflict_sources": [],
+      "requested": 4,
+      "spans": [
+        {
+          "address": "0x00007ff77ba909d0",
+          "contributors": [
+            {
+              "entry": 2219,
+              "file_offset": 871380910,
+              "stream": 9
+            }
+          ],
+          "length": 4
+        }
+      ],
+      "stop": "RequestedLength"
+    },
+    {
+      "address": "0x00007ff77ba909d4",
+      "bytes_hex": "0f9c97f8",
+      "conflict_sources": [],
+      "requested": 4,
+      "spans": [
+        {
+          "address": "0x00007ff77ba909d4",
+          "contributors": [
+            {
+              "entry": 2219,
+              "file_offset": 871380914,
+              "stream": 9
+            }
+          ],
+          "length": 4
+        }
+      ],
+      "stop": "RequestedLength"
+    },
+    {
+      "address": "0x00007ff77ba909d8",
+      "bytes_hex": "1dd197f8",
+      "conflict_sources": [],
+      "requested": 4,
+      "spans": [
+        {
+          "address": "0x00007ff77ba909d8",
+          "contributors": [
+            {
+              "entry": 2219,
+              "file_offset": 871380918,
+              "stream": 9
+            }
+          ],
+          "length": 4
+        }
+      ],
+      "stop": "RequestedLength"
+    },
+    {
+      "address": "0x00007ff77ba909dc",
+      "bytes_hex": "efd097f8",
+      "conflict_sources": [],
+      "requested": 4,
+      "spans": [
+        {
+          "address": "0x00007ff77ba909dc",
+          "contributors": [
+            {
+              "entry": 2219,
+              "file_offset": 871380922,
+              "stream": 9
+            }
+          ],
+          "length": 4
+        }
+      ],
+      "stop": "RequestedLength"
+    },
+    {
+      "address": "0x00007ff77ba909e0",
+      "bytes_hex": "10d197f8",
+      "conflict_sources": [],
+      "requested": 4,
+      "spans": [
+        {
+          "address": "0x00007ff77ba909e0",
+          "contributors": [
+            {
+              "entry": 2219,
+              "file_offset": 871380926,
+              "stream": 9
+            }
+          ],
+          "length": 4
+        }
+      ],
+      "stop": "RequestedLength"
+    },
+    {
+      "address": "0x00007ff77ba909e4",
+      "bytes_hex": "0f9c97f8",
+      "conflict_sources": [],
+      "requested": 4,
+      "spans": [
+        {
+          "address": "0x00007ff77ba909e4",
+          "contributors": [
+            {
+              "entry": 2219,
+              "file_offset": 871380930,
+              "stream": 9
+            }
+          ],
+          "length": 4
+        }
+      ],
+      "stop": "RequestedLength"
+    },
+    {
+      "address": "0x00007ff77ba909e8",
+      "bytes_hex": "1dd197f8",
+      "conflict_sources": [],
+      "requested": 4,
+      "spans": [
+        {
+          "address": "0x00007ff77ba909e8",
+          "contributors": [
+            {
+              "entry": 2219,
+              "file_offset": 871380934,
+              "stream": 9
+            }
+          ],
+          "length": 4
+        }
+      ],
+      "stop": "RequestedLength"
+    },
+    {
+      "address": "0x00007ff77ba909ec",
+      "bytes_hex": "1dd197f8",
+      "conflict_sources": [],
+      "requested": 4,
+      "spans": [
+        {
+          "address": "0x00007ff77ba909ec",
+          "contributors": [
+            {
+              "entry": 2219,
+              "file_offset": 871380938,
+              "stream": 9
+            }
+          ],
+          "length": 4
+        }
+      ],
+      "stop": "RequestedLength"
+    },
+    {
+      "address": "0x00007ff77ba909f0",
+      "bytes_hex": "1dd197f8",
+      "conflict_sources": [],
+      "requested": 4,
+      "spans": [
+        {
+          "address": "0x00007ff77ba909f0",
+          "contributors": [
+            {
+              "entry": 2219,
+              "file_offset": 871380942,
+              "stream": 9
+            }
+          ],
+          "length": 4
+        }
+      ],
+      "stop": "RequestedLength"
+    },
+    {
+      "address": "0x00007ff77ba909f4",
+      "bytes_hex": "1dd197f8",
+      "conflict_sources": [],
+      "requested": 4,
+      "spans": [
+        {
+          "address": "0x00007ff77ba909f4",
+          "contributors": [
+            {
+              "entry": 2219,
+              "file_offset": 871380946,
+              "stream": 9
+            }
+          ],
+          "length": 4
+        }
+      ],
+      "stop": "RequestedLength"
+    }
+  ],
+  "expected_targets": [
+    "0x00007ff77440a5df",
+    "0x00007ff77440dabf",
+    "0x00007ff77440dae0",
+    "0x00007ff77440daed"
+  ],
+  "legacy_resolution": {
+    "complete": false,
+    "paths": [
+      {
+        "base": "0x0000000000000000",
+        "entries": [],
+        "expression": {
+          "kind": {
+            "kind": "binary",
+            "left": {
+              "kind": {
+                "arg": {
+                  "kind": {
+                    "address": {
+                      "kind": {
+                        "kind": "binary",
+                        "left": {
+                          "kind": {
+                            "key": "RDX:0:false",
+                            "kind": "input"
+                          },
+                          "width": 64
+                        },
+                        "op": 18,
+                        "right": {
+                          "kind": {
+                            "kind": "binary",
+                            "left": {
+                              "kind": {
+                                "arg": {
+                                  "kind": {
+                                    "address": {
+                                      "kind": {
+                                        "kind": "binary",
+                                        "left": {
+                                          "kind": {
+                                            "key": "RCX:0:false",
+                                            "kind": "input"
+                                          },
+                                          "width": 64
+                                        },
+                                        "op": 18,
+                                        "right": {
+                                          "kind": {
+                                            "kind": "constant",
+                                            "value": "0x0000000000000078"
+                                          },
+                                          "width": 64
+                                        }
+                                      },
+                                      "width": 64
+                                    },
+                                    "kind": "load",
+                                    "site": "0x00007ff77440dacb"
+                                  },
+                                  "width": 8
+                                },
+                                "kind": "cast",
+                                "op": 3
+                              },
+                              "width": 64
+                            },
+                            "op": 11,
+                            "right": {
+                              "kind": {
+                                "kind": "constant",
+                                "value": "0x0000000000000002"
+                              },
+                              "width": 64
+                            }
+                          },
+                          "width": 64
+                        }
+                      },
+                      "width": 64
+                    },
+                    "kind": "load",
+                    "site": "0x00007ff77440dad6"
+                  },
+                  "width": 32
+                },
+                "kind": "cast",
+                "op": 2
+              },
+              "width": 64
+            },
+            "op": 18,
+            "right": {
+              "kind": {
+                "key": "RDX:0:false",
+                "kind": "input"
+              },
+              "width": 64
+            }
+          },
+          "width": 64
+        },
+        "form": "infeasible",
+        "frontier": true,
+        "guards": [
+          {
+            "expression": {
+              "kind": {
+                "arg": {
+                  "kind": {
+                    "kind": "binary",
+                    "left": {
+                      "kind": {
+                        "kind": "binary",
+                        "left": {
+                          "kind": {
+                            "arg": {
+                              "kind": {
+                                "address": {
+                                  "kind": {
+                                    "kind": "binary",
+                                    "left": {
+                                      "kind": {
+                                        "key": "RCX:0:false",
+                                        "kind": "input"
+                                      },
+                                      "width": 64
+                                    },
+                                    "op": 18,
+                                    "right": {
+                                      "kind": {
+                                        "kind": "constant",
+                                        "value": "0x0000000000000078"
+                                      },
+                                      "width": 64
+                                    }
+                                  },
+                                  "width": 64
+                                },
+                                "kind": "load",
+                                "site": "0x00007ff77440dacb"
+                              },
+                              "width": 8
+                            },
+                            "kind": "cast",
+                            "op": 3
+                          },
+                          "width": 64
+                        },
+                        "op": 3,
+                        "right": {
+                          "kind": {
+                            "kind": "constant",
+                            "value": "0x0000000000000009"
+                          },
+                          "width": 64
+                        }
+                      },
+                      "width": 1
+                    },
+                    "op": 7,
+                    "right": {
+                      "kind": {
+                        "kind": "binary",
+                        "left": {
+                          "kind": {
+                            "arg": {
+                              "kind": {
+                                "address": {
+                                  "kind": {
+                                    "kind": "binary",
+                                    "left": {
+                                      "kind": {
+                                        "key": "RCX:0:false",
+                                        "kind": "input"
+                                      },
+                                      "width": 64
+                                    },
+                                    "op": 18,
+                                    "right": {
+                                      "kind": {
+                                        "kind": "constant",
+                                        "value": "0x0000000000000078"
+                                      },
+                                      "width": 64
+                                    }
+                                  },
+                                  "width": 64
+                                },
+                                "kind": "load",
+                                "site": "0x00007ff77440dacb"
+                              },
+                              "width": 8
+                            },
+                            "kind": "cast",
+                            "op": 3
+                          },
+                          "width": 64
+                        },
+                        "op": 5,
+                        "right": {
+                          "kind": {
+                            "kind": "constant",
+                            "value": "0x0000000000000009"
+                          },
+                          "width": 64
+                        }
+                      },
+                      "width": 1
+                    }
+                  },
+                  "width": 1
+                },
+                "kind": "unary",
+                "op": 0
+              },
+              "width": 1
+            },
+            "taken": false
+          },
+          {
+            "expression": {
+              "kind": {
+                "kind": "binary",
+                "left": {
+                  "kind": {
+                    "kind": "constant",
+                    "value": "0x0000000000000000"
+                  },
+                  "width": 64
+                },
+                "op": 5,
+                "right": {
+                  "kind": {
+                    "key": "RCX:0:false",
+                    "kind": "input"
+                  },
+                  "width": 64
+                }
+              },
+              "width": 1
+            },
+            "taken": false
+          },
+          {
+            "expression": {
+              "kind": {
+                "arg": {
+                  "kind": {
+                    "kind": "binary",
+                    "left": {
+                      "kind": {
+                        "kind": "binary",
+                        "left": {
+                          "kind": {
+                            "arg": {
+                              "kind": {
+                                "address": {
+                                  "kind": {
+                                    "kind": "binary",
+                                    "left": {
+                                      "kind": {
+                                        "key": "RCX:0:false",
+                                        "kind": "input"
+                                      },
+                                      "width": 64
+                                    },
+                                    "op": 18,
+                                    "right": {
+                                      "kind": {
+                                        "kind": "constant",
+                                        "value": "0x0000000000000078"
+                                      },
+                                      "width": 64
+                                    }
+                                  },
+                                  "width": 64
+                                },
+                                "kind": "load",
+                                "site": "0x00007ff77440dacb"
+                              },
+                              "width": 8
+                            },
+                            "kind": "cast",
+                            "op": 3
+                          },
+                          "width": 64
+                        },
+                        "op": 3,
+                        "right": {
+                          "kind": {
+                            "kind": "constant",
+                            "value": "0x0000000000000009"
+                          },
+                          "width": 64
+                        }
+                      },
+                      "width": 1
+                    },
+                    "op": 7,
+                    "right": {
+                      "kind": {
+                        "kind": "binary",
+                        "left": {
+                          "kind": {
+                            "arg": {
+                              "kind": {
+                                "address": {
+                                  "kind": {
+                                    "kind": "binary",
+                                    "left": {
+                                      "kind": {
+                                        "key": "RCX:0:false",
+                                        "kind": "input"
+                                      },
+                                      "width": 64
+                                    },
+                                    "op": 18,
+                                    "right": {
+                                      "kind": {
+                                        "kind": "constant",
+                                        "value": "0x0000000000000078"
+                                      },
+                                      "width": 64
+                                    }
+                                  },
+                                  "width": 64
+                                },
+                                "kind": "load",
+                                "site": "0x00007ff77440dacb"
+                              },
+                              "width": 8
+                            },
+                            "kind": "cast",
+                            "op": 3
+                          },
+                          "width": 64
+                        },
+                        "op": 5,
+                        "right": {
+                          "kind": {
+                            "kind": "constant",
+                            "value": "0x0000000000000009"
+                          },
+                          "width": 64
+                        }
+                      },
+                      "width": 1
+                    }
+                  },
+                  "width": 1
+                },
+                "kind": "unary",
+                "op": 0
+              },
+              "width": 1
+            },
+            "taken": true
+          }
+        ],
+        "indices": [],
+        "reverse_edges": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          true,
+          false,
+          false
+        ],
+        "reverse_path": [
+          "0x00007ff77440dada",
+          "0x00007ff77440dad6",
+          "0x00007ff77440dad4",
+          "0x00007ff77440dad0",
+          "0x00007ff77440dacb",
+          "0x00007ff77440dac5",
+          "0x00007ff77440dac2",
+          "0x00007ff77440dad4",
+          "0x00007ff77440dad0",
+          "0x00007ff77440dacb"
+        ],
+        "root": "0x00007ff77440dacb"
+      },
+      {
+        "base": "0x00007ff77ba909d0",
+        "entries": [
+          {
+            "bytes_hex": "0f9c97f8",
+            "index": "0x0000000000000000",
+            "slot": "0x00007ff77ba909d0",
+            "target": "0x00007ff77440a5df"
+          },
+          {
+            "bytes_hex": "0f9c97f8",
+            "index": "0x0000000000000001",
+            "slot": "0x00007ff77ba909d4",
+            "target": "0x00007ff77440a5df"
+          },
+          {
+            "bytes_hex": "1dd197f8",
+            "index": "0x0000000000000002",
+            "slot": "0x00007ff77ba909d8",
+            "target": "0x00007ff77440daed"
+          },
+          {
+            "bytes_hex": "efd097f8",
+            "index": "0x0000000000000003",
+            "slot": "0x00007ff77ba909dc",
+            "target": "0x00007ff77440dabf"
+          },
+          {
+            "bytes_hex": "10d197f8",
+            "index": "0x0000000000000004",
+            "slot": "0x00007ff77ba909e0",
+            "target": "0x00007ff77440dae0"
+          },
+          {
+            "bytes_hex": "0f9c97f8",
+            "index": "0x0000000000000005",
+            "slot": "0x00007ff77ba909e4",
+            "target": "0x00007ff77440a5df"
+          },
+          {
+            "bytes_hex": "1dd197f8",
+            "index": "0x0000000000000006",
+            "slot": "0x00007ff77ba909e8",
+            "target": "0x00007ff77440daed"
+          },
+          {
+            "bytes_hex": "1dd197f8",
+            "index": "0x0000000000000007",
+            "slot": "0x00007ff77ba909ec",
+            "target": "0x00007ff77440daed"
+          },
+          {
+            "bytes_hex": "1dd197f8",
+            "index": "0x0000000000000008",
+            "slot": "0x00007ff77ba909f0",
+            "target": "0x00007ff77440daed"
+          },
+          {
+            "bytes_hex": "1dd197f8",
+            "index": "0x0000000000000009",
+            "slot": "0x00007ff77ba909f4",
+            "target": "0x00007ff77440daed"
+          }
+        ],
+        "expression": {
+          "kind": {
+            "kind": "binary",
+            "left": {
+              "kind": {
+                "arg": {
+                  "kind": {
+                    "address": {
+                      "kind": {
+                        "kind": "binary",
+                        "left": {
+                          "kind": {
+                            "kind": "constant",
+                            "value": "0x00007ff77ba909d0"
+                          },
+                          "width": 64
+                        },
+                        "op": 18,
+                        "right": {
+                          "kind": {
+                            "kind": "binary",
+                            "left": {
+                              "kind": {
+                                "arg": {
+                                  "kind": {
+                                    "address": {
+                                      "kind": {
+                                        "kind": "binary",
+                                        "left": {
+                                          "kind": {
+                                            "key": "RCX:0:false",
+                                            "kind": "input"
+                                          },
+                                          "width": 64
+                                        },
+                                        "op": 18,
+                                        "right": {
+                                          "kind": {
+                                            "kind": "constant",
+                                            "value": "0x0000000000000078"
+                                          },
+                                          "width": 64
+                                        }
+                                      },
+                                      "width": 64
+                                    },
+                                    "kind": "load",
+                                    "site": "0x00007ff77440dacb"
+                                  },
+                                  "width": 8
+                                },
+                                "kind": "cast",
+                                "op": 3
+                              },
+                              "width": 64
+                            },
+                            "op": 11,
+                            "right": {
+                              "kind": {
+                                "kind": "constant",
+                                "value": "0x0000000000000002"
+                              },
+                              "width": 64
+                            }
+                          },
+                          "width": 64
+                        }
+                      },
+                      "width": 64
+                    },
+                    "kind": "load",
+                    "site": "0x00007ff77440dad6"
+                  },
+                  "width": 32
+                },
+                "kind": "cast",
+                "op": 2
+              },
+              "width": 64
+            },
+            "op": 18,
+            "right": {
+              "kind": {
+                "kind": "constant",
+                "value": "0x00007ff77ba909d0"
+              },
+              "width": 64
+            }
+          },
+          "width": 64
+        },
+        "form": "relative32",
+        "frontier": true,
+        "guards": [
+          {
+            "expression": {
+              "kind": {
+                "arg": {
+                  "kind": {
+                    "kind": "binary",
+                    "left": {
+                      "kind": {
+                        "kind": "binary",
+                        "left": {
+                          "kind": {
+                            "arg": {
+                              "kind": {
+                                "address": {
+                                  "kind": {
+                                    "kind": "binary",
+                                    "left": {
+                                      "kind": {
+                                        "key": "RCX:0:false",
+                                        "kind": "input"
+                                      },
+                                      "width": 64
+                                    },
+                                    "op": 18,
+                                    "right": {
+                                      "kind": {
+                                        "kind": "constant",
+                                        "value": "0x0000000000000078"
+                                      },
+                                      "width": 64
+                                    }
+                                  },
+                                  "width": 64
+                                },
+                                "kind": "load",
+                                "site": "0x00007ff77440dacb"
+                              },
+                              "width": 8
+                            },
+                            "kind": "cast",
+                            "op": 3
+                          },
+                          "width": 64
+                        },
+                        "op": 3,
+                        "right": {
+                          "kind": {
+                            "kind": "constant",
+                            "value": "0x0000000000000009"
+                          },
+                          "width": 64
+                        }
+                      },
+                      "width": 1
+                    },
+                    "op": 7,
+                    "right": {
+                      "kind": {
+                        "kind": "binary",
+                        "left": {
+                          "kind": {
+                            "arg": {
+                              "kind": {
+                                "address": {
+                                  "kind": {
+                                    "kind": "binary",
+                                    "left": {
+                                      "kind": {
+                                        "key": "RCX:0:false",
+                                        "kind": "input"
+                                      },
+                                      "width": 64
+                                    },
+                                    "op": 18,
+                                    "right": {
+                                      "kind": {
+                                        "kind": "constant",
+                                        "value": "0x0000000000000078"
+                                      },
+                                      "width": 64
+                                    }
+                                  },
+                                  "width": 64
+                                },
+                                "kind": "load",
+                                "site": "0x00007ff77440dacb"
+                              },
+                              "width": 8
+                            },
+                            "kind": "cast",
+                            "op": 3
+                          },
+                          "width": 64
+                        },
+                        "op": 5,
+                        "right": {
+                          "kind": {
+                            "kind": "constant",
+                            "value": "0x0000000000000009"
+                          },
+                          "width": 64
+                        }
+                      },
+                      "width": 1
+                    }
+                  },
+                  "width": 1
+                },
+                "kind": "unary",
+                "op": 0
+              },
+              "width": 1
+            },
+            "taken": false
+          }
+        ],
+        "indices": [
+          "0x0000000000000000",
+          "0x0000000000000001",
+          "0x0000000000000002",
+          "0x0000000000000003",
+          "0x0000000000000004",
+          "0x0000000000000005",
+          "0x0000000000000006",
+          "0x0000000000000007",
+          "0x0000000000000008",
+          "0x0000000000000009"
+        ],
+        "reverse_edges": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          true,
+          false
+        ],
+        "reverse_path": [
+          "0x00007ff77440dada",
+          "0x00007ff77440dad6",
+          "0x00007ff77440dad4",
+          "0x00007ff77440dad0",
+          "0x00007ff77440dacb",
+          "0x00007ff77440dabd",
+          "0x00007ff77440dab6"
+        ],
+        "root": "0x00007ff77440dab6"
+      }
+    ],
+    "site": "0x00007ff77440dadd",
+    "targets": [
+      "0x00007ff77440a5df",
+      "0x00007ff77440dabf",
+      "0x00007ff77440dae0",
+      "0x00007ff77440daed"
+    ],
+    "unresolved": [
+      "cyclic-incoming-state"
+    ]
+  },
+  "maximal_scc_inventory": {
+    "scope": "Maximal SCC of represented local candidate edges; not an invariant region.",
+    "nodes": 411,
+    "internal_edges": 460,
+    "incoming_edges": [
+      {
+        "src": "0x00007ff7744061cb",
+        "dst": "0x00007ff7744061ce",
+        "taken": false
+      }
+    ],
+    "outgoing_edges": [
+      {
+        "src": "0x00007ff774405fe6",
+        "dst": "0x00007ff77440b753",
+        "taken": true
+      },
+      {
+        "src": "0x00007ff7744061ec",
+        "dst": "0x00007ff77440b0e0",
+        "taken": true
+      },
+      {
+        "src": "0x00007ff774406224",
+        "dst": "0x00007ff774406226",
+        "taken": false
+      },
+      {
+        "src": "0x00007ff77440dab0",
+        "dst": "0x00007ff77440bc0d",
+        "taken": true
+      },
+      {
+        "src": "0x00007ff77440dac5",
+        "dst": "0x00007ff77440bc0d",
+        "taken": true
+      }
+    ],
+    "rdx_may_def_sites": 53,
+    "call_sites": 18,
+    "memory_may_def_sites": 72
+  }
+}

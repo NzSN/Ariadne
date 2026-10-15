@@ -1,0 +1,44 @@
+{
+  "schema": "ariadne.loop-target-closure.documentation-reconciliation/v1",
+  "utc": "2026-10-15T05:24:49Z",
+  "scope": "Post-qualification documentation/plan archival and local static checks; no compilation",
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "tools/check_doc_links.py"
+      ],
+      "exit_code": 0,
+      "stdout": "Documentation PASS: 98 connected documents, 97 context sections, 2319 local links (including section anchors).\nRelationship meaning and historical scope require editorial review.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_rust_layout.py"
+      ],
+      "exit_code": 0,
+      "stdout": "Rust layout PASS: 141 Rust files in src/tests; one manifest/lock; root target.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "documents": {
+    "CHECKPOINTS.md": "d882f13c1aad5c65b443731d40a729ea67e382f9350b7953409dc1557cf9a5c1",
+    "ROADMAP.md": "5c4013f31268882d929afa18e60de947b771f9a07113c74cbcd645cce8601369",
+    "Plans/README.md": "f4a7fbd642c366ab29ae67b0249d5b209c10a01453ee7ffdb9b94096b2f43c9c",
+    "Plans/completed/loop-aware-target-resolution.md": "44cc6a7d7118f38b855c114c57edab8b0463fed5eeadef890c66ccbbf011f0eb",
+    "Plans/completed/guarded-target-resolution.md": "68b98807f08d2dd42ffd2271c6138746ea3092d16b8c81b820cc570a94084e6f",
+    "docs/Ariadne/guarded-target-resolution-design.md": "1b2172564d706ac019b5621b4b4f86d3526b3ab19785e9fd502093b48265ac99",
+    "evidence/Ariadne/loop-aware-target-resolution/20261015/README.md": "5604e300099fa48282020caf36acfae71dc79c773108867190065d546cd419a4"
+  }
+}

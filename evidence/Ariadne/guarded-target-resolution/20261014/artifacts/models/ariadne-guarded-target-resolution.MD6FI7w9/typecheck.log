@@ -1,0 +1,15 @@
+# Usage statistics is OFF. We care about your privacy.
+# If you want to help our project, consider enabling statistics with config --enable-stats=true.
+
+Output directory: /tmp/ariadne-guarded-target-resolution.MD6FI7w9/typecheck/AriadneGuardedTargetResolution.tla/2026-10-14T10-47-40_416310825750372562
+# APALACHE version: 0.58.0 | build: 711dce6                       I@10:47:41.019
+Type checking AriadneGuardedTargetResolution.tla                  I@10:47:41.030
+PASS #0: SanyParser                                               I@10:47:41.152
+PASS #1: TypeCheckerSnowcat                                       I@10:47:41.423
+ > Running Snowcat .::.                                           I@10:47:41.423
+ > Your types are purrfect!                                       I@10:47:41.968
+ > All expressions are typed                                      I@10:47:41.969
+Type checker [OK]                                                 I@10:47:41.969
+It took me 0 days  0 hours  0 min  0 sec                          I@10:47:41.969
+Total time: 0.948 sec                                             I@10:47:41.969
+EXITCODE: OK

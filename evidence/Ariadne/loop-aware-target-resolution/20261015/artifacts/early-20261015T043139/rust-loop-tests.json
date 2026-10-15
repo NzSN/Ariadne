@@ -1,0 +1,13 @@
+{
+  "name": "rust-loop-tests",
+  "command": [
+    "cargo",
+    "test",
+    "--offline",
+    "--locked",
+    "--lib",
+    "bap::target_resolution::loop_tests"
+  ],
+  "exit_code": 101,
+  "seconds": 1.1942632189999998
+}

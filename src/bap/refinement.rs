@@ -262,7 +262,10 @@ impl TransferReceipt {
             || self.bytes_hex != site.bytes_hex
             || site.semantic_status.as_deref() != Some("projected")
             || site.quality != "external_lift"
-            || site.projection.as_deref() != Some("bap-bit-provenance-v3")
+            || !site
+                .projection
+                .as_deref()
+                .is_some_and(super::known_projection)
             || !site.captured
             || site.ast_sha256.as_deref() != Some(self.ast_sha256.as_str())
             || crate::reports::sha256(self.ast.as_bytes()) != self.ast_sha256

@@ -1,0 +1,14 @@
+    Finished `test` profile [unoptimized] target(s) in 0.78s
+     Running unittests src/lib.rs (target/loop-aware-build/debug/deps/ariadne-ee964763ae0b7713)
+
+running 7 tests
+test bap::target_resolution::loop_tests::legacy_coverage_omission_is_distinct_from_explicit_json_null ... ok
+test bap::target_resolution::loop_tests::loop_closure_keeps_legacy_path_prohibition_and_retains_candidates_after_invalidation ... ok
+test bap::target_resolution::loop_tests::loop_closure_rejects_root_bypass_clobbers_and_missing_preexisting_witnesses ... ok
+test bap::target_resolution::loop_tests::independently_initialized_entrances_both_establish_the_loop_invariant ... ok
+test bap::target_resolution::loop_tests::loop_rule_declines_changed_original_guard_effects_and_explicit_zero_budgets ... ok
+test bap::target_resolution::loop_tests::captured_pointer_changing_phase_regions_close_with_independent_edge_replay ... ok
+test bap::target_resolution::loop_tests::loop_receipt_tampering_cannot_hide_entrance_edges_domains_or_original_sources ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 133 filtered out; finished in 0.13s
+

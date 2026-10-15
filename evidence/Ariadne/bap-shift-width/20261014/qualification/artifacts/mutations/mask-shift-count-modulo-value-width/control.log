@@ -1,0 +1,9 @@
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-bap-shift-count-20261014/target/shift-mutations-v2-20261014/mask-shift-count-modulo-value-width/sut)
+    Finished `release` profile [optimized] target(s) in 27.67s
+     Running unittests src/lib.rs (/home/nzsn/Repos/Ariadne-bap-shift-count-20261014/target/shift-mutations-v2-20261014/mask-shift-count-modulo-value-width/build/release/deps/ariadne-eac5fde57d2ca545)
+
+running 1 test
+test bap::shift_projection_tests::a_known_oversized_count_erases_data_origins_without_modulo_reduction ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 102 filtered out; finished in 0.00s
+

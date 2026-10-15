@@ -1,0 +1,22 @@
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-vector-registers-20261013/target/vector-mutations-release-20261013/xmm-write-clobbers-upper-ymm/sut)
+    Finished `release` profile [optimized] target(s) in 13.58s
+     Running unittests src/lib.rs (/home/nzsn/Repos/Ariadne-vector-registers-20261013/target/vector-mutations-release-20261013/xmm-write-clobbers-upper-ymm/build/lib-xmm_write_preserves_upper_ymm_and_ymm_write_replaces_prior_xmm_view/release/deps/ariadne-eac5fde57d2ca545)
+
+running 1 test
+test bap::vector_projection_tests::xmm_write_preserves_upper_ymm_and_ymm_write_replaces_prior_xmm_view ... FAILED
+
+failures:
+
+---- bap::vector_projection_tests::xmm_write_preserves_upper_ymm_and_ymm_write_replaces_prior_xmm_view stdout ----
+
+thread 'bap::vector_projection_tests::xmm_write_preserves_upper_ymm_and_ymm_write_replaces_prior_xmm_view' (6624) panicked at src/bap/../../tests/bap/vector_projection_unit.rs:125:5:
+assertion failed: p.uses.contains("state:other")
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    bap::vector_projection_tests::xmm_write_preserves_upper_ymm_and_ymm_write_replaces_prior_xmm_view
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 68 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--lib`

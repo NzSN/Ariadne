@@ -1,0 +1,10 @@
+warning: unused variable: `runtime_rva`
+  --> /work/frame-paths-dump03958-20261013/frame_probe.rs:11:46
+   |
+11 | ...et runtime_rva=u3...
+   |       ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_runtime_rva`
+   |
+   = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: 1 warning emitted
+

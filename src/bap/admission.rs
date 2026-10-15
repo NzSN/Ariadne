@@ -85,7 +85,8 @@ fn var_type(v: &Var) -> Result<Type, Error> {
         if v.index != 0
             || !(bank && ty == Type::Bits(64)
                 || flag && ty == Type::Bits(1)
-                || v.name == "mem" && ty == Type::Memory)
+                || v.name == "mem" && ty == Type::Memory
+                || super::registers::vector_backing(v).is_some())
         {
             return Err(failure(
                 FailureKind::UnsupportedControl,
@@ -194,7 +195,7 @@ impl Check {
                 {
                     return Err(malformed("BIL load memory/address type"));
                 }
-                if ![8, 16, 32, 64].contains(width) {
+                if ![8, 16, 32, 64, 128, 256].contains(width) {
                     self.unsupported_data = true;
                 }
                 Type::Bits(*width)
@@ -214,7 +215,7 @@ impl Check {
                     return Err(malformed("BIL store memory/address type"));
                 }
                 same(Type::Bits(*width), self.expr(value, depth + 1)?)?;
-                if ![8, 16, 32, 64].contains(width) {
+                if ![8, 16, 32, 64, 128, 256].contains(width) {
                     self.unsupported_data = true;
                 }
                 Type::Memory
@@ -224,7 +225,10 @@ impl Check {
                 let r = self.expr(rhs, depth + 1)?;
                 scalar(l)?;
                 scalar(r)?;
-                let ty = same(l, r)?;
+                // BIL shift counts are independent immediate bitvectors. The
+                // result keeps the data operand's width; other binary forms
+                // still require equal operand types.
+                let ty = if matches!(op, 9..=11) { l } else { same(l, r)? };
                 if *op < 0 {
                     return Err(malformed("negative BIL operator"));
                 }
@@ -438,8 +442,13 @@ pub(crate) fn decoded_destination(
     if definitions == 0 {
         return None;
     }
+    // The public operand list omits vector registers. Bind the first explicit
+    // definition to its original protocol token before treating a later GPR
+    // (for example a vector load's RSP address base) as a destination.
+    let first = fields.get(3)?.strip_prefix("r:")?;
+    let expected = crate::effects::RegisterView::parse(first)?;
     match e.operands.first()? {
-        crate::effects::Operand::Register(r) => Some(r),
+        crate::effects::Operand::Register(r) if *r == expected => Some(r),
         _ => None,
     }
 }
@@ -564,7 +573,7 @@ mod tests {
                 body: vec![],
             },
             move_to(v("RIP", 64, false), constant(64)),
-            move_to(v("YMM0", 256, false), constant(256)),
+            move_to(v("YMM16", 256, false), constant(256)),
         ] {
             let statements = [special];
             let e = capabilities(&statements).err().unwrap();

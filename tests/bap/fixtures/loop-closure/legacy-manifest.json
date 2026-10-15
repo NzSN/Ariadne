@@ -1,0 +1,47 @@
+{
+  "schema": "ariadne.loop-closure-legacy-source-manifest/v1",
+  "frozen_date": "2026-10-15",
+  "scope": "Exact previously qualified source files, frozen from the source archive before loop-closure implementation edits. Historical v1 fixtures; not the new implementation.",
+  "archive": {
+    "path": "target/loop-aware-20261015/legacy-qualified-sources.tar.gz",
+    "sha256": "94f0881ee74fab8aa0364a485becc6db4aa7fea045833065be094f1848eab87c",
+    "source_count": 711
+  },
+  "qualified_source_record": {
+    "path": "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/delivery/source-files.json",
+    "sha256": "4061744c473e9b0244ff8e7d0e52cae917e6a0028cbf6a35974c558ce502f1d2",
+    "source_count": 711
+  },
+  "assets": [
+    {
+      "source": "src/bap/composition.rs",
+      "asset": "legacy-v1/composition.rs.txt",
+      "sha256": "c36c8876810e35ed10b7e366e650d7854958b0ad7b07d33084039d39b68e9580",
+      "bytes": 16007
+    },
+    {
+      "source": "src/bap/target_resolution.rs",
+      "asset": "legacy-v1/target_resolution.rs.txt",
+      "sha256": "5614ff7054824075aa88c4f8e4ec4df47482cfb2ad38618a8dab7330dac65d32",
+      "bytes": 64575
+    },
+    {
+      "source": "native/bap-core/composition.ml",
+      "asset": "legacy-v1/composition.ml.txt",
+      "sha256": "8384ad9c5ddc1449db1c97c9247c1afcf4a683289a7fa56bb0d1db727395a868",
+      "bytes": 15533
+    },
+    {
+      "source": "native/bap-core/capture.ml",
+      "asset": "legacy-v1/capture.ml.txt",
+      "sha256": "ca17d97ade1e8acac9a11098d5eb26bbff693b3d29f30e7665d983db672d430c",
+      "bytes": 42513
+    },
+    {
+      "source": "Specs/AriadneGuardedTargetResolution.tla",
+      "asset": "legacy-v1/AriadneGuardedTargetResolution.tla.txt",
+      "sha256": "e142a6fd22d78044c444c26211b7c659a56fedb5f9e555aa20e3aa1be23e8b10",
+      "bytes": 19447
+    }
+  ]
+}

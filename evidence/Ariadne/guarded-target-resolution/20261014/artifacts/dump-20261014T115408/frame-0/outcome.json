@@ -1,0 +1,130 @@
+{
+  "attempted_starts": 778,
+  "candidate_epoch": 129,
+  "candidate_sites": 778,
+  "complete_target_sites": 0,
+  "composition_report_bytes": 653220,
+  "entry": "0x00007ff77443d960",
+  "frame": 0,
+  "guard_barriers": [
+    "0x00007ff77443da0e",
+    "0x00007ff77443e200",
+    "0x00007ff77444133a",
+    "0x00007ff77444148d",
+    "0x00007ff7744414a8",
+    "0x00007ff774441540",
+    "0x00007ff77444154b",
+    "0x00007ff77444154e",
+    "0x00007ff774442569",
+    "0x00007ff77444256c",
+    "0x00007ff77444256f",
+    "0x00007ff774442572"
+  ],
+  "guard_report_bytes": 1518560,
+  "guard_stop": "candidate-coverage-incomplete",
+  "guards": [],
+  "native_initialize": {
+    "elapsed_ms": 7314,
+    "error": "native guarded initialize rejected: resolver infeasible context proof",
+    "status": "rejected"
+  },
+  "rust_core": {
+    "actions": 17831,
+    "completed": true,
+    "elapsed_ms": 1334,
+    "observation": {
+      "decoded": 768,
+      "edges": 895,
+      "obligations": [
+        {
+          "reason": "IndirectTargets",
+          "site": "0x00007ff77443da0e"
+        },
+        {
+          "reason": "IndirectTargets",
+          "site": "0x00007ff77443e200"
+        },
+        {
+          "reason": "CallTargets",
+          "site": "0x00007ff77443ea73"
+        },
+        {
+          "reason": "CallTargets",
+          "site": "0x00007ff77443f6ba"
+        },
+        {
+          "reason": "CallTargets",
+          "site": "0x00007ff77443f73b"
+        },
+        {
+          "reason": "CallTargets",
+          "site": "0x00007ff77443f796"
+        },
+        {
+          "reason": "CallTargets",
+          "site": "0x00007ff774441063"
+        },
+        {
+          "reason": "DecodeFailed",
+          "site": "0x00007ff77444133a"
+        },
+        {
+          "reason": "DecodeFailed",
+          "site": "0x00007ff77444148d"
+        },
+        {
+          "reason": "DecodeFailed",
+          "site": "0x00007ff7744414a8"
+        },
+        {
+          "reason": "DecodeFailed",
+          "site": "0x00007ff774441540"
+        },
+        {
+          "reason": "DecodeFailed",
+          "site": "0x00007ff77444154b"
+        },
+        {
+          "reason": "DecodeFailed",
+          "site": "0x00007ff77444154e"
+        },
+        {
+          "reason": "CallTargets",
+          "site": "0x00007ff7744415b7"
+        },
+        {
+          "reason": "DecodeFailed",
+          "site": "0x00007ff774442569"
+        },
+        {
+          "reason": "DecodeFailed",
+          "site": "0x00007ff77444256c"
+        },
+        {
+          "reason": "DecodeFailed",
+          "site": "0x00007ff77444256f"
+        },
+        {
+          "reason": "DecodeFailed",
+          "site": "0x00007ff774442572"
+        },
+        {
+          "reason": "CallTargets",
+          "site": "0x00007ff7744425bf"
+        },
+        {
+          "reason": "CallTargets",
+          "site": "0x00007ff7744425e5"
+        }
+      ],
+      "phase": "Done",
+      "reaching_definitions": 1289259,
+      "slice": 0,
+      "visited": 778
+    }
+  },
+  "status": "prepared",
+  "target_report_bytes": 5565442,
+  "target_sites": 2,
+  "target_stop": null
+}

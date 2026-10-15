@@ -11,7 +11,10 @@ pub(crate) fn validate_opaque_ordinary(
     for (&va, e) in &prepared.prepared.instructions {
         if let Some(s) = &e.semantic
             && (s.status == "opaque-ordinary"
-                || e.rule.as_deref() == Some("bap-opaque-ordinary-v3")
+                || matches!(
+                    e.rule.as_deref(),
+                    Some("bap-opaque-ordinary-v3" | "bap-opaque-ordinary-v4")
+                )
                 || s.gaps.iter().any(|g| g == "unsupported-data-effects"))
         {
             let instruction = request
@@ -22,11 +25,21 @@ pub(crate) fn validate_opaque_ordinary(
                 .checked_add(u64::from(e.length))
                 .ok_or("opaque next VA overflow")?;
             if s.status != "opaque-ordinary"
-                || s.projection != "bap-bit-provenance-v3"
+                || !crate::bap::known_projection(&s.projection)
                 || s.ast_sha256.is_none()
                 || s.fallback.is_some()
                 || e.quality != EffectQuality::Opaque
-                || e.rule.as_deref() != Some("bap-opaque-ordinary-v3")
+                || e.rule.as_deref()
+                    != Some(match s.projection.as_str() {
+                        "bap-bit-provenance-v3" => "bap-opaque-ordinary-v3",
+                        // The finite ordinary summary is unchanged across
+                        // vector, guard, and shift-count producer profiles.
+                        "bap-bit-provenance-v4"
+                        | "bap-bit-provenance-v5"
+                        | "bap-bit-provenance-v6"
+                        | "bap-bit-provenance-v7" => crate::bap::OPAQUE_ORDINARY_RULE,
+                        _ => "",
+                    })
                 || e.length == 0
                 || !request.decodable.contains(&va)
                 || instruction.kind != crate::InstructionKind::Ordinary
@@ -52,6 +65,7 @@ pub(crate) fn capture_context(
 ) -> Result<EvidenceContext, crate::investigation::Error> {
     validate_opaque_ordinary(prepared)?;
     prepared.validate_target_resolution()?;
+    prepared.validate_guard_admission()?;
     let report = &prepared.materialization;
     let request = &prepared.prepared.request;
     if prepared.snapshot.snapshot_id != request.snapshot_id
@@ -60,15 +74,21 @@ pub(crate) fn capture_context(
     {
         return Err("prepared query metadata mismatch".into());
     }
-    let expected_query = super::materialize::query_identity(
-        &request.snapshot_id,
-        &super::AnalysisQuery {
-            entry_points: report.entry_points.clone(),
-            slice_seeds: report.slice_seeds.clone(),
-        },
-        &report.limits,
-        prepared.target_resolution.as_ref().map(|r| &r.limits),
-    )?;
+    let expected_query = if let Some(composition) = prepared.composition() {
+        crate::bap::composition::analysis_id(composition)?
+    } else if let Some(guard) = prepared.guard_admission() {
+        crate::bap::guard_admission::analysis_id(guard)?
+    } else {
+        super::materialize::query_identity(
+            &request.snapshot_id,
+            &super::AnalysisQuery {
+                entry_points: report.entry_points.clone(),
+                slice_seeds: report.slice_seeds.clone(),
+            },
+            &report.limits,
+            prepared.target_resolution.as_ref().map(|r| &r.limits),
+        )?
+    };
     if expected_query != report.query_identity {
         return Err("query identity or resource limits changed".into());
     }
@@ -161,7 +181,16 @@ pub(crate) fn capture_context(
             )
         })
         .collect();
-    let tool_binding = crate::reports::sha256(&serde_json::to_vec(&tool_facts)?);
+    let guard_binding = prepared.guard_admission().map(|guard| {
+        crate::reports::sha256(&serde_json::to_vec(guard).expect("serializable guard report"))
+    });
+    let tool_binding = if let Some(composition) = prepared.composition() {
+        crate::investigation::composition_capture_binding(composition, &sites)?
+    } else if let Some(binding) = &guard_binding {
+        crate::reports::sha256(&serde_json::to_vec(&(&tool_facts, binding))?)
+    } else {
+        crate::reports::sha256(&serde_json::to_vec(&tool_facts)?)
+    };
     let context = EvidenceContext {
         snapshot_id: request.snapshot_id.clone(),
         artifact_sha256: prepared.snapshot.artifact_sha256.clone(),
@@ -174,7 +203,20 @@ pub(crate) fn capture_context(
             identity.ruleset,
             identity.catalogue,
             tool_binding,
-            if prepared.target_resolution.is_some() {
+            if let Some(composition) = prepared.composition() {
+                crate::investigation::composition_semantic_suffix(
+                    composition,
+                    prepared
+                        .target_resolution
+                        .as_ref()
+                        .ok_or("composition target proof absent")?,
+                    prepared
+                        .guard_admission()
+                        .ok_or("composition guard proof absent")?,
+                )?
+            } else if let Some(guard) = prepared.guard_admission() {
+                crate::investigation::guard_semantic_suffix(guard)?
+            } else if prepared.target_resolution.is_some() {
                 format!(
                     ":{}:{}",
                     crate::bap::target_resolution::PROFILE,
@@ -221,7 +263,11 @@ pub fn bind_investigation(
                 }),
         )
         .collect();
-    BoundInvestigation::new(analyzer, request, context)
+    let mut bound = BoundInvestigation::new(analyzer, request, context)?;
+    bound.guard_admission = prepared.guard_admission().cloned();
+    bound.composition = prepared.composition().cloned();
+    bound.target_resolution = prepared.target_resolution.clone();
+    Ok(bound)
 }
 
 pub fn bind_memory_refinement(

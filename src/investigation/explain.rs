@@ -291,6 +291,14 @@ pub fn explain_fault_address(
     } else {
         None
     };
+    #[cfg(feature = "bap")]
+    let guarded = bound.guard_admission.is_some();
+    #[cfg(not(feature = "bap"))]
+    let guarded = false;
+    #[cfg(feature = "bap")]
+    let combined = bound.composition.is_some();
+    #[cfg(not(feature = "bap"))]
+    let combined = false;
     let mut b = Builder {
         bound,
         limits,
@@ -299,7 +307,51 @@ pub fn explain_fault_address(
         claim_ids: Default::default(),
         links: 0,
         out: Explanation {
-            schema: "ariadne.fault-address-explanation/v1".into(),
+            schema: if combined {
+                #[cfg(feature = "bap")]
+                {
+                    if bound
+                        .composition
+                        .as_ref()
+                        .is_some_and(crate::bap::composition::is_legacy)
+                    {
+                        "ariadne.fault-address-explanation/v3"
+                    } else {
+                        "ariadne.fault-address-explanation/v4"
+                    }
+                }
+                #[cfg(not(feature = "bap"))]
+                {
+                    "ariadne.fault-address-explanation/v4"
+                }
+            } else if guarded {
+                "ariadne.fault-address-explanation/v2"
+            } else {
+                "ariadne.fault-address-explanation/v1"
+            }
+            .into(),
+            #[cfg(feature = "bap")]
+            composition: bound.composition.clone(),
+            #[cfg(feature = "bap")]
+            target_resolution: if combined {
+                bound.target_resolution.clone()
+            } else {
+                None
+            },
+            #[cfg(feature = "bap")]
+            guard_sources: if combined {
+                Some(bound.context.sites.clone())
+            } else {
+                None
+            },
+            #[cfg(feature = "bap")]
+            guard_admission: bound.guard_admission.clone(),
+            #[cfg(feature = "bap")]
+            guard_request: if guarded {
+                Some(crate::bap::core_adapter::encode_request(&bound.request)?)
+            } else {
+                None
+            },
             identity: bound.identity.clone(),
             scope_id: bound.scope.clone(),
             question: question.clone(),
@@ -319,12 +371,19 @@ pub fn explain_fault_address(
             truncated: false,
         },
     };
-    if bound
-        .identity
-        .semantic_profile
-        .contains(":captured-indirect-targets/v1:")
+    if combined
+        || bound
+            .identity
+            .semantic_profile
+            .contains(":captured-indirect-targets/v1:")
     {
         b.out.assumptions.push("FrozenCapturedControlData: covered control-data loads use the named captured bytes; target coverage is relative to that snapshot model, not historical memory stability".into());
+    }
+    #[cfg(feature = "bap")]
+    if let Some(guard) = &bound.guard_admission {
+        b.out
+            .assumptions
+            .extend(super::validate::guard_assumptions(guard));
     }
     let refs: Vec<_> = b.evidence(question.site).into_iter().collect();
     if !bound.state.decoded.contains(&question.site) {

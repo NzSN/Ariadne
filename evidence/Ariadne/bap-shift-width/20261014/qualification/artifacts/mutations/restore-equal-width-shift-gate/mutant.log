@@ -1,0 +1,22 @@
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-bap-shift-count-20261014/target/shift-mutations-v2-20261014/restore-equal-width-shift-gate/sut)
+    Finished `release` profile [optimized] target(s) in 29.05s
+     Running unittests src/lib.rs (/home/nzsn/Repos/Ariadne-bap-shift-count-20261014/target/shift-mutations-v2-20261014/restore-equal-width-shift-gate/build/release/deps/ariadne-eac5fde57d2ca545)
+
+running 1 test
+test bap::shift_projection_tests::captured_xorps_retains_legacy_upper_half_and_coarse_old_origins ... FAILED
+
+failures:
+
+---- bap::shift_projection_tests::captured_xorps_retains_legacy_upper_half_and_coarse_old_origins stdout ----
+
+thread 'bap::shift_projection_tests::captured_xorps_retains_legacy_upper_half_and_coarse_old_origins' (2053) panicked at src/bap/../../tests/bap/shift_projection_unit.rs:104:87:
+called `Result::unwrap()` on an `Err` value: Failure { kind: Malformed, reason: "BIL operand type/width mismatch" }
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    bap::shift_projection_tests::captured_xorps_retains_legacy_upper_half_and_coarse_old_origins
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 102 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--lib`

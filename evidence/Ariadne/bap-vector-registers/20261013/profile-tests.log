@@ -1,0 +1,8 @@
+test_invalid_binding_scope_and_unresolved_references_are_rejected (test_bap_profile_migration.MigrationTests.test_invalid_binding_scope_and_unresolved_references_are_rejected) ... ok
+test_profile_and_resolved_ids_are_the_only_permitted_changes (test_bap_profile_migration.MigrationTests.test_profile_and_resolved_ids_are_the_only_permitted_changes) ... ok
+test_v4_migration_preserves_scalar_effects_and_captured_evidence (test_bap_profile_migration.MigrationTests.test_v4_migration_preserves_scalar_effects_and_captured_evidence) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+OK

@@ -1,0 +1,20 @@
+{
+  "dump_module": {
+    "base": "0x7ff76fbc0000",
+    "image_size": 225476608,
+    "timestamp": "0x6a87c949",
+    "codeview_guid": "a7877ffb-94f2-db3e-4c4c-44205044422e",
+    "age": 1,
+    "pdb_name": "electron.exe.pdb"
+  },
+  "cached_pdb": {
+    "path": "D:\\symcache-dump03958-20261009\\electron.exe.pdb\\A7877FFB94F2DB3E4C4C44205044422E1\\electron.exe.pdb",
+    "bytes": 3762233344,
+    "guid": "a7877ffb-94f2-db3e-4c4c-44205044422e",
+    "age": 1,
+    "sha256": "eab012ef555c641b2e10d314e58f02d01baa277b28f9ad5442e31c918c920ed9"
+  },
+  "identity_equal": true,
+  "symbol_endpoint": "https://192.168.150.219:4080/symbols",
+  "cache_scope": "existing identity-keyed cache; prior store-backed acquisition, fresh matching private-symbol CDB load"
+}

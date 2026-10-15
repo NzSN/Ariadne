@@ -2,8 +2,6 @@ use super::*;
 use crate::bap::ast::Lift;
 use crate::effects::{PreparationIdentity, SemanticEvidence};
 use crate::llvm_mc::{PreparedBatch, PreparedSite};
-#[path = "common/mod.rs"]
-mod common;
 
 fn case(linux: bool) -> FileSnapshot {
     case_with_ranges(linux, Vec::new())

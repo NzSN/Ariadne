@@ -1,0 +1,24 @@
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-guard-admission-20261014/target/guard-mutations-20261014/omit-actual-premise-identities/sut)
+    Finished `release` profile [optimized] target(s) in 28.20s
+     Running unittests src/lib.rs (/home/nzsn/Repos/Ariadne-guard-admission-20261014/target/guard-mutations-20261014/omit-actual-premise-identities/build/release/deps/ariadne-eac5fde57d2ca545)
+
+running 1 test
+test bap::guard_admission_tests::final_identity_binds_actual_premises_and_request_without_hash_cycles ... FAILED
+
+failures:
+
+---- bap::guard_admission_tests::final_identity_binds_actual_premises_and_request_without_hash_cycles stdout ----
+
+thread 'bap::guard_admission_tests::final_identity_binds_actual_premises_and_request_without_hash_cycles' (58352) panicked at src/bap/../../tests/bap/guard_admission_unit.rs:732:5:
+assertion `left == right` failed
+  left: "e68e5839a1d55ea63c7e1e8bb81e0cd74424b9e475c016991ad2778bf25040c9"
+ right: "088c2088e5edcb8948eddb396a7108324fa2a0523ea46209e3c2656428572c16"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    bap::guard_admission_tests::final_identity_binds_actual_premises_and_request_without_hash_cycles
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 91 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--lib`

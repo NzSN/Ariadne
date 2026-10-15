@@ -1,0 +1,22 @@
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-bap-shift-count-20261014/target/shift-mutations-v2-20261014/cancel-xor-from-abstract-metadata-equality/sut)
+    Finished `release` profile [optimized] target(s) in 27.82s
+     Running unittests src/lib.rs (/home/nzsn/Repos/Ariadne-bap-shift-count-20261014/target/shift-mutations-v2-20261014/cancel-xor-from-abstract-metadata-equality/build/release/deps/ariadne-eac5fde57d2ca545)
+
+running 1 test
+test bap::shift_projection_tests::equal_abstract_metadata_does_not_prove_computed_values_equal ... FAILED
+
+failures:
+
+---- bap::shift_projection_tests::equal_abstract_metadata_does_not_prove_computed_values_equal stdout ----
+
+thread 'bap::shift_projection_tests::equal_abstract_metadata_does_not_prove_computed_values_equal' (6119) panicked at src/bap/../../tests/bap/shift_projection_unit.rs:81:5:
+different expressions falsely cancelled
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    bap::shift_projection_tests::equal_abstract_metadata_does_not_prove_computed_values_equal
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 102 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--lib`

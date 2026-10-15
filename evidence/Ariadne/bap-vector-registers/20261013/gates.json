@@ -1,0 +1,181 @@
+[
+  {
+    "name": "format",
+    "command": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.596205213999994
+  },
+  {
+    "name": "vector-fixtures",
+    "command": [
+      "python3",
+      "tests/input/fixtures/make_vector.py",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 0.02454770500000336
+  },
+  {
+    "name": "profile-tests",
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools",
+      "-p",
+      "test_bap_profile_migration.py",
+      "-v"
+    ],
+    "exit_code": 0,
+    "seconds": 0.0450195089999994
+  },
+  {
+    "name": "native-contract-tests",
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools",
+      "-p",
+      "test_i5a_native_contract.py",
+      "-v"
+    ],
+    "exit_code": 0,
+    "seconds": 0.09007591700000717
+  },
+  {
+    "name": "default-tests",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked"
+    ],
+    "exit_code": 0,
+    "seconds": 27.194015057
+  },
+  {
+    "name": "core-only-tests",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--no-default-features"
+    ],
+    "exit_code": 0,
+    "seconds": 3.234521906999987
+  },
+  {
+    "name": "clippy",
+    "command": [
+      "cargo",
+      "clippy",
+      "--offline",
+      "--locked",
+      "--all-features",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "seconds": 11.809676422999999
+  },
+  {
+    "name": "layout",
+    "command": [
+      "python3",
+      "tools/check_rust_layout.py"
+    ],
+    "exit_code": 1,
+    "seconds": 0.055007686999999805
+  },
+  {
+    "name": "native-producer",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--test",
+      "bap_native",
+      "--",
+      "--ignored"
+    ],
+    "exit_code": 0,
+    "seconds": 20.255584173999992
+  },
+  {
+    "name": "producer-disagreements",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--test",
+      "bap_disagreement",
+      "--",
+      "--ignored"
+    ],
+    "exit_code": 0,
+    "seconds": 15.241313238000004
+  },
+  {
+    "name": "capture-parity",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--test",
+      "input_bap_core",
+      "--",
+      "--ignored"
+    ],
+    "exit_code": 0,
+    "seconds": 33.862865911
+  },
+  {
+    "name": "frame-path-native",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--test",
+      "input_frame_paths",
+      "--",
+      "--ignored"
+    ],
+    "exit_code": 0,
+    "seconds": 33.510383109
+  },
+  {
+    "name": "release-build",
+    "command": [
+      "cargo",
+      "build",
+      "--offline",
+      "--locked",
+      "--release",
+      "--lib",
+      "--bin",
+      "ariadne-minidump",
+      "--bin",
+      "bap-admission-validate"
+    ],
+    "exit_code": 101,
+    "seconds": 0.03777930100000049
+  }
+]

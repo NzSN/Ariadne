@@ -1,0 +1,13 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.03s
+     Running tests/input/bap_core.rs (target/vector-build/debug/deps/input_bap_core-0b447580561dcdea)
+
+running 6 tests
+test native_rejects_opaque_contract_tampering_directly ... ok
+test captured_native_results_and_explanations_match_reference_and_reject_tampering ... ok
+test vector_capture_has_native_reference_parity_and_keeps_prior_vector_origins ... ok
+test opaque_ordinary_keeps_old_and_unknown_origins_and_all_format_gaps ... ok
+test observed_chain_recovers_from_one_root_and_empty_lifts_still_stop ... ok
+test native_cli_assessment_and_explanation_preserve_reference_output ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 33.80s
+

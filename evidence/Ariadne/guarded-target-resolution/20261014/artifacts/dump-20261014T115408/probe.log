@@ -1,0 +1,276 @@
+{
+  "binding_hard_limits": {
+    "decoded_nodes": 8192,
+    "edges": 32768
+  },
+  "core_action_limit": 100000,
+  "dump_sha256": "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+  "elapsed_ms": 156178,
+  "frame_paths": {
+    "json": "frame-paths.json or lossless frame-paths.json.gz; see artifact-identities.ndjson",
+    "status": "listed"
+  },
+  "frames": [
+    {
+      "attempted_starts": 9590,
+      "candidate_epoch": 610,
+      "candidate_sites": 9590,
+      "complete_target_sites": 8,
+      "composition_report_bytes": 8165381,
+      "entry": "0x00007ff7744033a0",
+      "frame": 1,
+      "guard_barriers": [
+        "0x00007ff7744035c9",
+        "0x00007ff77440b0e0",
+        "0x00007ff77440b30d",
+        "0x00007ff77440b753",
+        "0x00007ff77440ba62",
+        "0x00007ff77440ba65",
+        "0x00007ff77440ba68",
+        "0x00007ff77440ba6b",
+        "0x00007ff77440ba6e",
+        "0x00007ff77440ba71",
+        "0x00007ff77440ba74",
+        "0x00007ff77440ba77",
+        "0x00007ff77440ba98",
+        "0x00007ff77440ba9b",
+        "0x00007ff77440ba9e",
+        "0x00007ff77440baa1",
+        "0x00007ff77440baa4",
+        "0x00007ff77440bc0d",
+        "0x00007ff77440c691",
+        "0x00007ff77440c709",
+        "0x00007ff77440c7a0",
+        "0x00007ff77440c7a3",
+        "0x00007ff77440d410",
+        "0x00007ff77440d413",
+        "0x00007ff77440d7cf",
+        "0x00007ff77440da09",
+        "0x00007ff77440dadd",
+        "0x00007ff77440dd2b",
+        "0x00007ff77440dd2e",
+        "0x00007ff77440dd7e",
+        "0x00007ff77440dd81",
+        "0x00007ff77440dd84"
+      ],
+      "guard_report_bytes": 17762335,
+      "guard_stop": "candidate-coverage-incomplete",
+      "guards": [
+        {
+          "residual": "normal-or-alignment-fault-unresolved",
+          "site": "0x00007ff7744033b3",
+          "verdict": "unknown"
+        }
+      ],
+      "native_initialize": {
+        "elapsed_ms": 17548,
+        "error": "native guarded initialize rejected: resolver infeasible context proof",
+        "status": "rejected"
+      },
+      "rust_core": {
+        "actions": 22,
+        "completed": true,
+        "elapsed_ms": 30,
+        "observation": {
+          "decoded": 9,
+          "edges": 9,
+          "obligations": [
+            {
+              "reason": "DecodeFailed",
+              "site": "0x00007ff7744033b3"
+            }
+          ],
+          "phase": "Done",
+          "reaching_definitions": 1269,
+          "slice": 0,
+          "visited": 10
+        }
+      },
+      "status": "prepared",
+      "target_report_bytes": 339897,
+      "target_sites": 10,
+      "target_stop": null
+    },
+    {
+      "attempted_starts": 778,
+      "candidate_epoch": 129,
+      "candidate_sites": 778,
+      "complete_target_sites": 0,
+      "composition_report_bytes": 653220,
+      "entry": "0x00007ff77443d960",
+      "frame": 0,
+      "guard_barriers": [
+        "0x00007ff77443da0e",
+        "0x00007ff77443e200",
+        "0x00007ff77444133a",
+        "0x00007ff77444148d",
+        "0x00007ff7744414a8",
+        "0x00007ff774441540",
+        "0x00007ff77444154b",
+        "0x00007ff77444154e",
+        "0x00007ff774442569",
+        "0x00007ff77444256c",
+        "0x00007ff77444256f",
+        "0x00007ff774442572"
+      ],
+      "guard_report_bytes": 1518560,
+      "guard_stop": "candidate-coverage-incomplete",
+      "guards": [],
+      "native_initialize": {
+        "elapsed_ms": 7314,
+        "error": "native guarded initialize rejected: resolver infeasible context proof",
+        "status": "rejected"
+      },
+      "rust_core": {
+        "actions": 17831,
+        "completed": true,
+        "elapsed_ms": 1334,
+        "observation": {
+          "decoded": 768,
+          "edges": 895,
+          "obligations": [
+            {
+              "reason": "IndirectTargets",
+              "site": "0x00007ff77443da0e"
+            },
+            {
+              "reason": "IndirectTargets",
+              "site": "0x00007ff77443e200"
+            },
+            {
+              "reason": "CallTargets",
+              "site": "0x00007ff77443ea73"
+            },
+            {
+              "reason": "CallTargets",
+              "site": "0x00007ff77443f6ba"
+            },
+            {
+              "reason": "CallTargets",
+              "site": "0x00007ff77443f73b"
+            },
+            {
+              "reason": "CallTargets",
+              "site": "0x00007ff77443f796"
+            },
+            {
+              "reason": "CallTargets",
+              "site": "0x00007ff774441063"
+            },
+            {
+              "reason": "DecodeFailed",
+              "site": "0x00007ff77444133a"
+            },
+            {
+              "reason": "DecodeFailed",
+              "site": "0x00007ff77444148d"
+            },
+            {
+              "reason": "DecodeFailed",
+              "site": "0x00007ff7744414a8"
+            },
+            {
+              "reason": "DecodeFailed",
+              "site": "0x00007ff774441540"
+            },
+            {
+              "reason": "DecodeFailed",
+              "site": "0x00007ff77444154b"
+            },
+            {
+              "reason": "DecodeFailed",
+              "site": "0x00007ff77444154e"
+            },
+            {
+              "reason": "CallTargets",
+              "site": "0x00007ff7744415b7"
+            },
+            {
+              "reason": "DecodeFailed",
+              "site": "0x00007ff774442569"
+            },
+            {
+              "reason": "DecodeFailed",
+              "site": "0x00007ff77444256c"
+            },
+            {
+              "reason": "DecodeFailed",
+              "site": "0x00007ff77444256f"
+            },
+            {
+              "reason": "DecodeFailed",
+              "site": "0x00007ff774442572"
+            },
+            {
+              "reason": "CallTargets",
+              "site": "0x00007ff7744425bf"
+            },
+            {
+              "reason": "CallTargets",
+              "site": "0x00007ff7744425e5"
+            }
+          ],
+          "phase": "Done",
+          "reaching_definitions": 1289259,
+          "slice": 0,
+          "visited": 778
+        }
+      },
+      "status": "prepared",
+      "target_report_bytes": 5565442,
+      "target_sites": 2,
+      "target_stop": null
+    }
+  ],
+  "frames_recovered": 2,
+  "guard_limits": {
+    "max_closure_rounds": 32768,
+    "max_edges": 131072,
+    "max_elapsed_ms": 120000,
+    "max_evidence_bytes": 67108864,
+    "max_residue_updates": 4194304,
+    "max_sites": 32768,
+    "max_transfer_evaluations": 67108864
+  },
+  "native_finish_precondition": "Rust completed and final decoded nodes <=4096; helper retains its own finite action/response policies",
+  "native_request_bytes": 134217728,
+  "native_timeout_seconds": 120,
+  "path_limits": {
+    "deadline_ms": 10000,
+    "max_frontier_bytes": 33554432,
+    "max_graph_edges": 32768,
+    "max_graph_nodes": 8192,
+    "max_node_visits": 2,
+    "max_output_bytes": 134217728,
+    "max_path_steps": 4096,
+    "max_scanned_edges": 262144,
+    "max_search_states": 65536
+  },
+  "premises": [
+    "FrozenCapturedControlData",
+    "windows-amd64-normal-call-entry/v1"
+  ],
+  "preparation_limits": {
+    "batch_size": 128,
+    "max_candidates": 32768,
+    "max_decoder_batches": 16384,
+    "max_prefix_bytes": 245760,
+    "max_starts": 16384
+  },
+  "rust_core_deadline_ms": 30000,
+  "schema": "ariadne.composition-dump-probe/v1",
+  "scope": "Capture-only validated frame activations; table witness is test expectation, never resolver configuration or extra roots; partial/unavailable outcomes remain explicit.",
+  "target_limits": {
+    "max_elapsed_ms": 120000,
+    "max_entries": 16384,
+    "max_evidence_bytes": 134217728,
+    "max_path_steps": 512,
+    "max_read_bytes": 16777216,
+    "max_rounds": 64,
+    "max_steps": 2097152,
+    "max_targets": 65536,
+    "max_values": 4096
+  },
+  "thread": 23668,
+  "unwind_stop": "unsupported-unwind-operation"
+}

@@ -1,0 +1,26 @@
+    Finished `test` profile [unoptimized] target(s) in 0.03s
+     Running unittests src/lib.rs (target/composed-build/debug/deps/ariadne-ee964763ae0b7713)
+
+running 1 test
+native kernel_cpu_s=0.000 serialization_cpu_s=0.000 actions=8
+test input::materialize::composition_tests::actual_bap_pending_store_targets_and_native_rust_results_agree ... FAILED
+
+failures:
+
+---- input::materialize::composition_tests::actual_bap_pending_store_targets_and_native_rust_results_agree stdout ----
+resolver pass_elapsed_us=221 instructions=4 reads=1 stop=None
+resolver pass_elapsed_us=304 instructions=5 reads=1 stop=None
+completion compute_ms=0 encoded_bytes=15600
+completion transfer_ms=0
+
+thread 'input::materialize::composition_tests::actual_bap_pending_store_targets_and_native_rust_results_agree' (5564) panicked at src/input/../../tests/input/composition.rs:539:10:
+called `Result::unwrap()` on an `Err` value: Error("unknown field `definition_dictionary`, expected one of `phase`, `pending`, `visited`, `decoded`, `provenance`, `edges`, `obligations`, `reaching`, `slice`", line: 1, column: 1119)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    input::materialize::composition_tests::actual_bap_pending_store_targets_and_native_rust_results_agree
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 122 filtered out; finished in 3.03s
+
+error: test failed, to rerun pass `--lib`

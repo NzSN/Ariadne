@@ -224,7 +224,14 @@ pub(super) fn decide(
         || site.quality != "external_lift"
         || !matches!(
             site.projection.as_deref(),
-            Some("bap-bit-provenance-v2" | "bap-bit-provenance-v3")
+            Some(
+                "bap-bit-provenance-v2"
+                    | "bap-bit-provenance-v3"
+                    | "bap-bit-provenance-v4"
+                    | "bap-bit-provenance-v5"
+                    | "bap-bit-provenance-v6"
+                    | "bap-bit-provenance-v7"
+            )
         )
         || site.helper_sha256.is_none()
         || site.runtime_sha256.is_none()

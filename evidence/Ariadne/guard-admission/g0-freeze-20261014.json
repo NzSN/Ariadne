@@ -1,0 +1,340 @@
+{
+  "schema": "ariadne.guard-admission-g0-freeze/v1",
+  "recordedUtc": "2026-10-14T02:14:20.807876+00:00",
+  "modelVersion": "ariadne.predicate-admission/v1",
+  "contractSchema": "ariadne.guard-admission-contract/v1",
+  "stage": "G0",
+  "status": "original freeze preserved; current corrected56-case oracle and stable model passed fresh localPython plus actual remote Apalache typecheck and27TLC finite safety/fairtermination",
+  "initialFreezeBeforeRuntimeEdits": true,
+  "initialFreeze": {
+    "modelSha256": "06ec5ff3b1c84b9d78051c9be80bf962e8a12a11c5ff7abc81591abaa0de3962",
+    "oracleSha256": "0040da6f2dc36aeee43436a08e6667aac17f8a8ee02984067ecd14d3fd2c30ab",
+    "contractSha256": "9a1f39c8618f5082472843d2c4595560e7f3b7dec4b01be74afcce3c65e89584"
+  },
+  "wordingClarification": {
+    "from": "no-external-reentry-assumed",
+    "to": "external-reentry-not-certified",
+    "modelUnchanged": true,
+    "semanticExpectedResultsUnchanged": true,
+    "syntheticMetadataAndDependentHashesChanged": true
+  },
+  "sourceHashes": {
+    "Specs/AriadnePredicateAdmission.tla": "10e870b21691946cd7985ff7d33819a8a58e4fea202ae6d2e771214b997f5bc9",
+    "Specs/check-predicate-admission.sh": "4ad2f6ebbb866638a05f58c6d9a895dfd15b9c99f5da49191b90efe44cd50cc2",
+    "tests/bap/fixtures/guards/oracle.py": "449ace9d36d48536ef16fc5a09796c73c7690c78cd2e1a34d5c9bf7b621ac915",
+    "tests/bap/fixtures/guards/contract.json": "a6dbec2c3232cd89cecff3c03e173b1d9a377f3440ee7a73f8fb1116fd40a763",
+    "Specs/PredicateAdmissionAbiOptOut.cfg": "ba497280a1edb83582d6f1ee4790d1a3bfba5d126290a8906855b0417028bf59",
+    "Specs/PredicateAdmissionAdditionalRoot.cfg": "761be4aba60ddb6f3bb5f94b350f2d7ed3797a6babd742c460083b0683ceb1de",
+    "Specs/PredicateAdmissionAligned.cfg": "6ca639e78f88eae0bfac512e1d8fd2c7516605ad307c47696d3c55bb042bd962",
+    "Specs/PredicateAdmissionBarrier.cfg": "72ddd07091ae3630fe75ceca3fc0f4f237d98bbe72570f1609b0f2b334b1574c",
+    "Specs/PredicateAdmissionCaptured.cfg": "d21dac32ead8ce0547526c8ff39e353989f82333a0d5f7fbcee068c765ca487a",
+    "Specs/PredicateAdmissionConflict.cfg": "4dd74f8a791ee88d2666552f8b8371b08a2b01f2abf167ec2c1c6cbf704004b4",
+    "Specs/PredicateAdmissionLateBarrier.cfg": "562c3a742789ec1a00817427c18a30da08f115089d343d382b8d76f55abc17be",
+    "Specs/PredicateAdmissionLateIncoming.cfg": "f56f19941770b9bc23b31dec400c7e2fc74477292b28003fc6fa461bba8663c1",
+    "Specs/PredicateAdmissionLateRoot.cfg": "16cd22c7aef2af964e8ac56450a8db65fb72d4fa931b36e62a8f9d85fba17e1a",
+    "Specs/PredicateAdmissionLateTransfer.cfg": "7753771d78be1dd3a8dc0a28435974c416c785292366b2b15b828a9776da3802",
+    "Specs/PredicateAdmissionLimited.cfg": "9dcebf7e9c061460d55dd213a14b151ab19a20e36142b5f50ce555599b8e7ad1",
+    "Specs/PredicateAdmissionLoopChanging.cfg": "c756400583829f4a77a864b1f8fb00e410711c58d34ba530daf9834232a2024e",
+    "Specs/PredicateAdmissionLoopIdentity.cfg": "652370055fbd86e68a94a1a311d4781fa90b96a15010f917ee12ef36faf677c3",
+    "Specs/PredicateAdmissionMisaligned.cfg": "d709652166e0277b0fa2ab00569f67e75036e46419974fd4a5bda41b620de967",
+    "Specs/PredicateAdmissionNonRootPremise.cfg": "dd00e529ab9cdb0f47285f1c95a2cdbfd1f90b50484da1b28611d8504412bd23",
+    "Specs/PredicateAdmissionOpaqueCall.cfg": "cff8b69a1c6dfd15a88576316b3c0a4c3e8ff923c30f8430cf1a4708e76d41c7",
+    "Specs/PredicateAdmissionOpaqueTransfer.cfg": "535f32956d9964b3bd8318947fe009ef6977b1b0c50b795869bd5d471c90f463",
+    "Specs/PredicateAdmissionPendingHavoc.cfg": "6c0de7a20d2b7024db1426ec130cd86c1516c1fd1b8bac0d6a89cf2113e2996d",
+    "Specs/PredicateAdmissionUnknown.cfg": "39cc6a66d45966d4cffe201c8711932d4db1362b0e1bd4b5d647766ad2bb7b29",
+    "Specs/PredicateAdmissionUnreached.cfg": "09bf4b589373cc67433eed569269f93d3c8fe3f6e880e58e3dc4ff2a959c0abe",
+    "Specs/PredicateAdmissionUnwind.cfg": "c6f7499eaa983f367f9aed856823ec7cb051a7572b2bcfee8295141c1a3268d0",
+    "Specs/PredicateAdmissionUnwindResume.cfg": "01a8137b1670285029efa25ffeb5ccba58dd4645f21378ce3749e16f3fb0e11e",
+    "Specs/PredicateAdmissionWrongActivation.cfg": "99a5b4504c87ab057fe72bea9a1af23d337551426a99b2168ca89d297988a543",
+    "Specs/PredicateAdmissionWrongIntent.cfg": "a84022de787ce631c44aeee99dc84d0a9684d3389d7cf8bf9ca62226fd9fc530",
+    "Specs/PredicateAdmissionWrongPoint.cfg": "87a58c4a874411cb68261ddba66dc08c8c3730b9fb5519fb41ad046a4505e861",
+    "Specs/PredicateAdmissionWrongSnapshot.cfg": "ff6bd6d1939789e965a863fe10d428437ed5867c62dc75f1ec05c2cce5ee2ea0",
+    "Specs/PredicateAdmissionZero.cfg": "384a12064488b9985f9c9d3ab62a73ff0e6191e10e4aff05d4bf18db18b0e993"
+  },
+  "corpus": {
+    "graphAndPremiseCases": 56,
+    "closureHistories": 3,
+    "receiptCases": 33,
+    "finiteTransferCases": 720,
+    "modelConfigurations": 27,
+    "modeledScenarios": 26
+  },
+  "checks": {
+    "pythonAst": true,
+    "frozenOracleCheck": true,
+    "oracleOutput": "Independent guard oracle PASS: 56 graph/premise cases, 3 closure histories, 33 receipt cases, 720 finite transfer cases",
+    "ownedSourceWhitespace": true,
+    "configurationScenarioCoverage": true,
+    "checkerBashSyntax": true,
+    "checkerStubDispatchAllConfigurations": true,
+    "checkerStubOptionalVersionPinRejection": true,
+    "metadataOnlyChangeComparedToInitialFreeze": false,
+    "checkerTlcHelpProbeExitZeroAndOneAccepted": true,
+    "checkerTlcHelpProbeBrokenAndUnavailableRejected": true,
+    "checkerTlcHelpProbeRequiresVersionAndHelpIdentity": true,
+    "checkerTlcHelpProbeMismatchPinRejected": true,
+    "checkerTlcAnsiDescriptiveBannerAccepted": true,
+    "checkerMinimalRootfsNeedsNoRipgrep": true,
+    "singleLineTypeAliasAnnotations": true,
+    "modelAnnotationOnlyChangeComparedToInitialFreeze": true,
+    "modelExecutableTextUnchangedAfterRemovingUnusedTypeAliasAnchorAndComments": true,
+    "typeAliasAnchorUnusedByTransitionSystem": true,
+    "uniformZeroWorkCountersIncludingLeafAndUnreached": true,
+    "directWorkCounterZeroAndOneCalibration": true
+  },
+  "qualification": {
+    "realApalacheTypecheckExercised": true,
+    "realApalacheSafetyExercised": false,
+    "realTlcSafetyAndFairTerminationExercised": true,
+    "runtimeConformanceExercised": false,
+    "nativeConformanceExercised": false,
+    "localCargoOrNativeBuildsRun": false,
+    "releaseQualification": false,
+    "realApalacheTypecheckPassed": true,
+    "realApalacheTypecheckResult": "Current model10e870b2 accepted by actual remote Apalache0.58.0; previous source failures preserved in modelSourceHistory.",
+    "realTlcSafetyAndFairTerminationPassed": true,
+    "realTlcConfigurationsPassed": 27,
+    "realCorrectedOracleRemoteCheckExercised": true,
+    "realCorrectedOracleRemoteCheckPassed": true,
+    "runtimeNativeEvidenceBoundary": "This G0 record establishes the model/oracle tier only; root reports default/core/fmt/Clippy and positive guarded native parity passed, with full runtime/native evidence retained separately."
+  },
+  "scope": "Finite analysis/predicate admission contract and independent synthetic expected results; source/typed-transfer and hash codec premises are separate runtime/native evidence.",
+  "next": "Retain current model/oracle/checker/config sources unchanged; use separately collected root runtime/native/replay/mutation and dump retry evidence for wider acceptance.",
+  "checkerHistory": [
+    {
+      "checkerSha256": "0e64440e287f8b6e65852a4d9e8176903ba4baa6718f9fff7b62c856d6a83bed",
+      "status": "failed remote version probe before Apalache typecheck",
+      "reportedBy": "root remote G0 runner",
+      "reason": "Pinned TLC printed valid Version2026.10.06 help but exited1; set -e terminated the original checker.",
+      "realTlcHelpProbeExercised": true,
+      "realModelTypecheckReached": false,
+      "modelSemanticFailure": false,
+      "artifactPath": "/work/tmp/ariadne-predicate-admission.7k6ViQng",
+      "artifactPathStatus": "original remote artifact directory reported by root; artifact bytes/hash not ingested locally"
+    },
+    {
+      "checkerSha256": "2ec13c0f416afe07664f6307c5a4f4012da2f231fcbab25b4ab3fc260bf6bc68",
+      "status": "failed second remote help identity probe before Apalache typecheck",
+      "change": "Accept TLC help status0/1 only with positive TLC Version and Usage/SYNOPSIS/-help output; record status; retain selected version-pin validation.",
+      "modelAndExpectedResultsUnchanged": true,
+      "stubControls": [
+        "valid help exit0 accepted",
+        "valid help exit1 accepted",
+        "exit2 rejected",
+        "exit127 rejected",
+        "empty output rejected",
+        "missing version rejected",
+        "missing help rejected",
+        "version pin mismatch rejected",
+        "all27configuration dispatch passed"
+      ],
+      "remoteFailureReason": "ANSI descriptive TLC banner placed text between TLC and Version; ANSI SYNOPSIS heading defeated strict whitespace regex; valid help exit1 was rejected.",
+      "artifactPath": "/work/guard-admission-20261014/model.log",
+      "artifactPathStatus": "preserved latest remote model runner log reported by root; bytes/hash not ingested locally",
+      "realTlcHelpProbeExercised": true,
+      "realModelTypecheckReached": false,
+      "modelSemanticFailure": false
+    },
+    {
+      "checkerSha256": "4ad2f6ebbb866638a05f58c6d9a895dfd15b9c99f5da49191b90efe44cd50cc2",
+      "status": "ANSI/descriptive help probe corrected; actual remote checker completed exit0 with typecheck and27TLC configurations",
+      "change": "Strip ANSI CSI codes into separate clean log; positively match TLC or TLC2 banner with intervening description before Version and stripped help markers; replace rg dependency with Python stdlib checks.",
+      "modelAndExpectedResultsUnchanged": true,
+      "stubControls": [
+        "exact reported ANSI descriptive TLC banner and SYNOPSIS exit1 accepted",
+        "traditional TLC2 Version and Usage exit0/1 accepted",
+        "exit2 rejected",
+        "exit127 rejected",
+        "empty output rejected",
+        "missing version rejected",
+        "missing help rejected",
+        "version pin mismatch rejected",
+        "all27configuration dispatch passed"
+      ],
+      "remoteReportedTools": {
+        "ApalacheVersion": "0.58.0",
+        "TlcVersion": "2026.10.06.014338",
+        "provenance": "root reported live helper version/help output; remote qualification owns binary identities"
+      },
+      "successfulArtifactDirectory": "/tmp/ariadne-predicate-admission.G3H8sCFi"
+    }
+  ],
+  "updatedUtc": "2026-10-14T03:32:22.231882+00:00",
+  "modelSourceHistory": [
+    {
+      "modelSha256": "06ec5ff3b1c84b9d78051c9be80bf962e8a12a11c5ff7abc81591abaa0de3962",
+      "status": "original model frozen before runtime edits; remote Apalache0.58 type annotation failed",
+      "toolVersion": "0.58.0",
+      "error": "Typing input error: Missing @typeAlias: guardPremise = <type>;",
+      "artifactPath": "/tmp/ariadne-predicate-admission.xxLEqLBo",
+      "runnerLog": "/work/guard-admission-20261014/model.log",
+      "provenance": "root reported live remote typecheck output and artifact path; local model tooling not run",
+      "executableSemanticFailure": false
+    },
+    {
+      "modelSha256": "3ec56ee546734de28d65b83229707c90ca911197944066c0bd73b61cc520d657",
+      "status": "single-line annotation revision still rejected by actual remote Apalache0.58; alias attachment correction needed",
+      "change": "Put guardPremise record type alias on one comment line so pinned Apalache0.58 recognizes it.",
+      "modelVersionUnchanged": true,
+      "executableTlaTextUnchangedAfterRemovingComments": true,
+      "originalModelSha256Retained": "06ec5ff3b1c84b9d78051c9be80bf962e8a12a11c5ff7abc81591abaa0de3962",
+      "toolVersion": "0.58.0",
+      "error": "Typing input error: Missing @typeAlias: guardPremise = <type>;",
+      "artifactPath": "/tmp/ariadne-predicate-admission.a4OEvXoQ",
+      "runnerLog": "/work/guard-admission-20261014/model.log",
+      "provenance": "root reported actual remote revised-source typecheck result; local model tooling not run",
+      "executableSemanticFailure": false
+    },
+    {
+      "modelSha256": "10e870b21691946cd7985ff7d33819a8a58e4fea202ae6d2e771214b997f5bc9",
+      "status": "unused typedef anchor accepted by actual remote Apalache0.58.0; all27TLC safety/fairtermination configurations passed",
+      "change": "Attach alias block to unused PredicateAdmission_typedefs == TRUE operator following AriadneTypes.tla convention.",
+      "modelVersionUnchanged": true,
+      "typeAliasAnchorUnusedByTransitionAndInvariantOperators": true,
+      "previousExecutableTextUnchangedAfterRemovingUnusedAnchorLine": true,
+      "originalFrozenSemanticContractSha256": "06ec5ff3b1c84b9d78051c9be80bf962e8a12a11c5ff7abc81591abaa0de3962",
+      "validationBoundary": "Actual remote Apalache typecheck and finite TLC safety/fairtermination passed; runtime/native refinement remains separate and unqualified by this model run.",
+      "successfulArtifactDirectory": "/tmp/ariadne-predicate-admission.G3H8sCFi"
+    }
+  ],
+  "remoteModelQualification": {
+    "passed": true,
+    "exitCode": 0,
+    "sessionId": 88719,
+    "modelSha256": "10e870b21691946cd7985ff7d33819a8a58e4fea202ae6d2e771214b997f5bc9",
+    "checkerSha256": "4ad2f6ebbb866638a05f58c6d9a895dfd15b9c99f5da49191b90efe44cd50cc2",
+    "ApalacheVersion": "0.58.0",
+    "TlcVersion": "2026.10.06.014338",
+    "artifactDirectory": "/tmp/ariadne-predicate-admission.YI9MFZfF",
+    "runnerLog": "/work/guard-admission-20261014/model.log",
+    "typecheckPassed": true,
+    "safetyAndFairTerminationConfigurationsPassed": 27,
+    "boundedApalacheSafetyExercised": false,
+    "provenance": "Root reported final actual remote runner session88719 exit0, corrected56-case oracle pass, stable model source, Apalache0.58.0 typecheck and27TLC finite safety/fairtermination passes; raw logs are collected by root.",
+    "rawArtifactHashes": "Root final qualification owns collected raw artifact hashes; this G0 identity/status record retains exact reported artifact directory and all source hashes.",
+    "oracleSha256AtRun": "449ace9d36d48536ef16fc5a09796c73c7690c78cd2e1a34d5c9bf7b621ac915",
+    "contractSha256AtRun": "a6dbec2c3232cd89cecff3c03e173b1d9a377f3440ee7a73f8fb1116fd40a763",
+    "oracleGraphAndPremiseCasesAtRun": 56,
+    "currentOracleRemoteRerunPending": false,
+    "status": "final current56-case corrected independent oracle and finite model qualification passed",
+    "oracleClosureHistoriesAtRun": 3,
+    "oracleReceiptCasesAtRun": 33,
+    "oracleFiniteTransferCasesAtRun": 720
+  },
+  "originalFrozenCorpus": {
+    "graphAndPremiseCases": 52,
+    "closureHistories": 3,
+    "receiptCases": 33,
+    "finiteTransferCases": 720,
+    "modelConfigurations": 27,
+    "modeledScenarios": 26
+  },
+  "oracleSourceHistory": [
+    {
+      "oracleSha256": "0040da6f2dc36aeee43436a08e6667aac17f8a8ee02984067ecd14d3fd2c30ab",
+      "contractSha256": "9a1f39c8618f5082472843d2c4595560e7f3b7dec4b01be74afcce3c65e89584",
+      "status": "original52-case expectations frozen before runtime edits; historical, unchanged identity",
+      "frozenBeforeRuntimeEdits": true
+    },
+    {
+      "oracleSha256": "2bc4199e54483aca7b196434ede7529df50bd26f5dc500c0ee7270b429d957f3",
+      "contractSha256": "d4c2328ea93edb49a56a29ca2bbb7f620afcd8dbb93c24601a2a02fba99a3674",
+      "status": "wording-only clarification of original52-case contract; later review exposed zero-transfer leaf-policy gap",
+      "frozenBeforeRuntimeEdits": false,
+      "semanticExpectedResultsChangedFromInitialFreeze": false
+    },
+    {
+      "oracleSha256": "449ace9d36d48536ef16fc5a09796c73c7690c78cd2e1a34d5c9bf7b621ac915",
+      "contractSha256": "a6dbec2c3232cd89cecff3c03e173b1d9a377f3440ee7a73f8fb1116fd40a763",
+      "status": "post-review zero-work correction after runtime edits; fresh Python and actual final remote56-case oracle checks passed",
+      "frozenBeforeRuntimeEdits": false,
+      "modelAndRuntimeUnchanged": true,
+      "graphAndPremiseCases": 56,
+      "changedExistingCaseNames": [
+        "zero-transfer-budget"
+      ],
+      "addedIndependentControlNames": [
+        "zero-product-state-budget-aligned-leaf",
+        "zero-product-state-budget-unreached-guard",
+        "zero-transfer-budget-aligned-leaf",
+        "zero-transfer-budget-unreached-guard"
+      ],
+      "successfulRemoteSessionId": 88719,
+      "successfulArtifactDirectory": "/tmp/ariadne-predicate-admission.YI9MFZfF"
+    }
+  ],
+  "postReviewOracleCorrection": {
+    "issue": "A seeded aligned guard with no outgoing edges admitted normal under zero transfer_evaluations because the previous counter check ran only while evaluating an arc.",
+    "previousLeafZeroTransferAdmitted": true,
+    "correctedLeafZeroTransferAdmitted": false,
+    "correction": "Any zero product_states or transfer_evaluations counter makes the proof incomplete before BFS; a zero budget cannot prove unreachability either.",
+    "analogousCountersChecked": [
+      "product_states",
+      "transfer_evaluations"
+    ],
+    "runtimeSafetyImpact": "None: runtime/model already stopped zero work budgets uniformly; the independent oracle was corrected to agree.",
+    "otherRuntimeCounters": "Elapsed time, evidence bytes, site/edge caps and closure rounds belong to separate runtime/native qualification; this product-state oracle does not claim to count those resources.",
+    "postRuntimeCorrection": true,
+    "originalFreezeRelabeled": false,
+    "unchangedOriginalCases": 51,
+    "changedOriginalCases": [
+      "zero-transfer-budget"
+    ],
+    "unchangedEvolutionReceiptNumericCases": true,
+    "freshChecks": [
+      "Python AST",
+      "oracle --check56/3/33/720",
+      "explicit leaf/unreached zero counters",
+      "independent direct guard counter0/1 calibration",
+      "historical pre-correction source/hash reconstruction",
+      "owned source whitespace"
+    ]
+  },
+  "remoteModelQualificationHistory": [
+    {
+      "passed": true,
+      "exitCode": 0,
+      "sessionId": 82465,
+      "modelSha256": "10e870b21691946cd7985ff7d33819a8a58e4fea202ae6d2e771214b997f5bc9",
+      "checkerSha256": "4ad2f6ebbb866638a05f58c6d9a895dfd15b9c99f5da49191b90efe44cd50cc2",
+      "ApalacheVersion": "0.58.0",
+      "TlcVersion": "2026.10.06.014338",
+      "artifactDirectory": "/tmp/ariadne-predicate-admission.G3H8sCFi",
+      "runnerLog": "/work/guard-admission-20261014/model.log",
+      "typecheckPassed": true,
+      "safetyAndFairTerminationConfigurationsPassed": 27,
+      "boundedApalacheSafetyExercised": false,
+      "provenance": "Root reported completed actual remote runner session82465 exit0 and successful artifact directory; root is collecting raw source/tool identity and model logs.",
+      "rawArtifactHashes": "Pending root collection; do not treat this reported qualification summary as a substitute for raw logs.",
+      "oracleSha256AtRun": "2bc4199e54483aca7b196434ede7529df50bd26f5dc500c0ee7270b429d957f3",
+      "contractSha256AtRun": "d4c2328ea93edb49a56a29ca2bbb7f620afcd8dbb93c24601a2a02fba99a3674",
+      "oracleGraphAndPremiseCasesAtRun": 52,
+      "currentOracleRemoteRerunPending": true,
+      "status": "historical successful52-case run before post-review zero-work oracle correction"
+    },
+    {
+      "passed": true,
+      "exitCode": 0,
+      "sessionId": 88719,
+      "modelSha256": "10e870b21691946cd7985ff7d33819a8a58e4fea202ae6d2e771214b997f5bc9",
+      "checkerSha256": "4ad2f6ebbb866638a05f58c6d9a895dfd15b9c99f5da49191b90efe44cd50cc2",
+      "ApalacheVersion": "0.58.0",
+      "TlcVersion": "2026.10.06.014338",
+      "artifactDirectory": "/tmp/ariadne-predicate-admission.YI9MFZfF",
+      "runnerLog": "/work/guard-admission-20261014/model.log",
+      "typecheckPassed": true,
+      "safetyAndFairTerminationConfigurationsPassed": 27,
+      "boundedApalacheSafetyExercised": false,
+      "provenance": "Root reported final actual remote runner session88719 exit0, corrected56-case oracle pass, stable model source, Apalache0.58.0 typecheck and27TLC finite safety/fairtermination passes; raw logs are collected by root.",
+      "rawArtifactHashes": "Root final qualification owns collected raw artifact hashes; this G0 identity/status record retains exact reported artifact directory and all source hashes.",
+      "oracleSha256AtRun": "449ace9d36d48536ef16fc5a09796c73c7690c78cd2e1a34d5c9bf7b621ac915",
+      "contractSha256AtRun": "a6dbec2c3232cd89cecff3c03e173b1d9a377f3440ee7a73f8fb1116fd40a763",
+      "oracleGraphAndPremiseCasesAtRun": 56,
+      "currentOracleRemoteRerunPending": false,
+      "status": "final current56-case corrected independent oracle and finite model qualification passed",
+      "oracleClosureHistoriesAtRun": 3,
+      "oracleReceiptCasesAtRun": 33,
+      "oracleFiniteTransferCasesAtRun": 720
+    }
+  ]
+}

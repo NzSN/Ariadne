@@ -1,0 +1,35 @@
+[
+  {
+    "name": "loop-model",
+    "command": [
+      "bash",
+      "Specs/check-loop-target-closure.sh"
+    ],
+    "exit_code": 0,
+    "seconds": 16.410011621000002
+  },
+  {
+    "name": "rust-loop-tests",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--lib",
+      "bap::target_resolution::loop_tests"
+    ],
+    "exit_code": 101,
+    "seconds": 1.1942632189999998
+  },
+  {
+    "name": "native-build",
+    "command": [
+      "python3",
+      "native/bap-core/build.py",
+      "--output",
+      "target/loop-aware-native"
+    ],
+    "exit_code": 0,
+    "seconds": 12.079809650000001
+  }
+]

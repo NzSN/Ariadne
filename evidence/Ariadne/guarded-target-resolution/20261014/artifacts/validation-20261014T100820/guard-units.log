@@ -1,0 +1,31 @@
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-composed-20261014)
+error[E0603]: module `projection` is private
+   --> src/investigation/../../tests/investigation/composition_unit.rs:308:39
+    |
+308 | ...p::projection::project(
+    |       ^^^^^^^^^^  ------- function `project` is not publicly re-exported
+    |       |
+    |       private module
+    |
+note: the module `projection` is defined here
+   --> src/bap/mod.rs:11:1
+    |
+ 11 | mod p...tion;
+    | ^^^^^...^^^^^
+
+error[E0282]: type annotations needed
+    --> src/bap/target_resolution.rs:1280:27
+     |
+1280 | ...map(|g| {
+     |         ^
+1281 | ...   g.expr...
+     |       - type must be known at this point
+     |
+help: consider giving this closure parameter an explicit type
+     |
+1280 |                     .map(|g: /* Type */| {
+     |                            ++++++++++++
+
+Some errors have detailed explanations: E0282, E0603.
+For more information about an error, try `rustc --explain E0282`.
+error: could not compile `ariadne-analysis` (lib test) due to 2 previous errors

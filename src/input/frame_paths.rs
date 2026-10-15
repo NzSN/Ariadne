@@ -14,6 +14,137 @@ pub struct FramePreparation<'a> {
 }
 
 impl FileSnapshot {
+    /// Bind the opt-in normal-call assumption to an unwind-validated function
+    /// entry in one physical activation. The captured SP is only an activation
+    /// identifier; it supplies no earlier entry residue.
+    pub(crate) fn frame_guard_preparation(
+        &self,
+        chain: &CapturedFrameChain,
+        index: usize,
+        entry: u64,
+        limits: &PrepareLimits,
+        guard_limits: crate::bap::guard_admission::Limits,
+    ) -> Result<(AnalysisQuery, super::materialize::GuardPreparation), Error> {
+        use crate::bap::guard_admission as guard;
+        if self.metadata.platform != Platform::Windows {
+            return Err(invalid(
+                "normal-call entry assumption requires Windows AMD64",
+            ));
+        }
+        self.validate_thread_frames(chain)?;
+        let frame = chain
+            .frames
+            .get(index)
+            .ok_or_else(|| invalid("frame index outside recovered chain"))?;
+        if frame.function_begin != Some(entry) {
+            return Err(invalid(
+                "normal-call entry assumption requires validated function_begin",
+            ));
+        }
+        guard_limits.validate()?;
+        let query = AnalysisQuery {
+            entry_points: [entry].into(),
+            slice_seeds: Default::default(),
+        };
+        let activation = guard::Activation {
+            thread_id: chain.thread_id,
+            frame_activation: format!("{}:{index}:0x{:016x}", chain.chain_id, frame.sp),
+        };
+        let anchor_sha256 = crate::reports::sha256(&serde_json::to_vec(&(
+            "captured-frame-function-entry/v1",
+            &chain.chain_id,
+            index,
+            frame.function_begin,
+            frame.function_end,
+            &activation,
+        ))?);
+        let roots = vec![guard::Root {
+            site: format!("0x{entry:016x}"),
+            function_entry: true,
+            anchor_sha256: anchor_sha256.clone(),
+        }];
+        let query_scope_sha256 = super::materialize::guard_query_scope(
+            &self.metadata.snapshot_id,
+            &query,
+            limits,
+            &activation,
+            &roots,
+        )?;
+        let evidence_sha256 = crate::reports::sha256(&serde_json::to_vec(&(
+            guard::ABI_POLICY,
+            &anchor_sha256,
+            &query_scope_sha256,
+            8u8,
+        ))?);
+        let premise = guard::Premise {
+            origin: guard::PremiseOrigin::AbiNormalCall,
+            snapshot: self.metadata.snapshot_id.clone(),
+            query_scope_sha256: query_scope_sha256.clone(),
+            root: format!("0x{entry:016x}"),
+            point: format!("0x{entry:016x}"),
+            activation: activation.clone(),
+            policy: guard::ABI_POLICY.into(),
+            evidence_sha256,
+            rsp_residues: 1 << 8,
+            rsp_value: None,
+        };
+        Ok((
+            query,
+            super::materialize::GuardPreparation {
+                limits: guard_limits,
+                activation,
+                roots,
+                premises: vec![premise],
+                query_scope_sha256,
+                producer: None,
+            },
+        ))
+    }
+
+    pub fn prepare_frame_with_bap_assuming_windows_call_entry(
+        &self,
+        chain: &CapturedFrameChain,
+        index: usize,
+        entry: u64,
+        setup: &FramePreparation<'_>,
+        guard_limits: crate::bap::guard_admission::Limits,
+    ) -> Result<FilePreparedAnalysis, Error> {
+        let (query, guard) =
+            self.frame_guard_preparation(chain, index, entry, &setup.limits, guard_limits)?;
+        Ok(self.prepare_bap_guarded(
+            &query,
+            setup.decoder,
+            setup.config,
+            setup.options,
+            setup.limits.clone(),
+            guard,
+        )?)
+    }
+
+    /// Jointly recover captured indirect targets and check normal alignment
+    /// paths under the same validated physical Windows activation.
+    pub fn prepare_frame_with_bap_assuming_windows_call_entry_and_target_resolution(
+        &self,
+        chain: &CapturedFrameChain,
+        index: usize,
+        entry: u64,
+        setup: &FramePreparation<'_>,
+        guard_limits: crate::bap::guard_admission::Limits,
+        target_limits: crate::bap::target_resolution::Limits,
+    ) -> Result<FilePreparedAnalysis, Error> {
+        let (query, guard) =
+            self.frame_guard_preparation(chain, index, entry, &setup.limits, guard_limits)?;
+        Ok(self.prepare_bap_guarded_targets(
+            &query,
+            setup.decoder,
+            setup.config,
+            setup.options,
+            setup.limits.clone(),
+            guard,
+            target_limits,
+        )?)
+    }
+
     /// Recheck every context/unwind/stack receipt against the owning capture.
     pub fn validate_thread_frames(&self, chain: &CapturedFrameChain) -> Result<(), Error> {
         if chain.snapshot_id != self.metadata.snapshot_id

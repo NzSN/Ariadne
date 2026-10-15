@@ -1,0 +1,13 @@
+# Usage statistics is OFF. We care about your privacy.
+# If you want to help our project, consider enabling statistics with config --enable-stats=true.
+
+Output directory: /tmp/ariadne-predicate-admission.xxLEqLBo/typecheck/AriadnePredicateAdmission.tla/2026-10-14T03-00-27_16441674074698745875
+# APALACHE version: 0.58.0 | build: 711dce6                       I@03:00:27.521
+Type checking AriadnePredicateAdmission.tla                       I@03:00:27.529
+PASS #0: SanyParser                                               I@03:00:27.645
+PASS #1: TypeCheckerSnowcat                                       I@03:00:27.872
+ > Running Snowcat .::.                                           I@03:00:27.872
+Typing input error: Missing @typeAlias: guardPremise = <type>;    E@03:00:27.953
+It took me 0 days  0 hours  0 min  0 sec                          I@03:00:27.954
+Total time: 0.431 sec                                             I@03:00:27.954
+EXITCODE: ERROR (255)

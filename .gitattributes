@@ -14,3 +14,10 @@ evidence/Ariadne/frame-paths/native-final.log whitespace=-blank-at-eof
 # Keep resolver debugger/model/runtime evidence bound to its original bytes.
 evidence/Ariadne/indirect-target-resolution/** -text
 evidence/Ariadne/indirect-target-resolution/**/*.log whitespace=-blank-at-eol,-blank-at-eof
+# Keep the sealed loop-qualification archive in the repository's LFS store.
+evidence/Ariadne/loop-aware-target-resolution/20261015/evidence.tar.gz filter=lfs diff=lfs merge=lfs -text
+# Hash-bound diagnostic output must retain its original bytes and whitespace.
+evidence/Ariadne/** -text
+evidence/Ariadne/**/*.log whitespace=-blank-at-eol,-blank-at-eof
+evidence/Ariadne/frame-paths/dump03958-20261013/certificate-trust.json whitespace=-blank-at-eol,-blank-at-eof
+evidence/Ariadne/frame-paths/dump03958-20261013/symbol-identity.json whitespace=-blank-at-eol,-blank-at-eof

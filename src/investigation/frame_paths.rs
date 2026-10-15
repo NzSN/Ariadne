@@ -5,6 +5,9 @@ use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, BTreeSet};
 use std::time::Instant;
 pub const FRAME_PATH_SCHEMA: &str = "ariadne.frame-paths/v1";
+pub const GUARDED_FRAME_PATH_SCHEMA: &str = "ariadne.frame-paths/v2";
+pub const LEGACY_COMPOSED_FRAME_PATH_SCHEMA: &str = "ariadne.frame-paths/v3";
+pub const COMPOSED_FRAME_PATH_SCHEMA: &str = "ariadne.frame-paths/v4";
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -99,6 +102,21 @@ struct FrameGraph {
     nodes: Vec<GraphNode>,
     edges: Vec<FramePathEdge>,
     gaps: Vec<String>,
+    #[cfg(feature = "bap")]
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    guard_admission: Option<GuardFrameEvidence>,
+}
+#[cfg(feature = "bap")]
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+struct GuardFrameEvidence {
+    report: crate::bap::guard_admission::Report,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    composition: Option<crate::bap::composition::Report>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    target_resolution: Option<crate::bap::target_resolution::Report>,
+    normalized: serde_json::Value,
+    sites: Vec<SiteEvidence>,
 }
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -192,6 +210,40 @@ pub fn bind_frame_paths(
         if f.function_begin.is_some_and(|begin| begin != entry) {
             return Err(invalid("graph entry disagrees with frame function"));
         }
+        #[cfg(feature = "bap")]
+        let guard_admission = bound
+            .guard_admission
+            .as_ref()
+            .map(|report| {
+                let normalized = crate::bap::core_adapter::encode_request(&bound.request)?;
+                let (query, _, _) = super::proof_binding(
+                    bound.composition.as_ref(),
+                    if bound.composition.is_some() {
+                        bound.target_resolution.as_ref()
+                    } else {
+                        None
+                    },
+                    report,
+                    &bound.request,
+                )?;
+                if query != bound.identity.query_id {
+                    return Err(invalid(
+                        "guarded frame query differs from original bound request",
+                    ));
+                }
+                Ok(GuardFrameEvidence {
+                    report: report.clone(),
+                    composition: bound.composition.clone(),
+                    target_resolution: if bound.composition.is_some() {
+                        bound.target_resolution.clone()
+                    } else {
+                        None
+                    },
+                    normalized,
+                    sites: bound.context.sites.clone(),
+                })
+            })
+            .transpose()?;
         count = count
             .checked_add(bound.state.decoded.len())
             .filter(|v| *v <= 8192)
@@ -254,6 +306,15 @@ pub fn bind_frame_paths(
         {
             gaps.push("local-edge-outside-frame-function".into());
         }
+        #[cfg(feature = "bap")]
+        if guard_admission
+            .as_ref()
+            .is_some_and(|e| e.composition.is_some())
+        {
+            // Reuse the already completed analysis. Published coverage gaps
+            // are core recovery facts, rather than caller-editable context.
+            gaps = recovered_frame_graph(frame, f, &bound.request, &bound.state).gaps;
+        }
         graphs.push(FrameGraph {
             frame,
             identity: bound.identity,
@@ -261,6 +322,8 @@ pub fn bind_frame_paths(
             nodes,
             edges,
             gaps,
+            #[cfg(feature = "bap")]
+            guard_admission,
         });
     }
     graphs.sort_by_key(|g| g.frame);
@@ -292,6 +355,8 @@ fn validate_input(input: &Input) -> Result<(), Error> {
         {
             return Err(invalid("frame graph identity/size invalid"));
         }
+        #[cfg(feature = "bap")]
+        validate_guarded_graph(&input.chain, g)?;
         let nodes: BTreeSet<_> = g.nodes.iter().map(|n| n.evidence.va).collect();
         if nodes.len() != g.nodes.len()
             || g.nodes.iter().any(|n| {
@@ -317,6 +382,470 @@ fn validate_input(input: &Input) -> Result<(), Error> {
     }
     Ok(())
 }
+
+#[cfg(feature = "bap")]
+fn validate_guarded_graph(chain: &CapturedFrameChain, graph: &FrameGraph) -> Result<(), Error> {
+    use crate::bap::guard_admission as guard;
+    let Some(evidence) = &graph.guard_admission else {
+        if graph.identity.semantic_profile.contains(guard::PROFILE) {
+            return Err(invalid("guarded frame graph has no proof sources"));
+        }
+        return Ok(());
+    };
+    let report = &evidence.report;
+    let input = &report.input;
+    let normalized_request = decode_guard_request(&evidence.normalized)?;
+    let frame = &chain.frames[graph.frame];
+    let (query, semantic_suffix, candidate) = super::proof_binding(
+        evidence.composition.as_ref(),
+        evidence.target_resolution.as_ref(),
+        report,
+        &normalized_request,
+    )?;
+    if let Some(composition) = &evidence.composition {
+        super::validate_composition_capture(
+            &graph.identity.semantic_profile,
+            composition,
+            evidence
+                .target_resolution
+                .as_ref()
+                .expect("validated paired target proof"),
+            report,
+            &evidence.sites,
+        )?;
+        if graph.identity.request_sha256 != super::request_fingerprint(&normalized_request) {
+            return Err(invalid(
+                "composed frame original request fingerprint changed",
+            ));
+        }
+    }
+    if query != graph.identity.query_id
+        || (evidence.composition.is_none()
+            && crate::bap::composition::contains_profile(&graph.identity.semantic_profile))
+        || input.snapshot != chain.snapshot_id
+        || input.artifact_sha256 != chain.artifact_sha256
+        || input.activation.thread_id != chain.thread_id
+        || input.activation.frame_activation
+            != format!("{}:{}:0x{:016x}", chain.chain_id, graph.frame, frame.sp)
+        || frame.function_begin != Some(graph.entry)
+        || input.roots.len() != 1
+        || input.roots[0].site != format!("0x{:016x}", graph.entry)
+        || !input.roots[0].function_entry
+        || !graph.identity.semantic_profile.ends_with(&semantic_suffix)
+        || evidence.normalized["snapshot"].as_str() != Some(input.snapshot.as_str())
+        || normalized_request.entry_points != [graph.entry].into()
+        || normalized_request.input_kind != crate::InputKind::Dump
+        || !normalized_request.file_backed.is_empty()
+        || !normalized_request.trusted_fallback.is_empty()
+    {
+        return Err(invalid(
+            "guarded frame activation, entry or request binding changed",
+        ));
+    }
+    if input.premises.len() != 1
+        || input.premises[0].origin != guard::PremiseOrigin::AbiNormalCall
+        || input.premises[0].policy != guard::ABI_POLICY
+    {
+        return Err(invalid("guarded frame normal-call premise absent"));
+    }
+    let rows = evidence.normalized["instructions"]
+        .as_array()
+        .ok_or_else(|| invalid("guarded frame normalized rows absent"))?;
+    let row_count = rows.len();
+    let rows: BTreeMap<_, _> = rows
+        .iter()
+        .map(|row| {
+            Ok((
+                row["address"]
+                    .as_str()
+                    .ok_or_else(|| invalid("guarded frame row address"))?,
+                row,
+            ))
+        })
+        .collect::<Result<_, Error>>()?;
+    if rows.len() != row_count {
+        return Err(invalid("duplicate guarded frame normalized row"));
+    }
+    let sites: BTreeMap<_, _> = evidence.sites.iter().map(|s| (s.va, s)).collect();
+    if sites.len() != evidence.sites.len() {
+        return Err(invalid("duplicate guarded frame capture source"));
+    }
+    if sites.keys().copied().collect::<crate::AddressSet>() != normalized_request.addresses {
+        return Err(invalid("guarded frame capture source domain changed"));
+    }
+    for source in &input.sites {
+        let va = crate::bap::core_adapter::address(&source.site)?;
+        let site = sites
+            .get(&va)
+            .ok_or_else(|| invalid("guarded frame raw capture source absent"))?;
+        if !super::validate::site_valid(site)
+            || site.bytes_hex != source.bytes_hex
+            || (!source.bytes_hex.is_empty()
+                && (!site.captured
+                    || site.ast_sha256.as_deref()
+                        != Some(crate::reports::sha256(source.ast.as_bytes()).as_str())
+                    || site.helper_sha256.as_ref() != Some(&input.producer.helper_sha256)
+                    || site.runtime_sha256.as_ref() != Some(&input.producer.runtime_sha256)
+                    || site.projection.as_ref() != Some(&input.producer.projection)))
+        {
+            return Err(invalid("guarded frame BIL, bytes or producer changed"));
+        }
+        let row = rows
+            .get(source.site.as_str())
+            .ok_or_else(|| invalid("guarded frame summary absent"))?;
+        if guard::recognize_pending(source)?.is_some() {
+            if let Some(ast) = report.normal_selection(va) {
+                let bytes = super::frame_unwind::unhex(&source.bytes_hex)?;
+                let selected = crate::bap::Backend::guard_normal_projection(
+                    ast,
+                    site.opcode.as_deref().unwrap_or(""),
+                    &bytes,
+                    va,
+                )?;
+                let actual = normalized_summary(row)?;
+                if selected.instruction != actual
+                    || !normalized_request.decodable.contains(&va)
+                    || site.quality != "external_lift"
+                    || site.semantic_status.as_deref() != Some("projected")
+                    || site.accesses
+                        != selected
+                            .memory_accesses
+                            .iter()
+                            .map(super::model::AddressUse::from)
+                            .collect::<Vec<_>>()
+                {
+                    return Err(invalid("guarded frame normal effect selection changed"));
+                }
+            } else {
+                let actual = normalized_summary(row)?;
+                let locations: crate::LocationSet =
+                    serde_json::from_value(evidence.normalized["locations"].clone())?;
+                if actual.kind != InstructionKind::Stop
+                    || normalized_request.decodable.contains(&va)
+                    || !actual.fall.is_empty()
+                    || !actual.targets.is_empty()
+                    || actual.complete
+                    || !actual.must_defs.is_empty()
+                    || actual.uses != locations
+                    || actual.may_defs != locations
+                    || site.quality != "opaque"
+                    || site.semantic_status.as_deref() != Some("guard-not-admitted")
+                    || !site.accesses.is_empty()
+                {
+                    return Err(invalid("unadmitted frame guard committed normal effects"));
+                }
+            }
+        } else if guard::CandidateControl::from_instruction(&normalized_summary(row)?)
+            != candidate
+                .as_ref()
+                .and_then(|r| r.instructions.get(&va))
+                .map(guard::CandidateControl::from_instruction)
+                .unwrap_or_else(|| source.control.clone())
+        {
+            return Err(invalid("guarded frame candidate control changed"));
+        }
+    }
+    for node in &graph.nodes {
+        if sites.get(&node.evidence.va).copied() != Some(&node.evidence)
+            || !normalized_request.decodable.contains(&node.evidence.va)
+        {
+            return Err(invalid(
+                "guarded frame published node differs from full capture source",
+            ));
+        }
+        let address = format!("0x{:016x}", node.evidence.va);
+        let actual = normalized_summary(
+            rows.get(address.as_str())
+                .ok_or_else(|| invalid("guarded graph row absent"))?,
+        )?;
+        if node.call != (actual.kind == InstructionKind::Call)
+            || node.fall != actual.fall.iter().copied().collect::<Vec<_>>()
+            || node.targets != actual.targets.iter().copied().collect::<Vec<_>>()
+        {
+            return Err(invalid(
+                "guarded frame published control differs from full request",
+            ));
+        }
+    }
+    if evidence.composition.is_some() {
+        // Replay only structural recovery. Stopping with an empty pending set
+        // avoids FinishRecovery and every dataflow/slice action.
+        let mut recovery = crate::Analyzer::new(normalized_request.clone())?;
+        while !recovery.state().pending.is_empty() {
+            recovery.step();
+        }
+        let expected =
+            recovered_frame_graph(graph.frame, frame, &normalized_request, recovery.state());
+        if graph
+            .nodes
+            .iter()
+            .map(|n| n.evidence.va)
+            .collect::<Vec<_>>()
+            != expected.node_addresses
+            || graph.edges != expected.edges
+            || graph.gaps != expected.gaps
+        {
+            return Err(invalid(
+                "composed frame topology or coverage gaps differ from sealed recovery",
+            ));
+        }
+    }
+    Ok(())
+}
+
+#[cfg(feature = "bap")]
+struct RecoveredFrameGraph {
+    node_addresses: Vec<u64>,
+    edges: Vec<FramePathEdge>,
+    gaps: Vec<String>,
+}
+
+#[cfg(feature = "bap")]
+fn recovered_frame_graph(
+    frame_index: usize,
+    frame: &super::frame_unwind::RecoveredFrame,
+    request: &crate::AnalysisRequest,
+    state: &crate::AnalysisState,
+) -> RecoveredFrameGraph {
+    let in_function = |site: u64| {
+        frame.function_begin.is_none_or(|b| site >= b)
+            && frame.function_end.is_none_or(|e| site < e)
+    };
+    let node_addresses = state
+        .decoded
+        .iter()
+        .copied()
+        .filter(|site| in_function(*site))
+        .collect();
+    let edges = state
+        .edges
+        .iter()
+        .filter(|e| {
+            e.kind.is_local()
+                && state.decoded.contains(&e.src)
+                && state.decoded.contains(&e.dst)
+                && in_function(e.src)
+                && in_function(e.dst)
+        })
+        .map(|e| FramePathEdge {
+            src: FramePathNode {
+                frame: frame_index,
+                site: e.src,
+            },
+            dst: FramePathNode {
+                frame: frame_index,
+                site: e.dst,
+            },
+            kind: e.kind.into(),
+        })
+        .collect();
+    let mut gaps: Vec<_> = state
+        .obligations
+        .iter()
+        .map(|o| format!("0x{:016x}:recovery:{:?}", o.site, o.reason))
+        .chain(
+            request
+                .slice_seeds
+                .difference(&state.decoded)
+                .map(|site| format!("0x{site:016x}:missing-seed")),
+        )
+        .collect();
+    gaps.extend(state.obligations.iter().map(|o| format!("{o:?}")));
+    if state
+        .edges
+        .iter()
+        .any(|e| e.kind.is_local() && in_function(e.src) && !in_function(e.dst))
+    {
+        gaps.push("local-edge-outside-frame-function".into());
+    }
+    RecoveredFrameGraph {
+        node_addresses,
+        edges,
+        gaps,
+    }
+}
+
+#[cfg(feature = "bap")]
+fn normalized_summary(row: &serde_json::Value) -> Result<crate::Instruction, Error> {
+    let addresses = |name: &str| -> Result<crate::AddressSet, Error> {
+        row[name]
+            .as_array()
+            .ok_or_else(|| invalid("guarded summary address set"))?
+            .iter()
+            .map(|v| {
+                crate::bap::core_adapter::address(
+                    v.as_str()
+                        .ok_or_else(|| invalid("guarded summary address"))?,
+                )
+            })
+            .collect()
+    };
+    Ok(crate::Instruction {
+        kind: match row["kind"].as_str() {
+            Some("ordinary") => InstructionKind::Ordinary,
+            Some("conditional") => InstructionKind::Conditional,
+            Some("jump") => InstructionKind::Jump,
+            Some("indirect") => InstructionKind::Indirect,
+            Some("call") => InstructionKind::Call,
+            Some("return") => InstructionKind::Return,
+            Some("stop") => InstructionKind::Stop,
+            _ => return Err(invalid("guarded summary kind")),
+        },
+        fall: addresses("fall")?,
+        targets: addresses("targets")?,
+        complete: row["targets_complete"]
+            .as_bool()
+            .ok_or_else(|| invalid("guarded summary completeness"))?,
+        uses: serde_json::from_value(row["uses"].clone())?,
+        may_defs: serde_json::from_value(row["may_defs"].clone())?,
+        must_defs: serde_json::from_value(row["must_defs"].clone())?,
+    })
+}
+
+#[cfg(feature = "bap")]
+pub(crate) fn decode_guard_request(
+    value: &serde_json::Value,
+) -> Result<crate::AnalysisRequest, Error> {
+    let addresses = |name: &str| -> Result<crate::AddressSet, Error> {
+        value[name]
+            .as_array()
+            .ok_or_else(|| invalid("guarded request address set"))?
+            .iter()
+            .map(|v| {
+                crate::bap::core_adapter::address(
+                    v.as_str()
+                        .ok_or_else(|| invalid("guarded request address"))?,
+                )
+            })
+            .collect()
+    };
+    let rows = value["instructions"]
+        .as_array()
+        .ok_or_else(|| invalid("guarded request rows"))?;
+    let instructions: BTreeMap<_, _> = rows
+        .iter()
+        .map(|row| {
+            Ok((
+                crate::bap::core_adapter::address(
+                    row["address"]
+                        .as_str()
+                        .ok_or_else(|| invalid("guarded request row address"))?,
+                )?,
+                normalized_summary(row)?,
+            ))
+        })
+        .collect::<Result<_, Error>>()?;
+    let request = crate::AnalysisRequest {
+        snapshot_id: value["snapshot"]
+            .as_str()
+            .ok_or_else(|| invalid("guarded request snapshot"))?
+            .into(),
+        addresses: addresses("addresses")?,
+        locations: serde_json::from_value(value["locations"].clone())?,
+        entry_points: addresses("entry_points")?,
+        slice_seeds: addresses("slice_seeds")?,
+        input_kind: match value["input_kind"].as_str() {
+            Some("dump") => crate::InputKind::Dump,
+            Some("binary") => crate::InputKind::Binary,
+            _ => return Err(invalid("guarded request input kind")),
+        },
+        captured: addresses("captured")?,
+        file_backed: addresses("file_backed")?,
+        trusted_fallback: addresses("trusted_fallback")?,
+        decodable: addresses("decodable")?,
+        instructions,
+    };
+    request.validate()?;
+    if crate::bap::core_adapter::encode_request(&request)? != *value {
+        return Err(invalid(
+            "noncanonical or duplicate guarded normalized request",
+        ));
+    }
+    Ok(request)
+}
+
+fn frame_path_schema(input: &Input) -> &'static str {
+    #[cfg(feature = "bap")]
+    if input.graphs.iter().any(|g| {
+        g.guard_admission
+            .as_ref()
+            .is_some_and(|e| e.composition.is_some())
+    }) {
+        return if input.graphs.iter().any(|g| {
+            g.guard_admission
+                .as_ref()
+                .and_then(|e| e.composition.as_ref())
+                .is_some_and(|c| !crate::bap::composition::is_legacy(c))
+        }) {
+            COMPOSED_FRAME_PATH_SCHEMA
+        } else {
+            LEGACY_COMPOSED_FRAME_PATH_SCHEMA
+        };
+    }
+    #[cfg(feature = "bap")]
+    if input.graphs.iter().any(|g| g.guard_admission.is_some()) {
+        return GUARDED_FRAME_PATH_SCHEMA;
+    }
+    let _ = input;
+    FRAME_PATH_SCHEMA
+}
+
+#[cfg(feature = "bap")]
+fn append_guard_premises(input: &Input, premises: &mut Vec<String>) {
+    for graph in &input.graphs {
+        if let Some(evidence) = &graph.guard_admission {
+            if let Some(composition) = &evidence.composition {
+                let target = evidence
+                    .target_resolution
+                    .as_ref()
+                    .expect("validated paired target proof");
+                premises.push(format!("frame-{}: composition {} proof {}; target profile {}; premise {}: captured control data is interpreted as frozen; no historical memory stability or executed path is inferred", graph.frame, composition.profile, composition.binding_sha256, target.profile, target.memory_premise));
+                for row in &target.resolutions {
+                    premises.push(format!(
+                        "frame-{}: indirect {}: {} targets; complete={}; unresolved={:?}",
+                        graph.frame,
+                        row.site,
+                        row.targets.len(),
+                        row.complete,
+                        row.unresolved
+                    ));
+                }
+                premises.push(format!(
+                    "frame-{}: target resolution stopped: {:?}",
+                    graph.frame, target.stop
+                ));
+            }
+            for premise in &evidence.report.input.premises {
+                premises.push(format!(
+                    "frame-{}: assumed {}: entry RSP mod 16 = 8 at {}; activation {}; evidence {}",
+                    graph.frame,
+                    premise.policy,
+                    premise.point,
+                    premise.activation.frame_activation,
+                    premise.evidence_sha256
+                ));
+            }
+            for decision in &evidence.report.guards {
+                premises.push(format!(
+                    "frame-{}: guard {} {:?}; {}; proof {}",
+                    graph.frame,
+                    decision.site,
+                    decision.verdict,
+                    decision.residual,
+                    decision.receipt_sha256
+                ));
+            }
+            if let Some(stop) = &evidence.report.stop {
+                premises.push(format!(
+                    "frame-{}: guard admission stopped: {stop}",
+                    graph.frame
+                ));
+            }
+        }
+    }
+}
+#[cfg(not(feature = "bap"))]
+fn append_guard_premises(_input: &Input, _premises: &mut Vec<String>) {}
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct ListedFramePath {
@@ -463,7 +992,32 @@ fn list(
     validate_input(&input)?;
     let started = Instant::now();
     let scope_id = sha(&serde_json::to_vec(&(&input, &q, &limits))?);
-    let mut result=FramePathListing{schema:FRAME_PATH_SCHEMA.into(),scope_id,question:q.clone(),limits:limits.clone(),available:true,coverage:"partial".into(),truncated:false,enumeration_exhausted:false,stop_reason:String::new(),gaps:Vec::new(),returned_count:0,paths:Vec::new(),counters:FramePathCounters{expanded_states:0,scanned_edges:0,peak_frontier_bytes:0,retained_path_bytes:0},frontier_count:0,elapsed_ms:0,premises:vec!["Structural alternatives under captured frame, decoded-control and unwind/Windows ABI premises; no executed history or selected writer".into(),"Opaque summary steps retain unknown callee interiors; an incomplete path list never excludes a memory writer".into()],input};
+    let mut premises = vec!["Structural alternatives under captured frame, decoded-control and unwind/Windows ABI premises; no executed history or selected writer".into(), "Opaque summary steps retain unknown callee interiors; an incomplete path list never excludes a memory writer".into()];
+    append_guard_premises(&input, &mut premises);
+    let mut result = FramePathListing {
+        schema: frame_path_schema(&input).into(),
+        scope_id,
+        question: q.clone(),
+        limits: limits.clone(),
+        available: true,
+        coverage: "partial".into(),
+        truncated: false,
+        enumeration_exhausted: false,
+        stop_reason: String::new(),
+        gaps: Vec::new(),
+        returned_count: 0,
+        paths: Vec::new(),
+        counters: FramePathCounters {
+            expanded_states: 0,
+            scanned_edges: 0,
+            peak_frontier_bytes: 0,
+            retained_path_bytes: 0,
+        },
+        frontier_count: 0,
+        elapsed_ms: 0,
+        premises,
+        input,
+    };
     let payload = serde_json::to_vec(&result)?.len();
     if payload > limits.max_output_bytes {
         return Err(invalid("frame-output-input-byte-budget"));
@@ -645,6 +1199,15 @@ pub fn list_frame_paths(
     list(bound.input.clone(), question, limits, None)
 }
 impl FramePathListing {
+    #[cfg(test)]
+    pub(super) fn relist_for_test(&self) -> Result<Self, Error> {
+        list(
+            self.input.clone(),
+            self.question.clone(),
+            self.limits.clone(),
+            Some(usize::MAX),
+        )
+    }
     pub fn frame_chain(&self) -> &CapturedFrameChain {
         &self.input.chain
     }

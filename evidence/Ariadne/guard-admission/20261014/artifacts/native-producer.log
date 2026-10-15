@@ -1,0 +1,16 @@
+    Finished `test` profile [unoptimized] target(s) in 0.06s
+     Running tests/bap/native.rs (target/guard-build/debug/deps/bap_native-b0d0816aae8e9622)
+
+running 9 tests
+test unavailable_batches_high_addresses_short_bytes_and_query_ownership_are_checked ... ok
+test independent_decoder_process_is_reused_across_snapshot_batches ... ok
+test vector_producer_tracks_coarse_state_and_retains_alignment_refusal ... ok
+test partial_self_moves_define_written_cells_and_unsupported_bil_never_falls_back ... ok
+test memory_address_evidence_distinguishes_payload_index_displacement_and_rip ... ok
+test aliases_zero_extension_memory_and_conditional_writes_have_independent_effect_expectations ... ok
+test calls_special_empty_lifts_prefixes_and_snapshot_reset_remain_explicit ... ok
+test observed_admission_forms_match_frozen_effects_and_address_footprints ... ok
+test every_pinned_runtime_file_is_checked_before_preparation ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 18.63s
+

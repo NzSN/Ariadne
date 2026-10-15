@@ -1,0 +1,50 @@
+    Finished `test` profile [unoptimized] target(s) in 0.03s
+     Running tests/input/bap_core.rs (target/composed-build/debug/deps/input_bap_core-6fa89f8fafdd27aa)
+
+running 9 tests
+native kernel_cpu_s=0.001 serialization_cpu_s=0.000 actions=12
+native kernel_cpu_s=0.001 serialization_cpu_s=0.000 actions=12
+native kernel_cpu_s=0.001 serialization_cpu_s=0.000 actions=12
+native kernel_cpu_s=0.000 serialization_cpu_s=0.000 actions=9
+native kernel_cpu_s=0.001 serialization_cpu_s=0.000 actions=15
+native kernel_cpu_s=0.000 serialization_cpu_s=0.000 actions=11
+native kernel_cpu_s=0.000 serialization_cpu_s=0.000 actions=9
+fatal: Recovery.Invalid("opaque ordinary capture contract")
+guarded native admission rejected: guard coverage/stop mismatch
+test captured_xorps_shift_width_has_guarded_native_parity_and_rejects_rehashed_nonshift ... ok
+fatal: Recovery.Invalid("opaque ordinary capture contract")
+guarded native admission rejected: guard capture proof binding
+fatal: Recovery.Invalid("opaque ordinary capture contract")
+guarded native admission rejected: guard capture proof binding
+fatal: Recovery.Invalid("opaque ordinary capture contract")
+guarded native admission rejected: guard capture proof binding
+fatal: Recovery.Invalid("opaque ordinary capture contract")
+guarded native admission rejected: guard capture proof binding
+native kernel_cpu_s=0.001 serialization_cpu_s=0.000 actions=12
+test captured_native_results_and_explanations_match_reference_and_reject_tampering ... ok
+native kernel_cpu_s=0.001 serialization_cpu_s=0.000 actions=12
+test vector_capture_has_native_reference_parity_and_keeps_prior_vector_origins ... ok
+native kernel_cpu_s=0.001 serialization_cpu_s=0.000 actions=12
+fatal: Recovery.Invalid("opaque ordinary capture contract")
+test native_rejects_opaque_contract_tampering_directly ... ok
+test opaque_ordinary_keeps_old_and_unknown_origins_and_all_format_gaps ... ok
+native kernel_cpu_s=0.000 serialization_cpu_s=0.000 actions=6
+native kernel_cpu_s=0.000 serialization_cpu_s=0.000 actions=6
+test guarded_native_accepts_full_unsigned_budgets_and_retains_zero_budget_stop ... ok
+guarded native admission rejected: guard capture proof binding
+guarded native admission rejected: guard capture proof binding
+guarded native admission rejected: guard capture proof binding
+guarded native admission rejected: projected AST identity
+guarded native admission rejected: guard capture proof binding
+guarded native admission rejected: guard normal control summary
+native kernel_cpu_s=0.001 serialization_cpu_s=0.000 actions=15
+guarded native admission rejected: guard coverage/stop mismatch
+native kernel_cpu_s=0.000 serialization_cpu_s=0.000 actions=6
+guarded native admission rejected: guard stopped summary/capture contract
+test guarded_frame_capture_has_native_parity_and_rejects_direct_proof_tampering ... ok
+native kernel_cpu_s=0.000 serialization_cpu_s=0.000 actions=6
+test observed_chain_recovers_from_one_root_and_empty_lifts_still_stop ... ok
+test native_cli_assessment_and_explanation_preserve_reference_output ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 31.05s
+

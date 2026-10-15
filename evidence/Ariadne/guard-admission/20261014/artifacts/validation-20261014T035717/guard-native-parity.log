@@ -1,0 +1,30 @@
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-guard-admission-20261014)
+    Finished `test` profile [unoptimized] target(s) in 0.76s
+     Running tests/input/bap_core.rs (target/guard-build/debug/deps/input_bap_core-6fa89f8fafdd27aa)
+
+running 1 test
+native kernel_cpu_s=0.000 serialization_cpu_s=0.000 actions=9
+completion compute_ms=0 encoded_bytes=17178
+completion transfer_ms=0
+completion expansion_ms=0
+completion state_decode_ms=0
+guarded native admission rejected: guard capture proof binding
+guarded native admission rejected: guard capture proof binding
+guarded native admission rejected: guard capture proof binding
+guarded native admission rejected: guard capture proof binding
+guarded native admission rejected: guard capture proof binding
+guarded native admission rejected: guard capture proof binding
+guarded native admission rejected: guard capture proof binding
+guarded native admission rejected: projected AST identity
+guarded native admission rejected: guard capture proof binding
+guarded native admission rejected: guard normal control summary
+guarded native admission rejected: guard coverage/stop mismatch
+native kernel_cpu_s=0.000 serialization_cpu_s=0.000 actions=6
+completion compute_ms=0 encoded_bytes=12198
+completion transfer_ms=0
+completion expansion_ms=0
+guarded native admission rejected: guard stopped summary/capture contract
+test guarded_frame_capture_has_native_parity_and_rejects_direct_proof_tampering ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 6 filtered out; finished in 9.52s
+

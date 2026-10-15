@@ -63,6 +63,42 @@ impl Value {
         }
         Some(n)
     }
+    fn bounded_shift_count(&self, width: usize) -> Option<usize> {
+        let bits = self.bits().ok()?;
+        if bits.iter().any(|bit| bit.value.is_none()) {
+            return None;
+        }
+        let mut count = 0usize;
+        for (index, bit) in bits.iter().enumerate() {
+            if bit.value == Some(true) {
+                let Some(value) = 1usize.checked_shl(index as u32) else {
+                    return Some(width);
+                };
+                count = count.saturating_add(value);
+                if count >= width {
+                    return Some(width);
+                }
+            }
+        }
+        Some(count)
+    }
+}
+
+fn justified_equal(lhs: &Expr, rhs: &Expr, left: &[Bit], right: &[Bit]) -> bool {
+    // A dependency set describes possible origins, not value identity. Reads
+    // of one bound variable refer to the same value at this expression point.
+    if let (Expr::Var { var: l }, Expr::Var { var: r }) = (lhs, rhs)
+        && l.key() == r.key()
+        && l.width == r.width
+        && l.type_ == r.type_
+    {
+        return true;
+    }
+    left.len() == right.len()
+        && left.iter().zip(right).all(|(l, r)| {
+            l.value.is_some() && l.value == r.value
+                || !l.uncertain && !r.uncertain && l.original.is_some() && l.original == r.original
+        })
 }
 #[derive(Clone, Default)]
 struct State {
@@ -70,10 +106,14 @@ struct State {
     arch: BTreeMap<String, Var>,
     forced_uses: LocationSet,
     memory_write: bool,
+    vector_write: bool,
     gaps: Vec<String>,
     jumps: Vec<Option<u64>>,
 }
 fn location(var: &Var, bit: usize) -> Result<String, Error> {
+    if super::registers::vector_backing(var).is_some() && bit < var.width {
+        return Ok("state:other".into());
+    }
     if let Some(bank) = BANKS.iter().position(|name| *name == var.name) {
         if var.width != 64 || bit >= 64 {
             return Err(invalid("unreviewed architectural register width"));
@@ -127,6 +167,15 @@ fn initial(var: &Var, va: u64) -> Result<Value, Error> {
     ))
 }
 fn get(state: &mut State, var: &Var, va: u64) -> Result<Value, Error> {
+    if let Some(backing) = super::registers::vector_backing(var) {
+        state.gaps.push("vector-state-coarsened:state:other".into());
+        let key = backing.key();
+        if let std::collections::btree_map::Entry::Vacant(entry) = state.env.entry(key.clone()) {
+            entry.insert(initial(&backing, va)?);
+            state.arch.insert(key.clone(), backing);
+        }
+        return Ok(Value::Bits(state.env[&key].bits()?[..var.width].to_vec()));
+    }
     if let Some(v) = state.env.get(&var.key()) {
         return Ok(v.clone());
     }
@@ -136,6 +185,22 @@ fn get(state: &mut State, var: &Var, va: u64) -> Result<Value, Error> {
         state.arch.insert(var.key(), var.clone());
     }
     Ok(value)
+}
+fn put(state: &mut State, var: &Var, value: Value, va: u64) -> Result<(), Error> {
+    if let Some(backing) = super::registers::vector_backing(var) {
+        // Preserve the upper half on an architectural XMM assignment. A BAP
+        // YMM assignment explicitly represents any VEX zeroing of that half.
+        get(state, &backing, va)?;
+        let key = backing.key();
+        let mut bits = state.env[&key].bits()?.to_vec();
+        bits[..var.width].clone_from_slice(value.bits()?);
+        state.forced_uses.extend(value.deps());
+        state.env.insert(key, Value::Bits(bits));
+        state.vector_write = true;
+    } else {
+        state.env.insert(var.key(), value);
+    }
+    Ok(())
 }
 fn union(lhs: &Value, rhs: &Value) -> LocationSet {
     lhs.deps().union(&rhs.deps()).cloned().collect()
@@ -233,7 +298,7 @@ fn eval(expr: &Expr, state: &mut State, va: u64, depth: usize) -> Result<Value, 
             addr,
             value,
         } => {
-            if !matches!(child(mem)?, Value::Memory) || ![8, 16, 32, 64].contains(width) {
+            if !matches!(child(mem)?, Value::Memory) || ![8, 16, 32, 64, 128, 256].contains(width) {
                 return Err(invalid("invalid store type/width"));
             }
             let address = child(addr)?;
@@ -347,10 +412,16 @@ fn eval(expr: &Expr, state: &mut State, va: u64, depth: usize) -> Result<Value, 
             let right = child(rhs)?;
             let l = left.bits()?;
             let r = right.bits()?;
-            if l.len() != r.len() {
+            let shift_op = matches!(op, 9..=11);
+            if !shift_op && l.len() != r.len() {
                 return Err(invalid("binary width mismatch"));
             }
-            if *op == 6 && l == r {
+            let count = if shift_op {
+                right.bounded_shift_count(l.len())
+            } else {
+                None
+            };
+            if *op == 6 && justified_equal(lhs, rhs, l, r) {
                 Value::Bits(vec![Bit::constant(false); l.len()])
             } else if [6, 7, 8].contains(op) {
                 Value::Bits(
@@ -389,8 +460,7 @@ fn eval(expr: &Expr, state: &mut State, va: u64, depth: usize) -> Result<Value, 
                         })
                         .collect(),
                 )
-            } else if [9, 10, 11].contains(op) && right.constant().is_some() {
-                let shift = right.constant().unwrap() as usize;
+            } else if let Some(shift) = count {
                 let mut bits = vec![Bit::constant(false); l.len()];
                 for (i, bit) in bits.iter_mut().enumerate() {
                     *bit = if *op == 11 {
@@ -457,15 +527,17 @@ fn run(
                     if var.type_ == "imm" && value.bits()?.len() != var.width {
                         // Generic Unknown lacks a type in the packaged accessor.
                         if matches!(value,Value::Bits(ref b) if b.len()==1&&b[0].uncertain) {
-                            state.env.insert(
-                                var.key(),
+                            put(
+                                &mut state,
+                                var,
                                 Value::Bits(vec![value.bits()?[0].clone(); var.width]),
-                            );
+                                va,
+                            )?;
                         } else {
                             return Err(invalid("assignment width mismatch"));
                         }
                     } else {
-                        state.env.insert(var.key(), value);
+                        put(&mut state, var, value, va)?;
                     }
                     next.push(state);
                 }
@@ -588,11 +660,15 @@ pub(crate) fn project_with_destination(
                     for (_, bit) in &parts {
                         uses.extend(bit.deps.clone());
                     }
-                    if parts.iter().all(|(i, b)| {
-                        !b.uncertain
-                            && (partial_destination.contains(&cell)
-                                || b.original.as_ref() != Some(&(key.clone(), *i)))
-                    }) {
+                    // One vector register is only a part of state:other. Even
+                    // a full YMM overwrite cannot kill the aggregate's origins.
+                    if cell != "state:other"
+                        && parts.iter().all(|(i, b)| {
+                            !b.uncertain
+                                && (partial_destination.contains(&cell)
+                                    || b.original.as_ref() != Some(&(key.clone(), *i)))
+                        })
+                    {
                         definite.insert(cell);
                     }
                 }
@@ -600,6 +676,9 @@ pub(crate) fn project_with_destination(
         }
         if state.memory_write {
             may_defs.insert("memory:any".into());
+        }
+        if state.vector_write {
+            may_defs.insert("state:other".into());
         }
         must_defs = Some(if let Some(old) = must_defs {
             old.intersection(&definite).cloned().collect()

@@ -19,7 +19,7 @@ value at the selected instruction, not historical null provenance.
 
 **Where to go next.**
 
-- [I5b implementation plan](../../Plans/i5b-zero-base-offset.md) — B0–B5 source
+- [I5b implementation plan](../../Plans/completed/i5b-zero-base-offset.md) — B0–B5 source
   ownership, fixtures, reports, mutation and controlled-capture qualification.
 - [Investigation stage ledger](../../Plans/investigation-layer.md) — delivered numeric
   questions, selected address-wrap work and the other deferred hypotheses.
@@ -233,7 +233,7 @@ captures. The [performance contract](../../tests/input/fixtures/i5b/performance.
 freezes 10 ms combined phase / 1,500 ms CLI medians, one warm-up and five measured
 release repeats. No fixture-only result satisfies real-Windows acceptance.
 
-The [implementation plan](../../Plans/i5b-zero-base-offset.md#b5--qualification-and-evidence)
+The [implementation plan](../../Plans/completed/i5b-zero-base-offset.md#b5--qualification-and-evidence)
 defines independent fixtures, actual-code mutation controls, old-result
 equivalence and controlled Windows capture work. Source/fixture and real-capture
 acceptance are separate decisions. Existing zero-displacement zero-address

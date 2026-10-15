@@ -4,8 +4,8 @@ use crate::effects::{EffectQuality, GapReason, InstructionEvidence, Operand, Reg
 use crate::input::{ByteRead, CaptureSource, FilePreparedAnalysis, ReadStop};
 use crate::render::{Format as CoreFormat, render as render_core};
 use crate::{
-    Address, AddressSet, AnalysisResult, ByteSource, DefinitionOrigin, EdgeKind, InstructionKind,
-    ObligationReason, Phase,
+    Address, AddressSet, AnalysisResult, AnalysisView, ByteSource, DefinitionOrigin, EdgeKind,
+    InstructionKind, ObligationReason, Phase,
 };
 use serde_json::{Value, json};
 use std::collections::BTreeSet;
@@ -38,6 +38,107 @@ impl fmt::Display for ReportError {
     }
 }
 impl Error for ReportError {}
+
+/// Replays the paired proof and full capture-source commitment of a saved
+/// combined minidump report. Presentation and saved analysis-state rows are not
+/// execution evidence and are not reanalyzed by this proof-only validator.
+pub fn validate_saved_composition(bytes: &[u8], max_bytes: usize) -> Result<Value, Box<dyn Error>> {
+    use crate::bap::{composition, guard_admission, target_resolution};
+    let value = crate::reports::strict_json_with_limit(bytes, max_bytes)?;
+    let composition: composition::Report = serde_json::from_value(value["composition"].clone())?;
+    let targets: target_resolution::Report =
+        serde_json::from_value(value["target_resolution"].clone())?;
+    let guards: guard_admission::Report = serde_json::from_value(value["guard_admission"].clone())?;
+    let sources: Vec<crate::investigation::SiteEvidence> =
+        serde_json::from_value(value["capture_sources"].clone())?;
+    let request = crate::investigation::frame_paths::decode_guard_request(&value["normalized"])?;
+    let expected_schema = if composition::is_legacy(&composition) {
+        "ariadne-minidump-report-v4"
+    } else {
+        "ariadne-minidump-report-v5"
+    };
+    if value["schema"] != expected_schema
+        || value["identity"]["snapshot_id"] != composition.snapshot
+        || value["identity"]["artifact_sha256"] != composition.artifact_sha256
+        || value["identity"]["query_id"] != composition::analysis_id(&composition)?
+        || value["query"]["entries"] != serde_json::json!(addresses(&request.entry_points))
+        || value["query"]["seeds"] != serde_json::json!(addresses(&request.slice_seeds))
+        || sources
+            .iter()
+            .any(|site| !crate::investigation::validate::site_valid(site))
+        || sources.iter().map(|site| site.va).collect::<BTreeSet<_>>() != request.addresses
+        || sources.len() != request.addresses.len()
+    {
+        return Err("saved combined minidump identity, version or source domain changed".into());
+    }
+    composition::validate(&composition, &targets, &guards, &request)?;
+    let by_site: std::collections::BTreeMap<_, _> = sources.iter().map(|s| (s.va, s)).collect();
+    let guard_sites: std::collections::BTreeMap<_, _> = guards
+        .input
+        .sites
+        .iter()
+        .map(|s| Ok((crate::bap::core_adapter::address(&s.site)?, s)))
+        .collect::<Result<_, crate::bap::Error>>()?;
+    for site in &sources {
+        let Some(source) = guard_sites.get(&site.va) else {
+            if site.captured || !site.bytes_hex.is_empty() {
+                return Err("saved combined captured source absent from proof".into());
+            }
+            continue;
+        };
+        if site.bytes_hex != source.bytes_hex
+            || (!source.bytes_hex.is_empty()
+                && (!site.captured
+                    || site.ast_sha256.as_deref()
+                        != Some(crate::reports::sha256(source.ast.as_bytes()).as_str())
+                    || site.helper_sha256.as_ref() != Some(&guards.input.producer.helper_sha256)
+                    || site.runtime_sha256.as_ref() != Some(&guards.input.producer.runtime_sha256)
+                    || site.projection.as_ref() != Some(&guards.input.producer.projection)))
+        {
+            return Err("saved combined original bytes, AST or producer changed".into());
+        }
+        if guard_admission::recognize_pending(source)?.is_some() {
+            if let Some(ast) = guards.normal_selection(site.va) {
+                let raw = crate::investigation::frame_unwind::unhex(&source.bytes_hex)?;
+                let selected = crate::bap::Backend::guard_normal_projection(
+                    ast,
+                    site.opcode.as_deref().unwrap_or(""),
+                    &raw,
+                    site.va,
+                )?;
+                if site.quality != "external_lift"
+                    || site.semantic_status.as_deref() != Some("projected")
+                    || site.accesses
+                        != selected
+                            .memory_accesses
+                            .iter()
+                            .map(crate::investigation::AddressUse::from)
+                            .collect::<Vec<_>>()
+                {
+                    return Err("saved combined normal guard access changed".into());
+                }
+            } else if site.quality != "opaque"
+                || site.semantic_status.as_deref() != Some("guard-not-admitted")
+                || !site.accesses.is_empty()
+            {
+                return Err("saved combined unadmitted guard access changed".into());
+            }
+        }
+    }
+    if guard_sites.keys().any(|site| !by_site.contains_key(site)) {
+        return Err("saved combined proof source absent from capture".into());
+    }
+    crate::investigation::validate_composition_capture(
+        value["identity"]["semantic_profile"]
+            .as_str()
+            .ok_or("saved combined semantic profile absent")?,
+        &composition,
+        &targets,
+        &guards,
+        &sources,
+    )?;
+    Ok(value)
+}
 
 fn va(address: Address) -> String {
     format!("0x{address:016x}")
@@ -547,8 +648,49 @@ pub fn render(
     format: ReportFormat,
     exception_rip_seed: bool,
 ) -> Result<String, ReportError> {
+    if prepared.guard_admission().is_some() {
+        // AnalysisResult contains no request identity. Guard proof reports need
+        // a sealed view that proves the exact immutable request was analyzed.
+        return Err(ReportError::IdentityMismatch);
+    }
+    render_result(prepared, result, format, exception_rip_seed)
+}
+
+/// Guard-aware rendering binds the completed analysis to the exact prepared
+/// request before any proof or ABI assumption is published.
+pub fn render_bound(
+    prepared: &FilePreparedAnalysis,
+    analysis: &dyn AnalysisView,
+    format: ReportFormat,
+    exception_rip_seed: bool,
+) -> Result<String, ReportError> {
+    if analysis.request() != &prepared.prepared.request || analysis.state().phase != Phase::Done {
+        return Err(ReportError::IdentityMismatch);
+    }
+    let result = AnalysisResult {
+        snapshot_id: analysis.request().snapshot_id.clone(),
+        state: analysis.state().clone(),
+        missing_slice_seeds: analysis
+            .request()
+            .slice_seeds
+            .difference(&analysis.state().decoded)
+            .copied()
+            .collect(),
+    };
+    render_result(prepared, &result, format, exception_rip_seed)
+}
+
+fn render_result(
+    prepared: &FilePreparedAnalysis,
+    result: &AnalysisResult,
+    format: ReportFormat,
+    exception_rip_seed: bool,
+) -> Result<String, ReportError> {
     prepared
         .validate_target_resolution()
+        .map_err(|_| ReportError::IdentityMismatch)?;
+    prepared
+        .validate_guard_admission()
         .map_err(|_| ReportError::IdentityMismatch)?;
     crate::input::investigation::validate_opaque_ordinary(prepared)
         .map_err(|_| ReportError::IdentityMismatch)?;
@@ -572,16 +714,47 @@ pub fn render(
         return Err(ReportError::InvalidExceptionSeed);
     }
     let mut value = json_report(prepared, result, exception_rip_seed);
-    let schema = if prepared.target_resolution.is_some() {
+    let composition_context = if prepared.composition().is_some() {
+        let context = crate::input::investigation::capture_context(prepared)
+            .map_err(|_| ReportError::IdentityMismatch)?;
+        value["identity"]["semantic_profile"] = serde_json::json!(context.semantic_profile);
+        Some(context)
+    } else {
+        None
+    };
+    let schema = if let Some(composition) = prepared.composition() {
+        if crate::bap::composition::is_legacy(composition) {
+            "ariadne-minidump-report-v4"
+        } else {
+            "ariadne-minidump-report-v5"
+        }
+    } else if prepared.guard_admission().is_some() {
+        "ariadne-minidump-report-v3"
+    } else if prepared.target_resolution.is_some() {
         "ariadne-minidump-report-v2"
     } else {
         SCHEMA
     };
     match format {
         ReportFormat::Json => {
+            if let Some(composition) = prepared.composition() {
+                let context = composition_context
+                    .as_ref()
+                    .expect("validated composition capture");
+                value["schema"] = serde_json::json!(schema);
+                value["composition"] = serde_json::json!(composition);
+                value["normalized"] =
+                    crate::bap::core_adapter::encode_request(&prepared.prepared.request)
+                        .map_err(|_| ReportError::IdentityMismatch)?;
+                value["capture_sources"] = serde_json::json!(context.sites);
+            }
             if let Some(resolution) = &prepared.target_resolution {
                 value["schema"] = serde_json::json!(schema);
                 value["target_resolution"] = serde_json::json!(resolution);
+            }
+            if let Some(guard) = prepared.guard_admission() {
+                value["schema"] = serde_json::json!(schema);
+                value["guard_admission"] = serde_json::json!(guard);
             }
             Ok(format!(
                 "{}\n",
@@ -591,6 +764,44 @@ pub fn render(
         ReportFormat::Text => {
             let mut out = String::new();
             writeln!(out, "Ariadne minidump report ({schema})").unwrap();
+            if let Some(composition) = prepared.composition() {
+                writeln!(
+                    out,
+                    "Composition: {}",
+                    serde_json::to_string(composition).map_err(ReportError::Json)?
+                )
+                .unwrap();
+                writeln!(
+                    out,
+                    "Target resolution proof: {}",
+                    serde_json::to_string(&prepared.target_resolution)
+                        .map_err(ReportError::Json)?
+                )
+                .unwrap();
+                writeln!(
+                    out,
+                    "Guard admission proof: {}",
+                    serde_json::to_string(&prepared.guard_admission())
+                        .map_err(ReportError::Json)?
+                )
+                .unwrap();
+                writeln!(
+                    out,
+                    "Final normalized request: {}",
+                    crate::bap::core_adapter::encode_request(&prepared.prepared.request)
+                        .map_err(|_| ReportError::IdentityMismatch)?
+                )
+                .unwrap();
+                let context = composition_context
+                    .as_ref()
+                    .expect("validated composition capture");
+                writeln!(
+                    out,
+                    "Original capture sources: {}",
+                    serde_json::to_string(&context.sites).map_err(ReportError::Json)?
+                )
+                .unwrap();
+            }
             if let Some(resolution) = &prepared.target_resolution {
                 writeln!(out,"Indirect target profile: {}; premise: {} (captured control data is interpreted as frozen; no historical memory stability is inferred)",resolution.profile,resolution.memory_premise).unwrap();
                 for row in &resolution.resolutions {
@@ -605,6 +816,20 @@ pub fn render(
                     .unwrap();
                 }
                 writeln!(out, "Resolution stop: {:?}", resolution.stop).unwrap();
+            }
+            if let Some(guard) = prepared.guard_admission() {
+                writeln!(
+                    out,
+                    "Guard profile: {}; intent: {}; candidate graph: {}; stop: {:?}",
+                    guard.profile, guard.intent_id, guard.candidate_graph_sha256, guard.stop
+                )
+                .unwrap();
+                for premise in &guard.input.premises {
+                    writeln!(out, "Guard premise at {} for root {}: {:?}, policy={}, RSP residues=0x{:04x} (assumed or captured at this point; no executed history)", premise.point, premise.root, premise.origin, premise.policy, premise.rsp_residues).unwrap();
+                }
+                for decision in &guard.guards {
+                    writeln!(out, "Guard {}: {:?}; input residues=0x{:04x}; address residues=0x{:04x}; residual={}; proof={}", decision.site, decision.verdict, decision.input_residues, decision.address_residues, decision.residual, decision.receipt_sha256).unwrap();
+                }
             }
             writeln!(out, "identity: {}", value["identity"]).unwrap();
             writeln!(out, "query: {}", value["query"]).unwrap();
@@ -633,8 +858,70 @@ pub fn render(
         }
         ReportFormat::Dot => {
             let mut out = format!("// {schema}\n");
+            if let Some(composition) = prepared.composition() {
+                writeln!(
+                    out,
+                    "// composition: {}",
+                    serde_json::to_string(composition).map_err(ReportError::Json)?
+                )
+                .unwrap();
+                writeln!(
+                    out,
+                    "// target-resolution: {}",
+                    serde_json::to_string(&prepared.target_resolution)
+                        .map_err(ReportError::Json)?
+                )
+                .unwrap();
+                writeln!(
+                    out,
+                    "// guard-admission: {}",
+                    serde_json::to_string(&prepared.guard_admission())
+                        .map_err(ReportError::Json)?
+                )
+                .unwrap();
+                writeln!(
+                    out,
+                    "// normalized: {}",
+                    crate::bap::core_adapter::encode_request(&prepared.prepared.request)
+                        .map_err(|_| ReportError::IdentityMismatch)?
+                )
+                .unwrap();
+                let context = composition_context
+                    .as_ref()
+                    .expect("validated composition capture");
+                writeln!(
+                    out,
+                    "// capture-sources: {}",
+                    serde_json::to_string(&context.sites).map_err(ReportError::Json)?
+                )
+                .unwrap();
+            }
             if let Some(r) = &prepared.target_resolution {
                 writeln!(out, "// {} under {}", r.profile, r.memory_premise).unwrap();
+            }
+            if let Some(guard) = prepared.guard_admission() {
+                writeln!(
+                    out,
+                    "// guard profile={} intent={} candidate={} stop={:?}",
+                    guard.profile, guard.intent_id, guard.candidate_graph_sha256, guard.stop
+                )
+                .unwrap();
+                for premise in &guard.input.premises {
+                    writeln!(
+                        out,
+                        "// guard premise root={} point={} policy={} rsp_residues=0x{:04x}",
+                        premise.root, premise.point, premise.policy, premise.rsp_residues
+                    )
+                    .unwrap();
+                }
+                for decision in &guard.guards {
+                    writeln!(
+                        out,
+                        "// guard {} verdict={:?} residual={} receipt={}",
+                        decision.site, decision.verdict, decision.residual, decision.receipt_sha256
+                    )
+                    .unwrap();
+                }
             }
             for key in ["identity", "query"] {
                 writeln!(out, "// {key}: {}", value[key]).unwrap();

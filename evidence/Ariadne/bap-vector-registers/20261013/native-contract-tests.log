@@ -1,0 +1,19 @@
+test_fixture_cannot_cross_dependency_snapshots (test_i5a_native_contract.NativeContractTests.test_fixture_cannot_cross_dependency_snapshots) ... ok
+test_frozen_performance_contract_and_warmup_exclusion (test_i5a_native_contract.NativeContractTests.test_frozen_performance_contract_and_warmup_exclusion) ... ok
+test_legacy_partial_and_false_acceptance_cannot_qualify (test_i5a_native_contract.NativeContractTests.test_legacy_partial_and_false_acceptance_cannot_qualify) ... ok
+test_missing_foreign_and_unknown_backend_receipts_fail (test_i5a_native_contract.NativeContractTests.test_missing_foreign_and_unknown_backend_receipts_fail) ... ok
+test_missing_reordered_or_malformed_phase_samples_fail (test_i5a_native_contract.NativeContractTests.test_missing_reordered_or_malformed_phase_samples_fail) ... ok
+test_native_manifest_checks_source_helper_and_sdk_linkage (test_i5a_native_contract.NativeContractTests.test_native_manifest_checks_source_helper_and_sdk_linkage) ... ok
+test_normalization_removes_only_verified_receipt (test_i5a_native_contract.NativeContractTests.test_normalization_removes_only_verified_receipt) ... ok
+test_phase_bindings_reject_other_backend_query_build_or_question (test_i5a_native_contract.NativeContractTests.test_phase_bindings_reject_other_backend_query_build_or_question) ... ok
+test_report_query_or_limit_substitution_fails (test_i5a_native_contract.NativeContractTests.test_report_query_or_limit_substitution_fails) ... ok
+test_retained_equivalence_requires_current_schema_and_exact_bindings (test_i5a_native_contract.NativeContractTests.test_retained_equivalence_requires_current_schema_and_exact_bindings) ... ok
+test_retained_producer_inventory_rejects_omitted_new_sources (test_i5a_native_contract.NativeContractTests.test_retained_producer_inventory_rejects_omitted_new_sources) ... ok
+test_retained_source_and_tool_inventory_must_be_exact (test_i5a_native_contract.NativeContractTests.test_retained_source_and_tool_inventory_must_be_exact) ... ok
+test_snapshot_artifact_build_and_completion_substitution_fail (test_i5a_native_contract.NativeContractTests.test_snapshot_artifact_build_and_completion_substitution_fail) ... ok
+test_valid_native_receipt_phase_and_acceptance (test_i5a_native_contract.NativeContractTests.test_valid_native_receipt_phase_and_acceptance) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.011s
+
+OK

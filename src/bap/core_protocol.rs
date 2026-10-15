@@ -4,9 +4,15 @@ use serde::{Deserialize, Serialize};
 use serde_json::Value;
 use sha2::{Digest, Sha256};
 
+/// Maximum inbound response frame, including its final newline.
 pub const MAX_FRAME: usize = 8 * 1024 * 1024;
+/// Default outbound request budget; callers may choose another positive budget.
+pub const DEFAULT_MAX_REQUEST_BYTES: usize = 8 * 1024 * 1024;
 pub const CAPTURED_PROFILE: &str = "captured-fixed-input/v1";
 pub const TARGET_PROFILE: &str = "captured-indirect-targets/v1";
+pub const GUARDED_PROFILE: &str = "captured-guarded-input/v1";
+pub const LEGACY_COMPOSED_PROFILE: &str = "captured-guarded-targets/v1";
+pub const COMPOSED_PROFILE: &str = "captured-guarded-targets/v2";
 pub const PROFILE: &str = "normalized-fixed-input/v1";
 pub const RECOVERY_OPERATIONS: &[&str] = &[
     "initialize",
@@ -90,7 +96,11 @@ pub fn profile_query_digest(
     }
     // Resolution receipts contain ordered edge words and repeated booleans.
     // Their strict validator owns set uniqueness; never reorder proof sequences.
-    let canonical = if profile == TARGET_PROFILE {
+    let canonical = if profile == TARGET_PROFILE
+        || profile == GUARDED_PROFILE
+        || profile == LEGACY_COMPOSED_PROFILE
+        || profile == COMPOSED_PROFILE
+    {
         input.to_string()
     } else {
         normalize(input)?.to_string()

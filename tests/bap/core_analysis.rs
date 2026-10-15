@@ -93,6 +93,62 @@ fn wide_request(nodes: usize) -> AnalysisRequest {
         ..AnalysisRequest::default()
     }
 }
+
+#[test]
+#[ignore = "requires native helper with configurable request bytes"]
+fn native_normalized_initialize_above_default_request_budget() {
+    use ariadne::bap::core_adapter::encode_request;
+    use ariadne::bap::core_protocol::DEFAULT_MAX_REQUEST_BYTES;
+    use std::time::Duration;
+    // An unused location expands only the valid input, keeping Init and Visit
+    // observations small. A large snapshot identity would also expand responses.
+    let request = AnalysisRequest {
+        snapshot_id: "large-request-small-response".into(),
+        addresses: [0x10].into(),
+        locations: ["x".repeat(DEFAULT_MAX_REQUEST_BYTES + 1)].into(),
+        entry_points: [0x10].into(),
+        input_kind: InputKind::Dump,
+        captured: [0x10].into(),
+        decodable: [0x10].into(),
+        instructions: [(
+            0x10,
+            Instruction {
+                kind: InstructionKind::Return,
+                ..Instruction::default()
+            },
+        )]
+        .into(),
+        ..AnalysisRequest::default()
+    };
+    assert!(
+        serde_json::to_vec(&encode_request(&request).unwrap())
+            .unwrap()
+            .len()
+            > DEFAULT_MAX_REQUEST_BYTES
+    );
+    let mut config = config();
+    config.timeout = Duration::from_secs(60);
+    let rejected = NativeAnalyzer::new(&config, "large-request", request.clone())
+        .err()
+        .expect("default request budget admitted an input above 8 MiB");
+    assert!(rejected.to_string().contains("core request oversized"));
+
+    config.max_request_bytes = 32 * 1024 * 1024;
+    let mut native = NativeAnalyzer::new(&config, "large-request", request.clone()).unwrap();
+    let mut reference = Analyzer::new(request).unwrap();
+    assert_eq!(
+        native.state(),
+        reference.state(),
+        "large input changed Init"
+    );
+    assert_eq!(native.step().unwrap(), reference.step());
+    assert_eq!(
+        native.state(),
+        reference.state(),
+        "large input changed Visit"
+    );
+    assert_eq!(native.state().decoded, [0x10].into());
+}
 #[test]
 #[ignore = "requires source-bound native helper with completion pages"]
 fn native_completion_pages_preserve_large_final_state() {

@@ -1,0 +1,9 @@
+{
+  "schema": "ariadne.shift-local-materialization/v1",
+  "rawRustCopies": {
+    "frame_probe.rs": "artifacts/frame_probe.rs.txt",
+    "expanded_probe.rs": "artifacts/expanded_probe.rs.txt",
+    "repro.rs": "artifacts/repro.rs.txt"
+  },
+  "archiveIdentitiesUnchanged": true
+}

@@ -69,7 +69,7 @@ fn table_read(slot: u64, width: usize) -> Result<DataRead, Error> {
         },
         conflict_sources: Vec::new(),
         stop: if data.len() == width {
-            "requested_length"
+            "RequestedLength"
         } else {
             "not_captured"
         }
@@ -387,7 +387,7 @@ fn pointer_read(slot: u64, width: usize) -> Result<DataRead, Error> {
             }],
         }],
         conflict_sources: Vec::new(),
-        stop: "requested_length".into(),
+        stop: "RequestedLength".into(),
     })
 }
 
@@ -695,4 +695,839 @@ fn admitted_evidence_leaves_room_for_conservative_discovery_stop() {
     retained.resolutions[0].complete = false;
     retained.stop = Some("resolution-retention-limit".into());
     validate(&retained, &instructions, &roots).unwrap();
+}
+
+fn frontier_diamond(
+    unknown_alternative: bool,
+) -> (BTreeMap<u64, Instruction>, BTreeMap<u64, Transfer>) {
+    let mut graph = BTreeMap::new();
+    for (site, kind, fall, targets) in [
+        (1, InstructionKind::Conditional, vec![2], vec![3]),
+        (2, InstructionKind::Ordinary, vec![4], vec![]),
+        (3, InstructionKind::Ordinary, vec![4], vec![]),
+        (4, InstructionKind::Indirect, vec![], vec![]),
+    ] {
+        graph.insert(
+            site,
+            Instruction {
+                kind,
+                complete: kind != InstructionKind::Indirect,
+                fall: fall.into_iter().collect(),
+                targets: targets.into_iter().collect(),
+                ..Instruction::default()
+            },
+        );
+    }
+    let mut transfers = BTreeMap::new();
+    for (site, slot) in [(2, 4096), (3, 8192)] {
+        if unknown_alternative && site == 3 {
+            graph.get_mut(&site).unwrap().may_defs = crate::effects::Catalogue.locations();
+            continue;
+        }
+        transfers.insert(
+            site,
+            extract(
+                &[Stmt::Move {
+                    var: register("RAX"),
+                    value: Expr::Int {
+                        value: format!("{slot}:64"),
+                    },
+                }],
+                site,
+                &[0x90],
+            )
+            .unwrap(),
+        );
+    }
+    transfers.insert(
+        4,
+        pointer_jump(
+            Expr::Var {
+                var: register("RAX"),
+            },
+            4,
+        ),
+    );
+    (graph, transfers)
+}
+
+#[test]
+fn local_frontiers_require_every_incoming_alternative_and_preserve_partial_witnesses() {
+    let (graph, transfers) = frontier_diamond(false);
+    let roots = [1].into();
+    let report = resolve_candidate(
+        "snapshot",
+        "artifact",
+        &graph,
+        &roots,
+        &transfers,
+        &Limits::default(),
+        pointer_read,
+    )
+    .unwrap();
+    assert!(report.resolutions[0].complete);
+    assert_eq!(
+        report.resolutions[0].targets,
+        vec![hex(0x5000), hex(0x6000)]
+    );
+    assert_eq!(report.resolutions[0].paths.len(), 2);
+    assert!(
+        report.resolutions[0]
+            .paths
+            .iter()
+            .all(|p| p.frontier && p.reverse_path.len() == 1)
+    );
+    validate(&report, &graph, &roots).unwrap();
+    let mut omitted = report;
+    omitted.resolutions[0].paths.pop();
+    omitted.resolutions[0].targets = omitted.resolutions[0].paths[0]
+        .entries
+        .iter()
+        .map(|e| e.target.clone())
+        .collect();
+    assert!(
+        validate(&omitted, &graph, &roots)
+            .unwrap_err()
+            .to_string()
+            .contains("prefix receipt references"),
+        "omitted paths also invalidate the v3 coverage references"
+    );
+    omitted.resolutions[0].coverage = Some(CoverageEvidence::ExistingPrefixTree {
+        path_receipt_refs: (0..omitted.resolutions[0].paths.len()).collect(),
+    });
+    assert!(
+        validate(&omitted, &graph, &roots)
+            .unwrap_err()
+            .to_string()
+            .contains("uncovered incoming path")
+    );
+    omitted.resolutions[0].complete = false;
+    validate(&omitted, &graph, &roots).unwrap();
+}
+
+#[test]
+fn unknown_incoming_register_does_not_gain_a_local_frontier_certificate() {
+    let (graph, transfers) = frontier_diamond(true);
+    let roots = [1].into();
+    let report = resolve_candidate(
+        "snapshot",
+        "artifact",
+        &graph,
+        &roots,
+        &transfers,
+        &Limits::default(),
+        pointer_read,
+    )
+    .unwrap();
+    let row = &report.resolutions[0];
+    assert!(!row.complete);
+    assert_eq!(row.targets, vec![hex(0x5000)]);
+    assert_eq!(row.paths.len(), 1);
+    assert!(row.paths[0].frontier);
+    assert!(row.unresolved.contains("unsupported-or-unknown-target"));
+    validate(&report, &graph, &roots).unwrap();
+    let mut forged = report;
+    forged.resolutions[0].complete = true;
+    forged.resolutions[0].unresolved.clear();
+    assert!(validate(&forged, &graph, &roots).is_err());
+}
+
+#[test]
+fn legacy_profile_retains_root_paths_and_rejects_local_frontier_receipts() {
+    let (graph, transfers) = frontier_diamond(false);
+    let roots = [1].into();
+    let legacy = resolve(
+        "snapshot",
+        "artifact",
+        &graph,
+        &roots,
+        &transfers,
+        &Limits::default(),
+        pointer_read,
+    )
+    .unwrap();
+    assert_eq!(legacy.profile, PROFILE);
+    assert!(legacy.resolutions[0].complete);
+    assert!(
+        legacy.resolutions[0]
+            .paths
+            .iter()
+            .all(|p| !p.frontier && p.root == hex(1) && p.reverse_path.len() == 2)
+    );
+    validate(&legacy, &graph, &roots).unwrap();
+    let mut local = resolve_candidate(
+        "snapshot",
+        "artifact",
+        &graph,
+        &roots,
+        &transfers,
+        &Limits::default(),
+        pointer_read,
+    )
+    .unwrap();
+    local.profile = PROFILE.into();
+    local.schema = "ariadne.indirect-target-resolution/v1".into();
+    assert!(validate(&local, &graph, &roots).is_err());
+}
+
+#[test]
+fn root_receipt_with_incoming_edge_is_terminal_but_not_a_frontier_cut() {
+    let graph = [
+        (0, InstructionKind::Ordinary, vec![1]),
+        (1, InstructionKind::Ordinary, vec![2]),
+        (2, InstructionKind::Indirect, vec![]),
+    ]
+    .into_iter()
+    .map(|(site, kind, fall)| {
+        (
+            site,
+            Instruction {
+                kind,
+                complete: kind != InstructionKind::Indirect,
+                fall: fall.into_iter().collect(),
+                ..Instruction::default()
+            },
+        )
+    })
+    .collect();
+    let transfers = [
+        (
+            1,
+            extract(
+                &[Stmt::Move {
+                    var: register("RAX"),
+                    value: Expr::Int {
+                        value: "4096:64".into(),
+                    },
+                }],
+                1,
+                &[0x90],
+            )
+            .unwrap(),
+        ),
+        (
+            2,
+            pointer_jump(
+                Expr::Var {
+                    var: register("RAX"),
+                },
+                2,
+            ),
+        ),
+    ]
+    .into();
+    let roots = [1].into();
+    let report = resolve_candidate(
+        "snapshot",
+        "artifact",
+        &graph,
+        &roots,
+        &transfers,
+        &Limits::default(),
+        pointer_read,
+    )
+    .unwrap();
+    assert!(report.resolutions[0].complete);
+    assert_eq!(report.resolutions[0].paths.len(), 2);
+    assert!(
+        report.resolutions[0]
+            .paths
+            .iter()
+            .any(|p| p.root == hex(1) && !p.frontier)
+    );
+    assert!(
+        report.resolutions[0]
+            .paths
+            .iter()
+            .any(|p| p.root == hex(0) && p.frontier)
+    );
+    validate(&report, &graph, &roots).unwrap();
+    let mut omitted = report.clone();
+    omitted.resolutions[0].paths.retain(|p| !p.frontier);
+    assert!(
+        validate(&omitted, &graph, &roots)
+            .unwrap_err()
+            .to_string()
+            .contains("prefix receipt references"),
+        "omitted paths also invalidate the v3 coverage references"
+    );
+    omitted.resolutions[0].coverage = Some(CoverageEvidence::ExistingPrefixTree {
+        path_receipt_refs: (0..omitted.resolutions[0].paths.len()).collect(),
+    });
+    assert!(
+        validate(&omitted, &graph, &roots)
+            .unwrap_err()
+            .to_string()
+            .contains("uncovered incoming path")
+    );
+    let mut forged = report;
+    forged.resolutions[0]
+        .paths
+        .iter_mut()
+        .find(|p| p.root == hex(1))
+        .unwrap()
+        .frontier = true;
+    assert!(
+        validate(&forged, &graph, &roots)
+            .unwrap_err()
+            .to_string()
+            .contains("path/semantic proof")
+    );
+}
+
+#[test]
+fn contradictory_unbounded_index_ranges_do_not_create_early_frontiers() {
+    let index = Term::input("RAX:0:false".into(), 32);
+    let base = Term::constant(4096, 64);
+    let term = Term::binary(
+        18,
+        base.clone(),
+        Term::cast(
+            2,
+            64,
+            Term {
+                width: 32,
+                kind: TermKind::Load {
+                    site: hex(4),
+                    address: Box::new(Term::binary(
+                        18,
+                        base,
+                        Term::binary(11, Term::cast(3, 64, index.clone()), Term::constant(2, 64)),
+                    )),
+                },
+            },
+        ),
+    );
+    let guards = [
+        Guard {
+            expression: Term::binary(2, index.clone(), Term::constant(1, 32)),
+            taken: true,
+        },
+        Guard {
+            expression: Term::binary(2, index, Term::constant(1, 32)),
+            taken: false,
+        },
+    ];
+    assert!(relative(&term).is_some());
+    assert!(!bounded_form(&term, &guards, &Limits::default()));
+}
+
+// Independent control: LOOP writes the counter once, then the subsequent
+// unsigned bound admits post-write table indices 0..=3. Its taken branch
+// excludes zero. Reapplying the move to the branch predicate wrongly excludes
+// one and admits zero instead.
+#[test]
+fn conditional_write_predicate_is_not_rewritten_twice() {
+    let var = |name: &str| Expr::Var {
+        var: register(name),
+    };
+    let number = |value: u64| Expr::Int {
+        value: format!("{value}:64u"),
+    };
+    let bin = |op, lhs, rhs| Expr::Binop {
+        op,
+        lhs: Box::new(lhs),
+        rhs: Box::new(rhs),
+    };
+    let mem = Expr::Var {
+        var: crate::bap::ast::Var {
+            name: "mem".into(),
+            index: 0,
+            virtual_: false,
+            width: 0,
+            type_: "mem".into(),
+        },
+    };
+    let programs = BTreeMap::from([
+        (
+            1,
+            vec![Stmt::Move {
+                var: register("RDX"),
+                value: number(4096),
+            }],
+        ),
+        (
+            2,
+            vec![
+                Stmt::Move {
+                    var: register("RCX"),
+                    value: bin(17, var("RCX"), number(1)),
+                },
+                Stmt::If {
+                    condition: bin(4, var("RCX"), number(0)),
+                    yes: vec![Stmt::Jump { target: number(3) }],
+                    no: vec![],
+                },
+            ],
+        ),
+        (
+            3,
+            vec![Stmt::If {
+                condition: bin(2, var("RCX"), number(3)),
+                yes: vec![Stmt::Jump { target: number(4) }],
+                no: vec![],
+            }],
+        ),
+        (
+            4,
+            vec![Stmt::Jump {
+                target: bin(
+                    18,
+                    var("RDX"),
+                    Expr::Cast {
+                        op: 2,
+                        width: 64,
+                        arg: Box::new(Expr::Load {
+                            width: 32,
+                            mem: Box::new(mem),
+                            addr: Box::new(bin(18, var("RDX"), bin(11, var("RCX"), number(2)))),
+                        }),
+                    },
+                ),
+            }],
+        ),
+    ]);
+    let mut graph = BTreeMap::new();
+    for (site, kind, fall, targets) in [
+        (1, InstructionKind::Ordinary, vec![2], vec![]),
+        (2, InstructionKind::Conditional, vec![8], vec![3]),
+        (3, InstructionKind::Conditional, vec![8], vec![4]),
+        (4, InstructionKind::Indirect, vec![], vec![]),
+        (8, InstructionKind::Return, vec![], vec![]),
+    ] {
+        graph.insert(
+            site,
+            Instruction {
+                kind,
+                fall: fall.into_iter().collect(),
+                targets: targets.into_iter().collect(),
+                complete: kind != InstructionKind::Indirect,
+                may_defs: if site == 2 {
+                    (0..8).map(|n| format!("gpr:rcx:{n}")).collect()
+                } else {
+                    LocationSet::new()
+                },
+                ..Instruction::default()
+            },
+        );
+    }
+    let transfers = programs
+        .iter()
+        .map(|(&site, bil)| (site, extract(bil, site, &[0x90]).unwrap()))
+        .collect();
+    let read = |slot: u64, width: usize| -> Result<DataRead, Error> {
+        assert_eq!(width, 4);
+        let index = (slot - 4096) / 4;
+        assert!(index <= 3);
+        Ok(DataRead {
+            address: hex(slot),
+            requested: 4,
+            bytes_hex: (256u32 + index as u32 * 16)
+                .to_le_bytes()
+                .iter()
+                .map(|b| format!("{b:02x}"))
+                .collect(),
+            spans: vec![Span {
+                address: hex(slot),
+                length: 4,
+                contributors: vec![Contributor {
+                    stream: 9,
+                    entry: index as usize,
+                    file_offset: slot,
+                }],
+            }],
+            conflict_sources: vec![],
+            stop: "RequestedLength".into(),
+        })
+    };
+    let expected = vec![1, 2, 3];
+    let double_applied = vec![0, 2, 3];
+    assert_eq!((0u64..=3).filter(|i| *i != 0).collect::<Vec<_>>(), expected);
+    assert_eq!(
+        (0u64..=3)
+            .filter(|i| i.wrapping_sub(1) != 0)
+            .collect::<Vec<_>>(),
+        double_applied
+    );
+    for local in [false, true] {
+        let report = resolve_inner(
+            "snapshot",
+            "artifact",
+            &graph,
+            &[1].into(),
+            &transfers,
+            &Limits::default(),
+            local,
+            read,
+        )
+        .unwrap();
+        let row = &report.resolutions[0];
+        assert!(row.complete, "{:?}", row.unresolved);
+        assert_eq!(
+            row.paths[0].indices, expected,
+            "conditional write applied twice"
+        );
+        validate(&report, &graph, &[1].into()).unwrap();
+        let mut forged = report;
+        let path = &mut forged.resolutions[0].paths[0];
+        let index = relative(&path.expression).unwrap().1;
+        path.guards[1].expression = Term::binary(
+            4,
+            Term::binary(17, index, Term::constant(1, 64)),
+            Term::constant(0, 64),
+        );
+        assert!(
+            validate(&forged, &graph, &[1].into())
+                .unwrap_err()
+                .to_string()
+                .contains("path/semantic proof")
+        );
+    }
+}
+
+#[test]
+fn full_captured_read_metadata_must_not_hide_conflicts_or_holes() {
+    let (graph, transfers) = dispatch();
+    let roots = [0x7ff640079640].into();
+    let report = resolve(
+        "snapshot",
+        "artifact",
+        &graph,
+        &roots,
+        &transfers,
+        &Limits::default(),
+        table_read,
+    )
+    .unwrap();
+    validate(&report, &graph, &roots).unwrap();
+    for case in [
+        "conflict",
+        "stop",
+        "span-hole",
+        "empty-contributor",
+        "short-coverage",
+        "wrong-width",
+        "invalid-span-address",
+    ] {
+        let mut forged = report.clone();
+        let record = &mut forged.data_reads[0];
+        match case {
+            "conflict" => record.conflict_sources.push(Contributor {
+                stream: 5,
+                entry: 1,
+                file_offset: 0,
+            }),
+            "stop" => record.stop = "Conflict".into(),
+            "span-hole" => record.spans[0].address = hex(address(&record.address).unwrap() + 1),
+            "empty-contributor" => record.spans[0].contributors.clear(),
+            "short-coverage" => record.spans[0].length = 3,
+            "wrong-width" => record.requested = 3,
+            "invalid-span-address" => record.spans[0].address = "0x0".into(),
+            _ => unreachable!(),
+        }
+        assert!(
+            validate(&forged, &graph, &roots).is_err(),
+            "accepted {case}"
+        );
+    }
+    // A partial/conflicting record remains an explicit residual and contributes
+    // no entry. Its other entries remain possible under the captured premise.
+    let partial = resolve(
+        "snapshot",
+        "artifact",
+        &graph,
+        &roots,
+        &transfers,
+        &Limits::default(),
+        |slot, width| {
+            let mut read = table_read(slot, width)?;
+            if slot == address(&report.data_reads[0].address).unwrap() {
+                read.bytes_hex.truncate(4);
+                read.spans.clear();
+                read.conflict_sources.push(Contributor {
+                    stream: 5,
+                    entry: 1,
+                    file_offset: 0,
+                });
+                read.stop = "Conflict".into();
+            }
+            Ok(read)
+        },
+    )
+    .unwrap();
+    assert!(!partial.resolutions[0].complete);
+    assert!(
+        partial.resolutions[0]
+            .unresolved
+            .contains("unavailable-control-data")
+    );
+    validate(&partial, &graph, &roots).unwrap();
+}
+
+#[test]
+fn malformed_full_read_callback_is_rejected_before_candidate_admission() {
+    let (graph, transfers) = dispatch();
+    for case in ["conflict", "stop", "span-hole", "empty-contributor"] {
+        let error = resolve(
+            "snapshot",
+            "artifact",
+            &graph,
+            &[0x7ff640079640].into(),
+            &transfers,
+            &Limits::default(),
+            |slot, width| {
+                let mut read = table_read(slot, width)?;
+                match case {
+                    "conflict" => read.conflict_sources.push(Contributor {
+                        stream: 5,
+                        entry: 1,
+                        file_offset: 0,
+                    }),
+                    "stop" => read.stop = "NotCaptured".into(),
+                    "span-hole" => read.spans[0].address = hex(slot + 1),
+                    "empty-contributor" => read.spans[0].contributors.clear(),
+                    _ => unreachable!(),
+                }
+                Ok(read)
+            },
+        )
+        .unwrap_err();
+        assert!(
+            error.to_string().contains("resolver"),
+            "unexpected {case}: {error}"
+        );
+    }
+}
+
+fn stable_byte_reload_loop(mode: &str) -> (BTreeMap<u64, Instruction>, BTreeMap<u64, Transfer>) {
+    let var = |name: &str| Expr::Var {
+        var: register(name),
+    };
+    let int = |n: u64| Expr::Int {
+        value: format!("{n}:64u"),
+    };
+    let bin = |op, lhs, rhs| Expr::Binop {
+        op,
+        lhs: Box::new(lhs),
+        rhs: Box::new(rhs),
+    };
+    let memory_var = crate::bap::ast::Var {
+        name: "mem".into(),
+        index: 0,
+        virtual_: false,
+        width: 0,
+        type_: "mem".into(),
+    };
+    let memory = Expr::Var {
+        var: memory_var.clone(),
+    };
+    let cycle = match mode {
+        "address-write" => vec![Stmt::Move {
+            var: register("RCX"),
+            value: bin(18, var("RCX"), int(1)),
+        }],
+        "memory-write" => vec![Stmt::Move {
+            var: memory_var,
+            value: Expr::Store {
+                width: 8,
+                mem: Box::new(memory.clone()),
+                addr: Box::new(var("RCX")),
+                value: Box::new(Expr::Int {
+                    value: "0:8u".into(),
+                }),
+            },
+        }],
+        _ => vec![],
+    };
+    let programs = BTreeMap::from([
+        (
+            1,
+            vec![Stmt::Move {
+                var: register("RDX"),
+                value: int(4096),
+            }],
+        ),
+        (2, vec![Stmt::Jump { target: int(6) }]),
+        (3, cycle),
+        (
+            6,
+            vec![Stmt::Move {
+                var: register("R8"),
+                value: Expr::Cast {
+                    op: 3,
+                    width: 64,
+                    arg: Box::new(Expr::Cast {
+                        op: 3,
+                        width: 32,
+                        arg: Box::new(Expr::Load {
+                            width: 8,
+                            mem: Box::new(memory.clone()),
+                            addr: Box::new(bin(18, var("RCX"), int(120))),
+                        }),
+                    }),
+                },
+            }],
+        ),
+        (7, vec![]),
+        (
+            8,
+            vec![Stmt::If {
+                condition: bin(2, var("R8"), int(9)),
+                yes: vec![Stmt::Jump { target: int(10) }],
+                no: vec![],
+            }],
+        ),
+        (
+            10,
+            vec![Stmt::Jump {
+                target: bin(
+                    18,
+                    var("RDX"),
+                    Expr::Cast {
+                        op: 2,
+                        width: 64,
+                        arg: Box::new(Expr::Load {
+                            width: 32,
+                            mem: Box::new(memory),
+                            addr: Box::new(bin(18, var("RDX"), bin(11, var("R8"), int(2)))),
+                        }),
+                    },
+                ),
+            }],
+        ),
+    ]);
+    let mut graph = BTreeMap::new();
+    for (site, kind, fall, targets) in [
+        (1, InstructionKind::Ordinary, vec![2], vec![]),
+        (2, InstructionKind::Jump, vec![], vec![6]),
+        (3, InstructionKind::Ordinary, vec![6], vec![]),
+        (6, InstructionKind::Ordinary, vec![7], vec![]),
+        (7, InstructionKind::Ordinary, vec![8], vec![]),
+        (8, InstructionKind::Conditional, vec![3], vec![10]),
+        (10, InstructionKind::Indirect, vec![], vec![]),
+    ] {
+        graph.insert(
+            site,
+            Instruction {
+                kind,
+                complete: kind != InstructionKind::Indirect,
+                fall: fall.into_iter().collect(),
+                targets: targets.into_iter().collect(),
+                may_defs: if site == 3 && mode == "address-write" {
+                    (0..8).map(|n| format!("gpr:rcx:{n}")).collect()
+                } else {
+                    LocationSet::new()
+                },
+                ..Instruction::default()
+            },
+        );
+    }
+    if mode == "bypass" {
+        graph.insert(
+            5,
+            Instruction {
+                kind: InstructionKind::Jump,
+                targets: [6].into(),
+                complete: true,
+                ..Instruction::default()
+            },
+        );
+    }
+    if mode == "unknown-memory" {
+        graph
+            .get_mut(&3)
+            .unwrap()
+            .may_defs
+            .insert("memory:any".into());
+    }
+    let transfers = programs
+        .iter()
+        .map(|(&site, bil)| (site, extract(bil, site, &[0x90]).unwrap()))
+        .collect();
+    (graph, transfers)
+}
+fn small_relative_read(slot: u64, width: usize) -> Result<DataRead, Error> {
+    assert_eq!(width, 4);
+    let index = (slot - 4096) / 4;
+    assert!(index <= 9);
+    Ok(DataRead {
+        address: hex(slot),
+        requested: 4,
+        bytes_hex: (256u32 + index as u32 * 16)
+            .to_le_bytes()
+            .iter()
+            .map(|b| format!("{b:02x}"))
+            .collect(),
+        spans: vec![Span {
+            address: hex(slot),
+            length: 4,
+            contributors: vec![Contributor {
+                stream: 9,
+                entry: index as usize,
+                file_offset: slot,
+            }],
+        }],
+        conflict_sources: vec![],
+        stop: "RequestedLength".into(),
+    })
+}
+#[test]
+fn stable_byte_reload_loop_has_checked_infeasible_context_and_ten_entries() {
+    let (graph, transfers) = stable_byte_reload_loop("stable");
+    let report = resolve_candidate(
+        "snapshot",
+        "artifact",
+        &graph,
+        &[1].into(),
+        &transfers,
+        &Limits::default(),
+        small_relative_read,
+    )
+    .unwrap();
+    let row = &report.resolutions[0];
+    assert!(row.complete, "{:?}", row.unresolved);
+    assert_eq!(row.targets.len(), 10);
+    assert!(
+        row.paths
+            .iter()
+            .any(|p| p.form == "relative32" && p.indices == (0..10).collect::<Vec<_>>())
+    );
+    assert!(row.paths.iter().any(|p| p.form == "infeasible"
+        && p.frontier
+        && p.indices.is_empty()
+        && p.entries.is_empty()));
+    validate(&report, &graph, &[1].into()).unwrap();
+    let mut omitted = report.clone();
+    omitted.resolutions[0]
+        .paths
+        .retain(|p| p.form != "infeasible");
+    assert!(validate(&omitted, &graph, &[1].into()).is_err());
+}
+#[test]
+fn byte_reload_loop_bypass_or_writes_keep_unknown_alternatives() {
+    for mode in ["memory-write", "unknown-memory", "address-write", "bypass"] {
+        let (graph, transfers) = stable_byte_reload_loop(mode);
+        let roots = if mode == "bypass" {
+            [1, 5].into()
+        } else {
+            [1].into()
+        };
+        let report = resolve_candidate(
+            "snapshot",
+            "artifact",
+            &graph,
+            &roots,
+            &transfers,
+            &Limits::default(),
+            small_relative_read,
+        )
+        .unwrap();
+        assert!(!report.resolutions[0].complete, "incorrect complete {mode}");
+        assert_eq!(
+            report.resolutions[0].targets.len(),
+            10,
+            "lost entry candidates {mode}"
+        );
+        validate(&report, &graph, &roots).unwrap();
+    }
 }

@@ -38,7 +38,7 @@ implementation, exercised qualification and future capabilities.
   arithmetic question; no model, assessor or new capture is implemented yet.
 
 - [I5b design](../docs/Ariadne/zero-base-offset-design.md) and
-  [B0–B5 implementation plan](i5b-zero-base-offset.md) scope the selected
+  [B0–B5 implementation plan](completed/i5b-zero-base-offset.md) scope the selected
   zero-base-plus-nonzero-displacement question; [actual contracts](../docs/Ariadne/zero-base-offset-design.md)
   and [qualification](../docs/Ariadne/zero-base-offset-design.md#retained-qualification) separate implementation from acceptance.
 - [Implemented contracts](../docs/Ariadne/investigation-design.md) define the
@@ -50,7 +50,7 @@ implementation, exercised qualification and future capabilities.
   records the qualification/truncation repairs and their 17 passing gates.
 - [I5a zero-address design](../docs/Ariadne/zero-address-design.md) scopes the
   first numeric address hypothesis and the context evidence it requires.
-- [I5a execution plan](i5a-zero-address.md) assigns H0–H5 work and separate
+- [I5a execution plan](completed/i5a-zero-address.md) assigns H0–H5 work and separate
   source/fixture and real-capture qualification tiers.
 - [Native qualification](../docs/Ariadne/zero-address-design.md#native-qualification)
   records complete native gates, passing controlled timings and the dependency snapshot.
@@ -79,7 +79,7 @@ The [documentation map](../docs/documentation-map.md) is optional navigation.
 | I2 — Explanation module | Implemented; truncation repaired | Per-byte possible producers, alternatives, premises and evidence requirements; [repair validation](../docs/Ariadne/investigation-design.md#qualification-and-truncation-repairs). |
 | I3 — CLI and reports | Implemented | Explicit question/index selection and transactional text/JSON/DOT publication; [first delivery](../docs/Ariadne/investigation-design.md#retained-delivery-evidence). |
 | I4 — Qualification | Exact active 98-start Windows and separate Linux tiers pass | [Native performance result](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification): 1,692.696 ms / 2,000 ms CLI and 182.924 ms / 250 ms phases, with current-inventory regressions and verified archives. |
-| I5a — Zero-address consistency | Qualified for source/fixture and controlled Windows tiers | [Native qualification](../docs/Ariadne/zero-address-design.md#native-qualification): 14 passing gates and both controlled capture modes under the selected snapshot; [H0–H5](i5a-zero-address.md) preserves the criteria. |
+| I5a — Zero-address consistency | Qualified for source/fixture and controlled Windows tiers | [Native qualification](../docs/Ariadne/zero-address-design.md#native-qualification): 14 passing gates and both controlled capture modes under the selected snapshot; [H0–H5](completed/i5a-zero-address.md) preserves the criteria. |
 | I5b — Zero base plus nonzero displacement | B0–B5 implemented and corpus-qualified | [Contracts](../docs/Ariadne/zero-base-offset-design.md) and [validation](../docs/Ariadne/zero-base-offset-design.md#retained-qualification): encoded GPR-base receipt, valid fault context and separate source/fixture/controlled-Windows gates. |
 | I5c — Fault-time address wrap | Selected design and W0–W5 plan; implementation pending | [Design](../docs/Ariadne/address-wrap-design.md) defines unsigned base plus signed encoded displacement, wide sum and inherited fault admission; [plan](i5c-address-wrap.md) starts with the model/oracle. |
 | Other I5 hypotheses | Unspecified beyond roadmap | Each needs its own evidence, support/refutation criteria and negative controls. |
@@ -103,7 +103,7 @@ I4 is complete for the recorded capture/query and source/tool/dependency identit
 on which it relies and separately qualify its new context-dependent conclusions.
 The active I4 performance condition is met in the separate
 [native performance result](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification). The separately qualified
-[BAP Stage 2](bap-integration.md#stage-2-bap-analysis-core) uses its own unlimited
+[BAP Stage 2](completed/bap-integration.md#stage-2-bap-analysis-core) uses its own unlimited
 timing policy and cannot waive I4.
 
 ## Implemented module ownership
@@ -225,7 +225,7 @@ complete source/tool inventories, native receipts and qualification environment.
 Base-mode and phase-only timings cannot substitute. The original manifest and
 older results remain unchanged historical evidence.
 
-**Completed Windows clause:** the [native D0–D3 follow-up](i4-performance-implementation.md)
+**Completed Windows clause:** the [native D0–D3 follow-up](completed/i4-performance-implementation.md)
 qualifies the same exact query at 1,692.696 ms with one warm-up/five release
 explanation-CLI repeats. Native replay, mutations and I5 regressions pass with
 matching source/tool/dependency inventories; the [validation](../docs/Ariadne/workload-performance-design.md#native-investigation-qualification)
@@ -251,7 +251,7 @@ registers; binding checks the exact completed query and capture. The new
 assessment evaluates only the selected exception instruction and preserves
 possible producers and structural control flow.
 
-The [I5a execution plan](i5a-zero-address.md) records the H0–H5 sequence. A new
+The [I5a execution plan](completed/i5a-zero-address.md) records the H0–H5 sequence. A new
 41-case corpus covers six reviewed forms and admission negatives; old Stage B
 fixtures remain unchanged and return unknown. The [contracts](../docs/Ariadne/zero-address-design.md)
 define the separate schema and `--assess-zero-address` CLI modes. All 12
@@ -267,7 +267,7 @@ adoption has its own retained qualification and current refresh obligation.
 
 The selected [I5b design](../docs/Ariadne/zero-base-offset-design.md) asks
 whether the encoded GPR base is zero and its signed displacement is nonzero
-at the selected exception instruction. The [B0–B5 plan](i5b-zero-base-offset.md)
+at the selected exception instruction. The [B0–B5 plan](completed/i5b-zero-base-offset.md)
 defines source ownership, a finite six-MOV base/displacement matrix, strict
 result/CLI modes and independent acceptance tiers. B0–B5 are implemented and
 [qualified](../docs/Ariadne/zero-base-offset-design.md#retained-qualification) with 18 passing gates, 15 detected

@@ -1,0 +1,8 @@
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-bap-shift-count-20261014)
+    Finished `test` profile [unoptimized] target(s) in 23.79s
+     Running tests/bap/native.rs (target/shift-build/debug/deps/bap_native-170527f041c84234)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 9 filtered out; finished in 0.00s
+

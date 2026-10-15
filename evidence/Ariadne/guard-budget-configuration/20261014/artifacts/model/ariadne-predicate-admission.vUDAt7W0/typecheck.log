@@ -1,0 +1,15 @@
+# Usage statistics is OFF. We care about your privacy.
+# If you want to help our project, consider enabling statistics with config --enable-stats=true.
+
+Output directory: /tmp/ariadne-predicate-admission.vUDAt7W0/typecheck/AriadnePredicateAdmission.tla/2026-10-14T06-45-26_15861411330735190113
+# APALACHE version: 0.58.0 | build: 711dce6                       I@06:45:26.948
+Type checking AriadnePredicateAdmission.tla                       I@06:45:26.960
+PASS #0: SanyParser                                               I@06:45:27.079
+PASS #1: TypeCheckerSnowcat                                       I@06:45:27.307
+ > Running Snowcat .::.                                           I@06:45:27.307
+ > Your types are purrfect!                                       I@06:45:27.708
+ > All expressions are typed                                      I@06:45:27.708
+Type checker [OK]                                                 I@06:45:27.709
+It took me 0 days  0 hours  0 min  0 sec                          I@06:45:27.709
+Total time: 0.759 sec                                             I@06:45:27.709
+EXITCODE: OK
