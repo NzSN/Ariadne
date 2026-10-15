@@ -1,0 +1,58 @@
+{
+  "scope": "Final local documentation, Rust layout and whitespace checks; no compilation",
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "tools/check_doc_links.py"
+      ],
+      "exit_code": 0,
+      "stdout": "Documentation PASS: 100 connected documents, 99 context sections, 2359 local links (including section anchors).\nRelationship meaning and historical scope require editorial review.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "tools/check_rust_layout.py"
+      ],
+      "exit_code": 0,
+      "stdout": "Rust layout PASS: 143 Rust files in src/tests; one manifest/lock; root target.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--package",
+        "ariadne-analysis",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "file_hashes": {
+    "CHECKPOINTS.md": "7a6abdf3cf9987e46b8ac3670998b4db4814bd0d882c1c9c425b77e17f58d2af",
+    "ROADMAP.md": "6517d26044673ad341bb042258fe3170185358a78dbdd81a0fb284f0f6fed9ab",
+    "Plans/caller-semantic-coverage.md": "b695985aab4dd70410141fa4d1c9d83a5368fe23cace5f12b3a50366ba635af4",
+    "Plans/README.md": "6a8e1e3a1ccdc83d6e7823ffb7676375b31b23404ad5e87f5d04a403bb5a0b97",
+    "Specs/README.md": "310ed0fbe291382c6ee780d7948790036976d47b3ea331608758a994285111f8",
+    "docs/Ariadne/caller-semantic-coverage-design.md": "aa142aa225155651541d675f5c95dc109c6df4efae27834b1007bba9507e1b17",
+    "docs/Ariadne/justified-branch-pruning-design.md": "9456a07e9de32b62b1827d55547033d3bb644a2d34e77fdcce4459c349377e37",
+    "evidence/Ariadne/caller-semantic-coverage/20261015/README.md": "b6e56ecdfb1bcae7b440b9d8f757527520a73baa68ef9cdac7540ffe42e32c29",
+    ".gitattributes": "88b2fbac56b7df8195dc3dfeb358aa053ea10a1fb3385aa71b388ff824a65b45"
+  },
+  "local_all_package_format_note": "A separate cargo fmt --all -- --check observed pre-existing formatting differences in sibling MirrorRust/tests/protocol.rs. Ariadne package check passes; qualified remote --all result remains in final-checks-20261015T074922/format.json. Sibling files were not modified."
+}

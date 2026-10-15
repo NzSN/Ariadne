@@ -1,0 +1,16 @@
+{
+  "binaries": {
+    "mirror": "60219ddae47e9b5764fe91cc3d0b6c86b68d4d3d201c66bedb4e6129b4537f00",
+    "model_interface_gen": "562a271ede8cf932bd8b18a81eb772bd403703a58ff5766929a394e848df9ed3"
+  },
+  "elaborationCheck": "TLA ELABORATION CORPUS (accepted): 34 fixtures, 34 elaborated and matched to their summaries\nTLA ELABORATION CORPUS (rejected): 27 fixtures, 7 rejected by this slice's stages\nTLA ELABORATION SPEC GREEN",
+  "originalRoot": "/home/nzsn/Repos/Mirrors",
+  "patchSha256": "c18c5ccac09f7ee87050a1bf6c3073f15d19d77f56325a5860910b48e654192e",
+  "profile": "mirrors-tla-frontend-profile-4-ariadne-isfinite-v1",
+  "requiredTargets": [
+    "mirrorrust-v1"
+  ],
+  "revision": "eb5cd001b990e6ac5e9b1e9b1c5a17ffb85e25fc",
+  "root": "/home/nzsn/Repos/Mirrors",
+  "schema": "ariadne.mbt-toolchain/v1"
+}

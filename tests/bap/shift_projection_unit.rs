@@ -518,6 +518,7 @@ fn admitted_rsp_shifts_stay_top_in_the_guard_numerical_domain() {
                     opaque: true,
                 },
             ],
+            normal_flow: Some(guard::NormalFlowEvidence::empty()),
         };
         let report = guard::certify_guards(&input).unwrap();
         assert!(

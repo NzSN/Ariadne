@@ -387,7 +387,7 @@ fn composed_frame_cli_roundtrip_retains_paired_proofs_and_rejects_stripping() {
     );
     let listing = reports::decode_frame_paths(&output.stdout).unwrap();
     let value = reports::encode_frame_paths(&listing).unwrap();
-    assert_eq!(value["schema"], "ariadne.frame-paths/v4");
+    assert_eq!(value["schema"], "ariadne.frame-paths/v6");
     let proof = &value["input"]["graphs"][0]["guard_admission"];
     assert_eq!(proof["composition"]["profile"], composition::PROFILE);
     assert_eq!(
@@ -485,7 +485,7 @@ fn paired_minidump_report_retains_exact_full_source_commitment_in_all_formats() 
     assert_eq!(completed.request(), &prepared.prepared.request);
     let saved = report::render_bound(&prepared, &completed, ReportFormat::Json, false).unwrap();
     let value: serde_json::Value = serde_json::from_str(&saved).unwrap();
-    assert_eq!(value["schema"], "ariadne-minidump-report-v5");
+    assert_eq!(value["schema"], "ariadne-minidump-report-v7");
     report::validate_saved_composition(saved.as_bytes(), 64 * 1024 * 1024).unwrap();
     let mut downgraded = value.clone();
     downgraded["schema"] = serde_json::json!("ariadne-minidump-report-v4");
@@ -501,7 +501,7 @@ fn paired_minidump_report_retains_exact_full_source_commitment_in_all_formats() 
     let composition = prepared.composition().unwrap();
     let expected = ariadne::reports::sha256(
         &serde_json::to_vec(&(
-            "ariadne-composed-capture/v2",
+            "ariadne-composed-capture/v3",
             &sources,
             &composition.binding_sha256,
         ))
@@ -517,7 +517,7 @@ fn paired_minidump_report_retains_exact_full_source_commitment_in_all_formats() 
     source.ast_sha256 = Some("1".repeat(64));
     let forged_binding = ariadne::reports::sha256(
         &serde_json::to_vec(&(
-            "ariadne-composed-capture/v2",
+            "ariadne-composed-capture/v3",
             &forged_sources,
             &composition.binding_sha256,
         ))
@@ -530,7 +530,8 @@ fn paired_minidump_report_retains_exact_full_source_commitment_in_all_formats() 
         report::validate_saved_composition(&serde_json::to_vec(&forged).unwrap(), 64 * 1024 * 1024)
             .is_err()
     );
-    let committed_prefix = profile.split_once(":bap-guard-admission-v1:").unwrap().0;
+    let guard_marker = format!(":{}:", guard::PROFILE);
+    let committed_prefix = profile.split_once(&guard_marker).unwrap().0;
     assert_eq!(committed_prefix.rsplit(':').next(), Some(expected.as_str()));
     assert_eq!(
         value["composition"],
@@ -548,7 +549,7 @@ fn paired_minidump_report_retains_exact_full_source_commitment_in_all_formats() 
     altered_sources[0].spans[0].contributors[0].file_offset += 1;
     let altered = ariadne::reports::sha256(
         &serde_json::to_vec(&(
-            "ariadne-composed-capture/v2",
+            "ariadne-composed-capture/v3",
             &altered_sources,
             &composition.binding_sha256,
         ))
@@ -724,7 +725,7 @@ fn frame_path_cli_accepts_above_default_guard_limits_and_binds_full_report() {
         assert!(listing.available, "{fixture}: {}", listing.stop_reason);
         assert_eq!(listing.returned_count, count);
         let encoded = ariadne::reports::encode_frame_paths(&listing).unwrap();
-        assert_eq!(encoded["schema"], "ariadne.frame-paths/v2");
+        assert_eq!(encoded["schema"], "ariadne.frame-paths/v5");
         let graphs = encoded["input"]["graphs"].as_array().unwrap();
         assert_eq!(graphs.len(), frames);
         let configured = serde_json::to_value(&limits).unwrap();
@@ -839,11 +840,18 @@ fn retained_combined_v1_minidump_and_frame_reports_replay_after_upgrade() {
 #[test]
 fn combined_profile_query_digest_preserves_ordered_loop_evidence() {
     use ariadne::bap::core_protocol::{
-        COMPOSED_PROFILE, LEGACY_COMPOSED_PROFILE, profile_query_digest,
+        COMPOSED_PROFILE, GUARDED_PROFILE, LEGACY_COMPOSED_PROFILE, LEGACY_GUARDED_PROFILE,
+        LEGACY_V2_COMPOSED_PROFILE, profile_query_digest,
     };
     let input = serde_json::json!({"ordered_edge_word":[true, false, true]});
     let changed = serde_json::json!({"ordered_edge_word":[false, true, true]});
-    for profile in [LEGACY_COMPOSED_PROFILE, COMPOSED_PROFILE] {
+    for profile in [
+        LEGACY_COMPOSED_PROFILE,
+        LEGACY_V2_COMPOSED_PROFILE,
+        COMPOSED_PROFILE,
+        LEGACY_GUARDED_PROFILE,
+        GUARDED_PROFILE,
+    ] {
         assert_ne!(
             profile_query_digest("snapshot", "recovery", profile, &input).unwrap(),
             profile_query_digest("snapshot", "recovery", profile, &changed).unwrap()
@@ -852,5 +860,35 @@ fn combined_profile_query_digest_preserves_ordered_loop_evidence() {
     assert_ne!(
         profile_query_digest("snapshot", "recovery", LEGACY_COMPOSED_PROFILE, &input).unwrap(),
         profile_query_digest("snapshot", "recovery", COMPOSED_PROFILE, &input).unwrap()
+    );
+}
+
+#[test]
+#[ignore = "requires decompressed retained 2026-10-15 loop reports; run in remote WSL"]
+fn retained_combined_v2_loop_reports_replay_after_guard_upgrade() {
+    let minidump = std::fs::read(
+        std::env::var_os("ARIADNE_LEGACY_V2_COMPOSED_MINIDUMP").expect("retained v2 minidump path"),
+    )
+    .unwrap();
+    let value =
+        ariadne::input::report::validate_saved_composition(&minidump, 256 * 1024 * 1024).unwrap();
+    assert_eq!(value["schema"], "ariadne-minidump-report-v5");
+    assert_eq!(
+        value["composition"]["model_sha256"],
+        ariadne::bap::composition::LEGACY_V2_MODEL_SHA256
+    );
+    assert_eq!(
+        value["composition"]["checker_sha256"],
+        ariadne::bap::composition::LEGACY_V2_CHECKER_SHA256
+    );
+    let frame = std::fs::read(
+        std::env::var_os("ARIADNE_LEGACY_V2_COMPOSED_FRAME").expect("retained v2 frame path"),
+    )
+    .unwrap();
+    let listing =
+        ariadne::reports::decode_frame_paths_with_limit(&frame, 256 * 1024 * 1024).unwrap();
+    assert_eq!(
+        listing.schema,
+        ariadne::investigation::LEGACY_V2_COMPOSED_FRAME_PATH_SCHEMA
     );
 }

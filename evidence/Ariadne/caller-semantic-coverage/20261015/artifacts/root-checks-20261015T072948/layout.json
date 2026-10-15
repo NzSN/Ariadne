@@ -1,0 +1,9 @@
+{
+  "name": "layout",
+  "command": [
+    "python3",
+    "tools/check_rust_layout.py"
+  ],
+  "exit_code": 1,
+  "seconds": 0.7168782349999674
+}

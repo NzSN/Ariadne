@@ -10,6 +10,11 @@
 
 **Where to go next.**
 
+- [Caller normal-flow coverage](docs/Ariadne/caller-semantic-coverage-design.md)
+  and [active S0–S6 plan](Plans/caller-semantic-coverage.md) — source-qualified
+  terminal/load support removes the original caller coverage barriers; completing
+  the much larger caller dataflow and its native/Rust parity gate remains open.
+
 - [Accepted P4 qualification](docs/Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query) — current v3 corpus and user scope decision; the [historical audit](docs/Ariadne/bap-analysis-core-design.md#documentation-audit) preserves its earlier v2 inventory.
 
 - [Selected I5c address-wrap design](docs/Ariadne/address-wrap-design.md) and
@@ -45,7 +50,15 @@ the [semantic assurance decision](docs/Ariadne/semantic-assurance.md).
 
 ## Guarded captured-target composition — scoped loop closure delivered
 
-The [design](docs/Ariadne/guarded-target-resolution-design.md), [composition plan](Plans/completed/guarded-target-resolution.md) and [loop plan](Plans/completed/loop-aware-target-resolution.md) deliver paired guarded/target preparation, versioned legacy replay and checked local-region induction. [Qualification dated 2026-10-15](evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) closes DA09 and DADD, all nine original incoming-coverage certificates and all 51 missing-start gates, with full native/Rust parity for both completed queries. The loop rule supplies coverage for already witnessed table entries. Regional guard coverage, the active call anchor and successful frame paths remain separate open work.
+The [design](docs/Ariadne/guarded-target-resolution-design.md), [composition plan](Plans/completed/guarded-target-resolution.md) and [loop plan](Plans/completed/loop-aware-target-resolution.md) deliver paired guarded/target preparation, versioned legacy replay and checked local-region induction. [Qualification dated 2026-10-15](evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) closes DA09 and DADD, all nine original incoming-coverage certificates and all 51 missing-start gates, with full native/Rust parity for both completed queries in that earlier stop-limited graph. The loop rule supplies coverage for already witnessed table entries. The caller follow-up below reaches a substantially larger graph; its completed-core and frame-path gates remain open.
+
+## Caller normal-flow coverage — S5 qualified, S6 partial
+
+The [design](docs/Ariadne/caller-semantic-coverage-design.md), [active plan](Plans/caller-semantic-coverage.md) and [qualification](evidence/Ariadne/caller-semantic-coverage/20261015/README.md) add control-only INT3/UD terminal certificates, exact guarded MOVAPS loads and explicit `local-normal-completion/v1` scope. S0–S5 pass on the declared final sources/helper; final admission refresh `075602` passes exact request/proof equality for both frames, caller structural recovery/admission and callee full parity. It does not repeat full caller completion. Legacy rules/proofs remain versioned, pending loads commit no vector effect, and exception-handler resumption is outside scope rather than assumed impossible.
+
+Original-dump probe `073143` removes all 30 caller coverage barriers and retains all target, root and premise facts. The initial MOVAPS is aligned under the recorded premises; the later load is still unknown. Caller recovery now decodes 9,589 sites and 11,321 edges, then Rust and native completion exhaust their selected action budgets. The callee completes with full request/state parity and two remaining indirect barriers. NP10 frame listing is unavailable with `missing-frame-query` because no completed caller query exists.
+
+The next acceptance gate is completed caller analysis and full native/Rust state comparison under declared budgets. Passing terminal admission or native initialization does not satisfy it. Keep S6 and its plan open, and report load alignment, callee targets and frame-path availability separately; normal-flow closure does not establish historical execution or whole-machine coverage.
 
 ## Investigation direction
 
@@ -91,11 +104,13 @@ CLI median was approximately 1.82 s. The [native I5a refresh](docs/Ariadne/zero-
 now qualifies both timing budgets and both capture modes. A read-only dependency
 snapshot prevents concurrent MirrorRust edits from invalidating qualification.
 
-The [proof-gated MOVAPS delivery](docs/Ariadne/justified-branch-pruning-design.md)
+The [original proof-gated MOVAPS delivery](docs/Ariadne/justified-branch-pruning-design.md)
 adds opt-in Windows function-entry alignment premises, candidate closure and
-versioned proof validation. G0–G4 finite remote checks pass; default v4 is
-unchanged. Its original dump retry remains unavailable at later XORPS width
-admission, so it does not qualify full-dump frame-path enumeration.
+versioned proof validation. Its early dump retry stopped at later XORPS width
+admission; subsequent corrections and loop closure supersede that diagnostic.
+The caller coverage extension above now proves the initial MOVAPS alignment,
+while the later load and caller completion remain unresolved. None of these
+scoped results qualifies full-dump frame-path enumeration.
 
 ## Current checkpoint
 

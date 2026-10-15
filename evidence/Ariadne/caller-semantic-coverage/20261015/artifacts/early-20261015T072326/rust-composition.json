@@ -1,0 +1,13 @@
+{
+  "name": "rust-composition",
+  "command": [
+    "cargo",
+    "test",
+    "--offline",
+    "--locked",
+    "--lib",
+    "input::materialize::composition_tests"
+  ],
+  "exit_code": 0,
+  "seconds": 1.2616060920000223
+}

@@ -1,0 +1,11 @@
+{
+  "name": "default-tests",
+  "command": [
+    "cargo",
+    "test",
+    "--offline",
+    "--locked"
+  ],
+  "exit_code": 0,
+  "seconds": 37.531830206999985
+}

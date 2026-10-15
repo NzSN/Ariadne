@@ -35,7 +35,9 @@ def target_graph_digest(wire):
 
 def seal(wire):
     report = wire["composition"]
-    version = "v2" if report["profile"] == "captured-guarded-targets/v2" else "v1"
+    version = report["profile"].rsplit("/", 1)[-1]
+    if version not in {"v1", "v2", "v3"}:
+        raise ValueError("unknown composition generation")
     report["candidate_sha256"] = digest(report["candidate"])
     report["target_report_sha256"] = digest(wire["target_resolution"])
     report["guard_report_sha256"] = digest(wire["guard_admission"])

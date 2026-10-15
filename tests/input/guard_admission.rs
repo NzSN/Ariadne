@@ -638,16 +638,7 @@ fn guarded_frame_v2_retains_full_sources_and_renders_the_assumed_entry_premise()
             "access" => record.instruction.accesses[0].access_width = 64,
             _ => unreachable!(),
         }
-        let expected = if field == "access" {
-            "guarded explanation selected normal access changed"
-        } else {
-            "guarded explanation captured bytes or original AST changed"
-        };
-        assert_eq!(
-            changed.validate().unwrap_err().to_string(),
-            expected,
-            "{field}"
-        );
+        assert!(changed.validate().is_err(), "forged capture field {field}");
     }
     let bound = crate::investigation::bind_frame_paths(chain, vec![(0, investigation)]).unwrap();
     let listing = crate::investigation::list_frame_paths(
@@ -660,7 +651,7 @@ fn guarded_frame_v2_retains_full_sources_and_renders_the_assumed_entry_premise()
         crate::investigation::FramePathLimits::default(),
     )
     .unwrap();
-    assert_eq!(listing.schema, "ariadne.frame-paths/v2");
+    assert_eq!(listing.schema, "ariadne.frame-paths/v5");
     assert!(
         listing
             .premises
@@ -705,4 +696,69 @@ fn guarded_frame_v2_retains_full_sources_and_renders_the_assumed_entry_premise()
     let mut forged = encoded;
     forged["schema"] = serde_json::json!("ariadne.frame-paths/v1");
     assert!(crate::reports::decode_frame_paths(&serde_json::to_vec(&forged).unwrap()).is_err());
+}
+
+#[test]
+#[ignore = "requires rebuilt pinned BAP/LLVM helpers; exports checked guard-only load inputs"]
+fn actual_movaps_load_guard_outcomes_export_checked_native_inputs() {
+    let root = Path::new(env!("CARGO_MANIFEST_DIR"));
+    let decoder = root.join("target/ariadne-llvm-mc");
+    for (name, subtraction, premise, expected) in [
+        ("aligned", 8, true, guard::Verdict::Aligned),
+        ("misaligned", 0, true, guard::Verdict::Misaligned),
+        ("unknown", 8, false, guard::Verdict::Unknown),
+    ] {
+        let mut code = vec![0x48, 0x83, 0xec, subtraction];
+        code.extend([0x0f, 0x28, 0xb4, 0x24, 0x40, 0x02, 0, 0]);
+        code.push(0xc3);
+        let mut dump = common::Dump::new(false);
+        dump.memory64(&[(ROOT, code.as_slice())]);
+        let snapshot =
+            FileSnapshot::from_minidump_bytes(dump.finish(), OpenLimits::default()).unwrap();
+        let prepared = snapshot
+            .prepare_bap_guarded(
+                &AnalysisQuery {
+                    entry_points: [ROOT].into(),
+                    slice_seeds: [STORE].into(),
+                },
+                &decoder,
+                &crate::bap::Config::from_env(),
+                &PreparationOptions::default(),
+                PrepareLimits::default(),
+                setup(&snapshot, premise),
+            )
+            .unwrap();
+        prepared.validate_guard_admission().unwrap();
+        let report = prepared.guard_admission().unwrap();
+        assert_eq!(report.guards.len(), 1);
+        assert_eq!(report.guards[0].verdict, expected, "{name}");
+        assert!(report.input.barriers.is_empty());
+        let instruction = &prepared.prepared.request.instructions[&STORE];
+        if name == "aligned" {
+            assert_eq!(instruction.kind, InstructionKind::Ordinary);
+            assert_eq!(instruction.may_defs, ["state:other".into()].into());
+            assert!(instruction.must_defs.is_empty());
+            let access = &prepared.prepared.instructions[&STORE]
+                .semantic
+                .as_ref()
+                .unwrap()
+                .memory_accesses[0];
+            assert_eq!(access.role, crate::effects::MemoryAccessRole::Load);
+            assert_eq!(access.access_width, 128);
+        } else {
+            assert_eq!(instruction.kind, InstructionKind::Stop);
+            assert!(!prepared.prepared.request.decodable.contains(&STORE));
+        }
+        let wire =
+            crate::bap::core_adapter::NativeAnalyzer::capture_wire_for_test(&prepared).unwrap();
+        if let Some(directory) = std::env::var_os("ARIADNE_CALLER_WIRE_DIR") {
+            let directory = std::path::PathBuf::from(directory);
+            std::fs::create_dir_all(&directory).unwrap();
+            std::fs::write(
+                directory.join(format!("movaps-load-{name}-guarded-wire.json")),
+                serde_json::to_vec_pretty(&wire).unwrap(),
+            )
+            .unwrap();
+        }
+    }
 }

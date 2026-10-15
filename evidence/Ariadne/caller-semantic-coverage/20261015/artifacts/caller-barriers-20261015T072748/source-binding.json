@@ -1,0 +1,29 @@
+{
+  "schema": "ariadne.caller-barrier-feedback-source-binding/v1",
+  "source_manifest_sha256": "ca8d0d5efb0ec1242f417aacd0ab4a24808f45ce10f54e796ec159bb82d18b27",
+  "source_files_verified": 935,
+  "source_archive_sha256": "c67021be23145d2ac1c7e9e4ff583a6d29cd9c3d147fb9b3ae2105694fe5e883",
+  "release_library_sha256": "778a139c94670082e120253516e22872ddd3f0b316d9e035a0d759a75b29f51f",
+  "driver_sha256": "82ec0e3a4b6e2a8aa350976d9228e911f3dbb2d187c7f5b4374c3f28bcd2adb6",
+  "driver_binary_sha256": "aa5d5d6061671913d7ca2868e40f3e338acbdde29a8230610e2a7d137a70dadb",
+  "tool_hashes": {
+    "ariadne-bap-lift": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+    "caller-llvm/ariadne-llvm-mc": "6bb0005e6416f172f88c4d122ae8908862adbe9d1d2f225046df17ae857d9349"
+  },
+  "fixture_sha256": "2680e17ad88714b034801bf5d703b902e9268d188ebc8dafd9b3efe4a3272ab9",
+  "compile_command": [
+    "rustc",
+    "--edition=2024",
+    "/caller-work/caller-barriers-barrier-probe-current.rs",
+    "-O",
+    "-L",
+    "dependency=/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/caller-build/release/deps",
+    "--extern",
+    "ariadne=/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/caller-build/release/libariadne.rlib",
+    "--extern",
+    "serde_json=/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/caller-build/release/deps/libserde_json-540ae372bafb180c.rlib",
+    "-o",
+    "/caller-work/caller-barriers-probe"
+  ],
+  "scope": "Post-correction four-shape feedback; not whole-caller closure or alignment proof."
+}

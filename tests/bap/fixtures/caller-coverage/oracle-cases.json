@@ -1,0 +1,1486 @@
+{
+  "schema": "ariadne.caller-coverage.oracle-cases/v1",
+  "scope": "Independent source/encoding, finite MOVAPS data-law and normal-flow controls; synthetic receipts are not production wire evidence.",
+  "cases": [
+    {
+      "name": "captured-int3",
+      "family": "terminal",
+      "fixture": "int3",
+      "expected": {
+        "recognized": true,
+        "barrier": false
+      }
+    },
+    {
+      "name": "captured-ud2",
+      "family": "terminal",
+      "fixture": "ud2",
+      "expected": {
+        "recognized": true,
+        "barrier": false
+      }
+    },
+    {
+      "name": "captured-ud1-preserves-three-versus-five",
+      "family": "terminal",
+      "fixture": "ud1",
+      "expected": {
+        "recognized": true,
+        "barrier": false,
+        "bap_extent_disagreement": true
+      }
+    },
+    {
+      "name": "legacy-terminal-not-enabled",
+      "family": "terminal",
+      "fixture": "int3",
+      "generation": 1,
+      "expected": {
+        "recognized": false,
+        "barrier": true
+      }
+    },
+    {
+      "name": "default-unguarded-int3-remains-unsupported",
+      "family": "terminal",
+      "fixture": "int3",
+      "guarded": false,
+      "expected": {
+        "recognized": false,
+        "barrier": true
+      }
+    },
+    {
+      "name": "ordinary-empty-nop-is-not-terminal",
+      "family": "terminal",
+      "fixture": "int3",
+      "changes": [
+        {
+          "path": [
+            "bytes"
+          ],
+          "value": "90"
+        },
+        {
+          "path": [
+            "reference",
+            "bytes"
+          ],
+          "value": "90"
+        },
+        {
+          "path": [
+            "reference",
+            "opcode"
+          ],
+          "value": "NOOP"
+        },
+        {
+          "path": [
+            "bap",
+            "bytes"
+          ],
+          "value": "90"
+        },
+        {
+          "path": [
+            "bap",
+            "opcode"
+          ],
+          "value": "NOOP"
+        },
+        {
+          "path": [
+            "bap",
+            "bil"
+          ],
+          "value": []
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "barrier": true
+      }
+    },
+    {
+      "name": "ordinary-empty-clc-is-not-terminal",
+      "family": "terminal",
+      "fixture": "int3",
+      "changes": [
+        {
+          "path": [
+            "bytes"
+          ],
+          "value": "f8"
+        },
+        {
+          "path": [
+            "reference",
+            "bytes"
+          ],
+          "value": "f8"
+        },
+        {
+          "path": [
+            "reference",
+            "opcode"
+          ],
+          "value": "CLC"
+        },
+        {
+          "path": [
+            "bap",
+            "bytes"
+          ],
+          "value": "f8"
+        },
+        {
+          "path": [
+            "bap",
+            "opcode"
+          ],
+          "value": "CLC"
+        },
+        {
+          "path": [
+            "bap",
+            "bil"
+          ],
+          "value": []
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "barrier": true
+      }
+    },
+    {
+      "name": "wrong-int3-exception-number",
+      "family": "terminal",
+      "fixture": "int3",
+      "changes": [
+        {
+          "path": [
+            "bap",
+            "bil",
+            0,
+            "number"
+          ],
+          "value": 6
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "barrier": true
+      }
+    },
+    {
+      "name": "conditional-exception-has-normal-arm",
+      "family": "terminal",
+      "fixture": "int3",
+      "changes": [
+        {
+          "path": [
+            "bap",
+            "bil"
+          ],
+          "value": [
+            {
+              "kind": "if",
+              "condition": {
+                "kind": "int",
+                "value": "1:1u"
+              },
+              "yes": [],
+              "no": [
+                {
+                  "kind": "exception",
+                  "number": 3
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "barrier": true
+      }
+    },
+    {
+      "name": "extra-exception-effect",
+      "family": "terminal",
+      "fixture": "int3",
+      "changes": [
+        {
+          "path": [
+            "bap",
+            "bil"
+          ],
+          "action": "append",
+          "value": {
+            "kind": "special"
+          }
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "barrier": true
+      }
+    },
+    {
+      "name": "bap-control-fact-changed",
+      "family": "terminal",
+      "fixture": "int3",
+      "changes": [
+        {
+          "path": [
+            "bap",
+            "properties",
+            "call"
+          ],
+          "value": true
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "barrier": true
+      }
+    },
+    {
+      "name": "bap-invalid-status",
+      "family": "terminal",
+      "fixture": "int3",
+      "changes": [
+        {
+          "path": [
+            "bap",
+            "status"
+          ],
+          "value": "invalid"
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "barrier": true
+      }
+    },
+    {
+      "name": "bad-reference-length",
+      "family": "terminal",
+      "fixture": "int3",
+      "changes": [
+        {
+          "path": [
+            "reference",
+            "length"
+          ],
+          "value": 2
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "barrier": true
+      }
+    },
+    {
+      "name": "bad-reference-control",
+      "family": "terminal",
+      "fixture": "int3",
+      "changes": [
+        {
+          "path": [
+            "reference",
+            "control"
+          ],
+          "value": "ordinary"
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "barrier": true
+      }
+    },
+    {
+      "name": "truncated-ud2",
+      "family": "terminal",
+      "fixture": "ud2",
+      "changes": [
+        {
+          "path": [
+            "bytes"
+          ],
+          "value": "0f"
+        },
+        {
+          "path": [
+            "reference",
+            "bytes"
+          ],
+          "value": "0f"
+        },
+        {
+          "path": [
+            "reference",
+            "length"
+          ],
+          "value": 1
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "barrier": true
+      }
+    },
+    {
+      "name": "prefixed-int3-not-admitted",
+      "family": "terminal",
+      "fixture": "int3",
+      "changes": [
+        {
+          "path": [
+            "bytes"
+          ],
+          "value": "66cc"
+        },
+        {
+          "path": [
+            "reference",
+            "bytes"
+          ],
+          "value": "66cc"
+        },
+        {
+          "path": [
+            "reference",
+            "length"
+          ],
+          "value": 2
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "barrier": true
+      }
+    },
+    {
+      "name": "ud2-fabricated-bap-exception6",
+      "family": "terminal",
+      "fixture": "ud2",
+      "changes": [
+        {
+          "path": [
+            "bap",
+            "bil"
+          ],
+          "value": [
+            {
+              "kind": "exception",
+              "number": 6
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "barrier": true
+      }
+    },
+    {
+      "name": "ud2-wrong-bap-opcode",
+      "family": "terminal",
+      "fixture": "ud2",
+      "changes": [
+        {
+          "path": [
+            "bap",
+            "opcode"
+          ],
+          "value": "UD2B"
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "barrier": true
+      }
+    },
+    {
+      "name": "ud1-truncated-modrm",
+      "family": "terminal",
+      "fixture": "ud1",
+      "changes": [
+        {
+          "path": [
+            "bytes"
+          ],
+          "value": "670fb9"
+        },
+        {
+          "path": [
+            "reference",
+            "bytes"
+          ],
+          "value": "670fb9"
+        },
+        {
+          "path": [
+            "reference",
+            "length"
+          ],
+          "value": 3
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "barrier": true
+      }
+    },
+    {
+      "name": "ud1-truncated-displacement",
+      "family": "terminal",
+      "fixture": "ud1",
+      "changes": [
+        {
+          "path": [
+            "bytes"
+          ],
+          "value": "670fb940"
+        },
+        {
+          "path": [
+            "reference",
+            "bytes"
+          ],
+          "value": "670fb940"
+        },
+        {
+          "path": [
+            "reference",
+            "length"
+          ],
+          "value": 4
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "barrier": true
+      }
+    },
+    {
+      "name": "ud1-trailing-byte-not-owned",
+      "family": "terminal",
+      "fixture": "ud1",
+      "changes": [
+        {
+          "path": [
+            "bytes"
+          ],
+          "value": "670fb9401290"
+        },
+        {
+          "path": [
+            "reference",
+            "bytes"
+          ],
+          "value": "670fb9401290"
+        },
+        {
+          "path": [
+            "reference",
+            "length"
+          ],
+          "value": 6
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "barrier": true
+      }
+    },
+    {
+      "name": "ud1-second-address-prefix",
+      "family": "terminal",
+      "fixture": "ud1",
+      "changes": [
+        {
+          "path": [
+            "bytes"
+          ],
+          "value": "67670fb94012"
+        },
+        {
+          "path": [
+            "reference",
+            "bytes"
+          ],
+          "value": "67670fb94012"
+        },
+        {
+          "path": [
+            "reference",
+            "length"
+          ],
+          "value": 6
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "barrier": true
+      }
+    },
+    {
+      "name": "ud1-rex-prefix-excluded",
+      "family": "terminal",
+      "fixture": "ud1",
+      "changes": [
+        {
+          "path": [
+            "bytes"
+          ],
+          "value": "480fb94012"
+        },
+        {
+          "path": [
+            "reference",
+            "bytes"
+          ],
+          "value": "480fb94012"
+        },
+        {
+          "path": [
+            "reference",
+            "length"
+          ],
+          "value": 5
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "barrier": true
+      }
+    },
+    {
+      "name": "ud1-pinned-bap-extent-not-rewritten",
+      "family": "terminal",
+      "fixture": "ud1",
+      "changes": [
+        {
+          "path": [
+            "bap",
+            "bytes"
+          ],
+          "value": "670fb94012"
+        },
+        {
+          "path": [
+            "bap",
+            "length"
+          ],
+          "value": 5
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "barrier": true
+      }
+    },
+    {
+      "name": "ud1-pinned-bap-opcode-not-borrowed",
+      "family": "terminal",
+      "fixture": "ud1",
+      "changes": [
+        {
+          "path": [
+            "bap",
+            "opcode"
+          ],
+          "value": "UD1Lm"
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "barrier": true
+      }
+    },
+    {
+      "name": "ud1-register",
+      "family": "terminal",
+      "fixture": "ud1",
+      "changes": [
+        {
+          "path": [
+            "bytes"
+          ],
+          "value": "0fb9c0"
+        },
+        {
+          "path": [
+            "reference",
+            "bytes"
+          ],
+          "value": "0fb9c0"
+        },
+        {
+          "path": [
+            "reference",
+            "length"
+          ],
+          "value": 3
+        },
+        {
+          "path": [
+            "reference",
+            "opcode"
+          ],
+          "value": "UD1Lr"
+        },
+        {
+          "path": [
+            "bap",
+            "bytes"
+          ],
+          "value": "0fb9"
+        },
+        {
+          "path": [
+            "bap",
+            "length"
+          ],
+          "value": 2
+        }
+      ],
+      "expected": {
+        "recognized": true,
+        "barrier": false
+      }
+    },
+    {
+      "name": "ud1-sib-no-displacement",
+      "family": "terminal",
+      "fixture": "ud1",
+      "changes": [
+        {
+          "path": [
+            "bytes"
+          ],
+          "value": "0fb90424"
+        },
+        {
+          "path": [
+            "reference",
+            "bytes"
+          ],
+          "value": "0fb90424"
+        },
+        {
+          "path": [
+            "reference",
+            "length"
+          ],
+          "value": 4
+        },
+        {
+          "path": [
+            "bap",
+            "bytes"
+          ],
+          "value": "0fb9"
+        },
+        {
+          "path": [
+            "bap",
+            "length"
+          ],
+          "value": 2
+        }
+      ],
+      "expected": {
+        "recognized": true,
+        "barrier": false
+      }
+    },
+    {
+      "name": "ud1-sib-base5-disp32",
+      "family": "terminal",
+      "fixture": "ud1",
+      "changes": [
+        {
+          "path": [
+            "bytes"
+          ],
+          "value": "0fb9042511223344"
+        },
+        {
+          "path": [
+            "reference",
+            "bytes"
+          ],
+          "value": "0fb9042511223344"
+        },
+        {
+          "path": [
+            "reference",
+            "length"
+          ],
+          "value": 8
+        },
+        {
+          "path": [
+            "bap",
+            "bytes"
+          ],
+          "value": "0fb9"
+        },
+        {
+          "path": [
+            "bap",
+            "length"
+          ],
+          "value": 2
+        }
+      ],
+      "expected": {
+        "recognized": true,
+        "barrier": false
+      }
+    },
+    {
+      "name": "ud1-rm5-disp32",
+      "family": "terminal",
+      "fixture": "ud1",
+      "changes": [
+        {
+          "path": [
+            "bytes"
+          ],
+          "value": "0fb90511223344"
+        },
+        {
+          "path": [
+            "reference",
+            "bytes"
+          ],
+          "value": "0fb90511223344"
+        },
+        {
+          "path": [
+            "reference",
+            "length"
+          ],
+          "value": 7
+        },
+        {
+          "path": [
+            "bap",
+            "bytes"
+          ],
+          "value": "0fb9"
+        },
+        {
+          "path": [
+            "bap",
+            "length"
+          ],
+          "value": 2
+        }
+      ],
+      "expected": {
+        "recognized": true,
+        "barrier": false
+      }
+    },
+    {
+      "name": "captured-movaps-load",
+      "family": "movaps",
+      "fixture": "movaps-load",
+      "operation": "load",
+      "expected": {
+        "recognized": true,
+        "normal_effect_before_proof": false
+      }
+    },
+    {
+      "name": "retained-movaps-store",
+      "family": "movaps",
+      "fixture": "movaps-store",
+      "operation": "store",
+      "expected": {
+        "recognized": true,
+        "normal_effect_before_proof": false
+      }
+    },
+    {
+      "name": "legacy-load-not-enabled",
+      "family": "movaps",
+      "fixture": "movaps-load",
+      "operation": "load",
+      "generation": 1,
+      "expected": {
+        "recognized": false,
+        "normal_effect_before_proof": false
+      }
+    },
+    {
+      "name": "default-unguarded-load-not-enabled",
+      "family": "movaps",
+      "fixture": "movaps-load",
+      "operation": "load",
+      "guarded": false,
+      "expected": {
+        "recognized": false,
+        "normal_effect_before_proof": false
+      }
+    },
+    {
+      "name": "direction-source-mismatch",
+      "family": "movaps",
+      "fixture": "movaps-load",
+      "operation": "load",
+      "changes": [
+        {
+          "path": [
+            "bytes"
+          ],
+          "value": "0f29b42440020000"
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "normal_effect_before_proof": false
+      }
+    },
+    {
+      "name": "destination-bank-mismatch",
+      "family": "movaps",
+      "fixture": "movaps-load",
+      "operation": "load",
+      "changes": [
+        {
+          "path": [
+            "bap",
+            "bil",
+            0,
+            "var",
+            "name"
+          ],
+          "value": "YMM7"
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "normal_effect_before_proof": false
+      }
+    },
+    {
+      "name": "upper-half-wrong-bank",
+      "family": "movaps",
+      "fixture": "movaps-load",
+      "operation": "load",
+      "changes": [
+        {
+          "path": [
+            "bap",
+            "bil",
+            0,
+            "value",
+            "lhs",
+            "arg",
+            "var",
+            "name"
+          ],
+          "value": "YMM7"
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "normal_effect_before_proof": false
+      }
+    },
+    {
+      "name": "upper-half-wrong-extent",
+      "family": "movaps",
+      "fixture": "movaps-load",
+      "operation": "load",
+      "changes": [
+        {
+          "path": [
+            "bap",
+            "bil",
+            0,
+            "value",
+            "lhs",
+            "lo"
+          ],
+          "value": 127
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "normal_effect_before_proof": false
+      }
+    },
+    {
+      "name": "load-width-not128",
+      "family": "movaps",
+      "fixture": "movaps-load",
+      "operation": "load",
+      "changes": [
+        {
+          "path": [
+            "bap",
+            "bil",
+            0,
+            "value",
+            "rhs",
+            "arg",
+            "width"
+          ],
+          "value": 64
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "normal_effect_before_proof": false
+      }
+    },
+    {
+      "name": "load-address-not-guard-address",
+      "family": "movaps",
+      "fixture": "movaps-load",
+      "operation": "load",
+      "changes": [
+        {
+          "path": [
+            "bap",
+            "bil",
+            0,
+            "value",
+            "rhs",
+            "arg",
+            "addr",
+            "rhs",
+            "value"
+          ],
+          "value": "0x250:64u"
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "normal_effect_before_proof": false
+      }
+    },
+    {
+      "name": "predicate-polarity-inverted",
+      "family": "movaps",
+      "fixture": "movaps-load",
+      "operation": "load",
+      "changes": [
+        {
+          "path": [
+            "bap",
+            "bil",
+            1,
+            "condition",
+            "op"
+          ],
+          "value": 4
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "normal_effect_before_proof": false
+      }
+    },
+    {
+      "name": "predicate-mask-not15",
+      "family": "movaps",
+      "fixture": "movaps-load",
+      "operation": "load",
+      "changes": [
+        {
+          "path": [
+            "bap",
+            "bil",
+            1,
+            "condition",
+            "lhs",
+            "rhs",
+            "value"
+          ],
+          "value": "0x7:64u"
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "normal_effect_before_proof": false
+      }
+    },
+    {
+      "name": "wrong-guard-exception",
+      "family": "movaps",
+      "fixture": "movaps-load",
+      "operation": "load",
+      "changes": [
+        {
+          "path": [
+            "bap",
+            "bil",
+            1,
+            "no",
+            0,
+            "number"
+          ],
+          "value": 6
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "normal_effect_before_proof": false
+      }
+    },
+    {
+      "name": "extra-guard-statement",
+      "family": "movaps",
+      "fixture": "movaps-load",
+      "operation": "load",
+      "changes": [
+        {
+          "path": [
+            "bap",
+            "bil"
+          ],
+          "action": "append",
+          "value": {
+            "kind": "special"
+          }
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "normal_effect_before_proof": false
+      }
+    },
+    {
+      "name": "unknown-vector-namespace",
+      "family": "movaps",
+      "fixture": "movaps-load",
+      "operation": "load",
+      "changes": [
+        {
+          "path": [
+            "bap",
+            "bil",
+            0,
+            "var",
+            "name"
+          ],
+          "value": "ZMM6"
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "normal_effect_before_proof": false
+      }
+    },
+    {
+      "name": "unreviewed-address-size-prefix",
+      "family": "movaps",
+      "fixture": "movaps-load",
+      "operation": "load",
+      "changes": [
+        {
+          "path": [
+            "bytes"
+          ],
+          "value": "670f28b42440020000"
+        }
+      ],
+      "expected": {
+        "recognized": false,
+        "normal_effect_before_proof": false
+      }
+    },
+    {
+      "name": "normal-aligned-store",
+      "family": "flow",
+      "input": {},
+      "expected": {
+        "verdict": "aligned",
+        "normal_effect": true
+      }
+    },
+    {
+      "name": "normal-aligned-load",
+      "family": "flow",
+      "input": {
+        "operation": "load"
+      },
+      "expected": {
+        "verdict": "aligned",
+        "normal_effect": true
+      }
+    },
+    {
+      "name": "unknown-rsp-does-not-enable-load",
+      "family": "flow",
+      "input": {
+        "operation": "load",
+        "entry_residues": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      "expected": {
+        "verdict": "unknown",
+        "normal_effect": false
+      }
+    },
+    {
+      "name": "misaligned-load-stays-stop",
+      "family": "flow",
+      "input": {
+        "operation": "load",
+        "prologue_delta": 0
+      },
+      "expected": {
+        "verdict": "misaligned",
+        "normal_effect": false
+      }
+    },
+    {
+      "name": "unknown-stop-stays-barrier",
+      "family": "flow",
+      "input": {
+        "barriers": [
+          3
+        ]
+      },
+      "expected": {
+        "verdict": "unknown",
+        "normal_effect": false
+      }
+    },
+    {
+      "name": "handler-may-resume-but-is-outside-normal-scope",
+      "family": "flow",
+      "input": {
+        "handler_resume_residues": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      "expected": {
+        "verdict": "aligned",
+        "normal_effect": true
+      }
+    },
+    {
+      "name": "handler-edge-cannot-be-normal-terminal-successor",
+      "family": "flow",
+      "input": {
+        "normal_terminal_successor": true
+      },
+      "expected": {
+        "verdict": "rejected",
+        "normal_effect": false
+      }
+    },
+    {
+      "name": "stale-completeness-only-epoch",
+      "family": "flow",
+      "input": {
+        "graph_epoch": 2,
+        "offered_epoch": 1
+      },
+      "expected": {
+        "verdict": "rejected",
+        "normal_effect": false
+      }
+    },
+    {
+      "name": "fresh-epoch-unmatched-terminal-still-barrier",
+      "family": "flow",
+      "input": {
+        "graph_epoch": 2,
+        "offered_epoch": 2,
+        "barriers": [
+          3
+        ]
+      },
+      "expected": {
+        "verdict": "unknown",
+        "normal_effect": false
+      }
+    },
+    {
+      "name": "wrong-normal-scope",
+      "family": "flow",
+      "input": {
+        "scope": "whole-machine/v1"
+      },
+      "expected": {
+        "verdict": "rejected",
+        "normal_effect": false
+      }
+    },
+    {
+      "name": "whole-machine-coverage-not-inferred",
+      "family": "flow",
+      "input": {
+        "whole_machine_claim": true
+      },
+      "expected": {
+        "verdict": "rejected",
+        "normal_effect": false
+      }
+    },
+    {
+      "name": "zero-product-budget",
+      "family": "flow",
+      "input": {
+        "budget": 0
+      },
+      "expected": {
+        "verdict": "unavailable",
+        "normal_effect": false
+      }
+    },
+    {
+      "name": "bounded-product-budget",
+      "family": "flow",
+      "input": {
+        "budget": 1
+      },
+      "expected": {
+        "verdict": "unavailable",
+        "normal_effect": false
+      }
+    },
+    {
+      "name": "terminal-receipt-valid",
+      "family": "receipt",
+      "fixture": "int3",
+      "proof_changes": [],
+      "expected": {
+        "accepted": true
+      }
+    },
+    {
+      "name": "terminal-receipt-wrong-epoch",
+      "family": "receipt",
+      "fixture": "int3",
+      "proof_changes": [
+        {
+          "path": [
+            "epoch"
+          ],
+          "value": 0
+        }
+      ],
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "name": "terminal-receipt-wrong-snapshot",
+      "family": "receipt",
+      "fixture": "int3",
+      "proof_changes": [
+        {
+          "path": [
+            "snapshot"
+          ],
+          "value": "snapshot-b"
+        }
+      ],
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "name": "terminal-receipt-wrong-activation",
+      "family": "receipt",
+      "fixture": "int3",
+      "proof_changes": [
+        {
+          "path": [
+            "activation"
+          ],
+          "value": 2
+        }
+      ],
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "name": "terminal-receipt-wrong-source",
+      "family": "receipt",
+      "fixture": "int3",
+      "proof_changes": [
+        {
+          "path": [
+            "source_sha256"
+          ],
+          "value": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ],
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "name": "terminal-receipt-unknown-tag",
+      "family": "receipt",
+      "fixture": "int3",
+      "proof_changes": [
+        {
+          "path": [
+            "kind"
+          ],
+          "value": "unrecognized"
+        }
+      ],
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "name": "terminal-receipt-null-tag",
+      "family": "receipt",
+      "fixture": "int3",
+      "proof_changes": [
+        {
+          "path": [
+            "kind"
+          ],
+          "value": null
+        }
+      ],
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "name": "terminal-receipt-missing-scope",
+      "family": "receipt",
+      "fixture": "int3",
+      "proof_changes": [
+        {
+          "path": [
+            "scope"
+          ],
+          "action": "delete"
+        }
+      ],
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "name": "terminal-receipt-missing-exit",
+      "family": "receipt",
+      "fixture": "int3",
+      "proof_changes": [
+        {
+          "path": [
+            "certificate",
+            "exception_exit"
+          ],
+          "value": false
+        }
+      ],
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "name": "terminal-receipt-hidden-resumption",
+      "family": "receipt",
+      "fixture": "int3",
+      "proof_changes": [
+        {
+          "path": [
+            "certificate",
+            "resumption_outside_scope"
+          ],
+          "value": false
+        }
+      ],
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "name": "terminal-receipt-unearned-mustdefs",
+      "family": "receipt",
+      "fixture": "int3",
+      "proof_changes": [
+        {
+          "path": [
+            "certificate",
+            "effects"
+          ],
+          "value": "must-all"
+        }
+      ],
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "name": "terminal-receipt-invented-no-handler-premise",
+      "family": "receipt",
+      "fixture": "int3",
+      "proof_changes": [
+        {
+          "path": [
+            "handlers_cannot_resume"
+          ],
+          "value": true
+        }
+      ],
+      "expected": {
+        "accepted": false
+      }
+    },
+    {
+      "name": "terminal-receipt-legacy-generation",
+      "family": "receipt",
+      "fixture": "int3",
+      "proof_changes": [],
+      "generation": 1,
+      "expected": {
+        "accepted": false
+      }
+    }
+  ]
+}

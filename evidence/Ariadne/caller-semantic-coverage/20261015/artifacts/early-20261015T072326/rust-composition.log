@@ -1,0 +1,24 @@
+    Finished `test` profile [unoptimized] target(s) in 0.72s
+     Running unittests src/lib.rs (target/caller-build/debug/deps/ariadne-ee964763ae0b7713)
+
+running 17 tests
+test input::materialize::composition_tests::actual_bap_pending_store_targets_and_native_rust_results_agree ... ignored, requires pinned BAP/LLVM and rebuilt native combined-profile helper
+test input::materialize::composition_tests::native_query_rotation_obeys_selected_aggregate_budget_and_pinned_capture_identity ... ignored, requires pinned BAP/LLVM native helpers; exercises two fixed-capacity BAP children
+test input::materialize::composition_tests::proof_relevant_completeness_barrier_and_transfer_changes_advance_epoch ... ok
+test input::materialize::composition_tests::terminal_receipt_changes_advance_epoch_even_without_control_changes ... ok
+test input::materialize::composition_tests::captured_terminals_close_only_checked_normal_flow_and_keep_opaque_effects ... ok
+test input::materialize::composition_tests::loop_publication_binds_unattempted_seed_and_nonlocal_call_endpoints ... ok
+test input::materialize::composition_tests::paired_publication_rejects_missing_proofs_stale_epochs_and_forged_final_store ... ok
+test input::materialize::composition_tests::resealed_composition_cannot_rewrite_retained_original_control ... ok
+test input::materialize::composition_tests::resealed_candidate_cannot_add_an_unsourced_indirect_without_a_receipt ... ok
+test input::materialize::composition_tests::fresh_paired_seal_rejects_indirect_bil_relabelled_as_direct_jump ... ok
+test input::materialize::composition_tests::known_missing_code_endpoint_is_attempted_and_keeps_guard_unknown ... ok
+test input::materialize::composition_tests::late_backedge_invalidates_target_completeness_and_keeps_known_destination ... ok
+test input::materialize::composition_tests::candidate_target_receipt_survives_unknown_final_guard_without_promoting_seeds ... ok
+test input::materialize::composition_tests::paired_alignment_receipt_commits_only_checked_normal_store ... ok
+test input::materialize::composition_tests::late_backedge_through_defining_load_keeps_a_universal_local_frontier ... ok
+test input::materialize::composition_tests::partial_capture_and_round_budget_preserve_explicit_coverage_residuals ... ok
+test input::materialize::composition_tests::terminal_guard_only_reports_preserve_sources_scope_and_native_input ... ok
+
+test result: ok. 15 passed; 0 failed; 2 ignored; 0 measured; 138 filtered out; finished in 0.50s
+

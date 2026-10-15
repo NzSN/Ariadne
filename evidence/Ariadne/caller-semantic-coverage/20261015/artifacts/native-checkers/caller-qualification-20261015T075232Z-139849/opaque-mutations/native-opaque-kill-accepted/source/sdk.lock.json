@@ -1,0 +1,27 @@
+{
+  "schema": "ariadne.bap-core-sdk-lock/v1",
+  "status": "SDK smoke passed; full OQ qualification pending",
+  "bapSourceRevision": "baa902209ee4be975bdd8db7d1160b0a0ec2831f",
+  "bapSourceArchive": {
+    "path": "tmp/bap-setup/bap-source.tar.gz",
+    "sha256": "b0f28f00e78958f671d84de918f36be8b068ea2ec4459dc72c6f7fe3a0ecf428",
+    "url": "https://codeload.github.com/BinaryAnalysisPlatform/bap/tar.gz/baa902209ee4be975bdd8db7d1160b0a0ec2831f"
+  },
+  "compiler": "ocaml-base-compiler.4.12.1",
+  "compilerSelection": "Pinned BAP source README explicitly recommends4.12.1; package constraints inspected before solving.",
+  "repositorySnapshot": {
+    "path": "target/bap-core-sdk/repository-snapshot.tar.gz",
+    "sha256": "a5eeecf4923b0e6feb34ae6a6fd6f4c4a5c1738256f53a44b5c7dd8116262dea",
+    "origin": "Read-only local opam.ocaml.org metadata snapshot, frozen by full archive SHA256; original Git revision unavailable."
+  },
+  "roots": [
+    "bap-std.2.5.0",
+    "yojson.3.0.0"
+  ],
+  "isolation": "Dedicated workspace-local OPAMROOT and prefix; no modification of existing user switches.",
+  "stage1Runtime": "Kept unchanged in a separate process; no binary/plugin ABI equivalence claimed.",
+  "resolvedPackages": {
+    "path": "native/bap-core/sdk-packages.export",
+    "sha256": "b82792ea34ed6ac9d2b4dc31ae5a6beda787af2a68066b1f17a65d9aef1a7d7c"
+  }
+}

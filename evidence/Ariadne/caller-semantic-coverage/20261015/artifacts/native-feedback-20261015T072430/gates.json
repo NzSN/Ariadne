@@ -1,0 +1,49 @@
+[
+  {
+    "name": "actual-load-export",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--lib",
+      "actual_movaps_load_guard_outcomes_export_checked_native_inputs",
+      "--",
+      "--ignored",
+      "--nocapture"
+    ],
+    "exit_code": 0,
+    "seconds": 8.870785930000011
+  },
+  {
+    "name": "native-controls",
+    "command": [
+      "python3",
+      "tests/bap/caller_coverage_native_controls.py",
+      "--native-dir",
+      "target/caller-native",
+      "--output",
+      "/caller-work/evidence/native-feedback-20261015T072430/native-controls",
+      "--receipt-dir",
+      "/caller-work/evidence/native-feedback-20261015T072430/caller-receipts",
+      "--wire-dir",
+      "/caller-work/evidence/native-feedback-20261015T072430/caller-wires",
+      "--mutations"
+    ],
+    "exit_code": 1,
+    "seconds": 0.04697819900002287
+  },
+  {
+    "name": "release-build",
+    "command": [
+      "cargo",
+      "build",
+      "--offline",
+      "--locked",
+      "--release",
+      "--lib"
+    ],
+    "exit_code": 0,
+    "seconds": 32.46294348600003
+  }
+]

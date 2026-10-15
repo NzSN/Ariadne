@@ -1,0 +1,90 @@
+{
+  "status": "retained-exact-snapshot-pass",
+  "source": "/caller-work/evidence/root-checks-20261015T072948",
+  "source_manifest_sha256": "fccc77d5e58752e4e8010567a28569995531fed8a9b73328c0598623d9595ac6",
+  "gates": [
+    {
+      "name": "format",
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.9326501929999722
+    },
+    {
+      "name": "default-tests",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "seconds": 37.531830206999985
+    },
+    {
+      "name": "core-only-tests",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--no-default-features"
+      ],
+      "exit_code": 0,
+      "seconds": 3.199170284999923
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--offline",
+        "--locked",
+        "--all-features",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "seconds": 19.401499231000003
+    },
+    {
+      "name": "release-build",
+      "command": [
+        "cargo",
+        "build",
+        "--offline",
+        "--locked",
+        "--release",
+        "--lib"
+      ],
+      "exit_code": 0,
+      "seconds": 32.381502470999976
+    }
+  ],
+  "uncredited_prior_gates": [
+    {
+      "name": "layout",
+      "command": [
+        "python3",
+        "tools/check_rust_layout.py"
+      ],
+      "exit_code": 1,
+      "seconds": 0.7168782349999674
+    }
+  ],
+  "fresh_layout_gate": "layout.log",
+  "logs": {
+    "format": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "default-tests": "f5f0ba8af629fab4afed39181c58d069845415b20200fe9b2dc6b1abb7449cf0",
+    "core-only-tests": "312554b570473f0537471443be4df2488a3283cc99b5e9c570d434c378eeeba9",
+    "clippy": "32662f6c8748f13af5c1ffafaa7fd9a088a5a9c987021d71e36db2ce2ce8589c",
+    "release-build": "83ee3a50c1b03dc2ee2a9b75a753615a03841464fcca1f297286af8bcbd1c016"
+  }
+}

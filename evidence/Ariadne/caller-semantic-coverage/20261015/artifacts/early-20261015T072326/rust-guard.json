@@ -1,0 +1,13 @@
+{
+  "name": "rust-guard",
+  "command": [
+    "cargo",
+    "test",
+    "--offline",
+    "--locked",
+    "--lib",
+    "bap::guard_admission_tests"
+  ],
+  "exit_code": 0,
+  "seconds": 1.1264454319999686
+}

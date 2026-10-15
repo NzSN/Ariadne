@@ -1,0 +1,45 @@
+[
+  {
+    "name": "predicate-model",
+    "command": [
+      "bash",
+      "Specs/check-predicate-admission.sh"
+    ],
+    "exit_code": 0,
+    "seconds": 42.855836459
+  },
+  {
+    "name": "rust-terminal",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--lib",
+      "bap::terminal_control::tests"
+    ],
+    "exit_code": 101,
+    "seconds": 19.567689196
+  },
+  {
+    "name": "native-build",
+    "command": [
+      "python3",
+      "native/bap-core/build.py",
+      "--output",
+      "target/caller-native"
+    ],
+    "exit_code": 0,
+    "seconds": 13.965951473999997
+  },
+  {
+    "name": "llvm-build",
+    "command": [
+      "bash",
+      "native/llvm_mc/build.sh",
+      "target/caller-llvm/ariadne-llvm-mc"
+    ],
+    "exit_code": 0,
+    "seconds": 2.268548899999999
+  }
+]

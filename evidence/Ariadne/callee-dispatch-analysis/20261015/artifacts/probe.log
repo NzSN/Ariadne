@@ -1,0 +1,47 @@
+{
+  "artifact_sha256": "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+  "attempted": 778,
+  "data_reads": 0,
+  "limits": {
+    "max_elapsed_ms": 120000,
+    "max_entries": 16384,
+    "max_evidence_bytes": 134217728,
+    "max_path_steps": 512,
+    "max_read_bytes": 16777216,
+    "max_rounds": 64,
+    "max_steps": 2097152,
+    "max_targets": 65536,
+    "max_values": 4096
+  },
+  "query_id": "fbc189b051bcfe244f1d4140020537e6753496598a20c6dac9349d6afeb6fdf5",
+  "resolutions": [
+    {
+      "complete": false,
+      "infeasible_paths": 271,
+      "paths": 271,
+      "site": "0x00007ff77443da0e",
+      "targets": [],
+      "unresolved": [
+        "cyclic-incoming-state",
+        "guard-work-limit",
+        "resolution-work-limit"
+      ]
+    },
+    {
+      "complete": false,
+      "infeasible_paths": 0,
+      "paths": 0,
+      "site": "0x00007ff77443e200",
+      "targets": [],
+      "unresolved": [
+        "resolution-work-limit"
+      ]
+    }
+  ],
+  "roots": [
+    "0x00007ff77443d960"
+  ],
+  "snapshot": "minidump-captured-amd64-v1:9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+  "stop": null
+}
+Error: "case4 RED: unresolved callee dispatches remain"

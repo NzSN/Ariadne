@@ -41,6 +41,20 @@ pub(crate) fn guard_assumptions(report: &crate::bap::guard_admission::Report) ->
             decision.residual, decision.receipt_sha256,
         ));
     }
+    if let Some(scope) = crate::bap::guard_admission::normal_flow_scope(report) {
+        assumptions.push(format!(
+            "normal-flow-scope: {scope}; exception-resumption-outside-local-scope"
+        ));
+        for terminal in &report
+            .input
+            .normal_flow
+            .as_ref()
+            .expect("scope requires evidence")
+            .terminals
+        {
+            assumptions.push(format!("terminal {}: exception-exit #{}; exception-resumption-outside-local-scope; exceptional effects remain unsupported", terminal.site, terminal.exception));
+        }
+    }
     assumptions
 }
 pub(crate) fn site_valid(site: &SiteEvidence) -> bool {
@@ -196,15 +210,21 @@ impl Explanation {
                 validate_guarded_explanation(self, report)?;
                 if let Some(composition) = &self.composition {
                     self.schema
-                        == if crate::bap::composition::is_legacy(composition) {
-                            "ariadne.fault-address-explanation/v3"
-                        } else {
-                            "ariadne.fault-address-explanation/v4"
+                        == match crate::bap::composition::generation(composition) {
+                            1 => "ariadne.fault-address-explanation/v3",
+                            2 => "ariadne.fault-address-explanation/v4",
+                            _ => "ariadne.fault-address-explanation/v6",
                         }
                 } else {
-                    self.schema == "ariadne.fault-address-explanation/v2"
+                    self.schema
+                        == if crate::bap::guard_admission::is_legacy(report) {
+                            "ariadne.fault-address-explanation/v2"
+                        } else {
+                            "ariadne.fault-address-explanation/v5"
+                        }
                         && self.target_resolution.is_none()
-                        && self.guard_sources.is_none()
+                        && (self.guard_sources.is_some()
+                            != crate::bap::guard_admission::is_legacy(report))
                         && !crate::bap::composition::contains_profile(
                             &self.identity.semantic_profile,
                         )
@@ -221,6 +241,10 @@ impl Explanation {
                         .identity
                         .semantic_profile
                         .contains(":bap-guard-admission-v1:")
+                    && !self
+                        .identity
+                        .semantic_profile
+                        .contains(":bap-guard-admission-v2:")
             }
         };
         #[cfg(not(feature = "bap"))]
@@ -428,7 +452,7 @@ fn validate_guarded_explanation(
             .instructions
             .get(&va)
             .ok_or_else(|| invalid("guarded explanation candidate summary absent"))?;
-        if guard::recognize_pending(source)?.is_some() {
+        if guard::recognize_pending_for_input(&report.input, source)?.is_some() {
             if let Some(ast) = report.normal_selection(va) {
                 let projection = crate::bap::Backend::guard_normal_projection(
                     ast,
@@ -463,21 +487,26 @@ fn validate_guarded_explanation(
         }
     }
     let mut retained = BTreeMap::new();
-    if let Some(composition) = &explanation.composition {
+    if explanation.composition.is_some() || !guard::is_legacy(report) {
         let full = explanation
             .guard_sources
             .as_ref()
             .ok_or_else(|| invalid("composed explanation full capture sources absent"))?;
-        super::validate_composition_capture(
-            &explanation.identity.semantic_profile,
-            composition,
-            explanation
-                .target_resolution
-                .as_ref()
-                .ok_or_else(|| invalid("composed explanation target proof absent"))?,
-            report,
-            full,
-        )?;
+        if let Some(composition) = &explanation.composition {
+            super::validate_composition_capture(
+                &explanation.identity.semantic_profile,
+                composition,
+                explanation
+                    .target_resolution
+                    .as_ref()
+                    .ok_or_else(|| invalid("composed explanation target proof absent"))?,
+                report,
+                full,
+            )?;
+        } else {
+            super::validate_guard_capture(&explanation.identity.semantic_profile, report, full)?;
+        }
+        super::validate_normal_flow_sources(report, &request, full)?;
         for site in full {
             if !site_valid(site) || retained.insert(site.va, site).is_some() {
                 return Err(invalid(
@@ -498,7 +527,9 @@ fn validate_guarded_explanation(
             }
         }
         let premise = "FrozenCapturedControlData: covered control-data loads use the named captured bytes; target coverage is relative to that snapshot model, not historical memory stability";
-        if !explanation.assumptions.iter().any(|p| p == premise) {
+        if explanation.composition.is_some()
+            && !explanation.assumptions.iter().any(|p| p == premise)
+        {
             return Err(invalid(
                 "composed explanation captured control data premise absent",
             ));
@@ -530,7 +561,7 @@ fn validate_guarded_explanation(
                 "guarded explanation captured bytes or original AST changed",
             ));
         }
-        if guard::recognize_pending(source)?.is_some() {
+        if guard::recognize_pending_for_input(&report.input, source)?.is_some() {
             if let Some(ast) = report.normal_selection(site.va) {
                 let projection = crate::bap::Backend::guard_normal_projection(
                     ast,

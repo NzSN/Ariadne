@@ -1,0 +1,151 @@
+use ariadne::input::{
+    FilePreparedAnalysis, FileSnapshot, FramePreparation, OpenLimits, PrepareLimits,
+};
+use ariadne::investigation::FrameRecoveryLimits;
+use serde_json::{Value, json};
+use std::{
+    collections::BTreeSet,
+    error::Error,
+    path::{Path, PathBuf},
+    time::Instant,
+};
+fn hex(v: u64) -> String {
+    format!("0x{v:016x}")
+}
+fn save(out: &Path, name: &str, value: &Value) -> Result<(), Box<dyn Error>> {
+    std::fs::write(out.join(name), serde_json::to_vec_pretty(value)?)?;
+    Ok(())
+}
+fn compact(p: &FilePreparedAnalysis) -> Value {
+    let r = p.target_resolution().unwrap();
+    json!({"snapshot":r.snapshot,"artifact_sha256":r.artifact_sha256,"limits":r.limits,"stop":r.stop,
+ "data_reads":r.data_reads.len(),"roots":p.materialization.entry_points.iter().copied().map(hex).collect::<Vec<_>>(),
+ "attempted":p.materialization.attempted.len(),"query_id":p.materialization.query_identity,
+ "resolutions":r.resolutions.iter().map(|v|json!({"site":v.site,"complete":v.complete,"targets":v.targets,"unresolved":v.unresolved,
+ "paths":v.paths.len(),"infeasible_paths":v.paths.iter().filter(|p|p.form=="infeasible").count()})).collect::<Vec<_>>()})
+}
+fn main() -> Result<(), Box<dyn Error>> {
+    let args: Vec<_> = std::env::args().skip(1).collect();
+    let out = PathBuf::from(&args[1]);
+    std::fs::create_dir_all(&out)?;
+    let root = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+    let started = Instant::now();
+    let snap = FileSnapshot::open_minidump(
+        &args[0],
+        OpenLimits {
+            max_file_bytes: 2 * 1024 * 1024 * 1024,
+            max_read_bytes: 32 * 1024 * 1024,
+            ..Default::default()
+        },
+    )?;
+    assert_eq!(
+        snap.metadata().artifact_sha256,
+        "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab"
+    );
+    let mut reads = Vec::new();
+    let mut tables = Vec::new();
+    for (name, base, count, width) in [
+        ("ascii-selector-map", 0x7ff77ba91d30u64, 128usize, 1usize),
+        ("da0e-relative32", 0x7ff77ba92a10, 118, 4),
+        ("e200-relative32", 0x7ff77ba92be8, 111, 4),
+    ] {
+        let r = snap.read_prefix(base, count * width)?;
+        let spans=r.spans.iter().map(|s|json!({"address":hex(s.address),"length":s.length,"contributors":s.contributors.iter().map(|c|json!({"stream":c.stream,"entry":c.entry,"file_offset":c.file_offset})).collect::<Vec<_>>()})).collect::<Vec<_>>();
+        reads.push(json!({"name":name,"address":hex(base),"requested":count*width,"captured":r.bytes.len(),"stop":format!("{:?}",r.stop),"bytes_hex":r.bytes.iter().map(|b|format!("{b:02x}")).collect::<String>(),"sha256":ariadne::reports::sha256(&r.bytes),"spans":spans}));
+        if width == 4 && r.bytes.len() == count * width {
+            let rows=r.bytes.chunks_exact(4).enumerate().map(|(i,b)|{let d=i32::from_le_bytes(b.try_into().unwrap());json!({"index":i,"slot":hex(base+4*i as u64),"offset_i32":d,"target":hex(base.wrapping_add(d as i64 as u64))})}).collect::<Vec<_>>();
+            let unique = rows
+                .iter()
+                .map(|r| r["target"].as_str().unwrap().to_owned())
+                .collect::<BTreeSet<_>>();
+            tables.push(json!({"name":name,"base":hex(base),"entry_count":count,"unique_target_count":unique.len(),"unique_targets":unique,"entries":rows}));
+        }
+    }
+    let mut report = json!({"schema":"ariadne.case4-analysis/v1","artifact_sha256":snap.metadata().artifact_sha256,"reads":reads,"tables":tables,"scope":"Direct captured-byte observations and conditional table arithmetic; not complete target certificates or executed paths."});
+    save(&out, "captured-tables.json", &report)?;
+    if args.iter().any(|v| v == "--tables-only") {
+        println!(
+            "{}",
+            json!({"out":out,"reads":report["reads"].as_array().unwrap().iter().map(|r|json!({"name":r["name"],"captured":r["captured"],"requested":r["requested"],"stop":r["stop"]})).collect::<Vec<_>>(),"tables":report["tables"].as_array().unwrap().iter().map(|r|json!({"name":r["name"],"entries":r["entry_count"],"unique_targets":r["unique_target_count"]})).collect::<Vec<_>>() })
+        );
+        return Ok(());
+    }
+    let chain = snap.recover_thread_frames(
+        23668,
+        FrameRecoveryLimits {
+            max_frames: 6,
+            max_runtime_entries: 440520,
+            max_read_bytes: 6334816,
+            ..Default::default()
+        },
+    )?;
+    snap.validate_thread_frames(&chain)?;
+    assert_eq!(chain.frames[0].function_begin, Some(0x7ff77443d960));
+    let decoder = root.join("target/caller-llvm/ariadne-llvm-mc");
+    let config = ariadne::bap::Config::from_env();
+    let options = ariadne::effects::PreparationOptions::default();
+    let setup = FramePreparation {
+        decoder: &decoder,
+        config: &config,
+        options: &options,
+        limits: PrepareLimits {
+            max_starts: 16384,
+            max_candidates: 32768,
+            max_prefix_bytes: 16384 * 15,
+            max_decoder_batches: 16384,
+            batch_size: 128,
+        },
+    };
+    let guard = ariadne::bap::guard_admission::Limits {
+        max_sites: 32768,
+        max_edges: 131072,
+        max_residue_updates: 4194304,
+        max_transfer_evaluations: 67108864,
+        max_closure_rounds: 32768,
+        max_evidence_bytes: 64 * 1024 * 1024,
+        max_elapsed_ms: 120000,
+    };
+    let mut target = ariadne::bap::target_resolution::Limits {
+        max_entries: 16384,
+        max_targets: 65536,
+        max_read_bytes: 16 * 1024 * 1024,
+        max_evidence_bytes: 128 * 1024 * 1024,
+        max_values: 4096,
+        max_steps: 2097152,
+        max_path_steps: 512,
+        max_rounds: 64,
+        max_elapsed_ms: 120000,
+    };
+    if let Some(pos) = args.iter().position(|v| v == "--max-steps") {
+        target.max_steps = args[pos + 1].parse()?;
+    }
+    let p = snap.prepare_frame_with_bap_assuming_windows_call_entry_and_target_resolution(
+        &chain,
+        0,
+        0x7ff77443d960,
+        &setup,
+        guard,
+        target,
+    )?;
+    let result = compact(&p);
+    save(&out, "resolver-summary.json", &result)?;
+    save(
+        &out,
+        "target-report.json",
+        &serde_json::to_value(p.target_resolution().unwrap())?,
+    )?;
+    report["resolver"] = result;
+    report["elapsed_ms"] = json!(started.elapsed().as_millis());
+    save(&out, "result.json", &report)?;
+    println!("{}", serde_json::to_string_pretty(&report["resolver"])?);
+    if args.iter().any(|v| v == "--assert-complete")
+        && p.target_resolution()
+            .unwrap()
+            .resolutions
+            .iter()
+            .any(|r| !r.complete)
+    {
+        return Err("case4 RED: unresolved callee dispatches remain".into());
+    }
+    Ok(())
+}

@@ -10,10 +10,29 @@ pub const MAX_FRAME: usize = 8 * 1024 * 1024;
 pub const DEFAULT_MAX_REQUEST_BYTES: usize = 8 * 1024 * 1024;
 pub const CAPTURED_PROFILE: &str = "captured-fixed-input/v1";
 pub const TARGET_PROFILE: &str = "captured-indirect-targets/v1";
-pub const GUARDED_PROFILE: &str = "captured-guarded-input/v1";
+pub const LEGACY_GUARDED_PROFILE: &str = "captured-guarded-input/v1";
+pub const GUARDED_PROFILE: &str = "captured-guarded-input/v2";
 pub const LEGACY_COMPOSED_PROFILE: &str = "captured-guarded-targets/v1";
-pub const COMPOSED_PROFILE: &str = "captured-guarded-targets/v2";
+pub const LEGACY_V2_COMPOSED_PROFILE: &str = "captured-guarded-targets/v2";
+pub const COMPOSED_PROFILE: &str = "captured-guarded-targets/v3";
 pub const PROFILE: &str = "normalized-fixed-input/v1";
+pub const INPUT_PROFILES: &[&str] = &[
+    PROFILE,
+    CAPTURED_PROFILE,
+    TARGET_PROFILE,
+    LEGACY_GUARDED_PROFILE,
+    LEGACY_COMPOSED_PROFILE,
+    LEGACY_V2_COMPOSED_PROFILE,
+    GUARDED_PROFILE,
+    COMPOSED_PROFILE,
+];
+pub fn proof_profile(profile: &str) -> bool {
+    INPUT_PROFILES[2..].contains(&profile)
+}
+pub fn guarded_profile(profile: &str) -> bool {
+    proof_profile(profile) && profile != TARGET_PROFILE
+}
+
 pub const RECOVERY_OPERATIONS: &[&str] = &[
     "initialize",
     "advance:Visit",
@@ -96,11 +115,7 @@ pub fn profile_query_digest(
     }
     // Resolution receipts contain ordered edge words and repeated booleans.
     // Their strict validator owns set uniqueness; never reorder proof sequences.
-    let canonical = if profile == TARGET_PROFILE
-        || profile == GUARDED_PROFILE
-        || profile == LEGACY_COMPOSED_PROFILE
-        || profile == COMPOSED_PROFILE
-    {
+    let canonical = if proof_profile(profile) {
         input.to_string()
     } else {
         normalize(input)?.to_string()

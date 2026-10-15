@@ -1076,3 +1076,356 @@ fn loop_publication_binds_unattempted_seed_and_nonlocal_call_endpoints() {
     }
     assert_eq!(final_request.entry_points, roots);
 }
+
+fn captured_terminal_fixture(
+    captured_byte: u8,
+    include_receipt: bool,
+) -> Result<FilePreparedAnalysis, PreparationError> {
+    captured_terminal_case_fixture("int3", Some(captured_byte), include_receipt)
+}
+fn captured_terminal_case_fixture(
+    name: &str,
+    override_first_byte: Option<u8>,
+    include_receipt: bool,
+) -> Result<FilePreparedAnalysis, PreparationError> {
+    let captured: Value = serde_json::from_str(include_str!(
+        "../bap/fixtures/caller-coverage/dump-four-shapes.json"
+    ))
+    .unwrap();
+    let raw: Value = serde_json::from_str(include_str!(
+        "../bap/fixtures/caller-coverage/raw-bap-observations.json"
+    ))
+    .unwrap();
+    let case = captured["cases"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|c| c["id"] == name)
+        .unwrap();
+    let lift: crate::bap::ast::Lift = serde_json::from_value(
+        raw["cases"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|c| c["id"] == name)
+            .unwrap()["raw_bap"]
+            .clone(),
+    )
+    .unwrap();
+    let va = parse_target_address(case["site"].as_str().unwrap()).unwrap();
+    let record = case["llvm_and_preparation"]["decoder_record"]
+        .as_str()
+        .unwrap()
+        .replace(" unsupported 1 - -", " ok 1 stop -");
+    let ast = serde_json::to_string(&lift.bil).unwrap();
+    let full_bytes = crate::investigation::frame_unwind::unhex(
+        case["llvm_and_preparation"]["bytes_hex"].as_str().unwrap(),
+    )
+    .unwrap();
+    let receipt = crate::bap::terminal_control::recognize(va, &full_bytes, &ast, &lift, &record)
+        .unwrap()
+        .unwrap();
+    let mut dump = common::Dump::new(false);
+    let mut captured_bytes = full_bytes.clone();
+    if let Some(first) = override_first_byte {
+        captured_bytes[0] = first;
+    }
+    dump.memory64(&[(va, captured_bytes.as_slice())]);
+    let snapshot = FileSnapshot::from_minidump_bytes(dump.finish(), OpenLimits::default()).unwrap();
+    let query = AnalysisQuery {
+        entry_points: [va].into(),
+        slice_seeds: AddressSet::new(),
+    };
+    let limits = PrepareLimits::default();
+    let activation = guard::Activation {
+        thread_id: 17,
+        frame_activation: "terminal-capture-fixture".into(),
+    };
+    let roots = vec![guard::Root {
+        site: format!("0x{va:016x}"),
+        function_entry: false,
+        anchor_sha256: "1".repeat(64),
+    }];
+    let scope = guard_query_scope(
+        &snapshot.metadata.snapshot_id,
+        &query,
+        &limits,
+        &activation,
+        &roots,
+    )
+    .unwrap();
+    let setup = GuardPreparation {
+        limits: guard::Limits::default(),
+        activation,
+        roots,
+        premises: vec![],
+        query_scope_sha256: scope,
+        producer: Some(guard::Producer {
+            helper_sha256: "3".repeat(64),
+            runtime_sha256: "4".repeat(64),
+            decoder_sha256: "5".repeat(64),
+            projection: guard::PRODUCER_PROFILE.into(),
+        }),
+    };
+    snapshot.prepare_materialization_with_terminals(
+        &query,
+        &PreparationOptions::default(),
+        limits,
+        None,
+        Some(&setup),
+        |_, candidates, options, _| {
+            assert_eq!(
+                candidates.keys().copied().collect::<AddressSet>(),
+                [va].into()
+            );
+            let instruction = Instruction {
+                kind: InstructionKind::Stop,
+                complete: include_receipt,
+                uses: options.catalogue.locations(),
+                may_defs: options.catalogue.locations(),
+                must_defs: LocationSet::new(),
+                fall: AddressSet::new(),
+                targets: AddressSet::new(),
+            };
+            let source = guard::CandidateSite {
+                site: format!("0x{va:016x}"),
+                bytes_hex: receipt.bytes_hex.clone(),
+                ast: ast.clone(),
+                control: guard::CandidateControl::from_instruction(&instruction),
+                opaque: true,
+            };
+            let mut evidence = placeholder();
+            evidence.bytes = full_bytes.clone();
+            evidence.length = u8::try_from(full_bytes.len()).unwrap();
+            evidence.source = ByteSource::Captured;
+            evidence.opcode = Some(receipt.reference.opcode.clone());
+            evidence.quality = EffectQuality::Opaque;
+            evidence.control = Some(InstructionKind::Stop);
+            evidence.decoder_control = Some(InstructionKind::Stop);
+            evidence.decoder_record = Some(record.clone());
+            evidence.rule = include_receipt.then(|| "captured-normal-terminal/v1".into());
+            evidence.semantic = Some(SemanticEvidence {
+                backend: "bap-x86-legacy".into(),
+                helper_sha256: "3".repeat(64),
+                runtime_sha256: "4".repeat(64),
+                projection: guard::PRODUCER_PROFILE.into(),
+                status: if include_receipt {
+                    "normal-flow-terminal"
+                } else {
+                    "opaque-unsupported"
+                }
+                .into(),
+                ast_sha256: Some(crate::reports::sha256(ast.as_bytes())),
+                fallback: None,
+                gaps: if include_receipt {
+                    vec![
+                        "exception-exit".into(),
+                        "exception-resumption-outside-local-scope".into(),
+                        "unsupported-exception-effects".into(),
+                    ]
+                } else {
+                    vec!["unmodeled BIL control/special/loop semantics".into()]
+                },
+                memory_accesses: vec![],
+            });
+            let batch = PreparedBatch {
+                sites: [(
+                    va,
+                    PreparedSite {
+                        instruction,
+                        evidence,
+                        gaps: vec![],
+                        decodable: include_receipt,
+                        complete_capture: true,
+                    },
+                )]
+                .into(),
+                identity: PreparationIdentity {
+                    target: "x86_64-pc-windows-msvc".into(),
+                    decoder: "independent terminal fixture".into(),
+                    protocol: 1,
+                    ruleset: guard::PRODUCER_PROFILE.into(),
+                    catalogue: "gpr-bytes-status-df-memory-other-v1".into(),
+                },
+            };
+            Ok((
+                batch,
+                BTreeMap::new(),
+                [(va, source)].into(),
+                if include_receipt {
+                    [(va, receipt.clone())].into()
+                } else {
+                    BTreeMap::new()
+                },
+            ))
+        },
+    )
+}
+#[test]
+fn captured_terminals_close_only_checked_normal_flow_and_keep_opaque_effects() {
+    let prepared = captured_terminal_fixture(0xcc, true).unwrap();
+    prepared.validate_guard_admission().unwrap();
+    let guard = prepared.guard_admission().unwrap();
+    assert!(guard.input.barriers.is_empty());
+    assert_eq!(guard.input.normal_flow.as_ref().unwrap().terminals.len(), 1);
+    assert_eq!(
+        guard::normal_flow_scope(guard),
+        Some("local-normal-completion/v1")
+    );
+    let va = prepared
+        .prepared
+        .request
+        .entry_points
+        .iter()
+        .copied()
+        .next()
+        .unwrap();
+    let instruction = &prepared.prepared.request.instructions[&va];
+    assert_eq!(instruction.kind, InstructionKind::Stop);
+    assert!(
+        instruction.fall.is_empty()
+            && instruction.targets.is_empty()
+            && instruction.must_defs.is_empty()
+    );
+    assert_eq!(instruction.uses, prepared.prepared.request.locations);
+    assert_eq!(instruction.may_defs, prepared.prepared.request.locations);
+    let analyzed = crate::analyze(prepared.prepared.request.clone()).unwrap();
+    assert!(analyzed.state.decoded.contains(&va));
+    assert!(analyzed.state.obligations.is_empty());
+    assert!(analyzed.state.edges.is_empty());
+    let mut forged = prepared.clone();
+    forged
+        .prepared
+        .request
+        .instructions
+        .get_mut(&va)
+        .unwrap()
+        .may_defs
+        .clear();
+    assert!(forged.validate_guard_admission().is_err());
+    let missing = captured_terminal_fixture(0xcc, false).unwrap();
+    assert_eq!(
+        missing.guard_admission().unwrap().input.barriers,
+        vec![format!("0x{va:016x}")]
+    );
+    assert_eq!(
+        missing.guard_admission().unwrap().stop.as_deref(),
+        Some("candidate-coverage-incomplete")
+    );
+    assert!(
+        captured_terminal_fixture(0x90, true).is_err(),
+        "terminal evidence cannot replace captured bytes"
+    );
+}
+#[test]
+fn terminal_receipt_changes_advance_epoch_even_without_control_changes() {
+    let prepared = captured_terminal_fixture(0xcc, true).unwrap();
+    let receipt = prepared
+        .guard_admission()
+        .unwrap()
+        .input
+        .normal_flow
+        .as_ref()
+        .unwrap()
+        .terminals[0]
+        .clone();
+    let va = parse_target_address(&receipt.site).unwrap();
+    let mut terminals: BTreeMap<_, _> = [(va, receipt)].into();
+    let mut previous = None;
+    let mut epoch = 0;
+    advance_candidate_epoch(
+        candidate_fingerprint_with_terminals(&BTreeMap::new(), &BTreeMap::new(), None, &terminals)
+            .unwrap(),
+        &mut previous,
+        &mut epoch,
+    )
+    .unwrap();
+    terminals
+        .get_mut(&va)
+        .unwrap()
+        .resumption
+        .push_str("changed");
+    advance_candidate_epoch(
+        candidate_fingerprint_with_terminals(&BTreeMap::new(), &BTreeMap::new(), None, &terminals)
+            .unwrap(),
+        &mut previous,
+        &mut epoch,
+    )
+    .unwrap();
+    assert_eq!(epoch, 2);
+}
+
+#[test]
+fn terminal_guard_only_reports_preserve_sources_scope_and_native_input() {
+    for name in ["int3", "ud2", "ud1"] {
+        let prepared = captured_terminal_case_fixture(name, None, true).unwrap();
+        let completed = crate::CompletedAnalysis::from_analyzer(
+            crate::Analyzer::new(prepared.prepared.request.clone()).unwrap(),
+        );
+        let bound = crate::input::investigation::bind_investigation(&prepared, &completed).unwrap();
+        let site = prepared
+            .prepared
+            .request
+            .entry_points
+            .iter()
+            .copied()
+            .next()
+            .unwrap();
+        let explanation = crate::investigation::explain_fault_address(
+            &bound,
+            crate::investigation::FaultAddressQuestion {
+                site,
+                memory_access: 0,
+            },
+            Default::default(),
+        )
+        .unwrap();
+        assert_eq!(explanation.schema, "ariadne.fault-address-explanation/v5");
+        assert_eq!(explanation.guard_sources.as_ref().unwrap().len(), 1);
+        let encoded = crate::reports::encode_explanation(&explanation).unwrap();
+        assert_eq!(
+            crate::reports::decode_explanation(&serde_json::to_vec(&encoded).unwrap()).unwrap(),
+            explanation
+        );
+        let mut stripped = encoded.clone();
+        stripped["guard_admission"]["input"]
+            .as_object_mut()
+            .unwrap()
+            .remove("normal_flow");
+        assert!(
+            crate::reports::decode_explanation(&serde_json::to_vec(&stripped).unwrap()).is_err()
+        );
+        let saved = crate::input::report::render_bound(
+            &prepared,
+            &completed,
+            crate::input::report::ReportFormat::Json,
+            false,
+        )
+        .unwrap();
+        let value: Value = serde_json::from_str(&saved).unwrap();
+        assert_eq!(value["schema"], "ariadne-minidump-report-v6");
+        assert!(value["capture_sources"].is_array());
+        assert!(value["normalized"].is_object());
+        for format in [
+            crate::input::report::ReportFormat::Text,
+            crate::input::report::ReportFormat::Dot,
+        ] {
+            let saved =
+                crate::input::report::render_bound(&prepared, &completed, format, false).unwrap();
+            assert!(saved.contains("exception-resumption-outside-local-scope"));
+            assert!(saved.contains("capture_sources"));
+        }
+        let wire =
+            crate::bap::core_adapter::NativeAnalyzer::capture_wire_for_test(&prepared).unwrap();
+        assert_eq!(wire["guard_admission"]["profile"], guard::PROFILE);
+        if let Some(directory) = std::env::var_os("ARIADNE_CALLER_WIRE_DIR") {
+            let directory = std::path::PathBuf::from(directory);
+            std::fs::create_dir_all(&directory).unwrap();
+            std::fs::write(
+                directory.join(format!("{name}-guarded-wire.json")),
+                serde_json::to_vec_pretty(&wire).unwrap(),
+            )
+            .unwrap();
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "native-controls",
+  "command": [
+    "python3",
+    "tests/bap/caller_coverage_native_controls.py",
+    "--native-dir",
+    "target/caller-native",
+    "--output",
+    "/caller-work/evidence/native-feedback-20261015T072430/native-controls",
+    "--receipt-dir",
+    "/caller-work/evidence/native-feedback-20261015T072430/caller-receipts",
+    "--wire-dir",
+    "/caller-work/evidence/native-feedback-20261015T072430/caller-wires",
+    "--mutations"
+  ],
+  "exit_code": 1,
+  "seconds": 0.04697819900002287
+}

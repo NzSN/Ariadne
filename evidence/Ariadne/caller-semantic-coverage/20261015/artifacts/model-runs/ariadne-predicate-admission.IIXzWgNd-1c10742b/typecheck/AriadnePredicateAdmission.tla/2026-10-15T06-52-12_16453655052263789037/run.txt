@@ -1,0 +1,1 @@
+ typecheck --out-dir=/caller-work/tmp/ariadne-predicate-admission.IIXzWgNd/typecheck AriadnePredicateAdmission.tla

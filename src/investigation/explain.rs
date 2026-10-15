@@ -310,22 +310,37 @@ pub fn explain_fault_address(
             schema: if combined {
                 #[cfg(feature = "bap")]
                 {
-                    if bound
+                    match bound
                         .composition
                         .as_ref()
-                        .is_some_and(crate::bap::composition::is_legacy)
+                        .map(crate::bap::composition::generation)
                     {
-                        "ariadne.fault-address-explanation/v3"
-                    } else {
-                        "ariadne.fault-address-explanation/v4"
+                        Some(1) => "ariadne.fault-address-explanation/v3",
+                        Some(2) => "ariadne.fault-address-explanation/v4",
+                        _ => "ariadne.fault-address-explanation/v6",
                     }
                 }
                 #[cfg(not(feature = "bap"))]
                 {
-                    "ariadne.fault-address-explanation/v4"
+                    "ariadne.fault-address-explanation/v6"
                 }
             } else if guarded {
-                "ariadne.fault-address-explanation/v2"
+                #[cfg(feature = "bap")]
+                {
+                    if bound
+                        .guard_admission
+                        .as_ref()
+                        .is_some_and(crate::bap::guard_admission::is_legacy)
+                    {
+                        "ariadne.fault-address-explanation/v2"
+                    } else {
+                        "ariadne.fault-address-explanation/v5"
+                    }
+                }
+                #[cfg(not(feature = "bap"))]
+                {
+                    "ariadne.fault-address-explanation/v5"
+                }
             } else {
                 "ariadne.fault-address-explanation/v1"
             }
@@ -339,7 +354,12 @@ pub fn explain_fault_address(
                 None
             },
             #[cfg(feature = "bap")]
-            guard_sources: if combined {
+            guard_sources: if combined
+                || bound
+                    .guard_admission
+                    .as_ref()
+                    .is_some_and(|g| !crate::bap::guard_admission::is_legacy(g))
+            {
                 Some(bound.context.sites.clone())
             } else {
                 None

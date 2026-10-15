@@ -1,0 +1,12 @@
+{
+  "name": "format",
+  "command": [
+    "cargo",
+    "fmt",
+    "--all",
+    "--",
+    "--check"
+  ],
+  "exit_code": 0,
+  "seconds": 0.9326501929999722
+}

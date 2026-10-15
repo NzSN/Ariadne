@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/home/nzsn/Repos/Ariadne-caller-coverage-20261015/tools/check_rust_layout.py", line 40, in <module>
+    main()
+  File "/home/nzsn/Repos/Ariadne-caller-coverage-20261015/tools/check_rust_layout.py", line 26, in main
+    assert Path(metadata["target_directory"]) == ROOT / "target"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

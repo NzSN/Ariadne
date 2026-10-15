@@ -1,0 +1,108 @@
+#![recursion_limit = "256"]
+use ariadne::bap::{Backend, Config};
+use ariadne::effects::PreparationOptions;
+use ariadne::input::{AnalysisQuery, FileSnapshot, OpenLimits, PrepareLimits};
+use ariadne::llvm_mc::{DecoderTarget, PreparedSite};
+use serde_json::{json, Value};
+use std::collections::{BTreeMap, BTreeSet};
+use std::error::Error;
+use std::path::{Path, PathBuf};
+
+fn va(value: u64) -> String { format!("0x{value:016x}") }
+fn address(value: &str) -> Result<u64, Box<dyn Error>> {
+    Ok(u64::from_str_radix(value.strip_prefix("0x").ok_or("address prefix")?, 16)?)
+}
+fn bytes(value: &str) -> Result<Vec<u8>, Box<dyn Error>> {
+    if value.len() % 2 != 0 { return Err("odd byte encoding".into()); }
+    (0..value.len()).step_by(2).map(|at|Ok(u8::from_str_radix(&value[at..at+2],16)?)).collect()
+}
+fn observation(site: &PreparedSite) -> Value {
+    let evidence = &site.evidence;
+    json!({"decodable":site.decodable,"complete_capture":site.complete_capture,
+      "kind":format!("{:?}",site.instruction.kind),"fall":site.instruction.fall.iter().map(|v|va(*v)).collect::<Vec<_>>(),
+      "targets":site.instruction.targets.iter().map(|v|va(*v)).collect::<Vec<_>>(),"targets_complete":site.instruction.complete,
+      "uses":site.instruction.uses,"may_defs":site.instruction.may_defs,"must_defs":site.instruction.must_defs,
+      "bytes_hex":evidence.bytes.iter().map(|v|format!("{v:02x}")).collect::<String>(),
+      "length":evidence.length,"opcode":evidence.opcode,"quality":format!("{:?}",evidence.quality),
+      "decoder_record":evidence.decoder_record,"decoder_control":evidence.decoder_control.map(|v|format!("{v:?}")),
+      "rule":evidence.rule,"gaps":site.gaps.iter().map(|g|format!("{:?}",g.reason)).collect::<Vec<_>>(),
+      "semantic":evidence.semantic.as_ref().map(|s|json!({"backend":s.backend,"status":s.status,
+        "projection":s.projection,"ast_sha256":s.ast_sha256,"helper_sha256":s.helper_sha256,
+        "runtime_sha256":s.runtime_sha256,"gaps":s.gaps,"memory_accesses":s.memory_accesses.iter().map(|access|json!({
+          "index":access.index,"role":format!("{:?}",access.role),"access_width":access.access_width,
+          "address_width":access.address_width,"address_inputs":access.address_inputs,"attribution":access.attribution,
+          "gaps":access.gaps,"expression":access.expression.as_ref().map(|expression|json!({
+            "width":expression.width,"constant":va(expression.constant),"terms":expression.terms.iter().map(|term|
+              json!({"bank":term.bank,"coefficient":va(term.coefficient)})).collect::<Vec<_>>()
+          }))})).collect::<Vec<_>>()}))})
+}
+fn write(out: &Path, name: &str, value: &Value) -> Result<(), Box<dyn Error>> {
+    std::fs::write(out.join(name),serde_json::to_vec_pretty(value)?)?;Ok(())
+}
+fn main() -> Result<(), Box<dyn Error>> {
+    let args: Vec<_> = std::env::args().skip(1).collect();
+    if args.len()<3 { return Err("usage: barrier-probe DUMP FOUR-SHAPES-JSON OUT [--assert-closed]".into()); }
+    let root=PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+    let fixture_bytes=std::fs::read(&args[1])?;
+    let fixture:Value=serde_json::from_slice(&fixture_bytes)?;
+    let out=PathBuf::from(&args[2]);std::fs::create_dir_all(&out)?;
+    let snapshot=FileSnapshot::open_minidump(&args[0],OpenLimits{
+      max_file_bytes:2*1024*1024*1024,max_read_bytes:1024*1024,..Default::default()})?;
+    if fixture["artifact_sha256"]!=snapshot.metadata().artifact_sha256 { return Err("original dump differs".into()); }
+    let snapshot_id=snapshot.metadata().snapshot_id.clone();
+    let mut candidates=BTreeMap::new();
+    let mut captures=Vec::new();
+    for case in fixture["cases"].as_array().ok_or("cases absent")? {
+        let site=address(case["site"].as_str().ok_or("site absent")?)?;
+        let expected=bytes(case["captured_prefix"]["bytes_hex"].as_str().ok_or("prefix absent")?)?;
+        let captured=snapshot.read_prefix(site,15)?;
+        if captured.bytes!=expected { return Err(format!("fresh capture differs: {}",va(site)).into()); }
+        captures.push(json!({"site":va(site),"bytes_hex":expected.iter().map(|v|format!("{v:02x}")).collect::<String>(),
+          "stop":format!("{:?}",captured.stop),"spans":captured.spans.iter().map(|span|json!({
+            "va":va(span.address),"length":span.length,"contributors":span.contributors.iter().map(|c|json!({
+              "stream":c.stream,"entry":c.entry,"file_offset":c.file_offset})).collect::<Vec<_>>()
+          })).collect::<Vec<_>>() }));
+        candidates.insert(site,Some(expected));
+    }
+    if candidates.len()!=4 { return Err("expected four distinct shapes".into()); }
+    let decoder=root.join("target/caller-llvm/ariadne-llvm-mc");
+    let config=Config::from_env();let options=PreparationOptions::default();
+    let reference=ariadne::llvm_mc::decode_captured_batch(&snapshot_id,&candidates,&decoder,&options,DecoderTarget::WindowsAmd64)?;
+    let mut backend=Backend::new(config.clone(),&decoder)?;
+    let plain=backend.prepare(&snapshot_id,&candidates,&options,DecoderTarget::WindowsAmd64)?;
+    backend.finish()?;
+    let query=AnalysisQuery{entry_points:candidates.keys().copied().collect(),slice_seeds:BTreeSet::new()};
+    let guarded=snapshot.prepare_with_bap_guard_admission(&query,&decoder,&config,&options,
+      PrepareLimits{max_starts:256,max_candidates:512,max_prefix_bytes:256*15,max_decoder_batches:256,batch_size:32},
+      ariadne::bap::guard_admission::Limits::default())?;
+    let guard=guarded.guard_admission().ok_or("guard report absent")?;
+    write(&out,"guard-report.json",&serde_json::to_value(guard)?)?;
+    let selected:BTreeSet<_>=candidates.keys().map(|v|va(*v)).collect();
+    let unresolved:Vec<_>=guard.input.barriers.iter().filter(|site|selected.contains(*site)).cloned().collect();
+    let cases:Vec<_>=candidates.keys().map(|site|{
+      let name=va(*site);
+      json!({"site":name,"reference":observation(&reference.sites[site]),
+        "plain_bap_preparation":observation(&plain.sites[site]),
+        "guarded_preparation":observation(&ariadne::llvm_mc::PreparedSite{
+          instruction:guarded.prepared.request.instructions[site].clone(),evidence:guarded.prepared.instructions[site].clone(),
+          gaps:guarded.prepared.gaps.iter().filter(|g|g.address==*site).cloned().collect(),
+          decodable:guarded.prepared.request.decodable.contains(site),complete_capture:true}),
+        "guard_source":guard.input.sites.iter().find(|source|source.site==name),
+        "guard_decision":guard.guards.iter().find(|decision|decision.site==name),
+        "candidate_barrier":guard.input.barriers.contains(&name)})
+    }).collect();
+    let result=json!({"schema":"ariadne.caller-barrier-feedback/v1","snapshot":snapshot_id,
+      "artifact_sha256":snapshot.metadata().artifact_sha256,"fixture_sha256":ariadne::reports::sha256(&fixture_bytes),
+      "current_composition_model":ariadne::bap::composition::model_identity(),
+      "current_composition_checker":ariadne::bap::composition::checker_identity(),
+      "captures":captures,"cases":cases,"selected_barriers":unresolved,
+      "selected_barriers_closed":unresolved.is_empty(),"guard_stop":guard.stop,
+      "other_discovered_barriers":guard.input.barriers.iter().filter(|site|!selected.contains(*site)).collect::<Vec<_>>(),
+      "scope":"Four selected instruction shapes through current public BAP preparation. Guarded roots start with unknown RSP; no aligned normal continuation or full-caller closure is assumed."});
+    write(&out,"feedback.json",&result)?;
+    println!("{}",serde_json::to_string_pretty(&result)?);
+    if args.iter().any(|arg|arg=="--assert-closed") && !unresolved.is_empty() {
+      return Err(format!("RED: {} selected caller guard barriers remain",unresolved.len()).into());
+    }
+    Ok(())
+}

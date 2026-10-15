@@ -10,6 +10,7 @@ pub mod guard_admission;
 mod prepare;
 mod projection;
 mod registers;
+pub(crate) mod terminal_control;
 pub(crate) const PROJECTION: &str = "bap-bit-provenance-v6";
 pub(crate) const OPAQUE_ORDINARY_RULE: &str = "bap-opaque-ordinary-v4";
 pub(crate) fn known_projection(profile: &str) -> bool {
@@ -19,6 +20,7 @@ pub(crate) fn known_projection(profile: &str) -> bool {
             | "bap-bit-provenance-v4"
             | "bap-bit-provenance-v5"
             | PROJECTION
+            | guard_admission::LEGACY_PRODUCER_PROFILE
             | guard_admission::PRODUCER_PROFILE
     )
 }

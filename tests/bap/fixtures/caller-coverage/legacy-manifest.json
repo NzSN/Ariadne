@@ -1,0 +1,39 @@
+{
+  "schema": "ariadne.caller-coverage.legacy-contracts/v1",
+  "base_commit": "3176d44850626707a490da75f3732abd8b450afd",
+  "files": {
+    "guard_admission.rs.txt": {
+      "source": "src/bap/guard_admission.rs",
+      "sha256": "076b8a3fb6f776e53ea99336854c1a793b8658874c153f4ddd2e32c54128ce7d"
+    },
+    "guard.ml.txt": {
+      "source": "native/bap-core/guard.ml",
+      "sha256": "258f0662ee5211ef04e7b6b40cfe14a7464d3375494faa8abf5a7e871b0812df"
+    },
+    "AriadnePredicateAdmission.tla.txt": {
+      "source": "Specs/AriadnePredicateAdmission.tla",
+      "sha256": "10e870b21691946cd7985ff7d33819a8a58e4fea202ae6d2e771214b997f5bc9"
+    },
+    "composition.rs.txt": {
+      "source": "src/bap/composition.rs",
+      "sha256": "cbc60160f105619472eaf28d845e4dcbd7894e67032e33e9d14ac6d906f3ec00"
+    },
+    "composition.ml.txt": {
+      "source": "native/bap-core/composition.ml",
+      "sha256": "34d7290b7957d464b890324b2b914932b0cc44f8b02dbb6e5ff321750004fc49"
+    },
+    "AriadneGuardedTargetResolution.tla.txt": {
+      "source": "Specs/AriadneGuardedTargetResolution.tla",
+      "sha256": "e142a6fd22d78044c444c26211b7c659a56fedb5f9e555aa20e3aa1be23e8b10"
+    }
+  },
+  "guard_checker_sha256": "076b8a3fb6f776e53ea99336854c1a793b8658874c153f4ddd2e32c54128ce7d",
+  "guard_model_sha256": "10e870b21691946cd7985ff7d33819a8a58e4fea202ae6d2e771214b997f5bc9",
+  "composition_v2_model_sha256": "605fb57d42e755b7fee75511f66e6ad864a16c303bbf5ffb5bad8855c7d05675",
+  "composition_v2_checker_sha256": "dd277b844376234cce199ecae9e7bc9eee04dfa69390d2320c2349b4f11b6cb4",
+  "loop_engine_sha256": "afc1b4b991a2bdf402dc8036eb0cfba0d0232505ea5dab31a6e2e2d267a15d95",
+  "target_sources": {
+    "src/bap/target_resolution.rs": "e7418679c31ea0e0bed475e1f5d25ca9cdb3190962175dc6fb5e253ff17d5dcc",
+    "src/bap/target_resolution/loop_closure.rs": "16bf1828947fb290f43c9ca6bad09768bcba24b1180b57c4dd14073bed182b1f"
+  }
+}

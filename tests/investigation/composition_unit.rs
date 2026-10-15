@@ -50,6 +50,7 @@ fn fixture() -> (CapturedFrameChain, BoundInvestigation) {
     };
     let scope = sha(b"independent-composition-codec-scope");
     let input = guard::GuardInput {
+        normal_flow: Some(guard::NormalFlowEvidence::empty()),
         snapshot: chain.snapshot_id.clone(),
         artifact_sha256: chain.artifact_sha256.clone(),
         query_scope_sha256: scope.clone(),
@@ -172,7 +173,7 @@ fn paired_explanation_roundtrip_preserves_sources_premises_and_unknown_endpoint(
         ExplainLimits::default(),
     )
     .unwrap();
-    assert_eq!(explanation.schema, "ariadne.fault-address-explanation/v4");
+    assert_eq!(explanation.schema, "ariadne.fault-address-explanation/v6");
     assert!(explanation.composition.is_some());
     assert!(explanation.target_resolution.is_some());
     assert!(explanation.guard_admission.is_some());
@@ -526,6 +527,42 @@ fn reached_listing(normal: bool) -> FramePathListing {
         FramePathLimits::default(),
     )
     .unwrap()
+}
+
+#[test]
+fn stripped_frame_proofs_cannot_relist_as_plain_reports_with_any_known_profile() {
+    let listing = reached_listing(true);
+    listing.validate().unwrap();
+    assert_eq!(listing.schema, COMPOSED_FRAME_PATH_SCHEMA);
+    let encoded = crate::reports::encode_frame_paths(&listing).unwrap();
+    assert!(encoded["input"]["graphs"][0]["guard_admission"].is_object());
+    let original_profile = encoded["input"]["graphs"][0]["identity"]["semantic_profile"]
+        .as_str()
+        .unwrap();
+    for profile in [
+        original_profile,
+        guard::LEGACY_PROFILE,
+        guard::PROFILE,
+        composition::LEGACY_PROFILE,
+        composition::LEGACY_V2_PROFILE,
+        composition::PROFILE,
+    ] {
+        let mut stripped = encoded.clone();
+        let graph = &mut stripped["input"]["graphs"][0];
+        graph.as_object_mut().unwrap().remove("guard_admission");
+        graph["identity"]["semantic_profile"] = serde_json::json!(profile);
+        stripped["schema"] = serde_json::json!(FRAME_PATH_SCHEMA);
+        let stripped: FramePathListing = serde_json::from_value(stripped).unwrap();
+        // Relisting recomputes the scope, paths, coverage and outer version;
+        // rejection must come from missing proof admission, not a stale seal.
+        let error = stripped.relist_for_test().unwrap_err();
+        assert!(
+            error
+                .to_string()
+                .contains("guarded frame graph has no proof sources"),
+            "profile {profile}: {error}"
+        );
+    }
 }
 
 #[test]

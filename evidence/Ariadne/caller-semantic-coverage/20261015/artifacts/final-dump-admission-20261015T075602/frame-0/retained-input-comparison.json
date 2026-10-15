@@ -1,0 +1,33 @@
+{
+  "all_equal": true,
+  "components": [
+    {
+      "component": "normalized",
+      "current_sha256": "9de5f240615225de915605c7af0b76c31dbc67ba9d82061522b77c2328c22a4f",
+      "equal": true,
+      "retained_sha256": "9de5f240615225de915605c7af0b76c31dbc67ba9d82061522b77c2328c22a4f"
+    },
+    {
+      "component": "guard-report",
+      "current_sha256": "589e33a2a9ef8abf960b6dd393463486cb04124d38f9f40e0ef46028bdce2375",
+      "equal": true,
+      "retained_sha256": "589e33a2a9ef8abf960b6dd393463486cb04124d38f9f40e0ef46028bdce2375"
+    },
+    {
+      "component": "target-report",
+      "current_sha256": "e95aab82023e8c6886a1c2a9eb453f605c206160a248f953cd86d16d018d3733",
+      "equal": true,
+      "retained_sha256": "e95aab82023e8c6886a1c2a9eb453f605c206160a248f953cd86d16d018d3733"
+    },
+    {
+      "component": "composition-report",
+      "current_sha256": "436a7fe2b343ddd6c2a6b3cfb6cc7ed990933a05ad0581f50a976c9956b2cbfc",
+      "equal": true,
+      "retained_sha256": "436a7fe2b343ddd6c2a6b3cfb6cc7ed990933a05ad0581f50a976c9956b2cbfc"
+    }
+  ],
+  "frame": 0,
+  "hash_codec": "SHA256 of serde_json Value compact serialization; exact JSON value equality independently required",
+  "retained_run": "/caller-work/evidence/dump-20261015T073143",
+  "schema": "ariadne.final-helper-retained-input-comparison/v1"
+}

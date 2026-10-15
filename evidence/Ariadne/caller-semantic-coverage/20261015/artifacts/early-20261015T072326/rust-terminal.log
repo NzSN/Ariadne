@@ -1,0 +1,13 @@
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-caller-coverage-20261015)
+    Finished `test` profile [unoptimized] target(s) in 11.21s
+     Running unittests src/lib.rs (target/caller-build/debug/deps/ariadne-ee964763ae0b7713)
+
+running 5 tests
+test bap::terminal_control::tests::ud1_parser_checks_every_modrm_sib_displacement_boundary_without_other_prefixes ... ok
+test bap::terminal_control::tests::normal_flow_wire_rejects_unknown_tags_and_keeps_the_scope_visible ... ok
+test bap::terminal_control::tests::terminal_replay_rejects_unreviewed_bytes_bil_annotations_and_normal_successors ... ok
+test bap::terminal_control::tests::exact_captured_terminal_shapes_replay_and_preserve_the_ud1_extent_disagreement ... ok
+test bap::terminal_control::tests::explicit_terminal_scope_closes_only_normal_coverage_and_binds_source_epoch_and_effects ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 150 filtered out; finished in 0.09s
+

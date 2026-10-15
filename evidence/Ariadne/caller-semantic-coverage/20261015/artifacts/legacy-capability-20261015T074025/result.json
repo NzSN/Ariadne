@@ -1,0 +1,34 @@
+{
+  "controls": [
+    {
+      "error": "native helper lacks the requested input profile; rebuild the helper",
+      "passed": true,
+      "rejection_stage": "manifest capability check before helper process launch",
+      "requested_profile": "captured-guarded-input/v2"
+    },
+    {
+      "error": "native helper lacks the requested input profile; rebuild the helper",
+      "passed": true,
+      "rejection_stage": "manifest capability check before helper process launch",
+      "requested_profile": "captured-guarded-targets/v3"
+    }
+  ],
+  "current_composition_engine_sha256": "a66b79f4a78330eda3dad00b64802498a3ab289404007c1fd62bb521a5a380ee",
+  "current_composition_model_sha256": "e85194724d0aff4ec992bb18dc855f85288a586a73532ae3ae78de327b62ecb9",
+  "current_guard_engine_sha256": "252ef410b03bf3ec7b97efd5bcfbbd42591d66aabdb7680aa118e8e736cb9184",
+  "current_guard_model_sha256": "94c94993a1c2fd9fc6a9ab94f4f782d355ae91b66f4dc010e2d8151cf0498acd",
+  "helper_executable": false,
+  "passed": true,
+  "retained_helper_sha256": "7f8030820b486dc5a7ec055433d5a7540496c3aaa85fb04c3d91cbdc9e6ec1dd",
+  "retained_manifest_sha256": "204ffe8a8f7585a8f873886b48e64081b6f69a707604e47d758b664c6c872712",
+  "retained_profiles": [
+    "normalized-fixed-input/v1",
+    "captured-fixed-input/v1",
+    "captured-indirect-targets/v1",
+    "captured-guarded-input/v1",
+    "captured-guarded-targets/v1",
+    "captured-guarded-targets/v2"
+  ],
+  "schema": "ariadne.caller-legacy-capability-control/v1",
+  "scope": "Current public CoreSession API rejects both new modes using a genuine manifest-bound loop-generation helper before launch; no historical helper runtime or instruction semantics is exercised."
+}

@@ -1,0 +1,14 @@
+{
+  "result": "pass",
+  "scope": "Independent read-only source/artifact review",
+  "checks": [
+    "all three captured payload hashes and lengths",
+    "229 signed relative-offset calculations",
+    "118 slots / 22 raw first targets / 21 mapped targets",
+    "111 slots / 13 second targets",
+    "34 union targets / 31 unattempted starts",
+    "short entry corridor, LIFO predecessor ordering and shared work counter",
+    "loop witness prerequisite and RAX versus RBX index restriction"
+  ],
+  "findings": []
+}

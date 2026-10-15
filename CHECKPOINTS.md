@@ -17,11 +17,21 @@
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
+## 2026-10-15 — Caller normal-flow coverage; completed caller analysis still open
+
+The [caller coverage correction](docs/Ariadne/caller-semantic-coverage-design.md) implements checked local normal-completion terminals and exact MOVAPS-load guards. The [S0–S6 ledger](Plans/caller-semantic-coverage.md) remains active: S0–S5 pass their source-bound scope, while S6 still lacks completed caller native/Rust state equality. The [qualification record](evidence/Ariadne/caller-semantic-coverage/20261015/README.md) separates the final helper, earlier full run and passing admission refresh.
+
+Final S5 source archive `c35459a19b1e2f5f139730bea6c119cfceff603207254b52d42effac68654a5f` (937 files), helper `d39df81c64c1fd832b88dd48652572234422d8d8840d277cbb83fb88e783e725`, passes 242 default/46 core-only tests, format/Clippy/release, nine capture tests, 88 direct/24 protocol controls, nine caller behavioral mutants, two frozen legacy-capture controls/one dependency mutant, native/frame/composition/tool gates, 330 generated observations, three opaque controls and retained report replay. The unchanged model/oracle sources retain their 58 predicate-case and 71-case/12,752-extent/8,944-truncation results. Review corrections retain completeness-bit parity, required legacy frame proofs and the frozen native capture dependency.
+
+Dump probe `073143` on its separately bound 935-file source archive removes all 30 original caller barriers without replacement, validates 29 terminal receipts, preserves roots/premises and all nine table/64-target/51-start facts, and retains complete DA09/DADD certificates. Initial MOVAPS is aligned under recorded normal-flow/entry premises; the later load remains unknown. Caller recovery reaches 9,589 decoded sites/11,321 edges but Rust hits 1,000,000 actions in dataflow and native completion hits its action budget. Callee completes with full parity; two indirect barriers remain. NP10 paths are unavailable with `missing-frame-query`, not proven absent.
+
+Final-helper admission refresh `075602` passes exact normalized-request and guard/target/composition proof-report equality for both frames, caller structural recovery/native admission and callee full parity. It records that caller completion was not attempted and full caller parity is not claimed; the original full-run action limits remain unmet. Normal-flow terminal coverage excludes handler/debugger resumption from local scope rather than assuming it impossible. Heavy validation runs remotely; no full S6 acceptance or plan archival is recorded here.
+
 ## 2026-10-15 — Inductive loop-target closure
 
 The [loop-aware extension](docs/Ariadne/guarded-target-resolution-design.md#proposed-stable-base-invariant-follow-up) is implemented and [qualified remotely](evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) within its coverage-only captured-table scope. Source-bound root/native/model checks, eight behavioral mutants, actual legacy semantic replay and 330 generated observations pass. An original-dump publication failure exposed omitted referenced Stop endpoints; the corrected coordinator binds the complete represented graph before producing proofs.
 
-Fresh probe `051409` completes DA09 and DADD with four targets each and independently accepted induction receipts. All nine original table sites are complete, all 64 destinations and 51 formerly missing starts reconcile, and native/Rust full requests and states match for both frames. The parent ninth C5 clause is closed. Caller guard coverage still has 30 barriers, MOVAPS remains unknown and NP10 listing remains unavailable because its active call anchor is missing or ambiguous. Full frame-path and universal-refinement gates remain separate.
+Fresh probe `051409` completes DA09 and DADD with four targets each and independently accepted induction receipts. All nine original table sites are complete, all 64 destinations and 51 formerly missing starts reconcile, and native/Rust full requests and states match for both frames. The parent ninth C5 clause is closed. At that checkpoint caller coverage still had 30 barriers, MOVAPS was unknown and NP10 listing was unavailable because its active call anchor was missing or ambiguous. The later caller-coverage checkpoint above records the subsequent change and its new completion limit. Full frame-path and universal-refinement gates remain separate.
 
 ## 2026-10-14 — Guarded captured-target composition
 

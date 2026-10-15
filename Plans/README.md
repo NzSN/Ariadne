@@ -29,6 +29,7 @@ universal-proof clauses. A partial result is not a completed acceptance gate.
 
 | Active plan | Remaining work |
 | --- | --- |
+| [Caller semantic coverage](caller-semantic-coverage.md) | S0 diagnosed; checked normal-flow exception exits, MOVAPS load admission, legacy replay and original 30-barrier qualification pending. |
 | [Frame-path enumeration](frame-path-enumeration.md) | Remote model/mutation and successful full-dump qualification. The original dump retry remains unavailable. |
 | [I5c address wrap](i5c-address-wrap.md) | W0–W5 model, runtime, capture and qualification stages. |
 | [Indirect-target resolution](indirect-target-resolution.md) | Full R6 mutation/replay qualification; retain the narrower completed native/dump retry. |

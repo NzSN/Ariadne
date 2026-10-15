@@ -37,7 +37,8 @@ pub(crate) fn validate_opaque_ordinary(
                         "bap-bit-provenance-v4"
                         | "bap-bit-provenance-v5"
                         | "bap-bit-provenance-v6"
-                        | "bap-bit-provenance-v7" => crate::bap::OPAQUE_ORDINARY_RULE,
+                        | "bap-bit-provenance-v7"
+                        | "bap-bit-provenance-v8" => crate::bap::OPAQUE_ORDINARY_RULE,
                         _ => "",
                     })
                 || e.length == 0
@@ -186,6 +187,11 @@ pub(crate) fn capture_context(
     });
     let tool_binding = if let Some(composition) = prepared.composition() {
         crate::investigation::composition_capture_binding(composition, &sites)?
+    } else if let Some(guard) = prepared
+        .guard_admission()
+        .filter(|g| !crate::bap::guard_admission::is_legacy(g))
+    {
+        crate::investigation::guard_capture_binding(guard, &sites)?
     } else if let Some(binding) = &guard_binding {
         crate::reports::sha256(&serde_json::to_vec(&(&tool_facts, binding))?)
     } else {

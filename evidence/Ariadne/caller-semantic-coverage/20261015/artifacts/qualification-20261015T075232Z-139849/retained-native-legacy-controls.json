@@ -1,0 +1,7 @@
+{
+  "status": "retained-exact-source-helper-pass",
+  "positive_negative_controls": 2,
+  "behavioral_mutants": 1,
+  "result": "/caller-work/evidence/final-checks-20261015T074922/legacy-capture-controls/result.json",
+  "result_sha256": "6cd52b4c34c5153353771b5ba0c66bb453baca622183997cf596edbda4cb53bc"
+}

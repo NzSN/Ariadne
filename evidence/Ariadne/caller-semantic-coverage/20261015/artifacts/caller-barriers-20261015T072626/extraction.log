@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/caller-work/caller-barriers-extract.py", line 136, in <module>
+    main()
+  File "/caller-work/caller-barriers-extract.py", line 78, in main
+    provenance[name] = {"path": str(path), "bytes": path.stat().st_size,
+                                                    ^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 842, in stat
+    return os.stat(self, follow_symlinks=follow_symlinks)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/loop-work/evidence/dump-20261015T051409/source-binding.json.gz'

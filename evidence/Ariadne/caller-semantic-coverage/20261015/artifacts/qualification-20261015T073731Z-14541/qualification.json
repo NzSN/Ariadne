@@ -1,0 +1,153 @@
+{
+  "schema": "ariadne.caller-coverage-qualification/v1",
+  "passed": false,
+  "remaining_gates_passed": true,
+  "pending_gates": [
+    "native-capture"
+  ],
+  "recorded_utc": "2026-10-15T07:41:17.719169+00:00",
+  "source_files_verified": 935,
+  "source_archive_sha256": "4a81b5c6b0439bcef53ab98c9c309c59ed0c4be16d522e5c2c691be653fe4f29",
+  "sources_stable": true,
+  "gates": [
+    {
+      "name": "native-frame-paths",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--test",
+        "input_frame_paths",
+        "--",
+        "--ignored"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "tests_passed": 6,
+      "seconds": 54.84686429900012
+    },
+    {
+      "name": "native-composition",
+      "command": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--lib",
+        "actual_bap_pending_store_targets_and_native_rust_results_agree",
+        "--",
+        "--ignored"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "tests_passed": 1,
+      "seconds": 15.599832890000016
+    },
+    {
+      "name": "core-contract-tools",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools",
+        "-p",
+        "test_bap_core_contract.py"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "tests_passed": null,
+      "seconds": 0.6670441469998423
+    },
+    {
+      "name": "profile-contract-tools",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools",
+        "-p",
+        "test_bap_profile_migration.py"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "tests_passed": null,
+      "seconds": 0.11594854300005863
+    },
+    {
+      "name": "native-generated-replay",
+      "command": [
+        "python3",
+        "/caller-work/qualification-continuation/core-replay.py",
+        "--helper-dir",
+        "/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/caller-native",
+        "--target-dir",
+        "/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/caller-qualification-20261015T073731Z-14541/replay-build",
+        "--output",
+        "/caller-work/evidence/qualification-20261015T073731Z-14541/generated-replay"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "tests_passed": null,
+      "seconds": 47.33029408399989
+    },
+    {
+      "name": "native-opaque-mutations",
+      "command": [
+        "python3",
+        "/caller-work/qualification-continuation/opaque-mutations.py",
+        "--native-dir",
+        "/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/caller-native",
+        "--cargo-target",
+        "/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/caller-qualification-20261015T073731Z-14541/opaque-mutation-cargo",
+        "--output",
+        "/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/caller-qualification-20261015T073731Z-14541/opaque-mutations"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "tests_passed": null,
+      "seconds": 98.06105992699986
+    },
+    {
+      "name": "legacy-guard-probe-build",
+      "command": [
+        "rustc",
+        "--edition=2024",
+        "/caller-work/qualification-continuation/legacy-guard-probe.rs",
+        "-O",
+        "-L",
+        "dependency=/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/caller-build/release/deps",
+        "--extern",
+        "ariadne=/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/caller-build/release/libariadne.rlib",
+        "--extern",
+        "serde_json=/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/caller-build/release/deps/libserde_json-540ae372bafb180c.rlib",
+        "-o",
+        "/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/caller-qualification-20261015T073731Z-14541/legacy-guard-probe"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "tests_passed": null,
+      "seconds": 2.5705384849998154
+    },
+    {
+      "name": "actual-legacy-guard-v1",
+      "command": [
+        "/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/caller-qualification-20261015T073731Z-14541/legacy-guard-probe",
+        "/caller-work/legacy/guard-v1.json"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "tests_passed": null,
+      "seconds": 0.26701580900021327
+    }
+  ],
+  "error": null,
+  "build_output": "/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/caller-qualification-20261015T073731Z-14541",
+  "scope": "Finite normal-completion/control/effect and native/core/report regressions; actual original dump retry is a separate gate.",
+  "fresh_model_run": false,
+  "performance_or_universal_refinement_claim": false
+}

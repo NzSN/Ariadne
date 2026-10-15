@@ -1,4 +1,4 @@
-//! Source-bound admission of one reviewed legacy MOVAPS normal outcome.
+//! Source-bound admission of reviewed MOVAPS normal outcomes and scoped terminals.
 //! Facts describe possible states under explicit premises, never execution history.
 use super::ast::{Expr, Stmt, Var};
 use super::{Error, invalid};
@@ -8,13 +8,18 @@ use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
 use std::time::Instant;
 
-pub const PROFILE: &str = "bap-guard-admission-v1";
-pub const PRODUCER_PROFILE: &str = "bap-bit-provenance-v7";
+pub const LEGACY_PROFILE: &str = "bap-guard-admission-v1";
+pub const PROFILE: &str = "bap-guard-admission-v2";
+pub const LEGACY_PRODUCER_PROFILE: &str = "bap-bit-provenance-v7";
+pub const PRODUCER_PROFILE: &str = "bap-bit-provenance-v8";
 pub const ABI_POLICY: &str = "windows-amd64-normal-call-entry/v1";
-pub const MODEL_VERSION: &str = "ariadne.predicate-admission/v1";
+pub const LEGACY_MODEL_VERSION: &str = "ariadne.predicate-admission/v1";
+pub const MODEL_VERSION: &str = "ariadne.predicate-admission/v2";
 pub const TOP: u16 = u16::MAX;
-const SCHEMA: &str = "ariadne.guard-admission/v1";
+const LEGACY_SCHEMA: &str = "ariadne.guard-admission/v1";
+const SCHEMA: &str = "ariadne.guard-admission/v2";
 const PENDING_IDENTITY: &str = "pending-legacy128-movaps-rsp-identity/v1";
+const PENDING_LOAD_IDENTITY: &str = "pending-legacy128-movaps-load-rsp-identity/v1";
 const TYPED_TRANSFER: &str = "typed-bil-rsp-residue/v1";
 const OPAQUE_TRANSFER: &str = "opaque-rsp-havoc/v1";
 
@@ -22,7 +27,116 @@ pub fn model_identity() -> String {
     crate::reports::sha256(include_bytes!("../../Specs/AriadnePredicateAdmission.tla"))
 }
 pub fn checker_identity() -> String {
-    crate::reports::sha256(include_bytes!("guard_admission.rs"))
+    let guard = crate::reports::sha256(include_bytes!("guard_admission.rs"));
+    let terminal = crate::reports::sha256(include_bytes!("terminal_control.rs"));
+    crate::reports::sha256(format!("ariadne.guard-checker/v2\n{guard}\n{terminal}\n").as_bytes())
+}
+pub fn legacy_checker_identity() -> String {
+    crate::reports::sha256(include_bytes!(
+        "../../tests/bap/fixtures/caller-coverage/legacy-v2/guard_admission.rs.txt"
+    ))
+}
+pub fn legacy_model_identity() -> String {
+    crate::reports::sha256(include_bytes!(
+        "../../tests/bap/fixtures/caller-coverage/legacy-v2/AriadnePredicateAdmission.tla.txt"
+    ))
+}
+pub use super::terminal_control::{NormalFlowEvidence, NormalFlowKind, TerminalReceipt};
+fn legacy_input(input: &GuardInput) -> bool {
+    input.policy == LEGACY_PROFILE
+}
+pub fn is_legacy(report: &Report) -> bool {
+    report.schema == LEGACY_SCHEMA && report.profile == LEGACY_PROFILE
+}
+pub fn normal_flow_scope(report: &Report) -> Option<&str> {
+    report.input.normal_flow.as_ref().map(|e| e.scope.as_str())
+}
+pub fn terminal_receipt(input: &GuardInput, site: u64) -> Option<&TerminalReceipt> {
+    input
+        .normal_flow
+        .as_ref()?
+        .terminals
+        .iter()
+        .find(|t| t.site == hex(site))
+}
+pub fn terminal_valid(site: &CandidateSite, receipt: &TerminalReceipt) -> Result<bool, Error> {
+    super::terminal_control::validate_source(site, receipt)?;
+    Ok(true)
+}
+pub fn validate_terminal_capture(receipt: &TerminalReceipt, prefix: &[u8]) -> Result<(), Error> {
+    super::terminal_control::validate_capture(receipt, prefix)
+}
+pub fn validate_normal_flow_request(
+    input: &GuardInput,
+    request: &crate::AnalysisRequest,
+) -> Result<(), Error> {
+    if !legacy_input(input) {
+        for (&site, instruction) in &request.instructions {
+            if instruction.kind == InstructionKind::Stop
+                && request.decodable.contains(&site)
+                && terminal_receipt(input, site).is_none()
+            {
+                return Err(invalid("decodable normal Stop lacks a terminal receipt"));
+            }
+        }
+    }
+    if let Some(normal) = &input.normal_flow {
+        if normal.scope != super::terminal_control::SCOPE
+            || (!normal.terminals.is_empty()
+                && (request.snapshot_id != input.snapshot
+                    || request.input_kind != crate::InputKind::Dump
+                    || !request.file_backed.is_empty()
+                    || !request.trusted_fallback.is_empty()))
+        {
+            return Err(invalid(
+                "terminal request scope or captured snapshot mismatch",
+            ));
+        }
+        for receipt in &normal.terminals {
+            let source = input
+                .sites
+                .iter()
+                .find(|s| s.site == receipt.site)
+                .ok_or_else(|| invalid("terminal candidate source absent"))?;
+            terminal_valid(source, receipt)?;
+            let site = address(&receipt.site)?;
+            let instruction = request
+                .instructions
+                .get(&site)
+                .ok_or_else(|| invalid("terminal final instruction absent"))?;
+            if instruction.kind != InstructionKind::Stop
+                || !instruction.complete
+                || !instruction.fall.is_empty()
+                || !instruction.targets.is_empty()
+                || instruction.uses != request.locations
+                || instruction.may_defs != request.locations
+                || !instruction.must_defs.is_empty()
+                || !request.captured.contains(&site)
+                || !request.decodable.contains(&site)
+            {
+                return Err(invalid(
+                    "terminal final request normal-control or conservative-effect mismatch",
+                ));
+            }
+        }
+    }
+    Ok(())
+}
+
+fn deserialize_normal_flow<'de, D: serde::Deserializer<'de>>(
+    deserializer: D,
+) -> Result<Option<NormalFlowEvidence>, D::Error> {
+    NormalFlowEvidence::deserialize(deserializer).map(Some)
+}
+fn append_normal_flow(
+    mut tuple: Vec<u8>,
+    evidence: &Option<NormalFlowEvidence>,
+) -> Result<Vec<u8>, Error> {
+    tuple.pop();
+    tuple.push(b',');
+    tuple.extend(serde_json::to_vec(evidence)?);
+    tuple.push(b']');
+    Ok(tuple)
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
@@ -179,6 +293,12 @@ pub struct GuardInput {
     /// An unresolved incoming/control source. These never become roots.
     pub barriers: Vec<String>,
     pub sites: Vec<CandidateSite>,
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "deserialize_normal_flow"
+    )]
+    pub normal_flow: Option<NormalFlowEvidence>,
 }
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -337,17 +457,27 @@ fn rsp_address(e: &Expr) -> Option<i64> {
     }
 }
 
-/// Independently identify only legacy 128-bit MOVAPS [RSP+disp],XMMn.
+/// Independently identify reviewed legacy 128-bit RSP-relative MOVAPS forms.
 /// No opcode text, predicate verdict or selected effects justify this rule.
-fn movaps_encoding(b: &[u8]) -> Option<(i64, u8)> {
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum Operation {
+    Store,
+    Load,
+}
+fn movaps_encoding(b: &[u8], legacy: bool) -> Option<(i64, u8, Operation)> {
     let (b, high) = match b.first() {
         Some(0x40) => (&b[1..], 0),
         Some(0x44) => (&b[1..], 8),
         _ => (b, 0),
     };
-    if b.len() < 4 || b[..2] != [0x0f, 0x29] || b[2] & 7 != 4 || b[3] != 0x24 {
+    if b.len() < 4 || b[0] != 0x0f || b[2] & 7 != 4 || b[3] != 0x24 {
         return None;
     }
+    let operation = match b[1] {
+        0x29 => Operation::Store,
+        0x28 if !legacy => Operation::Load,
+        _ => return None,
+    };
     let bank = ((b[2] >> 3) & 7) + high;
     let displacement = match b[2] >> 6 {
         0 if b.len() == 4 => 0,
@@ -355,19 +485,21 @@ fn movaps_encoding(b: &[u8]) -> Option<(i64, u8)> {
         2 if b.len() == 8 => i64::from(i32::from_le_bytes(b[4..8].try_into().ok()?)),
         _ => return None,
     };
-    Some((displacement, bank))
+    Some((displacement, bank, operation))
 }
 struct Recognized {
     pending: PendingGuard,
     normal_ast: String,
+    pending_rule: &'static str,
 }
-fn recognize(site: &CandidateSite) -> Result<Option<Recognized>, Error> {
+fn recognize(site: &CandidateSite, legacy: bool) -> Result<Option<Recognized>, Error> {
     let b = bytes(&site.bytes_hex)?;
-    let Some((displacement, bank)) = movaps_encoding(&b) else {
+    let Some((displacement, bank, operation)) = movaps_encoding(&b, legacy) else {
         return Ok(None);
     };
     let va = address(&site.site)?;
     if site.control.kind != ControlKind::Ordinary
+        || (!legacy && !site.control.complete)
         || !site.control.targets.is_empty()
         || site.control.fall
             != [hex(va
@@ -380,28 +512,28 @@ fn recognize(site: &CandidateSite) -> Result<Option<Recognized>, Error> {
     let [Stmt::Move { var, value }, Stmt::If { condition, yes, no }] = bil.as_slice() else {
         return Ok(None);
     };
-    if !architectural(var, "mem", 0, "mem")
-        || !yes.is_empty()
-        || !matches!(no.as_slice(), [Stmt::Exception { number: 13 }])
-    {
+    if !yes.is_empty() || !matches!(no.as_slice(), [Stmt::Exception { number: 13 }]) {
         return Ok(None);
     }
-    let Expr::Store {
-        width: 128,
-        mem,
-        addr,
-        value,
-    } = value
-    else {
-        return Ok(None);
+    let expected_bank = format!("YMM{bank}");
+    let shape = match operation {
+        Operation::Store => {
+            matches!(value,Expr::Store {width:128,mem,addr,value}
+                if architectural(var,"mem",0,"mem")
+                && matches!(&**mem,Expr::Var {var} if architectural(var,"mem",0,"mem"))
+                && rsp_address(addr)==Some(displacement)
+                && matches!(&**value,Expr::Cast {op:0,width:128,arg} if matches!(&**arg,Expr::Var {var} if architectural(var,&expected_bank,256,"imm"))))
+        }
+        Operation::Load => {
+            matches!(value,Expr::Concat {lhs,rhs}
+                if architectural(var,&expected_bank,256,"imm")
+                && matches!(&**lhs,Expr::Extract {hi:255,lo:128,arg} if matches!(&**arg,Expr::Var {var} if architectural(var,&expected_bank,256,"imm")))
+                && matches!(&**rhs,Expr::Cast {op:3,width:128,arg}
+                    if matches!(&**arg,Expr::Load {width:128,mem,addr}
+                        if matches!(&**mem,Expr::Var {var} if architectural(var,"mem",0,"mem")) && rsp_address(addr)==Some(displacement))))
+        }
     };
-    if !matches!(&**mem, Expr::Var { var } if architectural(var, "mem", 0, "mem"))
-        || rsp_address(addr) != Some(displacement)
-        || !matches!(&**value,
-            Expr::Cast { op: 0, width: 128, arg }
-            if matches!(&**arg, Expr::Var { var }
-                if architectural(var, &format!("YMM{bank}"), 256, "imm")))
-    {
+    if !shape {
         return Ok(None);
     }
     let Expr::Binop { op: 5, lhs, rhs } = condition else {
@@ -418,9 +550,22 @@ fn recognize(site: &CandidateSite) -> Result<Option<Recognized>, Error> {
     if !integer64(rhs, 0) || !integer64(mask, 15) || rsp_address(guard_addr) != Some(displacement) {
         return Ok(None);
     }
-    // This validates the store's widths, architectural namespaces and operands.
+    // This validates the normal operation's widths, namespaces and operands.
     // The discarded statement has already been checked in its entirety above.
-    super::admission::admit(&bil[..1], "MOVAPS-reviewed-store", &b)?;
+    super::admission::admit(
+        &bil[..1],
+        if operation == Operation::Store {
+            "MOVAPS-reviewed-store"
+        } else {
+            "MOVAPS-reviewed-load"
+        },
+        &b,
+    )?;
+    let pending_rule = if operation == Operation::Store {
+        PENDING_IDENTITY
+    } else {
+        PENDING_LOAD_IDENTITY
+    };
     let normal_ast = serde_json::to_string(&bil[..1])?;
     let relation: Vec<u16> = (0..16).map(|r| 1u16 << r).collect();
     Ok(Some(Recognized {
@@ -430,16 +575,24 @@ fn recognize(site: &CandidateSite) -> Result<Option<Recognized>, Error> {
             vector_bank: bank,
             original_ast_sha256: crate::reports::sha256(site.ast.as_bytes()),
             pending_relation_sha256: crate::reports::sha256(&serde_json::to_vec(&(
-                PENDING_IDENTITY,
+                pending_rule,
                 &relation,
             ))?),
         },
         normal_ast,
+        pending_rule,
     }))
 }
 /// Recognition authorizes candidate control and an RSP relation, no memory effect.
 pub fn recognize_pending(site: &CandidateSite) -> Result<Option<PendingGuard>, Error> {
-    Ok(recognize(site)?.map(|r| r.pending))
+    Ok(recognize(site, false)?.map(|r| r.pending))
+}
+
+pub fn recognize_pending_for_input(
+    input: &GuardInput,
+    site: &CandidateSite,
+) -> Result<Option<PendingGuard>, Error> {
+    Ok(recognize(site, legacy_input(input))?.map(|r| r.pending))
 }
 
 fn shift(values: u16, delta: u64) -> u16 {
@@ -523,10 +676,10 @@ fn derive_transfer(
     pending: Option<&Recognized>,
 ) -> Result<TransferReceipt, Error> {
     let b = bytes(&site.bytes_hex)?;
-    let (rule, relation) = if pending.is_some() {
+    let (rule, relation) = if let Some(pending) = pending {
         // Shape recognition precedes every verdict. This relation overapproximates
         // every candidate normal transition and commits no pending store.
-        (PENDING_IDENTITY, (0..16).map(|r| 1u16 << r).collect())
+        (pending.pending_rule, (0..16).map(|r| 1u16 << r).collect())
     } else if site.opaque || site.control.kind == ControlKind::Call {
         (OPAQUE_TRANSFER, vec![TOP; 16])
     } else {
@@ -583,10 +736,18 @@ fn normalized(input: &GuardInput) -> Result<GuardInput, Error> {
         || input.activation.frame_activation.is_empty()
         || input.activation.frame_activation.len() > 1024
         || input.roots.is_empty()
-        || input.policy != PROFILE
-        || input.model_version != MODEL_VERSION
-        || input.model_sha256 != model_identity()
-        || input.producer.projection != PRODUCER_PROFILE
+        || !(if legacy_input(input) {
+            input.normal_flow.is_none()
+                && input.model_version == LEGACY_MODEL_VERSION
+                && input.model_sha256 == legacy_model_identity()
+                && input.producer.projection == LEGACY_PRODUCER_PROFILE
+        } else {
+            input.policy == PROFILE
+                && input.normal_flow.is_some()
+                && input.model_version == MODEL_VERSION
+                && input.model_sha256 == model_identity()
+                && input.producer.projection == PRODUCER_PROFILE
+        })
     {
         return Err(invalid("guard input profile, snapshot or activation"));
     }
@@ -648,6 +809,21 @@ fn normalized(input: &GuardInput) -> Result<GuardInput, Error> {
                 && s.control.targets.len() != 1)
         {
             return Err(invalid("candidate control shape"));
+        }
+    }
+    if let Some(normal) = &out.normal_flow {
+        if normal.scope != super::terminal_control::SCOPE
+            || normal.terminals.windows(2).any(|v| v[0].site >= v[1].site)
+        {
+            return Err(invalid("normal-flow scope or terminal order"));
+        }
+        for receipt in &normal.terminals {
+            let site = out
+                .sites
+                .iter()
+                .find(|s| s.site == receipt.site)
+                .ok_or_else(|| invalid("terminal source outside candidate graph"))?;
+            terminal_valid(site, receipt)?;
         }
     }
     let roots: BTreeMap<_, _> = out.roots.iter().map(|r| (r.site.as_str(), r)).collect();
@@ -775,9 +951,15 @@ fn coverage_closed(input: &GuardInput) -> Result<bool, Error> {
     }
     for site in &input.sites {
         if matches!(site.control.kind, ControlKind::Call | ControlKind::Return)
-            || recognize(site)?.is_some()
+            || recognize(site, legacy_input(input))?.is_some()
         {
             continue;
+        }
+        if !legacy_input(input) && site.control.kind == ControlKind::Stop {
+            if terminal_receipt(input, address(&site.site)?).is_some() {
+                continue;
+            }
+            return Ok(false);
         }
         let bil = statements(&site.ast)?;
         let b = bytes(&site.bytes_hex)?;
@@ -801,8 +983,12 @@ fn coverage_closed(input: &GuardInput) -> Result<bool, Error> {
 }
 pub fn intent_id(input: &GuardInput) -> Result<String, Error> {
     let i = normalized(input)?;
-    Ok(crate::reports::sha256(&serde_json::to_vec(&(
-        "ariadne-guard-intent/v1",
+    let encoded = serde_json::to_vec(&(
+        if legacy_input(&i) {
+            "ariadne-guard-intent/v1"
+        } else {
+            "ariadne-guard-intent/v2"
+        },
         &i.snapshot,
         &i.artifact_sha256,
         &i.query_scope_sha256,
@@ -817,19 +1003,33 @@ pub fn intent_id(input: &GuardInput) -> Result<String, Error> {
         &i.model_sha256,
         &i.producer,
         &i.limits,
-    ))?))
+    ))?;
+    Ok(crate::reports::sha256(&if legacy_input(&i) {
+        encoded
+    } else {
+        append_normal_flow(encoded, &i.normal_flow)?
+    }))
 }
 pub fn graph_digest(input: &GuardInput) -> Result<String, Error> {
     let i = normalized(input)?;
-    Ok(crate::reports::sha256(&serde_json::to_vec(&(
-        "ariadne-guard-candidate/v1",
+    let encoded = serde_json::to_vec(&(
+        if legacy_input(&i) {
+            "ariadne-guard-candidate/v1"
+        } else {
+            "ariadne-guard-candidate/v2"
+        },
         &i.roots,
         i.candidate_epoch,
         i.closure_complete,
         &i.barriers,
         &i.sites,
         edges(&i),
-    ))?))
+    ))?;
+    Ok(crate::reports::sha256(&if legacy_input(&i) {
+        encoded
+    } else {
+        append_normal_flow(encoded, &i.normal_flow)?
+    }))
 }
 fn decision(r: &Recognized, values: u16, closed: bool) -> GuardDecision {
     let addresses = shift(values, r.pending.displacement as u64);
@@ -870,7 +1070,11 @@ fn decision(r: &Recognized, values: u16, closed: bool) -> GuardDecision {
 }
 fn receipt_prefix(report: &Report) -> Result<Sha256, Error> {
     let prefix = serde_json::to_vec(&(
-        "ariadne-guard-receipt/v1",
+        if is_legacy(report) {
+            "ariadne-guard-receipt/v1"
+        } else {
+            "ariadne-guard-receipt/v2"
+        },
         &report.checker_sha256,
         &report.intent_id,
         &report.candidate_graph_sha256,
@@ -941,9 +1145,18 @@ pub fn certify_guards(input: &GuardInput) -> Result<Report, Error> {
         return Err(invalid("guard input evidence byte limit"));
     }
     let mut report = Report {
-        schema: SCHEMA.into(),
-        profile: PROFILE.into(),
-        checker_sha256: checker_identity(),
+        schema: if legacy_input(&input) {
+            LEGACY_SCHEMA
+        } else {
+            SCHEMA
+        }
+        .into(),
+        profile: input.policy.clone(),
+        checker_sha256: if legacy_input(&input) {
+            legacy_checker_identity()
+        } else {
+            checker_identity()
+        },
         intent_id: intent_id(&input)?,
         candidate_graph_sha256: graph_digest(&input)?,
         input,
@@ -962,7 +1175,7 @@ pub fn certify_guards(input: &GuardInput) -> Result<Report, Error> {
         if deadline(start, &report.input.limits) {
             return Err(invalid("guard deadline while deriving source transfers"));
         }
-        let guard = recognize(site)?;
+        let guard = recognize(site, legacy_input(&report.input))?;
         report
             .transfers
             .push(derive_transfer(site, guard.as_ref())?);
@@ -1079,9 +1292,19 @@ pub fn certify_guards(input: &GuardInput) -> Result<Report, Error> {
 /// overapproximation. In particular, candidate-only predecessors are checked.
 pub fn replay_report(input: &GuardInput, report: &Report) -> Result<(), Error> {
     let input = normalized(input)?;
-    if report.schema != SCHEMA
-        || report.profile != PROFILE
-        || report.checker_sha256 != checker_identity()
+    if report.schema
+        != if legacy_input(&input) {
+            LEGACY_SCHEMA
+        } else {
+            SCHEMA
+        }
+        || report.profile != input.policy
+        || report.checker_sha256
+            != if legacy_input(&input) {
+                legacy_checker_identity()
+            } else {
+                checker_identity()
+            }
         || report.input != input
         || report.intent_id != intent_id(&input)?
         || report.candidate_graph_sha256 != graph_digest(&input)?
@@ -1123,7 +1346,7 @@ pub fn replay_report(input: &GuardInput, report: &Report) -> Result<(), Error> {
     let mut recognized = BTreeMap::new();
     let mut transfers = Vec::new();
     for site in &input.sites {
-        let guard = recognize(site)?;
+        let guard = recognize(site, legacy_input(&input))?;
         transfers.push(derive_transfer(site, guard.as_ref())?);
         if let Some(guard) = guard {
             recognized.insert(site.site.clone(), guard);
@@ -1227,7 +1450,11 @@ pub fn analysis_id(report: &Report) -> Result<String, Error> {
         .collect();
     receipts.sort();
     Ok(crate::reports::sha256(&serde_json::to_vec(&(
-        "ariadne-guard-analysis/v1",
+        if is_legacy(report) {
+            "ariadne-guard-analysis/v1"
+        } else {
+            "ariadne-guard-analysis/v2"
+        },
         &report.intent_id,
         request_hash,
         receipts,

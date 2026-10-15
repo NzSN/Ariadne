@@ -1,0 +1,543 @@
+{
+  "schema": "ariadne.caller-barrier-reproduction/v1",
+  "artifact_sha256": "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+  "dump_path": "/work/frame-paths-dump03958-20261013/original.dmp",
+  "origin_run": "/loop-work/evidence/dump-20261015T051409",
+  "origin_source_binding": {
+    "schema": "ariadne.loop-aware-dump-source-binding/v1",
+    "dump_url": "https://192.168.150.219:4080/dumps/dump_03958DA4FCA844A786262A1053",
+    "dump_sha256": "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+    "frozen_table_witness_sha256": "1390abca21bb7e2db9cde9a07067f60f5493498a7866fb648dcb103994674baf",
+    "historical_guard_sha256": "d0294c9b940d8366cb89d78a95d2186c89196dbf1a7955e70189c22afa2abda0",
+    "source_manifest_sha256": "7e16611a5fb938916209c34f2c8d73e58b267e50f64e0ebb84ce5735a8287e90",
+    "source_files_verified": 877,
+    "source_archive_sha256": "5cd406c5181d131679a60af15f53edcabecfe056144e40b5785bc37ce1d010ee",
+    "source_manifest_artifact": "source-manifest.json",
+    "native_manifest_sha256": "204ffe8a8f7585a8f873886b48e64081b6f69a707604e47d758b664c6c872712",
+    "native_manifest_artifact": "native-manifest.json",
+    "native_helper_sha256": "7f8030820b486dc5a7ec055433d5a7540496c3aaa85fb04c3d91cbdc9e6ec1dd",
+    "loop_engine_sha256": "afc1b4b991a2bdf402dc8036eb0cfba0d0232505ea5dab31a6e2e2d267a15d95",
+    "composition_model_sha256": "605fb57d42e755b7fee75511f66e6ad864a16c303bbf5ffb5bad8855c7d05675",
+    "composition_engine_sha256": "dd277b844376234cce199ecae9e7bc9eee04dfa69390d2320c2349b4f11b6cb4",
+    "loop_model_sha256": "876f6331bc1e7fc4e70864c486b589df66ffd5894bc659d6c1dfdbc4d1ed105d",
+    "driver_sha256": "8b5039dbe26669fd3da0c648a52bb824cb08dce424ef48b77c3d6facb6af5b61",
+    "driver_binary_sha256": "9b25d18132d411bac22ddfae575cfbb902e71b378d7994efe041f9adb03b93ed",
+    "runner_sha256": "128cbd65d087de8df81e45787f920951738932a11ca16a5934eb04ad9baaed26",
+    "release_library_sha256": "9351a0e9e3d56a33088e8f50334eb0a711e3316f1983cd111e3b41a3fd8937a3",
+    "serde_json_library": "libserde_json-540ae372bafb180c.rlib",
+    "serde_json_library_sha256": "536308274fbc56cf511a66b3c030d86566328a86d725c8c14210a09966fb4bb4",
+    "tool_hashes": {
+      "ariadne-bap-lift": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+      "ariadne-llvm-mc": "45dad913d912aed489a99a150edc846389877ef72cb9218b46b8e2e555ad813c"
+    },
+    "rustc": "rustc 1.96.0 (ac68faa20 2026-05-25)\nbinary: rustc\ncommit-hash: ac68faa20c58cbccd01ee7208bf3b6e93a7d7f96\ncommit-date: 2026-05-25\nhost: x86_64-unknown-linux-gnu\nrelease: 1.96.0\nLLVM version: 22.1.2\n",
+    "compile_command": [
+      "rustc",
+      "--edition=2024",
+      "/loop-work/dump-probe.rs",
+      "-O",
+      "-L",
+      "dependency=/home/nzsn/Repos/Ariadne-loop-aware-20261015/target/loop-aware-build/release/deps",
+      "--extern",
+      "ariadne=/home/nzsn/Repos/Ariadne-loop-aware-20261015/target/loop-aware-build/release/libariadne.rlib",
+      "--extern",
+      "serde_json=/home/nzsn/Repos/Ariadne-loop-aware-20261015/target/loop-aware-build/release/deps/libserde_json-540ae372bafb180c.rlib",
+      "-o",
+      "/loop-work/dump-probe"
+    ],
+    "claim_boundary": "Fresh original-dump scoped retry; downstream partial/unavailable outcomes remain explicit."
+  },
+  "origin_artifacts": {
+    "source-binding.json": {
+      "path": "/loop-work/evidence/dump-20261015T051409/source-binding.json",
+      "bytes": 2921,
+      "sha256": "102c3068323cf7588fa42991c7840a96a8bb94b79473c593d391d74a17c73435"
+    },
+    "source-manifest.json": {
+      "path": "/loop-work/evidence/dump-20261015T051409/source-manifest.json",
+      "bytes": 97954,
+      "sha256": "7e16611a5fb938916209c34f2c8d73e58b267e50f64e0ebb84ce5735a8287e90"
+    },
+    "run-result.json": {
+      "path": "/loop-work/evidence/dump-20261015T051409/run-result.json",
+      "bytes": 113,
+      "sha256": "d55c75e8e83a2623e5ce8cb0478fbcd3f698c02f71aa43165e8ed1eadba906b6"
+    },
+    "frame-1/outcome.json": {
+      "path": "/loop-work/evidence/dump-20261015T051409/frame-1/outcome.json",
+      "bytes": 6328,
+      "sha256": "c0a997f68428b64579df7592f53e3ec26879a7cff4310a414074cfe6c3dbe133"
+    },
+    "frame-1/guard-report.json": {
+      "path": "/loop-work/evidence/dump-20261015T051409/frame-1/guard-report.json.gz",
+      "bytes": 1245456,
+      "sha256": "debe75cc9cf743ba65358f8dbc4803624cd621bd0bc5b3292e22e4ec07f2a780"
+    },
+    "frame-1/minidump-rust.json": {
+      "path": "/loop-work/evidence/dump-20261015T051409/frame-1/minidump-rust.json.gz",
+      "bytes": 3848369,
+      "sha256": "78e31259ad8c666af994492ffc3cf50068c8b924cc558a1948f65b5ea6531eba"
+    }
+  },
+  "producer_identity": {
+    "artifact_sha256": "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+    "core_package_version": "0.1.0",
+    "decoder_build": "LLVM MC 20.1.2 (decode reference)",
+    "decoder_protocol": 2,
+    "decoder_target": "x86_64-pc-windows-msvc",
+    "effects_ruleset": "bap-bit-provenance-v7",
+    "input_package_version": "0.1.0",
+    "location_catalogue": "gpr-bytes-status-df-memory-other-v1",
+    "platform": "windows",
+    "query_id": "a80baeb7618066970991bb08ad2aad05013d6eabb2bef9850ec8c6e0fc5f956e",
+    "semantic_profile": "x86_64-pc-windows-msvc:LLVM MC 20.1.2 (decode reference):2:bap-bit-provenance-v7:gpr-bytes-status-df-memory-other-v1:4dd43346da7a8da433372e0870a9aafd9b6bc9d62cdf676ff10b7395d603cf81:bap-guard-admission-v1:2fb7c4cdc0d54b423e5055623d9da6c89dda412ad1bcb38374541b1c477bd18f:guard-premises=[AbiNormalCall@0x00007ff7744033a0:root=0x00007ff7744033a0:RSP-residue-mask=0x0100:windows-amd64-normal-call-entry/v1]:captured-guarded-targets/v2:0b9bda2f2897342c45339c876db5ff5cfcbecdab3c82f2b373f1e1e5814f7c7e:captured-local-indirect-targets/v2:FrozenCapturedControlData",
+    "snapshot_id": "minidump-captured-amd64-v1:9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab"
+  },
+  "guard_input": {
+    "snapshot": "minidump-captured-amd64-v1:9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+    "artifact_sha256": "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+    "candidate_epoch": 609,
+    "producer": {
+      "decoder_sha256": "45dad913d912aed489a99a150edc846389877ef72cb9218b46b8e2e555ad813c",
+      "helper_sha256": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+      "projection": "bap-bit-provenance-v7",
+      "runtime_sha256": "fb03843b065556c791e909b2cd7d1a8e2ef736ed461b6d8979da3f3fd5d6612a"
+    },
+    "query_scope_sha256": "b4ed757104b47052b3bede15728b55e6f6f50bdbf0750785c4e9b72820d778ed",
+    "barriers": [
+      "0x00007ff7744035c9",
+      "0x00007ff77440b0e0",
+      "0x00007ff77440b30d",
+      "0x00007ff77440b753",
+      "0x00007ff77440ba62",
+      "0x00007ff77440ba65",
+      "0x00007ff77440ba68",
+      "0x00007ff77440ba6b",
+      "0x00007ff77440ba6e",
+      "0x00007ff77440ba71",
+      "0x00007ff77440ba74",
+      "0x00007ff77440ba77",
+      "0x00007ff77440ba98",
+      "0x00007ff77440ba9b",
+      "0x00007ff77440ba9e",
+      "0x00007ff77440baa1",
+      "0x00007ff77440baa4",
+      "0x00007ff77440bc0d",
+      "0x00007ff77440c691",
+      "0x00007ff77440c709",
+      "0x00007ff77440c7a0",
+      "0x00007ff77440c7a3",
+      "0x00007ff77440d410",
+      "0x00007ff77440d413",
+      "0x00007ff77440d7cf",
+      "0x00007ff77440dd2b",
+      "0x00007ff77440dd2e",
+      "0x00007ff77440dd7e",
+      "0x00007ff77440dd81",
+      "0x00007ff77440dd84"
+    ],
+    "roots": [
+      {
+        "anchor_sha256": "807f3891ce0d5f5d5ff56469da7fbc7488b0edd81348cb2d7e70a0560642876d",
+        "function_entry": true,
+        "site": "0x00007ff7744033a0"
+      }
+    ],
+    "premises": [
+      {
+        "activation": {
+          "frame_activation": "0262c3eca68c0dfaa0459adb12ce6ef0fe8cc1bf10ed06f6c41222524c961270:1:0x000000bea89fa930",
+          "thread_id": 23668
+        },
+        "evidence_sha256": "79e8a46989e27c4dfc5f1cd57ed4e7f4f21edd9c77b5abcc274e888e20ad5291",
+        "origin": "abi_normal_call",
+        "point": "0x00007ff7744033a0",
+        "policy": "windows-amd64-normal-call-entry/v1",
+        "query_scope_sha256": "b4ed757104b47052b3bede15728b55e6f6f50bdbf0750785c4e9b72820d778ed",
+        "root": "0x00007ff7744033a0",
+        "rsp_residues": 256,
+        "rsp_value": null,
+        "snapshot": "minidump-captured-amd64-v1:9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab"
+      }
+    ]
+  },
+  "guard_stop": "candidate-coverage-incomplete",
+  "barrier_inventory": {
+    "MOVAPSrm": 1,
+    "UD1Lm": 1,
+    "INT3": 27,
+    "TRAP": 1
+  },
+  "cases": [
+    {
+      "id": "int3",
+      "site": "0x00007ff77440b30d",
+      "expected_reference_opcode": "INT3",
+      "captured_prefix": {
+        "bytes_hex": "cc0f0bb001e97884ffffb007e9608e",
+        "length": 15,
+        "sha256": "a16da78a7e75eb3ddad6cc1bfff93feb86cd05c0a07379e6591e99175b0c3def"
+      },
+      "bap_original": {
+        "ast": "[{\"kind\":\"exception\",\"number\":3}]",
+        "bytes_hex": "cc",
+        "control": {
+          "complete": false,
+          "fall": [],
+          "kind": "stop",
+          "targets": []
+        },
+        "opaque": true,
+        "site": "0x00007ff77440b30d"
+      },
+      "ast_sha256": "e698c4ea0ca7e41c22fd980e05e32c9e8f876e9e78f49f998d6ac99610a2ff80",
+      "bil_file": "int3-bil.json",
+      "bil_file_sha256": "f7f1818553b4aff8d1f53d1752a9869b11c644fb2ec8500e71822bd0eb8da12d",
+      "capture": {
+        "accesses": [],
+        "ast_sha256": "e698c4ea0ca7e41c22fd980e05e32c9e8f876e9e78f49f998d6ac99610a2ff80",
+        "bytes_hex": "cc",
+        "captured": true,
+        "gaps": [
+          "UnsupportedControl",
+          "control-disagreement"
+        ],
+        "helper_sha256": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+        "opcode": "INT3",
+        "projection": "bap-bit-provenance-v7",
+        "quality": "opaque",
+        "runtime_sha256": "fb03843b065556c791e909b2cd7d1a8e2ef736ed461b6d8979da3f3fd5d6612a",
+        "semantic_status": "control-disagreement",
+        "spans": [
+          {
+            "contributors": [
+              {
+                "entry": 2218,
+                "file_offset": "0x000000002c87e0eb",
+                "stream": 9
+              }
+            ],
+            "length": 15,
+            "va": "0x00007ff77440b30d"
+          }
+        ],
+        "va": "0x00007ff77440b30d"
+      },
+      "llvm_and_preparation": {
+        "byte_source": "captured",
+        "bytes_hex": "cc",
+        "control": "stop",
+        "decoder_record": "v2 INT3 0 0 7 0 0 140700784046861 unsupported 1 - -",
+        "issues": [
+          "unsupported_semantics"
+        ],
+        "length": 1,
+        "opcode": "INT3",
+        "operands": [],
+        "quality": "opaque",
+        "rule": null,
+        "semantic": {
+          "ast_sha256": "e698c4ea0ca7e41c22fd980e05e32c9e8f876e9e78f49f998d6ac99610a2ff80",
+          "backend": "bap-x86-legacy",
+          "fallback": null,
+          "gaps": [
+            "control-disagreement"
+          ],
+          "helper_sha256": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+          "memory_accesses": [],
+          "projection": "bap-bit-provenance-v7",
+          "runtime_sha256": "fb03843b065556c791e909b2cd7d1a8e2ef736ed461b6d8979da3f3fd5d6612a",
+          "status": "control-disagreement"
+        },
+        "undefined_flags": [],
+        "va": "0x00007ff77440b30d"
+      },
+      "expected_feedback": "selected candidate guard barrier absent after correction",
+      "scope": "No claim of execution or aligned normal continuation."
+    },
+    {
+      "id": "ud2",
+      "site": "0x00007ff77440b753",
+      "expected_reference_opcode": "TRAP",
+      "captured_prefix": {
+        "bytes_hex": "0f0b498b5424104c29f24889542450",
+        "length": 15,
+        "sha256": "fafb805e2f4ec8ed74c93199465ffb72ee8352e55df2fda43d11b8fbd49d5915"
+      },
+      "bap_original": {
+        "ast": "[]",
+        "bytes_hex": "0f0b",
+        "control": {
+          "complete": false,
+          "fall": [],
+          "kind": "stop",
+          "targets": []
+        },
+        "opaque": true,
+        "site": "0x00007ff77440b753"
+      },
+      "ast_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bil_file": "ud2-bil.json",
+      "bil_file_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "capture": {
+        "accesses": [],
+        "ast_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "bytes_hex": "0f0b",
+        "captured": true,
+        "gaps": [
+          "UnsupportedControl",
+          "control-disagreement"
+        ],
+        "helper_sha256": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+        "opcode": "TRAP",
+        "projection": "bap-bit-provenance-v7",
+        "quality": "opaque",
+        "runtime_sha256": "fb03843b065556c791e909b2cd7d1a8e2ef736ed461b6d8979da3f3fd5d6612a",
+        "semantic_status": "control-disagreement",
+        "spans": [
+          {
+            "contributors": [
+              {
+                "entry": 2218,
+                "file_offset": "0x000000002c87e531",
+                "stream": 9
+              }
+            ],
+            "length": 15,
+            "va": "0x00007ff77440b753"
+          }
+        ],
+        "va": "0x00007ff77440b753"
+      },
+      "llvm_and_preparation": {
+        "byte_source": "captured",
+        "bytes_hex": "0f0b",
+        "control": "stop",
+        "decoder_record": "v2 TRAP 0 0 5 0 0 140700784047955 ok 2 stop -",
+        "issues": [
+          "unsupported_semantics"
+        ],
+        "length": 2,
+        "opcode": "TRAP",
+        "operands": [],
+        "quality": "opaque",
+        "rule": null,
+        "semantic": {
+          "ast_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "backend": "bap-x86-legacy",
+          "fallback": null,
+          "gaps": [
+            "control-disagreement"
+          ],
+          "helper_sha256": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+          "memory_accesses": [],
+          "projection": "bap-bit-provenance-v7",
+          "runtime_sha256": "fb03843b065556c791e909b2cd7d1a8e2ef736ed461b6d8979da3f3fd5d6612a",
+          "status": "control-disagreement"
+        },
+        "undefined_flags": [],
+        "va": "0x00007ff77440b753"
+      },
+      "expected_feedback": "selected candidate guard barrier absent after correction",
+      "scope": "No claim of execution or aligned normal continuation."
+    },
+    {
+      "id": "ud1",
+      "site": "0x00007ff77440b0e0",
+      "expected_reference_opcode": "UD1Lm",
+      "captured_prefix": {
+        "bytes_hex": "670fb94012f687c800000040740431",
+        "length": 15,
+        "sha256": "1fd2a248438a78837312c1d240705f8cc11ea1f3ce0c2beae7e0c163c5d8d819"
+      },
+      "bap_original": {
+        "ast": "[]",
+        "bytes_hex": "670fb94012",
+        "control": {
+          "complete": false,
+          "fall": [],
+          "kind": "stop",
+          "targets": []
+        },
+        "opaque": true,
+        "site": "0x00007ff77440b0e0"
+      },
+      "ast_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bil_file": "ud1-bil.json",
+      "bil_file_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "capture": {
+        "accesses": [],
+        "ast_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "bytes_hex": "670fb94012",
+        "captured": true,
+        "gaps": [
+          "UnsupportedControl",
+          "decode-disagreement"
+        ],
+        "helper_sha256": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+        "opcode": "UD1Lm",
+        "projection": "bap-bit-provenance-v7",
+        "quality": "opaque",
+        "runtime_sha256": "fb03843b065556c791e909b2cd7d1a8e2ef736ed461b6d8979da3f3fd5d6612a",
+        "semantic_status": "decode-disagreement",
+        "spans": [
+          {
+            "contributors": [
+              {
+                "entry": 2218,
+                "file_offset": "0x000000002c87debe",
+                "stream": 9
+              }
+            ],
+            "length": 15,
+            "va": "0x00007ff77440b0e0"
+          }
+        ],
+        "va": "0x00007ff77440b0e0"
+      },
+      "llvm_and_preparation": {
+        "byte_source": "captured",
+        "bytes_hex": "670fb94012",
+        "control": "stop",
+        "decoder_record": "v2 UD1Lm 6 r:EAX r:EAX i:1 r:NONE i:18 r:NONE 0 5 0 0 -1 -1 -1 -1 -1 -1 140700784046304 ok 5 stop -",
+        "issues": [
+          "unsupported_semantics"
+        ],
+        "length": 5,
+        "opcode": "UD1Lm",
+        "operands": [
+          {
+            "kind": "register",
+            "view": {
+              "bank": 0,
+              "bit_offset": 0,
+              "width": 32
+            }
+          },
+          {
+            "kind": "register",
+            "view": {
+              "bank": 0,
+              "bit_offset": 0,
+              "width": 32
+            }
+          }
+        ],
+        "quality": "opaque",
+        "rule": null,
+        "semantic": {
+          "ast_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "backend": "bap-x86-legacy",
+          "fallback": null,
+          "gaps": [
+            "decode-disagreement"
+          ],
+          "helper_sha256": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+          "memory_accesses": [],
+          "projection": "bap-bit-provenance-v7",
+          "runtime_sha256": "fb03843b065556c791e909b2cd7d1a8e2ef736ed461b6d8979da3f3fd5d6612a",
+          "status": "decode-disagreement"
+        },
+        "undefined_flags": [],
+        "va": "0x00007ff77440b0e0"
+      },
+      "expected_feedback": "selected candidate guard barrier absent after correction",
+      "scope": "No claim of execution or aligned normal continuation."
+    },
+    {
+      "id": "movaps-load",
+      "site": "0x00007ff7744035c9",
+      "expected_reference_opcode": "MOVAPSrm",
+      "captured_prefix": {
+        "bytes_hex": "0f28b424400200004881c458020000",
+        "length": 15,
+        "sha256": "bb05021aeb70060dd7c053b1693205dd4d055fd7b1953bf8a6807194f9c9d4f6"
+      },
+      "bap_original": {
+        "ast": "[{\"kind\":\"move\",\"var\":{\"name\":\"YMM6\",\"index\":0,\"virtual\":false,\"width\":256,\"type\":\"imm\"},\"value\":{\"kind\":\"concat\",\"lhs\":{\"kind\":\"extract\",\"hi\":255,\"lo\":128,\"arg\":{\"kind\":\"var\",\"var\":{\"name\":\"YMM6\",\"index\":0,\"virtual\":false,\"width\":256,\"type\":\"imm\"}}},\"rhs\":{\"kind\":\"cast\",\"op\":3,\"width\":128,\"arg\":{\"kind\":\"load\",\"width\":128,\"mem\":{\"kind\":\"var\",\"var\":{\"name\":\"mem\",\"index\":0,\"virtual\":false,\"width\":0,\"type\":\"mem\"}},\"addr\":{\"kind\":\"binop\",\"op\":18,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"RSP\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"int\",\"value\":\"0x240:64u\"}}}}}},{\"kind\":\"if\",\"condition\":{\"kind\":\"binop\",\"op\":5,\"lhs\":{\"kind\":\"binop\",\"op\":8,\"lhs\":{\"kind\":\"binop\",\"op\":18,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"RSP\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"int\",\"value\":\"0x240:64u\"}},\"rhs\":{\"kind\":\"int\",\"value\":\"0xF:64u\"}},\"rhs\":{\"kind\":\"int\",\"value\":\"0:64u\"}},\"yes\":[],\"no\":[{\"kind\":\"exception\",\"number\":13}]}]",
+        "bytes_hex": "0f28b42440020000",
+        "control": {
+          "complete": false,
+          "fall": [],
+          "kind": "stop",
+          "targets": []
+        },
+        "opaque": true,
+        "site": "0x00007ff7744035c9"
+      },
+      "ast_sha256": "7713443722ab709255feb7752acd56b9b8bb4af69ebe3247d9b2b99647243df9",
+      "bil_file": "movaps-load-bil.json",
+      "bil_file_sha256": "54351983928fc4e0df941d4d478588fef121553d8118471f05b29e5f8bc32b0c",
+      "capture": {
+        "accesses": [],
+        "ast_sha256": "7713443722ab709255feb7752acd56b9b8bb4af69ebe3247d9b2b99647243df9",
+        "bytes_hex": "0f28b42440020000",
+        "captured": true,
+        "gaps": [
+          "UnsupportedControl",
+          "unmodeled BIL control/special/loop semantics"
+        ],
+        "helper_sha256": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+        "opcode": "MOVAPSrm",
+        "projection": "bap-bit-provenance-v7",
+        "quality": "opaque",
+        "runtime_sha256": "fb03843b065556c791e909b2cd7d1a8e2ef736ed461b6d8979da3f3fd5d6612a",
+        "semantic_status": "opaque-unsupported",
+        "spans": [
+          {
+            "contributors": [
+              {
+                "entry": 2218,
+                "file_offset": "0x000000002c8763a7",
+                "stream": 9
+              }
+            ],
+            "length": 15,
+            "va": "0x00007ff7744035c9"
+          }
+        ],
+        "va": "0x00007ff7744035c9"
+      },
+      "llvm_and_preparation": {
+        "byte_source": "captured",
+        "bytes_hex": "0f28b42440020000",
+        "control": "stop",
+        "decoder_record": "v2 MOVAPSrm 6 r:XMM6 r:RSP i:1 r:NONE i:576 r:NONE 1 1 0 0 -1 -1 -1 -1 -1 -1 140700784014793 ok 8 ordinary -",
+        "issues": [
+          "unsupported_semantics"
+        ],
+        "length": 8,
+        "opcode": "MOVAPSrm",
+        "operands": [
+          {
+            "kind": "register",
+            "view": {
+              "bank": 4,
+              "bit_offset": 0,
+              "width": 64
+            }
+          }
+        ],
+        "quality": "opaque",
+        "rule": null,
+        "semantic": {
+          "ast_sha256": "7713443722ab709255feb7752acd56b9b8bb4af69ebe3247d9b2b99647243df9",
+          "backend": "bap-x86-legacy",
+          "fallback": null,
+          "gaps": [
+            "unmodeled BIL control/special/loop semantics"
+          ],
+          "helper_sha256": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+          "memory_accesses": [],
+          "projection": "bap-bit-provenance-v7",
+          "runtime_sha256": "fb03843b065556c791e909b2cd7d1a8e2ef736ed461b6d8979da3f3fd5d6612a",
+          "status": "opaque-unsupported"
+        },
+        "undefined_flags": [],
+        "va": "0x00007ff7744035c9"
+      },
+      "expected_feedback": "selected candidate guard barrier absent after correction",
+      "scope": "No claim of execution or aligned normal continuation."
+    }
+  ]
+}

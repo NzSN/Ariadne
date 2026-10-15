@@ -141,6 +141,34 @@ impl FilePreparedAnalysis {
             .guard_snapshot
             .as_ref()
             .ok_or("guard immutable capture absent")?;
+        guard::validate_normal_flow_request(input, &self.prepared.request)?;
+        if let Some(flow) = &input.normal_flow {
+            for receipt in &flow.terminals {
+                let va = crate::bap::core_adapter::address(&receipt.site)?;
+                let captured = snapshot.read_prefix(va, receipt.bytes_hex.len() / 2)?;
+                guard::validate_terminal_capture(receipt, &captured.bytes)?;
+                let evidence = self
+                    .prepared
+                    .instructions
+                    .get(&va)
+                    .ok_or("terminal capture evidence absent")?;
+                if evidence.quality != EffectQuality::Opaque
+                    || evidence.rule.as_deref() != Some("captured-normal-terminal/v1")
+                    || evidence.semantic.as_ref().is_none_or(|s| {
+                        s.status != "normal-flow-terminal"
+                            || !s.gaps.iter().any(|g| g == "exception-exit")
+                            || !s
+                                .gaps
+                                .iter()
+                                .any(|g| g == "exception-resumption-outside-local-scope")
+                            || !s.gaps.iter().any(|g| g == "unsupported-exception-effects")
+                    })
+                {
+                    return Err("terminal capture effects/status changed".into());
+                }
+            }
+        }
+
         if **input != report.input
             || input.snapshot != self.snapshot.snapshot_id
             || input.artifact_sha256 != self.snapshot.artifact_sha256
@@ -228,7 +256,7 @@ impl FilePreparedAnalysis {
                 .instructions
                 .get(&va)
                 .ok_or("guard summary absent")?;
-            if let Some(pending) = guard::recognize_pending(source)? {
+            if let Some(pending) = guard::recognize_pending_for_input(input, source)? {
                 let decision = report.guards.iter().find(|g| g.site == pending.site);
                 let residual = decision
                     .map(|d| d.residual.as_str())
@@ -638,6 +666,18 @@ fn candidate_fingerprint(
         })
         .collect();
     let bytes = serde_json::to_vec(&(rows, sources, transfers))
+        .map_err(|e| PreparationError::Backend(e.to_string()))?;
+    Ok(crate::reports::sha256(&bytes))
+}
+
+fn candidate_fingerprint_with_terminals(
+    sites: &BTreeMap<Address, crate::llvm_mc::PreparedSite>,
+    sources: &BTreeMap<Address, guard::CandidateSite>,
+    transfers: Option<&BTreeMap<Address, crate::bap::target_resolution::Transfer>>,
+    terminals: &BTreeMap<Address, guard::TerminalReceipt>,
+) -> Result<String, PreparationError> {
+    let previous = candidate_fingerprint(sites, sources, transfers)?;
+    let bytes = serde_json::to_vec(&(previous, terminals))
         .map_err(|e| PreparationError::Backend(e.to_string()))?;
     Ok(crate::reports::sha256(&bytes))
 }
@@ -1150,7 +1190,7 @@ impl FileSnapshot {
             backend.enable_guard_admission();
             setup.producer = Some(backend.guard_producer());
         }
-        let mut prepared = self.prepare_materialization_guarded(
+        let mut prepared = self.prepare_materialization_with_terminals(
             query,
             options,
             limits,
@@ -1164,6 +1204,7 @@ impl FileSnapshot {
                     batch,
                     backend.take_target_transfers(),
                     backend.take_guard_sites(),
+                    backend.take_terminal_receipts(),
                 ))
             },
         )?;
@@ -1260,6 +1301,44 @@ impl FileSnapshot {
             PreparationError,
         >,
     {
+        self.prepare_materialization_with_terminals(
+            query,
+            options,
+            limits,
+            target_limits,
+            guard_setup,
+            |s, c, o, t| {
+                preparer(s, c, o, t)
+                    .map(|(batch, transfers, sources)| (batch, transfers, sources, BTreeMap::new()))
+            },
+        )
+    }
+
+    fn prepare_materialization_with_terminals<F>(
+        &self,
+        query: &AnalysisQuery,
+        options: &PreparationOptions,
+        limits: PrepareLimits,
+        target_limits: Option<&crate::bap::target_resolution::Limits>,
+        guard_setup: Option<&GuardPreparation>,
+        mut preparer: F,
+    ) -> Result<FilePreparedAnalysis, PreparationError>
+    where
+        F: FnMut(
+            &str,
+            &BTreeMap<Address, Option<Vec<u8>>>,
+            &PreparationOptions,
+            crate::llvm_mc::DecoderTarget,
+        ) -> Result<
+            (
+                crate::llvm_mc::PreparedBatch,
+                BTreeMap<Address, crate::bap::target_resolution::Transfer>,
+                BTreeMap<Address, guard::CandidateSite>,
+                BTreeMap<Address, guard::TerminalReceipt>,
+            ),
+            PreparationError,
+        >,
+    {
         if query.entry_points.is_empty() || limits.batch_size == 0 {
             return Err(PreparationError::InvalidQuery(
                 "nonempty roots and positive batch_size required",
@@ -1305,6 +1384,7 @@ impl FileSnapshot {
         let mut reads = BTreeMap::new();
         let mut sites = BTreeMap::new();
         let mut guard_sites = BTreeMap::new();
+        let mut terminal_receipts = BTreeMap::new();
         let mut guard_bytes = 0usize;
         let mut identity = None;
         let mut resolver = target_limits.map(TargetResolutionCoordinator::new);
@@ -1331,7 +1411,12 @@ impl FileSnapshot {
                 }
                 if combined {
                     advance_candidate_epoch(
-                        candidate_fingerprint(&sites, &guard_sites, Some(&resolver.transfers))?,
+                        candidate_fingerprint_with_terminals(
+                            &sites,
+                            &guard_sites,
+                            Some(&resolver.transfers),
+                            &terminal_receipts,
+                        )?,
                         &mut candidate_state,
                         &mut candidate_epoch,
                     )?;
@@ -1368,7 +1453,7 @@ impl FileSnapshot {
                 reads.insert(a, read);
                 report.attempted.insert(a);
             }
-            let (prepared, batch_transfers, batch_guards) = preparer(
+            let (prepared, batch_transfers, batch_guards, batch_terminals) = preparer(
                 &self.metadata.snapshot_id,
                 &candidates,
                 options,
@@ -1376,6 +1461,29 @@ impl FileSnapshot {
             )?;
             if let Some(resolver) = &mut resolver {
                 resolver.transfers.extend(batch_transfers);
+            }
+            if guard_setup.is_none() && !batch_terminals.is_empty() {
+                return Err(PreparationError::InvalidQuery(
+                    "terminal evidence without guarded preparation",
+                ));
+            }
+            for (va, receipt) in batch_terminals {
+                let source = batch_guards.get(&va).ok_or(PreparationError::InvalidQuery(
+                    "terminal source absent from batch",
+                ))?;
+                if !prepared.sites.contains_key(&va)
+                    || terminal_receipts.contains_key(&va)
+                    || !guard::terminal_valid(source, &receipt)
+                        .map_err(|e| PreparationError::Backend(e.to_string()))?
+                {
+                    return Err(PreparationError::InvalidQuery(
+                        "terminal evidence domain or source changed",
+                    ));
+                }
+                let captured = self.read_prefix(va, receipt.bytes_hex.len() / 2)?;
+                guard::validate_terminal_capture(&receipt, &captured.bytes)
+                    .map_err(|e| PreparationError::Backend(e.to_string()))?;
+                terminal_receipts.insert(va, receipt);
             }
             if let Some(setup) = guard_setup {
                 for (va, source) in batch_guards {
@@ -1417,10 +1525,11 @@ impl FileSnapshot {
             }
             if combined {
                 advance_candidate_epoch(
-                    candidate_fingerprint(
+                    candidate_fingerprint_with_terminals(
                         &sites,
                         &guard_sites,
                         resolver.as_ref().map(|r| &r.transfers),
+                        &terminal_receipts,
                     )?,
                     &mut candidate_state,
                     &mut candidate_epoch,
@@ -1463,14 +1572,18 @@ impl FileSnapshot {
                     source.control = guard::CandidateControl::from_instruction(&site.instruction);
                 }
                 if !site.decodable
-                    || site.instruction.kind == InstructionKind::Stop
+                    || (site.instruction.kind == InstructionKind::Stop
+                        && !terminal_receipts.contains_key(&va))
                     || (site.instruction.kind == InstructionKind::Indirect
                         && !site.instruction.complete)
                 {
                     barriers.insert(source.site.clone());
                 }
             }
+            let mut normal_flow = guard::NormalFlowEvidence::empty();
+            normal_flow.terminals = terminal_receipts.into_values().collect();
             let input = guard::GuardInput {
+                normal_flow: Some(normal_flow),
                 snapshot: self.metadata.snapshot_id.clone(),
                 artifact_sha256: self.metadata.artifact_sha256.clone(),
                 query_scope_sha256: setup.query_scope_sha256.clone(),
@@ -1511,7 +1624,7 @@ impl FileSnapshot {
             guard::replay_report(&input, &certified)
                 .map_err(|e| PreparationError::Backend(e.to_string()))?;
             for source in &input.sites {
-                if guard::recognize_pending(source)
+                if guard::recognize_pending_for_input(&input, source)
                     .map_err(|e| PreparationError::Backend(e.to_string()))?
                     .is_none()
                 {

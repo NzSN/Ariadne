@@ -130,8 +130,9 @@ let () =
         let profile=string payload "profile" in
         target_profile := profile="captured-indirect-targets/v1" ||
           profile="captured-guarded-input/v1" || profile="captured-guarded-targets/v1" ||
-          profile="captured-guarded-targets/v2";
-        require (List.mem profile ["normalized-fixed-input/v1";"captured-fixed-input/v1";"captured-indirect-targets/v1";"captured-guarded-input/v1";"captured-guarded-targets/v1";"captured-guarded-targets/v2"])
+          profile="captured-guarded-targets/v2" || profile="captured-guarded-input/v2" ||
+          profile="captured-guarded-targets/v3";
+        require (List.mem profile ["normalized-fixed-input/v1";"captured-fixed-input/v1";"captured-indirect-targets/v1";"captured-guarded-input/v1";"captured-guarded-targets/v1";"captured-guarded-targets/v2";"captured-guarded-input/v2";"captured-guarded-targets/v3"])
           "unsupported profile";
         require (family="recovery" || profile="normalized-fixed-input/v1") "stateflow profile";
         (* Large captured graphs allocate many short-lived persistent-tree nodes.
@@ -140,14 +141,19 @@ let () =
         let input_json = get payload "input" in
         let state = try Some (if family="recovery" then begin
             let input,sites=if profile="captured-guarded-targets/v1" ||
-                profile="captured-guarded-targets/v2" then begin
+                profile="captured-guarded-targets/v2" || profile="captured-guarded-targets/v3" then begin
                 require(string(get input_json "composition")"profile"=profile)
                   "composition transport profile binding";
                 require (Composition.transport_query snapshot input_json=query)
                   "composition session query identity";
                 Composition.admit input_json snapshot
               end
-              else if profile="captured-guarded-input/v1" then Guard.admit input_json snapshot
+              else if profile="captured-guarded-input/v1" then Legacy_guard.admit input_json snapshot
+              else if profile="captured-guarded-input/v2" then begin
+                require(string(get input_json "guard_admission")"schema"="ariadne.guard-admission/v2")
+                  "guard transport profile binding";
+                Guard.admit input_json snapshot
+              end
               else if profile="captured-indirect-targets/v1" then Capture.admit_resolved input_json snapshot
               else if profile="captured-fixed-input/v1" then Capture.admit input_json snapshot
               else Recovery.admit input_json snapshot,M.empty in
@@ -156,7 +162,8 @@ let () =
             let input=Stateflow.admit input_json snapshot in
             Flow (input, Stateflow.init input, Project_state.create snapshot input_json)
           end) with Invalid reason when profile="captured-guarded-input/v1" ||
-              profile="captured-guarded-targets/v1" || profile="captured-guarded-targets/v2" ->
+              profile="captured-guarded-targets/v1" || profile="captured-guarded-targets/v2" ||
+              profile="captured-guarded-input/v2" || profile="captured-guarded-targets/v3" ->
             if Sys.getenv_opt "ARIADNE_TARGET_DIAGNOSTICS"<>None then
               Printf.eprintf "guarded native admission rejected: %s\n%!" reason;
             let empty=`Assoc ["phase",js "recover";"pending",`List [];

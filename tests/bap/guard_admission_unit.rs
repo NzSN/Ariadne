@@ -104,6 +104,7 @@ fn input(sites: Vec<CandidateSite>, roots: &[u64]) -> GuardInput {
         closure_complete: true,
         barriers: Vec::new(),
         sites,
+        normal_flow: Some(NormalFlowEvidence::empty()),
     }
 }
 fn observe(input: &mut GuardInput, point: u64, residue: u8) {
@@ -187,11 +188,12 @@ fn typed_transfer_rows_match_all_720_frozen_independent_64_bit_executions() {
             "identity" | "havoc" => Vec::new(),
             _ => panic!("fixture transfer {kind}"),
         };
-        let mut s = site(va, &bil, ControlKind::Stop, &[], &[]);
+        let mut s = site(va, &bil, ControlKind::Ordinary, &[0x20000], &[]);
         s.opaque = kind == "havoc";
         sites.push(s);
         roots.push(va);
     }
+    sites.push(terminal(0x20000));
     let i = input(sites, &roots);
     let report = certify_guards(&i).unwrap();
     assert!(report.stop.is_none());
@@ -615,11 +617,7 @@ fn barriers_limits_and_unreached_facts_never_admit_a_normal_outcome() {
         Verdict::Unknown
     );
     let i = input(
-        vec![
-            site(0x1000, &[], ControlKind::Stop, &[], &[]),
-            guard(0x2000),
-            terminal(0x2008),
-        ],
+        vec![terminal(0x1000), guard(0x2000), terminal(0x2008)],
         &[0x1000],
     );
     let report = certify_guards(&i).unwrap();
@@ -713,7 +711,7 @@ fn final_identity_binds_actual_premises_and_request_without_hash_cycles() {
     let mut row = report.guards[0].clone();
     row.receipt_sha256.clear();
     let encoded = serde_json::to_vec(&(
-        "ariadne-guard-receipt/v1",
+        "ariadne-guard-receipt/v2",
         &report.checker_sha256,
         &report.intent_id,
         &report.candidate_graph_sha256,
@@ -795,5 +793,322 @@ fn caller_selected_budgets_can_exceed_every_default_and_bind_the_proof() {
             &format!("\"max_elapsed_ms\":{invalid}"),
         );
         assert!(serde_json::from_str::<Limits>(&text).is_err(), "{invalid}");
+    }
+}
+
+fn load_guard(va: u64) -> CandidateSite {
+    let fixture: Value = serde_json::from_str(include_str!(
+        "fixtures/caller-coverage/dump-four-shapes.json"
+    ))
+    .unwrap();
+    let load = fixture["cases"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|v| v["id"] == "movaps-load")
+        .unwrap();
+    CandidateSite {
+        site: hex(va),
+        bytes_hex: load["bap_original"]["bytes_hex"].as_str().unwrap().into(),
+        ast: load["bap_original"]["ast"].as_str().unwrap().into(),
+        control: control(ControlKind::Ordinary, &[va + 8], &[]),
+        opaque: true,
+    }
+}
+fn as_legacy(mut input: GuardInput) -> GuardInput {
+    input.policy = LEGACY_PROFILE.into();
+    input.model_version = LEGACY_MODEL_VERSION.into();
+    input.model_sha256 = legacy_model_identity();
+    input.producer.projection = LEGACY_PRODUCER_PROFILE.into();
+    input.normal_flow = None;
+    input
+}
+#[test]
+fn exact_load_guard_preserves_the_upper_bank_and_selects_effects_only_after_alignment() {
+    let load = load_guard(0x2000);
+    let pending = recognize_pending(&load).unwrap().unwrap();
+    assert_eq!(pending.vector_bank, 6);
+    assert_eq!(pending.displacement, 0x240);
+    assert_ne!(
+        pending.pending_relation_sha256,
+        recognize_pending(&guard(0x2000))
+            .unwrap()
+            .unwrap()
+            .pending_relation_sha256
+    );
+    let original: Vec<Stmt> = serde_json::from_str(&load.ast).unwrap();
+    assert!(
+        super::target_resolution::extract(
+            &original,
+            0x2000,
+            &[0x0f, 0x28, 0xb4, 0x24, 0x40, 2, 0, 0]
+        )
+        .unwrap()
+        .is_scalar_identity()
+    );
+    for (residue, expected) in [
+        (Some(0), Verdict::Aligned),
+        (Some(8), Verdict::Misaligned),
+        (None, Verdict::Unknown),
+    ] {
+        let mut input = direct(residue);
+        input.sites[0] = load.clone();
+        let report = certify_guards(&input).unwrap();
+        assert_eq!(report.guards[0].verdict, expected);
+        replay_report(&input, &report).unwrap();
+        if expected == Verdict::Aligned {
+            let normal: Vec<Stmt> =
+                serde_json::from_str(report.guards[0].normal_ast.as_ref().unwrap()).unwrap();
+            assert_eq!(normal.len(), 1);
+            let effects = super::projection::project(
+                &normal,
+                "MOVAPS-reviewed-load",
+                &[0x0f, 0x28, 0xb4, 0x24, 0x40, 2, 0, 0],
+                0x2000,
+            )
+            .unwrap();
+            assert!(effects.uses.contains("memory:any"));
+            assert!(effects.uses.contains("state:other"));
+            assert!(effects.may_defs.contains("state:other"));
+            assert!(effects.must_defs.is_empty());
+        } else {
+            assert!(report.guards[0].normal_ast.is_none());
+        }
+    }
+}
+#[test]
+fn load_guard_rejects_wrong_bank_merge_width_direction_address_and_predicate() {
+    let original = load_guard(0x2000);
+    let ast: Value = serde_json::from_str(&original.ast).unwrap();
+    for (pointer, value) in [
+        ("/0/var/name", serde_json::json!("YMM7")),
+        ("/0/value/lhs/arg/var/name", serde_json::json!("YMM7")),
+        ("/0/value/lhs/lo", serde_json::json!(127)),
+        ("/0/value/rhs/arg/width", serde_json::json!(256)),
+        (
+            "/0/value/rhs/arg/addr/rhs/value",
+            serde_json::json!("0x241:64u"),
+        ),
+        ("/1/condition/lhs/rhs/value", serde_json::json!("0x7:64u")),
+        ("/1/no/0/number", serde_json::json!(14)),
+    ] {
+        let mut changed = original.clone();
+        let mut altered = ast.clone();
+        *altered.pointer_mut(pointer).unwrap() = value;
+        changed.ast = altered.to_string();
+        assert!(recognize_pending(&changed).unwrap().is_none(), "{pointer}");
+    }
+    for bytes in [
+        "0f29b42440020000",
+        "660f28b42440020000",
+        "410f28b42440020000",
+        "0f28b4244002000090",
+    ] {
+        let mut changed = original.clone();
+        changed.bytes_hex = bytes.into();
+        assert!(recognize_pending(&changed).unwrap().is_none(), "{bytes}");
+    }
+}
+#[test]
+fn legacy_guard_policy_keeps_store_only_semantics_and_rejects_new_fields() {
+    let legacy = as_legacy(direct(Some(0)));
+    let report = certify_guards(&legacy).unwrap();
+    assert_eq!(report.schema, "ariadne.guard-admission/v1");
+    assert_eq!(report.profile, LEGACY_PROFILE);
+    assert_eq!(
+        report.checker_sha256,
+        "076b8a3fb6f776e53ea99336854c1a793b8658874c153f4ddd2e32c54128ce7d"
+    );
+    assert_eq!(
+        report.input.model_sha256,
+        "10e870b21691946cd7985ff7d33819a8a58e4fea202ae6d2e771214b997f5bc9"
+    );
+    assert_eq!(report.guards[0].verdict, Verdict::Aligned);
+    replay_report(&legacy, &report).unwrap();
+    let mut old_load = legacy.clone();
+    old_load.sites[0] = load_guard(0x2000);
+    assert!(
+        recognize_pending_for_input(&old_load, &old_load.sites[0])
+            .unwrap()
+            .is_none()
+    );
+    let partial = certify_guards(&old_load).unwrap();
+    assert!(partial.guards.is_empty());
+    assert_eq!(
+        partial.stop.as_deref(),
+        Some("candidate-coverage-incomplete")
+    );
+    let mut unsupported = legacy.clone();
+    unsupported.normal_flow = Some(NormalFlowEvidence::empty());
+    assert!(certify_guards(&unsupported).is_err());
+    let mut encoded = serde_json::to_value(&legacy).unwrap();
+    assert!(encoded.get("normal_flow").is_none());
+    encoded["normal_flow"] = Value::Null;
+    assert!(serde_json::from_value::<GuardInput>(encoded).is_err());
+    let mut modern = direct(Some(0));
+    modern.normal_flow = None;
+    assert!(certify_guards(&modern).is_err());
+}
+#[test]
+fn unreviewed_stops_cannot_borrow_empty_typed_bil_to_close_normal_coverage() {
+    for opcode in ["90", "f8"] {
+        let mut input = direct(Some(0));
+        input.sites[1].control.kind = ControlKind::Stop;
+        input.sites[1].bytes_hex = opcode.into();
+        input.sites[1].opaque = false;
+        let report = certify_guards(&input).unwrap();
+        assert_eq!(
+            report.stop.as_deref(),
+            Some("candidate-coverage-incomplete")
+        );
+        assert_eq!(report.guards[0].verdict, Verdict::Unknown);
+        replay_report(&input, &report).unwrap();
+    }
+}
+
+/// Independent checker unit capsules. Full reader/native capture admission is
+/// exercised separately by the input-module exports and original dump retry.
+pub(crate) fn export_caller_receipt_unit(
+    name: &str,
+    input: &GuardInput,
+    report: &Report,
+    request: &crate::AnalysisRequest,
+) {
+    let Some(directory) = std::env::var_os("ARIADNE_CALLER_RECEIPT_DIR") else {
+        return;
+    };
+    request.validate().unwrap();
+    validate_normal_flow_request(input, request).unwrap();
+    let normalized = super::core_adapter::encode_request(request).unwrap();
+    let digest = crate::reports::sha256(&serde_json::to_vec(&normalized).unwrap());
+    let mut report = report.clone();
+    bind_final_request(input, &mut report, &digest).unwrap();
+    replay_report(input, &report).unwrap();
+    let capsule = serde_json::json!({"schema":"ariadne.caller-proof-unit/v1","guard_report":report,"normalized":normalized,"sources":input.sites});
+    let directory = std::path::PathBuf::from(directory);
+    std::fs::create_dir_all(&directory).unwrap();
+    std::fs::write(
+        directory.join(format!("{name}-unit.json")),
+        serde_json::to_vec_pretty(&capsule).unwrap(),
+    )
+    .unwrap();
+}
+fn caller_unit_request(input: &GuardInput, report: &Report) -> crate::AnalysisRequest {
+    use crate::{AnalysisRequest, InputKind, Instruction, InstructionKind};
+    let locations = crate::effects::PreparationOptions::default()
+        .catalogue
+        .locations();
+    let mut request = AnalysisRequest {
+        snapshot_id: input.snapshot.clone(),
+        locations: locations.clone(),
+        entry_points: input
+            .roots
+            .iter()
+            .map(|r| u64::from_str_radix(&r.site[2..], 16).unwrap())
+            .collect(),
+        slice_seeds: input
+            .seeds
+            .iter()
+            .map(|s| u64::from_str_radix(&s[2..], 16).unwrap())
+            .collect(),
+        input_kind: InputKind::Dump,
+        ..AnalysisRequest::default()
+    };
+    for source in &input.sites {
+        let site = u64::from_str_radix(&source.site[2..], 16).unwrap();
+        let encoded = source.bytes_hex.as_bytes();
+        let bytes: Vec<_> = (0..encoded.len())
+            .step_by(2)
+            .map(|at| u8::from_str_radix(&source.bytes_hex[at..at + 2], 16).unwrap())
+            .collect();
+        request.addresses.insert(site);
+        request.captured.insert(site);
+        let instruction = if let Some(normal) = report.normal_selection(site) {
+            request.decodable.insert(site);
+            super::Backend::guard_normal_projection(
+                normal,
+                if bytes.get(1) == Some(&0x28) {
+                    "MOVAPS-reviewed-load"
+                } else {
+                    "MOVAPS-reviewed-store"
+                },
+                &bytes,
+                site,
+            )
+            .unwrap()
+            .instruction
+        } else if source.control.kind == ControlKind::Return {
+            request.decodable.insert(site);
+            Instruction {
+                kind: InstructionKind::Return,
+                complete: true,
+                uses: locations.clone(),
+                may_defs: locations.clone(),
+                ..Instruction::default()
+            }
+        } else {
+            Instruction {
+                kind: InstructionKind::Stop,
+                complete: false,
+                uses: locations.clone(),
+                may_defs: locations.clone(),
+                ..Instruction::default()
+            }
+        };
+        request.instructions.insert(site, instruction);
+    }
+    request
+}
+#[test]
+fn export_checked_current_load_store_and_legacy_guard_unit_capsules() {
+    for (name, residue, load, legacy) in [
+        ("movaps-load-aligned", Some(0), true, false),
+        ("movaps-load-misaligned", Some(8), true, false),
+        ("movaps-load-unknown", None, true, false),
+        ("movaps-store-aligned", Some(0), false, false),
+        ("legacy-store-aligned", Some(0), false, true),
+    ] {
+        let mut input = direct(residue);
+        if load {
+            input.sites[0] = load_guard(0x2000);
+        }
+        if legacy {
+            input = as_legacy(input);
+        }
+        let report = certify_guards(&input).unwrap();
+        let request = caller_unit_request(&input, &report);
+        replay_report(&input, &report).unwrap();
+        export_caller_receipt_unit(name, &input, &report, &request);
+    }
+}
+
+#[test]
+fn current_pending_guard_requires_complete_candidate_control_without_rewriting_legacy_policy() {
+    for mut source in [guard(0x2000), load_guard(0x2000)] {
+        source.control.complete = false;
+        assert!(recognize_pending(&source).unwrap().is_none());
+        let mut current = direct(Some(0));
+        current.sites[0] = source.clone();
+        assert!(
+            recognize_pending_for_input(&current, &source)
+                .unwrap()
+                .is_none()
+        );
+        let report = certify_guards(&current).unwrap();
+        assert!(report.guards.is_empty());
+        assert_eq!(
+            report.stop.as_deref(),
+            Some("candidate-coverage-incomplete")
+        );
+        replay_report(&current, &report).unwrap();
+        let legacy = as_legacy(current);
+        let expected_store = source.bytes_hex.starts_with("0f29");
+        assert_eq!(
+            recognize_pending_for_input(&legacy, &source)
+                .unwrap()
+                .is_some(),
+            expected_store,
+            "legacy retains its frozen store-only recognition policy"
+        );
     }
 }

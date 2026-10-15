@@ -1,0 +1,13 @@
+{
+  "name": "rust-terminal",
+  "command": [
+    "cargo",
+    "test",
+    "--offline",
+    "--locked",
+    "--lib",
+    "bap::terminal_control::tests"
+  ],
+  "exit_code": 101,
+  "seconds": 19.567689196
+}

@@ -33,6 +33,8 @@ pub fn render_frame_paths(value: &FramePathListing, format: Format) -> Result<St
             if [
                 crate::investigation::COMPOSED_FRAME_PATH_SCHEMA,
                 crate::investigation::LEGACY_COMPOSED_FRAME_PATH_SCHEMA,
+                crate::investigation::LEGACY_V2_COMPOSED_FRAME_PATH_SCHEMA,
+                crate::investigation::GUARDED_FRAME_PATH_SCHEMA,
             ]
             .contains(&value.schema.as_str())
             {

@@ -9,7 +9,7 @@ let rec canonical = function
       |> List.sort (fun (a,_) (b,_) -> compare a b))
   | `List rows -> `List (List.map canonical rows)
   | value -> value
-let hash_json value = Guard.hash_json (canonical value)
+let hash_json value = Legacy_guard.hash_json (canonical value)
 let transport_query snapshot input =
   let bytes=Buffer.create 512 in
   Buffer.add_string bytes "ariadne.bap-core-query/v1\000";
@@ -20,9 +20,9 @@ let transport_query snapshot input =
         (Int64.shift_right_logical length (byte*8)) 255L)))
     done;
     Buffer.add_string bytes text)
-    [snapshot;"recovery";profile;Guard.encoded(canonical input)];
-  Guard.Sha256.digest(Buffer.contents bytes)
-let same = Guard.same_shape
+    [snapshot;"recovery";profile;Legacy_guard.encoded(canonical input)];
+  Legacy_guard.Sha256.digest(Buffer.contents bytes)
+let same = Legacy_guard.same_shape
 let ends text suffix = let n=String.length text and m=String.length suffix in
   n>=m && String.sub text (n-m) m=suffix
 let control_of_instruction row = `Assoc [
@@ -82,7 +82,7 @@ let validate_original_control site source original =
   end else require (S.is_empty fall) "composition original unexpected fall";
   if kind="indirect" then require (S.is_empty targets &&
     get original "complete"=`Bool false) "composition raw indirect invented targets";
-  let pending=Guard.recognized source<>None in
+  let pending=Legacy_guard.recognized source<>None in
   if not pending && not(boolean(get source "opaque")) &&
       List.mem kind ["ordinary";"conditional";"jump";"indirect"] then begin
     let bil=list(Yojson.Safe.from_string(string source "ast")) in
@@ -103,7 +103,7 @@ let validate_original_control site source original =
       not(List.mem kind ["stop";"call";"return"]) then begin
     require (kind="ordinary") "composition opaque original control";
     require (S.is_empty targets && get original "complete"=`Bool true &&
-      not(Guard.unreviewed_control true 0
+      not(Legacy_guard.unreviewed_control true 0
         (list(Yojson.Safe.from_string(string source "ast")))))
       "composition opaque ordinary control changed"
   end
@@ -166,7 +166,7 @@ let admit j snapshot =
   require (string targets "graph_sha256"=resolver_graph_hash candidate)
     "composition target graph digest";
   List.iter (fun row ->
-    require (string row "ast_sha256"=Guard.Sha256.digest(string row "ast"))
+    require (string row "ast_sha256"=Legacy_guard.Sha256.digest(string row "ast"))
       "composition target original AST digest") (list(get targets "transfers"));
   (* Capture proves table arithmetic, structural incoming coverage and scalar
      substitution against the sealed candidate, including pending normal edges. *)
@@ -186,7 +186,7 @@ let admit j snapshot =
       raise(Invalid "composition target transfer missing original guard source") in
     require (get transfer "bytes_hex"=get source "bytes_hex" &&
       get transfer "ast"=get source "ast" &&
-      string transfer "ast_sha256"=Guard.Sha256.digest(string source "ast"))
+      string transfer "ast_sha256"=Legacy_guard.Sha256.digest(string source "ast"))
       "composition target/guard original BIL mismatch") (list(get targets "transfers"));
   let controls=List.fold_left (fun map row ->
     exact row ["site";"control"];
@@ -228,7 +228,7 @@ let admit j snapshot =
           get effective "targets"=`List [] && get effective "complete"=`Bool false &&
           get targets "stop"<>`Null) "composition missing indirect receipt")
     end else require (same original effective) "composition unauthorized control change";
-    if Guard.recognized source<>None then begin
+    if Legacy_guard.recognized source<>None then begin
       pending:=S.add site !pending;
       let next=Printf.sprintf "0x%016Lx" (Int64.add(Int64.of_string site)
         (Int64.of_int(String.length(string source "bytes_hex")/2))) in
@@ -257,8 +257,8 @@ let admit j snapshot =
      internal query ID stays guard-specific; the public query is the pair seal. *)
   let receipts=List.map (fun row -> get row "receipt_sha256") (list(get guards "guards"))
     |> List.sort compare in
-  let guard_query=Guard.digest_array [`String "ariadne-guard-analysis/v1";
+  let guard_query=Legacy_guard.digest_array [`String "ariadne-guard-analysis/v1";
     get guards "intent_id";get guards "final_request_sha256";`List receipts] in
-  let guard_capture=Guard.replace_field capture "query_id" (`String guard_query) in
-  Guard.admit (`Assoc ["normalized",final;"capture",guard_capture;
+  let guard_capture=Legacy_guard.replace_field capture "query_id" (`String guard_query) in
+  Legacy_guard.admit (`Assoc ["normalized",final;"capture",guard_capture;
     "guard_admission",guards]) snapshot

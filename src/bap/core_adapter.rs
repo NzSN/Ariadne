@@ -281,16 +281,11 @@ impl NativeAnalyzer {
         let (session, response) =
             CoreSession::start_profile(config, token, &request.snapshot_id, profile, &input)?;
         if let Some(error) = response.error {
-            return Err(invalid(
-                if profile == super::core_protocol::GUARDED_PROFILE
-                    || profile == super::core_protocol::LEGACY_COMPOSED_PROFILE
-                    || profile == super::core_protocol::COMPOSED_PROFILE
-                {
-                    format!("native guarded initialize rejected: {}", error.message)
-                } else {
-                    "native initialize rejected".into()
-                },
-            ));
+            return Err(invalid(if super::core_protocol::guarded_profile(profile) {
+                format!("native guarded initialize rejected: {}", error.message)
+            } else {
+                "native initialize rejected".into()
+            }));
         }
         let state = decode_state(&request, &response.observation)?;
         validate_attribution(&request, &state, &response.attribution, &evidence)?;
@@ -315,6 +310,13 @@ impl NativeAnalyzer {
         token: &str,
         prepared: &crate::input::FilePreparedAnalysis,
     ) -> Result<Self, Error> {
+        let (request, profile, input) = Self::capture_input(prepared)?;
+        Self::start(config, token, request, &profile, input)
+    }
+    #[cfg(feature = "input")]
+    fn capture_input(
+        prepared: &crate::input::FilePreparedAnalysis,
+    ) -> Result<(AnalysisRequest, String, Value), Error> {
         let request = prepared.prepared.request.clone();
         if prepared.prepared.instructions.values().any(|e| {
             e.semantic
@@ -354,11 +356,7 @@ impl NativeAnalyzer {
             input["composition"] = serde_json::to_value(composition)?;
             input["guard_admission"] = serde_json::to_value(guards)?;
             input["target_resolution"] = serde_json::to_value(targets)?;
-            if super::composition::is_legacy(composition) {
-                super::core_protocol::LEGACY_COMPOSED_PROFILE
-            } else {
-                super::core_protocol::COMPOSED_PROFILE
-            }
+            composition.profile.as_str()
         } else if let Some(report) = prepared.guard_admission() {
             if prepared.target_resolution().is_some() {
                 return Err(invalid(
@@ -367,7 +365,11 @@ impl NativeAnalyzer {
             }
             prepared.validate_guard_admission()?;
             input["guard_admission"] = serde_json::to_value(report)?;
-            super::core_protocol::GUARDED_PROFILE
+            if super::guard_admission::is_legacy(report) {
+                super::core_protocol::LEGACY_GUARDED_PROFILE
+            } else {
+                super::core_protocol::GUARDED_PROFILE
+            }
         } else if let Some(report) = prepared.target_resolution() {
             input["target_resolution"] = serde_json::to_value(report)?;
             super::core_protocol::TARGET_PROFILE
@@ -383,7 +385,13 @@ impl NativeAnalyzer {
         {
             std::fs::write(path, serde_json::to_vec(&input)?)?;
         }
-        Self::start(config, token, request, profile, input)
+        Ok((request, profile.to_owned(), input))
+    }
+    #[cfg(all(test, feature = "input"))]
+    pub(crate) fn capture_wire_for_test(
+        prepared: &crate::input::FilePreparedAnalysis,
+    ) -> Result<Value, Error> {
+        Ok(Self::capture_input(prepared)?.2)
     }
     pub fn identity(&self) -> &Value {
         self.session.identity()

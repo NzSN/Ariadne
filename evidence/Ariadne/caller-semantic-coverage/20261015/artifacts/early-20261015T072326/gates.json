@@ -1,0 +1,78 @@
+[
+  {
+    "name": "rust-terminal",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--lib",
+      "bap::terminal_control::tests"
+    ],
+    "exit_code": 0,
+    "seconds": 11.38015731400003
+  },
+  {
+    "name": "native-build",
+    "command": [
+      "python3",
+      "native/bap-core/build.py",
+      "--output",
+      "target/caller-native"
+    ],
+    "exit_code": 0,
+    "seconds": 11.919394051999973
+  },
+  {
+    "name": "llvm-build",
+    "command": [
+      "bash",
+      "native/llvm_mc/build.sh",
+      "target/caller-llvm/ariadne-llvm-mc"
+    ],
+    "exit_code": 0,
+    "seconds": 1.7810645420000242
+  },
+  {
+    "name": "rust-guard",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--lib",
+      "bap::guard_admission_tests"
+    ],
+    "exit_code": 0,
+    "seconds": 1.1264454319999686
+  },
+  {
+    "name": "rust-composition",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--lib",
+      "input::materialize::composition_tests"
+    ],
+    "exit_code": 0,
+    "seconds": 1.2616060920000223
+  },
+  {
+    "name": "actual-load-export",
+    "command": [
+      "cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--lib",
+      "actual_movaps_load_guard_outcomes_export_checked_native_inputs",
+      "--",
+      "--ignored",
+      "--nocapture"
+    ],
+    "exit_code": 101,
+    "seconds": 1.823210997999979
+  }
+]

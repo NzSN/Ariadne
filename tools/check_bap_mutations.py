@@ -92,7 +92,7 @@ def main():
  native_mutants=[
   ('native-opaque-kill-accepted','&& S.is_empty instruction.must)','&& true)'),
   ('native-opaque-footprint-lost','&& S.equal instruction.uses i.locations','&& true'),
-  ('native-opaque-profile-ignored','List.mem (get row "projection") [`String "bap-bit-provenance-v3"; `String "bap-bit-provenance-v4"; `String "bap-bit-provenance-v5"; `String "bap-bit-provenance-v6"; `String "bap-bit-provenance-v7"]','true'),
+  ('native-opaque-profile-ignored','List.mem (get row "projection") [`String "bap-bit-provenance-v3"; `String "bap-bit-provenance-v4"; `String "bap-bit-provenance-v5"; `String "bap-bit-provenance-v6"; `String "bap-bit-provenance-v7"; `String "bap-bit-provenance-v8"]','true'),
  ]
  for name,old,new in native_mutants:
   path=native_source/'capture.ml';original=path.read_text()
@@ -105,8 +105,9 @@ def main():
   mutant_env={**env,'ARIADNE_BAP_CORE_DIR':str(output_dir)}
   r=execute(command(sut/'Cargo.toml',ROOT/'target/bap-mutations'/work.name,'input-core',test),mutant_env)
   output=r.stdout+r.stderr;(work/(name+'.log')).write_text(output)
-  killed=r.returncode==101 and f'test {test} ... FAILED' in output and ('assertion' in output or 'native admitted opaque' in output) and 'could not compile' not in output
-  rows.append(dict(mutation=name,test=test,assertionRejected=killed,exitCode=r.returncode))
+  marker='native admitted opaque '+{'native-opaque-kill-accepted':'kill','native-opaque-footprint-lost':'uses','native-opaque-profile-ignored':'profile'}[name]+' mutation'
+  killed=r.returncode==101 and f'test {test} ... FAILED' in output and marker in output and 'could not compile' not in output
+  rows.append(dict(mutation=name,test=test,assertionRejected=killed,expectedFailureMarker=marker,exitCode=r.returncode))
   print(name,':','intended assertion mismatch' if killed else 'NOT ACCEPTED',flush=True)
   if not killed:raise SystemExit(name+': no intended native assertion mismatch')
  unchanged=all(digest(sut/p)==d for p,d in observers.items())

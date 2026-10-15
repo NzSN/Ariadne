@@ -1,0 +1,1185 @@
+{
+  "acceptance_observations": {
+    "all_29_original_terminal_receipts_checked": true,
+    "all_30_original_barriers_removed": true,
+    "all_51_formerly_missing_starts_attempted": true,
+    "all_nine_original_sites_complete": true,
+    "all_original_table_sets_equal": true,
+    "both_targeted_loop_receipts_complete_and_bound": true,
+    "caller_roots_and_premises_unchanged": true,
+    "frame_path_coverage": "unavailable",
+    "frame_path_stop_reason": "missing-frame-query",
+    "frame_paths_available": false,
+    "frames_with_full_native_rust_parity": [
+      0
+    ],
+    "no_remaining_caller_barriers": true,
+    "paired_native_accepted_loop_receipts": true,
+    "scope": "Loop closure, candidate recovery, guard coverage, completed-core parity and path availability are separate claims; unavailable paths never establish no possible path."
+  },
+  "binding_hard_limits": {
+    "decoded_nodes": 8192,
+    "edges": 32768
+  },
+  "caller_normal_flow": {
+    "all_guard_outcomes": [
+      {
+        "residual": "alignment-fault-refuted-under-premises",
+        "site": "0x00007ff7744033b3",
+        "verdict": "aligned"
+      },
+      {
+        "residual": "normal-or-alignment-fault-unresolved",
+        "site": "0x00007ff7744035c9",
+        "verdict": "unknown"
+      }
+    ],
+    "all_original_barriers_removed": true,
+    "all_original_terminal_receipts_checked": true,
+    "artifact_sha256": "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+    "claim_boundary": "Checked local normal completion; exception handler/debugger resumption and exceptional effects remain outside scope. Guard coverage, alignment verdict, completed-core parity and frame paths are separate outcomes.",
+    "expectation_sha256": "90b440c0059ca65888a5b4b11be69d505763684239118be84fe67e87d99ecb41",
+    "expectation_source": "/home/nzsn/Repos/Ariadne-caller-coverage-20261015/tests/bap/fixtures/caller-coverage/dump-four-shapes.json",
+    "expectations_are_configuration": false,
+    "guard_stop": null,
+    "load_guard": {
+      "receipt_sha256": "ef9043fbc87992d3219a05d64fb831e561f6265d905c62be32d80532f3356290",
+      "residual": "normal-or-alignment-fault-unresolved",
+      "site": "0x00007ff7744035c9",
+      "verdict": "unknown"
+    },
+    "no_remaining_barriers": true,
+    "normal_flow_kind": "local_normal_completion",
+    "original_barrier_count": 30,
+    "original_barriers": [
+      "0x00007ff7744035c9",
+      "0x00007ff77440b0e0",
+      "0x00007ff77440b30d",
+      "0x00007ff77440b753",
+      "0x00007ff77440ba62",
+      "0x00007ff77440ba65",
+      "0x00007ff77440ba68",
+      "0x00007ff77440ba6b",
+      "0x00007ff77440ba6e",
+      "0x00007ff77440ba71",
+      "0x00007ff77440ba74",
+      "0x00007ff77440ba77",
+      "0x00007ff77440ba98",
+      "0x00007ff77440ba9b",
+      "0x00007ff77440ba9e",
+      "0x00007ff77440baa1",
+      "0x00007ff77440baa4",
+      "0x00007ff77440bc0d",
+      "0x00007ff77440c691",
+      "0x00007ff77440c709",
+      "0x00007ff77440c7a0",
+      "0x00007ff77440c7a3",
+      "0x00007ff77440d410",
+      "0x00007ff77440d413",
+      "0x00007ff77440d7cf",
+      "0x00007ff77440dd2b",
+      "0x00007ff77440dd2e",
+      "0x00007ff77440dd7e",
+      "0x00007ff77440dd81",
+      "0x00007ff77440dd84"
+    ],
+    "original_int3_receipts": 27,
+    "original_terminal_receipts": [
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "670fb94012",
+        "exception": 6,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "ud1-pinned-extent/v1",
+        "site": "0x00007ff77440b0e0"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440b30d"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "0f0b",
+        "exception": 6,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "ud2-empty-lift/v1",
+        "site": "0x00007ff77440b753"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440ba62"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440ba65"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440ba68"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440ba6b"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440ba6e"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440ba71"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440ba74"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440ba77"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440ba98"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440ba9b"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440ba9e"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440baa1"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440baa4"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440bc0d"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440c691"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440c709"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440c7a0"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440c7a3"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440d410"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440d413"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440d7cf"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440dd2b"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440dd2e"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440dd7e"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440dd81"
+      },
+      {
+        "annotation": "exception-exit",
+        "bytes_hex": "cc",
+        "exception": 3,
+        "resumption": "exception-resumption-outside-local-scope",
+        "rule": "int3-exception/v1",
+        "site": "0x00007ff77440dd84"
+      }
+    ],
+    "premise_evidence_equal": true,
+    "remaining_barriers": [],
+    "root_evidence_equal": true,
+    "roots_and_premises_unchanged": true,
+    "schema": "ariadne.caller-normal-flow-dump-audit/v1",
+    "scope": "local-normal-completion/v1",
+    "snapshot": "minidump-captured-amd64-v1:9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+    "total_terminal_receipts": 29
+  },
+  "core_action_limit": 1000000,
+  "dump_sha256": "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+  "elapsed_ms": 1103461,
+  "frame_paths": {
+    "available": false,
+    "counters": {
+      "expanded_states": 0,
+      "peak_frontier_bytes": 0,
+      "retained_path_bytes": 0,
+      "scanned_edges": 0
+    },
+    "coverage": "unavailable",
+    "enumeration_exhausted": false,
+    "json": "frame-paths.json or lossless frame-paths.json.gz; see artifact-identities.ndjson",
+    "returned_count": 0,
+    "status": "listed",
+    "stop_reason": "missing-frame-query",
+    "truncated": false
+  },
+  "frames": [
+    {
+      "attempted_starts": 9600,
+      "candidate_epoch": 609,
+      "candidate_sites": 9600,
+      "complete_target_sites": 10,
+      "composition_profile": "captured-guarded-targets/v3",
+      "composition_report_bytes": 8173668,
+      "composition_schema": "ariadne.guarded-target-resolution/v3",
+      "entry": "0x00007ff7744033a0",
+      "frame": 1,
+      "guard_barriers": [],
+      "guard_report_bytes": 17797216,
+      "guard_stop": null,
+      "guards": [
+        {
+          "residual": "alignment-fault-refuted-under-premises",
+          "site": "0x00007ff7744033b3",
+          "verdict": "aligned"
+        },
+        {
+          "residual": "normal-or-alignment-fault-unresolved",
+          "site": "0x00007ff7744035c9",
+          "verdict": "unknown"
+        }
+      ],
+      "native_core": {
+        "elapsed_ms": 374754,
+        "error": "action budget",
+        "status": "failed"
+      },
+      "native_initialize": {
+        "elapsed_ms": 28295,
+        "identity": {
+          "backend": "bap",
+          "build": {
+            "handshake": {
+              "abi": 2,
+              "bap_revision": "baa902209ee4be975bdd8db7d1160b0a0ec2831f",
+              "compiler": "4.12.1",
+              "composition_engine_sha256": "a66b79f4a78330eda3dad00b64802498a3ab289404007c1fd62bb521a5a380ee",
+              "composition_model_sha256": "e85194724d0aff4ec992bb18dc855f85288a586a73532ae3ae78de327b62ecb9",
+              "configurable_request_bytes": true,
+              "families": [
+                "recovery",
+                "stateflow"
+              ],
+              "guard_engine_sha256": "252ef410b03bf3ec7b97efd5bcfbbd42591d66aabdb7680aa118e8e736cb9184",
+              "guard_model_sha256": "94c94993a1c2fd9fc6a9ab94f4f782d355ae91b66f4dc010e2d8151cf0498acd",
+              "legacy_composition_engine_sha256": "c36c8876810e35ed10b7e366e650d7854958b0ad7b07d33084039d39b68e9580",
+              "legacy_composition_model_sha256": "e142a6fd22d78044c444c26211b7c659a56fedb5f9e555aa20e3aa1be23e8b10",
+              "legacy_composition_v2_engine_sha256": "dd277b844376234cce199ecae9e7bc9eee04dfa69390d2320c2349b4f11b6cb4",
+              "legacy_composition_v2_model_sha256": "605fb57d42e755b7fee75511f66e6ad864a16c303bbf5ffb5bad8855c7d05675",
+              "legacy_guard_engine_sha256": "076b8a3fb6f776e53ea99336854c1a793b8658874c153f4ddd2e32c54128ce7d",
+              "legacy_guard_model_sha256": "10e870b21691946cd7985ff7d33819a8a58e4fea202ae6d2e771214b997f5bc9",
+              "loop_engine_sha256": "afc1b4b991a2bdf402dc8036eb0cfba0d0232505ea5dab31a6e2e2d267a15d95",
+              "loop_model_sha256": "876f6331bc1e7fc4e70864c486b589df66ffd5894bc659d6c1dfdbc4d1ed105d",
+              "max_addresses": 65536,
+              "max_frame_bytes": 8388608,
+              "max_request_bytes": 8388608,
+              "operations": [
+                "initialize",
+                "advance:Visit",
+                "advance:FinishRecovery",
+                "advance:Propagate",
+                "advance:FinishDataflow",
+                "advance:ExpandSlice",
+                "advance:FinishSlice",
+                "advance:FinishStateflow",
+                "step",
+                "observe",
+                "finish",
+                "reset",
+                "run-batch",
+                "result-page",
+                "result-close"
+              ],
+              "profiles": [
+                "normalized-fixed-input/v1",
+                "captured-fixed-input/v1",
+                "captured-indirect-targets/v1",
+                "captured-guarded-input/v1",
+                "captured-guarded-targets/v1",
+                "captured-guarded-targets/v2",
+                "captured-guarded-input/v2",
+                "captured-guarded-targets/v3"
+              ],
+              "schema": "ariadne.bap-core-ready/v1",
+              "sdk_manifest_sha256": "ba8eb693feb66fd77e6b536cce89314fc1e80ef563ac0f720a730557ff392838",
+              "source_hashes": {
+                "capture.ml": "51b6b5e92e9077f99d76da8bf8780b35ab480c85a515c04f1436b2eb86dc7cad",
+                "composition.ml": "dcf63ea01bd9db2e67cc6d09df7d35d18f5a7096a30e9d94bd45a1f8948648d8",
+                "guard.ml": "e4b67d768a52cc1ff89d9fe45b1546875ea7f0dd67af960abf07813c0f427a35",
+                "legacy_capture.ml": "ca17d97ade1e8acac9a11098d5eb26bbff693b3d29f30e7665d983db672d430c",
+                "legacy_composition.ml": "2bfadf15b3fa0e281e9c8cc4b6b9e0b64f203fca43a358d119345226398c7d80",
+                "legacy_composition_v2.ml": "b7076ced1cfcd0baf3bd68f55f4a68b5f5c8ffa4ad8905b9b7e2f6c3e70337b9",
+                "legacy_guard.ml": "47e5a140f7d340c5a8c9919834bc68e06ddb66b72b1a61b8b2797ce8ba2f32fd",
+                "loop_closure.ml": "18dea6f4d2b0a0304e13622fb3a76cd8a6babba2dfba3b7c801d1cbe8bb8572a",
+                "main.ml": "5390237a9dec5d16f38d0c1639becc3f239908418a6e8f2d571dd09f35e332fc",
+                "project_state.ml": "9cc366a55c4d5fdd74b6689ce172ae4eba823d016c6736af0f2c27438f8c35a9",
+                "recovery.ml": "756d0035c79d946dc2ac2260b49e5c242e452894d3a08d87301a606a264c5c2b",
+                "stateflow.ml": "2d6a39f261bad1267a022049bbff68ae7b88cdeb044699ff1d085da7b8008b46",
+                "terminal.ml": "e77ab5e437ef5beb522b62e5a6c8e576705dc02b40538760e53a1ecde8d36732"
+              }
+            },
+            "helper_sha256": "1f14146764f88deea26b5ae13b842da2a6c7794c22c589f6c884ebdacb1f3e5b",
+            "lock_sha256": "6f6bd3235ffcdc565ad4ab7e687d6238b85caceee0532f54c56570cbee61992f",
+            "schema": "ariadne.bap-core-build/v1"
+          },
+          "family": "recovery",
+          "profile": "captured-guarded-targets/v3",
+          "query": "af947d6b2e33304c5b5ba1e1b75cb8edd6a859232624b7267436ada6abedfaf3",
+          "schema": "ariadne.analysis-backend/v1",
+          "snapshot": "minidump-captured-amd64-v1:9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+          "transport": {
+            "max_request_bytes": 134217728,
+            "max_response_bytes": 8388608
+          }
+        },
+        "status": "accepted"
+      },
+      "rust_core": {
+        "actions": 1000000,
+        "completed": false,
+        "elapsed_ms": 554409,
+        "observation": {
+          "decoded": 9589,
+          "edges": 11321,
+          "obligations": [
+            {
+              "reason": "DecodeFailed",
+              "site": "0x00007ff7744035c9"
+            }
+          ],
+          "phase": "Dataflow",
+          "reaching_definitions": 105570377,
+          "slice": 0,
+          "visited": 9590
+        }
+      },
+      "status": "prepared",
+      "target_profile": "captured-local-indirect-targets/v2",
+      "target_report_bytes": 378449,
+      "target_schema": "ariadne.indirect-target-resolution/v3",
+      "target_sites": 10,
+      "target_stop": null
+    },
+    {
+      "attempted_starts": 778,
+      "candidate_epoch": 129,
+      "candidate_sites": 778,
+      "complete_target_sites": 0,
+      "composition_profile": "captured-guarded-targets/v3",
+      "composition_report_bytes": 653410,
+      "composition_schema": "ariadne.guarded-target-resolution/v3",
+      "entry": "0x00007ff77443d960",
+      "frame": 0,
+      "guard_barriers": [
+        "0x00007ff77443da0e",
+        "0x00007ff77443e200"
+      ],
+      "guard_report_bytes": 1524460,
+      "guard_stop": "candidate-coverage-incomplete",
+      "guards": [],
+      "native_core": {
+        "elapsed_ms": 15270,
+        "full_state_equal": true,
+        "observation": {
+          "decoded": 778,
+          "edges": 895,
+          "obligations": [
+            {
+              "reason": "IndirectTargets",
+              "site": "0x00007ff77443da0e"
+            },
+            {
+              "reason": "IndirectTargets",
+              "site": "0x00007ff77443e200"
+            },
+            {
+              "reason": "CallTargets",
+              "site": "0x00007ff77443ea73"
+            },
+            {
+              "reason": "CallTargets",
+              "site": "0x00007ff77443f6ba"
+            },
+            {
+              "reason": "CallTargets",
+              "site": "0x00007ff77443f73b"
+            },
+            {
+              "reason": "CallTargets",
+              "site": "0x00007ff77443f796"
+            },
+            {
+              "reason": "CallTargets",
+              "site": "0x00007ff774441063"
+            },
+            {
+              "reason": "CallTargets",
+              "site": "0x00007ff7744415b7"
+            },
+            {
+              "reason": "CallTargets",
+              "site": "0x00007ff7744425bf"
+            },
+            {
+              "reason": "CallTargets",
+              "site": "0x00007ff7744425e5"
+            }
+          ],
+          "phase": "Done",
+          "reaching_definitions": 1304602,
+          "slice": 0,
+          "visited": 778
+        },
+        "request_equal": true,
+        "rust_reference_completed": true,
+        "status": "completed"
+      },
+      "native_initialize": {
+        "elapsed_ms": 11188,
+        "identity": {
+          "backend": "bap",
+          "build": {
+            "handshake": {
+              "abi": 2,
+              "bap_revision": "baa902209ee4be975bdd8db7d1160b0a0ec2831f",
+              "compiler": "4.12.1",
+              "composition_engine_sha256": "a66b79f4a78330eda3dad00b64802498a3ab289404007c1fd62bb521a5a380ee",
+              "composition_model_sha256": "e85194724d0aff4ec992bb18dc855f85288a586a73532ae3ae78de327b62ecb9",
+              "configurable_request_bytes": true,
+              "families": [
+                "recovery",
+                "stateflow"
+              ],
+              "guard_engine_sha256": "252ef410b03bf3ec7b97efd5bcfbbd42591d66aabdb7680aa118e8e736cb9184",
+              "guard_model_sha256": "94c94993a1c2fd9fc6a9ab94f4f782d355ae91b66f4dc010e2d8151cf0498acd",
+              "legacy_composition_engine_sha256": "c36c8876810e35ed10b7e366e650d7854958b0ad7b07d33084039d39b68e9580",
+              "legacy_composition_model_sha256": "e142a6fd22d78044c444c26211b7c659a56fedb5f9e555aa20e3aa1be23e8b10",
+              "legacy_composition_v2_engine_sha256": "dd277b844376234cce199ecae9e7bc9eee04dfa69390d2320c2349b4f11b6cb4",
+              "legacy_composition_v2_model_sha256": "605fb57d42e755b7fee75511f66e6ad864a16c303bbf5ffb5bad8855c7d05675",
+              "legacy_guard_engine_sha256": "076b8a3fb6f776e53ea99336854c1a793b8658874c153f4ddd2e32c54128ce7d",
+              "legacy_guard_model_sha256": "10e870b21691946cd7985ff7d33819a8a58e4fea202ae6d2e771214b997f5bc9",
+              "loop_engine_sha256": "afc1b4b991a2bdf402dc8036eb0cfba0d0232505ea5dab31a6e2e2d267a15d95",
+              "loop_model_sha256": "876f6331bc1e7fc4e70864c486b589df66ffd5894bc659d6c1dfdbc4d1ed105d",
+              "max_addresses": 65536,
+              "max_frame_bytes": 8388608,
+              "max_request_bytes": 8388608,
+              "operations": [
+                "initialize",
+                "advance:Visit",
+                "advance:FinishRecovery",
+                "advance:Propagate",
+                "advance:FinishDataflow",
+                "advance:ExpandSlice",
+                "advance:FinishSlice",
+                "advance:FinishStateflow",
+                "step",
+                "observe",
+                "finish",
+                "reset",
+                "run-batch",
+                "result-page",
+                "result-close"
+              ],
+              "profiles": [
+                "normalized-fixed-input/v1",
+                "captured-fixed-input/v1",
+                "captured-indirect-targets/v1",
+                "captured-guarded-input/v1",
+                "captured-guarded-targets/v1",
+                "captured-guarded-targets/v2",
+                "captured-guarded-input/v2",
+                "captured-guarded-targets/v3"
+              ],
+              "schema": "ariadne.bap-core-ready/v1",
+              "sdk_manifest_sha256": "ba8eb693feb66fd77e6b536cce89314fc1e80ef563ac0f720a730557ff392838",
+              "source_hashes": {
+                "capture.ml": "51b6b5e92e9077f99d76da8bf8780b35ab480c85a515c04f1436b2eb86dc7cad",
+                "composition.ml": "dcf63ea01bd9db2e67cc6d09df7d35d18f5a7096a30e9d94bd45a1f8948648d8",
+                "guard.ml": "e4b67d768a52cc1ff89d9fe45b1546875ea7f0dd67af960abf07813c0f427a35",
+                "legacy_capture.ml": "ca17d97ade1e8acac9a11098d5eb26bbff693b3d29f30e7665d983db672d430c",
+                "legacy_composition.ml": "2bfadf15b3fa0e281e9c8cc4b6b9e0b64f203fca43a358d119345226398c7d80",
+                "legacy_composition_v2.ml": "b7076ced1cfcd0baf3bd68f55f4a68b5f5c8ffa4ad8905b9b7e2f6c3e70337b9",
+                "legacy_guard.ml": "47e5a140f7d340c5a8c9919834bc68e06ddb66b72b1a61b8b2797ce8ba2f32fd",
+                "loop_closure.ml": "18dea6f4d2b0a0304e13622fb3a76cd8a6babba2dfba3b7c801d1cbe8bb8572a",
+                "main.ml": "5390237a9dec5d16f38d0c1639becc3f239908418a6e8f2d571dd09f35e332fc",
+                "project_state.ml": "9cc366a55c4d5fdd74b6689ce172ae4eba823d016c6736af0f2c27438f8c35a9",
+                "recovery.ml": "756d0035c79d946dc2ac2260b49e5c242e452894d3a08d87301a606a264c5c2b",
+                "stateflow.ml": "2d6a39f261bad1267a022049bbff68ae7b88cdeb044699ff1d085da7b8008b46",
+                "terminal.ml": "e77ab5e437ef5beb522b62e5a6c8e576705dc02b40538760e53a1ecde8d36732"
+              }
+            },
+            "helper_sha256": "1f14146764f88deea26b5ae13b842da2a6c7794c22c589f6c884ebdacb1f3e5b",
+            "lock_sha256": "6f6bd3235ffcdc565ad4ab7e687d6238b85caceee0532f54c56570cbee61992f",
+            "schema": "ariadne.bap-core-build/v1"
+          },
+          "family": "recovery",
+          "profile": "captured-guarded-targets/v3",
+          "query": "f0855e2abf6c3c8fe6e54eb23dbb205bd3aab3216017393e563ea375103e7e88",
+          "schema": "ariadne.analysis-backend/v1",
+          "snapshot": "minidump-captured-amd64-v1:9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+          "transport": {
+            "max_request_bytes": 134217728,
+            "max_response_bytes": 8388608
+          }
+        },
+        "status": "accepted"
+      },
+      "rust_core": {
+        "actions": 17956,
+        "completed": true,
+        "elapsed_ms": 1461,
+        "observation": {
+          "decoded": 778,
+          "edges": 895,
+          "obligations": [
+            {
+              "reason": "IndirectTargets",
+              "site": "0x00007ff77443da0e"
+            },
+            {
+              "reason": "IndirectTargets",
+              "site": "0x00007ff77443e200"
+            },
+            {
+              "reason": "CallTargets",
+              "site": "0x00007ff77443ea73"
+            },
+            {
+              "reason": "CallTargets",
+              "site": "0x00007ff77443f6ba"
+            },
+            {
+              "reason": "CallTargets",
+              "site": "0x00007ff77443f73b"
+            },
+            {
+              "reason": "CallTargets",
+              "site": "0x00007ff77443f796"
+            },
+            {
+              "reason": "CallTargets",
+              "site": "0x00007ff774441063"
+            },
+            {
+              "reason": "CallTargets",
+              "site": "0x00007ff7744415b7"
+            },
+            {
+              "reason": "CallTargets",
+              "site": "0x00007ff7744425bf"
+            },
+            {
+              "reason": "CallTargets",
+              "site": "0x00007ff7744425e5"
+            }
+          ],
+          "phase": "Done",
+          "reaching_definitions": 1304602,
+          "slice": 0,
+          "visited": 778
+        }
+      },
+      "status": "prepared",
+      "target_profile": "captured-local-indirect-targets/v2",
+      "target_report_bytes": 5566547,
+      "target_schema": "ariadne.indirect-target-resolution/v3",
+      "target_sites": 2,
+      "target_stop": null
+    }
+  ],
+  "frames_recovered": 2,
+  "guard_limits": {
+    "max_closure_rounds": 32768,
+    "max_edges": 131072,
+    "max_elapsed_ms": 120000,
+    "max_evidence_bytes": 67108864,
+    "max_residue_updates": 4194304,
+    "max_sites": 32768,
+    "max_transfer_evaluations": 67108864
+  },
+  "loop_closure": {
+    "artifact_sha256": "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+    "graph_sha256": "6ea3611ed8dcd984f64a9daaf8bedfd40117c28e949b5cf8b0b7e6f41b198fce",
+    "paired_native_admission": {
+      "accepted": true,
+      "full_state_equal": null,
+      "native_initialize": {
+        "elapsed_ms": 28295,
+        "identity": {
+          "backend": "bap",
+          "build": {
+            "handshake": {
+              "abi": 2,
+              "bap_revision": "baa902209ee4be975bdd8db7d1160b0a0ec2831f",
+              "compiler": "4.12.1",
+              "composition_engine_sha256": "a66b79f4a78330eda3dad00b64802498a3ab289404007c1fd62bb521a5a380ee",
+              "composition_model_sha256": "e85194724d0aff4ec992bb18dc855f85288a586a73532ae3ae78de327b62ecb9",
+              "configurable_request_bytes": true,
+              "families": [
+                "recovery",
+                "stateflow"
+              ],
+              "guard_engine_sha256": "252ef410b03bf3ec7b97efd5bcfbbd42591d66aabdb7680aa118e8e736cb9184",
+              "guard_model_sha256": "94c94993a1c2fd9fc6a9ab94f4f782d355ae91b66f4dc010e2d8151cf0498acd",
+              "legacy_composition_engine_sha256": "c36c8876810e35ed10b7e366e650d7854958b0ad7b07d33084039d39b68e9580",
+              "legacy_composition_model_sha256": "e142a6fd22d78044c444c26211b7c659a56fedb5f9e555aa20e3aa1be23e8b10",
+              "legacy_composition_v2_engine_sha256": "dd277b844376234cce199ecae9e7bc9eee04dfa69390d2320c2349b4f11b6cb4",
+              "legacy_composition_v2_model_sha256": "605fb57d42e755b7fee75511f66e6ad864a16c303bbf5ffb5bad8855c7d05675",
+              "legacy_guard_engine_sha256": "076b8a3fb6f776e53ea99336854c1a793b8658874c153f4ddd2e32c54128ce7d",
+              "legacy_guard_model_sha256": "10e870b21691946cd7985ff7d33819a8a58e4fea202ae6d2e771214b997f5bc9",
+              "loop_engine_sha256": "afc1b4b991a2bdf402dc8036eb0cfba0d0232505ea5dab31a6e2e2d267a15d95",
+              "loop_model_sha256": "876f6331bc1e7fc4e70864c486b589df66ffd5894bc659d6c1dfdbc4d1ed105d",
+              "max_addresses": 65536,
+              "max_frame_bytes": 8388608,
+              "max_request_bytes": 8388608,
+              "operations": [
+                "initialize",
+                "advance:Visit",
+                "advance:FinishRecovery",
+                "advance:Propagate",
+                "advance:FinishDataflow",
+                "advance:ExpandSlice",
+                "advance:FinishSlice",
+                "advance:FinishStateflow",
+                "step",
+                "observe",
+                "finish",
+                "reset",
+                "run-batch",
+                "result-page",
+                "result-close"
+              ],
+              "profiles": [
+                "normalized-fixed-input/v1",
+                "captured-fixed-input/v1",
+                "captured-indirect-targets/v1",
+                "captured-guarded-input/v1",
+                "captured-guarded-targets/v1",
+                "captured-guarded-targets/v2",
+                "captured-guarded-input/v2",
+                "captured-guarded-targets/v3"
+              ],
+              "schema": "ariadne.bap-core-ready/v1",
+              "sdk_manifest_sha256": "ba8eb693feb66fd77e6b536cce89314fc1e80ef563ac0f720a730557ff392838",
+              "source_hashes": {
+                "capture.ml": "51b6b5e92e9077f99d76da8bf8780b35ab480c85a515c04f1436b2eb86dc7cad",
+                "composition.ml": "dcf63ea01bd9db2e67cc6d09df7d35d18f5a7096a30e9d94bd45a1f8948648d8",
+                "guard.ml": "e4b67d768a52cc1ff89d9fe45b1546875ea7f0dd67af960abf07813c0f427a35",
+                "legacy_capture.ml": "ca17d97ade1e8acac9a11098d5eb26bbff693b3d29f30e7665d983db672d430c",
+                "legacy_composition.ml": "2bfadf15b3fa0e281e9c8cc4b6b9e0b64f203fca43a358d119345226398c7d80",
+                "legacy_composition_v2.ml": "b7076ced1cfcd0baf3bd68f55f4a68b5f5c8ffa4ad8905b9b7e2f6c3e70337b9",
+                "legacy_guard.ml": "47e5a140f7d340c5a8c9919834bc68e06ddb66b72b1a61b8b2797ce8ba2f32fd",
+                "loop_closure.ml": "18dea6f4d2b0a0304e13622fb3a76cd8a6babba2dfba3b7c801d1cbe8bb8572a",
+                "main.ml": "5390237a9dec5d16f38d0c1639becc3f239908418a6e8f2d571dd09f35e332fc",
+                "project_state.ml": "9cc366a55c4d5fdd74b6689ce172ae4eba823d016c6736af0f2c27438f8c35a9",
+                "recovery.ml": "756d0035c79d946dc2ac2260b49e5c242e452894d3a08d87301a606a264c5c2b",
+                "stateflow.ml": "2d6a39f261bad1267a022049bbff68ae7b88cdeb044699ff1d085da7b8008b46",
+                "terminal.ml": "e77ab5e437ef5beb522b62e5a6c8e576705dc02b40538760e53a1ecde8d36732"
+              }
+            },
+            "helper_sha256": "1f14146764f88deea26b5ae13b842da2a6c7794c22c589f6c884ebdacb1f3e5b",
+            "lock_sha256": "6f6bd3235ffcdc565ad4ab7e687d6238b85caceee0532f54c56570cbee61992f",
+            "schema": "ariadne.bap-core-build/v1"
+          },
+          "family": "recovery",
+          "profile": "captured-guarded-targets/v3",
+          "query": "af947d6b2e33304c5b5ba1e1b75cb8edd6a859232624b7267436ada6abedfaf3",
+          "schema": "ariadne.analysis-backend/v1",
+          "snapshot": "minidump-captured-amd64-v1:9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+          "transport": {
+            "max_request_bytes": 134217728,
+            "max_response_bytes": 8388608
+          }
+        },
+        "status": "accepted"
+      },
+      "request_equal": null,
+      "scope": "Native paired admission independently checks every included loop receipt; completed full-state equality is recorded separately."
+    },
+    "schema": "ariadne.loop-closure-dump-audit/v1",
+    "sites": [
+      {
+        "complete": true,
+        "coverage": {
+          "artifact_bound": true,
+          "assertions": 9,
+          "corridors": 1,
+          "dispatch_bound": true,
+          "engine_sha256": "afc1b4b991a2bdf402dc8036eb0cfba0d0232505ea5dab31a6e2e2d267a15d95",
+          "entrances": 1,
+          "exits": 4,
+          "graph_bound": true,
+          "internal_edges": 10,
+          "kind": "inductive_dispatch",
+          "model_sha256": "876f6331bc1e7fc4e70864c486b589df66ffd5894bc659d6c1dfdbc4d1ed105d",
+          "region_sites": 9,
+          "rule": "local-phase-induction/v1",
+          "schema": "ariadne.loop-target-closure/v1",
+          "scope": "Whole queried-dispatch coverage is carried by this receipt; raw receipt remains in target-report.json.",
+          "snapshot_bound": true,
+          "source_refs": 11,
+          "table": {
+            "base": "0x00007ff77ba909a8",
+            "base_bank": "RDX:0:false",
+            "entries": [
+              {
+                "bytes_hex": "a99a97f8",
+                "index": "0x0000000000000000",
+                "slot": "0x00007ff77ba909a8",
+                "target": "0x00007ff77440a451"
+              },
+              {
+                "bytes_hex": "a99a97f8",
+                "index": "0x0000000000000001",
+                "slot": "0x00007ff77ba909ac",
+                "target": "0x00007ff77440a451"
+              },
+              {
+                "bytes_hex": "71d097f8",
+                "index": "0x0000000000000002",
+                "slot": "0x00007ff77ba909b0",
+                "target": "0x00007ff77440da19"
+              },
+              {
+                "bytes_hex": "43d097f8",
+                "index": "0x0000000000000003",
+                "slot": "0x00007ff77ba909b4",
+                "target": "0x00007ff77440d9eb"
+              },
+              {
+                "bytes_hex": "64d097f8",
+                "index": "0x0000000000000004",
+                "slot": "0x00007ff77ba909b8",
+                "target": "0x00007ff77440da0c"
+              },
+              {
+                "bytes_hex": "a99a97f8",
+                "index": "0x0000000000000005",
+                "slot": "0x00007ff77ba909bc",
+                "target": "0x00007ff77440a451"
+              },
+              {
+                "bytes_hex": "71d097f8",
+                "index": "0x0000000000000006",
+                "slot": "0x00007ff77ba909c0",
+                "target": "0x00007ff77440da19"
+              },
+              {
+                "bytes_hex": "71d097f8",
+                "index": "0x0000000000000007",
+                "slot": "0x00007ff77ba909c4",
+                "target": "0x00007ff77440da19"
+              },
+              {
+                "bytes_hex": "71d097f8",
+                "index": "0x0000000000000008",
+                "slot": "0x00007ff77ba909c8",
+                "target": "0x00007ff77440da19"
+              },
+              {
+                "bytes_hex": "71d097f8",
+                "index": "0x0000000000000009",
+                "slot": "0x00007ff77ba909cc",
+                "target": "0x00007ff77440da19"
+              }
+            ],
+            "indices": [
+              "0x0000000000000000",
+              "0x0000000000000001",
+              "0x0000000000000002",
+              "0x0000000000000003",
+              "0x0000000000000004",
+              "0x0000000000000005",
+              "0x0000000000000006",
+              "0x0000000000000007",
+              "0x0000000000000008",
+              "0x0000000000000009"
+            ],
+            "load_site": "0x00007ff77440da02",
+            "selector_bank": "R8:0:false"
+          }
+        },
+        "expectation_is_configuration": false,
+        "expectation_sha256": "e505673e241e2eb1a7407b3d76dc2f2aa4d7c50e2b4c1df77c104b5e83faf0d7",
+        "expectation_source": "/home/nzsn/Repos/Ariadne-caller-coverage-20261015/tests/bap/fixtures/loop-closure/dump-da09.json",
+        "expected_targets": [
+          "0x00007ff77440a451",
+          "0x00007ff77440d9eb",
+          "0x00007ff77440da0c",
+          "0x00007ff77440da19"
+        ],
+        "receipt_present": true,
+        "site": "0x00007ff77440da09",
+        "target_sets_equal": true,
+        "targets": [
+          "0x00007ff77440a451",
+          "0x00007ff77440d9eb",
+          "0x00007ff77440da0c",
+          "0x00007ff77440da19"
+        ],
+        "unresolved": []
+      },
+      {
+        "complete": true,
+        "coverage": {
+          "artifact_bound": true,
+          "assertions": 9,
+          "corridors": 1,
+          "dispatch_bound": true,
+          "engine_sha256": "afc1b4b991a2bdf402dc8036eb0cfba0d0232505ea5dab31a6e2e2d267a15d95",
+          "entrances": 1,
+          "exits": 4,
+          "graph_bound": true,
+          "internal_edges": 10,
+          "kind": "inductive_dispatch",
+          "model_sha256": "876f6331bc1e7fc4e70864c486b589df66ffd5894bc659d6c1dfdbc4d1ed105d",
+          "region_sites": 9,
+          "rule": "local-phase-induction/v1",
+          "schema": "ariadne.loop-target-closure/v1",
+          "scope": "Whole queried-dispatch coverage is carried by this receipt; raw receipt remains in target-report.json.",
+          "snapshot_bound": true,
+          "source_refs": 11,
+          "table": {
+            "base": "0x00007ff77ba909d0",
+            "base_bank": "RDX:0:false",
+            "entries": [
+              {
+                "bytes_hex": "0f9c97f8",
+                "index": "0x0000000000000000",
+                "slot": "0x00007ff77ba909d0",
+                "target": "0x00007ff77440a5df"
+              },
+              {
+                "bytes_hex": "0f9c97f8",
+                "index": "0x0000000000000001",
+                "slot": "0x00007ff77ba909d4",
+                "target": "0x00007ff77440a5df"
+              },
+              {
+                "bytes_hex": "1dd197f8",
+                "index": "0x0000000000000002",
+                "slot": "0x00007ff77ba909d8",
+                "target": "0x00007ff77440daed"
+              },
+              {
+                "bytes_hex": "efd097f8",
+                "index": "0x0000000000000003",
+                "slot": "0x00007ff77ba909dc",
+                "target": "0x00007ff77440dabf"
+              },
+              {
+                "bytes_hex": "10d197f8",
+                "index": "0x0000000000000004",
+                "slot": "0x00007ff77ba909e0",
+                "target": "0x00007ff77440dae0"
+              },
+              {
+                "bytes_hex": "0f9c97f8",
+                "index": "0x0000000000000005",
+                "slot": "0x00007ff77ba909e4",
+                "target": "0x00007ff77440a5df"
+              },
+              {
+                "bytes_hex": "1dd197f8",
+                "index": "0x0000000000000006",
+                "slot": "0x00007ff77ba909e8",
+                "target": "0x00007ff77440daed"
+              },
+              {
+                "bytes_hex": "1dd197f8",
+                "index": "0x0000000000000007",
+                "slot": "0x00007ff77ba909ec",
+                "target": "0x00007ff77440daed"
+              },
+              {
+                "bytes_hex": "1dd197f8",
+                "index": "0x0000000000000008",
+                "slot": "0x00007ff77ba909f0",
+                "target": "0x00007ff77440daed"
+              },
+              {
+                "bytes_hex": "1dd197f8",
+                "index": "0x0000000000000009",
+                "slot": "0x00007ff77ba909f4",
+                "target": "0x00007ff77440daed"
+              }
+            ],
+            "indices": [
+              "0x0000000000000000",
+              "0x0000000000000001",
+              "0x0000000000000002",
+              "0x0000000000000003",
+              "0x0000000000000004",
+              "0x0000000000000005",
+              "0x0000000000000006",
+              "0x0000000000000007",
+              "0x0000000000000008",
+              "0x0000000000000009"
+            ],
+            "load_site": "0x00007ff77440dad6",
+            "selector_bank": "R8:0:false"
+          }
+        },
+        "expectation_is_configuration": false,
+        "expectation_sha256": "c15df98f34f2eb210b16ab97ee5529d63837cdd479a6c03c9bbb63d25b1c6e13",
+        "expectation_source": "/home/nzsn/Repos/Ariadne-caller-coverage-20261015/tests/bap/fixtures/loop-closure/dump-dadd.json",
+        "expected_targets": [
+          "0x00007ff77440a5df",
+          "0x00007ff77440dabf",
+          "0x00007ff77440dae0",
+          "0x00007ff77440daed"
+        ],
+        "receipt_present": true,
+        "site": "0x00007ff77440dadd",
+        "target_sets_equal": true,
+        "targets": [
+          "0x00007ff77440a5df",
+          "0x00007ff77440dabf",
+          "0x00007ff77440dae0",
+          "0x00007ff77440daed"
+        ],
+        "unresolved": []
+      }
+    ],
+    "snapshot": "minidump-captured-amd64-v1:9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+    "target_profile": "captured-local-indirect-targets/v2",
+    "target_schema": "ariadne.indirect-target-resolution/v3"
+  },
+  "native_action_limit": 1000000,
+  "native_finish_precondition": "Always attempted after native initialization, independently of Rust completion or decoded-node count; helper has a 1000000-action budget, transport has a finite 600s response timeout and runner has a finite 2400s total process timeout",
+  "native_request_bytes": 134217728,
+  "native_timeout_seconds": 600,
+  "original_table_gates": {
+    "all_nine_target_sets_equal": true,
+    "original_complete_sites": 9,
+    "previously_missing_attempted": 51,
+    "previously_missing_unattempted": []
+  },
+  "path_limits": {
+    "deadline_ms": 10000,
+    "max_frontier_bytes": 33554432,
+    "max_graph_edges": 32768,
+    "max_graph_nodes": 8192,
+    "max_node_visits": 2,
+    "max_output_bytes": 134217728,
+    "max_path_steps": 4096,
+    "max_scanned_edges": 262144,
+    "max_search_states": 65536
+  },
+  "premises": [
+    "FrozenCapturedControlData",
+    "windows-amd64-normal-call-entry/v1"
+  ],
+  "preparation_limits": {
+    "batch_size": 128,
+    "max_candidates": 32768,
+    "max_decoder_batches": 16384,
+    "max_prefix_bytes": 245760,
+    "max_starts": 16384
+  },
+  "rust_core_deadline_ms": 600000,
+  "schema": "ariadne.caller-coverage-dump-probe/v1",
+  "scope": "Capture-only validated frame activations; table/loop fixtures are test expectations, never resolver configuration or extra roots; partial/unavailable outcomes remain explicit.",
+  "source_binding": {
+    "caller_expectation_sha256": "90b440c0059ca65888a5b4b11be69d505763684239118be84fe67e87d99ecb41",
+    "claim_boundary": "Fresh original-dump local-normal-completion retry; production frame budgets and roots/premises unchanged; exception resumption, alignment verdict, parity and frame paths reported separately.",
+    "compile_command": [
+      "rustc",
+      "--edition=2024",
+      "/caller-work/dump-probe.rs",
+      "-O",
+      "-L",
+      "dependency=/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/caller-build/release/deps",
+      "--extern",
+      "ariadne=/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/caller-build/release/libariadne.rlib",
+      "--extern",
+      "serde_json=/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/caller-build/release/deps/libserde_json-540ae372bafb180c.rlib",
+      "-o",
+      "/caller-work/dump-probe"
+    ],
+    "composition_engine_sha256": "a66b79f4a78330eda3dad00b64802498a3ab289404007c1fd62bb521a5a380ee",
+    "composition_model_sha256": "e85194724d0aff4ec992bb18dc855f85288a586a73532ae3ae78de327b62ecb9",
+    "diagnostic_completion_limits": {
+      "native_actions": 1000000,
+      "native_response_timeout_seconds": 600,
+      "process_timeout_seconds": 2400,
+      "rust_actions": 1000000,
+      "rust_deadline_seconds": 600
+    },
+    "driver_binary_sha256": "2c421aa2aa3099f6be03da247de4263403a7ce67aa3705dcd5b87f5a7fdffcbb",
+    "driver_sha256": "c368b3a6eedb17bf92983b4255f13419ce31afaaaf25d9d4822f43cdac4f0787",
+    "dump_sha256": "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+    "dump_url": "https://192.168.150.219:4080/dumps/dump_03958DA4FCA844A786262A1053",
+    "frozen_table_witness_sha256": "1390abca21bb7e2db9cde9a07067f60f5493498a7866fb648dcb103994674baf",
+    "guard_engine_sha256": "252ef410b03bf3ec7b97efd5bcfbbd42591d66aabdb7680aa118e8e736cb9184",
+    "guard_model_sha256": "94c94993a1c2fd9fc6a9ab94f4f782d355ae91b66f4dc010e2d8151cf0498acd",
+    "historical_guard_sha256": "d0294c9b940d8366cb89d78a95d2186c89196dbf1a7955e70189c22afa2abda0",
+    "loop_engine_sha256": "afc1b4b991a2bdf402dc8036eb0cfba0d0232505ea5dab31a6e2e2d267a15d95",
+    "loop_model_sha256": "876f6331bc1e7fc4e70864c486b589df66ffd5894bc659d6c1dfdbc4d1ed105d",
+    "native_helper_sha256": "1f14146764f88deea26b5ae13b842da2a6c7794c22c589f6c884ebdacb1f3e5b",
+    "native_manifest_artifact": "native-manifest.json",
+    "native_manifest_sha256": "ba6e7142618aa267226c9453b15add1b5a1d7dd8a98badc8bc5e85ff6b881ecd",
+    "release_library_sha256": "d7dca79f2a5e6544ae0fed728415a0a9168b4a482bcf91f4d786586e8cbd8e24",
+    "runner_sha256": "f113fe465d08ccdbd5268a23c07617296cdc35ec651caea5b9b10312294e2d71",
+    "rustc": "rustc 1.96.0 (ac68faa20 2026-05-25)\nbinary: rustc\ncommit-hash: ac68faa20c58cbccd01ee7208bf3b6e93a7d7f96\ncommit-date: 2026-05-25\nhost: x86_64-unknown-linux-gnu\nrelease: 1.96.0\nLLVM version: 22.1.2\n",
+    "schema": "ariadne.caller-coverage-dump-source-binding/v1",
+    "serde_json_library": "libserde_json-540ae372bafb180c.rlib",
+    "serde_json_library_sha256": "c923d77d1d00e3862c23ba11499062c8874e36496f26d4a9b9392f9f417066d3",
+    "source_archive_sha256": "4a81b5c6b0439bcef53ab98c9c309c59ed0c4be16d522e5c2c691be653fe4f29",
+    "source_files_verified": 935,
+    "source_manifest_artifact": "source-manifest.json",
+    "source_manifest_sha256": "fccc77d5e58752e4e8010567a28569995531fed8a9b73328c0598623d9595ac6",
+    "tool_hashes": {
+      "ariadne-bap-lift": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+      "ariadne-llvm-mc": "6bb0005e6416f172f88c4d122ae8908862adbe9d1d2f225046df17ae857d9349"
+    }
+  },
+  "source_binding_file": "source-binding.json",
+  "source_binding_sha256": "2c3fc19d98a3992281f61963340a6e341e45cc1c3fe9242057e4d73e99deaaf7",
+  "target_limits": {
+    "max_elapsed_ms": 120000,
+    "max_entries": 16384,
+    "max_evidence_bytes": 134217728,
+    "max_path_steps": 512,
+    "max_read_bytes": 16777216,
+    "max_rounds": 64,
+    "max_steps": 2097152,
+    "max_targets": 65536,
+    "max_values": 4096
+  },
+  "thread": 23668,
+  "unwind_stop": "unsupported-unwind-operation"
+}

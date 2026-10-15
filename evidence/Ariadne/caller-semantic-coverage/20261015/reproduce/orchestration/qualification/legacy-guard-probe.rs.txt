@@ -1,0 +1,23 @@
+use ariadne::bap::guard_admission as guard;
+
+fn main() {
+    let path = std::env::args().nth(1).expect("retained guard-v1 report path");
+    let bytes = std::fs::read(&path).expect("read retained guard-v1 report");
+    let report: guard::Report = serde_json::from_slice(&bytes).expect("decode actual legacy report");
+    assert_eq!(report.schema, "ariadne.guard-admission/v1");
+    assert_eq!(report.profile, "bap-guard-admission-v1");
+    assert_eq!(report.checker_sha256, guard::legacy_checker_identity());
+    assert_eq!(report.input.model_sha256, guard::legacy_model_identity());
+    guard::replay_report(&report.input, &report).expect("actual retained guard-v1 replay");
+    let mut forged = serde_json::to_value(&report).unwrap();
+    forged["input"]["normal_flow"] = serde_json::json!({
+        "kind":"local_normal_completion", "scope":"local-normal-completion/v1", "terminals":[]});
+    let rejected = match serde_json::from_value::<guard::Report>(forged) {
+        Err(_) => true,
+        Ok(changed) => guard::replay_report(&changed.input, &changed).is_err(),
+    };
+    assert!(rejected, "legacy report admitted a current normal-flow field");
+    println!("{}", serde_json::json!({"schema":"ariadne.actual-legacy-guard-replay/v1",
+        "passed":true,"profile":report.profile,"sites":report.input.sites.len(),
+        "guards":report.guards.len(),"new_field_rejected":rejected}));
+}

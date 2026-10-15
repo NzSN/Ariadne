@@ -1,8 +1,8 @@
 (* Independent admission for joint captured target/guard preparation.
    The candidate is a proof graph, never the committed ordinary effect graph. *)
 open Recovery
-let profile = "captured-guarded-targets/v2"
-let version = "ariadne.guarded-target-resolution/v2"
+let profile = "captured-guarded-targets/v3"
+let version = "ariadne.guarded-target-resolution/v3"
 let rec canonical = function
   | `Assoc rows -> `Assoc (List.map (fun (key,value) -> key,canonical value) rows
       |> List.sort (fun (a,_) (b,_) -> compare a b))
@@ -149,7 +149,7 @@ let admit_current j snapshot =
   require (originals=List.sort (fun a b -> compare (string a "site") (string b "site")) originals)
     "composition original control order";
   let binding=hash_json (`List [
-    `String "ariadne-guarded-target-binding/v2";get report "snapshot";
+    `String "ariadne-guarded-target-binding/v3";get report "snapshot";
     get report "artifact_sha256";get report "query_scope_sha256";
     get report "candidate_epoch";get report "model_version";
     get report "model_sha256";get report "checker_sha256";
@@ -157,7 +157,7 @@ let admit_current j snapshot =
     get report "target_report_sha256";get report "guard_report_sha256";
     get report "final_request_sha256"]) in
   require (string report "binding_sha256"=binding) "composition binding digest";
-  let query=hash_json (`List [`String "ariadne-guarded-target-analysis/v2";`String binding]) in
+  let query=hash_json (`List [`String "ariadne-guarded-target-analysis/v3";`String binding]) in
   require (string capture "query_id"=query) "composition analysis identity";
   require (ends (string capture "semantic_profile")
     (":" ^ profile ^ ":" ^ binding ^ ":" ^ string targets "profile" ^ ":" ^
@@ -259,17 +259,24 @@ let admit_current j snapshot =
      internal query ID stays guard-specific; the public query is the pair seal. *)
   let receipts=List.map (fun row -> get row "receipt_sha256") (list(get guards "guards"))
     |> List.sort compare in
-  let guard_query=Guard.digest_array [`String "ariadne-guard-analysis/v1";
+  require(string guards "schema"="ariadne.guard-admission/v2" &&
+    string guards "profile"="bap-guard-admission-v2")"composition current guard policy";
+  let guard_query=Guard.digest_array [`String "ariadne-guard-analysis/v2";
     get guards "intent_id";get guards "final_request_sha256";`List receipts] in
   let guard_capture=Guard.replace_field capture "query_id" (`String guard_query) in
   Guard.admit (`Assoc ["normalized",final;"capture",guard_capture;
     "guard_admission",guards]) snapshot
 
-let legacy input =
-  string(get input "composition")"profile"="captured-guarded-targets/v1"
+let generation input = match string(get input "composition")"profile" with
+  | "captured-guarded-targets/v1"->1|"captured-guarded-targets/v2"->2|_->3
 let transport_query snapshot input =
-  if legacy input then Legacy_composition.transport_query snapshot input
-  else transport_query_current snapshot input
+  match generation input with
+  | 1->Legacy_composition.transport_query snapshot input
+  | 2->Legacy_composition_v2.transport_query snapshot input
+  | _->transport_query_current snapshot input
 let admit input snapshot =
-  if legacy input then Legacy_composition.admit input snapshot
-  else admit_current input snapshot
+  match generation input with
+  | 1->Legacy_composition.admit input snapshot
+  | 2->Legacy_composition_v2.admit input snapshot
+  | _->(try admit_current input snapshot with
+    Yojson.Json_error _->raise(Invalid "composition malformed original BIL JSON"))

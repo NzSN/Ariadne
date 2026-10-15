@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# G0/G4 checker. Run model tooling on the authorized remote WSL build host.
+# G0/S1 checker. Run model tooling on the authorized remote WSL build host.
 # APALACHE_MC/TLC select the qualification host's pinned launchers. Record tool
 # versions and identities; optional explicit version pins reject tool drift.
 # Do not silently choose one of the repository's historical toolchain records.
@@ -16,10 +16,32 @@ printf 'Predicate-admission model artifacts: %s\n' "$run_root"
 python3 "$repo_root/tests/bap/fixtures/guards/oracle.py" --check \
   > "$run_root/oracle.log" 2>&1 || { cat "$run_root/oracle.log"; exit 1; }
 cat "$run_root/oracle.log"
+python3 "$repo_root/tests/bap/fixtures/caller-coverage/oracle.py" --check \
+  --output "$run_root/caller-coverage-oracle.json" \
+  > "$run_root/caller-coverage-oracle.log" 2>&1 || {
+    cat "$run_root/caller-coverage-oracle.log"; exit 1;
+  }
+cat "$run_root/caller-coverage-oracle.log"
+python3 - "$repo_root" <<'PY'
+import hashlib,json,pathlib,sys
+base=pathlib.Path(sys.argv[1])/'tests/bap/fixtures/caller-coverage'
+manifest=json.loads((base/'legacy-manifest.json').read_text())
+for name,row in manifest['files'].items():
+    if hashlib.sha256((base/'legacy-v2'/name).read_bytes()).hexdigest()!=row['sha256']:
+        raise SystemExit('frozen legacy contract differs: '+name)
+PY
 sha256sum "$repo_root/Specs/AriadnePredicateAdmission.tla" \
+  "$repo_root/Specs/check-predicate-admission.sh" \
   "$repo_root"/Specs/PredicateAdmission*.cfg \
   "$repo_root/tests/bap/fixtures/guards/oracle.py" \
-  "$repo_root/tests/bap/fixtures/guards/contract.json" > "$run_root/sources-before.sha256"
+  "$repo_root/tests/bap/fixtures/guards/contract.json" \
+  "$repo_root/tests/bap/fixtures/caller-coverage/oracle.py" \
+  "$repo_root/tests/bap/fixtures/caller-coverage/oracle-cases.json" \
+  "$repo_root/tests/bap/fixtures/caller-coverage/raw-bap-observations.json" \
+  "$repo_root/tests/bap/fixtures/caller-coverage/dump-four-shapes.json" \
+  "$repo_root/tests/bap/fixtures/caller-coverage/legacy-manifest.json" \
+  "$repo_root"/tests/bap/fixtures/caller-coverage/legacy-v2/* \
+  > "$run_root/sources-before.sha256"
 
 "$apalache" version > "$run_root/apalache-version.log" 2>&1
 # The selected TLC launcher prints valid help with exit 1. Accept that status

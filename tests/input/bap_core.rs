@@ -18,6 +18,16 @@ fn config() -> CoreConfig {
     )
 }
 
+fn current_guard_wire_profile(report: &ariadne::bap::guard_admission::Report) -> String {
+    assert_eq!(report.profile, ariadne::bap::guard_admission::PROFILE);
+    format!(
+        "direct:{}:{}:normal-flow-scope=[{}]:exception-resumption-outside-local-scope",
+        report.profile,
+        ariadne::reports::sha256(&serde_json::to_vec(report).unwrap()),
+        ariadne::bap::guard_admission::normal_flow_scope(report).unwrap(),
+    )
+}
+
 #[test]
 #[ignore = "requires pinned lifting, MC and native analysis helpers"]
 fn vector_capture_has_native_reference_parity_and_keeps_prior_vector_origins() {
@@ -540,7 +550,7 @@ fn guarded_frame_capture_has_native_parity_and_rejects_direct_proof_tampering() 
         ariadne::investigation::ExplainLimits::default(),
     )
     .unwrap();
-    assert_eq!(explanation.schema, "ariadne.fault-address-explanation/v2");
+    assert_eq!(explanation.schema, "ariadne.fault-address-explanation/v5");
     assert!(
         explanation
             .assumptions
@@ -562,7 +572,7 @@ fn guarded_frame_capture_has_native_parity_and_rejects_direct_proof_tampering() 
     )
     .unwrap();
     let report: Value = serde_json::from_str(&rendered).unwrap();
-    assert_eq!(report["schema"], "ariadne-minidump-report-v3");
+    assert_eq!(report["schema"], "ariadne-minidump-report-v6");
     assert_eq!(
         report["guard_admission"]["input"]["premises"][0]["policy"],
         guard_admission::ABI_POLICY
@@ -631,8 +641,7 @@ fn guarded_frame_capture_has_native_parity_and_rejects_direct_proof_tampering() 
             "snapshot":prepared.snapshot.snapshot_id,
             "artifact_sha256":prepared.snapshot.artifact_sha256,
             "query_id":prepared.materialization.query_identity,
-            "semantic_profile":format!("direct:{}:{}", guard_admission::PROFILE,
-                ariadne::reports::sha256(&serde_json::to_vec(proof).unwrap())),
+            "semantic_profile":current_guard_wire_profile(proof),
             "sites":sites,
         },
         "guard_admission":proof,
@@ -675,10 +684,8 @@ fn guarded_frame_capture_has_native_parity_and_rejects_direct_proof_tampering() 
             }
             _ => unreachable!(),
         }
-        bad["capture"]["semantic_profile"] = json!(format!(
-            "direct:{}:{}",
-            guard_admission::PROFILE,
-            ariadne::reports::sha256(&serde_json::to_vec(&bad["guard_admission"]).unwrap())
+        bad["capture"]["semantic_profile"] = json!(current_guard_wire_profile(
+            &serde_json::from_value(bad["guard_admission"].clone()).unwrap()
         ));
         let rejected = match ariadne::bap::core_session::CoreSession::start_profile(
             &config(),
@@ -714,7 +721,7 @@ fn guarded_frame_capture_has_native_parity_and_rejects_direct_proof_tampering() 
     receipt_row.receipt_sha256.clear();
     let forged_receipt = ariadne::reports::sha256(
         &serde_json::to_vec(&(
-            "ariadne-guard-receipt/v1",
+            "ariadne-guard-receipt/v2",
             &forged.checker_sha256,
             &forged.intent_id,
             &forged.candidate_graph_sha256,
@@ -735,11 +742,7 @@ fn guarded_frame_capture_has_native_parity_and_rejects_direct_proof_tampering() 
     let forged_analysis_id = guard_admission::analysis_id(&forged).unwrap();
     wrong_edge["guard_admission"] = serde_json::to_value(&forged).unwrap();
     wrong_edge["capture"]["query_id"] = json!(forged_analysis_id);
-    wrong_edge["capture"]["semantic_profile"] = json!(format!(
-        "direct:{}:{}",
-        guard_admission::PROFILE,
-        ariadne::reports::sha256(&serde_json::to_vec(&forged).unwrap())
-    ));
+    wrong_edge["capture"]["semantic_profile"] = json!(current_guard_wire_profile(&forged));
     let rejected = match ariadne::bap::core_session::CoreSession::start_profile(
         &config(),
         "guard-direct-rehashed-wrong-edge",
@@ -782,7 +785,7 @@ fn guarded_frame_capture_has_native_parity_and_rejects_direct_proof_tampering() 
     receipt_row.receipt_sha256.clear();
     let untyped_receipt = ariadne::reports::sha256(
         &serde_json::to_vec(&(
-            "ariadne-guard-receipt/v1",
+            "ariadne-guard-receipt/v2",
             &forged.checker_sha256,
             &forged.intent_id,
             &forged.candidate_graph_sha256,
@@ -802,7 +805,7 @@ fn guarded_frame_capture_has_native_parity_and_rejects_direct_proof_tampering() 
     forged.guards[0].receipt_sha256 = untyped_receipt;
     let forged_analysis_id = ariadne::reports::sha256(
         &serde_json::to_vec(&(
-            "ariadne-guard-analysis/v1",
+            "ariadne-guard-analysis/v2",
             &forged.intent_id,
             forged.final_request_sha256.as_ref().unwrap(),
             vec![forged.guards[0].receipt_sha256.as_str()],
@@ -812,11 +815,7 @@ fn guarded_frame_capture_has_native_parity_and_rejects_direct_proof_tampering() 
     untyped["capture"]["sites"][0]["ast_sha256"] = json!(forged.transfers[0].ast_sha256);
     untyped["guard_admission"] = serde_json::to_value(&forged).unwrap();
     untyped["capture"]["query_id"] = json!(forged_analysis_id);
-    untyped["capture"]["semantic_profile"] = json!(format!(
-        "direct:{}:{}",
-        guard_admission::PROFILE,
-        ariadne::reports::sha256(&serde_json::to_vec(&forged).unwrap())
-    ));
+    untyped["capture"]["semantic_profile"] = json!(current_guard_wire_profile(&forged));
     let rejected = match ariadne::bap::core_session::CoreSession::start_profile(
         &config(),
         "guard-direct-rehashed-untyped-transfer",
@@ -882,11 +881,7 @@ fn guarded_frame_capture_has_native_parity_and_rejects_direct_proof_tampering() 
     opaque_wire["capture"]["sites"][1]["quality"] = json!("opaque");
     opaque_wire["capture"]["query_id"] =
         json!(guard_admission::analysis_id(&opaque_report).unwrap());
-    opaque_wire["capture"]["semantic_profile"] = json!(format!(
-        "direct:{}:{}",
-        guard_admission::PROFILE,
-        ariadne::reports::sha256(&serde_json::to_vec(&opaque_report).unwrap())
-    ));
+    opaque_wire["capture"]["semantic_profile"] = json!(current_guard_wire_profile(&opaque_report));
     let (mut opaque_native, initial) = ariadne::bap::core_session::CoreSession::start_profile(
         &config(),
         "guard-direct-opaque-ordinary",
@@ -925,11 +920,7 @@ fn guarded_frame_capture_has_native_parity_and_rejects_direct_proof_tampering() 
     .unwrap();
     false_stop["guard_admission"] = serde_json::to_value(&false_report).unwrap();
     false_stop["capture"]["query_id"] = json!(guard_admission::analysis_id(&false_report).unwrap());
-    false_stop["capture"]["semantic_profile"] = json!(format!(
-        "direct:{}:{}",
-        guard_admission::PROFILE,
-        ariadne::reports::sha256(&serde_json::to_vec(&false_report).unwrap())
-    ));
+    false_stop["capture"]["semantic_profile"] = json!(current_guard_wire_profile(&false_report));
     let rejected = match ariadne::bap::core_session::CoreSession::start_profile(
         &config(),
         "guard-direct-rehashed-false-stop",
@@ -984,7 +975,7 @@ fn captured_xorps_shift_width_has_guarded_native_parity_and_rejects_rehashed_non
     let shift = &prepared.prepared.instructions[&0x40020c];
     let semantic = shift.semantic.as_ref().unwrap();
     assert_eq!(shift.bytes.as_slice(), &[0x0f, 0x57, 0xc0]);
-    assert_eq!(semantic.projection, "bap-bit-provenance-v7");
+    assert_eq!(semantic.projection, "bap-bit-provenance-v8");
     assert_eq!(semantic.status, "projected", "{:?}", semantic.gaps);
     assert!(prepared.prepared.request.decodable.contains(&0x40020c));
     assert!(
@@ -1069,7 +1060,7 @@ fn captured_xorps_shift_width_has_guarded_native_parity_and_rejects_rehashed_non
     receipt_row.receipt_sha256.clear();
     let receipt_sha = ariadne::reports::sha256(
         &serde_json::to_vec(&(
-            "ariadne-guard-receipt/v1",
+            "ariadne-guard-receipt/v2",
             &forged.checker_sha256,
             &forged.intent_id,
             &forged.candidate_graph_sha256,
@@ -1089,7 +1080,7 @@ fn captured_xorps_shift_width_has_guarded_native_parity_and_rejects_rehashed_non
     forged.guards[0].receipt_sha256 = receipt_sha;
     let forged_analysis_id = ariadne::reports::sha256(
         &serde_json::to_vec(&(
-            "ariadne-guard-analysis/v1",
+            "ariadne-guard-analysis/v2",
             &forged.intent_id,
             forged.final_request_sha256.as_ref().unwrap(),
             vec![forged.guards[0].receipt_sha256.as_str()],
@@ -1106,11 +1097,7 @@ fn captured_xorps_shift_width_has_guarded_native_parity_and_rejects_rehashed_non
         json!(forged.transfers[shift_index].ast_sha256);
     wire["capture"]["query_id"] = json!(forged_analysis_id);
     wire["guard_admission"] = serde_json::to_value(&forged).unwrap();
-    wire["capture"]["semantic_profile"] = json!(format!(
-        "direct:{}:{}",
-        guard_admission::PROFILE,
-        ariadne::reports::sha256(&serde_json::to_vec(&forged).unwrap()),
-    ));
+    wire["capture"]["semantic_profile"] = json!(current_guard_wire_profile(&forged));
     let rejected = match ariadne::bap::core_session::CoreSession::start_profile(
         &config(),
         "guard-direct-rehashed-nonshift-width",

@@ -1,0 +1,18 @@
+{
+  "name": "native-controls",
+  "command": [
+    "python3",
+    "tests/bap/caller_coverage_native_controls.py",
+    "--native-dir",
+    "target/caller-native",
+    "--output",
+    "/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/native-controls-20261015T072536",
+    "--receipt-dir",
+    "/caller-work/evidence/native-controls-20261015T072536/caller-receipts",
+    "--wire-dir",
+    "/caller-work/evidence/native-controls-20261015T072536/caller-wires",
+    "--mutations"
+  ],
+  "exit_code": 0,
+  "seconds": 16.029343884000014
+}

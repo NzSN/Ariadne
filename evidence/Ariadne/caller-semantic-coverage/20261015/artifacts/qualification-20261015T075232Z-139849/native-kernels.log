@@ -1,0 +1,36 @@
+    Finished `test` profile [unoptimized] target(s) in 0.83s
+     Running tests/bap/core_analysis.rs (target/caller-build/debug/deps/bap_core_analysis-854c36e8944d9f05)
+
+running 5 tests
+test native_complete_state_actions_match_reference_and_independent_origins ... ok
+test completion_rejects_page_and_lifecycle_tampering ... ok
+test native_normalized_initialize_above_default_request_budget ... ok
+test native_completion_pages_preserve_large_final_state ... ok
+test native_loops_calls_parallel_edges_and_failed_starts_match_full_reference ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.58s
+
+     Running tests/bap/core_bootstrap.rs (target/caller-build/debug/deps/bap_core_bootstrap-5a5f29bb79d7013a)
+
+running 10 tests
+test native_reader_request_byte_boundaries ... ok
+test native_host_request_byte_boundaries ... ok
+test native_request_limit_launch_validation ... ok
+test configurable_request_budget_handshake_controls ... ok
+test transport_failure_controls ... ok
+test rust_reference_crosscheck ... ok
+test native_full_observations ... ok
+test native_rejections_and_fresh_sessions ... ok
+test native_failures_and_unsigned_schedule ... ok
+test native_input_admission ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 9.22s
+
+     Running tests/bap/core_stateflow.rs (target/caller-build/debug/deps/bap_core_stateflow-636127cd2b59d174)
+
+running 2 tests
+test native_stateflow_matches_every_state_and_derived_observation ... ok
+test native_stateflow_rejects_invalid_finite_contracts ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 7.93s
+

@@ -13,6 +13,12 @@ records the subsequent source audit and separate qualification limits.
 
 **Where to go next.**
 
+- [Predicate admission v2](AriadnePredicateAdmission.tla) and the
+  [caller semantic-coverage plan](../Plans/caller-semantic-coverage.md) — checked
+  normal-completion terminals, exact MOVAPS load/store guards and separate
+  exception-resumption limits. The predicate section below records the new
+  contract, passed S5 finite runtime qualification and the separate incomplete original-caller gate.
+
 - [Loop-target closure model](AriadneLoopTargetClosure.tla) and
   [L0–L6 extension plan](../Plans/completed/loop-aware-target-resolution.md) — local-region
   entrance initialization, induction over original edges, fresh selector loads
@@ -100,6 +106,7 @@ original bytes and replay bindings.
 | [Supplied IR](AriadneLLVMIR.tla), [example](AriadneLLVMIRExample.tla) | `src/llvm_ir.rs`, `src/ir/`, `native/llvm_ir/` | Current instruction dependencies and separate block CFG; no binary-to-IR reconstruction. |
 | [Input](AriadneInput.tla), [checks](AriadneInputChecks.tla) | `src/input/address_space.rs`, `src/input/materialize.rs` | Current byte agreement, file-offset correspondence and local discovery closure. Actual parser limits, context validity and unwind admission remain reader contracts. |
 | [Effects](AriadneEffects.tla), [checks](AriadneEffectsChecks.tla) | `src/effects/`, `src/bap/projection.rs` | Executable projection contract unchanged; producer wording now names trusted BAP lifting and independent LLVM facts. No hardware/ISA proof. |
+| [Predicate admission v2](AriadnePredicateAdmission.tla) | `src/bap/guard_admission.rs`, private terminal-control admission, native guard/terminal replay | The 2026-10-15 extension defines 58 finite scenarios: 27 retained configurations plus 31 terminal/load cases. Normal terminals end local normal completion, keep opaque effects and represent exceptional exits. Source recognition and byte extents have separate concrete controls. S5 finite runtime qualification passes on its recorded sources/helper; original-caller completion remains S6 partial. Frozen v1 contracts remain separate. |
 | [Zero base/displacement](AriadneZeroBaseOffset.tla) | `src/investigation/zero_base_offset.rs` | Current question-level reduction over admitted coherent evidence and result budgets. Context/decode/BIL admission and full-width arithmetic have separate source/capture tests. |
 | [Memory refinement](AriadneMemoryRefinement.tla) | `src/investigation/backward_values.rs`, `src/investigation/memory_refinement.rs` | Updated exact/constrained/unknown meanings, composition/cap stops, conflict distinction and unavailable/candidate preservation. Four-bit words and two-operation chains are finite representatives; worklist and receipt validation remain outside this component model. |
 | [Frame paths](AriadneFramePaths.tla) | `src/investigation/frame_paths.rs`, `src/investigation/frame_unwind.rs` | Updated typed-edge DFS, strict NP, work/scan/visit/step guards, fair termination and conservative exhaustion. Activation-qualified node IDs and a bound composed graph are premises. External resource stops abstract byte/graph limits; they do not prove concrete payload sizing or RSS. |
@@ -166,7 +173,7 @@ conditional-write cases enumerate one decrement followed by its taken condition
 and a later upper bound: correct indices are `{1,2,3}`; substituting the update
 again into an already post-transfer condition incorrectly gives `{0,2,3}`.
 This is a finite guard-normalization contract, not an instruction-step proof.
-The [source-bound qualification](../evidence/Ariadne/guarded-target-resolution/20261014/README.md) now records remote typechecking, all 19 finite model cases, Rust/native controls and 330 generated replay observations. All nine original candidate sets and all 51 missing starts are recovered; the ninth incoming-state certificate remains incomplete. The [canonical design](../docs/Ariadne/guarded-target-resolution-design.md) records that scoped result and the open full-closure clause.
+The [2026-10-14 source-bound qualification](../evidence/Ariadne/guarded-target-resolution/20261014/README.md) records remote typechecking, all 19 finite model cases, Rust/native controls and 330 generated replay observations. Its candidate/discovery result is historical, including the then-incomplete ninth certificate. The [2026-10-15 loop qualification](../evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) subsequently closes that certificate and the new loop dispatch through independently checked induction. The [canonical design](../docs/Ariadne/guarded-target-resolution-design.md) keeps both scopes and remaining guard/frame limits explicit.
 
 ## Loop-target closure component interface
 
@@ -849,17 +856,55 @@ Those component results are historical and do not qualify the active analyzer.
 ## Predicate admission model
 
 [AriadnePredicateAdmission.tla](AriadnePredicateAdmission.tla) is the analysis-level
-authority for proof-gated MOVAPS normal admission. It models residue joins and
+authority for proof-gated MOVAPS load/store normal admission. It models residue joins and
 transfers, qualified entry premises, candidate-graph closure, invalidation after
-new incoming evidence, receipt replay and publication. It excludes full ISA
-semantics and general exception graphs.
+new incoming evidence, receipt replay and publication. Version 2 additionally
+distinguishes certified normal terminals from unsupported Stops, while keeping
+general exception graphs and full ISA execution outside the model.
 
-The [canonical design](../docs/Ariadne/justified-branch-pruning-design.md) explains
-the captured-source contract; its [execution plan](../Plans/completed/justified-branch-pruning.md)
-separates G0 model/oracle freeze from runtime and remote qualification. Run
-`bash Specs/check-predicate-admission.sh` on the authorized remote WSL host:
-Apalache typechecks the model and TLC checks all 27 `PredicateAdmission*.cfg`
-scenarios for safety and fair termination. The independent Python oracle has
-56 graph/premise cases, three closure histories, 33 receipt controls and
-720 finite numeric transfer checks. These finite instances are not a universal
-Rust refinement proof or an external-lifter qualification.
+The [original guard design](../docs/Ariadne/justified-branch-pruning-design.md)
+and [completed G0–G4 plan](../Plans/completed/justified-branch-pruning.md) retain
+the store-only v1 scope. Its exact model/source identities are preserved in
+the [legacy contract manifest](../tests/bap/fixtures/caller-coverage/legacy-manifest.json).
+The [caller coverage design](../docs/Ariadne/caller-semantic-coverage-design.md)
+and [S0–S6 plan](../Plans/caller-semantic-coverage.md) own v2 implementation and
+source-bound qualification. Editing this active model does not refresh the
+frozen v1 result or authorize its profile to admit new fields.
+
+The new scope is `local-normal-completion/v1`. A certified terminal has no
+normal successor; all-location uses/may-defs and empty must-defs preserve opaque
+exception effects. The model retains an exceptional-exit annotation and leaves
+handler/debugger resumption outside the scope. The `TerminalHandlerResume`
+scenario explicitly permits every handler-supplied RSP residue while normal
+coverage can still be closed. This is not an assumption that handlers never
+resume, nor a whole-machine coverage claim.
+
+`normalTerminals` and unmatched Stop barriers are distinct. Invalid byte/span,
+AST, source-rule, scope, successor, effect or generation claims prevent normal
+admission. Late terminal completeness/edge/evidence changes advance the epoch,
+invalidate receipts and restore conservative barriers. Pending guard relations
+commit neither a store nor a vector load; only a current, closed aligned verdict
+can select the operation-specific normal effect. Unknown, misaligned,
+unreached and budget-stopped results retain their stops.
+
+Run `bash Specs/check-predicate-admission.sh` on the authorized remote WSL host.
+It verifies frozen legacy file identities, runs both independent oracles,
+typechecks v2 and checks 58 `PredicateAdmission*.cfg` scenarios for safety,
+expected outcomes and fair termination. The unchanged
+[v1 oracle](../tests/bap/fixtures/guards/oracle.py) retains its 56 graph/premise
+cases, three closure histories, 33 receipt controls and 720 numeric transfer
+checks. The new [caller oracle](../tests/bap/fixtures/caller-coverage/oracle.py)
+and [71 declared cases](../tests/bap/fixtures/caller-coverage/oracle-cases.json)
+use a generated ModR/M/SIB extent grammar, concrete 128/256-bit evaluation of
+the captured MOVAPS source, finite product-graph traversal and synthetic receipt
+tampering. Complete/truncated UD1 grammar productions are also checked; the
+actual pinned BAP three-byte versus five-byte discrepancy remains explicit.
+
+Exact bytes/BIL, decoder observations, extent recognition and cryptographic
+bindings remain input-check obligations erased by the finite TLA+ abstraction.
+The new oracle tests selected concrete representation cases without importing
+production matchers; its receipts are not a runtime wire-compatibility test.
+Neither tier proves the lifter, a universal Rust refinement or mechanically
+checked coupling to the core/target/loop models. Those model files remain
+unchanged; native replay and the original-dump gate qualify their concrete
+integration separately.

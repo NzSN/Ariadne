@@ -1,0 +1,50 @@
+
+running 1 test
+test native_rejects_opaque_contract_tampering_directly ... FAILED
+
+failures:
+
+failures:
+    native_rejects_opaque_contract_tampering_directly
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 8 filtered out; finished in 4.38s
+
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling libc v0.2.189
+   Compiling generic-array v0.14.7
+   Compiling anyhow v1.0.104
+   Compiling serde_core v1.0.229
+   Compiling thiserror v2.0.21
+   Compiling zmij v1.0.23
+   Compiling syn v2.0.119
+   Compiling syn v3.0.6
+   Compiling getrandom v0.3.4
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling serde v1.0.229
+   Compiling serde_json v1.0.149
+   Compiling digest v0.10.7
+   Compiling memmap2 v0.9.11
+   Compiling tempfile v3.20.0
+   Compiling thiserror-impl v2.0.21
+   Compiling serde_derive v1.0.229
+   Compiling sha2 v0.10.9
+   Compiling scroll_derive v0.12.1
+   Compiling num-derive v0.4.2
+   Compiling smart-default v0.7.1
+   Compiling tracing-attributes v0.1.31
+   Compiling prost-derive v0.13.5
+   Compiling scroll v0.12.0
+   Compiling minidump-common v0.26.1
+   Compiling tracing v0.1.44
+   Compiling prost v0.13.5
+   Compiling minidump v0.26.1
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-caller-coverage-20261015)
+    Finished `test` profile [unoptimized] target(s) in 17.52s
+     Running tests/input/bap_core.rs (target/caller-qualification-20261015T073731Z-14541/opaque-mutation-cargo/debug/deps/input_bap_core-6fa89f8fafdd27aa)
+
+thread 'native_rejects_opaque_contract_tampering_directly' (20937) panicked at tests/input/bap_core.rs:484:9:
+native admitted opaque kill mutation
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+error: test failed, to rerun pass `--test input_bap_core`

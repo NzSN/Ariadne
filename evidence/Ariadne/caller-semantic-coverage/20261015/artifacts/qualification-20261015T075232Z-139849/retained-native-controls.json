@@ -1,0 +1,9 @@
+{
+  "status": "retained-source-tool-input-bound-pass",
+  "result": "/caller-work/evidence/final-checks-20261015T074922/native-controls/result.json",
+  "result_sha256": "7415923104048a00c631a8ce4d5296a2722d005f377cf5c5aa6a2eb099f1bbc8",
+  "direct_controls": 88,
+  "production_initialization_controls": 24,
+  "behavioral_mutants": 9,
+  "scope": "Actual recorded proof/capture inputs; fresh consumer regressions below are separate."
+}

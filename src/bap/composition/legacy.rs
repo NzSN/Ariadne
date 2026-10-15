@@ -124,7 +124,7 @@ pub fn validate(
             .instructions
             .get(&site)
             .ok_or_else(|| invalid("composition candidate source absent"))?;
-        validate_original_control(source, original)?;
+        validate_original_control(source, original, &guards.input)?;
         let mut augmented = (*original).clone();
         if original.kind == guard::ControlKind::Indirect {
             if let Some(row) = targets.resolutions.iter().find(|r| r.site == source.site) {
@@ -158,7 +158,7 @@ pub fn validate(
         let name = crate::bap::core_adapter::hex(site);
         let pending = sources
             .get(name.as_str())
-            .map(|s| guard::recognize_pending(s))
+            .map(|s| guard::recognize_pending_for_input(&guards.input, s))
             .transpose()?
             .flatten();
         if pending.is_some() {
@@ -213,6 +213,7 @@ pub fn validate(
 fn validate_original_control(
     source: &guard::CandidateSite,
     control: &guard::CandidateControl,
+    input: &guard::GuardInput,
 ) -> Result<(), Error> {
     use guard::ControlKind as K;
     let bytes: Vec<_> = (0..source.bytes_hex.len())
@@ -236,7 +237,7 @@ fn validate_original_control(
     {
         return Err(invalid("composition original structural control"));
     }
-    if guard::recognize_pending(source)?.is_some()
+    if guard::recognize_pending_for_input(input, source)?.is_some()
         || matches!(control.kind, K::Call | K::Return | K::Stop)
     {
         return Ok(());

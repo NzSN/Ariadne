@@ -1,0 +1,22 @@
+   Compiling num-traits v0.2.19
+   Compiling getrandom v0.3.4
+   Compiling ring v0.17.14
+   Compiling zerocopy v0.8.39
+    Checking rand_core v0.9.5
+    Checking thiserror v1.0.69
+    Checking num-integer v0.1.47
+    Checking range-map v0.2.0
+    Checking num-bigint v0.4.8
+    Checking minidump-common v0.26.1
+    Checking rand_xorshift v0.4.0
+    Checking rand v0.9.3
+    Checking tempfile v3.20.0
+    Checking ppv-lite86 v0.2.21
+    Checking rand_chacha v0.9.0
+    Checking proptest v1.9.0
+    Checking minidump v0.26.1
+   Compiling rustls v0.23.45
+    Checking rustls-webpki v0.103.15
+    Checking mirrorrust v1.0.0 (/home/nzsn/Repos/MirrorRust)
+    Checking ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-caller-coverage-20261015)
+    Finished `dev` profile [unoptimized] target(s) in 25.86s

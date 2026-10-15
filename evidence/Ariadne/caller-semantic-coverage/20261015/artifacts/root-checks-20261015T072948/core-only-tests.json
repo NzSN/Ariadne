@@ -1,0 +1,12 @@
+{
+  "name": "core-only-tests",
+  "command": [
+    "cargo",
+    "test",
+    "--offline",
+    "--locked",
+    "--no-default-features"
+  ],
+  "exit_code": 0,
+  "seconds": 3.199170284999923
+}

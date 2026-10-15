@@ -1,0 +1,71 @@
+
+running 1 test
+test native_rejects_opaque_contract_tampering_directly ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 8 filtered out; finished in 6.36s
+
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.26
+   Compiling quote v1.0.47
+   Compiling version_check v0.9.5
+   Compiling libc v0.2.189
+   Compiling generic-array v0.14.7
+   Compiling autocfg v1.5.1
+   Compiling typenum v1.20.1
+   Compiling anyhow v1.0.104
+   Compiling num-traits v0.2.19
+   Compiling cfg-if v1.0.5
+   Compiling bitflags v2.13.2
+   Compiling syn v2.0.119
+   Compiling syn v3.0.6
+   Compiling either v1.18.0
+   Compiling serde_core v1.0.229
+   Compiling once_cell v1.21.4
+   Compiling itertools v0.14.0
+   Compiling itoa v1.0.18
+   Compiling uuid v1.26.1
+   Compiling zmij v1.0.23
+   Compiling rustix v1.1.4
+   Compiling thiserror v2.0.21
+   Compiling powerfmt v0.2.0
+   Compiling getrandom v0.3.4
+   Compiling deranged v0.5.8
+   Compiling debugid v0.8.0
+   Compiling thiserror-impl v2.0.21
+   Compiling range-map v0.2.0
+   Compiling tracing-core v0.1.36
+   Compiling scroll_derive v0.12.1
+   Compiling smart-default v0.7.1
+   Compiling prost-derive v0.13.5
+   Compiling scroll v0.12.0
+   Compiling tracing-attributes v0.1.31
+   Compiling num-derive v0.4.2
+   Compiling crypto-common v0.1.7
+   Compiling block-buffer v0.10.4
+   Compiling hex v0.4.3
+   Compiling bytes v1.12.1
+   Compiling time-core v0.1.7
+   Compiling num-conv v0.1.0
+   Compiling serde_json v1.0.149
+   Compiling serde v1.0.229
+   Compiling linux-raw-sys v0.12.1
+   Compiling log v0.4.34
+   Compiling pin-project-lite v0.2.17
+   Compiling tracing v0.1.44
+   Compiling prost v0.13.5
+   Compiling time v0.3.45
+   Compiling minidump-common v0.26.1
+   Compiling procfs-core v0.17.0
+   Compiling digest v0.10.7
+   Compiling serde_derive v1.0.229
+   Compiling memmap2 v0.9.11
+   Compiling encoding_rs v0.8.35
+   Compiling cpufeatures v0.2.17
+   Compiling memchr v2.8.3
+   Compiling fastrand v2.5.0
+   Compiling tempfile v3.20.0
+   Compiling minidump v0.26.1
+   Compiling sha2 v0.10.9
+   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-caller-coverage-20261015)
+    Finished `test` profile [unoptimized] target(s) in 16.21s
+     Running tests/input/bap_core.rs (target/caller-qualification-20261015T075232Z-139849/opaque-mutation-cargo/debug/deps/input_bap_core-6fa89f8fafdd27aa)

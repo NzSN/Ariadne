@@ -1,0 +1,30 @@
+{
+  "scope": "Final summaries and transport/source verification outside the sealed remote archive",
+  "archive_sha256": "88a119907b002a9dbd4b1c2afb1ddb5d8d306011f174629ab25d35ca4a2ff8df",
+  "files": {
+    "README.md": {
+      "bytes": 8355,
+      "sha256": "b6e56ecdfb1bcae7b440b9d8f757527520a73baa68ef9cdac7540ffe42e32c29"
+    },
+    "qualification.json": {
+      "bytes": 5021,
+      "sha256": "eda2a60863a1108721dce3a25b2c6a50e3faaac36be48f1c5251f9db4b1912fb"
+    },
+    "import-verification.json": {
+      "bytes": 720,
+      "sha256": "c07dbbe502dff8d380cad1479737531c3f8c949c8faae8fb0789829ac33f1f6f"
+    },
+    "product-artifact-verification.json": {
+      "bytes": 11227,
+      "sha256": "2c9dc85731ecfe1cda487cc8b6d3c9ca860d0fe8991f6a0ae86a6b3e9ff40692"
+    },
+    "retained-other-models.json": {
+      "bytes": 9301,
+      "sha256": "cbb9ec087a36410ae8e3a9960855e6fdc4e5b85752413fec32edd8a82d6f7f4f"
+    },
+    "local-documentation.json": {
+      "bytes": 2326,
+      "sha256": "dd6d1ccc67fe4eac34857b8d6097922c45d05a83250bc679212c4e56941e47ce"
+    }
+  }
+}

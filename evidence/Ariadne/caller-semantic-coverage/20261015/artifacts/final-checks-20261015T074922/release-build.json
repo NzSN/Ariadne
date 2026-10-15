@@ -1,0 +1,13 @@
+{
+  "name": "release-build",
+  "command": [
+    "cargo",
+    "build",
+    "--offline",
+    "--locked",
+    "--release",
+    "--lib"
+  ],
+  "exit_code": 0,
+  "seconds": 2.1072188440000446
+}

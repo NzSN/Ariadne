@@ -1,0 +1,11 @@
+{
+  "name": "native-build",
+  "command": [
+    "python3",
+    "native/bap-core/build.py",
+    "--output",
+    "target/caller-native"
+  ],
+  "exit_code": 0,
+  "seconds": 11.919394051999973
+}

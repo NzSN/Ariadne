@@ -1,0 +1,16 @@
+{
+  "name": "actual-load-export",
+  "command": [
+    "cargo",
+    "test",
+    "--offline",
+    "--locked",
+    "--lib",
+    "actual_movaps_load_guard_outcomes_export_checked_native_inputs",
+    "--",
+    "--ignored",
+    "--nocapture"
+  ],
+  "exit_code": 101,
+  "seconds": 1.823210997999979
+}

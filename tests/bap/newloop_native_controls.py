@@ -85,7 +85,8 @@ def build(directory, native, environment, compiler, replacement=None):
     command = [str(compiler), "ocamlopt", "-linkpkg", "-package", "bap,yojson",
                *include, "-I", str(native), "-o", "newloop-checker"]
     command.extend(str(native / (name + ".cmx")) for name in
-                   ("build_identity", "recovery", "legacy_capture", "capture", "guard"))
+                   ("build_identity", "recovery", "terminal", "legacy_capture", "capture",
+                    "legacy_guard", "guard"))
     command.extend([str(module), DRIVER.name])
     if not run_command(command, directory, environment, directory / "compile-driver.log"):
         return None

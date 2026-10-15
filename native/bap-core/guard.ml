@@ -82,6 +82,12 @@ let () =
     "native guard SHA-256 self-test"
 let encoded j = Yojson.Safe.to_string j
 let hash_json j = Sha256.digest (encoded j)
+let rec canonical_value=function
+  | `Assoc rows->`Assoc(List.map(fun(key,value)->key,canonical_value value)rows|>
+    List.sort(fun(a,_)(b,_)->String.compare a b))
+  | `List rows->`List(List.map canonical_value rows)
+  | value->value
+let value_hash value=hash_json(canonical_value value)
 let rec same_shape a b = match a,b with
   | `Assoc a,`Assoc b ->
     let sort=List.sort (fun (x,_) (y,_) -> compare x y) in
@@ -143,7 +149,8 @@ let ordered_input j = `Assoc [
   "candidate_epoch",get j "candidate_epoch";
   "closure_complete",get j "closure_complete";
   "barriers",get j "barriers";
-  "sites",ordered_list ordered_site (get j "sites")]
+  "sites",ordered_list ordered_site (get j "sites");
+  "normal_flow",Terminal.ordered_flow(get j "normal_flow")]
 let ordered_report j = `Assoc [
   "schema",get j "schema";"profile",get j "profile";
   "checker_sha256",get j "checker_sha256";
@@ -209,7 +216,8 @@ let movaps_encoding text =
   let b=hex_bytes text in
   let b,high=match b with 0x40::rest -> rest,0 | 0x44::rest -> rest,8 | _ -> b,0 in
   match b with
-  | 0x0f::0x29::modrm::sib::rest when modrm land 7=4 && sib=0x24 ->
+  | 0x0f::operation::modrm::sib::rest
+      when List.mem operation [0x28;0x29] && modrm land 7=4 && sib=0x24 ->
     let bank=((modrm lsr 3) land 7)+high in
     (match modrm lsr 6,rest with
      | 0,[] -> Some (0L,bank)
@@ -222,6 +230,13 @@ let movaps_encoding text =
        Some (Int64.shift_right (Int64.shift_left n 32) 32,bank)
      | _ -> None)
   | _ -> None
+let load_encoding text=
+  let b=hex_bytes text in
+  let b=match b with 0x40::rest|0x44::rest->rest|_->b in
+  match b with 0x0f::0x28::_->true|_->false
+let pending_rule site=if load_encoding(string site "bytes_hex") then
+  "pending-legacy128-movaps-load-rsp-identity/v1"
+  else "pending-legacy128-movaps-rsp-identity/v1"
 let recognized site =
   try
     let displacement,bank=match movaps_encoding (string site "bytes_hex") with
@@ -239,19 +254,34 @@ let recognized site =
       "guard pending control";
     let ast=Yojson.Safe.from_string (string site "ast") in
     json_shape 0 ast;
+    Capture.validate_bil_ast ast;
     match list ast with
     | [store;check] ->
       let value=get store "value" in
-      require (string store "kind"="move" &&
-        variable (get store "var") "mem" 0 "mem" &&
-        string value "kind"="store" && get value "width"=`Int 128 &&
-        var_ref (get value "mem") "mem" 0 "mem" &&
-        rsp_offset (get value "addr")=Some displacement) "guard store shape";
-      let payload=get value "value" in
-      require (string payload "kind"="cast" && get payload "op"=`Int 0 &&
-        get payload "width"=`Int 128 &&
-        var_ref (get payload "arg") ("YMM"^string_of_int bank) 256 "imm")
-        "guard vector source";
+      require(string store "kind"="move")"guard normal assignment";
+      if load_encoding(string site "bytes_hex") then begin
+        let high=get value "lhs" and low=get value "rhs" in
+        require(variable(get store "var")("YMM"^string_of_int bank)256 "imm" &&
+          string value "kind"="concat" && string high "kind"="extract" &&
+          get high "hi"=`Int 255 && get high "lo"=`Int 128 &&
+          var_ref(get high "arg")("YMM"^string_of_int bank)256 "imm" &&
+          string low "kind"="cast" && get low "op"=`Int 3 && get low "width"=`Int 128)
+          "guard load vector merge";
+        let payload=get low "arg" in
+        require(string payload "kind"="load" && get payload "width"=`Int 128 &&
+          var_ref(get payload "mem")"mem" 0 "mem" &&
+          rsp_offset(get payload "addr")=Some displacement)"guard load address"
+      end else begin
+        require (variable (get store "var") "mem" 0 "mem" &&
+          string value "kind"="store" && get value "width"=`Int 128 &&
+          var_ref (get value "mem") "mem" 0 "mem" &&
+          rsp_offset (get value "addr")=Some displacement) "guard store shape";
+        let payload=get value "value" in
+        require (string payload "kind"="cast" && get payload "op"=`Int 0 &&
+          get payload "width"=`Int 128 &&
+          var_ref (get payload "arg") ("YMM"^string_of_int bank) 256 "imm")
+          "guard vector source"
+      end;
       let condition=get check "condition" in
       let bit_and=get condition "lhs" in
       require (string check "kind"="if" &&
@@ -581,7 +611,7 @@ let stopped_guard i capture site instruction =
     get capture "status"=`String "guard-not-admitted")
     "guard stopped summary/capture contract"
 
-let admit j snapshot =
+let admit_current j snapshot =
   exact j ["normalized";"capture";"guard_admission"];
   let normalized=get j "normalized" and capture=get j "capture" in
   let i,capture_sites=Capture.admit
@@ -590,14 +620,17 @@ let admit j snapshot =
   exact report ["schema";"profile";"checker_sha256";"input";"intent_id";
     "candidate_graph_sha256";"transfers";"facts";"guards";"stop";
     "final_request_sha256"];
-  require (string report "schema"="ariadne.guard-admission/v1" &&
-    string report "profile"="bap-guard-admission-v1" &&
+  require (string report "schema"="ariadne.guard-admission/v2" &&
+    string report "profile"="bap-guard-admission-v2" &&
     string report "checker_sha256"=Build_identity.guard_engine_sha256)
     "guard report profile/checker identity";
   require (contains (string capture "semantic_profile")
     (":" ^ string report "profile" ^ ":" ^
      hash_json (ordered_report report)))
     "guard capture proof binding";
+  require(contains(string capture "semantic_profile")
+    ":normal-flow-scope=[local-normal-completion/v1]:exception-resumption-outside-local-scope")
+    "guard capture normal-flow scope annotation";
   ignore (hash (get report "intent_id"));
   ignore (hash (get report "candidate_graph_sha256"));
   ignore (hash (get report "final_request_sha256"));
@@ -605,30 +638,31 @@ let admit j snapshot =
   exact input ["snapshot";"artifact_sha256";"query_scope_sha256";
     "preparation_sha256";"platform";"roots";"seeds";"activation";
     "premises";"producer";"policy";"model_version";"model_sha256";
-    "limits";"candidate_epoch";"closure_complete";"barriers";"sites"];
+    "limits";"candidate_epoch";"closure_complete";"barriers";"sites";"normal_flow"];
   require (string input "snapshot"=snapshot &&
     get input "artifact_sha256"=get capture "artifact_sha256" &&
-    string input "policy"="bap-guard-admission-v1" &&
-    string input "model_version"="ariadne.predicate-admission/v1" &&
+    string input "policy"="bap-guard-admission-v2" &&
+    string input "model_version"="ariadne.predicate-admission/v2" &&
     string input "model_sha256"=Build_identity.guard_model_sha256)
     "guard source/model identity";
   List.iter (fun k -> ignore(hash(get input k)))
     ["artifact_sha256";"query_scope_sha256";"preparation_sha256"];
   let producer=get input "producer" in
   exact producer ["helper_sha256";"runtime_sha256";"decoder_sha256";"projection"];
-  require (string producer "projection"="bap-bit-provenance-v7")
+  require (string producer "projection"="bap-bit-provenance-v8")
     "guard producer profile";
   List.iter (fun k -> ignore(hash(get producer k)))
     ["helper_sha256";"runtime_sha256";"decoder_sha256"];
   let expected_intent=digest_array [
-    `String "ariadne-guard-intent/v1";get input "snapshot";
+    `String "ariadne-guard-intent/v2";get input "snapshot";
     get input "artifact_sha256";get input "query_scope_sha256";
     get input "preparation_sha256";
     ordered_list ordered_root (get input "roots");get input "seeds";
     ordered_activation(get input "activation");
     ordered_list ordered_premise (get input "premises");get input "platform";
     get input "policy";get input "model_version";get input "model_sha256";
-    ordered_producer(get input "producer");ordered_limits(get input "limits")] in
+    ordered_producer(get input "producer");ordered_limits(get input "limits");
+    Terminal.ordered_flow(get input "normal_flow")] in
   require (string report "intent_id"=expected_intent) "guard intent digest";
   let limits=get input "limits" in
   exact limits ["max_sites";"max_edges";"max_residue_updates";
@@ -702,6 +736,7 @@ let admit j snapshot =
     ignore(hex_bytes(string site "bytes_hex"));
     let ast=Yojson.Safe.from_string (string site "ast") in
     json_shape 0 ast;ignore(list ast);
+    Capture.validate_bil_ast ast;
     ignore(boolean(get site "opaque"));
     let control=get site "control" in
     exact control ["kind";"fall";"targets";"complete"];
@@ -733,10 +768,26 @@ let admit j snapshot =
       require (boolean(get site "opaque")<>projected)
         "guard candidate opacity/source status mismatch";
       if projected then require (get source "quality"=`String "external_lift" &&
-        get source "projection"=`String "bap-bit-provenance-v7")
+        get source "projection"=`String "bap-bit-provenance-v8")
         "guard narrowed transfer lacks projected v5 source"
     end;
     M.add at site acc) M.empty rows in
+  let terminals=Terminal.validate_flow candidates(get input "normal_flow")in
+  S.iter(fun at->if(M.find at i.instructions).kind="stop" then
+    require(S.mem at terminals)"decoded Stop lacks terminal receipt")i.decodable;
+  M.iter(fun at source->if get source "status"=`String "normal-flow-terminal" then
+    require(S.mem at terminals)"terminal capture status lacks receipt")capture_sites;
+  S.iter(fun at->
+    let instruction=M.find at i.instructions and source=M.find at capture_sites in
+    require(instruction.kind="stop" && instruction.complete &&
+      S.is_empty instruction.fall && S.is_empty instruction.targets &&
+      S.equal instruction.uses i.locations && S.equal instruction.may i.locations &&
+      S.is_empty instruction.must && S.mem at i.captured && S.mem at i.decodable &&
+      get source "captured"=`Bool true && get source "quality"=`String "opaque" &&
+      get source "status"=`String "normal-flow-terminal" &&
+      get source "ast_sha256"<>`Null &&
+      get source "projection"=`String "bap-bit-provenance-v8")
+      "terminal final normal-control or conservative-effect mismatch")terminals;
   S.iter (fun at -> require (M.mem at candidates)
     "guard admitted instruction missing candidate evidence") i.decodable;
   M.iter (fun root _ -> require (M.mem root candidates) "guard root not candidate") roots;
@@ -786,11 +837,11 @@ let admit j snapshot =
         (list(get control "targets")) else [] in
     fall@targets) rows in
   let expected_graph=digest_array [
-    `String "ariadne-guard-candidate/v1";
+    `String "ariadne-guard-candidate/v2";
     ordered_list ordered_root (get input "roots");
     get input "candidate_epoch";get input "closure_complete";
     get input "barriers";ordered_list ordered_site (get input "sites");
-    `List edge_rows] in
+    `List edge_rows;Terminal.ordered_flow(get input "normal_flow")] in
   require (string report "candidate_graph_sha256"=expected_graph)
     "guard candidate graph digest";
   let static_stop=if Int64.unsigned_compare
@@ -819,9 +870,9 @@ let admit j snapshot =
       (string c "kind"<>"indirect" || boolean(get c "complete")) &&
       S.for_all (fun to_ -> M.mem to_ candidates)
         (M.find (address(string site "site")) outgoing) &&
-      (recognized site<>None ||
+      (recognized site<>None || S.mem(address(string site "site"))terminals ||
        List.mem (string c "kind") ["call";"return"] ||
-       ((typed_site site ||
+       (string c "kind"<>"stop" && (typed_site site ||
          opaque_ordinary_site (M.find (address(string site "site")) capture_sites) site) &&
         (list(Yojson.Safe.from_string(string site "ast"))<>[] ||
           string site "bytes_hex"="90") &&
@@ -859,7 +910,7 @@ let admit j snapshot =
         [get row "rule";get row "relation"])
       "guard transfer source/relation digest";
     let rule_ok=if pending then
-      rule="pending-legacy128-movaps-rsp-identity/v1" &&
+      rule=pending_rule source &&
       actual=List.init 16 (fun n -> 1 lsl n)
     else if rule="opaque-rsp-havoc/v1" then
       actual=List.init 16 (fun _ -> top)
@@ -928,10 +979,12 @@ let admit j snapshot =
         "guard selected AST digest";
       let source=M.find at capture_sites in
       let ordinary=M.find at i.instructions in
+      let is_load=load_encoding(string site "bytes_hex")in
       let expected_uses=List.fold_left (fun acc n ->
         S.add ("gpr:rsp:"^string_of_int n) acc)
-        (S.singleton "state:other") (List.init 8 Fun.id) in
-      require (string source "projection"="bap-bit-provenance-v7")
+        (if is_load then S.of_list["state:other";"memory:any"]else S.singleton "state:other")
+        (List.init 8 Fun.id) in
+      require (string source "projection"="bap-bit-provenance-v8")
         "guard normal producer profile";
       require (string source "status"="projected" &&
         string source "quality"="external_lift")
@@ -947,7 +1000,7 @@ let admit j snapshot =
         S.equal ordinary.fall candidate_fall &&
         S.is_empty ordinary.targets && ordinary.complete)
         "guard normal control summary";
-      require (S.equal ordinary.may (S.singleton "memory:any") &&
+      require (S.equal ordinary.may (S.singleton(if is_load then "state:other"else "memory:any")) &&
         S.is_empty ordinary.must) "guard normal write summary";
       require (S.equal ordinary.uses expected_uses)
         ("guard normal read summary: actual=" ^
@@ -968,13 +1021,13 @@ let admit j snapshot =
     if recognized site<>None then S.add at seen else seen) candidates S.empty in
   require (S.equal decisions expected) "guard decision coverage";
   end in
-  let request_digest=hash_json normalized in
+  let request_digest=value_hash normalized in
   require (string report "final_request_sha256"=request_digest)
     "guard final normalized request digest";
   List.iter (fun d ->
     let without=replace_field d "receipt_sha256" (`String "") in
     let digest=digest_array [
-      `String "ariadne-guard-receipt/v1";get report "checker_sha256";
+      `String "ariadne-guard-receipt/v2";get report "checker_sha256";
       get report "intent_id";get report "candidate_graph_sha256";
       get input "candidate_epoch";get input "model_version";
       get input "model_sha256";
@@ -988,8 +1041,16 @@ let admit j snapshot =
   let receipt_digests=List.map (fun d -> get d "receipt_sha256")
     (list(get report "guards")) |> List.sort compare in
   let analysis_id=digest_array [
-    `String "ariadne-guard-analysis/v1";get report "intent_id";
+    `String "ariadne-guard-analysis/v2";get report "intent_id";
     get report "final_request_sha256";`List receipt_digests] in
   require (string capture "query_id"=analysis_id)
     "guard capture analysis identity";
   i,capture_sites
+
+let admit input snapshot=
+  if string(get input "guard_admission")"schema"="ariadne.guard-admission/v1" then
+    Legacy_guard.admit input snapshot
+  else
+    try admit_current input snapshot with
+    | Yojson.Json_error _->raise(Invalid "guard malformed original BIL JSON")
+    | Failure _->raise(Invalid "guard malformed source scalar")

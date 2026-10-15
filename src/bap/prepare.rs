@@ -41,6 +41,7 @@ pub struct Backend {
     target_transfers: BTreeMap<Address, super::target_resolution::Transfer>,
     retain_guards: bool,
     guard_sites: BTreeMap<Address, super::guard_admission::CandidateSite>,
+    terminal_receipts: BTreeMap<Address, super::guard_admission::TerminalReceipt>,
     query_total: usize,
     query_limit: usize,
 }
@@ -158,6 +159,11 @@ impl Backend {
     ) -> BTreeMap<Address, super::guard_admission::CandidateSite> {
         std::mem::take(&mut self.guard_sites)
     }
+    pub(crate) fn take_terminal_receipts(
+        &mut self,
+    ) -> BTreeMap<Address, super::guard_admission::TerminalReceipt> {
+        std::mem::take(&mut self.terminal_receipts)
+    }
     pub(crate) fn enable_target_resolution(&mut self) {
         self.retain_targets = true;
     }
@@ -227,6 +233,7 @@ impl Backend {
             target_transfers: BTreeMap::new(),
             retain_guards: false,
             guard_sites: BTreeMap::new(),
+            terminal_receipts: BTreeMap::new(),
             query_total: 0,
             query_limit: super::session::MAX_SESSION_SITES,
         })
@@ -351,6 +358,58 @@ impl Backend {
                 site.evidence.semantic = Some(semantic);
                 continue;
             }
+            if self.retain_guards {
+                let terminal = if let Some(record) = site.evidence.decoder_record.as_deref() {
+                    super::terminal_control::recognize(
+                        va,
+                        &site.evidence.bytes,
+                        std::str::from_utf8(&ast)?,
+                        &lift,
+                        record,
+                    )?
+                } else {
+                    None
+                };
+                if let Some(receipt) = terminal {
+                    site.instruction.kind = InstructionKind::Stop;
+                    site.instruction.fall.clear();
+                    site.instruction.targets.clear();
+                    site.instruction.complete = true;
+                    site.instruction.uses = options.catalogue.locations();
+                    site.instruction.may_defs = options.catalogue.locations();
+                    site.instruction.must_defs.clear();
+                    site.decodable = true;
+                    site.evidence.quality = EffectQuality::Opaque;
+                    site.evidence.control = Some(InstructionKind::Stop);
+                    site.evidence.rule = Some(super::terminal_control::RULE.into());
+                    semantic.status = super::terminal_control::STATUS.into();
+                    semantic.gaps.extend([
+                        super::terminal_control::EXIT.into(),
+                        super::terminal_control::RESUMPTION.into(),
+                        "unsupported-exception-effects".into(),
+                    ]);
+                    if receipt.rule == "ud1-pinned-extent/v1" {
+                        semantic.gaps.push("pinned-bap-extent-disagreement".into());
+                    }
+                    site.gaps
+                        .retain(|g| g.reason != GapReason::UnsupportedControl);
+                    if !site
+                        .gaps
+                        .iter()
+                        .any(|g| g.reason == GapReason::OpaqueEffects)
+                    {
+                        site.gaps.push(PreparationGap {
+                            address: va,
+                            reason: GapReason::OpaqueEffects,
+                        });
+                    }
+                    self.guard_sites
+                        .insert(va, guard_source(site, va, &ast, true)?);
+                    self.terminal_receipts.insert(va, receipt);
+                    site.evidence.semantic = Some(semantic);
+                    continue;
+                }
+            }
             if lift.status != "decoded"
                 || lift.length != site.evidence.length
                 || lift.bytes
@@ -438,8 +497,8 @@ impl Backend {
                     .gaps
                     .push("normal-or-alignment-fault-pending".into());
                 if self.retain_targets {
-                    // Recognition above constrains this to the reviewed
-                    // memory-only store. Extract original BIL scalar flow on
+                    // Recognition above constrains this to a reviewed
+                    // vector-only load or memory store. Extract scalar flow on
                     // its candidate normal continuation, without selecting the
                     // normal AST or committing the store to final effects.
                     let transfer =

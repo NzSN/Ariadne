@@ -1,0 +1,192 @@
+{
+  "guard_report": {
+    "candidate_graph_sha256": "b282cf24f0000e80b9c4223bf2a47854c02fe3e78984ded40462515f41b391ce",
+    "checker_sha256": "252ef410b03bf3ec7b97efd5bcfbbd42591d66aabdb7680aa118e8e736cb9184",
+    "facts": [
+      {
+        "residues": 65535,
+        "site": "0x00007ff77440b0e0"
+      }
+    ],
+    "final_request_sha256": "23611980345be8267b236238955bbc8e4e6aeff444a8ee53363a1cff19819f76",
+    "guards": [],
+    "input": {
+      "activation": {
+        "frame_activation": "terminal-root",
+        "thread_id": 1
+      },
+      "artifact_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+      "barriers": [],
+      "candidate_epoch": 1,
+      "closure_complete": true,
+      "limits": {
+        "max_closure_rounds": 8,
+        "max_edges": 16384,
+        "max_elapsed_ms": 1000,
+        "max_evidence_bytes": 4194304,
+        "max_residue_updates": 131072,
+        "max_sites": 4096,
+        "max_transfer_evaluations": 262144
+      },
+      "model_sha256": "94c94993a1c2fd9fc6a9ab94f4f782d355ae91b66f4dc010e2d8151cf0498acd",
+      "model_version": "ariadne.predicate-admission/v2",
+      "normal_flow": {
+        "kind": "local_normal_completion",
+        "scope": "local-normal-completion/v1",
+        "terminals": [
+          {
+            "annotation": "exception-exit",
+            "ast_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "bap": {
+              "bytes_hex": "670fb9",
+              "length": 3,
+              "opcode": "UD2B",
+              "properties": {
+                "call": false,
+                "conditional": false,
+                "control": false,
+                "indirect": false,
+                "jump": false,
+                "return": false
+              },
+              "status": "decoded"
+            },
+            "bytes_hex": "670fb94012",
+            "exception": 6,
+            "reference": {
+              "control": "stop",
+              "decoder_record": "v2 UD1Lm 6 r:EAX r:EAX i:1 r:NONE i:18 r:NONE 0 5 0 0 -1 -1 -1 -1 -1 -1 140700784046304 ok 5 stop -",
+              "length": 5,
+              "opcode": "UD1Lm"
+            },
+            "resumption": "exception-resumption-outside-local-scope",
+            "rule": "ud1-pinned-extent/v1",
+            "schema": "ariadne.normal-terminal/v1",
+            "site": "0x00007ff77440b0e0"
+          }
+        ]
+      },
+      "platform": "windows-amd64",
+      "policy": "bap-guard-admission-v2",
+      "premises": [],
+      "preparation_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+      "producer": {
+        "decoder_sha256": "7777777777777777777777777777777777777777777777777777777777777777",
+        "helper_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+        "projection": "bap-bit-provenance-v8",
+        "runtime_sha256": "6666666666666666666666666666666666666666666666666666666666666666"
+      },
+      "query_scope_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "roots": [
+        {
+          "anchor_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+          "function_entry": true,
+          "site": "0x00007ff77440b0e0"
+        }
+      ],
+      "seeds": [],
+      "sites": [
+        {
+          "ast": "[]",
+          "bytes_hex": "670fb94012",
+          "control": {
+            "complete": true,
+            "fall": [],
+            "kind": "stop",
+            "targets": []
+          },
+          "opaque": true,
+          "site": "0x00007ff77440b0e0"
+        }
+      ],
+      "snapshot": "terminal-fixture"
+    },
+    "intent_id": "582a77490d669b598041db60f1bcb5b07c5b223f6a178c8cfc1fe963d5a0b063",
+    "profile": "bap-guard-admission-v2",
+    "schema": "ariadne.guard-admission/v2",
+    "stop": null,
+    "transfers": [
+      {
+        "ast_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "bytes_sha256": "a5e89741059a15cfa405e8dcc12583e3712b7066fe14fa80489905330c44f4a7",
+        "relation": [
+          65535,
+          65535,
+          65535,
+          65535,
+          65535,
+          65535,
+          65535,
+          65535,
+          65535,
+          65535,
+          65535,
+          65535,
+          65535,
+          65535,
+          65535,
+          65535
+        ],
+        "relation_sha256": "b03def4a9735f31cf8431a8613627627ce4782b5a584f9707f6063447ae057f6",
+        "rule": "opaque-rsp-havoc/v1",
+        "site": "0x00007ff77440b0e0"
+      }
+    ]
+  },
+  "normalized": {
+    "addresses": [
+      "0x00007ff77440b0e0"
+    ],
+    "captured": [
+      "0x00007ff77440b0e0"
+    ],
+    "decodable": [
+      "0x00007ff77440b0e0"
+    ],
+    "entry_points": [
+      "0x00007ff77440b0e0"
+    ],
+    "file_backed": [],
+    "input_kind": "dump",
+    "instructions": [
+      {
+        "address": "0x00007ff77440b0e0",
+        "fall": [],
+        "kind": "stop",
+        "may_defs": [
+          "memory:any",
+          "state:other"
+        ],
+        "must_defs": [],
+        "targets": [],
+        "targets_complete": true,
+        "uses": [
+          "memory:any",
+          "state:other"
+        ]
+      }
+    ],
+    "locations": [
+      "memory:any",
+      "state:other"
+    ],
+    "slice_seeds": [],
+    "snapshot": "terminal-fixture",
+    "trusted_fallback": []
+  },
+  "schema": "ariadne.caller-proof-unit/v1",
+  "sources": [
+    {
+      "ast": "[]",
+      "bytes_hex": "670fb94012",
+      "control": {
+        "complete": true,
+        "fall": [],
+        "kind": "stop",
+        "targets": []
+      },
+      "opaque": true,
+      "site": "0x00007ff77440b0e0"
+    }
+  ]
+}

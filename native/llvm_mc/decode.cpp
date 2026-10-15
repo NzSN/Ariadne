@@ -112,8 +112,9 @@ struct Decoder {
     // LLVM's generic control-flow flags do not mark all system transitions or
     // transactional aborts. These cannot be given an ordinary fallthrough.
     const llvm::StringRef name = instructions->getName(instruction.getOpcode());
+    const bool exact_int3 = name == "INT3" && size == 1 && bytes[0] == 0xcc;
     const bool opaque_control =
-        name.starts_with("INT") || name.starts_with("IRET") ||
+        (name.starts_with("INT") && !exact_int3) || name.starts_with("IRET") ||
         name.starts_with("LRET") || name.starts_with("LCALL") ||
         name.starts_with("LJMP") || name.starts_with("SYS") ||
         name.starts_with("VMCALL") || name.starts_with("VMMCALL") ||
@@ -128,7 +129,9 @@ struct Decoder {
     uint64_t target = 0;
     const bool direct_target = analysis->evaluateBranch(instruction, address, size, target);
     std::string kind;
-    if (analysis->isReturn(instruction)) {
+    if (exact_int3) {
+      kind = "stop";
+    } else if (analysis->isReturn(instruction)) {
       kind = "return";
     } else if (analysis->isCall(instruction)) {
       kind = "call";

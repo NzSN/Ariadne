@@ -1,0 +1,14 @@
+Predicate-admission model artifacts: /caller-work/tmp/ariadne-predicate-admission.8AZ8F4Mp
+Independent guard oracle PASS: 56 graph/premise cases, 3 closure histories, 33 receipt cases, 720 finite transfer cases
+# Usage statistics is OFF. We care about your privacy.
+# If you want to help our project, consider enabling statistics with config --enable-stats=true.
+
+Output directory: /caller-work/tmp/ariadne-predicate-admission.8AZ8F4Mp/typecheck/AriadnePredicateAdmission.tla/2026-10-15T06-43-37_4259994546183968544
+# APALACHE version: 0.58.0 | build: 711dce6                       I@06:43:37.111
+Type checking AriadnePredicateAdmission.tla                       I@06:43:37.119
+PASS #0: SanyParser                                               I@06:43:37.241
+Parsing error: Unknown SANY error (exit code=ERROR)               E@06:43:37.319
+Type checker [FAILED]                                             I@06:43:37.341
+It took me 0 days  0 hours  0 min  0 sec                          I@06:43:37.341
+Total time: 0.228 sec                                             I@06:43:37.342
+EXITCODE: ERROR (255)

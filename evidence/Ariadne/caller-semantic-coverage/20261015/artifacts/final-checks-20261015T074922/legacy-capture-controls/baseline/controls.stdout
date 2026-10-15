@@ -1,0 +1,1 @@
+[{"case":"legacy-opaque-v7","accepted":true,"expected":true,"passed":true,"error":null},{"case":"legacy-opaque-v8","accepted":false,"expected":false,"passed":true,"error":"opaque ordinary capture contract"}]

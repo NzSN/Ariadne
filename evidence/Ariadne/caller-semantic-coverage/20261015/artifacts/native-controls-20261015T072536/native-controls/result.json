@@ -1,0 +1,1231 @@
+{
+  "schema": "ariadne.native-caller-checker-controls/v1",
+  "scope": "Source-rule and optional captured-wire checker controls; original dump retry is separate.",
+  "driver_sha256": "759c3e7d3ab531e6156ed020bc1a47d53b25b07f25283e1b0e50e2337ce0b12b",
+  "runner_sha256": "9ecb90bd5e5a826395c696794f2d0447e0b5455ae534f3917a89648d73426364",
+  "source_sha256": {
+    "terminal.ml": "e77ab5e437ef5beb522b62e5a6c8e576705dc02b40538760e53a1ecde8d36732",
+    "guard.ml": "e4b67d768a52cc1ff89d9fe45b1546875ea7f0dd67af960abf07813c0f427a35",
+    "legacy_guard.ml": "47e5a140f7d340c5a8c9919834bc68e06ddb66b72b1a61b8b2797ce8ba2f32fd"
+  },
+  "native_manifest_sha256": "ba6e7142618aa267226c9453b15add1b5a1d7dd8a98badc8bc5e85ff6b881ecd",
+  "fixtures": {
+    "tests/bap/fixtures/caller-coverage/dump-four-shapes.json": "90b440c0059ca65888a5b4b11be69d505763684239118be84fe67e87d99ecb41",
+    "tests/bap/fixtures/caller-coverage/legacy-manifest.json": "e0893dc84f83bf95c14945a5993476cd5daf1fa60f8d05a97abb287a8d2635e1",
+    "tests/bap/fixtures/caller-coverage/oracle-cases.json": "d60dbb13947797fe00463159360955b39c5c47ad81fd99a7b2a158873fb40d4b",
+    "tests/bap/fixtures/caller-coverage/raw-bap-observations.json": "f3d606c563ffb2d8dd4bae48b9a564e9656572d43576038a9399610dab70de29"
+  },
+  "wire_inputs": {
+    "int3-guarded-wire.json": "33688dfe3506230b781c3a4a5451fe4f227f25f676b64af7d5ad370396679228",
+    "movaps-load-aligned-guarded-wire.json": "fb2c6c8a49eee49ca5403ea048a98f0ddada1e31afe5c2f3ae66c04d48a41cf3",
+    "movaps-load-misaligned-guarded-wire.json": "1eef99cc4e2a64682cbe713e0c009e78a5f9307f8e6ef35de2af7b803a7955c1",
+    "movaps-load-unknown-guarded-wire.json": "25346b059319d69e0ff7f190ab4ac42925c1f9b07be89968513c894bebdcdc10",
+    "ud1-guarded-wire.json": "aeed0946de35304591b01dc6d6c8f255d00ffba60d29d015a6d96343251952aa",
+    "ud2-guarded-wire.json": "6f9049087f7c73f69ddb901147a2a3c1048acd858f3fc4a1d5c8d44a9e64c017"
+  },
+  "receipt_inputs": {
+    "legacy-store-aligned-unit.json": "6c6e46ced2f08125f83f4ec4c0a3cc918618009607a2ec8a0285f6a11568b422",
+    "movaps-load-aligned-unit.json": "5ddfbb460cfbb222d634d603881911ec4d1dd4b10cb6c52fd95290ca92809397",
+    "movaps-load-misaligned-unit.json": "bf2839b054ec5260b5dcc1452d27e6c382431e96eb648683c029e2a0282128e4",
+    "movaps-load-unknown-unit.json": "8f73c49435706ee394379b1c1c685388ca9384d43056caca3da5efb2cad4011f",
+    "movaps-store-aligned-unit.json": "107119796a6c9d70c923544aba1ce22b95cea851b7c1ca31e95030c372497a7e",
+    "terminal-int3-unit.json": "d529e2d96d5f9aa6d72a9adce46d02956d2479dee25fbb88d4d516d440c0023f",
+    "terminal-ud1-unit.json": "b433c3af69798e4196648ad9c18158f42106c106c414587704e06fb52fb0ea96",
+    "terminal-ud2-unit.json": "127f359d2d144ba6eeb1db251d8952d5de47dbb08d09e4bb10310580e24d10b9"
+  },
+  "mutants": [
+    {
+      "name": "terminal-bytes",
+      "module": "terminal.ml",
+      "positive_case": "terminal-int3",
+      "negative_case": "terminal-bytes",
+      "source_sha256": "ca4801e21e51c7f0205e0f8fd6331d90fa5f6b48847362e910dff8ad07f4bb2f",
+      "behavioral_credit": true,
+      "status": "observed",
+      "positive": {
+        "status": "observed",
+        "returncode": 0,
+        "rows": [
+          {
+            "case": "terminal-int3",
+            "expected": true,
+            "accepted": true,
+            "passed": true,
+            "error": null
+          }
+        ]
+      },
+      "negative": {
+        "status": "observed",
+        "returncode": 1,
+        "rows": [
+          {
+            "case": "terminal-bytes",
+            "expected": false,
+            "accepted": true,
+            "passed": false,
+            "error": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "ud1-full-extent",
+      "module": "terminal.ml",
+      "positive_case": "terminal-ud1",
+      "negative_case": "ud1-extra-extent",
+      "source_sha256": "dcacc3d895c3c310e4437081b80a39590078b831aeb839a29ca2fe34c7a7d46f",
+      "behavioral_credit": true,
+      "status": "observed",
+      "positive": {
+        "status": "observed",
+        "returncode": 0,
+        "rows": [
+          {
+            "case": "terminal-ud1",
+            "expected": true,
+            "accepted": true,
+            "passed": true,
+            "error": null
+          }
+        ]
+      },
+      "negative": {
+        "status": "observed",
+        "returncode": 1,
+        "rows": [
+          {
+            "case": "ud1-extra-extent",
+            "expected": false,
+            "accepted": true,
+            "passed": false,
+            "error": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "terminal-source-bil",
+      "module": "terminal.ml",
+      "positive_case": "terminal-int3",
+      "negative_case": "terminal-extra-effect",
+      "source_sha256": "4a5fcbd3562b7eae5da442fea17db02951bdddad4dab80b466f77c8bda11cf16",
+      "behavioral_credit": true,
+      "status": "observed",
+      "positive": {
+        "status": "observed",
+        "returncode": 0,
+        "rows": [
+          {
+            "case": "terminal-int3",
+            "expected": true,
+            "accepted": true,
+            "passed": true,
+            "error": null
+          }
+        ]
+      },
+      "negative": {
+        "status": "observed",
+        "returncode": 1,
+        "rows": [
+          {
+            "case": "terminal-extra-effect",
+            "expected": false,
+            "accepted": true,
+            "passed": false,
+            "error": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "terminal-normal-successor",
+      "module": "terminal.ml",
+      "positive_case": "terminal-int3",
+      "negative_case": "terminal-normal-successor",
+      "source_sha256": "f919ecb895f81ad4b539c23ced621ea6484316645c01493367011998bb4d7b2f",
+      "behavioral_credit": true,
+      "status": "observed",
+      "positive": {
+        "status": "observed",
+        "returncode": 0,
+        "rows": [
+          {
+            "case": "terminal-int3",
+            "expected": true,
+            "accepted": true,
+            "passed": true,
+            "error": null
+          }
+        ]
+      },
+      "negative": {
+        "status": "observed",
+        "returncode": 1,
+        "rows": [
+          {
+            "case": "terminal-normal-successor",
+            "expected": false,
+            "accepted": true,
+            "passed": false,
+            "error": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "terminal-local-scope",
+      "module": "terminal.ml",
+      "positive_case": "flow-original",
+      "negative_case": "flow-unknown-scope",
+      "source_sha256": "d8a4203f91cbcf72b0e77bcd3036044e07db6d85736769eaa1a4f0013cf675ca",
+      "behavioral_credit": true,
+      "status": "observed",
+      "positive": {
+        "status": "observed",
+        "returncode": 0,
+        "rows": [
+          {
+            "case": "flow-original",
+            "expected": true,
+            "accepted": true,
+            "passed": true,
+            "error": null
+          }
+        ]
+      },
+      "negative": {
+        "status": "observed",
+        "returncode": 1,
+        "rows": [
+          {
+            "case": "flow-unknown-scope",
+            "expected": false,
+            "accepted": true,
+            "passed": false,
+            "error": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "load-preserved-vector-bank",
+      "module": "guard.ml",
+      "positive_case": "movaps-load-original",
+      "negative_case": "movaps-load-high-bank",
+      "source_sha256": "27702a93acbc6f7e331e93c8fe3caf4e6a53a7ec71ddc2456eefc12947c3d25b",
+      "behavioral_credit": true,
+      "status": "observed",
+      "positive": {
+        "status": "observed",
+        "returncode": 0,
+        "rows": [
+          {
+            "case": "movaps-load-original",
+            "expected": true,
+            "accepted": true,
+            "passed": true,
+            "error": null
+          }
+        ]
+      },
+      "negative": {
+        "status": "observed",
+        "returncode": 1,
+        "rows": [
+          {
+            "case": "movaps-load-high-bank",
+            "expected": false,
+            "accepted": true,
+            "passed": false,
+            "error": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "proof-gated-normal-decode",
+      "module": "guard.ml",
+      "positive_case": "stopped-guard-original",
+      "negative_case": "stopped-guard-premature-decode",
+      "source_sha256": "32eb34b3fdf422e49dc709f213476e66b657ffc4dc9937bb6334ea210c7b8f23",
+      "behavioral_credit": true,
+      "status": "observed",
+      "positive": {
+        "status": "observed",
+        "returncode": 0,
+        "rows": [
+          {
+            "case": "stopped-guard-original",
+            "expected": true,
+            "accepted": true,
+            "passed": true,
+            "error": null
+          }
+        ]
+      },
+      "negative": {
+        "status": "observed",
+        "returncode": 1,
+        "rows": [
+          {
+            "case": "stopped-guard-premature-decode",
+            "expected": false,
+            "accepted": true,
+            "passed": false,
+            "error": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "legacy-policy",
+      "module": "legacy_guard.ml",
+      "positive_case": "legacy-store-original",
+      "negative_case": "legacy-load-admitted",
+      "source_sha256": "c69dcecfebbe2734f6069e77f7e34a12a07f7073969c8f942056affb194e2fec",
+      "behavioral_credit": true,
+      "status": "observed",
+      "positive": {
+        "status": "observed",
+        "returncode": 0,
+        "rows": [
+          {
+            "case": "legacy-store-original",
+            "expected": true,
+            "accepted": true,
+            "passed": true,
+            "error": null
+          }
+        ]
+      },
+      "negative": {
+        "status": "observed",
+        "returncode": 1,
+        "rows": [
+          {
+            "case": "legacy-load-admitted",
+            "expected": false,
+            "accepted": true,
+            "passed": false,
+            "error": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "terminal-conservative-effects",
+      "module": "guard.ml",
+      "positive_case": "wire-int3",
+      "negative_case": "wire-terminal-narrowed-uses-int3",
+      "source_sha256": "7b8ebd15863469b552f0b30ac75989242db24be084eb8a5cf0308b4cf4a44eec",
+      "behavioral_credit": true,
+      "status": "observed",
+      "positive": {
+        "status": "observed",
+        "returncode": 0,
+        "rows": [
+          {
+            "case": "wire-int3",
+            "expected": true,
+            "accepted": true,
+            "passed": true,
+            "error": null
+          }
+        ]
+      },
+      "negative": {
+        "status": "observed",
+        "returncode": 1,
+        "rows": [
+          {
+            "case": "wire-terminal-narrowed-uses-int3",
+            "expected": false,
+            "accepted": true,
+            "passed": false,
+            "error": null
+          }
+        ]
+      }
+    }
+  ],
+  "baseline": {
+    "status": "observed",
+    "returncode": 0,
+    "rows": [
+      {
+        "case": "terminal-int3",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "terminal-ud2",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "terminal-ud1",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "terminal-bytes",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal INT3 source rule"
+      },
+      {
+        "case": "terminal-prefixed",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal independent reference facts"
+      },
+      {
+        "case": "terminal-extra-effect",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal INT3 source rule"
+      },
+      {
+        "case": "terminal-conditional",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "unexpected/missing/duplicate fields"
+      },
+      {
+        "case": "terminal-exception",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal INT3 source rule"
+      },
+      {
+        "case": "terminal-bap-extent",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal BAP consumed extent"
+      },
+      {
+        "case": "terminal-bap-opcode",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal INT3 source rule"
+      },
+      {
+        "case": "terminal-bap-properties",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal original BAP properties"
+      },
+      {
+        "case": "terminal-annotation",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal rule scope or exception annotation"
+      },
+      {
+        "case": "terminal-resumption",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal rule scope or exception annotation"
+      },
+      {
+        "case": "terminal-normal-successor",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal candidate has normal successor or unsupported effects"
+      },
+      {
+        "case": "terminal-incomplete",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal candidate has normal successor or unsupported effects"
+      },
+      {
+        "case": "terminal-unknown-rule",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal unknown rule"
+      },
+      {
+        "case": "terminal-ast-digest",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal original AST digest"
+      },
+      {
+        "case": "terminal-decoder-length",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal independent reference facts"
+      },
+      {
+        "case": "terminal-decoder-record",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal independent reference facts"
+      },
+      {
+        "case": "flow-original",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "flow-reordered-carrier",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "flow-unknown-scope",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal normal-flow scope"
+      },
+      {
+        "case": "flow-duplicate",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal receipt order or duplicate"
+      },
+      {
+        "case": "ud1-extent-0fb9c0",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "ud1-extent-0fb900",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "ud1-extent-0fb90420",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "ud1-extent-0fb9042500000000",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "ud1-extent-0fb90500000000",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "ud1-extent-0fb94012",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "ud1-extent-0fb9842000000000",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "ud1-extent-670fb9c0",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "ud1-extent-670fb94012",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "ud1-prefix-660fb9c0",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "unsupported UD1 prefix"
+      },
+      {
+        "case": "ud1-prefix-480fb9c0",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "unsupported UD1 prefix"
+      },
+      {
+        "case": "ud1-prefix-67670fb9c0",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "unsupported UD1 prefix"
+      },
+      {
+        "case": "ud1-prefix-f30fb9c0",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "unsupported UD1 prefix"
+      },
+      {
+        "case": "ud1-extra-extent",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "UD1 extra extent rejected"
+      },
+      {
+        "case": "movaps-load-original",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "movaps-load-direction",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "guard load source not recognized"
+      },
+      {
+        "case": "movaps-load-destination",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "guard load source not recognized"
+      },
+      {
+        "case": "movaps-load-high-bank",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "guard load source not recognized"
+      },
+      {
+        "case": "movaps-load-high-extent",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "guard load source not recognized"
+      },
+      {
+        "case": "movaps-load-load-width",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "guard load source not recognized"
+      },
+      {
+        "case": "movaps-load-load-address",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "guard load source not recognized"
+      },
+      {
+        "case": "movaps-load-polarity",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "guard load source not recognized"
+      },
+      {
+        "case": "movaps-load-extra-effect",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "guard load source not recognized"
+      },
+      {
+        "case": "legacy-load-declined",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "legacy-load-admitted",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "legacy store-only policy rejects load"
+      },
+      {
+        "case": "legacy-store-original",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "current-store-original",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "stopped-guard-original",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "stopped-guard-premature-decode",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "guard stopped summary/capture contract"
+      },
+      {
+        "case": "normalized-reordered-carrier",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "unit-terminal-int3",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "unit-terminal-ud2",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "unit-terminal-ud1",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "unit-movaps-load-aligned",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "unit-movaps-load-misaligned",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "unit-movaps-load-unknown",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "unit-movaps-store-aligned",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "unit-legacy-store-aligned",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "wire-int3",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "wire-reordered-int3",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "wire-missing-terminal-int3",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "decoded Stop lacks terminal receipt"
+      },
+      {
+        "case": "wire-terminal-must-effect-int3",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal final normal-control or conservative-effect mismatch"
+      },
+      {
+        "case": "wire-terminal-narrowed-uses-int3",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal final normal-control or conservative-effect mismatch"
+      },
+      {
+        "case": "wire-terminal-narrowed-may-int3",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal final normal-control or conservative-effect mismatch"
+      },
+      {
+        "case": "wire-terminal-incomplete-int3",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal final normal-control or conservative-effect mismatch"
+      },
+      {
+        "case": "wire-ud2",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "wire-reordered-ud2",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "wire-missing-terminal-ud2",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "decoded Stop lacks terminal receipt"
+      },
+      {
+        "case": "wire-terminal-must-effect-ud2",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal final normal-control or conservative-effect mismatch"
+      },
+      {
+        "case": "wire-terminal-narrowed-uses-ud2",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal final normal-control or conservative-effect mismatch"
+      },
+      {
+        "case": "wire-terminal-narrowed-may-ud2",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal final normal-control or conservative-effect mismatch"
+      },
+      {
+        "case": "wire-terminal-incomplete-ud2",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal final normal-control or conservative-effect mismatch"
+      },
+      {
+        "case": "wire-ud1",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "wire-reordered-ud1",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "wire-missing-terminal-ud1",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "decoded Stop lacks terminal receipt"
+      },
+      {
+        "case": "wire-terminal-must-effect-ud1",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal final normal-control or conservative-effect mismatch"
+      },
+      {
+        "case": "wire-terminal-narrowed-uses-ud1",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal final normal-control or conservative-effect mismatch"
+      },
+      {
+        "case": "wire-terminal-narrowed-may-ud1",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal final normal-control or conservative-effect mismatch"
+      },
+      {
+        "case": "wire-terminal-incomplete-ud1",
+        "expected": false,
+        "accepted": false,
+        "passed": true,
+        "error": "terminal final normal-control or conservative-effect mismatch"
+      },
+      {
+        "case": "wire-movaps-load-aligned",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "wire-reordered-movaps-load-aligned",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "wire-movaps-load-misaligned",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "wire-reordered-movaps-load-misaligned",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "wire-movaps-load-unknown",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      },
+      {
+        "case": "wire-reordered-movaps-load-unknown",
+        "expected": true,
+        "accepted": true,
+        "passed": true,
+        "error": null
+      }
+    ]
+  },
+  "production_protocol": [
+    {
+      "case": "int3-guarded-wire",
+      "status": "observed",
+      "expected": true,
+      "accepted": true,
+      "passed": true,
+      "error": null,
+      "returncode": 0
+    },
+    {
+      "case": "int3-guarded-wire-reordered",
+      "status": "observed",
+      "expected": true,
+      "accepted": true,
+      "passed": true,
+      "error": null,
+      "returncode": 0
+    },
+    {
+      "case": "int3-guarded-wire-null-flow",
+      "status": "observed",
+      "expected": false,
+      "accepted": false,
+      "passed": true,
+      "error": {
+        "kind": "semantic",
+        "message": "object required"
+      },
+      "returncode": 0
+    },
+    {
+      "case": "int3-guarded-wire-legacy-schema",
+      "status": "observed",
+      "expected": false,
+      "accepted": false,
+      "passed": true,
+      "error": {
+        "kind": "semantic",
+        "message": "guard transport profile binding"
+      },
+      "returncode": 0
+    },
+    {
+      "case": "movaps-load-aligned-guarded-wire",
+      "status": "observed",
+      "expected": true,
+      "accepted": true,
+      "passed": true,
+      "error": null,
+      "returncode": 0
+    },
+    {
+      "case": "movaps-load-aligned-guarded-wire-reordered",
+      "status": "observed",
+      "expected": true,
+      "accepted": true,
+      "passed": true,
+      "error": null,
+      "returncode": 0
+    },
+    {
+      "case": "movaps-load-aligned-guarded-wire-null-flow",
+      "status": "observed",
+      "expected": false,
+      "accepted": false,
+      "passed": true,
+      "error": {
+        "kind": "semantic",
+        "message": "object required"
+      },
+      "returncode": 0
+    },
+    {
+      "case": "movaps-load-aligned-guarded-wire-legacy-schema",
+      "status": "observed",
+      "expected": false,
+      "accepted": false,
+      "passed": true,
+      "error": {
+        "kind": "semantic",
+        "message": "guard transport profile binding"
+      },
+      "returncode": 0
+    },
+    {
+      "case": "movaps-load-misaligned-guarded-wire",
+      "status": "observed",
+      "expected": true,
+      "accepted": true,
+      "passed": true,
+      "error": null,
+      "returncode": 0
+    },
+    {
+      "case": "movaps-load-misaligned-guarded-wire-reordered",
+      "status": "observed",
+      "expected": true,
+      "accepted": true,
+      "passed": true,
+      "error": null,
+      "returncode": 0
+    },
+    {
+      "case": "movaps-load-misaligned-guarded-wire-null-flow",
+      "status": "observed",
+      "expected": false,
+      "accepted": false,
+      "passed": true,
+      "error": {
+        "kind": "semantic",
+        "message": "object required"
+      },
+      "returncode": 0
+    },
+    {
+      "case": "movaps-load-misaligned-guarded-wire-legacy-schema",
+      "status": "observed",
+      "expected": false,
+      "accepted": false,
+      "passed": true,
+      "error": {
+        "kind": "semantic",
+        "message": "guard transport profile binding"
+      },
+      "returncode": 0
+    },
+    {
+      "case": "movaps-load-unknown-guarded-wire",
+      "status": "observed",
+      "expected": true,
+      "accepted": true,
+      "passed": true,
+      "error": null,
+      "returncode": 0
+    },
+    {
+      "case": "movaps-load-unknown-guarded-wire-reordered",
+      "status": "observed",
+      "expected": true,
+      "accepted": true,
+      "passed": true,
+      "error": null,
+      "returncode": 0
+    },
+    {
+      "case": "movaps-load-unknown-guarded-wire-null-flow",
+      "status": "observed",
+      "expected": false,
+      "accepted": false,
+      "passed": true,
+      "error": {
+        "kind": "semantic",
+        "message": "object required"
+      },
+      "returncode": 0
+    },
+    {
+      "case": "movaps-load-unknown-guarded-wire-legacy-schema",
+      "status": "observed",
+      "expected": false,
+      "accepted": false,
+      "passed": true,
+      "error": {
+        "kind": "semantic",
+        "message": "guard transport profile binding"
+      },
+      "returncode": 0
+    },
+    {
+      "case": "ud1-guarded-wire",
+      "status": "observed",
+      "expected": true,
+      "accepted": true,
+      "passed": true,
+      "error": null,
+      "returncode": 0
+    },
+    {
+      "case": "ud1-guarded-wire-reordered",
+      "status": "observed",
+      "expected": true,
+      "accepted": true,
+      "passed": true,
+      "error": null,
+      "returncode": 0
+    },
+    {
+      "case": "ud1-guarded-wire-null-flow",
+      "status": "observed",
+      "expected": false,
+      "accepted": false,
+      "passed": true,
+      "error": {
+        "kind": "semantic",
+        "message": "object required"
+      },
+      "returncode": 0
+    },
+    {
+      "case": "ud1-guarded-wire-legacy-schema",
+      "status": "observed",
+      "expected": false,
+      "accepted": false,
+      "passed": true,
+      "error": {
+        "kind": "semantic",
+        "message": "guard transport profile binding"
+      },
+      "returncode": 0
+    },
+    {
+      "case": "ud2-guarded-wire",
+      "status": "observed",
+      "expected": true,
+      "accepted": true,
+      "passed": true,
+      "error": null,
+      "returncode": 0
+    },
+    {
+      "case": "ud2-guarded-wire-reordered",
+      "status": "observed",
+      "expected": true,
+      "accepted": true,
+      "passed": true,
+      "error": null,
+      "returncode": 0
+    },
+    {
+      "case": "ud2-guarded-wire-null-flow",
+      "status": "observed",
+      "expected": false,
+      "accepted": false,
+      "passed": true,
+      "error": {
+        "kind": "semantic",
+        "message": "object required"
+      },
+      "returncode": 0
+    },
+    {
+      "case": "ud2-guarded-wire-legacy-schema",
+      "status": "observed",
+      "expected": false,
+      "accepted": false,
+      "passed": true,
+      "error": {
+        "kind": "semantic",
+        "message": "guard transport profile binding"
+      },
+      "returncode": 0
+    }
+  ],
+  "passed": true,
+  "behavioral_mutant_credits": 9
+}

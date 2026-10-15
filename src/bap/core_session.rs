@@ -1,8 +1,7 @@
 //! Process-per-query transport for the experimental OCaml recovery bootstrap.
 use super::core_protocol::{
-    CAPTURED_PROFILE, COMPOSED_PROFILE, DEFAULT_MAX_REQUEST_BYTES, FamilyObservation,
-    FamilyResponse, GUARDED_PROFILE, LEGACY_COMPOSED_PROFILE, MAX_FRAME, Observation, PROFILE,
-    StateflowObservation, TARGET_PROFILE, profile_query_digest,
+    DEFAULT_MAX_REQUEST_BYTES, FamilyObservation, FamilyResponse, INPUT_PROFILES, MAX_FRAME,
+    Observation, PROFILE, StateflowObservation, profile_query_digest,
 };
 use super::{Error, invalid};
 use serde_json::{Value, json};
@@ -74,17 +73,7 @@ impl<O: FamilyObservation> FamilySession<O> {
         if config.max_request_bytes == 0 || u64::try_from(config.max_request_bytes).is_err() {
             return Err(invalid("invalid core request byte budget"));
         }
-        if ![
-            PROFILE,
-            CAPTURED_PROFILE,
-            TARGET_PROFILE,
-            GUARDED_PROFILE,
-            LEGACY_COMPOSED_PROFILE,
-            COMPOSED_PROFILE,
-        ]
-        .contains(&profile)
-            || (O::FAMILY != "recovery" && profile != PROFILE)
-        {
+        if !INPUT_PROFILES.contains(&profile) || (O::FAMILY != "recovery" && profile != PROFILE) {
             return Err(invalid("unsupported core input profile"));
         }
         if session.is_empty() || snapshot.is_empty() {
@@ -100,27 +89,13 @@ impl<O: FamilyObservation> FamilySession<O> {
         if handshake["schema"] != "ariadne.bap-core-ready/v1"
             || handshake["abi"] != 2
             || handshake["families"] != json!(["recovery", "stateflow"])
-            || (handshake["profiles"] != json!([PROFILE, CAPTURED_PROFILE])
-                && handshake["profiles"] != json!([PROFILE, CAPTURED_PROFILE, TARGET_PROFILE])
-                && handshake["profiles"]
-                    != json!([PROFILE, CAPTURED_PROFILE, TARGET_PROFILE, GUARDED_PROFILE])
-                && handshake["profiles"]
-                    != json!([
-                        PROFILE,
-                        CAPTURED_PROFILE,
-                        TARGET_PROFILE,
-                        GUARDED_PROFILE,
-                        LEGACY_COMPOSED_PROFILE
-                    ])
-                && handshake["profiles"]
-                    != json!([
-                        PROFILE,
-                        CAPTURED_PROFILE,
-                        TARGET_PROFILE,
-                        GUARDED_PROFILE,
-                        LEGACY_COMPOSED_PROFILE,
-                        COMPOSED_PROFILE
-                    ]))
+            || !handshake["profiles"].as_array().is_some_and(|profiles| {
+                (2..=INPUT_PROFILES.len()).contains(&profiles.len())
+                    && profiles
+                        .iter()
+                        .zip(INPUT_PROFILES)
+                        .all(|(actual, expected)| actual.as_str() == Some(*expected))
+            })
             || handshake["operations"] != json!(super::core_protocol::RECOVERY_OPERATIONS)
             || handshake["max_frame_bytes"] != MAX_FRAME
         {
@@ -517,34 +492,31 @@ impl FamilySession<Observation> {
         }
         self.wait_clean()?;
         let decoded = Instant::now();
-        let response: FamilyResponse<Observation> = if self.profile == TARGET_PROFILE
-            || self.profile == GUARDED_PROFILE
-            || self.profile == LEGACY_COMPOSED_PROFILE
-            || self.profile == COMPOSED_PROFILE
-        {
-            let compact: FamilyResponse<super::core_protocol::DictionaryObservation> =
-                serde_json::from_slice(&bytes)?;
-            if compact.schema != "ariadne.bap-core-dictionary/v1" {
-                return Err(invalid("completed dictionary schema"));
-            }
-            FamilyResponse {
-                schema: "ariadne.bap-core/v1".into(),
-                session: compact.session,
-                snapshot: compact.snapshot,
-                query: compact.query,
-                family: compact.family,
-                sequence: compact.sequence,
-                generation: compact.generation,
-                action_index: compact.action_index,
-                changed: compact.changed,
-                observation: compact.observation.expand()?,
-                attribution: compact.attribution,
-                error: compact.error,
-                result: compact.result,
-            }
-        } else {
-            serde_json::from_slice(&bytes)?
-        };
+        let response: FamilyResponse<Observation> =
+            if super::core_protocol::proof_profile(&self.profile) {
+                let compact: FamilyResponse<super::core_protocol::DictionaryObservation> =
+                    serde_json::from_slice(&bytes)?;
+                if compact.schema != "ariadne.bap-core-dictionary/v1" {
+                    return Err(invalid("completed dictionary schema"));
+                }
+                FamilyResponse {
+                    schema: "ariadne.bap-core/v1".into(),
+                    session: compact.session,
+                    snapshot: compact.snapshot,
+                    query: compact.query,
+                    family: compact.family,
+                    sequence: compact.sequence,
+                    generation: compact.generation,
+                    action_index: compact.action_index,
+                    changed: compact.changed,
+                    observation: compact.observation.expand()?,
+                    attribution: compact.attribution,
+                    error: compact.error,
+                    result: compact.result,
+                }
+            } else {
+                serde_json::from_slice(&bytes)?
+            };
         if diagnostic {
             eprintln!("completion expansion_ms={}", decoded.elapsed().as_millis());
         }

@@ -1,0 +1,14 @@
+{
+  "name": "legacy-capture-controls",
+  "command": [
+    "python3",
+    "tests/bap/legacy_guard_capture_controls.py",
+    "--native-dir",
+    "target/caller-native",
+    "--output",
+    "/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/final-checks-20261015T074922-legacy-capture-controls",
+    "--mutations"
+  ],
+  "exit_code": 0,
+  "seconds": 3.0386488710000776
+}

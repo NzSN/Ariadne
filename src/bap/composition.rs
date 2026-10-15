@@ -9,9 +9,15 @@ mod legacy;
 
 pub const LEGACY_PROFILE: &str = "captured-guarded-targets/v1";
 pub const LEGACY_SCHEMA: &str = "ariadne.guarded-target-resolution/v1";
-pub const PROFILE: &str = "captured-guarded-targets/v2";
-pub const SCHEMA: &str = "ariadne.guarded-target-resolution/v2";
-pub const MODEL_VERSION: &str = "ariadne.guarded-target-resolution/v2";
+pub const LEGACY_V2_PROFILE: &str = "captured-guarded-targets/v2";
+pub const LEGACY_V2_SCHEMA: &str = "ariadne.guarded-target-resolution/v2";
+pub const PROFILE: &str = "captured-guarded-targets/v3";
+pub const SCHEMA: &str = "ariadne.guarded-target-resolution/v3";
+pub const MODEL_VERSION: &str = "ariadne.guarded-target-resolution/v3";
+pub const LEGACY_V2_MODEL_SHA256: &str =
+    "605fb57d42e755b7fee75511f66e6ad864a16c303bbf5ffb5bad8855c7d05675";
+pub const LEGACY_V2_CHECKER_SHA256: &str =
+    "dd277b844376234cce199ecae9e7bc9eee04dfa69390d2320c2349b4f11b6cb4";
 pub const LEGACY_MODEL_SHA256: &str =
     "e142a6fd22d78044c444c26211b7c659a56fedb5f9e555aa20e3aa1be23e8b10";
 pub const LEGACY_CHECKER_SHA256: &str =
@@ -27,27 +33,63 @@ pub fn legacy_checker_identity() -> String {
         "../../tests/bap/fixtures/loop-closure/legacy-v1/composition.rs.txt"
     ))
 }
+pub fn generation(report: &Report) -> u8 {
+    match (report.schema.as_str(), report.profile.as_str()) {
+        (LEGACY_SCHEMA, LEGACY_PROFILE) => 1,
+        (LEGACY_V2_SCHEMA, LEGACY_V2_PROFILE) => 2,
+        (SCHEMA, PROFILE) => 3,
+        _ => 0,
+    }
+}
 pub fn is_legacy(report: &Report) -> bool {
-    report.schema == LEGACY_SCHEMA && report.profile == LEGACY_PROFILE
+    matches!(generation(report), 1 | 2)
 }
 pub fn contains_profile(profile: &str) -> bool {
-    profile.contains(LEGACY_PROFILE) || profile.contains(PROFILE)
+    [LEGACY_PROFILE, LEGACY_V2_PROFILE, PROFILE]
+        .iter()
+        .any(|p| profile.contains(p))
 }
-
-pub fn model_identity() -> String {
+pub fn capture_domain(report: &Report) -> &'static str {
+    match generation(report) {
+        1 => "ariadne-composed-capture/v1",
+        2 => "ariadne-composed-capture/v2",
+        _ => "ariadne-composed-capture/v3",
+    }
+}
+fn legacy_v2_model_identity() -> String {
     let composition = crate::reports::sha256(include_bytes!(
-        "../../Specs/AriadneGuardedTargetResolution.tla"
+        "../../tests/bap/fixtures/caller-coverage/legacy-v2/AriadneGuardedTargetResolution.tla.txt"
     ));
     let loops = crate::reports::sha256(include_bytes!("../../Specs/AriadneLoopTargetClosure.tla"));
     crate::reports::sha256(
         format!("ariadne.guarded-target-model/v2\n{composition}\n{loops}\n").as_bytes(),
     )
 }
-pub fn checker_identity() -> String {
-    let composition = crate::reports::sha256(include_bytes!("composition.rs"));
+fn legacy_v2_checker_identity() -> String {
+    let composition = crate::reports::sha256(include_bytes!(
+        "../../tests/bap/fixtures/caller-coverage/legacy-v2/composition.rs.txt"
+    ));
     let loops = target::loop_engine_identity();
     crate::reports::sha256(
         format!("ariadne.guarded-target-checker/v2\n{composition}\n{loops}\n").as_bytes(),
+    )
+}
+pub fn model_identity() -> String {
+    let composition = crate::reports::sha256(include_bytes!(
+        "../../Specs/AriadneGuardedTargetResolution.tla"
+    ));
+    let loops = crate::reports::sha256(include_bytes!("../../Specs/AriadneLoopTargetClosure.tla"));
+    let guards = guard::model_identity();
+    crate::reports::sha256(
+        format!("ariadne.guarded-target-model/v3\n{composition}\n{loops}\n{guards}\n").as_bytes(),
+    )
+}
+pub fn checker_identity() -> String {
+    let composition = crate::reports::sha256(include_bytes!("composition.rs"));
+    let loops = target::loop_engine_identity();
+    let guards = guard::checker_identity();
+    crate::reports::sha256(
+        format!("ariadne.guarded-target-checker/v3\n{composition}\n{loops}\n{guards}\n").as_bytes(),
     )
 }
 pub fn value_digest(value: &Value) -> Result<String, Error> {
@@ -88,10 +130,10 @@ pub fn candidate_request(report: &Report) -> Result<AnalysisRequest, Error> {
 }
 fn binding_digest(report: &Report) -> Result<String, Error> {
     value_digest(&json!([
-        if is_legacy(report) {
-            "ariadne-guarded-target-binding/v1"
-        } else {
-            "ariadne-guarded-target-binding/v2"
+        match generation(report) {
+            1 => "ariadne-guarded-target-binding/v1",
+            2 => "ariadne-guarded-target-binding/v2",
+            _ => "ariadne-guarded-target-binding/v3",
         },
         report.snapshot,
         report.artifact_sha256,
@@ -112,10 +154,10 @@ pub fn analysis_id(report: &Report) -> Result<String, Error> {
         return Err(invalid("composition binding digest"));
     }
     value_digest(&json!([
-        if is_legacy(report) {
-            "ariadne-guarded-target-analysis/v1"
-        } else {
-            "ariadne-guarded-target-analysis/v2"
+        match generation(report) {
+            1 => "ariadne-guarded-target-analysis/v1",
+            2 => "ariadne-guarded-target-analysis/v2",
+            _ => "ariadne-guarded-target-analysis/v3",
         },
         report.binding_sha256
     ]))
@@ -167,7 +209,12 @@ pub fn validate(
     guards: &guard::Report,
     final_request: &AnalysisRequest,
 ) -> Result<(), Error> {
-    if is_legacy(report) {
+    if generation(report) == 1 {
+        if !guard::is_legacy(guards) {
+            return Err(invalid(
+                "legacy composition cannot admit current guard evidence",
+            ));
+        }
         if legacy_model_identity() != LEGACY_MODEL_SHA256
             || legacy_checker_identity() != LEGACY_CHECKER_SHA256
         {
@@ -175,11 +222,28 @@ pub fn validate(
         }
         return legacy::validate(report, targets, guards, final_request);
     }
-    if report.schema != SCHEMA
-        || report.profile != PROFILE
-        || report.model_version != MODEL_VERSION
-        || report.model_sha256 != model_identity()
-        || report.checker_sha256 != checker_identity()
+    let previous = generation(report) == 2;
+    let (schema, profile, model, checker) = if previous {
+        if legacy_v2_model_identity() != LEGACY_V2_MODEL_SHA256
+            || legacy_v2_checker_identity() != LEGACY_V2_CHECKER_SHA256
+        {
+            return Err(invalid("legacy v2 composition fixture identities changed"));
+        }
+        (
+            LEGACY_V2_SCHEMA,
+            LEGACY_V2_PROFILE,
+            LEGACY_V2_MODEL_SHA256.to_owned(),
+            LEGACY_V2_CHECKER_SHA256.to_owned(),
+        )
+    } else {
+        (SCHEMA, PROFILE, model_identity(), checker_identity())
+    };
+    if report.schema != schema
+        || report.profile != profile
+        || report.model_version != schema
+        || report.model_sha256 != model
+        || report.checker_sha256 != checker
+        || guard::is_legacy(guards) != previous
         || report.snapshot != guards.input.snapshot
         || report.snapshot != targets.snapshot
         || report.artifact_sha256 != guards.input.artifact_sha256
@@ -279,7 +343,7 @@ pub fn validate(
             .instructions
             .get(&site)
             .ok_or_else(|| invalid("composition candidate source absent"))?;
-        validate_original_control(source, original)?;
+        validate_original_control(source, original, &guards.input)?;
         let mut augmented = (*original).clone();
         if original.kind == guard::ControlKind::Indirect {
             if let Some(row) = targets.resolutions.iter().find(|r| r.site == source.site) {
@@ -305,6 +369,8 @@ pub fn validate(
         .iter()
         .map(|s| (s.site.as_str(), s))
         .collect();
+    guard::validate_normal_flow_request(&guards.input, &candidate)?;
+    guard::validate_normal_flow_request(&guards.input, final_request)?;
     for (&site, old) in &candidate.instructions {
         let actual = final_request
             .instructions
@@ -313,7 +379,7 @@ pub fn validate(
         let name = super::core_adapter::hex(site);
         let pending = sources
             .get(name.as_str())
-            .map(|s| guard::recognize_pending(s))
+            .map(|s| guard::recognize_pending_for_input(&guards.input, s))
             .transpose()?
             .flatten();
         if pending.is_some() {
@@ -334,7 +400,11 @@ pub fn validate(
                     .collect::<Result<_, _>>()?;
                 let expected = super::Backend::guard_normal_projection(
                     ast,
-                    "MOVAPS-reviewed-store",
+                    if previous {
+                        "MOVAPS-reviewed-store"
+                    } else {
+                        "MOVAPS-reviewed-memory"
+                    },
                     &bytes,
                     site,
                 )?;
@@ -368,6 +438,7 @@ pub fn validate(
 fn validate_original_control(
     source: &guard::CandidateSite,
     control: &guard::CandidateControl,
+    input: &guard::GuardInput,
 ) -> Result<(), Error> {
     use guard::ControlKind as K;
     let bytes: Vec<_> = (0..source.bytes_hex.len())
@@ -391,7 +462,7 @@ fn validate_original_control(
     {
         return Err(invalid("composition original structural control"));
     }
-    if guard::recognize_pending(source)?.is_some()
+    if guard::recognize_pending_for_input(input, source)?.is_some()
         || matches!(control.kind, K::Call | K::Return | K::Stop)
     {
         return Ok(());

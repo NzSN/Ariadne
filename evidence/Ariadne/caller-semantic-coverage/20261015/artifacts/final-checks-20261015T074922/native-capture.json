@@ -1,0 +1,15 @@
+{
+  "name": "native-capture",
+  "command": [
+    "cargo",
+    "test",
+    "--offline",
+    "--locked",
+    "--test",
+    "input_bap_core",
+    "--",
+    "--ignored"
+  ],
+  "exit_code": 0,
+  "seconds": 46.920877303
+}

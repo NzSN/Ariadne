@@ -1,0 +1,5 @@
+{"bytes":21498305,"original":"guard-report.json","sha256":"c48f39b6ade8bd031112bef972e33301694c30fa1ac5c04903d22cdfe5fe6b93","stored":"guard-report.json.gz"}
+{"bytes":675222,"original":"target-report.json","sha256":"61ae8329a4a4c82b9254ea64d389051caedce524101297ab2cce8dfdc4d20fc9","stored":"target-report.json"}
+{"bytes":15192597,"original":"composition-report.json","sha256":"2ca0d179105d27b76b8b2a63e01bdd12be96795a9d4a810cf6dd0eecd3baee2f","stored":"composition-report.json.gz"}
+{"bytes":19728664,"original":"prepared-full.json","sha256":"9518d79e6a223ca93131814c649db11e00de8dcc7b280521a608517e9a0476f5","stored":"prepared-full.json.gz"}
+{"bytes":6223,"original":"outcome.json","sha256":"ca46d5d7d9ff43c796d1075fbbf613e67c5aa13ea89094b2e5bfaa79b9bd5682","stored":"outcome.json"}

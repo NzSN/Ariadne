@@ -5,9 +5,11 @@ use serde::{Deserialize, Serialize};
 use std::collections::{BTreeMap, BTreeSet};
 use std::time::Instant;
 pub const FRAME_PATH_SCHEMA: &str = "ariadne.frame-paths/v1";
-pub const GUARDED_FRAME_PATH_SCHEMA: &str = "ariadne.frame-paths/v2";
+pub const LEGACY_GUARDED_FRAME_PATH_SCHEMA: &str = "ariadne.frame-paths/v2";
+pub const GUARDED_FRAME_PATH_SCHEMA: &str = "ariadne.frame-paths/v5";
 pub const LEGACY_COMPOSED_FRAME_PATH_SCHEMA: &str = "ariadne.frame-paths/v3";
-pub const COMPOSED_FRAME_PATH_SCHEMA: &str = "ariadne.frame-paths/v4";
+pub const LEGACY_V2_COMPOSED_FRAME_PATH_SCHEMA: &str = "ariadne.frame-paths/v4";
+pub const COMPOSED_FRAME_PATH_SCHEMA: &str = "ariadne.frame-paths/v6";
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -307,10 +309,9 @@ pub fn bind_frame_paths(
             gaps.push("local-edge-outside-frame-function".into());
         }
         #[cfg(feature = "bap")]
-        if guard_admission
-            .as_ref()
-            .is_some_and(|e| e.composition.is_some())
-        {
+        if guard_admission.as_ref().is_some_and(|e| {
+            e.composition.is_some() || !crate::bap::guard_admission::is_legacy(&e.report)
+        }) {
             // Reuse the already completed analysis. Published coverage gaps
             // are core recovery facts, rather than caller-editable context.
             gaps = recovered_frame_graph(frame, f, &bound.request, &bound.state).gaps;
@@ -387,7 +388,11 @@ fn validate_input(input: &Input) -> Result<(), Error> {
 fn validate_guarded_graph(chain: &CapturedFrameChain, graph: &FrameGraph) -> Result<(), Error> {
     use crate::bap::guard_admission as guard;
     let Some(evidence) = &graph.guard_admission else {
-        if graph.identity.semantic_profile.contains(guard::PROFILE) {
+        if [guard::LEGACY_PROFILE, guard::PROFILE]
+            .iter()
+            .any(|profile| graph.identity.semantic_profile.contains(profile))
+            || crate::bap::composition::contains_profile(&graph.identity.semantic_profile)
+        {
             return Err(invalid("guarded frame graph has no proof sources"));
         }
         return Ok(());
@@ -395,6 +400,11 @@ fn validate_guarded_graph(chain: &CapturedFrameChain, graph: &FrameGraph) -> Res
     let report = &evidence.report;
     let input = &report.input;
     let normalized_request = decode_guard_request(&evidence.normalized)?;
+    super::validate_normal_flow_sources(report, &normalized_request, &evidence.sites)?;
+    if evidence.composition.is_none() && !guard::is_legacy(report) {
+        super::validate_guard_capture(&graph.identity.semantic_profile, report, &evidence.sites)?;
+    }
+
     let frame = &chain.frames[graph.frame];
     let (query, semantic_suffix, candidate) = super::proof_binding(
         evidence.composition.as_ref(),
@@ -493,7 +503,7 @@ fn validate_guarded_graph(chain: &CapturedFrameChain, graph: &FrameGraph) -> Res
         let row = rows
             .get(source.site.as_str())
             .ok_or_else(|| invalid("guarded frame summary absent"))?;
-        if guard::recognize_pending(source)?.is_some() {
+        if guard::recognize_pending_for_input(input, source)?.is_some() {
             if let Some(ast) = report.normal_selection(va) {
                 let bytes = super::frame_unwind::unhex(&source.bytes_hex)?;
                 let selected = crate::bap::Backend::guard_normal_projection(
@@ -567,7 +577,7 @@ fn validate_guarded_graph(chain: &CapturedFrameChain, graph: &FrameGraph) -> Res
             ));
         }
     }
-    if evidence.composition.is_some() {
+    if evidence.composition.is_some() || !guard::is_legacy(report) {
         // Replay only structural recovery. Stopping with an empty pending set
         // avoids FinishRecovery and every dataflow/slice action.
         let mut recovery = crate::Analyzer::new(normalized_request.clone())?;
@@ -766,25 +776,33 @@ pub(crate) fn decode_guard_request(
 
 fn frame_path_schema(input: &Input) -> &'static str {
     #[cfg(feature = "bap")]
-    if input.graphs.iter().any(|g| {
-        g.guard_admission
-            .as_ref()
-            .is_some_and(|e| e.composition.is_some())
-    }) {
-        return if input.graphs.iter().any(|g| {
-            g.guard_admission
-                .as_ref()
-                .and_then(|e| e.composition.as_ref())
-                .is_some_and(|c| !crate::bap::composition::is_legacy(c))
-        }) {
-            COMPOSED_FRAME_PATH_SCHEMA
-        } else {
-            LEGACY_COMPOSED_FRAME_PATH_SCHEMA
-        };
-    }
-    #[cfg(feature = "bap")]
-    if input.graphs.iter().any(|g| g.guard_admission.is_some()) {
-        return GUARDED_FRAME_PATH_SCHEMA;
+    {
+        let proofs: Vec<_> = input
+            .graphs
+            .iter()
+            .filter_map(|g| g.guard_admission.as_ref())
+            .collect();
+        let composition = proofs
+            .iter()
+            .filter_map(|p| p.composition.as_ref())
+            .map(crate::bap::composition::generation)
+            .max();
+        let current_guard = proofs
+            .iter()
+            .any(|p| !crate::bap::guard_admission::is_legacy(&p.report));
+        if let Some(generation) = composition {
+            return match (generation, current_guard) {
+                (1, false) => LEGACY_COMPOSED_FRAME_PATH_SCHEMA,
+                (2, false) => LEGACY_V2_COMPOSED_FRAME_PATH_SCHEMA,
+                _ => COMPOSED_FRAME_PATH_SCHEMA,
+            };
+        }
+        if current_guard {
+            return GUARDED_FRAME_PATH_SCHEMA;
+        }
+        if !proofs.is_empty() {
+            return LEGACY_GUARDED_FRAME_PATH_SCHEMA;
+        }
     }
     let _ = input;
     FRAME_PATH_SCHEMA
@@ -794,6 +812,9 @@ fn frame_path_schema(input: &Input) -> &'static str {
 fn append_guard_premises(input: &Input, premises: &mut Vec<String>) {
     for graph in &input.graphs {
         if let Some(evidence) = &graph.guard_admission {
+            if let Some(scope) = crate::bap::guard_admission::normal_flow_scope(&evidence.report) {
+                premises.push(format!("frame-{}: normal-flow-scope {scope}; exception-exit; exception-resumption-outside-local-scope; exceptional effects unsupported",graph.frame));
+            }
             if let Some(composition) = &evidence.composition {
                 let target = evidence
                     .target_resolution

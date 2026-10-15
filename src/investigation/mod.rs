@@ -8,7 +8,8 @@ pub use frame_paths::{
     BoundFramePaths, COMPOSED_FRAME_PATH_SCHEMA, FRAME_PATH_SCHEMA, FramePathCounters,
     FramePathEdge, FramePathEdgeKind, FramePathLimits, FramePathListing, FramePathNode,
     FramePathQuestion, GUARDED_FRAME_PATH_SCHEMA, LEGACY_COMPOSED_FRAME_PATH_SCHEMA,
-    ListedFramePath, active_frame_entry, bind_frame_paths, list_frame_paths,
+    LEGACY_GUARDED_FRAME_PATH_SCHEMA, LEGACY_V2_COMPOSED_FRAME_PATH_SCHEMA, ListedFramePath,
+    active_frame_entry, bind_frame_paths, list_frame_paths,
 };
 pub use frame_unwind::{
     CapturedFrameChain, FRAME_UNWIND_PROFILE, FrameMemoryEvidence, FrameRecoveryLimits,
@@ -70,8 +71,13 @@ pub(crate) fn guard_semantic_suffix(
         })
         .collect::<Vec<_>>()
         .join(";");
+    let scope = crate::bap::guard_admission::normal_flow_scope(report)
+        .map(|scope| {
+            format!(":normal-flow-scope=[{scope}]:exception-resumption-outside-local-scope")
+        })
+        .unwrap_or_default();
     Ok(format!(
-        ":{}:{binding}:guard-premises=[{premises}]",
+        ":{}:{binding}:guard-premises=[{premises}]{scope}",
         report.profile
     ))
 }
@@ -96,14 +102,81 @@ pub(crate) fn composition_capture_binding(
     sites: &[SiteEvidence],
 ) -> Result<String, Error> {
     Ok(sha(&serde_json::to_vec(&(
-        if crate::bap::composition::is_legacy(composition) {
-            "ariadne-composed-capture/v1"
-        } else {
-            "ariadne-composed-capture/v2"
-        },
+        crate::bap::composition::capture_domain(composition),
         sites,
         &composition.binding_sha256,
     ))?))
+}
+#[cfg(feature = "bap")]
+pub(crate) fn guard_capture_binding(
+    report: &crate::bap::guard_admission::Report,
+    sites: &[SiteEvidence],
+) -> Result<String, Error> {
+    Ok(sha(&serde_json::to_vec(&(
+        "ariadne-guarded-capture/v2",
+        sites,
+        sha(&serde_json::to_vec(report)?),
+    ))?))
+}
+#[cfg(feature = "bap")]
+pub(crate) fn validate_guard_capture(
+    profile: &str,
+    report: &crate::bap::guard_admission::Report,
+    sites: &[SiteEvidence],
+) -> Result<(), Error> {
+    let suffix = guard_semantic_suffix(report)?;
+    if profile
+        .strip_suffix(&suffix)
+        .and_then(|p| p.rsplit(':').next())
+        != Some(guard_capture_binding(report, sites)?.as_str())
+        || !sites.windows(2).all(|w| w[0].va < w[1].va)
+    {
+        return Err(invalid("guard full capture source binding changed"));
+    }
+    Ok(())
+}
+#[cfg(feature = "bap")]
+pub(crate) fn validate_normal_flow_sources(
+    report: &crate::bap::guard_admission::Report,
+    request: &crate::AnalysisRequest,
+    sites: &[SiteEvidence],
+) -> Result<(), Error> {
+    crate::bap::guard_admission::validate_normal_flow_request(&report.input, request)?;
+    if !crate::bap::guard_admission::is_legacy(report)
+        && sites.iter().any(|site| {
+            site.semantic_status.as_deref() == Some("normal-flow-terminal")
+                && crate::bap::guard_admission::terminal_receipt(&report.input, site.va).is_none()
+        })
+    {
+        return Err(invalid("terminal status without its source certificate"));
+    }
+    if let Some(flow) = &report.input.normal_flow {
+        for receipt in &flow.terminals {
+            let va = crate::bap::core_adapter::address(&receipt.site)?;
+            let site = sites
+                .iter()
+                .find(|s| s.va == va)
+                .ok_or_else(|| invalid("terminal full capture source absent"))?;
+            if !site.captured
+                || site.bytes_hex != receipt.bytes_hex
+                || site.quality != "opaque"
+                || site.semantic_status.as_deref() != Some("normal-flow-terminal")
+                || !site.accesses.is_empty()
+                || [
+                    "exception-exit",
+                    "exception-resumption-outside-local-scope",
+                    "unsupported-exception-effects",
+                ]
+                .iter()
+                .any(|gap| !site.gaps.iter().any(|g| g == gap))
+            {
+                return Err(invalid(
+                    "terminal capture status, scope or access effects changed",
+                ));
+            }
+        }
+    }
+    Ok(())
 }
 #[cfg(feature = "bap")]
 pub(crate) fn validate_composition_capture(

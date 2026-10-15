@@ -1,0 +1,125 @@
+{
+  "status": "retained-source-bound-pass",
+  "fresh_model_run": false,
+  "origin": "evidence/Ariadne/loop-aware-target-resolution/20261015/artifacts/validation-20261015T050857/complete.json",
+  "origin_sha256": "0fee6d70041b68710bdca09120bf1ef27d01faaccfeb330cd58faf70652c1225",
+  "model_configurations": {
+    "target": 5,
+    "composition": 19,
+    "loop": 25
+  },
+  "files": {
+    "Specs/AriadneGuardedTargetResolution.tla": "e142a6fd22d78044c444c26211b7c659a56fedb5f9e555aa20e3aa1be23e8b10",
+    "Specs/AriadneLoopTargetClosure.tla": "876f6331bc1e7fc4e70864c486b589df66ffd5894bc659d6c1dfdbc4d1ed105d",
+    "Specs/AriadneTargetResolution.tla": "c684457a7e60ce833fa6273b2037774820a4396b2f40d2726cf37c372241c1b0",
+    "Specs/GuardedTargetResolutionBackedge.cfg": "74311cd6e3a0d3c9df5cd664d676f946b295c0c2e3beb31ab5ddc92c66cf779d",
+    "Specs/GuardedTargetResolutionBarrierOnly.cfg": "1207bc1c7ad33a60bfcd787616898f183e3ba4f93bb985d9f6c2240cdf11de9d",
+    "Specs/GuardedTargetResolutionBoundedFrontier.cfg": "753596a974132428b3d3fcdbc0365d9f7097b67828df60f78fc054458fac8f28",
+    "Specs/GuardedTargetResolutionBypass.cfg": "3a1ee8d58671d31fef1a47c22a5069221aa7331482a508d6cc6864dbbd85ca28",
+    "Specs/GuardedTargetResolutionChangedFrontier.cfg": "6f0e1eab3f35e6e848c156fc3583605f2ea41a97f82f7b2ea4eaea3ada52b094",
+    "Specs/GuardedTargetResolutionComplete.cfg": "bcbf12997d08e887bdedb6c85234d219467453175a76daaed394dd48919e8885",
+    "Specs/GuardedTargetResolutionCompletenessOnly.cfg": "559f5ab8844923876f80ae3ecb412666b941e3b1dccbfd687661c0b590b9fe24",
+    "Specs/GuardedTargetResolutionInfeasibleFrontier.cfg": "8f3cb3cd49b29d145c22919dcea6e16fb2dbb001b02f9d65b2e995c921acf595",
+    "Specs/GuardedTargetResolutionMissingCode.cfg": "41aa4a59287b6e0a498d11b99acc9e6dc4d38dfe67285a01e68ea825dde6499d",
+    "Specs/GuardedTargetResolutionOpaqueCall.cfg": "8c1c8f594b45458d976d8dc6db7c2c4f6c94e90c8ba23917509581afcfeb0af2",
+    "Specs/GuardedTargetResolutionPartialBudget.cfg": "15cd42f342708ab92855faecd3c26028bbab542fd100217f047029bbe80cfa5c",
+    "Specs/GuardedTargetResolutionPartialRead.cfg": "aeda3c79d0bc0c2eeeec7d1d3088af50dbcc6e072b4cd4a91d34222210d8654b",
+    "Specs/GuardedTargetResolutionPendingHavoc.cfg": "36c6c2f35e50e78ccfcf791c71e2c72dda57ec2b4426a8959205f52c42e68276",
+    "Specs/GuardedTargetResolutionTransferOnly.cfg": "52d046d7028b10ec3c90cb469ddab869b220e92ca8912a487aeeeb8a4ce3fc74",
+    "Specs/GuardedTargetResolutionUncoveredFrontier.cfg": "36bd980aedb0ab0ecc9d84b5800ca57cbf70a1c5e2318ce722df9631c2cbcfc4",
+    "Specs/GuardedTargetResolutionUntrusted.cfg": "5600f4b2243d7a980376ead87f7ebe280454653744c9861abd6fbc56019eac61",
+    "Specs/GuardedTargetResolutionWrongScope.cfg": "a1eb89ec3c3768c2f45725598941bc3a7562273b5f54119ecf753cc9a8e6ced6",
+    "Specs/GuardedTargetResolutionZero.cfg": "00f867ac84a0da322de1adb21791f5d61df019e505874c45c4214a42af306cdd",
+    "Specs/GuardedTargetResolutionZeroPartial.cfg": "ab9ae6e58dbb08b3fba726d6820eab20271c19887448c52fdbbac85d8624087e",
+    "Specs/LoopTargetClosure.cfg": "ac7649021feb57efa985a242e49a962b4663b17a5d325e67fc68bc20c9aea5e6",
+    "Specs/LoopTargetClosureBackedgeClobber.cfg": "19f20f52270970850c77ca19ed87390576261b0d5e66b6b31a7d47d8db2c5632",
+    "Specs/LoopTargetClosureCircularComplete.cfg": "7fba378e2946279ed5a1a86dbf426b86d28b86535a76efde4d605c2fcdec6ac0",
+    "Specs/LoopTargetClosureCompletenessEpoch.cfg": "b7ecbbc7ce3b513ee0f8d751bcb838c5c3649d0df5f9a5b8af277e5ccfe91c89",
+    "Specs/LoopTargetClosureFlagClobber.cfg": "6d2695f8672d5372259a0eea3b7ffe2e989ac0c04409e664b65b7cbe40051609",
+    "Specs/LoopTargetClosureGuardBypass.cfg": "3540303a99429e6cf1749c430b91662fc4ae5e8ff34c6acfa3faa15d3933a78a",
+    "Specs/LoopTargetClosureHiddenEntrance.cfg": "ca5025b970f7d9467d7d1f42fc940fe94862653365ea73dc4d270ce99e1fc786",
+    "Specs/LoopTargetClosureHiddenStore.cfg": "9f0443a443701a6e196132c51e580da147d11ef113ebe26700d5447e0d5d6e37",
+    "Specs/LoopTargetClosureLateEntrance.cfg": "7b7b985c10aa76626a0bbaf6920802401c59fa187bb7b825efdb0a08ecd7bf5e",
+    "Specs/LoopTargetClosureMissingEntry.cfg": "86f2303fabc29b250a53be802a2fe1fb8b65ab29e64693ccaef30ebc6b2fdec4",
+    "Specs/LoopTargetClosureOmitExit.cfg": "94a0f73fcf5910b90d987e27179375262e07dc13b44381506e969cfcd728d4cd",
+    "Specs/LoopTargetClosureOmitTarget.cfg": "7759065a8963dc5dcd80eed9d060fa5b29ec433450feb6c97996fe0194932618",
+    "Specs/LoopTargetClosureOpaqueCall.cfg": "8435017cea884fc8d6e539cfc76601d85654915afe9eaa6a4c20e332030c9f4f",
+    "Specs/LoopTargetClosurePartialBudget.cfg": "8f0fff90fc81e3fd9c70d3739e400dbc71ccd78e2ce99beab48249962f04114f",
+    "Specs/LoopTargetClosureRecheckBudget.cfg": "18d9ef5f90eafed5c4639d50d7bc8620752fcc9b66db8ecc2f5253e49ad7f4ca",
+    "Specs/LoopTargetClosureRootInside.cfg": "21cd02a4484e5e186e489d24d0c50f99ae5706a80ac4f07c63f6f5971923f736",
+    "Specs/LoopTargetClosureSelectorClobber.cfg": "3d54045ec9f5dccfaf44a026b5f050851751f56e3aeb0ff1aef40c0352ed5440",
+    "Specs/LoopTargetClosureSharedSelector.cfg": "3136ede879bc370c797cb6ee13e6c8f95183f9ba5a04b8747b657603e5ca76e7",
+    "Specs/LoopTargetClosureStaleEpoch.cfg": "e2558ceba51883b64c3d134b51be65b468201a977cce26d1602a46173db006f1",
+    "Specs/LoopTargetClosureUnknownMemory.cfg": "37566965b21efa6d7ad7a31e018f63a14319841184ce850b0b9927f4ba96ba24",
+    "Specs/LoopTargetClosureUntrustedMemory.cfg": "5d4f52f5d2de867a43d1ce065f169e6a4b5f959755c455a1aa28f231bd5895e8",
+    "Specs/LoopTargetClosureWrongEntry.cfg": "72f9d6e0b564c711e2104c20d7395fa1122a36fbda868a93ef40b5a0d96da671",
+    "Specs/LoopTargetClosureWrongPolarity.cfg": "32100adbb4b92b88337a78386a6d95f97355ba1fcab3edbac3bf28bf3b13dee8",
+    "Specs/LoopTargetClosureWrongScope.cfg": "7e78f310beefe04c61b5396134ffab73569e3f540233f62242b7702271ae6cdb",
+    "Specs/LoopTargetClosureZeroBudget.cfg": "b9b596fa1dd05fc5d9d86c67eae5c0edfb105af66faa57e404be6dc3d7fe1c52",
+    "Specs/TargetResolution.cfg": "9b164106369c7481ac73d106831187996939a507aa29b7902819d283e170136d",
+    "Specs/TargetResolutionIncoming.cfg": "b447d3041062225192c33e9ea1bcf4837c2426b82e8d61b9ceb00e8cd429976d",
+    "Specs/TargetResolutionPartial.cfg": "d23c139b5eb8ed16cfe5bf211f33ec4a1813c5ec00f992bc47a5787874880193",
+    "Specs/TargetResolutionUntrusted.cfg": "3e9ffed9e414b0be728047b3df7ff0e2ea69ddc138a14c6db76fb04244adca6d",
+    "Specs/TargetResolutionZero.cfg": "cc7d97c48a4fe09a0b6fd695b8d05b800e652c6bc94e17d8c006abe14cf3c282",
+    "Specs/check-guarded-target-resolution.sh": "8d86507088caa360e05a9ac3ba415c23e428de3727545994854d0b41766d445b",
+    "Specs/check-loop-target-closure.sh": "538a1399730069098a7d047ec3234cafc48add0c05e72c4ace55be0807493cf3",
+    "Specs/check-target-resolution.sh": "4d8bc130eee6cf3ca65666fd50464d5f3712021d51fe9ced2f81f8cfa30632cf",
+    "tests/bap/fixtures/loop-closure/dump-da09.json": "e505673e241e2eb1a7407b3d76dc2f2aa4d7c50e2b4c1df77c104b5e83faf0d7",
+    "tests/bap/fixtures/loop-closure/dump-dadd.json": "c15df98f34f2eb210b16ab97ee5529d63837cdd479a6c03c9bbb63d25b1c6e13",
+    "tests/bap/fixtures/loop-closure/dump-provenance.json": "7305abf7459c0c4fe0ac1d534f1e5e3f81928389f5720024d7ffb084d844b63c",
+    "tests/bap/fixtures/loop-closure/extract.py": "3f5347344c1a99cdeb17711698cc201f53a7d0aabc72cee0a4e3d89472e2e247",
+    "tests/bap/fixtures/loop-closure/legacy-manifest.json": "b21af84183d446f64ceaed3ffef1f7a416f41a72e5cf1575099bba09a3eae63a",
+    "tests/bap/fixtures/loop-closure/legacy-v1/AriadneGuardedTargetResolution.tla.txt": "e142a6fd22d78044c444c26211b7c659a56fedb5f9e555aa20e3aa1be23e8b10",
+    "tests/bap/fixtures/loop-closure/legacy-v1/capture.ml.txt": "ca17d97ade1e8acac9a11098d5eb26bbff693b3d29f30e7665d983db672d430c",
+    "tests/bap/fixtures/loop-closure/legacy-v1/composition.ml.txt": "8384ad9c5ddc1449db1c97c9247c1afcf4a683289a7fa56bb0d1db727395a868",
+    "tests/bap/fixtures/loop-closure/legacy-v1/composition.rs.txt": "c36c8876810e35ed10b7e366e650d7854958b0ad7b07d33084039d39b68e9580",
+    "tests/bap/fixtures/loop-closure/legacy-v1/target_resolution.rs.txt": "5614ff7054824075aa88c4f8e4ec4df47482cfb2ad38618a8dab7330dac65d32",
+    "tests/bap/fixtures/loop-closure/oracle-cases.json": "3edf3db165b8b4b7e860b7e7bff29225b2d77d2914b1409e2d05850475ca77ac",
+    "tests/bap/fixtures/loop-closure/oracle.py": "360cc982b190c2fab5bd155e709a0f5f41ef001751a0d01d5c6b6ede459514c0"
+  },
+  "gates": [
+    {
+      "name": "loop-oracle",
+      "command": [
+        "python3",
+        "tests/bap/fixtures/loop-closure/oracle.py",
+        "--check",
+        "--output",
+        "/loop-work/evidence/validation-20261015T050857/oracle.json"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 0.08944913599999893
+    },
+    {
+      "name": "target-model",
+      "command": [
+        "bash",
+        "Specs/check-target-resolution.sh"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 3.0434078079999836
+    },
+    {
+      "name": "composition-model",
+      "command": [
+        "bash",
+        "Specs/check-guarded-target-resolution.sh"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 10.824624640999957
+    },
+    {
+      "name": "loop-model",
+      "command": [
+        "bash",
+        "Specs/check-loop-target-closure.sh"
+      ],
+      "exit_code": 0,
+      "passed": true,
+      "seconds": 15.29603124900001
+    }
+  ]
+}

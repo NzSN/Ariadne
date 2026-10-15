@@ -1,0 +1,38 @@
+{
+  "schema": "ariadne.caller-native-opaque-mutations/v1",
+  "passed": true,
+  "baseline_passed": true,
+  "observer_unchanged": true,
+  "observer_sha256": "d0b52574bcb6bab321db4955ffb370d54d754776a0394494ed393346830283c5",
+  "repository_mutation_tool_sha256": "7ce6a1b25902da1baf8c6838aaba5c69318db6361935e52d075a37a4294dcb3a",
+  "driver_sha256": "e41c00a6674d1c33c7be5f1f18105e0d9dc729c8d4541fbf7d08f40735a0f74b",
+  "mutants": [
+    {
+      "name": "native-opaque-kill-accepted",
+      "behavioral_credit": true,
+      "expected_failure_marker": "native admitted opaque kill mutation",
+      "source_sha256": "4fc3fd3a416b3983019209f426ea8a8f5afa23bbc169b2900964b25b7b1e014a",
+      "helper_sha256": "71f3de205fe0854b9f43844da4a28dcf9176cd01b20afbad43d5387c3568e108",
+      "helper_manifest_sha256": "038cf6cd9fbfdac8c1523d77d6e85c532421f0e881f233c8f6a1b6ae4e538a8a",
+      "exit_code": 101
+    },
+    {
+      "name": "native-opaque-footprint-lost",
+      "behavioral_credit": true,
+      "expected_failure_marker": "native admitted opaque uses mutation",
+      "source_sha256": "fe8d82acb94fb7ff58b497dc9ae4ad662e4289fd5e40ee748b9abab6b17ea725",
+      "helper_sha256": "222591aaef8bcb4ed1ed24b950d80b3f4bb4bcb64d0ec89e2be75b97de37ef06",
+      "helper_manifest_sha256": "6d4c136588571a18d89a7ca5aedaadbc942e2660eb1e41a2418fe79df4f7b6bd",
+      "exit_code": 101
+    },
+    {
+      "name": "native-opaque-profile-ignored",
+      "behavioral_credit": true,
+      "expected_failure_marker": "native admitted opaque profile mutation",
+      "source_sha256": "83931165d037648da000463e188d0afcb0e8c1c9c76527c298f55baefd764137",
+      "helper_sha256": "a38a31d3871049527ffc1cab0458a6f3f90474e6e0983a82c87c6efe98ab8094",
+      "helper_manifest_sha256": "ccd07a953691bc9e34bf4009285fb93646dbdec05d45d247e75b5148b3f4dd3a",
+      "exit_code": 101
+    }
+  ]
+}

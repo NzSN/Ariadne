@@ -52,10 +52,10 @@ pub fn validate_saved_composition(bytes: &[u8], max_bytes: usize) -> Result<Valu
     let sources: Vec<crate::investigation::SiteEvidence> =
         serde_json::from_value(value["capture_sources"].clone())?;
     let request = crate::investigation::frame_paths::decode_guard_request(&value["normalized"])?;
-    let expected_schema = if composition::is_legacy(&composition) {
-        "ariadne-minidump-report-v4"
-    } else {
-        "ariadne-minidump-report-v5"
+    let expected_schema = match composition::generation(&composition) {
+        1 => "ariadne-minidump-report-v4",
+        2 => "ariadne-minidump-report-v5",
+        _ => "ariadne-minidump-report-v7",
     };
     if value["schema"] != expected_schema
         || value["identity"]["snapshot_id"] != composition.snapshot
@@ -72,6 +72,7 @@ pub fn validate_saved_composition(bytes: &[u8], max_bytes: usize) -> Result<Valu
         return Err("saved combined minidump identity, version or source domain changed".into());
     }
     composition::validate(&composition, &targets, &guards, &request)?;
+    crate::investigation::validate_normal_flow_sources(&guards, &request, &sources)?;
     let by_site: std::collections::BTreeMap<_, _> = sources.iter().map(|s| (s.va, s)).collect();
     let guard_sites: std::collections::BTreeMap<_, _> = guards
         .input
@@ -97,7 +98,7 @@ pub fn validate_saved_composition(bytes: &[u8], max_bytes: usize) -> Result<Valu
         {
             return Err("saved combined original bytes, AST or producer changed".into());
         }
-        if guard_admission::recognize_pending(source)?.is_some() {
+        if guard_admission::recognize_pending_for_input(&guards.input, source)?.is_some() {
             if let Some(ast) = guards.normal_selection(site.va) {
                 let raw = crate::investigation::frame_unwind::unhex(&source.bytes_hex)?;
                 let selected = crate::bap::Backend::guard_normal_projection(
@@ -714,7 +715,11 @@ fn render_result(
         return Err(ReportError::InvalidExceptionSeed);
     }
     let mut value = json_report(prepared, result, exception_rip_seed);
-    let composition_context = if prepared.composition().is_some() {
+    let composition_context = if prepared.composition().is_some()
+        || prepared
+            .guard_admission()
+            .is_some_and(|g| !crate::bap::guard_admission::is_legacy(g))
+    {
         let context = crate::input::investigation::capture_context(prepared)
             .map_err(|_| ReportError::IdentityMismatch)?;
         value["identity"]["semantic_profile"] = serde_json::json!(context.semantic_profile);
@@ -723,13 +728,17 @@ fn render_result(
         None
     };
     let schema = if let Some(composition) = prepared.composition() {
-        if crate::bap::composition::is_legacy(composition) {
-            "ariadne-minidump-report-v4"
-        } else {
-            "ariadne-minidump-report-v5"
+        match crate::bap::composition::generation(composition) {
+            1 => "ariadne-minidump-report-v4",
+            2 => "ariadne-minidump-report-v5",
+            _ => "ariadne-minidump-report-v7",
         }
-    } else if prepared.guard_admission().is_some() {
-        "ariadne-minidump-report-v3"
+    } else if let Some(guard) = prepared.guard_admission() {
+        if crate::bap::guard_admission::is_legacy(guard) {
+            "ariadne-minidump-report-v3"
+        } else {
+            "ariadne-minidump-report-v6"
+        }
     } else if prepared.target_resolution.is_some() {
         "ariadne-minidump-report-v2"
     } else {
@@ -737,6 +746,12 @@ fn render_result(
     };
     match format {
         ReportFormat::Json => {
+            if let Some(context) = &composition_context {
+                value["normalized"] =
+                    crate::bap::core_adapter::encode_request(&prepared.prepared.request)
+                        .map_err(|_| ReportError::IdentityMismatch)?;
+                value["capture_sources"] = serde_json::json!(context.sites);
+            }
             if let Some(composition) = prepared.composition() {
                 let context = composition_context
                     .as_ref()
@@ -764,6 +779,12 @@ fn render_result(
         ReportFormat::Text => {
             let mut out = String::new();
             writeln!(out, "Ariadne minidump report ({schema})").unwrap();
+            if prepared.composition().is_none()
+                && let Some(context) = &composition_context
+            {
+                writeln!(out,"Guarded capture input: {}",serde_json::json!({"normalized":crate::bap::core_adapter::encode_request(&prepared.prepared.request).map_err(|_|ReportError::IdentityMismatch)?,"capture_sources":context.sites,"semantic_profile":context.semantic_profile})).unwrap();
+            }
+
             if let Some(composition) = prepared.composition() {
                 writeln!(
                     out,
@@ -858,6 +879,11 @@ fn render_result(
         }
         ReportFormat::Dot => {
             let mut out = format!("// {schema}\n");
+            if prepared.composition().is_none()
+                && let Some(context) = &composition_context
+            {
+                writeln!(out,"// guarded-capture-input: {}",serde_json::json!({"normalized":crate::bap::core_adapter::encode_request(&prepared.prepared.request).map_err(|_|ReportError::IdentityMismatch)?,"capture_sources":context.sites,"semantic_profile":context.semantic_profile})).unwrap();
+            }
             if let Some(composition) = prepared.composition() {
                 writeln!(
                     out,

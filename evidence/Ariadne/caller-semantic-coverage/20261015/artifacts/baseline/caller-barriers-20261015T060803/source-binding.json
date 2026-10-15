@@ -1,0 +1,29 @@
+{
+  "schema": "ariadne.caller-barrier-feedback-source-binding/v1",
+  "source_manifest_sha256": "7e16611a5fb938916209c34f2c8d73e58b267e50f64e0ebb84ce5735a8287e90",
+  "source_files_verified": 877,
+  "source_archive_sha256": "5cd406c5181d131679a60af15f53edcabecfe056144e40b5785bc37ce1d010ee",
+  "release_library_sha256": "9351a0e9e3d56a33088e8f50334eb0a711e3316f1983cd111e3b41a3fd8937a3",
+  "driver_sha256": "074f65530a69d2a16e694c6e2d7eff2e0c5d78409ceb9ca6e66e0d44c3ab5a56",
+  "driver_binary_sha256": "acb0d82f17684c73a6dcc36938df58813844aaf898048bd4af0aaf37f84c2145",
+  "tool_hashes": {
+    "ariadne-bap-lift": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+    "ariadne-llvm-mc": "45dad913d912aed489a99a150edc846389877ef72cb9218b46b8e2e555ad813c"
+  },
+  "fixture_sha256": "90b440c0059ca65888a5b4b11be69d505763684239118be84fe67e87d99ecb41",
+  "compile_command": [
+    "rustc",
+    "--edition=2024",
+    "/loop-work/caller-barriers-barrier-probe.rs",
+    "-O",
+    "-L",
+    "dependency=/home/nzsn/Repos/Ariadne-loop-aware-20261015/target/loop-aware-build/release/deps",
+    "--extern",
+    "ariadne=/home/nzsn/Repos/Ariadne-loop-aware-20261015/target/loop-aware-build/release/libariadne.rlib",
+    "--extern",
+    "serde_json=/home/nzsn/Repos/Ariadne-loop-aware-20261015/target/loop-aware-build/release/deps/libserde_json-540ae372bafb180c.rlib",
+    "-o",
+    "/loop-work/caller-barriers-probe"
+  ],
+  "scope": "Initial four-shape RED feedback; not whole-caller closure or alignment proof."
+}

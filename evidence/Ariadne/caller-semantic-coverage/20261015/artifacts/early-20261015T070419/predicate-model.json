@@ -1,0 +1,9 @@
+{
+  "name": "predicate-model",
+  "command": [
+    "bash",
+    "Specs/check-predicate-admission.sh"
+  ],
+  "exit_code": 0,
+  "seconds": 42.855836459
+}

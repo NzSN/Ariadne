@@ -2,7 +2,7 @@
 
 ## Context and follow-up
 
-**Status.** G0–G4 first-delivery implementation and finite remote checks are complete on 2026-10-14. The original dated retry was unavailable at XORPS typed admission; the [shift-count correction](bap-shift-count-design.md#original-dump-retry-2026-10-14) resolves that stop. The initial guard-evidence cap motivated [G5 configurable budgets](../../Plans/completed/guard-budget-configuration.md), now implemented and finitely validated; the larger original caller still has incomplete candidate coverage. The later [request-budget delivery](bap-analysis-core-design.md#configurable-native-request-limit) admits its native request with an explicit larger budget. The
+**Status.** G0–G4 first-delivery implementation and finite remote checks are complete on 2026-10-14. The original dated retry was unavailable at XORPS typed admission; the [shift-count correction](bap-shift-count-design.md#original-dump-retry-2026-10-14) resolves that stop. The initial guard-evidence cap motivated [G5 configurable budgets](../../Plans/completed/guard-budget-configuration.md), now implemented and finitely validated; the later [caller-coverage delivery](caller-semantic-coverage-design.md) closes the original candidate barriers, while full caller dataflow remains budget-stopped. The later [request-budget delivery](bap-analysis-core-design.md#configurable-native-request-limit) admits its native request with an explicit larger budget. The
 [G0–G4 execution plan](../../Plans/completed/justified-branch-pruning.md) records progress
 and separate qualification. The selected first
 delivery admits the reviewed MOVAPS normal outcome only with a checked alignment
@@ -19,6 +19,8 @@ validation needed to remove an alternative only when it is impossible under
 the declared analysis premises. Unknown is distinct from refuted.
 
 **Where to go next.**
+
+- [Caller semantic-coverage design](caller-semantic-coverage-design.md) and [S0–S6 plan](../../Plans/caller-semantic-coverage.md) address the remaining normal-flow exception exits and exact MOVAPS load rule after loop closure.
 
 - [Guarded target-resolution composition](guarded-target-resolution-design.md) and its [C0–C6 plan](../../Plans/completed/guarded-target-resolution.md) address the nine unresolved dispatches while preserving independent remaining semantic barriers.
 

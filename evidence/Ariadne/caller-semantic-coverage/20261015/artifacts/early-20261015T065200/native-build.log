@@ -1,0 +1,6 @@
+SDK inventory verified
+File "legacy_composition_v2.ml", line 179, characters 61-82:
+179 |   let candidate_input,_=Capture.admit_resolved ~loop_checker:Loop_closure.validate (`Assoc [
+                                                                   ^^^^^^^^^^^^^^^^^^^^^
+Error: Unbound module Loop_closure
+

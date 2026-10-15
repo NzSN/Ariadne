@@ -1,0 +1,10 @@
+{
+  "name": "llvm-build",
+  "command": [
+    "bash",
+    "native/llvm_mc/build.sh",
+    "target/caller-llvm/ariadne-llvm-mc"
+  ],
+  "exit_code": 0,
+  "seconds": 1.8747001170002022
+}

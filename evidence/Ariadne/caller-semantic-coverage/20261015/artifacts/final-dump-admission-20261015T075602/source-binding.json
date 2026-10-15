@@ -1,0 +1,116 @@
+{
+  "schema": "ariadne.caller-final-helper-dump-source-binding/v1",
+  "dump_url": "https://192.168.150.219:4080/dumps/dump_03958DA4FCA844A786262A1053",
+  "dump_sha256": "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+  "frozen_table_witness_sha256": "1390abca21bb7e2db9cde9a07067f60f5493498a7866fb648dcb103994674baf",
+  "historical_guard_sha256": "d0294c9b940d8366cb89d78a95d2186c89196dbf1a7955e70189c22afa2abda0",
+  "caller_expectation_sha256": "90b440c0059ca65888a5b4b11be69d505763684239118be84fe67e87d99ecb41",
+  "source_manifest_sha256": "4a8db7330735b3e1df84bfdcf764d6a500efd408709e63de8152954bfc1f8515",
+  "source_files_verified": 937,
+  "source_archive_sha256": "c35459a19b1e2f5f139730bea6c119cfceff603207254b52d42effac68654a5f",
+  "source_manifest_artifact": "source-manifest.json",
+  "native_manifest_sha256": "5fba77a55d0bb35cfcb902dc87f8029ed82f9951ac2d4b8dd9e7b80702f26095",
+  "native_manifest_artifact": "native-manifest.json",
+  "native_helper_sha256": "d39df81c64c1fd832b88dd48652572234422d8d8840d277cbb83fb88e783e725",
+  "loop_engine_sha256": "afc1b4b991a2bdf402dc8036eb0cfba0d0232505ea5dab31a6e2e2d267a15d95",
+  "guard_model_sha256": "94c94993a1c2fd9fc6a9ab94f4f782d355ae91b66f4dc010e2d8151cf0498acd",
+  "guard_engine_sha256": "252ef410b03bf3ec7b97efd5bcfbbd42591d66aabdb7680aa118e8e736cb9184",
+  "composition_model_sha256": "e85194724d0aff4ec992bb18dc855f85288a586a73532ae3ae78de327b62ecb9",
+  "composition_engine_sha256": "a66b79f4a78330eda3dad00b64802498a3ab289404007c1fd62bb521a5a380ee",
+  "loop_model_sha256": "876f6331bc1e7fc4e70864c486b589df66ffd5894bc659d6c1dfdbc4d1ed105d",
+  "driver_sha256": "e025f5ce39321f53164bfa68a2bfb4b5d4a6002c18c8845f67bee17a221f0d74",
+  "driver_binary_sha256": "436bc9434755244c19b3cc024ee51e7d64c7d9a612b59ca79c9a79caac3717dc",
+  "runner_sha256": "ff6aed84a39ee3479723550a07e1fe0cfcb42f2b2f1980ea32953f4c040142f1",
+  "release_library_sha256": "d7dca79f2a5e6544ae0fed728415a0a9168b4a482bcf91f4d786586e8cbd8e24",
+  "serde_json_library": "libserde_json-540ae372bafb180c.rlib",
+  "serde_json_library_sha256": "c923d77d1d00e3862c23ba11499062c8874e36496f26d4a9b9392f9f417066d3",
+  "tool_hashes": {
+    "ariadne-bap-lift": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+    "ariadne-llvm-mc": "6bb0005e6416f172f88c4d122ae8908862adbe9d1d2f225046df17ae857d9349"
+  },
+  "rustc": "rustc 1.96.0 (ac68faa20 2026-05-25)\nbinary: rustc\ncommit-hash: ac68faa20c58cbccd01ee7208bf3b6e93a7d7f96\ncommit-date: 2026-05-25\nhost: x86_64-unknown-linux-gnu\nrelease: 1.96.0\nLLVM version: 22.1.2\n",
+  "compile_command": [
+    "rustc",
+    "--edition=2024",
+    "/caller-work/final-dump-admission.rs",
+    "-O",
+    "-L",
+    "dependency=/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/caller-build/release/deps",
+    "--extern",
+    "ariadne=/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/caller-build/release/libariadne.rlib",
+    "--extern",
+    "serde_json=/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/caller-build/release/deps/libserde_json-540ae372bafb180c.rlib",
+    "-o",
+    "/caller-work/final-dump-admission"
+  ],
+  "retained_current_run": "/caller-work/evidence/dump-20261015T073143",
+  "retained_current_source_binding_sha256": "2c3fc19d98a3992281f61963340a6e341e45cc1c3fe9242057e4d73e99deaaf7",
+  "retained_current_source_manifest_sha256": "fccc77d5e58752e4e8010567a28569995531fed8a9b73328c0598623d9595ac6",
+  "retained_current_native_manifest_sha256": "ba6e7142618aa267226c9453b15add1b5a1d7dd8a98badc8bc5e85ff6b881ecd",
+  "retained_current_artifacts": {
+    "frame-1/prepared-full.json.gz": {
+      "stored_sha256": "6d1350c5699bc58c591e594ec3debcce75521539afdde69e18373d373aea7a66",
+      "original_sha256": "9518d79e6a223ca93131814c649db11e00de8dcc7b280521a608517e9a0476f5",
+      "original_bytes": 19728664
+    },
+    "frame-1/guard-report.json.gz": {
+      "stored_sha256": "0685dde8a53a4854009fd19ea02851bec4bc9f548d59efbb7973a618657ae71b",
+      "original_sha256": "c48f39b6ade8bd031112bef972e33301694c30fa1ac5c04903d22cdfe5fe6b93",
+      "original_bytes": 21498305
+    },
+    "frame-1/target-report.json": {
+      "stored_sha256": "61ae8329a4a4c82b9254ea64d389051caedce524101297ab2cce8dfdc4d20fc9",
+      "original_sha256": "61ae8329a4a4c82b9254ea64d389051caedce524101297ab2cce8dfdc4d20fc9",
+      "original_bytes": 675222
+    },
+    "frame-1/composition-report.json.gz": {
+      "stored_sha256": "5c7ad5ab2413c78fbe9bc8213809e603e5afe286c886cfb700a6538f902f8c73",
+      "original_sha256": "2ca0d179105d27b76b8b2a63e01bdd12be96795a9d4a810cf6dd0eecd3baee2f",
+      "original_bytes": 15192597
+    },
+    "frame-1/outcome.json": {
+      "stored_sha256": "ca46d5d7d9ff43c796d1075fbbf613e67c5aa13ea89094b2e5bfaa79b9bd5682",
+      "original_sha256": "ca46d5d7d9ff43c796d1075fbbf613e67c5aa13ea89094b2e5bfaa79b9bd5682",
+      "original_bytes": 6223
+    },
+    "frame-0/prepared-full.json.gz": {
+      "stored_sha256": "38e1f65ca4f01994ab4a5cf81199a851c7c070e026a8b43aaffb8ea50354d9ad",
+      "original_sha256": "233cd7df37058c14dd64589ada6ea1b16034abfc1c13733d9099005e7da2d3da",
+      "original_bytes": 1578750
+    },
+    "frame-0/guard-report.json.gz": {
+      "stored_sha256": "96af76613610e55e83efa3434602b357fb9045e7ee86cccd6b4c404e19194d25",
+      "original_sha256": "56be7b0d0b0dfba27f0fd47be25fb0237077bf545b547cb4f17ca1520624460e",
+      "original_bytes": 1827406
+    },
+    "frame-0/target-report.json.gz": {
+      "stored_sha256": "a204d01f55e491f1ba5058ec857092646bc2952c4b5254802674c539dd17b3b6",
+      "original_sha256": "9a9cfb32e93d82956adb5985a34fe00fb399c3065b71785e6d20beaa96959b31",
+      "original_bytes": 20985596
+    },
+    "frame-0/composition-report.json.gz": {
+      "stored_sha256": "ed99047faed6e4446a0203c016cd50752c42797343beb16f8c7be379315053fc",
+      "original_sha256": "5aec1ed7e4c87d15186d61a55eadf3d493a4bb55307d953c157db690dcdf9cf3",
+      "original_bytes": 1212705
+    },
+    "frame-0/outcome.json": {
+      "stored_sha256": "4b234018efc0fa9d886adf213294cdcb03322fce46f213c3a1b1b504aa9c546a",
+      "original_sha256": "4b234018efc0fa9d886adf213294cdcb03322fce46f213c3a1b1b504aa9c546a",
+      "original_bytes": 8101
+    }
+  },
+  "retained_library_sha256": "d7dca79f2a5e6544ae0fed728415a0a9168b4a482bcf91f4d786586e8cbd8e24",
+  "current_library_identical_to_retained": true,
+  "current_rust_sources_unchanged_from_retained": true,
+  "only_native_checker_change_allowed": "legacy_guard.ml",
+  "diagnostic_completion_limits": {
+    "caller_rust": "stop after structural recovery, at PhaseDataflow",
+    "caller_native": "initialize only, completion not attempted",
+    "callee_rust_actions": 1000000,
+    "callee_rust_deadline_seconds": 600,
+    "callee_native_actions": 1000000,
+    "native_response_timeout_seconds": 600,
+    "process_timeout_seconds": 2400
+  },
+  "claim_boundary": "Fresh final-helper caller admission and structural recovery only; no fresh caller full-state parity. Full callee comparison. Exact request/proofs compared with source-bound073143 bounded full run; original production budgets/roots/premises remain unchanged."
+}
