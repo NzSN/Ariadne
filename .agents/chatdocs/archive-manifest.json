@@ -896,8 +896,8 @@
       "sha256": "d45ac344091845ef73f1b50f1839a9cd95625deede4ab319c3807b301dee6ef7"
     },
     "ariadne-structural-plan-hard-cases-20261016.html": {
-      "bytes": 12184,
-      "sha256": "0d331b66b4d3c75e1878a5eddc0b8ba8efecb06962f35f695535d8fe8a1d09b9"
+      "bytes": 12826,
+      "sha256": "0ea89609a6591568aef9827e30403616eeb5aa8932b53cbb2ec6688619fd0544"
     }
   },
   "directory": ".agents/chatdocs/",
@@ -945,7 +945,10 @@
       "scope": "Explanation of planned finite recovery, unknowns and failure limits. SF0\u2013SF6 remain pending; no source/model/build/dump execution changes.",
       "validation": "Local links/anchors and unique HTML IDs checked.",
       "original_plan": "Plans/frame-structure-report.md",
-      "original_plan_sha256": "02bbd14e9f735c7faea0fc97196a3674c2dd14900f6e2539e3d47712bbe86dfa"
+      "original_plan_sha256": "02bbd14e9f735c7faea0fc97196a3674c2dd14900f6e2539e3d47712bbe86dfa",
+      "pre_browser_navigation_fix_sha256": "0d331b66b4d3c75e1878a5eddc0b8ba8efecb06962f35f695535d8fe8a1d09b9",
+      "browser_navigation_revision": "89153e72e2ead9052344be56324751a8e1b62e5f",
+      "browser_navigation_note": "Plan links use the archived HTML and real section IDs; code, design and retained-evidence citations use the published revision for browser-rendered anchors."
     }
   ],
   "plan_directory_relocation": {
