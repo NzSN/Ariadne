@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Captured indirect target resolver implementation plan</title><style>
+:root{color-scheme:light;--ink:#182535;--muted:#5a6878;--line:#dce3ea;--accent:#14685c;--soft:#edf5f2}*{box-sizing:border-box}body{margin:0;background:#f4f6f8;color:var(--ink);font:16px/1.7 Segoe UI,Arial,sans-serif}a{color:#176a9b;text-decoration:none}a:hover{text-decoration:underline}.shell{max-width:1360px;margin:auto;display:grid;grid-template-columns:250px minmax(0,1fr);gap:42px;padding:42px 32px}aside{position:sticky;top:28px;align-self:start;max-height:calc(100vh - 56px);overflow:auto;font-size:14px}.brand{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--accent)}.page-links{display:flex;gap:14px;margin:10px 0 25px;padding-bottom:18px;border-bottom:1px solid var(--line)}nav ul{list-style:none;padding:0;margin:0}nav li{margin:8px 0}nav li.sub{padding-left:14px;font-size:13px}main{min-width:0;background:white;padding:44px 52px;border:1px solid var(--line);border-radius:12px;box-shadow:0 6px 25px #122a4010}.eyebrow{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;font-size:12px;font-weight:600}.badge{background:var(--soft);color:var(--accent);padding:4px 10px;border-radius:5px}.badge.neutral{background:#edf1f7;color:#43536a}h1{font-size:34px;line-height:1.2;margin:8px 0 28px;letter-spacing:-.03em}h2{font-size:23px;margin:42px 0 16px;padding-top:10px;border-top:1px solid var(--line)}h3{font-size:18px;margin:28px 0 12px}h1,h2,h3{scroll-margin-top:24px}p{margin:15px 0}ul,ol{padding-left:25px}li{margin:7px 0}code{font:13px/1.55 Consolas,Courier New,monospace;background:#edf1f5;border-radius:3px;padding:2px 4px;overflow-wrap:anywhere}pre{background:#112b36;color:#e4f1f4;padding:20px;border-radius:8px;overflow:auto;line-height:1.55}pre code{padding:0;background:none;color:inherit;white-space:pre;overflow-wrap:normal}.table-scroll{overflow:auto;margin:22px 0}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.6}th{background:#edf5f2;text-align:left;color:#184b40}th,td{padding:13px 14px;border:1px solid var(--line);vertical-align:top}td:first-child{min-width:140px}footer{margin-top:42px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}@media(max-width:900px){.shell{display:block;padding:16px}aside{position:static;max-height:none;margin-bottom:20px}aside nav{display:none}main{padding:28px 24px}h1{font-size:29px}}@media print{body{background:white}.shell{display:block;padding:0}aside{display:none}main{border:0;padding:0;box-shadow:none}pre{white-space:pre-wrap;overflow:visible}h2,h3{break-after:avoid}table{font-size:11px}tr{break-inside:avoid}}
+</style></head><body><div class="shell"><aside><div class="brand">Ariadne</div><div class="page-links"><a href="ariadne-indirect-target-resolution-plan-20261012.html">Implementation plan</a><a href="ariadne-indirect-target-resolution-design-20261012.html">Design</a></div><nav aria-label="Contents"><ul><li><a href="#context-and-follow-up">Context and follow-up</a></li><li><a href="#delivery-scope-and-constraints">Delivery scope and constraints</a></li><li><a href="#stages-and-acceptance-gates">Stages and acceptance gates</a></li><li><a href="#r0-contract-freeze">R0 contract freeze</a></li><li><a href="#r1-and-r2-semantic-and-read-implementation">R1 and R2 semantic and read implementation</a></li><li><a href="#r3-discovery-and-coverage-validation">R3 discovery and coverage validation</a></li><li><a href="#r4-and-r5-evidence-and-product-integration">R4 and R5 evidence and product integration</a></li><li><a href="#r6-qualification-procedure">R6 qualification procedure</a></li><li><a href="#completion-checklist">Completion checklist</a></li></ul></nav></aside><main><p class="archive-note"><strong>Historical rendering: 2026-10-12.</strong> Moved into the chat archive on 2026-10-16. Pending-stage labels below describe the original design/plan, not current delivery. <a href="ariadne-reports-index.html">Chat report index</a> · <a href="ariadne-indirect-target-resolution-plan-20261012.md">Archived Markdown</a></p><div class="eyebrow"><span class="badge">Proposed resolver</span><span class="badge neutral">R0–R6 pending</span><span class="badge neutral">12 October 2026</span></div><h1 id="captured-indirect-target-resolver-implementation-plan">Captured indirect target resolver implementation plan</h1>
+<h2 id="context-and-follow-up">Context and follow-up</h2>
+<p><strong>Status.</strong> R0–R6 are pending. This plan was written on 2026-10-12; it does not
+authorize or claim completed runtime implementation. The existing dump
+inspection is a motivating target oracle, not resolver qualification.</p>
+<p><strong>Why this document exists.</strong> The <a href="ariadne-indirect-target-resolution-design-20261012.html">canonical design</a>
+defines how captured pointer slots and bounded relative tables can supply
+indirect CFG targets while preserving snapshot identity and unresolved cases.
+Implementation needs a model, evidence validation and discovery integration
+before augmented graphs can be accepted by either core backend.</p>
+<p><strong>What this document establishes.</strong> Stage ownership, dependencies, compatibility
+constraints, acceptance gates and the evidence required for the initial profile.</p>
+<p><strong>Where to go next.</strong></p>
+<ul>
+<li><a href="ariadne-indirect-target-resolution-design-20261012.html#semantic-contract">Semantic contract</a>
+— target candidates, conditional completeness and captured-memory premises.</li>
+<li><a href="../../Specs/README.md">Formal-model guide</a> — authoritative models and separate
+conformance/replay evidence; complete R0 before runtime edits.</li>
+<li><a href="../../docs/Ariadne/file-reader-design.md#public-interface">Input preparation</a> and
+<a href="../../docs/Ariadne/bap-analysis-core-design.md#backend-usage">BAP backend usage</a>
+— existing capture, helper and native/Rust execution contracts.</li>
+<li><a href="ariadne-indirect-target-resolution-design-20261012.html#motivating-windows-capture">Motivating capture</a>
+— exact original artifact, 58 entries, 45 destinations and retained limits.</li>
+</ul>
+<p><strong>What remains unresolved.</strong> There is no implemented resolver, resolver model,
+enabled CLI or qualification campaign. Budgets and timing ceilings must be
+frozen in R0. General indirect calls, mutable dispatch data, broad value-set
+analysis and execution-history reconstruction remain outside the first profile.</p>
+<h2 id="delivery-scope-and-constraints">Delivery scope and constraints</h2>
+<p>Deliver opt-in resolution for AMD64 near jumps through an established constant
+pointer slot or a bounded signed-32 table-relative expression. BAP supplies
+admitted semantics; LLVM MC independently checks decode/control facts. No
+automatic LLVM effects fallback, live process reads or module-file byte filling.</p>
+<p>All targets, receipts and source spans belong to one immutable snapshot. Use
+machine-width arithmetic for target expressions and checked storage mapping for
+reads. Maintain explicit holes/conflicts, unknown incoming states and unsupported
+transfers. Caller-supplied entry points remain roots; slice seeds remain selectors.
+Calls retain their existing summary/effect policy.</p>
+<p>The first enabled profile explicitly declares <code>FrozenCapturedControlData</code>.
+Completeness is relative to this premise and the covered incoming-state scope.
+Readable or read-only metadata alone cannot establish historical stability.
+Known targets with missing code remain edges and unavailable endpoints.</p>
+<p>Keep disabled mode compatible with current preparation and reports. Version
+enabled query/semantic/receipt/capture contracts. Core-only builds must continue
+to activate no external crate dependencies. Heavy SDK, model, mutation and real
+capture qualification use the established remote environment and separate
+task-owned build directories.</p>
+<h2 id="stages-and-acceptance-gates">Stages and acceptance gates</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Owner and work</th>
+<th>Required exit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R0 — freeze contract and oracle</td>
+<td>Canonical design, proposed <code>Specs/AriadneTargetResolution.tla</code>, finite configurations/checker and independent fixtures under <code>tests/bap/fixtures/</code>.</td>
+<td>Model bounded reads, index/value facts, unknown residuals, certificate invalidation and conditional completeness. Freeze supported BIL forms, default budgets, report/profile versions and timing criteria before runtime edits.</td>
+</tr>
+<tr>
+<td>R1 — extract semantic evidence</td>
+<td>Proposed <code>src/bap/target_resolution.rs</code>, existing BAP AST/admission/projection and address evidence.</td>
+<td>Admitted width-correct pointer/table/guard expressions; definition and clobber witnesses; explicit unsupported outcomes. Production recognition must not scrape printed assembly or share oracle enumeration logic.</td>
+</tr>
+<tr>
+<td>R2 — evaluate captured control data</td>
+<td>Resolver and <code>src/input/address_space.rs</code>, through the existing reader API.</td>
+<td>Exact little-endian pointer and signed-32 enumeration, deduplication, all contributor spans and conservative partial outcomes. Prove finite coverage conditions; retain known targets even when target code is absent.</td>
+</tr>
+<tr>
+<td>R3 — integrate discovery</td>
+<td><code>src/input/materialize.rs</code> and prepared-analysis identity/evidence ownership.</td>
+<td>New targets schedule local instruction reads; expanded incoming edges trigger fact/certificate revalidation. Bounded convergence or explicit partial stops, unchanged roots/seeds and frozen output only after final validation.</td>
+</tr>
+<tr>
+<td>R4 — validate native admission</td>
+<td><code>src/bap/core_adapter.rs</code>, <code>core_protocol.rs</code>, native <code>capture.ml</code>, profile/handshake and product tests.</td>
+<td>Strict identity/receipt/target coverage validation; forged, stale and cross-snapshot receipts rejected. Native and Rust consume the same augmented request. Preserve call-versus-summary policy and incomplete-target obligations.</td>
+</tr>
+<tr>
+<td>R5 — expose the product</td>
+<td>Input/investigation reports and <code>src/bin/ariadne-minidump.rs</code>, proposed <code>--resolve-indirect-targets</code>.</td>
+<td>Explicit memory premise, versioned enabled reports, all target evidence and residual gaps; disabled-mode regression. A resolved table alone must not change a still-partial explanation to explained.</td>
+</tr>
+<tr>
+<td>R6 — qualify the extension</td>
+<td>Root checks, finite oracle/model/replay tests, isolated real-code mutations and the external Windows capture.</td>
+<td>Source/tool/artifact-bound acceptance for the declared finite profile, native/Rust parity, fixed R0 budgets and independently inspected real-capture targets. Record unexercised prerequisites and historical evidence separately.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Proceed in stage order. R1/R2 may reuse existing reader and BIL structures, but
+R3 cannot promote an incomplete prototype into the core's trusted target input.
+R4/R5 must complete before calling the mode a supported product capability.</p>
+<h2 id="r0-contract-freeze">R0 contract freeze</h2>
+<p>Review the existing <a href="../../Specs/Ariadne.tla">target certificate</a>, not just the Rust
+field layout. The proposed resolver model must separate discovered candidates,
+remaining unknown alternatives and validated exhaustive coverage. Its required
+property is containment of all admitted target values when <code>complete = true</code>,
+not exact feasible-path reconstruction.</p>
+<p>Freeze independent cases before implementation: a constant pointer, positive
+and negative relative offsets, duplicates, default branch, nonzero lower index
+bound, 32-bit index wrap, 64-bit target wrap, missing/partial/conflicting entries,
+readable data with missing target code, a bypassed guard, a redefined base/index,
+an opaque clobber and a newly discovered incoming edge invalidating coverage.
+Include malformed and cross-snapshot receipt cases and every zero/exhausted
+budget. Define separately bounded table entries, targets, read/evidence bytes,
+value alternatives, transfers, revisits, graph growth and cooperative time.</p>
+<p>TLA+ remains authoritative for the modeled contract. Parse/typecheck the new
+model, explore finite safety and fair termination cases, and preserve existing
+core/input/effects scenarios. Finite exploration, replay and mutations are
+separate evidence; none is a universal ISA or Rust refinement proof.</p>
+<h2 id="r1-and-r2-semantic-and-read-implementation">R1 and R2 semantic and read implementation</h2>
+<p>Expose only admitted transfer evidence needed by the selected forms. Retain
+instruction VA/bytes, BIL/helper/projection identities, operand widths and
+register-definition bindings. Conditional constraints belong to graph edges;
+both structural edges remain. Treat unsupported outputs and opaque effects as
+unknown, never as preserving a value without proof.</p>
+<p>Evaluate through immutable captured reads. A table entry needs all four bytes;
+a pointer slot needs all eight. Compose fragments according to the existing
+reader contract. Preserve agreeing overlaps and reject arbitrary selection of
+conflicting bytes. Sign extension, endianness and modulo arithmetic require
+independent expected values. Unknown table contents retain an unresolved
+alternative unless the enabled captured-memory premise is bound and visible.</p>
+<h2 id="r3-discovery-and-coverage-validation">R3 discovery and coverage validation</h2>
+<p>Maintain separate instruction and resolution worklists. Add candidate indirect
+edges and their endpoints to the finite request domain, then materialize newly
+reachable local starts. Revisit value facts when predecessors change. A final
+certificate must cover every admitted incoming route to its dispatch; a new
+bypass, clobber or unmodeled route downgrades coverage.</p>
+<p>Do not certify a guard solely on the initially recovered graph, or let a target
+edge justify its own premise. Record unresolved frontier states and unsupported
+incoming transfers. On resolver exhaustion, retain proven candidates and
+unknown residuals under the selected partial-result contract. Existing ordinary
+preparation bounds retain their existing failure behavior.</p>
+<p>Freeze all instruction/target facts before native/Rust core initialization.
+Reaching definitions and slicing run against the expanded frozen graph;
+previous graphs/results and query identities remain historical artifacts.</p>
+<h2 id="r4-and-r5-evidence-and-product-integration">R4 and R5 evidence and product integration</h2>
+<p>Native capture admission currently receives trusted normalized facts and bounded
+instruction-prefix records. Table reads and completeness receipts need their
+own versioned validation path, rather than being squeezed into those site records.
+Bind covered graph/value revisions, premises, table read spans, arithmetic and
+target sets; a matching hash alone is not a coverage proof.</p>
+<p>Keep the enabled CLI opt-in through qualification. Display whether the target
+set is complete within its declared scope or still has additional possibilities.
+Propagate all remaining gaps into investigation status. Preserve disabled-mode
+output and old strict schema decoding; enabled identities must include resolver
+version, memory policy and limits. A production mode cannot depend on the
+temporary diagnostic frontend used in the motivating dump inspection.</p>
+<h2 id="r6-qualification-procedure">R6 qualification procedure</h2>
+<p>Run affected portable tests and applicable root checks after behavior changes:</p>
+<pre><code class="language-sh">cargo fmt --all -- --check
+cargo test --offline --locked
+cargo test --offline --locked --no-default-features
+cargo clippy --offline --locked --all-features --all-targets -- -D warnings
+python3 tools/check_rust_layout.py
+python3 tools/check_doc_links.py
+</code></pre>
+<p>Follow the linked module/model guides for native helpers, ignored tests,
+generated replay and mutations. Define the new resolver checker in R0; its
+future path is not an already available qualification command. Keep model,
+replay and mutation build outputs separate. Use a read-only dependency snapshot
+when required by the existing BAP qualification workflow.</p>
+<p>Mutate real production seams: wrong signedness/endian/base/scale, ignored guard,
+lost incoming alternative, ignored clobber, stale completeness, dropped missing
+entry, filtered unavailable target, skipped identity/premise validation and
+seed-as-root discovery. Each selected mutant needs an independently expected
+observable failure, not a test that mirrors the production helper.</p>
+<p>For <code>dump_048B10C302A4460D8A1FC75088</code>, retain the original SHA-256, all table
+contributors and the 58-entry/45-target oracle. Establish a supported large-input
+execution path explicitly: the current CLI's 256 MiB cap rejects the 1.31 GB
+artifact. A controlled library caller with declared <code>OpenLimits</code> can exercise
+the original; any reduced capture must retain original/derivative identities,
+byte correspondence, query/entry premises and its narrower scope. Decide the
+production size-limit/API path before claiming CLI support for this artifact.</p>
+<p>The enabled query must expose the 45 witnessed indirect edges and preserve
+additional unknowns unless final coverage is justified. Expect new discovered
+instructions, edges and dependencies; do not require the old 329/388/15 counts
+to remain unchanged. Compare native/Rust normalized requests and final results,
+inspect new gaps, and retain the incoming-RDX boundary and unrelated unsupported
+controls. The external inspection alone cannot supply Linux or general-table
+coverage, executed-path evidence or root-cause attribution.</p>
+<p>Write new qualification receipts under <code>evidence/Ariadne/indirect-target-resolution/</code>.
+Retain exact sources, BAP/runtime/helper/decoder/native-build identities, platform,
+input/query hashes, limits, mode/premises, phase timings and named corpus clauses.
+Measure R0's fixed resource/performance criteria on both focused fixtures and
+the expanded real query. Earlier backend timing does not qualify this extension.</p>
+<h2 id="completion-checklist">Completion checklist</h2>
+<ul>
+<li>R0 contract, budgets, schemas, independent oracle and model gates frozen.</li>
+<li>R1/R2 admitted expressions and captured target enumeration pass positive and
+negative cases without losing unresolved alternatives.</li>
+<li>R3 discovery closes or stops conservatively; final coverage is revalidated.</li>
+<li>R4 native/Rust admission and results agree; hostile receipts are rejected.</li>
+<li>R5 enabled product is explicit and evidence-bound; disabled mode remains compatible.</li>
+<li>R6 model/replay/mutation/native/external-capture clauses are individually
+recorded, with no missing tier relabeled as passed.</li>
+</ul>
+<p>All checklist items remain pending. Documentation delivery changes none of
+these acceptance states.</p>
+<footer>Rendered from <a href="../plans/indirect-target-resolution.md">.agents/plans/indirect-target-resolution.md</a>. The Markdown document is canonical. Implementation and resolver qualification remain pending.</footer></main></div></body></html>

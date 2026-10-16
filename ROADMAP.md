@@ -11,23 +11,23 @@
 **Where to go next.**
 
 - [Caller normal-flow coverage](docs/Ariadne/caller-semantic-coverage-design.md)
-  and [active S0–S6 plan](Plans/caller-semantic-coverage.md) — source-qualified
+  and [active S0–S6 plan](.agents/plans/caller-semantic-coverage.md) — source-qualified
   terminal/load support removes the original caller coverage barriers; completing
   the much larger caller dataflow and its native/Rust parity gate remains open.
 
 - [Accepted P4 qualification](docs/Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query) — current v3 corpus and user scope decision; the [historical audit](docs/Ariadne/bap-analysis-core-design.md#documentation-audit) preserves its earlier v2 inventory.
 
 - [Selected I5c address-wrap design](docs/Ariadne/address-wrap-design.md) and
-  [W0–W5 plan](Plans/i5c-address-wrap.md) — the next fault-time arithmetic
+  [W0–W5 plan](.agents/plans/i5c-address-wrap.md) — the next fault-time arithmetic
   question; documentation is written, all implementation/qualification pending.
 
 - [Selected I5b design](docs/Ariadne/zero-base-offset-design.md) and
-  [implementation plan](Plans/completed/i5b-zero-base-offset.md) — the delivered bounded
+  [implementation plan](.agents/plans/completed/i5b-zero-base-offset.md) — the delivered bounded
   zero-base-plus-displacement hypothesis, with B0–B5 implemented and corpus-qualified.
-- [Active plans](Plans/README.md) — turn remaining work into explicit implementation and qualification steps.
+- [Active plans](.agents/plans/README.md) — turn remaining work into explicit implementation and qualification steps.
 - [Assurance decision](docs/Ariadne/semantic-assurance.md) — defines the BAP trust boundary and retired ISA-proof scope.
 
-**What remains unresolved.** The [projection-admission extension](Plans/completed/bap-projection-admission.md)
+**What remains unresolved.** The [projection-admission extension](.agents/plans/completed/bap-projection-admission.md)
 has P0–P4 accepted: v3 capabilities, conservative ordinary continuation and
 source-bound qualification of the selected finite corpus.
 Its [current replacement record](docs/Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query) qualifies
@@ -50,11 +50,11 @@ the [semantic assurance decision](docs/Ariadne/semantic-assurance.md).
 
 ## Guarded captured-target composition — scoped loop closure delivered
 
-The [design](docs/Ariadne/guarded-target-resolution-design.md), [composition plan](Plans/completed/guarded-target-resolution.md) and [loop plan](Plans/completed/loop-aware-target-resolution.md) deliver paired guarded/target preparation, versioned legacy replay and checked local-region induction. [Qualification dated 2026-10-15](evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) closes DA09 and DADD, all nine original incoming-coverage certificates and all 51 missing-start gates, with full native/Rust parity for both completed queries in that earlier stop-limited graph. The loop rule supplies coverage for already witnessed table entries. The caller follow-up below reaches a substantially larger graph; its completed-core and frame-path gates remain open.
+The [design](docs/Ariadne/guarded-target-resolution-design.md), [composition plan](.agents/plans/completed/guarded-target-resolution.md) and [loop plan](.agents/plans/completed/loop-aware-target-resolution.md) deliver paired guarded/target preparation, versioned legacy replay and checked local-region induction. [Qualification dated 2026-10-15](evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) closes DA09 and DADD, all nine original incoming-coverage certificates and all 51 missing-start gates, with full native/Rust parity for both completed queries in that earlier stop-limited graph. The loop rule supplies coverage for already witnessed table entries. The caller follow-up below reaches a substantially larger graph; its completed-core and frame-path gates remain open.
 
 ## Caller normal-flow coverage — S5 qualified, S6 partial
 
-The [design](docs/Ariadne/caller-semantic-coverage-design.md), [active plan](Plans/caller-semantic-coverage.md) and [qualification](evidence/Ariadne/caller-semantic-coverage/20261015/README.md) add control-only INT3/UD terminal certificates, exact guarded MOVAPS loads and explicit `local-normal-completion/v1` scope. S0–S5 pass on the declared final sources/helper; final admission refresh `075602` passes exact request/proof equality for both frames, caller structural recovery/admission and callee full parity. It does not repeat full caller completion. Legacy rules/proofs remain versioned, pending loads commit no vector effect, and exception-handler resumption is outside scope rather than assumed impossible.
+The [design](docs/Ariadne/caller-semantic-coverage-design.md), [active plan](.agents/plans/caller-semantic-coverage.md) and [qualification](evidence/Ariadne/caller-semantic-coverage/20261015/README.md) add control-only INT3/UD terminal certificates, exact guarded MOVAPS loads and explicit `local-normal-completion/v1` scope. S0–S5 pass on the declared final sources/helper; final admission refresh `075602` passes exact request/proof equality for both frames, caller structural recovery/admission and callee full parity. It does not repeat full caller completion. Legacy rules/proofs remain versioned, pending loads commit no vector effect, and exception-handler resumption is outside scope rather than assumed impossible.
 
 Original-dump probe `073143` removes all 30 caller coverage barriers and retains all target, root and premise facts. The initial MOVAPS is aligned under the recorded premises; the later load is still unknown. Caller recovery now decodes 9,589 sites and 11,321 edges, then Rust and native completion exhaust their selected action budgets. The callee completes with full request/state parity and two remaining indirect barriers. NP10 frame listing is unavailable with `missing-frame-query` because no completed caller query exists.
 
@@ -63,7 +63,7 @@ The next acceptance gate is completed caller analysis and full native/Rust state
 ## Investigation direction
 
 The [investigation-layer design](docs/Ariadne/investigation-design.md)
-and [implementation plan](Plans/investigation-layer.md) propose domain questions
+and [implementation plan](.agents/plans/investigation-layer.md) propose domain questions
 above binary-analysis primitives. The first slice explains possible fault-address
 producers with captured evidence, alternatives and missing-evidence requirements.
 The [first fault-address delivery](docs/Ariadne/investigation-design.md#retained-delivery-evidence) now
@@ -85,7 +85,7 @@ and explicit CLI modes are implemented. The [12-gate source/fixture validation](
 passes for its historical sources. The native successor qualifies controlled
 Windows I5a; the later [I4 performance result](docs/Ariadne/workload-performance-design.md#native-investigation-qualification) meets its independent fixed budget; the original Electron case is historical.
 The selected [I5b design](docs/Ariadne/zero-base-offset-design.md) and
-[B0–B5 plan](Plans/completed/i5b-zero-base-offset.md) define a distinct fault-time question:
+[B0–B5 plan](.agents/plans/completed/i5b-zero-base-offset.md) define a distinct fault-time question:
 is the encoded GPR base zero with a nonzero signed displacement? Its first
 profile requires reviewed simple base/displacement decoded facts to agree with
 BAP address evidence. B0–B5 are implemented, with [actual contracts](docs/Ariadne/zero-base-offset-design.md)
@@ -93,7 +93,7 @@ for machine-code debugging; [qualification](docs/Ariadne/zero-base-offset-design
 18 gates and separate source/fixture/controlled Windows timing criteria.
 Historical null derivation and other hypotheses remain later work.
 The next selected [I5c design](docs/Ariadne/address-wrap-design.md) and
-[W0–W5 plan](Plans/i5c-address-wrap.md) assess the unsigned base plus signed
+[W0–W5 plan](.agents/plans/i5c-address-wrap.md) assess the unsigned base plus signed
 encoded displacement before modular reduction. All implementation stages are
 pending. The first profile preserves lower-range fault admission, so it can
 qualify upper-wrap/no-wrap cases while mathematical underflow remains unknown.

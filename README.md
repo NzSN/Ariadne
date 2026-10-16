@@ -10,7 +10,7 @@
 
 **Where to go next.**
 
-- [Accepted BAP v3 admission plan](Plans/completed/bap-projection-admission.md) and
+- [Accepted BAP v3 admission plan](.agents/plans/completed/bap-projection-admission.md) and
   [selected capture qualification](docs/Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query) —
   completed P0–P4, native parity, fixed budgets and the explicit exclusion of
   remaining historical real-Linux clauses.
@@ -18,7 +18,7 @@
   earlier v2 ownership/evidence inventory and links to its v3 successor.
 
 - [I5c address-wrap design](docs/Ariadne/address-wrap-design.md) and
-  [implementation plan](Plans/i5c-address-wrap.md) — selected next fault-time
+  [implementation plan](.agents/plans/i5c-address-wrap.md) — selected next fault-time
   arithmetic assessment; all runtime/model/capture qualification is pending.
 
 - [I5b machine-code debugging contracts](docs/Ariadne/zero-base-offset-design.md) and
@@ -27,7 +27,7 @@
 - [Documentation index](docs/Ariadne/README.md) — find the current interfaces and contracts.
 - [Terminology convention](docs/terminology.md) — shared vocabulary, required
   qualifiers and evidence/acceptance wording.
-- [Plan index](Plans/README.md) — separates remaining work from completed and retired work.
+- [Plan index](.agents/plans/README.md) — separates remaining work from completed and retired work.
 
 **What remains unresolved.** Active Windows I4 is [re-pinned and correctness-checked](docs/Ariadne/workload-performance-design.md#windows-investigation-replacement); the later [performance qualification](docs/Ariadne/workload-performance-design.md#native-investigation-qualification) meets the unchanged 2-second limit at 1,692.696 ms. Controlled Windows I5a is [qualified with the pinned dependency snapshot](docs/Ariadne/zero-address-design.md#native-qualification). Native BAP recovery, dataflow, slicing and finite stateflow are implemented; [Stage 2 qualification](docs/Ariadne/bap-analysis-core-design.md#native-qualification) records passing aggregate acceptance and default adoption. Other hypothesis, object/source-context and cross-capture questions remain later work.
 
@@ -46,11 +46,11 @@ The [BAP adapter](docs/Ariadne/bap-analysis-core-design.md#backend-usage) is now
 backend. It projects a finite typed-BIL subset into byte-register, flag and
 weak-memory effects. LLVM MC 20 remains an independent decode/control reference;
 its semantic selector and automatic effect fallback have been removed.
-The [Stage 1 removal plan](Plans/completed/bap-only-semantics.md) records the requested
+The [Stage 1 removal plan](.agents/plans/completed/bap-only-semantics.md) records the requested
 default change. V3 capability admission replaces generic opcode-name membership.
 Validated ordinary instructions with unknown data effects retain conservative
 continuation and visible gaps; unsupported control or architectural state stops
-explicitly. The [accepted P0–P4 plan](Plans/completed/bap-projection-admission.md) binds the
+explicitly. The [accepted P0–P4 plan](.agents/plans/completed/bap-projection-admission.md) binds the
 current finite qualification and its excluded historical real-Linux clauses.
 Historical [LLVM effect-rule research](docs/Ariadne/operand-effects-design.md#historical-rule-matrix)
 and its formal tests remain reference evidence, distinct from production BAP.
@@ -121,7 +121,7 @@ remaining Rust refinement boundary and reports a repeatable performance
 baseline without claiming a proof or qualified solver optimization.
 
 The [documentation index](docs/Ariadne/README.md) links current guides and
-contracts. The [plan index](Plans/README.md) separates active work, completed
+contracts. The [plan index](.agents/plans/README.md) separates active work, completed
 plans and retired research.
 
 The project uses **Rust 2024 and one root Cargo package**. Rust sources live in
@@ -145,7 +145,7 @@ cargo clippy --offline --locked --all-features --all-targets -- -D warnings
 ```
 
 The build produces `target/release/ariadne-minidump` and
-`target/release/ariadne-ir`. The [source-layout plan](Plans/completed/rust-source-layout.md)
+`target/release/ariadne-ir`. The [source-layout plan](.agents/plans/completed/rust-source-layout.md)
 records the consolidation, and the [implementation guide](docs/implementation.md)
 describes the modules and validation scope.
 The [layout delivery](docs/Ariadne/architecture.md#source-layout-and-development) records source and CLI

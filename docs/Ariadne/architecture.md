@@ -28,7 +28,7 @@ their original qualification scopes.
   native state ownership, checked transport and completed results.
 - [Investigation contracts](investigation-design.md) — query-bound possible
   producers, captured observations and explicit gaps.
-- [Completed layout plan](../../Plans/completed/rust-source-layout.md) — the
+- [Completed layout plan](../../.agents/plans/completed/rust-source-layout.md) — the
   root Cargo organization and its preserved equivalence requirements.
 - [Replay procedure](../../mbt/stage-e/README.md) — current toolchain checks.
 - [Formal-model guide](../../Specs/README.md) and
@@ -39,7 +39,7 @@ ISA or analysis-refinement proof. A dump supplies captured evidence, not an
 execution trace. Missing bytes, unsupported semantics, uncertain memory aliases
 and unresolved control targets can keep results partial. PE/ELF image and ELF
 core readers remain deferred. Qualification is specific to its recorded sources,
-tools and corpus; see the [accepted P4 scope](../../Plans/completed/bap-projection-admission.md).
+tools and corpus; see the [accepted P4 scope](../../.agents/plans/completed/bap-projection-admission.md).
 
 ## Reading this guide
 
@@ -406,7 +406,7 @@ commands are reproduction instructions, not results from this documentation chan
 
 ## Layout delivery (2026-10-02)
 
-The [completed layout plan](../../Plans/completed/rust-source-layout.md) moved
+The [completed layout plan](../../.agents/plans/completed/rust-source-layout.md) moved
 all 86 tracked Rust files at that checkpoint into the root package. The count is
 historical. The [validation record](../../evidence/Ariadne/rust-source-layout-validation.json)
 binds the following retained equivalence checks:

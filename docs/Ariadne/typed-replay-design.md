@@ -16,9 +16,9 @@ strict machine-state/IR report envelopes preserve each machine's contract.
 
 **Where to go next.**
 
-- [Completed initial integration plan](../../Plans/completed/stage-e-mirrorrust-integration.md)
+- [Completed initial integration plan](../../.agents/plans/completed/stage-e-mirrorrust-integration.md)
   — typed ports, negotiated admission and the initial transport corpus.
-- [Completed replay and report plan](../../Plans/completed/stage-e-completion.md)
+- [Completed replay and report plan](../../.agents/plans/completed/stage-e-completion.md)
   — generated corpus, mutations, handoffs and report/CLI delivery.
 - [Replay guide](../../mbt/stage-e/README.md) — regeneration and rerun procedures.
 - [Semantic assurance](semantic-assurance.md#universal-rust-refinement-boundary)
@@ -198,7 +198,7 @@ uncertainty, and reruns minidump regression/mutation gates. Run it with:
 python3 tools/check_stage_e.py
 ```
 
-The [completed plan](../../Plans/completed/stage-e-completion.md) defines the
+The [completed plan](../../.agents/plans/completed/stage-e-completion.md) defines the
 acceptance clauses; the source-bound completion JSON is the acceptance
 authority. These results apply to the recorded source/backend/workload and
 require fresh or exact-identity verification for a changed checkout. They are

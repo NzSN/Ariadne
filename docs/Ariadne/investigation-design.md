@@ -17,8 +17,12 @@ The [2026-10-13 full-dump application attempt](../../evidence/Ariadne/frame-path
 returned unavailable for physical frames 1→0: a runtime-table budget and then
 unsupported vector semantics prevented an admitted active-call anchor.
 The [later vector admission validation](../../evidence/Ariadne/bap-vector-registers/20261013/report.md)
-resolves the namespace refusal; the same instruction still stops at its
-unmodeled alignment-exception branch, leaving the query unavailable.
+resolved that namespace refusal while retaining the alignment stop at that date.
+The [2026-10-15 caller coverage qualification](../../evidence/Ariadne/caller-semantic-coverage/20261015/README.md)
+subsequently removes the original caller barriers and recovers its larger
+structural graph; full caller dataflow still exhausts its action budget, so the
+existing completed-query path mode remains unavailable. Stage 5.1 below proposes
+a separate structural report before dataflow; its SF0–SF6 stages are all planned.
 
 **Why this document exists.** The [real-capture slice](file-reader-design.md#historical-controlled-chromium-capture)
 provides possible origins but leaves their explanation to the investigator.
@@ -30,34 +34,40 @@ and qualification preserve alternatives and missing premises. The frame-path que
 
 **Where to go next.**
 
-- [Active specification synchronization](../../Plans/specification-sync.md) —
+- [Active specification synchronization](../../.agents/plans/specification-sync.md) —
   typed-edge frame-path model, bounded stops and preserved historical receipts.
 
-- [Implementation ledger](../../Plans/investigation-layer.md) — delivery stages,
+- [Implementation ledger](../../.agents/plans/investigation-layer.md) — delivery stages,
   selected address-wrap work and later questions.
-- [Scanner partial-explanation follow-up plan](../../Plans/scanner-partial-explanation.md)
+- [Scanner partial-explanation follow-up plan](../../.agents/plans/scanner-partial-explanation.md)
   — S0–S4 case-specific baseline, memory qualification, recovery-obligation and
   entry-origin review; preserves the existing answer-status contract.
 - [Memory provenance refinement](memory-provenance-refinement.md) — implemented
   Scanner diagnostic separation, bounded writer assessment and backward scalar
   inference; full model/mutation/Scanner qualification remains pending.
-- [Frame-path ledger](../../Plans/investigation-layer.md#bounded-frame-path-question)
+- [Frame-path ledger](../../.agents/plans/investigation-layer.md#bounded-frame-path-question)
   — the selected strict path-count bound, frame anchors and resource limits.
-- [Frame-path implementation plan](../../Plans/frame-path-enumeration.md)
+- [Frame-path implementation plan](../../.agents/plans/frame-path-enumeration.md)
   — F0–F4 contract, captured unwind profile, bounded enumeration and validation.
-- [Justified branch pruning design](justified-branch-pruning-design.md) — proposed
-  instruction-point alignment facts and proof receipts for the remaining MOVAPS stop.
+- [Structural frame report plan](../../.agents/plans/frame-structure-report.md)
+  — proposed Stage 5.1, SF0–SF6 recovery-prefix API, separate report, finite
+  resource policy and qualification before any dataflow or path enumeration.
+- [Caller semantic-coverage design](caller-semantic-coverage-design.md)
+  — later terminal/load admission and the remaining completed-caller dataflow gate.
+- [Justified branch pruning design](justified-branch-pruning-design.md) — checked
+  normal-projection receipts; the later MOVAPS-load alignment remains unknown
+  under the [caller coverage contract](caller-semantic-coverage-design.md).
 - [Zero-address design](zero-address-design.md) and
   [zero-base-plus-displacement design](zero-base-offset-design.md) — distinct
   delivered numeric predicates, evidence and contracts.
 - [Address-wrap design](address-wrap-design.md) and
-  [implementation plan](../../Plans/i5c-address-wrap.md) — selected arithmetic
+  [implementation plan](../../.agents/plans/i5c-address-wrap.md) — selected arithmetic
   predicate, inherited admission limits and pending qualification.
 - First delivery record and
   correctness repairs — historical
   source/fixture evidence and the limit-exhaustion repairs, with the
-  [completed repair plan](../../Plans/completed/investigation-correctness-fixes.md).
-- [Windows replacement plan](../../Plans/completed/i4-windows-repin.md),
+  [completed repair plan](../../.agents/plans/completed/investigation-correctness-fixes.md).
+- [Windows replacement plan](../../.agents/plans/completed/i4-windows-repin.md),
   [performance design](workload-performance-design.md#investigation-performance) and
   [qualification](workload-performance-design.md#native-investigation-qualification) — active exact-query correctness
   and independent timing clauses.
@@ -70,7 +80,9 @@ Later source/tool changes require renewed or complete identity-verified evidence
 Object/source context, historical execution and cross-capture questions remain
 open. The bounded frame-path implementation admits a finite captured-unwind profile
 and separately bound instruction graphs; general unwinding and broader capture
-qualification remain open. Full-memory capture alone does not supply a trace.
+qualification remain open. Caller semantic-coverage S6 and frame-path F4 remain
+incomplete; the proposed structural mode does not close either gate.
+Full-memory capture alone does not supply a trace.
 Possible producers and numeric conclusions do not prove a UAF, executed
 path or general root cause.
 
@@ -112,7 +124,7 @@ flowchart TD
 
 The current first-question implementation consumes the native-default or Rust-reference pipeline's
 completed facts. Dashed inputs in the diagram are proposed capabilities.
-The separate [Stage 2 migration](../../Plans/completed/bap-integration.md#stage-2-bap-analysis-core)
+The separate [Stage 2 migration](../../.agents/plans/completed/bap-integration.md#stage-2-bap-analysis-core)
 now supplies the default native analysis. Moving that computation is
 infrastructure work; the delivered zero-base-plus-displacement question is a separate domain capability.
 
@@ -140,7 +152,7 @@ instruction sequence or proof that the faulting memory operation committed.
 
 ## Investigation module and interface
 
-The [Rust source-layout consolidation plan](../../Plans/completed/rust-source-layout.md)
+The [Rust source-layout consolidation plan](../../.agents/plans/completed/rust-source-layout.md)
 places the implemented module in `src/investigation/` within the root Cargo
 package. Its initial
 interface consumes a bound normalized investigation context produced from the
@@ -272,7 +284,7 @@ the answer is `unavailable`, `truncated=true`, with no selected address or origi
 and an explicit budget gap. When that evidence and a supported address are kept
 but expansion is incomplete, the answer is `partial`, `truncated=true`.
 Invalid question sites/access indices still fail independently of budgets.
-The [correctness-fix plan](../../Plans/completed/investigation-correctness-fixes.md) describes
+The [correctness-fix plan](../../.agents/plans/completed/investigation-correctness-fixes.md) describes
 the boundary regressions and qualification repair.
 
 ## CLI and publication
@@ -333,8 +345,8 @@ cannot establish full Windows acceptance.
 | Question | Additional evidence or implementation needed |
 | --- | --- |
 | Does the selected access start at virtual address zero? | The [implemented I5a contract](zero-address-design.md) binds validated exception-context operands and exact site/access association under the admitted scalar MOV profile. Controlled Windows acceptance is recorded in the [native qualification](zero-address-design.md#native-qualification). No null-pointer root-cause claim. |
-| Is the fault-time encoded base zero with a nonzero displacement? | Implemented [zero-base-plus-displacement design and contract](zero-base-offset-design.md) and [B0–B5 plan](../../Plans/completed/i5b-zero-base-offset.md); simple base/displacement profile, decoded-role evidence and valid context. [Aggregate qualification](zero-base-offset-design.md#retained-qualification) passes within the declared finite corpus; historical null derivation is outside its claim. |
-| Did the selected base-plus-signed-displacement calculation wrap? | Selected [I5c design](address-wrap-design.md) and [W0–W5 plan](../../Plans/i5c-address-wrap.md), with all implementation/model/capture stages pending. Lower-range fault admission limits v1 definite answers to upper wrap and no wrap. |
+| Is the fault-time encoded base zero with a nonzero displacement? | Implemented [zero-base-plus-displacement design and contract](zero-base-offset-design.md) and [B0–B5 plan](../../.agents/plans/completed/i5b-zero-base-offset.md); simple base/displacement profile, decoded-role evidence and valid context. [Aggregate qualification](zero-base-offset-design.md#retained-qualification) passes within the declared finite corpus; historical null derivation is outside its claim. |
+| Did the selected base-plus-signed-displacement calculation wrap? | Selected [I5c design](address-wrap-design.md) and [W0–W5 plan](../../.agents/plans/i5c-address-wrap.md), with all implementation/model/capture stages pending. Lower-range fault admission limits v1 definite answers to upper wrap and no wrap. |
 | What about historical null derivation, earlier arithmetic errors or noncanonical addresses? | Separate later hypotheses with their own definitions and architectural/context premises; the selected I5c question does not establish historical execution or general canonicality. |
 | Which possible producers and inputs contribute to the selected address operand? | Delivered by the [first-question contract](#binding-and-result-contract). Selecting the actually executed alternative still needs additional evidence. |
 | Is a use-after-free or object-lifetime violation supported? | Object identity and lifetime evidence such as retained allocator/runtime events; a suspicious pointer or slice alone is insufficient. |
@@ -346,6 +358,125 @@ cannot establish full Windows acceptance.
 This roadmap adds domain questions above existing analyses. It does not claim
 automatic root-cause proof, backward execution reconstruction or unbounded
 cross-thread reasoning. Those require separately supported evidence and models.
+
+## Structural frame report before dataflow
+
+**Stage 5.1 — proposed.** This is the canonical contract for publishing bounded
+frame-local recovered structure when full reaching-definition analysis is too
+expensive. The [SF0–SF6 implementation plan](../../.agents/plans/frame-structure-report.md)
+records execution and acceptance; every stage is planned. This section defines
+neither a delivered API nor new qualification of the existing frame-path mode.
+
+### Prepared input and recovery prefix
+
+Each reportable frame requires a successfully prepared **final normalized BAP
+request**, its exact snapshot/query identity and existing captured-byte,
+guard/terminal, target/loop and paired-composition validation. Candidate graphs,
+pending proof inputs and invalid receipts cannot substitute for that request.
+Preserve the declared entry roots, capture-only reads, semantic VAs, accepted
+normal-completion scope, proof epochs and explicit residuals. LLVM MC remains an
+independent decode/control reference and supplies no fallback effects.
+
+A new privately constructed, standard-library-only `RecoveryResult` in proposed
+`src/recovery.rs` owns the validated immutable request and structural result.
+It runs the existing `Analyzer` deterministic `Visit` prefix and stops **before
+`FinishRecovery`**, including when `pending` is already empty. Thus a drained
+result remains in `Phase::Recover`; it is not a completed `AnalysisResult`.
+Do not execute dataflow/slicing actions, compute origins, call
+`NativeAnalyzer.complete`, or implement `AnalysisView` for the new core type.
+Existing completed-analysis consumers and the old frame-path binder retain
+their current input contracts and cannot consume this result.
+
+The first structural producer is `rust-recovery/v1`; retain BAP semantic-input
+producer/profile/helper identities separately. Native full analysis remains
+the current default on existing routes. Choosing Rust for this bounded prefix
+does not select or qualify a replacement full-analysis backend.
+
+### Separate frame binding and report
+
+Proposed `BoundFrameStructure` binds frame activations and their recovery results;
+`FrameStructureReport` publishes the separate `ariadne.frame-structure/v1`
+schema. Construction and replay compare final normalized requests, capture
+evidence and required proofs rather than trusting a serialized graph. Retain
+snapshot, thread, frame-chain, function/entry, query, producer, policy and
+evidence identities. Recursive activations use distinct frame-qualified nodes.
+
+Track preparation outcome separately from recovery status. A successfully
+prepared frame reports recovery `drained` or `work_stopped`, with visited,
+decoded, typed edges, provenance, obligations, pending frontier, counters and
+stop reasons. Source/semantic gaps are independent of whether work drained;
+drained recovery can still contain failed decodes or unresolved targets.
+Invalid proof, identity, byte or topology evidence is a hard validation error,
+not a gap or resource stop. A hard preparation `LimitReached` can publish only
+a typed diagnostic for that frame: it has no sealed request/CFG to bind.
+Retain other independently prepared frames when their entries are independently
+known; a failed frame cannot manufacture an entry for its neighbor.
+
+Distinguish pending recovery work, a visited failed endpoint, opaque-call
+interiors, guard/terminal residuals, unresolved indirect control and edges that
+leave the declared function. Include their evidence and boundary status without
+turning absent nodes into dead ends. Call edges remain visible context, while
+local recovery follows summary continuations. No completed origin, value-flow,
+slice, path-count or all-path reachability claim belongs to this report.
+
+### Cross-frame evidence
+
+Retain the captured unwind chain and active-call observations independently of
+graph composition. A frame-stack relation is an annotation, not a `CALL` edge.
+Stage 5.1 can add a cross-frame direct-call link only when captured reached
+`E8` call bytes, the saved return continuation and the independently validated
+child entry agree under the accepted frame profile. Missing, failed, ambiguous,
+pending or unsupported endpoints remain explicit link diagnostics. Neither a
+saved return address nor adjacent stack frames alone proves such an edge.
+These structural links state possibilities under premises, not executed history.
+
+### Finite host policy and self-contained evidence
+
+The new mode has one finite host-trusted policy, checked before work,
+allocation, proof replay and publication. It independently bounds unwind and
+runtime-table entry work; preparation starts/work; captured sources, proof and
+load bytes; graph nodes/edges; recovery actions and replay work; and published
+bytes. Overflow uses checked arithmetic. Producer receipts record consumed
+work and their own limits but cannot raise host caps. Existing 8,192-node,
+4 MiB evidence and 8 MiB report clamps do not become new-mode clamps.
+SF0 freezes finite defaults after sizing the retained payload and all required
+evidence, with reviewed headroom; larger explicit values remain finite and
+subject to the host policy. No unbounded default is implied.
+
+V1 evidence is self-contained, using a deduplicated dictionary of captured
+sources and proof/load records with validated typed references. Bind every
+reference to its owner, query, semantic role and byte extent; reject missing,
+duplicate/conflicting, wrong-owner or out-of-domain references. Loading and
+replay enforce host limits before allocating the referenced payload. If the
+evidence or publication envelope cannot fit, return a typed diagnostic with
+the affected scope and counters. Do not clip a graph or drop required proofs
+and then publish the remainder as a trusted sealed graph.
+
+### Opt-in usage and acceptance boundary
+
+The proposed CLI is `--frame-structure N:M`, with `N >= M >= 0`, and optional
+strict JSON policy file `--frame-structure-limits <policy.json>`. It is independent of
+`--list-frame-paths` and requires no `NP`. Track explicit flag use: reject an
+explicit `--analysis-backend` and incompatible full-analysis, entry/seed,
+explanation, assessment and path-enumeration flags in this mode. The existing
+default `bap` applies only to existing full-analysis routes. Shared capture,
+helper and evidence options retain their validated preparation roles.
+
+Stage 5.1 adds no SCC summaries, path enumeration, new target resolver,
+value-flow solver or resumable preparation checkpoint. Its controls cover
+empty/drained prefixes, work stops, failed endpoints, typed boundaries,
+tampered evidence, independent-frame survival and every resource dimension.
+Qualification must show that no `FinishRecovery`/dataflow action occurs and
+that default full-analysis behavior and old report replay remain intact.
+
+The retained [final-helper refresh `075602`](../../evidence/Ariadne/caller-semantic-coverage/20261015/README.md#original-dump-result)
+is a structural control oracle: caller 9,590 visited, 9,589 decoded and 11,321
+edges; the later MOVAPS load at `0x00007ff7744035c9` stays unknown; callee 778
+decoded and 895 edges with its two indirect barriers. Compare these values only
+when frozen requests and required evidence are identical; changed inputs need
+their own baseline. That refresh did not attempt caller completion or fresh
+path enumeration. A future Stage 5.1 pass will not complete caller-coverage S6,
+frame-path F4, full native/Rust state parity or an executed-history claim.
 
 ## Bounded frame-to-frame path listing
 
@@ -477,12 +608,12 @@ relevant access/instance, including unresolved paths, under the
 
 ### Implementation and acceptance boundary
 
-The [F0–F4 implementation plan](../../Plans/frame-path-enumeration.md) records
+The [F0–F4 implementation plan](../../.agents/plans/frame-path-enumeration.md) records
 the implemented model source, finite captured unwind profile, API/CLI and
 validation work without extending an existing report schema. The
 [source-bound validation record](../../evidence/Ariadne/frame-paths/source-validation.json)
 separates passing finite tiers from pending full qualification;
-the [investigation ledger](../../Plans/investigation-layer.md#bounded-frame-path-question)
+the [investigation ledger](../../.agents/plans/investigation-layer.md#bounded-frame-path-question)
 records that prerequisite. Independent controls must cover a two-way diamond,
 insufficient list capacity, `NP = 1`, malformed `NP`/frame indices, equal endpoints,
 recursive activations, loops, uncertain indirect calls, opaque summaries, missing
@@ -548,7 +679,7 @@ remaining evidence to universal correctness or packaged-release acceptance.
 
 These dated records retain their source/tool identities and original decisions.
 They are historical evidence, not fresh tests of this documentation checkout.
-The [implementation ledger](../../Plans/investigation-layer.md) and
+The [implementation ledger](../../.agents/plans/investigation-layer.md) and
 [evidence guide](../../evidence/Ariadne/README.md) explain stage scope and reuse.
 
 | Record | Exercised scope and retained decision | Limits and successor |

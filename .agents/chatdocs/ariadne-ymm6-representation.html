@@ -1,0 +1,139 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>What “YMM6 representation” means in this dump</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f7f8fa;color:#172337;font:17px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:1060px;margin:0 auto;padding:40px 44px 80px;background:white}h1{font-size:2.1rem;line-height:1.2;margin:0 0 24px}h2{font-size:1.45rem;margin:48px 0 16px;padding-top:16px;border-top:1px solid #d9e0e7}h3{font-size:1.1rem;margin-top:28px}p,li{max-width:90ch}a{color:#075caa}code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}code{font-size:.88em;background:#f0f3f6;padding:2px 4px;border-radius:3px}pre{overflow:auto;background:#f0f3f6;border-left:3px solid #7890a8;padding:18px;line-height:1.55;font-size:.88rem}pre code{background:none;padding:0}table{width:100%;border-collapse:collapse;font-size:.94rem;margin:20px 0}th,td{padding:11px 12px;text-align:left;vertical-align:top;border-bottom:1px solid #d9e0e7}th{background:#f0f3f6;font-weight:650}.demo{margin:28px 0;padding:24px;border:1px solid #b8c8d7;border-radius:8px;background:#fafcfe}.demo h3{margin-top:0}.caption,figcaption,.stack-label{color:#526274;font-size:.9rem}.lookup-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 28px;margin-top:18px}.lookup-grid div{border-bottom:1px solid #d9e0e7;padding:8px 0}.lookup-grid small{display:block;color:#526274}.lookup-grid strong{font-family:ui-monospace,Consolas,monospace;font-size:.95rem;overflow-wrap:anywhere}input[type=number]{width:90px;padding:8px;font-size:1rem;margin-left:12px;border:1px solid #8ca2b7;border-radius:4px}input[type=range]{accent-color:#075caa;min-width:100px;flex:1}.demo>input[type=range]{width:100%;display:block;margin:18px 0}.cfg{margin:26px 0}.cfg svg{width:100%;height:auto}.edges path{fill:none;stroke:#475569;stroke-width:2;marker-end:url(#arrow)}.node rect{fill:#f0f3f6;stroke:#9babbc;rx:6}.node text{text-anchor:middle;fill:#172337;font:15px system-ui,sans-serif}.entry rect{fill:#e8f1fb;stroke:#5b8fbe}.later rect{fill:#fff2e1;stroke:#b78646}.edge-label{font:14px system-ui;fill:#475569}.stack-layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}.stack-label{margin:10px 0}.stack-item{border:1px solid #809ab3;padding:14px;margin:10px 0;background:#e8f1fb;min-height:55px;border-radius:5px}.stack-item.later{background:#fff2e1;border-color:#b78646}.stack-item.empty{color:#66788a;background:white;border-style:dashed}.state{margin:0;padding:12px 0}.state dt{font-weight:650;margin:0 0 3px}.state dd{margin:0 0 14px;overflow-wrap:anywhere}.step-head{display:flex;gap:14px;align-items:center;margin:15px 0}.step-head span{color:#526274;font-size:.9rem}.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:20px}button{font:inherit;font-size:.95rem;background:#075caa;color:white;border:1px solid #075caa;padding:9px 15px;border-radius:5px;cursor:pointer}button:disabled{background:#e7ecf1;color:#68798a;border-color:#c2cdd7;cursor:default}button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #e4a237;outline-offset:3px}.advanced{margin-top:44px;padding:22px;background:#f8fafc;border:1px solid #cbd5df;border-radius:6px}.advanced summary{font-weight:650;cursor:pointer}.advanced h2{border:0;margin-top:20px}.top-note{font-size:.9rem;color:#526274;margin:0 0 25px}.top-note a{margin-right:16px}@media(max-width:720px){main{padding:26px 18px 50px}h1{font-size:1.7rem}.stack-layout,.lookup-grid{grid-template-columns:1fr}.demo{padding:16px}table{font-size:.85rem}th,td{padding:8px}.cfg{overflow:auto}.cfg svg{min-width:780px}.controls input{width:100%;order:3;flex-basis:100%}}@media print{body{background:white}main{max-width:none;padding:0}.controls,.top-note{display:none}.demo{break-inside:avoid}details>summary{display:none}}</style></head><body><main><p class="top-note"><a href="ariadne-reports-index.html">Chat report index</a> · <a href="ariadne-ymm6-representation.md">Markdown</a></p><h1 id="what-ymm6-representation-means-in-this-dump">What “YMM6 representation” means in this dump</h1>
+<blockquote>
+<p><strong>Archived chat document.</strong> Restored on 2026-10-16 from the original conversation records. Statements such as “current”, “latest” and “fresh” refer to the original report date. Restoration does not rerun analysis or qualification.</p>
+</blockquote>
+<p><strong>Update, 2026-10-13:</strong> Ariadne now admits the finite XMM/YMM namespace under profile v4. The original refusal explanation below is historical; the captured MOVAPS still stops at its unmodeled alignment-exception branch. See the <a href="../../evidence/Ariadne/bap-vector-registers/20261013/report.md">fresh validation record</a>.</p>
+<p><code>YMM6</code> is the <strong>256-bit architectural vector-register variable used by BAP's
+intermediate representation</strong>. For the instruction in this dump, BAP reads its
+lower 128 bits to represent <code>XMM6</code>.</p>
+<p>The captured instruction still performs a <strong>128-bit / 16-byte store</strong>. Seeing
+<code>YMM6</code> in the lifted expression does not turn it into a 256-bit AVX instruction.</p>
+<h2 id="xmm6-and-ymm6-share-register-storage">XMM6 and YMM6 share register storage</h2>
+<p><code>XMM6</code> names the lower 128 bits of <code>YMM6</code>. BAP can describe both widths using
+one register variable and a bit selection:</p>
+<pre><code class="language-text">                    YMM6: 256 bits
+             255                     128 127                       0
+             +--------------------------+--------------------------+
+             |       upper 128 bits     |       lower 128 bits     |
+             +--------------------------+--------------------------+
+                                          &lt;------ XMM6 ----------&gt;
+
+XMM6 = YMM6[127:0]
+</code></pre>
+<p>The source register number is six; “6” does not select a vector element.
+Intel's MOVAPS documentation distinguishes the legacy 128-bit XMM operation
+from the 256-bit YMM forms. The legacy store copies 128 bits and requires a
+16-byte-aligned memory destination. <a href="https://www.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-software-developer-vol-2b-manual.pdf#page=51">Intel instruction reference, MOVAPS</a>.</p>
+<h2 id="the-exact-instruction-and-bap-expression">The exact instruction and BAP expression</h2>
+<p>In <code>dump_03958DA4FCA844A786262A1053</code>:</p>
+<pre><code class="language-asm">; VA 0x00007ff7744033b3
+; bytes: 0f 29 b4 24 40 02 00 00
+movaps [rsp+0x240], xmm6
+</code></pre>
+<p>Its data effect can be written as:</p>
+<pre><code class="language-text">address = RSP + 0x240
+value   = low_128_bits(YMM6)
+mem'    = store_128_bits_little_endian(mem, address, value)
+</code></pre>
+<p>This expression describes dependencies; it does not supply a concrete captured
+value for <code>YMM6</code> or an earlier value of <code>RSP</code>.</p>
+<p>The actual typed BAP JSON contains this source expression:</p>
+<pre><code class="language-json">{
+  &quot;kind&quot;: &quot;cast&quot;,
+  &quot;op&quot;: 0,
+  &quot;width&quot;: 128,
+  &quot;arg&quot;: {
+    &quot;kind&quot;: &quot;var&quot;,
+    &quot;var&quot;: {
+      &quot;name&quot;: &quot;YMM6&quot;,
+      &quot;index&quot;: 0,
+      &quot;virtual&quot;: false,
+      &quot;width&quot;: 256,
+      &quot;type&quot;: &quot;imm&quot;
+    }
+  }
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name: YMM6</code></td>
+<td>Architectural vector register six.</td>
+</tr>
+<tr>
+<td><code>width: 256</code></td>
+<td>The register variable is a 256-bit bit vector.</td>
+</tr>
+<tr>
+<td><code>virtual: false</code></td>
+<td>Architectural state, rather than a temporary invented during lifting.</td>
+</tr>
+<tr>
+<td><code>type: imm</code></td>
+<td>BAP's bit-vector type; it does not mean this register is a literal constant.</td>
+</tr>
+<tr>
+<td>Cast <code>op: 0</code>, <code>width: 128</code></td>
+<td><code>BAP_CAST_LOW</code>: select the lower 128 bits.</td>
+</tr>
+</tbody>
+</table>
+<p>The enclosing store has <code>width: 128</code>. The packaged C API defines cast opcode
+zero as <code>BAP_CAST_LOW</code> in <code>bap.h</code> (historical local header: <code>tmp/bap-setup/stable/usr/local/include/bap.h:706</code>; this build artifact is not part of the archive).
+Upstream BAP likewise maps 128-bit vector operands through
+<code>bits2ymm128e</code>; this source is supporting context, while the reproduced AST
+below is evidence for our pinned helper. <a href="https://github.com/BinaryAnalysisPlatform/bap/blob/master/plugins/x86/x86_lifter.ml#L39-L68">BAP x86 lifter</a>.</p>
+<p>The full lift also includes an alignment condition that raises exception 13
+(<code>#GP</code>) when <code>(RSP + 0x240) &amp; 0xf</code> is nonzero. That exceptional behavior is part
+of the lifted semantics; representing the instruction as a no-op would lose
+both its memory write and its alignment exception.</p>
+<h2 id="why-ariadne-rejects-this-representation">Why Ariadne rejects this representation</h2>
+<p>BAP successfully decodes and lifts the instruction. Ariadne's current typed
+admission accepts architectural GPRs, <code>RIP</code>, selected flags and memory, but does
+not admit a vector-register namespace such as <code>YMM6</code>. It encounters the nested
+256-bit architectural variable and returns:</p>
+<pre><code class="language-text">unmodeled architectural namespace/type: YMM6
+</code></pre>
+<p>The current decision is in <a href="../../src/bap/admission.rs#L69">admission.rs</a>.
+The subsequent dependency projection also has no vector-register location
+mapping in <a href="../../src/bap/projection.rs#L76">projection.rs</a>.
+Although the AST parser understands widths up to 256 bits, that does not
+establish architectural vector support.</p>
+<p>The failure is classified as <code>UnsupportedControl</code>, producing a conservative
+stop in the admitted graph. This classification does not mean MOVAPS is a jump;
+the reference decoder and BAP's instruction properties describe ordinary
+control. It prevents continuation under semantics Ariadne has not admitted.
+Consequently, caller discovery stops before reaching the active call needed
+for frame-to-frame path enumeration.</p>
+<p>Supporting this properly requires register aliases, vector dependency locations
+and memory effects, together with the applicable exception/admission contract.
+Allowing the name alone is insufficient. XMM unwind support is a separate
+frame-recovery concern.</p>
+<h2 id="verification-and-further-reading">Verification and further reading</h2>
+<p>On 2026-10-13, I lifted these exact eight bytes with the existing local helper,
+without rebuilding or changing source. The helper SHA-256 matches the earlier
+dump diagnostic:</p>
+<pre><code class="language-text">helper: 6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf
+BIL:    fe37ab3c15e9e498522eb0cf192ed93706ea1e2dcc7339a9305434adaa10757a
+</code></pre>
+<p>The canonical serialized BIL hash also exactly matches the diagnostic, verifying
+the <code>YMM6 → low 128 bits → 128-bit store</code> representation above.</p>
+<ul>
+<li><a href="ariadne-ymm6/movaps-bil.json">Reproduced typed BIL</a>.</li>
+<li><a href="ariadne-ymm6/lift-response.jsonl">Raw lift response</a>.</li>
+<li><a href="../../evidence/Ariadne/frame-paths/dump03958-20261013/report.md">Dump application report</a>.</li>
+<li><a href="../../evidence/Ariadne/frame-paths/dump03958-20261013/blocker-instruction.json">Original instruction diagnostic</a>.</li>
+</ul>
+<h2 id="context-and-follow-up">Context and follow-up</h2>
+<p><strong>Status.</strong> Restored historical chat explanation. The original text and its evidence scope remain dated.</p>
+<p><strong>Why this document exists.</strong> It preserves an explanation presented through <code>wslview</code>; the <a href="../../../skills/skills/productivity/chatdoc/SKILL.md">chat-document convention</a> gives it a durable home.</p>
+<p><strong>What this document establishes.</strong> The body records the mechanism, observations and limits stated in that conversation.</p>
+<p><strong>Where to go next.</strong> The <a href="ariadne-reports-index.md">chat report index</a> links related reports; the <a href="../../docs/Ariadne/semantic-assurance.md">assurance contract</a> defines current responsibilities.</p>
+<p><strong>What remains unresolved.</strong> Restoration does not verify the report against the current implementation or refresh its original qualification.</p>
+</main></body></html>

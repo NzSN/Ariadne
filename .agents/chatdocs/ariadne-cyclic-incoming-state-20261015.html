@@ -1,0 +1,73 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Why `cyclic-incoming-state` remains</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f7f8fa;color:#172337;font:17px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:1060px;margin:0 auto;padding:40px 44px 80px;background:white}h1{font-size:2.1rem;line-height:1.2;margin:0 0 24px}h2{font-size:1.45rem;margin:48px 0 16px;padding-top:16px;border-top:1px solid #d9e0e7}h3{font-size:1.1rem;margin-top:28px}p,li{max-width:90ch}a{color:#075caa}code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}code{font-size:.88em;background:#f0f3f6;padding:2px 4px;border-radius:3px}pre{overflow:auto;background:#f0f3f6;border-left:3px solid #7890a8;padding:18px;line-height:1.55;font-size:.88rem}pre code{background:none;padding:0}table{width:100%;border-collapse:collapse;font-size:.94rem;margin:20px 0}th,td{padding:11px 12px;text-align:left;vertical-align:top;border-bottom:1px solid #d9e0e7}th{background:#f0f3f6;font-weight:650}.demo{margin:28px 0;padding:24px;border:1px solid #b8c8d7;border-radius:8px;background:#fafcfe}.demo h3{margin-top:0}.caption,figcaption,.stack-label{color:#526274;font-size:.9rem}.lookup-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 28px;margin-top:18px}.lookup-grid div{border-bottom:1px solid #d9e0e7;padding:8px 0}.lookup-grid small{display:block;color:#526274}.lookup-grid strong{font-family:ui-monospace,Consolas,monospace;font-size:.95rem;overflow-wrap:anywhere}input[type=number]{width:90px;padding:8px;font-size:1rem;margin-left:12px;border:1px solid #8ca2b7;border-radius:4px}input[type=range]{accent-color:#075caa;min-width:100px;flex:1}.demo>input[type=range]{width:100%;display:block;margin:18px 0}.cfg{margin:26px 0}.cfg svg{width:100%;height:auto}.edges path{fill:none;stroke:#475569;stroke-width:2;marker-end:url(#arrow)}.node rect{fill:#f0f3f6;stroke:#9babbc;rx:6}.node text{text-anchor:middle;fill:#172337;font:15px system-ui,sans-serif}.entry rect{fill:#e8f1fb;stroke:#5b8fbe}.later rect{fill:#fff2e1;stroke:#b78646}.edge-label{font:14px system-ui;fill:#475569}.stack-layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}.stack-label{margin:10px 0}.stack-item{border:1px solid #809ab3;padding:14px;margin:10px 0;background:#e8f1fb;min-height:55px;border-radius:5px}.stack-item.later{background:#fff2e1;border-color:#b78646}.stack-item.empty{color:#66788a;background:white;border-style:dashed}.state{margin:0;padding:12px 0}.state dt{font-weight:650;margin:0 0 3px}.state dd{margin:0 0 14px;overflow-wrap:anywhere}.step-head{display:flex;gap:14px;align-items:center;margin:15px 0}.step-head span{color:#526274;font-size:.9rem}.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:20px}button{font:inherit;font-size:.95rem;background:#075caa;color:white;border:1px solid #075caa;padding:9px 15px;border-radius:5px;cursor:pointer}button:disabled{background:#e7ecf1;color:#68798a;border-color:#c2cdd7;cursor:default}button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #e4a237;outline-offset:3px}.advanced{margin-top:44px;padding:22px;background:#f8fafc;border:1px solid #cbd5df;border-radius:6px}.advanced summary{font-weight:650;cursor:pointer}.advanced h2{border:0;margin-top:20px}.top-note{font-size:.9rem;color:#526274;margin:0 0 25px}.top-note a{margin-right:16px}@media(max-width:720px){main{padding:26px 18px 50px}h1{font-size:1.7rem}.stack-layout,.lookup-grid{grid-template-columns:1fr}.demo{padding:16px}table{font-size:.85rem}th,td{padding:8px}.cfg{overflow:auto}.cfg svg{min-width:780px}.controls input{width:100%;order:3;flex-basis:100%}}@media print{body{background:white}main{max-width:none;padding:0}.controls,.top-note{display:none}.demo{break-inside:avoid}details>summary{display:none}}</style></head><body><main><p class="top-note"><a href="ariadne-reports-index.html">Chat report index</a> · <a href="ariadne-cyclic-incoming-state-20261015.md">Markdown</a></p><h1 id="why-cyclic-incoming-state-remains">Why <code>cyclic-incoming-state</code> remains</h1>
+<blockquote>
+<p><strong>Archived chat document.</strong> Restored on 2026-10-16 from the original conversation records. Statements such as “current”, “latest” and “fresh” refer to the original report date. Restoration does not rerun analysis or qualification.</p>
+</blockquote>
+<p><strong>It means the target resolver encountered a loop in the possible incoming control flow and could not certify coverage across that loop.</strong> The captured jump-table targets are available; the missing part is a proof covering every incoming state at the jump.</p>
+<p>For dump <code>dump_03958DA4FCA844A786262A1053</code>, the latest retained probe <code>dump-20261014T121127</code> reports:</p>
+<table>
+<thead>
+<tr>
+<th>Caller dispatch</th>
+<th style="text-align:right">Known targets retained</th>
+<th>Complete?</th>
+<th>Remaining reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0x00007ff77440da09</code></td>
+<td style="text-align:right">4</td>
+<td><code>false</code></td>
+<td><code>cyclic-incoming-state</code></td>
+</tr>
+<tr>
+<td><code>0x00007ff77440dadd</code></td>
+<td style="text-align:right">4</td>
+<td><code>false</code></td>
+<td><code>cyclic-incoming-state</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-incoming-state-means">What “incoming state” means</h2>
+<p>An incoming edge tells us which instruction can precede the jump. An incoming state includes the register values and accumulated branch constraints with which execution could arrive there. Returning to the same instruction address after a loop does not establish that those values and constraints are unchanged.</p>
+<p>The resolver works backward from the indirect jump: it reconstructs the target expression, substitutes earlier register definitions and collects branch predicates. A complete certificate must cover every incoming candidate context, either through a checked bounded frontier or a checked exclusion. One successfully resolved route does not close an uncovered loop alternative. See <a href="../../src/bap/target_resolution.rs#L1040">reverse traversal</a>, <a href="../../src/bap/target_resolution.rs#L1204">frontier meaning</a> and <a href="../../src/bap/target_resolution.rs#L1684">complete-coverage replay</a>.</p>
+<h2 id="the-concrete-loop-in-this-dump">The concrete loop in this dump</h2>
+<p>At the original dispatch, the captured relative-32 table has base <strong><code>0x00007ff77ba909a8</code></strong>. Entry <strong>3</strong> selects <strong><code>0x00007ff77440d9eb</code></strong>, which leads back toward the same dispatch:</p>
+<pre><code class="language-text">0x00007ff77440da09   jmp r8
+         │ table entry 3
+         ▼
+0x00007ff77440d9eb   mov rcx,[rcx]                 ← RCX is reassigned
+0x00007ff77440d9ee   test rcx,rcx
+0x00007ff77440d9f1   jz ...                       ← null alternative exits
+0x00007ff77440d9f7   movzx r8d,byte ptr [rcx+0x78] ← potentially a new address
+0x00007ff77440d9fc   cmp r8,9
+0x00007ff77440da00   ja ...                       ← other branch also retained
+0x00007ff77440da02   movsxd r8,dword ptr [rdx+r8*4]
+0x00007ff77440da06   add r8,rdx
+         │
+         └───────────────────────────────────────► same dispatch
+</code></pre>
+<p>The mirror dispatch <code>0x00007ff77440dadd</code> has the same structure: table base <strong><code>0x00007ff77ba909d0</code></strong>, entry <strong>3</strong>, and pointer update <strong><code>mov rcx,[rcx]</code> at <code>0x00007ff77440dabf</code></strong>.</p>
+<p>The pointer update is the relevant state change. If the first iteration uses pointer <code>p</code>, the next can use the pointer loaded from <code>[p]</code>. The selector loads can therefore be from <code>[p+0x78]</code> and a different address on the next iteration. No invariant establishes that their values agree. The short cycle contains no calls or stores, but it writes an input register used to address the selector load.</p>
+<p>These loops are reconstructed from captured instructions, candidate controls and table-entry receipts. They describe structural possibilities, not an observed execution trace. The report does not retain a transcript of every rejected reverse context.</p>
+<h2 id="the-exact-implementation-rule">The exact implementation rule</h2>
+<p>When extending a reverse path, the current implementation records <code>cyclic-incoming-state</code> if either:</p>
+<ol>
+<li>The incoming predecessor is the queried dispatch itself; or</li>
+<li>The reverse path repeats an instruction and the enabled local-cycle rule cannot validate it.</li>
+</ol>
+<p>That branch sets <code>complete = false</code> and stops exploring that context. It preserves targets found through the other checked contexts. See <a href="../../src/bap/target_resolution.rs#L1216">the rejection branch</a> and <a href="../../src/bap/target_resolution.rs#L1275">retained-target publication</a>.</p>
+<p>The local-cycle rule supports one bounded simple-cycle unfolding. Its stability check rejects calls, unknown memory writes, original BIL stores, missing transfers and writes/clobbers of registers used in symbolic load addresses. Consequently, the <code>mov rcx,[rcx]</code> loop does not satisfy this stability rule. The return-to-dispatch check is also an explicit limitation of the current traversal. See <a href="../../src/bap/target_resolution.rs#L874">cycle shape</a>, <a href="../../src/bap/target_resolution.rs#L896">stability checks</a> and <a href="../../native/bap-core/capture.ml#L421">native replay checks</a>.</p>
+<h2 id="a-smaller-cycle-was-successfully-discharged">A smaller cycle was successfully discharged</h2>
+<p>Each dispatch also retains an <code>infeasible</code> receipt for a different cycle. That smaller cycle repeats the selector test <strong>without</strong> executing <code>mov rcx,[rcx]</code>. It requires the same unchanged byte load to be both greater than 9 on one pass and at most 9 on another. With the load-address and memory stability checks satisfied, the resolver can exclude that contradictory context.</p>
+<p>Thus, the remaining reason does not represent a blanket rejection of all loops. It represents the incoming cyclic contexts left uncovered after the supported local reasoning.</p>
+<h2 id="what-would-close-the-remaining-reason">What would close the remaining reason</h2>
+<p>A suitable follow-up would prove an invariant separating the stable <strong>RDX table base</strong> from the changing <strong>RCX object pointer</strong>, preserve the selector bound on every dispatch-reaching iteration, and cover all incoming loop edges. Under the recorded frozen-control-data premise, that could justify a complete target set without treating successive object-byte loads as equal.</p>
+<p>That is proposed work, not an implemented or accepted certificate. These two caller rows report only <code>cyclic-incoming-state</code>; increasing a work budget does not remove the explicit cycle rule or supply the missing invariant. See the <a href="../../docs/Ariadne/guarded-target-resolution-design.md">proposed invariant follow-up (historical line 133)</a>.</p>
+<p>This label does not establish that execution entered the loop, that the program ran forever, or that a fifth target exists. It states that <strong>the four witnessed candidates have not been certified as covering every incoming context</strong>. That incompleteness contributes to the caller's remaining guard-coverage barriers.</p>
+<h2 id="context-and-follow-up">Context and follow-up</h2>
+<p><strong>Status:</strong> source-grounded explanation, 2026-10-15, of the retained 2026-10-14 probe. The inspected Rust resolver and native checker match the qualification's recorded source hashes. No dump analysis, build or solver was rerun.</p>
+<p><strong>Motivating problem:</strong> understand why candidate targets can be present while <code>complete</code> remains false. <strong>Contribution:</strong> ties the diagnostic to its implementation rule and the captured pointer-following loop, while separating accepted infeasible receipts from rejected contexts.</p>
+<p>Read the <a href="../../docs/Ariadne/guarded-target-resolution-design.md">canonical design</a> for coverage contracts, the <a href="../plans/completed/guarded-target-resolution.md">active plan</a> for the unresolved acceptance gate, and the <a href="ariadne-remaining-blockers-before-loop-20261015.md">blocker inventory</a> for independent stops.</p>
+<p>Evidence: <a href="../../evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/target-report.json">caller target receipts</a>, <a href="../../evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/minidump-rust.json.gz">captured instructions and candidate graph, gzip</a>, and <a href="../../evidence/Ariadne/guarded-target-resolution/20261014/README.md">qualification scope</a>. A complete rejected-context transcript and executed history are not present in these records.</p>
+</main></body></html>

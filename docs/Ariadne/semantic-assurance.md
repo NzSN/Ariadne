@@ -18,7 +18,7 @@ proof track, and the practical priorities that shaped the delivered workflow.
 
 - [Active Windows I4 qualification](workload-performance-design.md#windows-investigation-replacement) — keeps producer correctness and the separately qualified fixed CLI timing condition distinct from the lifter trust decision.
 - [Projection contract](bap-analysis-core-design.md) — defines the boundary Ariadne still validates.
-- [Backend delivery ledger](../../Plans/completed/bap-integration.md) — records qualified native migration and the remaining proof, workload and release limits.
+- [Backend delivery ledger](../../.agents/plans/completed/bap-integration.md) — records qualified native migration and the remaining proof, workload and release limits.
 - [Typed replay](typed-replay-design.md) — finite conformance for the stateflow
   and supplied-IR machines, distinct from universal refinement.
 - [Workload performance design](workload-performance-design.md#historical-baseline-2026-09-29)
@@ -146,7 +146,7 @@ missing original Electron capture remains historical.
 
 Retiring ISA proofs did not deliver those changes or waive their evidence
 clauses. Native Stage 2 has [separate analysis qualification](bap-analysis-core-design.md#native-qualification).
-The [projection-admission extension](../../Plans/completed/bap-projection-admission.md)
+The [projection-admission extension](../../.agents/plans/completed/bap-projection-admission.md)
 was separately accepted on 2026-10-10 for its selected Windows replacement
 corpus and declared tiers. Its [acceptance record](file-reader-design.md#windows-replacement-capture-and-bounded-query)
 retains the excluded historical real-Linux capture/phase clauses and report
@@ -193,10 +193,10 @@ The practical priorities were delivered at these dated scopes:
 
 | Priority / completed plan | Decision and evidence |
 | --- | --- |
-| [Representative capture](../../Plans/completed/priority-1-real-capture-plan.md) | 2026-09-29 controlled Chromium/Linux case used a hash-pinned dump, independently established earlier captured entry and crash-IP seed. Its [capture design/evidence](file-reader-design.md#independent-entry-and-real-capture-evidence) binds matched-build entry evidence and a possible producer. Backward decoding and companion executable bytes cannot invent missing capture. |
-| [Path-driven effects](../../Plans/completed/priority-2-path-driven-effects-plan.md) | The first path required no change; the later Windows path needed eight ordinary-control bindings with opaque effects. [Effect/source review](operand-effects-design.md#path-driven-control-review) preserves weak memory, flags/alias uncertainty and unknown control. New paths can reopen coverage. |
-| [Investigator presentation](../../Plans/completed/priority-3-investigator-presentation-plan.md) | [Rendering design](result-rendering.md#instruction-overview-contract) brings exact bytes, typed operands, rule quality, provenance, possible origins and gaps together; versioned JSON and DOT meanings remain stable. |
-| [Measured workload performance](../../Plans/completed/priority-4-workload-performance-plan.md) | 2026-09-30 [historical LLVM result](workload-performance-design.md#historical-llvm-workload-qualification) used 98 captured instructions and a 19-node slice; median 3,845.7 → 1,787.6 ms met 2,000 ms while all 277 actions and report hashes stayed equal. Bounded 128/256/512-node families completed; no worst-case claim follows. |
+| [Representative capture](../../.agents/plans/completed/priority-1-real-capture-plan.md) | 2026-09-29 controlled Chromium/Linux case used a hash-pinned dump, independently established earlier captured entry and crash-IP seed. Its [capture design/evidence](file-reader-design.md#independent-entry-and-real-capture-evidence) binds matched-build entry evidence and a possible producer. Backward decoding and companion executable bytes cannot invent missing capture. |
+| [Path-driven effects](../../.agents/plans/completed/priority-2-path-driven-effects-plan.md) | The first path required no change; the later Windows path needed eight ordinary-control bindings with opaque effects. [Effect/source review](operand-effects-design.md#path-driven-control-review) preserves weak memory, flags/alias uncertainty and unknown control. New paths can reopen coverage. |
+| [Investigator presentation](../../.agents/plans/completed/priority-3-investigator-presentation-plan.md) | [Rendering design](result-rendering.md#instruction-overview-contract) brings exact bytes, typed operands, rule quality, provenance, possible origins and gaps together; versioned JSON and DOT meanings remain stable. |
+| [Measured workload performance](../../.agents/plans/completed/priority-4-workload-performance-plan.md) | 2026-09-30 [historical LLVM result](workload-performance-design.md#historical-llvm-workload-qualification) used 98 captured instructions and a 19-node slice; median 3,845.7 → 1,787.6 ms met 2,000 ms while all 277 actions and report hashes stayed equal. Bounded 128/256/512-node families completed; no worst-case claim follows. |
 
 Earlier LLVM timings do not qualify BAP. The missing original Electron capture
 was separately replaced by the authorized

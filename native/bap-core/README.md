@@ -31,10 +31,10 @@ remains a separate historical facility check.
 
 - [Snapshot-based native qualification](../../docs/Ariadne/zero-address-design.md#native-qualification) — explains the read-only MirrorRust dependency environment used by current core and controlled-I5a records.
 
-- [A0 plan](../../Plans/bap-stage2-a0.md) — preserves the historical capability probe; the later OCaml foundation closed its SDK/state-exchange gap.
+- [A0 plan](../../.agents/plans/bap-stage2-a0.md) — preserves the historical capability probe; the later OCaml foundation closed its SDK/state-exchange gap.
 - [Analysis contract](../../docs/Ariadne/bap-analysis-core-design.md) — specifies
   the custom-pass interface and formal observation mapping.
-- [Completion transport](../../Plans/bap-completion-pages.md) — preserves the
+- [Completion transport](../../.agents/plans/bap-completion-pages.md) — preserves the
   per-frame budget while retrieving large completed recovery results.
 - [Existing lifter](../bap/README.md) — remains the production lifting module.
 

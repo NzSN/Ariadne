@@ -1,10 +1,14 @@
 # Ariadne documentation network
 
 Designs are organized by feature: one canonical document owns each design's
-decisions and contracts. Implementation stages live in [Plans](../Plans/README.md);
+decisions and contracts. Implementation stages live in [Plans](../.agents/plans/README.md);
 source-review and validation summaries stay with their owning feature, while
 raw evidence retains its original identities and scope. Use the
 [design index](Ariadne/README.md#canonical-designs) to find the canonical owner.
+
+Implementation plans now live under `.agents/plans/`. Immutable evidence and
+source capsules may retain the former `Plans/` paths from their recorded
+checkout; use the [current plan index](../.agents/plans/README.md) for navigation.
 
 Each document's **Context and follow-up** section explains its status,
 motivating problem, contribution, direct next reading and unresolved limits.
@@ -36,14 +40,14 @@ flowchart TD
 | --- | --- | --- | --- |
 | How do captured instructions yield possible origins? | [Analysis model](../Specs/README.md), [BAP design](Ariadne/bap-analysis-core-design.md) | [Rust reference](implementation.md), [native qualification](Ariadne/bap-analysis-core-design.md#native-qualification) | [Universal refinement and trusted lifting](Ariadne/semantic-assurance.md). |
 | Which bytes and instruction entries are justified? | [File-reader design](Ariadne/file-reader-design.md) | [Input guide](Ariadne/file-reader-design.md#public-interface), [selected capture](Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query) | Capture-only production reader; further file formats remain deferred. |
-| Can captured data resolve an indirect jump? | [Indirect-target resolution](Ariadne/indirect-target-resolution.md) | [R0–R6 plan](../Plans/indirect-target-resolution.md), [captured table inspection](Ariadne/indirect-target-resolution.md#motivating-windows-capture) | Implemented finite profile with source-bound qualification; incoming-state coverage and captured-memory premises remain explicit. |
-| Can a pointer-changing loop have complete captured-table targets? | [Guarded target composition and loop-closure design](Ariadne/guarded-target-resolution-design.md#proposed-stable-base-invariant-follow-up) | [C0–C6 delivery ledger](../Plans/completed/guarded-target-resolution.md), [L0–L6 loop-aware plan](../Plans/completed/loop-aware-target-resolution.md) | Composition and local-region induction are qualified within their captured-table scope; DA09/DADD and all nine original certificates close. Full frame paths remain separate. |
-| How are instruction dependencies projected? | [BAP projection](Ariadne/bap-analysis-core-design.md#projection) | [Pinned source review](Ariadne/bap-analysis-core-design.md#pinned-projection-source-review), [accepted admission plan](../Plans/completed/bap-projection-admission.md) | Unsupported semantics remain explicit; the accepted corpus is finite. |
+| Can captured data resolve an indirect jump? | [Indirect-target resolution](Ariadne/indirect-target-resolution.md) | [R0–R6 plan](../.agents/plans/indirect-target-resolution.md), [captured table inspection](Ariadne/indirect-target-resolution.md#motivating-windows-capture) | Implemented finite profile with source-bound qualification; incoming-state coverage and captured-memory premises remain explicit. |
+| Can a pointer-changing loop have complete captured-table targets? | [Guarded target composition and loop-closure design](Ariadne/guarded-target-resolution-design.md#proposed-stable-base-invariant-follow-up) | [C0–C6 delivery ledger](../.agents/plans/completed/guarded-target-resolution.md), [L0–L6 loop-aware plan](../.agents/plans/completed/loop-aware-target-resolution.md) | Composition and local-region induction are qualified within their captured-table scope; DA09/DADD and all nine original certificates close. Full frame paths remain separate. |
+| How are instruction dependencies projected? | [BAP projection](Ariadne/bap-analysis-core-design.md#projection) | [Pinned source review](Ariadne/bap-analysis-core-design.md#pinned-projection-source-review), [accepted admission plan](../.agents/plans/completed/bap-projection-admission.md) | Unsupported semantics remain explicit; the accepted corpus is finite. |
 | Which definitions contribute to a fault address? | [Investigation design](Ariadne/investigation-design.md) | [API](Ariadne/investigation-design.md#investigation-module-and-interface), [validation](Ariadne/investigation-design.md#retained-delivery-evidence) | Possible dependencies do not establish execution or a root cause. |
 | Can a memory writer be narrowed to the selected load? | [Memory provenance proposal](Ariadne/memory-provenance-refinement.md) | [Retained Scanner query](Ariadne/bap-analysis-core-design.md#admission-resume) | Bounded alias assessment and output-specific refinements remain proposed. |
 | Does the fault-time access begin at zero? | [Zero-address design](Ariadne/zero-address-design.md) | [Source review](Ariadne/zero-address-design.md#source-and-finite-admission-review), [native qualification](Ariadne/zero-address-design.md#native-qualification) | Captured-context and finite admission premises apply. |
 | Is the encoded base zero with a nonzero displacement? | [Zero-base-offset design](Ariadne/zero-base-offset-design.md) | [Source review](Ariadne/zero-base-offset-design.md#decoded-record-and-independent-oracle), [qualification](Ariadne/zero-base-offset-design.md#retained-qualification) | First-profile forms and source-bound acceptance remain distinct from historical provenance. |
-| Did base plus signed displacement wrap? | [Address-wrap design](Ariadne/address-wrap-design.md) | [Implementation plan](../Plans/i5c-address-wrap.md) | Model, implementation and qualification remain pending. |
+| Did base plus signed displacement wrap? | [Address-wrap design](Ariadne/address-wrap-design.md) | [Implementation plan](../.agents/plans/i5c-address-wrap.md) | Model, implementation and qualification remain pending. |
 | How are analysis results presented? | [Rendering and minidump report design](Ariadne/result-rendering.md) | [Presentation validation](Ariadne/result-rendering.md#presentation-acceptance), [examples](Ariadne/result-rendering.md#investigator-cli-examples) | Each result family retains its own meaning and completeness rules. |
 | How do replay, supplied IR and stateflow fit? | [Typed replay](Ariadne/typed-replay-design.md), [stateflow](machine-state-design.md) | [Replay guide](../mbt/stage-e/README.md), [completion evidence](Ariadne/typed-replay-design.md#finite-corpus-and-claim-boundary), [IR guide](Ariadne/typed-replay-design.md#direct-verified-ir) | Supplied semantics remain premises; binary input does not reconstruct original LLVM IR. |
 | How is performance assessed and improved? | [Workload measurement](Ariadne/workload-performance-design.md), [investigation optimization](Ariadne/workload-performance-design.md#investigation-performance) | [Native investigation qualification](Ariadne/workload-performance-design.md#native-investigation-qualification), [historical workload result](Ariadne/workload-performance-design.md#historical-llvm-workload-qualification) | Budgets and measurements apply to their exact backend, host and workload. |
@@ -75,7 +79,7 @@ flowchart TD
 The catalogue below provides an entry to every document with contextual
 navigation, including completed plans and retired research.
 
-The [investigation correctness-fix plan](../Plans/completed/investigation-correctness-fixes.md)
+The [investigation correctness-fix plan](../.agents/plans/completed/investigation-correctness-fixes.md)
 addresses two reviewed gaps in the first-question implementation: full Windows
 latency enforcement and valid answers when explanation limits are exhausted.
 Its [delivery record](Ariadne/investigation-design.md#qualification-and-truncation-repairs) separates
@@ -83,27 +87,32 @@ implemented repairs and exercised checks from real-Windows qualification.
 
 ### Project and active plans
 
-- [Captured indirect-target resolver plan](../Plans/indirect-target-resolution.md)
+- [Structural frame report plan: Stage 5.1](../.agents/plans/frame-structure-report.md)
+  — proposed recovery-only artifact, validated frame links and separate report;
+  [the investigation contract](Ariadne/investigation-design.md#structural-frame-report-before-dataflow)
+  owns its scope. SF0–SF6 implementation and remote qualification remain pending.
+
+- [Captured indirect-target resolver plan](../.agents/plans/indirect-target-resolution.md)
   — R0–R6 contract, evidence, discovery, native admission and qualification.
 
-- [Active specification synchronization](../Plans/specification-sync.md) —
+- [Active specification synchronization](../.agents/plans/specification-sync.md) —
   source/model audit, preserved replay bindings and qualification boundaries.
 
-- [BAP projection admission and coverage plan](../Plans/completed/bap-projection-admission.md) —
+- [BAP projection admission and coverage plan](../.agents/plans/completed/bap-projection-admission.md) —
   accepted form validation, capability admission and conservative ordinary
   continuation, with qualified finite-corpus exits and excluded historical real-Linux clauses.
 
-- [I5c address-wrap implementation plan](../Plans/i5c-address-wrap.md).
-- [I4 native performance implementation](../Plans/completed/i4-performance-implementation.md).
-- [I5b zero-base-plus-displacement implementation plan](../Plans/completed/i5b-zero-base-offset.md).
-- [Windows I4 replacement plan](../Plans/completed/i4-windows-repin.md).
-- [I5a zero-address implementation plan](../Plans/completed/i5a-zero-address.md).
-- [Native I5a qualification plan](../Plans/completed/i5a-native-qualification.md).
+- [I5c address-wrap implementation plan](../.agents/plans/i5c-address-wrap.md).
+- [I4 native performance implementation](../.agents/plans/completed/i4-performance-implementation.md).
+- [I5b zero-base-plus-displacement implementation plan](../.agents/plans/completed/i5b-zero-base-offset.md).
+- [Windows I4 replacement plan](../.agents/plans/completed/i4-windows-repin.md).
+- [I5a zero-address implementation plan](../.agents/plans/completed/i5a-zero-address.md).
+- [Native I5a qualification plan](../.agents/plans/completed/i5a-native-qualification.md).
 
 - [Ariadne checkpoints](../CHECKPOINTS.md).
-- [Ariadne plans](../Plans/README.md).
-- [BAP integration plan: semantic backend, then analysis core](../Plans/completed/bap-integration.md).
-- [Ariadne investigation-layer implementation plan](../Plans/investigation-layer.md).
+- [Ariadne plans](../.agents/plans/README.md).
+- [BAP integration plan: semantic backend, then analysis core](../.agents/plans/completed/bap-integration.md).
+- [Ariadne investigation-layer implementation plan](../.agents/plans/investigation-layer.md).
 - [Ariadne](../README.md).
 - [Ariadne roadmap](../ROADMAP.md).
 
@@ -128,11 +137,11 @@ implemented repairs and exercised checks from real-Windows qualification.
 
 - [Repository terminology convention](terminology.md).
 - [Crashpad demo build and capture recipe](../native/crashpad-demo/README.md).
-- [Complete Stage 2 execution plan](../Plans/completed/bap-stage2-implementation.md).
-- [Stage 2 A0 plan](../Plans/completed/bap-stage2-a0.md).
-- [OCaml foundation qualification plan](../Plans/completed/bap-ocaml-qualification.md).
+- [Complete Stage 2 execution plan](../.agents/plans/completed/bap-stage2-implementation.md).
+- [Stage 2 A0 plan](../.agents/plans/completed/bap-stage2-a0.md).
+- [OCaml foundation qualification plan](../.agents/plans/completed/bap-ocaml-qualification.md).
 - [Native BAP analysis core](../native/bap-core/README.md) — default algorithms and separately labeled historical A0 probe.
-- [BAP Windows workload replacement plan](../Plans/completed/bap-windows-repin.md).
+- [BAP Windows workload replacement plan](../.agents/plans/completed/bap-windows-repin.md).
 - [Rust machine-analysis implementation](implementation.md).
 - [LLVM MC byte-span adapter](llvm-mc-adapter.md).
 - [Rust design for abstract machine-state analysis](machine-state-design.md).
@@ -150,16 +159,16 @@ implemented repairs and exercised checks from real-Windows qualification.
 
 ### Completed plans
 
-- [Stage 1 follow-up: remove the LLVM semantic backend](../Plans/completed/bap-only-semantics.md).
-- [Operand and effect implementation plan](../Plans/completed/operand-effects-plan.md).
-- [Priority 1 implementation plan: a real-capture predecessor slice](../Plans/completed/priority-1-real-capture-plan.md).
-- [Priority 2 implementation plan: effects demanded by captured paths](../Plans/completed/priority-2-path-driven-effects-plan.md).
-- [Priority 3 implementation plan: investigator presentation and examples](../Plans/completed/priority-3-investigator-presentation-plan.md).
-- [Priority 4 implementation plan: workload-sized performance decision](../Plans/completed/priority-4-workload-performance-plan.md).
-- [Consolidate Rust sources and Cargo targets](../Plans/completed/rust-source-layout.md).
-- [Stage A implementation plan: memory-immediate MOV effects](../Plans/completed/stage-a-memory-immediate-mov-plan.md).
-- [Stage E completion plan](../Plans/completed/stage-e-completion.md).
-- [Stage E: first MirrorRust integration stage](../Plans/completed/stage-e-mirrorrust-integration.md).
+- [Stage 1 follow-up: remove the LLVM semantic backend](../.agents/plans/completed/bap-only-semantics.md).
+- [Operand and effect implementation plan](../.agents/plans/completed/operand-effects-plan.md).
+- [Priority 1 implementation plan: a real-capture predecessor slice](../.agents/plans/completed/priority-1-real-capture-plan.md).
+- [Priority 2 implementation plan: effects demanded by captured paths](../.agents/plans/completed/priority-2-path-driven-effects-plan.md).
+- [Priority 3 implementation plan: investigator presentation and examples](../.agents/plans/completed/priority-3-investigator-presentation-plan.md).
+- [Priority 4 implementation plan: workload-sized performance decision](../.agents/plans/completed/priority-4-workload-performance-plan.md).
+- [Consolidate Rust sources and Cargo targets](../.agents/plans/completed/rust-source-layout.md).
+- [Stage A implementation plan: memory-immediate MOV effects](../.agents/plans/completed/stage-a-memory-immediate-mov-plan.md).
+- [Stage E completion plan](../.agents/plans/completed/stage-e-completion.md).
+- [Stage E: first MirrorRust integration stage](../.agents/plans/completed/stage-e-mirrorrust-integration.md).
 
 ### Retired ISA research
 

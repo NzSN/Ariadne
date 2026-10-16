@@ -1,0 +1,278 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Unresolved blockers for dump03958</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f7f8fa;color:#172337;font:17px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:1060px;margin:0 auto;padding:40px 44px 80px;background:white}h1{font-size:2.1rem;line-height:1.2;margin:0 0 24px}h2{font-size:1.45rem;margin:48px 0 16px;padding-top:16px;border-top:1px solid #d9e0e7}h3{font-size:1.1rem;margin-top:28px}p,li{max-width:90ch}a{color:#075caa}code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}code{font-size:.88em;background:#f0f3f6;padding:2px 4px;border-radius:3px}pre{overflow:auto;background:#f0f3f6;border-left:3px solid #7890a8;padding:18px;line-height:1.55;font-size:.88rem}pre code{background:none;padding:0}table{width:100%;border-collapse:collapse;font-size:.94rem;margin:20px 0}th,td{padding:11px 12px;text-align:left;vertical-align:top;border-bottom:1px solid #d9e0e7}th{background:#f0f3f6;font-weight:650}.demo{margin:28px 0;padding:24px;border:1px solid #b8c8d7;border-radius:8px;background:#fafcfe}.demo h3{margin-top:0}.caption,figcaption,.stack-label{color:#526274;font-size:.9rem}.lookup-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 28px;margin-top:18px}.lookup-grid div{border-bottom:1px solid #d9e0e7;padding:8px 0}.lookup-grid small{display:block;color:#526274}.lookup-grid strong{font-family:ui-monospace,Consolas,monospace;font-size:.95rem;overflow-wrap:anywhere}input[type=number]{width:90px;padding:8px;font-size:1rem;margin-left:12px;border:1px solid #8ca2b7;border-radius:4px}input[type=range]{accent-color:#075caa;min-width:100px;flex:1}.demo>input[type=range]{width:100%;display:block;margin:18px 0}.cfg{margin:26px 0}.cfg svg{width:100%;height:auto}.edges path{fill:none;stroke:#475569;stroke-width:2;marker-end:url(#arrow)}.node rect{fill:#f0f3f6;stroke:#9babbc;rx:6}.node text{text-anchor:middle;fill:#172337;font:15px system-ui,sans-serif}.entry rect{fill:#e8f1fb;stroke:#5b8fbe}.later rect{fill:#fff2e1;stroke:#b78646}.edge-label{font:14px system-ui;fill:#475569}.stack-layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}.stack-label{margin:10px 0}.stack-item{border:1px solid #809ab3;padding:14px;margin:10px 0;background:#e8f1fb;min-height:55px;border-radius:5px}.stack-item.later{background:#fff2e1;border-color:#b78646}.stack-item.empty{color:#66788a;background:white;border-style:dashed}.state{margin:0;padding:12px 0}.state dt{font-weight:650;margin:0 0 3px}.state dd{margin:0 0 14px;overflow-wrap:anywhere}.step-head{display:flex;gap:14px;align-items:center;margin:15px 0}.step-head span{color:#526274;font-size:.9rem}.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:20px}button{font:inherit;font-size:.95rem;background:#075caa;color:white;border:1px solid #075caa;padding:9px 15px;border-radius:5px;cursor:pointer}button:disabled{background:#e7ecf1;color:#68798a;border-color:#c2cdd7;cursor:default}button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #e4a237;outline-offset:3px}.advanced{margin-top:44px;padding:22px;background:#f8fafc;border:1px solid #cbd5df;border-radius:6px}.advanced summary{font-weight:650;cursor:pointer}.advanced h2{border:0;margin-top:20px}.top-note{font-size:.9rem;color:#526274;margin:0 0 25px}.top-note a{margin-right:16px}@media(max-width:720px){main{padding:26px 18px 50px}h1{font-size:1.7rem}.stack-layout,.lookup-grid{grid-template-columns:1fr}.demo{padding:16px}table{font-size:.85rem}th,td{padding:8px}.cfg{overflow:auto}.cfg svg{min-width:780px}.controls input{width:100%;order:3;flex-basis:100%}}@media print{body{background:white}main{max-width:none;padding:0}.controls,.top-note{display:none}.demo{break-inside:avoid}details>summary{display:none}}</style></head><body><main><p class="top-note"><a href="ariadne-reports-index.html">Chat report index</a> · <a href="ariadne-unresolved-blockers-20261014.md">Markdown</a></p><h1 id="unresolved-blockers-for-dump03958">Unresolved blockers for dump03958</h1>
+<blockquote>
+<p><strong>Archived chat document.</strong> Restored on 2026-10-16 from the original conversation records. Statements such as “current”, “latest” and “fresh” refer to the original report date. Restoration does not rerun analysis or qualification.</p>
+</blockquote>
+<p>Verified against the latest source-bound request-budget retry on 2026-10-14. All 686 recorded source/tool/document hashes match the current checkout. No build or new dump analysis was required for this inventory.</p>
+<p>Dump: <code>dump_03958DA4FCA844A786262A1053</code><br />
+Thread: <strong>23668</strong>; requested frame pair: <strong>1 → 0</strong>; original requested path bound: <strong>10</strong>.<br />
+SHA-256: <code>9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab</code>.</p>
+<p><strong>The remaining analysis blocker is incomplete candidate coverage.</strong> The guard report contains <strong>28 barriers: nine unresolved indirect jumps and 19 semantic stops</strong>. Consequently, MOVAPS at <code>0x00007ff7744033b3</code> remains <strong>unknown</strong>. A 32 MiB native request budget now admits the larger request successfully.</p>
+<h2 id="current-blockers-and-their-relationship">Current blockers and their relationship</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Observed result</th>
+<th>Why it matters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Incomplete candidate coverage</td>
+<td><code>candidate-coverage-incomplete</code>; 28 explicit barriers.</td>
+<td>The checker cannot certify the represented incoming control flow under its current contract.</td>
+</tr>
+<tr>
+<td>Indirect control targets</td>
+<td>Nine register jumps have empty target sets and <code>complete=false</code>.</td>
+<td>Their possible destinations remain unresolved; absence of targets in the report does not establish absence of target addresses in the dump.</td>
+</tr>
+<tr>
+<td>Semantic/control stops</td>
+<td>Nineteen sites have <code>kind=stop</code>, <code>complete=false</code>, <code>opaque=true</code>.</td>
+<td>They retain unadmitted control/exception behavior and contribute to the guard coverage barrier.</td>
+</tr>
+<tr>
+<td>Initial MOVAPS normal admission</td>
+<td>At <code>0x00007ff7744033b3</code>, verdict <code>unknown</code>, residue mask <code>0xffff</code>, residual <code>normal-or-alignment-fault-unresolved</code>; no normal AST selected.</td>
+<td>This is a consequence of incomplete coverage. It is not an observed misalignment or proof that the instruction faults.</td>
+</tr>
+<tr>
+<td>Guard coverage policy</td>
+<td><code>closure_complete=true</code>, but the stronger coverage check fails.</td>
+<td>Discovery reached a fixed point; proof coverage additionally requires no barriers, complete indirect control and represented/reviewed local continuations. The current checker widens all residue facts to TOP when that contract fails.</td>
+</tr>
+</tbody>
+</table>
+<p>The initial MOVAPS bytes are <code>0f29b42440020000</code>: <code>movaps [rsp+0x240], xmm6</code>. The normal-call entry premise is still explicitly assumed. The present whole-graph widening prevents that premise from yielding an alignment certificate for this query. Region-specific incoming coverage has not been qualified.</p>
+<h2 id="nine-unresolved-indirect-jumps">Nine unresolved indirect jumps</h2>
+<p>These are captured instructions represented by the candidate report. Their target lists are empty; this inventory does not determine which jump executed or its historical register value.</p>
+<table>
+<thead>
+<tr>
+<th>Address</th>
+<th>Captured bytes</th>
+<th>Form</th>
+<th>Reported targets</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0x00007ff77440361f</code></td>
+<td><code>ffe0</code></td>
+<td><code>jmp rax</code></td>
+<td>Empty; incomplete.</td>
+</tr>
+<tr>
+<td><code>0x00007ff774403fd7</code></td>
+<td><code>ffe2</code></td>
+<td><code>jmp rdx</code></td>
+<td>Empty; incomplete.</td>
+</tr>
+<tr>
+<td><code>0x00007ff77440417a</code></td>
+<td><code>ffe1</code></td>
+<td><code>jmp rcx</code></td>
+<td>Empty; incomplete.</td>
+</tr>
+<tr>
+<td><code>0x00007ff774404384</code></td>
+<td><code>ffe0</code></td>
+<td><code>jmp rax</code></td>
+<td>Empty; incomplete.</td>
+</tr>
+<tr>
+<td><code>0x00007ff7744048c5</code></td>
+<td><code>ffe0</code></td>
+<td><code>jmp rax</code></td>
+<td>Empty; incomplete.</td>
+</tr>
+<tr>
+<td><code>0x00007ff774408ab0</code></td>
+<td><code>ffe0</code></td>
+<td><code>jmp rax</code></td>
+<td>Empty; incomplete.</td>
+</tr>
+<tr>
+<td><code>0x00007ff774409837</code></td>
+<td><code>ffe1</code></td>
+<td><code>jmp rcx</code></td>
+<td>Empty; incomplete.</td>
+</tr>
+<tr>
+<td><code>0x00007ff7744099bf</code></td>
+<td><code>41ffe0</code></td>
+<td><code>jmp r8</code></td>
+<td>Empty; incomplete.</td>
+</tr>
+<tr>
+<td><code>0x00007ff77440da09</code></td>
+<td><code>41ffe0</code></td>
+<td><code>jmp r8</code></td>
+<td>Empty; incomplete.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="nineteen-semantic-stops">Nineteen semantic stops</h2>
+<p>The bytes below identify the sites. Labels for INT3/UD2 describe their instruction encodings; their occurrence in the candidate graph is not evidence that those traps executed. BIL admission is recorded separately.</p>
+<table>
+<thead>
+<tr>
+<th>Address</th>
+<th>Captured bytes</th>
+<th>Current boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0x00007ff7744035c9</code></td>
+<td><code>0f28b42440020000</code></td>
+<td><code>movaps xmm6, [rsp+0x240]</code> load with an alignment branch; current reviewed normal selector covers the store form.</td>
+</tr>
+<tr>
+<td><code>0x00007ff77440b0e0</code></td>
+<td><code>670fb94012</code></td>
+<td>Retained BIL is empty; no admitted normal/control semantics. Exact mnemonic/lifter failure is not attributed here.</td>
+</tr>
+<tr>
+<td><code>0x00007ff77440b30d</code></td>
+<td><code>cc</code></td>
+<td>INT3 encoding; BAP <code>Exception(3)</code> remains an unsupported control/exception stop.</td>
+</tr>
+<tr>
+<td><code>0x00007ff77440b753</code></td>
+<td><code>0f0b</code></td>
+<td>UD2 encoding; retained BIL is empty; no admitted normal semantics.</td>
+</tr>
+<tr>
+<td><code>0x00007ff77440ba62</code></td>
+<td><code>cc</code></td>
+<td>INT3 encoding; BAP <code>Exception(3)</code> remains an unsupported control/exception stop.</td>
+</tr>
+<tr>
+<td><code>0x00007ff77440ba65</code></td>
+<td><code>cc</code></td>
+<td>INT3 encoding; BAP <code>Exception(3)</code> remains an unsupported control/exception stop.</td>
+</tr>
+<tr>
+<td><code>0x00007ff77440ba68</code></td>
+<td><code>cc</code></td>
+<td>INT3 encoding; BAP <code>Exception(3)</code> remains an unsupported control/exception stop.</td>
+</tr>
+<tr>
+<td><code>0x00007ff77440ba6b</code></td>
+<td><code>cc</code></td>
+<td>INT3 encoding; BAP <code>Exception(3)</code> remains an unsupported control/exception stop.</td>
+</tr>
+<tr>
+<td><code>0x00007ff77440ba6e</code></td>
+<td><code>cc</code></td>
+<td>INT3 encoding; BAP <code>Exception(3)</code> remains an unsupported control/exception stop.</td>
+</tr>
+<tr>
+<td><code>0x00007ff77440ba71</code></td>
+<td><code>cc</code></td>
+<td>INT3 encoding; BAP <code>Exception(3)</code> remains an unsupported control/exception stop.</td>
+</tr>
+<tr>
+<td><code>0x00007ff77440ba74</code></td>
+<td><code>cc</code></td>
+<td>INT3 encoding; BAP <code>Exception(3)</code> remains an unsupported control/exception stop.</td>
+</tr>
+<tr>
+<td><code>0x00007ff77440ba77</code></td>
+<td><code>cc</code></td>
+<td>INT3 encoding; BAP <code>Exception(3)</code> remains an unsupported control/exception stop.</td>
+</tr>
+<tr>
+<td><code>0x00007ff77440c709</code></td>
+<td><code>cc</code></td>
+<td>INT3 encoding; BAP <code>Exception(3)</code> remains an unsupported control/exception stop.</td>
+</tr>
+<tr>
+<td><code>0x00007ff77440c7a0</code></td>
+<td><code>cc</code></td>
+<td>INT3 encoding; BAP <code>Exception(3)</code> remains an unsupported control/exception stop.</td>
+</tr>
+<tr>
+<td><code>0x00007ff77440c7a3</code></td>
+<td><code>cc</code></td>
+<td>INT3 encoding; BAP <code>Exception(3)</code> remains an unsupported control/exception stop.</td>
+</tr>
+<tr>
+<td><code>0x00007ff77440dd2b</code></td>
+<td><code>cc</code></td>
+<td>INT3 encoding; BAP <code>Exception(3)</code> remains an unsupported control/exception stop.</td>
+</tr>
+<tr>
+<td><code>0x00007ff77440dd2e</code></td>
+<td><code>cc</code></td>
+<td>INT3 encoding; BAP <code>Exception(3)</code> remains an unsupported control/exception stop.</td>
+</tr>
+<tr>
+<td><code>0x00007ff77440dd7e</code></td>
+<td><code>cc</code></td>
+<td>INT3 encoding; BAP <code>Exception(3)</code> remains an unsupported control/exception stop.</td>
+</tr>
+<tr>
+<td><code>0x00007ff77440dd81</code></td>
+<td><code>cc</code></td>
+<td>INT3 encoding; BAP <code>Exception(3)</code> remains an unsupported control/exception stop.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="independent-conditions-and-outstanding-validation">Independent conditions and outstanding validation</h2>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Status</th>
+<th>Scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Original 4,096-start discovery budget</td>
+<td>Still stops with <code>materialization limit: instruction starts</code>.</td>
+<td>Configuration condition: explicit expanded discovery bypasses it and prepares <strong>4,764</strong> candidate sites, <strong>4,744</strong> decodable sites.</td>
+</tr>
+<tr>
+<td>Older-frame unwind</td>
+<td><code>unsupported-unwind-operation</code> when continuing beyond the recovered frames.</td>
+<td>Both requested frames are recovered, so this does not by itself prevent the requested <strong>1 → 0</strong> pair. Exact additional unwind diagnosis is separate.</td>
+</tr>
+<tr>
+<td>Full native core execution and frame-path enumeration</td>
+<td>Not performed in the latest retry.</td>
+<td>Native initialization succeeded, but the probe deliberately ran <strong>no core steps or path enumeration</strong>. A new zero-path or full-analysis result has not been established.</td>
+</tr>
+<tr>
+<td>Response/result and other module limits</td>
+<td>Still apply independently.</td>
+<td>The latest initialization did not fail these limits; they are not observed current blockers.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="resolved-blockers">Resolved blockers</h2>
+<ul>
+<li>XORPS at <code>0x00007ff7744075b3</code> no longer fails shift operand-width admission.</li>
+<li>Guard-profile defaults no longer act as hard ceilings; the larger query uses a <strong>32 MiB evidence budget</strong>.</li>
+<li>The native request limit is configurable. The <strong>9,001,701-byte guard report</strong> is admitted at <strong>33,554,432 request bytes</strong>. The unchanged <strong>8,388,608-byte default</strong> still rejects that larger request.</li>
+</ul>
+<p>Budget increases permit transport/preparation; they do not replace missing control semantics, incoming-coverage evidence or an alignment proof.</p>
+<h2 id="evidence-and-source">Evidence and source</h2>
+<ul>
+<li><a href="../../evidence/Ariadne/native-request-budget/20261014/artifacts/probe-expanded/preparation-outcome.json">Latest initialization comparison</a>: exact budgets, successful 32 MiB native initialization, preserved incomplete-coverage result.</li>
+<li><a href="../../evidence/Ariadne/native-request-budget/20261014/artifacts/probe-expanded/guard-report.json">Guard report</a>: all 28 barrier sites, original captured BIL, candidate graph and unknown MOVAPS verdict.</li>
+<li><a href="../../evidence/Ariadne/native-request-budget/20261014/artifacts/probe-original-discovery/preparation-outcome.json">Original discovery-budget outcome</a>: 4,096-start stop and recovered-frame count.</li>
+<li><a href="../../evidence/Ariadne/native-request-budget/20261014/README.md">Qualification summary</a>: exercised corpus and explicit unperformed work.</li>
+<li><a href="../../src/bap/guard_admission.rs#L764">Coverage check</a> and <a href="../../src/bap/guard_admission.rs#L979">global widening</a>: explain why a discovery fixed point still yields TOP and an unknown guard.</li>
+</ul>
+<p>This list reports possible structural/semantic dependencies of one immutable snapshot. It does not identify executed history, a selected writer or a crash root cause.</p>
+<h2 id="context-and-follow-up">Context and follow-up</h2>
+<p><strong>Status.</strong> Restored historical chat explanation. The original text and its evidence scope remain dated.</p>
+<p><strong>Why this document exists.</strong> It preserves an explanation presented through <code>wslview</code>; the <a href="../../../skills/skills/productivity/chatdoc/SKILL.md">chat-document convention</a> gives it a durable home.</p>
+<p><strong>What this document establishes.</strong> The body records the mechanism, observations and limits stated in that conversation.</p>
+<p><strong>Where to go next.</strong> The <a href="ariadne-reports-index.md">chat report index</a> links related reports; the <a href="../../docs/Ariadne/semantic-assurance.md">assurance contract</a> defines current responsibilities.</p>
+<p><strong>What remains unresolved.</strong> Restoration does not verify the report against the current implementation or refresh its original qualification.</p>
+</main></body></html>

@@ -1,0 +1,73 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>How the structural-report plan handles hard cases</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f4f6f8;color:#192738;font:17px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:1060px;margin:auto;background:white;padding:38px 46px 70px}h1{font-size:2rem;line-height:1.2;margin:20px 0}h2{font-size:1.35rem;margin-top:38px;border-top:1px solid #d4dce5;padding-top:22px}p,li{max-width:92ch}a{color:#075d9e}code,pre{font-family:ui-monospace,Consolas,monospace}code{font-size:.88em;background:#edf1f5;padding:2px 4px}pre{overflow:auto;background:#edf1f5;padding:18px;line-height:1.6}pre code{padding:0}table{border-collapse:collapse;width:100%;margin:20px 0;font-size:.94rem}td,th{border-bottom:1px solid #d6dfe7;padding:10px 12px;text-align:left;vertical-align:top}th{background:#edf1f5}.lead{font-size:1.14rem}.note{font-size:.9rem;color:#526474}.answer{border-left:4px solid #1f658c;background:#edf5fa;padding:16px 20px}.demo{border:1px solid #aabfce;padding:20px 24px;margin:25px 0;background:#f9fbfd}.demo h3{margin-top:0}.demo label{display:block;cursor:pointer}.demo input{width:18px;height:18px;margin-right:8px;vertical-align:middle}.result{white-space:pre-line;font-weight:600;background:#e9f1f6;padding:14px}.tag{font-size:.85rem;border:1px solid #b9c9d5;padding:4px 8px}.top{display:flex;gap:16px;flex-wrap:wrap;font-size:.9rem}.table-wrap{overflow:auto}a:focus-visible,input:focus-visible{outline:3px solid #ce8d23;outline-offset:3px}@media(max-width:700px){main{padding:24px 17px 50px}h1{font-size:1.6rem}table{font-size:.85rem}.demo{padding:16px}}@media print{body{background:white}main{max-width:none;padding:0}.top{display:none}}
+</style></head><body><main><nav class="top"><a href="ariadne-reports-index.html">Chat document index</a><a href="../plans/frame-structure-report.md">Stage 5.1 plan</a><span>Explanation · 2026-10-16 · proposed behavior</span></nav>
+<h1>How Stage 5.1 handles the hard cases</h1>
+<p class="lead"><strong>The plan would publish the structural facts it can validate and preserve the unanswered questions as explicit boundaries.</strong> It does not need to decide the executed history, every feasible path or whether a program loop eventually exits.</p>
+<div class="answer">Its contract is: “Here are the recovered instructions, admitted edges, frame links and remaining gaps under this snapshot and these premises.” A partial report can be useful and valid without answering the harder semantic questions.</div>
+
+<h2 id="finite">1. Why a loop does not make this recovery pass run forever</h2>
+<p>The input is a finite, frozen prepared request. Structural recovery records each attempted address in a visited set and queues only local destinations that have not been visited. Known back edges remain in the graph, but they do not cause repeated execution of the loop.</p>
+<pre><code>visited := visited ∪ {current}
+pending := (pending ∪ local_successors(current)) − visited</code></pre>
+<p>Consequently, this core pass performs at most <code>request.addresses.len()</code> Visit actions, including failed attempts. A smaller work budget can stop it sooner. This bound concerns recovery over the prepared input; input preparation, proof verification and output have their own limits. <a href="../../src/engine.rs#L250">Actual scheduling behavior</a>; <a href="../../Specs/Ariadne.tla#L353">authoritative Visit rule</a>.</p>
+<div class="demo">
+<h3>Example: four starts, one cycle, one unknown destination</h3>
+<pre><code>A → B → C → D: indirect jump, target unresolved
+    ↑   │
+    └───┘</code></pre>
+<table><thead><tr><th>After visiting</th><th>Visited</th><th>Pending</th><th>What is retained</th></tr></thead><tbody>
+<tr><td>A</td><td>A</td><td>B</td><td>A → B</td></tr>
+<tr><td>B</td><td>A, B</td><td>C</td><td>B → C</td></tr>
+<tr><td>C</td><td>A, B, C</td><td>D</td><td>C → B and C → D; B is already visited.</td></tr>
+<tr><td>D</td><td>A, B, C, D</td><td>Empty</td><td>An unresolved-target obligation at D.</td></tr>
+</tbody></table>
+<p>Recovery drains after four visits. The cycle and D’s missing destination remain visible. No claim is made about how many times the program traversed B/C, whether that cycle terminates, or where D actually went.</p>
+<p class="note">Illustrative graph, not a dump result. Stage 5.1 retains cycles; SCC summarization and path enumeration are later work.</p>
+</div>
+
+<h2 id="cases">2. The handling rule for each case</h2>
+<div class="table-wrap"><table><thead><tr><th>Hard case</th><th>Planned behavior</th><th>Claim that remains unavailable</th></tr></thead><tbody>
+<tr><td>Several histories produce the same snapshot.</td><td>Retain admitted structure and its premises without selecting a history.</td><td>Which history actually happened.</td></tr>
+<tr><td>General semantic path feasibility is undecidable or too expensive.</td><td>Stage 5.1 does not ask the solver to decide it. Report admitted structural edges without a feasibility certificate.</td><td>That every displayed route is jointly feasible, or any one is the executed route.</td></tr>
+<tr><td>Cycles or potentially unbounded loop iterations.</td><td>Visit each discovered instruction start once; retain back edges and unknown boundaries.</td><td>Iteration count, loop termination and a complete list of execution walks.</td></tr>
+<tr><td><code>cyclic-incoming-state</code>, unknown target or unknown guard in preparation.</td><td>If preparation returns a valid final request, retain its incomplete target facts or final Stop/frontier.</td><td>A complete target set or an admitted normal edge whose guard is unresolved.</td></tr>
+<tr><td>Full reaching-definition analysis is too costly.</td><td>Stop before <code>FinishRecovery</code>; run no dataflow or slicing in this mode.</td><td>Completed origins, slices, writer exclusions and full caller parity.</td></tr>
+<tr><td>Recovery’s own work/time budget is reached.</td><td>Publish a replay-validated prefix as <code>work_stopped</code>, retaining pending starts, obligations and counters.</td><td>That unexplored continuations do not exist.</td></tr>
+<tr><td>Preparation fails before a validated final request exists.</td><td>Return a preparation-progress diagnostic for that frame. Preserve other independently valid frame maps.</td><td>A trusted graph for the failed frame.</td></tr>
+<tr><td>Evidence/output is too large, or the verifier cannot finish within its host limits.</td><td>Return a bounded diagnostic or refuse trusted publication.</td><td>A trusted artifact with omitted evidence, or a graph accepted without sufficient verification.</td></tr>
+<tr><td>Captured bytes, proof bindings, identities or graph topology are contradictory.</td><td>Reject the artifact as invalid.</td><td>Acceptance as an ordinary “unknown” partial result.</td></tr>
+</tbody></table></div>
+<p>These cases follow the plan’s <a href="../plans/frame-structure-report.md#delivery-contract-to-freeze-in-sf0">delivery contract</a>, <a href="../plans/frame-structure-report.md#sf0-freeze-interfaces-and-finite-policies">finite-policy rules</a> and <a href="../plans/frame-structure-report.md#sf1sf3-build-the-structural-boundary">input/recovery boundary</a>. General undecidability concerns the unbounded program model; exhausting this finite analyzer’s practical budget is a different issue. <a href="https://www.cs.cornell.edu/courses/cs4820/2019sp/handouts/computability.pdf">Computability and tractability distinction</a>.</p>
+
+<h2 id="status">3. “Validated” and “complete” describe different things</h2>
+<p>A report can be <strong>valid evidence of partial recovery</strong>. Validation establishes that its graph prefix, source binding and pending work were derived correctly. It does not establish that all control targets, earlier values or execution histories are known.</p>
+<pre><code>Illustrative planned result, not the finalized wire schema:
+
+preparation:           ready
+recovery:              drained
+control gaps:          unresolved indirect jump at D
+frame link:            unavailable; active-call evidence missing
+dataflow / slicing:    not requested
+executed history:      not inferred</code></pre>
+<p>Empty pending work means every <em>discovered local destination</em> was attempted. It does not mean every possible destination has been discovered. A missing or ambiguous active-call anchor leaves an unresolved frame link; stack adjacency can remain an annotation without becoming a verified CALL edge.</p>
+<p>The separate structural type cannot be substituted for the current completed <code>BoundInvestigation</code>. The old <code>Done</code> gate remains in force for its existing consumers. <a href="../../docs/Ariadne/investigation-design.md#separate-frame-binding-and-report">Proposed independent statuses</a>; <a href="../../src/investigation/validate.rs#L143">existing completed-analysis gate</a>.</p>
+
+<h2 id="case4">4. What this means for the current cyclic/budget problem</h2>
+<p>Stage 5.1 directly addresses the caller’s expensive dataflow completion: its structural report would not need that phase. It does not replace the existing indirect-target resolver or solve its cyclic constraints.</p>
+<p>For the remaining callee dispatches, there are two outcomes:</p>
+<ul>
+<li><strong>Preparation succeeds with unresolved targets:</strong> the structural report can contain the admitted graph and the unresolved dispatch boundaries.</li>
+<li><strong>Preparation itself hits a hard limit:</strong> v1 provides diagnostics for that frame, because the current error does not contain a sealed request and evidence graph. Recovering certified preparation checkpoints is separate future work.</li>
+</ul>
+<p>This is a deliberate limit of the first version: it improves the useful output after successful preparation, but does not guarantee a graph for every capture. <a href="../../src/input/materialize.rs#L481">Preparation error payload</a>; <a href="../../evidence/Ariadne/callee-dispatch-analysis/20261015/README.md#why-ariadne-still-reports-unresolved">retained Case-4 failure mechanisms</a>.</p>
+
+<h2 id="guarantee">5. What the plan promises to validate</h2>
+<p>The planned acceptance tests distinguish a drained graph with gaps, a work-stopped prefix, hard preparation failure and invalid evidence. Mutations must fail when an implementation drops a frontier, promotes an unknown guard continuation, fabricates a frame call or labels unfinished work as complete. Decoder-budget exhaustion must not construct a trusted object.</p>
+<p>The promise is bounded work under declared policies and honest evidence boundaries. It is not a promise to turn an unknown answer into yes or no. No path omitted by this report can justify excluding a memory writer. <a href="../plans/frame-structure-report.md#sf5-independent-controls-and-remote-qualification">Planned controls and remote qualification</a>.</p>
+
+<h2 id="context-and-follow-up">Context and follow-up</h2>
+<p><strong>Status.</strong> Explanation of the proposed Stage 5.1 plan, dated 2026-10-16. SF0–SF6 remain pending; no implementation or new dump/build/model run occurred.</p>
+<p><strong>Why this document exists.</strong> It explains how the <a href="../plans/frame-structure-report.md">implementation plan</a> responds to missing history, semantic uncertainty and resource exhaustion.</p>
+<p><strong>What this document establishes.</strong> Finite recovery visits, preserved unknowns, separate trust/completeness statuses and the preparation-failure limitation.</p>
+<p><strong>Where to go next.</strong> Read the <a href="../../docs/Ariadne/investigation-design.md#structural-frame-report-before-dataflow">canonical structural-report contract</a> or <a href="ariadne-frame-structure-implementation-plan-20261016.html">HTML implementation plan</a>.</p>
+<p><strong>What remains unresolved.</strong> Implementation and qualification of the planned artifact; true historical path selection; broader feasibility reasoning, target/loop refinement and preparation checkpoints.</p></main></body></html>

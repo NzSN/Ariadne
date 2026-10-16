@@ -20,13 +20,13 @@ Wrap describes conditional address arithmetic, not a programming error.
 
 **Where to go next.**
 
-- [I5c implementation plan](../../Plans/i5c-address-wrap.md) — W0–W5 ownership,
+- [I5c implementation plan](../../.agents/plans/i5c-address-wrap.md) — W0–W5 ownership,
   mandatory controls, model contract, preservation and qualification exits.
 - [I5b source review](zero-base-offset-design.md#decoded-record-and-independent-oracle) — reviewed encoded base/displacement
   roles, six MOV forms and the existing independent decode/BAP agreement checks.
 - [I5a contracts](zero-address-design.md) — sealed fault observations, site/operation
   association, validity groups and the existing narrow access-range policy.
-- [Investigation ledger](../../Plans/investigation-layer.md) — I5c is selected,
+- [Investigation ledger](../../.agents/plans/investigation-layer.md) — I5c is selected,
   I5a/I5b are delivered, and other arithmetic/history/lifetime questions remain open.
 - [Formal-model guide](../../Specs/README.md) — W0 must make the question-level
   TLA+ contract authoritative before runtime implementation; model checking,

@@ -10,7 +10,7 @@ single document, including its usage, design, source review and qualification
 history.
 
 **What this document establishes.** Feature documents own their contracts and
-supporting narrative. [Plans](../../Plans/README.md) own execution stages;
+supporting narrative. [Plans](../../.agents/plans/README.md) own execution stages;
 [checkpoints](../../CHECKPOINTS.md) own chronology; immutable evidence stays in
 [evidence/Ariadne](../../evidence/Ariadne/README.md).
 

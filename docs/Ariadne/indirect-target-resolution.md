@@ -9,7 +9,7 @@ state comparison and byte-identical CLI explanations. Native/Rust individual
 CLI samples are 38.61 s / 19.92 s against the unchanged 60 s criterion. The
 [correction record](../../evidence/Ariadne/indirect-target-resolution/review-corrections-20261013/report.json)
 retains the earlier portable/root checks; the full mutation aggregate remains pending.
-The [R0–R6 ledger](../../Plans/indirect-target-resolution.md) separates those
+The [R0–R6 ledger](../../.agents/plans/indirect-target-resolution.md) separates those
 fixes from full qualification. The [initial source-bound record](../../evidence/Ariadne/indirect-target-resolution/qualification-20261013/report.json)
 is historical evidence for its original sources and exercised corpus, not
 acceptance of the revised implementation. Its native timing exceeded the frozen
@@ -27,11 +27,11 @@ bounded discovery integration and qualification requirements.
 
 **Where to go next.**
 
-- [Guarded target-resolution composition](guarded-target-resolution-design.md) and its [C0–C6 plan](../../Plans/completed/guarded-target-resolution.md) — proposed integration of resolver discovery and guard proof closure for the nine captured table dispatches.
+- [Guarded target-resolution composition](guarded-target-resolution-design.md) and its [C0–C6 plan](../../.agents/plans/completed/guarded-target-resolution.md) — proposed integration of resolver discovery and guard proof closure for the nine captured table dispatches.
 
 - [Dump03958 table witness](../../evidence/Ariadne/indirect-target-resolution/dump03958-table-witness-20261014/README.md) — fresh captured reads for nine bounded relative jump tables; numerical candidates are separate from a resolver/guard completion certificate.
 
-- [R0–R6 implementation plan](../../Plans/indirect-target-resolution.md) —
+- [R0–R6 implementation plan](../../.agents/plans/indirect-target-resolution.md) —
   stage ownership, acceptance gates and execution order for this design.
 - [Core model](../../Specs/Ariadne.tla) and [formal-model guide](../../Specs/README.md)
   — existing target-set certificate and authority for the required extension.
@@ -71,7 +71,7 @@ with source/tool/artifact identities bound by the later retry record:
 The existing specification's `resolve(snapshot, VA, length)` describes byte
 resolution. It is not an indirect-control-target resolver. No earlier dedicated
 target-resolver design or API was found in the checked source, plans or relevant
-Git history. The [Scanner follow-up](../../Plans/scanner-partial-explanation.md)
+Git history. The [Scanner follow-up](../../.agents/plans/scanner-partial-explanation.md)
 requires an owning design/model extension before changing recovery semantics.
 
 ## Ownership and integration

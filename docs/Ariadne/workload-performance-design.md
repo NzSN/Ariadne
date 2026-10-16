@@ -18,17 +18,17 @@ mechanisms, and source-bound results with failures and successors preserved.
 
 **Where to go next.**
 
-- [Indirect-target resolver R4–R6](../../Plans/indirect-target-resolution.md#r4-and-r5-evidence-and-product-integration)
+- [Indirect-target resolver R4–R6](../../.agents/plans/indirect-target-resolution.md#r4-and-r5-evidence-and-product-integration)
   — expanded-query completion interning and native/Rust delta caches; its
   [dated result](indirect-target-resolution.md#dated-validation) binds individual
   CLI samples and full-state/schedule parity to the original capture.
-- [Completed original workload plan](../../Plans/completed/priority-4-workload-performance-plan.md)
+- [Completed original workload plan](../../.agents/plans/completed/priority-4-workload-performance-plan.md)
   — historical LLVM query, budget and equivalence checks.
-- [Windows replacement plan](../../Plans/completed/i4-windows-repin.md) — independent capture
+- [Windows replacement plan](../../.agents/plans/completed/i4-windows-repin.md) — independent capture
   identity and retained timing failure.
-- [Investigation performance plan](../../Plans/completed/i4-performance-implementation.md)
+- [Investigation performance plan](../../.agents/plans/completed/i4-performance-implementation.md)
   — D0–D3 measured optimizations and exact-query qualification.
-- [Investigation qualification repair](../../Plans/completed/investigation-correctness-fixes.md#1-enforce-the-windows-i4-latency-condition)
+- [Investigation qualification repair](../../.agents/plans/completed/investigation-correctness-fixes.md#1-enforce-the-windows-i4-latency-condition)
   — enforcement of the Windows total-query budget.
 - [Backend design](bap-analysis-core-design.md) — production ownership and separate
   native-backend qualification under its own timing policy.
@@ -123,7 +123,7 @@ acceptable. Neither result asserts a universal performance bound, formal Rust
 refinement, or AMD64 instruction-step correctness.
 The first [measurement record](../../evidence/Ariadne/priority-4-20260929-validation.json)
 is bounded by the initial 34-node real capture. The
-[2026-09-30 qualification and optimization stage](../../Plans/completed/priority-4-workload-performance-plan.md#2026-09-30-qualification-run)
+[2026-09-30 qualification and optimization stage](../../.agents/plans/completed/priority-4-workload-performance-plan.md#2026-09-30-qualification-run)
 used a larger Windows Electron capture, exact control bindings, a frozen
 scanning reference and successive measurements for the accepted historical
 performance decision. The later BAP and investigation qualifications linked
@@ -157,7 +157,7 @@ operation counts describe less work while the visible schedule remains equal.
 
 ## Investigation performance
 
-The [D0–D3 plan](../../Plans/completed/i4-performance-implementation.md) was implemented
+The [D0–D3 plan](../../.agents/plans/completed/i4-performance-implementation.md) was implemented
 from baseline `44413f8` and qualified on **2026-10-07** for the exact 98-start
 Windows query below. The dump, entry/fault/access, checksum producer, weak
 memory/call alternatives, report meaning and budgets stayed fixed. Captured
@@ -231,7 +231,7 @@ source-level invariants exercised by replay, not universal refinement proofs.
 The **2026-10-05** re-pin selected an existing partial Windows AMD64 Crashpad
 capture as `crashpad-windows-checksum-98-i4-v1`; no new host crash was generated.
 It replaces the unavailable original Electron artifact as the active I4
-obligation under the [replacement plan](../../Plans/completed/i4-windows-repin.md).
+obligation under the [replacement plan](../../.agents/plans/completed/i4-windows-repin.md).
 The original manifest and failed flags remain unchanged.
 
 | Input/query | Exact pin |
@@ -436,7 +436,7 @@ qualifies a replacement backend.
 ## Historical LLVM workload qualification
 
 Qualified **2026-09-30** under the
-[completed workload plan](../../Plans/completed/priority-4-workload-performance-plan.md).
+[completed workload plan](../../.agents/plans/completed/priority-4-workload-performance-plan.md).
 The [delivery record](../../evidence/Ariadne/priority-4-validation.json) retains
 qualification, source-bound regressions and before/after report comparisons.
 The initial 34-node Linux result remains separately in the

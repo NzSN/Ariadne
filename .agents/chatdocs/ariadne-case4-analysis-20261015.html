@@ -1,0 +1,138 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Case 4: remaining callee dispatches</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f7f8fa;color:#172337;font:17px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:1060px;margin:0 auto;padding:40px 44px 80px;background:white}h1{font-size:2.1rem;line-height:1.2;margin:0 0 24px}h2{font-size:1.45rem;margin:48px 0 16px;padding-top:16px;border-top:1px solid #d9e0e7}h3{font-size:1.1rem;margin-top:28px}p,li{max-width:90ch}a{color:#075caa}code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}code{font-size:.88em;background:#f0f3f6;padding:2px 4px;border-radius:3px}pre{overflow:auto;background:#f0f3f6;border-left:3px solid #7890a8;padding:18px;line-height:1.55;font-size:.88rem}pre code{background:none;padding:0}table{width:100%;border-collapse:collapse;font-size:.94rem;margin:20px 0}th,td{padding:11px 12px;text-align:left;vertical-align:top;border-bottom:1px solid #d9e0e7}th{background:#f0f3f6;font-weight:650}.demo{margin:28px 0;padding:24px;border:1px solid #b8c8d7;border-radius:8px;background:#fafcfe}.demo h3{margin-top:0}.caption,figcaption,.stack-label{color:#526274;font-size:.9rem}.lookup-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 28px;margin-top:18px}.lookup-grid div{border-bottom:1px solid #d9e0e7;padding:8px 0}.lookup-grid small{display:block;color:#526274}.lookup-grid strong{font-family:ui-monospace,Consolas,monospace;font-size:.95rem;overflow-wrap:anywhere}input[type=number]{width:90px;padding:8px;font-size:1rem;margin-left:12px;border:1px solid #8ca2b7;border-radius:4px}input[type=range]{accent-color:#075caa;min-width:100px;flex:1}.demo>input[type=range]{width:100%;display:block;margin:18px 0}.cfg{margin:26px 0}.cfg svg{width:100%;height:auto}.edges path{fill:none;stroke:#475569;stroke-width:2;marker-end:url(#arrow)}.node rect{fill:#f0f3f6;stroke:#9babbc;rx:6}.node text{text-anchor:middle;fill:#172337;font:15px system-ui,sans-serif}.entry rect{fill:#e8f1fb;stroke:#5b8fbe}.later rect{fill:#fff2e1;stroke:#b78646}.edge-label{font:14px system-ui;fill:#475569}.stack-layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}.stack-label{margin:10px 0}.stack-item{border:1px solid #809ab3;padding:14px;margin:10px 0;background:#e8f1fb;min-height:55px;border-radius:5px}.stack-item.later{background:#fff2e1;border-color:#b78646}.stack-item.empty{color:#66788a;background:white;border-style:dashed}.state{margin:0;padding:12px 0}.state dt{font-weight:650;margin:0 0 3px}.state dd{margin:0 0 14px;overflow-wrap:anywhere}.step-head{display:flex;gap:14px;align-items:center;margin:15px 0}.step-head span{color:#526274;font-size:.9rem}.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:20px}button{font:inherit;font-size:.95rem;background:#075caa;color:white;border:1px solid #075caa;padding:9px 15px;border-radius:5px;cursor:pointer}button:disabled{background:#e7ecf1;color:#68798a;border-color:#c2cdd7;cursor:default}button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #e4a237;outline-offset:3px}.advanced{margin-top:44px;padding:22px;background:#f8fafc;border:1px solid #cbd5df;border-radius:6px}.advanced summary{font-weight:650;cursor:pointer}.advanced h2{border:0;margin-top:20px}.top-note{font-size:.9rem;color:#526274;margin:0 0 25px}.top-note a{margin-right:16px}@media(max-width:720px){main{padding:26px 18px 50px}h1{font-size:1.7rem}.stack-layout,.lookup-grid{grid-template-columns:1fr}.demo{padding:16px}table{font-size:.85rem}th,td{padding:8px}.cfg{overflow:auto}.cfg svg{min-width:780px}.controls input{width:100%;order:3;flex-basis:100%}}@media print{body{background:white}main{max-width:none;padding:0}.controls,.top-note{display:none}.demo{break-inside:avoid}details>summary{display:none}}</style></head><body><main><p class="top-note">Regenerated 2026-10-16 from retained October 15 analysis · <a href="ariadne-reports-index.html">Report index</a> · <a href="ariadne-case4-analysis-20261015.md">Markdown</a></p><h1>Case 4: the two remaining callee indirect jumps</h1>
+<p><strong>The dump contains both jump tables. The remaining blocker is resolver search/coverage, with shared-budget starvation at the second jump.</strong> Direct reads recover 21 conditional destinations for the first dispatch and 13 for the second. Ariadne has not certified these as complete target sets.</p>
+<h2>Context and follow-up</h2>
+<p><strong>Status.</strong> Analysis completed on 2026-10-15; no production correction is qualified by this record. <strong>Motivating problem.</strong> Item 4 of the remaining-blocker inventory has two unresolved callee indirect jumps after terminal coverage improved from 12 barriers to two. <strong>Contribution.</strong> This report reproduces the exact resolver result, verifies captured table bytes, reconstructs dispatch arithmetic and identifies search and loop-matching limits. <strong>Next reading.</strong> The <a href="../../docs/Ariadne/indirect-target-resolution.md">existing target-resolution design</a> owns target evidence; the <a href="../../docs/Ariadne/guarded-target-resolution-design.md">loop/composition design</a> owns checked incoming coverage. The <a href="../../evidence/Ariadne/caller-semantic-coverage/20261015/README.md">caller-coverage qualification</a> records the preceding delivery. <strong>Limits.</strong> Table arithmetic is conditional on the shown base/range facts and <code>FrozenCapturedControlData</code>; it proves neither executed history nor complete incoming-state coverage. Additional discovery may expose further obligations.</p>
+<h2>What each instruction does</h2>
+<table>
+<thead>
+<tr>
+<th>Jump</th>
+<th>Bytes / semantics</th>
+<th>Captured dispatch data</th>
+<th style="text-align:right">Conditional destinations</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0x00007ff77443da0e</code></td>
+<td><code>ff e0</code>, LLVM <code>JMP64r</code>, BAP <code>jump RAX</code></td>
+<td>128-byte selector map at <code>0x00007ff77ba91d30</code>; relative32 table at <code>0x00007ff77ba92a10</code></td>
+<td style="text-align:right">21 through the captured selector map</td>
+</tr>
+<tr>
+<td><code>0x00007ff77443e200</code></td>
+<td><code>ff e0</code>, LLVM <code>JMP64r</code>, BAP <code>jump RAX</code></td>
+<td>111 relative32 slots at <code>0x00007ff77ba92be8</code></td>
+<td style="text-align:right">13</td>
+</tr>
+</tbody>
+</table>
+<p>Both jump instructions have projected BAP semantics without a semantic gap. The tables lie in a committed read-only <code>MEM_IMAGE</code> region of <code>electron.exe</code>. Object state supplies selectors; the final target values come from these fixed image tables.</p>
+<p>The first dispatch is:</p>
+<pre><code class="language-text">R15 = 0x00007ff77ba91d30             // RIP-relative LEA at 0x7ff77443d9b8
+R12 = 0x00007ff77ba92a10             // RIP-relative LEA at 0x7ff77443d9bf
+RDI = zero_extend(load32[RSI+0x38])
+require unsigned RDI &lt;= 127         // normal arm at 0x7ff77443d9f2
+RBX = zero_extend(load8[R15+RDI])    // 0x7ff77443d9f8
+require unsigned RBX &lt;= 117         // normal arm at 0x7ff77443da01
+RAX = sign_extend(load32[R12+4*RBX]) // 0x7ff77443da07
+jump R12 + RAX                     // 0x7ff77443da0e
+</code></pre>
+<p>All 128 selector-map bytes are captured. They contain 31 distinct indices, all within <code>0..117</code>, which select 21 distinct destinations. Reading all 118 offset slots without using the selector map gives a conservative 22-destination envelope; the additional target is <code>0x00007ff77444133a</code>. This distinction matters: finite byte-domain enumeration can safely retain that extra candidate, while 21 requires the captured map relationship.</p>
+<p>The second dispatch is:</p>
+<pre><code class="language-text">EAX = low32(R14 - 10)               // 0x7ff77443e1e9
+require unsigned EAX &lt;= 110         // normal arm at 0x7ff77443e1f0
+RCX = 0x00007ff77ba92be8             // RIP-relative LEA at 0x7ff77443e1f2
+RAX = sign_extend(load32[RCX+4*RAX]) // 0x7ff77443e1f9
+jump RCX + RAX                     // 0x7ff77443e200
+</code></pre>
+<p>All 111 slots are captured and yield 13 distinct destinations. Every numerically derived destination lies inside the captured runtime-function bounds <code>[0x7ff77443d960, 0x7ff774442634)</code>. This bounds check is separate from decoding/discovering those destinations.</p>
+<h2>Why Ariadne still reports unresolved</h2>
+<p>The reproduced preparation has the original root <code>0x7ff77443d960</code>, 778 attempted starts and the same exact target report as final-helper run <code>075602</code>. Its target resolver makes <strong>zero captured control-data reads</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Site</th>
+<th>Receipts and residuals</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DA0E</td>
+<td>271 receipts, all <code>infeasible</code>; no targets. Residuals: <code>cyclic-incoming-state</code>, <code>guard-work-limit</code>, <code>resolution-work-limit</code>.</td>
+</tr>
+<tr>
+<td>E200</td>
+<td>No receipts or targets. Residual: <code>resolution-work-limit</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>Three mechanisms explain this result.</p>
+<ol>
+<li>
+<p><strong>The later incoming subtree runs before the short table-base corridor.</strong> The predecessor list at <code>d9cd</code> is ordered <code>d9c6</code>, then <code>dd4c</code>. The resolver pushes both onto a vector and pops the last, so it explores the <code>dd4c</code> incoming subtree first. This branch goes to an earlier address; it does not establish an outgoing <code>da0e → dd4c</code> edge. The direct corridor is queued, but the retained used-transfer set never reaches <code>d9bf</code>, where R12's table base becomes known. There is a 45-node/44-edge structural root corridor with no calls, and only 19 reverse edges from the jump to the base initializer. The 271 explored prefixes instead have 85–155 reverse edges. See <a href="../../src/bap/target_resolution.rs#L1078">predecessor construction</a>, <a href="../../src/bap/target_resolution.rs#L1111">stack pop</a> and <a href="../../src/bap/target_resolution.rs#L1285">predecessor push</a>.</p>
+</li>
+<li>
+<p><strong>Work is shared across dispatches.</strong> <code>steps</code> is initialized once before the ascending-address dispatch loop. Substituting target expressions and every accumulated guard recursively spends this same counter. DA0E exhausts the 2,097,152-step allowance while rewriting guards. E200 sorts later and encounters exhausted work before substantive analysis. Its residual therefore does not diagnose an unsupported table shape or missing bytes. See <a href="../../src/bap/target_resolution.rs#L1073">shared budget</a>, <a href="../../src/bap/target_resolution.rs#L306">recursive substitution</a> and <a href="../../src/bap/target_resolution.rs#L1338">guard-work-limit</a>.</p>
+</li>
+<li>
+<p><strong>Current loop coverage cannot bootstrap this dispatch and has a further shape restriction.</strong> It requires an existing relative32 witness and nonempty targets before proposing induction. DA0E has only infeasible receipts, so proposal declines before constructing a loop proof. Even after a witness is obtained, the current matcher takes the initial jump register RAX as its selector and requires the reconstructed table index to be that same input. Here the table index is RBX, then a byte-load expression after substitution; continued backward matching reaches the two-predecessor boundary. See <a href="../../src/bap/target_resolution/loop_closure.rs#L1263">witness prerequisite</a>, <a href="../../src/bap/target_resolution/loop_closure.rs#L685">selector selection</a>, <a href="../../src/bap/target_resolution/loop_closure.rs#L705">index equality</a> and <a href="../../src/bap/target_resolution/loop_closure.rs#L734">join boundary</a>.</p>
+</li>
+</ol>
+<p>The ordinary resolver already represents byte-load/cast indices. Its 256-value byte domain fits the actual <code>max_values=4096</code>. Obtaining an initial table witness is therefore a search/bootstrap issue in this observed run, rather than evidence that byte-classifier syntax is entirely unsupported. Successful production admission still needs a replayed witness and complete coverage.</p>
+<h2>Accumulated branch constraints are checked</h2>
+<p>All 271 rejected prefixes include <code>low32(RDI) &lt;= 255</code>:</p>
+<ul>
+<li>262 also require <code>(low32(RDI) &amp; 0x1ffc00) == 0xd800</code>.</li>
+<li>The other nine also require <code>low32(RDI) &gt;= 256</code>.</li>
+</ul>
+<p>Each combination is contradictory. These are rejected reverse-search contexts, not 271 executed paths. The source checks accumulated guards at <a href="../../src/bap/target_resolution.rs#L1123">target_resolution.rs</a>; it does not establish that every incoming context is infeasible. The run is bounded search over a cyclic graph, not an infinite execution loop.</p>
+<h2>What the correction should address</h2>
+<p>The next implementation should extend the existing resolver in two stages: obtain ordinary table witnesses without starving short prefixes or later dispatches, then extend checked loop matching to distinguish the jump-result bank from the actual table-index expression. Per-site progress must remain within a finite aggregate budget, and all original incoming states, graph/epoch bindings and unknown writes must remain represented.</p>
+<p>The ownership is <code>src/bap/target_resolution.rs</code> for prefix scheduling, work accounting and candidate enumeration; <code>src/bap/target_resolution/loop_closure.rs</code> for induction/shape checks; <code>TargetResolutionCoordinator</code> in <code>src/input/materialize.rs</code> for discovery rounds and epochs. Table contents must remain captured-read evidence, not extra roots or configured target lists.</p>
+<p>These 34 conditional destinations include <strong>31 not yet attempted starts</strong> in the current callee materialization: all 21 first-dispatch destinations and ten of the second's 13. This explains why completed core parity for the current graph can coexist with incomplete callee coverage. Adding these destinations may expose further branches or semantic gaps; the present analysis does not predict complete callee recovery.</p>
+<h2>Reproduction and provenance</h2>
+<p>The fresh remote probe <code>case4-20261015T081221</code> returns the intended RED signal, <code>case4 RED: unresolved callee dispatches remain</code>. It exactly reproduces the retained target report and verifies all 937 qualified source files unchanged. Heavy execution and driver compilation run only in remote Windows WSL.</p>
+<ul>
+<li>Dump SHA-256: <code>9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab</code>; thread 23668, frame 0.</li>
+<li>Qualified source capsule: <code>c35459a19b1e2f5f139730bea6c119cfceff603207254b52d42effac68654a5f</code>.</li>
+<li>Rust release library SHA-256: <code>d7dca79f2a5e6544ae0fed728415a0a9168b4a482bcf91f4d786586e8cbd8e24</code>.</li>
+<li><a href="../../evidence/Ariadne/callee-dispatch-analysis/20261015/artifacts/captured-tables.json">Captured table bytes and all slot/target pairs</a>; <a href="../../evidence/Ariadne/callee-dispatch-analysis/20261015/artifacts/comparison-and-candidates.json">comparison and conditional target lists</a>; <a href="../../evidence/Ariadne/callee-dispatch-analysis/20261015/artifacts/resolver-summary.json">fresh resolver summary</a>; <a href="../../evidence/Ariadne/callee-dispatch-analysis/20261015/artifacts/run-result.json">run result</a>; <a href="../../evidence/Ariadne/callee-dispatch-analysis/20261015/artifacts/probe.rs.txt">driver</a>.</li>
+</ul>
+<p>All three reads use Memory64 stream 9, entry 2219, with complete requested spans and no holes/conflicts:</p>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>VA</th>
+<th style="text-align:right">Bytes</th>
+<th style="text-align:right">Dump file offset</th>
+<th>SHA-256</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ascii-selector-map</td>
+<td><code>0x00007ff77ba91d30</code></td>
+<td style="text-align:right">128</td>
+<td style="text-align:right">871385870</td>
+<td><code>1cc2dd6f92df16ae450d8da20bfc5cb5cdfaafd99d2c82766ed0782cd20ce241</code></td>
+</tr>
+<tr>
+<td>da0e-relative32</td>
+<td><code>0x00007ff77ba92a10</code></td>
+<td style="text-align:right">472</td>
+<td style="text-align:right">871389166</td>
+<td><code>154ff5db20afdf6e61dab6827d0b368a6cfc22cfef4b9ffd2873efb37f25b9f0</code></td>
+</tr>
+<tr>
+<td>e200-relative32</td>
+<td><code>0x00007ff77ba92be8</code></td>
+<td style="text-align:right">444</td>
+<td style="text-align:right">871389638</td>
+<td><code>5ba262117531983477160b23f9a1eedbec6d37c4c17061e0cbb6822fd046b88a</code></td>
+</tr>
+</tbody>
+</table>
+<p>The direct reader observations are outside the target resolver, whose report still records zero data reads. Python independently verifies all 229 signed relative-offset calculations against the captured bytes. <a href="../../evidence/Ariadne/callee-dispatch-analysis/20261015/manifest.json">The analysis manifest</a> binds retained files and the exact reproduced report identity.</p>
+</main></body></html>

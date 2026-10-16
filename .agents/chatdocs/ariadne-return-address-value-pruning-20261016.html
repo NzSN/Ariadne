@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Can a return address narrow cyclic target search?</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f6f8;color:#192738;font:17px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:1060px;margin:auto;background:white;padding:38px 46px 70px}h1{font-size:2rem;line-height:1.2;margin:20px 0}h2{font-size:1.35rem;margin-top:38px;border-top:1px solid #d4dce5;padding-top:22px}p,li{max-width:92ch}a{color:#075d9e}code,pre{font-family:ui-monospace,Consolas,monospace}code{font-size:.88em;background:#edf1f5;padding:2px 4px}pre{overflow:auto;background:#edf1f5;padding:18px;line-height:1.6}pre code{padding:0}table{border-collapse:collapse;width:100%;margin:20px 0;font-size:.94rem}td,th{border-bottom:1px solid #d6dfe7;padding:10px 12px;text-align:left;vertical-align:top}th{background:#edf1f5}.lead{font-size:1.14rem}.note{font-size:.9rem;color:#526474}.answer{border-left:4px solid #1f658c;background:#edf5fa;padding:16px 20px}.demo{border:1px solid #aabfce;padding:20px 24px;margin:25px 0;background:#f9fbfd}.demo h3{margin-top:0}.demo label{display:block;cursor:pointer}.demo input{width:18px;height:18px;margin-right:8px;vertical-align:middle}.result{white-space:pre-line;font-weight:600;background:#e9f1f6;padding:14px}.tag{font-size:.85rem;border:1px solid #b9c9d5;padding:4px 8px}.top{display:flex;gap:16px;flex-wrap:wrap;font-size:.9rem}.table-wrap{overflow:auto}a:focus-visible,input:focus-visible{outline:3px solid #ce8d23;outline-offset:3px}@media(max-width:700px){main{padding:24px 17px 50px}h1{font-size:1.6rem}table{font-size:.85rem}.demo{padding:16px}}@media print{body{background:white}main{max-width:none;padding:0}.top{display:none}}
+</style></head><body><main>
+<nav class="top"><a href="ariadne-reports-index.html">Chat document index</a><span>Source review: 2026-10-16 · retained dump03958 evidence</span></nav>
+<h1>Can the next frame’s return address narrow the possible values?</h1>
+<p class="lead"><strong>Yes, by constraining the relevant call context and, with additional reasoning, the paths compatible with the captured endpoint.</strong> A saved return address alone does not determine an internal <code>JMP RAX</code> target. Ariadne already uses it to select the active call; feeding that information back into target-value search would be a new feature.</p>
+<div class="answer">Your idea can help a question such as “which values at this dispatch can lead to this captured frame/PC?” The resulting set is specific to that question. It cannot replace the resolver’s answer about every incoming state of the dispatch.</div>
+
+<h2 id="actual-frame">1. What the return address already tells us in this dump</h2>
+<p>Here frame 1 is the older caller and frame 0 is the younger callee. The saved return address of frame 0 appears as frame 1’s saved PC. “Next frame” must be interpreted using this direction.</p>
+<div class="table-wrap"><table><thead><tr><th>Evidence or anchor</th><th>Address</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>Captured stack slot</td><td><code>0x000000bea89fa928</code></td><td>Contains the saved continuation below.</td></tr>
+<tr><td>Saved return address</td><td><code>0x00007ff77440410d</code></td><td>Resume location in the caller, after its active call.</td></tr>
+<tr><td>Verified caller CALL</td><td><code>0x00007ff774404108</code></td><td>Captured bytes <code>e8 53 98 03 00</code>, ending exactly at <code>…410d</code>.</td></tr>
+<tr><td>Callee entry</td><td><code>0x00007ff77443d960</code></td><td>The verified direct CALL target.</td></tr>
+<tr><td>Callee captured PC</td><td><code>0x00007ff77443dd6e</code></td><td>The endpoint for the selected frame-0 question.</td></tr>
+</tbody></table></div>
+<p>An earlier call to the same callee at <code>0x00007ff774403407</code> is excluded as <em>this activation’s active call</em> by the saved continuation. That is already a useful reduction of call-context alternatives. It does not say the earlier call never ran. These addresses are retained October 13 evidence, not a fresh dump run. <a href="../../evidence/Ariadne/frame-paths/dump03958-20261013/report.md#selected-physical-frame-pair">Exact retained observations</a>.</p>
+<p>Ariadne checks the captured <code>E8 rel32</code> bytes, decoded target and fallthrough, rather than subtracting five from an arbitrary return address. <a href="../../src/investigation/frame_paths.rs#L133">Call validation</a>; <a href="../../src/investigation/frame_paths.rs#L938">activation and endpoint composition</a>.</p>
+<p>Unwinding reconstructs a caller context using saved stack data. It does not mean the active callee already executed <code>RET</code>, or will ever return normally after the captured fault. The saved return address is therefore not a justified future endpoint for the callee’s internal search. <a href="https://learn.microsoft.com/en-us/cpp/build/exception-handling-x64?view=msvc-170#unwind-procedure">Microsoft’s x64 unwind procedure</a>; <a href="../../src/investigation/frame_unwind.rs#L627">Ariadne’s saved-slot reconstruction</a>.</p>
+
+<h2 id="value-reduction">2. Two ways it could reduce possible values</h2>
+<h3>Use the selected caller’s input constraints</h3>
+<p>The saved continuation selects a call site. Analyze the caller’s states at that call, derive justified argument constraints, then carry those constraints into the callee’s entry. If the dispatch depends on those inputs, its value set may shrink before considering a later endpoint:</p>
+<pre><code>saved return address → verified active CALL
+                    → states/arguments at that CALL
+                    → constrained callee entry states
+                    → narrower dispatch values</code></pre>
+<p>Under the standard Windows x64 convention, the first four integer/pointer argument positions use <code>RCX</code>, <code>RDX</code>, <code>R8</code> and <code>R9</code>. The return address contains none of their values. Caller analysis or correctly scoped saved-register evidence is still needed; crash-time volatile registers cannot simply become callee-entry values. <a href="https://learn.microsoft.com/en-us/cpp/build/x64-calling-convention?view=msvc-170#parameter-passing">Microsoft’s argument-passing contract</a>; <a href="../../docs/Ariadne/investigation-design.md#meaning-of-a-listed-path">Ariadne’s observation scope</a>.</p>
+<p>For example, if accepted caller semantics prove the selected call passes a selector in <code>{2, 3}</code>, and the callee preserves or soundly transforms that constraint up to its dispatch, the dispatch need not start with every selector value. This is a hypothetical example; no such argument constraint has been proved for this dump. If the selector is freshly read from mutable memory in each loop iteration, an initial constraint may no longer restrict later iterations.</p>
+<h3>Use paths compatible with the selected endpoint</h3>
+<p>If a dispatch is in the <strong>caller before its active call</strong>, the validated call site can be the goal. For the remaining Case-4 dispatches inside <strong>frame 0</strong>, the relevant endpoint is instead the captured PC <code>…43dd6e</code>. The caller’s saved continuation <code>…40410d</code> sits outside that callee.</p>
+<p>For a dispatch <code>D</code> visited before endpoint <code>G</code> in the same activation, the proposed question is:</p>
+<pre><code>Values_G(D) = { v |
+  an admitted prefix reaches D with value v,
+  and a compatible admitted suffix reaches G
+}</code></pre>
+<p>Intersect forward value facts with backward constraints from <code>G</code>, preserving branch predicates and memory assumptions. If the table formula maps a selector to a destination proven unable to reach <code>G</code>, that selector can be excluded <em>for this endpoint-specific question</em>. Several selectors can still lead to the same destination, and several destinations can converge on the same endpoint.</p>
+<p>For Case 4’s <code>JMP RAX</code> at <code>…43da0e</code>, the captured selector/table calculation supplies conditional destinations. All of them belong to the same runtime function, so identifying that function’s caller does not by itself distinguish them. The captured PC may support further constraints, but no reduced numeric selector set has been proved here. <a href="../../evidence/Ariadne/callee-dispatch-analysis/20261015/README.md#what-each-instruction-does">Retained dispatch arithmetic</a>.</p>
+
+<div class="demo" aria-labelledby="toy-title">
+<h3 id="toy-title">Small example: endpoint information and missing edges</h3>
+<p class="note">Illustrative values only. This is not a calculation over the dump. Goal G is an already bound endpoint in one activation.</p>
+<div class="table-wrap"><table><thead><tr><th>Selector</th><th>Computed destination</th><th>Continuation facts</th><th>Endpoint-specific status</th></tr></thead><tbody>
+<tr><td>0</td><td>A</td><td>A represented route leads to G.</td><td>Retain; data feasibility still needs checking.</td></tr>
+<tr><td>1</td><td>B</td><td>All admitted continuations terminate before G.</td><td>Refuted for this goal, under that proof.</td></tr>
+<tr><td>2</td><td>A</td><td>Same destination as selector 0.</td><td>Retain; the endpoint does not select between 0 and 2.</td></tr>
+<tr><td>3</td><td>C</td><td id="c-fact">C has an unresolved outgoing transfer.</td><td id="c-status">Unknown: retain it.</td></tr>
+</tbody></table></div>
+<label><input id="close-c" type="checkbox"> Supply a proof that all continuations from C terminate before G.</label>
+<p id="toy-result" class="result" aria-live="polite"></p>
+<p class="note">A search timeout is not that proof. A known structural route to G also does not prove all its data predicates are jointly feasible.</p>
+</div>
+
+<h2 id="limits">3. Why the cycle and budget limits still matter</h2>
+<p><code>cyclic-incoming-state</code> is an unsupported repeated reverse-search context. <code>resolution-work-limit</code> is exhausted resolver work. They can coexist. In the retained Case-4 run, DA0E produced 271 infeasible prefix receipts, used the shared 2,097,152-step budget while rewriting guards, and left E200 without substantive work. A separate larger caller query later exhausted its core dataflow action budget. <a href="../../src/bap/target_resolution.rs#L1288">Cycle cutoff</a>; <a href="../../evidence/Ariadne/callee-dispatch-analysis/20261015/README.md#why-ariadne-still-reports-unresolved">Case-4 search explanation</a>; <a href="../../evidence/Ariadne/caller-semantic-coverage/20261015/README.md">separate caller-completion record</a>.</p>
+<p>Frame constraints can improve search ordering and sometimes produce stronger value constraints. They do not supply the missing loop invariant. In particular:</p>
+<ul>
+<li>A destination absent from an incomplete graph is <strong>unknown</strong>, not disproved reachable to the goal.</li>
+<li>No path found within a budget does not prove no path exists beyond that budget.</li>
+<li>A branch may loop back and choose a different destination in a later iteration. The goal constraint must account for those iterations.</li>
+<li>A dispatch need not lie on every route to the endpoint. Narrowing applies to visits that occur on the chosen question’s paths, not an assertion that the dispatch executed.</li>
+<li>One compatible path cannot establish whole-dispatch coverage over all incoming states. Omitted paths cannot silently exclude possible memory writers.</li>
+</ul>
+<p><a href="../../docs/Ariadne/investigation-design.md#meaning-of-a-listed-path">Current structural-path meaning</a>; <a href="../../docs/Ariadne/guarded-target-resolution-design.md#proposed-stable-base-invariant-follow-up">whole-dispatch loop-coverage contract</a>.</p>
+
+<h2 id="current-support">4. What Ariadne supports today, and the useful extension</h2>
+<table><thead><tr><th>Operation</th><th>Current status</th></tr></thead><tbody>
+<tr><td>Use saved return address to validate the active direct call.</td><td>Implemented.</td></tr>
+<tr><td>Compose frame graphs using that call and the selected captured PC.</td><td>Implemented when the required completed graphs and anchors are available.</td></tr>
+<tr><td>Use the selected caller’s argument-state constraints to specialize this callee’s target resolver.</td><td>No such input propagation in the current frame-preparation interface.</td></tr>
+<tr><td>Propagate the selected endpoint backward into the target resolver to reduce selector/RAX domains.</td><td>Not implemented.</td></tr>
+</tbody></table>
+<p>The resolver currently receives snapshot/artifact identity, instructions, roots, BIL transfers, limits and captured-memory reads. It receives no frame-chain or endpoint constraint. Frame binding is a later consumer. Per-frame preparation supplies a function-entry root and, when requested, an ABI alignment premise; it does not specialize callee dispatch values from the selected caller’s argument state. <a href="../../src/bap/target_resolution.rs#L1011">Resolver interface</a>; <a href="../../src/input/materialize.rs#L773">materializer call</a>; <a href="../../src/input/frame_paths.rs#L17">per-frame preparation</a>.</p>
+<p><strong>A useful next step is a separate endpoint-scoped refinement.</strong> Bind the verified call/crash-PC endpoint and activation to that query, use it first to prioritize promising work, and retain candidates as compatible, refuted or unknown. Hard exclusion needs checked backward constraints and loop reasoning. Existing global target receipts and their completeness claims stay separate.</p>
+<p>For this particular budget failure, fair progress for short incoming prefixes and later dispatch sites is also important. An endpoint heuristic should help that scheduling, while still giving other contexts bounded progress. The ordinary table witnesses must be obtained before the current loop rule can use them. <a href="../../evidence/Ariadne/callee-dispatch-analysis/20261015/README.md#what-the-correction-should-address">Existing correction direction and module ownership</a>.</p>
+
+<h2 id="context-and-follow-up">Context and follow-up</h2>
+<p><strong>Status.</strong> Source-grounded explanation and proposed refinement, written 2026-10-16. The current resolver, loop module, coordinator, frame-path implementation and core engine match their retained Case-4 source hashes. No build, model campaign or fresh dump analysis ran for this explanation.</p>
+<p><strong>Why this document exists.</strong> The question proposes using the captured frame chain to reduce the work described in the <a href="ariadne-case4-analysis-20261015.html">Case-4 explanation</a> and <a href="ariadne-cyclic-incoming-state-20261015.html">historical cyclic-state explanation</a>.</p>
+<p><strong>What this document establishes.</strong> A saved continuation already constrains the active call. Reducing earlier dispatch values requires additional endpoint-specific semantics; the current implementation does not perform that propagation.</p>
+<p><strong>Where to go next.</strong> Read the <a href="../../docs/Ariadne/investigation-design.md#frame-evidence-and-instruction-anchors">frame-evidence contract</a> and <a href="../../docs/Ariadne/indirect-target-resolution.md#semantic-contract">target-resolution contract</a> for the separate scopes.</p>
+<p><strong>What remains unresolved.</strong> No numeric endpoint-conditioned domain, successful frame path, earlier executed branch or complete target closure has been established by this explanation.</p>
+</main><script>
+const checkbox=document.getElementById('close-c');
+function update(){const proved=checkbox.checked;document.getElementById('c-fact').textContent=proved?'All admitted continuations terminate before G.':'C has an unresolved outgoing transfer.';document.getElementById('c-status').textContent=proved?'Refuted for this goal, under the supplied proof.':'Unknown: retain it.';document.getElementById('toy-result').textContent='Values retained for endpoint G: '+(proved?'{0, 2}':'{0, 2, 3}')+'\nSelector 1 is excluded only because its no-goal continuation is proved.\nSelectors 0 and 2 remain alternatives; a concrete executed path is not established.';}
+checkbox.addEventListener('change',update);update();
+</script></body></html>

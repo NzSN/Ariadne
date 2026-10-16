@@ -1,0 +1,51 @@
+{
+  "restored": "2026-10-16",
+  "status": "original_static_html_template_with_reconstructed_graphics",
+  "historical_source_log_lines": [
+    15326,
+    15350,
+    15379
+  ],
+  "original_graphics": "not retained in source log; reconstructed from exact retained completed reports",
+  "new_ariadne_analysis": false,
+  "inputs": [
+    {
+      "path": "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/minidump-rust.json.gz",
+      "bytes": 3841748,
+      "sha256": "b63387a98d5466fffd7bd689480441c92a9213dcbcf9fb9441133e39e44c9d93"
+    },
+    {
+      "path": "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-0/minidump-rust.json.gz",
+      "bytes": 4980744,
+      "sha256": "444b14d1e6104224bf625c8d94c0d5c2084c6cafea7bd9af7085018b8dd7c0ea"
+    },
+    {
+      "path": "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-paths.json.gz",
+      "bytes": 6915105,
+      "sha256": "31be5206d353bece0b41aac49a98723d44587c06b7c1241a8b0892914c65bcf3"
+    },
+    {
+      "path": "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frames.json.gz",
+      "bytes": 3171631,
+      "sha256": "947c2a04617b4de513f33996b458592cb00bed9ef216a3da5603506bc7f19a86"
+    },
+    {
+      "path": "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/probe-summary.json",
+      "bytes": 17620,
+      "sha256": "4b485afcc4e3ce437d468f112f88ce1b8b188f03ef625b5c4dc32264bb744497"
+    }
+  ],
+  "counts": {
+    "1": {
+      "retained_nodes": 10,
+      "display_blocks": 2,
+      "edges": 9
+    },
+    "0": {
+      "retained_nodes": 778,
+      "display_blocks": 232,
+      "edges": 895
+    }
+  },
+  "focus_nodes": 22
+}

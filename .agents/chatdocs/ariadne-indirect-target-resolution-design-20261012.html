@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Captured indirect control target resolution</title><style>
+:root{color-scheme:light;--ink:#182535;--muted:#5a6878;--line:#dce3ea;--accent:#14685c;--soft:#edf5f2}*{box-sizing:border-box}body{margin:0;background:#f4f6f8;color:var(--ink);font:16px/1.7 Segoe UI,Arial,sans-serif}a{color:#176a9b;text-decoration:none}a:hover{text-decoration:underline}.shell{max-width:1360px;margin:auto;display:grid;grid-template-columns:250px minmax(0,1fr);gap:42px;padding:42px 32px}aside{position:sticky;top:28px;align-self:start;max-height:calc(100vh - 56px);overflow:auto;font-size:14px}.brand{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--accent)}.page-links{display:flex;gap:14px;margin:10px 0 25px;padding-bottom:18px;border-bottom:1px solid var(--line)}nav ul{list-style:none;padding:0;margin:0}nav li{margin:8px 0}nav li.sub{padding-left:14px;font-size:13px}main{min-width:0;background:white;padding:44px 52px;border:1px solid var(--line);border-radius:12px;box-shadow:0 6px 25px #122a4010}.eyebrow{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;font-size:12px;font-weight:600}.badge{background:var(--soft);color:var(--accent);padding:4px 10px;border-radius:5px}.badge.neutral{background:#edf1f7;color:#43536a}h1{font-size:34px;line-height:1.2;margin:8px 0 28px;letter-spacing:-.03em}h2{font-size:23px;margin:42px 0 16px;padding-top:10px;border-top:1px solid var(--line)}h3{font-size:18px;margin:28px 0 12px}h1,h2,h3{scroll-margin-top:24px}p{margin:15px 0}ul,ol{padding-left:25px}li{margin:7px 0}code{font:13px/1.55 Consolas,Courier New,monospace;background:#edf1f5;border-radius:3px;padding:2px 4px;overflow-wrap:anywhere}pre{background:#112b36;color:#e4f1f4;padding:20px;border-radius:8px;overflow:auto;line-height:1.55}pre code{padding:0;background:none;color:inherit;white-space:pre;overflow-wrap:normal}.table-scroll{overflow:auto;margin:22px 0}table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.6}th{background:#edf5f2;text-align:left;color:#184b40}th,td{padding:13px 14px;border:1px solid var(--line);vertical-align:top}td:first-child{min-width:140px}footer{margin-top:42px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}@media(max-width:900px){.shell{display:block;padding:16px}aside{position:static;max-height:none;margin-bottom:20px}aside nav{display:none}main{padding:28px 24px}h1{font-size:29px}}@media print{body{background:white}.shell{display:block;padding:0}aside{display:none}main{border:0;padding:0;box-shadow:none}pre{white-space:pre-wrap;overflow:visible}h2,h3{break-after:avoid}table{font-size:11px}tr{break-inside:avoid}}
+</style></head><body><div class="shell"><aside><div class="brand">Ariadne</div><div class="page-links"><a href="ariadne-indirect-target-resolution-plan-20261012.html">Implementation plan</a><a href="ariadne-indirect-target-resolution-design-20261012.html">Design</a></div><nav aria-label="Contents"><ul><li><a href="#context-and-follow-up">Context and follow-up</a></li><li><a href="#problem-and-source-review">Problem and source review</a></li><li><a href="#ownership-and-integration">Ownership and integration</a></li><li><a href="#initial-finite-profile">Initial finite profile</a></li><li><a href="#semantic-contract">Semantic contract</a></li><li class="sub"><a href="#captured-memory-premise">Captured memory premise</a></li><li class="sub"><a href="#captured-table-evaluation">Captured table evaluation</a></li><li class="sub"><a href="#completeness-and-failure-rules">Completeness and failure rules</a></li><li><a href="#discovery-state-and-freezing">Discovery state and freezing</a></li><li><a href="#evidence-and-product-contract">Evidence and product contract</a></li><li><a href="#limits-and-qualification">Limits and qualification</a></li><li><a href="#motivating-windows-capture">Motivating Windows capture</a></li><li><a href="#dated-validation">Dated validation</a></li></ul></nav></aside><main><p class="archive-note"><strong>Historical rendering: 2026-10-12.</strong> Moved into the chat archive on 2026-10-16. Pending-stage labels below describe the original design/plan, not current delivery. <a href="ariadne-reports-index.html">Chat report index</a> · <a href="ariadne-indirect-target-resolution-design-20261012.md">Archived Markdown</a></p><div class="eyebrow"><span class="badge">Proposed resolver</span><span class="badge neutral">R0–R6 pending</span><span class="badge neutral">12 October 2026</span></div><h1 id="captured-indirect-control-target-resolution">Captured indirect control target resolution</h1>
+<h2 id="context-and-follow-up">Context and follow-up</h2>
+<p><strong>Status.</strong> Proposed on 2026-10-12. The design and linked R0–R6 execution plan
+are written; resolver implementation, model checking and qualification are
+pending. Supplementary inspection of one Windows dump establishes a captured
+switch table, not an implemented resolver or its completeness certificate.</p>
+<p><strong>Why this document exists.</strong> The <a href="../../docs/Ariadne/file-reader-design.md#why-a-reader-alone-is-insufficient">input design</a>
+discovers instruction starts from supplied control facts, while the
+<a href="../../docs/Ariadne/bap-analysis-core-design.md">BAP design</a> leaves indirect-target enumeration
+outside delivery. A full dump can contain a table and its destination bytes
+without the current pipeline connecting them to an indirect jump.</p>
+<p><strong>What this document establishes.</strong> The proposed owner, finite supported forms,
+snapshot-relative target semantics, evidence and completeness contracts,
+bounded discovery integration and qualification requirements.</p>
+<p><strong>Where to go next.</strong></p>
+<ul>
+<li><a href="ariadne-indirect-target-resolution-plan-20261012.html">R0–R6 implementation plan</a> —
+stage ownership, acceptance gates and execution order for this design.</li>
+<li><a href="../../Specs/Ariadne.tla">Core model</a> and <a href="../../Specs/README.md">formal-model guide</a>
+— existing target-set certificate and authority for the required extension.</li>
+<li><a href="../../docs/Ariadne/architecture.md#ownership-and-process-boundaries">Source ownership</a> —
+preparation freezes inputs before native or Rust analysis.</li>
+<li><a href="../../evidence/Ariadne/indirect-target-resolution/dump048B-20261012/jump-table-inspection.json">Inspection evidence</a>
+— the captured table that motivates the first relative-table profile.</li>
+</ul>
+<p><strong>What remains unresolved.</strong> No resolver API, CLI mode, discovery fixed point,
+receipt validator or resolver model is implemented. General value-set analysis,
+mutable heap tables, arbitrary indirect calls, JIT/self-modifying code and
+executed history remain outside the initial profile. Completeness requires
+validated incoming-state coverage and an explicit captured-memory premise.</p>
+<h2 id="problem-and-source-review">Problem and source review</h2>
+<p>Source review uses local commit <code>50f3e9ce64bb21ec8e0805d51c3d1a038b618650</code>.
+The existing pipeline has three relevant contracts:</p>
+<ol>
+<li><a href="../../src/bap/projection.rs">BAP projection</a> derives effects from one
+instruction's typed BIL. A load contributes address dependencies and
+<code>memory:any</code>; it does not return a captured numeric value. A jump records a
+target only when its expression evaluates to a constant in that projection.</li>
+<li><a href="../../src/input/materialize.rs">Materialization</a> reads captured instruction
+prefixes, follows supplied local successors and freezes the request.
+Its batch-preparer interface supplies instruction prefixes, not arbitrary
+captured data-table reads or cross-instruction value facts.</li>
+<li><a href="../../src/model.rs">Core instructions</a> contain <code>targets</code> and <code>complete</code>.
+<a href="../../Specs/Ariadne.tla">The core model</a> treats completeness as a trusted
+certificate. Native and Rust recovery consume these supplied facts; they do
+not discover the values of table entries.</li>
+</ol>
+<p>The existing specification's <code>resolve(snapshot, VA, length)</code> describes byte
+resolution. It is not an indirect-control-target resolver. No earlier dedicated
+target-resolver design or API was found in the checked source, plans or relevant
+Git history. The <a href="../plans/scanner-partial-explanation.md">Scanner follow-up</a>
+requires an owning design/model extension before changing recovery semantics.</p>
+<h2 id="ownership-and-integration">Ownership and integration</h2>
+<p>The integration owner is <code>input::materialize</code>. Proposed internal resolver logic
+belongs under <code>src/bap/</code>, because admitted BIL supplies its semantic operations.
+It obtains captured reads through the existing immutable reader; it does not
+open module paths, debugger caches or live process memory.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Owner</th>
+<th>Proposed responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>src/bap/target_resolution.rs</code>, new</td>
+<td>Recognize admitted transfer expressions, propagate finite value constraints, enumerate targets and construct resolution receipts.</td>
+</tr>
+<tr>
+<td><code>src/input/address_space.rs</code></td>
+<td>Return captured bytes, all contributor offsets and explicit holes/conflicts.</td>
+</tr>
+<tr>
+<td><code>src/input/materialize.rs</code></td>
+<td>Coordinate bounded discovery and resolution, revisit affected sites, validate final certificates and freeze the expanded request.</td>
+</tr>
+<tr>
+<td><code>src/bap/core_adapter.rs</code>, <code>core_protocol.rs</code>, and native <code>capture.ml</code></td>
+<td>Bind and validate resolver receipts under a versioned capture profile before admitting augmented target sets.</td>
+</tr>
+<tr>
+<td>Native <code>recovery.ml</code> and Rust <code>engine.rs</code></td>
+<td>Follow supplied indirect edges and retain an obligation when target coverage remains incomplete.</td>
+</tr>
+<tr>
+<td>Input and investigation reports</td>
+<td>Retain resolver evidence, premises and unresolved reasons alongside the original effects and query identity.</td>
+</tr>
+</tbody>
+</table></div>
+<p>New modules and APIs are proposals. Reuse the existing BAP AST/admission and
+reader contracts; do not duplicate instruction effects or introduce a second
+decoder. LLVM MC remains an independent decode/control reference.</p>
+<h2 id="initial-finite-profile">Initial finite profile</h2>
+<p>Use the existing AMD64 minidump snapshot interface. Portable Windows and Linux
+fixtures exercise the shared arithmetic/read rules; the selected external
+acceptance case is Windows and does not supply real Linux qualification.</p>
+<p>The first profile supports:</p>
+<ul>
+<li>A near indirect jump through a pointer slot whose address is established by
+admitted constant or RIP-relative address computation.</li>
+<li>A near register jump formed by adding a known table base to a sign-extended
+little-endian 32-bit table entry, with a finite, justified unsigned index range.</li>
+</ul>
+<p>The relative-table slice admits only the reviewed operations needed for the
+case: register copies, RIP-relative base construction, the selected mask and
+32-bit modular index adjustment, unsigned comparison/branch, indexed 32-bit
+load, sign extension and 64-bit modular addition. Unsupported expressions,
+unknown outputs, uncertain definitions or an opaque clobber stop the affected
+inference. A recognizable opcode pattern alone is insufficient.</p>
+<p>Keep indirect calls, general heap pointer chasing, writable or dynamically
+changed dispatch structures, unbounded indices and general symbolic execution
+outside this first delivery. Existing calls retain display-only call edges,
+opaque effects and local summary edges.</p>
+<h2 id="semantic-contract">Semantic contract</h2>
+<p>The proposed operation is:</p>
+<pre><code class="language-text">resolve(snapshot, graph, site, before_site_value_facts, limits)
+    -&gt; target_set, coverage, receipt, premises, unresolved
+</code></pre>
+<p>The snapshot fixes artifact identity, captured bytes and semantic VAs. The graph
+and admitted BIL identify incoming paths and register definitions. Value facts
+are indexed by program point and machine width; they distinguish exact values,
+finite sets/ranges and unknown values. They are derived from admitted semantics,
+not copied from crash-time registers into earlier states.</p>
+<p>For snapshot <code>S</code>, graph <code>G</code>, incoming-state abstraction <code>Gamma</code> and jump <code>p</code>,
+write <code>S, G, Gamma |- p =&gt; (T, c) under Pi</code>. It means the resolver derives
+candidate targets <code>T</code>, with a completeness flag <code>c</code> and explicit premises <code>Pi</code>.
+The required soundness condition for <code>c = true</code> is:</p>
+<pre><code class="language-text">For every admitted state sigma reaching p under Gamma and Pi:
+    evaluated_target(p, sigma) belongs to T.
+</code></pre>
+<p><code>T</code> may overapproximate feasible destinations. Equality with the feasible set is
+not required. When <code>c = false</code>, <code>T</code> is not an exhaustive bound: unresolved
+alternatives remain explicit, including the possibility of additional targets.
+Empty/incomplete does not mean that the jump has no destination.</p>
+<p>All arithmetic follows the admitted machine widths. Register-bank/alias and
+virtual-variable identity come from the typed BIL binding; textual names alone
+do not identify definitions. Numeric VAs remain distinct from storage offsets.</p>
+<h3 id="captured-memory-premise">Captured memory premise</h3>
+<p>The reader owns immutable <em>captured</em> bytes. That fact alone does not prove that
+an earlier runtime load saw the same bytes. The proposed opt-in profile declares
+<code>FrozenCapturedControlData</code>: the covered pointer/table loads are interpreted
+using the named captured bytes for this analysis. The premise is visible in
+resolver receipts, the semantic profile, native admission and reports.</p>
+<p>Results are complete only relative to that stated model and its incoming-state
+scope. They cannot claim historical table immutability. A PE read-only section
+is corroborating metadata, not proof that every possible runtime write was
+excluded. Without the declared policy or other independently admitted stability
+evidence, retain the unknown runtime-content alternative and do not promote
+captured-table candidates into an exhaustive target certificate.</p>
+<h3 id="captured-table-evaluation">Captured table evaluation</h3>
+<p>For a known table base <code>B</code>, an admitted finite index domain <code>I</code> and this relative
+encoding, compute:</p>
+<pre><code class="language-text">slot(i)   = u64(B + 4 * i)
+offset(i) = sign_extend_32_to_64(read_little_endian_32(S, slot(i)))
+target(i) = u64(B + offset(i))
+T         = unique { target(i) : i belongs to I and its entry is readable }
+</code></pre>
+<p><code>u64</code> denotes reduction modulo <code>2^64</code>, not checked host-language addition.
+Mapping a read into capture storage uses checked offsets and bounded lengths.
+An unsupported wrapped read is an explicit gap, not a fabricated value.
+Conflicting overlaps never select an arbitrary contributor; agreeing overlaps
+retain every contributor. Partial entries do not become zero-filled integers.</p>
+<p>The pointer-slot form similarly evaluates an admitted slot address and reads
+one little-endian 64-bit candidate under the captured-memory premise.</p>
+<h3 id="completeness-and-failure-rules">Completeness and failure rules</h3>
+<p>Certify <code>Instruction.complete = true</code> only after checking:</p>
+<ol>
+<li>Every admitted incoming path establishes the covered base and index facts;
+no alternative entry bypasses the guard or base definition.</li>
+<li>Intervening writes, aliases, unsupported semantics and opaque calls do not
+invalidate the value facts. Unknown incoming definitions remain alternatives.</li>
+<li>Every required entry is unambiguous and fully captured, with a bound receipt.</li>
+<li>Widths, load encoding, sign extension and target arithmetic agree with admitted
+BIL and independent decoded facts.</li>
+<li>The captured-memory policy and all other premises are declared in the query.</li>
+<li>Enumeration and final certificate validation finish within all limits, on the
+final discovery graph rather than a stale earlier graph.</li>
+</ol>
+<p>A guard constrains the states on its relevant outgoing edge; both structural
+conditional edges remain in the graph. This is an inference about states that
+reach the table load, not an assertion about the branch taken at crash time.</p>
+<p>When any premise is missing, retain verified candidates with <code>complete = false</code>
+where the profile permits a partial result, and retain an unresolved reason.
+Malformed identities, forged receipts or invalid bindings are hard errors.
+Missing bytes, unsupported semantics and budget exhaustion are conservative
+resolution outcomes, not reasons to invent an edge or silently change backend.</p>
+<p>A known target with unavailable instruction bytes remains a target. The reader
+and core preserve its unavailable endpoint; the resolver must not filter it out
+merely because decoding or capture at that destination fails.</p>
+<h2 id="discovery-state-and-freezing">Discovery state and freezing</h2>
+<p>The proposed preparation machine maintains:</p>
+<pre><code class="language-text">(captured snapshot, discovered sites/edges, value facts,
+ pending starts, pending resolution sites, receipts, gaps, remaining budgets)
+</code></pre>
+<p>Start from the explicit entry points. Lift captured prefixes, derive permitted
+value constraints, resolve eligible indirect sites, and queue newly discovered
+local targets. Repeat until both worklists are empty or a declared bound stops
+progress. Slice seeds never become additional roots.</p>
+<p>New edges can expose new incoming states and invalidate an earlier guard/base
+argument. Recompute affected facts and revalidate certificates. Retained target
+edges grow conservatively; coverage certificates can be downgraded. Never keep
+a stale <code>complete = true</code> merely because a site was resolved once. A retained
+edge cannot establish the very incoming-state premise used to justify itself.</p>
+<p>Freeze <code>AnalysisRequest</code> only after final validation. A stopped resolver may
+freeze partial target sets with explicit residual obligations under the selected
+profile. Ordinary preparation limits keep their existing error contracts; a new
+resolver stop does not silently reinterpret those limits.</p>
+<p>Both core analyzers consume the same frozen request. Existing fixed-request
+core obligations are not discharged by mutating a running analyzer. Target
+discovery is not a new root policy or a replacement for the core's recovery,
+reaching-definition and slice transitions.</p>
+<p>The abstraction preserves identity, machine-width facts, structural alternatives
+and evidence. It erases historical ordering, concrete heap/object lifetime and
+which candidate actually executed. The existing supplied-stateflow and supplied
+LLVM IR paths remain separate.</p>
+<h2 id="evidence-and-product-contract">Evidence and product contract</h2>
+<p>A resolution receipt binds the artifact/query/semantic identities, site and
+graph/value-fact revision, admitted dispatch/guard bytes and BIL hashes, memory
+policy, table base and index domain, read spans/contributors, entry encodings,
+per-entry derived targets, deduplicated target set, completeness argument,
+unresolved alternatives and all exhausted limits.</p>
+<p>Digest equality alone is not evidence validation. Admission must verify the
+receipt's domains, arithmetic, coverage and bindings before accepting its
+target certificate. Retain evidence for data-table reads separately from the
+instruction-prefix read map and its current 15-byte site records.</p>
+<p>The proposed CLI switch is <code>--resolve-indirect-targets</code>; it does not exist yet.
+Keep the mode opt-in through qualification. Disabled mode preserves existing
+queries and output. Enabled mode changes the query/semantic identity, extends
+the capture profile and reports its premises explicitly. Do not add ad hoc
+fields to strict existing report or native schemas; version the affected
+contract and preserve legacy decoding/disabled-mode behavior.</p>
+<p>Resolving one table does not establish <code>scope_closed</code> for the whole query or
+change the meaning of investigation <code>partial</code>. Incoming RDX origins, other
+indirects, opaque effects and unsupported control remain separate gaps.</p>
+<h2 id="limits-and-qualification">Limits and qualification</h2>
+<p>R0 must freeze defaults and performance criteria before runtime implementation.
+Separately bound table entries, candidate targets, data-read bytes, retained
+evidence, expression/value alternatives, transfer work, graph growth, resolution
+revisits and cooperative elapsed time. Existing open/preparation limits and
+helper timeouts remain separate. Zero/exhausted limits retain conservative
+outcomes and never bypass receipt/identity validation.</p>
+<p>Qualification needs an independent integer/table oracle, negative semantic and
+capture fixtures, finite TLA+ exploration, native/Rust parity and mutations of
+real implementation seams. The oracle must not share production recognition
+or enumeration helpers. Include stale-completeness, bypassed-guard, incomplete
+table, sign-extension, endian, wrapping, unknown-clobber and identity mutants.
+Expanded CFG/dataflow/slices require renewed exact-query evidence; old output
+counts and backend performance results do not qualify this extension.</p>
+<h2 id="motivating-windows-capture">Motivating Windows capture</h2>
+<p>On 2026-10-12, supplementary inspection used original dump
+<code>dump_048B10C302A4460D8A1FC75088</code>, filename
+<code>d6196d6a-0b59-4321-8b1e-4e52c43a050d.dmp</code>, size <code>1,305,482,568</code> bytes and
+SHA-256 <code>5fea4ca614706fe0040ed3231efee0edf9ce4004a51d902bb581025b48bade08</code>.
+Its module debug ID is <code>A7877FFB94F2DB3E4C4C44205044422E1</code>; the matching CDB
+symbols identify <code>CallPrinter::VisitNoStackOverflowCheck</code> at entry
+<code>0x00007ff640079640</code> and the fault at <code>0x00007ff640079670</code>.</p>
+<p>The captured dispatch following that faulting load is:</p>
+<pre><code class="language-text">0x00007ff640079669  lea     r15, [rip + displacement]   ; B = 0x00007ff64791ef58
+0x00007ff640079673  mov     eax, ebp
+0x00007ff640079675  and     eax, 0x3f
+0x00007ff640079678  add     eax, -2                    ; 32-bit modular result
+0x00007ff64007967b  cmp     eax, 0x39
+0x00007ff64007967e  ja      0x00007ff6400797e5          ; default edge retained
+0x00007ff640079684  movsxd  rax, dword ptr [r15 + rax*4]
+0x00007ff640079688  add     rax, r15
+0x00007ff64007968b  jmp     rax
+</code></pre>
+<p>The unsigned guard's fallthrough admits indices <code>0..57</code>. The 232 captured table
+bytes yield 45 distinct destinations from 58 entries. Three overlapping copies
+agree; a separate CDB pass agrees with the parsed words, and all candidate
+destination prefixes are captured. Entry 0 has offset <code>-126,503,947</code> and target
+<code>0x00007ff64007a34d</code>. See the retained
+<a href="../../evidence/Ariadne/indirect-target-resolution/dump048B-20261012/jump-table-inspection.json">table record</a>,
+<a href="../../evidence/Ariadne/indirect-target-resolution/dump048B-20261012/jump-table-validation.json">inspection checks</a>
+and <a href="../../evidence/Ariadne/indirect-target-resolution/dump048B-20261012/cdb-jump-table.log">raw CDB log</a>.</p>
+<p>The original analysis used the existing remote 2026-10-10 BAP v3 runtime, with
+only a diagnostic frontend's artifact cap raised from 256 MiB to 2 GiB.
+Native/Rust explanations matched and remained partial: 329 decoded starts,
+388 edges, 15 slice sites, an incoming-RDX boundary, this unresolved indirect
+and three unsupported-control stops. The retained
+<a href="../../evidence/Ariadne/indirect-target-resolution/dump048B-20261012/baseline-summary.json">baseline summary</a>
+records its query and runtime scope. It is not a build of the current checkout.</p>
+<p>The supplementary target list did not modify that report, run resolver-enabled
+recovery or certify the final incoming graph. It supplies the expected finite
+table result for later qualification under declared premises. The actual crash
+stopped at the earlier load; it does not select an executed switch target.</p>
+<h2 id="dated-validation">Dated validation</h2>
+<p>2026-10-12: design and plan written from source review and the separately retained
+table inspection. Documentation checking passes with 88 connected documents,
+87 context sections and 2,093 local links; diff hygiene passes. All eight copied
+inspection/baseline artifacts retain their original byte hashes, including the
+three table artifacts in the original inspection validation record.</p>
+<p>Resolver implementation/model/runtime/release acceptance remain pending. Browser
+rendering is a delivery convenience, not a build, model exploration or resolver
+qualification result.</p>
+<footer>Rendered from <a href="../../docs/Ariadne/indirect-target-resolution.md">docs/Ariadne/indirect-target-resolution.md</a>. The Markdown document is canonical. Implementation and resolver qualification remain pending.</footer></main></div></body></html>

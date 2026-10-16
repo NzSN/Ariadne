@@ -2,13 +2,13 @@
 
 ## Context and follow-up
 
-**Status.** Guarded composition and its loop-aware extension are implemented and source-bound qualified within the declared captured-table scope, 2026-10-15. Original-dump probe `051409` completes all nine original target sites plus DADD, accepts both inductive loop receipts and matches native/Rust full requests and states. The [composition plan](../../Plans/completed/guarded-target-resolution.md) and [loop plan](../../Plans/completed/loop-aware-target-resolution.md) are complete. Full frame paths remain unavailable.
+**Status.** Guarded composition and its loop-aware extension are implemented and source-bound qualified within the declared captured-table scope, 2026-10-15. Original-dump probe `051409` completes all nine original target sites plus DADD, accepts both inductive loop receipts and matches native/Rust full requests and states. The [composition plan](../../.agents/plans/completed/guarded-target-resolution.md) and [loop plan](../../.agents/plans/completed/loop-aware-target-resolution.md) are complete. Full frame paths remain unavailable.
 
 **Why this document exists.** The [dump03958 table witness](../../evidence/Ariadne/indirect-target-resolution/dump03958-table-witness-20261014/README.md) finds captured tables for nine indirect jumps, while the baseline guarded frame preparation did not enable the resolver. Empty target sets contributed nine of the 28 recorded guard coverage barriers.
 
 **What this document establishes.** A composition contract between the existing [target resolver](indirect-target-resolution.md) and [guard admission](justified-branch-pruning-design.md): candidate discovery, separate original/augmented control, a shared epoch, independent proof replay and final request publication.
 
-**Where to go next.** Read the [2026-10-15 qualification](../../evidence/Ariadne/loop-aware-target-resolution/20261015/README.md), the loop contracts and original-dump outcome below, then the completed execution plans. The [2026-10-14 record](../../evidence/Ariadne/guarded-target-resolution/20261014/README.md) retains its earlier partial result. The [frame-path ledger](../../Plans/frame-path-enumeration.md) owns the remaining listing gate.
+**Where to go next.** Read the [2026-10-15 qualification](../../evidence/Ariadne/loop-aware-target-resolution/20261015/README.md), the loop contracts and original-dump outcome below, then the completed execution plans. The [2026-10-14 record](../../evidence/Ariadne/guarded-target-resolution/20261014/README.md) retains its earlier partial result. The [frame-path ledger](../../.agents/plans/frame-path-enumeration.md) owns the remaining listing gate.
 
 **What remains unresolved.** Caller guard coverage retains 30 barriers and the initial MOVAPS remains unknown; the callee retains 12 barriers. NP10 frame paths remain unavailable with `missing-or-ambiguous-active-call-anchor`. Regional guard coverage, independent semantic stops, general loop synthesis, heap traversal and executed history remain separate. The first loop rule supplies coverage only for table entries already supported by ordinary path witnesses.
 
@@ -132,7 +132,7 @@ The [delivery record](../../evidence/Ariadne/guarded-target-resolution/20261014/
 
 ## Proposed stable-base invariant follow-up
 
-The loop-aware extension was designed, implemented and source-bound qualified on 2026-10-15 under its [L0–L6 plan](../../Plans/completed/loop-aware-target-resolution.md). The [new qualification](../../evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) closes the parent ninth C5 clause through fresh Rust/native induction and original-dump evidence. This section owns the implemented contract. The 2026-10-14 result retains its original scope and identities.
+The loop-aware extension was designed, implemented and source-bound qualified on 2026-10-15 under its [L0–L6 plan](../../.agents/plans/completed/loop-aware-target-resolution.md). The [new qualification](../../evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) closes the parent ninth C5 clause through fresh Rust/native induction and original-dump evidence. This section owns the implemented contract. The 2026-10-14 result retains its original scope and identities.
 
 ### Decision and first support scope
 
@@ -260,7 +260,7 @@ Keep the current API and CLI opt-ins and the existing target-limit JSON fields. 
 
 ### Qualification and acceptance boundary
 
-The [L0–L6 plan](../../Plans/completed/loop-aware-target-resolution.md) orders the authoritative loop-closure component and independent oracle before runtime changes, then Rust production/replay, native replay, integration/codec checks, source-isolated mutation/replay and the original dump retry. The [component interface](../../Specs/README.md#loop-target-closure-component-interface) states the assurance boundary: existing target/composition models consume accepted coverage as a premise. There is no mechanically checked inter-model coupling theorem, refinement mapping or proof that the Rust/native implementation universally refines the models. All Cargo, native, model and replay work runs in remote `windows-dev` WSL. Local checks for this design change are documentation/navigation and whitespace only.
+The [L0–L6 plan](../../.agents/plans/completed/loop-aware-target-resolution.md) orders the authoritative loop-closure component and independent oracle before runtime changes, then Rust production/replay, native replay, integration/codec checks, source-isolated mutation/replay and the original dump retry. The [component interface](../../Specs/README.md#loop-target-closure-component-interface) states the assurance boundary: existing target/composition models consume accepted coverage as a premise. There is no mechanically checked inter-model coupling theorem, refinement mapping or proof that the Rust/native implementation universally refines the models. All Cargo, native, model and replay work runs in remote `windows-dev` WSL. Local checks for this design change are documentation/navigation and whitespace only.
 
 The original-dump gate requires both DA09 and DADD to retain their four witnessed targets and become complete through independently accepted induction receipts, with all other original table candidates preserved and native/Rust full-state parity. Inventory every remaining coverage barrier and path outcome. Closing these two sites does not qualify the maximal SCCs, eliminate other semantic stops, prove MOVAPS alignment or guarantee an active call anchor or available frame paths.
 

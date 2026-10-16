@@ -1,0 +1,305 @@
+import collections
+import gzip
+import hashlib
+import html
+import json
+from pathlib import Path
+import subprocess
+import xml.etree.ElementTree as ET
+
+ROOT = Path('/home/nzsn/Repos/Ariadne')
+BASE = ROOT / 'evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127'
+OUT = Path(__file__).parent
+PC = '0x00007ff77443dd6e'
+ENTRIES = {1: '0x00007ff7744033a0', 0: '0x00007ff77443d960'}
+STOP = '0x00007ff7744033b3'
+
+
+def read(path):
+    with gzip.open(path, 'rt') if path.suffix == '.gz' else path.open() as f:
+        return json.load(f)
+
+
+def reach(start, adj):
+    seen, pending = {start}, [start]
+    while pending:
+        for dst in adj[pending.pop()]:
+            if dst not in seen:
+                seen.add(dst)
+                pending.append(dst)
+    return seen
+
+
+def quote(text):
+    return json.dumps(str(text))
+
+
+def instruction(site):
+    rec = site.get('decoder_record') or ''
+    parts = rec.split()
+    op = site.get('opcode') or 'unavailable'
+    args = parts[3:3 + int(parts[2])] if len(parts) > 2 else []
+    if op == 'PUSH64r' and args:
+        return 'push ' + args[0].removeprefix('r:').lower()
+    if op in ('SUB64ri8', 'SUB64ri32') and len(args) == 3:
+        return 'sub rsp, ' + hex(int(args[-1].removeprefix('i:')))
+    if site['va'] == STOP:
+        return 'movaps [rsp+0x240], xmm6'
+    if site['va'] in ('0x00007ff77443d992', PC):
+        return 'cmp byte ptr [rax+0x38], 0x76'
+    if site['va'] == '0x00007ff77443dd66':
+        return 'mov [rsi+0x18], rax'
+    if site['va'] == '0x00007ff77443dd6a':
+        return 'mov rax, [rsi+0x28]'
+    if op == 'MOV64rr' and len(args) == 2:
+        return 'mov ' + ', '.join(x.removeprefix('r:').lower() for x in args)
+    def memory(values):
+        base, scale, index, displacement = values[:4]
+        terms = []
+        if base != 'r:NONE':
+            terms.append(base.removeprefix('r:').lower())
+        if index != 'r:NONE':
+            terms.append(index.removeprefix('r:').lower() + '*' + scale.removeprefix('i:'))
+        disp = int(displacement.removeprefix('i:'))
+        address = '+'.join(terms)
+        if disp:
+            address += ('+' if address and disp > 0 else '') + hex(disp)
+        return '[' + (address or '0') + ']'
+    if op == 'MOV64rm' and len(args) == 6:
+        return 'mov ' + args[0].removeprefix('r:').lower() + ', ' + memory(args[1:])
+    if op == 'MOV64mr' and len(args) == 6:
+        return 'mov ' + memory(args[:5]) + ', ' + args[-1].removeprefix('r:').lower()
+    if op == 'XOR64rr' and len(args) == 3 and args[0] == args[1]:
+        return 'xor ' + args[0].removeprefix('r:').lower() + ', ' + args[2].removeprefix('r:').lower()
+    if op.startswith('JCC'):
+        return op + '  conditional branch'
+    return op
+
+
+reports = {i: read(BASE / f'frame-{i}/minidump-rust.json.gz') for i in (1, 0)}
+paths = read(BASE / 'frame-paths.json.gz')
+assert paths['available'] is False and paths['returned_count'] == 0
+assert paths['counters']['expanded_states'] == 0
+source_hashes = read(ROOT / 'evidence/Ariadne/guarded-target-resolution/20261014/artifacts/delivery/source-files.json')
+assert all(hashlib.sha256((ROOT / p).read_bytes()).hexdigest() == h for p, h in source_hashes.items())
+
+graph_data = {}
+for frame, report in reports.items():
+    analysis = report['analysis']
+    sites = {s['va']: s for s in report['preparation']['sites']}
+    local = [e for e in analysis['edges'] if e['local']]
+    nodes = set(analysis['visited']) | set(analysis['decoded'])
+    succ, pred, calls = (collections.defaultdict(list) for _ in range(3))
+    for e in local:
+        nodes.update((e['src'], e['dst']))
+        succ[e['src']].append(e)
+        pred[e['dst']].append(e)
+    for e in analysis['edges']:
+        if not e['local']:
+            calls[e['src']].append(e)
+    leaders = {ENTRIES[frame]} | (set(analysis['visited']) - set(analysis['decoded']))
+    if frame == 0:
+        leaders.add(PC)
+    for va in nodes:
+        if len(pred[va]) != 1:
+            leaders.add(va)
+    for e in local:
+        if e['kind'] != 'next' or len(succ[e['src']]) != 1 or calls[e['src']]:
+            leaders.add(e['dst'])
+    blocks, owner = [], {}
+    ordered = sorted(leaders & nodes) + sorted(nodes - leaders)
+    for start in ordered:
+        if start in owner:
+            continue
+        block, cur = [], start
+        while cur not in owner:
+            owner[cur] = len(blocks)
+            block.append(cur)
+            edges = succ[cur]
+            if len(edges) != 1 or edges[0]['kind'] != 'next' or calls[cur]:
+                break
+            nxt = edges[0]['dst']
+            if nxt in leaders or nxt in owner:
+                break
+            cur = nxt
+        blocks.append(block)
+    assert set(owner) == nodes
+    internal = [e for e in local if owner[e['src']] == owner[e['dst']]]
+    between = [e for e in local if owner[e['src']] != owner[e['dst']]]
+    assert len(internal) + len(between) == len(local)
+    assert all(e['kind'] == 'next' for e in internal)
+    graph_data[frame] = dict(sites=sites, nodes=nodes, local=local, succ=succ,
+                             blocks=blocks, owner=owner, calls=calls, internal=internal)
+
+# A display projection: retain local edges that can connect callee entry to PC,
+# cutting outgoing edges at PC. It does not run Ariadne's path enumerator.
+succ, pred = collections.defaultdict(list), collections.defaultdict(list)
+for e in graph_data[0]['local']:
+    if e['src'] != PC:
+        succ[e['src']].append(e['dst'])
+        pred[e['dst']].append(e['src'])
+focus = reach(ENTRIES[0], succ) & reach(PC, pred)
+assert PC in focus and len(focus) == 22
+
+HEADER = '''digraph PartialFrame {
+graph [rankdir=TB, bgcolor="#ffffff", pad="0.25", nodesep="0.35", ranksep="0.55", fontname="Arial", fontsize=14, compound=true, newrank=true];
+node [shape=box, style="rounded,filled", fillcolor="#f4f8f8", color="#537c7b", fontname="DejaVu Sans Mono", fontsize=11, margin="0.18,0.12"];
+edge [fontname="Arial", fontsize=10, color="#477c7b", arrowsize="0.7"];
+'''
+
+
+def view(frame, included=None, individual=False, prefix=None):
+    g = graph_data[frame]
+    inc = set(g['nodes'] if included is None else included)
+    prefix = prefix or f'f{frame}'
+    groups = [[n] for n in sorted(inc)] if individual else [
+        [n for n in block if n in inc] for block in g['blocks'] if any(n in inc for n in block)]
+    owners = {n: i for i, block in enumerate(groups) for n in block}
+    lines = []
+    for i, block in enumerate(groups):
+        shown = block if len(block) <= 6 else block[:2] + [None] + block[-3:]
+        label = []
+        for n in shown:
+            if n is None:
+                label.append(f'... {len(block) - 5} more instructions ...')
+            else:
+                label.append(n + '  ' + instruction(g['sites'].get(n, {'va': n})))
+        if len(block) > 1:
+            label.insert(0, f'{len(block)} retained instruction starts')
+        fill, color, width = '#f4f8f8', '#537c7b', '1'
+        if ENTRIES[frame] in block:
+            label.insert(0, f'FRAME {frame} ENTRY')
+            fill, color, width = '#e2f2ef', '#12665f', '2'
+        if STOP in block:
+            label += ['GUARD NOT ADMITTED', 'normal / alignment fault unresolved', 'candidate coverage incomplete']
+            fill, color, width = '#fff0d9', '#b96c15', '2'
+        if PC in block:
+            label.insert(0, 'CAPTURED PC')
+            fill, color, width = '#e4eefc', '#315f9b', '2'
+        obligations = [o for o in reports[frame]['analysis']['obligations'] if o['va'] in block]
+        if obligations and STOP not in block:
+            label += ['OPEN: ' + ', '.join(sorted({o['reason'] for o in obligations}))]
+            fill, color = '#fff0d9', '#b96c15'
+        details = '\n'.join(n + '  ' + instruction(g['sites'].get(n, {'va': n})) + '\n' +
+                            (g['sites'].get(n, {}).get('bytes_hex') or '') + '\n' +
+                            (g['sites'].get(n, {}).get('decoder_record') or '') for n in block)
+        lines.append(f'{prefix}_{i} [id="{prefix}_{i}", label={quote(chr(10).join(label))}, tooltip={quote(details)}, fillcolor="{fill}", color="{color}", penwidth={width}];')
+    grouped = collections.Counter()
+    hidden = collections.defaultdict(list)
+    for e in g['local']:
+        if e['src'] not in inc:
+            continue
+        if e['dst'] not in inc:
+            hidden[owners[e['src']]].append(e)
+        elif owners[e['src']] != owners[e['dst']]:
+            grouped[(owners[e['src']], owners[e['dst']], e['kind'])] += 1
+    for (a, b, kind), count in sorted(grouped.items()):
+        label = kind if count == 1 else f'{kind} x{count}'
+        style = ', color="#315f9b"' if kind == 'summary' else ''
+        lines.append(f'{prefix}_{a} -> {prefix}_{b} [label={quote(label)}{style}];')
+    for a, edges in hidden.items():
+        after_pc = PC in groups[a]
+        label = 'Recovered graph continues after PC' if after_pc else 'Other retained branch\n' + '\n'.join(e['kind'] + ' -> ' + e['dst'] for e in edges)
+        lines.append(f'{prefix}_other{a} [shape=note, fillcolor="#fafafa", color="#9a9a9a", label={quote(label)}];')
+        lines.append(f'{prefix}_{a} -> {prefix}_other{a} [color="#999999", label={quote("next" if after_pc else ", ".join(sorted({e["kind"] for e in edges})))}];')
+    for src, edges in g['calls'].items():
+        if src not in inc:
+            continue
+        for j, e in enumerate(edges):
+            ext = f'{prefix}_call{owners[src]}_{j}'
+            lines.append(f'{ext} [shape=ellipse, fillcolor="#f1f4fb", color="#6a7f9f", label={quote("call target " + e["dst"])}];')
+            lines.append(f'{prefix}_{owners[src]} -> {ext} [style=dashed, color="#6a7f9f", label="call (display only)"];')
+    return lines, owners, groups
+
+
+def render(name, body):
+    dot = HEADER + '\n'.join(body) + '\n}\n'
+    (OUT / f'{name}.dot').write_text(dot)
+    subprocess.run(['dot', '-Tsvg', str(OUT / f'{name}.dot'), '-o', str(OUT / f'{name}.svg')], check=True, timeout=45)
+    ET.parse(OUT / f'{name}.svg')
+    svg = (OUT / f'{name}.svg').read_text()
+    return svg[svg.index('<svg'):]
+
+
+caller, caller_owners, _ = view(1, individual=True)
+callee, callee_owners, _ = view(0, focus)
+ov_caller, ov_caller_owners, _ = view(1, prefix='ov1')
+ov_callee, ov_callee_owners, _ = view(0, focus, prefix='ov0')
+overview = ['subgraph cluster_caller { label="FRAME 1 / CALLER — recovered prefix"; color="#b9cecc";'] + ov_caller + ['}']
+overview += ['subgraph cluster_callee { label="FRAME 0 / CALLEE — local connection to captured PC"; color="#b9cecc";'] + ov_callee + ['}']
+overview += [
+    f'{{rank=same; ov1_{ov_caller_owners[ENTRIES[1]]}; ov0_{ov_callee_owners[ENTRIES[0]]};}}',
+    'gap [shape=note, style="filled,dashed", fillcolor="#fff7ed", color="#b96c15", label="CROSS-FRAME CONNECTION UNAVAILABLE\\nNo recovered active call anchor\\nUnwind return PC: 0x00007ff77440410d\\n0 frame-to-frame paths returned; search not started"];',
+    f'ov1_{ov_caller_owners[STOP]} -> gap [style=dashed, arrowhead=none, color="#999999", label="recovery boundary"];',
+    f'ov0_{ov_callee_owners[PC]} -> gap [style=dashed, arrowhead=none, color="#999999", label="frame relationship / annotation"];'
+]
+svgs = {
+    'overview': render('overview', overview),
+    'caller': render('caller', caller),
+    'callee-focus': render('callee-focus', callee),
+    'callee-full': render('callee-full', view(0)[0]),
+}
+export = {
+    'schema': 'ariadne.partial-frame-graph-display/v1',
+    'source_probe': 'dump-20261014T121127',
+    'source_checked': '2026-10-15',
+    'source_file_hashes_matching': len(source_hashes),
+    'dump_sha256': reports[0]['identity']['artifact_sha256'],
+    'frame_path_result': {k: paths[k] for k in ('question', 'available', 'coverage', 'returned_count', 'stop_reason', 'counters')},
+    'focus_rule': 'Retained local entry-to-captured-PC connectivity, cutting outgoing edges at PC; other branches shown as boundary stubs. No new Ariadne analysis or frame-path enumeration.',
+    'callee_focus_addresses': sorted(focus),
+    'frames': {},
+}
+for frame, g in graph_data.items():
+    export['frames'][str(frame)] = {
+        'entry': ENTRIES[frame], 'decoded': reports[frame]['analysis']['decoded'],
+        'visited': reports[frame]['analysis']['visited'],
+        'edges': reports[frame]['analysis']['edges'],
+        'obligations': reports[frame]['analysis']['obligations'],
+        'display_blocks': g['blocks'],
+        'internal_next_edges_collapsed': len(g['internal']),
+        'instruction_sources': {va: {'opcode': g['sites'].get(va, {}).get('opcode'),
+                                     'bytes': g['sites'].get(va, {}).get('bytes_hex'),
+                                     'decoder_record': g['sites'].get(va, {}).get('decoder_record')}
+                                for va in sorted(g['nodes'])},
+    }
+(OUT / 'graph-data.json').write_text(json.dumps(export, indent=2) + '\n')
+
+page = r'''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ariadne · partial frame graph · dump03958</title>
+<style>
+:root{font-family:system-ui,sans-serif;color:#243237;background:#f5f7f7}*{box-sizing:border-box}body{margin:0}header{padding:20px 28px 14px;background:white;border-bottom:1px solid #d6dfdf}h1{font-size:22px;margin:0 0 8px;font-weight:650}p{margin:7px 0;line-height:1.5}.meta{color:#58696e;font-size:13px}.status{color:#935411;font-weight:600}nav{display:flex;flex-wrap:wrap;gap:8px;padding:12px 28px;background:#fff;border-bottom:1px solid #d6dfdf}button,a{font:inherit}button{border:1px solid #b8c8c8;border-radius:4px;background:white;color:#2b4245;padding:7px 12px;cursor:pointer}button[aria-selected=true]{background:#165e58;color:white;border-color:#165e58}button:focus-visible,a:focus-visible{outline:3px solid #4b8dce;outline-offset:2px}.toolbar{display:flex;gap:8px;align-items:center;padding:10px 28px}.toolbar .hint{font-size:13px;color:#58696e;margin-left:auto}a{color:#155d85}#stage{margin:0 20px;background:white;border:1px solid #ccd8d8;height:calc(100vh - 315px);min-height:440px;overflow:hidden;touch-action:none;cursor:grab}#stage:active{cursor:grabbing}#stage>svg{width:100%;height:100%;display:block}#stage .selected polygon,#stage .selected path{stroke:#c72c60!important;stroke-width:4px!important}footer{padding:12px 28px;font-size:13px}.legend{display:flex;gap:22px;flex-wrap:wrap;color:#526469;font-size:13px;margin-top:8px}.legend span:before{content:"";display:inline-block;width:20px;height:3px;background:#477c7b;vertical-align:middle;margin-right:6px}.legend .boundary:before{background:#b96c15}.legend .observed:before{background:#315f9b}.legend .annotation:before{background:repeating-linear-gradient(90deg,#999 0 4px,transparent 4px 7px)}details{margin:10px 28px 22px;font-size:13px;line-height:1.6}input{font:inherit;padding:7px 9px;border:1px solid #b8c8c8;border-radius:4px;width:240px}#caption{font-size:13px;padding:0 28px 9px;color:#455b61}@media(max-width:700px){header{padding:15px}nav,.toolbar{padding:10px 15px}.toolbar{flex-wrap:wrap}.toolbar .hint{display:none}#stage{margin:0 8px;height:65vh}input{width:190px}}
+</style>
+<header><h1>Partial frame graph · dump03958</h1>
+<p><strong>Frame 1 → frame 0</strong> · thread 23668 · <span class="status">cross-frame path unavailable</span></p>
+<p class="meta">Latest dump run: 14 Oct 2026 · 711 source hashes match on 15 Oct · rendering retained results; no new analysis run</p>
+<div class="legend"><span>retained local control</span><span class="boundary">unresolved boundary</span><span class="observed">captured PC</span><span class="annotation">annotation / display-only relation</span></div>
+</header>
+<nav aria-label="Graph views"><button data-view="overview" aria-selected="true">Frame overview</button><button data-view="caller" aria-selected="false">Caller: exact prefix</button><button data-view="callee-focus" aria-selected="false">Callee: entry → captured PC</button><button data-view="callee-full" aria-selected="false">Callee: full partial CFG</button></nav>
+<div class="toolbar"><button id="fit">Fit</button><button id="plus" aria-label="Zoom in">＋</button><button id="minus" aria-label="Zoom out">−</button><input id="address" aria-label="Find virtual address" placeholder="Find address, e.g. 43dd6e"><button id="find">Find</button><span class="hint">Drag to pan · wheel to zoom · hover a block for bytes</span></div>
+<div id="caption" aria-live="polite"></div><div id="stage" aria-label="Interactive control-flow graph"></div>
+<footer><a id="svg-download" href="overview.svg" download>Download SVG</a> · <a id="dot-download" href="overview.dot" download>Graphviz DOT</a> · <a href="graph-data.json" download>Exact nodes, edges and sources (JSON)</a></footer>
+<details><summary>Evidence and interpretation</summary>
+<p>The caller has 9 decoded instructions, 9 edges and a visited MOVAPS boundary at 0x00007ff7744033b3. The callee has 768 decoded instructions and 895 edges. The focus projects 22 retained callee instruction starts connected to the captured PC, with other branch/continuation stubs retained in the view. Linear chains are grouped into blocks; hover for all member addresses and decoder records.</p>
+<p>Both outcomes have exact Rust/native request and full-state agreement. Solid edges are possible structural control flow under the recorded captured-data and Windows ABI premises. They do not identify the executed branch history. The caller's unresolved alignment guard prevents recovery of a unique active call anchor; the dashed cross-frame annotation supplies no control edge. The frame-path enumerator returned 0 paths with 0 expanded states.</p>
+<p>Source: evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127. The full CFG view retains nonlocal calls as display-only edges; local traversal follows summary edges. Unknown indirect targets and unsupported semantic stops remain visible in amber. Candidate-only target exploration is outside these final recovered graphs.</p>
+<p><strong>Context and follow-up.</strong> This graph displays the current partial outcome. Read the <a href="../ariadne-frame-to-frame-outcome-20261015.md">outcome report</a> and <a href="../ariadne-remaining-blockers-20261015.md">blocker inventory</a> for scope and open work. Full incoming-state closure, guard coverage and frame paths remain open.</p>
+</details>
+<script>
+const graphs=__GRAPHS__;
+const captions={overview:'Recovered caller prefix and callee local connection. The gray dashed bridge records the missing connection and unwind relationship.',caller:'All 9 retained caller edges, with the unadmitted MOVAPS boundary. Recovery supplies no outgoing edge beyond this boundary.', 'callee-focus':'Retained callee entry-to-PC connectivity: 22 instruction starts, 21 internal edges. The alternate conditional branch and continuation after PC are shown as stubs.', 'callee-full':'Full retained callee partial CFG: 768 decoded starts, 778 visited addresses, 895 edges. Linear next chains are grouped; call edges remain display-only.'};
+const stage=document.getElementById('stage'); let svg,vb,initial,drag,current='overview';
+function apply(){svg.setAttribute('viewBox',vb.join(' '));}
+function zoom(f,cx,cy){const r=stage.getBoundingClientRect();cx=cx??(r.left+r.width/2);cy=cy??(r.top+r.height/2);const t=svg.createSVGPoint();t.x=cx;t.y=cy;const point=t.matrixTransform(svg.getScreenCTM().inverse());vb=[point.x-(point.x-vb[0])*f,point.y-(point.y-vb[1])*f,vb[2]*f,vb[3]*f];apply();}
+function show(name){current=name;stage.innerHTML=graphs[name];svg=stage.querySelector('svg');svg.removeAttribute('width');svg.removeAttribute('height');svg.setAttribute('role','img');svg.setAttribute('aria-label',captions[name]);initial=svg.getAttribute('viewBox').split(/\s+/).map(Number);vb=[...initial];document.getElementById('caption').textContent=captions[name];document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.view===name)));document.getElementById('svg-download').href=name+'.svg';document.getElementById('dot-download').href=name+'.dot';}
+document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>show(b.dataset.view));document.getElementById('fit').onclick=()=>{vb=[...initial];apply()};document.getElementById('plus').onclick=()=>zoom(.75);document.getElementById('minus').onclick=()=>zoom(1.33);
+stage.addEventListener('wheel',e=>{e.preventDefault();zoom(e.deltaY>0?1.15:1/1.15,e.clientX,e.clientY)},{passive:false});
+stage.addEventListener('pointerdown',e=>{if(e.button!==0)return;drag={x:e.clientX,y:e.clientY,vb:[...vb],matrix:svg.getScreenCTM().inverse()};stage.setPointerCapture(e.pointerId)});
+stage.addEventListener('pointermove',e=>{if(!drag)return;const m=drag.matrix,dx=e.clientX-drag.x,dy=e.clientY-drag.y;vb=[drag.vb[0]-(m.a*dx+m.c*dy),drag.vb[1]-(m.b*dx+m.d*dy),drag.vb[2],drag.vb[3]];apply()});
+stage.addEventListener('pointerup',()=>drag=null);stage.addEventListener('pointercancel',()=>drag=null);
+function find(){const q=document.getElementById('address').value.trim().toLowerCase();if(!q)return;const nodes=[...stage.querySelectorAll('g.node')];nodes.forEach(n=>n.classList.remove('selected'));const match=nodes.find(n=>(n.textContent+' '+[...n.querySelectorAll('a')].map(x=>x.getAttributeNS('http://www.w3.org/1999/xlink','title')||'').join(' ')).toLowerCase().includes(q));if(!match){document.getElementById('caption').textContent='Address is outside this view. Use the full partial CFG for other callee addresses.';return}match.classList.add('selected');const r=match.getBoundingClientRect(),pt=svg.createSVGPoint();pt.x=r.x+r.width/2;pt.y=r.y+r.height/2;const inv=svg.getScreenCTM().inverse(),center=pt.matrixTransform(inv),ratio=stage.clientWidth/stage.clientHeight;let w=Math.max(r.width*Math.abs(inv.a)*1.6,700),h=Math.max(r.height*Math.abs(inv.d)*1.6,w/ratio);w=Math.max(w,h*ratio);vb=[center.x-w/2,center.y-h/2,w,h];apply();}
+document.getElementById('find').onclick=find;document.getElementById('address').addEventListener('keydown',e=>{if(e.key==='Enter')find()});show('overview');
+</script></html>'''
+page = page.replace('__GRAPHS__', json.dumps(svgs).replace('</', '<\\/'))
+(OUT / 'index.html').write_text(page)
+print(json.dumps({'output': str(OUT / 'index.html'), 'svg_views': list(svgs), 'caller_nodes': len(graph_data[1]['nodes']), 'callee_nodes': len(graph_data[0]['nodes']), 'callee_blocks': len(graph_data[0]['blocks']), 'focus_nodes': len(focus), 'source_hashes_matched': len(source_hashes)}, indent=2))

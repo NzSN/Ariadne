@@ -4,7 +4,7 @@
 
 **Status.** Active analysis-model authority. Retired AMD64/x86-64 ISA specifications,
 coverage inventories and their checkers were removed on 2026-10-11.
-The [specification synchronization ledger](../Plans/specification-sync.md)
+The [specification synchronization ledger](../.agents/plans/specification-sync.md)
 records the subsequent source audit and separate qualification limits.
 
 **Why this document exists.** [Project overview](../README.md) motivates snapshot-scoped control flow and possible value origins.
@@ -14,41 +14,41 @@ records the subsequent source audit and separate qualification limits.
 **Where to go next.**
 
 - [Predicate admission v2](AriadnePredicateAdmission.tla) and the
-  [caller semantic-coverage plan](../Plans/caller-semantic-coverage.md) — checked
+  [caller semantic-coverage plan](../.agents/plans/caller-semantic-coverage.md) — checked
   normal-completion terminals, exact MOVAPS load/store guards and separate
   exception-resumption limits. The predicate section below records the new
   contract, passed S5 finite runtime qualification and the separate incomplete original-caller gate.
 
 - [Loop-target closure model](AriadneLoopTargetClosure.tla) and
-  [L0–L6 extension plan](../Plans/completed/loop-aware-target-resolution.md) — local-region
+  [L0–L6 extension plan](../.agents/plans/completed/loop-aware-target-resolution.md) — local-region
   entrance initialization, induction over original edges, fresh selector loads
   and the checked coverage premise consumed by target/composition admission.
   The component interface section below separates
   executable premise checks from model-to-model refinement, which is not proved.
 
 - [Guarded target composition model](AriadneGuardedTargetResolution.tla) and
-  [C0–C6 plan](../Plans/completed/guarded-target-resolution.md) — immutable query scope,
+  [C0–C6 plan](../.agents/plans/completed/guarded-target-resolution.md) — immutable query scope,
   original/candidate/final graph layering, a shared epoch, paired receipt
   invalidation and proof-only final effects. The 2026-10-14 source-bound
   qualification is retained; the new loop component has its own acceptance gate.
 
 - [Indirect-target model](AriadneTargetResolution.tla) and
-  [R0–R6 ledger](../Plans/indirect-target-resolution.md) — finite captured-table
+  [R0–R6 ledger](../.agents/plans/indirect-target-resolution.md) — finite captured-table
   candidates, residuals, incoming-coverage invalidation and resource stops;
   five model scenarios and implementation qualification have separate records.
 
 - [Frame-path model](AriadneFramePaths.tla) and
-  [F0–F4 plan](../Plans/frame-path-enumeration.md) — strict output count, valid
+  [F0–F4 plan](../.agents/plans/frame-path-enumeration.md) — strict output count, valid
   structural paths, bounded work and preservation of memory writers; checking
   and implementation qualification remain separate tiers.
 
 - [Memory refinement model](AriadneMemoryRefinement.tla) and
-  [implementation ledger](../Plans/memory-provenance-refinement.md) — specified
+  [implementation ledger](../.agents/plans/memory-provenance-refinement.md) — specified
   candidate-preservation and backward-value contract; model qualification is
   pending despite passing source/root and finite-runtime probes.
 
 - [Selected I5c design](../docs/Ariadne/address-wrap-design.md) and
-  [W0 model/oracle stage](../Plans/i5c-address-wrap.md#w0--freeze-semantics-and-independent-expectations)
+  [W0 model/oracle stage](../.agents/plans/i5c-address-wrap.md#w0--freeze-semantics-and-independent-expectations)
   — proposed address-wrap decision model; no new specification/check result
   exists yet, and model authority must precede runtime implementation.
 
@@ -93,7 +93,7 @@ The indirect-target extension adds one active module and five configurations on
 2026-10-13, with its own source-bound qualification below.
 The loop-target extension adds a component module and 25 configurations on
 2026-10-15, with a separate premise interface and qualification scope below.
-The [synchronization plan](../Plans/specification-sync.md) separates source
+The [synchronization plan](../.agents/plans/specification-sync.md) separates source
 corrections and bounded local evidence from remote qualification. A model's
 age alone does not imply drift; unchanged executable contracts retain their
 original bytes and replay bindings.
@@ -244,7 +244,7 @@ from the transition state, detailed BIL syntax, physical memory layout,
 cryptographic encoding and unrestricted CFGs. Trusted lifting, exact source
 transport, concrete budgets and those erased representation obligations still
 need Rust/native controls and source-bound replay. Fresh qualification under
-the [L0–L6 plan](../Plans/completed/loop-aware-target-resolution.md) records those tiers
+the [L0–L6 plan](../.agents/plans/completed/loop-aware-target-resolution.md) records those tiers
 separately; none of them is a universal implementation or inter-model proof.
 
 ## Shared semantic types
@@ -863,11 +863,11 @@ distinguishes certified normal terminals from unsupported Stops, while keeping
 general exception graphs and full ISA execution outside the model.
 
 The [original guard design](../docs/Ariadne/justified-branch-pruning-design.md)
-and [completed G0–G4 plan](../Plans/completed/justified-branch-pruning.md) retain
+and [completed G0–G4 plan](../.agents/plans/completed/justified-branch-pruning.md) retain
 the store-only v1 scope. Its exact model/source identities are preserved in
 the [legacy contract manifest](../tests/bap/fixtures/caller-coverage/legacy-manifest.json).
 The [caller coverage design](../docs/Ariadne/caller-semantic-coverage-design.md)
-and [S0–S6 plan](../Plans/caller-semantic-coverage.md) own v2 implementation and
+and [S0–S6 plan](../.agents/plans/caller-semantic-coverage.md) own v2 implementation and
 source-bound qualification. Editing this active model does not refresh the
 frozen v1 result or authorize its profile to admit new fields.
 

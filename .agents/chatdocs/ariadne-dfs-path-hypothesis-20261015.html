@@ -1,0 +1,66 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DFS with a path-existence hypothesis</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f7f8fa;color:#172337;font:17px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:1060px;margin:0 auto;padding:40px 44px 80px;background:white}h1{font-size:2.1rem;line-height:1.2;margin:0 0 24px}h2{font-size:1.45rem;margin:48px 0 16px;padding-top:16px;border-top:1px solid #d9e0e7}h3{font-size:1.1rem;margin-top:28px}p,li{max-width:90ch}a{color:#075caa}code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}code{font-size:.88em;background:#f0f3f6;padding:2px 4px;border-radius:3px}pre{overflow:auto;background:#f0f3f6;border-left:3px solid #7890a8;padding:18px;line-height:1.55;font-size:.88rem}pre code{background:none;padding:0}table{width:100%;border-collapse:collapse;font-size:.94rem;margin:20px 0}th,td{padding:11px 12px;text-align:left;vertical-align:top;border-bottom:1px solid #d9e0e7}th{background:#f0f3f6;font-weight:650}.demo{margin:28px 0;padding:24px;border:1px solid #b8c8d7;border-radius:8px;background:#fafcfe}.demo h3{margin-top:0}.caption,figcaption,.stack-label{color:#526274;font-size:.9rem}.lookup-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 28px;margin-top:18px}.lookup-grid div{border-bottom:1px solid #d9e0e7;padding:8px 0}.lookup-grid small{display:block;color:#526274}.lookup-grid strong{font-family:ui-monospace,Consolas,monospace;font-size:.95rem;overflow-wrap:anywhere}input[type=number]{width:90px;padding:8px;font-size:1rem;margin-left:12px;border:1px solid #8ca2b7;border-radius:4px}input[type=range]{accent-color:#075caa;min-width:100px;flex:1}.demo>input[type=range]{width:100%;display:block;margin:18px 0}.cfg{margin:26px 0}.cfg svg{width:100%;height:auto}.edges path{fill:none;stroke:#475569;stroke-width:2;marker-end:url(#arrow)}.node rect{fill:#f0f3f6;stroke:#9babbc;rx:6}.node text{text-anchor:middle;fill:#172337;font:15px system-ui,sans-serif}.entry rect{fill:#e8f1fb;stroke:#5b8fbe}.later rect{fill:#fff2e1;stroke:#b78646}.edge-label{font:14px system-ui;fill:#475569}.stack-layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}.stack-label{margin:10px 0}.stack-item{border:1px solid #809ab3;padding:14px;margin:10px 0;background:#e8f1fb;min-height:55px;border-radius:5px}.stack-item.later{background:#fff2e1;border-color:#b78646}.stack-item.empty{color:#66788a;background:white;border-style:dashed}.state{margin:0;padding:12px 0}.state dt{font-weight:650;margin:0 0 3px}.state dd{margin:0 0 14px;overflow-wrap:anywhere}.step-head{display:flex;gap:14px;align-items:center;margin:15px 0}.step-head span{color:#526274;font-size:.9rem}.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:20px}button{font:inherit;font-size:.95rem;background:#075caa;color:white;border:1px solid #075caa;padding:9px 15px;border-radius:5px;cursor:pointer}button:disabled{background:#e7ecf1;color:#68798a;border-color:#c2cdd7;cursor:default}button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #e4a237;outline-offset:3px}.advanced{margin-top:44px;padding:22px;background:#f8fafc;border:1px solid #cbd5df;border-radius:6px}.advanced summary{font-weight:650;cursor:pointer}.advanced h2{border:0;margin-top:20px}.top-note{font-size:.9rem;color:#526274;margin:0 0 25px}.top-note a{margin-right:16px}@media(max-width:720px){main{padding:26px 18px 50px}h1{font-size:1.7rem}.stack-layout,.lookup-grid{grid-template-columns:1fr}.demo{padding:16px}table{font-size:.85rem}th,td{padding:8px}.cfg{overflow:auto}.cfg svg{min-width:780px}.controls input{width:100%;order:3;flex-basis:100%}}@media print{body{background:white}main{max-width:none;padding:0}.controls,.top-note{display:none}.demo{break-inside:avoid}details>summary{display:none}}</style></head><body><main><p class="top-note">Regenerated 2026-10-16 from retained October 15 analysis · <a href="ariadne-reports-index.html">Report index</a> · <a href="ariadne-dfs-path-hypothesis-20261015.md">Markdown</a></p><h1>Can an existence hypothesis support DFS?</h1>
+<p><strong>Yes. A DFS phase can search for one justified path or table witness first. Ariadne already uses DFS; the useful changes would be the objective and scheduling.</strong> This restores the earlier design explanation, rather than adding an implementation.</p>
+<h2>Meaning of the hypothesis</h2>
+<pre><code class="language-text">At least one feasible path reaches the jump at DA0E.
+</code></pre>
+<p>That statement does not identify the path, fix its earlier register inputs or make the first path searched feasible. Search can also start without this hypothesis; finding a justified witness would establish existence under its admitted premises. A supplied hypothesis remains an explicit assumption.</p>
+<table>
+<thead>
+<tr>
+<th>Goal</th>
+<th>Required evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Structural path</td>
+<td>Represented edges connect the entry and jump. A 44-edge corridor is already known in the recovered graph.</td>
+</tr>
+<tr>
+<td>Feasible or conditional witness</td>
+<td>Symbolic transfers and accumulated conditions justify the witness or its conditional table arithmetic.</td>
+</tr>
+<tr>
+<td>Complete target coverage</td>
+<td>All relevant incoming contexts are covered by target evidence or an accepted coverage proof.</td>
+</tr>
+</tbody>
+</table>
+<p>A contradiction checker may reject an impossible context. A context that it has not rejected is not automatically a proved feasible execution.</p>
+<h2>Why DFS can still exhaust its budget</h2>
+<p>At D9CD the source pushes D9C6, then DD4C. A stack pops DD4C first. Expanding that incoming region can keep newer work above the queued entry corridor, even when a short useful corridor exists elsewhere.</p>
+<p>The shown entry corridor reaches the R12 initializer D9BF in 19 reverse edges from the jump. Giving it timely work could help obtain an initial table witness. That structural distance does not certify every condition along the corridor.</p>
+<p>The existence assumption changes neither this ordering nor the fixed resource allowance.</p>
+<h2>A useful witness-first strategy</h2>
+<ol>
+<li>Preserve the original graph, entry roots, capture and value premises.</li>
+<li>Search fairly for a first source-bound witness. Prioritize the initialization corridor or use bounded-depth DFS with increasing limits.</li>
+<li>Check accumulated constraints; prune proved contradictions and retain unresolved conditions explicitly.</li>
+<li>Retain the first valid table evidence and possible targets as partial progress.</li>
+<li>Prove remaining incoming/loop coverage before marking the target result complete.</li>
+</ol>
+<pre><code class="language-text">first-witness search
+    → conditional path/table evidence
+    → remaining incoming-coverage proof
+    → complete only if the coverage gate passes
+</code></pre>
+<p>With finite branching, a finite witness and terminating checks, a fair search can eventually reach a witness given sufficient resources. A fixed work budget can still expire. Address-only visited sets establish structural reachability but cannot safely discard all distinct symbolic states and constraints.</p>
+<h2>One path does not always fix RAX</h2>
+<p>Even one local branch sequence can allow both selectors 65 and 43 under the shown bounds. Captured table arithmetic gives different RAX values for them. A symbolic witness can therefore yield a set of possible values rather than one numeric result.</p>
+<p>A suitable partial result would say:</p>
+<pre><code class="language-text">One justified table witness found.
+Targets under its conditions: retained.
+Remaining incoming coverage: unresolved.
+Complete: false.
+</code></pre>
+<p>For DA0E, the existing loop matcher also needs to distinguish the result register RAX from the index register RBX and its byte-classifier expression. Finding an initial witness does not remove that separate limitation.</p>
+<h2>Relationship to current frame-path listing</h2>
+<p>The <a href="ariadne-frame-to-frame-semantics-20261015.html">frame-to-frame semantics report</a> describes a separate forward structural DFS. Its <code>NP=2</code> setting retains at most one structural path, but does not add a feasibility proof or bypass missing bound frame graphs. The witness-first proposal above concerns the earlier target-resolution stage.</p>
+<p><a href="ariadne-first-callee-jump-explained-20261015.html">Detailed first-jump explanation</a>, <a href="ariadne-case4-analysis-20261015.html">case-4 analysis</a>.</p>
+<h2>Context and follow-up</h2>
+<p><strong>Status.</strong> Retained design discussion, restored on 2026-10-16; the proposed witness-first strategy is not an implementation claim.</p>
+<p><strong>Why this document exists.</strong> It preserves the conversation explanation associated with the <a href="../../docs/Ariadne/indirect-target-resolution.md">target-resolution design</a> and <a href="ariadne-frame-to-frame-semantics-20261015.md">frame-path explanation</a>.</p>
+<p><strong>What this document establishes.</strong> The body records the stated mechanism, examples and evidence boundaries as of the report date.</p>
+<p><strong>Where to go next.</strong> Use the <a href="../../docs/Ariadne/indirect-target-resolution.md">target-resolution design</a> and <a href="ariadne-frame-to-frame-semantics-20261015.md">frame-path explanation</a>; the <a href="ariadne-reports-index.md">report index</a> links related explanations.</p>
+<p><strong>What remains unresolved.</strong> A path-existence premise does not supply a witness or remove feasibility and coverage obligations.</p>
+</main></body></html>

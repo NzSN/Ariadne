@@ -1,0 +1,347 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Resolver pattern matching in structural type theory</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f7f8fa;color:#172337;font:17px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:1060px;margin:0 auto;padding:40px 44px 80px;background:white}h1{font-size:2.1rem;line-height:1.2;margin:0 0 24px}h2{font-size:1.45rem;margin:48px 0 16px;padding-top:16px;border-top:1px solid #d9e0e7}h3{font-size:1.1rem;margin-top:28px}p,li{max-width:90ch}a{color:#075caa}code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}code{font-size:.88em;background:#f0f3f6;padding:2px 4px;border-radius:3px}pre{overflow:auto;background:#f0f3f6;border-left:3px solid #7890a8;padding:18px;line-height:1.55;font-size:.88rem}pre code{background:none;padding:0}table{width:100%;border-collapse:collapse;font-size:.94rem;margin:20px 0}th,td{padding:11px 12px;text-align:left;vertical-align:top;border-bottom:1px solid #d9e0e7}th{background:#f0f3f6;font-weight:650}.demo{margin:28px 0;padding:24px;border:1px solid #b8c8d7;border-radius:8px;background:#fafcfe}.demo h3{margin-top:0}.caption,figcaption,.stack-label{color:#526274;font-size:.9rem}.lookup-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 28px;margin-top:18px}.lookup-grid div{border-bottom:1px solid #d9e0e7;padding:8px 0}.lookup-grid small{display:block;color:#526274}.lookup-grid strong{font-family:ui-monospace,Consolas,monospace;font-size:.95rem;overflow-wrap:anywhere}input[type=number]{width:90px;padding:8px;font-size:1rem;margin-left:12px;border:1px solid #8ca2b7;border-radius:4px}input[type=range]{accent-color:#075caa;min-width:100px;flex:1}.demo>input[type=range]{width:100%;display:block;margin:18px 0}.cfg{margin:26px 0}.cfg svg{width:100%;height:auto}.edges path{fill:none;stroke:#475569;stroke-width:2;marker-end:url(#arrow)}.node rect{fill:#f0f3f6;stroke:#9babbc;rx:6}.node text{text-anchor:middle;fill:#172337;font:15px system-ui,sans-serif}.entry rect{fill:#e8f1fb;stroke:#5b8fbe}.later rect{fill:#fff2e1;stroke:#b78646}.edge-label{font:14px system-ui;fill:#475569}.stack-layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}.stack-label{margin:10px 0}.stack-item{border:1px solid #809ab3;padding:14px;margin:10px 0;background:#e8f1fb;min-height:55px;border-radius:5px}.stack-item.later{background:#fff2e1;border-color:#b78646}.stack-item.empty{color:#66788a;background:white;border-style:dashed}.state{margin:0;padding:12px 0}.state dt{font-weight:650;margin:0 0 3px}.state dd{margin:0 0 14px;overflow-wrap:anywhere}.step-head{display:flex;gap:14px;align-items:center;margin:15px 0}.step-head span{color:#526274;font-size:.9rem}.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:20px}button{font:inherit;font-size:.95rem;background:#075caa;color:white;border:1px solid #075caa;padding:9px 15px;border-radius:5px;cursor:pointer}button:disabled{background:#e7ecf1;color:#68798a;border-color:#c2cdd7;cursor:default}button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #e4a237;outline-offset:3px}.advanced{margin-top:44px;padding:22px;background:#f8fafc;border:1px solid #cbd5df;border-radius:6px}.advanced summary{font-weight:650;cursor:pointer}.advanced h2{border:0;margin-top:20px}.top-note{font-size:.9rem;color:#526274;margin:0 0 25px}.top-note a{margin-right:16px}@media(max-width:720px){main{padding:26px 18px 50px}h1{font-size:1.7rem}.stack-layout,.lookup-grid{grid-template-columns:1fr}.demo{padding:16px}table{font-size:.85rem}th,td{padding:8px}.cfg{overflow:auto}.cfg svg{min-width:780px}.controls input{width:100%;order:3;flex-basis:100%}}@media print{body{background:white}main{max-width:none;padding:0}.controls,.top-note{display:none}.demo{break-inside:avoid}details>summary{display:none}}</style></head><body><main><p class="top-note"><a href="ariadne-reports-index.html">Chat report index</a> · <a href="ariadne-resolver-structural-types-20261015.md">Markdown</a></p><h1 id="resolver-pattern-matching-in-structural-type-theory">Resolver pattern matching in structural type theory</h1>
+<blockquote>
+<p><strong>Archived chat document.</strong> Restored on 2026-10-16 from the original conversation records. Statements such as “current”, “latest” and “fresh” refer to the original report date. Restoration does not rerun analysis or qualification.</p>
+</blockquote>
+<p><strong>Ariadne currently has one indirect-target resolver. Its two target-producing shapes form a sum type: <code>Relative32 + Pointer64</code>. Loop properties belong to a separate context, so a relative-table expression can also occur inside a loop. Matching a shape supplies evidence about its structure; completeness requires additional semantic checks.</strong></p>
+<p>Here, “structural type theory” means tagged sums, records/products, structural views, and predicate refinements. The notation below is explanatory pseudocode, not executable Rust or a newly checked formal specification. The existing TLA+ models retain their authority. The proposed general loop-invariant rule is marked explicitly.</p>
+<p>For the requested patterns, jump to <a href="#11-abstract-syntax">11. Abstract syntax</a> and <a href="#14-statics-and-pattern-rules">14. Statics and pattern rules</a>. For overlap with the proposed loop rule, read <a href="#19-model-versus-implementation-analysis">19. Model-versus-implementation analysis</a>.</p>
+<h2 id="1-purpose-and-module-boundary">1. Purpose and module boundary</h2>
+<p>The resolver reconstructs possible indirect-jump destinations from admitted BIL, a fixed candidate graph, captured control-data bytes, branch constraints and finite budgets. It owns symbolic reconstruction, target recognition and receipts. Input materialization owns discovery and captured reads; Rust/native admission independently checks receipts.</p>
+<p>Source: <a href="../../src/bap/target_resolution.rs#L945">target resolver</a>, <a href="../../src/input/materialize.rs#L682">materialization coordinator</a>, <a href="../../native/bap-core/capture.ml#L493">native checker</a>.</p>
+<h2 id="2-concrete-implementation">2. Concrete implementation</h2>
+<p>Rust stores a <code>Term</code> record containing a width and a tagged <code>TermKind</code>. Its variants are constant, input, unknown, binary operation, unary operation, cast and load. <code>PathReceipt</code> stores a string <code>form</code> and common fields for paths, guards, indices and table entries. <code>Resolution</code> stores targets, receipts, a Boolean <code>complete</code> and unresolved reasons.</p>
+<p>The coordinator selects rooted <code>resolve</code> or local-candidate <code>resolve_candidate</code>; both enter <code>resolve_inner</code>. That function searches backward, rewrites terms and guards, recognizes bounded target forms and reads captured table slots. It borrows the graph and transfers, owns its worklist/results, and mutates finite counters and a captured-read cache. No concurrent resolver arbitration occurs here. Invalid evidence is an error; unsupported contexts and exhausted work can produce incomplete results.</p>
+<p>Source: <a href="../../src/bap/target_resolution.rs#L89">term representation</a>, <a href="../../src/bap/target_resolution.rs#L480">receipt representation</a>, <a href="../../src/input/materialize.rs#L722">mode selection</a>.</p>
+<h2 id="3-concrete-invariants">3. Concrete invariants</h2>
+<table>
+<thead>
+<tr>
+<th>Invariant</th>
+<th>Enforcement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A recognized <code>relative32</code> expression uses the same concrete base for table addressing and offset addition</td>
+<td>Runtime equality tests in <code>relative</code></td>
+</tr>
+<tr>
+<td>Recognized indices contain no <code>Unknown</code> term</td>
+<td>Runtime structural check</td>
+</tr>
+<tr>
+<td>Candidate entries remain tied to captured reads and signed-offset arithmetic</td>
+<td>Runtime receipt validation</td>
+</tr>
+<tr>
+<td>A complete row has no unresolved reason or stopped report and has coverage receipts</td>
+<td>Runtime validation</td>
+</tr>
+<tr>
+<td>Completeness covers all incoming reverse contexts, ending at roots or justified local frontiers</td>
+<td>Runtime prefix-coverage replay</td>
+</tr>
+<tr>
+<td>Report identity matches the snapshot, graph, profile and premise</td>
+<td>Runtime validation</td>
+</tr>
+</tbody>
+</table>
+<p>These are not statically encoded as Rust refinement types. Source: <a href="../../src/bap/target_resolution.rs#L689">recognition</a>, <a href="../../src/bap/target_resolution.rs#L1386">report binding</a>, <a href="../../src/bap/target_resolution.rs#L1684">coverage</a>.</p>
+<h2 id="4-representative-execution">4. Representative execution</h2>
+<p>For the dump's jump at <code>0x00007ff77440da09</code>, backward reconstruction obtains a relative table expression and retains four known candidates. The candidate graph also contains a table edge back through <code>mov rcx,[rcx]</code>. That assigns an address input used by a later selector-byte load. The existing cycle rules leave a context unresolved, so the row remains <code>complete=false</code> with <code>cyclic-incoming-state</code>.</p>
+<p>The shape match succeeded; incoming-state closure did not. The report also retains a separate stable, contradictory context as <code>infeasible</code>. These observations come from the <a href="../../evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/target-report.json">retained target report</a>, not a new analysis run.</p>
+<h2 id="5-first-abstraction-boundary">5. First abstraction boundary</h2>
+<p><strong>Preserve:</strong> fixed snapshot/query identity, semantic VAs, expression widths and constructors, variable/read identities, branch direction, incoming graph structure, captured-byte premises, finite resources and incomplete outcomes.</p>
+<p><strong>Erase:</strong> <code>Box</code> allocation layout, collection implementations, JSON field order, string formatting and cached-read storage. The cache's captured-read identity and its effect on resource accounting remain relevant. Numeric operation codes become names such as <code>Add</code> and <code>SignedCast</code>.</p>
+<h2 id="6-minimal-abstract-machine">6. Minimal abstract machine</h2>
+<pre><code class="language-text">Context = {
+  cursor : VA,
+  target : RawTerm,
+  guards : List&lt;Guard&gt;,
+  reverse_path : List&lt;{ predecessor : VA, taken : Bool }&gt;
+}
+
+Machine = {
+  fixed : { snapshot, candidate_graph, roots, transfers, premise, limits },
+  pending : List&lt;Context&gt;,
+  targets : Set&lt;VA&gt;,
+  receipts : List&lt;RawReceipt&gt;,
+  unresolved : Set&lt;Reason&gt;,
+  resources : { steps_remaining, elapsed, read_bytes, ... }
+}
+</code></pre>
+<p><code>pending</code> contains unprocessed reverse contexts. <code>guards</code> preserve the branch constraints for that particular context. <code>targets</code> contain witnessed candidates, not an executed-target history. The fixed graph may be replaced by a later discovery epoch outside this invocation; old completeness must then be rechecked.</p>
+<h2 id="7-abstract-operations">7. Abstract operations</h2>
+<pre><code class="language-text">rewrite   : RawTerm × Transfer × Budget -&gt; Option&lt;RawTerm&gt;
+matchShape: RawTerm -&gt; Option&lt;TargetShape&gt;
+inferDomain : RawTerm × List&lt;Guard&gt; × Limits -&gt; Option&lt;FiniteSet&lt;Word&gt;&gt;
+checkContradiction : List&lt;Guard&gt; × Limits -&gt; Bool
+checkCycle : Context × CandidateGraph × Transfers -&gt; Bool
+readCaptured : VA × ByteCount -&gt; CapturedRead + Error
+validate : RawReport × FixedInput -&gt; Accepted + Error
+</code></pre>
+<p><code>checkContradiction=false</code> means that the bounded checker did not establish a contradiction. It does not mean satisfiable. <code>validate=Accepted</code> means the current runtime checks accepted the report, not that a universal correctness theorem has been proved.</p>
+<h2 id="8-reachability-and-invariants">8. Reachability and invariants</h2>
+<p>The initial worklist holds the queried jump expression with no accumulated guards or predecessor steps. Each successful reverse step substitutes a predecessor's outputs and adds its branch condition when present. Recognized frontiers, roots or excluded contexts terminate individual searches. Cycle rejection or resource exhaustion leaves explicit uncertainty; other contexts continue.</p>
+<p>The raw record types can represent contradictory combinations such as <code>complete=true</code> with unresolved reasons. Such a value is representable but fails admission. A partial result is an intentional terminal outcome, not a stuck machine.</p>
+<h2 id="9-abstract-execution-trace">9. Abstract execution trace</h2>
+<pre><code class="language-text">Context(jump, Input(R8), [], [])
+  -- reverse through ADD and table LOAD --&gt;
+Context(cursor, B + sext64(load32(B + scale(i))), guards, path)
+  -- matchShape --&gt;
+Some(Relative32{base=B, index=i})
+  -- inferDomain and captured slot reads --&gt;
+table receipts and known candidates
+  -- encounter uncovered cyclic predecessor --&gt;
+Partial{known_candidates, reason=cyclic-incoming-state}
+</code></pre>
+<p>The generic trace abstracts multiple substitutions. See <a href="../../src/bap/target_resolution.rs#L1040">worklist</a>, <a href="../../src/bap/target_resolution.rs#L1089">target-form dispatch</a>, and <a href="../../src/bap/target_resolution.rs#L1216">cycle cutoff</a>.</p>
+<h2 id="10-second-abstraction-boundary">10. Second abstraction boundary</h2>
+<p>The formal presentation below removes the particular DFS schedule and allocation details. It preserves typed expression shapes, finite checks, incoming-context identity and failure/partial distinctions. Runtime counters become an abstract budget. Timing remains observable through budget-stop outcomes.</p>
+<p>This presentation does not replace the actual bounded contradiction checker with a general satisfiability oracle.</p>
+<h2 id="11-abstract-syntax">11. Abstract syntax</h2>
+<p>Read <code>A + B</code> as a tagged alternative, <code>A × B</code> as a pair of facts and <code>{field:T,...}</code> as a record. Within expression syntax, <code>Add</code> denotes arithmetic; it is different from type-level <code>+</code>.</p>
+<h3 id="raw-recursive-type-product-containing-a-sum">Raw recursive type: product containing a sum</h3>
+<pre><code class="language-text">RawTerm = μT. {
+  width : U8,
+  kind :
+      Constant { value : HexWord }
+    + Input    { key : VariableKey }
+    + Unknown  {}
+    + Binary   { op : Int, left : T, right : T }
+    + Unary    { op : Int, arg : T }
+    + Cast     { op : Int, arg : T }
+    + Load     { site : VA, address : T }
+}
+</code></pre>
+<p><code>μT</code> means the record can recursively contain terms. This mirrors the shape of Rust's <code>Term</code> and <code>TermKind</code>; it does not claim that Rust uses a structural-subtyping language.</p>
+<h3 id="output-shape-a-second-sum">Output shape: a second sum</h3>
+<pre><code class="language-text">TargetShape =
+    Relative32 { base : Word64, index : RawTerm }
+  + Pointer64  { address : VA }
+</code></pre>
+<p>This sum has exactly two current target-producing alternatives. <code>infeasible</code> is a context-proof case, not a third target shape.</p>
+<h3 id="shape-and-control-context-are-separate-products">Shape and control context are separate products</h3>
+<pre><code class="language-text">ShapedContext = {
+  shape : TargetShape,
+  context : Context,
+  snapshot : SnapshotIdentity,
+  graph_epoch : Epoch,
+  match : MatchEvidence(context.target, shape)
+}
+</code></pre>
+<p>This checked conceptual record includes a refinement connecting its shape to its target term; arbitrarily pairing the two fields would not establish a match. A context can have both a <code>Relative32</code> target shape and an incoming graph containing a loop. Those properties are not exclusive alternatives in the same sum.</p>
+<h2 id="12-binding-structure">12. Binding structure</h2>
+<p>In the patterns below, <code>b</code>, <code>a</code>, <code>i</code> and <code>s</code> are pattern-bound metavariables. A repeated <code>b</code> requires equality of concrete base values; it does not introduce a fresh base with the same spelling.</p>
+<p>Program inputs use keys derived from BIL variable identities. The key does not itself give every loop iteration a fresh SSA name. Reverse substitution and the particular path context determine which earlier expression is represented. Load terms preserve their source site and rewritten address. Matching the spelling <code>RCX</code> at two iterations does not establish equal values or equal load addresses. BIL <code>let</code> binding is handled during extraction before these simplified patterns are inspected.</p>
+<h2 id="13-judgment-forms">13. Judgment forms</h2>
+<pre><code class="language-text">t ⇝ shape
+    The structural recognizer extracts a supported target shape from term t.
+
+Γ, L ⊢ i bounded-by D
+    The implemented finite-domain/range checks obtain a finite candidate domain D.
+
+Γ, L ⊢ impossible
+    The implemented bounded checker establishes a contradiction.
+
+S, G, Q ⊢ receipt accepted
+    Runtime replay accepts the receipt under the exact snapshot, graph and query.
+
+Covered(G, Q, receipts)
+    Every required incoming context ends in an admitted root/frontier/proof case.
+</code></pre>
+<p><code>Γ</code> is the accumulated guard list, <code>L</code> the limits, <code>S</code> the immutable captured snapshot, <code>G</code> the candidate graph and <code>Q</code> the fixed query/premise scope. A shape judgment does not imply any of the later judgments.</p>
+<h2 id="14-statics-and-pattern-rules">14. Statics and pattern rules</h2>
+<h3 id="pointer64-match-a-load-whose-address-is-concrete"><code>pointer64</code>: match a load whose address is concrete</h3>
+<pre><code class="language-text">t = { width=64,
+      kind=Load{ site=s,
+                 address={ kind=Constant{value=a}, ... } } }
+number(address) = a
+---------------------------------------------------------------- POINTER64
+t ⇝ Pointer64{address=a}
+</code></pre>
+<p>This is a structural match over nested records and tagged alternatives. The captured 8-byte read is a later operation. A load from an address that remains symbolic does not match this target form.</p>
+<h3 id="relative32-match-nested-arithmetic-cast-and-load-structure"><code>relative32</code>: match nested arithmetic, cast and load structure</h3>
+<p>For a well-formed normalized term, the recognized shape is:</p>
+<pre><code class="language-text">Add(Const(b), SignedCast64(
+  Load32(site=s,
+    address=Add(Const(b), scale(j)))))
+
+scale(j) ::= ShiftLeft(j, Const(2)) | Multiply(j, Const(4))
+index(j) ::= i  when j = UnsignedCast(i)
+           | j  otherwise
+</code></pre>
+<p>Both <code>Add</code> nodes allow the constant base on either side. The scale factor must be on the right of the shift/multiply node. After the optional unsigned cast is removed, the index must contain no <code>Unknown</code>.</p>
+<pre><code class="language-text">outer operation = Add
+outer constant base = b
+offset = SignedCast(width=64, arg=Load(width=32, site=s, address=slot))
+slot = Add(Const(b), scale(j))             [either Add operand order]
+scale(j) = ShiftLeft(j,Const(2)) or Multiply(j,Const(4))
+i = index(j)     noUnknown(i)
+---------------------------------------------------------------- RELATIVE32
+t ⇝ Relative32{base=b, index=i}
+</code></pre>
+<p>The width-64 signed cast and width-32 load are explicit recognizer tests. Width annotations on the other constructors above describe well-formed terms supplied by extraction; they are not all independent raw-field tests in <code>relative</code>. See <a href="../../src/bap/target_resolution.rs#L689">the exact nested matcher</a>.</p>
+<p>This is not unrestricted algebraic equivalence. For symbolic <code>i</code>, the matcher accepts <code>i*4</code>; it does not commute <code>4*i</code> into that form. Constructors already perform limited constant folding and cast simplification, so recognition is applied to that resulting representation.</p>
+<h3 id="structural-matching-versus-refinement-evidence">Structural matching versus refinement evidence</h3>
+<p>We can model a recognized case as a dependent pair:</p>
+<pre><code class="language-text">Recognized(t) = Σ shape : TargetShape. MatchEvidence(t, shape)
+</code></pre>
+<p><code>Σ</code> packages a selected shape with evidence that the term matches it. This is an explanatory type; Rust currently returns options, fields and runtime-checked receipts rather than a proof term of this type.</p>
+<p>Closing a target-producing context needs a larger product of obligations:</p>
+<pre><code class="language-text">CompleteTargetContextEvidence =
+  ShapeEvidence
+  × FiniteDomainEvidence
+  × FullCapturedReadEvidence
+  × TargetArithmeticEvidence
+  × SemanticPathReplayEvidence
+
+ContextClosure =
+    CompleteTargetContextEvidence
+  + CheckedInfeasibleContextEvidence
+
+CompleteEvidence =
+  RequiredContextClosures
+  × IncomingCoverageEvidence
+  × SnapshotQueryEpochBinding
+</code></pre>
+<p>For a partial result, only some checked entry/context evidence may exist. Known candidates are retained; the missing components prevent a completeness claim. A zero-target result can also be complete if all required contexts are validly excluded; target count alone decides neither success nor failure.</p>
+<h2 id="15-dynamics">15. Dynamics</h2>
+<h3 id="implemented-shape-dispatch">Implemented shape dispatch</h3>
+<pre><code class="language-text">matchShape(t):
+  match relative(t):
+    Some(base,index) -&gt; Some(Relative32{base,index})
+    None -&gt;
+      match t:
+        Load{width=64, address=concrete(a), ...}
+          -&gt; Some(Pointer64{address=a})
+        _ -&gt; None
+</code></pre>
+<p>The target-form match is reached at a root or supported local frontier. In local mode, a checked contradictory context can terminate earlier with an <code>infeasible</code> receipt. Extending a predecessor can instead stop at the cycle rule. These checks are therefore a control-flow sequence, not one flat list of competing resolver classes.</p>
+<h3 id="table-candidate-evaluation">Table candidate evaluation</h3>
+<pre><code class="language-text">Relative32(b,i):
+  D := supportedFiniteDomain(i, Γ, limits)
+  for each retained index k in D:
+    slot   := b + 4*k                         modulo 2^64
+    offset := signed32(capturedRead32(slot))
+    target := b + signExtend64(offset)         modulo 2^64
+    retain the entry/read/arithmetic receipt
+
+Pointer64(a):
+  target := capturedRead64(a)
+  retain the read/arithmetic receipt
+</code></pre>
+<p>Guards can narrow domains or exclude values they definitely contradict. An unsupported evaluation returns unknown and cannot remove a candidate. Capture failures and budgets can leave only partial entry evidence.</p>
+<h3 id="context-proof-sum">Context proof sum</h3>
+<pre><code class="language-text">ContextCase =
+    TableCase      { shape, domain, entry_evidence, path_evidence }
+  + InfeasibleCase { contradiction_evidence, required_cycle_stability }
+</code></pre>
+<p><code>InfeasibleCase</code> adds no destination. Existing cyclic exclusions require the reviewed stable-cycle check. A return to the queried dispatch or an unsupported repeated context instead produces <code>cyclic-incoming-state</code>.</p>
+<h2 id="16-error-behavior">16. Error behavior</h2>
+<pre><code class="language-text">ObservedOutcome =
+    Complete { candidates, accepted_receipts, incoming_coverage }
+  + Partial  { known_candidates, receipts, unresolved_reasons, optional_stop }
+  + InvalidEvidence { error }
+</code></pre>
+<p>This sum refines the concrete record/Boolean representation for explanation. It does not introduce a new public result type. Unsupported target shapes, unknown bounds, cyclic contexts or budgets can yield partial results. Malformed bindings, altered source bytes/BIL, invalid graph edges or inconsistent receipts fail admission. <code>Partial</code> does not imply the candidate set is empty, and <code>Complete</code> does not imply that any path executed.</p>
+<h2 id="17-implementation-correspondence">17. Implementation correspondence</h2>
+<table>
+<thead>
+<tr>
+<th>Formal concept</th>
+<th>Concrete implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Recursive record containing a tagged sum</td>
+<td><a href="../../src/bap/target_resolution.rs#L91">Term / TermKind</a></td>
+</tr>
+<tr>
+<td>Normalized constructors and substitution</td>
+<td><a href="../../src/bap/target_resolution.rs#L174">cast</a>, <a href="../../src/bap/target_resolution.rs#L294">rewrite</a></td>
+</tr>
+<tr>
+<td>Relative32 match and base-equality tests</td>
+<td><a href="../../src/bap/target_resolution.rs#L689">relative</a></td>
+</tr>
+<tr>
+<td>Pointer64 match and target-form selection</td>
+<td><a href="../../src/bap/target_resolution.rs#L1089">form selection</a></td>
+</tr>
+<tr>
+<td>Finite domain and local cut</td>
+<td><a href="../../src/bap/target_resolution.rs#L555">values</a>, <a href="../../src/bap/target_resolution.rs#L752">bounded_form</a></td>
+</tr>
+<tr>
+<td>Bounded contradiction judgment</td>
+<td><a href="../../src/bap/target_resolution.rs#L794">guards_infeasible</a></td>
+</tr>
+<tr>
+<td>Existing cycle predicate</td>
+<td><a href="../../src/bap/target_resolution.rs#L896">stable_cycle</a></td>
+</tr>
+<tr>
+<td>Runtime refinement admission</td>
+<td><a href="../../src/bap/target_resolution.rs#L1386">validate</a>, <a href="../../native/bap-core/capture.ml#L586">native replay</a></td>
+</tr>
+<tr>
+<td>Full incoming coverage</td>
+<td><a href="../../src/bap/target_resolution.rs#L1684">prefix replay</a></td>
+</tr>
+<tr>
+<td>Abstract completeness authority</td>
+<td><a href="../../Specs/AriadneTargetResolution.tla#L67">target model</a>, <a href="../../Specs/AriadneGuardedTargetResolution.tla#L341">composition policies</a></td>
+</tr>
+</tbody>
+</table>
+<p>This is a source correspondence table, not a machine-checked refinement proof.</p>
+<h2 id="18-final-abstraction-boundary">18. Final abstraction boundary</h2>
+<p>The type presentation omits JSON encodings, source-hash algorithms, helper transport and the detailed finite guard evaluator. It retains their obligations as runtime checks. <code>MatchEvidence</code> and <code>CompleteEvidence</code> express required evidence, without asserting a proven theorem that every accepted runtime record inhabits those formal types.</p>
+<p>Structural record views can be written conceptually as:</p>
+<pre><code class="language-text">{ term:T, guards:G, path:P, snapshot:S } &lt;: { term:T }
+</code></pre>
+<p>The left record contains the information required by the right view. This is a mathematical information view, not permission to add arbitrary JSON fields: actual receipt schemas use strict field validation. The notation also introduces no new assumption that crash-time registers describe earlier loop states.</p>
+<h2 id="19-model-versus-implementation-analysis">19. Model-versus-implementation analysis</h2>
+<p>The abstraction map <code>α</code> translates a concrete Rust term recursively into <code>RawTerm</code>, retaining widths, operation meaning, keys and read sites. It translates concrete collections and worklist fields into the finite sets/lists of <code>Machine</code>. A runtime-invalid receipt can still map to a raw structural record; it does not thereby inhabit an evidence-refined type. Thus the comparison is by this translation and checked predicates, not by treating Rust values and mathematical types as literally the same set. One concrete worklist iteration can realize several abstract operations. No transition-simulation theorem is claimed.</p>
+<h3 id="why-patterns-can-overlap">Why patterns can overlap</h3>
+<p>Target form and loop properties describe different fields:</p>
+<pre><code class="language-text">RelativeContext = {
+  shape:Relative32,
+  context:Context,
+  match:MatchEvidence(context.target, shape), ...
+}
+LoopContext(G) = {
+  context:Context,
+  loop:LoopRegion(G),
+  relevance:RelevantIncomingLoop(context, loop), ...
+}
+
+RelativeLoopContext(G) = RelativeContext &amp; LoopContext(G)
+</code></pre>
+<p>Here <code>&amp;</code> is an intersection of compatible record predicates. <code>LoopRegion(G)</code> names a cyclic region of the bound candidate graph; <code>RelevantIncomingLoop</code> relates it to a candidate incoming route for this context. This is model vocabulary, not a claim that the current resolver runs a separate loop-region matcher. The intersection is inhabited by a relative-table expression whose incoming graph contains a loop. One successfully closed reverse path can still be acyclic. By contrast, the current <code>Relative32</code> and <code>Pointer64</code> term recognizers require different outer constructors (<code>Binary(Add,...)</code> and <code>Load</code>), so those two raw target-form cases do not overlap.</p>
+<h3 id="proposed-loop-aware-refinement--not-implemented">Proposed loop-aware refinement — not implemented</h3>
+<pre><code class="language-text">LoopSummaryEvidence = {
+  invariant,
+  initialization : CheckedForEveryLoopEntrance(invariant),
+  preservation   : CheckedForEveryLoopBackedge(invariant),
+  dispatch_bound : CheckedAtEveryTableLoad(invariant),
+  coverage       : CheckedCoverageOfRequiredEntrancesRecurrencesAndExits,
+  source_binding : CheckedSnapshotGraphQueryBinding
+}
+
+LoopRelativeContext(G) =
+  RelativeContext &amp; LoopContext(G) &amp; { summary : LoopSummaryEvidence }
+</code></pre>
+<p>For this dump, a candidate invariant would keep the RDX table base fixed while permitting RCX to follow a different pointer. At the indexed-load point, the selector must be within the admitted table range. At the jump, R8 has already become a target address, so the selector-bound property must not be incorrectly attached to R8 at that later point.</p>
+<p>A loop-aware checker would discharge the summary obligations before providing the existing relative-table evaluator with a complete input domain. Merely matching the <code>LoopContext</code> fields cannot construct <code>summary</code>. The current producer and Rust/native validators reject general dispatch revisits; they need a new checked closure rule before accepting this proposed case.</p>
+<h3 id="what-the-stronger-types-intentionally-exclude">What the stronger types intentionally exclude</h3>
+<p>The actual <code>form:String</code> receipt representation can encode inconsistent variants until validation rejects them. <code>Term.width:U8</code> and integer operation tags are more permissive than a statically indexed expression grammar. Runtime re-extraction, replay and exact field checks restrict admitted values. The model's refined evidence types intentionally exclude malformed combinations; no type-level implementation change or equivalence proof is claimed here.</p>
+<p>Constraint infeasibility remains a soundness-sensitive bounded check: an unknown expression is not a shared symbolic value that can establish contradiction. Loads from potentially different RCX values remain distinct. Existing stable-cycle proofs remain applicable under their original premises; adding a broader invariant rule must not weaken those premises globally.</p>
+<h2 id="context-and-follow-up">Context and follow-up</h2>
+<p><strong>Status:</strong> explanatory document created 2026-10-15 from the inspected source. <strong>Motivating problem:</strong> understand resolver matching and overlap through structural types. <strong>Contribution:</strong> reconstructs the concrete implementation into sum/product types, contextual judgments and evidence refinements, with explicit abstraction losses.</p>
+<p>The <a href="../../../skills/skills/engineering/formal-semantics/SKILL.md">formal-semantics skill</a> guided the source-to-model presentation. The <a href="../../Specs/README.md">formal-model guide</a> remains the entry to authoritative analysis contracts. Read the <a href="../../docs/Ariadne/guarded-target-resolution-design.md">canonical composition design</a> for current behavior and the proposed invariant follow-up, or the <a href="ariadne-cyclic-incoming-state-20261015.md">cyclic-state explanation</a> for the concrete dump loop. The <a href="../plans/completed/guarded-target-resolution.md">active plan</a> retains the open completeness gate.</p>
+<p><strong>Unresolved limits:</strong> these structural types and inference rules have not been encoded or typechecked in a proof assistant. They do not replace the TLA+ authority, establish universal Rust/native refinement, implement a resolver registry, or implement the proposed loop-summary rule. No build, model checker or dump analysis was run to write this explanation.</p>
+</main></body></html>

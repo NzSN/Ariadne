@@ -147,7 +147,7 @@ This inspector uses an explicit reviewed byte recipe and a separate integer
 checksum calculation, plus raw minidump/PE parsing. It checks every instruction
 boundary and short-branch target, full captured code, inputs, process/module
 identity and fault context. It does not derive expected results from Ariadne or
-BAP. The [replacement plan](../../Plans/bap-windows-repin.md) defines the pin and
+BAP. The [replacement plan](../../.agents/plans/bap-windows-repin.md) defines the pin and
 its historical 2,000 ms criterion; the later
 [unlimited BAP policy](../../docs/Ariadne/bap-analysis-core-design.md#unlimited-timing-policy) supersedes
 that timing ceiling. I5a keeps its separate 1,500 ms CLI criterion.
@@ -182,7 +182,7 @@ metadata does not identify the source that produced the historical executable.
 
 With `build/`, `partial/` and `full/` records copied into one local directory,
 first select the read-only dependency snapshot used for qualification, following
-[the snapshot procedure](../../Plans/i5a-native-qualification.md#reproduce-with-a-stable-dependency-snapshot).
+[the snapshot procedure](../../.agents/plans/i5a-native-qualification.md#reproduce-with-a-stable-dependency-snapshot).
 Use its path and the digest printed when it was created for all commands:
 
 ```sh

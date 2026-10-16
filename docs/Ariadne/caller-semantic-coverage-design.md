@@ -2,13 +2,13 @@
 
 ## Context and follow-up
 
-**Status.** S0–S5 implementation and source-bound qualification pass, 2026-10-15. Dump probe `073143` removes all 30 original caller coverage barriers but exhausts the caller core action budgets, so full completed-core parity is unmet. Final-helper admission refresh `075602` passes within its narrower scope. The [S0–S6 plan](../../Plans/caller-semantic-coverage.md) remains active with S6 partial; this is not full acceptance.
+**Status.** S0–S5 implementation and source-bound qualification pass, 2026-10-15. Dump probe `073143` removes all 30 original caller coverage barriers but exhausts the caller core action budgets, so full completed-core parity is unmet. Final-helper admission refresh `075602` passes within its narrower scope. The [S0–S6 plan](../../.agents/plans/caller-semantic-coverage.md) remains active with S6 partial; this is not full acceptance.
 
 **Why this document exists.** [Loop closure](guarded-target-resolution-design.md#dated-loop-delivery-and-publication-correction--2026-10-15) completes DA09/DADD but leaves 30 caller guard barriers: 27 INT3 sites, one UD2, one UD1 and one MOVAPS load. This is item 2 of the remaining-blocker inventory.
 
 **What this document establishes.** A narrow control-only terminal certificate, exact guarded-load recognition, versioned replay and acceptance gates that preserve the [BAP trust contract](semantic-assurance.md). It does not add LLVM-derived effects or a general exception interpreter.
 
-**Where to go next.** Read the [source-bound qualification](../../evidence/Ariadne/caller-semantic-coverage/20261015/README.md), dated outcome below and [execution plan](../../Plans/caller-semantic-coverage.md) for passed checks and unmet gates. The [guard contract](justified-branch-pruning-design.md), [composition contract](guarded-target-resolution-design.md) and [formal guide](../../Specs/README.md) define the semantics. The [frame-path ledger](../../Plans/frame-path-enumeration.md) retains the separate positive-listing gate.
+**Where to go next.** Read the [source-bound qualification](../../evidence/Ariadne/caller-semantic-coverage/20261015/README.md), dated outcome below and [execution plan](../../.agents/plans/caller-semantic-coverage.md) for passed checks and unmet gates. The [guard contract](justified-branch-pruning-design.md), [composition contract](guarded-target-resolution-design.md) and [formal guide](../../Specs/README.md) define the semantics. The [frame-path ledger](../../.agents/plans/frame-path-enumeration.md) retains the separate positive-listing gate.
 
 **What remains unresolved.** The caller core has not completed within the selected one-million-action budgets, and completed caller native/Rust parity is therefore unavailable. The later MOVAPS load remains unknown; the callee retains two indirect barriers. NP10 frame paths are unavailable. Normal-flow closure makes no exception-handler, executed-history or whole-machine coverage claim. The passing final-helper admission refresh remains distinct from the budget-stopped full run.
 

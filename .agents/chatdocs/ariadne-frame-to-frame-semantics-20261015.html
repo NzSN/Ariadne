@@ -1,0 +1,458 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Current Ariadne frame-to-frame semantics</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f7f8fa;color:#172337;font:17px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:1060px;margin:0 auto;padding:40px 44px 80px;background:white}h1{font-size:2.1rem;line-height:1.2;margin:0 0 24px}h2{font-size:1.45rem;margin:48px 0 16px;padding-top:16px;border-top:1px solid #d9e0e7}h3{font-size:1.1rem;margin-top:28px}p,li{max-width:90ch}a{color:#075caa}code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}code{font-size:.88em;background:#f0f3f6;padding:2px 4px;border-radius:3px}pre{overflow:auto;background:#f0f3f6;border-left:3px solid #7890a8;padding:18px;line-height:1.55;font-size:.88rem}pre code{background:none;padding:0}table{width:100%;border-collapse:collapse;font-size:.94rem;margin:20px 0}th,td{padding:11px 12px;text-align:left;vertical-align:top;border-bottom:1px solid #d9e0e7}th{background:#f0f3f6;font-weight:650}.demo{margin:28px 0;padding:24px;border:1px solid #b8c8d7;border-radius:8px;background:#fafcfe}.demo h3{margin-top:0}.caption,figcaption,.stack-label{color:#526274;font-size:.9rem}.lookup-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 28px;margin-top:18px}.lookup-grid div{border-bottom:1px solid #d9e0e7;padding:8px 0}.lookup-grid small{display:block;color:#526274}.lookup-grid strong{font-family:ui-monospace,Consolas,monospace;font-size:.95rem;overflow-wrap:anywhere}input[type=number]{width:90px;padding:8px;font-size:1rem;margin-left:12px;border:1px solid #8ca2b7;border-radius:4px}input[type=range]{accent-color:#075caa;min-width:100px;flex:1}.demo>input[type=range]{width:100%;display:block;margin:18px 0}.cfg{margin:26px 0}.cfg svg{width:100%;height:auto}.edges path{fill:none;stroke:#475569;stroke-width:2;marker-end:url(#arrow)}.node rect{fill:#f0f3f6;stroke:#9babbc;rx:6}.node text{text-anchor:middle;fill:#172337;font:15px system-ui,sans-serif}.entry rect{fill:#e8f1fb;stroke:#5b8fbe}.later rect{fill:#fff2e1;stroke:#b78646}.edge-label{font:14px system-ui;fill:#475569}.stack-layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}.stack-label{margin:10px 0}.stack-item{border:1px solid #809ab3;padding:14px;margin:10px 0;background:#e8f1fb;min-height:55px;border-radius:5px}.stack-item.later{background:#fff2e1;border-color:#b78646}.stack-item.empty{color:#66788a;background:white;border-style:dashed}.state{margin:0;padding:12px 0}.state dt{font-weight:650;margin:0 0 3px}.state dd{margin:0 0 14px;overflow-wrap:anywhere}.step-head{display:flex;gap:14px;align-items:center;margin:15px 0}.step-head span{color:#526274;font-size:.9rem}.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:20px}button{font:inherit;font-size:.95rem;background:#075caa;color:white;border:1px solid #075caa;padding:9px 15px;border-radius:5px;cursor:pointer}button:disabled{background:#e7ecf1;color:#68798a;border-color:#c2cdd7;cursor:default}button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #e4a237;outline-offset:3px}.advanced{margin-top:44px;padding:22px;background:#f8fafc;border:1px solid #cbd5df;border-radius:6px}.advanced summary{font-weight:650;cursor:pointer}.advanced h2{border:0;margin-top:20px}.top-note{font-size:.9rem;color:#526274;margin:0 0 25px}.top-note a{margin-right:16px}@media(max-width:720px){main{padding:26px 18px 50px}h1{font-size:1.7rem}.stack-layout,.lookup-grid{grid-template-columns:1fr}.demo{padding:16px}table{font-size:.85rem}th,td{padding:8px}.cfg{overflow:auto}.cfg svg{min-width:780px}.controls input{width:100%;order:3;flex-basis:100%}}@media print{body{background:white}main{max-width:none;padding:0}.controls,.top-note{display:none}.demo{break-inside:avoid}details>summary{display:none}}.anchor-figure{margin:24px 0}.anchor-figure svg{width:100%;height:auto}.demo-result{padding:14px 16px;background:#eef3f8;border-left:4px solid #075caa;white-space:pre-wrap;font:14px/1.6 ui-monospace,Consolas,monospace}.toy-note{color:#7a4413;background:#fff6e9;padding:12px;border:1px solid #e5c597;border-radius:4px}.toy-path{font-family:ui-monospace,Consolas,monospace}.demo table{background:white}.ok{color:#255b31}.unknown{color:#7a4413}</style></head><body><main><h1>What the current frame-to-frame analysis means</h1>
+<p><strong>The current question asks Ariadne to list a bounded number of structural instruction paths between validated captured frame activations. A listed path follows admitted graph edges and call anchors; its complete machine-state feasibility is not proved by the path enumerator.</strong></p>
+<p>This distinction matters for the earlier DFS discussion. “Find one feasible execution witness” would be a stronger goal. The current listing can return a structural alternative whose data conditions remain unknown.</p>
+<h2>1. What “frame 1 → frame 0” identifies</h2>
+<p>A frame index identifies one physical activation in a captured thread's validated unwind chain:</p>
+<table>
+<thead>
+<tr>
+<th>Index</th>
+<th>Meaning in this dump</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Frame 0</td>
+<td>Innermost captured activation; its PC is <code>0x7ff77443dd6e</code></td>
+</tr>
+<tr>
+<td>Frame 1</td>
+<td>Its older caller; its recovered PC is <code>0x7ff77440410d</code>, the return continuation after the active call</td>
+</tr>
+</tbody>
+</table>
+<p>The question is bound to the same immutable dump, thread 23668, unwind chain and analysis scope. It does not combine arbitrary frames from different captures.</p>
+<p>Different recursive invocations can execute the same instruction address. Nodes therefore have identity <strong><code>(frame index, instruction VA)</code></strong>, within the bound chain. Equal VAs in two activations remain different nodes.</p>
+<p>Unwind recovery goes from the captured inner frame toward older callers. The requested path direction <code>1 → 0</code> follows forward control through the active call into the younger activation.</p>
+<h2>2. The exact start and end anchors</h2>
+<p>For <code>1 → 0</code>, the returned path starts <strong>at the caller's active CALL instruction</strong>, crosses into the callee at its function entry, and ends <strong>at the captured PC in frame 0</strong>.</p>
+<p>For this dump, the expected anchors are:</p>
+<pre><code class="language-text">Preparation context in frame 1:
+    function entry 0x7ff7744033a0 → ... → active CALL 0x7ff774404108
+    ^ per-frame recovery starts here        ^ returned 1→0 path starts here
+
+Requested forward path:
+    (frame 1, 0x7ff774404108)     CALL
+                  ↓ verified cross-frame Call edge
+    (frame 0, 0x7ff77443d960)     callee function entry
+                  ↓ zero or more local graph edges
+    (frame 0, 0x7ff77443dd6e)     captured endpoint PC
+</code></pre>
+<p>The caller's function-entry-to-call corridor is prerequisite discovery context. It is not part of the returned <code>1 → 0</code> path. The caller's saved PC <code>0x7ff77440410d</code> is the continuation <strong>after</strong> CALL, so it is not the forward start anchor either.</p>
+<p>Captured bytes at <code>0x7ff774404108</code> are <code>e8 53 98 03 00</code>. They encode a five-byte direct call:</p>
+<pre><code class="language-text">next instruction = 0x7ff77440410d
+relative target  = next instruction + 0x00039853
+                 = 0x7ff77443d960
+</code></pre>
+<p>These bytes identify the expected call candidate. The current unavailable listing has not admitted a completed caller graph, so this explanation does not substitute that candidate for the missing binding prerequisite.</p>
+<p>The general rule is:</p>
+<ul>
+<li>Start at frame N's validated active call when <code>N &gt; 0</code>.</li>
+<li>End at frame 0's captured PC when <code>M = 0</code>.</li>
+<li>If <code>M &gt; 0</code>, end at frame M's active call site, before its call into the next younger frame.</li>
+<li>If <code>N = M</code>, matching anchors may yield a one-node, zero-edge path, subject to budgets.</li>
+</ul>
+<figure class="anchor-figure"><svg viewBox="0 0 1000 400" role="img" aria-labelledby="anchor-title anchor-desc"><title id="anchor-title">Frame-path endpoints and prerequisite caller recovery</title><desc id="anchor-desc">Caller function entry to active call is preparation context. The requested path starts at the active call in frame1, enters frame0 and ends at the captured PC. Return PC410d is a continuation, not the starting point.</desc><defs><marker id="fparrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#475569"/></marker></defs><rect x="20" y="30" width="420" height="325" rx="8" fill="#f7fafc" stroke="#a6b8c9"/><rect x="555" y="30" width="425" height="325" rx="8" fill="#f7fafc" stroke="#a6b8c9"/><text x="40" y="62" font-size="18">Frame 1 — older caller</text><text x="575" y="62" font-size="18">Frame 0 — younger activation</text><rect x="60" y="92" width="340" height="65" rx="5" fill="#eef1f4" stroke="#a6b8c9"/><text x="230" y="118" text-anchor="middle">Function entry …4033a0</text><text x="230" y="140" text-anchor="middle" fill="#526274">prerequisite recovery context</text><path d="M230 157V207" stroke="#8f9ca8" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#fparrow)"/><rect x="60" y="215" width="340" height="70" rx="5" fill="#e8f1fb" stroke="#5b8fbe"/><text x="230" y="242" text-anchor="middle">CALL …404108</text><text x="230" y="266" text-anchor="middle" font-weight="bold">returned path starts here</text><text x="60" y="325" fill="#526274">Saved resume PC: …40410d</text><path d="M400 250H490V125H595" fill="none" stroke="#475569" stroke-width="2" marker-end="url(#fparrow)"/><text x="456" y="197" text-anchor="middle" fill="#475569">Call edge</text><rect x="595" y="92" width="345" height="65" rx="5" fill="#e8f1fb" stroke="#5b8fbe"/><text x="767" y="118" text-anchor="middle">Function entry …43d960</text><text x="767" y="140" text-anchor="middle">child activation</text><path d="M767 157V215" stroke="#475569" stroke-width="2" marker-end="url(#fparrow)"/><text x="798" y="192" fill="#526274">local edges</text><rect x="595" y="223" width="345" height="70" rx="5" fill="#e8f1fb" stroke="#5b8fbe"/><text x="767" y="250" text-anchor="middle">Captured PC …43dd6e</text><text x="767" y="274" text-anchor="middle" font-weight="bold">returned path ends here</text></svg><figcaption>Expected endpoint structure from captured call bytes and frame evidence. The current full listing remains unavailable because its completed caller graph is missing.</figcaption></figure>
+<h2>3. How a cross-frame CALL edge becomes valid</h2>
+<p>The current implementation accepts a deliberately narrow active-call anchor. It requires:</p>
+<ol>
+<li>Valid captured bytes for a five-byte <code>E8 rel32</code> instruction.</li>
+<li>Its next-instruction address to equal the older frame's recovered return/resume PC.</li>
+<li>Its decoded fall/target facts to match the calculated continuation and target.</li>
+<li>Its target to agree with the younger activation's function entry.</li>
+<li>Exactly one matching active-call candidate in the supplied graph.</li>
+</ol>
+<p>Only then does composition insert a typed edge:</p>
+<pre><code class="language-text">(frame N, active CALL) --Call--&gt; (frame N-1, child entry)
+</code></pre>
+<p>A captured unwind relationship alone is not an instruction-level connection accepted by this enumerator. The older diagram's dashed “recovery boundary / frame relationship” annotations were explanatory notes, not enumerated CFG edges. Its renderer explicitly stated that the active-call connection was unavailable.</p>
+<p>Indirect calls, tail calls or other forms do not automatically pass this current E8-only anchor rule. Missing or ambiguous anchor evidence makes the question unavailable.</p>
+<h2>4. The pipeline has separate gates</h2>
+<p>There are several computations behind the phrase “frame-to-frame analysis.” They have different states and different budgets:</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Main job</th>
+<th>What it produces</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Captured frame recovery</td>
+<td>Validate thread/stack/unwind evidence</td>
+<td>Physical frame activations and their provenance</td>
+</tr>
+<tr>
+<td>Per-frame preparation</td>
+<td>Discover instructions from an explicit entry; apply admitted BAP, guard and target semantics</td>
+<td>A frozen request and CFG facts with explicit gaps</td>
+</tr>
+<tr>
+<td>Local core analysis</td>
+<td>Finish recovery, may-reaching definitions and slicing for that request</td>
+<td>A completed local analysis, possibly still carrying unresolved control obligations</td>
+</tr>
+<tr>
+<td>Investigation/frame binding</td>
+<td>Match the exact completed request/state to capture/proof evidence</td>
+<td>Activation-scoped frame graphs</td>
+</tr>
+<tr>
+<td>Composition</td>
+<td>Validate the selected anchors and connect active calls</td>
+<td>One composed structural graph for the question</td>
+</tr>
+<tr>
+<td>Path listing</td>
+<td>Deterministic bounded DFS through that graph</td>
+<td>Fewer than NP structural paths and a coverage/stop report</td>
+</tr>
+</tbody>
+</table>
+<p>“Completed local analysis” means the core reaches <code>Phase::Done</code> for its fixed admitted graph. It does not mean every indirect target was recovered or every instruction effect was precise. The completed callee can still retain two indirect-target obligations.</p>
+<p>The current <code>BoundInvestigation</code> API requires <code>Phase::Done</code>. Although the final path search itself uses CFG topology, the current pipeline obtains that topology through completed investigations. A recovery-only caller cannot currently be substituted for the completed caller binding. This is an implementation/evidence contract, not an intrinsic requirement of all structural path-search algorithms.</p>
+<h2>5. Two different DFS procedures are involved</h2>
+<table>
+<thead>
+<tr>
+<th>Procedure</th>
+<th>Direction and search state</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Indirect-target resolver</td>
+<td>Backward from a JMP; carries target expressions, rewritten branch guards and predecessor contexts</td>
+<td>Justifies candidate destination addresses and incoming coverage</td>
+</tr>
+<tr>
+<td>Frame-path enumerator</td>
+<td>Forward from the selected anchor; carries node sequences and typed edge sequences</td>
+<td>Lists structural walks between frame anchors</td>
+</tr>
+</tbody>
+</table>
+<p>The resolver discussion at <code>0x7ff77443da0e</code> concerned the first procedure. The frame listing uses the second procedure after graph preparation and binding.</p>
+<p>The frame-path enumerator has no register/memory valuation or accumulated path-condition formula in its frontier state. It does not independently run a global solver to prove all branch conditions in a returned path jointly satisfiable.</p>
+<p>Accepted earlier guard/target proofs can change the graph supplied to it. Once that graph is bound, the enumerator extends the supplied edges. Unknown feasibility remains eligible. A returned structural path is therefore an alternative <strong>under the recorded premises</strong>, not a reconstructed execution history.</p>
+<h2>6. What the edge kinds mean</h2>
+<table>
+<thead>
+<tr>
+<th>Kind</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Next</code></td>
+<td>Local ordinary continuation</td>
+</tr>
+<tr>
+<td><code>Taken</code> / <code>Fallthrough</code></td>
+<td>A represented conditional-branch alternative</td>
+</tr>
+<tr>
+<td><code>Jump</code></td>
+<td>A represented direct jump</td>
+</tr>
+<tr>
+<td><code>Indirect</code></td>
+<td>A retained candidate indirect target under its target-resolution contract</td>
+</tr>
+<tr>
+<td><code>Summary</code></td>
+<td>A call-to-continuation abstraction; the callee interior is not listed</td>
+</tr>
+<tr>
+<td><code>Call</code></td>
+<td>The specifically validated active-call transition into the next younger frame</td>
+</tr>
+</tbody>
+</table>
+<p>At active calls in queried frames strictly older than destination frame M, composition suppresses the local outgoing continuation and inserts the cross-frame Call edge. The returned path enters the selected child activation. If M &gt; 0, enumeration stops at frame M's active-call anchor before entering M-1; its graph edges need not be removed to enforce that endpoint.</p>
+<p>Other calls can remain opaque Summary edges. A path containing one does not enumerate the helper's instructions or establish that its concrete execution returned. The result marks <code>contains_opaque_summary</code>.</p>
+<p>A path's identity includes both its node sequence and its typed edge sequence. Two parallel edges with the same source and destination but different kinds can therefore distinguish two paths.</p>
+<h2>7. The count bound is strict</h2>
+<pre><code class="language-text">0 &lt;= returned_count &lt; NP
+maximum retained paths = NP - 1
+</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">NP</th>
+<th style="text-align:right">Maximum returned paths</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:right">1</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td style="text-align:right">9</td>
+</tr>
+</tbody>
+</table>
+<p>So <strong>NP=2 already expresses a capacity of one structural path</strong> in the current listing. It does not bypass graph/anchor prerequisites or add a feasibility proof. NP=1 cannot be used to ask for one path because its list capacity is zero.</p>
+<p>The count limit does not bound preparation work. It also does not reveal the total number of program paths. If a count cap stops a search while prefixes remain, those prefixes might lead to more complete paths, or might lead only to dead ends.</p>
+<section class="demo" aria-labelledby="toy-title"><h3 id="toy-title">Interactive: structural paths versus feasible executions</h3><p>This toy graph illustrates the current enumeration contract. It is not the dump's actual CFG and is not a new Ariadne validation run. Assume x is unchanged between checks, and all shown structural edges remain in the supplied graph.</p><pre>frame1:CALL → frame0:ENTRY → B: check x == 0
+                              ├─ Taken → C: check x != 0
+                              │             ├─ Taken ─────→ END
+                              │             └─ Fallthrough → END
+                              └─ Fallthrough ──────────────→ END</pre><p>There are three typed structural paths. The two C→END edges have the same node endpoints but different kinds. For this toy, the declared canonical order visits C before END at B, and Taken before Fallthrough at C; that produces TT → TF → F. All other search budgets are assumed sufficient.</p><label for="np">NP: <input id="np" type="number" min="1" max="5" value="2"></label><input id="np-range" type="range" min="1" max="5" value="2" aria-label="NP bound"><div id="toy-status" class="demo-result" aria-live="polite"></div><div id="toy-paths"></div><p class="toy-note">Feasibility comments below come from our extra reasoning about unchanged x. The frame-path enumerator itself does not compute these comments. With NP=2, its first structural result can be the contradictory Taken/Taken path.</p></section>
+<h2>8. How the actual enumeration runs</h2>
+<p>The supplied edges are sorted into a canonical order. The enumerator keeps a stack of path prefixes. It pops one prefix, appends it to the result if it reaches the endpoint, or pushes permitted outgoing extensions in reverse order so the next pop follows the canonical edge order.</p>
+<p>A prefix contains:</p>
+<pre><code class="language-text">(nodes visited in order, typed edges traversed in order)
+</code></pre>
+<p>The current algorithm does not select a particular concrete register state for that prefix. It is not an unbounded “find every execution” operation.</p>
+<p>Independent limits restrict search states, scanned edges, nodes in a path, repeated visits to an activation-scoped node, frontier bytes, output bytes and elapsed time. A node may be visited at most twice by default. Hitting that visit cap omits longer structural unrollings; it does not prove that a real loop could execute only twice.</p>
+<table>
+<thead>
+<tr>
+<th>Limit</th>
+<th style="text-align:right">Default</th>
+<th style="text-align:right">Retained full-dump request</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Composed graph nodes</td>
+<td style="text-align:right">8,192</td>
+<td style="text-align:right">8,192</td>
+</tr>
+<tr>
+<td>Composed graph edges</td>
+<td style="text-align:right">32,768</td>
+<td style="text-align:right">32,768</td>
+</tr>
+<tr>
+<td>Expanded search states</td>
+<td style="text-align:right">4,096</td>
+<td style="text-align:right">65,536</td>
+</tr>
+<tr>
+<td>Scanned edges</td>
+<td style="text-align:right">16,384</td>
+<td style="text-align:right">262,144</td>
+</tr>
+<tr>
+<td>Nodes retained in one path</td>
+<td style="text-align:right">256</td>
+<td style="text-align:right">4,096</td>
+</tr>
+<tr>
+<td>Visits per activation-scoped node</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">2</td>
+</tr>
+<tr>
+<td>Frontier bytes</td>
+<td style="text-align:right">4 MiB</td>
+<td style="text-align:right">32 MiB</td>
+</tr>
+<tr>
+<td>Output bytes</td>
+<td style="text-align:right">4 MiB</td>
+<td style="text-align:right">128 MiB</td>
+</tr>
+<tr>
+<td>Cooperative deadline</td>
+<td style="text-align:right">1,000 ms</td>
+<td style="text-align:right">10,000 ms</td>
+</tr>
+</tbody>
+</table>
+<p>Frame binding separately has hard aggregate admission limits of 8,192 decoded nodes and 32,768 core edges, counted before in-function filtering. Increasing only the later enumerator's graph limit does not change that earlier binding cap.</p>
+<p>The target resolver's 2,097,152 symbolic work units and the caller core's 1,000,000 diagnostic actions belong to earlier stages. They are not this path DFS's search-state limit.</p>
+<h2>9. What the result fields mean</h2>
+<table>
+<thead>
+<tr>
+<th>Field or status</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>available=false</code>, <code>coverage=unavailable</code></td>
+<td>Required input graphs, frames or anchors could not be supplied/composed; the requested listing is not available</td>
+</tr>
+<tr>
+<td><code>coverage=partial</code></td>
+<td>The available result does not establish complete enumeration/graph coverage in the declared scope</td>
+</tr>
+<tr>
+<td><code>truncated=true</code></td>
+<td>A work, size, depth, visit or other declared search restriction cut work short</td>
+</tr>
+<tr>
+<td><code>enumeration_exhausted=true</code></td>
+<td>The frontier was drained without search restrictions or an earlier stop</td>
+</tr>
+<tr>
+<td><code>complete_within_declared_scope</code></td>
+<td>Enumeration exhausted and the retained graph has no reported gaps, under its declared scope</td>
+</tr>
+<tr>
+<td><code>returned_count</code></td>
+<td>Number of retained paths; always strictly less than NP</td>
+</tr>
+</tbody>
+</table>
+<p><code>enumeration_exhausted</code> and graph completeness are different. The represented frontier can drain while input gaps remain, leaving coverage partial.</p>
+<p>A zero count needs its accompanying status:</p>
+<ul>
+<li><strong>Unavailable + zero:</strong> the question could not be composed; no disconnection conclusion follows.</li>
+<li><strong>Partial/truncated + zero:</strong> no path was retained within the work completed; no impossibility conclusion follows.</li>
+<li><strong>Exhausted + closed declared graph + zero:</strong> no structural path exists in that admitted graph/scope. This is still not a universal statement about every concrete program execution.</li>
+</ul>
+<p>Complete structural enumeration is not the same as proving each listed path feasible. The graph and its scope are part of the claim.</p>
+<h2>10. What the current dump result actually says</h2>
+<p>The latest retained <strong>full</strong> listing attempt is <code>dump-20261015T073143</code>, for thread 23668, question <code>1:0</code>, NP=10:</p>
+<pre><code class="language-text">available             = false
+coverage              = unavailable
+returned_count        = 0
+stop_reason           = missing-frame-query
+truncated             = false
+enumeration_exhausted  = false
+expanded_states       = 0
+scanned_edges         = 0
+</code></pre>
+<p>The caller core reached its one-million-action bound while still in Dataflow, so it did not supply a completed bound frame-1 graph. The callee completed and supplied frame 0. Composition requires both graphs for 1→0, sees frame 1 missing, and returns <code>missing-frame-query</code> before a DFS frontier is started.</p>
+<p>This explains the perhaps surprising combination: <strong>zero returned paths, but <code>truncated=false</code> and no search work.</strong> The failure is availability before search. It is not evidence that the frame pair is disconnected, nor is it a DFS proof that every path is infeasible.</p>
+<p>The later <code>075602</code> refresh validates final-helper admission and caller structural recovery, and retains full callee parity. It deliberately does not repeat caller completion or frame-path enumeration. It does not turn the earlier unavailable result into a new successful listing.</p>
+<p>There is another subsequent admission boundary: the caller already has 9,589 decoded nodes; together with the callee's 778, that is 10,367, above the current hard binding cap of 8,192. The current unavailable result occurs earlier, but completing caller dataflow alone will not remove that next cap.</p>
+<p>Earlier reports used <code>missing-or-ambiguous-active-call-anchor</code> when caller recovery had not reached the expected call. The latest full record's immediate stop is the missing completed caller query, so these dated results should not be conflated.</p>
+<h2>11. Relationship to the “at least one path exists” hypothesis</h2>
+<p>The current question has fields <code>from_frame</code>, <code>to_frame</code> and <code>np</code>. It does not introduce a hypothesis that one feasible historical path must be constructible from the available model.</p>
+<p>A witness-first target-resolution phase could help obtain table evidence, and NP=2 can request at most one structural frame path once inputs are admitted. Those are different stages. A hypothesis does not supply a missing completed graph or active-call certificate, and it does not make a structural result into a feasibility proof.</p>
+<p>If the desired future question is “find one path whose complete data/branch conditions are satisfiable,” that requires an explicit stronger witness contract and adequate feasibility evidence. It is not what the current structural listing claims.</p>
+<h2>12. Memory writers, observations and scope</h2>
+<p>The frame-path list does not remove candidates from the core's may-reaching-definition or possible-writer results. A writer absent from a bounded list remains possible unless a separate proof excludes it across all relevant contexts.</p>
+<p>Crash-time flags/registers do not automatically supply earlier branch outcomes. Saved registers recovered by unwinding have individual provenance; they do not constitute a complete historical register file for each frame.</p>
+<p>The current guarded normal-flow scope also excludes exception-handler/debugger resumption from the modeled local continuation. Certified exception exits have no normal successor; the listing does not silently add handler-resumption edges. These limits remain in its premises.</p>
+<h2>Source and verification</h2>
+<p>This explanation was checked against the current source and the retained full-result artifact. No build, model campaign or fresh dump execution was needed.</p>
+<ul>
+<li>Contract: <code>docs/Ariadne/investigation-design.md:350–475</code>.</li>
+<li>Completed-query binding: <code>src/investigation/validate.rs:143–154</code>.</li>
+<li>Frame graph admission: <code>src/investigation/frame_paths.rs:189–357</code>.</li>
+<li>Active direct-call verification: <code>src/investigation/frame_paths.rs:133–146</code>.</li>
+<li>Graph composition/anchors: <code>src/investigation/frame_paths.rs:907–1002</code>.</li>
+<li>DFS and coverage classification: <code>src/investigation/frame_paths.rs:1004–1213</code>.</li>
+<li>Strict report replay: <code>src/investigation/frame_paths.rs:1235–1264</code>.</li>
+<li>Authoritative modeled search contract: <code>Specs/AriadneFramePaths.tla</code>.</li>
+<li>Full-result artifact: <code>evidence/Ariadne/caller-semantic-coverage/20261015/artifacts/dump-20261015T073143/frame-paths.json.gz</code>.</li>
+</ul>
+<p>The latest combined report uses <code>ariadne.frame-paths/v6</code>; the structural search contract is separate from those versioned proof-carrier generations.</p>
+<details class="advanced"><summary>Open the optional formal semantics appendix</summary>
+<h2>Optional formal view: the current structural judgment</h2>
+<h3>From implementation to invariants</h3>
+<p>The implementation owns an immutable bound input containing a captured frame chain and per-frame graph/proof payloads. It constructs anchors and composed edges, then mutates only frontier/result/counter state. It does not mutate captured bytes or the earlier core writer sets.</p>
+<p>Its key checks are exact snapshot/query identity, validated activation-qualified nodes, typed edge membership, validated active calls, strict count bounds and explicit incomplete outcomes. Malformed input is rejected; missing query/anchor evidence can yield an unavailable listing.</p>
+<p>The first abstraction preserves admitted graph topology, activation identities, anchors, typed edges, path ordering, limits and coverage. It replaces concrete capture/proof replay with an <code>InputAdmitted</code> premise. JSON layout, Rust allocation and SDK transport are erased.</p>
+<h3>Minimal search machine</h3>
+<pre><code class="language-text">Inputs = (G, start_anchor, end_anchor, NP, limits, graph_gaps)
+State  = (frontier_stack, listed_paths, counters, blocked, stop_reason)
+Path   = (node_sequence, typed_edge_sequence)
+</code></pre>
+<p>Initially the frontier contains the one-node start prefix, subject to admission/zero limits. A transition pops the newest prefix. An endpoint prefix may be retained; another prefix is extended by permitted outgoing edges in canonical DFS order. Limit transitions retain partial status. An empty unrestricted frontier allows exhaustion classification.</p>
+<p>A representative successful structural trace is:</p>
+<pre><code class="language-text">[frame1:CALL]
+→ [frame1:CALL, frame0:ENTRY]
+→ [... local structural steps ...]
+→ [frame1:CALL, frame0:ENTRY, ..., frame0:captured_PC]
+→ retain path, subject to NP/output limits
+</code></pre>
+<p>This example is the intended shape of an admitted result, not a claimed path already returned for this dump.</p>
+<p>The second abstraction erases per-node instruction internals and preserves only admitted typed graph transitions. The frame enumerator never had a global register valuation or branch formula in its search state; this is a limit of its claim, not a feasibility proof hidden in the abstraction.</p>
+<h3>Syntax and judgments</h3>
+<p>Let <code>Γ</code> bind the admitted snapshot/thread/activation scope, composed graph <code>G</code>, anchors <code>A_N</code> and <code>A_M</code>, and declared summary/normal-flow premises.</p>
+<pre><code class="language-text">node  v = (frame_index, instruction_VA)
+edge  e = (source_node, destination_node, edge_kind)
+path  p = v0, e0, v1, ..., ek-1, vk
+</code></pre>
+<p>The useful judgment is:</p>
+<pre><code class="language-text">Γ ⊢ p : StructuralPath(A_N, A_M)
+</code></pre>
+<p>It means the first and last nodes are the validated anchors and every typed step belongs to the composed graph with matching endpoints. Typed edge identity distinguishes parallel alternatives. Activation identity prevents recursive frames from aliasing one node.</p>
+<p>It does not mean:</p>
+<pre><code class="language-text">there exists a concrete machine-state execution realizing p
+</code></pre>
+<p>That stronger statement would need a state/condition semantics and evidence not carried by this enumerator.</p>
+<h3>Statics and dynamics</h3>
+<p>A bound input is well formed when its capture/query/graph/anchor checks pass. A path prefix starts at <code>A_N</code> and contains only matching graph edges. A completed structural path also ends at <code>A_M</code>.</p>
+<pre><code class="language-text">EXTEND:
+    prefix ends at u, and (u,v,kind) is an admitted edge
+    → append that edge and v, subject to visit/path/byte/work limits
+
+RETAIN:
+    prefix ends at A_M, and list/output capacity permits
+    → retain the distinct path
+
+UNAVAILABLE:
+    a required frame graph or anchor is absent
+    → unavailable result, before path search
+
+RESTRICT:
+    a declared resource or loop-unrolling restriction prevents work
+    → partial/truncated outcome, with its reason
+</code></pre>
+<p>The returned set <code>L</code> satisfies:</p>
+<pre><code class="language-text">L is a subset of the admitted structural paths
+|L| &lt; NP
+</code></pre>
+<p>Exhaustion with no input gaps justifies completeness within that declared structural scope. It supplies no additional judgment about actual execution or a selected memory writer.</p>
+<h3>Correspondence and abstraction boundary</h3>
+<table>
+<thead>
+<tr>
+<th>Semantic concept</th>
+<th>Current implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Input admission</td>
+<td><code>BoundInvestigation::new</code>, <code>bind_frame_paths</code>, <code>validate_input</code></td>
+</tr>
+<tr>
+<td>Anchors and cross-frame graph</td>
+<td><code>compose</code> and <code>call_target</code></td>
+</tr>
+<tr>
+<td>Path extension/retention</td>
+<td><code>list</code></td>
+</tr>
+<tr>
+<td>Stable scope/path identity</td>
+<td>hashes of frozen input/question/limits and ordered path</td>
+</tr>
+<tr>
+<td>Result validity</td>
+<td>deterministic recomputation in <code>FramePathListing::validate</code></td>
+</tr>
+<tr>
+<td>Search-model authority</td>
+<td><code>AriadneFramePaths.tla</code></td>
+</tr>
+</tbody>
+</table>
+<p>The TLA model assumes graph/anchor admission and models structural prefixes, deterministic DFS, NP bounds, resource stops, visits and preservation of writers. It abstracts wall-clock deadlines by an admitted work-count receipt. Capture binding, JSON sizing, concrete hashes and process memory are outside that model. Finite conformance evidence does not establish universal implementation refinement.</p>
+</details>
+<h2>Context and follow-up</h2>
+<p><strong>Status.</strong> Retained explanation of structural frame-path enumeration, restored on 2026-10-16.</p>
+<p><strong>Why this document exists.</strong> It preserves the conversation explanation associated with the <a href="../../docs/Ariadne/investigation-design.md">frame-path contract</a> and <a href="../../evidence/Ariadne/caller-semantic-coverage/20261015/README.md">retained caller qualification</a>.</p>
+<p><strong>What this document establishes.</strong> The body records the stated mechanism, examples and evidence boundaries as of the report date.</p>
+<p><strong>Where to go next.</strong> Use the <a href="../../docs/Ariadne/investigation-design.md">frame-path contract</a> and <a href="../../evidence/Ariadne/caller-semantic-coverage/20261015/README.md">retained caller qualification</a>; the <a href="ariadne-reports-index.md">report index</a> links related explanations.</p>
+<p><strong>What remains unresolved.</strong> The explanation distinguishes structural paths, feasibility and incomplete query binding; restoration does not rerun the dump.</p>
+</main><script>const paths=[{label:'CALL → ENTRY → B —Taken→ C —Taken→ END',note:'Requires x==0 and x!=0 with x unchanged: infeasible by additional reasoning.'},{label:'CALL → ENTRY → B —Taken→ C —Fallthrough→ END',note:'Conditions admit x==0 in this toy example.'},{label:'CALL → ENTRY → B —Fallthrough→ END',note:'Conditions admit x!=0 in this toy example.'}];function show(raw){let np=Number(raw);if(!Number.isFinite(np))return;np=Math.max(1,Math.min(5,Math.trunc(np)));document.getElementById('np').value=document.getElementById('np-range').value=np;const cap=np-1,n=Math.min(cap,paths.length),exhausted=n===paths.length;document.getElementById('toy-status').textContent='capacity = NP - 1 = '+cap+'\nreturned_count = '+n+' < '+np+'\ncoverage = '+(exhausted?'complete_within_declared_scope (structural toy graph)':'partial')+'\nenumeration_exhausted = '+exhausted+'\ntruncated = '+(!exhausted)+'\nstop_reason = '+(exhausted?'frontier-exhausted':'path-count-budget');const wrap=document.getElementById('toy-paths');wrap.replaceChildren();if(n===0){const p=document.createElement('p');p.textContent='The capacity is zero. This does not prove the graph has no path.';wrap.append(p);return}const table=document.createElement('table'),head=document.createElement('tr');for(const h of ['Retained structural path','Separate reasoning about data conditions']){const th=document.createElement('th');th.textContent=h;head.append(th)}table.append(head);for(const p of paths.slice(0,n)){const tr=document.createElement('tr'),a=document.createElement('td'),b=document.createElement('td');a.className='toy-path';a.textContent=p.label;b.textContent=p.note;tr.append(a,b);table.append(tr)}wrap.append(table)}document.getElementById('np').addEventListener('input',e=>show(e.target.value));document.getElementById('np-range').addEventListener('input',e=>show(e.target.value));show(2);</script></body></html>

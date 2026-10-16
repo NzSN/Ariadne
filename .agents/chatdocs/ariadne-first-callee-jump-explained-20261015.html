@@ -1,0 +1,432 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>First callee jump: detailed explanation</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f7f8fa;color:#172337;font:17px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:1060px;margin:0 auto;padding:40px 44px 80px;background:white}h1{font-size:2.1rem;line-height:1.2;margin:0 0 24px}h2{font-size:1.45rem;margin:48px 0 16px;padding-top:16px;border-top:1px solid #d9e0e7}h3{font-size:1.1rem;margin-top:28px}p,li{max-width:90ch}a{color:#075caa}code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}code{font-size:.88em;background:#f0f3f6;padding:2px 4px;border-radius:3px}pre{overflow:auto;background:#f0f3f6;border-left:3px solid #7890a8;padding:18px;line-height:1.55;font-size:.88rem}pre code{background:none;padding:0}table{width:100%;border-collapse:collapse;font-size:.94rem;margin:20px 0}th,td{padding:11px 12px;text-align:left;vertical-align:top;border-bottom:1px solid #d9e0e7}th{background:#f0f3f6;font-weight:650}.demo{margin:28px 0;padding:24px;border:1px solid #b8c8d7;border-radius:8px;background:#fafcfe}.demo h3{margin-top:0}.caption,figcaption,.stack-label{color:#526274;font-size:.9rem}.lookup-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 28px;margin-top:18px}.lookup-grid div{border-bottom:1px solid #d9e0e7;padding:8px 0}.lookup-grid small{display:block;color:#526274}.lookup-grid strong{font-family:ui-monospace,Consolas,monospace;font-size:.95rem;overflow-wrap:anywhere}input[type=number]{width:90px;padding:8px;font-size:1rem;margin-left:12px;border:1px solid #8ca2b7;border-radius:4px}input[type=range]{accent-color:#075caa;min-width:100px;flex:1}.demo>input[type=range]{width:100%;display:block;margin:18px 0}.cfg{margin:26px 0}.cfg svg{width:100%;height:auto}.edges path{fill:none;stroke:#475569;stroke-width:2;marker-end:url(#arrow)}.node rect{fill:#f0f3f6;stroke:#9babbc;rx:6}.node text{text-anchor:middle;fill:#172337;font:15px system-ui,sans-serif}.entry rect{fill:#e8f1fb;stroke:#5b8fbe}.later rect{fill:#fff2e1;stroke:#b78646}.edge-label{font:14px system-ui;fill:#475569}.stack-layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}.stack-label{margin:10px 0}.stack-item{border:1px solid #809ab3;padding:14px;margin:10px 0;background:#e8f1fb;min-height:55px;border-radius:5px}.stack-item.later{background:#fff2e1;border-color:#b78646}.stack-item.empty{color:#66788a;background:white;border-style:dashed}.state{margin:0;padding:12px 0}.state dt{font-weight:650;margin:0 0 3px}.state dd{margin:0 0 14px;overflow-wrap:anywhere}.step-head{display:flex;gap:14px;align-items:center;margin:15px 0}.step-head span{color:#526274;font-size:.9rem}.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:20px}button{font:inherit;font-size:.95rem;background:#075caa;color:white;border:1px solid #075caa;padding:9px 15px;border-radius:5px;cursor:pointer}button:disabled{background:#e7ecf1;color:#68798a;border-color:#c2cdd7;cursor:default}button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #e4a237;outline-offset:3px}.advanced{margin-top:44px;padding:22px;background:#f8fafc;border:1px solid #cbd5df;border-radius:6px}.advanced summary{font-weight:650;cursor:pointer}.advanced h2{border:0;margin-top:20px}.top-note{font-size:.9rem;color:#526274;margin:0 0 25px}.top-note a{margin-right:16px}@media(max-width:720px){main{padding:26px 18px 50px}h1{font-size:1.7rem}.stack-layout,.lookup-grid{grid-template-columns:1fr}.demo{padding:16px}table{font-size:.85rem}th,td{padding:8px}.cfg{overflow:auto}.cfg svg{min-width:780px}.controls input{width:100%;order:3;flex-basis:100%}}@media print{body{background:white}main{max-width:none;padding:0}.controls,.top-note{display:none}.demo{break-inside:avoid}details>summary{display:none}}</style></head><body><main><p class="top-note">Offline explanation · Ariadne case 4 · <a href="ariadne-first-callee-jump-explained-20261015.md">Markdown version</a></p><h1 id="why-the-first-callee-jump-is-still-unresolved">Why the first callee jump is still unresolved</h1>
+<p>This explains <strong>the first jump in case 4</strong>, at <strong><code>0x00007ff77443da0e</code></strong>. I will use short labels such as <code>da0e</code> below; they identify the final digits of addresses in this same function.</p>
+<p><strong>The table bytes are available. Ariadne's bounded backward search explores a complicated incoming region before reaching the instruction that establishes the table base. It exhausts its work budget with that initializer still unprocessed.</strong></p>
+<p>There are two different activities to keep apart: the program computes a destination and jumps forward; Ariadne works backward through possible predecessors to explain that computation. The search stack belongs to Ariadne, not to the program's stack or RSP.</p>
+<h2 id="1-what-is-ariadne-trying-to-determine">1. What is Ariadne trying to determine?</h2>
+<p>The machine instruction is:</p>
+<pre><code class="language-asm">0x00007ff77443da0e:  jmp rax       ; captured bytes: ff e0
+</code></pre>
+<p>It means “continue execution at the address currently held in RAX.” Unlike <code>jmp 0x1234</code>, the destination address is not written directly in the instruction bytes.</p>
+<p>Ariadne's question is: <strong>which addresses can this instruction's RAX contain under the admitted incoming conditions?</strong> Its target resolver owns the symbolic expressions, predecessor search and captured-table reads. The later loop checker owns a separate coverage certificate. The reader supplies immutable captured bytes.</p>
+<p>The requested answer is a set of possible destinations. It is not a claim about which destination the process actually took before the crash.</p>
+<h3 id="does-one-incoming-edge-imply-one-rax-value">Does one incoming edge imply one RAX value?</h3>
+<p><strong>RAX is deterministic for one complete concrete machine state. A single control-flow edge can carry many such states.</strong> Knowing the edge tells us which instructions are connected; it does not necessarily fix the input values those instructions operate on.</p>
+<p>For this particular jump, there is only <strong>one immediate incoming edge</strong>:</p>
+<pre><code class="language-text">da0b: add rax, r12
+          │
+          │ one CFG edge
+          ▼
+da0e: jmp rax
+</code></pre>
+<p>There are <strong>two incoming edges at the earlier join d9cd</strong>, from d9c6 and dd4c. The search difficulty does not mean the jump itself has hundreds of incoming edges. The 271 rejected prefixes are longer backward contexts, not 271 immediate edges.</p>
+<p>Consider two illustrative local states using the same captured table bases and the shown selector bounds:</p>
+<table>
+<thead>
+<tr>
+<th>Value entering the lookup</th>
+<th style="text-align:right">Case index RBX</th>
+<th>RAX at JMP</th>
+<th>Final incoming edge</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Selector 65 (<code>A</code>)</td>
+<td style="text-align:right">95</td>
+<td><code>0x00007ff77443da10</code></td>
+<td>da0b → da0e</td>
+</tr>
+<tr>
+<td>Selector 43 (<code>+</code>)</td>
+<td style="text-align:right">47</td>
+<td><code>0x00007ff77443e8de</code></td>
+<td>da0b → da0e</td>
+</tr>
+</tbody>
+</table>
+<p>Each computation has one definite result once its inputs are fixed. Both use the <strong>same final edge</strong>, but the selector values differ, so their RAX values differ. These are conditional local examples; they do not assert that both complete entry-to-jump histories have been proved feasible.</p>
+<p>The distinction is:</p>
+<pre><code class="language-text">One concrete state, with relevant register/memory values fixed:
+    one definite RAX value
+
+One CFG edge, with relevant input values still variable:
+    potentially several RAX values
+</code></pre>
+<p>Even fixing a sequence of branch choices does not always fix all data inputs. For example, both 65 and 43 satisfy the same local <code>selector &lt;= 127</code> branch and both resulting case indices satisfy <code>index &lt;= 117</code>.</p>
+<p>Ariadne therefore needs to determine the possible values carried by the edge, and justify them across the relevant predecessor contexts. Here the obstacle is how that search spends its work, together with the remaining coverage checks. It is not a large count of immediate incoming edges at JMP.</p>
+<h2 id="2-how-the-program-computes-rax-two-table-lookups">2. How the program computes RAX: two table lookups</h2>
+<p>Think of a small switch statement implemented with two arrays:</p>
+<pre><code class="language-text">selector value
+    ↓ first table: translate the value to a case index
+case index
+    ↓ second table: read a signed offset
+signed offset + table base
+    ↓
+code address to jump to
+</code></pre>
+<p>Here are the actual ingredients:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Role</th>
+<th>Value or bound</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RDI</td>
+<td>Selector for the first lookup</td>
+<td>The normal branch requires <code>0 &lt;= RDI &lt;= 127</code></td>
+</tr>
+<tr>
+<td>R15</td>
+<td>Base of the byte selector map</td>
+<td><code>0x00007ff77ba91d30</code></td>
+</tr>
+<tr>
+<td>RBX</td>
+<td>Index returned by the byte map</td>
+<td>The next normal branch requires <code>0 &lt;= RBX &lt;= 117</code></td>
+</tr>
+<tr>
+<td>R12</td>
+<td>Base of the signed-offset table</td>
+<td><code>0x00007ff77ba92a10</code></td>
+</tr>
+<tr>
+<td>RAX</td>
+<td>Final jump address</td>
+<td>Computed from the selected signed offset and R12</td>
+</tr>
+</tbody>
+</table>
+<p>The important instructions are:</p>
+<pre><code class="language-asm">; Initialization on the entry corridor:
+d9b8: lea    r15, [rip + ...]       ; R15 = 0x00007ff77ba91d30
+d9bf: lea    r12, [rip + ...]       ; R12 = 0x00007ff77ba92a10
+
+; Other instructions intervene, including loading the selector.
+; The relevant normal branches establish the bounds shown above.
+d9f8: movzx  ebx, byte ptr [r15+rdi]
+da07: movsxd rax, dword ptr [r12+rbx*4]
+da0b: add    rax, r12
+da0e: jmp    rax
+</code></pre>
+<p><code>movzx</code> makes the byte into a nonnegative larger value. <code>movsxd</code> interprets the 32-bit table entry as a <strong>signed</strong> offset. Multiplication by four selects one four-byte entry.</p>
+<h3 id="a-concrete-example-using-real-captured-bytes">A concrete example using real captured bytes</h3>
+<p>Choose the selector <strong>65</strong>, which is ASCII <code>A</code>. This is an example input to the captured tables, not a recovered earlier value of RDI.</p>
+<table>
+<thead>
+<tr>
+<th>Calculation</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Read byte at <code>0x00007ff77ba91d30 + 65</code></td>
+<td><code>95</code></td>
+</tr>
+<tr>
+<td>Select four-byte slot <code>0x00007ff77ba92a10 + 4 × 95</code></td>
+<td><code>0x00007ff77ba92b8c</code></td>
+</tr>
+<tr>
+<td>Read those four captured bytes</td>
+<td><code>00 b0 9a f8</code></td>
+</tr>
+<tr>
+<td>Interpret little-endian word <code>0xf89ab000</code> as signed 32-bit</td>
+<td><code>-124,080,128</code>, or <code>-0x07655000</code></td>
+</tr>
+<tr>
+<td>Add the signed offset to R12</td>
+<td><code>0x00007ff77ba92a10 - 0x07655000</code></td>
+</tr>
+<tr>
+<td>Destination</td>
+<td><strong><code>0x00007ff77443da10</code></strong></td>
+</tr>
+</tbody>
+</table>
+<p>So, when these base and selector conditions hold, this particular lookup is straightforward.</p>
+<p>The 128 selector-map bytes contain 31 distinct indices. Those indices lead to <strong>21 distinct destinations</strong>. Several selector values can choose the same index, and several slots can choose the same destination. The full 118-slot offset table contains 22 destinations; the selector map does not select one of them in this <code>0..127</code> range.</p>
+<section class="demo" aria-labelledby="lookup-title"><h3 id="lookup-title">Try the captured lookup</h3><p>Change the illustrative selector. All displayed map/offset bytes come from the captured tables.</p><label for="selector">Selector <input id="selector" type="number" min="0" max="127" value="65"></label><input id="selector-range" aria-label="Selector slider" type="range" min="0" max="127" value="65"><div id="lookup" aria-live="polite"></div><p class="caption">This demonstrates a conditional table map. It does not recover an earlier register value or certify every incoming context.</p></section>
+<h2 id="3-why-doesn-t-ariadne-simply-do-those-same-reads">3. Why doesn't Ariadne simply do those same reads?</h2>
+<p>Because, at the unresolved jump, it initially has a <strong>formula</strong>, not a justified numeric value for every register in that formula.</p>
+<p>It starts with the question “what produced RAX?” Walking backward substitutes earlier assignments:</p>
+<pre><code class="language-text">At jmp rax:
+    target = RAX
+
+Across add rax,r12:
+    target = old_RAX + R12
+
+Across the signed table load:
+    target = sign_extend(load32[R12 + 4*RBX]) + R12
+
+Across the byte lookup:
+    RBX is explained by load8[R15 + selector]
+</code></pre>
+<p>This is symbolic substitution. Ariadne is not running the machine instructions backward. It is replacing names in an expression with the expressions that produced their values.</p>
+<p>The table expression still needs a justified R12 base. The instruction at <code>d9bf</code> supplies exactly that constant, but the resolver must reach it through its predecessor search—or find another sufficient source-bound frontier proof. Merely seeing a register named R12 does not supply the constant.</p>
+<p>Also, learning the value on the entry corridor is one piece of evidence. To close the entire jump, Ariadne must justify the relevant base/range facts across all represented incoming contexts, including later returns to the same code region and intervening effects.</p>
+<h2 id="4-where-the-backward-search-branches">4. Where the backward search branches</h2>
+<p>At address <strong><code>d9cd</code></strong>, the represented graph has two incoming edges:</p>
+<pre><code class="language-text">entry corridor
+    ... d9b8 sets R15
+    ... d9bf sets R12
+    ... d9c6 --------------------┐
+                                 ↓
+                               d9cd → ... → dispatch checks → ... → da0e → ?
+                                 ↑
+              dd4c --------------┘
+              known branch to an earlier address
+</code></pre>
+<p>“Incoming” is from <strong>d9cd's point of view</strong>: both <code>d9c6</code> and <code>dd4c</code> can immediately precede it in the represented CFG.</p>
+<p>The graph also contains a structural route from <code>d9cd</code>, through another branch at <code>d9f2</code> and other code, to <code>dd4c</code>. That route does not need an outgoing edge from <code>da0e</code>. Its branch conditions have not been proved jointly feasible just by drawing the route.</p>
+<p>This matters because <strong>we do not know a <code>da0e → dd4c</code> edge</strong>. DA0E's destination remains unresolved. Calling the later incoming branch “loop-side” is shorthand for the cyclic predecessor region explored by the analyzer; it is not proof that the CPU executed a loop through this unresolved jump.</p>
+<figure class="cfg"><svg viewBox="0 0 1000 530" role="img" aria-labelledby="cfg-title cfg-desc"><title id="cfg-title">Relevant forward control-flow structure</title><desc id="cfg-desc">The entry-side predecessor d9c6 and later branch dd4c both reach d9cd. The normal selector branch reaches unresolved jump da0e. A separate structural route can reach dd4c; no outgoing edge from da0e is assumed.</desc><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#475569"/></marker></defs><g class="edges"><path d="M260 67H330"/><path d="M670 67H745"/><path d="M845 99V160"/><path d="M310 192H745"/><path d="M845 224V285"/><path d="M745 317H590"/><path d="M175 285V224"/><path d="M845 349V405"/></g><g class="node"><rect x="40" y="35" width="220" height="64"/><text x="150" y="62">Function entry</text><text x="150" y="84">0x7ff77443d960</text></g><g class="node entry"><rect x="330" y="35" width="340" height="64"/><text x="500" y="62">R15 / R12 base initialization</text><text x="500" y="84">…d9b8 and …d9bf</text></g><g class="node entry"><rect x="745" y="35" width="200" height="64"/><text x="845" y="62">Entry-side predecessor</text><text x="845" y="84">…d9c6</text></g><g class="node later"><rect x="40" y="160" width="270" height="64"/><text x="175" y="187">Known later incoming branch</text><text x="175" y="209">…dd4c → …d9cd</text></g><g class="node"><rect x="745" y="160" width="200" height="64"/><text x="845" y="187">Join</text><text x="845" y="209">…d9cd</text></g><g class="node later"><rect x="40" y="285" width="550" height="64"/><text x="315" y="312">Other represented predecessor region</text><text x="315" y="334">route via …e9f1; intervening code collapsed</text></g><g class="node"><rect x="745" y="285" width="200" height="64"/><text x="845" y="312">Selector check</text><text x="845" y="334">…d9f2</text></g><g class="node"><rect x="650" y="405" width="295" height="80"/><text x="797" y="432">Byte map → offset → JMP RAX</text><text x="797" y="454">…da0e</text><text x="797" y="476">outgoing destination unresolved</text></g><text class="edge-label" x="644" y="306">&gt;127</text><text class="edge-label" x="856" y="383">≤127</text></svg><figcaption>The arrows summarize represented CFG routes, with instructions omitted. The long route is structural, not a proved feasible execution. No DA0E→DD4C edge is invented.</figcaption></figure>
+<h2 id="5-why-ariadne-chooses-the-complicated-side-first">5. Why Ariadne chooses the complicated side first</h2>
+<p>The resolver stores waiting work in a Rust vector named <code>pending</code> and takes work using <code>pending.pop()</code>. That is a stack: <strong>last in, first out</strong>.</p>
+<p>At this join, the predecessor list is ordered by address:</p>
+<pre><code class="language-text">[d9c6, dd4c]
+</code></pre>
+<p>The code pushes the first one and then the second one:</p>
+<pre><code class="language-text">push entry-side item d9c6
+push later incoming item dd4c
+pop()                       → dd4c is selected next
+</code></pre>
+<p>Picture the waiting stack from bottom to top:</p>
+<pre><code class="language-text">TOP     dd4c — selected next
+        d9c6 — entry corridor waits
+BOTTOM
+</code></pre>
+<p>While expanding the <code>dd4c</code> side, the search can push additional predecessor work above the waiting entry item. Those newer items are selected first too. This is depth-first exploration.</p>
+<p>The entry-side initializer is close: from the jump, the represented path to <code>d9bf</code> needs only <strong>19 reverse edges</strong>. A full structural entry-to-jump corridor has 45 nodes and no calls. In contrast, the retained rejected prefixes have <strong>85–155 reverse edges</strong>.</p>
+<p>The source determines the initial selection order. The evidence also records <code>d9c6</code> in the used-transfer set, but does not record <code>d9bf</code>. Importantly, a parent enters that used set when the resolver <strong>considers/queues it</strong>; this does not mean it was fully explored. Together, these facts support the search-order explanation. The report does not retain a complete push/pop log of every operation.</p>
+<section class="demo" aria-labelledby="stack-title"><h3 id="stack-title">Step through the resolver's waiting stack</h3><p class="caption">Illustrative reconstruction from source and retained evidence. Intervening search work is collapsed; this is not a complete logged trace. One click is not one work unit.</p><div class="step-head"><span id="step-number"></span><strong id="step-title"></strong></div><p id="step-text" aria-live="polite"></p><div class="stack-layout"><div><p class="stack-label">Newest waiting item / next to pop</p><div id="stack"></div><p class="stack-label">Oldest waiting item</p></div><dl class="state"><dt>Active cursor / region</dt><dd id="cursor"></dd><dt>Relevant target formula</dt><dd id="formula"></dd><dt>Analysis fuel</dt><dd id="fuel"></dd></dl></div><div class="controls"><button id="previous" type="button">← Previous</button><input id="step-range" aria-label="Explanation step" type="range" min="0" max="7" value="0"><button id="next" type="button">Next →</button><button id="reset" type="button">Restart</button></div></section>
+<h2 id="6-what-consumes-the-2-097-152-step-budget">6. What consumes the 2,097,152-step budget?</h2>
+<p>The budget limits the analyzer's work. It does not count CPU loop iterations, program instructions executed before the crash, or just the number of graph edges visited.</p>
+<p>A pending item contains:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Plain meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cursor</code></td>
+<td>Where this backward explanation currently stands</td>
+</tr>
+<tr>
+<td><code>term</code></td>
+<td>The current formula for the jump destination</td>
+</tr>
+<tr>
+<td><code>guards</code></td>
+<td>Branch conditions that this candidate context requires</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>The predecessor sequence accumulated so far</td>
+</tr>
+</tbody>
+</table>
+<p>Ariadne spends work on processing an item and on recursively visiting expression nodes while rewriting the target formula and its accumulated guards. For example, rewriting <code>base + 4*index</code> visits several expression nodes. Rewriting many accumulated guards repeats that work over larger expressions.</p>
+<p>In the observed run, the first jump exhausts the shared <strong>2,097,152 resolver work units</strong>. Guard rewriting cannot finish, so it records <code>guard-work-limit</code>; pending work then records <code>resolution-work-limit</code>.</p>
+<p>This budget is different from the <strong>1,000,000 core-analysis-action limit</strong> discussed for the large caller graph. They belong to different analyses.</p>
+<h2 id="7-are-branch-constraints-ignored">7. Are branch constraints ignored?</h2>
+<p>No. The resolver rejected <strong>271 predecessor contexts</strong> because their accumulated conditions were contradictory.</p>
+<p>A simple recorded contradiction is:</p>
+<pre><code class="language-text">the same rewritten symbolic value must be &lt;= 255
+AND
+that value must be &gt;= 256
+</code></pre>
+<p>No value satisfies both. Nine rejected contexts have this form. The other 262 combine a <code>&lt;=255</code> condition with a bit-mask equality that cannot hold in that range.</p>
+<p>The <code>255</code> condition comes from other code in those retained prefixes; it is not a replacement for the first dispatch's own <code>&lt;=127</code> check.</p>
+<p>Ariadne must compare conditions after substituting the intervening assignments. A register can hold one value in an earlier pass and a different value later. It would be unsound to treat two conditions on the same register name at different times as automatically contradictory.</p>
+<p>Rejecting these 271 contexts is useful and conservative. It does not prove every incoming context impossible. It also consumes work to construct, rewrite and reject each context.</p>
+<p>The outcome is therefore:</p>
+<pre><code class="language-text">271 contexts rejected
++ unresolved cyclic incoming contexts
++ work exhausted
++ no retained table witness
+= jump remains incomplete
+</code></pre>
+<h2 id="8-why-doesn-t-the-existing-loop-aware-checker-finish-the-job">8. Why doesn't the existing loop-aware checker finish the job?</h2>
+<p>There are two separate obstacles.</p>
+<p><strong>First, its current job is coverage after a table witness exists.</strong> It requires an existing <code>relative32</code> witness with entries and nonempty targets. This jump has only infeasible receipts, so that prerequisite is absent. The checker does not start by independently finding the table.</p>
+<p><strong>Second, its current shape matcher is narrower than this dispatch.</strong> It takes the initial jump register, RAX, as the selector and requires the reconstructed table index to be that same input bank. Here:</p>
+<pre><code class="language-text">RBX chooses a slot in the table.
+RAX receives the loaded offset and then the final jump address.
+</code></pre>
+<p>Distinguishing the index register from the result register is normal machine code, but this particular matcher does not yet accept this shape. After byte-lookup substitution, the index is a nested load expression, which also requires deliberate handling.</p>
+<p>So selecting the short entry corridor sooner could help obtain the first table witness. It would not, by itself, establish complete loop/incoming-state coverage.</p>
+<h2 id="9-what-is-known-and-what-still-needs-proof">9. What is known, and what still needs proof?</h2>
+<table>
+<thead>
+<tr>
+<th>Statement</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The first jump is <code>jmp rax</code></td>
+<td>Captured and decoded</td>
+</tr>
+<tr>
+<td>Both relevant table byte ranges exist in the dump</td>
+<td>Directly read and hash-checked</td>
+</tr>
+<tr>
+<td>The shown bounds and captured tables yield 21 destinations</td>
+<td>Verified conditional arithmetic</td>
+</tr>
+<tr>
+<td>The source uses a stack and selects dd4c before the queued d9c6 item at the join</td>
+<td>Verified from source and represented predecessor order</td>
+</tr>
+<tr>
+<td>The initializer at d9bf is absent from the retained used transfers</td>
+<td>Observed in the reproduced report</td>
+</tr>
+<tr>
+<td>Every represented incoming context satisfies the needed base/range facts</td>
+<td>Not established</td>
+</tr>
+<tr>
+<td>All 21 destinations were executed, or one particular destination was taken</td>
+<td>Not established by these results</td>
+</tr>
+<tr>
+<td>Raising the budget alone will complete the analysis</td>
+<td>Not demonstrated</td>
+</tr>
+</tbody>
+</table>
+<p>The practical correction has two parts: make the search give timely progress to short prefixes and later dispatches within a finite total budget; then extend the existing loop matcher to represent the actual index expression independently of the jump-result register.</p>
+<h2 id="10-source-and-evidence">10. Source and evidence</h2>
+<p>The original dump is <code>dump_03958DA4FCA844A786262A1053</code>, thread 23668, frame 0. The focused remote reproduction <code>case4-20261015T081221</code> exactly matches the retained target report and leaves the qualified sources unchanged. No build or dump execution is needed to produce this explanation.</p>
+<ul>
+<li><a href="../../evidence/Ariadne/callee-dispatch-analysis/20261015/README.md">Detailed case-4 analysis</a>.</li>
+<li><a href="../../evidence/Ariadne/callee-dispatch-analysis/20261015/artifacts/captured-tables.json">Captured selector/offset tables and slot arithmetic</a>.</li>
+<li><a href="../../evidence/Ariadne/callee-dispatch-analysis/20261015/artifacts/resolver-summary.json">Reproduced resolver summary</a>.</li>
+<li>Resolver work initialization and predecessor construction: <code>src/bap/target_resolution.rs:1073–1081</code>.</li>
+<li>Pending stack selection: <code>src/bap/target_resolution.rs:1111</code>.</li>
+<li>Parent iteration and queueing: <code>src/bap/target_resolution.rs:1285–1337</code>.</li>
+<li>Expression-node work accounting: <code>src/bap/target_resolution.rs:306–343</code>.</li>
+<li>Loop witness prerequisite: <code>src/bap/target_resolution/loop_closure.rs:1263–1273</code>.</li>
+<li>Loop selector/index restriction: <code>src/bap/target_resolution/loop_closure.rs:685–735</code>.</li>
+</ul>
+<details class="advanced"><summary>Open the optional technical appendix</summary>
+<h2 id="optional-technical-appendix-a-small-model-of-the-resolver">Optional technical appendix: a small model of the resolver</h2>
+<p>This appendix is for connecting the walkthrough back to the implementation. The earlier sections contain the explanation needed to understand the case.</p>
+<h3 id="state-and-invariants">State and invariants</h3>
+<p>The concrete implementation uses a fixed instruction graph, typed BAP transfers, original entry roots, a pending vector, result rows, captured-read evidence and a shared remaining-work counter. Its mutations change the search state and result evidence; they do not change the captured snapshot.</p>
+<p>A minimal abstract state is:</p>
+<pre><code class="language-text">State = (fixed_inputs, waiting_stack, current_item, results, read_log, fuel)
+Item  = (cursor, target_formula, constraints, predecessor_path)
+</code></pre>
+<p>The first abstraction preserves predecessor order, stack order, symbolic dependencies, uncertainty and exhaustion. It erases Rust allocation, string encodings, most register-byte bookkeeping and unrelated instructions.</p>
+<p>Useful invariants are that fuel never goes negative, every searched predecessor edge comes from the supplied graph, and exhausted work produces an incomplete result rather than a complete proof. Queue membership is distinct from completed exploration. The recorded used-transfer set is not an execution trace.</p>
+<h3 id="operations-and-legal-transitions">Operations and legal transitions</h3>
+<p>In plain pseudocode:</p>
+<pre><code class="language-text">take:
+    remove the newest waiting item
+
+if fuel is exhausted:
+    record an unresolved work limit for that item
+else:
+    charge item processing
+    if accumulated constraints are proved contradictory:
+        retain an infeasible-context receipt
+    else if a bounded table expression has been established:
+        read captured bytes and retain a table witness, subject to its checks
+    else:
+        for each represented predecessor:
+            substitute its transfer into the target and constraints
+            charge the visited expression nodes
+            queue the resulting predecessor item when supported
+</code></pre>
+<p>Initial states have a jump expression and a pending item. Successful terminal states have the required evidence and coverage. Exhausted, unsupported, unanchored or uncovered states remain partial. A missing memory read would be a separate failure; this resolver run stops before attempting the relevant table reads.</p>
+<p>A representative abstract trace is:</p>
+<pre><code class="language-text">W = []
+W = [entry_item]
+W = [entry_item, later_branch_item]
+take later_branch_item
+W = [entry_item, ...newer predecessor work...]
+...fuel is consumed...
+record incomplete result when fuel is exhausted
+</code></pre>
+<p>This is a source-grounded reconstruction of the relevant policy, not a recording of every intervening operation.</p>
+<h3 id="expressions-bindings-and-judgments">Expressions, bindings and judgments</h3>
+<p>We can summarize the expression language as:</p>
+<pre><code class="language-text">term       ::= constant | input-register | operation(term, ...) | load(term)
+constraint ::= (predicate-term, required-branch-outcome)
+</code></pre>
+<p>An input-register reference is interpreted at the current search cursor. Walking across an assignment substitutes that register's producing expression. The relevant binding is this relation between an expression and its before-state, rather than a lexical variable declaration.</p>
+<p>Two useful judgments, written as explanatory notation, are:</p>
+<pre><code class="language-text">constraints prove impossible
+inputs and constraints justify a finite table witness
+</code></pre>
+<p>These are different judgments: the first rejects one context, while the second supplies target evidence. Neither alone proves whole-dispatch coverage. Typed widths, captured-byte identity and the original graph/root scope constrain admissible witnesses; this note does not replace their implementation checks.</p>
+<p>The second abstraction erases the internal arithmetic of each term and keeps only substitution, contradiction, bounded-read and exhaustion operations. A transition spends a cost determined by the concrete expression work; one abstract arrow is not one fuel token.</p>
+<h3 id="correspondence-and-remaining-mismatch">Correspondence and remaining mismatch</h3>
+<table>
+<thead>
+<tr>
+<th>Abstract operation</th>
+<th>Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Newest item selected</td>
+<td><code>pending.pop()</code></td>
+</tr>
+<tr>
+<td>Incoming work queued</td>
+<td>predecessor loop plus <code>pending.push(...)</code></td>
+</tr>
+<tr>
+<td>Formula substitution</td>
+<td><code>Term::rewrite</code></td>
+</tr>
+<tr>
+<td>Contradictory context rejected</td>
+<td><code>guards_infeasible</code></td>
+</tr>
+<tr>
+<td>Finite table read/witness</td>
+<td>bounded-form and captured-read branches in <code>resolve_inner</code></td>
+</tr>
+<tr>
+<td>Loop coverage attempted</td>
+<td><code>loop_closure::propose</code> after ordinary exploration</td>
+</tr>
+<tr>
+<td>Work exhaustion retained</td>
+<td>unresolved reason plus <code>complete = false</code></td>
+</tr>
+</tbody>
+</table>
+<p>The implementation can represent a queued item that never receives enough work to expand. Its address can already be in the used set. This is exactly why a queued entry corridor must not be described as successfully analyzed.</p>
+<p>The model intentionally omits full hardware behavior, exception resumption, detailed heap aliasing and proof of Rust/native refinement. It preserves the search behavior relevant to this case, not a history of what the crashing program executed.</p>
+</details>
+<h2>Context and follow-up</h2>
+<p><strong>Status.</strong> Retained explanation of the first callee dispatch, restored on 2026-10-16.</p>
+<p><strong>Why this document exists.</strong> It preserves the conversation explanation associated with the <a href="../../evidence/Ariadne/callee-dispatch-analysis/20261015/README.md">case-4 evidence</a> and <a href="../../docs/Ariadne/indirect-target-resolution.md">target-resolution design</a>.</p>
+<p><strong>What this document establishes.</strong> The body records the stated mechanism, examples and evidence boundaries as of the report date.</p>
+<p><strong>Where to go next.</strong> Use the <a href="../../evidence/Ariadne/callee-dispatch-analysis/20261015/README.md">case-4 evidence</a> and <a href="../../docs/Ariadne/indirect-target-resolution.md">target-resolution design</a>; the <a href="ariadne-reports-index.md">report index</a> links related explanations.</p>
+<p><strong>What remains unresolved.</strong> The calculator uses captured table bytes under the stated premises; it does not prove executed history or complete incoming-state coverage.</p>
+</main><script>const selectorMap=[115, 115, 115, 115, 115, 115, 115, 115, 115, 117, 117, 117, 117, 117, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 115, 117, 49, 93, 114, 95, 45, 39, 93, 5, 6, 43, 47, 33, 48, 2, 44, 90, 90, 90, 90, 90, 90, 90, 90, 90, 90, 9, 12, 60, 17, 61, 11, 115, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 3, 95, 7, 38, 95, 0, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 95, 8, 37, 13, 50, 115];const entries=[{"index": 0, "offset_i32": -124074679, "slot": "0x00007ff77ba92a10", "target": "0x00007ff77443ef59"}, {"index": 1, "offset_i32": -124065494, "slot": "0x00007ff77ba92a14", "target": "0x00007ff77444133a"}, {"index": 2, "offset_i32": -124079691, "slot": "0x00007ff77ba92a18", "target": "0x00007ff77443dbc5"}, {"index": 3, "offset_i32": -124079626, "slot": "0x00007ff77ba92a1c", "target": "0x00007ff77443dc06"}, {"index": 4, "offset_i32": -124065494, "slot": "0x00007ff77ba92a20", "target": "0x00007ff77444133a"}, {"index": 5, "offset_i32": -124079626, "slot": "0x00007ff77ba92a24", "target": "0x00007ff77443dc06"}, {"index": 6, "offset_i32": -124079626, "slot": "0x00007ff77ba92a28", "target": "0x00007ff77443dc06"}, {"index": 7, "offset_i32": -124079626, "slot": "0x00007ff77ba92a2c", "target": "0x00007ff77443dc06"}, {"index": 8, "offset_i32": -124079626, "slot": "0x00007ff77ba92a30", "target": "0x00007ff77443dc06"}, {"index": 9, "offset_i32": -124079626, "slot": "0x00007ff77ba92a34", "target": "0x00007ff77443dc06"}, {"index": 10, "offset_i32": -124065494, "slot": "0x00007ff77ba92a38", "target": "0x00007ff77444133a"}, {"index": 11, "offset_i32": -124075502, "slot": "0x00007ff77ba92a3c", "target": "0x00007ff77443ec22"}, {"index": 12, "offset_i32": -124079626, "slot": "0x00007ff77ba92a40", "target": "0x00007ff77443dc06"}, {"index": 13, "offset_i32": -124079626, "slot": "0x00007ff77ba92a44", "target": "0x00007ff77443dc06"}, {"index": 14, "offset_i32": -124065494, "slot": "0x00007ff77ba92a48", "target": "0x00007ff77444133a"}, {"index": 15, "offset_i32": -124065494, "slot": "0x00007ff77ba92a4c", "target": "0x00007ff77444133a"}, {"index": 16, "offset_i32": -124065494, "slot": "0x00007ff77ba92a50", "target": "0x00007ff77444133a"}, {"index": 17, "offset_i32": -124079514, "slot": "0x00007ff77ba92a54", "target": "0x00007ff77443dc76"}, {"index": 18, "offset_i32": -124065494, "slot": "0x00007ff77ba92a58", "target": "0x00007ff77444133a"}, {"index": 19, "offset_i32": -124065494, "slot": "0x00007ff77ba92a5c", "target": "0x00007ff77444133a"}, {"index": 20, "offset_i32": -124065494, "slot": "0x00007ff77ba92a60", "target": "0x00007ff77444133a"}, {"index": 21, "offset_i32": -124065494, "slot": "0x00007ff77ba92a64", "target": "0x00007ff77444133a"}, {"index": 22, "offset_i32": -124065494, "slot": "0x00007ff77ba92a68", "target": "0x00007ff77444133a"}, {"index": 23, "offset_i32": -124065494, "slot": "0x00007ff77ba92a6c", "target": "0x00007ff77444133a"}, {"index": 24, "offset_i32": -124065494, "slot": "0x00007ff77ba92a70", "target": "0x00007ff77444133a"}, {"index": 25, "offset_i32": -124065494, "slot": "0x00007ff77ba92a74", "target": "0x00007ff77444133a"}, {"index": 26, "offset_i32": -124065494, "slot": "0x00007ff77ba92a78", "target": "0x00007ff77444133a"}, {"index": 27, "offset_i32": -124065494, "slot": "0x00007ff77ba92a7c", "target": "0x00007ff77444133a"}, {"index": 28, "offset_i32": -124065494, "slot": "0x00007ff77ba92a80", "target": "0x00007ff77444133a"}, {"index": 29, "offset_i32": -124065494, "slot": "0x00007ff77ba92a84", "target": "0x00007ff77444133a"}, {"index": 30, "offset_i32": -124065494, "slot": "0x00007ff77ba92a88", "target": "0x00007ff77444133a"}, {"index": 31, "offset_i32": -124065494, "slot": "0x00007ff77ba92a8c", "target": "0x00007ff77444133a"}, {"index": 32, "offset_i32": -124065494, "slot": "0x00007ff77ba92a90", "target": "0x00007ff77444133a"}, {"index": 33, "offset_i32": -124079626, "slot": "0x00007ff77ba92a94", "target": "0x00007ff77443dc06"}, {"index": 34, "offset_i32": -124065494, "slot": "0x00007ff77ba92a98", "target": "0x00007ff77444133a"}, {"index": 35, "offset_i32": -124065494, "slot": "0x00007ff77ba92a9c", "target": "0x00007ff77444133a"}, {"index": 36, "offset_i32": -124065494, "slot": "0x00007ff77ba92aa0", "target": "0x00007ff77444133a"}, {"index": 37, "offset_i32": -124075016, "slot": "0x00007ff77ba92aa4", "target": "0x00007ff77443ee08"}, {"index": 38, "offset_i32": -124074337, "slot": "0x00007ff77ba92aa8", "target": "0x00007ff77443f0af"}, {"index": 39, "offset_i32": -124079239, "slot": "0x00007ff77ba92aac", "target": "0x00007ff77443dd89"}, {"index": 40, "offset_i32": -124065494, "slot": "0x00007ff77ba92ab0", "target": "0x00007ff77444133a"}, {"index": 41, "offset_i32": -124065494, "slot": "0x00007ff77ba92ab4", "target": "0x00007ff77444133a"}, {"index": 42, "offset_i32": -124065494, "slot": "0x00007ff77ba92ab8", "target": "0x00007ff77444133a"}, {"index": 43, "offset_i32": -124074879, "slot": "0x00007ff77ba92abc", "target": "0x00007ff77443ee91"}, {"index": 44, "offset_i32": -124078940, "slot": "0x00007ff77ba92ac0", "target": "0x00007ff77443deb4"}, {"index": 45, "offset_i32": -124074247, "slot": "0x00007ff77ba92ac4", "target": "0x00007ff77443f109"}, {"index": 46, "offset_i32": -124065494, "slot": "0x00007ff77ba92ac8", "target": "0x00007ff77444133a"}, {"index": 47, "offset_i32": -124076338, "slot": "0x00007ff77ba92acc", "target": "0x00007ff77443e8de"}, {"index": 48, "offset_i32": -124074626, "slot": "0x00007ff77ba92ad0", "target": "0x00007ff77443ef8e"}, {"index": 49, "offset_i32": -124079148, "slot": "0x00007ff77ba92ad4", "target": "0x00007ff77443dde4"}, {"index": 50, "offset_i32": -124079626, "slot": "0x00007ff77ba92ad8", "target": "0x00007ff77443dc06"}, {"index": 51, "offset_i32": -124065494, "slot": "0x00007ff77ba92adc", "target": "0x00007ff77444133a"}, {"index": 52, "offset_i32": -124065494, "slot": "0x00007ff77ba92ae0", "target": "0x00007ff77444133a"}, {"index": 53, "offset_i32": -124065494, "slot": "0x00007ff77ba92ae4", "target": "0x00007ff77444133a"}, {"index": 54, "offset_i32": -124065494, "slot": "0x00007ff77ba92ae8", "target": "0x00007ff77444133a"}, {"index": 55, "offset_i32": -124065494, "slot": "0x00007ff77ba92aec", "target": "0x00007ff77444133a"}, {"index": 56, "offset_i32": -124065494, "slot": "0x00007ff77ba92af0", "target": "0x00007ff77444133a"}, {"index": 57, "offset_i32": -124065494, "slot": "0x00007ff77ba92af4", "target": "0x00007ff77444133a"}, {"index": 58, "offset_i32": -124065494, "slot": "0x00007ff77ba92af8", "target": "0x00007ff77444133a"}, {"index": 59, "offset_i32": -124065494, "slot": "0x00007ff77ba92afc", "target": "0x00007ff77444133a"}, {"index": 60, "offset_i32": -124075762, "slot": "0x00007ff77ba92b00", "target": "0x00007ff77443eb1e"}, {"index": 61, "offset_i32": -124074157, "slot": "0x00007ff77ba92b04", "target": "0x00007ff77443f163"}, {"index": 62, "offset_i32": -124065494, "slot": "0x00007ff77ba92b08", "target": "0x00007ff77444133a"}, {"index": 63, "offset_i32": -124065494, "slot": "0x00007ff77ba92b0c", "target": "0x00007ff77444133a"}, {"index": 64, "offset_i32": -124065494, "slot": "0x00007ff77ba92b10", "target": "0x00007ff77444133a"}, {"index": 65, "offset_i32": -124065494, "slot": "0x00007ff77ba92b14", "target": "0x00007ff77444133a"}, {"index": 66, "offset_i32": -124065494, "slot": "0x00007ff77ba92b18", "target": "0x00007ff77444133a"}, {"index": 67, "offset_i32": -124065494, "slot": "0x00007ff77ba92b1c", "target": "0x00007ff77444133a"}, {"index": 68, "offset_i32": -124065494, "slot": "0x00007ff77ba92b20", "target": "0x00007ff77444133a"}, {"index": 69, "offset_i32": -124065494, "slot": "0x00007ff77ba92b24", "target": "0x00007ff77444133a"}, {"index": 70, "offset_i32": -124065494, "slot": "0x00007ff77ba92b28", "target": "0x00007ff77444133a"}, {"index": 71, "offset_i32": -124065494, "slot": "0x00007ff77ba92b2c", "target": "0x00007ff77444133a"}, {"index": 72, "offset_i32": -124065494, "slot": "0x00007ff77ba92b30", "target": "0x00007ff77444133a"}, {"index": 73, "offset_i32": -124065494, "slot": "0x00007ff77ba92b34", "target": "0x00007ff77444133a"}, {"index": 74, "offset_i32": -124065494, "slot": "0x00007ff77ba92b38", "target": "0x00007ff77444133a"}, {"index": 75, "offset_i32": -124065494, "slot": "0x00007ff77ba92b3c", "target": "0x00007ff77444133a"}, {"index": 76, "offset_i32": -124065494, "slot": "0x00007ff77ba92b40", "target": "0x00007ff77444133a"}, {"index": 77, "offset_i32": -124065494, "slot": "0x00007ff77ba92b44", "target": "0x00007ff77444133a"}, {"index": 78, "offset_i32": -124065494, "slot": "0x00007ff77ba92b48", "target": "0x00007ff77444133a"}, {"index": 79, "offset_i32": -124065494, "slot": "0x00007ff77ba92b4c", "target": "0x00007ff77444133a"}, {"index": 80, "offset_i32": -124065494, "slot": "0x00007ff77ba92b50", "target": "0x00007ff77444133a"}, {"index": 81, "offset_i32": -124065494, "slot": "0x00007ff77ba92b54", "target": "0x00007ff77444133a"}, {"index": 82, "offset_i32": -124065494, "slot": "0x00007ff77ba92b58", "target": "0x00007ff77444133a"}, {"index": 83, "offset_i32": -124065494, "slot": "0x00007ff77ba92b5c", "target": "0x00007ff77444133a"}, {"index": 84, "offset_i32": -124065494, "slot": "0x00007ff77ba92b60", "target": "0x00007ff77444133a"}, {"index": 85, "offset_i32": -124065494, "slot": "0x00007ff77ba92b64", "target": "0x00007ff77444133a"}, {"index": 86, "offset_i32": -124065494, "slot": "0x00007ff77ba92b68", "target": "0x00007ff77444133a"}, {"index": 87, "offset_i32": -124065494, "slot": "0x00007ff77ba92b6c", "target": "0x00007ff77444133a"}, {"index": 88, "offset_i32": -124065494, "slot": "0x00007ff77ba92b70", "target": "0x00007ff77444133a"}, {"index": 89, "offset_i32": -124065494, "slot": "0x00007ff77ba92b74", "target": "0x00007ff77444133a"}, {"index": 90, "offset_i32": -124077460, "slot": "0x00007ff77ba92b78", "target": "0x00007ff77443e47c"}, {"index": 91, "offset_i32": -124065494, "slot": "0x00007ff77ba92b7c", "target": "0x00007ff77444133a"}, {"index": 92, "offset_i32": -124065494, "slot": "0x00007ff77ba92b80", "target": "0x00007ff77444133a"}, {"index": 93, "offset_i32": -124078431, "slot": "0x00007ff77ba92b84", "target": "0x00007ff77443e0b1"}, {"index": 94, "offset_i32": -124065494, "slot": "0x00007ff77ba92b88", "target": "0x00007ff77444133a"}, {"index": 95, "offset_i32": -124080128, "slot": "0x00007ff77ba92b8c", "target": "0x00007ff77443da10"}, {"index": 96, "offset_i32": -124065494, "slot": "0x00007ff77ba92b90", "target": "0x00007ff77444133a"}, {"index": 97, "offset_i32": -124065494, "slot": "0x00007ff77ba92b94", "target": "0x00007ff77444133a"}, {"index": 98, "offset_i32": -124065494, "slot": "0x00007ff77ba92b98", "target": "0x00007ff77444133a"}, {"index": 99, "offset_i32": -124065494, "slot": "0x00007ff77ba92b9c", "target": "0x00007ff77444133a"}, {"index": 100, "offset_i32": -124065494, "slot": "0x00007ff77ba92ba0", "target": "0x00007ff77444133a"}, {"index": 101, "offset_i32": -124065494, "slot": "0x00007ff77ba92ba4", "target": "0x00007ff77444133a"}, {"index": 102, "offset_i32": -124065494, "slot": "0x00007ff77ba92ba8", "target": "0x00007ff77444133a"}, {"index": 103, "offset_i32": -124065494, "slot": "0x00007ff77ba92bac", "target": "0x00007ff77444133a"}, {"index": 104, "offset_i32": -124065494, "slot": "0x00007ff77ba92bb0", "target": "0x00007ff77444133a"}, {"index": 105, "offset_i32": -124065494, "slot": "0x00007ff77ba92bb4", "target": "0x00007ff77444133a"}, {"index": 106, "offset_i32": -124065494, "slot": "0x00007ff77ba92bb8", "target": "0x00007ff77444133a"}, {"index": 107, "offset_i32": -124065494, "slot": "0x00007ff77ba92bbc", "target": "0x00007ff77444133a"}, {"index": 108, "offset_i32": -124065494, "slot": "0x00007ff77ba92bc0", "target": "0x00007ff77444133a"}, {"index": 109, "offset_i32": -124065494, "slot": "0x00007ff77ba92bc4", "target": "0x00007ff77444133a"}, {"index": 110, "offset_i32": -124065494, "slot": "0x00007ff77ba92bc8", "target": "0x00007ff77444133a"}, {"index": 111, "offset_i32": -124065494, "slot": "0x00007ff77ba92bcc", "target": "0x00007ff77444133a"}, {"index": 112, "offset_i32": -124065494, "slot": "0x00007ff77ba92bd0", "target": "0x00007ff77444133a"}, {"index": 113, "offset_i32": -124065494, "slot": "0x00007ff77ba92bd4", "target": "0x00007ff77444133a"}, {"index": 114, "offset_i32": -124074391, "slot": "0x00007ff77ba92bd8", "target": "0x00007ff77443f079"}, {"index": 115, "offset_i32": -124079626, "slot": "0x00007ff77ba92bdc", "target": "0x00007ff77443dc06"}, {"index": 116, "offset_i32": -124065494, "slot": "0x00007ff77ba92be0", "target": "0x00007ff77444133a"}, {"index": 117, "offset_i32": -124079454, "slot": "0x00007ff77ba92be4", "target": "0x00007ff77443dcb2"}];const steps=[{"title": "Start at the unresolved jump", "text": "Ariadne asks what value can be in RAX at DA0E. It carries a symbolic formula rather than assuming an earlier register value from the crash.", "stack": [["DA0E: explain RAX", "entry"]], "cursor": "DA0E", "formula": "RAX", "fuel": "Shared analysis allowance: 2,097,152 work units"}, {"title": "Walk backward through the local computation", "text": "Assignments expand the target formula. The relevant search reaches the join D9CD, with the table base R12 still symbolic. Other expression details and guards are omitted here.", "stack": [], "cursor": "D9CD (join)", "formula": "R12 + sign_extend(load32[R12 + 4 \u00d7 index])", "fuel": "Available; item processing and expression rewriting consume fuel"}, {"title": "Queue the entry-side predecessor first", "text": "The sorted predecessor list starts with D9C6. Its resulting search item is pushed onto the waiting stack. The initializer D9BF lies earlier on that corridor. Queueing does not mean the corridor has been fully explored.", "stack": [["D9C6: entry-side corridor \u2192 D9BF initializer", "entry"]], "cursor": "Considering predecessors of D9CD", "formula": "R12 is still not replaced by its constant base", "fuel": "Some work has already been spent"}, {"title": "Queue the later incoming branch second", "text": "DD4C is pushed after D9C6. A stack selects the last item pushed, so DD4C is now the next item. These are reverse-search choices, not a recovered execution history.", "stack": [["DD4C: later incoming branch \u2014 selected next", "later"], ["D9C6: entry-side corridor waits", "entry"]], "cursor": "D9CD expansion complete", "formula": "Target formula still depends on R12", "fuel": "The same shared counter applies to both choices"}, {"title": "Pop DD4C and explore that predecessor region", "text": "pending.pop() removes DD4C first. The older entry-side item remains waiting. We do not draw any outgoing DA0E\u2192DD4C edge; DD4C is a known incoming predecessor of D9CD.", "stack": [["D9C6: entry-side corridor waits", "entry"]], "cursor": "DD4C / its earlier predecessor contexts", "formula": "Target formula and accumulated branch constraints are substituted", "fuel": "Being consumed by predecessor work"}, {"title": "More work is pushed above the waiting entry item", "text": "Depth-first exploration can keep adding newer predecessor items. This frame collapses the intervening work. The observed report retains 271 rejected prefixes of 85\u2013155 reverse edges; it does not contain a full push/pop trace.", "stack": [["Newer predecessor work (collapsed)", "later"], ["Other newer predecessor work (collapsed)", "later"], ["D9C6: older entry-side item waits", "entry"]], "cursor": "Cyclic predecessor search region", "formula": "Many target/guard expression nodes must be rewritten", "fuel": "The finite work budget is being consumed"}, {"title": "Guard rewriting exhausts the work counter", "text": "The observed first-jump result contains guard-work-limit, which occurs when the shared rewrite counter reaches zero. The retained used transfers include D9C6 but not the base initializer D9BF. This supports the scheduling explanation without supplying a complete operation trace.", "stack": [["Entry-side work cannot expand with zero fuel", "entry"]], "cursor": "Guard substitution cannot finish", "formula": "No justified numeric table-base witness has been retained", "fuel": "Exhausted"}, {"title": "Publish an incomplete result", "text": "Ariadne keeps the unresolved result: 271 infeasible receipts, zero table targets and zero resolver data reads. This does not mean the table bytes are absent. Independent captured reads yield a conditional 21-target map; completing coverage remains a separate obligation.", "stack": [], "cursor": "First dispatch remains incomplete", "formula": "No complete incoming-state/table certificate", "fuel": "resolution-work-limit; later dispatch also sees exhausted shared fuel"}];
+const number=document.getElementById('selector'),slider=document.getElementById('selector-range');
+function hx(n){return '0x'+n.toString(16).padStart(16,'0')}
+function showLookup(raw){let v=Number(raw);if(!Number.isFinite(v))return;v=Math.max(0,Math.min(127,Math.trunc(v)));number.value=slider.value=v;const idx=selectorMap[v],e=entries[idx];const label=v===32?'space':v===10?'newline':v===0?'NUL':v===127?'DEL':v>=33&&v<=126?String.fromCharCode(v):'control';const bits=BigInt.asUintN(32,BigInt(e.offset_i32));const word=bits.toString(16).padStart(8,'0');const bytes=word.match(/../g).reverse().join(' ');const dest=hx(BigInt('0x00007ff77ba92a10')+BigInt(e.offset_i32));const cells=[['Example selector',v+' ('+label+')'],['Map-byte address',hx(BigInt('0x00007ff77ba91d30')+BigInt(v))],['Captured case index',String(idx)],['Four-byte offset slot',e.slot],['Captured bytes / signed offset',bytes+' / '+e.offset_i32.toLocaleString()],['Computed destination',dest]];const grid=document.createElement('div');grid.className='lookup-grid';for(const [a,b]of cells){const box=document.createElement('div'),small=document.createElement('small'),strong=document.createElement('strong');small.textContent=a;strong.textContent=b;box.append(small,strong);grid.append(box)}document.getElementById('lookup').replaceChildren(grid)}
+number.addEventListener('input',e=>showLookup(e.target.value));slider.addEventListener('input',e=>showLookup(e.target.value));showLookup(65);
+let step=0;function showStep(n){step=Math.max(0,Math.min(steps.length-1,n));const s=steps[step];document.getElementById('step-number').textContent=(step+1)+' / '+steps.length;for(const [id,key]of [['step-title','title'],['step-text','text'],['cursor','cursor'],['formula','formula'],['fuel','fuel']])document.getElementById(id).textContent=s[key];const stack=document.getElementById('stack');stack.replaceChildren();if(s.stack.length===0){const e=document.createElement('div');e.className='stack-item empty';e.textContent='No waiting items shown';stack.append(e)}else for(const [label,type]of s.stack){const e=document.createElement('div');e.className='stack-item '+type;e.textContent=label;stack.append(e)}document.getElementById('previous').disabled=step===0;document.getElementById('next').disabled=step===steps.length-1;document.getElementById('step-range').value=step}
+document.getElementById('previous').onclick=()=>showStep(step-1);document.getElementById('next').onclick=()=>showStep(step+1);document.getElementById('reset').onclick=()=>showStep(0);document.getElementById('step-range').oninput=e=>showStep(Number(e.target.value));showStep(0);</script></body></html>

@@ -22,13 +22,13 @@ reconstructing an executed path or implementing another ISA model.
 
 **Where to go next.**
 
-- [Native-default qualification plan](../../Plans/completed/i5a-native-qualification.md)
+- [Native-default qualification plan](../../.agents/plans/completed/i5a-native-qualification.md)
   refreshes phase measurements, backend identities and controlled Windows
   acceptance after Stage 2 adoption.
-- [I5a implementation plan](../../Plans/completed/i5a-zero-address.md) sequences admission
+- [I5a implementation plan](../../.agents/plans/completed/i5a-zero-address.md) sequences admission
   review, exception evidence, assessment, reports and qualification for this
   Windows zero-address question and records its delivery status.
-- [Investigation stage plan, I5a](../../Plans/investigation-layer.md#i5a--zero-address-consistency)
+- [Investigation stage plan, I5a](../../.agents/plans/investigation-layer.md#i5a--zero-address-consistency)
   places this design after the delivered first question and keeps active Windows
   I4 qualification separate.
 - [Input module](file-reader-design.md#public-interface) describes the snapshot reader that retains
@@ -304,7 +304,7 @@ assessment-CLI median for its small synthetic workloads. These are separate from
 the unchanged I4 timing conditions on its independently re-pinned case; they
 make no universal scale claim.
 
-The [implementation plan](../../Plans/completed/i5a-zero-address.md) records the delivered
+The [implementation plan](../../.agents/plans/completed/i5a-zero-address.md) records the delivered
 H0–H5 sequence: finite form/context review, captured evidence, six-form assessment,
 reports and independently reported qualification tiers. The original
 [source/fixture result](#historical-source-and-fixture-qualification) and demo timing miss are historical;
@@ -502,7 +502,7 @@ Use the same wrapper for `tools/check_investigation.py`, `tools/check_i5a.py`,
 source/tool and qualification-environment identity matches. Pinned helpers/runtime,
 SDK, Graphviz, model tooling and raw capture inputs are prerequisites; missing
 inputs give no acceptance credit. The
-[native qualification plan](../../Plans/completed/i5a-native-qualification.md) owns this
+[native qualification plan](../../.agents/plans/completed/i5a-native-qualification.md) owns this
 refresh sequence and its fixed criteria.
 
 `check_i5a.py` emits `ariadne.i5a-acceptance/v2` and runs fixture determinism,

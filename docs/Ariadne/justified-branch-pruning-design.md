@@ -2,8 +2,8 @@
 
 ## Context and follow-up
 
-**Status.** G0–G4 first-delivery implementation and finite remote checks are complete on 2026-10-14. The original dated retry was unavailable at XORPS typed admission; the [shift-count correction](bap-shift-count-design.md#original-dump-retry-2026-10-14) resolves that stop. The initial guard-evidence cap motivated [G5 configurable budgets](../../Plans/completed/guard-budget-configuration.md), now implemented and finitely validated; the later [caller-coverage delivery](caller-semantic-coverage-design.md) closes the original candidate barriers, while full caller dataflow remains budget-stopped. The later [request-budget delivery](bap-analysis-core-design.md#configurable-native-request-limit) admits its native request with an explicit larger budget. The
-[G0–G4 execution plan](../../Plans/completed/justified-branch-pruning.md) records progress
+**Status.** G0–G4 first-delivery implementation and finite remote checks are complete on 2026-10-14. The original dated retry was unavailable at XORPS typed admission; the [shift-count correction](bap-shift-count-design.md#original-dump-retry-2026-10-14) resolves that stop. The initial guard-evidence cap motivated [G5 configurable budgets](../../.agents/plans/completed/guard-budget-configuration.md), now implemented and finitely validated; the later [caller-coverage delivery](caller-semantic-coverage-design.md) closes the original candidate barriers, while full caller dataflow remains budget-stopped. The later [request-budget delivery](bap-analysis-core-design.md#configurable-native-request-limit) admits its native request with an explicit larger budget. The
+[G0–G4 execution plan](../../.agents/plans/completed/justified-branch-pruning.md) records progress
 and separate qualification. The selected first
 delivery admits the reviewed MOVAPS normal outcome only with a checked alignment
 proof. Handling both outcomes when alignment is unknown is a separate extension.
@@ -20,11 +20,11 @@ the declared analysis premises. Unknown is distinct from refuted.
 
 **Where to go next.**
 
-- [Caller semantic-coverage design](caller-semantic-coverage-design.md) and [S0–S6 plan](../../Plans/caller-semantic-coverage.md) address the remaining normal-flow exception exits and exact MOVAPS load rule after loop closure.
+- [Caller semantic-coverage design](caller-semantic-coverage-design.md) and [S0–S6 plan](../../.agents/plans/caller-semantic-coverage.md) address the remaining normal-flow exception exits and exact MOVAPS load rule after loop closure.
 
-- [Guarded target-resolution composition](guarded-target-resolution-design.md) and its [C0–C6 plan](../../Plans/completed/guarded-target-resolution.md) address the nine unresolved dispatches while preserving independent remaining semantic barriers.
+- [Guarded target-resolution composition](guarded-target-resolution-design.md) and its [C0–C6 plan](../../.agents/plans/completed/guarded-target-resolution.md) address the nine unresolved dispatches while preserving independent remaining semantic barriers.
 
-- [G5 configurable-budget execution plan](../../Plans/completed/guard-budget-configuration.md) releases the initial profile's fixed ceilings while preserving finite caller budgets and proof requirements.
+- [G5 configurable-budget execution plan](../../.agents/plans/completed/guard-budget-configuration.md) releases the initial profile's fixed ceilings while preserving finite caller budgets and proof requirements.
 
 - [Shift-count compatibility](bap-shift-count-design.md) diagnoses the later XORPS width stop and owns its authorized correction.
 
@@ -35,7 +35,7 @@ the declared analysis premises. Unknown is distinct from refuted.
 - [Existing stateflow design](../machine-state-design.md) classifies a frozen
   recovered graph; it is not a discovery prerequisite solver.
 - [Formal-model guide](../../Specs/README.md) defines the active model authority.
-  The [execution plan](../../Plans/completed/justified-branch-pruning.md) requires a frozen
+  The [execution plan](../../.agents/plans/completed/justified-branch-pruning.md) requires a frozen
   predicate-admission model and oracle before runtime changes.
 
 **What remains unresolved.** General exception handling, page/protection faults,
@@ -453,7 +453,7 @@ cooperative 1,000 ms predicate deadline. A budget stop yields no alignment proof
 
 ## Configurable guard budgets
 
-The [G5 implementation plan](../../Plans/completed/guard-budget-configuration.md) implements the user-authorized release of hard guard-profile ceilings. The [captured budget diagnosis](../../evidence/Ariadne/guard-evidence-budget/20261014/README.md) found that the caller needs more than the initial 4 MiB, while Rust and native validation incorrectly used default budgets as maximum permitted budgets.
+The [G5 implementation plan](../../.agents/plans/completed/guard-budget-configuration.md) implements the user-authorized release of hard guard-profile ceilings. The [captured budget diagnosis](../../evidence/Ariadne/guard-evidence-budget/20261014/README.md) found that the caller needs more than the initial 4 MiB, while Rust and native validation incorrectly used default budgets as maximum permitted budgets.
 
 Keep current defaults for the seven `guard_admission::Limits` fields, but allow higher and lower caller-selected finite values. Typed Rust unsigned fields remain finite; configuration is no longer compared with `Limits::default()`. Native admission uses the existing checked unsigned-64 parser and unsigned comparisons, including values encoded beyond the OCaml signed-machine-integer range. Malformed, negative and unsigned-overflow inputs remain rejected. Zero continues to request the existing conservative zero-budget behavior.
 
@@ -542,12 +542,12 @@ The guarded listing is `coverage: unavailable`, `stop: missing-frame-query`,
 zero returned paths, `truncated=false`; it never searches a complete frame
 query. Zero therefore does not mean no path exists. The recorded shift-width stop is resolved by the linked finite correction; general SIMD, larger guard-evidence contracts, XMM unwind, large-table CLI configuration, other faults, general
 exception graphs and full release/performance qualification remain outside
-this delivery. The [execution plan](../../Plans/completed/justified-branch-pruning.md)
+this delivery. The [execution plan](../../.agents/plans/completed/justified-branch-pruning.md)
 records completion of the scoped stages and those exclusions.
 
 ## G5 budget configuration validation, 2026-10-14
 
-The [completed G5 ledger](../../Plans/completed/guard-budget-configuration.md) and [source-bound qualification](../../evidence/Ariadne/guard-budget-configuration/20261014/README.md) record 686 matching source/tool/document hashes and 86 archived files. All final remote WSL gates pass: 14 guard controls, 189 default and 46 core-only tests, format/Clippy, 12 native kernels, nine captured/native and two frame-path tests, strict contract controls and 27 predicate-model configurations. Full unsigned budgets, each above-default field, budget identity tampering and conservative zero-budget stops are exercised. Independent read-only review found no concrete issue; mutation seam checks are not a new mutation campaign. The initial CLI fixture-only failure remains archived, followed by passing one-frame guard and three-frame diamond cases.
+The [completed G5 ledger](../../.agents/plans/completed/guard-budget-configuration.md) and [source-bound qualification](../../evidence/Ariadne/guard-budget-configuration/20261014/README.md) record 686 matching source/tool/document hashes and 86 archived files. All final remote WSL gates pass: 14 guard controls, 189 default and 46 core-only tests, format/Clippy, 12 native kernels, nine captured/native and two frame-path tests, strict contract controls and 27 predicate-model configurations. Full unsigned budgets, each above-default field, budget identity tampering and conservative zero-budget stops are exercised. Independent read-only review found no concrete issue; mutation seam checks are not a new mutation campaign. The initial CLI fixture-only failure remains archived, followed by passing one-frame guard and three-frame diamond cases.
 
 The original captured caller now accepts 32 MiB of evidence budget. Under the original discovery limits it stops at 4,096 starts. Expanded captured-only discovery prepares 4,764 sites, with 4,943,346 raw AST bytes and a 9,001,701-byte guard report. The report retains `candidate-coverage-incomplete` and an unknown MOVAPS verdict; higher budgets do not justify incomplete incoming coverage. A bounded native initialization attempt fails with `core request oversized` under the independent 8 MiB frame limit. No original-dump core steps or paths are qualified. The [exact probe outcomes](../../evidence/Ariadne/guard-budget-configuration/20261014/validation.json) distinguish these boundaries from the removed profile ceilings. Older source-bound qualification and diagnosis records remain historical.
 

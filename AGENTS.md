@@ -85,7 +85,7 @@ validation. Keep analysis-level TLA+ models, replay and mutation checks active.
 
 Maintain one canonical document per feature design in `docs/Ariadne/`.
 Keep its usage, contracts, source-review findings and dated validation summaries
-in that document. Keep stage execution in `Plans/` and raw qualification evidence
+in that document. Keep stage execution in `.agents/plans/` and raw qualification evidence
 under `evidence/Ariadne/`; preserve original evidence identities and scope.
 
 When creating or updating an implementation plan for an existing design, add

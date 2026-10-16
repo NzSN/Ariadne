@@ -25,11 +25,11 @@ replay and evidence-linked reports/CLI are implemented and checked within the
 baseline: `62d7c57ac88336d1defd4bd121e9976470cf704f`.
 The [current roadmap](../ROADMAP.md)
 places this Rust module in Stage E.
-The [Stage E MirrorRust integration plan](../Plans/completed/stage-e-mirrorrust-integration.md)
+The [Stage E MirrorRust integration plan](../.agents/plans/completed/stage-e-mirrorrust-integration.md)
 covers its first typed replay integration stage.
-The [Stage E completion plan](../Plans/completed/stage-e-completion.md) covers generated
+The [Stage E completion plan](../.agents/plans/completed/stage-e-completion.md) covers generated
 case replay, mutation sensitivity and the evidence-linked report/CLI handoff.
-The [BAP integration plan, Stage 2](../Plans/completed/bap-integration.md#stage-2-bap-analysis-core)
+The [BAP integration plan, Stage 2](../.agents/plans/completed/bap-integration.md#stage-2-bap-analysis-core)
 plans migration of this finite stateflow computation into BAP-owned passes.
 
 The specification is [AriadneMachineState.tla](../Specs/AriadneMachineState.tla),

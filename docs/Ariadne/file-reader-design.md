@@ -22,10 +22,10 @@ entry, matching module/build identity and retained instruction evidence.
 - [Captured indirect-target resolution](indirect-target-resolution.md) —
   implemented opt-in captured pointer/table evidence, bounded discovery and
   finite qualification; the reader stays capture-only.
-- [Completed real-capture plan](../../Plans/completed/priority-1-real-capture-plan.md)
+- [Completed real-capture plan](../../.agents/plans/completed/priority-1-real-capture-plan.md)
   and controlled-case validation —
   preserve the initial exact-case acceptance and its limits.
-- [Real-capture re-pin plan](../../Plans/completed/real-capture-repin-79938.md) — applies
+- [Real-capture re-pin plan](../../.agents/plans/completed/real-capture-repin-79938.md) — applies
   this entry/evidence contract to the accepted Windows replacement corpus.
 - [Investigation design](investigation-design.md) — turns a bound query,
   possible producers and retained gaps into a fault-address explanation.
@@ -48,7 +48,7 @@ The [versioned minidump report contract](result-rendering.md#json-v1) covers the
 investigator CLI built on this reader.
 The [current practical queue](semantic-assurance.md#practical-assurance-priorities) prioritizes a
 source-anchored historical capture path; it does not expand reader formats.
-The [workload-performance implementation plan](../../Plans/completed/priority-4-workload-performance-plan.md)
+The [workload-performance implementation plan](../../.agents/plans/completed/priority-4-workload-performance-plan.md)
 and [performance design](workload-performance-design.md) cover
 historical measured scale without expanding reader scope. The exact-case plans
 linked above use the entry and evidence contract in this document.
@@ -488,7 +488,7 @@ each of two Breakpad fixtures, without identifying matching `driver` or
 `crash.exe` symbol artifacts beside them. That historical observation showed
 byte availability, not independently witnessed predecessor paths. The
 [controlled-case validation](#historical-controlled-chromium-capture) and later
-[replacement plan](../../Plans/completed/real-capture-repin-79938.md) retain their own
+[replacement plan](../../.agents/plans/completed/real-capture-repin-79938.md) retain their own
 artifact-specific entry evidence.
 
 ### Evidence chain
@@ -532,15 +532,15 @@ labeled as unknown origins.
 
 Unsupported control, missing bytes, conflicting capture, missing seeds, opaque
 effects and resource limits retain their distinct meanings. A partial report
-can guide [path-driven effects work](../../Plans/completed/priority-2-path-driven-effects-plan.md),
+can guide [path-driven effects work](../../.agents/plans/completed/priority-2-path-driven-effects-plan.md),
 but cannot satisfy the predecessor-case claim until an independently anchored,
 nontrivial producer slice exists. If no candidate has a valid entry witness,
 retain the candidate audit and leave that case unqualified. A qualifying
 possible-producer slice can still have unresolved dependencies; it does not
 claim a complete execution history or root cause.
 
-The [completed real-capture plan](../../Plans/completed/priority-1-real-capture-plan.md)
-and [Windows replacement plan](../../Plans/completed/real-capture-repin-79938.md) define
+The [completed real-capture plan](../../.agents/plans/completed/priority-1-real-capture-plan.md)
+and [Windows replacement plan](../../.agents/plans/completed/real-capture-repin-79938.md) define
 their acceptance scopes. This contract adds no executable-file fallback,
 reverse-from-RIP boundary heuristic, historical execution reconstruction,
 interprocedural return matching or fault/commit semantics. The independent

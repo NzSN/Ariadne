@@ -192,7 +192,7 @@ documents the additive helper modes and rebuild requirement.
 
 See [the protocol](Ariadne/operand-effects-design.md#llvm-mc-protocol-2),
 [design](Ariadne/operand-effects-design.md), and
-[implementation plan](../Plans/completed/operand-effects-plan.md). Run all effects gates:
+[implementation plan](../.agents/plans/completed/operand-effects-plan.md). Run all effects gates:
 
 ```sh
 LLVM20_INCLUDE_DIR=/tmp/ariadne-llvm20/usr/include/llvm-20 \

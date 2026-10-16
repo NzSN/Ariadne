@@ -11,7 +11,7 @@ for the selected finite corpus, with the excluded historical real-Linux clauses
 preserved in the [acceptance decision](../../evidence/Ariadne/bap-admission/p4-acceptance-20261010.json).
 Implementation contracts, source/API review and source-bound qualification are
 separate evidence; this consolidated design does not renew qualification.
-The [vector admission extension](../../Plans/completed/bap-vector-registers.md) implements
+The [vector admission extension](../../.agents/plans/completed/bap-vector-registers.md) implements
 a finite XMM/YMM namespace under producer profile v4; its fresh validation is
 separate from the accepted v3 records.
 
@@ -20,8 +20,8 @@ exposes the coverage and maintenance costs of local instruction rules. BAP
 integration first introduced a pinned semantic provider, then moved actual
 analysis computation into BAP-owned passes while preserving Ariadne's snapshot,
 control, origin and reporting contracts. The integration plan records the
-[semantic-provider stage](../../Plans/completed/bap-integration.md#stage-1-bap-semantic-backend)
-and [native-analysis stage](../../Plans/completed/bap-integration.md#stage-2-bap-analysis-core)
+[semantic-provider stage](../../.agents/plans/completed/bap-integration.md#stage-1-bap-semantic-backend)
+and [native-analysis stage](../../.agents/plans/completed/bap-integration.md#stage-2-bap-analysis-core)
 as delivery steps of this design.
 
 **What this document establishes.** One integration design covers native lifting,
@@ -32,32 +32,32 @@ scopes. Contract validation does not prove an arbitrary lifter or pass correct.
 
 **Where to go next.**
 
-- [Completed native request-budget plan](../../Plans/completed/native-request-budget.md) records caller-selected inbound frames, paired capability checks and fresh native qualification.
+- [Completed native request-budget plan](../../.agents/plans/completed/native-request-budget.md) records caller-selected inbound frames, paired capability checks and fresh native qualification.
 
 - [BIL shift-count compatibility](bap-shift-count-design.md) — captured XORPS diagnosis, independent count widths and versioned correction.
 
 - [Captured indirect-target resolution](indirect-target-resolution.md) and
-  [R0–R6 plan](../../Plans/indirect-target-resolution.md) — implemented BAP-based
+  [R0–R6 plan](../../.agents/plans/indirect-target-resolution.md) — implemented BAP-based
   target expressions, completeness receipts and preparation integration.
-- [Integration plan](../../Plans/completed/bap-integration.md) and its
-  [execution ledger](../../Plans/completed/bap-integration.md#current-execution-ledger) —
+- [Integration plan](../../.agents/plans/completed/bap-integration.md) and its
+  [execution ledger](../../.agents/plans/completed/bap-integration.md#current-execution-ledger) —
   delivery order and retained semantic-provider/analysis-core decisions.
-- [Projection admission plan](../../Plans/completed/bap-projection-admission.md) — accepted
+- [Projection admission plan](../../.agents/plans/completed/bap-projection-admission.md) — accepted
   P0–P4 scope, remote qualification, exclusions and nonblocking follow-ups.
-- [Vector admission plan](../../Plans/completed/bap-vector-registers.md) — finite XMM/YMM
+- [Vector admission plan](../../.agents/plans/completed/bap-vector-registers.md) — finite XMM/YMM
   aliases, conservative aggregate-state projection and dated finite validation.
 - [Justified branch pruning design](justified-branch-pruning-design.md) — proposed
   alignment premises, all-path receipts and proof-gated MOVAPS normal admission.
-- [Bounded completion transport plan](../../Plans/completed/bap-completion-pages.md) —
+- [Bounded completion transport plan](../../.agents/plans/completed/bap-completion-pages.md) —
   action batches and paged final results within unchanged frame limits.
-- [Native analysis implementation plan](../../Plans/completed/bap-stage2-implementation.md) —
+- [Native analysis implementation plan](../../.agents/plans/completed/bap-stage2-implementation.md) —
   delivered A1–A6 analysis and adoption work.
-- [A0 implementation plan](../../Plans/completed/bap-stage2-a0.md) and
-  [OCaml foundation plan](../../Plans/completed/bap-ocaml-qualification.md) — completed
+- [A0 implementation plan](../../.agents/plans/completed/bap-stage2-a0.md) and
+  [OCaml foundation plan](../../.agents/plans/completed/bap-ocaml-qualification.md) — completed
   contract, SDK, helper-state and transport foundation.
-- [Windows workload replacement plan](../../Plans/completed/bap-windows-repin.md) —
+- [Windows workload replacement plan](../../.agents/plans/completed/bap-windows-repin.md) —
   authorized replacement of the unavailable capture for active BAP S4/S5.
-- [Completed BAP-only semantics plan](../../Plans/completed/bap-only-semantics.md) —
+- [Completed BAP-only semantics plan](../../.agents/plans/completed/bap-only-semantics.md) —
   removal of the LLVM semantic fallback while retaining decoded-fact validation.
 - [Native helper setup](../../native/bap/README.md) and
   [analysis SDK setup](../../native/bap-core/README.md) — pinned build and runtime
@@ -251,7 +251,7 @@ capture and timing contract; default selection does not establish that result.
 
 ## Vector-register admission
 
-The [V0–V2 vector admission plan](../../Plans/completed/bap-vector-registers.md) selects
+The [V0–V2 vector admission plan](../../.agents/plans/completed/bap-vector-registers.md) selects
 XMM0–15/YMM0–15, exact 128/256-bit widths, canonical YMM backing and low-half
 XMM aliases. Vector effects use the existing coarse `state:other` location:
 reads retain that dependency and writes may-define it, but never must-kill the
@@ -608,7 +608,7 @@ session without automatic Rust fallback.
 
 ## Configurable native request limit
 
-The [T0–T4 execution plan](../../Plans/completed/native-request-budget.md) implements the user-authorized configurable request limit, following the [G5 captured retry](../../evidence/Ariadne/guard-budget-configuration/20261014/README.md). Guard proof budgets and transport request budgets are independent; the larger captured report reached the previous fixed inbound 8 MiB limit.
+The [T0–T4 execution plan](../../.agents/plans/completed/native-request-budget.md) implements the user-authorized configurable request limit, following the [G5 captured retry](../../evidence/Ariadne/guard-budget-configuration/20261014/README.md). Guard proof budgets and transport request budgets are independent; the larger captured report reached the previous fixed inbound 8 MiB limit.
 
 `CoreConfig.max_request_bytes` defaults to 8 MiB and accepts caller-selected positive finite values without a default-based ceiling. The CLI option is `--bap-core-max-request-bytes N`. Host enforcement and native input reading both count the complete JSON line including its newline. Native launch receives a nondefault value through `--max-request-bytes DECIMAL`, parsed with checked unsigned-64 arithmetic. Zero, malformed and overflowing values are rejected. The chosen budget does not become an allocation reservation.
 
@@ -925,7 +925,7 @@ The user confirmed its loss and authorized the replacement below.
 The controlled `crashpad-windows-checksum-98-v1` is a real Windows AMD64 Crashpad
 capture analyzed on Linux, not a manually edited dump or reconstruction of the
 old crash. Its [recipe](../../native/crashpad-demo/README.md) and
-[replacement plan](../../Plans/completed/bap-windows-repin.md) freeze 98 starts: setup,
+[replacement plan](../../.agents/plans/completed/bap-windows-repin.md) freeze 98 starts: setup,
 eight checksum rounds, indexed loop, conditional diamond, spill/reload and RCX
 producer before a four-byte null write. All rounds feed the address computation.
 
@@ -1120,8 +1120,8 @@ direct native tampering bypassed Rust prevalidation.
 | Migration / workloads | Earlier focused comparison reproduced 24 v2 hashes and declared profile/ID changes; 98-start/99-edge/90-slice/zero-obligation Windows Rust median 657.39 ms under unlimited timing. This did not qualify native I4 budgets. |
 | Acceptance | Complete admission mutation campaign and source-bound P4 refresh were not accepted here; later selected replacement supplied its own decision. |
 
-The [plan execution ledger](../../Plans/completed/bap-projection-admission.md#execution-ledger-2026-10-10)
-and [resume order](../../Plans/completed/bap-projection-admission.md#resume-order) distinguish
+The [plan execution ledger](../../.agents/plans/completed/bap-projection-admission.md#execution-ledger-2026-10-10)
+and [resume order](../../.agents/plans/completed/bap-projection-admission.md#resume-order) distinguish
 these historical checks from the later accepted scope. Failed run paths such as
 `target/bap-admission-qualification-20261010` identify the original environment,
 not a promise that temporary files persist.
@@ -1233,7 +1233,7 @@ not follow.
 ## Proof-gated normal admission
 
 The opt-in [MOVAPS guard design](justified-branch-pruning-design.md) and its
-[G0–G4 plan](../../Plans/completed/justified-branch-pruning.md) add producer
+[G0–G4 plan](../../.agents/plans/completed/justified-branch-pruning.md) add producer
 `bap-bit-provenance-v5` and native capture profile `captured-guarded-input/v1`.
 The preparation coordinator freezes full candidate control and residue proof
 evidence before selecting the reviewed normal BIL. Unknown, refuted and
@@ -1260,7 +1260,7 @@ and the original retry's subsequent guard-evidence limit.
 
 ## Request-budget validation, 2026-10-14
 
-The [completed T0–T4 ledger](../../Plans/completed/native-request-budget.md) and [source-bound qualification](../../evidence/Ariadne/native-request-budget/20261014/README.md) retain 686 matching source/tool/document hashes and 35 archived files. Fresh remote WSL checks pass: 191 default/46 core-only tests, format/Clippy/layout, 17 native kernels, nine capture and two frame-path tests, plus 14 Python contract controls. Five new transport tests exercise exact newline-inclusive host/direct-native bounds, malformed/overflow/full-unsigned launches, legacy compatibility, invalid capabilities/ready, child cleanup, unchanged response limits and a valid request above 8 MiB. Independent read-only review found no concrete issue. Model bodies remain unchanged and their retained G5 hashes are verified; no fresh model/mutation, release/performance or universal refinement campaign is credited.
+The [completed T0–T4 ledger](../../.agents/plans/completed/native-request-budget.md) and [source-bound qualification](../../evidence/Ariadne/native-request-budget/20261014/README.md) retain 686 matching source/tool/document hashes and 35 archived files. Fresh remote WSL checks pass: 191 default/46 core-only tests, format/Clippy/layout, 17 native kernels, nine capture and two frame-path tests, plus 14 Python contract controls. Five new transport tests exercise exact newline-inclusive host/direct-native bounds, malformed/overflow/full-unsigned launches, legacy compatibility, invalid capabilities/ready, child cleanup, unchanged response limits and a valid request above 8 MiB. Independent read-only review found no concrete issue. Model bodies remain unchanged and their retained G5 hashes are verified; no fresh model/mutation, release/performance or universal refinement campaign is credited.
 
 The [original caller comparison](../../evidence/Ariadne/native-request-budget/20261014/artifacts/probe-expanded/preparation-outcome.json) initializes its 4,764-site capture and 9,001,701-byte guard report successfully with `max_request_bytes=33554432`; the default still rejects it with `core request oversized`. Responses remain bounded at 8 MiB. The report retains incomplete candidate coverage and unknown MOVAPS alignment. The retry performs native initialization only, so it does not qualify core/path results.
 

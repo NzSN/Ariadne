@@ -26,9 +26,9 @@ The root analysis crate remains dependency-free. Application ports own actual
 Rust analyzers; generated modules own codecs, dispatch and lifecycle. Registered
 factories construct ports only after exact semantic-digest admission.
 
-The [completion plan](../../Plans/completed/stage-e-completion.md) and
+The [completion plan](../../.agents/plans/completed/stage-e-completion.md) and
 [design](../../docs/Ariadne/typed-replay-design.md) define this stage.
-The original [first integration plan](../../Plans/completed/stage-e-mirrorrust-integration.md)
+The original [first integration plan](../../.agents/plans/completed/stage-e-mirrorrust-integration.md)
 and its two-fixture record remain historical evidence.
 
 ## Checked campaign

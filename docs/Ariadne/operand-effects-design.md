@@ -18,15 +18,15 @@ records while retaining LLVM's current independent decode/control role.
 
 - [BAP production design](bap-analysis-core-design.md) — current typed-BIL admission,
   projection and native analysis ownership.
-- [Completed initial effects plan](../../Plans/completed/operand-effects-plan.md)
+- [Completed initial effects plan](../../.agents/plans/completed/operand-effects-plan.md)
   — original contract/protocol/rule delivery.
-- [Completed memory-immediate MOV plan](../../Plans/completed/stage-a-memory-immediate-mov-plan.md)
+- [Completed memory-immediate MOV plan](../../.agents/plans/completed/stage-a-memory-immediate-mov-plan.md)
   — the two exact memory forms and weak-update tests.
-- [Completed path-driven effects plan](../../Plans/completed/priority-2-path-driven-effects-plan.md)
+- [Completed path-driven effects plan](../../.agents/plans/completed/priority-2-path-driven-effects-plan.md)
   — selected-path no-change and later bounded control bindings.
-- [Completed Windows workload stage](../../Plans/completed/priority-4-workload-performance-plan.md#2026-09-30-qualification-run)
+- [Completed Windows workload stage](../../.agents/plans/completed/priority-4-workload-performance-plan.md#2026-09-30-qualification-run)
   — eight observed forms and measured use of their opaque summaries.
-- [BAP integration plan](../../Plans/completed/bap-integration.md#stage-1-bap-semantic-backend)
+- [BAP integration plan](../../.agents/plans/completed/bap-integration.md#stage-1-bap-semantic-backend)
   — replacement lifting backend under the surviving summary contract.
 - [Semantic assurance](semantic-assurance.md) — trusted lifting, finite conformance
   and retirement of independent instruction-step proofs.
@@ -221,7 +221,7 @@ LLVM decoding nor source interpretation or a complete instruction step.
 
 ## Implementation sequence and acceptance
 
-The [completed effects plan](../../Plans/completed/operand-effects-plan.md)
+The [completed effects plan](../../.agents/plans/completed/operand-effects-plan.md)
 retains sequencing. Tests run through `prepare()` and the real analyzer: AL/AH
 after RAX, EAX zero extension, ties, CF dependencies/preservation, unknown stores,
 opaque calls, RIP-relative addressing and unknown control. A precision fixture
@@ -635,7 +635,7 @@ no PE/ELF reader, ISA executor or production JSON CLI was delivered here.
 
 ### Selected-path no-change decision (2026-09-29)
 
-The [path-driven plan](../../Plans/completed/priority-2-path-driven-effects-plan.md)
+The [path-driven plan](../../.agents/plans/completed/priority-2-path-driven-effects-plan.md)
 and [source-bound record](../../evidence/Ariadne/priority-2-3-validation.json)
 reviewed the controlled Chromium path at 23:26 CST. Of 29 captured starts before
 the seed, 22 had reviewed effects and seven `CALL64pcrel32` sites had opaque
@@ -655,7 +655,7 @@ Breakpad fixtures. No user64 case was promoted.
 ### Eight ordinary-control bindings (2026-09-30)
 
 Reviewed 2026-09-30 for the Windows Electron workload in the
-[qualification plan](../../Plans/completed/priority-4-workload-performance-plan.md#2026-09-30-qualification-run).
+[qualification plan](../../.agents/plans/completed/priority-4-workload-performance-plan.md#2026-09-30-qualification-run).
 The eight bindings below admit ordinary continuation while retaining opaque
 effects: every catalogue cell remains a possible input and write, with no
 definite replacement. They do not execute an instruction or assert fault

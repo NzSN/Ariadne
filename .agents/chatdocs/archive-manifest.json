@@ -1,0 +1,957 @@
+{
+  "archived": "2026-10-16",
+  "scope": "Conversation presentation archive; canonical designs stay in docs/ and plan owners now live in .agents/plans/. No new analysis or qualification.",
+  "report_count": 25,
+  "markdown_html_pairs_including_index": 21,
+  "source_session": "01a12ddc-4e59-7cb2-b5aa-67a8e522c597",
+  "recovered_reports": [
+    {
+      "markdown": "ariadne-cyclic-incoming-state-20261015.md",
+      "html": "ariadne-cyclic-incoming-state-20261015.html",
+      "source_sha256": "bc1459fa99256f397e8994fb852d8030bcf89efd82701ae1841855dde6236faf",
+      "archive_sha256": "efbfd2b7458466ce14636f7c85e3cf0056f571947b0cf37cee98a0e588fa069e",
+      "original_path": "/tmp/ariadne-cyclic-incoming-state-20261015.md",
+      "source_log_lines": [
+        15515
+      ],
+      "recovery_status": "exact_literal_restoration",
+      "pre_plan_relocation_archive_sha256": "3ff055db6e926a742570a0861787a947b7ba30f4d60d0582b54cdf9bb72366e9"
+    },
+    {
+      "markdown": "ariadne-frame-to-frame-outcome-20261015.md",
+      "html": "ariadne-frame-to-frame-outcome-20261015.html",
+      "source_sha256": "77dd0f6dc721573300dd1c28f731acb5260e813f72948c4bc426f9d6ac88d902",
+      "archive_sha256": "a94b93e94909e9481e7add52d575b98a60d5d072335432a1193fd5efb237db2a",
+      "original_path": "/tmp/ariadne-frame-to-frame-outcome-20261015.md",
+      "source_log_lines": [
+        15224
+      ],
+      "recovery_status": "exact_literal_restoration",
+      "pre_plan_relocation_archive_sha256": "e96fc1510cb518c2877bde3b1b1f864efe4036d1081596a44f840e75f0e72bb5"
+    },
+    {
+      "markdown": "ariadne-guarded-target-resolution-implementation.md",
+      "html": "ariadne-guarded-target-resolution-implementation.html",
+      "source_sha256": "5c8806371f8ec66fe95689a1ab6c1316dd3090f1f9f539471c69489ebf1a1da3",
+      "archive_sha256": "030ddc7a4b96a3980bf5b6405c70ba22649de3b69118f163bfa370e624eccb93",
+      "original_path": "/tmp/ariadne-guarded-target-resolution-implementation.md",
+      "source_log_lines": [
+        14984
+      ],
+      "recovery_status": "exact_literal_restoration",
+      "pre_plan_relocation_archive_sha256": "1a3eb9a925d0838709161d2250a593cb69bf3009946f05cc86c80230e3e81853"
+    },
+    {
+      "markdown": "ariadne-indirect-target-resolution-design-20261012.md",
+      "html": "ariadne-indirect-target-resolution-design-20261012.html",
+      "source_sha256": "1b34e8e022e82b9bc9f7d0dade73e5bc9b47738951724e0a0a458476b375b6c9",
+      "archive_sha256": "be4c68caa236d94dc519689fb0d38ecac85098eafe87519d20fa4355c0694256",
+      "original_path": "/home/nzsn/Repos/Ariadne/docs/Ariadne/indirect-target-resolution.md",
+      "source_log_lines": [
+        465,
+        509
+      ],
+      "recovery_status": "exact_historical_source_verified_against_render_manifest",
+      "pre_plan_relocation_archive_sha256": "7c755c7d843b9e11abf33b2198e21a8fe9eb23f9c7647d70ff27cc2d2780c783"
+    },
+    {
+      "markdown": "ariadne-indirect-target-resolution-plan-20261012.md",
+      "html": "ariadne-indirect-target-resolution-plan-20261012.html",
+      "source_sha256": "1d98a4d24a91b5d7da8ec4092fb0939e378763904e2087cc5910d75f06c1aa28",
+      "archive_sha256": "13a0dc965ce18ecff4f72ef569092d088a74131f9053fe047539f80e9af84738",
+      "original_path": "/home/nzsn/Repos/Ariadne/Plans/indirect-target-resolution.md",
+      "source_log_lines": [
+        465
+      ],
+      "recovery_status": "exact_historical_source_verified_against_render_manifest"
+    },
+    {
+      "markdown": "ariadne-loop-aware-design-and-plan-20261015.md",
+      "html": "ariadne-loop-aware-design-and-plan-20261015.html",
+      "source_sha256": "f4fb7fb900cc3064ef933c18884cf3e3269e154d577062a1a0474885f6ab18e6",
+      "archive_sha256": "47529bc054223f1a5422b3083950405d3b3af7ec57bc8e83d41906714fe1a3e2",
+      "original_path": "/tmp/ariadne-loop-aware-design-and-plan-20261015.md",
+      "source_log_lines": [
+        15947,
+        16066,
+        16122,
+        16152
+      ],
+      "recovery_status": "restored_from_exact_historical_source_and_literal_reading_view",
+      "pre_plan_relocation_archive_sha256": "2d95f5682d41101a2f24f1a9a5ced8ad2c2a69593fee0cb3ecdb3588072d009c"
+    },
+    {
+      "markdown": "ariadne-loop-aware-implementation-20261015.md",
+      "html": "ariadne-loop-aware-implementation-20261015.html",
+      "source_sha256": "1b0069642be9c6ec76441f04dc0e42c062f78ea7861a42f7a414b8d1b06d131b",
+      "archive_sha256": "080bf67955818c34346ac1ec29946a120e4325f18e8d1284faae3dc2dea9f057",
+      "original_path": "/tmp/ariadne-loop-aware-implementation-20261015.md",
+      "source_log_lines": [
+        18348
+      ],
+      "recovery_status": "exact_literal_restoration",
+      "pre_plan_relocation_archive_sha256": "a7faaaccc86a2bddd4ec18a138f04c7e1976de2faf770ea94ce4680ff517327f"
+    },
+    {
+      "markdown": "ariadne-nine-jump-tables-20261014.md",
+      "html": "ariadne-nine-jump-tables-20261014.html",
+      "source_sha256": "b00bff8c1cc0d4a020692c9e8c20137ea009a6c2ac041b57f1d9584d1c3809b9",
+      "archive_sha256": "3a2eb67edd8eae78ada96dcbbb10ec69970a3cd5f110968711d16f70207fca82",
+      "original_path": "/tmp/ariadne-nine-jump-tables-20261014.md",
+      "source_log_lines": [
+        12395
+      ],
+      "recovery_status": "restored_from_literal_template_and_retained_data"
+    },
+    {
+      "markdown": "ariadne-resolver-structural-types-20261015.md",
+      "html": "ariadne-resolver-structural-types-20261015.html",
+      "source_sha256": "e8a327555d2cc1889281df7bbe0a2e0f1bb1c8fd3ea066507cc37b7042603eb0",
+      "archive_sha256": "5af32b0db399382d757440dea07a1ab09cf6236cc7011fe36be004c743f9e7a5",
+      "original_path": "/tmp/ariadne-resolver-structural-types-20261015.md",
+      "source_log_lines": [
+        15836,
+        15851,
+        15859,
+        15877
+      ],
+      "recovery_status": "exact_literal_restoration",
+      "pre_plan_relocation_archive_sha256": "3501d22a36329c3cd110e1e10ce0613ae97de397e1517e9ac20f0f95b103905a"
+    },
+    {
+      "markdown": "ariadne-unresolved-blockers-20261014.md",
+      "html": "ariadne-unresolved-blockers-20261014.html",
+      "source_sha256": "647ebb7e91696c676a7c857ea42b2b7196f6bc7cc33f2de1fa48b91e60035d50",
+      "archive_sha256": "5253a903e35343cb72aa4cf1f1db034a440884e3f8e58141973afdf60cb58211",
+      "original_path": "/tmp/ariadne-unresolved-blockers-20261014.md",
+      "source_log_lines": [
+        12248
+      ],
+      "recovery_status": "restored_from_literal_template_and_retained_data",
+      "pre_plan_relocation_archive_sha256": "2a55b9a309c6f5dec81d08c2bb7507b0173293a6160ef56b34de979add82bf21"
+    },
+    {
+      "markdown": "ariadne-ymm6-representation.md",
+      "html": "ariadne-ymm6-representation.html",
+      "source_sha256": "ab4a3bed05f235a34f878280a77d345963e81bca9cfa036af8c5a43b3c870957",
+      "archive_sha256": "f11447bc7e90f1bc036730521c1cafb04d9e43bafe1f5cc1a4126eaa5ca6cab1",
+      "original_path": "/tmp/ariadne-ymm6-representation.md",
+      "source_log_lines": [
+        7261,
+        8007
+      ],
+      "recovery_status": "exact_literal_restoration",
+      "pre_plan_relocation_archive_sha256": "09ebe8ee2bab02b649c9d753e7548d6b92e83f41dad6415fd43b37bca264f5bb",
+      "pre_clean_checkout_reference_archive_sha256": "a58c164bd4d6bf72eaac971ec7eb2195fcbb4906d96fb5d350d9d2039a812e38",
+      "archive_reference_note": "Historical local BAP header reference retained as text because its ignored build artifact is absent from clean checkouts."
+    }
+  ],
+  "recovered_sources_and_assets": [
+    {
+      "original_path": "/tmp/ariadne-ymm6-representation.md",
+      "source_log_lines": [
+        7261,
+        8007
+      ],
+      "status": "exact_literal_restoration",
+      "bytes": 6000,
+      "sha256": "ab4a3bed05f235a34f878280a77d345963e81bca9cfa036af8c5a43b3c870957",
+      "archive_path": "ariadne-ymm6-representation.md",
+      "archive_sha256": "f11447bc7e90f1bc036730521c1cafb04d9e43bafe1f5cc1a4126eaa5ca6cab1",
+      "pre_plan_relocation_archive_sha256": "09ebe8ee2bab02b649c9d753e7548d6b92e83f41dad6415fd43b37bca264f5bb",
+      "pre_clean_checkout_reference_archive_sha256": "a58c164bd4d6bf72eaac971ec7eb2195fcbb4906d96fb5d350d9d2039a812e38",
+      "archive_reference_note": "Historical local BAP header reference retained as text because its ignored build artifact is absent from clean checkouts."
+    },
+    {
+      "original_path": "/tmp/ariadne-cyclic-incoming-state-20261015.md",
+      "source_log_lines": [
+        15515
+      ],
+      "status": "exact_literal_restoration",
+      "bytes": 7740,
+      "sha256": "bc1459fa99256f397e8994fb852d8030bcf89efd82701ae1841855dde6236faf",
+      "archive_path": "ariadne-cyclic-incoming-state-20261015.md",
+      "archive_sha256": "efbfd2b7458466ce14636f7c85e3cf0056f571947b0cf37cee98a0e588fa069e",
+      "pre_plan_relocation_archive_sha256": "3ff055db6e926a742570a0861787a947b7ba30f4d60d0582b54cdf9bb72366e9"
+    },
+    {
+      "original_path": "/tmp/ariadne-resolver-structural-types-20261015.md",
+      "source_log_lines": [
+        15836,
+        15851,
+        15859,
+        15877
+      ],
+      "status": "exact_literal_restoration",
+      "bytes": 24677,
+      "sha256": "e8a327555d2cc1889281df7bbe0a2e0f1bb1c8fd3ea066507cc37b7042603eb0",
+      "archive_path": "ariadne-resolver-structural-types-20261015.md",
+      "archive_sha256": "5af32b0db399382d757440dea07a1ab09cf6236cc7011fe36be004c743f9e7a5",
+      "pre_plan_relocation_archive_sha256": "3501d22a36329c3cd110e1e10ce0613ae97de397e1517e9ac20f0f95b103905a"
+    },
+    {
+      "original_path": "/tmp/ariadne-guarded-target-resolution-implementation.md",
+      "source_log_lines": [
+        14984
+      ],
+      "status": "exact_literal_restoration",
+      "bytes": 1642,
+      "sha256": "5c8806371f8ec66fe95689a1ab6c1316dd3090f1f9f539471c69489ebf1a1da3",
+      "archive_path": "ariadne-guarded-target-resolution-implementation.md",
+      "archive_sha256": "030ddc7a4b96a3980bf5b6405c70ba22649de3b69118f163bfa370e624eccb93",
+      "pre_plan_relocation_archive_sha256": "1a3eb9a925d0838709161d2250a593cb69bf3009946f05cc86c80230e3e81853"
+    },
+    {
+      "original_path": "/tmp/ariadne-frame-to-frame-outcome-20261015.md",
+      "source_log_lines": [
+        15224
+      ],
+      "status": "exact_literal_restoration",
+      "bytes": 4775,
+      "sha256": "77dd0f6dc721573300dd1c28f731acb5260e813f72948c4bc426f9d6ac88d902",
+      "archive_path": "ariadne-frame-to-frame-outcome-20261015.md",
+      "archive_sha256": "a94b93e94909e9481e7add52d575b98a60d5d072335432a1193fd5efb237db2a",
+      "pre_plan_relocation_archive_sha256": "e96fc1510cb518c2877bde3b1b1f864efe4036d1081596a44f840e75f0e72bb5"
+    },
+    {
+      "original_path": "/tmp/ariadne-loop-aware-implementation-20261015.md",
+      "source_log_lines": [
+        18348
+      ],
+      "status": "exact_literal_restoration",
+      "bytes": 2831,
+      "sha256": "1b0069642be9c6ec76441f04dc0e42c062f78ea7861a42f7a414b8d1b06d131b",
+      "archive_path": "ariadne-loop-aware-implementation-20261015.md",
+      "archive_sha256": "080bf67955818c34346ac1ec29946a120e4325f18e8d1284faae3dc2dea9f057",
+      "pre_plan_relocation_archive_sha256": "a7faaaccc86a2bddd4ec18a138f04c7e1976de2faf770ea94ce4680ff517327f"
+    },
+    {
+      "original_path": "/tmp/ariadne-unresolved-blockers-20261014.md",
+      "source_log_lines": [
+        12248
+      ],
+      "status": "restored_from_literal_template_and_retained_data",
+      "bytes": 8781,
+      "sha256": "647ebb7e91696c676a7c857ea42b2b7196f6bc7cc33f2de1fa48b91e60035d50",
+      "dependencies": [
+        "/home/nzsn/Repos/Ariadne/evidence/Ariadne/native-request-budget/20261014/artifacts/probe-expanded/guard-report.json",
+        "/home/nzsn/Repos/Ariadne/evidence/Ariadne/native-request-budget/20261014/artifacts/probe-expanded/preparation-outcome.json"
+      ],
+      "archive_path": "ariadne-unresolved-blockers-20261014.md",
+      "archive_sha256": "5253a903e35343cb72aa4cf1f1db034a440884e3f8e58141973afdf60cb58211",
+      "pre_plan_relocation_archive_sha256": "2a55b9a309c6f5dec81d08c2bb7507b0173293a6160ef56b34de979add82bf21"
+    },
+    {
+      "original_path": "/tmp/ariadne-nine-jump-tables-20261014.md",
+      "source_log_lines": [
+        12395
+      ],
+      "status": "restored_from_literal_template_and_retained_data",
+      "bytes": 5590,
+      "sha256": "b00bff8c1cc0d4a020692c9e8c20137ea009a6c2ac041b57f1d9584d1c3809b9",
+      "dependencies": [
+        "/home/nzsn/Repos/Ariadne/evidence/Ariadne/indirect-target-resolution/dump03958-table-witness-20261014/tables.json"
+      ],
+      "archive_path": "ariadne-nine-jump-tables-20261014.md",
+      "archive_sha256": "3a2eb67edd8eae78ada96dcbbb10ec69970a3cd5f110968711d16f70207fca82"
+    },
+    {
+      "original_path": "/home/nzsn/Repos/Ariadne/Plans/indirect-target-resolution.md",
+      "source_log_lines": [
+        465
+      ],
+      "status": "exact_historical_source_verified_against_render_manifest",
+      "bytes": 13544,
+      "sha256": "1d98a4d24a91b5d7da8ec4092fb0939e378763904e2087cc5910d75f06c1aa28",
+      "archive_path": "ariadne-indirect-target-resolution-plan-20261012.md",
+      "archive_sha256": "13a0dc965ce18ecff4f72ef569092d088a74131f9053fe047539f80e9af84738"
+    },
+    {
+      "original_path": "/home/nzsn/Repos/Ariadne/docs/Ariadne/indirect-target-resolution.md",
+      "source_log_lines": [
+        465,
+        509
+      ],
+      "status": "exact_historical_source_verified_against_render_manifest",
+      "bytes": 18529,
+      "sha256": "1b34e8e022e82b9bc9f7d0dade73e5bc9b47738951724e0a0a458476b375b6c9",
+      "archive_path": "ariadne-indirect-target-resolution-design-20261012.md",
+      "archive_sha256": "be4c68caa236d94dc519689fb0d38ecac85098eafe87519d20fa4355c0694256",
+      "pre_plan_relocation_archive_sha256": "7c755c7d843b9e11abf33b2198e21a8fe9eb23f9c7647d70ff27cc2d2780c783"
+    },
+    {
+      "original_path": "/tmp/ariadne-loop-aware-design-and-plan-20261015.md",
+      "source_log_lines": [
+        15947,
+        16066,
+        16122,
+        16152
+      ],
+      "status": "restored_from_exact_historical_source_and_literal_reading_view",
+      "bytes": 35250,
+      "sha256": "f4fb7fb900cc3064ef933c18884cf3e3269e154d577062a1a0474885f6ab18e6",
+      "archive_path": "ariadne-loop-aware-design-and-plan-20261015.md",
+      "archive_sha256": "47529bc054223f1a5422b3083950405d3b3af7ec57bc8e83d41906714fe1a3e2",
+      "pre_plan_relocation_archive_sha256": "2d95f5682d41101a2f24f1a9a5ced8ad2c2a69593fee0cb3ecdb3588072d009c"
+    },
+    {
+      "original_path": "/tmp/ariadne-partial-frame-graph-20261015/render.py",
+      "source_log_lines": [
+        15326,
+        15350,
+        15379
+      ],
+      "status": "exact_literal_restoration",
+      "bytes": 22550,
+      "sha256": "e22c196a9107ef9d286bfd0f57a5df86b438e3aba6c4543bde7bc33375c77ec4",
+      "archive_path": "ariadne-partial-frame-graph-20261015/render.py.txt",
+      "archive_sha256": "e22c196a9107ef9d286bfd0f57a5df86b438e3aba6c4543bde7bc33375c77ec4"
+    },
+    {
+      "original_path": "/tmp/ariadne-partial-frame-graph-20261015/index.html",
+      "source_log_lines": [
+        15326,
+        15350,
+        15379
+      ],
+      "status": "exact_literal_template_svg_payload_requires_reconstruction",
+      "bytes": 9223,
+      "sha256": "6b5b4e50776bc3c07446e24199af3b5b2c83868b02928ab0f2455fff919a1397",
+      "dependencies": [
+        "frame-0/minidump-rust.json.gz",
+        "frame-1/minidump-rust.json.gz",
+        "frame-paths.json.gz"
+      ],
+      "archive_path": "ariadne-partial-frame-graph-20261015/page-template.html.txt",
+      "archive_sha256": "6b5b4e50776bc3c07446e24199af3b5b2c83868b02928ab0f2455fff919a1397"
+    },
+    {
+      "original_path": "/tmp/ariadne-frame-to-frame-outcome-20261015.json",
+      "source_log_lines": [
+        15224
+      ],
+      "status": "restored_from_literal_field_selection_and_retained_data",
+      "bytes": 2085,
+      "sha256": "2236f83238163e6e31d2061e7f672a422f7a0ec5330a607ce8b34adcfd82e4b1",
+      "dependencies": [
+        "/home/nzsn/Repos/Ariadne/evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-paths.json.gz",
+        "/home/nzsn/Repos/Ariadne/evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frames.json.gz",
+        "/home/nzsn/Repos/Ariadne/evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/probe-summary.json"
+      ],
+      "archive_path": "ariadne-frame-to-frame-outcome-20261015.json",
+      "archive_sha256": "2236f83238163e6e31d2061e7f672a422f7a0ec5330a607ce8b34adcfd82e4b1"
+    },
+    {
+      "original_path": "/tmp/ariadne-partial-frame-graph-20261015/callee-focus.dot",
+      "source_log_lines": [
+        15326,
+        15350,
+        15379
+      ],
+      "status": "reconstructed_graph_display_asset_from_retained_data",
+      "bytes": 3922,
+      "sha256": "74d889b5562908cc7a8ebbe8ab165f839272267fd8be310b1ca54022ea030ae2",
+      "dependencies": [
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-0/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-paths.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frames.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/probe-summary.json"
+      ],
+      "archive_path": "ariadne-partial-frame-graph-20261015/callee-focus.dot",
+      "archive_sha256": "74d889b5562908cc7a8ebbe8ab165f839272267fd8be310b1ca54022ea030ae2"
+    },
+    {
+      "original_path": "/tmp/ariadne-partial-frame-graph-20261015/callee-focus.svg",
+      "source_log_lines": [
+        15326,
+        15350,
+        15379
+      ],
+      "status": "reconstructed_graph_display_asset_from_retained_data",
+      "bytes": 9114,
+      "sha256": "0eb488fb0c8303fde8cd5c9a78866b71c10b73bf4eebb2d5ee1135d3b9a3b4de",
+      "dependencies": [
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-0/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-paths.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frames.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/probe-summary.json"
+      ],
+      "archive_path": "ariadne-partial-frame-graph-20261015/callee-focus.svg",
+      "archive_sha256": "0eb488fb0c8303fde8cd5c9a78866b71c10b73bf4eebb2d5ee1135d3b9a3b4de"
+    },
+    {
+      "original_path": "/tmp/ariadne-partial-frame-graph-20261015/callee-full.dot",
+      "source_log_lines": [
+        15326,
+        15350,
+        15379
+      ],
+      "status": "reconstructed_graph_display_asset_from_retained_data",
+      "bytes": 161034,
+      "sha256": "9cd88d227e8dec030bccb507a5844265d369dea2c1f7f897030b9093bf262504",
+      "dependencies": [
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-0/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-paths.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frames.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/probe-summary.json"
+      ],
+      "archive_path": "ariadne-partial-frame-graph-20261015/callee-full.dot",
+      "archive_sha256": "9cd88d227e8dec030bccb507a5844265d369dea2c1f7f897030b9093bf262504"
+    },
+    {
+      "original_path": "/tmp/ariadne-partial-frame-graph-20261015/callee-full.svg",
+      "source_log_lines": [
+        15326,
+        15350,
+        15379
+      ],
+      "status": "reconstructed_graph_display_asset_from_retained_data",
+      "bytes": 513847,
+      "sha256": "9be130d41468041d45c17f1ca4aa39f68a1b612e2b33d28bd1f818e127bf8799",
+      "dependencies": [
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-0/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-paths.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frames.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/probe-summary.json"
+      ],
+      "archive_path": "ariadne-partial-frame-graph-20261015/callee-full.svg",
+      "archive_sha256": "9be130d41468041d45c17f1ca4aa39f68a1b612e2b33d28bd1f818e127bf8799"
+    },
+    {
+      "original_path": "/tmp/ariadne-partial-frame-graph-20261015/caller.dot",
+      "source_log_lines": [
+        15326,
+        15350,
+        15379
+      ],
+      "status": "reconstructed_graph_display_asset_from_retained_data",
+      "bytes": 2960,
+      "sha256": "105ef193442f8c9ed091c478d5140e0d9a2c4c890de76204d6585182727b198e",
+      "dependencies": [
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-0/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-paths.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frames.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/probe-summary.json"
+      ],
+      "archive_path": "ariadne-partial-frame-graph-20261015/caller.dot",
+      "archive_sha256": "105ef193442f8c9ed091c478d5140e0d9a2c4c890de76204d6585182727b198e"
+    },
+    {
+      "original_path": "/tmp/ariadne-partial-frame-graph-20261015/caller.svg",
+      "source_log_lines": [
+        15326,
+        15350,
+        15379
+      ],
+      "status": "reconstructed_graph_display_asset_from_retained_data",
+      "bytes": 10911,
+      "sha256": "cc0cd2c7c0ed664d4d95677b1d4b776df9bc931cc5b309f9a824daa0d8286cca",
+      "dependencies": [
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-0/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-paths.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frames.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/probe-summary.json"
+      ],
+      "archive_path": "ariadne-partial-frame-graph-20261015/caller.svg",
+      "archive_sha256": "cc0cd2c7c0ed664d4d95677b1d4b776df9bc931cc5b309f9a824daa0d8286cca"
+    },
+    {
+      "original_path": "/tmp/ariadne-partial-frame-graph-20261015/graph-data.json",
+      "source_log_lines": [
+        15326,
+        15350,
+        15379
+      ],
+      "status": "reconstructed_graph_display_asset_from_retained_data",
+      "bytes": 393894,
+      "sha256": "b4da9c288feb3736c1d3552fc41d4fd2f3f92403fbac92370d0bd762b3f78c6d",
+      "dependencies": [
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-0/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-paths.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frames.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/probe-summary.json"
+      ],
+      "archive_path": "ariadne-partial-frame-graph-20261015/graph-data.json",
+      "archive_sha256": "b4da9c288feb3736c1d3552fc41d4fd2f3f92403fbac92370d0bd762b3f78c6d"
+    },
+    {
+      "original_path": "/tmp/ariadne-partial-frame-graph-20261015/index.html",
+      "source_log_lines": [
+        15326,
+        15350,
+        15379
+      ],
+      "status": "original_static_html_template_with_reconstructed_graphics",
+      "bytes": 591024,
+      "sha256": "b70271f68ceadaa047efe4563fdff603089f5927b1bb86579c646f6c7f0b3bab",
+      "dependencies": [
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-0/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-paths.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frames.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/probe-summary.json"
+      ],
+      "archive_path": "ariadne-partial-frame-graph-20261015/index.html",
+      "archive_sha256": "7f0ff2ea1e0bdf8bcc972cb92e9553c04e1111e03224d67b811a0539bd9e4e51"
+    },
+    {
+      "original_path": "/tmp/ariadne-partial-frame-graph-20261015/index.md",
+      "source_log_lines": [
+        15326,
+        15350,
+        15379
+      ],
+      "status": "new_archival_companion_from_retained_data",
+      "bytes": 2020,
+      "sha256": "5b0852140884c96388012ae6e046036b747c6f7b9fa850d7aee977017e7cf716",
+      "dependencies": [
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-0/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-paths.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frames.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/probe-summary.json"
+      ],
+      "archive_path": "ariadne-partial-frame-graph-20261015/index.md",
+      "archive_sha256": "7da7bd87fccba8098f068a1d4700aa195febb4fc7516a102071620bb2de86cfe"
+    },
+    {
+      "original_path": "/tmp/ariadne-partial-frame-graph-20261015/overview.dot",
+      "source_log_lines": [
+        15326,
+        15350,
+        15379
+      ],
+      "status": "reconstructed_graph_display_asset_from_retained_data",
+      "bytes": 6150,
+      "sha256": "53b79f5c6d699fd5d0e598452a366e7dcd26820c654e3c97e58efd4debd482bb",
+      "dependencies": [
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-0/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-paths.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frames.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/probe-summary.json"
+      ],
+      "archive_path": "ariadne-partial-frame-graph-20261015/overview.dot",
+      "archive_sha256": "53b79f5c6d699fd5d0e598452a366e7dcd26820c654e3c97e58efd4debd482bb"
+    },
+    {
+      "original_path": "/tmp/ariadne-partial-frame-graph-20261015/overview.svg",
+      "source_log_lines": [
+        15326,
+        15350,
+        15379
+      ],
+      "status": "reconstructed_graph_display_asset_from_retained_data",
+      "bytes": 15569,
+      "sha256": "29abdbdda0bc608cee0a4ad49141ee770b61d7903910a6d4fe906fcda4c998b4",
+      "dependencies": [
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-0/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-paths.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frames.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/probe-summary.json"
+      ],
+      "archive_path": "ariadne-partial-frame-graph-20261015/overview.svg",
+      "archive_sha256": "29abdbdda0bc608cee0a4ad49141ee770b61d7903910a6d4fe906fcda4c998b4"
+    },
+    {
+      "original_path": "/tmp/ariadne-partial-frame-graph-20261015/restoration.json",
+      "source_log_lines": [
+        15326,
+        15350,
+        15379
+      ],
+      "status": "new_archival_companion_from_retained_data",
+      "bytes": 1769,
+      "sha256": "d9124c65bc7f5878952df165a9b7c93354fce90d331374107c3a099917774a0d",
+      "dependencies": [
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-0/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-paths.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frames.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/probe-summary.json"
+      ],
+      "archive_path": "ariadne-partial-frame-graph-20261015/restoration.json",
+      "archive_sha256": "d9124c65bc7f5878952df165a9b7c93354fce90d331374107c3a099917774a0d"
+    },
+    {
+      "original_path": "/tmp/ariadne-partial-frame-graph-20261015/viewer.js",
+      "source_log_lines": [
+        15326,
+        15350,
+        15379
+      ],
+      "status": "reconstructed_graph_display_asset_from_retained_data",
+      "bytes": 585208,
+      "sha256": "0c69845f938f8a7820ecb13a379221981682151a61cc88e7076f7ac3754890c6",
+      "dependencies": [
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-0/minidump-rust.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-paths.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frames.json.gz",
+        "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/probe-summary.json"
+      ],
+      "archive_path": "ariadne-partial-frame-graph-20261015/viewer.js",
+      "archive_sha256": "0c69845f938f8a7820ecb13a379221981682151a61cc88e7076f7ac3754890c6"
+    },
+    {
+      "original_path": "/tmp/ariadne-ymm6/lift-response.jsonl",
+      "source_log_lines": [
+        7244,
+        7270,
+        7358
+      ],
+      "status": "restored_from_complete_logged_literal_output_verified_against_retained_fixture",
+      "bytes": 1459,
+      "sha256": "b918f70c6305554dc6107d8479c586e05d3b057f1d971c5bfe33a75ed25f8b86",
+      "archive_path": "ariadne-ymm6/lift-response.jsonl",
+      "archive_sha256": "b918f70c6305554dc6107d8479c586e05d3b057f1d971c5bfe33a75ed25f8b86"
+    },
+    {
+      "original_path": "/tmp/ariadne-ymm6/movaps-bil.json",
+      "source_log_lines": [
+        7244,
+        7270,
+        7358
+      ],
+      "status": "restored_from_complete_logged_literal_output_verified_against_retained_fixture",
+      "bytes": 1894,
+      "sha256": "4e4699c59f974523b2a69a2db7287af9ea8e07c8f6d828bf80089e1740dae840",
+      "archive_path": "ariadne-ymm6/movaps-bil.json",
+      "archive_sha256": "4e4699c59f974523b2a69a2db7287af9ea8e07c8f6d828bf80089e1740dae840"
+    }
+  ],
+  "unavailable_historical_citations": [],
+  "graph_restoration": "ariadne-partial-frame-graph-20261015/restoration.json",
+  "validation": {
+    "local_links_and_anchors": 539,
+    "inline_scripts": 3,
+    "javascript_sidecars": 3,
+    "svg_files": 4,
+    "protected_docs_files": 27,
+    "protected_docs_unchanged": true
+  },
+  "files": {
+    "ariadne-case4-analysis-20261015.html": {
+      "bytes": 17199,
+      "sha256": "18582b412970e4843c1f6eac4a932141fcce42ddbd2c3dad83b1f87b5d04c9c6"
+    },
+    "ariadne-case4-analysis-20261015.md": {
+      "bytes": 11044,
+      "sha256": "73e5a7d2c493bb7b408b601c3d73b8bdef8c37ba55711bf848b1d1194664a419"
+    },
+    "ariadne-cyclic-incoming-state-20261015.html": {
+      "bytes": 13250,
+      "sha256": "926730f28807ada19cdb9cb2df595b46424adad47a0bda310f571c29088d473b"
+    },
+    "ariadne-cyclic-incoming-state-20261015.md": {
+      "bytes": 7760,
+      "sha256": "efbfd2b7458466ce14636f7c85e3cf0056f571947b0cf37cee98a0e588fa069e"
+    },
+    "ariadne-dfs-path-hypothesis-20261015.html": {
+      "bytes": 9770,
+      "sha256": "7f805e0a69412211474b1256533dedf6b7471d1cc79aaf3ffdfeccb07ec09d07"
+    },
+    "ariadne-dfs-path-hypothesis-20261015.md": {
+      "bytes": 4989,
+      "sha256": "9e41352931c939420753802fe3441ef3d113bb63db91d2da244c7486dd1f1638"
+    },
+    "ariadne-first-callee-jump-explained-20261015.html": {
+      "bytes": 53945,
+      "sha256": "c62adfd084981f9cd9289abf145839042d01ca48a0579fe204f54a7a9fd78aee"
+    },
+    "ariadne-first-callee-jump-explained-20261015.js": {
+      "bytes": 19307,
+      "sha256": "f680ad5b64b3f3e11305647d9da4bbbf96a0f4f42ad2a75fdf32f0dd00f3841b"
+    },
+    "ariadne-first-callee-jump-explained-20261015.md": {
+      "bytes": 21753,
+      "sha256": "7f5a87c3a72dab74a98990639593384e8850830ed413610a4c9394b54913a315"
+    },
+    "ariadne-frame-to-frame-outcome-20261015.html": {
+      "bytes": 10961,
+      "sha256": "bbffed8a42307a69b96d3f24b3405536afb88743dd404111e72c0750023d9569"
+    },
+    "ariadne-frame-to-frame-outcome-20261015.json": {
+      "bytes": 2085,
+      "sha256": "2236f83238163e6e31d2061e7f672a422f7a0ec5330a607ce8b34adcfd82e4b1"
+    },
+    "ariadne-frame-to-frame-outcome-20261015.md": {
+      "bytes": 4935,
+      "sha256": "a94b93e94909e9481e7add52d575b98a60d5d072335432a1193fd5efb237db2a"
+    },
+    "ariadne-frame-to-frame-semantics-20261015.html": {
+      "bytes": 37896,
+      "sha256": "e70d4b8c7100e8ff7505a6da4eacbb984a1474f6642feb01e50d5c3be0d35e9d"
+    },
+    "ariadne-frame-to-frame-semantics-20261015.js": {
+      "bytes": 1888,
+      "sha256": "573d6181b46065ccfd151a932cf1fdee1b9e8239f5d59abf6b19ab29f4109329"
+    },
+    "ariadne-frame-to-frame-semantics-20261015.md": {
+      "bytes": 22971,
+      "sha256": "dbbc549c382e912b8eedd5257203f67e4709628a7e2b97a05f4a6ec648ad3612"
+    },
+    "ariadne-guarded-target-resolution-implementation.html": {
+      "bytes": 7233,
+      "sha256": "898f14675142d781caaade2bb7fc18fc413a7ab892c21d8aca197d59f673ecf7"
+    },
+    "ariadne-guarded-target-resolution-implementation.md": {
+      "bytes": 2631,
+      "sha256": "030ddc7a4b96a3980bf5b6405c70ba22649de3b69118f163bfa370e624eccb93"
+    },
+    "ariadne-indirect-target-resolution-design-20261012.html": {
+      "bytes": 25536,
+      "sha256": "7ac1f6389d423444e86268393d61285e16c03411dc43e085790c594af867250a"
+    },
+    "ariadne-indirect-target-resolution-design-20261012.md": {
+      "bytes": 18826,
+      "sha256": "be4c68caa236d94dc519689fb0d38ecac85098eafe87519d20fa4355c0694256"
+    },
+    "ariadne-indirect-target-resolution-plan-20261012.html": {
+      "bytes": 19529,
+      "sha256": "43e6af4d8a96e4abf4479920e931e429ee6e0839840a63a6d22df23f97544bf3"
+    },
+    "ariadne-indirect-target-resolution-plan-20261012.md": {
+      "bytes": 13811,
+      "sha256": "13a0dc965ce18ecff4f72ef569092d088a74131f9053fe047539f80e9af84738"
+    },
+    "ariadne-loop-aware-design-and-plan-20261015.html": {
+      "bytes": 43949,
+      "sha256": "1fc40ee41b27b2fc16ed1fee1a2ce82d75b6fd28f4301a8ec4a82257faec37bc"
+    },
+    "ariadne-loop-aware-design-and-plan-20261015.md": {
+      "bytes": 35334,
+      "sha256": "47529bc054223f1a5422b3083950405d3b3af7ec57bc8e83d41906714fe1a3e2"
+    },
+    "ariadne-loop-aware-implementation-20261015.html": {
+      "bytes": 8554,
+      "sha256": "f532c46acf8b91eecab2d7850cbdff2826d983a82b83c783a9b71870a69fecfa"
+    },
+    "ariadne-loop-aware-implementation-20261015.md": {
+      "bytes": 3810,
+      "sha256": "080bf67955818c34346ac1ec29946a120e4325f18e8d1284faae3dc2dea9f057"
+    },
+    "ariadne-nine-jump-tables-20261014.html": {
+      "bytes": 11182,
+      "sha256": "1a0656eda63e51f3883d652c50e82861efbe6232c84634f089312b24add509a3"
+    },
+    "ariadne-nine-jump-tables-20261014.md": {
+      "bytes": 5741,
+      "sha256": "3a2eb67edd8eae78ada96dcbbb10ec69970a3cd5f110968711d16f70207fca82"
+    },
+    "ariadne-partial-frame-graph-20261015/callee-focus.dot": {
+      "bytes": 3922,
+      "sha256": "74d889b5562908cc7a8ebbe8ab165f839272267fd8be310b1ca54022ea030ae2"
+    },
+    "ariadne-partial-frame-graph-20261015/callee-focus.svg": {
+      "bytes": 9114,
+      "sha256": "0eb488fb0c8303fde8cd5c9a78866b71c10b73bf4eebb2d5ee1135d3b9a3b4de"
+    },
+    "ariadne-partial-frame-graph-20261015/callee-full.dot": {
+      "bytes": 161034,
+      "sha256": "9cd88d227e8dec030bccb507a5844265d369dea2c1f7f897030b9093bf262504"
+    },
+    "ariadne-partial-frame-graph-20261015/callee-full.svg": {
+      "bytes": 513847,
+      "sha256": "9be130d41468041d45c17f1ca4aa39f68a1b612e2b33d28bd1f818e127bf8799"
+    },
+    "ariadne-partial-frame-graph-20261015/caller.dot": {
+      "bytes": 2960,
+      "sha256": "105ef193442f8c9ed091c478d5140e0d9a2c4c890de76204d6585182727b198e"
+    },
+    "ariadne-partial-frame-graph-20261015/caller.svg": {
+      "bytes": 10911,
+      "sha256": "cc0cd2c7c0ed664d4d95677b1d4b776df9bc931cc5b309f9a824daa0d8286cca"
+    },
+    "ariadne-partial-frame-graph-20261015/graph-data.json": {
+      "bytes": 393894,
+      "sha256": "b4da9c288feb3736c1d3552fc41d4fd2f3f92403fbac92370d0bd762b3f78c6d"
+    },
+    "ariadne-partial-frame-graph-20261015/index.html": {
+      "bytes": 591036,
+      "sha256": "7f0ff2ea1e0bdf8bcc972cb92e9553c04e1111e03224d67b811a0539bd9e4e51"
+    },
+    "ariadne-partial-frame-graph-20261015/index.md": {
+      "bytes": 2032,
+      "sha256": "7da7bd87fccba8098f068a1d4700aa195febb4fc7516a102071620bb2de86cfe"
+    },
+    "ariadne-partial-frame-graph-20261015/overview.dot": {
+      "bytes": 6150,
+      "sha256": "53b79f5c6d699fd5d0e598452a366e7dcd26820c654e3c97e58efd4debd482bb"
+    },
+    "ariadne-partial-frame-graph-20261015/overview.svg": {
+      "bytes": 15569,
+      "sha256": "29abdbdda0bc608cee0a4ad49141ee770b61d7903910a6d4fe906fcda4c998b4"
+    },
+    "ariadne-partial-frame-graph-20261015/page-template.html.txt": {
+      "bytes": 9223,
+      "sha256": "6b5b4e50776bc3c07446e24199af3b5b2c83868b02928ab0f2455fff919a1397"
+    },
+    "ariadne-partial-frame-graph-20261015/render.py.txt": {
+      "bytes": 22550,
+      "sha256": "e22c196a9107ef9d286bfd0f57a5df86b438e3aba6c4543bde7bc33375c77ec4"
+    },
+    "ariadne-partial-frame-graph-20261015/restoration.json": {
+      "bytes": 1769,
+      "sha256": "d9124c65bc7f5878952df165a9b7c93354fce90d331374107c3a099917774a0d"
+    },
+    "ariadne-partial-frame-graph-20261015/viewer.js": {
+      "bytes": 585208,
+      "sha256": "0c69845f938f8a7820ecb13a379221981682151a61cc88e7076f7ac3754890c6"
+    },
+    "ariadne-partial-result-dump048B-b5d56b7.html": {
+      "bytes": 1964,
+      "sha256": "00eb3b9de3a29255e8e6b40dfdb287d1d0608b10765eb6c36927f0497f1c9e19"
+    },
+    "ariadne-partial-result-dump048B-b5d56b7.md": {
+      "bytes": 1515,
+      "sha256": "bda1a563e3b89b10de5858a44d01d3febf5c95c8fc8fd728a5e4e29fd1d68e89"
+    },
+    "ariadne-rax-calculation-20261015.html": {
+      "bytes": 7496,
+      "sha256": "21b0373ca27fde5fb936aa639fe45efe629c121dd07c2d1f5af8fa4eb2e7ae28"
+    },
+    "ariadne-rax-calculation-20261015.md": {
+      "bytes": 2924,
+      "sha256": "7dfa6741081f3d6b67a580e21dff58634b97d0c5fb84bf138bd3c00e17e5e799"
+    },
+    "ariadne-remaining-blockers-20261015.html": {
+      "bytes": 8926,
+      "sha256": "3cde05a79f817ac1cf8962abcab304331d1efcc577f5f72b120903b20f91d430"
+    },
+    "ariadne-remaining-blockers-20261015.md": {
+      "bytes": 4067,
+      "sha256": "b20cde2f843488a70614790a4f043b162b2eff001d384f5aafe8f9804684515b"
+    },
+    "ariadne-remaining-blockers-before-loop-20261015.html": {
+      "bytes": 6672,
+      "sha256": "d2be5df53e98fc50b6a8244541262bb364f835df5c9fdd7eeca448d5d005e155"
+    },
+    "ariadne-remaining-blockers-before-loop-20261015.md": {
+      "bytes": 2090,
+      "sha256": "2667f3af9200452de3e195dc17664344a094f718310fb48d7527f5a02999ac33"
+    },
+    "ariadne-reports-index.html": {
+      "bytes": 11903,
+      "sha256": "57594bb946013d796ea8f3f7b86c9d79dcfd7dade4f0d1ca88de70bc1e7a44f3"
+    },
+    "ariadne-reports-index.md": {
+      "bytes": 6353,
+      "sha256": "9b94c9b6b97a92ee49a29576cd1d14327a15cab6576e61bf6fb82393abb861fb"
+    },
+    "ariadne-resolver-structural-types-20261015.html": {
+      "bytes": 32858,
+      "sha256": "5cb70fcd59834bce9933504442f84f740fb84d4b1b3a2c818b04aaebd9684328"
+    },
+    "ariadne-resolver-structural-types-20261015.md": {
+      "bytes": 24355,
+      "sha256": "5af32b0db399382d757440dea07a1ab09cf6236cc7011fe36be004c743f9e7a5"
+    },
+    "ariadne-unresolved-blockers-20261014.html": {
+      "bytes": 17243,
+      "sha256": "300d675fbf8887d2a8497e582db5ec5386b2573e0a494e9143476d0d238b1b09"
+    },
+    "ariadne-unresolved-blockers-20261014.md": {
+      "bytes": 9708,
+      "sha256": "5253a903e35343cb72aa4cf1f1db034a440884e3f8e58141973afdf60cb58211"
+    },
+    "ariadne-ymm6/lift-response.jsonl": {
+      "bytes": 1459,
+      "sha256": "b918f70c6305554dc6107d8479c586e05d3b057f1d971c5bfe33a75ed25f8b86"
+    },
+    "ariadne-ymm6/movaps-bil.json": {
+      "bytes": 1894,
+      "sha256": "4e4699c59f974523b2a69a2db7287af9ea8e07c8f6d828bf80089e1740dae840"
+    },
+    "ariadne-ymm6-representation.html": {
+      "bytes": 12695,
+      "sha256": "c04ffceb884b2cd08fe9a523176e7eaee0ed98e46ab9691d5f6da16ffa8f6e9f"
+    },
+    "ariadne-ymm6-representation.md": {
+      "bytes": 6987,
+      "sha256": "f11447bc7e90f1bc036730521c1cafb04d9e43bafe1f5cc1a4126eaa5ca6cab1"
+    },
+    "ariadne-return-address-value-pruning-20261016.html": {
+      "bytes": 16365,
+      "sha256": "05ae74814da349b6cef98e08edbb75a18dd9211111118d370fc24583a51966c6"
+    },
+    "ariadne-frame-to-frame-recommendation-20261016.html": {
+      "bytes": 16774,
+      "sha256": "c69db1d7a2c85c3000e769f7f527e0c7f7cc0856a39d5cb4b2a517335c7a3af1"
+    },
+    "ariadne-frame-structure-first-contract-20261016.html": {
+      "bytes": 15151,
+      "sha256": "5d12623d28db579c384acdcf273474b976c484c3d07376e22cfbd4cdc94a6ea6"
+    },
+    "ariadne-frame-structure-implementation-plan-20261016.html": {
+      "bytes": 30179,
+      "sha256": "d45ac344091845ef73f1b50f1839a9cd95625deede4ab319c3807b301dee6ef7"
+    },
+    "ariadne-structural-plan-hard-cases-20261016.html": {
+      "bytes": 12184,
+      "sha256": "0d331b66b4d3c75e1878a5eddc0b8ba8efecb06962f35f695535d8fe8a1d09b9"
+    }
+  },
+  "directory": ".agents/chatdocs/",
+  "html_documents_including_index": 26,
+  "markdown_documents_including_index": 21,
+  "source_review_documents": [
+    {
+      "html": "ariadne-return-address-value-pruning-20261016.html",
+      "date": "2026-10-16",
+      "source_revision": "6192dee19a5b2f133177a21187952e28d603c2d9",
+      "scope": "Read-only source review and conditional design explanation; no new build, native analysis or dump run.",
+      "validation": "Local links and script syntax validated; interactive proof toggle exercised in a minimal DOM."
+    },
+    {
+      "html": "ariadne-frame-to-frame-recommendation-20261016.html",
+      "date": "2026-10-16",
+      "source_revision": "6192dee19a5b2f133177a21187952e28d603c2d9",
+      "scope": "Product recommendation based on current contracts/source and dated evidence; no implementation, build, model campaign or new dump run.",
+      "validation": "Local links/anchors and script syntax validated; interactive history example preserves identical observed state."
+    },
+    {
+      "html": "ariadne-frame-structure-first-contract-20261016.html",
+      "date": "2026-10-16",
+      "source_revision": "6192dee19a5b2f133177a21187952e28d603c2d9",
+      "scope": "Focused structural-artifact contract proposal for recommendation5.1; no runtime/model/canonical design or plan changes and no build or dump run.",
+      "validation": "Local document/section links, unique IDs and SVG syntax validated."
+    },
+    {
+      "html": "ariadne-frame-structure-implementation-plan-20261016.html",
+      "date": "2026-10-16",
+      "canonical_markdown": ".agents/plans/frame-structure-report.md",
+      "canonical_sha256": "7866d392580c883b1cece1438eb29476cfb0485f1a880c6f6ac7877a43b14a76",
+      "source_revision": "6192dee19a5b2f133177a21187952e28d603c2d9",
+      "scope": "Planning only; canonical investigation design and SF0\u2013SF6 plan linked, all implementation/qualification pending. No runtime or model code built or changed.",
+      "validation": "74 connected documents, 73 context sections, 2148 local links; scoped diff hygiene and rendered local links/source hash checked.",
+      "original_canonical_markdown": "Plans/frame-structure-report.md",
+      "original_canonical_sha256": "02bbd14e9f735c7faea0fc97196a3674c2dd14900f6e2539e3d47712bbe86dfa"
+    },
+    {
+      "html": "ariadne-structural-plan-hard-cases-20261016.html",
+      "date": "2026-10-16",
+      "source_revision": "6192dee19a5b2f133177a21187952e28d603c2d9",
+      "plan": ".agents/plans/frame-structure-report.md",
+      "plan_sha256": "7866d392580c883b1cece1438eb29476cfb0485f1a880c6f6ac7877a43b14a76",
+      "scope": "Explanation of planned finite recovery, unknowns and failure limits. SF0\u2013SF6 remain pending; no source/model/build/dump execution changes.",
+      "validation": "Local links/anchors and unique HTML IDs checked.",
+      "original_plan": "Plans/frame-structure-report.md",
+      "original_plan_sha256": "02bbd14e9f735c7faea0fc97196a3674c2dd14900f6e2539e3d47712bbe86dfa"
+    }
+  ],
+  "plan_directory_relocation": {
+    "date": "2026-10-16",
+    "original": "Plans/",
+    "current": ".agents/plans/",
+    "historical_evidence": "Original evidence paths and file hashes are preserved; this relocation is not requalification."
+  }
+}

@@ -1,0 +1,380 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Loop-aware resolver: design and implementation plan</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f7f8fa;color:#172337;font:17px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:1060px;margin:0 auto;padding:40px 44px 80px;background:white}h1{font-size:2.1rem;line-height:1.2;margin:0 0 24px}h2{font-size:1.45rem;margin:48px 0 16px;padding-top:16px;border-top:1px solid #d9e0e7}h3{font-size:1.1rem;margin-top:28px}p,li{max-width:90ch}a{color:#075caa}code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}code{font-size:.88em;background:#f0f3f6;padding:2px 4px;border-radius:3px}pre{overflow:auto;background:#f0f3f6;border-left:3px solid #7890a8;padding:18px;line-height:1.55;font-size:.88rem}pre code{background:none;padding:0}table{width:100%;border-collapse:collapse;font-size:.94rem;margin:20px 0}th,td{padding:11px 12px;text-align:left;vertical-align:top;border-bottom:1px solid #d9e0e7}th{background:#f0f3f6;font-weight:650}.demo{margin:28px 0;padding:24px;border:1px solid #b8c8d7;border-radius:8px;background:#fafcfe}.demo h3{margin-top:0}.caption,figcaption,.stack-label{color:#526274;font-size:.9rem}.lookup-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 28px;margin-top:18px}.lookup-grid div{border-bottom:1px solid #d9e0e7;padding:8px 0}.lookup-grid small{display:block;color:#526274}.lookup-grid strong{font-family:ui-monospace,Consolas,monospace;font-size:.95rem;overflow-wrap:anywhere}input[type=number]{width:90px;padding:8px;font-size:1rem;margin-left:12px;border:1px solid #8ca2b7;border-radius:4px}input[type=range]{accent-color:#075caa;min-width:100px;flex:1}.demo>input[type=range]{width:100%;display:block;margin:18px 0}.cfg{margin:26px 0}.cfg svg{width:100%;height:auto}.edges path{fill:none;stroke:#475569;stroke-width:2;marker-end:url(#arrow)}.node rect{fill:#f0f3f6;stroke:#9babbc;rx:6}.node text{text-anchor:middle;fill:#172337;font:15px system-ui,sans-serif}.entry rect{fill:#e8f1fb;stroke:#5b8fbe}.later rect{fill:#fff2e1;stroke:#b78646}.edge-label{font:14px system-ui;fill:#475569}.stack-layout{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}.stack-label{margin:10px 0}.stack-item{border:1px solid #809ab3;padding:14px;margin:10px 0;background:#e8f1fb;min-height:55px;border-radius:5px}.stack-item.later{background:#fff2e1;border-color:#b78646}.stack-item.empty{color:#66788a;background:white;border-style:dashed}.state{margin:0;padding:12px 0}.state dt{font-weight:650;margin:0 0 3px}.state dd{margin:0 0 14px;overflow-wrap:anywhere}.step-head{display:flex;gap:14px;align-items:center;margin:15px 0}.step-head span{color:#526274;font-size:.9rem}.controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:20px}button{font:inherit;font-size:.95rem;background:#075caa;color:white;border:1px solid #075caa;padding:9px 15px;border-radius:5px;cursor:pointer}button:disabled{background:#e7ecf1;color:#68798a;border-color:#c2cdd7;cursor:default}button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #e4a237;outline-offset:3px}.advanced{margin-top:44px;padding:22px;background:#f8fafc;border:1px solid #cbd5df;border-radius:6px}.advanced summary{font-weight:650;cursor:pointer}.advanced h2{border:0;margin-top:20px}.top-note{font-size:.9rem;color:#526274;margin:0 0 25px}.top-note a{margin-right:16px}@media(max-width:720px){main{padding:26px 18px 50px}h1{font-size:1.7rem}.stack-layout,.lookup-grid{grid-template-columns:1fr}.demo{padding:16px}table{font-size:.85rem}th,td{padding:8px}.cfg{overflow:auto}.cfg svg{min-width:780px}.controls input{width:100%;order:3;flex-basis:100%}}@media print{body{background:white}main{max-width:none;padding:0}.controls,.top-note{display:none}.demo{break-inside:avoid}details>summary{display:none}}</style></head><body><main><p class="top-note"><a href="ariadne-reports-index.html">Chat report index</a> · <a href="ariadne-loop-aware-design-and-plan-20261015.md">Markdown</a></p><h1 id="loop-aware-resolver-design-and-implementation-plan">Loop-aware resolver: design and implementation plan</h1>
+<blockquote>
+<p><strong>Archived chat document.</strong> Restored on 2026-10-16 from the original conversation records. Statements such as “current”, “latest” and “fresh” refer to the original report date. Restoration does not rerun analysis or qualification.</p>
+</blockquote>
+<p><strong>Proposed, 2026-10-15. No runtime implementation or new dump result is claimed.</strong></p>
+<p>Extend the existing resolver with a private inductive loop-closure module. The first target is the two nine-instruction local dispatch regions in dump03958, with checked initialization, every entrance/backedge, fresh selector loads and independently replayed coverage. The full cyclic components contain many calls and clobbers and are outside this first proof scope.</p>
+<p>This is a generated reading view. Canonical contracts remain in the <a href="../../docs/Ariadne/guarded-target-resolution-design.md#proposed-stable-base-invariant-follow-up">composition design</a>; execution stages remain in the <a href="../plans/completed/loop-aware-target-resolution.md">L0–L6 plan</a>.</p>
+<h2 id="proposed-design">Proposed design</h2>
+<p>The following loop-aware design is proposed on 2026-10-15. Its <a href="../plans/completed/loop-aware-target-resolution.md">L0–L6 implementation plan</a> covers the stable-base follow-up to C5. This section is the canonical contract; the plan owns task sequencing, and future raw qualification belongs under <code>evidence/Ariadne/loop-aware-target-resolution/</code>. The ninth C5 clause remains open until fresh implementation and dump evidence establish it. Designing this extension does not change the 2026-10-14 result.</p>
+<h3 id="decision-and-first-support-scope">Decision and first support scope</h3>
+<p>Extend the existing target resolver with a private loop-closure module. Keep one discovery coordinator, one candidate epoch and the existing pointer/table evaluation. A loop closure is an additional coverage-proof strategy, not another competing target resolver. No resolver registry, general SMT solver, new runtime dependency or new CLI switch is required for this first scope.</p>
+<p>Support bounded, source-checked local dispatch regions with a captured relative-32 table. Prove a constant table-base bank across every region entrance and internal edge, permit changing object pointers and fresh selector loads, and prove a finite unsigned selector domain at each indexed table load. Rooted target-only v1 remains unchanged in this stage; the new proof is used by local combined preparation. General nested-loop synthesis, arbitrary heap traversal, memory alias proofs, regional MOVAPS admission and successful frame-path enumeration remain separate work.</p>
+<p>The analysis must terminate within its budgets. It need not prove that the program's loop terminates: an inductive invariant covers arbitrary finite traversals even when an infinite runtime traversal is possible.</p>
+<h3 id="dump-specific-feasibility-inspection">Dump-specific feasibility inspection</h3>
+<p>A read-only inspection on 2026-10-15 used the final caller <a href="../../evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/minidump-rust.json.gz">captured/candidate report</a> and <a href="../../evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/target-report.json">target receipts</a>. This is structural evidence, not a new closure proof or dump execution.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Original dispatch</th>
+<th>Newly exposed dispatch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dispatch VA</td>
+<td><code>0x00007ff77440da09</code></td>
+<td><code>0x00007ff77440dadd</code></td>
+</tr>
+<tr>
+<td>Captured table base</td>
+<td><code>0x00007ff77ba909a8</code></td>
+<td><code>0x00007ff77ba909d0</code></td>
+</tr>
+<tr>
+<td>Base initialization</td>
+<td>LEA at <code>0x00007ff77440d9e2</code>, bytes <code>488d15bf2f6807</code></td>
+<td>LEA at <code>0x00007ff77440dab6</code>, bytes <code>488d15132f6807</code></td>
+</tr>
+<tr>
+<td>Represented region entrance</td>
+<td><code>0x00007ff77440d9e9 → 0x00007ff77440d9f7</code></td>
+<td><code>0x00007ff77440dabd → 0x00007ff77440dacb</code></td>
+</tr>
+<tr>
+<td>Pointer-changing backedge</td>
+<td>Table index 3 → <code>0x00007ff77440d9eb</code>, <code>mov rcx,[rcx]</code></td>
+<td>Table index 3 → <code>0x00007ff77440dabf</code>, <code>mov rcx,[rcx]</code></td>
+</tr>
+<tr>
+<td>Selector / compare / unsigned branch</td>
+<td><code>0x00007ff77440d9f7</code> / <code>0x00007ff77440d9fc</code> / <code>0x00007ff77440da00</code></td>
+<td><code>0x00007ff77440dacb</code> / <code>0x00007ff77440dad0</code> / <code>0x00007ff77440dad4</code></td>
+</tr>
+<tr>
+<td>Proposed local region</td>
+<td>9 instructions, 10 internal edges, 1 entrance, 4 exits</td>
+<td>9 instructions, 10 internal edges, 1 entrance, 4 exits</td>
+</tr>
+<tr>
+<td>Local base clobbers / calls / memory writes</td>
+<td>0 / 0 / 0</td>
+<td>0 / 0 / 0</td>
+</tr>
+<tr>
+<td>Maximal candidate SCC</td>
+<td>4,694 nodes; 37 entrances; 631 sites may-define RDX; 246 calls</td>
+<td>411 nodes; 1 entrance; 53 sites may-define RDX; 18 calls</td>
+</tr>
+</tbody>
+</table>
+<p>The maximal SCC is unsuitable for the proposed constant-base invariant. The small phase region is the relevant proof domain: every represented entrance passes a base-reset LEA followed by an unconditional jump. Region construction must discover this shape from controls, transfers and definition boundaries; the addresses above are acceptance fixtures, never production dispatch conditions. The checker must independently enumerate every actual entrance and exit, so a producer cannot hide a clobber by shrinking its claimed region.</p>
+<p>The caller candidate epoch is 610 and <code>composition.candidate_sha256</code> is <code>50b54d681fe01f9488da4cf2c90948afe52cb2ab13dad2e960bad55648122a3f</code>. The original dump SHA-256 remains <code>9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab</code>. Do not substitute the guard graph digest for this candidate-request identity. Exact region members, edges, original BIL, bytes, contributors and initialization chains must become source-bound L0 fixtures before implementation.</p>
+<h3 id="private-module-and-invocation">Private module and invocation</h3>
+<p>Use a private Rust module under <code>src/bap/target_resolution/</code> for region discovery, finite invariant proposal and loop-receipt validation, with small named interfaces. Keep ordinary path substitution, existing target recognition and discovery ownership in their current modules. The native checker independently implements the same receipt contract from original source evidence.</p>
+<pre><code class="language-text">try_loop_closure(bound_query, candidate_graph, original_transfers,
+                 dispatch_site, retained_table_evidence, shared_budget)
+  -&gt; NotApplicable
+   | Candidate { coverage_receipt, table_witnesses }
+   | Partial { reason }
+</code></pre>
+<p>Attempt this strategy for eligible local cyclic table contexts before finalizing <code>cyclic-incoming-state</code>. Preserve existing bounded-frontier, infeasible and stable-simple-cycle paths. A failed proposal leaves the original conservative result; a successful proposal is still candidate evidence until independent validation accepts it. No instruction address, expected target list or concrete crash-time register may select or initialize the strategy.</p>
+<p>For the first version, a loop receipt proves <strong>whole-dispatch incoming coverage</strong> and attaches at that dispatch's root coverage obligation. It does not claim to close an arbitrary accumulated reverse-prefix context. Existing path receipts remain individually replayed target/infeasibility evidence. This avoids equating different reverse contexts or weakening the current repeated-path checks.</p>
+<h3 id="inductive-proof-obligations">Inductive proof obligations</h3>
+<p>Let <code>R</code> be a proposed finite local region, <code>G</code> the bound candidate graph and <code>I[n]</code> an assertion about the relevant scalar state immediately before region instruction <code>n</code>.</p>
+<pre><code class="language-text">Entrance:     every represented edge u outside R → v inside R
+              has source-replayed initialization establishing I[v].
+
+Preservation: original normal-path BIL at n, together with its edge predicate,
+              maps every state admitted by I[n] into I[successor]
+              for every internal edge.
+
+Dispatch:     the assertion at the table-load point bounds its selector;
+              captured reads and modular signed-offset arithmetic derive
+              every possible target at the dispatch.
+
+Coverage:     all region entrances, internal edges, exits, relevant roots,
+              and all derived table successors are represented and checked.
+</code></pre>
+<p>An entrance proof may begin at a source-checked assignment that resets the base for arbitrary prior scalar values. Replay the complete short corridor from that assignment to the entrance. Any edge entering after the reset, any root inside the region or any alternate initialization needs its own proof; it cannot be silently ignored. First-scope unsupported entrances return partial.</p>
+<p>Use a small width-aware private abstract domain: <code>Top</code>, constant, finite unsigned interval and finite word set. This is a resolver-proof implementation, separate from the supplied abstract-stateflow API. Proposal may iterate assertions within budgets; replay checks asserted inclusions directly and does not rerun or trust the producer's convergence decisions.</p>
+<p>For each region, the intended point-specific assertions are:</p>
+<ol>
+<li>RDX equals the captured base at all relevant points.</li>
+<li>Each unknown selector-byte load produces a fresh arbitrary value in <code>0..255</code>; MOVZX preserves that unsigned interpretation.</li>
+<li>The source-replayed CMP/JA chain establishes <code>selector ≤ 9</code> on the edge to the indexed load. Preserve compare/flag definition identity; wrong polarity, signed comparisons or intervening flag/selector writes cannot establish this bound.</li>
+<li>The signed table load changes R8 from selector to offset, and ADD changes it to a member of the derived target set. The <code>0..9</code> assertion applies before the table load, not to R8 at the jump.</li>
+</ol>
+<p>Fresh means an independent abstract value per transition. Even the range-check loop may be overapproximated with fresh loads; the new proof never needs two iterations' selector values to agree. Existing stronger stable-load contradiction proofs remain valid under their own unchanged premises.</p>
+<p>The first scope rejects original stores, hidden pending-store BIL, opaque calls, unknown memory writes, unsupported relevant effects and unproved base clobbers inside the region or its initialization corridors. Changing RCX and ordinary pointer loads are permitted when the required invariant remains established. Unrelated scalar values may become <code>Top</code>. This rule introduces no normal-effect admission, LLVM effect fallback, concrete heap reads or historical memory premise.</p>
+<h3 id="avoiding-circular-target-and-region-proofs">Avoiding circular target and region proofs</h3>
+<p>The current incomplete target set or <code>Instruction.complete</code> flag cannot establish a loop's successor coverage. First reconstruct the table form and finite selector domain from original transfers/assertions; validate every required captured slot and derive the full successor set. Compare it with the prospective candidate graph, queue every new destination, and recompute region boundaries and assertions after graph expansion. Only then admit the coverage certificate on the stable candidate epoch.</p>
+<p>A missing destination may remain an explicit recovery endpoint; it cannot be erased from the target set. Unsupported control inside a claimed proof region prevents closure. A new graph entrance, changed source transfer, target-completeness change or changed boundary invalidates the affected receipt. One coordinator owns target union, proof invalidation and guard re-evaluation; no independent loop cache may outlive its bound epoch/scope.</p>
+<p>In particular, the first accepted proposal can change <code>Instruction.complete</code> without adding a destination. That changes the candidate fingerprint and advances the epoch. Recompute and independently replay the summary on the resulting candidate graph before sealing; copying a receipt and replacing its epoch field is not revalidation.</p>
+<h3 id="receipt-and-coverage-representation">Receipt and coverage representation</h3>
+<p>The new local report retains existing path witnesses and adds a tagged coverage alternative for each row:</p>
+<pre><code class="language-text">CoverageEvidence =
+    ExistingPrefixTree { path_receipt_refs }
+  | InductiveDispatch { loop_closure_receipt }
+</code></pre>
+<p><code>ExistingPrefixTree</code> preserves the existing exact incoming-prefix rules. <code>InductiveDispatch</code> independently covers every incoming state at one site through the entrance and preservation obligations above; it is not an <code>infeasible</code> receipt or an arbitrary-register local frontier. Retained path witnesses are individually validated even when the row uses inductive coverage. Target arithmetic from path/table evidence remains checked independently from the coverage choice. No reason is removed merely because a new strategy returned nonempty targets.</p>
+<p>A strict <code>LoopClosureReceipt</code> carries its rule version, dispatch site, ordered region VAs, complete typed boundary/internal edge inventories, initialization corridors, point assertions and guard-definition references, captured table/domain/entry references, and original transfer/byte identities. It binds the snapshot, query/activation/premises, semantic/model ruleset, candidate epoch and graph digest. It contains no trusted “proof succeeded” Boolean. Rust and native reconstruct the graph/effects, check all inclusions and table arithmetic, and derive acceptance themselves.</p>
+<p>Replay preserves the old prohibition on general cycles in ordinary path receipts. The new induction rule is the sole additional way to establish cyclic dispatch coverage. If any remaining required context or read is unresolved, the row stays partial with its known candidates and explicit reasons.</p>
+<h3 id="version-and-compatibility-decision">Version and compatibility decision</h3>
+<p>The following names are planned wire identities; they are not current capabilities:</p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Current exercised identity</th>
+<th>Loop-capable producer identity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Local target report / profile</td>
+<td><code>ariadne.indirect-target-resolution/v2</code> / <code>captured-local-indirect-targets/v1</code></td>
+<td><code>ariadne.indirect-target-resolution/v3</code> / <code>captured-local-indirect-targets/v2</code></td>
+</tr>
+<tr>
+<td>Combined native input</td>
+<td><code>captured-guarded-targets/v1</code></td>
+<td><code>captured-guarded-targets/v2</code></td>
+</tr>
+<tr>
+<td>Composition report</td>
+<td><code>ariadne.guarded-target-resolution/v1</code></td>
+<td><code>ariadne.guarded-target-resolution/v2</code></td>
+</tr>
+<tr>
+<td>Combined minidump / explanation / frame-path reports</td>
+<td>v4 / v3 / v3</td>
+<td>v5 / v4 / v4</td>
+</tr>
+</tbody>
+</table>
+<p>New combined queries use the new identities consistently, including queries where the loop strategy declines. Keep rooted v1, target-only and guard-only behavior and legacy saved-report decoding explicitly supported. Old helpers reject the new combined profile before analysis; never silently strip a loop proof or fall back to weaker admission. New readers dispatch by version and preserve exact old/new semantics. Model/engine hashes and profile commitments include the new closure checker; receipt binding must not hash its own enclosing report into itself.</p>
+<p>Legacy compatibility includes <strong>semantic replay of the retained reports</strong>, not parsing alone. The current composition validator hashes both its live Rust source and live TLA+ model. Editing those files changes the expected identities, so version dispatch must also select a frozen legacy validation contract. Before runtime edits, preserve the exact old sources as hash-verified fixture assets and retain a dedicated v1 checker/replay path. Its admitted model/checker pair is <code>e142a6fd22d78044c444c26211b7c659a56fedb5f9e555aa20e3aa1be23e8b10</code> / <code>c36c8876810e35ed10b7e366e650d7854958b0ad7b07d33084039d39b68e9580</code>. Native build metadata must advertise version-indexed supported proof identities separately from the current helper's own build identity. Keep retained receipt identities unchanged; a legacy identity must not authorize the new loop fields or weaker replay. Test an actual retained 2026-10-14 combined minidump and frame report after the new implementation is built, together with profile/hash downgrade and proof-stripping negatives.</p>
+<p>Keep the current API and CLI opt-ins and the existing target-limit JSON fields. Charge graph scans, assertion transfer/inclusion checks, domain operations and validation work to finite counters derived from <code>max_steps</code>, <code>max_values</code>, <code>max_entries</code>, <code>max_read_bytes</code>, <code>max_evidence_bytes</code>, <code>max_rounds</code> and <code>max_elapsed_ms</code>. Loop computation has no uncapped nested work or changed global defaults. Rooted and disabled modes gain no new semantics. Limits still allow explicit zero-work outcomes. L0 freezes exact accounting units for producer and checker separately.</p>
+<h3 id="qualification-and-acceptance-boundary">Qualification and acceptance boundary</h3>
+<p>The <a href="../plans/completed/loop-aware-target-resolution.md">L0–L6 plan</a> requires an authoritative loop-closure model and independent oracle before runtime changes, then Rust production/replay, native replay, integration/codec checks, source-isolated mutation/replay and the original dump retry. All Cargo, native, model and replay work runs in remote <code>windows-dev</code> WSL. Local checks for this design change are documentation/navigation and whitespace only.</p>
+<p>The original-dump gate requires both DA09 and DADD to retain their four witnessed targets and become complete through independently accepted induction receipts, with all other original table candidates preserved and native/Rust full-state parity. Inventory every remaining coverage barrier and path outcome. Closing these two sites does not qualify the maximal SCCs, eliminate other semantic stops, prove MOVAPS alignment or guarantee an active call anchor or available frame paths.</p>
+<p><strong>Dated design validation, 2026-10-15:</strong> source and retained graph inspection plus semantic/qualification review support the proposed small-region scope. Runtime, model and dump acceptance remain unexecuted. The 2026-10-14 artifacts retain their original identities and result; future implementation qualification requires new source/tool-bound records.</p>
+<hr />
+<h2 id="implementation-plan--l0l6">Implementation plan — L0–L6</h2>
+<h2 id="context-and-follow-up">Context and follow-up</h2>
+<p><strong>Status.</strong> Designed 2026-10-15; implementation and qualification have not started. L0–L6 below extend the existing resolver with checked local-region induction. No loop capability is accepted by this document.</p>
+<p><strong>Why this document exists.</strong> The <a href="../../docs/Ariadne/guarded-target-resolution-design.md#proposed-stable-base-invariant-follow-up">canonical composition design</a> owns this extension's contracts. The <a href="../plans/completed/guarded-target-resolution.md">C0–C6 parent plan</a> retains the ninth incoming-coverage clause after successful candidate recovery.</p>
+<p><strong>What this document establishes.</strong> The support boundary, reviewable implementation stages, file ownership, dependencies and remote acceptance gates for closing the DA09/DADD cyclic dispatch certificates.</p>
+<p><strong>Where to go next.</strong> Read the canonical design's loop section first, then L0 for exact proof/codec/budget decisions and L6 for the required dump outcome. The <a href="../../evidence/Ariadne/guarded-target-resolution/20261014/README.md">retained qualification</a> supplies the baseline; the <a href="../../Specs/README.md">formal-model guide</a> defines model authority.</p>
+<p><strong>What remains unresolved.</strong> Every L stage remains pending. The callee's other indirect jumps and work residuals, caller semantic barriers, MOVAPS admission, call-anchor recovery and full frame paths remain separate gates. Larger SCCs and general loop synthesis are outside this first scope.</p>
+<h2 id="objective-and-design-decision">Objective and design decision</h2>
+<p>Extend the current resolver with a private loop-closure proof module. Reuse <code>relative32</code> evaluation and one materialization coordinator. For a small local dispatch region, prove a stable table base, permit changing RCX and fresh selector loads, and establish the selector domain before each indexed table load. Produce a whole-dispatch induction receipt checked independently by Rust and native admission.</p>
+<p>This is a design-and-plan delivery only. It authorizes no claim that a code change or new dump result exists. Implementation should execute the gates below without replacing unknown controls, adding roots or importing crash-time values into earlier states.</p>
+<h2 id="baseline-and-concrete-dump-acceptance">Baseline and concrete dump acceptance</h2>
+<table>
+<thead>
+<tr>
+<th>Baseline item</th>
+<th>Retained value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dump</td>
+<td><code>dump_03958DA4FCA844A786262A1053</code></td>
+</tr>
+<tr>
+<td>Dump SHA-256</td>
+<td><code>9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab</code></td>
+</tr>
+<tr>
+<td>Query</td>
+<td>Thread 23668, frame pair 1 → 0, NP10</td>
+</tr>
+<tr>
+<td>Caller candidate epoch / sites</td>
+<td>610 / 9,590</td>
+</tr>
+<tr>
+<td>Candidate identity</td>
+<td><code>composition.candidate_sha256=50b54d681fe01f9488da4cf2c90948afe52cb2ab13dad2e960bad55648122a3f</code></td>
+</tr>
+<tr>
+<td>Target status</td>
+<td>Eight original complete certificates; DA09 and DADD each have four known targets and <code>cyclic-incoming-state</code></td>
+</tr>
+<tr>
+<td>Discovery</td>
+<td>Nine original table sets reconciled; 64 destinations, all 51 formerly missing starts attempted</td>
+</tr>
+<tr>
+<td>Final result</td>
+<td>Rust/native requests and full states match; caller MOVAPS unknown; frame listing unavailable</td>
+</tr>
+</tbody>
+</table>
+<p>The maximal SCCs contain 4,694 and 411 nodes and many base clobbers/calls. Initial support must instead discover and verify the following local regions. Instruction offsets below share the explicit semantic VA prefix <code>0x00007ff77440</code>:</p>
+<pre><code class="language-text">DA09 region: d9eb d9ee d9f1 d9f7 d9fc da00 da02 da06 da09
+DADD region: dabf dac2 dac5 dacb dad0 dad4 dad6 dada dadd
+
+Entrance / base-reset corridor:
+  d9e2 LEA RDX,base → d9e9 JMP → d9f7
+  dab6 LEA RDX,base → dabd JMP → dacb
+
+Each local region: 9 nodes; 10 internal edges; 1 entrance; 4 exits.
+</code></pre>
+<p>These are fixture expectations, never address-specific production rules. The canonical design records the table bases, original bytes and complete obligation structure. L0 must independently reproduce these facts from the sealed baseline and retain them as test fixtures. Structural feasibility is not a completed induction proof; rejected reverse contexts were not fully recorded by the old implementation.</p>
+<h2 id="implementation-architecture">Implementation architecture</h2>
+<pre><code class="language-text">Existing local resolver and coordinator
+  → existing path/frontier/infeasible rules
+  → private loop-region discovery and assertion proposal
+  → independent loop-receipt validation
+  → existing captured table evaluation / candidate union
+  → discovery and epoch revalidation
+  → paired native admission and reports
+</code></pre>
+<p>Keep ordinary path receipts unchanged. The new v3 local report uses a tagged coverage choice: existing prefix-tree coverage or a whole-dispatch inductive receipt. An inductive receipt checks every entrance and internal edge, derives all table successors without trusting current target-completeness flags, and preserves every exit. It is not a stable-load infeasibility receipt or an arbitrary-register frontier.</p>
+<p>The private module returns <code>NotApplicable</code>, <code>Candidate{receipt,table_witnesses}</code> or <code>Partial{reason}</code>. A candidate cannot set <code>complete=true</code> until the shared validator accepts all required obligations on the final epoch. New target discoveries invalidate region/boundary proofs and restart checked closure. One context's first successful witness cannot erase other incoming alternatives.</p>
+<h2 id="stages-ownership-and-dependencies">Stages, ownership and dependencies</h2>
+<p>Owners describe independent responsibilities for execution, not changes made by this plan. Workers are not alone in the checkout: preserve unrelated changes, edit only assigned files and coordinate shared interfaces before implementation. L0 freezes the interface and receipt contract before L2/L3 proceed in parallel. Review gates are evidence gates, not additional user-confirmation steps.</p>
+<table>
+<thead>
+<tr>
+<th>Stage / owner</th>
+<th>Principal files and tasks</th>
+<th>Depends on</th>
+<th>Reviewable exit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>L0 — Contract and baseline owner</strong></td>
+<td>Update canonical design; preserve this plan; extract source-bound loop fixtures into <code>tests/bap/fixtures/loop-closure/</code>; record graph policy, regions, entrances, LEA corridors, original BIL/bytes, tables and baseline hashes. Freeze new coverage tag, full wire fields, private interface, version-indexed legacy validation contract and finite work units.</td>
+<td>Source inspection</td>
+<td>Independent reproduction of both local regions and all entrances; frozen legacy source/model identities; explicit rejection of the maximal-SCC invariant; no production address constants or expected-target injection.</td>
+</tr>
+<tr>
+<td><strong>L1 — Formal model and oracle owner</strong></td>
+<td>Add planned <code>Specs/AriadneLoopTargetClosure.tla</code>, finite configs and checker; integrate its coverage case with <code>AriadneTargetResolution.tla</code> and composition authority. Add an independent finite oracle under the fixture directory. Do not encode production matcher/substitution as the oracle.</td>
+<td>L0</td>
+<td>Initialization, preservation, domain implication, every entrance/edge/exit, stale-epoch invalidation, conservative partial publication and bounded analyzer termination are modeled. Positive and deliberate counterexample configurations behave as specified.</td>
+</tr>
+<tr>
+<td><strong>L2 — Rust resolver owner</strong></td>
+<td><code>src/bap/target_resolution.rs</code>; private implementation under <code>src/bap/target_resolution/</code>; strict receipt types; <code>tests/bap/target_resolution_unit.rs</code>; <code>src/bin/target_resolution_validate.rs</code> as necessary. Add bounded region discovery, point assertions and independent replay from original BIL.</td>
+<td>L1 contract/model cases</td>
+<td>Both synthetic loop shapes yield accepted whole-dispatch evidence. Replay rejects bad entrances, clobbers, wrong guard provenance and tampered boundaries. Existing target/frontier/infeasible/cycle tests retain their stated behavior.</td>
+</tr>
+<tr>
+<td><strong>L3 — Native admission owner</strong></td>
+<td><code>native/bap-core/capture.ml</code>, <code>composition.ml</code>, <code>main.ml</code>, <code>build.py</code>; relevant <code>src/bap/core_adapter.rs</code>, <code>core_protocol.rs</code>, <code>core_session.rs</code> interfaces coordinated with L2. Add independent assertion/edge/read replay, new capability/profile handling and version-indexed legacy/new ruleset/model identities.</td>
+<td>L1 and frozen L2 wire contract</td>
+<td>Native accepts the same valid proof cases and rejects named invalid ones. Old helpers explicitly reject the new profile. Legacy proof replay retains its frozen contract separately from the new helper build identity. JSON field order cannot change symbolic equality. Exact read contributors and original BIL remain mandatory.</td>
+</tr>
+<tr>
+<td><strong>L4 — Integration and reports owner</strong></td>
+<td><code>src/input/materialize.rs</code>; <code>src/bap/composition.rs</code>; input frame/report/investigation codecs, <code>src/reports/</code>, CLI and consumer tests. Integrate proof invalidation, target union, completeness-only epoch changes, dedicated v1 replay, saved old/new versions and JSON/text/DOT explanations.</td>
+<td>L2 + L3</td>
+<td>One coordinator and immutable query scope; new targets queued without roots; summaries rechecked after epoch changes; no proof stripping or unsupported fallback. Validate actual retained 2026-10-14 combined minidump/frame reports without rewriting their model/checker identities; old/new roundtrips preserve full requests and gaps.</td>
+</tr>
+<tr>
+<td><strong>L5 — Qualification owner</strong></td>
+<td>Loop oracle/tests, targeted mutation tooling, isolated native SDK/helper/replay outputs, model logs and a new source/tool manifest under <code>evidence/Ariadne/loop-aware-target-resolution/</code>.</td>
+<td>L4</td>
+<td>Applicable root checks, model/oracle controls, native admission, saved-report controls, behavioral mutations and generated replay pass on the same source snapshot. Missing prerequisites remain unexercised rather than passed.</td>
+</tr>
+<tr>
+<td><strong>L6 — Original-dump and delivery owner</strong></td>
+<td>Byte-identical dump retry, all-nine table reconciliation, DA09/DADD proof comparison, native/Rust full-state parity, remaining-barrier report; update canonical dated validation and parent C5 status.</td>
+<td>L5</td>
+<td>Both dispatches complete with the expected four-target sets and validated induction receipts; eight previously complete certificates retain valid coverage; all original candidates remain. Separate frame-path result and remaining barriers are reported honestly.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="l0-decisions-to-freeze-before-runtime-edits">L0 decisions to freeze before runtime edits</h2>
+<ol>
+<li><strong>Region rule:</strong> bounded local phase discovery from actual table/control structure and definition boundaries; exact independent enumeration of all crossing/internal edges. Maximal SCCs may guide discovery but are not automatically proof regions.</li>
+<li><strong>Entrance rule:</strong> a checked base-reset assignment plus a fully covered acyclic corridor establishes the assertion for arbitrary earlier scalar state. A bypass into the corridor or an additional region entrance must be represented and proved.</li>
+<li><strong>Assertions:</strong> width-aware <code>Top</code>, constant, unsigned interval and finite set; same-iteration compare/flag/selector definition provenance. Unknown pointer loads and byte loads are fresh abstract values, with no inferred cross-iteration equality.</li>
+<li><strong>Proof representation:</strong> retain old path witnesses and add <code>ExistingPrefixTree | InductiveDispatch</code> coverage. The first loop rule covers the entire queried dispatch; arbitrary prefix summary application is deferred.</li>
+<li><strong>Wire identity:</strong> local target report v3/profile local-v2; combined native profile v2; composition v2; combined minidump v5, explanation v4 and frame-path v4. Preserve target-only v1, guard-only behavior and a dedicated semantic replay path for legacy combined reports. Freeze old Rust/model source bytes as hash-verified fixture assets before edits; select checker semantics and admitted proof identities by version, separately from the new helper build identity. New loop-capable producers use new identities even when a loop proof declines.</li>
+<li><strong>Budget accounting:</strong> use existing target-limit fields; charge every nested scan, transfer/inclusion and finite-set operation; preserve zero limits and unchanged global defaults. Define producer and validator work accounting separately, including region edges, assertion sizes and report decoding.</li>
+<li><strong>Proof independence:</strong> replay original source BIL, captured bytes/control and table reads. Do not accept a producer's asserted constant, region boundary, domain, successful convergence flag or existing <code>complete</code> bit as its own evidence.</li>
+</ol>
+<h2 id="required-positive-and-negative-controls">Required positive and negative controls</h2>
+<table>
+<thead>
+<tr>
+<th>Family</th>
+<th>Positive controls</th>
+<th>Required rejection or partial controls</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Region and entrances</td>
+<td>Both nine-node phase regions; base clobbers elsewhere in the large SCC do not poison a valid locally reinitialized phase; multiple independently initialized entrances</td>
+<td>Hidden entrance, corridor bypass, root inside region without proof, omitted edge/exit, incorrect region contraction</td>
+</tr>
+<tr>
+<td>Induction</td>
+<td>Stable base with changing RCX; any number of pointer-loop and range-loop traversals; selector values vary across iterations</td>
+<td>Base clobbered on one edge, different base on one entrance, circular reliance on candidate completeness, omitted recurrence</td>
+</tr>
+<tr>
+<td>Branch constraints</td>
+<td>MOVZX byte domain and unsigned JA untaken edge prove <code>0..9</code> at the table load</td>
+<td>Wrong polarity, signed comparison, flag clobber, selector overwritten after comparison, applying the selector bound to target-valued R8</td>
+</tr>
+<tr>
+<td>Loads and effects</td>
+<td>Fresh byte/pointer values, captured signed32 table arithmetic, existing stable-load infeasible receipts preserved</td>
+<td>Equating different iterations' loads; original store or hidden pending-store BIL; opaque call; unknown memory write; unsupported relevant transfer</td>
+</tr>
+<tr>
+<td>Captured evidence</td>
+<td>All ten required selector slots with exact bytes/contributors and four derived destinations</td>
+<td>Missing/conflicting slot, bad sign extension or wrap arithmetic, wrong base/slot/width, omitted table successor</td>
+</tr>
+<tr>
+<td>Identity and consumers</td>
+<td>Same sealed scope/epoch across producer, Rust, native and saved report; actual retained v1 combined minidump/frame semantic replay; valid old/new codec cases</td>
+<td>Altered snapshot/activation/roots/semantics/epoch, swapped source AST, stripped closure, new loop evidence submitted under a legacy profile/hash, unsupported profile downgrade, malformed/extra fields</td>
+</tr>
+<tr>
+<td>Resources and termination</td>
+<td>Finite admitted region and independent receipt checking; runtime loop need not terminate</td>
+<td>Zero step/value/time allowance, producer and native budget exhaustion, oversized assertions/evidence, nested uncharged work</td>
+</tr>
+</tbody>
+</table>
+<p>Use an independent small finite state space to enumerate one-step transfer inclusion and generate induction counterexamples. Finite oracle cases do not establish a universal Rust theorem. Mutations must independently disable entrance checking, base preservation, branch provenance, successor coverage, selector freshness or epoch binding. Credit requires a passing original and a named behavioral negative; compile errors, timeouts and rejection by an unrelated still-active check receive no behavioral mutation credit.</p>
+<h2 id="remote-validation-and-evidence-commands">Remote validation and evidence commands</h2>
+<p>All Cargo, native helper/SDK compilation, Apalache/TLC, replay, mutations and original-dump execution run on remote <code>windows-dev</code> WSL through the established <code>r_windev</code> workflow. Source inspection and document checks may run locally. Synchronize an exact source snapshot, verify archive/source/tool hashes and use a task-private checkout. Keep replay and mutation SUT build directories isolated under their checkout's <code>target/</code>.</p>
+<p>The following existing root commands must pass in that remote checkout after implementation:</p>
+<pre><code class="language-sh">cargo fmt --all -- --check
+cargo test --offline --locked
+cargo test --offline --locked --no-default-features
+cargo clippy --offline --locked --all-features --all-targets -- -D warnings
+python3 tools/check_rust_layout.py
+python3 tools/check_doc_links.py
+bash Specs/check-target-resolution.sh
+bash Specs/check-guarded-target-resolution.sh
+python3 tests/bap/fixtures/composition/oracle.py --check
+</code></pre>
+<p>L1 must create and verify the new loop-model/oracle entry points. L5 records exact invocations of the existing target-resolution, native/frame, replay and mutation tools after inspecting their current options; do not present a planned script or guessed flag as an existing executable command. Include the affected ignored native tests, strict target validator, both completion codecs, actual dump receipt replay and legacy capability controls. Use dedicated outputs such as <code>target/loop-aware-native</code>, <code>target/loop-aware-replay-build</code> and <code>target/loop-aware-mutations-build</code>; adapt any tool with a fixed build path or isolate its whole SUT checkout.</p>
+<p>Future evidence must retain source and tool hashes, model files/configs, helper manifests, exact budgets, stdout/stderr, original and mutated variants, failed attempts, original dump/PDB provenance when symbols are used, all capture-read witnesses, prospective/final graph identities and native/Rust comparison results. Preserve the old 2026-10-14 artifacts byte-for-byte as historical results.</p>
+<h2 id="acceptance-and-stopping-rules">Acceptance and stopping rules</h2>
+<ul>
+<li>L0–L1 deliver a reviewed contract and finite expectation set; they do not claim implementation.</li>
+<li>L2–L4 cannot publish completeness from an unvalidated summary or weaken legacy path-cycle checks globally. A failed summary preserves candidates and an explicit residual.</li>
+<li>L5 is accepted only for its exercised source/tool/model/corpus scope. Core-only builds retain no activated external crate dependencies.</li>
+<li>L6 must freshly establish both <code>0x00007ff77440da09</code> and <code>0x00007ff77440dadd</code> as complete, with their four expected targets, accepted Rust/native induction evidence and all-nine reconciliation. Re-run both frame queries and compare complete normalized requests and states.</li>
+<li>Report remaining caller/callee barriers and NP10 availability independently. A still-unavailable listing does not fail this narrower loop-closure gate; neither does successful target closure satisfy full frame-path acceptance.</li>
+<li>Update the parent ninth C5 clause only after the original-dump gate passes. Do not archive either active plan as full delivery merely because candidate recovery or finite tests pass.</li>
+</ul>
+<h2 id="validation-of-this-plan-document">Validation of this plan document</h2>
+<p>This change is documentation only. Source inspection and independent semantic/qualification reviews informed the region, induction and version decisions. Local link/navigation and whitespace checks must pass before presenting the plan. No Cargo, native/model build, replay, mutation or dump retry is part of this planning turn.</p>
+</main></body></html>

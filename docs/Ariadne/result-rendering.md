@@ -17,7 +17,7 @@ preserve the frozen query, structural graph, uncertainty and possible origins.
 
 **Where to go next.**
 
-- [Completed presentation plan](../../Plans/completed/priority-3-investigator-presentation-plan.md)
+- [Completed presentation plan](../../.agents/plans/completed/priority-3-investigator-presentation-plan.md)
   — implementation and cross-format equivalence checks for the instruction overview.
 - [Investigation contract](investigation-design.md) — separate typed fault-address claims.
 - [Typed replay and result contracts](typed-replay-design.md#result-families)
@@ -39,11 +39,11 @@ effects or input reading. The minidump report layer joins that completed result
 with captured-byte and preparation evidence. The input package owns the join
 because the pure renderer has no decoded operands, rule IDs or captured spans.
 
-The [completed real-capture plan](../../Plans/completed/priority-1-real-capture-plan.md)
+The [completed real-capture plan](../../.agents/plans/completed/priority-1-real-capture-plan.md)
 uses JSON v1 to qualify a historical predecessor slice; its
 [evidence-chain design](file-reader-design.md#independent-entry-and-real-capture-evidence) retains independent
 entry witnesses in a separate case manifest. The
-[completed presentation plan](../../Plans/completed/priority-3-investigator-presentation-plan.md)
+[completed presentation plan](../../.agents/plans/completed/priority-3-investigator-presentation-plan.md)
 adds the instruction overview while preserving JSON v1 and DOT graph semantics.
 
 ## Interface and use
@@ -313,7 +313,7 @@ only demonstrate the supported CLI and presentation mechanics.
 The [2026-09-29 23:26 CST source-bound record](../../evidence/Ariadne/priority-2-3-validation.json)
 retains exact Windows/Linux example identities, format hashes, controlled-case
 replay and the 11-gate minidump run under the
-[completed presentation plan](../../Plans/completed/priority-3-investigator-presentation-plan.md).
+[completed presentation plan](../../.agents/plans/completed/priority-3-investigator-presentation-plan.md).
 
 | Check | Retained outcome |
 | --- | --- |

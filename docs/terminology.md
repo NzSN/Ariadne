@@ -456,7 +456,7 @@ as recorded in the [removal policy](Ariadne/semantic-assurance.md#dependency-aud
 | Scanned group | Markdown documents | Reading purpose |
 | --- | ---: | --- |
 | Root: README, roadmap, checkpoints, repository instructions | 4 | Product intent, invariants and current/historical scope. |
-| `Plans/`, including completed plans | 28 | Stage vocabulary, acceptance clauses and unresolved work. |
+| `.agents/plans/`, including completed plans | 28 | Stage vocabulary, acceptance clauses and unresolved work. |
 | `Specs/` guides | 2 | Active modeled contracts and retired ISA inventory. |
 | `docs/Ariadne/` | 14 | Feature-specific inputs, effects, questions, reports and qualification. |
 | Other `docs/` | 31 | Core/stateflow contracts, navigation and retired architecture research. |

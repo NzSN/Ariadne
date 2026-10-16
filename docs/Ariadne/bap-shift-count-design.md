@@ -2,13 +2,13 @@
 
 ## Context and follow-up
 
-**Status.** X0–X4 implemented and finitely validated on remote WSL on 2026-10-14. The [execution record](../../Plans/completed/bap-shift-counts.md) is complete. Original XORPS admission succeeds; the initial full captured retry reached the guard-evidence limit. The later [configurable-budget delivery](justified-branch-pruning-design.md#configurable-guard-budgets) releases that profile ceiling, with separate source-bound validation and remaining coverage/transport limits.
+**Status.** X0–X4 implemented and finitely validated on remote WSL on 2026-10-14. The [execution record](../../.agents/plans/completed/bap-shift-counts.md) is complete. Original XORPS admission succeeds; the initial full captured retry reached the guard-evidence limit. The later [configurable-budget delivery](justified-branch-pruning-design.md#configurable-guard-budgets) releases that profile ceiling, with separate source-bound validation and remaining coverage/transport limits.
 
 **Why this document exists.** The earlier [guarded dump retry](justified-branch-pruning-design.md#captured-retry-and-remaining-boundary) aborted at captured `XORPS xmm0,xmm0`, VA `0x00007ff7744075b3`, bytes `0f57c0`, with `BIL operand type/width mismatch`.
 
 **What this document establishes.** The source-grounded diagnosis, generic BIL shift contract, count/provenance safeguards, producer identities, implementation ownership and separate original-dump retry boundary.
 
-**Where to go next.** Read [BAP integration](bap-analysis-core-design.md#projection) for typed transport and projection, [semantic assurance](semantic-assurance.md) for trusted lifting, and the [execution plan](../../Plans/completed/bap-shift-counts.md) for tasks and gates. The [pinned-source research](../../evidence/Ariadne/bap-shift-width/20261014/pinned-bap-source-research.md) retains primary source provenance.
+**Where to go next.** Read [BAP integration](bap-analysis-core-design.md#projection) for typed transport and projection, [semantic assurance](semantic-assurance.md) for trusted lifting, and the [execution plan](../../.agents/plans/completed/bap-shift-counts.md) for tasks and gates. The [pinned-source research](../../evidence/Ariadne/bap-shift-width/20261014/pinned-bap-source-research.md) retains primary source provenance.
 
 **What remains unresolved.** This fixes BIL shift typing/projection compatibility. It does not introduce exact vector values, general SIMD coverage, new scalar/address/target-resolution precision, hardware shift-count assumptions, executed history or a full-dump path guarantee. Existing incomplete control, unwind and resource limits remain separate.
 

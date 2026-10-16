@@ -19,7 +19,7 @@ Rust retains preparation, validation, reports and explicit reference/rollback.
 
 - [Rust backend guide](../../docs/Ariadne/bap-analysis-core-design.md#backend-usage) — connects the helper to minidump preparation.
 - [Binding review](../../docs/Ariadne/bap-analysis-core-design.md#pinned-projection-source-review) — explains the measured accessor and projection assumptions.
-- [Active Windows replacement](../../Plans/completed/bap-windows-repin.md) — defines the authorized workload pin and independent capture evidence.
+- [Active Windows replacement](../../.agents/plans/completed/bap-windows-repin.md) — defines the authorized workload pin and independent capture evidence.
 - [Replacement validation](../../docs/Ariadne/bap-analysis-core-design.md#windows-workload-replacement) — records completed capture/pinning, passing implementation checks and the former latency limit.
 
 **What remains unresolved.** The [native core qualification](../../docs/Ariadne/bap-analysis-core-design.md#native-qualification)

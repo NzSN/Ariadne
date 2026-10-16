@@ -47,7 +47,7 @@ def anchors(text):
 
 
 def main():
-    docs = set((ROOT / "docs").rglob("*.md")) | set((ROOT / "Plans").rglob("*.md"))
+    docs = set((ROOT / "docs").rglob("*.md")) | set((ROOT / ".agents" / "plans").rglob("*.md"))
     docs.update(ROOT / name for name in (
         "README.md", "ROADMAP.md", "CHECKPOINTS.md", "Specs/README.md",
         "lean/README.md", "native/bap/README.md",

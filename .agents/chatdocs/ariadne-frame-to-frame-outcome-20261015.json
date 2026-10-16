@@ -1,0 +1,80 @@
+{
+  "latest_analysis": "2026-10-14, dump-20261014T121127",
+  "inspected": "2026-10-15",
+  "dump_id": "dump_03958DA4FCA844A786262A1053",
+  "dump_sha256": "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+  "thread": 23668,
+  "source_binding": {
+    "recorded_files": 711,
+    "matching_files": 711
+  },
+  "frame_path_result": {
+    "schema": "ariadne.frame-paths/v3",
+    "scope_id": "94233f5e63890e5a1c44bc374eb8543b46b527d7c660bb6fda7d19a1217e271d",
+    "question": {
+      "from_frame": 1,
+      "to_frame": 0,
+      "np": 10
+    },
+    "available": false,
+    "coverage": "unavailable",
+    "returned_count": 0,
+    "truncated": false,
+    "enumeration_exhausted": false,
+    "stop_reason": "missing-or-ambiguous-active-call-anchor",
+    "gaps": [
+      "missing-or-ambiguous-active-call-anchor"
+    ],
+    "counters": {
+      "expanded_states": 0,
+      "scanned_edges": 0,
+      "peak_frontier_bytes": 0,
+      "retained_path_bytes": 0
+    },
+    "frontier_count": 0,
+    "elapsed_ms": 0
+  },
+  "frames": [
+    {
+      "index": 0,
+      "method": "runtime-v1",
+      "function_begin": "0x00007ff77443d960",
+      "function_end": "0x00007ff774442634",
+      "pc": "0x00007ff77443dd6e",
+      "sp": "0x000000bea89fa890",
+      "return_pc": "0x00007ff77440410d",
+      "return_slot": "0x000000bea89fa928"
+    },
+    {
+      "index": 1,
+      "method": "runtime-v1",
+      "function_begin": "0x00007ff7744033a0",
+      "function_end": "0x00007ff77440deba",
+      "pc": "0x00007ff77440410d",
+      "sp": "0x000000bea89fa930",
+      "return_pc": null,
+      "return_slot": null
+    }
+  ],
+  "unwind_stop": "unsupported-unwind-operation",
+  "frame_analysis": [
+    {
+      "frame": 1,
+      "candidate_sites": 9590,
+      "final_decoded": 9,
+      "final_edges": 9,
+      "guard_barriers": 32,
+      "request_equal": true,
+      "full_state_equal": true
+    },
+    {
+      "frame": 0,
+      "candidate_sites": 778,
+      "final_decoded": 768,
+      "final_edges": 895,
+      "guard_barriers": 12,
+      "request_equal": true,
+      "full_state_equal": true
+    }
+  ]
+}

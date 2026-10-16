@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Is Partial expected? — Ariadne</title>
+<style>
+:root {color-scheme:light dark;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.65;}
+body {margin:0;background:#f5f7fa;color:#172131;} main {max-width:760px;margin:64px auto;padding:40px 44px;background:white;border:1px solid #dde3ec;border-radius:16px;box-shadow:0 8px 30px #17213108;}
+h1 {font-size:1.7rem;line-height:1.25;margin:0 0 24px;} p {margin:18px 0;} ul {padding-left:24px;} li {margin:14px 0;} code {font-family:ui-monospace,monospace;background:#edf1f7;border-radius:4px;padding:2px 5px;font-size:.93em;} .lead {font-size:1.15rem;} footer {margin-top:30px;padding-top:16px;border-top:1px solid #dde3ec;font-size:.85rem;color:#58667a;}
+@media(max-width:700px){main{margin:20px 14px;padding:24px;}} @media(prefers-color-scheme:dark){body{background:#111722;color:#e7ecf5;}main{background:#192131;border-color:#344057;}code{background:#273249;}footer{color:#aab7cc;border-color:#344057;}}
+</style></head><body><main>
+<h1>Is the partial result expected?</h1>
+<p class="lead">Yes—<strong>under the current resolver profile and limits.</strong></p>
+<ul>
+<li>All <strong>45 table targets</strong> were recovered, but <code>cyclic-incoming-state</code> prevents certifying that they exhaust every incoming state.</li>
+<li>Unknown entry origins, memory/call effects and <strong>13 decode failures</strong> remain.</li>
+<li>The explanation hits its <strong>32,768-origin-link limit</strong>, so it is also marked truncated.</li>
+</ul>
+<p>The core dataflow computation finished successfully. Increasing the reporting limit could remove truncation; the semantic gaps would still justify <code>Partial</code>.</p>
+<footer>Ariadne · Original dump retry at <code>b5d56b7</code> · <code>dump_048B10C302A4460D8A1FC75088</code></footer>
+</main></body></html>

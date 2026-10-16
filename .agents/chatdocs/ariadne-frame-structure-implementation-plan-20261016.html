@@ -1,0 +1,489 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Stage 5.1 structural frame report: implementation plan</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f4f6f8;color:#192738;font:17px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:1060px;margin:auto;background:white;padding:38px 46px 70px}h1{font-size:2rem;line-height:1.2;margin:20px 0}h2{font-size:1.35rem;margin-top:38px;border-top:1px solid #d4dce5;padding-top:22px}p,li{max-width:92ch}a{color:#075d9e}code,pre{font-family:ui-monospace,Consolas,monospace}code{font-size:.88em;background:#edf1f5;padding:2px 4px}pre{overflow:auto;background:#edf1f5;padding:18px;line-height:1.6}pre code{padding:0}table{border-collapse:collapse;width:100%;margin:20px 0;font-size:.94rem}td,th{border-bottom:1px solid #d6dfe7;padding:10px 12px;text-align:left;vertical-align:top}th{background:#edf1f5}.lead{font-size:1.14rem}.note{font-size:.9rem;color:#526474}.answer{border-left:4px solid #1f658c;background:#edf5fa;padding:16px 20px}.demo{border:1px solid #aabfce;padding:20px 24px;margin:25px 0;background:#f9fbfd}.demo h3{margin-top:0}.demo label{display:block;cursor:pointer}.demo input{width:18px;height:18px;margin-right:8px;vertical-align:middle}.result{white-space:pre-line;font-weight:600;background:#e9f1f6;padding:14px}.tag{font-size:.85rem;border:1px solid #b9c9d5;padding:4px 8px}.top{display:flex;gap:16px;flex-wrap:wrap;font-size:.9rem}.table-wrap{overflow:auto}a:focus-visible,input:focus-visible{outline:3px solid #ce8d23;outline-offset:3px}@media(max-width:700px){main{padding:24px 17px 50px}h1{font-size:1.6rem}table{font-size:.85rem}.demo{padding:16px}}@media print{body{background:white}main{max-width:none;padding:0}.top{display:none}}
+main{max-width:1280px}table{font-size:.86rem;line-height:1.5}th,td{padding:10px}td:first-child{min-width:105px}.toc{columns:2;padding-left:24px}.toc li{margin:5px 0}details{margin:24px 0;padding:15px 20px;background:#f2f5f8}summary{cursor:pointer;font-weight:600}@media(max-width:750px){.toc{columns:1}main{padding:23px 16px}table{font-size:.8rem}}</style></head><body><main><nav class="top"><a href="ariadne-reports-index.html">Chat document index</a><a href="../plans/frame-structure-report.md">Canonical implementation plan</a><a href="../../docs/Ariadne/investigation-design.md#structural-frame-report-before-dataflow">Owning design</a><span>All SF0–SF6 stages pending</span></nav><details open><summary>Jump to a section</summary><ul class="toc"><li><a href="#context-and-follow-up">Context and follow-up</a></li><li><a href="#delivery-contract-to-freeze-in-sf0">Delivery contract to freeze in SF0</a></li><li><a href="#execution-waves-and-ownership">Execution waves and ownership</a></li><li><a href="#fine-grained-task-ledger">Fine-grained task ledger</a></li><li><a href="#sf0-freeze-interfaces-and-finite-policies">SF0: freeze interfaces and finite policies</a></li><li><a href="#sf1sf3-build-the-structural-boundary">SF1–SF3: build the structural boundary</a></li><li><a href="#sf4-product-and-persistence">SF4: product and persistence</a></li><li><a href="#sf5-independent-controls-and-remote-qualification">SF5: independent controls and remote qualification</a></li><li><a href="#sf6-named-dump-acceptance">SF6: named dump acceptance</a></li><li><a href="#completion-ledger-and-planning-validation">Completion ledger and planning validation</a></li></ul></details><h1 id="structural-frame-report-before-dataflow-stage-51">Structural frame report before dataflow: Stage 5.1</h1>
+<h2 id="context-and-follow-up">Context and follow-up</h2>
+<p><strong>Status.</strong> Planning only, 2026-10-16. SF0–SF6 below are pending. No runtime,
+model, native or dump qualification is supplied by this document. Source review
+starts at <code>6192dee19a5b2f133177a21187952e28d603c2d9</code>; the working tree also contains
+unrelated documentation cleanup that must be preserved.</p>
+<p><strong>Why this document exists.</strong> The <a href="../../docs/Ariadne/investigation-design.md#structural-frame-report-before-dataflow">canonical structural-report design</a>
+addresses a concrete coupling: the <a href="../../evidence/Ariadne/caller-semantic-coverage/20261015/README.md#original-dump-result">retained caller run</a>
+recovered control flow but exhausted dataflow before the existing frame binder
+could consume it. Stage 5.1 delivers a separate structural result.</p>
+<p><strong>What this document establishes.</strong> Implementation order, file ownership,
+interface decisions, finite policies, independent controls and remote acceptance
+for this stage. The investigation design owns the resulting API and contracts.</p>
+<p><strong>Where to go next.</strong> Read the canonical section, <a href="../../docs/implementation.md">core implementation guide</a>,
+<a href="../../Specs/README.md">formal-model guide</a>, <a href="../../docs/Ariadne/file-reader-design.md#public-interface">input interface</a>
+and <a href="../../docs/Ariadne/bap-analysis-core-design.md#backend-usage">BAP usage</a>.
+The <a href="../plans/frame-path-enumeration.md">existing frame-path plan</a> and
+<a href="../plans/caller-semantic-coverage.md">caller-coverage S6 ledger</a> keep their separate gates.</p>
+<p><strong>What remains unresolved.</strong> Everything SF0–SF6 is unimplemented/unqualified.
+Preparation checkpoints, SCC summaries, path enumeration, new target/loop rules,
+backward values and writer refinement are outside this stage. A structural
+report does not discharge full caller completion or existing frame-path acceptance.</p>
+<h2 id="delivery-contract-to-freeze-in-sf0">Delivery contract to freeze in SF0</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Decision</th>
+<th>Stage 5.1 contract</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Product</td>
+<td>A distinct privately constructed structural binding and <code>ariadne.frame-structure/v1</code> report family. Names are proposed until SF0 freezes the interface.</td>
+</tr>
+<tr>
+<td>Core result</td>
+<td>A standard-library-only <code>RecoveryResult</code>, produced by bounded deterministic recovery. It implements no <code>AnalysisView</code> and cannot be supplied as a completed investigation.</td>
+</tr>
+<tr>
+<td>Input</td>
+<td>Successful <code>FilePreparedAnalysis</code>, exact final normalized request, original capture evidence, unchanged roots and verified guard/target/composition bindings.</td>
+</tr>
+<tr>
+<td>Capture profile</td>
+<td>Existing finite Windows AMD64 physical-frame/unwind and E8 direct-call profile. Core recovery stays platform-neutral; no new Linux/JIT/tail-call/handler-frame support is part of v1.</td>
+</tr>
+<tr>
+<td>Producer</td>
+<td><code>rust-recovery/v1</code>, using production BAP semantics and the LLVM decode/control reference. This does not claim native-core execution or qualification.</td>
+</tr>
+<tr>
+<td>Stop</td>
+<td>Run Visit actions while pending work and budget remain. Stop before <code>FinishRecovery</code>, including when pending becomes empty. No dataflow/slice action is executed.</td>
+</tr>
+<tr>
+<td>Meaning</td>
+<td>Recovery <code>drained</code> or <code>work_stopped</code> is separate from semantic/control gaps. Neither is <code>Done</code>, <code>ScopeClosed</code>, an executed path or a writer exclusion.</td>
+</tr>
+<tr>
+<td>CLI</td>
+<td>Proposed <code>--frame-structure N:M</code> and <code>--frame-structure-limits FILE</code>, independent of <code>--list-frame-paths</code>; no NP or path enumeration. Preserve the existing route by default.</td>
+</tr>
+<tr>
+<td>Saved evidence</td>
+<td>V1 is self-contained and replayable under host policy. Deduplicate immutable payloads with checked references; a hash-only reference cannot substitute for missing evidence.</td>
+</tr>
+<tr>
+<td>Compatibility</td>
+<td>Existing <code>BoundInvestigation</code>, frame-path codecs/limits, native-default full analysis, roots, effects and evidence identities retain their contracts.</td>
+</tr>
+</tbody>
+</table></div>
+<p>A missing final guard decision remains a Stop/frontier. Candidate continuations
+are not admitted merely because dataflow is skipped. Preserve typed call facts
+while local recovery follows summary edges. New frame links use the existing
+captured E8/continuation/child-entry checks against reached caller sites.</p>
+<h2 id="execution-waves-and-ownership">Execution waves and ownership</h2>
+<p>All stages are pending. Dependencies below are evidence gates, not additional
+permission questions. Workers are not alone: preserve unrelated edits and do not
+revert other workers. A stage owns its stated files; coordinate shared exports
+through that stage's integration owner. Only disjoint model/oracle work or
+independent reviews should run in parallel until their prerequisite interfaces
+are frozen.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Wave / stage</th>
+<th>Owner and file responsibility</th>
+<th>Depends on</th>
+<th>Exit evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>W0 / SF0: authority and oracle</td>
+<td>Contract/model owner: owning design, this plan, proposed <code>Specs/AriadneFrameStructure.tla</code>, finite configurations/checker, independent oracle and fixtures under <code>tests/</code>.</td>
+<td>Source/corpus inventory</td>
+<td>Frozen schema/status/limit/CLI meanings; independent expectations and authoritative recovery-prefix contract before runtime acceptance.</td>
+</tr>
+<tr>
+<td>W1 / SF1: core recovery result</td>
+<td>Core owner: proposed <code>src/recovery.rs</code>, <code>src/lib.rs</code>, narrowly necessary engine accessors, <code>tests/</code>; no serde/hash dependencies in the core.</td>
+<td>SF0</td>
+<td>Exact bounded recovery prefix, private construction, deterministic work receipt and zero dataflow/slice work.</td>
+</tr>
+<tr>
+<td>W2 / SF2: prepared-capture binding</td>
+<td>Input owner: proposed <code>src/input/frame_structure.rs</code>, existing <code>capture_context</code>/validation seams, input exports, focused <code>tests/input/</code> and root manifest targets.</td>
+<td>SF1</td>
+<td>Final-request and capture/proof validation; preparation diagnostics never become sealed graphs.</td>
+</tr>
+<tr>
+<td>W3 / SF3: frame structure</td>
+<td>Investigation owner: proposed <code>src/investigation/frame_structure.rs</code>, module exports and shared active-call helper; focused investigation tests.</td>
+<td>SF2</td>
+<td>Independently useful frame maps, verified adjacent-call links, typed gaps/frontiers and aggregate policy checks.</td>
+</tr>
+<tr>
+<td>W4 / SF4: codecs and CLI</td>
+<td>Product owner: proposed <code>src/reports/frame_structure.rs</code>, reports exports, <code>src/bin/ariadne-minidump.rs</code>, focused report/CLI tests and root test registrations.</td>
+<td>SF3</td>
+<td>Strict saved replay, JSON/text/DOT views and explicit structural mode without any full-completion call.</td>
+</tr>
+<tr>
+<td>W5 / SF5: finite qualification</td>
+<td>Qualification owner plus independent reviewer: isolated remote model/oracle/replay/mutation jobs and source/tool records under <code>evidence/Ariadne/frame-structure/</code>.</td>
+<td>SF4</td>
+<td>Applicable root, fixture/capture, model and behavioral mutation gates; compatibility and source identity checked.</td>
+</tr>
+<tr>
+<td>W6 / SF6: dump and reconciliation</td>
+<td>Root/corpus owner: original-dump driver, retained qualification bundle, canonical usage/validation summary and this ledger.</td>
+<td>SF5</td>
+<td>Public API and CLI structural report on the named dump; independent replay/control equality and explicit remaining gaps.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="fine-grained-task-ledger">Fine-grained task ledger</h2>
+<p>Each row's deliverable belongs to its wave owner. Source/model hashes and actual
+commands are recorded by the executing stage; nothing below is a claimed pass.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Dependency</th>
+<th>Owns / deliver</th>
+<th>Acceptance</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SF0.1</td>
+<td>Baseline</td>
+<td>Contract, API/CLI/status/identity and producer-vs-semantic-backend inventory; payload sizing.</td>
+<td>Decisions below frozen without changing old reports or input roots.</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>SF0.2</td>
+<td>SF0.1 contract</td>
+<td>Independent finite recovery/frame oracle, TLA+ projection/status model and checker registration.</td>
+<td>Expected edges, frontiers, stop receipts and call links are not calculated by the SUT. Model bounds and trusted capture premises explicit.</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>SF1.1</td>
+<td>SF0</td>
+<td>Owned core recovery result/factory and immutable getters.</td>
+<td>Only Visit actions; result cannot be upcast/deserialized as a completed analysis.</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>SF1.2</td>
+<td>SF1.1</td>
+<td>Work-stop handling and core fixture tests.</td>
+<td>Exact pending/visited/decoded/edges/obligations at zero, boundary and drained budgets; completed-run control projection matches.</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>SF2.1</td>
+<td>SF1</td>
+<td>Final capture/request/proof binding and feature-correct input API.</td>
+<td>Reuses opaque-ordinary, target, guard and composition checks; tampering fails even after rehashing.</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>SF2.2</td>
+<td>SF2.1</td>
+<td>Preparation-failure and per-frame status handling.</td>
+<td>A hard preparation failure has diagnostics only; other valid frames survive when independently preparable.</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>SF3.1</td>
+<td>SF2</td>
+<td>Frame graph extraction, boundaries and shared active-call validation.</td>
+<td>Reached captured E8 + exact continuation + child entry is required for each CALL link. Stack relation alone remains an annotation.</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>SF3.2</td>
+<td>SF3.1</td>
+<td>Aggregate frame result and bounded validation.</td>
+<td>Missing/ambiguous anchors are partial evidence; forged identities/proofs are errors. Recursion preserves activation identity.</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>SF4.1</td>
+<td>SF3</td>
+<td>Strict structure codec, evidence dictionary and renderers.</td>
+<td>Standalone replay, host-controlled decode/check limits and deterministic outputs; old codecs unchanged.</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>SF4.2</td>
+<td>SF4.1</td>
+<td>New CLI mode, arguments and finite-policy input.</td>
+<td>No native <code>complete()</code> or <code>CompletedAnalysis</code>; invalid mode combinations rejected; BAP prerequisites remain explicit.</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>SF5.1</td>
+<td>SF4</td>
+<td>Root/model/oracle/capture qualification on an isolated remote source snapshot.</td>
+<td>All declared tiers pass or remain explicitly unexercised; exact hashes retained.</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>SF5.2</td>
+<td>SF5.1</td>
+<td>Compiled behavioral mutations, compatibility replay and independent review.</td>
+<td>Intended behavior observers reject mutants; compile/transport failure earns no mutation credit.</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>SF6.1</td>
+<td>SF5</td>
+<td>Source-bound corpus and payload preflight.</td>
+<td>Dump/helper/reader/normalized-request/proof identities verified; finite policy can carry the real pair.</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>SF6.2</td>
+<td>SF6.1</td>
+<td>Public API and CLI original-dump run plus saved replay.</td>
+<td>Useful admitted structural report with zero dataflow/slice work, exact control comparison and preserved unknowns.</td>
+<td>Pending</td>
+</tr>
+<tr>
+<td>SF6.3</td>
+<td>SF6.2</td>
+<td>Canonical API/CLI usage and dated validation summary; final ledger/evidence inventory.</td>
+<td>Every accepted claim has source/tool/corpus evidence. Full caller S6 and path F4 remain separate.</td>
+<td>Pending</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="sf0-freeze-interfaces-and-finite-policies">SF0: freeze interfaces and finite policies</h2>
+<p>Freeze private bound types and raw transport forms before implementing them.
+The source request/activation/proofs are immutable. The structure identity binds
+those inputs, its recovery prefix, producer/ruleset, limits and stop receipt in
+a separate hash domain from completed analysis. Avoid hash cycles.
+Freeze which selected frames and auxiliary caller-entry witnesses are retained.
+An independently validated auxiliary caller may establish an entry witness, but
+does not change the requested frame range; its evidence and work count against
+the same trusted policy.</p>
+<p>Preserve the existing feature chain and register focused tests in the root
+manifest rather than adding another Cargo package:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Intended feature/test boundary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Core <code>RecoveryResult</code></td>
+<td>Standard library only, available in core-only builds; standalone recovery tests need no external features.</td>
+</tr>
+<tr>
+<td>BAP proof-bound structural types/codecs</td>
+<td>Gate verification on <code>bap</code>; a reports-only build must not accept the BAP family by silently omitting proof fields.</td>
+</tr>
+<tr>
+<td>File-backed factory and CLI</td>
+<td><code>input</code>; add focused input/CLI test targets under <code>tests/input/</code>.</td>
+</tr>
+<tr>
+<td>Report/replay controls</td>
+<td>BAP-enabled structural contract tests under <code>tests/</code>; retain current reports-only APIs and their gates.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The authoritative model must retain <code>Ariadne.tla</code>'s recovery invariant: visited
+starts reflect attempts; decoded starts reflect admitted successful visits;
+pending and visited account for original roots and discovered local destinations;
+edges, provenance and obligations are exact. <code>FinishRecovery</code> leaves those
+control fields unchanged, so the structural product can seal a prefix before
+that action without claiming the original model's <code>Done</code>/<code>ScopeClosed</code> property.
+Model frame-link admission, partial-status propagation and budget stops as
+separate properties. Finite checks are not universal Rust/native refinement.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Policy layer</th>
+<th>Freeze and exercise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Open/read/unwind</td>
+<td>Artifact/read evidence, supported unwind profile, frame count and runtime-table entry bounds. The named Electron image exceeded the old 4,096-entry default.</td>
+</tr>
+<tr>
+<td>Preparation</td>
+<td>Existing lifting/discovery/guard/target inputs and their distinct limits; successful final request is required for a trusted structure.</td>
+</tr>
+<tr>
+<td>Owned source/proofs</td>
+<td>Nodes, edges, original captures, normalized request and proof bytes, checked references and arithmetic overflow.</td>
+</tr>
+<tr>
+<td>Recovery producer</td>
+<td>Visit count, cooperative time and retained prefix/frontier size; stop before the next Visit.</td>
+</tr>
+<tr>
+<td>Frame aggregation</td>
+<td>Total frames/nodes/edges and boundary/anchor evidence, with no inherited 8,192-node hard clamp.</td>
+</tr>
+<tr>
+<td>Saved decoding/replay</td>
+<td>Host-selected byte/node/proof/replay limits checked before expensive allocation or work. A report cannot raise host caps using its own declared limits.</td>
+</tr>
+<tr>
+<td>Rendering/publication</td>
+<td>Format/payload limits and bounded diagnostics if a valid self-contained report cannot fit. No silent graph clipping.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Choose finite defaults only after sizing the frozen workload. They are policy
+choices, not new arbitrary hard maxima. The existing frame-path 8,192-node,
+4 MiB output and 8 MiB decode defaults are unchanged and do not govern this
+new family. Boundary and zero-limit semantics must be explicit.</p>
+<p>Producer stops and verifier stops are different: a producer may emit a validated
+partial prefix with its pending work; a decoder that exhausts its verification
+budget must refuse a trusted bound result. Deadline receipts validate the exact
+recorded visit prefix and separately describe clock observations; replay does
+not pretend to reproduce elapsed time.</p>
+<h2 id="sf1sf3-build-the-structural-boundary">SF1–SF3: build the structural boundary</h2>
+<ol>
+<li>Reuse <code>Analyzer</code>'s deterministic Visit behavior. Publish only the core control
+projection and its work receipt; do not expose reaching/slice facts through
+the new type. Preserve the core-only dependency boundary.</li>
+<li>Validate the exact final prepared request through the current input ownership
+and proof-dispatch rules. Keep all effects needed for proof validation even
+though this producer does not propagate definitions. Never traverse a pending
+candidate continuation that is a final nondecodable Stop.</li>
+<li>Distinguish pending local work, failed decode endpoints, unknown indirect
+destinations, final unresolved guards, opaque call context and local edges
+leaving the declared function. Unfollowed call targets are not automatically
+pending local work; preserve call facts while following local summaries.</li>
+<li>Preserve the frame chain and independently available local maps if another
+frame cannot prepare or bind. A child without a runtime function entry may
+use only a separately verified parent direct-call entry witness; otherwise
+report the missing entry. Do not guess roots from saved PCs or slice seeds.</li>
+<li>Factor shared active-call evidence checks without widening their supported
+E8 profile or weakening the old completed binder. Equal VAs in recursive
+activations remain different frame nodes.</li>
+</ol>
+<p>Today <code>PreparationError::LimitReached</code> contains a <code>MaterializationReport</code>, not
+publishable instructions/evidence/seals. Treat it as progress diagnostics only.
+Its <code>unattempted_references</code> may not yet be finalized; derive referenced-minus-
+attempted for progress when needed, and distinguish deliberately unqueued call
+references from actual local frontiers. Preparation checkpoint sealing is out
+of scope.</p>
+<h2 id="sf4-product-and-persistence">SF4: product and persistence</h2>
+<p>The proposed CLI is a separate mode:</p>
+<pre><code class="language-text">ariadne-minidump &lt;dump&gt; --frame-structure N:M
+    [--frame-structure-limits &lt;policy.json&gt;] [existing supported BAP/input options]
+</code></pre>
+<p>This is a planned interface, not an available command. Preserve existing frame
+index/thread/entry provenance rules. Define the structural policy bundle to
+cover the relevant unwind/read, preparation, recovery, validation and publication
+limits, so the real corpus does not silently inherit an unrelated default.
+Validate <code>N &gt;= M &gt;= 0</code> against the recovered physical chain. An equal-frame
+selection yields one frame map, with no zero-edge-path claim. Missing frames in
+a truncated chain remain unavailable evidence, not an invented connection.</p>
+<p>Reject combinations with <code>--list-frame-paths</code>, NP/path-count options and
+origin/assessment modes. Track explicit full-analysis backend options: an
+explicit <code>--analysis-backend</code> or native-core-only option is incompatible with
+v1 structural mode. The implicit existing default <code>bap</code> still governs old
+full-analysis routes; it
+must not falsely label the new projection as native-core execution. Report
+<code>semantic_backend = bap</code> and <code>producer = rust-recovery/v1</code> separately.</p>
+<p>V1 saved reports retain one self-contained, deduplicated evidence dictionary.
+Resolve and validate every reference. Decode untrusted raw forms first; only
+successful replay constructs a privately owned bound object. JSON, text and
+DOT expose the same structural facts and gaps. Reject unknown schema fields,
+duplicate keys, malformed addresses and contradictory counters. A missing
+anchor does not erase valid local maps; a frame-chain relation alone is never
+rendered as a proven
+CALL edge. The new type is not accepted by origin assessment or current path
+listing. Adding a native structural producer or a new path consumer is later work.</p>
+<h2 id="sf5-independent-controls-and-remote-qualification">SF5: independent controls and remote qualification</h2>
+<p>Run all Cargo/native/model/replay/mutation/dump work in remote Windows WSL via
+the existing <code>r_windev</code> workflow. Hash-verify the task-owned source archive and
+frozen sibling dependency snapshot. Keep replay and mutation build directories
+separate under the remote root <code>target/</code>; preserve exact executable identities.
+Local work for this planning change is documentation/rendering/link validation.</p>
+<p>Required independent cases:</p>
+<ul>
+<li>Straight line, both arms of a diamond, cycle, recursion, unreachable seed,
+intentionally unfollowed call target, failed/out-of-function endpoint and
+incomplete indirect target.</li>
+<li>Drained recovery with gaps; work-stopped prefix; zero recovery work; hard
+preparation failure; independently valid frame beside an unavailable frame.</li>
+<li>Captured reached E8 link, uncaptured/unreached call, return/target mismatch,
+ambiguous call and repeated VAs in different activations.</li>
+<li>Rehashed node/edge/gap edits, changed capture bytes/spans, wrong snapshot,
+request/activation/epoch/producer, missing proof and candidate-edge promotion.</li>
+<li>Each trusted-host and producer limit at below/exact/above boundaries; integer
+overflow; proof dictionary corruption; oversized raw input and rendered output;
+verifier-budget exhaustion without trusted publication.</li>
+<li>Projection equality with completed-control fixtures; zero dataflow/slice work;
+legacy proof/version replay and unchanged current path/origin behavior.</li>
+</ul>
+<p>Add behavioral mutants for missing edges/frontiers, forged drained/coverage
+status, a Visit after queue drain, admitting an unknown guard's candidate edge,
+accepting an unreached call and ignoring an independent limit. Expected outcomes
+come from an independent oracle/model, not only the same producer and replay
+implementation. Existing native/capture regressions must name actual helpers
+and exercised ignored tests. The new producer makes no claim of native
+structural parity; optional native comparisons are separate evidence.</p>
+<p>Run the applicable root checks remotely on the final source snapshot:</p>
+<pre><code class="language-sh">cargo fmt --all -- --check
+cargo test --offline --locked
+cargo test --offline --locked --no-default-features
+cargo clippy --offline --locked --all-features --all-targets -- -D warnings
+python3 tools/check_rust_layout.py
+python3 tools/check_doc_links.py
+</code></pre>
+<p>SF0/SF5 must create and document the new structural model/oracle/mutation
+entry points before citing their commands as available. Ordinary Cargo success
+cannot substitute for ignored capture tests, model checking or a real dump.</p>
+<h2 id="sf6-named-dump-acceptance">SF6: named dump acceptance</h2>
+<p>Use <code>dump_03958DA4FCA844A786262A1053</code>, SHA-256
+<code>9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab</code>,
+thread 23668, physical pair 1 → 0. Start from the exact recorded roots/premises
+and named matching helper/source evidence. No expected destination is a new root.</p>
+<p>The <a href="../../evidence/Ariadne/caller-semantic-coverage/20261015/artifacts/final-dump-admission-20261015T075602/probe-summary.json">final-helper refresh 075602</a>
+provides a frozen control oracle: caller 9,590 visited, 9,589 decoded and 11,321
+edges; callee 778 decoded and 895 edges. Materialization's 9,600 attempted
+starts is a different counter. Compare those sets/receipts exactly only when
+the prepared request/proofs and source identities are identical; record and
+explain newly discovered differences instead of hardcoding these counts.</p>
+<p>Preserve the caller boundary at <code>0x00007ff7744035c9</code>: its <code>DecodeFailed</code>
+obligation reflects a final unknown guarded load, not an observed architectural
+fault there. Preserve the two callee indirect barriers and original premises.
+A reached/verified call link may be shown; missing admission evidence remains
+an unresolved link rather than an invented edge.</p>
+<p>Preflight the whole self-contained payload: the recorded proof reports alone
+are about 25 MiB for the caller and 7.4 MiB for the callee, before other source
+and request evidence. Exercise the public API, CLI with explicit finite corpus
+policy, saved decode/replay and text/DOT output. An isolated positive run must
+not need the native-core executable, but still needs the BAP lifter/runtime,
+LLVM reference and actual capture prerequisites it claims to exercise.</p>
+<p>Pass SF6 when the new structural family publishes and independently validates
+useful control evidence with zero dataflow/slice propagation and precise gaps.
+This does not require a path, SCC summary, full caller parity or exact history.
+Freeze source/tool/policy/query identities, observer logs, original/stored hashes
+and stop receipts under <code>evidence/Ariadne/frame-structure/</code>. Preserve older
+qualification bytes and failure history.
+If SF6 exposes a runtime correction, reopen its affected implementation stages
+and repeat SF5's affected source-bound gates before crediting the corrected run.</p>
+<h2 id="completion-ledger-and-planning-validation">Completion ledger and planning validation</h2>
+<p>All SF tasks remain pending. Acceptance requires SF0–SF6 evidence and independent
+review, canonical API/CLI usage plus a dated validation summary, and an accurate
+ledger. Existing caller S6 and frame-path F4 remain open unless their own gates
+are separately met.</p>
+<p>2026-10-16 planning validation passes documentation/navigation checks for 74
+connected documents, 73 context sections and 2,148 local links, plus scoped diff
+hygiene. HTML rendering and destination checks are presentation-only validation.
+No implementation or execution acceptance is supplied.</p>
+<footer class="note">Rendered from <code>.agents/plans/frame-structure-report.md</code> on 2026-10-16. Canonical source SHA-256: <code>7866d392580c883b1cece1438eb29476cfb0485f1a880c6f6ac7877a43b14a76</code>. This page is a presentation copy; the plan remains in .agents/plans/.</footer></main></body></html>

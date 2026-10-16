@@ -21,7 +21,7 @@
 
 For the wider context, see the optional [documentation map](documentation-map.md).
 
-The [Rust source-layout consolidation plan](../Plans/completed/rust-source-layout.md)
+The [Rust source-layout consolidation plan](../.agents/plans/completed/rust-source-layout.md)
 implements the user-requested single Cargo package with sources in `src/`, tests
 in `tests/`, and build artifacts in the root `target/`.
 The [completed layout and validation](Ariadne/architecture.md#source-layout-and-development) record the
@@ -34,7 +34,7 @@ now have [Stage E completion](Ariadne/typed-replay-design.md#finite-corpus-and-c
 [current roadmap](../ROADMAP.md)
 and [proof-boundary record](Ariadne/semantic-assurance.md#universal-rust-refinement-boundary) distinguish
 that progress from generated model-based replay or a Rust refinement proof.
-The scoped [Priority 4 workload-performance implementation plan](../Plans/completed/priority-4-workload-performance-plan.md)
+The scoped [Priority 4 workload-performance implementation plan](../.agents/plans/completed/priority-4-workload-performance-plan.md)
 historically qualified its original 98-instruction Windows minidump and a
 measured predecessor cache under the earlier LLVM-backed pipeline. That result
 does not qualify the current native backend or the re-pinned I4 query. Incoming sets are recomputed only when local predecessors change;

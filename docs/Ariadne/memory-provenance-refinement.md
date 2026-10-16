@@ -27,10 +27,10 @@ proposed types, algorithms, limits and report validation.
 
 **Where to go next.**
 
-- [Active specification synchronization](../../Plans/specification-sync.md) —
+- [Active specification synchronization](../../.agents/plans/specification-sync.md) —
   current finite scalar/alias model and its separate remote-check boundary.
 
-- [Implementation plan](../../Plans/memory-provenance-refinement.md) — M0–M4
+- [Implementation plan](../../.agents/plans/memory-provenance-refinement.md) — M0–M4
   contract, symbolic assessment, backward values, product and qualification.
 
 - [Investigation contracts](investigation-design.md) — exact query binding,
@@ -292,7 +292,7 @@ are not prerequisites for constant-address or justified equal-base checks.
 
 ## Implementation details
 
-The [implementation plan](../../Plans/memory-provenance-refinement.md) tracks
+The [implementation plan](../../.agents/plans/memory-provenance-refinement.md) tracks
 M0–M4. The source now supplies the entry point and separate v1 report described
 below; the model and complete qualification gates remain pending. Logical type
 sketches are explanatory where their names differ from the exported Rust types.
