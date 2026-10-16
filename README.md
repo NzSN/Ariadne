@@ -112,7 +112,8 @@ on supported lifting behavior and captured evidence. The independent AMD64
 instruction-step/Lean track is **retired**, including its user64 milestones and
 full-manual roadmap. Its ISA specifications, coverage inventories and obsolete
 checkers were removed on 2026-10-11. Historical artifacts remain in Git;
-the root Lean reference and recorded evidence are retained.
+their model guides were removed on 2026-10-16. The root Lean reference and
+recorded evidence are retained.
 The [semantic assurance decision](docs/Ariadne/semantic-assurance.md) defines
 this boundary. Analysis-level TLA+ specifications, replay and mutation checks
 remain active.
@@ -299,10 +300,8 @@ cross-location correlations, while valuations expose finite per-location value
 sets. It does not reconstruct historical execution, prove ISA semantics, or
 justify applying a crash-time observation to an earlier program point.
 
-The independent x86-64 instruction-rule research is retired and its
-specifications were removed. The [historical forms and assumptions](docs/x86-64-semantics.md)
-remain as reference; active supplied stateflow and BAP lifting retain their
-separate contracts.
+The [BAP trust boundary](docs/Ariadne/semantic-assurance.md#active-responsibility)
+keeps supplied stateflow semantics and instruction lifting under separate contracts.
 
 The slice follows all modeled inputs of each included instruction. It does not
 yet select individual operands, include control dependencies, or establish which
@@ -330,7 +329,6 @@ state transitions, invariants, and interpretation of partial results.
 | [docs/implementation.md](docs/implementation.md) | Rust API, model correspondence, and implementation boundaries |
 | [docs/llvm-mc-adapter.md](docs/llvm-mc-adapter.md) | Optional pinned decoder build, snapshot input contract, and validation |
 | [docs/machine-state-design.md](docs/machine-state-design.md) | Implemented Rust design for abstract stateflow with generated conformance and report/CLI acceptance |
-| [docs/x86-64-semantics.md](docs/x86-64-semantics.md) | Historical instruction-rule research and archive references; specifications removed |
 | [mbt/README.md](mbt/README.md) | Mirrors/MirrorRust MBT setup, checked corpus, mutation gate, and evidence |
 | [Specs/AriadneTypes.tla](Specs/AriadneTypes.tla) | Shared Apalache aliases for semantic identities, labels, states, and values |
 | [Specs/AriadneMachineCommon.tla](Specs/AriadneMachineCommon.tla) | Stateless machine address, local-edge, and effect contracts shared by machine models |

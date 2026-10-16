@@ -3,7 +3,8 @@
 ## Context and follow-up
 
 **Status.** Active analysis-model authority. Retired AMD64/x86-64 ISA specifications,
-coverage inventories and their checkers were removed on 2026-10-11.
+coverage inventories and their checkers were removed on 2026-10-11; the retired
+model guides were removed on 2026-10-16.
 The [specification synchronization ledger](../.agents/plans/specification-sync.md)
 records the subsequent source audit and separate qualification limits.
 

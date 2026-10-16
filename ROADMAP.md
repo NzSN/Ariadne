@@ -10,6 +10,11 @@
 
 **Where to go next.**
 
+- [Structural frame report: Stage 5.1](docs/Ariadne/investigation-design.md#structural-frame-report-before-dataflow)
+  and [SF0–SF6 plan](.agents/plans/frame-structure-report.md) — selected structural-only
+  delivery before caller dataflow; contract/model, implementation and remote
+  qualification are pending. Existing completed-analysis gates remain separate.
+
 - [Caller normal-flow coverage](docs/Ariadne/caller-semantic-coverage-design.md)
   and [active S0–S6 plan](.agents/plans/caller-semantic-coverage.md) — source-qualified
   terminal/load support removes the original caller coverage barriers; completing
@@ -58,7 +63,7 @@ The [design](docs/Ariadne/caller-semantic-coverage-design.md), [active plan](.ag
 
 Original-dump probe `073143` removes all 30 caller coverage barriers and retains all target, root and premise facts. The initial MOVAPS is aligned under the recorded premises; the later load is still unknown. Caller recovery now decodes 9,589 sites and 11,321 edges, then Rust and native completion exhaust their selected action budgets. The callee completes with full request/state parity and two remaining indirect barriers. NP10 frame listing is unavailable with `missing-frame-query` because no completed caller query exists.
 
-The next acceptance gate is completed caller analysis and full native/Rust state comparison under declared budgets. Passing terminal admission or native initialization does not satisfy it. Keep S6 and its plan open, and report load alignment, callee targets and frame-path availability separately; normal-flow closure does not establish historical execution or whole-machine coverage.
+The next acceptance gate for this completed-analysis milestone is completed caller analysis and full native/Rust state comparison under declared budgets. Passing terminal admission or native initialization does not satisfy it. Keep S6 and its plan open, and report load alignment, callee targets and frame-path availability separately; normal-flow closure does not establish historical execution or whole-machine coverage. The separately planned Stage 5.1 structural report does not discharge S6.
 
 ## Investigation direction
 

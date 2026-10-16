@@ -4,7 +4,8 @@
 
 **Status.** Current assurance contract: BAP lifting is trusted, independent ISA
 proofs are retired and their specifications/checkers were removed on 2026-10-11.
-Universal Rust refinement remains open.
+Their model guides were removed on 2026-10-16. Universal Rust refinement remains
+open.
 
 **Why this document exists.** [BAP assessment](bap-analysis-core-design.md#architectural-rationale) separates external semantics from ownership of analysis correctness.
 
@@ -115,24 +116,35 @@ claim. Active effects/progress inventories continue to exclude retired models.
 
 The [last retained specification tree](https://github.com/NzSN/Ariadne/tree/01ae404e8c8556966e219118945082ff8e213f7e/Specs)
 and [obsolete tooling](https://github.com/NzSN/Ariadne/tree/01ae404e8c8556966e219118945082ff8e213f7e/tools)
-remain available at an immutable Git revision. Historical documentation links
-to removed files use that revision; old commands require that historical checkout.
+remain available at an immutable Git revision. Old commands require that historical checkout.
 The pre-retirement state also remains at `2ba80a9`.
 
-The root [Lean library](../../lean/README.md), historical AMD64 reference
-documents and machine-readable Stage D evidence remain for interpretation of
-earlier results. Recorded evidence keeps its original bytes, source paths and
+On **2026-10-16**, the user also requested removal of the model documentation.
+All 26 `docs/amd64-*.md` guides and `docs/x86-64-semantics.md` were removed,
+together with their navigation entries and the retired ISA terminology section.
+The root [Lean reference](../../lean/README.md) retains a short scope notice in
+place of its component guide. Git history preserves the removed documentation.
+
+The Lean sources and machine-readable Stage D evidence remain for interpretation
+of earlier results. Recorded evidence keeps its original bytes, source paths and
 pass flags; the moved manual pin does not rebind any previous qualification.
 Retirement and removal leave former proof obligations unresolved. Active product
 gates depend on BAP projection and analysis contracts.
 
-Fresh cleanup validation passes the three active-qualification tests, SANY
+The **2026-10-11** cleanup validation passed the three active-qualification tests, SANY
 parsing of all 17 remaining TLA+ modules, documentation links and Rust layout.
 The qualification test's stale mock checkout now supplies the corpus file read
 by the BAP runner; the original HEAD test independently reproduced that fixture
 failure. A hash audit confirms 677 existing implementation/fixture/model/Lean/
 raw-evidence files retain their pre-cleanup bytes, as does the relocated manual
 pin. These are cleanup checks, not model exploration, native or release qualification.
+
+The **2026-10-16** documentation-removal check passes navigation and section
+validation for all 73 remaining connected documents and 2,129 local links.
+A separate check passes all 157 local Markdown/HTML links in the chat reports;
+`git diff --check` passes. The source diff confirms that runtime code, active
+model bodies, retained Lean sources and raw evidence are unchanged. No build,
+model campaign or dump analysis was rerun for this documentation cleanup.
 
 ## Qualification limits preserved
 

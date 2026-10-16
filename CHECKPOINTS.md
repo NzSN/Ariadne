@@ -17,6 +17,14 @@
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
+## 2026-10-16 — Retired ISA model documentation removed
+
+Removed the 26 AMD64 model guides and the initial x86-64 semantics guide after
+their specifications had already been removed. Navigation, terminology and the
+Lean README now point to the [active assurance boundary](docs/Ariadne/semantic-assurance.md#dependency-audit-and-retained-references).
+The retained Lean sources, raw evidence and active analysis models are unchanged;
+this documentation cleanup does not refresh earlier qualification results.
+
 ## 2026-10-15 — Caller normal-flow coverage; completed caller analysis still open
 
 The [caller coverage correction](docs/Ariadne/caller-semantic-coverage-design.md) implements checked local normal-completion terminals and exact MOVAPS-load guards. The [S0–S6 ledger](.agents/plans/caller-semantic-coverage.md) remains active: S0–S5 pass their source-bound scope, while S6 still lacks completed caller native/Rust state equality. The [qualification record](evidence/Ariadne/caller-semantic-coverage/20261015/README.md) separates the final helper, earlier full run and passing admission refresh.
@@ -1322,9 +1330,7 @@ TLA+/Lean correspondence, and conservative analysis-projection obligations.
 - [Delivery roadmap](ROADMAP.md)
 - [Rust implementation](docs/implementation.md)
 - [LLVM MC adapter](docs/llvm-mc-adapter.md)
-- [User64 profile and acceptance rules](docs/amd64-user64.md)
-- [AMD64 validation record](docs/amd64-validation.md)
-- [AMD64 task ledger](docs/amd64-semantics-tasks.md)
+- [Retired ISA scope and retained records](docs/Ariadne/semantic-assurance.md#dependency-audit-and-retained-references)
 - [Model-based testing evidence](mbt/README.md)
 - [current roadmap](ROADMAP.md)
 - [Stage A source review and validation](docs/Ariadne/operand-effects-design.md#memory-immediate-mov-delivery-2026-09-28)

@@ -245,7 +245,7 @@ separate choice.
 
 References: [original adapter](../llvm-mc-adapter.md),
 [core correspondence](../implementation.md),
-[historical user64 acceptance](../amd64-user64.md),
+[semantic assurance boundary](semantic-assurance.md),
 [shared effect contract](../../Specs/AriadneMachineCommon.tla),
 [native decoder](../../native/llvm_mc/decode.cpp), LLVM
 [MCOperand](https://llvm.org/doxygen/classllvm_1_1MCOperand.html) and

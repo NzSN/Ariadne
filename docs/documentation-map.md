@@ -15,7 +15,7 @@ motivating problem, contribution, direct next reading and unresolved limits.
 Readers can follow the subject without returning to this map.
 
 The [terminology convention](terminology.md) defines shared words and required
-qualifiers across active contracts, reports, plans and retired research.
+qualifiers across active contracts, reports, plans and historical evidence.
 
 ## Main problem-to-delivery paths
 
@@ -51,7 +51,6 @@ flowchart TD
 | How are analysis results presented? | [Rendering and minidump report design](Ariadne/result-rendering.md) | [Presentation validation](Ariadne/result-rendering.md#presentation-acceptance), [examples](Ariadne/result-rendering.md#investigator-cli-examples) | Each result family retains its own meaning and completeness rules. |
 | How do replay, supplied IR and stateflow fit? | [Typed replay](Ariadne/typed-replay-design.md), [stateflow](machine-state-design.md) | [Replay guide](../mbt/stage-e/README.md), [completion evidence](Ariadne/typed-replay-design.md#finite-corpus-and-claim-boundary), [IR guide](Ariadne/typed-replay-design.md#direct-verified-ir) | Supplied semantics remain premises; binary input does not reconstruct original LLVM IR. |
 | How is performance assessed and improved? | [Workload measurement](Ariadne/workload-performance-design.md), [investigation optimization](Ariadne/workload-performance-design.md#investigation-performance) | [Native investigation qualification](Ariadne/workload-performance-design.md#native-investigation-qualification), [historical workload result](Ariadne/workload-performance-design.md#historical-llvm-workload-qualification) | Budgets and measurements apply to their exact backend, host and workload. |
-| Why are old ISA models retained? | [Semantic assurance](Ariadne/semantic-assurance.md) | [Retired ISA reference](amd64-semantics-design.md), [retained evidence](../evidence/Ariadne/README.md) | The independent ISA proof track is retired; its obligations were not proved by retirement. |
 
 ## Maintaining the network
 
@@ -77,7 +76,7 @@ flowchart TD
 ## Document catalogue
 
 The catalogue below provides an entry to every document with contextual
-navigation, including completed plans and retired research.
+navigation, including completed plans and retained evidence.
 
 The [investigation correctness-fix plan](../.agents/plans/completed/investigation-correctness-fixes.md)
 addresses two reviewed gaps in the first-question implementation: full Windows
@@ -148,11 +147,8 @@ implemented repairs and exercised checks from real-Windows qualification.
 
 ### Formal-model, native-tool and evidence guides
 
-- [Archived AMD64 source and coverage inventory](https://github.com/NzSN/Ariadne/blob/01ae404e8c8556966e219118945082ff8e213f7e/Specs/AMD64/README.md)
-  — removed from the checkout; see the [removal and retained-reference policy](Ariadne/semantic-assurance.md#dependency-audit-and-retained-references).
 - [Ariadne formal model](../Specs/README.md).
 - [Retained Ariadne evidence](../evidence/Ariadne/README.md).
-- [AMD64 Lean formalization](../lean/README.md).
 - [Model-based tests for Ariadne](../mbt/README.md).
 - [Stage E generated MirrorRust replay](../mbt/stage-e/README.md).
 - [Pinned BAP instruction helper](../native/bap/README.md).
@@ -169,33 +165,3 @@ implemented repairs and exercised checks from real-Windows qualification.
 - [Stage A implementation plan: memory-immediate MOV effects](../.agents/plans/completed/stage-a-memory-immediate-mov-plan.md).
 - [Stage E completion plan](../.agents/plans/completed/stage-e-completion.md).
 - [Stage E: first MirrorRust integration stage](../.agents/plans/completed/stage-e-mirrorrust-integration.md).
-
-### Retired ISA research
-
-- [AMD64 architectural CPU state](amd64-architectural-state.md).
-- [AMD64 atomic CPU and memory execution](amd64-atomic-execution.md).
-- [AMD64 concrete memory and captured knowledge](amd64-concrete-memory.md).
-- [AMD64 control-transfer foundation](amd64-control.md).
-- [AMD64 external and profile-dependent instructions](amd64-external.md).
-- [AMD64 instruction-form catalogue and legality boundary](amd64-instruction-forms.md).
-- [AMD64 mul/div execution worktree checkpoint](amd64-integer-muldiv-execution.md).
-- [AMD64 integer semantic kernels](amd64-integer-semantics.md).
-- [AMD64 shift and rotate execution binding](amd64-integer-shift-execution.md).
-- [AMD64 port-I/O foundation](amd64-io.md).
-- [AMD64 Lightweight Profiling control-block layout](amd64-lwp-layout.md).
-- [AMD64 machine access boundary](amd64-machine-access.md).
-- [AMD64 memory and exception foundation](amd64-memory-exceptions.md).
-- [AMD64 WB/WC memory ordering](amd64-memory-ordering.md).
-- [AMD64 memory types and atomic RMW foundation](amd64-memory-types-atomics.md).
-- [AMD64 MONITORX and MWAITX](amd64-monitor.md).
-- [AMD64 executable operands and form coupling](amd64-operands.md).
-- [AMD64 page-walk certificates](amd64-page-walk.md).
-- [AMD64 semantics and Lean correspondence](amd64-semantics-design.md).
-- [AMD64 delivery tasks](amd64-semantics-tasks.md).
-- [AMD64 string and repetition foundation](amd64-strings.md).
-- [AMD64 raw system controls and execution guards](amd64-system-state.md).
-- [Typed AMD64 register-view foundation](amd64-typed-foundation.md).
-- [Conservative unsupported-semantics analysis contract](amd64-unsupported.md).
-- [Verified 64-bit user-mode semantics](amd64-user64.md).
-- [AMD64 foundation validation, 2026-09-22](amd64-validation.md).
-- [Executable x86-64 instruction semantics](x86-64-semantics.md).

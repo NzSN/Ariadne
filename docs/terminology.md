@@ -10,7 +10,7 @@ status. This is a documentation change, not new runtime qualification.
 **Why this document exists.** The [project overview](../README.md) describes
 snapshot-based machine-code investigation. The [architecture](Ariadne/architecture.md)
 and [formal-model guide](../Specs/README.md) distinguish several analysis paths,
-while active designs and retired ISA research sometimes share words such as
+while analysis contracts and retained evidence sometimes share words such as
 state, provenance, backend, complete and verified. Those words need explicit
 scope to keep claims interpretable.
 
@@ -81,9 +81,8 @@ Lookup: [input identities](#snapshot-input-and-identity),
 [investigation answers](#investigation-evidence-and-answers),
 [fault-time arithmetic](#fault-time-address-assessments),
 [memory refinement](#memory-refinement-and-backward-numerical-reasoning),
-[stateflow/IR](#separate-abstract-stateflow-and-supplied-ir-paths),
-[qualification](#validation-qualification-and-delivery-claims) and
-[retired ISA terms](#retired-isa-research-terminology).
+[stateflow/IR](#separate-abstract-stateflow-and-supplied-ir-paths) and
+[qualification](#validation-qualification-and-delivery-claims).
 
 ## Names, abbreviations and identifier spelling
 
@@ -393,31 +392,6 @@ For a retained result, replace “freshly passed” with “retained result appl
 after complete identity verification,” and say whether verification was actually
 performed. Report budgets using their measured statistic, such as median
 end-to-end latency or sum of phase medians; these are different measurements.
-
-## Retired ISA research terminology
-
-Owners: [retirement decision](Ariadne/semantic-assurance.md#dependency-audit-and-retained-references),
-[historical AMD64 design](amd64-semantics-design.md),
-[captured/concrete memory distinction](amd64-concrete-memory.md) and
-[Lean reference](../lean/README.md).
-Use these meanings when reading retained research; do not import its milestones
-into active validation.
-
-| Canonical term | Historical meaning and present boundary |
-| --- | --- |
-| **Independent instruction-step track** | Retired AMD64 execution/TLA+/Lean project, including Stage D and user64 milestones. ISA specifications, inventories and checkers were removed on 2026-10-11; retained Lean and evidence remain historical. Retirement/removal do not discharge old proof obligations. |
-| **Architectural CPU state** | Mode/profile, register banks, flags, segments and application-visible processor state in the ISA models. It is not the finite recovery/dataflow algorithm state. |
-| **Architectural machine state / concrete memory** | Composed execution state with a total physical-byte store (`ConcreteMemory`). A chosen default concrete byte is part of modeled state, not a value inferred from absent capture. |
-| **Captured memory knowledge** | Finite `MemoryState` availability/observations constraining possible concrete stores. Missing knowledge is neither an architectural byte nor an architectural fault. |
-| **Architecturally undefined / implementation-defined** | Relational result choices constrained by the instruction contract, or behavior tied to an explicit consistent processor profile. Neither is synonymous with absent capture. |
-| **Instruction form / form-profile case** | Exact encoding/operand alternatives and, for a case, the selected execution profile. A source-table row, partial register body or reviewed mnemonic does not complete all forms. |
-| **Processor profile / execution mode** | Declared architecture capabilities/configuration and current mode/privilege facts. Distinguish these from an Ariadne projection or assessment profile. |
-| **Effective offset / linear address / physical address** | Separate architectural address stages in the memory models. File offsets and process VAs cannot substitute for these stages. |
-| **Page-walk certificate** | Checked raw-entry/byte evidence for a specified translation walk. Missing or invalid evidence is a tool-input/knowledge limitation, not automatically an architectural page fault. |
-| **Instruction body / retirement / commit / restart** | Semantic value/effect calculation, successful architectural completion, specified effect publication and interrupted/faulted continuation rules. Distinguish instruction retirement from project-track retirement and effect commit from Git commit. |
-| **Memory event / RMW / ordering** | Architectural reads/writes, read-modify-write events and visibility/order relations. A memory RMW is not automatically atomic; these contracts are separate from `memory:any` weak updates. |
-| **Port I/O / device environment / monitor state** | Explicit external behavior in the historical ISA models, not additional captured minidump effects implicitly supported by production BAP projection. |
-| **Component proof / TLA+-Lean correspondence** | Proof of the named helper or representation relation. It does not certify whole-ISA execution, hardware conformance or Ariadne's current analyzer. |
 
 ## Disambiguation examples
 

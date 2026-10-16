@@ -75,8 +75,8 @@ corpus and unmet clauses; a partial tier does not satisfy a full acceptance gate
 Earlier backend performance measurements do not qualify a replacement backend.
 
 The independent AMD64 instruction-step track is retired; its ISA specifications,
-coverage inventories and checkers have been removed. Retained Lean sources and
-recorded evidence are historical reference. Follow the
+model documentation, coverage inventories and checkers have been removed.
+Retained Lean sources and recorded evidence are historical reference. Follow the
 [BAP trust boundary](docs/Ariadne/semantic-assurance.md): pinned lifting is a
 trusted dependency; Ariadne owns transport, projection, analysis and evidence
 validation. Keep analysis-level TLA+ models, replay and mutation checks active.
