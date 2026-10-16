@@ -131,8 +131,22 @@ pub struct BoundFramePaths {
 }
 
 fn call_target(node: &GraphNode, return_pc: u64) -> Option<u64> {
-    let s = &node.evidence;
-    if !node.call
+    captured_call_target(
+        &node.evidence,
+        node.call,
+        &node.fall,
+        &node.targets,
+        return_pc,
+    )
+}
+pub(crate) fn captured_call_target(
+    s: &SiteEvidence,
+    call: bool,
+    fall: &[u64],
+    targets: &[u64],
+    return_pc: u64,
+) -> Option<u64> {
+    if !call
         || !s.captured
         || !super::validate::site_valid(s)
         || s.bytes_hex.len() != 10
@@ -143,7 +157,7 @@ fn call_target(node: &GraphNode, return_pc: u64) -> Option<u64> {
     let b = super::frame_unwind::unhex(&s.bytes_hex).ok()?;
     let next = s.va.checked_add(5)?;
     let target = next.wrapping_add_signed(i64::from(i32::from_le_bytes(b[1..5].try_into().ok()?)));
-    (next == return_pc && node.fall == [next] && node.targets == [target]).then_some(target)
+    (next == return_pc && fall == [next] && targets == [target]).then_some(target)
 }
 /// Entry of a leaf activation is supplied only by its verified active direct call.
 pub fn active_frame_entry(
@@ -386,6 +400,14 @@ fn validate_input(input: &Input) -> Result<(), Error> {
 
 #[cfg(feature = "bap")]
 fn validate_guarded_graph(chain: &CapturedFrameChain, graph: &FrameGraph) -> Result<(), Error> {
+    validate_guarded_graph_inner(chain, graph, false)
+}
+#[cfg(feature = "bap")]
+fn validate_guarded_graph_inner(
+    chain: &CapturedFrameChain,
+    graph: &FrameGraph,
+    structural: bool,
+) -> Result<(), Error> {
     use crate::bap::guard_admission as guard;
     let Some(evidence) = &graph.guard_admission else {
         if [guard::LEGACY_PROFILE, guard::PROFILE]
@@ -437,7 +459,13 @@ fn validate_guarded_graph(chain: &CapturedFrameChain, graph: &FrameGraph) -> Res
         || input.activation.thread_id != chain.thread_id
         || input.activation.frame_activation
             != format!("{}:{}:0x{:016x}", chain.chain_id, graph.frame, frame.sp)
-        || frame.function_begin != Some(graph.entry)
+        || if structural {
+            frame
+                .function_begin
+                .is_some_and(|entry| entry != graph.entry)
+        } else {
+            frame.function_begin != Some(graph.entry)
+        }
         || input.roots.len() != 1
         || input.roots[0].site != format!("0x{:016x}", graph.entry)
         || !input.roots[0].function_entry
@@ -452,9 +480,10 @@ fn validate_guarded_graph(chain: &CapturedFrameChain, graph: &FrameGraph) -> Res
             "guarded frame activation, entry or request binding changed",
         ));
     }
-    if input.premises.len() != 1
-        || input.premises[0].origin != guard::PremiseOrigin::AbiNormalCall
-        || input.premises[0].policy != guard::ABI_POLICY
+    if (!structural || !input.premises.is_empty())
+        && (input.premises.len() != 1
+            || input.premises[0].origin != guard::PremiseOrigin::AbiNormalCall
+            || input.premises[0].policy != guard::ABI_POLICY)
     {
         return Err(invalid("guarded frame normal-call premise absent"));
     }
@@ -577,7 +606,7 @@ fn validate_guarded_graph(chain: &CapturedFrameChain, graph: &FrameGraph) -> Res
             ));
         }
     }
-    if evidence.composition.is_some() || !guard::is_legacy(report) {
+    if !structural && (evidence.composition.is_some() || !guard::is_legacy(report)) {
         // Replay only structural recovery. Stopping with an empty pending set
         // avoids FinishRecovery and every dataflow/slice action.
         let mut recovery = crate::Analyzer::new(normalized_request.clone())?;
@@ -597,6 +626,196 @@ fn validate_guarded_graph(chain: &CapturedFrameChain, graph: &FrameGraph) -> Res
         {
             return Err(invalid(
                 "composed frame topology or coverage gaps differ from sealed recovery",
+            ));
+        }
+    }
+    Ok(())
+}
+
+/// Reuse complete source/effect/proof checks without draining recovery or requiring completed analysis.
+#[cfg(feature = "bap")]
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn validate_frame_recovery_sources(
+    chain: &CapturedFrameChain,
+    frame: usize,
+    entry: u64,
+    identity: &Identity,
+    normalized: serde_json::Value,
+    sites: Vec<SiteEvidence>,
+    report: crate::bap::guard_admission::Report,
+    composition: Option<crate::bap::composition::Report>,
+    target_resolution: Option<crate::bap::target_resolution::Report>,
+    decoder_records: &BTreeMap<String, String>,
+) -> Result<(), Error> {
+    validate_structural_decode_sources(&report, &sites, decoder_records)?;
+    let graph = FrameGraph {
+        frame,
+        identity: identity.clone(),
+        entry,
+        nodes: Vec::new(),
+        edges: Vec::new(),
+        gaps: Vec::new(),
+        guard_admission: Some(GuardFrameEvidence {
+            report,
+            composition,
+            target_resolution,
+            normalized,
+            sites,
+        }),
+    };
+    validate_guarded_graph_inner(chain, &graph, true)
+}
+
+/// The original decoded continuation is independent of the final guard Stop.
+/// Require every attempted captured source's decode receipt before considering
+/// opaque effects, so omitting a receipt cannot evade the control checks.
+#[cfg(feature = "bap")]
+pub(crate) fn validate_structural_decode_sources(
+    report: &crate::bap::guard_admission::Report,
+    sites: &[SiteEvidence],
+    decoder_records: &BTreeMap<String, String>,
+) -> Result<(), Error> {
+    use crate::bap::guard_admission::ControlKind;
+    let evidence: BTreeMap<_, _> = sites.iter().map(|site| (site.va, site)).collect();
+    let expected: BTreeSet<_> = report
+        .input
+        .sites
+        .iter()
+        .filter(|source| !source.bytes_hex.is_empty())
+        .map(|source| source.site.clone())
+        .collect();
+    if decoder_records.keys().cloned().collect::<BTreeSet<_>>() != expected {
+        return Err(invalid("captured structural decode receipt domain changed"));
+    }
+    for source in report
+        .input
+        .sites
+        .iter()
+        .filter(|source| !source.bytes_hex.is_empty())
+    {
+        let address = crate::bap::core_adapter::address(&source.site)?;
+        let site = evidence
+            .get(&address)
+            .ok_or_else(|| invalid("decoded source evidence absent"))?;
+        let raw = crate::llvm_mc::protocol::parse(&decoder_records[&source.site])?;
+        let opcode = (raw.opcode != "-").then_some(raw.opcode.as_str());
+        if !site.captured
+            || site.bytes_hex != source.bytes_hex
+            || site.opcode.as_deref() != opcode
+            || raw.decoded.address != address
+            || (raw.decoded.status != "invalid"
+                && raw.decoded.length != (source.bytes_hex.len() / 2) as u64)
+        {
+            return Err(invalid(
+                "captured structural decoder opcode/address/extent changed",
+            ));
+        }
+        if source.control.kind == ControlKind::Stop {
+            let terminal = site.semantic_status.as_deref() == Some("normal-flow-terminal");
+            if terminal {
+                let receipt = crate::bap::guard_admission::terminal_receipt(&report.input, address)
+                    .ok_or_else(|| invalid("captured structural terminal receipt absent"))?;
+                crate::bap::guard_admission::terminal_valid(source, receipt)?;
+                if receipt.reference.decoder_record != decoder_records[&source.site] {
+                    return Err(invalid(
+                        "captured structural terminal decode receipt changed",
+                    ));
+                }
+            }
+            if !source.opaque
+                || !source.control.fall.is_empty()
+                || !source.control.targets.is_empty()
+                || (!terminal && source.control.complete)
+                || (raw.decoded.status == "ok"
+                    && !matches!(
+                        site.semantic_status.as_deref(),
+                        Some(
+                            "normal-flow-terminal"
+                                | "decode-disagreement"
+                                | "control-disagreement"
+                                | "opaque-unsupported"
+                                | "operand-binding-disagreement"
+                        )
+                    ))
+            {
+                return Err(invalid(
+                    "captured structural Stop lacks its explicit decode/semantic barrier",
+                ));
+            }
+            continue;
+        }
+        let kind = raw
+            .decoded
+            .kind
+            .ok_or_else(|| invalid("captured structural candidate lacks decoded control"))?;
+        if source.control.kind
+            != crate::bap::guard_admission::CandidateControl::from_instruction(
+                &crate::Instruction {
+                    kind,
+                    ..Default::default()
+                },
+            )
+            .kind
+        {
+            return Err(invalid("captured structural candidate kind changed"));
+        }
+        let expected_fall = if matches!(
+            kind,
+            InstructionKind::Ordinary | InstructionKind::Conditional | InstructionKind::Call
+        ) {
+            vec![format!(
+                "0x{:016x}",
+                address
+                    .checked_add(raw.decoded.length)
+                    .ok_or_else(|| invalid("decoded continuation overflow"))?
+            )]
+        } else {
+            Vec::new()
+        };
+        if source.control.fall != expected_fall {
+            return Err(invalid("captured structural original continuation changed"));
+        }
+        match kind {
+            InstructionKind::Jump | InstructionKind::Conditional => {
+                let target = raw
+                    .decoded
+                    .target
+                    .ok_or_else(|| invalid("direct decoded branch target absent"))?;
+                if source.control.targets != [format!("0x{target:016x}")] {
+                    return Err(invalid("captured structural direct target changed"));
+                }
+            }
+            InstructionKind::Call => {
+                let targets = raw
+                    .decoded
+                    .target
+                    .into_iter()
+                    .map(|target| format!("0x{target:016x}"))
+                    .collect::<Vec<_>>();
+                if source.control.targets != targets {
+                    return Err(invalid("captured structural call target changed"));
+                }
+            }
+            InstructionKind::Ordinary | InstructionKind::Return => {
+                if raw.decoded.target.is_some() || !source.control.targets.is_empty() {
+                    return Err(invalid("nonbranch captured source gained a target"));
+                }
+            }
+            InstructionKind::Indirect => {
+                if raw.decoded.target.is_some() {
+                    return Err(invalid("indirect decoded source gained a direct target"));
+                }
+            }
+            InstructionKind::Stop => {
+                return Err(invalid("nonterminal candidate has decoded Stop control"));
+            }
+        }
+        if kind != InstructionKind::Indirect
+            && source.control.complete
+                != (kind != InstructionKind::Call || raw.decoded.target.is_some())
+        {
+            return Err(invalid(
+                "captured structural original control completeness changed",
             ));
         }
     }

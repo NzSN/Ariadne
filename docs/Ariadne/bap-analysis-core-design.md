@@ -260,8 +260,13 @@ and payload dependencies. This is producer profile `bap-bit-provenance-v4`;
 earlier v3 qualification remains historical. General SIMD coverage,
 ZMM/opmask state, XMM unwind recipes and
 alignment-exception admission remain outside this finite extension.
-The [proposed predicate design](justified-branch-pruning-design.md) supplies the
-next contract for that exception boundary; it has no runtime qualification yet.
+The [predicate design](justified-branch-pruning-design.md) and
+[caller normal-flow contract](caller-semantic-coverage-design.md) own checked
+MOVAPS normal admission and its scoped qualification. The separate
+[explicit alignment-hypothesis extension](investigation-design.md#explicit-alignment-hypotheses)
+adds a [qualified structural-only opt-in](../../evidence/Ariadne/alignment-hypotheses/20261016/README.md).
+Its additive BAP companion preserves the original guard proof and native input
+profile; conditional v2 reports cannot be supplied as completed native analysis.
 
 XMM aliases share a 256-bit YMM backing value within each BIL interpretation;
 an XMM assignment preserves its high half, while a YMM assignment expresses

@@ -2,6 +2,7 @@
 mod address_space;
 mod fault_context;
 mod frame_paths;
+mod frame_structure;
 pub use frame_paths::FramePreparation;
 pub mod investigation;
 mod materialize;

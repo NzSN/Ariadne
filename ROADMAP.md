@@ -11,9 +11,15 @@
 **Where to go next.**
 
 - [Structural frame report: Stage 5.1](docs/Ariadne/investigation-design.md#structural-frame-report-before-dataflow)
-  and [SF0–SF6 plan](.agents/plans/frame-structure-report.md) — selected structural-only
-  delivery before caller dataflow; contract/model, implementation and remote
-  qualification are pending. Existing completed-analysis gates remain separate.
+  and [SF0–SF6 ledger](.agents/plans/frame-structure-report.md) — recovery-only API,
+  frame maps and separate CLI/report qualified in the
+  [2026-10-16 finite scope](evidence/Ariadne/frame-structure/20261016/README.md).
+  Existing completed-analysis and full frame-path gates remain separate.
+
+- [Explicit alignment hypotheses](docs/Ariadne/investigation-design.md#explicit-alignment-hypotheses)
+  and [H0–H5 ledger](.agents/plans/alignment-hypotheses.md) — structural-only
+  conditional MOVAPS normal selection, separately [qualified](evidence/Ariadne/alignment-hypotheses/20261016/README.md)
+  while retaining the baseline unknown verdict and actual saved v1 replay.
 
 - [Caller normal-flow coverage](docs/Ariadne/caller-semantic-coverage-design.md)
   and [active S0–S6 plan](.agents/plans/caller-semantic-coverage.md) — source-qualified
@@ -57,13 +63,32 @@ the [semantic assurance decision](docs/Ariadne/semantic-assurance.md).
 
 The [design](docs/Ariadne/guarded-target-resolution-design.md), [composition plan](.agents/plans/completed/guarded-target-resolution.md) and [loop plan](.agents/plans/completed/loop-aware-target-resolution.md) deliver paired guarded/target preparation, versioned legacy replay and checked local-region induction. [Qualification dated 2026-10-15](evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) closes DA09 and DADD, all nine original incoming-coverage certificates and all 51 missing-start gates, with full native/Rust parity for both completed queries in that earlier stop-limited graph. The loop rule supplies coverage for already witnessed table entries. The caller follow-up below reaches a substantially larger graph; its completed-core and frame-path gates remain open.
 
+## Structural frame maps — Stage 5.1 delivered
+
+The [structural report](docs/Ariadne/investigation-design.md#structural-frame-report-before-dataflow)
+publishes final-request recovery prefixes before dataflow, with explicit local
+frontiers, captured frame relations and admitted E8 call links. SF0–SF6 pass
+their [2026-10-16 source-bound scope](evidence/Ariadne/frame-structure/20261016/README.md):
+finite model/oracle, root/capture/compatibility, compiled mutation, original-dump
+and helper-free saved-replay gates. The named frame 1→0 pair drains with zero
+dataflow/slice work and exact frozen-control agreement. Unknown guards/targets,
+exceptional exits and opaque call context remain visible. Caller completion,
+full frame-path acceptance and executed-history recovery retain separate gates.
+
+The [explicit alignment extension](docs/Ariadne/investigation-design.md#explicit-alignment-hypotheses)
+is separately [qualified](evidence/Ariadne/alignment-hypotheses/20261016/README.md).
+It admits the selected 35c9 normal continuation only under a retained
+per-activation hypothesis, labels all derived structure conditional and
+preserves baseline Unknown. It adds no target narrowing, accumulated-path
+constraint solver or completed caller/frame-path gate.
+
 ## Caller normal-flow coverage — S5 qualified, S6 partial
 
 The [design](docs/Ariadne/caller-semantic-coverage-design.md), [active plan](.agents/plans/caller-semantic-coverage.md) and [qualification](evidence/Ariadne/caller-semantic-coverage/20261015/README.md) add control-only INT3/UD terminal certificates, exact guarded MOVAPS loads and explicit `local-normal-completion/v1` scope. S0–S5 pass on the declared final sources/helper; final admission refresh `075602` passes exact request/proof equality for both frames, caller structural recovery/admission and callee full parity. It does not repeat full caller completion. Legacy rules/proofs remain versioned, pending loads commit no vector effect, and exception-handler resumption is outside scope rather than assumed impossible.
 
 Original-dump probe `073143` removes all 30 caller coverage barriers and retains all target, root and premise facts. The initial MOVAPS is aligned under the recorded premises; the later load is still unknown. Caller recovery now decodes 9,589 sites and 11,321 edges, then Rust and native completion exhaust their selected action budgets. The callee completes with full request/state parity and two remaining indirect barriers. NP10 frame listing is unavailable with `missing-frame-query` because no completed caller query exists.
 
-The next acceptance gate for this completed-analysis milestone is completed caller analysis and full native/Rust state comparison under declared budgets. Passing terminal admission or native initialization does not satisfy it. Keep S6 and its plan open, and report load alignment, callee targets and frame-path availability separately; normal-flow closure does not establish historical execution or whole-machine coverage. The separately planned Stage 5.1 structural report does not discharge S6.
+The next acceptance gate for this completed-analysis milestone is completed caller analysis and full native/Rust state comparison under declared budgets. Passing terminal admission or native initialization does not satisfy it. Keep S6 and its plan open, and report load alignment, callee targets and frame-path availability separately; normal-flow closure does not establish historical execution or whole-machine coverage. The separately implemented Stage 5.1 structural report does not discharge S6.
 
 ## Investigation direction
 
@@ -165,7 +190,9 @@ is recorded without a universal refinement or optimization claim.
 Phases 1–3 and 5 define the practical minidump workflow. The former Phase 4
 instruction-step project is retired. The immutable [analysis contract](docs/Ariadne/bap-analysis-core-design.md)
 and [Rust reference](docs/implementation.md) remain the correspondence boundary.
-The CLI consumes completed native analysis through the shared `AnalysisView`.
+Existing full-analysis CLI routes consume completed native analysis through
+the shared `AnalysisView`; the opt-in structural route consumes a separate Rust
+recovery prefix.
 
 ## Scope and priority rules
 

@@ -1,7 +1,7 @@
 {
   "archived": "2026-10-16",
   "scope": "Conversation presentation archive; canonical designs stay in docs/ and plan owners now live in .agents/plans/. No new analysis or qualification.",
-  "report_count": 25,
+  "report_count": 26,
   "markdown_html_pairs_including_index": 21,
   "source_session": "01a12ddc-4e59-7cb2-b5aa-67a8e522c597",
   "recovered_reports": [
@@ -840,12 +840,12 @@
       "sha256": "2667f3af9200452de3e195dc17664344a094f718310fb48d7527f5a02999ac33"
     },
     "ariadne-reports-index.html": {
-      "bytes": 11903,
-      "sha256": "57594bb946013d796ea8f3f7b86c9d79dcfd7dade4f0d1ca88de70bc1e7a44f3"
+      "bytes": 12091,
+      "sha256": "13e63e04f5fc50c8f91fbdadb9d4552ae7a45764e75872dfb1b7a380436308d0"
     },
     "ariadne-reports-index.md": {
-      "bytes": 6353,
-      "sha256": "9b94c9b6b97a92ee49a29576cd1d14327a15cab6576e61bf6fb82393abb861fb"
+      "bytes": 6500,
+      "sha256": "b304a0ac417f1e63619b11d3f2add1e53518a7be97b03296621a6604af7e4a84"
     },
     "ariadne-resolver-structural-types-20261015.html": {
       "bytes": 32858,
@@ -898,10 +898,34 @@
     "ariadne-structural-plan-hard-cases-20261016.html": {
       "bytes": 12826,
       "sha256": "0ea89609a6591568aef9827e30403616eeb5aa8932b53cbb2ec6688619fd0544"
+    },
+    "ariadne-frame-structure-graph-20261016/index.html": {
+      "bytes": 1942911,
+      "sha256": "6c7ae31c0b6c18d005758a27990ec578e916ab7f098ef69c8eca097c8014ab90"
+    },
+    "ariadne-frame-structure-graph-20261016/viewer.js": {
+      "bytes": 14526,
+      "sha256": "11676f464f6285b5ba0719e12b6376577859d54b27630aebc14ee4c836cd652b"
+    },
+    "ariadne-frame-structure-graph-20261016/graph-data.json": {
+      "bytes": 1930004,
+      "sha256": "71907a092a7146f7b4b818a1def466622e315d226e741bddabe563acd48a75e1"
+    },
+    "ariadne-frame-structure-graph-20261016/frame-structure.dot": {
+      "bytes": 1684053,
+      "sha256": "c46705fe04e5a63f06259e8d0d65f117a4d3f29cc96c4ae5e7ecefaa9ab0bd5e"
+    },
+    "ariadne-frame-structure-graph-20261016/provenance.json": {
+      "bytes": 649,
+      "sha256": "e0d9effc68e1ec5bd9bcdefb6080f656fb227998e7c6e9b2ddb6ab166653307b"
+    },
+    "ariadne-frame-structure-graph-20261016/validation.json": {
+      "bytes": 1334,
+      "sha256": "300cedf565cfc0cbc82391a53007c35fa98b1a1c318f550360e87fc4d9c137d2"
     }
   },
   "directory": ".agents/chatdocs/",
-  "html_documents_including_index": 26,
+  "html_documents_including_index": 27,
   "markdown_documents_including_index": 21,
   "source_review_documents": [
     {
@@ -934,7 +958,10 @@
       "scope": "Planning only; canonical investigation design and SF0\u2013SF6 plan linked, all implementation/qualification pending. No runtime or model code built or changed.",
       "validation": "74 connected documents, 73 context sections, 2148 local links; scoped diff hygiene and rendered local links/source hash checked.",
       "original_canonical_markdown": "Plans/frame-structure-report.md",
-      "original_canonical_sha256": "02bbd14e9f735c7faea0fc97196a3674c2dd14900f6e2539e3d47712bbe86dfa"
+      "original_canonical_sha256": "02bbd14e9f735c7faea0fc97196a3674c2dd14900f6e2539e3d47712bbe86dfa",
+      "current_canonical_sha256": "3b4e80b5f492d5563a2e8775691ad313c220b04dd96ca1e81b6a174fc731e53c",
+      "canonical_updated": "2026-10-16",
+      "canonical_status": "SF0\u2013SF6 complete in the recorded finite scope. canonical_sha256 remains the historical presentation-source hash."
     },
     {
       "html": "ariadne-structural-plan-hard-cases-20261016.html",
@@ -948,7 +975,19 @@
       "original_plan_sha256": "02bbd14e9f735c7faea0fc97196a3674c2dd14900f6e2539e3d47712bbe86dfa",
       "pre_browser_navigation_fix_sha256": "0d331b66b4d3c75e1878a5eddc0b8ba8efecb06962f35f695535d8fe8a1d09b9",
       "browser_navigation_revision": "89153e72e2ead9052344be56324751a8e1b62e5f",
-      "browser_navigation_note": "Plan links use the archived HTML and real section IDs; code, design and retained-evidence citations use the published revision for browser-rendered anchors."
+      "browser_navigation_note": "Plan links use the archived HTML and real section IDs; code, design and retained-evidence citations use the published revision for browser-rendered anchors.",
+      "current_plan_sha256": "3b4e80b5f492d5563a2e8775691ad313c220b04dd96ca1e81b6a174fc731e53c",
+      "plan_updated": "2026-10-16",
+      "plan_status": "Implementation and finite qualification complete. plan_sha256 remains the historical source cited by this planning explanation."
+    },
+    {
+      "html": "ariadne-frame-structure-graph-20261016/index.html",
+      "date": "2026-10-16",
+      "qualified_source_capsule_sha256": "8266a844e60e3afbcaa8f0bba557899a0466e18940d8fa881630377cf78bb37c",
+      "structure_id": "229e9248025f1470110b652c92ea370131cee2bf4fe72484a8dee8cb4c39db18",
+      "source_dot_sha256": "c46705fe04e5a63f06259e8d0d65f117a4d3f29cc96c4ae5e7ecefaa9ab0bd5e",
+      "scope": "Presentation of qualified Stage 5.1 frame structure, including verified call link, exact retained edges and boundary facts; no new analysis, build or dump run.",
+      "validation": "Local references, anchors, unique IDs, SVG XML and source data checked; Node DOM controls exercised against synthetic and full retained graph. Browser launch recorded separately in final reply."
     }
   ],
   "plan_directory_relocation": {

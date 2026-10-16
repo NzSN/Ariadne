@@ -6,6 +6,7 @@ Canonical documents under `docs/` remain in place. The two 2026-10-12 design/pla
 
 | Chat document | Browser page | Markdown |
 | --- | --- | --- |
+| Stage 5.1: qualified structural frame graph and address explorer | [Open graph](ariadne-frame-structure-graph-20261016/index.html) | HTML only |
 | Current frame-to-frame analysis semantics | [Open](ariadne-frame-to-frame-semantics-20261015.html) | [Read](ariadne-frame-to-frame-semantics-20261015.md) |
 | First jump: detailed interactive explanation | [Open](ariadne-first-callee-jump-explained-20261015.html) | [Read](ariadne-first-callee-jump-explained-20261015.md) |
 | Instructions calculating RAX | [Open](ariadne-rax-calculation-20261015.html) | [Read](ariadne-rax-calculation-20261015.md) |

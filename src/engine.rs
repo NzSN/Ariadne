@@ -70,6 +70,13 @@ impl Analyzer {
         self.metrics.get()
     }
 
+    /// Consume a recovery prefix without running the next model action. This
+    /// crate-private seam does not publish the full state as a completed result.
+    pub(crate) fn into_recovery_parts(self) -> (AnalysisRequest, AnalysisState, AnalyzerMetrics) {
+        debug_assert_eq!(self.state.phase, Phase::Recover);
+        (self.request, self.state, self.metrics.get())
+    }
+
     /// Perform one `Next` action, choosing the lowest eligible VA when the
     /// specification leaves scheduling open. Returns false only in `Done`.
     pub fn step(&mut self) -> bool {

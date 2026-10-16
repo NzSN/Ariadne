@@ -1,0 +1,2457 @@
+{
+  "schema": "ariadne.frame-structure-oracle/v1",
+  "scope": "Independent finite hand-derived recovery prefixes and admission controls; no ISA, concrete proof-parser or universal refinement claim.",
+  "authority": "Specs/AriadneFrameStructure.tla and recovery equations in Specs/Ariadne.tla",
+  "recovery_cases": [
+    {
+      "name": "empty-roots-rejected",
+      "input": {
+        "addresses": [
+          10
+        ],
+        "entry_points": [],
+        "slice_seeds": [],
+        "captured": [
+          10
+        ],
+        "decodable": [
+          10
+        ],
+        "instructions": [
+          {
+            "address": 10,
+            "kind": "return",
+            "fall": [],
+            "targets": [],
+            "complete": true
+          }
+        ],
+        "max_visits": 0,
+        "deadline_before_visit": null,
+        "candidate_continuations": []
+      },
+      "expected": {
+        "request_status": "invalid_request",
+        "invalid_field": "entry_points"
+      }
+    },
+    {
+      "name": "zero-visits",
+      "input": {
+        "addresses": [
+          10,
+          20
+        ],
+        "entry_points": [
+          10
+        ],
+        "slice_seeds": [],
+        "captured": [
+          10,
+          20
+        ],
+        "decodable": [
+          10,
+          20
+        ],
+        "instructions": [
+          {
+            "address": 10,
+            "kind": "ordinary",
+            "fall": [
+              20
+            ],
+            "targets": [],
+            "complete": true
+          },
+          {
+            "address": 20,
+            "kind": "return",
+            "fall": [],
+            "targets": [],
+            "complete": true
+          }
+        ],
+        "max_visits": 0,
+        "deadline_before_visit": null,
+        "candidate_continuations": []
+      },
+      "expected": {
+        "visited_order": [],
+        "visited": [],
+        "decoded": [],
+        "pending": [
+          10
+        ],
+        "edges": [],
+        "obligations": [],
+        "provenance": [
+          {
+            "address": 10,
+            "source": "unavailable"
+          },
+          {
+            "address": 20,
+            "source": "unavailable"
+          }
+        ],
+        "recovery_status": "work_stopped",
+        "stop_reason": "visit_limit",
+        "phase": "recover",
+        "recovery_visits": 0,
+        "finish_recovery_actions": 0,
+        "dataflow_actions": 0,
+        "slice_actions": 0
+      }
+    },
+    {
+      "name": "straight-prefix",
+      "input": {
+        "addresses": [
+          10,
+          20
+        ],
+        "entry_points": [
+          10
+        ],
+        "slice_seeds": [],
+        "captured": [
+          10,
+          20
+        ],
+        "decodable": [
+          10,
+          20
+        ],
+        "instructions": [
+          {
+            "address": 10,
+            "kind": "ordinary",
+            "fall": [
+              20
+            ],
+            "targets": [],
+            "complete": true
+          },
+          {
+            "address": 20,
+            "kind": "return",
+            "fall": [],
+            "targets": [],
+            "complete": true
+          }
+        ],
+        "max_visits": 1,
+        "deadline_before_visit": null,
+        "candidate_continuations": []
+      },
+      "expected": {
+        "visited_order": [
+          10
+        ],
+        "visited": [
+          10
+        ],
+        "decoded": [
+          10
+        ],
+        "pending": [
+          20
+        ],
+        "edges": [
+          {
+            "src": 10,
+            "dst": 20,
+            "kind": "next"
+          }
+        ],
+        "obligations": [],
+        "provenance": [
+          {
+            "address": 10,
+            "source": "captured"
+          },
+          {
+            "address": 20,
+            "source": "unavailable"
+          }
+        ],
+        "recovery_status": "work_stopped",
+        "stop_reason": "visit_limit",
+        "phase": "recover",
+        "recovery_visits": 1,
+        "finish_recovery_actions": 0,
+        "dataflow_actions": 0,
+        "slice_actions": 0
+      }
+    },
+    {
+      "name": "straight-exact-budget",
+      "input": {
+        "addresses": [
+          10,
+          20
+        ],
+        "entry_points": [
+          10
+        ],
+        "slice_seeds": [],
+        "captured": [
+          10,
+          20
+        ],
+        "decodable": [
+          10,
+          20
+        ],
+        "instructions": [
+          {
+            "address": 10,
+            "kind": "ordinary",
+            "fall": [
+              20
+            ],
+            "targets": [],
+            "complete": true
+          },
+          {
+            "address": 20,
+            "kind": "return",
+            "fall": [],
+            "targets": [],
+            "complete": true
+          }
+        ],
+        "max_visits": 2,
+        "deadline_before_visit": null,
+        "candidate_continuations": []
+      },
+      "expected": {
+        "visited_order": [
+          10,
+          20
+        ],
+        "visited": [
+          10,
+          20
+        ],
+        "decoded": [
+          10,
+          20
+        ],
+        "pending": [],
+        "edges": [
+          {
+            "src": 10,
+            "dst": 20,
+            "kind": "next"
+          }
+        ],
+        "obligations": [],
+        "provenance": [
+          {
+            "address": 10,
+            "source": "captured"
+          },
+          {
+            "address": 20,
+            "source": "captured"
+          }
+        ],
+        "recovery_status": "drained",
+        "stop_reason": "drained",
+        "phase": "recover",
+        "recovery_visits": 2,
+        "finish_recovery_actions": 0,
+        "dataflow_actions": 0,
+        "slice_actions": 0
+      }
+    },
+    {
+      "name": "straight-above-budget",
+      "input": {
+        "addresses": [
+          10,
+          20
+        ],
+        "entry_points": [
+          10
+        ],
+        "slice_seeds": [],
+        "captured": [
+          10,
+          20
+        ],
+        "decodable": [
+          10,
+          20
+        ],
+        "instructions": [
+          {
+            "address": 10,
+            "kind": "ordinary",
+            "fall": [
+              20
+            ],
+            "targets": [],
+            "complete": true
+          },
+          {
+            "address": 20,
+            "kind": "return",
+            "fall": [],
+            "targets": [],
+            "complete": true
+          }
+        ],
+        "max_visits": 3,
+        "deadline_before_visit": null,
+        "candidate_continuations": []
+      },
+      "expected": {
+        "visited_order": [
+          10,
+          20
+        ],
+        "visited": [
+          10,
+          20
+        ],
+        "decoded": [
+          10,
+          20
+        ],
+        "pending": [],
+        "edges": [
+          {
+            "src": 10,
+            "dst": 20,
+            "kind": "next"
+          }
+        ],
+        "obligations": [],
+        "provenance": [
+          {
+            "address": 10,
+            "source": "captured"
+          },
+          {
+            "address": 20,
+            "source": "captured"
+          }
+        ],
+        "recovery_status": "drained",
+        "stop_reason": "drained",
+        "phase": "recover",
+        "recovery_visits": 2,
+        "finish_recovery_actions": 0,
+        "dataflow_actions": 0,
+        "slice_actions": 0
+      }
+    },
+    {
+      "name": "diamond-both-arms",
+      "input": {
+        "addresses": [
+          10,
+          20,
+          30,
+          40
+        ],
+        "entry_points": [
+          10
+        ],
+        "slice_seeds": [],
+        "captured": [
+          10,
+          20,
+          30,
+          40
+        ],
+        "decodable": [
+          10,
+          20,
+          30,
+          40
+        ],
+        "instructions": [
+          {
+            "address": 10,
+            "kind": "conditional",
+            "fall": [
+              20
+            ],
+            "targets": [
+              30
+            ],
+            "complete": true
+          },
+          {
+            "address": 20,
+            "kind": "ordinary",
+            "fall": [
+              40
+            ],
+            "targets": [],
+            "complete": true
+          },
+          {
+            "address": 30,
+            "kind": "ordinary",
+            "fall": [
+              40
+            ],
+            "targets": [],
+            "complete": true
+          },
+          {
+            "address": 40,
+            "kind": "return",
+            "fall": [],
+            "targets": [],
+            "complete": true
+          }
+        ],
+        "max_visits": 4,
+        "deadline_before_visit": null,
+        "candidate_continuations": []
+      },
+      "expected": {
+        "visited_order": [
+          10,
+          20,
+          30,
+          40
+        ],
+        "visited": [
+          10,
+          20,
+          30,
+          40
+        ],
+        "decoded": [
+          10,
+          20,
+          30,
+          40
+        ],
+        "pending": [],
+        "edges": [
+          {
+            "src": 10,
+            "dst": 20,
+            "kind": "fallthrough"
+          },
+          {
+            "src": 10,
+            "dst": 30,
+            "kind": "taken"
+          },
+          {
+            "src": 20,
+            "dst": 40,
+            "kind": "next"
+          },
+          {
+            "src": 30,
+            "dst": 40,
+            "kind": "next"
+          }
+        ],
+        "obligations": [],
+        "provenance": [
+          {
+            "address": 10,
+            "source": "captured"
+          },
+          {
+            "address": 20,
+            "source": "captured"
+          },
+          {
+            "address": 30,
+            "source": "captured"
+          },
+          {
+            "address": 40,
+            "source": "captured"
+          }
+        ],
+        "recovery_status": "drained",
+        "stop_reason": "drained",
+        "phase": "recover",
+        "recovery_visits": 4,
+        "finish_recovery_actions": 0,
+        "dataflow_actions": 0,
+        "slice_actions": 0
+      }
+    },
+    {
+      "name": "parallel-edge-kinds",
+      "input": {
+        "addresses": [
+          10,
+          20
+        ],
+        "entry_points": [
+          10
+        ],
+        "slice_seeds": [],
+        "captured": [
+          10,
+          20
+        ],
+        "decodable": [
+          10,
+          20
+        ],
+        "instructions": [
+          {
+            "address": 10,
+            "kind": "conditional",
+            "fall": [
+              20
+            ],
+            "targets": [
+              20
+            ],
+            "complete": true
+          },
+          {
+            "address": 20,
+            "kind": "return",
+            "fall": [],
+            "targets": [],
+            "complete": true
+          }
+        ],
+        "max_visits": 2,
+        "deadline_before_visit": null,
+        "candidate_continuations": []
+      },
+      "expected": {
+        "visited_order": [
+          10,
+          20
+        ],
+        "visited": [
+          10,
+          20
+        ],
+        "decoded": [
+          10,
+          20
+        ],
+        "pending": [],
+        "edges": [
+          {
+            "src": 10,
+            "dst": 20,
+            "kind": "fallthrough"
+          },
+          {
+            "src": 10,
+            "dst": 20,
+            "kind": "taken"
+          }
+        ],
+        "obligations": [],
+        "provenance": [
+          {
+            "address": 10,
+            "source": "captured"
+          },
+          {
+            "address": 20,
+            "source": "captured"
+          }
+        ],
+        "recovery_status": "drained",
+        "stop_reason": "drained",
+        "phase": "recover",
+        "recovery_visits": 2,
+        "finish_recovery_actions": 0,
+        "dataflow_actions": 0,
+        "slice_actions": 0
+      }
+    },
+    {
+      "name": "cycle-terminates",
+      "input": {
+        "addresses": [
+          10,
+          20
+        ],
+        "entry_points": [
+          10
+        ],
+        "slice_seeds": [],
+        "captured": [
+          10,
+          20
+        ],
+        "decodable": [
+          10,
+          20
+        ],
+        "instructions": [
+          {
+            "address": 10,
+            "kind": "ordinary",
+            "fall": [
+              20
+            ],
+            "targets": [],
+            "complete": true
+          },
+          {
+            "address": 20,
+            "kind": "jump",
+            "fall": [],
+            "targets": [
+              10
+            ],
+            "complete": true
+          }
+        ],
+        "max_visits": 2,
+        "deadline_before_visit": null,
+        "candidate_continuations": []
+      },
+      "expected": {
+        "visited_order": [
+          10,
+          20
+        ],
+        "visited": [
+          10,
+          20
+        ],
+        "decoded": [
+          10,
+          20
+        ],
+        "pending": [],
+        "edges": [
+          {
+            "src": 10,
+            "dst": 20,
+            "kind": "next"
+          },
+          {
+            "src": 20,
+            "dst": 10,
+            "kind": "jump"
+          }
+        ],
+        "obligations": [],
+        "provenance": [
+          {
+            "address": 10,
+            "source": "captured"
+          },
+          {
+            "address": 20,
+            "source": "captured"
+          }
+        ],
+        "recovery_status": "drained",
+        "stop_reason": "drained",
+        "phase": "recover",
+        "recovery_visits": 2,
+        "finish_recovery_actions": 0,
+        "dataflow_actions": 0,
+        "slice_actions": 0
+      }
+    },
+    {
+      "name": "self-loop-not-requeued",
+      "input": {
+        "addresses": [
+          10
+        ],
+        "entry_points": [
+          10
+        ],
+        "slice_seeds": [],
+        "captured": [
+          10
+        ],
+        "decodable": [
+          10
+        ],
+        "instructions": [
+          {
+            "address": 10,
+            "kind": "jump",
+            "fall": [],
+            "targets": [
+              10
+            ],
+            "complete": true
+          }
+        ],
+        "max_visits": 1,
+        "deadline_before_visit": null,
+        "candidate_continuations": []
+      },
+      "expected": {
+        "visited_order": [
+          10
+        ],
+        "visited": [
+          10
+        ],
+        "decoded": [
+          10
+        ],
+        "pending": [],
+        "edges": [
+          {
+            "src": 10,
+            "dst": 10,
+            "kind": "jump"
+          }
+        ],
+        "obligations": [],
+        "provenance": [
+          {
+            "address": 10,
+            "source": "captured"
+          }
+        ],
+        "recovery_status": "drained",
+        "stop_reason": "drained",
+        "phase": "recover",
+        "recovery_visits": 1,
+        "finish_recovery_actions": 0,
+        "dataflow_actions": 0,
+        "slice_actions": 0
+      }
+    },
+    {
+      "name": "slice-seed-is-not-root",
+      "input": {
+        "addresses": [
+          10,
+          20,
+          30
+        ],
+        "entry_points": [
+          10
+        ],
+        "slice_seeds": [
+          30
+        ],
+        "captured": [
+          10,
+          20,
+          30
+        ],
+        "decodable": [
+          10,
+          20,
+          30
+        ],
+        "instructions": [
+          {
+            "address": 10,
+            "kind": "ordinary",
+            "fall": [
+              20
+            ],
+            "targets": [],
+            "complete": true
+          },
+          {
+            "address": 20,
+            "kind": "return",
+            "fall": [],
+            "targets": [],
+            "complete": true
+          },
+          {
+            "address": 30,
+            "kind": "return",
+            "fall": [],
+            "targets": [],
+            "complete": true
+          }
+        ],
+        "max_visits": 3,
+        "deadline_before_visit": null,
+        "candidate_continuations": []
+      },
+      "expected": {
+        "visited_order": [
+          10,
+          20
+        ],
+        "visited": [
+          10,
+          20
+        ],
+        "decoded": [
+          10,
+          20
+        ],
+        "pending": [],
+        "edges": [
+          {
+            "src": 10,
+            "dst": 20,
+            "kind": "next"
+          }
+        ],
+        "obligations": [],
+        "provenance": [
+          {
+            "address": 10,
+            "source": "captured"
+          },
+          {
+            "address": 20,
+            "source": "captured"
+          },
+          {
+            "address": 30,
+            "source": "unavailable"
+          }
+        ],
+        "recovery_status": "drained",
+        "stop_reason": "drained",
+        "phase": "recover",
+        "recovery_visits": 2,
+        "finish_recovery_actions": 0,
+        "dataflow_actions": 0,
+        "slice_actions": 0
+      }
+    },
+    {
+      "name": "call-target-is-context",
+      "input": {
+        "addresses": [
+          10,
+          20,
+          100
+        ],
+        "entry_points": [
+          10
+        ],
+        "slice_seeds": [],
+        "captured": [
+          10,
+          20,
+          100
+        ],
+        "decodable": [
+          10,
+          20,
+          100
+        ],
+        "instructions": [
+          {
+            "address": 10,
+            "kind": "call",
+            "fall": [
+              20
+            ],
+            "targets": [
+              100
+            ],
+            "complete": true
+          },
+          {
+            "address": 20,
+            "kind": "return",
+            "fall": [],
+            "targets": [],
+            "complete": true
+          },
+          {
+            "address": 100,
+            "kind": "return",
+            "fall": [],
+            "targets": [],
+            "complete": true
+          }
+        ],
+        "max_visits": 3,
+        "deadline_before_visit": null,
+        "candidate_continuations": []
+      },
+      "expected": {
+        "visited_order": [
+          10,
+          20
+        ],
+        "visited": [
+          10,
+          20
+        ],
+        "decoded": [
+          10,
+          20
+        ],
+        "pending": [],
+        "edges": [
+          {
+            "src": 10,
+            "dst": 20,
+            "kind": "summary"
+          },
+          {
+            "src": 10,
+            "dst": 100,
+            "kind": "call"
+          }
+        ],
+        "obligations": [],
+        "provenance": [
+          {
+            "address": 10,
+            "source": "captured"
+          },
+          {
+            "address": 20,
+            "source": "captured"
+          },
+          {
+            "address": 100,
+            "source": "unavailable"
+          }
+        ],
+        "recovery_status": "drained",
+        "stop_reason": "drained",
+        "phase": "recover",
+        "recovery_visits": 2,
+        "finish_recovery_actions": 0,
+        "dataflow_actions": 0,
+        "slice_actions": 0
+      }
+    },
+    {
+      "name": "failed-endpoint-still-attempted",
+      "input": {
+        "addresses": [
+          10,
+          20
+        ],
+        "entry_points": [
+          10
+        ],
+        "slice_seeds": [],
+        "captured": [
+          10,
+          20
+        ],
+        "decodable": [
+          10
+        ],
+        "instructions": [
+          {
+            "address": 10,
+            "kind": "ordinary",
+            "fall": [
+              20
+            ],
+            "targets": [],
+            "complete": true
+          },
+          {
+            "address": 20,
+            "kind": "return",
+            "fall": [],
+            "targets": [],
+            "complete": true
+          }
+        ],
+        "max_visits": 2,
+        "deadline_before_visit": null,
+        "candidate_continuations": []
+      },
+      "expected": {
+        "visited_order": [
+          10,
+          20
+        ],
+        "visited": [
+          10,
+          20
+        ],
+        "decoded": [
+          10
+        ],
+        "pending": [],
+        "edges": [
+          {
+            "src": 10,
+            "dst": 20,
+            "kind": "next"
+          }
+        ],
+        "obligations": [
+          {
+            "site": 20,
+            "reason": "decode-failed"
+          }
+        ],
+        "provenance": [
+          {
+            "address": 10,
+            "source": "captured"
+          },
+          {
+            "address": 20,
+            "source": "unavailable"
+          }
+        ],
+        "recovery_status": "drained",
+        "stop_reason": "drained",
+        "phase": "recover",
+        "recovery_visits": 2,
+        "finish_recovery_actions": 0,
+        "dataflow_actions": 0,
+        "slice_actions": 0
+      }
+    },
+    {
+      "name": "unavailable-endpoint",
+      "input": {
+        "addresses": [
+          10,
+          20
+        ],
+        "entry_points": [
+          10
+        ],
+        "slice_seeds": [],
+        "captured": [
+          10
+        ],
+        "decodable": [
+          10,
+          20
+        ],
+        "instructions": [
+          {
+            "address": 10,
+            "kind": "ordinary",
+            "fall": [
+              20
+            ],
+            "targets": [],
+            "complete": true
+          },
+          {
+            "address": 20,
+            "kind": "return",
+            "fall": [],
+            "targets": [],
+            "complete": true
+          }
+        ],
+        "max_visits": 2,
+        "deadline_before_visit": null,
+        "candidate_continuations": []
+      },
+      "expected": {
+        "visited_order": [
+          10,
+          20
+        ],
+        "visited": [
+          10,
+          20
+        ],
+        "decoded": [
+          10
+        ],
+        "pending": [],
+        "edges": [
+          {
+            "src": 10,
+            "dst": 20,
+            "kind": "next"
+          }
+        ],
+        "obligations": [
+          {
+            "site": 20,
+            "reason": "unavailable"
+          }
+        ],
+        "provenance": [
+          {
+            "address": 10,
+            "source": "captured"
+          },
+          {
+            "address": 20,
+            "source": "unavailable"
+          }
+        ],
+        "recovery_status": "drained",
+        "stop_reason": "drained",
+        "phase": "recover",
+        "recovery_visits": 2,
+        "finish_recovery_actions": 0,
+        "dataflow_actions": 0,
+        "slice_actions": 0
+      }
+    },
+    {
+      "name": "final-unknown-guard-excludes-candidate",
+      "input": {
+        "addresses": [
+          10,
+          20,
+          30
+        ],
+        "entry_points": [
+          10
+        ],
+        "slice_seeds": [],
+        "captured": [
+          10,
+          20,
+          30
+        ],
+        "decodable": [
+          10,
+          30
+        ],
+        "instructions": [
+          {
+            "address": 10,
+            "kind": "ordinary",
+            "fall": [
+              20
+            ],
+            "targets": [],
+            "complete": true
+          },
+          {
+            "address": 20,
+            "kind": "stop",
+            "fall": [],
+            "targets": [],
+            "complete": true
+          },
+          {
+            "address": 30,
+            "kind": "return",
+            "fall": [],
+            "targets": [],
+            "complete": true
+          }
+        ],
+        "max_visits": 3,
+        "deadline_before_visit": null,
+        "candidate_continuations": [
+          {
+            "src": 20,
+            "dst": 30
+          }
+        ]
+      },
+      "expected": {
+        "visited_order": [
+          10,
+          20
+        ],
+        "visited": [
+          10,
+          20
+        ],
+        "decoded": [
+          10
+        ],
+        "pending": [],
+        "edges": [
+          {
+            "src": 10,
+            "dst": 20,
+            "kind": "next"
+          }
+        ],
+        "obligations": [
+          {
+            "site": 20,
+            "reason": "decode-failed"
+          }
+        ],
+        "provenance": [
+          {
+            "address": 10,
+            "source": "captured"
+          },
+          {
+            "address": 20,
+            "source": "unavailable"
+          },
+          {
+            "address": 30,
+            "source": "unavailable"
+          }
+        ],
+        "recovery_status": "drained",
+        "stop_reason": "drained",
+        "phase": "recover",
+        "recovery_visits": 2,
+        "finish_recovery_actions": 0,
+        "dataflow_actions": 0,
+        "slice_actions": 0
+      }
+    },
+    {
+      "name": "incomplete-indirect-retains-gap",
+      "input": {
+        "addresses": [
+          10,
+          20
+        ],
+        "entry_points": [
+          10
+        ],
+        "slice_seeds": [],
+        "captured": [
+          10,
+          20
+        ],
+        "decodable": [
+          10,
+          20
+        ],
+        "instructions": [
+          {
+            "address": 10,
+            "kind": "indirect",
+            "fall": [],
+            "targets": [
+              20
+            ],
+            "complete": false
+          },
+          {
+            "address": 20,
+            "kind": "return",
+            "fall": [],
+            "targets": [],
+            "complete": true
+          }
+        ],
+        "max_visits": 2,
+        "deadline_before_visit": null,
+        "candidate_continuations": []
+      },
+      "expected": {
+        "visited_order": [
+          10,
+          20
+        ],
+        "visited": [
+          10,
+          20
+        ],
+        "decoded": [
+          10,
+          20
+        ],
+        "pending": [],
+        "edges": [
+          {
+            "src": 10,
+            "dst": 20,
+            "kind": "indirect"
+          }
+        ],
+        "obligations": [
+          {
+            "site": 10,
+            "reason": "indirect-targets"
+          }
+        ],
+        "provenance": [
+          {
+            "address": 10,
+            "source": "captured"
+          },
+          {
+            "address": 20,
+            "source": "captured"
+          }
+        ],
+        "recovery_status": "drained",
+        "stop_reason": "drained",
+        "phase": "recover",
+        "recovery_visits": 2,
+        "finish_recovery_actions": 0,
+        "dataflow_actions": 0,
+        "slice_actions": 0
+      }
+    },
+    {
+      "name": "empty-indirect-drained-with-gap",
+      "input": {
+        "addresses": [
+          10
+        ],
+        "entry_points": [
+          10
+        ],
+        "slice_seeds": [],
+        "captured": [
+          10
+        ],
+        "decodable": [
+          10
+        ],
+        "instructions": [
+          {
+            "address": 10,
+            "kind": "indirect",
+            "fall": [],
+            "targets": [],
+            "complete": false
+          }
+        ],
+        "max_visits": 1,
+        "deadline_before_visit": null,
+        "candidate_continuations": []
+      },
+      "expected": {
+        "visited_order": [
+          10
+        ],
+        "visited": [
+          10
+        ],
+        "decoded": [
+          10
+        ],
+        "pending": [],
+        "edges": [],
+        "obligations": [
+          {
+            "site": 10,
+            "reason": "indirect-targets"
+          }
+        ],
+        "provenance": [
+          {
+            "address": 10,
+            "source": "captured"
+          }
+        ],
+        "recovery_status": "drained",
+        "stop_reason": "drained",
+        "phase": "recover",
+        "recovery_visits": 1,
+        "finish_recovery_actions": 0,
+        "dataflow_actions": 0,
+        "slice_actions": 0
+      }
+    },
+    {
+      "name": "incomplete-call-retains-gap",
+      "input": {
+        "addresses": [
+          10,
+          20
+        ],
+        "entry_points": [
+          10
+        ],
+        "slice_seeds": [],
+        "captured": [
+          10,
+          20
+        ],
+        "decodable": [
+          10,
+          20
+        ],
+        "instructions": [
+          {
+            "address": 10,
+            "kind": "call",
+            "fall": [
+              20
+            ],
+            "targets": [],
+            "complete": false
+          },
+          {
+            "address": 20,
+            "kind": "return",
+            "fall": [],
+            "targets": [],
+            "complete": true
+          }
+        ],
+        "max_visits": 2,
+        "deadline_before_visit": null,
+        "candidate_continuations": []
+      },
+      "expected": {
+        "visited_order": [
+          10,
+          20
+        ],
+        "visited": [
+          10,
+          20
+        ],
+        "decoded": [
+          10,
+          20
+        ],
+        "pending": [],
+        "edges": [
+          {
+            "src": 10,
+            "dst": 20,
+            "kind": "summary"
+          }
+        ],
+        "obligations": [
+          {
+            "site": 10,
+            "reason": "call-targets"
+          }
+        ],
+        "provenance": [
+          {
+            "address": 10,
+            "source": "captured"
+          },
+          {
+            "address": 20,
+            "source": "captured"
+          }
+        ],
+        "recovery_status": "drained",
+        "stop_reason": "drained",
+        "phase": "recover",
+        "recovery_visits": 2,
+        "finish_recovery_actions": 0,
+        "dataflow_actions": 0,
+        "slice_actions": 0
+      }
+    },
+    {
+      "name": "deadline-zero",
+      "input": {
+        "addresses": [
+          10,
+          20
+        ],
+        "entry_points": [
+          10
+        ],
+        "slice_seeds": [],
+        "captured": [
+          10,
+          20
+        ],
+        "decodable": [
+          10,
+          20
+        ],
+        "instructions": [
+          {
+            "address": 10,
+            "kind": "ordinary",
+            "fall": [
+              20
+            ],
+            "targets": [],
+            "complete": true
+          },
+          {
+            "address": 20,
+            "kind": "return",
+            "fall": [],
+            "targets": [],
+            "complete": true
+          }
+        ],
+        "max_visits": 2,
+        "deadline_before_visit": 0,
+        "candidate_continuations": []
+      },
+      "expected": {
+        "visited_order": [],
+        "visited": [],
+        "decoded": [],
+        "pending": [
+          10
+        ],
+        "edges": [],
+        "obligations": [],
+        "provenance": [
+          {
+            "address": 10,
+            "source": "unavailable"
+          },
+          {
+            "address": 20,
+            "source": "unavailable"
+          }
+        ],
+        "recovery_status": "work_stopped",
+        "stop_reason": "deadline",
+        "phase": "recover",
+        "recovery_visits": 0,
+        "finish_recovery_actions": 0,
+        "dataflow_actions": 0,
+        "slice_actions": 0
+      }
+    },
+    {
+      "name": "deadline-prefix",
+      "input": {
+        "addresses": [
+          10,
+          20
+        ],
+        "entry_points": [
+          10
+        ],
+        "slice_seeds": [],
+        "captured": [
+          10,
+          20
+        ],
+        "decodable": [
+          10,
+          20
+        ],
+        "instructions": [
+          {
+            "address": 10,
+            "kind": "ordinary",
+            "fall": [
+              20
+            ],
+            "targets": [],
+            "complete": true
+          },
+          {
+            "address": 20,
+            "kind": "return",
+            "fall": [],
+            "targets": [],
+            "complete": true
+          }
+        ],
+        "max_visits": 2,
+        "deadline_before_visit": 1,
+        "candidate_continuations": []
+      },
+      "expected": {
+        "visited_order": [
+          10
+        ],
+        "visited": [
+          10
+        ],
+        "decoded": [
+          10
+        ],
+        "pending": [
+          20
+        ],
+        "edges": [
+          {
+            "src": 10,
+            "dst": 20,
+            "kind": "next"
+          }
+        ],
+        "obligations": [],
+        "provenance": [
+          {
+            "address": 10,
+            "source": "captured"
+          },
+          {
+            "address": 20,
+            "source": "unavailable"
+          }
+        ],
+        "recovery_status": "work_stopped",
+        "stop_reason": "deadline",
+        "phase": "recover",
+        "recovery_visits": 1,
+        "finish_recovery_actions": 0,
+        "dataflow_actions": 0,
+        "slice_actions": 0
+      }
+    },
+    {
+      "name": "deadline-exact-drain",
+      "input": {
+        "addresses": [
+          10,
+          20
+        ],
+        "entry_points": [
+          10
+        ],
+        "slice_seeds": [],
+        "captured": [
+          10,
+          20
+        ],
+        "decodable": [
+          10,
+          20
+        ],
+        "instructions": [
+          {
+            "address": 10,
+            "kind": "ordinary",
+            "fall": [
+              20
+            ],
+            "targets": [],
+            "complete": true
+          },
+          {
+            "address": 20,
+            "kind": "return",
+            "fall": [],
+            "targets": [],
+            "complete": true
+          }
+        ],
+        "max_visits": 2,
+        "deadline_before_visit": 2,
+        "candidate_continuations": []
+      },
+      "expected": {
+        "visited_order": [
+          10,
+          20
+        ],
+        "visited": [
+          10,
+          20
+        ],
+        "decoded": [
+          10,
+          20
+        ],
+        "pending": [],
+        "edges": [
+          {
+            "src": 10,
+            "dst": 20,
+            "kind": "next"
+          }
+        ],
+        "obligations": [],
+        "provenance": [
+          {
+            "address": 10,
+            "source": "captured"
+          },
+          {
+            "address": 20,
+            "source": "captured"
+          }
+        ],
+        "recovery_status": "drained",
+        "stop_reason": "drained",
+        "phase": "recover",
+        "recovery_visits": 2,
+        "finish_recovery_actions": 0,
+        "dataflow_actions": 0,
+        "slice_actions": 0
+      }
+    },
+    {
+      "name": "visit-priority-over-deadline",
+      "input": {
+        "addresses": [
+          10,
+          20
+        ],
+        "entry_points": [
+          10
+        ],
+        "slice_seeds": [],
+        "captured": [
+          10,
+          20
+        ],
+        "decodable": [
+          10,
+          20
+        ],
+        "instructions": [
+          {
+            "address": 10,
+            "kind": "ordinary",
+            "fall": [
+              20
+            ],
+            "targets": [],
+            "complete": true
+          },
+          {
+            "address": 20,
+            "kind": "return",
+            "fall": [],
+            "targets": [],
+            "complete": true
+          }
+        ],
+        "max_visits": 1,
+        "deadline_before_visit": 1,
+        "candidate_continuations": []
+      },
+      "expected": {
+        "visited_order": [
+          10
+        ],
+        "visited": [
+          10
+        ],
+        "decoded": [
+          10
+        ],
+        "pending": [
+          20
+        ],
+        "edges": [
+          {
+            "src": 10,
+            "dst": 20,
+            "kind": "next"
+          }
+        ],
+        "obligations": [],
+        "provenance": [
+          {
+            "address": 10,
+            "source": "captured"
+          },
+          {
+            "address": 20,
+            "source": "unavailable"
+          }
+        ],
+        "recovery_status": "work_stopped",
+        "stop_reason": "visit_limit",
+        "phase": "recover",
+        "recovery_visits": 1,
+        "finish_recovery_actions": 0,
+        "dataflow_actions": 0,
+        "slice_actions": 0
+      }
+    },
+    {
+      "name": "multiple-roots-ordered",
+      "input": {
+        "addresses": [
+          10,
+          20,
+          30
+        ],
+        "entry_points": [
+          30,
+          10
+        ],
+        "slice_seeds": [],
+        "captured": [
+          10,
+          20,
+          30
+        ],
+        "decodable": [
+          10,
+          20,
+          30
+        ],
+        "instructions": [
+          {
+            "address": 10,
+            "kind": "return",
+            "fall": [],
+            "targets": [],
+            "complete": true
+          },
+          {
+            "address": 20,
+            "kind": "return",
+            "fall": [],
+            "targets": [],
+            "complete": true
+          },
+          {
+            "address": 30,
+            "kind": "return",
+            "fall": [],
+            "targets": [],
+            "complete": true
+          }
+        ],
+        "max_visits": 2,
+        "deadline_before_visit": null,
+        "candidate_continuations": []
+      },
+      "expected": {
+        "visited_order": [
+          10,
+          30
+        ],
+        "visited": [
+          10,
+          30
+        ],
+        "decoded": [
+          10,
+          30
+        ],
+        "pending": [],
+        "edges": [],
+        "obligations": [],
+        "provenance": [
+          {
+            "address": 10,
+            "source": "captured"
+          },
+          {
+            "address": 20,
+            "source": "unavailable"
+          },
+          {
+            "address": 30,
+            "source": "captured"
+          }
+        ],
+        "recovery_status": "drained",
+        "stop_reason": "drained",
+        "phase": "recover",
+        "recovery_visits": 2,
+        "finish_recovery_actions": 0,
+        "dataflow_actions": 0,
+        "slice_actions": 0
+      }
+    }
+  ],
+  "link_cases": [
+    {
+      "name": "captured-reached-e8",
+      "input": {
+        "caller_frame": 1,
+        "child_frame": 0,
+        "caller_reached": true,
+        "caller_decoded": true,
+        "captured": true,
+        "opcode": "e8",
+        "instruction_va": 10,
+        "instruction_size": 5,
+        "saved_return": 15,
+        "decoded_continuation": 15,
+        "decoded_target": 100,
+        "child_entry": 100,
+        "child_entry_valid": true,
+        "matching_candidates": 1,
+        "child_entry_decoded": true,
+        "child_entry_status": "decoded"
+      },
+      "expected_link": true
+    },
+    {
+      "name": "unreached-call",
+      "input": {
+        "caller_frame": 1,
+        "child_frame": 0,
+        "caller_reached": false,
+        "caller_decoded": true,
+        "captured": true,
+        "opcode": "e8",
+        "instruction_va": 10,
+        "instruction_size": 5,
+        "saved_return": 15,
+        "decoded_continuation": 15,
+        "decoded_target": 100,
+        "child_entry": 100,
+        "child_entry_valid": true,
+        "matching_candidates": 1,
+        "child_entry_decoded": true,
+        "child_entry_status": "decoded"
+      },
+      "expected_link": false
+    },
+    {
+      "name": "failed-call",
+      "input": {
+        "caller_frame": 1,
+        "child_frame": 0,
+        "caller_reached": true,
+        "caller_decoded": false,
+        "captured": true,
+        "opcode": "e8",
+        "instruction_va": 10,
+        "instruction_size": 5,
+        "saved_return": 15,
+        "decoded_continuation": 15,
+        "decoded_target": 100,
+        "child_entry": 100,
+        "child_entry_valid": true,
+        "matching_candidates": 1,
+        "child_entry_decoded": true,
+        "child_entry_status": "decoded"
+      },
+      "expected_link": false
+    },
+    {
+      "name": "uncaptured-call",
+      "input": {
+        "caller_frame": 1,
+        "child_frame": 0,
+        "caller_reached": true,
+        "caller_decoded": true,
+        "captured": false,
+        "opcode": "e8",
+        "instruction_va": 10,
+        "instruction_size": 5,
+        "saved_return": 15,
+        "decoded_continuation": 15,
+        "decoded_target": 100,
+        "child_entry": 100,
+        "child_entry_valid": true,
+        "matching_candidates": 1,
+        "child_entry_decoded": true,
+        "child_entry_status": "decoded"
+      },
+      "expected_link": false
+    },
+    {
+      "name": "unsupported-indirect-call",
+      "input": {
+        "caller_frame": 1,
+        "child_frame": 0,
+        "caller_reached": true,
+        "caller_decoded": true,
+        "captured": true,
+        "opcode": "ff",
+        "instruction_va": 10,
+        "instruction_size": 5,
+        "saved_return": 15,
+        "decoded_continuation": 15,
+        "decoded_target": 100,
+        "child_entry": 100,
+        "child_entry_valid": true,
+        "matching_candidates": 1,
+        "child_entry_decoded": true,
+        "child_entry_status": "decoded"
+      },
+      "expected_link": false
+    },
+    {
+      "name": "wrong-e8-size",
+      "input": {
+        "caller_frame": 1,
+        "child_frame": 0,
+        "caller_reached": true,
+        "caller_decoded": true,
+        "captured": true,
+        "opcode": "e8",
+        "instruction_va": 10,
+        "instruction_size": 4,
+        "saved_return": 15,
+        "decoded_continuation": 15,
+        "decoded_target": 100,
+        "child_entry": 100,
+        "child_entry_valid": true,
+        "matching_candidates": 1,
+        "child_entry_decoded": true,
+        "child_entry_status": "decoded"
+      },
+      "expected_link": false
+    },
+    {
+      "name": "wrong-saved-return",
+      "input": {
+        "caller_frame": 1,
+        "child_frame": 0,
+        "caller_reached": true,
+        "caller_decoded": true,
+        "captured": true,
+        "opcode": "e8",
+        "instruction_va": 10,
+        "instruction_size": 5,
+        "saved_return": 16,
+        "decoded_continuation": 15,
+        "decoded_target": 100,
+        "child_entry": 100,
+        "child_entry_valid": true,
+        "matching_candidates": 1,
+        "child_entry_decoded": true,
+        "child_entry_status": "decoded"
+      },
+      "expected_link": false
+    },
+    {
+      "name": "wrong-continuation",
+      "input": {
+        "caller_frame": 1,
+        "child_frame": 0,
+        "caller_reached": true,
+        "caller_decoded": true,
+        "captured": true,
+        "opcode": "e8",
+        "instruction_va": 10,
+        "instruction_size": 5,
+        "saved_return": 15,
+        "decoded_continuation": 16,
+        "decoded_target": 100,
+        "child_entry": 100,
+        "child_entry_valid": true,
+        "matching_candidates": 1,
+        "child_entry_decoded": true,
+        "child_entry_status": "decoded"
+      },
+      "expected_link": false
+    },
+    {
+      "name": "wrong-target",
+      "input": {
+        "caller_frame": 1,
+        "child_frame": 0,
+        "caller_reached": true,
+        "caller_decoded": true,
+        "captured": true,
+        "opcode": "e8",
+        "instruction_va": 10,
+        "instruction_size": 5,
+        "saved_return": 15,
+        "decoded_continuation": 15,
+        "decoded_target": 101,
+        "child_entry": 100,
+        "child_entry_valid": true,
+        "matching_candidates": 1,
+        "child_entry_decoded": true,
+        "child_entry_status": "decoded"
+      },
+      "expected_link": false
+    },
+    {
+      "name": "unvalidated-child-entry",
+      "input": {
+        "caller_frame": 1,
+        "child_frame": 0,
+        "caller_reached": true,
+        "caller_decoded": true,
+        "captured": true,
+        "opcode": "e8",
+        "instruction_va": 10,
+        "instruction_size": 5,
+        "saved_return": 15,
+        "decoded_continuation": 15,
+        "decoded_target": 100,
+        "child_entry": 100,
+        "child_entry_valid": false,
+        "matching_candidates": 1,
+        "child_entry_decoded": true,
+        "child_entry_status": "decoded"
+      },
+      "expected_link": false
+    },
+    {
+      "name": "ambiguous-call",
+      "input": {
+        "caller_frame": 1,
+        "child_frame": 0,
+        "caller_reached": true,
+        "caller_decoded": true,
+        "captured": true,
+        "opcode": "e8",
+        "instruction_va": 10,
+        "instruction_size": 5,
+        "saved_return": 15,
+        "decoded_continuation": 15,
+        "decoded_target": 100,
+        "child_entry": 100,
+        "child_entry_valid": true,
+        "matching_candidates": 2,
+        "child_entry_decoded": true,
+        "child_entry_status": "decoded"
+      },
+      "expected_link": false
+    },
+    {
+      "name": "missing-call",
+      "input": {
+        "caller_frame": 1,
+        "child_frame": 0,
+        "caller_reached": true,
+        "caller_decoded": true,
+        "captured": true,
+        "opcode": "e8",
+        "instruction_va": 10,
+        "instruction_size": 5,
+        "saved_return": 15,
+        "decoded_continuation": 15,
+        "decoded_target": 100,
+        "child_entry": 100,
+        "child_entry_valid": true,
+        "matching_candidates": 0,
+        "child_entry_decoded": true,
+        "child_entry_status": "decoded"
+      },
+      "expected_link": false
+    },
+    {
+      "name": "wrong-activation",
+      "input": {
+        "caller_frame": 0,
+        "child_frame": 0,
+        "caller_reached": true,
+        "caller_decoded": true,
+        "captured": true,
+        "opcode": "e8",
+        "instruction_va": 10,
+        "instruction_size": 5,
+        "saved_return": 15,
+        "decoded_continuation": 15,
+        "decoded_target": 100,
+        "child_entry": 100,
+        "child_entry_valid": true,
+        "matching_candidates": 1,
+        "child_entry_decoded": true,
+        "child_entry_status": "decoded"
+      },
+      "expected_link": false
+    },
+    {
+      "name": "recursive-distinct-activations",
+      "input": {
+        "caller_frame": 1,
+        "child_frame": 0,
+        "caller_reached": true,
+        "caller_decoded": true,
+        "captured": true,
+        "opcode": "e8",
+        "instruction_va": 10,
+        "instruction_size": 5,
+        "saved_return": 15,
+        "decoded_continuation": 15,
+        "decoded_target": 10,
+        "child_entry": 10,
+        "child_entry_valid": true,
+        "matching_candidates": 1,
+        "child_entry_decoded": true,
+        "child_entry_status": "decoded"
+      },
+      "expected_link": true
+    },
+    {
+      "name": "saved-return-overflow",
+      "input": {
+        "caller_frame": 1,
+        "child_frame": 0,
+        "caller_reached": true,
+        "caller_decoded": true,
+        "captured": true,
+        "opcode": "e8",
+        "instruction_va": 18446744073709551612,
+        "instruction_size": 5,
+        "saved_return": 1,
+        "decoded_continuation": 1,
+        "decoded_target": 100,
+        "child_entry": 100,
+        "child_entry_valid": true,
+        "matching_candidates": 1,
+        "child_entry_decoded": true,
+        "child_entry_status": "decoded"
+      },
+      "expected_link": false
+    },
+    {
+      "name": "pending-child-entry",
+      "input": {
+        "caller_frame": 1,
+        "child_frame": 0,
+        "caller_reached": true,
+        "caller_decoded": true,
+        "captured": true,
+        "opcode": "e8",
+        "instruction_va": 10,
+        "instruction_size": 5,
+        "saved_return": 15,
+        "decoded_continuation": 15,
+        "decoded_target": 100,
+        "child_entry": 100,
+        "child_entry_valid": true,
+        "matching_candidates": 1,
+        "child_entry_decoded": false,
+        "child_entry_status": "pending"
+      },
+      "expected_link": false
+    },
+    {
+      "name": "failed-child-entry",
+      "input": {
+        "caller_frame": 1,
+        "child_frame": 0,
+        "caller_reached": true,
+        "caller_decoded": true,
+        "captured": true,
+        "opcode": "e8",
+        "instruction_va": 10,
+        "instruction_size": 5,
+        "saved_return": 15,
+        "decoded_continuation": 15,
+        "decoded_target": 100,
+        "child_entry": 100,
+        "child_entry_valid": true,
+        "matching_candidates": 1,
+        "child_entry_decoded": false,
+        "child_entry_status": "failed"
+      },
+      "expected_link": false
+    }
+  ],
+  "limit_cases": [
+    {
+      "name": "source_bytes-4",
+      "dimension": "source_bytes",
+      "required": 5,
+      "host_capacity": 4,
+      "producer_claimed_capacity": 1000000,
+      "expected_trusted": false
+    },
+    {
+      "name": "source_bytes-5",
+      "dimension": "source_bytes",
+      "required": 5,
+      "host_capacity": 5,
+      "producer_claimed_capacity": 1000000,
+      "expected_trusted": true
+    },
+    {
+      "name": "source_bytes-6",
+      "dimension": "source_bytes",
+      "required": 5,
+      "host_capacity": 6,
+      "producer_claimed_capacity": 1000000,
+      "expected_trusted": true
+    },
+    {
+      "name": "proof_bytes-4",
+      "dimension": "proof_bytes",
+      "required": 5,
+      "host_capacity": 4,
+      "producer_claimed_capacity": 1000000,
+      "expected_trusted": false
+    },
+    {
+      "name": "proof_bytes-5",
+      "dimension": "proof_bytes",
+      "required": 5,
+      "host_capacity": 5,
+      "producer_claimed_capacity": 1000000,
+      "expected_trusted": true
+    },
+    {
+      "name": "proof_bytes-6",
+      "dimension": "proof_bytes",
+      "required": 5,
+      "host_capacity": 6,
+      "producer_claimed_capacity": 1000000,
+      "expected_trusted": true
+    },
+    {
+      "name": "nodes-4",
+      "dimension": "nodes",
+      "required": 5,
+      "host_capacity": 4,
+      "producer_claimed_capacity": 1000000,
+      "expected_trusted": false
+    },
+    {
+      "name": "nodes-5",
+      "dimension": "nodes",
+      "required": 5,
+      "host_capacity": 5,
+      "producer_claimed_capacity": 1000000,
+      "expected_trusted": true
+    },
+    {
+      "name": "nodes-6",
+      "dimension": "nodes",
+      "required": 5,
+      "host_capacity": 6,
+      "producer_claimed_capacity": 1000000,
+      "expected_trusted": true
+    },
+    {
+      "name": "edges-4",
+      "dimension": "edges",
+      "required": 5,
+      "host_capacity": 4,
+      "producer_claimed_capacity": 1000000,
+      "expected_trusted": false
+    },
+    {
+      "name": "edges-5",
+      "dimension": "edges",
+      "required": 5,
+      "host_capacity": 5,
+      "producer_claimed_capacity": 1000000,
+      "expected_trusted": true
+    },
+    {
+      "name": "edges-6",
+      "dimension": "edges",
+      "required": 5,
+      "host_capacity": 6,
+      "producer_claimed_capacity": 1000000,
+      "expected_trusted": true
+    },
+    {
+      "name": "replay_actions-4",
+      "dimension": "replay_actions",
+      "required": 5,
+      "host_capacity": 4,
+      "producer_claimed_capacity": 1000000,
+      "expected_trusted": false
+    },
+    {
+      "name": "replay_actions-5",
+      "dimension": "replay_actions",
+      "required": 5,
+      "host_capacity": 5,
+      "producer_claimed_capacity": 1000000,
+      "expected_trusted": true
+    },
+    {
+      "name": "replay_actions-6",
+      "dimension": "replay_actions",
+      "required": 5,
+      "host_capacity": 6,
+      "producer_claimed_capacity": 1000000,
+      "expected_trusted": true
+    },
+    {
+      "name": "output_bytes-4",
+      "dimension": "output_bytes",
+      "required": 5,
+      "host_capacity": 4,
+      "producer_claimed_capacity": 1000000,
+      "expected_trusted": false
+    },
+    {
+      "name": "output_bytes-5",
+      "dimension": "output_bytes",
+      "required": 5,
+      "host_capacity": 5,
+      "producer_claimed_capacity": 1000000,
+      "expected_trusted": true
+    },
+    {
+      "name": "output_bytes-6",
+      "dimension": "output_bytes",
+      "required": 5,
+      "host_capacity": 6,
+      "producer_claimed_capacity": 1000000,
+      "expected_trusted": true
+    },
+    {
+      "name": "checked-sum-overflow",
+      "dimension": "source_bytes",
+      "required_parts": [
+        18446744073709551615,
+        1
+      ],
+      "host_capacity": 18446744073709551615,
+      "producer_claimed_capacity": 18446744073709551615,
+      "expected_trusted": false
+    },
+    {
+      "name": "zero-empty-evidence",
+      "dimension": "proof_bytes",
+      "required": 0,
+      "host_capacity": 0,
+      "producer_claimed_capacity": 0,
+      "expected_trusted": true
+    },
+    {
+      "name": "zero-nonempty-evidence",
+      "dimension": "proof_bytes",
+      "required": 1,
+      "host_capacity": 0,
+      "producer_claimed_capacity": 1000000,
+      "expected_trusted": false
+    }
+  ],
+  "admission_cases": [
+    {
+      "name": "hard-preparation-failure",
+      "input": {
+        "prepared": false,
+        "identity_valid": true,
+        "proofs_valid": true,
+        "host_verifier_finished": true,
+        "independent_neighbor_prepared": true
+      },
+      "expected_status": "unavailable",
+      "expected_neighbor_preserved": true
+    },
+    {
+      "name": "invalid-snapshot",
+      "input": {
+        "prepared": true,
+        "identity_valid": false,
+        "proofs_valid": true,
+        "host_verifier_finished": true,
+        "independent_neighbor_prepared": true
+      },
+      "expected_status": "invalid",
+      "expected_neighbor_preserved": false
+    },
+    {
+      "name": "invalid-proof",
+      "input": {
+        "prepared": true,
+        "identity_valid": true,
+        "proofs_valid": false,
+        "host_verifier_finished": true,
+        "independent_neighbor_prepared": true
+      },
+      "expected_status": "invalid",
+      "expected_neighbor_preserved": false
+    },
+    {
+      "name": "verifier-exhausted",
+      "input": {
+        "prepared": true,
+        "identity_valid": true,
+        "proofs_valid": true,
+        "host_verifier_finished": false,
+        "independent_neighbor_prepared": true
+      },
+      "expected_status": "verification_stopped",
+      "expected_neighbor_preserved": false
+    },
+    {
+      "name": "independent-neighbor",
+      "input": {
+        "prepared": true,
+        "identity_valid": true,
+        "proofs_valid": true,
+        "host_verifier_finished": true,
+        "independent_neighbor_prepared": true
+      },
+      "expected_status": "available",
+      "expected_neighbor_preserved": true
+    }
+  ]
+}

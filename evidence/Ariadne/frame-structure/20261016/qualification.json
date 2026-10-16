@@ -1,0 +1,234 @@
+{
+  "schema": "ariadne.frame-structure-qualification/v1",
+  "recorded_utc": "2026-10-16T06:07:15.696416+00:00",
+  "status": "passed within stated finite Stage 5.1 scope",
+  "source": {
+    "base_revision": "4811d7de6f2b86319135a5f0a1a18c397a4cd4c2",
+    "capsule_sha256": "8266a844e60e3afbcaa8f0bba557899a0466e18940d8fa881630377cf78bb37c",
+    "packaged_files": 1093,
+    "runtime_files_verified": 693,
+    "runtime_manifest": "sources/final-runtime-source.json"
+  },
+  "root": {
+    "default": {
+      "passed": 285,
+      "failed": 0,
+      "ignored": 106,
+      "summary_rows": 41,
+      "doctests_passed": 3
+    },
+    "core_only": {
+      "passed": 57,
+      "failed": 0,
+      "ignored": 22,
+      "summary_rows": 12,
+      "doctests_passed": 3
+    },
+    "fmt": "checks/root-fmt.log",
+    "clippy": "checks/root-clippy.log",
+    "layout": "checks/root-layout.log",
+    "no_external_core_dependencies": "checks/core-dependencies.log",
+    "receipt": "checks/root-result.json",
+    "navigation": "Final complete-tree navigation is coordinator evidence outside this raw archive; isolated-reader prerequisite failure retained in history"
+  },
+  "model": {
+    "configurations": 43,
+    "source_files_verified": 50,
+    "model_sha256": "58f3f368b3fdf730fcee104769a43de452af899d1d5a3c0e682edf907dc87ec1",
+    "oracle_counts": {
+      "recovery_cases": 22,
+      "link_cases": 17,
+      "limit_cases": 21,
+      "admission_cases": 5
+    },
+    "oracle_negative_controls_rejected": 8,
+    "mutation_negative_tier": "43 finite scenario controls plus 8 mutated-expectation observer controls; no mutated-TLA checker campaign was run",
+    "qualification_boundary": "Finite safety, scenario outcomes and fair termination; concrete decoder/capture/proof validators remain premises; no universal refinement",
+    "tool_identity_record": "checks/model-tool-identities.json"
+  },
+  "independent_review": "checks/focused-review.json",
+  "mutations": {
+    "compiled_behavioral_mutants_rejected": 9,
+    "passing_unmodified_controls": 9,
+    "source_files_verified": 620,
+    "scope": "Rust recovery/frame-link/host-limit behavior; no compile or transport failure credited; no native-helper or original-dump mutation claim",
+    "report": "mutations/report.json"
+  },
+  "native_compatibility": {
+    "counts": {
+      "passed": 38,
+      "failed": 0,
+      "ignored": 0,
+      "summary_rows": 6,
+      "doctests_passed": 0
+    },
+    "log": "checks/native-compatibility.log",
+    "selected_targets": [
+      "bap_native",
+      "bap_core_analysis",
+      "input_bap_core",
+      "input_frame_paths",
+      "input_investigation",
+      "input_bap_backend"
+    ],
+    "scope": "Explicitly exercised ignored compatibility tests; default ignored counts are not credited as executed"
+  },
+  "structural_capture": {
+    "counts": {
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "summary_rows": 1,
+      "doctests_passed": 0
+    },
+    "log": "checks/native-structure-cli-final.log"
+  },
+  "feature_boundaries": [
+    "checks/feature-reports.log",
+    "checks/feature-bap.log"
+  ],
+  "public_replay": {
+    "counts": {
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "summary_rows": 1,
+      "doctests_passed": 0
+    },
+    "log": "checks/dump-final-replay.log",
+    "feature_selection": "--no-default-features --features bap",
+    "native_helpers": "unavailable by explicit environment paths and unused",
+    "assertions": "Expected publication binding, exact JSON/text/DOT bytes, all frame phases Recover, metrics.actions=visits and all dataflow/transfer/slice metrics zero"
+  },
+  "dump": {
+    "artifact_sha256": "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+    "thread_id": 23668,
+    "question": {
+      "from_frame": 1,
+      "to_frame": 0
+    },
+    "structure_id": "229e9248025f1470110b652c92ea370131cee2bf4fe72484a8dee8cb4c39db18",
+    "producer": "rust-recovery/v1",
+    "semantic_backend": "bap",
+    "dictionary_entries": 222830,
+    "frames": [
+      {
+        "frame": 0,
+        "entry": "0x00007ff77443d960",
+        "visited": 778,
+        "decoded": 778,
+        "edges": 895,
+        "pending": 0,
+        "visits": 778,
+        "phase": "recover",
+        "gap_count": 45,
+        "gap_kinds": {
+          "exception_exit": 10,
+          "opaque_call_context": 25,
+          "unknown_call_target": 8,
+          "unknown_indirect_target": 2
+        },
+        "unresolved_guards": [],
+        "all_frozen_inputs_equal": true
+      },
+      {
+        "frame": 1,
+        "entry": "0x00007ff7744033a0",
+        "visited": 9590,
+        "decoded": 9589,
+        "edges": 11321,
+        "pending": 0,
+        "visits": 9590,
+        "phase": "recover",
+        "gap_count": 565,
+        "gap_kinds": {
+          "exception_exit": 29,
+          "opaque_call_context": 535,
+          "unresolved_guard": 1
+        },
+        "unresolved_guards": [
+          {
+            "site": "0x00007ff7744035c9",
+            "verdict": "unknown",
+            "residual": "normal-or-alignment-fault-unresolved"
+          }
+        ],
+        "all_frozen_inputs_equal": true
+      }
+    ],
+    "links": [
+      {
+        "admitted": true,
+        "call_site": "0x00007ff774404108",
+        "caller": 1,
+        "child": 0,
+        "child_entry": "0x00007ff77443d960",
+        "continuation": "0x00007ff77440410d"
+      }
+    ],
+    "diagnostics": [],
+    "all_frozen_inputs_equal": true,
+    "independent_frozen_control_passed": true,
+    "independent_current_control_passed": true,
+    "independent_link_comparison_equal": true,
+    "summary": "dump/dump-final-summary.json",
+    "policy": "dump/dump-final-policy.json",
+    "timing_scope": "One observed run only; not a benchmark or performance qualification"
+  },
+  "payloads": "payload-index.json",
+  "operational_drivers": [
+    "archive-namespace-attempt.sh",
+    "bootstrap.sh",
+    "build-volume.sh",
+    "cargo-check.sh",
+    "collect-final.py",
+    "collect-final.sh",
+    "collect-model-mutations.py",
+    "collect-model-mutations.sh",
+    "compatibility-final.sh",
+    "compatibility.sh",
+    "correction-check.sh",
+    "dump-final-summary.py",
+    "dump-final.sh",
+    "dump-preflight.sh",
+    "dump-summary.py",
+    "enter-volume.sh",
+    "final-acceptance.sh",
+    "first-check.sh",
+    "fix-tmp.sh",
+    "format.sh",
+    "model-tool-identities.sh",
+    "mount-keeper.sh",
+    "mutations.sh",
+    "native-check.sh",
+    "permissions.sh",
+    "read-remote-reference.py",
+    "reconcile-root-receipt.py",
+    "replay-final.sh",
+    "retry-root.sh",
+    "root-checks.sh",
+    "root-finish.sh",
+    "run.sh",
+    "start-mount.sh",
+    "stop-mutation.py",
+    "storage.sh",
+    "summarize-final.sh"
+  ],
+  "excluded_claims": [
+    "Full caller dataflow completion/caller S6",
+    "Frame-path F4 or path enumeration/completeness",
+    "Native structural producer/full native-Rust parity",
+    "Universal refinement or ISA proof",
+    "Executed history or crash root cause",
+    "Performance qualification",
+    "Exceptional resumption or whole-machine completeness"
+  ],
+  "omitted_payloads": [
+    "Original dump",
+    "Build/image files and binaries",
+    "TLC state databases",
+    "Mutant source checkouts",
+    "Preliminary full reports",
+    "Rejected local proof upload blob"
+  ]
+}

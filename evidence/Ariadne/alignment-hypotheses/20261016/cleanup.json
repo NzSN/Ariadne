@@ -1,0 +1,14 @@
+{
+  "schema": "ariadne.alignment-hypothesis-cleanup/v1",
+  "recorded_utc": "2026-10-16T09:59:59.559654+00:00",
+  "status": "passed",
+  "verified_keeper_pid": 914,
+  "verified_keeper_command": "bash /mnt/d/ariadne-frame-structure-20261016/mount-keeper.sh",
+  "mount_namespace": "mnt:[4026532217]",
+  "task_mount_users_before": [],
+  "action": "SIGTERM verified task-owned keeper; its trap unmounted the build volume and removed its PID file",
+  "keeper_pid_file_removed": true,
+  "build_image_retained": "/mnt/d/ariadne-frame-structure-20261016/build.ext4",
+  "previous_cleanup_receipt_modified": false,
+  "qualification_jobs_running": false
+}

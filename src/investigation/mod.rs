@@ -3,6 +3,15 @@ mod backward_values;
 mod explain;
 mod fault_context;
 pub(crate) mod frame_paths;
+#[cfg(feature = "bap")]
+pub(crate) mod frame_structure;
+#[cfg(feature = "bap")]
+pub use frame_structure::{
+    BoundFrameRecovery, BoundFrameStructure, FRAME_STRUCTURE_PRODUCER, FRAME_STRUCTURE_SCHEMA,
+    FrameStructureDiagnostic, FrameStructureDiagnosticKind, FrameStructureEdge, FrameStructureGap,
+    FrameStructureGapKind, FrameStructureLimits, FrameStructureLink, FrameStructureMap,
+    FrameStructureQuestion, active_frame_structure_entry, bind_frame_structure,
+};
 pub(crate) mod frame_unwind;
 pub use frame_paths::{
     BoundFramePaths, COMPOSED_FRAME_PATH_SCHEMA, FRAME_PATH_SCHEMA, FramePathCounters,

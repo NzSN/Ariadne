@@ -21,8 +21,11 @@ resolved that namespace refusal while retaining the alignment stop at that date.
 The [2026-10-15 caller coverage qualification](../../evidence/Ariadne/caller-semantic-coverage/20261015/README.md)
 subsequently removes the original caller barriers and recovers its larger
 structural graph; full caller dataflow still exhausts its action budget, so the
-existing completed-query path mode remains unavailable. Stage 5.1 below proposes
-a separate structural report before dataflow; its SF0–SF6 stages are all planned.
+existing completed-query path mode remains unavailable. Stage 5.1 implements
+a separate structural report before dataflow. Its
+[2026-10-16 qualification](../../evidence/Ariadne/frame-structure/20261016/README.md)
+completes SF0–SF6 within the finite Windows AMD64 captured-frame/E8-call scope;
+caller completion and full frame-path acceptance retain separate gates.
 
 **Why this document exists.** The [real-capture slice](file-reader-design.md#historical-controlled-chromium-capture)
 provides possible origins but leaves their explanation to the investigator.
@@ -50,8 +53,9 @@ and qualification preserve alternatives and missing premises. The frame-path que
 - [Frame-path implementation plan](../../.agents/plans/frame-path-enumeration.md)
   — F0–F4 contract, captured unwind profile, bounded enumeration and validation.
 - [Structural frame report plan](../../.agents/plans/frame-structure-report.md)
-  — proposed Stage 5.1, SF0–SF6 recovery-prefix API, separate report, finite
-  resource policy and qualification before any dataflow or path enumeration.
+  — implemented Stage 5.1 recovery-prefix API, separate report and finite host
+  policy and [source-bound qualification](../../evidence/Ariadne/frame-structure/20261016/README.md).
+  No dataflow or path enumeration is performed.
 - [Caller semantic-coverage design](caller-semantic-coverage-design.md)
   — later terminal/load admission and the remaining completed-caller dataflow gate.
 - [Justified branch pruning design](justified-branch-pruning-design.md) — checked
@@ -81,10 +85,15 @@ Object/source context, historical execution and cross-capture questions remain
 open. The bounded frame-path implementation admits a finite captured-unwind profile
 and separately bound instruction graphs; general unwinding and broader capture
 qualification remain open. Caller semantic-coverage S6 and frame-path F4 remain
-incomplete; the proposed structural mode does not close either gate.
+incomplete; the structural report does not close either gate.
 Full-memory capture alone does not supply a trace.
 Possible producers and numeric conclusions do not prove a UAF, executed
 path or general root cause.
+The explicit alignment-hypothesis extension is implemented and
+[qualified in its finite scope](../../evidence/Ariadne/alignment-hypotheses/20261016/README.md).
+Its [H0–H5 ledger](../../.agents/plans/alignment-hypotheses.md) records the
+additive conditional product; the original Stage 5.1 evidence retains its own
+source identity. Caller S6 and frame-path F4 remain open.
 
 For wider navigation, see the [documentation map](../documentation-map.md).
 
@@ -361,11 +370,134 @@ cross-thread reasoning. Those require separately supported evidence and models.
 
 ## Structural frame report before dataflow
 
-**Stage 5.1 — proposed.** This is the canonical contract for publishing bounded
-frame-local recovered structure when full reaching-definition analysis is too
-expensive. The [SF0–SF6 implementation plan](../../.agents/plans/frame-structure-report.md)
-records execution and acceptance; every stage is planned. This section defines
-neither a delivered API nor new qualification of the existing frame-path mode.
+**Stage 5.1 — scoped qualification complete.** This is the canonical
+contract for publishing bounded frame-local recovered structure when full
+reaching-definition analysis is too expensive. The [SF0–SF6 implementation plan](../../.agents/plans/frame-structure-report.md)
+records execution and acceptance. The recovery API, capture binder, separate
+codecs and opt-in CLI are implemented and
+[qualified on their recorded sources](../../evidence/Ariadne/frame-structure/20261016/README.md),
+including the named dump and standalone saved replay. Existing completed caller
+and frame-path acceptance remain separate.
+
+### Explicit alignment hypotheses
+
+**Status, 2026-10-16.** Implemented and [qualified within the declared finite
+profile](../../evidence/Ariadne/alignment-hypotheses/20261016/README.md).
+The [H0–H5 ledger](../../.agents/plans/alignment-hypotheses.md) records the
+completed extension. Its additive checker, model, conditional request and v2
+report preserve the original request/context/guard/target/composition inputs
+and keep the baseline verdict separate.
+
+`--assume-frame-aligned FRAME:VA` selects an existing reviewed MOVAPS guard in
+a selected physical activation. For example,
+`--assume-frame-aligned 1:0x00007ff7744035c9` means: whenever frame 1 reaches
+that instruction, assume `(RSP + 0x240) mod 16 = 0`. It constrains the low four
+bits at that point and supplies no new entry root or observed register value.
+The hypothesis applies on every modeled visit in that activation.
+
+A separate source-bound certificate retains the original request, source facts,
+guard verdict and target/composition evidence. Its conditional residue solver
+filters the incoming states at each assumed point before further propagation.
+It distinguishes an assumed normal selection from alignment proved by the
+original premises, an empty conditional branch and an unknown result. Limits
+or incomplete incoming coverage never establish an assumed normal edge.
+
+Only the recognized MOVAPS normal BIL may be selected under this hypothesis.
+The production BAP projector computes its effects. Original target proofs are
+replayed on their owning candidate graph; this extension claims no new target
+precision under the assumption. Final identities bind the whole hypothesis
+context and conditional request. The new structural schema is v2 when a
+hypothesis participates; the ordinary v1 route and its proof contract remain
+separate. Text, DOT and JSON identify the conditional premise and retain the
+baseline unknown decision. Saved replay independently checks the same
+bounded finite derivation. Native full analysis cannot consume this conditional
+product through the existing capture interface.
+
+The opt-in CLI is repeatable and restricted to structural mode. For the named
+capture, use the retained policy and original thread/frame selection:
+
+```sh
+target/release/ariadne-minidump original.dmp \
+  --frame-structure 1:0 --thread-id 23668 \
+  --frame-structure-limits evidence/Ariadne/alignment-hypotheses/20261016/corpus-policy.json \
+  --assume-windows-call-entry --resolve-indirect-targets \
+  --assume-frame-aligned 1:0x00007ff7744035c9 \
+  --decoder-reference target/ariadne-llvm-mc \
+  --bap-helper target/ariadne-bap-lift --bap-runtime tmp/bap-setup/stable \
+  --output-dir conditional-frame-structure
+```
+
+The library first obtains the unchanged `FilePreparedAnalysis` through
+`FileSnapshot::prepare_frame_structure`, then calls
+`FileSnapshot::bind_frame_recovery_hypotheses(&chain, index, &prepared,
+&[site], &limits)`. Live capture and baseline proof validation precede the
+additive certificate. `bap::alignment_hypothesis::{certify, validate,
+base_request, analysis_id}` owns the conditional proof contract;
+`BoundFrameRecovery::alignment_hypotheses` exposes that proof separately from
+the original context. `BoundFrameStructure::{is_conditional, hypothesis_ids}`
+and per-map/link/control scope fields identify all retained hypotheses.
+
+With H, the schema is `ariadne.frame-structure/v2` and producer is
+`rust-recovery-alignment-hypotheses/v1`. Without H, v1 remains byte-compatible
+with actual retained Stage 5.1 reports. Captured byte provenance remains
+captured; derived structure, including maps and links from other participating
+frames, is conservatively labelled conditional on the report's whole H set.
+Baseline Unknown decisions and all original source/proof records survive saved
+transport. The strict codec checks hypothesis IDs/counts under host policy
+before typed allocation, then applies intersected producer/host caps before
+proof replay.
+
+`reports::frame_structure::decode` checks self-contained consistency under the
+declared capture/lifting premises; `decode_expected` additionally checks a
+publication binding retained independently of the report. Neither turns an
+assumption into a captured observation. Standalone BAP-only saved replay needs
+no native helper/runtime; JSON/text/DOT preserve the conditional annotations.
+
+A conditional graph answers what structure can be recovered under H. It does
+not establish that H held, that the instruction executed, that the memory was
+readable, or which historical path executed. Caller S6 and frame-path F4 keep
+their separate gates. The [dated qualification](../../evidence/Ariadne/alignment-hypotheses/20261016/README.md)
+records this conditional product's finite acceptance.
+
+#### 2026-10-16 alignment-hypothesis qualification
+
+The [retained bundle](../../evidence/Ariadne/alignment-hypotheses/20261016/README.md)
+binds corrected source capsule
+`34d078b4e3c94977620e72313111d40d52fae1978af05b0682d716d1bec5d556`
+(1,060 files; 725 runtime-inventory files unchanged), the pinned helpers and
+the finite policy. Root validation passes 298 default / 57 core-only tests,
+each including three doctests, formatting and Clippy. The ordinary suites leave
+108 / 22 ignored tests. Nine new kernel tests, 25 model configurations,
+39 oracle cases, six compiled behavioral mutants, the named capture/codec and
+38 release compatibility controls pass. Actual saved v1 and standalone saved
+v2 replay pass separately; this does not qualify every ignored test.
+
+For dump `dump_03958DA4FCA844A786262A1053`, thread 23668, frames 1→0, H states
+that the reviewed MOVAPS at `0x00007ff7744035c9` is aligned whenever reached.
+The baseline verdict remains Unknown. The conditional basis is Assumed, with
+residue mask `0x0001`, and the normal edge to `0x00007ff7744035d1` is admitted
+only under H.
+
+| Frame | Baseline visited / decoded / edges | Conditional visited / decoded / edges |
+| --- | --- | --- |
+| 1, caller | 9,590 / 9,589 / 11,321 | 9,600 / 9,600 / 11,331 |
+| 0, callee | 778 / 778 / 895 | 778 / 778 / 895 |
+
+All roots, captured-source facts, original requests/contexts and guard/target/
+composition receipts are retained unchanged as baseline inputs. An independent
+explicit product BFS checks 153,210 states under a 153,600-state bound and
+172,346 transfer evaluations, matching every incoming and masked residue fact.
+This finite graph retains structural edges; a composed path can still be
+infeasible. No accumulated branch-constraint SAT/SMT or executed-path claim is
+made.
+
+The caller retains 565 typed boundaries: the prior unresolved guard disappears
+under H, while a newly reached return adds an opaque call-context boundary,
+giving 536 opaque contexts and 29 exceptional exits. Callee boundaries remain
+45: two unknown indirect targets, eight unknown call targets, 25 opaque
+contexts and 10 exceptional exits. No new target precision is claimed.
+Caller S6, frame-path F4, full caller dataflow, exact history and performance
+qualification remain separate.
 
 ### Prepared input and recovery prefix
 
@@ -377,11 +509,15 @@ Preserve the declared entry roots, capture-only reads, semantic VAs, accepted
 normal-completion scope, proof epochs and explicit residuals. LLVM MC remains an
 independent decode/control reference and supplies no fallback effects.
 
-A new privately constructed, standard-library-only `RecoveryResult` in proposed
+A privately constructed, standard-library-only `RecoveryResult` in
 `src/recovery.rs` owns the validated immutable request and structural result.
 It runs the existing `Analyzer` deterministic `Visit` prefix and stops **before
 `FinishRecovery`**, including when `pending` is already empty. Thus a drained
 result remains in `Phase::Recover`; it is not a completed `AnalysisResult`.
+Before each next Visit, queue exhaustion takes priority over the Visit limit,
+which takes priority over the deadline. Zero limits are real limits. Receipt
+replay validates the exact prefix and clock consistency without reproducing
+the producer's wall clock.
 Do not execute dataflow/slicing actions, compute origins, call
 `NativeAnalyzer.complete`, or implement `AnalysisView` for the new core type.
 Existing completed-analysis consumers and the old frame-path binder retain
@@ -394,10 +530,12 @@ does not select or qualify a replacement full-analysis backend.
 
 ### Separate frame binding and report
 
-Proposed `BoundFrameStructure` binds frame activations and their recovery results;
-`FrameStructureReport` publishes the separate `ariadne.frame-structure/v1`
-schema. Construction and replay compare final normalized requests, capture
-evidence and required proofs rather than trusting a serialized graph. Retain
+`BoundFrameStructure` binds frame activations and their recovery results;
+`reports::frame_structure` publishes the separate `ariadne.frame-structure/v1`
+schema through private `RawReport` transport. Public `BoundFrameRecovery` and
+`BoundFrameStructure` are not trusted through direct deserialization.
+Construction and replay compare final normalized requests, capture evidence
+and required proofs rather than trusting a serialized graph. Retain
 snapshot, thread, frame-chain, function/entry, query, producer, policy and
 evidence identities. Recursive activations use distinct frame-qualified nodes.
 
@@ -439,22 +577,21 @@ load bytes; graph nodes/edges; recovery actions and replay work; and published
 bytes. Overflow uses checked arithmetic. Producer receipts record consumed
 work and their own limits but cannot raise host caps. Existing 8,192-node,
 4 MiB evidence and 8 MiB report clamps do not become new-mode clamps.
-SF0 freezes finite defaults after sizing the retained payload and all required
-evidence, with reviewed headroom; larger explicit values remain finite and
-subject to the host policy. No unbounded default is implied.
+Finite defaults account for the retained payload and required evidence with
+headroom; larger explicit values remain finite and subject to host policy. No unbounded default is implied.
 
 V1 evidence is self-contained, using a deduplicated dictionary of captured
 sources and proof/load records with validated typed references. Bind every
 reference to its owner, query, semantic role and byte extent; reject missing,
 duplicate/conflicting, wrong-owner or out-of-domain references. Loading and
 replay enforce host limits before allocating the referenced payload. If the
-evidence or publication envelope cannot fit, return a typed diagnostic with
-the affected scope and counters. Do not clip a graph or drop required proofs
-and then publish the remainder as a trusted sealed graph.
+evidence or publication envelope cannot fit, refuse trusted publication with
+an error. Do not clip a graph or drop required proofs and then publish the
+remainder as a trusted sealed graph.
 
 ### Opt-in usage and acceptance boundary
 
-The proposed CLI is `--frame-structure N:M`, with `N >= M >= 0`, and optional
+The opt-in CLI is `--frame-structure N:M`, with `N >= M >= 0`, and optional
 strict JSON policy file `--frame-structure-limits <policy.json>`. It is independent of
 `--list-frame-paths` and requires no `NP`. Track explicit flag use: reject an
 explicit `--analysis-backend` and incompatible full-analysis, entry/seed,
@@ -462,21 +599,118 @@ explanation, assessment and path-enumeration flags in this mode. The existing
 default `bap` applies only to existing full-analysis routes. Shared capture,
 helper and evidence options retain their validated preparation roles.
 
+```sh
+target/release/ariadne-minidump crash.dmp \
+  --frame-structure 1:0 --thread-id 23668 \
+  --frame-structure-limits evidence/Ariadne/frame-structure/20261016/corpus-policy.json \
+  --assume-windows-call-entry --resolve-indirect-targets \
+  --decoder-reference target/ariadne-llvm-mc \
+  --bap-helper target/ariadne-bap-lift --bap-runtime tmp/bap-setup/stable \
+  --output-dir frame-structure-output
+```
+
+The output directory contains `frame-structure.json`, `.txt` and `.dot`.
+`--format json|text|dot` selects one stdout format instead. Saved-report replay
+is a library API; no stdin saved-report replay mode is added. The ABI premise and
+captured-control-data premise above are explicit options. With neither option,
+the mode still retains complete BAP guard-source proofs, supplies no alignment
+premise and preserves unresolved control. Native-core completion is never
+required by this route.
+
+The public API uses `recovery::recover` / `replay_recovery`,
+`FileSnapshot::prepare_frame_structure` / `bind_frame_recovery`, and
+`investigation::bind_frame_structure`. `RecoveryResult` exposes immutable
+request, control state, limits, receipt and metrics. `BoundFrameStructure`
+exposes frame maps, typed gaps, captured stack relations, admitted E8 links and
+diagnostics separately. `reports::frame_structure::{render_json, render_text,
+render_dot, decode}` supplies the product and replay boundary; `decode_expected`
+also checks an independently retained publication binding before replay.
+Saved replay establishes consistency under the declared capture identity and
+trusted lifting premises. Actual artifact authentication requires the owning
+capture or an independently trusted publication identity; reading the expected
+binding from the same untrusted report does not authenticate it.
+
+`FrameStructureLimits` is a strict, complete JSON policy rather than a set of
+overrides, read under a fixed 64 KiB policy-file cap before opening the dump.
+It covers input, unwind, preparation, recovery, aggregate evidence, proof replay,
+dictionary expansion and publication independently. Defaults
+allow 1,048,576 runtime rows (the retained corpus needed 440,520), 65,536 graph
+nodes, 262,144 edges, 256 MiB expanded evidence/proof caps and 512 MiB input/output
+caps, with 1,000,000 aggregate replay Visits and 16,000,000 replay-work units.
+Larger explicit finite policy values remain possible. Explicit shared
+preparation, artifact, guard and target options may lower this host policy;
+their implicit legacy defaults do not replace it, and producer receipts cannot
+raise it. Zero work limits remain real zero limits. A verifier exhaustion
+refuses a trusted bound result; a producer stop preserves its exact pending set.
+
+The self-contained JSON dictionary deduplicates source, normalized-request,
+decoder, preparation and guard/target/composition subtrees. References carry
+frame owner and semantic role. Replay checks every content identity, reference,
+scope, exact prefix and claimed graph, rejecting unused records and contradictory
+diagnostics. Flat dictionary expansion uses iterative bounded traversal, then
+the strict JSON parser's nesting profile. Publication limits apply while
+building the dictionary and writing each format.
+
 Stage 5.1 adds no SCC summaries, path enumeration, new target resolver,
 value-flow solver or resumable preparation checkpoint. Its controls cover
 empty/drained prefixes, work stops, failed endpoints, typed boundaries,
 tampered evidence, independent-frame survival and every resource dimension.
-Qualification must show that no `FinishRecovery`/dataflow action occurs and
-that default full-analysis behavior and old report replay remain intact.
+The qualified controls verify that no `FinishRecovery`/dataflow action occurs
+and exercise default full-analysis behavior and actual legacy report replay
+within the declared finite corpus.
 
-The retained [final-helper refresh `075602`](../../evidence/Ariadne/caller-semantic-coverage/20261015/README.md#original-dump-result)
-is a structural control oracle: caller 9,590 visited, 9,589 decoded and 11,321
-edges; the later MOVAPS load at `0x00007ff7744035c9` stays unknown; callee 778
-decoded and 895 edges with its two indirect barriers. Compare these values only
-when frozen requests and required evidence are identical; changed inputs need
-their own baseline. That refresh did not attempt caller completion or fresh
-path enumeration. A future Stage 5.1 pass will not complete caller-coverage S6,
-frame-path F4, full native/Rust state parity or an executed-history claim.
+### 2026-10-16 structural qualification
+
+The [Stage 5.1 bundle](../../evidence/Ariadne/frame-structure/20261016/README.md)
+records SF0–SF6 completion on corrected source capsule `8266a844e60e3afbcaa8f0bba557899a0466e18940d8fa881630377cf78bb37c`
+(1,093 files), based on `4811d7de6f2b86319135a5f0a1a18c397a4cd4c2`. Its 693-file runtime
+inventory remains unchanged throughout final validation. The Stop-barrier
+validator correction and failed earlier attempts remain in the retained
+history; their passes are not substituted for the final corrected-source run.
+
+Remote root checks pass formatting, 285 default tests including three doctests,
+57 core-only tests including three doctests, all-feature/all-target Clippy,
+Rust layout, reports-only/BAP-only builds and a dependency-free core tree.
+The root runs retain 106 default / 22 core-only ignored tests; the new structural
+capture CLI test and 38 named native/capture/compatibility cases pass separately.
+The model sources pass 43 finite configurations; the independent literal
+corpus passes 65 cases and eight negative observer controls. Nine compiled
+behavioral mutants are rejected with passing unmodified controls. This finite
+corpus is not universal refinement or qualification of every ignored test.
+
+Final run `dump-final-20261016T055748` analyzes captured thread 23668, physical
+frames 1→0, from `dump_03958DA4FCA844A786262A1053` (SHA-256
+`9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab`).
+
+| Frame | Visited | Decoded | Core edges | Recovery stop |
+| --- | --- | --- | --- | --- |
+| 1, caller | 9,590 | 9,589 | 11,321 | Drained |
+| 0, callee | 778 | 778 | 895 | Drained |
+
+Both prefixes remain in Recover with zero dataflow/slice actions. Final requests,
+captured source projections and guard/target/composition proofs match the frozen
+075602 inputs exactly. An independent oracle matches the full typed graph,
+provenance, obligations and cross-frame link. Captured reached E8 at
+`0x00007ff774404108` supports child entry `0x00007ff77443d960`, with saved
+continuation `0x00007ff77440410d`, under the recorded premises.
+
+The self-contained JSON is 112,984,262 bytes, SHA-256
+`0b46b1796e85c522088305da62ccf2b0d146a3ac36e4be8bfac7a65e26c2989e`,
+with binding
+`229e9248025f1470110b652c92ea370131cee2bf4fe72484a8dee8cb4c39db18`.
+Public BAP-only saved replay passes with all helpers/runtime absent, produces
+byte-identical JSON/text/DOT and independently checks zero dataflow/slice
+metrics. JSON/text/DOT publication and replay remain separate from performance
+acceptance; the observed 103.99 seconds and 1,885,696 KiB peak RSS establish no
+new performance gate.
+
+Caller load `0x00007ff7744035c9` remains an unknown guard/failed final endpoint,
+not an observed fault at that site. Callee indirect sites
+`0x00007ff77443da0e` and `0x00007ff77443e200` retain unresolved target boundaries.
+Checked exceptional exits and opaque call context are visible independently of
+those unknowns. Drained recovery does not imply semantic completeness.
+Caller-coverage S6, frame-path F4, full caller state parity, exact paths and
+executed history remain outside this qualification.
 
 ## Bounded frame-to-frame path listing
 

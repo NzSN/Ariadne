@@ -17,6 +17,71 @@
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
+## 2026-10-16 — Explicit conditional MOVAPS alignment hypotheses
+
+The [alignment-hypothesis extension](docs/Ariadne/investigation-design.md#explicit-alignment-hypotheses)
+and [H0–H5 ledger](.agents/plans/alignment-hypotheses.md) add structural-only
+`--assume-frame-aligned FRAME:VA`, a separate source-bound finite residue proof,
+conditional report v2 and standalone replay. Existing baseline requests,
+source/guard/target/composition evidence and verdicts remain unchanged; ordinary
+v1 replay is byte-compatible with the actual prior publication.
+
+[Qualification](evidence/Ariadne/alignment-hypotheses/20261016/README.md) binds
+source capsule `34d078b4e3c94977620e72313111d40d52fae1978af05b0682d716d1bec5d556`
+(1,060 files), unchanged 725-file runtime inventory and pinned helpers. Remote
+format/Clippy and 298 default / 57 core-only tests including three doctests
+each pass, with 108 / 22 ignored. Nine kernel tests, 25 model configurations,
+39 independent oracle cases, six compiled mutants, named capture/codec tests,
+38 release compatibility controls and actual v1/v2 saved replay pass their
+declared tiers. Not every ignored test is claimed as exercised.
+
+On the named dump, baseline `094136` preserves the old qualified v1 binding;
+conditional `094313` applies H at frame 1 / `0x00007ff7744035c9`. Baseline
+Unknown is retained, while Assumed alignment admits the normal edge to 35d1.
+Caller recovery changes from 9,590 / 9,589 / 11,321 to 9,600 / 9,600 / 11,331
+visited/decoded/edges; callee 778 / 778 / 895 is unchanged. Zero dataflow/slice
+work is preserved. An independent 153,210-state product BFS matches all incoming
+and masked facts. The caller retains 565 boundaries after replacing the guard
+gap with a newly reached return context; callee retains its 45 boundaries.
+This conditional result proves neither H nor executed history, target narrowing,
+path feasibility, completed caller S6, frame-path F4 or a performance gate.
+
+## 2026-10-16 — Structural frame report before dataflow
+
+[Stage 5.1](docs/Ariadne/investigation-design.md#structural-frame-report-before-dataflow)
+and its [SF0–SF6 ledger](.agents/plans/frame-structure-report.md) complete the
+separate `ariadne.frame-structure/v1` product and `--frame-structure N:M` route.
+The `rust-recovery/v1` producer consumes final validated BAP requests and stops
+before `FinishRecovery`, retaining typed gaps, local frontiers and verified E8
+frame links with zero dataflow/slice actions. Existing completed-analysis
+routes and frame-path input requirements retain their contracts.
+
+[Source-bound qualification](evidence/Ariadne/frame-structure/20261016/README.md)
+uses corrected source capsule `8266a844e60e3afbcaa8f0bba557899a0466e18940d8fa881630377cf78bb37c` (1,093 files),
+baseline `4811d7d`, and an unchanged 693-file runtime inventory. Remote format,
+285 default tests / 57 core-only tests (each including three doctests), Clippy,
+layout, reports-only/BAP-only builds and a dependency-free core check pass.
+The final finite model run passes 43 configurations, the independent literal
+oracle passes 65 cases/eight negative controls, and nine compiled behavioral
+mutants are rejected with passing baseline observers. The new capture CLI test
+and 38 named release native/capture/compatibility controls pass separately;
+106 default and 22 core-only ignored tests are not all claimed as exercised.
+
+Final run `dump-final-20261016T055748` publishes physical frames 1→0: caller
+9,590 visited / 9,589 decoded / 11,321 edges; callee 778 / 778 / 895. Both drain
+in Recover with zero dataflow/slice actions. Frozen 075602 requests, captured
+sources and required proofs match exactly, and an independent oracle matches
+the full typed graph, provenance, obligations and reached E8 link
+`0x00007ff774404108` → `0x00007ff77443d960`, continuation
+`0x00007ff77440410d`. Public BAP-only saved replay succeeds without helpers or
+runtime and reproduces all three output formats byte for byte.
+
+The Stop-barrier validator defect found during qualification is corrected;
+earlier failed attempts remain historical receipts. Caller guarded load
+`0x00007ff7744035c9`, callee indirect sites DA0E/E200, exceptional exits and
+opaque call context remain visible. This delivery does not close caller S6,
+frame-path F4, full caller state parity or historical path reconstruction.
+
 ## 2026-10-16 — Retired ISA model documentation removed
 
 Removed the 26 AMD64 model guides and the initial x86-64 semantics guide after

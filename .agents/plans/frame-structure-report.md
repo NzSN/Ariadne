@@ -2,10 +2,12 @@
 
 ## Context and follow-up
 
-**Status.** Planning only, 2026-10-16. SF0–SF6 below are pending. No runtime,
-model, native or dump qualification is supplied by this document. Source review
-starts at `6192dee19a5b2f133177a21187952e28d603c2d9`; the working tree also contains
-unrelated documentation cleanup that must be preserved.
+**Status.** SF0–SF6 are complete within the [2026-10-16 qualified scope](../../evidence/Ariadne/frame-structure/20261016/README.md).
+The corrected source capsule is `8266a844e60e3afbcaa8f0bba557899a0466e18940d8fa881630377cf78bb37c`
+(1,093 files), based on `4811d7de6f2b86319135a5f0a1a18c397a4cd4c2`. Runtime, model,
+oracle, compiled mutation, compatibility, original-dump and saved-replay evidence
+have separate source/tool receipts. The original planning review at
+`6192dee19a5b2f133177a21187952e28d603c2d9` remains historical.
 
 **Why this document exists.** The [canonical structural-report design](../../docs/Ariadne/investigation-design.md#structural-frame-report-before-dataflow)
 addresses a concrete coupling: the [retained caller run](../../evidence/Ariadne/caller-semantic-coverage/20261015/README.md#original-dump-result)
@@ -21,24 +23,30 @@ for this stage. The investigation design owns the resulting API and contracts.
 and [BAP usage](../../docs/Ariadne/bap-analysis-core-design.md#backend-usage).
 The [existing frame-path plan](frame-path-enumeration.md) and
 [caller-coverage S6 ledger](caller-semantic-coverage.md) keep their separate gates.
+The [dated qualification record](../../evidence/Ariadne/frame-structure/20261016/README.md)
+binds the exercised sources, finite controls, final dump and saved replay to
+their declared qualification scope.
 
-**What remains unresolved.** Everything SF0–SF6 is unimplemented/unqualified.
-Preparation checkpoints, SCC summaries, path enumeration, new target/loop rules,
-backward values and writer refinement are outside this stage. A structural
-report does not discharge full caller completion or existing frame-path acceptance.
+**What remains unresolved.** No required Stage 5.1 work remains within the
+recorded Windows AMD64 physical-frame/E8-call profile. Preparation checkpoints,
+SCC summaries, path enumeration, new target/loop rules, backward values and
+writer refinement remain outside this stage. The caller unknown guarded load,
+two callee indirect target boundaries and opaque call context remain explicit.
+Caller-coverage S6, frame-path F4, full caller state parity and executed history
+retain their separate unmet gates.
 
-## Delivery contract to freeze in SF0
+## Frozen delivery contract
 
 | Decision | Stage 5.1 contract |
 | --- | --- |
-| Product | A distinct privately constructed structural binding and `ariadne.frame-structure/v1` report family. Names are proposed until SF0 freezes the interface. |
+| Product | A distinct privately constructed structural binding and `ariadne.frame-structure/v1` report family. Public bound types remain privately constructed; raw serialized transport is private. |
 | Core result | A standard-library-only `RecoveryResult`, produced by bounded deterministic recovery. It implements no `AnalysisView` and cannot be supplied as a completed investigation. |
 | Input | Successful `FilePreparedAnalysis`, exact final normalized request, original capture evidence, unchanged roots and verified guard/target/composition bindings. |
 | Capture profile | Existing finite Windows AMD64 physical-frame/unwind and E8 direct-call profile. Core recovery stays platform-neutral; no new Linux/JIT/tail-call/handler-frame support is part of v1. |
 | Producer | `rust-recovery/v1`, using production BAP semantics and the LLVM decode/control reference. This does not claim native-core execution or qualification. |
 | Stop | Run Visit actions while pending work and budget remain. Stop before `FinishRecovery`, including when pending becomes empty. No dataflow/slice action is executed. |
 | Meaning | Recovery `drained` or `work_stopped` is separate from semantic/control gaps. Neither is `Done`, `ScopeClosed`, an executed path or a writer exclusion. |
-| CLI | Proposed `--frame-structure N:M` and `--frame-structure-limits FILE`, independent of `--list-frame-paths`; no NP or path enumeration. Preserve the existing route by default. |
+| CLI | Opt-in `--frame-structure N:M` and `--frame-structure-limits FILE`, independent of `--list-frame-paths`; no NP or path enumeration. Preserve the existing route by default. |
 | Saved evidence | V1 is self-contained and replayable under host policy. Deduplicate immutable payloads with checked references; a hash-only reference cannot substitute for missing evidence. |
 | Compatibility | Existing `BoundInvestigation`, frame-path codecs/limits, native-default full analysis, roots, effects and evidence identities retain their contracts. |
 
@@ -49,8 +57,8 @@ captured E8/continuation/child-entry checks against reached caller sites.
 
 ## Execution waves and ownership
 
-All stages are pending. Dependencies below are evidence gates, not additional
-permission questions. Workers are not alone: preserve unrelated edits and do not
+SF0–SF6 satisfy their scoped exit gates. Dependencies below record the
+qualification order, not additional permission questions. Workers are not alone: preserve unrelated edits and do not
 revert other workers. A stage owns its stated files; coordinate shared exports
 through that stage's integration owner. Only disjoint model/oracle work or
 independent reviews should run in parallel until their prerequisite interfaces
@@ -58,44 +66,46 @@ are frozen.
 
 | Wave / stage | Owner and file responsibility | Depends on | Exit evidence |
 | --- | --- | --- | --- |
-| W0 / SF0: authority and oracle | Contract/model owner: owning design, this plan, proposed `Specs/AriadneFrameStructure.tla`, finite configurations/checker, independent oracle and fixtures under `tests/`. | Source/corpus inventory | Frozen schema/status/limit/CLI meanings; independent expectations and authoritative recovery-prefix contract before runtime acceptance. |
-| W1 / SF1: core recovery result | Core owner: proposed `src/recovery.rs`, `src/lib.rs`, narrowly necessary engine accessors, `tests/`; no serde/hash dependencies in the core. | SF0 | Exact bounded recovery prefix, private construction, deterministic work receipt and zero dataflow/slice work. |
-| W2 / SF2: prepared-capture binding | Input owner: proposed `src/input/frame_structure.rs`, existing `capture_context`/validation seams, input exports, focused `tests/input/` and root manifest targets. | SF1 | Final-request and capture/proof validation; preparation diagnostics never become sealed graphs. |
-| W3 / SF3: frame structure | Investigation owner: proposed `src/investigation/frame_structure.rs`, module exports and shared active-call helper; focused investigation tests. | SF2 | Independently useful frame maps, verified adjacent-call links, typed gaps/frontiers and aggregate policy checks. |
-| W4 / SF4: codecs and CLI | Product owner: proposed `src/reports/frame_structure.rs`, reports exports, `src/bin/ariadne-minidump.rs`, focused report/CLI tests and root test registrations. | SF3 | Strict saved replay, JSON/text/DOT views and explicit structural mode without any full-completion call. |
+| W0 / SF0: authority and oracle | Contract/model owner: owning design, this plan, `Specs/AriadneFrameStructure.tla`, finite configurations/checker, independent oracle and fixtures under `tests/`. | Source/corpus inventory | Frozen schema/status/limit/CLI meanings; independent expectations and authoritative recovery-prefix contract before runtime acceptance. |
+| W1 / SF1: core recovery result | Core owner: `src/recovery.rs`, `src/lib.rs`, narrowly necessary engine accessors, `tests/`; no serde/hash dependencies in the core. | SF0 | Exact bounded recovery prefix, private construction, deterministic work receipt and zero dataflow/slice work. |
+| W2 / SF2: prepared-capture binding | Input owner: `src/input/frame_structure.rs`, existing `capture_context`/validation seams, input exports, focused `tests/input/` and root manifest targets. | SF1 | Final-request and capture/proof validation; preparation diagnostics never become sealed graphs. |
+| W3 / SF3: frame structure | Investigation owner: `src/investigation/frame_structure.rs`, module exports and shared active-call helper; focused investigation tests. | SF2 | Independently useful frame maps, verified adjacent-call links, typed gaps/frontiers and aggregate policy checks. |
+| W4 / SF4: codecs and CLI | Product owner: `src/reports/frame_structure.rs`, reports exports, `src/bin/ariadne-minidump.rs`, focused report/CLI tests and root test registrations. | SF3 | Strict saved replay, JSON/text/DOT views and explicit structural mode without any full-completion call. |
 | W5 / SF5: finite qualification | Qualification owner plus independent reviewer: isolated remote model/oracle/replay/mutation jobs and source/tool records under `evidence/Ariadne/frame-structure/`. | SF4 | Applicable root, fixture/capture, model and behavioral mutation gates; compatibility and source identity checked. |
 | W6 / SF6: dump and reconciliation | Root/corpus owner: original-dump driver, retained qualification bundle, canonical usage/validation summary and this ledger. | SF5 | Public API and CLI structural report on the named dump; independent replay/control equality and explicit remaining gaps. |
 
 ## Fine-grained task ledger
 
 Each row's deliverable belongs to its wave owner. Source/model hashes and actual
-commands are recorded by the executing stage; nothing below is a claimed pass.
+commands are retained in the dated evidence bundle. Passed rows refer only to
+that finite source/tool/corpus scope.
 
 | Task | Dependency | Owns / deliver | Acceptance | Status |
 | --- | --- | --- | --- | --- |
-| SF0.1 | Baseline | Contract, API/CLI/status/identity and producer-vs-semantic-backend inventory; payload sizing. | Decisions below frozen without changing old reports or input roots. | Pending |
-| SF0.2 | SF0.1 contract | Independent finite recovery/frame oracle, TLA+ projection/status model and checker registration. | Expected edges, frontiers, stop receipts and call links are not calculated by the SUT. Model bounds and trusted capture premises explicit. | Pending |
-| SF1.1 | SF0 | Owned core recovery result/factory and immutable getters. | Only Visit actions; result cannot be upcast/deserialized as a completed analysis. | Pending |
-| SF1.2 | SF1.1 | Work-stop handling and core fixture tests. | Exact pending/visited/decoded/edges/obligations at zero, boundary and drained budgets; completed-run control projection matches. | Pending |
-| SF2.1 | SF1 | Final capture/request/proof binding and feature-correct input API. | Reuses opaque-ordinary, target, guard and composition checks; tampering fails even after rehashing. | Pending |
-| SF2.2 | SF2.1 | Preparation-failure and per-frame status handling. | A hard preparation failure has diagnostics only; other valid frames survive when independently preparable. | Pending |
-| SF3.1 | SF2 | Frame graph extraction, boundaries and shared active-call validation. | Reached captured E8 + exact continuation + child entry is required for each CALL link. Stack relation alone remains an annotation. | Pending |
-| SF3.2 | SF3.1 | Aggregate frame result and bounded validation. | Missing/ambiguous anchors are partial evidence; forged identities/proofs are errors. Recursion preserves activation identity. | Pending |
-| SF4.1 | SF3 | Strict structure codec, evidence dictionary and renderers. | Standalone replay, host-controlled decode/check limits and deterministic outputs; old codecs unchanged. | Pending |
-| SF4.2 | SF4.1 | New CLI mode, arguments and finite-policy input. | No native `complete()` or `CompletedAnalysis`; invalid mode combinations rejected; BAP prerequisites remain explicit. | Pending |
-| SF5.1 | SF4 | Root/model/oracle/capture qualification on an isolated remote source snapshot. | All declared tiers pass or remain explicitly unexercised; exact hashes retained. | Pending |
-| SF5.2 | SF5.1 | Compiled behavioral mutations, compatibility replay and independent review. | Intended behavior observers reject mutants; compile/transport failure earns no mutation credit. | Pending |
-| SF6.1 | SF5 | Source-bound corpus and payload preflight. | Dump/helper/reader/normalized-request/proof identities verified; finite policy can carry the real pair. | Pending |
-| SF6.2 | SF6.1 | Public API and CLI original-dump run plus saved replay. | Useful admitted structural report with zero dataflow/slice work, exact control comparison and preserved unknowns. | Pending |
-| SF6.3 | SF6.2 | Canonical API/CLI usage and dated validation summary; final ledger/evidence inventory. | Every accepted claim has source/tool/corpus evidence. Full caller S6 and path F4 remain separate. | Pending |
+| SF0.1 | Baseline | Contract, API/CLI/status/identity and producer-vs-semantic-backend inventory; payload sizing. | Decisions below frozen without changing old reports or input roots. | Passed |
+| SF0.2 | SF0.1 contract | Independent finite recovery/frame oracle, TLA+ projection/status model and checker registration. | Expected edges, frontiers, stop receipts and call links are not calculated by the SUT. Model bounds and trusted capture premises explicit. | Passed |
+| SF1.1 | SF0 | Owned core recovery result/factory and immutable getters. | Only Visit actions; result cannot be upcast/deserialized as a completed analysis. | Passed |
+| SF1.2 | SF1.1 | Work-stop handling and core fixture tests. | Exact pending/visited/decoded/edges/obligations at zero, boundary and drained budgets; completed-run control projection matches. | Passed |
+| SF2.1 | SF1 | Final capture/request/proof binding and feature-correct input API. | Reuses opaque-ordinary, target, guard and composition checks; tampering fails even after rehashing. | Passed |
+| SF2.2 | SF2.1 | Preparation-failure and per-frame status handling. | A hard preparation failure has diagnostics only; other valid frames survive when independently preparable. | Passed |
+| SF3.1 | SF2 | Frame graph extraction, boundaries and shared active-call validation. | Reached captured E8 + exact continuation + child entry is required for each CALL link. Stack relation alone remains an annotation. | Passed |
+| SF3.2 | SF3.1 | Aggregate frame result and bounded validation. | Missing/ambiguous anchors are partial evidence; forged identities/proofs are errors. Recursion preserves activation identity. | Passed |
+| SF4.1 | SF3 | Strict structure codec, evidence dictionary and renderers. | Standalone replay, host-controlled decode/check limits and deterministic outputs; old codecs unchanged. | Passed |
+| SF4.2 | SF4.1 | New CLI mode, arguments and finite-policy input. | No native `complete()` or `CompletedAnalysis`; invalid mode combinations rejected; BAP prerequisites remain explicit. | Passed |
+| SF5.1 | SF4 | Root/model/oracle/capture qualification on an isolated remote source snapshot. | All declared tiers pass or remain explicitly unexercised; exact hashes retained. | Passed |
+| SF5.2 | SF5.1 | Compiled behavioral mutations, compatibility replay and independent review. | Intended behavior observers reject mutants; compile/transport failure earns no mutation credit. | Passed |
+| SF6.1 | SF5 | Source-bound corpus and payload preflight. | Dump/helper/reader/normalized-request/proof identities verified; finite policy can carry the real pair. | Passed |
+| SF6.2 | SF6.1 | Public API and CLI original-dump run plus saved replay. | Useful admitted structural report with zero dataflow/slice work, exact control comparison and preserved unknowns. | Passed |
+| SF6.3 | SF6.2 | Canonical API/CLI usage and dated validation summary; final ledger/evidence inventory. | Every accepted claim has source/tool/corpus evidence. Full caller S6 and path F4 remain separate. | Passed |
 
 ## SF0: freeze interfaces and finite policies
 
-Freeze private bound types and raw transport forms before implementing them.
-The source request/activation/proofs are immutable. The structure identity binds
+Private bound types and raw transport forms are implemented. The source
+request/activation/proofs are immutable. The structure identity binds
 those inputs, its recovery prefix, producer/ruleset, limits and stop receipt in
 a separate hash domain from completed analysis. Avoid hash cycles.
-Freeze which selected frames and auxiliary caller-entry witnesses are retained.
+Selected frames and necessary auxiliary caller-entry witnesses have explicit
+activation scope and aggregate limits.
 An independently validated auxiliary caller may establish an entry witness, but
 does not change the requested frame range; its evidence and work count against
 the same trusted policy.
@@ -170,15 +180,15 @@ of scope.
 
 ## SF4: product and persistence
 
-The proposed CLI is a separate mode:
+The implemented CLI is a separate mode:
 
 ```text
 ariadne-minidump <dump> --frame-structure N:M
     [--frame-structure-limits <policy.json>] [existing supported BAP/input options]
 ```
 
-This is a planned interface, not an available command. Preserve existing frame
-index/thread/entry provenance rules. Define the structural policy bundle to
+The route branches before full analysis and performs no native-core
+completion. Existing frame index/thread/entry provenance rules remain binding. Define the structural policy bundle to
 cover the relevant unwind/read, preparation, recovery, validation and publication
 limits, so the real corpus does not silently inherit an unrelated default.
 Validate `N >= M >= 0` against the recovered physical chain. An equal-frame
@@ -209,7 +219,8 @@ Run all Cargo/native/model/replay/mutation/dump work in remote Windows WSL via
 the existing `r_windev` workflow. Hash-verify the task-owned source archive and
 frozen sibling dependency snapshot. Keep replay and mutation build directories
 separate under the remote root `target/`; preserve exact executable identities.
-Local work for this planning change is documentation/rendering/link validation.
+All heavy runtime/model/mutation/dump work runs in remote Windows WSL;
+local reconciliation checks documentation and source identities.
 
 Required independent cases:
 
@@ -247,9 +258,12 @@ python3 tools/check_rust_layout.py
 python3 tools/check_doc_links.py
 ```
 
-SF0/SF5 must create and document the new structural model/oracle/mutation
-entry points before citing their commands as available. Ordinary Cargo success
-cannot substitute for ignored capture tests, model checking or a real dump.
+The implemented finite-check entry points are `Specs/check-frame-structure.sh`,
+`tests/investigation/fixtures/frame_structure_oracle.py` and
+`tools/check_frame_structure_mutations.py`. The literal oracle and its negative
+observer controls are distinct from compiled-SUT behavioral mutations. Ordinary
+Cargo success cannot substitute for ignored capture tests, model checking or a
+real dump.
 
 ## SF6: named dump acceptance
 
@@ -287,14 +301,49 @@ qualification bytes and failure history.
 If SF6 exposes a runtime correction, reopen its affected implementation stages
 and repeat SF5's affected source-bound gates before crediting the corrected run.
 
-## Completion ledger and planning validation
+## Completion ledger and retained validation
 
-All SF tasks remain pending. Acceptance requires SF0–SF6 evidence and independent
-review, canonical API/CLI usage plus a dated validation summary, and an accurate
-ledger. Existing caller S6 and frame-path F4 remain open unless their own gates
-are separately met.
+The [2026-10-16 bundle](../../evidence/Ariadne/frame-structure/20261016/README.md)
+records SF0–SF6 completion on corrected source capsule `8266a844e60e3afbcaa8f0bba557899a0466e18940d8fa881630377cf78bb37c`
+(1,093 files) and the independently verified 693-file runtime inventory.
+Documentation reconciliation preserves the exercised source capsule rather
+than rewriting its identity. The archive/sidecar manifests bind each receipt,
+helper, binary, policy, corpus and output to its exact bytes.
 
-2026-10-16 planning validation passes documentation/navigation checks for 74
-connected documents, 73 context sections and 2,148 local links, plus scoped diff
-hygiene. HTML rendering and destination checks are presentation-only validation.
-No implementation or execution acceptance is supplied.
+Remote checks pass formatting, 285 default tests including three doctests,
+57 core-only tests including three doctests, all-feature/all-target Clippy and
+Rust layout. The root runs leave 106 default and 22 core-only tests ignored;
+these counts are not claims of exercised capture prerequisites. The new
+structural capture CLI test passes separately. Reports-only and BAP-only builds
+pass, and the core-only dependency tree activates no external crates.
+
+The final model sources pass 43 finite configurations and the independent
+literal oracle passes 65 cases with eight negative observer controls. Nine
+compiled behavioral mutants have passing unmodified controls and are rejected
+by the intended observers on the final source. Thirty-eight named release
+compatibility/native/capture tests pass: five native kernels, nine BAP producer,
+five backend capture, nine native capture, six frame-path (including two actual
+legacy report versions) and four investigation controls. Unrelated ignored
+tests and broader platform/release claims remain outside this corpus.
+
+Final run `dump-final-20261016T055748` publishes physical frames 1→0 with caller
+9,590 visited / 9,589 decoded / 11,321 edges and callee 778 / 778 / 895. Both
+prefixes drain in Recover with zero dataflow/slice actions. Final normalized
+requests, captured source projections, guard, target and composition proofs
+match the frozen 075602 inputs exactly. An independent oracle also matches the
+entire typed graph, provenance, obligations and reached E8 link for both frames.
+Public BAP-only saved replay passes without helper/runtime availability, with
+byte-identical JSON, text and DOT outputs and zero dataflow/slice metrics.
+
+The earlier Stop-barrier validator defect was corrected and the affected final
+checks rerun. Earlier source observations, storage/namespace/temp-file failures
+and failed probes remain historical evidence. Caller load
+`0x00007ff7744035c9`, callee indirect sites `0x00007ff77443da0e` and
+`0x00007ff77443e200`, exceptional exits and opaque call context remain explicit.
+Caller-coverage S6 and frame-path F4 are not discharged.
+
+The 2026-10-16 planning checks remain historical: 74 connected documents,
+73 context sections and 2,148 local links, plus presentation/diff validation.
+Final reconciliation checks navigation locally against the maintained archive;
+the isolated remote source capsule does not contain all old chat archives.
+These document checks are distinct from remote runtime qualification.

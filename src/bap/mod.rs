@@ -1,6 +1,7 @@
 //! Optional BAP-owned instruction lifting and conservative projection.
 pub(crate) mod address;
 mod admission;
+pub mod alignment_hypothesis;
 pub(crate) mod ast;
 pub mod composition;
 pub mod core_adapter;
@@ -8,7 +9,7 @@ pub mod core_protocol;
 pub mod core_session;
 pub mod guard_admission;
 mod prepare;
-mod projection;
+pub(crate) mod projection;
 mod registers;
 pub(crate) mod terminal_control;
 pub(crate) const PROJECTION: &str = "bap-bit-provenance-v6";

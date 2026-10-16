@@ -34,6 +34,30 @@ name = "ariadne"
 [lints.rust]
 unsafe_code = "deny"
 
+[[test]]
+name = "recovery"
+path = "tests/recovery.rs"
+
+[[test]]
+name = "frame_structure_oracle"
+path = "tests/frame_structure_oracle.rs"
+required-features = ["bap"]
+
+[[test]]
+name = "input_frame_structure"
+path = "tests/input/frame_structure.rs"
+required-features = ["input"]
+
+[[test]]
+name = "input_frame_structure_cli"
+path = "tests/input/frame_structure_cli.rs"
+required-features = ["input"]
+
+[[test]]
+name = "frame_structure_replay"
+path = "tests/reports/frame_structure_replay.rs"
+required-features = ["bap"]
+
 [[bin]]
 name = "ariadne-minidump"
 path = "src/bin/ariadne-minidump.rs"

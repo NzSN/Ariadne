@@ -1,0 +1,9 @@
+{
+  "task": "Stage 5.1 structural frame report",
+  "keeper_pid": 900,
+  "verified_command": "bash /mnt/d/ariadne-frame-structure-20261016/mount-keeper.sh ",
+  "stop_signal": "SIGTERM",
+  "keeper_pid_file_removed": true,
+  "retained_task_image": "/mnt/d/ariadne-frame-structure-20261016/build.ext4",
+  "scope": "All task build/test/model/mutation/dump/collection jobs completed before cleanup; image preserved for reproduction."
+}

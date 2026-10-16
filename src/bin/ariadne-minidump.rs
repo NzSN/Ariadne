@@ -7,8 +7,11 @@ use std::fs::{self, OpenOptions};
 use std::io::{self, Read, Write};
 use std::path::{Path, PathBuf};
 
+#[path = "ariadne_minidump/frame_structure.rs"]
+mod frame_structure;
+
 fn usage() -> &'static str {
-    "usage: ariadne-minidump DUMP --decoder-reference PATH --entry VA_HEX [--entry VA_HEX ...] [--seed VA_HEX ...] [--seed-exception-rip] [--max-starts N] [--max-artifact-bytes N] [--resolve-indirect-targets [--target-resolution-limits JSON]] [--list-frame-paths N:M --path-count-bound NP [--thread-id ID] [--frame-path-limits JSON] [--assume-windows-call-entry [--guard-admission-limits JSON]]] [--stateflow-input SEMANTICS_JSON] [--explain-fault-address VA --memory-access N] [--explanation-only] [--assess-zero-address VA --memory-access N] [--assess-zero-base-offset VA --memory-access N] [--assess-memory-provenance LOAD_VA --memory-access N] [--assessment-only] [--analysis-backend rust|bap] [--bap-core-dir DIR] [--bap-core-response-timeout-ms N] [--bap-core-max-request-bytes N] [--bap-helper PATH] [--bap-runtime DIR] (--format text|dot|json | --output-dir NEW_DIR)"
+    "usage: ariadne-minidump DUMP --decoder-reference PATH (--entry VA_HEX [--entry VA_HEX ...] | --list-frame-paths N:M --path-count-bound NP | --frame-structure N:M [--frame-structure-limits JSON]) [--seed VA_HEX ...] [--seed-exception-rip] [--max-starts N] [--max-artifact-bytes N] [--resolve-indirect-targets [--target-resolution-limits JSON]] [--thread-id ID] [--frame-path-limits JSON] [--assume-frame-aligned FRAME:VA] [--assume-windows-call-entry [--guard-admission-limits JSON]] [--stateflow-input SEMANTICS_JSON] [--explain-fault-address VA --memory-access N] [--explanation-only] [--assess-zero-address VA --memory-access N] [--assess-zero-base-offset VA --memory-access N] [--assess-memory-provenance LOAD_VA --memory-access N] [--assessment-only] [--analysis-backend rust|bap] [--bap-core-dir DIR] [--bap-core-response-timeout-ms N] [--bap-core-max-request-bytes N] [--bap-helper PATH] [--bap-runtime DIR] (--format text|dot|json | --output-dir NEW_DIR)"
 }
 fn invalid(message: impl Into<String>) -> io::Error {
     io::Error::new(io::ErrorKind::InvalidInput, message.into())
@@ -53,11 +56,13 @@ struct Args {
     resolve_indirect: bool,
     target_limits: Option<PathBuf>,
     max_artifact_bytes: usize,
+    max_artifact_bytes_explicit: bool,
     decoder: PathBuf,
     entries: ariadne::AddressSet,
     seeds: ariadne::AddressSet,
     exception_rip_seed: bool,
     limits: PrepareLimits,
+    max_starts_explicit: bool,
     format: Option<ReportFormat>,
     output_dir: Option<PathBuf>,
     stateflow_input: Option<PathBuf>,
@@ -66,6 +71,9 @@ struct Args {
     assess_offset_site: Option<u64>,
     memory_provenance_site: Option<u64>,
     frame_pair: Option<(usize, usize)>,
+    structure_pair: Option<(usize, usize)>,
+    structure_limits: Option<ariadne::investigation::FrameStructureLimits>,
+    alignment_assumptions: std::collections::BTreeMap<usize, ariadne::AddressSet>,
     path_count_bound: Option<usize>,
     frame_thread: Option<u32>,
     frame_limits: Option<PathBuf>,
@@ -106,6 +114,9 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
     let mut assess_offset_site = None;
     let mut memory_provenance_site = None;
     let mut frame_pair = None;
+    let mut structure_pair = None;
+    let mut structure_limits = None;
+    let mut alignment_assumptions = std::collections::BTreeMap::<usize, ariadne::AddressSet>::new();
     let mut path_count_bound = None;
     let mut frame_thread = None;
     let mut frame_limits = None;
@@ -159,6 +170,19 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
         }
         let value = args.next().ok_or_else(|| invalid(usage()))?;
         match flag {
+            "--assume-frame-aligned" => {
+                let text = value
+                    .to_str()
+                    .ok_or_else(|| invalid("non-UTF8 alignment hypothesis"))?;
+                let (frame, site) = text
+                    .split_once(':')
+                    .ok_or_else(|| invalid("--assume-frame-aligned requires FRAME:VA"))?;
+                let frame = parse_index(frame)?;
+                let site = parse_va(site)?;
+                if !alignment_assumptions.entry(frame).or_default().insert(site) {
+                    return Err(invalid("duplicate --assume-frame-aligned frame/site").into());
+                }
+            }
             "--bap-core-max-request-bytes" if bap_core_max_request_bytes.is_none() => {
                 let text = value.to_str().ok_or_else(|| {
                     invalid("--bap-core-max-request-bytes expects a positive unsigned byte count")
@@ -196,7 +220,7 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
                     .to_str()
                     .ok_or_else(|| invalid("non-UTF8 artifact limit"))?
                     .parse()?;
-                if count == 0 || count > 2 * 1024 * 1024 * 1024 {
+                if count == 0 || u64::try_from(count).is_err() {
                     return Err(invalid("artifact limit must be positive and at most 2 GiB").into());
                 }
                 max_artifact_bytes = Some(count);
@@ -271,6 +295,18 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
                     .ok_or_else(|| invalid("frame query requires N:M"))?;
                 frame_pair = Some((parse_index(n)?, parse_index(m)?));
             }
+            "--frame-structure" if structure_pair.is_none() => {
+                let pair = value
+                    .to_str()
+                    .ok_or_else(|| invalid("non-UTF8 frame indices"))?;
+                let (n, m) = pair
+                    .split_once(':')
+                    .ok_or_else(|| invalid("structural frame query requires N:M"))?;
+                structure_pair = Some((parse_index(n)?, parse_index(m)?));
+            }
+            "--frame-structure-limits" if structure_limits.is_none() => {
+                structure_limits = Some(PathBuf::from(value));
+            }
             "--path-count-bound" if path_count_bound.is_none() => {
                 path_count_bound = Some(parse_index(
                     value.to_str().ok_or_else(|| invalid("non-UTF8 NP"))?,
@@ -320,7 +356,17 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
             _ => return Err(invalid(format!("unknown or duplicate option: {flag}")).into()),
         }
     }
-    if (entries.is_empty() && frame_pair.is_none())
+    if !alignment_assumptions.is_empty() {
+        let (n, m) = structure_pair
+            .ok_or_else(|| invalid("--assume-frame-aligned requires --frame-structure"))?;
+        if alignment_assumptions
+            .keys()
+            .any(|frame| *frame < m || *frame > n)
+        {
+            return Err(invalid("alignment hypothesis frame outside selected frame range").into());
+        }
+    }
+    if (entries.is_empty() && frame_pair.is_none() && structure_pair.is_none())
         || decoder.is_none()
         || format.is_some() == output_dir.is_some()
     {
@@ -331,17 +377,50 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
         + usize::from(assess_offset_site.is_some())
         + usize::from(memory_provenance_site.is_some())
         + usize::from(frame_pair.is_some())
+        + usize::from(structure_pair.is_some())
         > 1
     {
         return Err(invalid("choose one explanation or assessment question").into());
     }
-    if guard_admission_limits.is_some() && !assume_windows_call_entry {
+    if let Some((n, m)) = structure_pair {
+        if n < m {
+            return Err(invalid("invalid structural frame ordering: requires N >= M").into());
+        }
+        if !entries.is_empty()
+            || !seeds.is_empty()
+            || exception_rip_seed
+            || stateflow_input.is_some()
+            || assessment_only
+            || explanation_only
+            || memory_access.is_some()
+            || path_count_bound.is_some()
+            || frame_limits.is_some()
+        {
+            return Err(invalid("--frame-structure cannot combine with entry/seed/stateflow/explanation/assessment/path options").into());
+        }
+        if analysis_backend.is_some()
+            || bap_core_dir.is_some()
+            || bap_response_timeout_ms.is_some()
+            || bap_core_max_request_bytes.is_some()
+        {
+            return Err(invalid("--frame-structure uses rust-recovery/v1; explicit analysis-backend or native-core options are incompatible").into());
+        }
+    } else {
+        if structure_limits.is_some() {
+            return Err(invalid("--frame-structure-limits requires --frame-structure N:M").into());
+        }
+        if max_artifact_bytes.is_some_and(|count| count > 2 * 1024 * 1024 * 1024) {
+            return Err(invalid("artifact limit must be positive and at most 2 GiB").into());
+        }
+    }
+    if guard_admission_limits.is_some() && !assume_windows_call_entry && structure_pair.is_none() {
         return Err(
             invalid("--guard-admission-limits requires --assume-windows-call-entry").into(),
         );
     }
     if frame_pair.is_some() != path_count_bound.is_some()
         || (frame_pair.is_none()
+            && structure_pair.is_none()
             && (frame_thread.is_some() || frame_limits.is_some() || assume_windows_call_entry))
     {
         return Err(invalid(
@@ -422,6 +501,7 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
     Ok(Args {
         resolve_indirect,
         target_limits,
+        max_artifact_bytes_explicit: max_artifact_bytes.is_some(),
         max_artifact_bytes: max_artifact_bytes
             .unwrap_or_else(|| OpenLimits::default().max_file_bytes),
         dump: PathBuf::from(dump),
@@ -430,6 +510,7 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
         seeds,
         exception_rip_seed,
         limits,
+        max_starts_explicit: max_starts_set,
         format,
         output_dir,
         stateflow_input,
@@ -438,6 +519,19 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
         assess_offset_site,
         memory_provenance_site,
         frame_pair,
+        structure_pair,
+        alignment_assumptions,
+        structure_limits: if structure_pair.is_some() {
+            Some(
+                structure_limits
+                    .as_deref()
+                    .map(frame_structure::read_limits)
+                    .transpose()?
+                    .unwrap_or_default(),
+            )
+        } else {
+            None
+        },
         path_count_bound,
         frame_thread,
         frame_limits,
@@ -676,6 +770,9 @@ fn frame_query(args: &Args, snapshot: &FileSnapshot) -> Result<(), Box<dyn Error
 }
 fn run() -> Result<(), Box<dyn Error>> {
     let mut args = arguments()?;
+    if args.structure_pair.is_some() {
+        return frame_structure::run(&args);
+    }
     let snapshot = FileSnapshot::open_minidump(
         &args.dump,
         OpenLimits {

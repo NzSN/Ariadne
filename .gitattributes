@@ -25,3 +25,7 @@ evidence/Ariadne/frame-paths/dump03958-20261013/symbol-identity.json whitespace=
 evidence/Ariadne/caller-semantic-coverage/20261015/evidence.tar.gz filter=lfs diff=lfs merge=lfs -text
 # Preserve the pinned upstream package export copied into native mutation evidence.
 evidence/Ariadne/caller-semantic-coverage/20261015/**/sdk-packages.export whitespace=-blank-at-eol
+# Keep the sealed recovery-only frame-report qualification archive in LFS.
+evidence/Ariadne/frame-structure/20261016/evidence.tar.gz filter=lfs diff=lfs merge=lfs -text
+# Keep the sealed conditional alignment-hypothesis qualification archive in LFS.
+evidence/Ariadne/alignment-hypotheses/20261016/evidence.tar.gz filter=lfs diff=lfs merge=lfs -text

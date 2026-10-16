@@ -1,0 +1,78 @@
+{
+  "schema": "ariadne.frame-structure-publication-check/v1",
+  "date": "2026-10-16",
+  "passed": true,
+  "runtime_files_verified_unchanged": 693,
+  "qualified_source_capsule_sha256": "8266a844e60e3afbcaa8f0bba557899a0466e18940d8fa881630377cf78bb37c",
+  "postqualification_changes": [
+    ".agents/chatdocs/archive-manifest.json",
+    ".agents/plans/README.md",
+    ".agents/plans/frame-structure-report.md",
+    ".gitattributes",
+    "CHECKPOINTS.md",
+    "ROADMAP.md",
+    "docs/Ariadne/investigation-design.md"
+  ],
+  "postqualification_scope": "Documentation and LFS publication metadata only; runtime/model/test sources unchanged",
+  "archive_sha256": "0faaf72e8651997d9be7dce0944a135156a47aa81482beaecf17e29c069e0834",
+  "archive_members_verified_remotely": 261,
+  "local_archive_digest_verified": true,
+  "live_plan_hash_links_verified": [
+    "current_canonical_sha256",
+    "current_plan_sha256"
+  ],
+  "current_plan_sha256": "3b4e80b5f492d5563a2e8775691ad313c220b04dd96ca1e81b6a174fc731e53c",
+  "navigation_log": "Documentation PASS: 74 connected documents, 73 context sections, 2163 local links (including section anchors).\nRelationship meaning and historical scope require editorial review.\n",
+  "layout_log": "Rust layout PASS: 156 Rust files in src/tests; one manifest/lock; root target.\n",
+  "files": {
+    "evidence/Ariadne/frame-structure/20261016/README.md": {
+      "sha256": "4cecdafe51fe2996a7608027c9db8200c254d38c012ff0bd03f88b55902d57dc",
+      "bytes": 10343
+    },
+    "evidence/Ariadne/frame-structure/20261016/cleanup.json": {
+      "sha256": "65018160199c5f0f13f1fecb9814fd35664e40ee8260632a529c98654ac58904",
+      "bytes": 430
+    },
+    "evidence/Ariadne/frame-structure/20261016/corpus-policy.json": {
+      "sha256": "dea7fcc2701ca17e548afb65967e16da565c08c22372a5807b855ecc37f93096",
+      "bytes": 1390
+    },
+    "evidence/Ariadne/frame-structure/20261016/dump-summary.json": {
+      "sha256": "4375f0539a38fca5261d9b056b01d8c50dc9c358f82fe8777162a18f1ccd5ec0",
+      "bytes": 116702
+    },
+    "evidence/Ariadne/frame-structure/20261016/evidence.tar.gz": {
+      "sha256": "0faaf72e8651997d9be7dce0944a135156a47aa81482beaecf17e29c069e0834",
+      "bytes": 43676983
+    },
+    "evidence/Ariadne/frame-structure/20261016/local-doc-links.log": {
+      "sha256": "1c0ac3d699468e716b52b0e1dafc7fa91e5afc55b0164c29bff262736a4907d4",
+      "bytes": 179
+    },
+    "evidence/Ariadne/frame-structure/20261016/local-layout.log": {
+      "sha256": "5c942f423c9a79ecc09e53896e94a86088435644b6b81e1fb6061eb064afa21c",
+      "bytes": 79
+    },
+    "evidence/Ariadne/frame-structure/20261016/manifest.json": {
+      "sha256": "7e7fb7f53f521c4f7b86b838b65433c6bd28b736e354f0bfc63249f6ba7b09ab",
+      "bytes": 46355
+    },
+    "evidence/Ariadne/frame-structure/20261016/qualification.json": {
+      "sha256": "b145f117a70d2efada680af1b23b24e034ae9e795eb331bbac64ad6578ca2612",
+      "bytes": 7288
+    },
+    "evidence/Ariadne/frame-structure/20261016/remote-manifest.json": {
+      "sha256": "4d158e0a17ef026bb414ed070f83e29f098d75eaad976733e313d75130e6c27b",
+      "bytes": 46027
+    },
+    "evidence/Ariadne/frame-structure/20261016/runtime-source.json": {
+      "sha256": "fc946604484523b903a97b84a8e49526099fdb74aaae890981516d3a5bbeff05",
+      "bytes": 75561
+    },
+    "evidence/Ariadne/frame-structure/20261016/source-manifest.json": {
+      "sha256": "9beeda0ea1148f7e238527f20cf6356a17b55454ef3d4ef0ac6df4eaa0ace78f",
+      "bytes": 123704
+    }
+  },
+  "evidence_readme_links_verified": 16
+}

@@ -129,7 +129,8 @@ pub struct RecoveryGap {
     pub site: u64,
     pub code: String,
 }
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct EvidenceContext {
     pub snapshot_id: String,
     pub artifact_sha256: String,

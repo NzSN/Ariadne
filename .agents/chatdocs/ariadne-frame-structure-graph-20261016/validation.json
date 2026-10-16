@@ -1,0 +1,32 @@
+{
+  "schema": "ariadne.frame-structure.graph-presentation-check/v1",
+  "date": "2026-10-16",
+  "html_local_references_checked": 10,
+  "unique_static_ids": 16,
+  "summary_svg_xml_valid": true,
+  "retained_data_checked": "DOT hash, 12216 local + 1 cross-frame edges, frame node/visit counts, 610 boundary annotations and all per-kind totals",
+  "controls": "Node DOM harness: synthetic CALL/Summary/cross-frame graph, ambiguity/errors/keyboard/presets/cycles, 64-node/160-edge limits; all six actual report presets and exact retained edge membership",
+  "browser_rendering": "Not visually inspected; wslview launch follows validation",
+  "files": {
+    "index.html": {
+      "bytes": 1942911,
+      "sha256": "6c7ae31c0b6c18d005758a27990ec578e916ab7f098ef69c8eca097c8014ab90"
+    },
+    "frame-structure.dot": {
+      "bytes": 1684053,
+      "sha256": "c46705fe04e5a63f06259e8d0d65f117a4d3f29cc96c4ae5e7ecefaa9ab0bd5e"
+    },
+    "viewer.js": {
+      "bytes": 14526,
+      "sha256": "11676f464f6285b5ba0719e12b6376577859d54b27630aebc14ee4c836cd652b"
+    },
+    "graph-data.json": {
+      "bytes": 1930004,
+      "sha256": "71907a092a7146f7b4b818a1def466622e315d226e741bddabe563acd48a75e1"
+    },
+    "provenance.json": {
+      "bytes": 649,
+      "sha256": "e0d9effc68e1ec5bd9bcdefb6080f656fb227998e7c6e9b2ddb6ab166653307b"
+    }
+  }
+}

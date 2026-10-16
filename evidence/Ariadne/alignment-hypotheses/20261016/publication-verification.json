@@ -1,0 +1,185 @@
+{
+  "schema": "ariadne.alignment-hypothesis-publication-verification/v1",
+  "recorded_utc": "2026-10-16T10:01:03.434346+00:00",
+  "status": "passed",
+  "base_revision": "4811d7de6f2b86319135a5f0a1a18c397a4cd4c2",
+  "qualification_scope": "Finite conditional structural recovery under explicit reviewed MOVAPS point hypotheses. Original BAP semantics remain trusted; no observed alignment, concrete executed path, target narrowing or performance qualification is claimed.",
+  "source_capsule": {
+    "sha256": "34d078b4e3c94977620e72313111d40d52fae1978af05b0682d716d1bec5d556",
+    "files": 1060,
+    "unchanged_files_at_publication": 1052,
+    "post_qualification_documentation_and_publication_metadata_delta": {
+      ".agents/plans/README.md": {
+        "qualified_sha256": "74845429bc71ca89d69f5ec683fcf7e97fb06781e43330a9b48a16eecc603280",
+        "publication_sha256": "4caee1cd61776f0c4b81e146f443ad6db553994a6a8310005a2a988c13fa3e87"
+      },
+      ".agents/plans/alignment-hypotheses.md": {
+        "qualified_sha256": "0fe5d1322d44bc25e389e1746e4016feba1a4adc0c3ad8efebd1c78ec11bfbf7",
+        "publication_sha256": "73d7c0c208b57acb41f8e9224bb1b041cf626256028da245c30e1a5035007cb5"
+      },
+      ".gitattributes": {
+        "qualified_sha256": "b533ee3cdc8ffc0cc4e5f7105f9a030ba451daa14eec7b2a6c2e444ff318c697",
+        "publication_sha256": "a3c4cbb97466c20088416ee06b0b6e251f173f61d92b9ec2fff0a2729e32154d"
+      },
+      "CHECKPOINTS.md": {
+        "qualified_sha256": "2950dcd6b7c3b049e334964d1d166618cecf45fec3fbe651a5821433a6e433da",
+        "publication_sha256": "baba9501a7046af349af94ac38730d72b85ecbf1dc6f6bbb78353ba286e31385"
+      },
+      "ROADMAP.md": {
+        "qualified_sha256": "59c850c06558db52b695541da70db3bf34cd0ff597b7910b5771427eb9c22b66",
+        "publication_sha256": "084aa9e9d83208a959bbc7c330fe50a77b4267e0fe52ad7027836e1caeb781c0"
+      },
+      "Specs/README.md": {
+        "qualified_sha256": "d606de213442e1f9a348b05c8fd27e51fab0ca9a8169ac232227104378b46922",
+        "publication_sha256": "c41d5a883355b094eae74a77a3652f9166fcb04090afcc4261161654a351c6a6"
+      },
+      "docs/Ariadne/bap-analysis-core-design.md": {
+        "qualified_sha256": "7350d1e7863ae781a75a115f6fe2cd31863b794b6a783eb934e62b0e04fb5d88",
+        "publication_sha256": "1bece98e60c3f498d20e4eaa3fb13653d16102a02d44c7ae464c9ae5176c0a08"
+      },
+      "docs/Ariadne/investigation-design.md": {
+        "qualified_sha256": "0247bc27d635f71e3e2984f0526ba0053bcb90f57835dc53cff4cfdd19ee4719",
+        "publication_sha256": "e4944ece7aa507b497875d466d514acd8dd8f68208985545646b83c487eb44ff"
+      }
+    },
+    "note": "Raw exercised source capsule and manifests remain unchanged. Publication prose and LFS metadata do not replace that identity."
+  },
+  "runtime_inventory": {
+    "qualified_files": 725,
+    "unchanged_files_at_publication": 724,
+    "documentation_only_delta": {
+      "Specs/README.md": {
+        "qualified_sha256": "d606de213442e1f9a348b05c8fd27e51fab0ca9a8169ac232227104378b46922",
+        "publication_sha256": "c41d5a883355b094eae74a77a3652f9166fcb04090afcc4261161654a351c6a6"
+      }
+    },
+    "all_implementation_test_model_body_tool_native_cargo_files_match": true
+  },
+  "preserved_baseline_authorities": {
+    "src/bap/guard_admission.rs": "cc9be3470525cb1e47ff297b2bd215f9aa179f7f4794a2f94ffc3e93d4e61b0b",
+    "src/bap/terminal_control.rs": "572dc4a3ad5c32fe52de7d0cf2e6d9a84eedeb6994c72db7b12428ab4da49f43",
+    "src/bap/composition.rs": "f91c20c811120a84ac19cc1b898b06dce7a6991d914171d1680e87b89516476b",
+    "Specs/AriadnePredicateAdmission.tla": "94c94993a1c2fd9fc6a9ab94f4f782d355ae91b66f4dc010e2d8151cf0498acd",
+    "Specs/AriadneGuardedTargetResolution.tla": "e142a6fd22d78044c444c26211b7c659a56fedb5f9e555aa20e3aa1be23e8b10"
+  },
+  "archive": {
+    "path": "evidence.tar.gz",
+    "sha256": "c27544b44b580f2fc4f790e2c0dd84ca207044481a2fccfb97fa7a943143cb44",
+    "bytes": 78190590,
+    "members": 176,
+    "original_manifest": "remote-manifest.json",
+    "original_manifest_sha256": "bed32ffdbc42e65e6dc9e996ebcb4a25724f638ef6bdb7abc6f60aee12500326",
+    "normalized_manifest": "manifest.json",
+    "normalized_manifest_sha256": "c0395965b35421035dcaeb33c11499a160666ebaff9423f39b181d8b1c5ba147",
+    "member_validation": "Original and stored member bytes were hash-checked remotely before sealing. Local transport verification matches the sealed archive and original manifest SHA-256."
+  },
+  "preserved_v1_archive": {
+    "path": "evidence/Ariadne/frame-structure/20261016/evidence.tar.gz",
+    "sha256": "0faaf72e8651997d9be7dce0944a135156a47aa81482beaecf17e29c069e0834"
+  },
+  "sidecar_archive_membership": {
+    "qualification.json": {
+      "sha256": "011e43e0d40af2034493e273a1efb9b4185eced2273eda63fbb5dcb06cf7a1e4",
+      "original_archive_members": [
+        "qualification.json"
+      ]
+    },
+    "source-manifest.json": {
+      "sha256": "052941c11b033340a3e704432eb4e1b0059069568b1a2657cf5eecc447072263",
+      "original_archive_members": [
+        "sources/source-manifest.json"
+      ]
+    },
+    "runtime-source.json": {
+      "sha256": "8d01fcf6e003110ca3f7f810fcd2ece22a3ccb5fab28460dbbb34dacb313e4c7",
+      "original_archive_members": [
+        "sources/final-runtime-source.json"
+      ]
+    },
+    "corpus-policy.json": {
+      "sha256": "dea7fcc2701ca17e548afb65967e16da565c08c22372a5807b855ecc37f93096",
+      "original_archive_members": [
+        "dump/corpus-policy.json"
+      ]
+    },
+    "dump-comparison.json": {
+      "sha256": "8badc6dcc8678550e07823e4f5ce90d62223f527f29c4d52b6c404b7918b2711",
+      "original_archive_members": [
+        "dump/dump-comparison.json"
+      ]
+    }
+  },
+  "local_checks": {
+    "documentation": {
+      "status": "passed",
+      "command": [
+        "python3",
+        "tools/check_doc_links.py"
+      ],
+      "log": "local-doc-links.log",
+      "log_sha256": "cde2e137ae5bd064bfc5af7d4ad73286f7dde4509066e3a3268f86d79d161fcf"
+    },
+    "rust_layout": {
+      "status": "passed",
+      "command": [
+        "python3",
+        "tools/check_rust_layout.py"
+      ],
+      "log": "local-layout.log",
+      "log_sha256": "cd2a5a89ec81312e7fde7223a3cd8512aba3ccd1b70d8265d1f1e195e60a3e92"
+    },
+    "diff_whitespace": {
+      "status": "passed",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "log": "local-diff-check.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "evidence_readme_links": {
+      "status": "passed",
+      "count": 15,
+      "destinations": [
+        "../../../../docs/Ariadne/investigation-design.md#explicit-alignment-hypotheses",
+        "../../../../.agents/plans/alignment-hypotheses.md",
+        "qualification.json",
+        "source-manifest.json",
+        "runtime-source.json",
+        "corpus-policy.json",
+        "dump-comparison.json",
+        "publication-verification.json",
+        "manifest.json",
+        "evidence.tar.gz",
+        "../../frame-structure/20261016/README.md",
+        "remote-manifest.json",
+        "local-doc-links.log",
+        "local-layout.log",
+        "cleanup.json"
+      ]
+    },
+    "archive_lfs_attributes": {
+      "status": "passed",
+      "output": "evidence/Ariadne/alignment-hypotheses/20261016/evidence.tar.gz: filter: lfs\nevidence/Ariadne/alignment-hypotheses/20261016/evidence.tar.gz: diff: lfs\nevidence/Ariadne/alignment-hypotheses/20261016/evidence.tar.gz: merge: lfs\nevidence/Ariadne/alignment-hypotheses/20261016/evidence.tar.gz: text: unset\n"
+    }
+  },
+  "publication_document_hashes": {
+    ".agents/plans/README.md": "4caee1cd61776f0c4b81e146f443ad6db553994a6a8310005a2a988c13fa3e87",
+    ".agents/plans/alignment-hypotheses.md": "73d7c0c208b57acb41f8e9224bb1b041cf626256028da245c30e1a5035007cb5",
+    ".gitattributes": "a3c4cbb97466c20088416ee06b0b6e251f173f61d92b9ec2fff0a2729e32154d",
+    "CHECKPOINTS.md": "baba9501a7046af349af94ac38730d72b85ecbf1dc6f6bbb78353ba286e31385",
+    "ROADMAP.md": "084aa9e9d83208a959bbc7c330fe50a77b4267e0fe52ad7027836e1caeb781c0",
+    "Specs/README.md": "c41d5a883355b094eae74a77a3652f9166fcb04090afcc4261161654a351c6a6",
+    "docs/Ariadne/bap-analysis-core-design.md": "1bece98e60c3f498d20e4eaa3fb13653d16102a02d44c7ae464c9ae5176c0a08",
+    "docs/Ariadne/investigation-design.md": "e4944ece7aa507b497875d466d514acd8dd8f68208985545646b83c487eb44ff",
+    "evidence/Ariadne/alignment-hypotheses/20261016/README.md": "533aa57f3ba855cebcd0da23bc095fb398ef38b4f56e0ec56a246077424785e4"
+  },
+  "cleanup": {
+    "receipt": "cleanup.json",
+    "sha256": "c44885a70827755555321197ee79afc2c252a7ce843a2c5c4f6c95144c2bd222",
+    "status": "passed",
+    "build_image_retained": "/mnt/d/ariadne-frame-structure-20261016/build.ext4"
+  },
+  "local_heavy_build_or_test_execution": false
+}

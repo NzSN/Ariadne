@@ -60,6 +60,7 @@ pub mod llvm_ir;
 pub mod llvm_mc;
 pub mod machine_state;
 mod model;
+pub mod recovery;
 pub mod render;
 
 pub use engine::{Analyzer, AnalyzerMetrics, analyze};

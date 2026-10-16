@@ -183,6 +183,9 @@ pub struct CapturedFrameChain {
     seed: FrameSeed,
 }
 impl CapturedFrameChain {
+    pub(crate) fn artifact_bytes(&self) -> usize {
+        self.seed.artifact_bytes
+    }
     pub fn validate(&self) -> Result<(), Error> {
         let mut at = 0;
         let expected = recover_frames(self.seed.clone(), self.limits.clone(), &mut |va, n| {

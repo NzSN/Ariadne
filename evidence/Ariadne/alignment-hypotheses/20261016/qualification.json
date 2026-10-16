@@ -1,0 +1,400 @@
+{
+  "schema": "ariadne.alignment-hypothesis-qualification/v1",
+  "recorded_utc": "2026-10-16T09:51:56.954309+00:00",
+  "status": "passed within stated finite conditional-analysis scope",
+  "source": {
+    "base_revision": "4811d7de6f2b86319135a5f0a1a18c397a4cd4c2",
+    "capsule_sha256": "34d078b4e3c94977620e72313111d40d52fae1978af05b0682d716d1bec5d556",
+    "packaged_files": 1060,
+    "runtime_files_verified": 725,
+    "runtime_manifest": "sources/final-runtime-source.json",
+    "documentation_follow_up": "Publication documentation is reconciled after this runtime qualification; any documentation delta is recorded separately"
+  },
+  "root": {
+    "default": {
+      "passed": 298,
+      "failed": 0,
+      "ignored": 108,
+      "summary_rows": 41,
+      "doctests_passed": 3
+    },
+    "core_only": {
+      "passed": 57,
+      "failed": 0,
+      "ignored": 22,
+      "summary_rows": 12,
+      "doctests_passed": 3
+    },
+    "receipt": "checks/root-result.json",
+    "fmt": "checks/root-fmt.log",
+    "clippy": "checks/root-clippy.log",
+    "layout": "checks/root-layout.log",
+    "core_dependencies": "checks/core-dependencies.log",
+    "navigation": "Coordinator complete-tree documentation checks are separate post-archive evidence"
+  },
+  "model": {
+    "configurations": 25,
+    "oracle_cases": 39,
+    "oracle_receipt": {
+      "schema": "ariadne.alignment-hypothesis-oracle-check/v1",
+      "cases": 39,
+      "complete_cases": 15,
+      "invalid_cases": 16,
+      "fixture_sha256": "f055f92f436a364c5eb0499ccabc7ea4c8eadf8d0418c2cd856522362ed02a78",
+      "passed": true
+    },
+    "log": "model/model.log",
+    "scope": "Finite safety/scenario/fair termination under explicit source/decoder/recognizer premises; no universal refinement",
+    "mutation_negative_tier": "Finite invalid-source/scope scenarios and independent oracle cases; no mutated-TLA checker campaign"
+  },
+  "kernel_oracle": {
+    "executed_cases": 21,
+    "observer": "bap::alignment_hypothesis::tests::masked_kernel_matches_independent_product_graph_oracle",
+    "source": "mutations/sources/tests/bap/alignment_hypothesis.rs",
+    "scope": "Real finite kernel seam compared with frozen product-BFS facts; 16 synthetic identity cases use separate public tamper controls; recursive/default integration are separate"
+  },
+  "compiled_mutations": {
+    "count": 6,
+    "positive_controls": 6,
+    "report": "mutations/report.json",
+    "compile_transport_failures_credited": false
+  },
+  "feature_boundaries": [
+    "checks/feature-reports.log",
+    "checks/feature-bap.log"
+  ],
+  "structural_capture": {
+    "passed": 2,
+    "failed": 0,
+    "ignored": 0,
+    "summary_rows": 1,
+    "doctests_passed": 0
+  },
+  "conditional_capture_tamper": {
+    "passed": 1,
+    "failed": 0,
+    "ignored": 0,
+    "summary_rows": 1,
+    "doctests_passed": 0
+  },
+  "native_compatibility": {
+    "passed": 38,
+    "failed": 0,
+    "ignored": 0,
+    "summary_rows": 6,
+    "doctests_passed": 0
+  },
+  "default_ignored_scope": "Default ignored tests are not credited as executed. Only explicitly exercised capture/tamper/native/replay logs establish those tiers.",
+  "saved_replay": {
+    "retained_v1": {
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "summary_rows": 1,
+      "doctests_passed": 0
+    },
+    "conditional_v2": {
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "summary_rows": 1,
+      "doctests_passed": 0
+    },
+    "features": "--no-default-features --features bap",
+    "assertions": "Expected publication identity; exact JSON/text/DOT bytes; Recover phase and actual AnalyzerMetrics verify no dataflow/slicing/native helper use",
+    "v1_reference": "references/qualified-v1.json",
+    "v2_log": "checks/conditional-v2-replay.log"
+  },
+  "dump": {
+    "artifact_sha256": "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+    "thread_id": 23668,
+    "question": {
+      "from_frame": 1,
+      "to_frame": 0
+    },
+    "baseline_id": "229e9248025f1470110b652c92ea370131cee2bf4fe72484a8dee8cb4c39db18",
+    "conditional_id": "cfb480b259887fe4272afa6da5cf5a750aa5cf0c04216539cd61b2b5977b2564",
+    "hypothesis": {
+      "activation": {
+        "frame_activation": "0262c3eca68c0dfaa0459adb12ce6ef0fe8cc1bf10ed06f6c41222524c961270:1:0x000000bea89fa930",
+        "thread_id": 23668
+      },
+      "alignment": 16,
+      "artifact_sha256": "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
+      "bytes_hex": "0f28b42440020000",
+      "candidate_epoch": 609,
+      "decoder_record_sha256": "554606b48df6a6c199df832c6d6a67ae6574467f794ee9422b62ea740f67065e",
+      "displacement": 576,
+      "id": "96892f89380228b2c50c3bfff2bdd975aa1bd83ff013abfb1b8de8570884b903",
+      "original_ast_sha256": "7713443722ab709255feb7752acd56b9b8bb4af69ebe3247d9b2b99647243df9",
+      "pending_relation_sha256": "b3c35e8e05319e263658d0c017875f49e6cf128ca778f07a0cbd8c9e4289d045",
+      "point": "0x00007ff7744035c9",
+      "policy": "assumed-reviewed-movaps-alignment16/v1",
+      "query_scope_sha256": "b4ed757104b47052b3bede15728b55e6f6f50bdbf0750785c4e9b72820d778ed",
+      "root": "0x00007ff7744033a0",
+      "rsp_residues": 1,
+      "snapshot": "minidump-captured-amd64-v1:9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab"
+    },
+    "decisions": [
+      {
+        "address_residues": 1,
+        "baseline_verdict": "aligned",
+        "basis": "proved",
+        "input_residues": 1,
+        "normal_ast": "[{\"kind\":\"move\",\"var\":{\"name\":\"mem\",\"index\":0,\"virtual\":false,\"width\":0,\"type\":\"mem\"},\"value\":{\"kind\":\"store\",\"width\":128,\"mem\":{\"kind\":\"var\",\"var\":{\"name\":\"mem\",\"index\":0,\"virtual\":false,\"width\":0,\"type\":\"mem\"}},\"addr\":{\"kind\":\"binop\",\"op\":18,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"RSP\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"int\",\"value\":\"0x240:64u\"}},\"value\":{\"kind\":\"cast\",\"op\":0,\"width\":128,\"arg\":{\"kind\":\"var\",\"var\":{\"name\":\"YMM6\",\"index\":0,\"virtual\":false,\"width\":256,\"type\":\"imm\"}}}}}]",
+        "site": "0x00007ff7744033b3",
+        "verdict": "aligned"
+      },
+      {
+        "address_residues": 1,
+        "baseline_verdict": "unknown",
+        "basis": "assumed",
+        "input_residues": 1,
+        "normal_ast": "[{\"kind\":\"move\",\"var\":{\"name\":\"YMM6\",\"index\":0,\"virtual\":false,\"width\":256,\"type\":\"imm\"},\"value\":{\"kind\":\"concat\",\"lhs\":{\"kind\":\"extract\",\"hi\":255,\"lo\":128,\"arg\":{\"kind\":\"var\",\"var\":{\"name\":\"YMM6\",\"index\":0,\"virtual\":false,\"width\":256,\"type\":\"imm\"}}},\"rhs\":{\"kind\":\"cast\",\"op\":3,\"width\":128,\"arg\":{\"kind\":\"load\",\"width\":128,\"mem\":{\"kind\":\"var\",\"var\":{\"name\":\"mem\",\"index\":0,\"virtual\":false,\"width\":0,\"type\":\"mem\"}},\"addr\":{\"kind\":\"binop\",\"op\":18,\"lhs\":{\"kind\":\"var\",\"var\":{\"name\":\"RSP\",\"index\":0,\"virtual\":false,\"width\":64,\"type\":\"imm\"}},\"rhs\":{\"kind\":\"int\",\"value\":\"0x240:64u\"}}}}}}]",
+        "site": "0x00007ff7744035c9",
+        "verdict": "aligned"
+      }
+    ],
+    "independent_product": {
+      "algorithm": "Explicit finite (point,RSP residue) BFS over independently replayed original transfer receipts; point mask checked before every successor propagation; only entry roots seed work; call targets excluded",
+      "metrics": {
+        "states": 153210,
+        "maximum_states": 153600,
+        "transfer_evaluations": 172346,
+        "local_edges": 10796
+      },
+      "all_facts_comparison": {
+        "equal": true,
+        "actual_canonical_sha256": "4de690160549d04a11f388867a7cbf3846d9eba19bd7e702c24956fcce006f6a",
+        "expected_canonical_sha256": "4de690160549d04a11f388867a7cbf3846d9eba19bd7e702c24956fcce006f6a",
+        "difference_fields": [],
+        "differences": {
+          "items": [],
+          "truncated": false
+        }
+      }
+    },
+    "independent_core_controls": {
+      "baseline_frame0": {
+        "passed": true,
+        "checks": {
+          "visited": true,
+          "decoded": true,
+          "pending": true,
+          "typed_edges": true,
+          "obligations": true,
+          "provenance": true,
+          "frame_qualified_edges": true,
+          "visits": true,
+          "phase": true,
+          "zero_dataflow_and_slice_claim": true,
+          "receipt_stop": true,
+          "drained_status": true
+        },
+        "differences": {},
+        "expected_counts": {
+          "visited": 778,
+          "decoded": 778,
+          "pending": 0,
+          "edges": 895,
+          "obligations": 10
+        },
+        "expected_edge_kinds": {
+          "call": 24,
+          "fallthrough": 106,
+          "jump": 52,
+          "next": 575,
+          "summary": 32,
+          "taken": 106
+        },
+        "oracle": "independent finite set/priority-queue closure over frozen normalized request; direct call edges retained, only local edges queued"
+      },
+      "baseline_frame1": {
+        "passed": true,
+        "checks": {
+          "visited": true,
+          "decoded": true,
+          "pending": true,
+          "typed_edges": true,
+          "obligations": true,
+          "provenance": true,
+          "frame_qualified_edges": true,
+          "visits": true,
+          "phase": true,
+          "zero_dataflow_and_slice_claim": true,
+          "receipt_stop": true,
+          "drained_status": true
+        },
+        "differences": {},
+        "expected_counts": {
+          "visited": 9590,
+          "decoded": 9589,
+          "pending": 0,
+          "edges": 11321,
+          "obligations": 1
+        },
+        "expected_edge_kinds": {
+          "call": 535,
+          "fallthrough": 1168,
+          "indirect": 68,
+          "jump": 615,
+          "next": 7232,
+          "summary": 535,
+          "taken": 1168
+        },
+        "oracle": "independent finite set/priority-queue closure over frozen normalized request; direct call edges retained, only local edges queued"
+      },
+      "conditional_frame0": {
+        "passed": true,
+        "checks": {
+          "visited": true,
+          "decoded": true,
+          "pending": true,
+          "typed_edges": true,
+          "obligations": true,
+          "provenance": true,
+          "frame_qualified_edges": true,
+          "visits": true,
+          "phase": true,
+          "zero_dataflow_and_slice_claim": true,
+          "receipt_stop": true,
+          "drained_status": true
+        },
+        "differences": {},
+        "expected_counts": {
+          "visited": 778,
+          "decoded": 778,
+          "pending": 0,
+          "edges": 895,
+          "obligations": 10
+        },
+        "expected_edge_kinds": {
+          "call": 24,
+          "fallthrough": 106,
+          "jump": 52,
+          "next": 575,
+          "summary": 32,
+          "taken": 106
+        },
+        "oracle": "independent finite set/priority-queue closure over frozen normalized request; direct call edges retained, only local edges queued"
+      },
+      "conditional_frame1": {
+        "passed": true,
+        "checks": {
+          "visited": true,
+          "decoded": true,
+          "pending": true,
+          "typed_edges": true,
+          "obligations": true,
+          "provenance": true,
+          "frame_qualified_edges": true,
+          "visits": true,
+          "phase": true,
+          "zero_dataflow_and_slice_claim": true,
+          "receipt_stop": true,
+          "drained_status": true
+        },
+        "differences": {},
+        "expected_counts": {
+          "visited": 9600,
+          "decoded": 9600,
+          "pending": 0,
+          "edges": 11331,
+          "obligations": 0
+        },
+        "expected_edge_kinds": {
+          "call": 535,
+          "fallthrough": 1168,
+          "indirect": 68,
+          "jump": 615,
+          "next": 7242,
+          "summary": 535,
+          "taken": 1168
+        },
+        "oracle": "independent finite set/priority-queue closure over frozen normalized request; direct call edges retained, only local edges queued"
+      }
+    },
+    "links": [
+      {
+        "admitted": true,
+        "call_site": "0x00007ff774404108",
+        "caller": 1,
+        "child": 0,
+        "child_entry": "0x00007ff77443d960",
+        "conditional_on": [
+          "96892f89380228b2c50c3bfff2bdd975aa1bd83ff013abfb1b8de8570884b903"
+        ],
+        "continuation": "0x00007ff77440410d"
+      }
+    ],
+    "diagnostics": [],
+    "summary": "dump/dump-comparison.json",
+    "policy": "dump/corpus-policy.json",
+    "gap_changes": {
+      "0": {
+        "baseline_kinds": {
+          "exception_exit": 10,
+          "opaque_call_context": 25,
+          "unknown_call_target": 8,
+          "unknown_indirect_target": 2
+        },
+        "conditional_kinds": {
+          "exception_exit": 10,
+          "opaque_call_context": 25,
+          "unknown_call_target": 8,
+          "unknown_indirect_target": 2
+        },
+        "removed": [],
+        "added": []
+      },
+      "1": {
+        "baseline_kinds": {
+          "exception_exit": 29,
+          "opaque_call_context": 535,
+          "unresolved_guard": 1
+        },
+        "conditional_kinds": {
+          "exception_exit": 29,
+          "opaque_call_context": 536
+        },
+        "removed": [
+          {
+            "destination": null,
+            "kind": "unresolved_guard",
+            "site": "0x00007ff7744035c9"
+          }
+        ],
+        "added": [
+          {
+            "destination": null,
+            "kind": "opaque_call_context",
+            "site": "0x00007ff7744035e4"
+          }
+        ]
+      }
+    },
+    "timing_scope": "Two observed corpus runs; no performance qualification"
+  },
+  "focused_review": "checks/focused-review.json",
+  "payload_index": "payload-index.json",
+  "excluded_claims": [
+    "Captured truth of alignment H",
+    "New target precision under H",
+    "Completed caller dataflow/caller S6",
+    "Frame-path F4/path enumeration/exact path",
+    "Native conditional producer parity",
+    "Universal ISA/refinement proof",
+    "Executed history or root cause",
+    "Performance qualification",
+    "Whole-machine or exceptional-resumption completeness"
+  ],
+  "omitted": [
+    "Original dump",
+    "Old full v1 report duplicated bytes",
+    "Build trees/native binaries/images",
+    "TLC state databases",
+    "Mutant source clones",
+    "Prewarm outputs",
+    "Corrupt/preliminary source capsules"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "source": "evidence/Ariadne/frame-structure/20261016",
+  "structure_id": "229e9248025f1470110b652c92ea370131cee2bf4fe72484a8dee8cb4c39db18",
+  "source_dot_sha256": "c46705fe04e5a63f06259e8d0d65f117a4d3f29cc96c4ae5e7ecefaa9ab0bd5e",
+  "source_archive_sha256": "0faaf72e8651997d9be7dce0944a135156a47aa81482beaecf17e29c069e0834",
+  "nodes_including_unvisited_call_targets": 10476,
+  "local_edges": 12216,
+  "cross_frame_edges": 1,
+  "boundary_annotations": 610,
+  "validation": "Exact retained DOT hash, per-frame visited/node and typed-edge counts, all boundary-kind counts, captured E8 link and caller Summary edge checked; presentation only."
+}

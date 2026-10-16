@@ -14,6 +14,14 @@ records the subsequent source audit and separate qualification limits.
 
 **Where to go next.**
 
+- [Explicit alignment hypotheses](AriadneAlignmentHypothesis.tla) and the
+  [H0–H5 implementation plan](../.agents/plans/alignment-hypotheses.md) — additive
+  conditional residue filtering, activation ownership and normal selection.
+  The original guard verdict and proof remain separate. The
+  [2026-10-16 qualification](../evidence/Ariadne/alignment-hypotheses/20261016/README.md)
+  records 25 finite model configurations and the independent 39-case oracle;
+  runtime/mutation evidence remains a separate tier.
+
 - [Predicate admission v2](AriadnePredicateAdmission.tla) and the
   [caller semantic-coverage plan](../.agents/plans/caller-semantic-coverage.md) — checked
   normal-completion terminals, exact MOVAPS load/store guards and separate
@@ -94,6 +102,19 @@ The indirect-target extension adds one active module and five configurations on
 2026-10-13, with its own source-bound qualification below.
 The loop-target extension adds a component module and 25 configurations on
 2026-10-15, with a separate premise interface and qualification scope below.
+The 2026-10-16 [structural-frame model](AriadneFrameStructure.tla) adds the
+recovery-prefix, independent-frame and captured-call contract for
+[Stage 5.1](../docs/Ariadne/investigation-design.md#structural-frame-report-before-dataflow).
+It seals in `Recover`, including a drained queue, and never executes
+`FinishRecovery`, dataflow or slicing. Concrete BAP lifting, capture/proof
+validation and byte sizing remain explicit premises. Its finite checker is
+`bash Specs/check-frame-structure.sh`; the independent literal oracle and
+compiled behavioral mutations have separate observers and evidence.
+[AriadneAlignmentHypothesis.tla](AriadneAlignmentHypothesis.tla) adds per-point
+masked residue propagation and conditional normal-selection invariants without
+changing the original root-premise authority. Its
+[qualified finite scope](../evidence/Ariadne/alignment-hypotheses/20261016/README.md)
+does not establish accumulated-path feasibility or universal refinement.
 The [synchronization plan](../.agents/plans/specification-sync.md) separates source
 corrections and bounded local evidence from remote qualification. A model's
 age alone does not imply drift; unchanged executable contracts retain their
