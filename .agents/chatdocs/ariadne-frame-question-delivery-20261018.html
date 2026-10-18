@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ariadne: what the section 5 delivery adds</title>
+<style>
+:root{color-scheme:light;--ink:#172b3b;--muted:#526574;--blue:#125c94;--teal:#086b62;--line:#d6e0e7;--wash:#f2f6f8;--amber:#795018}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:#edf2f5;color:var(--ink);font:17px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:var(--blue);text-underline-offset:3px}a:hover{text-decoration-thickness:2px}a:focus-visible,summary:focus-visible{outline:3px solid #cb8c25;outline-offset:4px}header{background:#132e41;color:#fff;padding:50px max(26px,calc((100vw - 1180px)/2)) 42px}header a{color:#b4deff}header .small{color:#c5d9e6}header p{max-width:79ch;color:#d7e5ef}.eyebrow{text-transform:uppercase;letter-spacing:.13em;font-size:.76rem;font-weight:750;margin:0 0 12px}h1{max-width:23ch;font-size:clamp(2rem,4.3vw,3.3rem);line-height:1.12;margin:0 0 22px;letter-spacing:-.025em}.lead{font-size:1.2rem;line-height:1.65}.badge{display:inline-block;font-size:.82rem;font-weight:650;border:1px solid #6c92a7;border-radius:30px;padding:4px 13px;margin:4px 7px 4px 0}.shell{max-width:1232px;margin:auto;display:grid;grid-template-columns:214px minmax(0,1fr);gap:38px;padding:35px 26px 80px}nav{position:sticky;top:24px;align-self:start;font-size:.88rem}nav a{display:block;padding:8px 0;text-decoration:none}nav .label{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}main{min-width:0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:35px 38px 45px}h2{font-size:1.6rem;line-height:1.3;letter-spacing:-.015em;margin:45px 0 18px;padding-top:10px}h2:first-child{margin-top:0}h3{font-size:1.12rem;line-height:1.4;margin:26px 0 10px}p{margin:0 0 16px}li{margin:7px 0}ul,ol{padding-left:23px}.note{background:#eef7f5;border-left:4px solid var(--teal);padding:17px 21px;margin:22px 0}.note p:last-child,.limit p:last-child{margin-bottom:0}.limit{background:#fff8ec;border-left:4px solid #bc8b3e;padding:17px 21px;margin:22px 0}.small,figcaption{font-size:.87rem;color:var(--muted)}code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}code{font-size:.84em;overflow-wrap:anywhere;background:#edf2f5;padding:2px 4px;border-radius:3px}header code{background:#294659;color:#fff}pre{background:#132b3b;color:#e4f0f7;overflow:auto;padding:20px;border-radius:7px;font-size:.79rem;line-height:1.65}pre code{background:none;padding:0;color:inherit;overflow-wrap:normal}.table-wrap{overflow-x:auto;margin:20px 0}table{border-collapse:collapse;width:100%;font-size:.91rem}th,td{text-align:left;vertical-align:top;padding:13px 12px;border-bottom:1px solid var(--line)}th{background:var(--wash);font-size:.82rem;color:#354f61}td:first-child{font-weight:600}figure{margin:25px 0}.pipeline{list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));padding:0;gap:13px}.pipeline li{border:1px solid #b7cbd7;border-radius:7px;background:#f5f9fb;margin:0;padding:15px}.pipeline strong{display:block;margin-bottom:8px}.pipeline .step{display:inline-block;color:#fff;background:var(--blue);width:24px;height:24px;border-radius:50%;font-size:.79rem;text-align:center;margin-right:6px}.pipeline small{display:block;color:var(--muted);font-size:.79rem;margin-top:7px}.case{border:1px solid var(--line);border-radius:8px;padding:23px;margin:23px 0}.case h3{margin-top:0}.case .tag{font-size:.78rem;text-transform:uppercase;color:var(--teal);letter-spacing:.06em;font-weight:750}.layers{font-size:.9rem;border-left:3px solid #adc3d1;padding-left:16px}.layers p{margin:6px 0}.status{font-weight:700;color:var(--teal)}.stopped{color:var(--amber);font-weight:700}.hash{font-family:ui-monospace,Consolas,monospace;font-size:.78rem;overflow-wrap:anywhere}details{margin:18px 0;border:1px solid var(--line);padding:15px 18px;border-radius:7px}summary{cursor:pointer;font-weight:650}details[open] summary{margin-bottom:15px}.context{border-top:1px solid var(--line);margin-top:44px;padding-top:12px}footer{font-size:.84rem;color:var(--muted);margin-top:28px}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}.comparison>div{padding:18px;background:var(--wash);border-radius:7px}.comparison strong{display:block;margin-bottom:8px}@media(max-width:920px){.shell{grid-template-columns:1fr;gap:15px}nav{position:static;display:flex;flex-wrap:wrap;gap:3px 18px}nav .label{width:100%}nav a{padding:4px 0}main{padding:27px 24px}}@media(max-width:560px){body{font-size:16px}header{padding:34px 20px}.shell{padding:20px 12px 45px}main{padding:23px 18px}.pipeline,.comparison{grid-template-columns:1fr}.case{padding:18px}th,td{padding:10px 8px}h2{font-size:1.4rem}.table-wrap table{min-width:570px}}@media print{body{background:white}header{background:white;color:var(--ink);padding:0 0 18px}header p,header a{color:var(--ink)}header code{background:var(--wash);color:var(--ink)}.shell{display:block;padding:0}nav{display:none}main{border:0;padding:0}.case,.pipeline li{break-inside:avoid}pre{white-space:pre-wrap;background:var(--wash);color:var(--ink)}details{break-inside:avoid}h2{break-after:avoid}a{color:inherit}}
+</style>
+</head>
+<body>
+<header>
+<p class="eyebrow">Ariadne · delivery explanation · 2026-10-18</p>
+<h1>Ask a focused question above a partial frame map.</h1>
+<p class="lead">The delivered change adds a bounded investigation layer: select a branch or faulting access, supply supported constraints, and receive a checked assessment with its premises, unfinished work and evidence.</p>
+<p><span class="badge">Local implementation delivered</span><span class="badge">Remote / release qualification open</span></p>
+<p class="small">Published commit <code>a2e98e4</code> · <a href="https://github.com/NzSN/Ariadne/commit/a2e98e42f471dc2c78d8c7490671ac861afd8aac">Add bounded frame-question investigation</a> · <a href="ariadne-reports-index.html">Archive index</a></p>
+</header>
+<div class="shell">
+<nav aria-label="Document sections"><span class="label">In this explanation</span><a href="#delivered">What changed</a><a href="#section-five">Section 5 coverage</a><a href="#questions">Questions and answers</a><a href="#architecture">How it works</a><a href="#captures">Results on the dumps</a><a href="#use">How to use it</a><a href="#validation">What was checked</a><a href="#limits">What remains open</a><a href="#context">Context and follow-up</a></nav>
+<main>
+<section id="delivered">
+<h2>What you now have</h2>
+<p>The earlier structural product recovered frame anchors, admitted local control flow and explicit unknown frontiers. The connection product added reachability, cycle groups and example routes. This delivery lets an investigator spend bounded semantic work on <strong>one question about that source</strong>, without first completing every caller’s dataflow analysis.</p>
+<div class="comparison"><div><strong>Existing products</strong>A partial map of the captured activations and represented connections, with gaps and independently bounded route examples.</div><div><strong>New question product</strong>A selected alternative checked against value constraints, or a local fault-dependency assessment with value facts, possible memory origins and reasons for stopping.</div></div>
+<p>The entry point is <code>--frame-question QUESTION.json</code>. It writes <code>frame-question.json</code>, <code>frame-question.txt</code> and <code>frame-question.dot</code>. The JSON embeds the source and evidence needed to replay its assessment. Library users can provide an already bound structural source or connection source.</p>
+<div class="note"><p><strong>Delivery scope:</strong> the new code integrates recommendation items 5.1–5.4. The structural and connection engines already existed in the preceding delivery; this commit reuses them and adds the focused question, scheduling, constraint, dependency and replay layers.</p></div>
+</section>
+<section id="section-five">
+<h2>How this maps to your section 5 plan</h2>
+<p>The four priorities come from <a href="ariadne-frame-to-frame-recommendation-20261016.html#order">the original recommendation</a>. Their integration is now implemented locally.</p>
+<div class="table-wrap"><table><thead><tr><th>Priority</th><th>Delivered behavior</th><th>Boundary</th></tr></thead><tbody>
+<tr><td>5.1 · Structural report first</td><td>Reuse the validated frame map, activation identities, admitted edges and explicit frontiers before full caller dataflow.</td><td>A missing map or unresolved edge stays visible.</td></tr>
+<tr><td>5.2 · Cycles and examples</td><td>Accept the existing connection product and its independent corridor, SCC and example layers. An SCC is a group of mutually reachable nodes.</td><td>Examples are optional. A cycle group does not establish iteration counts or an executed route.</td></tr>
+<tr><td>5.3 · Resolve one bottleneck</td><td>Admit a typed alternative question; rotate resolver work fairly; check supported value constraints; publish a model witness, scoped refutation, conflict or unknown.</td><td>Coverage and supported semantics determine what can be concluded.</td></tr>
+<tr><td>5.4 · Refine fault dependencies</td><td>Reuse a compatible completed callee, derive local value facts and assess the complete baseline memory-origin collection.</td><td>Uncertain writers, entry memory and interference survive unless an exclusion is justified.</td></tr>
+</tbody></table></div>
+<p>The <a href="../../docs/Ariadne/frame-question-investigation-design.md">canonical design</a> defines these contracts. The <a href="../plans/frame-question-investigation.md">P0–P10 execution ledger</a> records the completed local stages and pending qualification gates.</p>
+</section>
+<section id="questions">
+<h2>Two kinds of question</h2>
+<h3>1. Can this alternative coexist with these value constraints?</h3>
+<p>Select a represented edge and a register constraint at an exact <em>before</em> or <em>after</em> point. For example: “Can this taken branch lead to the selected endpoint with RCX equal to zero, under the declared normal-flow model?” Supported explicit conditions can narrow the question further.</p>
+<div class="table-wrap"><table><thead><tr><th>Answer</th><th>What it means</th></tr></thead><tbody>
+<tr><td><code>possible_under_model</code></td><td>A separately checked, coherent concrete assignment and loop-free model path satisfy the supported relations. This establishes a model witness.</td></tr>
+<tr><td><code>refuted_under_model</code></td><td>The alternative is incompatible within the declared model and covered scope. A stopped search or missing semantics cannot produce this conclusion.</td></tr>
+<tr><td><code>unknown</code></td><td>The bounded analysis cannot settle it. The report names missing relations, open frontiers, work limits or unavailable cycle/value coverage. Abstract nonemptiness alone also remains unknown.</td></tr>
+<tr><td><code>premise_conflict</code></td><td>Valid supplied conditions conflict with admitted observations or premises. The conflict is reported explicitly.</td></tr>
+</tbody></table></div>
+<p>The compiled diamond fixture demonstrates the distinction: one endpoint RCX value has a model witness; changing that value refutes the selected branch in the supported fixture model. Zero work produces an explicit unknown.</p>
+<h3>2. Which local values and possible writers contribute to this access?</h3>
+<p>Select a frame, instruction address and access index. The result separates captured observations from earlier facts derived through checked transfers. It walks register producers to contributing load boundaries, then preserves and assesses the actual baseline memory origins from the compatible completed callee.</p>
+<p>A requested writer is a focus hint; it does not filter the candidate universe. Numerical work and origin assessment have separate receipts, so useful facts can remain available when another layer stops. This question profile does not use the branch-feasibility verdict as its success measure; feasibility is marked unavailable / not applicable.</p>
+<div class="limit"><p><strong>A model witness is not an execution record.</strong> The current profile reports execution evidence as <code>not_supplied</code>. Captured registers describe the captured point; earlier branches, argument values, iterations and writers need their own evidence.</p></div>
+</section>
+<section id="architecture">
+<h2>How the implementation is arranged</h2>
+<figure><ol class="pipeline">
+<li><strong><span class="step">1</span>Bind the source</strong>Own an admitted structural or connection product.<small><code>FrameQuestionSource</code><br><code>src/investigation/frame_question.rs</code></small></li>
+<li><strong><span class="step">2</span>Bind one question</strong>Validate its frame, edge/access, point facts and evidence.<small><code>FrameQuestionEvidence</code><br><code>src/input/frame_question.rs</code></small></li>
+<li><strong><span class="step">3</span>Do bounded work</strong>Run resolver, scalar or dependency work under independent caps.<small><code>frame_question/{resolution,alternative,dependencies}.rs</code><br><code>src/bap/work_schedule.rs</code></small></li>
+<li><strong><span class="step">4</span>Publish and replay</strong>Bind the result to its exact source, premises and work receipts.<small><code>BoundFrameQuestion</code><br><code>src/reports/frame_question.rs</code></small></li>
+</ol><figcaption>These blocks map to concrete source owners. The coordinator consumes admitted BAP semantics; the optional connection summary supplies structural context.</figcaption></figure>
+<p><strong>Fair work:</strong> the resolver rotates admitted tasks through question, relevant and coverage bands in a 2:1:1 schedule, with FIFO service within each band. Sufficient work gives peers turns; finite task, work and byte caps still apply. Deadlines are cooperative boundaries around bounded operations.</p>
+<p><strong>Checked scalar scope:</strong> the first profile uses 64-bit general-purpose register constraints, known-bit masks and supported constant/copy/add/subtract/AND relations. BAP remains the source of minidump semantics. Unsupported flag relations, memory inversions and partial-register combinations retain uncertainty.</p>
+<p><strong>Source revisions:</strong> independently admitted successors keep the same snapshot, roots and selected range. A revision has its own identity; stale conclusions and incompatible completed-callee imports are invalidated or recomputed.</p>
+<p><strong>Saved verification:</strong> the strict <code>ariadne.frame-question/v1</code> decoder replays source admission, revisions and conclusions using a BAP-only build, without reopening the capture, launching helpers or fetching from the network. An independently trusted expected binding identifies the intended publication; internal hashes alone do not authenticate a capture.</p>
+<div class="table-wrap"><table><thead><tr><th>Source owner</th><th>Responsibility</th></tr></thead><tbody>
+<tr><td><a href="../../src/investigation/frame_question.rs">Question facade</a></td><td>Bound source/evidence, typed query, source revisions and independent layer receipts.</td></tr>
+<tr><td><a href="../../src/bap/target_resolution.rs">Target resolver</a> / <a href="../../src/bap/work_schedule.rs">queue</a></td><td>Bounded resolver continuation and fair rotation; existing proof admission stays authoritative.</td></tr>
+<tr><td><a href="../../src/investigation/frame_question/alternative.rs">Alternative checker</a> / <a href="../../src/bap/target_resolution/question_semantics.rs">bit semantics</a></td><td>Overapproximating constraints, coverage requirements and separate coherent witnesses.</td></tr>
+<tr><td><a href="../../src/investigation/frame_question/dependencies.rs">Dependency collector</a> / <a href="../../src/investigation/memory_refinement.rs">memory refinement</a></td><td>Point-scoped value facts, completed-callee reuse and candidate-preserving writer assessments.</td></tr>
+<tr><td><a href="../../src/reports/frame_question.rs">Report codec</a> / <a href="../../src/bin/ariadne_minidump/frame_question.rs">CLI mode</a></td><td>Strict replay, finite host policies and consistent JSON/text/DOT publication.</td></tr>
+</tbody></table></div>
+</section>
+<section id="captures">
+<h2>What happened on the two real capture sources</h2>
+<p>These are the retained application results delivered with the commit. This explanation rechecked their source inventory and evidence hashes; it did not generate another dump or rerun the campaigns.</p>
+<article class="case"><p class="tag">Controlled recursive C++ program · real Crashpad minidump</p><h3>A useful fault explanation with explicit stops</h3>
+<p>For thread <code>17848</code>, range <code>5:0</code>, the question selects access 0 at store <code>0x00007ff724c93bd8</code>. The captured RCX value is zero before the faulting instruction.</p>
+<ul><li><strong>371 scoped value records:</strong> four observed and 367 derived under recorded producer / prefix premises.</li><li><strong>All 10 baseline memory origins retained, plus external interference.</strong> The result contains 11 origin records and does not falsely exclude a writer.</li><li><strong>Independent outcomes:</strong> numerical work stops at prefix depth after 723 operations; origin assessment finishes after 91,819 accounted operations.</li></ul>
+<div class="layers"><p><span class="status">Finished:</span> frame binding, structural recovery, origin assessment.</p><p><span class="stopped">Work stopped:</span> numerical expansion — <code>value-prefix-depth-limit</code>.</p><p>Connections were not requested; feasibility is not applicable; execution evidence is not supplied.</p></div>
+<p class="small">The full caller dataflow was not completed. The derived records remain conditional on their stated transfer contexts; they do not identify the writer that actually executed.</p>
+<p><a href="ariadne-crashpad-dump-analysis-20261018.html">Earlier capture report and frame explorer</a> · <a href="../../evidence/Ariadne/frame-question/20261018/requests/controlled-question.json">Exact delivered question</a></p>
+<details><summary>Capture and publication identities</summary><p>Dump SHA-256:</p><p class="hash">47d93971541230b24d992e3c0f60a17df732145f083089844b99e44597f1ae34</p><p>Question publication binding:</p><p class="hash">512076a29eec4ee0dfeb7799c3c6730625d2616a1a31c45a724dbbad2ce3a88e</p></details>
+</article>
+<article class="case"><p class="tag">Original large Windows capture source</p><h3>The selected alternative remains unknown</h3>
+<p>For thread <code>23668</code>, range <code>1:0</code>, the question asks whether taken edge <code>0x7ff77443d996 → 0x7ff77443dd66</code> can coexist with RAX <code>0x1100000020</code> before <code>0x7ff77443dd6e</code>.</p>
+<ul><li>The resolver stops at its <strong>1,048,576-operation</strong> allowance.</li><li>The scalar feasibility check stops at its path-depth bound after 4,232 operations.</li><li>All <strong>610 original source gaps</strong> remain among 615 recorded obligations.</li></ul>
+<p>The outcome is an explicit <code>unknown</code> with the exact blocking reasons. It supplies no value/origin assessment for this alternative profile and establishes no executed path.</p>
+<p><a href="../../evidence/Ariadne/frame-question/20261018/requests/original-question.json">Exact delivered question</a> · <a href="../../evidence/Ariadne/frame-question/20261018/README.md">Qualification record and application scope</a></p>
+<details><summary>Capture and publication identities</summary><p>Dump SHA-256:</p><p class="hash">9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab</p><p>Question publication binding:</p><p class="hash">305480a85a3bd21feb460283135c8d43d9b4b4cf964c27d89a463a0d027c78f0</p></details>
+</article>
+<p>Both saved products replay with the BAP-only build. They are retained in <a href="../../evidence/Ariadne/frame-question/20261018/products-current.tar.gz">products-current.tar.gz</a>, alongside finite controls, the native-default comparison and the controlled raw dump. The large source’s decoding, publication and replay took about 112 seconds locally; this is an application observation, not a performance qualification.</p>
+</section>
+<section id="use">
+<h2>How to use the delivered mode</h2>
+<p>The following is the documented finite-diamond example. It asks about a taken edge in frame 1 and RCX = 0 before its endpoint. Save the JSON as <code>question.json</code>; register bank 1 is RCX in the existing AMD64 namespace.</p>
+<pre><code>{
+  "schema": "ariadne.frame-question-request/v1",
+  "from_frame": 1,
+  "to_frame": 0,
+  "question": {
+    "question": {
+      "kind": "alternative",
+      "frame": 1,
+      "site": "0x0000000000400306",
+      "destination": "0x000000000040030c",
+      "edge_kind": "taken",
+      "endpoint": {
+        "point": {
+          "frame": 1,
+          "site": "0x0000000000400310",
+          "moment": "before"
+        },
+        "bank": 1,
+        "width": 64,
+        "mask": "0xffffffffffffffff",
+        "value": "0x0000000000000000"
+      }
+    },
+    "conditions": []
+  }
+}</code></pre>
+<pre><code>cargo run --offline --locked --bin ariadne-minidump -- \
+  tests/input/fixtures/frame_paths/diamond.dmp \
+  --decoder-reference target/ariadne-llvm-mc \
+  --frame-question question.json \
+  --output-dir target/my-frame-question</code></pre>
+<p>Live analysis needs the configured BAP lifter/runtime and LLVM reference helper. Use a new output directory. An optional <code>--frame-question-limits POLICY.json</code> supplies the complete finite policy. The <a href="../../docs/Ariadne/frame-question-investigation-design.md#implemented-profile-and-usage">canonical usage section</a> defines the supported vocabulary and library interfaces.</p>
+<p>For fault dependencies, use <code>kind: fault_dependency</code>, with <code>frame</code>, <code>site</code>, <code>access</code>, optional <code>load</code> and optional <code>focus_writer</code>. The <a href="../../evidence/Ariadne/frame-question/20261018/requests/controlled-question.json">retained controlled request</a> is an exact example for that capture. Addresses and masks are canonical 16-digit hexadecimal strings.</p>
+</section>
+<section id="validation">
+<h2>What was checked and retained</h2>
+<p>The <a href="../../evidence/Ariadne/frame-question/20261018/summary-current.json">current qualification summary</a> is tied to the final source inventory. This explanation freshly verified that all <strong>732 inventoried source/test/model/native/runner files</strong> still match, and that all <strong>329 entries in the artifact manifest</strong> match their retained bytes.</p>
+<div class="table-wrap"><table><thead><tr><th>Tier</th><th>Recorded result</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>Rust test profiles</td><td>Default 323 passed / 114 ignored; core 57 / 22; reports 70 / 22; BAP 194 / 56.</td><td>Counts overlap across profiles. Ignored tests earn no pass credit.</td></tr>
+<tr><td>Source checks</td><td>Format, all-feature/all-target Clippy with warnings denied, Rust layout and documentation checks pass.</td><td>Source consistency and maintainability checks.</td></tr>
+<tr><td>Finite formal checks</td><td>18 question/scheduler TLC configurations, two Apalache type checks, plus imported memory TLC/type checking.</td><td>Bounded modeled safety and fair termination; no universal implementation theorem.</td></tr>
+<tr><td>Independent expectations</td><td>1,296 four-bit projection cases and 1,280 inverse cases.</td><td>Concrete finite expectations cross-check supported abstractions.</td></tr>
+<tr><td>Compiled mutation controls</td><td>16/16: original controls pass, compiled mutants fail the unchanged named observers.</td><td>The observers detect targeted behavioral errors; compilation failures receive no sensitivity credit.</td></tr>
+<tr><td>Native compatibility</td><td>Nine selected native tests pass; normal native-default scalar output matches the explicit Rust output byte-for-byte.</td><td>A named compatibility tier. The new question coordinator is a Rust consumer of admitted semantics.</td></tr>
+<tr><td>Application / saved replay</td><td>Live finite controls, both capture applications and helper-free BAP-only replay pass their named checks.</td><td>Evidence for these sources and questions, with their reported stops.</td></tr>
+</tbody></table></div>
+<h3>Corrections included in the delivery</h3>
+<p>The regression and mutation controls cover a captured top PC as a <em>before-state boundary</em>, future after-point conditions, partial-register joins and observations inside loops. In particular, the synthetic loop control remains unknown when an all-visits value invariant is unavailable. Its earlier invalid refutation is retained as failed historical evidence.</p>
+<p>Generic loads stop backward numerical expansion at the memory boundary. Source revisions invalidate stale conclusions. Work stops and displayed route samples cannot erase candidates or unknown frontiers.</p>
+<p>Evidence, including reports, logs, source capsules and products, is stored through <strong>Git LFS</strong>. Four empty evidence files contain no payload. Earlier failed attempts remain labeled as failures; the current manifest selects the final evidence without rewriting history.</p>
+<p><a href="../../evidence/Ariadne/frame-question/20261018/README.md">Evidence guide</a> · <a href="../../evidence/Ariadne/frame-question/20261018/artifact-manifest-current.json">Artifact manifest</a> · <a href="../../evidence/Ariadne/frame-question/20261018/mutations-current/report.json">Compiled mutation receipts</a> · <a href="../../Specs/AriadneFrameQuestion.tla">Question model</a> · <a href="../../Specs/AriadneQuestionSchedule.tla">Scheduler model</a></p>
+</section>
+<section id="limits">
+<h2>What remains open</h2>
+<p><strong>The local implementation and local product acceptance are delivered.</strong> The P0–P8 stages and local P9/P10 clauses are recorded as passed. Full program acceptance still depends on the separately named gates.</p>
+<ul><li><strong>Remote Windows WSL qualification:</strong> P9 and imported FC5/M4 remain open. The retained receipt records the missing registered executor, launcher and SSH host configuration for that campaign.</li><li><strong>Broader campaigns:</strong> full Scanner qualification, caller S6, frame-path F4 and release qualification remain separate.</li><li><strong>Semantic scope:</strong> v1 has no general SMT solver, general cross-activation argument proof, historical memory inversion or general loop-instance value proof. Unsupported relations stay unknown.</li><li><strong>Historical claims:</strong> the delivery supplies no execution recording, executed-writer identity, iteration count, lifetime-violation proof or root-cause conclusion.</li></ul>
+<p>The next qualification work is to provide the declared remote prerequisites and run the named P9 / FC5 / M4 clauses. Further semantic work should target a concrete remaining obligation, such as a required loop-value invariant, with its own checked contract and evidence.</p>
+</section>
+<section id="context" class="context">
+<h2>Context and follow-up</h2>
+<p><strong>Status.</strong> Archival explanation of published implementation <code>a2e98e42f471dc2c78d8c7490671ac861afd8aac</code>, dated 2026-10-18. This HTML page is a presentation; the canonical design and execution ledger remain authoritative. It adds no runtime changes or new qualification campaign.</p>
+<p><strong>Motivating problem.</strong> The <a href="ariadne-frame-to-frame-recommendation-20261016.html#order">section 5 recommendation</a> asked for useful structural products and focused explanations while preserving unknowns when complete historical reconstruction is unavailable.</p>
+<p><strong>Contribution.</strong> This page explains what the integration adds, how to ask its two question kinds, what happened on the retained captures and what evidence supports the local delivery.</p>
+<p><strong>Direct next reading.</strong> Start with the <a href="../../docs/Ariadne/frame-question-investigation-design.md">canonical design and usage</a>; use the <a href="../plans/frame-question-investigation.md">stage ledger</a> for open gates, the <a href="../../evidence/Ariadne/frame-question/20261018/README.md">qualification record</a> for exact evidence, and <a href="../../CHECKPOINTS.md">CHECKPOINTS.md</a> for dated project status. Return through the <a href="ariadne-reports-index.html">archive index</a>.</p>
+<p><strong>Unresolved limits.</strong> The remote/imported/release gates and model/history limits listed above remain open. The original large-case question is still unknown.</p>
+</section>
+<footer>Report scope: source-grounded explanation and retained-evidence identity verification. Local links and presentation are checked separately from the recorded runtime campaigns.</footer>
+</main>
+</div>
+</body>
+</html>
