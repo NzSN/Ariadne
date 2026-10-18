@@ -1,12 +1,3 @@
-{
-  "schema": "ariadne.frame-path-property-evidence-manifest/v1",
-  "files": {
-    "property-clippy.log": "12781312a8ac205f89f3b4e68bac26e382ae51ca8d7fb1e6a2fa9d6d6fae6b90",
-    "property-core-dependencies.log": "c674e3dedb27a91aff9775a1dbd995cda57a706202583c0c42db609b28ee39a0",
-    "property-core.log": "32a9c9138343f7d5c856c41a613d161dcdf780ac7e0c1a60711d53efa5b76fa3",
-    "property-default-dependencies.log": "ff65a44d1d264eded39b1a6a2a48a696c7f51e06f4b1c6e06c221b8b9e5951dd",
-    "property-default.log": "3696fb060539b7b1e028e0595456dbe4d53931bd4afcf9ab61c18c2f3c27f5bf",
-    "property-suite-summary.log": "73f60c6ec07c8f0686ae81cfa37d8d7720233a1040bffd328a69674afd9786ef",
-    "property-validation.json": "b9533a723383815d638505ee824c479deb12a51bd6541a9b40e49490e0dbc6cf"
-  }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:4d278468d0970afe70682931e262e3103ecb6f2cad67f7e15ac85c125d75aad5
+size 785

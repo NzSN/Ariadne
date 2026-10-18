@@ -1,8 +1,3 @@
-{
-  "schema": "ariadne.guard-local-materialization/v1",
-  "scope": "Original archive member identities and bytes remain unchanged; raw diagnostic Rust source copies use .rs.txt locally to preserve repository source layout.",
-  "members": {
-    "frame_probe.rs": "artifacts/frame_probe.rs.txt",
-    "blocker_probe.rs": "artifacts/blocker_probe.rs.txt"
-  }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:a15a30ae48db87bf2918d67d1855d5e2c96ea3806058ad67d60476754250a999
+size 357

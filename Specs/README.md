@@ -46,6 +46,13 @@ records the subsequent source audit and separate qualification limits.
   candidates, residuals, incoming-coverage invalidation and resource stops;
   five model scenarios and implementation qualification have separate records.
 
+- [Frame-connection model](AriadneFrameConnections.tla) and
+  [Stage 5.2 ledger](../.agents/plans/frame-connections.md) — represented
+  corridor/SCC exactness, shortest first sample, bounded further samples and
+  preserved frontiers/writers/hypotheses. The
+  [local record](../evidence/Ariadne/frame-connections/20261018/README.md)
+  separates finite checking, compiled mutations, captures and remote limits.
+
 - [Frame-path model](AriadneFramePaths.tla) and
   [F0–F4 plan](../.agents/plans/frame-path-enumeration.md) — strict output count, valid
   structural paths, bounded work and preservation of memory writers; checking
@@ -94,6 +101,38 @@ frame-path and question-level models in this directory. The
 [semantic assurance decision](../docs/Ariadne/semantic-assurance.md#dependency-audit-and-retained-references)
 records the archive location, retained [Lean reference](../lean/README.md),
 BAP's trusted role and the analysis-model boundary.
+
+## Frame connections: Stage 5.2
+
+Run `bash Specs/check-frame-connections.sh` for Apalache type checking, 13 TLC
+configurations with safety and fair termination, and the independent literal
+oracle. Configurations cover diamond/cycle/self-loop/parallel/disconnected/
+unknown-reconnect/equal/conditional/missing-anchor cases, zero work/search,
+NP=1 and multiple samples. `AriadneFrameConnections.tla` computes a finite
+least closure, requires its completed relation to equal independently enumerated
+finite paths, derives forward/backward corridor and mutual-reachability
+components, and checks quotient acyclicity and first-witness minimality.
+
+`src/investigation/frame_connections.rs` implements bounded graph projection,
+forward/reverse worklists, iterative Kosaraju SCCs and BFS/detours. The model
+abstracts those traversals into closure rounds. Its queue models a first shortest
+loop-free witness; subsequent sample choices abstract bounded detours by valid
+node paths with strict NP. Typed edge facts remain in the modeled graph, while
+parallel sample identity and independent concrete layer scheduling are erased.
+The literal Python oracle uses Floyd–Warshall and path permutations across
+all 512 three-node directed graphs plus four named cases; Rust tests compare
+actual typed routes, SCCs and quotient edges. Capture checking separately uses
+Tarjan SCCs, DFS closure and distance relaxation.
+
+Source admission, activation-qualified identity, captured bytes, E8 anchors,
+function extents, trusted lifting and source hashes are premises. Concrete
+codec validation, allocation accounting, source publication preservation,
+clock observations and deterministic deadline-prefix replay are Rust contracts
+and separate tests. Preserving a modeled writer set says samples cannot remove
+candidates; this module performs no writer analysis. The checks do not prove
+universal refinement, instruction semantics, feasibility, execution history or
+program-level disconnection. The dated evidence records local Windows WSL
+results; the plan's remote qualification remains unexercised.
 
 ## Current model ownership
 

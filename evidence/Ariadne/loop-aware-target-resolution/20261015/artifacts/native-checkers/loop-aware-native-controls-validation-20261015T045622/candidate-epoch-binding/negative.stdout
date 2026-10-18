@@ -1,1 +1,3 @@
-[{"case":"stale-candidate-epoch","expected_acceptance":false,"accepted":true,"passed":false,"error":null}]
+version https://git-lfs.github.com/spec/v1
+oid sha256:ef694cb7af5d92903db76557104c5d65ad08e6ba4718cbe96a30ece79ca23491
+size 107

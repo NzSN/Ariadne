@@ -1,7 +1,3 @@
-Traceback (most recent call last):
-  File "/home/nzsn/Repos/Ariadne-vector-registers-20261013/tools/check_rust_layout.py", line 40, in <module>
-    main()
-  File "/home/nzsn/Repos/Ariadne-vector-registers-20261013/tools/check_rust_layout.py", line 26, in main
-    assert Path(metadata["target_directory"]) == ROOT / "target"
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError
+version https://git-lfs.github.com/spec/v1
+oid sha256:b1a8bc3542879825b5a34ef5643e411670596fabe02a77257c90f70bc9970cf7
+size 405

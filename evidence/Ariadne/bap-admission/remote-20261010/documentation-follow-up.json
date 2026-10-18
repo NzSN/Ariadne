@@ -1,21 +1,3 @@
-{
-  "schema": "ariadne.qualification-documentation-follow-up/v1",
-  "qualificationReportSha256": "2fb149a6a3bab565f981a10bdbf70f6e33e97e789e20d21d3d8222bd3834c50a",
-  "qualifiedCodeAndFixtureHashesStillMatch": true,
-  "changedQualifiedDocuments": [
-    {
-      "path": "docs/Ariadne/bap-analysis-core-design.md",
-      "qualifiedSha256": "ebc1a4dbd795eeee1c38e7ce1c24a6bfcdc81ab887f3a1801cc5507250b8a0e0",
-      "currentSha256": "7c1e2eedf924e63e710fa37174baae833e696ebcacc4a5d7922fdb0892376ce2",
-      "kind": "documentation-only follow-up"
-    }
-  ],
-  "scope": "Protocol documentation updated after qualification; retained record/archive hashes remain unchanged. This does not manufacture a fresh aggregate pass.",
-  "documentationCheck": {
-    "connectedDocuments": 137,
-    "contextSections": 136,
-    "localLinks": 2435,
-    "passed": true
-  },
-  "heavyLocalValidation": false
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:8ebf8033972347a154d804fe032ed3c95672b158530d6b600742320754b76e24
+size 885

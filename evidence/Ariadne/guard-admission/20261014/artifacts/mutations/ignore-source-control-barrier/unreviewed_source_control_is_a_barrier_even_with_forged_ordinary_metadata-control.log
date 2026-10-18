@@ -1,9 +1,3 @@
-   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-guard-admission-20261014/target/guard-mutations-20261014/ignore-source-control-barrier/sut)
-    Finished `release` profile [optimized] target(s) in 27.53s
-     Running unittests src/lib.rs (/home/nzsn/Repos/Ariadne-guard-admission-20261014/target/guard-mutations-20261014/ignore-source-control-barrier/build/release/deps/ariadne-eac5fde57d2ca545)
-
-running 1 test
-test bap::guard_admission_tests::unreviewed_source_control_is_a_barrier_even_with_forged_ordinary_metadata ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 91 filtered out; finished in 0.00s
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:7d11e574b18e0a0dfb73127099d9da7fca8166f0a1f88cadb9cb2588a9b4d533
+size 637

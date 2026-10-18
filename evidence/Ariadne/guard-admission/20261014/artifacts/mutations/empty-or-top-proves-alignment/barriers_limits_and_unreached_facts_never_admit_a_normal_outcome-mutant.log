@@ -1,24 +1,3 @@
-   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-guard-admission-20261014/target/guard-mutations-20261014/empty-or-top-proves-alignment/sut)
-    Finished `release` profile [optimized] target(s) in 28.39s
-     Running unittests src/lib.rs (/home/nzsn/Repos/Ariadne-guard-admission-20261014/target/guard-mutations-20261014/empty-or-top-proves-alignment/build/release/deps/ariadne-eac5fde57d2ca545)
-
-running 1 test
-test bap::guard_admission_tests::barriers_limits_and_unreached_facts_never_admit_a_normal_outcome ... FAILED
-
-failures:
-
----- bap::guard_admission_tests::barriers_limits_and_unreached_facts_never_admit_a_normal_outcome stdout ----
-
-thread 'bap::guard_admission_tests::barriers_limits_and_unreached_facts_never_admit_a_normal_outcome' (55016) panicked at src/bap/../../tests/bap/guard_admission_unit.rs:601:5:
-assertion `left == right` failed
-  left: Aligned
- right: Unknown
-note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
-
-
-failures:
-    bap::guard_admission_tests::barriers_limits_and_unreached_facts_never_admit_a_normal_outcome
-
-test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 91 filtered out; finished in 0.00s
-
-error: test failed, to rerun pass `--lib`
+version https://git-lfs.github.com/spec/v1
+oid sha256:3d457fd18f568a45d1e954a3bcb4dd1b5cbd9bc24ae2443c9a3e0cf23c19cc9a
+size 1230

@@ -1,11 +1,3 @@
-   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne)
-    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.62s
-     Running tests/input/target_resolution_cli.rs (target/debug/deps/input_target_resolution_cli-4aae6e746bd18830)
-
-running 3 tests
-test initial_profile_rejects_unsupported_composed_modes ... ok
-test native_response_timeout_is_explicit_and_bounded ... ok
-test resolver_cli_requires_explicit_mode_and_bounded_nonzero_artifact_allowance ... ok
-
-test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:6fadb9425b83154674e457173545d5a1e7d4caf032c77f544b49d8fe25694740
+size 575

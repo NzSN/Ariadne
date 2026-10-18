@@ -1,9 +1,3 @@
-{
-  "name": "predicate-model",
-  "command": [
-    "bash",
-    "Specs/check-predicate-admission.sh"
-  ],
-  "exit_code": 0,
-  "seconds": 42.855836459
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:d118b38a49df780e20c298302d5129a03c0463ee00e4a24583a4406fab2c07d1
+size 150

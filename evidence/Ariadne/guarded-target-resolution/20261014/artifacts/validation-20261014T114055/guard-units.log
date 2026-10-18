@@ -1,9 +1,3 @@
-   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-composed-20261014)
-error[E0282]: type annotations needed
-   --> src/bap/target_resolution.rs:883:20
-    |
-883 | ...|| path[...tive].0 ...
-    |       ^^^^^...^^^^^ cannot infer type
-
-For more information about this error, try `rustc --explain E0282`.
-error: could not compile `ariadne-analysis` (lib test) due to 1 previous error
+version https://git-lfs.github.com/spec/v1
+oid sha256:10551305e4ba21d0969d644c40330e822afaafd08c23bbb5d683a438891e3cf5
+size 393

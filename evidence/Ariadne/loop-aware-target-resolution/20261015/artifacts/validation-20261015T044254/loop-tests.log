@@ -1,14 +1,3 @@
-   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-loop-aware-20261015)
-    Finished `test` profile [unoptimized] target(s) in 10.30s
-     Running unittests src/lib.rs (target/loop-aware-build/debug/deps/ariadne-ee964763ae0b7713)
-
-running 6 tests
-test bap::target_resolution::loop_tests::legacy_coverage_omission_is_distinct_from_explicit_json_null ... ok
-test bap::target_resolution::loop_tests::loop_closure_keeps_legacy_path_prohibition_and_retains_candidates_after_invalidation ... ok
-test bap::target_resolution::loop_tests::loop_closure_rejects_root_bypass_clobbers_and_missing_preexisting_witnesses ... ok
-test bap::target_resolution::loop_tests::loop_rule_declines_changed_original_guard_effects_and_explicit_zero_budgets ... ok
-test bap::target_resolution::loop_tests::captured_pointer_changing_phase_regions_close_with_independent_edge_replay ... ok
-test bap::target_resolution::loop_tests::loop_receipt_tampering_cannot_hide_entrance_edges_domains_or_original_sources ... ok
-
-test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 132 filtered out; finished in 0.12s
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:8f53afc448d269458eb64296a717423bfe0dfb37fbc74f3ddbb40405cc8b5d8f
+size 1096

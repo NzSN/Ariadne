@@ -1,10 +1,3 @@
-{
-  "schema": "ariadne.target-resolution-completion-freeze/v1",
-  "date": "2026-10-12",
-  "reason": "Expanded original query exceeds legacy completion representation; preserve fixed state and encoded-result cap through lossless interning",
-  "profile": "captured-indirect-targets/v1",
-  "encoded_result_bytes": 268435456,
-  "expanded_definition_links": 16777216,
-  "legacy_mode_changed": false,
-  "reference_optimization": "cache outgoing definitions and enabled propagation sites; preserve smallest eligible scheduled action"
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:499e3b575557888b1595de5268e0a7c53429e1aab229efe71862677347bcc4ee
+size 529

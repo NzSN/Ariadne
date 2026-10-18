@@ -1,22 +1,3 @@
-   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-composed-20261014)
-    Finished `test` profile [unoptimized] target(s) in 7.76s
-     Running unittests src/lib.rs (target/composed-build/debug/deps/ariadne-ee964763ae0b7713)
-
-running 1 test
-test bap::target_resolution::tests::stable_byte_reload_loop_has_checked_infeasible_context_and_ten_entries ... FAILED
-
-failures:
-
----- bap::target_resolution::tests::stable_byte_reload_loop_has_checked_infeasible_context_and_ten_entries stdout ----
-
-thread 'bap::target_resolution::tests::stable_byte_reload_loop_has_checked_infeasible_context_and_ten_entries' (1080) panicked at src/bap/../../tests/bap/target_resolution_unit.rs:1468:5:
-{"cyclic-incoming-state", "unsupported-or-unknown-target"}
-note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
-
-
-failures:
-    bap::target_resolution::tests::stable_byte_reload_loop_has_checked_infeasible_context_and_ten_entries
-
-test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 131 filtered out; finished in 0.00s
-
-error: test failed, to rerun pass `--lib`
+version https://git-lfs.github.com/spec/v1
+oid sha256:7226d8babaa9973849458e82f2462c801e194bdc62c5a6135e543f3a6041f7ae
+size 1090

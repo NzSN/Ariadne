@@ -1,0 +1,171 @@
+{
+  "schema": "ariadne-chatdoc-evidence-copy/v1",
+  "document": "ariadne-crashpad-dump-analysis-20261018.html",
+  "presentation_date": "2026-10-18",
+  "analysis_recorded_utc": "2026-10-18T05:16:51.628686+00:00",
+  "dump_sha256": "47d93971541230b24d992e3c0f60a17df732145f083089844b99e44597f1ae34",
+  "git_head": "012a2482043b167f8a65a0a2d86bc822ca334331",
+  "scope": "Presentation and byte-identical evidence copies of the named experiment. Report creation reruns no capture, analysis or qualification.",
+  "original_case_directory": "/home/nzsn/Repos/Ariadne/tmp/crashpad-frame-capture-20261018",
+  "files": [
+    {
+      "source": "tmp/crashpad-frame-capture-20261018/dump-analysis.json",
+      "archived": "evidence/dump-analysis.json",
+      "bytes": 4694,
+      "sha256": "af00cdb2a9578507103b71e5ad0fe159641c3356d2d2d13265f0ea1b8e14cb92"
+    },
+    {
+      "source": "tmp/crashpad-frame-capture-20261018/capture/capture.json",
+      "archived": "evidence/capture-receipt.json",
+      "bytes": 1951,
+      "sha256": "7825c485dedabff121ee722ec1f95275b65a05f19c91f59e9da7d2d876892846"
+    },
+    {
+      "source": "tmp/crashpad-frame-capture-20261018/capture/witness.json",
+      "archived": "evidence/producer-witness.json",
+      "bytes": 531,
+      "sha256": "72c3311a1f72e13827731969b1bb0c05dd6feb27e4102cca642c711d510a1a35"
+    },
+    {
+      "source": "tmp/crashpad-frame-capture-20261018/capture-inspection.json",
+      "archived": "evidence/capture-inspection.json",
+      "bytes": 6079,
+      "sha256": "85196a06b7d90c409c25ea3c1037c11b3ba2e100abe70b29b0e19caf6c5fe961"
+    },
+    {
+      "source": "tmp/crashpad-frame-capture-20261018/product-check.json",
+      "archived": "evidence/product-check.json",
+      "bytes": 1190,
+      "sha256": "fc13fa923e00cf2171d588444ca7adee8794bea5f1191de97dae727853a83f2b"
+    },
+    {
+      "source": "tmp/crashpad-frame-capture-20261018/fault-arithmetic-check.json",
+      "archived": "evidence/fault-arithmetic-check.json",
+      "bytes": 836,
+      "sha256": "d3c9dee4135d7d5080d7089b695df5f7c03ead3b3030b6f4eaa99380eb205eee"
+    },
+    {
+      "source": "tmp/crashpad-frame-capture-20261018/structure/frame-structure.json",
+      "archived": "evidence/frame-structure.json",
+      "bytes": 1680240,
+      "sha256": "513fc6bab337c563e2f58d1939b6f15ba88ffa8c2c3e7a795ffa2ab1ed81c14b"
+    },
+    {
+      "source": "tmp/crashpad-frame-capture-20261018/structure/frame-structure.txt",
+      "archived": "evidence/frame-structure.txt",
+      "bytes": 32728,
+      "sha256": "8db5e67e1f57dd0f1abcbbdefcf4b3abfb836ed23e05a094af07479892d0169f"
+    },
+    {
+      "source": "tmp/crashpad-frame-capture-20261018/structure/frame-structure.dot",
+      "archived": "evidence/frame-structure.dot",
+      "bytes": 29033,
+      "sha256": "cf933dab3fa642c12e836d8b6b5e67d01f1db6837dc047e1a3fa3ee84d510461"
+    },
+    {
+      "source": "tmp/crashpad-frame-capture-20261018/paths/frame-paths.json",
+      "archived": "evidence/frame-paths.json",
+      "bytes": 797989,
+      "sha256": "3dea3a43cfedec09b07fd4e81697d5a66a15008e8e8c7afcd80f7699f1861359"
+    },
+    {
+      "source": "tmp/crashpad-frame-capture-20261018/paths/frame-paths.txt",
+      "archived": "evidence/frame-paths.txt",
+      "bytes": 56265,
+      "sha256": "75f9e4a310955807411771019e79b0a128354950b7dee7aaa2564010e5cee85a"
+    },
+    {
+      "source": "tmp/crashpad-frame-capture-20261018/paths/frame-paths.dot",
+      "archived": "evidence/frame-paths.dot",
+      "bytes": 504865,
+      "sha256": "b3322f1a2dac7c83d8734ad80760cc2f0bbf82b86e1f9a3e6c5f64f2c7e86a74"
+    },
+    {
+      "source": "tmp/crashpad-frame-capture-20261018/fault-explanation/explanation.json",
+      "archived": "evidence/explanation.json",
+      "bytes": 1962008,
+      "sha256": "c711add7c743f3b2d9c89171e80dba67ecf8557daeda4306788ef77a907f555c"
+    },
+    {
+      "source": "tmp/crashpad-frame-capture-20261018/fault-explanation/explanation.txt",
+      "archived": "evidence/explanation.txt",
+      "bytes": 641043,
+      "sha256": "63eecfbdbc64882611c66d41d961a8c92daabd5884817730be4973c37286448b"
+    },
+    {
+      "source": "tmp/crashpad-frame-capture-20261018/zero-address/zero-address-assessment.json",
+      "archived": "evidence/zero-address-assessment.json",
+      "bytes": 40816,
+      "sha256": "b0e5d5a52fb3468e50b75b6b7263155011464f044ddf3f6e0bceeeadd38b219d"
+    },
+    {
+      "source": "tmp/crashpad-frame-capture-20261018/zero-address/zero-address-assessment.txt",
+      "archived": "evidence/zero-address-assessment.txt",
+      "bytes": 19601,
+      "sha256": "d8f4eb6f18dfd350114ae21f92a7ab48ff9675f38203afd77d19f467c35929b3"
+    },
+    {
+      "source": "tmp/crashpad-frame-capture-20261018/structure-command.json",
+      "archived": "evidence/structure-command.json",
+      "bytes": 597,
+      "sha256": "479a32ef2f872b26b559e1e3d6bd58bfe630903d63141570232e0fddf6ab0b81"
+    },
+    {
+      "source": "tmp/crashpad-frame-capture-20261018/paths-command.json",
+      "archived": "evidence/paths-command.json",
+      "bytes": 736,
+      "sha256": "78a592a3d8ee54aa66a26a49d7713c76fa8efa20bfcf08c4307c66df19defd0d"
+    },
+    {
+      "source": "tmp/crashpad-frame-capture-20261018/fault-explanation-command.json",
+      "archived": "evidence/fault-explanation-command.json",
+      "bytes": 832,
+      "sha256": "3568d7bd05b572c99aff584d14d1a3808c4ebcca96a4dc9e1a915505655794c1"
+    },
+    {
+      "source": "tmp/crashpad-frame-capture-20261018/zero-address-command.json",
+      "archived": "evidence/zero-address-command.json",
+      "bytes": 825,
+      "sha256": "eba5ac676d832446df656021dfd27aff3661d45eafb0c1fcc91396948631f91d"
+    },
+    {
+      "source": "tmp/crashpad-frame-capture-20261018/replay-command.json",
+      "archived": "evidence/replay-command.json",
+      "bytes": 458,
+      "sha256": "ae240ea750cb6fb2e94eaf973f959c517d35641cc6eac28f41a4fc4df5ee3580"
+    },
+    {
+      "source": "tmp/crashpad-frame-capture-20261018/replay.log",
+      "archived": "evidence/replay.log",
+      "bytes": 5689,
+      "sha256": "bd56df0e8823dae3755d1f8ae48b4bfb93a6cee0d605ac69a76d9ea04e5c2f1d"
+    },
+    {
+      "source": "tmp/crashpad-frame-capture-20261018/build.json",
+      "archived": "evidence/build.json",
+      "bytes": 3368,
+      "sha256": "357e2c31b8fe21fb672c942da213cac1d1c88f2b8a92e66523c29b04d7f9c39c"
+    },
+    {
+      "source": "tmp/crashpad-frame-capture-20261018/recipes/crash_demo.cc",
+      "archived": "evidence/crash_demo.cc",
+      "bytes": 6225,
+      "sha256": "55736f6f352d17363d94d5fa62904de373dec5840df810dd5db8ec8998a8fc6f"
+    },
+    {
+      "source": "tmp/crashpad-frame-capture-20261018/recipes/bap_workload.asm",
+      "archived": "evidence/bap_workload.asm",
+      "bytes": 5061,
+      "sha256": "88b514037c060c393b803391ecff2dbb00b58f997eadc0adf659ae2e8c726147"
+    }
+  ],
+  "derived_graph_data": {
+    "path": "graph-data.json",
+    "sha256": "c82a36474024266657b3cfe7dca24ccaf73aacbff7422864dceba5b34053e5cd"
+  },
+  "raw_inputs": "Raw dump, executable and source archive remain in the ignored original experiment directory; they are not copied into the maintained archive.",
+  "presentation_validation": {
+    "path": "presentation-validation.json",
+    "scope": "Static, evidence-copy, simulated-DOM and wslview launch checks; actual browser rendering unexercised"
+  }
+}

@@ -1,1 +1,3 @@
- typecheck --out-dir=/tmp/ariadne-predicate-admission.vUDAt7W0/typecheck AriadnePredicateAdmission.tla
+version https://git-lfs.github.com/spec/v1
+oid sha256:b570a1e5080f9860354c3ad719236801cd147d7b7e0d7697afefe0dd103867aa
+size 103

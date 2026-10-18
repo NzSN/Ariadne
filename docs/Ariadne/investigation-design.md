@@ -26,6 +26,10 @@ a separate structural report before dataflow. Its
 [2026-10-16 qualification](../../evidence/Ariadne/frame-structure/20261016/README.md)
 completes SF0–SF6 within the finite Windows AMD64 captured-frame/E8-call scope;
 caller completion and full frame-path acceptance retain separate gates.
+The next selected focus is the proposed
+[Stage 5.2 plan](../../.agents/plans/frame-connections.md): represented corridors,
+SCC summaries and bounded examples over the validated structural source.
+Its implementation and qualification are pending.
 
 **Why this document exists.** The [real-capture slice](file-reader-design.md#historical-controlled-chromium-capture)
 provides possible origins but leaves their explanation to the investigator.
@@ -56,6 +60,9 @@ and qualification preserve alternatives and missing premises. The frame-path que
   — implemented Stage 5.1 recovery-prefix API, separate report and finite host
   policy and [source-bound qualification](../../evidence/Ariadne/frame-structure/20261016/README.md).
   No dataflow or path enumeration is performed.
+- [Frame connections plan: Stage 5.2](../../.agents/plans/frame-connections.md)
+  — proposed corridor/SCC/example consumer of the Stage 5.1 artifact; FC0–FC6
+  remain pending.
 - [Caller semantic-coverage design](caller-semantic-coverage-design.md)
   — later terminal/load admission and the remaining completed-caller dataflow gate.
 - [Justified branch pruning design](justified-branch-pruning-design.md) — checked
@@ -711,6 +718,335 @@ Checked exceptional exits and opaque call context are visible independently of
 those unknowns. Drained recovery does not imply semantic completeness.
 Caller-coverage S6, frame-path F4, full caller state parity, exact paths and
 executed history remain outside this qualification.
+
+## Structural corridors and cycle summaries
+
+**Stage 5.2 — implemented, 2026-10-18.** This read-only consumer follows
+Stage 5.1. It addresses the second item in section 5 of the
+[frame-to-frame recommendation](../../.agents/chatdocs/ariadne-frame-to-frame-recommendation-20261016.html):
+summarize cycles and offer bounded examples. The
+[FC0–FC6 implementation plan](../../.agents/plans/frame-connections.md)
+owns execution. The API and opt-in report/CLI described below are implemented.
+The [local qualification record](../../evidence/Ariadne/frame-connections/20261018/README.md)
+separates fresh finite checks and capture applications from unexercised remote
+and release qualification.
+
+### Question and module interface
+
+For an already validated structural frame report, answer:
+
+> Which represented instruction connections join its selected frame anchors,
+> which cyclic regions do those connections contain, what frontiers remain
+> unresolved, and can a few example routes be shown within a separate budget?
+
+Consume `BoundFrameStructure` directly. Do not require `Phase::Done`, compute
+reaching definitions, rerun preparation or use the completed-investigation
+binder. The Stage 5.1 source owns captured bytes, roots, activations,
+recovery prefixes, proofs and diagnostics; Stage 5.2 adds a read-only assessment.
+Ownership may move into the result, but those source facts remain unchanged.
+
+The module has one main interface:
+
+```text
+summarize_frame_connections(
+    structure: BoundFrameStructure,
+    example_count_bound: positive NP,
+    limits: FrameConnectionLimits,
+) -> Result<BoundFrameConnections, Error>
+```
+
+`BoundFrameConnections` is privately constructed and owns the immutable source
+plus derived results. Its range is the source's selected `N:M`; v1 adds no
+custom instruction endpoints or scope expansion. Source validation errors are
+errors. Missing anchors or stopped analysis produce explicit unavailable or
+partial layers while preserving independently valid source maps.
+
+Keep the existing `BoundInvestigation`, `BoundFramePaths`, strict NP contract,
+report versions and default native full-analysis routes unchanged. The new
+module is enabled with `bap`, like `BoundFrameStructure`; it adds no dependency
+to the standard-library-only recovery core. It depends on validated
+investigation types, not on file input or report rendering.
+
+### Represented graph and active-call scope
+
+Use activation-qualified nodes `(frame identity, semantic instruction VA)` and
+typed edges. Equal VAs in recursive activations remain distinct. Auxiliary
+frames retained as entry witnesses stay evidence, outside the selected route
+graph. Do not turn slice seeds, candidate targets or saved return PCs into roots.
+
+The route graph contains successfully decoded instructions inside the validated
+frame function extents. Follow admitted local `next`, `taken`, `fallthrough`,
+`jump`, `indirect` and `summary` edges whose endpoints are such nodes.
+Unfollowed call-only targets are context. Add a cross-frame `call` edge only
+from an already admitted `FrameStructureLink`; preserve its original byte,
+continuation, activation and hypothesis evidence.
+
+An edge to a failed, pending, missing or out-of-function endpoint remains an
+explicit boundary record with the original source/destination. It cannot be
+silently discarded or treated as a terminal instruction proving disconnection.
+The underlying source retains every original map, edge and diagnostic even
+when an item is ineligible for route traversal.
+
+Use the existing active-anchor policy: start before frame N's verified active
+call; finish at frame 0's captured PC, or frame M's active call when M is older
+than frame 0. At intermediate active-call anchors, the matched transition enters
+the child; the local summary continuation stays context. This admits a finite
+captured-activation composition, not arbitrary earlier invocations of the same
+call site. Ending at an older active-call anchor excludes that call's descent.
+For `N=M`, a single validated anchor can yield a zero-edge example under NP;
+this is a new derived result, not a change to the Stage 5.1 frame-map meaning.
+Missing or ambiguous anchors make cross-frame corridor/examples unavailable;
+available per-frame structure and SCCs can still be useful.
+
+### Corridor, frontiers and result meanings
+
+For the fully constructed represented graph `G`, compute:
+
+```text
+F = ForwardReachable_G(start)
+B = BackwardReachable_G(endpoint)
+represented_corridor = F intersect B
+```
+
+Both traversals use bounded deterministic worklists. Each discovered node is
+processed once per traversal; cycles do not require enumerating loop walks.
+Retain membership, original typed edges and endpoint identities. If a traversal
+stops before completion, expose its work/frontier receipt and no exact corridor
+intersection. A discovered concrete route can still be retained as a witness
+under its own completed validation; unfinished work cannot prove absence.
+
+Keep the following dimensions independent:
+
+| Layer | Meanings |
+| --- | --- |
+| Graph construction | `complete_for_represented_graph`, `work_stopped`, `unavailable`; records whether the selected represented graph was fully materialized under host policy. |
+| Represented connection | `found`, `absent_in_represented_graph`, `unknown_work_stopped`, `unavailable_anchors`. A found route is only a structural witness. |
+| Corridor | `complete_for_represented_graph`, `work_stopped`, `unavailable`; unrelated to semantic path feasibility. |
+| SCC partition | `complete_for_represented_graph`, `work_stopped`, `unavailable`; states its exact node/edge domain. |
+| Examples | Retained count, strict NP, work counters, stop reason and restrictions; no total path-count or enumeration-completeness claim. |
+| Semantic/history evidence | Inherited premises and gaps; feasibility and executed history stay unassessed. |
+
+`absent_in_represented_graph` requires completed construction and traversal over
+the declared graph. It says only that this graph contains no connecting route.
+It never means the program cannot connect the frames. In particular, an unknown
+target can leave the displayed intersection and reconnect later.
+
+Retain all source gaps, then annotate their relation to the query where it can
+be computed: on the corridor, forward-reachable outside it, another represented
+region, or not classifiable with available work/evidence. Preserve forward-
+reachable unresolved frontiers outside the corridor, not merely gaps whose
+destinations already reach the endpoint. Sites lacking an admitted graph node
+keep their original edge/frame attachment rather than an invented node.
+
+Separate topological unknowns from effect precision. Missing targets, pending
+work, missing bytes and unresolved guards can hide continuations. An
+`UnsupportedEffects` or `OpaqueCallContext` annotation need not remove an
+already admitted local continuation, and it does not become precise value or
+return behavior. Checked exception exits retain the source's local-normal-
+completion scope; do not invent handler resumption or claim it impossible.
+
+### SCC condensation
+
+Compute strongly connected components of each available activation-scoped
+represented graph, including regions outside the corridor. A complete composed
+partition may also be reported when all required frame maps and links exist.
+Admitted cross-frame edges move to younger activations; recursion in the stack
+therefore does not merge different activations into one SCC.
+
+Use iterative traversal with explicit stacks and work/byte limits. A component
+is cyclic if it has multiple nodes or a singleton self-loop. Component IDs bind
+the analysis scope and canonical sorted member identities. The condensation
+preserves every inter-component structural relation; edge kinds and original
+edge references remain available even for parallel edges. Internal edges,
+members and attached frontiers stay inspectable.
+
+SCCs and their DAG are exact only relative to the explicitly represented graph.
+Unknown additional edges could merge components. A condensed component supplies
+no iteration count, termination argument, data invariant or path-feasibility
+certificate. If partition work stops, retain progress and the original graph;
+v1 publishes no unfinished partition as an exact set of SCCs.
+
+### Small, independent example budget
+
+Keep `0 <= returned_examples < NP`; reject NP=0 before work handling. NP=1
+requests no retained examples while leaving corridor/SCC analysis available.
+The default NP=2 permits one shortest represented route.
+
+Use deterministic breadth-first search for the first example, minimizing
+instruction-edge count over the represented graph. A route found by admitted
+BFS ordering can carry that graph-relative shortest guarantee. Resource
+exhaustion before discovery stays unknown; a longer frontier cannot be relabeled
+as an exhaustive negative result. Tie-breaking uses canonical typed-edge order.
+
+When more examples are requested, try bounded deterministic detours: exclude
+one typed edge of an existing example and run BFS again. Validate endpoints,
+edge identities and activation transitions; deduplicate by typed edge sequence.
+Select additional retained examples by length and canonical edge order among
+the candidates actually found. These are selected alternatives, with no claim
+to be the globally next-shortest routes or an exhaustive enumeration.
+
+V1 examples are loop-free in activation-qualified node identity. Cyclic regions
+remain visible through SCCs; examples need not unroll them. Bound BFS attempts,
+expanded nodes, scanned edges, candidate/frontier bytes, output bytes, deadline
+and example length separately. Even if all detour attempts finish, that work
+does not establish all-path coverage. A missing/omitted example never excludes
+a memory writer or refutes a path's feasibility.
+
+### Source binding, reports and compatibility
+
+The report family is `ariadne.frame-connections/v1`, with separate
+JSON/text/DOT views. It retains the original structural source, graph scope,
+typed frontiers, partition/corridor memberships, examples, independent layer
+statuses, counters and effective limits. Conditional Stage 5.1 inputs retain
+their hypothesis IDs on every dependent result; no baseline/conditional union
+is constructed.
+
+The graph module needs a deterministic source-facts fingerprint over the
+validated chain, questions, frame identities, recovery facts, active links,
+premises and effective policy. The existing structural publication ID is
+private to the report codec. Do not obtain it by rendering JSON inside
+investigation or change the existing v1/v2 identity domains. Keep the logical
+assessment identity and the enclosing publication binding distinct.
+
+The new codec embeds one unchanged structural source report and its publication
+binding, then the derived assessment. Reuse the existing structural decoder
+with its own host policy before constructing a trusted source. Replay
+recomputes the assessment from that source and its bounded deterministic work
+receipt; it does not trust serialized corridor/SCC/path assertions or pretend
+to reproduce the producer's wall clock. A trusted expected publication binding
+or owning capture is still required for authentication, as in Stage 5.1.
+
+Apply total input, nested structural decode/replay, graph work, temporary bytes,
+assessment replay and publication caps before allocation or work. Producer
+limits cannot raise host caps. Reject an invalid identity/proof/topology as an
+error. A producer work stop can preserve a verified partial result; verifier
+exhaustion refuses trusted publication. Do not clip evidence or silently adopt
+the old 8,192-node/4 MiB frame-path limits. The finite defaults admit the
+original large caller/callee source and graph.
+
+The opt-in live-capture command is:
+
+```text
+ariadne-minidump DUMP --frame-connections N:M
+  [--example-path-count-bound NP] [--frame-connections-limits POLICY.json]
+  [existing compatible structural preparation options]
+```
+
+This command shares capture preparation with the existing structural route. An explicit full-
+analysis backend, entry/seed, assessment or old path-listing option is
+incompatible. The new producer performs no native full completion, reaching
+definitions or slicing. The library also accepts a separately decoded
+`BoundFrameStructure`; a new saved-report stdin CLI is outside v1.
+
+### Source review and validation targets, 2026-10-18
+
+| Current source fact | Stage 5.2 consequence |
+| --- | --- |
+| [`BoundFrameStructure` getters](../../src/investigation/frame_structure.rs) expose validated maps, recoveries, links, diagnostics and hypothesis identity. | Use this interface as the source; raw graph JSON is not an admission shortcut. |
+| The same file retains call context, pending/failed endpoints, outside-function edges and effect gaps. | Preserve them when constructing the eligible route graph and frontier annotations. |
+| [`bind_frame_paths`](../../src/investigation/frame_paths.rs) consumes completed investigations and separately caps graph admission at 8,192 nodes. | Keep that interface compatible; the new consumer has its own finite host policy. |
+| [`frame_structure::identity`](../../src/reports/frame_structure.rs) is codec-private and report replay reconstructs trusted sources. | Use a lower-level source-facts fingerprint and reuse source decoding; avoid an investigation-to-renderer dependency. |
+| [`AriadneFrameStructure.tla`](../../Specs/AriadneFrameStructure.tla) models the recovery-prefix source, while [`AriadneFramePaths.tla`](../../Specs/AriadneFramePaths.tla) models bounded DFS. | The separate [connection model](../../Specs/AriadneFrameConnections.tla) owns the new finite graph contract; no universal model-to-Rust refinement is claimed. |
+
+The [FC0–FC6 plan](../../.agents/plans/frame-connections.md) covers
+independent finite reachability/SCC oracles, cyclic and unknown-reconnect cases,
+recursive identities, typed parallel edges, all resource stops and real compiled
+mutations. The original large frame pair tests scale and source preservation.
+The separate 2026-10-18 controlled recursive capture supplies a second case,
+whose nine existing DFS examples are observations, not expected shortest or
+SCC answers. Source/tool/capture identities and failed attempts are retained. No
+remote or release qualification is claimed; fresh local results are recorded below.
+
+Historical design-draft navigation validation on 2026-10-18 passed: 76 connected documents,
+75 context sections and 2,221 local links, plus scoped whitespace checks.
+These are documentation checks; no Stage 5.2 runtime/model acceptance is credited.
+
+
+### Implemented policy, transport and usage
+
+The implementation lives in [frame_connections.rs](../../src/investigation/frame_connections.rs),
+with [report replay/rendering](../../src/reports/frame_connections.rs) and a
+[CLI adapter](../../src/bin/ariadne_minidump/frame_connections.rs). Source capture
+preparation is shared with Stage 5.1. The old structure/path codecs and full
+analysis default remain separately exercised.
+
+```sh
+cargo run --offline --locked --bin ariadne-minidump -- CAPTURE.dmp \
+  --decoder-reference target/ariadne-llvm-mc \
+  --frame-connections 5:0 --example-path-count-bound 2 \
+  --output-dir NEW_DIRECTORY
+```
+
+`--frame-connections-limits FILE` accepts a complete strict JSON
+`FrameConnectionLimits` object, at most 64 KiB. The CLI validates positive NP
+and policy before opening the dump. Output files are `frame-connections.json`,
+`frame-connections.txt` and `frame-connections.dot`. An existing saved structural
+publication can instead be passed through `reports::frame_structure::decode_expected`
+and then `summarize_frame_connections`; no input adapter or helper is needed.
+
+| Policy field | Default and meaning |
+| --- | --- |
+| `structural` | Existing complete Stage 5.1 policy for capture/source admission and replay. |
+| `max_input_bytes`, `max_output_bytes` | 1 GiB each for the new envelope/publication. |
+| `max_source_bytes` | 512 MiB for source-facts fingerprint input and embedded source publication. |
+| `max_graph_nodes`, `max_graph_edges` | 65,536 / 262,144 preflight cardinalities, including retained source context in the edge estimate. |
+| `max_work_bytes` | 128 MiB per accounted graph-storage or cumulative route-candidate pool. Source/proof bytes are independent; this is not a process-RSS ceiling. |
+| `graph_work`, `reach_work`, `scc_work`, `example_work` | 4,194,304 / 4,194,304 per direction / 8,388,608 / 4,194,304 work units. |
+| `deadline_ms` | 5,000 per graph/traversal/SCC/example layer, polled at work units. Source admission, hashing, bounded sorting and publication have their own byte/cardinality bounds. |
+| `max_example_attempts`, `max_path_nodes`, `max_count_bound` | 64 BFS attempts / 4,096 nodes per route / maximum positive NP 4,097. NP defaults to 2. |
+
+Graph work charges node, gap, edge, active-link and adjacency-index operations;
+reachability charges node/edge scans. SCC work charges iterative DFS, membership
+and quotient operations; example work charges BFS visits/edge scans. Ordering
+and hashing have finite cardinality/byte bounds. Zero work budgets stay zero.
+A source/publication byte refusal is an error; a stopped graph layer yields an
+honest partial bound result with the unchanged source. Example status is
+`finished`, `work_stopped` or `unavailable`; `finished` describes the requested
+sample search and never claims enumeration completeness. A count stop retains
+strictly fewer than NP examples.
+
+The source-facts hash domain is `ariadne.frame-connection-source/v1`. It streams
+validated chain/question/policy, complete source maps/links/diagnostics and each
+recovery's identity/context/proofs, limits and exact receipt. The assessment
+scope additionally binds algorithm `represented-graph-kosaraju-bfs-detours/v1`,
+positive NP and policy. SCC/example IDs bind that scope and their canonical
+members/typed route. No renderer is called from investigation.
+
+The new envelope embeds `source_json` as a UTF-8 JSON string, retaining the old
+source publication byte for byte, and an `assessment`. Its separate
+`publication_binding` hashes the schema, source bytes and complete assessment.
+The decoder rejects duplicate/unknown fields, checks host bytes/cardinalities
+before typed copies, validates the nested structural source and replays every
+claimed assessment field. Producer policies must fit the verifier's independent
+policy; insufficient verifier resources reject the artifact instead of silently
+changing the source scope or returning a trusted partial verification.
+
+Deadline replay follows the producer's recorded deterministic work prefix.
+Elapsed time is a producer observation; replay does not pretend to reproduce its
+wall clock. Invalid/inconsistent receipts and altered claims fail replay.
+Rendering limits apply while writing; graph/candidate accounting is deliberately
+separate from serialized source/proof size.
+
+### Finite validation and limits
+
+The [model](../../Specs/AriadneFrameConnections.tla) and
+[checker](../../Specs/check-frame-connections.sh) cover exact finite closure,
+corridor/SCC relations, quotient acyclicity, a first shortest sample, strict NP,
+valid further samples, unavailable anchors and preserved writers/frontiers and
+hypotheses. The model guide states its abstraction boundary. The independent
+literal oracle covers all 512 directed three-node graphs plus diamond,
+parallel-edge, self-loop and zero-edge cases. Rust uses iterative Kosaraju and
+BFS; the literal oracle uses Floyd–Warshall and path permutations. A 10,000-node
+chain checks graph depth beyond the old path admission cap.
+
+The [2026-10-18 local record](../../evidence/Ariadne/frame-connections/20261018/README.md)
+contains both full capture applications and qualification receipts. The large
+source produces a 23-node corridor, 3,143 SCCs (33 cyclic) and a 22-edge first
+shortest example. The recursive controlled source produces a 140-node corridor,
+167 SCCs (three cyclic) and a 133-edge first shortest example. These graph
+results retain the source's semantic gaps and conditional premises; they add
+no feasibility, history, loop invariant or writer exclusion claim. Remote
+qualification remains unexercised, and caller S6/frame-path F4 remain separate.
 
 ## Bounded frame-to-frame path listing
 

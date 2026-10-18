@@ -1,12 +1,3 @@
-2026-10-14T10:20:01,720 [main] INFO  a.f.a.t.Tool$ - # APALACHE version: 0.58.0 | build: 711dce6
-2026-10-14T10:20:01,727 [main] INFO  a.f.a.t.t.o.TypeCheckCmd - Type checking AriadneGuardedTargetResolution.tla
-2026-10-14T10:20:01,847 [main] INFO  a.f.a.i.p.PassChainExecutor - PASS #0: SanyParser
-2026-10-14T10:20:02,098 [main] DEBUG a.f.a.i.p.PassChainExecutor - PASS #0: SanyParser [OK]
-2026-10-14T10:20:02,098 [main] INFO  a.f.a.i.p.PassChainExecutor - PASS #1: TypeCheckerSnowcat
-2026-10-14T10:20:02,100 [main] INFO  a.f.a.t.p.t.EtcTypeCheckerPassImpl -  > Running Snowcat .::.
-2026-10-14T10:20:02,640 [main] INFO  a.f.a.t.p.t.EtcTypeCheckerPassImpl -  > Your types are purrfect!
-2026-10-14T10:20:02,640 [main] INFO  a.f.a.t.p.t.EtcTypeCheckerPassImpl -  > All expressions are typed
-2026-10-14T10:20:02,640 [main] DEBUG a.f.a.i.p.PassChainExecutor - PASS #1: TypeCheckerSnowcat [OK]
-2026-10-14T10:20:02,640 [main] INFO  a.f.a.t.Tool$ - Type checker [OK]
-2026-10-14T10:20:02,640 [main] INFO  a.f.a.t.Tool$ - It took me 0 days  0 hours  0 min  0 sec
-2026-10-14T10:20:02,641 [main] INFO  a.f.a.t.Tool$ - Total time: 0.919 sec
+version https://git-lfs.github.com/spec/v1
+oid sha256:5fd603282f56e366b2aed998626c3de6de4a542bffb920eba1a46d0dab4cbe89
+size 1127

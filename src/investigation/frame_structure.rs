@@ -1520,4 +1520,4 @@ fn frame_map(
 
 #[cfg(all(test, feature = "input"))]
 #[path = "../../tests/investigation/frame_structure.rs"]
-mod tests;
+pub(super) mod tests;

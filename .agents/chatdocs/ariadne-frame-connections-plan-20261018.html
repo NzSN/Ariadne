@@ -1,0 +1,230 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Stage 5.2 implementation plan — frame corridors and cycle summaries</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f1f4f7;color:#172337;font:17px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:1280px;margin:auto;padding:30px 44px 70px;background:white}a{color:#075caa;text-underline-offset:3px}h1{font-size:2rem;line-height:1.2;margin:24px 0}h2{font-size:1.35rem;margin:40px 0 16px;padding-top:20px;border-top:1px solid #d9e0e7;scroll-margin-top:15px}h3{font-size:1.08rem}p,li{max-width:100ch}.top{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center;font-size:.88rem}.status{padding:4px 10px;border:1px solid #b78646;border-radius:20px;background:#fff5e1;color:#795113}.notice{background:#f5f9fd;border-left:4px solid #075caa;padding:16px 20px;margin:24px 0}.notice p{margin:3px 0}.toc{columns:2;padding-left:24px;font-size:.95rem}.toc li{margin:5px 0;break-inside:avoid}code,pre{font-family:ui-monospace,Consolas,monospace}code{background:#eef2f6;border-radius:3px;font-size:.86em;padding:2px 4px;overflow-wrap:anywhere}pre{font-size:.9rem;line-height:1.6;overflow:auto;background:#eef2f6;padding:18px;border-left:3px solid #7890a8}pre code{padding:0;background:none}.table-scroll{overflow:auto;margin:20px 0}table{width:100%;border-collapse:collapse;font-size:.85rem;line-height:1.5}th,td{padding:10px;text-align:left;vertical-align:top;border-bottom:1px solid #d9e0e7}th{background:#eef2f6}td:first-child{min-width:125px}td:last-child{min-width:90px}table th{position:sticky;top:0}details{margin:24px 0;padding:15px 20px;background:#f2f5f8;border:1px solid #d9e0e7;border-radius:6px}summary{cursor:pointer;font-weight:600}.note,footer{font-size:.88rem;color:#526274}footer{border-top:1px solid #d9e0e7;margin-top:36px;padding-top:18px}.hash{word-break:break-all}a:focus-visible,summary:focus-visible{outline:3px solid #b78646;outline-offset:3px}.flow{overflow:auto;margin:24px 0}.flow svg{width:100%;min-width:800px;height:auto;display:block}.flow text{font:15px system-ui,sans-serif;text-anchor:middle;fill:#172337}.flow .small{font-size:12px;fill:#526274}@media(max-width:760px){main{padding:23px 16px 50px}h1{font-size:1.7rem}.toc{columns:1}.top{gap:8px 15px}table{font-size:.8rem}th,td{padding:8px}}@media print{body{background:white}main{max-width:none;padding:0}.top,details{display:none}h2{break-after:avoid}.flow{break-inside:avoid}a{color:inherit}}</style></head><body><main><nav class="top" aria-label="Document navigation"><a href="ariadne-reports-index.html">Chat document index</a><a href="../plans/frame-connections.md">Canonical implementation plan</a><a href="../../docs/Ariadne/investigation-design.md#structural-corridors-and-cycle-summaries">Owning Stage 5.2 design</a><span class="status">Draft · all FC0–FC6 stages pending</span></nav>
+<div class="notice"><p><strong>Stage 5.2: summarize cycles and offer examples.</strong> Consume Stage 5.1’s validated structural result, compute represented corridors and SCCs, preserve unresolved frontiers, and spend a separate small budget on example routes.</p><p>With default NP=2, retain at most one shortest represented route. SCCs supply no iteration count or feasibility proof. This presentation adds no implementation or qualification.</p></div>
+<figure class="flow"><svg viewBox="0 0 1120 130" role="img" aria-labelledby="flow-title flow-description"><title id="flow-title">Proposed Stage 5.2 module flow</title><desc id="flow-description">An existing validated structural source feeds a proposed graph consumer, which produces independently scoped corridor, SCC and example-route results while preserving source evidence and gaps.</desc><defs><marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7" fill="#47627e"/></marker></defs><rect x="5" y="15" width="315" height="95" rx="8" fill="#e8f1fb" stroke="#809ab3"/><text x="162" y="44">BoundFrameStructure</text><text class="small" x="162" y="70">Existing Stage 5.1 source</text><text class="small" x="162" y="91">Captured evidence, frame links and gaps</text><path d="M321 62 H370" stroke="#47627e" stroke-width="2" marker-end="url(#arrow)"/><rect x="375" y="15" width="355" height="95" rx="8" fill="#fff5e1" stroke="#b78646"/><text x="552" y="44">Proposed frame_connections module</text><text class="small" x="552" y="70">Reachability · SCCs · bounded BFS examples</text><text class="small" x="552" y="91">No full dataflow or completed-analysis gate</text><path d="M731 62 H780" stroke="#47627e" stroke-width="2" marker-end="url(#arrow)"/><rect x="785" y="15" width="330" height="95" rx="8" fill="#f0f3f6" stroke="#9babbc"/><text x="950" y="44">Proposed separate report</text><text class="small" x="950" y="70">Corridor · cycles · unknowns · examples</text><text class="small" x="950" y="91">Independent statuses, limits and replay</text></svg><figcaption class="note">Proposed flow. New module and report names are not implemented interfaces.</figcaption></figure>
+<details open><summary>Jump to a section</summary><ul class="toc"><li><a href="#context-and-follow-up">Context and follow-up</a></li><li><a href="#frozen-direction-and-proposed-interface">Frozen direction and proposed interface</a></li><li><a href="#stage-ledger-and-file-ownership">Stage ledger and file ownership</a></li><li><a href="#fc0-contract-identity-and-finite-policy">FC0: contract, identity and finite policy</a></li><li><a href="#fc1fc3-implementation-and-independent-cases">FC1–FC3: implementation and independent cases</a></li><li><a href="#fc4-product-replay-and-compatibility">FC4: product, replay and compatibility</a></li><li><a href="#fc5fc6-qualification-and-capture-scope">FC5–FC6: qualification and capture scope</a></li><li><a href="#execution-record">Execution record</a></li></ul></details><h1 id="frame-corridors-and-cycle-summaries-stage-52">Frame corridors and cycle summaries: Stage 5.2</h1>
+<h2 id="context-and-follow-up">Context and follow-up</h2>
+<p><strong>Status.</strong> Design and implementation-plan draft, 2026-10-18. FC0–FC6 are pending. This document does not record runtime, model, replay, mutation or capture qualification. Source review uses Ariadne revision <code>012a2482043b167f8a65a0a2d86bc822ca334331</code>; unrelated chat-document edits remain outside this plan. The <a href="../../docs/Ariadne/investigation-design.md#structural-corridors-and-cycle-summaries">canonical Stage 5.2 design</a> owns the proposed interface and result meanings.</p>
+<p><strong>Why this document exists.</strong> The second item in section 5 of the <a href="ariadne-frame-to-frame-recommendation-20261016.html">frame-to-frame recommendation</a> asks for reachability, SCC summaries and a small number of useful routes. <a href="../plans/frame-structure-report.md">Stage 5.1</a> now provides validated recovery-only sources without full caller dataflow. The existing completed-analysis path binder still has its own completion and admission requirements.</p>
+<p><strong>What this document establishes.</strong> A concrete order of implementation, source ownership, modeled properties, independent controls, finite budgets and capture acceptance for the read-only consumer of <code>BoundFrameStructure</code>. Stage 5.2 refers to the recommendation item; it is distinct from Stage 5.1's SF5.2 mutation-qualification task.</p>
+<p><strong>Where to go next.</strong> Read the <a href="../../docs/Ariadne/investigation-design.md#structural-corridors-and-cycle-summaries">owning design</a>, <a href="../../docs/Ariadne/investigation-design.md#structural-frame-report-before-dataflow">structural source contract</a>, <a href="../../docs/implementation.md">implementation guide</a> and <a href="../../Specs/README.md">formal-model guide</a>. The <a href="../plans/frame-path-enumeration.md">old frame-path ledger</a> and <a href="../plans/caller-semantic-coverage.md">caller S6 ledger</a> retain their separate gates.</p>
+<p><strong>What remains unresolved.</strong> All Stage 5.2 runtime/model/product/qualification work is pending. Finite host defaults, the exact source-fingerprint projection and codec embedding/replay receipts must be frozen in FC0. This stage adds no new unwinder, semantic target resolver, full dataflow, loop invariant, writer exclusion or executed-history inference. It does not close caller S6 or F4.</p>
+<h2 id="frozen-direction-and-proposed-interface">Frozen direction and proposed interface</h2>
+<p>Use the owning design as the single contract. Freeze its exact wire/interface details before runtime acceptance rather than adding another feature design.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Decision</th>
+<th>Required outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Source</td>
+<td>Privately validated <code>BoundFrameStructure</code>; never raw caller-supplied graph JSON or a candidate request.</td>
+</tr>
+<tr class="even">
+<td>Computation</td>
+<td>Read-only activation-qualified graph composition, forward/reverse reachability, iterative SCC partition and separately bounded example search.</td>
+</tr>
+<tr class="odd">
+<td>Range/anchors</td>
+<td>Inherit the selected <code>N:M</code> and existing captured active-call anchor policy. Preserve auxiliary witnesses without expanding route scope.</td>
+</tr>
+<tr class="even">
+<td>Unknowns</td>
+<td>Retain every source gap; annotate corridor/forward-reachable/outside/unclassified attachment where known. Unknown continuations outside the corridor can reconnect.</td>
+</tr>
+<tr class="odd">
+<td>Negative meaning</td>
+<td>Only <code>absent_in_represented_graph</code> after completed graph/traversal work; no negative program-reachability claim.</td>
+</tr>
+<tr class="even">
+<td>SCC meaning</td>
+<td>Exact partition and condensation of the declared represented graph; no semantic iteration/termination invariant.</td>
+</tr>
+<tr class="odd">
+<td>Examples</td>
+<td>Default NP=2 allows one shortest represented route. Optional bounded edge-detour BFS attempts produce selected additional loop-free alternatives. Always fewer than positive NP; never all-path enumeration.</td>
+</tr>
+<tr class="even">
+<td>Identity</td>
+<td>Logical source-facts/assessment identity in investigation, separate enclosing publication binding in reports; preserve old source IDs and all conditional hypotheses.</td>
+</tr>
+<tr class="odd">
+<td>Product</td>
+<td>Proposed <code>ariadne.frame-connections/v1</code>, JSON/text/DOT and opt-in <code>--frame-connections N:M</code>; no default-route change or native full completion.</td>
+</tr>
+<tr class="even">
+<td>Replay</td>
+<td>Embed one unchanged structural source report, validate/replay it under host policy, then recompute the new assessment. Invalid evidence is rejected; verification exhaustion constructs no trusted result.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Proposed main interface:</p>
+<pre class="text"><code>summarize_frame_connections(structure, positive example_count_bound, limits)
+    -&gt; BoundFrameConnections</code></pre>
+<p>Names and transport fields are not available interfaces until FC0/FC4 implement them. Default NP and algorithm restrictions belong in the serialized query; independent host limits cannot be raised by producer declarations.</p>
+<h2 id="stage-ledger-and-file-ownership">Stage ledger and file ownership</h2>
+<p>The owner column describes responsibilities, not a request to spawn workers. Implementers are not alone in the repository: preserve unrelated edits and coordinate shared exports. Each stage's dependencies are evidence gates.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Stage</th>
+<th>Owner and proposed paths</th>
+<th>Dependency</th>
+<th>Exit evidence</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>FC0 — contract and authority</td>
+<td>Contract/model owner: canonical investigation section, this ledger, <code>Specs/AriadneFrameConnections.tla</code>, finite configurations/checker and literal expectations under <code>tests/investigation/fixtures/</code>.</td>
+<td>Existing Stage 5.1 contracts and source/corpus inventory</td>
+<td>Graph domain, identity, active-anchor scope, status values, finite host defaults, NP and independent expected results fixed before runtime acceptance.</td>
+<td>Pending</td>
+</tr>
+<tr class="even">
+<td>FC1 — source and composition</td>
+<td>Investigation owner: <code>src/investigation/frame_connections.rs</code>, narrowly shared structural identity/active-link helpers, exports and focused <code>tests/investigation/</code>.</td>
+<td>FC0</td>
+<td>Input remains byte/fact-identical; eligible graph, typed frontiers and active-call transitions match independent controls; no completed binder or 8,192-node clamp.</td>
+<td>Pending</td>
+</tr>
+<tr class="odd">
+<td>FC2 — corridor and SCCs</td>
+<td>Graph owner: private implementation inside the new module and focused tests.</td>
+<td>FC1</td>
+<td>Forward/reverse sets, exact represented corridor, iterative SCC partition/quotient and unknown-reconnect annotations match independent oracles under every stop.</td>
+<td>Pending</td>
+</tr>
+<tr class="even">
+<td>FC3 — example routes</td>
+<td>Example owner: private bounded BFS/detour search, result getters and focused tests.</td>
+<td>FC2 graph interface</td>
+<td>First shortest route when found, typed-edge identities, loop-free samples, strict NP, canonical ordering and independent caps. Examples cannot mutate corridor/SCC/source facts or writer candidates.</td>
+<td>Pending</td>
+</tr>
+<tr class="odd">
+<td>FC4 — codec and CLI</td>
+<td>Product owner: <code>src/reports/frame_connections.rs</code>, report exports, <code>src/bin/ariadne_minidump/</code> integration, root manifest test registrations and <code>tests/input/</code>/<code>tests/reports/</code>.</td>
+<td>FC1–FC3</td>
+<td>Self-contained strict replay; JSON/text/DOT agreement; live capture and separately decoded source supported through the library. Existing structure/path routes and versions replay unchanged.</td>
+<td>Pending</td>
+</tr>
+<tr class="even">
+<td>FC5 — finite qualification</td>
+<td>Qualification owner: isolated model/oracle/replay/mutation jobs and source/tool receipts under <code>evidence/Ariadne/frame-connections/</code>.</td>
+<td>FC4</td>
+<td>Root/feature/layout/model/oracle/compiled-mutation/capture/legacy controls pass on declared sources; all ignored or missing prerequisites named.</td>
+<td>Pending</td>
+</tr>
+<tr class="odd">
+<td>FC6 — capture application and delivery</td>
+<td>Corpus/docs owner: original and controlled capture comparisons, canonical usage/validation summary and this ledger.</td>
+<td>FC5</td>
+<td>New product accepts the declared large source and recursive controlled source; preserves inputs/gaps and shows independently checked summaries/examples or honest layer stops.</td>
+<td>Pending</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="fc0-contract-identity-and-finite-policy">FC0: contract, identity and finite policy</h2>
+<p>Inventory the complete current Stage 5.1 source interface, report versions, conditional hypothesis behavior and old CLI routes. Retain baseline bytes for actual saved v1 and conditional v2 reports. The current source publication ID is codec-private: do not call a renderer from investigation to obtain it. Specify a source-facts fingerprint over the actual validated chain, selected range, roots, frame/query identities, recovery facts, active links, policies and hypotheses. Specify separate logical and publication hash domains with no cycles, and frozen canonical orderings.</p>
+<p>Freeze one complete finite policy covering nested structural input/replay, eligible graph nodes/edges, adjacency construction, traversal work, SCC stacks, temporary/frontier/candidate bytes, BFS attempts, route length, deadlines, assessment replay and published bytes. Zero work limits stay real limits; malformed questions, scope and source evidence are rejected before work stops. Default sizing must carry the recorded 9,589+778 decoded frame pair and its source/proof payload; defaults are policy choices rather than hard maxima. This stage must not inherit old frame-path admission/output clamps.</p>
+<p>Add the authoritative finite model before runtime acceptance. Its checked properties must include:</p>
+<ul>
+<li>The represented graph and original typed frontiers are preserved.</li>
+<li>Complete reachability sets equal finite closure under the admitted edges; exact corridor membership is the forward/reverse intersection.</li>
+<li>Only completed work can produce graph-relative absence. Unknown continuations can hide reconnection; no status turns them into a program disconnection.</li>
+<li>Complete SCC membership is a partition with mutual reachability and maximal components; its quotient is acyclic and preserves represented inter-component relations. Self-loop singletons are cyclic; recursive activations stay distinct.</li>
+<li>A shortest witness has minimum edge count in the represented graph; further examples are valid loop-free typed routes with strict NP and bounded work.</li>
+<li>Examples and truncation preserve all possible writers and inherited premises. Conditional hypotheses cannot be stripped or combined into a baseline claim.</li>
+<li>Resource stops terminate fairly within the modeled schedule and remain distinct from invalid evidence and missing anchors.</li>
+</ul>
+<p>The model abstracts concrete byte/hash validation and wall clocks. Its guide must state the adapter/source premises and exact Rust correspondence; finite checking is not a universal refinement proof. Register model/checker commands in <code>Specs/README.md</code> only when the files exist. Add an independent literal graph oracle whose expected closures and SCC equivalence come from a different finite procedure, not the SUT's outputs.</p>
+<h2 id="fc1fc3-implementation-and-independent-cases">FC1–FC3: implementation and independent cases</h2>
+<p>Start at the new investigation interface. The source is immutable and privately validated. Keep route eligibility and boundary attachments explicit, including edges to undecoded/out-of-function destinations. Shared helpers may be factored only with legacy behavior/identity regression controls. Do not turn decoded callee references into local roots or follow arbitrary call-only edges.</p>
+<p>Required graph cases:</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Case</th>
+<th>Required observation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Straight line and diamond</td>
+<td>Exact corridor and shortest route; two branch alternatives retain their typed edge identities.</td>
+</tr>
+<tr class="even">
+<td>Parallel edge kinds</td>
+<td>Equal node sequences with different typed edges remain distinct examples.</td>
+</tr>
+<tr class="odd">
+<td>Self-loop, two-node cycle, nested/connected SCCs</td>
+<td>Exact known partition/condensation and inspectable original members/edges; no iteration-count inference.</td>
+</tr>
+<tr class="even">
+<td>Cycle with an exit</td>
+<td>Finite traversal terminates; the exit stays visible and a shortest example needs no loop unrolling.</td>
+</tr>
+<tr class="odd">
+<td>Disconnected represented graph</td>
+<td>Exact graph-relative absence only after complete work; scope and source gaps retained.</td>
+</tr>
+<tr class="even">
+<td>Unknown frontier outside the corridor</td>
+<td>Forward-reachable unresolved continuation stays visible even when its known destination cannot reach the endpoint. A completion adding reconnection cannot contradict a prior program-level negative claim because none was made.</td>
+</tr>
+<tr class="odd">
+<td>Failed/pending/out-of-function endpoint</td>
+<td>Original edge and boundary identity retained; no invented terminal instruction or promoted route.</td>
+</tr>
+<tr class="even">
+<td>Missing/ambiguous active call or child entry</td>
+<td>Cross-frame corridor/examples unavailable; independently available frame maps/SCCs survive.</td>
+</tr>
+<tr class="odd">
+<td>Recursion with repeated VAs</td>
+<td>Activation identities and exactly admitted younger-frame transitions retained; no cross-activation SCC merge.</td>
+</tr>
+<tr class="even">
+<td>Equal selected frame</td>
+<td>A validated identical anchor permits a zero-edge example only when NP allows it.</td>
+</tr>
+<tr class="odd">
+<td>Work stops at every layer, NP=1 and zero budgets</td>
+<td>Source maps and completed independent layers survive; no false corridor, partition, shortest guarantee or absence.</td>
+</tr>
+<tr class="even">
+<td>Conditional source</td>
+<td>All dependent results retain original hypothesis identity; baseline verdicts and source proofs remain unchanged.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Implement iterative graph algorithms: no recursion proportional to graph depth. Examples use the admitted graph and do not require completed SCC work; their budgets and statuses remain independent. Stop provenance must identify the actual restricted operation. Do not retry indefinitely to fill an example count or reuse a partial SCC label as if the partition were complete. Minimize retained copies of large source/proof payloads and check allocation estimates/overflow before work.</p>
+<h2 id="fc4-product-replay-and-compatibility">FC4: product, replay and compatibility</h2>
+<p>The new JSON envelope embeds one unchanged structural source plus its binding and the derived assessment. Nested source decoding calls the existing strict decoder under a separately bounded host structural policy. Replay reconstructs the privately owned source before recomputing corridor/SCC/examples and comparing all claimed facts, statuses, IDs and work receipts. A verifier budget stop is a refusal to trust the artifact, not a valid unexplained graph.</p>
+<p>JSON/text/DOT must show source selection and hypothesis premises, separate layer statuses, full memberships/typed frontier references, shortest guarantee scope, example restrictions, counters and stop reasons. A collapsed SCC must link to its member nodes/edges. Unclassified frontiers and non-corridor unknowns must remain navigable. Do not hide source evidence to make the envelope fit.</p>
+<p>Factor live structural capture preparation into a private shared function where needed; preserve current <code>--frame-structure</code> output bytes and behavior. The proposed new flags are <code>--frame-connections N:M</code>, <code>--example-path-count-bound NP</code> and <code>--frame-connections-limits FILE</code>. Reject explicit full-analysis backend, old path-listing, entry/seed and explanation/assessment combinations. Keep <code>bap</code> as the old full-analysis default; it does not label the new graph consumer as native core execution. Library saved-source support does not require a new stdin replay CLI.</p>
+<p>Run actual legacy v1/v2 structural replay, legacy path reports and current default full analysis as separate compatibility controls. Keep core-only, reports-only, BAP-only and input feature behavior explicit. All Rust sources belong under <code>src/</code>, fixtures/tests under <code>tests/</code>, with the root manifest/lock and root <code>target/</code> layout.</p>
+<h2 id="fc5fc6-qualification-and-capture-scope">FC5–FC6: qualification and capture scope</h2>
+<p>Implement named model/oracle/mutation entry points before citing them as available. Follow the established remote Windows WSL workflow for heavy qualification, using task-owned source capsules and isolated build directories. Keep replay and mutation outputs in different <code>target/</code> subdirectories and record exact executable/source/tool identities. Ordinary Cargo tests do not exercise all ignored native/capture tests automatically.</p>
+<p>Required root checks after runtime changes:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">cargo</span> fmt <span class="at">--all</span> <span class="at">--</span> <span class="at">--check</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">cargo</span> test <span class="at">--offline</span> <span class="at">--locked</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">cargo</span> test <span class="at">--offline</span> <span class="at">--locked</span> <span class="at">--no-default-features</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">cargo</span> clippy <span class="at">--offline</span> <span class="at">--locked</span> <span class="at">--all-features</span> <span class="at">--all-targets</span> <span class="at">--</span> <span class="at">-D</span> warnings</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tools/check_rust_layout.py</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tools/check_doc_links.py</span></code></pre></div>
+<p>Compiled behavioral mutations must be rejected by unchanged independent observers for: omitted off-corridor unknown frontiers, forged absence after a work stop, incorrect SCC merge/split, self-loop omission, erased parallel edge kind, an unsupported active-call link, false shortest labeling, NP off-by-one, producer-raised host limits, hypothesis stripping and dropped writer alternatives. Compilation/transport failures earn no mutant-sensitivity credit.</p>
+<p>Use at least these separately identified capture products:</p>
+<ol type="1">
+<li>The original large Windows pair from the <a href="../../evidence/Ariadne/frame-structure/20261016/README.md">Stage 5.1 record</a>: original dump <code>9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab</code>, thread 23668, frames 1→0. Publicly replay its complete saved structural report rather than repeating full caller completion. Verify the actual original/conditional source version and binding selected for the run.</li>
+<li>The independent controlled Windows Crashpad case from the <a href="ariadne-crashpad-dump-analysis-20261018.html">2026-10-18 report</a>: dump <code>47d93971541230b24d992e3c0f60a17df732145f083089844b99e44597f1ae34</code>, thread 17848, frames 5→0. Its six maps/five active links and loops provide explicit recursion and cycle controls. Its nine old DFS samples do not define expected Stage 5.2 shortest routes or SCCs.</li>
+</ol>
+<p>Independently check the new graph domain, source preservation, corridor sets, SCC equivalence, quotient edges, frontier attachment and example validity. Name missing raw inputs or prerequisites as unexercised. Resource-stopped examples may be valid partial results, but FC6 must still demonstrate at least one useful independently checked shortest route in its declared acceptance corpus. A failure on the large case remains a failed or incomplete gate, not replaced by a small fixture pass. No existing F4/S6 or release claim is implied.</p>
+<h2 id="execution-record">Execution record</h2>
+<p>2026-10-18: inspected the recommendation's §5 second item, canonical Stage 5.1 design/ledger, source types/getters, raw typed gaps, active-link composition and codec-private identity. Drafted the owning design extension and this staged plan. Runtime/model implementation and new qualification were not attempted. Documentation/link validation passes: 76 connected documents, 75 context sections and 2,221 local links, plus scoped whitespace checks. These checks do not credit FC0–FC6 runtime acceptance.</p>
+<footer><p>Archival HTML presentation of <a href="../plans/frame-connections.md">.agents/plans/frame-connections.md</a>, rendered on 2026-10-18. The canonical plan remains in place.</p><p class="hash">Canonical source SHA-256: <code>a256b017427aeafa372152cf17269e833c0fa402cbe2163c3bda4e9d97239562</code>.</p><p>Rendering and link validation establish presentation consistency only. FC0–FC6 remain pending; no runtime, model, mutation, replay or capture campaign was run for this presentation.</p></footer></main></body></html>

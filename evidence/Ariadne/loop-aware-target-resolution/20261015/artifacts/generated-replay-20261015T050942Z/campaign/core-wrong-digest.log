@@ -1,1 +1,3 @@
-{"adapterId":"ariadne.machine-analysis/v1","analysisBackend":"bap","bindingImplementation":"compiler-generated","cleanupMechanism":"Rust Drop of generated binding port","completedTraces":0,"coverageSatisfied":false,"error":"register failed (interface_digest_mismatch): interface_digest_mismatch","factoryCalls":0,"fixtures":[],"gatePassed":true,"interfaceMatched":false,"matchedActionCounts":null,"matchedObservations":null,"matchedPairCounts":null,"mismatch":null,"mode":"wrong-digest","modelMatched":false,"observationsDispatched":0,"portDrops":0,"schema":"ariadne.mbt-replay/v2","semanticDigest":"0000000000000000000000000000000000000000000000000000000000000000","status":"rejected","targetProfile":"mirrorrust-v1"}
+version https://git-lfs.github.com/spec/v1
+oid sha256:2713c3f91d7856daf703922b9723047218e44df69bf6f562477c4d569f0c56fb
+size 719

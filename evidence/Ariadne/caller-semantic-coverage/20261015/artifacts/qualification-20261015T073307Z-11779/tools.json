@@ -1,6 +1,3 @@
-{
-  "native_manifest_sha256": "ba6e7142618aa267226c9453b15add1b5a1d7dd8a98badc8bc5e85ff6b881ecd",
-  "native_helper_sha256": "1f14146764f88deea26b5ae13b842da2a6c7794c22c589f6c884ebdacb1f3e5b",
-  "lifter_sha256": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
-  "decoder_sha256": "6bb0005e6416f172f88c4d122ae8908862adbe9d1d2f225046df17ae857d9349"
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:1bd7fcd15bc2570cdd721a068ffc4444714b185a17262f8d965abeacbe31b55b
+size 368

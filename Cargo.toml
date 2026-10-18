@@ -271,3 +271,13 @@ required-features = ["input"]
 name = "frame_unwind_properties"
 path = "tests/input/frame_unwind_properties.rs"
 required-features = ["property-tests"]
+
+[[test]]
+name = "frame_connections_replay"
+path = "tests/reports/frame_connections_replay.rs"
+required-features = ["bap"]
+
+[[test]]
+name = "input_frame_connections_cli"
+path = "tests/input/frame_connections_cli.rs"
+required-features = ["input"]

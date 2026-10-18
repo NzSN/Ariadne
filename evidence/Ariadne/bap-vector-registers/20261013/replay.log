@@ -1,36 +1,3 @@
-Traceback (most recent call last):
-  File "/home/nzsn/Repos/Ariadne-vector-registers-20261013/tools/check_bap_core_replay.py", line 76, in <module>
-    if __name__=='__main__':main()
-                            ^^^^^^
-  File "/home/nzsn/Repos/Ariadne-vector-registers-20261013/tools/check_bap_core_replay.py", line 48, in main
-    run(['cargo','build','--offline','--locked','--no-default-features','--features','mbt,bap',
-  File "/home/nzsn/Repos/Ariadne-vector-registers-20261013/tools/check_bap_core_replay.py", line 22, in run
-    raise RuntimeError(f'failed {command}: {result.stdout[-3000:]}')
-RuntimeError: failed ['cargo', 'build', '--offline', '--locked', '--no-default-features', '--features', 'mbt,bap', '--bin', 'ariadne-mbt', '--bin', 'ariadne-stage-e-mbt', '--target-dir', PosixPath('/home/nzsn/Repos/Ariadne-vector-registers-20261013/target/bap-core-replay')]: 0.7
-   Compiling subtle v2.6.1
-   Compiling memchr v2.8.3
-   Compiling cpufeatures v0.2.17
-   Compiling itoa v1.0.18
-   Compiling rustls-webpki v0.103.15
-   Compiling once_cell v1.21.4
-   Compiling sha2 v0.10.9
-error: error writing dependencies to `/home/nzsn/Repos/Ariadne-vector-registers-20261013/target/bap-core-replay/debug/deps/rustls-f290bf94abf6e282.d`: No space left on device (os error 28)
-
-error: could not compile `rustls` (lib) due to 1 previous error
-warning: build failed, waiting for other jobs to finish...
-error: failed to write to `/home/nzsn/Repos/Ariadne-vector-registers-20261013/target/bap-core-replay/debug/deps/rmetarVSj0l/full.rmeta`: No space left on device (os error 28)
-
-error: couldn't create a temp dir: No space left on device (os error 28) at path "/home/nzsn/Repos/Ariadne-vector-registers-20261013/target/bap-core-replay/debug/deps/rmetaA4hygO"
-
-error: could not compile `sha2` (lib) due to 1 previous error
-error: could not compile `serde_json` (lib) due to 1 previous error
-error: linking with `cc` failed: exit status: 1
-  |
-  = note:  "cc" "-Wl,--version-script=/home/nzsn/Repos/Ariadne-vector-registers-20261013/target/bap-core-replay/debug/deps/rustcDbs2cy/list" "-Wl,--no-undefined-version" "-m64" "/home/nzsn/Repos/Ariadne-vector-registers-20261013/target/bap-core-replay/debug/deps/rustcDbs2cy/symbols.o" "<16 object files omitted>" "/home/nzsn/Repos/Ariadne-vector-registers-20261013/target/bap-core-replay/debug/deps/rustcDbs2cy/rmeta.o" "<1 object files omitted>" "-Wl,--as-needed" "-Wl,-Bstatic" "/home/nzsn/Repos/Ariadne-vector-registers-20261013/target/bap-core-replay/debug/deps/{libsyn-c125d994a26c5b7d,libquote-3ac0a4531b0f7114,libproc_macro2-28c66146724bc8cc,libunicode_ident-fb42b8aec065fabd}.rlib" "<sysroot>/lib/rustlib/x86_64-unknown-linux-gnu/lib/{libproc_macro-*,librustc_literal_escaper-*,libstd-*,libpanic_unwind-*,libobject-*,libmemchr-*,libaddr2line-*,libgimli-*,libcfg_if-*,librustc_demangle-*,libstd_detect-*,libhashbrown-*,librustc_std_workspace_alloc-*,libminiz_oxide-*,libadler2-*,libunwind-*,liblibc-*,librustc_std_workspace_core-*,liballoc-*,libcore-*,libcompiler_builtins-*}.rlib" "-Wl,-Bdynamic" "-lgcc_s" "-lutil" "-lrt" "-lpthread" "-lm" "-ldl" "-lc" "-L" "/home/nzsn/Repos/Ariadne-vector-registers-20261013/target/bap-core-replay/debug/deps/rustcDbs2cy/raw-dylibs" "-B<sysroot>/lib/rustlib/x86_64-unknown-linux-gnu/bin/gcc-ld" "-fuse-ld=lld" "-Wl,--eh-frame-hdr" "-Wl,-z,noexecstack" "-L" "<sysroot>/lib/rustlib/x86_64-unknown-linux-gnu/lib" "-o" "/home/nzsn/Repos/Ariadne-vector-registers-20261013/target/bap-core-replay/debug/deps/libserde_derive-65b9ad88c7300bef.so" "-Wl,--gc-sections" "-shared" "-Wl,-z,relro,-z,now" "-nodefaultlibs"
-  = note: some arguments are omitted. use `--verbose` to show all linker arguments
-  = note: collect2: fatal error: ld terminated with signal 7 [Bus error], core dumped
-          compilation terminated.
-          
-
-error: could not compile `serde_derive` (lib) due to 1 previous error
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:55894d9077dc4225fb5eed633ab89bd7b16eebd8377b300f26af10fca21afe1e
+size 3877

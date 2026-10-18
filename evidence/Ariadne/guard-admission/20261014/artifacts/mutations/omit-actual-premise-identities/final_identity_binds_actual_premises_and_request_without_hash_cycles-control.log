@@ -1,9 +1,3 @@
-   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-guard-admission-20261014/target/guard-mutations-20261014/omit-actual-premise-identities/sut)
-    Finished `release` profile [optimized] target(s) in 29.14s
-     Running unittests src/lib.rs (/home/nzsn/Repos/Ariadne-guard-admission-20261014/target/guard-mutations-20261014/omit-actual-premise-identities/build/release/deps/ariadne-eac5fde57d2ca545)
-
-running 1 test
-test bap::guard_admission_tests::final_identity_binds_actual_premises_and_request_without_hash_cycles ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 91 filtered out; finished in 0.00s
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:2d79ce2bae627a56d15abd5fc4a051fff3d9ed0084290d85ca331db7f3847c2d
+size 634

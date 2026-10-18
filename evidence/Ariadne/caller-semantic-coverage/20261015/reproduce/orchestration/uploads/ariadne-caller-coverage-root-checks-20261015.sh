@@ -1,7 +1,3 @@
-#!/bin/bash
-set -euo pipefail
-python3 /mnt/d/ariadne-caller-coverage-setup-20261015.py
-external=/mnt/d/ariadne-caller-coverage-20261015
-cp /mnt/d/ariadne-caller-coverage-root-checks-20261015.py "$external/root-checks.py"
-chown jlc:jlc "$external/root-checks.py"
-exec runuser -u jlc -- bash "$external/run.sh" python3 /caller-work/root-checks.py
+version https://git-lfs.github.com/spec/v1
+oid sha256:8edea0220fb6bfe0b2bcaed7e6867be04ed307acb88173232cb3783f91d6a5d6
+size 345

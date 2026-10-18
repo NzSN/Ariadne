@@ -1,30 +1,3 @@
-resolver pass_elapsed_us=1050 instructions=332 reads=58 stop=None
-resolver pass_elapsed_us=90072 instructions=3990 reads=58 stop=None
-native kernel_cpu_s=54.063 serialization_cpu_s=16.342 actions=116199
-completion compute_ms=76183 encoded_bytes=59256199
-completion transfer_ms=12163
-completion expansion_ms=4992
-completion state_decode_ms=8513
-	Command being timed: "target/release/ariadne-minidump /work/dump048B/original.dmp --max-artifact-bytes 2147483648 --decoder-reference target/ariadne-llvm-mc --bap-core-dir target/indirect-target-resolution-native-current --bap-core-response-timeout-ms 30000 --entry 0x7ff640079640 --seed-exception-rip --resolve-indirect-targets --explain-fault-address 0x7ff640079670 --memory-access 0 --explanation-only --format json"
-	User time (seconds): 89.92
-	System time (seconds): 25.08
-	Percent of CPU this job got: 92%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:03.79
-	Average shared text size (kbytes): 0
-	Average unshared data size (kbytes): 0
-	Average stack size (kbytes): 0
-	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 4341416
-	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 1
-	Minor (reclaiming a frame) page faults: 2100605
-	Voluntary context switches: 22095
-	Involuntary context switches: 156
-	Swaps: 0
-	File system inputs: 0
-	File system outputs: 179104
-	Socket messages sent: 0
-	Socket messages received: 0
-	Signals delivered: 0
-	Page size (bytes): 4096
-	Exit status: 0
+version https://git-lfs.github.com/spec/v1
+oid sha256:3a8d2f80322f10fbf7629d2d1f0b21572cd0423cc2884fcfad40ab3966835199
+size 1473

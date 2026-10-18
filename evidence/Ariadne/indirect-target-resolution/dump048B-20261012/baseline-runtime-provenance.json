@@ -1,19 +1,3 @@
-{
-  "scope": "existing remote Ariadne P4 runtime from 2026-10-10; diagnostic frontend artifact cap raised to 2 GiB only",
-  "files": {
-    "src/bin/ariadne-minidump.rs": "5eafc57492766db10612ed670c0ed0eef4b8255b03ec6aa9e2b940676be3aae3",
-    "target/release/ariadne-minidump": "071ca3c1dc2b0782949e916cc47a565c16a224bf7b65976c6ab210350f35a87f",
-    "target/release/deps/libariadne-65576f209a0d696c.rlib": "bbba0588a0d45e954ef68ee05ef1e6d45d1eef0cea3f929ba22e04101f720f42",
-    "target/release/deps/libserde_json-540ae372bafb180c.rlib": "81c433d67980100ee12eab06585fa44050d1817cd7c15585efcf60aff863cf92",
-    "target/ariadne-llvm-mc": "45dad913d912aed489a99a150edc846389877ef72cb9218b46b8e2e555ad813c",
-    "target/ariadne-bap-lift": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
-    "target/bap-core-native/ariadne-bap-core": "a984e629c33abf4158aa85ced8ff87ec691e5401c9e64b7193104617490bacc7",
-    "target/bap-core-native/manifest.json": "79cac8a350a35e3b285e9c9777ae75625cf9047a5f6995b7804ca8f3234cc30a",
-    "src/bap/admission.rs": "d1964990393229c486150fc3c40b73bef3473960d2440f70dd1af70ce84c174d",
-    "src/bap/projection.rs": "2214ef554acc6df826069126cd491d786318b6803f212e388ae7e55645592b24",
-    "src/input/investigation.rs": "ba46cf884c62edec1a05fd27eabedf58a52ba6212e6c3bcb3cd3a18a4170254c",
-    "src/investigation/mod.rs": "3a27f618b9109d1ad5d6786a71d2399b0018c8ff9a63b0678f6a9881c3ef6c8a",
-    "native/bap/toolchain.lock.json": "23dac7be3de321d80fb806b8a9ba4cb64a51f5c75c3c20f3ede77ea348de5382"
-  },
-  "diagnostic_frontend_sha256": "aeca2d9c7513e708d4881ebda74fb2ea45be337145fda1ec90d97f2d98e26a2f"
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:155f8cddf94da93c426cf6777175bf1e7e8ac68349e4867aa0908e1070afd25a
+size 1634

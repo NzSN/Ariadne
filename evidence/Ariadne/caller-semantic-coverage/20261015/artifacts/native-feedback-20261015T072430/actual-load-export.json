@@ -1,16 +1,3 @@
-{
-  "name": "actual-load-export",
-  "command": [
-    "cargo",
-    "test",
-    "--offline",
-    "--locked",
-    "--lib",
-    "actual_movaps_load_guard_outcomes_export_checked_native_inputs",
-    "--",
-    "--ignored",
-    "--nocapture"
-  ],
-  "exit_code": 0,
-  "seconds": 8.870785930000011
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:676437d3a397ff1e2905504d8b43636a215add08a99f0d1d6707326cfa7503f5
+size 291

@@ -1,23 +1,3 @@
-	Command being timed: "timeout 180 /work/guard-budget-config-20261014/prepare-probe /work/frame-paths-dump03958-20261013/original.dmp /work/guard-budget-config-20261014/probe-expanded expanded"
-	User time (seconds): 5.63
-	System time (seconds): 1.83
-	Percent of CPU this job got: 102%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:07.26
-	Average shared text size (kbytes): 0
-	Average unshared data size (kbytes): 0
-	Average stack size (kbytes): 0
-	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 1884672
-	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 19
-	Minor (reclaiming a frame) page faults: 595706
-	Voluntary context switches: 14737
-	Involuntary context switches: 26
-	Swaps: 0
-	File system inputs: 53032
-	File system outputs: 91560
-	Socket messages sent: 0
-	Socket messages received: 0
-	Signals delivered: 0
-	Page size (bytes): 4096
-	Exit status: 0
+version https://git-lfs.github.com/spec/v1
+oid sha256:d9ffb0e30d2605990d3e817e30a6382fa51f309d0af62f62133b9109a862187e
+size 903

@@ -1,18 +1,3 @@
-{
-  "verified_export_sha256": "88a119907b002a9dbd4b1c2afb1ddb5d8d306011f174629ab25d35ca4a2ff8df",
-  "verified_files": 1259,
-  "verified_source_aliases": 420,
-  "verified_original_gzip_files": 0,
-  "qualified_source_archive_sha256": "c35459a19b1e2f5f139730bea6c119cfceff603207254b52d42effac68654a5f",
-  "source_files_unchanged": 930,
-  "post_validation_document_changes": [
-    ".gitattributes",
-    "CHECKPOINTS.md",
-    "Plans/caller-semantic-coverage.md",
-    "ROADMAP.md",
-    "Specs/README.md",
-    "docs/Ariadne/caller-semantic-coverage-design.md",
-    "docs/Ariadne/justified-branch-pruning-design.md"
-  ],
-  "claim_boundary": "transport and identity verification; each recorded gate retains its original scope"
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:c07dbbe502dff8d380cad1479737531c3f8c949c8faae8fb0789829ac33f1f6f
+size 720

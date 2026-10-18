@@ -1,9 +1,3 @@
-{
-  "schema": "ariadne.shift-local-materialization/v1",
-  "rawRustCopies": {
-    "frame_probe.rs": "artifacts/frame_probe.rs.txt",
-    "expanded_probe.rs": "artifacts/expanded_probe.rs.txt",
-    "repro.rs": "artifacts/repro.rs.txt"
-  },
-  "archiveIdentitiesUnchanged": true
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:6a4337cfb3a0938cfa8b43c1a4822907c5d8370c94531d14f30b552dc2526a68
+size 276

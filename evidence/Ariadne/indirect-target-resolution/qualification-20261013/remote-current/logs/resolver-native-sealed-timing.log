@@ -1,27 +1,3 @@
-resolver pass_elapsed_us=9420 instructions=332 reads=58 stop=None
-resolver pass_elapsed_us=60347 instructions=3990 reads=58 stop=None
-ariadne-minidump: core response: timed out waiting on channel
-Command exited with non-zero status 1
-	Command being timed: "target/release/ariadne-minidump /work/dump048B/original.dmp --max-artifact-bytes 2147483648 --decoder-reference target/ariadne-llvm-mc --bap-core-dir target/indirect-target-resolution-native-final --entry 0x7ff640079640 --seed-exception-rip --resolve-indirect-targets --explain-fault-address 0x7ff640079670 --memory-access 0 --explanation-only --format json"
-	User time (seconds): 64.26
-	System time (seconds): 19.03
-	Percent of CPU this job got: 90%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:32.02
-	Average shared text size (kbytes): 0
-	Average unshared data size (kbytes): 0
-	Average stack size (kbytes): 0
-	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 2554112
-	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 701
-	Minor (reclaiming a frame) page faults: 1211510
-	Voluntary context switches: 18731
-	Involuntary context switches: 152
-	Swaps: 0
-	File system inputs: 3133048
-	File system outputs: 73976
-	Socket messages sent: 0
-	Socket messages received: 0
-	Signals delivered: 0
-	Page size (bytes): 4096
-	Exit status: 1
+version https://git-lfs.github.com/spec/v1
+oid sha256:c223337bda82102fe79ee7b24aafd2c6ab49dea92bfaa91a49792662ac8a68f1
+size 1331

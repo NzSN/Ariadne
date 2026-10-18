@@ -1,8 +1,3 @@
-    Finished `test` profile [unoptimized] target(s) in 0.83s
-     Running tests/input/frame_paths.rs (target/loop-aware-build/debug/deps/input_frame_paths-8f581fb26eff3929)
-
-running 1 test
-test retained_combined_v1_minidump_and_frame_reports_replay_after_upgrade ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 16 filtered out; finished in 52.59s
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:26d29c4d8a7232061e01429cf2da87de53c4d7449cd3f75bbb54e9db33d56bd7
+size 368

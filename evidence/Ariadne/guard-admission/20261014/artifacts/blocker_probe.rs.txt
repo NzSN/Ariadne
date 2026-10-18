@@ -1,28 +1,3 @@
-use std::{collections::{BTreeMap,BTreeSet},error::Error,path::PathBuf};
-use ariadne::input::{FileSnapshot,OpenLimits};
-fn main()->Result<(),Box<dyn Error>> {
- let args:Vec<_>=std::env::args().skip(1).collect();
- let root=PathBuf::from(env!("CARGO_MANIFEST_DIR"));
- let snapshot=FileSnapshot::open_minidump(&args[0],OpenLimits{max_file_bytes:2*1024*1024*1024,max_read_bytes:16*1024*1024,..Default::default()})?;
- let options=ariadne::effects::PreparationOptions::default();let decoder=root.join("target/ariadne-llvm-mc");
- let mut backend=ariadne::bap::Backend::new(ariadne::bap::Config::from_env(),&decoder)?;
- let mut pending:BTreeSet<u64>=[0x7ff7744033a0].into();let mut seen=BTreeSet::new();let mut rows=Vec::new();let mut failure=None;
- while let Some(va)=pending.pop_first() {
-  if !seen.insert(va){continue;}if seen.len()>4096{break;}
-  let read=snapshot.read_prefix(va,15)?;
-  let candidates:BTreeMap<_,_>=[(va,if read.bytes.is_empty(){None}else{Some(read.bytes.clone())})].into();
-  // Independent decode/control scope only: no request, effects, dataflow or proof is published.
-  let reference=ariadne::llvm_mc::decode_captured_batch(&snapshot.metadata().snapshot_id,&candidates,&decoder,&options,snapshot.metadata().platform.decoder_target())?;
-  let site=&reference.sites[&va];
-  let result=backend.prepare(&snapshot.metadata().snapshot_id,&candidates,&options,snapshot.metadata().platform.decoder_target());
-  let row=serde_json::json!({"va":format!("0x{va:016x}"),"bytes":site.evidence.bytes.iter().map(|b|format!("{b:02x}")).collect::<String>(),"opcode":site.evidence.opcode,"captured_spans":read.spans.iter().map(|s|serde_json::json!({"address":format!("0x{:016x}",s.address),"length":s.length,"contributors":s.contributors.iter().map(|c|serde_json::json!({"stream":c.stream,"entry":c.entry,"file_offset":c.file_offset})).collect::<Vec<_>>()})).collect::<Vec<_>>(),"projection_error":result.as_ref().err().map(|e|e.to_string())});
-  if result.is_err(){failure=Some(row.clone());rows.push(row);break;}
-  rows.push(row);
-  pending.extend(site.instruction.fall.iter().copied());
-  if site.instruction.kind!=ariadne::InstructionKind::Call {pending.extend(site.instruction.targets.iter().copied());}
- }
- backend.finish()?;
- let report=serde_json::json!({"schema":"ariadne.guard-next-blocker-diagnostic/v1","dump_sha256":snapshot.metadata().artifact_sha256,"entry":"0x00007ff7744033a0","failure":failure,"visited":seen.len(),"sites":rows,"scope":"Captured-only independent decoded-control walk to locate typed BAP failure; pending MOVAPS may have decoded normal continuation, but no guard verdict, normal effects, core request or historical path is published"});
- std::fs::write(&args[1],serde_json::to_vec_pretty(&report)?)?;
- println!("{}",serde_json::to_string_pretty(&report["failure"])?);Ok(())
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:e69d5f76822773615c538ecbeef8cf9e3c17a448f3ca37159dcef73f70cb822a
+size 2810

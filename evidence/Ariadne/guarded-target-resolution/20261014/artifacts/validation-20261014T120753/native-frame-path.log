@@ -1,11 +1,3 @@
-    Finished `test` profile [unoptimized] target(s) in 0.03s
-     Running tests/input/frame_paths.rs (target/composed-build/debug/deps/input_frame_paths-8f581fb26eff3929)
-
-running 4 tests
-test paired_minidump_report_retains_exact_full_source_commitment_in_all_formats ... ok
-test composed_frame_cli_roundtrip_retains_paired_proofs_and_rejects_stripping ... ok
-test frame_path_cli_accepts_above_default_guard_limits_and_binds_full_report ... ok
-test frame_path_cli_native_reference_parity_on_finite_diamond_and_recursion ... ok
-
-test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 11 filtered out; finished in 29.87s
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:4c6f0f53220b9f851122fc526c9fa433204a10db865407d091278cdbd8f7999f
+size 625

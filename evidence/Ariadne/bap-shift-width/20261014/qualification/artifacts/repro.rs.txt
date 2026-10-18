@@ -1,14 +1,3 @@
-use std::{collections::BTreeMap,error::Error,path::PathBuf};
-fn main()->Result<(),Box<dyn Error>> {
- let root=PathBuf::from(env!("CARGO_MANIFEST_DIR"));
- let mut backend=ariadne::bap::Backend::new(ariadne::bap::Config::from_env(),&root.join("target/ariadne-llvm-mc"))?;
- let candidates:BTreeMap<_,_>=[(0x00007ff7744075b3,Some(vec![0x0f,0x57,0xc0]))].into();
- let result=backend.prepare("xorps-captured-width-regression/v1",&candidates,&ariadne::effects::PreparationOptions::default(),ariadne::llvm_mc::DecoderTarget::WindowsAmd64);
- let batch=match result {Ok(b)=>b,Err(e)=>panic!("captured XORPS 0f57c0 must project, admission failed: {e}")};
- let site=&batch.sites[&0x00007ff7744075b3];
- let semantic=site.evidence.semantic.as_ref().expect("semantic evidence");
- assert_eq!(semantic.status,"projected","captured XORPS must project");
- assert_eq!(site.instruction.may_defs,["state:other".to_string()].into());
- assert!(site.instruction.must_defs.is_empty(),"vector aggregate must not be killed");
- backend.finish()?;println!("captured XORPS width regression PASS");Ok(())
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:416be6f04db84b7bd3d39178f0bcc6872b25d30f7dd7b394a959bcbb59056678
+size 1075

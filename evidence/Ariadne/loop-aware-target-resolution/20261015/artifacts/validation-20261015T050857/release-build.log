@@ -1,35 +1,3 @@
-   Compiling proc-macro2 v1.0.107
-   Compiling quote v1.0.47
-   Compiling generic-array v0.14.7
-   Compiling libc v0.2.189
-   Compiling anyhow v1.0.104
-   Compiling num-traits v0.2.19
-   Compiling serde_core v1.0.229
-   Compiling syn v2.0.119
-   Compiling syn v3.0.6
-   Compiling thiserror v2.0.21
-   Compiling getrandom v0.3.4
-   Compiling zmij v1.0.23
-   Compiling range-map v0.2.0
-   Compiling crypto-common v0.1.7
-   Compiling block-buffer v0.10.4
-   Compiling serde v1.0.229
-   Compiling digest v0.10.7
-   Compiling thiserror-impl v2.0.21
-   Compiling serde_derive v1.0.229
-   Compiling memmap2 v0.9.11
-   Compiling serde_json v1.0.149
-   Compiling tempfile v3.20.0
-   Compiling scroll_derive v0.12.1
-   Compiling tracing-attributes v0.1.31
-   Compiling scroll v0.12.0
-   Compiling smart-default v0.7.1
-   Compiling prost-derive v0.13.5
-   Compiling num-derive v0.4.2
-   Compiling tracing v0.1.44
-   Compiling sha2 v0.10.9
-   Compiling minidump-common v0.26.1
-   Compiling prost v0.13.5
-   Compiling minidump v0.26.1
-   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-loop-aware-20261015)
-    Finished `release` profile [optimized] target(s) in 32.30s
+version https://git-lfs.github.com/spec/v1
+oid sha256:836a56ab32d4cb39def61d706deced003e4a1a33de2ad95a77a94efca0ccfbeb
+size 1169

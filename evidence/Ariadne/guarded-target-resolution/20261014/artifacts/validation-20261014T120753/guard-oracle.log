@@ -1,1 +1,3 @@
-Independent guard oracle PASS: 56 graph/premise cases, 3 closure histories, 33 receipt cases, 720 finite transfer cases
+version https://git-lfs.github.com/spec/v1
+oid sha256:f1e7771a22e028d318cff7f58fd7665b99ac897a504a081188289c484afcbe8d
+size 120

@@ -1,31 +1,3 @@
---------------------------- MODULE AriadneTypes ---------------------------
-
-\* Shared Apalache aliases. These document semantic roles and reduce accidental
-\* annotation drift, but remain transparent aliases rather than nominal types.
-\* @typeAlias: address = Int;
-\* @typeAlias: snapshotId = Str;
-\* @typeAlias: location = Str;
-\* @typeAlias: edgeKind = Str;
-\* @typeAlias: obligationReason = Str;
-\* @typeAlias: analysisPhase = Str;
-\* @typeAlias: instructionKind = Str;
-\* @typeAlias: inputKind = Str;
-\* @typeAlias: byteSource = Str;
-\* @typeAlias: definitionOrigin = Str;
-\* @typeAlias: scenarioId = Str;
-\* @typeAlias: abstractStateId = Str;
-\* @typeAlias: abstractValue = Str;
-\* @typeAlias: machineStatus = Str;
-\* @typeAlias: terminalOutcome = Str;
-\* @typeAlias: artifactId = Str;
-\* @typeAlias: moduleId = Str;
-\* @typeAlias: functionId = Str;
-\* @typeAlias: blockId = Str;
-\* @typeAlias: instructionId = Str;
-\* @typeAlias: valueId = Str;
-\* @typeAlias: valueKind = Str;
-\* @typeAlias: terminatorKind = Str;
-\* @typeAlias: calleeId = Str;
-AriadneTypes_typedefs == TRUE
-
-=============================================================================
+version https://git-lfs.github.com/spec/v1
+oid sha256:3bfb36f3bf96adc324a9c714d34a12af708d0e7daaba91a5a1ae5f79f2820329
+size 1161

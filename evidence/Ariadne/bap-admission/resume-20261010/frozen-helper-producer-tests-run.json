@@ -1,17 +1,3 @@
-{
-  "command": [
-    "cargo",
-    "test",
-    "--offline",
-    "--locked",
-    "--test",
-    "bap_native",
-    "--test",
-    "bap_disagreement",
-    "--",
-    "--include-ignored"
-  ],
-  "exitCode": 0,
-  "seconds": 85.25169861898758,
-  "helperSha256": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf"
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:cd4cb3b08b9d15cb608320ad1029c06ecdb8c5742e600559801f2b45e35a5b1b
+size 320

@@ -1,20 +1,3 @@
-   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-guard-admission-20261014)
-    Finished `test` profile [unoptimized] target(s) in 3.02s
-     Running tests/input/bap_core.rs (target/guard-build/debug/deps/input_bap_core-bf21726b95b40f73)
-
-running 1 test
-guarded native admission rejected: guard normal capture/effects
-
-thread 'guarded_frame_capture_has_native_parity_and_rejects_direct_proof_tampering' (13332) panicked at tests/input/bap_core.rs:529:10:
-called `Result::unwrap()` on an `Err` value: Custom { kind: InvalidData, error: "native guarded initialize rejected: guard normal capture/effects" }
-note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
-test guarded_frame_capture_has_native_parity_and_rejects_direct_proof_tampering ... FAILED
-
-failures:
-
-failures:
-    guarded_frame_capture_has_native_parity_and_rejects_direct_proof_tampering
-
-test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 6 filtered out; finished in 2.75s
-
-error: test failed, to rerun pass `--test input_bap_core`
+version https://git-lfs.github.com/spec/v1
+oid sha256:b0637a4ef8ee35d03c6768fe9e67c2b1117693b0df1553cdfc05540a472749ad
+size 1045

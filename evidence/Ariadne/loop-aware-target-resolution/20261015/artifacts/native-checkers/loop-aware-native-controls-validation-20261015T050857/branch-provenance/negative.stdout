@@ -1,1 +1,3 @@
-[{"case":"branch-definition","expected_acceptance":false,"accepted":true,"passed":false,"error":null}]
+version https://git-lfs.github.com/spec/v1
+oid sha256:f35347c8f34f3b9a0171eeeb26c6df12daa7bdae9552ea0744298392ead9c726
+size 103

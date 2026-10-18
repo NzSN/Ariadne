@@ -1,13 +1,3 @@
-{
-  "name": "rust-terminal",
-  "command": [
-    "cargo",
-    "test",
-    "--offline",
-    "--locked",
-    "--lib",
-    "bap::terminal_control::tests"
-  ],
-  "exit_code": 101,
-  "seconds": 14.683789346000001
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:49a35e919cc9b91228ede71045d8ead5e87c60307c4118f041511d460bce91f2
+size 209

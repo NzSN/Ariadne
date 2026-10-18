@@ -29,3 +29,6 @@ evidence/Ariadne/caller-semantic-coverage/20261015/**/sdk-packages.export whites
 evidence/Ariadne/frame-structure/20261016/evidence.tar.gz filter=lfs diff=lfs merge=lfs -text
 # Keep the sealed conditional alignment-hypothesis qualification archive in LFS.
 evidence/Ariadne/alignment-hypotheses/20261016/evidence.tar.gz filter=lfs diff=lfs merge=lfs -text
+# Store all retained evidence in LFS, including reports, metadata and logs.
+evidence/** filter=lfs diff=lfs merge=lfs -text
+**/evidence/** filter=lfs diff=lfs merge=lfs -text

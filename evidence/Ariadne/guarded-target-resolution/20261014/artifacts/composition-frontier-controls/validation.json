@@ -1,22 +1,3 @@
-{
-  "schema": "ariadne.native-frontier-controls/v1",
-  "source_sha256": "5b7a2e1ecc1cb7352824cd3088484e61ae51f0746bd7999a4b1b48bb7d3c9ebe",
-  "native_manifest_sha256": "70d7a8ee8a6c3d30b214349208524676b1038dd9544c5f225def51a2b68c2798",
-  "source_cases": 9,
-  "build_command": [
-    "/home/nzsn/Repos/Ariadne-composed-20261014/target/bap-core-sdk/prefix/_opam/bin/ocamlfind",
-    "ocamlopt",
-    "-linkpkg",
-    "-package",
-    "bap,yojson",
-    "-I",
-    "/home/nzsn/Repos/Ariadne-composed-20261014/target/composed-native",
-    "/home/nzsn/Repos/Ariadne-composed-20261014/target/composed-native/recovery.cmx",
-    "/home/nzsn/Repos/Ariadne-composed-20261014/target/composed-native/capture.cmx",
-    "target_resolution_frontier.ml",
-    "-o",
-    "frontier-controls"
-  ],
-  "build_exit": 0,
-  "run_exit": 0
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:ebbf1d73f9507b7ad7e1e2e1aa9df476cd30e629c750fa97cc17a168b3148b6e
+size 808

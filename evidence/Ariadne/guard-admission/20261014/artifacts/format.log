@@ -1,19 +1,3 @@
-Diff in /home/nzsn/Repos/Ariadne-guard-admission-20261014/src/bap/core_adapter.rs:281:
-         let (session, response) =
-             CoreSession::start_profile(config, token, &request.snapshot_id, profile, &input)?;
-         if let Some(error) = response.error {
-[31m-            return Err(invalid(if profile == super::core_protocol::GUARDED_PROFILE {
-(B[m[31m-                format!("native guarded initialize rejected: {}", error.message)
-(B[m[31m-            } else {
-(B[m[31m-                "native initialize rejected".into()
-(B[m[31m-            }));
-(B[m[32m+            return Err(invalid(
-(B[m[32m+                if profile == super::core_protocol::GUARDED_PROFILE {
-(B[m[32m+                    format!("native guarded initialize rejected: {}", error.message)
-(B[m[32m+                } else {
-(B[m[32m+                    "native initialize rejected".into()
-(B[m[32m+                },
-(B[m[32m+            ));
-(B[m         }
-         let state = decode_state(&request, &response.observation)?;
-         validate_attribution(&request, &state, &response.attribution, &evidence)?;
+version https://git-lfs.github.com/spec/v1
+oid sha256:ba9fa32ad183258fce2cc6eb711335d691700f82e7792eca3904d253f3034b0d
+size 1132

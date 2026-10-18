@@ -1,31 +1,3 @@
-TLC2 Version 2026.10.06.014338 (rev: 94d0c50)
-Running breadth-first search Model-Checking with fp 16 and seed 153923114377629742 with 1 worker on 32 cores with 13394MB heap and 64MB offheap memory [pid: 908] (Linux 6.6.87.2-microsoft-standard-WSL2 amd64, Ubuntu 21.0.12.1 64bit, MSBDiskFPSet, DiskStateQueue).
-Parsing file /home/nzsn/Repos/Ariadne-caller-coverage-20261015/Specs/AriadnePredicateAdmission.tla
-***Parse Error***
-
-  Precedence conflict between ops = in block line 281, col 31 to line 281, col 31 of module AriadnePredicateAdmission and /=.
-
-Residual stack trace follows:
-ExtendableExpr starting at line 281, column 33.
-ExtendableExpr starting at line 281, column 6.
-Expression starting at line 281, column 6.
-Junction Item starting at line 281, column 3.
-AND-OR Junction starting at line 270, column 3.
-
-
-Fatal errors while parsing TLA+ spec in file AriadnePredicateAdmission
-
-In module AriadnePredicateAdmission
-
-Could not parse module AriadnePredicateAdmission from file AriadnePredicateAdmission.tla
-*** Errors: 1
-
-In module AriadnePredicateAdmission
-
-Could not parse module AriadnePredicateAdmission from file AriadnePredicateAdmission.tla
-
-
-
-Starting... (2026-10-15 06:46:27)
-Error: Parsing or semantic analysis failed.
-Finished in 00s at (2026-10-15 06:46:27)
+version https://git-lfs.github.com/spec/v1
+oid sha256:93df4db608e6a551c6a721d3830336c34eea4c9c09fa1ae495539d23a88c2c09
+size 1280

@@ -1,4 +1,3 @@
-core-good 168
-core-wrong-digest 0
-machine-state-good 162
-machine-state-wrong-digest 0
+version https://git-lfs.github.com/spec/v1
+oid sha256:2826c4bd0c9c2e84d788e0da52802ecbf064c3df4af36ba89c44a8cbcf9ef86b
+size 86

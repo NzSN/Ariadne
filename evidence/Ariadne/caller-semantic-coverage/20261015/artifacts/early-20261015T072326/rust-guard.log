@@ -1,27 +1,3 @@
-    Finished `test` profile [unoptimized] target(s) in 0.71s
-     Running unittests src/lib.rs (target/caller-build/debug/deps/ariadne-ee964763ae0b7713)
-
-running 20 tests
-test bap::guard_admission_tests::load_guard_rejects_wrong_bank_merge_width_direction_address_and_predicate ... ok
-test bap::guard_admission_tests::exact_guard_recognition_rejects_every_unreviewed_leaf_and_source_mismatch ... ok
-test bap::guard_admission_tests::wrong_or_conflicting_premises_are_errors_not_empty_path_proofs ... ok
-test bap::guard_admission_tests::opt_in_abi_prologue_proves_alignment_and_unseeded_prologue_does_not ... ok
-test bap::guard_admission_tests::legacy_guard_policy_keeps_store_only_semantics_and_rejects_new_fields ... ok
-test bap::guard_admission_tests::current_pending_guard_requires_complete_candidate_control_without_rewriting_legacy_policy ... ok
-test bap::guard_admission_tests::temporaries_are_supported_and_call_targets_are_not_local_predecessors ... ok
-test bap::guard_admission_tests::selected_normal_store_retains_weak_memory_definition_and_original_source ... ok
-test bap::guard_admission_tests::unreviewed_stops_cannot_borrow_empty_typed_bil_to_close_normal_coverage ... ok
-test bap::guard_admission_tests::opaque_calls_stack_loads_and_unsupported_writes_havoc_rsp ... ok
-test bap::guard_admission_tests::joined_paths_and_changing_loops_prevent_false_alignment ... ok
-test bap::guard_admission_tests::replay_rejects_omitted_roots_candidate_predecessors_and_tampering ... ok
-test bap::guard_admission_tests::exact_load_guard_preserves_the_upper_bank_and_selects_effects_only_after_alignment ... ok
-test bap::guard_admission_tests::final_identity_binds_actual_premises_and_request_without_hash_cycles ... ok
-test bap::guard_admission_tests::unreviewed_source_control_is_a_barrier_even_with_forged_ordinary_metadata ... ok
-test bap::guard_admission_tests::barriers_limits_and_unreached_facts_never_admit_a_normal_outcome ... ok
-test bap::guard_admission_tests::caller_selected_budgets_can_exceed_every_default_and_bind_the_proof ... ok
-test bap::guard_admission_tests::export_checked_current_load_store_and_legacy_guard_unit_capsules ... ok
-test bap::guard_admission_tests::direct_guard_verdicts_match_frozen_independent_product_graph ... ok
-test bap::guard_admission_tests::typed_transfer_rows_match_all_720_frozen_independent_64_bit_executions ... ok
-
-test result: ok. 20 passed; 0 failed; 0 ignored; 0 measured; 135 filtered out; finished in 0.38s
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:fbdd5af1553f00d5bfdeb253882880346c89bfaa5e59c60aa2827feee4a5be9d
+size 2460

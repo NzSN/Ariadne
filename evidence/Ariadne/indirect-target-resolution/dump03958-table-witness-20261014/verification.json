@@ -1,27 +1,3 @@
-{
-  "date": "2026-10-14",
-  "scope": "Read-only numeric table witness from originaldump, qualifiedAriadnereader andretainedtypedBILlocalbranchbounds. No targetcompletionreceipt, graphmutation or core/pathanalysis. StandalonediagnosticcompiledonlyonremoteWSL;productionunchanged.",
-  "dump_sha256": "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
-  "candidate_graph_source": "evidence/Ariadne/native-request-budget/20261014/artifacts/probe-expanded/guard-report.json",
-  "candidate_graph_sha256": "d0294c9b940d8366cb89d78a95d2186c89196dbf1a7955e70189c22afa2abda0",
-  "tables": 9,
-  "entries": 370,
-  "table_bytes": 1480,
-  "table_interval_begin": "0x00007ff77ba90408",
-  "table_interval_end_exclusive": "0x00007ff77ba909d0",
-  "module_basename": "electron.exe",
-  "section": ".rdata",
-  "all_table_reads_complete_without_conflict": true,
-  "distinct_candidate_targets": 64,
-  "already_represented_candidate_targets": 13,
-  "new_candidate_targets": 51,
-  "all_targets_within_caller_runtime_range": true,
-  "all_target_prefixes_fully_captured_15_bytes": true,
-  "required_interpretation_premise": "FrozenCapturedControlData",
-  "current_integration_gap": "PreparationExtension::GuardAdmission has target_limits=None; guardedframepreparationdoesnotcomposeexistingtargetresolver.",
-  "files": {
-    "tables.json": "1390abca21bb7e2db9cde9a07067f60f5493498a7866fb648dcb103994674baf",
-    "check.rs.txt": "d1371491ada02020ccc4e5ebccc76ce2b0af164acdfc5bb2ab705d5bc4122f0f",
-    "reproduce.sh": "1ec87a47a2756d74ca42289c9e280566a69180ea8f6d2d2bf84ebf5843371292"
-  }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:2f62cc4a2dac7c92376475b508182de00a0c13c3d400ec0da2da0887daad4567
+size 1578

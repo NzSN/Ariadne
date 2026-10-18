@@ -1,1 +1,3 @@
- typecheck --out-dir=/loop-work/tmp/ariadne-target-resolution.Cc4DfYT8/typecheck AriadneTargetResolution.tla
+version https://git-lfs.github.com/spec/v1
+oid sha256:d09cc3be717267342e8053a87959ec2b6939ec46c84685d35cf33b53344b951e
+size 109

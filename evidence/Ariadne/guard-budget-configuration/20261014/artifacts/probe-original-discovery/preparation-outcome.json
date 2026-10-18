@@ -1,32 +1,3 @@
-{
-  "attempted_starts": 4096,
-  "caller_entry": "0x00007ff7744033a0",
-  "completed_batches": 247,
-  "dump_sha256": "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
-  "elapsed_ms": 4820,
-  "error": "materialization limit: instruction starts",
-  "frames_recovered": 2,
-  "guard_limits": {
-    "max_closure_rounds": 8,
-    "max_edges": 16384,
-    "max_elapsed_ms": 1000,
-    "max_evidence_bytes": 33554432,
-    "max_residue_updates": 131072,
-    "max_sites": 4096,
-    "max_transfer_evaluations": 262144
-  },
-  "limit_reason": "instruction starts",
-  "mode": "original-discovery",
-  "prefix_bytes": 61440,
-  "preparation_limits": {
-    "batch_size": 128,
-    "max_candidates": 8192,
-    "max_decoder_batches": 4096,
-    "max_prefix_bytes": 61440,
-    "max_starts": 4096
-  },
-  "scope": "captured-only original rooted caller; samevalidated frame/ABI premise; preparation and native initialization check only; no core steps/path enumeration",
-  "status": "preparation-failed",
-  "thread_id": 23668,
-  "unwind_stop": "unsupported-unwind-operation"
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:58d4ac19e93e8752692aab112ad3cec9a685e8ce346cc8a4f54137d74721ba61
+size 1062

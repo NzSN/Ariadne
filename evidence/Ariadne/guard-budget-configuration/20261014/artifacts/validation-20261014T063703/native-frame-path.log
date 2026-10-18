@@ -1,22 +1,3 @@
-    Finished `test` profile [unoptimized] target(s) in 0.03s
-     Running tests/input/frame_paths.rs (target/guard-budget-build/debug/deps/input_frame_paths-8f581fb26eff3929)
-
-running 2 tests
-test frame_path_cli_accepts_above_default_guard_limits_and_binds_full_report ... FAILED
-test frame_path_cli_native_reference_parity_on_finite_diamond_and_recursion ... ok
-
-failures:
-
----- frame_path_cli_accepts_above_default_guard_limits_and_binds_full_report stdout ----
-
-thread 'frame_path_cli_accepts_above_default_guard_limits_and_binds_full_report' (4758) panicked at tests/input/frame_paths.rs:407:5:
-requested-frame-not-recovered
-note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
-
-
-failures:
-    frame_path_cli_accepts_above_default_guard_limits_and_binds_full_report
-
-test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 8 filtered out; finished in 29.98s
-
-error: test failed, to rerun pass `--test input_frame_paths`
+version https://git-lfs.github.com/spec/v1
+oid sha256:54acb6d1758d5a0b9221ab7fdebc5672440893026a183a13f862d391160350c4
+size 957

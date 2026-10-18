@@ -1,27 +1,3 @@
-preparing frame 1 entry 0x00007ff7744033a0
-resolver pass_elapsed_us=184421 instructions=4764 reads=360 stop=None
-preparing frame 0 entry 0x00007ff77443d960
-resolver pass_elapsed_us=201244 instructions=778 reads=0 stop=None
-	Command being timed: "timeout 900 /work/guarded-target-resolution-20261014/dump-probe /work/frame-paths-dump03958-20261013/original.dmp /work/guarded-target-resolution-20261014/dump-20261014T102948 /home/nzsn/Repos/Ariadne-composed-20261014/evidence/Ariadne/indirect-target-resolution/dump03958-table-witness-20261014/tables.json /work/native-request-budget-20261014/probe-expanded/guard-report.json paths"
-	User time (seconds): 36.05
-	System time (seconds): 8.75
-	Percent of CPU this job got: 100%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:44.45
-	Average shared text size (kbytes): 0
-	Average unshared data size (kbytes): 0
-	Average stack size (kbytes): 0
-	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 3623936
-	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 630
-	Minor (reclaiming a frame) page faults: 3411665
-	Voluntary context switches: 29127
-	Involuntary context switches: 109
-	Swaps: 0
-	File system inputs: 571272
-	File system outputs: 626952
-	Socket messages sent: 0
-	Socket messages received: 0
-	Signals delivered: 0
-	Page size (bytes): 4096
-	Exit status: 0
+version https://git-lfs.github.com/spec/v1
+oid sha256:0ec11b356f18a12a8f18d9b5230d750f1e81134beaf17736b6e5af14332ad505
+size 1346

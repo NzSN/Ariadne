@@ -1,22 +1,3 @@
-{
-  "command": [
-    "rustc",
-    "--edition=2024",
-    "--crate-name",
-    "dump_retry_diagnostic",
-    "/home/nzsn/Repos/Ariadne-dump-retry-b5d56b7/target/retry-diagnostic.rs",
-    "-O",
-    "-L",
-    "dependency=/home/nzsn/Repos/Ariadne-dump-retry-b5d56b7/target/retry-build/release/deps",
-    "--extern",
-    "ariadne=/home/nzsn/Repos/Ariadne-dump-retry-b5d56b7/target/retry-build/release/libariadne.rlib",
-    "--extern",
-    "sha2=/home/nzsn/Repos/Ariadne-dump-retry-b5d56b7/target/retry-build/release/deps/libsha2-97bdddeafdc9790e.rlib",
-    "--extern",
-    "serde_json=/home/nzsn/Repos/Ariadne-dump-retry-b5d56b7/target/retry-build/release/deps/libserde_json-540ae372bafb180c.rlib",
-    "-o",
-    "/home/nzsn/Repos/Ariadne-dump-retry-b5d56b7/target/retry-diagnostic"
-  ],
-  "difference": "Only public CoreConfig response timeout is set to 60000 ms; analyzer and capture sources are unchanged.",
-  "cli_timing_credit": false
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:b70bf9963b5447e948e1edfbffd5addd734458a27682dac9feeb67f32fe9f1a3
+size 934

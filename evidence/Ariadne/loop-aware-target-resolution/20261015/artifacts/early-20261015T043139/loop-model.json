@@ -1,9 +1,3 @@
-{
-  "name": "loop-model",
-  "command": [
-    "bash",
-    "Specs/check-loop-target-closure.sh"
-  ],
-  "exit_code": 0,
-  "seconds": 16.410011621000002
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:40a3beadb40d58c6b6ff39414378ee1e5719d7613d801aecd726566c3edfbcac
+size 151

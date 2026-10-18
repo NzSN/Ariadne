@@ -1,1 +1,3 @@
-{"captured_reference": {"entries": 370, "tables": 9, "targets": 64}, "conditional_write_cases": 2, "epoch_cases": 5, "frontier_cases": 4, "graph_cases": 15, "numeric_cases": 12, "receipt_cases": 32, "schema": "ariadne.guarded-target-composition-oracle-result/v1", "status": "pass"}
+version https://git-lfs.github.com/spec/v1
+oid sha256:84701f56c57553077c8cbc7750ec47d14309ffafa11cfd9dc57bc6cf8e45a354
+size 282

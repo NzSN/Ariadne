@@ -1,9 +1,3 @@
-   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-bap-shift-count-20261014/target/shift-mutations-v2-20261014/restore-equal-width-shift-gate/sut)
-    Finished `release` profile [optimized] target(s) in 30.76s
-     Running unittests src/lib.rs (/home/nzsn/Repos/Ariadne-bap-shift-count-20261014/target/shift-mutations-v2-20261014/restore-equal-width-shift-gate/build/release/deps/ariadne-eac5fde57d2ca545)
-
-running 1 test
-test bap::shift_projection_tests::captured_xorps_retains_legacy_upper_half_and_coarse_old_origins ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 102 filtered out; finished in 0.00s
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:975cb42a2a561c4eb9e5648524b566501fe6b18a4a7481294903252665016e55
+size 637

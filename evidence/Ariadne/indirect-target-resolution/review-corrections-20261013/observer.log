@@ -1,14 +1,3 @@
-test_compile_error_and_unrelated_failure_do_not_qualify (test_target_resolution_mutations.MutationObserverTests.test_compile_error_and_unrelated_failure_do_not_qualify) ... ok
-test_control_failure_is_retained_and_aborts_before_mutation (test_target_resolution_mutations.MutationObserverTests.test_control_failure_is_retained_and_aborts_before_mutation) ... ok
-test_control_requires_the_selected_runtime_test_to_pass (test_target_resolution_mutations.MutationObserverTests.test_control_requires_the_selected_runtime_test_to_pass) ... ok
-test_missing_or_failed_unmodified_control_prevents_credit (test_target_resolution_mutations.MutationObserverTests.test_missing_or_failed_unmodified_control_prevents_credit) ... ok
-test_mutation_is_unique_within_its_declared_scope (test_target_resolution_mutations.MutationObserverTests.test_mutation_is_unique_within_its_declared_scope) ... ok
-test_named_failure_in_captured_and_serial_nocapture_output (test_target_resolution_mutations.MutationObserverTests.test_named_failure_in_captured_and_serial_nocapture_output) ... ok
-test_native_runtime_failure_after_a_passing_control_is_not_arithmetic_detection (test_target_resolution_mutations.MutationObserverTests.test_native_runtime_failure_after_a_passing_control_is_not_arithmetic_detection) ... ok
-test_retained_checker_rechecks_control_and_native_failure_cause (test_target_resolution_mutations.MutationObserverTests.test_retained_checker_rechecks_control_and_native_failure_cause) ... ok
-test_test_name_in_panic_text_is_not_a_failed_test (test_target_resolution_mutations.MutationObserverTests.test_test_name_in_panic_text_is_not_a_failed_test) ... ok
-
-----------------------------------------------------------------------
-Ran 9 tests in 0.018s
-
-OK
+version https://git-lfs.github.com/spec/v1
+oid sha256:eb567af8acd76f12e5ecb649d018cbcdabc5ce2fcb4843a96f719602ac4009ad
+size 1740

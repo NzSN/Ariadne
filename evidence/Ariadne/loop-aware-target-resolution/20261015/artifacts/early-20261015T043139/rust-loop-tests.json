@@ -1,13 +1,3 @@
-{
-  "name": "rust-loop-tests",
-  "command": [
-    "cargo",
-    "test",
-    "--offline",
-    "--locked",
-    "--lib",
-    "bap::target_resolution::loop_tests"
-  ],
-  "exit_code": 101,
-  "seconds": 1.1942632189999998
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:652eabcd4991de38adf31fc58c24e5ad1df914baf825448e0ca537739a71387e
+size 217

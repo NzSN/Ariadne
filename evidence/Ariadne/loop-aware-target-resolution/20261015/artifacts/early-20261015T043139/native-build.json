@@ -1,11 +1,3 @@
-{
-  "name": "native-build",
-  "command": [
-    "python3",
-    "native/bap-core/build.py",
-    "--output",
-    "target/loop-aware-native"
-  ],
-  "exit_code": 0,
-  "seconds": 12.079809650000001
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:8c2f948bad9a36e9cb176189049591a7da68bcd66b0d4ba9597d33bc5faf55e6
+size 194

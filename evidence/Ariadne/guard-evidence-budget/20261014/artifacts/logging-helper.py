@@ -1,10 +1,3 @@
-#!/usr/bin/python3
-"""Transparent stdout tee; diagnostic identity is deliberately different."""
-import os,sys,subprocess
-with open(os.environ['DIAGNOSTIC_LIFT_LOG'],'wb',buffering=0) as log:
- child=subprocess.Popen([os.environ['DIAGNOSTIC_REAL_HELPER'],*sys.argv[1:]],stdin=sys.stdin.buffer,stdout=subprocess.PIPE,stderr=sys.stderr.buffer)
- for line in child.stdout:
-  log.write(line)
-  sys.stdout.buffer.write(line)
-  sys.stdout.buffer.flush()
- sys.exit(child.wait())
+version https://git-lfs.github.com/spec/v1
+oid sha256:4d7bfdefacfd67798a0d3516a73a3405b031b580b26f5bd2c8e2e1d54380df70
+size 469

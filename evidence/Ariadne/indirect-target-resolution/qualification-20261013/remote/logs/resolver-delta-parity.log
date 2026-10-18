@@ -1,12 +1,3 @@
-   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-target-resolution-20261012)
-    Finished `release` profile [optimized] target(s) in 19.02s
-SDK inventory verified
-/home/nzsn/Repos/Ariadne-target-resolution-20261012/target/indirect-target-resolution-native/ariadne-bap-core
-prepared_ms=5063; table targets=45; complete=false
-native kernel_cpu_s=51.704 serialization_cpu_s=6.922 actions=116199
-completion compute_ms=59350 encoded_bytes=59256201
-completion transfer_ms=2415
-completion expansion_ms=1814
-completion state_decode_ms=2241
-{"analysis_ms":66900,"answer":"Partial","backend":"bap","decoded":3977,"definition_links":10744212,"edges":4819,"prepare_ms":5063,"slice":392,"state_sha256":"4b5c6d947ac8622932e63d8731733e4cf328b7d7401302fcc68ffa0d2ffcf30c","table_edges":45}
-{"analysis_ms":13091,"answer":"Partial","backend":"rust","decoded":3977,"definition_links":10744212,"edges":4819,"prepare_ms":5063,"slice":392,"state_sha256":"4b5c6d947ac8622932e63d8731733e4cf328b7d7401302fcc68ffa0d2ffcf30c","table_edges":45}
+version https://git-lfs.github.com/spec/v1
+oid sha256:7479f553195e259463826665bff9ea444c17166044bf24ca2c1a97c7d01f8226
+size 1031

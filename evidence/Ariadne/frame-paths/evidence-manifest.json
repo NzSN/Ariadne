@@ -1,15 +1,3 @@
-{
-  "schema": "ariadne.frame-path-evidence-manifest/v1",
-  "files": {
-    "clippy-final.log": "ea4ae44161616601c2dc54524a7cd2432ddb384ec2e21876f0a188e5f44efa8e",
-    "config-syntax.log": "a56d00b972fbe806ea4e031c67a6e739bae2f7f6bd79269325ee394f6eae1b92",
-    "contract-freeze.json": "44095a6b450a8683e7ae5c58174527f6763631b8a2c1192d83f43fc047138adf",
-    "contract-revision.json": "38a56c0b2ce01b97aa426bb33c6f8d79604a91c98c069685d5157311e6dad85e",
-    "core-final.log": "6520f110e91117eb8101cf363f020dc71d434c573850ea9cab822bd62de15694",
-    "default-final.log": "f1d326c7e65e6fd6e02eb7eec6647d451f56a546feaaf428b3b5fe48c4cfd182",
-    "default-transient-error.log": "1844a8e766e49caca344dc01d52376a24af764769d878044ec0c0e18b3f7a4fa",
-    "native-final.log": "90a7337b4dbb5a2c42ee59cd9b300bb15f559265ed8782f07cddceb41cc6100d",
-    "sany.log": "205fe405f4483e773666275735e3d603a671da32e03902cc509a1f15b0452516",
-    "source-validation.json": "1fa8714958aacac4c7cfc6ec776a8f4a1ab0692cc898dee97329f6dccf63b60d"
-  }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:fdc7e5481ed06bffa1b6d8dae7497d3c446d5d6fc6c7a6d1646954301a19ce7d
+size 1014

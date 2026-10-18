@@ -1,15 +1,3 @@
-{
-  "name": "native-capture",
-  "command": [
-    "cargo",
-    "test",
-    "--offline",
-    "--locked",
-    "--test",
-    "input_bap_core",
-    "--",
-    "--ignored"
-  ],
-  "exit_code": 0,
-  "seconds": 46.920877303
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:b82197f65ae6aaaeae6608485a053bac2522646e07bf197f22a84ab3b06b4cb9
+size 216

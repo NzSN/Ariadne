@@ -1,1 +1,3 @@
-{"schema":"ariadne.bap-shift-probe-ready/v1","version":"2.5.0-alpha","loaded_library":"/home/nzsn/Repos/Ariadne/tmp/bap-setup/stable/usr/local/lib/libbap.so.2.5.0","initialization_argv":["/home/nzsn/Repos/Ariadne-bap-shift-count-20261014/target/bap-shift-probe/ariadne-bap-shift-probe"],"required_plugins":[],"static_typing_api_exercised":false}
+version https://git-lfs.github.com/spec/v1
+oid sha256:6a6ed0f0e9531acc3cefae4eeca92d0f42bbf60466a079c314bf245cfd631714
+size 346

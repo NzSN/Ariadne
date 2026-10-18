@@ -1,10 +1,3 @@
-{
-  "name": "llvm-build",
-  "command": [
-    "bash",
-    "native/llvm_mc/build.sh",
-    "target/caller-llvm/ariadne-llvm-mc"
-  ],
-  "exit_code": 0,
-  "seconds": 1.7810645420000242
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:51e392924f962751b1101e19f9fa0a6bf7192b4ab60bb6e41a208fc05f5eea28
+size 182

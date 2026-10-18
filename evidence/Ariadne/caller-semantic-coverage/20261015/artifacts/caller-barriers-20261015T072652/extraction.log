@@ -1,1 +1,3 @@
-{"fixture": "/caller-work/evidence/caller-barriers-20261015T072652/extracted/four-shapes.json", "cases": 4, "barriers": 30, "inventory": {"MOVAPSrm": 1, "UD1Lm": 1, "INT3": 27, "TRAP": 1}}
+version https://git-lfs.github.com/spec/v1
+oid sha256:dc529fbc1d635610c1df932a74c61d64fa9d3e4c309d3af74964b08b6b80c0de
+size 189

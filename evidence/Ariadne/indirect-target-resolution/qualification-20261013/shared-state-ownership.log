@@ -1,9 +1,3 @@
-   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne)
-    Finished `test` profile [unoptimized + debuginfo] target(s) in 5.19s
-     Running unittests src/lib.rs (target/debug/deps/ariadne-455f3fc91149393b)
-
-running 1 test
-test analysis_view::tests::retained_completed_snapshot_survives_mutation_of_consumed_owned_result ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 0.00s
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:1b6836bc8b134e080fd3841117ed82a1632ab53769d0ffc7460a54bcaf62657b
+size 433

@@ -1,27 +1,3 @@
-{
-  "schema": "ariadne.target-resolution-contract-freeze/v1",
-  "date": "2026-10-12",
-  "profile": "captured-indirect-targets/v1",
-  "memory_premise": "FrozenCapturedControlData",
-  "limits": {
-    "max_entries": 4096,
-    "max_targets": 65536,
-    "max_read_bytes": 1048576,
-    "max_evidence_bytes": 4194304,
-    "max_values": 256,
-    "max_steps": 262144,
-    "max_path_steps": 256,
-    "max_rounds": 16,
-    "max_elapsed_ms": 1000
-  },
-  "timing_criteria": {
-    "resolver_ms": 1000,
-    "expanded_original_dump_cli_ms": 60000
-  },
-  "scope": "constant 64-bit pointer-slot and finite signed32 table-relative AMD64 near jumps; explicit snapshot memory premise; no historical execution claim",
-  "files": {
-    "Specs/AriadneTargetResolution.tla": "23c42692070b780e47584ca18bc2f7e8f20efdd5615b255d5cfafbd60c179a14",
-    "tests/bap/fixtures/target-resolution-oracle.json": "1369262ce668e42155650bf64658352749bf8cd0f801beed885f1bc768499ba1",
-    "tests/bap/fixtures/target-resolution-bil.json": "5e6198d448b567c96a9f0d46ba110774d42651ff08cbb05f7c1e30ea451d69bb"
-  }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:87f017f7d265acb08d01c7d13b4c762a8c89041af3f841855f4092c679abfd88
+size 1068

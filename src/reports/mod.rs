@@ -1,5 +1,7 @@
 //! Strict Stage E inputs and identity-preserving result envelopes.
 mod codecs;
+#[cfg(feature = "bap")]
+pub mod frame_connections;
 mod frame_paths;
 #[cfg(feature = "bap")]
 pub mod frame_structure;

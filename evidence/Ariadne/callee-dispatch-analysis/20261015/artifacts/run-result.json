@@ -1,29 +1,3 @@
-{
-  "exit_code": 1,
-  "sources_unchanged": true,
-  "changed": [],
-  "compile_command": [
-    "rustc",
-    "--edition=2024",
-    "/caller-work/case4-probe.rs",
-    "-O",
-    "-L",
-    "dependency=/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/caller-build/release/deps",
-    "--extern",
-    "ariadne=/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/caller-build/release/libariadne.rlib",
-    "--extern",
-    "serde_json=/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/caller-build/release/deps/libserde_json-540ae372bafb180c.rlib",
-    "-o",
-    "/caller-work/case4-probe"
-  ],
-  "probe_command": [
-    "timeout",
-    "240",
-    "/caller-work/case4-probe",
-    "/work/frame-paths-dump03958-20261013/original.dmp",
-    "/caller-work/evidence/case4-20261015T081221",
-    "--assert-complete"
-  ],
-  "driver_sha256": "53670792de1b785891ca4dd9dc381427cd99d62dfce4c843e75ae051165cc624",
-  "release_library_sha256": "d7dca79f2a5e6544ae0fed728415a0a9168b4a482bcf91f4d786586e8cbd8e24"
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:3acdd92c9528d58fb8e596f4ebafc776c420f2543a30d6476d9b5b7ef2aba01b
+size 1004

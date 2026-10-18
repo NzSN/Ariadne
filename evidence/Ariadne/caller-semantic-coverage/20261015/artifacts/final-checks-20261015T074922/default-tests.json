@@ -1,11 +1,3 @@
-{
-  "name": "default-tests",
-  "command": [
-    "cargo",
-    "test",
-    "--offline",
-    "--locked"
-  ],
-  "exit_code": 0,
-  "seconds": 23.54265670099994
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:60ac66dc1a4f87ee43bafa4c02b47d66b4dc78965fdb0551292297fa89b65b4f
+size 157

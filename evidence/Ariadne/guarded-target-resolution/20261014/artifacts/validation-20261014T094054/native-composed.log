@@ -1,24 +1,3 @@
-    Finished `test` profile [unoptimized] target(s) in 0.03s
-     Running unittests src/lib.rs (target/composed-build/debug/deps/ariadne-ee964763ae0b7713)
-
-running 1 test
-guarded native admission rejected: composition session query identity
-test input::materialize::composition_tests::actual_bap_pending_store_targets_and_native_rust_results_agree ... FAILED
-
-failures:
-
----- input::materialize::composition_tests::actual_bap_pending_store_targets_and_native_rust_results_agree stdout ----
-resolver pass_elapsed_us=197 instructions=4 reads=1 stop=None
-resolver pass_elapsed_us=285 instructions=5 reads=1 stop=None
-
-thread 'input::materialize::composition_tests::actual_bap_pending_store_targets_and_native_rust_results_agree' (4829) panicked at src/input/../../tests/input/composition.rs:537:10:
-called `Result::unwrap()` on an `Err` value: Custom { kind: InvalidData, error: "native initialize rejected" }
-note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
-
-
-failures:
-    input::materialize::composition_tests::actual_bap_pending_store_targets_and_native_rust_results_agree
-
-test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 121 filtered out; finished in 2.99s
-
-error: test failed, to rerun pass `--lib`
+version https://git-lfs.github.com/spec/v1
+oid sha256:df198dd567c6cfab3c4ff65907830fa3a2b697b2a0d13149844f9e31a76a134b
+size 1247

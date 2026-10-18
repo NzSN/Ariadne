@@ -1,9 +1,3 @@
-   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-bap-shift-count-20261014/target/shift-mutations-v2-20261014/cancel-xor-from-abstract-metadata-equality/sut)
-    Finished `release` profile [optimized] target(s) in 28.00s
-     Running unittests src/lib.rs (/home/nzsn/Repos/Ariadne-bap-shift-count-20261014/target/shift-mutations-v2-20261014/cancel-xor-from-abstract-metadata-equality/build/release/deps/ariadne-eac5fde57d2ca545)
-
-running 1 test
-test bap::shift_projection_tests::equal_abstract_metadata_does_not_prove_computed_values_equal ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 102 filtered out; finished in 0.00s
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:0293edea325c70f503e04fbe53ce6fb2c659883527ec9b91c921dc79662259ef
+size 658

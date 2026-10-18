@@ -87,9 +87,17 @@ implemented repairs and exercised checks from real-Windows qualification.
 ### Project and active plans
 
 - [Structural frame report plan: Stage 5.1](../.agents/plans/frame-structure-report.md)
-  — proposed recovery-only artifact, validated frame links and separate report;
+  — recovery-only artifact, validated frame links and separate report;
   [the investigation contract](Ariadne/investigation-design.md#structural-frame-report-before-dataflow)
-  owns its scope. SF0–SF6 implementation and remote qualification remain pending.
+  owns its scope. SF0–SF6 are complete within the
+  [2026-10-16 qualified Windows scope](../evidence/Ariadne/frame-structure/20261016/README.md).
+
+- [Frame connections plan: Stage 5.2](../.agents/plans/frame-connections.md)
+  — implemented corridor reachability, SCC condensation and bounded example routes
+  over the Stage 5.1 source; the
+  [canonical design section](Ariadne/investigation-design.md#structural-corridors-and-cycle-summaries)
+  owns meanings and limits. Local implementation and validation pass; remote
+  qualification remains open.
 
 - [Captured indirect-target resolver plan](../.agents/plans/indirect-target-resolution.md)
   — R0–R6 contract, evidence, discovery, native admission and qualification.

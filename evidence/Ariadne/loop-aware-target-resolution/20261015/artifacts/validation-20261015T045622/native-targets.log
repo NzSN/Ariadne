@@ -1,11 +1,3 @@
-    Finished `test` profile [unoptimized] target(s) in 0.72s
-     Running unittests src/lib.rs (target/loop-aware-build/debug/deps/ariadne-ee964763ae0b7713)
-
-running 4 tests
-test input::materialize::target_resolution_tests::native_requires_all_combinations_of_successive_diamonds ... ok
-test input::materialize::target_resolution_tests::actual_bap_lifts_and_native_rust_results_agree_on_both_capture_platforms ... ok
-test input::materialize::target_resolution_tests::captured_pointer_slot_resolves_even_when_destination_code_is_missing ... ok
-test input::materialize::target_resolution_tests::native_rejects_resolver_receipt_tampering_directly ... ok
-
-test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 135 filtered out; finished in 15.03s
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:7cf28bb687c306d719dff80f1a9e986b6c58f7238714144ae7edc33caefe4651
+size 750

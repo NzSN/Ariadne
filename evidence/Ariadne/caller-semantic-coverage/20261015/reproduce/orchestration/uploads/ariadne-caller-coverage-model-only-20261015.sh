@@ -1,7 +1,3 @@
-#!/bin/bash
-set -euo pipefail
-python3 /mnt/d/ariadne-caller-coverage-setup-20261015.py
-external=/mnt/d/ariadne-caller-coverage-20261015
-cp /mnt/d/ariadne-caller-coverage-model-only-20261015.py "$external/model-only.py"
-chown jlc:jlc "$external/model-only.py"
-exec runuser -u jlc -- bash "$external/run.sh" python3 /caller-work/model-only.py
+version https://git-lfs.github.com/spec/v1
+oid sha256:a98db8d886fcdb77b5df92bddecdfe9f38e431d60a81382595da06c43c173e7c
+size 341

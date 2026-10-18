@@ -5,6 +5,8 @@
 **Status.** The active ledgers below retain unfinished work after the 2026-10-15 loop delivery. Guarded target composition and its bounded loop-aware follow-up are complete within their recorded captured-table scope.
 Stage 5.1 is complete within its separate structural frame-report scope;
 the dated ledger retains exact source/tool/corpus qualification.
+Stage 5.2 corridor/SCC/example implementation and local validation pass;
+its FC0–FC6 plan retains the open remote qualification gate.
 Thirty-one completed or superseded records live in `completed/`. Archiving
 preserves each record's original scope and does not refresh its qualification.
 
@@ -32,6 +34,7 @@ universal-proof clauses. A partial result is not a completed acceptance gate.
 | Active plan | Remaining work |
 | --- | --- |
 | [Explicit alignment hypotheses](alignment-hypotheses.md) | H0–H5 complete within the 2026-10-16 structural-only reviewed MOVAPS profile; conditional v2 and actual v1/v2 replay qualified. Caller S6 and frame-path F4 remain separate. |
+| [Frame corridors and cycle summaries: Stage 5.2](frame-connections.md) | FC0–FC4 implemented; local model/oracle/mutation/product checks and both capture applications pass. FC5 remote qualification remains open. |
 | [Structural frame report: Stage 5.1](frame-structure-report.md) | SF0–SF6 complete within the 2026-10-16 recovery-only Windows AMD64/E8-call scope. Retained at its canonical path; caller S6 and frame-path F4 remain separate. |
 | [Caller semantic coverage](caller-semantic-coverage.md) | S0–S5 source-bound qualification retained; S6 completed caller dataflow and full native/Rust state equality remain open. |
 | [Frame-path enumeration](frame-path-enumeration.md) | Remote model/mutation and successful full-dump qualification. The original dump retry remains unavailable. |

@@ -1,21 +1,3 @@
-{
-  "schema": "ariadne.native-loop-checker-controls/v1",
-  "scope": "Independent native checker units over Rust-exported fixtures; production paired admission is separate.",
-  "source_sha256": "18dea6f4d2b0a0304e13622fb3a76cd8a6babba2dfba3b7c801d1cbe8bb8572a",
-  "driver_sha256": "b5d108aae6091b471f1544f15f08a0f9bbebb2d193660c1be11e2f9d231c61f9",
-  "native_manifest_sha256": "e40e567b1291940ae9a82f29f68707f10b39803492eb5a1b530fc3bf516d5e2b",
-  "inputs": {
-    "da09-instructions.json": "ac69a00871af4a932e3140953c7106d261c850bddd3a7203e4a0b9762bace51f",
-    "da09-target-report.json": "d33c3d699971261dbdde4b6591c8418c1360b044cb908609980129f1e7196a6b",
-    "dadd-instructions.json": "71eb0164cbee89519f7b9622a7b354083537b75b3856b4147c2ba9b4d2c7bf38",
-    "dadd-target-report.json": "b53f99ea2b51c1d86ae12f383177009c8b1d5ca837d1c0629540b073e84733b4"
-  },
-  "mutants": [],
-  "baseline": {
-    "status": "invalid-output",
-    "error": "Expecting value: line 1 column 1 (char 0)",
-    "returncode": 2
-  },
-  "passed": false,
-  "behavioral_mutant_credits": 0
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:8a99e41bbfb190c8e7a42ab27912d06f33607b7d8f6b86979f8b94866c978def
+size 1058

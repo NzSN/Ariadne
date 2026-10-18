@@ -1,8 +1,3 @@
-2026-10-15T06:43:37,111 [main] INFO  a.f.a.t.Tool$ - # APALACHE version: 0.58.0 | build: 711dce6
-2026-10-15T06:43:37,119 [main] INFO  a.f.a.t.t.o.TypeCheckCmd - Type checking AriadnePredicateAdmission.tla
-2026-10-15T06:43:37,241 [main] INFO  a.f.a.i.p.PassChainExecutor - PASS #0: SanyParser
-2026-10-15T06:43:37,319 [main] ERROR a.f.a.t.p.i.SanyParserPassImpl - Parsing error: Unknown SANY error (exit code=ERROR)
-2026-10-15T06:43:37,341 [main] DEBUG a.f.a.i.p.PassChainExecutor - PASS #0: SanyParser [FAIL]
-2026-10-15T06:43:37,341 [main] INFO  a.f.a.t.Tool$ - Type checker [FAILED]
-2026-10-15T06:43:37,341 [main] INFO  a.f.a.t.Tool$ - It took me 0 days  0 hours  0 min  0 sec
-2026-10-15T06:43:37,342 [main] INFO  a.f.a.t.Tool$ - Total time: 0.228 sec
+version https://git-lfs.github.com/spec/v1
+oid sha256:cc0746ffc6641d049fe23936639369d9041a1ffc38432d935ba6829e6ac9ed4b
+size 752

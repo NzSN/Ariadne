@@ -1,12 +1,3 @@
-#!/bin/bash
-set -euo pipefail
-if [[ ${1:-} != --inside ]]; then
-  base=/home/jlc/ariadne-p4-20261010
-  cp "$0" "$base/work/guarded-target-resolution-20261014/model-only.sh"
-  chown jlc:jlc "$base/work/guarded-target-resolution-20261014/model-only.sh"
-  exec runuser -u jlc -- "$base/run.sh" bash /work/guarded-target-resolution-20261014/model-only.sh --inside
-fi
-cd /home/nzsn/Repos/Ariadne-composed-20261014
-out=/work/guarded-target-resolution-20261014/model-$(date -u +%Y%m%dT%H%M%S).log
-bash Specs/check-guarded-target-resolution.sh > "$out" 2>&1
-cat "$out"
+version https://git-lfs.github.com/spec/v1
+oid sha256:a6b09de62ad27d72c32c135c71dbc18ae5fb82cb64f92cd66eb35c974855e918
+size 561

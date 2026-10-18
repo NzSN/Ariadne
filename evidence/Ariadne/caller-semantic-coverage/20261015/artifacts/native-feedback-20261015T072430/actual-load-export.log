@@ -1,8 +1,3 @@
-    Finished `test` profile [unoptimized] target(s) in 0.68s
-     Running unittests src/lib.rs (target/caller-build/debug/deps/ariadne-ee964763ae0b7713)
-
-running 1 test
-test input::materialize::guard_admission_tests::actual_movaps_load_guard_outcomes_export_checked_native_inputs ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 154 filtered out; finished in 8.15s
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:9eebf04ee73735df4cf06974a92087c561f2f0bc1003d16bb1771be44958ee0b
+size 385

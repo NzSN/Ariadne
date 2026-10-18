@@ -1,12 +1,3 @@
-{
-  "backend": "rust reference, explicit",
-  "dump_sha256": "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab",
-  "elapsed_ms": 3652,
-  "preparation_errors": [
-    "frame 1 preparation: guard profile limit exceeded"
-  ],
-  "runtime_bytes": 5286240,
-  "runtime_entries": 440520,
-  "scope": "API probe raises captured-read/runtime-table/output byte budgets; explicit windows-amd64-normal-call-entry/v1 premise and 32MiB guard evidence cap; no image fallback, symbol bytes or additional discovery roots are used",
-  "thread_id": 23668
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:1b965d0b030749b11a09ef1f7f786f487dd4bf389153ca77373daefabdcf65f8
+size 549

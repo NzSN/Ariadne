@@ -1,18 +1,3 @@
-{
-  "verified_export_sha256": "aa89248a75a5d9371236e57010541f953d50ed3b2ba379ad9cf71351bc9a76dc",
-  "verified_files": 663,
-  "qualified_source_archive_sha256": "5cd406c5181d131679a60af15f53edcabecfe056144e40b5785bc37ce1d010ee",
-  "source_files_unchanged": 867,
-  "post_validation_document_changes": [
-    "CHECKPOINTS.md",
-    "Plans/README.md",
-    "Plans/guarded-target-resolution.md",
-    "Plans/loop-aware-target-resolution.md",
-    "ROADMAP.md",
-    "Specs/README.md",
-    "docs/Ariadne/guarded-target-resolution-design.md",
-    "docs/Ariadne/indirect-target-resolution.md",
-    "docs/Ariadne/justified-branch-pruning-design.md",
-    "docs/documentation-map.md"
-  ]
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:cf49649cdc09c2a44077d5ed07ae309356fb852b1936d79a62b35fd3e6756444
+size 673

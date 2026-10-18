@@ -1,35 +1,3 @@
-[
-  {
-    "name": "loop-model",
-    "command": [
-      "bash",
-      "Specs/check-loop-target-closure.sh"
-    ],
-    "exit_code": 0,
-    "seconds": 18.1357918220001
-  },
-  {
-    "name": "rust-loop-tests",
-    "command": [
-      "cargo",
-      "test",
-      "--offline",
-      "--locked",
-      "--lib",
-      "loop_closure"
-    ],
-    "exit_code": 0,
-    "seconds": 18.476541140999984
-  },
-  {
-    "name": "native-build",
-    "command": [
-      "python3",
-      "native/bap-core/build.py",
-      "--output",
-      "target/loop-aware-native"
-    ],
-    "exit_code": 1,
-    "seconds": 6.884195142000067
-  }
-]
+version https://git-lfs.github.com/spec/v1
+oid sha256:3b4e493d623adb559642cb0be9cfb3e2c8dbd2beeac21e79e2384739e1e627da
+size 607

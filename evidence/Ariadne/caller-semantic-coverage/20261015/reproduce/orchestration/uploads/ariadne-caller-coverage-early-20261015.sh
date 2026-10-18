@@ -1,7 +1,3 @@
-#!/bin/bash
-set -euo pipefail
-python3 /mnt/d/ariadne-caller-coverage-setup-20261015.py
-external=/mnt/d/ariadne-caller-coverage-20261015
-cp /mnt/d/ariadne-caller-coverage-early-20261015.py "$external/early.py"
-chown jlc:jlc "$external/early.py"
-exec runuser -u jlc -- bash "$external/run.sh" python3 /caller-work/early.py
+version https://git-lfs.github.com/spec/v1
+oid sha256:b2a79ad129ea68c274035cb59fc5aa07bb36c3538cb18dd4ad25cbf13edbb003
+size 321

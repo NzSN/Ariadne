@@ -1,11 +1,3 @@
-{
-  "name": "native-build",
-  "command": [
-    "python3",
-    "native/bap-core/build.py",
-    "--output",
-    "target/caller-native"
-  ],
-  "exit_code": 0,
-  "seconds": 11.919394051999973
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:d6293e50c272e637a29d15f89d035e498ff3827d2e1591e43f2983238612ca44
+size 190

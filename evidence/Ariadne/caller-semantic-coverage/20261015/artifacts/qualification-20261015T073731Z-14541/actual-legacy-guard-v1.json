@@ -1,11 +1,3 @@
-{
-  "guards": 1,
-  "new_field_rejected": true,
-  "passed": true,
-  "profile": "bap-guard-admission-v1",
-  "schema": "ariadne.actual-legacy-guard-replay/v1",
-  "sites": 4764,
-  "probe_sha256": "10135d5e3f58df561e9069337b1f921949d306a9ce5a3987140bf64091916535",
-  "source_sha256": "2fb8128488bc78a137ce1e0c3ac9d224cb9fa2613f510dd28774602f68c211dd",
-  "retained_report_sha256": "d0294c9b940d8366cb89d78a95d2186c89196dbf1a7955e70189c22afa2abda0"
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:47ec1fff01540ec87ae2c7d566556d0311bbb60e1ecaa05e501b468da63e2da6
+size 444

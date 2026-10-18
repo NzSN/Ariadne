@@ -1,8 +1,3 @@
-    Finished `test` profile [unoptimized] target(s) in 0.72s
-     Running tests/bap/protocol.rs (target/caller-build/debug/deps/bap_protocol-c90dc74d54eca3cd)
-
-running 1 test
-test unix::malformed_wrong_version_and_missing_helper_fail_before_a_session_is_admitted ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.21s
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:03c46d17ff57eb3f031795d821a075f690bca030c67658fd930843f5d8e568a0
+size 366

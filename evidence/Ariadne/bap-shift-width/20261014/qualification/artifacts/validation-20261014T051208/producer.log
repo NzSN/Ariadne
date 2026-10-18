@@ -1,16 +1,3 @@
-    Finished `test` profile [unoptimized] target(s) in 0.06s
-     Running tests/bap/native.rs (target/shift-build/debug/deps/bap_native-170527f041c84234)
-
-running 9 tests
-test independent_decoder_process_is_reused_across_snapshot_batches ... ok
-test vector_producer_tracks_coarse_state_and_retains_alignment_refusal ... ok
-test memory_address_evidence_distinguishes_payload_index_displacement_and_rip ... ok
-test unavailable_batches_high_addresses_short_bytes_and_query_ownership_are_checked ... ok
-test partial_self_moves_define_written_cells_and_unsupported_bil_never_falls_back ... ok
-test calls_special_empty_lifts_prefixes_and_snapshot_reset_remain_explicit ... ok
-test observed_admission_forms_match_frozen_effects_and_address_footprints ... ok
-test aliases_zero_extension_memory_and_conditional_writes_have_independent_effect_expectations ... ok
-test every_pinned_runtime_file_is_checked_before_preparation ... ok
-
-test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 18.03s
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:5122c8135b4232797da4a2592189d27ecab8c32fd36919e45b4651dc2af80e97
+size 1018

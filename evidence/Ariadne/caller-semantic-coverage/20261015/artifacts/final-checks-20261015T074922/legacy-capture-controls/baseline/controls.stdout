@@ -1,1 +1,3 @@
-[{"case":"legacy-opaque-v7","accepted":true,"expected":true,"passed":true,"error":null},{"case":"legacy-opaque-v8","accepted":false,"expected":false,"passed":true,"error":"opaque ordinary capture contract"}]
+version https://git-lfs.github.com/spec/v1
+oid sha256:b061c7e46fdc4c9285276664a515342b489e84e01c97a2b0eb71512dd1885f91
+size 208

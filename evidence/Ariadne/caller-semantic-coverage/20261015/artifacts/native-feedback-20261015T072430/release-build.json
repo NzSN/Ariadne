@@ -1,13 +1,3 @@
-{
-  "name": "release-build",
-  "command": [
-    "cargo",
-    "build",
-    "--offline",
-    "--locked",
-    "--release",
-    "--lib"
-  ],
-  "exit_code": 0,
-  "seconds": 32.46294348600003
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:bda489ba434c8fc9a57d11319ea897a5fba5f39103b054cf6f811b218fbdf741
+size 188

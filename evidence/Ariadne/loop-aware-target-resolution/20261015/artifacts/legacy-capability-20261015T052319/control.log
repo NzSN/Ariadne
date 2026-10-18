@@ -1,1 +1,3 @@
-{"error":"native helper lacks the requested input profile; rebuild the helper","helper_executable":false,"passed":true,"rejection_stage":"manifest capability check before helper process launch","requested_profile":"captured-guarded-targets/v2","retained_helper_sha256":"cc9ff8718659af45e3d86ba0949915615f8bdb64822638597522af63dba0c0f8","retained_manifest_sha256":"70d7a8ee8a6c3d30b214349208524676b1038dd9544c5f225def51a2b68c2798","retained_profiles":["normalized-fixed-input/v1","captured-fixed-input/v1","captured-indirect-targets/v1","captured-guarded-input/v1","captured-guarded-targets/v1"],"schema":"ariadne.legacy-combined-capability-control/v1","scope":"Current qualified Rust adapter rejects a genuine manifest-bound old helper lacking the new profile; no historical helper runtime is exercised."}
+version https://git-lfs.github.com/spec/v1
+oid sha256:1b9a720ec64023e4e66293b4f686876178bd1fe9925f742c54e229bdd2289cc3
+size 806

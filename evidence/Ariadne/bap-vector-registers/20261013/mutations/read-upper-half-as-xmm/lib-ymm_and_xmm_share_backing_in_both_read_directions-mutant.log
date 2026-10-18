@@ -1,22 +1,3 @@
-   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-vector-registers-20261013/target/vector-mutations-release-20261013/read-upper-half-as-xmm/sut)
-    Finished `release` profile [optimized] target(s) in 13.53s
-     Running unittests src/lib.rs (/home/nzsn/Repos/Ariadne-vector-registers-20261013/target/vector-mutations-release-20261013/read-upper-half-as-xmm/build/lib-ymm_and_xmm_share_backing_in_both_read_directions/release/deps/ariadne-eac5fde57d2ca545)
-
-running 1 test
-test bap::vector_projection_tests::ymm_and_xmm_share_backing_in_both_read_directions ... FAILED
-
-failures:
-
----- bap::vector_projection_tests::ymm_and_xmm_share_backing_in_both_read_directions stdout ----
-
-thread 'bap::vector_projection_tests::ymm_and_xmm_share_backing_in_both_read_directions' (5722) panicked at src/bap/../../tests/bap/vector_projection_unit.rs:114:5:
-assertion failed: p.uses.is_superset(&gpr("rbx"))
-note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
-
-
-failures:
-    bap::vector_projection_tests::ymm_and_xmm_share_backing_in_both_read_directions
-
-test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 68 filtered out; finished in 0.00s
-
-error: test failed, to rerun pass `--lib`
+version https://git-lfs.github.com/spec/v1
+oid sha256:8d7938651b11f478c58e6061029e3d839d1919bd3b1f6ff5fd6414b3f2adf6c5
+size 1224

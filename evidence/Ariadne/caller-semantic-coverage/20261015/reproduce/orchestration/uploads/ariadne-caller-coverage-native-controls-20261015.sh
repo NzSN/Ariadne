@@ -1,6 +1,3 @@
-#!/bin/bash
-set -euo pipefail
-external=/mnt/d/ariadne-caller-coverage-20261015
-cp /mnt/d/ariadne-caller-coverage-native-controls-20261015.py "$external/native-controls.py"
-chown jlc:jlc "$external/native-controls.py"
-exec runuser -u jlc -- bash "$external/run.sh" python3 /caller-work/native-controls.py
+version https://git-lfs.github.com/spec/v1
+oid sha256:1a3d06ed00a5d0abd6b5a1ecc3d2192c1c0c93f0c821c626be39b26f658cf029
+size 304

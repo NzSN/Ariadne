@@ -1,12 +1,3 @@
-2026-10-15T04:28:56,994 [main] INFO  a.f.a.t.Tool$ - # APALACHE version: 0.58.0 | build: 711dce6
-2026-10-15T04:28:57,002 [main] INFO  a.f.a.t.t.o.TypeCheckCmd - Type checking AriadneLoopTargetClosure.tla
-2026-10-15T04:28:57,091 [main] INFO  a.f.a.i.p.PassChainExecutor - PASS #0: SanyParser
-2026-10-15T04:28:57,357 [main] DEBUG a.f.a.i.p.PassChainExecutor - PASS #0: SanyParser [OK]
-2026-10-15T04:28:57,357 [main] INFO  a.f.a.i.p.PassChainExecutor - PASS #1: TypeCheckerSnowcat
-2026-10-15T04:28:57,357 [main] INFO  a.f.a.t.p.t.EtcTypeCheckerPassImpl -  > Running Snowcat .::.
-2026-10-15T04:28:57,884 [main] INFO  a.f.a.t.p.t.EtcTypeCheckerPassImpl -  > Your types are purrfect!
-2026-10-15T04:28:57,885 [main] INFO  a.f.a.t.p.t.EtcTypeCheckerPassImpl -  > All expressions are typed
-2026-10-15T04:28:57,886 [main] DEBUG a.f.a.i.p.PassChainExecutor - PASS #1: TypeCheckerSnowcat [OK]
-2026-10-15T04:28:57,887 [main] INFO  a.f.a.t.Tool$ - Type checker [OK]
-2026-10-15T04:28:57,887 [main] INFO  a.f.a.t.Tool$ - It took me 0 days  0 hours  0 min  0 sec
-2026-10-15T04:28:57,887 [main] INFO  a.f.a.t.Tool$ - Total time: 0.891 sec
+version https://git-lfs.github.com/spec/v1
+oid sha256:6d4d7808cce1bf36171ed7b568b0a5877d32e075f69aa473d6d82f8f9b25d27d
+size 1121

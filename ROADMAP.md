@@ -16,6 +16,12 @@
   [2026-10-16 finite scope](evidence/Ariadne/frame-structure/20261016/README.md).
   Existing completed-analysis and full frame-path gates remain separate.
 
+- [Frame corridors and cycle summaries: Stage 5.2](docs/Ariadne/investigation-design.md#structural-corridors-and-cycle-summaries)
+  and [FC0–FC6 plan](.agents/plans/frame-connections.md) — implemented
+  reachability/SCC/example consumer of validated structural reports.
+  [Local validation and both capture applications](evidence/Ariadne/frame-connections/20261018/README.md)
+  are recorded separately from unexercised remote/release qualification.
+
 - [Explicit alignment hypotheses](docs/Ariadne/investigation-design.md#explicit-alignment-hypotheses)
   and [H0–H5 ledger](.agents/plans/alignment-hypotheses.md) — structural-only
   conditional MOVAPS normal selection, separately [qualified](evidence/Ariadne/alignment-hypotheses/20261016/README.md)

@@ -1,25 +1,3 @@
-resolver pass_elapsed_us=10526 instructions=332 reads=58 stop=None
-resolver pass_elapsed_us=68031 instructions=3990 reads=58 stop=None
-	Command being timed: "target/release/ariadne-minidump /work/dump048B/original.dmp --max-artifact-bytes 2147483648 --decoder-reference target/ariadne-llvm-mc --analysis-backend rust --entry 0x7ff640079640 --seed-exception-rip --resolve-indirect-targets --explain-fault-address 0x7ff640079670 --memory-access 0 --explanation-only --format json"
-	User time (seconds): 62.35
-	System time (seconds): 8.91
-	Percent of CPU this job got: 95%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 1:14.69
-	Average shared text size (kbytes): 0
-	Average unshared data size (kbytes): 0
-	Average stack size (kbytes): 0
-	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 4742392
-	Average resident set size (kbytes): 0
-	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 1522435
-	Voluntary context switches: 7568
-	Involuntary context switches: 115
-	Swaps: 0
-	File system inputs: 0
-	File system outputs: 179072
-	Socket messages sent: 0
-	Socket messages received: 0
-	Signals delivered: 0
-	Page size (bytes): 4096
-	Exit status: 0
+version https://git-lfs.github.com/spec/v1
+oid sha256:79e7e299874bdc39a58fd10819a41fd346c667da9197482ed6a971dc4895296b
+size 1185

@@ -1,18 +1,3 @@
-{
-  "source_commit": "b5d56b7256f62f4bafff4cac3e0500664f41fd39",
-  "source_archive_sha256": "7c46f05e60cf9f61d53dd5e4b898176ba5504760fafc60340ef0d75cf00c4ffb",
-  "dump_sha256": "5fea4ca614706fe0040ed3231efee0edf9ce4004a51d902bb581025b48bade08",
-  "dump_bytes": 1305482568,
-  "entry": "0x00007ff640079640",
-  "seed_and_fault": "0x00007ff640079670",
-  "dispatch": "0x00007ff64007968b",
-  "native_cli_response_timeout_ms": 30000,
-  "diagnostic_response_timeout_ms": 60000,
-  "memory_premise": "FrozenCapturedControlData",
-  "expected_targets": 45,
-  "launch_repairs": [
-    "Disabled MSYS argument path conversion before WSL launch",
-    "Ran bubblewrap under its owning jlc account",
-    "Linked the existing hash-pinned SDK source archive into the clean checkout"
-  ]
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:ba17cfdc01d36c71cedfe651dee31a7b9bfc86b78eecb7a2e2e6711782d6ce59
+size 769

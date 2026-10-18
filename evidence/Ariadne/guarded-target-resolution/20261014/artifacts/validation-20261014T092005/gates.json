@@ -1,24 +1,3 @@
-[
-  {
-    "name": "format-apply",
-    "command": [
-      "cargo",
-      "fmt",
-      "--all"
-    ],
-    "exit_code": 0,
-    "passed": true,
-    "seconds": 3.1837647259999997
-  },
-  {
-    "name": "composition-oracle",
-    "command": [
-      "python3",
-      "tests/bap/fixtures/composition/oracle.py",
-      "--check"
-    ],
-    "exit_code": 1,
-    "passed": false,
-    "seconds": 0.12172748400000444
-  }
-]
+version https://git-lfs.github.com/spec/v1
+oid sha256:d39f50c52f70e9a8558d70b17d15f40a9f851d004479b124cc8e1f406c256c84
+size 406

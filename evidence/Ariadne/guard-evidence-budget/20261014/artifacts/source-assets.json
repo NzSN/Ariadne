@@ -1,9 +1,3 @@
-{
-  "src/input/materialize.rs": "238e92179ea5bc3213d96ae1a0be96c77ed977768412b1ffb04e95ff07111051",
-  "src/bap/ast.rs": "e03169007ec2469ad0a006faf044d956aeacf468a2ad19ce810e9153a52ccafb",
-  "src/bap/prepare.rs": "8fcaebc1daa1628149feda6dc31af6f7d207345a1412157dc0bfe5e74081ed4d",
-  "src/bap/guard_admission.rs": "a3a76f601dfa21d388e1a816d1aeb8ffd2bc42c0773221cb9e6032359e0684b4",
-  "src/investigation/frame_paths.rs": "6312a1258537bbba1af2a74f66d81d4c624be418a30e6ae791c1578e318198f4",
-  "target/shift-build/release/libariadne.rlib": "c9339ec0db9bdc61f35cdea1dab83a3b0b3ec8590ad53d83b32609a37054ea3a",
-  "target/ariadne-bap-lift": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf"
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:e16e76064d0c550477637473636a6f733c58c6c9bd932e635de7c142568ac89b
+size 700

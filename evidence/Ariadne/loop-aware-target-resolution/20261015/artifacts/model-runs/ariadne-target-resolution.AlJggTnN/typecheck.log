@@ -1,15 +1,3 @@
-# Usage statistics is OFF. We care about your privacy.
-# If you want to help our project, consider enabling statistics with config --enable-stats=true.
-
-Output directory: /loop-work/tmp/ariadne-target-resolution.AlJggTnN/typecheck/AriadneTargetResolution.tla/2026-10-15T05-13-03_5396793605938932461
-# APALACHE version: 0.58.0 | build: 711dce6                       I@05:13:03.192
-Type checking AriadneTargetResolution.tla                         I@05:13:03.199
-PASS #0: SanyParser                                               I@05:13:03.318
-PASS #1: TypeCheckerSnowcat                                       I@05:13:03.495
- > Running Snowcat .::.                                           I@05:13:03.496
- > Your types are purrfect!                                       I@05:13:03.644
- > All expressions are typed                                      I@05:13:03.645
-Type checker [OK]                                                 I@05:13:03.645
-It took me 0 days  0 hours  0 min  0 sec                          I@05:13:03.646
-Total time: 0.452 sec                                             I@05:13:03.646
-EXITCODE: OK
+version https://git-lfs.github.com/spec/v1
+oid sha256:2e2ecf393d5046b43db95196bde40cf621ff33afee9a174095f9f3c7b253f616
+size 1122

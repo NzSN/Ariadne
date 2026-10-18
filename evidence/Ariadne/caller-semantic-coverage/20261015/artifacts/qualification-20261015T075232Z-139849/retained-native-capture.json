@@ -1,23 +1,3 @@
-{
-  "status": "retained-exact-source-helper-pass",
-  "tests": 9,
-  "source": "/caller-work/evidence/final-checks-20261015T074922",
-  "gate": {
-    "name": "native-capture",
-    "command": [
-      "cargo",
-      "test",
-      "--offline",
-      "--locked",
-      "--test",
-      "input_bap_core",
-      "--",
-      "--ignored"
-    ],
-    "exit_code": 0,
-    "seconds": 46.920877303
-  },
-  "log_sha256": "073e0c1db3d5b0146e29daa0dc683c4453db4dfeac7327ffaf174bf478d7752b",
-  "source_manifest_sha256": "4a8db7330735b3e1df84bfdcf764d6a500efd408709e63de8152954bfc1f8515",
-  "native_manifest_sha256": "5fba77a55d0bb35cfcb902dc87f8029ed82f9951ac2d4b8dd9e7b80702f26095"
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:c1ddadec9ce9ec5428677ab8210f70a6a4c020ec9dd6f198fa6f56ed2e79a4aa
+size 663

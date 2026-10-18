@@ -1,5 +1,3 @@
-disable-original-binder: behavioral-kill
-disable-paired-source-binding: survived-or-invalid-control-no-credit
-disable-pending-effects-check: behavioral-kill
-disable-epoch-binding: behavioral-kill
-native source campaign: 3/4 behavioral kills
+version https://git-lfs.github.com/spec/v1
+oid sha256:1f074b326499b5f1d38063c262bb93439e169a6cb985a5b562861e0e06c6ff4f
+size 241

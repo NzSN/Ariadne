@@ -1,7 +1,3 @@
-/usr/bin/java
-/work/bin/tlc
-/work/bin/apalache-mc
-apalache-mc
-clang
-clang++
-tlc
+version https://git-lfs.github.com/spec/v1
+oid sha256:dfcf1d7ad123965c4c0677c2a86091a0d14d5dc9ce954cb6ecddc66e73462f02
+size 80

@@ -1,7 +1,3 @@
-{
-  "status": "retained-exact-source-helper-pass",
-  "positive_negative_controls": 2,
-  "behavioral_mutants": 1,
-  "result": "/caller-work/evidence/final-checks-20261015T074922/legacy-capture-controls/result.json",
-  "result_sha256": "6cd52b4c34c5153353771b5ba0c66bb453baca622183997cf596edbda4cb53bc"
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:6dea7872331b1c464b86f72c529985685275daef5257eb8992603be979291f62
+size 303

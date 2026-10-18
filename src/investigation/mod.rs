@@ -2,9 +2,18 @@
 mod backward_values;
 mod explain;
 mod fault_context;
+#[cfg(feature = "bap")]
+pub(crate) mod frame_connections;
 pub(crate) mod frame_paths;
 #[cfg(feature = "bap")]
 pub(crate) mod frame_structure;
+#[cfg(feature = "bap")]
+pub use frame_connections::{
+    BoundFrameConnections, CondensationEdge, ConnectionExample, ConnectionFrontier,
+    ConnectionLayerStatus, ConnectionReceipt, ConnectionReceipts, ConnectionStop, ContextEdge,
+    ExampleSearchStatus, FRAME_CONNECTION_SCHEMA, FrameConnectionAnalysis, FrameConnectionLimits,
+    FrontierRelation, RepresentedConnection, StructuralComponent, summarize_frame_connections,
+};
 #[cfg(feature = "bap")]
 pub use frame_structure::{
     BoundFrameRecovery, BoundFrameStructure, FRAME_STRUCTURE_PRODUCER, FRAME_STRUCTURE_SCHEMA,

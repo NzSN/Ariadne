@@ -1,1 +1,3 @@
-{"analysisBackend":"bap","cases":[],"completedTraces":0,"coverageSatisfied":false,"engine":"machine-state","error":"register failed (interface_digest_mismatch): interface_digest_mismatch","factoryCalls":0,"gatePassed":true,"initializations":0,"matchedActions":null,"matchedObservations":null,"matchedPairs":null,"mismatch":null,"mode":"wrong-digest","modelMatched":false,"observationsDispatched":0,"portDrops":0,"schema":"ariadne.stage-e-mirrorrust-replay/v1","scope":"generated finite campaign replay; supplied semantics and universal refinement are separate boundaries","semanticDigest":"0000000000000000000000000000000000000000000000000000000000000000","status":"rejected"}
+version https://git-lfs.github.com/spec/v1
+oid sha256:953feefd5908bfc95b30938b88a61f85ce1764d0b3808cca66a2f3c97e33ffd3
+size 677

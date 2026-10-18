@@ -1,7 +1,3 @@
-{"bytes":21448192,"original":"guard-report.json","sha256":"e73eb2e95b5245475127f75da841ece56cefba672ef5a331d340bcf2f57952f2","stored":"guard-report.json.gz"}
-{"bytes":675222,"original":"target-report.json","sha256":"237d828feb43c3294e588dee0d38f8396be56f15f2afccdd77a4417239ba52c4","stored":"target-report.json"}
-{"bytes":15177571,"original":"composition-report.json","sha256":"4ae064933d00dad37cb717987b3eb9f7533d38a8b880a1df2a8d08eb444a8fbb","stored":"composition-report.json.gz"}
-{"bytes":19705423,"original":"prepared-full.json","sha256":"3796b86f2ab88e1cb864c8c601295b458135b1310ab850903ab8f9802bb0cfae","stored":"prepared-full.json.gz"}
-{"bytes":90200245,"original":"minidump-native.json","sha256":"95bf8715287e4b638a7856faf4ed8fca0ece7d262eed28e69b2c68b7d539f79e","stored":"minidump-native.json.gz"}
-{"bytes":90200245,"original":"minidump-rust.json","sha256":"95bf8715287e4b638a7856faf4ed8fca0ece7d262eed28e69b2c68b7d539f79e","stored":"minidump-rust.json.gz"}
-{"bytes":6328,"original":"outcome.json","sha256":"c0a997f68428b64579df7592f53e3ec26879a7cff4310a414074cfe6c3dbe133","stored":"outcome.json"}
+version https://git-lfs.github.com/spec/v1
+oid sha256:1ede6602d66ab38c7ae098566832d3493eaf12abf557a818f74ee04c752b0c2b
+size 1108

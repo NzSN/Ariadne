@@ -1,9 +1,3 @@
-   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-guard-admission-20261014/target/guard-mutations-20261014/omit-candidate-predecessor-replay/sut)
-    Finished `release` profile [optimized] target(s) in 28.08s
-     Running unittests src/lib.rs (/home/nzsn/Repos/Ariadne-guard-admission-20261014/target/guard-mutations-20261014/omit-candidate-predecessor-replay/build/release/deps/ariadne-eac5fde57d2ca545)
-
-running 1 test
-test bap::guard_admission_tests::replay_rejects_omitted_roots_candidate_predecessors_and_tampering ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 91 filtered out; finished in 0.00s
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:fe886c50aa54eaf1e58f2232422c1b74f6f78c1c79ca856d56704bdc7ef92460
+size 637

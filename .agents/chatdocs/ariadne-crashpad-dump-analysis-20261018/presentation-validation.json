@@ -1,0 +1,47 @@
+{
+  "schema": "ariadne-chatdoc-presentation-validation/v1",
+  "recorded_utc": "2026-10-18T06:30:27.111131+00:00",
+  "report": "ariadne-crashpad-dump-analysis-20261018.html",
+  "html_only": true,
+  "static_links_and_resources": {
+    "passed": true,
+    "checked": 149
+  },
+  "byte_identical_evidence_copies": {
+    "passed": true,
+    "checked": 25
+  },
+  "javascript_syntax": {
+    "passed": true,
+    "tool": "node --check"
+  },
+  "control_logic": {
+    "passed": true,
+    "paths_exercised": 9,
+    "environment": "Node VM with simulated DOM",
+    "script": "check-explorer.js",
+    "script_sha256": "81c7f5fcb0315dc71f429afe0b78ada5310e7b1c2bfc8a395991848343e04290"
+  },
+  "repository_doc_check": {
+    "passed": true,
+    "connected_documents": 75,
+    "context_sections": 74,
+    "local_links": 2193
+  },
+  "wslview": {
+    "command": [
+      "wslview",
+      "/home/nzsn/Repos/Ariadne/.agents/chatdocs/ariadne-crashpad-dump-analysis-20261018.html"
+    ],
+    "exit_code": 0,
+    "launch_confirmed": true
+  },
+  "browser_validation": {
+    "exercised": false,
+    "reason": "Kimi browser bridge returned extension_not_connected",
+    "visually_inspected": false
+  },
+  "missing_sources": [],
+  "raw_inputs_archived": false,
+  "raw_input_policy": "Raw dump and executable remain at the linked ignored experiment paths. Exact analysis evidence is archived beside the HTML."
+}

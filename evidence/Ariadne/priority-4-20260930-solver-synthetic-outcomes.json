@@ -1,17 +1,3 @@
-[
-  {
-    "nodes": 128,
-    "status": "complete",
-    "rows": 25
-  },
-  {
-    "nodes": 256,
-    "status": "complete",
-    "rows": 25
-  },
-  {
-    "nodes": 512,
-    "status": "complete",
-    "rows": 25
-  }
-]
+version https://git-lfs.github.com/spec/v1
+oid sha256:1cf684e936ffd0040267489fe12296f8775de155f73697701894bef38d31ba01
+size 207

@@ -1,9 +1,3 @@
-    Finished `test` profile [unoptimized] target(s) in 0.03s
-     Running tests/input/frame_paths.rs (target/request-budget-build/debug/deps/input_frame_paths-8f581fb26eff3929)
-
-running 2 tests
-test frame_path_cli_accepts_above_default_guard_limits_and_binds_full_report ... ok
-test frame_path_cli_native_reference_parity_on_finite_diamond_and_recursion ... ok
-
-test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 10 filtered out; finished in 29.37s
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:bf5a3601aba66acd27b432f2fd813454e236a1bca178d58de21347cf3690db25
+size 459

@@ -1,6 +1,3 @@
-#!/bin/bash
-set -euo pipefail
-external=/mnt/d/ariadne-caller-coverage-20261015
-mkdir -p "$external/inputs"
-tar -xf /mnt/d/ariadne-caller-source-history-20261015.tar -C "$external/inputs"
-chown -R jlc:jlc "$external/inputs"
+version https://git-lfs.github.com/spec/v1
+oid sha256:dcfc90686d72ef8295a5bbeb1481ce6d436bf13ad5fdc385db211b180cfc5f31
+size 223

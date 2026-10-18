@@ -1,20 +1,3 @@
-[
-  {
-    "name": "native-controls",
-    "command": [
-      "python3",
-      "tests/bap/caller_coverage_native_controls.py",
-      "--native-dir",
-      "target/caller-native",
-      "--output",
-      "/home/nzsn/Repos/Ariadne-caller-coverage-20261015/target/native-controls-20261015T072536",
-      "--receipt-dir",
-      "/caller-work/evidence/native-controls-20261015T072536/caller-receipts",
-      "--wire-dir",
-      "/caller-work/evidence/native-controls-20261015T072536/caller-wires",
-      "--mutations"
-    ],
-    "exit_code": 0,
-    "seconds": 16.029343884000014
-  }
-]
+version https://git-lfs.github.com/spec/v1
+oid sha256:a00de7b15e4ded3bb3c61d0eff878719b1261fe9dbacf3cb6873b8a759edef79
+size 578

@@ -1,9 +1,3 @@
-   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-vector-registers-20261013/target/vector-mutations-release-20261013/vector-payload-as-stack-address/sut)
-    Finished `release` profile [optimized] target(s) in 13.53s
-     Running unittests src/lib.rs (/home/nzsn/Repos/Ariadne-vector-registers-20261013/target/vector-mutations-release-20261013/vector-payload-as-stack-address/build/lib-vector_stores_keep_payload_and_address_origins_without_memory_kills/release/deps/ariadne-eac5fde57d2ca545)
-
-running 1 test
-test bap::vector_projection_tests::vector_stores_keep_payload_and_address_origins_without_memory_kills ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 68 filtered out; finished in 0.00s
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:76680eef7dbba9fae7fde2473f57e88c9cd75cc39b851590a360a1a9dce39091
+size 729

@@ -1,9 +1,3 @@
-   Compiling ariadne-analysis v0.1.0 (/home/nzsn/Repos/Ariadne-bap-shift-count-20261014/target/shift-mutations-v2-20261014/truncate-shift-count-to-64-bits/sut)
-    Finished `release` profile [optimized] target(s) in 28.33s
-     Running unittests src/lib.rs (/home/nzsn/Repos/Ariadne-bap-shift-count-20261014/target/shift-mutations-v2-20261014/truncate-shift-count-to-64-bits/build/release/deps/ariadne-eac5fde57d2ca545)
-
-running 1 test
-test bap::shift_projection_tests::full_unsigned_counts_and_boundary_fills_match_the_independent_integer_oracle ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 102 filtered out; finished in 2.94s
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:a0bbcd20f7c888fdadc3359e01c51e28804c2ea06c53dc5b127900f4aa2bf2b8
+size 652

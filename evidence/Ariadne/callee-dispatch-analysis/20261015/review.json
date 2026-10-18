@@ -1,14 +1,3 @@
-{
-  "result": "pass",
-  "scope": "Independent read-only source/artifact review",
-  "checks": [
-    "all three captured payload hashes and lengths",
-    "229 signed relative-offset calculations",
-    "118 slots / 22 raw first targets / 21 mapped targets",
-    "111 slots / 13 second targets",
-    "34 union targets / 31 unattempted starts",
-    "short entry corridor, LIFO predecessor ordering and shared work counter",
-    "loop witness prerequisite and RAX versus RBX index restriction"
-  ],
-  "findings": []
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:65c9f830c1114bad3b70650e2b238c3f5ff525b3b34f276302268189bafebd4b
+size 512

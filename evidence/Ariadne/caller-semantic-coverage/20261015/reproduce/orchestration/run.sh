@@ -1,4 +1,3 @@
-#!/bin/bash
-set -euo pipefail
-BASE=/home/jlc/ariadne-p4-20261010
-exec bwrap --unshare-user --uid 0 --gid 0 --bind "$BASE/rootfs" / --bind "$BASE/work" /work --bind "$BASE/work/Repos" /home/nzsn/Repos --ro-bind "$BASE/work/Repos/Ariadne/target/i5b-dependency-snapshot" /home/nzsn/Repos/Ariadne/target/i5b-dependency-snapshot --ro-bind "$BASE/work/Repos/Ariadne/target/i5b-dependency-snapshot/MirrorRust" /home/nzsn/Repos/MirrorRust --ro-bind /home/jlc/.rustup /opt/rustup --ro-bind /home/jlc/.cargo/bin /opt/cargo-bin --ro-bind /home/jlc/.local/bin/opam /opt/bin/opam --bind "$BASE/work/tmp" /tmp --proc /proc --dev /dev --bind /mnt/d/ariadne-caller-coverage-20261015 /caller-work --bind /mnt/d/ariadne-caller-coverage-20261015/repo-final /home/nzsn/Repos/Ariadne-caller-coverage-20261015 --ro-bind /mnt/d/ariadne-loop-aware-20261015 /loop-baseline --chdir /home/nzsn/Repos/Ariadne-caller-coverage-20261015 --setenv TMPDIR /caller-work/tmp --setenv CARGO_HOME /work/cargo --setenv RUSTUP_HOME /opt/rustup --setenv RUSTUP_TOOLCHAIN stable-x86_64-unknown-linux-gnu --setenv PATH /work/bin:/opt/cargo-bin:/opt/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin --setenv TAR_OPTIONS --no-same-owner --setenv CARGO_BUILD_JOBS 4 --setenv ARIADNE_MIRRORRUST_SNAPSHOT /home/nzsn/Repos/Ariadne/target/i5b-dependency-snapshot --setenv ARIADNE_MIRRORRUST_SNAPSHOT_SHA256 a087ecfb136795d30f6c3861d9e4003f0ed9f457db2b17561f0417551bf97854 -- "$@"
+version https://git-lfs.github.com/spec/v1
+oid sha256:560e85ed0cf5678050603ecd8b6969e5b8ce25cf95f2bfb32cf70bc48a4f4721
+size 1446

@@ -1,4 +1,3 @@
-#!/bin/bash
-set -euo pipefail
-python3 /mnt/d/ariadne-loop-aware-setup-20261015.py
-exec runuser -u jlc -- bash /mnt/d/ariadne-loop-aware-20261015/run.sh python3 /loop-work/early.py
+version https://git-lfs.github.com/spec/v1
+oid sha256:d8f187718e3fece009573883de9089e4c8bbabd764965bcc04843b9420ff7944
+size 180

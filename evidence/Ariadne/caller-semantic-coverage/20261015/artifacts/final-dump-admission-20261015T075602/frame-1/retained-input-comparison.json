@@ -1,33 +1,3 @@
-{
-  "all_equal": true,
-  "components": [
-    {
-      "component": "normalized",
-      "current_sha256": "6b5afebea31cff34103ddb38e4bf795ce63660eb9eb375804aff8a340a4bed22",
-      "equal": true,
-      "retained_sha256": "6b5afebea31cff34103ddb38e4bf795ce63660eb9eb375804aff8a340a4bed22"
-    },
-    {
-      "component": "guard-report",
-      "current_sha256": "119616f72f2cb84074b89375405f58bda53609918768babf01b941103fea1b71",
-      "equal": true,
-      "retained_sha256": "119616f72f2cb84074b89375405f58bda53609918768babf01b941103fea1b71"
-    },
-    {
-      "component": "target-report",
-      "current_sha256": "4c316f2898e150819cfb828f6c769d61b734e3d71237583a7b71c55ae176775a",
-      "equal": true,
-      "retained_sha256": "4c316f2898e150819cfb828f6c769d61b734e3d71237583a7b71c55ae176775a"
-    },
-    {
-      "component": "composition-report",
-      "current_sha256": "cf2c645674dc7e9453146bfbff1d2d6d2927c44fe8c6fee04a070bcad75d711d",
-      "equal": true,
-      "retained_sha256": "cf2c645674dc7e9453146bfbff1d2d6d2927c44fe8c6fee04a070bcad75d711d"
-    }
-  ],
-  "frame": 1,
-  "hash_codec": "SHA256 of serde_json Value compact serialization; exact JSON value equality independently required",
-  "retained_run": "/caller-work/evidence/dump-20261015T073143",
-  "schema": "ariadne.final-helper-retained-input-comparison/v1"
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:29fe2e46165e977e84d559b408624f42defda5263681bba7aea412897699623d
+size 1323

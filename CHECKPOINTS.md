@@ -17,6 +17,33 @@
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
+## 2026-10-18 — Stage 5.2 represented frame connections
+
+The [connection consumer](docs/Ariadne/investigation-design.md#structural-corridors-and-cycle-summaries)
+and [FC0–FC6 ledger](.agents/plans/frame-connections.md) add the privately bound
+`BoundFrameStructure` consumer, activation-qualified graph/context/frontiers,
+independent corridor/SCC/example work, iterative SCC condensation and bounded
+BFS/edge-detour examples. The opt-in `--frame-connections N:M` route publishes
+strict self-contained `ariadne.frame-connections/v1` JSON/text/DOT and replays
+all assessment claims while preserving the original source publication.
+
+[Fresh local evidence](evidence/Ariadne/frame-connections/20261018/README.md)
+records 305 default, 57 core-only and 70 reports-only passing tests, with
+111/22/22 ignored respectively; format/Clippy/layout/navigation, 13 finite model
+configurations, 516 independent graph expectations and 12 compiled mutations
+pass. Selected live conditional/stop, saved replay, legacy source/path report
+and native-default compatibility checks pass separately. Remaining ignored
+tests are not implied to have run.
+
+Both independently checked captures yield complete represented corridors/SCCs
+and one shortest example under NP=2. The original 10,367-node source has a
+23-node corridor, 3,143 components (33 cyclic) and a 22-edge example. The
+controlled recursive source has 176 nodes, a 140-node corridor, 167 components
+(three cyclic) and a 133-edge example. All source gaps and premises survive.
+These are structural witnesses; feasibility, history and writer exclusion are
+unassessed. The remote launcher/SSH configuration are unavailable in this
+session, so remote qualification remains open. No release, S6 or F4 gate closes.
+
 ## 2026-10-16 — Explicit conditional MOVAPS alignment hypotheses
 
 The [alignment-hypothesis extension](docs/Ariadne/investigation-design.md#explicit-alignment-hypotheses)

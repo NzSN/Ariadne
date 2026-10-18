@@ -1,8 +1,3 @@
-{
-  "native_rust_explanation_equal": true,
-  "snapshot_sha256": "5fea4ca614706fe0040ed3231efee0edf9ce4004a51d902bb581025b48bade08",
-  "query_id": "597c609f87a480b74bd8968096b9fc2364e355df1caad58c6af6d70b944eb44e",
-  "status": "partial",
-  "truncated": false,
-  "diagnostic_binary_sha256": "484dcc00a3e017dabaf727f69211eab588b649ad20873a9cb5f0b92da657249c"
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:b825c467479ef3e6f989ba546a61d0f7b5d7beaae8d54de8879d9d7d76ef2335
+size 358

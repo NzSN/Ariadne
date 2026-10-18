@@ -1,13 +1,3 @@
-{
-  "exit_code": 1,
-  "sources_unchanged": true,
-  "changed_sources": [],
-  "feedback_present": true,
-  "selected_barriers_closed": false,
-  "selected_barriers": [
-    "0x00007ff7744035c9",
-    "0x00007ff77440b0e0",
-    "0x00007ff77440b30d",
-    "0x00007ff77440b753"
-  ]
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:f61ec234d15c43344aed9ee231978a0aa34c3dc287967e724c16a680d7e78f38
+size 273

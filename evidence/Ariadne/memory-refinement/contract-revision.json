@@ -1,9 +1,3 @@
-{
-  "schema": "ariadne.memory-refinement-contract-revision/v1",
-  "originalFreezeSha256": "72c579b3a43760bc108faffd34069f59a291b018ca457fdc4bc6f7eebac7ffb0",
-  "modelPreviousSha256": "5a8c31888a077d77b3a47db67ec8cbb00d20b8b0b4ebc9ea4335659a6a0913fd",
-  "modelCurrentSha256": "23385aefa0b143ba05aa22d2dc1106a46521979bd2258e8f99060eaf740f4721",
-  "change": "Move Int annotation onto checked variable; mathematical rules unchanged",
-  "oracleUnchanged": true,
-  "modelChecked": false
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:6d60623482c82e8ad0620c1b08a9917388115a340b1fb2dcfd3dfcbe3e69f129
+size 483

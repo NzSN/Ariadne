@@ -15,9 +15,9 @@ use std::path::Path;
 
 // This host input cap applies before parsing a policy; the file cannot increase
 // the resources required to read and decode itself.
-const MAX_POLICY_BYTES: u64 = 64 * 1024;
+pub(super) const MAX_POLICY_BYTES: u64 = 64 * 1024;
 
-fn read_json(path: &Path, max_bytes: u64) -> Result<serde_json::Value, Box<dyn Error>> {
+pub(super) fn read_json(path: &Path, max_bytes: u64) -> Result<serde_json::Value, Box<dyn Error>> {
     let mut bytes = Vec::new();
     fs::File::open(path)?
         .take(max_bytes + 1)
@@ -61,7 +61,9 @@ fn check_override<T: serde::Serialize>(
     Ok(())
 }
 
-pub(super) fn run(args: &Args) -> Result<(), Box<dyn Error>> {
+pub(super) fn prepare(
+    args: &Args,
+) -> Result<ariadne::investigation::BoundFrameStructure, Box<dyn Error>> {
     let (n, m) = args
         .structure_pair
         .ok_or_else(|| invalid("missing structural frame question"))?;
@@ -232,6 +234,11 @@ pub(super) fn run(args: &Args) -> Result<(), Box<dyn Error>> {
         diagnostics,
         policy.clone(),
     )?;
+    Ok(bound)
+}
+pub(super) fn run(args: &Args) -> Result<(), Box<dyn Error>> {
+    let bound = prepare(args)?;
+    let policy = bound.limits();
     if let Some(directory) = &args.output_dir {
         let files = vec![
             ("frame-structure.json", report::render_json(&bound)?),

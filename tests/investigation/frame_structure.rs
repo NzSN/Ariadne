@@ -8,7 +8,7 @@ use crate::investigation::{
 use crate::{AnalysisRequest, InputKind, Instruction, InstructionKind};
 use std::collections::BTreeMap;
 use std::path::PathBuf;
-fn fixture() -> (CapturedFrameChain, BoundFrameRecovery) {
+pub(crate) fn fixture() -> (CapturedFrameChain, BoundFrameRecovery) {
     let snapshot = crate::input::FileSnapshot::open_minidump(
         PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("tests/input/fixtures/guard-frame.dmp"),
         crate::input::OpenLimits::default(),
@@ -1313,4 +1313,83 @@ fn certified_complete_terminal_stops_require_their_exact_source_and_decode_recei
             );
         }
     }
+}
+
+/// Internal projection fixture only. Deliberately bypasses source admission so
+/// graph-policy tests do not need a lifter; never published/replayed as evidence.
+pub(crate) fn connection_projection_fixture(admitted: bool) -> BoundFrameStructure {
+    let (chain, recovery) = fixture();
+    let mut bound = bind_frame_structure(
+        chain,
+        FrameStructureQuestion {
+            from_frame: 0,
+            to_frame: 0,
+        },
+        vec![(0, recovery)],
+        vec![],
+        FrameStructureLimits::default(),
+    )
+    .unwrap();
+    let mut older = bound.chain.frames[0].clone();
+    older.index = 1;
+    bound.chain.frames = vec![bound.chain.frames[0].clone(), older];
+    for frame in &mut bound.chain.frames {
+        frame.function_begin = Some(0);
+        frame.function_end = Some(1000);
+    }
+    bound.question = FrameStructureQuestion {
+        from_frame: 1,
+        to_frame: 0,
+    };
+    let template = bound.recoveries[0].1.context.sites[0].clone();
+    let node = |frame, site| super::super::FramePathNode { frame, site };
+    let mut m = bound.frames[0].clone();
+    m.nodes = [10, 20, 30, 40, 2000]
+        .into_iter()
+        .map(|va| {
+            let mut site = template.clone();
+            site.va = va;
+            site.bytes_hex = "90".into();
+            site
+        })
+        .collect();
+    m.edges = vec![
+        (10, 20, super::super::FramePathEdgeKind::Taken),
+        (10, 30, super::super::FramePathEdgeKind::Fallthrough),
+        (20, 40, super::super::FramePathEdgeKind::Next),
+        (20, 2000, super::super::FramePathEdgeKind::Jump),
+        (20, 30, super::super::FramePathEdgeKind::Call),
+    ]
+    .into_iter()
+    .map(|(a, b, kind)| FrameStructureEdge {
+        src: node(0, a),
+        dst: node(0, b),
+        kind,
+    })
+    .collect();
+    m.gaps = vec![FrameStructureGap {
+        kind: FrameStructureGapKind::UnknownIndirectTarget,
+        site: 30,
+        destination: None,
+    }];
+    let mut parent = m.clone();
+    parent.frame = 1;
+    parent.nodes.truncate(2);
+    parent.gaps.clear();
+    parent.edges = vec![FrameStructureEdge {
+        src: node(1, 10),
+        dst: node(1, 20),
+        kind: super::super::FramePathEdgeKind::Summary,
+    }];
+    bound.frames = vec![m, parent];
+    bound.links = vec![FrameStructureLink {
+        conditional_on: vec![],
+        caller: 1,
+        child: 0,
+        call_site: Some(10),
+        child_entry: Some(10),
+        continuation: 15,
+        admitted,
+    }];
+    bound
 }

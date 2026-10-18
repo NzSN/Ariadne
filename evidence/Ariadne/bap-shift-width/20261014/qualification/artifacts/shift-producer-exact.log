@@ -1,8 +1,3 @@
-    Finished `test` profile [unoptimized] target(s) in 0.59s
-     Running tests/bap/native.rs (target/shift-build/debug/deps/bap_native-170527f041c84234)
-
-running 1 test
-test vector_producer_tracks_coarse_state_and_retains_alignment_refusal ... ok
-
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 8 filtered out; finished in 2.54s
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:e2ee45eacdf0405cf7d05a182344896b3e891d7b002575eb4a39c2bb2e3d8e38
+size 344

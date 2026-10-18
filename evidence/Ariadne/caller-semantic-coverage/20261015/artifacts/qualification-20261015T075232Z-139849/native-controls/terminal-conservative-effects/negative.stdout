@@ -1,1 +1,3 @@
-[{"case":"wire-terminal-narrowed-uses-int3","expected":false,"accepted":true,"passed":false,"error":null}]
+version https://git-lfs.github.com/spec/v1
+oid sha256:e9c9d0385ff81b13d855193ef6d15c3440424cd9c07b9c104a55a94d90959f42
+size 107

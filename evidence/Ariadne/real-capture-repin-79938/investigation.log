@@ -1,19 +1,3 @@
-Investigation acceptance artifacts: /tmp/ariadne-investigation-acceptance-ckp40l9_
-qualification-regressions : PASS
-root-tests : PASS
-root-format : PASS
-root-clippy : PASS
-module-tests : PASS
-module-format : PASS
-module-clippy : PASS
-producer-addresses : PASS
-native-cli-questions : PASS
-input-format : PASS
-input-clippy : PASS
-report-tests : PASS
-report-format : PASS
-report-clippy : PASS
-mutation : PASS
-workload : PASS
-stage-e : PASS
-Report: /tmp/ariadne-investigation-acceptance-ckp40l9_/report.json
+version https://git-lfs.github.com/spec/v1
+oid sha256:3d5ed6317199da8ff4a0086299973c53770fa5fa3a984702c4d1471c16d9f274
+size 504

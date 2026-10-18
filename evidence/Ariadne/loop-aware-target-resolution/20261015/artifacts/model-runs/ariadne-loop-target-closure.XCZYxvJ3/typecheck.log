@@ -1,15 +1,3 @@
-# Usage statistics is OFF. We care about your privacy.
-# If you want to help our project, consider enabling statistics with config --enable-stats=true.
-
-Output directory: /loop-work/tmp/ariadne-loop-target-closure.XCZYxvJ3/typecheck/AriadneLoopTargetClosure.tla/2026-10-15T05-00-59_6582793495386442452
-# APALACHE version: 0.58.0 | build: 711dce6                       I@05:00:59.221
-Type checking AriadneLoopTargetClosure.tla                        I@05:00:59.228
-PASS #0: SanyParser                                               I@05:00:59.313
-PASS #1: TypeCheckerSnowcat                                       I@05:00:59.520
- > Running Snowcat .::.                                           I@05:00:59.521
- > Your types are purrfect!                                       I@05:00:59.877
- > All expressions are typed                                      I@05:00:59.878
-Type checker [OK]                                                 I@05:00:59.879
-It took me 0 days  0 hours  0 min  0 sec                          I@05:00:59.879
-Total time: 0.656 sec                                             I@05:00:59.879
-EXITCODE: OK
+version https://git-lfs.github.com/spec/v1
+oid sha256:39793077e7cd8ddf61cfae5f6a408bae426c857e1a99ea2ff2b215509416b11a
+size 1125

@@ -1,1 +1,3 @@
-{"cases": 71, "families": ["flow", "movaps", "receipt", "terminal"], "generated_ud1_extents": 12752, "truncated_ud1_extents": 8944, "checked": true}
+version https://git-lfs.github.com/spec/v1
+oid sha256:34ebdc691391930bbde34110aacf01af244ac26d6905fa552d6897533826d7fa
+size 149

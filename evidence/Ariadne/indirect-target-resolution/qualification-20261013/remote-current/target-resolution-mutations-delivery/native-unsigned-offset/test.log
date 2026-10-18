@@ -1,18 +1,3 @@
-    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.10s
-     Running unittests src/lib.rs (target/debug/deps/ariadne-30a1fc32cccfc7e4)
-
-running 1 test
-
-thread 'input::materialize::target_resolution_tests::actual_bap_lifts_and_native_rust_results_agree_on_both_capture_platforms' (47998) panicked at src/input/../../tests/input/target_resolution_unit.rs:320:10:
-called `Result::unwrap()` on an `Err` value: Custom { kind: InvalidData, error: "core partial frame/EOF" }
-note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
-test input::materialize::target_resolution_tests::actual_bap_lifts_and_native_rust_results_agree_on_both_capture_platforms ... FAILED
-
-failures:
-
-failures:
-    input::materialize::target_resolution_tests::actual_bap_lifts_and_native_rust_results_agree_on_both_capture_platforms
-
-test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 50 filtered out; finished in 6.12s
-
-error: test failed, to rerun pass `--lib`
+version https://git-lfs.github.com/spec/v1
+oid sha256:42a0c487ee771902e73c1e5a1ff5771c856cf063a9a7b4d4f4d5290cd6fd5f52
+size 984
