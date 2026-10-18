@@ -1,7 +1,7 @@
 //! Evidence-bound domain explanations above the normalized analysis result.
 mod backward_values;
 mod explain;
-mod fault_context;
+pub(crate) mod fault_context;
 #[cfg(feature = "bap")]
 pub(crate) mod frame_connections;
 pub(crate) mod frame_paths;
@@ -256,3 +256,15 @@ pub(crate) fn id(kind: &str, scope: &str, value: &impl serde::Serialize) -> Stri
 #[cfg(all(test, feature = "input", feature = "bap"))]
 #[path = "../../tests/investigation/composition_unit.rs"]
 mod composition_unit;
+
+#[cfg(feature = "bap")]
+pub(crate) mod frame_question;
+#[cfg(feature = "bap")]
+pub use frame_question::{
+    BoundFrameQuestion, FRAME_QUESTION_REQUEST_SCHEMA, FRAME_QUESTION_SCHEMA, FrameQuestion,
+    FrameQuestionAssessment, FrameQuestionEvidence, FrameQuestionKind, FrameQuestionLimits,
+    FrameQuestionRequest, FrameQuestionSource, ModelWitness, QuestionLayerStatus, QuestionLayers,
+    QuestionMoment, QuestionObligation, QuestionOrigin, QuestionPoint, QuestionReceipt,
+    QuestionResolution, QuestionRevision, QuestionValue, QuestionVerdict, ValueConstraint,
+    investigate_frame_question,
+};

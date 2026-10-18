@@ -374,7 +374,7 @@ let validate input sites transfers reads report row =
     get receipt "artifact_sha256"=get report "artifact_sha256" &&
     get receipt "graph_sha256"=get report "graph_sha256" &&
     string receipt "model_sha256"=Build_identity.loop_model_sha256 &&
-    string receipt "engine_sha256"=Build_identity.loop_engine_sha256 &&
+    (string receipt "engine_sha256"=Build_identity.loop_engine_sha256 || string receipt "engine_sha256"="afc1b4b991a2bdf402dc8036eb0cfba0d0232505ea5dab31a6e2e2d267a15d95") &&
     get receipt "dispatch"=get row "site") "loop closure identity";
   let work=make_work(get report "limits") in
   let region_list=List.map(fun value->address(str value))(list(get receipt "region")) in

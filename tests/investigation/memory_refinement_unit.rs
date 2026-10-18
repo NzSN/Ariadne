@@ -491,3 +491,43 @@ fn partial_overlap_is_retained_and_recovery_gaps_block_equal_base_exclusion() {
             .all(|c| c.disposition != "excluded_within_scope")
     );
 }
+
+#[test]
+fn all_store_accesses_must_be_disjoint_before_static_exclusion() {
+    let (bound, load) = fixture(true, false, true);
+    let mut input = bound.input(question(load)).unwrap();
+    let store = 0x1000;
+    let bil:Vec<Stmt>=serde_json::from_value(json!([1000u64,0x2000].into_iter().map(|offset|json!({"kind":"move","var":variable("mem",0,"mem"),"value":{"kind":"store","width":64,"mem":{"kind":"var","var":variable("mem",0,"mem")},"addr":integer(offset),"value":expression_var("RAX")}})).collect::<Vec<_>>())).unwrap();
+    let site = input.sites.iter_mut().find(|s| s.va == store).unwrap();
+    let receipt = crate::bap::refinement::extract(&bil, store, site.bytes_hex.clone()).unwrap();
+    site.ast_sha256 = Some(receipt.ast_sha256.clone());
+    site.accesses = crate::bap::address::extract(&bil, store)
+        .iter()
+        .map(AddressUse::from)
+        .collect();
+    *input.receipts.iter_mut().find(|r| r.site == store).unwrap() = receipt;
+    let full = run(input.clone(), MemoryRefinementLimits::default()).unwrap();
+    let c = full
+        .candidates
+        .iter()
+        .find(|c| c.origin == OriginKind::Instruction)
+        .unwrap();
+    assert_eq!(c.pairs.len(), 2);
+    assert_eq!(c.pairs[0].relation, "disjoint");
+    assert_eq!(c.pairs[1].relation, "overlapping");
+    assert_ne!(c.disposition, "excluded_within_scope");
+    let partial = run(
+        input,
+        MemoryRefinementLimits {
+            max_pair_checks: 1,
+            ..Default::default()
+        },
+    )
+    .unwrap();
+    assert!(
+        partial
+            .candidates
+            .iter()
+            .all(|c| c.disposition != "excluded_within_scope")
+    );
+}

@@ -1207,7 +1207,8 @@ pub(super) fn validate(
         || receipt.artifact_sha256 != report.artifact_sha256
         || receipt.graph_sha256 != report.graph_sha256
         || receipt.model_sha256 != model_identity()
-        || receipt.engine_sha256 != loop_engine_identity()
+        || (receipt.engine_sha256 != loop_engine_identity()
+            && receipt.engine_sha256 != LEGACY_QUESTION_LOOP_ENGINE)
         || receipt.dispatch != row.site
     {
         return Err(invalid("loop closure identity"));

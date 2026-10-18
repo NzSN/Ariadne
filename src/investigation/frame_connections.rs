@@ -278,7 +278,10 @@ pub(crate) fn digest<T: Serialize>(value: &T, cap: usize) -> Result<String, Erro
     serde_json::to_writer(&mut sink, value)?;
     Ok(format!("{:x}", sink.hash.finalize()))
 }
-fn source_fingerprint(source: &BoundFrameStructure, cap: usize) -> Result<String, Error> {
+pub(crate) fn source_fingerprint(
+    source: &BoundFrameStructure,
+    cap: usize,
+) -> Result<String, Error> {
     // Borrow payloads: hashing cannot allocate a second copy of captured BIL.
     let recoveries: Vec<_> = source
         .recoveries()

@@ -27,6 +27,10 @@ The [dated qualification record](../../evidence/Ariadne/frame-structure/20261016
 binds the exercised sources, finite controls, final dump and saved replay to
 their declared qualification scope.
 
+The [complete section-5 program](frame-question-investigation.md) is the
+successor integration: it reuses this structural source without changing SF
+acceptance.
+
 **What remains unresolved.** No required Stage 5.1 work remains within the
 recorded Windows AMD64 physical-frame/E8-call profile. Preparation checkpoints,
 SCC summaries, path enumeration, new target/loop rules, backward values and

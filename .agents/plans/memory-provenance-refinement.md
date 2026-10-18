@@ -4,8 +4,9 @@
 
 **Status.** Source implementation added on 2026-10-11 from `8007236`, with
 independent expectations, root/source checks and two finite pinned-runtime
-probes. Model checking, real-code mutations and full Scanner qualification
-remain pending; full acceptance is not granted.
+probes. The section-5 integration now adds local model checking and compiled
+component controls; remote model qualification, the complete dedicated mutation
+campaign and full Scanner qualification remain pending. Full acceptance is not granted.
 
 **Why this document exists.** The [design](../../docs/Ariadne/memory-provenance-refinement.md)
 defines bounded candidate-writer assessment and per-value backward inference.
@@ -17,6 +18,8 @@ the complete selected design. Existing effects, original explanations, query
 roots and historical evidence remain the compatibility baseline.
 
 **Where to go next.**
+
+- [Section-5 frame integration](frame-question-investigation.md) — implemented P2/P5 frame/callee binding and local dependencies; M4 remains separate.
 
 - [Design and implementation details](../../docs/Ariadne/memory-provenance-refinement.md#implementation-details)
   — input/output contracts, precision outcomes and source ownership.
@@ -40,7 +43,7 @@ receipts; remote qualification must bind the revised model's own hashes.
 
 | Stage | Work | Acceptance |
 | --- | --- | --- |
-| M0 — independent contract | 784 range / 1,280 inverse expectations frozen; TLA+ source and remote check command specified. | Oracle passes. Remote Apalache/TLC checks remain unexercised. |
+| M0 — independent contract | 784 range / 1,280 inverse expectations frozen; TLA+ source and remote check command specified. | Oracle and 2026-10-18 local Apalache/TLC checks pass; a sequence type annotation resolves the initial local typecheck failure. Remote checks remain unexercised. |
 | M1 — symbolic assessment | Source implemented with full candidate coverage, bounded constant/common-base comparisons and immutable witnesses. | Finite oracle and source controls pass; broader qualification is M4. |
 | M2 — transfers and backward values | Opt-in canonical BIL sidecars, receipt validation, exact/constrained/unknown scalar rules and path-scoped worklist implemented. | Source controls and captured RBX/RCX seed probe pass; no general joint-state or loop-instance inference. |
 | M3 — product and reporting | Separate strict v1 codec, recomputation, JSON/text/DOT and explicit CLI mode implemented. | Finite probe preserves original JSON bytes and native/Rust assessments agree on one controlled capture. |

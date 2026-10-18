@@ -7,7 +7,8 @@
 bounded scalar predecessor inference, a strict separate report and CLI mode.
 The original source inspection used `53fe1ff` and the retained Scanner record.
 The independent oracle is frozen; source/root checks and small pinned-runtime
-probes pass. Remote model checking, real-code mutations and the full Scanner
+probes pass. The [2026-10-18 section-5 record](../../evidence/Ariadne/frame-question/20261018/README.md)
+adds local model checking and integration mutation controls. Remote model checking, the complete dedicated mutation campaign and the full Scanner
 campaign remain pending, so the complete design is not yet qualified.
 
 **Why this document exists.** The [Scanner resume record](bap-analysis-core-design.md#admission-resume)
@@ -30,6 +31,10 @@ proposed types, algorithms, limits and report validation.
 - [Active specification synchronization](../../.agents/plans/specification-sync.md) —
   current finite scalar/alias model and its separate remote-check boundary.
 
+- [Question-directed frame integration](frame-question-investigation-design.md)
+  and [section-5 program](../../.agents/plans/frame-question-investigation.md) —
+  implemented completed-callee import and local fault-dependency composition;
+  preserves this document's rules and independent M4 gate.
 - [Implementation plan](../../.agents/plans/memory-provenance-refinement.md) — M0–M4
   contract, symbolic assessment, backward values, product and qualification.
 
@@ -631,3 +636,20 @@ is a prerequisite failure, not a semantic pass. Restoring the exact accepted
 binary from sealed evidence allowed the finite probe without rebuilding the SDK.
 These small checks do not qualify the full Scanner workload or replace the
 pending model/mutation campaign. The execution ledger preserves that boundary.
+
+## Planned frame-question integration
+
+The [section-5 design](frame-question-investigation-design.md#stage-54-local-dependencies-and-candidate-writers)
+and [P0–P10 program](../../.agents/plans/frame-question-investigation.md) reuse
+this module for item 5.4. The proposed coordinator adds exact frame/source
+binding, compatible completed-callee import and independent local value work
+without requiring completed caller dataflow. It does not relax memory-v1's
+completed-origin universe or promote a decoded memory table into a complete
+analysis certificate.
+
+All origin candidates, entry memory, unknown effects and relevant interference
+alternatives remain available. Exclusion still needs all-access/all-instance
+coverage within its declared scope. A sample route, same register name or
+crash-time memory value cannot replace that evidence. Existing M4/model/
+mutation/Scanner clauses remain pending until their own source-bound campaigns
+pass; writing the integration design supplies no new qualification.

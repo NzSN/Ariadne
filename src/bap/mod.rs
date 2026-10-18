@@ -46,3 +46,5 @@ pub type Error = Box<dyn std::error::Error>;
 fn invalid(message: impl Into<String>) -> Error {
     std::io::Error::new(std::io::ErrorKind::InvalidData, message.into()).into()
 }
+
+pub(crate) mod work_schedule;

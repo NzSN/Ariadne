@@ -107,6 +107,7 @@ PlainConstraints ==
   {f \in {Fact("constrained",m,v,<<>>) : m \in 1..14, v \in Values}:
     And(f.value,f.mask) = f.value}
 \* Directed bijective chains exercise retained constraints and the cap boundary.
+\* @type: Set(Seq($memoryTransfer));
 Chains == {<<Transfer("add",1)>>, <<Transfer("sub",15)>>,
            <<Transfer("add",1),Transfer("sub",15)>>}
 ComposedConstraints ==

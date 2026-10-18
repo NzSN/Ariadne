@@ -61,9 +61,9 @@ fn check_override<T: serde::Serialize>(
     Ok(())
 }
 
-pub(super) fn prepare(
+pub(super) fn prepare_with_snapshot(
     args: &Args,
-) -> Result<ariadne::investigation::BoundFrameStructure, Box<dyn Error>> {
+) -> Result<(FileSnapshot, ariadne::investigation::BoundFrameStructure), Box<dyn Error>> {
     let (n, m) = args
         .structure_pair
         .ok_or_else(|| invalid("missing structural frame question"))?;
@@ -234,7 +234,12 @@ pub(super) fn prepare(
         diagnostics,
         policy.clone(),
     )?;
-    Ok(bound)
+    Ok((snapshot, bound))
+}
+pub(super) fn prepare(
+    args: &Args,
+) -> Result<ariadne::investigation::BoundFrameStructure, Box<dyn Error>> {
+    Ok(prepare_with_snapshot(args)?.1)
 }
 pub(super) fn run(args: &Args) -> Result<(), Box<dyn Error>> {
     let bound = prepare(args)?;

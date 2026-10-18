@@ -178,6 +178,56 @@ impl FileSnapshot {
         guard_limits: crate::bap::guard_admission::Limits,
         target_limits: Option<crate::bap::target_resolution::Limits>,
     ) -> Result<FilePreparedAnalysis, Error> {
+        self.prepare_frame_structure_inner(
+            chain,
+            index,
+            entry,
+            parent,
+            setup,
+            assume_windows_call_entry,
+            guard_limits,
+            target_limits,
+            None,
+        )
+    }
+    #[allow(clippy::too_many_arguments)]
+    pub(crate) fn prepare_frame_structure_question(
+        &self,
+        chain: &CapturedFrameChain,
+        index: usize,
+        entry: u64,
+        parent: Option<&BoundFrameRecovery>,
+        setup: &FramePreparation<'_>,
+        assume_windows_call_entry: bool,
+        guard_limits: crate::bap::guard_admission::Limits,
+        target_limits: crate::bap::target_resolution::Limits,
+        schedule: crate::bap::target_resolution::QuestionTargetSchedule,
+    ) -> Result<FilePreparedAnalysis, Error> {
+        self.prepare_frame_structure_inner(
+            chain,
+            index,
+            entry,
+            parent,
+            setup,
+            assume_windows_call_entry,
+            guard_limits,
+            Some(target_limits),
+            Some(schedule),
+        )
+    }
+    #[allow(clippy::too_many_arguments)]
+    fn prepare_frame_structure_inner(
+        &self,
+        chain: &CapturedFrameChain,
+        index: usize,
+        entry: u64,
+        parent: Option<&BoundFrameRecovery>,
+        setup: &FramePreparation<'_>,
+        assume_windows_call_entry: bool,
+        guard_limits: crate::bap::guard_admission::Limits,
+        target_limits: Option<crate::bap::target_resolution::Limits>,
+        schedule: Option<crate::bap::target_resolution::QuestionTargetSchedule>,
+    ) -> Result<FilePreparedAnalysis, Error> {
         use crate::bap::guard_admission as guard;
         if self.metadata.platform != super::Platform::Windows {
             return Err(invalid(
@@ -256,25 +306,38 @@ impl FileSnapshot {
             query_scope_sha256,
             producer: None,
         };
-        Ok(if let Some(target_limits) = target_limits {
-            self.prepare_bap_guarded_targets(
-                &query,
-                setup.decoder,
-                setup.config,
-                setup.options,
-                setup.limits.clone(),
-                guard,
-                target_limits,
-            )?
-        } else {
-            self.prepare_bap_guarded(
-                &query,
-                setup.decoder,
-                setup.config,
-                setup.options,
-                setup.limits.clone(),
-                guard,
-            )?
-        })
+        Ok(
+            if let (Some(target_limits), Some(schedule)) = (target_limits.as_ref(), schedule) {
+                self.prepare_bap_question_targets(
+                    &query,
+                    setup.decoder,
+                    setup.config,
+                    setup.options,
+                    setup.limits.clone(),
+                    guard,
+                    target_limits.clone(),
+                    schedule,
+                )?
+            } else if let Some(target_limits) = target_limits {
+                self.prepare_bap_guarded_targets(
+                    &query,
+                    setup.decoder,
+                    setup.config,
+                    setup.options,
+                    setup.limits.clone(),
+                    guard,
+                    target_limits,
+                )?
+            } else {
+                self.prepare_bap_guarded(
+                    &query,
+                    setup.decoder,
+                    setup.config,
+                    setup.options,
+                    setup.limits.clone(),
+                    guard,
+                )?
+            },
+        )
     }
 }

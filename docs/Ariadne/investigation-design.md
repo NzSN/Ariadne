@@ -26,10 +26,14 @@ a separate structural report before dataflow. Its
 [2026-10-16 qualification](../../evidence/Ariadne/frame-structure/20261016/README.md)
 completes SF0–SF6 within the finite Windows AMD64 captured-frame/E8-call scope;
 caller completion and full frame-path acceptance retain separate gates.
-The next selected focus is the proposed
-[Stage 5.2 plan](../../.agents/plans/frame-connections.md): represented corridors,
-SCC summaries and bounded examples over the validated structural source.
-Its implementation and qualification are pending.
+[Stage 5.2](../../.agents/plans/frame-connections.md) implements represented
+corridors, SCC summaries and bounded examples over the validated structural
+source; its local validation and capture applications are recorded separately
+from open remote qualification. The
+[complete section-5 design](frame-question-investigation-design.md) now covers
+all four recommendation items, with question-directed resolution and local
+fault-dependency integration proposed under its
+[P0–P10 program](../../.agents/plans/frame-question-investigation.md).
 
 **Why this document exists.** The [real-capture slice](file-reader-design.md#historical-controlled-chromium-capture)
 provides possible origins but leaves their explanation to the investigator.
@@ -61,8 +65,12 @@ and qualification preserve alternatives and missing premises. The frame-path que
   policy and [source-bound qualification](../../evidence/Ariadne/frame-structure/20261016/README.md).
   No dataflow or path enumeration is performed.
 - [Frame connections plan: Stage 5.2](../../.agents/plans/frame-connections.md)
-  — proposed corridor/SCC/example consumer of the Stage 5.1 artifact; FC0–FC6
-  remain pending.
+  — implemented corridor/SCC/example consumer; local validation passes and FC5
+  remote qualification remains open.
+- [Question-directed frame investigation](frame-question-investigation-design.md)
+  and [complete section-5 program](../../.agents/plans/frame-question-investigation.md)
+  — all four recommendation items, existing source/connection reuse and proposed
+  question-directed resolution plus local dependency/writer integration.
 - [Caller semantic-coverage design](caller-semantic-coverage-design.md)
   — later terminal/load admission and the remaining completed-caller dataflow gate.
 - [Justified branch pruning design](justified-branch-pruning-design.md) — checked
@@ -374,6 +382,23 @@ cannot establish full Windows acceptance.
 This roadmap adds domain questions above existing analyses. It does not claim
 automatic root-cause proof, backward execution reconstruction or unbounded
 cross-thread reasoning. Those require separately supported evidence and models.
+
+## Complete section-5 investigation program
+
+The [question-directed frame design](frame-question-investigation-design.md)
+and [program plan](../../.agents/plans/frame-question-investigation.md) cover
+all four items of the 2026-10-16 recommendation. This document remains the
+canonical owner of the existing structural source and connection contracts.
+The new design owns their composition with a bounded investigator question,
+fair semantic work, scoped feasibility and local fault dependencies. The
+[memory-refinement document](memory-provenance-refinement.md) retains its own
+value/alias rules and pending M4 qualification.
+
+Items 5.1/5.2 are reused with their recorded qualification boundaries. New
+5.3/5.4 integration is implemented with [separate local evidence](../../evidence/Ariadne/frame-question/20261018/README.md): one question does not require
+completed caller dataflow, unknown continuations and candidate writers survive,
+and each result layer keeps its own status. Execution-recording ingestion from
+recommendation section 6 is outside this program.
 
 ## Structural frame report before dataflow
 

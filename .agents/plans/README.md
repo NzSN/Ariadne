@@ -7,6 +7,9 @@ Stage 5.1 is complete within its separate structural frame-report scope;
 the dated ledger retains exact source/tool/corpus qualification.
 Stage 5.2 corridor/SCC/example implementation and local validation pass;
 its FC0–FC6 plan retains the open remote qualification gate.
+The complete section-5 integration design and P0–P10 program now cover all
+four recommendation items; the 5.3/5.4 implementation and local qualification
+pass while remote P9/FC5/M4 gates remain open.
 Thirty-one completed or superseded records live in `completed/`. Archiving
 preserves each record's original scope and does not refresh its qualification.
 
@@ -34,6 +37,7 @@ universal-proof clauses. A partial result is not a completed acceptance gate.
 | Active plan | Remaining work |
 | --- | --- |
 | [Explicit alignment hypotheses](alignment-hypotheses.md) | H0–H5 complete within the 2026-10-16 structural-only reviewed MOVAPS profile; conditional v2 and actual v1/v2 replay qualified. Caller S6 and frame-path F4 remain separate. |
+| [Complete section-5 frame investigation](frame-question-investigation.md) | Implemented 5.1/5.2 reuse and 5.3/5.4 question/dependency integration. P0–P8/local P9/P10 pass on the corrected point/cycle/word profile; remote P9/FC5/M4 remain open. |
 | [Frame corridors and cycle summaries: Stage 5.2](frame-connections.md) | FC0–FC4 implemented; local model/oracle/mutation/product checks and both capture applications pass. FC5 remote qualification remains open. |
 | [Structural frame report: Stage 5.1](frame-structure-report.md) | SF0–SF6 complete within the 2026-10-16 recovery-only Windows AMD64/E8-call scope. Retained at its canonical path; caller S6 and frame-path F4 remain separate. |
 | [Caller semantic coverage](caller-semantic-coverage.md) | S0–S5 source-bound qualification retained; S6 completed caller dataflow and full native/Rust state equality remain open. |

@@ -99,6 +99,12 @@ implemented repairs and exercised checks from real-Windows qualification.
   owns meanings and limits. Local implementation and validation pass; remote
   qualification remains open.
 
+- [Complete section-5 investigation program](../.agents/plans/frame-question-investigation.md)
+  — [canonical integration design](Ariadne/frame-question-investigation-design.md)
+  for all four recommendation items: reuse existing source/connections, then
+  add question-directed resolution and local fault-dependency composition.
+  New P0–P10 stages remain pending; FC5/M4 keep their separate qualification.
+
 - [Captured indirect-target resolver plan](../.agents/plans/indirect-target-resolution.md)
   — R0–R6 contract, evidence, discovery, native admission and qualification.
 

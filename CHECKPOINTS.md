@@ -17,6 +17,37 @@
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
+## 2026-10-18 — Section-5 question integration, local scope
+
+The [question design](docs/Ariadne/frame-question-investigation-design.md) and
+[P0–P10 ledger](.agents/plans/frame-question-investigation.md) now have the owned
+source/evidence facade, typed alternative/fault queries, fair resolver prefix
+rotation, checked finite GPR constraints, immutable revisions, compatible
+completed-callee reuse and candidate-preserving local dependency collection.
+The opt-in `--frame-question JSON` publishes separate JSON/text/DOT views with
+strict helper-free saved replay. The original structural/connection artifacts
+and normal native full-analysis route keep their separate contracts.
+
+[Local source-bound evidence](evidence/Ariadne/frame-question/20261018/README.md)
+records 323 default, 57 core-only, 70 reports-only and 194 BAP-only passing tests;
+114/22/22/56 tests remain ignored respectively. Format, Clippy, layout,
+18 question/scheduler TLC configurations, the imported memory model, independent
+oracles and 16 compiled mutations pass. Nine selected native compatibility tests,
+a normal-native-default/Rust byte comparison, live finite question controls and
+two capture applications/replays are separate exercised tiers. Earlier failures
+and an interrupted mutation attempt remain in the record with failed status.
+
+The recursive Crashpad capture yields 371 scoped value records (four observed,
+367 derived) and all 10 original memory origins plus external interference.
+Numerical prefix-depth exhaustion remains explicit and no writer is falsely
+excluded. The original large case remains unknown after the resolver's
+1,048,576 operations and a scalar prefix-depth stop; all 610 source gaps survive.
+Neither query completes caller dataflow or establishes executed history.
+
+Remote Windows WSL, imported FC5/M4, caller S6, frame-path F4 and release
+qualification remain open. The program's local implementation/acceptance record
+does not close those gates.
+
 ## 2026-10-18 — Stage 5.2 represented frame connections
 
 The [connection consumer](docs/Ariadne/investigation-design.md#structural-corridors-and-cycle-summaries)
@@ -30,7 +61,7 @@ all assessment claims while preserving the original source publication.
 [Fresh local evidence](evidence/Ariadne/frame-connections/20261018/README.md)
 records 305 default, 57 core-only and 70 reports-only passing tests, with
 111/22/22 ignored respectively; format/Clippy/layout/navigation, 13 finite model
-configurations, 516 independent graph expectations and 12 compiled mutations
+configurations, 516 independent graph expectations and 16 compiled mutations
 pass. Selected live conditional/stop, saved replay, legacy source/path report
 and native-default compatibility checks pass separately. Remaining ignored
 tests are not implied to have run.

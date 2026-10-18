@@ -438,7 +438,7 @@ pub(crate) fn query_identity(
     Ok(format!("{:x}", digest.finalize()))
 }
 
-fn control_data_read(
+pub(crate) fn control_data_read(
     snapshot: &FileSnapshot,
     address: u64,
     length: usize,
@@ -560,6 +560,11 @@ enum PreparationExtension {
     TargetResolution(crate::bap::target_resolution::Limits),
     GuardAdmission(GuardPreparation),
     GuardAndTargets(GuardPreparation, crate::bap::target_resolution::Limits),
+    QuestionTargets(
+        GuardPreparation,
+        crate::bap::target_resolution::Limits,
+        crate::bap::target_resolution::QuestionTargetSchedule,
+    ),
 }
 
 pub(crate) struct GuardPreparation {
@@ -725,6 +730,7 @@ struct TargetResolutionCoordinator<'a> {
     report: Option<crate::bap::target_resolution::Report>,
     rounds: usize,
     candidate_mode: bool,
+    question_schedule: Option<crate::bap::target_resolution::QuestionTargetSchedule>,
 }
 
 impl<'a> TargetResolutionCoordinator<'a> {
@@ -735,6 +741,7 @@ impl<'a> TargetResolutionCoordinator<'a> {
             report: None,
             rounds: 0,
             candidate_mode: false,
+            question_schedule: None,
         }
     }
 
@@ -765,20 +772,37 @@ impl<'a> TargetResolutionCoordinator<'a> {
             if round_limit {
                 limits.max_steps = 0;
             }
-            let resolve = if self.candidate_mode {
-                resolver::resolve_candidate
+            if let Some(schedule) = self
+                .question_schedule
+                .as_ref()
+                .filter(|_| self.candidate_mode)
+            {
+                resolver::resolve_question(
+                    &snapshot.metadata.snapshot_id,
+                    &snapshot.metadata.artifact_sha256,
+                    &instructions,
+                    roots,
+                    &self.transfers,
+                    &limits,
+                    schedule,
+                    |a, n| control_data_read(snapshot, a, n),
+                )
             } else {
-                resolver::resolve
-            };
-            resolve(
-                &snapshot.metadata.snapshot_id,
-                &snapshot.metadata.artifact_sha256,
-                &instructions,
-                roots,
-                &self.transfers,
-                &limits,
-                |a, n| control_data_read(snapshot, a, n),
-            )
+                let resolve = if self.candidate_mode {
+                    resolver::resolve_candidate
+                } else {
+                    resolver::resolve
+                };
+                resolve(
+                    &snapshot.metadata.snapshot_id,
+                    &snapshot.metadata.artifact_sha256,
+                    &instructions,
+                    roots,
+                    &self.transfers,
+                    &limits,
+                    |a, n| control_data_read(snapshot, a, n),
+                )
+            }
             .map_err(|e| PreparationError::Backend(e.to_string()))?
         };
         resolved.limits = self.limits.clone();
@@ -1157,6 +1181,28 @@ impl FileSnapshot {
         )
     }
 
+    #[allow(clippy::too_many_arguments)]
+    pub(crate) fn prepare_bap_question_targets(
+        &self,
+        query: &AnalysisQuery,
+        decoder: &Path,
+        config: &crate::bap::Config,
+        options: &PreparationOptions,
+        limits: PrepareLimits,
+        guard: GuardPreparation,
+        target_limits: crate::bap::target_resolution::Limits,
+        schedule: crate::bap::target_resolution::QuestionTargetSchedule,
+    ) -> Result<FilePreparedAnalysis, PreparationError> {
+        self.prepare_bap(
+            query,
+            decoder,
+            config,
+            options,
+            limits,
+            PreparationExtension::QuestionTargets(guard, target_limits, schedule),
+        )
+    }
+
     fn prepare_bap(
         &self,
         query: &AnalysisQuery,
@@ -1166,11 +1212,16 @@ impl FileSnapshot {
         limits: PrepareLimits,
         extension: PreparationExtension,
     ) -> Result<FilePreparedAnalysis, PreparationError> {
+        let mut question_schedule = None;
         let (refinement, target_limits, mut guard_setup) = match extension {
             PreparationExtension::None => (false, None, None),
             PreparationExtension::Refinement => (true, None, None),
             PreparationExtension::TargetResolution(limits) => (false, Some(limits), None),
             PreparationExtension::GuardAdmission(setup) => (false, None, Some(setup)),
+            PreparationExtension::QuestionTargets(setup, limits, schedule) => {
+                question_schedule = Some(schedule);
+                (false, Some(limits), Some(setup))
+            }
             PreparationExtension::GuardAndTargets(setup, limits) => {
                 (false, Some(limits), Some(setup))
             }
@@ -1196,6 +1247,7 @@ impl FileSnapshot {
             limits,
             target_limits.as_ref(),
             guard_setup.as_ref(),
+            question_schedule.as_ref(),
             |s, c, o, t| {
                 let batch = backend
                     .prepare(s, c, o, t)
@@ -1265,11 +1317,12 @@ impl FileSnapshot {
             PreparationError,
         >,
     {
-        self.prepare_materialization_guarded(
+        self.prepare_materialization_guarded_scheduled(
             query,
             options,
             limits,
             target_limits,
+            None,
             None,
             |s, c, o, t| {
                 preparer(s, c, o, t).map(|(batch, transfers)| (batch, transfers, BTreeMap::new()))
@@ -1277,6 +1330,7 @@ impl FileSnapshot {
         )
     }
 
+    #[cfg(test)]
     fn prepare_materialization_guarded<F>(
         &self,
         query: &AnalysisQuery,
@@ -1284,6 +1338,43 @@ impl FileSnapshot {
         limits: PrepareLimits,
         target_limits: Option<&crate::bap::target_resolution::Limits>,
         guard_setup: Option<&GuardPreparation>,
+        preparer: F,
+    ) -> Result<FilePreparedAnalysis, PreparationError>
+    where
+        F: FnMut(
+            &str,
+            &BTreeMap<Address, Option<Vec<u8>>>,
+            &PreparationOptions,
+            crate::llvm_mc::DecoderTarget,
+        ) -> Result<
+            (
+                crate::llvm_mc::PreparedBatch,
+                BTreeMap<Address, crate::bap::target_resolution::Transfer>,
+                BTreeMap<Address, guard::CandidateSite>,
+            ),
+            PreparationError,
+        >,
+    {
+        self.prepare_materialization_guarded_scheduled(
+            query,
+            options,
+            limits,
+            target_limits,
+            guard_setup,
+            None,
+            preparer,
+        )
+    }
+
+    #[allow(clippy::too_many_arguments)]
+    fn prepare_materialization_guarded_scheduled<F>(
+        &self,
+        query: &AnalysisQuery,
+        options: &PreparationOptions,
+        limits: PrepareLimits,
+        target_limits: Option<&crate::bap::target_resolution::Limits>,
+        guard_setup: Option<&GuardPreparation>,
+        question_schedule: Option<&crate::bap::target_resolution::QuestionTargetSchedule>,
         mut preparer: F,
     ) -> Result<FilePreparedAnalysis, PreparationError>
     where
@@ -1307,6 +1398,7 @@ impl FileSnapshot {
             limits,
             target_limits,
             guard_setup,
+            question_schedule,
             |s, c, o, t| {
                 preparer(s, c, o, t)
                     .map(|(batch, transfers, sources)| (batch, transfers, sources, BTreeMap::new()))
@@ -1314,6 +1406,7 @@ impl FileSnapshot {
         )
     }
 
+    #[allow(clippy::too_many_arguments)]
     fn prepare_materialization_with_terminals<F>(
         &self,
         query: &AnalysisQuery,
@@ -1321,6 +1414,7 @@ impl FileSnapshot {
         limits: PrepareLimits,
         target_limits: Option<&crate::bap::target_resolution::Limits>,
         guard_setup: Option<&GuardPreparation>,
+        question_schedule: Option<&crate::bap::target_resolution::QuestionTargetSchedule>,
         mut preparer: F,
     ) -> Result<FilePreparedAnalysis, PreparationError>
     where
@@ -1388,6 +1482,9 @@ impl FileSnapshot {
         let mut guard_bytes = 0usize;
         let mut identity = None;
         let mut resolver = target_limits.map(TargetResolutionCoordinator::new);
+        if let Some(r) = &mut resolver {
+            r.question_schedule = question_schedule.cloned();
+        }
         let combined = target_limits.is_some() && guard_setup.is_some();
         if let Some(resolver) = &mut resolver {
             resolver.candidate_mode = combined;

@@ -25,6 +25,9 @@ supporting narrative. [Plans](../../.agents/plans/README.md) own execution stage
   projection, analysis, source review and qualification.
 - [Investigation](investigation-design.md) — possible-origin questions and their
   binding, reporting and completeness contracts.
+- [Question-directed frame investigation](frame-question-investigation-design.md) —
+  all four section-5 priorities, existing structural/connection products and
+  proposed question/value integration with its staged program.
 - [Documentation map](../documentation-map.md) — models, plans and related guides.
 
 **What remains unresolved.** Address-wrap remains proposed. Memory-provenance
@@ -42,6 +45,7 @@ identities; consolidating its description supplies no new runtime qualification.
 | Guarded target closure | [Guarded target composition](guarded-target-resolution-design.md) | Joint candidate/guard preparation and scoped qualification; proposed local-region induction and the linked L0–L6 plan address the remaining cyclic target certificates. |
 | Instruction semantics and native analysis | [BAP integration](bap-analysis-core-design.md) | Setup, lift/projection/admission and analysis contracts, source review, replay and qualification history. |
 | Fault-address dependencies | [Investigation](investigation-design.md) | Bound completed analysis, possible origins, explanation API, validation history and the bounded frame-path implementation and its finite qualification scope. |
+| Question-directed frame investigation | [Section-5 integration](frame-question-investigation-design.md) | Existing 5.1/5.2 reuse; implemented 5.3/5.4 coordinator, fair work, feasibility and local fault dependencies with P0–P10 gates. |
 | Fault-time zero address | [Zero-address assessment](zero-address-design.md) | Predicate, admission, CLI, source review and controlled-capture qualification. |
 | Fault-time zero base plus displacement | [Zero-base-offset assessment](zero-base-offset-design.md) | Decoded/BAP agreement, result contract, source review and qualification. |
 | Fault-time address wrap | [Address-wrap assessment](address-wrap-design.md) | Selected design; model, implementation and qualification pending. |

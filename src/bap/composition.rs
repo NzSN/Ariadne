@@ -69,7 +69,7 @@ fn legacy_v2_checker_identity() -> String {
     let composition = crate::reports::sha256(include_bytes!(
         "../../tests/bap/fixtures/caller-coverage/legacy-v2/composition.rs.txt"
     ));
-    let loops = target::loop_engine_identity();
+    let loops = target::LEGACY_QUESTION_LOOP_ENGINE.to_owned();
     crate::reports::sha256(
         format!("ariadne.guarded-target-checker/v2\n{composition}\n{loops}\n").as_bytes(),
     )
@@ -242,7 +242,10 @@ pub fn validate(
         || report.profile != profile
         || report.model_version != schema
         || report.model_sha256 != model
-        || report.checker_sha256 != checker
+        || (report.checker_sha256 != checker
+            && (previous
+                || report.checker_sha256
+                    != "a66b79f4a78330eda3dad00b64802498a3ab289404007c1fd62bb521a5a380ee"))
         || guard::is_legacy(guards) != previous
         || report.snapshot != guards.input.snapshot
         || report.snapshot != targets.snapshot

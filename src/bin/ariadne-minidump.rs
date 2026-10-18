@@ -9,11 +9,13 @@ use std::path::{Path, PathBuf};
 
 #[path = "ariadne_minidump/frame_connections.rs"]
 mod frame_connections;
+#[path = "ariadne_minidump/frame_question.rs"]
+mod frame_question;
 #[path = "ariadne_minidump/frame_structure.rs"]
 mod frame_structure;
 
 fn usage() -> &'static str {
-    "usage: ariadne-minidump DUMP --decoder-reference PATH (--entry VA_HEX [--entry VA_HEX ...] | --list-frame-paths N:M --path-count-bound NP | --frame-structure N:M [--frame-structure-limits JSON] | --frame-connections N:M [--example-path-count-bound NP] [--frame-connections-limits JSON]) [--seed VA_HEX ...] [--seed-exception-rip] [--max-starts N] [--max-artifact-bytes N] [--resolve-indirect-targets [--target-resolution-limits JSON]] [--thread-id ID] [--frame-path-limits JSON] [--assume-frame-aligned FRAME:VA] [--assume-windows-call-entry [--guard-admission-limits JSON]] [--stateflow-input SEMANTICS_JSON] [--explain-fault-address VA --memory-access N] [--explanation-only] [--assess-zero-address VA --memory-access N] [--assess-zero-base-offset VA --memory-access N] [--assess-memory-provenance LOAD_VA --memory-access N] [--assessment-only] [--analysis-backend rust|bap] [--bap-core-dir DIR] [--bap-core-response-timeout-ms N] [--bap-core-max-request-bytes N] [--bap-helper PATH] [--bap-runtime DIR] (--format text|dot|json | --output-dir NEW_DIR)"
+    "usage: ariadne-minidump DUMP --decoder-reference PATH (--entry VA_HEX [--entry VA_HEX ...] | --list-frame-paths N:M --path-count-bound NP | --frame-structure N:M [--frame-structure-limits JSON] | --frame-question JSON [--frame-question-limits JSON] | --frame-connections N:M [--example-path-count-bound NP] [--frame-connections-limits JSON]) [--seed VA_HEX ...] [--seed-exception-rip] [--max-starts N] [--max-artifact-bytes N] [--resolve-indirect-targets [--target-resolution-limits JSON]] [--thread-id ID] [--frame-path-limits JSON] [--assume-frame-aligned FRAME:VA] [--assume-windows-call-entry [--guard-admission-limits JSON]] [--stateflow-input SEMANTICS_JSON] [--explain-fault-address VA --memory-access N] [--explanation-only] [--assess-zero-address VA --memory-access N] [--assess-zero-base-offset VA --memory-access N] [--assess-memory-provenance LOAD_VA --memory-access N] [--assessment-only] [--analysis-backend rust|bap] [--bap-core-dir DIR] [--bap-core-response-timeout-ms N] [--bap-core-max-request-bytes N] [--bap-helper PATH] [--bap-runtime DIR] (--format text|dot|json | --output-dir NEW_DIR)"
 }
 fn invalid(message: impl Into<String>) -> io::Error {
     io::Error::new(io::ErrorKind::InvalidInput, message.into())
@@ -74,6 +76,8 @@ struct Args {
     memory_provenance_site: Option<u64>,
     frame_pair: Option<(usize, usize)>,
     structure_pair: Option<(usize, usize)>,
+    question: Option<ariadne::investigation::FrameQuestion>,
+    question_limits: Option<ariadne::investigation::FrameQuestionLimits>,
     connection_limits: Option<ariadne::investigation::FrameConnectionLimits>,
     example_count_bound: usize,
     structure_limits: Option<ariadne::investigation::FrameStructureLimits>,
@@ -119,6 +123,8 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
     let mut memory_provenance_site = None;
     let mut frame_pair = None;
     let mut structure_pair = None;
+    let mut question_file = None;
+    let mut question_limits_file = None;
     let mut connection_pair = None;
     let mut connection_limits = None;
     let mut example_count_bound = None;
@@ -311,6 +317,12 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
                     .ok_or_else(|| invalid("structural frame query requires N:M"))?;
                 structure_pair = Some((parse_index(n)?, parse_index(m)?));
             }
+            "--frame-question" if question_file.is_none() => {
+                question_file = Some(PathBuf::from(value));
+            }
+            "--frame-question-limits" if question_limits_file.is_none() => {
+                question_limits_file = Some(PathBuf::from(value));
+            }
             "--frame-connections" if connection_pair.is_none() => {
                 let pair = value
                     .to_str()
@@ -379,6 +391,40 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
             }
             _ => return Err(invalid(format!("unknown or duplicate option: {flag}")).into()),
         }
+    }
+    if question_file.is_none() && question_limits_file.is_some() {
+        return Err(invalid("--frame-question-limits requires --frame-question").into());
+    }
+    if question_file.is_some()
+        && (connection_pair.is_some()
+            || structure_pair.is_some()
+            || structure_limits.is_some()
+            || connection_limits.is_some()
+            || example_count_bound.is_some())
+    {
+        return Err(invalid(
+            "choose one frame question, connection or structure mode and its policy",
+        )
+        .into());
+    }
+    let question_limits = if question_file.is_some() {
+        Some(
+            question_limits_file
+                .as_deref()
+                .map(frame_question::read_limits)
+                .transpose()?
+                .unwrap_or_default(),
+        )
+    } else {
+        None
+    };
+    let request = question_file
+        .as_deref()
+        .map(frame_question::read_request)
+        .transpose()?;
+    if let (Some(q), Some(limits)) = (&request, &question_limits) {
+        q.validate(limits)?;
+        structure_pair = Some((q.from_frame, q.to_frame));
     }
     if connection_pair.is_some() && (structure_pair.is_some() || structure_limits.is_some()) {
         return Err(invalid("choose one structural or connection question and its policy").into());
@@ -568,11 +614,15 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
         memory_provenance_site,
         frame_pair,
         structure_pair,
+        question: request.map(|q| q.question),
+        question_limits: question_limits.clone(),
         connection_limits: connection_limits.clone(),
         example_count_bound,
         alignment_assumptions,
         structure_limits: if structure_pair.is_some() {
-            Some(if let Some(policy) = &connection_limits {
+            Some(if let Some(policy) = &question_limits {
+                policy.structural.clone()
+            } else if let Some(policy) = &connection_limits {
                 policy.structural.clone()
             } else {
                 structure_limits
@@ -822,6 +872,9 @@ fn frame_query(args: &Args, snapshot: &FileSnapshot) -> Result<(), Box<dyn Error
 }
 fn run() -> Result<(), Box<dyn Error>> {
     let mut args = arguments()?;
+    if args.question.is_some() {
+        return frame_question::run(&args);
+    }
     if args.connection_limits.is_some() {
         return frame_connections::run(&args);
     }

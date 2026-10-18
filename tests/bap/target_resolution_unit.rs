@@ -1531,3 +1531,45 @@ fn byte_reload_loop_bypass_or_writes_keep_unknown_alternatives() {
         validate(&report, &graph, &roots).unwrap();
     }
 }
+
+#[test]
+fn question_resolver_services_selected_late_dispatch_before_earlier_peers() {
+    let (mut instructions, mut transfers) = dispatch();
+    let (&site, first) = instructions
+        .iter()
+        .find(|(_, i)| i.kind == InstructionKind::Indirect)
+        .unwrap();
+    let first = first.clone();
+    let transfer = transfers[&site].clone();
+    let later = site + 0x100000;
+    let bil: Vec<Stmt> = serde_json::from_str(&transfer.ast).unwrap();
+    instructions.insert(later, first);
+    transfers.insert(
+        later,
+        extract(&bil, later, &decode_bytes(&transfer.bytes_hex).unwrap()).unwrap(),
+    );
+    let schedule = QuestionTargetSchedule {
+        priority: [later].into(),
+        quantum: 1,
+        deadline: None,
+        work: std::cell::Cell::new(0),
+        service: std::cell::RefCell::new(Vec::new()),
+    };
+    let roots = [*instructions.keys().next().unwrap(), later].into();
+    let r = resolve_question(
+        "question-fixture",
+        &"1".repeat(64),
+        &instructions,
+        &roots,
+        &transfers,
+        &Limits::default(),
+        &schedule,
+        table_read,
+    )
+    .unwrap();
+    validate(&r, &instructions, &roots).unwrap();
+    let service = schedule.service.borrow();
+    assert_eq!(service.first(), Some(&later));
+    assert!(service.contains(&site));
+    assert!(schedule.work.get() > 0);
+}

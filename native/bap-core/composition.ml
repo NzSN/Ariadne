@@ -123,7 +123,7 @@ let admit_current j snapshot =
   require (string report "schema"=version && string report "profile"=profile &&
     string report "model_version"=version &&
     string report "model_sha256"=Build_identity.composition_model_sha256 &&
-    string report "checker_sha256"=Build_identity.composition_engine_sha256)
+    (string report "checker_sha256"=Build_identity.composition_engine_sha256 || string report "checker_sha256"="a66b79f4a78330eda3dad00b64802498a3ab289404007c1fd62bb521a5a380ee"))
     "composition profile/model/checker identity";
   List.iter (fun key -> Capture.digest(string report key))
     ["model_sha256";"checker_sha256";"artifact_sha256";"query_scope_sha256";

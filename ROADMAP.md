@@ -22,6 +22,13 @@
   [Local validation and both capture applications](evidence/Ariadne/frame-connections/20261018/README.md)
   are recorded separately from unexercised remote/release qualification.
 
+- [All four section-5 priorities](docs/Ariadne/frame-question-investigation-design.md)
+  and [program plan](.agents/plans/frame-question-investigation.md) — implemented
+  one-question resolution, fair semantic work and local dependency/writer
+  integration above the existing 5.1/5.2 products, with separate
+  [local qualification](evidence/Ariadne/frame-question/20261018/README.md);
+  remote FC5, memory M4, caller S6 and frame-path F4 remain separate gates.
+
 - [Explicit alignment hypotheses](docs/Ariadne/investigation-design.md#explicit-alignment-hypotheses)
   and [H0–H5 ledger](.agents/plans/alignment-hypotheses.md) — structural-only
   conditional MOVAPS normal selection, separately [qualified](evidence/Ariadne/alignment-hypotheses/20261016/README.md)

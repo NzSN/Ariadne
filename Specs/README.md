@@ -46,6 +46,16 @@ records the subsequent source audit and separate qualification limits.
   candidates, residuals, incoming-coverage invalidation and resource stops;
   five model scenarios and implementation qualification have separate records.
 
+- [Frame question composition](AriadneFrameQuestion.tla),
+  [fair question scheduling](AriadneQuestionSchedule.tla) and
+  [P0–P10 program](../.agents/plans/frame-question-investigation.md) — finite
+  verdict, premise, epoch, candidate-preservation and fair-termination contracts.
+  Run `bash Specs/check-frame-question.sh` for two Apalache type checks and
+  eighteen TLC configurations. BAP projection, capture bytes, hashes, host
+  allocation and cooperative clock behavior remain concrete premises; these
+  finite checks do not prove Rust/native/ISA refinement. See the
+  [local qualification](../evidence/Ariadne/frame-question/20261018/README.md).
+
 - [Frame-connection model](AriadneFrameConnections.tla) and
   [Stage 5.2 ledger](../.agents/plans/frame-connections.md) — represented
   corridor/SCC exactness, shortest first sample, bounded further samples and
@@ -60,8 +70,9 @@ records the subsequent source audit and separate qualification limits.
 
 - [Memory refinement model](AriadneMemoryRefinement.tla) and
   [implementation ledger](../.agents/plans/memory-provenance-refinement.md) — specified
-  candidate-preservation and backward-value contract; model qualification is
-  pending despite passing source/root and finite-runtime probes.
+  candidate-preservation and backward-value contract. Local Apalache/TLC checking
+  passes in the section-5 record after adding the sequence type annotation;
+  remote M4/Scanner qualification remains separate.
 
 - [Selected I5c design](../docs/Ariadne/address-wrap-design.md) and
   [W0 model/oracle stage](../.agents/plans/i5c-address-wrap.md#w0--freeze-semantics-and-independent-expectations)

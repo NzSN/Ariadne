@@ -33,6 +33,10 @@ SF5.2 mutation-qualification task.
 [old frame-path ledger](frame-path-enumeration.md) and
 [caller S6 ledger](caller-semantic-coverage.md) retain their separate gates.
 
+The [complete section-5 program](frame-question-investigation.md) is the
+successor integration: it reuses connection layers without requiring them to
+finish.
+
 **What remains unresolved.** Remote qualification and broader release acceptance
 remain open. Source/model/test checking is finite, not universal refinement.
 This stage adds no new unwinder, semantic target resolver, full dataflow, loop

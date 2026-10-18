@@ -276,6 +276,7 @@ fn validate_preparation_proof(
 }
 
 /// Privately constructed from the final normalized request and captured proof sources.
+#[derive(Clone)]
 pub struct BoundFrameRecovery {
     recovery: RecoveryResult,
     context: EvidenceContext,

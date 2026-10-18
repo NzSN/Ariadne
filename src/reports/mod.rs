@@ -36,3 +36,6 @@ pub type Error = Box<dyn std::error::Error>;
 pub(crate) fn invalid(message: impl Into<String>) -> Error {
     std::io::Error::new(std::io::ErrorKind::InvalidData, message.into()).into()
 }
+
+#[cfg(feature = "bap")]
+pub mod frame_question;

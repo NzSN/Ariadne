@@ -1173,6 +1173,7 @@ fn captured_terminal_case_fixture(
         limits,
         None,
         Some(&setup),
+        None,
         |_, candidates, options, _| {
             assert_eq!(
                 candidates.keys().copied().collect::<AddressSet>(),

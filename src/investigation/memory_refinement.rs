@@ -504,7 +504,42 @@ fn validate_input(input: &Input) -> Result<(), Error> {
 
 /// New seed profile: coherent ordinary scalar AV accesses, not historical values.
 fn fault_seeds(input: &Input) -> Option<(u64, BTreeMap<u8, u64>)> {
-    let f = input.fault.as_ref()?;
+    seed_profile(
+        input.fault.as_ref()?,
+        &input.sites,
+        &input.question,
+        |rip| input.nodes.iter().any(|n| n.site == rip && n.ordinary),
+    )
+}
+pub(crate) fn frame_fault_seeds(
+    request: &crate::AnalysisRequest,
+    sites: &[SiteEvidence],
+    metadata: &FaultMetadata,
+    data: &[FaultDatum],
+    question: FaultAddressQuestion,
+) -> Option<(u64, BTreeMap<u8, u64>)> {
+    seed_profile(
+        &FaultWitness {
+            metadata: metadata.clone(),
+            data: data.to_vec(),
+        },
+        sites,
+        &question,
+        |rip| {
+            request.decodable.contains(&rip)
+                && request
+                    .instructions
+                    .get(&rip)
+                    .is_some_and(|i| i.kind == InstructionKind::Ordinary)
+        },
+    )
+}
+fn seed_profile(
+    f: &FaultWitness,
+    sites: &[SiteEvidence],
+    question: &FaultAddressQuestion,
+    ordinary: impl Fn(u64) -> bool,
+) -> Option<(u64, BTreeMap<u8, u64>)> {
     if f.metadata.platform != "windows-amd64"
         || !f.metadata.exception_present
         || !f.metadata.context_supported
@@ -520,12 +555,10 @@ fn fault_seeds(input: &Input) -> Option<(u64, BTreeMap<u8, u64>)> {
         return None;
     }
     let rip = *fields.get("reg:rip")?;
-    if fields.get("exception_location") != Some(&rip)
-        || !input.nodes.iter().any(|n| n.site == rip && n.ordinary)
-    {
+    if fields.get("exception_location") != Some(&rip) || !ordinary(rip) {
         return None;
     }
-    let site = input.sites.iter().find(|s| s.va == rip)?;
+    let site = sites.iter().find(|s| s.va == rip)?;
     if site.semantic_status.as_deref() != Some("projected")
         || site.quality != "external_lift"
         || !site.captured
@@ -566,12 +599,11 @@ fn fault_seeds(input: &Input) -> Option<(u64, BTreeMap<u8, u64>)> {
     if end > 0x0000800000000000 || reported < address || u128::from(reported) >= end {
         return None;
     }
-    let selected = input
-        .sites
+    let selected = sites
         .iter()
-        .find(|s| s.va == input.question.site)?
+        .find(|s| s.va == question.site)?
         .accesses
-        .get(input.question.memory_access)?;
+        .get(question.memory_access)?;
     let mut seeds = BTreeMap::new();
     for term in &selected.expression.as_ref()?.terms {
         let name = format!("reg:{}", BANKS[usize::from(term.bank)]);
@@ -581,8 +613,8 @@ fn fault_seeds(input: &Input) -> Option<(u64, BTreeMap<u8, u64>)> {
     }
     Some((rip, seeds))
 }
-type InverseExpressionResult = (Option<(u8, BackwardValue)>, Option<String>);
-fn inverse_expression(
+pub(crate) type InverseExpressionResult = (Option<(u8, BackwardValue)>, Option<String>);
+pub(crate) fn inverse_expression(
     value: &BackwardValue,
     expression: &TransferExpression,
     destination: u8,

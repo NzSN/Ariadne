@@ -281,3 +281,13 @@ required-features = ["bap"]
 name = "input_frame_connections_cli"
 path = "tests/input/frame_connections_cli.rs"
 required-features = ["input"]
+
+[[test]]
+name = "input_frame_question_cli"
+path = "tests/input/frame_question_cli.rs"
+required-features = ["input"]
+
+[[test]]
+name = "frame_question_replay"
+path = "tests/reports/frame_question_replay.rs"
+required-features = ["bap"]

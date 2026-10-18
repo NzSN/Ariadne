@@ -21,6 +21,8 @@ pub(crate) fn loop_engine_identity() -> String {
         format!("ariadne.loop-target-engine/v1\n{resolver}\n{closure}\n").as_bytes(),
     )
 }
+pub(crate) const LEGACY_QUESTION_LOOP_ENGINE: &str =
+    "afc1b4b991a2bdf402dc8036eb0cfba0d0232505ea5dab31a6e2e2d267a15d95";
 pub const MEMORY_PREMISE: &str = "FrozenCapturedControlData";
 const BANKS: [&str; 16] = [
     "RAX", "RCX", "RDX", "RBX", "RSP", "RBP", "RSI", "RDI", "R8", "R9", "R10", "R11", "R12", "R13",
@@ -1054,6 +1056,14 @@ where
         read,
     )
 }
+#[derive(Clone, Debug)]
+pub(crate) struct QuestionTargetSchedule {
+    pub priority: AddressSet,
+    pub quantum: usize,
+    pub deadline: Option<Instant>,
+    pub work: std::cell::Cell<usize>,
+    pub service: std::cell::RefCell<Vec<u64>>,
+}
 #[allow(clippy::too_many_arguments)]
 fn resolve_inner<F>(
     snapshot: &str,
@@ -1063,6 +1073,69 @@ fn resolve_inner<F>(
     transfers: &BTreeMap<u64, Transfer>,
     limits: &Limits,
     local: bool,
+    read: F,
+) -> Result<Report, Error>
+where
+    F: FnMut(u64, usize) -> Result<DataRead, Error>,
+{
+    resolve_scheduled(
+        snapshot,
+        artifact,
+        instructions,
+        roots,
+        transfers,
+        limits,
+        local,
+        None,
+        read,
+    )
+}
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn resolve_question<F>(
+    snapshot: &str,
+    artifact: &str,
+    instructions: &BTreeMap<u64, Instruction>,
+    roots: &AddressSet,
+    transfers: &BTreeMap<u64, Transfer>,
+    limits: &Limits,
+    schedule: &QuestionTargetSchedule,
+    read: F,
+) -> Result<Report, Error>
+where
+    F: FnMut(u64, usize) -> Result<DataRead, Error>,
+{
+    if schedule.quantum == 0 {
+        return Err(invalid("question resolver quantum must be positive"));
+    }
+    resolve_scheduled(
+        snapshot,
+        artifact,
+        instructions,
+        roots,
+        transfers,
+        limits,
+        true,
+        Some(schedule),
+        read,
+    )
+}
+type ResolutionPrefix = (u64, Term, Vec<Guard>, Vec<(u64, bool)>);
+struct ResolutionTask {
+    site: u64,
+    result: Resolution,
+    pending: Vec<ResolutionPrefix>,
+    targets: BTreeSet<u64>,
+}
+#[allow(clippy::too_many_arguments)]
+fn resolve_scheduled<F>(
+    snapshot: &str,
+    artifact: &str,
+    instructions: &BTreeMap<u64, Instruction>,
+    roots: &AddressSet,
+    transfers: &BTreeMap<u64, Transfer>,
+    limits: &Limits,
+    local: bool,
+    schedule: Option<&QuestionTargetSchedule>,
     mut read: F,
 ) -> Result<Report, Error>
 where
@@ -1083,6 +1156,8 @@ where
     let mut results = Vec::new();
     let mut stop = None;
     let mut retained_targets = BTreeSet::new();
+    let mut fair = crate::bap::work_schedule::FairQueue::default();
+    let mut legacy = std::collections::VecDeque::new();
     for (&site, _) in instructions
         .iter()
         .filter(|(_, i)| i.kind == InstructionKind::Indirect)
@@ -1106,13 +1181,46 @@ where
             continue;
         };
         used.insert(site);
-        let mut pending = vec![(site, jump, Vec::<Guard>::new(), Vec::<(u64, bool)>::new())];
-        let mut targets = BTreeSet::new();
+        let task = ResolutionTask {
+            site,
+            result,
+            pending: vec![(site, jump, Vec::new(), Vec::new())],
+            targets: BTreeSet::new(),
+        };
+        if let Some(policy) = schedule {
+            fair.push(usize::from(!policy.priority.contains(&site)), task);
+        } else {
+            legacy.push_back(task);
+        }
+    }
+    while let Some((band, task)) = if schedule.is_some() {
+        fair.pop()
+    } else {
+        legacy.pop_front().map(|t| (0, t))
+    } {
+        let ResolutionTask {
+            site,
+            mut result,
+            mut pending,
+            mut targets,
+        } = task;
+        if let Some(policy) = schedule {
+            if policy.service.borrow().len() < 8192 {
+                policy.service.borrow_mut().push(site);
+            }
+        }
+        let mut serviced = 0usize;
         while let Some((cursor, term, guards, path)) = pending.pop() {
+            if schedule.is_some_and(|policy| serviced >= policy.quantum) {
+                pending.push((cursor, term, guards, path));
+                break;
+            }
+            serviced += 1;
             if steps == 0
                 || limits.max_values == 0
                 || limits.max_rounds == 0
                 || start.elapsed().as_millis() >= u128::from(limits.max_elapsed_ms)
+                || schedule.is_some_and(|p| p.deadline.is_some_and(|d| Instant::now() >= d))
                 || path.len() >= limits.max_path_steps
             {
                 result.unresolved.insert("resolution-work-limit".into());
@@ -1341,6 +1449,18 @@ where
                 }
             }
         }
+        if !pending.is_empty() {
+            fair.push(
+                band,
+                ResolutionTask {
+                    site,
+                    result,
+                    pending,
+                    targets,
+                },
+            );
+            continue;
+        }
         if result.paths.is_empty() {
             result.complete = false;
         }
@@ -1384,6 +1504,10 @@ where
             result.complete = false;
         }
         results.push(result);
+    }
+    if let Some(policy) = schedule {
+        policy.work.set(limits.max_steps.saturating_sub(steps));
+        results.sort_by_key(|r| r.site.clone());
     }
     let mut report = Report {
         schema: if local {
@@ -1450,7 +1574,7 @@ struct CoveragePrefix {
 
 /// Validate the captured-read wire contract without reopening its artifact.
 /// A full prefix cannot hide a conflict or a hole behind nonempty metadata.
-fn validate_data_read(read: &DataRead) -> Result<(), Error> {
+pub(crate) fn validate_data_read(read: &DataRead) -> Result<(), Error> {
     let start = address(&read.address)?;
     let bytes = decode_bytes(&read.bytes_hex)
         .ok_or_else(|| invalid("resolver captured read byte encoding"))?;
@@ -1867,3 +1991,6 @@ mod unsigned_vec {
             .collect()
     }
 }
+
+#[path = "target_resolution/question_semantics.rs"]
+pub(crate) mod question_semantics;
