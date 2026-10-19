@@ -1,7 +1,7 @@
 {
   "archived": "2026-10-16",
   "scope": "Conversation presentation archive; canonical designs stay in docs/ and plan owners now live in .agents/plans/. No new analysis or qualification.",
-  "report_count": 26,
+  "report_count": 31,
   "markdown_html_pairs_including_index": 21,
   "source_session": "01a12ddc-4e59-7cb2-b5aa-67a8e522c597",
   "recovered_reports": [
@@ -840,12 +840,12 @@
       "sha256": "2667f3af9200452de3e195dc17664344a094f718310fb48d7527f5a02999ac33"
     },
     "ariadne-reports-index.html": {
-      "bytes": 12091,
-      "sha256": "13e63e04f5fc50c8f91fbdadb9d4552ae7a45764e75872dfb1b7a380436308d0"
+      "bytes": 13442,
+      "sha256": "7ecda394fbf836d820a841d73244f950eeb276d218ffd259943a9b8836235b91"
     },
     "ariadne-reports-index.md": {
-      "bytes": 6500,
-      "sha256": "b304a0ac417f1e63619b11d3f2add1e53518a7be97b03296621a6604af7e4a84"
+      "bytes": 7614,
+      "sha256": "6097b9b8ce7f4a4120ee6fe1aa4accbf2f06ecb4b6402e71f38539da7cd5274f"
     },
     "ariadne-resolver-structural-types-20261015.html": {
       "bytes": 32858,
@@ -922,10 +922,30 @@
     "ariadne-frame-structure-graph-20261016/validation.json": {
       "bytes": 1334,
       "sha256": "300cedf565cfc0cbc82391a53007c35fa98b1a1c318f550360e87fc4d9c137d2"
+    },
+    "ariadne-crashpad-dump-analysis-20261018.html": {
+      "bytes": 83129,
+      "sha256": "eb737fde1717c6244c6760dfbbbc2039cd8680c3bf527c12af801e9228157a81"
+    },
+    "ariadne-frame-connections-plan-20261018.html": {
+      "bytes": 28219,
+      "sha256": "81fdffe1bf89aabc4337e4aee4e785d4ae363280df14c208717189fe6b1dbf30"
+    },
+    "ariadne-frame-question-delivery-20261018.html": {
+      "bytes": 29090,
+      "sha256": "2cbf44c62270ecf4bd84bff836eca67bb0663be58a3888921e6f0d8efffe6bcb"
+    },
+    "ariadne-open-plans-20261019/index.html": {
+      "bytes": 9489,
+      "sha256": "0e841f58a12facddff4f462450517d94e86eab9a034cf6cb4d434d4faaa79a9c"
+    },
+    "ariadne-open-plans-20261019/before-qualification.html": {
+      "bytes": 10776,
+      "sha256": "11a5e3896542b04867506a854e8139a962a9f54f4fdb9693a94ff02a0f07156d"
     }
   },
   "directory": ".agents/chatdocs/",
-  "html_documents_including_index": 27,
+  "html_documents_including_index": 32,
   "markdown_documents_including_index": 21,
   "source_review_documents": [
     {
@@ -988,6 +1008,63 @@
       "source_dot_sha256": "c46705fe04e5a63f06259e8d0d65f117a4d3f29cc96c4ae5e7ecefaa9ab0bd5e",
       "scope": "Presentation of qualified Stage 5.1 frame structure, including verified call link, exact retained edges and boundary facts; no new analysis, build or dump run.",
       "validation": "Local references, anchors, unique IDs, SVG XML and source data checked; Node DOM controls exercised against synthetic and full retained graph. Browser launch recorded separately in final reply."
+    },
+    {
+      "html": "ariadne-open-plans-20261019/before-qualification.html",
+      "date": "2026-10-19",
+      "source_revision": "04461afcc89fad7150696d182d09b3b74097e74b",
+      "canonical_plan_index": ".agents/plans/README.md",
+      "canonical_plan_index_sha256": "95c274c40faac78f436e507ee8b7d4e426d2f808991310285c57bfbea17949c2",
+      "open_plan_count": 10,
+      "source_plan_sha256": {
+        ".agents/plans/frame-question-investigation.md": "484f705acf7c4073d7c3b7129274d97b3a6b93dbfa4acbc59bda5bc63b1a8c11",
+        ".agents/plans/frame-connections.md": "0c8ee3b06127d6792d5eba9201927daa8803cd4c9dd7549ae9115909fb466751",
+        ".agents/plans/memory-provenance-refinement.md": "11e28c41a3884d0589cf7a347854bd994c009519c1751a9cf8b9f0aa4b31f869",
+        ".agents/plans/caller-semantic-coverage.md": "c92003f44ea181a469b4caf89b19fccc76873819957608b47d3691f8705aa7f3",
+        ".agents/plans/frame-path-enumeration.md": "b00faf56d338cf9d17d52f2020461fed16eece12fa3e58ec8c9bf8f6cc00f7d8",
+        ".agents/plans/indirect-target-resolution.md": "e30f3e4e207b124cc56c3e46471466d2d88af6e31a0bdce1355618c28bbcff23",
+        ".agents/plans/scanner-partial-explanation.md": "a44db9ad99ce384f04aa6360f87e317ab9945896b4ef13f49fc6fc28ab1bf3d8",
+        ".agents/plans/specification-sync.md": "593c48875e98eb69cbf77b58e85a4d9e2269724babacc11719718d634509e767",
+        ".agents/plans/i5c-address-wrap.md": "f72a6e9a68b28bc7a55ae82f0e8a2079b015f26de5b2d87a81c7c96734e67d0c",
+        ".agents/plans/investigation-layer.md": "91b9e596fe4927e2179a62491b7c9bad7ba6298e54d3771ffa458c4d7d926e95"
+      },
+      "scope": "Navigation and dated status snapshot only. Existing canonical plans, designs, implementation and qualification receipts are unchanged. Several open ledgers share qualification gates.",
+      "validation": "Passed after live prerequisite update: all ten plan/source hashes; 133 local references/anchors in the new and existing archive indexes; HTML structure and unique IDs; ten browser URLs matched to Git objects; six new/updated inventory hashes; historical ledger entries preserved. Canonical navigation passes (78 documents, 77 context sections, 2327 links). Remote checks are version/help, identity, runtime and access preflight only. External HTTP reachability and visual browser rendering are not checked.",
+      "source_state": "Status prose updated in the working tree after live 2026-10-19 remote preflight; browser links remain pinned to the reviewed base revision.",
+      "remote_preflight": {
+        "verification": "evidence/Ariadne/remote-prerequisites/20261019/verification.json",
+        "sha256": "742c7e9d912bb3bfc70158e2b34ded630ee9d37efd25ad18ceb2bbcda810c0eb",
+        "ssh_wsl_and_tooling_verified": true,
+        "qualification_campaigns_executed": false
+      },
+      "original_html": "ariadne-open-plans-20261019/index.html",
+      "version_note": "Exact earlier ten-open-plan index preserved before finite remote qualification closed three ledgers."
+    },
+    {
+      "html": "ariadne-open-plans-20261019/index.html",
+      "date": "2026-10-19",
+      "source_revision": "04461afcc89fad7150696d182d09b3b74097e74b",
+      "source_state": "Current working-tree status after source-bound finite remote acceptance; browser references remain pinned to the published base.",
+      "canonical_plan_index": ".agents/plans/README.md",
+      "canonical_plan_index_sha256": "14ae5fee4506300aeaeb9ed8ed5246b249d6ba0f5383d99a40206e27d6155189",
+      "open_plan_count": 7,
+      "source_plan_sha256": {
+        ".agents/plans/caller-semantic-coverage.md": "c92003f44ea181a469b4caf89b19fccc76873819957608b47d3691f8705aa7f3",
+        ".agents/plans/frame-path-enumeration.md": "b00faf56d338cf9d17d52f2020461fed16eece12fa3e58ec8c9bf8f6cc00f7d8",
+        ".agents/plans/indirect-target-resolution.md": "e30f3e4e207b124cc56c3e46471466d2d88af6e31a0bdce1355618c28bbcff23",
+        ".agents/plans/scanner-partial-explanation.md": "53ac1e008d27319e31af66494eb4e267a6a11a9ba5882aa5434e2e7387c417e3",
+        ".agents/plans/specification-sync.md": "593c48875e98eb69cbf77b58e85a4d9e2269724babacc11719718d634509e767",
+        ".agents/plans/i5c-address-wrap.md": "f72a6e9a68b28bc7a55ae82f0e8a2079b015f26de5b2d87a81c7c96734e67d0c",
+        ".agents/plans/investigation-layer.md": "91b9e596fe4927e2179a62491b7c9bad7ba6298e54d3771ffa458c4d7d926e95"
+      },
+      "qualification": "evidence/Ariadne/frame-question/20261019/README.md",
+      "qualification_archive_sha256": "3a051719957d3c373b074e4187e557a822e475b2a3dba65ae85f716139bebdf0",
+      "scope": "Navigation/status update only. Earlier ten-plan HTML is preserved byte-for-byte; runtime/model/capture evidence is owned by the new qualification archive.",
+      "validation": "Final publication checks pass: seven current plan/source hashes, ten prior snapshot hashes matched to the exercised capsule, 170 local references/anchors, 17 browser source URLs matched to Git objects, HTML structure/unique IDs and updated archive hashes. Canonical navigation passes78documents/77contextsections/2348links. Browser launch is separate from visual inspection.",
+      "publication_verification": {
+        "path": "evidence/Ariadne/frame-question/20261019/publication-verification.json",
+        "sha256": "fe57330883483d898914967623803ff5b0d64f29e30a68510b04d0ca3bde45cb"
+      }
     }
   ],
   "plan_directory_relocation": {

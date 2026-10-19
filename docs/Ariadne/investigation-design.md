@@ -28,11 +28,11 @@ completes SF0–SF6 within the finite Windows AMD64 captured-frame/E8-call scope
 caller completion and full frame-path acceptance retain separate gates.
 [Stage 5.2](../../.agents/plans/frame-connections.md) implements represented
 corridors, SCC summaries and bounded examples over the validated structural
-source; its local validation and capture applications are recorded separately
-from open remote qualification. The
+source; [remote consumer qualification](../../evidence/Ariadne/frame-question/20261019/README.md)
+now covers both declared saved-source applications. The
 [complete section-5 design](frame-question-investigation-design.md) now covers
 all four recommendation items, with question-directed resolution and local
-fault-dependency integration proposed under its
+fault-dependency integration qualified within the finite scope of its
 [P0–P10 program](../../.agents/plans/frame-question-investigation.md).
 
 **Why this document exists.** The [real-capture slice](file-reader-design.md#historical-controlled-chromium-capture)
@@ -55,7 +55,7 @@ and qualification preserve alternatives and missing premises. The frame-path que
   entry-origin review; preserves the existing answer-status contract.
 - [Memory provenance refinement](memory-provenance-refinement.md) — implemented
   Scanner diagnostic separation, bounded writer assessment and backward scalar
-  inference; full model/mutation/Scanner qualification remains pending.
+  inference; the selected model/mutation/Scanner profile is [qualified remotely](../../evidence/Ariadne/frame-question/20261019/README.md).
 - [Frame-path ledger](../../.agents/plans/investigation-layer.md#bounded-frame-path-question)
   — the selected strict path-count bound, frame anchors and resource limits.
 - [Frame-path implementation plan](../../.agents/plans/frame-path-enumeration.md)
@@ -65,12 +65,11 @@ and qualification preserve alternatives and missing premises. The frame-path que
   policy and [source-bound qualification](../../evidence/Ariadne/frame-structure/20261016/README.md).
   No dataflow or path enumeration is performed.
 - [Frame connections plan: Stage 5.2](../../.agents/plans/frame-connections.md)
-  — implemented corridor/SCC/example consumer; local validation passes and FC5
-  remote qualification remains open.
+  — implemented corridor/SCC/example consumer with source-bound remote FC5/FC6 qualification.
 - [Question-directed frame investigation](frame-question-investigation-design.md)
   and [complete section-5 program](../../.agents/plans/frame-question-investigation.md)
-  — all four recommendation items, existing source/connection reuse and proposed
-  question-directed resolution plus local dependency/writer integration.
+  — all four recommendation items, existing source/connection reuse and qualified
+  finite question-directed resolution plus local dependency/writer integration.
 - [Caller semantic-coverage design](caller-semantic-coverage-design.md)
   — later terminal/load admission and the remaining completed-caller dataflow gate.
 - [Justified branch pruning design](justified-branch-pruning-design.md) — checked
@@ -392,10 +391,10 @@ canonical owner of the existing structural source and connection contracts.
 The new design owns their composition with a bounded investigator question,
 fair semantic work, scoped feasibility and local fault dependencies. The
 [memory-refinement document](memory-provenance-refinement.md) retains its own
-value/alias rules and pending M4 qualification.
+value/alias rules and [selected M4 qualification](../../evidence/Ariadne/frame-question/20261019/README.md).
 
 Items 5.1/5.2 are reused with their recorded qualification boundaries. New
-5.3/5.4 integration is implemented with [separate local evidence](../../evidence/Ariadne/frame-question/20261018/README.md): one question does not require
+5.3/5.4 integration has [source-bound remote evidence](../../evidence/Ariadne/frame-question/20261019/README.md): one question does not require
 completed caller dataflow, unknown continuations and candidate writers survive,
 and each result layer keeps its own status. Execution-recording ingestion from
 recommendation section 6 is outside this program.
@@ -1071,7 +1070,9 @@ shortest example. The recursive controlled source produces a 140-node corridor,
 167 SCCs (three cyclic) and a 133-edge first shortest example. These graph
 results retain the source's semantic gaps and conditional premises; they add
 no feasibility, history, loop invariant or writer exclusion claim. Remote
-qualification remains unexercised, and caller S6/frame-path F4 remain separate.
+[consumer qualification now passes](../../evidence/Ariadne/frame-question/20261019/README.md)
+for these exact inputs; caller S6/frame-path F4 and fresh raw-source coverage
+remain separate.
 
 ## Bounded frame-to-frame path listing
 

@@ -2,47 +2,31 @@
 
 ## Context and follow-up
 
-**Status.** Implementation delivered, 2026-10-18. FC0–FC4 pass the declared
-local contract/model/runtime/product checks; FC5 has fresh local finite evidence
-and FC6 has both independently checked capture applications. The plan's remote
-qualification gate remains unexercised: `r_windev` and SSH configuration are
-unavailable in this session. No remote or release qualification is claimed.
-The [local evidence record](../../evidence/Ariadne/frame-connections/20261018/README.md)
-contains source/tool identities, failures, corrected passes and full artifacts.
-Implementation started from revision `012a2482043b167f8a65a0a2d86bc822ca334331`;
-unrelated existing chat-document edits were preserved. The [canonical Stage 5.2 design](../../docs/Ariadne/investigation-design.md#structural-corridors-and-cycle-summaries)
-owns the implemented interface and result meanings.
+**Status.** FC0–FC6 pass the declared finite consumer profile, with
+[remote qualification on 2026-10-19](../../evidence/Ariadne/frame-question/20261019/README.md) and both independently checked
+capture applications. The [2026-10-18 local record](../../evidence/Ariadne/frame-connections/20261018/README.md)
+retains its original scope. Broader release acceptance remains separate.
 
-**Why this document exists.** The second item in section 5 of the
-[frame-to-frame recommendation](../chatdocs/ariadne-frame-to-frame-recommendation-20261016.html)
-asks for reachability, SCC summaries and a small number of useful routes.
-[Stage 5.1](frame-structure-report.md) now provides validated recovery-only
-sources without full caller dataflow. The existing completed-analysis path
-binder still has its own completion and admission requirements.
+**Why this document exists.** Section 5's second [recommendation](../chatdocs/ariadne-frame-to-frame-recommendation-20261016.html#order)
+asks for represented reachability, cycles and useful examples over
+[Stage 5.1 sources](frame-structure-report.md), without completed caller dataflow.
 
-**What this document establishes.** A concrete order of implementation,
-source ownership, modeled properties, independent controls, finite budgets and
-capture acceptance for the read-only consumer of `BoundFrameStructure`.
-Stage 5.2 refers to the recommendation item; it is distinct from Stage 5.1's
-SF5.2 mutation-qualification task.
+**What this document establishes.** The implemented bounded consumer and its
+finite acceptance ledger. Stage 5.2 is distinct from Stage 5.1's SF5.2 mutation task.
+The [canonical contract](../../docs/Ariadne/investigation-design.md#structural-corridors-and-cycle-summaries)
+owns graph domains, statuses, policies, identities and replay.
 
-**Where to go next.** Read the [owning design](../../docs/Ariadne/investigation-design.md#structural-corridors-and-cycle-summaries),
-[structural source contract](../../docs/Ariadne/investigation-design.md#structural-frame-report-before-dataflow),
-[implementation guide](../../docs/implementation.md) and
-[formal-model guide](../../Specs/README.md). The
-[old frame-path ledger](frame-path-enumeration.md) and
-[caller S6 ledger](caller-semantic-coverage.md) retain their separate gates.
+**Where to go next.** Read the canonical contract, [new evidence](../../evidence/Ariadne/frame-question/20261019/README.md),
+[complete section-5 program](frame-question-investigation.md),
+[structural source contract](../../docs/Ariadne/investigation-design.md#structural-frame-report-before-dataflow)
+and [model guide](../../Specs/README.md). Caller [S6](caller-semantic-coverage.md)
+and frame-path [F4](frame-path-enumeration.md) retain separate gates.
 
-The [complete section-5 program](frame-question-investigation.md) is the
-successor integration: it reuses connection layers without requiring them to
-finish.
-
-**What remains unresolved.** Remote qualification and broader release acceptance
-remain open. Source/model/test checking is finite, not universal refinement.
-This stage adds no new unwinder, semantic target resolver, full dataflow, loop
-invariant, writer exclusion or executed-history inference. It does not close
-caller S6 or F4. The canonical design now records frozen defaults, source-facts
-fingerprint and exact codec/work-prefix replay behavior.
+**What remains unresolved.** Unknown continuations can reconnect; structural
+examples do not establish feasibility, execution history, loop invariants or
+writer exclusion. Broad release and universal refinement are unqualified.
+The extra raw original refresh remains guard-coverage limited; the qualified
+large consumer application uses the exact declared saved source.
 
 ## Frozen direction and implemented interface
 
@@ -86,8 +70,8 @@ coordinate shared exports. Each stage's dependencies are evidence gates.
 | FC2 — corridor and SCCs | Graph owner: private implementation inside the new module and focused tests. | FC1 | Forward/reverse sets, exact represented corridor, iterative SCC partition/quotient and unknown-reconnect annotations match independent oracles under every stop. | Implemented; local checks pass |
 | FC3 — example routes | Example owner: private bounded BFS/detour search, result getters and focused tests. | FC2 graph interface | First shortest route when found, typed-edge identities, loop-free samples, strict NP, canonical ordering and independent caps. Examples cannot mutate corridor/SCC/source facts or writer candidates. | Implemented; local checks pass |
 | FC4 — codec and CLI | Product owner: `src/reports/frame_connections.rs`, report exports, `src/bin/ariadne_minidump/` integration, root manifest test registrations and `tests/input/`/`tests/reports/`. | FC1–FC3 | Self-contained strict replay; JSON/text/DOT agreement; live capture and separately decoded source supported through the library. Existing structure/path routes and versions replay unchanged. | Implemented; local checks pass |
-| FC5 — finite qualification | Qualification owner: isolated model/oracle/replay/mutation jobs and source/tool receipts under `evidence/Ariadne/frame-connections/`. | FC4 | Root/feature/layout/model/oracle/compiled-mutation/capture/legacy controls pass on declared sources; all ignored or missing prerequisites named. | Local finite qualification passes; remote gate open |
-| FC6 — capture application and delivery | Corpus/docs owner: original and controlled capture comparisons, canonical usage/validation summary and this ledger. | FC5 | New product accepts the declared large source and recursive controlled source; preserves inputs/gaps and shows independently checked summaries/examples or honest layer stops. | Both local capture applications pass; remote acceptance open |
+| FC5 — finite qualification | Qualification owner: isolated model/oracle/replay/mutation jobs and source/tool receipts under `evidence/Ariadne/frame-connections/`. | FC4 | Root/feature/layout/model/oracle/compiled-mutation/capture/legacy controls pass on declared sources; all ignored or missing prerequisites named. | Passed remote finite qualification, 2026-10-19 |
+| FC6 — capture application and delivery | Corpus/docs owner: original and controlled capture comparisons, canonical usage/validation summary and this ledger. | FC5 | New product accepts the declared large source and recursive controlled source; preserves inputs/gaps and shows independently checked summaries/examples or honest layer stops. | Passed both declared capture applications remotely |
 
 ## FC0: contract, identity and finite policy
 
@@ -281,3 +265,19 @@ shortest example. Controlled recursive range 5:0: 176 nodes, 179 edges,
 All 610/14 gaps survive. See the evidence record for exact source/binding and
 qualification boundaries. FC5 remote qualification remains open; local passes
 do not satisfy that remote gate.
+
+## 2026-10-19 remote qualification
+
+The [section-5 remote record](../../evidence/Ariadne/frame-question/20261019/README.md)
+closes FC5/FC6 for the unchanged declared structural sources. The fresh campaign
+checks 13 model scenarios, 516 literal graph expectations, 12 compiled mutations,
+conditional/stopped live controls and strict public saved replay. Actual prior
+structural v1/v2, legacy frame versions and normal native behavior have separate
+compatibility receipts.
+
+Original source `229e9248…`: 10,367 nodes, 11,656 edges, 23-node corridor,
+3,143 SCCs/33 cyclic and one 22-edge shortest example. Controlled source
+`5a7ce406…`: 176 nodes, 179 edges, 140-node corridor, 167 SCCs/three cyclic and
+one 133-edge shortest example. All 610/14 source gaps remain. An independent
+DFS/Tarjan/distance observer checks the entire represented result. No new
+full-analysis or program-level negative reachability claim is supplied.

@@ -2,45 +2,41 @@
 
 ## Context and follow-up
 
-**Status.** Implemented with source-bound local qualification, 2026-10-18,
-from source review `b29f095e15746e8b16937e2eb7c16cf98fe2de4e`. It covers all
-four items in [recommendation section 5](../chatdocs/ariadne-frame-to-frame-recommendation-20261016.html#order).
-[Local receipts and source/tool inventories](../../evidence/Ariadne/frame-question/20261018/README.md)
-record P0–P8 and local P9/P10 acceptance. The remote P9 tier and imported FC5/M4
-qualification remain open; the whole program is not marked fully accepted.
+**Status.** P0–P10 pass the declared finite frame-question profile with
+[source-bound remote qualification dated 2026-10-19](../../evidence/Ariadne/frame-question/20261019/README.md).
+The imported FC5/FC6 and selected memory M4/Scanner candidate-table gates pass
+on the same exercised source and corpus. The [2026-10-18 local record](../../evidence/Ariadne/frame-question/20261018/README.md)
+remains historical. No broad release or universal refinement acceptance is implied.
 
 **Why this document exists.** The [recommendation](../chatdocs/ariadne-frame-to-frame-recommendation-20261016.html#order)
-orders the work. Structural recovery and connection summaries are
-now useful products, while a selected value/control question can still be
-blocked by semantic work or uncertain memory origins. Delivery needs a concrete
-order that preserves both existing products and the missing premises.
+orders structural reporting, connection summaries, question-directed work and
+local dependencies without requiring completed caller dataflow.
 
-**What this document establishes.** One program ledger for recommendation
-items 5.1–5.4, implementation-sized stages for the proposed coordinator,
-explicit imported contracts, source ownership and independently checkable gates.
-The [canonical design](../../docs/Ariadne/frame-question-investigation-design.md)
-owns interfaces, model scope, defaults and result meanings; this plan does not
-create a second design.
+**What this document establishes.** The implementation and finite acceptance
+ledger for items 5.1–5.4. The [canonical design](../../docs/Ariadne/frame-question-investigation-design.md)
+owns interfaces, model scope, defaults and result meanings; imported owners
+retain their separate contracts and evidence identities.
 
-**Where to go next.** Read the canonical design, [SF0–SF6](frame-structure-report.md),
-[FC0–FC6](frame-connections.md), [memory M0–M4](memory-provenance-refinement.md),
-[Scanner follow-up](scanner-partial-explanation.md),
-[implementation guide](../../docs/implementation.md) and
-[model guide](../../Specs/README.md).
+**Where to go next.** Read the canonical design, the [new qualification record](../../evidence/Ariadne/frame-question/20261019/README.md),
+[SF0–SF6](frame-structure-report.md), [FC0–FC6](frame-connections.md),
+[memory M0–M4](memory-provenance-refinement.md), [Scanner follow-up](scanner-partial-explanation.md),
+[implementation guide](../../docs/implementation.md) and [model guide](../../Specs/README.md).
 
-**What remains unresolved.** Remote P9 and the imported acceptance tiers remain open. Existing
-Stage 5.2 remote qualification and memory M4 are not credited as complete by
-this plan. General SMT, lifetime/root-cause proofs, historical trace ingestion,
-caller S6 and old frame-path F4 are outside the program's completion claim.
+**What remains unresolved.** Caller S6, old frame-path F4, broader release,
+general SMT, historical traces, root cause and universal refinement remain
+outside this finite completion. The original saved-source question remains
+unknown at its resolver/prefix bounds. The additional fresh raw-source refresh
+has incomplete guard candidate coverage and no admitted active caller link;
+it is not credited as parity with the declared saved structural source.
 
 ## All four items: inventory and ownership
 
 | Recommendation item | Existing delivery and evidence | Remaining action / owning ledger | Completion meaning |
 | --- | --- | --- | --- |
 | 5.1 structural report | `BoundFrameStructure`, source v1/v2, recovery-only CLI, finite Windows AMD64/E8 source qualification. | SF0–SF6 stay in [the original ledger](frame-structure-report.md). P0 inventories source hashes and old codec versions; P2/P6 reuse admission. | Existing scoped delivery; source changes need applicable requalification, not a relabeling of old results. |
-| 5.2 connections/cycles/examples | `BoundFrameConnections`, `--frame-connections`, exact represented corridor/SCC layers and bounded routes; two capture applications and local tests/model/mutations. | [FC5 remote qualification](frame-connections.md) remains open. P0 freezes the import identity; P7/P9 exercise compatibility. | Implementation/local evidence exists; full FC5 acceptance remains separate until its remote gate passes. |
-| 5.3 question-directed bottleneck | Existing target/guard/loop primitives, but no bound one-question coordinator or integrated feasibility report. | P0–P4, P6–P10 below. | Checked per-question conclusions or explicit unknowns, fair bounded work and immutable source revisions; no full-caller prerequisite. |
-| 5.4 local fault dependencies | Existing completed-analysis explanations, scalar inverse rules and candidate-preserving memory assessment; limited finite probes. | P2, P5, P7–P10 below; retain [M4](memory-provenance-refinement.md) and case-specific Scanner gates. | Compatible completed-callee reuse, local value facts and scoped writer assessments with unchanged alternatives; no executed-writer claim. |
+| 5.2 connections/cycles/examples | `BoundFrameConnections`, `--frame-connections`, exact represented corridor/SCC layers and bounded routes; two capture applications and local tests/model/mutations. | FC5/FC6 pass the matching remote source/corpus tier. | Scoped consumer qualification; no feasibility/history or universal refinement claim. |
+| 5.3 question-directed bottleneck | Owned one-question coordinator, bounded GPR constraints, fair resolver work and immutable source revisions. | P0–P4/P6–P10 pass the declared remote finite profile. | Checked per-question conclusions or explicit unknowns, fair bounded work and immutable source revisions; no full-caller prerequisite. |
+| 5.4 local fault dependencies | Completed-callee reuse, captured point facts and candidate-preserving local writer assessment. | P2/P5/P7–P10 and selected M4 clauses pass; Scanner S2–S4 remain separate. | Compatible completed-callee reuse, local value facts and scoped writer assessments with unchanged alternatives; no executed-writer claim. |
 
 The program owns integration, not the old SF/FC/M acceptance records. Import
 only the specific contracts and evidence that match the selected source/tool
@@ -53,17 +49,17 @@ must preserve edits made by others and keep shared exports coordinated.
 
 | Stage | Responsibility and implemented source paths | Dependencies | Exit evidence | Status |
 | --- | --- | --- | --- | --- |
-| P0 — freeze questions and imports | Design/model owner: canonical design, this ledger, existing SF/FC/M source/report inventory and literal expected cases. | Current source review | Exact typed question kinds, point/context/premise scopes, source import/revision rules, finite defaults, statuses and corpus identities frozen. | Frozen; local profile recorded |
-| P1 — authoritative models and independent oracles | Model owner: proposed `Specs/AriadneFrameQuestion.tla`, `Specs/AriadneQuestionSchedule.tla`, configurations/checkers and `tests/investigation/fixtures/`. | P0 | Finite safety/fair-termination checks and independently generated expectations; all abstractions and unmodeled concrete checks stated. | Local models/oracles pass |
-| P2 — bound question and evidence adapter | Investigation/input owner: proposed `src/investigation/frame_question.rs`, `src/input/frame_question.rs`, shared source/fault/transfer validation and exports. | P1 contract | Immutable privately constructed input/result; both structural source carriers and sealed live/embedded evidence providers work without large payload copies; invalid inputs reject before work stops. | Implemented; both carriers/import controls pass |
-| P3 — fair target/resolution work | Resolver owner: `src/bap/target_resolution.rs`, private continuation and coordinator queue; composition/native validator compatibility as applicable. | P2 | Per-operation suspension, deterministic 2:1:1 scheduling, per-task/global caps, no starvation when budget permits, unchanged proof admission. | Implemented; local prefix fairness/compatibility pass |
-| P4 — checked question constraints | Constraint owner: private question implementation reusing `src/bap/refinement.rs`, `src/investigation/backward_values.rs` and existing loop/guard checks. | P2; P3 for integrated work | Refutation, coherent model witness, abstract-only unknown and premise conflict distinguished; scoped inverses and invariant use match independent concrete evaluators. | Implemented; finite constraint controls pass |
-| P5 — callee and memory-origin integration | Memory owner: `src/investigation/memory_refinement.rs`, frame import adapter, local fault witness/assessment and tests. | P2/P4; applicable M4 clauses | Full baseline origin universe recomputed/validated from completed state, not trusted from a standalone memory table; validated callee import or honest unavailable collection; checked per-instance/all-context exclusions; no caller completion dependency. | Implemented; local value/origin/import controls pass |
-| P6 — immutable source revision | Source/composition owner: new question revision binding, existing frame preparation/structure recovery and resolver proof validation. | P3/P4 | Same snapshot/roots/range, candidate-to-admitted checks, parent identity, bounded revisions and stale negative/invariant/import invalidation. | Implemented; revision/replay controls pass |
-| P7 — codec, views and opt-in CLI | Product owner: proposed `src/reports/frame_question.rs`, `src/bin/ariadne_minidump/frame_question.rs`, existing CLI parser, root test registrations and report/input tests. | P2–P6 | Strict self-contained replay, independent layers, JSON/text/DOT links, source/old-codec compatibility and pre-capture option/policy validation. | Implemented; live and saved products pass |
-| P8 — compiled behavioral mutations | Qualification owner: new mutation entry point and unchanged independent observers in tests, separate mutation target directory. | P7 | Each listed mutation has a passing original control and a compiled behavioral rejection; compile/transport failures earn no sensitivity credit. | 16/16 current-source local controls pass; remote tier separate |
-| P9 — finite/native/capture qualification | Qualification owner: isolated source/tool capsules and `evidence/Ariadne/frame-question/DATE/`. | P7/P8; declared import gates | Required root/features, models/oracles, native compatibility, two capture applications and saved-source replay pass their named clauses; missing tiers remain explicit. | Local tier passes; remote/imported gates pending |
-| P10 — product acceptance and documentation | Corpus/docs owner: canonical usage, result examples, remaining evidence requirements, plan and roadmap. | P9 plus imported gates required by the final claim | At least one new question improvement without completed caller analysis, useful fault-local explanation, honest original-case limits and source-bound publication. | Local product acceptance passes; full program gate remains open |
+| P0 — freeze questions and imports | Design/model owner: canonical design, this ledger, existing SF/FC/M source/report inventory and literal expected cases. | Current source review | Exact typed question kinds, point/context/premise scopes, source import/revision rules, finite defaults, statuses and corpus identities frozen. | Passed; declared question/import profile frozen |
+| P1 — authoritative models and independent oracles | Model owner: `Specs/AriadneFrameQuestion.tla`, `Specs/AriadneQuestionSchedule.tla`, configurations/checkers and `tests/investigation/fixtures/`. | P0 | Finite safety/fair-termination checks and independently generated expectations; all abstractions and unmodeled concrete checks stated. | Passed remote finite models and independent oracles |
+| P2 — bound question and evidence adapter | Investigation/input owner: `src/investigation/frame_question.rs`, `src/input/frame_question.rs`, shared source/fault/transfer validation and exports. | P1 contract | Immutable privately constructed input/result; both structural source carriers and sealed live/embedded evidence providers work without large payload copies; invalid inputs reject before work stops. | Passed source/capture and both-carrier controls |
+| P3 — fair target/resolution work | Resolver owner: `src/bap/target_resolution.rs`, private continuation and coordinator queue; composition/native validator compatibility as applicable. | P2 | Per-operation suspension, deterministic 2:1:1 scheduling, per-task/global caps, no starvation when budget permits, unchanged proof admission. | Passed fair-prefix controls and native compatibility |
+| P4 — checked question constraints | Constraint owner: private question implementation reusing `src/bap/refinement.rs`, `src/investigation/backward_values.rs` and existing loop/guard checks. | P2; P3 for integrated work | Refutation, coherent model witness, abstract-only unknown and premise conflict distinguished; scoped inverses and invariant use match independent concrete evaluators. | Passed finite witness/refutation/unknown/premise controls |
+| P5 — callee and memory-origin integration | Memory owner: `src/investigation/memory_refinement.rs`, frame import adapter, local fault witness/assessment and tests. | P2/P4; applicable M4 clauses | Full baseline origin universe recomputed/validated from completed state, not trusted from a standalone memory table; validated callee import or honest unavailable collection; checked per-instance/all-context exclusions; no caller completion dependency. | Passed controlled/original local dependency and Scanner candidate checks |
+| P6 — immutable source revision | Source/composition owner: new question revision binding, existing frame preparation/structure recovery and resolver proof validation. | P3/P4 | Same snapshot/roots/range, candidate-to-admitted checks, parent identity, bounded revisions and stale negative/invariant/import invalidation. | Passed immutable revision and replay controls |
+| P7 — codec, views and opt-in CLI | Product owner: `src/reports/frame_question.rs`, `src/bin/ariadne_minidump/frame_question.rs`, existing CLI parser, root test registrations and report/input tests. | P2–P6 | Strict self-contained replay, independent layers, JSON/text/DOT links, source/old-codec compatibility and pre-capture option/policy validation. | Passed live CLI, formats and helper-free saved replay |
+| P8 — compiled behavioral mutations | Qualification owner: new mutation entry point and unchanged independent observers in tests, separate mutation target directory. | P7 | Each listed mutation has a passing original control and a compiled behavioral rejection; compile/transport failures earn no sensitivity credit. | Passed remote: 16 original controls and compiled behavioral rejections |
+| P9 — finite/native/capture qualification | Qualification owner: isolated source/tool capsules and `evidence/Ariadne/frame-question/DATE/`. | P7/P8; declared import gates | Required root/features, models/oracles, native compatibility, two capture applications and saved-source replay pass their named clauses; missing tiers remain explicit. | Passed remote finite/native/capture tiers and applicable FC5/M4 imports |
+| P10 — product acceptance and documentation | Corpus/docs owner: canonical usage, result examples, remaining evidence requirements, plan and roadmap. | P9 plus imported gates required by the final claim | At least one new question improvement without completed caller analysis, useful fault-local explanation, honest original-case limits and source-bound publication. | Passed declared finite product acceptance and durable evidence |
 
 P3 and P4 can proceed independently after P2; P5 consumes P4's checked value
 scope. P6 must finish before a product may publish an extended source. P7 may
@@ -345,3 +341,42 @@ normal transfer at the captured top PC, and prevent partial-word outputs/joins
 from becoming exact whole-register values. Four new model configurations and
 four additional compiled mutations cover these findings. Earlier provisional
 artifacts are preserved as historical and do not qualify this corrected source.
+
+## 2026-10-19 remote completion
+
+The [qualification record](../../evidence/Ariadne/frame-question/20261019/README.md)
+binds the 875-file source capsule
+`7e23bbd4aab5e12e48d342d4ab0a9c9b51e2aacbd8ed35c2a749919c088610c6`
+to remote Windows WSL execution. Root default/core/reports/BAP counts are
+323/57/70/194 passed, with 114/22/22/56 ignored; named native/capture/replay tiers
+are exercised separately. Format, Clippy, feature/layout/core-dependency checks,
+18 question/scheduler + 13 connection + one memory model configuration,
+independent oracles and 16/12/5 compiled mutations pass.
+
+Both declared saved sources pass public connection application/replay and
+independent full-graph/SCC/shortest checks. The original question retains all
+610 source gaps and returns unknown at 1,048,576 resolver operations and a
+prefix-depth stop. The controlled real capture provides 371 point-value records
+and preserves all 10 memory candidates plus interference. Its values stop at
+depth while origin assessment finishes. The extra original fault query provides
+25 records and all 12 visible baseline candidates; conservative origin-work
+charging stops refinement, preserving an unknown count and unresolved entries.
+
+Full Scanner assessment preserves baseline report bytes, exactly matches native
+and Rust output and retains all 12 entry/instruction memory origins. Actual
+prior/current question products, structural v1/conditional v2 and both legacy
+combined-report versions replay with their named policies; BAP-only report
+replay uses deliberately unavailable helper/runtime paths.
+
+The new source-bound memory mutation driver records positive controls, actual
+compiler executables, exact named behavioral failures and source stability.
+Initial missing-rg, absent output-parent and independent-observer stopped-count
+interpretation failures remain in the archive with their original statuses.
+The final memory run uses its own root target subdirectory; a preliminary run
+outside that directory contributes no additional final mutation count.
+
+This completion qualifies the question/connection/memory consumers on the
+explicitly declared finite sources. An additional fresh raw original refresh
+stops at guard candidate coverage (caller 9 nodes, callee 769); the exact retained
+large source remains the required 10,367-node consumer acceptance case. No caller
+completion, broad release, execution-history or ISA refinement claim follows.

@@ -54,7 +54,8 @@ records the subsequent source audit and separate qualification limits.
   eighteen TLC configurations. BAP projection, capture bytes, hashes, host
   allocation and cooperative clock behavior remain concrete premises; these
   finite checks do not prove Rust/native/ISA refinement. See the
-  [local qualification](../evidence/Ariadne/frame-question/20261018/README.md).
+  [local qualification](../evidence/Ariadne/frame-question/20261018/README.md) and
+  [2026-10-19 remote finite acceptance](../evidence/Ariadne/frame-question/20261019/README.md).
 
 - [Frame-connection model](AriadneFrameConnections.tla) and
   [Stage 5.2 ledger](../.agents/plans/frame-connections.md) — represented
@@ -72,7 +73,8 @@ records the subsequent source audit and separate qualification limits.
   [implementation ledger](../.agents/plans/memory-provenance-refinement.md) — specified
   candidate-preservation and backward-value contract. Local Apalache/TLC checking
   passes in the section-5 record after adding the sequence type annotation;
-  remote M4/Scanner qualification remains separate.
+  [remote M4/Scanner acceptance](../evidence/Ariadne/frame-question/20261019/README.md)
+  now passes for the selected profile; the broader audited model suite remains separate.
 
 - [Selected I5c design](../docs/Ariadne/address-wrap-design.md) and
   [W0 model/oracle stage](../.agents/plans/i5c-address-wrap.md#w0--freeze-semantics-and-independent-expectations)
@@ -143,7 +145,9 @@ and separate tests. Preserving a modeled writer set says samples cannot remove
 candidates; this module performs no writer analysis. The checks do not prove
 universal refinement, instruction semantics, feasibility, execution history or
 program-level disconnection. The dated evidence records local Windows WSL
-results; the plan's remote qualification remains unexercised.
+results; the [2026-10-19 remote record](../evidence/Ariadne/frame-question/20261019/README.md)
+now closes the finite FC5/FC6 gate on the exact declared sources. It does not
+close the separate S3 audit of all active specifications.
 
 ## Current model ownership
 

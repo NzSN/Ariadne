@@ -19,15 +19,16 @@
 - [Frame corridors and cycle summaries: Stage 5.2](docs/Ariadne/investigation-design.md#structural-corridors-and-cycle-summaries)
   and [FC0–FC6 plan](.agents/plans/frame-connections.md) — implemented
   reachability/SCC/example consumer of validated structural reports.
-  [Local validation and both capture applications](evidence/Ariadne/frame-connections/20261018/README.md)
-  are recorded separately from unexercised remote/release qualification.
+  [Remote finite/capture qualification](evidence/Ariadne/frame-question/20261019/README.md)
+  now passes for both declared saved sources; broad release remains separate.
 
 - [All four section-5 priorities](docs/Ariadne/frame-question-investigation-design.md)
   and [program plan](.agents/plans/frame-question-investigation.md) — implemented
   one-question resolution, fair semantic work and local dependency/writer
   integration above the existing 5.1/5.2 products, with separate
-  [local qualification](evidence/Ariadne/frame-question/20261018/README.md);
-  remote FC5, memory M4, caller S6 and frame-path F4 remain separate gates.
+  [remote qualification](evidence/Ariadne/frame-question/20261019/README.md).
+  The applicable FC5/M4 gates pass; caller S6, frame-path F4, fresh raw-source
+  guard coverage and broad release acceptance remain separate.
 
 - [Explicit alignment hypotheses](docs/Ariadne/investigation-design.md#explicit-alignment-hypotheses)
   and [H0–H5 ledger](.agents/plans/alignment-hypotheses.md) — structural-only

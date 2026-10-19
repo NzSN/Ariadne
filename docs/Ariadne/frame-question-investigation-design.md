@@ -2,48 +2,43 @@
 
 ## Context and follow-up
 
-**Status.** Implemented locally, 2026-10-18, above the structural and
-connection products reviewed at `b29f095e15746e8b16937e2eb7c16cf98fe2de4e`.
-This document covers all four items in
-[recommendation section 5](../../.agents/chatdocs/ariadne-frame-to-frame-recommendation-20261016.html#order).
-The [new qualification record](../../evidence/Ariadne/frame-question/20261018/README.md)
-separates source tests, finite models, compiled mutations, native compatibility,
-capture applications and the still-open remote gate.
+**Status.** Implemented with [source-bound remote qualification, 2026-10-19](../../evidence/Ariadne/frame-question/20261019/README.md).
+P0–P10 and the applicable FC5/FC6/M4 finite imports pass on the declared sources.
+The [2026-10-18 local record](../../evidence/Ariadne/frame-question/20261018/README.md)
+is retained as historical evidence. This design covers all four items of the
+[original recommendation](../../.agents/chatdocs/ariadne-frame-to-frame-recommendation-20261016.html#order).
 
 **Why this document exists.** The [recommendation](../../.agents/chatdocs/ariadne-frame-to-frame-recommendation-20261016.html#first-change)
-identifies a cost/coverage problem: a structural map can succeed while a selected
-branch, value or memory origin remains unresolved. An investigator needs to
-spend bounded work on that specific uncertainty without first completing every
-caller reaching-definition calculation or enumerating paths.
+identifies how a structural map can succeed while a selected
+branch, value or possible writer remains unresolved. The investigator needs
+bounded work on that question without completed caller dataflow or path enumeration.
 
-**What this document establishes.** The integration design for the four-item
-program: existing structural sources and connections, question-directed work,
-local dependency/writer assessments, independent result layers and replay.
-Existing feature documents retain authority for their own algorithms; this
-is the canonical owner of the new question coordinator and its composition.
+**What this document establishes.** The coordinator's contracts for immutable
+sources, fair question work, finite feasibility, local dependencies, independent
+result layers and strict replay. Imported feature documents retain authority
+for their own rules and recorded qualification scopes.
 
-**Where to go next.** The [complete implementation plan](../../.agents/plans/frame-question-investigation.md)
-owns stage dependencies, source ownership and acceptance. Read the
-[structural-source contract](investigation-design.md#structural-frame-report-before-dataflow),
-[connection contract](investigation-design.md#structural-corridors-and-cycle-summaries),
-[memory-refinement contract](memory-provenance-refinement.md),
-[guarded target contract](guarded-target-resolution-design.md) and
-[model guide](../../Specs/README.md) for the imported contracts.
+**Where to go next.** The [P0–P10 ledger](../../.agents/plans/frame-question-investigation.md)
+records completion and limits. Read [qualification](../../evidence/Ariadne/frame-question/20261019/README.md), the
+[structural](investigation-design.md#structural-frame-report-before-dataflow),
+[connection](investigation-design.md#structural-corridors-and-cycle-summaries),
+[memory](memory-provenance-refinement.md), [guarded-target](guarded-target-resolution-design.md)
+and [model](../../Specs/README.md) contracts for the imported premises.
 
-**What remains unresolved.** Remote Windows WSL qualification, the imported
-FC5/M4 remote gates, caller S6 and frame-path F4 remain separate. The v1 scalar
-profile has no general SMT solver, historical trace, loop-instance value proof,
-loaded-address inverse or root-cause conclusion. Missing relations remain
-unknown. A finite model or local capture pass does not close those limits.
+**What remains unresolved.** The original saved-source question is unknown at
+its finite resolver/prefix bounds. The extra raw original refresh has incomplete
+guard candidate coverage and no admitted caller link. Caller S6, frame-path F4,
+broader release, general SMT, historical traces, loop-instance value invariants,
+generic load inverses, root cause and universal refinement remain separate.
 
 ## Coverage of the four recommendation items
 
 | Item | Investigator question | Contract owner and current state | Work in this program |
 | --- | --- | --- | --- |
 | 5.1 — structural report first | Which captured activations, admitted local edges and unresolved frontiers are available before dataflow completes? | [Investigation source contract](investigation-design.md#structural-frame-report-before-dataflow); `BoundFrameStructure`, v1/v2 source reports and SF0–SF6 exist with [dated qualification](../../evidence/Ariadne/frame-structure/20261016/README.md). | Reuse the privately bound source. Recheck identities for reuse; preserve missing maps, auxiliary witnesses and source gaps. Do not reimplement SF0–SF6. |
-| 5.2 — cycles and examples | Which represented connections join the selected anchors, where are structural cycles, and what samples fit a separate budget? | [Connection contract](investigation-design.md#structural-corridors-and-cycle-summaries); `BoundFrameConnections` and its CLI/codec exist with [local finite/capture evidence](../../evidence/Ariadne/frame-connections/20261018/README.md). Remote acceptance remains open in FC5. | Reuse optional graph/corridor/SCC results. Their completion and retained examples are not prerequisites for value work. Close FC5 in its own ledger. |
+| 5.2 — cycles and examples | Which represented connections join the selected anchors, where are structural cycles, and what samples fit a separate budget? | [Connection contract](investigation-design.md#structural-corridors-and-cycle-summaries); `BoundFrameConnections` and its CLI/codec exist with [local finite/capture evidence](../../evidence/Ariadne/frame-connections/20261018/README.md). [Remote FC5/FC6 consumer acceptance](../../evidence/Ariadne/frame-question/20261019/README.md) now passes for those exact sources. | Reuse optional graph/corridor/SCC results. Their completion and retained examples are not prerequisites for value work. Retain FC5's exact source/corpus boundary. |
 | 5.3 — resolve one question's bottleneck | Under declared inputs and endpoint constraints, can a selected alternative be refuted, witnessed in the model, or only left unknown; which unfinished obligation blocks the answer? | New coordinator and assessment contract below. Existing target/guard/loop proof mechanisms remain their own owners. | Admit one typed question; schedule relevant work fairly; use checked constraints and existing induction strategies; publish premises, coverage and concrete evidence requirements. |
-| 5.4 — local fault dependencies | Which immediate values and possible writers contribute to a selected access, and which individual candidates can be excluded within a justified scope? | [Memory refinement](memory-provenance-refinement.md) has scalar/writer source implementation and finite probes, with full qualification pending. | Reuse a compatible completed callee when available; add the frame/source join and question-scoped local assessment without requiring completed caller dataflow. Retain unknown memory, interference and instance ambiguity. |
+| 5.4 — local fault dependencies | Which immediate values and possible writers contribute to a selected access, and which individual candidates can be excluded within a justified scope? | [Memory refinement](memory-provenance-refinement.md) has [remote finite/Scanner qualification](../../evidence/Ariadne/frame-question/20261019/README.md) for the selected candidate-preserving profile. | Reuse a compatible completed callee when available; add the frame/source join and question-scoped local assessment without requiring completed caller dataflow. Retain unknown memory, interference and instance ambiguity. |
 
 The paragraph following the four items is also part of this design: frame
 binding, structural recovery, feasibility, values/origins and execution evidence
@@ -64,12 +59,12 @@ flowchart TD
     Work --> Targets["Existing BAP target / guard / loop checkers; bounded continuation extension"]
     Work --> Values["Existing BAP transfer receipts / backward_preimage; scoped checker extension"]
     Work --> Writers["Existing memory refinement; validated completed-callee import"]
-    Targets --> Revision["Proposed immutable source revision; existing source admission"]
+    Targets --> Revision["Immutable source revision; existing source admission"]
     Revision --> Structure
-    Values --> Result["Proposed BoundFrameQuestion assessment"]
+    Values --> Result["BoundFrameQuestion assessment"]
     Writers --> Result
     Work --> Result
-    Result --> Codec["Proposed reports::frame_question replay / rendering"]
+    Result --> Codec["reports::frame_question replay / rendering"]
 ```
 
 The revision cycle is bounded by policy, not an unlimited retry loop. A baseline
@@ -451,8 +446,9 @@ records retain their own identities and unmet clauses. In particular, an old
 model pass or earlier backend timing does not qualify a new scheduler, checker,
 source revision or native validator.
 
-This design adds no runtime result today. Documentation and link checks are
-separate from implementing or qualifying the proposed contracts.
+The original design-only revision added no runtime result. The implemented
+profile below and the dated remote qualification now supersede that planning
+status; documentation checks remain separate from runtime acceptance.
 
 ## Implemented profile and usage
 
@@ -575,3 +571,29 @@ unless the retained BAP expression itself establishes the whole word; partial
 word joins cannot manufacture zero upper bits. The synthetic loop/point control,
 future-after-condition, captured-boundary and mixed-width controls are checked
 by separate compiled mutations in the current evidence record.
+
+## 2026-10-19 source-bound acceptance
+
+The [new record](../../evidence/Ariadne/frame-question/20261019/README.md) binds
+an unchanged 875-file campaign capsule to remote root/features, 32 finite model
+configurations, independent oracles, 33 compiled mutations, native compatibility,
+live controls, both declared capture-source applications and helper-free replay.
+The question consumer remains Rust over admitted BAP semantics; native-default
+and native/Rust Scanner comparison are separately exercised tiers.
+
+The original declared saved source keeps all 610 gaps; its alternative query
+remains unknown at the resolver-work and scalar-prefix limits. The controlled
+real capture supplies four observed and 367 derived value records, with all 10
+memory candidates plus interference. Its value layer stops at depth while its
+origin layer finishes. The additional original local-fault query preserves 25
+value records and 12 visible candidates; conservative origin charging stops
+refinement, so the publication keeps an unknown candidate count and unresolved
+entries. The selected historical Scanner's full 12-origin table is separately
+checked against completed baseline reaching definitions with exact native/Rust
+assessment equality and unchanged default report bytes.
+
+The extra fresh original source refresh is more limited than the retained
+structural input: candidate coverage leaves its initial MOVAPS unknown and its
+active caller link unavailable. The exact saved original source remains the
+consumer acceptance input; no fresh raw-source structural parity or completed
+caller claim is inferred from this finite question qualification.

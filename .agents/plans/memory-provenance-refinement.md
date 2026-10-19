@@ -2,37 +2,28 @@
 
 ## Context and follow-up
 
-**Status.** Source implementation added on 2026-10-11 from `8007236`, with
-independent expectations, root/source checks and two finite pinned-runtime
-probes. The section-5 integration now adds local model checking and compiled
-component controls; remote model qualification, the complete dedicated mutation
-campaign and full Scanner qualification remain pending. Full acceptance is not granted.
+**Status.** M0–M4 pass the selected bounded memory-refinement profile with
+[remote qualification dated 2026-10-19](../../evidence/Ariadne/frame-question/20261019/README.md). The complete declared Scanner
+candidate-table case, independent oracles, revised component model and five
+dedicated compiled mutations pass. Earlier source/local records remain historical.
 
-**Why this document exists.** The [design](../../docs/Ariadne/memory-provenance-refinement.md)
-defines bounded candidate-writer assessment and per-value backward inference.
-Its execution needs separate evidence for the mathematical rules, admitted
-semantic receipts, product integration and source-bound qualification.
+**Why this document exists.** The [canonical design](../../docs/Ariadne/memory-provenance-refinement.md)
+defines candidate-preserving writer assessment and scoped backward scalar facts.
 
-**What this document establishes.** Ordered implementation stages and gates for
-the complete selected design. Existing effects, original explanations, query
-roots and historical evidence remain the compatibility baseline.
+**What this document establishes.** The implementation and finite acceptance
+ledger for that design, including source-bound mathematical, semantic-receipt,
+product and captured-Scanner evidence.
 
-**Where to go next.**
+**Where to go next.** Read the canonical design, [new qualification](../../evidence/Ariadne/frame-question/20261019/README.md),
+[section-5 integration](frame-question-investigation.md),
+[Scanner follow-up](scanner-partial-explanation.md),
+[model guide](../../Specs/README.md) and [BAP trust boundary](../../docs/Ariadne/semantic-assurance.md).
 
-- [Section-5 frame integration](frame-question-investigation.md) — implemented P2/P5 frame/callee binding and local dependencies; M4 remains separate.
-
-- [Design and implementation details](../../docs/Ariadne/memory-provenance-refinement.md#implementation-details)
-  — input/output contracts, precision outcomes and source ownership.
-- [Model guide](../../Specs/README.md) — active analysis-model authority.
-- [BAP integration](../../docs/Ariadne/bap-analysis-core-design.md) — semantic
-  admission, helper identities, native/default and Rust reference boundaries.
-
-**What remains unresolved.** Remote model qualification, real-code mutations
-and the bound Scanner case are pending. The local cached helper was historical;
-a hash-verified accepted helper restored finite native parity. Heavy builds,
-model checks, mutation and large-query work must run remotely. The previously
-recorded remote endpoint is not currently reachable through SSH; local contract,
-oracle and source work can continue without claiming a remote tier.
+**What remains unresolved.** The selected Scanner retains all 12 origins as
+unresolved; qualification does not identify a historical writer. General alias
+precision, joint-state/loop-instance reconstruction, root cause and universal
+refinement remain outside the profile. Scanner S2–S4, caller S6, frame-path F4
+and broad release acceptance remain separate.
 
 ## Execution ledger
 
@@ -43,11 +34,11 @@ receipts; remote qualification must bind the revised model's own hashes.
 
 | Stage | Work | Acceptance |
 | --- | --- | --- |
-| M0 — independent contract | 784 range / 1,280 inverse expectations frozen; TLA+ source and remote check command specified. | Oracle and 2026-10-18 local Apalache/TLC checks pass; a sequence type annotation resolves the initial local typecheck failure. Remote checks remain unexercised. |
+| M0 — independent contract | 784 range / 1,280 inverse expectations frozen; TLA+ source and remote check command specified. | Oracle and 2026-10-18 local Apalache/TLC checks pass; a sequence type annotation resolves the initial local typecheck failure. Remote component checks pass on the 2026-10-19 source/tool inventory. |
 | M1 — symbolic assessment | Source implemented with full candidate coverage, bounded constant/common-base comparisons and immutable witnesses. | Finite oracle and source controls pass; broader qualification is M4. |
 | M2 — transfers and backward values | Opt-in canonical BIL sidecars, receipt validation, exact/constrained/unknown scalar rules and path-scoped worklist implemented. | Source controls and captured RBX/RCX seed probe pass; no general joint-state or loop-instance inference. |
 | M3 — product and reporting | Separate strict v1 codec, recomputation, JSON/text/DOT and explicit CLI mode implemented. | Finite probe preserves original JSON bytes and native/Rust assessments agree on one controlled capture. |
-| M4 — qualification | Root default/core-only and all-feature Clippy checks pass in bounded local checks; accepted helper restored for finite probes. | Remote model/mutation and complete Scanner clauses remain pending. |
+| M4 — qualification | Root default/core-only and all-feature Clippy checks pass in bounded local checks; accepted helper restored for finite probes. | Remote component model, five dedicated mutation cases and complete selected Scanner candidate-table clauses pass, 2026-10-19. |
 
 ## Resume commands
 
@@ -89,3 +80,21 @@ investigation gates from the owning feature documents. Isolate mutation/replay
 build outputs under separate `target/` subdirectories. Retain missing prerequisites
 and failures as such; no old performance or accepted P4 receipt qualifies these
 changed sources automatically.
+
+## 2026-10-19 remote M4 completion
+
+The [remote record](../../evidence/Ariadne/frame-question/20261019/README.md)
+retains the current component typecheck/TLC run, 784 range/1,280 inverse oracle
+cases, five compiled behavioral mutations with passing original controls,
+finite live probes and the complete declared Scanner case. The hardened
+mutation driver records executable/log/source hashes and rejects compile or
+transport failures as mutation credit; final builds live under the root target.
+
+For capture `ed82b433…`, entry D960, fault DD6E and selected load DD6A, the new
+assessment preserves the default base report byte-for-byte and matches native
+and Rust results exactly. An independent comparison to the completed baseline
+reaching set checks all 12 original candidate keys: entry memory, eight pushes
+and three stores. All remain unresolved, with the appropriate unsupported
+address/scope reasons; numerical facts are scoped, and the report is untruncated.
+This closes the selected candidate-table acceptance, leaving the Scanner
+control/decode and earlier-entry investigation in their owning follow-up plan.

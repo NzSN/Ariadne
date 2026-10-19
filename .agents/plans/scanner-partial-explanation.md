@@ -6,8 +6,9 @@
 `/tmp/ariadne-scanner-partial-explanation.html` (title: “Why Scanner’s explanation
 is partial”). The retained baseline and its 28 gap entries were checked against
 the original JSON and member manifest. This document records no new Scanner run
-or implementation acceptance. Follow-up stages S1–S4 remain pending; existing
-memory-refinement source work retains its separately recorded finite scope.
+or implementation acceptance in that original revision. The [2026-10-19 memory
+qualification](../../evidence/Ariadne/frame-question/20261019/README.md) now closes
+S1's selected candidate-table scope; S2–S4 remain pending.
 
 **Why this document exists.** The [Scanner admission resume record](../../docs/Ariadne/bap-analysis-core-design.md#admission-resume)
 shows that recovery now completes, while the [investigation contract](../../docs/Ariadne/investigation-design.md#binding-and-result-contract)
@@ -27,7 +28,7 @@ this work does not require an unsupported promotion to `explained`.
   focused explanation of the four real loads, conservative XOR diagnostic,
   candidate-writer assessment and backward scalar constraints.
 - [Memory-refinement execution plan](memory-provenance-refinement.md) — M0–M4
-  implementation and the still-pending model, mutation and full Scanner gates.
+  implementation and the qualified finite model/mutation/Scanner candidate-table scope.
 - [Investigation design](../../docs/Ariadne/investigation-design.md) — canonical
   query, claim, gap, publication and evidence contracts for this follow-up.
 - [Evidence guide](../../evidence/Ariadne/README.md) — source/tool identity checks,
@@ -35,8 +36,8 @@ this work does not require an unsupported promotion to `explained`.
 
 **What remains unresolved.** The snapshot does not establish the executed path,
 the actual memory writer or who produced the bad RSI value. Memory refinement
-has source implementation and finite probes, but its full Scanner qualification
-remains pending. The 20 retained recovery obligations need individual review.
+now has selected full-Scanner candidate-table qualification. The 20 retained
+recovery obligations and earlier-provenance boundary still need individual review.
 No historical-path, root-cause, universal-refinement or release qualification
 is established by this plan.
 
@@ -129,7 +130,7 @@ its stated premises.
 | Stage | Current state | Exit evidence |
 | --- | --- | --- |
 | S0 — preserve the baseline | Retained-data inspection complete for this document. | HTML counts and all 28 gap pairs agree with the retained JSON; explanation bytes match the member-manifest hash. No fresh analysis credit. |
-| S1 — clarify and assess memory provenance | Existing M0–M3 source work and finite probes are recorded; full Scanner gate pending. | Complete candidate table for the selected load, justified exclusions, explicit unknowns and preserved original output under M4 qualification. |
+| S1 — clarify and assess memory provenance | Selected candidate-table scope passes remote M4 qualification, 2026-10-19. | All 12 original candidate keys preserved with explicit unresolved reasons, default report bytes unchanged and native/Rust assessments equal; source-bound evidence retained. |
 | S2 — review control and decode obligations | Pending. | A disposition and evidence requirement for each of eight call, two indirect-target and ten decode obligations. |
 | S3 — review entry-origin limits | Pending. | Explicit earlier-provenance boundary; any additional accepted evidence is bound to a separate query or supported input contract. |
 | S4 — qualify and publish the follow-up | Pending. | Fresh source/tool-bound checks, exact-case outputs, complete gap disposition and an honestly assigned final status. |
@@ -268,3 +269,14 @@ semantic virtual addresses, not file offsets or graph identifiers.
 | `recovery:DecodeFailed` | `0x00007ff774442572` |
 | `recovery:CallTargets` | `0x00007ff7744425bf` |
 | `recovery:CallTargets` | `0x00007ff7744425e5` |
+
+## S1 qualification follow-up, 2026-10-19
+
+The [remote section-5/M4 record](../../evidence/Ariadne/frame-question/20261019/README.md)
+uses the same `ed82b433…` Scanner snapshot and selected DD6A load. Its complete
+12-origin table matches the completed baseline reaching set. Entry memory,
+eight pushes and three stores all remain unresolved with explicit scope/alias
+reasons. The default report is byte-preserved and native/Rust assessments match.
+This closes selected memory-candidate qualification while leaving S2's 20-site
+control audit, S3's earlier-entry provenance and S4's combined follow-up open.
+The original 28-gap explanation and its immutable qualification remain historical.

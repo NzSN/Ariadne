@@ -17,6 +17,42 @@
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
+## 2026-10-19 — Frame-question remote qualification and finite acceptance
+
+The [P0–P10 plan](.agents/plans/frame-question-investigation.md) and
+[canonical design](docs/Ariadne/frame-question-investigation-design.md) now have
+[source-bound remote evidence](evidence/Ariadne/frame-question/20261019/README.md)
+for the declared finite profile, including imported FC5/FC6 and selected M4.
+The 875-file source capsule is
+`7e23bbd4aab5e12e48d342d4ab0a9c9b51e2aacbd8ed35c2a749919c088610c6`.
+Root default/core/reports/BAP tests pass 323/57/70/194 with 114/22/22/56 ignored;
+format, Clippy, layout/features, 32 finite model configurations, independent
+oracles, 16/12/5 question/connection/memory compiled mutations and named native,
+live-capture and saved-report compatibility tiers pass remotely.
+
+The exact retained original/controlled sources produce independently checked
+22/133-edge shortest structural examples. The original saved-source question
+remains unknown with all 610 gaps; the controlled real capture yields 371 value
+records and preserves 10 candidates plus interference. A supplementary original
+fault query retains 25 values and 12 visible origins while honestly stopping
+origin refinement. Full selected Scanner assessment preserves baseline bytes,
+retains all 12 original candidates and matches native/Rust output. Actual prior
+question products, structural v1/conditional v2 and both legacy combined-report
+versions replay; BAP-only saved replay uses unavailable helper/runtime paths.
+
+Additional raw original refresh remains guard-candidate-coverage limited
+(caller 9/callee 769 nodes, no admitted active caller link). It is not credited
+as parity with the declared retained large source. Initial missing-rg, output
+parent and independent-observer stopped-count interpretation failures remain
+failed attempts in the evidence. The final memory mutation driver records
+positive controls, compiler/test/log hashes and source stability.
+
+The sealed archive contains 324 members, 186,653,677 bytes, SHA-256
+`3a051719957d3c373b074e4187e557a822e475b2a3dba65ae85f716139bebdf0`.
+Postqualification documentation changes are separate from the exercised source
+capsule. Caller S6, frame-path F4, broader release/history and universal
+refinement remain open. Scanner S1's selected memory gate closes; S2–S4 remain.
+
 ## 2026-10-18 — Section-5 question integration, local scope
 
 The [question design](docs/Ariadne/frame-question-investigation-design.md) and
