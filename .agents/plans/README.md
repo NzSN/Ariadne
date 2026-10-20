@@ -7,7 +7,8 @@ Stage 5.1 is complete within its separate structural frame-report scope;
 the dated ledger retains exact source/tool/corpus qualification.
 The [2026-10-19 remote qualification](../../evidence/Ariadne/frame-question/20261019/README.md)
 closes the finite section-5 P0–P10, FC0–FC6 consumer and selected memory M0–M4
-profiles. The [caller S6 record](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md) also closes its original completed-caller gate. Six ledgers below still contain unfinished work; overlapping gates
+profiles. The [caller S6 record](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md) also closes its original completed-caller gate. Finite [frame-path F4](../../evidence/Ariadne/frame-paths/20261020/README.md)
+is qualified separately. Five ledgers below still contain unfinished work; overlapping gates
 remain separate from those completed deliveries. The prior prerequisite/local
 records retain their dates and original scope.
 Thirty-one completed or superseded records live in `completed/`. Archiving
@@ -41,10 +42,10 @@ universal-proof clauses. A partial result is not a completed acceptance gate.
 | [Frame corridors and cycle summaries: Stage 5.2](frame-connections.md) | FC0–FC6 pass source-bound remote finite/capture acceptance on the exact declared saved sources. |
 | [Structural frame report: Stage 5.1](frame-structure-report.md) | SF0–SF6 complete within the 2026-10-16 recovery-only Windows AMD64/E8-call scope. Retained at its canonical path; caller S6 and frame-path F4 remain separate. |
 | [Caller semantic coverage](caller-semantic-coverage.md) | S0–S6 complete within the 2026-10-19 original Windows profile, including independent full-state checks. Frame-path F4 remains separate. |
-| [Frame-path enumeration](frame-path-enumeration.md) | Remote model/mutation and successful full-dump qualification. The previous original-dump retry returned unavailable; F4 needs fresh path-level qualification. |
+| [Frame-path enumeration](frame-path-enumeration.md) | F0–F4 pass the 2026-10-20 finite model/mutation/original-capture scope; the 32-node/two-visit path restriction retains partial coverage. Earlier unavailable and zero-path attempts remain historical. |
 | [I5c address wrap](i5c-address-wrap.md) | W0–W5 model, runtime, capture and qualification stages. |
 | [Indirect-target resolution](indirect-target-resolution.md) | Full R6 mutation/replay qualification; retain the narrower completed native/dump retry. |
-| [Investigation layer](investigation-layer.md) | I5c, other hypotheses, I6/I7 and remaining frame-path qualification. |
+| [Investigation layer](investigation-layer.md) | I5c, other hypotheses and I6/I7; finite frame-path F4 has separate qualification. |
 | [Memory provenance refinement](memory-provenance-refinement.md) | M0–M4 pass the selected remote finite/Scanner candidate-table scope. Wider alias/history claims remain outside the profile. |
 | [Scanner partial explanation](scanner-partial-explanation.md) | Selected S1 candidate-table gate passes; S2–S4 control/decode audit, entry provenance and combined follow-up remain open. |
 | [Specification synchronization](specification-sync.md) | S3 remote qualification of the audited model suite. |

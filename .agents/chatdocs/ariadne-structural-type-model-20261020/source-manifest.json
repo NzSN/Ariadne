@@ -1,0 +1,200 @@
+{
+  "schema": "ariadne.chatdoc-source/v1",
+  "date": "2026-10-20",
+  "revision": "184a181a0a09c81bed38c543721bd10970512d89",
+  "purpose": "Explanatory structural type-theoretic reconstruction, not new executable semantics or qualification.",
+  "sources": {
+    "AGENTS.md": {
+      "bytes": 5585,
+      "sha256": "4e24421d54ff294a5fe04f6ff5f14a169073f14ec058d06d72f669d677c70707"
+    },
+    "CHECKPOINTS.md": {
+      "bytes": 105837,
+      "sha256": "45bc75f1ce75a6c6c99a238d4ab26ef76107291461d00dbde074b7ce13e77512"
+    },
+    "ROADMAP.md": {
+      "bytes": 19614,
+      "sha256": "a6f7a4671c8b522aa31ad732126183ad9933e4a6815022a59c390fcf9982dcc2"
+    },
+    "Specs/Ariadne.tla": {
+      "bytes": 29274,
+      "sha256": "26d3a783c43b0b86029bfbeb2e9f8bff7a56d3c7e8702493d7b502d21bf32019"
+    },
+    "Specs/AriadneFrameConnections.tla": {
+      "bytes": 8078,
+      "sha256": "4442512fabc2999404494926d34372cd2876b9bef3e39691d0633588280075fc"
+    },
+    "Specs/AriadneFrameQuestion.tla": {
+      "bytes": 3436,
+      "sha256": "d15ad67eb7be083abdb9146847416cd83b991dac45c7dd88d549488f1111b65b"
+    },
+    "Specs/AriadneFrameStructure.tla": {
+      "bytes": 15824,
+      "sha256": "58f3f368b3fdf730fcee104769a43de452af899d1d5a3c0e682edf907dc87ec1"
+    },
+    "Specs/AriadneLoopTargetClosure.tla": {
+      "bytes": 9630,
+      "sha256": "876f6331bc1e7fc4e70864c486b589df66ffd5894bc659d6c1dfdbc4d1ed105d"
+    },
+    "Specs/README.md": {
+      "bytes": 65670,
+      "sha256": "61d41e196598979c51f7a0cf4887ffcbb9d7af89763a77dea8d5e1194dd4c5a5"
+    },
+    "docs/Ariadne/architecture.md": {
+      "bytes": 30735,
+      "sha256": "a2c300a3933d135a992983a557dcc8f34bc7784619b006c58ebdb34e3a4ac534"
+    },
+    "docs/Ariadne/bap-analysis-core-design.md": {
+      "bytes": 93872,
+      "sha256": "da8c0a799d414a31e4637f65ba42c09f4b61be7bb0ce5a0f8969204a31b9d06c"
+    },
+    "docs/Ariadne/caller-semantic-coverage-design.md": {
+      "bytes": 22303,
+      "sha256": "8fdcdd85bb3deeb46da38182a43f585d7f8a96303c254a92e6cf2ba80c63fe0c"
+    },
+    "docs/Ariadne/file-reader-design.md": {
+      "bytes": 64443,
+      "sha256": "d8af6e11e2ecb8e004be0a95cbee036cc6b94d960d89f8448937f39f118125be"
+    },
+    "docs/Ariadne/frame-question-investigation-design.md": {
+      "bytes": 41058,
+      "sha256": "46fc5a8d4f6109cc1c75574d197b24fbb1000b34c5abfd05de8df0973e404480"
+    },
+    "docs/Ariadne/guarded-target-resolution-design.md": {
+      "bytes": 44720,
+      "sha256": "d9def1f7398f18634f7a55873a01606fd07c1156588f20c6998d24984fad6060"
+    },
+    "docs/Ariadne/investigation-design.md": {
+      "bytes": 94153,
+      "sha256": "d7cd35950ddda415d74be9d5582076247c399d7e4e33058e0b56e946a760f6a0"
+    },
+    "docs/Ariadne/semantic-assurance.md": {
+      "bytes": 16501,
+      "sha256": "d0603adf75e147899a4129da0d2595cf28dcc4bcb806597fc6b8eda51b7aff7e"
+    },
+    "docs/implementation.md": {
+      "bytes": 16313,
+      "sha256": "aa8ac131737df32b8c87708be6f52ad64ba16cc17b8c7887bc3f20c425bf7259"
+    },
+    "evidence/Ariadne/caller-semantic-coverage/20261019/README.md": {
+      "bytes": 7551,
+      "sha256": "f0340ad3697e9ba9f6c6302ab2326a11bacb7f9646c2125c8ca3611ec75c4e2a"
+    },
+    "evidence/Ariadne/caller-semantic-coverage/20261019/publication-verification.json": {
+      "bytes": 5505,
+      "sha256": "b2589bc042f7929603b966fefea905f88081231c307bca6bd8349d8c4e91dfa1"
+    },
+    "evidence/Ariadne/caller-semantic-coverage/20261019/qualification.json": {
+      "bytes": 2388,
+      "sha256": "23adc3bcdd91d0e2691247cf71e76ecdda185d0cb38fd7192adf43d2f5072936"
+    },
+    "evidence/Ariadne/caller-semantic-coverage/20261019/source-manifest.json": {
+      "bytes": 119853,
+      "sha256": "17f15990afc4ce493233d2c43b52bf9252295f2d1691cdb3e354aeecbc917a64"
+    },
+    "native/bap-core/dense_completion.ml": {
+      "bytes": 7370,
+      "sha256": "c83e876a005423bfb2f08f044f91eed3283e810a32660400e52febb612016d67"
+    },
+    "native/bap-core/recovery.ml": {
+      "bytes": 17954,
+      "sha256": "ad8ab3250d96e08d161f51ef5327946796eb0a00bc58152a27ca69aa6a204de5"
+    },
+    "src/analysis_view.rs": {
+      "bytes": 2389,
+      "sha256": "d155b18f403291f0f99b6aec9dbb0d1b277160a119c1cf0310fe22b6de90ad2e"
+    },
+    "src/bap/alignment_hypothesis.rs": {
+      "bytes": 27684,
+      "sha256": "6d69a628a5f093f2729d108e5233d56ad9a709cc5ac0b545691e6518e90e54e5"
+    },
+    "src/bap/core_protocol.rs": {
+      "bytes": 18471,
+      "sha256": "9a604c074958ff8c7dd21703ca73e4a16c35fc7e3e9e5fdc0b3925b81afd0672"
+    },
+    "src/bap/guard_admission.rs": {
+      "bytes": 51884,
+      "sha256": "cc9be3470525cb1e47ff297b2bd215f9aa179f7f4794a2f94ffc3e93d4e61b0b"
+    },
+    "src/bap/target_resolution.rs": {
+      "bytes": 73210,
+      "sha256": "d74cbb22069c457438fb243d730c09ae977bcdcbc066c84faff7b38fe23607e7"
+    },
+    "src/bap/target_resolution/loop_closure.rs": {
+      "bytes": 51029,
+      "sha256": "4835bc5620a75731cfc1fc2b11c841688a2be3eb2cf075e1ff282720213e47e7"
+    },
+    "src/completion.rs": {
+      "bytes": 9574,
+      "sha256": "69dac733d552b0a616efe45a853a0b09fb4908aa4b5257fbd68dcde3c9926d6c"
+    },
+    "src/definition_set.rs": {
+      "bytes": 9731,
+      "sha256": "efe26834d096f0e8e7a5e3ce791c295ab84e915cefa89fdb4f768f928a8280ca"
+    },
+    "src/engine.rs": {
+      "bytes": 16254,
+      "sha256": "059a43d8688182525d4f4b31c470dcc88e93a2118a4aa6c9d0b701bf2866f337"
+    },
+    "src/input/address_space.rs": {
+      "bytes": 5703,
+      "sha256": "0a41c8cb9658ff9d04b2c48896c13fc0fd1cbf339346dcd6dbfa056c5a61d053"
+    },
+    "src/input/materialize.rs": {
+      "bytes": 72927,
+      "sha256": "30924300914f11bba9f751f5c3abde816bc9d5f884c2131ba6193c828e613d5e"
+    },
+    "src/investigation/frame_connections.rs": {
+      "bytes": 34775,
+      "sha256": "31eeed425929b979e31bfbabd22a87d7ba1ea765598d2f0a6871aa6b8db4f31e"
+    },
+    "src/investigation/frame_paths.rs": {
+      "bytes": 56024,
+      "sha256": "82144c81b174d357cfaed6cb8456f730aeb883678c3ec4da034f7ce35000a041"
+    },
+    "src/investigation/frame_question/alternative.rs": {
+      "bytes": 24440,
+      "sha256": "1bcfa62d2d3ea9d4002b6f10d20474dcfb54a77dbffea47a028d95f375cb23e2"
+    },
+    "src/investigation/frame_question/model.rs": {
+      "bytes": 11591,
+      "sha256": "3bb43265e7c817b1bc213c648326b87a5e2cccbcee8b7b7884e6f33051830e50"
+    },
+    "src/investigation/frame_structure.rs": {
+      "bytes": 54767,
+      "sha256": "4a16793d4cb45df8730273087792b98cd84621188d6768a31def883e98a8488b"
+    },
+    "src/llvm_ir.rs": {
+      "bytes": 15015,
+      "sha256": "c5b173605bab60001b04b829258519412f94d92d0c4c558eee6f4d2618914e93"
+    },
+    "src/machine_state.rs": {
+      "bytes": 18929,
+      "sha256": "bc9d52eec94b481af854ba205c56a35a0f5f1536eacf16f9459b50ad2146f293"
+    },
+    "src/model.rs": {
+      "bytes": 9957,
+      "sha256": "9840e96e86685f258cfff7aca56c2dc429902acd1978d1b73174d23e20280e5c"
+    },
+    "src/recovery.rs": {
+      "bytes": 7284,
+      "sha256": "e078533a32059b73e543300719b0499dd10b256f0e7d410c7fc7e4cabba3854f"
+    }
+  },
+  "notation_references": [
+    {
+      "title": "Frank Pfenning, Lecture Notes on Subtyping (2003)",
+      "url": "https://www.cs.cmu.edu/~fp/courses/15312-f03/handouts/16-subtyping.pdf"
+    },
+    {
+      "title": "Robert Harper, Practical Foundations for Programming Languages, second-edition preview",
+      "url": "https://www.cs.cmu.edu/~rwh/pfpl/abbrev.pdf"
+    }
+  ],
+  "retained_evidence": {
+    "runtime_inputs_checked": 980,
+    "all_match": true,
+    "qualification_rerun": false
+  },
+  "link_contract": "PDF source links are relative to the archive folder and open current checkout files. Reader policy can restrict source-file actions; hashes bind the inspected bytes."
+}

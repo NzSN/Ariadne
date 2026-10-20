@@ -11,6 +11,7 @@ EXTENDS Naturals, FiniteSets, Sequences
 \* hash validation and process RSS are outside this search abstraction.
 \* @typeAlias: frameEdge = {src: Int, dst: Int, kind: Str};
 \* @typeAlias: framePath = {nodes: Seq(Int), edges: Seq($frameEdge)};
+FramePaths_typedefs == TRUE
 CONSTANT
   \* @type: Set(Int);
   Nodes
@@ -52,16 +53,25 @@ CONSTANT
   Writers
 \* @type: (Int, Int, Str) => $frameEdge;
 Edge(a,b,kind) == [src |-> a, dst |-> b, kind |-> kind]
+\* @type: ($frameEdge, Int) => Bool;
+EdgeFrom(e,n) == e.src = n
+\* @type: Seq($frameEdge);
 DemoEdges == <<Edge(1,2,"taken"), Edge(1,2,"fallthrough"),
                Edge(1,3,"next"), Edge(2,2,"jump"),
                Edge(2,4,"next"), Edge(3,4,"next")>>
-DemoAcyclicEdges == SelectSeq(DemoEdges, LAMBDA e: e.src # e.dst)
+\* @type: $frameEdge => Bool;
+NonLoopEdge(e) == e.src # e.dst
+\* @type: Seq($frameEdge);
+DemoAcyclicEdges == SelectSeq(DemoEdges, LAMBDA e: NonLoopEdge(e))
+\* @type: Bool;
 DemoConstants ==
   /\ Nodes = {1,2,3,4} /\ EdgeOrder = DemoEdges /\ Start = 1 /\ Finish = 4
   /\ NP = 3 /\ MaxSteps = 6 /\ MaxVisits = 2 /\ MaxWork = 20
   /\ MaxScans = 40 /\ DeadlineAt = 21
   /\ GraphComplete = TRUE /\ AllowExternalStops = FALSE /\ Writers = {1,2,3}
+\* @type: Set($frameEdge);
 Edges == {EdgeOrder[i] : i \in DOMAIN EdgeOrder}
+\* @type: Bool;
 InputContract ==
   /\ IsFiniteSet(Nodes) /\ Start \in Nodes /\ Finish \in Nodes
   /\ NP \in 1..4097
@@ -90,11 +100,13 @@ Valid(p) == Prefix(p) /\ Last(p) = Finish
 \* @type: ($framePath, $frameEdge) => $framePath;
 Extend(p,e) == [nodes |-> Append(p.nodes,e.dst), edges |-> Append(p.edges,e)]
 \* @type: Int => Seq($frameEdge);
-Outgoing(n) == SelectSeq(EdgeOrder, LAMBDA e: e.src = n)
+Outgoing(n) == SelectSeq(EdgeOrder, LAMBDA e: EdgeFrom(e,n))
+RECURSIVE Reverse(_)
 \* @type: Seq($frameEdge) => Seq($frameEdge);
-Reverse(s) == [i \in 1..Len(s) |-> s[Len(s)-i+1]]
+Reverse(s) == IF Len(s)=0 THEN <<>> ELSE Append(Reverse(Tail(s)),Head(s))
 \* @type: Seq($framePath) => Seq($framePath);
 DropLast(s) == SubSeq(s,1,Len(s)-1)
+\* @type: $framePath;
 Seed == [nodes |-> <<Start>>, edges |-> <<>>]
 VARIABLE
   \* @type: Seq($framePath);

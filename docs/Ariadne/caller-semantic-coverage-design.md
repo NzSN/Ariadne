@@ -8,9 +8,10 @@
 
 **What this document establishes.** Checked normal-flow terminal/load admission, versioned replay and bounded complete dataflow with lossless membership storage. BAP lifting remains trusted; LLVM supplies independent decode/control facts.
 
-**Where to go next.** Read the [new qualification](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md), [S0–S6 ledger](../../.agents/plans/caller-semantic-coverage.md), [completion implementation](../implementation.md), [guard contract](justified-branch-pruning-design.md) and remaining [frame-path F4](../../.agents/plans/frame-path-enumeration.md).
+**Where to go next.** Read the [new qualification](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md), [S0–S6 ledger](../../.agents/plans/caller-semantic-coverage.md), [completion implementation](../implementation.md), [guard contract](justified-branch-pruning-design.md) and separately [qualified finite frame-path F4](../../evidence/Ariadne/frame-paths/20261020/README.md),
+with its [execution ledger](../../.agents/plans/frame-path-enumeration.md).
 
-**What remains unresolved.** The later MOVAPS load remains Unknown under the original premises; two callee indirect barriers remain. Frame-path F4, broader release/large-report qualification, executed history, root cause and universal refinement remain separate. Completed dataflow is relative to the admitted graph.
+**What remains unresolved.** The later MOVAPS load remains Unknown under the original premises; two callee indirect barriers remain. Finite frame-path F4 has separate source-bound qualification under a 32-node/two-visit path policy and retains partial coverage. Broader release/large-report qualification, executed history, root cause and universal refinement remain open. Completed dataflow is relative to the admitted graph.
 
 ## Reproduced facts
 
@@ -173,8 +174,10 @@ original requests, an independent per-row fixed-point check, prefix/replay and
 hostile codec controls, applicable core/native/model/replay/mutation qualification,
 and a byte-identical raw-dump admission refresh with explicit source differences.
 The [source-bound qualification](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md) passes those named clauses. Later
-load alignment, callee target gaps, frame-path admission and the fresh raw-source
-guard-coverage limitation retain separate outcomes.
+load alignment, callee target gaps and the fresh raw-source guard-coverage
+limitation retain separate outcomes. Finite frame-path admission/enumeration now
+has the separately [qualified F4 successor](investigation-design.md#f4-post-s6-qualification);
+it reuses the unchanged completed S6 requests and does not refresh S6 evidence.
 
 Predicate-admission v2 was written before runtime implementation and distinguishes certified normal terminals, pending load/store guards and coverage barriers. It models stale epochs, invalid scope/evidence, late edges, forbidden terminal successors and unknown alignment. Existing core Stop semantics and target/loop premise interfaces remain authoritative and unchanged. Finite checks do not prove universal refinement or an inter-model coupling theorem.
 

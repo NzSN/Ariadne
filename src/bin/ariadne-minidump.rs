@@ -724,7 +724,7 @@ fn parse_index(s: &str) -> Result<usize, Box<dyn Error>> {
 fn frame_query(args: &Args, snapshot: &FileSnapshot) -> Result<(), Box<dyn Error>> {
     use ariadne::investigation::{
         FramePathLimits, FramePathQuestion, FrameRecoveryLimits, active_frame_entry,
-        bind_frame_paths, list_frame_paths,
+        bind_frame_paths, bind_frame_paths_with_limits, list_frame_paths,
     };
     let (n, m) = args
         .frame_pair
@@ -833,7 +833,11 @@ fn frame_query(args: &Args, snapshot: &FileSnapshot) -> Result<(), Box<dyn Error
             ));
         }
     }
-    let bound = bind_frame_paths(chain, queries)?;
+    let bound = if args.frame_limits.is_some() {
+        bind_frame_paths_with_limits(chain, queries, &limits)?
+    } else {
+        bind_frame_paths(chain, queries)?
+    };
     let listing = list_frame_paths(
         &bound,
         FramePathQuestion {

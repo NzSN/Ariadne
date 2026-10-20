@@ -1,0 +1,66 @@
+{
+  "schema": "ariadne.chatdoc-render/v1",
+  "date": "2026-10-20",
+  "revision": "184a181a0a09c81bed38c543721bd10970512d89",
+  "files": {
+    "model.tex": {
+      "sha256": "cf8cbcc0001193993c6b096819fee512581667a8aa1f741bbec6e309160d85b4",
+      "bytes": 57070
+    },
+    "model.pdf": {
+      "sha256": "cf5573cf123dcca57e55ac718bee2904171220b1f4624af827c981d81a3e7c68",
+      "bytes": 180574
+    }
+  },
+  "renderer": {
+    "name": "Tectonic",
+    "version": "0.17.0",
+    "executable_sha256": "a98aa59ad5c1df39a6c9e56cbfc5088f2b11d6c179c0130b97998e4bd46a46da",
+    "download_url": "https://github.com/tectonic-typesetting/tectonic/releases/download/tectonic%400.17.0/tectonic-0.17.0-x86_64-unknown-linux-musl.tar.gz",
+    "download_sha256": "8533d07f9ccbd7a65824b9e0459041bca34af1eb33daba48f59215593753a3b7",
+    "command": "tectonic --untrusted --only-cached --keep-logs --keep-intermediates --outdir <temporary-build> model.tex",
+    "cache": "temporary XDG_CACHE_HOME; no system installation"
+  },
+  "checks": {
+    "pages": 22,
+    "outline_entries": 45,
+    "links": 71,
+    "text_bounds": "passed",
+    "unresolved_references": false,
+    "overfull_lines": false,
+    "missing_glyphs": false,
+    "underfull_table_lines_retained": 16,
+    "source_links_resolve": 19,
+    "all_source_links_resolve": true,
+    "visual_contact_sheet_all_pages": true,
+    "visual_sample_pages": [
+      1,
+      8,
+      9,
+      11,
+      16,
+      18
+    ],
+    "source_link_launches_exercised": false,
+    "archive_index_references_and_fragments_verified": 118,
+    "inspected_source_hashes_verified": 44,
+    "root_documentation_links_passed": 2368
+  },
+  "runtime_tests_or_builds_executed": false,
+  "new_analysis_or_qualification": false,
+  "wslview": {
+    "status": "launch_succeeded",
+    "exit_code": 0,
+    "command": [
+      "wslview",
+      "/home/nzsn/Repos/Ariadne/.agents/chatdocs/ariadne-structural-type-model-20261020/model.pdf"
+    ],
+    "recorded_utc": "2026-10-20T01:55:24.567426+00:00",
+    "viewer_window_inspected": false
+  },
+  "limits": [
+    "Explanatory dependent/refinement indices are not Rust types or checked proofs.",
+    "Retained source-bound qualification was checked for source identity, not rerun.",
+    "Local source-file links depend on PDF-reader policy."
+  ]
+}

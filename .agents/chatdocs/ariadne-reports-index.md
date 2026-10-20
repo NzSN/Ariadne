@@ -8,9 +8,10 @@ Chat reports and their browser renderings are kept in `.agents/chatdocs/`. This 
 
 Canonical documents under `docs/` remain in place. The two 2026-10-12 design/plan pages below preserve the original browser presentation and its matching historical Markdown; current design and execution ownership remains in `docs/Ariadne/` and `.agents/plans/`.
 
-| Chat document | Browser page | Markdown |
+| Chat document | View | Source |
 | --- | --- | --- |
-| Open-plan index: six unfinished ledgers; caller S6 and Stage 5.2 complete (2026-10-19) | [Open index](ariadne-open-plans-20261019/index.html) | HTML only |
+| Ariadne current model through structural types, refinements and inference rules (2026-10-20; local revision 184a181) | [PDF (22 pages)](ariadne-structural-type-model-20261020/model.pdf) | [LaTeX source](ariadne-structural-type-model-20261020/model.tex) |
+| Open-plan index: five unfinished ledgers; frame-path F4, caller S6 and Stage 5.2 complete (2026-10-20) | [Open index](ariadne-open-plans-20261019/index.html) | HTML only |
 | Section 5 delivery: focused frame questions, fault dependencies and evidence (2026-10-18) | [Open](ariadne-frame-question-delivery-20261018.html) | HTML only |
 | Stage 5.2 implementation plan: frame corridors, SCCs and example routes (2026-10-18) | [Open](ariadne-frame-connections-plan-20261018.html) | [Canonical plan](../plans/frame-connections.md) |
 | Crashpad Windows dump: null-write diagnosis and six-frame path explorer (2026-10-18) | [Open](ariadne-crashpad-dump-analysis-20261018.html) | HTML only |
@@ -49,7 +50,7 @@ The first-jump page includes the captured selector/table calculator and search-s
 
 **Why this document exists.** The [chat-document skill](../../../skills/skills/productivity/chatdoc/SKILL.md) keeps explanations and their renderings together while preserving existing `docs/` documents.
 
-**What this document establishes.** This index lists the available report formats and interactive illustrations. The archive contains 29 reports plus this index. Older reports preserve their Markdown/HTML pairs; new chat reports default to HTML only unless Markdown is explicitly requested. Historical browser pages are retained; reconstructed content is labeled. The graph page preserves its original template, with SVGs reconstructed from the retained completed reports and input hashes recorded alongside it.
+**What this document establishes.** This index lists the available report formats and interactive illustrations. The archive contains 35 reports plus this index. Older reports preserve their Markdown/HTML pairs; new chat reports default to HTML only unless Markdown is explicitly requested. Historical browser pages are retained; reconstructed content is labeled. The graph page preserves its original template, with SVGs reconstructed from the retained completed reports and input hashes recorded alongside it.
 
 **Where to go next.** Consult the [investigation contract](../../docs/Ariadne/investigation-design.md), [target-resolution contract](../../docs/Ariadne/indirect-target-resolution.md) and [checkpoint history](../../CHECKPOINTS.md) for their respective contracts, retained results and delivery status.
 

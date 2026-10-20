@@ -24,10 +24,11 @@ pub use frame_structure::{
 pub(crate) mod frame_unwind;
 pub use frame_paths::{
     BoundFramePaths, COMPOSED_FRAME_PATH_SCHEMA, FRAME_PATH_SCHEMA, FramePathCounters,
-    FramePathEdge, FramePathEdgeKind, FramePathLimits, FramePathListing, FramePathNode,
-    FramePathQuestion, GUARDED_FRAME_PATH_SCHEMA, LEGACY_COMPOSED_FRAME_PATH_SCHEMA,
-    LEGACY_GUARDED_FRAME_PATH_SCHEMA, LEGACY_V2_COMPOSED_FRAME_PATH_SCHEMA, ListedFramePath,
-    active_frame_entry, bind_frame_paths, list_frame_paths,
+    FramePathEdge, FramePathEdgeKind, FramePathGraphLimits, FramePathLimits, FramePathListing,
+    FramePathNode, FramePathQuestion, GUARDED_FRAME_PATH_SCHEMA, LEGACY_COMPOSED_FRAME_PATH_SCHEMA,
+    LEGACY_GUARDED_FRAME_PATH_SCHEMA, LEGACY_V2_COMPOSED_FRAME_PATH_SCHEMA,
+    LIMITED_FRAME_PATH_SCHEMA, ListedFramePath, active_frame_entry, bind_frame_paths,
+    bind_frame_paths_with_limits, list_frame_paths,
 };
 pub use frame_unwind::{
     CapturedFrameChain, FRAME_UNWIND_PROFILE, FrameMemoryEvidence, FrameRecoveryLimits,

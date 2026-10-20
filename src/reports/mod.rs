@@ -10,7 +10,7 @@ mod frame_structure_dictionary;
 mod investigation;
 pub use frame_paths::{
     decode_frame_path_limits, decode_frame_paths, decode_frame_paths_with_limit,
-    encode_frame_paths, render_frame_paths,
+    decode_frame_paths_with_policy, encode_frame_paths, render_frame_paths,
 };
 #[cfg(feature = "bap")]
 mod memory_provenance;

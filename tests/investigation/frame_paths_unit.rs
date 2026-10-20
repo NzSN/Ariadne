@@ -101,7 +101,153 @@ pub(super) fn input(edges: &[(usize, usize)]) -> Input {
     Input {
         chain,
         graphs: vec![graph, parent],
+        graph_limits: None,
     }
+}
+#[test]
+fn explicit_graph_policy_preserves_legacy_replay_and_independent_search_stops() {
+    let edges = [(0, 1), (1, 3)];
+    let legacy = list(input(&edges), q(10), limits(), Some(usize::MAX)).unwrap();
+    let legacy_json = serde_json::to_value(&legacy).unwrap();
+    assert!(legacy_json["input"].get("graph_limits").is_none());
+    assert_eq!(legacy.schema, FRAME_PATH_SCHEMA);
+    let mut explicit = input(&edges);
+    explicit.graph_limits = Some(FramePathGraphLimits {
+        max_graph_nodes: 6,
+        max_graph_edges: 2,
+    });
+    let listing = list(explicit.clone(), q(10), limits(), Some(usize::MAX)).unwrap();
+    assert_eq!(listing.schema, LIMITED_FRAME_PATH_SCHEMA);
+    assert_eq!(listing.paths[0].nodes, legacy.paths[0].nodes);
+    let bytes = serde_json::to_vec(&listing).unwrap();
+    assert_eq!(crate::reports::decode_frame_paths(&bytes).unwrap(), listing);
+    if let Some(path) = std::env::var_os("ARIADNE_FRAME_PATH_FEATURE_FIXTURE") {
+        std::fs::write(path, &bytes).unwrap();
+    }
+    let mut narrow = limits();
+    narrow.max_graph_nodes = 0;
+    let stopped = list(explicit.clone(), q(10), narrow, Some(usize::MAX)).unwrap();
+    assert_eq!(stopped.stop_reason, "frame-graph-budget");
+    assert!(stopped.truncated && !stopped.enumeration_exhausted);
+    stopped.validate().unwrap();
+    explicit.graph_limits.as_mut().unwrap().max_graph_nodes = 5;
+    assert!(list(explicit, q(10), limits(), Some(usize::MAX)).is_err());
+    for field in ["max_graph_nodes", "max_graph_edges"] {
+        let mut tampered = serde_json::to_value(&listing).unwrap();
+        tampered["input"]["graph_limits"][field] = serde_json::json!(0);
+        assert!(
+            crate::reports::decode_frame_paths(&serde_json::to_vec(&tampered).unwrap()).is_err()
+        );
+    }
+    let mut tampered = serde_json::to_value(&listing).unwrap();
+    tampered["input"]["graph_limits"] = serde_json::Value::Null;
+    assert!(crate::reports::decode_frame_paths(&serde_json::to_vec(&tampered).unwrap()).is_err());
+    let mut tampered = serde_json::to_value(&listing).unwrap();
+    tampered["input"]
+        .as_object_mut()
+        .unwrap()
+        .remove("graph_limits");
+    assert!(crate::reports::decode_frame_paths(&serde_json::to_vec(&tampered).unwrap()).is_err());
+}
+#[test]
+fn saved_graph_admission_uses_independent_host_bounds_before_replay() {
+    let defaults = FramePathGraphLimits::default();
+    assert_eq!(defaults.max_graph_nodes, 8192);
+    assert_eq!(defaults.max_graph_edges, 32768);
+    assert_eq!(
+        defaults,
+        FramePathGraphLimits::from(&FramePathLimits::default())
+    );
+    let mut source = input(&[(0, 1), (1, 3)]);
+    source.graph_limits = Some(FramePathGraphLimits {
+        max_graph_nodes: usize::MAX,
+        max_graph_edges: usize::MAX,
+    });
+    let listing = list(source, q(10), limits(), Some(usize::MAX)).unwrap();
+    let bytes = serde_json::to_vec(&listing).unwrap();
+    let mut host = FramePathGraphLimits {
+        max_graph_nodes: 6,
+        max_graph_edges: 2,
+    };
+    assert_eq!(
+        crate::reports::decode_frame_paths_with_policy(&bytes, bytes.len(), &host).unwrap(),
+        listing
+    );
+    assert_eq!(
+        crate::reports::decode_frame_paths_with_limit(&bytes, bytes.len()).unwrap(),
+        listing
+    );
+    host.max_graph_nodes = 5;
+    let error =
+        crate::reports::decode_frame_paths_with_policy(&bytes, bytes.len(), &host).unwrap_err();
+    assert!(
+        error
+            .to_string()
+            .contains("host graph admission node budget")
+    );
+    host.max_graph_nodes = 6;
+    host.max_graph_edges = 1;
+    let error =
+        crate::reports::decode_frame_paths_with_policy(&bytes, bytes.len(), &host).unwrap_err();
+    assert!(
+        error
+            .to_string()
+            .contains("host graph admission edge budget")
+    );
+    let mut invalid_chain = listing;
+    invalid_chain.input.chain.chain_id.clear();
+    let bytes = serde_json::to_vec(&invalid_chain).unwrap();
+    host.max_graph_nodes = 5;
+    host.max_graph_edges = 2;
+    let error =
+        crate::reports::decode_frame_paths_with_policy(&bytes, bytes.len(), &host).unwrap_err();
+    assert!(
+        error
+            .to_string()
+            .contains("host graph admission node budget")
+    );
+}
+#[test]
+fn zero_search_work_still_replays_graph_identity_and_proof_sources() {
+    let mut source = input(&[(0, 1), (1, 3)]);
+    source.graph_limits = Some(FramePathGraphLimits::default());
+    let mut search = limits();
+    search.max_search_states = 0;
+    let listing = list(source, q(10), search, Some(usize::MAX)).unwrap();
+    assert_eq!(listing.stop_reason, "search-state-budget");
+    let host = FramePathGraphLimits {
+        max_graph_nodes: 6,
+        max_graph_edges: 2,
+    };
+    let bytes = serde_json::to_vec(&listing).unwrap();
+    assert_eq!(
+        crate::reports::decode_frame_paths_with_policy(&bytes, bytes.len(), &host).unwrap(),
+        listing
+    );
+    let mut wrong_identity = listing.clone();
+    wrong_identity.input.graphs[0]
+        .identity
+        .snapshot_id
+        .push('x');
+    let bytes = serde_json::to_vec(&wrong_identity).unwrap();
+    let error =
+        crate::reports::decode_frame_paths_with_policy(&bytes, bytes.len(), &host).unwrap_err();
+    assert!(
+        error
+            .to_string()
+            .contains("frame graph identity/size invalid")
+    );
+    let mut missing_proof = listing;
+    missing_proof.input.graphs[0].identity.semantic_profile =
+        crate::bap::guard_admission::PROFILE.into();
+    let bytes = serde_json::to_vec(&missing_proof).unwrap();
+    let error =
+        crate::reports::decode_frame_paths_with_policy(&bytes, bytes.len(), &host).unwrap_err();
+    assert!(
+        error
+            .to_string()
+            .contains("guarded frame graph has no proof sources")
+    );
 }
 fn q(np: usize) -> FramePathQuestion {
     FramePathQuestion {

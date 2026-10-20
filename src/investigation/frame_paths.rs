@@ -10,6 +10,7 @@ pub const GUARDED_FRAME_PATH_SCHEMA: &str = "ariadne.frame-paths/v5";
 pub const LEGACY_COMPOSED_FRAME_PATH_SCHEMA: &str = "ariadne.frame-paths/v3";
 pub const LEGACY_V2_COMPOSED_FRAME_PATH_SCHEMA: &str = "ariadne.frame-paths/v4";
 pub const COMPOSED_FRAME_PATH_SCHEMA: &str = "ariadne.frame-paths/v6";
+pub const LIMITED_FRAME_PATH_SCHEMA: &str = "ariadne.frame-paths/v7";
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -125,6 +126,38 @@ struct GuardFrameEvidence {
 struct Input {
     chain: CapturedFrameChain,
     graphs: Vec<FrameGraph>,
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "graph_limits"
+    )]
+    graph_limits: Option<FramePathGraphLimits>,
+}
+/// Aggregate graph admission bounds, independent of path-search restrictions.
+/// Saved-report consumers supply these separately from the retained source policy.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct FramePathGraphLimits {
+    pub max_graph_nodes: usize,
+    pub max_graph_edges: usize,
+}
+impl Default for FramePathGraphLimits {
+    fn default() -> Self {
+        Self::from(&FramePathLimits::default())
+    }
+}
+impl From<&FramePathLimits> for FramePathGraphLimits {
+    fn from(limits: &FramePathLimits) -> Self {
+        Self {
+            max_graph_nodes: limits.max_graph_nodes,
+            max_graph_edges: limits.max_graph_edges,
+        }
+    }
+}
+fn graph_limits<'de, D: serde::Deserializer<'de>>(
+    d: D,
+) -> Result<Option<FramePathGraphLimits>, D::Error> {
+    FramePathGraphLimits::deserialize(d).map(Some)
 }
 pub struct BoundFramePaths {
     input: Input,
@@ -204,7 +237,24 @@ pub fn bind_frame_paths(
     chain: CapturedFrameChain,
     analyses: Vec<(usize, BoundInvestigation)>,
 ) -> Result<BoundFramePaths, Error> {
+    bind_frame_paths_inner(chain, analyses, None)
+}
+/// Bind under explicit graph admission bounds, retained separately from search
+/// restrictions in a v7 source. The default binder and legacy wire stay unchanged.
+pub fn bind_frame_paths_with_limits(
+    chain: CapturedFrameChain,
+    analyses: Vec<(usize, BoundInvestigation)>,
+    limits: &FramePathLimits,
+) -> Result<BoundFramePaths, Error> {
+    bind_frame_paths_inner(chain, analyses, Some(FramePathGraphLimits::from(limits)))
+}
+fn bind_frame_paths_inner(
+    chain: CapturedFrameChain,
+    analyses: Vec<(usize, BoundInvestigation)>,
+    graph_policy: Option<FramePathGraphLimits>,
+) -> Result<BoundFramePaths, Error> {
     chain.validate()?;
+    let limits = graph_policy.unwrap_or_default();
     let mut graphs = Vec::new();
     let mut count = 0usize;
     let mut edge_count = 0usize;
@@ -226,6 +276,14 @@ pub fn bind_frame_paths(
         if f.function_begin.is_some_and(|begin| begin != entry) {
             return Err(invalid("graph entry disagrees with frame function"));
         }
+        count = count
+            .checked_add(bound.state.decoded.len())
+            .filter(|v| *v <= limits.max_graph_nodes)
+            .ok_or_else(|| invalid("frame graph admission node budget"))?;
+        edge_count = edge_count
+            .checked_add(bound.state.edges.len())
+            .filter(|v| *v <= limits.max_graph_edges)
+            .ok_or_else(|| invalid("frame graph admission edge budget"))?;
         #[cfg(feature = "bap")]
         let guard_admission = bound
             .guard_admission
@@ -260,14 +318,6 @@ pub fn bind_frame_paths(
                 })
             })
             .transpose()?;
-        count = count
-            .checked_add(bound.state.decoded.len())
-            .filter(|v| *v <= 8192)
-            .ok_or_else(|| invalid("frame graph admission node budget"))?;
-        edge_count = edge_count
-            .checked_add(bound.state.edges.len())
-            .filter(|v| *v <= 32768)
-            .ok_or_else(|| invalid("frame graph admission edge budget"))?;
         let in_function = |site: u64| {
             f.function_begin.is_none_or(|b| site >= b) && f.function_end.is_none_or(|e| site < e)
         };
@@ -342,26 +392,55 @@ pub fn bind_frame_paths(
         });
     }
     graphs.sort_by_key(|g| g.frame);
-    let input = Input { chain, graphs };
+    let input = Input {
+        chain,
+        graphs,
+        graph_limits: graph_policy,
+    };
     validate_input(&input)?;
     Ok(BoundFramePaths { input })
 }
 fn validate_input(input: &Input) -> Result<(), Error> {
+    // Legacy v1 treats profiles as supplied premises in builds without BAP.
+    // Explicit-policy v7 must not lose proof checks under the same schema.
+    #[cfg(not(feature = "bap"))]
+    if input.graph_limits.is_some()
+        && input.graphs.iter().any(|graph| {
+            [
+                "bap-guard-admission-v1",
+                "bap-guard-admission-v2",
+                "captured-guarded-targets/v1",
+                "captured-guarded-targets/v2",
+                "captured-guarded-targets/v3",
+            ]
+            .iter()
+            .any(|profile| graph.identity.semantic_profile.contains(profile))
+        })
+    {
+        return Err(invalid(
+            "explicit frame graph proof profile requires bap feature",
+        ));
+    }
     input.chain.validate()?;
+    let limits = input.graph_limits.unwrap_or_default();
     let mut frames = BTreeSet::new();
-    let mut total = 0;
-    let mut edges = 0;
+    let mut total = 0usize;
+    let mut edges = 0usize;
     for g in &input.graphs {
         let f = input
             .chain
             .frames
             .get(g.frame)
             .ok_or_else(|| invalid("invalid graph frame"))?;
-        total += g.nodes.len();
-        edges += g.edges.len();
+        total = total
+            .checked_add(g.nodes.len())
+            .ok_or_else(|| invalid("frame node count overflow"))?;
+        edges = edges
+            .checked_add(g.edges.len())
+            .ok_or_else(|| invalid("frame edge count overflow"))?;
         if !frames.insert(g.frame)
-            || total > 8192
-            || edges > 32768
+            || total > limits.max_graph_nodes
+            || edges > limits.max_graph_edges
             || g.identity.snapshot_id != input.chain.snapshot_id
             || g.identity.artifact_sha256 != input.chain.artifact_sha256
             || !super::validate::digest(&g.identity.query_id)
@@ -994,6 +1073,9 @@ pub(crate) fn decode_guard_request(
 }
 
 fn frame_path_schema(input: &Input) -> &'static str {
+    if input.graph_limits.is_some() {
+        return LIMITED_FRAME_PATH_SCHEMA;
+    }
     #[cfg(feature = "bap")]
     {
         let proofs: Vec<_> = input
@@ -1451,6 +1533,25 @@ impl FramePathListing {
     pub fn frame_chain(&self) -> &CapturedFrameChain {
         &self.input.chain
     }
+    /// Check caller-selected saved-report graph bounds before chain/proof replay.
+    /// The retained producer policy cannot enlarge these independent host bounds.
+    pub fn validate_with_graph_limits(&self, limits: &FramePathGraphLimits) -> Result<(), Error> {
+        let mut nodes = 0usize;
+        let mut edges = 0usize;
+        for graph in &self.input.graphs {
+            nodes = nodes
+                .checked_add(graph.nodes.len())
+                .filter(|count| *count <= limits.max_graph_nodes)
+                .ok_or_else(|| invalid("frame host graph admission node budget"))?;
+            edges = edges
+                .checked_add(graph.edges.len())
+                .filter(|count| *count <= limits.max_graph_edges)
+                .ok_or_else(|| invalid("frame host graph admission edge budget"))?;
+        }
+        self.validate()
+    }
+    /// Replay under the retained source policy. Saved-report decoders additionally
+    /// enforce independently supplied host bounds via `validate_with_graph_limits`.
     pub fn validate(&self) -> Result<(), Error> {
         let deadline = if self.stop_reason == "deadline-budget" {
             if self.elapsed_ms < self.limits.deadline_ms {
@@ -1486,6 +1587,10 @@ impl FramePathListing {
 #[cfg(all(test, feature = "input"))]
 #[path = "../../tests/investigation/frame_paths_unit.rs"]
 mod tests;
+
+#[cfg(all(test, feature = "reports", not(feature = "bap")))]
+#[path = "../../tests/investigation/frame_paths_reports_only.rs"]
+mod reports_only_tests;
 
 #[cfg(all(test, feature = "property-tests"))]
 #[path = "../../tests/investigation/frame_paths_properties.rs"]

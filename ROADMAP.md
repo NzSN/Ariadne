@@ -75,7 +75,7 @@ the [semantic assurance decision](docs/Ariadne/semantic-assurance.md).
 
 ## Guarded captured-target composition — scoped loop closure delivered
 
-The [design](docs/Ariadne/guarded-target-resolution-design.md), [composition plan](.agents/plans/completed/guarded-target-resolution.md) and [loop plan](.agents/plans/completed/loop-aware-target-resolution.md) deliver paired guarded/target preparation, versioned legacy replay and checked local-region induction. [Qualification dated 2026-10-15](evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) closes DA09 and DADD, all nine original incoming-coverage certificates and all 51 missing-start gates, with full native/Rust parity for both completed queries in that earlier stop-limited graph. The loop rule supplies coverage for already witnessed table entries. The caller follow-up below reaches a substantially larger graph; its completed-core gate now has S6 qualification; the frame-path gate remains open.
+The [design](docs/Ariadne/guarded-target-resolution-design.md), [composition plan](.agents/plans/completed/guarded-target-resolution.md) and [loop plan](.agents/plans/completed/loop-aware-target-resolution.md) deliver paired guarded/target preparation, versioned legacy replay and checked local-region induction. [Qualification dated 2026-10-15](evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) closes DA09 and DADD, all nine original incoming-coverage certificates and all 51 missing-start gates, with full native/Rust parity for both completed queries in that earlier stop-limited graph. The loop rule supplies coverage for already witnessed table entries. The caller follow-up below reaches a substantially larger graph; its completed-core gate now has S6 qualification. Finite original-capture frame-path F4 has the separate qualification below.
 
 ## Structural frame maps — Stage 5.1 delivered
 
@@ -108,8 +108,28 @@ in 91,175 actions within the original million-action limit.
 Completion uses exact compact membership and RPO; ordinary replay remains
 unchanged. The current LLVM rebuild restores the 30 original barriers after the
 stale-helper partial attempt. Later MOVAPS alignment and two callee targets remain
-unknown. Frame-path F4, release/large-report qualification, history/root cause and
-universal refinement remain separate.
+unknown. Finite frame-path F4 is separately qualified below; broader
+release/large-report qualification, history/root cause and universal refinement
+remain open.
+
+## Bounded structural frame paths — finite F4 qualified
+
+The [contract](docs/Ariadne/investigation-design.md#f4-post-s6-qualification),
+[F0–F4 ledger](.agents/plans/frame-path-enumeration.md) and
+[2026-10-20 evidence](evidence/Ariadne/frame-paths/20261020/README.md) qualify
+bounded structural enumeration for the unchanged original S6 requests and
+physical frames 1→0, thread 23668, NP=10. The final listing returns
+one structural path with native/Rust equality and helper-free
+saved replay. Six finite model configurations and typechecking, independent
+oracles/properties, compiled mutations and hostile codec controls pass their
+recorded scope.
+
+Explicit v7 graph admission and independent saved-decoder caps retain ordinary
+legacy defaults. The selected 32-node/two-visit path policy keeps coverage
+partial and preserves all possible writers and source unknowns. The initial
+512-node/million-state attempt returned zero paths and remains a failed positive
+gate. General unwinding, path feasibility/history, root cause, release and
+universal refinement remain outside this result.
 
 ## Investigation direction
 
@@ -160,8 +180,9 @@ adds opt-in Windows function-entry alignment premises, candidate closure and
 versioned proof validation. Its early dump retry stopped at later XORPS width
 admission; subsequent corrections and loop closure supersede that diagnostic.
 The caller coverage extension above now proves the initial MOVAPS alignment,
-while the later load and caller completion remain unresolved. None of these
-scoped results qualifies full-dump frame-path enumeration.
+while the later load remains unresolved. Caller completion and finite
+original-capture frame-path enumeration now have their own separately bound
+S6 and F4 evidence; the earlier admission results do not qualify those gates.
 
 ## Current checkpoint
 

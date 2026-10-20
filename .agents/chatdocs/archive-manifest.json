@@ -1,7 +1,7 @@
 {
   "archived": "2026-10-16",
   "scope": "Conversation presentation archive; canonical designs stay in docs/ and plan owners now live in .agents/plans/. No new analysis or qualification.",
-  "report_count": 33,
+  "report_count": 35,
   "markdown_html_pairs_including_index": 21,
   "source_session": "01a12ddc-4e59-7cb2-b5aa-67a8e522c597",
   "recovered_reports": [
@@ -840,12 +840,12 @@
       "sha256": "2667f3af9200452de3e195dc17664344a094f718310fb48d7527f5a02999ac33"
     },
     "ariadne-reports-index.html": {
-      "bytes": 13454,
-      "sha256": "1e5e0038ec2299e69e390b8c16e43e63380c2dc7fef82b82d1ba5b701215bd45"
+      "bytes": 13770,
+      "sha256": "b2392a6c1b7c19c943a450157c2e6f0c6b4abc578e4b01a24d0c5b5bb00bc407"
     },
     "ariadne-reports-index.md": {
-      "bytes": 7626,
-      "sha256": "c8547075c8c7eafe4e9ddb08e6ccd757b31a727d5724471675b8d39c68db2925"
+      "bytes": 7889,
+      "sha256": "2c20b9d87aa4074dfd674496036869f450451db79c672b2c62937cd02b9a0c10"
     },
     "ariadne-resolver-structural-types-20261015.html": {
       "bytes": 32858,
@@ -936,8 +936,8 @@
       "sha256": "2cbf44c62270ecf4bd84bff836eca67bb0663be58a3888921e6f0d8efffe6bcb"
     },
     "ariadne-open-plans-20261019/index.html": {
-      "bytes": 13365,
-      "sha256": "40858c669273f94edd6b7cc2174fd33d0e902fda2f00ae4574bf94234e696eba"
+      "bytes": 14456,
+      "sha256": "2f0d25c10c499e0994a5648aca165d39ee841608d1d9e88f0994d94ec77b2ebd"
     },
     "ariadne-open-plans-20261019/before-qualification.html": {
       "bytes": 10776,
@@ -950,10 +950,30 @@
     "ariadne-open-plans-20261019/before-caller-completion.html": {
       "bytes": 12671,
       "sha256": "8af604d4307a7f854ddb9f34bcbf5c0b9493042cb3aee3348754457e514625f6"
+    },
+    "ariadne-structural-type-model-20261020/model.pdf": {
+      "bytes": 180574,
+      "sha256": "cf5573cf123dcca57e55ac718bee2904171220b1f4624af827c981d81a3e7c68"
+    },
+    "ariadne-structural-type-model-20261020/model.tex": {
+      "bytes": 57070,
+      "sha256": "cf8cbcc0001193993c6b096819fee512581667a8aa1f741bbec6e309160d85b4"
+    },
+    "ariadne-structural-type-model-20261020/render-receipt.json": {
+      "bytes": 2293,
+      "sha256": "967856e9be360ff3915897b7bab9479098e8adb08c8f2c9832f2fcb8a3790bec"
+    },
+    "ariadne-structural-type-model-20261020/source-manifest.json": {
+      "bytes": 7703,
+      "sha256": "4941a4630978cbaa4c045fc782358bafd006bbda2538ecb46203adbaa3d455c6"
+    },
+    "ariadne-open-plans-20261019/before-frame-path-completion.html": {
+      "bytes": 13365,
+      "sha256": "40858c669273f94edd6b7cc2174fd33d0e902fda2f00ae4574bf94234e696eba"
     }
   },
   "directory": ".agents/chatdocs/",
-  "html_documents_including_index": 34,
+  "html_documents_including_index": 35,
   "markdown_documents_including_index": 21,
   "source_review_documents": [
     {
@@ -1111,7 +1131,7 @@
       "version_note": "Exact seven-open-plan presentation preserved before separate caller S6 completion."
     },
     {
-      "html": "ariadne-open-plans-20261019/index.html",
+      "html": "ariadne-open-plans-20261019/before-frame-path-completion.html",
       "date": "2026-10-19",
       "source_revision": "feecc34943326cc28981d9a8405f4432eed55b9a",
       "source_state": "Working-tree status after source-bound caller S6 completion; code and documentation updates are uncommitted over feecc34.",
@@ -1143,7 +1163,56 @@
       "qualification_snapshot_sha256": "0e841f58a12facddff4f462450517d94e86eab9a034cf6cb4d434d4faaa79a9c",
       "qualified_source_capsule_sha256": "d1c705d04fb20c215601416911355d274aa0b3fec3fac3539f259d5917257cc6",
       "prior_snapshot": "ariadne-open-plans-20261019/before-caller-completion.html",
-      "prior_snapshot_sha256": "8af604d4307a7f854ddb9f34bcbf5c0b9493042cb3aee3348754457e514625f6"
+      "prior_snapshot_sha256": "8af604d4307a7f854ddb9f34bcbf5c0b9493042cb3aee3348754457e514625f6",
+      "original_html": "ariadne-open-plans-20261019/index.html",
+      "version_note": "Exact six-open/six-completed presentation preserved before the finite frame-path F4 closure. All original source identities, scope and validation statements remain historical."
+    },
+    {
+      "html": "ariadne-open-plans-20261019/index.html",
+      "date": "2026-10-20",
+      "source_revision": "184a181a0a09c81bed38c543721bd10970512d89",
+      "source_state": "Current working-tree navigation after the separately retained finite F4 qualification.",
+      "canonical_plan_index": ".agents/plans/README.md",
+      "canonical_plan_index_sha256": "3cec05da1ff8a5d9337679e0366006871b237c19279e9aa96c1c15586b07d4fa",
+      "open_plan_count": 5,
+      "source_plan_sha256": {
+        ".agents/plans/indirect-target-resolution.md": "e30f3e4e207b124cc56c3e46471466d2d88af6e31a0bdce1355618c28bbcff23",
+        ".agents/plans/scanner-partial-explanation.md": "53ac1e008d27319e31af66494eb4e267a6a11a9ba5882aa5434e2e7387c417e3",
+        ".agents/plans/specification-sync.md": "593c48875e98eb69cbf77b58e85a4d9e2269724babacc11719718d634509e767",
+        ".agents/plans/i5c-address-wrap.md": "f72a6e9a68b28bc7a55ae82f0e8a2079b015f26de5b2d87a81c7c96734e67d0c",
+        ".agents/plans/investigation-layer.md": "e6873e533c499124c58decbda3b9ef5d45b36efcb223e5d02bf1c9b1af334943"
+      },
+      "completed_plan_count": 7,
+      "completed_plan_sha256": {
+        ".agents/plans/frame-path-enumeration.md": "b4f4abd8f7c02dd5468d995d14be490b5e720247f9dc45728a66072d1690df66",
+        ".agents/plans/caller-semantic-coverage.md": "74e8873e7ce49355cf0406304d7670820d2bfb3d9bbe9b65d79ad0cb1ba361e7",
+        ".agents/plans/frame-structure-report.md": "61c0690ebffd342485b967c3dd65ac7cde666b13016a646240d304a977190ac2",
+        ".agents/plans/frame-connections.md": "6035ad34543a64e2b4b912868047a39ae8a27f68be9a69292ffec7ee7e0f2550",
+        ".agents/plans/frame-question-investigation.md": "d653f45b3dda1f480aeb4553f279ad0a4cd31d178334d7ff6d498628871812b5",
+        ".agents/plans/memory-provenance-refinement.md": "3723d20c7dcb4ddd708731dc78c385972b192b830397f3170847462dc54cc35d",
+        ".agents/plans/alignment-hypotheses.md": "73d7c0c208b57acb41f8e9224bb1b041cf626256028da245c30e1a5035007cb5"
+      },
+      "qualification": "evidence/Ariadne/frame-paths/20261020/README.md",
+      "qualification_readme_sha256": "a1137f9a79e60ed58a96181184ee8d26a0d4d2e3169871c44aaab631f2239c50",
+      "qualification_receipt": "evidence/Ariadne/frame-paths/20261020/qualification.json",
+      "qualification_receipt_sha256": "da4d03375356462c5af65cea30b80cce5b83c5357a882ef385972447365bf63b",
+      "qualification_archive_sha256": "42feba66c6445de674ddaf0aa7f3ec3d63ca845a5c117c45d02c9e8352eb40ff",
+      "qualified_source_capsule_sha256": "ed7b76ef6b9ac6f32e66c570d0234780861afe123fe0786916b33d7eba1bb84d",
+      "prior_snapshot": "ariadne-open-plans-20261019/before-frame-path-completion.html",
+      "prior_snapshot_sha256": "40858c669273f94edd6b7cc2174fd33d0e902fda2f00ae4574bf94234e696eba",
+      "scope": "Five unfinished ledgers and seven completed finite stages. F4 retains bounded partial paths and every source premise/gap; broader release and historical execution remain unqualified.",
+      "validation": "Programmatic plan counts, actual current plan hashes, local references/fragments, unique IDs, preserved historical HTML and unrelated archive records checked by the update script. Canonical documentation checking and browser launch are separate.",
+      "validation_local_references": 189
+    },
+    {
+      "pdf": "ariadne-structural-type-model-20261020/model.pdf",
+      "latex": "ariadne-structural-type-model-20261020/model.tex",
+      "date": "2026-10-20",
+      "source_revision": "184a181a0a09c81bed38c543721bd10970512d89",
+      "purpose": "Current Ariadne model reconstructed with structural types, refinements, judgments and operational rules.",
+      "source_manifest": "ariadne-structural-type-model-20261020/source-manifest.json",
+      "render_receipt": "ariadne-structural-type-model-20261020/render-receipt.json",
+      "new_analysis_or_qualification": false
     }
   ],
   "plan_directory_relocation": {
@@ -1151,5 +1220,7 @@
     "original": "Plans/",
     "current": ".agents/plans/",
     "historical_evidence": "Original evidence paths and file hashes are preserved; this relocation is not requalification."
-  }
+  },
+  "pdf_documents": 1,
+  "latex_sources": 1
 }

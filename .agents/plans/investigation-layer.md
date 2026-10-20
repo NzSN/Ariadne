@@ -2,10 +2,10 @@
 
 ## Context and follow-up
 
-**Status.** Current stage/status plan updated on 2026-10-11. The bounded frame-path
-question now requests fewer than `NP` possible paths. Its finite Windows AMD64
-source/API/CLI and fixture/native parity checks are implemented; remote
-model/mutation and real full-dump qualification remain pending. I5c fault-time address
+**Status.** Current stage/status plan updated on 2026-10-20. The bounded frame-path
+question requests fewer than `NP` possible paths. Its finite Windows AMD64
+model/mutation and original physical-frame 1→0 clauses pass their
+[separate qualification](../../evidence/Ariadne/frame-paths/20261020/README.md). I5c fault-time address
 wrap is selected with a linked W0–W5 plan; all its runtime/model/capture/acceptance
 stages remain pending. Existing I5a/I5b and native I4 deliveries retain their scope.
 I0–I3 are implemented. I4 is validated for the recorded fixture/Linux tier, with
@@ -31,7 +31,7 @@ implementation, exercised qualification and future capabilities.
 - [Bounded frame-path contract](../../docs/Ariadne/investigation-design.md#bounded-frame-to-frame-path-listing)
   — strict count bound, frame anchors, coverage and independent resource budgets;
   [F0–F4 execution plan](frame-path-enumeration.md) records implemented source
-  and finite checks separately from pending full qualification.
+  and finite source-bound qualification separately from broader unwind/history claims.
 
 - [I5c design](../../docs/Ariadne/address-wrap-design.md) and
   [W0–W5 implementation plan](i5c-address-wrap.md) select the next fault-time
@@ -312,9 +312,13 @@ loop, depth, byte and deadline budgets are required to bound the work.
 
 The [F0–F4 execution plan](frame-path-enumeration.md) now records source
 implementation of a finite captured frame adapter, bounded graph composition,
-separate API/report/CLI and fixture/native parity checks. Remote model/mutation
-and actual full-dump qualification remain pending. Existing fault-address and memory-refinement schemas and
-qualification records do not establish this new capability. Preserve the original
+separate API/report/CLI and fixture/native parity checks. The
+[2026-10-20 evidence](../../evidence/Ariadne/frame-paths/20261020/README.md) qualifies
+the six finite model configurations, compiled mutation controls, original
+physical-frame 1→0 listing and helper-free replay under the selected 32-node,
+two-visit path policy. Coverage remains partial under those restrictions.
+Existing fault-address and memory-refinement qualifications do not substitute
+for this separate source-bound result. Preserve the original
 memory-writer universe when an enumerated path list is incomplete.
 
 ## Other I5, I6 and I7 deliveries

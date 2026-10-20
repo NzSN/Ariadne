@@ -10,9 +10,10 @@ identities. The distinct zero-address and zero-base-plus-displacement questions
 are implemented within their finite profiles; address-wrap remains selected,
 with implementation and qualification pending. On 2026-10-11, the user relaxed
 the frame-to-frame question to listing fewer than `NP` possible paths. The
-bounded frame-path contract below now has source implementation for a finite
-Windows AMD64 captured-unwind profile, separate API/report/CLI and finite native
-parity checks. Remote model/mutation and real full-dump qualification remain pending.
+bounded frame-path contract below is qualified within the finite Windows AMD64
+captured-unwind and original physical-frame 1→0 scope. The
+[2026-10-20 F4 evidence](../../evidence/Ariadne/frame-paths/20261020/README.md)
+records model, mutation, native/reference, original-capture and saved-replay gates.
 The [2026-10-13 full-dump application attempt](../../evidence/Ariadne/frame-paths/dump03958-20261013/report.md)
 returned unavailable for physical frames 1→0: a runtime-table budget and then
 unsupported vector semantics prevented an admitted active-call anchor.
@@ -26,7 +27,7 @@ a separate structural report before dataflow. Its
 [2026-10-16 qualification](../../evidence/Ariadne/frame-structure/20261016/README.md)
 completes SF0–SF6 within the finite Windows AMD64 captured-frame/E8-call scope;
 caller completion now has [S6 qualification](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md),
-while full frame-path acceptance retains its separate gate.
+and finite frame-path F4 now has its own separately bound qualification.
 [Stage 5.2](../../.agents/plans/frame-connections.md) implements represented
 corridors, SCC summaries and bounded examples over the validated structural
 source; [remote consumer qualification](../../evidence/Ariadne/frame-question/20261019/README.md)
@@ -99,8 +100,8 @@ Later source/tool changes require renewed or complete identity-verified evidence
 Object/source context, historical execution and cross-capture questions remain
 open. The bounded frame-path implementation admits a finite captured-unwind profile
 and separately bound instruction graphs; general unwinding and broader capture
-qualification remain open. Caller S6 now has its own completed qualification;
-frame-path F4 remains open. The structural report retains its separate scope.
+qualification remain open. Caller S6 and finite original-capture frame-path F4
+have separate completed qualifications. The structural report retains its separate scope.
 Full-memory capture alone does not supply a trace.
 Possible producers and numeric conclusions do not prove a UAF, executed
 path or general root cause.
@@ -108,7 +109,8 @@ The explicit alignment-hypothesis extension is implemented and
 [qualified in its finite scope](../../evidence/Ariadne/alignment-hypotheses/20261016/README.md).
 Its [H0–H5 ledger](../../.agents/plans/alignment-hypotheses.md) records the
 additive conditional product; the original Stage 5.1 evidence retains its own
-source identity. Caller S6 has subsequent qualification; frame-path F4 remains open.
+source identity. Caller S6 and finite frame-path F4 have subsequent, separately
+bound qualification; neither closes general feasibility or history questions.
 
 For wider navigation, see the [documentation map](../documentation-map.md).
 
@@ -1207,15 +1209,63 @@ relevant access/instance, including unresolved paths, under the
 
 The [F0–F4 implementation plan](../../.agents/plans/frame-path-enumeration.md) records
 the implemented model source, finite captured unwind profile, API/CLI and
-validation work without extending an existing report schema. The
-[source-bound validation record](../../evidence/Ariadne/frame-paths/source-validation.json)
-separates passing finite tiers from pending full qualification;
-the [investigation ledger](../../.agents/plans/investigation-layer.md#bounded-frame-path-question)
-records that prerequisite. Independent controls must cover a two-way diamond,
+validation work. The
+[initial validation record](../../evidence/Ariadne/frame-paths/source-validation.json)
+retains the earlier passing tiers and then-pending qualification. The
+[2026-10-20 F4 evidence](../../evidence/Ariadne/frame-paths/20261020/README.md)
+closes the declared finite model/mutation/original-capture clauses; the
+[investigation ledger](../../.agents/plans/investigation-layer.md#bounded-frame-path-question)
+records that scope. Independent controls must cover a two-way diamond,
 insufficient list capacity, `NP = 1`, malformed `NP`/frame indices, equal endpoints,
 recursive activations, loops, uncertain indirect calls, opaque summaries, missing
 unwind/bytes and each independent resource boundary. In particular, a truncated
 path list must never justify deleting a possible memory writer.
+
+### F4 post-S6 qualification
+
+The [F4 execution sequence](../../.agents/plans/frame-path-enumeration.md#f4-post-s6-execution--2026-10-20)
+is qualified within the [2026-10-20 finite scope](../../evidence/Ariadne/frame-paths/20261020/README.md).
+It reuses the unchanged completed S6 caller/callee requests and the original
+physical frame 1→0 question, thread 23668 and NP=10. Baseline unknown alignment/targets and the captured
+call/ABI premises remain. Structural paths are not feasibility/history witnesses.
+
+The legacy 8,192-node binder cannot admit the 10,367-site source pair.
+The explicit `bind_frame_paths_with_limits` API retains the selected graph
+admission bounds in the immutable source. The existing binder keeps legacy
+8,192-node/32,768-edge admission and original report bytes. A present explicit
+policy selects `ariadne.frame-paths/v7`; absent policy keeps the existing schema
+selection. Graph-policy evidence is source-bound and replayed independently of
+search caps; lowering a search cap preserves an admitted partial result.
+Saved decoding uses independent `FramePathGraphLimits`: existing decoders retain
+8,192-node/32,768-edge host caps as well as their byte bound. Larger reports
+require `decode_frame_paths_with_policy`; producer-declared graph limits cannot
+raise consumer caps. Reports-only builds reject recognized guarded/composed
+profiles for v7 when BAP proof checking is unavailable. Original qualification
+replay additionally requires a trusted expected artifact hash and exact original
+scope. CLI use of an explicit frame-limit file selects the new binder;
+ordinary default invocation remains on the legacy route.
+
+The finite TLA+ search model already abstracts graph/byte admission as external
+stops; this resource-policy extension adds concrete API/codec/boundary controls,
+not a new path-feasibility solver. The frozen implementation source capsule has SHA-256
+`ed7b76ef6b9ac6f32e66c570d0234780861afe123fe0786916b33d7eba1bb84d`
+(source2, 1,070 files). Six finite model configurations and typechecking pass;
+the evidence records `334 / 64 / 77 / 202 default/core/reports/BAP tests; 10 graph and 3 unwind properties; 7 native/legacy tests` and
+`6 compiled mutations rejected after 6 passing controls` with passing observer controls.
+
+The final original-capture attempt returns one structural path,
+strictly between zero and ten, with native/Rust parity and helper-free replay.
+The selected policy admits 16,384 graph nodes and 65,536 graph edges and bounds
+paths to 32 nodes with two visits per activation node. The other recorded work,
+scan, frontier, output and deadline bounds remain explicit. Depth restrictions
+keep coverage partial and cannot exclude any possible writer. The initial
+512-node policy exhausted 1,000,000 search states with zero retained paths;
+that failed positive gate remains in the evidence and is not credited.
+
+The evidence archive SHA-256 is `42feba66c6445de674ddaf0aa7f3ec3d63ca845a5c117c45d02c9e8352eb40ff`. Broader unwinding,
+release acceptance, actual execution history and universal refinement remain
+separate. Qualification applies to the recorded source/tool/capture/request
+identities and selected bounded policy.
 
 ### Full-dump application attempt, 2026-10-13
 
@@ -1415,7 +1465,9 @@ and terminal deadlock policy. Five real-code mutation seams are specified and
 checked for unique applicability; their remote campaign is unexercised. Remote
 model/mutation and actual full-dump qualification remain pending. General
 unwinding, jointly reconstructed historical states and executed paths remain
-outside the accepted claim.
+outside the accepted claim. This dated checkpoint is superseded only for the
+subsequently exercised clauses by the [F4 qualification](#f4-post-s6-qualification);
+its original receipts, counts and unexercised results remain historical.
 
 ## Frame-path property-based coverage
 
@@ -1423,7 +1475,8 @@ The opt-in `property-tests` Cargo feature adds pinned Proptest 1.9.0 with
 automatic shrinking and persisted regression seeds. It is absent from default
 and core-only dependency activation. These generated tests extend the finite
 fixture checks; they do not qualify real full dumps, executed histories or the
-pending remote model/mutation campaign.
+then-pending remote model/mutation campaign. The subsequent
+[F4 qualification](#f4-post-s6-qualification) records those separate exercised tiers.
 
 Ten graph properties generate two to five nodes, up to eight typed edges,
 cycles, parallel edges, path/visit limits and NP values. An independent oracle

@@ -66,8 +66,9 @@ records the subsequent source audit and separate qualification limits.
 
 - [Frame-path model](AriadneFramePaths.tla) and
   [F0–F4 plan](../.agents/plans/frame-path-enumeration.md) — strict output count, valid
-  structural paths, bounded work and preservation of memory writers; checking
-  and implementation qualification remain separate tiers.
+  structural paths, bounded work and preservation of memory writers; the
+  [2026-10-20 finite qualification](../evidence/Ariadne/frame-paths/20261020/README.md)
+  records model checks separately from runtime/capture evidence.
 
 - [Memory refinement model](AriadneMemoryRefinement.tla) and
   [implementation ledger](../.agents/plans/memory-provenance-refinement.md) — specified
@@ -1001,3 +1002,23 @@ compiled mutations pass their declared scope. Exact original requests/full state
 and every reaching row have independent checks. This does not complete audited
 model S3 or provide a universal representation/refinement proof. Resource limits
 and wire validation have separate concrete tests; no ISA semantics is added.
+
+## Frame-path F4 finite qualification, 2026-10-20
+
+The [frame-path contract](../docs/Ariadne/investigation-design.md#f4-post-s6-qualification)
+and [execution ledger](../.agents/plans/frame-path-enumeration.md) have
+[source-bound evidence](../evidence/Ariadne/frame-paths/20261020/README.md) for
+six finite model configurations and typechecking. The source2 capsule contains 1,070
+files and has SHA-256
+`ed7b76ef6b9ac6f32e66c570d0234780861afe123fe0786916b33d7eba1bb84d`.
+The model retains strict NP, typed-edge DFS, explicit resource stops and
+conservative writer preservation. Its external resource-stop abstraction does
+not prove concrete payload sizing, capture/hash validation or process RSS.
+
+Independent concrete controls cover explicit producer graph admission,
+consumer-selected decoder caps, reports-only proof-feature refusal, native/Rust
+path equality and original-capture helper-free replay. The final original
+32-node/two-visit listing remains partial; the failed initial 512-node policy is
+retained separately. Compiled mutations: `6 compiled mutations rejected after 6 passing controls`.
+Archive SHA-256: `42feba66c6445de674ddaf0aa7f3ec3d63ca845a5c117c45d02c9e8352eb40ff`. This finite F4 result does not close
+specification-sync S3, general unwind/ISA semantics or universal refinement.

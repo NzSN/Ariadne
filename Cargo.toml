@@ -64,6 +64,11 @@ path = "src/bin/ariadne-minidump.rs"
 required-features = ["input"]
 
 [[bin]]
+name = "frame-path-validate"
+path = "src/bin/frame_path_validate.rs"
+required-features = ["validation"]
+
+[[bin]]
 name = "caller-coverage-validate"
 path = "src/bin/caller_coverage_validate.rs"
 required-features = ["validation"]

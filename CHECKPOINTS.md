@@ -17,6 +17,33 @@
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
+## 2026-10-20 — Frame-path F4 finite original-capture qualification
+
+The [canonical contract](docs/Ariadne/investigation-design.md#f4-post-s6-qualification)
+and [F0–F4 ledger](.agents/plans/frame-path-enumeration.md) pass their declared
+finite clauses under [source-bound evidence](evidence/Ariadne/frame-paths/20261020/README.md).
+Source2 capsule: 1,070 files, SHA-256
+`ed7b76ef6b9ac6f32e66c570d0234780861afe123fe0786916b33d7eba1bb84d`.
+Root/feature/property/native controls: `334 / 64 / 77 / 202 default/core/reports/BAP tests; 10 graph and 3 unwind properties; 7 native/legacy tests`.
+Compiled mutations with passing observers: `6 compiled mutations rejected after 6 passing controls`.
+Six frame-path model configurations and typechecking pass. Archive SHA-256:
+`42feba66c6445de674ddaf0aa7f3ec3d63ca845a5c117c45d02c9e8352eb40ff`.
+
+The original dump SHA
+`9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab`,
+thread 23668, physical frames 1→0 and NP=10 retain the unchanged S6 requests
+and full native/Rust states. The final 32-node/two-visit policy produces
+one independently checked structural path;
+coverage remains partial. Native/reference path products and helper-free replay
+agree. Independent decoder graph caps, reports-only proof-profile rejection and
+trusted expected original-report identity have passing failure controls.
+
+The initial 512-node/million-search-state attempt retained zero paths and remains
+a failed positive gate. Earlier unavailable results and source/property receipts
+remain historical. This closes finite F4 without closing general unwinding,
+release/large-report qualification, feasibility, executed history, root cause or
+universal refinement. Five indexed ledgers still contain unfinished work.
+
 ## 2026-10-19 — Caller S6 bounded completion accepted
 
 The [caller plan](.agents/plans/caller-semantic-coverage.md) completes S6 under
