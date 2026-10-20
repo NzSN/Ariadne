@@ -97,7 +97,19 @@ module D = Set.Make(struct type t = string * string * string let compare = compa
 type state = { phase:string; pending:S.t; visited:S.t; decoded:S.t; provenance:string M.t;
                edges:E.t; obligations:O.t; reaching:D.t M.t; slice:S.t;
                (* Derived per-state flow facts; never part of the observation. *)
-               flow_out:D.t M.t; flow_in:S.t M.t; flow_next:S.t M.t; entry_defs:D.t M.t; flow_values:D.t M.t; flow_delta:D.t M.t; flow_enabled:S.t }
+               flow_out:D.t M.t; flow_in:S.t M.t; flow_next:S.t M.t; entry_defs:D.t M.t; flow_values:D.t M.t; flow_delta:D.t M.t; flow_enabled:S.t;
+               compact_reaching:(D.elt array * int array M.t) option }
+let fold_reaching f s a initial = match s.compact_reaching with
+  | None -> D.fold f (M.find a s.reaching) initial
+  | Some (universe,rows) ->
+    let words=M.find a rows and result=ref initial in
+    Array.iteri (fun word bits ->
+      if bits<>0 then for bit=0 to 61 do
+        if bits land (1 lsl bit)<>0 then result:=f universe.(word*62+bit) !result
+      done) words; !result
+let reaching_at s a = match s.compact_reaching with
+  | None -> M.find a s.reaching
+  | Some _ -> fold_reaching D.add s a D.empty
 let generated a origin locations =
   S.fold (fun loc -> D.add (loc,a,origin)) locations D.empty
 (* Definitions are ordered by location first. Removing one definite location
@@ -113,7 +125,7 @@ let init input = {phase="recover"; pending=input.roots; visited=S.empty; decoded
                   reaching=S.fold (fun a -> M.add a D.empty) input.addresses M.empty;
                   flow_out=M.empty;
                   flow_in=M.empty; flow_next=M.empty; flow_values=M.empty; flow_delta=M.empty; flow_enabled=S.empty;
-                  entry_defs=M.empty}
+                  entry_defs=M.empty;compact_reaching=None}
 let source i a =
   if i.binary then (if S.mem a i.files then "file" else "unavailable")
   else if S.mem a i.captured then "captured"
@@ -180,9 +192,9 @@ let enabled_propagation _i s = S.min_elt_opt s.flow_enabled
 let predecessors i s =
   S.fold (fun a sites ->
       let uses = (M.find a i.instructions).uses in
-      D.fold (fun (loc,site,origin) sites ->
+      fold_reaching (fun (loc,site,origin) sites ->
           if origin = "instruction" && S.mem loc uses then S.add site sites else sites)
-        (M.find a s.reaching) sites) s.slice S.empty
+        s a sites) s.slice S.empty
 type action = Visit of string | FinishRecovery | Propagate of string
             | FinishDataflow | ExpandSlice | FinishSlice
 let action_name = function
@@ -237,7 +249,7 @@ let observe i s = `Assoc [
                            (O.elements s.obligations));
     "reaching", `List (List.map (fun a -> `Assoc ["address",js a;"definitions",
         `List (List.map (fun (loc,site,origin) -> `Assoc ["loc",js loc;"site",js site;"origin",js origin])
-                 (D.elements (M.find a s.reaching)))]) (S.elements i.addresses));
+                 (D.elements (reaching_at s a)))]) (S.elements i.addresses));
     "slice", jsset s.slice]
 
 (* Query-owned serialization cache. Every response still carries the complete
@@ -246,7 +258,7 @@ type observation_cache = (D.t * string) M.t ref
 let observation_cache () = ref M.empty
 let observe_chunks cache i s =
   let rows = S.elements i.addresses |> List.map (fun a ->
-      let defs = M.find a s.reaching in
+      let defs = reaching_at s a in
       match M.find_opt a !cache with
       | Some (old,text) when old == defs -> text
       | _ ->

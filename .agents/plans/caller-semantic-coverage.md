@@ -2,15 +2,15 @@
 
 ## Context and follow-up
 
-**Status.** S0–S5 implementation and scoped qualification pass, 2026-10-15. Original-dump caller coverage closes, but the full caller run hits both core action budgets and completed caller parity remains unavailable. Final-helper admission refresh `075602` passes without repeating caller completion. S6 remains partial; keep this plan active. The [canonical design](../../docs/Ariadne/caller-semantic-coverage-design.md) owns the contracts and scope.
+**Status.** S0–S6 complete within the [2026-10-19 original Windows profile](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md). Final caller/callee requests and full states match across Rust/native implementations; every reaching row is independently checked. October 15 entries remain historical.
 
 **Why this document exists.** [Original-dump probe `051409`](../../evidence/Ariadne/loop-aware-target-resolution/20261015/artifacts/dump-20261015T051409/probe-summary.json) closes both cyclic jump certificates but leaves 30 caller barriers. Remote four-shape probe `060803` reproduces each instruction-class failure through the actual public preparation path.
 
 **What this document establishes.** Execution order, ownership, independent negative controls and remote gates for item 2 of the blocker inventory.
 
-**Where to go next.** Read the [qualification record](../../evidence/Ariadne/caller-semantic-coverage/20261015/README.md), dated ledger below and canonical design for passed versus incomplete gates. The [guard contract](../../docs/Ariadne/justified-branch-pruning-design.md), [BAP input interface](../../docs/Ariadne/file-reader-design.md#public-interface) and [formal guide](../../Specs/README.md) define the supporting contracts.
+**Where to go next.** Read the [new qualification](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md), [canonical design](../../docs/Ariadne/caller-semantic-coverage-design.md), [completion implementation](../../docs/implementation.md) and remaining [frame-path F4](frame-path-enumeration.md).
 
-**What remains unresolved.** Completed caller native/Rust parity is unmet after the selected one-million-action budgets. Initial MOVAPS is aligned under recorded premises, while the later load stays unknown; the callee has two indirect barriers. Frame paths remain unavailable. Final-helper admission refresh does not repeat full caller completion. Normal-flow closure does not establish handler behavior, actual execution or whole-machine completeness.
+**What remains unresolved.** Later MOVAPS alignment, two callee indirect targets, frame-path F4, broader release/large-report qualification, execution history/root cause and universal refinement remain outside this completion. The original full-caller budget gate is met.
 
 ## Stages and ownership
 
@@ -75,4 +75,46 @@ The confirmed RED run is `/loop-work/evidence/caller-barriers-20261015T060803`: 
 
 ## Completion boundary
 
-The semantic-coverage observation is met, but S6 additionally requires completed caller native/Rust state equality, which is still unmet. Do not weaken that criterion, substitute native initialization for completion or archive the plan. Complete the caller within declared budgets and rerun the required comparisons, then report the unknown later load, callee barriers and path outcome separately. No exception-handler, executed-history or whole-machine coverage claim follows. No commit, push or deployment is included unless requested.
+S6 is complete under the [new source-bound qualification](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md).
+The exact original caller/callee inputs and full completed states match, with
+unchanged roots, target sets and premises. Later alignment, callee barriers and
+frame-path acceptance remain independently reported. Normal-flow completion
+establishes no exception-handler behavior or executed history.
+
+## S6 bounded completion continuation, 2026-10-19
+
+**Status:** complete within the recorded finite scope. User authorized continued S6 execution. The
+[owning completion contract](../../docs/Ariadne/caller-semantic-coverage-design.md#s6-bounded-completion-continuation-2026-10-19)
+keeps ordinary replay, transfer equations, source premises and legacy evidence
+unchanged. Pending chatdoc-index edits remain separate.
+
+1. Freeze current sources and retain an actual red-capable descending-chain
+   measurement, plus independently computed original-frame fixed points.
+2. Add bounded completion scheduling and compact value-semantic definition sets
+   in Rust, with exact ordinary-prefix and independent final-result controls.
+3. Add independently implemented native compact completion, explicit codec
+   negotiation, checked physical storage and hostile final-envelope controls.
+4. Run applicable root/features/native/model/generated-replay checks and targeted
+   behavioral mutations in isolated remote targets. Preserve failed attempts.
+5. Replay the exact original caller/callee requests, independently check every
+   reaching row and compare both complete states within the declared bounds.
+   Refresh raw-dump admission and retain any source/proof changes explicitly.
+6. Seal source/tool/command/result evidence; update this ledger and canonical
+   status only for demonstrated clauses. Unknown alignment, target and path
+   outcomes remain independently reported. No commit or push is included.
+
+### S6 accepted result
+
+Caller: 9,589 decoded sites, 11,321 edges, 141,301,903 retained reaching links,
+91,175 charged actions. Saved and raw preparation match the original requests
+and complete with exact Rust/native full-state equality. Callee: 778 sites,
+895 edges and 1,304,602 links, with the same equality. Every address row is
+independently checked. Initial MOVAPS is aligned under the recorded ABI premise;
+the later load remains Unknown and the callee retains two indirect barriers.
+No action or result cap was raised.
+
+The current LLVM rebuild restores the original 30 coverage barriers; its hash
+matches the original `6bb0005e…` helper. Stale `45dad913…` results remain partial
+earlier attempts. Qualification records root features, 113 configurations/eight
+typechecks, 330 replay observations, 29 unique compiled mutations and 24 wire
+controls. Archive SHA-256: `240dd9fafd7cafe78ab531934cf5c122955e4629c46e6b7803794ca75987922d`. Commit/push is outside this delivery.

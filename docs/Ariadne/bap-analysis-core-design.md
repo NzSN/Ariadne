@@ -1270,3 +1270,17 @@ The [completed T0–T4 ledger](../../.agents/plans/completed/native-request-budg
 The [original caller comparison](../../evidence/Ariadne/native-request-budget/20261014/artifacts/probe-expanded/preparation-outcome.json) initializes its 4,764-site capture and 9,001,701-byte guard report successfully with `max_request_bytes=33554432`; the default still rejects it with `core request oversized`. Responses remain bounded at 8 MiB. The report retains incomplete candidate coverage and unknown MOVAPS alignment. The retry performs native initialization only, so it does not qualify core/path results.
 
 For a 32 MiB request budget, add `--bap-core-max-request-bytes 33554432` to the native CLI command, or set `CoreConfig.max_request_bytes = 32 * 1024 * 1024` before initialization. Guard evidence, discovery and frame recovery budgets remain independent and must describe the actual captured query. The immutable build identity remains source-bound; its runtime budget is separately negotiated and recorded.
+
+## Source-bound caller completion, 2026-10-19
+
+The [S6 contract](caller-semantic-coverage-design.md#s6-bounded-completion-continuation-2026-10-19)
+and [qualified corpus](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md)
+add negotiated bitmap completion while preserving ordinary replay. Exact original
+caller/callee inputs finish with full native/Rust state equality; all definition
+rows have independent checks. RPO and shared exact sets retain every possible
+origin. Branch feasibility, history and whole-machine completeness remain separate.
+
+Prepare this corpus with a source-bound current LLVM helper. The current
+`native/llvm_mc/build.sh` produces the `6bb0005e…` decoder used by qualification.
+The earlier `45dad913…` helper leaves INT3 candidate barriers. Helper/runtime,
+source and query identities remain separate from the completed-result codec.

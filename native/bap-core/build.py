@@ -24,7 +24,7 @@ def main():
     if not output.is_relative_to(sdk.ROOT / "target"):
         raise SystemExit("build output must be isolated under target/")
     output.mkdir(parents=True, exist_ok=True)
-    sources = ["recovery.ml", "stateflow.ml", "terminal.ml", "legacy_capture.ml", "capture.ml",
+    sources = ["recovery.ml", "dense_completion.ml", "stateflow.ml", "terminal.ml", "legacy_capture.ml", "capture.ml",
                "legacy_guard.ml", "guard.ml", "legacy_composition.ml", "loop_closure.ml", "legacy_composition_v2.ml",
                "composition.ml", "project_state.ml", "main.ml"]
     source_hashes = {name: sdk.sha(args.source_dir / name) for name in sources}
@@ -87,6 +87,7 @@ def main():
                                 "advance:ExpandSlice", "advance:FinishSlice", "advance:FinishStateflow",
                                 "step", "observe", "finish", "reset",
                                 "run-batch", "result-page", "result-close"],
+                 "completion_codec": "bitmap/v1",
                  "max_frame_bytes": 8 * 1024 * 1024,
                  "max_request_bytes": 8 * 1024 * 1024,
                  "configurable_request_bytes": True, "max_addresses": 65536}

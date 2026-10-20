@@ -53,6 +53,8 @@ pub mod mbt;
 pub mod reports;
 
 mod analysis_view;
+mod completion;
+mod definition_set;
 pub mod effects;
 mod engine;
 pub use analysis_view::{AnalysisView, CompletedAnalysis};
@@ -63,6 +65,7 @@ mod model;
 pub mod recovery;
 pub mod render;
 
+pub use completion::{CompletionError, CompletionLimits};
 pub use engine::{Analyzer, AnalyzerMetrics, analyze};
 pub use model::*;
 

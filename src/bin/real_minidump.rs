@@ -5,7 +5,6 @@ use ariadne::effects::PreparationOptions;
 use ariadne::input::report::{ReportFormat, render};
 use ariadne::input::{AnalysisQuery, FileSnapshot, OpenLimits, PrepareLimits};
 use std::alloc::{GlobalAlloc, Layout, System};
-use std::collections::BTreeSet;
 use std::error::Error;
 use std::path::Path;
 use std::sync::atomic::{AtomicU64, Ordering};
@@ -102,7 +101,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         let allocations = ALLOCATIONS.load(Ordering::Relaxed) - allocation_start;
         let allocated_bytes = ALLOCATED_BYTES.load(Ordering::Relaxed) - bytes_start;
         let state = &result.state;
-        let total_reaching: usize = state.reaching.values().map(BTreeSet::len).sum();
+        let total_reaching: usize = state.reaching.values().map(|defs| defs.len()).sum();
         println!(
             "real_minidump,{artifact_sha256},0x{entry:016x},0x{seed:016x},{run},{open_ns},{prepare_ns},{analysis_ns},{render_ns},{total_ns},{allocations},{allocated_bytes},{},{},{},{},{},{total_reaching},{},{},{},{},{output_bytes}",
             metrics.actions,

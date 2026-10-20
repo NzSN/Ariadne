@@ -124,7 +124,7 @@ fn main() {
             let allocations = ALLOCATIONS.load(Ordering::Relaxed) - alloc_before;
             let bytes = ALLOCATED_BYTES.load(Ordering::Relaxed) - bytes_before;
             let state = analyzer.state();
-            let total_reaching: usize = state.reaching.values().map(BTreeSet::len).sum();
+            let total_reaching: usize = state.reaching.values().map(|defs| defs.len()).sum();
             let decoded = state.decoded.len();
             let edges = state.edges.len();
             let slice = state.slice.len();
@@ -168,7 +168,7 @@ fn main() {
             let allocations = ALLOCATIONS.load(Ordering::Relaxed) - alloc_before;
             let bytes = ALLOCATED_BYTES.load(Ordering::Relaxed) - bytes_before;
             let state = analyzer.state();
-            let total_reaching: usize = state.reaching.values().map(BTreeSet::len).sum();
+            let total_reaching: usize = state.reaching.values().map(|defs| defs.len()).sum();
             println!(
                 "minidump,4,{run},{elapsed},{allocations},{bytes},{},{},{},{},{},{total_reaching},{},{},{},{}",
                 metrics.actions,

@@ -2,6 +2,8 @@ use ariadne::bap::core_adapter::NativeAnalyzer;
 use ariadne::bap::core_session::CoreConfig;
 use ariadne::*;
 use std::path::PathBuf;
+#[path = "../support/scanning_engine.rs"]
+mod scanning_engine;
 
 fn config() -> CoreConfig {
     CoreConfig::from_directory(
@@ -165,6 +167,36 @@ fn native_completion_pages_preserve_large_final_state() {
         .finish()
         .unwrap();
     assert_eq!(native, reference);
+}
+
+#[test]
+#[ignore = "requires a source-bound helper advertising compact completion"]
+fn compact_completion_preserves_more_than_legacy_expanded_link_limit() {
+    let mut request = wide_request(4097);
+    request.locations = (0..4096).map(|i| format!("loc-{i:04}")).collect();
+    request.slice_seeds.clear();
+    for instruction in request.instructions.values_mut() {
+        instruction.may_defs.clear();
+        instruction.uses.clear();
+    }
+    let (reference, _) = Analyzer::new(request.clone())
+        .unwrap()
+        .finish_bounded(CompletionLimits::default())
+        .unwrap();
+    let links: usize = reference
+        .state
+        .reaching
+        .values()
+        .map(DefinitionSet::len)
+        .sum();
+    assert!(links > 16 * 1024 * 1024);
+    let mut policy = config();
+    policy.timeout = std::time::Duration::from_secs(120);
+    let actual = NativeAnalyzer::new(&policy, "compact-large-membership", request)
+        .unwrap()
+        .finish()
+        .unwrap();
+    assert_eq!(actual, reference);
 }
 #[cfg(unix)]
 #[test]
@@ -353,5 +385,58 @@ fn native_loops_calls_parallel_edges_and_failed_starts_match_full_reference() {
             assert!(count < 200);
         }
         assert_eq!(native.finish().unwrap(), reference.finish(), "{case}");
+    }
+}
+
+#[test]
+#[ignore = "requires a source-bound compact completion helper"]
+fn native_compact_completion_matches_independent_reference_from_every_prefix() {
+    for case in [
+        "weak-write",
+        "loop",
+        "call",
+        "parallel",
+        "missing",
+        "two-roots",
+    ] {
+        let mut r = request();
+        match case {
+            "loop" => {
+                let i = r.instructions.get_mut(&0x20).unwrap();
+                i.kind = InstructionKind::Conditional;
+                i.targets.insert(0x10);
+            }
+            "call" => {
+                let i = r.instructions.get_mut(&0x10).unwrap();
+                i.kind = InstructionKind::Call;
+                i.targets.insert(u64::MAX);
+                i.must_defs.clear();
+                r.entry_points.insert(u64::MAX);
+            }
+            "parallel" => {
+                let i = r.instructions.get_mut(&0x10).unwrap();
+                i.kind = InstructionKind::Conditional;
+                i.targets.insert(0x20);
+            }
+            "missing" => {
+                r.captured.remove(&0x20);
+            }
+            "two-roots" => {
+                r.entry_points.insert(0x20);
+            }
+            _ => {}
+        }
+        let expected = scanning_engine::Analyzer::new(r.clone()).unwrap().finish();
+        for prefix in [0, 1, 5, 7, 20] {
+            let mut native =
+                NativeAnalyzer::new(&config(), &format!("compact-{case}-{prefix}"), r.clone())
+                    .unwrap();
+            for _ in 0..prefix {
+                if !native.step().unwrap() {
+                    break;
+                }
+            }
+            assert_eq!(native.finish().unwrap(), expected, "{case} prefix {prefix}");
+        }
     }
 }

@@ -52,6 +52,7 @@ pub const RECOVERY_OPERATIONS: &[&str] = &[
 ];
 pub const MAX_COMPLETED_BYTES: usize = 256 * 1024 * 1024;
 pub const COMPLETION_PAGE_BYTES: usize = 256 * 1024;
+pub(crate) const MAX_BITMAP_WORDS: usize = 32 * 1024 * 1024;
 
 #[derive(Debug, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -247,6 +248,179 @@ impl DictionaryObservation {
             reaching,
             slice: self.slice,
         })
+    }
+}
+
+/// Completion-only lossless membership. This representation is admitted under
+/// physical storage limits and never expanded into a vector per logical link.
+#[derive(Debug, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub(crate) struct BitmapObservation {
+    phase: String,
+    pending: Vec<String>,
+    visited: Vec<String>,
+    decoded: Vec<String>,
+    provenance: Vec<Provenance>,
+    edges: Vec<Edge>,
+    obligations: Vec<Obligation>,
+    slice: Vec<String>,
+    reaching: Vec<DictionaryReaching>,
+    definition_dictionary: Vec<DefinitionRow>,
+    definition_bitmaps: Vec<String>,
+}
+pub(crate) struct BitmapMembership {
+    rows: Vec<DictionaryReaching>,
+    dictionary: Vec<DefinitionRow>,
+    bitmaps: Vec<String>,
+}
+impl BitmapObservation {
+    pub(crate) fn split(self) -> (Observation, BitmapMembership) {
+        let reaching = self
+            .reaching
+            .iter()
+            .map(|r| Reaching {
+                address: r.address.clone(),
+                definitions: vec![],
+            })
+            .collect();
+        (
+            Observation {
+                phase: self.phase,
+                pending: self.pending,
+                visited: self.visited,
+                decoded: self.decoded,
+                provenance: self.provenance,
+                edges: self.edges,
+                obligations: self.obligations,
+                slice: self.slice,
+                reaching,
+            },
+            BitmapMembership {
+                rows: self.reaching,
+                dictionary: self.definition_dictionary,
+                bitmaps: self.definition_bitmaps,
+            },
+        )
+    }
+}
+impl BitmapMembership {
+    pub(crate) fn bind(
+        self,
+        request: &crate::AnalysisRequest,
+        state: &mut crate::AnalysisState,
+    ) -> Result<(), Error> {
+        use crate::{Definition, DefinitionOrigin, DefinitionSet};
+        use std::collections::{BTreeSet, HashSet};
+        use std::sync::Arc;
+        if self.dictionary.len() > 1_000_000
+            || self.rows.len() != request.addresses.len()
+            || self.bitmaps.len() > self.rows.len()
+        {
+            return Err(invalid("compact definition universe/domain budget"));
+        }
+        let words = self.dictionary.len().div_ceil(64);
+        if self
+            .dictionary
+            .iter()
+            .try_fold(0usize, |n, d| n.checked_add(d.loc.len()))
+            .is_none_or(|n| n > 64 * 1024 * 1024)
+        {
+            return Err(invalid("compact definition bytes budget"));
+        }
+        if words
+            .checked_mul(self.rows.len())
+            .is_none_or(|n| n > MAX_BITMAP_WORDS)
+        {
+            return Err(invalid("compact bitmap budget"));
+        }
+        let universe = self
+            .dictionary
+            .into_iter()
+            .map(|d| {
+                Ok(Definition {
+                    loc: d.loc,
+                    site: super::core_adapter::address(&d.site)?,
+                    origin: match d.origin.as_str() {
+                        "entry" => DefinitionOrigin::Entry,
+                        "instruction" => DefinitionOrigin::Instruction,
+                        _ => return Err(invalid("compact definition origin")),
+                    },
+                })
+            })
+            .collect::<Result<Vec<_>, Error>>()?;
+        if universe.windows(2).any(|w| w[0] >= w[1]) {
+            return Err(invalid("compact definition order/duplicate"));
+        }
+        let mut expected = BTreeSet::new();
+        let mut expected_bytes = 0usize;
+        for &a in &state.decoded {
+            for loc in &request.instructions[&a].may_defs {
+                expected_bytes = expected_bytes
+                    .checked_add(loc.len())
+                    .filter(|n| *n <= 64 * 1024 * 1024)
+                    .ok_or_else(|| invalid("compact expected definition bytes budget"))?;
+                expected.insert(Definition {
+                    loc: loc.clone(),
+                    site: a,
+                    origin: DefinitionOrigin::Instruction,
+                });
+            }
+            if request.entry_points.contains(&a) {
+                for loc in &request.locations {
+                    expected_bytes = expected_bytes
+                        .checked_add(loc.len())
+                        .filter(|n| *n <= 64 * 1024 * 1024)
+                        .ok_or_else(|| invalid("compact expected definition bytes budget"))?;
+                    expected.insert(Definition {
+                        loc: loc.clone(),
+                        site: a,
+                        origin: DefinitionOrigin::Entry,
+                    });
+                }
+            }
+            if expected.len() > 1_000_000 {
+                return Err(invalid("compact expected universe budget"));
+            }
+        }
+        if !expected.iter().eq(universe.iter()) {
+            return Err(invalid("compact definition universe binding"));
+        }
+        let universe: Arc<[Definition]> = universe.into();
+        let mut unique = HashSet::new();
+        let mut sets = Vec::with_capacity(self.bitmaps.len());
+        for text in &self.bitmaps {
+            if text.len() != universe.len().div_ceil(4) || !unique.insert(text) {
+                return Err(invalid("compact bitmap size/duplicate"));
+            }
+            let mut membership = vec![0u64; words];
+            for (n, byte) in text.bytes().enumerate() {
+                let value = match byte {
+                    b'0'..=b'9' => byte - b'0',
+                    b'a'..=b'f' => byte - b'a' + 10,
+                    _ => return Err(invalid("noncanonical compact membership")),
+                };
+                let offset = n * 4;
+                if offset + 4 > universe.len() && u64::from(value) >> (universe.len() - offset) != 0
+                {
+                    return Err(invalid("compact membership padding"));
+                }
+                membership[offset / 64] |= u64::from(value) << (offset % 64);
+            }
+            sets.push(DefinitionSet::from_dense(universe.clone(), membership));
+        }
+        for row in self.rows {
+            let address = super::core_adapter::address(&row.address)?;
+            let set = sets
+                .get(row.definitions_ref)
+                .ok_or_else(|| invalid("compact set index"))?;
+            if !state.reaching.contains_key(&address)
+                || (!state.decoded.contains(&address) && !set.is_empty())
+            {
+                return Err(invalid("compact reaching domain"));
+            }
+            state.reaching.insert(address, set.clone());
+        }
+        Ok(())
     }
 }
 

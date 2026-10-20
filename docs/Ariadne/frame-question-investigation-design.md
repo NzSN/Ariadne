@@ -25,11 +25,7 @@ records completion and limits. Read [qualification](../../evidence/Ariadne/frame
 [memory](memory-provenance-refinement.md), [guarded-target](guarded-target-resolution-design.md)
 and [model](../../Specs/README.md) contracts for the imported premises.
 
-**What remains unresolved.** The original saved-source question is unknown at
-its finite resolver/prefix bounds. The extra raw original refresh has incomplete
-guard candidate coverage and no admitted caller link. Caller S6, frame-path F4,
-broader release, general SMT, historical traces, loop-instance value invariants,
-generic load inverses, root cause and universal refinement remain separate.
+**What remains unresolved.** The original bounded alternative question remains Unknown. General SMT, loop-instance invariants, historical execution, root cause and universal refinement remain outside this finite profile. The early raw-source guard limit is preserved with its stale decoder identity; [caller S6](caller-semantic-coverage-design.md) separately restores original coverage and completes full-state comparison. Frame-path F4 and broad release remain separate.
 
 ## Coverage of the four recommendation items
 
@@ -592,8 +588,14 @@ entries. The selected historical Scanner's full 12-origin table is separately
 checked against completed baseline reaching definitions with exact native/Rust
 assessment equality and unchanged default report bytes.
 
-The extra fresh original source refresh is more limited than the retained
+The extra fresh original source refresh in that campaign is more limited than the retained
 structural input: candidate coverage leaves its initial MOVAPS unknown and its
 active caller link unavailable. The exact saved original source remains the
 consumer acceptance input; no fresh raw-source structural parity or completed
 caller claim is inferred from this finite question qualification.
+
+That refresh selected stale LLVM decoder `45dad913…`. The subsequent
+[caller S6 qualification](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md)
+rebuilds the current `6bb0005e…` helper, restores original coverage and completes
+both original full states. The question/structural publications above retain
+their own identities and limits; S6 does not provide an execution witness.

@@ -22,12 +22,7 @@ retain their separate contracts and evidence identities.
 [memory M0–M4](memory-provenance-refinement.md), [Scanner follow-up](scanner-partial-explanation.md),
 [implementation guide](../../docs/implementation.md) and [model guide](../../Specs/README.md).
 
-**What remains unresolved.** Caller S6, old frame-path F4, broader release,
-general SMT, historical traces, root cause and universal refinement remain
-outside this finite completion. The original saved-source question remains
-unknown at its resolver/prefix bounds. The additional fresh raw-source refresh
-has incomplete guard candidate coverage and no admitted active caller link;
-it is not credited as parity with the declared saved structural source.
+**What remains unresolved.** Frame-path F4, broader release, general SMT, historical traces, root cause and universal refinement remain outside this program. The original saved-source question stays Unknown at resolver/prefix bounds. The early raw refresh with stale LLVM helper remains a historical partial source; [caller S6](caller-semantic-coverage.md) separately restores original coverage and completed-state parity using the current decoder.
 
 ## All four items: inventory and ownership
 

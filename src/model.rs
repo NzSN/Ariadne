@@ -9,7 +9,7 @@ pub type Location = String;
 pub type AddressSet = BTreeSet<Address>;
 pub type LocationSet = BTreeSet<Location>;
 pub type EdgeSet = BTreeSet<Edge>;
-pub type DefinitionSet = BTreeSet<Definition>;
+pub use crate::definition_set::DefinitionSet;
 pub type ObligationSet = BTreeSet<Obligation>;
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]

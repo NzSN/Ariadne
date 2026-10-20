@@ -7,7 +7,7 @@ Stage 5.1 is complete within its separate structural frame-report scope;
 the dated ledger retains exact source/tool/corpus qualification.
 The [2026-10-19 remote qualification](../../evidence/Ariadne/frame-question/20261019/README.md)
 closes the finite section-5 P0–P10, FC0–FC6 consumer and selected memory M0–M4
-profiles. Seven ledgers below still contain unfinished work; overlapping gates
+profiles. The [caller S6 record](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md) also closes its original completed-caller gate. Six ledgers below still contain unfinished work; overlapping gates
 remain separate from those completed deliveries. The prior prerequisite/local
 records retain their dates and original scope.
 Thirty-one completed or superseded records live in `completed/`. Archiving
@@ -37,11 +37,11 @@ universal-proof clauses. A partial result is not a completed acceptance gate.
 | Active plan | Remaining work |
 | --- | --- |
 | [Explicit alignment hypotheses](alignment-hypotheses.md) | H0–H5 complete within the 2026-10-16 structural-only reviewed MOVAPS profile; conditional v2 and actual v1/v2 replay qualified. Caller S6 and frame-path F4 remain separate. |
-| [Complete section-5 frame investigation](frame-question-investigation.md) | P0–P10 pass the 2026-10-19 remote finite profile, including applicable FC5/M4 imports. General SMT, raw-source guard coverage, S6/F4 and release remain separate. |
+| [Complete section-5 frame investigation](frame-question-investigation.md) | P0–P10 pass the 2026-10-19 remote finite profile, including applicable FC5/M4 imports. General SMT, F4 and release remain separate; caller S6 now has its own completed qualification. |
 | [Frame corridors and cycle summaries: Stage 5.2](frame-connections.md) | FC0–FC6 pass source-bound remote finite/capture acceptance on the exact declared saved sources. |
 | [Structural frame report: Stage 5.1](frame-structure-report.md) | SF0–SF6 complete within the 2026-10-16 recovery-only Windows AMD64/E8-call scope. Retained at its canonical path; caller S6 and frame-path F4 remain separate. |
-| [Caller semantic coverage](caller-semantic-coverage.md) | S0–S5 source-bound qualification retained; S6 completed caller dataflow and full native/Rust state equality remain open. |
-| [Frame-path enumeration](frame-path-enumeration.md) | Remote model/mutation and successful full-dump qualification. The original dump retry remains unavailable. |
+| [Caller semantic coverage](caller-semantic-coverage.md) | S0–S6 complete within the 2026-10-19 original Windows profile, including independent full-state checks. Frame-path F4 remains separate. |
+| [Frame-path enumeration](frame-path-enumeration.md) | Remote model/mutation and successful full-dump qualification. The previous original-dump retry returned unavailable; F4 needs fresh path-level qualification. |
 | [I5c address wrap](i5c-address-wrap.md) | W0–W5 model, runtime, capture and qualification stages. |
 | [Indirect-target resolution](indirect-target-resolution.md) | Full R6 mutation/replay qualification; retain the narrower completed native/dump retry. |
 | [Investigation layer](investigation-layer.md) | I5c, other hypotheses, I6/I7 and remaining frame-path qualification. |

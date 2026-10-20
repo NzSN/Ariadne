@@ -10,7 +10,7 @@ Canonical documents under `docs/` remain in place. The two 2026-10-12 design/pla
 
 | Chat document | Browser page | Markdown |
 | --- | --- | --- |
-| Open-plan index: seven unfinished ledgers after qualification (2026-10-19) | [Open index](ariadne-open-plans-20261019/index.html) | HTML only |
+| Open-plan index: six unfinished ledgers; caller S6 and Stage 5.2 complete (2026-10-19) | [Open index](ariadne-open-plans-20261019/index.html) | HTML only |
 | Section 5 delivery: focused frame questions, fault dependencies and evidence (2026-10-18) | [Open](ariadne-frame-question-delivery-20261018.html) | HTML only |
 | Stage 5.2 implementation plan: frame corridors, SCCs and example routes (2026-10-18) | [Open](ariadne-frame-connections-plan-20261018.html) | [Canonical plan](../plans/frame-connections.md) |
 | Crashpad Windows dump: null-write diagnosis and six-frame path explorer (2026-10-18) | [Open](ariadne-crashpad-dump-analysis-20261018.html) | HTML only |

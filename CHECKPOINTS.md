@@ -17,6 +17,28 @@
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
+## 2026-10-19 — Caller S6 bounded completion accepted
+
+The [caller plan](.agents/plans/caller-semantic-coverage.md) completes S6 under
+[source-bound evidence](evidence/Ariadne/caller-semantic-coverage/20261019/README.md).
+Caller: 9,589 decoded sites, 11,321 edges, 141,301,903 reaching links and 91,175
+actions. Callee: 778 sites, 895 edges and 1,304,602 links. Saved and raw original
+requests/full Rust-native states match; every reaching row is independently
+checked. The million-action and 256 MiB result caps remain.
+
+RPO and shared exact membership improve completion while ordinary replay stays
+unchanged. Rebuilding current LLVM yields `6bb0005e…`, restoring the 30 original
+caller barriers. Stale `45dad913…` partial reports remain historical. The
+completed-prefix total-action-budget regression is corrected with red/green tests.
+
+Root/features/Clippy, eight typechecks/113 configurations, 330 replay observations,
+29 unique compiled mutations and 24 wire controls pass. Source capsule:
+`d1c705d04fb20c215601416911355d274aa0b3fec3fac3539f259d5917257cc6`. Archive: `240dd9fafd7cafe78ab531934cf5c122955e4629c46e6b7803794ca75987922d`.
+Later MOVAPS, two callee targets, frame-path F4, broad release/large-report
+qualification, history and universal refinement remain separate. This entry
+supersedes the earlier caller-budget and stale-decoder coverage limits; original
+receipts retain their dates and scope.
+
 ## 2026-10-19 — Frame-question remote qualification and finite acceptance
 
 The [P0–P10 plan](.agents/plans/frame-question-investigation.md) and

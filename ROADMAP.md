@@ -27,8 +27,8 @@
   one-question resolution, fair semantic work and local dependency/writer
   integration above the existing 5.1/5.2 products, with separate
   [remote qualification](evidence/Ariadne/frame-question/20261019/README.md).
-  The applicable FC5/M4 gates pass; caller S6, frame-path F4, fresh raw-source
-  guard coverage and broad release acceptance remain separate.
+  The applicable FC5/M4 gates pass; frame-path F4 and release acceptance remain
+  separate. Caller S6 has its own completed qualification.
 
 - [Explicit alignment hypotheses](docs/Ariadne/investigation-design.md#explicit-alignment-hypotheses)
   and [H0–H5 ledger](.agents/plans/alignment-hypotheses.md) — structural-only
@@ -36,9 +36,9 @@
   while retaining the baseline unknown verdict and actual saved v1 replay.
 
 - [Caller normal-flow coverage](docs/Ariadne/caller-semantic-coverage-design.md)
-  and [active S0–S6 plan](.agents/plans/caller-semantic-coverage.md) — source-qualified
-  terminal/load support removes the original caller coverage barriers; completing
-  the much larger caller dataflow and its native/Rust parity gate remains open.
+  and [completed S0–S6 ledger](.agents/plans/caller-semantic-coverage.md) — terminal/load
+  support removes the original barriers, and its completed-caller gate has
+  separate 2026-10-19 qualification.
 
 - [Accepted P4 qualification](docs/Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query) — current v3 corpus and user scope decision; the [historical audit](docs/Ariadne/bap-analysis-core-design.md#documentation-audit) preserves its earlier v2 inventory.
 
@@ -75,7 +75,7 @@ the [semantic assurance decision](docs/Ariadne/semantic-assurance.md).
 
 ## Guarded captured-target composition — scoped loop closure delivered
 
-The [design](docs/Ariadne/guarded-target-resolution-design.md), [composition plan](.agents/plans/completed/guarded-target-resolution.md) and [loop plan](.agents/plans/completed/loop-aware-target-resolution.md) deliver paired guarded/target preparation, versioned legacy replay and checked local-region induction. [Qualification dated 2026-10-15](evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) closes DA09 and DADD, all nine original incoming-coverage certificates and all 51 missing-start gates, with full native/Rust parity for both completed queries in that earlier stop-limited graph. The loop rule supplies coverage for already witnessed table entries. The caller follow-up below reaches a substantially larger graph; its completed-core and frame-path gates remain open.
+The [design](docs/Ariadne/guarded-target-resolution-design.md), [composition plan](.agents/plans/completed/guarded-target-resolution.md) and [loop plan](.agents/plans/completed/loop-aware-target-resolution.md) deliver paired guarded/target preparation, versioned legacy replay and checked local-region induction. [Qualification dated 2026-10-15](evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) closes DA09 and DADD, all nine original incoming-coverage certificates and all 51 missing-start gates, with full native/Rust parity for both completed queries in that earlier stop-limited graph. The loop rule supplies coverage for already witnessed table entries. The caller follow-up below reaches a substantially larger graph; its completed-core gate now has S6 qualification; the frame-path gate remains open.
 
 ## Structural frame maps — Stage 5.1 delivered
 
@@ -96,13 +96,20 @@ per-activation hypothesis, labels all derived structure conditional and
 preserves baseline Unknown. It adds no target narrowing, accumulated-path
 constraint solver or completed caller/frame-path gate.
 
-## Caller normal-flow coverage — S5 qualified, S6 partial
+## Caller normal-flow coverage — S0–S6 qualified
 
-The [design](docs/Ariadne/caller-semantic-coverage-design.md), [active plan](.agents/plans/caller-semantic-coverage.md) and [qualification](evidence/Ariadne/caller-semantic-coverage/20261015/README.md) add control-only INT3/UD terminal certificates, exact guarded MOVAPS loads and explicit `local-normal-completion/v1` scope. S0–S5 pass on the declared final sources/helper; final admission refresh `075602` passes exact request/proof equality for both frames, caller structural recovery/admission and callee full parity. It does not repeat full caller completion. Legacy rules/proofs remain versioned, pending loads commit no vector effect, and exception-handler resumption is outside scope rather than assumed impossible.
+The [design](docs/Ariadne/caller-semantic-coverage-design.md), [ledger](.agents/plans/caller-semantic-coverage.md)
+and [2026-10-19 evidence](evidence/Ariadne/caller-semantic-coverage/20261019/README.md)
+complete the original normal-flow/caller profile. Both original requests and
+their full states match between Rust/native implementations. Every reaching row
+is independently checked. Caller dataflow retains 141,301,903 links and finishes
+in 91,175 actions within the original million-action limit.
 
-Original-dump probe `073143` removes all 30 caller coverage barriers and retains all target, root and premise facts. The initial MOVAPS is aligned under the recorded premises; the later load is still unknown. Caller recovery now decodes 9,589 sites and 11,321 edges, then Rust and native completion exhaust their selected action budgets. The callee completes with full request/state parity and two remaining indirect barriers. NP10 frame listing is unavailable with `missing-frame-query` because no completed caller query exists.
-
-The next acceptance gate for this completed-analysis milestone is completed caller analysis and full native/Rust state comparison under declared budgets. Passing terminal admission or native initialization does not satisfy it. Keep S6 and its plan open, and report load alignment, callee targets and frame-path availability separately; normal-flow closure does not establish historical execution or whole-machine coverage. The separately implemented Stage 5.1 structural report does not discharge S6.
+Completion uses exact compact membership and RPO; ordinary replay remains
+unchanged. The current LLVM rebuild restores the 30 original barriers after the
+stale-helper partial attempt. Later MOVAPS alignment and two callee targets remain
+unknown. Frame-path F4, release/large-report qualification, history/root cause and
+universal refinement remain separate.
 
 ## Investigation direction
 

@@ -115,3 +115,20 @@ Generated replay uses `ARIADNE_REPLAY_BACKEND=bap` and an explicit helper direct
 the selected ports never run the Rust solver. The aggregate checker includes
 native/generated tests, real-code mutations, five release workloads and existing
 Stage 1/Stage E regression gates. The supplied LLVM IR engine remains separate.
+
+## Compact completed recovery
+
+The [S6 contract](../../docs/Ariadne/caller-semantic-coverage-design.md#s6-bounded-completion-continuation-2026-10-19)
+and [qualification](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md)
+add `dense_completion.ml`. Helpers advertise `completion_codec = bitmap/v1`;
+`NativeAnalyzer::finish` explicitly selects its completion transaction. Ordinary
+step/named-action and legacy paged transactions retain their old schedule.
+Compact completion uses iterative RPO and lossless shared membership. The host
+checks dictionary identity, canonical bitmaps, domains, padding and references,
+plus page identity/checksum and clean exit before publishing a result.
+
+The million-action, 8 MiB frame, 256 KiB page and 256 MiB final-envelope caps
+remain. The compact profile separately bounds its universe, definition-name bytes
+and membership workspace; the legacy expanded-link cap remains intact. Compact
+transactions expose progress and sealed final results, with no trusted partial
+ordinary observation. Native computation is independent of the Rust reference.

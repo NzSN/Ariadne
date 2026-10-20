@@ -1,7 +1,7 @@
 {
   "archived": "2026-10-16",
   "scope": "Conversation presentation archive; canonical designs stay in docs/ and plan owners now live in .agents/plans/. No new analysis or qualification.",
-  "report_count": 31,
+  "report_count": 33,
   "markdown_html_pairs_including_index": 21,
   "source_session": "01a12ddc-4e59-7cb2-b5aa-67a8e522c597",
   "recovered_reports": [
@@ -840,12 +840,12 @@
       "sha256": "2667f3af9200452de3e195dc17664344a094f718310fb48d7527f5a02999ac33"
     },
     "ariadne-reports-index.html": {
-      "bytes": 13442,
-      "sha256": "7ecda394fbf836d820a841d73244f950eeb276d218ffd259943a9b8836235b91"
+      "bytes": 13454,
+      "sha256": "1e5e0038ec2299e69e390b8c16e43e63380c2dc7fef82b82d1ba5b701215bd45"
     },
     "ariadne-reports-index.md": {
-      "bytes": 7614,
-      "sha256": "6097b9b8ce7f4a4120ee6fe1aa4accbf2f06ecb4b6402e71f38539da7cd5274f"
+      "bytes": 7626,
+      "sha256": "c8547075c8c7eafe4e9ddb08e6ccd757b31a727d5724471675b8d39c68db2925"
     },
     "ariadne-resolver-structural-types-20261015.html": {
       "bytes": 32858,
@@ -936,16 +936,24 @@
       "sha256": "2cbf44c62270ecf4bd84bff836eca67bb0663be58a3888921e6f0d8efffe6bcb"
     },
     "ariadne-open-plans-20261019/index.html": {
-      "bytes": 9489,
-      "sha256": "0e841f58a12facddff4f462450517d94e86eab9a034cf6cb4d434d4faaa79a9c"
+      "bytes": 13365,
+      "sha256": "40858c669273f94edd6b7cc2174fd33d0e902fda2f00ae4574bf94234e696eba"
     },
     "ariadne-open-plans-20261019/before-qualification.html": {
       "bytes": 10776,
       "sha256": "11a5e3896542b04867506a854e8139a962a9f54f4fdb9693a94ff02a0f07156d"
+    },
+    "ariadne-open-plans-20261019/qualification-snapshot.html": {
+      "bytes": 9489,
+      "sha256": "0e841f58a12facddff4f462450517d94e86eab9a034cf6cb4d434d4faaa79a9c"
+    },
+    "ariadne-open-plans-20261019/before-caller-completion.html": {
+      "bytes": 12671,
+      "sha256": "8af604d4307a7f854ddb9f34bcbf5c0b9493042cb3aee3348754457e514625f6"
     }
   },
   "directory": ".agents/chatdocs/",
-  "html_documents_including_index": 32,
+  "html_documents_including_index": 34,
   "markdown_documents_including_index": 21,
   "source_review_documents": [
     {
@@ -1041,7 +1049,7 @@
       "version_note": "Exact earlier ten-open-plan index preserved before finite remote qualification closed three ledgers."
     },
     {
-      "html": "ariadne-open-plans-20261019/index.html",
+      "html": "ariadne-open-plans-20261019/qualification-snapshot.html",
       "date": "2026-10-19",
       "source_revision": "04461afcc89fad7150696d182d09b3b74097e74b",
       "source_state": "Current working-tree status after source-bound finite remote acceptance; browser references remain pinned to the published base.",
@@ -1064,7 +1072,78 @@
       "publication_verification": {
         "path": "evidence/Ariadne/frame-question/20261019/publication-verification.json",
         "sha256": "fe57330883483d898914967623803ff5b0d64f29e30a68510b04d0ca3bde45cb"
-      }
+      },
+      "original_html": "ariadne-open-plans-20261019/index.html",
+      "version_note": "Exact seven-open-plan index preserved from the remote qualification publication before the postcommit status refresh. Its original HTML hash remains bound by the historical publication-verification record."
+    },
+    {
+      "html": "ariadne-open-plans-20261019/before-caller-completion.html",
+      "date": "2026-10-19",
+      "source_revision": "feecc34943326cc28981d9a8405f4432eed55b9a",
+      "source_state": "Postcommit local status refresh; the source commit is not yet pushed. Current plan links resolve directly to the canonical local files.",
+      "canonical_plan_index": ".agents/plans/README.md",
+      "canonical_plan_index_sha256": "14ae5fee4506300aeaeb9ed8ed5246b249d6ba0f5383d99a40206e27d6155189",
+      "open_plan_count": 7,
+      "source_plan_sha256": {
+        ".agents/plans/caller-semantic-coverage.md": "c92003f44ea181a469b4caf89b19fccc76873819957608b47d3691f8705aa7f3",
+        ".agents/plans/frame-path-enumeration.md": "b00faf56d338cf9d17d52f2020461fed16eece12fa3e58ec8c9bf8f6cc00f7d8",
+        ".agents/plans/indirect-target-resolution.md": "e30f3e4e207b124cc56c3e46471466d2d88af6e31a0bdce1355618c28bbcff23",
+        ".agents/plans/scanner-partial-explanation.md": "53ac1e008d27319e31af66494eb4e267a6a11a9ba5882aa5434e2e7387c417e3",
+        ".agents/plans/specification-sync.md": "593c48875e98eb69cbf77b58e85a4d9e2269724babacc11719718d634509e767",
+        ".agents/plans/i5c-address-wrap.md": "f72a6e9a68b28bc7a55ae82f0e8a2079b015f26de5b2d87a81c7c96734e67d0c",
+        ".agents/plans/investigation-layer.md": "91b9e596fe4927e2179a62491b7c9bad7ba6298e54d3771ffa458c4d7d926e95"
+      },
+      "qualification": "evidence/Ariadne/frame-question/20261019/README.md",
+      "qualification_archive_sha256": "3a051719957d3c373b074e4187e557a822e475b2a3dba65ae85f716139bebdf0",
+      "scope": "Presentation refresh only: seven unfinished ledgers, five completed-stage ledgers including Stage 5.2 FC0\u2013FC6, and the separate fresh-source guard-coverage follow-up. Earlier snapshots and qualification evidence remain unchanged.",
+      "validation": "165 local references and fragments in four presentation/index files resolve. Current HTML IDs are unique; seven open and five completed plan hashes match local commit feecc34. Historical qualification and prequalification snapshot bytes are preserved. No external HTTP reachability, visual inspection or new runtime qualification is claimed.",
+      "completed_plan_count": 5,
+      "completed_plan_sha256": {
+        ".agents/plans/frame-structure-report.md": "61c0690ebffd342485b967c3dd65ac7cde666b13016a646240d304a977190ac2",
+        ".agents/plans/frame-connections.md": "f2c9962401c7807b3676fd3919dd240f6d8318d10c4f0c38b81e35e08b01fe14",
+        ".agents/plans/frame-question-investigation.md": "f1d19b9cbe4c071e53bdfe8bc4240c6e801f95509a235a248607275469920ebd",
+        ".agents/plans/memory-provenance-refinement.md": "3723d20c7dcb4ddd708731dc78c385972b192b830397f3170847462dc54cc35d",
+        ".agents/plans/alignment-hypotheses.md": "73d7c0c208b57acb41f8e9224bb1b041cf626256028da245c30e1a5035007cb5"
+      },
+      "qualification_snapshot": "ariadne-open-plans-20261019/qualification-snapshot.html",
+      "qualification_snapshot_sha256": "0e841f58a12facddff4f462450517d94e86eab9a034cf6cb4d434d4faaa79a9c",
+      "original_html": "ariadne-open-plans-20261019/index.html",
+      "version_note": "Exact seven-open-plan presentation preserved before separate caller S6 completion."
+    },
+    {
+      "html": "ariadne-open-plans-20261019/index.html",
+      "date": "2026-10-19",
+      "source_revision": "feecc34943326cc28981d9a8405f4432eed55b9a",
+      "source_state": "Working-tree status after source-bound caller S6 completion; code and documentation updates are uncommitted over feecc34.",
+      "canonical_plan_index": ".agents/plans/README.md",
+      "canonical_plan_index_sha256": "5d2393151f2b2510abacacb7e11ce6a0c6fa2a87ef8d0cfb996555c8d8874cdd",
+      "open_plan_count": 6,
+      "source_plan_sha256": {
+        ".agents/plans/frame-path-enumeration.md": "b00faf56d338cf9d17d52f2020461fed16eece12fa3e58ec8c9bf8f6cc00f7d8",
+        ".agents/plans/indirect-target-resolution.md": "e30f3e4e207b124cc56c3e46471466d2d88af6e31a0bdce1355618c28bbcff23",
+        ".agents/plans/scanner-partial-explanation.md": "53ac1e008d27319e31af66494eb4e267a6a11a9ba5882aa5434e2e7387c417e3",
+        ".agents/plans/specification-sync.md": "593c48875e98eb69cbf77b58e85a4d9e2269724babacc11719718d634509e767",
+        ".agents/plans/i5c-address-wrap.md": "f72a6e9a68b28bc7a55ae82f0e8a2079b015f26de5b2d87a81c7c96734e67d0c",
+        ".agents/plans/investigation-layer.md": "91b9e596fe4927e2179a62491b7c9bad7ba6298e54d3771ffa458c4d7d926e95"
+      },
+      "qualification": "evidence/Ariadne/caller-semantic-coverage/20261019/README.md",
+      "qualification_archive_sha256": "3a051719957d3c373b074e4187e557a822e475b2a3dba65ae85f716139bebdf0",
+      "scope": "Current navigation: six unfinished ledgers and six completed stage ledgers. Caller S6 complete in the original Windows profile; past partial source publications keep their own identities.",
+      "validation": "Plan hashes and local references checked after the S6 closure. Browser launch is separate from visual inspection.",
+      "completed_plan_count": 6,
+      "completed_plan_sha256": {
+        ".agents/plans/caller-semantic-coverage.md": "74e8873e7ce49355cf0406304d7670820d2bfb3d9bbe9b65d79ad0cb1ba361e7",
+        ".agents/plans/frame-structure-report.md": "61c0690ebffd342485b967c3dd65ac7cde666b13016a646240d304a977190ac2",
+        ".agents/plans/frame-connections.md": "6035ad34543a64e2b4b912868047a39ae8a27f68be9a69292ffec7ee7e0f2550",
+        ".agents/plans/frame-question-investigation.md": "d653f45b3dda1f480aeb4553f279ad0a4cd31d178334d7ff6d498628871812b5",
+        ".agents/plans/memory-provenance-refinement.md": "3723d20c7dcb4ddd708731dc78c385972b192b830397f3170847462dc54cc35d",
+        ".agents/plans/alignment-hypotheses.md": "73d7c0c208b57acb41f8e9224bb1b041cf626256028da245c30e1a5035007cb5"
+      },
+      "qualification_snapshot": "ariadne-open-plans-20261019/qualification-snapshot.html",
+      "qualification_snapshot_sha256": "0e841f58a12facddff4f462450517d94e86eab9a034cf6cb4d434d4faaa79a9c",
+      "qualified_source_capsule_sha256": "d1c705d04fb20c215601416911355d274aa0b3fec3fac3539f259d5917257cc6",
+      "prior_snapshot": "ariadne-open-plans-20261019/before-caller-completion.html",
+      "prior_snapshot_sha256": "8af604d4307a7f854ddb9f34bcbf5c0b9493042cb3aee3348754457e514625f6"
     }
   ],
   "plan_directory_relocation": {

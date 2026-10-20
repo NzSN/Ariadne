@@ -2,15 +2,15 @@
 
 ## Context and follow-up
 
-**Status.** S0–S5 implementation and source-bound qualification pass, 2026-10-15. Dump probe `073143` removes all 30 original caller coverage barriers but exhausts the caller core action budgets, so full completed-core parity is unmet. Final-helper admission refresh `075602` passes within its narrower scope. The [S0–S6 plan](../../.agents/plans/caller-semantic-coverage.md) remains active with S6 partial; this is not full acceptance.
+**Status.** S0–S6 pass the declared original Windows AMD64 normal-flow and completed-caller profile. The [2026-10-19 qualification](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md) completes both frames with exact native/Rust states. October 15 budget-stopped and admission-only records retain their original scope.
 
 **Why this document exists.** [Loop closure](guarded-target-resolution-design.md#dated-loop-delivery-and-publication-correction--2026-10-15) completes DA09/DADD but leaves 30 caller guard barriers: 27 INT3 sites, one UD2, one UD1 and one MOVAPS load. This is item 2 of the remaining-blocker inventory.
 
-**What this document establishes.** A narrow control-only terminal certificate, exact guarded-load recognition, versioned replay and acceptance gates that preserve the [BAP trust contract](semantic-assurance.md). It does not add LLVM-derived effects or a general exception interpreter.
+**What this document establishes.** Checked normal-flow terminal/load admission, versioned replay and bounded complete dataflow with lossless membership storage. BAP lifting remains trusted; LLVM supplies independent decode/control facts.
 
-**Where to go next.** Read the [source-bound qualification](../../evidence/Ariadne/caller-semantic-coverage/20261015/README.md), dated outcome below and [execution plan](../../.agents/plans/caller-semantic-coverage.md) for passed checks and unmet gates. The [guard contract](justified-branch-pruning-design.md), [composition contract](guarded-target-resolution-design.md) and [formal guide](../../Specs/README.md) define the semantics. The [frame-path ledger](../../.agents/plans/frame-path-enumeration.md) retains the separate positive-listing gate.
+**Where to go next.** Read the [new qualification](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md), [S0–S6 ledger](../../.agents/plans/caller-semantic-coverage.md), [completion implementation](../implementation.md), [guard contract](justified-branch-pruning-design.md) and remaining [frame-path F4](../../.agents/plans/frame-path-enumeration.md).
 
-**What remains unresolved.** The caller core has not completed within the selected one-million-action budgets, and completed caller native/Rust parity is therefore unavailable. The later MOVAPS load remains unknown; the callee retains two indirect barriers. NP10 frame paths are unavailable. Normal-flow closure makes no exception-handler, executed-history or whole-machine coverage claim. The passing final-helper admission refresh remains distinct from the budget-stopped full run.
+**What remains unresolved.** The later MOVAPS load remains Unknown under the original premises; two callee indirect barriers remain. Frame-path F4, broader release/large-report qualification, executed history, root cause and universal refinement remain separate. Completed dataflow is relative to the admitted graph.
 
 ## Reproduced facts
 
@@ -96,6 +96,10 @@ Pending load/store preparation clears instruction effects and retains only the c
 
 ## Dated implementation and dump outcome, 2026-10-15
 
+This section preserves the October 15 outcome. The later
+[S6 completion](#completed-caller-qualification-2026-10-19) closes its caller
+budget/parity gate while retaining the stated alignment and target unknowns.
+
 S0–S5 pass under their declared source/tool scope. The model checker passes all 58 predicate configurations; the independent oracle passes 71 declared cases, 12,752 complete UD1 extents and 8,944 truncation controls. The unchanged model/oracle sources support retained source-bound reuse in the final campaign. These checks do not assert a universal implementation or ISA proof.
 
 Final source archive `c35459a19b1e2f5f139730bea6c119cfceff603207254b52d42effac68654a5f` contains 937 files. S5 record `qualification-20261015T075232Z-139849/qualification.json` passes with helper `d39df81c64c1fd832b88dd48652572234422d8d8840d277cbb83fb88e783e725`: format, 242 default tests, 46 core-only tests, Clippy, release build, nine native capture tests, 88 direct controls, 24 protocol controls, nine behavioral caller mutations, and the two legacy-capture controls/one dependency mutant above. Final native kernel/protocol/frame/composition/tool gates, 330 generated observations, three opaque controls and actual retained guard/combined report replay also pass. This closes S5, not the incomplete original caller-core gate.
@@ -120,8 +124,88 @@ The selected semantic-coverage goal is observed, but S6's explicit requirement f
 
 ## Formal and acceptance boundary
 
+### S6 bounded completion continuation, 2026-10-19
+
+The [S6 continuation ledger](../../.agents/plans/caller-semantic-coverage.md#s6-bounded-completion-continuation-2026-10-19)
+addresses the completed-caller gate. Its finite qualification now passes;
+the October 15 records retain their original outcome and source identities.
+
+A remote descending-chain feedback case reproduces repeated address-order
+propagation. An independent bit-membership observer computes the exact retained
+caller fixed point: 9,589 decoded sites, 125,254 possible definition identities
+and 141,301,903 reaching links. This exceeds the legacy completion decoder's
+16-million expanded-link policy even after scheduling is improved.
+
+The continuation preserves the core transfer equations and ordinary least-VA
+`step`/named-action replay. Completion uses iterative reverse-postorder priorities
+over decoded local edges, including summary edges and excluding call-only edges.
+Every queued update is an enabled monotone propagation; the completed product
+must equal the same least fixed point, including entry and possible-write origins.
+An existing ordinary-action prefix can be completed without changing its premises.
+
+Completed `DefinitionSet` values may share a sorted definition universe and
+immutable membership words. Iteration, membership, equality and copy-on-write
+mutation retain set meanings. The Rust bounded completion API refuses publication
+on action, elapsed, universe or bitmap-workspace exhaustion. Unbounded legacy
+completion retains a reference path when the compact workspace policy declines.
+Core-only builds continue to use the standard library alone.
+
+The native helper advertises `completion_codec = bitmap/v1`. The new completion
+transaction selects that codec explicitly and retains batches of at most 64
+charged actions, the one-million-action cap, 8 MiB response frames, checked
+256 KiB pages and 256 MiB completed-envelope cap. Ordinary replay and legacy
+completion transactions keep their previous contracts. Compact transactions
+expose only progress and the sealed final envelope; mixing ordinary observation
+operations into a compact transaction is rejected.
+
+The final bitmap envelope binds a canonical, sorted definition universe,
+interned membership strings and total address-to-set references. Each lowercase
+hex character carries four membership bits from low to high; unused final bits
+are zero. The host independently checks source/query/counters, dictionary identity
+against decoded may-defs and entry facts, strict order, canonical strings, padding,
+unique sets, references, domain and undecoded empty rows. It bounds one membership
+plane to 33,554,432 words and the universe to one million definitions before
+allocation. The legacy 16-million expanded-link policy remains unchanged; the
+new representation avoids allocating one object per logical reaching link.
+
+Acceptance requires exact Rust/native full-state equality on both retained
+original requests, an independent per-row fixed-point check, prefix/replay and
+hostile codec controls, applicable core/native/model/replay/mutation qualification,
+and a byte-identical raw-dump admission refresh with explicit source differences.
+The [source-bound qualification](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md) passes those named clauses. Later
+load alignment, callee target gaps, frame-path admission and the fresh raw-source
+guard-coverage limitation retain separate outcomes.
+
 Predicate-admission v2 was written before runtime implementation and distinguishes certified normal terminals, pending load/store guards and coverage barriers. It models stale epochs, invalid scope/evidence, late edges, forbidden terminal successors and unknown alignment. Existing core Stop semantics and target/loop premise interfaces remain authoritative and unchanged. Finite checks do not prove universal refinement or an inter-model coupling theorem.
 
 The four-shape feedback is green in run `072748` without adding an RSP-alignment premise. Full acceptance requires all 30 original caller sites to stop being unresolved candidate barriers under the declared normal-flow contract, every original INT3 site to have checked terminal evidence, and no replacement unaccounted barrier. Preserve all nine original target sets, DA09/DADD completeness, entry roots and captured bytes. Re-run the byte-identical dump and both native/Rust full-state comparisons.
 
 Report initial MOVAPS admission, the later MOVAPS-load verdict, new discovery, callee barriers and frame-path availability separately. A successful frame listing is not a prerequisite for this narrower semantic-coverage gate.
+
+## Completed caller qualification, 2026-10-19
+
+The [S6 evidence](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md) binds 1066 source/input files
+to capsule `d1c705d04fb20c215601416911355d274aa0b3fec3fac3539f259d5917257cc6`. Saved requests and byte-identical raw-dump
+preparation reproduce the original normalized inputs. Caller recovery contains
+9,589 decoded sites/11,321 edges; callee recovery contains 778/895. Every
+completed reaching row matches an independent finite observer. Native and Rust
+requests and full states match for both frames. All 29 original terminal receipts
+and the original target facts remain under the same premises.
+
+The caller fixed point retains **141,301,903** reaching links and completes in
+**91,175 actions**, within the existing million-action limit. The bitmap envelope
+also remains below the unchanged 256 MiB completed-result cap. Every possible
+definition and source premise is retained. Ordinary replay keeps its least-VA
+schedule; completion uses RPO and shared exact membership.
+
+The initial fresh retry selected stale LLVM helper `45dad913…`, reproducing the
+small 9/769-node source and INT3 barriers. Rebuilding the current decoder yields
+`6bb0005e…`, matching the original caller-qualified helper, and restores the full
+source with zero caller candidate barriers. Earlier partial reports are preserved.
+
+Root feature suites, Clippy, eight selected typechecks/113 finite configurations,
+330 generated observations, 29 unique compiled mutations and 24 caller wire
+controls pass their recorded tiers. The completed-prefix budget regression has
+retained red/green checks. Failed drivers and preliminary repeats earn no final
+mutation credit. This qualification covers the original empty-seed requests;
+arbitrary large slices and report rendering retain separate release scope.

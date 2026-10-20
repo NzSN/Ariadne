@@ -91,6 +91,7 @@ let () =
         else key,value) (fields handshake)));
     let sequence = ref 0 and action_index = ref 0 and owned = ref None in
     let completed = ref None and completion_mode = ref false and page_offset = ref 0 in
+    let dense_mode = ref false and dense_work = ref None in
     let target_profile=ref false in
     let computation_cpu=ref 0. in
     let identity seq = ["schema",js "ariadne.bap-core/v1"; "session",js session;
@@ -105,10 +106,12 @@ let () =
             | Some (old,text) when old == p -> text
             | _ -> let text = Yojson.Safe.to_string (Project_state.attribution p snapshot) in
               attribution_cache := Some (p,text); text in
-          (if !target_profile && !completion_mode && s.phase="done" then [Yojson.Safe.to_string (Recovery.observe_dictionary i s)] else Recovery.observe_chunks observation_cache i s), attribution
+          (if !dense_mode && s.phase="done" then [Yojson.Safe.to_string (Dense_completion.observe i s)]
+           else if !target_profile && !completion_mode && s.phase="done" then [Yojson.Safe.to_string (Recovery.observe_dictionary i s)] else Recovery.observe_chunks observation_cache i s), attribution
         | Some (Flow (i,s,_)) -> [Yojson.Safe.to_string (Stateflow.observe i s)], "[]" in
       let compact= !target_profile && !completion_mode && (match !owned with Some (Core (_,s,_)) -> s.phase="done" | _ -> false) in
-      let fields = (List.map (fun (k,v) -> if k="schema" && compact then k,js "ariadne.bap-core-dictionary/v1" else k,v) (identity seq)) @ ["generation",`Int 1; "action_index",`Int !action_index;
+      let fields = (List.map (fun (k,v) -> if k="schema" && !dense_mode then k,js "ariadne.bap-core-bitmap/v1"
+          else if k="schema" && compact then k,js "ariadne.bap-core-dictionary/v1" else k,v) (identity seq)) @ ["generation",`Int 1; "action_index",`Int !action_index;
         "changed",`Bool changed] in
       let encode (k,v) = Yojson.Safe.to_string (js k) ^ ":" ^ Yojson.Safe.to_string v in
       ["{" ^ String.concat "," (List.map encode fields) ^ ",\"observation\":"] @
@@ -122,6 +125,8 @@ let () =
       List.iter (fun (k,v) -> require (get request k = v) ("identity/sequence mismatch: " ^ k))
         (identity !sequence);
       let operation = string request "operation" and payload = get request "payload" in
+      require (not !dense_mode || List.mem operation ["run-batch";"result-page";"result-close";"reset"])
+        "compact completion transaction cannot expose partial observations";
       let seq = !sequence in
       incr sequence;
       if !owned = None then begin
@@ -187,14 +192,25 @@ let () =
         let error = try
           begin match operation with
           | "run-batch" ->
-            exact payload ["steps"];
+            if List.mem_assoc "codec" (fields payload) then begin
+              exact payload ["steps";"codec"];
+              require (string payload "codec"="bitmap/v1" && (not !completion_mode || !dense_mode)) "completion codec";
+              dense_mode:=true
+            end else begin require(not !dense_mode) "completion codec changed";exact payload ["steps"] end;
             let steps = match get payload "steps" with `Int n -> n | _ -> raise (Invalid "batch steps") in
             require (steps > 0 && steps <= 64 && !completed=None) "batch guard";
             completion_mode := true;
             let rec advance n = if n > 0 then match Option.get !owned with
               | Core (i,s,_) when s.phase<>"done" ->
                 require (!action_index < 1000000) "action budget";
-                let next=advance_owned "step" (`Assoc []) snapshot (Option.get !owned) in
+                let next=if !dense_mode && s.phase="dataflow" then begin
+                  let work=match !dense_work with Some work->work|None->
+                    let work=Dense_completion.initialize i s in dense_work:=Some work;work in
+                  if Dense_completion.step work then Option.get !owned
+                  else begin dense_work:=None;
+                    match Option.get !owned with Core(i,s,p)->Core(i,Dense_completion.finish work i s,p)|_->assert false
+                  end
+                end else advance_owned "step" (`Assoc []) snapshot (Option.get !owned) in
                 owned := Some next; incr action_index; incr advanced; advance (n-1)
               | _ -> () in
             let before=Sys.time () in advance steps;computation_cpu := !computation_cpu +. Sys.time () -. before;

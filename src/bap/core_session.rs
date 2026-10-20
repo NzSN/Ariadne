@@ -50,6 +50,7 @@ pub struct FamilySession<O: FamilyObservation> {
     closed: bool,
     identity: Value,
     last_observation: Option<Vec<u8>>,
+    bitmap_completion: bool,
 }
 impl<O: FamilyObservation> FamilySession<O> {
     pub fn identity(&self) -> &Value {
@@ -86,6 +87,11 @@ impl<O: FamilyObservation> FamilySession<O> {
             return Err(invalid("core helper manifest mismatch"));
         }
         let handshake = &manifest["handshake"];
+        let bitmap_completion = match handshake.get("completion_codec") {
+            None => false,
+            Some(Value::String(codec)) if codec == "bitmap/v1" => true,
+            _ => return Err(invalid("unsupported completion codec capability")),
+        };
         if handshake["schema"] != "ariadne.bap-core-ready/v1"
             || handshake["abi"] != 2
             || handshake["families"] != json!(["recovery", "stateflow"])
@@ -221,6 +227,7 @@ impl<O: FamilyObservation> FamilySession<O> {
             max_request_bytes: config.max_request_bytes,
             closed: false,
             last_observation: None,
+            bitmap_completion,
             identity: json!({"schema":"ariadne.analysis-backend/v1","backend":"bap",
                 "snapshot":snapshot,"query":query,"family":O::FAMILY,"profile":profile,
                 "build":manifest,"transport":{"max_request_bytes":config.max_request_bytes,
@@ -402,18 +409,48 @@ impl FamilySession<Observation> {
     /// Executes the same scheduled actions natively and retrieves one immutable
     /// final envelope through bounded pages. No partial observation is exposed.
     pub fn finish_paged(&mut self) -> Result<FamilyResponse<Observation>, Error> {
-        let result = self.finish_paged_inner();
+        let result = self.finish_paged_inner(false).map(|(response, _)| response);
         if result.is_err() {
             self.terminate();
         }
         result
     }
-    fn finish_paged_inner(&mut self) -> Result<FamilyResponse<Observation>, Error> {
+    pub(crate) fn finish_paged_compact(
+        &mut self,
+    ) -> Result<
+        (
+            FamilyResponse<Observation>,
+            Option<super::core_protocol::BitmapMembership>,
+        ),
+        Error,
+    > {
+        let result = self.finish_paged_inner(true);
+        if result.is_err() {
+            self.terminate();
+        }
+        result
+    }
+    fn finish_paged_inner(
+        &mut self,
+        compact: bool,
+    ) -> Result<
+        (
+            FamilyResponse<Observation>,
+            Option<super::core_protocol::BitmapMembership>,
+        ),
+        Error,
+    > {
         use super::core_protocol::{COMPLETION_PAGE_BYTES, completion_checksum};
         let diagnostic = std::env::var_os("ARIADNE_TARGET_DIAGNOSTICS").is_some();
         let started = Instant::now();
+        let compact = compact && self.bitmap_completion;
         let metadata = loop {
-            let response = self.completion_request("run-batch", json!({"steps":64}))?;
+            let payload = if compact {
+                json!({"steps":64,"codec":"bitmap/v1"})
+            } else {
+                json!({"steps":64})
+            };
+            let response = self.completion_request("run-batch", payload)?;
             if !response.data_hex.is_empty() || response.offset != 0 {
                 return Err(invalid("unsolicited completion data"));
             }
@@ -492,31 +529,54 @@ impl FamilySession<Observation> {
         }
         self.wait_clean()?;
         let decoded = Instant::now();
-        let response: FamilyResponse<Observation> =
-            if super::core_protocol::proof_profile(&self.profile) {
-                let compact: FamilyResponse<super::core_protocol::DictionaryObservation> =
-                    serde_json::from_slice(&bytes)?;
-                if compact.schema != "ariadne.bap-core-dictionary/v1" {
-                    return Err(invalid("completed dictionary schema"));
-                }
-                FamilyResponse {
-                    schema: "ariadne.bap-core/v1".into(),
-                    session: compact.session,
-                    snapshot: compact.snapshot,
-                    query: compact.query,
-                    family: compact.family,
-                    sequence: compact.sequence,
-                    generation: compact.generation,
-                    action_index: compact.action_index,
-                    changed: compact.changed,
-                    observation: compact.observation.expand()?,
-                    attribution: compact.attribution,
-                    error: compact.error,
-                    result: compact.result,
-                }
-            } else {
-                serde_json::from_slice(&bytes)?
-            };
+        let mut membership = None;
+        let response: FamilyResponse<Observation> = if compact {
+            let raw: FamilyResponse<super::core_protocol::BitmapObservation> =
+                serde_json::from_slice(&bytes)?;
+            if raw.schema != "ariadne.bap-core-bitmap/v1" {
+                return Err(invalid("completed bitmap schema"));
+            }
+            let (observation, bitmap) = raw.observation.split();
+            membership = Some(bitmap);
+            FamilyResponse {
+                schema: "ariadne.bap-core/v1".into(),
+                session: raw.session,
+                snapshot: raw.snapshot,
+                query: raw.query,
+                family: raw.family,
+                sequence: raw.sequence,
+                generation: raw.generation,
+                action_index: raw.action_index,
+                changed: raw.changed,
+                observation,
+                attribution: raw.attribution,
+                error: raw.error,
+                result: raw.result,
+            }
+        } else if super::core_protocol::proof_profile(&self.profile) {
+            let compact: FamilyResponse<super::core_protocol::DictionaryObservation> =
+                serde_json::from_slice(&bytes)?;
+            if compact.schema != "ariadne.bap-core-dictionary/v1" {
+                return Err(invalid("completed dictionary schema"));
+            }
+            FamilyResponse {
+                schema: "ariadne.bap-core/v1".into(),
+                session: compact.session,
+                snapshot: compact.snapshot,
+                query: compact.query,
+                family: compact.family,
+                sequence: compact.sequence,
+                generation: compact.generation,
+                action_index: compact.action_index,
+                changed: compact.changed,
+                observation: compact.observation.expand()?,
+                attribution: compact.attribution,
+                error: compact.error,
+                result: compact.result,
+            }
+        } else {
+            serde_json::from_slice(&bytes)?
+        };
         if diagnostic {
             eprintln!("completion expansion_ms={}", decoded.elapsed().as_millis());
         }
@@ -539,7 +599,7 @@ impl FamilySession<Observation> {
             return Err(invalid("completed envelope identity/state mismatch"));
         }
         response.observation.validate_shape()?;
-        Ok(response)
+        Ok((response, membership))
     }
 }
 impl<O: FamilyObservation> Drop for FamilySession<O> {

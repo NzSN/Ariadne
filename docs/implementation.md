@@ -100,6 +100,7 @@ pipeline fixture and is executed by `cargo test`. Public API entry points are:
   `state()` expose shared references for observation.
 - `Analyzer::step()` performs one enabled model action. It returns `false` only
   at `Done`, leaving the terminal state unchanged.
+- `Analyzer::finish_bounded(limits)` returns a completed result and metrics or an explicit resource error. Its action limit covers the total run, including an existing prefix.
 - `Analyzer::finish()` consumes the analyzer, runs remaining actions, and moves
   the completed state into an owned result.
 
@@ -120,7 +121,7 @@ producer nodes.
 | --- | --- |
 | Fixed constants and `ASSUME` | `AnalysisRequest` and `validate()` |
 | `Kinds`, `Sources`, `EdgeKinds`, `Reasons`, `Phases` | Rust enums |
-| Finite sets and total address-keyed functions | `BTreeSet` and `BTreeMap` |
+| Finite sets and total address-keyed functions | `BTreeMap`, ordinary `BTreeSet` values and value-semantic `DefinitionSet` membership |
 | `Init` | `Analyzer::new()` |
 | `Source`, `InstructionEdges`, `Visit` | `source()`, `instruction_edges()`, `visit()` |
 | `FinishRecovery` | Empty recovery worklist in `step()` |
@@ -240,3 +241,25 @@ performing I/O. The text view includes the full reaching-definition relation;
 DOT retains it in node tooltips and highlights the data slice and unresolved
 obligations. Missing seeds and unvisited references remain visible. See the
 [rendering guide](Ariadne/result-rendering.md) for examples and interpretation.
+
+## Bounded compact completion
+
+The [caller S6 contract](Ariadne/caller-semantic-coverage-design.md#s6-bounded-completion-continuation-2026-10-19)
+and [qualification](../evidence/Ariadne/caller-semantic-coverage/20261019/README.md)
+cover completion-only RPO scheduling and exact shared membership. Ordinary
+`step`/named-action replay retains its lowest-address schedule. Both compute
+the same least fixed point over recovered local edges, including summaries,
+excluding call-only edges and killing old origins only for must-defs.
+
+`CompletionLimits::default()` allows one million total actions, 33,554,432
+64-bit membership words per plane, one million definition identities, 64 MiB
+of definition-name bytes and 600 seconds. `finish_bounded` refuses publication
+on exhaustion. An already completed prefix still obeys the total-action cap.
+Unbounded `finish` keeps its API and uses the reference path when the compact
+workspace policy declines.
+
+Completed definition sets may share a sorted universe and immutable membership
+words. Iteration, membership, ordering, equality and copy-on-write updates retain
+set meanings. `compact_membership()` exposes immutable exact storage for receipts.
+Core-only builds activate no external dependency. This is finite conformance
+evidence; universal refinement remains open.

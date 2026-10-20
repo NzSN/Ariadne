@@ -22,11 +22,7 @@ owns graph domains, statuses, policies, identities and replay.
 and [model guide](../../Specs/README.md). Caller [S6](caller-semantic-coverage.md)
 and frame-path [F4](frame-path-enumeration.md) retain separate gates.
 
-**What remains unresolved.** Unknown continuations can reconnect; structural
-examples do not establish feasibility, execution history, loop invariants or
-writer exclusion. Broad release and universal refinement are unqualified.
-The extra raw original refresh remains guard-coverage limited; the qualified
-large consumer application uses the exact declared saved source.
+**What remains unresolved.** Unknown continuations can reconnect; structural examples do not establish feasibility, history, loop invariants or writer exclusion. Broad release and universal refinement remain unqualified. The original large consumer application retains its exact saved source. The stale-decoder raw refresh is historical; [caller S6](caller-semantic-coverage.md) separately restores original coverage/full-state parity with the current helper.
 
 ## Frozen direction and implemented interface
 

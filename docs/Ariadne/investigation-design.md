@@ -20,12 +20,13 @@ The [later vector admission validation](../../evidence/Ariadne/bap-vector-regist
 resolved that namespace refusal while retaining the alignment stop at that date.
 The [2026-10-15 caller coverage qualification](../../evidence/Ariadne/caller-semantic-coverage/20261015/README.md)
 subsequently removes the original caller barriers and recovers its larger
-structural graph; full caller dataflow still exhausts its action budget, so the
-existing completed-query path mode remains unavailable. Stage 5.1 implements
+structural graph. That dated run exhausted its caller action budget and left
+the completed-query path mode unavailable. Stage 5.1 implements
 a separate structural report before dataflow. Its
 [2026-10-16 qualification](../../evidence/Ariadne/frame-structure/20261016/README.md)
 completes SF0–SF6 within the finite Windows AMD64 captured-frame/E8-call scope;
-caller completion and full frame-path acceptance retain separate gates.
+caller completion now has [S6 qualification](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md),
+while full frame-path acceptance retains its separate gate.
 [Stage 5.2](../../.agents/plans/frame-connections.md) implements represented
 corridors, SCC summaries and bounded examples over the validated structural
 source; [remote consumer qualification](../../evidence/Ariadne/frame-question/20261019/README.md)
@@ -71,7 +72,7 @@ and qualification preserve alternatives and missing premises. The frame-path que
   — all four recommendation items, existing source/connection reuse and qualified
   finite question-directed resolution plus local dependency/writer integration.
 - [Caller semantic-coverage design](caller-semantic-coverage-design.md)
-  — later terminal/load admission and the remaining completed-caller dataflow gate.
+  — terminal/load admission and the separately qualified completed-caller gate.
 - [Justified branch pruning design](justified-branch-pruning-design.md) — checked
   normal-projection receipts; the later MOVAPS-load alignment remains unknown
   under the [caller coverage contract](caller-semantic-coverage-design.md).
@@ -98,8 +99,8 @@ Later source/tool changes require renewed or complete identity-verified evidence
 Object/source context, historical execution and cross-capture questions remain
 open. The bounded frame-path implementation admits a finite captured-unwind profile
 and separately bound instruction graphs; general unwinding and broader capture
-qualification remain open. Caller semantic-coverage S6 and frame-path F4 remain
-incomplete; the structural report does not close either gate.
+qualification remain open. Caller S6 now has its own completed qualification;
+frame-path F4 remains open. The structural report retains its separate scope.
 Full-memory capture alone does not supply a trace.
 Possible producers and numeric conclusions do not prove a UAF, executed
 path or general root cause.
@@ -107,7 +108,7 @@ The explicit alignment-hypothesis extension is implemented and
 [qualified in its finite scope](../../evidence/Ariadne/alignment-hypotheses/20261016/README.md).
 Its [H0–H5 ledger](../../.agents/plans/alignment-hypotheses.md) records the
 additive conditional product; the original Stage 5.1 evidence retains its own
-source identity. Caller S6 and frame-path F4 remain open.
+source identity. Caller S6 has subsequent qualification; frame-path F4 remains open.
 
 For wider navigation, see the [documentation map](../documentation-map.md).
 
@@ -1468,3 +1469,15 @@ replay proof/source/effect/request bindings and do not interpret an assumed
 entry residue as a captured historical RSP value. Guarded minidump v3 rendering
 uses `input::report::render_bound` with a sealed completed analysis view.
 The design's dated qualification states the finite exercised scope.
+
+## Caller completion successor, 2026-10-19
+
+The [caller S6 contract](caller-semantic-coverage-design.md) and
+[qualification](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md)
+now complete the original caller/callee requests with full native/Rust equality
+and independent checks of every reaching row. RPO and exact shared membership
+retain all possible definitions while ordinary replay remains unchanged.
+The earlier stale-decoder raw refresh keeps its recorded source identity;
+rebuilding current LLVM restores the original caller coverage. The structural
+products retain their own publication identities and need no completed caller
+prerequisite. Frame-path F4 and general feasibility/history remain separate.

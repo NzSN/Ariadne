@@ -984,3 +984,20 @@ Neither tier proves the lifter, a universal Rust refinement or mechanically
 checked coupling to the core/target/loop models. Those model files remain
 unchanged; native replay and the original-dump gate qualify their concrete
 integration separately.
+
+## Caller completion conformance, 2026-10-19
+
+The [S6 evidence](../evidence/Ariadne/caller-semantic-coverage/20261019/README.md)
+checks existing core/admission models against compact completed results. The
+[completion contract](../docs/Ariadne/caller-semantic-coverage-design.md#s6-bounded-completion-continuation-2026-10-19)
+changes storage and completion scheduling. `Ariadne.tla` retains the same
+may-reaching equations and enabled propagation actions. RPO selects an enabled
+action; ordinary least-VA replay remains unchanged. Membership words project
+to the same finite mathematical sets.
+
+Eight selected typechecks, six core and 107 mechanism configurations, 330 native
+generated observations, 2,048 directed-graph completion comparisons and 29 unique
+compiled mutations pass their declared scope. Exact original requests/full states
+and every reaching row have independent checks. This does not complete audited
+model S3 or provide a universal representation/refinement proof. Resource limits
+and wire validation have separate concrete tests; no ISA semantics is added.

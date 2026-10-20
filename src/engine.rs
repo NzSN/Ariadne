@@ -204,7 +204,64 @@ impl Analyzer {
     /// Consume the analyzer, run any remaining actions, and return an owned
     /// completed result. Local/call graphs are derived from one stored edge set.
     pub fn finish(mut self) -> AnalysisResult {
+        let limits = crate::CompletionLimits {
+            max_actions: u64::MAX,
+            max_elapsed: std::time::Duration::MAX,
+            ..crate::CompletionLimits::default()
+        };
+        // Resource-policy refusal falls back to the existing unbounded API.
+        // No partial compact result is published or interpreted as complete.
+        let _ = self.complete(limits);
         while self.step() {}
+        self.into_result()
+    }
+
+    /// Complete under explicit total-action, workspace and elapsed limits.
+    /// Ordinary step/replay scheduling is independent of completion scheduling.
+    pub fn finish_bounded(
+        mut self,
+        limits: crate::CompletionLimits,
+    ) -> Result<(AnalysisResult, AnalyzerMetrics), crate::CompletionError> {
+        self.complete(limits)?;
+        let metrics = self.metrics();
+        Ok((self.into_result(), metrics))
+    }
+
+    fn complete(&mut self, limits: crate::CompletionLimits) -> Result<(), crate::CompletionError> {
+        let started = std::time::Instant::now();
+        if self.metrics().actions > limits.max_actions {
+            return Err(crate::CompletionError {
+                reason: "action budget",
+                actions: self.metrics().actions,
+            });
+        }
+        while self.state.phase == Phase::Recover {
+            crate::completion::check(limits, started, self.metrics().actions)?;
+            self.step();
+        }
+        if self.state.phase == Phase::Dataflow {
+            let mut metrics = self.metrics();
+            crate::completion::dataflow(
+                &self.request,
+                &mut self.state,
+                &mut metrics,
+                limits,
+                started,
+            )?;
+            self.metrics.set(metrics);
+            self.dirty_incoming.clear();
+            self.enabled_dataflow.clear();
+            self.incoming_cache.clear();
+            self.outgoing_cache.clear();
+        }
+        while self.state.phase != Phase::Done {
+            crate::completion::check(limits, started, self.metrics().actions)?;
+            self.step();
+        }
+        Ok(())
+    }
+
+    fn into_result(self) -> AnalysisResult {
         AnalysisResult {
             snapshot_id: self.request.snapshot_id,
             missing_slice_seeds: self

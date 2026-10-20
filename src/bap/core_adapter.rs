@@ -474,12 +474,15 @@ impl NativeAnalyzer {
         Ok(CompletedAnalysis::from_native(request, result))
     }
     pub fn finish(mut self) -> Result<AnalysisResult, Error> {
-        let response = self.session.finish_paged()?;
+        let (response, membership) = self.session.finish_paged_compact()?;
         if let Some(error) = response.error {
             return Err(invalid(error.message));
         }
         let decoded = std::time::Instant::now();
-        let state = decode_state(&self.request, &response.observation)?;
+        let mut state = decode_state(&self.request, &response.observation)?;
+        if let Some(membership) = membership {
+            membership.bind(&self.request, &mut state)?;
+        }
         if std::env::var_os("ARIADNE_TARGET_DIAGNOSTICS").is_some() {
             eprintln!(
                 "completion state_decode_ms={}",
