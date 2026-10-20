@@ -1,7 +1,7 @@
 {
   "archived": "2026-10-16",
   "scope": "Conversation presentation archive; canonical designs stay in docs/ and plan owners now live in .agents/plans/. No new analysis or qualification.",
-  "report_count": 35,
+  "report_count": 37,
   "markdown_html_pairs_including_index": 21,
   "source_session": "01a12ddc-4e59-7cb2-b5aa-67a8e522c597",
   "recovered_reports": [
@@ -840,12 +840,12 @@
       "sha256": "2667f3af9200452de3e195dc17664344a094f718310fb48d7527f5a02999ac33"
     },
     "ariadne-reports-index.html": {
-      "bytes": 13770,
-      "sha256": "b2392a6c1b7c19c943a450157c2e6f0c6b4abc578e4b01a24d0c5b5bb00bc407"
+      "bytes": 13981,
+      "sha256": "f6fcfebf971307ac7ec445281aaa7f0d2d296f43ec9b59730d17a7c428cd5b19"
     },
     "ariadne-reports-index.md": {
-      "bytes": 7889,
-      "sha256": "2c20b9d87aa4074dfd674496036869f450451db79c672b2c62937cd02b9a0c10"
+      "bytes": 8048,
+      "sha256": "ef43c90aaa9b890431eddb6748bcf50aea236dd1b9ddac4ba0ca9553b5e8b805"
     },
     "ariadne-resolver-structural-types-20261015.html": {
       "bytes": 32858,
@@ -936,8 +936,8 @@
       "sha256": "2cbf44c62270ecf4bd84bff836eca67bb0663be58a3888921e6f0d8efffe6bcb"
     },
     "ariadne-open-plans-20261019/index.html": {
-      "bytes": 14456,
-      "sha256": "2f0d25c10c499e0994a5648aca165d39ee841608d1d9e88f0994d94ec77b2ebd"
+      "bytes": 15135,
+      "sha256": "3556fd9315b84255a0ad249617d5cec4b6376645feffd144739d7ebca4db6363"
     },
     "ariadne-open-plans-20261019/before-qualification.html": {
       "bytes": 10776,
@@ -970,11 +970,19 @@
     "ariadne-open-plans-20261019/before-frame-path-completion.html": {
       "bytes": 13365,
       "sha256": "40858c669273f94edd6b7cc2174fd33d0e902fda2f00ae4574bf94234e696eba"
+    },
+    "ariadne-open-plans-20261019/before-delivery-sync-20261020.html": {
+      "bytes": 14456,
+      "sha256": "2f0d25c10c499e0994a5648aca165d39ee841608d1d9e88f0994d94ec77b2ebd"
+    },
+    "ariadne-terminology-scope-20261020.md": {
+      "bytes": 38728,
+      "sha256": "2fa6fb95f4c74eda98d474942473f9139990d66a69bc519a798b328b954faf1a"
     }
   },
   "directory": ".agents/chatdocs/",
-  "html_documents_including_index": 35,
-  "markdown_documents_including_index": 21,
+  "html_documents_including_index": 36,
+  "markdown_documents_including_index": 22,
   "source_review_documents": [
     {
       "html": "ariadne-return-address-value-pruning-20261016.html",
@@ -1168,7 +1176,7 @@
       "version_note": "Exact six-open/six-completed presentation preserved before the finite frame-path F4 closure. All original source identities, scope and validation statements remain historical."
     },
     {
-      "html": "ariadne-open-plans-20261019/index.html",
+      "html": "ariadne-open-plans-20261019/before-delivery-sync-20261020.html",
       "date": "2026-10-20",
       "source_revision": "184a181a0a09c81bed38c543721bd10970512d89",
       "source_state": "Current working-tree navigation after the separately retained finite F4 qualification.",
@@ -1202,7 +1210,63 @@
       "prior_snapshot_sha256": "40858c669273f94edd6b7cc2174fd33d0e902fda2f00ae4574bf94234e696eba",
       "scope": "Five unfinished ledgers and seven completed finite stages. F4 retains bounded partial paths and every source premise/gap; broader release and historical execution remain unqualified.",
       "validation": "Programmatic plan counts, actual current plan hashes, local references/fragments, unique IDs, preserved historical HTML and unrelated archive records checked by the update script. Canonical documentation checking and browser launch are separate.",
-      "validation_local_references": 189
+      "validation_local_references": 189,
+      "original_html": "ariadne-open-plans-20261019/index.html",
+      "version_note": "Exact F4 qualification-time five-open/seven-completed index preserved before syncing navigation to the committed and pushed delivery."
+    },
+    {
+      "html": "ariadne-open-plans-20261019/index.html",
+      "date": "2026-10-20",
+      "source_revision": "3d525e2929cae2416ad0a31f92bd201980e40827",
+      "source_state": "Navigation synchronized to committed and pushed source revision 3d525e2; this later presentation edit adds no qualification.",
+      "canonical_plan_index": ".agents/plans/README.md",
+      "canonical_plan_index_sha256": "3cec05da1ff8a5d9337679e0366006871b237c19279e9aa96c1c15586b07d4fa",
+      "open_plan_count": 5,
+      "source_plan_sha256": {
+        ".agents/plans/indirect-target-resolution.md": "e30f3e4e207b124cc56c3e46471466d2d88af6e31a0bdce1355618c28bbcff23",
+        ".agents/plans/scanner-partial-explanation.md": "53ac1e008d27319e31af66494eb4e267a6a11a9ba5882aa5434e2e7387c417e3",
+        ".agents/plans/specification-sync.md": "593c48875e98eb69cbf77b58e85a4d9e2269724babacc11719718d634509e767",
+        ".agents/plans/i5c-address-wrap.md": "f72a6e9a68b28bc7a55ae82f0e8a2079b015f26de5b2d87a81c7c96734e67d0c",
+        ".agents/plans/investigation-layer.md": "e6873e533c499124c58decbda3b9ef5d45b36efcb223e5d02bf1c9b1af334943"
+      },
+      "completed_plan_count": 7,
+      "completed_plan_sha256": {
+        ".agents/plans/frame-path-enumeration.md": "b4f4abd8f7c02dd5468d995d14be490b5e720247f9dc45728a66072d1690df66",
+        ".agents/plans/caller-semantic-coverage.md": "74e8873e7ce49355cf0406304d7670820d2bfb3d9bbe9b65d79ad0cb1ba361e7",
+        ".agents/plans/frame-structure-report.md": "61c0690ebffd342485b967c3dd65ac7cde666b13016a646240d304a977190ac2",
+        ".agents/plans/frame-connections.md": "6035ad34543a64e2b4b912868047a39ae8a27f68be9a69292ffec7ee7e0f2550",
+        ".agents/plans/frame-question-investigation.md": "d653f45b3dda1f480aeb4553f279ad0a4cd31d178334d7ff6d498628871812b5",
+        ".agents/plans/memory-provenance-refinement.md": "3723d20c7dcb4ddd708731dc78c385972b192b830397f3170847462dc54cc35d",
+        ".agents/plans/alignment-hypotheses.md": "73d7c0c208b57acb41f8e9224bb1b041cf626256028da245c30e1a5035007cb5"
+      },
+      "qualification": "evidence/Ariadne/frame-paths/20261020/README.md",
+      "qualification_readme_sha256": "a1137f9a79e60ed58a96181184ee8d26a0d4d2e3169871c44aaab631f2239c50",
+      "qualification_receipt": "evidence/Ariadne/frame-paths/20261020/qualification.json",
+      "qualification_receipt_sha256": "da4d03375356462c5af65cea30b80cce5b83c5357a882ef385972447365bf63b",
+      "qualification_archive_sha256": "42feba66c6445de674ddaf0aa7f3ec3d63ca845a5c117c45d02c9e8352eb40ff",
+      "qualified_source_capsule_sha256": "ed7b76ef6b9ac6f32e66c570d0234780861afe123fe0786916b33d7eba1bb84d",
+      "prior_snapshot": "ariadne-open-plans-20261019/before-delivery-sync-20261020.html",
+      "prior_snapshot_sha256": "2f0d25c10c499e0994a5648aca165d39ee841608d1d9e88f0994d94ec77b2ebd",
+      "scope": "Five unfinished ledgers and seven completed finite stages. F4 retains bounded partial paths and every source premise/gap; broader release and historical execution remain unqualified.",
+      "validation": "All twelve plan bytes match the delivered commit and recorded hashes; remote main equals the source revision; local links, anchors, IDs and archive metadata validated. Browser launch is recorded separately.",
+      "remote_ref": "origin/main",
+      "remote_revision": "3d525e2929cae2416ad0a31f92bd201980e40827",
+      "plan_sources_match_commit": true,
+      "status_sync": {
+        "date": "2026-10-20",
+        "local_revision": "3d525e2929cae2416ad0a31f92bd201980e40827",
+        "remote_revision": "3d525e2929cae2416ad0a31f92bd201980e40827",
+        "plan_files_checked": 12,
+        "open_plan_count": 5,
+        "completed_plan_count": 7,
+        "new_runtime_qualification": false
+      },
+      "validation_local_references": 196,
+      "presentation": {
+        "launcher": "wslview",
+        "launch_exit": 0,
+        "visual_inspection": false
+      }
     },
     {
       "pdf": "ariadne-structural-type-model-20261020/model.pdf",
@@ -1213,6 +1277,34 @@
       "source_manifest": "ariadne-structural-type-model-20261020/source-manifest.json",
       "render_receipt": "ariadne-structural-type-model-20261020/render-receipt.json",
       "new_analysis_or_qualification": false
+    },
+    {
+      "markdown": "ariadne-terminology-scope-20261020.md",
+      "date": "2026-10-20",
+      "source_revision": "3d525e2929cae2416ad0a31f92bd201980e40827",
+      "purpose": "Plain-language meanings and scope for vocabulary used in Ariadne discussions, with examples and precise distinctions for overloaded terms.",
+      "canonical_vocabulary": "docs/terminology.md",
+      "format": "Markdown only, as explicitly requested.",
+      "source_sha256": {
+        "docs/terminology.md": "8480322df1f0155b5111e6469bec7a0d77419b40afc183d4527aaa6ba7584352",
+        "docs/Ariadne/architecture.md": "a2c300a3933d135a992983a557dcc8f34bc7784619b006c58ebdb34e3a4ac534",
+        "docs/implementation.md": "aa8ac131737df32b8c87708be6f52ad64ba16cc17b8c7887bc3f20c425bf7259",
+        "docs/Ariadne/indirect-target-resolution.md": "839358bf6e845aff13a278bc745f712ed6a4e3f9a6c434c9fab234109e5a9a7a",
+        "docs/Ariadne/investigation-design.md": "d50d965aa3b49599ad9aac100e69dad5834e1a8b37ca2449ae051d25ef97469e",
+        "docs/Ariadne/frame-question-investigation-design.md": "46fc5a8d4f6109cc1c75574d197b24fbb1000b34c5abfd05de8df0973e404480",
+        "docs/Ariadne/semantic-assurance.md": "d0603adf75e147899a4129da0d2595cf28dcc4bcb806597fc6b8eda51b7aff7e",
+        "src/investigation/frame_question/model.rs": "3bb43265e7c817b1bc213c648326b87a5e2cccbcee8b7b7884e6f33051830e50",
+        "src/bap/guard_admission.rs": "cc9be3470525cb1e47ff297b2bd215f9aa179f7f4794a2f94ffc3e93d4e61b0b",
+        "src/bap/alignment_hypothesis.rs": "6d69a628a5f093f2729d108e5233d56ad9a709cc5ac0b545691e6518e90e54e5",
+        "mbt/README.md": "1fce0f07a435dbedabb2412e7a22b60f84ad08779d6d2650b8e302e14122913a",
+        "mbt/stage-e/README.md": "b3eacd870d9f607e661bfebb8937ecd82a82e3642d611172326f6463c90ff2ed",
+        "mbt/generate.py": "fd2c499fd27c1196622151eb633578694b724c88863a33c9d7390a88a2233228",
+        "tools/check_bap_core_replay.py": "689f13e784139a3f90475397cdc21535c17d1aec4c22d925a23e74a9cb74d28e",
+        "tools/check_target_resolution_mutations.py": "125611bdea84742bbbaae387198bf38995308c6c150560b455f4e7d1df483d6d"
+      },
+      "scope": "Input identity; semantics/backends; control flow/targets; frames/paths/loops; values/origins; premises/status; formal models/replay/mutations; qualification/delivery.",
+      "new_analysis_or_qualification": false,
+      "validation": "Local references, fragments, context fields, exact enum labels, archive hashes and format counts checked; no builds or campaigns run."
     }
   ],
   "plan_directory_relocation": {
