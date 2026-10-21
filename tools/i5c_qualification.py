@@ -36,19 +36,7 @@ def read_json(path):
     return strict_json(raw.decode("utf-8"))
 
 
-def retained_path(path):
-    """Read exact old evidence from the LFS cache without rewriting its checkout."""
-    path = Path(path)
-    raw = path.read_bytes()
-    if not raw.startswith(LFS):
-        return path
-    match = re.fullmatch(rb"version https://git-lfs.github.com/spec/v1\noid sha256:([0-9a-f]{64})\nsize ([0-9]+)\n?", raw)
-    require(match is not None, "malformed retained LFS pointer")
-    digest = match[1].decode()
-    cached = ROOT / ".git/lfs/objects" / digest[:2] / digest[2:4] / digest
-    require(cached.is_file() and cached.stat().st_size == int(match[2]) and sha(cached) == digest,
-            "retained LFS payload is unavailable or corrupt: " + str(path))
-    return cached
+
 
 
 def write_json(path, value):
@@ -70,10 +58,10 @@ def sources():
     paths.update(ROOT / name for name in (
         "Cargo.toml", "Cargo.lock", "docs/Ariadne/bap-analysis-core-design.md",
         ".agents/plans/completed/bap-stage2-implementation.md",
-        "evidence/Ariadne/investigation-windows-workload-case.json",
-        "evidence/Ariadne/i4-windows-capture-inspection.json",
-        "evidence/Ariadne/bap-windows-workload-inputs.tar.gz",
-        "evidence/Ariadne/real-capture-workload-case.json"))
+        "tests/input/fixtures/workloads/investigation-windows-workload-case.json",
+        "tests/input/fixtures/workloads/windows-oracle.json",
+        "tests/input/fixtures/workloads/windows-inputs.tar.gz",
+        "tests/input/fixtures/workloads/real-capture-workload-case.json"))
     # Missing/unhydrated manifests must still permit a preflight failure record.
     # A real campaign additionally checks exact equality with the native owner.
     try:

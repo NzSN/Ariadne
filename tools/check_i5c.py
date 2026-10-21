@@ -2,134 +2,42 @@
 """Coordinate fresh W4/W5 qualification without crediting unavailable prerequisites.
 
 Run --preflight-only before scheduling remote work. Full campaigns need the
-eight I5c captures, retained legacy bytes, earlier I5a/I5b capture sets, I4
-profile baseline and retained W2/W3 runtime logs. No missing tier is waived.
+eight I5c captures, checked-in golden values, applicable I5a/I5b capture sets
+and the I4 profile baseline. The current native matrix replaces old runtime exports.
 """
 import argparse
 import hashlib
 from pathlib import Path
+from run_output import run_output
 import tarfile
 
 from i5c_qualification import (FIXTURES, ROOT, artifact, command, named_rows,
                                prerequisite_report, read_json, require, sha,
-                               retained_path, sources, write_json)
+                               sources, write_json)
 
 
-def verify_archive(path, entries):
-    """Stream every member; reject duplicates, links, missing and extra entries."""
-    seen = set()
-    with tarfile.open(path, "r:gz") as archive:
-        for member in archive:
-            require(member.isfile() and member.name not in seen and member.name in entries,
-                    "unexpected/non-file/duplicate archive member: " + member.name)
-            seen.add(member.name)
-            digest = hashlib.sha256()
-            size = 0
-            with archive.extractfile(member) as stream:
-                for block in iter(lambda: stream.read(1024 * 1024), b""):
-                    size += len(block)
-                    digest.update(block)
-            require(entries[member.name] == {"bytes": size, "sha256": digest.hexdigest()},
-                    "archive member size/hash differs: " + member.name)
-    require(seen == set(entries), "archive member closure differs")
 
 
-def runtime_files(index_path, expected_digest):
-    require(sha(index_path) == expected_digest, "retained runtime export index digest differs")
-    index = read_json(index_path)
-    require(index.get("schema") == "ariadne.i5c-w2-w3-runtime-export/v1"
-            and set(index.get("stages", {})) == {"W2", "W3"}, "both retained runtime stages are required")
-    result = {"retained-runtime/export-index.json": Path(index_path)}
-    for stage, relative in (("W2", "20261020/w2"), ("W3", "20261021/w3")):
-        row = index["stages"][stage]
-        root = Path(row["root"]).resolve()
-        require(root.is_dir() and row.get("files"), "missing retained runtime export: " + stage)
-        qualified = ROOT / "evidence/Ariadne/address-wrap" / relative / "qualification.json"
-        payload = retained_path(qualified)
-        expected_qualification = artifact(payload)["sha256"]
-        require(row.get("qualificationSha256") == expected_qualification, "retained stage identity differs")
-        original = read_json(payload)
-        require(original.get("passed") is True and original.get("records"), "retained stage did not qualify")
-        paths = {str(p.relative_to(root)): p for p in root.rglob("*") if p.is_file()}
-        require(set(paths) == set(row["files"]) and "qualification.json" in paths,
-                "retained runtime pathname closure differs")
-        require(sha(paths["qualification.json"]) == expected_qualification, "retained original qualification differs")
-        for metadata in qualified.parent.iterdir():
-            if metadata.is_file():
-                require(metadata.name in paths and sha(paths[metadata.name]) == sha(retained_path(metadata)),
-                        "published stage inputs/metadata omitted or changed: " + stage + "/" + metadata.name)
-        # The export cannot redefine which runtime streams the old campaigns
-        # produced. Require every verbatim stream bound by the original receipt,
-        # preserving its absolute campaign path below this export root.
-        for receipt in original["records"]:
-            require(receipt.get("passed") is True and receipt.get("exit") == 0
-                    and receipt.get("timed_out") is False, "retained command lacks a successful receipt")
-            for stream in ("stdout", "stderr"):
-                expected = receipt[stream]
-                name = expected["path"].lstrip("/")
-                require(name in row["files"] and row["files"][name] == {
-                    "bytes": expected["bytes"], "sha256": expected["sha256"]},
-                    "missing/changed originally bound runtime stream: " + stage + "/" + name)
-            cases = receipt.get("case_records")
-            if cases:
-                name = cases["path"].lstrip("/")
-                published = qualified.parent / Path(name).name
-                require(name in row["files"] and row["files"][name]["sha256"] == artifact(retained_path(published))["sha256"],
-                        "retained named-case records differ from the publication")
-        for name, path in paths.items():
-            require(not path.is_symlink() and not any(p.is_symlink() for p in path.parents if p != root.parent),
-                    "symlink in retained runtime export")
-            item = artifact(path)
-            require(row["files"][name] == {"bytes": item["bytes"], "sha256": item["sha256"]},
-                    "retained runtime bytes differ: " + stage + "/" + name)
-            result["retained-runtime/" + stage + "/" + name] = path
-    return result
 
 
-def seal(work, before, inputs, publication):
-    archive_path = publication / "evidence.tar.gz"
-    files = {"sources/" + name: ROOT / name for name in before}
-    files.update(inputs)
-    for path in work.rglob("*"):
-        relative = path.relative_to(work)
-        if path.is_file() and not {"sut", ".seal-pending", "sealed"}.intersection(relative.parts):
-            files["qualification/" + str(relative)] = path
-    files["qualification/report.json"] = publication / "report.json"
-    entries = {}
-    with tarfile.open(archive_path, "w:gz") as archive:
-        for name, path in sorted(files.items()):
-            require(not path.is_symlink(), "cannot seal a symlink: " + str(path))
-            item = artifact(path)
-            entries[name] = {"bytes": item["bytes"], "sha256": item["sha256"]}
-            archive.add(path, arcname=name, recursive=False)
-    verify_archive(archive_path, entries)
-    return {"schema": "ariadne.i5c-evidence/v1", "verified": True,
-            "archiveSha256": sha(archive_path), "entries": entries,
-            "qualificationReportSha256": sha(publication / "report.json")}
 
 
 def publish_acceptance(work, record, before, inputs):
-    """Publish positive flags only with a completely verified sealed directory."""
-    pending = {**record, "passed": False, "sourceFixtureAcceptance": False,
-               "controlledWindowsPartialAcceptance": False, "controlledWindowsFullAcceptance": False,
-               "fullI5cAcceptance": False, "failure": record["failure"] or "evidence sealing pending"}
-    write_json(work / "report.json", pending)
-    if not record["passed"]:
-        return False
+    """Publish only a transient current-run result after checking live inputs."""
+    pending = {**record, 'passed': False, 'sourceFixtureAcceptance': False,
+               'controlledWindowsPartialAcceptance': False, 'controlledWindowsFullAcceptance': False,
+               'fullI5cAcceptance': False}
     try:
-        publication = work / ".seal-pending"
-        publication.mkdir()
-        write_json(publication / "report.json", record)
-        manifest = seal(work, before, inputs, publication)
-        write_json(publication / "evidence-manifest.json", manifest)
-        require(sources() == before, "sources changed while sealing evidence")
-        publication.rename(work / "sealed")
-        write_json(work / "report.json", record)
-        return True
-    except (OSError, ValueError, tarfile.TarError) as error:
-        pending["failure"] = "evidence sealing failed: " + str(error)
-        write_json(work / "report.json", pending)
+        require(record['passed'] is True, 'required tests did not pass')
+        for path in inputs.values():
+            artifact(path)
+        require(sources() == before, 'sources changed during tests')
+    except (OSError, ValueError) as error:
+        pending['failure'] = str(error)
+        write_json(work / 'report.json', pending)
         return False
+    write_json(work / 'report.json', record)
+    return True
 
 
 def gate_plan(work):
@@ -264,12 +172,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--preflight-only", action="store_true")
-    for name in ("captures", "build", "legacy-baseline", "i5a-captures", "i5b-captures", "i4-profiles-root", "runtime-index"):
+    for name in ("captures", "build", "legacy-baseline", "i5a-captures", "i5b-captures", "i4-profiles-root"):
         parser.add_argument("--" + name, type=Path)
-    for name in ("expected-build-sha256", "expected-legacy-baseline-sha256", "expected-runtime-index-sha256"):
+    for name in ("expected-build-sha256", "expected-legacy-baseline-sha256"):
         parser.add_argument("--" + name)
     args = parser.parse_args()
-    work = args.output.resolve()
+    work = run_output(args.output)
     work.mkdir(parents=True, exist_ok=False)
     before = sources()
     preflight = prerequisite_report()
@@ -289,10 +197,9 @@ def main():
     failure = None
     try:
         require(preflight["passed"], "qualification prerequisites unavailable; see prerequisites.json")
-        for name in ("captures", "build", "legacy_baseline", "i5a_captures", "i5b_captures", "i4_profiles_root", "runtime_index",
-                     "expected_build_sha256", "expected_legacy_baseline_sha256", "expected_runtime_index_sha256"):
+        for name in ("captures", "build", "legacy_baseline", "i5a_captures", "i5b_captures", "i4_profiles_root",
+                     "expected_build_sha256", "expected_legacy_baseline_sha256"):
             require(getattr(args, name) is not None, "full qualification requires --" + name.replace("_", "-"))
-        inputs.update(runtime_files(args.runtime_index, args.expected_runtime_index_sha256))
         inputs.update(producer_files(args.build, args.expected_build_sha256))
         from compare_i5c_legacy import baseline
         legacy = baseline(args.legacy_baseline, args.expected_legacy_baseline_sha256)
@@ -354,7 +261,6 @@ def main():
         controlled_cases({"captures": str(args.captures), "build": str(args.build), "expectedBuildSha256": args.expected_build_sha256})
         for label, directory in (("i5c", args.captures), ("i5a", args.i5a_captures), ("i5b", args.i5b_captures)):
             inputs.update({f"captures/{label}/{path.relative_to(directory)}": path for path in directory.rglob("*") if path.is_file()})
-        inputs.update(runtime_files(args.runtime_index, args.expected_runtime_index_sha256))
         dependency = preflight["qualificationEnvironment"]
         inputs["dependencies/mirrorrust-snapshot.json"] = Path(dependency["manifestPath"])
         for name, item in preflight["tools"].items():

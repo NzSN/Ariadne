@@ -2,7 +2,7 @@
 
 ## Context and follow-up
 
-**Status.** R0–R6 pass within the [2026-10-20 finite qualification](../../evidence/Ariadne/indirect-target-resolution/20261020/README.md)
+**Status.** R0–R6 pass within the [2026-10-20 finite qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/20261020/README.md)
 for the captured pointer-slot/signed-32 table profile, synthetic Windows/Linux
 fixtures and original Windows dump048B query. The
 [canonical R6 summary](../../docs/Ariadne/indirect-target-resolution.md#r6-qualification-refresh)
@@ -13,7 +13,7 @@ supply the new evidence. The 2026-10-13 correction/retry receipts remain histori
 The initial R6 correctness claim was too broad: its mutation campaign omitted
 required seams; the new fifteen-mutant campaign supplies that missing tier.
 Earlier native CLI samples exceeded the unchanged 60 s criterion; the retry's
-38.61 s native / 19.92 s Rust samples pass individually. The [initial qualification record](../../evidence/Ariadne/indirect-target-resolution/qualification-20261013/report.json)
+38.61 s native / 19.92 s Rust samples pass individually. The [initial qualification record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/qualification-20261013/report.json)
 binds historical sources, fixtures, models, helpers and results. The original
 2026-10-12 dump inspection remains motivation with its original identity.
 
@@ -37,7 +37,7 @@ constraints, acceptance gates and the evidence required for the initial profile.
   — existing capture, helper and native/Rust execution contracts.
 - [Motivating capture](../../docs/Ariadne/indirect-target-resolution.md#motivating-windows-capture)
   — exact original artifact, 58 entries, 45 destinations and retained limits.
-- [R6 qualification](../../evidence/Ariadne/indirect-target-resolution/20261020/README.md)
+- [R6 qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/20261020/README.md)
   — final source identity, fresh gates, retained-core provenance and failed attempts.
 
 **What remains unresolved.** Release qualification and a latency distribution
@@ -47,6 +47,11 @@ partial; 45 witnessed destinations are not exhaustive incoming-state coverage.
 Real Linux full-dump and packaged release qualification are not credited.
 General indirect calls, mutable dispatch data, broad value-set
 analysis and execution-history reconstruction remain outside the first profile.
+
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## Delivery scope and constraints
 
@@ -212,7 +217,7 @@ inspect new gaps, and retain the incoming-RDX boundary and unrelated unsupported
 controls. The external inspection alone cannot supply Linux or general-table
 coverage, executed-path evidence or root-cause attribution.
 
-Write new qualification receipts under `evidence/Ariadne/indirect-target-resolution/`.
+Write new qualification receipts under `https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/`.
 Retain exact sources, BAP/runtime/helper/decoder/native-build identities, platform,
 input/query hashes, limits, mode/premises, phase timings and named corpus clauses.
 Measure R0's fixed resource/performance criteria on both focused fixtures and
@@ -249,7 +254,7 @@ review below supersedes its unqualified R6 correctness conclusion.
 | R5 | Complete | Opt-in CLI/API, explicit memory premise, versioned enabled base report, old disabled mode, declared large-artifact ceiling and unsupported composition errors. |
 | R6 | Correctness passed; performance open | Root/default/core-only/Clippy/layout/docs; pinned synthetic Windows/Linux captures; original Windows full dump; 330 generated replay observations, 9 resolver and 12 core/stateflow mutants. Current local/native and Windows/WSL samples exceed 60 s; older 46.87 s / 27.74 s results remain historical. |
 
-The [source-bound record](../../evidence/Ariadne/indirect-target-resolution/qualification-20261013/report.json)
+The [source-bound record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/qualification-20261013/report.json)
 and raw evidence retain full native/Rust state parity and failed earlier trials.
 The expanded query has 3,977 decoded starts, 4,819 edges, a 392-site slice and
 10,744,212 reaching-definition links. Its 45 dispatch edges remain non-exhaustive;
@@ -296,7 +301,7 @@ execution; the full mutation/replay aggregate remains pending.
 | Retention used every validation error as a capacity stop | Check union capacity explicitly, then propagate proof errors from fitting merges. | A corrupted merged AST fails preparation; valid budget stops retain prior witnesses. |
 
 See the [canonical correction contracts](../../docs/Ariadne/indirect-target-resolution.md#second-review-corrections)
-and [source-bound correction record](../../evidence/Ariadne/indirect-target-resolution/review-corrections-20261013/report.json).
+and [source-bound correction record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/review-corrections-20261013/report.json).
 At this correction checkpoint, pinned native and full mutation execution were
 pending remote transfer authorization. The [later retry](#original-dump-retry)
 resolved the pinned-native and individual timing-sample clauses. At that
@@ -305,7 +310,7 @@ finite R6 successor below closes its declared mutation/replay clauses.
 
 ### Original-dump retry
 
-The [b5d56b7 retry](../../evidence/Ariadne/indirect-target-resolution/dump-retry-b5d56b7-20261013/report.json)
+The [b5d56b7 retry](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/dump-retry-b5d56b7-20261013/report.json)
 resolves the pinned-native and dump-rerun blockers above. Published sources
 were verified, the pinned helper rebuilt, and all 26 resolver tests passed.
 The original dump retains 45 witnessed targets and exact native/Rust full-state
@@ -321,7 +326,7 @@ the later completed campaign without rewriting that record.
 ## R6 qualification refresh — 2026-10-20
 
 **Execution status.** All declared finite clauses pass under the
-[final evidence](../../evidence/Ariadne/indirect-target-resolution/20261020/README.md).
+[final evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/20261020/README.md).
 The authorized sequence started from base revision
 `12673307f5939f3a982877423c2606bdf7572c47`; its final source capsule contains
 1,076 files with SHA-256
@@ -361,7 +366,7 @@ Record any current-source normalized-fact difference from earlier captures.
 ### Publication and failure handling
 
 Place new raw qualification under
-`evidence/Ariadne/indirect-target-resolution/20261020/`. Keep source capsules,
+`https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/20261020/`. Keep source capsules,
 controls and every failed attempt distinct. Raw original dumps, PDBs, SDKs and
 compiled build caches remain external with identities recorded. Separate source
 qualification from subsequent documentation-only publication changes.
@@ -374,7 +379,7 @@ finite R6 profile does not silently close other feature or release plans.
 
 ### Final finite R6 result — 2026-10-20
 
-The [aggregate evidence](../../evidence/Ariadne/indirect-target-resolution/20261020/README.md)
+The [aggregate evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/20261020/README.md)
 records in-task source-bound root/feature/native checks (`default 334, core-only 64, reports 77, BAP 202, resolver 46`), 39 small Python
 controls (23 runner/observer plus 16 aggregate controls), an independent integer/
 byte oracle, five finite target-model configurations and typechecking. Fresh

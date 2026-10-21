@@ -52,7 +52,7 @@ Keep the retired Lean reference tree at root `lean/`. Consult `Cargo.toml` for f
 target definitions; core-only builds must retain no activated external crate
 dependencies.
 
-## Validation and evidence
+## Validation and tests
 
 For Rust behavior changes, run the affected tests and the applicable root checks:
 
@@ -68,15 +68,19 @@ relevant module/model guide's qualification commands. Ordinary Cargo tests can
 skip ignored native tests; report missing helpers, runtimes or capture artifacts
 as unexercised prerequisites. Keep replay and mutation build outputs isolated.
 
-Distinguish fresh tests, retained source-bound evidence and release qualification.
-Check recorded source/tool hashes before relying on retained evidence after a
-change, and preserve older records as historical results. Name the exercised
-corpus and unmet clauses; a partial tier does not satisfy a full acceptance gate.
+Validate the current source with executable tests; see [the test matrix](tests/README.md).
+Keep models, generators, minimized regressions and small actual inputs under
+tests or the owning model/replay directory. Do not retain qualification reports,
+acceptance flags, raw logs, copied source trees or archives as repository evidence.
+Generated run products belong under ignored target/work or system temporary
+directories. Historical documentation may reference an immutable Git revision;
+old passing flags never replace current tests. Name the exercised corpus and
+unmet clauses; a partial tier does not satisfy a full acceptance gate.
 Earlier backend performance measurements do not qualify a replacement backend.
 
 The independent AMD64 instruction-step track is retired; its ISA specifications,
 model documentation, coverage inventories and checkers have been removed.
-Retained Lean sources and recorded evidence are historical reference. Follow the
+Retained Lean sources are historical reference. Follow the
 [BAP trust boundary](docs/Ariadne/semantic-assurance.md): pinned lifting is a
 trusted dependency; Ariadne owns transport, projection, analysis and evidence
 validation. Keep analysis-level TLA+ models, replay and mutation checks active.
@@ -85,8 +89,8 @@ validation. Keep analysis-level TLA+ models, replay and mutation checks active.
 
 Maintain one canonical document per feature design in `docs/Ariadne/`.
 Keep its usage, contracts, source-review findings and dated validation summaries
-in that document. Keep stage execution in `.agents/plans/` and raw qualification evidence
-under `evidence/Ariadne/`; preserve original evidence identities and scope.
+in that document. Keep stage execution in `.agents/plans/`, executable validation
+and small fixtures in tests, and disposable run products outside maintained source.
 
 When creating or updating an implementation plan for an existing design, add
 a direct relative link to the plan in the design document in the same change.

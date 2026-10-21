@@ -3,8 +3,8 @@
 ## Context and follow-up
 
 **Status.** FC0–FC6 pass the declared finite consumer profile, with
-[remote qualification on 2026-10-19](../../evidence/Ariadne/frame-question/20261019/README.md) and both independently checked
-capture applications. The [2026-10-18 local record](../../evidence/Ariadne/frame-connections/20261018/README.md)
+[remote qualification on 2026-10-19](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md) and both independently checked
+capture applications. The [2026-10-18 local record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-connections/20261018/README.md)
 retains its original scope. Broader release acceptance remains separate.
 
 **Why this document exists.** Section 5's second [recommendation](../chatdocs/ariadne-frame-to-frame-recommendation-20261016.html#order)
@@ -16,13 +16,18 @@ finite acceptance ledger. Stage 5.2 is distinct from Stage 5.1's SF5.2 mutation 
 The [canonical contract](../../docs/Ariadne/investigation-design.md#structural-corridors-and-cycle-summaries)
 owns graph domains, statuses, policies, identities and replay.
 
-**Where to go next.** Read the canonical contract, [new evidence](../../evidence/Ariadne/frame-question/20261019/README.md),
+**Where to go next.** Read the canonical contract, [new evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md),
 [complete section-5 program](frame-question-investigation.md),
 [structural source contract](../../docs/Ariadne/investigation-design.md#structural-frame-report-before-dataflow)
 and [model guide](../../Specs/README.md). Caller [S6](caller-semantic-coverage.md)
 and frame-path [F4](frame-path-enumeration.md) retain separate gates.
 
 **What remains unresolved.** Unknown continuations can reconnect; structural examples do not establish feasibility, history, loop invariants or writer exclusion. Broad release and universal refinement remain unqualified. The original large consumer application retains its exact saved source. The stale-decoder raw refresh is historical; [caller S6](caller-semantic-coverage.md) separately restores original coverage/full-state parity with the current helper.
+
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## Frozen direction and implemented interface
 
@@ -66,7 +71,7 @@ coordinate shared exports. Each stage's dependencies are evidence gates.
 | FC2 — corridor and SCCs | Graph owner: private implementation inside the new module and focused tests. | FC1 | Forward/reverse sets, exact represented corridor, iterative SCC partition/quotient and unknown-reconnect annotations match independent oracles under every stop. | Implemented; local checks pass |
 | FC3 — example routes | Example owner: private bounded BFS/detour search, result getters and focused tests. | FC2 graph interface | First shortest route when found, typed-edge identities, loop-free samples, strict NP, canonical ordering and independent caps. Examples cannot mutate corridor/SCC/source facts or writer candidates. | Implemented; local checks pass |
 | FC4 — codec and CLI | Product owner: `src/reports/frame_connections.rs`, report exports, `src/bin/ariadne_minidump/` integration, root manifest test registrations and `tests/input/`/`tests/reports/`. | FC1–FC3 | Self-contained strict replay; JSON/text/DOT agreement; live capture and separately decoded source supported through the library. Existing structure/path routes and versions replay unchanged. | Implemented; local checks pass |
-| FC5 — finite qualification | Qualification owner: isolated model/oracle/replay/mutation jobs and source/tool receipts under `evidence/Ariadne/frame-connections/`. | FC4 | Root/feature/layout/model/oracle/compiled-mutation/capture/legacy controls pass on declared sources; all ignored or missing prerequisites named. | Passed remote finite qualification, 2026-10-19 |
+| FC5 — finite qualification | Qualification owner: isolated model/oracle/replay/mutation jobs and source/tool receipts under `https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-connections/`. | FC4 | Root/feature/layout/model/oracle/compiled-mutation/capture/legacy controls pass on declared sources; all ignored or missing prerequisites named. | Passed remote finite qualification, 2026-10-19 |
 | FC6 — capture application and delivery | Corpus/docs owner: original and controlled capture comparisons, canonical usage/validation summary and this ledger. | FC5 | New product accepts the declared large source and recursive controlled source; preserves inputs/gaps and shows independently checked summaries/examples or honest layer stops. | Passed both declared capture applications remotely |
 
 ## FC0: contract, identity and finite policy
@@ -206,7 +211,7 @@ Compilation/transport failures earn no mutant-sensitivity credit.
 Use at least these separately identified capture products:
 
 1. The original large Windows pair from the
-   [Stage 5.1 record](../../evidence/Ariadne/frame-structure/20261016/README.md):
+   [Stage 5.1 record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-structure/20261016/README.md):
    original dump `9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab`,
    thread 23668, frames 1→0. Publicly replay its complete saved structural
    report rather than repeating full caller completion. Verify the actual
@@ -264,7 +269,7 @@ do not satisfy that remote gate.
 
 ## 2026-10-19 remote qualification
 
-The [section-5 remote record](../../evidence/Ariadne/frame-question/20261019/README.md)
+The [section-5 remote record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md)
 closes FC5/FC6 for the unchanged declared structural sources. The fresh campaign
 checks 13 model scenarios, 516 literal graph expectations, 12 compiled mutations,
 conditional/stopped live controls and strict public saved replay. Actual prior

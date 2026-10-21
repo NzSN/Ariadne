@@ -35,6 +35,11 @@ The 2026-09-29 controlled Chromium/Linux case is now
 The steps below remain the acceptance procedure for that exact case or a new
 candidate; they do not license reusing its result for a changed artifact.
 
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## Result and boundary
 
 Retain one reproducible report in which an independently justified instruction start

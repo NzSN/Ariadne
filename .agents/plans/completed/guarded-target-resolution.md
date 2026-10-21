@@ -6,13 +6,18 @@
 
 **2026-10-15 follow-up.** The [loop extension](loop-aware-target-resolution.md) passes L0–L6 on corrected snapshot `5cd406c5181d131679a60af15f53edcabecfe056144e40b5785bc37ce1d010ee`. Initial attempt `dump-20261015T050210` failed caller publication while callee parity passed; its correction, regression and fresh qualification pass. Probe `dump-20261015T051409` accepts both complete loop receipts and both Rust/native frame results. Parent C5/C6 acceptance is closed for this stated scope, with the earlier failure retained separately.
 
-**Why this document exists.** The [captured table inspection](../../../evidence/Ariadne/indirect-target-resolution/dump03958-table-witness-20261014/README.md) proves that the nine dispatch tables are available, while the baseline mutually exclusive preparation extensions left their target sets empty.
+**Why this document exists.** The [captured table inspection](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/dump03958-table-witness-20261014/README.md) proves that the nine dispatch tables are available, while the baseline mutually exclusive preparation extensions left their target sets empty. The [test matrix](../../../tests/README.md) defines current validation.
 
 **What this document establishes.** Fine-grained stages, file ownership, dependencies, safety/acceptance gates and remote qualification for the [canonical composition design](../../../docs/Ariadne/guarded-target-resolution-design.md).
 
-**Where to go next.** Read the [accepted 2026-10-15 qualification](../../../evidence/Ariadne/loop-aware-target-resolution/20261015/README.md), [loop-closure ledger](loop-aware-target-resolution.md) and [canonical design](../../../docs/Ariadne/guarded-target-resolution-design.md) for current outcomes and limits. The [2026-10-14 qualification](../../../evidence/Ariadne/guarded-target-resolution/20261014/README.md), [existing resolver ledger](../indirect-target-resolution.md), [original guard delivery](justified-branch-pruning.md) and [request-budget delivery](native-request-budget.md) retain their original scope.
+**Where to go next.** Read the [accepted 2026-10-15 qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/loop-aware-target-resolution/20261015/README.md), [loop-closure ledger](loop-aware-target-resolution.md) and [canonical design](../../../docs/Ariadne/guarded-target-resolution-design.md) for current outcomes and limits. The [2026-10-14 qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guarded-target-resolution/20261014/README.md), [existing resolver ledger](../indirect-target-resolution.md), [original guard delivery](justified-branch-pruning.md) and [request-budget delivery](native-request-budget.md) retain their original scope.
 
 **What remains unresolved.** This plan fixes target/guard integration for the nine jumps. The other 19 recorded semantic stops and any newly discovered barriers remain explicit. Their resolution, regional coverage and successful full-dump path enumeration are separate gates; no alignment or positive-path guarantee is made here.
+
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## Concrete objective
 
@@ -42,7 +47,7 @@ That delivery seals the candidate graph, original controls, target report, guard
 
 The 2026-10-15 loop implementation uses local target report v3/profile `captured-local-indirect-targets/v2`, composition v2 and combined native profile `captured-guarded-targets/v2`; its combined minidump/explanation/frame reports are v5/v4/v4. A tagged whole-dispatch induction proof is an alternative to the unchanged prefix-tree coverage rule. Retained v1 combined reports select the frozen legacy checker/model and have passed actual semantic replay; new loop fields cannot be admitted through a legacy profile or stripped during downgrade. This coverage-only extension over retained table witnesses passes the publication regression and original-dump target-closure acceptance.
 
-The controls include paired codec roundtrips, proof stripping, identity/premise/epoch/source tampering, an explicit unavailable endpoint and pinned-helper synthetic composition cases. Final validation `120753` passes source/model/native checks within the scope recorded in the [delivery evidence](../../../evidence/Ariadne/guarded-target-resolution/20261014/README.md). Order-independent native term comparison, twelve native infeasible controls and all 273 actual infeasible receipts pass; historical failed controls remain separately identified.
+The controls include paired codec roundtrips, proof stripping, identity/premise/epoch/source tampering, an explicit unavailable endpoint and pinned-helper synthetic composition cases. Final validation `120753` passes source/model/native checks within the scope recorded in the [delivery evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guarded-target-resolution/20261014/README.md). Order-independent native term comparison, twelve native infeasible controls and all 273 actual infeasible receipts pass; historical failed controls remain separately identified.
 
 ## C5 original-dump probe checkpoint
 
@@ -58,7 +63,7 @@ Final probe `121127` represented 9,590 caller sites and 778 callee sites. Every 
 
 The caller retains 32 guard-coverage barriers and its initial MOVAPS is unknown with `candidate-coverage-incomplete`. Rust and native completed both queries with `request_equal=true` and `full_state_equal=true`: caller nine decoded/nine edges/1,269 reported definitions; callee 768 decoded/895 edges/1,289,259 reported definitions. Frame listing `1:0`, `NP=10` is unavailable with zero paths and `missing-or-ambiguous-active-call-anchor`; no alignment, executed-path or positive-listing claim is made.
 
-Native structural term comparison now ignores object field order while retaining field names, scalar values and list order. The earlier order-sensitive failure/probe `115408` remains historical; final positive probe `121127` elapsed 192,204 ms with native checker identity `cc9ff8718659af45e3d86ba0949915615f8bdb64822638597522af63dba0c0f8`. The [delivery record](../../../evidence/Ariadne/guarded-target-resolution/20261014/README.md) retains final parity and finite qualification; its artifact archive is sealed.
+Native structural term comparison now ignores object field order while retaining field names, scalar values and list order. The earlier order-sensitive failure/probe `115408` remains historical; final positive probe `121127` elapsed 192,204 ms with native checker identity `cc9ff8718659af45e3d86ba0949915615f8bdb64822638597522af63dba0c0f8`. The [delivery record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guarded-target-resolution/20261014/README.md) retains final parity and finite qualification; its artifact archive is sealed.
 
 The [canonical source-review corrections](../../../docs/Ariadne/guarded-target-resolution-design.md#source-review-corrections) also record conditional-write pre-state handling, captured-read structure checks, raw source/control totality, combined transport/paged completion, saved minidump source identity and exact offline frame recovery projection. Final qualification must use the corrected sources rather than earlier snapshots.
 
@@ -89,7 +94,7 @@ Probe `dump-20261015T051409` passed every target-closure acceptance gate in 202,
 
 The caller has 9,590 candidate sites at epoch 609 and all 10 indirect sites complete, with 30 remaining guard barriers; completed core remains nine decoded sites, nine edges and 1,269 definitions. The callee has 778 candidates at epoch 129, 12 guard barriers, 768 decoded sites, 895 edges and 1,289,259 definitions. Initial caller MOVAPS remains unknown. NP10 frame listing is unavailable with zero returned paths and `missing-or-ambiguous-active-call-anchor`; this does not establish that no path exists.
 
-The ninth C5 clause and the scoped C6 delivery are complete. Their acceptance covers target/guard integration and these dispatch proofs, not removal of every semantic barrier, universal loop handling or available frame paths. The [new qualification](../../../evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) records exact source/tool/dump identities and remaining limits.
+The ninth C5 clause and the scoped C6 delivery are complete. Their acceptance covers target/guard integration and these dispatch proofs, not removal of every semantic barrier, universal loop handling or available frame paths. The [new qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) records exact source/tool/dump identities and remaining limits.
 
 ## Staged tasks, ownership and gates
 
@@ -112,7 +117,7 @@ Workers must preserve unrelated changes. Each owner edits only its assigned file
 | C4.2 codecs and consumers | Product/validation owners: `src/input/report.rs`, `investigation.rs`, investigation `model.rs`, `validate.rs`, `frame_paths.rs`, `src/reports/` | C3 | Minidump, explanation and frame-path text/JSON/DOT retain both scopes/proofs/gaps; versioned strict round-trip/tamper validation. |
 | C5.1 finite model/runtime parity | Test/native owners, task-private remote WSL builds | C1–C4 | Applicable TLA typecheck/safety/termination and replay; exact Rust/native combined fixtures; target-only/guard-only/default regressions. |
 | C5.2 targeted mutations | Test owner: isolated SUT/build directories under `target/` | C5.1 controls | Every credited mutant has a passing original control and a named behavioral failure; no compile-error/timeout credit. |
-| C5.3 original dump retry | Qualification owner: `evidence/Ariadne/guarded-target-resolution/` | C5.1/C5.2 | Nine site-by-site candidate/completeness outcomes, table-oracle reconciliation, discovery accounting for 51 new starts, remaining/new barriers and native/Rust parity recorded. |
+| C5.3 original dump retry | Qualification owner: `https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guarded-target-resolution/` | C5.1/C5.2 | Nine site-by-site candidate/completeness outcomes, table-oracle reconciliation, discovery accounting for 51 new starts, remaining/new barriers and native/Rust parity recorded. |
 | C6 final review and delivery | Coordinator + independent reviewers | C5 | Exact source/tool/dump hashes, finite scope, unmet gates and usage reconciled in canonical docs; links/layout pass; completed plan archived after actual delivery. |
 
 ## Required negative and mutation controls

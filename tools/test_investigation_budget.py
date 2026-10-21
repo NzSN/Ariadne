@@ -15,7 +15,7 @@ from investigation_windows_case import load_case, case_digest
 
 
 CASE = load_case()
-LINUX = json.loads((gate.ROOT / "evidence/Ariadne/priority-1-real-capture-case.json").read_text())
+LINUX = json.loads((gate.ROOT / "tests/input/fixtures/workloads/priority-1-real-capture-case.json").read_text())
 ACTIVE_HISTORICAL = {"id": "historical-test-double", "capture": {**LINUX["capture"], "platform": "linux"},
                      "query": LINUX["query"], "expectations": {"decodedStarts": 34, "phaseBudgetMs": 250}}
 

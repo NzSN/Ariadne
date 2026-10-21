@@ -2,16 +2,21 @@
 
 ## Context and follow-up
 
-**Status.** S0–S6 pass the declared original Windows AMD64 normal-flow and completed-caller profile. The [2026-10-19 qualification](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md) completes both frames with exact native/Rust states. October 15 budget-stopped and admission-only records retain their original scope.
+**Status.** S0–S6 pass the declared original Windows AMD64 normal-flow and completed-caller profile. The [2026-10-19 qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/caller-semantic-coverage/20261019/README.md) completes both frames with exact native/Rust states. October 15 budget-stopped and admission-only records retain their original scope.
 
 **Why this document exists.** [Loop closure](guarded-target-resolution-design.md#dated-loop-delivery-and-publication-correction--2026-10-15) completes DA09/DADD but leaves 30 caller guard barriers: 27 INT3 sites, one UD2, one UD1 and one MOVAPS load. This is item 2 of the remaining-blocker inventory.
 
 **What this document establishes.** Checked normal-flow terminal/load admission, versioned replay and bounded complete dataflow with lossless membership storage. BAP lifting remains trusted; LLVM supplies independent decode/control facts.
 
-**Where to go next.** Read the [new qualification](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md), [S0–S6 ledger](../../.agents/plans/caller-semantic-coverage.md), [completion implementation](../implementation.md), [guard contract](justified-branch-pruning-design.md) and separately [qualified finite frame-path F4](../../evidence/Ariadne/frame-paths/20261020/README.md),
+**Where to go next.** Read the [new qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/caller-semantic-coverage/20261019/README.md), [S0–S6 ledger](../../.agents/plans/caller-semantic-coverage.md), [completion implementation](../implementation.md), [guard contract](justified-branch-pruning-design.md) and separately [qualified finite frame-path F4](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/20261020/README.md),
 with its [execution ledger](../../.agents/plans/frame-path-enumeration.md).
 
 **What remains unresolved.** The later MOVAPS load remains Unknown under the original premises; two callee indirect barriers remain. Finite frame-path F4 has separate source-bound qualification under a 32-node/two-visit path policy and retains partial coverage. Broader release/large-report qualification, executed history, root cause and universal refinement remain open. Completed dataflow is relative to the admitted graph.
+
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## Reproduced facts
 
@@ -173,7 +178,7 @@ Acceptance requires exact Rust/native full-state equality on both retained
 original requests, an independent per-row fixed-point check, prefix/replay and
 hostile codec controls, applicable core/native/model/replay/mutation qualification,
 and a byte-identical raw-dump admission refresh with explicit source differences.
-The [source-bound qualification](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md) passes those named clauses. Later
+The [source-bound qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/caller-semantic-coverage/20261019/README.md) passes those named clauses. Later
 load alignment, callee target gaps and the fresh raw-source guard-coverage
 limitation retain separate outcomes. Finite frame-path admission/enumeration now
 has the separately [qualified F4 successor](investigation-design.md#f4-post-s6-qualification);
@@ -187,7 +192,7 @@ Report initial MOVAPS admission, the later MOVAPS-load verdict, new discovery, c
 
 ## Completed caller qualification, 2026-10-19
 
-The [S6 evidence](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md) binds 1066 source/input files
+The [S6 evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/caller-semantic-coverage/20261019/README.md) binds 1066 source/input files
 to capsule `d1c705d04fb20c215601416911355d274aa0b3fec3fac3539f259d5917257cc6`. Saved requests and byte-identical raw-dump
 preparation reproduce the original normalized inputs. Caller recovery contains
 9,589 decoded sites/11,321 edges; callee recovery contains 778/895. Every

@@ -41,6 +41,9 @@ snapshot and captures; later changes need new qualification. The Linux source
 path of this demo has not been built or run in this delivery. Full-dump flags do
 not prove every process-memory read succeeded.
 
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+
 ## Program and integration
 
 `crash_demo.cc` initializes a fresh database with uploads disabled and launches

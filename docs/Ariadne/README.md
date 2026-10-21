@@ -12,7 +12,7 @@ history.
 **What this document establishes.** Feature documents own their contracts and
 supporting narrative. [Plans](../../.agents/plans/README.md) own execution stages;
 [checkpoints](../../CHECKPOINTS.md) own chronology; immutable evidence stays in
-[evidence/Ariadne](../../evidence/Ariadne/README.md).
+[evidence/Ariadne](../../tests/README.md).
 
 **Where to go next.**
 
@@ -34,6 +34,11 @@ supporting narrative. [Plans](../../.agents/plans/README.md) own execution stage
 refinement has source implementation and finite probes; full model, mutation
 and Scanner qualification remain pending. A retained passing result applies to its recorded source/tool/corpus
 identities; consolidating its description supplies no new runtime qualification.
+
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## Canonical designs
 

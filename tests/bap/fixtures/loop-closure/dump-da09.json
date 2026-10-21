@@ -1,7 +1,7 @@
 {
   "schema": "ariadne.loop-closure-dump-region-fixture/v1",
   "id": "da09",
-  "provenance": "dump-provenance.json",
+  "provenance": "extract.py",
   "scope": "Captured candidate local phase; loop closure is not yet proved by this fixture.",
   "dispatch": "0x00007ff77440da09",
   "header": "0x00007ff77440d9f7",

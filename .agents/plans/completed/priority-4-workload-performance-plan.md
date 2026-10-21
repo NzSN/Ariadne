@@ -39,6 +39,11 @@ The later [2026-09-30 delivery](../../../docs/Ariadne/workload-performance-desig
 that gate for a 98-instruction Windows capture, retains before/after evidence,
 and meets the unchanged 2,000 ms median budget.
 
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## 2026-09-30 qualification run
 
 Audit the available Windows Electron captures against a companion's exact

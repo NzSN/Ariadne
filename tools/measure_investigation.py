@@ -14,7 +14,7 @@ def sources():
  paths=source_files()
  for tree in ['src','src/bap','src/input','src/reports','src/investigation','src/bench','native/bap','native/bap-core','native/llvm_mc']:
   paths.update(p for p in (ROOT/tree).rglob('*') if p.is_file() and p.suffix!='.md' and '__pycache__' not in p.parts)
- paths.update(ROOT/p for p in ['Cargo.toml', 'Cargo.lock', 'tools/measure_investigation.py', 'tools/investigation_budget.py', 'tools/test_investigation_budget.py', 'evidence/Ariadne/priority-1-real-capture-case.json', 'evidence/Ariadne/priority-4-real-capture-case.json'])
+ paths.update(ROOT/p for p in ['Cargo.toml', 'Cargo.lock', 'tools/measure_investigation.py', 'tools/investigation_budget.py', 'tools/test_investigation_budget.py', 'tests/input/fixtures/workloads/priority-1-real-capture-case.json', 'tests/input/fixtures/workloads/priority-4-real-capture-case.json'])
  paths.update(ROOT/p for p in [CASE_RELATIVE,INSPECTION_RELATIVE,ARCHIVE_RELATIVE,'tools/investigation_windows_case.py','tools/i5a_native_contract.py','tools/with_mirrorrust_snapshot.py'])
  paths.update(real_case.source_paths())
  return {str(p.relative_to(ROOT)):sha(p) for p in sorted(paths)}

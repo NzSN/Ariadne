@@ -30,6 +30,11 @@ No coverage-ledger promotion or instruction-step acceptance is claimed.
 The scope is two exact LLVM MC 20.1.2 forms, `MOV32mi` and `MOV64mi32`, used
 by the two retained AMD64 Windows/Linux minidump fixtures.
 
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## Outcome and boundary
 
 After this stage, both fixtures should decode their faulting instruction, keep

@@ -33,6 +33,11 @@ later changes require fresh or exact-inventory-verified acceptance.
 Indexed, Linux, historical-provenance and object-lifetime questions remain later
 deliveries. Existing I4/I5a records do not qualify I5b or waive their own criteria.
 
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## Selected question
 
 For a selected captured memory access, ask:
@@ -301,7 +306,7 @@ Source review alone supplies no capture or timing acceptance.
 
 ## Retained qualification
 
-The [2026-10-07 aggregate](../../evidence/Ariadne/i5b-qualification.json) retains
+The [2026-10-07 aggregate](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5b-qualification.json) retains
 18 passing gates, stable inventories of 294 sources and eleven tools, and
 source/fixture plus controlled partial/full acceptance for the declared corpus.
 Its `fullI5bAcceptance`, `sourcesStable` and `toolsStable` fields are true within
@@ -342,9 +347,9 @@ capture evidence.
 | Indexed-unknown partial | 801.059 | 1.193 | Unknown; both pass |
 | Indexed-unknown full | 900.772 | 1.129 | Unknown; both pass |
 
-The [manifest](../../evidence/Ariadne/i5b-evidence-manifest.json),
-[controlled-case pins](../../evidence/Ariadne/i5b-controlled-cases.json) and
-[archive](../../evidence/Ariadne/i5b-evidence.tar.gz) retain exact sources,
+The [manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5b-evidence-manifest.json),
+[controlled-case pins](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5b-controlled-cases.json) and
+[archive](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5b-evidence.tar.gz) retain exact sources,
 logs/reports/samples, mutations, nested native-core evidence and all six dumps,
 witnesses and matching executable bytes. The 2,005 members were size/hash checked;
 archive SHA-256 is `4b256fc48a5b18c0a929b8f64adeefcc57f58ff042cb31766e0113348bc6229c`.

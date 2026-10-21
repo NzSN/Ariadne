@@ -39,6 +39,11 @@ Address-wrap and memory-refinement terminology describes their selected designs;
 partial working-tree implementations do not establish integration or acceptance.
 Historical records keep their original wording and identities.
 
+Current validation follows the [executable test matrix](../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## How to apply this convention
 
 Use the canonical terms below in new or revised prose. A shorter form is allowed
@@ -363,7 +368,7 @@ visible in recovery context. Avoid **pruned CFG**, **impossible branch** and
 ## Validation, qualification and delivery claims
 
 Owners: [assurance boundary](Ariadne/semantic-assurance.md),
-[evidence guide](../evidence/Ariadne/README.md), [replay guide](../mbt/README.md)
+[evidence guide](../tests/README.md), [replay guide](../mbt/README.md)
 and [performance contract](Ariadne/workload-performance-design.md#workload-set-and-measurement-layers).
 
 | Canonical term | Meaning and required distinction |

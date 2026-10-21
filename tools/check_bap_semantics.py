@@ -17,7 +17,7 @@ def sources():
  for tree in ['src','tests','src/input','tests/input','src/examples','src/reports','tests/reports','src/bap','src/investigation','tests/bap','src/bench','native/llvm_mc','native/bap']:
   paths.update(p for p in (ROOT/tree).rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix!='.md')
  paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Specs/Ariadne.tla','Specs/AriadneMachineCommon.tla','Specs/AriadneTypes.tla','tools/check_bap_semantics.py','tools/check_bap_model.py','tools/check_bap_mutations.py','tools/measure_bap.py','tools/test_bap_workload.py','tools/bap_workload_contract.py','tools/test_bap_workload_contract.py','tools/test_bap_workload_gate.py','tools/check_stage_e.py','tools/check_minidump.py','tools/check_minidump_mutations.py'])
- paths.update(ROOT/p for p in ['evidence/Ariadne/priority-1-real-capture-case.json','evidence/Ariadne/bap-windows-workload-case.json',WINDOWS_ARCHIVE_RELATIVE])
+ paths.update(ROOT/p for p in ['tests/input/fixtures/workloads/priority-1-real-capture-case.json','tests/input/fixtures/workloads/bap-windows-workload-case.json',WINDOWS_ARCHIVE_RELATIVE])
  paths.update(real_case.source_paths())
  return {str(p.relative_to(ROOT)):sha(p) for p in sorted(paths)}
 def validate_workload_bindings(data):

@@ -15,7 +15,6 @@ import check_i5c as gate
 import check_i5c_mutations as mutations
 import compare_i5c_legacy as legacy
 import i5c_qualification as evidence
-import export_i5c_runtime as runtime_export
 
 
 class QualificationControls(unittest.TestCase):
@@ -65,21 +64,7 @@ class QualificationControls(unittest.TestCase):
             with self.subTest(raw=raw), self.assertRaises(ValueError):
                 evidence.read_json(path)
 
-    def test_retained_cache_payload_must_match_pointer_size_and_digest(self):
-        payload = b'{"old-evidence":true}\n'
-        digest = hashlib.sha256(payload).hexdigest()
-        pointer = self.root / "old.json"
-        pointer.write_bytes(evidence.LFS + f"oid sha256:{digest}\nsize {len(payload)}\n".encode())
-        cached = self.root / ".git/lfs/objects" / digest[:2] / digest[2:4] / digest
-        cached.parent.mkdir(parents=True)
-        with patch.object(evidence, "ROOT", self.root):
-            with self.assertRaises(ValueError):
-                evidence.retained_path(pointer)
-            cached.write_bytes(payload)
-            self.assertEqual(evidence.retained_path(pointer), cached)
-            cached.write_bytes(payload + b"changed")
-            with self.assertRaises(ValueError):
-                evidence.retained_path(pointer)
+
 
     def test_command_preserves_raw_stream_bytes(self):
         receipt, _, _ = evidence.command(self.root, "raw", [
@@ -152,74 +137,18 @@ class QualificationControls(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.synthetic_baseline(path)
 
-    def test_original_pre_w1_baseline_is_adapted_without_replacing_expected_bytes(self):
-        outputs = {}
-        for key in legacy.expected_keys():
-            if key.startswith("base/"):
-                old = key
-            else:
-                parts = key.split("/")
-                if parts[0] == "i5b-upstream":
-                    parts = ["i5b", "upstream-call", *parts[1:]]
-                profile, case, backend, fmt = parts
-                prefix = "zero-address-assessment." if profile == "i5a" else "zero-base-offset-assessment."
-                old = f"{profile}/{case}/{backend}/{prefix}{'txt' if fmt == 'text' else fmt}"
-            outputs[old] = {"bytes": 7, "sha256": "a" * 64}
-        parity = [{"case": f"parity/{profile}/{case}/{backend}/{fmt}", "sha256": "a" * 64}
-                  for profile, case in (("i5a", "zero-store"), ("i5a", "unknown-flags"),
-                                        ("i5b", "mov32mi-positive"), ("i5b", "indexed"),
-                                        ("i5b", "excluded-range"), ("i5b", "upstream-call"))
-                  for backend in ("rust", "bap") for fmt in ("text", "json", "dot")]
-        original = {"schema": "ariadne.i5c-legacy-before/v1", "passed": True, "total_outputs": 666,
-                    "sources_unchanged": True, "outputs_normalized": False,
-                    "native_build_receipts_preserved_raw": True, "outputs": outputs,
-                    "public_api_cli_parity": parity}
-        path = self.root / "original-baseline.json"
-        evidence.write_json(path, original)
-        adapted = self.synthetic_baseline(path)
-        self.assertEqual(set(adapted["outputs"]), legacy.expected_keys())
-        self.assertEqual(adapted["retainedCliParityCases"], 36)
-        self.assertTrue(all(row == {"bytes": 7, "sha256": "a" * 64} for row in adapted["outputs"].values()))
-        for change in ("normalized", "missing-parity", "bad-parity"):
-            bad = copy.deepcopy(original)
-            if change == "normalized":
-                bad["outputs_normalized"] = True
-            elif change == "missing-parity":
-                bad["public_api_cli_parity"].pop()
-            else:
-                bad["public_api_cli_parity"][0]["sha256"] = "b" * 64
-            evidence.write_json(path, bad)
-            with self.subTest(change=change), self.assertRaises(ValueError):
-                self.synthetic_baseline(path)
+    def test_checked_in_legacy_vectors_define_all_666_expected_outputs(self):
+        path = evidence.ROOT / 'tests/reports/fixtures/i5c-legacy-sha256.json'
+        vector = legacy.baseline(path, legacy.LEGACY_BASELINE_SHA256)
+        self.assertEqual(set(vector['outputs']), legacy.expected_keys())
+        self.assertNotIn('passed', vector)
+        self.assertTrue(all(set(row) == {'bytes','sha256'} for row in vector['outputs'].values()))
 
-    def make_archive(self, members):
-        path = self.root / "evidence.tar.gz"
-        with tarfile.open(path, "w:gz") as archive:
-            for name, data, kind in members:
-                item = tarfile.TarInfo(name)
-                if kind == "file":
-                    item.size = len(data)
-                    archive.addfile(item, io.BytesIO(data))
-                else:
-                    item.type = tarfile.SYMTYPE
-                    item.linkname = "elsewhere"
-                    archive.addfile(item)
-        return path
 
-    def test_archive_verification_rejects_duplicate_missing_extra_link_and_changed_bytes(self):
-        expected = {"entry": {"bytes": 1, "sha256": hashlib.sha256(b"x").hexdigest()}}
-        gate.verify_archive(self.make_archive([("entry", b"x", "file")]), expected)
-        for members in ([], [("entry", b"x", "file")] * 2, [("extra", b"x", "file")],
-                        [("entry", b"x", "link")], [("entry", b"y", "file")]):
-            with self.subTest(members=members), self.assertRaises(ValueError):
-                gate.verify_archive(self.make_archive(members), expected)
 
-    def test_runtime_stage_exports_cannot_be_omitted(self):
-        path = self.root / "export.json"
-        for stages in ({}, {"W2": {}}):
-            evidence.write_json(path, {"schema": "ariadne.i5c-w2-w3-runtime-export/v1", "stages": stages})
-            with self.subTest(stages=stages), self.assertRaises(ValueError):
-                gate.runtime_files(path, evidence.sha(path))
+
+
+
 
     def test_producer_sealing_requires_original_inputs_tools_binaries_and_logs(self):
         directory = self.root / "producer"
@@ -261,48 +190,24 @@ class QualificationControls(unittest.TestCase):
         with self.assertRaises(ValueError):
             gate.producer_files(path, "0" * 64)
 
-    def test_runtime_export_checks_original_streams_and_rejects_a_self_consistent_omission(self):
-        repo = self.root / "repo"
-        campaign = self.root / "retained"
-        campaign.mkdir()
-        (campaign / "stdout.log").write_bytes(b"old successful test output\n")
-        (campaign / "stderr.log").write_bytes(b"")
-        for relative in ("20261020/w2", "20261021/w3"):
-            qualified = repo / "evidence/Ariadne/address-wrap" / relative / "qualification.json"
-            qualified.parent.mkdir(parents=True)
-            streams = {name: {"path": "/campaign/" + name + ".log",
-                              "bytes": (campaign / (name + ".log")).stat().st_size,
-                              "sha256": evidence.sha(campaign / (name + ".log"))}
-                       for name in ("stdout", "stderr")}
-            evidence.write_json(qualified, {"passed": True, "records": [
-                {"passed": True, "exit": 0, "timed_out": False, **streams}]})
-        with patch.object(runtime_export, "ROOT", repo), patch.object(gate, "ROOT", repo):
-            index_path = runtime_export.export(campaign, self.root / "export")
-            value = evidence.read_json(index_path)
-            gate.runtime_files(index_path, evidence.sha(index_path))
-            del value["stages"]["W2"]["files"]["campaign/stdout.log"]
-            (Path(value["stages"]["W2"]["root"]) / "campaign/stdout.log").unlink()
-            evidence.write_json(index_path, value)
-            with self.assertRaisesRegex(ValueError, "originally bound runtime stream"):
-                gate.runtime_files(index_path, evidence.sha(index_path))
 
-    def test_failed_sealing_or_source_drift_cannot_publish_positive_flags(self):
-        record = {"passed": True, "failure": None, "sourceFixtureAcceptance": True,
-                  "controlledWindowsPartialAcceptance": True, "controlledWindowsFullAcceptance": True,
-                  "fullI5cAcceptance": True}
-        for reason in ("archive failure", "source drift"):
+
+    def test_failed_tests_missing_inputs_and_source_drift_cannot_publish_positive_flags(self):
+        record = {'passed': True, 'failure': None, 'sourceFixtureAcceptance': True,
+                  'controlledWindowsPartialAcceptance': True, 'controlledWindowsFullAcceptance': True,
+                  'fullI5cAcceptance': True}
+        for reason in ('failed-tests', 'missing-input', 'source-drift'):
             work = self.root / reason
             work.mkdir()
-            with patch.object(gate, "seal") as seal, patch.object(gate, "sources", return_value={"changed": "1"}):
-                if reason == "archive failure":
-                    seal.side_effect = ValueError("archive mismatch")
-                else:
-                    seal.return_value = {"verified": True}
-                self.assertFalse(gate.publish_acceptance(work, record, {}, {}))
-            published = evidence.read_json(work / "report.json")
-            for key in ("passed", "sourceFixtureAcceptance", "controlledWindowsPartialAcceptance", "controlledWindowsFullAcceptance", "fullI5cAcceptance"):
+            current = copy.deepcopy(record)
+            if reason == 'failed-tests': current['passed'] = False
+            inputs = {'missing': self.root / 'missing'} if reason == 'missing-input' else {}
+            with patch.object(gate, 'sources', return_value={'changed':'1'} if reason == 'source-drift' else {}):
+                self.assertFalse(gate.publish_acceptance(work, current, {}, inputs))
+            published = evidence.read_json(work / 'report.json')
+            for key in ('passed','sourceFixtureAcceptance','controlledWindowsPartialAcceptance','controlledWindowsFullAcceptance','fullI5cAcceptance'):
                 self.assertIs(published[key], False)
-            self.assertFalse((work / "sealed").exists())
+            self.assertEqual(list(work.iterdir()), [work / 'report.json'])
 
     def test_preflight_failure_keeps_every_acceptance_flag_false(self):
         output = self.root / "preflight"

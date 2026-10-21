@@ -53,6 +53,11 @@ Broader hypotheses, executed history and root cause remain outside this profile.
 
 The [documentation map](../documentation-map.md) is optional navigation.
 
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## Selected question and claim
 
 For one selected captured memory access, assess:
@@ -367,10 +372,10 @@ No new runtime qualification was run for this document consolidation.
 
 | Date / record | Result and scope | Open clause or successor |
 | --- | --- | --- |
-| 2026-10-03, [v1 source/fixture record](../../evidence/Ariadne/i5a-validation.json) | 12 gates, 171 stable source hashes, all 41 synthetic cases and 16 actual implementation mutants pass; 24 legacy CLI outputs stay byte-exact. | Controlled Windows was unexercised. The historical backend measurements do not qualify the later native default. |
-| 2026-10-03, [controlled demo](../../evidence/Ariadne/crashpad-demo-validation.json) | Both captures and independent zero-address answers pass; phase medians meet 10 ms. | CLI medians 1,820.299/1,824.496 ms exceed 1,500 ms; controlled acceptance remains false. |
-| Initial native refresh, [progress record](../../evidence/Ariadne/i5a-native-progress/progress.json) | Nine fixture timing cases and sixteen mutants pass, but source/fixture is 12/14 and investigation 16/17. | Concurrent MirrorRust formatting/source identity changes invalidate aggregate qualification. Failed flags are retained. |
-| 2026-10-05, [native fixture](../../evidence/Ariadne/i5a-native-fixture-validation.json) and [controlled record](../../evidence/Ariadne/i5a-native-controlled-validation.json) | All 14 fixture, 17 investigation and refreshed 20 native-core gates pass under the selected read-only dependency snapshot; both controlled modes meet unchanged budgets. | Covers the recorded Linux-hosted analysis of Windows-origin captures, not arbitrary later source or a packaged cross-platform release. |
+| 2026-10-03, [v1 source/fixture record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5a-validation.json) | 12 gates, 171 stable source hashes, all 41 synthetic cases and 16 actual implementation mutants pass; 24 legacy CLI outputs stay byte-exact. | Controlled Windows was unexercised. The historical backend measurements do not qualify the later native default. |
+| 2026-10-03, [controlled demo](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/crashpad-demo-validation.json) | Both captures and independent zero-address answers pass; phase medians meet 10 ms. | CLI medians 1,820.299/1,824.496 ms exceed 1,500 ms; controlled acceptance remains false. |
+| Initial native refresh, [progress record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5a-native-progress/progress.json) | Nine fixture timing cases and sixteen mutants pass, but source/fixture is 12/14 and investigation 16/17. | Concurrent MirrorRust formatting/source identity changes invalidate aggregate qualification. Failed flags are retained. |
+| 2026-10-05, [native fixture](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5a-native-fixture-validation.json) and [controlled record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5a-native-controlled-validation.json) | All 14 fixture, 17 investigation and refreshed 20 native-core gates pass under the selected read-only dependency snapshot; both controlled modes meet unchanged budgets. | Covers the recorded Linux-hosted analysis of Windows-origin captures, not arbitrary later source or a packaged cross-platform release. |
 
 The original run exercised eleven I5a tests with `--include-ignored`: eight
 without native prerequisites and three covering native preparation with Rust
@@ -393,8 +398,8 @@ nine qualified fixture workloads, combined phase medians ranged 0.859–1.795 ms
 and assessment CLI medians 754.883–1,179.540 ms against 10/1,500 ms. The v1 record
 retains all per-case values, 90 measured CLI samples and 45 measured phase samples
 plus warm-ups, hashes and peak RSS (at most 84,196 KiB). Timing variation does not
-establish a speedup. The [historical manifest](../../evidence/Ariadne/i5a-evidence-manifest.json)
-and [archive](../../evidence/Ariadne/i5a-evidence.tar.gz) retain 1,610 files,
+establish a speedup. The [historical manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5a-evidence-manifest.json)
+and [archive](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5a-evidence.tar.gz) retain 1,610 files,
 including 334 source files across combined inventories, original/nested records,
 logs, synthetic dumps, reports and comparison baselines. Real captures remain
 external; archive verification applies to that recorded snapshot.
@@ -434,7 +439,7 @@ gaps under admitted premises. Assessment preserves base-report bytes and both
 DOT families parse with Graphviz. The historical CLI ranges were
 1,742.791–1,853.441 ms partial and 1,804.609–2,056.832 ms full; neither passed its
 frozen median criterion. The
-[demo manifest](../../evidence/Ariadne/crashpad-demo-evidence-manifest.json)
+[demo manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/crashpad-demo-evidence-manifest.json)
 binds exact build/capture/inspection/answer/timing evidence.
 
 Raw inputs/executables were retained externally under
@@ -505,9 +510,9 @@ claimed to equal a clean revision. The native-core record covers 632 Ariadne
 sources and retains the dependency contents; all 190 qualification Python controls
 passed in that campaign. Reuse across snapshot identities is rejected.
 
-Failed [progress evidence](../../evidence/Ariadne/i5a-native-progress-evidence.tar.gz),
-[pre-repin accepted history](../../evidence/Ariadne/i5a-native-history/2026-10-05-before-i4-repin/i5a-native-evidence-manifest.json)
-and [earlier native-core adoption](../../evidence/Ariadne/bap-core-history/2026-10-04-adoption/bap-core-qualification.json)
+Failed [progress evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5a-native-progress-evidence.tar.gz),
+[pre-repin accepted history](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5a-native-history/2026-10-05-before-i4-repin/i5a-native-evidence-manifest.json)
+and [earlier native-core adoption](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-core-history/2026-10-04-adoption/bap-core-qualification.json)
 retain their original identities and flags. The native successor qualifies only
 the declared finite capture/fixture corpus under its snapshot and trusted BAP
 lifting premises; no historical path, lifetime or universal refinement follows.
@@ -546,8 +551,8 @@ through `--inspection-dir` and a matching environment. Historical v1 or partial
 [demo instructions](../../native/crashpad-demo/README.md#inspect-and-analyze)
 cover the inspection and default/explicit-native checks.
 
-The [native manifest](../../evidence/Ariadne/i5a-native-evidence-manifest.json)
-and [archive](../../evidence/Ariadne/i5a-native-evidence.tar.gz) retain 1,969 entries
+The [native manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5a-native-evidence-manifest.json)
+and [archive](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5a-native-evidence.tar.gz) retain 1,969 entries
 (27,059,376 bytes): source snapshots, producer records, logs, CSVs, bundles and
 separate inspections, with original-path mapping. Every member and accepted
 source/tool inventory was checked after retention. Raw real dump/executable bytes

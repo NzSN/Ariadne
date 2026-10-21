@@ -10,8 +10,8 @@ def canonical(value):return json.dumps(value,sort_keys=True,separators=(',',':')
 def legacy_source_build(output):
  output=Path(output);source=output/'source';source.mkdir(parents=True)
  head=BASELINE_REVISION
- frozen=json.loads((ROOT/'evidence/Ariadne/bap-admission/p0-contract-freeze.json').read_text())
- for name,expected in frozen['baselineSourceHashes'].items():
+ frozen=json.loads((ROOT/'tests/bap/fixtures/admission/legacy-source.json').read_text())
+ for name,expected in frozen['sourceHashes'].items():
   raw=subprocess.check_output(['git','show',head+':'+name],cwd=ROOT)
   if hashlib.sha256(raw).hexdigest()!=expected:raise ValueError('Git baseline differs from frozen P0 source: '+name)
  raw=subprocess.check_output(['git','archive',head,'src','Cargo.toml','Cargo.lock','native/bap/toolchain.lock.json'],cwd=ROOT)

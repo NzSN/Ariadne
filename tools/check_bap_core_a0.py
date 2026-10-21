@@ -32,7 +32,7 @@ def sources():
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--stage1-record", type=Path,
-                        default=ROOT / "evidence/Ariadne/bap-unlimited-validation.json")
+                        required=True)
     args = parser.parse_args()
     work = Path(tempfile.mkdtemp(prefix="ariadne-bap-core-a0-"))
     before = sources()

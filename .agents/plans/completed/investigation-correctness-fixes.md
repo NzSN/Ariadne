@@ -40,6 +40,11 @@ the decision logic rejects invalid acceptance; they cannot qualify that workload
 
 The [documentation map](../../../docs/documentation-map.md) is optional navigation.
 
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## Reviewed failures
 
 | Finding | Observed behavior | Required behavior |

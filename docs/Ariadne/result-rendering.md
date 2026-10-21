@@ -31,6 +31,11 @@ own contracts; minidump JSON v1 alone does not imply them.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## Layer ownership
 
 `ariadne::render` presents `AnalysisResult`, the Rust implementation's output
@@ -310,7 +315,7 @@ only demonstrate the supported CLI and presentation mechanics.
 
 ### Presentation acceptance
 
-The [2026-09-29 23:26 CST source-bound record](../../evidence/Ariadne/priority-2-3-validation.json)
+The [2026-09-29 23:26 CST source-bound record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/priority-2-3-validation.json)
 retains exact Windows/Linux example identities, format hashes, controlled-case
 replay and the 11-gate minidump run under the
 [completed presentation plan](../../.agents/plans/completed/priority-3-investigator-presentation-plan.md).

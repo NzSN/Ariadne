@@ -5,12 +5,12 @@
 **Status.** The active ledgers below retain unfinished work after the 2026-10-15 loop delivery. Guarded target composition and its bounded loop-aware follow-up are complete within their recorded captured-table scope.
 Stage 5.1 is complete within its separate structural frame-report scope;
 the dated ledger retains exact source/tool/corpus qualification.
-The [2026-10-19 remote qualification](../../evidence/Ariadne/frame-question/20261019/README.md)
+The [2026-10-19 remote qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md)
 closes the finite section-5 P0–P10, FC0–FC6 consumer and selected memory M0–M4
-profiles. The [caller S6 record](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md) also closes its original completed-caller gate. Finite [frame-path F4](../../evidence/Ariadne/frame-paths/20261020/README.md)
-is qualified separately. The [finite resolver R6 qualification](../../evidence/Ariadne/indirect-target-resolution/20261020/README.md)
-closes its declared mutation/replay/original-capture clauses. The [Scanner S2–S4 review](../../evidence/Ariadne/scanner-followup/20261020/README.md) closes its finite audit and entry-boundary follow-up while retaining a partial answer. Two ledgers below
-still contain unfinished work, while ten retained stage ledgers are complete
+profiles. The [caller S6 record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/caller-semantic-coverage/20261019/README.md) also closes its original completed-caller gate. Finite [frame-path F4](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/20261020/README.md)
+is qualified separately. The [finite resolver R6 qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/20261020/README.md)
+closes its declared mutation/replay/original-capture clauses. The [Scanner S2–S4 review](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/scanner-followup/20261020/README.md) closes its finite audit and entry-boundary follow-up while retaining a partial answer. Two ledgers below
+still contain unfinished work, while eleven retained stage ledgers are complete
 within their finite profiles. Overlapping gates remain separate from those deliveries. The prior prerequisite/local
 records retain their dates and original scope.
 Thirty-one completed or superseded records live in `completed/`. Archiving
@@ -35,10 +35,16 @@ summaries remain in the [design documentation](../../docs/documentation-map.md).
 Archived Windows scopes do not qualify excluded Linux, full-dump, release or
 universal-proof clauses. A partial result is not a completed acceptance gate.
 
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## Current work and delivery ledgers
 
 | Active plan | Remaining work |
 | --- | --- |
+| [Generated validation and retention](generated-validation-retention.md) | T0–T5 complete: retained collection removed; PBT, core/stateflow/IR replay, compiled mutants and root checks pass. Full native-core/capture, timing and release prerequisites remain explicit. |
 | [Explicit alignment hypotheses](alignment-hypotheses.md) | H0–H5 complete within the 2026-10-16 structural-only reviewed MOVAPS profile; conditional v2 and actual v1/v2 replay qualified. Caller S6 and frame-path F4 remain separate. |
 | [Complete section-5 frame investigation](frame-question-investigation.md) | P0–P10 pass the 2026-10-19 remote finite profile, including applicable FC5/M4 imports. General SMT, F4 and release remain separate; caller S6 now has its own completed qualification. |
 | [Frame corridors and cycle summaries: Stage 5.2](frame-connections.md) | FC0–FC6 pass source-bound remote finite/capture acceptance on the exact declared saved sources. |
@@ -50,7 +56,7 @@ universal-proof clauses. A partial result is not a completed acceptance gate.
 | [Investigation layer](investigation-layer.md) | I5c, other hypotheses and I6/I7; finite frame-path F4 has separate qualification. |
 | [Memory provenance refinement](memory-provenance-refinement.md) | M0–M4 pass the selected remote finite/Scanner candidate-table scope. Wider alias/history claims remain outside the profile. |
 | [Scanner partial explanation](scanner-partial-explanation.md) | S1 retains its selected M4 scope; S2–S4 pass the 2026-10-20 twenty-site audit, 123-location entry boundary and exact-case replay. All 28 gaps and the partial status remain explicit. |
-| [Specification synchronization](specification-sync.md) | S0–S3 complete within the [2026-10-20 finite model profile](../../evidence/Ariadne/specification-sync/20261020/README.md): 53 type calls, 40 bounded calls and 24 TLC instances; wider/runtime refinement remains separate. |
+| [Specification synchronization](specification-sync.md) | S0–S3 complete within the [2026-10-20 finite model profile](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/specification-sync/20261020/README.md): 53 type calls, 40 bounded calls and 24 TLC instances; wider/runtime refinement remains separate. |
 
 ## Delivered implementation and qualification plans
 

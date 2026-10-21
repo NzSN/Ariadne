@@ -7,7 +7,7 @@ from rust_layout import copy_sut, source_files
 import real_capture_workload as real_case
 from bap_workload_contract import WINDOWS_ARCHIVE_RELATIVE, WORKLOAD_SCHEMA, windows_case_error, windows_qualification
 ROOT=Path(__file__).resolve().parents[1]
-WINDOWS_CASE_PATH=ROOT/'evidence/Ariadne/bap-windows-workload-case.json'
+WINDOWS_CASE_PATH=ROOT/'tests/input/fixtures/workloads/bap-windows-workload-case.json'
 WINDOWS_ARCHIVE_PATH=ROOT/WINDOWS_ARCHIVE_RELATIVE
 def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def run(cmd,timeout=120):
@@ -33,7 +33,7 @@ def sources():
  paths=source_files()
  for tree in ['src','src/input','src/reports','src/bap','src/investigation','src/bench','native/llvm_mc','native/bap']:
   paths.update(p for p in (ROOT/tree).rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.suffix!='.md')
- paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','tools/measure_bap.py','tools/test_bap_workload.py','tools/bap_workload_contract.py','tools/test_bap_workload_contract.py','evidence/Ariadne/priority-1-real-capture-case.json','evidence/Ariadne/bap-windows-workload-case.json',WINDOWS_ARCHIVE_RELATIVE])
+ paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','Cargo.toml','Cargo.lock','tools/measure_bap.py','tools/test_bap_workload.py','tools/bap_workload_contract.py','tools/test_bap_workload_contract.py','tests/input/fixtures/workloads/priority-1-real-capture-case.json','tests/input/fixtures/workloads/bap-windows-workload-case.json',WINDOWS_ARCHIVE_RELATIVE])
  paths.update(real_case.source_paths())
  return {str(p.relative_to(ROOT)):sha(p) for p in sorted(paths)}
 def main():

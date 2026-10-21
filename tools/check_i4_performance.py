@@ -5,8 +5,8 @@ import csv
 from datetime import datetime, timezone
 import json
 from pathlib import Path
+from run_output import run_output
 import subprocess
-import tarfile
 
 import check_bap_core
 import check_i5a
@@ -31,7 +31,7 @@ def main():
     parser.add_argument('--profiles-root', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
-    work = args.output.resolve()
+    work = run_output(args.output)
     work.mkdir(parents=True, exist_ok=False)
     before = check_bap_core.sources()
     qualification = active_identity()
@@ -124,33 +124,6 @@ def main():
     print('Report:',work/'report.json',flush=True)
     if not passed:
         raise SystemExit(1)
-    # Preserve complete nested qualification, raw timing/output evidence and the
-    # diagnostic/negative baselines, with every retained member verified by hash.
-    archive, entries = work/'evidence.tar.gz', {}
-    with tarfile.open(archive,'w:gz') as tar:
-        def add(path, name):
-            entries[name] = sha(path)
-            tar.add(path,arcname=name,recursive=False)
-        for name in before:
-            add(ROOT/name,'sources/'+name)
-        for name in ['report.json','native-phases.csv', *[g['gate']+'.log' for g in gates
-                     if (work/(g['gate']+'.log')).is_file()]]:
-            add(work/name,'qualification/'+name)
-        for name in ['report.json','evidence-manifest.json','evidence.tar.gz']:
-            add(args.regressions.parent/name,'regressions/'+name)
-        add(Path(qualification['manifestPath']),'dependencies/mirrorrust-snapshot.json')
-        for number, directory in enumerate([args.profiles_root,*artifacts]):
-            for path in sorted(directory.rglob('*')):
-                if path.is_file() and (path.suffix in {'.json','.csv','.txt','.ml','.log','.dmp','.dot','.stderr','.stdout','.time'} or path.name == 'ariadne-bap-core'):
-                    add(path,f'profiles-and-samples/{number}/'+str(path.relative_to(directory)))
-    with tarfile.open(archive,'r:gz') as tar:
-        actual = {member.name: __import__('hashlib').sha256(tar.extractfile(member).read()).hexdigest()
-                  for member in tar.getmembers() if member.isfile()}
-    require(actual == entries, 'archive verification failed')
-    manifest = dict(schema='ariadne.i4-performance-evidence/v1',verified=True,
-                    archiveSha256=sha(archive),qualificationReportSha256=sha(work/'report.json'),entries=entries)
-    (work/'evidence-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
-    print('Verified archive:',archive,flush=True)
 
 
 if __name__ == '__main__':

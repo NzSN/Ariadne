@@ -4,7 +4,7 @@
 
 **Status.** P0–P4 accepted by the user on 2026-10-10 for the selected active
 corpus, with the remaining historical real-Linux clauses excluded. The
-[acceptance decision](../../../evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
+[acceptance decision](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
 preserves the original qualification records and flags. V3 typed admission,
 conservative ordinary continuation and bounded
 completion transport pass remote source/fixture, Rust release-runtime and
@@ -60,6 +60,11 @@ separate. Heavy build/model/mutation/large-query work must run remotely.
 
 For the wider context, see the [documentation map](../../../docs/documentation-map.md).
 
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## Acceptance decision (2026-10-10)
 
 The user accepted P4 after excluding its remaining historical real-Linux
@@ -68,7 +73,7 @@ native/reference/default parity, model/mutation checks, fixed budgets and sealed
 evidence constitute the accepted scope. Existing Linux fixture checks remain
 part of the passing finite corpus.
 
-The [decision record](../../../evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
+The [decision record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
 binds the retained qualification and current implementation hashes. It records
 acceptance separately from the historical generic runner's
 `fullPlanAcceptance=false` flag. Automatic ingestion of the separate external
@@ -79,11 +84,11 @@ follow-ups, not acceptance gates. No release or causal-attribution claim follows
 
 | Stage | Current state | Evidence / next action |
 | --- | --- | --- |
-| P0 | Completed contract/baseline freeze before runtime edits. | [Independent contract](../../../tests/bap/fixtures/admission/contract.json), [freeze receipt](../../../evidence/Ariadne/bap-admission/p0-contract-freeze.json) and actual four-form rejection reports. |
-| P1 | Four observed forms and thirteen boundary encodings pass independent effects/address/flag checks on both targets. | [Bounded P1 record](../../../evidence/Ariadne/bap-admission/p1-validation.json); retained results qualify their earlier source hashes. |
-| P2 | Generic opcode whitelist removed; typed BIL/namespace/width/control/operand checks implemented. | [Bounded P2 record](../../../evidence/Ariadne/bap-admission/p2-validation.json); current corpus has 58 cases and 37 projected forms. Empty CLC remains a recorded lifter gap. |
+| P0 | Completed contract/baseline freeze before runtime edits. | [Independent contract](../../../tests/bap/fixtures/admission/contract.json), [freeze receipt](../../../tests/bap/fixtures/admission/legacy-source.json) and actual four-form rejection reports. |
+| P1 | Four observed forms and thirteen boundary encodings pass independent effects/address/flag checks on both targets. | [Bounded P1 record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/p1-validation.json); retained results qualify their earlier source hashes. |
+| P2 | Generic opcode whitelist removed; typed BIL/namespace/width/control/operand checks implemented. | [Bounded P2 record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/p2-validation.json); current corpus has 58 cases and 37 projected forms. Empty CLC remains a recorded lifter gap. |
 | P3 | Ordinary data-only unknowns continue with all-location possible effects, no definite kills and visible gaps. Rust/native capture admission and report binding enforce the outcome. | Producer–opaque–consumer, direct native tampering, malformed/resource and hidden-control tests pass. Earlier and opaque origins both survive. |
-| P4 | Accepted by the user; historical real-Linux remaining clauses excluded. | [Joined scope record](../../../evidence/Ariadne/real-capture-repin-79938/report.json): 20 native-core gates, Stage 1/Stage E/input/model checks, 25 admission, 12 algorithm and eight boundary mutants, 330 replay observations, product/output parity and unchanged I4/I5 budgets pass. Eighteen historical hashes and six new replacement outputs pass; the old six Linux hashes remain unexercised. Retained Scanner/PreParser implementation/helper identities match. |
+| P4 | Accepted by the user; historical real-Linux remaining clauses excluded. | [Joined scope record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/real-capture-repin-79938/report.json): 20 native-core gates, Stage 1/Stage E/input/model checks, 25 admission, 12 algorithm and eight boundary mutants, 330 replay observations, product/output parity and unchanged I4/I5 budgets pass. Eighteen historical hashes and six new replacement outputs pass; the old six Linux hashes remain unexercised. Retained Scanner/PreParser implementation/helper identities match. |
 
 The v3 profile intentionally changes semantic/content identities. The original
 focused comparison reproduced all 24 historical output hashes. The later resume
@@ -98,7 +103,7 @@ The active P4 campaign is complete under the
 [selected replacement plan](real-capture-repin-79938.md). For future continuation:
 
 1. Preserve failed and passing historical records, the frozen v2 source/tool pin
-   and the [new verified bundle](../../../evidence/Ariadne/real-capture-repin-79938/evidence-manifest.json).
+   and the [new verified bundle](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/real-capture-repin-79938/evidence-manifest.json).
 2. Use the isolated remote SDK/helper and read-only dependency snapshot. Heavy
    local work remains stopped.
 3. Resolve the active artifact through the validated manifest or

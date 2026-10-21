@@ -23,7 +23,7 @@ stage ownership, acceptance gates and execution order for this design.</li>
 — existing target-set certificate and authority for the required extension.</li>
 <li><a href="../../docs/Ariadne/architecture.md#ownership-and-process-boundaries">Source ownership</a> —
 preparation freezes inputs before native or Rust analysis.</li>
-<li><a href="../../evidence/Ariadne/indirect-target-resolution/dump048B-20261012/jump-table-inspection.json">Inspection evidence</a>
+<li><a href="https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/dump048B-20261012/jump-table-inspection.json">Inspection evidence</a>
 — the captured table that motivates the first relative-table profile.</li>
 </ul>
 <p><strong>What remains unresolved.</strong> No resolver API, CLI mode, discovery fixed point,
@@ -275,15 +275,15 @@ bytes yield 45 distinct destinations from 58 entries. Three overlapping copies
 agree; a separate CDB pass agrees with the parsed words, and all candidate
 destination prefixes are captured. Entry 0 has offset <code>-126,503,947</code> and target
 <code>0x00007ff64007a34d</code>. See the retained
-<a href="../../evidence/Ariadne/indirect-target-resolution/dump048B-20261012/jump-table-inspection.json">table record</a>,
-<a href="../../evidence/Ariadne/indirect-target-resolution/dump048B-20261012/jump-table-validation.json">inspection checks</a>
-and <a href="../../evidence/Ariadne/indirect-target-resolution/dump048B-20261012/cdb-jump-table.log">raw CDB log</a>.</p>
+<a href="https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/dump048B-20261012/jump-table-inspection.json">table record</a>,
+<a href="https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/dump048B-20261012/jump-table-validation.json">inspection checks</a>
+and <a href="https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/dump048B-20261012/cdb-jump-table.log">raw CDB log</a>.</p>
 <p>The original analysis used the existing remote 2026-10-10 BAP v3 runtime, with
 only a diagnostic frontend's artifact cap raised from 256 MiB to 2 GiB.
 Native/Rust explanations matched and remained partial: 329 decoded starts,
 388 edges, 15 slice sites, an incoming-RDX boundary, this unresolved indirect
 and three unsupported-control stops. The retained
-<a href="../../evidence/Ariadne/indirect-target-resolution/dump048B-20261012/baseline-summary.json">baseline summary</a>
+<a href="https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/dump048B-20261012/baseline-summary.json">baseline summary</a>
 records its query and runtime scope. It is not a build of the current checkout.</p>
 <p>The supplementary target list did not modify that report, run resolver-enabled
 recovery or certify the final incoming graph. It supplies the expected finite

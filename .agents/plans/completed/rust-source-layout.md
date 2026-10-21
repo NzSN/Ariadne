@@ -46,3 +46,8 @@ Cargo manifest and lockfile. Formal specifications and native helpers retain
 their existing locations. The original Windows capture was missing at this layout checkpoint. The
 later [I4 replacement](../../../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement) closes
 that artifact gap. The later [native performance qualification](../../../docs/Ariadne/workload-performance-design.md#native-investigation-qualification) meets the separate fixed budget; the consolidation record retains its historical scope.
+
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.

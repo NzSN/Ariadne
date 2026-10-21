@@ -1,13 +1,15 @@
 """Active Windows I4 case, independent provenance and capture-only inputs."""
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
+import sys
 import tarfile
 
 ROOT = Path(__file__).resolve().parents[1]
-CASE_RELATIVE = "evidence/Ariadne/investigation-windows-workload-case.json"
-INSPECTION_RELATIVE = "evidence/Ariadne/i4-windows-capture-inspection.json"
-ARCHIVE_RELATIVE = "evidence/Ariadne/bap-windows-workload-inputs.tar.gz"
+CASE_RELATIVE = "tests/input/fixtures/workloads/investigation-windows-workload-case.json"
+INSPECTION_RELATIVE = "tests/input/fixtures/workloads/windows-oracle.json"
+ARCHIVE_RELATIVE = "tests/input/fixtures/workloads/windows-inputs.tar.gz"
 CASE_SCHEMA = "ariadne.investigation-windows-workload-case/v1"
 
 
@@ -65,7 +67,7 @@ def materialize(case, directory, override=None):
     if sha(inspection_path) != case["independentInspection"]["sha256"]:
         raise ValueError("Windows I4 independent inspection changed")
     inspection = json.loads(inspection_path.read_text())
-    if (inspection.get("passed") is not True or inspection.get("independently_decoded_starts") != 98
+    if (inspection.get("independently_decoded_starts") != 98
             or any(inspection["query"].get(k) != case["query"][k]
                    for k in ("entry_va", "seed_va", "producer_va"))
             or inspection["inputs"]["dump"]["sha256"] != case["capture"]["sha256"]
@@ -96,6 +98,28 @@ def materialize(case, directory, override=None):
     if (sha(directory / "ariadne_crash_demo.exe") != case["companion"]["sha256"]
             or sha(directory / "witness.json") != inspection["inputs"]["witness"]["sha256"]):
         raise ValueError("Windows I4 companion or witness identity mismatch")
+    # Execute the independent byte/PE/context/checksum recipe on the test input.
+    # A stored successful inspection never supplies this result.
+    module_root = ROOT / "native/crashpad-demo"
+    sys.path.insert(0, str(module_root))
+    try:
+        spec = importlib.util.spec_from_file_location("ariadne_workload_fixture", module_root / "inspect_workload.py")
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        files = []
+        try:
+            for path in (dump, directory / "witness.json", directory / "ariadne_crash_demo.exe"):
+                files.append(module.BinaryFile(path))
+            current = module.inspect(*files)
+        except module.InspectionError as error:
+            raise ValueError("independent capture inspection failed: " + str(error)) from error
+        finally:
+            for stream in files:
+                stream.close()
+        if current["independently_decoded_starts"] != 98:
+            raise ValueError("independent workload recipe differs")
+    finally:
+        sys.path.pop(0)
     if override is not None:
         dump = Path(override).resolve()
         if sha(dump) != case["capture"]["sha256"] or dump.stat().st_size != case["capture"]["bytes"]:

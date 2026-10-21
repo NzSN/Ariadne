@@ -20,7 +20,7 @@ CASE = {
     },
     "expectations": {"decodedStarts": 98, "windowsBudgetMs": None, "timingPolicy": "unlimited"},
     "inputArchive": {
-        "path": "evidence/Ariadne/bap-windows-workload-inputs.tar.gz",
+        "path": "tests/input/fixtures/workloads/windows-inputs.tar.gz",
         "sha256": "f" * 64,
         "captureMember": "capture.dmp",
     },

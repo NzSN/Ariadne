@@ -4,9 +4,9 @@
 
 **Status.** All five replacement stages completed remotely and P4 accepted by
 the user on 2026-10-10, with remaining historical real-Linux clauses excluded.
-The [acceptance decision](../../../evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
+The [acceptance decision](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
 records that scope separately from the retained test results.
-The [qualification record](../../../evidence/Ariadne/real-capture-repin-79938/report.json)
+The [qualification record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/real-capture-repin-79938/report.json)
 binds independent inspection, fresh output identity, native-default/product
 qualification and unchanged fixed budgets.
 
@@ -24,7 +24,7 @@ relabeled and no real-Linux acceptance is inferred from this Windows case.
   requires independently established earlier entries and capture-only bytes.
 - [Replacement record](../../../docs/Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query) — selected
   identity, boundaries, validation and unresolved scope.
-- [Active manifest](../../../evidence/Ariadne/real-capture-workload-case.json) — exact
+- [Active manifest](../../../tests/input/fixtures/workloads/real-capture-workload-case.json) — exact
   metadata and resource/budget premises for every active workload consumer.
 
 **What remains unresolved.** Current-source repeatability, product/aggregate and
@@ -32,6 +32,11 @@ relabeled and no real-Linux acceptance is inferred from this Windows case.
 and its six historical outputs remain unexercised and excluded from accepted P4.
 No required replacement stage remains. The capture provides no trace
 or root-cause attribution; the explanation retains memory/entry uncertainty.
+
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## Stages and acceptance
 

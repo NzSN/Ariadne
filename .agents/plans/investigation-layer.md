@@ -5,8 +5,8 @@
 **Status.** Current stage/status plan updated on 2026-10-20. The bounded frame-path
 question requests fewer than `NP` possible paths. Its finite Windows AMD64
 model/mutation and original physical-frame 1→0 clauses pass their
-[separate qualification](../../evidence/Ariadne/frame-paths/20261020/README.md). I5c fault-time address
-wrap has [finite W0 qualification](../../evidence/Ariadne/address-wrap/20261020/w0/README.md).
+[separate qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/20261020/README.md). I5c fault-time address
+wrap has [finite W0 qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/address-wrap/20261020/w0/README.md).
 W1–W3 pass their recorded binding, pilot and full finite/native matrix gates.
 W4 sources are implemented with product/capture gates pending; W5 and full
 acceptance remain pending. Existing I5a/I5b and native I4 deliveries retain their scope.
@@ -71,6 +71,11 @@ later changes need fresh or exact-inventory-verified acceptance. Other hypothese
 and cross-capture capabilities remain later work.
 
 The [documentation map](../../docs/documentation-map.md) is optional navigation.
+
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## Current stage ledger
 
@@ -203,7 +208,7 @@ No renderer or language model may introduce facts absent from the typed result.
 
 ## I4 — Qualified tier and remaining Windows clause
 
-The [latest source-bound repair record](../../evidence/Ariadne/investigation-correctness-validation.json)
+The [latest source-bound repair record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/investigation-correctness-validation.json)
 retains 17 passing investigation gates, including the nested 12-gate Stage E and
 11-gate minidump campaigns, 13 detected investigation/producer mutants and two
 controlled Python decision mutants. The 24 default reports compared before/after
@@ -216,9 +221,9 @@ and finite resource exhaustion. Compile failures and tool timeouts receive no
 mutation-sensitivity credit.
 
 **Historical re-pin baseline:** the user-authorized
-[active case](../../evidence/Ariadne/investigation-windows-workload-case.json) replaces
+[active case](../../tests/input/fixtures/workloads/investigation-windows-workload-case.json) replaces
 the unavailable Electron artifact with an independently inspected real Windows
-98-instruction Crashpad capture. The [re-pin record](../../evidence/Ariadne/i4-windows-repin-validation.json)
+98-instruction Crashpad capture. The [re-pin record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i4-windows-repin-validation.json)
 passes all 17 implementation gates and capture/query checks. One warm-up and five
 measured native-default explanation-CLI repeats yield **4,774.451 ms**, exceeding
 the unchanged **2,000 ms** ceiling. That record’s full I4 acceptance was false solely on
@@ -290,9 +295,9 @@ selected instruction's unsigned base plus signed encoded displacement leaves
 `[0, 2^64-1]` before reduction. The [W0–W5 plan](i5c-address-wrap.md) owns its
 question-level model, exact binding, finite MOV matrix, strict result/product
 modes and separate fixture/controlled-capture qualification. Its
-[W0 evidence](../../evidence/Ariadne/address-wrap/20261020/w0/README.md) qualifies
+[W0 evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/address-wrap/20261020/w0/README.md) qualifies
 the finite model/oracle and synthetic-input scope. The later
-[W3 record](../../evidence/Ariadne/address-wrap/20261021/w3/README.md) qualifies
+[W3 record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/address-wrap/20261021/w3/README.md) qualifies
 all 140 decisions, 44 binding controls, 24 serialized controls and 114 native
 raw cases. W4 sources are implemented with product/capture gates pending; W5
 and full-feature acceptance remain pending.
@@ -320,7 +325,7 @@ loop, depth, byte and deadline budgets are required to bound the work.
 The [F0–F4 execution plan](frame-path-enumeration.md) now records source
 implementation of a finite captured frame adapter, bounded graph composition,
 separate API/report/CLI and fixture/native parity checks. The
-[2026-10-20 evidence](../../evidence/Ariadne/frame-paths/20261020/README.md) qualifies
+[2026-10-20 evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/20261020/README.md) qualifies
 the six finite model configurations, compiled mutation controls, original
 physical-frame 1→0 listing and helper-free replay under the selected 32-node,
 two-visit path policy. Coverage remains partial under those restrictions.

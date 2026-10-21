@@ -41,6 +41,11 @@ and unresolved control targets can keep results partial. PE/ELF image and ELF
 core readers remain deferred. Qualification is specific to its recorded sources,
 tools and corpus; see the [accepted P4 scope](../../.agents/plans/completed/bap-projection-admission.md).
 
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## Reading this guide
 
 - [Pipeline](#main-minidump-pipeline) and [ownership](#ownership-and-process-boundaries).
@@ -408,7 +413,7 @@ commands are reproduction instructions, not results from this documentation chan
 
 The [completed layout plan](../../.agents/plans/completed/rust-source-layout.md) moved
 all 86 tracked Rust files at that checkpoint into the root package. The count is
-historical. The [validation record](../../evidence/Ariadne/rust-source-layout-validation.json)
+historical. The [validation record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/rust-source-layout-validation.json)
 binds the following retained equivalence checks:
 
 | Check | Recorded result |
@@ -422,15 +427,15 @@ binds the following retained equivalence checks:
 Generated bindings, captured/BAP/IR fixtures, engine/model sources, specifications
 and the retired Lean tree retained their bytes at that checkpoint. The merged
 lockfile introduced no external package/version identities beyond the earlier
-locks. The [manifest](../../evidence/Ariadne/rust-source-layout-evidence-manifest.json)
-binds the [reports and logs](../../evidence/Ariadne/rust-source-layout-evidence.tar.gz).
+locks. The [manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/rust-source-layout-evidence-manifest.json)
+binds the [reports and logs](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/rust-source-layout-evidence.tar.gz).
 The then-missing Windows artifact and later re-pin/performance decisions are
 recorded in the [workload design](workload-performance-design.md); the layout
 change itself added no semantic, historical-execution or root-cause capability.
 
 ## Installed-tool compatibility (2026-10-01)
 
-The [installed compatibility record](../../evidence/Ariadne/installed-modelmirrors-compatibility-validation.json)
+The [installed compatibility record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/installed-modelmirrors-compatibility-validation.json)
 checked the actual `/home/nzsn/.local/bin/ModelMirrors` executable against the
 recorded MirrorRust client and evaluators. All 11 local-stdio negotiated-replay
 checks passed within this initial tier:

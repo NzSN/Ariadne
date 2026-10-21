@@ -1,0 +1,34 @@
+{
+  "linux": {
+    "explanation.dot": "2d1ae6c407377631301074344f2218a2641bdda4b2e3ff884e8e6bfbe4cdcab5",
+    "explanation.json": "e7e958c91b41accb08c58e9cf09dde12c581471626f5d005b9266dba0bc2b879",
+    "explanation.txt": "f08705a669fa0b67f6938b86f520fb541930f520a04875b8a0c230cd11ea8a15",
+    "report.dot": "98d566e700176348db8b7da3eeab692f2f8deba4386038aaf86ff7bec3693f31",
+    "report.json": "83eceed93e1ad9327bf810df829d2f5d4718d555c01869e754471252c3a43cbc",
+    "report.txt": "4b1d93de9826621a17f3fbbb8ac0f20176bcefae89fc26ed5a485838151a11ba"
+  },
+  "windows": {
+    "explanation.dot": "27f27758b43babfbe4274531edc201cbe72b88ab26ee19938405bb0909c465ec",
+    "explanation.json": "569c9759e30e1418f5d4643dfb7b333a142044fe66423e8d4e9b462da2484cf8",
+    "explanation.txt": "10a01a3d73b517837341f31caf38632c8cdf99130620cc8b757b87ed09a0b5b4",
+    "report.dot": "d1b6009b65c4e6e13221ac96ac8f4bb1257acf7cc1a315a43b5cc85d14d21cdf",
+    "report.json": "b55a3c36770fb719e2a6237251711884102a9d3aa805114561d45493c4840a16",
+    "report.txt": "dc5ccb3c01df45e4c54234d531cb5949b5e205433bc0c6f4f9f6d1145e96b1fc"
+  },
+  "not": {
+    "explanation.dot": "1e2ee584f7930146970f9afe274ccbc205701b9eedfa8a4335940ee04661de78",
+    "explanation.json": "798127db3c2d7982aedf3c5da793a131a0018efe032fd1b249f37898861069ba",
+    "explanation.txt": "8886efa8109a905154571cef2529cb4b2439c077834a42a0379a17e50a61d175",
+    "report.dot": "f354ebe35378da3bf99e6d219bfda61c2eb2513d6502db05bcac3b9a363f0130",
+    "report.json": "af8359d65ec968697396314b53aa7eee624fd87fc4b355a7c74cbc0a7d691a11",
+    "report.txt": "b5c93c4053dd85e9d4401399d10a77853f55db63b3333601ce92990d1e3292dc"
+  },
+  "real-linux": {
+    "explanation.dot": "e25e663cd28a52d2d787062de650629622a796f1f1abfc6216093f3f7c1227ef",
+    "explanation.json": "339ed5d49819b2d7fa76919e9e692419d8bf1716dfcc3024af1d07777d3cab5c",
+    "explanation.txt": "2f5a8fcc45c42684cc4e72aa0167c29368740908c900d418bf5758bd7b556e35",
+    "report.dot": "18005c8b2eb0839550cd81bcde3e08b873966fe91c1aa7d008cfb0b3353cba9d",
+    "report.json": "c7a5df1f8cb93a2cb3646162de217a26e610e395aa6131cccc0bec2f6dec492b",
+    "report.txt": "9a0bf7fa559cbe7c91f19405e38c20fbb6bdd51940300d0c32ee4825e87484ce"
+  }
+}

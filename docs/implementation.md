@@ -59,6 +59,11 @@ helper, while this guide's `Analyzer` API describes the explicit Rust reference.
 Preparation freezes inputs before either analyzer runs.
 PE/ELF images and ELF core readers remain pending.
 
+Current validation follows the [executable test matrix](../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## Build and use
 
 The crate uses Rust 2024 with a declared minimum Rust version of 1.85. Validation
@@ -67,8 +72,9 @@ and IR adapters. `--no-default-features` retains the standard-library-only core;
 `bench` and `mbt` enable benchmark binaries and generated MirrorRust replay.
 One root Cargo lockfile covers all feature selections.
 
-The optional `property-tests` feature enables pinned Proptest only for the
-[frame-path generated properties](Ariadne/investigation-design.md#frame-path-property-based-coverage).
+The optional `property-tests` feature enables pinned Proptest for
+[core generated conformance](Ariadne/semantic-assurance.md#running-generated-validation)
+and [frame-path/unwind properties](Ariadne/investigation-design.md#frame-path-property-based-coverage).
 Default and core-only builds do not activate it; use the documented feature
 commands to exercise shrinking graph and synthetic-capture properties.
 
@@ -245,7 +251,7 @@ obligations. Missing seeds and unvisited references remain visible. See the
 ## Bounded compact completion
 
 The [caller S6 contract](Ariadne/caller-semantic-coverage-design.md#s6-bounded-completion-continuation-2026-10-19)
-and [qualification](../evidence/Ariadne/caller-semantic-coverage/20261019/README.md)
+and [qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/caller-semantic-coverage/20261019/README.md)
 cover completion-only RPO scheduling and exact shared membership. Ordinary
 `step`/named-action replay retains its lowest-address schedule. Both compute
 the same least fixed point over recovered local edges, including summaries,

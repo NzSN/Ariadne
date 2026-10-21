@@ -3,7 +3,7 @@
 ## Context and follow-up
 
 **Status.** M0–M4 pass the selected bounded memory-refinement profile with
-[remote qualification dated 2026-10-19](../../evidence/Ariadne/frame-question/20261019/README.md). The complete declared Scanner
+[remote qualification dated 2026-10-19](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md). The complete declared Scanner
 candidate-table case, independent oracles, revised component model and five
 dedicated compiled mutations pass. Earlier source/local records remain historical.
 
@@ -14,7 +14,7 @@ defines candidate-preserving writer assessment and scoped backward scalar facts.
 ledger for that design, including source-bound mathematical, semantic-receipt,
 product and captured-Scanner evidence.
 
-**Where to go next.** Read the canonical design, [new qualification](../../evidence/Ariadne/frame-question/20261019/README.md),
+**Where to go next.** Read the canonical design, [new qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md),
 [section-5 integration](frame-question-investigation.md),
 [Scanner follow-up](scanner-partial-explanation.md),
 [model guide](../../Specs/README.md) and [BAP trust boundary](../../docs/Ariadne/semantic-assurance.md).
@@ -24,6 +24,11 @@ unresolved; qualification does not identify a historical writer. General alias
 precision, joint-state/loop-instance reconstruction, root cause and universal
 refinement remain outside the profile. Scanner S2–S4, caller S6, frame-path F4
 and broad release acceptance remain separate.
+
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## Execution ledger
 
@@ -83,7 +88,7 @@ changed sources automatically.
 
 ## 2026-10-19 remote M4 completion
 
-The [remote record](../../evidence/Ariadne/frame-question/20261019/README.md)
+The [remote record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md)
 retains the current component typecheck/TLC run, 784 range/1,280 inverse oracle
 cases, five compiled behavioral mutations with passing original controls,
 finite live probes and the complete declared Scanner case. The hardened

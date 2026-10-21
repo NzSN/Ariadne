@@ -15,7 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 DRIVER = ROOT / "tests/bap/legacy_guard_capture.ml"
 SOURCE = ROOT / "native/bap-core/legacy_guard.ml"
-FIXTURE = ROOT / "evidence/Ariadne/loop-aware-target-resolution/20261015/artifacts/validation-20261015T050857/passing-combined-wire.json"
+FIXTURE = ROOT / "tests/bap/fixtures/loop-closure/native-wire.json"
 
 
 def sha(path):

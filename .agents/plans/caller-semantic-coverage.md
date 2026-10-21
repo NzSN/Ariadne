@@ -2,15 +2,20 @@
 
 ## Context and follow-up
 
-**Status.** S0–S6 complete within the [2026-10-19 original Windows profile](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md). Final caller/callee requests and full states match across Rust/native implementations; every reaching row is independently checked. October 15 entries remain historical.
+**Status.** S0–S6 complete within the [2026-10-19 original Windows profile](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/caller-semantic-coverage/20261019/README.md). Final caller/callee requests and full states match across Rust/native implementations; every reaching row is independently checked. October 15 entries remain historical.
 
-**Why this document exists.** [Original-dump probe `051409`](../../evidence/Ariadne/loop-aware-target-resolution/20261015/artifacts/dump-20261015T051409/probe-summary.json) closes both cyclic jump certificates but leaves 30 caller barriers. Remote four-shape probe `060803` reproduces each instruction-class failure through the actual public preparation path.
+**Why this document exists.** [Original-dump probe `051409`](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/loop-aware-target-resolution/20261015/artifacts/dump-20261015T051409/probe-summary.json) closes both cyclic jump certificates but leaves 30 caller barriers. Remote four-shape probe `060803` reproduces each instruction-class failure through the actual public preparation path. The [test matrix](../../tests/README.md) defines current validation.
 
 **What this document establishes.** Execution order, ownership, independent negative controls and remote gates for item 2 of the blocker inventory.
 
-**Where to go next.** Read the [new qualification](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md), [canonical design](../../docs/Ariadne/caller-semantic-coverage-design.md), [completion implementation](../../docs/implementation.md) and remaining [frame-path F4](frame-path-enumeration.md).
+**Where to go next.** Read the [new qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/caller-semantic-coverage/20261019/README.md), [canonical design](../../docs/Ariadne/caller-semantic-coverage-design.md), [completion implementation](../../docs/implementation.md) and remaining [frame-path F4](frame-path-enumeration.md).
 
 **What remains unresolved.** Later MOVAPS alignment, two callee indirect targets, frame-path F4, broader release/large-report qualification, execution history/root cause and universal refinement remain outside this completion. The original full-caller budget gate is met.
+
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## Stages and ownership
 
@@ -75,7 +80,7 @@ The confirmed RED run is `/loop-work/evidence/caller-barriers-20261015T060803`: 
 
 ## Completion boundary
 
-S6 is complete under the [new source-bound qualification](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md).
+S6 is complete under the [new source-bound qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/caller-semantic-coverage/20261019/README.md).
 The exact original caller/callee inputs and full completed states match, with
 unchanged roots, target sets and premises. Later alignment, callee barriers and
 frame-path acceptance remain independently reported. Normal-flow completion

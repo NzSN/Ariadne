@@ -61,3 +61,8 @@ and machine-readable record distinguish removal acceptance from the still
 incomplete full Windows/Stage 1 qualification. LLVM's role is decoded-fact
 validation and historical/supplied-IR research, with no production semantic
 selection or fallback. The user has authorized committing this change; push remains a separate action.
+
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.

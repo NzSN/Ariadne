@@ -27,7 +27,7 @@ Prepared 2026-10-01. Design: [typed replay integration](../../../docs/Ariadne/ty
 This stage connects the two existing Stage E Rust engines to the sibling
 `MirrorRust` checkout. It does not close the broader Stage E acceptance campaign.
 
-Completed 2026-10-01. The [retained validation record](../../../evidence/Ariadne/stage-e-mirrorrust-integration-validation.json)
+Completed 2026-10-01. The [retained validation record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/stage-e-mirrorrust-integration-validation.json)
 contains four complete Stage E fixture traces and 20 matched observations,
 both pre-factory wrong-digest rejections, seven supporting tests, formatting
 and Clippy checks. The restored core gate also passed its 12 traces,
@@ -54,3 +54,8 @@ are delivered within this first-stage scope.
 Further Stage E work: expand generated input/trace coverage, mechanical engine
 mutants and retained mismatch evidence, recovery/native-adapter coverage, and
 independent report/CLI integration. Fixture replay alone is not Stage E completion.
+
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.

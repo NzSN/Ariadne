@@ -8,9 +8,9 @@ The restored native helper rejects the Scanner query when a response exceeds
 second. This plan preserves that per-frame limit and the analysis equations.
 Remote root/native/model/replay/mutation checks and large-result parity pass,
 including twelve hostile page/lifecycle modes. Scanner now completes through
-paging. The [remote record](../../../evidence/Ariadne/bap-admission/remote-20261010/report.json)
+paging. The [remote record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/remote-20261010/report.json)
 retains its original identities and explicit gaps. The later
-[acceptance decision](../../../evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
+[acceptance decision](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
 accepts P4 on the selected Windows corpus and excludes the remaining historical
 real-Linux clauses. Heavy work must remain on the remote machine.
 
@@ -35,6 +35,11 @@ universal refinement or identify an executed path. Result-size/action/time
 exhaustion still fails without publishing a partial analysis. The missing
 historical controlled Linux capture is excluded from the accepted P4 scope;
 its coverage and output hashes remain unexercised.
+
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## Contract and ownership
 

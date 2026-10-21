@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "volume": 1,
+      "publication": "24592",
+      "revision": "3.25",
+      "release_date": "2026-05-28",
+      "retrieved": "2026-09-22",
+      "filename": "24592_3.25_APM_Vol1_PUB.pdf",
+      "content_url": "https://docs.amd.com/api/khub/documents/OdDzCKsU4uf~KbI1htdPvA/content",
+      "viewer_url": "https://docs.amd.com/v/u/en-US/24592_3.25_APM_Vol1_PUB",
+      "sha256": "aed9236b718ae86cdb49f7d628f4ebb1a4bdce1a012df6cf6aad6735776c8a38",
+      "bytes": 4774887,
+      "pdf_pages": 396,
+      "numbered_sections": 298
+    },
+    {
+      "volume": 2,
+      "publication": "24593",
+      "revision": "3.45",
+      "release_date": "2026-07-29",
+      "retrieved": "2026-09-22",
+      "filename": "24593_3.45_APM_Vol2_PUB.pdf",
+      "content_url": "https://docs.amd.com/api/khub/documents/LNBl5evreogi0r25VIFF2g/content",
+      "viewer_url": "https://docs.amd.com/v/u/en-US/24593_3.45_APM_Vol2_PUB",
+      "sha256": "7257d41d3584822edb7934e2c630c7d3865eea30c0ab95b8de4e546088d5ea9a",
+      "bytes": 11394894,
+      "pdf_pages": 875,
+      "numbered_sections": 773
+    },
+    {
+      "volume": 3,
+      "publication": "24594",
+      "revision": "3.38",
+      "release_date": "2026-07-21",
+      "retrieved": "2026-09-22",
+      "filename": "24594_3.38_APM_Vol3_PUB.pdf",
+      "content_url": "https://docs.amd.com/api/khub/documents/BqEoC2FadIAgbrUdEzDJIg/content",
+      "viewer_url": "https://docs.amd.com/v/u/en-US/24594_3.38_APM_Vol3_PUB",
+      "sha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "bytes": 31234038,
+      "pdf_pages": 728,
+      "numbered_sections": 71,
+      "general_purpose_reference_entries": 154
+    }
+  ]
+}

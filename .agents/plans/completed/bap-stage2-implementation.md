@@ -30,6 +30,11 @@ and cross-platform packaged release qualification remain separate.
 
 For wider context, see the [documentation map](../../../docs/documentation-map.md).
 
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## Fixed implementation decisions
 
 - Extend `native/bap-core/`, keeping the packaged Stage 1 lifter separate.

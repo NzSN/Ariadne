@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Source-frozen P4 qualification; external Electron acceptance stays a separate tier."""
-import argparse,hashlib,json,os,shutil,subprocess,tarfile,time
+import argparse,hashlib,json,os,shutil,subprocess,time
 from datetime import datetime,timezone
 from pathlib import Path
+from run_output import run_output
 import check_bap_core
 from with_mirrorrust_snapshot import active_identity
 ROOT=Path(__file__).resolve().parents[1]
@@ -12,7 +13,7 @@ def sha(p):
   for block in iter(lambda:f.read(1024*1024),b''):h.update(block)
  return h.hexdigest()
 def main():
- parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--output',type=Path,required=True);args=parser.parse_args();out=args.output.resolve();out.mkdir(parents=True,exist_ok=False)
+ parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--output',type=Path,required=True);args=parser.parse_args();out=run_output(args.output);out.mkdir(parents=True,exist_ok=False)
  before=check_bap_core.sources();identity=active_identity()
  if identity is None:raise SystemExit('sealed dependency snapshot required')
  env={**os.environ,'ARIADNE_BAP_CORE_DIR':str(ROOT/'target/bap-core-native'),'ARIADNE_LLVM_MC':str(ROOT/'target/ariadne-llvm-mc'),'ARIADNE_BAP_HELPER':str(ROOT/'target/ariadne-bap-lift'),'BAP_RUNTIME_ROOT':str(ROOT/'tmp/bap-setup/stable')}
@@ -56,25 +57,4 @@ def main():
  report=dict(schema='ariadne.bap-admission-qualification/v1',recordedUtc=datetime.now(timezone.utc).isoformat(),passed=passed,sourceFixtureTierQualified=passed,rustReleaseRuntimeTierQualified=passed,nativeDefaultTierQualified=passed,externalCaptureTier=external,fullPlanAcceptance=False,sourcesStable=before==check_bap_core.sources(),sourceHashes=before,qualificationEnvironment=identity,gates=gates,records=nested,error=error,projection='bap-bit-provenance-v6',scope='finite v6 vector/scalar projection and shift-count compatibility with native/model/mutation/owned-capture qualification; external Electron tier separate, no root-cause or universal ISA/refinement proof')
  (out/'report.json').write_text(json.dumps(report,indent=2)+'\n');print('Report:',out/'report.json',flush=True)
  if not passed:raise SystemExit(1)
- archive=out/'evidence.tar.gz';entries={}
- with tarfile.open(archive,'w:gz') as tar:
-  def add(p,name):
-   if name in entries:return
-   entries[name]=sha(p);tar.add(p,arcname=name,recursive=False)
-  for p in before:add(ROOT/p,'sources/'+p)
-  for p in (ROOT/'evidence/Ariadne/bap-admission').rglob('*'):
-   if p.is_file():add(p,'p0-p3/'+str(p.relative_to(ROOT/'evidence/Ariadne/bap-admission')))
-  for i,directory in enumerate(dict.fromkeys(artifact_roots)):
-   for p in sorted(directory.rglob('*')):
-    if p.is_file() and p!=archive and '__pycache__' not in p.parts and p.suffix in ['.json','.log','.txt','.dot','.csv','.diff','.gz','.ml','.stderr','.stdout','.time']:
-     add(p,f'artifacts/{i}/'+str(p.relative_to(directory)))
-  add(Path(identity['manifestPath']),'dependencies/mirrorrust-snapshot.json')
- actual={}
- with tarfile.open(archive,'r|gz') as tar:
-  for m in tar:
-   if not m.isfile():continue
-   actual[m.name]=hashlib.sha256(tar.extractfile(m).read()).hexdigest()
- if actual!=entries:raise RuntimeError('archive member verification failed')
- manifest=dict(schema='ariadne.bap-admission-evidence/v1',verified=True,archiveSha256=sha(archive),qualificationReportSha256=sha(out/'report.json'),entries=entries)
- (out/'evidence-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n');print('Verified archive:',archive,flush=True)
 if __name__=='__main__':main()

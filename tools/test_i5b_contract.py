@@ -90,10 +90,16 @@ class AggregateReuseTests(unittest.TestCase):
         import check_i5b
         import check_bap_core
         import i5a_native_contract as contract
-        # A real retained producer record supplies the independent gate shape;
-        # only live identities are mocked to exercise admission controls.
-        record = json.loads((subject.ROOT/'evidence/Ariadne/i5b-qualification.json').read_text())[
-            'records']['native-core-stage-e-input-bap-regressions']
+        names = {'sdk-inventory','sdk-smoke','helper-build','helper-clean-build',
+                 'format','root-tests','core-only-tests','all-feature-clippy','rust-layout',
+                 'documentation','contract-regressions','native-kernels','capture-investigation-cli',
+                 'native-stateflow-cli','native-generated-replay','native-algorithm-mutations',
+                 'native-boundary-mutations','stage1-regression','release-build','native-product-workloads'}
+        record = dict(passed=True, sourcesStable=True, toolsStable=True,
+                      stage2Qualified=True, defaultNativeVerified=True, candidateOnly=False,
+                      sourceHashes={'source':'hash'}, tools={'qualificationEnvironment':{'snapshot':'hash'}},
+                      gates=[dict(gate=name,exitCode=0) for name in sorted(names)],
+                      records={'generatedReplay':{'helperManifest':{'helper':'hash'}}})
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory)/'report.json'
             with patch.object(check_bap_core,'sources',return_value=record['sourceHashes']), \

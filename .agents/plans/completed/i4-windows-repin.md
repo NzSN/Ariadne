@@ -27,13 +27,13 @@ I4 verdict. The original manifest and older records remain historical, and the
 - [Delivery and validation](../../../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement) —
   completed re-pin, historical samples and its accepted performance successor.
 
-- [Active case](../../../evidence/Ariadne/investigation-windows-workload-case.json) — exact
+- [Active case](../../../tests/input/fixtures/workloads/investigation-windows-workload-case.json) — exact
   capture, query, provenance and fixed timing contract.
-- [Independent inspection](../../../evidence/Ariadne/i4-windows-capture-inspection.json)
+- [Independent inspection](../../../tests/input/fixtures/workloads/windows-oracle.json)
   — raw captured bytes, PE equality and producer/fault witness.
 - [Investigation contracts](../../../docs/Ariadne/investigation-design.md) — meaning
   of possible producers, uncertainty and exact-query acceptance.
-- [Original case](../../../evidence/Ariadne/priority-4-real-capture-case.json) — preserved
+- [Original case](../../../tests/input/fixtures/workloads/priority-4-real-capture-case.json) — preserved
   historical identity, not retroactively qualified by this replacement.
 - [Capture recipe](../../../native/crashpad-demo/README.md) — native Windows producer and
   existing independently inspected 98-instruction input bundle.
@@ -42,6 +42,11 @@ I4 verdict. The original manifest and older records remain historical, and the
 exact capture/query timing clause. Later source/tool changes require refreshed
 qualification. The replacement does not reconstruct the original crash or establish an executed
 history, UAF, object lifetime or general root cause.
+
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## Frozen replacement contract
 

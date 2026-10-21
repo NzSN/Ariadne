@@ -47,7 +47,7 @@ import tempfile
 
 DUMP_SHA256 = "9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab"
 # Canonical encode_request bytes in the retained S6 manifest:
-# evidence/Ariadne/caller-semantic-coverage/20261019/manifest.json.
+# the explicit input reports, which are validated against the live capture.
 S6_NORMALIZED_SHA256 = {
     0: "9de5f240615225de915605c7af0b76c31dbc67ba9d82061522b77c2328c22a4f",
     1: "6b5afebea31cff34103ddb38e4bf795ce63660eb9eb375804aff8a340a4bed22",
@@ -1070,8 +1070,7 @@ def main():
                             "src/investigation/validate.rs", "src/investigation/model.rs",
                             "src/input/minidump.rs", "src/input/address_space.rs",
                             "src/bap/guard_admission.rs", "src/bap/target_resolution.rs",
-                            "src/bap/terminal_control.rs",
-                            "evidence/Ariadne/caller-semantic-coverage/20261019/manifest.json")
+                            "src/bap/terminal_control.rs")
             result["observer_and_contract_source_sha256"] = {
                 relative: file_hash(root / relative) for relative in source_paths}
             artifacts = {name: {"path": str(path.resolve()), "bytes": path.stat().st_size,

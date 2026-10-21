@@ -1,0 +1,32 @@
+{
+  "query": {
+    "entry_va": "0x00007ff7382f4840",
+    "seed_va": "0x00007ff7382f49b4",
+    "producer_va": "0x00007ff7382f49b1",
+    "entry_points": [
+      "0x00007ff7382f4840"
+    ],
+    "slice_seeds": [
+      "0x00007ff7382f49b4"
+    ],
+    "memory_access_index": 0
+  },
+  "independently_decoded_starts": 98,
+  "inputs": {
+    "dump": {
+      "path": "/home/nzsn/Repos/Ariadne/target/i4-repin-candidate/inputs/capture.dmp",
+      "size_bytes": 217936,
+      "sha256": "1bd80af7a739471a7026776bfb37cbbe5953d01ad122e7cf7db0392f84da0b0a"
+    },
+    "witness": {
+      "path": "/home/nzsn/Repos/Ariadne/target/i4-repin-candidate/inputs/witness.json",
+      "size_bytes": 780,
+      "sha256": "b408eaa7e8700127ca41ec9aee85a7d8241b8c1314cd785d2c83347f373605b2"
+    },
+    "executable": {
+      "path": "/home/nzsn/Repos/Ariadne/target/i4-repin-candidate/inputs/ariadne_crash_demo.exe",
+      "size_bytes": 428032,
+      "sha256": "00906b04af5dfcfff66b15657e81c08152f3e49479820bf084123c41286fc89e"
+    }
+  }
+}

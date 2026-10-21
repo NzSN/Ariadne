@@ -2,7 +2,7 @@
 
 ## Context and follow-up
 
-**Status.** SF0–SF6 are complete within the [2026-10-16 qualified scope](../../evidence/Ariadne/frame-structure/20261016/README.md).
+**Status.** SF0–SF6 are complete within the [2026-10-16 qualified scope](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-structure/20261016/README.md).
 The corrected source capsule is `8266a844e60e3afbcaa8f0bba557899a0466e18940d8fa881630377cf78bb37c`
 (1,093 files), based on `4811d7de6f2b86319135a5f0a1a18c397a4cd4c2`. Runtime, model,
 oracle, compiled mutation, compatibility, original-dump and saved-replay evidence
@@ -10,7 +10,7 @@ have separate source/tool receipts. The original planning review at
 `6192dee19a5b2f133177a21187952e28d603c2d9` remains historical.
 
 **Why this document exists.** The [canonical structural-report design](../../docs/Ariadne/investigation-design.md#structural-frame-report-before-dataflow)
-addresses a concrete coupling: the [retained caller run](../../evidence/Ariadne/caller-semantic-coverage/20261015/README.md#original-dump-result)
+addresses a concrete coupling: the [retained caller run](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/caller-semantic-coverage/20261015/README.md)
 recovered control flow but exhausted dataflow before the existing frame binder
 could consume it. Stage 5.1 delivers a separate structural result.
 
@@ -23,7 +23,7 @@ for this stage. The investigation design owns the resulting API and contracts.
 and [BAP usage](../../docs/Ariadne/bap-analysis-core-design.md#backend-usage).
 The [existing frame-path plan](frame-path-enumeration.md) and
 [caller-coverage S6 ledger](caller-semantic-coverage.md) keep their separate gates.
-The [dated qualification record](../../evidence/Ariadne/frame-structure/20261016/README.md)
+The [dated qualification record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-structure/20261016/README.md)
 binds the exercised sources, finite controls, final dump and saved replay to
 their declared qualification scope.
 
@@ -38,6 +38,11 @@ writer refinement remain outside this stage. The caller unknown guarded load,
 two callee indirect target boundaries and opaque call context remain explicit.
 Caller-coverage S6, frame-path F4, full caller state parity and executed history
 retain their separate unmet gates.
+
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## Frozen delivery contract
 
@@ -75,7 +80,7 @@ are frozen.
 | W2 / SF2: prepared-capture binding | Input owner: `src/input/frame_structure.rs`, existing `capture_context`/validation seams, input exports, focused `tests/input/` and root manifest targets. | SF1 | Final-request and capture/proof validation; preparation diagnostics never become sealed graphs. |
 | W3 / SF3: frame structure | Investigation owner: `src/investigation/frame_structure.rs`, module exports and shared active-call helper; focused investigation tests. | SF2 | Independently useful frame maps, verified adjacent-call links, typed gaps/frontiers and aggregate policy checks. |
 | W4 / SF4: codecs and CLI | Product owner: `src/reports/frame_structure.rs`, reports exports, `src/bin/ariadne-minidump.rs`, focused report/CLI tests and root test registrations. | SF3 | Strict saved replay, JSON/text/DOT views and explicit structural mode without any full-completion call. |
-| W5 / SF5: finite qualification | Qualification owner plus independent reviewer: isolated remote model/oracle/replay/mutation jobs and source/tool records under `evidence/Ariadne/frame-structure/`. | SF4 | Applicable root, fixture/capture, model and behavioral mutation gates; compatibility and source identity checked. |
+| W5 / SF5: finite qualification | Qualification owner plus independent reviewer: isolated remote model/oracle/replay/mutation jobs and source/tool records under `https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-structure/`. | SF4 | Applicable root, fixture/capture, model and behavioral mutation gates; compatibility and source identity checked. |
 | W6 / SF6: dump and reconciliation | Root/corpus owner: original-dump driver, retained qualification bundle, canonical usage/validation summary and this ledger. | SF5 | Public API and CLI structural report on the named dump; independent replay/control equality and explicit remaining gaps. |
 
 ## Fine-grained task ledger
@@ -276,7 +281,7 @@ Use `dump_03958DA4FCA844A786262A1053`, SHA-256
 thread 23668, physical pair 1 → 0. Start from the exact recorded roots/premises
 and named matching helper/source evidence. No expected destination is a new root.
 
-The [final-helper refresh 075602](../../evidence/Ariadne/caller-semantic-coverage/20261015/artifacts/final-dump-admission-20261015T075602/probe-summary.json)
+The [final-helper refresh 075602](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/caller-semantic-coverage/20261015/artifacts/final-dump-admission-20261015T075602/probe-summary.json)
 provides a frozen control oracle: caller 9,590 visited, 9,589 decoded and 11,321
 edges; callee 778 decoded and 895 edges. Materialization's 9,600 attempted
 starts is a different counter. Compare those sets/receipts exactly only when
@@ -300,14 +305,14 @@ Pass SF6 when the new structural family publishes and independently validates
 useful control evidence with zero dataflow/slice propagation and precise gaps.
 This does not require a path, SCC summary, full caller parity or exact history.
 Freeze source/tool/policy/query identities, observer logs, original/stored hashes
-and stop receipts under `evidence/Ariadne/frame-structure/`. Preserve older
+and stop receipts under `https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-structure/`. Preserve older
 qualification bytes and failure history.
 If SF6 exposes a runtime correction, reopen its affected implementation stages
 and repeat SF5's affected source-bound gates before crediting the corrected run.
 
 ## Completion ledger and retained validation
 
-The [2026-10-16 bundle](../../evidence/Ariadne/frame-structure/20261016/README.md)
+The [2026-10-16 bundle](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-structure/20261016/README.md)
 records SF0–SF6 completion on corrected source capsule `8266a844e60e3afbcaa8f0bba557899a0466e18940d8fa881630377cf78bb37c`
 (1,093 files) and the independently verified 693-file runtime inventory.
 Documentation reconciliation preserves the exercised source capsule rather

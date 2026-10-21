@@ -20,7 +20,7 @@ def sources():
     for pattern in ('Specs/Ariadne*.tla', 'Specs/*.cfg', 'Specs/check-effects.sh',
                     'tools/check_effects*.py', 'mbt/*.py', 'src/mbt/core/*.rs'):
         paths.update(p for p in ROOT.glob(pattern) if not p.name.startswith(('AMD64', 'AriadneX86_64', 'X86_64')))
-    paths.update(ROOT / p for p in ('Cargo.toml', 'Cargo.lock', 'evidence/Ariadne/amd-manuals.lock.json',
+    paths.update(ROOT / p for p in ('Cargo.toml', 'Cargo.lock', 'tests/bap/fixtures/amd-manuals.lock.json',
                                    'mbt/corpus/manifest.json'))
     return {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(paths)}
 

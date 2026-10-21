@@ -1,0 +1,20 @@
+{
+  "profile": "captured-indirect-targets/v1",
+  "memory_premise": "FrozenCapturedControlData",
+  "limits": {
+    "max_entries": 4096,
+    "max_targets": 65536,
+    "max_read_bytes": 1048576,
+    "max_evidence_bytes": 4194304,
+    "max_values": 256,
+    "max_steps": 262144,
+    "max_path_steps": 256,
+    "max_rounds": 16,
+    "max_elapsed_ms": 1000
+  },
+  "timing_criteria": {
+    "resolver_ms": 1000,
+    "expanded_original_dump_cli_ms": 60000
+  },
+  "scope": "constant 64-bit pointer-slot and finite signed32 table-relative AMD64 near jumps; explicit snapshot memory premise; no historical execution claim"
+}

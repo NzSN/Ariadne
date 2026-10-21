@@ -51,40 +51,10 @@ def mutant_manifest(mutation, directory):
     return sut / "Cargo.toml", sha256(engine)
 
 
-def compare_baseline(report, path):
-    baseline = json.loads(path.read_text())
-    contract = json.loads((MBT / "corpus/AriadneReplay.lock.json").read_text())["contract"]
-    stable_ids = {action["wireAction"]: action["id"] for action in contract["actions"]}
-    old = baseline["positive"]
-    new = report["positive"]
-    actions = {stable_ids.get(action, action): count for action, count in old["matchedActionCounts"].items()}
-    pairs = {"->".join(stable_ids.get(action, action) for action in pair.split("->")): count
-             for pair, count in old["matchedPairCounts"].items()}
-    mismatch_positions = lambda evidence: {
-        row["mutation"]: (row["mismatch"]["action"], row["observationsDispatched"])
-        for row in evidence["mutants"]
-    }
-    checks = {
-        "oraclePreserved": baseline["corpusManifestSha256"] == report["corpusManifestSha256"],
-        "sutPreserved": baseline["sutSources"] == report["sutSources"],
-        "semanticDigestPreserved": old["semanticDigest"] == new["semanticDigest"],
-        "completeReplayPreserved": old["matchedObservations"] == new["matchedObservations"]
-                                   and old["fixtures"] == new["fixtures"]
-                                   and old["completedTraces"] == new["completedTraces"],
-        "coveragePreserved": actions == new["matchedActionCounts"] and pairs == new["matchedPairCounts"],
-        "mutantMismatchPositionsPreserved": mismatch_positions(baseline) == mismatch_positions(report),
-        "admissionBarrierPreserved": baseline["wrongDigest"]["factoryCalls"] == 0
-                                     and report["wrongDigest"]["factoryCalls"] == 0,
-    }
-    if not baseline["passed"] or not all(checks.values()):
-        raise RuntimeError(f"generated-binding migration changed baseline behavior: {checks}")
-    return {"baselineSha256": sha256(path), **checks}
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--compare-baseline", type=Path,
-                        help="also require preservation against a previous MBT result")
     args = parser.parse_args()
     manifest = verify_corpus()
     work = work_directory("replay")
@@ -144,10 +114,6 @@ def main():
                   "compatibilityBuild": json.loads(identity_path.read_text()) if identity_path.is_file() else None},
         "positive": positive, "wrongDigest": rejected, "mutants": mutants,
     }
-    if args.compare_baseline:
-        report["migration"] = compare_baseline(report, args.compare_baseline)
-        report["command"] += f" --compare-baseline {args.compare_baseline}"
-        print("Baseline preserved: oracle, SUT, replay, coverage, and first mutant mismatch positions", flush=True)
     results = MBT / "results"
     results.mkdir(exist_ok=True)
     write_json(results / "latest.json", report)

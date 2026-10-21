@@ -34,6 +34,11 @@ The first controlled Chromium case has a
 forms reach the seed, while call effects remain deliberately opaque. New
 real-path blockers reopen this plan.
 
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## 1. Turn observed gaps into a bounded queue
 
 Capture the pre-change text/DOT/JSON reports and source hashes. For each site on the

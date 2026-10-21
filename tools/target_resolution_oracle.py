@@ -31,7 +31,7 @@ def main():
         actual = targets(int(case['base'], 16), case['words'], case['lower'],
                          case['upper'], case['missing'])
         assert [f'0x{value:016x}' for value in actual] == case['expected'], case['name']
-    table = ROOT / 'evidence/Ariadne/indirect-target-resolution/dump048B-20261012/jump-table.bin'
+    table = ROOT / 'tests/bap/fixtures/target-resolution-table.bin'
     record = json.loads(table.with_name('jump-table-inspection.json').read_text())
     data = table.read_bytes()
     actual = targets(int(record['table_base'], 16),

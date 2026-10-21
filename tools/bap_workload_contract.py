@@ -9,7 +9,7 @@ WORKLOAD_SCHEMA = "ariadne.bap-workloads/v4"
 WINDOWS_CASE_SCHEMA = "ariadne.bap-windows-workload-case/v1"
 WINDOWS_WORKLOAD_ID = "crashpad-windows-checksum-98-v1"
 WINDOWS_CAPTURE_KIND = "controlled-crashpad-windows"
-WINDOWS_ARCHIVE_RELATIVE = "evidence/Ariadne/bap-windows-workload-inputs.tar.gz"
+WINDOWS_ARCHIVE_RELATIVE = "tests/input/fixtures/workloads/windows-inputs.tar.gz"
 
 
 def _timing(value):

@@ -3,14 +3,14 @@
 ## Context and follow-up
 
 **Status.** W0 is qualified on 2026-10-20 for the finite model/oracle and
-synthetic-input scope in the [durable record](../../evidence/Ariadne/address-wrap/20261020/w0/README.md).
+synthetic-input scope in the [durable record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/address-wrap/20261020/w0/README.md).
 Its 23 normal source files were promoted byte-identically after one Apalache
-typecheck and six TLC configurations. The separate [W1 record](../../evidence/Ariadne/address-wrap/20261020/w1/README.md)
+typecheck and six TLC configurations. The separate [W1 record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/address-wrap/20261020/w1/README.md)
 qualifies 10 binding tests, 4 I5b tests, 666 unchanged legacy files and 36 CLI
 comparisons; 3 native tests remain ignored in that W1 tier. The separate
-[W2 pilot](../../evidence/Ariadne/address-wrap/20261020/w2/README.md) passes the
+[W2 pilot](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/address-wrap/20261020/w2/README.md) passes the
 public assessor, seven native synthetic cases and required Rust gates.
-[W3 qualification](../../evidence/Ariadne/address-wrap/20261021/w3/README.md) passes
+[W3 qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/address-wrap/20261021/w3/README.md) passes
 all 140 decisions, 44 binding controls, 24 serialized controls and 114 fresh
 native cases. W4 sources are implemented with product/capture gates pending;
 W5 and full acceptance remain pending.
@@ -54,6 +54,11 @@ I4/I5a/I5b records cannot supply new I5c acceptance.
 
 For the wider context, see the [documentation map](../../docs/documentation-map.md).
 
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## Frozen delivery intent
 
 Ask whether the selected instruction's `T = unsigned(B) + signed(D)` leaves
@@ -81,7 +86,7 @@ Implement stages sequentially; a partial matrix or partial tier remains partial.
 | W2 — First vertical slice | `src/investigation/address_wrap.rs`; root Cargo test target; new investigation/input tests | MOV32mi upper-wrap, no-wrap, signed-negative no-wrap, unknown/error and tiny-budget cases pass through the same bound assessment interface as callers. |
 | W3 — Complete finite matrix and serialization | Assessor, new `src/reports/address_wrap.rs`, report exports, dedicated tests and the [actual-contract section](../../docs/Ariadne/address-wrap-design.md#w0-result-and-publication-contract) of the existing canonical design | All six forms, boundary/negative controls and strict recomputation pass; conditional arithmetic versus unknown fault assessment is unambiguous in text/JSON/DOT. |
 | W4 — Product and controlled capture recipes | `src/bin/ariadne-minidump.rs`; native demo profile dispatch/witness/build/capture/inspector additions; new assembly file and input/native CLI tests | Explicit modes, seed/root behavior, atomic publication and eight independently inspected owned partial/full captures. No old profile/capture bytes rewritten. |
-| W5 — Qualification and durable evidence | New `tools/check_i5c.py`, contract/equivalence/mutation/measurement tools, `src/bin/i5c.rs`; root manifest; raw evidence under `evidence/Ariadne/address-wrap/`; validation guidance and dated summaries in the existing canonical design; status updates | Separate source/fixture, controlled partial/full and fixed-budget flags pass under stable source/tool/dependency inventories; full evidence archive verifies. |
+| W5 — Executable qualification | `tools/check_i5c.py`, contract/equivalence/mutation/measurement tools, `src/bin/i5c.rs`; compact expected vectors under tests; transient run products under target; dated summaries in the canonical design | Separate source/fixture, controlled partial/full and fixed-budget tests pass on current sources/tools/dependencies. No archival or LFS-publication gate remains. |
 
 ## W0 — Freeze semantics and independent expectations
 
@@ -165,7 +170,7 @@ are binding errors before budgets, never clamped. Defaults remain 64/64. Five
 arithmetic claims form one atomic bundle; an early gap or mandatory omission
 removes it, while late range/reported-byte gaps retain conditional arithmetic
 with an Unknown assessment. The design fixes exact field/claim ordering and
-wide-decimal validation. The [2026-10-20 W0 record](../../evidence/Ariadne/address-wrap/20261020/w0/README.md)
+wide-decimal validation. The [2026-10-20 W0 record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/address-wrap/20261020/w0/README.md)
 qualifies the exact 140-row/52-scenario/114-raw-input tier, 12 oracle controls,
 88 sequence controls, one typecheck and six TLC configurations. Failed model,
 producer and packaging attempts remain uncredited. The 666-output pre-W1
@@ -197,7 +202,7 @@ regenerating the baseline to hide it.
 
 ### W1 exit, 2026-10-20
 
-The [W1 evidence record](../../evidence/Ariadne/address-wrap/20261020/w1/README.md)
+The [W1 evidence record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/address-wrap/20261020/w1/README.md)
 and [canonical qualification summary](../../docs/Ariadne/address-wrap-design.md#w1-qualification-2026-10-20)
 close this stage for the retained 1,213-file source snapshot. Ten binding tests
 and four I5b tests pass; three native I5b tests remain ignored. A fresh release
@@ -232,7 +237,7 @@ and a completed native analyzer in the integration pilot.
 
 ### W2 exit, 2026-10-21
 
-The [dated pilot record](../../evidence/Ariadne/address-wrap/20261020/w2/README.md)
+The [dated pilot record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/address-wrap/20261020/w2/README.md)
 passes five ordinary tests and one explicitly exercised native test on seven
 freshly prepared/completed synthetic captures, including four native budget
 controls. Formatting, default/core-only tests and all-features/all-targets Clippy
@@ -273,14 +278,14 @@ Renderers share the same typed result, with full JSON preserved in DOT metadata.
 
 ### W3 exit, 2026-10-21
 
-The [dated matrix/report record](../../evidence/Ariadne/address-wrap/20261021/w3/README.md)
+The [dated matrix/report record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/address-wrap/20261021/w3/README.md)
 passes all 140 frozen decisions, 44 expanded binding invocations, 24 strict
 serialized controls and fresh native preparation/completion for all 114 raw
 cases. The 26 typed unit cases remain a separate scope. Matrix, pilot, reports,
 formatting, default/core-only tests and all-features/all-targets Clippy pass on
 the exact remote source/tool/dependency snapshot. The first incomplete source
 package is uncredited; the corrected package verifies all named case records.
-Complete runtime-log sealing remains with W5. W4 source implementation follows;
+Fresh runtime validation remains with W5; persistent log sealing is retired. W4 source implementation follows;
 its CLI, build and owned capture gates remain pending.
 
 ## W4 — Product and real controlled Windows evidence
@@ -370,30 +375,29 @@ Unavailable, malformed, skipped, over-budget or stale evidence cannot qualify.
 All synthetic underflow diagnostics remain outside the supported v1
 fault-assessment tier, even if their arithmetic kernel/oracle is correct.
 
-Retain source snapshots, formal/Rust/native outcomes, raw samples/reports,
-mutant observations, rejected attempts, independent capture witnesses and a
-complete verified archive. Use LFS for large artifacts. Verify every archive
-member's size/hash, exact report/archive digest and tool/dependency identity;
-a manifest flag alone is insufficient. Update the design's status, actual
-contracts, qualification guide, plan ledger/checkpoints and direct successor
-links only to the demonstrated scope. Packaged-release and universal-refinement
-acceptance remain separate.
+Run the required tests on the current source/tool/input identities. Keep their
+logs, measurements and result summaries in ignored run directories. Under the
+[test-only validation policy](../../tests/README.md), do not create a retained
+archive, copy source trees into publication bundles or upload LFS evidence.
+Missing native, capture or timing tests remain unmet gates. The current native
+matrix replaces historical W2/W3 stream import, and the checked-in 666-output
+size/digest vector replaces the old raw-output baseline.
 
 ## W4/W5 execution preparation, 2026-10-21
 
-Execution resume: the [recovered-host record](../../evidence/Ariadne/address-wrap/20261021/execution-resume/README.md)
+Execution resume: the [recovered-host record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/address-wrap/20261021/execution-resume/README.md)
 verified the retained producer and captures; source transfer was then approved.
-The [current campaign](../../evidence/Ariadne/address-wrap/20261021/w4-w5-execution/README.md)
+The [current campaign](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/address-wrap/20261021/w4-w5-execution/README.md)
 reported root/model, native114 matrix, strict-report and CLI12 success. Ten of 24
 compiled mutants were last confirmed detected. New owned I5c/I5b captures and a
 new I5a null-write cohort passed raw inspection. The current I5a qualifier binds
 the extended six-source producer while retaining its original historical contract.
 SSH subsequently began closing before authentication. Resume by inspecting
 `results/qualification-02` in the existing task, then retrieve and verify all
-remaining gates and the sealed archive. Aggregate W4/W5 acceptance stays pending.
+remaining gates. The later test-only policy retires archive sealing; aggregate W4/W5 acceptance stays pending.
 
 The [canonical execution guide](../../docs/Ariadne/address-wrap-design.md#w4w5-execution-preparation-2026-10-21)
-and [preparation evidence](../../evidence/Ariadne/address-wrap/20261021/w4-w5-preparation/README.md)
+and [preparation evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/address-wrap/20261021/w4-w5-preparation/README.md)
 record the new CLI-control runner, eight-case Windows capture wrapper, all-24
 mutation driver with focused frozen-case observers, original-baseline comparator,
 W2/W3 runtime exporter and aggregate qualification/sealing runner. These sources
@@ -415,13 +419,14 @@ controllers map `/campaign` to the host's
 evidence rather than present access. Use a new isolated task containing the
 final source/tool inventory and the sealed read-only dependency view. Run the
 W4 native build, twelve CLI controls and all eight independently inspected owned
-captures before W5 qualification. Export the original W2/W3 raw streams from
-that retained campaign, then supply the fixed baseline, older I5a/I5b captures
-and I4 profile baseline to the aggregate runner.
+captures before W5 qualification. Execute the current native matrix and supply
+the checked-in legacy expectation vector, applicable I5a/I5b captures and I4
+profile baseline to the aggregate runner. Historical runtime exports are retired.
 
-Current local preflight records missing native helpers/SDK/runtime and the
-MirrorRust snapshot, plus eight unhydrated working-tree qualification inputs.
-Offline default/core Cargo tests and Clippy stop at the uncached `minidump`
-package. Fresh Python controls, formatting and layout do not waive those gates.
+That preparation-time local preflight recorded missing native dependencies and
+uncached Cargo inputs. The later test-only migration supplies ordinary fixtures
+and fresh local Rust checks; these historical blockers do not describe current
+portable-test coverage. Full native/capture and timing prerequisites remain
+explicit and are not waived by portable tests.
 No local native/model run, new capture, compiled mutation, replay or timing
 acceptance is credited. W4, W5 and full-I5c acceptance remain pending.

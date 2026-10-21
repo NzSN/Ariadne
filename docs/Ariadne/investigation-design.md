@@ -12,25 +12,25 @@ with implementation and qualification pending. On 2026-10-11, the user relaxed
 the frame-to-frame question to listing fewer than `NP` possible paths. The
 bounded frame-path contract below is qualified within the finite Windows AMD64
 captured-unwind and original physical-frame 1→0 scope. The
-[2026-10-20 F4 evidence](../../evidence/Ariadne/frame-paths/20261020/README.md)
-records model, mutation, native/reference, original-capture and saved-replay gates. The later [S3 finite model suite](../../evidence/Ariadne/specification-sync/20261020/README.md) independently qualifies the declared model scripts and preserved bounds; it adds no new runtime or capture acceptance.
-The [2026-10-13 full-dump application attempt](../../evidence/Ariadne/frame-paths/dump03958-20261013/report.md)
+[2026-10-20 F4 evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/20261020/README.md)
+records model, mutation, native/reference, original-capture and saved-replay gates. The later [S3 finite model suite](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/specification-sync/20261020/README.md) independently qualifies the declared model scripts and preserved bounds; it adds no new runtime or capture acceptance.
+The [2026-10-13 full-dump application attempt](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/dump03958-20261013/report.md)
 returned unavailable for physical frames 1→0: a runtime-table budget and then
 unsupported vector semantics prevented an admitted active-call anchor.
-The [later vector admission validation](../../evidence/Ariadne/bap-vector-registers/20261013/report.md)
+The [later vector admission validation](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-vector-registers/20261013/report.md)
 resolved that namespace refusal while retaining the alignment stop at that date.
-The [2026-10-15 caller coverage qualification](../../evidence/Ariadne/caller-semantic-coverage/20261015/README.md)
+The [2026-10-15 caller coverage qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/caller-semantic-coverage/20261015/README.md)
 subsequently removes the original caller barriers and recovers its larger
 structural graph. That dated run exhausted its caller action budget and left
 the completed-query path mode unavailable. Stage 5.1 implements
 a separate structural report before dataflow. Its
-[2026-10-16 qualification](../../evidence/Ariadne/frame-structure/20261016/README.md)
+[2026-10-16 qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-structure/20261016/README.md)
 completes SF0–SF6 within the finite Windows AMD64 captured-frame/E8-call scope;
-caller completion now has [S6 qualification](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md),
+caller completion now has [S6 qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/caller-semantic-coverage/20261019/README.md),
 and finite frame-path F4 now has its own separately bound qualification.
 [Stage 5.2](../../.agents/plans/frame-connections.md) implements represented
 corridors, SCC summaries and bounded examples over the validated structural
-source; [remote consumer qualification](../../evidence/Ariadne/frame-question/20261019/README.md)
+source; [remote consumer qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md)
 now covers both declared saved-source applications. The
 [complete section-5 design](frame-question-investigation-design.md) now covers
 all four recommendation items, with question-directed resolution and local
@@ -53,18 +53,18 @@ and qualification preserve alternatives and missing premises. The frame-path que
 - [Implementation ledger](../../.agents/plans/investigation-layer.md) — delivery stages,
   selected address-wrap work and later questions.
 - [Scanner partial-explanation follow-up plan](../../.agents/plans/scanner-partial-explanation.md)
-  — S0–S4 finite case follow-up is [qualified](../../evidence/Ariadne/scanner-followup/20261020/README.md):
+  — S0–S4 finite case follow-up is [qualified](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/scanner-followup/20261020/README.md):
   twenty-site review, explicit entry boundary and a partial result with all gaps retained.
 - [Memory provenance refinement](memory-provenance-refinement.md) — implemented
   Scanner diagnostic separation, bounded writer assessment and backward scalar
-  inference; the selected model/mutation/Scanner profile is [qualified remotely](../../evidence/Ariadne/frame-question/20261019/README.md).
+  inference; the selected model/mutation/Scanner profile is [qualified remotely](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md).
 - [Frame-path ledger](../../.agents/plans/investigation-layer.md#bounded-frame-path-question)
   — the selected strict path-count bound, frame anchors and resource limits.
 - [Frame-path implementation plan](../../.agents/plans/frame-path-enumeration.md)
   — F0–F4 contract, captured unwind profile, bounded enumeration and validation.
 - [Structural frame report plan](../../.agents/plans/frame-structure-report.md)
   — implemented Stage 5.1 recovery-prefix API, separate report and finite host
-  policy and [source-bound qualification](../../evidence/Ariadne/frame-structure/20261016/README.md).
+  policy and [source-bound qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-structure/20261016/README.md).
   No dataflow or path enumeration is performed.
 - [Frame connections plan: Stage 5.2](../../.agents/plans/frame-connections.md)
   — implemented corridor/SCC/example consumer with source-bound remote FC5/FC6 qualification.
@@ -106,7 +106,7 @@ Full-memory capture alone does not supply a trace.
 Possible producers and numeric conclusions do not prove a UAF, executed
 path or general root cause.
 The explicit alignment-hypothesis extension is implemented and
-[qualified in its finite scope](../../evidence/Ariadne/alignment-hypotheses/20261016/README.md).
+[qualified in its finite scope](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/alignment-hypotheses/20261016/README.md).
 Its [H0–H5 ledger](../../.agents/plans/alignment-hypotheses.md) records the
 additive conditional product; the original Stage 5.1 evidence retains its own
 source identity. Caller S6 and finite frame-path F4 have subsequent, separately
@@ -117,6 +117,11 @@ For wider navigation, see the [documentation map](../documentation-map.md).
 The original proposal against `7de5a1e` on 2026-10-01 and first repairs through
 `c9eb4c5` on 2026-10-02 are historical source checkpoints. Their records do not
 independently qualify a later checkout.
+
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## Product position
 
@@ -394,10 +399,10 @@ canonical owner of the existing structural source and connection contracts.
 The new design owns their composition with a bounded investigator question,
 fair semantic work, scoped feasibility and local fault dependencies. The
 [memory-refinement document](memory-provenance-refinement.md) retains its own
-value/alias rules and [selected M4 qualification](../../evidence/Ariadne/frame-question/20261019/README.md).
+value/alias rules and [selected M4 qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md).
 
 Items 5.1/5.2 are reused with their recorded qualification boundaries. New
-5.3/5.4 integration has [source-bound remote evidence](../../evidence/Ariadne/frame-question/20261019/README.md): one question does not require
+5.3/5.4 integration has [source-bound remote evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md): one question does not require
 completed caller dataflow, unknown continuations and candidate writers survive,
 and each result layer keeps its own status. Execution-recording ingestion from
 recommendation section 6 is outside this program.
@@ -409,14 +414,14 @@ contract for publishing bounded frame-local recovered structure when full
 reaching-definition analysis is too expensive. The [SF0–SF6 implementation plan](../../.agents/plans/frame-structure-report.md)
 records execution and acceptance. The recovery API, capture binder, separate
 codecs and opt-in CLI are implemented and
-[qualified on their recorded sources](../../evidence/Ariadne/frame-structure/20261016/README.md),
+[qualified on their recorded sources](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-structure/20261016/README.md),
 including the named dump and standalone saved replay. Existing completed caller
 and frame-path acceptance remain separate.
 
 ### Explicit alignment hypotheses
 
 **Status, 2026-10-16.** Implemented and [qualified within the declared finite
-profile](../../evidence/Ariadne/alignment-hypotheses/20261016/README.md).
+profile](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/alignment-hypotheses/20261016/README.md).
 The [H0–H5 ledger](../../.agents/plans/alignment-hypotheses.md) records the
 completed extension. Its additive checker, model, conditional request and v2
 report preserve the original request/context/guard/target/composition inputs
@@ -453,7 +458,7 @@ capture, use the retained policy and original thread/frame selection:
 ```sh
 target/release/ariadne-minidump original.dmp \
   --frame-structure 1:0 --thread-id 23668 \
-  --frame-structure-limits evidence/Ariadne/alignment-hypotheses/20261016/corpus-policy.json \
+  --frame-structure-limits target/test-runs/alignment-hypotheses/20261016/corpus-policy.json \
   --assume-windows-call-entry --resolve-indirect-targets \
   --assume-frame-aligned 1:0x00007ff7744035c9 \
   --decoder-reference target/ariadne-llvm-mc \
@@ -490,12 +495,12 @@ no native helper/runtime; JSON/text/DOT preserve the conditional annotations.
 A conditional graph answers what structure can be recovered under H. It does
 not establish that H held, that the instruction executed, that the memory was
 readable, or which historical path executed. Caller S6 and frame-path F4 keep
-their separate gates. The [dated qualification](../../evidence/Ariadne/alignment-hypotheses/20261016/README.md)
+their separate gates. The [dated qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/alignment-hypotheses/20261016/README.md)
 records this conditional product's finite acceptance.
 
 #### 2026-10-16 alignment-hypothesis qualification
 
-The [retained bundle](../../evidence/Ariadne/alignment-hypotheses/20261016/README.md)
+The [retained bundle](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/alignment-hypotheses/20261016/README.md)
 binds corrected source capsule
 `34d078b4e3c94977620e72313111d40d52fae1978af05b0682d716d1bec5d556`
 (1,060 files; 725 runtime-inventory files unchanged), the pinned helpers and
@@ -636,7 +641,7 @@ helper and evidence options retain their validated preparation roles.
 ```sh
 target/release/ariadne-minidump crash.dmp \
   --frame-structure 1:0 --thread-id 23668 \
-  --frame-structure-limits evidence/Ariadne/frame-structure/20261016/corpus-policy.json \
+  --frame-structure-limits target/test-runs/frame-structure/20261016/corpus-policy.json \
   --assume-windows-call-entry --resolve-indirect-targets \
   --decoder-reference target/ariadne-llvm-mc \
   --bap-helper target/ariadne-bap-lift --bap-runtime tmp/bap-setup/stable \
@@ -695,7 +700,7 @@ within the declared finite corpus.
 
 ### 2026-10-16 structural qualification
 
-The [Stage 5.1 bundle](../../evidence/Ariadne/frame-structure/20261016/README.md)
+The [Stage 5.1 bundle](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-structure/20261016/README.md)
 records SF0–SF6 completion on corrected source capsule `8266a844e60e3afbcaa8f0bba557899a0466e18940d8fa881630377cf78bb37c`
 (1,093 files), based on `4811d7de6f2b86319135a5f0a1a18c397a4cd4c2`. Its 693-file runtime
 inventory remains unchanged throughout final validation. The Stop-barrier
@@ -754,7 +759,7 @@ Stage 5.1. It addresses the second item in section 5 of the
 summarize cycles and offer bounded examples. The
 [FC0–FC6 implementation plan](../../.agents/plans/frame-connections.md)
 owns execution. The API and opt-in report/CLI described below are implemented.
-The [local qualification record](../../evidence/Ariadne/frame-connections/20261018/README.md)
+The [local qualification record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-connections/20261018/README.md)
 separates fresh finite checks and capture applications from unexercised remote
 and release qualification.
 
@@ -1066,14 +1071,14 @@ parallel-edge, self-loop and zero-edge cases. Rust uses iterative Kosaraju and
 BFS; the literal oracle uses Floyd–Warshall and path permutations. A 10,000-node
 chain checks graph depth beyond the old path admission cap.
 
-The [2026-10-18 local record](../../evidence/Ariadne/frame-connections/20261018/README.md)
+The [2026-10-18 local record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-connections/20261018/README.md)
 contains both full capture applications and qualification receipts. The large
 source produces a 23-node corridor, 3,143 SCCs (33 cyclic) and a 22-edge first
 shortest example. The recursive controlled source produces a 140-node corridor,
 167 SCCs (three cyclic) and a 133-edge first shortest example. These graph
 results retain the source's semantic gaps and conditional premises; they add
 no feasibility, history, loop invariant or writer exclusion claim. Remote
-[consumer qualification now passes](../../evidence/Ariadne/frame-question/20261019/README.md)
+[consumer qualification now passes](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md)
 for these exact inputs; caller S6/frame-path F4 and fresh raw-source coverage
 remain separate.
 
@@ -1210,9 +1215,9 @@ relevant access/instance, including unresolved paths, under the
 The [F0–F4 implementation plan](../../.agents/plans/frame-path-enumeration.md) records
 the implemented model source, finite captured unwind profile, API/CLI and
 validation work. The
-[initial validation record](../../evidence/Ariadne/frame-paths/source-validation.json)
+[initial validation record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/source-validation.json)
 retains the earlier passing tiers and then-pending qualification. The
-[2026-10-20 F4 evidence](../../evidence/Ariadne/frame-paths/20261020/README.md)
+[2026-10-20 F4 evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/20261020/README.md)
 closes the declared finite model/mutation/original-capture clauses; the
 [investigation ledger](../../.agents/plans/investigation-layer.md#bounded-frame-path-question)
 records that scope. Independent controls must cover a two-way diamond,
@@ -1224,7 +1229,7 @@ path list must never justify deleting a possible memory writer.
 ### F4 post-S6 qualification
 
 The [F4 execution sequence](../../.agents/plans/frame-path-enumeration.md#f4-post-s6-execution--2026-10-20)
-is qualified within the [2026-10-20 finite scope](../../evidence/Ariadne/frame-paths/20261020/README.md).
+is qualified within the [2026-10-20 finite scope](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/20261020/README.md).
 It reuses the unchanged completed S6 caller/callee requests and the original
 physical frame 1→0 question, thread 23668 and NP=10. Baseline unknown alignment/targets and the captured
 call/ABI premises remain. Structural paths are not feasibility/history witnesses.
@@ -1269,7 +1274,7 @@ identities and selected bounded policy.
 
 ### Full-dump application attempt, 2026-10-13
 
-The [dump03958 attempt record](../../evidence/Ariadne/frame-paths/dump03958-20261013/report.md)
+The [dump03958 attempt record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/dump03958-20261013/report.md)
 binds the original dump, matching private Electron PDB, independent CDB frames,
 captured disassembly, source/tool hashes and two separate frame-path reports.
 The selected question was physical caller frame 1 (`ParsePrimaryExpression`)
@@ -1289,7 +1294,7 @@ This is missing admitted evidence, not proof of no path. The attempt exercises
 real-capture refusal behavior and does not pass F4 full-dump qualification.
 The subsequent [finite vector admission extension](bap-analysis-core-design.md#vector-register-admission)
 admits YMM6 and re-runs the same query. Its
-[fresh record](../../evidence/Ariadne/bap-vector-registers/20261013/report.md)
+[fresh record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-vector-registers/20261013/report.md)
 preserves the unchanged BIL identity and shows the remaining alignment-exception
 refusal, unchanged caller graph and unavailable active-call anchor.
 
@@ -1327,12 +1332,12 @@ remaining evidence to universal correctness or packaged-release acceptance.
 These dated records retain their source/tool identities and original decisions.
 They are historical evidence, not fresh tests of this documentation checkout.
 The [implementation ledger](../../.agents/plans/investigation-layer.md) and
-[evidence guide](../../evidence/Ariadne/README.md) explain stage scope and reuse.
+[evidence guide](../../tests/README.md) explain stage scope and reuse.
 
 | Record | Exercised scope and retained decision | Limits and successor |
 | --- | --- | --- |
-| First delivery after `7de5a1e`, [16-gate record](../../evidence/Ariadne/investigation-validation.json) | Both platform fixtures and controlled Linux capture passed; nested 12-gate Stage E regression and 11 actual producer/adapter/claim mutants passed with stable sources. | Full original-Windows acceptance remained false. The active replacement and its later performance qualification own the successor result. |
-| 2026-10-02 repairs, [17-gate record](../../evidence/Ariadne/investigation-correctness-validation.json) | 123 stable source hashes; nested 12-gate Stage E and 11-gate minidump campaigns; 13 actual mutants plus two Python acceptance mutants detected. | Original-Windows artifact remained missing. Controlled decision tests provided no real-Windows timing credit. |
+| First delivery after `7de5a1e`, [16-gate record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/investigation-validation.json) | Both platform fixtures and controlled Linux capture passed; nested 12-gate Stage E regression and 11 actual producer/adapter/claim mutants passed with stable sources. | Full original-Windows acceptance remained false. The active replacement and its later performance qualification own the successor result. |
+| 2026-10-02 repairs, [17-gate record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/investigation-correctness-validation.json) | 123 stable source hashes; nested 12-gate Stage E and 11-gate minidump campaigns; 13 actual mutants plus two Python acceptance mutants detected. | Original-Windows artifact remained missing. Controlled decision tests provided no real-Windows timing credit. |
 | 2026-10-05 [Windows replacement](workload-performance-design.md#windows-investigation-replacement), followed by [performance qualification](workload-performance-design.md#native-investigation-qualification) | Correctness on the exact 98-start replacement; later native explanation CLI median 1,692.696 ms and Linux phase total 182.924 ms met the fixed 2,000/250 ms budgets. | These records cover their own source/tool/dependency inventories and finite queries; they do not qualify the missing original Electron capture. |
 
 The first platform fixtures identify the earlier MOV as a possible RAX-byte
@@ -1351,16 +1356,16 @@ possible producer `0x0000566817922de6`. A known trigger or fixture name supplies
 no UAF claim. First-delivery phase medians were approximately 1.12/86.86/65.21 ms
 for binding/explanation/rendering (about 153 ms combined); full CLI medians were
 about 1,408 ms base and 1,626 ms explanation. Raw
-[CLI samples](../../evidence/Ariadne/investigation-cli.csv) and
-[phase samples](../../evidence/Ariadne/investigation-phase.csv) retain variance,
+[CLI samples](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/investigation-cli.csv) and
+[phase samples](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/investigation-phase.csv) retain variance,
 RSS, counts and hashes. The repair run separately measured about 159 ms combined,
 1,355 ms base CLI and 1,535 ms explanation CLI. These runs neither prove a
 speedup nor bound arbitrary workloads.
 
-The first [manifest](../../evidence/Ariadne/investigation-evidence-manifest.json)
-and [archive](../../evidence/Ariadne/investigation-evidence.tar.gz), and repair
-[manifest](../../evidence/Ariadne/investigation-correctness-evidence-manifest.json)
-and [archive](../../evidence/Ariadne/investigation-correctness-evidence.tar.gz),
+The first [manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/investigation-evidence-manifest.json)
+and [archive](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/investigation-evidence.tar.gz), and repair
+[manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/investigation-correctness-evidence-manifest.json)
+and [archive](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/investigation-correctness-evidence.tar.gz),
 preserve derived reports, gate/mutation logs, measurements and output comparisons.
 Raw real minidumps, runtime archives and build caches remain external.
 The missing historical Windows artifact was 2,028,400 bytes with SHA-256
@@ -1459,7 +1464,7 @@ pinned-runtime probe returns two alternatives on both diamond and recursive
 fixtures with native/Rust report parity after removing observed elapsed time.
 
 Model source and TLC configuration parse successfully without state exploration.
-The [contract revision](../../evidence/Ariadne/frame-paths/contract-revision.json)
+The [contract revision](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/contract-revision.json)
 preserves the original freeze and corrects tuple-valued TLC configuration syntax
 and terminal deadlock policy. Five real-code mutation seams are specified and
 checked for unique applicability; their remote campaign is unexercised. Remote
@@ -1505,9 +1510,9 @@ cargo test --offline --locked --features property-tests --lib frame_paths::prope
 cargo test --offline --locked --features property-tests --test frame_unwind_properties -- --test-threads=1
 ```
 
-The [property validation record](../../evidence/Ariadne/frame-paths/property-validation.json)
+The [property validation record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/property-validation.json)
 binds the generated suite and applicable root checks to their sources. Earlier
-[frame-path validation](../../evidence/Ariadne/frame-paths/source-validation.json)
+[frame-path validation](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/source-validation.json)
 retains its original hashes and native/synthetic scope; adding properties does
 not rewrite that historical evidence or grant full design acceptance.
 
@@ -1526,7 +1531,7 @@ The design's dated qualification states the finite exercised scope.
 ## Caller completion successor, 2026-10-19
 
 The [caller S6 contract](caller-semantic-coverage-design.md) and
-[qualification](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md)
+[qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/caller-semantic-coverage/20261019/README.md)
 now complete the original caller/callee requests with full native/Rust equality
 and independent checks of every reaching row. RPO and exact shared membership
 retain all possible definitions while ordinary replay remains unchanged.
@@ -1538,7 +1543,7 @@ prerequisite. Frame-path F4 and general feasibility/history remain separate.
 ## Scanner partial-explanation follow-up
 
 The [S0–S4 plan](../../.agents/plans/scanner-partial-explanation.md) and
-[2026-10-20 follow-up evidence](../../evidence/Ariadne/scanner-followup/20261020/README.md)
+[2026-10-20 follow-up evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/scanner-followup/20261020/README.md)
 qualify the exact derivative Scanner case while preserving its partial answer.
 The 571,636-byte capture SHA is
 `ed82b433501162828460ccbf067476e4683a52157372b27040f0269d2b3949c5`;

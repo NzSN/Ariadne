@@ -35,18 +35,7 @@ def sources():
 
 
 def retained_stage_e_status():
-    """Report Stage E only from its independently passing, still-current record."""
-    path=ROOT / 'evidence/Ariadne/stage-e-completion-validation.json'
-    try:
-        evidence=json.loads(path.read_text())
-        if not evidence['passed'] or not evidence['sourcesStable']:
-            return 'open or stale retained evidence'
-        for relative,digest in evidence['sourceHashes'].items():
-            if hashlib.sha256((ROOT/relative).read_bytes()).hexdigest()!=digest:
-                return 'open or stale retained evidence'
-        return 'passed: finite generated conformance; see stage-e-completion-validation.json'
-    except (OSError,ValueError,KeyError):
-        return 'open or stale retained evidence'
+    return 'unexercised: run python3 mbt/stage-e/run.py on the current sources'
 
 
 def main():

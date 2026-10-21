@@ -9,7 +9,7 @@ implemented and selected by default in the minidump CLI. The
 The later [P4 resume](../../docs/Ariadne/bap-analysis-core-design.md#admission-resume) records bounded
 completion pages and current remote checks. The
 [selected replacement](../../docs/Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query) qualifies
-active-corpus P4. The [user decision](../../evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
+active-corpus P4. The [user decision](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
 accepts that scope and excludes the remaining historical real-Linux clauses;
 old coverage and six historical outputs remain unexercised.
 Heavy work must remain remote.
@@ -43,6 +43,9 @@ corpus, not universal refinement or a packaged cross-platform release. Historica
 A0 records describe the older bounded bootstrap. BAP lifting remains trusted.
 
 For the wider context, see the [documentation map](../../docs/documentation-map.md).
+
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
 
 ## Historical A0 facility probe
 
@@ -119,7 +122,7 @@ Stage 1/Stage E regression gates. The supplied LLVM IR engine remains separate.
 ## Compact completed recovery
 
 The [S6 contract](../../docs/Ariadne/caller-semantic-coverage-design.md#s6-bounded-completion-continuation-2026-10-19)
-and [qualification](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md)
+and [qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/caller-semantic-coverage/20261019/README.md)
 add `dense_completion.ml`. Helpers advertise `completion_codec = bitmap/v1`;
 `NativeAnalyzer::finish` explicitly selects its completion transaction. Ordinary
 step/named-action and legacy paged transactions retain their old schedule.

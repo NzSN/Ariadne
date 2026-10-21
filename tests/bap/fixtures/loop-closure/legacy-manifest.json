@@ -1,17 +1,7 @@
 {
   "schema": "ariadne.loop-closure-legacy-source-manifest/v1",
   "frozen_date": "2026-10-15",
-  "scope": "Exact previously qualified source files, frozen from the source archive before loop-closure implementation edits. Historical v1 fixtures; not the new implementation.",
-  "archive": {
-    "path": "target/loop-aware-20261015/legacy-qualified-sources.tar.gz",
-    "sha256": "94f0881ee74fab8aa0364a485becc6db4aa7fea045833065be094f1848eab87c",
-    "source_count": 711
-  },
-  "qualified_source_record": {
-    "path": "evidence/Ariadne/guarded-target-resolution/20261014/artifacts/delivery/source-files.json",
-    "sha256": "4061744c473e9b0244ff8e7d0e52cae917e6a0028cbf6a35974c558ce502f1d2",
-    "source_count": 711
-  },
+  "scope": "Legacy source inputs for compiled compatibility tests; not a retained successful run.",
   "assets": [
     {
       "source": "src/bap/composition.rs",

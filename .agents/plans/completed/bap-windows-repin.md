@@ -36,6 +36,11 @@ replacement contract. Correct capture and performance acceptance remain separate
 
 For the wider context, see the [documentation map](../../../docs/documentation-map.md).
 
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## Frozen replacement scope
 
 The new case is a controlled application that crashes under native Windows x64

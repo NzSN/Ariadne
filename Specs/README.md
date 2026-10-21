@@ -18,7 +18,7 @@ records the subsequent source audit and separate qualification limits.
   [H0–H5 implementation plan](../.agents/plans/alignment-hypotheses.md) — additive
   conditional residue filtering, activation ownership and normal selection.
   The original guard verdict and proof remain separate. The
-  [2026-10-16 qualification](../evidence/Ariadne/alignment-hypotheses/20261016/README.md)
+  [2026-10-16 qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/alignment-hypotheses/20261016/README.md)
   records 25 finite model configurations and the independent 39-case oracle;
   runtime/mutation evidence remains a separate tier.
 
@@ -54,33 +54,33 @@ records the subsequent source audit and separate qualification limits.
   eighteen TLC configurations. BAP projection, capture bytes, hashes, host
   allocation and cooperative clock behavior remain concrete premises; these
   finite checks do not prove Rust/native/ISA refinement. See the
-  [local qualification](../evidence/Ariadne/frame-question/20261018/README.md) and
-  [2026-10-19 remote finite acceptance](../evidence/Ariadne/frame-question/20261019/README.md).
+  [local qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261018/README.md) and
+  [2026-10-19 remote finite acceptance](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md).
 
 - [Frame-connection model](AriadneFrameConnections.tla) and
   [Stage 5.2 ledger](../.agents/plans/frame-connections.md) — represented
   corridor/SCC exactness, shortest first sample, bounded further samples and
   preserved frontiers/writers/hypotheses. The
-  [local record](../evidence/Ariadne/frame-connections/20261018/README.md)
+  [local record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-connections/20261018/README.md)
   separates finite checking, compiled mutations, captures and remote limits.
 
 - [Frame-path model](AriadneFramePaths.tla) and
   [F0–F4 plan](../.agents/plans/frame-path-enumeration.md) — strict output count, valid
   structural paths, bounded work and preservation of memory writers; the
-  [2026-10-20 finite qualification](../evidence/Ariadne/frame-paths/20261020/README.md)
+  [2026-10-20 finite qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/20261020/README.md)
   records model checks separately from runtime/capture evidence.
 
 - [Memory refinement model](AriadneMemoryRefinement.tla) and
   [implementation ledger](../.agents/plans/memory-provenance-refinement.md) — specified
   candidate-preservation and backward-value contract. Local Apalache/TLC checking
   passes in the section-5 record after adding the sequence type annotation;
-  [remote M4/Scanner acceptance](../evidence/Ariadne/frame-question/20261019/README.md)
+  [remote M4/Scanner acceptance](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md)
   now passes for the selected profile; the broader audited model suite remains separate.
 
 - [Selected I5c design](../docs/Ariadne/address-wrap-design.md) and
   [W0 model/oracle stage](../.agents/plans/i5c-address-wrap.md#w0--freeze-semantics-and-independent-expectations)
   — [address-wrap decision model](AriadneAddressWrap.tla), qualified in the
-  [2026-10-20 W0 record](../evidence/Ariadne/address-wrap/20261020/w0/README.md):
+  [2026-10-20 W0 record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/address-wrap/20261020/w0/README.md):
   52 scenarios, one Apalache typecheck and six TLC configurations on exact
   promoted sources. No bounded-SMT, ISA or runtime conformance result is claimed.
 
@@ -118,6 +118,9 @@ frame-path and question-level models in this directory. The
 records the archive location, retained [Lean reference](../lean/README.md),
 BAP's trusted role and the analysis-model boundary.
 
+Current validation follows the [executable test matrix](../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+
 ## Frame connections: Stage 5.2
 
 Run `bash Specs/check-frame-connections.sh` for Apalache type checking, 13 TLC
@@ -148,7 +151,7 @@ and separate tests. Preserving a modeled writer set says samples cannot remove
 candidates; this module performs no writer analysis. The checks do not prove
 universal refinement, instruction semantics, feasibility, execution history or
 program-level disconnection. The dated evidence records local Windows WSL
-results; the [2026-10-19 remote record](../evidence/Ariadne/frame-question/20261019/README.md)
+results; the [2026-10-19 remote record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md)
 now closes the finite FC5/FC6 gate on the exact declared sources. It is separate from the later [S3 finite suite qualification](#specification-synchronization-s3-qualification-2026-10-20).
 
 ## Current model ownership
@@ -169,7 +172,7 @@ compiled behavioral mutations have separate observers and evidence.
 [AriadneAlignmentHypothesis.tla](AriadneAlignmentHypothesis.tla) adds per-point
 masked residue propagation and conditional normal-selection invariants without
 changing the original root-premise authority. Its
-[qualified finite scope](../evidence/Ariadne/alignment-hypotheses/20261016/README.md)
+[qualified finite scope](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/alignment-hypotheses/20261016/README.md)
 does not establish accumulated-path feasibility or universal refinement.
 The [synchronization plan](../.agents/plans/specification-sync.md) separates source
 corrections and bounded local evidence from remote qualification. A model's
@@ -200,8 +203,8 @@ finite/native matrix qualification; W4 product/capture gates and W5 full
 acceptance remain pending. Its exact two model files received fresh global typing in the later S3 suite; the W0 model/oracle tier remains separate. Retired ISA models and historical Lean research are outside this audit. Earlier source-bound records retain their hashes and qualification scope;
 changing a model or its comments does not refresh those records.
 
-The [synchronization record](../evidence/Ariadne/specification-sync-20261011/report.json)
-and [artifact manifest](../evidence/Ariadne/specification-sync-20261011/evidence-manifest.json)
+The [synchronization record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/specification-sync-20261011/report.json)
+and [artifact manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/specification-sync-20261011/evidence-manifest.json)
 retain source hashes and bounded local checks: all 22 modules and 19
 configurations parse; 13 selected frame traces and 22 scalar probes pass;
 checker dispatch/failure tests use stub tools; default/core/property tests pass.
@@ -209,7 +212,7 @@ These historical checks are separate from the later finite remote S3 qualificati
 
 ## Specification synchronization S3 qualification, 2026-10-20
 
-The [S0–S3 ledger](../.agents/plans/specification-sync.md) and [sealed evidence](../evidence/Ariadne/specification-sync/20261020/README.md) close the declared finite S3 suite on the exact lookup8 models. The historical 20261011 audit retains its 17 active/five replay counts; the new snapshot types 32 root modules, including the official standard module, pair auxiliaries and two current AddressWrap modules. There are 53 actual typecheck invocations, including repeated specialized checks and five replay types, 40 bounded calls, 24 TLC instances (19 original plus five prerequisites),six original scripts and eight audited core configurations.
+The [S0–S3 ledger](../.agents/plans/specification-sync.md) and [sealed evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/specification-sync/20261020/README.md) close the declared finite S3 suite on the exact lookup8 models. The historical 20261011 audit retains its 17 active/five replay counts; the new snapshot types 32 root modules, including the official standard module, pair auxiliaries and two current AddressWrap modules. There are 53 actual typecheck invocations, including repeated specialized checks and five replay types, 40 bounded calls, 24 TLC instances (19 original plus five prerequisites),six original scripts and eight audited core configurations.
 
 The full 120 guarded Java invocations are 53 type +40 bounded +24 TLC +3version/identity calls. The bounded outcomes are30 `NoError` and 10 `ExecutionsTooShort`, all exit0. Each short scenario has a nonempty initial state and intended terminal Next, independently matched by its fresh TLC graph. Its last checked state precedes the unchanged requested maximum; no full-length execution or unbounded proof is inferred. Eight targeted FramePaths preflight checks and three final fold/range TLC controls are separate groups.
 
@@ -223,7 +226,7 @@ The official 6,500-byte `Apalache.tla` SHA `a9115b404e72c58fd085f81bc59cc918f8ad
 Run `Specs/check-target-resolution.sh` with the pinned Apalache and TLC tools.
 It typechecks `AriadneTargetResolution.tla` and explores the full, partial-table,
 new-incoming, untrusted-memory and zero-budget configurations with one worker.
-The [qualification record](../evidence/Ariadne/indirect-target-resolution/qualification-20261013/report.json)
+The [qualification record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/qualification-20261013/report.json)
 retains the five safety/fair-termination results and separate oracle, native,
 replay and mutation evidence. These new checks do not refresh the older
 specification-synchronization campaign or its pending remote clauses.
@@ -263,7 +266,7 @@ conditional-write cases enumerate one decrement followed by its taken condition
 and a later upper bound: correct indices are `{1,2,3}`; substituting the update
 again into an already post-transfer condition incorrectly gives `{0,2,3}`.
 This is a finite guard-normalization contract, not an instruction-step proof.
-The [2026-10-14 source-bound qualification](../evidence/Ariadne/guarded-target-resolution/20261014/README.md) records remote typechecking, all 19 finite model cases, Rust/native controls and 330 generated replay observations. Its candidate/discovery result is historical, including the then-incomplete ninth certificate. The [2026-10-15 loop qualification](../evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) subsequently closes that certificate and the new loop dispatch through independently checked induction. The [canonical design](../docs/Ariadne/guarded-target-resolution-design.md) keeps both scopes and remaining guard/frame limits explicit.
+The [2026-10-14 source-bound qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guarded-target-resolution/20261014/README.md) records remote typechecking, all 19 finite model cases, Rust/native controls and 330 generated replay observations. Its candidate/discovery result is historical, including the then-incomplete ninth certificate. The [2026-10-15 loop qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) subsequently closes that certificate and the new loop dispatch through independently checked induction. The [canonical design](../docs/Ariadne/guarded-target-resolution-design.md) keeps both scopes and remaining guard/frame limits explicit.
 
 ## Loop-target closure component interface
 
@@ -1000,7 +1003,7 @@ integration separately.
 
 ## Caller completion conformance, 2026-10-19
 
-The [S6 evidence](../evidence/Ariadne/caller-semantic-coverage/20261019/README.md)
+The [S6 evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/caller-semantic-coverage/20261019/README.md)
 checks existing core/admission models against compact completed results. The
 [completion contract](../docs/Ariadne/caller-semantic-coverage-design.md#s6-bounded-completion-continuation-2026-10-19)
 changes storage and completion scheduling. `Ariadne.tla` retains the same
@@ -1019,7 +1022,7 @@ and wire validation have separate concrete tests; no ISA semantics is added.
 
 The [frame-path contract](../docs/Ariadne/investigation-design.md#f4-post-s6-qualification)
 and [execution ledger](../.agents/plans/frame-path-enumeration.md) have
-[source-bound evidence](../evidence/Ariadne/frame-paths/20261020/README.md) for
+[source-bound evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/20261020/README.md) for
 six finite model configurations and typechecking. The source2 capsule contains 1,070
 files and has SHA-256
 `ed7b76ef6b9ac6f32e66c570d0234780861afe123fe0786916b33d7eba1bb84d`.

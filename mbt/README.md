@@ -16,6 +16,9 @@
 - [Installed compatibility record](../docs/Ariadne/architecture.md#installed-tool-compatibility-2026-10-01) — bounds the exercised tool/server/client path.
 - [Stage E replay](stage-e/README.md) — extends generated conformance to stateflow and supplied IR.
 - [Proof boundary](../docs/Ariadne/semantic-assurance.md#universal-rust-refinement-boundary) — explains why replay is not a universal refinement proof.
+- [Routine generated validation](../docs/Ariadne/semantic-assurance.md#running-generated-validation)
+  — combines generated core/reference properties with this replay and retains a
+  compact receipt; selected native/capture and timing campaigns remain separate.
 
 **What remains unresolved.** Finite conformance checks do not prove the Rust implementation correct for every valid request. A universal refinement proof remains open, and adapter facts remain premises. Installed-server compatibility applies only to the exercised transport and tool identities.
 
@@ -60,6 +63,9 @@ binding inside the post-match factory. The application adapter contains no raw
 `State`/`Value` encoding or wire-action dispatch. Generated source is owned by
 the compiler and excluded from rustfmt; only its unused support helpers are
 allowed at the module's lint boundary.
+
+Current validation follows the [executable test matrix](../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
 
 ## Prepare and run
 
@@ -147,7 +153,7 @@ the corpus alongside the projected files. The `ariadne.mbt-address-map-projectio
 receipts bind raw bytes, projected bytes, and converter source; they are
 application-owned receipts, not compiler-generated projection certificates.
 
-## Acceptance and recorded result
+## Executable acceptance
 
 Acceptance requires complete replay of every fixture, repeated initialization,
 all six transition kinds and the required adjacent transition pairs, actual
@@ -165,9 +171,8 @@ failed attempts expose dispatch counts without claiming matched coverage.
 The 27 input-contract rejection cases and generated-request tests remain in the
 ordinary Rust test suite; this MBT corpus exercises the six specified fixtures.
 
-The [retained handwritten baseline](results/handwritten-baseline.json) records
-the complete gate's historical results below. Fresh runs write ignored
-`results/latest.json`; the retained baseline supplies no current qualification:
+The runner executes these expectations afresh and writes only ignored local
+results. No retained passing baseline supplies an expected result.
 
 | Check | Result |
 | --- | --- |
@@ -195,14 +200,8 @@ instead of treating a disposal callback invocation as resource release. Adapter
 successful replay and every mutant require exactly one drop; wrong-digest
 rejection requires no port construction or drop.
 
-The refactor was checked against [the handwritten baseline](results/handwritten-baseline.json):
-the corpus manifest, analyzer source hashes, semantic digest, all 168 matched
-states, action/pair coverage, and each mutant's first mismatch position were
-preserved. This comparison is optional for normal runs and reproducible with:
-
-```sh
-python3 mbt/run.py --compare-baseline mbt/results/handwritten-baseline.json
-```
+The former optional comparison with a handwritten passing report is retired.
+Generated model traces and explicit mutation expectations are the test oracles.
 
 Focused binding checks cover generated input rejection before any reset,
 poisoning, generated action coverage, and ownership release. The freshness test

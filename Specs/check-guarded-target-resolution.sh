@@ -16,7 +16,6 @@ sha256sum "$repo_root/Specs/AriadneGuardedTargetResolution.tla" \
   "$repo_root"/Specs/GuardedTargetResolution*.cfg \
   "$repo_root/tests/bap/fixtures/composition/oracle.py" \
   "$repo_root/tests/bap/fixtures/composition/contract.json" \
-  "$repo_root/evidence/Ariadne/indirect-target-resolution/dump03958-table-witness-20261014/tables.json" \
   > "$run_root/sources-before.sha256"
 
 "$apalache" version > "$run_root/apalache-version.log" 2>&1

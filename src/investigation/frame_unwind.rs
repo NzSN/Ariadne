@@ -123,6 +123,7 @@ pub(crate) fn unhex(s: &str) -> Result<Vec<u8>, Error> {
         .map(|i| u8::from_str_radix(&s[i..i + 2], 16).map_err(|e| invalid(e.to_string())))
         .collect()
 }
+#[cfg(feature = "input")]
 pub(crate) fn hex(b: &[u8]) -> String {
     b.iter().map(|b| format!("{b:02x}")).collect()
 }
@@ -183,6 +184,7 @@ pub struct CapturedFrameChain {
     seed: FrameSeed,
 }
 impl CapturedFrameChain {
+    #[cfg(feature = "bap")]
     pub(crate) fn artifact_bytes(&self) -> usize {
         self.seed.artifact_bytes
     }

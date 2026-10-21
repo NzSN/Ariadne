@@ -1,0 +1,10 @@
+{
+  "revision": "ebb2e534e8da339f498f20d0a9e1e0b8506a3bdd",
+  "sourceHashes": {
+    "src/bap/projection.rs": "836ee084c0885563d19b5f5e61b196a494929117194a8f30dadc96424bc59488",
+    "src/bap/prepare.rs": "b7a5eb08024b3d21c39a5daa3419354607caa90f2c5ed7629189aad8ea556d2a",
+    "src/bap/ast.rs": "e03169007ec2469ad0a006faf044d956aeacf468a2ad19ce810e9153a52ccafb",
+    "src/investigation/zero_address.rs": "bcb75de73f078b97f330fbd42406923ca2c57a5aa8248db4b88caaafc5bf85dc",
+    "native/bap-core/capture.ml": "aa4a3432f44c961a1fe2bac99e60c3ac68baca8c1034e5eb06bbe87eb0ac0a34"
+  }
+}

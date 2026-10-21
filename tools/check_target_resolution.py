@@ -21,7 +21,6 @@ from check_target_resolution_mutations import (
 )
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT = ROOT / 'evidence/Ariadne/indirect-target-resolution/qualification-20261013/report.json'
 ORIGINAL_SHA256 = '5fea4ca614706fe0040ed3231efee0edf9ce4004a51d902bb581025b48bade08'
 ORIGINAL_BYTES = 1305482568
 ORIGINAL_QUERY = {'entry': '0x00007ff640079640', 'seed': '0x00007ff640079670',
@@ -260,46 +259,9 @@ def verify_core_import(core, manifest, report, record):
         require(row['family'] in {'core', 'machine-state'} and row['observations'] > 0
                 and isinstance(row['mismatch'], dict) and row['mismatch'].get('action')
                 and is_digest(row['sourceSha256']), 'core mutant behavioral evidence missing')
-    imported = artifact_json(report, record, 'core-import/verification.json')
-    require(imported['schema'] == 'ariadne.r6-core-evidence-import/v1', 'core import schema differs')
-    archive = imported['archive']
-    old_root = ROOT / 'evidence/Ariadne/caller-semantic-coverage/20261019'
-    require(archive['source'] == str((old_root / 'evidence.tar.gz').relative_to(ROOT))
-            and archive['sha256'] == '240dd9fafd7cafe78ab531934cf5c122955e4629c46e6b7803794ca75987922d'
-            and archive['bytes'] == 21973656, 'core import archive identity differs')
-    path = bound_path(ROOT, archive['source'])
-    require(path.stat().st_size == archive['bytes'] and sha(path) == archive['sha256'],
-            'core import archive bytes differ')
-    evidence_path = artifact_path(report, record, imported['evidence_manifest'])
-    source_path = artifact_path(report, record, imported['source_manifest'])
-    require(sha(evidence_path) == sha(old_root / 'manifest.json')
-            and sha(source_path) == sha(old_root / 'source-manifest.json'),
-            'core import retained manifests differ')
-    evidence = read_json(evidence_path)
-    require(evidence['archive_sha256'] == archive['sha256']
-            and evidence['archive_bytes'] == archive['bytes'], 'core import archive manifest differs')
-    core_path = artifact_path(report, record, report['gates']['core_mutations']['result'])
-    for member, path in [
-        ('mutations/ordinary/result.json', core_path),
-        ('campaign/last-checks/native-replay/result.json',
-         artifact_path(report, record, imported['baseline_replay'])),
-        ('native/manifest.json', artifact_path(report, record, imported['baseline_native_manifest'])),
-        ('sources/source-manifest.json', source_path),
-    ]:
-        identity = evidence['files'][member]
-        require(path.stat().st_size == identity['bytes'] and sha(path) == identity['sha256'],
-                'core import extracted member differs: ' + member)
-    baseline = read_json(source_path)['files']
-    relevant = {name for name in baseline if name.startswith((
-        'native/bap-core/', 'src/mbt/core/', 'src/mbt/stage_e/', 'mbt/'))
-        and name != 'native/bap-core/README.md'}
-    relevant.update(core['observerHashes'])
-    relevant.update({'tools/check_bap_core_mutations.py', 'tools/check_bap_core_replay.py'})
-    for name in relevant:
-        require(report['sources'].get(name) == baseline[name], 'core import source changed: ' + name)
-    old_native = artifact_json(report, record, imported['baseline_native_manifest'])
-    require(old_native == manifest, 'core import baseline native helper differs')
-    verify_replay(artifact_json(report, record, imported['baseline_replay']), old_native, report['sources'])
+    for row in core['mutants']:
+        require(row.get('helperManifest') == manifest, 'fresh core mutant helper differs')
+    require(not report.get('core_import'), 'historical mutation imports are retired; execute current tests')
 
 
 def parse_cli_sample(text):
@@ -325,7 +287,7 @@ def verify_original(original, report, record):
         require(original[key] == value, 'original query differs: ' + key)
     require(original['memory_premise'] == 'FrozenCapturedControlData', 'original memory premise differs')
     oracle_name = 'tests/bap/fixtures/target-resolution-table.json'
-    freeze_name = 'evidence/Ariadne/indirect-target-resolution/contract-freeze-20261012.json'
+    freeze_name = 'tests/bap/fixtures/target-resolution-limits.json'
     require(oracle_name in report['sources'] and freeze_name in report['sources'],
             'original oracle/contract source identity missing')
     oracle = read_json(ROOT / oracle_name)
@@ -437,7 +399,7 @@ def verify_v2(report, record):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--record', type=Path, default=DEFAULT)
+    parser.add_argument('--record', type=Path, required=True)
     parser.add_argument('--correctness-only', action='store_true', help='verify correctness tiers while explicitly leaving performance acceptance open')
     args = parser.parse_args()
     record = args.record.resolve()

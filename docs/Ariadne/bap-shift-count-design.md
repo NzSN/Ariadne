@@ -8,15 +8,20 @@
 
 **What this document establishes.** The source-grounded diagnosis, generic BIL shift contract, count/provenance safeguards, producer identities, implementation ownership and separate original-dump retry boundary.
 
-**Where to go next.** Read [BAP integration](bap-analysis-core-design.md#projection) for typed transport and projection, [semantic assurance](semantic-assurance.md) for trusted lifting, and the [execution plan](../../.agents/plans/completed/bap-shift-counts.md) for tasks and gates. The [pinned-source research](../../evidence/Ariadne/bap-shift-width/20261014/pinned-bap-source-research.md) retains primary source provenance.
+**Where to go next.** Read [BAP integration](bap-analysis-core-design.md#projection) for typed transport and projection, [semantic assurance](semantic-assurance.md) for trusted lifting, and the [execution plan](../../.agents/plans/completed/bap-shift-counts.md) for tasks and gates. The [pinned-source research](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-shift-width/20261014/pinned-bap-source-research.md) retains primary source provenance.
 
 **What remains unresolved.** This fixes BIL shift typing/projection compatibility. It does not introduce exact vector values, general SIMD coverage, new scalar/address/target-resolution precision, hardware shift-count assumptions, executed history or a full-dump path guarantee. Existing incomplete control, unwind and resource limits remain separate.
+
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## Reproduction and diagnosis
 
 A public `bap::Backend::prepare` regression containing only the captured three bytes reproduces the same failure against the current pinned producer on remote WSL. Both runs fail before projection with the identical operand-width message; the full dump is unnecessary for this loop.
 
-The [captured lift](../../evidence/Ariadne/guard-admission/20261014/artifacts/next-blocker-bil.json) has fourteen statements. At `bil[3].value.rhs`, operator 11 is BIL LSHIFT:
+The [captured lift](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guard-admission/20261014/artifacts/next-blocker-bil.json) has fourteen statements. At `bil[3].value.rhs`, operator 11 is BIL LSHIFT:
 
 ```text
 cast128(lane_result32) << (lane_index8 * 0x20:8u)
@@ -65,7 +70,7 @@ Scalar refinement, affine addresses and target-expression extraction keep their 
 
 ## Validation and dated execution
 
-The [source-bound validation](../../evidence/Ariadne/bap-shift-width/20261014/validation.json) and [268-member artifact manifest](../../evidence/Ariadne/bap-shift-width/20261014/qualification/artifact-manifest.json) record 680 source/tool/fixture hashes against the shift-count implementation as qualified then. Later G5 guard-validator/CLI changes have separate qualification; the original records remain immutable. All builds and campaigns ran in a task-private WSL namespace on `windows-dev`; no local Cargo/native compilation was performed.
+The [source-bound validation](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-shift-width/20261014/validation.json) and [268-member artifact manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-shift-width/20261014/qualification/artifact-manifest.json) record 680 source/tool/fixture hashes against the shift-count implementation as qualified then. Later G5 guard-validator/CLI changes have separate qualification; the original records remain immutable. All builds and campaigns ran in a task-private WSL namespace on `windows-dev`; no local Cargo/native compilation was performed.
 
 | Tier | Result and scope |
 | --- | --- |
@@ -90,7 +95,7 @@ V6 default still stops at the unproved MOVAPS alignment branch: nine caller and 
 
 A separate attempted 32 MiB evidence cap is rejected as `guard profile limit exceeded`: this reviewed profile permits tightening limits, not increasing them. No limit relaxation was implemented or qualified here. Larger guard-evidence contracts, complete incoming coverage, unwind and full-dump path qualification need separate work. New profiles distinguish this correction without rewriting old v4/v5 evidence or its measured outcomes.
 
-A later [read-only budget diagnosis](../../evidence/Ariadne/guard-evidence-budget/20261014/README.md) reproduces the same failure with unchanged production limits. The first refused source is the 4,004th lifted instruction, `CMP32rm` at `0x00007ff77440423d`, bytes `413b4f14`: its 4,457-byte BIL would raise the raw AST sum from 4,192,674 to 4,197,131 bytes, exceeding the 4,194,304-byte cap. All 4,012 sources in the returned batches are unique and within the caller's runtime function range. CMP-family BIL accounts for 1,549,137 bytes; exact XORPS was already passed in batch 51. The cost comes from retaining original BIL throughout the candidate graph, with no duplicate-site charge found. Preparation aborts before guard checking and final query publication, so the retry driver's subsequent `missing-frame-query` listing never enters path enumeration. The separately enforced full input/report, instruction-start and prefix-byte budgets remain part of any future larger-evidence design.
+A later [read-only budget diagnosis](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guard-evidence-budget/20261014/README.md) reproduces the same failure with unchanged production limits. The first refused source is the 4,004th lifted instruction, `CMP32rm` at `0x00007ff77440423d`, bytes `413b4f14`: its 4,457-byte BIL would raise the raw AST sum from 4,192,674 to 4,197,131 bytes, exceeding the 4,194,304-byte cap. All 4,012 sources in the returned batches are unique and within the caller's runtime function range. CMP-family BIL accounts for 1,549,137 bytes; exact XORPS was already passed in batch 51. The cost comes from retaining original BIL throughout the candidate graph, with no duplicate-site charge found. Preparation aborts before guard checking and final query publication, so the retry driver's subsequent `missing-frame-query` listing never enters path enumeration. The separately enforced full input/report, instruction-start and prefix-byte budgets remain part of any future larger-evidence design.
 
 
 The subsequent [G5 budget delivery](justified-branch-pruning-design.md#g5-budget-configuration-validation-2026-10-14) releases the profile ceilings without changing shift semantics or defaults. Its fresh original caller retry prepares 4,764 candidate sites under explicitly expanded budgets, with a 9,001,701-byte report, but retains incomplete candidate coverage and an unknown MOVAPS verdict. Native initialization separately rejects the request above its 8 MiB frame bound. The initial 4 MiB rejection above is historical; no full-dump paths are qualified by either finite correction.

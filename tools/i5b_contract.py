@@ -15,6 +15,7 @@ PERFORMANCE=ROOT/'tests/input/fixtures/i5b/performance.json'
 def sources():
     result=previous_sources()
     paths=list((ROOT/'tools').glob('*i5b*.py'))
+    paths.append(ROOT/'tools/run_output.py')
     paths += [ROOT/'Specs'/name for name in ['AriadneZeroBaseOffset.tla','ZeroBaseOffset.cfg','check-zero-base-offset.sh']]
     for p in paths: result[str(p.relative_to(ROOT))]=sha(p)
     return dict(sorted(result.items()))

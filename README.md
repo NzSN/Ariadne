@@ -180,6 +180,9 @@ python3 mbt/run.py
 Follow the MBT guide's one-time tool preparation first; ordinary Cargo tests
 remain independent of the model-checking tools and client dependencies.
 
+Current validation follows the [executable test matrix](tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+
 ## Intended workflow
 
 Binary and dump inputs should feed the same machine analysis through a common view

@@ -7,10 +7,10 @@
 bounded scalar predecessor inference, a strict separate report and CLI mode.
 The original source inspection used `53fe1ff` and the retained Scanner record.
 The independent oracle is frozen; source/root checks and small pinned-runtime
-probes pass. The [2026-10-18 section-5 record](../../evidence/Ariadne/frame-question/20261018/README.md)
-adds local model checking and integration mutation controls. The [2026-10-19 remote record](../../evidence/Ariadne/frame-question/20261019/README.md)
+probes pass. The [2026-10-18 section-5 record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261018/README.md)
+adds local model checking and integration mutation controls. The [2026-10-19 remote record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md)
 qualifies the selected bounded model, dedicated mutation campaign and complete
-Scanner candidate-table profile. The [S3 finite suite](../../evidence/Ariadne/specification-sync/20261020/README.md) subsequently qualifies the exact algebraic scalar model and checked finite solver reduction. Wider alias, history and release claims remain separate.
+Scanner candidate-table profile. The [S3 finite suite](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/specification-sync/20261020/README.md) subsequently qualifies the exact algebraic scalar model and checked finite solver reduction. Wider alias, history and release claims remain separate.
 
 **Why this document exists.** The [Scanner resume record](bap-analysis-core-design.md#admission-resume)
 preserves a completed but partial explanation. Its `unknown-memory-alias` gaps
@@ -55,9 +55,14 @@ proposed types, algorithms, limits and report validation.
 
 **What remains unresolved.** General memory regions, loop-instance identities,
 joint machine-state reconstruction and broader inverse operations remain outside
-the first finite profile. Selected mutation/Scanner acceptance is bound to its 2026-10-19 evidence, and the [2026-10-20 S3 suite](../../evidence/Ariadne/specification-sync/20261020/README.md) qualifies the finite algebraic model and exact lookup-copy prerequisites. No executed writer or bad-RSI cause is established. The
+the first finite profile. Selected mutation/Scanner acceptance is bound to its 2026-10-19 evidence, and the [2026-10-20 S3 suite](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/specification-sync/20261020/README.md) qualifies the finite algebraic model and exact lookup-copy prerequisites. No executed writer or bad-RSI cause is established. The
 [accepted P4 scope](file-reader-design.md#windows-replacement-capture-and-bounded-query)
 qualifies its earlier implementation and corpus rather than these changed sources.
+
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## The concrete Scanner problem
 
@@ -84,7 +89,7 @@ one entry-memory origin and 11 instruction origins, comprising eight stack
 pushes and three stores. They are candidates admitted by the coarse model;
 they do not establish that each write touched the loaded bytes.
 
-The [retained summary](../../evidence/Ariadne/bap-admission/remote-20261010/report.json)
+The [retained summary](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/remote-20261010/report.json)
 records five `unknown-memory-alias` labels:
 
 | Site | Instruction | Relevant limitation |
@@ -100,10 +105,10 @@ overapproximation. They do not imply five missing numerical addresses.
 
 The detailed counts above come from member
 `artifacts/0/external/scanner/explanation.json` in the
-[retained archive](../../evidence/Ariadne/bap-admission/remote-20261010/evidence.tar.gz).
+[retained archive](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/remote-20261010/evidence.tar.gz).
 Its SHA-256 is
 `f48ca41bd52bdd233cf115c19f14a9f73d04ac02d8aa155f8c77793a9959892a`,
-verified against the [member manifest](../../evidence/Ariadne/bap-admission/remote-20261010/evidence-manifest.json)
+verified against the [member manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/remote-20261010/evidence-manifest.json)
 during this inspection. This is retained-evidence inspection, not a new
 Scanner execution.
 
@@ -587,9 +592,9 @@ remains remote. This documentation change provides no new runtime acceptance.
 
 ## Implementation checkpoint (2026-10-11)
 
-The [source-bound validation record](../../evidence/Ariadne/memory-refinement/source-validation.json)
+The [source-bound validation record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/memory-refinement/source-validation.json)
 records the exercised tiers and failed/unexercised prerequisites. The
-[model revision](../../evidence/Ariadne/memory-refinement/contract-revision.json)
+[model revision](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/memory-refinement/contract-revision.json)
 binds the corrected type-annotation placement while preserving the original
 freeze. Neither record grants full design acceptance.
 
@@ -621,7 +626,7 @@ groups and the inherited lower-range access guard. It does not reuse the MOV-onl
 question as permission for other forms. Scalar records are path-scoped and
 `derived_under_premises`; they do not claim jointly reconstructed pointers.
 
-The [independent contract freeze](../../evidence/Ariadne/memory-refinement/contract-freeze.json)
+The [independent contract freeze](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/memory-refinement/contract-freeze.json)
 binds 784 modular-range cases and 1,280 exhaustive small-width inverse cases.
 The source regressions check entry/candidate preservation, constants and common
 bases, loops/recovery gaps, budgets, invalid questions, forged exclusions,
@@ -657,7 +662,7 @@ original integration-design change itself supplied no qualification.
 
 ## Remote qualification, 2026-10-19
 
-The [P9/M4 evidence](../../evidence/Ariadne/frame-question/20261019/README.md)
+The [P9/M4 evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md)
 qualifies the finite component contract with typechecking/TLC, independent
 784/1,280 expectations, five dedicated compiled mutations and the full selected
 Scanner table. All 12 original entry/instruction candidates remain unresolved;
@@ -671,7 +676,7 @@ and local records above retain their historical acceptance boundaries.
 The [Scanner partial-explanation follow-up](investigation-design.md#scanner-partial-explanation-follow-up)
 subsequently qualifies the twenty-site control/decode audit, 123 location-specific
 entry requirements and fresh partial-case replay. Its
-[evidence](../../evidence/Ariadne/scanner-followup/20261020/README.md) keeps all
+[evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/scanner-followup/20261020/README.md) keeps all
 historical gaps and the old-v3/current-v6 semantic identities distinct. This is
 not a replacement M4 model/mutation campaign or evidence of an actual writer;
 the twelve-candidate S1 result above retains its original scope and tool identity.

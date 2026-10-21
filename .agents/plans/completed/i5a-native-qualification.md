@@ -38,6 +38,11 @@ or source/tool changes require new qualification.
 
 See the [documentation map](../../../docs/documentation-map.md) for wider context.
 
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## Preserved criteria and completed work
 
 Keep one warm-up and five measured repeats, assessment CLI median at most
@@ -90,16 +95,16 @@ identity checks; never promote a failed aggregate or rewrite its hashes.
 
 ## Acceptance and retained boundaries
 
-The [fixture record](../../../evidence/Ariadne/i5a-native-fixture-validation.json)
+The [fixture record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5a-native-fixture-validation.json)
 qualifies the source/fixture tier; its controlled-case flag remains false by
-scope. The separate [controlled record](../../../evidence/Ariadne/i5a-native-controlled-validation.json)
+scope. The separate [controlled record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5a-native-controlled-validation.json)
 qualifies both real Windows capture modes. Its historical original-Windows I4
 flag stays false in both records. The [separate active I4 re-pin](../../../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement)
-passes correctness but exceeds its fixed budget. The [verified archive](../../../evidence/Ariadne/i5a-native-evidence-manifest.json)
+passes correctness but exceeds its fixed budget. The [verified archive](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5a-native-evidence-manifest.json)
 binds retained files and maps their original runner paths.
 
-The [initial progress record](../../../evidence/Ariadne/i5a-native-progress/progress.json)
-and [progress archive](../../../evidence/Ariadne/i5a-native-progress-evidence.tar.gz)
+The [initial progress record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5a-native-progress/progress.json)
+and [progress archive](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5a-native-progress-evidence.tar.gz)
 preserve the earlier rejected attempts. Their flags remain unchanged; the new
 accepted records establish the later result.
 

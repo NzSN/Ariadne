@@ -32,6 +32,11 @@ now supplies captured memory and local instruction-start discovery within the
 root Cargo package. The [investigator CLI](Ariadne/result-rendering.md#json-v1) is
 delivered; PE/ELF image and ELF-core readers remain deferred.
 
+Current validation follows the [executable test matrix](../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## Build and check
 
 The native module is pinned at compile time to LLVM 20.1.2. The current build

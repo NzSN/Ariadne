@@ -41,6 +41,11 @@ For the wider context, see the [documentation map](../documentation-map.md).
 The original design was proposed on **2026-09-26**, baseline `fb7f142`, and
 implemented before production semantics migrated to BAP.
 
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## Historical decision and surviving contract
 
 The 2026-09-26 design retained LLVM MC 20.1.2 decoding and introduced native
@@ -539,7 +544,7 @@ locations. All writes to `memory:any` remain may-writes, never whole-memory kill
 
 ### Initial delivery (2026-09-26)
 
-Based on `fb7f142`, the [source-bound record](../../evidence/Ariadne/operand-effects-validation.json)
+Based on `fb7f142`, the [source-bound record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/operand-effects-validation.json)
 closed P0–P6 of the completed effects plan. `ByteSnapshot::prepare()` returned
 validated requests/evidence from protocol 2; `to_request()` retained protocol 1
 and coarse summaries. Neither `Analyzer` nor `Ariadne.tla` changed. The original
@@ -593,7 +598,7 @@ That independent track is now retired.
 
 ### Memory-immediate MOV delivery (2026-09-28)
 
-The [retained record](../../evidence/Ariadne/stage-a-validation.json), based on
+The [retained record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/stage-a-validation.json), based on
 `9bde052` at 23:49 CST, is byte-identical to the eight-gate
 `tools/check_minidump.py` result in `/tmp/ariadne-minidump-acceptance-na02rnng`.
 Sources stayed stable throughout and were checked again before recording.
@@ -636,7 +641,7 @@ no PE/ELF reader, ISA executor or production JSON CLI was delivered here.
 ### Selected-path no-change decision (2026-09-29)
 
 The [path-driven plan](../../.agents/plans/completed/priority-2-path-driven-effects-plan.md)
-and [source-bound record](../../evidence/Ariadne/priority-2-3-validation.json)
+and [source-bound record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/priority-2-3-validation.json)
 reviewed the controlled Chromium path at 23:26 CST. Of 29 captured starts before
 the seed, 22 had reviewed effects and seven `CALL64pcrel32` sites had opaque
 callee effects. `TEST64rr`/`TEST8rr` retained undefined AF. No pre-seed missing
@@ -709,7 +714,7 @@ Reviewed **2026-09-28** for the exact normal-continuation memory forms; no compl
 - Both PDFs were fetched through `tools/amd64_inventory.py fetch`, verified
   against the original `Specs/AMD64/manuals.lock.json`, and independently
   hash-checked. That source pin now retains the same bytes at
-  [amd-manuals.lock.json](../../evidence/Ariadne/amd-manuals.lock.json).
+  [amd-manuals.lock.json](../../tests/bap/fixtures/amd-manuals.lock.json).
 - The native helper was rebuilt against exact LLVM 20.1.2 headers; its binary
   SHA-256 for this review is
   `dca617ca3e4ad50aef0f795b7793b73a6dae10cf04eebd695b030f8ba82ac7b7`.
@@ -773,7 +778,7 @@ boundary, not a claim that the form-catalogue discrepancy is closed.
 
 ## Retired register-immediate MOV review
 
-Reviewed **2026-09-29**, retired **2026-10-02**. This fixed source/decoder observations for one candidate and closed none of its eight instruction-step obligations. The [D0 baseline](../../evidence/Ariadne/stage-d-baseline.json) and [D1 observations](../../evidence/Ariadne/stage-d-mov-observation.json) retain exact hashes and positive/negative rows.
+Reviewed **2026-09-29**, retired **2026-10-02**. This fixed source/decoder observations for one candidate and closed none of its eight instruction-step obligations. The [D0 baseline](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/stage-d-baseline.json) and [D1 observations](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/stage-d-mov-observation.json) retain exact hashes and positive/negative rows.
 
 ### Authority and case identity
 
@@ -833,7 +838,7 @@ form. `AMD64IntegerExecution.tla` and `lean/AMD64/IntegerExecution.lean`
 dispatch the reviewed form to a MOV **body**; existing checked examples cover
 one signed payload. Their fallthrough helpers advance RIP only under supplied
 fetch/event assumptions and label the result `fallthrough-applied`, not
-`retired`. The later [historical Stage D validation record](../../evidence/Ariadne/stage-d-progress-validation.json) adds bounded
+`retired`. The later [historical Stage D validation record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/stage-d-progress-validation.json) adds bounded
 fault and analyzer-projection witnesses. There is still no case-bound proof
 composing the full successful/faulting architectural boundary for all admitted
 payloads, TLA+/Lean correspondence for that composition, or the general

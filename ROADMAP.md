@@ -10,42 +10,49 @@
 
 **Where to go next.**
 
+- [Executable validation](tests/README.md) and the
+  [T0–T5 migration](.agents/plans/generated-validation-retention.md) replace the
+  retained collection with tests, small actual inputs and independent oracles.
+  T0–T5 is complete for this migration: PBT, core and stateflow/IR replay,
+  compiled mutations and root checks pass. Generated results stay outside source.
+  Full native-core/capture, timing and release prerequisites remain explicit.
+
 - [Structural frame report: Stage 5.1](docs/Ariadne/investigation-design.md#structural-frame-report-before-dataflow)
   and [SF0–SF6 ledger](.agents/plans/frame-structure-report.md) — recovery-only API,
   frame maps and separate CLI/report qualified in the
-  [2026-10-16 finite scope](evidence/Ariadne/frame-structure/20261016/README.md).
+  [2026-10-16 finite scope](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-structure/20261016/README.md).
   Existing completed-analysis and full frame-path gates remain separate.
 
 - [Frame corridors and cycle summaries: Stage 5.2](docs/Ariadne/investigation-design.md#structural-corridors-and-cycle-summaries)
   and [FC0–FC6 plan](.agents/plans/frame-connections.md) — implemented
   reachability/SCC/example consumer of validated structural reports.
-  [Remote finite/capture qualification](evidence/Ariadne/frame-question/20261019/README.md)
+  [Remote finite/capture qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md)
   now passes for both declared saved sources; broad release remains separate.
 
 - [All four section-5 priorities](docs/Ariadne/frame-question-investigation-design.md)
   and [program plan](.agents/plans/frame-question-investigation.md) — implemented
   one-question resolution, fair semantic work and local dependency/writer
   integration above the existing 5.1/5.2 products, with separate
-  [remote qualification](evidence/Ariadne/frame-question/20261019/README.md).
+  [remote qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md).
   The applicable FC5/M4 gates pass; frame-path F4 and release acceptance remain
   separate. Caller S6 has its own completed qualification.
 
 - [Explicit alignment hypotheses](docs/Ariadne/investigation-design.md#explicit-alignment-hypotheses)
   and [H0–H5 ledger](.agents/plans/alignment-hypotheses.md) — structural-only
-  conditional MOVAPS normal selection, separately [qualified](evidence/Ariadne/alignment-hypotheses/20261016/README.md)
+  conditional MOVAPS normal selection, separately [qualified](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/alignment-hypotheses/20261016/README.md)
   while retaining the baseline unknown verdict and actual saved v1 replay.
 
 - [Captured indirect-target R6 qualification](docs/Ariadne/indirect-target-resolution.md#r6-qualification-refresh)
   and [R0–R6 ledger](.agents/plans/indirect-target-resolution.md) — finite
   pointer-slot/signed-32 target admission, fresh resolver/model/replay/original
   Windows gates and retained source-verified core mutations. The
-  [2026-10-20 evidence](evidence/Ariadne/indirect-target-resolution/20261020/README.md)
+  [2026-10-20 evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/20261020/README.md)
   preserves incomplete target coverage and partial explanations.
 
 - [Scanner partial-explanation follow-up](docs/Ariadne/investigation-design.md#scanner-partial-explanation-follow-up)
   and [S2–S4 ledger](.agents/plans/scanner-partial-explanation.md) — twenty-site
   control/decode audit and 123-location entry boundary, with [qualified partial
-  evidence](evidence/Ariadne/scanner-followup/20261020/README.md). All 28 gaps
+  evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/scanner-followup/20261020/README.md). All 28 gaps
   remain; the review establishes no executed history or actual writer.
 
 - [Caller normal-flow coverage](docs/Ariadne/caller-semantic-coverage-design.md)
@@ -58,7 +65,7 @@
 - [Selected I5c address-wrap design](docs/Ariadne/address-wrap-design.md) and
   [W0–W5 plan](.agents/plans/i5c-address-wrap.md) — the next fault-time arithmetic
   question; W0–W3 pass their separate recorded gates, including the
-  [140-case/native114 W3 matrix](evidence/Ariadne/address-wrap/20261021/w3/README.md).
+  [140-case/native114 W3 matrix](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/address-wrap/20261021/w3/README.md).
   W4 sources are implemented with product/capture gates pending; W5 remains pending.
 
 - [Selected I5b design](docs/Ariadne/zero-base-offset-design.md) and
@@ -73,7 +80,7 @@ source-bound qualification of the selected finite corpus.
 Its [current replacement record](docs/Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query) qualifies
 P4 source/fixture, Rust release-runtime and native-default tiers remotely with
 completion transport, exact parity and unchanged fixed budgets. The user
-[accepted P4](evidence/Ariadne/bap-admission/p4-acceptance-20261010.json) with its
+[accepted P4](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/p4-acceptance-20261010.json) with its
 remaining historical real-Linux clauses excluded. No required P4 work remains.
 The selected
 Windows pin has its own baseline; the old six Linux hashes and real-Linux capture
@@ -88,9 +95,12 @@ transport, semantic projection, analysis and reports. The independent AMD64
 instruction-step/Lean project and full-manual coverage goal are retired under
 the [semantic assurance decision](docs/Ariadne/semantic-assurance.md).
 
+Current validation follows the [executable test matrix](tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+
 ## Active specifications — finite S3 qualified
 
-The [formal-model guide](Specs/README.md#specification-synchronization-s3-qualification-2026-10-20), [completed S0–S3 ledger](.agents/plans/specification-sync.md) and [evidence](evidence/Ariadne/specification-sync/20261020/README.md) close the declared finite model suite. The exact 1,118-file snapshot has 53 typecheck calls/32 root modules, 40 bounded calls, 24 TLC instances, 20 Memory partitions, six scripts and eight audited core TLC configurations. Full 120 Java calls include three identity checks; the eight preflight and three final equality controls are separate.
+The [formal-model guide](Specs/README.md#specification-synchronization-s3-qualification-2026-10-20), [completed S0–S3 ledger](.agents/plans/specification-sync.md) and [evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/specification-sync/20261020/README.md) close the declared finite model suite. The exact 1,118-file snapshot has 53 typecheck calls/32 root modules, 40 bounded calls, 24 TLC instances, 20 Memory partitions, six scripts and eight audited core TLC configurations. Full 120 Java calls include three identity checks; the eight preflight and three final equality controls are separate.
 
 Bounded outcomes remain 30 `NoError` and 10 terminal `ExecutionsTooShort` with nonempty Init and matching complete TLC graphs; requested maximum lengths are unchanged and not claimed reached by short cases. Canonical algebraic authority, exact finite lookup equality/closure/coverage, original Safety TLC, all domains and bounds remain explicit. This does not qualify W2 runtime, ISA, wider widths/chains, universal refinement or release. Historical 20261011 counts and failed attempts retain their scopes.
 
@@ -98,7 +108,7 @@ Bounded outcomes remain 30 `NoError` and 10 terminal `ExecutionsTooShort` with n
 ## Captured indirect targets — finite R6 qualified
 
 The [canonical contract](docs/Ariadne/indirect-target-resolution.md#r6-qualification-refresh)
-and [2026-10-20 evidence](evidence/Ariadne/indirect-target-resolution/20261020/README.md)
+and [2026-10-20 evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/20261020/README.md)
 close the selected R6 profile. Final source identity is
 `193e31bb835bda4a4e4b5fc59397c424f11adefc691d1e309faf7ff0348d43a5`
 (1,076 files). Fresh 14 Rust/one native legacy-v1 mutations, 39 Python controls,
@@ -117,14 +127,14 @@ base reports, packaged release, history/root cause and universal refinement.
 
 ## Guarded captured-target composition — scoped loop closure delivered
 
-The [design](docs/Ariadne/guarded-target-resolution-design.md), [composition plan](.agents/plans/completed/guarded-target-resolution.md) and [loop plan](.agents/plans/completed/loop-aware-target-resolution.md) deliver paired guarded/target preparation, versioned legacy replay and checked local-region induction. [Qualification dated 2026-10-15](evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) closes DA09 and DADD, all nine original incoming-coverage certificates and all 51 missing-start gates, with full native/Rust parity for both completed queries in that earlier stop-limited graph. The loop rule supplies coverage for already witnessed table entries. The caller follow-up below reaches a substantially larger graph; its completed-core gate now has S6 qualification. Finite original-capture frame-path F4 has the separate qualification below.
+The [design](docs/Ariadne/guarded-target-resolution-design.md), [composition plan](.agents/plans/completed/guarded-target-resolution.md) and [loop plan](.agents/plans/completed/loop-aware-target-resolution.md) deliver paired guarded/target preparation, versioned legacy replay and checked local-region induction. [Qualification dated 2026-10-15](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) closes DA09 and DADD, all nine original incoming-coverage certificates and all 51 missing-start gates, with full native/Rust parity for both completed queries in that earlier stop-limited graph. The loop rule supplies coverage for already witnessed table entries. The caller follow-up below reaches a substantially larger graph; its completed-core gate now has S6 qualification. Finite original-capture frame-path F4 has the separate qualification below.
 
 ## Structural frame maps — Stage 5.1 delivered
 
 The [structural report](docs/Ariadne/investigation-design.md#structural-frame-report-before-dataflow)
 publishes final-request recovery prefixes before dataflow, with explicit local
 frontiers, captured frame relations and admitted E8 call links. SF0–SF6 pass
-their [2026-10-16 source-bound scope](evidence/Ariadne/frame-structure/20261016/README.md):
+their [2026-10-16 source-bound scope](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-structure/20261016/README.md):
 finite model/oracle, root/capture/compatibility, compiled mutation, original-dump
 and helper-free saved-replay gates. The named frame 1→0 pair drains with zero
 dataflow/slice work and exact frozen-control agreement. Unknown guards/targets,
@@ -132,7 +142,7 @@ exceptional exits and opaque call context remain visible. Caller completion,
 full frame-path acceptance and executed-history recovery retain separate gates.
 
 The [explicit alignment extension](docs/Ariadne/investigation-design.md#explicit-alignment-hypotheses)
-is separately [qualified](evidence/Ariadne/alignment-hypotheses/20261016/README.md).
+is separately [qualified](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/alignment-hypotheses/20261016/README.md).
 It admits the selected 35c9 normal continuation only under a retained
 per-activation hypothesis, labels all derived structure conditional and
 preserves baseline Unknown. It adds no target narrowing, accumulated-path
@@ -141,7 +151,7 @@ constraint solver or completed caller/frame-path gate.
 ## Caller normal-flow coverage — S0–S6 qualified
 
 The [design](docs/Ariadne/caller-semantic-coverage-design.md), [ledger](.agents/plans/caller-semantic-coverage.md)
-and [2026-10-19 evidence](evidence/Ariadne/caller-semantic-coverage/20261019/README.md)
+and [2026-10-19 evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/caller-semantic-coverage/20261019/README.md)
 complete the original normal-flow/caller profile. Both original requests and
 their full states match between Rust/native implementations. Every reaching row
 is independently checked. Caller dataflow retains 141,301,903 links and finishes
@@ -158,7 +168,7 @@ remain open.
 
 The [contract](docs/Ariadne/investigation-design.md#f4-post-s6-qualification),
 [F0–F4 ledger](.agents/plans/frame-path-enumeration.md) and
-[2026-10-20 evidence](evidence/Ariadne/frame-paths/20261020/README.md) qualify
+[2026-10-20 evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/20261020/README.md) qualify
 bounded structural enumeration for the unchanged original S6 requests and
 physical frames 1→0, thread 23668, NP=10. The final listing returns
 one structural path with native/Rust equality and helper-free

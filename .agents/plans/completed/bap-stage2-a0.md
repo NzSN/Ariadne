@@ -35,6 +35,11 @@ adoption. This earlier capability probe does not supply those claims.
 
 For the wider context, see the [documentation map](../../../docs/documentation-map.md).
 
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## Work and exit evidence
 
 1. Verify the complete retained Stage 1 source inventory and analysis tools.

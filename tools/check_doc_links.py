@@ -52,7 +52,7 @@ def main():
         "README.md", "ROADMAP.md", "CHECKPOINTS.md", "Specs/README.md",
         "lean/README.md", "native/bap/README.md", "native/bap-core/README.md",
         "native/crashpad-demo/README.md",
-        "mbt/README.md", "mbt/stage-e/README.md", "evidence/Ariadne/README.md",
+        "mbt/README.md", "mbt/stage-e/README.md", "tests/README.md",
     ))
     docs = {p.resolve() for p in docs}
     graph = {p: set() for p in docs}

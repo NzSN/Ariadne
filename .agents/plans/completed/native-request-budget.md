@@ -4,13 +4,18 @@
 
 **Status.** T0–T4 completed on 2026-10-14 with source-bound remote WSL checks and successful larger original caller native initialization.
 
-**Why this document exists.** The [G5 captured retry](../../../evidence/Ariadne/guard-budget-configuration/20261014/README.md) creates a 9,001,701-byte guard report but native initialization rejects its request under the fixed 8 MiB inbound limit.
+**Why this document exists.** The [G5 captured retry](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guard-budget-configuration/20261014/README.md) creates a 9,001,701-byte guard report but native initialization rejects its request under the fixed 8 MiB inbound limit. The [test matrix](../../../tests/README.md) defines current validation.
 
 **What this document establishes.** Paired host/native transport configuration, capability negotiation, test ownership and finite acceptance gates. The canonical contract remains [BAP native request limits](../../../docs/Ariadne/bap-analysis-core-design.md#configurable-native-request-limit).
 
 **Where to go next.** Read the [completed guard-budget stage](guard-budget-configuration.md) for proof-budget configuration and [bounded completion transport](bap-completion-pages.md) for independent response/result limits.
 
 **What remains unresolved.** Larger requests do not repair incomplete candidate coverage, justify MOVAPS alignment or qualify full-dump paths. Response, completion, normalized-input and investigation budgets remain separate. This stage configures one JSON request frame rather than adding an input paging protocol.
+
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## Contract
 
@@ -38,6 +43,6 @@ All Cargo/native compilation runs in remote `windows-dev` WSL. Use task-private 
 
 ## Dated delivery, 2026-10-14
 
-T0–T4 are complete. The [qualification record](../../../evidence/Ariadne/native-request-budget/20261014/README.md) retains 686 matching source/tool/document hashes and 35 archived files. Final remote checks pass: 191 default and 46 core-only tests, format/Clippy/layout, 17 native kernel tests (five new request controls), nine capture and two frame-path tests, plus 14 Python contract controls. Exact host/direct-reader bounds, full unsigned parsing, capability/legacy/ready mismatch, child cleanup, unchanged response limits and a valid input above 8 MiB are exercised. Independent review returned no concrete finding.
+T0–T4 are complete. The [qualification record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/native-request-budget/20261014/README.md) retains 686 matching source/tool/document hashes and 35 archived files. Final remote checks pass: 191 default and 46 core-only tests, format/Clippy/layout, 17 native kernel tests (five new request controls), nine capture and two frame-path tests, plus 14 Python contract controls. Exact host/direct-reader bounds, full unsigned parsing, capability/legacy/ready mismatch, child cleanup, unchanged response limits and a valid input above 8 MiB are exercised. Independent review returned no concrete finding.
 
 The original 4,764-site captured caller and 9,001,701-byte guard report are rejected under the 8 MiB default and initialize successfully under 32 MiB. No core steps or paths are run. Candidate coverage remains incomplete and MOVAPS stays unknown. Defaults, response bounds, semantic inputs/model actions, captured bytes/roots and old qualification records retain their original scope. Model source hashes match retained G5 evidence; no fresh model or mutation campaign is claimed.

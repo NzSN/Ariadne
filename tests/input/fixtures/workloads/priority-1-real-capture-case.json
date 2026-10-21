@@ -1,0 +1,38 @@
+{
+  "schema": "ariadne-priority-1-real-capture-case-v1",
+  "description": "Controlled Chromium renderer member-dereference-after-free crash, Linux AMD64",
+  "capture": {
+    "sha256": "31481f3f080b0b165cc0d0c70f555f127f882556b34129055e80b082225a45c9",
+    "bytes": 237600,
+    "exception_thread": 299496,
+    "exception_code": "0x0000000b",
+    "rip": "0x0000566817922e42",
+    "code_range_start": "0x0000566817922dc2",
+    "code_range_end_exclusive": "0x0000566817922fc2",
+    "code_stream": 5,
+    "code_stream_entry": 15,
+    "code_file_offset": "0x0000000000039620"
+  },
+  "companion": {
+    "sha256": "d665de26a68430eccf3ae2621d76738bb044619cf75d556cf6126268bbb0776a",
+    "build_id": "97676574663086478a8fe1b40f3a541a444bc634",
+    "module_basename": "chrome",
+    "module_base": "0x0000566807306000",
+    "function_symbol": "_ZN4base5debug34AsanHeapMemberDereferenceAfterFreeEv",
+    "function_value": "0x000000001061cda0",
+    "function_size": 187
+  },
+  "query": {
+    "entry_rva": "0x000000001061cdc5",
+    "entry_va": "0x0000566817922dc5",
+    "entry_bytes_hex": "bf20000000",
+    "seed_rva": "0x000000001061ce42",
+    "seed_va": "0x0000566817922e42",
+    "seed_bytes_hex": "8b03",
+    "producer_rva": "0x000000001061cde6",
+    "producer_va": "0x0000566817922de6",
+    "producer_bytes_hex": "488b1b",
+    "upstream_rva": "0x000000001061cdcf",
+    "upstream_va": "0x0000566817922dcf"
+  }
+}

@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 INPUT_TREES = ('src', 'tests', 'native', 'Specs', 'tools', 'mbt')
-FIXTURE_TREES = ('evidence/Ariadne/indirect-target-resolution/dump048B-20261012',)
+FIXTURE_TREES = ()
 IGNORED_PARTS = {'__pycache__', 'target'}
 TIMEOUT_SECONDS = 1200
 # Production helper translation units; sdk_smoke.ml is a separate SDK check.

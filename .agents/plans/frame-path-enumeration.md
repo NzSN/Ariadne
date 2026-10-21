@@ -2,11 +2,11 @@
 
 ## Context and follow-up
 
-**Status.** F0–F4 pass the [2026-10-20 finite qualification](../../evidence/Ariadne/frame-paths/20261020/README.md)
+**Status.** F0–F4 pass the [2026-10-20 finite qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/20261020/README.md)
 for the strict `returned_count < NP` question, declared Windows captured-unwind
 profile and original physical-frame 1→0 query. The source/API/CLI and earlier
 fixture/native checks retain their historical source identities.
-The [2026-10-13 dump03958 application attempt](../../evidence/Ariadne/frame-paths/dump03958-20261013/report.md)
+The [2026-10-13 dump03958 application attempt](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/dump03958-20261013/report.md)
 ran the CLI and an explicitly larger-budget API probe; both returned unavailable.
 
 **Why this document exists.** The [owning investigation design](../../docs/Ariadne/investigation-design.md#bounded-frame-to-frame-path-listing)
@@ -33,6 +33,11 @@ separate source-bound qualification; broader release and capture claims do not.
 Remote endpoints were unavailable at the initial checkpoint. The 2026-10-13
 application used windows-dev successfully but did not exercise model/mutation
 gates; those original receipts are preserved as historical evidence.
+
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## Stages and ownership
 
@@ -89,7 +94,7 @@ F0 has a pre-runtime graph oracle/model freeze and a later syntax-bound revision
 source/configuration parsing passes, while remote state exploration is pending.
 F1–F3 have implemented source, strict codecs and opt-in CLI. F4 records portable
 root/fixture checks and finite native/Rust parity on diamond and recursive
-synthetic captures. The [source-bound record](../../evidence/Ariadne/frame-paths/source-validation.json)
+synthetic captures. The [source-bound record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/source-validation.json)
 retains exact hashes and incomplete acceptance clauses.
 
 Resume remotely with `bash Specs/check-frame-paths.sh` and
@@ -100,7 +105,7 @@ qualification needs externally retained captured artifacts, independent frame
 inspection and named byte/query/tool identities; synthetic minidumps cannot
 substitute for that tier.
 
-On 2026-10-13, the [real-dump attempt](../../evidence/Ariadne/frame-paths/dump03958-20261013/report.md)
+On 2026-10-13, the [real-dump attempt](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/dump03958-20261013/report.md)
 preserved the default runtime-table refusal and a distinct larger-budget public
 API probe. Two physical frames were recovered in the latter; unsupported
 caller vector semantics prevented active-call binding, while an XMM unwind
@@ -108,7 +113,7 @@ recipe stopped older recovery. Neither attempt enumerated paths or satisfies
 the successful full-dump acceptance gate. Broader runtime/read budgets, vector
 alignment-exception admission and XMM unwind support remain separate follow-up decisions.
 The [later finite vector namespace extension](completed/bap-vector-registers.md) admits
-XMM/YMM and its [source-bound retry](../../evidence/Ariadne/bap-vector-registers/20261013/report.md)
+XMM/YMM and its [source-bound retry](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-vector-registers/20261013/report.md)
 advances the semantic refusal to MOVAPS's alignment-exception branch. Namespace
 support was delivered; the caller graph and unavailable frame-path answer remained
 at that retry. The final F4 section below records the later result.
@@ -128,7 +133,7 @@ now adds ten shrinking graph properties and three generated capture properties
 under optional `property-tests`. Fixed-seed 128-case runs cover independent
 Cartesian edge-word expectations, strict NP, resource/capacity behavior,
 ordering, scope IDs, evidence/codec integrity, unwind arithmetic and register
-validity. The [separate property record](../../evidence/Ariadne/frame-paths/property-validation.json)
+validity. The [separate property record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/property-validation.json)
 binds this test-only extension; original model/oracle/native evidence stays
 historical. The later F4 qualification exercises remote model/mutation checks
 and the selected original full-dump question under separately recorded policies.
@@ -137,7 +142,7 @@ and the selected original full-dump question under separately recorded policies.
 ## F4 post-S6 execution — 2026-10-20
 
 The authorized closure sequence passes within the
-[2026-10-20 finite evidence scope](../../evidence/Ariadne/frame-paths/20261020/README.md).
+[2026-10-20 finite evidence scope](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/20261020/README.md).
 Older qualification and unavailable attempts remain historical.
 The [owning design](../../docs/Ariadne/investigation-design.md#f4-post-s6-qualification)
 records the corresponding resource-policy extension and proof boundary.
@@ -181,7 +186,7 @@ premises remain intact. Depth-restricted enumeration must remain partial.
 
 The source2 implementation capsule contains 1,070 files and has SHA-256
 `ed7b76ef6b9ac6f32e66c570d0234780861afe123fe0786916b33d7eba1bb84d`.
-The [qualification record](../../evidence/Ariadne/frame-paths/20261020/README.md)
+The [qualification record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/20261020/README.md)
 binds all source/tool/capture/request identities and passing commands. Six finite
 model configurations and typechecking pass. Root/feature/property/native and
 codec controls: `334 / 64 / 77 / 202 default/core/reports/BAP tests; 10 graph and 3 unwind properties; 7 native/legacy tests`. Compiled mutations with passing

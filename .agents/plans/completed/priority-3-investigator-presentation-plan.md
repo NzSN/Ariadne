@@ -30,6 +30,11 @@ decoder, effect or JSON v1 semantics change is authorized by this plan.
 The text overview and examples are
 [delivered with source-bound validation](../../../docs/Ariadne/result-rendering.md#presentation-acceptance).
 
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## 1. Freeze the current report contract
 
 Run both pinned Stage B Windows/Linux CLI cases and the hash-checked Priority 1

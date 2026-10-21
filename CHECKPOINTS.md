@@ -11,16 +11,62 @@
 **Where to go next.**
 
 - [Plan index](.agents/plans/README.md) — identifies what is still open after the recorded deliveries.
-- [Evidence guide](evidence/Ariadne/README.md) — explains how to interpret retained results without treating them as fresh qualification.
+- [Evidence guide](tests/README.md) — explains how to interpret retained results without treating them as fresh qualification.
 
 **What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Retired ISA milestones in older entries are no longer active work.
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
+Current validation follows the [executable test matrix](tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+
+## 2026-10-22 — Retained evidence replaced by executable tests
+
+The user superseded the earlier retention policy and requested removal of the
+complete evidence collection. The [test matrix](tests/README.md) and
+[T0–T5 ledger](.agents/plans/generated-validation-retention.md) own the migration.
+Active consumers use explicit expected vectors, small actual inputs and fresh
+validators. Historical passing records are not current test expectations.
+The 666-output compatibility contract remains an explicit test vector; the
+controlled Windows fixture contains only the dump, PE and witness and is
+independently inspected at test time. Archive production/publication and the
+old runtime-export gate are retired. The collection is now removed (5,229 files / about 3,646.58 decimal MB). Fresh
+execution passes 3,200 configured property cases, 76 model-generated traces,
+494 matched observations, twenty compiled mutants, 104 live scalar-BIL checks
+and 247 Python controls. All applicable root Rust checks, reports-only tests,
+layout and navigation checks pass. The core-only dependency tree stays empty.
+The installed native analysis helper is source-stale and the full qualifier's
+sealed dependency view is inactive; native-core/capture, timing and release
+qualification remain unexercised. No generated result is retained in source.
+
+## 2026-10-21 — Generated correctness tests and compact evidence retention
+
+The [assurance contract](docs/Ariadne/semantic-assurance.md#generated-validation-and-evidence-retention)
+and [G0–G4 ledger](.agents/plans/generated-validation-retention.md) add an
+independent literal core reference, generated step/completion checks and a routine
+runner with compact success receipts. The [fresh receipt](tests/README.md)
+passes 3,200 configured property cases plus twelve TLA+-generated core traces,
+168 matched observations and five detected compiled mutants. A stale may-write
+mutation selector was repaired for the current engine; older failures remain
+uncredited. The receipt and input inventory total about 135 decimal KB.
+
+Six qualification writers now deduplicate equal payloads within self-contained
+tar archives while retaining every logical member and payload hash. The
+[experiment](tests/README.md)
+reduces a temporary copy from 326.47 to 158.77 decimal MB with all 3,435 members
+verified. Existing archives are unchanged. Git LFS now skips large raw evidence
+archives by default; selected qualification inputs require explicit fetching.
+
+The [validation audit](tests/README.md)
+records 249 passing Python controls and all applicable root Rust/layout/doc
+checks. An initial guard deadline failure under overlapping builds is retained;
+the complete isolated default-suite rerun passes without changing that deadline.
+Native/capture, Stage E, performance and release qualification remain separate.
+
 ## 2026-10-21 — I5c W4/W5 execution preparation, gates still pending
 
 The [canonical execution guide](docs/Ariadne/address-wrap-design.md#w4w5-execution-preparation-2026-10-21)
-and [preparation record](evidence/Ariadne/address-wrap/20261021/w4-w5-preparation/README.md)
+and [preparation record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/address-wrap/20261021/w4-w5-preparation/README.md)
 add the twelve-control CLI runner, eight-case Windows capture wrapper, 24-mutant
 driver, exact 666-output comparator, retained-runtime exporter and aggregate
 qualification/sealing tooling. Local Python controls, source-seam checks,
@@ -38,9 +84,9 @@ timing acceptance is claimed; W4/W5 and full I5c remain pending.
 
 ## 2026-10-21 — I5c binding, public pilot and full matrix qualified
 
-The separate [W1](evidence/Ariadne/address-wrap/20261020/w1/README.md),
-[W2](evidence/Ariadne/address-wrap/20261020/w2/README.md) and
-[W3](evidence/Ariadne/address-wrap/20261021/w3/README.md) records close those
+The separate [W1](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/address-wrap/20261020/w1/README.md),
+[W2](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/address-wrap/20261020/w2/README.md) and
+[W3](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/address-wrap/20261021/w3/README.md) records close those
 stage exits on their exact source/tool snapshots. W1 preserves all 666 legacy
 outputs and 36 parity comparisons; its sealed archive has 2,713 members.
 W2 runs the public arithmetic/budget pilot and seven actual native synthetic
@@ -59,7 +105,7 @@ pending. These later records do not rewrite the earlier W0/design checkpoints.
 
 ## 2026-10-21 — Finite specification S3 evidence sealed
 
-The [model guide](Specs/README.md#specification-synchronization-s3-qualification-2026-10-20), [completed S0–S3 ledger](.agents/plans/specification-sync.md) and [sealed evidence](evidence/Ariadne/specification-sync/20261020/README.md) retain the successful 2026-10-20 lookup8 qualification. The full suite has 53 type calls covering 32 root modules, 40 bounded checks, 24 TLC runs,all 20 Memory partitions, six scripts, eight audited core TLC configurations and five replay types. The 120 Java calls include three identity checks; eight targeted preflight checks and three final equality controls are separate.
+The [model guide](Specs/README.md#specification-synchronization-s3-qualification-2026-10-20), [completed S0–S3 ledger](.agents/plans/specification-sync.md) and [sealed evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/specification-sync/20261020/README.md) retain the successful 2026-10-20 lookup8 qualification. The full suite has 53 type calls covering 32 root modules, 40 bounded checks, 24 TLC runs,all 20 Memory partitions, six scripts, eight audited core TLC configurations and five replay types. The 120 Java calls include three identity checks; eight targeted preflight checks and three final equality controls are separate.
 
 The forty bounded calls retain30 `NoError` and 10 `ExecutionsTooShort` outcomes. All ten terminal cases have one TLC initial state and matching finite graph depths; the original maximum bounds remain unchanged, without claiming full-length executions. The 1,118-file snapshot and source/tool/derived hashes are stable. The evidence archive SHA is `92045c6f12f2f280e8fb81350eb0f972741c96a708182a71a9dc262a78596674`; promotion archive SHA is `3ef87cce1f40f15f4e12ab1833e3c89f0cfb8240eefe3d7d63350b229659161a`. Every archive member is stream-verified with no duplicate, missing or unexpected pathname; the one internal compatibility link is materialized with its original target recorded.
 
@@ -70,7 +116,7 @@ All earlier failures and partial campaigns remain uncredited; no original record
 
 The [canonical design](docs/Ariadne/address-wrap-design.md#w0-qualification-2026-10-20)
 and [stage plan](.agents/plans/i5c-address-wrap.md) now have
-[sealed W0 evidence](evidence/Ariadne/address-wrap/20261020/w0/README.md):
+[sealed W0 evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/address-wrap/20261020/w0/README.md):
 140 independent decision rows, 52 scenarios, one Apalache typecheck and six
 TLC configurations, with 12 oracle controls, 88 sequence controls and all 114
 synthetic raw inputs. The 23 qualified normal files are byte-identical to the
@@ -91,7 +137,7 @@ separate binding, pilot and matrix qualification without changing W0 credit.
 
 The [Scanner ledger](.agents/plans/scanner-partial-explanation.md#s2s4-qualification-2026-10-20)
 and [canonical case summary](docs/Ariadne/investigation-design.md#scanner-partial-explanation-follow-up)
-now have [source-bound evidence](evidence/Ariadne/scanner-followup/20261020/README.md).
+now have [source-bound evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/scanner-followup/20261020/README.md).
 All twenty recovery-obligation sites have captured-byte/projection dispositions;
 nine INT3 control disagreements and one UD1Lm/UD2B disagreement retain explicit
 barriers. All 123 entry-location requirements and all 28 historical gaps remain.
@@ -112,7 +158,7 @@ No producer/runtime semantics changed. Three indexed ledgers remain unfinished.
 
 The [resolver design](docs/Ariadne/indirect-target-resolution.md#r6-qualification-refresh)
 and [R0–R6 ledger](.agents/plans/indirect-target-resolution.md#r6-qualification-refresh--2026-10-20)
-pass the declared [finite qualification](evidence/Ariadne/indirect-target-resolution/20261020/README.md).
+pass the declared [finite qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/20261020/README.md).
 Final source capsule: 1,076 files, SHA-256
 `193e31bb835bda4a4e4b5fc59397c424f11adefc691d1e309faf7ff0348d43a5`.
 Archive SHA-256: `bb44c1a28ebee857e5775fac304f74383e7c75bfdd0286b41cc45642880064ba`. Root/features/native:
@@ -152,7 +198,7 @@ remain stable.
 
 The [canonical contract](docs/Ariadne/investigation-design.md#f4-post-s6-qualification)
 and [F0–F4 ledger](.agents/plans/frame-path-enumeration.md) pass their declared
-finite clauses under [source-bound evidence](evidence/Ariadne/frame-paths/20261020/README.md).
+finite clauses under [source-bound evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/20261020/README.md).
 Source2 capsule: 1,070 files, SHA-256
 `ed7b76ef6b9ac6f32e66c570d0234780861afe123fe0786916b33d7eba1bb84d`.
 Root/feature/property/native controls: `334 / 64 / 77 / 202 default/core/reports/BAP tests; 10 graph and 3 unwind properties; 7 native/legacy tests`.
@@ -178,7 +224,7 @@ universal refinement. Five indexed ledgers still contain unfinished work.
 ## 2026-10-19 — Caller S6 bounded completion accepted
 
 The [caller plan](.agents/plans/caller-semantic-coverage.md) completes S6 under
-[source-bound evidence](evidence/Ariadne/caller-semantic-coverage/20261019/README.md).
+[source-bound evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/caller-semantic-coverage/20261019/README.md).
 Caller: 9,589 decoded sites, 11,321 edges, 141,301,903 reaching links and 91,175
 actions. Callee: 778 sites, 895 edges and 1,304,602 links. Saved and raw original
 requests/full Rust-native states match; every reaching row is independently
@@ -201,7 +247,7 @@ receipts retain their dates and scope.
 
 The [P0–P10 plan](.agents/plans/frame-question-investigation.md) and
 [canonical design](docs/Ariadne/frame-question-investigation-design.md) now have
-[source-bound remote evidence](evidence/Ariadne/frame-question/20261019/README.md)
+[source-bound remote evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md)
 for the declared finite profile, including imported FC5/FC6 and selected M4.
 The 875-file source capsule is
 `7e23bbd4aab5e12e48d342d4ab0a9c9b51e2aacbd8ed35c2a749919c088610c6`.
@@ -244,7 +290,7 @@ The opt-in `--frame-question JSON` publishes separate JSON/text/DOT views with
 strict helper-free saved replay. The original structural/connection artifacts
 and normal native full-analysis route keep their separate contracts.
 
-[Local source-bound evidence](evidence/Ariadne/frame-question/20261018/README.md)
+[Local source-bound evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261018/README.md)
 records 323 default, 57 core-only, 70 reports-only and 194 BAP-only passing tests;
 114/22/22/56 tests remain ignored respectively. Format, Clippy, layout,
 18 question/scheduler TLC configurations, the imported memory model, independent
@@ -274,7 +320,7 @@ BFS/edge-detour examples. The opt-in `--frame-connections N:M` route publishes
 strict self-contained `ariadne.frame-connections/v1` JSON/text/DOT and replays
 all assessment claims while preserving the original source publication.
 
-[Fresh local evidence](evidence/Ariadne/frame-connections/20261018/README.md)
+[Fresh local evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-connections/20261018/README.md)
 records 305 default, 57 core-only and 70 reports-only passing tests, with
 111/22/22 ignored respectively; format/Clippy/layout/navigation, 13 finite model
 configurations, 516 independent graph expectations and 16 compiled mutations
@@ -300,7 +346,7 @@ conditional report v2 and standalone replay. Existing baseline requests,
 source/guard/target/composition evidence and verdicts remain unchanged; ordinary
 v1 replay is byte-compatible with the actual prior publication.
 
-[Qualification](evidence/Ariadne/alignment-hypotheses/20261016/README.md) binds
+[Qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/alignment-hypotheses/20261016/README.md) binds
 source capsule `34d078b4e3c94977620e72313111d40d52fae1978af05b0682d716d1bec5d556`
 (1,060 files), unchanged 725-file runtime inventory and pinned helpers. Remote
 format/Clippy and 298 default / 57 core-only tests including three doctests
@@ -330,7 +376,7 @@ before `FinishRecovery`, retaining typed gaps, local frontiers and verified E8
 frame links with zero dataflow/slice actions. Existing completed-analysis
 routes and frame-path input requirements retain their contracts.
 
-[Source-bound qualification](evidence/Ariadne/frame-structure/20261016/README.md)
+[Source-bound qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-structure/20261016/README.md)
 uses corrected source capsule `8266a844e60e3afbcaa8f0bba557899a0466e18940d8fa881630377cf78bb37c` (1,093 files),
 baseline `4811d7d`, and an unchanged 693-file runtime inventory. Remote format,
 285 default tests / 57 core-only tests (each including three doctests), Clippy,
@@ -366,7 +412,7 @@ this documentation cleanup does not refresh earlier qualification results.
 
 ## 2026-10-15 — Caller normal-flow coverage; completed caller analysis still open
 
-The [caller coverage correction](docs/Ariadne/caller-semantic-coverage-design.md) implements checked local normal-completion terminals and exact MOVAPS-load guards. The [S0–S6 ledger](.agents/plans/caller-semantic-coverage.md) remains active: S0–S5 pass their source-bound scope, while S6 still lacks completed caller native/Rust state equality. The [qualification record](evidence/Ariadne/caller-semantic-coverage/20261015/README.md) separates the final helper, earlier full run and passing admission refresh.
+The [caller coverage correction](docs/Ariadne/caller-semantic-coverage-design.md) implements checked local normal-completion terminals and exact MOVAPS-load guards. The [S0–S6 ledger](.agents/plans/caller-semantic-coverage.md) remains active: S0–S5 pass their source-bound scope, while S6 still lacks completed caller native/Rust state equality. The [qualification record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/caller-semantic-coverage/20261015/README.md) separates the final helper, earlier full run and passing admission refresh.
 
 Final S5 source archive `c35459a19b1e2f5f139730bea6c119cfceff603207254b52d42effac68654a5f` (937 files), helper `d39df81c64c1fd832b88dd48652572234422d8d8840d277cbb83fb88e783e725`, passes 242 default/46 core-only tests, format/Clippy/release, nine capture tests, 88 direct/24 protocol controls, nine caller behavioral mutants, two frozen legacy-capture controls/one dependency mutant, native/frame/composition/tool gates, 330 generated observations, three opaque controls and retained report replay. The unchanged model/oracle sources retain their 58 predicate-case and 71-case/12,752-extent/8,944-truncation results. Review corrections retain completeness-bit parity, required legacy frame proofs and the frozen native capture dependency.
 
@@ -376,7 +422,7 @@ Final-helper admission refresh `075602` passes exact normalized-request and guar
 
 ## 2026-10-15 — Inductive loop-target closure
 
-The [loop-aware extension](docs/Ariadne/guarded-target-resolution-design.md#proposed-stable-base-invariant-follow-up) is implemented and [qualified remotely](evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) within its coverage-only captured-table scope. Source-bound root/native/model checks, eight behavioral mutants, actual legacy semantic replay and 330 generated observations pass. An original-dump publication failure exposed omitted referenced Stop endpoints; the corrected coordinator binds the complete represented graph before producing proofs.
+The [loop-aware extension](docs/Ariadne/guarded-target-resolution-design.md#proposed-stable-base-invariant-follow-up) is implemented and [qualified remotely](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) within its coverage-only captured-table scope. Source-bound root/native/model checks, eight behavioral mutants, actual legacy semantic replay and 330 generated observations pass. An original-dump publication failure exposed omitted referenced Stop endpoints; the corrected coordinator binds the complete represented graph before producing proofs.
 
 Fresh probe `051409` completes DA09 and DADD with four targets each and independently accepted induction receipts. All nine original table sites are complete, all 64 destinations and 51 formerly missing starts reconcile, and native/Rust full requests and states match for both frames. The parent ninth C5 clause is closed. At that checkpoint caller coverage still had 30 barriers, MOVAPS was unknown and NP10 listing was unavailable because its active call anchor was missing or ambiguous. The later caller-coverage checkpoint above records the subsequent change and its new completion limit. Full frame-path and universal-refinement gates remain separate.
 
@@ -390,7 +436,7 @@ final effect selection remain distinct. Symbolic byte/short loads and bounded
 infeasible contexts retain unknown writes and feasible cycles. Snapshot queries
 use their declared finite start budget across bounded BAP child sessions.
 
-[Remote qualification](evidence/Ariadne/guarded-target-resolution/20261014/README.md)
+[Remote qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guarded-target-resolution/20261014/README.md)
 records 218 default tests, 46 core-only, native capture/kernel/report controls,
 19 finite model configurations and 330 generated replay observations. Both
 completed dump03958 frame queries agree exactly between native and Rust. Nine
@@ -407,7 +453,7 @@ The [shift-count design](docs/Ariadne/bap-shift-count-design.md) and
 operand-width rule: pinned BAP permits independent shift counts and left-width
 results. Full unsigned counts and justified XOR equality preserve conservative
 origins. Default v6/guarded v7 distinguish new semantics; older identities remain.
-[Remote qualification](evidence/Ariadne/bap-shift-width/20261014/validation.json)
+[Remote qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-shift-width/20261014/validation.json)
 records 186 default/46 core-only tests, exact-asset and independent numeric
 controls, affected native suites, six mutants, 27 models and 330 replay
 observations. The original XORPS now projects; the full captured guarded query
@@ -420,7 +466,7 @@ The [guard design](docs/Ariadne/justified-branch-pruning-design.md) and
 [G0–G4 plan](.agents/plans/completed/justified-branch-pruning.md) are implemented with opt-in
 Windows normal-call entry premises, full candidate closure, finite residue
 proofs, versioned native capture and query-bound reports. Default v4 remains.
-[Fresh remote evidence](evidence/Ariadne/guard-admission/20261014/validation.json)
+[Fresh remote evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guard-admission/20261014/validation.json)
 binds root/native checks, 27 predicate-model configurations, independent oracle,
 six guard mutants and 330 existing native replay observations.
 
@@ -433,7 +479,7 @@ not universal refinement, hardware semantics, executed history or root cause.
 
 ## 2026-10-13 — Original dump retried at b5d56b7
 
-The [retry record](evidence/Ariadne/indirect-target-resolution/dump-retry-b5d56b7-20261013/report.json)
+The [retry record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/dump-retry-b5d56b7-20261013/report.json)
 binds the committed sources, rebuilt pinned helper and unchanged original dump.
 All 26 resolver tests passed, including four previously pending native cases.
 Native and Rust retain the same 45 dispatch targets and exact historical full
@@ -454,7 +500,7 @@ The [second review corrections](docs/Ariadne/indirect-target-resolution.md#secon
 align frontier admission with the producer's complete pending stack, require
 passing unmodified mutation controls and the native arithmetic diagnostic, and
 propagate invalid proof data from budget-fitting retention merges. The
-[correction record](evidence/Ariadne/indirect-target-resolution/review-corrections-20261013/report.json)
+[correction record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/review-corrections-20261013/report.json)
 binds root/portable checks, nine mutation observer/runner/checker tests and six
 native source-level frontier cases. Those OCaml 5.1 diagnostics are separate
 from pinned SDK/helper qualification. Four native tests, fifteen mutant runs
@@ -471,7 +517,7 @@ JSON construction. Preparation modes and resolver convergence now have explicit
 private types. Regression tests reproduce the two correctness failures and
 verify conservative outcomes after the fixes.
 
-The [review-fix record](evidence/Ariadne/indirect-target-resolution/review-fixes-20261013/report.json)
+The [review-fix record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/review-fixes-20261013/report.json)
 binds 144 passing default tests, 46 core-only tests, format, Clippy, layout,
 documentation and four mutation-observer tests. The mutation runner now requires
 fourteen Rust mutants and one native mutant with expected named runtime failures.
@@ -490,7 +536,7 @@ capture reads produce target receipts under `FrozenCapturedControlData`;
 new local destinations expand discovery without making slice seeds roots.
 Both cores retain unknown alternatives and validate final incoming coverage.
 
-The [source-bound record](evidence/Ariadne/indirect-target-resolution/qualification-20261013/report.json)
+The [source-bound record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/qualification-20261013/report.json)
 retains five Apalache/TLC scenarios, independent oracles, synthetic Windows/Linux
 captures, direct hostile receipt controls, root/native regressions, 330 generated
 replay observations and detection of 9 resolver plus 12 core/stateflow mutants.
@@ -519,7 +565,7 @@ unavailable/candidate preservation. Frame paths now retain typed parallel edges,
 DFS state, scan/work/visit/step guards and conservative partial/exhausted results.
 Effects producer wording and shared/specialized checking entry points are updated.
 
-The [source-bound record](evidence/Ariadne/specification-sync-20261011/report.json)
+The [source-bound record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/specification-sync-20261011/report.json)
 retains parsing of 22 modules/19 configurations, 13 bounded frame traces and
 22 scalar probes plus candidate/wrap controls, stub-tool checker dispatch and
 failure propagation, 117 default/45 core tests and all 13 property tests.
@@ -535,7 +581,7 @@ The [assurance contract](docs/Ariadne/semantic-assurance.md#dependency-audit-and
 now removes the retired AMD64/x86-64 specification track: 73 TLA+ modules,
 38 configurations, ten shell checkers, its source/coverage inventory directory
 and fifteen obsolete Python tools/tests. The manual source pin moves byte-for-byte
-to [amd-manuals.lock.json](evidence/Ariadne/amd-manuals.lock.json) for active effects
+to [amd-manuals.lock.json](tests/bap/fixtures/amd-manuals.lock.json) for active effects
 provenance. Historical links point to immutable Git archives. Active models,
 the root Lean library, existing implementation and raw evidence are preserved.
 
@@ -549,7 +595,7 @@ does not refresh native, model-exploration or release qualification.
 ## 2026-10-11 — Frame-path property-based tests
 
 The [generated coverage contract](docs/Ariadne/investigation-design.md#frame-path-property-based-coverage)
-and [separate property record](evidence/Ariadne/frame-paths/property-validation.json)
+and [separate property record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/property-validation.json)
 add 13 Proptest properties with shrinking and persisted regression seeds.
 All 1,664 fixed-seed generated cases pass: ten properties cover independent
 typed edge-word expectations, loops/parallel edges, strict NP and work/byte
@@ -576,7 +622,7 @@ count, graph/work/loop/payload and cooperative search time. Per-register evidenc
 distinguishes top-context observations from derived caller values. An incomplete
 list never excludes a possible memory writer.
 
-The [source-bound record](evidence/Ariadne/frame-paths/source-validation.json)
+The [source-bound record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/source-validation.json)
 pins 160 source/fixture hashes, 64 independent graph oracles, 14 synthetic
 capture encodings, 117 default tests (82 ignored), 45 core-only tests (22 ignored),
 all-feature/all-target Clippy under the read-only dependency snapshot and final
@@ -599,7 +645,7 @@ oracle, TLA+ source, opt-in BIL transfer evidence, immutable candidate assessmen
 bounded scalar preimages/worklist, strict separate report and explicit CLI mode.
 Original roots, effects, memory origins and default reports remain the baseline.
 
-The [source-bound record](evidence/Ariadne/memory-refinement/source-validation.json)
+The [source-bound record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/memory-refinement/source-validation.json)
 retains 784 range/1,280 inverse cases, source regressions, 103 passing default
 tests (81 ignored), 45 core-only tests (22 ignored), all-feature/all-target
 Clippy under the frozen read-only dependency snapshot, layout/format/docs checks,
@@ -615,7 +661,7 @@ record while the original pre-runtime freeze remains unchanged.
 
 Updated **2026-10-10**: the [projection-admission plan](.agents/plans/completed/bap-projection-admission.md)
 has P0–P4 accepted on the qualified real Windows replacement. The
-[user decision](evidence/Ariadne/bap-admission/p4-acceptance-20261010.json) excludes
+[user decision](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/p4-acceptance-20261010.json) excludes
 the remaining historical real-Linux clauses; no required P4 work remains.
 Bounded native completion pages allow the Scanner query to complete. The
 [replacement record](docs/Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query) binds the fresh
@@ -623,9 +669,9 @@ corpus and fixed budgets; old Linux coverage and six historical hashes remain
 unexercised.
 
 The **2026-10-07** I5c design checkpoint is historical. Its separate
-[2026-10-20 W0 record](evidence/Ariadne/address-wrap/20261020/w0/README.md) now
+[2026-10-20 W0 record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/address-wrap/20261020/w0/README.md) now
 qualifies the finite model/oracle and synthetic-input gate. The later
-[W3 record](evidence/Ariadne/address-wrap/20261021/w3/README.md) qualifies the
+[W3 record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/address-wrap/20261021/w3/README.md) qualifies the
 implemented assessment/report matrix; W4 product/capture and W5 remain pending.
 I5b zero-base-plus-displacement has B0–B5 implemented and qualified for its
 recorded finite source/fixture and controlled Windows tiers. The product intent
@@ -642,7 +688,7 @@ and the independent ISA track retired.
 
 The user accepted P4 after excluding the remaining absent controlled Linux
 capture, its six historical output comparisons and real-Linux capture/phase
-qualification. The [acceptance decision](evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
+qualification. The [acceptance decision](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
 binds the passing Windows replacement and retained external evidence, verified
 implementation/fixture hashes and the exact exclusions. Existing Linux fixture
 checks remain part of the passing finite corpus.
@@ -668,7 +714,7 @@ Eighteen frozen historical hashes reproduce and six distinct replacement outputs
 pass exact current native/reference/default comparison. The explanation-phase
 sum of medians is 2.870 ms against 250 ms; Windows-98 is
 475.664 ms against 2,000 ms and I5a
-fixture budgets pass. The [sealed record](evidence/Ariadne/real-capture-repin-79938/report.json)
+fixture budgets pass. The [sealed record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/real-capture-repin-79938/report.json)
 retains sources, tools and scope; heavy work ran remotely.
 
 The previous original-corpus acceptance remains false. The six old Linux hashes
@@ -678,7 +724,7 @@ receives no new completion credit.
 
 ## 2026-10-10 — Remote completion transport and available P4 tiers pass
 
-The [remote evidence](evidence/Ariadne/bap-admission/remote-20261010/report.json)
+The [remote evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/remote-20261010/report.json)
 binds the restored SDK, clean helpers, current root/native/Stage E/minidump gates,
 25 admission mutations, 330 native observations, 12 algorithm and eight boundary
 mutations. Active input/effects models and eight-case BAP TLA replay pass.
@@ -695,7 +741,7 @@ execution or bad-RSI producer is established.
 Owned native/reference and nine I5a fixture measurements pass. Quiet scoped
 Windows I4 is 480.236 ms against the unchanged 2,000 ms budget. Eighteen historical
 hashes reproduce; six, Linux I4 and full aggregate/product clauses require the
-absent controlled Linux capture. The [2,959-member archive](evidence/Ariadne/bap-admission/remote-20261010/evidence-manifest.json)
+absent controlled Linux capture. The [2,959-member archive](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/remote-20261010/evidence-manifest.json)
 is remotely verified. Heavy local work is stopped; the remote workspace remains
 available for resumption. Full P4 and full native-default qualification remain false.
 
@@ -717,7 +763,7 @@ Older v2 evidence remains historical; no root-cause or release claim is made.
 Audited BAP plans, helper/module guides, assurance and consumer documentation
 against the current lifter, projection, native passes, CLI and qualification
 inventories. The [audit guide](docs/Ariadne/bap-analysis-core-design.md#documentation-audit) and
-[identity record](evidence/Ariadne/bap-documentation-audit.json) distinguish the
+[identity record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-documentation-audit.json) distinguish the
 matching October 7 nested refresh from stale standalone snapshots. Current
 projection remains v2 with its finite whitelist and conservative stop policy;
 P0–P4 remains planned. Stale I4 timing gaps, helper prerequisites and historical
@@ -748,9 +794,9 @@ The design links directly to its implementation plan, and the plan/roadmap/
 documentation entry points name its unresolved scope.
 
 The following table records the 2026-10-07 status. The later
-[W0 qualification](evidence/Ariadne/address-wrap/20261020/w0/README.md)
+[W0 qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/address-wrap/20261020/w0/README.md)
 supersedes its W0-pending state. The later
-[W1–W3 qualification](evidence/Ariadne/address-wrap/20261021/w3/README.md)
+[W1–W3 qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/address-wrap/20261021/w3/README.md)
 supersedes those implementation states; W4–W5 remain pending. The table and
 diagram below preserve their original design-date scope.
 
@@ -799,7 +845,7 @@ was changed.
 Completion rechecks the existing campaign against current 712-source/12-tool
 inventories and the sealed MirrorRust dependency identity. This is exact-source
 verified reuse of the recorded tests, with a new archive/current-inventory audit;
-it is not a second runtime campaign. The [retained manifest](evidence/Ariadne/i4-performance-evidence-manifest.json)
+it is not a second runtime campaign. The [retained manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i4-performance-evidence-manifest.json)
 verifies all 3,625 archive entries and the nested 919-entry regression / 1,432-entry
 core archives. Both earlier failed phase/timing attempts are retained separately.
 Historical re-pin and I5 records remain byte-identical. Full I4 acceptance is
@@ -812,7 +858,7 @@ this result.
 [B0–B5](.agents/plans/completed/i5b-zero-base-offset.md) are implemented and qualified for the
 finite Windows AMD64 scalar MOV base/displacement profile. The
 [validation guide](docs/Ariadne/zero-base-offset-design.md#retained-qualification) and
-[aggregate](evidence/Ariadne/i5b-qualification.json) record **18/18 gates**, 57
+[aggregate](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5b-qualification.json) record **18/18 gates**, 57
 independent fixtures plus one auxiliary call case, all 15 detected real-code
 mutants, stable 294-source/11-tool inventories and separately passing partial/
 full controlled Windows tiers under the sealed MirrorRust snapshot.
@@ -828,8 +874,8 @@ provenance, executed paths, object lifetime or a general root cause.
 
 All 246 old I5a assessment outputs and 24 old base/explanation reports remain
 byte-exact. Refreshed I5a 14-gate, investigation/minidump/Stage E and native-core
-20-gate regressions pass. The [new evidence manifest](evidence/Ariadne/i5b-evidence-manifest.json)
-verifies 2,005 entries in the retained archive; [case pins](evidence/Ariadne/i5b-controlled-cases.json)
+20-gate regressions pass. The [new evidence manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5b-evidence-manifest.json)
+verifies 2,005 entries in the retained archive; [case pins](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5b-controlled-cases.json)
 preserve exact per-capture identities/questions. Historical records and the
 source-bound Stage 2 design/plan remain unchanged. I4's separate over-budget
 Windows criterion and other I5/I6/I7 work remain open.
@@ -898,7 +944,7 @@ All 17 investigation gates pass. Five native-default explanation-CLI samples
 after warm-up yield **4,774.451 ms**, exceeding the unchanged **2,000 ms** ceiling.
 Re-pin and correctness succeed; `fullI4RealCaptureAcceptance=false` remains an
 explicit performance failure. BAP's unlimited timing policy does not waive I4.
-The [I4 record](evidence/Ariadne/i4-windows-repin-validation.json) and verified
+The [I4 record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i4-windows-repin-validation.json) and verified
 865-entry archive retain source/tool identities, exact samples and reports.
 
 The complete source refresh passes 20 core gates with 632 stable sources and
@@ -906,8 +952,8 @@ The complete source refresh passes 20 core gates with 632 stable sources and
 controlled capture modes pass the unchanged 1,500 ms CLI / 10 ms phase criteria
 (partial 869.642 / 1.067 ms; full 873.537 / 1.032 ms). Its archive verifies 1,969
 entries. Both use the same read-only dependency snapshot. Previous accepted
-[core](evidence/Ariadne/bap-core-history/2026-10-05-before-i4-repin/bap-core-qualification.json)
-and [I5a](evidence/Ariadne/i5a-native-history/2026-10-05-before-i4-repin/i5a-native-evidence-manifest.json)
+[core](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-core-history/2026-10-05-before-i4-repin/bap-core-qualification.json)
+and [I5a](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5a-native-history/2026-10-05-before-i4-repin/i5a-native-evidence-manifest.json)
 bundles are preserved byte-for-byte before the source refresh.
 
 ## 2026-10-05 — Dependency isolation repairs and native I5a accepted
@@ -941,13 +987,13 @@ flowchart LR
 ```
 
 The [qualification guide](docs/Ariadne/zero-address-design.md#native-qualification),
-[fixture record](evidence/Ariadne/i5a-native-history/2026-10-05-before-i4-repin/i5a-native-fixture-validation.json) and
-[controlled record](evidence/Ariadne/i5a-native-history/2026-10-05-before-i4-repin/i5a-native-controlled-validation.json)
+[fixture record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5a-native-history/2026-10-05-before-i4-repin/i5a-native-fixture-validation.json) and
+[controlled record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5a-native-history/2026-10-05-before-i4-repin/i5a-native-controlled-validation.json)
 keep the tiers separate. The native I5a archive verifies **1,894 entries** and
 211 source hashes. The refreshed Stage 2 archive verifies **1,350 entries** and
 627 Ariadne sources, and retains the complete dependency snapshot manifest.
 The earlier rejected progress archive and the
-[original adoption record](evidence/Ariadne/bap-core-history/2026-10-04-adoption/bap-core-qualification.json)
+[original adoption record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-core-history/2026-10-04-adoption/bap-core-qualification.json)
 remain byte-identical historical evidence. Original-Windows I4, packaged release,
 broader hypotheses and universal refinement are not credited by this result.
 
@@ -967,7 +1013,7 @@ phase criteria. The retained Windows partial/full diagnostic CLI medians are
 **804.201 / 811.943 ms**; their native phase medians are **0.967 / 0.994 ms**.
 These diagnostics do not constitute controlled-case acceptance.
 
-The [progress record](evidence/Ariadne/i5a-native-progress/progress.json) keeps
+The [progress record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5a-native-progress/progress.json) keeps
 the failed decisions explicit. The first Stage 2 refresh passed all twenty
 component gates but rejected final tool stability after the sibling MirrorRust
 sources changed. A rerun then failed `cargo fmt --all -- --check` in that
@@ -1009,10 +1055,10 @@ flowchart LR
 ```
 
 The [qualification guide](docs/Ariadne/bap-analysis-core-design.md#native-qualification) and
-[record](evidence/Ariadne/bap-core-history/2026-10-04-adoption/bap-core-qualification.json) bind 44 generated traces
+[record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-core-history/2026-10-04-adoption/bap-core-qualification.json) bind 44 generated traces
 and 330 observations, twelve detected native algorithm mutations, boundary
 controls and five release workloads. `stage2Qualified`, `defaultNativeVerified`
-and `sourcesStable` are true. The [archive manifest](evidence/Ariadne/bap-core-history/2026-10-04-adoption/bap-core-evidence-manifest.json)
+and `sourcesStable` are true. The [archive manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-core-history/2026-10-04-adoption/bap-core-evidence-manifest.json)
 verifies all 1,345 entries, including a smoke check with no backend or helper-path
 override against the exact final release executable.
 
@@ -1052,14 +1098,14 @@ BAP runtime confirm persistent graph/term state and unsigned address attribution
 They also show that two labels on identical TID endpoints collapse to one edge;
 the analysis must retain its typed parallel-edge relation separately.
 
-The [A0 record](evidence/Ariadne/bap-stage2-a0-validation.json) binds 15 source/design
+The [A0 record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-stage2-a0-validation.json) binds 15 source/design
 files and tool identities. Its `passed` covers these bounded checks;
 `a0ExitPassed=false` and `stage2Qualified=false`. The installed extraction has no
 OCaml SDK `.cmi`/`.cmxa` files, so a compatible isolated SDK and real custom-pass
 initialize/observe qualification are next. No recovery/dataflow/stateflow pass,
 model replay or mutation acceptance is claimed. See the
 [validation guide](docs/Ariadne/bap-analysis-core-design.md#a0-capability-evidence) and
-[25-entry evidence archive](evidence/Ariadne/bap-stage2-a0-evidence-manifest.json).
+[25-entry evidence archive](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-stage2-a0-evidence-manifest.json).
 
 ## 2026-10-03 — BAP latency acceptance changed to unlimited
 
@@ -1076,8 +1122,8 @@ Full Stage 1 exit and the Stage 2 prerequisite now pass under the new policy;
 Stage 2 implementation remains unstarted. Operational watchdogs remain separate.
 
 See the [policy and validation](docs/Ariadne/bap-analysis-core-design.md#unlimited-timing-policy),
-[source-bound record](evidence/Ariadne/bap-unlimited-validation.json) and
-[evidence manifest](evidence/Ariadne/bap-unlimited-evidence-manifest.json).
+[source-bound record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-unlimited-validation.json) and
+[evidence manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-unlimited-evidence-manifest.json).
 Earlier bounded-policy results below remain historical. Changes are uncommitted.
 
 ## 2026-10-03 — Controlled Windows workload generated and repinned
@@ -1089,8 +1135,8 @@ completed the [replacement plan](.agents/plans/completed/bap-windows-repin.md). 
 process/module and exception/context inspection passes. The original null-write
 profile also passes its capture regression; uploads remain disabled.
 
-The [new BAP pin](evidence/Ariadne/bap-windows-workload-case.json) and
-[23-entry input bundle](evidence/Ariadne/bap-windows-workload-inputs.tar.gz) retain
+The [new BAP pin](tests/input/fixtures/workloads/bap-windows-workload-case.json) and
+[23-entry input bundle](tests/input/fixtures/workloads/windows-inputs.tar.gz) retain
 the capture, matching executable and independent witnesses. The historical
 Priority 4 manifest and I4 requirement remain unchanged.
 
@@ -1105,8 +1151,8 @@ identify reference decoding at **7,572.13 ms** and core analysis at **69.61 ms**
 no optimization is included. Capture/pin delivery is complete, while full Stage 1
 and the Stage 2 prerequisite remain false due to latency. Stage 2 is unstarted.
 The [delivery guide](docs/Ariadne/bap-analysis-core-design.md#windows-workload-replacement),
-[source-bound record](evidence/Ariadne/bap-windows-repin-validation.json) and
-[199-entry derived archive](evidence/Ariadne/bap-windows-repin-evidence-manifest.json)
+[source-bound record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-windows-repin-validation.json) and
+[199-entry derived archive](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-windows-repin-evidence-manifest.json)
 retain exact results and timing limitations. Changes remain uncommitted.
 
 ## 2026-10-03 — BAP workload qualification repair and source refresh
@@ -1118,7 +1164,7 @@ raw release samples. Workload v2 and aggregate v3 validate the evidence and
 require complete source/tool inventories. Full-exit and Stage 2 prerequisite
 decisions require the original Windows workload's median at most 2,000 ms.
 
-The [current record](evidence/Ariadne/bap-windows-workload-validation.json)
+The [current record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-windows-workload-validation.json)
 passes all **17 implementation gates** with **177 stable source hashes**:
 39 controlled Python tests, native corpus/integration, eight model cases with
 99 matched states across all nine fields, 16 detected mutations and four
@@ -1131,7 +1177,7 @@ They each decode two instructions and do not replace the original 98-instruction
 capture, which bounded searches did not locate. `stage1ExitPassed`,
 `stage2PrerequisiteSatisfied` and `defaultPromotionEligible` remain **false**;
 Stage 2 A0–A6 remain unstarted. See the [delivery guide](docs/Ariadne/bap-analysis-core-design.md#workload-evidence-repair)
-and [238-entry archive manifest](evidence/Ariadne/bap-windows-workload-evidence-manifest.json).
+and [238-entry archive manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-windows-workload-evidence-manifest.json).
 Changes remain uncommitted.
 
 ## 2026-10-03 — Native Windows Crashpad demo captures
@@ -1153,7 +1199,7 @@ under 2 ms, but CLI medians are approximately **1.82 s**, exceeding the unchange
 **1.5 s** I5a condition. Controlled-case acceptance therefore remains partial;
 the original Windows I4 artifact/query also remains separate and unexercised.
 See the [delivery guide](docs/Ariadne/zero-address-design.md#controlled-windows-capture) and
-[retained record](evidence/Ariadne/crashpad-demo-validation.json). Raw dumps remain
+[retained record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/crashpad-demo-validation.json). Raw dumps remain
 under ignored `tmp/crashpad-demo/20261003/`; changes are uncommitted.
 
 ## 2026-10-03 — I5a zero-address source/fixture delivery
@@ -1174,8 +1220,8 @@ Nine measured fixtures meet the frozen I5a criteria: combined phase medians are
 0.86–1.80 ms against 10 ms, and assessment CLI medians are 755–1,180 ms against
 1,500 ms. The existing Linux explanation phase remains within its separate
 250 ms condition. See the [delivery record](docs/Ariadne/zero-address-design.md#historical-source-and-fixture-qualification),
-[source-bound acceptance](evidence/Ariadne/i5a-validation.json) and
-[verified archive manifest](evidence/Ariadne/i5a-evidence-manifest.json).
+[source-bound acceptance](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5a-validation.json) and
+[verified archive manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5a-evidence-manifest.json).
 
 Controlled real Windows I5a and original-Windows I4 acceptance remain false;
 neither fixtures nor the retained Linux case replaces those missing artifacts.
@@ -1195,7 +1241,7 @@ mutants and two controlled Python decision mutants were detected. Default-output
 comparison preserved 24 reports byte-for-byte. The retained Linux explanation
 phase measured about 159 ms against the unchanged 250 ms condition.
 
-The [source-bound record](evidence/Ariadne/investigation-correctness-validation.json)
+The [source-bound record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/investigation-correctness-validation.json)
 and associated archive retain the exercised evidence. Full original-Windows I4
 acceptance remains false because its pinned capture is unavailable. The
 [completed fix plan](.agents/plans/completed/investigation-correctness-fixes.md) covers
@@ -1261,7 +1307,7 @@ Thirty report/explanation outputs match the prior executables byte-for-byte.
 Generated bindings and capture/IR fixtures retain their original bytes. Replay
 and mutation builds use isolated root `target/` subdirectories, and CLI
 measurement/test builds use the default production feature set. The
-[source-bound record](evidence/Ariadne/rust-source-layout-validation.json) retains
+[source-bound record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/rust-source-layout-validation.json) retains
 the exercised regression tier; the original Windows I4 capture is still absent.
 The root Lean/formal files and core engine/model source remain unchanged.
 Validation was retained before the user-authorized publication.
@@ -1271,7 +1317,7 @@ Validation was retained before the user-authorized publication.
 The [I0–I4 plan](.agents/plans/investigation-layer.md) now has an implemented bound
 fault-address explanation module, typed BIL address evidence, exact query binding,
 CLI question and strict reports. The
-[source-bound first-delivery record](evidence/Ariadne/investigation-validation.json)
+[source-bound first-delivery record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/investigation-validation.json)
 passes **16 gates**, including the full **12-gate Stage E regression**, and
 **11 new actual investigation/producer mutants**. Both platform fixtures and the
 pinned controlled Chromium/Linux capture retain expected producer evidence.
@@ -1292,7 +1338,7 @@ LLVM effect fallback are removed. LLVM MC remains an independent decoded-fact
 reference, with no production uses/defs/rules from its legacy semantic layer.
 Historical effect-rule research and the separate supplied LLVM IR path remain.
 The [removal plan](.agents/plans/completed/bap-only-semantics.md) and
-[current record](evidence/Ariadne/bap-only-removal-validation.json) identify the scope.
+[current record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-only-removal-validation.json) identify the scope.
 
 All **16 removal gates** pass against **93 stable current hashes**, including
 **12 Stage E regression gates**, **99 model observations** and **16 producer/adapter
@@ -1314,7 +1360,7 @@ backend feeding the existing Rust core. A hash-pinned isolated BAP helper,
 strict Rust transport, conservative BIL projection, shared captured-preparation
 seam, CLI selector and per-site reports are implemented. LLVM remains default.
 
-The [current record](evidence/Ariadne/bap-stage1-validation.json) passes all
+The [current record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-stage1-validation.json) passes all
 **16 implementation gates** with **92 stable source hashes**. Its finite corpus
 contains 34 native BIL cases and 23 admitted opcode forms. Independent model
 replay compares all nine fields for **99 observations**, all **15 producer/adapter
@@ -1324,7 +1370,7 @@ the real 34-site Linux analysis, at a measured median cost of about 645 ms.
 
 **Stage 1's exit remains partial:** fresh BAP acceptance and timing on the
 original hash-pinned 98-instruction Windows capture are unavailable. The
-[historical BAP Stage 1 validation record](evidence/Ariadne/bap-stage1-validation.json) identifies the missing
+[historical BAP Stage 1 validation record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-stage1-validation.json) identifies the missing
 S4/S5 clause and rerun command. The 2,000 ms default-promotion target is preserved.
 Stage 2 remains unstarted and unqualified; Stage D stays **0/49**. These Stage 1
 implementation changes are uncommitted.
@@ -1333,7 +1379,7 @@ implementation changes are uncommitted.
 
 The [completion plan](.agents/plans/completed/stage-e-completion.md) is delivered within its
 finite conformance/report acceptance scope. The
-[source-bound completion record](evidence/Ariadne/stage-e-completion-validation.json)
+[source-bound completion record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/stage-e-completion-validation.json)
 passes **12/12 gates** with stable source hashes. Its 16 machine-state and
 16 IR inputs cover joins, loops, empty/multiple roots and seeds, sparse/full-width
 addresses, equal-valued IDs, terminal alternatives, phi inputs, memory/call
@@ -1367,7 +1413,7 @@ formatting and Clippy passed. The core harness was repaired for MirrorRust's
 `NegotiatedError` API and passed its existing 12 traces, 168 matched states,
 wrong-digest rejection and five engine mutation checks.
 
-The [retained source-bound record](evidence/Ariadne/stage-e-mirrorrust-integration-validation.json)
+The [retained source-bound record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/stage-e-mirrorrust-integration-validation.json)
 pins client, SUT, oracle and generated artifacts. The
 [first-stage implementation plan](.agents/plans/completed/stage-e-mirrorrust-integration.md) is
 complete. Broader generated scenarios, Stage E engine mutants,
@@ -1395,7 +1441,7 @@ claimed. All five synthetic families complete at 128, 256 and 512 nodes.
 
 All 277 visible actions match the frozen scanning reference, as do transitions
 on 256 generated requests. Text, DOT and JSON hashes are byte-identical across
-the performance checkpoints. The [integration record](evidence/Ariadne/current-integration-validation.json)
+the performance checkpoints. The [integration record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/current-integration-validation.json)
 has 19 passing components and 93 stable source hashes, including the fresh
 11-component minidump gate, native Windows/Linux matrix, MBT replay and
 mutation gates. It retains the rerun of an interrupted generated test artifact.
@@ -1409,7 +1455,7 @@ passed all 19 B/C/E/F gates with **89 stable source hashes**, including the
 11-gate nested minidump acceptance, root and IR tests, formal fixtures and
 the now explicitly selected original benchmark binary. The required
 register-core gate returned its expected **pending 0/49** result. The
-retained [Stage D component record](evidence/Ariadne/stage-d-progress-validation.json)
+retained [Stage D component record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/stage-d-progress-validation.json)
 matched all **242 source hashes** at that checkpoint; it remains a component
 checkpoint, not accepted instruction steps. A redundant Stage D rerun passed
 its first observation, AMD64 component and mutation checks before it was
@@ -1444,7 +1490,7 @@ captured instruction boundary 125 bytes before the exception RIP. Ariadne
 decoded 34 starts and retained a 28-node possible data slice; a reviewed RBX
 load is a possible address producer for the faulting memory read. Opaque
 calls and a later unsupported control remain visible. The
-[source-bound record](evidence/Ariadne/priority-1-validation.json) contains a
+[source-bound record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/priority-1-validation.json) contains a
 passing focused gate, three negative controls and all 11 passing minidump
 regression gates with stable sources. The raw dump stays in ignored local
 `tmp/priority1/`; no PE/ELF reader, historical execution claim or formal
@@ -1470,7 +1516,7 @@ or implementation behavior is claimed.
 ## 2026-09-29 13:43 CST — Stage D first-case progress
 
 The [ISA-track retirement decision](docs/Ariadne/semantic-assurance.md)
-has begun. The source-bound [historical Stage D validation record](evidence/Ariadne/stage-d-progress-validation.json)
+has begun. The source-bound [historical Stage D validation record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/stage-d-progress-validation.json)
 pins the first `MOV reg64, imm32` form and profile hashes, checks LLVM 20.1.2
 payload observations under Windows/Linux targets, and adds TLA+/Lean fixtures
 for a CPL-3 body, assumed fallthrough, LOCK #UD rollback witness and finite
@@ -1479,7 +1525,7 @@ RAX-byte-cell projection. Nine deliberate semantic mutations were rejected.
 The default AMD64 suite passed 70 Apalache typechecks, 33 TLC configurations,
 73 Lean build jobs, the combined axiom audit and 50 Python integrity tests on
 stable sources. Fifteen native effects tests also passed. The
-[Stage D validation report](evidence/Ariadne/stage-d-progress-validation.json)
+[Stage D validation report](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/stage-d-progress-validation.json)
 records **242 stable source hashes**. The required `register-core` gate still
 reports **0/49 accepted** because the complete case-specific boundary,
 TLA+/Lean correspondence, general projection and coverage-ledger binding
@@ -1516,7 +1562,7 @@ replay of all observable fields and CLI integration remain open. **Stage F is
 partial:** a [proof-boundary record and benchmark baseline](docs/Ariadne/semantic-assurance.md#universal-rust-refinement-boundary)
 measure loops, joins, calls, dense aliases and a pinned minidump; no universal
 Rust refinement or solver optimization is claimed. The
-[19-gate source-bound report](evidence/Ariadne/stage-b-f-validation.json) passed
+[19-gate source-bound report](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/stage-b-f-validation.json) passed
 with **83 stable source hashes**. This working-tree progress has not been
 committed or pushed.
 
@@ -1686,7 +1732,7 @@ TLA+/Lean correspondence, and conservative analysis-projection obligations.
 - [Priority 2 effect decision](docs/Ariadne/operand-effects-design.md#selected-path-no-change-decision-2026-09-29)
 - [Priority 3 presentation validation](docs/Ariadne/result-rendering.md#presentation-acceptance)
 - [Priority 4 performance validation](docs/Ariadne/workload-performance-design.md#historical-llvm-workload-qualification)
-- [Current integration gate](evidence/Ariadne/current-integration-validation.json)
+- [Current integration gate](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/current-integration-validation.json)
 
 
 ## 2026-09-26 — Operand/effects working-tree delivery

@@ -1,10 +1,40 @@
 #!/usr/bin/env python3
-"""Compare pinned typed BIL with independent frozen scalar integer equations."""
-import argparse,hashlib,json,sys
+"""Compare fresh native typed BIL with independent scalar integer equations."""
+import argparse,hashlib,json,sys,os,subprocess
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'tests/bap/fixtures/admission'))
 from oracle import arithmetic
+from i5a_native_contract import strict_json
+
+def fresh_lifts(cases, contract_path, helper=None, runtime=None):
+ helper=Path(helper or os.environ.get('ARIADNE_BAP_HELPER',ROOT/'target/ariadne-bap-lift'))
+ runtime=Path(runtime or os.environ.get('BAP_RUNTIME_ROOT',ROOT/'tmp/bap-setup/stable'))
+ snapshot=hashlib.sha256(Path(contract_path).read_bytes()).hexdigest()
+ request=f'ARIADNE-BAP-LIFT 1 windows-amd64 {snapshot}\nbatch 0 {len(cases)}\n'
+ request+=''.join(f'0x{0x401000+i*32:016x} {case["bytes"]}\n' for i,case in enumerate(cases))
+ env={**os.environ,'LD_LIBRARY_PATH':str(runtime/'usr/local/lib')+':'+str(runtime/'usr/lib/x86_64-linux-gnu'),
+      'XDG_STATE_HOME':str(runtime/'state'),'XDG_CACHE_HOME':str(runtime/'cache')}
+ process=subprocess.run([str(helper),str(runtime/'usr/local/lib/bap')],input=request,text=True,capture_output=True,env=env,timeout=300)
+ if process.returncode:raise RuntimeError('fresh BAP lift failed: '+process.stderr)
+ responses=[strict_json(line) for line in process.stdout.splitlines()]
+ if len(responses)!=len(cases)+2:raise ValueError('fresh helper omitted or duplicated frames')
+ ready=responses[0]
+ if (ready.get('schema')!='ariadne.bap-ready/v1' or ready.get('snapshot')!=snapshot
+     or ready.get('target')!='windows-amd64' or ready.get('version')!='2.5.0-alpha'
+     or ready.get('lifter')!='legacy'):raise ValueError('fresh helper identity differs')
+ native=responses[1:-1]
+ for i,(case,row) in enumerate(zip(cases,native)):
+  if (row.get('schema')!='ariadne.bap-site/v1' or row.get('snapshot')!=snapshot
+      or type(row.get('batch')) is not int or row.get('batch')!=0 or row.get('va')!=f'0x{0x401000+i*32:016x}'
+      or row.get('status')!='decoded' or row.get('bytes')!=case['bytes']
+      or type(row.get('length')) is not int or row.get('length')!=len(case['bytes'])//2 or not row.get('bil')):
+   raise ValueError('fresh helper case differs: '+case['name'])
+ if (responses[-1]!={'schema':'ariadne.bap-batch/v1','batch':0,'count':len(cases)}
+     or type(responses[-1].get('batch')) is not int or type(responses[-1].get('count')) is not int):
+  raise ValueError('fresh helper batch completion differs')
+ return native,hashlib.sha256(process.stdout.encode()).hexdigest(),hashlib.sha256(helper.read_bytes()).hexdigest()
+
 class Value:
  def __init__(self,n,w):self.n=None if n is None else n&((1<<w)-1);self.w=w
  def signed(self):return self.n-(1<<self.w) if self.n&(1<<(self.w-1)) else self.n
@@ -55,7 +85,8 @@ class Evaluator:
    else:raise ValueError('oracle unexpected actual BIL statement '+s['kind'])
 def main():
  p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
- contract_path=ROOT/'tests/bap/fixtures/admission/contract.json';contract=json.loads(contract_path.read_text());native_path=ROOT/'evidence/Ariadne/bap-admission/p0-native-bil.json';native=json.loads(native_path.read_text())['responses'][1:-1]
+ contract_path=ROOT/'tests/bap/fixtures/admission/contract.json';contract=json.loads(contract_path.read_text())
+ native,lift_sha,helper_sha=fresh_lifts(contract['cases'][:13],contract_path)
  rows=[]
  for case,lift in zip(contract['cases'][:13],native[:13]):
   assert lift['bytes']==case['bytes'] and lift['bil'];name=case['name'];expected=case['expected'];access=expected.get('access')
@@ -83,6 +114,6 @@ def main():
    rows.append(dict(case=name,input=value,resultMatches=True,flagsMatch=True))
  a.output.parent.mkdir(parents=True,exist_ok=True)
  sha=lambda path:hashlib.sha256(path.read_bytes()).hexdigest()
- record=dict(schema='ariadne.bap-independent-scalar-oracle/v1',passed=True,comparisons=len(rows),contractSha256=sha(contract_path),typedBilSha256=sha(native_path),oracleSourceSha256=sha(Path(__file__)),rows=rows,scope='Pinned producer arithmetic/flags/zero-extension for thirteen independently specified encodings; no Ariadne provenance evaluator or hardware executor used.')
+ record=dict(schema='ariadne.bap-independent-scalar-oracle/v1',passed=True,comparisons=len(rows),contractSha256=sha(contract_path),typedBilSha256=lift_sha,helperSha256=helper_sha,oracleSourceSha256=sha(Path(__file__)),rows=rows,scope='Fresh producer arithmetic/flags/zero-extension for thirteen independently specified encodings; no Ariadne provenance evaluator or hardware executor used.')
  a.output.write_text(json.dumps(record,indent=2)+'\n');print('Independent scalar BIL oracle:',len(rows),'comparisons pass')
 if __name__=='__main__':main()

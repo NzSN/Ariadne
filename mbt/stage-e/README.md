@@ -31,6 +31,9 @@ The [completion plan](../../.agents/plans/completed/stage-e-completion.md) and
 The original [first integration plan](../../.agents/plans/completed/stage-e-mirrorrust-integration.md)
 and its two-fixture record remain historical evidence.
 
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+
 ## Checked campaign
 
 `cases.py` deterministically generates 16 machine-state and 16 normalized IR
@@ -86,7 +89,7 @@ non-system installation. `ARIADNE_REAL_DUMPS` selects the existing Breakpad
 fixtures used by the minidump regression gate. Prepared archives in ignored
 `tmp/llvm20-headers` and `tmp/graphviz-headers` are recognized locally.
 
-[Retained completion evidence](../../evidence/Ariadne/stage-e-completion-validation.json)
+[Retained completion evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/stage-e-completion-validation.json)
 establishes bounded conformance and report/CLI acceptance. ISA-step acceptance,
 faithfulness of supplied semantic relations, universal Rust refinement and
 MirrorGate restricted execution are separate boundaries.

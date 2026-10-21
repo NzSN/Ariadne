@@ -1521,7 +1521,7 @@ pub fn list_frame_paths(
     list(bound.input.clone(), question, limits, None)
 }
 impl FramePathListing {
-    #[cfg(test)]
+    #[cfg(all(test, feature = "input"))]
     pub(super) fn relist_for_test(&self) -> Result<Self, Error> {
         list(
             self.input.clone(),

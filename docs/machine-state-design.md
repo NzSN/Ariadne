@@ -39,6 +39,11 @@ and an executable fixture in
 The existing Rust [recovery engine](../src/engine.rs) and
 [public types](../src/model.rs) establish the integration constraints below.
 
+Current validation follows the [executable test matrix](../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## 1. Module and scope
 
 Add `ariadne::machine_state` as a separate module. Its interface accepts an

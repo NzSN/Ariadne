@@ -2,9 +2,9 @@
 
 ## Context and follow-up
 
-**Status.** Implemented with [source-bound remote qualification, 2026-10-19](../../evidence/Ariadne/frame-question/20261019/README.md).
+**Status.** Implemented with [source-bound remote qualification, 2026-10-19](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md).
 P0–P10 and the applicable FC5/FC6/M4 finite imports pass on the declared sources.
-The [2026-10-18 local record](../../evidence/Ariadne/frame-question/20261018/README.md)
+The [2026-10-18 local record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261018/README.md)
 is retained as historical evidence. This design covers all four items of the
 [original recommendation](../../.agents/chatdocs/ariadne-frame-to-frame-recommendation-20261016.html#order).
 
@@ -19,7 +19,7 @@ result layers and strict replay. Imported feature documents retain authority
 for their own rules and recorded qualification scopes.
 
 **Where to go next.** The [P0–P10 ledger](../../.agents/plans/frame-question-investigation.md)
-records completion and limits. Read [qualification](../../evidence/Ariadne/frame-question/20261019/README.md), the
+records completion and limits. Read [qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md), the
 [structural](investigation-design.md#structural-frame-report-before-dataflow),
 [connection](investigation-design.md#structural-corridors-and-cycle-summaries),
 [memory](memory-provenance-refinement.md), [guarded-target](guarded-target-resolution-design.md)
@@ -27,14 +27,19 @@ and [model](../../Specs/README.md) contracts for the imported premises.
 
 **What remains unresolved.** The original bounded alternative question remains Unknown. General SMT, loop-instance invariants, historical execution, root cause and universal refinement remain outside this finite profile. The early raw-source guard limit is preserved with its stale decoder identity; [caller S6](caller-semantic-coverage-design.md) separately restores original coverage and completes full-state comparison. Frame-path F4 and broad release remain separate.
 
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## Coverage of the four recommendation items
 
 | Item | Investigator question | Contract owner and current state | Work in this program |
 | --- | --- | --- | --- |
-| 5.1 — structural report first | Which captured activations, admitted local edges and unresolved frontiers are available before dataflow completes? | [Investigation source contract](investigation-design.md#structural-frame-report-before-dataflow); `BoundFrameStructure`, v1/v2 source reports and SF0–SF6 exist with [dated qualification](../../evidence/Ariadne/frame-structure/20261016/README.md). | Reuse the privately bound source. Recheck identities for reuse; preserve missing maps, auxiliary witnesses and source gaps. Do not reimplement SF0–SF6. |
-| 5.2 — cycles and examples | Which represented connections join the selected anchors, where are structural cycles, and what samples fit a separate budget? | [Connection contract](investigation-design.md#structural-corridors-and-cycle-summaries); `BoundFrameConnections` and its CLI/codec exist with [local finite/capture evidence](../../evidence/Ariadne/frame-connections/20261018/README.md). [Remote FC5/FC6 consumer acceptance](../../evidence/Ariadne/frame-question/20261019/README.md) now passes for those exact sources. | Reuse optional graph/corridor/SCC results. Their completion and retained examples are not prerequisites for value work. Retain FC5's exact source/corpus boundary. |
+| 5.1 — structural report first | Which captured activations, admitted local edges and unresolved frontiers are available before dataflow completes? | [Investigation source contract](investigation-design.md#structural-frame-report-before-dataflow); `BoundFrameStructure`, v1/v2 source reports and SF0–SF6 exist with [dated qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-structure/20261016/README.md). | Reuse the privately bound source. Recheck identities for reuse; preserve missing maps, auxiliary witnesses and source gaps. Do not reimplement SF0–SF6. |
+| 5.2 — cycles and examples | Which represented connections join the selected anchors, where are structural cycles, and what samples fit a separate budget? | [Connection contract](investigation-design.md#structural-corridors-and-cycle-summaries); `BoundFrameConnections` and its CLI/codec exist with [local finite/capture evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-connections/20261018/README.md). [Remote FC5/FC6 consumer acceptance](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md) now passes for those exact sources. | Reuse optional graph/corridor/SCC results. Their completion and retained examples are not prerequisites for value work. Retain FC5's exact source/corpus boundary. |
 | 5.3 — resolve one question's bottleneck | Under declared inputs and endpoint constraints, can a selected alternative be refuted, witnessed in the model, or only left unknown; which unfinished obligation blocks the answer? | New coordinator and assessment contract below. Existing target/guard/loop proof mechanisms remain their own owners. | Admit one typed question; schedule relevant work fairly; use checked constraints and existing induction strategies; publish premises, coverage and concrete evidence requirements. |
-| 5.4 — local fault dependencies | Which immediate values and possible writers contribute to a selected access, and which individual candidates can be excluded within a justified scope? | [Memory refinement](memory-provenance-refinement.md) has [remote finite/Scanner qualification](../../evidence/Ariadne/frame-question/20261019/README.md) for the selected candidate-preserving profile. | Reuse a compatible completed callee when available; add the frame/source join and question-scoped local assessment without requiring completed caller dataflow. Retain unknown memory, interference and instance ambiguity. |
+| 5.4 — local fault dependencies | Which immediate values and possible writers contribute to a selected access, and which individual candidates can be excluded within a justified scope? | [Memory refinement](memory-provenance-refinement.md) has [remote finite/Scanner qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md) for the selected candidate-preserving profile. | Reuse a compatible completed callee when available; add the frame/source join and question-scoped local assessment without requiring completed caller dataflow. Retain unknown memory, interference and instance ambiguity. |
 
 The paragraph following the four items is also part of this design: frame
 binding, structural recovery, feasibility, values/origins and execution evidence
@@ -570,7 +575,7 @@ by separate compiled mutations in the current evidence record.
 
 ## 2026-10-19 source-bound acceptance
 
-The [new record](../../evidence/Ariadne/frame-question/20261019/README.md) binds
+The [new record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md) binds
 an unchanged 875-file campaign capsule to remote root/features, 32 finite model
 configurations, independent oracles, 33 compiled mutations, native compatibility,
 live controls, both declared capture-source applications and helper-free replay.
@@ -595,7 +600,7 @@ consumer acceptance input; no fresh raw-source structural parity or completed
 caller claim is inferred from this finite question qualification.
 
 That refresh selected stale LLVM decoder `45dad913…`. The subsequent
-[caller S6 qualification](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md)
+[caller S6 qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/caller-semantic-coverage/20261019/README.md)
 rebuilds the current `6bb0005e…` helper, restores original coverage and completes
 both original full states. The question/structural publications above retain
 their own identities and limits; S6 does not provide an execution witness.

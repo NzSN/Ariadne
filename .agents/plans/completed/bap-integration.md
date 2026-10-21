@@ -44,7 +44,7 @@ clauses. Older standalone records retain their original scope.
 - [Controlled Windows demo](../../../docs/Ariadne/zero-address-design.md#controlled-windows-capture) — documents the separate two-instruction I5a/smoke capture.
 
 **What remains unresolved.** No required P4 work remains in the
-[accepted scope](../../../evidence/Ariadne/bap-admission/p4-acceptance-20261010.json).
+[accepted scope](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/p4-acceptance-20261010.json).
 Historical real-Linux clauses are excluded, not exercised. Generic-runner
 external-evidence ingestion and the old Scanner Rust timing repetitions remain
 optional follow-ups. Earlier integration records do not qualify v3 by themselves.
@@ -70,6 +70,11 @@ The [Stage 1 protocol/projection implementation design](../../../docs/Ariadne/ba
 records the selected isolated C bridge hosting BAP's OCaml runtime, actual
 release-asset fingerprints and conservative admission policy. S0 uses pinned
 official assets rather than modifying the user's existing OCaml switches.
+
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## Architecture and boundaries
 
@@ -223,7 +228,7 @@ profile. Capture and pinning are complete; latency is measured without blocking 
 ### Original Windows input and commands
 
 This section preserves the historical input reference. The user confirmed that
-the original dump no longer exists. Its [unchanged manifest](../../../evidence/Ariadne/priority-4-real-capture-case.json) records
+the original dump no longer exists. Its [unchanged manifest](../../../tests/input/fixtures/workloads/priority-4-real-capture-case.json) records
 `f13d18cd-9ade-4eff-947c-15a649b636fa.dmp`, 2,028,400 bytes, SHA-256
 `4b3deb70134015ec227b3cf5edf82e1dac0b308b3f19ae62f79cbd4251109e86`.
 Its entry is `0x7ff6451d52d0`, seed `0x7ff6451d530f`, and independent address
@@ -233,7 +238,7 @@ refer to this case; the replacement cannot qualify the original Electron crash.
 
 ### Active Windows input and commands
 
-The [active manifest](../../../evidence/Ariadne/bap-windows-workload-case.json) pins
+The [active manifest](../../../tests/input/fixtures/workloads/bap-windows-workload-case.json) pins
 `crashpad-windows-checksum-98-v1`: a native Windows AMD64 partial-mode Crashpad
 capture of a 379-byte function with 98 instruction starts. The dump is 217,936
 bytes, SHA-256 `1bd80af7a739471a7026776bfb37cbbe5953d01ad122e7cf7db0392f84da0b0a`.
@@ -242,7 +247,7 @@ Entry is `0x7ff7382f4840`, seed `0x7ff7382f49b4`, and producer
 the matching executable and the input/checksum witness. Executable bytes never
 fill uncaptured runtime ranges.
 
-The [input archive](../../../evidence/Ariadne/bap-windows-workload-inputs.tar.gz)
+The [input archive](../../../tests/input/fixtures/workloads/windows-inputs.tar.gz)
 contains 23 pinned entries and is 399,636 bytes. It retains the dump, companion,
 build/inspection records and sources. The default workload runner verifies the
 archive and capture identity before materializing `capture.dmp` in its output
@@ -415,7 +420,7 @@ selected build.
 
 ## Stage 1 execution status
 
-The [historical BAP Stage 1 validation record](../../../evidence/Ariadne/bap-stage1-validation.json)
+The [historical BAP Stage 1 validation record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-stage1-validation.json)
 tracks its original source snapshot. S0–S3 are implemented. That S4 record exercised 34 native BIL
 cases, strict transport, both platform fixtures, full-state model replay,
 15 real producer/adapter mutants, and the existing Rust/Stage E regression.
@@ -425,7 +430,7 @@ coverage benefit, with one warm-up and five release-build repeats.
 The [previous R0–R2 delivery](../../../docs/Ariadne/bap-analysis-core-design.md#workload-evidence-repair),
 recorded on 2026-10-03 before the replacement,
 records the repaired runner and shared evidence validator. R0–R2 are complete
-for the available corpus. The [retained aggregate](../../../evidence/Ariadne/bap-windows-workload-validation.json)
+for the available corpus. The [retained aggregate](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-windows-workload-validation.json)
 passed **17/17 implementation gates** with **177 stable source hashes** and
 **39 controlled tests**: 15 producer, 14 validator and 10 aggregate-gate tests.
 Native coverage includes 41 exact cases and 30 admitted forms; BAP model replay
@@ -436,21 +441,21 @@ Model, mutation and workload evidence was freshly generated in that campaign,
 then reused by the final aggregate after identity checks. The 12-gate Stage E
 record was reused from I5a after exact verification of all 315 source hashes
 and its native IR, MC and Graphviz tool hashes. The
-[evidence manifest](../../../evidence/Ariadne/bap-windows-workload-evidence-manifest.json)
-binds the [retained archive](../../../evidence/Ariadne/bap-windows-workload-evidence.tar.gz),
+[evidence manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-windows-workload-evidence-manifest.json)
+binds the [retained archive](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-windows-workload-evidence.tar.gz),
 whose 238 entries were verified.
 
 The [replacement delivery](../../../docs/Ariadne/bap-analysis-core-design.md#windows-workload-replacement)
 records a new native Crashpad capture and active BAP pin under the user's
 authorization. Capture generation and independent inspection are complete;
 59 controlled BAP tests and nine inspector tests pass. The
-[new retained record](../../../evidence/Ariadne/bap-windows-repin-validation.json)
+[new retained record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-windows-repin-validation.json)
 contains 17/17 passing implementation gates with 178 stable aggregate source
 hashes and 168 workload source hashes. The valid 98-start Windows workload has
 a 10,667.760921 ms CLI median against the former 2,000 ms condition, so that
 historical record has false exit/prerequisite fields. Its
-[manifest](../../../evidence/Ariadne/bap-windows-repin-evidence-manifest.json) binds the
-[evidence archive](../../../evidence/Ariadne/bap-windows-repin-evidence.tar.gz).
+[manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-windows-repin-evidence-manifest.json) binds the
+[evidence archive](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-windows-repin-evidence.tar.gz).
 
 The historical replacement phase benchmark measured reference decoding at 7,572.131181 ms,
 helper startup at 1,178.301727 ms and core analysis at 69.614232 ms (medians).

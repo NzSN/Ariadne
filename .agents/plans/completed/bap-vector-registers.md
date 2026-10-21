@@ -8,7 +8,7 @@ namespace; historical qualification remains bound to its original sources.
 
 **Why this document exists.** The [BAP design](../../../docs/Ariadne/bap-analysis-core-design.md#projection)
 rejects `YMM6` in the captured caller's MOVAPS lift, as recorded by the
-[frame-path attempt](../../../evidence/Ariadne/frame-paths/dump03958-20261013/report.md).
+[frame-path attempt](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/dump03958-20261013/report.md).
 The user requested vector-register namespace support.
 
 **What this document establishes.** Admit XMM0–15 at 128 bits and YMM0–15 at
@@ -29,6 +29,13 @@ XMM unwind recipes and new exception modeling are outside this change. The
 captured MOVAPS lift contains an alignment exception and can still stop after
 namespace admission. No executed-history or root-cause claim follows.
 
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## Stages
 
 | Stage | Implementation and validation | Acceptance |
@@ -43,7 +50,7 @@ No commit or push is included in this task.
 
 ## Dated validation
 
-The [validation receipt](../../../evidence/Ariadne/bap-vector-registers/20261013/report.md)
+The [validation receipt](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-vector-registers/20261013/report.md)
 binds 380 current source/tool/fixture hashes, the native helper manifest and
 checked executable hashes. Remote fmt, default/core-only tests, all-feature
 Clippy, root-target layout, pinned producer and capture/native parity pass.

@@ -7,9 +7,9 @@ proof-gated normal outcome in the [canonical design](../../../docs/Ariadne/justi
 Unknown/refuted alignment remains stopped with explicit residuals. General
 guarded exception graphs are excluded.
 
-**Why this document exists.** The [vector-qualified dump retry](../../../evidence/Ariadne/bap-vector-registers/20261013/report.md)
+**Why this document exists.** The [vector-qualified dump retry](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-vector-registers/20261013/report.md)
 still refuses MOVAPS's alignment exception. The user authorized implementing
-the design, with all builds and heavy checks on remote WSL.
+the design, with all builds and heavy checks on remote WSL. The [test matrix](../../../tests/README.md) defines current validation.
 
 **What this document establishes.** Owned implementation stages, dependencies,
 finite limits and acceptance gates. Preserve all current uncommitted vector
@@ -24,6 +24,11 @@ owns analysis-model authority.
 unwind, large default runtime tables, full SIMD and successful full-dump path
 enumeration are not guaranteed by this work. ABI facts are opt-in assumptions,
 not inferred historical observations.
+
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## Stages, dependencies and ownership
 
@@ -58,7 +63,7 @@ assumption and guard policy. A still-unavailable answer is recorded honestly.
 ## Execution checkpoint, 2026-10-14
 
 All owned stages are complete within the selected first-delivery scope.
-[Validation](../../../evidence/Ariadne/guard-admission/20261014/validation.json) binds
+[Validation](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guard-admission/20261014/validation.json) binds
 670 implementation/fixture/tool sources and the hash-verified remote artifacts.
 Root/default/core-only/Clippy/layout, affected pinned native suites, 27 model
 configurations, independent oracle, six guard mutants/seven observer pairs and

@@ -209,7 +209,7 @@ fn independent_exhaustive_inverse_oracle() {
 
 fn saved_source() -> BoundFrameStructure {
     crate::reports::frame_structure::decode_expected(
-        include_bytes!("fixtures/evidence/frame-question-source.json"),
+        include_bytes!("fixtures/saved_sources/frame-question-source.json"),
         &FrameStructureLimits::default(),
         "92ec88bd4e0f55b977bbe0ee08a80f4eb077c00d0b3884c4660e1d1f8da05739",
     )
@@ -456,7 +456,7 @@ fn completed_callee_identity_and_candidate_universe_survive_focus_and_stops() {
 #[test]
 fn partial_connection_carrier_preserves_conditional_source_and_independent_layers() {
     let source = crate::reports::frame_structure::decode(
-        include_bytes!("fixtures/evidence/frame-question-conditional-source.json"),
+        include_bytes!("fixtures/saved_sources/frame-question-conditional-source.json"),
         &FrameStructureLimits::default(),
     )
     .unwrap();
@@ -691,7 +691,7 @@ fn partial_word_outputs_cannot_become_exact_whole_registers() {
 #[test]
 fn captured_loop_observation_is_not_forced_onto_its_first_visit() {
     let source = crate::reports::frame_structure::decode_expected(
-        include_bytes!("fixtures/evidence/frame-question-loop-source.json"),
+        include_bytes!("fixtures/saved_sources/frame-question-loop-source.json"),
         &FrameStructureLimits::default(),
         "2c15d35ef28b9c0192e373650e3e008cab4eb157ad32acaef21dd2c211a39fed",
     )

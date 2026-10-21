@@ -17,7 +17,7 @@ def sources():
  paths.add(ROOT/'tools/test_investigation_windows_case.py')
  for tree in ['src','tests','src/bap','tests/bap','src/input','tests/input','src/reports','tests/reports','src/investigation','tests/investigation','src/bench','native/bap','native/llvm_mc']:
   paths.update(p for p in (ROOT/tree).rglob('*') if p.is_file() and p.suffix!='.md' and '__pycache__' not in p.parts)
- paths.update(ROOT/p for p in ['Cargo.toml', 'Cargo.lock', 'tools/check_investigation.py', 'tools/check_investigation_mutations.py', 'tools/measure_investigation.py', 'tools/investigation_budget.py', 'tools/test_investigation_budget.py', 'evidence/Ariadne/priority-4-real-capture-case.json', 'tools/check_minidump.py', 'tools/check_minidump_mutations.py', 'tools/check_stage_e.py', 'Specs/Ariadne.tla', 'Specs/AriadneTypes.tla', 'Specs/AriadneMachineCommon.tla'])
+ paths.update(ROOT/p for p in ['Cargo.toml', 'Cargo.lock', 'tools/check_investigation.py', 'tools/check_investigation_mutations.py', 'tools/measure_investigation.py', 'tools/investigation_budget.py', 'tools/test_investigation_budget.py', 'tests/input/fixtures/workloads/priority-4-real-capture-case.json', 'tools/check_minidump.py', 'tools/check_minidump_mutations.py', 'tools/check_stage_e.py', 'Specs/Ariadne.tla', 'Specs/AriadneTypes.tla', 'Specs/AriadneMachineCommon.tla'])
  paths.update(real_case.source_paths())
  return {str(p.relative_to(ROOT)):sha(p) for p in sorted(paths)}
 def retained(path, name):

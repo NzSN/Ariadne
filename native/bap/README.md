@@ -69,7 +69,7 @@ python3 tools/check_bap_semantics.py
 ```
 
 The default qualification command uses the bundled
-[`crashpad-windows-checksum-98-v1` capture](../../evidence/Ariadne/bap-windows-workload-case.json).
+[`crashpad-windows-checksum-98-v1` capture](../../tests/input/fixtures/workloads/bap-windows-workload-case.json).
 The Linux benchmark verifies the archive and capture hashes before materializing
 the native Windows partial dump. The active query requires exactly 98 decoded
 starts with captured provenance and the independent RCX-producer witness.
@@ -95,3 +95,6 @@ selector is not used by BAP. Historical Priority 4 retains its original artifact
 the later I4-specific re-pin has its own manifest and bounded timing contract.
 The earlier BAP capture campaign did not implement Stage 2; the later
 [native core qualification](../../docs/Ariadne/bap-analysis-core-design.md#native-qualification) does.
+
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.

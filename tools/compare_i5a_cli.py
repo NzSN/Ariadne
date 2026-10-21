@@ -43,8 +43,8 @@ def without_verified_receipt(report, text, dot, manifest):
 def main():
     before = sources()
     work = Path(tempfile.mkdtemp(prefix="ariadne-i5a-equivalence-"))
-    baseline = ROOT / "evidence/Ariadne/investigation-correctness-validation.json"
-    expected = strict_json(baseline.read_text())["defaultOutputEquivalence"]["after"]
+    baseline = ROOT / "tests/reports/fixtures/legacy-cli-sha256.json"
+    expected = strict_json(baseline.read_text())
     for flags in [["--bin", "ariadne-minidump"], ["--features", "validation", "--bin", "bap-admission-validate"]]:
         build = subprocess.run(["cargo", "build", "--offline", "--locked", "--release", *flags], cwd=ROOT, capture_output=True, text=True)
         if build.returncode:

@@ -4,13 +4,18 @@
 
 **Status.** G5 completed on 2026-10-14 with fresh remote WSL checks and original caller retry. The hard guard-profile ceilings are released; independent transport and incomplete-coverage boundaries remain explicit.
 
-**Why this document exists.** The [guard-evidence diagnosis](../../../evidence/Ariadne/guard-evidence-budget/20261014/README.md) found that the captured caller exceeds 4 MiB, while the existing profile rejects a larger configured budget before preparation.
+**Why this document exists.** The [guard-evidence diagnosis](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guard-evidence-budget/20261014/README.md) found that the captured caller exceeds 4 MiB, while the existing profile rejects a larger configured budget before preparation. The [test matrix](../../../tests/README.md) defines current validation.
 
 **What this document establishes.** Ownership, implementation and validation gates for caller-selected finite guard budgets. The canonical contract remains the [justified branch design](../../../docs/Ariadne/justified-branch-pruning-design.md#configurable-guard-budgets).
 
 **Where to go next.** Read the [original G0–G4 ledger](justified-branch-pruning.md) for predicate behavior, and [BAP integration](../../../docs/Ariadne/bap-analysis-core-design.md) for independent native transport bounds.
 
 **What remains unresolved.** Removing guard-policy ceilings does not supply unlimited memory/time, close an incomplete candidate graph, add unwind semantics or qualify full-dump paths. Native initialization still has an independent 8 MiB frame limit; this stage changes guard budgets rather than the native transport protocol.
+
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## Contract and ownership
 
@@ -24,7 +29,7 @@ Remove the native guard's separate absolute 8,192-site and 32,768-edge checks. T
 | G5.1 validator and controls | Guard preparation worker: `src/bap/guard_admission.rs`, `native/bap-core/guard.ml`, `tests/bap/guard_admission_unit.rs`, `tests/input/bap_core.rs` | G5.0 | Above-default values accepted in Rust/native; unsigned parsing and overflow rejection consistent; actual budget exhaustion and proof tampering remain conservative. |
 | G5.2 CLI configuration | Root: `src/bin/ariadne-minidump.rs`, applicable CLI tests | G5.0 | `--guard-admission-limits JSON` binds exact strict seven-field limits to guarded frame preparation and rejects incompatible usage. |
 | G5.3 review | Independent transport explorer, root source review | G5.1/G5.2 | No default ceiling remains in the guard validator; independent protocol limits and unchanged proof requirements documented. |
-| G5.4 remote qualification | Root: isolated remote WSL source/build, `evidence/Ariadne/guard-budget-configuration/` | G5.3 | Affected Rust/native tests plus root format/default/core-only/Clippy checks; source-bound artifacts retained; original dump retries distinguish actual configured budget stops from profile rejection. |
+| G5.4 remote qualification | Root: isolated remote WSL source/build, `https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guard-budget-configuration/` | G5.3 | Affected Rust/native tests plus root format/default/core-only/Clippy checks; source-bound artifacts retained; original dump retries distinguish actual configured budget stops from profile rejection. |
 | G5.5 delivery | Root: canonical design, archive/index | G5.4 | Current usage/results reconciled; document links and layout pass; completed stage archived without altering old evidence. |
 
 ## Validation scope
@@ -35,7 +40,7 @@ Retry the original captured caller with 32 MiB evidence under both the original 
 
 ## Dated delivery, 2026-10-14
 
-G5.0–G5.5 are complete. The [source-bound qualification](../../../evidence/Ariadne/guard-budget-configuration/20261014/README.md) retains 686 matching source/tool/document hashes and 86 archived files. Final remote checks pass: 14 guard controls, 189 default/46 core-only tests, format/Clippy, 12 native kernel/nine capture/two frame-path tests, strict contract controls and all 27 predicate-model configurations. Independent source/test review returned no concrete finding. Mutation seam checking is not a fresh mutation campaign.
+G5.0–G5.5 are complete. The [source-bound qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guard-budget-configuration/20261014/README.md) retains 686 matching source/tool/document hashes and 86 archived files. Final remote checks pass: 14 guard controls, 189 default/46 core-only tests, format/Clippy, 12 native kernel/nine capture/two frame-path tests, strict contract controls and all 27 predicate-model configurations. Independent source/test review returned no concrete finding. Mutation seam checking is not a fresh mutation campaign.
 
 The initial native CLI test requested three frames from a fixture that cannot recover them. It was corrected to exercise the guarded one-frame fixture and three-frame diamond separately; the failed attempt remains archived.
 

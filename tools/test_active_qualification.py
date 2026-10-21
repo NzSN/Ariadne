@@ -28,7 +28,7 @@ class ActiveQualificationTests(unittest.TestCase):
                     {"lift": {"opcode": "TEST_FORM"}, "expect": {}},
                     {"expect": {"reject": True}},
                 ]},
-                "evidence/Ariadne/bap-windows-workload-case.json": {},
+                "tests/input/fixtures/workloads/bap-windows-workload-case.json": {},
                 "mbt/stage-e/results/latest.json": {"sourceHashes": {}},
                 "mbt/stage-e/corpus/manifest.json": {
                     "generation": {"nativeHelperSha256": "test-digest"}
@@ -76,7 +76,7 @@ class ActiveQualificationTests(unittest.TestCase):
                                                      return_value={"targetMet": windows,
                                                                    "reason": "controlled prerequisite"}))
                     stack.enter_context(patch.object(module, "WINDOWS_CASE_PATH",
-                                                     root / "evidence/Ariadne/bap-windows-workload-case.json"))
+                                                     root / "tests/input/fixtures/workloads/bap-windows-workload-case.json"))
                 stack.enter_context(patch.object(module.subprocess, "run", side_effect=run))
                 stack.enter_context(patch.object(module.tempfile, "mkdtemp", return_value=str(work)))
                 stack.enter_context(patch.dict("os.environ", {"ARIADNE_DOT": str(root / "dot")}))
@@ -119,7 +119,7 @@ class ActiveQualificationTests(unittest.TestCase):
         sources = check_effects.sources()
         for path in ("Specs/Ariadne.tla", "Specs/AriadneEffects.tla",
                      "Specs/AriadneTypes.tla", "Specs/AriadneMachineCommon.tla",
-                     "Specs/Effects.cfg", "evidence/Ariadne/amd-manuals.lock.json"):
+                     "Specs/Effects.cfg", "tests/bap/fixtures/amd-manuals.lock.json"):
             self.assertIn(path, sources)
         self.assertFalse(any(Path(path).name.startswith(
             ("AMD64", "AriadneX86_64", "X86_64")) for path in sources))

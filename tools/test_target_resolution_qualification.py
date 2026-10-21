@@ -205,7 +205,7 @@ class QualificationTests(unittest.TestCase):
     def original(self):
         root = self.base / 'repo'
         oracle_name = 'tests/bap/fixtures/target-resolution-table.json'
-        freeze_name = 'evidence/Ariadne/indirect-target-resolution/contract-freeze-20261012.json'
+        freeze_name = 'tests/bap/fixtures/target-resolution-limits.json'
         oracle = {'snapshot_sha256': check.ORIGINAL_SHA256, 'entry_count': 58,
                   'table_base': '0x00007ff64791ef58', 'unique_targets': [str(n) for n in range(45)]}
         freeze = {'limits': {'max_entries': 4096}}

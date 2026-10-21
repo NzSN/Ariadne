@@ -9,8 +9,8 @@
     "final-transformation"
   ],
   "captured_reference": {
-    "path": "evidence/Ariadne/indirect-target-resolution/dump03958-table-witness-20261014/tables.json",
-    "sha256": "1390abca21bb7e2db9cde9a07067f60f5493498a7866fb648dcb103994674baf",
+    "path": "tests/bap/fixtures/composition/relative32-tables.json",
+    "sha256": "91b48d129138deca3d20a5cb40d732937a7fb3589c5351aaef3f4a9b3aee6e3e",
     "tables": 9,
     "entries": 370,
     "targets": 64,

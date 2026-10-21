@@ -3,12 +3,12 @@
 ## Context and follow-up
 
 **Status.** The finite `captured-indirect-targets/v1` profile passes the
-[2026-10-20 R6 qualification](../../evidence/Ariadne/indirect-target-resolution/20261020/README.md).
+[2026-10-20 R6 qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/20261020/README.md).
 The [R0–R6 ledger](../../.agents/plans/indirect-target-resolution.md) records fresh
 resolver/model/replay/original-capture gates and explicitly retained,
 source-verified core-mutation evidence. Producer/runtime semantics remain
 unchanged; the diagnostic validation driver pins and exports the original query.
-The original 2026-10-13 correction and retry records keep their dated scope. The [initial source-bound record](../../evidence/Ariadne/indirect-target-resolution/qualification-20261013/report.json)
+The original 2026-10-13 correction and retry records keep their dated scope. The [initial source-bound record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/qualification-20261013/report.json)
 is historical evidence for its original sources and exercised corpus, not
 acceptance of the revised implementation. Its native timing exceeded the frozen
 60 s criterion, and its mutation set did not cover every required R6 seam.
@@ -27,17 +27,17 @@ bounded discovery integration and qualification requirements.
 
 - [Guarded target-resolution composition](guarded-target-resolution-design.md) and its [C0–C6 plan](../../.agents/plans/completed/guarded-target-resolution.md) — recorded scoped composition delivery and bounded loop-aware follow-up for the nine captured table dispatches.
 
-- [Dump03958 table witness](../../evidence/Ariadne/indirect-target-resolution/dump03958-table-witness-20261014/README.md) — fresh captured reads for nine bounded relative jump tables; numerical candidates are separate from a resolver/guard completion certificate.
+- [Dump03958 table witness](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/dump03958-table-witness-20261014/README.md) — fresh captured reads for nine bounded relative jump tables; numerical candidates are separate from a resolver/guard completion certificate.
 
 - [R0–R6 implementation plan](../../.agents/plans/indirect-target-resolution.md) —
   stage ownership, acceptance gates and execution order for this design.
-- [Finite R6 qualification](../../evidence/Ariadne/indirect-target-resolution/20261020/README.md)
+- [Finite R6 qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/20261020/README.md)
   — final sources, fresh and retained tiers, timing samples and original-query evidence.
 - [Core model](../../Specs/Ariadne.tla) and [formal-model guide](../../Specs/README.md)
   — existing target-set certificate and authority for the required extension.
 - [Source ownership](architecture.md#ownership-and-process-boundaries) —
   preparation freezes inputs before native or Rust analysis.
-- [Inspection evidence](../../evidence/Ariadne/indirect-target-resolution/dump048B-20261012/jump-table-inspection.json)
+- [Inspection evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/dump048B-20261012/jump-table-inspection.json)
   — the captured table that motivates the first relative-table profile.
 
 **What remains unresolved.** Full base report rendering in all formats, a real
@@ -50,10 +50,15 @@ mutable heap tables, arbitrary indirect calls, JIT/self-modifying code and
 executed history remain outside the initial profile. Completeness requires
 validated incoming-state coverage and an explicit captured-memory premise.
 
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## R6 qualification refresh
 
 The authorized [R6 execution sequence](../../.agents/plans/indirect-target-resolution.md#r6-qualification-refresh--2026-10-20)
-passes its [2026-10-20 finite aggregate](../../evidence/Ariadne/indirect-target-resolution/20261020/README.md).
+passes its [2026-10-20 finite aggregate](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/20261020/README.md).
 The final capsule contains 1,076 files with SHA-256
 `193e31bb835bda4a4e4b5fc59397c424f11adefc691d1e309faf7ff0348d43a5`.
 Source-bound in-task root/feature/native controls (`default 334, core-only 64, reports 77, BAP 202, resolver 46`), 39 Python controls
@@ -405,7 +410,7 @@ and derived native/Rust flow caches, with a 16,777,216 expanded-link cap. This c
 representation/work, not targets, effects, reaching sets or the deterministic
 action sequence; disabled native completion remains the original encoding.
 
-The [R0 contract freeze](../../evidence/Ariadne/indirect-target-resolution/contract-freeze-20261012.json)
+The [R0 contract freeze](../../tests/bap/fixtures/target-resolution-limits.json)
 sets the defaults below. Callers may tighten them; larger values are rejected.
 Read caching charges unique slot/width reads, and target budgets count distinct
 VAs. Work and cooperative time apply to each resolution pass; the separate
@@ -473,16 +478,16 @@ bytes yield 45 distinct destinations from 58 entries. Three overlapping copies
 agree; a separate CDB pass agrees with the parsed words, and all candidate
 destination prefixes are captured. Entry 0 has offset `-126,503,947` and target
 `0x00007ff64007a34d`. See the retained
-[table record](../../evidence/Ariadne/indirect-target-resolution/dump048B-20261012/jump-table-inspection.json),
-[inspection checks](../../evidence/Ariadne/indirect-target-resolution/dump048B-20261012/jump-table-validation.json)
-and [raw CDB log](../../evidence/Ariadne/indirect-target-resolution/dump048B-20261012/cdb-jump-table.log).
+[table record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/dump048B-20261012/jump-table-inspection.json),
+[inspection checks](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/dump048B-20261012/jump-table-validation.json)
+and [raw CDB log](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/dump048B-20261012/cdb-jump-table.log).
 
 The original analysis used the existing remote 2026-10-10 BAP v3 runtime, with
 only a diagnostic frontend's artifact cap raised from 256 MiB to 2 GiB.
 Native/Rust explanations matched and remained partial: 329 decoded starts,
 388 edges, 15 slice sites, an incoming-RDX boundary, this unresolved indirect
 and three unsupported-control stops. The retained
-[baseline summary](../../evidence/Ariadne/indirect-target-resolution/dump048B-20261012/baseline-summary.json)
+[baseline summary](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/dump048B-20261012/baseline-summary.json)
 records its query and runtime scope. It is not a build of the current checkout.
 
 The supplementary target list did not modify that report, run resolver-enabled
@@ -515,7 +520,7 @@ plan. Passing its nine selected mutants did not complete that R6 clause.
 The revised runner defines fourteen Rust mutants and one native mutant, requires
 each expected named runtime-test failure, and rejects compilation or unrelated
 failures as evidence. Four observer tests and all mutation-anchor checks pass.
-At that checkpoint, the [review-fix record](../../evidence/Ariadne/indirect-target-resolution/review-fixes-20261013/report.json)
+At that checkpoint, the [review-fix record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/review-fixes-20261013/report.json)
 recorded 144 passing default tests, 46 passing core-only tests, format, Clippy,
 layout and documentation checks. Four target-resolution native tests and the
 fifteen-mutant campaign still required remote execution. Automatic approval
@@ -546,7 +551,7 @@ the native mutant additionally requires the expected `resolver target arithmetic
 diagnostic. The retained checker rechecks both the passing control and failure
 cause. Older mutation records without controls cannot satisfy this contract.
 
-The [correction record](../../evidence/Ariadne/indirect-target-resolution/review-corrections-20261013/report.json)
+The [correction record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/review-corrections-20261013/report.json)
 binds fresh root/portable checks, nine observer/runner/checker tests and six
 native source-level frontier cases. The latter compile the actual recovery and
 capture modules with local OCaml 5.1 and do not qualify the pinned SDK/helper.
@@ -558,7 +563,7 @@ remains pending.
 
 ### Original-dump retry at b5d56b7
 
-The [retry record](../../evidence/Ariadne/indirect-target-resolution/dump-retry-b5d56b7-20261013/report.json)
+The [retry record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/dump-retry-b5d56b7-20261013/report.json)
 supersedes the preceding pinned-native and dump-rerun blockers. Anonymous Git
 access verified the published commit before its source-only archive was sent
 to the existing qualification workspace; the original dump stayed on that host.
@@ -596,7 +601,7 @@ reported passing R6 correctness tiers for its declared finite corpus while the
 native CLI timing criterion was unmet. The later implementation review found
 that the mutation coverage was incomplete; the [retry](#original-dump-retry-at-b5d56b7)
 subsequently met the individual timing criterion. The historical
-[source-bound record](../../evidence/Ariadne/indirect-target-resolution/qualification-20261013/report.json)
+[source-bound record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/qualification-20261013/report.json)
 retains Apalache typechecking, five TLC safety/fair-termination scenarios,
 independent integer/table oracles, pinned-lifter Windows/Linux fixtures,
 malformed-receipt controls, nine resolver and twelve core/stateflow mutations,

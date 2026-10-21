@@ -5,9 +5,9 @@ from datetime import datetime,timezone
 import hashlib
 import json
 from pathlib import Path
+from run_output import run_output
 import shutil
 import subprocess
-import tarfile
 import time
 from i5b_contract import ROOT,environment,sha,sources,tools,validate_measurements,contract
 from with_mirrorrust_snapshot import active_identity
@@ -72,7 +72,7 @@ def main():
                         help='reuse only a complete exact current source/tool/environment I5a record')
     parser.add_argument('--native-core-record',type=Path,
                         help='reuse only a complete exact current source/tool/environment native adoption record')
-    args=parser.parse_args();work=args.output.resolve();work.mkdir(parents=True,exist_ok=False)
+    args=parser.parse_args();work=run_output(args.output);work.mkdir(parents=True,exist_ok=False)
     before=sources();env=environment()
     graph=ROOT/'tmp/graphviz-headers/root'
     if (graph/'usr/bin/dot').is_file():
@@ -118,16 +118,6 @@ def main():
                 destination = work/'retained'/name
                 destination.mkdir(parents=True)
                 shutil.copyfile(reuse,destination/'report.json')
-                if name == 'native-core-stage-e-input-bap-regressions':
-                    manifest_path = reuse.parent/'evidence-manifest.json'
-                    archive_path = reuse.parent/'evidence.tar.gz'
-                    manifest = json.loads(manifest_path.read_text())
-                    if (manifest.get('verified') is not True
-                        or manifest['qualificationReportSha256'] != sha(reuse)
-                        or manifest['archiveSha256'] != sha(archive_path)):
-                        raise ValueError('retained native evidence archive differs')
-                    shutil.copyfile(manifest_path,destination/'evidence-manifest.json')
-                    shutil.copyfile(archive_path,destination/'evidence.tar.gz')
                 for g in nested[name]['gates']:
                     if 'log' in g:
                         shutil.copyfile(g['log'],destination/(g['gate']+'.log'))
@@ -183,27 +173,6 @@ def main():
         sourceFixtureCases=57,independentAuxiliaryCases=1,defaultNativeVerified=True,
         scope='Finite Windows AMD64 scalar MOV base/displacement machine-code debugging; declared captures only. No historical null provenance, root cause, universal refinement, I4 waiver or packaged release claim.')
     report=work/'report.json';report.write_text(json.dumps(record,indent=2)+'\n')
-    # Archive the exact source and exercised evidence closure; every entry is
-    # verified by retained bytes, digest and size after creation.
-    entries={}
-    archive=work/'evidence.tar.gz'
-    with tarfile.open(archive,'w:gz') as tar:
-        files={**{'sources/'+name:ROOT/name for name in before},
-               **{'qualification/'+str(p.relative_to(work)):p for p in work.rglob('*') if p.is_file() and p!=archive
-                  and 'sut' not in p.relative_to(work).parts},
-               **{'captures/'+str(p.relative_to(args.captures)):p for p in args.captures.rglob('*') if p.is_file()
-                  and p.name in ['capture.dmp','capture.json','witness.json','ariadne_crash_demo.exe','i5b-capture-bundle.json']}}
-        for name,path in sorted(files.items()):
-            tar.add(path,arcname=name,recursive=False);entries[name]=dict(sha256=sha(path),bytes=path.stat().st_size)
-    with tarfile.open(archive,'r:gz') as tar:
-        members=tar.getmembers()
-        if len(members)!=len(entries):raise ValueError('archive closure differs')
-        for member in members:
-            raw=tar.extractfile(member).read();expected=entries[member.name]
-            if len(raw)!=expected['bytes'] or hashlib.sha256(raw).hexdigest()!=expected['sha256']:
-                raise ValueError('archive entry digest differs')
-    (work/'evidence-manifest.json').write_text(json.dumps(dict(schema='ariadne.i5b-evidence/v1',
-        archiveSha256=sha(archive),qualificationReportSha256=sha(report),verified=True,entries=entries),indent=2)+'\n')
     print('Report:',report,flush=True)
     raise SystemExit(0 if record['passed'] else 1)
 

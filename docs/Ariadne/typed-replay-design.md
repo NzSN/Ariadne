@@ -31,12 +31,17 @@ IR is not reconstructed machine-code IR.
 
 For the wider context, see the optional [documentation map](../documentation-map.md).
 
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## Integration and retained delivery
 
 The integration uses `~/Repos/MirrorRust` through the prepared Mirrors
 compiler's `mirrorrust-v1` target. The 2026-10-01 two-fixture
-[integration record](../../evidence/Ariadne/stage-e-mirrorrust-integration-validation.json)
-records initial delivery. The later [source-bound completion evidence](../../evidence/Ariadne/stage-e-completion-validation.json)
+[integration record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/stage-e-mirrorrust-integration-validation.json)
+records initial delivery. The later [source-bound completion evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/stage-e-completion-validation.json)
 records expanded replay, mutation, handoff and report/CLI acceptance. The
 2026-10-02 scope update removes the retired independent ISA track from
 qualification; the [assurance decision](semantic-assurance.md) preserves the
@@ -185,8 +190,8 @@ representation. Raw model witnesses and projected type evidence remain retained.
 
 | Recorded campaign | Scope and retained result |
 | --- | --- |
-| [2026-10-01 initial integration](../../evidence/Ariadne/stage-e-mirrorrust-integration-validation.json) | Five-node machine-state and four-block IR fixtures exercised transport, semantic-digest admission, generated binding ownership and actual-engine observations. |
-| [Completion campaign](../../evidence/Ariadne/stage-e-completion-validation.json) | 16 machine-state and 16 IR inputs, twice per engine: 64 complete traces and 326 matched observations; all mutable fields/public derived views compared through generated MirrorRust ports. All 15 real-engine mutants produced genuine model mismatches. |
+| [2026-10-01 initial integration](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/stage-e-mirrorrust-integration-validation.json) | Five-node machine-state and four-block IR fixtures exercised transport, semantic-digest admission, generated binding ownership and actual-engine observations. |
+| [Completion campaign](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/stage-e-completion-validation.json) | 16 machine-state and 16 IR inputs, twice per engine: 64 complete traces and 326 matched observations; all mutable fields/public derived views compared through generated MirrorRust ports. All 15 real-engine mutants produced genuine model mismatches. |
 | High-address case in completion | Exact u64 values use Apalache because TLC integers are bounded; bounded safety evidence plus a complete four-transition witness. |
 | [2026-10-02 assurance scope](semantic-assurance.md) | Independent ISA track retired; analysis-level replay, mutation and model contracts retained. |
 

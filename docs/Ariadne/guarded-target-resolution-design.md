@@ -4,13 +4,18 @@
 
 **Status.** Guarded composition and its loop-aware extension are implemented and source-bound qualified within the declared captured-table scope, 2026-10-15. Original-dump probe `051409` completes all nine original target sites plus DADD, accepts both inductive loop receipts and matches native/Rust full requests and states. The [composition plan](../../.agents/plans/completed/guarded-target-resolution.md) and [loop plan](../../.agents/plans/completed/loop-aware-target-resolution.md) are complete. Full frame paths remain unavailable.
 
-**Why this document exists.** The [dump03958 table witness](../../evidence/Ariadne/indirect-target-resolution/dump03958-table-witness-20261014/README.md) finds captured tables for nine indirect jumps, while the baseline guarded frame preparation did not enable the resolver. Empty target sets contributed nine of the 28 recorded guard coverage barriers.
+**Why this document exists.** The [dump03958 table witness](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/dump03958-table-witness-20261014/README.md) finds captured tables for nine indirect jumps, while the baseline guarded frame preparation did not enable the resolver. Empty target sets contributed nine of the 28 recorded guard coverage barriers. The [test matrix](../../tests/README.md) defines current validation.
 
 **What this document establishes.** A composition contract between the existing [target resolver](indirect-target-resolution.md) and [guard admission](justified-branch-pruning-design.md): candidate discovery, separate original/augmented control, a shared epoch, independent proof replay and final request publication.
 
-**Where to go next.** Read the [2026-10-15 qualification](../../evidence/Ariadne/loop-aware-target-resolution/20261015/README.md), the loop contracts and original-dump outcome below, then the completed execution plans. The [2026-10-14 record](../../evidence/Ariadne/guarded-target-resolution/20261014/README.md) retains its earlier partial result. The [frame-path ledger](../../.agents/plans/frame-path-enumeration.md) owns the remaining listing gate.
+**Where to go next.** Read the [2026-10-15 qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/loop-aware-target-resolution/20261015/README.md), the loop contracts and original-dump outcome below, then the completed execution plans. The [2026-10-14 record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guarded-target-resolution/20261014/README.md) retains its earlier partial result. The [frame-path ledger](../../.agents/plans/frame-path-enumeration.md) owns the remaining listing gate.
 
 **What remains unresolved.** Caller guard coverage retains 30 barriers and the initial MOVAPS remains unknown; the callee retains 12 barriers. NP10 frame paths remain unavailable with `missing-or-ambiguous-active-call-anchor`. Regional guard coverage, independent semantic stops, general loop synthesis, heap traversal and executed history remain separate. The first loop rule supplies coverage only for table entries already supported by ordinary path witnesses.
+
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## Scope and captured evidence
 
@@ -107,7 +112,7 @@ These corrections are exercised by the scoped source-bound qualification and ret
 
 The current source implements paired preparation and epoch tracking, local target v3 prefix-tree or inductive receipt replay, candidate/final transformation validation, the v2 combined native profile, versioned consumers and paired-proof/source tamper controls. C0–C4 implementation was delivered on 2026-10-14; loop-closure implementation followed on 2026-10-15 and its fresh runtime/dump qualification is in progress. The C0 model and independent cases are recorded in [`AriadneGuardedTargetResolution.tla`](../../Specs/AriadneGuardedTargetResolution.tla) and the [composition oracle](../../tests/bap/fixtures/composition/oracle.py).
 
-For the 2026-10-14 source snapshot, final checks passed in validation run `120753`, including default/core-only tests and applicable root checks. Scoped model/native controls pass: 19 finite model configurations, the independent oracle's ten infeasible-context controls, twelve native infeasible controls and all 273 actual infeasible receipts. The [qualification record](../../evidence/Ariadne/guarded-target-resolution/20261014/README.md) retains exact gate logs, model/tool/source identities, isolated mutation results and historical RED controls. These checks establish the exercised analysis-level scope; they do not prove all instruction semantics, all incoming loop states or successful full-dump path enumeration.
+For the 2026-10-14 source snapshot, final checks passed in validation run `120753`, including default/core-only tests and applicable root checks. Scoped model/native controls pass: 19 finite model configurations, the independent oracle's ten infeasible-context controls, twelve native infeasible controls and all 273 actual infeasible receipts. The [qualification record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guarded-target-resolution/20261014/README.md) retains exact gate logs, model/tool/source identities, isolated mutation results and historical RED controls. These checks establish the exercised analysis-level scope; they do not prove all instruction semantics, all incoming loop states or successful full-dump path enumeration.
 
 The corrected native checker accepted and completed both final queries with `request_equal=true` and `full_state_equal=true`. Its recorded identity is `cc9ff8718659af45e3d86ba0949915615f8bdb64822638597522af63dba0c0f8`. The earlier order-sensitive comparison failure and probe `115408` remain historical diagnostics; final positive probe `121127` elapsed 192,204 ms. Native parity closes the exercised result-comparison gate, not the ninth complete target certificate.
 
@@ -128,11 +133,11 @@ The caller retains 32 guard-coverage barriers. Its initial MOVAPS is `Unknown` w
 
 The frame question `1:0`, `NP=10` returned an unavailable listing with zero paths and reason `missing-or-ambiguous-active-call-anchor`. This is a final-request recovery outcome, not proof that execution took no path. The candidate target successes do not authorize a normal MOVAPS continuation or reconstruct the missing active call anchor.
 
-The [delivery record](../../evidence/Ariadne/guarded-target-resolution/20261014/README.md) retains the declared scope and reproduction requirements; its source/tool-bound artifact archive and 330-observation replay supplement are sealed. It records probe inputs, source/tool/dump identities, all nine comparisons, discovered dispatches, known/incomplete targets, remaining barriers and final native status. Source-bound records, rather than a table match or a successful initialization alone, support reuse of this scoped result.
+The [delivery record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guarded-target-resolution/20261014/README.md) retains the declared scope and reproduction requirements; its source/tool-bound artifact archive and 330-observation replay supplement are sealed. It records probe inputs, source/tool/dump identities, all nine comparisons, discovered dispatches, known/incomplete targets, remaining barriers and final native status. Source-bound records, rather than a table match or a successful initialization alone, support reuse of this scoped result.
 
 ## Proposed stable-base invariant follow-up
 
-The loop-aware extension was designed, implemented and source-bound qualified on 2026-10-15 under its [L0–L6 plan](../../.agents/plans/completed/loop-aware-target-resolution.md). The [new qualification](../../evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) closes the parent ninth C5 clause through fresh Rust/native induction and original-dump evidence. This section owns the implemented contract. The 2026-10-14 result retains its original scope and identities.
+The loop-aware extension was designed, implemented and source-bound qualified on 2026-10-15 under its [L0–L6 plan](../../.agents/plans/completed/loop-aware-target-resolution.md). The [new qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) closes the parent ninth C5 clause through fresh Rust/native induction and original-dump evidence. This section owns the implemented contract. The 2026-10-14 result retains its original scope and identities.
 
 ### Decision and first support scope
 
@@ -144,7 +149,7 @@ The analysis must terminate within its budgets. It need not prove that the progr
 
 ### Dump-specific feasibility inspection
 
-A read-only inspection on 2026-10-15 used the final caller [captured/candidate report](../../evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/minidump-rust.json.gz) and [target receipts](../../evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/target-report.json). This is structural evidence, not a new closure proof or dump execution.
+A read-only inspection on 2026-10-15 used the final caller [captured/candidate report](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/minidump-rust.json.gz) and [target receipts](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guarded-target-resolution/20261014/artifacts/dump-20261014T121127/frame-1/target-report.json). This is structural evidence, not a new closure proof or dump execution.
 
 | Property | Original dispatch | Newly exposed dispatch |
 | --- | --- | --- |
@@ -160,7 +165,7 @@ A read-only inspection on 2026-10-15 used the final caller [captured/candidate r
 
 The maximal SCC is unsuitable for the proposed constant-base invariant. The small phase region is the relevant proof domain: every represented entrance passes a base-reset LEA followed by an unconditional jump. Region construction must discover this shape from controls, transfers and definition boundaries; the addresses above are acceptance fixtures, never production dispatch conditions. The checker must independently enumerate every actual entrance and exit, so a producer cannot hide a clobber by shrinking its claimed region.
 
-In that retained baseline, the caller candidate epoch is 610 and `composition.candidate_sha256` is `50b54d681fe01f9488da4cf2c90948afe52cb2ab13dad2e960bad55648122a3f`. The original dump SHA-256 remains `9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab`. Do not substitute the guard graph digest for this candidate-request identity. Exact region members, edges, original BIL, bytes, contributors and initialization chains are retained in the [source-bound loop fixtures](../../tests/bap/fixtures/loop-closure/dump-provenance.json). Those fixtures are acceptance evidence, not production dispatch configuration.
+In that retained baseline, the caller candidate epoch is 610 and `composition.candidate_sha256` is `50b54d681fe01f9488da4cf2c90948afe52cb2ab13dad2e960bad55648122a3f`. The original dump SHA-256 remains `9be21e47453fec954857db52db7dfe3b8c5a5c6a49369d39a10eb701de9624ab`. Do not substitute the guard graph digest for this candidate-request identity. Exact region members, edges, original BIL, bytes, contributors and initialization chains are retained in the [source-bound loop fixtures](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/tests/bap/fixtures/loop-closure/dump-provenance.json). Those fixtures are acceptance evidence, not production dispatch configuration.
 
 ### Private module and invocation
 
@@ -266,7 +271,7 @@ The original-dump gate requires both DA09 and DADD to retain their four witnesse
 
 ### Dated loop delivery and publication correction — 2026-10-15
 
-[Fresh qualification](../../evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) binds source archive `5cd406c5181d131679a60af15f53edcabecfe056144e40b5785bc37ce1d010ee` (877 files), 227 default/46 core-only tests, seven focused loop tests plus the publication regression, 41 native controls, eight behavioral mutants, 49 finite model configurations and 330 generated replay observations. Actual retained legacy minidump/frame reports replay under their frozen identities. All heavy work ran remotely.
+[Fresh qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/loop-aware-target-resolution/20261015/README.md) binds source archive `5cd406c5181d131679a60af15f53edcabecfe056144e40b5785bc37ce1d010ee` (877 files), 227 default/46 core-only tests, seven focused loop tests plus the publication regression, 41 native controls, eight behavioral mutants, 49 finite model configurations and 330 generated replay observations. Actual retained legacy minidump/frame reports replay under their frozen identities. All heavy work ran remotely.
 
 Probe `051409` on the byte-identical dump accepts DA09 and DADD as complete, each with four targets and a nine-instruction inductive region. All nine original tables match 370 entries and 64 destinations, all 51 missing starts were attempted, and all nine original sites retain complete coverage; DADD brings the caller to 10/10 complete target sites. Native and Rust full requests/states match for both frames. Caller materialization remains 9,590 sites at epoch 609; the callee has 778 sites at epoch 129.
 

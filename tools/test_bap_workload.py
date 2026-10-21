@@ -22,7 +22,7 @@ import measure_bap as measurement
 from test_bap_workload_contract import CASE as WINDOWS
 
 
-LINUX = json.loads((measurement.ROOT / "evidence/Ariadne/priority-1-real-capture-case.json").read_text())
+LINUX = json.loads((measurement.ROOT / "tests/input/fixtures/workloads/priority-1-real-capture-case.json").read_text())
 ACTIVE_HISTORICAL = {"id": "historical-test-double", "capture": {**LINUX["capture"], "platform": "linux"},
                      "query": LINUX["query"], "expectations": {"decodedStarts": 34, "phaseBudgetMs": 250}}
 

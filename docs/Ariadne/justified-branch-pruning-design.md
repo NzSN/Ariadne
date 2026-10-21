@@ -9,7 +9,7 @@ delivery admits the reviewed MOVAPS normal outcome only with a checked alignment
 proof. Handling both outcomes when alignment is unknown is a separate extension.
 
 **Why this document exists.** The [finite vector admission extension](bap-analysis-core-design.md#vector-register-admission)
-accepts XMM/YMM, but the [dump03958 retry](../../evidence/Ariadne/bap-vector-registers/20261013/report.md)
+accepts XMM/YMM, but the [dump03958 retry](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-vector-registers/20261013/report.md)
 still stops at the lift's conditional `Exception(13)`. A later captured RSP
 value cannot establish alignment at an earlier instruction automatically.
 
@@ -43,6 +43,11 @@ precise vector values, arbitrary predicates, backward reconstruction of earlier
 register values and historical execution remain outside the first delivery.
 Runtime-table budgets and XMM unwind support are independent limits. This design
 does not promise that dump03958 will yield frame paths after implementation.
+
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## Decision and scope
 
@@ -344,7 +349,7 @@ or establishes historical execution.
 
 ## Worked conditional proof for dump03958
 
-The [captured prologue](../../evidence/Ariadne/frame-paths/dump03958-20261013/cdb-call-unwind.log)
+The [captured prologue](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/dump03958-20261013/cdb-call-unwind.log)
 has eight pushes followed by `sub rsp,0x258`, before the MOVAPS store.
 Under the explicitly selected normal-call entry premise:
 
@@ -453,7 +458,7 @@ cooperative 1,000 ms predicate deadline. A budget stop yields no alignment proof
 
 ## Configurable guard budgets
 
-The [G5 implementation plan](../../.agents/plans/completed/guard-budget-configuration.md) implements the user-authorized release of hard guard-profile ceilings. The [captured budget diagnosis](../../evidence/Ariadne/guard-evidence-budget/20261014/README.md) found that the caller needs more than the initial 4 MiB, while Rust and native validation incorrectly used default budgets as maximum permitted budgets.
+The [G5 implementation plan](../../.agents/plans/completed/guard-budget-configuration.md) implements the user-authorized release of hard guard-profile ceilings. The [captured budget diagnosis](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guard-evidence-budget/20261014/README.md) found that the caller needs more than the initial 4 MiB, while Rust and native validation incorrectly used default budgets as maximum permitted budgets.
 
 Keep current defaults for the seven `guard_admission::Limits` fields, but allow higher and lower caller-selected finite values. Typed Rust unsigned fields remain finite; configuration is no longer compared with `Limits::default()`. Native admission uses the existing checked unsigned-64 parser and unsigned comparisons, including values encoded beyond the OCaml signed-machine-integer range. Malformed, negative and unsigned-overflow inputs remain rejected. Zero continues to request the existing conservative zero-budget behavior.
 
@@ -481,8 +486,8 @@ Guard budgets and independent native transport/recovery capabilities have differ
 
 ## Implementation validation, 2026-10-14
 
-The [source-bound validation](../../evidence/Ariadne/guard-admission/20261014/validation.json)
-and [artifact manifest](../../evidence/Ariadne/guard-admission/20261014/artifact-manifest.json)
+The [source-bound validation](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guard-admission/20261014/validation.json)
+and [artifact manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guard-admission/20261014/artifact-manifest.json)
 retain 275 hash-verified artifacts and 670 exact implementation/fixture/tool
 source matches. All Cargo/native/model builds and acceptance campaigns ran in
 a task-private WSL namespace on `windows-dev`. The source-only remote checkout
@@ -499,7 +504,7 @@ credited; the complete local checkout passed documentation navigation separately
 | Existing generated native replay | 168 core and 162 stateflow observations matched; both wrong-digest controls rejected. This preserves core behavior and is distinct from predicate-model checking. |
 | Original dump retry | Same original SHA-256, frame pair 1:0, NP=10 and capture-only expanded budgets; unavailable, zero paths. No full-dump path qualification. |
 
-The [G0 freeze](../../evidence/Ariadne/guard-admission/g0-freeze-20261014.json)
+The [G0 freeze](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guard-admission/g0-freeze-20261014.json)
 preserves pre-runtime model/oracle identities, failed tool probes/typechecks,
 annotation-only compatibility corrections and the later four-case zero-budget
 oracle correction. Current successful evidence never rewrites the earlier
@@ -530,9 +535,9 @@ The guarded run selects only `windows-amd64-normal-call-entry/v1`. Candidate
 discovery continues beyond the reviewed MOVAPS, but preparation fails before
 final closure at `BIL operand type/width mismatch`. No alignment receipt or frame
 query is published. A separate captured-only decoded-control diagnostic locates
-[the next blocker](../../evidence/Ariadne/guard-admission/20261014/artifacts/next-blocker.json):
+[the next blocker](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guard-admission/20261014/artifacts/next-blocker.json):
 `0x00007ff7744075b3`, bytes `0f57c0`, `XORPS xmm0,xmm0`. The
-[exact pinned BIL](../../evidence/Ariadne/guard-admission/20261014/artifacts/next-blocker-bil.json)
+[exact pinned BIL](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guard-admission/20261014/artifacts/next-blocker-bil.json)
 contains a 128-bit left operand and an 8-bit shift-count expression at
 `bil[3].value.rhs`; current binary-operand admission requires equal types.
 This records the historical BAP/Ariadne compatibility stop. The later [shift-count diagnosis and correction](bap-shift-count-design.md) verifies that BAP permits independently sized shift counts and corrects Ariadne admission/projection and native validation. The diagnostic publishes no
@@ -547,9 +552,9 @@ records completion of the scoped stages and those exclusions.
 
 ## G5 budget configuration validation, 2026-10-14
 
-The [completed G5 ledger](../../.agents/plans/completed/guard-budget-configuration.md) and [source-bound qualification](../../evidence/Ariadne/guard-budget-configuration/20261014/README.md) record 686 matching source/tool/document hashes and 86 archived files. All final remote WSL gates pass: 14 guard controls, 189 default and 46 core-only tests, format/Clippy, 12 native kernels, nine captured/native and two frame-path tests, strict contract controls and 27 predicate-model configurations. Full unsigned budgets, each above-default field, budget identity tampering and conservative zero-budget stops are exercised. Independent read-only review found no concrete issue; mutation seam checks are not a new mutation campaign. The initial CLI fixture-only failure remains archived, followed by passing one-frame guard and three-frame diamond cases.
+The [completed G5 ledger](../../.agents/plans/completed/guard-budget-configuration.md) and [source-bound qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guard-budget-configuration/20261014/README.md) record 686 matching source/tool/document hashes and 86 archived files. All final remote WSL gates pass: 14 guard controls, 189 default and 46 core-only tests, format/Clippy, 12 native kernels, nine captured/native and two frame-path tests, strict contract controls and 27 predicate-model configurations. Full unsigned budgets, each above-default field, budget identity tampering and conservative zero-budget stops are exercised. Independent read-only review found no concrete issue; mutation seam checks are not a new mutation campaign. The initial CLI fixture-only failure remains archived, followed by passing one-frame guard and three-frame diamond cases.
 
-The original captured caller now accepts 32 MiB of evidence budget. Under the original discovery limits it stops at 4,096 starts. Expanded captured-only discovery prepares 4,764 sites, with 4,943,346 raw AST bytes and a 9,001,701-byte guard report. The report retains `candidate-coverage-incomplete` and an unknown MOVAPS verdict; higher budgets do not justify incomplete incoming coverage. A bounded native initialization attempt fails with `core request oversized` under the independent 8 MiB frame limit. No original-dump core steps or paths are qualified. The [exact probe outcomes](../../evidence/Ariadne/guard-budget-configuration/20261014/validation.json) distinguish these boundaries from the removed profile ceilings. Older source-bound qualification and diagnosis records remain historical.
+The original captured caller now accepts 32 MiB of evidence budget. Under the original discovery limits it stops at 4,096 starts. Expanded captured-only discovery prepares 4,764 sites, with 4,943,346 raw AST bytes and a 9,001,701-byte guard report. The report retains `candidate-coverage-incomplete` and an unknown MOVAPS verdict; higher budgets do not justify incomplete incoming coverage. A bounded native initialization attempt fails with `core request oversized` under the independent 8 MiB frame limit. No original-dump core steps or paths are qualified. The [exact probe outcomes](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guard-budget-configuration/20261014/validation.json) distinguish these boundaries from the removed profile ceilings. Older source-bound qualification and diagnosis records remain historical.
 
 
 The subsequent [native request-budget qualification](bap-analysis-core-design.md#request-budget-validation-2026-10-14) resolves the dated G5 transport rejection: the same original larger caller initializes at 32 MiB, while the 8 MiB default still rejects it. Incomplete candidate coverage and unknown MOVAPS alignment remain. The original G5 transport result above stays historical; no alignment proof or executed path follows from larger transport capacity.

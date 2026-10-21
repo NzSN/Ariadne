@@ -1,0 +1,1910 @@
+{
+  "entry_count": 370,
+  "all_distinct_targets": 64,
+  "tables": [
+    {
+      "base": "0x00007ff77ba90408",
+      "distinct_targets": 13,
+      "entries": [
+        {
+          "offset_i32": -124287634,
+          "target": "0x00007ff774408976",
+          "captured_code_prefix_hex": "c6442420004889f94c89e24531c041"
+        },
+        {
+          "offset_i32": -124287634,
+          "target": "0x00007ff774408976",
+          "captured_code_prefix_hex": "c6442420004889f94c89e24531c041"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124303160,
+          "target": "0x00007ff774404cd0",
+          "captured_code_prefix_hex": "41bfffffffffe8858c0300488b8788"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124308386,
+          "target": "0x00007ff774403866",
+          "captured_code_prefix_hex": "e8f5a00300488b0e488b4118807838"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124303446,
+          "target": "0x00007ff774404bb2",
+          "captured_code_prefix_hex": "41beffffffffe8a38d0300488b8788"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124295073,
+          "target": "0x00007ff774406c67",
+          "captured_code_prefix_hex": "e8f407040084c00f8483460000488b"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124295073,
+          "target": "0x00007ff774406c67",
+          "captured_code_prefix_hex": "e8f407040084c00f8483460000488b"
+        },
+        {
+          "offset_i32": -124277089,
+          "target": "0x00007ff77440b2a7",
+          "captured_code_prefix_hex": "f687ca0000000174104889f94c89e2"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124302109,
+          "target": "0x00007ff7744050eb",
+          "captured_code_prefix_hex": "e870880300488b0e488b41180fb658"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124297902,
+          "target": "0x00007ff77440615a",
+          "captured_code_prefix_hex": "e801780300e86c1d0b00483b47700f"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124308967,
+          "target": "0x00007ff774403621",
+          "captured_code_prefix_hex": "e83aa30300488b06488b40180fb640"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124295778,
+          "target": "0x00007ff7744069a6",
+          "captured_code_prefix_hex": "e8b56f0300488b0f488b87c0000000"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124294761,
+          "target": "0x00007ff774406d9f",
+          "captured_code_prefix_hex": "488b1fe8b96b0300488b8fc0000000"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124277064,
+          "target": "0x00007ff77440b2c0",
+          "captured_code_prefix_hex": "e89b2603004889f989c2e86120df01"
+        },
+        {
+          "offset_i32": -124281811,
+          "target": "0x00007ff77440a035",
+          "captured_code_prefix_hex": "4889f94c89e2e870eca2fce96695ff"
+        }
+      ]
+    },
+    {
+      "base": "0x00007ff77ba905d0",
+      "distinct_targets": 7,
+      "entries": [
+        {
+          "offset_i32": -124306935,
+          "target": "0x00007ff774403fd9",
+          "captured_code_prefix_hex": "b00688842488010000488b5728e8e5"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124306933,
+          "target": "0x00007ff774403fdb",
+          "captured_code_prefix_hex": "88842488010000488b5728e8e53904"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124274365,
+          "target": "0x00007ff77440bf13",
+          "captured_code_prefix_hex": "b007e9c180fffff687c80000004074"
+        },
+        {
+          "offset_i32": -124285281,
+          "target": "0x00007ff77440946f",
+          "captured_code_prefix_hex": "b008e965abffffc644242000488d94"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124282668,
+          "target": "0x00007ff774409ea4",
+          "captured_code_prefix_hex": "b005e930a1ffff4589ef4531f64489"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124285288,
+          "target": "0x00007ff774409468",
+          "captured_code_prefix_hex": "b004e96cabffffb008e965abffffc6"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124307040,
+          "target": "0x00007ff774403f70",
+          "captured_code_prefix_hex": "488b41108b48042b088d51fe807838"
+        },
+        {
+          "offset_i32": -124274365,
+          "target": "0x00007ff77440bf13",
+          "captured_code_prefix_hex": "b007e9c180fffff687c80000004074"
+        }
+      ]
+    },
+    {
+      "base": "0x00007ff77ba90718",
+      "distinct_targets": 7,
+      "entries": [
+        {
+          "offset_i32": -124306844,
+          "target": "0x00007ff77440417c",
+          "captured_code_prefix_hex": "b00688842488010000c78424080100"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306842,
+          "target": "0x00007ff77440417e",
+          "captured_code_prefix_hex": "88842488010000c784240801000002"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124277761,
+          "target": "0x00007ff77440b317",
+          "captured_code_prefix_hex": "b007e9608effff488b0e488b411880"
+        },
+        {
+          "offset_i32": -124288234,
+          "target": "0x00007ff774408a2e",
+          "captured_code_prefix_hex": "b008e949b7ffffe896f40a00483b47"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124285573,
+          "target": "0x00007ff774409493",
+          "captured_code_prefix_hex": "b005e9e4acffff488b742468e9dca7"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124288318,
+          "target": "0x00007ff7744089da",
+          "captured_code_prefix_hex": "b004e99db7ffffb104e9d4baffff48"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124306835,
+          "target": "0x00007ff774404185",
+          "captured_code_prefix_hex": "c7842408010000020000000fb6ac24"
+        },
+        {
+          "offset_i32": -124277761,
+          "target": "0x00007ff77440b317",
+          "captured_code_prefix_hex": "b007e9608effff488b0e488b411880"
+        }
+      ]
+    },
+    {
+      "base": "0x00007ff77ba907e0",
+      "distinct_targets": 13,
+      "entries": [
+        {
+          "offset_i32": -124285802,
+          "target": "0x00007ff774409476",
+          "captured_code_prefix_hex": "c644242000488d94240c0100004889"
+        },
+        {
+          "offset_i32": -124285802,
+          "target": "0x00007ff774409476",
+          "captured_code_prefix_hex": "c644242000488d94240c0100004889"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124288949,
+          "target": "0x00007ff77440882b",
+          "captured_code_prefix_hex": "4889f9488d94240c010000e8a58500"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124291686,
+          "target": "0x00007ff774407d7a",
+          "captured_code_prefix_hex": "4489cbe8de5b0300488b0e488b4118"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124289824,
+          "target": "0x00007ff7744084c0",
+          "captured_code_prefix_hex": "4889f9488d94240c010000e8d08e00"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124287241,
+          "target": "0x00007ff774408ed7",
+          "captured_code_prefix_hex": "488d94240c0100004889f9e8395b00"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124287241,
+          "target": "0x00007ff774408ed7",
+          "captured_code_prefix_hex": "488d94240c0100004889f9e8395b00"
+        },
+        {
+          "offset_i32": -124275157,
+          "target": "0x00007ff77440be0b",
+          "captured_code_prefix_hex": "f687ca000000017415488d94240c01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124288970,
+          "target": "0x00007ff774408816",
+          "captured_code_prefix_hex": "4889f9488d94240c010000e8aa6400"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124289803,
+          "target": "0x00007ff7744084d5",
+          "captured_code_prefix_hex": "4889f9488d94240c010000e83b5d00"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124306522,
+          "target": "0x00007ff774404386",
+          "captured_code_prefix_hex": "e8d5950300488b06488b40180fb640"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124288504,
+          "target": "0x00007ff7744089e8",
+          "captured_code_prefix_hex": "488d94240c0100004889f9e8088100"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124287316,
+          "target": "0x00007ff774408e8c",
+          "captured_code_prefix_hex": "4c8b07488d94240c0100004889f9e8"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124275127,
+          "target": "0x00007ff77440be29",
+          "captured_code_prefix_hex": "e8321b03004889f989c2e8f814df01"
+        },
+        {
+          "offset_i32": -124280368,
+          "target": "0x00007ff77440a9b0",
+          "captured_code_prefix_hex": "488d94240c0100004889f9e8f0e2a2"
+        }
+      ]
+    },
+    {
+      "base": "0x00007ff77ba90690",
+      "distinct_targets": 4,
+      "entries": [
+        {
+          "offset_i32": -124288212,
+          "target": "0x00007ff7744089bc",
+          "captured_code_prefix_hex": "e89f4f030048c78424700100000000"
+        },
+        {
+          "offset_i32": -124288212,
+          "target": "0x00007ff7744089bc",
+          "captured_code_prefix_hex": "e89f4f030048c78424700100000000"
+        },
+        {
+          "offset_i32": -124288212,
+          "target": "0x00007ff7744089bc",
+          "captured_code_prefix_hex": "e89f4f030048c78424700100000000"
+        },
+        {
+          "offset_i32": -124304841,
+          "target": "0x00007ff7744048c7",
+          "captured_code_prefix_hex": "e894900300488b06488b4018807838"
+        },
+        {
+          "offset_i32": -124306824,
+          "target": "0x00007ff774404108",
+          "captured_code_prefix_hex": "e8539803003c780f83cb6f00000fb6"
+        },
+        {
+          "offset_i32": -124306824,
+          "target": "0x00007ff774404108",
+          "captured_code_prefix_hex": "e8539803003c780f83cb6f00000fb6"
+        },
+        {
+          "offset_i32": -124306824,
+          "target": "0x00007ff774404108",
+          "captured_code_prefix_hex": "e8539803003c780f83cb6f00000fb6"
+        },
+        {
+          "offset_i32": -124306824,
+          "target": "0x00007ff774404108",
+          "captured_code_prefix_hex": "e8539803003c780f83cb6f00000fb6"
+        },
+        {
+          "offset_i32": -124306824,
+          "target": "0x00007ff774404108",
+          "captured_code_prefix_hex": "e8539803003c780f83cb6f00000fb6"
+        },
+        {
+          "offset_i32": -124306824,
+          "target": "0x00007ff774404108",
+          "captured_code_prefix_hex": "e8539803003c780f83cb6f00000fb6"
+        },
+        {
+          "offset_i32": -124306824,
+          "target": "0x00007ff774404108",
+          "captured_code_prefix_hex": "e8539803003c780f83cb6f00000fb6"
+        },
+        {
+          "offset_i32": -124306824,
+          "target": "0x00007ff774404108",
+          "captured_code_prefix_hex": "e8539803003c780f83cb6f00000fb6"
+        },
+        {
+          "offset_i32": -124306824,
+          "target": "0x00007ff774404108",
+          "captured_code_prefix_hex": "e8539803003c780f83cb6f00000fb6"
+        },
+        {
+          "offset_i32": -124306824,
+          "target": "0x00007ff774404108",
+          "captured_code_prefix_hex": "e8539803003c780f83cb6f00000fb6"
+        },
+        {
+          "offset_i32": -124306824,
+          "target": "0x00007ff774404108",
+          "captured_code_prefix_hex": "e8539803003c780f83cb6f00000fb6"
+        },
+        {
+          "offset_i32": -124306824,
+          "target": "0x00007ff774404108",
+          "captured_code_prefix_hex": "e8539803003c780f83cb6f00000fb6"
+        },
+        {
+          "offset_i32": -124306824,
+          "target": "0x00007ff774404108",
+          "captured_code_prefix_hex": "e8539803003c780f83cb6f00000fb6"
+        },
+        {
+          "offset_i32": -124306824,
+          "target": "0x00007ff774404108",
+          "captured_code_prefix_hex": "e8539803003c780f83cb6f00000fb6"
+        },
+        {
+          "offset_i32": -124306824,
+          "target": "0x00007ff774404108",
+          "captured_code_prefix_hex": "e8539803003c780f83cb6f00000fb6"
+        },
+        {
+          "offset_i32": -124306824,
+          "target": "0x00007ff774404108",
+          "captured_code_prefix_hex": "e8539803003c780f83cb6f00000fb6"
+        },
+        {
+          "offset_i32": -124306824,
+          "target": "0x00007ff774404108",
+          "captured_code_prefix_hex": "e8539803003c780f83cb6f00000fb6"
+        },
+        {
+          "offset_i32": -124306824,
+          "target": "0x00007ff774404108",
+          "captured_code_prefix_hex": "e8539803003c780f83cb6f00000fb6"
+        },
+        {
+          "offset_i32": -124306824,
+          "target": "0x00007ff774404108",
+          "captured_code_prefix_hex": "e8539803003c780f83cb6f00000fb6"
+        },
+        {
+          "offset_i32": -124306824,
+          "target": "0x00007ff774404108",
+          "captured_code_prefix_hex": "e8539803003c780f83cb6f00000fb6"
+        },
+        {
+          "offset_i32": -124273748,
+          "target": "0x00007ff77440c23c",
+          "captured_code_prefix_hex": "c684248a01000001e81717030080bc"
+        }
+      ]
+    },
+    {
+      "base": "0x00007ff77ba907b4",
+      "distinct_targets": 6,
+      "entries": [
+        {
+          "offset_i32": -124273881,
+          "target": "0x00007ff77440c2db",
+          "captured_code_prefix_hex": "4c89e3488b8fc0000000e876160300"
+        },
+        {
+          "offset_i32": -124287878,
+          "target": "0x00007ff774408c2e",
+          "captured_code_prefix_hex": "4989f5488b8f88000000488b87c000"
+        },
+        {
+          "offset_i32": -124287878,
+          "target": "0x00007ff774408c2e",
+          "captured_code_prefix_hex": "4989f5488b8f88000000488b87c000"
+        },
+        {
+          "offset_i32": -124276044,
+          "target": "0x00007ff77440ba68",
+          "captured_code_prefix_hex": "cc0f0bcc0f0bcc0f0bcc0f0bcc0f0b"
+        },
+        {
+          "offset_i32": -124288258,
+          "target": "0x00007ff774408ab2",
+          "captured_code_prefix_hex": "418d45a13c060f87683600004080fd"
+        },
+        {
+          "offset_i32": -124288258,
+          "target": "0x00007ff774408ab2",
+          "captured_code_prefix_hex": "418d45a13c060f87683600004080fd"
+        },
+        {
+          "offset_i32": -124288099,
+          "target": "0x00007ff774408b51",
+          "captured_code_prefix_hex": "4989f58bb42484010000488b8f8800"
+        },
+        {
+          "offset_i32": -124273881,
+          "target": "0x00007ff77440c2db",
+          "captured_code_prefix_hex": "4c89e3488b8fc0000000e876160300"
+        },
+        {
+          "offset_i32": -124288258,
+          "target": "0x00007ff774408ab2",
+          "captured_code_prefix_hex": "418d45a13c060f87683600004080fd"
+        },
+        {
+          "offset_i32": -124287617,
+          "target": "0x00007ff774408d33",
+          "captured_code_prefix_hex": "b001888424890100008884248c0100"
+        },
+        {
+          "offset_i32": -124273881,
+          "target": "0x00007ff77440c2db",
+          "captured_code_prefix_hex": "4c89e3488b8fc0000000e876160300"
+        }
+      ]
+    },
+    {
+      "base": "0x00007ff77ba906f4",
+      "distinct_targets": 5,
+      "entries": [
+        {
+          "offset_i32": -124284603,
+          "target": "0x00007ff774409839",
+          "captured_code_prefix_hex": "888424880100004088af0c0100004c"
+        },
+        {
+          "offset_i32": -124284596,
+          "target": "0x00007ff774409840",
+          "captured_code_prefix_hex": "4088af0c0100004c89f6e941a9ffff"
+        },
+        {
+          "offset_i32": -124284596,
+          "target": "0x00007ff774409840",
+          "captured_code_prefix_hex": "4088af0c0100004c89f6e941a9ffff"
+        },
+        {
+          "offset_i32": -124284558,
+          "target": "0x00007ff774409866",
+          "captured_code_prefix_hex": "b007ebcf31c9e9edc1ffff83f9030f"
+        },
+        {
+          "offset_i32": -124280048,
+          "target": "0x00007ff77440aa04",
+          "captured_code_prefix_hex": "b008e92eeeffffb208e9b0efffff48"
+        },
+        {
+          "offset_i32": -124284596,
+          "target": "0x00007ff774409840",
+          "captured_code_prefix_hex": "4088af0c0100004c89f6e941a9ffff"
+        },
+        {
+          "offset_i32": -124284596,
+          "target": "0x00007ff774409840",
+          "captured_code_prefix_hex": "4088af0c0100004c89f6e941a9ffff"
+        },
+        {
+          "offset_i32": -124284596,
+          "target": "0x00007ff774409840",
+          "captured_code_prefix_hex": "4088af0c0100004c89f6e941a9ffff"
+        },
+        {
+          "offset_i32": -124279066,
+          "target": "0x00007ff77440adda",
+          "captured_code_prefix_hex": "b005e958eaffffb205e9daebffff48"
+        }
+      ]
+    },
+    {
+      "base": "0x00007ff77ba9066c",
+      "distinct_targets": 5,
+      "entries": [
+        {
+          "offset_i32": -124284074,
+          "target": "0x00007ff7744099c2",
+          "captured_code_prefix_hex": "88942488010000488b5728e8fedf03"
+        },
+        {
+          "offset_i32": -124283930,
+          "target": "0x00007ff774409a52",
+          "captured_code_prefix_hex": "807850010f846dffffff488b41108b"
+        },
+        {
+          "offset_i32": -124283930,
+          "target": "0x00007ff774409a52",
+          "captured_code_prefix_hex": "807850010f846dffffff488b41108b"
+        },
+        {
+          "offset_i32": -124268130,
+          "target": "0x00007ff77440d80a",
+          "captured_code_prefix_hex": "b207e9b1c1ffff4889f989c2e815fb"
+        },
+        {
+          "offset_i32": -124279905,
+          "target": "0x00007ff77440aa0b",
+          "captured_code_prefix_hex": "b208e9b0efffff488b842418010000"
+        },
+        {
+          "offset_i32": -124283930,
+          "target": "0x00007ff774409a52",
+          "captured_code_prefix_hex": "807850010f846dffffff488b41108b"
+        },
+        {
+          "offset_i32": -124283930,
+          "target": "0x00007ff774409a52",
+          "captured_code_prefix_hex": "807850010f846dffffff488b41108b"
+        },
+        {
+          "offset_i32": -124283930,
+          "target": "0x00007ff774409a52",
+          "captured_code_prefix_hex": "807850010f846dffffff488b41108b"
+        },
+        {
+          "offset_i32": -124278923,
+          "target": "0x00007ff77440ade1",
+          "captured_code_prefix_hex": "b205e9daebffff488b8f8800000048"
+        }
+      ]
+    },
+    {
+      "base": "0x00007ff77ba909a8",
+      "distinct_targets": 4,
+      "entries": [
+        {
+          "offset_i32": -124282199,
+          "target": "0x00007ff77440a451",
+          "captured_code_prefix_hex": "488b4f30488b51104c8b41184929d0"
+        },
+        {
+          "offset_i32": -124282199,
+          "target": "0x00007ff77440a451",
+          "captured_code_prefix_hex": "488b4f30488b51104c8b41184929d0"
+        },
+        {
+          "offset_i32": -124268431,
+          "target": "0x00007ff77440da19",
+          "captured_code_prefix_hex": "4c8d8c24180100004989014489e2ff"
+        },
+        {
+          "offset_i32": -124268477,
+          "target": "0x00007ff77440d9eb",
+          "captured_code_prefix_hex": "488b094885c90f8480e0ffff440fb6"
+        },
+        {
+          "offset_i32": -124268444,
+          "target": "0x00007ff77440da0c",
+          "captured_code_prefix_hex": "83bfd8000000000f8438caffff4c8d"
+        },
+        {
+          "offset_i32": -124282199,
+          "target": "0x00007ff77440a451",
+          "captured_code_prefix_hex": "488b4f30488b51104c8b41184929d0"
+        },
+        {
+          "offset_i32": -124268431,
+          "target": "0x00007ff77440da19",
+          "captured_code_prefix_hex": "4c8d8c24180100004989014489e2ff"
+        },
+        {
+          "offset_i32": -124268431,
+          "target": "0x00007ff77440da19",
+          "captured_code_prefix_hex": "4c8d8c24180100004989014489e2ff"
+        },
+        {
+          "offset_i32": -124268431,
+          "target": "0x00007ff77440da19",
+          "captured_code_prefix_hex": "4c8d8c24180100004989014489e2ff"
+        },
+        {
+          "offset_i32": -124268431,
+          "target": "0x00007ff77440da19",
+          "captured_code_prefix_hex": "4c8d8c24180100004989014489e2ff"
+        }
+      ]
+    }
+  ]
+}

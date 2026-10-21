@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Compare all 666 pre-W1 output bytes; this tool never creates a new baseline.
+"""Compare all 666 regression outputs with the checked-in golden vector.
 
-Consume the exact original ariadne.i5c-legacy-before/v1 baseline whose digest
-is fixed by W1. Internal pathname adaptation never regenerates expected bytes.
+This tool never derives expected values from current SUT output. The vector
+contains only expected byte counts and hashes, not prior passing results.
 """
 import argparse
 from pathlib import Path
@@ -15,9 +15,8 @@ from i5c_qualification import (FIXTURES, ROOT, artifact, command, read_json,
 FORMATS = ("text", "json", "dot")
 BUNDLE = ("report.txt", "report.json", "report.dot", "explanation.txt", "explanation.json", "explanation.dot")
 BASE_CASES = ("linux-stage-b", "windows-stage-b", "bap-precision-not", "pinned-real-capture")
-# Published W1 qualification.before_baseline_sha256; verified against its sealed
-# archive and all 666 retained payloads. A caller cannot repin current outputs.
-LEGACY_BASELINE_SHA256 = "e1adb5a375f67398ddbd4fb17189729aee40a13e049ae52b50a154d0c758e002"
+# Reviewed expected-value vector; a caller cannot substitute current outputs.
+LEGACY_BASELINE_SHA256 = "c0108f5f92fb003ffa869c3fbcbb30b0b72b1918df5e33ac786de724d2b65af9"
 
 
 def expected_keys():
@@ -35,42 +34,10 @@ def expected_keys():
 
 
 def baseline(path, expected_digest):
-    require(expected_digest == LEGACY_BASELINE_SHA256, "baseline pin differs from the original W1 acceptance record")
-    require(sha(path) == expected_digest, "retained baseline manifest digest differs")
+    require(expected_digest == LEGACY_BASELINE_SHA256, "baseline pin differs from the checked-in expected vector")
+    require(sha(path) == expected_digest, "expected vector digest differs")
     value = read_json(path)
-    if value.get("schema") == "ariadne.i5c-legacy-before/v1":
-        require(value.get("passed") is True and value.get("sources_unchanged") is True
-                and value.get("total_outputs") == 666 and value.get("outputs_normalized") is False
-                and value.get("native_build_receipts_preserved_raw") is True,
-                "original legacy baseline was incomplete or normalized")
-        adapted = {}
-        for key, row in value["outputs"].items():
-            if key.startswith("base/"):
-                canonical = key
-            else:
-                profile, case, backend, filename = key.split("/")
-                prefix = "zero-address-assessment." if profile == "i5a" else "zero-base-offset-assessment."
-                require(filename.startswith(prefix), "unknown original assessment filename")
-                ext = filename.removeprefix(prefix)
-                require(ext in ("txt", "json", "dot"), "unknown original assessment format")
-                fmt = "text" if ext == "txt" else ext
-                canonical = (f"i5b-upstream/{backend}/{fmt}" if profile == "i5b" and case == "upstream-call"
-                             else f"{profile}/{case}/{backend}/{fmt}")
-            require(canonical not in adapted, "duplicate adapted baseline key")
-            adapted[canonical] = row
-        parity = value.get("public_api_cli_parity", [])
-        require(len(parity) == 36 and len({row["case"] for row in parity}) == 36,
-                "original 36 public-API/CLI comparisons are incomplete")
-        for row in parity:
-            canonical = row["case"].removeprefix("parity/")
-            if canonical.startswith("i5b/upstream-call/"):
-                canonical = canonical.replace("i5b/upstream-call/", "i5b-upstream/", 1)
-            require(canonical in adapted and adapted[canonical]["sha256"] == row["sha256"],
-                    "original CLI parity differs from retained output bytes")
-        value = {"schema": "ariadne.i5c-legacy-bytes/v1", "outputs": adapted,
-                 "originalSchema": value["schema"], "originalBaselineSha256": expected_digest,
-                 "retainedCliParityCases": 36}
-    require(value.get("schema") == "ariadne.i5c-legacy-bytes/v1", "unsupported retained baseline adapter")
+    require(value.get("schema") == "ariadne.i5c-legacy-bytes/v1", "unsupported expected vector schema")
     require(set(value.get("outputs", {})) == expected_keys(), "retained baseline must cover all 666 named outputs")
     for row in value["outputs"].values():
         require(type(row.get("bytes")) is int and row["bytes"] >= 0, "invalid baseline byte count")

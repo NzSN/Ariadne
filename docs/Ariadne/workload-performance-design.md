@@ -46,6 +46,11 @@ For the wider context, see the [documentation map](../documentation-map.md).
 The original measurement decision dates to **2026-09-29**; its stage names
 remain only in plan/evidence identities.
 
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## Decision to be made
 
 Measure whether a representative Windows/Linux AMD64 minidump investigation
@@ -121,7 +126,7 @@ results on the same workloads and source-bound conformance evidence. For no
 change, state the measured range in which the current implementation is
 acceptable. Neither result asserts a universal performance bound, formal Rust
 refinement, or AMD64 instruction-step correctness.
-The first [measurement record](../../evidence/Ariadne/priority-4-20260929-validation.json)
+The first [measurement record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/priority-4-20260929-validation.json)
 is bounded by the initial 34-node real capture. The
 [2026-09-30 qualification and optimization stage](../../.agents/plans/completed/priority-4-workload-performance-plan.md#2026-09-30-qualification-run)
 used a larger Windows Electron capture, exact control bindings, a frozen
@@ -243,21 +248,21 @@ The original manifest and failed flags remain unchanged.
 | Independent producer | `0x00007ff7382f49b1`, `mov rcx, rax` |
 | Access/workload | index `0`; 98 starts; 379 captured function bytes |
 
-The [active case](../../evidence/Ariadne/investigation-windows-workload-case.json)
-and [independent inspection](../../evidence/Ariadne/i4-windows-capture-inspection.json)
+The [active case](../../tests/input/fixtures/workloads/investigation-windows-workload-case.json)
+and [independent inspection](../../tests/input/fixtures/workloads/windows-oracle.json)
 bind raw exception/context fields, every function byte, forward instruction
 boundaries and checksum `0x4bea2`. PE bytes are comparison evidence only.
 The [capture recipe](../../native/crashpad-demo/README.md) distinguishes this
 workload from the smaller I5a question.
 
-The [23-entry input bundle](../../evidence/Ariadne/bap-windows-workload-inputs.tar.gz)
+The [23-entry input bundle](../../tests/input/fixtures/workloads/windows-inputs.tar.gz)
 SHA-256 is `8ef47d751829680caa4d9a852e3b9c9d6f2906150a7d9bfec8f96b3487f63222`.
 Materialization verifies the entire capture/PE/witness/build/source inventory,
 rejects unsafe members and requires explicit dump overrides to match the pin.
-The [old Electron manifest](../../evidence/Ariadne/priority-4-real-capture-case.json)
+The [old Electron manifest](../../tests/input/fixtures/workloads/priority-4-real-capture-case.json)
 remains byte-identical historical evidence.
 
-The [re-pin record](../../evidence/Ariadne/i4-windows-repin-validation.json)
+The [re-pin record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i4-windows-repin-validation.json)
 passed capture/producer checks and **17/17** investigation gates, stable
 sources/tools, repeated reports and expected producer evidence. Its one-warm-up,
 five-repeat native explanation CLI median was **4,774.451 ms** against **2,000 ms**:
@@ -290,15 +295,15 @@ and cannot grant full I4 acceptance. Workload v3 binds the case ID/digest;
 legacy records, incomplete inventories, the narrower aggregate `passed` flag
 and process exit success cannot override `fullI4RealCaptureAcceptance`.
 
-The [865-entry evidence archive](../../evidence/Ariadne/i4-windows-repin-evidence.tar.gz)
-and [manifest](../../evidence/Ariadne/i4-windows-repin-evidence-manifest.json)
+The [865-entry evidence archive](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i4-windows-repin-evidence.tar.gz)
+and [manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i4-windows-repin-evidence-manifest.json)
 retain 18,012,236 bytes of exact sources, inspection, pin, nested records, raw
 CSVs and report bundles. Runner paths map to archive members; accepted earlier
 core/I5a bundles remain under `2026-10-05-before-i4-repin` history directories.
 
 ## Native investigation qualification
 
-The **2026-10-07** [qualification record](../../evidence/Ariadne/i4-performance-qualification.json)
+The **2026-10-07** [qualification record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i4-performance-qualification.json)
 accepts the exact replacement query and finite regression corpora under the
 sealed dependency view. Completion independently reverified current identities
 and every archive member; it retained the runtime campaign rather than rerunning it.
@@ -318,11 +323,11 @@ The phase contract uses their sum and the Rust reference analyzer; diagnostic
 native profiles or base CLI results cannot substitute for the normal release
 explanation-mode measurement.
 
-Raw [CLI](../../evidence/Ariadne/i4-performance-cli.csv),
-[phase](../../evidence/Ariadne/i4-performance-phase.csv) and
-[native profile](../../evidence/Ariadne/i4-performance-native-phases.csv) samples
+Raw [CLI](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i4-performance-cli.csv),
+[phase](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i4-performance-phase.csv) and
+[native profile](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i4-performance-native-phases.csv) samples
 remain byte-exact. Prior re-pin and diagnosis baselines remain historical.
-The [rejected-attempt manifest](../../evidence/Ariadne/i4-performance-history/2026-10-07-rejected/evidence-manifest.json)
+The [rejected-attempt manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i4-performance-history/2026-10-07-rejected/evidence-manifest.json)
 retains phase failures of **261.578** and **252.488 ms**, with a **2,117.911 ms**
 Windows CLI result in the second attempt; their failure flags are unchanged.
 
@@ -334,19 +339,19 @@ and damage to every runtime pin. Root/core-only tests, fmt, all-feature/all-targ
 Clippy and layout passed in those exact-source records. Old I5a/default outputs
 and all 216 native actions stayed equal across six runs.
 
-The [controlled I5a record](../../evidence/Ariadne/i4-performance-i5a-controlled.json)
+The [controlled I5a record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i4-performance-i5a-controlled.json)
 binds current source/tool/dependency and sample/prerequisite identities:
 partial/full CLI **417.978 / 457.633 ms** against 1,500 ms; phase
 **1.044 / 1.068 ms** against 10 ms. No criterion was waived.
 
-The [accepted archive](../../evidence/Ariadne/i4-performance-evidence.tar.gz)
+The [accepted archive](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i4-performance-evidence.tar.gz)
 contains **3,625** verified entries including **712** source inputs, nested
 regression/core archives, baselines, samples, outputs and dependency manifest.
 SHA-256: `4a5f05ea02317a3a21a56ad177796f794f87661a3a143694ce80e5d0ea5039d8`.
 Nested archives verified 919 regression and 1,432 native-core entries; twelve
 tool digests and the dependency identity matched. The
-[evidence manifest](../../evidence/Ariadne/i4-performance-evidence-manifest.json)
-and [completion audit](../../evidence/Ariadne/i4-performance-audit.json)
+[evidence manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i4-performance-evidence-manifest.json)
+and [completion audit](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i4-performance-audit.json)
 separate retained-byte verification from the original runtime campaign.
 
 ## Reproduction and retained-byte verification
@@ -375,16 +380,16 @@ changed identities cannot qualify. Temporary paths describe the exercised
 environment; archive member names do not guarantee those paths still exist.
 
 Materialize Git LFS before hashing:
-`git lfs pull --include="evidence/Ariadne/i4-performance-evidence.tar.gz"`.
+`git lfs pull --include="https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i4-performance-evidence.tar.gz"`.
 Verify report/archive digests against the manifest, then every member hash;
 a pointer or manifest flag alone is insufficient.
 
 ## Historical baseline (2026-09-29)
 
 Recorded **2026-09-29 10:16 CST**. The
-[source-bound progress report](../../evidence/Ariadne/stage-b-f-validation.json)
+[source-bound progress report](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/stage-b-f-validation.json)
 recorded 19 implementation/formal/benchmark gates. Its
-[raw baseline CSV](../../evidence/Ariadne/stage-f-baseline.csv) and 83 source hashes
+[raw baseline CSV](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/stage-f-baseline.csv) and 83 source hashes
 identify this historical measurement, which is not a release-scale performance
 guarantee. Retain the original report and CSV unchanged.
 
@@ -437,10 +442,10 @@ qualifies a replacement backend.
 
 Qualified **2026-09-30** under the
 [completed workload plan](../../.agents/plans/completed/priority-4-workload-performance-plan.md).
-The [delivery record](../../evidence/Ariadne/priority-4-validation.json) retains
+The [delivery record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/priority-4-validation.json) retains
 qualification, source-bound regressions and before/after report comparisons.
 The initial 34-node Linux result remains separately in the
-[2026-09-29 record](../../evidence/Ariadne/priority-4-20260929-validation.json).
+[2026-09-29 record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/priority-4-20260929-validation.json).
 The original Electron artifact is now unavailable; commands below describe the
 historical pinned path and require its exact artifacts and source/tool identity.
 
@@ -448,7 +453,7 @@ historical pinned path and require its exact artifacts and source/tool identity.
 
 The external `f13d18cd-9ade-4eff-947c-15a649b636fa.dmp` is a historical Windows
 Electron application access violation, not a generated graph fixture.
-The [case manifest](../../evidence/Ariadne/priority-4-real-capture-case.json) pins its 2,028,400 bytes
+The [case manifest](../../tests/input/fixtures/workloads/priority-4-real-capture-case.json) pins its 2,028,400 bytes
 and SHA-256 `4b3deb70134015ec227b3cf5edf82e1dac0b308b3f19ae62f79cbd4251109e86`.
 Its companion has SHA-256
 `8ed58d015ad328da011e0bc889c2fa431cc13944610a5ead8b9a353bb91fe9a9`.
@@ -467,10 +472,10 @@ The selected entry `0x7ff6451d52d0` reaches exception RIP
 `MOV64rm RCX,[RDI+0x20]` at `0x7ff6451d530b` remains a possible origin of all
 eight RCX byte cells before the seed. The query has **98 captured decoded
 instructions, 113 edges and a 19-node backward slice**, with no missing seed.
-The [qualification record](../../evidence/Ariadne/priority-4-real-capture-validation.json) checks
+The [qualification record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/priority-4-real-capture-validation.json) checks
 local reachability, captured forward boundaries, cross-format agreement,
 Graphviz parsing and the seed-only negative control. The
-[identity/byte negative controls](../../evidence/Ariadne/priority-4-negative-controls.json) reject
+[identity/byte negative controls](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/priority-4-negative-controls.json) reject
 wrong module identity and changed captured function bytes before publication.
 
 Eight path blockers gained [source-reviewed ordinary control](operand-effects-design.md#eight-ordinary-control-bindings-2026-09-30)
@@ -519,17 +524,17 @@ Raw data and identities are retained for all three checkpoints:
 
 | Checkpoint | CLI CSV | Stage CSV | Synthetic CSV | Measurement record |
 | --- | --- | --- | --- | --- |
-| Before | [CSV](../../evidence/Ariadne/priority-4-20260930-before-cli.csv) | [CSV](../../evidence/Ariadne/priority-4-20260930-before-stage.csv) | [CSV](../../evidence/Ariadne/priority-4-20260930-before-synthetic.csv) | [JSON](../../evidence/Ariadne/priority-4-20260930-before-validation.json) |
-| Cache | [CSV](../../evidence/Ariadne/priority-4-20260930-solver-cli.csv) | [CSV](../../evidence/Ariadne/priority-4-20260930-solver-stage.csv) | [CSV](../../evidence/Ariadne/priority-4-20260930-solver-synthetic.csv) | [JSON](../../evidence/Ariadne/priority-4-20260930-solver-validation.json) |
-| Final | [CSV](../../evidence/Ariadne/priority-4-20260930-after-cli.csv) | [CSV](../../evidence/Ariadne/priority-4-20260930-after-stage.csv) | [CSV](../../evidence/Ariadne/priority-4-20260930-after-synthetic.csv) | [JSON](../../evidence/Ariadne/priority-4-20260930-after-validation.json) |
+| Before | [CSV](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/priority-4-20260930-before-cli.csv) | [CSV](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/priority-4-20260930-before-stage.csv) | [CSV](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/priority-4-20260930-before-synthetic.csv) | [JSON](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/priority-4-20260930-before-validation.json) |
+| Cache | [CSV](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/priority-4-20260930-solver-cli.csv) | [CSV](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/priority-4-20260930-solver-stage.csv) | [CSV](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/priority-4-20260930-solver-synthetic.csv) | [JSON](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/priority-4-20260930-solver-validation.json) |
+| Final | [CSV](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/priority-4-20260930-after-cli.csv) | [CSV](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/priority-4-20260930-after-stage.csv) | [CSV](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/priority-4-20260930-after-synthetic.csv) | [JSON](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/priority-4-20260930-after-validation.json) |
 
 ### Bounded synthetic scaling
 
 All five families completed one warm-up and five repetitions at 128, 256 and
 512 nodes after optimization. The before-change 512-node measured suite
 reached its 180-second bound; its
-[partial output](../../evidence/Ariadne/priority-4-20260930-before-synthetic-512-measured-partial.csv)
-and [outcomes](../../evidence/Ariadne/priority-4-20260930-before-synthetic-outcomes.json) remain limit
+[partial output](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/priority-4-20260930-before-synthetic-512-measured-partial.csv)
+and [outcomes](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/priority-4-20260930-before-synthetic-outcomes.json) remain limit
 evidence rather than a completed baseline. The initial September 29 timeout
 and `stage-f-baseline.csv` also remain intact.
 
@@ -547,14 +552,14 @@ larger real captures, and no speedup factor is claimed against the timed-out
 
 ### Conformance and decision
 
-The [schedule comparison](../../evidence/Ariadne/priority-4-schedule-validation.json) matches all
+The [schedule comparison](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/priority-4-schedule-validation.json) matches all
 277 visible transitions and the completed real-query result against the
 [frozen scanning implementation](../../tests/support/scanning_engine.rs).
 All 256 generated requests also compare every visible state with that
 reference, alongside their independent graph/path oracles. Text, DOT and JSON
 hashes are byte-identical across the three performance checkpoints.
 
-The [recorded integration result](../../evidence/Ariadne/current-integration-validation.json) covers
+The [recorded integration result](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/current-integration-validation.json) covers
 the existing root/input/native/formal/IR checks, MBT replay, effect and reader
 mutations, formatting and Clippy. The effect registry is exercised on both
 Windows and Linux. The new control bindings retain all possible prior origins

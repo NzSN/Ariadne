@@ -64,9 +64,9 @@ def source_inventory():
         "tools/test_investigation_budget.py",
         "tools/with_mirrorrust_snapshot.py",
         "tools/investigation_windows_case.py", "tools/test_investigation_windows_case.py",
-        "evidence/Ariadne/investigation-windows-workload-case.json",
-        "evidence/Ariadne/i4-windows-capture-inspection.json",
-        "evidence/Ariadne/bap-windows-workload-inputs.tar.gz",
+        "tests/input/fixtures/workloads/investigation-windows-workload-case.json",
+        "tests/input/fixtures/workloads/windows-oracle.json",
+        "tests/input/fixtures/workloads/windows-inputs.tar.gz",
     ))
     import real_capture_workload
     paths.update(real_capture_workload.source_paths())

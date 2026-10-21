@@ -7,8 +7,8 @@
 is partial”). The retained baseline and its 28 gap entries were checked against
 the original JSON and member manifest. This document records no new Scanner run
 or implementation acceptance in that original revision. The [2026-10-19 memory
-qualification](../../evidence/Ariadne/frame-question/20261019/README.md) now closes
-S1's selected candidate-table scope. The [2026-10-20 Scanner follow-up](../../evidence/Ariadne/scanner-followup/20261020/README.md)
+qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md) now closes
+S1's selected candidate-table scope. The [2026-10-20 Scanner follow-up](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/scanner-followup/20261020/README.md)
 now qualifies S2–S4's finite audit and publication scope with the result still
 partial. The original rendering and qualification retain their dated identities.
 
@@ -33,9 +33,9 @@ this work does not require an unsupported promotion to `explained`.
   implementation and the qualified finite model/mutation/Scanner candidate-table scope.
 - [Investigation design](../../docs/Ariadne/investigation-design.md) — canonical
   query, claim, gap, publication and evidence contracts for this follow-up.
-- [Evidence guide](../../evidence/Ariadne/README.md) — source/tool identity checks,
+- [Evidence guide](../../tests/README.md) — source/tool identity checks,
   immutable historical records and fresh qualification boundaries.
-- [S2–S4 qualification](../../evidence/Ariadne/scanner-followup/20261020/README.md) —
+- [S2–S4 qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/scanner-followup/20261020/README.md) —
   exact current case, twenty-site audit, entry requirements and actual report replay.
 
 **What remains unresolved.** The snapshot does not establish the executed path,
@@ -47,13 +47,18 @@ does not identify an executed path or writer.
 No historical-path, root-cause, universal-refinement or release qualification
 is established by this plan.
 
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## Retained query and evidence identity
 
-The [remote Scanner record](../../evidence/Ariadne/bap-admission/remote-20261010/report.json)
+The [remote Scanner record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/remote-20261010/report.json)
 binds the baseline to its capture, query and semantic profile. Its detailed
 explanation is member `artifacts/0/external/scanner/explanation.json` of the
-[retained archive](../../evidence/Ariadne/bap-admission/remote-20261010/evidence.tar.gz),
-listed in the [member manifest](../../evidence/Ariadne/bap-admission/remote-20261010/evidence-manifest.json).
+[retained archive](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/remote-20261010/evidence.tar.gz),
+listed in the [member manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/remote-20261010/evidence-manifest.json).
 
 | Field | Retained value |
 | --- | --- |
@@ -278,7 +283,7 @@ semantic virtual addresses, not file offsets or graph identifiers.
 
 ## S1 qualification follow-up, 2026-10-19
 
-The [remote section-5/M4 record](../../evidence/Ariadne/frame-question/20261019/README.md)
+The [remote section-5/M4 record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md)
 uses the same `ed82b433…` Scanner snapshot and selected DD6A load. Its complete
 12-origin table matches the completed baseline reaching set. Entry memory,
 eight pushes and three stores all remain unresolved with explicit scope/alias
@@ -289,7 +294,7 @@ The original 28-gap explanation and its immutable qualification remain historica
 
 ## S2–S4 qualification, 2026-10-20
 
-The [finite follow-up evidence](../../evidence/Ariadne/scanner-followup/20261020/README.md)
+The [finite follow-up evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/scanner-followup/20261020/README.md)
 closes the audit, explicit boundary and publication clauses without changing
 producer/runtime/model semantics or claiming explained status. The source
 capsule is `ced9183d56c58eaa18014540d7a9e63a5b5b1de1e0f61551fb619ce8ee027c36`

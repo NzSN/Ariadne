@@ -22,6 +22,11 @@ semantic equivalence and full I4 qualification requirements.
 
 **What remains unresolved.** The recorded exact-query acceptance passes. Later source/tool/dependency changes require fresh or complete identity-verified qualification. This finite controlled-capture result does not qualify the original Electron crash, a packaged release, universal refinement or a general performance bound.
 
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## Stages and ownership
 
 | Stage | Owned work | Exit |
@@ -107,12 +112,12 @@ one warm-up and five repeats. The separate 34-start Linux reference phase
 benchmark passes at 182.924 ms, using the contract's sum of binding, explanation
 and rendering medians. The earlier diagnostic loop alone supplied no acceptance.
 
-The [retained result](../../../evidence/Ariadne/i4-performance-qualification.json) binds
+The [retained result](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i4-performance-qualification.json) binds
 712 sources, 12 tools and the sealed dependency manifest. Its
-[verified archive](../../../evidence/Ariadne/i4-performance-evidence-manifest.json)
+[verified archive](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i4-performance-evidence-manifest.json)
 contains 3,625 entries. Completion follows an exact current-inventory audit,
 including all members of that archive and the nested regression/core archives.
-The [rejected attempts](../../../evidence/Ariadne/i4-performance-history/2026-10-07-rejected/evidence-manifest.json)
+The [rejected attempts](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i4-performance-history/2026-10-07-rejected/evidence-manifest.json)
 retain both earlier phase-budget failures and their raw samples. Historical
 records, fixed budgets, capture pins and source-bound Stage 2 design/plan bytes
 remain unchanged. The [validation guide](../../../docs/Ariadne/workload-performance-design.md#native-investigation-qualification)

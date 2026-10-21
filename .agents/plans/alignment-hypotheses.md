@@ -2,7 +2,7 @@
 
 ## Context and follow-up
 
-**Status.** H0–H5 are complete within the [2026-10-16 qualified scope](../../evidence/Ariadne/alignment-hypotheses/20261016/README.md).
+**Status.** H0–H5 are complete within the [2026-10-16 qualified scope](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/alignment-hypotheses/20261016/README.md).
 Source capsule `34d078b4e3c94977620e72313111d40d52fae1978af05b0682d716d1bec5d556`
 contains 1,060 files, based on `4811d7de6f2b86319135a5f0a1a18c397a4cd4c2`.
 The working baseline preserves the separately qualified, uncommitted Stage
@@ -16,15 +16,20 @@ The user requests an explicit assumption allowing conditional normal execution.
 ownership, an additive proof boundary, bounded validation and remote acceptance.
 
 **Where to go next.** Read the [canonical hypothesis contract](../../docs/Ariadne/investigation-design.md#explicit-alignment-hypotheses),
-[Stage 5.1 evidence](../../evidence/Ariadne/frame-structure/20261016/README.md)
+[Stage 5.1 evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-structure/20261016/README.md)
 and [predicate model](../../Specs/AriadnePredicateAdmission.tla). The
-[retained qualification](../../evidence/Ariadne/alignment-hypotheses/20261016/README.md)
+[retained qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/alignment-hypotheses/20261016/README.md)
 binds runtime, model, independent oracle, compiled mutations, compatibility and
 named-dump/saved-replay results to their exact sources and finite scope.
 
 **What remains unresolved.** Current native full analysis, exact executed paths,
 general instruction assumptions and general SIMD admission are outside this
 extension. Finite model/replay evidence does not prove universal refinement.
+
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## H0: frozen contract
 
@@ -100,7 +105,7 @@ all three conditional formats and standalone public API replay.
 
 ## Retained qualification — 2026-10-16
 
-The [evidence bundle](../../evidence/Ariadne/alignment-hypotheses/20261016/README.md)
+The [evidence bundle](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/alignment-hypotheses/20261016/README.md)
 records H0–H5 completion on source capsule
 `34d078b4e3c94977620e72313111d40d52fae1978af05b0682d716d1bec5d556`
 (1,060 files), with 725 runtime-inventory files verified unchanged during the

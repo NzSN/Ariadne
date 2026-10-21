@@ -6,7 +6,7 @@
 B0–B5 are implemented and qualified for the recorded finite source/
 fixture and controlled partial/full Windows tiers. [Contracts](../../../docs/Ariadne/zero-base-offset-design.md)
 describe the actual interface; [validation](../../../docs/Ariadne/zero-base-offset-design.md#retained-qualification) and
-the [aggregate](../../../evidence/Ariadne/i5b-qualification.json) bind all 18 gates to
+the [aggregate](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5b-qualification.json) bind all 18 gates to
 exact source/tool/dependency identity.
 
 **Why this document exists.** The [I5b design](../../../docs/Ariadne/zero-base-offset-design.md)
@@ -39,6 +39,11 @@ report compatibility, mutation controls and separate acceptance tiers.
 qualification. The
 profile excludes indexed and Linux assessments and historical provenance.
 Source/fixture success cannot qualify real Windows evidence or close I4.
+
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## Delivery definition
 

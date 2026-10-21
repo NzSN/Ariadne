@@ -3,9 +3,9 @@
 ## Context and follow-up
 
 **Status.** P0–P10 pass the declared finite frame-question profile with
-[source-bound remote qualification dated 2026-10-19](../../evidence/Ariadne/frame-question/20261019/README.md).
+[source-bound remote qualification dated 2026-10-19](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md).
 The imported FC5/FC6 and selected memory M4/Scanner candidate-table gates pass
-on the same exercised source and corpus. The [2026-10-18 local record](../../evidence/Ariadne/frame-question/20261018/README.md)
+on the same exercised source and corpus. The [2026-10-18 local record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261018/README.md)
 remains historical. No broad release or universal refinement acceptance is implied.
 
 **Why this document exists.** The [recommendation](../chatdocs/ariadne-frame-to-frame-recommendation-20261016.html#order)
@@ -17,12 +17,17 @@ ledger for items 5.1–5.4. The [canonical design](../../docs/Ariadne/frame-ques
 owns interfaces, model scope, defaults and result meanings; imported owners
 retain their separate contracts and evidence identities.
 
-**Where to go next.** Read the canonical design, the [new qualification record](../../evidence/Ariadne/frame-question/20261019/README.md),
+**Where to go next.** Read the canonical design, the [new qualification record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md),
 [SF0–SF6](frame-structure-report.md), [FC0–FC6](frame-connections.md),
 [memory M0–M4](memory-provenance-refinement.md), [Scanner follow-up](scanner-partial-explanation.md),
 [implementation guide](../../docs/implementation.md) and [model guide](../../Specs/README.md).
 
 **What remains unresolved.** Frame-path F4, broader release, general SMT, historical traces, root cause and universal refinement remain outside this program. The original saved-source question stays Unknown at resolver/prefix bounds. The early raw refresh with stale LLVM helper remains a historical partial source; [caller S6](caller-semantic-coverage.md) separately restores original coverage and completed-state parity using the current decoder.
+
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## All four items: inventory and ownership
 
@@ -53,7 +58,7 @@ must preserve edits made by others and keep shared exports coordinated.
 | P6 — immutable source revision | Source/composition owner: new question revision binding, existing frame preparation/structure recovery and resolver proof validation. | P3/P4 | Same snapshot/roots/range, candidate-to-admitted checks, parent identity, bounded revisions and stale negative/invariant/import invalidation. | Passed immutable revision and replay controls |
 | P7 — codec, views and opt-in CLI | Product owner: `src/reports/frame_question.rs`, `src/bin/ariadne_minidump/frame_question.rs`, existing CLI parser, root test registrations and report/input tests. | P2–P6 | Strict self-contained replay, independent layers, JSON/text/DOT links, source/old-codec compatibility and pre-capture option/policy validation. | Passed live CLI, formats and helper-free saved replay |
 | P8 — compiled behavioral mutations | Qualification owner: new mutation entry point and unchanged independent observers in tests, separate mutation target directory. | P7 | Each listed mutation has a passing original control and a compiled behavioral rejection; compile/transport failures earn no sensitivity credit. | Passed remote: 16 original controls and compiled behavioral rejections |
-| P9 — finite/native/capture qualification | Qualification owner: isolated source/tool capsules and `evidence/Ariadne/frame-question/DATE/`. | P7/P8; declared import gates | Required root/features, models/oracles, native compatibility, two capture applications and saved-source replay pass their named clauses; missing tiers remain explicit. | Passed remote finite/native/capture tiers and applicable FC5/M4 imports |
+| P9 — finite/native/capture qualification | Qualification owner: isolated source/tool capsules and `https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/DATE/`. | P7/P8; declared import gates | Required root/features, models/oracles, native compatibility, two capture applications and saved-source replay pass their named clauses; missing tiers remain explicit. | Passed remote finite/native/capture tiers and applicable FC5/M4 imports |
 | P10 — product acceptance and documentation | Corpus/docs owner: canonical usage, result examples, remaining evidence requirements, plan and roadmap. | P9 plus imported gates required by the final claim | At least one new question improvement without completed caller analysis, useful fault-local explanation, honest original-case limits and source-bound publication. | Passed declared finite product acceptance and durable evidence |
 
 P3 and P4 can proceed independently after P2; P5 consumes P4's checked value
@@ -255,7 +260,7 @@ Freeze the chosen investigator question and expected bounded-model outcome
 before the acceptance run; do not select a trivial passing query afterward.
 
 Store raw source/tool/command/hash inventories, reports and failed/corrected
-receipts under `evidence/Ariadne/frame-question/DATE/`. All evidence paths,
+receipts under `https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/DATE/`. All evidence paths,
 including copied report evidence, use Git LFS. Preserve original evidence
 bytes/identities; staged pointers or fresh docs are not new qualification.
 Update the canonical design, direct plan links, roadmap, status and usage after
@@ -283,7 +288,7 @@ acceptance.
 
 The [canonical design](../../docs/Ariadne/frame-question-investigation-design.md#implemented-profile-and-usage)
 owns the exact API, supported profile, usage and cooperative deadline limits.
-The [source-bound record](../../evidence/Ariadne/frame-question/20261018/README.md)
+The [source-bound record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261018/README.md)
 retains every tested capsule, tool identity, raw log and product. Use the
 `mutations-current` capsule as the final implementation baseline; earlier
 mutation runs and failed attempts are historical, not interchangeable passes.
@@ -339,7 +344,7 @@ artifacts are preserved as historical and do not qualify this corrected source.
 
 ## 2026-10-19 remote completion
 
-The [qualification record](../../evidence/Ariadne/frame-question/20261019/README.md)
+The [qualification record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md)
 binds the 875-file source capsule
 `7e23bbd4aab5e12e48d342d4ab0a9c9b51e2aacbd8ed35c2a749919c088610c6`
 to remote Windows WSL execution. Root default/core/reports/BAP counts are

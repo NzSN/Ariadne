@@ -6,9 +6,9 @@ import hashlib
 import json
 import os
 from pathlib import Path
+from run_output import run_output
 import shutil
 import subprocess
-import tarfile
 import time
 import check_bap_semantics as stage1
 from check_bap_ocaml import tool_identities
@@ -23,7 +23,7 @@ def sources():
   paths.update(p for p in (ROOT/tree).rglob('*') if p.is_file() and p.suffix!='.md'
                and not set(p.parts)&{'target','.work','__pycache__','results','states','_apalache-out'})
  paths.update(ROOT/p for p in ['Cargo.toml','Cargo.lock','docs/Ariadne/bap-analysis-core-design.md','.agents/plans/completed/bap-stage2-implementation.md'])
- paths.update(ROOT/p for p in ['evidence/Ariadne/investigation-windows-workload-case.json','evidence/Ariadne/i4-windows-capture-inspection.json','evidence/Ariadne/bap-windows-workload-inputs.tar.gz'])
+ paths.update(ROOT/p for p in ['tests/input/fixtures/workloads/investigation-windows-workload-case.json','tests/input/fixtures/workloads/windows-oracle.json','tests/input/fixtures/workloads/windows-inputs.tar.gz'])
  paths.update(real_case.source_paths())
  return {str(p.relative_to(ROOT)):sha(p) for p in sorted(paths)}
 def tools_inventory():
@@ -39,7 +39,7 @@ def main():
  parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--output',type=Path,required=True)
  parser.add_argument('--candidate',action='store_true',help='qualify explicit native selection, without default-adoption credit')
  parser.add_argument('--stage1-record',type=Path,help='reuse only a complete current source/tool-bound regression record')
- args=parser.parse_args();work=args.output.resolve();work.mkdir(parents=True,exist_ok=True)
+ args=parser.parse_args();work=run_output(args.output);work.mkdir(parents=True,exist_ok=True)
  before=sources();tools_before=tools_inventory();gates=[];nested={};artifact_roots=[work]
  helper=ROOT/'target/bap-core-stage2';clean=ROOT/'target/bap-core-stage2-clean'
  env={**os.environ,'ARIADNE_BAP_CORE_DIR':str(helper),'ARIADNE_LLVM_MC':str(ROOT/'target/ariadne-llvm-mc'),
@@ -107,23 +107,4 @@ def main():
          'gates':gates,'records':nested,'error':error,'scope':'native fixed-input recovery/dataflow/slice and supplied finite stateflow; capture-only product integration; BAP lifting trusted; supplied LLVM IR remains a separate Rust path; no universal refinement or ISA proof'}
  (work/'report.json').write_text(json.dumps(result,indent=2)+'\n');print('Report:',work/'report.json',flush=True)
  if not passed:raise SystemExit(1)
- archive=work/'evidence.tar.gz';entries={}
- with tarfile.open(archive,'w:gz') as tar:
-  def add(path,name):
-   if name in entries:return
-   entries[name]=sha(path);tar.add(path,arcname=name,recursive=False)
-  for p in before:add(ROOT/p,'sources/'+p)
-  for filename in ['ariadne-bap-core','manifest.json','build.log']:add(helper/filename,'helper/'+filename)
-  if tools_before['qualificationEnvironment']:
-   add(Path(tools_before['qualificationEnvironment']['manifestPath']),'dependencies/mirrorrust-snapshot.json')
-  for index,directory in enumerate(dict.fromkeys(artifact_roots)):
-   for p in sorted(directory.rglob('*')):
-    if p.is_file() and p!=archive and not set(p.parts)&{'rust-build','debug','release','__pycache__'} and (p.suffix in ['.json','.log','.diff','.ml','.txt','.dot','.csv','.stderr','.stdout','.time'] or p.name=='ariadne-bap-core'):
-     add(p,f'artifacts/{index}/'+str(p.relative_to(directory)))
- with tarfile.open(archive,'r:gz') as tar:
-  actual={m.name:hashlib.sha256(tar.extractfile(m).read()).hexdigest() for m in tar.getmembers() if m.isfile()}
- if actual!=entries:raise RuntimeError('archive verification failed')
- manifest={'schema':'ariadne.bap-core-evidence/v1','archiveSha256':sha(archive),'entries':entries,'verified':True,'qualificationReportSha256':sha(work/'report.json')}
- (work/'evidence-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
- print('Verified archive:',archive,flush=True)
 if __name__=='__main__':main()

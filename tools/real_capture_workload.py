@@ -1,4 +1,4 @@
-"""One active capture-only workload; historical Linux evidence stays separate."""
+"""One pinned capture-only regression workload; no prior-run result is consumed."""
 import hashlib
 import json
 import os
@@ -6,7 +6,7 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-CASE_RELATIVE = "evidence/Ariadne/real-capture-workload-case.json"
+CASE_RELATIVE = "tests/input/fixtures/workloads/real-capture-workload-case.json"
 
 
 def sha(path):
@@ -33,29 +33,18 @@ def load_case():
             or type(expected["decodedStarts"]) is not int or expected["decodedStarts"] <= 1
             or expected["phaseBudgetMs"] != 250):
         raise ValueError("invalid active capture identity/query/budget")
-    for path_key, hash_key in [("path", "sha256"), ("entryWitnessPath", "entryWitnessSha256")]:
-        inspection = case["independentInspection"]
-        if sha(ROOT / inspection[path_key]) != inspection[hash_key]:
-            raise ValueError("active capture independent witness changed")
-    inspected = json.loads((ROOT / case["independentInspection"]["path"]).read_text())
-    if (any(capture[key] != inspected["derivative"][key] for key in ["sha256", "bytes"])
-            or case["original"]["sha256"] != inspected["original"]["sha256"]
-            or any(query[key + "_va"] != inspected["query"][key]
-                   for key in ["entry", "seed", "producer"])
-            or not inspected["metadataAndContextsIdentical"]
-            or not inspected["selectedOverlapsAgree"]
-            or not inspected["code"]["matchesCompanion"]):
-        raise ValueError("active capture manifest disagrees with independent inspection")
-    if sha(ROOT / case["historicalCase"]) != case["historicalCaseSha256"]:
-        raise ValueError("historical capture manifest changed during re-pin")
+    # Explicit regression expectations identify the selected test input. No old
+    # inspector's passed flag or output log can stand in for a fresh test.
+    if (capture["sha256"] != "0333e29bfed1608ac877395d191642947aacc58dd81d0b786e0fd0df1a131f90"
+            or capture["bytes"] != 516256
+            or query["entry_va"] != "0x00007ff63cba6c50"):
+        raise ValueError("active capture differs from the regression input")
     return case
 
 
 def source_paths():
     case = load_case()
-    return [Path(__file__), ROOT / CASE_RELATIVE,
-            ROOT / case["independentInspection"]["path"],
-            ROOT / case["independentInspection"]["entryWitnessPath"]]
+    return [Path(__file__), ROOT / CASE_RELATIVE]
 
 
 def selected_dump(case, hash_file=sha):

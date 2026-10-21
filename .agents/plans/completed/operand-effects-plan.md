@@ -25,7 +25,7 @@ For the wider context, see the optional [documentation map](../../../docs/docume
 Prepared 2026-09-26 against `fb7f142`.
 Status: P0–P6 implemented and checked on 2026-09-26 in the working tree.
 See the [delivery evidence](../../../docs/Ariadne/operand-effects-design.md#historical-effect-qualification) and
-[source-bound gate report](../../../evidence/Ariadne/operand-effects-validation.json). No commit/push
+[source-bound gate report](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/operand-effects-validation.json). No commit/push
 has been performed. The sequence below is retained as the implementation plan.
 
 | Stage | Delivery evidence |
@@ -38,6 +38,11 @@ has been performed. The sequence below is retained as the implementation plan.
 | P5 | Reviewed controls, LEA, MOV memory forms, opaque calls and explicit control gaps |
 | P6 | All eight integrated gates passed with stable source hashes; docs and checkpoint recorded |
 Design: [Structured operands and conservative instruction effects](../../../docs/Ariadne/operand-effects-design.md).
+
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## Outcome and scope
 

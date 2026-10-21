@@ -303,6 +303,11 @@ path = "tests/input/frame_unwind_properties.rs"
 required-features = ["property-tests"]
 
 [[test]]
+name = "core_properties"
+path = "tests/core_properties.rs"
+required-features = ["property-tests"]
+
+[[test]]
 name = "frame_connections_replay"
 path = "tests/reports/frame_connections_replay.rs"
 required-features = ["bap"]

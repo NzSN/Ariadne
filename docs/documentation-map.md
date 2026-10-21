@@ -3,12 +3,12 @@
 Designs are organized by feature: one canonical document owns each design's
 decisions and contracts. Implementation stages live in [Plans](../.agents/plans/README.md);
 source-review and validation summaries stay with their owning feature, while
-raw evidence retains its original identities and scope. Use the
+[executable tests](../tests/README.md) define current validation and generated
+run products stay outside source. Use the
 [design index](Ariadne/README.md#canonical-designs) to find the canonical owner.
 
-Implementation plans now live under `.agents/plans/`. Immutable evidence and
-source capsules may retain the former `Plans/` paths from their recorded
-checkout; use the [current plan index](../.agents/plans/README.md) for navigation.
+Implementation plans live under `.agents/plans/`. Dated historical Git links may
+refer to earlier layouts; use the [current plan index](../.agents/plans/README.md) for navigation.
 
 Each document's **Context and follow-up** section explains its status,
 motivating problem, contribution, direct next reading and unresolved limits.
@@ -40,11 +40,11 @@ flowchart TD
 | --- | --- | --- | --- |
 | How do captured instructions yield possible origins? | [Analysis model](../Specs/README.md), [BAP design](Ariadne/bap-analysis-core-design.md) | [Rust reference](implementation.md), [native qualification](Ariadne/bap-analysis-core-design.md#native-qualification) | [Universal refinement and trusted lifting](Ariadne/semantic-assurance.md). |
 | Which bytes and instruction entries are justified? | [File-reader design](Ariadne/file-reader-design.md) | [Input guide](Ariadne/file-reader-design.md#public-interface), [selected capture](Ariadne/file-reader-design.md#windows-replacement-capture-and-bounded-query) | Capture-only production reader; further file formats remain deferred. |
-| Can captured data resolve an indirect jump? | [Indirect-target resolution](Ariadne/indirect-target-resolution.md) | [R0–R6 plan](../.agents/plans/indirect-target-resolution.md), [finite R6 evidence](../evidence/Ariadne/indirect-target-resolution/20261020/README.md), [captured table inspection](Ariadne/indirect-target-resolution.md#motivating-windows-capture) | Finite R6 qualified; fresh resolver/model/replay/Windows gates and retained source-verified core mutations. Incoming-state unknowns and captured-memory premises remain explicit; Linux full dumps, full-base formats and release remain excluded. |
+| Can captured data resolve an indirect jump? | [Indirect-target resolution](Ariadne/indirect-target-resolution.md) | [R0–R6 plan](../.agents/plans/indirect-target-resolution.md), [finite R6 evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/20261020/README.md), [captured table inspection](Ariadne/indirect-target-resolution.md#motivating-windows-capture) | Finite R6 qualified; fresh resolver/model/replay/Windows gates and retained source-verified core mutations. Incoming-state unknowns and captured-memory premises remain explicit; Linux full dumps, full-base formats and release remain excluded. |
 | Can a pointer-changing loop have complete captured-table targets? | [Guarded target composition and loop-closure design](Ariadne/guarded-target-resolution-design.md#proposed-stable-base-invariant-follow-up) | [C0–C6 delivery ledger](../.agents/plans/completed/guarded-target-resolution.md), [L0–L6 loop-aware plan](../.agents/plans/completed/loop-aware-target-resolution.md) | Composition and local-region induction are qualified within their captured-table scope; DA09/DADD and all nine original certificates close. Full frame paths remain separate. |
 | How are instruction dependencies projected? | [BAP projection](Ariadne/bap-analysis-core-design.md#projection) | [Pinned source review](Ariadne/bap-analysis-core-design.md#pinned-projection-source-review), [accepted admission plan](../.agents/plans/completed/bap-projection-admission.md) | Unsupported semantics remain explicit; the accepted corpus is finite. |
 | Which definitions contribute to a fault address? | [Investigation design](Ariadne/investigation-design.md) | [API](Ariadne/investigation-design.md#investigation-module-and-interface), [validation](Ariadne/investigation-design.md#retained-delivery-evidence) | Possible dependencies do not establish execution or a root cause. |
-| Can a memory writer be narrowed to the selected load? | [Memory provenance design](Ariadne/memory-provenance-refinement.md) | [Selected M4 qualification](../evidence/Ariadne/frame-question/20261019/README.md), [Scanner S2–S4 follow-up](../evidence/Ariadne/scanner-followup/20261020/README.md) | Finite candidate assessment and the twenty-site/entry-boundary review are qualified separately. The partial answer retains unresolved aliases, writers and history. |
+| Can a memory writer be narrowed to the selected load? | [Memory provenance design](Ariadne/memory-provenance-refinement.md) | [Selected M4 qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-question/20261019/README.md), [Scanner S2–S4 follow-up](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/scanner-followup/20261020/README.md) | Finite candidate assessment and the twenty-site/entry-boundary review are qualified separately. The partial answer retains unresolved aliases, writers and history. |
 | Does the fault-time access begin at zero? | [Zero-address design](Ariadne/zero-address-design.md) | [Source review](Ariadne/zero-address-design.md#source-and-finite-admission-review), [native qualification](Ariadne/zero-address-design.md#native-qualification) | Captured-context and finite admission premises apply. |
 | Is the encoded base zero with a nonzero displacement? | [Zero-base-offset design](Ariadne/zero-base-offset-design.md) | [Source review](Ariadne/zero-base-offset-design.md#decoded-record-and-independent-oracle), [qualification](Ariadne/zero-base-offset-design.md#retained-qualification) | First-profile forms and source-bound acceptance remain distinct from historical provenance. |
 | Did base plus signed displacement wrap? | [Address-wrap design](Ariadne/address-wrap-design.md) | [Implementation plan](../.agents/plans/i5c-address-wrap.md) | W0–W3 qualified in their declared finite/model/native-matrix tiers; W4 product/capture and W5 full qualification pending. |
@@ -90,7 +90,7 @@ implemented repairs and exercised checks from real-Windows qualification.
   — recovery-only artifact, validated frame links and separate report;
   [the investigation contract](Ariadne/investigation-design.md#structural-frame-report-before-dataflow)
   owns its scope. SF0–SF6 are complete within the
-  [2026-10-16 qualified Windows scope](../evidence/Ariadne/frame-structure/20261016/README.md).
+  [2026-10-16 qualified Windows scope](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-structure/20261016/README.md).
 
 - [Frame connections plan: Stage 5.2](../.agents/plans/frame-connections.md)
   — implemented corridor reachability, SCC condensation and bounded example routes
@@ -107,11 +107,11 @@ implemented repairs and exercised checks from real-Windows qualification.
 
 - [Captured indirect-target resolver plan](../.agents/plans/indirect-target-resolution.md)
   — R0–R6 contract, evidence, discovery and native admission, with
-  [2026-10-20 finite qualification](../evidence/Ariadne/indirect-target-resolution/20261020/README.md)
+  [2026-10-20 finite qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/indirect-target-resolution/20261020/README.md)
   and separately identified fresh/retained tiers.
 
 - [Specification synchronization](../.agents/plans/specification-sync.md) —
-  completed finite S3 source/model audit, preserved replay bindings and [qualified scope](../evidence/Ariadne/specification-sync/20261020/README.md); wider/runtime proof boundaries remain separate.
+  completed finite S3 source/model audit, preserved replay bindings and [qualified scope](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/specification-sync/20261020/README.md); wider/runtime proof boundaries remain separate.
 
 - [BAP projection admission and coverage plan](../.agents/plans/completed/bap-projection-admission.md) —
   accepted form validation, capability admission and conservative ordinary
@@ -164,7 +164,7 @@ implemented repairs and exercised checks from real-Windows qualification.
 ### Formal-model, native-tool and evidence guides
 
 - [Ariadne formal model](../Specs/README.md).
-- [Retained Ariadne evidence](../evidence/Ariadne/README.md).
+- [Retained Ariadne evidence](../tests/README.md).
 - [Model-based tests for Ariadne](../mbt/README.md).
 - [Stage E generated MirrorRust replay](../mbt/stage-e/README.md).
 - [Pinned BAP instruction helper](../native/bap/README.md).

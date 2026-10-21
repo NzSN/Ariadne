@@ -43,6 +43,11 @@ Linux numeric admission remain separate work.
 
 The [documentation map](../../../docs/documentation-map.md) is optional navigation.
 
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## Scope and preserved behavior
 
 Deliver `windows-amd64-av-scalar-mov-v1` for the single question **does the selected
@@ -90,7 +95,7 @@ bound assessment interface, without adding a generic hypothesis/provider framewo
 | H2 | Bound assessment API, strict recomputation, 32/32 default output limits and the first-form pilot. |
 | H3 | Native finite corpus, additional unsupported-shape/malformed-input checks, 56 budget combinations and 16 detected implementation mutants. |
 | H4 | Separate JSON/text/DOT schema, explicit CLI modes and atomic publication; 24 prior reports remain byte-identical. |
-| H5 | All 12 acceptance gates pass, including the full investigation/Stage E/minidump regressions. Nine measured fixtures meet the frozen criteria; [source-bound evidence](../../../evidence/Ariadne/i5a-validation.json) and its [manifest](../../../evidence/Ariadne/i5a-evidence-manifest.json) are retained. |
+| H5 | All 12 acceptance gates pass, including the full investigation/Stage E/minidump regressions. Nine measured fixtures meet the frozen criteria; [source-bound evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5a-validation.json) and its [manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i5a-evidence-manifest.json) are retained. |
 
 The [delivery record](../../../docs/Ariadne/zero-address-design.md#historical-source-and-fixture-qualification) gives the exercised
 scope and measurements. The remaining sections preserve each step's acceptance

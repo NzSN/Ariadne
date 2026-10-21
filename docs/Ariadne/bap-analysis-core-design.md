@@ -8,7 +8,7 @@ reaching definitions, slicing, finite stateflow, generated replay and bounded
 completion transport are implemented. The CLI selects native BAP analysis by
 default and retains explicit Rust analysis rollback. P0–P4 admission is accepted
 for the selected finite corpus, with the excluded historical real-Linux clauses
-preserved in the [acceptance decision](../../evidence/Ariadne/bap-admission/p4-acceptance-20261010.json).
+preserved in the [acceptance decision](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/p4-acceptance-20261010.json).
 Implementation contracts, source/API review and source-bound qualification are
 separate evidence; this consolidated design does not renew qualification.
 The [vector admission extension](../../.agents/plans/completed/bap-vector-registers.md) implements
@@ -63,8 +63,8 @@ scopes. Contract validation does not prove an arbitrary lifter or pass correct.
   [analysis SDK setup](../../native/bap-core/README.md) — pinned build and runtime
   prerequisites; [lifter source](../../native/bap/lift.cpp) and
   [projection source](../../src/bap/projection.rs) implement the reviewed boundary.
-- [Retained native refresh](../../evidence/Ariadne/i4-performance-qualification.json),
-  [OCaml foundation record](../../evidence/Ariadne/bap-ocaml-qualification.json) and
+- [Retained native refresh](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i4-performance-qualification.json),
+  [OCaml foundation record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-ocaml-qualification.json) and
   [selected replacement qualification](file-reader-design.md#windows-replacement-capture-and-bounded-query) — separate
   source/tool/corpus decisions and adoption evidence.
 - [Core model](../../Specs/Ariadne.tla),
@@ -88,6 +88,11 @@ real-Linux coverage and its six output hashes; their unexercised/failed records
 remain historical. BAP timing is unlimited, while investigation contracts keep
 their separate fixed budgets. The evidence boundaries below retain those scopes;
 the [documentation map](../documentation-map.md) connects the related work.
+
+Current validation follows the [executable test matrix](../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## Reading map
 
@@ -264,7 +269,7 @@ The [predicate design](justified-branch-pruning-design.md) and
 [caller normal-flow contract](caller-semantic-coverage-design.md) own checked
 MOVAPS normal admission and its scoped qualification. The separate
 [explicit alignment-hypothesis extension](investigation-design.md#explicit-alignment-hypotheses)
-adds a [qualified structural-only opt-in](../../evidence/Ariadne/alignment-hypotheses/20261016/README.md).
+adds a [qualified structural-only opt-in](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/alignment-hypotheses/20261016/README.md).
 Its additive BAP companion preserves the original guard proof and native input
 profile; conditional v2 reports cannot be supplied as completed native analysis.
 
@@ -283,7 +288,7 @@ address base as a possible destination. Native regression and a dedicated mutant
 cover this source-review repair. V4 scalar consumers and the strict profile
 migration checker accept the declared profile without erasing effect changes.
 
-On 2026-10-13, the [source-bound validation record](../../evidence/Ariadne/bap-vector-registers/20261013/report.md)
+On 2026-10-13, the [source-bound validation record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-vector-registers/20261013/report.md)
 passes all applicable root checks in isolated remote WSL, nine pinned native
 producer tests, disagreement checks, six native/capture parity tests, finite
 frame-path native checking, model replay and six vector mutants with seven
@@ -341,7 +346,7 @@ printed instruction looks ordinary.
 
 ## Effects and independent expectations
 
-The [P0 freeze receipt](../../evidence/Ariadne/bap-admission/p0-contract-freeze.json)
+The [P0 freeze receipt](../../tests/bap/fixtures/admission/legacy-source.json)
 binds the original projection sources, installed provider and independent
 expectations, frozen before runtime edits on 2026-10-09. The
 [independent contract](../../tests/bap/fixtures/admission/contract.json) and
@@ -613,7 +618,7 @@ session without automatic Rust fallback.
 
 ## Configurable native request limit
 
-The [T0–T4 execution plan](../../.agents/plans/completed/native-request-budget.md) implements the user-authorized configurable request limit, following the [G5 captured retry](../../evidence/Ariadne/guard-budget-configuration/20261014/README.md). Guard proof budgets and transport request budgets are independent; the larger captured report reached the previous fixed inbound 8 MiB limit.
+The [T0–T4 execution plan](../../.agents/plans/completed/native-request-budget.md) implements the user-authorized configurable request limit, following the [G5 captured retry](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/guard-budget-configuration/20261014/README.md). Guard proof budgets and transport request budgets are independent; the larger captured report reached the previous fixed inbound 8 MiB limit.
 
 `CoreConfig.max_request_bytes` defaults to 8 MiB and accepts caller-selected positive finite values without a default-based ceiling. The CLI option is `--bap-core-max-request-bytes N`. Host enforcement and native input reading both count the complete JSON line including its newline. Native launch receives a nondefault value through `--max-request-bytes DECIMAL`, parsed with checked unsigned-64 arithmetic. Zero, malformed and overflowing values are rejected. The chosen budget does not become an allocation reservation.
 
@@ -650,7 +655,7 @@ ABI equivalence to the packaged runtime is not claimed.
 Source/API assessment, implementation checks and runtime qualification answer
 separate questions. The sections below preserve their dated decisions and
 original JSON/archive links; moving documentation does not refresh a source
-inventory. The [initial integration record](../../evidence/Ariadne/bap-stage1-validation.json)
+inventory. The [initial integration record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-stage1-validation.json)
 retains its missing original Windows capture. Later selected Windows P4 acceptance
 excludes the remaining real-Linux clauses without changing their failed flags.
 Default selection, unlimited timing and transport completion do not resolve
@@ -859,7 +864,7 @@ python3 tools/check_bap_semantics.py --workload-record /new/workload-directory/r
 ```
 
 The default benchmark verifies and materializes the
-[checksum input bundle](../../evidence/Ariadne/bap-windows-workload-case.json).
+[checksum input bundle](../../tests/input/fixtures/workloads/bap-windows-workload-case.json).
 `ARIADNE_PRIORITY4_DUMP` no longer selects it; I4 has its own
 `ARIADNE_I4_WINDOWS_DUMP` override. Skipped or malformed workload evidence cannot
 satisfy full acceptance. Active P4's separately selected 29-start replacement
@@ -867,8 +872,8 @@ and excluded Linux clauses remain defined by its plan and acceptance decision.
 
 ## BAP-only delivery
 
-The [2026-10-01 removal record](../../evidence/Ariadne/bap-only-removal-validation.json)
-and [manifest](../../evidence/Ariadne/bap-only-removal-evidence-manifest.json)
+The [2026-10-01 removal record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-only-removal-validation.json)
+and [manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-only-removal-evidence-manifest.json)
 retain 16/16 gates, 93 stable sources, 16 detected producer/adapter mutants
 (including partial self-move definitions), and eight TLC cases/99 observations
 comparing all nine fields. Its nested Stage E run passed 12 gates over 251
@@ -877,8 +882,8 @@ cases/30 admitted forms, including immediate stores, dword loads/stores and TEST
 Both Stage B inputs and NOT retained their producer slices. The real Linux query
 had 34 starts, 45 edges, a 28-site slice and one obligation: 25 projected sites,
 nine opaque calls/returns, one control disagreement and nine unattempted
-references. [CLI samples](../../evidence/Ariadne/bap-only-cli.csv) and
-[phase samples](../../evidence/Ariadne/bap-only-stage.csv) retain one warm-up,
+references. [CLI samples](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-only-cli.csv) and
+[phase samples](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-only-stage.csv) retain one warm-up,
 five release repeats, spread, RSS and startup/reference/lift/projection/analysis/
 render timings. These checks did not qualify the absent original Windows pin or
 its former 2,000 ms condition. BAP default selection was separately authorized.
@@ -898,8 +903,8 @@ reuse required complete current source/tool inventories. Under its historical
 inclusive 2,000 ms policy, absent/invalid/over-budget evidence could never satisfy
 full exit even when implementation gates passed.
 
-The [repair record](../../evidence/Ariadne/bap-windows-workload-validation.json)
-and [238-entry manifest](../../evidence/Ariadne/bap-windows-workload-evidence-manifest.json)
+The [repair record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-windows-workload-validation.json)
+and [238-entry manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-windows-workload-evidence-manifest.json)
 retain 17/17 implementation gates and 177 stable sources:
 
 | Tier | Historical exercised result |
@@ -919,7 +924,7 @@ dumps/executables were excluded. The final original-corpus flags remain
 `implementationGatesPassed=true`, `stage1ExitPassed=false`,
 `stage2PrerequisiteSatisfied=false`, `defaultPromotionEligible=false`, Windows
 status `unavailable`.
-The [original pin](../../evidence/Ariadne/priority-4-real-capture-case.json) was
+The [original pin](../../tests/input/fixtures/workloads/priority-4-real-capture-case.json) was
 `f13d18cd-9ade-4eff-947c-15a649b636fa.dmp`, 2,028,400 bytes, SHA-256
 `4b3deb70134015ec227b3cf5edf82e1dac0b308b3f19ae62f79cbd4251109e86`;
 entry/seed/producer `0x7ff6451d52d0` / `0x7ff6451d530f` / `0x7ff6451d530b`.
@@ -936,7 +941,7 @@ producer before a four-byte null write. All rounds feed the address computation.
 
 | Bound item | Value |
 | --- | --- |
-| [Active checksum pin](../../evidence/Ariadne/bap-windows-workload-case.json) | [Input archive](../../evidence/Ariadne/bap-windows-workload-inputs.tar.gz): 399,636 bytes, 23 verified entries. |
+| [Active checksum pin](../../tests/input/fixtures/workloads/bap-windows-workload-case.json) | [Input archive](../../tests/input/fixtures/workloads/windows-inputs.tar.gz): 399,636 bytes, 23 verified entries. |
 | Partial dump | 217,936 bytes; SHA-256 `1bd80af7a739471a7026776bfb37cbbe5953d01ad122e7cf7db0392f84da0b0a`. |
 | Entry / fault seed / RCX producer | `0x00007ff7382f4840` / `0x00007ff7382f49b4` / `0x00007ff7382f49b1`. |
 | Function / handler | 379 bytes, 98 reviewed starts; Crashpad revision `7a884c25c84c46352fc6f16ef0a798ece2b77e84`. |
@@ -949,8 +954,8 @@ all captured function bytes against both the PE and byte oracle, branch targets,
 four labels, input/checksum, PID/module and exception/context: a four-byte write
 to zero with RAX/RCX zero. The PE supplies comparison only, never fallback bytes.
 
-The [replacement record](../../evidence/Ariadne/bap-windows-repin-validation.json)
-and [manifest](../../evidence/Ariadne/bap-windows-repin-evidence-manifest.json)
+The [replacement record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-windows-repin-validation.json)
+and [manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-windows-repin-evidence-manifest.json)
 retain 17/17 implementation gates, 178 stable aggregate sources, 59 decision
 controls, nine inspector controls, native integration and five fresh release
 workloads. Result: 98 starts/99 edges/90-site slice/zero obligations, no missing
@@ -983,8 +988,8 @@ summary. Valid evidence reports status `unlimited`, `valid=true`, `targetMet=tru
 while retaining its median. Invalid evidence or implementation failure still
 blocks full exit; operational timeouts/resource limits remain separate.
 
-The [policy record](../../evidence/Ariadne/bap-unlimited-validation.json) and
-[manifest](../../evidence/Ariadne/bap-unlimited-evidence-manifest.json) retain
+The [policy record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-unlimited-validation.json) and
+[manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-unlimited-evidence-manifest.json) retain
 17 gates, 60 controls and 178 stable sources. Native integration/five workloads
 reran; model/mutation/Stage E records were reused only after complete source/tool
 checks. The new median was 3,111.33 ms with unchanged analysis binaries: no
@@ -995,8 +1000,8 @@ I5a's 1,500 ms CLI/10 ms phase limits are separate and were not waived.
 
 ## A0 capability evidence
 
-The first 2026-10-03 [A0 record](../../evidence/Ariadne/bap-stage2-a0-validation.json)
-and [manifest](../../evidence/Ariadne/bap-stage2-a0-evidence-manifest.json) bind
+The first 2026-10-03 [A0 record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-stage2-a0-validation.json)
+and [manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-stage2-a0-evidence-manifest.json) bind
 15 contract/probe files and compiler/helper/header/library identities. At that
 run the prerequisite's 178-source/tool inventory matched. Seven admission tests
 covered envelopes/actions, identity/sequence, unsigned canonical addresses,
@@ -1023,8 +1028,8 @@ term attribution; the handshake exposed only `initialize`, `advance:Visit`,
 `observe`, `reset`. Reset required a clean exit. There was no completion or
 production-native selection at this foundation stage.
 
-The [qualified foundation](../../evidence/Ariadne/bap-ocaml-qualification.json)
-and [327-entry manifest](../../evidence/Ariadne/bap-ocaml-evidence-manifest.json)
+The [qualified foundation](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-ocaml-qualification.json)
+and [327-entry manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-ocaml-evidence-manifest.json)
 bind 199 stable sources, two equal helper builds/observations and seven actual
 code mutations rejected by intended assertions. Six native test groups cover
 ordinary/conditional/call/jump/self-loop/indirect/terminal input, missing/decode
@@ -1036,7 +1041,7 @@ Separate `sdkQualified`, `helperBuildQualified`, `nativeStateExchangeQualified`,
 `transportLifecycleQualified`, `bootstrapMutationChecksPassed` and stability
 compose `a0ExitPassed=true`; `stage2Qualified=false` remained correct.
 
-The [earlier formatting-blocked record](../../evidence/Ariadne/bap-ocaml-history/2026-10-03-format-blocked/bap-ocaml-qualification.json)
+The [earlier formatting-blocked record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-ocaml-history/2026-10-03-format-blocked/bap-ocaml-qualification.json)
 is preserved. After explicit user approval, only MirrorRust's
 `tests/protocol.rs` was formatted with Rust 2021; fresh root/effects/minidump/
 Stage E/producer/A0 checks then passed. The failed aggregate was not relabeled.
@@ -1055,10 +1060,10 @@ Default output matches explicit BAP, while explicit Rust remains functional.
 
 | Retained record | Scope |
 | --- | --- |
-| [2026-10-04 adoption](../../evidence/Ariadne/bap-core-history/2026-10-04-adoption/bap-core-qualification.json) | Explicit-native candidate first passed 19 gates; adoption and its archive/manifest remain byte-identical in history. |
-| [Pre-I4 refresh](../../evidence/Ariadne/bap-core-history/2026-10-05-before-i4-repin/bap-core-qualification.json) | Original archive/manifest preserved before the I4 pin refresh. |
-| [2026-10-05 standalone](../../evidence/Ariadne/bap-core-qualification.json), [archive](../../evidence/Ariadne/bap-core-evidence.tar.gz), [manifest](../../evidence/Ariadne/bap-core-evidence-manifest.json) | Twenty gates, 632 stable sources, 1,355 verified entries; 13 protocol/snapshot controls, two equal clean builds, native/capture/investigation/stateflow/root/Clippy and producer/Stage E regressions. Its inventory is historical. |
-| [2026-10-07 I4 aggregate](../../evidence/Ariadne/i4-performance-qualification.json) | Newer 20-gate/712-source native refresh at `records.regressions.records.native-core-stage-e-input-bap-regressions`; its `records.stage1-regression` is the separate producer refresh. |
+| [2026-10-04 adoption](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-core-history/2026-10-04-adoption/bap-core-qualification.json) | Explicit-native candidate first passed 19 gates; adoption and its archive/manifest remain byte-identical in history. |
+| [Pre-I4 refresh](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-core-history/2026-10-05-before-i4-repin/bap-core-qualification.json) | Original archive/manifest preserved before the I4 pin refresh. |
+| [2026-10-05 standalone](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-core-qualification.json), [archive](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-core-evidence.tar.gz), [manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-core-evidence-manifest.json) | Twenty gates, 632 stable sources, 1,355 verified entries; 13 protocol/snapshot controls, two equal clean builds, native/capture/investigation/stateflow/root/Clippy and producer/Stage E regressions. Its inventory is historical. |
+| [2026-10-07 I4 aggregate](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i4-performance-qualification.json) | Newer 20-gate/712-source native refresh at `records.regressions.records.native-core-stage-e-input-bap-regressions`; its `records.stage1-regression` is the separate producer refresh. |
 
 `artifacts/0/default-path-smoke-check.json` binds a successful no-backend-flag,
 no-helper-directory-override invocation to the same final release executable
@@ -1070,11 +1075,11 @@ real Linux 1,566.21/2,248.97 and Windows 2,967.88/5,020.08. They establish no
 current performance comparison; later preparation/transport changes have their
 own evidence. This is Linux-hosted workspace qualification including Windows
 captures, not packaged cross-platform release or universal refinement.
-See the [evidence guide](../../evidence/Ariadne/README.md) for archive interpretation.
+See the [evidence guide](../../tests/README.md) for archive interpretation.
 
 ## Documentation audit
 
-The [2026-10-09 audit receipt](../../evidence/Ariadne/bap-documentation-audit.json)
+The [2026-10-09 audit receipt](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-documentation-audit.json)
 is a retained identity/documentation check, not fresh runtime qualification.
 It inventoried 111 BAP-related Markdown files; navigation then covered 133
 connected documents/2,360 links. The 41-case corpus and 107-file Rust layout
@@ -1088,8 +1093,8 @@ above: respectively 20 gates/712 sources, 17/255, 18/295 and 14/286. Producer
 `stage2Qualified=false` limits that campaign and does not override native adoption.
 Twelve installed tool hashes and compiled provider pins matched; dependency
 manifest was `a087ecfb136795d30f6c3861d9e4003f0ed9f457db2b17561f0417551bf97854`.
-The [I4 archive](../../evidence/Ariadne/i4-performance-evidence.tar.gz) and
-[manifest](../../evidence/Ariadne/i4-performance-evidence-manifest.json) verified
+The [I4 archive](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i4-performance-evidence.tar.gz) and
+[manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/i4-performance-evidence-manifest.json) verified
 all 3,625 members including exact compressed nested archives. Older standalone
 inventories remained historical despite matching helper binaries.
 
@@ -1107,7 +1112,7 @@ applicable qualification; this consolidated guide is not a frozen source record.
 
 ## Admission checkpoint
 
-The [initial 2026-10-10 checkpoint](../../evidence/Ariadne/bap-admission/checkpoint.json)
+The [initial 2026-10-10 checkpoint](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/checkpoint.json)
 retains P0–P3 delivery and **unaccepted P4**. The installed runtime/bridge and
 isolated SDK were reused without rebuilding BAP or installing another SDK.
 The four new forms had 13 boundary encodings on Linux/Windows, 104 independent
@@ -1136,7 +1141,7 @@ not a promise that temporary files persist.
 The first extended mutant removed the prefix guard. The unchanged corpus failed
 at the LOCK rejection (exit 101, successful compile), but its custom message was
 only `"lock"`; the harness required literal `assertion`. The
-[prefix failure log](../../evidence/Ariadne/bap-admission/prefix-mutation.log)
+[prefix failure log](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/prefix-mutation.log)
 and checkpoint retain `NOT ACCEPTED`. The classifier was repaired for that exact
 assertion without crediting build failure or timeout.
 The resumed campaign then rejected its first 18 mutants and correctly stopped
@@ -1163,10 +1168,10 @@ mutation repairs; earlier failed receipts remain failures.
 
 ## Admission resume
 
-The [local resume report](../../evidence/Ariadne/bap-admission/resume-20261010/report.json),
-[later remote report](../../evidence/Ariadne/bap-admission/remote-20261010/report.json),
-[2,959-member manifest](../../evidence/Ariadne/bap-admission/remote-20261010/evidence-manifest.json)
-and [documentation-only follow-up](../../evidence/Ariadne/bap-admission/remote-20261010/documentation-follow-up.json)
+The [local resume report](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/resume-20261010/report.json),
+[later remote report](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/remote-20261010/report.json),
+[2,959-member manifest](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/remote-20261010/evidence-manifest.json)
+and [documentation-only follow-up](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/remote-20261010/documentation-follow-up.json)
 retain separate attempts and identities. Source-only transfers and ten named
 tool/manifest files were hash-verified; customer captures stayed external.
 
@@ -1227,7 +1232,7 @@ The later user-selected `dump_79938FAE443F4021A4F7B6C215` Windows derivative has
 producer. Its [qualification](file-reader-design.md#windows-replacement-capture-and-bounded-query) closes the active
 source/fixture, Rust release-runtime, native-default, product and fixed-budget
 clauses with a distinct six-output baseline; all 17 investigation gates pass.
-The [2026-10-10 user decision](../../evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
+The [2026-10-10 user decision](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-admission/p4-acceptance-20261010.json)
 accepts that scope and excludes remaining real-Linux clauses. Eighteen historical
 hashes reproduce, while the six old Linux hashes/capture tier stay false or
 unexercised. Optional full Scanner Rust repetitions and automatic external
@@ -1265,16 +1270,16 @@ and the original retry's subsequent guard-evidence limit.
 
 ## Request-budget validation, 2026-10-14
 
-The [completed T0–T4 ledger](../../.agents/plans/completed/native-request-budget.md) and [source-bound qualification](../../evidence/Ariadne/native-request-budget/20261014/README.md) retain 686 matching source/tool/document hashes and 35 archived files. Fresh remote WSL checks pass: 191 default/46 core-only tests, format/Clippy/layout, 17 native kernels, nine capture and two frame-path tests, plus 14 Python contract controls. Five new transport tests exercise exact newline-inclusive host/direct-native bounds, malformed/overflow/full-unsigned launches, legacy compatibility, invalid capabilities/ready, child cleanup, unchanged response limits and a valid request above 8 MiB. Independent read-only review found no concrete issue. Model bodies remain unchanged and their retained G5 hashes are verified; no fresh model/mutation, release/performance or universal refinement campaign is credited.
+The [completed T0–T4 ledger](../../.agents/plans/completed/native-request-budget.md) and [source-bound qualification](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/native-request-budget/20261014/README.md) retain 686 matching source/tool/document hashes and 35 archived files. Fresh remote WSL checks pass: 191 default/46 core-only tests, format/Clippy/layout, 17 native kernels, nine capture and two frame-path tests, plus 14 Python contract controls. Five new transport tests exercise exact newline-inclusive host/direct-native bounds, malformed/overflow/full-unsigned launches, legacy compatibility, invalid capabilities/ready, child cleanup, unchanged response limits and a valid request above 8 MiB. Independent read-only review found no concrete issue. Model bodies remain unchanged and their retained G5 hashes are verified; no fresh model/mutation, release/performance or universal refinement campaign is credited.
 
-The [original caller comparison](../../evidence/Ariadne/native-request-budget/20261014/artifacts/probe-expanded/preparation-outcome.json) initializes its 4,764-site capture and 9,001,701-byte guard report successfully with `max_request_bytes=33554432`; the default still rejects it with `core request oversized`. Responses remain bounded at 8 MiB. The report retains incomplete candidate coverage and unknown MOVAPS alignment. The retry performs native initialization only, so it does not qualify core/path results.
+The [original caller comparison](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/native-request-budget/20261014/artifacts/probe-expanded/preparation-outcome.json) initializes its 4,764-site capture and 9,001,701-byte guard report successfully with `max_request_bytes=33554432`; the default still rejects it with `core request oversized`. Responses remain bounded at 8 MiB. The report retains incomplete candidate coverage and unknown MOVAPS alignment. The retry performs native initialization only, so it does not qualify core/path results.
 
 For a 32 MiB request budget, add `--bap-core-max-request-bytes 33554432` to the native CLI command, or set `CoreConfig.max_request_bytes = 32 * 1024 * 1024` before initialization. Guard evidence, discovery and frame recovery budgets remain independent and must describe the actual captured query. The immutable build identity remains source-bound; its runtime budget is separately negotiated and recorded.
 
 ## Source-bound caller completion, 2026-10-19
 
 The [S6 contract](caller-semantic-coverage-design.md#s6-bounded-completion-continuation-2026-10-19)
-and [qualified corpus](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md)
+and [qualified corpus](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/caller-semantic-coverage/20261019/README.md)
 add negotiated bitmap completion while preserving ordinary replay. Exact original
 caller/callee inputs finish with full native/Rust state equality; all definition
 rows have independent checks. RPO and shared exact sets retain every possible

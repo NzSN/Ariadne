@@ -1,0 +1,111 @@
+{
+  "schema": "ariadne.bap-windows-workload-case/v1",
+  "id": "crashpad-windows-checksum-98-v1",
+  "captureKind": "controlled-crashpad-windows",
+  "description": "Native Windows AMD64 Crashpad capture of a controlled 98-instruction checksum/loop/branch workload, analyzed by Ariadne on Linux.",
+  "capture": {
+    "sha256": "1bd80af7a739471a7026776bfb37cbbe5953d01ad122e7cf7db0392f84da0b0a",
+    "bytes": 217936,
+    "platform": "windows",
+    "architecture": "amd64",
+    "dumpMode": "partial",
+    "processId": 11192,
+    "exceptionThread": 2764,
+    "exceptionCode": "0xc0000005",
+    "codeCapture": {
+      "address": "0x00007ff7382f4840",
+      "size_bytes": 379,
+      "bytes_hex": "4989ca4989d3498b0241b9000000004d8b024c01c048f7d0488d400148894424084c8b4424084b8d04404c01c0488d40034d8b42084c01c048f7d0488d400248894424084c8b4424084b8d4440014c01c0488d40044d8b42104c01c048f7d0488d400348894424084c8b4424084b8d4440024c01c0488d40054d8b42184c01c048f7d0488d400448894424084c8b4424084b8d4440034c01c0488d40064d8b42204c01c048f7d0488d400548894424084c8b4424084b8d4440044c01c0488d40074d8b42284c01c048f7d0488d400648894424084c8b4424084b8d4440054c01c0488d40084d8b42304c01c048f7d0488d400748894424084c8b4424084b8d4440064c01c0488d40094d8b42384c01c048f7d0488d400848894424084c8b4424084b8d4440074c01c0488d400a4f8b04ca4c01c049ffc141b8040000004d39c175eb41b8010000004c85c07506488d4007eb04488d400b48894424104c8b4424104d8d401149f7d049ffc04d01d84c89c04889c1c70105000000c3",
+      "sha256": "9561b2a084bbbec07af11d5d80a9505b82d9354a4afd59813d6d00093835e00b",
+      "fully_captured": true,
+      "holes": [],
+      "conflicts": [],
+      "contributors": [
+        {
+          "source": "MemoryList",
+          "descriptor_index": 74,
+          "address": "0x7ff7382f4840",
+          "size_bytes": 256,
+          "file_offset": 138560
+        },
+        {
+          "source": "MemoryList",
+          "descriptor_index": 74,
+          "address": "0x7ff7382f4940",
+          "size_bytes": 123,
+          "file_offset": 138816
+        }
+      ]
+    },
+    "inputCapture": {
+      "address": "0x00007ff73833d050",
+      "size_bytes": 64,
+      "bytes_hex": "0300000000000000050000000000000008000000000000000d000000000000001500000000000000220000000000000037000000000000005900000000000000",
+      "sha256": "040b868b63b191cb467d7378a2b7d2997e091449b3e4eb544cbf432619ab9ab3",
+      "fully_captured": true,
+      "holes": [],
+      "conflicts": [],
+      "contributors": [
+        {
+          "source": "MemoryList",
+          "descriptor_index": 87,
+          "address": "0x7ff73833d050",
+          "size_bytes": 64,
+          "file_offset": 145936
+        }
+      ]
+    }
+  },
+  "query": {
+    "entry_va": "0x00007ff7382f4840",
+    "seed_va": "0x00007ff7382f49b4",
+    "producer_va": "0x00007ff7382f49b1"
+  },
+  "expectations": {
+    "decodedStarts": 98,
+    "functionBytes": 379,
+    "addressRegister": "rcx",
+    "producerInstruction": "mov rcx, rax",
+    "faultInstruction": "mov dword ptr [rcx], 5",
+    "faultDataAddress": "0x0",
+    "checksum": "0x4bea2",
+    "windowsBudgetMs": null,
+    "correctnessPremise": "Reviewed byte recipe and independent input/checksum/capture inspection; no executed-history claim.",
+    "timingPolicy": "unlimited",
+    "timingPolicyAuthorization": "User explicitly requested raising the BAP workload limit to unlimited after reviewing the 10.67 s result."
+  },
+  "companion": {
+    "sha256": "00906b04af5dfcfff66b15657e81c08152f3e49479820bf084123c41286fc89e",
+    "bytes": 428032,
+    "module": {
+      "index": 0,
+      "name": "C:\\Users\\ayden\\AppData\\Local\\Temp\\ariadne-crashpad-bap-workload-v2-20261003\\source\\out\\Release\\ariadne_crash_demo.exe",
+      "base_address": "0x00007ff7382f0000",
+      "size_of_image": 462848,
+      "timestamp": 1790998960,
+      "checksum": 0,
+      "preferred_pe_image_base": "0x0000000140000000",
+      "entry_rva": "0x0000000000004840",
+      "fault_rva": "0x00000000000049b4"
+    },
+    "functionBoundaries": {
+      "entry": "0x00007ff7382f4840",
+      "producer": "0x00007ff7382f49b1",
+      "fault": "0x00007ff7382f49b4",
+      "end": "0x00007ff7382f49bb"
+    },
+    "identityScope": "Exact supplied executable digest plus captured whole-function comparison; no fallback."
+  },
+  "inputArchive": {
+    "path": "tests/input/fixtures/workloads/windows-inputs.tar.gz",
+    "sha256": "3a8453ef462d27826a0da7c1cd38f73a06efdb85ba530623279d8c9d54441f84",
+    "bytes": 399636,
+    "captureMember": "capture.dmp",
+    "companionMember": "ariadne_crash_demo.exe",
+    "entries": {
+      "capture.dmp": "1bd80af7a739471a7026776bfb37cbbe5953d01ad122e7cf7db0392f84da0b0a",
+      "ariadne_crash_demo.exe": "00906b04af5dfcfff66b15657e81c08152f3e49479820bf084123c41286fc89e",
+      "witness.json": "b408eaa7e8700127ca41ec9aee85a7d8241b8c1314cd785d2c83347f373605b2"
+    }
+  }
+}

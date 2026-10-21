@@ -27,7 +27,7 @@ Prepared 2026-10-01 against `518ed9e`. Design:
 The [Stage E delivery record](../../../docs/Ariadne/typed-replay-design.md#finite-corpus-and-claim-boundary) documents the result.
 
 Status **complete, 2026-10-01**, within the finite conformance/report scope.
-The [retained completion record](../../../evidence/Ariadne/stage-e-completion-validation.json)
+The [retained completion record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/stage-e-completion-validation.json)
 passes all 12 gates with stable source hashes: 32 generated inputs, 64 complete
 traces, 326 matched observations, 15 genuine engine mutation mismatches,
 verifier/recovery handoffs and independently parsed CLI reports. The minidump
@@ -35,6 +35,11 @@ regression record is reused only after every bound source hash matches.
 All six implementation steps below are delivered. Scope update 2026-10-02:
 Stage D is [retired](../../../docs/Ariadne/semantic-assurance.md); Stage F remains separate.
 The retained record above predates the qualification-runner changes.
+
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
 
 ## Acceptance
 

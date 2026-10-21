@@ -12,6 +12,11 @@
 
 **What remains unresolved.** Exact vector values, general SIMD, additional scalar/address/target precision, unwind and successful full-dump enumeration are excluded. The retry can uncover another independent stop.
 
+Current validation follows the [executable test matrix](../../../tests/README.md). Dated run
+results below are historical; their Git links do not establish a current pass.
+Former qualification-archive retention/publication clauses are retired;
+current validation uses executable tests and disposable run products.
+
 ## Stages and acceptance
 
 | Stage | Owner / work | Acceptance |
@@ -22,10 +27,10 @@
 | X3 | Root orchestrates remote qualification. | Format/default/core-only/Clippy/layout, affected pinned producer/native suites, independent oracle, meaningful source mutations and existing generated replay; source/tool hashes and distinct failures retained. |
 | X4 | Root retries original captured frame pair and reconciles documentation. | Same dump hash, capture-only roots/premises/declared budgets; locate remaining gaps without inventing semantics or claiming executed history. |
 
-All builds run in task-private WSL on `windows-dev`. Reuse verified caches with separate replay/mutation target directories and check free disk. Prefer focused loops before full-dump runs. Retain all prior reports and archives as historical; new evidence lives under `evidence/Ariadne/bap-shift-width/20261014/`.
+All builds run in task-private WSL on `windows-dev`. Reuse verified caches with separate replay/mutation target directories and check free disk. Prefer focused loops before full-dump runs. Retain all prior reports and archives as historical; new evidence lives under `https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-shift-width/20261014/`.
 
 ## Execution checkpoint, 2026-10-14
 
-[Validation](../../../evidence/Ariadne/bap-shift-width/20261014/validation.json) binds the original red loop, independent width/count/origin controls, exact pinned-library probe, v6/v7 profile migration, affected root/native checks, six meaningful source mutants, 27 model scenarios and 330 replay observations. All Cargo/native/model compilation ran remotely. The canonical [design's dated entry](../../../docs/Ariadne/bap-shift-count-design.md#validation-and-dated-execution) owns the exact tier counts, review and retained failed attempts.
+[Validation](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-shift-width/20261014/validation.json) binds the original red loop, independent width/count/origin controls, exact pinned-library probe, v6/v7 profile migration, affected root/native checks, six meaningful source mutants, 27 model scenarios and 330 replay observations. All Cargo/native/model compilation ran remotely. The canonical [design's dated entry](../../../docs/Ariadne/bap-shift-count-design.md#validation-and-dated-execution) owns the exact tier counts, review and retained failed attempts.
 
 The captured XORPS projects with coarse vector effects and retained legacy upper-half origins. No opcode bypass, width padding, count masking/truncation, precise vector aggregate kill or new scalar/address/target precision was introduced. General `Unknown` data keeps its prior opaque policy. The original full frame-pair retry now encounters the 4 MiB guard-evidence cap rather than operand-width admission; a 32 MiB request is rejected by the existing profile contract. No final full-dump query/receipt or path qualification follows. All scoped stages are complete, with those independent limits retained. No commit/push was performed.
