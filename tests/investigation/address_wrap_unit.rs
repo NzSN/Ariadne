@@ -275,3 +275,41 @@ fn w3_all_16_supplied_budget_cases_match_the_frozen_oracle() {
         26
     );
 }
+
+/// Select one existing independent expectation without altering the W3 matrix.
+/// The campaign pins this observer before compiling controls and mutations.
+#[test]
+#[ignore = "requires an explicit frozen I5c mutation observer case"]
+fn w5_selected_frozen_mutation_case() {
+    let name = std::env::var("ARIADNE_I5C_MUTATION_CASE").unwrap();
+    println!("I5C_W5_OBSERVER {}", serde_json::json!({"case": name}));
+    if name == "binding:receipt-bytes" {
+        let mut bound = bound_raw_fixture("mov32mi-upper");
+        bound
+            .receipt
+            .as_mut()
+            .unwrap()
+            .bytes_hex
+            .replace_range(0..2, "90");
+        assert!(
+            assess_address_wrap(
+                &bound,
+                AddressWrapLimits {
+                    max_evidence: 0,
+                    max_claims: 0,
+                }
+            )
+            .is_err(),
+            "invalid receipt must be rejected before zero budgets"
+        );
+        return;
+    }
+    let row = case(&name);
+    let bound = match row["harness"].as_str().unwrap() {
+        "synthetic-capture" => bound_raw_fixture(&name),
+        "bound-unit" => supplied_bound_unit(&row),
+        other => panic!("unsupported frozen harness: {other}"),
+    };
+    let result = assess_address_wrap(&bound, oracle_limits(&row)).unwrap();
+    assert_frozen_assessment(&result, &row);
+}

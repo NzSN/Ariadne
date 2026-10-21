@@ -19,7 +19,8 @@
 
 - [I5c address-wrap design](docs/Ariadne/address-wrap-design.md) and
   [implementation plan](.agents/plans/i5c-address-wrap.md) — selected next fault-time
-  arithmetic assessment; all runtime/model/capture qualification is pending.
+  arithmetic assessment; W0–W3 have recorded finite qualification, while W4
+  product/capture gates and W5 full qualification remain pending.
 
 - [I5b machine-code debugging contracts](docs/Ariadne/zero-base-offset-design.md) and
   [qualification](docs/Ariadne/zero-base-offset-design.md#retained-qualification) — exact zero-base-plus-displacement

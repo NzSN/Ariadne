@@ -9,15 +9,16 @@ from i5b_contract import ROOT,environment,sha,sources
 
 ZERO='src/investigation/zero_base_offset.rs'
 OLD='src/investigation/zero_address.rs'
+SCALAR='src/investigation/scalar_base_displacement.rs'
 CORPUS='independent_corpus_covers_six_forms_and_admission_negatives'
 BUDGET='budgets_binding_and_strict_decoding_preserve_unknown_or_errors'
 MUTATIONS=[
  ('nonzero-base-as-zero',CORPUS,[(ZERO,'d.value == Some(0)','d.value == Some(1)')]),
  ('zero-displacement-as-offset',CORPUS,[(ZERO,'d.displacement.is_some_and(|n| n != 0)','d.displacement.is_some_and(|n| n == 0)')]),
  ('effective-zero-as-base-zero',CORPUS,[(ZERO,'d.value == Some(0)','d.address == Some(0)')]),
- ('index-as-encoded-base',CORPUS,[(ZERO,'r.base.as_deref().and_then(gpr_bank)','r.base.as_deref().or(r.index.as_deref()).and_then(gpr_bank)'),(ZERO,'if r.index.is_some()','if false')]),
- ('ignore-bil-displacement','decoded_bil_disagreement_and_missing_receipt_are_unknown',[(ZERO,'x.constant != r.displacement as u64','false')]),
- ('ignore-decoder-identity','decoded_bil_disagreement_and_missing_receipt_are_unknown',[(ZERO,'r.decoder_sha256.is_none()','false')]),
+ ('index-as-encoded-base',CORPUS,[(SCALAR,'.base\n        .as_deref()','.base\n        .as_deref().or(r.index.as_deref())'),(SCALAR,'if r.index.is_some()','if false'),(SCALAR,'x.terms.len() != 1','false'),(SCALAR,'x.terms[0].coefficient != 1','false')]),
+ ('ignore-bil-displacement','decoded_bil_disagreement_and_missing_receipt_are_unknown',[(SCALAR,'x.constant != r.displacement as u64','false')]),
+ ('ignore-decoder-identity','decoded_bil_disagreement_and_missing_receipt_are_unknown',[(SCALAR,'r.decoder_sha256.is_none()','false')]),
  ('drop-displacement',CORPUS,[(OLD,'let mut address = expression.constant;','let mut address = 0u64;')]),
  ('missing-register-zero-fill',CORPUS,[(OLD,'if let Some(value) = fields.get(format!("reg:{reg}").as_str()) {','if let Some(value) = Some(fields.get(format!("reg:{reg}").as_str()).unwrap_or(&0)) {')]),
  ('thread-context-substitution',CORPUS,[('src/input/fault_context.rs','let decoded = metadata.exception.as_ref().map(|e| &e.registers);','let decoded = metadata.threads.first().map(|e| &e.registers);')]),

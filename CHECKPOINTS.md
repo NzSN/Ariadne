@@ -17,6 +17,25 @@
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
+## 2026-10-21 — I5c W4/W5 execution preparation, gates still pending
+
+The [canonical execution guide](docs/Ariadne/address-wrap-design.md#w4w5-execution-preparation-2026-10-21)
+and [preparation record](evidence/Ariadne/address-wrap/20261021/w4-w5-preparation/README.md)
+add the twelve-control CLI runner, eight-case Windows capture wrapper, 24-mutant
+driver, exact 666-output comparator, retained-runtime exporter and aggregate
+qualification/sealing tooling. Local Python controls, source-seam checks,
+formatting and layout pass; these are preparation evidence only.
+
+Fresh stream verification authenticates all 2,713 W1 archive members and all
+666 original output payloads, with the original baseline digest and 36 retained
+CLI parity rows preserved. Current-output comparison remains unexercised.
+Cargo tests and Clippy stop at the missing offline `minidump` package. Native
+helpers/SDK/runtime, the dependency snapshot and eight required working-tree
+LFS inputs remain unavailable. Historical controller paths identify the retained
+campaign layout but do not establish an accessible qualification host.
+No new native analysis, model execution, capture, compiled mutation, replay or
+timing acceptance is claimed; W4/W5 and full I5c remain pending.
+
 ## 2026-10-21 — I5c binding, public pilot and full matrix qualified
 
 The separate [W1](evidence/Ariadne/address-wrap/20261020/w1/README.md),

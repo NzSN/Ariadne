@@ -195,7 +195,8 @@ original bytes and replay bindings.
 
 The address-wrap model was added and qualified separately on 2026-10-20:
 its W0 record binds 140 independent oracle rows, 52 scenarios and the exact
-typechecking/TLC tier. W1 is implemented with tests pending; W2–W5 and runtime
+typechecking/TLC tier. W1–W3 now have their separate recorded binding, pilot and
+finite/native matrix qualification; W4 product/capture gates and W5 full
 acceptance remain pending. Its exact two model files received fresh global typing in the later S3 suite; the W0 model/oracle tier remains separate. Retired ISA models and historical Lean research are outside this audit. Earlier source-bound records retain their hashes and qualification scope;
 changing a model or its comments does not refresh those records.
 

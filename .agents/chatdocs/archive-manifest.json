@@ -1,7 +1,7 @@
 {
   "archived": "2026-10-16",
   "scope": "Conversation presentation archive; canonical designs stay in docs/ and plan owners now live in .agents/plans/. No new analysis or qualification.",
-  "report_count": 37,
+  "report_count": 38,
   "markdown_html_pairs_including_index": 21,
   "source_session": "01a12ddc-4e59-7cb2-b5aa-67a8e522c597",
   "recovered_reports": [
@@ -840,12 +840,12 @@
       "sha256": "2667f3af9200452de3e195dc17664344a094f718310fb48d7527f5a02999ac33"
     },
     "ariadne-reports-index.html": {
-      "bytes": 14082,
-      "sha256": "98061965d46f9a2487efb5d73318eac1d4edf27c2b6528a69e080c805723808e"
+      "bytes": 14355,
+      "sha256": "83076f2c50901286891f8c2ed14ef9e4db836ff1754f6908ad7df1adf4181d00"
     },
     "ariadne-reports-index.md": {
-      "bytes": 8149,
-      "sha256": "27f1b04cd64da1eff217a2fdb3ab983b2afbf1b2fc3553b8ff6083a5e5fc8da7"
+      "bytes": 8369,
+      "sha256": "19737206284e3a0046a299e9f9b962be647bbb36c652538184779038008720c5"
     },
     "ariadne-resolver-structural-types-20261015.html": {
       "bytes": 32858,
@@ -990,10 +990,14 @@
     "ariadne-open-plans-20261019/manifest-metadata-correction-20261021.json": {
       "bytes": 1936,
       "sha256": "32db0c8ba43f7dc412ccb44735b1316d7dfc0192df4bf2b9cc04207117e6f771"
+    },
+    "ariadne-remaining-work-20261021.html": {
+      "bytes": 14479,
+      "sha256": "2b38aab44e2a5d5bc3c991b8fc7ecf8f4a009343b1a0599e0b96ec5bfb33b4da"
     }
   },
   "directory": ".agents/chatdocs/",
-  "html_documents_including_index": 38,
+  "html_documents_including_index": 39,
   "markdown_documents_including_index": 22,
   "source_review_documents": [
     {
@@ -1023,13 +1027,13 @@
       "canonical_markdown": ".agents/plans/frame-structure-report.md",
       "canonical_sha256": "7866d392580c883b1cece1438eb29476cfb0485f1a880c6f6ac7877a43b14a76",
       "source_revision": "6192dee19a5b2f133177a21187952e28d603c2d9",
-      "scope": "Planning only; canonical investigation design and SF0\u2013SF6 plan linked, all implementation/qualification pending. No runtime or model code built or changed.",
+      "scope": "Planning only; canonical investigation design and SF0–SF6 plan linked, all implementation/qualification pending. No runtime or model code built or changed.",
       "validation": "74 connected documents, 73 context sections, 2148 local links; scoped diff hygiene and rendered local links/source hash checked.",
       "original_canonical_markdown": "Plans/frame-structure-report.md",
       "original_canonical_sha256": "02bbd14e9f735c7faea0fc97196a3674c2dd14900f6e2539e3d47712bbe86dfa",
       "current_canonical_sha256": "3b4e80b5f492d5563a2e8775691ad313c220b04dd96ca1e81b6a174fc731e53c",
       "canonical_updated": "2026-10-16",
-      "canonical_status": "SF0\u2013SF6 complete in the recorded finite scope. canonical_sha256 remains the historical presentation-source hash."
+      "canonical_status": "SF0–SF6 complete in the recorded finite scope. canonical_sha256 remains the historical presentation-source hash."
     },
     {
       "html": "ariadne-structural-plan-hard-cases-20261016.html",
@@ -1037,7 +1041,7 @@
       "source_revision": "6192dee19a5b2f133177a21187952e28d603c2d9",
       "plan": ".agents/plans/frame-structure-report.md",
       "plan_sha256": "7866d392580c883b1cece1438eb29476cfb0485f1a880c6f6ac7877a43b14a76",
-      "scope": "Explanation of planned finite recovery, unknowns and failure limits. SF0\u2013SF6 remain pending; no source/model/build/dump execution changes.",
+      "scope": "Explanation of planned finite recovery, unknowns and failure limits. SF0–SF6 remain pending; no source/model/build/dump execution changes.",
       "validation": "Local links/anchors and unique HTML IDs checked.",
       "original_plan": "Plans/frame-structure-report.md",
       "original_plan_sha256": "02bbd14e9f735c7faea0fc97196a3674c2dd14900f6e2539e3d47712bbe86dfa",
@@ -1135,7 +1139,7 @@
       },
       "qualification": "evidence/Ariadne/frame-question/20261019/README.md",
       "qualification_archive_sha256": "3a051719957d3c373b074e4187e557a822e475b2a3dba65ae85f716139bebdf0",
-      "scope": "Presentation refresh only: seven unfinished ledgers, five completed-stage ledgers including Stage 5.2 FC0\u2013FC6, and the separate fresh-source guard-coverage follow-up. Earlier snapshots and qualification evidence remain unchanged.",
+      "scope": "Presentation refresh only: seven unfinished ledgers, five completed-stage ledgers including Stage 5.2 FC0–FC6, and the separate fresh-source guard-coverage follow-up. Earlier snapshots and qualification evidence remain unchanged.",
       "validation": "165 local references and fragments in four presentation/index files resolve. Current HTML IDs are unique; seven open and five completed plan hashes match local commit feecc34. Historical qualification and prequalification snapshot bytes are preserved. No external HTTP reachability, visual inspection or new runtime qualification is claimed.",
       "completed_plan_count": 5,
       "completed_plan_sha256": {
@@ -1369,7 +1373,7 @@
       "html": "ariadne-open-plans-20261019/index.html",
       "date": "2026-10-21",
       "source_revision": "12673307f5939f3a982877423c2606bdf7572c47",
-      "source_state": "Uncommitted working-tree navigation after published S3 and I5c W0\u2013W3 records; no commit/push, remote parity or new validation credit.",
+      "source_state": "Uncommitted working-tree navigation after published S3 and I5c W0–W3 records; no commit/push, remote parity or new validation credit.",
       "canonical_plan_index": ".agents/plans/README.md",
       "canonical_plan_index_sha256": "98a4f7819bc53d32bdd80d77989e19f17a751daa98ca1f24418c1eebeba45cd3",
       "open_plan_count": 2,
@@ -1466,6 +1470,49 @@
       "validation": "Twelve current plan hashes,2open/10completed counts, exact prior-snapshot bytes, all current archive file identities, exact retained prior metadata and unchanged corrected-entry source bytes, local references/fragments, HTML structure and uniqueIDs checked in a temporary overlay. No browser launch/visual inspection or new runtime/model/build qualification.",
       "corrected_preexisting_metadata_entries": 2,
       "validation_local_references": 223
+    },
+    {
+      "html": "ariadne-remaining-work-20261021.html",
+      "date": "2026-10-21",
+      "source_revision": "3785779882eaac376ec03f0313c99fe68aa214a9",
+      "scope": "Archival presentation of the remaining-work explanation from this conversation; canonical sources unchanged; no new runtime/model/capture/release qualification.",
+      "canonical_source_sha256": {
+        ".agents/plans/README.md": "98a4f7819bc53d32bdd80d77989e19f17a751daa98ca1f24418c1eebeba45cd3",
+        ".agents/plans/i5c-address-wrap.md": "673a93ecb31319d62e8ca2dc2941f7010ab0cb5a630e00092341a508f3b1fb97",
+        ".agents/plans/investigation-layer.md": "a1bc640746fc902a8638457142fc7a06299b64048f867b36394dc00942ec43a6",
+        "docs/Ariadne/address-wrap-design.md": "2a0842081c0eb52b2bad6cc659eb3342c5998fc967d7845abea9b082dd68cc28",
+        "docs/Ariadne/semantic-assurance.md": "d0603adf75e147899a4129da0d2595cf28dcc4bcb806597fc6b8eda51b7aff7e",
+        "ROADMAP.md": "aa31a805667fdc66e518e5974bf5be21087ab4843b42b5eb76ea6107d102f30d",
+        "CHECKPOINTS.md": "ad9de2c69569a95513f847d60958d66c8c3ae62081953abe6a96e23517b3d09d",
+        "Cargo.toml": "112baa40f6b7f499a46eac7d3664fd22255b9ad78e5fb0139dca706a263ea409"
+      },
+      "previous_index_sha256": {
+        "ariadne-reports-index.html": "98061965d46f9a2487efb5d73318eac1d4edf27c2b6528a69e080c805723808e",
+        "ariadne-reports-index.md": "27f1b04cd64da1eff217a2fdb3ab983b2afbf1b2fc3553b8ff6083a5e5fc8da7"
+      },
+      "validation": {
+        "local_references_checked": 143,
+        "html_structure": "balanced elements and unique IDs",
+        "fragments": "all checked HTML/Markdown fragments resolve",
+        "resources": "self-contained HTML; no scripts or external resources",
+        "archive_metadata": "file sizes/hashes, canonical-source hashes, counters and both index links verified",
+        "qualification_refreshed": false
+      },
+      "presentation": {
+        "requested": "browser presentation of HTML report",
+        "wslview": {
+          "launched": false,
+          "error": "[Errno 2] No such file or directory: 'wslview'"
+        },
+        "fallback": {
+          "launcher": "Windows PowerShell Start-Process",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        "visual_inspection": false,
+        "launch_succeeded": true
+      }
     }
   ],
   "plan_directory_relocation": {

@@ -14,6 +14,8 @@ captures, and required Rust gates. The [W3 matrix/report qualification](../../ev
 passes all 140 decisions, 44 binding controls, 24 serialized controls and 114
 fresh native cases. W4 CLI/native recipe sources are implemented with their
 product/capture gates pending; W5 and full acceptance remain pending.
+The [W4/W5 execution preparation](../../.agents/plans/i5c-address-wrap.md#w4w5-execution-preparation-2026-10-21)
+adds campaign tooling and retained-baseline verification without advancing those gates.
 
 **Why this document exists.** The [investigation design](investigation-design.md#higher-level-questions-after-the-first-slice)
 leaves arithmetic hypotheses open. [I5a](zero-address-design.md) computes an effective
@@ -516,3 +518,77 @@ all twelve CLI controls and eight newly owned partial/full captures are still
 pending; source review and tiny Python controls do not satisfy them. W5 timing,
 compiled mutations, replay, legacy/I4/I5a/I5b refresh and full evidence closure
 also remain pending. W3 grants none of those later acceptance flags.
+
+## W4/W5 execution preparation, 2026-10-21
+
+The [W4/W5 stage ledger](../../.agents/plans/i5c-address-wrap.md#w4w5-execution-preparation-2026-10-21)
+now has source-prepared execution tooling. Its [preparation evidence](../../evidence/Ariadne/address-wrap/20261021/w4-w5-preparation/README.md)
+distinguishes fresh Python/source checks from unavailable native qualification.
+No W4 exit, compiled mutation, new capture, timing, replay or full-I5c acceptance
+is granted by this preparation. The two new ignored Rust mutation observers
+also require compilation and execution in the qualified environment.
+
+| Source | Responsibility |
+| --- | --- |
+| [Qualification primitives](../../tools/i5c_qualification.py) | Broad source inventory, selected tool identities, explicit prerequisite failures, verbatim command streams and exact Cargo artifact/test admission. |
+| [W4 CLI runner](../../tools/check_i5c_cli.py) | Run all twelve named controls, including a hash-pinned Cargo-selected CLI unit executable and retained native failure artifacts. |
+| [Windows capture batch](../../native/crashpad-demo/capture_i5c_windows.py) | Produce eight new recipe/mode captures and run the independent inspector; keep incomplete bundles failed. |
+| [Mutation runner](../../tools/check_i5c_mutations.py) | All 24 frozen source transformations, selected original oracle cases, passing controls, isolated builds and actual compiled test failures. Anchor checking alone grants no mutation credit. |
+| [Legacy comparator](../../tools/compare_i5c_legacy.py) | Compare all 666 named outputs to the exact pre-W1 baseline; refuse a caller-supplied replacement pin. |
+| [Retained runtime exporter](../../tools/export_i5c_runtime.py) | Copy W2/W3 streams selected by original receipt paths, sizes and hashes, without executing historical controllers. |
+| [Aggregate runner](../../tools/check_i5c.py) | Coordinate required root/model/native/mutation/legacy/I4/I5a/I5b/timing gates and publish positive flags only after verified evidence sealing. |
+
+The legacy comparator consumes the original `ariadne.i5c-legacy-before/v1`
+baseline, SHA-256
+`e1adb5a375f67398ddbd4fb17189729aee40a13e049ae52b50a154d0c758e002`.
+Its enclosing W1 archive SHA is
+`bdc1289ad7fa7be9515127bfa891d0b85e1b7cce7966ff813f55097bee2f800e`.
+Fresh stream verification checks all 2,713 outer members and all 666 retained
+output payloads (34,365,159 bytes), plus the 36 retained CLI parity rows. This
+verifies historical bytes; comparison against newly produced outputs remains
+unexercised. The original archive and qualification records are unchanged.
+
+Start with a read-only preflight on the qualification host:
+
+```sh
+python3 tools/check_i5c.py \
+  --output target/i5c-qualification/NEW_PREFLIGHT --preflight-only
+```
+
+A successful preflight grants no acceptance flag. The full runner additionally
+requires `--captures`, `--build`, `--expected-build-sha256`, the original
+`--legacy-baseline` and `--expected-legacy-baseline-sha256`, retained
+`--i5a-captures` and `--i5b-captures`, `--i4-profiles-root`, and a verified
+`--runtime-index` / `--expected-runtime-index-sha256` pair. Execute through the
+[sealed read-only MirrorRust view](../../tools/with_mirrorrust_snapshot.py).
+
+Export old runtime evidence from the host directory previously mounted as
+`/campaign`, using a new output directory:
+
+```sh
+python3 tools/export_i5c_runtime.py \
+  --campaign-root RETAINED_CAMPAIGN_ARTIFACTS \
+  --output target/i5c-qualification/NEW_RUNTIME_EXPORT
+```
+
+The exporter prints the index path and digest. The index must contain exactly
+W2 and W3, each with its original qualification hash and complete exported
+pathname/size/hash table. Every stdout/stderr stream referenced by the original
+qualified receipts must remain present at its `campaign/...` path. Published
+named-case records must also match. An internally consistent reduced export
+cannot replace those original stream requirements.
+
+Source review also found stale I5b mutation anchors after W1 moved shared
+admission into `scalar_base_displacement.rs`. The corresponding three mutation
+definitions now target that owner; all fifteen source seams are checked, but
+their fresh compiled campaign remains pending. Historical I5b results retain
+their source identities.
+
+The current checkout lacks the native helpers/SDK/runtime and active dependency
+snapshot; ordinary offline Cargo checks also stop at the uncached `minidump`
+package. Eight required source/evidence inputs remain LFS pointers in the
+working tree. Verified I5c metadata and the W1 archive were fetched into the LFS
+object cache without replacing historical tracked evidence. The retained
+controllers identify host paths below `/home/jlc/ariadne-target-r6-20261020`
+and its `artifacts/` directory; no accessible qualification host is established
+by those historical paths. Heavy native/model/campaign execution remains remote.

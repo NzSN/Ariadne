@@ -284,3 +284,23 @@ fn all_24_frozen_serialized_rejections_are_checked_without_stale_digest_shortcut
     }
     assert_eq!((parse_only, typed), (4, 20));
 }
+
+#[test]
+#[ignore = "requires an explicit frozen I5c serialized mutation observer case"]
+fn w5_selected_frozen_serialized_mutation_case() {
+    let name = std::env::var("ARIADNE_I5C_MUTATION_CASE").unwrap();
+    let rejection = name.strip_prefix("serialization:").unwrap();
+    assert!(REJECTIONS.contains(&rejection));
+    println!("I5C_W5_OBSERVER {}", json!({"case": name}));
+    match corrupt(rejection, &sample("mov32mi-upper")) {
+        Corruption::Json(bytes) => assert!(decode_address_wrap(&bytes).is_err()),
+        Corruption::Typed(value) => {
+            assert!(decode_address_wrap(&serde_json::to_vec(&value).unwrap()).is_err());
+            assert!(value.validate().is_err());
+            assert!(encode_address_wrap(&value).is_err());
+            for format in [Format::Text, Format::Json, Format::Dot] {
+                assert!(render_address_wrap(&value, format).is_err());
+            }
+        }
+    }
+}

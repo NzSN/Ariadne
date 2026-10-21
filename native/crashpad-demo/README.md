@@ -147,7 +147,7 @@ This inspector uses an explicit reviewed byte recipe and a separate integer
 checksum calculation, plus raw minidump/PE parsing. It checks every instruction
 boundary and short-branch target, full captured code, inputs, process/module
 identity and fault context. It does not derive expected results from Ariadne or
-BAP. The [replacement plan](../../.agents/plans/bap-windows-repin.md) defines the pin and
+BAP. The [replacement plan](../../.agents/plans/completed/bap-windows-repin.md) defines the pin and
 its historical 2,000 ms criterion; the later
 [unlimited BAP policy](../../docs/Ariadne/bap-analysis-core-design.md#unlimited-timing-policy) supersedes
 that timing ceiling. I5a keeps its separate 1,500 ms CLI criterion.
@@ -182,7 +182,7 @@ metadata does not identify the source that produced the historical executable.
 
 With `build/`, `partial/` and `full/` records copied into one local directory,
 first select the read-only dependency snapshot used for qualification, following
-[the snapshot procedure](../../.agents/plans/i5a-native-qualification.md#reproduce-with-a-stable-dependency-snapshot).
+[the snapshot procedure](../../.agents/plans/completed/i5a-native-qualification.md#reproduce-with-a-stable-dependency-snapshot).
 Use its path and the digest printed when it was created for all commands:
 
 ```sh
@@ -274,6 +274,19 @@ task paths from the producer manifest. The inspector requires `build-inputs.json
 declared prepared source hash, the local recipe/preparation/build source hashes,
 tool/binary identities and capture/witness/dump bindings. New profiles always use
 the runner's minimal Windows child environment and disabled uploads.
+
+The source-prepared batch wrapper runs all four recipes in both capture modes,
+preserves partial failures and independently inspects each actual capture:
+
+```powershell
+& $python "$demo\capture_i5c_windows.py" --build $build `
+  --expected-build-sha256 $buildSha --output 'D:\TASK\captures\i5c-eight'
+```
+
+Use a new output directory. The wrapper never grants product-assessment or W5
+acceptance. Its native execution remains pending until the owned build and
+capture prerequisites are available. The [canonical W4/W5 preparation record](../../docs/Ariadne/address-wrap-design.md#w4w5-execution-preparation-2026-10-21)
+describes the current tooling and its separate validation limits.
 
 The inspector reads the PE and raw minidump without Ariadne, BAP, LLVM, a debugger
 or a native child. It requires valid AMD64 CONTROL/INTEGER observations, matching

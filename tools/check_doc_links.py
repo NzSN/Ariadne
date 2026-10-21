@@ -50,7 +50,8 @@ def main():
     docs = set((ROOT / "docs").rglob("*.md")) | set((ROOT / ".agents" / "plans").rglob("*.md"))
     docs.update(ROOT / name for name in (
         "README.md", "ROADMAP.md", "CHECKPOINTS.md", "Specs/README.md",
-        "lean/README.md", "native/bap/README.md",
+        "lean/README.md", "native/bap/README.md", "native/bap-core/README.md",
+        "native/crashpad-demo/README.md",
         "mbt/README.md", "mbt/stage-e/README.md", "evidence/Ariadne/README.md",
     ))
     docs = {p.resolve() for p in docs}

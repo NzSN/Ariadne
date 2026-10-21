@@ -14,6 +14,8 @@ public assessor, seven native synthetic cases and required Rust gates.
 all 140 decisions, 44 binding controls, 24 serialized controls and 114 fresh
 native cases. W4 sources are implemented with product/capture gates pending;
 W5 and full acceptance remain pending.
+The [W4/W5 execution preparation](../../docs/Ariadne/address-wrap-design.md#w4w5-execution-preparation-2026-10-21) adds
+source tooling and retained-baseline verification without closing those gates.
 No I5c assessor, capture, timing or full-feature acceptance is granted by W0/W1. The
 [canonical design](../../docs/Ariadne/address-wrap-design.md#w0-finite-contract-2026-10-20)
 owns the exact inventory, publication accounting and qualification boundaries.
@@ -376,3 +378,38 @@ a manifest flag alone is insufficient. Update the design's status, actual
 contracts, qualification guide, plan ledger/checkpoints and direct successor
 links only to the demonstrated scope. Packaged-release and universal-refinement
 acceptance remain separate.
+
+## W4/W5 execution preparation, 2026-10-21
+
+The [canonical execution guide](../../docs/Ariadne/address-wrap-design.md#w4w5-execution-preparation-2026-10-21)
+and [preparation evidence](../../evidence/Ariadne/address-wrap/20261021/w4-w5-preparation/README.md)
+record the new CLI-control runner, eight-case Windows capture wrapper, all-24
+mutation driver with focused frozen-case observers, original-baseline comparator,
+W2/W3 runtime exporter and aggregate qualification/sealing runner. These sources
+have local Python/source checks only; new Rust observers remain uncompiled here.
+Three stale I5b mutation definitions now follow their shared admission owner;
+the fifteen source seams have checks but no fresh compiled campaign credit.
+
+All 2,713 members of the original W1 archive and all 666 retained output payloads
+(34,365,159 bytes) are freshly stream-verified. The original pre-W1 baseline SHA
+`e1adb5a375f67398ddbd4fb17189729aee40a13e049ae52b50a154d0c758e002` and
+36 retained public-API/CLI parity rows remain fixed. This does not compare current
+outputs or refresh W1/W2/W3 acceptance. Historical payloads and stage exits stay
+unchanged.
+
+Next execution requires the retained remote Windows/WSL host. Recovered W3
+controllers map `/campaign` to the host's
+`/home/jlc/ariadne-target-r6-20261020/artifacts`; those paths are historical
+evidence rather than present access. Use a new isolated task containing the
+final source/tool inventory and the sealed read-only dependency view. Run the
+W4 native build, twelve CLI controls and all eight independently inspected owned
+captures before W5 qualification. Export the original W2/W3 raw streams from
+that retained campaign, then supply the fixed baseline, older I5a/I5b captures
+and I4 profile baseline to the aggregate runner.
+
+Current local preflight records missing native helpers/SDK/runtime and the
+MirrorRust snapshot, plus eight unhydrated working-tree qualification inputs.
+Offline default/core Cargo tests and Clippy stop at the uncached `minidump`
+package. Fresh Python controls, formatting and layout do not waive those gates.
+No local native/model run, new capture, compiled mutation, replay or timing
+acceptance is credited. W4, W5 and full-I5c acceptance remain pending.
