@@ -315,6 +315,44 @@ class NativeReportTests(unittest.TestCase):
 
 
 class CaptureProvenanceTests(unittest.TestCase):
+    def test_extended_current_producer_binds_every_source_script_and_archive(self):
+        with tempfile.TemporaryDirectory() as directory:
+            fixture = CaptureFixture(Path(directory))
+            native = ROOT / "native/crashpad-demo"
+            names = ("BUILD.gn", "crash_demo.cc", "fault.cc", "bap_workload.asm",
+                     "zero_base_offset.asm", "address_wrap.asm")
+            sources = {name: ASSESS.sha(native / name) for name in names}
+            fixture.inputs["demoSourceHashes"] = dict(sources)
+            fixture.inputs["sourceHashes"] = {"examples\\ariadne_demo\\" + name: value
+                                               for name, value in sources.items()}
+            fixture.inputs["buildOnlyAdjustments"] = {"preparationScriptSha256": ASSESS.sha(native / "prepare.py")}
+            fixture.build["buildScriptSha256"] = ASSESS.sha(native / "build_windows.py")
+            archive = fixture.build_dir / "source.tar.gz"
+            archive.write_bytes(b"synthetic producer archive; not a native capture")
+            fixture.build["inputs"]["sourceArchiveSha256"] = ASSESS.sha(archive)
+            for name in ("crash_demo.cc", "fault.cc"):
+                fixture.historical["local_source_files"][name]["sha256"] = sources[name]
+            fixture.write_records()
+            fixture.validate()
+            for name in ("address_wrap.asm", "BUILD.gn"):
+                fixture.inputs["demoSourceHashes"][name] = OTHER_SHA
+                fixture.inputs["sourceHashes"]["examples\\ariadne_demo\\" + name] = OTHER_SHA
+                fixture.write_records()
+                with self.subTest(source=name), self.assertRaisesRegex(ValueError, "current producer source changed"):
+                    fixture.validate()
+                fixture.inputs["demoSourceHashes"][name] = sources[name]
+                fixture.inputs["sourceHashes"]["examples\\ariadne_demo\\" + name] = sources[name]
+            fixture.write_records()
+            fixture.build["buildScriptSha256"] = OTHER_SHA
+            fixture.write_records()
+            with self.assertRaisesRegex(ValueError, "build scripts changed"):
+                fixture.validate()
+            fixture.build["buildScriptSha256"] = ASSESS.sha(native / "build_windows.py")
+            fixture.write_records()
+            archive.write_bytes(b"changed")
+            with self.assertRaisesRegex(ValueError, "source archive changed"):
+                fixture.validate()
+
     def test_complete_partial_and_full_record_graphs_are_accepted(self):
         for mode in ("partial", "full"):
             with self.subTest(mode=mode), tempfile.TemporaryDirectory() as directory:

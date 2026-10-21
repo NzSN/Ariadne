@@ -1,7 +1,7 @@
 {
   "archived": "2026-10-16",
   "scope": "Conversation presentation archive; canonical designs stay in docs/ and plan owners now live in .agents/plans/. No new analysis or qualification.",
-  "report_count": 38,
+  "report_count": 40,
   "markdown_html_pairs_including_index": 21,
   "source_session": "01a12ddc-4e59-7cb2-b5aa-67a8e522c597",
   "recovered_reports": [
@@ -840,12 +840,12 @@
       "sha256": "2667f3af9200452de3e195dc17664344a094f718310fb48d7527f5a02999ac33"
     },
     "ariadne-reports-index.html": {
-      "bytes": 14355,
-      "sha256": "83076f2c50901286891f8c2ed14ef9e4db836ff1754f6908ad7df1adf4181d00"
+      "bytes": 14835,
+      "sha256": "a9d05e4f84660f19d94947c50a3a5e0e1e55e843bb59f54b9e908119805037da"
     },
     "ariadne-reports-index.md": {
-      "bytes": 8369,
-      "sha256": "19737206284e3a0046a299e9f9b962be647bbb36c652538184779038008720c5"
+      "bytes": 8771,
+      "sha256": "bbc7d55f84d76cac995d61fa25237bedd706c3a6b47785cd45056a6b5130abc8"
     },
     "ariadne-resolver-structural-types-20261015.html": {
       "bytes": 32858,
@@ -992,12 +992,20 @@
       "sha256": "32db0c8ba43f7dc412ccb44735b1316d7dfc0192df4bf2b9cc04207117e6f771"
     },
     "ariadne-remaining-work-20261021.html": {
+      "bytes": 16177,
+      "sha256": "12059ae697a92db3a1d853488b0e0a39a76f5c08379e1e179ee867b52b348d82"
+    },
+    "ariadne-remaining-work-20261021-3785779.html": {
       "bytes": 14479,
       "sha256": "2b38aab44e2a5d5bc3c991b8fc7ecf8f4a009343b1a0599e0b96ec5bfb33b4da"
+    },
+    "ariadne-remaining-work-20261021-438ee6b-pre-execution.html": {
+      "bytes": 15462,
+      "sha256": "17f4d311ab3b94b45d5559e5c16dbcd3fd71682148e2f269ea275bae07331c10"
     }
   },
   "directory": ".agents/chatdocs/",
-  "html_documents_including_index": 39,
+  "html_documents_including_index": 41,
   "markdown_documents_including_index": 22,
   "source_review_documents": [
     {
@@ -1472,7 +1480,7 @@
       "validation_local_references": 223
     },
     {
-      "html": "ariadne-remaining-work-20261021.html",
+      "html": "ariadne-remaining-work-20261021-3785779.html",
       "date": "2026-10-21",
       "source_revision": "3785779882eaac376ec03f0313c99fe68aa214a9",
       "scope": "Archival presentation of the remaining-work explanation from this conversation; canonical sources unchanged; no new runtime/model/capture/release qualification.",
@@ -1512,6 +1520,113 @@
         },
         "visual_inspection": false,
         "launch_succeeded": true
+      },
+      "preserved_from": "ariadne-remaining-work-20261021.html",
+      "preservation": "Byte-identical historical snapshot retained when the current report was updated after commit 438ee6b."
+    },
+    {
+      "html": "ariadne-remaining-work-20261021-438ee6b-pre-execution.html",
+      "date": "2026-10-21",
+      "source_revision": "438ee6b0ccc1174a92f329e25cd4cf02a0f24445",
+      "source_state": "Local HTML refresh after pushed execution-tooling commit 438ee6b; the document update itself is not committed.",
+      "scope": "Updated remaining-work explanation; preserves prior HTML and evidence identities; adds no runtime/model/capture/release qualification.",
+      "canonical_source_sha256": {
+        ".agents/plans/README.md": "98a4f7819bc53d32bdd80d77989e19f17a751daa98ca1f24418c1eebeba45cd3",
+        ".agents/plans/i5c-address-wrap.md": "5d812cc804578b8be108c4648e0b3fa04a77888d92ebbf7d3cfb5dd5accbbe56",
+        ".agents/plans/investigation-layer.md": "a1bc640746fc902a8638457142fc7a06299b64048f867b36394dc00942ec43a6",
+        "docs/Ariadne/address-wrap-design.md": "a4c4f47bb5b9a6acaa51c38e3f7bdedf2a361350a4f8917b1ca31e96c3cbc906",
+        "docs/Ariadne/semantic-assurance.md": "d0603adf75e147899a4129da0d2595cf28dcc4bcb806597fc6b8eda51b7aff7e",
+        "ROADMAP.md": "aa31a805667fdc66e518e5974bf5be21087ab4843b42b5eb76ea6107d102f30d",
+        "CHECKPOINTS.md": "b9af3298056fe2a5377462e43b3d86c430f27dcd9e87434e456392fffeb07c07",
+        "Cargo.toml": "112baa40f6b7f499a46eac7d3664fd22255b9ad78e5fb0139dca706a263ea409",
+        "evidence/Ariadne/address-wrap/20261021/w4-w5-preparation/preparation.json": "b8fd284b217b3d4b3d7def4ed17c4bbf080fc30183f496e4bfdf2079d29ed36d",
+        "evidence/Ariadne/address-wrap/20261021/w4-w5-preparation/retained-baseline-verification.json": "af17a27a9a32078315509c8d4897cd324a85b71352ca7e8f22527e09effc7fe2"
+      },
+      "prior_snapshot": "ariadne-remaining-work-20261021-3785779.html",
+      "prior_snapshot_sha256": "2b38aab44e2a5d5bc3c991b8fc7ecf8f4a009343b1a0599e0b96ec5bfb33b4da",
+      "recorded_preparation_checks": {
+        "python_controls": 52,
+        "native_cli_controls": 0,
+        "owned_captures": 0,
+        "compiled_mutants": 0,
+        "full_i5c_acceptance": false
+      },
+      "validation": {
+        "local_references_checked": 167,
+        "html_structure": "balanced elements, unique IDs and resolved accessibility labels",
+        "fragments": "all checked HTML/Markdown fragments resolve",
+        "resources": "self-contained HTML; no scripts or external resources",
+        "snapshot": "earlier HTML retained byte-identically",
+        "archive_metadata": "artifact/source hashes, archive counters and both index links verified",
+        "qualification_refreshed": false
+      },
+      "presentation": {
+        "visual_inspection": false,
+        "wslview": {
+          "launched": false,
+          "error": "[Errno 2] No such file or directory: 'wslview'"
+        },
+        "fallback": {
+          "launcher": "Windows PowerShell Start-Process",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        "launch_succeeded": true
+      },
+      "preserved_from": "ariadne-remaining-work-20261021.html",
+      "preservation": "Byte-identical pre-execution report retained when updating current campaign progress."
+    },
+    {
+      "html": "ariadne-remaining-work-20261021.html",
+      "date": "2026-10-21",
+      "source_revision": "438ee6b0ccc1174a92f329e25cd4cf02a0f24445",
+      "source_state": "Base 438ee6b plus local qualification fixes staged in the retained remote campaign; final outcome not retrieved.",
+      "scope": "Current execution progress and SSH interruption; aggregate acceptance remains pending.",
+      "canonical_source_sha256": {
+        ".agents/plans/README.md": "98a4f7819bc53d32bdd80d77989e19f17a751daa98ca1f24418c1eebeba45cd3",
+        ".agents/plans/i5c-address-wrap.md": "223e3c68d1a00fb00c7f2f2d04a1445ab02c106f7e175706e6be91055f908495",
+        ".agents/plans/investigation-layer.md": "a1bc640746fc902a8638457142fc7a06299b64048f867b36394dc00942ec43a6",
+        "docs/Ariadne/address-wrap-design.md": "66d1f5767c4035635223a2c24d2b7a1093553354f862b63a722bddeb13d891cd",
+        "docs/Ariadne/semantic-assurance.md": "d0603adf75e147899a4129da0d2595cf28dcc4bcb806597fc6b8eda51b7aff7e",
+        "ROADMAP.md": "aa31a805667fdc66e518e5974bf5be21087ab4843b42b5eb76ea6107d102f30d",
+        "CHECKPOINTS.md": "b9af3298056fe2a5377462e43b3d86c430f27dcd9e87434e456392fffeb07c07",
+        "Cargo.toml": "112baa40f6b7f499a46eac7d3664fd22255b9ad78e5fb0139dca706a263ea409",
+        "evidence/Ariadne/address-wrap/20261021/w4-w5-preparation/preparation.json": "b8fd284b217b3d4b3d7def4ed17c4bbf080fc30183f496e4bfdf2079d29ed36d",
+        "evidence/Ariadne/address-wrap/20261021/w4-w5-preparation/retained-baseline-verification.json": "af17a27a9a32078315509c8d4897cd324a85b71352ca7e8f22527e09effc7fe2",
+        "evidence/Ariadne/address-wrap/20261021/w4-w5-execution/report.json": "7a8fd3468eace58ae2ce119c3daa248be07c5653bb6163182684371ec7831462"
+      },
+      "prior_snapshot": "ariadne-remaining-work-20261021-438ee6b-pre-execution.html",
+      "prior_snapshot_sha256": "17f4d311ab3b94b45d5559e5c16dbcd3fd71682148e2f269ea275bae07331c10",
+      "recorded_preparation_checks": {
+        "python_controls": 52,
+        "native_cli_controls": 0,
+        "owned_captures": 0,
+        "compiled_mutants": 0,
+        "full_i5c_acceptance": false
+      },
+      "validation": {
+        "local_references_checked": 176,
+        "html_structure": "balanced elements, unique IDs and resolved accessibility labels",
+        "fragments": "checked HTML/Markdown fragments resolve",
+        "resources": "self-contained report; local index resources resolve",
+        "snapshot": "pre-execution HTML preserved byte-identically",
+        "archive_metadata": "artifact hashes, archive counters and index links verified",
+        "qualification_refreshed": false
+      },
+      "presentation": {
+        "launch_succeeded": false,
+        "visual_inspection": false,
+        "note": "No new browser presentation requested for this progress update."
+      },
+      "execution_progress": {
+        "cli_controls_reported_passed": 12,
+        "native_matrix_reported_passed": 114,
+        "owned_i5c_raw_inspections_reported_passed": 8,
+        "last_confirmed_detected_mutants": 10,
+        "expected_mutants": 24,
+        "final_outcome_retrieved": false,
+        "full_i5c_acceptance": false
       }
     }
   ],
@@ -1548,5 +1663,17 @@
       "entries": 2,
       "source_content_changed": false
     }
-  ]
+  ],
+  "latest_remaining_work_update": {
+    "date": "2026-10-21",
+    "source_revision": "438ee6b0ccc1174a92f329e25cd4cf02a0f24445",
+    "report": "ariadne-remaining-work-20261021.html",
+    "prior_snapshot": "ariadne-remaining-work-20261021-438ee6b-pre-execution.html",
+    "W4_acceptance": false,
+    "W5_acceptance": false,
+    "new_qualification_claimed": false,
+    "execution_progress_reported": true,
+    "host_access": "SSH closes before authentication",
+    "last_confirmed_detected_mutants": 10
+  }
 }

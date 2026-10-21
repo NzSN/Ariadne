@@ -221,6 +221,46 @@ class QualificationControls(unittest.TestCase):
             with self.subTest(stages=stages), self.assertRaises(ValueError):
                 gate.runtime_files(path, evidence.sha(path))
 
+    def test_producer_sealing_requires_original_inputs_tools_binaries_and_logs(self):
+        directory = self.root / "producer"
+        directory.mkdir()
+        source = directory / "source/recipe.asm"
+        source.parent.mkdir()
+        source.write_bytes(b"original recipe")
+        (directory / "source.tar.gz").write_bytes(b"original prepared archive")
+        tools, binaries = {}, {}
+        for name in ("gn.exe", "ninja.exe"):
+            path = directory / "tools" / name
+            path.parent.mkdir(exist_ok=True)
+            path.write_bytes(name.encode())
+            tools[name] = evidence.sha(path)
+        for name in ("ariadne_crash_demo.exe", "crashpad_handler.exe", "crashpad_database_util.exe"):
+            path = directory / "source/out/Release" / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(name.encode())
+            binaries[name] = evidence.sha(path)
+        evidence.write_json(directory / "build-inputs.json", {"sourceHashes": {"recipe.asm": evidence.sha(source)}})
+        evidence.write_json(directory / "build.json", {
+            "inputs": {"inputsSha256": evidence.sha(directory / "build-inputs.json"),
+                       "sourceArchiveSha256": evidence.sha(directory / "source.tar.gz")},
+            "toolHashes": tools, "binaryHashes": binaries})
+        for name in ("tools.ensure", "owner.json", "tools.log", "gn.log", "gn-repeat.log", "build.log",
+                     "arm64-rejection.log", "gn-version.log", "ninja-version.log", "clang-version.log"):
+            (directory / name).write_bytes(b"original log")
+        path = directory / "build.json"
+        pin = evidence.sha(path)
+        files = gate.producer_files(path, pin)
+        self.assertEqual(files["producer/source/recipe.asm"].read_bytes(), b"original recipe")
+        for relative in ("source.tar.gz", "source/recipe.asm", "tools/gn.exe",
+                         "source/out/Release/crashpad_handler.exe", "build.log"):
+            original = (directory / relative).read_bytes()
+            (directory / relative).unlink()
+            with self.subTest(relative=relative), self.assertRaises((OSError, ValueError)):
+                gate.producer_files(path, pin)
+            (directory / relative).write_bytes(original)
+        with self.assertRaises(ValueError):
+            gate.producer_files(path, "0" * 64)
+
     def test_runtime_export_checks_original_streams_and_rejects_a_self_consistent_omission(self):
         repo = self.root / "repo"
         campaign = self.root / "retained"

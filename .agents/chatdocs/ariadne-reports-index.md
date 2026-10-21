@@ -10,7 +10,9 @@ Canonical documents under `docs/` remain in place. The two 2026-10-12 design/pla
 
 | Chat document | View | Source |
 | --- | --- | --- |
-| Ariadne remaining work: I5c W4/W5, later capabilities and qualification limits (2026-10-21; revision 3785779) | [Open explanation](ariadne-remaining-work-20261021.html) | HTML only; [canonical plan index](../plans/README.md) |
+| Ariadne I5c execution progress: CLI12/native114 passed; SSH interruption (2026-10-21; base 438ee6b) | [Open explanation](ariadne-remaining-work-20261021.html) | HTML only; [canonical plan index](../plans/README.md) |
+| Historical remaining-work snapshot before qualification execution (2026-10-21; base 438ee6b) | [Open snapshot](ariadne-remaining-work-20261021-438ee6b-pre-execution.html) | HTML only; preserved earlier version |
+| Historical remaining-work snapshot before execution tooling (2026-10-21; revision 3785779) | [Open snapshot](ariadne-remaining-work-20261021-3785779.html) | HTML only; preserved earlier version |
 | Ariadne terminology scope and explanations (2026-10-20) | [Read Markdown](ariadne-terminology-scope-20261020.md) | [Canonical vocabulary](../../docs/terminology.md) |
 | Ariadne current model through structural types, refinements and inference rules (2026-10-20; local revision 184a181) | [PDF (22 pages)](ariadne-structural-type-model-20261020/model.pdf) | [LaTeX source](ariadne-structural-type-model-20261020/model.tex) |
 | Open-plan index: two unfinished ledgers; finite S3 complete; I5c W0–W3 qualified, W4 product/capture gates pending (2026-10-21; uncommitted publication) | [Open index](ariadne-open-plans-20261019/index.html) | HTML only |
@@ -52,7 +54,7 @@ The first-jump page includes the captured selector/table calculator and search-s
 
 **Why this document exists.** The [chat-document skill](../../../../.agents/skills/chatdoc/SKILL.md) keeps explanations and their renderings together while preserving existing `docs/` documents.
 
-**What this document establishes.** This index lists the available report formats and interactive illustrations. The archive retains its 38 report records, dated presentation snapshots and this index. Older reports preserve their Markdown/HTML pairs; new chat reports default to HTML only unless Markdown is explicitly requested. Historical browser pages are retained; reconstructed content is labeled. The graph page preserves its original template, with SVGs reconstructed from the retained completed reports and input hashes recorded alongside it.
+**What this document establishes.** This index lists the available report formats and interactive illustrations. The archive retains its 39 report records, dated presentation snapshots and this index. Older reports preserve their Markdown/HTML pairs; new chat reports default to HTML only unless Markdown is explicitly requested. Historical browser pages are retained; reconstructed content is labeled. The graph page preserves its original template, with SVGs reconstructed from the retained completed reports and input hashes recorded alongside it.
 
 **Where to go next.** Consult the [investigation contract](../../docs/Ariadne/investigation-design.md), [target-resolution contract](../../docs/Ariadne/indirect-target-resolution.md) and [checkpoint history](../../CHECKPOINTS.md) for their respective contracts, retained results and delivery status.
 

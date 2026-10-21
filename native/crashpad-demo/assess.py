@@ -122,14 +122,31 @@ def validate_capture_provenance(captures, mode, inspection_path, inspector_sha):
             and query.get("slice_seeds") == [query.get("fault_instruction")]
             and query.get("memory_access_index") == 0, "inspection query changed")
     producer_sources = inputs.get("demoSourceHashes", {})
-    require(set(producer_sources) == {"BUILD.gn", "crash_demo.cc", "fault.cc"},
+    historical_sources = {"BUILD.gn", "crash_demo.cc", "fault.cc"}
+    current_sources = historical_sources | {"bap_workload.asm", "zero_base_offset.asm", "address_wrap.asm"}
+    require(set(producer_sources) in (historical_sources, current_sources),
             "incomplete historical producer source inventory")
+    normalized = {name.replace("\\", "/"): digest for name, digest in inputs.get("sourceHashes", {}).items()}
+    require(len(normalized) == len(inputs.get("sourceHashes", {})), "ambiguous producer source paths")
     for name, digest in producer_sources.items():
-        require(inputs.get("sourceHashes", {}).get("examples/ariadne_demo/" + name) == digest,
+        require(normalized.get("examples/ariadne_demo/" + name) == digest,
                 "historical producer source bindings disagree")
-        if name != "BUILD.gn":
+        if name in {"crash_demo.cc", "fault.cc"}:
             require(historical.get("local_source_files", {}).get(name, {}).get("sha256") == digest,
                     "historical inspection/producer source mismatch")
+    if set(producer_sources) == current_sources:
+        # A new owned null-write cohort may use the extended demo. Keep the
+        # original three-file producer contract intact and bind this additional
+        # producer to all six current sources and the unchanged build scripts.
+        for name, digest in producer_sources.items():
+            require(sha(Path(__file__).with_name(name)) == digest, "current producer source changed: " + name)
+        require(build.get("buildScriptSha256") == sha(Path(__file__).with_name("build_windows.py"))
+                and inputs.get("buildOnlyAdjustments", {}).get("preparationScriptSha256")
+                == sha(Path(__file__).with_name("prepare.py")), "current producer build scripts changed")
+        archive_path = captures / "build/source.tar.gz"
+        require(sha(archive_path) == build.get("inputs", {}).get("sourceArchiveSha256"),
+                "current producer source archive changed")
+        tracked.append(archive_path)
     provenance = {
         "buildRecordSha256": sha(build_path), "buildInputsSha256": sha(inputs_path),
         "captureRecordSha256": sha(capture_path), "inspectionSha256": sha(inspection_path),

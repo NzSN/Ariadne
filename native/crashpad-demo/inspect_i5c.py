@@ -213,8 +213,15 @@ def inspect(directory, build_path, expected_build_sha256):
             tool_paths[name] = source_root / "third_party/windows/clang/win-amd64/bin" / name
         for name, path in tool_paths.items():
             require(hash_file(path)["sha256"] == build["toolHashes"][name], "build tool changed: " + name)
+        # Preserve the producer's Windows pathname as historical metadata.
+        # Reopened evidence can live elsewhere (including a Linux qualification
+        # host); verify the pinned binaries beside the supplied build receipt.
+        binary_directory = build.get("binaryDirectory")
+        require(type(binary_directory) is str and
+                binary_directory.replace("\\", "/").rstrip("/").endswith("/source/out/Release"),
+                "unexpected build binary directory layout")
         for name, expected in build["binaryHashes"].items():
-            require(hash_file(Path(build["binaryDirectory"]) / name)["sha256"] == digest(expected, name),
+            require(hash_file(source_path(source_root, "out/Release/" + name))["sha256"] == digest(expected, name),
                     "built binary changed: " + name)
 
         capture = json_file(open_raw("capture_record", directory / "capture.json"))

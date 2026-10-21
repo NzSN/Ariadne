@@ -16,6 +16,12 @@ fresh native cases. W4 CLI/native recipe sources are implemented with their
 product/capture gates pending; W5 and full acceptance remain pending.
 The [W4/W5 execution preparation](../../.agents/plans/i5c-address-wrap.md#w4w5-execution-preparation-2026-10-21)
 adds campaign tooling and retained-baseline verification without advancing those gates.
+The [execution-resume record](../../evidence/Ariadne/address-wrap/20261021/execution-resume/README.md)
+locates the retained host and freshly reinspects its eight existing captures.
+The [current execution record](../../evidence/Ariadne/address-wrap/20261021/w4-w5-execution/README.md)
+reports passing root/model, native-matrix, strict-report and twelve CLI gates,
+new owned capture cohorts and ten detected compiled mutants. SSH access then
+failed; the remaining results and complete evidence closure are unverified.
 
 **Why this document exists.** The [investigation design](investigation-design.md#higher-level-questions-after-the-first-slice)
 leaves arithmetic hypotheses open. [I5a](zero-address-design.md) computes an effective
@@ -520,6 +526,16 @@ compiled mutations, replay, legacy/I4/I5a/I5b refresh and full evidence closure
 also remain pending. W3 grants none of those later acceptance flags.
 
 ## W4/W5 execution preparation, 2026-10-21
+
+The [execution resume](../../evidence/Ariadne/address-wrap/20261021/execution-resume/README.md)
+verified the retained producer and captures. Source transfer was subsequently
+approved, and the [current execution](../../evidence/Ariadne/address-wrap/20261021/w4-w5-execution/README.md)
+reported root/model, native114 matrix, strict-report and CLI12 success, plus ten
+detected compiled mutants. New I5c and regression captures passed raw inspection
+on the host. SSH now closes before authentication; the campaign's remaining
+results, product/timing tiers and final archive require retrieval and verification.
+All aggregate acceptance remains pending. The current inspector supports relocated
+build bundles while preserving producer receipts.
 
 The [W4/W5 stage ledger](../../.agents/plans/i5c-address-wrap.md#w4w5-execution-preparation-2026-10-21)
 now has source-prepared execution tooling. Its [preparation evidence](../../evidence/Ariadne/address-wrap/20261021/w4-w5-preparation/README.md)

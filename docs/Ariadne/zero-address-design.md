@@ -8,6 +8,9 @@ Historical source/fixture qualification passes; the retained
 native refresh qualifies both source/fixture and
 controlled Windows tiers under its pinned dependency snapshot. Scope is
 Windows AMD64 scalar MOV access violations; Linux and other hypotheses are deferred.
+The current demo producer binding also supports
+fresh null-write cohorts from the extended demo; their product and timing
+qualification is separate from the retained original captures.
 
 **Why this document exists.** The [first investigation question](investigation-design.md)
 explains possible producers but does not evaluate a fault-time address. A useful
@@ -22,6 +25,9 @@ reconstructing an executed path or implementing another ISA model.
 
 **Where to go next.**
 
+- [I5c W5 qualification](../../.agents/plans/i5c-address-wrap.md#w5--qualification-mutation-sensitivity-and-evidence)
+  refreshes current I5a behavior after shared-source changes and identifies any
+  new owned capture cohort independently of the historical captures.
 - [Native-default qualification plan](../../.agents/plans/completed/i5a-native-qualification.md)
   refreshes phase measurements, backend identities and controlled Windows
   acceptance after Stage 2 adoption.
@@ -437,6 +443,29 @@ path is recorded in the demo evidence. A full-memory flag does not establish
 complete process memory. This two-instruction demo does not qualify the separate
 98-start first-question Windows workload, original Electron artifact, native
 Windows execution of Ariadne, general instruction coverage or root cause.
+
+### Current demo producer binding
+
+The [controlled qualifier](../../native/crashpad-demo/assess.py) preserves the
+original three-source producer contract (`BUILD.gn`, `crash_demo.cc`, `fault.cc`).
+It additionally accepts the current six-source producer, which includes
+`bap_workload.asm`, `zero_base_offset.asm` and `address_wrap.asm`. This allows a
+new owned null-write cohort to exercise the unchanged scalar-MOV question after
+the demo gains additional profiles.
+
+For the six-source producer, all six local source hashes must match the bound
+producer inventory, normalized source paths must be unambiguous, preparation
+and build scripts must match, and the supplied source archive must match the
+build receipt. Capture/build, dump, witness, executable, process, query and
+independent inspection checks remain required. A shared null-write capture may
+serve I5a's consistent case and I5b's zero-displacement refutation case; each
+question retains its own assessment and timing records.
+
+The original producer records retain their historical identities. New cohorts
+require fresh raw inspection, current source/fixture qualification and the
+unchanged one-warm-up/five-repeat 10 ms phase / 1,500 ms CLI criteria. Synthetic
+provenance controls verify both producer contracts and reject changed source,
+script or archive bindings; they grant no native acceptance.
 
 ## Native qualification
 

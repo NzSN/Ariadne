@@ -381,12 +381,24 @@ acceptance remain separate.
 
 ## W4/W5 execution preparation, 2026-10-21
 
+Execution resume: the [recovered-host record](../../evidence/Ariadne/address-wrap/20261021/execution-resume/README.md)
+verified the retained producer and captures; source transfer was then approved.
+The [current campaign](../../evidence/Ariadne/address-wrap/20261021/w4-w5-execution/README.md)
+reported root/model, native114 matrix, strict-report and CLI12 success. Ten of 24
+compiled mutants were last confirmed detected. New owned I5c/I5b captures and a
+new I5a null-write cohort passed raw inspection. The current I5a qualifier binds
+the extended six-source producer while retaining its original historical contract.
+SSH subsequently began closing before authentication. Resume by inspecting
+`results/qualification-02` in the existing task, then retrieve and verify all
+remaining gates and the sealed archive. Aggregate W4/W5 acceptance stays pending.
+
 The [canonical execution guide](../../docs/Ariadne/address-wrap-design.md#w4w5-execution-preparation-2026-10-21)
 and [preparation evidence](../../evidence/Ariadne/address-wrap/20261021/w4-w5-preparation/README.md)
 record the new CLI-control runner, eight-case Windows capture wrapper, all-24
 mutation driver with focused frozen-case observers, original-baseline comparator,
 W2/W3 runtime exporter and aggregate qualification/sealing runner. These sources
-have local Python/source checks only; new Rust observers remain uncompiled here.
+initially had local Python/source checks only; the current execution above
+supersedes that preparation limit for its reported completed gates.
 Three stale I5b mutation definitions now follow their shared admission owner;
 the fifteen source seams have checks but no fresh compiled campaign credit.
 

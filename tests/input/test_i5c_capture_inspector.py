@@ -229,6 +229,19 @@ class InspectorTests(unittest.TestCase):
         f.refresh_capture()
         self.assertTrue(f.inspect()["passed"])
 
+    def test_relocated_build_preserves_original_receipt_and_checks_local_binaries(self):
+        f = Fixture(self.root)
+        original_receipt = f.build_path.read_bytes()
+        moved = self.root / "relocated-build"
+        f.build_dir.rename(moved)
+        f.build_path = moved / "build.json"
+        self.assertTrue(f.inspect()["passed"])
+        self.assertEqual(f.build_path.read_bytes(), original_receipt)
+        binary = moved / "source/out/Release/crashpad_handler.exe"
+        binary.write_bytes(b"changed")
+        with self.assertRaises(oracle.InspectionError):
+            f.inspect()
+
     def test_raw_observation_corruptions_rejected_even_with_rebound_dump_digest(self):
         changes = {
             "missing-integer": lambda f: struct.pack_into("<I", f.dump, f.context + 48, 0x100001),

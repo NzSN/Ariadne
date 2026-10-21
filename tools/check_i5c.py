@@ -178,6 +178,88 @@ def matrix_rows(stdout):
     return {"decisions": decisions, "native": native, "bindings": bindings}
 
 
+def producer_files(build_path, expected_digest):
+    """Retain the immutable Windows producer inputs needed for reinspection."""
+    build_path = Path(build_path)
+    require(sha(build_path) == expected_digest, "controlled producer build digest differs")
+    build = read_json(build_path)
+    directory = build_path.parent
+    prepared_path = directory / "build-inputs.json"
+    prepared = read_json(prepared_path)
+    require(sha(prepared_path) == build["inputs"]["inputsSha256"]
+            and sha(directory / "source.tar.gz") == build["inputs"]["sourceArchiveSha256"],
+            "controlled producer inputs differ")
+    import sys
+    sys.path.insert(0, str(ROOT / "native/crashpad-demo"))
+    from inspect_i5c import BINARY_NAMES, source_path
+    files = {"producer/" + name: directory / name for name in
+             ("build.json", "build-inputs.json", "source.tar.gz")}
+    for name, digest in prepared["sourceHashes"].items():
+        path = source_path(directory / "source", name)
+        require(sha(path) == digest, "controlled producer source differs: " + name)
+        files["producer/source/" + name.replace("\\", "/")] = path
+    for name in ("gn.exe", "ninja.exe"):
+        path = directory / "tools" / name
+        require(sha(path) == build["toolHashes"][name], "controlled producer tool differs: " + name)
+        files["producer/tools/" + name] = path
+    require(set(build["binaryHashes"]) == BINARY_NAMES, "controlled producer binary closure differs")
+    for name, digest in build["binaryHashes"].items():
+        path = source_path(directory / "source", "out/Release/" + name)
+        require(sha(path) == digest, "controlled producer binary differs: " + name)
+        files["producer/source/out/Release/" + name] = path
+    for name in ("tools.ensure", "owner.json", "tools.log", "gn.log", "gn-repeat.log", "build.log",
+                 "arm64-rejection.log", "gn-version.log", "ninja-version.log", "clang-version.log"):
+        path = directory / name
+        require(path.is_file(), "controlled producer log missing: " + name)
+        files["producer/" + name] = path
+    return files
+
+
+def inspect_i5a(work, captures):
+    for mode in ("partial", "full"):
+        destination = work / "i5a-inspection" / mode
+        destination.mkdir(parents=True)
+        case = captures / mode
+        receipt, _ = run_gate(work, "i5a-inspect-" + mode, [
+            "python3", "native/crashpad-demo/inspect_capture.py",
+            "--dump", case / "capture.dmp", "--witness", case / "witness.json",
+            "--executable", case / "ariadne_crash_demo.exe", "--output", destination / "inspection.json"])
+        yield {"gate": "i5a-inspect-" + mode, **receipt}
+
+
+def compiled_files(work):
+    """Seal the actual selected observers, product binaries and mutant sources."""
+    cli = read_json(work / "cli/report.json")
+    mutations = read_json(work / "mutations/report.json")
+    require(cli["passed"] is True and mutations["passed"] is True
+            and len(mutations["mutants"]) == 24, "compiled evidence is incomplete")
+    files = {}
+    selected = [cli[key] for key in ("cli", "suite", "unit")]
+    for row in mutations["mutants"]:
+        selected.extend(row[kind]["executable"] for kind in ("positive", "negative"))
+        sut = work / "mutations" / row["name"] / "sut"
+        for name, change in row["changes"].items():
+            path = sut / name
+            require(sha(path) == change["after"], "mutant source changed before sealing")
+            files["mutants/" + row["name"] + "/" + name] = path
+        for name in ("Cargo.toml", "Cargo.lock"):
+            files["mutants/" + row["name"] + "/" + name] = sut / name
+    for item in selected:
+        require(artifact(item["path"]) == item, "selected compiled observer changed before sealing")
+        files["executables/" + item["sha256"] + "/" + Path(item["path"]).name] = Path(item["path"])
+    # Integration-test compilation also builds the CLI selected by its embedded
+    # CARGO_BIN_EXE. Retain that product, including the seed-to-root mutant.
+    from i5a_native_contract import strict_json
+    logs = [log for root in (work / "cli", work / "mutations") for log in root.rglob("build.stdout")]
+    for log in logs:
+        for line in log.read_text().splitlines():
+            row = strict_json(line)
+            if row.get("reason") == "compiler-artifact" and row.get("executable"):
+                item = artifact(row["executable"])
+                files["executables/" + item["sha256"] + "/" + Path(item["path"]).name] = Path(item["path"])
+    return files
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
@@ -211,6 +293,7 @@ def main():
                      "expected_build_sha256", "expected_legacy_baseline_sha256", "expected_runtime_index_sha256"):
             require(getattr(args, name) is not None, "full qualification requires --" + name.replace("_", "-"))
         inputs.update(runtime_files(args.runtime_index, args.expected_runtime_index_sha256))
+        inputs.update(producer_files(args.build, args.expected_build_sha256))
         from compare_i5c_legacy import baseline
         legacy = baseline(args.legacy_baseline, args.expected_legacy_baseline_sha256)
         inputs["legacy/baseline.json"] = args.legacy_baseline
@@ -245,6 +328,7 @@ def main():
         require(regression["fullI5bAcceptance"] is True, "I5b controlled refresh is incomplete")
         source_i5a = work / "current-i5a-fixture-record.json"
         write_json(source_i5a, regression["records"]["i5a-regression"])
+        gates.extend(inspect_i5a(work, args.i5a_captures))
         receipt, _ = run_gate(work, "i5a-controlled-refresh", ["python3", "native/crashpad-demo/assess.py",
             "--captures", args.i5a_captures, "--source-fixture-record", source_i5a,
             "--inspection-dir", work / "i5a-inspection", "--output", work / "i5a-controlled"])
@@ -277,6 +361,7 @@ def main():
             inputs["tools/" + name + "/" + Path(item["path"]).name] = Path(item["path"])
         for name in ("ariadne-minidump", "i5c", "i5a", "i5b", "i4_profile"):
             inputs["tools/release/" + name] = ROOT / "target/release" / name
+        inputs.update(compiled_files(work))
         require(sources() == before, "source inventory changed during full campaign")
         require(prerequisite_report()["tools"] == preflight["tools"], "native tool inventory changed")
     except (OSError, ValueError, KeyError) as error:

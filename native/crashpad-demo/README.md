@@ -297,6 +297,13 @@ T, q and EA independently; the immediate store payload `5` never contributes to
 the address. The indexed recipe remains an admission-negative oracle even though
 its physical EA is eight. PE bytes are comparison evidence only.
 
+For Linux reinspection, preserve the producer receipt unchanged and keep the
+build's `source/out/Release/` binaries beside it along with the other required
+build inputs. The inspector checks those local binaries against the recorded
+hashes; `binaryDirectory` remains the original producer pathname. The 2026-10-21
+relocation and changed-binary controls pass as part of 15 synthetic inspector
+tests. This is tooling validation and grants no controlled-capture acceptance.
+
 The report is published atomically to a new file; creating the no-overwrite
 hardlink is the commit point. A later temporary-name cleanup failure leaves the
 complete report committed, exits successfully and reports the cleanup warning on
