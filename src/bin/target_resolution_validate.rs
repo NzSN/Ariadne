@@ -4,6 +4,8 @@ use ariadne::input::{AnalysisQuery, FileSnapshot, OpenLimits, PrepareLimits};
 use ariadne::{AnalysisState, AnalysisView, CompletedAnalysis, DefinitionOrigin};
 use sha2::{Digest, Sha256};
 use std::{error::Error, path::PathBuf, time::Instant};
+
+const ORIGINAL_SHA256: &str = "5fea4ca614706fe0040ed3231efee0edf9ce4004a51d902bb581025b48bade08";
 fn digest(state: &AnalysisState, snapshot: &str) -> String {
     let mut hash = Sha256::new();
     hash.update(snapshot.as_bytes());
@@ -57,6 +59,9 @@ fn main() -> Result<(), Box<dyn Error>> {
             ..OpenLimits::default()
         },
     )?;
+    if snapshot.metadata().artifact_sha256 != ORIGINAL_SHA256 {
+        return Err("original dump SHA differs".into());
+    }
     let p = snapshot.prepare_with_bap_target_resolution(
         &AnalysisQuery {
             entry_points: [0x7ff640079640].into(),
@@ -75,9 +80,32 @@ fn main() -> Result<(), Box<dyn Error>> {
         .iter()
         .find(|r| r.site == "0x00007ff64007968b")
         .ok_or("table absent")?;
-    if selected.targets.len() != 45 {
+    let oracle: serde_json::Value = serde_json::from_str(include_str!(
+        "../../tests/bap/fixtures/target-resolution-table.json"
+    ))?;
+    let targets: Vec<String> = serde_json::from_value(oracle["unique_targets"].clone())?;
+    if selected.targets != targets
+        || selected.complete
+        || resolution.memory_premise != ariadne::bap::target_resolution::MEMORY_PREMISE
+    {
         return Err("captured target oracle mismatch".into());
     }
+    let normalized = serde_json::to_vec_pretty(&ariadne::bap::core_adapter::encode_request(
+        &p.prepared.request,
+    )?)?;
+    std::fs::write(out.join("normalized-request.json"), &normalized)?;
+    std::fs::write(
+        out.join("query-identity.json"),
+        serde_json::to_vec_pretty(&serde_json::json!({
+            "artifact_sha256": snapshot.metadata().artifact_sha256,
+            "snapshot_id": p.prepared.request.snapshot_id,
+            "entry_points": p.prepared.request.entry_points.iter().map(|a| format!("0x{a:016x}")).collect::<Vec<_>>(),
+            "slice_seeds": p.prepared.request.slice_seeds.iter().map(|a| format!("0x{a:016x}")).collect::<Vec<_>>(),
+            "normalized_request_sha256": ariadne::reports::sha256(&normalized),
+            "diagnostic_response_timeout_ms": 60000,
+            "production_cli_timing_credit": false
+        }))?,
+    )?;
     std::fs::write(
         out.join("target-resolution.json"),
         serde_json::to_vec_pretty(resolution)?,
@@ -86,11 +114,12 @@ fn main() -> Result<(), Box<dyn Error>> {
         "prepared_ms={prepared_ms}; table targets=45; complete={}",
         selected.complete
     );
-    let config = ariadne::bap::core_session::CoreConfig::from_directory(
+    let mut config = ariadne::bap::core_session::CoreConfig::from_directory(
         std::env::var_os("ARIADNE_BAP_CORE_DIR")
             .map(PathBuf::from)
             .unwrap_or_else(|| root.join("target/bap-core-native")),
     );
+    config.timeout = std::time::Duration::from_secs(60);
     let mut records = Vec::new();
     let mut expected = None;
     for backend in ["bap", "rust"] {

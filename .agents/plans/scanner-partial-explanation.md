@@ -8,7 +8,9 @@ is partial”). The retained baseline and its 28 gap entries were checked agains
 the original JSON and member manifest. This document records no new Scanner run
 or implementation acceptance in that original revision. The [2026-10-19 memory
 qualification](../../evidence/Ariadne/frame-question/20261019/README.md) now closes
-S1's selected candidate-table scope; S2–S4 remain pending.
+S1's selected candidate-table scope. The [2026-10-20 Scanner follow-up](../../evidence/Ariadne/scanner-followup/20261020/README.md)
+now qualifies S2–S4's finite audit and publication scope with the result still
+partial. The original rendering and qualification retain their dated identities.
 
 **Why this document exists.** The [Scanner admission resume record](../../docs/Ariadne/bap-analysis-core-design.md#admission-resume)
 shows that recovery now completes, while the [investigation contract](../../docs/Ariadne/investigation-design.md#binding-and-result-contract)
@@ -33,11 +35,15 @@ this work does not require an unsupported promotion to `explained`.
   query, claim, gap, publication and evidence contracts for this follow-up.
 - [Evidence guide](../../evidence/Ariadne/README.md) — source/tool identity checks,
   immutable historical records and fresh qualification boundaries.
+- [S2–S4 qualification](../../evidence/Ariadne/scanner-followup/20261020/README.md) —
+  exact current case, twenty-site audit, entry requirements and actual report replay.
 
 **What remains unresolved.** The snapshot does not establish the executed path,
 the actual memory writer or who produced the bad RSI value. Memory refinement
-now has selected full-Scanner candidate-table qualification. The 20 retained
-recovery obligations and earlier-provenance boundary still need individual review.
+now has selected full-Scanner candidate-table qualification. The twenty retained recovery obligations now have individual source-bound
+dispositions, and 123 exact entry-location requirements retain their earlier-
+provenance boundary. Their uncertainties remain unresolved; qualified review
+does not identify an executed path or writer.
 No historical-path, root-cause, universal-refinement or release qualification
 is established by this plan.
 
@@ -131,9 +137,9 @@ its stated premises.
 | --- | --- | --- |
 | S0 — preserve the baseline | Retained-data inspection complete for this document. | HTML counts and all 28 gap pairs agree with the retained JSON; explanation bytes match the member-manifest hash. No fresh analysis credit. |
 | S1 — clarify and assess memory provenance | Selected candidate-table scope passes remote M4 qualification, 2026-10-19. | All 12 original candidate keys preserved with explicit unresolved reasons, default report bytes unchanged and native/Rust assessments equal; source-bound evidence retained. |
-| S2 — review control and decode obligations | Pending. | A disposition and evidence requirement for each of eight call, two indirect-target and ten decode obligations. |
-| S3 — review entry-origin limits | Pending. | Explicit earlier-provenance boundary; any additional accepted evidence is bound to a separate query or supported input contract. |
-| S4 — qualify and publish the follow-up | Pending. | Fresh source/tool-bound checks, exact-case outputs, complete gap disposition and an honestly assigned final status. |
+| S2 — review control and decode obligations | Qualified finite review, 2026-10-20. | All twenty sites independently read and source-bound; eight opaque calls, two uncertified indirects, nine INT3 control disagreements and one UD1Lm/UD2B decode disagreement retained with requirements. |
+| S3 — review entry-origin limits | Qualified explicit boundary, 2026-10-20. | All 123 unique entry locations retain exact earlier-input requirements; no independently accepted earlier-value/activation query is supplied or invented. |
+| S4 — qualify and publish the follow-up | Qualified partial case, 2026-10-20. | Full native/Rust state and explanation equality, all 28 historical gaps preserved, actual old/current all-format replay and nine rejected corruptions; source-bound archive. |
 
 ### S0 — preserve the baseline
 
@@ -280,3 +286,47 @@ reasons. The default report is byte-preserved and native/Rust assessments match.
 This closes selected memory-candidate qualification while leaving S2's 20-site
 control audit, S3's earlier-entry provenance and S4's combined follow-up open.
 The original 28-gap explanation and its immutable qualification remain historical.
+
+## S2–S4 qualification, 2026-10-20
+
+The [finite follow-up evidence](../../evidence/Ariadne/scanner-followup/20261020/README.md)
+closes the audit, explicit boundary and publication clauses without changing
+producer/runtime/model semantics or claiming explained status. The source
+capsule is `ced9183d56c58eaa18014540d7a9e63a5b5b1de1e0f61551fb619ce8ee027c36`
+(1,075 files), checked unchanged through analysis and raw-byte auditing.
+
+The exact 571,636-byte `ed82b433…` derivative retains query `f25889d5…` and
+request fingerprint `5479d593…`. Full native/Rust states agree on 768 decoded
+starts, 895 edges, 19 slice instructions and twenty recovery obligations.
+Current explanations are byte-identical, partial and not truncated; all 28
+historical gap keys and order survive. The old projection-v3 report and current
+projection-v6 report retain separate semantic/output identities even though the
+query/request facts match. The original `9be21e47…` full capture is a distinct
+snapshot and is not silently substituted for this derivative.
+
+Independent raw reads match every fifteen-byte obligation prefix, with all
+contributors retained. All twenty sites are outside the selected slice; this
+does not remove query-wide gaps or prove non-execution. The eight CALL64m sites
+retain opaque-call-return summaries; the two JMP64r sites have no exhaustive
+certificate. Nine decoded INT3 sites fail production control agreement. At
+`0x00007ff7744414a8`, LLVM UD1Lm and BAP UD2B disagree. These are precise retained
+admission boundaries rather than ten assumed missing-byte/opcode problems.
+
+The entry audit records 123 unique required locations: 120 GPR byte locations,
+`flag:df`, `memory:any` and `state:other`. Earlier value provenance is not
+supplied; per-location requirements stay explicit. The separately qualified S1
+twelve-candidate memory result remains retained evidence in its own scope.
+
+Actual historical/native/Rust explanations replay without helpers in all three
+formats. Nine corruptions fail: false explained-with-gaps status, foreign
+snapshot and changed captured bytes for each input. A separate optional
+literal-AST comparison failed for the independent twenty-site lifting session;
+its eight call AST digests differ from whole-query digests. Both observations
+remain separately bound, with no cause or equivalence asserted. Setup/path
+failures also remain uncredited. No runtime or model source was changed.
+
+Archive: 1,039,011 bytes, SHA-256
+`ed0c443bda51f62d6bb8e83b76355ae9e216eb208c7c73bcf0ea1e0657f95ec5`.
+This closes S2–S4 for a useful qualified partial follow-up. Actual writers,
+history/root cause, stronger alias/entry evidence, unsupported semantic
+extensions, broad release and universal refinement remain separate goals.

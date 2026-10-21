@@ -1,4 +1,5 @@
 //! Evidence-bound domain explanations above the normalized analysis result.
+mod address_wrap;
 mod backward_values;
 mod explain;
 pub(crate) mod fault_context;
@@ -43,9 +44,15 @@ pub use memory_refinement::{
     MemoryDependencyDiagnostic, MemoryPair, MemoryProvenanceAssessment, MemoryRefinementLimits,
     NumericalBoundary, assess_memory_origins, modular_memory_overlap,
 };
+mod scalar_base_displacement;
 pub(crate) mod validate;
 mod zero_address;
 mod zero_base_offset;
+pub use address_wrap::{
+    ADDRESS_WRAP_PROFILE, ADDRESS_WRAP_SCHEMA, AddressWrapArithmetic, AddressWrapAssertion,
+    AddressWrapAssessment, AddressWrapClaim, AddressWrapEvidence, AddressWrapEvidenceData,
+    AddressWrapKind, AddressWrapLimits, BoundAddressWrapContext, assess_address_wrap,
+};
 pub use backward_values::{BackwardStep, BackwardValue, ScalarTransfer, backward_preimage};
 pub use explain::explain_fault_address;
 pub use fault_context::{

@@ -2,10 +2,18 @@
 
 ## Context and follow-up
 
-**Status.** Selected design on 2026-10-07, source-reviewed against `1344c99`.
-The implementation ledger identifies this question as I5c. The linked W0–W5 implementation plan
-is written; every implementation and qualification stage remains pending.
-No new assessment interface, CLI option, model or capture is delivered here.
+**Status.** The selected 2026-10-07 design identifies this question as I5c.
+The [2026-10-20 W0 qualification](../../evidence/Ariadne/address-wrap/20261020/w0/README.md)
+passes its finite model/oracle and synthetic-input gate on the exact promoted
+sources. The separate [W1 qualification](../../evidence/Ariadne/address-wrap/20261020/w1/README.md)
+passes binding and private-admission preservation: 10 binding tests, 4 I5b tests,
+666 unchanged legacy output files and 36 CLI comparisons. Three native I5b tests
+remain ignored in W1. The [W2 pilot](../../evidence/Ariadne/address-wrap/20261020/w2/README.md)
+passes the public assessor, seven freshly prepared/completed native synthetic
+captures, and required Rust gates. The [W3 matrix/report qualification](../../evidence/Ariadne/address-wrap/20261021/w3/README.md)
+passes all 140 decisions, 44 binding controls, 24 serialized controls and 114
+fresh native cases. W4 CLI/native recipe sources are implemented with their
+product/capture gates pending; W5 and full acceptance remain pending.
 
 **Why this document exists.** The [investigation design](investigation-design.md#higher-level-questions-after-the-first-slice)
 leaves arithmetic hypotheses open. [I5a](zero-address-design.md) computes an effective
@@ -20,8 +28,15 @@ Wrap describes conditional address arithmetic, not a programming error.
 
 **Where to go next.**
 
-- [I5c implementation plan](../../.agents/plans/i5c-address-wrap.md) — W0–W5 ownership,
-  mandatory controls, model contract, preservation and qualification exits.
+- [I5c implementation plan](../../.agents/plans/i5c-address-wrap.md) — W0–W5 ownership.
+  Read [W0 contract/model/oracle](../../.agents/plans/i5c-address-wrap.md#w0--freeze-semantics-and-independent-expectations),
+  [W1 binding/preservation](../../.agents/plans/i5c-address-wrap.md#w1--exact-binding-and-private-admission-reuse),
+  [W2 vertical slice](../../.agents/plans/i5c-address-wrap.md#w2--pilot-calculation-and-bounded-output),
+  [W3 complete matrix/reports](../../.agents/plans/i5c-address-wrap.md#w3--mandatory-oracle-and-negative-control-matrix),
+  [W4 owned capture/product](../../.agents/plans/i5c-address-wrap.md#w4--product-and-real-controlled-windows-evidence), and
+  [W5 qualification](../../.agents/plans/i5c-address-wrap.md#w5--qualification-mutation-sensitivity-and-evidence)
+  for the corresponding bounded exit. Source-review findings, actual contracts
+  and dated qualification summaries stay in this canonical design.
 - [I5b source review](zero-base-offset-design.md#decoded-record-and-independent-oracle) — reviewed encoded base/displacement
   roles, six MOV forms and the existing independent decode/BAP agreement checks.
 - [I5a contracts](zero-address-design.md) — sealed fault observations, site/operation
@@ -32,7 +47,8 @@ Wrap describes conditional address arithmetic, not a programming error.
   TLA+ contract authoritative before runtime implementation; model checking,
   Rust conformance and hardware capture evidence remain different tiers.
 
-**What remains unresolved.** All W0–W5 work remains pending. The first profile
+**What remains unresolved.** W4 product/native-build/owned-capture gates and W5
+full qualification remain pending. The first profile
 cannot grant a definite assessment for mathematical underflow because its
 resulting access is outside the inherited lower-range admission policy. Indexed,
 32-bit addressing, general canonicality, Linux, earlier executed arithmetic and
@@ -185,7 +201,7 @@ or executable, starts no decoder/lifter and reruns no recovery/dataflow. The CLI
 adds the question to slice seeds, never entry roots. BAP stays the native default
 and sole production effect producer; Rust remains explicit reference/rollback.
 
-## Proposed result, rendering and budgets
+## Result, rendering and budgets
 
 Schema: `ariadne.address-wrap-assessment/v1`. Existing strict schemas remain
 unchanged. Retain identity/question/profile/context/receipt digests, source
@@ -209,8 +225,7 @@ A derived `lower` arithmetic fact in an unknown result is not an accepted
 lower-wrap fault diagnosis. Text must lead with the unknown assessment and its
 range gap before showing that conditional arithmetic fact.
 
-Default `AddressWrapLimits` are separately proposed as 64 evidence and 64 claim
-records; I5a/I5b defaults remain untouched. W0 must account for the exact complete
+Default `AddressWrapLimits` are 64 evidence and 64 claim records; I5a/I5b defaults remain untouched. W0 must account for the exact complete
 bundle before coding. Omit mandatory records atomically with their dependent
 facts/claims. Budget exhaustion yields unknown/truncated; diagnostic arithmetic
 cannot survive loss of its own inputs. Validate identities/shape even at zero
@@ -220,9 +235,9 @@ Raw bytes/register fields are observed. Encoded-role interpretation, wide sum,
 wrap kind, EA and conclusion are derived under explicit premises. No observed
 arithmetic, CPU carry flag, confirmed bug or historical producer is asserted.
 
-Proposed CLI selection is `--assess-address-wrap VA --memory-access N`, with
+The implemented CLI source selects `--assess-address-wrap VA --memory-access N`, with
 existing assessment-only text/JSON/DOT and transactional output-directory modes.
-Bundle mode would add `address-wrap-assessment.{txt,json,dot}` beside unchanged
+Bundle mode adds `address-wrap-assessment.{txt,json,dot}` beside unchanged
 base reports. One numeric question, explanation or supplied stateflow selection
 at a time; invalid combinations publish no finished bundle. DOT must preserve
 the full typed result, and all formats expose the same conclusion and gaps.
@@ -255,6 +270,191 @@ repeats. W0 freezes them before implementation. Requalify the independent I4
 2,000 ms Windows / 250 ms Linux clauses and preserve I5a/I5b limits. Diagnostic,
 fixture, controlled-capture and packaged-release tiers remain explicit.
 
+## W0 finite contract, 2026-10-20
+
+This contract is frozen by the [finite W0 record](../../evidence/Ariadne/address-wrap/20261020/w0/README.md)
+and its exact source/tool/raw-input bindings. It does not assert that the
+assessor, CLI, native captures or W1–W5 qualification have run. The promoted
+23 normal source files are byte-identical to the checked layout. The
+[W1 stage](../../.agents/plans/i5c-address-wrap.md#w1--exact-binding-and-private-admission-reuse)
+has its own later binding and legacy-preservation qualification below.
+
+Source review confirms that `zero_address::decide` sets modular EA only after
+operation, site, context, form and register admission. Only the range and
+reported-byte gaps are late. The shared private seam extracts decoded
+one-base/no-index and BAP coefficient/constant agreement; I5b keeps its existing
+gap precedence: any gap suppresses decoded base/value/displacement, while late
+range/reported-byte gaps preserve the admitted evaluated/reported addresses and
+computed-address claim. Receipt/base/profile/BIL failures clear the evaluated
+address but retain the reported observation; claim-budget failure clears all
+operand/address fields. The new I5c arithmetic
+survives only late range/reported-byte gaps, never operation mismatch or loss
+of its own required evidence.
+
+W1 adds an immutable input-owned seal at final preparation publication: original
+request fingerprint and preparation identity, complete instruction-evidence/read
+maps and gaps, materialization report and open limits. The new binder compares
+all facts before binding, rejecting coherent public edits at unselected sites
+as well as the question site. Reader-owned fault metadata remains private;
+private refinement receipts are outside this seal. I5b does not consume it.
+No completed analysis or reaching-state copy is created.
+
+The independent corpus is fixed at 140 decision rows: six forms times eleven
+arithmetic categories (66), 20 boundary/base/payload, 30 exclusion/context,
+eight adapter controls and 16 output-budget controls. Of these, 114 use
+synthetic capture inputs and 26 use bound-unit substitutions. There are 19
+binding negatives, each at 64/64 and 0/0 budgets; 24 strict-result negatives;
+12 CLI controls; 24 compiled behavioral mutants; ten fixture timing workloads;
+and eight newly owned controlled Windows observations. Required gap sets are
+minimum mandatory subsets, while conclusions, arithmetic facts, truncation and
+record accounting are exact expectations.
+
+The 114 synthetic inputs must be materialized in the normal fixture layout
+with exact hashes, sizes and inventory. The W0 checker binds the actual raw
+files and their manifest before and after checking; merely retaining expected
+hashes does not satisfy this gate. A separate current-product preparation probe
+reviews all 114 decoder/context premises before the promotion freeze. Any
+receipt or admission correction is explicit and retains prior failed packets;
+SUT preparation observations never supply arithmetic or assessment expectations.
+
+The separate 2026-10-20 preparation probe03 prepared all 114 raw inputs under
+unchanged read-only producer files, fresh retained state/cache and pre/post raw
+hashes. Its [four selected-instruction facts](../../tests/input/fixtures/i5c/producer-selection-facts.json)
+correct receipt absence for operand-size, vector, repeat and lock. In the last
+two cases the selected instructions are one-byte prefix records, distinct from
+the complete captured MOV sequence. Their conclusions and all 140 independent
+arithmetic expectations are unchanged. Excluded-shape offset worksheets are
+calculated diagnostics, not observed or admitted linear addresses; they do not
+supply an absent FS base or the arithmetic of an isolated prefix. This producer
+probe ran no core analysis or I5c assessment and is separate from the model gate.
+
+The formal representation keeps four 16-bit limbs for every 64-bit base and EA,
+and sign-extends a two-limb displacement. If c is the unsigned carry, q is
+`c-negative(D)`, so signed-negative ordinary offsets do not become wraps.
+`(q,EA)` denotes the exact wide T; access-end overflow, H=2^47 and reported-byte
+membership are calculated from the whole word. Fifty-two finite scenarios run
+under six TLC configurations after one Apalache typecheck. BAP/decoded
+admission, context normalization and raw parsing are supplied premises; this
+question model supplies no ISA/history proof or runtime refinement result.
+The sequence constructor uses an unbounded natural-number recurrence, with
+88 finite equivalence controls at lengths 0..42 and 64. No Apalache bounded-SMT
+claim is made; typechecking and TLC remain the declared formal tier.
+
+The byte-preservation matrix is 666 outputs: all 41 I5a fixtures times two
+backends/three formats (246), all 57 I5b fixtures similarly (342), its
+upstream-call auxiliary (six), and four established base/explanation workloads
+times Rust/default/explicit-native and all formats (72). Freeze the actual
+pre-W1 bytes once. Any necessary native build-receipt replacement is separately
+validated and labeled; never normalize substantive fields or refresh the
+baseline after extraction. Older controls, fixture bytes and source-bound
+contracts remain unchanged.
+
+### W0 result and publication contract
+
+For an admitted full context, E=13+P+R evidence atoms and O=10+P+R observed
+claims, with P≤15 exception parameters and R≤18 registers. Five arithmetic
+claims plus one assessment give maximum 46/49; ordinary P=2/R=18 needs 33/36.
+P>15 is a malformed binding/reader case, independently of output limits.
+Defaults stay 64/64; I5a/I5b defaults and schemas do not change.
+
+Preserve instruction, reader-ordered fault atoms and decoded receipt-last
+evidence order. Any omitted evidence yields incomplete/Unknown/truncated and
+removes arithmetic. The derived decoded-base, captured-base, wide-sum,
+wrap-kind and computed-EA claims form one atomic bundle. If the full claim
+bundle does not fit, retain only a bounded observed prefix and an Unknown
+assessment when a slot remains. No partial arithmetic bundle is published.
+
+The new schema uses one optional arithmetic object containing base register,
+base value, signed displacement, displacement bit pattern, canonical decimal
+T, wrap kind and EA. q is determined by wrap kind, not another independent wire
+field. The complete input-evidence count and retained prefix are explicit.
+Malformed identities/receipts are checked before zero budgets. Strict decoding
+recomputes arithmetic/readiness/conclusion, canonical spellings, ordered claims,
+source/scope/content digests and reference closure. Every renderer validates;
+Unknown text precedes any conditional arithmetic, and DOT retains full JSON.
+
+Bindings retain the existing snapshot/query/receipt contract. Scope IDs use the
+ordered identity/question/schema/profile/context-digest/receipt-digest tuple;
+evidence and claim domains are `i5c-evidence` and `i5c-claim`. The new content ID
+hashes the typed compact result with that content-ID field empty. Complete
+source digests recompute; incomplete source bindings cannot justify arithmetic.
+
+The four new owned ASM recipes are upper wrap (RCX=M−8,disp16), no wrap
+(RCX8,disp0), signed-negative no wrap (RCX16,disp−8) and indexed exclusion
+(RCX=M−8,RDX0,disp16). Every recipe is separately captured in partial/full mode,
+with uploads disabled and exact native-build/context/bytes/PE observations.
+Existing remote WSL access does not prove native Windows SDK/CIPD/llvm-ml
+availability; record a fresh read-only preflight before W4. Old I5b captures
+remain regressions rather than new I5c acceptance.
+
+Keep later actual-contract corrections and dated validation summaries in this
+document, stage execution in the
+[existing W0–W5 plan](../../.agents/plans/i5c-address-wrap.md), and raw
+qualification evidence under `evidence/Ariadne/address-wrap/`. Full finite
+acceptance still requires every original qualification clause above; no new
+count, model check or presentation update waives broader unresolved boundaries.
+
+## W0 qualification, 2026-10-20
+
+The [sealed W0 evidence](../../evidence/Ariadne/address-wrap/20261020/w0/README.md)
+qualifies 140 independent decision rows, 52 model scenarios, one Apalache 0.58
+typecheck and six TLC configurations using the pinned 1.8.0 distribution. Twelve
+oracle controls, 88 sequence controls and all 114 synthetic raw inputs pass.
+The exact 23 normal source files and 115 raw files are promoted from the
+qualified export; no local model/build or raw generation was used. The model
+uses full-width limbs and signed-displacement carry correction; no Apalache
+bounded-SMT, ISA proof or runtime refinement claim is made.
+
+The separate producer03 review records all 114 preparation shapes: 86 ready and
+28 negative/incomplete, 110 receipts and four legitimate receipt absences. The
+operand-size/vector/repeat/lock corrections change only preparation input facts
+and evidence counts; all independent arithmetic/conclusion expectations remain
+unchanged. Earlier failed model/probe/packaging attempts are retained without
+credit. All 100 generated producer state logs are retained separately from the
+159 immutable runtime files.
+
+Archive SHA-256 is
+`5e7b164af51caecc322400f9bcb1425c0ed5bf895087569d56d973685ed701c7`;
+all 2,207 members and the publication sidecars are verified. Compiled tools,
+dependencies and the pinned static runtime remain in byte-verified remote
+retention, with identities in the evidence record. The 666 legacy outputs in
+that W0 record remain the BEFORE baseline. The separate W1 record below binds
+the later AFTER comparison; W0 itself grants no W1–W5 runtime acceptance.
+
+## W1 qualification, 2026-10-20
+
+The [sealed W1 evidence](../../evidence/Ariadne/address-wrap/20261020/w1/README.md)
+qualifies the immutable preparation seal, exact address-wrap binding and private
+scalar admission extraction against one retained 1,213-file source snapshot.
+All 10 binding tests and 4 existing I5b tests pass; 3 native I5b tests remain
+ignored. The scoped formatting check also passes. The source and dependency/tool
+inventories stayed stable during the executed tests.
+
+A fresh release build selected its Ariadne and serde_json libraries and CLI
+from actual Cargo metadata and compiler-artifact output. The unchanged driver
+made 210 analysis runs: all 594 legacy assessment files and 72 base/explanation
+files are byte-identical to the sealed BEFORE baseline. All 36 independent CLI
+comparisons also pass. The collector retains 251 command receipts and separate
+stdout/stderr streams, exact source/artifact identities and actual process-group
+absence checks. No normalization or native-receipt replacement was needed.
+
+The first AFTER preflight confused the test-report digest with the launch digest
+and stopped before output creation or build/collection. Its controllers and the
+explicit correction remain in the archive without credit; no absent raw failure
+log is fabricated. The passing launch and report have distinct pinned identities.
+
+Qualified source, all 184 release dependency files, selected compiled artifacts,
+native inputs and tool files are retained independently before later changes.
+Archive and export verification use those copies and closed evidence after the
+retention checkpoint. The full source snapshot, raw tests, AFTER products and
+BEFORE archive are included in the transport evidence; compiled payloads and the
+static BAP runtime stay in byte-verified remote retention. Later W2 edits do not
+change the identity of this W1 qualification.
+
+This closes only W1. I5c arithmetic, reports/CLI, source-fixture, controlled-Windows,
+fixed-budget performance, all-features Clippy and full-I5c acceptance are separate
+unresolved gates. The ignored native tests are not counted as exercised.
+
 ## Design verification on 2026-10-07
 
 A standalone mathematical check verifies all six example rows, including the
@@ -263,5 +463,56 @@ A direct pinned LLVM MC 20.1.2 checked-protocol probe decodes the four proposed
 controlled recipes in the plan as MOV32mi with the expected RCX base, absent or
 RDX index, and signed displacement 16, 0, -8 or 16. These are design arithmetic
 and decode-reference checks; they exercise no BAP address-wrap assessor,
-Windows capture, question-level model or new performance workload. W0–W5
-remain pending.
+Windows capture, question-level model or new performance workload. At that
+date W0–W5 remained pending; the later W0 record has its own exact scope.
+
+## W2 qualification and W3 follow-up, 2026-10-21
+
+The [W2 record](../../evidence/Ariadne/address-wrap/20261020/w2/README.md)
+qualifies exact wide arithmetic, conditional-versus-final conclusions and atomic
+budgets through the public owned binding on its recorded 1,214-file snapshot.
+Five ordinary pilot tests and one explicitly exercised native test pass. The
+native test freshly prepares and completes seven synthetic captures, checks four
+budget variants, and rejects invalid accesses at full and zero output limits.
+Formatting, default tests, core-only tests and all-features/all-targets Clippy
+also pass on remote WSL. Root-check receipts and all source/tool/native/runtime
+postchecks pass. No local Cargo or native analysis ran.
+
+The source delta and predecessor W1 source reconstruct the exact qualified
+snapshot. The local W2 record retains receipts/controllers; raw logs remain
+remote and must join W5's sealed runtime campaign. An owned-path test API error
+and a singular/plural receipt-parser error are preserved without whole-campaign
+credit; the final continuation validates the actual passing pilot logs before
+running the remaining root checks. These corrections do not change arithmetic.
+
+W3 adds strict encoding/decoding and text/JSON/DOT rendering, with an internal
+shared fixture helper and 24 named serialized-negative controls. Its full
+140-case matrix and report qualification remain pending. The later helper
+refactor preserves every W2 test body; its new source hashes require their own
+checks. W2 supplies no W3–W5, owned-Windows-capture, timing or full-I5c acceptance.
+
+## W3 qualification and W4 follow-up, 2026-10-21
+
+The [dated W3 record](../../evidence/Ariadne/address-wrap/20261021/w3/README.md)
+passes all 140 frozen decisions (114 supplied-preparation raw captures and 26
+separately named typed unit cases), 44 pre-budget binding controls and all 24
+strict serialized controls. Eight representative results roundtrip through
+JSON and complete DOT metadata; Unknown and every gap/requirement precede
+conditional arithmetic in text. The explicit native gate freshly prepares and
+completes all 114 raw cases with pinned decoded facts, BAP and the native core.
+None of the 26 unit cases receives raw/native credit.
+
+All ordinary matrix/pilot/report targets, formatting, default/core-only tests
+and all-features/all-targets Clippy pass remotely. Source/tool/dependency/native
+and immutable-runtime rechecks pass on the exact 1,252-file snapshot. The first
+package's omitted untracked files were detected by the declared-count gate and
+remain uncredited; the corrected package checks explicit source closure and
+actual named 140/44/114 output rows. Full runtime-log sealing remains a W5 gate.
+
+W4 sources now add the explicit CLI selector, transactional report bundle, four
+native assembly recipes, new-only witnesses and an independent raw/PE inspector.
+Review corrected its post-commit cleanup status before adoption. Native build,
+all twelve CLI controls and eight newly owned partial/full captures are still
+pending; source review and tiny Python controls do not satisfy them. W5 timing,
+compiled mutations, replay, legacy/I4/I5a/I5b refresh and full evidence closure
+also remain pending. W3 grants none of those later acceptance flags.

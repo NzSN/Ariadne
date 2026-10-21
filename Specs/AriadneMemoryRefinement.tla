@@ -1,5 +1,5 @@
 ---------------------- MODULE AriadneMemoryRefinement ----------------------
-EXTENDS Integers, FiniteSets, Sequences
+EXTENDS Integers, FiniteSets, Sequences, Apalache
 \* Finite assessment contract. Instruction relations and scoped alias witnesses
 \* are admitted premises; this model does not establish instruction-step truth.
 \* Synchronized with backward_values.rs and memory_refinement.rs, 2026-10-11.
@@ -32,8 +32,12 @@ Before(kind, after, c) == {x \in Values : Forward(kind,x,c) = after}
 Precision(s) == IF s = {} THEN "conflict"
                 ELSE IF Cardinality(s) = 1 THEN "exact"
                 ELSE IF s = Values THEN "unknown" ELSE "constrained"
+\* One representative for each offset residue needed by the modular range.
+\* This is not a cap on n: n >= Modulus already covers every address residue.
+\* @type: Int => Set(Int);
+OffsetResidues(n) == {i \in Values : i < n}
 \* @type: (Int, Int) => Set(Int);
-Range(a,n) == {(a+i) % Modulus : i \in 0..(n-1)}
+Range(a,n) == {(a+i) % Modulus : i \in OffsetResidues(n)}
 \* @type: (Int, Int, Int, Int) => Bool;
 Disjoint(a,n,b,m) == Range(a,n) \cap Range(b,m) = {}
 \* @type: (Bool, Bool, Bool, Bool, Bool) => Bool;
@@ -50,8 +54,8 @@ IdealSafety ==
        /\ (Precision(s) = "conflict" => s = {})
        /\ \A x \in Values: x \in s <=> Forward(kind,x,c) = after
  /\ \A a,b \in Values, n,m \in {1,2,4,8}:
-       Disjoint(a,n,b,m) <=> ~\E i \in 0..(n-1), j \in 0..(m-1):
-                                   (a+i) % Modulus = (b+j) % Modulus
+       Disjoint(a,n,b,m) <=> ~\E i \in 0..7, j \in 0..7:
+                    i < n /\ j < m /\ (a+i) % Modulus = (b+j) % Modulus
  /\ \A entry,footprintComplete,scopeComplete,disjoint,budgetFits \in BOOLEAN:
        Exclude(entry,footprintComplete,scopeComplete,disjoint,budgetFits) =>
          ~entry /\ footprintComplete /\ scopeComplete /\ disjoint /\ budgetFits
@@ -65,11 +69,10 @@ Transfer(kind,value) == [kind |-> kind, value |-> value]
 \* @type: (Str, Int, Int, Seq($memoryTransfer)) => $memoryFact;
 Fact(kind,mask,value,operations) ==
   [kind |-> kind, mask |-> mask, value |-> value, operations |-> operations]
-RECURSIVE ApplyChain(_, _)
+\* @type: (Int, $memoryTransfer) => Int;
+ChainStep(x,t) == Forward(t.kind,x,t.value)
 \* @type: (Int, Seq($memoryTransfer)) => Int;
-ApplyChain(x,operations) ==
-  IF operations = <<>> THEN x
-  ELSE ApplyChain(Forward(Head(operations).kind,x,Head(operations).value), Tail(operations))
+ApplyChain(x,operations) == ApaFoldSeqLeft(ChainStep,x,operations)
 \* @type: ($memoryFact, Int) => Bool;
 Permits(f,x) ==
   CASE f.kind = "unknown" -> TRUE

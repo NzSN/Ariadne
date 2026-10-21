@@ -35,6 +35,19 @@
   conditional MOVAPS normal selection, separately [qualified](evidence/Ariadne/alignment-hypotheses/20261016/README.md)
   while retaining the baseline unknown verdict and actual saved v1 replay.
 
+- [Captured indirect-target R6 qualification](docs/Ariadne/indirect-target-resolution.md#r6-qualification-refresh)
+  and [R0–R6 ledger](.agents/plans/indirect-target-resolution.md) — finite
+  pointer-slot/signed-32 target admission, fresh resolver/model/replay/original
+  Windows gates and retained source-verified core mutations. The
+  [2026-10-20 evidence](evidence/Ariadne/indirect-target-resolution/20261020/README.md)
+  preserves incomplete target coverage and partial explanations.
+
+- [Scanner partial-explanation follow-up](docs/Ariadne/investigation-design.md#scanner-partial-explanation-follow-up)
+  and [S2–S4 ledger](.agents/plans/scanner-partial-explanation.md) — twenty-site
+  control/decode audit and 123-location entry boundary, with [qualified partial
+  evidence](evidence/Ariadne/scanner-followup/20261020/README.md). All 28 gaps
+  remain; the review establishes no executed history or actual writer.
+
 - [Caller normal-flow coverage](docs/Ariadne/caller-semantic-coverage-design.md)
   and [completed S0–S6 ledger](.agents/plans/caller-semantic-coverage.md) — terminal/load
   support removes the original barriers, and its completed-caller gate has
@@ -44,7 +57,9 @@
 
 - [Selected I5c address-wrap design](docs/Ariadne/address-wrap-design.md) and
   [W0–W5 plan](.agents/plans/i5c-address-wrap.md) — the next fault-time arithmetic
-  question; documentation is written, all implementation/qualification pending.
+  question; W0–W3 pass their separate recorded gates, including the
+  [140-case/native114 W3 matrix](evidence/Ariadne/address-wrap/20261021/w3/README.md).
+  W4 sources are implemented with product/capture gates pending; W5 remains pending.
 
 - [Selected I5b design](docs/Ariadne/zero-base-offset-design.md) and
   [implementation plan](.agents/plans/completed/i5b-zero-base-offset.md) — the delivered bounded
@@ -72,6 +87,33 @@ investigations using pinned BAP instruction lifting. Ariadne validates its own
 transport, semantic projection, analysis and reports. The independent AMD64
 instruction-step/Lean project and full-manual coverage goal are retired under
 the [semantic assurance decision](docs/Ariadne/semantic-assurance.md).
+
+## Active specifications — finite S3 qualified
+
+The [formal-model guide](Specs/README.md#specification-synchronization-s3-qualification-2026-10-20), [completed S0–S3 ledger](.agents/plans/specification-sync.md) and [evidence](evidence/Ariadne/specification-sync/20261020/README.md) close the declared finite model suite. The exact 1,118-file snapshot has 53 typecheck calls/32 root modules, 40 bounded calls, 24 TLC instances, 20 Memory partitions, six scripts and eight audited core TLC configurations. Full 120 Java calls include three identity checks; the eight preflight and three final equality controls are separate.
+
+Bounded outcomes remain 30 `NoError` and 10 terminal `ExecutionsTooShort` with nonempty Init and matching complete TLC graphs; requested maximum lengths are unchanged and not claimed reached by short cases. Canonical algebraic authority, exact finite lookup equality/closure/coverage, original Safety TLC, all domains and bounds remain explicit. This does not qualify W2 runtime, ISA, wider widths/chains, universal refinement or release. Historical 20261011 counts and failed attempts retain their scopes.
+
+
+## Captured indirect targets — finite R6 qualified
+
+The [canonical contract](docs/Ariadne/indirect-target-resolution.md#r6-qualification-refresh)
+and [2026-10-20 evidence](evidence/Ariadne/indirect-target-resolution/20261020/README.md)
+close the selected R6 profile. Final source identity is
+`193e31bb835bda4a4e4b5fc59397c424f11adefc691d1e309faf7ff0348d43a5`
+(1,076 files). Fresh 14 Rust/one native legacy-v1 mutations, 39 Python controls,
+five model configurations and typechecking, 330 replay observations, native
+fixtures and original Windows parity pass. Twelve core mutants are explicitly
+retained after 221 relevant-input and identical-helper checks.
+
+The original 58-entry/45-target dispatch stays non-exhaustive and its explanation
+partial. Each measured resolver pass meets 1,000 ms and each current-source
+JSON explanation-only CLI sample meets 60,000 ms; concrete timing samples and
+archive identity are in the canonical qualification. The 60 s diagnostic response
+timeout supplies state-parity evidence only; production native transport remains
+30 s. Producer/runtime semantics are unchanged. Historical failures remain
+historical. This finite result excludes real Linux full dumps, all-format full
+base reports, packaged release, history/root cause and universal refinement.
 
 ## Guarded captured-target composition — scoped loop closure delivered
 
@@ -165,8 +207,9 @@ for machine-code debugging; [qualification](docs/Ariadne/zero-base-offset-design
 Historical null derivation and other hypotheses remain later work.
 The next selected [I5c design](docs/Ariadne/address-wrap-design.md) and
 [W0–W5 plan](.agents/plans/i5c-address-wrap.md) assess the unsigned base plus signed
-encoded displacement before modular reduction. All implementation stages are
-pending. The first profile preserves lower-range fault admission, so it can
+encoded displacement before modular reduction. W0 passes its separate finite
+model/oracle gate; W1–W3 now pass binding, pilot and full finite/native matrix
+qualification. W4 product/capture and W5 full qualification remain pending. The first profile preserves lower-range fault admission, so it can
 qualify upper-wrap/no-wrap cases while mathematical underflow remains unknown.
 It introduces no historical-path, canonicality or root-cause claim.
 The [native Windows Crashpad demo](docs/Ariadne/zero-address-design.md#controlled-windows-capture)

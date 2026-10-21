@@ -8,8 +8,10 @@ the dated ledger retains exact source/tool/corpus qualification.
 The [2026-10-19 remote qualification](../../evidence/Ariadne/frame-question/20261019/README.md)
 closes the finite section-5 P0–P10, FC0–FC6 consumer and selected memory M0–M4
 profiles. The [caller S6 record](../../evidence/Ariadne/caller-semantic-coverage/20261019/README.md) also closes its original completed-caller gate. Finite [frame-path F4](../../evidence/Ariadne/frame-paths/20261020/README.md)
-is qualified separately. Five ledgers below still contain unfinished work; overlapping gates
-remain separate from those completed deliveries. The prior prerequisite/local
+is qualified separately. The [finite resolver R6 qualification](../../evidence/Ariadne/indirect-target-resolution/20261020/README.md)
+closes its declared mutation/replay/original-capture clauses. The [Scanner S2–S4 review](../../evidence/Ariadne/scanner-followup/20261020/README.md) closes its finite audit and entry-boundary follow-up while retaining a partial answer. Two ledgers below
+still contain unfinished work, while ten retained stage ledgers are complete
+within their finite profiles. Overlapping gates remain separate from those deliveries. The prior prerequisite/local
 records retain their dates and original scope.
 Thirty-one completed or superseded records live in `completed/`. Archiving
 preserves each record's original scope and does not refresh its qualification.
@@ -43,12 +45,12 @@ universal-proof clauses. A partial result is not a completed acceptance gate.
 | [Structural frame report: Stage 5.1](frame-structure-report.md) | SF0–SF6 complete within the 2026-10-16 recovery-only Windows AMD64/E8-call scope. Retained at its canonical path; caller S6 and frame-path F4 remain separate. |
 | [Caller semantic coverage](caller-semantic-coverage.md) | S0–S6 complete within the 2026-10-19 original Windows profile, including independent full-state checks. Frame-path F4 remains separate. |
 | [Frame-path enumeration](frame-path-enumeration.md) | F0–F4 pass the 2026-10-20 finite model/mutation/original-capture scope; the 32-node/two-visit path restriction retains partial coverage. Earlier unavailable and zero-path attempts remain historical. |
-| [I5c address wrap](i5c-address-wrap.md) | W0–W5 model, runtime, capture and qualification stages. |
-| [Indirect-target resolution](indirect-target-resolution.md) | Full R6 mutation/replay qualification; retain the narrower completed native/dump retry. |
+| [I5c address wrap](i5c-address-wrap.md) | W0–W3 pass their recorded finite/model/public/native-matrix scopes; W4 CLI/native recipe sources are implemented with product/capture gates pending; W5 full qualification remains pending. |
+| [Indirect-target resolution](indirect-target-resolution.md) | R0–R6 pass the 2026-10-20 finite profile: fresh 15 resolver mutants, models/replay/original Windows query and source-verified retained core mutants. Linux full dumps, all-format full base reports and release remain excluded. |
 | [Investigation layer](investigation-layer.md) | I5c, other hypotheses and I6/I7; finite frame-path F4 has separate qualification. |
 | [Memory provenance refinement](memory-provenance-refinement.md) | M0–M4 pass the selected remote finite/Scanner candidate-table scope. Wider alias/history claims remain outside the profile. |
-| [Scanner partial explanation](scanner-partial-explanation.md) | Selected S1 candidate-table gate passes; S2–S4 control/decode audit, entry provenance and combined follow-up remain open. |
-| [Specification synchronization](specification-sync.md) | S3 remote qualification of the audited model suite. |
+| [Scanner partial explanation](scanner-partial-explanation.md) | S1 retains its selected M4 scope; S2–S4 pass the 2026-10-20 twenty-site audit, 123-location entry boundary and exact-case replay. All 28 gaps and the partial status remain explicit. |
+| [Specification synchronization](specification-sync.md) | S0–S3 complete within the [2026-10-20 finite model profile](../../evidence/Ariadne/specification-sync/20261020/README.md): 53 type calls, 40 bounded calls and 24 TLC instances; wider/runtime refinement remains separate. |
 
 ## Delivered implementation and qualification plans
 

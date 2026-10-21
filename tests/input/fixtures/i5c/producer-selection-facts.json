@@ -1,0 +1,66 @@
+{
+  "changed_cases": {
+    "lock": {
+      "bytes_hex": "f0",
+      "decoder_control": "Ordinary",
+      "length": 1,
+      "memory_access_shapes": [],
+      "opcode": "LOCK_PREFIX",
+      "provenance": "Verified current public preparation producer03; not arithmetic or conclusion expectations",
+      "receipt_present": false,
+      "semantic_control": "Stop",
+      "semantic_status": "decode-disagreement"
+    },
+    "operand-size": {
+      "bytes_hex": "66c740100500",
+      "decoder_control": "Ordinary",
+      "length": 6,
+      "memory_access_shapes": [
+        {
+          "access_width": 16,
+          "address_width": 64,
+          "role": "Store"
+        }
+      ],
+      "opcode": "MOV16mi",
+      "provenance": "Verified current public preparation producer03; not arithmetic or conclusion expectations",
+      "receipt_present": false,
+      "semantic_control": "Ordinary",
+      "semantic_status": "projected"
+    },
+    "repeat": {
+      "bytes_hex": "f3",
+      "decoder_control": "Ordinary",
+      "length": 1,
+      "memory_access_shapes": [],
+      "opcode": "XRELEASE_PREFIX",
+      "provenance": "Verified current public preparation producer03; not arithmetic or conclusion expectations",
+      "receipt_present": false,
+      "semantic_control": "Stop",
+      "semantic_status": "decode-disagreement"
+    },
+    "vector": {
+      "bytes_hex": "0f1100",
+      "decoder_control": "Ordinary",
+      "length": 3,
+      "memory_access_shapes": [
+        {
+          "access_width": 128,
+          "address_width": 64,
+          "role": "Store"
+        }
+      ],
+      "opcode": "MOVUPSmr",
+      "provenance": "Verified current public preparation producer03; not arithmetic or conclusion expectations",
+      "receipt_present": false,
+      "semantic_control": "Ordinary",
+      "semantic_status": "projected"
+    }
+  },
+  "probe03_raw_stability_sha256": "f4b8070e99bb6be0e4961a7730e377714a43f8dd5f447244c0809f48affb49bf",
+  "probe03_run_sha256": "71cbe572e31bf00852e3209da90cafbceeb51477ad520f9e45998fe286ba5cea",
+  "producer_cases": 114,
+  "producer_observations_sha256": "4730d27d2f4c3cbd97d659abaef560c7aa1e46b617e4c3b9ca0cb7d455cd976f",
+  "schema": "ariadne.i5c-v4-producer-selection-binding/v1",
+  "scope": "Admitted producer input facts only; no arithmetic or conclusion oracle from producer"
+}

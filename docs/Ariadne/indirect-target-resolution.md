@@ -2,15 +2,13 @@
 
 ## Context and follow-up
 
-**Status.** The finite `captured-indirect-targets/v1` implementation and review
-corrections are committed at `b5d56b7`. The [original-dump retry](../../evidence/Ariadne/indirect-target-resolution/dump-retry-b5d56b7-20261013/report.json)
-passes 26 resolver tests including the pinned native cases, full native/Rust
-state comparison and byte-identical CLI explanations. Native/Rust individual
-CLI samples are 38.61 s / 19.92 s against the unchanged 60 s criterion. The
-[correction record](../../evidence/Ariadne/indirect-target-resolution/review-corrections-20261013/report.json)
-retains the earlier portable/root checks; the full mutation aggregate remains pending.
-The [R0–R6 ledger](../../.agents/plans/indirect-target-resolution.md) separates those
-fixes from full qualification. The [initial source-bound record](../../evidence/Ariadne/indirect-target-resolution/qualification-20261013/report.json)
+**Status.** The finite `captured-indirect-targets/v1` profile passes the
+[2026-10-20 R6 qualification](../../evidence/Ariadne/indirect-target-resolution/20261020/README.md).
+The [R0–R6 ledger](../../.agents/plans/indirect-target-resolution.md) records fresh
+resolver/model/replay/original-capture gates and explicitly retained,
+source-verified core-mutation evidence. Producer/runtime semantics remain
+unchanged; the diagnostic validation driver pins and exports the original query.
+The original 2026-10-13 correction and retry records keep their dated scope. The [initial source-bound record](../../evidence/Ariadne/indirect-target-resolution/qualification-20261013/report.json)
 is historical evidence for its original sources and exercised corpus, not
 acceptance of the revised implementation. Its native timing exceeded the frozen
 60 s criterion, and its mutation set did not cover every required R6 seam.
@@ -27,12 +25,14 @@ bounded discovery integration and qualification requirements.
 
 **Where to go next.**
 
-- [Guarded target-resolution composition](guarded-target-resolution-design.md) and its [C0–C6 plan](../../.agents/plans/completed/guarded-target-resolution.md) — proposed integration of resolver discovery and guard proof closure for the nine captured table dispatches.
+- [Guarded target-resolution composition](guarded-target-resolution-design.md) and its [C0–C6 plan](../../.agents/plans/completed/guarded-target-resolution.md) — recorded scoped composition delivery and bounded loop-aware follow-up for the nine captured table dispatches.
 
 - [Dump03958 table witness](../../evidence/Ariadne/indirect-target-resolution/dump03958-table-witness-20261014/README.md) — fresh captured reads for nine bounded relative jump tables; numerical candidates are separate from a resolver/guard completion certificate.
 
 - [R0–R6 implementation plan](../../.agents/plans/indirect-target-resolution.md) —
   stage ownership, acceptance gates and execution order for this design.
+- [Finite R6 qualification](../../evidence/Ariadne/indirect-target-resolution/20261020/README.md)
+  — final sources, fresh and retained tiers, timing samples and original-query evidence.
 - [Core model](../../Specs/Ariadne.tla) and [formal-model guide](../../Specs/README.md)
   — existing target-set certificate and authority for the required extension.
 - [Source ownership](architecture.md#ownership-and-process-boundaries) —
@@ -40,13 +40,66 @@ bounded discovery integration and qualification requirements.
 - [Inspection evidence](../../evidence/Ariadne/indirect-target-resolution/dump048B-20261012/jump-table-inspection.json)
   — the captured table that motivates the first relative-table profile.
 
-**What remains unresolved.** Full R6 mutation/replay and release qualification
-remain open; passing single CLI samples do not establish a latency distribution. The
+**What remains unresolved.** Full base report rendering in all formats, a real
+Linux full dump and packaged release remain unqualified; passing individual CLI
+samples do not establish a latency distribution. Finite R6 is complete within
+its separately bound declared profile. The
 selected full-dump explanation remains partial;
 its 45 witnessed targets do not certify all incoming paths. General value-set analysis,
 mutable heap tables, arbitrary indirect calls, JIT/self-modifying code and
 executed history remain outside the initial profile. Completeness requires
 validated incoming-state coverage and an explicit captured-memory premise.
+
+## R6 qualification refresh
+
+The authorized [R6 execution sequence](../../.agents/plans/indirect-target-resolution.md#r6-qualification-refresh--2026-10-20)
+passes its [2026-10-20 finite aggregate](../../evidence/Ariadne/indirect-target-resolution/20261020/README.md).
+The final capsule contains 1,076 files with SHA-256
+`193e31bb835bda4a4e4b5fc59397c424f11adefc691d1e309faf7ff0348d43a5`.
+Source-bound in-task root/feature/native controls (`default 334, core-only 64, reports 77, BAP 202, resolver 46`), 39 Python controls
+(23 runner/observer plus 16 aggregate), the independent byte/integer oracle,
+five finite target-model configurations and typechecking pass. All 14 Rust plus
+one native legacy-v1 resolver mutations compile and fail their intended observers
+after passing unmodified controls. Fresh native replay matches 168 core and
+162 stateflow observations; wrong-digest cases dispatch zero observations.
+
+Twelve ordinary core/stateflow mutants are retained S6 evidence. Import checks
+bind the original archive/member identities, all 221 relevant source/corpus/
+observer inputs and native helper
+`6c444024fddae8d9050570e2e3f1c4cb6c9d463954c5eaf5c3f0c29ebfe3d562`.
+They are not relabeled as a fresh campaign.
+
+The exact original Windows dump048B query retains all 45 witnessed targets from
+58 entries, `complete=false`, partial explanations and the captured-control-data
+premise. Native/Rust full states agree on 3,977 decoded sites, 4,819 edges,
+392 slice sites and 10,744,212 definition links; their state digest remains
+`4b5c6d947ac8622932e63d8731733e4cf328b7d7401302fcc68ffa0d2ffcf30c`.
+The independent observer is bound to the exact raw resolution bytes and current
+sources; timed CLI request fingerprints match the pinned normalized request.
+
+Native/Rust JSON explanation-only CLI samples are
+`37070` / `15990` ms; maximum measured resolver
+passes are `88753` /
+`68248` µs. Each CLI sample meets 60,000 ms and each
+resolver pass 1,000 ms. Production native transport remains 30 s per response. The pinned
+full-state diagnostic driver uses the public 60 s response timeout and exports
+request identity/normalized facts; its execution supplies no CLI timing credit.
+Producer and runtime semantics retain their existing contracts.
+
+Native controls and mutants explicitly enable helper diagnostics. The runner
+captures stdout and stderr separately and appends diagnostics after completion,
+so child output cannot split the test-result line. Generic EOF failures and the
+earlier interleaved passing-control log earn no credit. All fifteen mutations
+reran with the corrected runner. Eight earlier in-task Rust/native checks retain
+exact unchanged compiled-input identities; the final Python controls reran.
+
+Archive SHA-256: `bb44c1a28ebee857e5775fac304f74383e7c75bfdd0286b41cc45642880064ba`. The native wrong-seam review, Cargo
+stale-mtime feedback, Windows/WSL launch failures, missing oracle inspection
+metadata and stopped preliminary mutation attempts remain uncredited in the
+archive. The final freeze includes the missing metadata. Earlier historical
+`full_plan_acceptance=false` fields retain their original outcomes; the current
+finite result does not rewrite them or close release, real Linux full-dump,
+all-format full-base-report, executed-history/root-cause or universal-proof gates.
 
 ## Problem and source review
 
@@ -439,6 +492,10 @@ stopped at the earlier load; it does not select an executed switch target.
 
 ## Dated validation
 
+These entries preserve their recorded sources, false acceptance flags and
+unexercised clauses. The later [R6 refresh](#r6-qualification-refresh) supplies
+current finite closure without refreshing any historical receipt.
+
 ### Implementation review follow-up
 
 The implementation review found that bounded revalidation could retain old
@@ -523,8 +580,10 @@ The full core state is retained, while the explanation remains `Partial` and
 `truncated=true` after its existing 32,768-origin-link limit. Incomplete dispatch
 coverage, entry origins, unknown memory/call effects and 13 decode failures
 remain explicit. Captured control data remains a stated premise; no executed
-path or root cause follows. The fifteen-mutant campaign and full revised-helper
-R6 aggregate are still pending, so full plan acceptance remains false.
+path or root cause follows. At that retry the fifteen-mutant campaign and full
+revised-helper aggregate remained pending, so its acceptance flag was false.
+The later [finite R6 refresh](#r6-qualification-refresh) closes those declared
+clauses while preserving this historical result.
 
 2026-10-12: design and plan written from source review and the separately retained
 table inspection. Documentation checking passes with 88 connected documents,

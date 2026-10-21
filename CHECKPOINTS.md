@@ -17,6 +17,118 @@
 
 For the wider context, see the optional [documentation map](docs/documentation-map.md).
 
+## 2026-10-21 — I5c binding, public pilot and full matrix qualified
+
+The separate [W1](evidence/Ariadne/address-wrap/20261020/w1/README.md),
+[W2](evidence/Ariadne/address-wrap/20261020/w2/README.md) and
+[W3](evidence/Ariadne/address-wrap/20261021/w3/README.md) records close those
+stage exits on their exact source/tool snapshots. W1 preserves all 666 legacy
+outputs and 36 parity comparisons; its sealed archive has 2,713 members.
+W2 runs the public arithmetic/budget pilot and seven actual native synthetic
+cases. W3 checks all 140 independent decisions, 44 pre-budget binding controls,
+24 strict serialized controls and fresh native preparation/completion of all
+114 raw cases. Formatting, default/core-only tests and all-features/all-targets
+Clippy pass remotely, with unchanged source/tool/dependency/native/runtime pins.
+
+W2/W3 local records retain receipts/controllers and actual named case rows;
+their full raw logs remain remote for W5 sealing. Earlier source-package,
+test-API and collector failures stay uncredited. No local build, native analysis
+or model run was used. W4 CLI/native recipe sources are implemented after review,
+but product/native-build/eight-owned-capture gates remain pending. W5 mutations,
+replay, legacy/I4/I5a/I5b refresh, timing and full evidence acceptance also remain
+pending. These later records do not rewrite the earlier W0/design checkpoints.
+
+## 2026-10-21 — Finite specification S3 evidence sealed
+
+The [model guide](Specs/README.md#specification-synchronization-s3-qualification-2026-10-20), [completed S0–S3 ledger](.agents/plans/specification-sync.md) and [sealed evidence](evidence/Ariadne/specification-sync/20261020/README.md) retain the successful 2026-10-20 lookup8 qualification. The full suite has 53 type calls covering 32 root modules, 40 bounded checks, 24 TLC runs,all 20 Memory partitions, six scripts, eight audited core TLC configurations and five replay types. The 120 Java calls include three identity checks; eight targeted preflight checks and three final equality controls are separate.
+
+The forty bounded calls retain30 `NoError` and 10 `ExecutionsTooShort` outcomes. All ten terminal cases have one TLC initial state and matching finite graph depths; the original maximum bounds remain unchanged, without claiming full-length executions. The 1,118-file snapshot and source/tool/derived hashes are stable. The evidence archive SHA is `92045c6f12f2f280e8fb81350eb0f972741c96a708182a71a9dc262a78596674`; promotion archive SHA is `3ef87cce1f40f15f4e12ab1833e3c89f0cfb8240eefe3d7d63350b229659161a`. Every archive member is stream-verified with no duplicate, missing or unexpected pathname; the one internal compatibility link is materialized with its original target recorded.
+
+All earlier failures and partial campaigns remain uncredited; no original record is rewritten. The historical 20261011 audit counts remain historical. Adjacent pinned standard-module/license and deterministic external finite lookup generation preserve reproducibility and algebraic authority. W0 fresh typing is separate from its earlier finite model/oracle tier; no W2 runtime, ISA, universal or release acceptance is claimed.
+
+
+## 2026-10-20 — I5c W0 finite model/oracle qualification
+
+The [canonical design](docs/Ariadne/address-wrap-design.md#w0-qualification-2026-10-20)
+and [stage plan](.agents/plans/i5c-address-wrap.md) now have
+[sealed W0 evidence](evidence/Ariadne/address-wrap/20261020/w0/README.md):
+140 independent decision rows, 52 scenarios, one Apalache typecheck and six
+TLC configurations, with 12 oracle controls, 88 sequence controls and all 114
+synthetic raw inputs. The 23 qualified normal files are byte-identical to the
+promoted layout. No Apalache bounded-SMT or runtime acceptance is claimed.
+
+Producer03 separately reviews all 114 preparation shapes, including four
+explicit receipt-absence corrections; its observations do not supply arithmetic
+expectations. Earlier model/probe/packaging failures remain uncredited. The
+2,207-member archive has SHA-256
+`5e7b164af51caecc322400f9bcb1425c0ed5bf895087569d56d973685ed701c7`.
+Compiled/runtime payloads remain in verified remote retention; the publication
+records their identities rather than claiming all payload bytes are local.
+The 666 legacy outputs in W0 are BEFORE evidence only. At that checkpoint W1
+tests and W2–W5 remained pending; the later W1–W3 records above supply their
+separate binding, pilot and matrix qualification without changing W0 credit.
+
+## 2026-10-20 — Scanner S2–S4 qualified partial follow-up
+
+The [Scanner ledger](.agents/plans/scanner-partial-explanation.md#s2s4-qualification-2026-10-20)
+and [canonical case summary](docs/Ariadne/investigation-design.md#scanner-partial-explanation-follow-up)
+now have [source-bound evidence](evidence/Ariadne/scanner-followup/20261020/README.md).
+All twenty recovery-obligation sites have captured-byte/projection dispositions;
+nine INT3 control disagreements and one UD1Lm/UD2B disagreement retain explicit
+barriers. All 123 entry-location requirements and all 28 historical gaps remain.
+Native/Rust full states and explanations agree on 768 starts, 895 edges and
+19 slice sites. The result remains partial without truncation; audit completion
+does not identify the executed path, actual writer or bad-pointer producer.
+
+Three old/current reports replay in every format; nine corruptions are rejected.
+The baseline v3 and current v6 producer profiles remain distinct. Separate direct
+BAP observations have their own query scope; the failed literal cross-session
+AST comparison earns no equivalence credit. S1/M4 retains its earlier finite
+candidate-table qualification and is not relabeled as a fresh campaign.
+The analysis snapshot contains 1,075 files, capsule `ced9183d56c58eaa18014540d7a9e63a5b5b1de1e0f61551fb619ce8ee027c36`.
+Archive SHA-256: `ed0c443bda51f62d6bb8e83b76355ae9e216eb208c7c73bcf0ea1e0657f95ec5`.
+No producer/runtime semantics changed. Three indexed ledgers remain unfinished.
+
+## 2026-10-20 — Captured indirect-target R6 finite qualification
+
+The [resolver design](docs/Ariadne/indirect-target-resolution.md#r6-qualification-refresh)
+and [R0–R6 ledger](.agents/plans/indirect-target-resolution.md#r6-qualification-refresh--2026-10-20)
+pass the declared [finite qualification](evidence/Ariadne/indirect-target-resolution/20261020/README.md).
+Final source capsule: 1,076 files, SHA-256
+`193e31bb835bda4a4e4b5fc59397c424f11adefc691d1e309faf7ff0348d43a5`.
+Archive SHA-256: `bb44c1a28ebee857e5775fac304f74383e7c75bfdd0286b41cc45642880064ba`. Root/features/native:
+`default 334, core-only 64, reports 77, BAP 202, resolver 46`; 39 Python controls, five finite model configurations and
+typechecking pass. Fresh mutation coverage is 14 Rust plus one native legacy-v1
+resolver mutant with passing controls and intended compiled behavioral failures.
+Fresh replay matches 168 core plus 162 stateflow observations; wrong digests
+dispatch none. Twelve core/stateflow mutants are retained S6 evidence after
+221 relevant input and identical-helper checks; they are not a fresh campaign.
+
+Original Windows dump048B retains artifact SHA-256
+`5fea4ca614706fe0040ed3231efee0edf9ce4004a51d902bb581025b48bade08`,
+entry `0x00007ff640079640`, seed/fault `0x00007ff640079670` and dispatch
+`0x00007ff64007968b`. Its 58 table entries yield all 45 exact witnessed targets;
+coverage stays incomplete and the explanation partial. Full native/Rust states
+retain 3,977 decoded sites, 4,819 edges, 392 slice sites and 10,744,212 definition
+links, with digest `4b5c6d947ac8622932e63d8731733e4cf328b7d7401302fcc68ffa0d2ffcf30c`.
+
+Native/Rust JSON explanation-only CLI samples are
+`37070` / `15990` ms; maximum resolver passes are
+`88753` / `68248` µs.
+The original 60,000 ms CLI and 1,000 ms resolver criteria remain unchanged;
+production native transport stays 30 s. The diagnostic driver pins/exports the
+query and uses a 60 s public response timeout solely for state parity, without
+CLI timing credit. Producer/runtime semantics retain their prior contracts.
+
+The archive preserves the native wrong-seam review, Cargo stale-mtime feedback,
+Windows/WSL failures, missing inspection metadata, stopped preliminary campaigns
+and prior failed timing/acceptance records. Current closure does not relabel them
+as passing. Real Linux full dumps, all-format full base reports, packaged release,
+execution history/root cause and universal refinement remain unqualified.
+At the R6 publication checkpoint four indexed ledgers retained unfinished work;
+the later Scanner publication above closes its separate audit. Canonical paths
+remain stable.
+
 ## 2026-10-20 — Frame-path F4 finite original-capture qualification
 
 The [canonical contract](docs/Ariadne/investigation-design.md#f4-post-s6-qualification)
@@ -491,9 +603,11 @@ Bounded native completion pages allow the Scanner query to complete. The
 corpus and fixed budgets; old Linux coverage and six historical hashes remain
 unexercised.
 
-The **2026-10-07** product checkpoint remains: I5c address wrap has a selected design and W0–W5 plan,
-with every implementation/qualification stage pending. The next executable
-stage is W0: freeze the source/oracle contract and check the new decision model.
+The **2026-10-07** I5c design checkpoint is historical. Its separate
+[2026-10-20 W0 record](evidence/Ariadne/address-wrap/20261020/w0/README.md) now
+qualifies the finite model/oracle and synthetic-input gate. The later
+[W3 record](evidence/Ariadne/address-wrap/20261021/w3/README.md) qualifies the
+implemented assessment/report matrix; W4 product/capture and W5 remain pending.
 I5b zero-base-plus-displacement has B0–B5 implemented and qualified for its
 recorded finite source/fixture and controlled Windows tiers. The product intent
 is debugging bugs at the machine-code level using captured instruction/context evidence.
@@ -613,6 +727,13 @@ arithmetic/range examples and four candidate recipe decodings are checked;
 these provide no implementation, model or hardware/capture acceptance credit.
 The design links directly to its implementation plan, and the plan/roadmap/
 documentation entry points name its unresolved scope.
+
+The following table records the 2026-10-07 status. The later
+[W0 qualification](evidence/Ariadne/address-wrap/20261020/w0/README.md)
+supersedes its W0-pending state. The later
+[W1–W3 qualification](evidence/Ariadne/address-wrap/20261021/w3/README.md)
+supersedes those implementation states; W4–W5 remain pending. The table and
+diagram below preserve their original design-date scope.
 
 | I5c stage | Checkpoint status | Next required evidence |
 | --- | --- | --- |

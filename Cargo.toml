@@ -252,6 +252,21 @@ name = "input_i5b"
 path = "tests/input/i5b.rs"
 required-features = ["input"]
 
+[[test]]
+name = "investigation_address_wrap"
+path = "tests/investigation/address_wrap.rs"
+required-features = ["input"]
+
+[[test]]
+name = "reports_address_wrap"
+path = "tests/reports/address_wrap.rs"
+required-features = ["input"]
+
+[[test]]
+name = "input_address_wrap_cli"
+path = "tests/input/address_wrap_cli.rs"
+required-features = ["input"]
+
 [[bin]]
 name = "i5a"
 path = "src/bin/i5a.rs"
@@ -260,6 +275,11 @@ required-features = ["bench"]
 [[bin]]
 name = "i5b"
 path = "src/bin/i5b.rs"
+required-features = ["bench"]
+
+[[bin]]
+name = "i5c"
+path = "src/bin/i5c.rs"
 required-features = ["bench"]
 
 [[bin]]

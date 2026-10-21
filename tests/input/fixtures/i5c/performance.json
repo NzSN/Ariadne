@@ -1,0 +1,37 @@
+{
+  "controlledCases": [
+    "upper-partial",
+    "upper-full",
+    "none-partial",
+    "none-full",
+    "negative-partial",
+    "negative-full",
+    "indexed-partial",
+    "indexed-full"
+  ],
+  "fixtureCases": [
+    "mov32mi-upper",
+    "mov64mi32-upper",
+    "mov32rm-upper",
+    "mov64rm-upper",
+    "mov32mr-upper",
+    "mov64mr-upper",
+    "mov32mi-negative-zero",
+    "mov32mi-underflow",
+    "indexed-zero",
+    "missing-integer"
+  ],
+  "frozenDate": "2026-10-20",
+  "independentI4BudgetsMs": {
+    "linux": 250,
+    "windows": 2000
+  },
+  "maxClaims": 64,
+  "maxCliMedianMs": 1500,
+  "maxEvidence": 64,
+  "maxPhaseMedianMs": 10,
+  "measuredRepeats": 5,
+  "schema": "ariadne.i5c-performance-contract/v1",
+  "scope": "Each named workload separately; no pooled median or inherited acceptance.",
+  "warmups": 1
+}

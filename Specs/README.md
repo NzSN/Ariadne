@@ -79,8 +79,10 @@ records the subsequent source audit and separate qualification limits.
 
 - [Selected I5c design](../docs/Ariadne/address-wrap-design.md) and
   [W0 model/oracle stage](../.agents/plans/i5c-address-wrap.md#w0--freeze-semantics-and-independent-expectations)
-  — proposed address-wrap decision model; no new specification/check result
-  exists yet, and model authority must precede runtime implementation.
+  — [address-wrap decision model](AriadneAddressWrap.tla), qualified in the
+  [2026-10-20 W0 record](../evidence/Ariadne/address-wrap/20261020/w0/README.md):
+  52 scenarios, one Apalache typecheck and six TLC configurations on exact
+  promoted sources. No bounded-SMT, ISA or runtime conformance result is claimed.
 
 - [I5b question-level decision model](AriadneZeroBaseOffset.tla) — admission,
   output availability and zero-base/nonzero-displacement conclusions; the
@@ -147,8 +149,7 @@ candidates; this module performs no writer analysis. The checks do not prove
 universal refinement, instruction semantics, feasibility, execution history or
 program-level disconnection. The dated evidence records local Windows WSL
 results; the [2026-10-19 remote record](../evidence/Ariadne/frame-question/20261019/README.md)
-now closes the finite FC5/FC6 gate on the exact declared sources. It does not
-close the separate S3 audit of all active specifications.
+now closes the finite FC5/FC6 gate on the exact declared sources. It is separate from the later [S3 finite suite qualification](#specification-synchronization-s3-qualification-2026-10-20).
 
 ## Current model ownership
 
@@ -192,9 +193,10 @@ original bytes and replay bindings.
 | [Guarded target composition](AriadneGuardedTargetResolution.tla) | Combined `src/input/materialize.rs`, BAP guard/target validators and native capture | C0 authority added 2026-10-14: fixed scope, source/candidate/final layering, shared epochs and paired receipts. The 2026-10-14 record retains 19 finite remote configurations and its runtime scope; the new loop component is qualified separately. Structural identities abstract concrete hash/codec validation. |
 | [Core replay](../mbt/model/AriadneReplay.tla), [stateflow replay](../mbt/stage-e/model/MachineStateReplay.tla) and [cases](../mbt/stage-e/model/MachineStateCases.tla), [IR replay](../mbt/stage-e/model/LLVMIRReplay.tla) and [cases](../mbt/stage-e/model/LLVMIRCases.tla) | `mbt/`, `src/mbt/`, native replay observers | Current deterministic schedules and observation projections; retained corpus/source bindings are preserved. Replay remains finite conformance evidence. |
 
-Address-wrap W0 is still an unimplemented design stage, not an outdated existing
-specification. Retired ISA models and historical Lean research are outside this
-audit. Earlier source-bound records retain their hashes and qualification scope;
+The address-wrap model was added and qualified separately on 2026-10-20:
+its W0 record binds 140 independent oracle rows, 52 scenarios and the exact
+typechecking/TLC tier. W1 is implemented with tests pending; W2–W5 and runtime
+acceptance remain pending. Its exact two model files received fresh global typing in the later S3 suite; the W0 model/oracle tier remains separate. Retired ISA models and historical Lean research are outside this audit. Earlier source-bound records retain their hashes and qualification scope;
 changing a model or its comments does not refresh those records.
 
 The [synchronization record](../evidence/Ariadne/specification-sync-20261011/report.json)
@@ -202,8 +204,18 @@ and [artifact manifest](../evidence/Ariadne/specification-sync-20261011/evidence
 retain source hashes and bounded local checks: all 22 modules and 19
 configurations parse; 13 selected frame traces and 22 scalar probes pass;
 checker dispatch/failure tests use stub tools; default/core/property tests pass.
-These checks are separate from pending remote Apalache typechecking and
-exhaustive TLC safety/liveness qualification. Historical receipts are unchanged.
+These historical checks are separate from the later finite remote S3 qualification below. Historical receipts are unchanged.
+
+## Specification synchronization S3 qualification, 2026-10-20
+
+The [S0–S3 ledger](../.agents/plans/specification-sync.md) and [sealed evidence](../evidence/Ariadne/specification-sync/20261020/README.md) close the declared finite S3 suite on the exact lookup8 models. The historical 20261011 audit retains its 17 active/five replay counts; the new snapshot types 32 root modules, including the official standard module, pair auxiliaries and two current AddressWrap modules. There are 53 actual typecheck invocations, including repeated specialized checks and five replay types, 40 bounded calls, 24 TLC instances (19 original plus five prerequisites),six original scripts and eight audited core configurations.
+
+The full 120 guarded Java invocations are 53 type +40 bounded +24 TLC +3version/identity calls. The bounded outcomes are30 `NoError` and 10 `ExecutionsTooShort`, all exit0. Each short scenario has a nonempty initial state and intended terminal Next, independently matched by its fresh TLC graph. Its last checked state precedes the unchanged requested maximum; no full-length execution or unbounded proof is inferred. Eight targeted FramePaths preflight checks and three final fold/range TLC controls are separate groups.
+
+Canonical Memory authority remains algebraic. The shared runner deterministically generates a fresh solver copy outside the repository: literal finite operations agree on Values0..15, original 123 Facts/80 Transfers and all admitted chain prefixes. Exact equality of complete inverse records, six clauses and full Safety, operation closure, static/dynamic coverage and the original algebraic Safety TLC are prerequisites. The original IdealSafety/CandidateSafety plus all 20 fact-class/transfer-kind partitions retain their domains, Init/Next, invariant and length 1. This is a finite reduction of the checked model, with no outside-carrier replacement claim.
+
+The official 6,500-byte `Apalache.tla` SHA `a9115b404e72c58fd085f81bc59cc918f8adac49feabfb57f8e285bc7ab5cfac` and unmodified license are adjacent normal sources. Ordinary TLC uses its pinned JAR and this source, not alternate TLC classes. DOMAIN, fold, range and inductive stop-domain compatibility changes preserve the modeled behavior; no action, bound or Safety conjunct was removed. Earlier failures remain uncredited. W0 gets fresh global typing only; its earlier model/oracle tier and W1–W5/runtime qualification remain separate. ISA, universal refinement and wider domains are excluded.
+
 
 ## Indirect-target qualification
 
@@ -655,8 +667,7 @@ checks `AriadneCalls.tla` through the same configurable bound (six by default).
 It checks `AriadneLLVMIRExample.tla` through eight transitions and
 `AriadneMachineStateExample.tla` through six. It also registers input closure and
 budget scenarios through six, effects and scalar/question decisions through
-one, and six typed-edge frame-path scenarios through thirty-two. It writes all artifacts to a fresh
-temporary directory and prints its path. Set `APALACHE_MC` to select an
+one, and six typed-edge frame-path scenarios through thirty-two. It generates the pinned Memory solver/control copies in that fresh temporary directory, requires the five ordinary-TLC equality/closure/coverage prerequisites, and checks canonical IdealSafety/CandidateSafety plus all 20 exact pair partitions. It writes all artifacts there and prints the path. Canonical algebraic Memory sources are never overwritten. Set `APALACHE_MC` to select an
 executable. To change the bound for the larger scenarios or select one scenario:
 
 ```sh

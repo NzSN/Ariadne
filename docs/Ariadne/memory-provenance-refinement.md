@@ -10,7 +10,7 @@ The independent oracle is frozen; source/root checks and small pinned-runtime
 probes pass. The [2026-10-18 section-5 record](../../evidence/Ariadne/frame-question/20261018/README.md)
 adds local model checking and integration mutation controls. The [2026-10-19 remote record](../../evidence/Ariadne/frame-question/20261019/README.md)
 qualifies the selected bounded model, dedicated mutation campaign and complete
-Scanner candidate-table profile. Wider alias, history and release claims remain separate.
+Scanner candidate-table profile. The [S3 finite suite](../../evidence/Ariadne/specification-sync/20261020/README.md) subsequently qualifies the exact algebraic scalar model and checked finite solver reduction. Wider alias, history and release claims remain separate.
 
 **Why this document exists.** The [Scanner resume record](bap-analysis-core-design.md#admission-resume)
 preserves a completed but partial explanation. Its `unknown-memory-alias` gaps
@@ -30,7 +30,7 @@ proposed types, algorithms, limits and report validation.
 **Where to go next.**
 
 - [Active specification synchronization](../../.agents/plans/specification-sync.md) —
-  current finite scalar/alias model and its separate remote-check boundary.
+  completed finite scalar/alias model qualification and its exact finite boundary.
 
 - [Question-directed frame integration](frame-question-investigation-design.md)
   and [section-5 program](../../.agents/plans/frame-question-investigation.md) —
@@ -55,9 +55,7 @@ proposed types, algorithms, limits and report validation.
 
 **What remains unresolved.** General memory regions, loop-instance identities,
 joint machine-state reconstruction and broader inverse operations remain outside
-the first finite profile. The new model still needs remote checking, and the
-mutation/Scanner acceptance clauses need their source-bound campaigns. No
-executed writer or bad-RSI cause is established. The
+the first finite profile. Selected mutation/Scanner acceptance is bound to its 2026-10-19 evidence, and the [2026-10-20 S3 suite](../../evidence/Ariadne/specification-sync/20261020/README.md) qualifies the finite algebraic model and exact lookup-copy prerequisites. No executed writer or bad-RSI cause is established. The
 [accepted P4 scope](file-reader-design.md#windows-replacement-capture-and-bounded-query)
 qualifies its earlier implementation and corpus rather than these changed sources.
 
@@ -667,3 +665,13 @@ the result preserves default report bytes and matches the native/Rust assessment
 This is successful candidate-preserving qualification, without identifying the
 actual writer or proving unsupported same-base/path relations. The dated source
 and local records above retain their historical acceptance boundaries.
+
+### Scanner review successor, 2026-10-20
+
+The [Scanner partial-explanation follow-up](investigation-design.md#scanner-partial-explanation-follow-up)
+subsequently qualifies the twenty-site control/decode audit, 123 location-specific
+entry requirements and fresh partial-case replay. Its
+[evidence](../../evidence/Ariadne/scanner-followup/20261020/README.md) keeps all
+historical gaps and the old-v3/current-v6 semantic identities distinct. This is
+not a replacement M4 model/mutation campaign or evidence of an actual writer;
+the twelve-candidate S1 result above retains its original scope and tool identity.

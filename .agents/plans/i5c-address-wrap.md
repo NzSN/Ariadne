@@ -2,9 +2,21 @@
 
 ## Context and follow-up
 
-**Status.** W0–W5 plan written on 2026-10-07 against `1344c99`. The selected
-design is delivered as documentation; all implementation, model, capture,
-measurement and acceptance stages remain pending.
+**Status.** W0 is qualified on 2026-10-20 for the finite model/oracle and
+synthetic-input scope in the [durable record](../../evidence/Ariadne/address-wrap/20261020/w0/README.md).
+Its 23 normal source files were promoted byte-identically after one Apalache
+typecheck and six TLC configurations. The separate [W1 record](../../evidence/Ariadne/address-wrap/20261020/w1/README.md)
+qualifies 10 binding tests, 4 I5b tests, 666 unchanged legacy files and 36 CLI
+comparisons; 3 native tests remain ignored in that W1 tier. The separate
+[W2 pilot](../../evidence/Ariadne/address-wrap/20261020/w2/README.md) passes the
+public assessor, seven native synthetic cases and required Rust gates.
+[W3 qualification](../../evidence/Ariadne/address-wrap/20261021/w3/README.md) passes
+all 140 decisions, 44 binding controls, 24 serialized controls and 114 fresh
+native cases. W4 sources are implemented with product/capture gates pending;
+W5 and full acceptance remain pending.
+No I5c assessor, capture, timing or full-feature acceptance is granted by W0/W1. The
+[canonical design](../../docs/Ariadne/address-wrap-design.md#w0-finite-contract-2026-10-20)
+owns the exact inventory, publication accounting and qualification boundaries.
 
 **Why this document exists.** The [selected design](../../docs/Ariadne/address-wrap-design.md)
 defines a distinct fault-time address-wrap question. Existing I5a/I5b calculate
@@ -30,8 +42,9 @@ preservation and separately gated source/fixture and controlled Windows tiers.
   [snapshot runner](../../tools/with_mirrorrust_snapshot.py) — modeled authority
   and qualification through a sealed read-only dependency view.
 
-**What remains unresolved.** Nothing in W0–W5 is implemented or accepted yet.
-The v1 assessment qualifies upper wraps and no-wrap cases only within the
+**What remains unresolved.** W4 product/native-build/owned-capture gates and W5
+full acceptance remain pending.
+The v1 assessment profile covers upper wraps and no-wrap cases only within the
 inherited lower-range access profile. Mathematical underflow stays unknown for
 fault assessment. General canonicality, indexed/32-bit/Linux admission, earlier
 executed arithmetic and lifetime remain separate work. Existing qualified
@@ -56,17 +69,17 @@ separate named target subdirectories.
 
 ## Stages, ownership and exits
 
-The file names below are proposed new outputs, not links to files that exist.
+The table retains each stage's intended outputs; W0 sources and the W1 binding seam now exist.
 Implement stages sequentially; a partial matrix or partial tier remains partial.
 
 | Stage | Owned sources and outputs | Exit |
 | --- | --- | --- |
-| W0 — Contract, source review and independent oracle | New `docs/Ariadne/i5c-source-review.md`; `Specs/AriadneAddressWrap.tla`, `AddressWrap.cfg`, `check-address-wrap.sh`; `tests/input/fixtures/make_i5c.py` and new `i5c/` fixture/contract files | Exact signed-displacement arithmetic, readiness/range/budget decision model and complete independent case inventory frozen; model checks and oracle calculations agree before runtime code. |
+| W0 — Contract, source review and independent oracle | Source-review findings and the [W0 finite contract](../../docs/Ariadne/address-wrap-design.md#w0-finite-contract-2026-10-20) in the existing canonical design; `Specs/AriadneAddressWrap.tla`, generated `AriadneAddressWrapCases.tla`, six `AddressWrap*.cfg` files and `check-address-wrap.sh`; `tests/input/fixtures/make_i5c.py` and new `i5c/` fixture/contract files | Exact signed-displacement arithmetic, readiness/range/budget decision model and complete independent case inventory frozen; model checks and oracle calculations agree before runtime code. |
 | W1 — Bind and share finite admission facts | `src/input/investigation.rs`; new private `src/investigation/scalar_base_displacement.rs`; narrow use from `zero_base_offset.rs`; new bound type in `address_wrap.rs`; exports | Sealed selected-site receipt/context binding; shared existing decoded/BAP facts with old I5a/I5b results and bytes unchanged. |
 | W2 — First vertical slice | `src/investigation/address_wrap.rs`; root Cargo test target; new investigation/input tests | MOV32mi upper-wrap, no-wrap, signed-negative no-wrap, unknown/error and tiny-budget cases pass through the same bound assessment interface as callers. |
-| W3 — Complete finite matrix and serialization | Assessor, new `src/reports/address_wrap.rs`, report exports, dedicated tests and new actual contracts document | All six forms, boundary/negative controls and strict recomputation pass; conditional arithmetic versus unknown fault assessment is unambiguous in text/JSON/DOT. |
+| W3 — Complete finite matrix and serialization | Assessor, new `src/reports/address_wrap.rs`, report exports, dedicated tests and the [actual-contract section](../../docs/Ariadne/address-wrap-design.md#w0-result-and-publication-contract) of the existing canonical design | All six forms, boundary/negative controls and strict recomputation pass; conditional arithmetic versus unknown fault assessment is unambiguous in text/JSON/DOT. |
 | W4 — Product and controlled capture recipes | `src/bin/ariadne-minidump.rs`; native demo profile dispatch/witness/build/capture/inspector additions; new assembly file and input/native CLI tests | Explicit modes, seed/root behavior, atomic publication and eight independently inspected owned partial/full captures. No old profile/capture bytes rewritten. |
-| W5 — Qualification and durable evidence | New `tools/check_i5c.py`, contract/equivalence/mutation/measurement tools, `src/bin/i5c.rs`; root manifest; new evidence/validation guide and status updates | Separate source/fixture, controlled partial/full and fixed-budget flags pass under stable source/tool/dependency inventories; full evidence archive verifies. |
+| W5 — Qualification and durable evidence | New `tools/check_i5c.py`, contract/equivalence/mutation/measurement tools, `src/bin/i5c.rs`; root manifest; raw evidence under `evidence/Ariadne/address-wrap/`; validation guidance and dated summaries in the existing canonical design; status updates | Separate source/fixture, controlled partial/full and fixed-budget flags pass under stable source/tool/dependency inventories; full evidence archive verifies. |
 
 ## W0 — Freeze semantics and independent expectations
 
@@ -115,6 +128,48 @@ CLI, one warm-up/five measured repeats for declared I5c workloads. Existing
 I4/I5a/I5b contracts/manifests and source-bound Stage 2 design/plan bytes remain
 unchanged. Record W0 results and their exact source/tool/dependency identities.
 
+### W0 frozen inventory and qualification, 2026-10-20
+
+The canonical design owns source review, actual result contracts and later dated
+qualification summaries. No separate `i5c-source-review.md` or second contracts
+design is created. Preserve every acceptance clause above and in W1–W5.
+
+Freeze 140 decision rows (114 synthetic captures and 26 bound-unit controls),
+19 binding negatives at full and zero budgets (38 invocations), 24 strict-result
+negatives, 12 CLI controls and 24 compiled behavioral mutants with passing
+controls. Ten fixture timing workloads and eight newly owned partial/full
+Windows captures remain distinct. The old-output gate has 666 outputs: 246 I5a,
+342 I5b, six I5b upstream-call and 72 base/explanation outputs, including the
+explicit Rust/native/default ownership choices. Preserve all rows, not just the
+performance subset.
+
+Materialize all 114 synthetic raw inputs under `tests/input/fixtures/i5c/dumps/`
+and freeze their exact file inventory before W1. The normal W0 checker binds
+every dump and its manifest before and after the model run. Review a separate
+114-row current-product preparation probe before freezing receipt/admission
+premises; its observations cannot replace independent arithmetic expectations.
+
+The question-level model preserves exact 64-bit values as four 16-bit limbs;
+signed-displacement carry correction yields q=-1/0/1 and the full lower-range
+span/reported-byte predicate. One typecheck and six TLC configurations cover
+52 scenarios. The natural-number sequence recurrence has uncapped controls at
+length 64; this tier makes no Apalache bounded-SMT claim. Source admission, raw
+parsing and ISA semantics remain explicit premises. The independent Python integer/encoding oracle and its 52-case model
+projection crosscheck are separate evidence from runtime conformance.
+
+The largest admitted source bundle is 46 evidence and 49 claims; ordinary
+two-parameter full contexts require 33/36. Counts above 15 exception parameters
+are binding errors before budgets, never clamped. Defaults remain 64/64. Five
+arithmetic claims form one atomic bundle; an early gap or mandatory omission
+removes it, while late range/reported-byte gaps retain conditional arithmetic
+with an Unknown assessment. The design fixes exact field/claim ordering and
+wide-decimal validation. The [2026-10-20 W0 record](../../evidence/Ariadne/address-wrap/20261020/w0/README.md)
+qualifies the exact 140-row/52-scenario/114-raw-input tier, 12 oracle controls,
+88 sequence controls, one typecheck and six TLC configurations. Failed model,
+producer and packaging attempts remain uncredited. The 666-output pre-W1
+baseline remains the W0 BEFORE evidence. The separate W1 record below qualifies
+the later AFTER comparison; W2–W5 acceptance remains pending.
+
 ## W1 — Exact binding and private admission reuse
 
 `bind_address_wrap(prepared, completed, question)` reuses `bind_fault_context`,
@@ -138,6 +193,19 @@ before and after this extraction, including I5b unknowns and I5a outputs.
 If factoring causes a difference, repair the extraction before W2 rather than
 regenerating the baseline to hide it.
 
+### W1 exit, 2026-10-20
+
+The [W1 evidence record](../../evidence/Ariadne/address-wrap/20261020/w1/README.md)
+and [canonical qualification summary](../../docs/Ariadne/address-wrap-design.md#w1-qualification-2026-10-20)
+close this stage for the retained 1,213-file source snapshot. Ten binding tests
+and four I5b tests pass; three native I5b tests remain ignored. A fresh release
+build and unchanged batch driver produce all 666 legacy files byte-identically
+and pass all 36 CLI comparisons. The record retains 251 command receipts,
+actual Cargo artifact selection, raw streams and the uncredited initial pin
+mixup/correction. Source and all 184 release dependencies are retained before
+later changes; export verification uses retained copies rather than the live
+ROOT/target. This exit grants no W2–W5 or full-I5c acceptance.
+
 ## W2 — Pilot calculation and bounded output
 
 The module takes the proposed sealed `BoundAddressWrapContext` and
@@ -159,6 +227,19 @@ exact-fit limits must produce valid unknown/truncated results or the appropriate
 binding error, without dangling references or leaked definite conclusions.
 Test through the public binding/assessment interface, with native preparation
 and a completed native analyzer in the integration pilot.
+
+### W2 exit, 2026-10-21
+
+The [dated pilot record](../../evidence/Ariadne/address-wrap/20261020/w2/README.md)
+passes five ordinary tests and one explicitly exercised native test on seven
+freshly prepared/completed synthetic captures, including four native budget
+controls. Formatting, default/core-only tests and all-features/all-targets Clippy
+pass remotely with unchanged source/tool/dependency/native/runtime bindings.
+Exact sum/reduction, early versus late gaps, tiny/exact budgets and binding
+errors run through the public API. Earlier failed setup/test/collector attempts
+remain recorded; the passing continuation verifies the original pilot logs.
+W3's helper refactor preserves all six test bodies and gets a new source-bound
+qualification. This exit grants no complete W3 matrix, owned capture or W5 gate.
 
 ## W3 — Mandatory oracle and negative-control matrix
 
@@ -187,6 +268,18 @@ conclusion, content/scope IDs and reference closure from retained inputs. The
 wide sum uses canonical signed decimal text, not a VA/u64/float. Define missing
 arithmetic data explicitly; never serialize absent facts as zero/no-wrap.
 Renderers share the same typed result, with full JSON preserved in DOT metadata.
+
+### W3 exit, 2026-10-21
+
+The [dated matrix/report record](../../evidence/Ariadne/address-wrap/20261021/w3/README.md)
+passes all 140 frozen decisions, 44 expanded binding invocations, 24 strict
+serialized controls and fresh native preparation/completion for all 114 raw
+cases. The 26 typed unit cases remain a separate scope. Matrix, pilot, reports,
+formatting, default/core-only tests and all-features/all-targets Clippy pass on
+the exact remote source/tool/dependency snapshot. The first incomplete source
+package is uncredited; the corrected package verifies all named case records.
+Complete runtime-log sealing remains with W5. W4 source implementation follows;
+its CLI, build and owned capture gates remain pending.
 
 ## W4 — Product and real controlled Windows evidence
 

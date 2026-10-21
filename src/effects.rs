@@ -66,7 +66,7 @@ pub struct PreparationGap {
     pub address: Address,
     pub reason: GapReason,
 }
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub struct InstructionEvidence {
     pub bytes: Vec<u8>,
     pub source: ByteSource,
@@ -86,7 +86,7 @@ pub struct InstructionEvidence {
     pub semantic: Option<SemanticEvidence>,
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub struct SemanticEvidence {
     pub backend: String,
     pub helper_sha256: String,

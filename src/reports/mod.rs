@@ -1,4 +1,5 @@
 //! Strict Stage E inputs and identity-preserving result envelopes.
+mod address_wrap;
 mod codecs;
 #[cfg(feature = "bap")]
 pub mod frame_connections;
@@ -21,6 +22,7 @@ pub use memory_provenance::{
 mod render;
 mod zero_address;
 mod zero_base_offset;
+pub use address_wrap::{decode_address_wrap, encode_address_wrap, render_address_wrap};
 pub use codecs::{
     decode_ir_request, decode_machine_request, decode_semantics, encode_ir_request,
     encode_machine_request, encode_semantics, sha256, strict_json, strict_json_with_limit,

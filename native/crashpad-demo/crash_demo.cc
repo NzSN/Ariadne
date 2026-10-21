@@ -37,6 +37,10 @@
 extern "C" void AriadneCrashDemoZeroBaseOffset(volatile uint32_t* base);
 extern "C" void AriadneCrashDemoZeroBaseOffsetIndexed(volatile uint32_t* base,
                                                     uintptr_t index);
+extern "C" void AriadneCrashDemoAddressWrapUpper(volatile uint32_t* base, uintptr_t index);
+extern "C" void AriadneCrashDemoAddressWrapNoWrap(volatile uint32_t* base, uintptr_t index);
+extern "C" void AriadneCrashDemoAddressWrapNegative(volatile uint32_t* base, uintptr_t index);
+extern "C" void AriadneCrashDemoAddressWrapIndexed(volatile uint32_t* base, uintptr_t index);
 #include <windows.h>
 
 #include "client/simple_address_range_bag.h"
@@ -63,6 +67,27 @@ constexpr size_t kCodeExtentBytes = 256;
 constexpr uint32_t kIndirectMemoryBudget = 4u * 1024u * 1024u;
 constexpr char kIntegrationProfile[] = "ariadne-crashpad-null-write-v1";
 constexpr char kBapIntegrationProfile[] = "ariadne-crashpad-bap-workload-v1";
+
+// Caller declarations only. Raw exception-context and code observations are
+// independently verified after capture, before any assessment is credited.
+struct AddressWrapRecipe {
+  const char* name;
+  const char* integration_profile;
+  uint64_t base;
+  int displacement;
+  const char* instruction_bytes;
+  const char* expected_conclusion;
+};
+constexpr AddressWrapRecipe kAddressWrapRecipes[] = {
+    {"upper", "ariadne-crashpad-address-wrap-upper-v1", UINT64_C(0xfffffffffffffff8), 16,
+     "c7411005000000", "consistent_with_evidence"},
+    {"none", "ariadne-crashpad-address-wrap-no-wrap-v1", 8, 0,
+     "c70105000000", "refuted_under_premises"},
+    {"negative", "ariadne-crashpad-address-wrap-negative-v1", 16, -8,
+     "c741f805000000", "refuted_under_premises"},
+    {"indexed", "ariadne-crashpad-address-wrap-indexed-v1", UINT64_C(0xfffffffffffffff8), 16,
+     "c744111005000000", "unknown"},
+};
 
 #if BUILDFLAG(IS_WIN)
 constexpr size_t kMaxWorkloadCodeExtentBytes = 1024;
@@ -174,7 +199,8 @@ bool WriteWitness(const base::FilePath& path,
                   const std::string& mode,
                   bool bap_workload,
                   bool zero_base_offset,
-                  bool indexed_offset) {
+                  bool indexed_offset,
+                  const AddressWrapRecipe* address_wrap) {
 #if BUILDFLAG(IS_WIN)
   const uint64_t process_id = GetCurrentProcessId();
   constexpr char kExplicitRangeRegistered[] = "true";
@@ -220,6 +246,25 @@ bool WriteWitness(const base::FilePath& path,
     workload_fields += "]\n  }";
   }
 #endif
+  if (address_wrap) {
+    char fields[1024];
+    const int length = snprintf(
+        fields, sizeof(fields),
+        ",\n  \"address_wrap\": {\n"
+        "    \"recipe\": \"%s\",\n"
+        "    \"expected_rcx\": \"0x%016" PRIx64 "\",\n"
+        "    \"expected_rdx\": \"0x0000000000000000\",\n"
+        "    \"displacement\": %d,\n"
+        "    \"instruction_bytes\": \"%s\",\n"
+        "    \"expected_conclusion\": \"%s\"\n  }",
+        address_wrap->name, address_wrap->base, address_wrap->displacement,
+        address_wrap->instruction_bytes, address_wrap->expected_conclusion);
+    if (length < 0 || static_cast<size_t>(length) >= sizeof(fields)) {
+      fprintf(stderr, "Cannot format address-wrap witness.\n");
+      return false;
+    }
+    workload_fields.assign(fields, static_cast<size_t>(length));
+  }
 
   // This records the intended access and capture request, not a claim that the
   // dump exists or that the function entry equals the faulting instruction.
@@ -243,9 +288,9 @@ bool WriteWitness(const base::FilePath& path,
       "}\n",
       process_id,
       function_entry,
-      zero_base_offset ? "0x8" : "0x0",
+      (zero_base_offset || address_wrap) ? "0x8" : "0x0",
       mode.c_str(),
-      bap_workload ? kBapIntegrationProfile : zero_base_offset
+      address_wrap ? address_wrap->integration_profile : bap_workload ? kBapIntegrationProfile : zero_base_offset
           ? indexed_offset ? "ariadne-crashpad-zero-base-offset-indexed-v1"
                            : "ariadne-crashpad-zero-base-offset-v1"
           : kIntegrationProfile,
@@ -287,7 +332,8 @@ int CrashDemoMain(int argc, base::FilePath::CharType* argv[]) {
   if (argc < 4 || argc > 6) {
     fprintf(stderr,
             "Usage: ariadne_crash_demo HANDLER NEW_DATABASE WITNESS_JSON "
-            "[partial|full] [null-write|bap-workload|zero-base-offset|zero-base-offset-indexed]\n"
+            "[partial|full] [null-write|bap-workload|zero-base-offset|zero-base-offset-indexed|"
+            "address-wrap-upper|address-wrap-no-wrap|address-wrap-negative|address-wrap-indexed]\n"
             "The database and witness must not already exist. This demo "
             "deliberately crashes its own process after setup.\n");
     return EXIT_FAILURE;
@@ -316,12 +362,22 @@ int CrashDemoMain(int argc, base::FilePath::CharType* argv[]) {
       requested_profile == FILE_PATH_LITERAL("bap-workload");
   const bool indexed_offset = requested_profile == FILE_PATH_LITERAL("zero-base-offset-indexed");
   const bool zero_base_offset = indexed_offset || requested_profile == FILE_PATH_LITERAL("zero-base-offset");
-  if (!bap_workload && !zero_base_offset && requested_profile != FILE_PATH_LITERAL("null-write")) {
+  const AddressWrapRecipe* address_wrap = nullptr;
+  if (requested_profile == FILE_PATH_LITERAL("address-wrap-upper")) {
+    address_wrap = &kAddressWrapRecipes[0];
+  } else if (requested_profile == FILE_PATH_LITERAL("address-wrap-no-wrap")) {
+    address_wrap = &kAddressWrapRecipes[1];
+  } else if (requested_profile == FILE_PATH_LITERAL("address-wrap-negative")) {
+    address_wrap = &kAddressWrapRecipes[2];
+  } else if (requested_profile == FILE_PATH_LITERAL("address-wrap-indexed")) {
+    address_wrap = &kAddressWrapRecipes[3];
+  }
+  if (!bap_workload && !zero_base_offset && !address_wrap && requested_profile != FILE_PATH_LITERAL("null-write")) {
     fprintf(stderr, "Unsupported controlled profile.\n");
     return EXIT_FAILURE;
   }
 #if !BUILDFLAG(IS_WIN)
-  if (bap_workload || zero_base_offset) {
+  if (bap_workload || zero_base_offset || address_wrap) {
     fprintf(stderr, "The bap-workload profile is supported only on Windows.\n");
     return EXIT_FAILURE;
   }
@@ -350,6 +406,16 @@ int CrashDemoMain(int argc, base::FilePath::CharType* argv[]) {
   } else if (zero_base_offset) {
     function_entry = indexed_offset ? reinterpret_cast<uintptr_t>(&AriadneCrashDemoZeroBaseOffsetIndexed)
                                    : reinterpret_cast<uintptr_t>(&AriadneCrashDemoZeroBaseOffset);
+  } else if (address_wrap) {
+    if (address_wrap == &kAddressWrapRecipes[0]) {
+      function_entry = reinterpret_cast<uintptr_t>(&AriadneCrashDemoAddressWrapUpper);
+    } else if (address_wrap == &kAddressWrapRecipes[1]) {
+      function_entry = reinterpret_cast<uintptr_t>(&AriadneCrashDemoAddressWrapNoWrap);
+    } else if (address_wrap == &kAddressWrapRecipes[2]) {
+      function_entry = reinterpret_cast<uintptr_t>(&AriadneCrashDemoAddressWrapNegative);
+    } else {
+      function_entry = reinterpret_cast<uintptr_t>(&AriadneCrashDemoAddressWrapIndexed);
+    }
   }
 #endif
   size_t code_extent_bytes;
@@ -360,7 +426,7 @@ int CrashDemoMain(int argc, base::FilePath::CharType* argv[]) {
   CrashpadClient client;
   const std::map<std::string, std::string> annotations = {
       {"integration_profile",
-       bap_workload ? kBapIntegrationProfile : zero_base_offset
+       address_wrap ? address_wrap->integration_profile : bap_workload ? kBapIntegrationProfile : zero_base_offset
            ? indexed_offset ? "ariadne-crashpad-zero-base-offset-indexed-v1"
                             : "ariadne-crashpad-zero-base-offset-v1"
            : kIntegrationProfile},
@@ -398,7 +464,7 @@ int CrashDemoMain(int argc, base::FilePath::CharType* argv[]) {
 
   if (!WriteWitness(
           witness_path, function_entry, code_extent_bytes, mode, bap_workload,
-          zero_base_offset, indexed_offset)) {
+          zero_base_offset, indexed_offset, address_wrap)) {
     fprintf(stderr, "Cannot persist the witness; exiting normally.\n");
     return EXIT_FAILURE;
   }
@@ -409,6 +475,18 @@ int CrashDemoMain(int argc, base::FilePath::CharType* argv[]) {
   } else if (zero_base_offset) {
     if (indexed_offset) { AriadneCrashDemoZeroBaseOffsetIndexed(nullptr, 0); }
     else { AriadneCrashDemoZeroBaseOffset(nullptr); }
+  } else if (address_wrap) {
+    volatile uint32_t* base = reinterpret_cast<volatile uint32_t*>(
+        static_cast<uintptr_t>(address_wrap->base));
+    if (address_wrap == &kAddressWrapRecipes[0]) {
+      AriadneCrashDemoAddressWrapUpper(base, 0);
+    } else if (address_wrap == &kAddressWrapRecipes[1]) {
+      AriadneCrashDemoAddressWrapNoWrap(base, 0);
+    } else if (address_wrap == &kAddressWrapRecipes[2]) {
+      AriadneCrashDemoAddressWrapNegative(base, 0);
+    } else {
+      AriadneCrashDemoAddressWrapIndexed(base, 0);
+    }
   } else {
     AriadneCrashDemoFault(nullptr);
   }

@@ -1,0 +1,412 @@
+{
+  "binding_rejections": [
+    {
+      "budgets": [
+        [
+          64,
+          64
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": "Err before budgets",
+      "name": "snapshot-id"
+    },
+    {
+      "budgets": [
+        [
+          64,
+          64
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": "Err before budgets",
+      "name": "artifact-sha256"
+    },
+    {
+      "budgets": [
+        [
+          64,
+          64
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": "Err before budgets",
+      "name": "query-id"
+    },
+    {
+      "budgets": [
+        [
+          64,
+          64
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": "Err before budgets",
+      "name": "request-sha256"
+    },
+    {
+      "budgets": [
+        [
+          64,
+          64
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": "Err before budgets",
+      "name": "semantic-profile"
+    },
+    {
+      "budgets": [
+        [
+          64,
+          64
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": "Err before budgets",
+      "name": "mutable-reader-metadata"
+    },
+    {
+      "budgets": [
+        [
+          64,
+          64
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": "Err before budgets",
+      "name": "outside-query-site"
+    },
+    {
+      "budgets": [
+        [
+          64,
+          64
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": "Err before budgets",
+      "name": "invalid-access-index"
+    },
+    {
+      "budgets": [
+        [
+          64,
+          64
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": "Err before budgets",
+      "name": "receipt-address"
+    },
+    {
+      "budgets": [
+        [
+          64,
+          64
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": "Err before budgets",
+      "name": "receipt-bytes"
+    },
+    {
+      "budgets": [
+        [
+          64,
+          64
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": "Err before budgets",
+      "name": "receipt-opcode"
+    },
+    {
+      "budgets": [
+        [
+          64,
+          64
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": "Err before budgets",
+      "name": "receipt-length"
+    },
+    {
+      "budgets": [
+        [
+          64,
+          64
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": "Err before budgets",
+      "name": "receipt-raw-row"
+    },
+    {
+      "budgets": [
+        [
+          64,
+          64
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": "Err before budgets",
+      "name": "receipt-decoder-hash"
+    },
+    {
+      "budgets": [
+        [
+          64,
+          64
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": "Err before budgets",
+      "name": "fault-field-bytes"
+    },
+    {
+      "budgets": [
+        [
+          64,
+          64
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": "Err before budgets",
+      "name": "fault-span-hash"
+    },
+    {
+      "budgets": [
+        [
+          64,
+          64
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": "Err before budgets",
+      "name": "duplicate-fault-field"
+    },
+    {
+      "budgets": [
+        [
+          64,
+          64
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": "Err before budgets",
+      "name": "invalid-context-validity-claim"
+    },
+    {
+      "budgets": [
+        [
+          64,
+          64
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "expected": "Err before budgets",
+      "name": "invalid-parameter-count"
+    }
+  ],
+  "cli_cases": [
+    "with-zero-address",
+    "with-zero-base-offset",
+    "with-explanation",
+    "with-stateflow",
+    "out-of-query-site",
+    "invalid-access-index",
+    "site-remains-seed-not-root",
+    "default-native-ownership",
+    "explicit-rust-rollback",
+    "transactional-render-failure",
+    "transactional-native-failure",
+    "unknown-assessment-render-order"
+  ],
+  "compiled_mutants": 24,
+  "decision_cases": 140,
+  "legacy_outputs": {
+    "base_and_explanation": 72,
+    "base_and_explanation_backends": [
+      "rust",
+      "default",
+      "bap"
+    ],
+    "base_and_explanation_cases": [
+      "linux-stage-b",
+      "windows-stage-b",
+      "bap-precision-not",
+      "pinned-real-capture"
+    ],
+    "files_per_bundle": [
+      "report.txt",
+      "report.json",
+      "report.dot",
+      "explanation.txt",
+      "explanation.json",
+      "explanation.dot"
+    ],
+    "i5a": 246,
+    "i5b": 342,
+    "i5b_upstream": 6,
+    "total": 666
+  },
+  "owned_controlled_cases": 8,
+  "schema": "ariadne.i5c-w0-matrix/v1",
+  "serialized_rejections": [
+    {
+      "expected": "Err in parse/validate/every renderer",
+      "name": "duplicate-json-member"
+    },
+    {
+      "expected": "Err in parse/validate/every renderer",
+      "name": "unknown-top-level-field"
+    },
+    {
+      "expected": "Err in parse/validate/every renderer",
+      "name": "unknown-arithmetic-field"
+    },
+    {
+      "expected": "Err in parse/validate/every renderer",
+      "name": "sum-json-number"
+    },
+    {
+      "expected": "Err in parse/validate/every renderer",
+      "name": "sum-plus-sign"
+    },
+    {
+      "expected": "Err in parse/validate/every renderer",
+      "name": "sum-leading-zero"
+    },
+    {
+      "expected": "Err in parse/validate/every renderer",
+      "name": "sum-negative-zero"
+    },
+    {
+      "expected": "Err in parse/validate/every renderer",
+      "name": "sum-empty"
+    },
+    {
+      "expected": "Err in parse/validate/every renderer",
+      "name": "sum-whitespace"
+    },
+    {
+      "expected": "Err in parse/validate/every renderer",
+      "name": "sum-over-21-chars"
+    },
+    {
+      "expected": "Err in parse/validate/every renderer",
+      "name": "sum-below-domain"
+    },
+    {
+      "expected": "Err in parse/validate/every renderer",
+      "name": "sum-above-domain"
+    },
+    {
+      "expected": "Err in parse/validate/every renderer",
+      "name": "sum-not-B-plus-D"
+    },
+    {
+      "expected": "Err in parse/validate/every renderer",
+      "name": "wrong-wrap-kind"
+    },
+    {
+      "expected": "Err in parse/validate/every renderer",
+      "name": "wrong-effective-address"
+    },
+    {
+      "expected": "Err in parse/validate/every renderer",
+      "name": "wrong-signed-displacement"
+    },
+    {
+      "expected": "Err in parse/validate/every renderer",
+      "name": "arithmetic-through-early-gap"
+    },
+    {
+      "expected": "Err in parse/validate/every renderer",
+      "name": "definite-through-late-gap"
+    },
+    {
+      "expected": "Err in parse/validate/every renderer",
+      "name": "definite-through-budget-gap"
+    },
+    {
+      "expected": "Err in parse/validate/every renderer",
+      "name": "scope-digest"
+    },
+    {
+      "expected": "Err in parse/validate/every renderer",
+      "name": "content-digest"
+    },
+    {
+      "expected": "Err in parse/validate/every renderer",
+      "name": "dangling-evidence-ref"
+    },
+    {
+      "expected": "Err in parse/validate/every renderer",
+      "name": "cross-scope-claim-ref"
+    },
+    {
+      "expected": "Err in parse/validate/every renderer",
+      "name": "forged-observed-arithmetic"
+    }
+  ]
+}

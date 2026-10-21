@@ -1,0 +1,20 @@
+{
+  "module": "Apalache.tla",
+  "version": "v0.62.2",
+  "upstream_url": "https://raw.githubusercontent.com/apalache-mc/apalache/v0.62.2/src/tla/Apalache.tla",
+  "module_sha256": "a9115b404e72c58fd085f81bc59cc918f8adac49feabfb57f8e285bc7ab5cfac",
+  "module_bytes": 6500,
+  "license": {
+    "schema": "ariadne.apalache-license-pin/v1",
+    "version": "v0.62.2",
+    "origin": {
+      "archive_sha256": "765f610537281a0f25b8c30f2554f19523e2859c824e80e62276653ee23c10e2",
+      "member": "apalache-0.62.2/LICENSE"
+    },
+    "bytes": 11945,
+    "sha256": "2dd033a9407b570f58ba4efe7c726f0eb734f3b3fa184d3cc056048883cfe495",
+    "standard_module_sha256": "a9115b404e72c58fd085f81bc59cc918f8adac49feabfb57f8e285bc7ab5cfac",
+    "standard_module_bytes": 6500
+  },
+  "copied_without_modification": true
+}

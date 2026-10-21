@@ -1,12 +1,13 @@
 //! Encoded zero-base/nonzero-displacement assessment at one captured fault site.
-use super::fault_context::{CapturedFaultContext, GPRS, validate_context, values};
+use super::fault_context::{CapturedFaultContext, validate_context, values};
+use super::scalar_base_displacement::scalar_base_displacement;
 use super::validate::{digest, site_valid};
 use super::zero_address::{ZeroAddressEvidence, ZeroAddressEvidenceData, decide};
 use super::{
     AssessedValue, BoundFaultContext, Classification, Error, FaultAddressQuestion, FaultDatum,
     FaultMetadata, Identity, SiteEvidence, ZeroAddressConclusion, id, invalid, sha,
 };
-use crate::llvm_mc::address_reference::{DecodedAddressReference, gpr_bank};
+use crate::llvm_mc::address_reference::DecodedAddressReference;
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeSet;
 
@@ -231,32 +232,6 @@ fn decision(
         gaps: admitted.gaps,
         ..Decision::default()
     };
-    let Some(r) = receipt(evidence) else {
-        result
-            .gaps
-            .insert("missing-decoded-address-reference".into());
-        result.address = None;
-        return result;
-    };
-    let Some(bank) = r.base.as_deref().and_then(gpr_bank) else {
-        result.gaps.insert("unsupported-encoded-base".into());
-        result.address = None;
-        return result;
-    };
-    if r.index.is_some()
-        || r.segment.is_some()
-        || r.rip_relative
-        || r.address_width != 64
-        || !r.gaps.is_empty()
-        || r.decoder_sha256.is_none()
-        || r.target != "x86_64-pc-windows-msvc"
-    {
-        result
-            .gaps
-            .insert("unsupported-decoded-address-profile".into());
-        result.address = None;
-        return result;
-    }
     let access = numeric.iter().find_map(|e| {
         if let ZeroAddressEvidenceData::Instruction { instruction, .. } = &e.data {
             instruction.accesses.get(question.memory_access)
@@ -264,30 +239,21 @@ fn decision(
             None
         }
     });
-    if access.is_none_or(|a| {
-        a.access_width != u16::from(r.access_width)
-            || a.address_width != u16::from(r.address_width)
-            || a.expression.as_ref().is_none_or(|x| {
-                x.width != 64
-                    || x.terms.len() != 1
-                    || x.terms[0].bank != bank
-                    || x.terms[0].coefficient != 1
-                    || x.constant != r.displacement as u64
-            })
-    }) {
-        result
-            .gaps
-            .insert("decoded-bil-address-disagreement".into());
-        result.address = None;
-        return result;
-    }
+    let facts = match scalar_base_displacement(receipt(evidence), access) {
+        Ok(facts) => facts,
+        Err(gap) => {
+            result.gaps.insert(gap.into());
+            result.address = None;
+            return result;
+        }
+    };
     let data = fault_data(evidence);
     let fields = values(&data);
-    let name = GPRS[bank as usize];
+    let name = facts.register;
     if result.gaps.is_empty() {
         result.base = Some(name.into());
         result.value = fields.get(format!("reg:{name}").as_str()).copied();
-        result.displacement = Some(r.displacement);
+        result.displacement = Some(facts.displacement);
     }
     result
 }

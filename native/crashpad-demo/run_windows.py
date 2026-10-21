@@ -12,6 +12,10 @@ import subprocess
 import sys
 import time
 
+ADDRESS_WRAP_PROFILES = {
+    "address-wrap-upper": "upper", "address-wrap-no-wrap": "none",
+    "address-wrap-negative": "negative", "address-wrap-indexed": "indexed",
+}
 
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
@@ -22,7 +26,7 @@ def main():
     parser.add_argument("--build", type=Path, required=True, help="build.json from build_windows.py")
     parser.add_argument("--output", type=Path, required=True, help="new capture directory")
     parser.add_argument("--mode", choices=["partial", "full"], default="partial")
-    parser.add_argument("--profile", choices=["null-write", "bap-workload", "zero-base-offset", "zero-base-offset-indexed"],
+    parser.add_argument("--profile", choices=["null-write", "bap-workload", "zero-base-offset", "zero-base-offset-indexed", *ADDRESS_WRAP_PROFILES],
                         default="null-write")
     parser.add_argument("--check-failures", action="store_true")
     parser.add_argument("--minimal-environment", action="store_true",
@@ -110,6 +114,7 @@ def main():
         "bap-workload": "ariadne-crashpad-bap-workload-v1",
         "zero-base-offset": "ariadne-crashpad-zero-base-offset-v1",
         "zero-base-offset-indexed": "ariadne-crashpad-zero-base-offset-indexed-v1",
+        **{profile: "ariadne-crashpad-" + profile + "-v1" for profile in ADDRESS_WRAP_PROFILES},
     }[args.profile]
     if (observation["process_id"] != process.pid
             or observation["dump_mode"] != args.mode
@@ -161,6 +166,14 @@ def main():
         "setupFailures": failures,
         "scope": "Owned demo crashed and Crashpad wrote a minidump. Raw exception/context/code verification is a separate check.",
     }
+    if args.profile in ADDRESS_WRAP_PROFILES:
+        # New-profile bindings only; old capture record fields stay unchanged.
+        prepared_inputs = args.build.parent / "build-inputs.json"
+        if sha(prepared_inputs) != build["inputs"]["inputsSha256"]:
+            raise RuntimeError("prepared inputs differ from the build receipt")
+        result.update(addressWrapRecipe=ADDRESS_WRAP_PROFILES[args.profile],
+                      buildInputsSha256=build["inputs"]["inputsSha256"],
+                      sourceArchiveSha256=build["inputs"]["sourceArchiveSha256"])
     (output / "capture.json").write_text(json.dumps(result, indent=2) + "\n")
     print(f"Capture created: {dump} ({dump.stat().st_size} bytes)", flush=True)
     print(f"Record: {output / 'capture.json'}", flush=True)

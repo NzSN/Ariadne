@@ -1,0 +1,163 @@
+{
+  "schema": "ariadne.memory-solver-profile/v1",
+  "authority_sha256": "8227ba888e54258fbef9fef93c735772045c9a6286ee82ca3ddef2c24e982f72",
+  "solver_sha256": "cc47c1ccea8eda9cd0bfc8647a0f45ca409a8079569e340339f4ad0508b9d105",
+  "standard_module_sha256": "a9115b404e72c58fd085f81bc59cc918f8adac49feabfb57f8e285bc7ab5cfac",
+  "license_sha256": "2dd033a9407b570f58ba4efe7c726f0eb734f3b3fa184d3cc056048883cfe495",
+  "partition_inputs": {
+    "MemoryPairChecks.cfg": {
+      "bytes": 70,
+      "sha256": "63878fbbe11c3046b3ba7f25d080ab4201aa2ed4bd0760d9a8a68d35d77e787d"
+    },
+    "MemoryPairChecks.tla": {
+      "bytes": 1186,
+      "sha256": "2b4afe6e4c4ec42322da366af01fb08681c18ec7b38232b28ef34a37127b29df"
+    },
+    "MemoryPairComposedAdd.cfg": {
+      "bytes": 95,
+      "sha256": "f80e0350bd6fa77b8ba9d3acaa2b07d04d0703e13116a7bea9bb6fdf6b3a81c9"
+    },
+    "MemoryPairComposedAnd.cfg": {
+      "bytes": 95,
+      "sha256": "3ded7003ea55c70074f28f2939ae3c4f50bdd2590a10bfe64f0fca33b1fb5b8e"
+    },
+    "MemoryPairComposedConstant.cfg": {
+      "bytes": 100,
+      "sha256": "f664045df0e7cb2b2b4936529d0829de5c83dfef3c5581cae14103dc2b9670b7"
+    },
+    "MemoryPairComposedCopy.cfg": {
+      "bytes": 96,
+      "sha256": "60217363b36f1cd2e5567b8b572da2420674b3dad107bae568de72a2f773dcc8"
+    },
+    "MemoryPairComposedSub.cfg": {
+      "bytes": 95,
+      "sha256": "3b3f71e3e0179d441e5f15a15ea646ece563171b80babe18fb3216f718235cac"
+    },
+    "MemoryPairExactAdd.cfg": {
+      "bytes": 92,
+      "sha256": "7a9f3795250d326cdefaa5629c48b9e27d14b0791cbe03f754dbb099e205ce43"
+    },
+    "MemoryPairExactAnd.cfg": {
+      "bytes": 92,
+      "sha256": "ef13a347bc9d5e109a05ba2d4ed5d1dcc299db13e75783168fc8f8c603d7e7d4"
+    },
+    "MemoryPairExactConstant.cfg": {
+      "bytes": 97,
+      "sha256": "01676abcfa37e90ffd39f8f963a39257a11286fdd83ad8936330ea98d37b6c0f"
+    },
+    "MemoryPairExactCopy.cfg": {
+      "bytes": 93,
+      "sha256": "a6bf8ecdc725808c66486ed81df12f562ebe2a9292839a4aca16b604462f7355"
+    },
+    "MemoryPairExactSub.cfg": {
+      "bytes": 92,
+      "sha256": "3bb80580a0b2e9d72912cc15204d772c6e1cd5c90c03447bfe91f4d63ceed5de"
+    },
+    "MemoryPairPartitionChecks-cover.cfg": {
+      "bytes": 84,
+      "sha256": "8e78aa70cc127f93b4682cf56d5d959ae3b5a7622079288b22fce41c9cbcc182"
+    },
+    "MemoryPairPartitionChecks.tla": {
+      "bytes": 2498,
+      "sha256": "92e7d45f7d06e537ccf6171eafcbfb18cd69cca3a2ba2b85d5aacb001f6585cb"
+    },
+    "MemoryPairPartitionCoverage.cfg": {
+      "bytes": 71,
+      "sha256": "6d8128deb09253f435f00c8560f96a9dbb1ee93706027c84f43c093ebb50237c"
+    },
+    "MemoryPairPartitionCoverage.tla": {
+      "bytes": 928,
+      "sha256": "a77a602947b9bf5ccfaa6c5d512a12f860ca3de83ca56d913116ae3868108087"
+    },
+    "MemoryPairPlainAdd.cfg": {
+      "bytes": 92,
+      "sha256": "f4f5d33b9649e07bfd4f55b216d1551ac8b4bff55ab14775dbe37a74fe0622f1"
+    },
+    "MemoryPairPlainAnd.cfg": {
+      "bytes": 92,
+      "sha256": "c5329b2cb5786fbd01fe783bee8c3455fbe75fcceb7b86439d2fe11701d8c9cb"
+    },
+    "MemoryPairPlainConstant.cfg": {
+      "bytes": 97,
+      "sha256": "e0859f1dc3bcb8b0d6bf8c2e05c4ba2c0f26e6f36b0da940c694d418d59ca4b3"
+    },
+    "MemoryPairPlainCopy.cfg": {
+      "bytes": 93,
+      "sha256": "4382c776d44762f94f10a9509d1358c822d5e14d2a0272c7f5013e89f46e88b9"
+    },
+    "MemoryPairPlainSub.cfg": {
+      "bytes": 92,
+      "sha256": "e080f068f1d31fe1b10c3e04d3cb54e4baf5b1225e4d75a6bc3656f034bb90f6"
+    },
+    "MemoryPairUnknownAdd.cfg": {
+      "bytes": 94,
+      "sha256": "80239acb2e9afa768513bbd6f829b0ae96542580afb8e68eb13a1d20a7287bbf"
+    },
+    "MemoryPairUnknownAnd.cfg": {
+      "bytes": 94,
+      "sha256": "f71972849d3b1fe3958b4acfff57eff5d4898d465e81dc9e184d08bf02651707"
+    },
+    "MemoryPairUnknownConstant.cfg": {
+      "bytes": 99,
+      "sha256": "b738b47365614fec46bf4bb143d61ead1f359e450b3217f20db391b9d448a08d"
+    },
+    "MemoryPairUnknownCopy.cfg": {
+      "bytes": 95,
+      "sha256": "8c8e783da0e1dbf65457f4c9b66c70b77788a7d73c13bec8b91582506fb359a7"
+    },
+    "MemoryPairUnknownSub.cfg": {
+      "bytes": 94,
+      "sha256": "ac0363c37b02dbb9a1dab357986503feb928e3796d530cf7e2456cdaf276131e"
+    },
+    "MemoryRefinement.cfg": {
+      "bytes": 57,
+      "sha256": "ad0cbba66696cd5a8ae7b1d4be992fadae04bf5cb6b015c7b2f6eec106135ffe"
+    }
+  },
+  "control_inputs": {
+    "FiniteLookupPointwise.cfg": {
+      "bytes": 69,
+      "sha256": "21754f74cde3780505ae505ba52dea32e8eaa091ee0c6f78bbd2c327ae2234bc"
+    },
+    "FiniteLookupWhole.cfg": {
+      "bytes": 65,
+      "sha256": "f3d137cc2aa164ef8c2aff60268334cf1897789097ebe576d3612e4a1a4d6037"
+    },
+    "FiniteLookupEquality.tla": {
+      "bytes": 3225,
+      "sha256": "9907c78574b2dff17215bb2f40769226ec8aa4da3fcb6d333b6a9d1c1e10063d"
+    }
+  },
+  "carrier": {
+    "chain_limit": 2,
+    "facts": 123,
+    "kinds": [
+      "copy",
+      "add",
+      "sub",
+      "and",
+      "constant"
+    ],
+    "pairs": 9840,
+    "transfers": 80,
+    "values": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ]
+  },
+  "scope": "Exact finite Values/Facts/Transfers and closed chains only; original algebraic authority retained"
+}

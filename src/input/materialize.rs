@@ -1,5 +1,8 @@
 use crate::bap::guard_admission as guard;
-use crate::effects::{EffectQuality, InstructionEvidence, PreparationOptions, PreparedAnalysis};
+use crate::effects::{
+    EffectQuality, InstructionEvidence, PreparationGap, PreparationIdentity, PreparationOptions,
+    PreparedAnalysis,
+};
 use crate::input::*;
 use crate::llvm_mc::AdapterError;
 use crate::{
@@ -15,6 +18,9 @@ pub struct AnalysisQuery {
 }
 
 #[cfg(test)]
+#[path = "../../tests/input/address_wrap_binding.rs"]
+pub(crate) mod address_wrap_binding_tests;
+#[cfg(test)]
 #[path = "../../tests/input/common/mod.rs"]
 mod common;
 #[cfg(test)]
@@ -26,7 +32,7 @@ mod guard_admission_tests;
 #[cfg(test)]
 #[path = "../../tests/input/target_resolution_unit.rs"]
 mod target_resolution_tests;
-#[derive(Clone, Debug, serde::Serialize)]
+#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize)]
 pub struct PrepareLimits {
     pub max_starts: usize,
     pub max_candidates: usize,
@@ -45,7 +51,7 @@ impl Default for PrepareLimits {
         }
     }
 }
-#[derive(Clone, Debug, Default)]
+#[derive(Clone, Debug, Default, PartialEq, Eq)]
 pub struct MaterializationReport {
     pub entry_points: AddressSet,
     pub slice_seeds: AddressSet,
@@ -58,8 +64,24 @@ pub struct MaterializationReport {
     pub overlapping_starts: BTreeSet<(Address, Address)>,
     pub query_identity: String,
 }
+/// Original publication facts for the new scalar question binding. Public
+/// preparation fields remain editable for existing callers; this seal is never
+/// refreshed from those fields, and it owns no analysis or reaching state.
+#[derive(Clone, Debug)]
+struct ScalarPreparationBinding {
+    identity: PreparationIdentity,
+    request_fingerprint: String,
+    instructions: BTreeMap<Address, InstructionEvidence>,
+    reads: BTreeMap<Address, ByteRead>,
+    gaps: Vec<PreparationGap>,
+    materialization: MaterializationReport,
+    open_limits: OpenLimits,
+    snapshot: Arc<SnapshotMetadata>,
+    fault_digest: String,
+}
 #[derive(Clone, Debug)]
 pub struct FilePreparedAnalysis {
+    scalar_binding: Arc<ScalarPreparationBinding>,
     guard_input: Option<Arc<guard::GuardInput>>,
     guard_snapshot: Option<Arc<FileSnapshot>>,
     original_controls: Option<Arc<BTreeMap<Address, guard::CandidateControl>>>,
@@ -76,6 +98,33 @@ pub struct FilePreparedAnalysis {
     pub materialization: MaterializationReport,
 }
 impl FilePreparedAnalysis {
+    pub(crate) fn checked_scalar_binding(&self) -> Result<(), crate::investigation::Error> {
+        let original = &self.scalar_binding;
+        if crate::investigation::request_fingerprint(&self.prepared.request)
+            != original.request_fingerprint
+        {
+            return Err("address-wrap request changed after preparation".into());
+        }
+        if self.prepared.identity != original.identity
+            || self.materialization != original.materialization
+            || self.open_limits != original.open_limits
+            || self.snapshot.as_ref() != original.snapshot.as_ref()
+            || self.fault.metadata.as_ref() != original.snapshot.as_ref()
+        {
+            return Err("address-wrap preparation identity or metadata changed".into());
+        }
+        if self.prepared.instructions != original.instructions
+            || self.reads != original.reads
+            || self.prepared.gaps != original.gaps
+        {
+            return Err("address-wrap preparation evidence changed".into());
+        }
+        if self.fault.evidence.digest() != original.fault_digest {
+            return Err("address-wrap fault observations changed after capture".into());
+        }
+        Ok(())
+    }
+
     pub fn composition(&self) -> Option<&crate::bap::composition::Report> {
         self.composition.as_ref()
     }
@@ -1846,7 +1895,25 @@ impl FileSnapshot {
         } else {
             None
         };
+        let prepared = PreparedAnalysis {
+            request,
+            instructions: evidence,
+            gaps,
+            identity: identity.expect("nonempty roots"),
+        };
+        let scalar_binding = Arc::new(ScalarPreparationBinding {
+            identity: prepared.identity.clone(),
+            request_fingerprint: crate::investigation::request_fingerprint(&prepared.request),
+            instructions: prepared.instructions.clone(),
+            reads: reads.clone(),
+            gaps: prepared.gaps.clone(),
+            materialization: report.clone(),
+            open_limits: self.limits.clone(),
+            snapshot: self.metadata.clone(),
+            fault_digest: self.fault.evidence.digest(),
+        });
         Ok(FilePreparedAnalysis {
+            scalar_binding,
             guard_input,
             guard_snapshot: guard_setup.map(|_| Arc::new(self.clone())),
             original_controls: combined.then(|| Arc::new(original_controls)),
@@ -1856,12 +1923,7 @@ impl FileSnapshot {
             composition,
             refinement: BTreeMap::new(),
             fault: self.fault.clone(),
-            prepared: PreparedAnalysis {
-                request,
-                instructions: evidence,
-                gaps,
-                identity: identity.expect("nonempty roots"),
-            },
+            prepared,
             snapshot: self.metadata.clone(),
             open_limits: self.limits.clone(),
             reads,

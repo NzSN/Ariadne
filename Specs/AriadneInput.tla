@@ -10,7 +10,7 @@ ValuesAt(captures, va) ==
 \* @type: (Set({start: Int, data: Seq(Int), fileOffset: Int}), Int) => Bool;
 Readable(captures, va) == Cardinality(ValuesAt(captures, va)) = 1
 \* @type: (Set({start: Int, data: Seq(Int), fileOffset: Int}), Int, Seq(Int)) => Bool;
-PrefixEvidence(captures, va, bytes) == \A i \in 1..Len(bytes):
+PrefixEvidence(captures, va, bytes) == \A i \in DOMAIN bytes:
   /\ Readable(captures, va+i-1)
   /\ bytes[i] \in ValuesAt(captures, va+i-1)
 
@@ -19,7 +19,7 @@ PrefixEvidence(captures, va, bytes) == \A i \in 1..Len(bytes):
 WellMapped(file, captures) == \A c \in captures:
   /\ c.fileOffset >= 0
   /\ c.fileOffset + Len(c.data) <= Len(file)
-  /\ \A i \in 1..Len(c.data): c.data[i] = file[c.fileOffset+i]
+  /\ \A i \in DOMAIN c.data: c.data[i] = file[c.fileOffset+i]
 
 \* @type: (Set({src: Int, dst: Int, kind: Str}), Int) => Set(Int);
 LocalSuccessors(edges, a) == {e.dst : e \in

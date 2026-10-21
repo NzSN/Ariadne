@@ -226,3 +226,72 @@ the historical original-Windows I4 flag remains false in every I5a result.
 The [separate active I4 re-pin](../../docs/Ariadne/workload-performance-design.md#windows-investigation-replacement)
 uses the 98-instruction workload. Its later [performance qualification](../../docs/Ariadne/workload-performance-design.md#native-investigation-qualification)
 meets the fixed CLI budget independently of the two-instruction I5a captures.
+
+## I5c address-wrap recipes (W4 qualification pending)
+
+These four additive Windows x64 profiles implement the exact owned recipes in
+the [W4 plan](../../.agents/plans/i5c-address-wrap.md#w4--product-and-real-controlled-windows-evidence).
+The [canonical address-wrap design](../../docs/Ariadne/address-wrap-design.md)
+defines the question and its exclusions. Source preparation, synthetic inspector
+tests, native compilation, raw capture inspection and product assessment are
+separate gates. The earlier build/capture records above remain historical.
+
+| Demo `--profile` | Frozen recipe | Caller RCX / RDX | MOV bytes (then `c3` RET) | Expected question answer |
+| --- | --- | --- | --- | --- |
+| `address-wrap-upper` | `upper` | `fffffffffffffff8` / `0` | `c7411005000000` | Consistent |
+| `address-wrap-no-wrap` | `none` | `8` / `0` | `c70105000000` | Refuted |
+| `address-wrap-negative` | `negative` | `10` / `0` (hex) | `c741f805000000` | Refuted |
+| `address-wrap-indexed` | `indexed` | `fffffffffffffff8` / `0` | `c744111005000000` | Unknown |
+
+Each profile is separately captured in partial and full mode. Preserve the eight
+case IDs `upper-partial`, `upper-full`, `none-partial`, `none-full`,
+`negative-partial`, `negative-full`, `indexed-partial`, `indexed-full` from the
+existing [frozen inventory](../../tests/input/fixtures/i5c/owned-captures.json).
+All eight actual access violations must be writes to byte eight. The new
+`address_wrap` witness object declares recipe, intended RCX/RDX, signed
+displacement, MOV bytes and expected answer. Witness intent is never substituted
+for raw observations. Existing profiles receive no new witness fields.
+
+After a fresh source-bound native build, use explicit native Windows Python
+3.11 or newer and new capture directories. For example, in PowerShell:
+
+```powershell
+$python = 'C:\Users\win10\AppData\Local\Programs\Python\Python311\python.exe'
+$demo = 'D:\TASK\ariadne\native\crashpad-demo'
+$build = 'D:\TASK\native-build\build.json'
+$buildSha = (Get-FileHash -Algorithm SHA256 $build).Hash.ToLowerInvariant()
+& $python "$demo\run_windows.py" --build $build `
+  --output 'D:\TASK\captures\upper-partial' --mode partial `
+  --profile address-wrap-upper --check-failures
+& $python "$demo\inspect_i5c.py" --capture 'D:\TASK\captures\upper-partial' `
+  --build $build --expected-build-sha256 $buildSha `
+  --output 'D:\TASK\captures\upper-partial\inspection.json'
+```
+
+These are recipe examples; substitute the independently frozen build digest and
+task paths from the producer manifest. The inspector requires `build-inputs.json`,
+`source.tar.gz`, source tree and tools beside the build record. It verifies every
+declared prepared source hash, the local recipe/preparation/build source hashes,
+tool/binary identities and capture/witness/dump bindings. New profiles always use
+the runner's minimal Windows child environment and disabled uploads.
+
+The inspector reads the PE and raw minidump without Ariadne, BAP, LLVM, a debugger
+or a native child. It requires valid AMD64 CONTROL/INTEGER observations, matching
+RIP/entry, observed RCX/RDX, write-AV byte eight, exact MOV/RET code and PE
+comparison, captured contributors without holes/conflicts, process/module binding,
+and matching partial/full flag plus memory streams. Integer arithmetic computes
+T, q and EA independently; the immediate store payload `5` never contributes to
+the address. The indexed recipe remains an admission-negative oracle even though
+its physical EA is eight. PE bytes are comparison evidence only.
+
+The report is published atomically to a new file; creating the no-overwrite
+hardlink is the commit point. A later temporary-name cleanup failure leaves the
+complete report committed, exits successfully and reports the cleanup warning on
+stderr for the controller to retain. Before commit, failures leave the existing
+final path unchanged and cleanup attempts never mask the original error. A
+task-owned temporary may remain after a cleanup failure and must be retained or
+cleaned separately; cleanup is not capture validation. A trusted pinned build receipt
+is not a proof of compiler correctness, compared code is not whole-image
+identity, full-memory flags do not prove all process bytes were captured, and
+these controlled observations establish neither earlier execution nor root
+cause. Product CLI results and the W5 gates remain separate qualification work.

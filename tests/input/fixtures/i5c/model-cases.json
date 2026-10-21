@@ -1,0 +1,3502 @@
+{
+  "architectural_width": 64,
+  "cases": [
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "consistent_with_evidence",
+      "expectedEffective": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 1,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 1,
+      "name": "mov32mi-upper",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        8,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "consistent_with_evidence",
+      "expectedEffective": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 1,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 2,
+      "name": "mov32mi-upper-boundary",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        65528,
+        65535
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "refuted_under_premises",
+      "expectedEffective": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 0,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 3,
+      "name": "mov32mi-negative-zero",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        16,
+        0,
+        0,
+        0
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        65528,
+        65535
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "refuted_under_premises",
+      "expectedEffective": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 0,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 4,
+      "name": "mov32mi-negative-nonzero",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "base": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        65528,
+        65535
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": -1,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 5,
+      "name": "mov32mi-underflow",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        0,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "refuted_under_premises",
+      "expectedEffective": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 0,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 6,
+      "name": "mov32mi-no-displacement",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        65532,
+        65535,
+        32767,
+        0
+      ],
+      "base": [
+        65532,
+        65535,
+        32767,
+        0
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        0,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "refuted_under_premises",
+      "expectedEffective": [
+        65532,
+        65535,
+        32767,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 0,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 7,
+      "name": "span-end-h32",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        65532,
+        65535,
+        32767,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 8,
+      "bapAddress": [
+        65528,
+        65535,
+        32767,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        32767,
+        0
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        0,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "refuted_under_premises",
+      "expectedEffective": [
+        65528,
+        65535,
+        32767,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 0,
+      "expectedTruncated": false,
+      "form": "MOV64mi32",
+      "id": 8,
+      "name": "span-end-h64",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        65528,
+        65535,
+        32767,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        65533,
+        65535,
+        32767,
+        0
+      ],
+      "base": [
+        65533,
+        65535,
+        32767,
+        0
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        0,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        65533,
+        65535,
+        32767,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 0,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 9,
+      "name": "span-cross-h32",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        65533,
+        65535,
+        32767,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 8,
+      "bapAddress": [
+        65532,
+        65535,
+        32767,
+        0
+      ],
+      "base": [
+        65532,
+        65535,
+        32767,
+        0
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        0,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        65532,
+        65535,
+        32767,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 0,
+      "expectedTruncated": false,
+      "form": "MOV64mi32",
+      "id": 10,
+      "name": "span-cross-h64",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        65532,
+        65535,
+        32767,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        65534,
+        65535,
+        65535,
+        65535
+      ],
+      "base": [
+        65534,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        0,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        65534,
+        65535,
+        65535,
+        65535
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 0,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 11,
+      "name": "span-wrap32",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        65534,
+        65535,
+        65535,
+        65535
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 8,
+      "bapAddress": [
+        65532,
+        65535,
+        65535,
+        65535
+      ],
+      "base": [
+        65532,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        0,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        65532,
+        65535,
+        65535,
+        65535
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 0,
+      "expectedTruncated": false,
+      "form": "MOV64mi32",
+      "id": 12,
+      "name": "span-wrap64",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        65532,
+        65535,
+        65535,
+        65535
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "consistent_with_evidence",
+      "expectedEffective": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 1,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 13,
+      "name": "reported-last32",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        11,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 8,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "consistent_with_evidence",
+      "expectedEffective": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 1,
+      "expectedTruncated": false,
+      "form": "MOV64mi32",
+      "id": 14,
+      "name": "reported-last64",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        15,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 1,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 15,
+      "name": "reported-before",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        7,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 1,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 16,
+      "name": "reported-after32",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        12,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 8,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 1,
+      "expectedTruncated": false,
+      "form": "MOV64mi32",
+      "id": 17,
+      "name": "reported-after64",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        16,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 1,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048577,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 21,
+      "expectedConclusion": "consistent_with_evidence",
+      "expectedEffective": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 18,
+      "expectedFacts": true,
+      "expectedQuotient": 1,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 18,
+      "name": "rsp-sib-upper",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048577,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 16,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 18,
+      "expectedFacts": false,
+      "expectedQuotient": 0,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 19,
+      "name": "missing-integer",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048578,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 28,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 30,
+      "expectedFacts": false,
+      "expectedQuotient": 0,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 20,
+      "name": "missing-control",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 31,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": false,
+      "expectedQuotient": 0,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 21,
+      "name": "wrong-operation",
+      "oneAccess": true,
+      "operation": 0,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": false,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 31,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": false,
+      "expectedQuotient": 0,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 22,
+      "name": "indexed-zero",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 31,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 32,
+      "expectedFacts": false,
+      "expectedQuotient": 0,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 23,
+      "name": "missing-decoded-receipt",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": false,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        9,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 31,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": false,
+      "expectedQuotient": 0,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 24,
+      "name": "decoder-bap-constant-disagreement",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        128,
+        0,
+        0,
+        0
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        65408,
+        65535
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "refuted_under_premises",
+      "expectedEffective": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 0,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 25,
+      "name": "mov32mi-disp8-min",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65409,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        127,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "consistent_with_evidence",
+      "expectedEffective": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 1,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 26,
+      "name": "mov32mi-disp8-max",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        0,
+        32768,
+        0,
+        0
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        0,
+        32768
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "refuted_under_premises",
+      "expectedEffective": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 0,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 27,
+      "name": "mov32mi-disp32-min",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        65534,
+        32767,
+        0,
+        0
+      ],
+      "base": [
+        65535,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        65535,
+        32767
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "consistent_with_evidence",
+      "expectedEffective": [
+        65534,
+        32767,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 1,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 28,
+      "name": "mov32mi-disp32-max",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        65534,
+        32767,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        0,
+        32768,
+        65535,
+        65535
+      ],
+      "base": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        0,
+        32768
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        0,
+        32768,
+        65535,
+        65535
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": -1,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 29,
+      "name": "lower-disp32-min",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        0,
+        32768,
+        65535,
+        65535
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 0,
+      "exception": true,
+      "expectedClaims": 1,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 0,
+      "expectedFacts": false,
+      "expectedQuotient": 0,
+      "expectedTruncated": true,
+      "form": "MOV32mi",
+      "id": 30,
+      "name": "budget-e0-c64",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 32,
+      "exception": true,
+      "expectedClaims": 31,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 32,
+      "expectedFacts": false,
+      "expectedQuotient": 0,
+      "expectedTruncated": true,
+      "form": "MOV32mi",
+      "id": 31,
+      "name": "budget-e32-c64",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 33,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "consistent_with_evidence",
+      "expectedEffective": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 1,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 32,
+      "name": "budget-e33-c64",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 0,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 0,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": false,
+      "expectedQuotient": 0,
+      "expectedTruncated": true,
+      "form": "MOV32mi",
+      "id": 33,
+      "name": "budget-e64-c0",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 35,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 31,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": false,
+      "expectedQuotient": 0,
+      "expectedTruncated": true,
+      "form": "MOV32mi",
+      "id": 34,
+      "name": "budget-e64-c35",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 36,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "consistent_with_evidence",
+      "expectedEffective": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 1,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 35,
+      "name": "budget-e64-c36",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 45,
+      "exception": true,
+      "expectedClaims": 44,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 45,
+      "expectedFacts": false,
+      "expectedQuotient": 0,
+      "expectedTruncated": true,
+      "form": "MOV32mi",
+      "id": 36,
+      "name": "budget-max-bundle-e45-c64",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 15,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 49,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 46,
+      "exception": true,
+      "expectedClaims": 49,
+      "expectedConclusion": "consistent_with_evidence",
+      "expectedEffective": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 46,
+      "expectedFacts": true,
+      "expectedQuotient": 1,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 37,
+      "name": "budget-max-bundle-e46-c49",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 15,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 48,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 44,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 46,
+      "expectedFacts": false,
+      "expectedQuotient": 0,
+      "expectedTruncated": true,
+      "form": "MOV32mi",
+      "id": 38,
+      "name": "budget-max-bundle-e64-c48",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 15,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 8,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "consistent_with_evidence",
+      "expectedEffective": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 1,
+      "expectedTruncated": false,
+      "form": "MOV64mi32",
+      "id": 39,
+      "name": "mov64mi32-upper",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "consistent_with_evidence",
+      "expectedEffective": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 1,
+      "expectedTruncated": false,
+      "form": "MOV32rm",
+      "id": 40,
+      "name": "mov32rm-upper",
+      "oneAccess": true,
+      "operation": 0,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 8,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "consistent_with_evidence",
+      "expectedEffective": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 1,
+      "expectedTruncated": false,
+      "form": "MOV64rm",
+      "id": 41,
+      "name": "mov64rm-upper",
+      "oneAccess": true,
+      "operation": 0,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "consistent_with_evidence",
+      "expectedEffective": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 1,
+      "expectedTruncated": false,
+      "form": "MOV32mr",
+      "id": 42,
+      "name": "mov32mr-upper",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        65528,
+        65535,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 8,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "consistent_with_evidence",
+      "expectedEffective": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 1,
+      "expectedTruncated": false,
+      "form": "MOV64mr",
+      "id": 43,
+      "name": "mov64mr-upper",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 36,
+      "expectedConclusion": "consistent_with_evidence",
+      "expectedEffective": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": true,
+      "expectedQuotient": 1,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 44,
+      "name": "payload-immediate-zero",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": false,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 0,
+      "expectedConclusion": "error",
+      "expectedEffective": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 0,
+      "expectedFacts": false,
+      "expectedQuotient": 0,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 45,
+      "name": "binding-invalid-full",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": false,
+      "captured": true,
+      "claimLimit": 0,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 0,
+      "exception": true,
+      "expectedClaims": 0,
+      "expectedConclusion": "error",
+      "expectedEffective": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 0,
+      "expectedFacts": false,
+      "expectedQuotient": 0,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 46,
+      "name": "binding-invalid-zero",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": false,
+      "contextFlags": 1048579,
+      "contextSupported": false,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 12,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 13,
+      "expectedFacts": false,
+      "expectedQuotient": 0,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 47,
+      "name": "no-context",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": false,
+      "contextFlags": 1048579,
+      "contextSupported": false,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": false,
+      "expectedClaims": 2,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 2,
+      "expectedFacts": false,
+      "expectedQuotient": 0,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 48,
+      "name": "no-exception",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 16,
+      "bapAddress": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        0,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 31,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 32,
+      "expectedFacts": false,
+      "expectedQuotient": 0,
+      "expectedTruncated": false,
+      "form": "MOVUPSmr",
+      "id": 49,
+      "name": "vector",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": false,
+      "receiptMatches": true,
+      "reported": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 31,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": false,
+      "expectedQuotient": 0,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 50,
+      "name": "multiple-access",
+      "oneAccess": false,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 31,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": false,
+      "expectedQuotient": 0,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 51,
+      "name": "site-not-reached",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": false,
+      "receipt": true,
+      "receiptMatches": true,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    },
+    {
+      "accessBytes": 4,
+      "bapAddress": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "base": [
+        65528,
+        65535,
+        65535,
+        65535
+      ],
+      "baseGroup": 2,
+      "baseOnly": true,
+      "bindingValid": true,
+      "captured": true,
+      "claimLimit": 64,
+      "context": true,
+      "contextFlags": 1048579,
+      "contextSupported": true,
+      "displacement": [
+        16,
+        0
+      ],
+      "evidenceLimit": 64,
+      "exception": true,
+      "expectedClaims": 31,
+      "expectedConclusion": "unknown",
+      "expectedEffective": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "expectedEvidence": 33,
+      "expectedFacts": false,
+      "expectedQuotient": 0,
+      "expectedTruncated": false,
+      "form": "MOV32mi",
+      "id": 52,
+      "name": "missing-decoder-identity",
+      "oneAccess": true,
+      "operation": 1,
+      "ordinaryAV": true,
+      "parameters": 2,
+      "payload": [
+        5,
+        0,
+        0,
+        0
+      ],
+      "prefix": true,
+      "reached": true,
+      "receipt": true,
+      "receiptMatches": false,
+      "reported": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "semantics": true,
+      "siteMatches": true,
+      "windows": true
+    }
+  ],
+  "configurations": {
+    "AddressWrap": 52,
+    "AddressWrapAdmission": 12,
+    "AddressWrapArithmetic": 23,
+    "AddressWrapBudgets": 11,
+    "AddressWrapForms": 6,
+    "AddressWrapPayload": 2
+  },
+  "independent_fixture_sha256": "8d13a87e8f443328a4994cfdc0596d0098cb1f8c4508e4ffd67f91f0ffc0e0ae",
+  "limb_count": 4,
+  "limb_width": 16,
+  "scenarios": 52,
+  "schema": "ariadne.i5c-w0-model-case-binding/v1"
+}

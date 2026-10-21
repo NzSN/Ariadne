@@ -15,7 +15,7 @@ mod frame_question;
 mod frame_structure;
 
 fn usage() -> &'static str {
-    "usage: ariadne-minidump DUMP --decoder-reference PATH (--entry VA_HEX [--entry VA_HEX ...] | --list-frame-paths N:M --path-count-bound NP | --frame-structure N:M [--frame-structure-limits JSON] | --frame-question JSON [--frame-question-limits JSON] | --frame-connections N:M [--example-path-count-bound NP] [--frame-connections-limits JSON]) [--seed VA_HEX ...] [--seed-exception-rip] [--max-starts N] [--max-artifact-bytes N] [--resolve-indirect-targets [--target-resolution-limits JSON]] [--thread-id ID] [--frame-path-limits JSON] [--assume-frame-aligned FRAME:VA] [--assume-windows-call-entry [--guard-admission-limits JSON]] [--stateflow-input SEMANTICS_JSON] [--explain-fault-address VA --memory-access N] [--explanation-only] [--assess-zero-address VA --memory-access N] [--assess-zero-base-offset VA --memory-access N] [--assess-memory-provenance LOAD_VA --memory-access N] [--assessment-only] [--analysis-backend rust|bap] [--bap-core-dir DIR] [--bap-core-response-timeout-ms N] [--bap-core-max-request-bytes N] [--bap-helper PATH] [--bap-runtime DIR] (--format text|dot|json | --output-dir NEW_DIR)"
+    "usage: ariadne-minidump DUMP --decoder-reference PATH (--entry VA_HEX [--entry VA_HEX ...] | --list-frame-paths N:M --path-count-bound NP | --frame-structure N:M [--frame-structure-limits JSON] | --frame-question JSON [--frame-question-limits JSON] | --frame-connections N:M [--example-path-count-bound NP] [--frame-connections-limits JSON]) [--seed VA_HEX ...] [--seed-exception-rip] [--max-starts N] [--max-artifact-bytes N] [--resolve-indirect-targets [--target-resolution-limits JSON]] [--thread-id ID] [--frame-path-limits JSON] [--assume-frame-aligned FRAME:VA] [--assume-windows-call-entry [--guard-admission-limits JSON]] [--stateflow-input SEMANTICS_JSON] [--explain-fault-address VA --memory-access N] [--explanation-only] [--assess-zero-address VA --memory-access N] [--assess-zero-base-offset VA --memory-access N] [--assess-address-wrap VA --memory-access N] [--assess-memory-provenance LOAD_VA --memory-access N] [--assessment-only] [--analysis-backend rust|bap] [--bap-core-dir DIR] [--bap-core-response-timeout-ms N] [--bap-core-max-request-bytes N] [--bap-helper PATH] [--bap-runtime DIR] (--format text|dot|json | --output-dir NEW_DIR)"
 }
 fn invalid(message: impl Into<String>) -> io::Error {
     io::Error::new(io::ErrorKind::InvalidInput, message.into())
@@ -73,6 +73,7 @@ struct Args {
     explain_site: Option<u64>,
     assess_site: Option<u64>,
     assess_offset_site: Option<u64>,
+    assess_wrap_site: Option<u64>,
     memory_provenance_site: Option<u64>,
     frame_pair: Option<(usize, usize)>,
     structure_pair: Option<(usize, usize)>,
@@ -120,6 +121,7 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
     let mut explain_site = None;
     let mut assess_site = None;
     let mut assess_offset_site = None;
+    let mut assess_wrap_site = None;
     let mut memory_provenance_site = None;
     let mut frame_pair = None;
     let mut structure_pair = None;
@@ -299,6 +301,13 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
                         .ok_or_else(|| invalid("non-UTF8 assessment VA"))?,
                 )?);
             }
+            "--assess-address-wrap" if assess_wrap_site.is_none() => {
+                assess_wrap_site = Some(parse_va(
+                    value
+                        .to_str()
+                        .ok_or_else(|| invalid("non-UTF8 assessment VA"))?,
+                )?);
+            }
             "--list-frame-paths" if frame_pair.is_none() => {
                 let pair = value
                     .to_str()
@@ -469,6 +478,7 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
     if usize::from(explain_site.is_some())
         + usize::from(assess_site.is_some())
         + usize::from(assess_offset_site.is_some())
+        + usize::from(assess_wrap_site.is_some())
         + usize::from(memory_provenance_site.is_some())
         + usize::from(frame_pair.is_some())
         + usize::from(structure_pair.is_some())
@@ -546,13 +556,15 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
     if (explain_site.is_some()
         || assess_site.is_some()
         || assess_offset_site.is_some()
+        || assess_wrap_site.is_some()
         || memory_provenance_site.is_some())
         != memory_access.is_some()
     {
-        return Err(invalid(
-            "a question requires --explain-fault-address or --assess-zero-address, and --memory-access",
-        )
-        .into());
+        return Err(invalid(if assess_wrap_site.is_some() {
+            "--assess-address-wrap requires --memory-access"
+        } else {
+            "a question requires --explain-fault-address or --assess-zero-address, and --memory-access"
+        }).into());
     }
     if explanation_only
         && (explain_site.is_none() || output_dir.is_some() || stateflow_input.is_some())
@@ -565,6 +577,7 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
     if assessment_only
         && (assess_site.is_none()
             && assess_offset_site.is_none()
+            && assess_wrap_site.is_none()
             && memory_provenance_site.is_none()
             || output_dir.is_some()
             || stateflow_input.is_some())
@@ -574,7 +587,10 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
         )
         .into());
     }
-    if (assess_site.is_some() || assess_offset_site.is_some() || memory_provenance_site.is_some())
+    if (assess_site.is_some()
+        || assess_offset_site.is_some()
+        || assess_wrap_site.is_some()
+        || memory_provenance_site.is_some())
         && (stateflow_input.is_some()
             || explanation_only
             || (!assessment_only && output_dir.is_none()))
@@ -611,6 +627,7 @@ fn arguments() -> Result<Args, Box<dyn Error>> {
         explain_site,
         assess_site,
         assess_offset_site,
+        assess_wrap_site,
         memory_provenance_site,
         frame_pair,
         structure_pair,
@@ -711,6 +728,28 @@ fn publish_all(directory: &Path, reports: &[(&str, String)]) -> Result<(), Box<d
     }
     publication?;
     Ok(())
+}
+
+/// Render and validate the complete new bundle before transactional publication.
+fn publish_address_wrap_bundle(
+    directory: &Path,
+    mut reports: Vec<(&str, String)>,
+    value: &ariadne::investigation::AddressWrapAssessment,
+) -> Result<(), Box<dyn Error>> {
+    for (name, format) in [
+        (
+            "address-wrap-assessment.txt",
+            ariadne::reports::Format::Text,
+        ),
+        (
+            "address-wrap-assessment.json",
+            ariadne::reports::Format::Json,
+        ),
+        ("address-wrap-assessment.dot", ariadne::reports::Format::Dot),
+    ] {
+        reports.push((name, ariadne::reports::render_address_wrap(value, format)?));
+    }
+    publish_all(directory, &reports)
 }
 
 fn parse_index(s: &str) -> Result<usize, Box<dyn Error>> {
@@ -910,6 +949,9 @@ fn run() -> Result<(), Box<dyn Error>> {
     if let Some(site) = args.assess_offset_site {
         args.seeds.insert(site);
     }
+    if let Some(site) = args.assess_wrap_site {
+        args.seeds.insert(site);
+    }
     if let Some(site) = args.explain_site {
         args.seeds.insert(site);
     }
@@ -1010,6 +1052,22 @@ fn run() -> Result<(), Box<dyn Error>> {
         Some(ariadne::investigation::assess_zero_base_offset(
             &bound,
             ariadne::investigation::ZeroBaseOffsetLimits::default(),
+        )?)
+    } else {
+        None
+    };
+    let wrap_assessment = if let Some(site) = args.assess_wrap_site {
+        let bound = ariadne::input::bind_address_wrap(
+            &prepared,
+            &analyzer,
+            ariadne::investigation::FaultAddressQuestion {
+                site,
+                memory_access: args.memory_access.unwrap(),
+            },
+        )?;
+        Some(ariadne::investigation::assess_address_wrap(
+            &bound,
+            ariadne::investigation::AddressWrapLimits::default(),
         )?)
     } else {
         None
@@ -1178,7 +1236,11 @@ fn run() -> Result<(), Box<dyn Error>> {
                 ));
             }
         }
-        publish_all(&directory, &reports)?;
+        if let Some(value) = &wrap_assessment {
+            publish_address_wrap_bundle(&directory, reports, value)?;
+        } else {
+            publish_all(&directory, &reports)?;
+        }
     } else {
         let output = if args.assessment_only {
             let format = match args.format.unwrap() {
@@ -1188,6 +1250,8 @@ fn run() -> Result<(), Box<dyn Error>> {
             };
             if let Some(value) = &memory_assessment {
                 ariadne::reports::render_memory_provenance(value, format)?
+            } else if let Some(value) = &wrap_assessment {
+                ariadne::reports::render_address_wrap(value, format)?
             } else if let Some(value) = &offset_assessment {
                 ariadne::reports::render_zero_base_offset(value, format)?
             } else {
@@ -1251,5 +1315,57 @@ fn main() {
     if let Err(error) = run() {
         eprintln!("ariadne-minidump: {error}");
         std::process::exit(1);
+    }
+}
+
+#[cfg(test)]
+#[allow(dead_code)]
+#[path = "../../tests/common/address_wrap.rs"]
+mod address_wrap_test_fixture;
+
+#[cfg(test)]
+mod address_wrap_cli_tests {
+    use super::*;
+
+    #[test]
+    fn transactional_render_failure_uses_real_renderer() {
+        use super::address_wrap_test_fixture::{limits, oracle, pipeline, prepare, question};
+        let row = oracle("mov32mi-upper");
+        let (prepared, completed) = prepare("mov32mi-upper", |_| {});
+        let mut value = pipeline(&prepared, &completed, question(), limits(&row)).unwrap();
+        value.validate().unwrap();
+        value.content_id.push('0');
+        let nonce = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_nanos();
+        let parent = std::env::temp_dir().join(format!(
+            "ariadne-i5c-render-failure-{}-{nonce}",
+            std::process::id()
+        ));
+        fs::create_dir(&parent).unwrap();
+        let directory = parent.join("bundle");
+        let result = publish_address_wrap_bundle(
+            &directory,
+            vec![(
+                "report.json",
+                "base report rendered before the I5c result\n".into(),
+            )],
+            &value,
+        );
+        assert!(
+            result.is_err(),
+            "the real renderer must reject the invalid typed value"
+        );
+        assert!(
+            !directory.exists(),
+            "render failure published a finished bundle"
+        );
+        assert_eq!(
+            fs::read_dir(&parent).unwrap().count(),
+            0,
+            "render failure leaked staging data"
+        );
+        fs::remove_dir(parent).unwrap();
     }
 }

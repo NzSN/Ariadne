@@ -13,7 +13,7 @@ the frame-to-frame question to listing fewer than `NP` possible paths. The
 bounded frame-path contract below is qualified within the finite Windows AMD64
 captured-unwind and original physical-frame 1→0 scope. The
 [2026-10-20 F4 evidence](../../evidence/Ariadne/frame-paths/20261020/README.md)
-records model, mutation, native/reference, original-capture and saved-replay gates.
+records model, mutation, native/reference, original-capture and saved-replay gates. The later [S3 finite model suite](../../evidence/Ariadne/specification-sync/20261020/README.md) independently qualifies the declared model scripts and preserved bounds; it adds no new runtime or capture acceptance.
 The [2026-10-13 full-dump application attempt](../../evidence/Ariadne/frame-paths/dump03958-20261013/report.md)
 returned unavailable for physical frames 1→0: a runtime-table budget and then
 unsupported vector semantics prevented an admitted active-call anchor.
@@ -48,13 +48,13 @@ and qualification preserve alternatives and missing premises. The frame-path que
 **Where to go next.**
 
 - [Active specification synchronization](../../.agents/plans/specification-sync.md) —
-  typed-edge frame-path model, bounded stops and preserved historical receipts.
+  completed finite typed-edge frame-path model qualification, bounded stops and preserved historical receipts.
 
 - [Implementation ledger](../../.agents/plans/investigation-layer.md) — delivery stages,
   selected address-wrap work and later questions.
 - [Scanner partial-explanation follow-up plan](../../.agents/plans/scanner-partial-explanation.md)
-  — S0–S4 case-specific baseline, memory qualification, recovery-obligation and
-  entry-origin review; preserves the existing answer-status contract.
+  — S0–S4 finite case follow-up is [qualified](../../evidence/Ariadne/scanner-followup/20261020/README.md):
+  twenty-site review, explicit entry boundary and a partial result with all gaps retained.
 - [Memory provenance refinement](memory-provenance-refinement.md) — implemented
   Scanner diagnostic separation, bounded writer assessment and backward scalar
   inference; the selected model/mutation/Scanner profile is [qualified remotely](../../evidence/Ariadne/frame-question/20261019/README.md).
@@ -1534,3 +1534,42 @@ The earlier stale-decoder raw refresh keeps its recorded source identity;
 rebuilding current LLVM restores the original caller coverage. The structural
 products retain their own publication identities and need no completed caller
 prerequisite. Frame-path F4 and general feasibility/history remain separate.
+
+## Scanner partial-explanation follow-up
+
+The [S0–S4 plan](../../.agents/plans/scanner-partial-explanation.md) and
+[2026-10-20 follow-up evidence](../../evidence/Ariadne/scanner-followup/20261020/README.md)
+qualify the exact derivative Scanner case while preserving its partial answer.
+The 571,636-byte capture SHA is
+`ed82b433501162828460ccbf067476e4683a52157372b27040f0269d2b3949c5`;
+entry D960, seed/fault DD6E and access zero retain the original query/request
+fingerprints. The full original `9be21e47…` is a distinct snapshot; its frame
+relations do not establish earlier values in this derivative query.
+
+Fresh native/Rust full states match 768 decoded starts, 895 edges and nineteen
+slice instructions. All twenty recovery obligations and all 28 historical gap
+keys/order remain; explanations are byte-identical, partial and not truncated.
+The historical projection-v3 output and fresh projection-v6 output have separate
+semantic identities. Exact independently read prefixes and contributors support
+the site review: eight opaque CALL64m target/effect boundaries, two uncertified
+JMP64r target sets, nine INT3 control disagreements and one LLVM UD1Lm/BAP UD2B
+decode disagreement. All twenty sites are outside the selected slice; slice
+relevance clarifies presentation without deleting any query-wide uncertainty.
+
+At the entry boundary, 123 unique location-specific requirements remain:
+120 GPR byte locations, `flag:df`, `memory:any` and `state:other`. No earlier
+producer, root or crash-time value is invented. The [selected S1 memory
+qualification](memory-provenance-refinement.md#remote-qualification-2026-10-19)
+retains all twelve possible memory origins in its separately recorded scope.
+Neither this audit nor completed transport identifies the actual writer.
+
+Public replay exercises actual historical/native/Rust explanations in
+JSON/text/DOT with helpers deliberately unavailable. Nine scope/evidence/status
+corruptions fail. Production AST receipts and independent twenty-site BAP
+observations are retained separately: an optional literal-AST match failed for
+the call sites and earns no equivalence credit. No runtime/model source changed.
+The tested source capsule is `ced9183d56c58eaa18014540d7a9e63a5b5b1de1e0f61551fb619ce8ee027c36`;
+archive identity and failed setup/validation attempts are in the linked evidence.
+S2–S4 are complete for this finite qualified partial follow-up; unsupported
+semantics, entry/alias unknowns, historical execution, root cause, release and
+universal refinement remain separate.

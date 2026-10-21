@@ -2,13 +2,16 @@
 
 ## Context and follow-up
 
-**Status.** R0–R5 implemented for the finite pointer-slot/signed-32 table profile;
-2026-10-13 review corrections are committed at `b5d56b7`. The
-[original-dump retry](../../evidence/Ariadne/indirect-target-resolution/dump-retry-b5d56b7-20261013/report.json)
-passes pinned native resolver tests, full native/Rust state parity and the
-single-sample CLI timing criterion. The [correction record](../../evidence/Ariadne/indirect-target-resolution/review-corrections-20261013/report.json)
-retains portable/root checks. Full mutation/replay qualification remains pending. The initial R6
-correctness claim was too broad: its mutation campaign omitted required seams.
+**Status.** R0–R6 pass within the [2026-10-20 finite qualification](../../evidence/Ariadne/indirect-target-resolution/20261020/README.md)
+for the captured pointer-slot/signed-32 table profile, synthetic Windows/Linux
+fixtures and original Windows dump048B query. The
+[canonical R6 summary](../../docs/Ariadne/indirect-target-resolution.md#r6-qualification-refresh)
+separates fresh resolver/model/replay/capture gates from the retained,
+source-verified twelve-core-mutant tier. Producer and runtime semantics retain
+their existing contracts; qualification tooling and the bounded diagnostic driver
+supply the new evidence. The 2026-10-13 correction/retry receipts remain historical.
+The initial R6 correctness claim was too broad: its mutation campaign omitted
+required seams; the new fifteen-mutant campaign supplies that missing tier.
 Earlier native CLI samples exceeded the unchanged 60 s criterion; the retry's
 38.61 s native / 19.92 s Rust samples pass individually. The [initial qualification record](../../evidence/Ariadne/indirect-target-resolution/qualification-20261013/report.json)
 binds historical sources, fixtures, models, helpers and results. The original
@@ -34,10 +37,12 @@ constraints, acceptance gates and the evidence required for the initial profile.
   — existing capture, helper and native/Rust execution contracts.
 - [Motivating capture](../../docs/Ariadne/indirect-target-resolution.md#motivating-windows-capture)
   — exact original artifact, 58 entries, 45 destinations and retained limits.
+- [R6 qualification](../../evidence/Ariadne/indirect-target-resolution/20261020/README.md)
+  — final source identity, fresh gates, retained-core provenance and failed attempts.
 
-**What remains unresolved.** Full R6 mutation/replay and release qualification
-remain pending. The retry met the individual CLI timing criterion; earlier
-over-budget samples remain historical. The expanded original-dump explanation remains
+**What remains unresolved.** Release qualification and a latency distribution
+remain unqualified. Finite R6 now has its own complete evidence; the old failed
+and over-budget samples retain their original outcomes. The expanded original-dump explanation remains
 partial; 45 witnessed destinations are not exhaustive incoming-state coverage.
 Real Linux full-dump and packaged release qualification are not credited.
 General indirect calls, mutable dispatch data, broad value-set
@@ -224,9 +229,11 @@ the expanded real query. Earlier backend timing does not qualify this extension.
 - R6 model/replay/mutation/native/external-capture clauses are individually
   recorded, with no missing tier relabeled as passed.
 
-The initial R0–R5 implementation now has the review follow-up below. R6 mutation
-coverage and performance require separate acceptance; full plan acceptance is false. The
-canonical design retains the [usage and limits](../../docs/Ariadne/indirect-target-resolution.md#usage-and-public-api).
+At the initial R0–R5 checkpoint, mutation coverage and performance required
+separate acceptance and full plan acceptance was false. Those historical receipts
+remain unchanged. The later [finite R6 qualification](#r6-qualification-refresh--2026-10-20)
+closes only its declared clauses. The canonical design retains the
+[usage and limits](../../docs/Ariadne/indirect-target-resolution.md#usage-and-public-api).
 
 ## 2026-10-13 execution ledger
 
@@ -292,8 +299,9 @@ See the [canonical correction contracts](../../docs/Ariadne/indirect-target-reso
 and [source-bound correction record](../../evidence/Ariadne/indirect-target-resolution/review-corrections-20261013/report.json).
 At this correction checkpoint, pinned native and full mutation execution were
 pending remote transfer authorization. The [later retry](#original-dump-retry)
-resolved the pinned-native and individual timing-sample clauses. Full
-mutation/replay and release qualification remain pending.
+resolved the pinned-native and individual timing-sample clauses. At that
+checkpoint full mutation/replay and release qualification remained pending; the
+finite R6 successor below closes its declared mutation/replay clauses.
 
 ### Original-dump retry
 
@@ -305,6 +313,106 @@ and CLI-explanation parity. Individual native/Rust CLI samples pass the original
 60 s ceiling; explanation output still reaches its 32,768-origin-link limit and
 remains partial. The complete core state is compared without dropping definitions.
 
-Remaining R6 work: the fifteen-mutant campaign with unmodified controls and
-fresh aggregate replay/mutation receipts for the rebuilt helper. Historical
-records retain their identities; full acceptance is false.
+At the 2026-10-13 retry, the fifteen-mutant campaign and refreshed aggregate
+were still outstanding. Its false acceptance flag remains historical. The
+[2026-10-20 finite R6 successor](#r6-qualification-refresh--2026-10-20) supplies
+the later completed campaign without rewriting that record.
+
+## R6 qualification refresh — 2026-10-20
+
+**Execution status.** All declared finite clauses pass under the
+[final evidence](../../evidence/Ariadne/indirect-target-resolution/20261020/README.md).
+The authorized sequence started from base revision
+`12673307f5939f3a982877423c2606bdf7572c47`; its final source capsule contains
+1,076 files with SHA-256
+`193e31bb835bda4a4e4b5fc59397c424f11adefc691d1e309faf7ff0348d43a5`.
+Subsequent documentation publication is separate from that tested inventory. Older records,
+including the nine-mutant v1 campaign and b5d56b7 retry, remain historical.
+The [owning design](../../docs/Ariadne/indirect-target-resolution.md#r6-qualification-refresh)
+links this execution scope. All compilation, native/model/replay/mutation and
+large-capture work runs in task-owned remote Windows WSL via `r_windev`.
+Local work is limited to edits, small Python/static checks and documentation.
+
+### Selected scope and invariants
+
+Use the finite captured pointer-slot/signed-32 relative-table profile, the
+existing synthetic Windows/Linux fixtures and the original Windows dump048B.
+Original artifact SHA-256, entry/seed, all 58 table entries and 45 distinct target
+VAs remain independently bound. Keep `FrozenCapturedControlData`, explicit
+unresolved incoming alternatives and `complete = false` for the original
+capture. Preserve roots, slice semantics, missing destination edges, may/must
+writes, capture-only reads, and native/Rust complete-state comparison.
+
+Keep the frozen criteria: at most 1,000 ms per measured resolver pass and at most
+60,000 ms per measured end-to-end JSON explanation-only CLI sample. Respect
+separate transport/helper timeouts. Do not change target sets, requested output,
+workload, semantic premises or acceptance ceilings to obtain a passing timing.
+Record any current-source normalized-fact difference from earlier captures.
+
+| Step | Work | Required outcome |
+| --- | --- | --- |
+| Q0 — plan and freeze | Record current source, helper/SDK/model/corpus/input identities and exact original query. Prepare isolated remote checkout and read-only dependencies. | Reviewable plan precedes edits/campaigns; prior workspaces and evidence stay intact. |
+| Q1 — repair qualification tooling | Update graph-binding and root-only ignored-guard mutation anchors; copy/inventory every current compile input including `Specs/`; isolate mutant builds; validate native seam; preserve exact passing controls and intended behavioral failures. Publish progress/failure atomically; success requires stable complete source inventory. | All 14 Rust plus one native mutation definitions remain meaningful; small negative controls catch missing inputs, prerequisite failures, stale source and false success. Production resolver behavior is unchanged unless a separate qualification finding requires a justified correction. |
+| Q2 — current-source preflight | Run root/feature/fmt/Clippy/layout checks, independent six-case byte oracle, resolver unit/product/pinned-native fixtures, target-model typecheck and five finite configurations. Verify replay corpus/binding freshness. | Every credited named test actually runs. Missing runtime/artifact prerequisites remain explicit. No silent corpus regeneration. |
+| Q3 — mutation and replay campaign | Compile and exercise all 15 resolver mutants with unmodified controls. Run fresh core/stateflow replay: 168 + 162 matched observations; wrong-digest cases dispatch zero. Verify any retained 12-core-mutant import against complete relevant source/helper/observer identities. | Every selected mutant compiles and fails its intended observer; source drift, skipped tests, transport/setup/timeout failures earn no credit. Imported evidence is labeled retained, not fresh; rerun any clause whose exact relevant identities do not match. |
+| Q4 — original capture and budgets | Hash original dump; independently check table/capture contributors and arithmetic. Run the unchanged original query through both current backends, compare full states and JSON explanations, preserve all target alternatives/gaps and collect individual resolver/CLI timings. | All 45 witnessed targets retained, original target coverage stays non-exhaustive, full native/Rust parity passes, and original frozen timing criteria pass. A useful partial explanation is an expected result. |
+| Q5 — seal and reconcile | Validate aggregate receipts independently, archive source/tool/corpus/commands/logs/failed attempts with member hashes, verify transfer, and update design/plan/checkpoints/index. | Mark finite R6 complete only after every declared clause passes. Keep general-table, historical execution, real Linux full-dump, packaged release and universal refinement boundaries explicit. No commit/push is implied. |
+
+### Publication and failure handling
+
+Place new raw qualification under
+`evidence/Ariadne/indirect-target-resolution/20261020/`. Keep source capsules,
+controls and every failed attempt distinct. Raw original dumps, PDBs, SDKs and
+compiled build caches remain external with identities recorded. Separate source
+qualification from subsequent documentation-only publication changes.
+
+If a controlled test exposes a production defect, first retain the failing
+case and identify its existing model/contract obligation, then make a focused
+correction and qualify a new source freeze. Resource exhaustion and unresolved
+states remain partial/unknown; they do not become exclusions. Closure of this
+finite R6 profile does not silently close other feature or release plans.
+
+### Final finite R6 result — 2026-10-20
+
+The [aggregate evidence](../../evidence/Ariadne/indirect-target-resolution/20261020/README.md)
+records in-task source-bound root/feature/native checks (`default 334, core-only 64, reports 77, BAP 202, resolver 46`), 39 small Python
+controls (23 runner/observer plus 16 aggregate controls), an independent integer/
+byte oracle, five finite target-model configurations and typechecking. Fresh
+resolver mutation evidence contains all 14 Rust and one native legacy-v1
+mutation, each with an unchanged passing control, intended compiled behavioral
+failure and stable complete source inventory. Fresh replay matches 168 core and
+162 stateflow observations; wrong-digest cases dispatch no observations.
+
+The twelve ordinary core/stateflow mutants are retained S6 evidence, not a new
+campaign. Import verification checks the original archive/member hashes, all
+221 relevant source/corpus/observer inputs and the unchanged native helper
+`6c444024fddae8d9050570e2e3f1c4cb6c9d463954c5eaf5c3f0c29ebfe3d562`.
+Any changed relevant identity would require a fresh campaign.
+
+The unchanged original 1,305,482,568-byte Windows dump has SHA-256
+`5fea4ca614706fe0040ed3231efee0edf9ce4004a51d902bb581025b48bade08`.
+Entry `0x00007ff640079640`, seed/fault `0x00007ff640079670` and dispatch
+`0x00007ff64007968b` retain all 58 table entries and 45 exact independently
+checked targets. Coverage stays `complete=false`; explanations stay partial.
+Both full states retain 3,977 decoded sites, 4,819 edges, 392 slice sites and
+10,744,212 definition links, with digest
+`4b5c6d947ac8622932e63d8731733e4cf328b7d7401302fcc68ffa0d2ffcf30c`.
+Raw-observer resolution/source identities and timed-CLI request fingerprints
+are bound to the exact current artifacts and normalized roots/seeds.
+
+Current native/Rust JSON explanation-only samples are
+`37070` / `15990` ms; maximum resolver passes are
+`88753` / `68248` µs.
+Each CLI sample satisfies the unchanged 60,000 ms ceiling and each resolver pass
+the unchanged 1,000 ms ceiling. Production native CLI transport remains 30 s.
+The diagnostic driver pins/exports the original request and sets its public
+response timeout to 60 s solely for full-state comparison; that run earns no CLI
+timing credit. No producer/runtime semantic change is credited by this campaign.
+
+Archive SHA-256: `bb44c1a28ebee857e5775fac304f74383e7c75bfdd0286b41cc45642880064ba`. Earlier over-budget trials, the native
+wrong-seam review, Cargo stale-mtime feedback, Windows/WSL launch failures,
+missing-inspection-metadata prerequisite, and stopped preliminary campaigns remain
+separate failed or uncredited attempts. The final campaign includes the missing
+inspection metadata; no earlier attempt is relabeled successful. General forms,
+real Linux full dumps, all-format full base reports, packaged release, execution
+history/root cause and universal refinement remain outside this finite result.

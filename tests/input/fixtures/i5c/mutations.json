@@ -1,0 +1,150 @@
+{
+  "count": 24,
+  "records": [
+    {
+      "behavioral_change": "convert B through i64 before i128",
+      "credit": "passing control plus compiled mutant rejected by unchanged independent observer",
+      "name": "signed-base",
+      "observer_case": "mov32mi-upper"
+    },
+    {
+      "behavioral_change": "convert D through u64 before i128",
+      "credit": "passing control plus compiled mutant rejected by unchanged independent observer",
+      "name": "unsigned-displacement",
+      "observer_case": "mov32mi-negative-zero"
+    },
+    {
+      "behavioral_change": "classify wrap using overflowing_add(D as u64)",
+      "credit": "passing control plus compiled mutant rejected by unchanged independent observer",
+      "name": "unsigned-carry",
+      "observer_case": "mov32mi-negative-nonzero"
+    },
+    {
+      "behavioral_change": "replace D with abs(D)",
+      "credit": "passing control plus compiled mutant rejected by unchanged independent observer",
+      "name": "absolute-displacement",
+      "observer_case": "mov32mi-negative-nonzero"
+    },
+    {
+      "behavioral_change": "use T > M instead of T >= M",
+      "credit": "passing control plus compiled mutant rejected by unchanged independent observer",
+      "name": "strict-upper-bound",
+      "observer_case": "mov32mi-upper-boundary"
+    },
+    {
+      "behavioral_change": "store u64-reduced sum as T",
+      "credit": "passing control plus compiled mutant rejected by unchanged independent observer",
+      "name": "reduced-before-sum",
+      "observer_case": "mov32mi-upper"
+    },
+    {
+      "behavioral_change": "interpret disp8 as unsigned",
+      "credit": "passing control plus compiled mutant rejected by unchanged independent observer",
+      "name": "disp8-sign",
+      "observer_case": "mov32mi-disp8-min"
+    },
+    {
+      "behavioral_change": "interpret disp32 as unsigned",
+      "credit": "passing control plus compiled mutant rejected by unchanged independent observer",
+      "name": "disp32-sign",
+      "observer_case": "mov32mi-disp32-min"
+    },
+    {
+      "behavioral_change": "omit decoded/BAP constant agreement",
+      "credit": "passing control plus compiled mutant rejected by unchanged independent observer",
+      "name": "bap-ea-agreement",
+      "observer_case": "decoder-bap-constant-disagreement"
+    },
+    {
+      "behavioral_change": "omit decoded/BAP base agreement",
+      "credit": "passing control plus compiled mutant rejected by unchanged independent observer",
+      "name": "decoded-base-agreement",
+      "observer_case": "decoder-bap-base-disagreement"
+    },
+    {
+      "behavioral_change": "admit an encoded index when its captured value is zero",
+      "credit": "passing control plus compiled mutant rejected by unchanged independent observer",
+      "name": "zero-index-admission",
+      "observer_case": "indexed-zero"
+    },
+    {
+      "behavioral_change": "substitute raw/default base despite invalid INTEGER",
+      "credit": "passing control plus compiled mutant rejected by unchanged independent observer",
+      "name": "missing-base-validity",
+      "observer_case": "missing-integer"
+    },
+    {
+      "behavioral_change": "retain arithmetic through operation mismatch",
+      "credit": "passing control plus compiled mutant rejected by unchanged independent observer",
+      "name": "operation-treated-late",
+      "observer_case": "wrong-operation"
+    },
+    {
+      "behavioral_change": "use wrapping access end instead of checked end",
+      "credit": "passing control plus compiled mutant rejected by unchanged independent observer",
+      "name": "wrapping-access-end",
+      "observer_case": "span-wrap64"
+    },
+    {
+      "behavioral_change": "remove end <= H admission",
+      "credit": "passing control plus compiled mutant rejected by unchanged independent observer",
+      "name": "omit-lower-range",
+      "observer_case": "mov32mi-underflow"
+    },
+    {
+      "behavioral_change": "require reported byte == EA",
+      "credit": "passing control plus compiled mutant rejected by unchanged independent observer",
+      "name": "reported-equals-ea-only",
+      "observer_case": "reported-last32"
+    },
+    {
+      "behavioral_change": "allow reported byte == exclusive end",
+      "credit": "passing control plus compiled mutant rejected by unchanged independent observer",
+      "name": "inclusive-reported-end",
+      "observer_case": "reported-after32"
+    },
+    {
+      "behavioral_change": "refute missing encoded evidence",
+      "credit": "passing control plus compiled mutant rejected by unchanged independent observer",
+      "name": "unknown-becomes-refuted",
+      "observer_case": "missing-decoded-receipt"
+    },
+    {
+      "behavioral_change": "keep arithmetic after mandatory evidence omission",
+      "credit": "passing control plus compiled mutant rejected by unchanged independent observer",
+      "name": "evidence-budget-facts",
+      "observer_case": "budget-e32-c64"
+    },
+    {
+      "behavioral_change": "keep arithmetic after atomic derived-claim omission",
+      "credit": "passing control plus compiled mutant rejected by unchanged independent observer",
+      "name": "claim-budget-facts",
+      "observer_case": "budget-e64-c35"
+    },
+    {
+      "behavioral_change": "return early Unknown before binding validation",
+      "credit": "passing control plus compiled mutant rejected by unchanged independent observer",
+      "name": "zero-budget-skips-binding",
+      "observer_case": "binding:receipt-bytes"
+    },
+    {
+      "behavioral_change": "accept forged T in strict validator",
+      "credit": "passing control plus compiled mutant rejected by unchanged independent observer",
+      "name": "skip-wide-recomputation",
+      "observer_case": "serialization:sum-not-B-plus-D"
+    },
+    {
+      "behavioral_change": "accept dangling claim reference",
+      "credit": "passing control plus compiled mutant rejected by unchanged independent observer",
+      "name": "skip-reference-closure",
+      "observer_case": "serialization:dangling-evidence-ref"
+    },
+    {
+      "behavioral_change": "insert assessment site into entry roots",
+      "credit": "passing control plus compiled mutant rejected by unchanged independent observer",
+      "name": "question-seed-is-root",
+      "observer_case": "cli:site-remains-seed-not-root"
+    }
+  ],
+  "schema": "ariadne.i5c-w0-mutations/v1"
+}

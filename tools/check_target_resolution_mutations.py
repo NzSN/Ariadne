@@ -6,20 +6,152 @@ import json
 import os
 from pathlib import Path
 import re
+import signal
 import shutil
 import subprocess
 import time
+from types import SimpleNamespace
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def source_inventory():
-    files = [ROOT / 'Cargo.toml', ROOT / 'Cargo.lock', Path(__file__)]
-    for folder in ['src', 'tests', 'native/bap-core', 'native/bap']:
-        files.extend(p for p in (ROOT / folder).rglob('*')
-                     if p.is_file() and not p.is_symlink() and '__pycache__' not in p.parts)
-    return {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
-            for p in sorted(set(files))}
+INPUT_TREES = ('src', 'tests', 'native', 'Specs', 'tools', 'mbt')
+FIXTURE_TREES = ('evidence/Ariadne/indirect-target-resolution/dump048B-20261012',)
+IGNORED_PARTS = {'__pycache__', 'target'}
+TIMEOUT_SECONDS = 1200
+# Production helper translation units; sdk_smoke.ml is a separate SDK check.
+NATIVE_HELPER_SOURCES = (
+    'recovery.ml', 'dense_completion.ml', 'stateflow.ml', 'terminal.ml', 'legacy_capture.ml',
+    'capture.ml', 'legacy_guard.ml', 'guard.ml', 'legacy_composition.ml', 'loop_closure.ml',
+    'legacy_composition_v2.ml', 'composition.ml', 'project_state.ml', 'main.ml',
+)
+
+
+def sha(path):
+    digest = hashlib.sha256()
+    with Path(path).open('rb') as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b''):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def source_inventory(root=None):
+    """Re-enumerate input names as well as bytes, including generated bindings."""
+    root = ROOT if root is None else root
+    files = [p for tree in INPUT_TREES + FIXTURE_TREES for p in (root / tree).rglob('*')
+             if p.is_file() and not IGNORED_PARTS.intersection(p.relative_to(root).parts)]
+    files.extend(p for p in (root / 'Cargo.toml', root / 'Cargo.lock') if p.is_file())
+    return {str(p.relative_to(root)): sha(p) for p in sorted(set(files))}
+
+
+def copy_inputs(checkout, baseline):
+    for tree in INPUT_TREES + FIXTURE_TREES:
+        if (ROOT / tree).is_dir():
+            shutil.copytree(ROOT / tree, checkout / tree,
+                            ignore=shutil.ignore_patterns(*sorted(IGNORED_PARTS)))
+    for name in ('Cargo.toml', 'Cargo.lock'):
+        shutil.copyfile(ROOT / name, checkout / name)
+    # Check byte identity before the task-local dependency path rewrite.
+    if source_inventory(checkout) != baseline:
+        raise SystemExit('copied qualification inputs differ from baseline')
+    manifest = checkout / 'Cargo.toml'
+    original = manifest.read_text()
+    marker = 'path = "../MirrorRust"'
+    if original.count(marker) != 1:
+        raise SystemExit('MirrorRust dependency path seam is not unique')
+    manifest.write_text(original.replace(marker, 'path = ' + json.dumps(str(ROOT.parent / 'MirrorRust')), 1))
+    return manifest
+
+
+def write_json(path, value):
+    temporary = path.with_name(path.name + '.tmp')
+    temporary.write_text(json.dumps(value, indent=2) + '\n')
+    os.replace(temporary, path)
+
+
+def write_report(output, records, baseline, expected, final_sources=None, passed=False, failure=None):
+    stable = final_sources is not None and baseline == final_sources
+    names = [row['name'] for row in records]
+    complete = (stable and len(names) == len(set(names)) and set(names) == set(expected)
+                and all(row.get('detected') for row in records))
+    if passed and not complete:
+        raise SystemExit('incomplete or unstable mutation campaign cannot pass')
+    report = {'schema': 'ariadne.target-resolution-mutations/v2', 'mutants': records,
+              'passed': passed and complete, 'complete': passed and complete,
+              'expected_mutants': sorted(expected), 'baseline_sources': baseline,
+              'sources_unchanged': stable, 'compile_failures_credited': False,
+              'positive_controls_required': True,
+              'source_sha256': baseline.get('src/bap/target_resolution.rs')}
+    if final_sources is not None:
+        report['final_sources'] = final_sources
+        report['source_changes'] = {
+            'added': sorted(set(final_sources) - set(baseline)),
+            'removed': sorted(set(baseline) - set(final_sources)),
+            'changed': sorted(name for name in set(baseline) & set(final_sources)
+                              if baseline[name] != final_sources[name]),
+        }
+    if failure is not None:
+        report['failure'] = failure
+    write_json(output / 'report.json', report)
+    return report
+
+
+def command_result(code, stdout, stderr, timed_out):
+    """Append diagnostics after stdout so a child cannot split a libtest line."""
+    stdout, stderr = stdout or '', stderr or ''
+    combined = stdout
+    if stderr:
+        combined += '\n--- command stderr (captured separately) ---\n' + stderr
+    return SimpleNamespace(returncode=code, stdout=combined, timed_out=timed_out,
+                           captured_stdout=stdout, captured_stderr=stderr)
+
+
+def run_command(command, cwd, env=None, timeout=TIMEOUT_SECONDS):
+    """Capture streams independently and stop the whole process group on timeout."""
+    process = subprocess.Popen(command, cwd=cwd, env=env, text=True, stdout=subprocess.PIPE,
+                               stderr=subprocess.PIPE, start_new_session=True)
+    try:
+        stdout, stderr = process.communicate(timeout=timeout)
+    except subprocess.TimeoutExpired:
+        stop_process_group(process)
+        stdout, stderr = process.communicate()
+        return command_result(None, stdout, stderr, timed_out=True)
+    except BaseException:
+        stop_process_group(process)
+        process.communicate()
+        raise
+    return command_result(process.returncode, stdout, stderr, timed_out=False)
+
+
+def command_logs(directory, label, result):
+    """Retain verbatim streams as well as the post-completion observer log."""
+    log = directory / (label + '.log')
+    log.write_text(result.stdout)
+    streams = {}
+    for name, text in [('stdout', getattr(result, 'captured_stdout', result.stdout)),
+                       ('stderr', getattr(result, 'captured_stderr', ''))]:
+        path = directory / (label + '.' + name + '.log')
+        path.write_text(text)
+        streams[name] = {'path': path.name, 'sha256': sha(path)}
+    return {'log_sha256': sha(log), 'output_streams': streams,
+            'stderr_combined_after_completion': True}
+
+
+def stop_process_group(process):
+    try:
+        os.killpg(process.pid, signal.SIGTERM)
+    except ProcessLookupError:
+        return
+    try:
+        process.wait(timeout=5)
+    except subprocess.TimeoutExpired:
+        pass
+    # The immediate child can exit before a compiler descendant. Reap any
+    # remaining members even after wait() observes the child exit.
+    try:
+        os.killpg(process.pid, signal.SIGKILL)
+    except ProcessLookupError:
+        pass
 
 
 RUST_MUTATION_TESTS = {
@@ -60,12 +192,12 @@ def mutation_specs():
         ('big-endian-offset', source, 'i32::from_le_bytes(', 'i32::from_be_bytes(', producer),
         ('unknown-is-complete', source, 'if !result.unresolved.is_empty() {\n            result.complete = false;\n        }', 'result.complete = true; result.unresolved.clear();', producer),
         ('lost-clobber', source, 'else if clobbered(key, killed)', 'else if false && clobbered(key, killed)', None),
-        ('no-graph-binding', source, '|| report.graph_sha256 != graph_digest(instructions, roots)?', '|| false', None),
+        ('no-graph-binding', source, '|| report.graph_sha256 != report_graph_digest(report, instructions, roots)?', '|| false', None),
         ('subtract-relative-offset', source, 'base.wrapping_add(i32::from_le_bytes(', 'base.wrapping_sub(i32::from_le_bytes(', producer),
         ('seed-becomes-root', materialize, 'let mut pending = query.entry_points.clone();', 'let mut pending = query.entry_points.union(&query.slice_seeds).copied().collect::<AddressSet>();', None),
         ('discard-incoming-alternative', source, bypass.group(), '/* deliberately drop the unresolved incoming state */', producer),
         ('wrong-table-scale', source, 'index.wrapping_mul(4)', 'index.wrapping_mul(8)', producer),
-        ('ignored-guard', source, 'if roots.contains(&cursor) {', 'if roots.contains(&cursor) { let guards: Vec<Guard> = Vec::new();', producer),
+        ('ignored-guard', source, 'if roots.contains(&cursor) || frontier {', 'if roots.contains(&cursor) || frontier { let guards = if roots.contains(&cursor) { Vec::<Guard>::new() } else { guards.clone() };', producer),
         ('dropped-missing-entry', source, missing.group(), '/* deliberately drop the unavailable-entry residual */', producer),
         ('filtered-unavailable-target', materialize, 'let target = parse_target_address(value)?;', 'let target = parse_target_address(value)?;\n                if snapshot.read_prefix(target, 1)?.bytes.is_empty() { continue; }', None),
         ('skipped-premise', source, '|| report.memory_premise != MEMORY_PREMISE', '|| false', None),
@@ -111,28 +243,123 @@ def failure_evidence(result, expected, control=None, diagnostic=None):
             'diagnostic_matched': diagnostic_matched}
 
 
-def binary_identities(build):
-    """Bind the executable before optionally removing this mutant's build tree."""
-    return {str(path.relative_to(build)): hashlib.sha256(path.read_bytes()).hexdigest()
-            for path in sorted((build / 'debug/deps').glob('ariadne-*'))
-            if path.is_file() and not path.is_symlink() and os.access(path, os.X_OK)}
+def binary_identities(build, stdout):
+    """Bind only executables Cargo reported for this invocation, never stale files."""
+    binaries = {}
+    for line in stdout.splitlines():
+        try:
+            record = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if not isinstance(record, dict) or record.get('reason') != 'compiler-artifact':
+            continue
+        executable = record.get('executable')
+        if executable is None:
+            continue
+        path = Path(executable)
+        if not path.resolve().is_relative_to(build.resolve()) or not path.is_file():
+            raise SystemExit('compiler executable is missing or outside its isolated build')
+        binaries[str(path.relative_to(build))] = sha(path)
+    return binaries
+
+
+def qualified_test(name):
+    input_tests = {
+        'both_platforms_expand_targets_without_promoting_seeds_to_roots',
+        'prepared_target_resolution_rejects_changed_semantic_source',
+        'captured_table_targets_remain_edges_when_destination_code_is_missing',
+        *NATIVE_MUTATION_TESTS.values(),
+    }
+    prefix = ('input::materialize::target_resolution_tests::' if name in input_tests
+              else 'bap::target_resolution::tests::')
+    return prefix + name
+
+
+def cargo_command(manifest, build, test, ignored=False):
+    command = ['cargo', 'test', '--offline', '--locked', '-j', '1', '--message-format=json',
+               '--manifest-path', str(manifest), '--target-dir', str(build), '--lib',
+               qualified_test(test), '--', '--exact', '--nocapture', '--test-threads=1']
+    if ignored:
+        command.append('--ignored')
+    return command
 
 
 def run_control(directory, command, cwd, env, expected, build, source_sha256, helper_manifest=None):
     """A prerequisite failure aborts the campaign before the source is mutated."""
-    result = subprocess.run(command, cwd=cwd, env=env, text=True, stdout=subprocess.PIPE,
-                            stderr=subprocess.STDOUT, timeout=600)
-    log = directory / 'control.log'
-    log.write_text(result.stdout)
+    result = run_command(command, cwd, env)
+    logs = command_logs(directory, 'control', result)
     record = {**control_evidence(result, expected), 'returncode': result.returncode,
-              'command': command, 'log_sha256': hashlib.sha256(log.read_bytes()).hexdigest(),
-              'test_binaries': binary_identities(build), 'source_sha256': source_sha256}
+              'timed_out': result.timed_out, 'command': command, **logs,
+              'test_binaries': binary_identities(build, result.stdout),
+              'source_sha256': source_sha256}
     if helper_manifest is not None:
         record['helper_manifest'] = helper_manifest
-    (directory / 'control.json').write_text(json.dumps(record, indent=2) + '\n')
+    write_json(directory / 'control.json', record)
     if not record['passed'] or not record['test_binaries']:
         raise SystemExit('unmodified control did not pass its expected runtime test: ' + ', '.join(expected))
     return result, record
+
+
+def native_mutation_spec():
+    return ('native-unsigned-offset', 'native/bap-core/legacy_capture.ml',
+            'Int64.add base (signed raw 32)', 'Int64.add base raw', None)
+
+
+def native_observer_binding():
+    """Fail preflight if the selected observer no longer exercises the legacy profile.
+
+    This is a source routing check; only the compiled arithmetic failure earns
+    mutation credit. The source inventory binds every checked routing input.
+    """
+    test_file = ROOT / 'tests/input/target_resolution_unit.rs'
+    test = NATIVE_MUTATION_TESTS['native-unsigned-offset']
+    observer = re.search(r'fn ' + re.escape(test) + r'\(\)\s*\{(.*?)(?=\n#\[test\]|\Z)',
+                         test_file.read_text(), re.DOTALL)
+    calls = re.findall(r'\.(prepare_with_bap_[A-Za-z0-9_]+)\(', observer.group(1)) if observer else []
+    if calls != ['prepare_with_bap_target_resolution']:
+        raise SystemExit('native mutation observer preparation/profile changed')
+    router = ROOT / 'native/bap-core/capture.ml'
+    route = re.search(
+        r'let admit_resolved \?loop_checker j snapshot =\s*'
+        r'let report=get j "target_resolution" in\s*'
+        r'if string report "schema"="([^"\n]+)" then\s*'
+        r'admit_resolved_current ~loop_checker j snapshot\s*'
+        r'else ([A-Za-z_]+)\.admit_resolved j snapshot', router.read_text())
+    if not route or route.group(1) != 'ariadne.indirect-target-resolution/v3':
+        raise SystemExit('native mutation profile dispatch changed')
+    file = 'native/bap-core/' + route.group(2).lower() + '.ml'
+    if file != native_mutation_spec()[1]:
+        raise SystemExit('native mutation translation unit does not match observer profile dispatch')
+    legacy = (ROOT / file).read_text()
+    if not re.search(r'string report "schema"="ariadne.indirect-target-resolution/v1"\s*&&\s*'
+                     r'string report "profile"="captured-indirect-targets/v1"', legacy):
+        raise SystemExit('native mutation legacy admission profile changed')
+    return {'observer': qualified_test(test), 'preparation': calls[0],
+            'schema': 'ariadne.indirect-target-resolution/v1',
+            'profile': 'captured-indirect-targets/v1', 'source_file': file,
+            'routing_sources': {str(path.relative_to(ROOT)): sha(path)
+                                for path in (test_file, router, ROOT / file)}}
+
+
+def checked_helper(directory, sources):
+    manifest = json.loads((directory / 'manifest.json').read_text())
+    expected = {name: sha(sources / name) for name in NATIVE_HELPER_SOURCES}
+    if (manifest['handshake']['source_hashes'] != expected
+            or manifest['helper_sha256'] != sha(directory / 'ariadne-bap-core')):
+        raise SystemExit('native helper identity does not bind the selected sources and executable')
+    return manifest
+
+
+def native_build(directory, sources, output, label, env):
+    command = ['python3', str(ROOT / 'native/bap-core/build.py'), '--source-dir', str(sources),
+               '--output', str(output)]
+    result = run_command(command, ROOT, env)
+    logs = command_logs(directory, label, result)
+    write_json(directory / (label + '.json'), {'command': command, 'returncode': result.returncode,
+                                            'timed_out': result.timed_out, **logs})
+    if result.returncode != 0:
+        raise SystemExit('native ' + label + ' failed or timed out')
+    return checked_helper(output, sources)
 
 
 def main():
@@ -145,112 +372,133 @@ def main():
     mutations = mutation_specs()
     if {row[0] for row in mutations} != set(RUST_MUTATION_TESTS):
         raise SystemExit('mutation definitions and required test expectations differ')
-    for name, file, before, after, scope in mutations:
+    for name, file, before, after, scope in mutations + [native_mutation_spec()]:
         apply_mutation((ROOT / file).read_text(), name, before, after, scope)
+    native_binding = native_observer_binding() if args.native or args.check_seams else None
     if args.check_seams:
-        print(json.dumps({'rust': RUST_MUTATION_TESTS, 'native': NATIVE_MUTATION_TESTS}, indent=2))
+        print(json.dumps({'rust': RUST_MUTATION_TESTS, 'native': NATIVE_MUTATION_TESTS,
+                          'native_observer_binding': native_binding}, indent=2))
         return
     if args.output is None:
         parser.error('--output is required unless --check-seams is selected')
     output = args.output.resolve()
+    if args.native and not output.is_relative_to(ROOT / 'target'):
+        parser.error('--native needs task-owned output beneath the root target/ directory')
     output.mkdir(parents=True, exist_ok=False)
-    baseline = source_inventory()
-    source = 'src/bap/target_resolution.rs'
-    records = []
-    env = dict(os.environ, CARGO_BUILD_JOBS='4')
-    for name, file, before, after, scope in mutations:
-        checkout = output / name / 'sut'
-        checkout.mkdir(parents=True)
-        for folder in ['src', 'tests', 'native/bap', 'native/bap-core']:
-            shutil.copytree(ROOT / folder, checkout / folder)
-        for file_name in ['Cargo.toml', 'Cargo.lock']:
-            shutil.copyfile(ROOT / file_name, checkout / file_name)
-        evidence = 'evidence/Ariadne/indirect-target-resolution/dump048B-20261012'
-        shutil.copytree(ROOT / evidence, checkout / evidence)
-        manifest = checkout / 'Cargo.toml'
-        manifest.write_text(manifest.read_text().replace('path = "../MirrorRust"', 'path = "' + str(ROOT.parent / 'MirrorRust') + '"'))
-        target = checkout / file
-        original = target.read_text()
-        build_directory = output / name / 'build'
-        expected = [RUST_MUTATION_TESTS[name]]
-        control_command = ['cargo', 'test', '--offline', '--locked', '--manifest-path', str(manifest),
-                           '--target-dir', str(build_directory), '--lib', expected[0], '--', '--test-threads=1']
-        control, control_record = run_control(output / name, control_command, checkout, env,
-                                             expected, build_directory, hashlib.sha256(target.read_bytes()).hexdigest())
-        target.write_text(apply_mutation(original, name, before, after, scope))
-        command = ['cargo', 'test', '--offline', '--locked', '--manifest-path', str(manifest),
-                   '--target-dir', str(build_directory), '--lib', 'target_resolution', '--', '--test-threads=1']
-        started = time.monotonic()
-        result = subprocess.run(command, cwd=checkout, env=env, text=True, stdout=subprocess.PIPE,
-                                stderr=subprocess.STDOUT, timeout=600)
-        log = output / name / 'test.log'
-        log.write_text(result.stdout)
-        observation = failure_evidence(result, expected, control)
-        records.append({'name': name, **observation, 'returncode': result.returncode,
-                        'seconds': time.monotonic()-started, 'mutated_source_sha256': hashlib.sha256(target.read_bytes()).hexdigest(),
-                        'log_sha256': hashlib.sha256(log.read_bytes()).hexdigest(), 'command': command,
-                        'test_binaries': binary_identities(build_directory), 'control': control_record,
-                        'source_file': file})
-        (output / name / 'result.json').write_text(json.dumps(records[-1], indent=2) + '\n')
-        print(json.dumps(records[-1]), flush=True)
-        if not observation['detected']:
-            raise SystemExit('mutant escaped, failed to compile, or missed its expected test: ' + name)
-        if not records[-1]['test_binaries']:
-            raise SystemExit('mutant test executable identity missing: ' + name)
-        if args.discard_builds:
-            shutil.rmtree(build_directory)
-    if args.native:
-        directory = output / 'native-unsigned-offset'
-        sources = directory / 'sources'
-        shutil.copytree(ROOT / 'native/bap-core', sources)
-        source_file = sources / 'capture.ml'
-        original = source_file.read_text()
-        before = 'Int64.add base (signed raw 32)'
-        control_helper = directory / 'control-helper'
-        control_build = subprocess.run(['python3', str(ROOT / 'native/bap-core/build.py'), '--source-dir', str(sources), '--output', str(control_helper)], cwd=ROOT, text=True, capture_output=True, timeout=600)
-        (directory / 'control-build.log').write_text(control_build.stdout + control_build.stderr)
-        if control_build.returncode:
-            raise SystemExit('unmodified native helper failed to build')
-        control_env = dict(env, ARIADNE_BAP_CORE_DIR=str(control_helper))
-        build_directory = directory / 'build'
-        expected = [NATIVE_MUTATION_TESTS['native-unsigned-offset']]
-        command = ['cargo', 'test', '--offline', '--locked', '--target-dir', str(build_directory), '--lib', expected[0], '--', '--ignored', '--test-threads=1']
-        control, control_record = run_control(directory, command, ROOT, control_env, expected,
-                                             build_directory, hashlib.sha256(source_file.read_bytes()).hexdigest(),
-                                             json.loads((control_helper / 'manifest.json').read_text()))
-        source_file.write_text(apply_mutation(original, 'native-unsigned-offset', before, 'Int64.add base raw'))
-        helper = directory / 'helper'
-        build = subprocess.run(['python3', str(ROOT / 'native/bap-core/build.py'), '--source-dir', str(sources), '--output', str(helper)], cwd=ROOT, text=True, capture_output=True, timeout=600)
-        (directory / 'build.log').write_text(build.stdout + build.stderr)
-        if build.returncode:
-            raise SystemExit('native mutant failed to build')
-        mutant_env = dict(env, ARIADNE_BAP_CORE_DIR=str(helper))
-        result = subprocess.run(command, cwd=ROOT, env=mutant_env, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=600)
-        (directory / 'test.log').write_text(result.stdout)
-        observation = failure_evidence(result, expected, control,
-                                       NATIVE_MUTATION_DIAGNOSTICS['native-unsigned-offset'])
-        records.append({'name': 'native-unsigned-offset', **observation,
-                        'returncode': result.returncode,
-                        'mutated_source_sha256': hashlib.sha256(source_file.read_bytes()).hexdigest(),
-                        'log_sha256': hashlib.sha256((directory / 'test.log').read_bytes()).hexdigest(),
-                        'helper_manifest': json.loads((helper / 'manifest.json').read_text()),
-                        'command': command, 'test_binaries': binary_identities(build_directory),
-                        'control': control_record, 'source_file': 'native/bap-core/capture.ml'})
-        (directory / 'result.json').write_text(json.dumps(records[-1], indent=2) + '\n')
-        if not observation['detected']:
-            raise SystemExit('native arithmetic mutant escaped or missed its expected test')
-        if not records[-1]['test_binaries']:
-            raise SystemExit('native mutant test executable identity missing')
-        if args.discard_builds:
-            shutil.rmtree(build_directory)
-    report = {'schema': 'ariadne.target-resolution-mutations/v2', 'mutants': records,
-              'passed': all(row['detected'] for row in records),
-              'expected_mutants': sorted(set(RUST_MUTATION_TESTS) | (set(NATIVE_MUTATION_TESTS) if args.native else set())),
-              'baseline_sources': baseline, 'sources_unchanged': baseline == source_inventory(),
-              'source_sha256': hashlib.sha256((ROOT / source).read_bytes()).hexdigest()}
-    (output / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
-    if not report['sources_unchanged']:
-        raise SystemExit('qualification source changed during mutation campaign')
+    records, baseline, final_sources = [], {}, None
+    expected_names = set(RUST_MUTATION_TESTS) | (set(NATIVE_MUTATION_TESTS) if args.native else set())
+    write_report(output, records, baseline, expected_names)
+    env = dict(os.environ, CARGO_BUILD_JOBS='1', RUST_TEST_THREADS='1')
+    try:
+        baseline = source_inventory()
+        write_json(output / 'source-inventory.json', baseline)
+        write_report(output, records, baseline, expected_names)
+        for name, file, before, after, scope in mutations:
+            directory = output / name
+            checkout = directory / 'sut'
+            checkout.mkdir(parents=True)
+            manifest = copy_inputs(checkout, baseline)
+            target = checkout / file
+            original = target.read_text()
+            build_directory = directory / 'build'
+            expected = [RUST_MUTATION_TESTS[name]]
+            command = cargo_command(manifest, build_directory, expected[0])
+            record = {'name': name, 'source_file': file, 'detected': False}
+            records.append(record)
+            print('CONTROL ' + name, flush=True)
+            control, control_record = run_control(directory, command, checkout, env, expected,
+                                                 build_directory, sha(target))
+            record['control'] = control_record
+            write_report(output, records, baseline, expected_names)
+            target.write_text(apply_mutation(original, name, before, after, scope))
+            print('MUTANT ' + name, flush=True)
+            started = time.monotonic()
+            result = run_command(command, checkout, env)
+            logs = command_logs(directory, 'test', result)
+            observation = failure_evidence(result, expected, control)
+            record.update({**observation, 'returncode': result.returncode, 'timed_out': result.timed_out,
+                           'seconds': time.monotonic() - started, 'mutated_source_sha256': sha(target),
+                           **logs, 'command': command,
+                           'test_binaries': binary_identities(build_directory, result.stdout)})
+            # A stale control executable cannot qualify a Rust source mutation.
+            changed_executable = record['test_binaries'] != control_record['test_binaries']
+            record['mutant_executable_changed'] = changed_executable
+            record['detected'] &= bool(record['test_binaries']) and changed_executable
+            write_json(directory / 'result.json', record)
+            write_report(output, records, baseline, expected_names)
+            print(json.dumps(record), flush=True)
+            if not record['detected']:
+                raise SystemExit('mutant escaped, failed to compile, or missed its expected test: ' + name)
+            if args.discard_builds:
+                shutil.rmtree(build_directory)
+        if args.native:
+            name, file, before, after, scope = native_mutation_spec()
+            directory = output / name
+            sources = directory / 'sources'
+            shutil.copytree(ROOT / 'native/bap-core', sources,
+                            ignore=shutil.ignore_patterns(*sorted(IGNORED_PARTS)))
+            source_file = sources / Path(file).name
+            if {str(path.relative_to(sources)): sha(path) for path in sources.rglob('*') if path.is_file()} != {
+                    path.removeprefix('native/bap-core/'): digest for path, digest in baseline.items()
+                    if path.startswith('native/bap-core/')}:
+                raise SystemExit('copied native helper inputs differ from baseline')
+            original = source_file.read_text()
+            record = {'name': name, 'source_file': file, 'detected': False,
+                      'profile_binding': native_binding}
+            records.append(record)
+            control_helper = directory / 'control-helper'
+            control_manifest = native_build(directory, sources, control_helper, 'control-build', env)
+            control_env = dict(env, ARIADNE_BAP_CORE_DIR=str(control_helper),
+                               ARIADNE_TARGET_DIAGNOSTICS='1')
+            build_directory = directory / 'build'
+            expected = [NATIVE_MUTATION_TESTS[name]]
+            command = cargo_command(ROOT / 'Cargo.toml', build_directory, expected[0], ignored=True)
+            print('CONTROL ' + name, flush=True)
+            control, control_record = run_control(directory, command, ROOT, control_env, expected,
+                                                 build_directory, sha(source_file), control_manifest)
+            record['control'] = control_record
+            write_report(output, records, baseline, expected_names)
+            source_file.write_text(apply_mutation(original, name, before, after, scope))
+            helper = directory / 'helper'
+            mutant_manifest = native_build(directory, sources, helper, 'build', env)
+            if mutant_manifest['helper_sha256'] == control_manifest['helper_sha256']:
+                raise SystemExit('native mutation did not change its compiled helper')
+            mutant_env = dict(env, ARIADNE_BAP_CORE_DIR=str(helper),
+                              ARIADNE_TARGET_DIAGNOSTICS='1')
+            print('MUTANT ' + name, flush=True)
+            started = time.monotonic()
+            result = run_command(command, ROOT, mutant_env)
+            logs = command_logs(directory, 'test', result)
+            observation = failure_evidence(result, expected, control, NATIVE_MUTATION_DIAGNOSTICS[name])
+            record.update({**observation, 'returncode': result.returncode, 'timed_out': result.timed_out,
+                           'seconds': time.monotonic() - started,
+                           'mutated_source_sha256': sha(source_file), **logs,
+                           'helper_manifest': mutant_manifest, 'command': command,
+                           'test_binaries': binary_identities(build_directory, result.stdout)})
+            record['detected'] &= bool(record['test_binaries'])
+            write_json(directory / 'result.json', record)
+            write_report(output, records, baseline, expected_names)
+            print(json.dumps(record), flush=True)
+            if not record['detected']:
+                raise SystemExit('native arithmetic mutant escaped or missed its expected test')
+            if args.discard_builds:
+                shutil.rmtree(build_directory)
+        final_sources = source_inventory()
+        write_json(output / 'final-source-inventory.json', final_sources)
+        if baseline != final_sources:
+            raise SystemExit('qualification source changed during mutation campaign')
+        write_report(output, records, baseline, expected_names, final_sources, passed=True)
+    except BaseException as error:
+        # A failed prerequisite, interrupted command or changed source can never
+        # leave a stale passing campaign receipt.
+        if baseline:
+            try:
+                final_sources = source_inventory()
+            except (OSError, ValueError):
+                final_sources = None
+        write_report(output, records, baseline, expected_names, final_sources,
+                     failure={'type': type(error).__name__, 'message': str(error)})
+        raise
 
 
 if __name__ == '__main__':

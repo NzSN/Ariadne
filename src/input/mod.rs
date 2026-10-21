@@ -5,7 +5,10 @@ mod frame_paths;
 mod frame_structure;
 pub use frame_paths::FramePreparation;
 pub mod investigation;
+pub use investigation::bind_address_wrap;
 mod materialize;
+#[cfg(all(test, feature = "investigation"))]
+pub(crate) use materialize::address_wrap_binding_tests;
 mod minidump;
 pub mod report;
 
@@ -34,7 +37,7 @@ impl Platform {
         }
     }
 }
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub struct OpenLimits {
     pub max_file_bytes: usize,
     pub max_streams: usize,

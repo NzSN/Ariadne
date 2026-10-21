@@ -1,0 +1,39 @@
+{
+  "schema": "ariadne.chatdoc-metadata-correction/v1",
+  "date": "2026-10-21",
+  "base_revision": "12673307f5939f3a982877423c2606bdf7572c47",
+  "prior_manifest_sha256": "df5460d6c00a27a83184b058d6b935a8c5baef0f49d2e571de660cf8ca29a93c",
+  "entries": [
+    {
+      "file": "ariadne-frame-to-frame-outcome-20261015.html",
+      "previous_manifest_entry": {
+        "bytes": 10961,
+        "sha256": "bbffed8a42307a69b96d3f24b3405536afb88743dd404111e72c0750023d9569"
+      },
+      "corrected_manifest_entry": {
+        "bytes": 10962,
+        "sha256": "4d042499ca08ed1488467a82837c8976568dfbaa6a6150d1baf2e281ca5ea693"
+      },
+      "file_sha256_before": "4d042499ca08ed1488467a82837c8976568dfbaa6a6150d1baf2e281ca5ea693",
+      "file_sha256_after": "4d042499ca08ed1488467a82837c8976568dfbaa6a6150d1baf2e281ca5ea693",
+      "tracked_HEAD_file_sha256": "4d042499ca08ed1488467a82837c8976568dfbaa6a6150d1baf2e281ca5ea693",
+      "source_content_untouched": true
+    },
+    {
+      "file": "ariadne-nine-jump-tables-20261014.html",
+      "previous_manifest_entry": {
+        "bytes": 11182,
+        "sha256": "1a0656eda63e51f3883d652c50e82861efbe6232c84634f089312b24add509a3"
+      },
+      "corrected_manifest_entry": {
+        "bytes": 11184,
+        "sha256": "f347a73ee71daf928406eab659a5aef0522a0bf15278ce7c858bc392f7904418"
+      },
+      "file_sha256_before": "f347a73ee71daf928406eab659a5aef0522a0bf15278ce7c858bc392f7904418",
+      "file_sha256_after": "f347a73ee71daf928406eab659a5aef0522a0bf15278ce7c858bc392f7904418",
+      "tracked_HEAD_file_sha256": "f347a73ee71daf928406eab659a5aef0522a0bf15278ce7c858bc392f7904418",
+      "source_content_untouched": true
+    }
+  ],
+  "scope": "Correct two preexisting current-inventory mismatches only; exact prior entries retained. Source files are byte-identical to HEAD and were not regenerated. This does not retroactively validate the previous manifest or rerun any qualification."
+}

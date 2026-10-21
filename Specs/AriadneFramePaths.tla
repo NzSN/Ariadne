@@ -1,5 +1,5 @@
 ------------------------- MODULE AriadneFramePaths -------------------------
-EXTENDS Naturals, FiniteSets, Sequences
+EXTENDS Naturals, FiniteSets, Sequences, Apalache
 
 \* Search contract for src/investigation/frame_paths.rs, synchronized 2026-10-11.
 \* Nodes are activation-qualified IDs: equal VAs in different frames stay
@@ -101,9 +101,10 @@ Valid(p) == Prefix(p) /\ Last(p) = Finish
 Extend(p,e) == [nodes |-> Append(p.nodes,e.dst), edges |-> Append(p.edges,e)]
 \* @type: Int => Seq($frameEdge);
 Outgoing(n) == SelectSeq(EdgeOrder, LAMBDA e: EdgeFrom(e,n))
-RECURSIVE Reverse(_)
+\* @type: (Seq($frameEdge), $frameEdge) => Seq($frameEdge);
+PrependEdge(s,e) == <<e>> \o s
 \* @type: Seq($frameEdge) => Seq($frameEdge);
-Reverse(s) == IF Len(s)=0 THEN <<>> ELSE Append(Reverse(Tail(s)),Head(s))
+Reverse(s) == ApaFoldSeqLeft(PrependEdge,<<>>,s)
 \* @type: Seq($framePath) => Seq($framePath);
 DropLast(s) == SubSeq(s,1,Len(s)-1)
 \* @type: $framePath;
@@ -208,7 +209,10 @@ BoundedWork == work \in 0..MaxWork
 BoundedScans == scans \in 0..MaxScans
 PreserveWriters == writers = Writers
 TypeOK ==
-  /\ phase \in {"select","process","scan","done"} /\ stop \in STRING
+  /\ phase \in {"select","process","scan","done"}
+  /\ stop \in {"", "path-or-visit-budget", "search-restriction", "frontier-exhausted",
+                 "path-count-budget", "search-state-budget", "deadline-budget",
+                 "external-resource-budget"}
   /\ blocked \in BOOLEAN /\ Prefix(active)
   /\ \A i \in DOMAIN frontier: Prefix(frontier[i])
   /\ \A i \in DOMAIN remaining: remaining[i] \in Edges

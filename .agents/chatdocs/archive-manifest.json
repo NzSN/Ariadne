@@ -676,8 +676,8 @@
       "sha256": "7f5a87c3a72dab74a98990639593384e8850830ed413610a4c9394b54913a315"
     },
     "ariadne-frame-to-frame-outcome-20261015.html": {
-      "bytes": 10961,
-      "sha256": "bbffed8a42307a69b96d3f24b3405536afb88743dd404111e72c0750023d9569"
+      "bytes": 10962,
+      "sha256": "4d042499ca08ed1488467a82837c8976568dfbaa6a6150d1baf2e281ca5ea693"
     },
     "ariadne-frame-to-frame-outcome-20261015.json": {
       "bytes": 2085,
@@ -740,8 +740,8 @@
       "sha256": "080bf67955818c34346ac1ec29946a120e4325f18e8d1284faae3dc2dea9f057"
     },
     "ariadne-nine-jump-tables-20261014.html": {
-      "bytes": 11182,
-      "sha256": "1a0656eda63e51f3883d652c50e82861efbe6232c84634f089312b24add509a3"
+      "bytes": 11184,
+      "sha256": "f347a73ee71daf928406eab659a5aef0522a0bf15278ce7c858bc392f7904418"
     },
     "ariadne-nine-jump-tables-20261014.md": {
       "bytes": 5741,
@@ -840,12 +840,12 @@
       "sha256": "2667f3af9200452de3e195dc17664344a094f718310fb48d7527f5a02999ac33"
     },
     "ariadne-reports-index.html": {
-      "bytes": 13981,
-      "sha256": "f6fcfebf971307ac7ec445281aaa7f0d2d296f43ec9b59730d17a7c428cd5b19"
+      "bytes": 14082,
+      "sha256": "98061965d46f9a2487efb5d73318eac1d4edf27c2b6528a69e080c805723808e"
     },
     "ariadne-reports-index.md": {
-      "bytes": 8048,
-      "sha256": "ef43c90aaa9b890431eddb6748bcf50aea236dd1b9ddac4ba0ca9553b5e8b805"
+      "bytes": 8149,
+      "sha256": "27f1b04cd64da1eff217a2fdb3ab983b2afbf1b2fc3553b8ff6083a5e5fc8da7"
     },
     "ariadne-resolver-structural-types-20261015.html": {
       "bytes": 32858,
@@ -936,8 +936,8 @@
       "sha256": "2cbf44c62270ecf4bd84bff836eca67bb0663be58a3888921e6f0d8efffe6bcb"
     },
     "ariadne-open-plans-20261019/index.html": {
-      "bytes": 15135,
-      "sha256": "3556fd9315b84255a0ad249617d5cec4b6376645feffd144739d7ebca4db6363"
+      "bytes": 18926,
+      "sha256": "92420f54db71365a719aff1af6077bf1bde156d074cd250ca3e95c3cd9f98e9c"
     },
     "ariadne-open-plans-20261019/before-qualification.html": {
       "bytes": 10776,
@@ -978,10 +978,22 @@
     "ariadne-terminology-scope-20261020.md": {
       "bytes": 38728,
       "sha256": "2fa6fb95f4c74eda98d474942473f9139990d66a69bc519a798b328b954faf1a"
+    },
+    "ariadne-open-plans-20261019/before-r6-scanner-completion-20261020.html": {
+      "bytes": 15135,
+      "sha256": "3556fd9315b84255a0ad249617d5cec4b6376645feffd144739d7ebca4db6363"
+    },
+    "ariadne-open-plans-20261019/before-s3-completion-20261021.html": {
+      "bytes": 16194,
+      "sha256": "b47c7ad817ee94fda488cf85a5456db41ecad8eb66be25f0b1ff1303fbd7737c"
+    },
+    "ariadne-open-plans-20261019/manifest-metadata-correction-20261021.json": {
+      "bytes": 1936,
+      "sha256": "32db0c8ba43f7dc412ccb44735b1316d7dfc0192df4bf2b9cc04207117e6f771"
     }
   },
   "directory": ".agents/chatdocs/",
-  "html_documents_including_index": 36,
+  "html_documents_including_index": 38,
   "markdown_documents_including_index": 22,
   "source_review_documents": [
     {
@@ -1215,7 +1227,7 @@
       "version_note": "Exact F4 qualification-time five-open/seven-completed index preserved before syncing navigation to the committed and pushed delivery."
     },
     {
-      "html": "ariadne-open-plans-20261019/index.html",
+      "html": "ariadne-open-plans-20261019/before-r6-scanner-completion-20261020.html",
       "date": "2026-10-20",
       "source_revision": "3d525e2929cae2416ad0a31f92bd201980e40827",
       "source_state": "Navigation synchronized to committed and pushed source revision 3d525e2; this later presentation edit adds no qualification.",
@@ -1266,7 +1278,8 @@
         "launcher": "wslview",
         "launch_exit": 0,
         "visual_inspection": false
-      }
+      },
+      "version_note": "Exact five-open/seven-completed presentation preserved before finite R6 and Scanner closure publication."
     },
     {
       "pdf": "ariadne-structural-type-model-20261020/model.pdf",
@@ -1305,6 +1318,154 @@
       "scope": "Input identity; semantics/backends; control flow/targets; frames/paths/loops; values/origins; premises/status; formal models/replay/mutations; qualification/delivery.",
       "new_analysis_or_qualification": false,
       "validation": "Local references, fragments, context fields, exact enum labels, archive hashes and format counts checked; no builds or campaigns run."
+    },
+    {
+      "html": "ariadne-open-plans-20261019/before-s3-completion-20261021.html",
+      "date": "2026-10-20",
+      "source_revision": "12673307f5939f3a982877423c2606bdf7572c47",
+      "source_state": "Working-tree publication after source-qualified R6/Scanner snapshots; uncommitted, no push or remote parity claim.",
+      "canonical_plan_index": ".agents/plans/README.md",
+      "canonical_plan_index_sha256": "912229a5b39fa5237cd35c1d835ce4e2b52e3f3fbba9833f147c357efa40c6bb",
+      "open_plan_count": 3,
+      "completed_plan_count": 9,
+      "source_plan_sha256": {
+        ".agents/plans/specification-sync.md": "593c48875e98eb69cbf77b58e85a4d9e2269724babacc11719718d634509e767",
+        ".agents/plans/i5c-address-wrap.md": "f72a6e9a68b28bc7a55ae82f0e8a2079b015f26de5b2d87a81c7c96734e67d0c",
+        ".agents/plans/investigation-layer.md": "e6873e533c499124c58decbda3b9ef5d45b36efcb223e5d02bf1c9b1af334943"
+      },
+      "completed_plan_sha256": {
+        ".agents/plans/indirect-target-resolution.md": "67fb655a2a6b77cb53351bb126d229a97af98e5c4a7896e6e20f49e0c5400db9",
+        ".agents/plans/scanner-partial-explanation.md": "78347bd09d7b29cfec8b864afd8041f0fcb1a2bffe853dcc99a4a2f67bef2ef7",
+        ".agents/plans/frame-path-enumeration.md": "b4f4abd8f7c02dd5468d995d14be490b5e720247f9dc45728a66072d1690df66",
+        ".agents/plans/caller-semantic-coverage.md": "74e8873e7ce49355cf0406304d7670820d2bfb3d9bbe9b65d79ad0cb1ba361e7",
+        ".agents/plans/frame-structure-report.md": "61c0690ebffd342485b967c3dd65ac7cde666b13016a646240d304a977190ac2",
+        ".agents/plans/frame-connections.md": "6035ad34543a64e2b4b912868047a39ae8a27f68be9a69292ffec7ee7e0f2550",
+        ".agents/plans/frame-question-investigation.md": "d653f45b3dda1f480aeb4553f279ad0a4cd31d178334d7ff6d498628871812b5",
+        ".agents/plans/memory-provenance-refinement.md": "3723d20c7dcb4ddd708731dc78c385972b192b830397f3170847462dc54cc35d",
+        ".agents/plans/alignment-hypotheses.md": "73d7c0c208b57acb41f8e9224bb1b041cf626256028da245c30e1a5035007cb5"
+      },
+      "prior_snapshot": "ariadne-open-plans-20261019/before-r6-scanner-completion-20261020.html",
+      "prior_snapshot_sha256": "3556fd9315b84255a0ad249617d5cec4b6376645feffd144739d7ebca4db6363",
+      "qualifications": {
+        "R6": {
+          "readme": "evidence/Ariadne/indirect-target-resolution/20261020/README.md",
+          "readme_sha256": "4d3099a9c8fef10e3316c97bb043f4769a2cf64f5b4202b79a38c6610fedd7ea",
+          "source_capsule_sha256": "193e31bb835bda4a4e4b5fc59397c424f11adefc691d1e309faf7ff0348d43a5",
+          "archive_sha256": "bb44c1a28ebee857e5775fac304f74383e7c75bfdd0286b41cc45642880064ba"
+        },
+        "Scanner": {
+          "readme": "evidence/Ariadne/scanner-followup/20261020/README.md",
+          "readme_sha256": "5129e0c7ab27118c96726870f241735cad9a043b6f3c4f442e1305d672a665ec",
+          "source_capsule_sha256": "ced9183d56c58eaa18014540d7a9e63a5b5b1de1e0f61551fb619ce8ee027c36",
+          "archive_sha256": "ed0c443bda51f62d6bb8e83b76355ae9e216eb208c7c73bcf0ea1e0657f95ec5"
+        }
+      },
+      "validation_local_references": 146,
+      "validation": "All12current plan hashes,3open/9completed counts, local resources, fragments and uniqueHTMLIDs checked; originalsnapshot preserved. No new runtime or browser visual validation.",
+      "original_html": "ariadne-open-plans-20261019/index.html",
+      "version_note": "Exact three-open/nine-completed presentation preserved before the S3 completion navigation refresh. Its dated plan hashes, qualifications and stage status remain historical."
+    },
+    {
+      "html": "ariadne-open-plans-20261019/index.html",
+      "date": "2026-10-21",
+      "source_revision": "12673307f5939f3a982877423c2606bdf7572c47",
+      "source_state": "Uncommitted working-tree navigation after published S3 and I5c W0\u2013W3 records; no commit/push, remote parity or new validation credit.",
+      "canonical_plan_index": ".agents/plans/README.md",
+      "canonical_plan_index_sha256": "98a4f7819bc53d32bdd80d77989e19f17a751daa98ca1f24418c1eebeba45cd3",
+      "open_plan_count": 2,
+      "completed_plan_count": 10,
+      "source_plan_sha256": {
+        ".agents/plans/i5c-address-wrap.md": "673a93ecb31319d62e8ca2dc2941f7010ab0cb5a630e00092341a508f3b1fb97",
+        ".agents/plans/investigation-layer.md": "a1bc640746fc902a8638457142fc7a06299b64048f867b36394dc00942ec43a6"
+      },
+      "completed_plan_sha256": {
+        ".agents/plans/specification-sync.md": "c2dc6c718caa36c73a4f90d92373dc8d4f8bbaae9b701c6e0f2dc85d4476a73a",
+        ".agents/plans/indirect-target-resolution.md": "67fb655a2a6b77cb53351bb126d229a97af98e5c4a7896e6e20f49e0c5400db9",
+        ".agents/plans/scanner-partial-explanation.md": "78347bd09d7b29cfec8b864afd8041f0fcb1a2bffe853dcc99a4a2f67bef2ef7",
+        ".agents/plans/frame-path-enumeration.md": "b4f4abd8f7c02dd5468d995d14be490b5e720247f9dc45728a66072d1690df66",
+        ".agents/plans/caller-semantic-coverage.md": "74e8873e7ce49355cf0406304d7670820d2bfb3d9bbe9b65d79ad0cb1ba361e7",
+        ".agents/plans/frame-structure-report.md": "61c0690ebffd342485b967c3dd65ac7cde666b13016a646240d304a977190ac2",
+        ".agents/plans/frame-connections.md": "6035ad34543a64e2b4b912868047a39ae8a27f68be9a69292ffec7ee7e0f2550",
+        ".agents/plans/frame-question-investigation.md": "d653f45b3dda1f480aeb4553f279ad0a4cd31d178334d7ff6d498628871812b5",
+        ".agents/plans/memory-provenance-refinement.md": "3723d20c7dcb4ddd708731dc78c385972b192b830397f3170847462dc54cc35d",
+        ".agents/plans/alignment-hypotheses.md": "73d7c0c208b57acb41f8e9224bb1b041cf626256028da245c30e1a5035007cb5"
+      },
+      "prior_snapshot": "ariadne-open-plans-20261019/before-s3-completion-20261021.html",
+      "prior_snapshot_sha256": "b47c7ad817ee94fda488cf85a5456db41ecad8eb66be25f0b1ff1303fbd7737c",
+      "qualifications": {
+        "R6": {
+          "readme": "evidence/Ariadne/indirect-target-resolution/20261020/README.md",
+          "readme_sha256": "4d3099a9c8fef10e3316c97bb043f4769a2cf64f5b4202b79a38c6610fedd7ea",
+          "source_capsule_sha256": "193e31bb835bda4a4e4b5fc59397c424f11adefc691d1e309faf7ff0348d43a5",
+          "archive_sha256": "bb44c1a28ebee857e5775fac304f74383e7c75bfdd0286b41cc45642880064ba"
+        },
+        "Scanner": {
+          "readme": "evidence/Ariadne/scanner-followup/20261020/README.md",
+          "readme_sha256": "5129e0c7ab27118c96726870f241735cad9a043b6f3c4f442e1305d672a665ec",
+          "source_capsule_sha256": "ced9183d56c58eaa18014540d7a9e63a5b5b1de1e0f61551fb619ce8ee027c36",
+          "archive_sha256": "ed0c443bda51f62d6bb8e83b76355ae9e216eb208c7c73bcf0ea1e0657f95ec5"
+        },
+        "S3": {
+          "readme": "evidence/Ariadne/specification-sync/20261020/README.md",
+          "readme_sha256": "a1686776f58e8692a9c414a5c0f3a9032ac158a602439c1805a9e13f9c8f6737",
+          "receipt": "evidence/Ariadne/specification-sync/20261020/seal.json",
+          "receipt_sha256": "124f6c9e70b6c302735c63ec8a7e391979074edad4e9c712d7eaae3019151fd0",
+          "archive_sha256": "92045c6f12f2f280e8fb81350eb0f972741c96a708182a71a9dc262a78596674",
+          "source_inventory_sha256": "22bf9f64c8de770d8656c22b0fbd93e615288835fb4d671dd79a3e99dfd1c8a4",
+          "full_suite_java": 120,
+          "typecheck_calls": 53,
+          "root_modules": 32,
+          "bounded_calls": 40,
+          "tlc_calls": 24,
+          "identity_calls": 3,
+          "preflight_separate": 8,
+          "equivalence_separate": 3,
+          "bounded_outcomes": {
+            "NoError": 30,
+            "ExecutionsTooShort": 10
+          }
+        },
+        "I5c_W0": {
+          "readme": "evidence/Ariadne/address-wrap/20261020/w0/README.md",
+          "readme_sha256": "2397a40bfd52b7546a071639755891f179b6d996d76b8c91df1313b80dc6e3bd",
+          "receipt": "evidence/Ariadne/address-wrap/20261020/w0/qualification.json",
+          "receipt_sha256": "a52ea79bd1f93454ad518f85fe8eec2c214a4919fd9e6e6f68ed526a545ea4f5",
+          "scope": "Separate finite source-bound stage qualification; no successor or full-feature credit"
+        },
+        "I5c_W1": {
+          "readme": "evidence/Ariadne/address-wrap/20261020/w1/README.md",
+          "readme_sha256": "1a77dfa20beefad19be64f88ad5b772bd45493712db43a6f90d1123773c6c6c9",
+          "receipt": "evidence/Ariadne/address-wrap/20261020/w1/qualification.json",
+          "receipt_sha256": "bd7fd0bd49ff9990cd64706f927ab5553c75742586c17e3c18662bcb692e0b3a",
+          "scope": "Separate finite source-bound stage qualification; no successor or full-feature credit"
+        },
+        "I5c_W2": {
+          "readme": "evidence/Ariadne/address-wrap/20261020/w2/README.md",
+          "readme_sha256": "413adee138e2570cad3dc13a8f3a42e509146f839fb9992d663abfaf7629ec7b",
+          "receipt": "evidence/Ariadne/address-wrap/20261020/w2/qualification.json",
+          "receipt_sha256": "755f1c430c20130669753da90d5068822125ea34bbe5fbd57f5381b042d1896a",
+          "scope": "Separate finite source-bound stage qualification; no successor or full-feature credit"
+        },
+        "I5c_W3": {
+          "readme": "evidence/Ariadne/address-wrap/20261021/w3/README.md",
+          "readme_sha256": "fb3e8c9edd170496e3e7179d15a4232ab56fab2e0e1bf60653f13489ad1f00b1",
+          "receipt": "evidence/Ariadne/address-wrap/20261021/w3/qualification.json",
+          "receipt_sha256": "964c9be42ac5d3305e3e3319b0ee11ad43fc645d81a8759240f42508b2d51d8b",
+          "scope": "140 decision rows,44 binding rejections,24 strict-result controls,native114 and root checks; no W4/W5/full-feature credit"
+        }
+      },
+      "metadata_correction_audit": "ariadne-open-plans-20261019/manifest-metadata-correction-20261021.json",
+      "i5c_stage_status": {
+        "W0": "qualified finite model/oracle",
+        "W1": "qualified binding/legacy preservation",
+        "W2": "qualified public/native pilot",
+        "W3": "qualified complete140/44/24/native114 matrix",
+        "W4": "CLI/native capture sources implemented; product/capture gates pending",
+        "W5": "pending"
+      },
+      "validation": "Twelve current plan hashes,2open/10completed counts, exact prior-snapshot bytes, all current archive file identities, exact retained prior metadata and unchanged corrected-entry source bytes, local references/fragments, HTML structure and uniqueIDs checked in a temporary overlay. No browser launch/visual inspection or new runtime/model/build qualification.",
+      "corrected_preexisting_metadata_entries": 2,
+      "validation_local_references": 223
     }
   ],
   "plan_directory_relocation": {
@@ -1314,5 +1475,31 @@
     "historical_evidence": "Original evidence paths and file hashes are preserved; this relocation is not requalification."
   },
   "pdf_documents": 1,
-  "latex_sources": 1
+  "latex_sources": 1,
+  "latest_plan_status_update": {
+    "date": "2026-10-21",
+    "open": 2,
+    "completed": 10,
+    "base_revision": "12673307f5939f3a982877423c2606bdf7572c47",
+    "uncommitted_publication": true,
+    "i5c_stage_status": {
+      "W0": "qualified finite model/oracle",
+      "W1": "qualified binding/legacy preservation",
+      "W2": "qualified public/native pilot",
+      "W3": "qualified complete140/44/24/native114 matrix",
+      "W4": "CLI/native capture sources implemented; product/capture gates pending",
+      "W5": "pending"
+    },
+    "snapshot": "ariadne-open-plans-20261019/before-s3-completion-20261021.html",
+    "local_references_checked": 223
+  },
+  "metadata_corrections": [
+    {
+      "date": "2026-10-21",
+      "audit": "ariadne-open-plans-20261019/manifest-metadata-correction-20261021.json",
+      "audit_sha256": "32db0c8ba43f7dc412ccb44735b1316d7dfc0192df4bf2b9cc04207117e6f771",
+      "entries": 2,
+      "source_content_changed": false
+    }
+  ]
 }
