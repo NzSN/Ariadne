@@ -55,7 +55,7 @@ impl Default for OpenLimits {
             max_records: 131072,
             max_metadata_bytes: 16 * 1024 * 1024,
             max_capture_ranges: 131072,
-            max_overlap: 64,
+            max_overlap: 128,
             max_read_bytes: 65536,
         }
     }

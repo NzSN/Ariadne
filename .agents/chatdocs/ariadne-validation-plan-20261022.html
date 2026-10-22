@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Ariadne validation plan — unit tests, PBT and MBT</title>
+<style>
+:root{--ink:#172c38;--muted:#526773;--paper:#fff;--line:#d9e3e6;--unit:#155f83;--property:#16735b;--model:#7751a4}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{margin:0;background:#eef2f3;color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1180px;margin:36px auto;background:var(--paper);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+header{padding:44px 48px 30px;background:linear-gradient(125deg,#f2f8fa,#f8faf7);border-bottom:1px solid var(--line)}
+.eyebrow{margin:0 0 15px;color:var(--unit);font-size:.77rem;font-weight:750;letter-spacing:.12em;text-transform:uppercase}
+h1{max-width:820px;margin:0 0 20px;font-size:clamp(2rem,4.4vw,3.4rem);line-height:1.12;letter-spacing:-.035em}
+.lead{max-width:850px;margin:0;font-size:1.12rem;color:#3b535f}.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.tag{padding:5px 11px;border:1px solid #cbdce0;border-radius:20px;background:#fff;font-size:.78rem;color:#435c68}
+nav{display:flex;gap:22px;flex-wrap:wrap;padding:17px 48px;border-bottom:1px solid var(--line);font-size:.9rem}
+a{color:#075f8a;text-underline-offset:3px}nav a{text-decoration:none;font-weight:650}a:hover{text-decoration:underline}
+.content{padding:8px 48px 42px}section{margin-top:36px}h2{margin:0 0 14px;font-size:1.45rem;line-height:1.3;letter-spacing:-.02em}
+h3{margin:0 0 8px;font-size:1.04rem;line-height:1.4}p{margin:0 0 14px}.muted,.caption{color:var(--muted);font-size:.9rem}
+.pillars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:22px}
+.pillar{padding:23px;border:1px solid var(--line);border-radius:12px;background:#f8fbfc;border-top:4px solid var(--unit)}
+.pillar.p{background:#f6faf7;border-top-color:var(--property)}.pillar.m{background:#faf8fc;border-top-color:var(--model)}
+.letter{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:9px;background:#e1edf4;color:var(--unit);font-size:.9rem;font-weight:800;margin-bottom:14px}
+.p .letter{background:#e0f0e7;color:var(--property)}.m .letter{background:#eee6f6;color:var(--model)}.pillar p{margin:0;font-size:.93rem}
+.pillar .question{display:block;margin-top:12px;font-weight:650;color:#304c59;font-size:.9rem}
+.callout{padding:17px 20px;margin:20px 0 0;border:1px solid #b9d7d2;border-left:4px solid var(--property);border-radius:8px;background:#f2f9f5}
+.flow{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;list-style:none;padding:0;margin:22px 0 12px;counter-reset:stage}
+.flow li{position:relative;padding:15px 12px;border:1px solid var(--line);border-radius:9px;background:#f8fafb;font-size:.82rem;font-weight:650}
+.flow li:before{counter-increment:stage;content:"0" counter(stage);display:block;color:#6b818d;font-size:.7rem;letter-spacing:.06em;margin-bottom:4px}
+.flow li:not(:last-child):after{content:"→";position:absolute;right:-13px;top:32px;color:#6c8490;z-index:1;background:#fff;line-height:1}
+.stages{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:24px}
+.stage{padding:22px;border:1px solid var(--line);border-radius:11px}.stage h3 span{color:#597382;font-size:.8rem;margin-right:8px}
+.stage p{font-size:.92rem}.stage .exit{font-size:.85rem;margin:15px 0 0;padding-top:12px;border-top:1px solid #e4eaed;color:#435d68}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin-top:19px}
+table{border-collapse:collapse;width:100%;font-size:.87rem;min-width:770px}caption{text-align:left;padding:14px 16px;font-weight:650;background:#f5f8f9}
+th,td{text-align:left;vertical-align:top;padding:13px 15px;border-top:1px solid var(--line)}thead th{background:#f7f9fa;color:#405a67;font-size:.8rem}tbody th{width:16%;font-weight:650}
+.numbers{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin:20px 0}
+.number{padding:15px 10px;background:#f7f9fb;border:1px solid var(--line);border-radius:9px;text-align:center}
+.number strong{display:block;font-size:1.7rem;line-height:1.2;letter-spacing:-.03em;color:#264d65}.number span{display:block;margin-top:7px;font-size:.75rem;color:var(--muted)}
+details{border:1px solid var(--line);border-radius:9px;margin:14px 0;padding:14px 18px}summary{cursor:pointer;font-weight:650;font-size:.94rem}details[open] summary{margin-bottom:14px}
+code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}code{font-size:.85em;padding:2px 4px;border-radius:3px;background:#eef3f5}
+pre{margin:12px 0;padding:16px;background:#172c38;color:#e5f0f5;border-radius:7px;font-size:.8rem;line-height:1.75;overflow:auto}pre code{font-size:inherit;padding:0;background:none}
+ul{padding-left:21px;margin:12px 0}li{margin:7px 0}.checks{display:grid;grid-template-columns:1fr 1fr;gap:0 30px;font-size:.92rem}
+footer{padding:30px 48px 36px;background:#f7f9fa;border-top:1px solid var(--line)}footer h2{font-size:1.15rem}footer p{font-size:.85rem;color:#4a626e;margin:10px 0 0}
+:focus-visible{outline:3px solid #e4a237;outline-offset:4px}
+@media(max-width:900px){main{margin:0;border-radius:0;border:0}.flow{grid-template-columns:repeat(3,1fr)}.flow li:nth-child(3):after{display:none}.numbers{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:650px){header{padding:30px 22px 24px}nav{padding:15px 22px;gap:12px 20px}.content{padding:0 22px 30px}footer{padding:25px 22px}.pillars,.stages,.checks{grid-template-columns:1fr}.flow{gap:10px}.flow li{font-size:.74rem}.pillar{padding:20px}.numbers{gap:7px}}
+@media print{body,main{background:white}main{max-width:none;margin:0;border:0}nav{display:none}header,.content,footer{padding-left:20px;padding-right:20px}.pillar,.stage,.number{break-inside:avoid}.flow li:after{display:none}details{break-inside:avoid}table{min-width:0;font-size:.74rem}a{color:inherit}}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <p class="eyebrow">Ariadne · validation overview</p>
+  <h1>Validate with ordinary tests,<br>property tests and model replay.</h1>
+  <p class="lead">Put correctness assertions in executable test suites. Use independent expectations, exercise the actual implementation and make every missing prerequisite visible.</p>
+  <div class="meta"><span class="tag">Proposed plan · 22 October 2026</span><span class="tag">Source reviewed: c55fe1b</span><span class="tag">Execution pending</span></div>
+</header>
+<nav aria-label="Document sections"><a href="#methods">Methods</a><a href="#sequence">Delivery sequence</a><a href="#coverage">Coverage</a><a href="#i5c">I5c scope</a><a href="#execution">Execution</a><a href="#completion">Completion</a></nav>
+<div class="content">
+<section id="methods" aria-labelledby="methods-title">
+  <h2 id="methods-title">Three methods, with a clear job for each</h2>
+  <div class="pillars">
+    <article class="pillar"><span class="letter" aria-hidden="true">U</span><h3>Ordinary tests</h3><p>Rust <code>#[test]</code> and Python <code>unittest</code> cover reviewed examples, errors and regressions. Integration tests launch the CLI and native helpers.</p><span class="question">Does this concrete case obey its contract?</span></article>
+    <article class="pillar p"><span class="letter" aria-hidden="true">P</span><h3>PBT · property-based testing</h3><p>Generate input combinations and boundary cases. Compare against independent reference calculations, then shrink failures into reproducible regressions.</p><span class="question">Does the property hold across generated cases?</span></article>
+    <article class="pillar m"><span class="letter" aria-hidden="true">M</span><h3>MBT · model-based testing</h3><p>Replay model-generated actions against the real analyzer. Compare observable states and transitions, including partial results and termination.</p><span class="question">Does the implementation follow the model?</span></article>
+  </div>
+  <p class="callout"><strong>Native execution uses these same test methods.</strong> An ordinary integration test can invoke BAP or consume a real minidump. Its required helper, runtime and capture are declared test inputs.</p>
+  <p class="caption">Existing starting points: <a href="../../tests/README.md">test matrix</a>, <a href="../../tests/core_properties.rs">core properties</a> and <a href="../../mbt/README.md">core MBT</a>. The coverage additions below are proposed work.</p>
+</section>
+
+<section id="sequence" aria-labelledby="sequence-title">
+  <h2 id="sequence-title">Implement in six stages</h2>
+  <ol class="flow" aria-label="Implementation order"><li>Map coverage</li><li>Ordinary tests</li><li>Extend PBT</li><li>Extend MBT</li><li>Native fixtures</li><li>Routine runs</li></ol>
+  <p class="muted">First restore the execution prerequisites: cached Cargo packages, the required MirrorRust dependency view and freshly built pinned native helpers/runtime. The current workspace review found these missing.</p>
+  <div class="stages">
+    <article class="stage"><h3><span>01</span>Map contracts to tests</h3><p>Inventory existing tests and campaign-script assertions. Assign each behavior a test owner, independent expectation, required inputs and exact execution command.</p><p class="exit"><strong>Exit:</strong> every required contract has an executable test or an explicit coverage gap.</p></article>
+    <article class="stage"><h3><span>02</span>Complete ordinary test coverage</h3><p>Reuse concrete input, core, investigation, report and protocol tests. Move deterministic assertions out of campaign scripts. Add parameterized compatibility and rejection cases where missing.</p><p class="exit"><strong>Exit:</strong> reviewed positive, negative and boundary cases execute through Cargo or Python unittest.</p></article>
+    <article class="stage"><h3><span>03</span>Extend generated properties</h3><p>Build on core, frame-path and unwind PBT. Add capture mapping, arithmetic admission, context validity, report tampering and resource-bound generators where the inventory finds gaps.</p><p class="exit"><strong>Exit:</strong> declared seeds, bounds and counts execute; failures shrink and become small regression cases. Preserve the existing 3,200-case routine baseline.</p></article>
+    <article class="stage"><h3><span>04</span>Extend live model replay</h3><p>Reuse core and Stage E replay. Exercise applicable core traces against Rust and native analyzers. Add missing runtime adapters for target/guard composition and frame-question scheduling.</p><p class="exit"><strong>Exit:</strong> every selected trace state matches the declared observation mapping; deliberate-bug controls demonstrate that observers detect intended deviations.</p></article>
+    <article class="stage"><h3><span>05</span>Exercise native and captured inputs</h3><p>Select ordinary integration tests that run the actual helpers and CLI. Independently inspect captured bytes/context before asserting answers. Add explicit release workload tests using the existing timing policy.</p><p class="exit"><strong>Exit:</strong> named synthetic and controlled-capture cases execute on the equipped host; missing selected prerequisites fail clearly.</p></article>
+    <article class="stage"><h3><span>06</span>Make execution routine</h3><p>Keep scripts responsible for invocation, fixture generation and isolated builds. Remove duplicated assertions after their replacement tests pass. Publish the exact commands in the maintained test matrix.</p><p class="exit"><strong>Exit:</strong> ordinary test results identify what ran, failed or remained unselected. Generated diagnostics live under ignored build/work directories.</p></article>
+  </div>
+</section>
+
+<section id="coverage" aria-labelledby="coverage-title">
+  <h2 id="coverage-title">What each suite will assert</h2>
+  <div class="table-wrap"><table>
+    <caption>Target coverage; extend existing suites before creating new ones</caption>
+    <thead><tr><th scope="col">Contract</th><th scope="col">Ordinary tests</th><th scope="col">PBT / MBT emphasis</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Input and identity</th><td>Captured-byte precedence, holes/conflicts, virtual addresses, malformed streams and context validity. Reject mismatched snapshot/query/bytes.</td><td><strong>PBT:</strong> sparse and overlapping ranges, boundary addresses and corrupted metadata.</td></tr>
+      <tr><th scope="row">CFG and origins</th><td>Entry-driven discovery, visible calls and summary edges, possible/definite writes, explicit unknowns and backward slicing.</td><td><strong>PBT:</strong> independent reference results and origin preservation. <strong>MBT:</strong> recovery/dataflow/slice transitions and completion.</td></tr>
+      <tr><th scope="row">Semantic boundary</th><td>Actual BAP lifts against independent scalar equations; LLVM decode/control checks; helper/protocol failures and unsupported operations.</td><td><strong>PBT:</strong> admitted arithmetic/alias combinations and explicit unsupported cases, with reviewed generation bounds.</td></tr>
+      <tr><th scope="row">Investigation</th><td>Correct consistent/refuted/unknown decisions for selected accesses. Check evidence binding, gaps and exact output-budget boundaries.</td><td><strong>PBT:</strong> arithmetic/context combinations and tampering. <strong>MBT:</strong> extend target/guard and question-scheduling replay.</td></tr>
+      <tr><th scope="row">Frames and structure</th><td>Reviewed path, corridor, cycle, unwind and memory-candidate examples retain their premises and frontiers.</td><td><strong>PBT:</strong> paths against an independent graph oracle, frame identity, bounded work and honest partial completion.</td></tr>
+      <tr><th scope="row">Reports and CLI</th><td>Strict parsing, all-format meaning, 666 exact compatibility vectors, option conflicts, native ownership and transactional publication.</td><td><strong>PBT:</strong> round trips and rejection of modified identities, arithmetic and evidence references.</td></tr>
+      <tr><th scope="row">Stateflow and IR</th><td>Finite supplied-semantics contracts, retained structural edges and separate result families.</td><td><strong>MBT:</strong> existing Stage E machine-state and supplied-IR traces against their actual engines.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="callout"><strong>Independent expectations are essential.</strong> Keep explicit reviewed examples, reference equations and model traces independent of production helpers. Rust/native equality is an additional comparison; both implementations must satisfy the applicable oracle.</p>
+</section>
+
+<section id="i5c" aria-labelledby="i5c-title">
+  <h2 id="i5c-title">First complete feature: I5c address wrap</h2>
+  <p>Use the unfinished address-wrap work to complete the test mapping, then apply the same structure across Ariadne.</p>
+  <div class="numbers" aria-label="I5c declared scope">
+    <div class="number"><strong>140</strong><span>decision cases</span></div>
+    <div class="number"><strong>114</strong><span>native synthetic inputs</span></div>
+    <div class="number"><strong>12</strong><span>CLI controls</span></div>
+    <div class="number"><strong>8</strong><span>controlled Windows captures</span></div>
+    <div class="number"><strong>666</strong><span>legacy output vectors</span></div>
+    <div class="number"><strong>24</strong><span>compiled mutation controls</span></div>
+  </div>
+  <p class="caption">These are execution targets, not passing claims. Binding/serialization rejection cases and I4/I5a/I5b regressions remain part of the scope. Synthetic captures and controlled Windows captures exercise distinct inputs.</p>
+  <details><summary>Concrete assertions and performance expectations</summary>
+    <p>Ordinary tests establish exact unsigned-base plus signed-displacement arithmetic, agreement with admitted address evidence, and unknown results for insufficient evidence. PBT explores boundary values and context combinations. MBT connects finite decision/transition expectations to the implementation where an adapter is required.</p>
+    <p>Run existing mutation transformations against the same observers; compilation failures or missing helpers do not demonstrate bug detection. Require the positive control to pass and the changed implementation to fail the intended behavioral assertion.</p>
+    <p>Explicit release tests retain the existing I5c 10 ms binding/assessment/rendering phase and 1,500 ms CLI ceilings, using one warm-up and five measurements. Preserve the separate I4 criteria and existing capture modes.</p>
+    <p class="muted">Sources: <a href="../plans/i5c-address-wrap.md#w5--qualification-mutation-sensitivity-and-evidence">I5c W5 criteria</a>, <a href="../../tests/input/fixtures/i5c/qualification-matrix.json">case inventory</a> and <a href="../../docs/Ariadne/address-wrap-design.md">address-wrap contract</a>.</p>
+  </details>
+</section>
+
+<section id="execution" aria-labelledby="execution-title">
+  <h2 id="execution-title">Execution through familiar test commands</h2>
+  <details open><summary>Routine ordinary tests</summary>
+<pre><code>cargo test --offline --locked
+cargo test --offline --locked --no-default-features
+python3 -m unittest discover -s tools -p 'test_*.py'
+python3 -m unittest discover -s tests/input -p 'test_*.py'</code></pre>
+    <p class="muted">Run formatting, all-feature/all-target Clippy, layout and documentation checks alongside these tests. Pure tests must retain a portable execution path.</p>
+  </details>
+  <details><summary>Generated properties and live model replay</summary>
+<pre><code>python3 tools/run_generated_validation.py --mbt all</code></pre>
+    <p>The existing runner selects Cargo property tests plus core and Stage E MBT. Extend it only to select missing suites and check execution completeness. Model-checker exploration supplies traces and invariant checks; runtime conformance requires live replay.</p>
+    <p class="muted">Starting points: <a href="../../tools/run_generated_validation.py">generated test runner</a>, <a href="../../mbt/run.py">core replay</a>, <a href="../../mbt/stage-e/README.md">Stage E replay</a> and <a href="../../Specs/README.md">formal-model guide</a>.</p>
+  </details>
+  <details><summary>Explicit native and workload test groups</summary>
+    <p>Freeze the exact named test inventory during stage 1, then select those ordinary Cargo/Python tests on the host with pinned helpers/runtime. Existing native Cargo targets include <code>bap_core_analysis</code>, <code>bap_core_stateflow</code>, <code>input_bap_core</code> and <code>input_address_wrap_cli</code>.</p>
+    <p>Run the applicable ignored tests explicitly. Workload timing tests run in release mode with isolated execution. Validate externally supplied captures when selected; portable fixtures cannot substitute for a required capture.</p>
+    <p class="muted">Keep replay and mutation build directories separate under <code>target/</code>. Perform heavy native/model execution on the equipped host according to the module guides.</p>
+  </details>
+</section>
+
+<section id="completion" aria-labelledby="completion-title">
+  <h2 id="completion-title">Completion is visible in executed tests</h2>
+  <div class="checks">
+    <ul><li>Every required contract maps to a named test or property.</li><li>Every selected case executes; empty or partial selections cannot pass.</li><li>Expected results come from reviewed examples or independent oracles.</li></ul>
+    <ul><li>Missing selected tools or captures produce a clear failure.</li><li>Failures retain reproducible seeds or small regression inputs.</li><li>Current results identify their scope and required input/tool versions.</li></ul>
+  </div>
+  <p class="muted">Validation establishes finite contract conformance under declared captured-evidence and trusted-BAP premises. Universal refinement, complete ISA coverage and historical execution/root-cause claims retain their separate boundaries.</p>
+</section>
+</div>
+<footer aria-labelledby="context-and-follow-up">
+  <h2 id="context-and-follow-up">Context and follow-up</h2>
+  <p><strong>Status.</strong> Chat presentation of the proposed validation plan from this conversation, dated 2026-10-22. Grounded in source revision <code>c55fe1b8eea9e28094610c6e50ac038491fe9b02</code>. The proposed test additions have not been implemented or executed by creating this page.</p>
+  <p><strong>Motivating problem.</strong> The user selected ordinary tests, PBT and MBT as the mechanisms for validating Ariadne. This overview maps contracts to those mechanisms and orders the remaining work.</p>
+  <p><strong>Origin and contribution.</strong> The <a href="../../docs/Ariadne/semantic-assurance.md#generated-validation-and-evidence-retention">canonical assurance contract</a> and <a href="../plans/generated-validation-retention.md">completed test-only migration</a> establish the current policy. This page presents the next coverage and execution improvements.</p>
+  <p><strong>Next reading.</strong> Use the <a href="../../tests/README.md">maintained test matrix</a> to implement stage 1, the <a href="../plans/i5c-address-wrap.md">I5c ledger</a> for feature-specific exits, and the <a href="../plans/README.md">plan index</a> for the wider backlog. Return to the <a href="ariadne-reports-index.html">chat document archive</a>.</p>
+  <p><strong>Unresolved limits.</strong> Native dependencies, external captures and model runtimes remain required by their selected tests. The full declared validation has not been rerun for this presentation. Browser launch is separate from visual inspection.</p>
+</footer>
+</main>
+</body>
+</html>

@@ -10,10 +10,23 @@ from pathlib import Path
 import re
 
 from rust_layout import source_files
+from bap_core_contract import MAX_FRAME_BYTES
 
 ROOT = Path(__file__).resolve().parents[1]
 CORE = ROOT / "target/bap-core-native"
 PROFILE = "captured-fixed-input/v1"
+CORE_SOURCES = (
+    "recovery.ml", "dense_completion.ml", "stateflow.ml", "terminal.ml",
+    "legacy_capture.ml", "capture.ml", "legacy_guard.ml", "guard.ml",
+    "legacy_composition.ml", "loop_closure.ml", "legacy_composition_v2.ml",
+    "composition.ml", "project_state.ml", "main.ml",
+)
+CORE_PROFILES = (
+    "normalized-fixed-input/v1", PROFILE, "captured-indirect-targets/v1",
+    "captured-guarded-input/v1", "captured-guarded-targets/v1",
+    "captured-guarded-targets/v2", "captured-guarded-input/v2",
+    "captured-guarded-targets/v3",
+)
 GATES = {
     "fixtures", "format", "root-tests", "core-tests", "clippy",
     "investigation-feature", "layout", "native-corpus-cli", "mutations",
@@ -108,15 +121,14 @@ def native_manifest():
              "core SDK lock changed")
     sdk = ROOT / "target/bap-core-sdk/sdk-manifest.json"
     _require(handshake["sdk_manifest_sha256"] == sha(sdk), "core SDK manifest changed")
-    expected = {name: sha(ROOT / "native/bap-core" / name) for name in
-                ("recovery.ml", "stateflow.ml", "capture.ml", "project_state.ml", "main.ml")}
+    expected = {name: sha(ROOT / "native/bap-core" / name) for name in CORE_SOURCES}
     _require(handshake["source_hashes"] == expected, "native core sources changed")
     lock = strict_json((ROOT / "native/bap-core/sdk.lock.json").read_text())
     _require(handshake["bap_revision"] == lock["bapSourceRevision"], "native core revision changed")
     _require(handshake["schema"] == "ariadne.bap-core-ready/v1"
              and type(handshake["abi"]) is int and handshake["abi"] == 2
              and handshake["families"] == ["recovery", "stateflow"]
-             and handshake["profiles"] == ["normalized-fixed-input/v1", PROFILE],
+             and handshake["profiles"] == list(CORE_PROFILES),
              "unsupported core handshake")
     return manifest
 
@@ -144,7 +156,7 @@ def validate_backend_receipt(report, manifest):
     try:
         receipt = report["analysis_backend"]
         _require(isinstance(receipt, dict) and set(receipt) == {
-            "schema", "backend", "snapshot", "query", "family", "profile", "build",
+            "schema", "backend", "snapshot", "query", "family", "profile", "build", "transport",
         }, "missing or unknown backend receipt field")
         _require(receipt["schema"] == "ariadne.analysis-backend/v1"
                  and receipt["backend"] == "bap" and receipt["profile"] == PROFILE
@@ -152,6 +164,19 @@ def validate_backend_receipt(report, manifest):
         _require(receipt["build"] == manifest and manifest_digest(receipt["build"]) == manifest_digest(manifest)
                  and manifest["schema"] == "ariadne.bap-core-build/v1"
                  and _digest(manifest["helper_sha256"]), "native build differs from pinned manifest")
+        transport = receipt["transport"]
+        _require(isinstance(transport, dict) and set(transport) == {
+            "max_request_bytes", "max_response_bytes",
+        }, "missing or unknown native transport field")
+        request_bytes = transport["max_request_bytes"]
+        _require(type(request_bytes) is int and 0 < request_bytes < 2**64,
+                 "invalid native request byte budget")
+        _require(type(transport["max_response_bytes"]) is int
+                 and transport["max_response_bytes"] == MAX_FRAME_BYTES,
+                 "invalid native response byte bound")
+        _require(request_bytes == MAX_FRAME_BYTES
+                 or manifest["handshake"].get("configurable_request_bytes") is True,
+                 "native helper does not admit the selected request byte budget")
         identity = report["identity"]
         _require(_digest(identity["artifact_sha256"])
                  and identity["snapshot_id"] == "minidump-captured-amd64-v1:" + identity["artifact_sha256"]

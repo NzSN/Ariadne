@@ -6,10 +6,13 @@ Chat reports and their browser renderings are kept in `.agents/chatdocs/`. This 
 
 **Delivery update, 2026-10-18.** The [section 5 delivery explanation](ariadne-frame-question-delivery-20261018.html) describes published commit `a2e98e4`, its focused question and fault-dependency modes, retained capture results, and open remote/release gates.
 
+**Validation plan, 2026-10-22.** The [new overview](ariadne-validation-plan-20261022.html) maps validation to ordinary tests, PBT and MBT, with six implementation stages. It presents proposed work; creating the page does not execute application validation.
+
 Canonical documents under `docs/` remain in place. The two 2026-10-12 design/plan pages below preserve the original browser presentation and its matching historical Markdown; current design and execution ownership remains in `docs/Ariadne/` and `.agents/plans/`.
 
 | Chat document | View | Source |
 | --- | --- | --- |
+| Ariadne validation plan: ordinary tests, PBT and MBT (2026-10-22) | [Open overview](ariadne-validation-plan-20261022.html) | HTML only; [maintained test matrix](../../tests/README.md) |
 | Ariadne I5c execution progress: CLI12/native114 passed; SSH interruption (2026-10-21; base 438ee6b) | [Open explanation](ariadne-remaining-work-20261021.html) | HTML only; [canonical plan index](../plans/README.md) |
 | Historical remaining-work snapshot before qualification execution (2026-10-21; base 438ee6b) | [Open snapshot](ariadne-remaining-work-20261021-438ee6b-pre-execution.html) | HTML only; preserved earlier version |
 | Historical remaining-work snapshot before execution tooling (2026-10-21; revision 3785779) | [Open snapshot](ariadne-remaining-work-20261021-3785779.html) | HTML only; preserved earlier version |
@@ -54,7 +57,7 @@ The first-jump page includes the captured selector/table calculator and search-s
 
 **Why this document exists.** The [chat-document skill](../../../../.agents/skills/chatdoc/SKILL.md) keeps explanations and their renderings together while preserving existing `docs/` documents.
 
-**What this document establishes.** This index lists the available report formats and interactive illustrations. The archive retains its 39 report records, dated presentation snapshots and this index. Older reports preserve their Markdown/HTML pairs; new chat reports default to HTML only unless Markdown is explicitly requested. Historical browser pages are retained; reconstructed content is labeled. The graph page preserves its original template, with SVGs reconstructed from the retained completed reports and input hashes recorded alongside it.
+**What this document establishes.** This index lists the available report formats and interactive illustrations, including the proposed test/PBT/MBT validation overview. The archive retains report records, dated presentation snapshots and this index. Older reports preserve their Markdown/HTML pairs; new chat reports default to HTML only unless Markdown is explicitly requested. Historical browser pages are retained; reconstructed content is labeled. The graph page preserves its original template, with SVGs reconstructed from the retained completed reports and input hashes recorded alongside it.
 
 **Where to go next.** Consult the [investigation contract](../../docs/Ariadne/investigation-design.md), [target-resolution contract](../../docs/Ariadne/indirect-target-resolution.md) and [checkpoint history](../../CHECKPOINTS.md) for their respective contracts, retained results and delivery status.
 

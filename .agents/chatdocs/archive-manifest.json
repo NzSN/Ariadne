@@ -1,7 +1,7 @@
 {
   "archived": "2026-10-16",
   "scope": "Conversation presentation archive; canonical designs stay in docs/ and plan owners now live in .agents/plans/. No new analysis or qualification.",
-  "report_count": 40,
+  "report_count": 41,
   "markdown_html_pairs_including_index": 21,
   "source_session": "01a12ddc-4e59-7cb2-b5aa-67a8e522c597",
   "recovered_reports": [
@@ -840,12 +840,12 @@
       "sha256": "2667f3af9200452de3e195dc17664344a094f718310fb48d7527f5a02999ac33"
     },
     "ariadne-reports-index.html": {
-      "bytes": 14835,
-      "sha256": "a9d05e4f84660f19d94947c50a3a5e0e1e55e843bb59f54b9e908119805037da"
+      "bytes": 15413,
+      "sha256": "940cc2e09e4534701680b073166ea806d60ae295aa218d8df990fcb0f7bfb01b"
     },
     "ariadne-reports-index.md": {
-      "bytes": 8771,
-      "sha256": "bbc7d55f84d76cac995d61fa25237bedd706c3a6b47785cd45056a6b5130abc8"
+      "bytes": 9267,
+      "sha256": "d09aaf523e293c99cb60fdc59679656f09c07e009380021cbf8988db6cf78188"
     },
     "ariadne-resolver-structural-types-20261015.html": {
       "bytes": 32858,
@@ -1002,10 +1002,14 @@
     "ariadne-remaining-work-20261021-438ee6b-pre-execution.html": {
       "bytes": 15462,
       "sha256": "17f4d311ab3b94b45d5559e5c16dbcd3fd71682148e2f269ea275bae07331c10"
+    },
+    "ariadne-validation-plan-20261022.html": {
+      "bytes": 21749,
+      "sha256": "bd8b46ce78d839f7d92e5da87d6eb6b22b0a6056b840113aaf0100ffdefa42a6"
     }
   },
   "directory": ".agents/chatdocs/",
-  "html_documents_including_index": 41,
+  "html_documents_including_index": 42,
   "markdown_documents_including_index": 22,
   "source_review_documents": [
     {
@@ -1628,6 +1632,44 @@
         "final_outcome_retrieved": false,
         "full_i5c_acceptance": false
       }
+    },
+    {
+      "html": "ariadne-validation-plan-20261022.html",
+      "date": "2026-10-22",
+      "source_revision": "c55fe1b8eea9e28094610c6e50ac038491fe9b02",
+      "scope": "Conversation overview of the proposed ordinary-test/PBT/MBT validation plan; implementation and execution pending.",
+      "canonical_source_sha256": {
+        "tests/README.md": "746e975e7ec088aa50862e682c1b6831d09f316241f8446d5c70735a46c047d8",
+        "tests/core_properties.rs": "4125b1f09507b65b15969d4e5b1cec85598ab1ee306029776c3fdd6cdd2617da",
+        "tools/run_generated_validation.py": "b273ce985b273a353c6ac46f358f6ec30e5cf9dfb21fb2b2eda5c71800f0dac7",
+        "mbt/README.md": "7bf2cf2e5acf6545286edbfeeb80c80c94c6e1e130d6114f16c33a108f310e11",
+        "mbt/run.py": "21e76fb256e8456074544565a3a7f7c974aab9e0577f58c81d2e739e43bbda8a",
+        "mbt/stage-e/README.md": "2010803df71891c30c9b3f54a498fa57aff4a91d7e8249bcf89afc7bb7d6e539",
+        "Specs/README.md": "2674dba8dfb4a4f1a6da7f10930b3f67b97149046948dea2e8739046bf262f4b",
+        ".agents/plans/generated-validation-retention.md": "a4a9e9549c89e85fcaf72ac0e00c0a73f86ab6563f75573d3dcd5c01fbde62ee",
+        ".agents/plans/i5c-address-wrap.md": "d5e690a26be90e411f5918268d9425afd4b35ff769e3df2bb9b51326bb317cfe",
+        "tests/input/fixtures/i5c/qualification-matrix.json": "2751fdf2fc407e6b104f29c57f6619cbdbc9d9bb226bdd9c029d16dec4fc2fca",
+        "docs/Ariadne/address-wrap-design.md": "391be18f0cb7fff351c06d4d81538a499b90de85f3ad1b7eefe0c8a3b050b4de",
+        "docs/Ariadne/semantic-assurance.md": "b8e357e2a3d27348c8e73ca054ac5fd2d30934d83920d80db6c873baabe54f81"
+      },
+      "previous_index_sha256": {
+        "ariadne-reports-index.html": "a9d05e4f84660f19d94947c50a3a5e0e1e55e843bb59f54b9e908119805037da",
+        "ariadne-reports-index.md": "bbc7d55f84d76cac995d61fa25237bedd706c3a6b47785cd45056a6b5130abc8"
+      },
+      "validation": {
+        "html_structure": "balanced elements, unique IDs and resolved accessibility labels",
+        "resources": "self-contained HTML/CSS; page and both index links/fragments checked",
+        "browser_controls": "four native details disclosures; interactive behavior not browser-tested",
+        "application_tests_executed_for_presentation": false,
+        "local_references_checked": 158
+      },
+      "presentation": {
+        "requested": "wslview",
+        "launch_succeeded": true,
+        "visual_inspection": false,
+        "initial_attempt": "Sandboxed launch failed because WSL_INTEROP was stale/unavailable.",
+        "completed_attempt": "wslview outside the sandbox exited 0; no browser rendering or disclosure interaction was visually inspected."
+      }
     }
   ],
   "plan_directory_relocation": {
@@ -1675,5 +1717,17 @@
     "execution_progress_reported": true,
     "host_access": "SSH closes before authentication",
     "last_confirmed_detected_mutants": 10
+  },
+  "latest_validation_plan_overview": {
+    "date": "2026-10-22",
+    "report": "ariadne-validation-plan-20261022.html",
+    "source_revision": "c55fe1b8eea9e28094610c6e50ac038491fe9b02",
+    "methods": [
+      "ordinary unit and integration tests",
+      "PBT",
+      "MBT"
+    ],
+    "stages": 6,
+    "implementation_status": "proposed"
   }
 }

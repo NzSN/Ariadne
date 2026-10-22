@@ -55,6 +55,75 @@ fn adjacent_and_identical_overlaps_compose_but_conflicts_are_localized() {
         ReadStop::NotCaptured(104)
     );
 }
+
+#[test]
+fn dense_capture_overlap_preserves_provenance_and_enforces_the_selected_limit() {
+    let limits = OpenLimits::default();
+    assert_eq!(limits.max_overlap, 128);
+    assert_eq!(
+        ariadne::investigation::FrameStructureLimits::default().max_overlap,
+        limits.max_overlap
+    );
+    for linux in [false, true] {
+        for memory64 in [false, true] {
+            let bytes = |count: usize, conflict: bool| {
+                let mut dump = Dump::new(linux);
+                let matching = [0x90, 0x48, 0xc3];
+                let differing = [0x90, 0xff, 0xc3];
+                let mut ranges = vec![(0x4000, matching.as_slice()); count];
+                if conflict {
+                    ranges[count - 1].1 = differing.as_slice();
+                }
+                if memory64 {
+                    dump.memory64(&ranges);
+                } else {
+                    dump.memory(&ranges);
+                }
+                dump.finish()
+            };
+            // Owned full captures reached 100 contributors; retain every one,
+            // including at the new default's exact boundary.
+            for count in [100, limits.max_overlap] {
+                let snapshot =
+                    FileSnapshot::from_minidump_bytes(bytes(count, false), limits.clone()).unwrap();
+                let read = snapshot.read_prefix(0x4000, 4).unwrap();
+                assert_eq!(read.bytes, [0x90, 0x48, 0xc3]);
+                assert_eq!(read.stop, ReadStop::NotCaptured(0x4003));
+                for span in &read.spans {
+                    assert_eq!(span.contributors.len(), count);
+                    assert_eq!(
+                        span.contributors
+                            .iter()
+                            .map(|source| (source.stream, source.entry, source.file_offset))
+                            .collect::<std::collections::BTreeSet<_>>()
+                            .len(),
+                        count
+                    );
+                }
+            }
+            assert!(matches!(
+                FileSnapshot::from_minidump_bytes(bytes(129, false), limits.clone()),
+                Err(InputError::Limit("overlapping capture ranges"))
+            ));
+            let lower = OpenLimits {
+                max_overlap: 64,
+                ..limits.clone()
+            };
+            assert!(matches!(
+                FileSnapshot::from_minidump_bytes(bytes(65, false), lower),
+                Err(InputError::Limit("overlapping capture ranges"))
+            ));
+            let snapshot =
+                FileSnapshot::from_minidump_bytes(bytes(128, true), limits.clone()).unwrap();
+            let read = snapshot.read_prefix(0x4000, 3).unwrap();
+            assert_eq!(read.bytes, [0x90]);
+            assert_eq!(read.stop, ReadStop::ConflictingCapture(0x4001));
+            assert_eq!(read.spans[0].contributors.len(), 128);
+            assert_eq!(read.conflict_sources.len(), 128);
+        }
+    }
+}
+
 #[test]
 fn thread_capture_and_valid_register_groups_are_retained_without_using_crash_values() {
     let mut d = Dump::new(true);

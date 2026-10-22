@@ -1,4 +1,5 @@
 """Negative acceptance controls for native I5a receipts, timings and inventories."""
+import ast
 import copy
 import hashlib
 import json
@@ -16,7 +17,8 @@ from compare_i5a_cli import without_verified_receipt
 class NativeContractTests(unittest.TestCase):
     def setUp(self):
         self.manifest = {"schema": "ariadne.bap-core-build/v1", "helper_sha256": "a" * 64,
-                         "lock_sha256": "b" * 64, "handshake": {"abi": 2}}
+                         "lock_sha256": "b" * 64, "handshake": {
+                             "abi": 2, "configurable_request_bytes": True}}
         self.report = {"identity": {"artifact_sha256": "c" * 64,
                                    "snapshot_id": "minidump-captured-amd64-v1:" + "c" * 64},
                        "query": {"entries": ["0x0000000000401000"], "seeds": ["0x0000000000401006"]},
@@ -29,6 +31,8 @@ class NativeContractTests(unittest.TestCase):
             "schema": "ariadne.analysis-backend/v1", "backend": "bap", "family": "recovery",
             "profile": contract.PROFILE, "snapshot": self.report["identity"]["snapshot_id"],
             "query": "d" * 64, "build": self.manifest,
+            "transport": {"max_request_bytes": contract.MAX_FRAME_BYTES,
+                          "max_response_bytes": contract.MAX_FRAME_BYTES},
         }
         self.performance = {"warmups": 1, "repeats": 5, "phaseMedianBudgetMs": 10, "cliMedianBudgetMs": 1500}
         self.rows = [{
@@ -87,6 +91,37 @@ class NativeContractTests(unittest.TestCase):
                 broken["analysis_backend"][field] = value
                 with self.assertRaises(ValueError):
                     contract.validate_backend_receipt(broken, self.manifest)
+
+    def test_native_transport_bounds_require_exact_fields_and_capability(self):
+        missing = copy.deepcopy(self.report)
+        del missing["analysis_backend"]["transport"]
+        with self.assertRaises(ValueError):
+            contract.validate_backend_receipt(missing, self.manifest)
+        for transport in (
+                {}, {"max_request_bytes": contract.MAX_FRAME_BYTES},
+                {"max_response_bytes": contract.MAX_FRAME_BYTES},
+                {**self.report["analysis_backend"]["transport"], "unknown": 1}):
+            broken = copy.deepcopy(self.report)
+            broken["analysis_backend"]["transport"] = transport
+            with self.subTest(transport=transport), self.assertRaises(ValueError):
+                contract.validate_backend_receipt(broken, self.manifest)
+        for field, value in (
+                ("max_request_bytes", 0), ("max_request_bytes", -1),
+                ("max_request_bytes", True), ("max_request_bytes", 8.0),
+                ("max_request_bytes", 2**64), ("max_response_bytes", True),
+                ("max_response_bytes", float(contract.MAX_FRAME_BYTES)),
+                ("max_response_bytes", contract.MAX_FRAME_BYTES + 1)):
+            broken = copy.deepcopy(self.report)
+            broken["analysis_backend"]["transport"][field] = value
+            with self.subTest(field=field, value=value), self.assertRaises(ValueError):
+                contract.validate_backend_receipt(broken, self.manifest)
+        self.report["analysis_backend"]["transport"]["max_request_bytes"] = 2**64 - 1
+        contract.validate_backend_receipt(self.report, self.manifest)
+        self.manifest["handshake"]["configurable_request_bytes"] = False
+        with self.assertRaises(ValueError):
+            contract.validate_backend_receipt(self.report, self.manifest)
+        self.report["analysis_backend"]["transport"]["max_request_bytes"] = contract.MAX_FRAME_BYTES
+        contract.validate_backend_receipt(self.report, self.manifest)
 
     def test_snapshot_artifact_build_and_completion_substitution_fail(self):
         for path, value in [(('analysis_backend', 'snapshot'), 'other'),
@@ -253,6 +288,20 @@ class NativeContractTests(unittest.TestCase):
                         with self.assertRaises(RuntimeError):
                             check_i5a.retained(path, "equivalence")
 
+    def test_native_manifest_inventory_matches_current_builder(self):
+        builder = ast.parse((contract.ROOT / "native/bap-core/build.py").read_text())
+        main = next(node for node in builder.body
+                    if isinstance(node, ast.FunctionDef) and node.name == "main")
+        assignments = {target.id: node.value for node in ast.walk(main)
+                       if isinstance(node, ast.Assign) for target in node.targets
+                       if isinstance(target, ast.Name)}
+        sources = ast.literal_eval(assignments["sources"])
+        handshake = assignments["handshake"]
+        profiles = next(value for key, value in zip(handshake.keys, handshake.values)
+                        if isinstance(key, ast.Constant) and key.value == "profiles")
+        self.assertEqual(tuple(sources), contract.CORE_SOURCES)
+        self.assertEqual(tuple(ast.literal_eval(profiles)), contract.CORE_PROFILES)
+
     def test_native_manifest_checks_source_helper_and_sdk_linkage(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -267,19 +316,19 @@ class NativeContractTests(unittest.TestCase):
             lock.write_text('{"bapSourceRevision":"revision"}')
             helper = core / "ariadne-bap-core"
             helper.write_bytes(b"qualified helper")
-            names = ["recovery.ml", "stateflow.ml", "capture.ml", "project_state.ml", "main.ml"]
+            names = list(contract.CORE_SOURCES)
             for name in names + ["sdk_smoke.ml"]:
                 (source / name).write_text(name)
             manifest = {"schema": "ariadne.bap-core-build/v1", "helper_sha256": contract.sha(helper),
                         "lock_sha256": contract.sha(lock), "handshake": {
                             "schema": "ariadne.bap-core-ready/v1", "abi": 2, "families": ["recovery", "stateflow"],
-                            "profiles": ["normalized-fixed-input/v1", contract.PROFILE], "bap_revision": "revision",
+                            "profiles": list(contract.CORE_PROFILES), "bap_revision": "revision",
                             "sdk_manifest_sha256": contract.sha(sdk),
                             "source_hashes": {name: contract.sha(source / name) for name in names}}}
             (core / "manifest.json").write_text(json.dumps(manifest))
             with patch.object(contract, "ROOT", root), patch.object(contract, "CORE", core):
                 self.assertEqual(contract.native_manifest(), manifest)
-                for path in [helper, lock, sdk, source / "capture.ml"]:
+                for path in [helper, lock, sdk, *(source / name for name in names)]:
                     original = path.read_bytes()
                     path.write_bytes(original + b"changed")
                     try:
@@ -287,6 +336,26 @@ class NativeContractTests(unittest.TestCase):
                             contract.native_manifest()
                     finally:
                         path.write_bytes(original)
+                mutations = []
+                for name in names:
+                    missing = copy.deepcopy(manifest)
+                    del missing["handshake"]["source_hashes"][name]
+                    mutations.append(missing)
+                extra_source = copy.deepcopy(manifest)
+                extra_source["handshake"]["source_hashes"]["sdk_smoke.ml"] = contract.sha(source / "sdk_smoke.ml")
+                mutations.append(extra_source)
+                for profiles in (list(contract.CORE_PROFILES[:2]),
+                                 list(contract.CORE_PROFILES[:-1]),
+                                 list(reversed(contract.CORE_PROFILES)),
+                                 [*contract.CORE_PROFILES, "unsupported-profile/v1"]):
+                    changed = copy.deepcopy(manifest)
+                    changed["handshake"]["profiles"] = profiles
+                    mutations.append(changed)
+                for index, changed in enumerate(mutations):
+                    with self.subTest(manifest_change=index):
+                        (core / "manifest.json").write_text(json.dumps(changed))
+                        with self.assertRaises(ValueError):
+                            contract.native_manifest()
 
 
 if __name__ == "__main__":

@@ -69,7 +69,7 @@ impl Default for FrameStructureLimits {
             max_metadata_bytes: 64 * 1024 * 1024,
             max_streams: 1024,
             max_records: 131_072,
-            max_overlap: 64,
+            max_overlap: 128,
             max_capture_ranges: 262_144,
             max_read_bytes: 16 * 1024 * 1024,
             max_prepare_starts: 65_536,

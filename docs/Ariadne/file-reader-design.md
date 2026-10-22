@@ -4,6 +4,8 @@
 
 **Status.** Canonical input design, API, operating guide and capture-evidence record. Windows/Linux AMD64
 minidumps are implemented; PE/ELF image and ELF-core readers remain deferred.
+The default overlap ceiling is 128 captured ranges at one virtual address;
+explicit caller limits and capture-conflict handling remain part of the API.
 
 **Why this document exists.** The [byte-span adapter](../llvm-mc-adapter.md)
 leaves file parsing, address mapping and byte provenance to readers. The
@@ -650,7 +652,27 @@ intervals. `PrepareLimits` bounds attempted starts, queued candidates, decoded
 bytes and process work. Use deterministic ordering; include limits in query
 identity and report actual consumption. Current minidump open defaults are
 256 MiB artifact bytes, 1,024 streams, 131,072 entries per supported list, 131,072 capture ranges, 16 MiB cumulative nested
-metadata, 64 overlapping captures at a VA, and 64 KiB per public read.
+metadata, 128 overlapping captures at a VA, and 64 KiB per public read.
+
+The 2026-10-22 full-capture run found densities of 67–100 overlapping ranges
+in six owned Windows dumps, exceeding the former default of 64. Both
+`OpenLimits` and `FrameStructureLimits` now default to 128. The
+[reader regression](../../tests/input/reader.rs) exercises Windows and Linux,
+MemoryList and Memory64List, 100 and 128 retained contributors, rejection at
+129, an explicit lower limit of 64, and localized conflicting bytes. Reads retain
+all capture contributors and stop at conflicting bytes. Capture and timing
+results require fresh execution on the selected inputs.
+
+Fresh validation on 2026-10-22 passed the nine reader tests, 362 default and
+382 all-feature Rust tests, the 64 core-only tests, Clippy, Ariadne package
+formatting and the
+3,200-case generated-property suite. Native execution with the raised default
+passed both I5a, all six I5b and all eight I5c controlled Windows cases, including
+the eight full dumps. All 28 selected I5a/I5b/I5c fixture timing workloads and
+the I4 workload checks also passed their original budgets. These observations
+cover the selected immutable inputs; a future dump exceeding 128 contributors
+still requires an explicit caller policy or receives the typed overlap-limit
+error.
 Preparation defaults are 4,096 starts, 8,192 referenced candidates, 61,440
 returned prefix bytes, 4,096 decoder batches and 128 starts per batch. These
 are resource bounds, not large-dump performance guarantees. Deferred formats

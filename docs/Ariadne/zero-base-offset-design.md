@@ -6,6 +6,9 @@
 and controlled partial/full Windows corpora on 2026-10-07. The design baseline
 `ae987bc` is historical. See the qualification for
 the 18 gates, exact source/tool inventory and separate controlled Windows tiers.
+The 2026-10-22 analysis of exact output below identifies different decoder build
+fingerprints as the cause of later byte-vector
+differences and separates the subsequently requested reader-limit change.
 
 **Why this document exists.** The [investigation design](investigation-design.md)
 motivates separate fault-time questions. [Zero-address assessment](zero-address-design.md)
@@ -30,6 +33,8 @@ value at the selected instruction, not historical null provenance.
 
 **What remains unresolved.** Qualification is source/tool-bound and corpus-scoped;
 later changes require fresh or exact-inventory-verified acceptance.
+Exact output vectors also require the decoder executable identity and reader
+policy used to define those expected bytes.
 Indexed, Linux, historical-provenance and object-lifetime questions remain later
 deliveries. Existing I4/I5a records do not qualify I5b or waive their own criteria.
 
@@ -135,6 +140,50 @@ The selected question is bound once, preventing evidence for one access from
 being assessed as another. Store payloads never enter the address predicate.
 The assessment consumes one completed normalized analysis and returns a typed
 answer; capture, semantic preparation and formatting keep their existing owners.
+
+## Exact output compatibility (2026-10-22)
+
+A fresh comparison against the 666-entry
+[expected byte vector](../../tests/reports/fixtures/i5c-legacy-sha256.json)
+initially found 336 differences: 330 I5b fixture outputs and six upstream-call
+outputs. Their byte counts matched the expected counts. The decoded-address
+receipt records the LLVM MC executable SHA-256; that receipt contributes to
+`receipt_digest`, `scope_id`, evidence IDs and claim IDs. Consequently, a
+different decoder executable changes exact assessment bytes even when its
+decoded facts and the assessment answer agree.
+
+The original and rebuilt decoders had identical `decode.cpp` and build-script
+contents and used GCC 13.3.0 with LLVM 20.1.2. Their LLVM assertion strings named
+different header paths: `/usr/include/llvm-20/...` in the original and the
+extracted SDK's absolute directory in the rebuild. This changed the executable
+fingerprint:
+
+| Decoder build | SHA-256 |
+| --- | --- |
+| Original, with canonical header paths | `6bb0005e6416f172f88c4d122ae8908862adbe9d1d2f225046df17ae857d9349` |
+| Rebuilt, with extracted-header paths | `674de9856fcbd13717a404ab99af00a69ddf75127f1ae7156eb7508595ea13b6` |
+
+An isolated fresh build with the same compiler and SDK added these mappings:
+
+```sh
+-ffile-prefix-map="$include_dir"=/usr/include/llvm-20
+-ffile-prefix-map="$c_include_dir"=/usr/include/llvm-c-20
+```
+
+It reproduced the original executable byte for byte. Replaying the CLI saved
+before the limit change with that freshly built decoder matched **666/666** expected
+outputs and passed all 36 base-report parity comparisons. This experiment
+establishes the cause of the original 336 differences for this compiler/SDK
+cohort; executable identity remains part of the evidence contract.
+
+The subsequent [reader policy change](file-reader-design.md#limits-and-failure-behavior)
+raises the default overlap ceiling from 64 to 128. A second complete comparison
+with the current CLI and the reproduced decoder matched 654 outputs and found
+exactly 12 differences, all in base `report.json` files. Comparing their parsed
+contents found only `/input/open_limits/max_overlap`: 64 became 128. All
+assessment, explanation, text and DOT outputs matched. The existing vector
+therefore still expresses the former reader policy for those 12 JSON files;
+the dated diagnosis and the requested default change have distinct causes.
 
 ## First admission profile
 

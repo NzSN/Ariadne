@@ -64,6 +64,8 @@ def report_fixture():
             "schema": "ariadne.analysis-backend/v1", "backend": "bap",
             "snapshot": snapshot, "query": digest(b"native captured query"),
             "family": "recovery", "profile": NATIVE.PROFILE, "build": copy.deepcopy(manifest),
+            "transport": {"max_request_bytes": NATIVE.MAX_FRAME_BYTES,
+                          "max_response_bytes": NATIVE.MAX_FRAME_BYTES},
         },
     }
     inspection = {
