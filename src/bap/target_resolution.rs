@@ -10,6 +10,25 @@ use std::time::Instant;
 pub const PROFILE: &str = "captured-indirect-targets/v1";
 pub const LEGACY_LOCAL_PROFILE: &str = "captured-local-indirect-targets/v1";
 pub const LOCAL_PROFILE: &str = "captured-local-indirect-targets/v2";
+pub const ADVANCED_PROFILE: &str = "captured-indirect-targets/v2";
+pub const ADVANCED_LOCAL_PROFILE: &str = "captured-local-indirect-targets/v3";
+pub const ADVANCED_SCHEMA: &str = "ariadne.indirect-target-resolution/v4";
+pub(crate) const PRE_ADVANCED_LOOP_ENGINE: &str =
+    "acdf884e7d041157bab3d1b065a2f9be26653d72f65b00ea8767abc437510d4a";
+pub(crate) fn is_advanced(report: &Report) -> bool {
+    report.schema == ADVANCED_SCHEMA
+        && [ADVANCED_PROFILE, ADVANCED_LOCAL_PROFILE].contains(&report.profile.as_str())
+}
+pub(crate) fn promote_advanced(report: &mut Report) -> Result<(), Error> {
+    report.profile = match report.profile.as_str() {
+        PROFILE => ADVANCED_PROFILE,
+        LOCAL_PROFILE => ADVANCED_LOCAL_PROFILE,
+        _ => return Err(invalid("source advanced target promotion profile")),
+    }
+    .into();
+    report.schema = ADVANCED_SCHEMA.into();
+    Ok(())
+}
 #[path = "target_resolution/loop_closure.rs"]
 mod loop_closure;
 pub use loop_closure::{CoverageEvidence, LoopClosureReceipt};
@@ -583,7 +602,9 @@ pub(crate) fn report_graph_digest(
     instructions: &BTreeMap<Address, Instruction>,
     roots: &AddressSet,
 ) -> Result<String, Error> {
-    if report.schema == "ariadne.indirect-target-resolution/v3" {
+    if report.schema == "ariadne.indirect-target-resolution/v3"
+        || (is_advanced(report) && report.profile == ADVANCED_LOCAL_PROFILE)
+    {
         graph_digest(instructions, roots)
     } else {
         legacy_graph_digest(instructions, roots)
@@ -1620,12 +1641,14 @@ pub(crate) fn validate(
     instructions: &BTreeMap<u64, Instruction>,
     roots: &AddressSet,
 ) -> Result<(), Error> {
-    let new_local =
-        report.schema == "ariadne.indirect-target-resolution/v3" && report.profile == LOCAL_PROFILE;
+    let new_local = (report.schema == "ariadne.indirect-target-resolution/v3"
+        && report.profile == LOCAL_PROFILE)
+        || (is_advanced(report) && report.profile == ADVANCED_LOCAL_PROFILE);
     let legacy_local = report.schema == "ariadne.indirect-target-resolution/v2"
         && report.profile == LEGACY_LOCAL_PROFILE;
     let local = new_local || legacy_local;
     if !(local
+        || (is_advanced(report) && report.profile == ADVANCED_PROFILE)
         || (report.schema == "ariadne.indirect-target-resolution/v1" && report.profile == PROFILE))
         || report.memory_premise != MEMORY_PREMISE
         || report.graph_sha256 != report_graph_digest(report, instructions, roots)?

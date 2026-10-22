@@ -13,6 +13,10 @@ pub const LEGACY_V2_PROFILE: &str = "captured-guarded-targets/v2";
 pub const LEGACY_V2_SCHEMA: &str = "ariadne.guarded-target-resolution/v2";
 pub const PROFILE: &str = "captured-guarded-targets/v3";
 pub const SCHEMA: &str = "ariadne.guarded-target-resolution/v3";
+pub const ADVANCED_PROFILE: &str = "captured-guarded-targets/v4";
+pub const ADVANCED_SCHEMA: &str = "ariadne.guarded-target-resolution/v4";
+pub const PRE_ADVANCED_CHECKER: &str =
+    "6f8a96e415998dbc9ea69f701ef72c76697746e1b1549fb117dd1ccee1cf82bc";
 pub const MODEL_VERSION: &str = "ariadne.guarded-target-resolution/v3";
 pub const LEGACY_V2_MODEL_SHA256: &str =
     "605fb57d42e755b7fee75511f66e6ad864a16c303bbf5ffb5bad8855c7d05675";
@@ -38,6 +42,7 @@ pub fn generation(report: &Report) -> u8 {
         (LEGACY_SCHEMA, LEGACY_PROFILE) => 1,
         (LEGACY_V2_SCHEMA, LEGACY_V2_PROFILE) => 2,
         (SCHEMA, PROFILE) => 3,
+        (ADVANCED_SCHEMA, ADVANCED_PROFILE) => 4,
         _ => 0,
     }
 }
@@ -45,7 +50,7 @@ pub fn is_legacy(report: &Report) -> bool {
     matches!(generation(report), 1 | 2)
 }
 pub fn contains_profile(profile: &str) -> bool {
-    [LEGACY_PROFILE, LEGACY_V2_PROFILE, PROFILE]
+    [LEGACY_PROFILE, LEGACY_V2_PROFILE, PROFILE, ADVANCED_PROFILE]
         .iter()
         .any(|p| profile.contains(p))
 }
@@ -53,6 +58,7 @@ pub fn capture_domain(report: &Report) -> &'static str {
     match generation(report) {
         1 => "ariadne-composed-capture/v1",
         2 => "ariadne-composed-capture/v2",
+        4 => "ariadne-composed-capture/v4",
         _ => "ariadne-composed-capture/v3",
     }
 }
@@ -90,6 +96,17 @@ pub fn checker_identity() -> String {
     let guards = guard::checker_identity();
     crate::reports::sha256(
         format!("ariadne.guarded-target-checker/v3\n{composition}\n{loops}\n{guards}\n").as_bytes(),
+    )
+}
+pub fn advanced_checker_identity() -> String {
+    crate::reports::sha256(
+        format!(
+            "ariadne.guarded-target-checker/v4\n{}\n{}\n{}\n",
+            crate::reports::sha256(include_bytes!("composition.rs")),
+            target::loop_engine_identity(),
+            guard::advanced_checker_identity()
+        )
+        .as_bytes(),
     )
 }
 pub fn value_digest(value: &Value) -> Result<String, Error> {
@@ -133,6 +150,7 @@ fn binding_digest(report: &Report) -> Result<String, Error> {
         match generation(report) {
             1 => "ariadne-guarded-target-binding/v1",
             2 => "ariadne-guarded-target-binding/v2",
+            4 => "ariadne-guarded-target-binding/v4",
             _ => "ariadne-guarded-target-binding/v3",
         },
         report.snapshot,
@@ -157,6 +175,7 @@ pub fn analysis_id(report: &Report) -> Result<String, Error> {
         match generation(report) {
             1 => "ariadne-guarded-target-analysis/v1",
             2 => "ariadne-guarded-target-analysis/v2",
+            4 => "ariadne-guarded-target-analysis/v4",
             _ => "ariadne-guarded-target-analysis/v3",
         },
         report.binding_sha256
@@ -172,12 +191,17 @@ pub fn seal(
     final_request: &AnalysisRequest,
 ) -> Result<Report, Error> {
     let encoded = super::core_adapter::encode_request(candidate)?;
+    let advanced = guard::is_advanced(guards);
     let mut report = Report {
-        schema: SCHEMA.into(),
-        profile: PROFILE.into(),
+        schema: if advanced { ADVANCED_SCHEMA } else { SCHEMA }.into(),
+        profile: if advanced { ADVANCED_PROFILE } else { PROFILE }.into(),
         model_version: MODEL_VERSION.into(),
         model_sha256: model_identity(),
-        checker_sha256: checker_identity(),
+        checker_sha256: if advanced {
+            advanced_checker_identity()
+        } else {
+            checker_identity()
+        },
         snapshot: guards.input.snapshot.clone(),
         artifact_sha256: guards.input.artifact_sha256.clone(),
         query_scope_sha256: guards.input.query_scope_sha256.clone(),
@@ -223,6 +247,7 @@ pub fn validate(
         return legacy::validate(report, targets, guards, final_request);
     }
     let previous = generation(report) == 2;
+    let advanced = generation(report) == 4;
     let (schema, profile, model, checker) = if previous {
         if legacy_v2_model_identity() != LEGACY_V2_MODEL_SHA256
             || legacy_v2_checker_identity() != LEGACY_V2_CHECKER_SHA256
@@ -235,18 +260,30 @@ pub fn validate(
             LEGACY_V2_MODEL_SHA256.to_owned(),
             LEGACY_V2_CHECKER_SHA256.to_owned(),
         )
+    } else if advanced {
+        (
+            ADVANCED_SCHEMA,
+            ADVANCED_PROFILE,
+            model_identity(),
+            advanced_checker_identity(),
+        )
     } else {
         (SCHEMA, PROFILE, model_identity(), checker_identity())
     };
     if report.schema != schema
         || report.profile != profile
-        || report.model_version != schema
+        || report.model_version != if advanced { MODEL_VERSION } else { schema }
         || report.model_sha256 != model
         || (report.checker_sha256 != checker
             && (previous
-                || report.checker_sha256
-                    != "a66b79f4a78330eda3dad00b64802498a3ab289404007c1fd62bb521a5a380ee"))
+                || advanced
+                || ![
+                    PRE_ADVANCED_CHECKER,
+                    "a66b79f4a78330eda3dad00b64802498a3ab289404007c1fd62bb521a5a380ee",
+                ]
+                .contains(&report.checker_sha256.as_str())))
         || guard::is_legacy(guards) != previous
+        || guard::is_advanced(guards) != advanced
         || report.snapshot != guards.input.snapshot
         || report.snapshot != targets.snapshot
         || report.artifact_sha256 != guards.input.artifact_sha256
@@ -254,8 +291,18 @@ pub fn validate(
         || report.query_scope_sha256 != guards.input.query_scope_sha256
         || report.candidate_epoch != guards.input.candidate_epoch
         || targets.memory_premise != target::MEMORY_PREMISE
-        || targets.profile != target::LOCAL_PROFILE
-        || targets.schema != "ariadne.indirect-target-resolution/v3"
+        || targets.profile
+            != if advanced {
+                target::ADVANCED_LOCAL_PROFILE
+            } else {
+                target::LOCAL_PROFILE
+            }
+        || targets.schema
+            != if advanced {
+                target::ADVANCED_SCHEMA
+            } else {
+                "ariadne.indirect-target-resolution/v3"
+            }
         || report.candidate_sha256 != value_digest(&report.candidate)?
         || report.target_report_sha256 != typed_digest(targets)?
         || report.guard_report_sha256 != typed_digest(guards)?

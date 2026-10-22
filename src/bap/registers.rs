@@ -1,6 +1,24 @@
 //! The finite vector namespace of the pinned AMD64 BAP producer.
 use super::ast::Var;
 
+/// These capabilities belong only to the explicitly selected advanced producer
+/// profiles. Saved older projections retain their original namespace.
+pub(crate) fn advanced_profile(profile: &str) -> bool {
+    matches!(profile, "bap-bit-provenance-v10" | "bap-bit-provenance-v11")
+}
+
+/// Canonical application FP-control variables emitted by the pinned producer.
+/// LLVM spellings (for example FPCW) are not additional BIL aliases.
+pub(crate) fn fp_control(var: &Var) -> bool {
+    !var.virtual_
+        && var.index == 0
+        && var.type_ == "imm"
+        && matches!(
+            (var.name.as_str(), var.width),
+            ("MXCSR", 32) | ("FPU_CONTROL", 16)
+        )
+}
+
 /// XMM is the low half of the canonical 256-bit YMM backing register.
 /// ZMM, opmask, noncanonical spellings and extended register banks are excluded.
 pub(crate) fn vector_backing(var: &Var) -> Option<Var> {

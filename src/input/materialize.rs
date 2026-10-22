@@ -176,7 +176,8 @@ impl FilePreparedAnalysis {
         let Some(report) = &self.guard_admission else {
             if self.guard_input.is_some()
                 || self.guard_snapshot.is_some()
-                || self.prepared.identity.ruleset == guard::PRODUCER_PROFILE
+                || [guard::PRODUCER_PROFILE, guard::ADVANCED_PRODUCER_PROFILE]
+                    .contains(&self.prepared.identity.ruleset.as_str())
             {
                 return Err("guard profile has no proof evidence".into());
             }
@@ -221,7 +222,7 @@ impl FilePreparedAnalysis {
         if **input != report.input
             || input.snapshot != self.snapshot.snapshot_id
             || input.artifact_sha256 != self.snapshot.artifact_sha256
-            || self.prepared.identity.ruleset != guard::PRODUCER_PROFILE
+            || self.prepared.identity.ruleset != input.producer.projection
         {
             return Err("guard original source or snapshot changed".into());
         }
@@ -248,6 +249,7 @@ impl FilePreparedAnalysis {
                     &self.materialization.limits,
                     &request.locations,
                     &self.open_limits,
+                    &input.policy,
                 )?
             || input.query_scope_sha256
                 != guard_query_scope(
@@ -387,6 +389,11 @@ impl FilePreparedAnalysis {
             })
         {
             return Err("source flag extension does not admit target resolution".into());
+        }
+        if crate::bap::advanced_projection(&self.prepared.identity.ruleset)
+            != crate::bap::target_resolution::is_advanced(report)
+        {
+            return Err("target report does not match source producer generation".into());
         }
         if report.snapshot != self.snapshot.snapshot_id
             || report.artifact_sha256 != self.snapshot.artifact_sha256
@@ -652,6 +659,7 @@ fn preparation_digest(
     limits: &PrepareLimits,
     locations: &LocationSet,
     open_limits: &OpenLimits,
+    profile: &str,
 ) -> Result<String, crate::bap::Error> {
     Ok(crate::reports::sha256(&serde_json::to_vec(
         &serde_json::json!({
@@ -665,7 +673,7 @@ fn preparation_digest(
                 "max_overlap": open_limits.max_overlap,
                 "max_read_bytes": open_limits.max_read_bytes,
             },
-            "profile": guard::PROFILE,
+            "profile": profile,
         }),
     )?))
 }
@@ -1285,6 +1293,7 @@ impl FileSnapshot {
             }
         };
         if config.source_extension.is_some()
+            && config.source_extension_mode != crate::bap::SourceExtensionMode::Advanced
             && (refinement || target_limits.is_some() || guard_setup.is_some())
         {
             return Err(PreparationError::Backend(
@@ -1754,6 +1763,15 @@ impl FileSnapshot {
                     &limits,
                     &options.catalogue.locations(),
                     &self.limits,
+                    if setup
+                        .producer
+                        .as_ref()
+                        .is_some_and(|p| p.projection == guard::ADVANCED_PRODUCER_PROFILE)
+                    {
+                        guard::ADVANCED_PROFILE
+                    } else {
+                        guard::PROFILE
+                    },
                 )
                 .map_err(|e| PreparationError::Backend(e.to_string()))?,
                 platform: match self.metadata.platform {
@@ -1773,7 +1791,16 @@ impl FileSnapshot {
                     .producer
                     .clone()
                     .ok_or(PreparationError::InvalidQuery("guard producer absent"))?,
-                policy: guard::PROFILE.into(),
+                policy: if setup
+                    .producer
+                    .as_ref()
+                    .is_some_and(|p| p.projection == guard::ADVANCED_PRODUCER_PROFILE)
+                {
+                    guard::ADVANCED_PROFILE
+                } else {
+                    guard::PROFILE
+                }
+                .into(),
                 model_version: guard::MODEL_VERSION.into(),
                 model_sha256: guard::model_identity(),
                 limits: setup.limits.clone(),
@@ -1854,6 +1881,14 @@ impl FileSnapshot {
             .validate()
             .map_err(|e| PreparationError::Decoder(AdapterError::InvalidRequest(e)))?;
         let mut target_resolution = resolver.and_then(|resolver| resolver.report);
+        if identity
+            .as_ref()
+            .is_some_and(|i| crate::bap::advanced_projection(&i.ruleset))
+            && let Some(resolved) = &mut target_resolution
+        {
+            crate::bap::target_resolution::promote_advanced(resolved)
+                .map_err(|e| PreparationError::Backend(e.to_string()))?;
+        }
         if let Some(resolved) = &mut target_resolution {
             let replay = candidate.as_ref().unwrap_or(&request);
             let graph = crate::bap::target_resolution::report_graph_digest(

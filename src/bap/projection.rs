@@ -107,10 +107,16 @@ struct State {
     forced_uses: LocationSet,
     memory_write: bool,
     vector_write: bool,
+    fp_control_write: bool,
+    advanced: bool,
+    join_data_paths: bool,
     gaps: Vec<String>,
     jumps: Vec<Option<u64>>,
 }
-fn location(var: &Var, bit: usize) -> Result<String, Error> {
+fn location(var: &Var, bit: usize, advanced: bool) -> Result<String, Error> {
+    if advanced && super::registers::fp_control(var) && bit < var.width {
+        return Ok("state:other".into());
+    }
     if super::registers::vector_backing(var).is_some() && bit < var.width {
         return Ok("state:other".into());
     }
@@ -136,7 +142,7 @@ fn location(var: &Var, bit: usize) -> Result<String, Error> {
         var.name
     )))
 }
-fn initial(var: &Var, va: u64) -> Result<Value, Error> {
+fn initial(var: &Var, va: u64, advanced: bool) -> Result<Value, Error> {
     if var.type_ == "mem" && var.name == "mem" {
         return Ok(Value::Memory);
     }
@@ -159,7 +165,7 @@ fn initial(var: &Var, va: u64) -> Result<Value, Error> {
                 Ok(Bit {
                     value: None,
                     original: Some((var.key(), i)),
-                    deps: [location(var, i)?].into(),
+                    deps: [location(var, i, advanced)?].into(),
                     uncertain: false,
                 })
             })
@@ -167,11 +173,16 @@ fn initial(var: &Var, va: u64) -> Result<Value, Error> {
     ))
 }
 fn get(state: &mut State, var: &Var, va: u64) -> Result<Value, Error> {
+    if state.advanced && super::registers::fp_control(var) {
+        state
+            .gaps
+            .push("fp-control-state-coarsened:state:other".into());
+    }
     if let Some(backing) = super::registers::vector_backing(var) {
         state.gaps.push("vector-state-coarsened:state:other".into());
         let key = backing.key();
         if let std::collections::btree_map::Entry::Vacant(entry) = state.env.entry(key.clone()) {
-            entry.insert(initial(&backing, va)?);
+            entry.insert(initial(&backing, va, state.advanced)?);
             state.arch.insert(key.clone(), backing);
         }
         return Ok(Value::Bits(state.env[&key].bits()?[..var.width].to_vec()));
@@ -179,7 +190,7 @@ fn get(state: &mut State, var: &Var, va: u64) -> Result<Value, Error> {
     if let Some(v) = state.env.get(&var.key()) {
         return Ok(v.clone());
     }
-    let value = initial(var, va)?;
+    let value = initial(var, va, state.advanced)?;
     state.env.insert(var.key(), value.clone());
     if !var.virtual_ && var.type_ == "imm" && var.name != "RIP" {
         state.arch.insert(var.key(), var.clone());
@@ -198,6 +209,10 @@ fn put(state: &mut State, var: &Var, value: Value, va: u64) -> Result<(), Error>
         state.env.insert(key, Value::Bits(bits));
         state.vector_write = true;
     } else {
+        if state.advanced && super::registers::fp_control(var) {
+            state.forced_uses.extend(value.deps());
+            state.fp_control_write = true;
+        }
         state.env.insert(var.key(), value);
     }
     Ok(())
@@ -499,14 +514,17 @@ fn run(
     states: Vec<State>,
     va: u64,
     depth: usize,
+    budget: &mut ProjectionBudget,
 ) -> Result<Vec<State>, Error> {
     if depth > 32 {
         return Err(invalid("BIL statement nesting limit"));
     }
+    let join_data_paths = states.first().is_some_and(|state| state.join_data_paths);
     let mut states = states;
     for stmt in statements {
         let mut next = Vec::new();
         for mut state in states {
+            budget.step()?;
             match stmt {
                 Stmt::Move { var, value } => {
                     if !var.virtual_ && var.type_ == "imm" && var.name != "RIP" {
@@ -556,10 +574,11 @@ fn run(
                             vec![state],
                             va,
                             depth + 1,
+                            budget,
                         )?);
                     } else {
-                        next.extend(run(yes, vec![state.clone()], va, depth + 1)?);
-                        next.extend(run(no, vec![state], va, depth + 1)?);
+                        next.extend(run(yes, vec![state.clone()], va, depth + 1, budget)?);
+                        next.extend(run(no, vec![state], va, depth + 1, budget)?);
                     }
                 }
                 Stmt::While { condition, body } => {
@@ -573,6 +592,13 @@ fn run(
                     return Err(invalid("unreviewed special semantics"));
                 }
             }
+            if join_data_paths && next.len() > 32 {
+                let first = next.pop().expect("more than 32 states");
+                let joined = next
+                    .drain(..)
+                    .try_fold(first, |left, right| merge_data_states(left, right, va))?;
+                next.push(joined);
+            }
         }
         if next.len() > 32 {
             return Err(crate::bap::admission::failure(
@@ -583,6 +609,74 @@ fn run(
         states = next;
     }
     Ok(states)
+}
+const ADVANCED_PROJECTION_WORK_LIMIT: usize = 262_144;
+struct ProjectionBudget {
+    remaining: Option<usize>,
+}
+impl ProjectionBudget {
+    fn step(&mut self) -> Result<(), Error> {
+        if let Some(remaining) = &mut self.remaining {
+            *remaining = remaining.checked_sub(1).ok_or_else(|| {
+                crate::bap::admission::failure(
+                    crate::bap::admission::FailureKind::Resource,
+                    "BIL projection work limit",
+                )
+            })?;
+        }
+        Ok(())
+    }
+}
+fn merge_data_states(mut left: State, mut right: State, va: u64) -> Result<State, Error> {
+    if !left.jumps.is_empty() || !right.jumps.is_empty() {
+        return Err(invalid("cannot join control-transfer projection paths"));
+    }
+    let arch: BTreeMap<_, _> = left
+        .arch
+        .iter()
+        .chain(&right.arch)
+        .map(|(key, var)| (key.clone(), var.clone()))
+        .collect();
+    // A register first touched on only one branch is unchanged on the other.
+    // Materialize that initial value before joining, retaining its origins.
+    for var in arch.values() {
+        get(&mut left, var, va)?;
+        get(&mut right, var, va)?;
+    }
+    let forced_uses: LocationSet = left
+        .forced_uses
+        .union(&right.forced_uses)
+        .cloned()
+        .collect();
+    let choice = Value::Bits(vec![Bit::calculated(forced_uses.clone(), true)]);
+    let mut env = BTreeMap::new();
+    for (key, value) in &left.env {
+        if let Some(other) = right.env.get(key) {
+            let joined = match (value, other) {
+                (Value::Memory, Value::Memory) => Value::Memory,
+                (Value::Bits(_), Value::Bits(_)) => join(&choice, value.clone(), other.clone())?,
+                _ => return Err(invalid("joined BIL binding type mismatch")),
+            };
+            env.insert(key.clone(), joined);
+        }
+    }
+    let mut gaps = left.gaps;
+    gaps.extend(right.gaps);
+    gaps.push("data-paths-joined:possible-origin-union".into());
+    gaps.sort();
+    gaps.dedup();
+    Ok(State {
+        env,
+        arch,
+        forced_uses,
+        memory_write: left.memory_write || right.memory_write,
+        vector_write: left.vector_write || right.vector_write,
+        fp_control_write: left.fp_control_write || right.fp_control_write,
+        advanced: left.advanced,
+        join_data_paths: true,
+        gaps,
+        jumps: Vec::new(),
+    })
 }
 #[derive(Clone, Debug)]
 pub(crate) struct Projection {
@@ -608,7 +702,24 @@ pub(crate) fn project_with_destination(
     va: u64,
     destination: Option<&crate::effects::RegisterView>,
 ) -> Result<Projection, Error> {
-    crate::bap::admission::admit(statements, opcode, bytes)?;
+    project_with_destination_profile(
+        statements,
+        opcode,
+        bytes,
+        va,
+        destination,
+        super::PROJECTION,
+    )
+}
+pub(crate) fn project_with_destination_profile(
+    statements: &[Stmt],
+    opcode: &str,
+    bytes: &[u8],
+    va: u64,
+    destination: Option<&crate::effects::RegisterView>,
+    profile: &str,
+) -> Result<Projection, Error> {
+    crate::bap::admission::admit_with_profile(statements, opcode, bytes, profile)?;
     if statements.is_empty() {
         return Ok(Projection {
             uses: LocationSet::new(),
@@ -618,7 +729,23 @@ pub(crate) fn project_with_destination(
             targets: Vec::new(),
         });
     }
-    let states = run(statements, vec![State::default()], va, 0)?;
+    let advanced = super::registers::advanced_profile(profile);
+    let join_data_paths = advanced
+        && crate::bap::admission::capabilities_with_profile(statements, profile)?
+            .ordinary_data_only;
+    let states = run(
+        statements,
+        vec![State {
+            advanced,
+            join_data_paths,
+            ..State::default()
+        }],
+        va,
+        0,
+        &mut ProjectionBudget {
+            remaining: advanced.then_some(ADVANCED_PROJECTION_WORK_LIMIT),
+        },
+    )?;
     let mut uses = LocationSet::new();
     let mut may_defs = LocationSet::new();
     let mut must_defs: Option<LocationSet> = None;
@@ -648,7 +775,10 @@ pub(crate) fn project_with_destination(
             }
             let mut cells: BTreeMap<String, Vec<(usize, &Bit)>> = BTreeMap::new();
             for (i, bit) in bits.iter().enumerate() {
-                cells.entry(location(var, i)?).or_default().push((i, bit));
+                cells
+                    .entry(location(var, i, state.advanced)?)
+                    .or_default()
+                    .push((i, bit));
             }
             for (cell, parts) in cells {
                 let changed = partial_destination.contains(&cell)
@@ -660,8 +790,8 @@ pub(crate) fn project_with_destination(
                     for (_, bit) in &parts {
                         uses.extend(bit.deps.clone());
                     }
-                    // One vector register is only a part of state:other. Even
-                    // a full YMM overwrite cannot kill the aggregate's origins.
+                    // Vector and FP-control registers are only parts of
+                    // state:other. Their writes cannot kill aggregate origins.
                     if cell != "state:other"
                         && parts.iter().all(|(i, b)| {
                             !b.uncertain
@@ -677,7 +807,7 @@ pub(crate) fn project_with_destination(
         if state.memory_write {
             may_defs.insert("memory:any".into());
         }
-        if state.vector_write {
+        if state.vector_write || state.fp_control_write {
             may_defs.insert("state:other".into());
         }
         must_defs = Some(if let Some(old) = must_defs {
@@ -698,6 +828,14 @@ pub(crate) fn project_with_destination(
         targets,
     })
 }
+
+#[cfg(test)]
+#[path = "../../tests/bap/broader_semantics_unit.rs"]
+mod broader_semantics_tests;
+
+#[cfg(test)]
+#[path = "../../tests/bap/broader_semantics_prefix.rs"]
+mod broader_semantics_prefix_tests;
 
 #[cfg(test)]
 mod tests {

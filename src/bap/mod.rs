@@ -22,6 +22,8 @@ pub(crate) fn known_projection(profile: &str) -> bool {
             | "bap-bit-provenance-v5"
             | PROJECTION
             | source_extension::PROFILE
+            | source_extension::ADVANCED_PROFILE
+            | source_extension::ADVANCED_GUARDED_PROFILE
             | guard_admission::LEGACY_PRODUCER_PROFILE
             | guard_admission::PRODUCER_PROFILE
     )
@@ -43,7 +45,13 @@ mod source_extension;
 pub mod stateflow_adapter;
 pub mod target_resolution;
 pub use prepare::{Backend, Metrics};
-pub use session::{Config, Session, helper_identity};
+pub use session::{Config, Session, SourceExtensionMode, helper_identity};
+pub(crate) fn advanced_projection(profile: &str) -> bool {
+    matches!(
+        profile,
+        source_extension::ADVANCED_PROFILE | source_extension::ADVANCED_GUARDED_PROFILE
+    )
+}
 pub type Error = Box<dyn std::error::Error>;
 fn invalid(message: impl Into<String>) -> Error {
     std::io::Error::new(std::io::ErrorKind::InvalidData, message.into()).into()

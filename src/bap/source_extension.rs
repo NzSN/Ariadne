@@ -11,8 +11,12 @@ use std::sync::mpsc;
 use std::time::{Duration, Instant};
 
 pub(crate) const PROFILE: &str = "bap-bit-provenance-v9";
+pub(crate) const ADVANCED_PROFILE: &str = "bap-bit-provenance-v10";
+pub(crate) const ADVANCED_GUARDED_PROFILE: &str = "bap-bit-provenance-v11";
 const MAX_RESPONSE: usize = 4096;
 const LOCK: &[u8] = include_bytes!("../../native/bap/source-coverage/runtime.lock.json");
+const ADVANCED_LOCK: &[u8] =
+    include_bytes!("../../native/bap/source-coverage/advanced.runtime.lock.json");
 
 fn file_hash(path: &Path, maximum: u64) -> Result<String, Error> {
     let mut file = std::fs::File::open(path)?;
@@ -53,9 +57,30 @@ pub(crate) struct SourceExtension {
 }
 
 impl SourceExtension {
+    #[cfg(test)]
     pub(crate) fn load(directory: &Path) -> Result<Self, Error> {
-        let lock: Lock = serde_json::from_value(crate::reports::strict_json(LOCK)?)?;
-        if lock.schema != "ariadne.bap-source-flags-lock/v1" {
+        Self::load_with_mode(directory, super::SourceExtensionMode::Basic)
+    }
+    pub(crate) fn load_with_mode(
+        directory: &Path,
+        mode: super::SourceExtensionMode,
+    ) -> Result<Self, Error> {
+        let advanced = mode == super::SourceExtensionMode::Advanced;
+        if mode == super::SourceExtensionMode::Invalid {
+            return Err(invalid("invalid source extension mode"));
+        }
+        let lock: Lock = serde_json::from_value(crate::reports::strict_json(if advanced {
+            ADVANCED_LOCK
+        } else {
+            LOCK
+        })?)?;
+        if lock.schema
+            != if advanced {
+                "ariadne.bap-source-advanced-lock/v1"
+            } else {
+                "ariadne.bap-source-flags-lock/v1"
+            }
+        {
             return Err(invalid("source extension dependency lock schema"));
         }
         let manifest_path = directory.join("manifest.json");
@@ -66,9 +91,17 @@ impl SourceExtension {
             ));
         }
         let manifest = crate::reports::strict_json(&std::fs::read(manifest_path)?)?;
-        if manifest["schema"] != "ariadne.bap-source-flags-build/v1"
-            || manifest["profile"] != PROFILE
-            || manifest["runtime_role"] != "explicit-opt-in-four-flag-preparation"
+        let version_matches = if advanced {
+            manifest["schema"] == "ariadne.bap-source-advanced-build/v1"
+                && manifest["profiles"]
+                    == serde_json::json!([ADVANCED_PROFILE, ADVANCED_GUARDED_PROFILE])
+                && manifest["runtime_role"] == "advanced-source-flags"
+        } else {
+            manifest["schema"] == "ariadne.bap-source-flags-build/v1"
+                && manifest["profile"] == PROFILE
+                && manifest["runtime_role"] == "explicit-opt-in-four-flag-preparation"
+        };
+        if !version_matches
             || manifest["executable"] != "flag-lift"
             || manifest["executable_sha256"] != lock.executable_sha256
             || manifest["max_response_bytes"] != MAX_RESPONSE
@@ -94,8 +127,28 @@ impl SourceExtension {
                 include_bytes!("../../native/bap/source-coverage/flags.patch").as_slice(),
             ),
         ] {
+            if advanced && name == "flag_lift.ml" {
+                continue;
+            }
             if manifest["binding"]["sources"][name] != crate::reports::sha256(source) {
                 return Err(invalid("source extension source/patch binding differs"));
+            }
+        }
+        if advanced {
+            for (name, source) in [
+                (
+                    "advanced_build.py",
+                    include_bytes!("../../native/bap/source-coverage/advanced_build.py").as_slice(),
+                ),
+                (
+                    "advanced_flag_lift.ml",
+                    include_bytes!("../../native/bap/source-coverage/advanced_flag_lift.ml")
+                        .as_slice(),
+                ),
+            ] {
+                if manifest["binding"]["sources"][name] != crate::reports::sha256(source) {
+                    return Err(invalid("advanced source extension source binding differs"));
+                }
             }
         }
         if manifest["binding"]["sdk_lock_sha256"]

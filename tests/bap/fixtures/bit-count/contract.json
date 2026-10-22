@@ -1,0 +1,150 @@
+{
+  "schema": "ariadne.bap-bit-count-cases/v1",
+  "scope": "POPCNT/LZCNT/TZCNT numeric and defined-flag expectations for finite long-mode register/memory forms; no full ISA claim",
+  "cases": [
+    {
+      "name": "popcnt-16-register",
+      "operation": "popcnt",
+      "width": 16,
+      "source": "register",
+      "assembly": "popcnt ax, bx",
+      "bytes": "66f30fb8c3"
+    },
+    {
+      "name": "popcnt-16-memory",
+      "operation": "popcnt",
+      "width": 16,
+      "source": "memory",
+      "assembly": "popcnt ax, WORD PTR [rbx]",
+      "bytes": "66f30fb803"
+    },
+    {
+      "name": "popcnt-32-register",
+      "operation": "popcnt",
+      "width": 32,
+      "source": "register",
+      "assembly": "popcnt eax, ebx",
+      "bytes": "f30fb8c3"
+    },
+    {
+      "name": "popcnt-32-memory",
+      "operation": "popcnt",
+      "width": 32,
+      "source": "memory",
+      "assembly": "popcnt eax, DWORD PTR [rbx]",
+      "bytes": "f30fb803"
+    },
+    {
+      "name": "popcnt-64-register",
+      "operation": "popcnt",
+      "width": 64,
+      "source": "register",
+      "assembly": "popcnt rax, rbx",
+      "bytes": "f3480fb8c3"
+    },
+    {
+      "name": "popcnt-64-memory",
+      "operation": "popcnt",
+      "width": 64,
+      "source": "memory",
+      "assembly": "popcnt rax, QWORD PTR [rbx]",
+      "bytes": "f3480fb803"
+    },
+    {
+      "name": "lzcnt-16-register",
+      "operation": "lzcnt",
+      "width": 16,
+      "source": "register",
+      "assembly": "lzcnt ax, bx",
+      "bytes": "66f30fbdc3"
+    },
+    {
+      "name": "lzcnt-16-memory",
+      "operation": "lzcnt",
+      "width": 16,
+      "source": "memory",
+      "assembly": "lzcnt ax, WORD PTR [rbx]",
+      "bytes": "66f30fbd03"
+    },
+    {
+      "name": "lzcnt-32-register",
+      "operation": "lzcnt",
+      "width": 32,
+      "source": "register",
+      "assembly": "lzcnt eax, ebx",
+      "bytes": "f30fbdc3"
+    },
+    {
+      "name": "lzcnt-32-memory",
+      "operation": "lzcnt",
+      "width": 32,
+      "source": "memory",
+      "assembly": "lzcnt eax, DWORD PTR [rbx]",
+      "bytes": "f30fbd03"
+    },
+    {
+      "name": "lzcnt-64-register",
+      "operation": "lzcnt",
+      "width": 64,
+      "source": "register",
+      "assembly": "lzcnt rax, rbx",
+      "bytes": "f3480fbdc3"
+    },
+    {
+      "name": "lzcnt-64-memory",
+      "operation": "lzcnt",
+      "width": 64,
+      "source": "memory",
+      "assembly": "lzcnt rax, QWORD PTR [rbx]",
+      "bytes": "f3480fbd03"
+    },
+    {
+      "name": "tzcnt-16-register",
+      "operation": "tzcnt",
+      "width": 16,
+      "source": "register",
+      "assembly": "tzcnt ax, bx",
+      "bytes": "66f30fbcc3"
+    },
+    {
+      "name": "tzcnt-16-memory",
+      "operation": "tzcnt",
+      "width": 16,
+      "source": "memory",
+      "assembly": "tzcnt ax, WORD PTR [rbx]",
+      "bytes": "66f30fbc03"
+    },
+    {
+      "name": "tzcnt-32-register",
+      "operation": "tzcnt",
+      "width": 32,
+      "source": "register",
+      "assembly": "tzcnt eax, ebx",
+      "bytes": "f30fbcc3"
+    },
+    {
+      "name": "tzcnt-32-memory",
+      "operation": "tzcnt",
+      "width": 32,
+      "source": "memory",
+      "assembly": "tzcnt eax, DWORD PTR [rbx]",
+      "bytes": "f30fbc03"
+    },
+    {
+      "name": "tzcnt-64-register",
+      "operation": "tzcnt",
+      "width": 64,
+      "source": "register",
+      "assembly": "tzcnt rax, rbx",
+      "bytes": "f3480fbcc3"
+    },
+    {
+      "name": "tzcnt-64-memory",
+      "operation": "tzcnt",
+      "width": 64,
+      "source": "memory",
+      "assembly": "tzcnt rax, QWORD PTR [rbx]",
+      "bytes": "f3480fbc03"
+    }
+  ]
+}

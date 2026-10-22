@@ -85,8 +85,9 @@ general indirect-target enumeration and historical execution reconstruction
 remain outside this delivered contract. The [finite target resolver](indirect-target-resolution.md)
 implements opt-in pointer-slot/table work and records its separate named-corpus
 qualification, new capture profile and compact completion encoding. Prefix/system,
-SIMD beyond the finite XMM/YMM extension, x87 and loop semantics retain
-explicit unsupported outcomes. External Electron acceptance requires its exact
+SIMD beyond the finite XMM/YMM extension, general x87 and unreviewed loop
+semantics retain explicit unsupported outcomes. The advanced producer below
+adds a finite FP-control namespace and separately versioned analysis integration. External Electron acceptance requires its exact
 capture bytes. The selected replacement acceptance excludes historical
 real-Linux coverage and its six output hashes; their unexercised/failed records
 remain historical. BAP timing is unlimited, while investigation contracts keep
@@ -258,6 +259,104 @@ target resolution and memory refinement are explicitly refused, including
 zero-work requests and their saved/native replay boundaries, until their
 operation-dependent proofs have separate qualification. This four-operation
 extension does not establish general AMD64 coverage.
+
+#### Pinned form inventory and advanced producer
+
+**Stopped checkpoint, 2026-10-22.** The user stopped implementation and requested
+publication of the partial source. The [checkpoint](../../CHECKPOINTS.md#2026-10-22--amd64-items-13-stopped-at-user-request)
+records the failed native integration tests and unexercised compatibility gates.
+The advanced versions below describe saved implementation, not general
+qualification. Mandatory-count guard/native replay wiring is unfinished, and
+REP production admission remains explicitly refused.
+
+The [inventory extractor](../../tools/amd64_inventory.py) and its
+[lock](../../tests/bap/fixtures/amd64-semantics/inventory.lock.json) enumerate
+10,994 encoding templates from pinned Intel XED commit
+`0bcb6237345c5066726dcc08b3d87928df3b5b26`: 10,569 have a long-mode candidate
+and 425 are excluded by their mode constraints. The records retain raw encoding
+patterns, operand forms, prefixes, extension/ISA sets, aliases and source
+locations. These are symbolic templates, not all concrete byte strings and not
+an assertion that every candidate is legal on every AMD processor. The
+[AMD manual extractor](../../tools/amd64_manual_inventory.py) separately indexes
+instruction sections and encoding tables; unmatched names, merged cells and
+unparsed lines remain explicit. Name agreement with XED does not prove matching
+encoding legality. S1 remains open until those gaps and vendor differences are
+reconciled.
+
+```sh
+python3 tools/amd64_inventory.py fetch
+python3 tools/amd64_inventory.py generate --output target/new-amd64-inventory
+python3 tools/amd64_inventory.py check target/new-amd64-inventory/inventory.json
+```
+
+The separately pinned [advanced builder](../../native/bap/source-coverage/advanced_build.py)
+and [runtime lock](../../native/bap/source-coverage/advanced.runtime.lock.json)
+retain the four source-built flag forms while opening a separately versioned
+analysis path. Select `Config::with_advanced_source_extension`, or set both
+`ARIADNE_BAP_SOURCE_EXTENSION` and `ARIADNE_BAP_SOURCE_EXTENSION_MODE=advanced`.
+An absent directory, unknown mode, Basic bundle in Advanced mode, or changed
+artifact is rejected. The default packaged profile and Basic v9 interpretation
+remain separate.
+
+| Product | Advanced version and binding |
+| --- | --- |
+| Plain/guarded producer | `bap-bit-provenance-v10` / `bap-bit-provenance-v11`; exact combined runtime identity |
+| Guard proof | Report/policy v3; `captured-guarded-input/v3` |
+| Captured indirect target | Report schema v4; rooted policy v2 / local policy v3; `captured-indirect-targets/v2` |
+| Guard/target composition | Report v4; `captured-guarded-targets/v4` |
+| Memory refinement | Transfer receipt and assessment v2, bound to the advanced producer |
+
+The native checker replays the selected profile's typed BIL and proof premises.
+A producer-version string alone cannot authorize a saved report. Basic v9 keeps
+its refusal of guarded, target and refinement modes. Explicit alignment
+hypotheses retain their separate contract and are not enabled by selecting this
+producer.
+
+The new projection admits canonical `MXCSR:32` and `FPU_CONTROL:16` variables,
+with possible dependencies/writes in `state:other`; those partial state updates
+never kill all aggregate origins. It admits only the reviewed canonical 2–9 byte
+NOP encodings as empty lifts, after exact BAP/LLVM byte and length agreement.
+For data-only BIL, path merging unions possible origins under a 262,144-step
+work bound, allowing the observed PSHUFB lift without erasing alternatives.
+Control-bearing paths keep their separate limits. These changes do not admit
+arbitrary x87, system, mask, ZMM or extended-register semantics.
+
+The [bit-count oracle](../../tools/check_bap_bit_count_oracle.py) checks actual
+BAP BIL against independent integer equations for eighteen POPCNT/LZCNT/TZCNT
+forms: 16/32/64-bit register and memory operands. It checks numeric results,
+defined flags, partial/zero-extended destinations and unaffected state; undefined
+flags remain outside the numeric comparison. Its passing 4,020 comparisons do
+not establish other operand/prefix forms or full ISA correctness.
+
+The [repeated-string oracle](../../tools/check_bap_repeated_string_oracle.py)
+compares the exact `F3 A4`, `F3 AA` and `F3 A6` BIL with sequential byte-copy,
+byte-store and repeat-while-equal byte-comparison equations. Its 720 finite
+comparisons include zero count, both directions, early mismatch, overlapping
+buffers and pointer wrap, checking complete registers, flags and memory.
+Hardware exception and partial-fault behavior are separate from this concrete
+BIL comparison. Production loop admission also requires conservative projection
+and every downstream consumer to handle loop writes.
+
+```sh
+python3 native/bap/source-coverage/advanced_build.py --output target/new-source-advanced
+python3 native/bap-core/build.py --output target/new-core-advanced
+ARIADNE_BAP_ADVANCED_SOURCE_EXTENSION=target/new-source-advanced/runtime \
+ARIADNE_BAP_CORE_DIR=target/new-core-advanced \
+  cargo test --offline --locked --lib source_extension_advanced \
+  -- --ignored --test-threads=1
+python3 tools/check_bap_bit_count_oracle.py --output target/new-bit-count/report.json
+python3 tools/check_bap_repeated_string_oracle.py --output target/new-repeated-string/report.json
+```
+
+Two independent advanced producer builds reproduce their executable and
+manifest. The [advanced integration tests](../../tests/input/source_extension_advanced.rs)
+exercise actual source-produced flags in guarded stack arithmetic, captured
+jump tables, call/alternate-root uncertainty and memory-writer analysis,
+including native/reference equality and saved-proof tampering. Current results
+and remaining stage exits are recorded in the
+[execution plan](../../.agents/plans/amd64-operation-coverage.md). This finite
+integration does not close full producer, architecture, real-capture, timing or
+release qualification.
 
 The [survey catalogue](../../tests/bap/fixtures/amd64-semantics/catalogue.json)
 currently defines 49 family categories and 171 representative encodings, with

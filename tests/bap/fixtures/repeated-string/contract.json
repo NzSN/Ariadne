@@ -1,0 +1,9 @@
+{
+  "schema": "ariadne.bap-repeated-string-cases/v1",
+  "scope": "Concrete byte-string REP MOVSB/STOSB and REPE CMPSB numeric, flags and memory checks; finite long-mode forms only",
+  "cases": [
+    {"name": "rep-movsb", "operation": "movsb", "bytes": "f3a4"},
+    {"name": "rep-stosb", "operation": "stosb", "bytes": "f3aa"},
+    {"name": "repe-cmpsb", "operation": "cmpsb", "bytes": "f3a6"}
+  ]
+}

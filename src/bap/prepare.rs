@@ -110,7 +110,13 @@ impl Backend {
             helper_sha256: self.helper_hash.clone(),
             runtime_sha256: self.runtime_hash.clone(),
             decoder_sha256: self.decoder_hash.clone(),
-            projection: super::guard_admission::PRODUCER_PROFILE.into(),
+            projection:
+                if self.config.source_extension_mode == super::SourceExtensionMode::Advanced {
+                    super::source_extension::ADVANCED_GUARDED_PROFILE
+                } else {
+                    super::guard_admission::PRODUCER_PROFILE
+                }
+                .into(),
         }
     }
     /// Apply only a selection replayed over the frozen candidate graph.
@@ -138,7 +144,14 @@ impl Backend {
             )?;
             site.instruction = projection.instruction;
             site.evidence.quality = EffectQuality::ExternalLifted;
-            site.evidence.rule = Some(super::guard_admission::PRODUCER_PROFILE.into());
+            site.evidence.rule = Some(
+                if semantic.projection == super::source_extension::ADVANCED_GUARDED_PROFILE {
+                    super::source_extension::ADVANCED_GUARDED_PROFILE
+                } else {
+                    super::guard_admission::PRODUCER_PROFILE
+                }
+                .into(),
+            );
             let semantic = site.evidence.semantic.as_mut().expect("checked semantic");
             semantic.status = "projected".into();
             semantic.memory_accesses = projection.memory_accesses;
@@ -223,11 +236,17 @@ impl Backend {
     }
     pub fn new(config: Config, decoder: &Path) -> Result<Self, Error> {
         let start = Instant::now();
+        config.validate_source_mode()?;
         let packaged_runtime_hash = config.validate_runtime()?;
         let source_extension = config
             .source_extension
             .as_deref()
-            .map(super::source_extension::SourceExtension::load)
+            .map(|directory| {
+                super::source_extension::SourceExtension::load_with_mode(
+                    directory,
+                    config.source_extension_mode,
+                )
+            })
             .transpose()?;
         let runtime_hash = source_extension.as_ref().map_or_else(
             || packaged_runtime_hash.clone(),
@@ -290,6 +309,7 @@ impl Backend {
         target: DecoderTarget,
     ) -> Result<PreparedBatch, Error> {
         if self.source_extension.is_some()
+            && self.config.source_extension_mode != super::SourceExtensionMode::Advanced
             && (self.retain_guards || self.retain_targets || self.retain_refinement)
         {
             return Err(invalid(
@@ -322,9 +342,17 @@ impl Backend {
         }
         self.metrics.reference_decode += start.elapsed();
         let profile = if self.retain_guards {
-            super::guard_admission::PRODUCER_PROFILE
+            if self.config.source_extension_mode == super::SourceExtensionMode::Advanced {
+                super::source_extension::ADVANCED_GUARDED_PROFILE
+            } else {
+                super::guard_admission::PRODUCER_PROFILE
+            }
         } else if self.source_extension.is_some() {
-            super::source_extension::PROFILE
+            if self.config.source_extension_mode == super::SourceExtensionMode::Advanced {
+                super::source_extension::ADVANCED_PROFILE
+            } else {
+                super::source_extension::PROFILE
+            }
         } else {
             PROJECTION
         };
@@ -600,12 +628,13 @@ impl Backend {
                     })
                     .collect();
                 let destination = crate::bap::admission::decoded_destination(&site.evidence);
-                match crate::bap::projection::project_with_destination(
+                match crate::bap::projection::project_with_destination_profile(
                     &lift.bil,
                     opcode,
                     &site.evidence.bytes,
                     va,
                     destination,
+                    profile,
                 ) {
                     Ok(projection) => {
                         let actual: Vec<u64> =
@@ -666,8 +695,12 @@ impl Backend {
                                 );
                             }
                             if self.retain_refinement {
-                                let receipt =
-                                    super::refinement::extract(&lift.bil, va, lift.bytes.clone())?;
+                                let receipt = super::refinement::extract_with_profile(
+                                    &lift.bil,
+                                    va,
+                                    lift.bytes.clone(),
+                                    profile,
+                                )?;
                                 self.refinement_bytes = self
                                     .refinement_bytes
                                     .checked_add(receipt.ast.len())
@@ -685,10 +718,11 @@ impl Backend {
                         }
                         semantic.gaps.push(e.to_string());
                         if kind == InstructionKind::Ordinary
-                            && crate::bap::admission::ordinary_unknown(
+                            && crate::bap::admission::ordinary_unknown_with_profile(
                                 &lift.bil,
                                 &site.evidence.bytes,
                                 &e,
+                                profile,
                             )
                         {
                             semantic.status = "opaque-ordinary".into();

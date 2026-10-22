@@ -1,4 +1,6 @@
 //! Captured coordinator controls for the independent C0 composition contract.
+#[path = "source_extension_advanced.rs"]
+mod source_extension_advanced;
 use super::*;
 use crate::bap::ast::Stmt;
 use crate::effects::{PreparationIdentity, SemanticEvidence};

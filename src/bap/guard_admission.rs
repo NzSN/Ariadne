@@ -10,14 +10,19 @@ use std::time::Instant;
 
 pub const LEGACY_PROFILE: &str = "bap-guard-admission-v1";
 pub const PROFILE: &str = "bap-guard-admission-v2";
+pub const ADVANCED_PROFILE: &str = "bap-guard-admission-v3";
 pub const LEGACY_PRODUCER_PROFILE: &str = "bap-bit-provenance-v7";
 pub const PRODUCER_PROFILE: &str = "bap-bit-provenance-v8";
+pub const ADVANCED_PRODUCER_PROFILE: &str = "bap-bit-provenance-v11";
 pub const ABI_POLICY: &str = "windows-amd64-normal-call-entry/v1";
 pub const LEGACY_MODEL_VERSION: &str = "ariadne.predicate-admission/v1";
 pub const MODEL_VERSION: &str = "ariadne.predicate-admission/v2";
 pub const TOP: u16 = u16::MAX;
 const LEGACY_SCHEMA: &str = "ariadne.guard-admission/v1";
 const SCHEMA: &str = "ariadne.guard-admission/v2";
+const ADVANCED_SCHEMA: &str = "ariadne.guard-admission/v3";
+pub const PRE_ADVANCED_CHECKER: &str =
+    "252ef410b03bf3ec7b97efd5bcfbbd42591d66aabdb7680aa118e8e736cb9184";
 const PENDING_IDENTITY: &str = "pending-legacy128-movaps-rsp-identity/v1";
 const PENDING_LOAD_IDENTITY: &str = "pending-legacy128-movaps-load-rsp-identity/v1";
 const TYPED_TRANSFER: &str = "typed-bil-rsp-residue/v1";
@@ -30,6 +35,16 @@ pub fn checker_identity() -> String {
     let guard = crate::reports::sha256(include_bytes!("guard_admission.rs"));
     let terminal = crate::reports::sha256(include_bytes!("terminal_control.rs"));
     crate::reports::sha256(format!("ariadne.guard-checker/v2\n{guard}\n{terminal}\n").as_bytes())
+}
+pub fn advanced_checker_identity() -> String {
+    crate::reports::sha256(
+        format!(
+            "ariadne.guard-checker/v3\n{}\n{}\n",
+            crate::reports::sha256(include_bytes!("guard_admission.rs")),
+            crate::reports::sha256(include_bytes!("terminal_control.rs"))
+        )
+        .as_bytes(),
+    )
 }
 pub fn legacy_checker_identity() -> String {
     crate::reports::sha256(include_bytes!(
@@ -47,6 +62,30 @@ fn legacy_input(input: &GuardInput) -> bool {
 }
 pub fn is_legacy(report: &Report) -> bool {
     report.schema == LEGACY_SCHEMA && report.profile == LEGACY_PROFILE
+}
+fn advanced_input(input: &GuardInput) -> bool {
+    input.policy == ADVANCED_PROFILE
+}
+pub fn is_advanced(report: &Report) -> bool {
+    report.schema == ADVANCED_SCHEMA && report.profile == ADVANCED_PROFILE
+}
+fn input_schema(input: &GuardInput) -> &'static str {
+    if legacy_input(input) {
+        LEGACY_SCHEMA
+    } else if advanced_input(input) {
+        ADVANCED_SCHEMA
+    } else {
+        SCHEMA
+    }
+}
+fn input_checker(input: &GuardInput) -> String {
+    if legacy_input(input) {
+        legacy_checker_identity()
+    } else if advanced_input(input) {
+        advanced_checker_identity()
+    } else {
+        checker_identity()
+    }
 }
 pub fn normal_flow_scope(report: &Report) -> Option<&str> {
     report.input.normal_flow.as_ref().map(|e| e.scope.as_str())
@@ -674,6 +713,7 @@ fn transfer_statements(bil: &[Stmt], env: &mut BTreeMap<String, u16>) {
 fn derive_transfer(
     site: &CandidateSite,
     pending: Option<&Recognized>,
+    producer: &str,
 ) -> Result<TransferReceipt, Error> {
     let b = bytes(&site.bytes_hex)?;
     let (rule, relation) = if let Some(pending) = pending {
@@ -684,14 +724,11 @@ fn derive_transfer(
         (OPAQUE_TRANSFER, vec![TOP; 16])
     } else {
         let bil = statements(&site.ast)?;
-        if super::admission::admit(
+        if super::admission::admit_with_profile(
             &bil,
-            if b == [0x90] {
-                "NOOP"
-            } else {
-                "typed-transfer"
-            },
+            super::admission::canonical_noop_opcode(&b, producer).unwrap_or("typed-transfer"),
             &b,
+            producer,
         )
         .is_err()
         {
@@ -742,11 +779,16 @@ fn normalized(input: &GuardInput) -> Result<GuardInput, Error> {
                 && input.model_sha256 == legacy_model_identity()
                 && input.producer.projection == LEGACY_PRODUCER_PROFILE
         } else {
-            input.policy == PROFILE
+            [PROFILE, ADVANCED_PROFILE].contains(&input.policy.as_str())
                 && input.normal_flow.is_some()
                 && input.model_version == MODEL_VERSION
                 && input.model_sha256 == model_identity()
-                && input.producer.projection == PRODUCER_PROFILE
+                && input.producer.projection
+                    == if advanced_input(input) {
+                        ADVANCED_PRODUCER_PROFILE
+                    } else {
+                        PRODUCER_PROFILE
+                    }
         })
     {
         return Err(invalid("guard input profile, snapshot or activation"));
@@ -963,16 +1005,18 @@ fn coverage_closed(input: &GuardInput) -> Result<bool, Error> {
         }
         let bil = statements(&site.ast)?;
         let b = bytes(&site.bytes_hex)?;
-        if let Err(error) = super::admission::admit(
+        if let Err(error) = super::admission::admit_with_profile(
             &bil,
-            if b == [0x90] {
-                "NOOP"
-            } else {
-                "typed-transfer"
-            },
+            super::admission::canonical_noop_opcode(&b, &input.producer.projection)
+                .unwrap_or("typed-transfer"),
             &b,
-        ) && !super::admission::ordinary_unknown(&bil, &b, &error)
-        {
+            &input.producer.projection,
+        ) && !super::admission::ordinary_unknown_with_profile(
+            &bil,
+            &b,
+            &error,
+            &input.producer.projection,
+        ) {
             // Unreviewed source control cannot borrow an ordinary continuation
             // merely because caller metadata describes one. Ordinary data-only
             // opacity has its separate conservative continuation contract.
@@ -986,6 +1030,8 @@ pub fn intent_id(input: &GuardInput) -> Result<String, Error> {
     let encoded = serde_json::to_vec(&(
         if legacy_input(&i) {
             "ariadne-guard-intent/v1"
+        } else if advanced_input(&i) {
+            "ariadne-guard-intent/v3"
         } else {
             "ariadne-guard-intent/v2"
         },
@@ -1015,6 +1061,8 @@ pub fn graph_digest(input: &GuardInput) -> Result<String, Error> {
     let encoded = serde_json::to_vec(&(
         if legacy_input(&i) {
             "ariadne-guard-candidate/v1"
+        } else if advanced_input(&i) {
+            "ariadne-guard-candidate/v3"
         } else {
             "ariadne-guard-candidate/v2"
         },
@@ -1072,6 +1120,8 @@ fn receipt_prefix(report: &Report) -> Result<Sha256, Error> {
     let prefix = serde_json::to_vec(&(
         if is_legacy(report) {
             "ariadne-guard-receipt/v1"
+        } else if is_advanced(report) {
+            "ariadne-guard-receipt/v3"
         } else {
             "ariadne-guard-receipt/v2"
         },
@@ -1145,18 +1195,9 @@ pub fn certify_guards(input: &GuardInput) -> Result<Report, Error> {
         return Err(invalid("guard input evidence byte limit"));
     }
     let mut report = Report {
-        schema: if legacy_input(&input) {
-            LEGACY_SCHEMA
-        } else {
-            SCHEMA
-        }
-        .into(),
+        schema: input_schema(&input).into(),
         profile: input.policy.clone(),
-        checker_sha256: if legacy_input(&input) {
-            legacy_checker_identity()
-        } else {
-            checker_identity()
-        },
+        checker_sha256: input_checker(&input),
         intent_id: intent_id(&input)?,
         candidate_graph_sha256: graph_digest(&input)?,
         input,
@@ -1176,9 +1217,11 @@ pub fn certify_guards(input: &GuardInput) -> Result<Report, Error> {
             return Err(invalid("guard deadline while deriving source transfers"));
         }
         let guard = recognize(site, legacy_input(&report.input))?;
-        report
-            .transfers
-            .push(derive_transfer(site, guard.as_ref())?);
+        report.transfers.push(derive_transfer(
+            site,
+            guard.as_ref(),
+            &report.input.producer.projection,
+        )?);
         if let Some(guard) = guard {
             recognized.insert(site.site.clone(), guard);
         }
@@ -1292,19 +1335,10 @@ pub fn certify_guards(input: &GuardInput) -> Result<Report, Error> {
 /// overapproximation. In particular, candidate-only predecessors are checked.
 pub fn replay_report(input: &GuardInput, report: &Report) -> Result<(), Error> {
     let input = normalized(input)?;
-    if report.schema
-        != if legacy_input(&input) {
-            LEGACY_SCHEMA
-        } else {
-            SCHEMA
-        }
+    if report.schema != input_schema(&input)
         || report.profile != input.policy
-        || report.checker_sha256
-            != if legacy_input(&input) {
-                legacy_checker_identity()
-            } else {
-                checker_identity()
-            }
+        || (report.checker_sha256 != input_checker(&input)
+            && !(input.policy == PROFILE && report.checker_sha256 == PRE_ADVANCED_CHECKER))
         || report.input != input
         || report.intent_id != intent_id(&input)?
         || report.candidate_graph_sha256 != graph_digest(&input)?
@@ -1347,7 +1381,11 @@ pub fn replay_report(input: &GuardInput, report: &Report) -> Result<(), Error> {
     let mut transfers = Vec::new();
     for site in &input.sites {
         let guard = recognize(site, legacy_input(&input))?;
-        transfers.push(derive_transfer(site, guard.as_ref())?);
+        transfers.push(derive_transfer(
+            site,
+            guard.as_ref(),
+            &input.producer.projection,
+        )?);
         if let Some(guard) = guard {
             recognized.insert(site.site.clone(), guard);
         }
@@ -1452,6 +1490,8 @@ pub fn analysis_id(report: &Report) -> Result<String, Error> {
     Ok(crate::reports::sha256(&serde_json::to_vec(&(
         if is_legacy(report) {
             "ariadne-guard-analysis/v1"
+        } else if is_advanced(report) {
+            "ariadne-guard-analysis/v3"
         } else {
             "ariadne-guard-analysis/v2"
         },

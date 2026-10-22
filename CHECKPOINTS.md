@@ -20,6 +20,114 @@ For the wider context, see the optional [documentation map](docs/documentation-m
 Current validation follows the [executable test matrix](tests/README.md). Dated run
 results below are historical; their Git links do not establish a current pass.
 
+## 2026-10-22 — AMD64 items 1–3 stopped at user request
+
+**Status: stopped, partial implementation; not accepted as complete.** The user
+requested stopping current work, recording this boundary, then committing and
+pushing the snapshot. All implementation and native-test workers stopped.
+This checkpoint supersedes any inference that the active
+[operation plan](.agents/plans/amd64-operation-coverage.md) has completed items
+1–3. Windows v3/APX was outside this continuation and remains open.
+The source baseline for this continuation was
+`01a98a075c3bbf2ed1020d3bbf71e5876502b281`.
+
+### Saved implementation
+
+1. **Instruction inventory.** Pinned Intel XED extraction reproduces 10,994
+   symbolic encoding templates: 10,569 long-mode candidates and 425 excluded
+   forms. Nine inventory controls pass. AMD Volumes 3/4/5 have reproducible
+   source-index and table extraction with thirteen controls passing: 1,063
+   outline entries and 4,118 parsed rows in total. These counts are not an
+   exhaustive legal-form or supported-semantics denominator. The three volumes
+   retain respectively 159, 1,987 and 511 extraction gaps; strict no-gap checking
+   fails explicitly. Mode/prefix/feature references and name-only XED candidates
+   still need legality reconciliation, including unmatched RMPQUERY/RMPREAD
+   candidates. Vol3 matches its official source pin. Vol4/5 are pinned
+   AMD-authored archive copies; official-download byte identity is unverified.
+   See the [XED extractor](tools/amd64_inventory.py),
+   [manual extractor](tools/amd64_manual_inventory.py) and
+   [manual pins](tests/bap/fixtures/amd64-semantics/manual-inventory.lock.json).
+2. **Broader finite semantics.** Advanced profiles v10/v11 add canonical
+   `MXCSR:32` / `FPU_CONTROL:16` variables with weak `state:other` writes, exact
+   canonical NOP forms, data-only path joining with a 262,144-step work cap,
+   and the eighteen reviewed POPCNT/LZCNT/TZCNT register/memory forms.
+   Twelve focused pure tests, fourteen actual FP-control/NOP/PSHUFB forms and
+   eighteen count-effect forms passed before the stop. Independent fresh-BIL
+   numeric checks pass 4,020 count comparisons and 720 repeated-string
+   comparisons. **REP production admission was not implemented:** `While`
+   remains explicitly rejected. The REP oracle validates finite concrete BIL;
+   it does not establish projection, downstream-consumer or hardware-fault
+   support. Missing producer lifts, wider state, floating-point/vector,
+   system/exception and full prefix/loop semantics remain open.
+3. **Advanced producer integration.** A separate reproducible producer bundle
+   selects plain/guarded v10/v11 with guard report/policy v3, target report v4,
+   composition v4 and refinement receipt/assessment v2. Native profiles and
+   report consumers were updated; Basic v9 retains its refusal contract.
+   Two builds match the advanced manifest/executable lock. Focused Rust
+   compilation, native helper construction and thirty portable guard tests
+   passed (one ignored). The actual native integration matrix is only partial,
+   as detailed below. This producer is not generally qualified for advanced
+   use. See the [canonical design](docs/Ariadne/bap-analysis-core-design.md#pinned-form-inventory-and-advanced-producer)
+   and [integration tests](tests/input/source_extension_advanced.rs).
+
+### Failed and unexercised gates
+
+The completed main advanced native run had **five passing tests and one failing
+test**. Passing cases covered fourteen flag/guard cases, twenty-four memory
+refinement cases, six FP-control/NOP/PSHUFB guard cases, two alternate-root/CALL
+target cases, and one composed-wire control plus six rejected corruptions.
+These finite successes do not constitute a passing combined-analysis gate.
+
+The original rooted CLC relative32 table fixture used `CMP EAX,0; JA abort` and
+failed with `unbounded-control-index`. After changing the equivalent low-arm
+condition to `JNE`, its targeted rerun failed because `guard_roundtrip` indexed
+an empty guard vector in the first combined CLC case. That fixture edit is saved;
+the helper failure was not fixed and the test was not rerun after the stop.
+The strict expected target sets remain unchanged.
+
+Mandatory-count prefix admission has no completed guard/native replay wiring.
+REP fixed-point execution, zero-iteration origin preservation, conservative
+RCX/RSI/RDI/flag clobbers, and later-iteration memory-writer tests remain design
+work. The current target extractor skips `While`; this must not become an
+unchanged-register transfer when REP is eventually admitted. Memory refinement
+must retain an incomplete footprint rather than certify first-iteration accesses.
+
+Old-v9 and complete v7/v8 saved-profile compatibility runs were not started.
+The guard mutation selector requires review after the profile refactor; no new
+compiled mutation campaign, TLA+ qualification, full native generated replay,
+real-capture, timing or release gate completed. No TLA+ model was changed.
+The independent review was interrupted and provides no completed review verdict.
+
+### Validation and resume boundary
+
+Before the stop, core-only tests passed 64 with 22 ignored and no activated
+external normal dependencies; 251 general Python controls passed. Publication
+checks on the stopped snapshot pass 422 default Rust tests (142 ignored), 46 BAP
+Python controls, formatting, Rust layout and documentation navigation.
+
+**Strict Clippy fails** on the stopped snapshot: the old `ordinary_unknown`
+wrapper is unused in non-test builds, and two new test assignments trigger
+`clippy::replace_box`. These failures are preserved for the next work session;
+no implementation or lint fixes were made after the stop. The successful default
+suite excludes the ignored native matrix whose failures are recorded above.
+Earlier passing native build/helper identities do not qualify later sibling edits.
+
+Resume only on a subsequent user instruction. First inspect the committed
+snapshot and failing integration test; complete the rooted/composed fixture and
+count replay wiring, then implement REP only with all consumer contracts.
+Rebuild the native helper after freezing sources, repair and run applicable
+mutation controls, exercise saved-profile compatibility and native matrices,
+and complete root checks. Reconcile the manual inventory gaps before closing S1;
+keep S2–S5 and the overall item-1/item-2 objectives open until their exits hold.
+
+Transient artifacts remain under ignored `target/`, including
+`bap-source-advanced-{a,b}/runtime`, `bap-core-advanced`,
+`amd64-inventory-repro-a`, `amd-manual-index-repro/volume{3,4,5}`,
+`bap-bit-count-oracle-a`, `bap-repeated-string-oracle-a`, and
+`advanced-target-debug-01/target.json`. These local run products are disposable
+and are not repository evidence or portable prerequisites. The commit contains
+implementation, test inputs, executable validators, dependency pins and docs.
+
 ## 2026-10-22 — AMD64 operation coverage implementation begins
 
 The requested [operation coverage program](.agents/plans/amd64-operation-coverage.md)

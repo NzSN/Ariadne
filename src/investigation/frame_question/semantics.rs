@@ -62,7 +62,20 @@ pub(crate) fn materialize(
             return Err(invalid("question semantic evidence byte cap"));
         }
         let bil: Vec<Stmt> = serde_json::from_str(ast)?;
-        let receipt = crate::bap::refinement::extract(&bil, site.va, site.bytes_hex.clone())?;
+        let receipt = if site
+            .projection
+            .as_deref()
+            .is_some_and(crate::bap::advanced_projection)
+        {
+            crate::bap::refinement::extract_with_profile(
+                &bil,
+                site.va,
+                site.bytes_hex.clone(),
+                site.projection.as_deref().unwrap(),
+            )?
+        } else {
+            crate::bap::refinement::extract(&bil, site.va, site.bytes_hex.clone())?
+        };
         receipt.validate(site)?;
         let bytes = (0..site.bytes_hex.len())
             .step_by(2)

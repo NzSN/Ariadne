@@ -317,6 +317,7 @@ pub fn explain_fault_address(
                     {
                         Some(1) => "ariadne.fault-address-explanation/v3",
                         Some(2) => "ariadne.fault-address-explanation/v4",
+                        Some(4) => "ariadne.fault-address-explanation/v8",
                         _ => "ariadne.fault-address-explanation/v6",
                     }
                 }
@@ -333,6 +334,12 @@ pub fn explain_fault_address(
                         .is_some_and(crate::bap::guard_admission::is_legacy)
                     {
                         "ariadne.fault-address-explanation/v2"
+                    } else if bound
+                        .guard_admission
+                        .as_ref()
+                        .is_some_and(crate::bap::guard_admission::is_advanced)
+                    {
+                        "ariadne.fault-address-explanation/v7"
                     } else {
                         "ariadne.fault-address-explanation/v5"
                     }

@@ -2,8 +2,10 @@
 
 ## Context and follow-up
 
-**Status.** Active implementation program requested on 2026-10-22. Full coverage
-is the target, not an achieved result. Initial implementation proceeds on both
+**Status.** Stopped at the user's request on 2026-10-22, after partial work on
+instruction inventory, broader semantics and advanced producer integration. The
+[stopped checkpoint](../../CHECKPOINTS.md#2026-10-22--amd64-items-13-stopped-at-user-request)
+is the current resume boundary. Full coverage is the target, not an achieved result. Initial implementation proceeds on both
 machine-instruction semantics and Windows unwind operations. A representative
 family survey is not an exhaustive instruction-form inventory.
 
@@ -254,3 +256,18 @@ The final current-source Windows matrix still passes all 103 bounded-image cases
 these high-address and sparse-input tests are Rust-only. The final source also
 passes the selected compiled stack-slot mutation, 384 generated unwind cases,
 410 default Rust tests, 64 core-only tests and strict root checks.
+
+
+### User-requested stop: items 1–3
+
+2026-10-22: implementation and native campaigns stopped before completion.
+The [checkpoint](../../CHECKPOINTS.md#2026-10-22--amd64-items-13-stopped-at-user-request)
+records the exact source/test boundary and failures; resume only when requested.
+S1 now has reproducible pinned XED templates and AMD manual transcriptions with
+explicit unresolved extraction/legality gaps. S3/S4 have finite v10/v11
+FP-control, NOP, data-path-join and mandatory-count admission work. REP remains
+refused; its independent numeric oracle is not production admission. The
+separately pinned advanced producer and versioned guard/target/refinement
+integration are saved with a failing native matrix and incomplete count replay,
+compatibility and mutation gates. Earlier ledger statuses are historical stage
+exits; none of S1, broader S2–S5 or Q1 is closed by this stopped snapshot.

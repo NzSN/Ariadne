@@ -338,7 +338,7 @@ let vector_type name width =
       | Some n -> n>=0 && n<16 && string_of_int n=suffix
       | None -> false in
   bank "XMM" 128 || bank "YMM" 256
-let typed_var v =
+let typed_var advanced v =
   exact v ["name";"index";"virtual";"width";"type"];
   let name=string v "name" and index=signed(get v "index")
   and width=nonnegative(get v "width")
@@ -355,7 +355,8 @@ let typed_var v =
     let flag=List.mem name ["CF";"PF";"AF";"ZF";"SF";"OF";"DF"] in
     typed_require (index=0 &&
       ((gpr && ty=Bits 64) || (flag && ty=Bits 1) ||
-       (name="mem" && ty=Memory) || vector_type name width))
+       (name="mem" && ty=Memory) || vector_type name width ||
+       (advanced && ((name="MXCSR" && ty=Bits 32) || (name="FPU_CONTROL" && ty=Bits 16)))))
   end;ty
 let typed_integer text =
   let number,width=match String.split_on_char ':' text with
@@ -391,11 +392,11 @@ let typed_integer text =
       typed_require
         (Int64.compare parsed (Int64.neg(Int64.shift_left 1L (width-1)))>=0)
   end;Bits width
-let rec typed_expr allow_data env depth e =
+let rec typed_expr advanced allow_data env depth e =
   if depth>64 then raise Untyped;
   match string e "kind" with
   | "var" ->
-    let v=get e "var" in let ty=typed_var v in
+    let v=get e "var" in let ty=typed_var advanced v in
     if boolean(get v "virtual") then begin
       let bound=try M.find (key v) env with Not_found -> raise Untyped in
       ignore(equal_type ty bound);bound
@@ -407,61 +408,61 @@ let rec typed_expr allow_data env depth e =
     let width=nonnegative(get e "width") in
     typed_require ((List.mem width [8;16;32;64;128;256] ||
       (allow_data && width>=1 && width<=256)) &&
-      typed_expr allow_data env (depth+1) (get e "mem")=Memory &&
-      typed_expr allow_data env (depth+1) (get e "addr")=Bits 64);
+      typed_expr advanced allow_data env (depth+1) (get e "mem")=Memory &&
+      typed_expr advanced allow_data env (depth+1) (get e "addr")=Bits 64);
     Bits width
   | "store" ->
     let width=nonnegative(get e "width") in
     typed_require ((List.mem width [8;16;32;64;128;256] ||
       (allow_data && width>=1 && width<=256)) &&
-      typed_expr allow_data env (depth+1) (get e "mem")=Memory &&
-      typed_expr allow_data env (depth+1) (get e "addr")=Bits 64);
+      typed_expr advanced allow_data env (depth+1) (get e "mem")=Memory &&
+      typed_expr advanced allow_data env (depth+1) (get e "addr")=Bits 64);
     ignore(equal_type (Bits width)
-      (typed_expr allow_data env (depth+1) (get e "value")));Memory
+      (typed_expr advanced allow_data env (depth+1) (get e "value")));Memory
   | "binop" ->
     let op=signed(get e "op") in
     typed_require (op>=0 && (op<=18 || allow_data));
-    let left=scalar_type (typed_expr allow_data env (depth+1) (get e "lhs")) in
-    let right=scalar_type (typed_expr allow_data env (depth+1) (get e "rhs")) in
+    let left=scalar_type (typed_expr advanced allow_data env (depth+1) (get e "lhs")) in
+    let right=scalar_type (typed_expr advanced allow_data env (depth+1) (get e "rhs")) in
     let ty=if List.mem op [9;10;11] then left else equal_type left right in
     if op>18 then Unknown else if op<=5 then Bits 1 else ty
   | "unop" ->
     let op=signed(get e "op") in
     typed_require (op>=0 && (op<=1 || allow_data));
-    let ty=scalar_type (typed_expr allow_data env (depth+1) (get e "arg")) in
+    let ty=scalar_type (typed_expr advanced allow_data env (depth+1) (get e "arg")) in
     if op>1 then Unknown else ty
   | "cast" ->
     let op=signed(get e "op") and width=nonnegative(get e "width") in
     typed_require (op>=0 && (op<=3 || allow_data) && width>=1 && width<=256);
-    let source=scalar_type (typed_expr allow_data env (depth+1) (get e "arg")) in
+    let source=scalar_type (typed_expr advanced allow_data env (depth+1) (get e "arg")) in
     (match source with Bits n ->
        if op<=3 then typed_require
          (if op<2 then width<=n else width>=n)
      | _ -> ());Bits width
   | "extract" ->
     let hi=nonnegative(get e "hi") and lo=nonnegative(get e "lo") in
-    let source=scalar_type (typed_expr allow_data env (depth+1) (get e "arg")) in
+    let source=scalar_type (typed_expr advanced allow_data env (depth+1) (get e "arg")) in
     typed_require (lo<=hi && hi<256);
     (match source with Bits n -> typed_require (hi<n) | _ -> ());
     Bits (hi-lo+1)
   | "concat" ->
-    let left=scalar_type (typed_expr allow_data env (depth+1) (get e "lhs")) in
-    let right=scalar_type (typed_expr allow_data env (depth+1) (get e "rhs")) in
+    let left=scalar_type (typed_expr advanced allow_data env (depth+1) (get e "lhs")) in
+    let right=scalar_type (typed_expr advanced allow_data env (depth+1) (get e "rhs")) in
     (match left,right with
      | Bits a,Bits b when a+b<=256 -> Bits(a+b)
      | _ when allow_data -> Unknown
      | _ -> raise Untyped)
   | "ite" ->
-    let condition=scalar_type (typed_expr allow_data env (depth+1) (get e "condition")) in
+    let condition=scalar_type (typed_expr advanced allow_data env (depth+1) (get e "condition")) in
     typed_require (condition=Bits 1 || condition=Unknown);
-    equal_type (typed_expr allow_data env (depth+1) (get e "yes"))
-      (typed_expr allow_data env (depth+1) (get e "no"))
+    equal_type (typed_expr advanced allow_data env (depth+1) (get e "yes"))
+      (typed_expr advanced allow_data env (depth+1) (get e "no"))
   | "let" ->
     let v=get e "var" in
     typed_require (boolean(get v "virtual"));
-    let ty=typed_var v in
-    ignore(equal_type ty (typed_expr allow_data env (depth+1) (get e "value")));
-    typed_expr allow_data (M.add (key v) ty env) (depth+1) (get e "body")
+    let ty=typed_var advanced v in
+    ignore(equal_type ty (typed_expr advanced allow_data env (depth+1) (get e "value")));
+    typed_expr advanced allow_data (M.add (key v) ty env) (depth+1) (get e "body")
   | _ -> raise Untyped
 let rec has_unknown e =
   match string e "kind" with
@@ -475,41 +476,44 @@ let rec has_unknown e =
       has_unknown(get e "no")
   | "let" -> has_unknown(get e "value") || has_unknown(get e "body")
   | _ -> false
-let rec typed_statements allow_data env depth bil =
+let rec typed_statements advanced allow_data env depth bil =
   if depth>64 then raise Untyped;
   List.fold_left (fun env stmt ->
     match string stmt "kind" with
     | "move" ->
       let v=get stmt "var" in
-      let ty=typed_var v in
+      let ty=typed_var advanced v in
       typed_require (not (get v "virtual"=`Bool false &&
         string v "name"="RIP"));
       let value=get stmt "value" in
       (match ty with Bits width when width>1 ->
          typed_require (allow_data || not(has_unknown value)) | _ -> ());
-      let value_ty=typed_expr allow_data env (depth+1) value in
+      let value_ty=typed_expr advanced allow_data env (depth+1) value in
       ignore(equal_type ty value_ty);
       typed_require (allow_data || value_ty<>Unknown || ty=Bits 1);
       M.add (key v) ty env
     | "jump" ->
-      typed_require (typed_expr allow_data env (depth+1) (get stmt "target")=Bits 64);env
+      typed_require (typed_expr advanced allow_data env (depth+1) (get stmt "target")=Bits 64);env
     | "if" ->
-      let condition=typed_expr allow_data env (depth+1) (get stmt "condition") in
+      let condition=typed_expr advanced allow_data env (depth+1) (get stmt "condition") in
       typed_require (condition=Bits 1 || condition=Unknown);
-      let yes=typed_statements allow_data env (depth+1) (list(get stmt "yes")) in
-      let no=typed_statements allow_data env (depth+1) (list(get stmt "no")) in
+      let yes=typed_statements advanced allow_data env (depth+1) (list(get stmt "yes")) in
+      let no=typed_statements advanced allow_data env (depth+1) (list(get stmt "no")) in
       M.merge (fun _ left right ->
         match left,right with Some a,Some b when a=b -> Some a | _ -> None)
         yes no
     | _ -> raise Untyped
   ) env bil
-let typed_site_mode allow_data site =
+let canonical_noop advanced bytes =
+  bytes="90" || (advanced && List.mem bytes ["6690";"0f1f00";"0f1f4000";"0f1f440000";
+    "660f1f440000";"0f1f8000000000";"0f1f840000000000";"660f1f840000000000"])
+let typed_site_mode ?(advanced=false) allow_data site =
   try
     let bil=list(Yojson.Safe.from_string(string site "ast")) in
-    typed_require (bil<>[] || string site "bytes_hex"="90");
-    ignore(typed_statements allow_data M.empty 0 bil);true
+    typed_require (bil<>[] || canonical_noop advanced (string site "bytes_hex"));
+    ignore(typed_statements advanced allow_data M.empty 0 bil);true
   with Untyped | Invalid _ | Failure _ | Not_found -> false
-let typed_site site = typed_site_mode false site
+let typed_site ?(advanced=false) site = typed_site_mode ~advanced false site
 let rec expression depth env e =
   if depth>64 then top else
   match string e "kind" with
@@ -573,7 +577,7 @@ let guarded_prefix bytes =
         0x3e;0x64;0x65;0x67]
     | [] -> false in
   prefix bytes
-let opaque_ordinary_site source site =
+let opaque_ordinary_site ?(advanced=false) source site =
   let control=get site "control" in
   boolean(get site "opaque") &&
   string control "kind"="ordinary" &&
@@ -581,14 +585,14 @@ let opaque_ordinary_site source site =
   get source "quality"=`String "opaque" &&
   list(Yojson.Safe.from_string(string site "ast"))<>[] &&
   not(guarded_prefix(hex_bytes(string site "bytes_hex"))) &&
-  typed_site_mode true site &&
+  typed_site_mode ~advanced true site &&
   (let bil=list(Yojson.Safe.from_string(string site "ast")) in
    not(unreviewed_control true 0 bil))
-let relation site pending =
+let relation ?(advanced=false) site pending =
   if pending then List.init 16 (fun r -> 1 lsl r)
   else if boolean (get site "opaque") ||
       string (get site "control") "kind"="call" ||
-      not(typed_site site) then
+      not(typed_site ~advanced site) then
     List.init 16 (fun _ -> top)
   else
     let ast=try list (Yojson.Safe.from_string (string site "ast"))
@@ -617,12 +621,19 @@ let admit_current j snapshot =
   let i,capture_sites=Capture.admit
     (`Assoc ["normalized",normalized;"capture",capture]) snapshot in
   let report=get j "guard_admission" in
+  let advanced=string report "profile"="bap-guard-admission-v3" in
+  let guard_schema=if advanced then "ariadne.guard-admission/v3" else "ariadne.guard-admission/v2" in
+  let guard_policy=if advanced then "bap-guard-admission-v3" else "bap-guard-admission-v2" in
+  let producer_profile=if advanced then "bap-bit-provenance-v11" else "bap-bit-provenance-v8" in
+  let guard_checker=if advanced then Build_identity.advanced_guard_engine_sha256 else Build_identity.guard_engine_sha256 in
+  let domain name="ariadne-guard-"^name^(if advanced then "/v3" else "/v2") in
   exact report ["schema";"profile";"checker_sha256";"input";"intent_id";
     "candidate_graph_sha256";"transfers";"facts";"guards";"stop";
     "final_request_sha256"];
-  require (string report "schema"="ariadne.guard-admission/v2" &&
-    string report "profile"="bap-guard-admission-v2" &&
-    string report "checker_sha256"=Build_identity.guard_engine_sha256)
+  require (string report "schema"=guard_schema &&
+    string report "profile"=guard_policy &&
+    (string report "checker_sha256"=guard_checker ||
+      (not advanced && string report "checker_sha256"="252ef410b03bf3ec7b97efd5bcfbbd42591d66aabdb7680aa118e8e736cb9184")))
     "guard report profile/checker identity";
   require (contains (string capture "semantic_profile")
     (":" ^ string report "profile" ^ ":" ^
@@ -641,7 +652,7 @@ let admit_current j snapshot =
     "limits";"candidate_epoch";"closure_complete";"barriers";"sites";"normal_flow"];
   require (string input "snapshot"=snapshot &&
     get input "artifact_sha256"=get capture "artifact_sha256" &&
-    string input "policy"="bap-guard-admission-v2" &&
+    string input "policy"=guard_policy &&
     string input "model_version"="ariadne.predicate-admission/v2" &&
     string input "model_sha256"=Build_identity.guard_model_sha256)
     "guard source/model identity";
@@ -649,12 +660,12 @@ let admit_current j snapshot =
     ["artifact_sha256";"query_scope_sha256";"preparation_sha256"];
   let producer=get input "producer" in
   exact producer ["helper_sha256";"runtime_sha256";"decoder_sha256";"projection"];
-  require (string producer "projection"="bap-bit-provenance-v8")
+  require (string producer "projection"=producer_profile)
     "guard producer profile";
   List.iter (fun k -> ignore(hash(get producer k)))
     ["helper_sha256";"runtime_sha256";"decoder_sha256"];
   let expected_intent=digest_array [
-    `String "ariadne-guard-intent/v2";get input "snapshot";
+    `String(domain "intent");get input "snapshot";
     get input "artifact_sha256";get input "query_scope_sha256";
     get input "preparation_sha256";
     ordered_list ordered_root (get input "roots");get input "seeds";
@@ -768,7 +779,7 @@ let admit_current j snapshot =
       require (boolean(get site "opaque")<>projected)
         "guard candidate opacity/source status mismatch";
       if projected then require (get source "quality"=`String "external_lift" &&
-        get source "projection"=`String "bap-bit-provenance-v8")
+        get source "projection"=`String producer_profile)
         "guard narrowed transfer lacks projected v5 source"
     end;
     M.add at site acc) M.empty rows in
@@ -786,7 +797,7 @@ let admit_current j snapshot =
       get source "captured"=`Bool true && get source "quality"=`String "opaque" &&
       get source "status"=`String "normal-flow-terminal" &&
       get source "ast_sha256"<>`Null &&
-      get source "projection"=`String "bap-bit-provenance-v8")
+      get source "projection"=`String producer_profile)
       "terminal final normal-control or conservative-effect mismatch")terminals;
   S.iter (fun at -> require (M.mem at candidates)
     "guard admitted instruction missing candidate evidence") i.decodable;
@@ -837,7 +848,7 @@ let admit_current j snapshot =
         (list(get control "targets")) else [] in
     fall@targets) rows in
   let expected_graph=digest_array [
-    `String "ariadne-guard-candidate/v2";
+    `String(domain "candidate");
     ordered_list ordered_root (get input "roots");
     get input "candidate_epoch";get input "closure_complete";
     get input "barriers";ordered_list ordered_site (get input "sites");
@@ -872,10 +883,10 @@ let admit_current j snapshot =
         (M.find (address(string site "site")) outgoing) &&
       (recognized site<>None || S.mem(address(string site "site"))terminals ||
        List.mem (string c "kind") ["call";"return"] ||
-       (string c "kind"<>"stop" && (typed_site site ||
-         opaque_ordinary_site (M.find (address(string site "site")) capture_sites) site) &&
+       (string c "kind"<>"stop" && (typed_site ~advanced site ||
+         opaque_ordinary_site ~advanced (M.find (address(string site "site")) capture_sites) site) &&
         (list(Yojson.Safe.from_string(string site "ast"))<>[] ||
-          string site "bytes_hex"="90") &&
+          canonical_noop advanced (string site "bytes_hex")) &&
         (let bil=try list(Yojson.Safe.from_string(string site "ast"))
           with _ -> raise(Invalid "guard candidate AST") in
          not(unreviewed_control (string c "kind"="ordinary") 0 bil)))))
@@ -892,7 +903,7 @@ let admit_current j snapshot =
     "guard coverage/stop mismatch";
   let transfers=M.fold (fun at site acc ->
     let pending=recognized site<>None in
-    M.add at (relation site pending) acc) candidates M.empty in
+    M.add at (relation ~advanced site pending) acc) candidates M.empty in
   let reported_transfers=List.fold_left (fun acc row ->
     exact row ["site";"bytes_sha256";"ast_sha256";"rule";
       "relation";"relation_sha256"];
@@ -917,7 +928,7 @@ let admit_current j snapshot =
     else rule="typed-bil-rsp-residue/v1" &&
       not(boolean(get source "opaque")) &&
       string (get source "control") "kind"<>"call" &&
-      typed_site source &&
+      typed_site ~advanced source &&
       actual=M.find at transfers in
     require (List.length actual=16 && rule_ok)
       "guard transfer relation";
@@ -984,7 +995,7 @@ let admit_current j snapshot =
         S.add ("gpr:rsp:"^string_of_int n) acc)
         (if is_load then S.of_list["state:other";"memory:any"]else S.singleton "state:other")
         (List.init 8 Fun.id) in
-      require (string source "projection"="bap-bit-provenance-v8")
+      require (string source "projection"=producer_profile)
         "guard normal producer profile";
       require (string source "status"="projected" &&
         string source "quality"="external_lift")
@@ -1027,7 +1038,7 @@ let admit_current j snapshot =
   List.iter (fun d ->
     let without=replace_field d "receipt_sha256" (`String "") in
     let digest=digest_array [
-      `String "ariadne-guard-receipt/v2";get report "checker_sha256";
+      `String(domain "receipt");get report "checker_sha256";
       get report "intent_id";get report "candidate_graph_sha256";
       get input "candidate_epoch";get input "model_version";
       get input "model_sha256";
@@ -1041,7 +1052,7 @@ let admit_current j snapshot =
   let receipt_digests=List.map (fun d -> get d "receipt_sha256")
     (list(get report "guards")) |> List.sort compare in
   let analysis_id=digest_array [
-    `String "ariadne-guard-analysis/v2";get report "intent_id";
+    `String(domain "analysis");get report "intent_id";
     get report "final_request_sha256";`List receipt_digests] in
   require (string capture "query_id"=analysis_id)
     "guard capture analysis identity";

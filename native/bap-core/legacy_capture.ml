@@ -490,14 +490,16 @@ let require_path_coverage roots incoming max_values site context =
         pending:=(parent,child)::!pending;incr pending_count
       | None -> raise (Invalid "resolver uncovered incoming path")) parents
   done
-let admit_resolved j snapshot =
+let admit_resolved ?(capture_admit=admit) ?(check_bil=false) j snapshot =
   exact j ["normalized";"capture";"target_resolution"];
-  let i,sites=admit (`Assoc ["normalized",get j "normalized";"capture",get j "capture"]) snapshot in
+  let i,sites=capture_admit (`Assoc ["normalized",get j "normalized";"capture",get j "capture"]) snapshot in
   let report=get j "target_resolution" and capture=get j "capture" in
   exact report ["schema";"profile";"memory_premise";"snapshot";"artifact_sha256";"graph_sha256";"limits";"resolutions";"data_reads";"transfers";"stop"];
   let local=string report "schema"="ariadne.indirect-target-resolution/v2" &&
     string report "profile"="captured-local-indirect-targets/v1" in
-  require ((local || (string report "schema"="ariadne.indirect-target-resolution/v1" &&
+  let advanced_rooted=check_bil && string report "schema"="ariadne.indirect-target-resolution/v4" &&
+    string report "profile"="captured-indirect-targets/v2" in
+  require ((local || advanced_rooted || (string report "schema"="ariadne.indirect-target-resolution/v1" &&
     string report "profile"="captured-indirect-targets/v1")) &&
     string report "memory_premise"="FrozenCapturedControlData" && string report "snapshot"=snapshot
     && get report "artifact_sha256"=get capture "artifact_sha256") "resolver identity/premise";
@@ -526,7 +528,7 @@ let admit_resolved j snapshot =
     let a=address (string t "site") in require (not (M.mem a map) && M.mem a sites) "resolver transfer domain";
     let source=M.find a sites in require (get source "bytes"=get t "bytes_hex" && get source "ast_sha256"=get t "ast_sha256") "resolver semantic source binding";
     digest (string t "ast_sha256");let ast=Yojson.Safe.from_string (string t "ast") in json_shape 0 ast;ignore (list ast);
-    if local then begin
+    if local || check_bil then begin
       validate_bil_ast ast;
       let outputs,jump,condition=transfer_from_bil a ast in
       require (term_same outputs (get t "outputs") && term_same jump (get t "jump") &&
@@ -593,7 +595,7 @@ let admit_resolved j snapshot =
           | Some child -> child
           | None -> let child=path_context () in Hashtbl.add (!prefix).children (parent,taken) child; child in
         prefix:=child;
-        if local then begin
+        if local || check_bil then begin
           let instruction=M.find parent i.instructions in
           let transfer=M.find_opt parent transfers in
           let outputs=match transfer with Some t -> get t "outputs" | None -> `Assoc [] in
@@ -607,7 +609,7 @@ let admit_resolved j snapshot =
       ) chain edges;
       require (!cursor=string path "root" && (frontier || S.mem !cursor i.roots) &&
         not(frontier && S.mem !cursor i.roots)) "resolver root witness";
-      if local then require (term_same !term (get path "expression") &&
+      if local || check_bil then require (term_same !term (get path "expression") &&
         term_same (`List !guards) (get path "guards")) "resolver path semantic replay";
       require (not (!prefix).terminal) "resolver duplicate path";
       (!prefix).terminal<-true;(!prefix).frontier<-frontier;

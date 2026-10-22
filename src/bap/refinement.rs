@@ -5,6 +5,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 
 pub(crate) const PROFILE: &str = "bap-memory-refinement-v1";
+pub(crate) const ADVANCED_PROFILE: &str = "bap-memory-refinement-v2";
 const BANKS: [&str; 16] = [
     "RAX", "RCX", "RDX", "RBX", "RSP", "RBP", "RSI", "RDI", "R8", "R9", "R10", "R11", "R12", "R13",
     "R14", "R15",
@@ -206,6 +207,14 @@ pub(crate) fn extract(
     site: u64,
     bytes_hex: String,
 ) -> Result<TransferReceipt, super::Error> {
+    extract_with_profile(bil, site, bytes_hex, super::PROJECTION)
+}
+pub(crate) fn extract_with_profile(
+    bil: &[Stmt],
+    site: u64,
+    bytes_hex: String,
+    producer: &str,
+) -> Result<TransferReceipt, super::Error> {
     let ast = serde_json::to_string(bil)?;
     if ast.len() > 1024 * 1024 {
         return Err(super::invalid("refinement AST byte limit"));
@@ -246,7 +255,12 @@ pub(crate) fn extract(
             .iter()
             .all(|a| a.gaps.is_empty() && a.expression.is_some());
     Ok(TransferReceipt {
-        profile: PROFILE.into(),
+        profile: if super::advanced_projection(producer) {
+            ADVANCED_PROFILE
+        } else {
+            PROFILE
+        }
+        .into(),
         site,
         bytes_hex,
         ast_sha256: crate::reports::sha256(ast.as_bytes()),
@@ -257,7 +271,16 @@ pub(crate) fn extract(
 }
 impl TransferReceipt {
     pub(crate) fn validate(&self, site: &SiteEvidence) -> Result<(), super::Error> {
-        if self.profile != PROFILE
+        if self.profile
+            != if site
+                .projection
+                .as_deref()
+                .is_some_and(super::advanced_projection)
+            {
+                ADVANCED_PROFILE
+            } else {
+                PROFILE
+            }
             || site.projection.as_deref() == Some(super::source_extension::PROFILE)
             || self.site != site.va
             || self.bytes_hex != site.bytes_hex
@@ -292,8 +315,14 @@ impl TransferReceipt {
             .step_by(2)
             .map(|i| u8::from_str_radix(&self.bytes_hex[i..i + 2], 16))
             .collect::<Result<Vec<_>, _>>()?;
-        super::admission::admit(&bil, site.opcode.as_deref().unwrap_or(""), &bytes)?;
-        if extract(&bil, self.site, self.bytes_hex.clone())? != *self {
+        let producer = site.projection.as_deref().unwrap_or("");
+        super::admission::admit_with_profile(
+            &bil,
+            site.opcode.as_deref().unwrap_or(""),
+            &bytes,
+            producer,
+        )?;
+        if extract_with_profile(&bil, self.site, self.bytes_hex.clone(), producer)? != *self {
             return Err(super::invalid("refinement receipt recomputation mismatch"));
         }
         let accesses: Vec<_> = super::address::extract(&bil, self.site)

@@ -33,6 +33,10 @@ def main():
         "ariadne.guard-checker/v2\n"
         + sdk.sha(sdk.ROOT / "src/bap/guard_admission.rs") + "\n"
         + sdk.sha(sdk.ROOT / "src/bap/terminal_control.rs") + "\n").encode()).hexdigest()
+    advanced_guard_engine_sha256 = hashlib.sha256((
+        "ariadne.guard-checker/v3\n"
+        + sdk.sha(sdk.ROOT / "src/bap/guard_admission.rs") + "\n"
+        + sdk.sha(sdk.ROOT / "src/bap/terminal_control.rs") + "\n").encode()).hexdigest()
     caller_legacy = sdk.ROOT / "tests/bap/fixtures/caller-coverage/legacy-v2"
     legacy_guard_model_sha256 = sdk.sha(caller_legacy / "AriadnePredicateAdmission.tla.txt")
     legacy_guard_engine_sha256 = sdk.sha(caller_legacy / "guard_admission.rs.txt")
@@ -64,6 +68,10 @@ def main():
         "ariadne.guarded-target-checker/v3\n"
         + sdk.sha(sdk.ROOT / "src/bap/composition.rs") + "\n"
         + loop_engine_sha256 + "\n" + guard_engine_sha256 + "\n").encode()).hexdigest()
+    advanced_composition_engine_sha256 = hashlib.sha256((
+        "ariadne.guarded-target-checker/v4\n"
+        + sdk.sha(sdk.ROOT / "src/bap/composition.rs") + "\n"
+        + loop_engine_sha256 + "\n" + advanced_guard_engine_sha256 + "\n").encode()).hexdigest()
     lock = json.loads(sdk.LOCK.read_text())
     handshake = {"schema": "ariadne.bap-core-ready/v1", "abi": 2,
                  "compiler": "4.12.1", "bap_revision": lock["bapSourceRevision"],
@@ -71,6 +79,8 @@ def main():
                  "source_hashes": source_hashes, "families": ["recovery", "stateflow"],
                  "guard_model_sha256": guard_model_sha256,
                  "guard_engine_sha256": guard_engine_sha256,
+                 "advanced_guard_engine_sha256": advanced_guard_engine_sha256,
+                 "advanced_composition_engine_sha256": advanced_composition_engine_sha256,
                  "legacy_guard_model_sha256": legacy_guard_model_sha256,
                  "legacy_guard_engine_sha256": legacy_guard_engine_sha256,
                  "composition_model_sha256": composition_model_sha256,
@@ -81,7 +91,7 @@ def main():
                  "legacy_composition_v2_engine_sha256": legacy_composition_v2_engine_sha256,
                  "loop_model_sha256": loop_model_sha256,
                  "loop_engine_sha256": loop_engine_sha256,
-                 "profiles": ["normalized-fixed-input/v1", "captured-fixed-input/v1", "captured-indirect-targets/v1", "captured-guarded-input/v1", "captured-guarded-targets/v1", "captured-guarded-targets/v2", "captured-guarded-input/v2", "captured-guarded-targets/v3"],
+                 "profiles": ["normalized-fixed-input/v1", "captured-fixed-input/v1", "captured-indirect-targets/v1", "captured-guarded-input/v1", "captured-guarded-targets/v1", "captured-guarded-targets/v2", "captured-guarded-input/v2", "captured-guarded-targets/v3", "captured-indirect-targets/v2", "captured-guarded-input/v3", "captured-guarded-targets/v4"],
                  "operations": ["initialize", "advance:Visit", "advance:FinishRecovery",
                                 "advance:Propagate", "advance:FinishDataflow",
                                 "advance:ExpandSlice", "advance:FinishSlice", "advance:FinishStateflow",
@@ -96,6 +106,8 @@ def main():
         "let handshake = {identity|" + encoded + "|identity}\n"
         + "let guard_model_sha256 = " + json.dumps(guard_model_sha256) + "\n"
         + "let guard_engine_sha256 = " + json.dumps(guard_engine_sha256) + "\n"
+        + "let advanced_guard_engine_sha256 = " + json.dumps(advanced_guard_engine_sha256) + "\n"
+        + "let advanced_composition_engine_sha256 = " + json.dumps(advanced_composition_engine_sha256) + "\n"
         + "let legacy_guard_model_sha256 = " + json.dumps(legacy_guard_model_sha256) + "\n"
         + "let legacy_guard_engine_sha256 = " + json.dumps(legacy_guard_engine_sha256) + "\n"
         + "let composition_model_sha256 = " + json.dumps(composition_model_sha256) + "\n"

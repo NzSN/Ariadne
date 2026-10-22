@@ -39,7 +39,9 @@ pub(crate) fn validate_opaque_ordinary(
                         | "bap-bit-provenance-v6"
                         | "bap-bit-provenance-v7"
                         | "bap-bit-provenance-v8"
-                        | "bap-bit-provenance-v9" => crate::bap::OPAQUE_ORDINARY_RULE,
+                        | "bap-bit-provenance-v9"
+                        | "bap-bit-provenance-v10"
+                        | "bap-bit-provenance-v11" => crate::bap::OPAQUE_ORDINARY_RULE,
                         _ => "",
                     })
                 || e.length == 0

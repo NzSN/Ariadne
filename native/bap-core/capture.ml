@@ -34,7 +34,7 @@ let admit j snapshot =
         let instruction=M.find a i.instructions in
         let next=Printf.sprintf "0x%016Lx" (Int64.add (Int64.of_string a)
             (Int64.of_int (String.length bytes / 2))) in
-        require (List.mem (get row "projection") [`String "bap-bit-provenance-v3"; `String "bap-bit-provenance-v4"; `String "bap-bit-provenance-v5"; `String "bap-bit-provenance-v6"; `String "bap-bit-provenance-v7"; `String "bap-bit-provenance-v8"; `String "bap-bit-provenance-v9"]
+        require (List.mem (get row "projection") [`String "bap-bit-provenance-v3"; `String "bap-bit-provenance-v4"; `String "bap-bit-provenance-v5"; `String "bap-bit-provenance-v6"; `String "bap-bit-provenance-v7"; `String "bap-bit-provenance-v8"; `String "bap-bit-provenance-v9"; `String "bap-bit-provenance-v10"; `String "bap-bit-provenance-v11"]
                  && get row "ast_sha256"<>`Null && string row "quality"="opaque"
                  && S.mem a i.decodable && instruction.kind="ordinary"
                  && S.equal instruction.fall (S.singleton next)
@@ -490,13 +490,13 @@ let require_path_coverage roots incoming max_values site context =
         pending:=(parent,child)::!pending;incr pending_count
       | None -> raise (Invalid "resolver uncovered incoming path")) parents
   done
-let admit_resolved_current ~loop_checker j snapshot =
+let admit_resolved_current ~loop_checker ?(advanced=false) j snapshot =
   exact j ["normalized";"capture";"target_resolution"];
   let i,sites=admit (`Assoc ["normalized",get j "normalized";"capture",get j "capture"]) snapshot in
   let report=get j "target_resolution" and capture=get j "capture" in
   exact report ["schema";"profile";"memory_premise";"snapshot";"artifact_sha256";"graph_sha256";"limits";"resolutions";"data_reads";"transfers";"stop"];
-  let local=string report "schema"="ariadne.indirect-target-resolution/v3" &&
-    string report "profile"="captured-local-indirect-targets/v2" in
+  let local=string report "schema"=(if advanced then "ariadne.indirect-target-resolution/v4" else "ariadne.indirect-target-resolution/v3") &&
+    string report "profile"=(if advanced then "captured-local-indirect-targets/v3" else "captured-local-indirect-targets/v2") in
   require (local &&
     string report "memory_premise"="FrozenCapturedControlData" && string report "snapshot"=snapshot
     && get report "artifact_sha256"=get capture "artifact_sha256") "resolver identity/premise";
@@ -676,11 +676,21 @@ let admit_resolved_current ~loop_checker j snapshot =
 
 (* v1/v2 receipts keep their frozen admission algorithm. The new coverage sum
    is not retroactively accepted by a legacy profile. *)
-let admit_resolved ?loop_checker j snapshot =
+let admit_resolved ?loop_checker ?(advanced=false) j snapshot =
   require (List.for_all (fun row -> get row "projection" <> `String "bap-bit-provenance-v9")
       (list (get (get j "capture") "sites")))
     "source flag extension does not admit target resolution";
+  let source_profiles=List.filter_map (fun row -> match get row "projection" with
+      | `Null -> None | value -> Some(str value)) (list(get(get j "capture")"sites")) in
+  require (List.for_all (fun profile ->
+      (List.mem profile ["bap-bit-provenance-v10";"bap-bit-provenance-v11"]) = advanced) source_profiles)
+    "target source producer/transport generation mismatch";
   let report=get j "target_resolution" in
-  if string report "schema"="ariadne.indirect-target-resolution/v3" then
+  if advanced then begin
+    require(string report "schema"="ariadne.indirect-target-resolution/v4") "advanced target report generation";
+    if string report "profile"="captured-local-indirect-targets/v3" then
+      admit_resolved_current ~loop_checker ~advanced:true j snapshot
+    else Legacy_capture.admit_resolved ~capture_admit:admit ~check_bil:true j snapshot
+  end else if string report "schema"="ariadne.indirect-target-resolution/v3" then
     admit_resolved_current ~loop_checker j snapshot
   else Legacy_capture.admit_resolved j snapshot

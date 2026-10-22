@@ -10,11 +10,14 @@ pub const MAX_FRAME: usize = 8 * 1024 * 1024;
 pub const DEFAULT_MAX_REQUEST_BYTES: usize = 8 * 1024 * 1024;
 pub const CAPTURED_PROFILE: &str = "captured-fixed-input/v1";
 pub const TARGET_PROFILE: &str = "captured-indirect-targets/v1";
+pub const ADVANCED_TARGET_PROFILE: &str = "captured-indirect-targets/v2";
 pub const LEGACY_GUARDED_PROFILE: &str = "captured-guarded-input/v1";
 pub const GUARDED_PROFILE: &str = "captured-guarded-input/v2";
+pub const ADVANCED_GUARDED_PROFILE: &str = "captured-guarded-input/v3";
 pub const LEGACY_COMPOSED_PROFILE: &str = "captured-guarded-targets/v1";
 pub const LEGACY_V2_COMPOSED_PROFILE: &str = "captured-guarded-targets/v2";
 pub const COMPOSED_PROFILE: &str = "captured-guarded-targets/v3";
+pub const ADVANCED_COMPOSED_PROFILE: &str = "captured-guarded-targets/v4";
 pub const PROFILE: &str = "normalized-fixed-input/v1";
 pub const INPUT_PROFILES: &[&str] = &[
     PROFILE,
@@ -25,12 +28,15 @@ pub const INPUT_PROFILES: &[&str] = &[
     LEGACY_V2_COMPOSED_PROFILE,
     GUARDED_PROFILE,
     COMPOSED_PROFILE,
+    ADVANCED_TARGET_PROFILE,
+    ADVANCED_GUARDED_PROFILE,
+    ADVANCED_COMPOSED_PROFILE,
 ];
 pub fn proof_profile(profile: &str) -> bool {
     INPUT_PROFILES[2..].contains(&profile)
 }
 pub fn guarded_profile(profile: &str) -> bool {
-    proof_profile(profile) && profile != TARGET_PROFILE
+    proof_profile(profile) && ![TARGET_PROFILE, ADVANCED_TARGET_PROFILE].contains(&profile)
 }
 
 pub const RECOVERY_OPERATIONS: &[&str] = &[

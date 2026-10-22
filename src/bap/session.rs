@@ -11,6 +11,15 @@ use std::time::Duration;
 
 pub(crate) const MAX_SESSION_SITES: usize = 8192;
 
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum SourceExtensionMode {
+    #[default]
+    Basic,
+    Advanced,
+    #[doc(hidden)]
+    Invalid,
+}
+
 #[derive(Clone, Debug)]
 pub struct Config {
     pub helper: PathBuf,
@@ -19,6 +28,7 @@ pub struct Config {
     /// Explicit narrow source-built flag producer. Guard admission, target
     /// resolution and refinement require separate qualification and are refused.
     pub source_extension: Option<PathBuf>,
+    pub source_extension_mode: SourceExtensionMode,
 }
 impl Config {
     pub fn from_env() -> Self {
@@ -33,6 +43,12 @@ impl Config {
         );
         config.source_extension =
             std::env::var_os("ARIADNE_BAP_SOURCE_EXTENSION").map(PathBuf::from);
+        config.source_extension_mode =
+            match std::env::var("ARIADNE_BAP_SOURCE_EXTENSION_MODE").as_deref() {
+                Ok("advanced") => SourceExtensionMode::Advanced,
+                Ok("basic") | Err(std::env::VarError::NotPresent) => SourceExtensionMode::Basic,
+                _ => SourceExtensionMode::Invalid,
+            };
         config
     }
     pub fn new(helper: PathBuf, runtime: PathBuf) -> Self {
@@ -41,16 +57,40 @@ impl Config {
             runtime,
             timeout: Duration::from_secs(10),
             source_extension: None,
+            source_extension_mode: SourceExtensionMode::Basic,
         }
     }
     pub fn with_source_extension(mut self, directory: PathBuf) -> Self {
         self.source_extension = Some(directory);
+        self.source_extension_mode = SourceExtensionMode::Basic;
         self
+    }
+    /// Select the separately pinned producer for guard, target and memory
+    /// refinement integration. The historical basic v9 mode stays unchanged.
+    pub fn with_advanced_source_extension(mut self, directory: PathBuf) -> Self {
+        self.source_extension = Some(directory);
+        self.source_extension_mode = SourceExtensionMode::Advanced;
+        self
+    }
+    pub(crate) fn validate_source_mode(&self) -> Result<(), Error> {
+        if self.source_extension_mode == SourceExtensionMode::Invalid
+            || (self.source_extension_mode == SourceExtensionMode::Advanced
+                && self.source_extension.is_none())
+        {
+            return Err(invalid(
+                "source extension mode must be basic or advanced; advanced requires an explicit source directory",
+            ));
+        }
+        Ok(())
     }
     pub fn validate(&self) -> Result<(), Error> {
         self.validate_runtime()?;
+        self.validate_source_mode()?;
         if let Some(directory) = &self.source_extension {
-            super::source_extension::SourceExtension::load(directory)?;
+            super::source_extension::SourceExtension::load_with_mode(
+                directory,
+                self.source_extension_mode,
+            )?;
         }
         Ok(())
     }

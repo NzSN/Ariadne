@@ -413,9 +413,11 @@ fn validate_input(input: &Input) -> Result<(), Error> {
             [
                 "bap-guard-admission-v1",
                 "bap-guard-admission-v2",
+                "bap-guard-admission-v3",
                 "captured-guarded-targets/v1",
                 "captured-guarded-targets/v2",
                 "captured-guarded-targets/v3",
+                "captured-guarded-targets/v4",
             ]
             .iter()
             .any(|profile| graph.identity.semantic_profile.contains(profile))
@@ -493,9 +495,13 @@ fn validate_guarded_graph_inner(
 ) -> Result<(), Error> {
     use crate::bap::guard_admission as guard;
     let Some(evidence) = &graph.guard_admission else {
-        if [guard::LEGACY_PROFILE, guard::PROFILE]
-            .iter()
-            .any(|profile| graph.identity.semantic_profile.contains(profile))
+        if [
+            guard::LEGACY_PROFILE,
+            guard::PROFILE,
+            guard::ADVANCED_PROFILE,
+        ]
+        .iter()
+        .any(|profile| graph.identity.semantic_profile.contains(profile))
             || crate::bap::composition::contains_profile(&graph.identity.semantic_profile)
         {
             return Err(invalid("guarded frame graph has no proof sources"));

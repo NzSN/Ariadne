@@ -233,6 +233,8 @@ pub(super) fn decide(
                     | "bap-bit-provenance-v7"
                     | "bap-bit-provenance-v8"
                     | "bap-bit-provenance-v9"
+                    | "bap-bit-provenance-v10"
+                    | "bap-bit-provenance-v11"
             )
         )
         || site.helper_sha256.is_none()

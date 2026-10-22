@@ -3,6 +3,8 @@
 open Recovery
 let profile = "captured-guarded-targets/v3"
 let version = "ariadne.guarded-target-resolution/v3"
+let advanced_profile = "captured-guarded-targets/v4"
+let advanced_version = "ariadne.guarded-target-resolution/v4"
 let rec canonical = function
   | `Assoc rows -> `Assoc (List.map (fun (key,value) -> key,canonical value) rows
       |> List.sort (fun (a,_) (b,_) -> compare a b))
@@ -10,6 +12,7 @@ let rec canonical = function
   | value -> value
 let hash_json value = Guard.hash_json (canonical value)
 let transport_query_current snapshot input =
+  let profile=string(get input "composition")"profile" in
   let bytes=Buffer.create 512 in
   Buffer.add_string bytes "ariadne.bap-core-query/v1\000";
   List.iter (fun text ->
@@ -71,7 +74,7 @@ let rec original_targets site depth env statements =
            | _ -> None) left right in
          joined,targets @ ls @ rs)
     | _ -> raise(Invalid "composition unreviewed projected source control")) (env,[]) statements
-let validate_original_control site source original =
+let validate_original_control ?(advanced=false) site source original =
   let kind=string original "kind" in
   let start=Int64.of_string site in
   let length=String.length(string source "bytes_hex")/2 in
@@ -88,7 +91,7 @@ let validate_original_control site source original =
   if not pending && not(boolean(get source "opaque")) &&
       List.mem kind ["ordinary";"conditional";"jump";"indirect"] then begin
     let bil=list(Yojson.Safe.from_string(string source "ast")) in
-    require (bil<>[] || (kind="ordinary" && string source "bytes_hex"="90"))
+    require (bil<>[] || (kind="ordinary" && Guard.canonical_noop advanced (string source "bytes_hex")))
       "composition empty projected source control";
     let _,jumps=original_targets site 0 M.empty bil in
     let known=List.fold_left (fun set value -> match value with
@@ -115,15 +118,20 @@ let admit_current j snapshot =
   let final=get j "normalized" and capture=get j "capture" and
       guards=get j "guard_admission" and targets=get j "target_resolution" and
       report=get j "composition" in
+  let advanced=string report "profile"=advanced_profile in
+  let profile=if advanced then advanced_profile else profile in
+  let schema=if advanced then advanced_version else version in
+  let checker=if advanced then Build_identity.advanced_composition_engine_sha256 else Build_identity.composition_engine_sha256 in
+  let domain name="ariadne-guarded-target-"^name^(if advanced then "/v4" else "/v3") in
   exact report ["schema";"profile";"model_version";"model_sha256";
     "checker_sha256";"snapshot";"artifact_sha256";"query_scope_sha256";
     "candidate_epoch";"candidate";"original_controls";"candidate_sha256";
     "target_report_sha256";"guard_report_sha256";"final_request_sha256";
     "binding_sha256"];
-  require (string report "schema"=version && string report "profile"=profile &&
+  require (string report "schema"=schema && string report "profile"=profile &&
     string report "model_version"=version &&
     string report "model_sha256"=Build_identity.composition_model_sha256 &&
-    (string report "checker_sha256"=Build_identity.composition_engine_sha256 || string report "checker_sha256"="a66b79f4a78330eda3dad00b64802498a3ab289404007c1fd62bb521a5a380ee"))
+    (string report "checker_sha256"=checker || (not advanced && List.mem (string report "checker_sha256") ["6f8a96e415998dbc9ea69f701ef72c76697746e1b1549fb117dd1ccee1cf82bc";"a66b79f4a78330eda3dad00b64802498a3ab289404007c1fd62bb521a5a380ee"])))
     "composition profile/model/checker identity";
   List.iter (fun key -> Capture.digest(string report key))
     ["model_sha256";"checker_sha256";"artifact_sha256";"query_scope_sha256";
@@ -149,7 +157,7 @@ let admit_current j snapshot =
   require (originals=List.sort (fun a b -> compare (string a "site") (string b "site")) originals)
     "composition original control order";
   let binding=hash_json (`List [
-    `String "ariadne-guarded-target-binding/v3";get report "snapshot";
+    `String(domain "binding");get report "snapshot";
     get report "artifact_sha256";get report "query_scope_sha256";
     get report "candidate_epoch";get report "model_version";
     get report "model_sha256";get report "checker_sha256";
@@ -157,13 +165,13 @@ let admit_current j snapshot =
     get report "target_report_sha256";get report "guard_report_sha256";
     get report "final_request_sha256"]) in
   require (string report "binding_sha256"=binding) "composition binding digest";
-  let query=hash_json (`List [`String "ariadne-guarded-target-analysis/v3";`String binding]) in
+  let query=hash_json (`List [`String(domain "analysis");`String binding]) in
   require (string capture "query_id"=query) "composition analysis identity";
   require (ends (string capture "semantic_profile")
     (":" ^ profile ^ ":" ^ binding ^ ":" ^ string targets "profile" ^ ":" ^
       string targets "memory_premise")) "composition capture proof binding";
-  require (string targets "schema"="ariadne.indirect-target-resolution/v3" &&
-    string targets "profile"="captured-local-indirect-targets/v2")
+  require (string targets "schema"=(if advanced then "ariadne.indirect-target-resolution/v4" else "ariadne.indirect-target-resolution/v3") &&
+    string targets "profile"=(if advanced then "captured-local-indirect-targets/v3" else "captured-local-indirect-targets/v2"))
     "composition requires local target replay";
   require (string targets "graph_sha256"=resolver_graph_hash candidate)
     "composition target graph digest";
@@ -175,7 +183,7 @@ let admit_current j snapshot =
   require (get candidate "input_kind"=`String "dump" &&
     get candidate "file_backed"=`List [] && get candidate "trusted_fallback"=`List [])
     "composition requires capture-only dump";
-  let candidate_input,_=Capture.admit_resolved ~loop_checker:Loop_closure.validate (`Assoc [
+  let candidate_input,_=Capture.admit_resolved ~loop_checker:Loop_closure.validate ~advanced (`Assoc [
     "normalized",candidate;"capture",capture;"target_resolution",targets]) snapshot in
   let site_rows=list(get input "sites") in
   let sources=List.fold_left (fun map row ->
@@ -210,7 +218,7 @@ let admit_current j snapshot =
   M.iter (fun site source ->
     Capture.validate_bil_ast (Yojson.Safe.from_string(string source "ast"));
     let original=M.find site controls and effective=get source "control" in
-    validate_original_control site source original;
+    validate_original_control ~advanced site source original;
     let row=try M.find site candidate_rows with Not_found ->
       raise(Invalid "composition source absent from candidate") in
     require (same effective (control_of_instruction row))
@@ -259,16 +267,16 @@ let admit_current j snapshot =
      internal query ID stays guard-specific; the public query is the pair seal. *)
   let receipts=List.map (fun row -> get row "receipt_sha256") (list(get guards "guards"))
     |> List.sort compare in
-  require(string guards "schema"="ariadne.guard-admission/v2" &&
-    string guards "profile"="bap-guard-admission-v2")"composition current guard policy";
-  let guard_query=Guard.digest_array [`String "ariadne-guard-analysis/v2";
+  require(string guards "schema"=(if advanced then "ariadne.guard-admission/v3" else "ariadne.guard-admission/v2") &&
+    string guards "profile"=(if advanced then "bap-guard-admission-v3" else "bap-guard-admission-v2"))"composition current guard policy";
+  let guard_query=Guard.digest_array [`String(if advanced then "ariadne-guard-analysis/v3" else "ariadne-guard-analysis/v2");
     get guards "intent_id";get guards "final_request_sha256";`List receipts] in
   let guard_capture=Guard.replace_field capture "query_id" (`String guard_query) in
   Guard.admit (`Assoc ["normalized",final;"capture",guard_capture;
     "guard_admission",guards]) snapshot
 
 let generation input = match string(get input "composition")"profile" with
-  | "captured-guarded-targets/v1"->1|"captured-guarded-targets/v2"->2|_->3
+  | "captured-guarded-targets/v1"->1|"captured-guarded-targets/v2"->2|"captured-guarded-targets/v4"->4|_->3
 let transport_query snapshot input =
   match generation input with
   | 1->Legacy_composition.transport_query snapshot input

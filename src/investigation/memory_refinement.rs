@@ -13,6 +13,8 @@ use std::collections::{BTreeMap, BTreeSet};
 
 pub const MEMORY_PROVENANCE_SCHEMA: &str = "ariadne.memory-provenance-assessment/v1";
 pub const MEMORY_PROVENANCE_PROFILE: &str = "captured-amd64-memory-provenance-v1";
+pub const ADVANCED_MEMORY_PROVENANCE_SCHEMA: &str = "ariadne.memory-provenance-assessment/v2";
+pub const ADVANCED_MEMORY_PROVENANCE_PROFILE: &str = "captured-amd64-memory-provenance-v2";
 const BANKS: [&str; 16] = [
     "rax", "rcx", "rdx", "rbx", "rsp", "rbp", "rsi", "rdi", "r8", "r9", "r10", "r11", "r12", "r13",
     "r14", "r15",
@@ -803,17 +805,27 @@ fn walk_numerical(
 }
 fn run(input: Input, limits: MemoryRefinementLimits) -> Result<MemoryProvenanceAssessment, Error> {
     validate_input(&input)?;
+    let advanced = input.sites.iter().any(|site| {
+        site.projection
+            .as_deref()
+            .is_some_and(crate::bap::advanced_projection)
+    });
+    let profile = if advanced {
+        ADVANCED_MEMORY_PROVENANCE_PROFILE
+    } else {
+        MEMORY_PROVENANCE_PROFILE
+    };
     let input_digest = sha(&serde_json::to_vec(&input)?);
     let scope_id = sha(&serde_json::to_vec(&(
         &input.identity,
         &input.question,
-        MEMORY_PROVENANCE_PROFILE,
+        profile,
         &input_digest,
         &limits,
     ))?);
     let mut out = MemoryProvenanceAssessment {
-        schema: MEMORY_PROVENANCE_SCHEMA.into(),
-        profile: MEMORY_PROVENANCE_PROFILE.into(),
+        schema: if advanced { ADVANCED_MEMORY_PROVENANCE_SCHEMA } else { MEMORY_PROVENANCE_SCHEMA }.into(),
+        profile: profile.into(),
         identity: input.identity.clone(),
         question: input.question.clone(),
         scope_id,

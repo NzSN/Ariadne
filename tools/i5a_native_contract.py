@@ -26,6 +26,7 @@ CORE_PROFILES = (
     "captured-guarded-input/v1", "captured-guarded-targets/v1",
     "captured-guarded-targets/v2", "captured-guarded-input/v2",
     "captured-guarded-targets/v3",
+    "captured-indirect-targets/v2", "captured-guarded-input/v3", "captured-guarded-targets/v4",
 )
 GATES = {
     "fixtures", "format", "root-tests", "core-tests", "clippy",

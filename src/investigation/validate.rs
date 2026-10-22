@@ -213,12 +213,15 @@ impl Explanation {
                         == match crate::bap::composition::generation(composition) {
                             1 => "ariadne.fault-address-explanation/v3",
                             2 => "ariadne.fault-address-explanation/v4",
+                            4 => "ariadne.fault-address-explanation/v8",
                             _ => "ariadne.fault-address-explanation/v6",
                         }
                 } else {
                     self.schema
                         == if crate::bap::guard_admission::is_legacy(report) {
                             "ariadne.fault-address-explanation/v2"
+                        } else if crate::bap::guard_admission::is_advanced(report) {
+                            "ariadne.fault-address-explanation/v7"
                         } else {
                             "ariadne.fault-address-explanation/v5"
                         }
@@ -245,6 +248,10 @@ impl Explanation {
                         .identity
                         .semantic_profile
                         .contains(":bap-guard-admission-v2:")
+                    && !self
+                        .identity
+                        .semantic_profile
+                        .contains(":bap-guard-admission-v3:")
             }
         };
         #[cfg(not(feature = "bap"))]

@@ -266,7 +266,7 @@ fn validate_preparation_proof(
     ))?);
     let preparation = super::sha(&serde_json::to_vec(&serde_json::json!({
         "limits":p,"locations":request.locations,"open_limits":proofs.preparation.open_limits,
-        "profile":crate::bap::guard_admission::PROFILE,
+        "profile":guard.input.policy,
     }))?);
     if scope != guard.input.query_scope_sha256 || preparation != guard.input.preparation_sha256 {
         return Err(invalid(

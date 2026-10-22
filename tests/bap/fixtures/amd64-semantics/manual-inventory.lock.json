@@ -1,0 +1,166 @@
+{
+  "schema": "ariadne.amd-manual-inventory-lock/v1",
+  "scope": "Source-reference and table-row transcription pins; retained gaps and name-only XED candidates are not legal-form or semantic acceptance.",
+  "documents": [
+    {
+      "publication": "24594",
+      "revision": "3.38",
+      "volume": 3,
+      "chapters": [
+        "3 General-Purpose Instruction Reference",
+        "4 System Instruction Reference"
+      ],
+      "sourceProvenance": {
+        "publisher": "Advanced Micro Devices",
+        "retrieval": "official-content-url",
+        "retrievalUrl": "https://docs.amd.com/api/khub/documents/BqEoC2FadIAgbrUdEzDJIg/content",
+        "officialByteIdentity": "matches-repository-official-source-pin"
+      },
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "layoutTextSha256": "574594a881bda7ef381b025875827e925a478ac9e94378689dfc646b23acdd52",
+      "outlineSha256": "44384ec7f4fa0d2ffdb77caf5af68169d8fb95685e4b56e6e81e6ffcefaf6af9",
+      "contentSha256": "32599573a8a8e5d62cbcb819aacf3c8b77869b8c9fad03605c6ae951294f0d9d",
+      "counts": {
+        "entries": 224,
+        "tables": 245,
+        "rows": 1037,
+        "tableLines": 2331,
+        "chapters": {
+          "3 General-Purpose Instruction Reference": 154,
+          "4 System Instruction Reference": 70
+        },
+        "lineClasses": {
+          "blank": 535,
+          "column-header": 27,
+          "description-or-encoding-continuation": 678,
+          "operand-continuation": 6,
+          "row": 1037,
+          "unparsed": 48
+        },
+        "gaps": {
+          "encoding-cell-without-mnemonic": 14,
+          "fragmented-or-unrecognized-encoding-cell": 1,
+          "missing-or-merged-encoding-cell": 96,
+          "unparsed-table-line": 48
+        },
+        "constraintReferences": 1430
+      },
+      "scopeSha256": "153d2bd17ef1284befa9b41a0d5c8cd330d53636b67c37f46163f957b046fc3d",
+      "xedRecordsSha256": "1f62f4da85d77353dbab13f85a06fa8732477de2cfe10877f73742fc0934cc48",
+      "xedComparisonSha256": "7c509b1c5fba190db2a42fd55cfba15e22dbed6375f7fadc018ef7befcdba14e"
+    },
+    {
+      "publication": "26568",
+      "revision": "3.26",
+      "volume": 4,
+      "chapters": [
+        "2 Instruction Reference"
+      ],
+      "sourceProvenance": {
+        "publisher": "Advanced Micro Devices",
+        "retrieval": "archive-copy",
+        "retrievalUrl": "https://kib.kiev.ua/x86docs/AMD/AMD64/26568_APM_v4-r3.26.pdf",
+        "officialByteIdentity": "not-independently-verified"
+      },
+      "additionalSources": [
+        {
+          "volume": 4,
+          "publication": "26568",
+          "revision": "3.26",
+          "filename": "mirror4.pdf",
+          "sha256": "5fec87806a5d03418bef588bfbe3f466c129c2f784369fe1e11dd0b6dd8213f0",
+          "bytes": 6359631,
+          "content_url": "https://kib.kiev.ua/x86docs/AMD/AMD64/26568_APM_v4-r3.26.pdf"
+        }
+      ],
+      "pdfSha256": "5fec87806a5d03418bef588bfbe3f466c129c2f784369fe1e11dd0b6dd8213f0",
+      "layoutTextSha256": "ddceeaa34d9502914fdb8800b4d561ad44bf43c40589a62fb1d4ac1584e9ea24",
+      "outlineSha256": "4721f5baf48779fef172ad3e108b9d8ea367f69cee23334f7e65dd3a96114d5d",
+      "contentSha256": "5e7c7de87474bf6a117c400ffb773098f42dc5e531662bf3200ccef0f50f5d80",
+      "counts": {
+        "entries": 679,
+        "tables": 1186,
+        "rows": 2818,
+        "tableLines": 7300,
+        "chapters": {
+          "2 Instruction Reference": 679
+        },
+        "lineClasses": {
+          "blank": 1104,
+          "column-header": 904,
+          "description-or-encoding-continuation": 515,
+          "operand-continuation": 4,
+          "row": 2818,
+          "unparsed": 1955
+        },
+        "gaps": {
+          "encoding-cell-without-mnemonic": 4,
+          "fragmented-or-unrecognized-encoding-cell": 6,
+          "missing-or-merged-encoding-cell": 15,
+          "unparsed-table-line": 1955,
+          "unrecognized-mnemonic-table-header": 7
+        },
+        "constraintReferences": 10440
+      },
+      "scopeSha256": "153d2bd17ef1284befa9b41a0d5c8cd330d53636b67c37f46163f957b046fc3d",
+      "xedRecordsSha256": "1f62f4da85d77353dbab13f85a06fa8732477de2cfe10877f73742fc0934cc48",
+      "xedComparisonSha256": "dd50add8d0dde26e3c55a5e4cff947c9da3ac9b6d129cf7cd8b3b6328d1efad3"
+    },
+    {
+      "publication": "26569",
+      "revision": "3.16",
+      "volume": 5,
+      "chapters": [
+        "1 64-Bit Media Instruction Reference",
+        "2 x87 Floating-Point Instruction Reference"
+      ],
+      "sourceProvenance": {
+        "publisher": "Advanced Micro Devices",
+        "retrieval": "archive-copy",
+        "retrievalUrl": "https://kib.kiev.ua/x86docs/AMD/AMD64/26569_APM_v5-r3.16.pdf",
+        "officialByteIdentity": "not-independently-verified"
+      },
+      "additionalSources": [
+        {
+          "volume": 5,
+          "publication": "26569",
+          "revision": "3.16",
+          "filename": "mirror5.pdf",
+          "sha256": "8c8c63c5e285c50faac2e7d474cf5046f5fcccb54673f464f57a8cb171ef0767",
+          "bytes": 1129228,
+          "content_url": "https://kib.kiev.ua/x86docs/AMD/AMD64/26569_APM_v5-r3.16.pdf"
+        }
+      ],
+      "pdfSha256": "8c8c63c5e285c50faac2e7d474cf5046f5fcccb54673f464f57a8cb171ef0767",
+      "layoutTextSha256": "4f329c665428735bdc0a5d6db5a46745044b28d8ea7820be49e1d05dec08f9a5",
+      "outlineSha256": "d4fe1b0e7b9b66fe359ea5fd2da9a631a749889c9de9ca8cb3ce3209336c9227",
+      "contentSha256": "4cb08ce2733b8f28e58c35f7a06b5c8e8163d1c8ffee36c7711432d2103ec155",
+      "counts": {
+        "entries": 160,
+        "tables": 160,
+        "rows": 263,
+        "tableLines": 2657,
+        "chapters": {
+          "1 64-Bit Media Instruction Reference": 101,
+          "2 x87 Floating-Point Instruction Reference": 59
+        },
+        "lineClasses": {
+          "blank": 1261,
+          "description-or-encoding-continuation": 683,
+          "operand-continuation": 6,
+          "row": 263,
+          "unparsed": 444
+        },
+        "gaps": {
+          "encoding-cell-without-mnemonic": 44,
+          "missing-or-merged-encoding-cell": 23,
+          "unparsed-table-line": 444
+        },
+        "constraintReferences": 1177
+      },
+      "scopeSha256": "153d2bd17ef1284befa9b41a0d5c8cd330d53636b67c37f46163f957b046fc3d",
+      "xedRecordsSha256": "1f62f4da85d77353dbab13f85a06fa8732477de2cfe10877f73742fc0934cc48",
+      "xedComparisonSha256": "b3e0dd96b9d43e14f7df8bd888bcbaf80f1407a2872cee57e583d9da6c51aaf3"
+    }
+  ]
+}

@@ -367,12 +367,18 @@ impl NativeAnalyzer {
             input["guard_admission"] = serde_json::to_value(report)?;
             if super::guard_admission::is_legacy(report) {
                 super::core_protocol::LEGACY_GUARDED_PROFILE
+            } else if super::guard_admission::is_advanced(report) {
+                super::core_protocol::ADVANCED_GUARDED_PROFILE
             } else {
                 super::core_protocol::GUARDED_PROFILE
             }
         } else if let Some(report) = prepared.target_resolution() {
             input["target_resolution"] = serde_json::to_value(report)?;
-            super::core_protocol::TARGET_PROFILE
+            if super::target_resolution::is_advanced(report) {
+                super::core_protocol::ADVANCED_TARGET_PROFILE
+            } else {
+                super::core_protocol::TARGET_PROFILE
+            }
         } else {
             super::core_protocol::CAPTURED_PROFILE
         };

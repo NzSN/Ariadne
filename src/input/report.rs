@@ -55,6 +55,7 @@ pub fn validate_saved_composition(bytes: &[u8], max_bytes: usize) -> Result<Valu
     let expected_schema = match composition::generation(&composition) {
         1 => "ariadne-minidump-report-v4",
         2 => "ariadne-minidump-report-v5",
+        4 => "ariadne-minidump-report-v8",
         _ => "ariadne-minidump-report-v7",
     };
     if value["schema"] != expected_schema
@@ -731,16 +732,27 @@ fn render_result(
         match crate::bap::composition::generation(composition) {
             1 => "ariadne-minidump-report-v4",
             2 => "ariadne-minidump-report-v5",
+            4 => "ariadne-minidump-report-v8",
             _ => "ariadne-minidump-report-v7",
         }
     } else if let Some(guard) = prepared.guard_admission() {
         if crate::bap::guard_admission::is_legacy(guard) {
             "ariadne-minidump-report-v3"
+        } else if crate::bap::guard_admission::is_advanced(guard) {
+            "ariadne-minidump-report-v9"
         } else {
             "ariadne-minidump-report-v6"
         }
     } else if prepared.target_resolution.is_some() {
-        "ariadne-minidump-report-v2"
+        if prepared
+            .target_resolution
+            .as_ref()
+            .is_some_and(crate::bap::target_resolution::is_advanced)
+        {
+            "ariadne-minidump-report-v10"
+        } else {
+            "ariadne-minidump-report-v2"
+        }
     } else {
         SCHEMA
     };

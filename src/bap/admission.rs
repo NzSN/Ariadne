@@ -39,6 +39,7 @@ struct Check {
     unsupported_data: bool,
     control: bool,
     nodes: usize,
+    advanced: bool,
 }
 pub(crate) struct Capabilities {
     pub ordinary_data_only: bool,
@@ -66,7 +67,7 @@ fn same(lhs: Type, rhs: Type) -> Result<Type, Error> {
     }
     Ok(lhs)
 }
-fn var_type(v: &Var) -> Result<Type, Error> {
+fn var_type(v: &Var, advanced: bool) -> Result<Type, Error> {
     if v.name.is_empty() || v.name.len() > 128 || v.index < 0 {
         return Err(malformed("invalid BIL variable identity"));
     }
@@ -86,7 +87,8 @@ fn var_type(v: &Var) -> Result<Type, Error> {
             || !(bank && ty == Type::Bits(64)
                 || flag && ty == Type::Bits(1)
                 || v.name == "mem" && ty == Type::Memory
-                || super::registers::vector_backing(v).is_some())
+                || super::registers::vector_backing(v).is_some()
+                || advanced && super::registers::fp_control(v))
         {
             return Err(failure(
                 FailureKind::UnsupportedControl,
@@ -168,7 +170,7 @@ impl Check {
         self.budget(depth)?;
         Ok(match e {
             Expr::Var { var } => {
-                let ty = var_type(var)?;
+                let ty = var_type(var, self.advanced)?;
                 if var.virtual_ {
                     let bound = *self
                         .env
@@ -302,7 +304,7 @@ impl Check {
                 if !var.virtual_ {
                     return Err(malformed("architectural let binder"));
                 }
-                let ty = var_type(var)?;
+                let ty = var_type(var, self.advanced)?;
                 same(ty, self.expr(value, depth + 1)?)?;
                 let key = var.key();
                 let previous = self.env.insert(key.clone(), ty);
@@ -321,7 +323,7 @@ impl Check {
             self.budget(depth)?;
             match s {
                 Stmt::Move { var, value } => {
-                    let ty = var_type(var)?;
+                    let ty = var_type(var, self.advanced)?;
                     if matches!(ty, Type::Bits(w) if w>1) && unknown_value(value) {
                         self.unsupported_data = true;
                     }
@@ -383,23 +385,106 @@ pub(crate) fn guarded_prefix(bytes: &[u8]) -> bool {
     }
     false
 }
+/// Exact forms exercised by the fresh-BIL numeric/defined-flag oracle. F3 is
+/// a mandatory opcode selector here; it is not a general REP permission.
+pub(crate) fn mandatory_count_opcode(bytes: &[u8], profile: &str) -> Option<&'static str> {
+    if !super::registers::advanced_profile(profile) {
+        return None;
+    }
+    let (width, operation, source) = match bytes {
+        [0x66, 0xf3, 0x0f, operation, source] => (16, *operation, *source),
+        [0xf3, 0x0f, operation, source] => (32, *operation, *source),
+        [0xf3, 0x48, 0x0f, operation, source] => (64, *operation, *source),
+        _ => return None,
+    };
+    match (operation, width, source) {
+        (0xb8, 16, 0xc3) => Some("POPCNT16rr"),
+        (0xb8, 16, 0x03) => Some("POPCNT16rm"),
+        (0xb8, 32, 0xc3) => Some("POPCNT32rr"),
+        (0xb8, 32, 0x03) => Some("POPCNT32rm"),
+        (0xb8, 64, 0xc3) => Some("POPCNT64rr"),
+        (0xb8, 64, 0x03) => Some("POPCNT64rm"),
+        (0xbd, 16, 0xc3) => Some("LZCNT16rr"),
+        (0xbd, 16, 0x03) => Some("LZCNT16rm"),
+        (0xbd, 32, 0xc3) => Some("LZCNT32rr"),
+        (0xbd, 32, 0x03) => Some("LZCNT32rm"),
+        (0xbd, 64, 0xc3) => Some("LZCNT64rr"),
+        (0xbd, 64, 0x03) => Some("LZCNT64rm"),
+        (0xbc, 16, 0xc3) => Some("TZCNT16rr"),
+        (0xbc, 16, 0x03) => Some("TZCNT16rm"),
+        (0xbc, 32, 0xc3) => Some("TZCNT32rr"),
+        (0xbc, 32, 0x03) => Some("TZCNT32rm"),
+        (0xbc, 64, 0xc3) => Some("TZCNT64rr"),
+        (0xbc, 64, 0x03) => Some("TZCNT64rm"),
+        _ => None,
+    }
+}
+pub(crate) fn guarded_prefix_with_profile(bytes: &[u8], profile: &str) -> bool {
+    mandatory_count_opcode(bytes, profile).is_none() && guarded_prefix(bytes)
+}
 pub(crate) fn capabilities(statements: &[Stmt]) -> Result<Capabilities, Error> {
-    let mut check = Check::default();
+    capabilities_with_profile(statements, super::PROJECTION)
+}
+pub(crate) fn capabilities_with_profile(
+    statements: &[Stmt],
+    profile: &str,
+) -> Result<Capabilities, Error> {
+    let mut check = Check {
+        advanced: super::registers::advanced_profile(profile),
+        ..Check::default()
+    };
     check.statements(statements, 0)?;
     Ok(Capabilities {
         ordinary_data_only: !check.control,
         unsupported_data: check.unsupported_data,
     })
 }
+pub(crate) fn canonical_noop_opcode(bytes: &[u8], profile: &str) -> Option<&'static str> {
+    if bytes == [0x90] {
+        return Some("NOOP");
+    }
+    if !super::registers::advanced_profile(profile) {
+        return None;
+    }
+    // Canonical 2--9 byte NOP encodings only. The exact byte patterns bind
+    // ModRM /0, displacement/SIB lengths and the optional operand-size prefix.
+    // Preparation separately checks exact BAP/LLVM length and ordinary control.
+    // PAUSE, neighboring /r encodings and additional prefixes are not covered.
+    match bytes {
+        [0x66, 0x90] => Some("NOOP"),
+        [0x0f, 0x1f, 0x00]
+        | [0x0f, 0x1f, 0x40, 0x00]
+        | [0x0f, 0x1f, 0x44, 0x00, 0x00]
+        | [0x0f, 0x1f, 0x80, 0x00, 0x00, 0x00, 0x00]
+        | [0x0f, 0x1f, 0x84, 0x00, 0x00, 0x00, 0x00, 0x00] => Some("NOOPL"),
+        [0x66, 0x0f, 0x1f, 0x44, 0x00, 0x00]
+        | [0x66, 0x0f, 0x1f, 0x84, 0x00, 0x00, 0x00, 0x00, 0x00] => Some("NOOPW"),
+        _ => None,
+    }
+}
 pub(crate) fn admit(statements: &[Stmt], opcode: &str, bytes: &[u8]) -> Result<(), Error> {
-    if guarded_prefix(bytes) {
+    admit_with_profile(statements, opcode, bytes, super::PROJECTION)
+}
+pub(crate) fn admit_with_profile(
+    statements: &[Stmt],
+    opcode: &str,
+    bytes: &[u8],
+    profile: &str,
+) -> Result<(), Error> {
+    if guarded_prefix_with_profile(bytes, profile) {
         return Err(failure(
             FailureKind::UnsupportedControl,
             "unmodeled instruction prefix",
         ));
     }
+    if mandatory_count_opcode(bytes, profile).is_some_and(|expected| expected != opcode) {
+        return Err(failure(
+            FailureKind::UnsupportedControl,
+            "mandatory count opcode/bytes mismatch",
+        ));
+    }
     if statements.is_empty() {
-        if opcode == "NOOP" && bytes == [0x90] {
+        if canonical_noop_opcode(bytes, profile) == Some(opcode) {
             return Ok(());
         }
         return Err(failure(
@@ -407,7 +492,11 @@ pub(crate) fn admit(statements: &[Stmt], opcode: &str, bytes: &[u8]) -> Result<(
             "empty lift is not an admitted no-op",
         ));
     }
-    let capabilities = capabilities(statements)?;
+    let capabilities = if super::registers::advanced_profile(profile) {
+        capabilities_with_profile(statements, profile)?
+    } else {
+        capabilities(statements)?
+    };
     if capabilities.unsupported_data {
         return Err(failure(
             FailureKind::UnsupportedData,
@@ -417,13 +506,21 @@ pub(crate) fn admit(statements: &[Stmt], opcode: &str, bytes: &[u8]) -> Result<(
     Ok(())
 }
 pub(crate) fn ordinary_unknown(statements: &[Stmt], bytes: &[u8], error: &Error) -> bool {
-    if guarded_prefix(bytes) || statements.is_empty() {
+    ordinary_unknown_with_profile(statements, bytes, error, super::PROJECTION)
+}
+pub(crate) fn ordinary_unknown_with_profile(
+    statements: &[Stmt],
+    bytes: &[u8],
+    error: &Error,
+    profile: &str,
+) -> bool {
+    if guarded_prefix_with_profile(bytes, profile) || statements.is_empty() {
         return false;
     }
     error
         .downcast_ref::<Failure>()
         .is_some_and(|e| e.kind == FailureKind::UnsupportedData)
-        && capabilities(statements).is_ok_and(|c| c.ordinary_data_only)
+        && capabilities_with_profile(statements, profile).is_ok_and(|c| c.ordinary_data_only)
 }
 pub(crate) fn fatal(error: &Error) -> bool {
     error

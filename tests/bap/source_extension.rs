@@ -141,13 +141,11 @@ fn child_output_size_exit_and_time_limits_are_enforced() {
 }
 
 fn native_config() -> super::super::Config {
-    let mut config = super::super::Config::from_env();
-    config.source_extension = Some(
+    super::super::Config::from_env().with_source_extension(
         std::env::var_os("ARIADNE_BAP_SOURCE_EXTENSION")
             .expect("set source extension directory for ignored native test")
             .into(),
-    );
-    config
+    )
 }
 fn decoder() -> PathBuf {
     std::env::var_os("ARIADNE_LLVM_MC")

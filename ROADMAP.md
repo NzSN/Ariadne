@@ -97,8 +97,11 @@ For the wider context, see the optional [documentation map](docs/documentation-m
 Ariadne produces evidence-bounded control-flow and data-flow results for crash
 investigations using pinned BAP instruction lifting. Ariadne validates its own
 transport, semantic projection, analysis and reports. The independent AMD64
-instruction-step/Lean project and full-manual coverage goal are retired under
-the [semantic assurance decision](docs/Ariadne/semantic-assurance.md).
+instruction-step/Lean proof project remains retired under
+the [semantic assurance decision](docs/Ariadne/semantic-assurance.md). The later
+[operation program](.agents/plans/amd64-operation-coverage.md) reopens full
+implementation coverage, with inventory and finite advanced-producer work in
+progress; this does not restore the retired proof project.
 
 Current validation follows the [executable test matrix](tests/README.md). Dated run
 results below are historical; their Git links do not establish a current pass.
