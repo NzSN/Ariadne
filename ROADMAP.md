@@ -10,6 +10,11 @@
 
 **Where to go next.**
 
+- [AMD64 operation coverage program](.agents/plans/amd64-operation-coverage.md) —
+  user-requested expansion of machine-instruction semantics and captured Windows
+  unwind operations. Implementation and independent operation tests are active;
+  the exhaustive instruction-form and newer metadata gates remain pending.
+
 - [Executable validation](tests/README.md) and the
   [T0–T5 migration](.agents/plans/generated-validation-retention.md) replace the
   retained collection with tests, small actual inputs and independent oracles.

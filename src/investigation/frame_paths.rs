@@ -1,4 +1,5 @@
 //! Bounded structural alternatives between validated captured activations.
+use super::frame_unwind::FrameTransition;
 use super::{BoundInvestigation, CapturedFrameChain, Error, Identity, SiteEvidence, invalid, sha};
 use crate::{EdgeKind, InstructionKind};
 use serde::{Deserialize, Serialize};
@@ -203,6 +204,9 @@ pub fn active_frame_entry(
         .frames
         .get(child)
         .ok_or_else(|| invalid("child frame outside chain"))?;
+    if younger.transition == Some(FrameTransition::MachineFrame) {
+        return Err(invalid("machine-frame transition has no active call entry"));
+    }
     let older = chain
         .frames
         .get(child + 1)
@@ -565,6 +569,11 @@ fn validate_guarded_graph_inner(
             || input.premises[0].policy != guard::ABI_POLICY)
     {
         return Err(invalid("guarded frame normal-call premise absent"));
+    }
+    if frame.transition == Some(FrameTransition::MachineFrame) && !input.premises.is_empty() {
+        return Err(invalid(
+            "machine-frame activation cannot supply a normal-call entry premise",
+        ));
     }
     let rows = evidence.normalized["instructions"]
         .as_array()
@@ -1239,6 +1248,11 @@ fn compose(
         let anchor = if frame == 0 {
             input.chain.frames[0].pc
         } else {
+            if input.chain.frames[frame - 1].transition == Some(FrameTransition::MachineFrame) {
+                return Err(invalid(
+                    "machine-frame transition has no active-call anchor",
+                ));
+            }
             let child = graphs.get(&(frame - 1));
             let expected = input.chain.frames[frame - 1]
                 .function_begin

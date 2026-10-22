@@ -258,6 +258,7 @@ pub(crate) fn extract(
 impl TransferReceipt {
     pub(crate) fn validate(&self, site: &SiteEvidence) -> Result<(), super::Error> {
         if self.profile != PROFILE
+            || site.projection.as_deref() == Some(super::source_extension::PROFILE)
             || self.site != site.va
             || self.bytes_hex != site.bytes_hex
             || site.semantic_status.as_deref() != Some("projected")

@@ -1,6 +1,8 @@
 use ariadne::input::{FileSnapshot, OpenLimits};
 use ariadne::investigation::FrameRecoveryLimits;
 use std::path::PathBuf;
+#[path = "unwind_operations.rs"]
+mod unwind_operations;
 fn fixture(name: &str) -> FileSnapshot {
     FileSnapshot::open_minidump(
         PathBuf::from(env!("CARGO_MANIFEST_DIR"))
@@ -86,8 +88,6 @@ fn self_consistent_context_offset_forgery_is_rejected_by_live_capture_binding() 
 fn missing_and_unsupported_unwind_evidence_stops_without_scanning() {
     for name in [
         "missing-control",
-        "prologue",
-        "epilogue",
         "chained",
         "unsorted-table",
         "missing-table-bytes",
@@ -99,6 +99,32 @@ fn missing_and_unsupported_unwind_evidence_stops_without_scanning() {
         assert_ne!(chain.stop_reason, "zero-return-boundary", "{name}");
         chain.validate().unwrap();
     }
+}
+#[test]
+fn v3_recovers_existing_partial_prologue_and_epilogue_fixtures() {
+    let prologue = fixture("prologue")
+        .recover_thread_frames(17, FrameRecoveryLimits::default())
+        .unwrap();
+    assert_eq!(prologue.frames.len(), 1);
+    assert_eq!(prologue.frames[0].return_slot, Some(0x1000));
+    assert_eq!(prologue.frames[0].return_pc, Some(0));
+    assert_eq!(prologue.stop_reason, "zero-return-boundary");
+    prologue.validate().unwrap();
+    fixture("prologue")
+        .validate_thread_frames(&prologue)
+        .unwrap();
+
+    let epilogue = fixture("epilogue")
+        .recover_thread_frames(17, FrameRecoveryLimits::default())
+        .unwrap();
+    assert_eq!(epilogue.frames.len(), 3, "{}", epilogue.stop_reason);
+    assert_eq!(epilogue.frames[0].return_slot, Some(0x1020));
+    assert_eq!(epilogue.frames[1].sp, 0x1028);
+    assert_eq!(epilogue.stop_reason, "zero-return-boundary");
+    epilogue.validate().unwrap();
+    fixture("epilogue")
+        .validate_thread_frames(&epilogue)
+        .unwrap();
 }
 #[test]
 fn frame_recovery_budgets_and_receipt_tampering_are_checked() {

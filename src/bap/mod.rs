@@ -21,6 +21,7 @@ pub(crate) fn known_projection(profile: &str) -> bool {
             | "bap-bit-provenance-v4"
             | "bap-bit-provenance-v5"
             | PROJECTION
+            | source_extension::PROFILE
             | guard_admission::LEGACY_PRODUCER_PROFILE
             | guard_admission::PRODUCER_PROFILE
     )
@@ -38,6 +39,7 @@ mod vector_projection_tests;
 pub(crate) use projection::project as test_project;
 pub(crate) mod refinement;
 mod session;
+mod source_extension;
 pub mod stateflow_adapter;
 pub mod target_resolution;
 pub use prepare::{Backend, Metrics};

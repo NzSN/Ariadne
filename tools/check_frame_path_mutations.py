@@ -16,7 +16,10 @@ MUTANTS = [
     ('loop-budget-ignored', 'src/investigation/frame_paths.rs', '>= limits.max_node_visits', '> limits.max_node_visits', 'enumerated_paths_match_64_independent_cartesian_oracles'),
     ('forged-completeness', 'src/investigation/frame_paths.rs', 'frontier.is_empty() && !blocked && result.stop_reason.is_empty()', 'frontier.is_empty()', 'every_search_work_and_retention_boundary_stays_explicit'),
     ('lost-call-activation', 'src/investigation/frame_paths.rs', 'frame: frame - 1,', 'frame: frame,', 'strict_np_and_equal_frame_cases_preserve_empty_list_meaning'),
-    ('guessed-stack-slot', 'src/investigation/frame_unwind.rs', 'let slot = registers["rsp"];', 'let slot = original_sp;', 'captured_allocations_saves_and_frame_pointer_restore_only_valid_registers'),
+    ('guessed-stack-slot', 'src/investigation/frame_unwind.rs',
+     '    } else {\n        let slot = registers["rsp"];\n        (\n            slot,\n            r.stack(slot, lo, hi)?,',
+     '    } else {\n        let slot = original["rsp"];\n        (\n            slot,\n            r.stack(slot, lo, hi)?,',
+     'captured_allocations_saves_and_frame_pointer_restore_only_valid_registers'),
     ('graph-policy-ignored', 'src/investigation/frame_paths.rs', 'let limits = input.graph_limits.unwrap_or_default();', 'let limits = FramePathGraphLimits::default();', 'explicit_graph_policy_preserves_legacy_replay_and_independent_search_stops'),
 ]
 TREES = ('src', 'tests', 'native', 'Specs', 'tools', 'mbt')

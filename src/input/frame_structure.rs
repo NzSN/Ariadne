@@ -239,6 +239,14 @@ impl FileSnapshot {
             .frames
             .get(index)
             .ok_or_else(|| invalid("structural frame outside recovered chain"))?;
+        if assume_windows_call_entry
+            && frame.transition
+                == Some(crate::investigation::frame_unwind::FrameTransition::MachineFrame)
+        {
+            return Err(invalid(
+                "machine-frame activation cannot supply a normal-call entry premise",
+            ));
+        }
         if let Some(begin) = frame.function_begin {
             if begin != entry {
                 return Err(invalid(

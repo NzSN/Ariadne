@@ -1,0 +1,1868 @@
+{
+  "schema": "ariadne.amd64-semantics-catalogue/v1",
+  "profile": "amd64-long-mode-family-survey-v1",
+  "scope": "Finite representative byte forms across the five AMD64 architectural subsets. Family presence does not establish exhaustive mnemonics, encodings, CPU features, privilege states, exceptions, modes, or hardware correctness.",
+  "exhaustiveEncodingCoverage": false,
+  "sourcePolicy": "BAP remains the sole production semantic provider. Unsupported or unexercised cases are not supported instructions; LLVM decode facts alone establish no effects.",
+  "encodingSource": "GNU assembler (GNU Binutils for Ubuntu) 2.42, --64, Intel syntax; one instruction per ELF section. No machine instructions are executed.",
+  "references": [
+    {
+      "id": "amd-apm-v3",
+      "publication": "24594",
+      "title": "AMD64 Architecture Programmer Manual Volume 3: General-Purpose and System Instructions",
+      "url": "https://docs.amd.com/v/u/en-US/24594_3.37",
+      "scope": "General-purpose and system instruction taxonomy; revision 3.37 search-indexed official metadata. Existing repository manual pin is tests/bap/fixtures/amd-manuals.lock.json."
+    },
+    {
+      "id": "amd-apm-v4",
+      "publication": "26568",
+      "title": "AMD64 Architecture Programmer Manual Volume 4: 128-Bit, 256-Bit, and 512-Bit Media Instructions",
+      "url": "https://docs.amd.com/v/u/en-US/26568_3.26_APM_Vol4",
+      "scope": "Media instruction taxonomy, revision 3.26 official search-indexed metadata; does not claim every extension form is enumerated here."
+    },
+    {
+      "id": "amd-apm-v5",
+      "publication": "26569",
+      "title": "AMD64 Architecture Programmer Manual Volume 5: 64-Bit Media and x87 Floating-Point Instructions",
+      "url": "https://www.amd.com/content/dam/amd/en/documents/processor-tech-docs/programmer-references/26569.pdf",
+      "scope": "Five architectural subsets and 64-bit media/x87 scope, revision 3.16 official search-indexed content; direct PDF retrieval was unavailable during authoring."
+    }
+  ],
+  "architecturalSubsets": [
+    "general-purpose",
+    "system",
+    "media-128-256-512",
+    "media-64",
+    "x87"
+  ],
+  "families": [
+    {
+      "id": "data-transfer",
+      "subset": "general-purpose",
+      "description": "Integer moves and extensions",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "address-generation",
+      "subset": "general-purpose",
+      "description": "Effective address and address-size forms",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "scalar-memory",
+      "subset": "general-purpose",
+      "description": "Scalar memory loads and stores",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "stack",
+      "subset": "general-purpose",
+      "description": "Stack data operations",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "integer-arithmetic",
+      "subset": "general-purpose",
+      "description": "Integer arithmetic and carry",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "logic",
+      "subset": "general-purpose",
+      "description": "Integer logical operations",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "shift-rotate",
+      "subset": "general-purpose",
+      "description": "Shifts and rotates",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "bit-manipulation",
+      "subset": "general-purpose",
+      "description": "Bit test, scanning, counting and permutation",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "bmi",
+      "subset": "general-purpose",
+      "description": "BMI extension operations",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "flags",
+      "subset": "general-purpose",
+      "description": "Flag state manipulation",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "conditional-data",
+      "subset": "general-purpose",
+      "description": "Conditional value production",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "branches",
+      "subset": "general-purpose",
+      "description": "Direct, conditional and indirect local transfers",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "calls-returns",
+      "subset": "general-purpose",
+      "description": "Call and return summary boundaries",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "atomic",
+      "subset": "general-purpose",
+      "description": "Atomic memory read-modify-write",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "strings",
+      "subset": "general-purpose",
+      "description": "String movement, comparison and repeated operations",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "segment-addressing",
+      "subset": "general-purpose",
+      "description": "FS/GS and segment-relative addressing",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "random",
+      "subset": "general-purpose",
+      "description": "Hardware random-number instructions",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "no-operation",
+      "subset": "general-purpose",
+      "description": "Architectural no-op and pause forms",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "processor-information",
+      "subset": "system",
+      "description": "Processor identity and timestamp interfaces",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "interrupt-exception",
+      "subset": "system",
+      "description": "Software interrupts and exception terminals",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "system-entry",
+      "subset": "system",
+      "description": "System-call entry and exit",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "io",
+      "subset": "system",
+      "description": "Port input/output and string I/O",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "control-debug-registers",
+      "subset": "system",
+      "description": "Control and debug register transfers",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "descriptor-segment-management",
+      "subset": "system",
+      "description": "Descriptor and task-state instructions",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "model-specific-registers",
+      "subset": "system",
+      "description": "Model-specific registers and counters",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "translation",
+      "subset": "system",
+      "description": "Address-translation invalidation",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "cache-ordering",
+      "subset": "system",
+      "description": "Cache management, prefetch and memory ordering",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "extended-state",
+      "subset": "system",
+      "description": "Extended-state save/restore and control",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "thread-state",
+      "subset": "system",
+      "description": "FS/GS base and protection-key state",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "execution-control",
+      "subset": "system",
+      "description": "Interrupt masking, halt and monitor/wait",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "virtualization",
+      "subset": "system",
+      "description": "AMD SVM entry, exit and interrupt control",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "control-protection",
+      "subset": "system",
+      "description": "Control-flow enforcement entry and shadow-stack state",
+      "reference": "amd-apm-v3"
+    },
+    {
+      "id": "sse-move",
+      "subset": "media-128-256-512",
+      "description": "Legacy vector register and memory moves",
+      "reference": "amd-apm-v4"
+    },
+    {
+      "id": "sse-floating",
+      "subset": "media-128-256-512",
+      "description": "Packed/scalar floating arithmetic and comparisons",
+      "reference": "amd-apm-v4"
+    },
+    {
+      "id": "sse-integer",
+      "subset": "media-128-256-512",
+      "description": "Packed integer arithmetic and logical operations",
+      "reference": "amd-apm-v4"
+    },
+    {
+      "id": "sse-permute-convert",
+      "subset": "media-128-256-512",
+      "description": "Vector shuffle, extract, conversion and MXCSR",
+      "reference": "amd-apm-v4"
+    },
+    {
+      "id": "sse3-ssse3",
+      "subset": "media-128-256-512",
+      "description": "Horizontal arithmetic and byte shuffling",
+      "reference": "amd-apm-v4"
+    },
+    {
+      "id": "sse4",
+      "subset": "media-128-256-512",
+      "description": "SSE4 blend, packed-string and CRC operations",
+      "reference": "amd-apm-v4"
+    },
+    {
+      "id": "avx",
+      "subset": "media-128-256-512",
+      "description": "VEX vector moves, arithmetic and upper-state clearing",
+      "reference": "amd-apm-v4"
+    },
+    {
+      "id": "avx2",
+      "subset": "media-128-256-512",
+      "description": "AVX2 integer and gather operations",
+      "reference": "amd-apm-v4"
+    },
+    {
+      "id": "fma-f16c",
+      "subset": "media-128-256-512",
+      "description": "Fused multiply-add and half conversion",
+      "reference": "amd-apm-v4"
+    },
+    {
+      "id": "avx512",
+      "subset": "media-128-256-512",
+      "description": "EVEX 512-bit vector and mask operations",
+      "reference": "amd-apm-v4"
+    },
+    {
+      "id": "cryptographic",
+      "subset": "media-128-256-512",
+      "description": "AES, carryless multiply and SHA instructions",
+      "reference": "amd-apm-v4"
+    },
+    {
+      "id": "amd-xop-fma4",
+      "subset": "media-128-256-512",
+      "description": "AMD XOP and four-operand fused arithmetic",
+      "reference": "amd-apm-v4"
+    },
+    {
+      "id": "mmx",
+      "subset": "media-64",
+      "description": "64-bit media moves, integer operations and state release",
+      "reference": "amd-apm-v5"
+    },
+    {
+      "id": "amd-3dnow",
+      "subset": "media-64",
+      "description": "AMD legacy 3DNow packed floating operations",
+      "reference": "amd-apm-v5"
+    },
+    {
+      "id": "x87-data",
+      "subset": "x87",
+      "description": "x87 stack, constant, load and store operations",
+      "reference": "amd-apm-v5"
+    },
+    {
+      "id": "x87-arithmetic",
+      "subset": "x87",
+      "description": "x87 arithmetic, comparison and transcendental operations",
+      "reference": "amd-apm-v5"
+    },
+    {
+      "id": "x87-state",
+      "subset": "x87",
+      "description": "x87 control, environment and synchronization",
+      "reference": "amd-apm-v5"
+    }
+  ],
+  "cases": [
+    {
+      "id": "data-transfer-1",
+      "family": "data-transfer",
+      "assembly": "mov rax, rbx",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "4889d8",
+      "expectedEffects": {
+        "uses": [
+          "gpr:rbx:0",
+          "gpr:rbx:1",
+          "gpr:rbx:2",
+          "gpr:rbx:3",
+          "gpr:rbx:4",
+          "gpr:rbx:5",
+          "gpr:rbx:6",
+          "gpr:rbx:7"
+        ],
+        "mayDefs": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "mustDefs": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ]
+      },
+      "expectationBasis": "Independent scalar effect equations retained in tests/bap/fixtures/make_corpus.py; exact byte fixture, not producer-derived."
+    },
+    {
+      "id": "data-transfer-2",
+      "family": "data-transfer",
+      "assembly": "mov eax, 0x12345678",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "b878563412",
+      "expectedEffects": {
+        "uses": [],
+        "mayDefs": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "mustDefs": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ]
+      },
+      "expectationBasis": "Independent scalar effect equations retained in tests/bap/fixtures/make_corpus.py; exact byte fixture, not producer-derived."
+    },
+    {
+      "id": "data-transfer-3",
+      "family": "data-transfer",
+      "assembly": "movsx rax, al",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "480fbec0"
+    },
+    {
+      "id": "address-generation-1",
+      "family": "address-generation",
+      "assembly": "lea rax, [rbx+rcx*4+8]",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "488d448b08"
+    },
+    {
+      "id": "address-generation-2",
+      "family": "address-generation",
+      "assembly": "mov rax, QWORD PTR [ebx]",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "67488b03"
+    },
+    {
+      "id": "scalar-memory-1",
+      "family": "scalar-memory",
+      "assembly": "mov rax, QWORD PTR [rbx]",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "488b03",
+      "expectedEffects": {
+        "uses": [
+          "gpr:rbx:0",
+          "gpr:rbx:1",
+          "gpr:rbx:2",
+          "gpr:rbx:3",
+          "gpr:rbx:4",
+          "gpr:rbx:5",
+          "gpr:rbx:6",
+          "gpr:rbx:7",
+          "memory:any"
+        ],
+        "mayDefs": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ],
+        "mustDefs": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7"
+        ]
+      },
+      "expectationBasis": "Independent scalar effect equations retained in tests/bap/fixtures/make_corpus.py; exact byte fixture, not producer-derived."
+    },
+    {
+      "id": "scalar-memory-2",
+      "family": "scalar-memory",
+      "assembly": "mov QWORD PTR [rbx], rax",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "488903",
+      "expectedEffects": {
+        "uses": [
+          "gpr:rax:0",
+          "gpr:rax:1",
+          "gpr:rax:2",
+          "gpr:rax:3",
+          "gpr:rax:4",
+          "gpr:rax:5",
+          "gpr:rax:6",
+          "gpr:rax:7",
+          "gpr:rbx:0",
+          "gpr:rbx:1",
+          "gpr:rbx:2",
+          "gpr:rbx:3",
+          "gpr:rbx:4",
+          "gpr:rbx:5",
+          "gpr:rbx:6",
+          "gpr:rbx:7"
+        ],
+        "mayDefs": [
+          "memory:any"
+        ],
+        "mustDefs": []
+      },
+      "expectationBasis": "Independent scalar effect equations retained in tests/bap/fixtures/make_corpus.py; exact byte fixture, not producer-derived."
+    },
+    {
+      "id": "stack-1",
+      "family": "stack",
+      "assembly": "push rax",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "50"
+    },
+    {
+      "id": "stack-2",
+      "family": "stack",
+      "assembly": "pop rax",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "58"
+    },
+    {
+      "id": "stack-3",
+      "family": "stack",
+      "assembly": "enter 16, 0",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "c8100000"
+    },
+    {
+      "id": "stack-4",
+      "family": "stack",
+      "assembly": "leave",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "c9"
+    },
+    {
+      "id": "integer-arithmetic-1",
+      "family": "integer-arithmetic",
+      "assembly": "add rax, rbx",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "4801d8"
+    },
+    {
+      "id": "integer-arithmetic-2",
+      "family": "integer-arithmetic",
+      "assembly": "adc rax, rbx",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "4811d8"
+    },
+    {
+      "id": "integer-arithmetic-3",
+      "family": "integer-arithmetic",
+      "assembly": "sub rax, rbx",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "4829d8"
+    },
+    {
+      "id": "integer-arithmetic-4",
+      "family": "integer-arithmetic",
+      "assembly": "imul rax, rbx",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "480fafc3"
+    },
+    {
+      "id": "integer-arithmetic-5",
+      "family": "integer-arithmetic",
+      "assembly": "div rbx",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "48f7f3"
+    },
+    {
+      "id": "logic-1",
+      "family": "logic",
+      "assembly": "and rax, rbx",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "4821d8"
+    },
+    {
+      "id": "logic-2",
+      "family": "logic",
+      "assembly": "or rax, rbx",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "4809d8"
+    },
+    {
+      "id": "logic-3",
+      "family": "logic",
+      "assembly": "xor rax, rax",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "4831c0"
+    },
+    {
+      "id": "logic-4",
+      "family": "logic",
+      "assembly": "not rax",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "48f7d0"
+    },
+    {
+      "id": "logic-5",
+      "family": "logic",
+      "assembly": "test rax, rbx",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "4885d8"
+    },
+    {
+      "id": "shift-rotate-1",
+      "family": "shift-rotate",
+      "assembly": "shl rax, cl",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "48d3e0"
+    },
+    {
+      "id": "shift-rotate-2",
+      "family": "shift-rotate",
+      "assembly": "ror rax, 1",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "48d1c8"
+    },
+    {
+      "id": "shift-rotate-3",
+      "family": "shift-rotate",
+      "assembly": "shrd rax, rbx, cl",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "480fadd8"
+    },
+    {
+      "id": "bit-manipulation-1",
+      "family": "bit-manipulation",
+      "assembly": "bt rax, rcx",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "480fa3c8"
+    },
+    {
+      "id": "bit-manipulation-2",
+      "family": "bit-manipulation",
+      "assembly": "bsf rax, rbx",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "480fbcc3"
+    },
+    {
+      "id": "bit-manipulation-3",
+      "family": "bit-manipulation",
+      "assembly": "popcnt rax, rbx",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "f3480fb8c3"
+    },
+    {
+      "id": "bit-manipulation-4",
+      "family": "bit-manipulation",
+      "assembly": "lzcnt rax, rbx",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "f3480fbdc3"
+    },
+    {
+      "id": "bit-manipulation-5",
+      "family": "bit-manipulation",
+      "assembly": "bswap rax",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "480fc8"
+    },
+    {
+      "id": "bmi-1",
+      "family": "bmi",
+      "assembly": "andn rax, rbx, rcx",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "c4e2e0f2c1"
+    },
+    {
+      "id": "bmi-2",
+      "family": "bmi",
+      "assembly": "pext rax, rbx, rcx",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "c4e2e2f5c1"
+    },
+    {
+      "id": "flags-1",
+      "family": "flags",
+      "assembly": "clc",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "f8",
+      "expectedEffects": {
+        "uses": [],
+        "mayDefs": [
+          "flag:cf"
+        ],
+        "mustDefs": [
+          "flag:cf"
+        ]
+      },
+      "expectationBasis": "Independent constant flag assignment; all other state preserved. Baseline missing producer semantics remains a failed expectation."
+    },
+    {
+      "id": "flags-2",
+      "family": "flags",
+      "assembly": "stc",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "f9",
+      "expectedEffects": {
+        "uses": [],
+        "mayDefs": [
+          "flag:cf"
+        ],
+        "mustDefs": [
+          "flag:cf"
+        ]
+      },
+      "expectationBasis": "Independent constant flag assignment; all other state preserved. Baseline missing producer semantics remains a failed expectation."
+    },
+    {
+      "id": "flags-3",
+      "family": "flags",
+      "assembly": "cld",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "fc"
+    },
+    {
+      "id": "flags-4",
+      "family": "flags",
+      "assembly": "std",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "fd",
+      "expectedEffects": {
+        "uses": [],
+        "mayDefs": [
+          "flag:df"
+        ],
+        "mustDefs": [
+          "flag:df"
+        ]
+      },
+      "expectationBasis": "Independent constant flag assignment; all other state preserved. Baseline missing producer semantics remains a failed expectation."
+    },
+    {
+      "id": "flags-5",
+      "family": "flags",
+      "assembly": "lahf",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "9f"
+    },
+    {
+      "id": "flags-6",
+      "family": "flags",
+      "assembly": "sahf",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "9e"
+    },
+    {
+      "id": "flags-7",
+      "family": "flags",
+      "assembly": "pushfq",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "9c"
+    },
+    {
+      "id": "flags-8",
+      "family": "flags",
+      "assembly": "popfq",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "9d"
+    },
+    {
+      "id": "conditional-data-1",
+      "family": "conditional-data",
+      "assembly": "cmovne rax, rbx",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "480f45c3"
+    },
+    {
+      "id": "conditional-data-2",
+      "family": "conditional-data",
+      "assembly": "setne al",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f95c0"
+    },
+    {
+      "id": "branches-1",
+      "family": "branches",
+      "assembly": "jmp .+2",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "eb00"
+    },
+    {
+      "id": "branches-2",
+      "family": "branches",
+      "assembly": "jne .+2",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "7500"
+    },
+    {
+      "id": "branches-3",
+      "family": "branches",
+      "assembly": "jmp rax",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "ffe0"
+    },
+    {
+      "id": "branches-4",
+      "family": "branches",
+      "assembly": "loop .+2",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "e200"
+    },
+    {
+      "id": "calls-returns-1",
+      "family": "calls-returns",
+      "assembly": "call .+5",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "e800000000"
+    },
+    {
+      "id": "calls-returns-2",
+      "family": "calls-returns",
+      "assembly": "call rax",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "ffd0"
+    },
+    {
+      "id": "calls-returns-3",
+      "family": "calls-returns",
+      "assembly": "ret",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "c3"
+    },
+    {
+      "id": "atomic-1",
+      "family": "atomic",
+      "assembly": "lock add QWORD PTR [rax], rbx",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "f0480118"
+    },
+    {
+      "id": "atomic-2",
+      "family": "atomic",
+      "assembly": "lock cmpxchg QWORD PTR [rax], rbx",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "f0480fb118"
+    },
+    {
+      "id": "atomic-3",
+      "family": "atomic",
+      "assembly": "xchg QWORD PTR [rax], rbx",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "488718"
+    },
+    {
+      "id": "strings-1",
+      "family": "strings",
+      "assembly": "movsb",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "a4"
+    },
+    {
+      "id": "strings-2",
+      "family": "strings",
+      "assembly": "rep movsb",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "f3a4"
+    },
+    {
+      "id": "strings-3",
+      "family": "strings",
+      "assembly": "repe cmpsb",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "f3a6"
+    },
+    {
+      "id": "strings-4",
+      "family": "strings",
+      "assembly": "rep stosb",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "f3aa"
+    },
+    {
+      "id": "segment-addressing-1",
+      "family": "segment-addressing",
+      "assembly": "mov rax, QWORD PTR fs:[rbx]",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "64488b03"
+    },
+    {
+      "id": "segment-addressing-2",
+      "family": "segment-addressing",
+      "assembly": "mov rax, QWORD PTR gs:[rbx]",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "65488b03"
+    },
+    {
+      "id": "random-1",
+      "family": "random",
+      "assembly": "rdrand rax",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "480fc7f0"
+    },
+    {
+      "id": "random-2",
+      "family": "random",
+      "assembly": "rdseed rax",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "480fc7f8"
+    },
+    {
+      "id": "no-operation-1",
+      "family": "no-operation",
+      "assembly": "nop",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "90",
+      "expectedEffects": {
+        "uses": [],
+        "mayDefs": [],
+        "mustDefs": []
+      },
+      "expectationBasis": "Independent scalar effect equations retained in tests/bap/fixtures/make_corpus.py; exact byte fixture, not producer-derived."
+    },
+    {
+      "id": "no-operation-2",
+      "family": "no-operation",
+      "assembly": "nop DWORD PTR [rax]",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f1f00"
+    },
+    {
+      "id": "no-operation-3",
+      "family": "no-operation",
+      "assembly": "pause",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "f390"
+    },
+    {
+      "id": "processor-information-1",
+      "family": "processor-information",
+      "assembly": "cpuid",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0fa2"
+    },
+    {
+      "id": "processor-information-2",
+      "family": "processor-information",
+      "assembly": "rdtsc",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f31"
+    },
+    {
+      "id": "processor-information-3",
+      "family": "processor-information",
+      "assembly": "rdtscp",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f01f9"
+    },
+    {
+      "id": "interrupt-exception-1",
+      "family": "interrupt-exception",
+      "assembly": "int3",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "cc"
+    },
+    {
+      "id": "interrupt-exception-2",
+      "family": "interrupt-exception",
+      "assembly": "int 0x80",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "cd80"
+    },
+    {
+      "id": "interrupt-exception-3",
+      "family": "interrupt-exception",
+      "assembly": "ud2",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f0b"
+    },
+    {
+      "id": "interrupt-exception-4",
+      "family": "interrupt-exception",
+      "assembly": "iretq",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "48cf"
+    },
+    {
+      "id": "system-entry-1",
+      "family": "system-entry",
+      "assembly": "syscall",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f05"
+    },
+    {
+      "id": "system-entry-2",
+      "family": "system-entry",
+      "assembly": "sysretq",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "480f07"
+    },
+    {
+      "id": "system-entry-3",
+      "family": "system-entry",
+      "assembly": "sysenter",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f34"
+    },
+    {
+      "id": "system-entry-4",
+      "family": "system-entry",
+      "assembly": "sysexitq",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "480f35"
+    },
+    {
+      "id": "io-1",
+      "family": "io",
+      "assembly": "in al, dx",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "ec"
+    },
+    {
+      "id": "io-2",
+      "family": "io",
+      "assembly": "out dx, al",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "ee"
+    },
+    {
+      "id": "io-3",
+      "family": "io",
+      "assembly": "rep insb",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "f36c"
+    },
+    {
+      "id": "io-4",
+      "family": "io",
+      "assembly": "rep outsb",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "f36e"
+    },
+    {
+      "id": "control-debug-registers-1",
+      "family": "control-debug-registers",
+      "assembly": "mov rax, cr0",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f20c0"
+    },
+    {
+      "id": "control-debug-registers-2",
+      "family": "control-debug-registers",
+      "assembly": "mov cr3, rax",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f22d8"
+    },
+    {
+      "id": "control-debug-registers-3",
+      "family": "control-debug-registers",
+      "assembly": "mov rax, dr0",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f21c0"
+    },
+    {
+      "id": "descriptor-segment-management-1",
+      "family": "descriptor-segment-management",
+      "assembly": "lgdt [rax]",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f0110"
+    },
+    {
+      "id": "descriptor-segment-management-2",
+      "family": "descriptor-segment-management",
+      "assembly": "lidt [rax]",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f0118"
+    },
+    {
+      "id": "descriptor-segment-management-3",
+      "family": "descriptor-segment-management",
+      "assembly": "ltr ax",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f00d8"
+    },
+    {
+      "id": "descriptor-segment-management-4",
+      "family": "descriptor-segment-management",
+      "assembly": "swapgs",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f01f8"
+    },
+    {
+      "id": "model-specific-registers-1",
+      "family": "model-specific-registers",
+      "assembly": "rdmsr",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f32"
+    },
+    {
+      "id": "model-specific-registers-2",
+      "family": "model-specific-registers",
+      "assembly": "wrmsr",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f30"
+    },
+    {
+      "id": "model-specific-registers-3",
+      "family": "model-specific-registers",
+      "assembly": "rdpmc",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f33"
+    },
+    {
+      "id": "translation-1",
+      "family": "translation",
+      "assembly": "invlpg [rax]",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f0138"
+    },
+    {
+      "id": "translation-2",
+      "family": "translation",
+      "assembly": "invpcid rax, OWORD PTR [rbx]",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "660f388203"
+    },
+    {
+      "id": "cache-ordering-1",
+      "family": "cache-ordering",
+      "assembly": "clflush [rax]",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0fae38"
+    },
+    {
+      "id": "cache-ordering-2",
+      "family": "cache-ordering",
+      "assembly": "prefetcht0 [rax]",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f1808"
+    },
+    {
+      "id": "cache-ordering-3",
+      "family": "cache-ordering",
+      "assembly": "lfence",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0faee8"
+    },
+    {
+      "id": "cache-ordering-4",
+      "family": "cache-ordering",
+      "assembly": "mfence",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0faef0"
+    },
+    {
+      "id": "cache-ordering-5",
+      "family": "cache-ordering",
+      "assembly": "sfence",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0faef8"
+    },
+    {
+      "id": "cache-ordering-6",
+      "family": "cache-ordering",
+      "assembly": "wbinvd",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f09"
+    },
+    {
+      "id": "extended-state-1",
+      "family": "extended-state",
+      "assembly": "fxsave [rax]",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0fae00"
+    },
+    {
+      "id": "extended-state-2",
+      "family": "extended-state",
+      "assembly": "fxrstor [rax]",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0fae08"
+    },
+    {
+      "id": "extended-state-3",
+      "family": "extended-state",
+      "assembly": "xsave [rax]",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0fae20"
+    },
+    {
+      "id": "extended-state-4",
+      "family": "extended-state",
+      "assembly": "xrstor [rax]",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0fae28"
+    },
+    {
+      "id": "extended-state-5",
+      "family": "extended-state",
+      "assembly": "xgetbv",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f01d0"
+    },
+    {
+      "id": "extended-state-6",
+      "family": "extended-state",
+      "assembly": "xsetbv",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f01d1"
+    },
+    {
+      "id": "thread-state-1",
+      "family": "thread-state",
+      "assembly": "rdfsbase rax",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "f3480faec0"
+    },
+    {
+      "id": "thread-state-2",
+      "family": "thread-state",
+      "assembly": "wrgsbase rax",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "f3480faed8"
+    },
+    {
+      "id": "thread-state-3",
+      "family": "thread-state",
+      "assembly": "rdpkru",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f01ee"
+    },
+    {
+      "id": "thread-state-4",
+      "family": "thread-state",
+      "assembly": "wrpkru",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f01ef"
+    },
+    {
+      "id": "execution-control-1",
+      "family": "execution-control",
+      "assembly": "cli",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "fa"
+    },
+    {
+      "id": "execution-control-2",
+      "family": "execution-control",
+      "assembly": "sti",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "fb"
+    },
+    {
+      "id": "execution-control-3",
+      "family": "execution-control",
+      "assembly": "hlt",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "f4"
+    },
+    {
+      "id": "execution-control-4",
+      "family": "execution-control",
+      "assembly": "monitor",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f01c8"
+    },
+    {
+      "id": "execution-control-5",
+      "family": "execution-control",
+      "assembly": "mwait",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f01c9"
+    },
+    {
+      "id": "virtualization-1",
+      "family": "virtualization",
+      "assembly": "vmrun",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f01d8"
+    },
+    {
+      "id": "virtualization-2",
+      "family": "virtualization",
+      "assembly": "vmmcall",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f01d9"
+    },
+    {
+      "id": "virtualization-3",
+      "family": "virtualization",
+      "assembly": "vmload",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f01da"
+    },
+    {
+      "id": "virtualization-4",
+      "family": "virtualization",
+      "assembly": "vmsave",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f01db"
+    },
+    {
+      "id": "virtualization-5",
+      "family": "virtualization",
+      "assembly": "stgi",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f01dc"
+    },
+    {
+      "id": "virtualization-6",
+      "family": "virtualization",
+      "assembly": "clgi",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f01dd"
+    },
+    {
+      "id": "virtualization-7",
+      "family": "virtualization",
+      "assembly": "invlpga",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f01df"
+    },
+    {
+      "id": "control-protection-1",
+      "family": "control-protection",
+      "assembly": "endbr64",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "f30f1efa"
+    },
+    {
+      "id": "control-protection-2",
+      "family": "control-protection",
+      "assembly": "rdsspq rax",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "f3480f1ec8"
+    },
+    {
+      "id": "sse-move-1",
+      "family": "sse-move",
+      "assembly": "movups xmm0, xmm1",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f10c1"
+    },
+    {
+      "id": "sse-move-2",
+      "family": "sse-move",
+      "assembly": "movups xmm0, XMMWORD PTR [rax]",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f1000"
+    },
+    {
+      "id": "sse-move-3",
+      "family": "sse-move",
+      "assembly": "movaps XMMWORD PTR [rax], xmm0",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f2900"
+    },
+    {
+      "id": "sse-floating-1",
+      "family": "sse-floating",
+      "assembly": "addps xmm0, xmm1",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f58c1"
+    },
+    {
+      "id": "sse-floating-2",
+      "family": "sse-floating",
+      "assembly": "addss xmm0, xmm1",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "f30f58c1"
+    },
+    {
+      "id": "sse-floating-3",
+      "family": "sse-floating",
+      "assembly": "cmpps xmm0, xmm1, 0",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0fc2c100"
+    },
+    {
+      "id": "sse-floating-4",
+      "family": "sse-floating",
+      "assembly": "sqrtpd xmm0, xmm1",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "660f51c1"
+    },
+    {
+      "id": "sse-integer-1",
+      "family": "sse-integer",
+      "assembly": "paddb xmm0, xmm1",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "660ffcc1"
+    },
+    {
+      "id": "sse-integer-2",
+      "family": "sse-integer",
+      "assembly": "pmullw xmm0, xmm1",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "660fd5c1"
+    },
+    {
+      "id": "sse-integer-3",
+      "family": "sse-integer",
+      "assembly": "pxor xmm0, xmm1",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "660fefc1"
+    },
+    {
+      "id": "sse-permute-convert-1",
+      "family": "sse-permute-convert",
+      "assembly": "shufps xmm0, xmm1, 0",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0fc6c100"
+    },
+    {
+      "id": "sse-permute-convert-2",
+      "family": "sse-permute-convert",
+      "assembly": "cvtsi2ss xmm0, rax",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "f3480f2ac0"
+    },
+    {
+      "id": "sse-permute-convert-3",
+      "family": "sse-permute-convert",
+      "assembly": "pextrw eax, xmm0, 0",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "660fc5c000"
+    },
+    {
+      "id": "sse-permute-convert-4",
+      "family": "sse-permute-convert",
+      "assembly": "ldmxcsr DWORD PTR [rax]",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0fae10"
+    },
+    {
+      "id": "sse3-ssse3-1",
+      "family": "sse3-ssse3",
+      "assembly": "haddps xmm0, xmm1",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "f20f7cc1"
+    },
+    {
+      "id": "sse3-ssse3-2",
+      "family": "sse3-ssse3",
+      "assembly": "pshufb xmm0, xmm1",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "660f3800c1"
+    },
+    {
+      "id": "sse4-1",
+      "family": "sse4",
+      "assembly": "pblendw xmm0, xmm1, 1",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "660f3a0ec101"
+    },
+    {
+      "id": "sse4-2",
+      "family": "sse4",
+      "assembly": "pcmpistri xmm0, xmm1, 0",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "660f3a63c100"
+    },
+    {
+      "id": "sse4-3",
+      "family": "sse4",
+      "assembly": "crc32 eax, ebx",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "f20f38f1c3"
+    },
+    {
+      "id": "avx-1",
+      "family": "avx",
+      "assembly": "vmovups ymm0, ymm1",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "c5fc10c1"
+    },
+    {
+      "id": "avx-2",
+      "family": "avx",
+      "assembly": "vaddps ymm0, ymm1, ymm2",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "c5f458c2"
+    },
+    {
+      "id": "avx-3",
+      "family": "avx",
+      "assembly": "vzeroupper",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "c5f877"
+    },
+    {
+      "id": "avx2-1",
+      "family": "avx2",
+      "assembly": "vpaddb ymm0, ymm1, ymm2",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "c5f5fcc2"
+    },
+    {
+      "id": "avx2-2",
+      "family": "avx2",
+      "assembly": "vgatherdps ymm0, [rax+ymm1*4], ymm2",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "c4e26d920488"
+    },
+    {
+      "id": "fma-f16c-1",
+      "family": "fma-f16c",
+      "assembly": "vfmadd132ps ymm0, ymm1, ymm2",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "c4e27598c2"
+    },
+    {
+      "id": "fma-f16c-2",
+      "family": "fma-f16c",
+      "assembly": "vcvtph2ps ymm0, xmm1",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "c4e27d13c1"
+    },
+    {
+      "id": "avx512-1",
+      "family": "avx512",
+      "assembly": "vaddps zmm0, zmm1, zmm2",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "62f1744858c2"
+    },
+    {
+      "id": "avx512-2",
+      "family": "avx512",
+      "assembly": "kmovw k1, k2",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "c5f890ca"
+    },
+    {
+      "id": "avx512-3",
+      "family": "avx512",
+      "assembly": "vpternlogd zmm0, zmm1, zmm2, 0x96",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "62f3754825c296"
+    },
+    {
+      "id": "cryptographic-1",
+      "family": "cryptographic",
+      "assembly": "aesenc xmm0, xmm1",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "660f38dcc1"
+    },
+    {
+      "id": "cryptographic-2",
+      "family": "cryptographic",
+      "assembly": "pclmulqdq xmm0, xmm1, 0",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "660f3a44c100"
+    },
+    {
+      "id": "cryptographic-3",
+      "family": "cryptographic",
+      "assembly": "sha256rnds2 xmm0, xmm1",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f38cbc1"
+    },
+    {
+      "id": "amd-xop-fma4-1",
+      "family": "amd-xop-fma4",
+      "assembly": "vprotb xmm0, xmm1, xmm2",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "8fe96890c1"
+    },
+    {
+      "id": "amd-xop-fma4-2",
+      "family": "amd-xop-fma4",
+      "assembly": "vfmaddps xmm0, xmm1, xmm2, xmm3",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "c4e3f168c320"
+    },
+    {
+      "id": "mmx-1",
+      "family": "mmx",
+      "assembly": "movq mm0, mm1",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f6fc1"
+    },
+    {
+      "id": "mmx-2",
+      "family": "mmx",
+      "assembly": "paddb mm0, mm1",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0ffcc1"
+    },
+    {
+      "id": "mmx-3",
+      "family": "mmx",
+      "assembly": "emms",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f77"
+    },
+    {
+      "id": "amd-3dnow-1",
+      "family": "amd-3dnow",
+      "assembly": "pfadd mm0, mm1",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f0fc19e"
+    },
+    {
+      "id": "amd-3dnow-2",
+      "family": "amd-3dnow",
+      "assembly": "femms",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "0f0e"
+    },
+    {
+      "id": "x87-data-1",
+      "family": "x87-data",
+      "assembly": "fld1",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "d9e8"
+    },
+    {
+      "id": "x87-data-2",
+      "family": "x87-data",
+      "assembly": "fld QWORD PTR [rax]",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "dd00"
+    },
+    {
+      "id": "x87-data-3",
+      "family": "x87-data",
+      "assembly": "fstp QWORD PTR [rax]",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "dd18"
+    },
+    {
+      "id": "x87-data-4",
+      "family": "x87-data",
+      "assembly": "fxch st(1)",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "d9c9"
+    },
+    {
+      "id": "x87-arithmetic-1",
+      "family": "x87-arithmetic",
+      "assembly": "fadd st, st(1)",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "d8c1"
+    },
+    {
+      "id": "x87-arithmetic-2",
+      "family": "x87-arithmetic",
+      "assembly": "fcomi st, st(1)",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "dbf1"
+    },
+    {
+      "id": "x87-arithmetic-3",
+      "family": "x87-arithmetic",
+      "assembly": "fsin",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "d9fe"
+    },
+    {
+      "id": "x87-arithmetic-4",
+      "family": "x87-arithmetic",
+      "assembly": "fsqrt",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "d9fa"
+    },
+    {
+      "id": "x87-state-1",
+      "family": "x87-state",
+      "assembly": "fninit",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "dbe3"
+    },
+    {
+      "id": "x87-state-2",
+      "family": "x87-state",
+      "assembly": "fldcw WORD PTR [rax]",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "d928"
+    },
+    {
+      "id": "x87-state-3",
+      "family": "x87-state",
+      "assembly": "fnstenv [rax]",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "d930"
+    },
+    {
+      "id": "x87-state-4",
+      "family": "x87-state",
+      "assembly": "fwait",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "9b"
+    },
+    {
+      "id": "flags-9",
+      "family": "flags",
+      "assembly": "cmc",
+      "mode": "long-64",
+      "featureAvailability": "not-inferred-from-capture",
+      "bytes": "f5",
+      "expectedEffects": {
+        "uses": [
+          "flag:cf"
+        ],
+        "mayDefs": [
+          "flag:cf"
+        ],
+        "mustDefs": [
+          "flag:cf"
+        ]
+      },
+      "expectationBasis": "Independent carry-complement equation CF_new = 1 - CF_old; other state preserved."
+    }
+  ]
+}

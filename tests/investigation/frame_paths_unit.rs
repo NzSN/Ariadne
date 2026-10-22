@@ -105,6 +105,30 @@ pub(super) fn input(edges: &[(usize, usize)]) -> Input {
     }
 }
 #[test]
+fn interrupted_pc_cannot_supply_an_active_call_anchor() {
+    let mut source = input(&[(0, 3)]);
+    assert!(compose(&source, &q(10)).is_ok());
+    source.chain.frames[0].transition = Some(FrameTransition::MachineFrame);
+    for question in [
+        q(10),
+        FramePathQuestion {
+            from_frame: 1,
+            to_frame: 1,
+            np: 10,
+        },
+    ] {
+        let error = compose(&source, &question).unwrap_err();
+        assert!(error.to_string().contains("machine-frame transition"));
+    }
+    // A call made by an interrupted activation remains an ordinary call. The
+    // edge to frame 1 depends on frame 0's transition, not frame 1's own edge.
+    source.chain.frames[0].transition = Some(FrameTransition::NormalReturn);
+    source.chain.frames[1].transition = Some(FrameTransition::MachineFrame);
+    assert!(compose(&source, &q(10)).is_ok());
+    source.chain.frames[0].transition = None;
+    assert!(compose(&source, &q(10)).is_ok());
+}
+#[test]
 fn explicit_graph_policy_preserves_legacy_replay_and_independent_search_stops() {
     let edges = [(0, 1), (1, 3)];
     let legacy = list(input(&edges), q(10), limits(), Some(usize::MAX)).unwrap();

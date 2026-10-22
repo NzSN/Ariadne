@@ -33,6 +33,8 @@ pub struct Backend {
     target: Option<DecoderTarget>,
     runtime_hash: String,
     helper_hash: String,
+    source_extension: Option<super::source_extension::SourceExtension>,
+    source_extension_failed: bool,
     metrics: Metrics,
     retain_refinement: bool,
     refinement: BTreeMap<Address, super::refinement::TransferReceipt>,
@@ -195,6 +197,14 @@ impl Backend {
         Ok(())
     }
     pub fn finish(mut self) -> Result<(), Error> {
+        if self.source_extension_failed {
+            return Err(invalid(
+                "source extension query failed; start a fresh backend",
+            ));
+        }
+        if let Some(extension) = &self.source_extension {
+            extension.validate()?;
+        }
         if crate::reports::sha256(&std::fs::read(&self.decoder)?) != self.decoder_hash {
             return Err(invalid(
                 "decode reference changed during snapshot preparation",
@@ -206,11 +216,23 @@ impl Backend {
         if let Some(s) = self.decoder_session.take() {
             s.finish()?;
         }
+        if let Some(extension) = &self.source_extension {
+            extension.validate()?;
+        }
         Ok(())
     }
     pub fn new(config: Config, decoder: &Path) -> Result<Self, Error> {
         let start = Instant::now();
-        let runtime_hash = config.validate_runtime()?;
+        let packaged_runtime_hash = config.validate_runtime()?;
+        let source_extension = config
+            .source_extension
+            .as_deref()
+            .map(super::source_extension::SourceExtension::load)
+            .transpose()?;
+        let runtime_hash = source_extension.as_ref().map_or_else(
+            || packaged_runtime_hash.clone(),
+            |extension| extension.runtime_identity(&packaged_runtime_hash),
+        );
         let helper_hash = crate::bap::helper_identity(&config.helper)?;
         Ok(Self {
             config,
@@ -222,6 +244,8 @@ impl Backend {
             target: None,
             runtime_hash,
             helper_hash,
+            source_extension,
+            source_extension_failed: false,
             metrics: Metrics {
                 runtime_validation: start.elapsed(),
                 ..Metrics::default()
@@ -245,6 +269,33 @@ impl Backend {
         options: &PreparationOptions,
         target: DecoderTarget,
     ) -> Result<PreparedBatch, Error> {
+        if self.source_extension_failed {
+            return Err(invalid(
+                "source extension query failed; start a fresh backend",
+            ));
+        }
+        let result = self.prepare_inner(snapshot, candidates, options, target);
+        if self.source_extension.is_some() && result.is_err() {
+            self.source_extension_failed = true;
+            self.session.take();
+            self.decoder_session.take();
+        }
+        result
+    }
+    fn prepare_inner(
+        &mut self,
+        snapshot: &str,
+        candidates: &BTreeMap<Address, Option<Vec<u8>>>,
+        options: &PreparationOptions,
+        target: DecoderTarget,
+    ) -> Result<PreparedBatch, Error> {
+        if self.source_extension.is_some()
+            && (self.retain_guards || self.retain_targets || self.retain_refinement)
+        {
+            return Err(invalid(
+                "source flag extension does not admit guards, target resolution or refinement",
+            ));
+        }
         if self.snapshot.as_deref().is_some_and(|id| id != snapshot)
             || self.target.is_some_and(|t| t != target)
         {
@@ -272,6 +323,8 @@ impl Backend {
         self.metrics.reference_decode += start.elapsed();
         let profile = if self.retain_guards {
             super::guard_admission::PRODUCER_PROFILE
+        } else if self.source_extension.is_some() {
+            super::source_extension::PROFILE
         } else {
             PROJECTION
         };
@@ -329,11 +382,35 @@ impl Backend {
         }
         self.metrics.lift_and_protocol += start.elapsed();
         let start = Instant::now();
-        for (va, lift) in lifts {
+        for (va, mut lift) in lifts {
             let site = batch
                 .sites
                 .get_mut(&va)
                 .ok_or_else(|| invalid("BAP returned unsolicited site"))?;
+            if let Some(extension) = &self.source_extension
+                && lift.status == "decoded"
+                && lift.bil.is_empty()
+                && lift.length == 1
+                && site.evidence.length == 1
+                && super::source_extension::SourceExtension::supports(&site.evidence.bytes)
+                && lift.bytes == format!("{:02x}", site.evidence.bytes[0])
+                && site.instruction.kind == InstructionKind::Ordinary
+                && lift.properties.as_ref().is_some_and(|p| {
+                    !p.jump && !p.conditional && !p.indirect && !p.call && !p.return_ && !p.control
+                })
+            {
+                lift.bil = extension.lift(
+                    match target {
+                        DecoderTarget::WindowsAmd64 => "windows-amd64",
+                        DecoderTarget::LinuxAmd64 => "linux-amd64",
+                    },
+                    snapshot,
+                    va,
+                    &site.evidence.bytes,
+                    self.config.timeout,
+                )?;
+                lift.validate_ast()?;
+            }
             let ast = serde_json::to_vec(&lift.bil)?;
             let mut semantic = SemanticEvidence {
                 backend: "bap-x86-legacy".into(),

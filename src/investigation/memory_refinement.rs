@@ -409,6 +409,15 @@ fn pair(
     })
 }
 fn validate_input(input: &Input) -> Result<(), Error> {
+    if input
+        .sites
+        .iter()
+        .any(|site| site.projection.as_deref() == Some("bap-bit-provenance-v9"))
+    {
+        return Err(invalid(
+            "source flag extension does not admit memory refinement",
+        ));
+    }
     if !digest(&input.identity.artifact_sha256)
         || !digest(&input.identity.query_id)
         || !digest(&input.identity.request_sha256)

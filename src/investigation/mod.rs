@@ -33,7 +33,7 @@ pub use frame_paths::{
 };
 pub use frame_unwind::{
     CapturedFrameChain, FRAME_UNWIND_PROFILE, FrameMemoryEvidence, FrameRecoveryLimits,
-    FrameRegisterEvidence, RecoveredFrame,
+    FrameRegisterEvidence, FrameTransition, RecoveredFrame,
 };
 #[cfg(feature = "bap")]
 mod memory_refinement;

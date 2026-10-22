@@ -16,28 +16,43 @@ pub struct Config {
     pub helper: PathBuf,
     pub runtime: PathBuf,
     pub timeout: Duration,
+    /// Explicit narrow source-built flag producer. Guard admission, target
+    /// resolution and refinement require separate qualification and are refused.
+    pub source_extension: Option<PathBuf>,
 }
 impl Config {
     pub fn from_env() -> Self {
         let root = Path::new(env!("CARGO_MANIFEST_DIR"));
-        Self::new(
+        let mut config = Self::new(
             std::env::var_os("ARIADNE_BAP_HELPER")
                 .map(PathBuf::from)
                 .unwrap_or_else(|| root.join("target/ariadne-bap-lift")),
             std::env::var_os("BAP_RUNTIME_ROOT")
                 .map(PathBuf::from)
                 .unwrap_or_else(|| root.join("tmp/bap-setup/stable")),
-        )
+        );
+        config.source_extension =
+            std::env::var_os("ARIADNE_BAP_SOURCE_EXTENSION").map(PathBuf::from);
+        config
     }
     pub fn new(helper: PathBuf, runtime: PathBuf) -> Self {
         Self {
             helper,
             runtime,
             timeout: Duration::from_secs(10),
+            source_extension: None,
         }
     }
+    pub fn with_source_extension(mut self, directory: PathBuf) -> Self {
+        self.source_extension = Some(directory);
+        self
+    }
     pub fn validate(&self) -> Result<(), Error> {
-        self.validate_runtime().map(|_| ())
+        self.validate_runtime()?;
+        if let Some(directory) = &self.source_extension {
+            super::source_extension::SourceExtension::load(directory)?;
+        }
+        Ok(())
     }
     pub(crate) fn validate_runtime(&self) -> Result<String, Error> {
         let helper = std::fs::metadata(&self.helper)?;

@@ -148,6 +148,11 @@ path = "tests/bap/disagreement.rs"
 required-features = ["bap"]
 
 [[test]]
+name = "bap_amd64_semantics_probe"
+path = "tests/bap/amd64_semantics_probe.rs"
+required-features = ["input"]
+
+[[test]]
 name = "bap_native"
 path = "tests/bap/native.rs"
 required-features = ["bap"]

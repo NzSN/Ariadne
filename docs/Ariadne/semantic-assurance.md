@@ -37,6 +37,14 @@ AMD64 instruction-step project, including the user64 milestones, Stage D, Lean
 ISA proofs and full-manual coverage objective. Retirement changes project scope;
 it does not mark the former proof obligations as satisfied.
 
+On **2026-10-22**, the user requested full AMD64 operation implementation
+coverage. The [operation coverage program](../../.agents/plans/amd64-operation-coverage.md)
+reopens implementation coverage across the semantic producer/projection and
+captured unwind layers. This later implementation objective does not restore
+the retired independent ISA-proof track or discharge its former obligations.
+Its versioned inventory and fresh operation tests must establish their own
+coverage; conservative unsupported results remain gaps.
+
 Ariadne relies on a pinned BAP lifter for AMD64 instruction semantics and
 validates its own semantic projection and analysis. Results remain conditional
 on supported lifting behavior and captured evidence.

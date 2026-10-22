@@ -1,4 +1,5 @@
 //! Evidence-bound recovery prefixes. These values never represent completed dataflow.
+use super::frame_unwind::FrameTransition;
 use super::{
     CapturedFrameChain, Error, EvidenceContext, FramePathEdgeKind, FramePathNode, Identity,
     SiteEvidence, invalid,
@@ -925,6 +926,8 @@ pub(crate) fn frame_entry_anchor(
             frame.function_end,
             &activation,
         ))?))
+    } else if frame.transition == Some(FrameTransition::MachineFrame) {
+        Err(invalid("machine-frame transition has no parent-call entry"))
     } else {
         Ok(super::sha(&serde_json::to_vec(&(
             "captured-frame-parent-call-entry/v1",
@@ -1004,6 +1007,9 @@ fn active_calls(
         .frames
         .get(child)
         .ok_or_else(|| invalid("child frame outside chain"))?;
+    if younger.transition == Some(FrameTransition::MachineFrame) {
+        return Err(invalid("machine-frame transition has no active call entry"));
+    }
     let older = chain
         .frames
         .get(
@@ -1079,11 +1085,9 @@ pub fn active_frame_structure_entry(
 /// auxiliary entry evidence. Missing preparation leaves the other maps useful.
 fn auxiliary_frame_ceiling(chain: &CapturedFrameChain, question: &FrameStructureQuestion) -> usize {
     let mut oldest = question.from_frame;
-    while chain
-        .frames
-        .get(oldest)
-        .is_some_and(|frame| frame.function_begin.is_none())
-    {
+    while chain.frames.get(oldest).is_some_and(|frame| {
+        frame.function_begin.is_none() && frame.transition != Some(FrameTransition::MachineFrame)
+    }) {
         let Some(parent) = oldest
             .checked_add(1)
             .filter(|parent| *parent < chain.frames.len())
@@ -1118,6 +1122,16 @@ fn frame_link(
         continuation,
         admitted: false,
     };
+    if chain.frames[child].transition == Some(FrameTransition::MachineFrame) {
+        return Ok((
+            link,
+            Some(FrameStructureDiagnostic::new(
+                child,
+                FrameStructureDiagnosticKind::UnavailableLinkEndpoint,
+                "machine-frame transition restores an interrupted PC; no ordinary call link is implied",
+            )),
+        ));
+    }
     let Some(parent) = parent else {
         return Ok((link, None));
     };

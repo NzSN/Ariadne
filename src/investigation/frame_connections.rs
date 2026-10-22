@@ -329,6 +329,9 @@ fn anchor(source: &BoundFrameStructure, frame: usize) -> Result<FramePathNode, S
         .frames
         .get(frame - 1)
         .ok_or("child-frame-not-recovered")?;
+    if child.transition == Some(super::frame_unwind::FrameTransition::MachineFrame) {
+        return Err("machine-frame-transition-has-no-active-call-anchor".into());
+    }
     let parent = source
         .recoveries()
         .iter()

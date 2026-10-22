@@ -37,6 +37,9 @@ impl FileSnapshot {
             .frames
             .get(index)
             .ok_or_else(|| invalid("frame index outside recovered chain"))?;
+        if frame.transition == Some(crate::investigation::FrameTransition::MachineFrame) {
+            return Err(invalid("machine-frame-has-no-normal-call-entry"));
+        }
         if frame.function_begin != Some(entry) {
             return Err(invalid(
                 "normal-call entry assumption requires validated function_begin",

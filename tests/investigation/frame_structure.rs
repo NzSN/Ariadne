@@ -215,6 +215,26 @@ pub(crate) fn fixture() -> (CapturedFrameChain, BoundFrameRecovery) {
 }
 
 #[test]
+fn machine_frame_rejects_a_normal_call_alignment_premise() {
+    let (mut chain, bound) = fixture();
+    chain.frames[0].transition = Some(FrameTransition::MachineFrame);
+    let error = validate_sources(
+        &chain,
+        0,
+        bound.request(),
+        bound.context(),
+        bound.proofs(),
+        &FrameStructureLimits::default(),
+    )
+    .unwrap_err();
+    assert!(
+        error
+            .to_string()
+            .contains("machine-frame activation cannot supply a normal-call entry premise")
+    );
+}
+
+#[test]
 fn unavailable_endpoint_drains_with_gap_without_dataflow() {
     let (chain, bound) = fixture();
     assert!(bound.recovery().state().pending.is_empty());
@@ -671,6 +691,33 @@ fn active_call_requires_reached_e8_not_merely_prepared_source() {
             .unwrap()
             .0
             .admitted
+    );
+
+    // An interrupted RIP can happen to follow matching E8 bytes. The machine
+    // transition still cannot justify a call edge or a call-entry root.
+    chain.frames[0].transition = Some(FrameTransition::MachineFrame);
+    let error = active_calls(&chain, 0, &parent).unwrap_err();
+    assert!(error.to_string().contains("machine-frame transition"));
+    let (link, diagnostic) = frame_link(&chain, 0, Some(&parent), Some(&child)).unwrap();
+    assert!(!link.admitted);
+    assert_eq!((link.call_site, link.child_entry), (None, None));
+    let diagnostic = diagnostic.unwrap();
+    assert_eq!(
+        diagnostic.kind,
+        FrameStructureDiagnosticKind::UnavailableLinkEndpoint
+    );
+    assert!(diagnostic.message.contains("interrupted PC"));
+    chain.frames[0].function_begin = None;
+    assert!(frame_entry_anchor(&chain, 0, target).is_err());
+    assert_eq!(
+        auxiliary_frame_ceiling(
+            &chain,
+            &FrameStructureQuestion {
+                from_frame: 0,
+                to_frame: 0,
+            },
+        ),
+        0
     );
 }
 

@@ -32,6 +32,10 @@ scopes. Contract validation does not prove an arbitrary lifter or pass correct.
 
 **Where to go next.**
 
+- [AMD64 operation coverage program](../../.agents/plans/amd64-operation-coverage.md) —
+  active instruction-family inventory, producer-gap closure and architectural
+  admission expansion; full instruction coverage remains an open stage exit.
+
 - [Completed native request-budget plan](../../.agents/plans/completed/native-request-budget.md) records caller-selected inbound frames, paired capability checks and fresh native qualification.
 
 - [BIL shift-count compatibility](bap-shift-count-design.md) — captured XORPS diagnosis, independent count widths and versioned correction.
@@ -188,6 +192,81 @@ Unavailable capture remains distinct from decoder/lifter failure. Retain
 unsupported constructs and generic unknown values conservatively.
 
 ## Projection
+
+### AMD64 operation coverage program
+
+The user-requested [coverage program](../../.agents/plans/amd64-operation-coverage.md)
+extends this design's production semantic boundary across AMD64 operations.
+It separately tracks an executable family survey, a complete versioned legal-form
+inventory, missing producer lifts, architectural-state/width expansion, prefix
+and loop semantics, and exceptional/system operations. A representative survey
+does not establish an exhaustive instruction denominator. The existing profile
+v6 remains finite until individual changes are implemented and qualified.
+
+Support means implemented control and dependency effects under declared
+architectural premises, with independent executable expectations. Merely
+decoding an instruction, receiving BIL, or emitting conservative unknown effects
+for an unimplemented operation does not close its coverage row. Environmental
+unknowns within implemented semantics remain explicit. BAP remains the trusted
+semantic producer; missing upstream lifts require producer work and new pinning,
+not an automatic LLVM effect fallback. Saved producer profiles retain their
+original interpretation. The plan's S0–S5 and Q0–Q1 stages own implementation
+and qualification; its unwind track belongs to the investigation design.
+
+#### Explicit source-built flag extension
+
+The first producer extension supplies actual upstream BAP BIL for the exact
+unprefixed AMD64 bytes F8 (CLC), F9 (STC), F5 (CMC) and FD (STD). The pinned
+packaged producer returns empty lifts for these forms. A maintained
+[upstream patch](../../native/bap/source-coverage/flags.patch) extends its opcode
+type, byte parser and lifter; a separate process built against the checked SDK
+exports the resulting typed BIL. It does not load an SDK-built plugin into the
+older packaged runtime, and it does not synthesize effects from LLVM opcode names.
+
+The [build command](../../native/bap/source-coverage/build.py) verifies the source
+archive, checks the original gaps, builds original/patched observers, checks
+independent CF/DF equations and emits an isolated runtime. A checked-in
+[dependency lock](../../native/bap/source-coverage/runtime.lock.json) binds the
+reproducible manifest and executable. The [host boundary](../../src/bap/source_extension.rs)
+also binds exact source, patch, SDK and query identities, bounds process output
+and time, and rejects malformed, changed or out-of-scope responses. The backend
+refuses reuse after a failed extension query and revalidates artifacts at finish.
+
+Selection is explicit through `Config::with_source_extension` or
+`ARIADNE_BAP_SOURCE_EXTENSION`. The default packaged path retains its existing
+behavior and identities. The opt-in path uses projection profile
+`bap-bit-provenance-v9` and a combined runtime identity; saved earlier profiles
+retain their original interpretation. Extension use requires agreement between
+the two decoders on an ordinary one-byte instruction and an empty base lift.
+Prefix variants and all other missing lifts remain outside this extension.
+
+```sh
+python3 native/bap/source-coverage/build.py --output target/new-source-flags
+ARIADNE_BAP_SOURCE_EXTENSION=target/new-source-flags/runtime \
+  python3 tools/probe_amd64_semantics.py --native \
+  --output target/new-source-flags-survey
+ARIADNE_BAP_SOURCE_EXTENSION=target/new-source-flags/runtime \
+ARIADNE_BAP_CORE_DIR=target/bap-core-native \
+  cargo test --offline --locked --lib bap::source_extension::tests::native_ \
+  -- --ignored --test-threads=1
+```
+
+The source/SDK lock qualifies a specific reproducible build; different artifacts
+need explicit pin review and qualification. Ordinary preparation, recovery,
+definitions and slicing are the initial integration scope. Guard admission,
+target resolution and memory refinement are explicitly refused, including
+zero-work requests and their saved/native replay boundaries, until their
+operation-dependent proofs have separate qualification. This four-operation
+extension does not establish general AMD64 coverage.
+
+The [survey catalogue](../../tests/bap/fixtures/amd64-semantics/catalogue.json)
+currently defines 49 family categories and 171 representative encodings, with
+nine independent effect expectations. Its [runner](../../tools/probe_amd64_semantics.py)
+distinguishes projected effects, unknown effects, missing producer lifts,
+unsupported state/control, decode disagreement, query errors and unexercised
+rows. A missing expected flag effect makes the baseline survey fail its coverage
+expectation while preserving the measured reason; this does not turn a known
+producer gap into a successful result. Full legal-form completeness remains S1.
 
 Use a bounded abstract bit-provenance interpreter for supported BIL nodes.
 Initial architectural bits refer to canonical GPR byte/flag cells and the

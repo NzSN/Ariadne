@@ -20,6 +20,37 @@ For the wider context, see the optional [documentation map](docs/documentation-m
 Current validation follows the [executable test matrix](tests/README.md). Dated run
 results below are historical; their Git links do not establish a current pass.
 
+## 2026-10-22 — AMD64 operation coverage implementation begins
+
+The requested [operation coverage program](.agents/plans/amd64-operation-coverage.md)
+now has two implemented finite tracks. [Unwind recovery](docs/Ariadne/investigation-design.md#amd64-unwind-coverage-program)
+uses Ariadne profile v4 for conventional Windows metadata v1/v2, preserves older
+profiles and distinguishes machine frames from ordinary calls. Fifty-three focused
+tests and 103 fresh Windows reference comparisons pass; sparse capture and
+malformed instruction-boundary checks have separate Rust tests.
+
+The [source-built flag extension](docs/Ariadne/bap-analysis-core-design.md#explicit-source-built-flag-extension)
+adds explicit opt-in BAP CLC/STC/CMC/STD semantics with reproducible dependency
+pins, checked transport and native/Rust parity. The 171-encoding survey moves
+from 44 to 48 projected cases and 80 to 76 missing lifts; other categories are
+unchanged. Eight Rust extension controls, four direct native refusal controls
+and sixteen Python producer/survey controls pass. Default behavior remains
+separate; guarded/target/refinement modes are not admitted under v9.
+
+The current default/core-only Rust suites pass 410/64 tests (134/22 ignored),
+with strict Clippy, formatting, layout and navigation. Three property tests
+exercise 384 configured unwind cases, 251 general Python controls pass, and a
+compiled stack-slot mutation is detected after repairing isolated-copy inputs.
+Runtime-table, chained-range and legacy code-pointer overflow now produce
+explicit failures; saved replay and live-reader binding are tested separately.
+Earlier source-stability, RET-immediate and mutation-compilation failures remain
+uncredited. Generated run products stay outside maintained source.
+
+Full AMD64 coverage remains incomplete: exhaustive legal forms, wider producer
+and state/prefix/control semantics, composed v9 analysis and Windows v3/APX
+context/metadata qualification are open. These finite deliveries do not close
+full model, real-capture, performance, release or universal-proof gates.
+
 ## 2026-10-22 — Retained evidence replaced by executable tests
 
 The user superseded the earlier retention policy and requested removal of the

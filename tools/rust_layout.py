@@ -4,6 +4,7 @@ import shutil
 
 ROOT = Path(__file__).resolve().parents[1]
 MODELS = (
+    "AriadneAlignmentHypothesis.tla",
     "AriadnePredicateAdmission.tla",
     "AriadneGuardedTargetResolution.tla",
     "AriadneLoopTargetClosure.tla",
@@ -12,11 +13,12 @@ MODELS = (
 
 def source_files():
     paths = {ROOT / "Cargo.toml", ROOT / "Cargo.lock", Path(__file__)}
-    for tree in ("src", "tests"):
+    for tree in ("src", "tests", "native/bap"):
         paths.update(p for p in (ROOT / tree).rglob("*")
                      if p.is_file() and p.suffix != ".md"
                      and "__pycache__" not in p.parts)
     paths.update(ROOT / "Specs" / name for name in MODELS)
+    paths.add(ROOT / "native/bap-core/sdk.lock.json")
     return paths
 
 
@@ -26,6 +28,9 @@ def copy_sut(destination):
     destination.mkdir(parents=True, exist_ok=True)
     for tree in ("src", "tests", "native/bap"):
         shutil.copytree(ROOT / tree, destination / tree)
+    (destination / "native/bap-core").mkdir(parents=True, exist_ok=True)
+    shutil.copy2(ROOT / "native/bap-core/sdk.lock.json",
+                 destination / "native/bap-core/sdk.lock.json")
     shutil.copy2(ROOT / "Cargo.lock", destination / "Cargo.lock")
     (destination / "Specs").mkdir(exist_ok=True)
     for name in MODELS:

@@ -33,8 +33,8 @@ def inventory():
         ["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z"], cwd=ROOT
     ).decode().split("\0")
     paths = {name: ROOT / name for name in listed if name and
-             (name.startswith(("src/", "tests/", "Specs/", "tools/", "mbt/"))
-              or name in ("Cargo.toml", "Cargo.lock")) and
+             (name.startswith(("src/", "tests/", "Specs/", "tools/", "mbt/", "native/bap/"))
+              or name in ("Cargo.toml", "Cargo.lock", "native/bap-core/sdk.lock.json")) and
              not name.startswith(("mbt/results/", "mbt/stage-e/results/"))}
     client = ROOT.parent / "MirrorRust"
     for path in (client / "Cargo.toml", *sorted((client / "src").rglob("*.rs"))):

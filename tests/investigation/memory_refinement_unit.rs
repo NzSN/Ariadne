@@ -4,6 +4,30 @@ use crate::effects::{Catalogue, RegisterView};
 use crate::{AnalysisRequest, Analyzer, InputKind, Instruction, InstructionKind};
 use serde_json::json;
 
+#[test]
+fn saved_refinement_refuses_source_extension_profile_before_hash_replay() {
+    let (bound, load) = fixture(false, false, true);
+    let mut report =
+        assess_memory_origins(&bound, question(load), MemoryRefinementLimits::default()).unwrap();
+    assert!(!report.input.receipts.is_empty());
+    for site in &mut report.input.sites {
+        site.projection = Some("bap-bit-provenance-v9".into());
+    }
+    let error = report.validate().unwrap_err().to_string();
+    assert!(
+        error.contains("source flag extension does not admit memory refinement"),
+        "{error}"
+    );
+    let receipt = &report.input.receipts[0];
+    let site = report
+        .input
+        .sites
+        .iter()
+        .find(|s| s.va == receipt.site)
+        .unwrap();
+    assert!(receipt.validate(site).is_err());
+}
+
 fn variable(name: &str, width: usize, kind: &str) -> serde_json::Value {
     json!({"name":name,"index":0,"virtual":false,"width":width,"type":kind})
 }

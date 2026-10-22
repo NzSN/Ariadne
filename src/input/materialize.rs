@@ -379,6 +379,15 @@ impl FilePreparedAnalysis {
             }
             return Ok(());
         };
+        if self.prepared.identity.ruleset == "bap-bit-provenance-v9"
+            || self.prepared.instructions.values().any(|site| {
+                site.semantic
+                    .as_ref()
+                    .is_some_and(|semantic| semantic.projection == "bap-bit-provenance-v9")
+            })
+        {
+            return Err("source flag extension does not admit target resolution".into());
+        }
         if report.snapshot != self.snapshot.snapshot_id
             || report.artifact_sha256 != self.snapshot.artifact_sha256
         {
@@ -1275,6 +1284,14 @@ impl FileSnapshot {
                 (false, Some(limits), Some(setup))
             }
         };
+        if config.source_extension.is_some()
+            && (refinement || target_limits.is_some() || guard_setup.is_some())
+        {
+            return Err(PreparationError::Backend(
+                "source flag extension does not admit guards, target resolution or refinement"
+                    .into(),
+            ));
+        }
         let mut backend = crate::bap::Backend::new(config.clone(), decoder)
             .map_err(|e| PreparationError::Backend(e.to_string()))?;
         backend

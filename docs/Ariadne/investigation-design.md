@@ -50,6 +50,10 @@ and qualification preserve alternatives and missing premises. The frame-path que
 
 **Where to go next.**
 
+- [AMD64 operation coverage program](../../.agents/plans/amd64-operation-coverage.md) —
+  conventional unwind completion, exceptional-transition provenance and
+  separately versioned metadata coverage alongside instruction semantics.
+
 - [Active specification synchronization](../../.agents/plans/specification-sync.md) —
   completed finite typed-edge frame-path model qualification, bounded stops and preserved historical receipts.
 
@@ -1128,12 +1132,13 @@ retain its unwind method, validity, stack slots, source spans and module/build
 identity. Missing unwind data, corrupt return addresses, unsupported tail-call,
 inline or exceptional frames remain explicit gaps rather than guessed links.
 The [reader scope](file-reader-design.md#decision-and-supported-scope) now includes
-a finite opt-in Windows AMD64 captured-unwind adapter. General unwinding remains
-outside delivery. It reads captured PE32+ headers, complete sorted runtime tables,
-Windows `UNWIND_INFO` version-1 ordinary-body PUSH_NONVOL, ALLOC_SMALL/LARGE,
-SET_FPREG, SAVE_NONVOL/FAR and the bounded SAVE_XMM128 form described below.
-Prologues, epilogues, chained/handler/SAVE_XMM128_FAR/machine-frame recipes and
-unmatched/JIT modules stop explicitly. Unannotated leaf recovery
+a finite opt-in Windows AMD64 captured-unwind adapter. It reads captured PE32+
+headers and complete sorted runtime tables. The Ariadne profile v3 extension adds
+Windows metadata-v1 recovery with near/far saved GPR/vector operations,
+machine-frame restoration, validated handler/chained records, partial prologues
+and recognized captured epilog suffixes. The [coverage program](#amd64-unwind-coverage-program)
+tracks its current validation and remaining metadata-version limits. Unmatched/JIT
+modules and unimplemented forms still stop explicitly. Unannotated leaf recovery
 uses the stated Windows ABI and complete-table premises. Essential missing
 thread/context records are input prerequisites, not zero-valued frames.
 
@@ -1155,7 +1160,7 @@ they cannot replace missing captured instruction bytes automatically.
 
 #### Saved-XMM unwind support (2026-10-22)
 
-Fresh recovery uses `captured-windows-amd64-unwind-v2`. It accepts operation 8
+The initial extension used `captured-windows-amd64-unwind-v2`. It accepts operation 8
 (`UWOP_SAVE_XMM128`) for nonvolatile XMM6–XMM15, consumes both code slots and
 scales the unsigned 16-bit offset by 16. The save address uses the fixed frame
 base: captured RSP for a frame without a frame register, otherwise the frame
@@ -1205,6 +1210,92 @@ Automated tests, mutation/model campaigns and executable legacy replay were
 not run for this extension. V1 compatibility was reviewed at both replay
 dispatch sites; its runtime qualification remains separate. Disposable build
 and run products are under ignored `target/dump-5a5fe796-frame-example/`.
+
+### AMD64 unwind coverage program
+
+The [operation coverage program](../../.agents/plans/amd64-operation-coverage.md)
+extends captured unwind recovery beyond the earlier ordinary-body subset. Its
+U0–U5 stages separately own conventional save operations, machine frames,
+handler/chained metadata, partial prologues, epilogs, and Windows v3/APX metadata.
+This is an implementation program, not a claim that every stage is complete.
+
+New behavior uses a distinct Ariadne replay profile. Old v1/v2 products must
+retain their original byte reads, stopping decisions, serialization and hashes.
+An optional per-frame transition distinguishes an ordinary return from a
+machine frame; it describes the transition into the next older frame. Machine
+frames restore the captured saved RIP/RSP and use exact interrupted-PC lookup.
+They do not establish a normal call-entry alignment premise or an active CALL
+anchor. Dependent structural and path products preserve this boundary.
+
+Handler data stays opaque. Chained records require captured bytes, compatible
+metadata, cycle detection and existing read/work budgets. Partial prologue
+recovery applies only completed operations. Epilog recovery requires validated
+captured instruction suffixes. Missing stack/code bytes remain explicit gaps;
+the parser never supplies them from a module image. Saved vector bytes remain
+evidence without inventing a vector register context.
+
+The Ariadne replay-profile number and Windows UNWIND_INFO format version are
+independent. Introducing an Ariadne v3 profile does not imply support for the
+separate Windows v3/APX descriptor format. Independent operation fixtures,
+same-capture legacy replay and applicable Windows reference comparisons define
+the stage exits; broad root tests alone cannot qualify unexercised operations.
+
+The Windows profile reconstructs a caller virtual-unwind context; it does not
+simulate execution of a return instruction. For recognized `RET imm16` epilogs,
+Windows `RtlVirtualUnwind` consumes the encoding but derives caller RSP by popping
+the eight-byte return slot, without adding the immediate cleanup amount. The
+independent Windows reference gate checks this distinction explicitly. A machine
+frame restoring interrupted RIP zero is also distinct from an ordinary zero
+return-address boundary: it retains an unresolved interrupted frame.
+
+Chained secondary fragments and machine-frame dummy prologues do not, by
+themselves, establish a callable function entry or one contiguous function
+interval. Their stack recovery can succeed while entry-dependent analysis
+remains unavailable until independent captured-call evidence supplies the entry.
+
+Executable validation uses the synthetic operation cases in
+[`unwind_operations.rs`](../../tests/input/unwind_operations.rs), including
+same-capture legacy replay, and the Windows reference runner:
+
+```sh
+ARIADNE_UNWIND_EXPORT=target/new-unwind-inputs \
+  cargo test --offline --locked --test input_frame_paths \
+  export_positive_unwind_inputs_for_windows_reference -- --ignored --nocapture
+python3 tools/check_amd64_unwind_windows.py \
+  --cases target/new-unwind-inputs --output target/new-unwind-reference
+```
+
+The export test writes only fresh ignored inputs and current compiled-source
+identities. The runner invokes Windows `RtlVirtualUnwind` on positive synthetic
+captures, comparing first-frame PC/SP and available registers; it never executes
+captured code. Windows interop is a prerequisite. Malformed captures are tested
+against Ariadne's validating reader rather than passed to the OS unwinder.
+These finite comparisons do not establish Windows v3/APX coverage.
+
+Fresh recovery now selects `captured-windows-amd64-unwind-v4`, which adds
+Windows metadata-v2 EPILOG descriptors while preserving v1/v2/v3 replay.
+It parses the bounded descriptor prefix separately from ordinary unwind slots,
+validates flags, padding, ranges, common size and overlap, and uses the declared
+epilog geometry. That geometry excludes preceding stack cleanup and includes
+only the first terminal byte. Captured POP encodings and exact instruction
+boundaries are checked before applying the remaining suffix. Flags-pop cleanup
+and IRETQ machine-frame restoration have separate cases. A PC inside the trailing
+bytes of a multi-byte terminal is rejected even when it lies outside the
+descriptor's nominal span.
+
+Metadata-v2 body/prologue recovery does not read unrelated instruction bytes.
+Selected epilogs retain only the required captured instruction spans. Sparse
+capture tests assert the absence of reads through missing code; the Windows
+reference matrix uses complete synthetic images and supplies no native sparse
+capture acceptance claim. Metadata-v3/APX, extended captured context layouts and
+OS-defined canonical-frame types remain open U5 prerequisites.
+
+Runtime-table, chained-range and code-array addresses use checked arithmetic.
+Unrepresentable endpoints produce explicit overflow gaps, including during
+legacy replay. Three saved-chain tests cover these boundaries separately from
+the live reader, whose minidump dependency omits a module ending exactly at
+the mathematical address-space endpoint. Valid representable read sequences
+retain their profile-specific behavior.
 
 ### Meaning of a listed path
 
