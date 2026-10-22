@@ -8,10 +8,19 @@ Chat reports and their browser renderings are kept in `.agents/chatdocs/`. This 
 
 **Validation plan, 2026-10-22.** The [new overview](ariadne-validation-plan-20261022.html) maps validation to ordinary tests, PBT and MBT, with six implementation stages. It presents proposed work; creating the page does not execute application validation.
 
+**Frame-to-frame capabilities, 2026-10-22.** The [frame-to-frame question guide](ariadne-frame-structure-type-theory-20261022.html) presents six current questions through records, sums, dependent indices and refinements, with a site glossary, explicit unknown results and an illustrative interactive graph.
+
+**Actual dump example, 2026-10-22.** The [new capture example](ariadne-dump-5a5fe796-frame-example-20261022.html) applies the current frame 1 → frame 0 query to DumpLedger capture 5A5FE796. Two completed runs retain unavailable anchors, nine local instructions, and explicit unwind and alignment-coverage blockers.
+
+**Saved-XMM unwind support, 2026-10-22.** The [implementation follow-up](ariadne-dump-5a5fe796-op8-followup-20261022.html) records operation-8 support and a fresh run on dump 5A5FE796: 29 recovered frame records, known caller context, and remaining alignment/active-call limits.
+
 Canonical documents under `docs/` remain in place. The two 2026-10-12 design/plan pages below preserve the original browser presentation and its matching historical Markdown; current design and execution ownership remains in `docs/Ariadne/` and `.agents/plans/`.
 
 | Chat document | View | Source |
 | --- | --- | --- |
+| Operation 8 support: 29 recovered frame records on dump 5A5FE796 (2026-10-22; working-tree v2) | [Open follow-up](ariadne-dump-5a5fe796-op8-followup-20261022.html) | HTML only; [original v1 example](ariadne-dump-5a5fe796-frame-example-20261022.html) |
+| Original v1 frame-to-frame example: dump 5A5FE796, unavailable anchors (2026-10-22) | [Open example](ariadne-dump-5a5fe796-frame-example-20261022.html) | HTML only; [connection contract](../../docs/Ariadne/investigation-design.md#structural-corridors-and-cycle-summaries) |
+| What frame-to-frame can answer through structural types (2026-10-22; 758d7ef) | [Open explanation](ariadne-frame-structure-type-theory-20261022.html) | HTML only; [canonical frame-question contract](../../docs/Ariadne/frame-question-investigation-design.md) |
 | Ariadne validation plan: ordinary tests, PBT and MBT (2026-10-22) | [Open overview](ariadne-validation-plan-20261022.html) | HTML only; [maintained test matrix](../../tests/README.md) |
 | Ariadne I5c execution progress: CLI12/native114 passed; SSH interruption (2026-10-21; base 438ee6b) | [Open explanation](ariadne-remaining-work-20261021.html) | HTML only; [canonical plan index](../plans/README.md) |
 | Historical remaining-work snapshot before qualification execution (2026-10-21; base 438ee6b) | [Open snapshot](ariadne-remaining-work-20261021-438ee6b-pre-execution.html) | HTML only; preserved earlier version |
@@ -57,7 +66,7 @@ The first-jump page includes the captured selector/table calculator and search-s
 
 **Why this document exists.** The [chat-document skill](../../../../.agents/skills/chatdoc/SKILL.md) keeps explanations and their renderings together while preserving existing `docs/` documents.
 
-**What this document establishes.** This index lists the available report formats and interactive illustrations, including the proposed test/PBT/MBT validation overview. The archive retains report records, dated presentation snapshots and this index. Older reports preserve their Markdown/HTML pairs; new chat reports default to HTML only unless Markdown is explicitly requested. Historical browser pages are retained; reconstructed content is labeled. The graph page preserves its original template, with SVGs reconstructed from the retained completed reports and input hashes recorded alongside it.
+**What this document establishes.** This index lists the available report formats and interactive illustrations, including the proposed test/PBT/MBT validation overview and the structural-type guide to current frame-to-frame questions. The archive retains report records, dated presentation snapshots and this index. Older reports preserve their Markdown/HTML pairs; new chat reports default to HTML only unless Markdown is explicitly requested. Historical browser pages are retained; reconstructed content is labeled. The graph page preserves its original template, with SVGs reconstructed from the retained completed reports and input hashes recorded alongside it.
 
 **Where to go next.** Consult the [investigation contract](../../docs/Ariadne/investigation-design.md), [target-resolution contract](../../docs/Ariadne/indirect-target-resolution.md) and [checkpoint history](../../CHECKPOINTS.md) for their respective contracts, retained results and delivery status.
 

@@ -1,7 +1,7 @@
 {
   "archived": "2026-10-16",
   "scope": "Conversation presentation archive; canonical designs stay in docs/ and plan owners now live in .agents/plans/. No new analysis or qualification.",
-  "report_count": 41,
+  "report_count": 44,
   "markdown_html_pairs_including_index": 21,
   "source_session": "01a12ddc-4e59-7cb2-b5aa-67a8e522c597",
   "recovered_reports": [
@@ -840,12 +840,12 @@
       "sha256": "2667f3af9200452de3e195dc17664344a094f718310fb48d7527f5a02999ac33"
     },
     "ariadne-reports-index.html": {
-      "bytes": 15413,
-      "sha256": "940cc2e09e4534701680b073166ea806d60ae295aa218d8df990fcb0f7bfb01b"
+      "bytes": 17415,
+      "sha256": "66734ca4e41f711f3ea52cb1e247c37e7badfae531726cf35c67023e45876878"
     },
     "ariadne-reports-index.md": {
-      "bytes": 9267,
-      "sha256": "d09aaf523e293c99cb60fdc59679656f09c07e009380021cbf8988db6cf78188"
+      "bytes": 11031,
+      "sha256": "911ac25702695265166801025423d9dfaa4c67a018e41ef6c85d40b6793135ff"
     },
     "ariadne-resolver-structural-types-20261015.html": {
       "bytes": 32858,
@@ -1006,10 +1006,22 @@
     "ariadne-validation-plan-20261022.html": {
       "bytes": 21749,
       "sha256": "bd8b46ce78d839f7d92e5da87d6eb6b22b0a6056b840113aaf0100ffdefa42a6"
+    },
+    "ariadne-frame-structure-type-theory-20261022.html": {
+      "bytes": 56173,
+      "sha256": "fb145fd973f51687fd9aa9b370839350064e263b39a7d181064ba8a6a7da7944"
+    },
+    "ariadne-dump-5a5fe796-frame-example-20261022.html": {
+      "bytes": 34641,
+      "sha256": "2b14386b781dac073138b5675b4af03c646a2ef90530313794ae1385ddd75399"
+    },
+    "ariadne-dump-5a5fe796-op8-followup-20261022.html": {
+      "bytes": 20471,
+      "sha256": "321631a34a9ab4dcc1f04a15d672ef530f41cde1d264455f7a040741cd0797ab"
     }
   },
   "directory": ".agents/chatdocs/",
-  "html_documents_including_index": 42,
+  "html_documents_including_index": 45,
   "markdown_documents_including_index": 22,
   "source_review_documents": [
     {
@@ -1670,6 +1682,170 @@
         "initial_attempt": "Sandboxed launch failed because WSL_INTEROP was stale/unavailable.",
         "completed_attempt": "wslview outside the sandbox exited 0; no browser rendering or disclosure interaction was visually inspected."
       }
+    },
+    {
+      "html": "ariadne-frame-structure-type-theory-20261022.html",
+      "date": "2026-10-22",
+      "source_revision": "758d7ef8a21e4607e01e68e988f7ec8b280afb8c",
+      "scope": "Current six-question capability catalogue, site/point vocabulary, unknown handling and structural type explanation; illustrative local model only.",
+      "canonical_source_sha256": {
+        "src/investigation/frame_paths.rs": "0113d026e74041c4e023646774b2c3f4f63b353dd815bf7d641b86569a9af6dd",
+        "src/investigation/frame_connections.rs": "31eeed425929b979e31bfbabd22a87d7ba1ea765598d2f0a6871aa6b8db4f31e",
+        "src/investigation/frame_question/model.rs": "3bb43265e7c817b1bc213c648326b87a5e2cccbcee8b7b7884e6f33051830e50",
+        "src/investigation/frame_question/alternative.rs": "1bcfa62d2d3ea9d4002b6f10d20474dcfb54a77dbffea47a028d95f375cb23e2",
+        "src/investigation/frame_question/dependencies.rs": "d7c9f43dc55d63f7d0fec824e1fabb27d8abc5416033435571eed06cd2666cc6",
+        "src/investigation/frame_question.rs": "8fd643faaf3973f476433492a0de52b5260491a5d6370c10441a393d4a637470",
+        "src/investigation/frame_structure.rs": "dcb70ebe77face6e33adafbeccc5b551a10d8f6b0ebbc9bec01ba13d85217b28",
+        "src/investigation/frame_unwind.rs": "4768f93a93f95f1f44ad6b0fa7aaaa4d7f2bd6e568b0955fe12f6a1726d9243d",
+        "docs/Ariadne/investigation-design.md": "9ba92ca7f02831c3ccc05d6dadea19e73a368ec4b6ccdfde0bf4ab0bba236ef3",
+        "docs/Ariadne/frame-question-investigation-design.md": "cd3fb4cdc8732fd55b4031e59e3f4e2a2eabdd4ea58dfa84bc81e8606927155f",
+        "Specs/AriadneFramePaths.tla": "c15d29de2fe56c147b3ba7fc6d3391544b8276c5d081d5fdcd765f72afaf832f",
+        "Specs/AriadneFrameQuestion.tla": "d15ad67eb7be083abdb9146847416cd83b991dac45c7dd88d549488f1111b65b",
+        "tests/input/frame_question_cli.rs": "cf3703d76891089119b1a1aeb213de9c8b681fafc4307c4fd921f38bd22afa98",
+        "src/bap/target_resolution/question_semantics.rs": "1a5cb26a9d6cf1f53cfea40f789cd40b553ad1cbdd6602cf9c48994cffb92d02",
+        "src/bin/ariadne-minidump.rs": "1a10662e0fb2cfb7cad2bbb0c065d7e3673af1c1cd224b03c36caab7b15d76b6",
+        "Specs/AriadneFrameConnections.tla": "4442512fabc2999404494926d34372cd2876b9bef3e39691d0633588280075fc"
+      },
+      "previous_index_sha256": {
+        "ariadne-reports-index.html": "940cc2e09e4534701680b073166ea806d60ae295aa218d8df990fcb0f7bfb01b",
+        "ariadne-reports-index.md": "d09aaf523e293c99cb60fdc59679656f09c07e009380021cbf8988db6cf78188"
+      },
+      "validation": {
+        "html_structure": "balanced elements, unique IDs and resolved accessibility labels",
+        "local_references_checked": 197,
+        "inline_svg_xml_validated": 2,
+        "interactive_controls": 4,
+        "toy_control_states_checked": 24,
+        "toy_dom_updates_checked": 24,
+        "browser_rendering_inspected": false,
+        "interactive_validation_method": "Node VM with a DOM stub: 24 control combinations and event-driven updates; no live browser interaction inspected.",
+        "unique_ids": 51,
+        "capability_questions": 6,
+        "documentation_navigation": "81 connected documents, 80 context sections, 2103 local links; tools/check_doc_links.py",
+        "editorial_review": "Current-source review of six capability signatures, scope boundaries and unknown handling."
+      },
+      "presentation": {
+        "requested": "wslview",
+        "state": "launched",
+        "launch_succeeded": true,
+        "launch_exit_code": 0,
+        "launched_at": "2026-10-22T08:17:52+00:00",
+        "visual_inspection": false
+      },
+      "updated": "2026-10-22",
+      "update_previous_html_sha256": "7819d9dcce48aa11f7ab0b12a80adad524c8c2c127e981f735fe9272c370e8f0",
+      "capability_questions": 6
+    },
+    {
+      "html": "ariadne-dump-5a5fe796-frame-example-20261022.html",
+      "date": "2026-10-22",
+      "source_revision": "758d7ef8a21e4607e01e68e988f7ec8b280afb8c",
+      "scope": "Actual frame 1 to frame 0 query on user-selected dump; partial unavailable-anchor result with baseline and explicit Windows-entry-premise runs.",
+      "canonical_source_sha256": {
+        "src/investigation/frame_connections.rs": "31eeed425929b979e31bfbabd22a87d7ba1ea765598d2f0a6871aa6b8db4f31e",
+        "src/investigation/frame_unwind.rs": "4768f93a93f95f1f44ad6b0fa7aaaa4d7f2bd6e568b0955fe12f6a1726d9243d",
+        "src/bap/guard_admission.rs": "cc9be3470525cb1e47ff297b2bd215f9aa179f7f4794a2f94ffc3e93d4e61b0b",
+        "src/input/frame_structure.rs": "43a047549b2a9830637b6a7a5c207971ac68466a452ea7237bd13760e02584ee",
+        "src/bin/ariadne_minidump/frame_structure.rs": "ccc09dae536ac1e9a7d41cebd1831a8d9bbb954ccdf925d19725ba1e4fc6db14",
+        "src/bin/ariadne_minidump/frame_connections.rs": "3e7ea4aaea1fcbf69353d079cfa41bf47d90b29684d49fbe4169a75b830b507c",
+        "docs/Ariadne/investigation-design.md": "9ba92ca7f02831c3ccc05d6dadea19e73a368ec4b6ccdfde0bf4ab0bba236ef3",
+        "docs/Ariadne/frame-question-investigation-design.md": "cd3fb4cdc8732fd55b4031e59e3f4e2a2eabdd4ea58dfa84bc81e8606927155f"
+      },
+      "dump_id": "dump_5A5FE7964BA24F2EAB465F164F",
+      "artifact_sha256": "2135f6c965c3db1b7265915fe89f222c758d8f10f1eeef782099f5887a6b0265",
+      "query": {
+        "thread_id": 26348,
+        "from_frame": 1,
+        "to_frame": 0,
+        "example_count_bound": 3
+      },
+      "runs": [
+        {
+          "directory": "target/dump-5a5fe796-frame-example/connections-1-0-complete-runtime",
+          "exit_code": 0,
+          "elapsed_seconds": 28.992,
+          "report_sha256": "00767a03d76c6831d2692e7966bb61b2188496b4aa77bd3923e992e421bfa570",
+          "publication_binding": "8d0a14370f552d7e527416ca78ea4e1b0ed859bdf5fbbcc424f5ad40557d9dfb",
+          "connection": "unavailable_anchors"
+        },
+        {
+          "directory": "target/dump-5a5fe796-frame-example/connections-1-0-windows-entry",
+          "exit_code": 0,
+          "elapsed_seconds": 29.537,
+          "report_sha256": "03f4445962172eeec9057cdd1c16a1fdc8ff6a96c55c250e3681e503e3552d03",
+          "publication_binding": "90f5092a0e9bb144dce94c113472a37a94241f25c625787ac628292acfc4cf95",
+          "connection": "unavailable_anchors"
+        }
+      ],
+      "validation": {
+        "browser_rendering_inspected": false,
+        "html_structure": "balanced tags, unique IDs and resolved accessibility labels",
+        "local_references_checked": 173,
+        "inline_svg_xml_validated": 1,
+        "unique_ids": 17,
+        "interactive_control_sites": 12,
+        "interactive_validation_method": "Node VM with DOM stub; 12 site selections and event-driven updates; no browser rendering inspected.",
+        "documentation_navigation": "81 connected documents, 80 context sections, 2103 local links; tools/check_doc_links.py",
+        "editorial_review": "Checked against run, chain, projection and guard results; current scope and partial-result meanings preserved."
+      },
+      "presentation": {
+        "requested": "wslview",
+        "state": "launched",
+        "launch_succeeded": true,
+        "launch_exit_code": 0,
+        "launched_at": "2026-10-22T09:21:35+00:00",
+        "visual_inspection": false
+      },
+      "successor": {
+        "html": "ariadne-dump-5a5fe796-op8-followup-20261022.html",
+        "purpose": "v2 operation-8 implementation and fresh application; preserves original v1 run identities"
+      },
+      "before_successor_notice_sha256": "721353b6ccc61744180acf4276a70affc01b254a1dbe248c6e9c1c606b0af6cb"
+    },
+    {
+      "html": "ariadne-dump-5a5fe796-op8-followup-20261022.html",
+      "date": "2026-10-22",
+      "source_revision": "758d7ef8a21e4607e01e68e988f7ec8b280afb8c",
+      "source_state": "working-tree operation-8 extension",
+      "scope": "Versioned SAVE_XMM128 support and fresh same-capture frame 1 to 0 application; remaining unavailable active call and endpoint.",
+      "canonical_source_sha256": {
+        "src/investigation/frame_unwind.rs": "6c509d6936d20d007cf75d89521033a147b7e46e48558f88675578136f72d4fe",
+        "src/input/frame_paths.rs": "fc1a8b5e4b0b828fc857b96b71eb24ad3e5f73af8b6ff47a26b06f3d3d917515",
+        "src/investigation/frame_connections.rs": "31eeed425929b979e31bfbabd22a87d7ba1ea765598d2f0a6871aa6b8db4f31e",
+        "docs/Ariadne/investigation-design.md": "8eec144d87781f6d092a8a2846d639ba11da06fc9a71ceb7449be831d6561a30"
+      },
+      "artifact_sha256": "2135f6c965c3db1b7265915fe89f222c758d8f10f1eeef782099f5887a6b0265",
+      "profile": "captured-windows-amd64-unwind-v2",
+      "run": {
+        "directory": "target/dump-5a5fe796-frame-example/connections-1-0-op8",
+        "binary_sha256": "2159538238546e816c18a39dd35b4633aa00d471c16b971497750a60dfc6abea",
+        "publication_binding": "d41ece2ad358904b77e7fd63d6b9a6bbff137b3821cbdb2747767ddc631b80f2",
+        "report_sha256": "0c42622c77fea4f0ace5b8858e54113bbb1c5b6f44e7910fcf6f064cdea13461",
+        "frame_records": 29,
+        "saved_xmm_slots": 16,
+        "connection": "unavailable_anchors"
+      },
+      "validation": {
+        "browser_rendering_inspected": false,
+        "application_tests_run": false,
+        "legacy_replay_execution": false,
+        "html_structure": "balanced tags, unique IDs and resolved accessibility labels",
+        "local_references_checked": 197,
+        "inline_svg_xml_validated": 1,
+        "unique_ids": 7,
+        "interactive_control_sites": 0,
+        "interactive_validation_method": "Static SVG and native details control; browser rendering not inspected.",
+        "documentation_navigation": "81 connected documents, 80 context sections, 2105 local links",
+        "source_review": "Two independent read-only reviews of op8 bounds/evidence and versioned replay dispatch."
+      },
+      "presentation": {
+        "requested": "wslview",
+        "state": "launched",
+        "launch_succeeded": true,
+        "launch_exit_code": 0,
+        "launched_at": "2026-10-22T09:59:35+00:00",
+        "visual_inspection": false
+      }
     }
   ],
   "plan_directory_relocation": {
@@ -1729,5 +1905,26 @@
     ],
     "stages": 6,
     "implementation_status": "proposed"
+  },
+  "latest_frame_structure_type_explanation": {
+    "date": "2026-10-22",
+    "report": "ariadne-frame-structure-type-theory-20261022.html",
+    "source_revision": "758d7ef8a21e4607e01e68e988f7ec8b280afb8c",
+    "notation": "Explanatory structural records, sums, dependent indices and refinements",
+    "illustrative_control_states": 24,
+    "capability_questions": 6,
+    "includes": [
+      "site and point vocabulary",
+      "unknown outcomes and layer receipts",
+      "six current capability signatures"
+    ]
+  },
+  "latest_frame_dump_example": {
+    "date": "2026-10-22",
+    "report": "ariadne-dump-5a5fe796-op8-followup-20261022.html",
+    "dump_id": "dump_5A5FE7964BA24F2EAB465F164F",
+    "profile": "captured-windows-amd64-unwind-v2",
+    "result": "unavailable_anchors",
+    "frame_records": 29
   }
 }

@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light">
+<title>Frame 1 → frame 0 on DumpLedger dump 5A5FE796</title>
+<style>
+:root{--ink:#19313f;--muted:#536874;--line:#d1dfe5;--blue:#17688b;--amber:#87520d;--green:#176b53}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:20px}body{margin:0;background:#edf2f4;color:var(--ink);font:17px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:1120px;margin:30px auto;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}header{padding:42px 46px;background:linear-gradient(120deg,#edf7fa,#fff7e8);border-bottom:1px solid var(--line)}h1{font-size:clamp(2rem,4vw,3rem);line-height:1.16;letter-spacing:-.03em;margin:12px 0 20px}h2{font-size:1.45rem;line-height:1.3;margin:0 0 18px}h3{font-size:1.04rem;margin:0 0 10px}p{margin:0 0 16px}.eyebrow{font-size:.76rem;font-weight:750;text-transform:uppercase;letter-spacing:.11em;color:var(--blue)}.lead{font-size:1.1rem;max-width:850px}.chips{display:flex;flex-wrap:wrap;gap:9px}.chip{font-size:.75rem;border:1px solid #c8d4d9;border-radius:20px;padding:4px 10px;background:white}.chip.warn{color:var(--amber);border-color:#d5b57a;background:#fff6df}.body{padding:0 46px 38px}section{margin-top:36px}nav{display:flex;flex-wrap:wrap;gap:9px 22px;padding:16px 46px;border-bottom:1px solid var(--line);font-size:.85rem}nav a{font-weight:650;text-decoration:none}a{color:#08638a;text-underline-offset:3px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0}.card{background:#f5f9fa;padding:20px;border:1px solid var(--line);border-radius:10px}.card strong{display:block;font-size:1.75rem;color:var(--blue)}.card span{font-size:.86rem}.callout{padding:19px 21px;border-left:4px solid #bc8328;background:#fff8e9;border-radius:8px;margin:20px 0}.callout p:last-child{margin:0}.note{color:var(--muted);font-size:.87rem}code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}code{font-size:.84em;background:#edf3f5;padding:2px 4px;border-radius:4px;overflow-wrap:anywhere}pre{padding:20px;background:#193341;color:#eaf4f9;border-radius:9px;overflow:auto;line-height:1.6;font-size:.82rem}pre code{padding:0;background:none;color:inherit;font-size:inherit}.hash{word-break:break-all}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:9px;margin:18px 0}table{border-collapse:collapse;width:100%;font-size:.86rem;min-width:620px}th,td{text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--line)}thead th{background:#f0f6f8}tbody tr:last-child td,tbody tr:last-child th{border-bottom:0}tbody th{width:24%}figure{margin:20px 0}figure svg{display:block;width:100%;height:auto;border:1px solid var(--line);background:#fafcfd;border-radius:10px}figcaption{font-size:.85rem;color:var(--muted);margin:9px 0}.diagram-label{font:600 16px system-ui,sans-serif;fill:#1e4155}.diagram-sub{font:13px system-ui,sans-serif;fill:#4c6875}.diagram-code{font:13px ui-monospace,monospace;fill:#234757}.diagram-small{font:12px system-ui,sans-serif;fill:#675336}details{border:1px solid var(--line);padding:18px 20px;border-radius:9px;margin:18px 0}summary{cursor:pointer;font-weight:650}details[open] summary{margin-bottom:14px}.inspector{padding:23px;border:1px solid #b4cbd6;border-radius:11px;background:#f3f9fc}label{display:block;font-weight:650;font-size:.88rem;margin-bottom:8px}select{width:100%;padding:10px;border:1px solid #9bb4c1;border-radius:6px;background:white;color:var(--ink);font:inherit;font-size:.86rem}.readout{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}.readout div{padding:14px;background:white;border:1px solid var(--line);border-radius:7px}.readout small{display:block;color:var(--muted);font-weight:600}.readout strong{display:block;margin-top:5px;font-size:.9rem;overflow-wrap:anywhere}#site-detail{margin-top:16px;font-size:.9rem}footer{padding:28px 46px;background:#f4f8fa;border-top:1px solid var(--line);font-size:.86rem}footer h2{font-size:1.15rem}.sources li{margin:10px 0;font-size:.87rem}:focus-visible{outline:3px solid #cf9738;outline-offset:4px}
+@media(max-width:760px){main{margin:0;border:0;border-radius:0}header{padding:28px 22px}.body{padding:0 22px 26px}nav{padding:14px 22px}footer{padding:24px 22px}.cards,.readout{grid-template-columns:1fr}.diagram-wrap{overflow:auto}.diagram-wrap svg{min-width:840px}table{font-size:.8rem}pre{font-size:.74rem}}
+@media print{main{max-width:none;margin:0;border:0}body{background:white}nav,.inspector{display:none}.body,header,footer{padding-left:12px;padding-right:12px}figure,.card{break-inside:avoid}pre{white-space:pre-wrap;background:#f1f4f5;color:#193341}table{min-width:0}}
+</style></head><body><main>
+<header><p class="eyebrow">Ariadne · an actual capture · 22 October 2026</p><h1>Frame 1 → frame 0<br>on dump 5A5FE796</h1>
+<p class="lead">The baseline analysis at <code>758d7ef</code> returns <strong>unavailable anchors</strong>. It recovers a small local prologue, but cannot establish the caller activation or reach the captured fault instruction in its admitted graph.</p>
+<div class="chips"><span class="chip warn">connection: unavailable_anchors</span><span class="chip">Thread 26348</span><span class="chip">Windows AMD64</span><span class="chip">Source 758d7ef</span><span class="chip">Fresh local execution</span></div>
+</header>
+<nav aria-label="Sections"><a href="#answer">Answer</a><a href="#capture">Capture</a><a href="#graph">Recovered structure</a><a href="#blockers">Two blockers</a><a href="#types">Read it as types</a><a href="#comparison">Second run</a><a href="#reproduce">Commands and outputs</a></nav>
+<div class="body">
+<section id="answer"><div class="callout"><p><strong>Later implementation update.</strong> <a href="ariadne-dump-5a5fe796-op8-followup-20261022.html">Operation 8 is now supported in profile v2</a>: the rerun recovers 29 frame records, including the caller context. The runs below remain the original v1 baseline; their active-call and local-coverage limits are explained in the follow-up.</p></div><h2>The original v1 question and answer</h2>
+<p><strong>Question:</strong> on the exception thread, can Ariadne connect frame 1’s verified active call to frame 0’s captured PC at <code>0x00007ff77501e620</code>? Request up to two example routes using the strict count bound <code>NP=3</code>.</p>
+<div class="cards"><div class="card"><strong>1</strong><span>captured frame recovered; caller unavailable</span></div><div class="card"><strong>9</strong><span>admitted instructions in frame 0</span></div><div class="card"><strong>0</strong><span>frame-to-frame examples; search unavailable</span></div></div>
+<div class="callout"><p><strong>No connecting route can currently be reported for this query.</strong> Frame unwinding stops on an unsupported XMM-save operation. Separately, local control recovery stops at an unresolved alignment guard before the fault PC. The empty example list supplies no refutation of a real caller-to-fault route.</p></div>
+<p>The 1.16 GB dump was accepted by the reader under the current default policy, including the overlap limit of 128. These blockers occur later in unwind and semantic analysis. Increasing the path-count bound would not supply either missing anchor.</p>
+</section>
+
+<section id="capture"><h2>Which snapshot was analyzed?</h2>
+<p><a href="https://192.168.150.219:4080/dumps/dump_5A5FE7964BA24F2EAB465F164F">Open this capture in DumpLedger</a>. Retrieval used the existing analyzer access and configured CA. The downloaded bytes match both the ledger’s size and SHA-256.</p>
+<div class="table-wrap"><table><tbody>
+<tr><th>Dump identity</th><td><code>dump_5A5FE7964BA24F2EAB465F164F</code> · case <code>renderer-crash</code></td></tr>
+<tr><th>Original filename</th><td><code>9ec86f3c-b82e-40fb-9a80-0d9355daba98.dmp</code></td></tr>
+<tr><th>Size / digest</th><td>1,162,246,736 bytes<br><code class="hash">2135f6c965c3db1b7265915fe89f222c758d8f10f1eeef782099f5887a6b0265</code></td></tr>
+<tr><th>Captured platform</th><td>Windows AMD64, reported OS 10.0.19045; 50 threads and 32 modules.</td></tr>
+<tr><th>Exception</th><td><code>0xc0000005</code>; read access at <code>0x18</code>; exception thread <code>26348</code>.</td></tr>
+<tr><th>Captured instruction</th><td><code>0x00007ff77501e620</code> = <code>electron.exe + 0x545e620</code></td></tr>
+<tr><th>Frame 0 function extent</th><td><code>[0x00007ff77501e110, 0x00007ff77501fb95)</code>, from captured runtime-function metadata.</td></tr>
+<tr><th>Capture coverage</th><td>Ledger: <code>full-memory-declared</code>. The header has flag <code>0x2</code>; the Memory64 stream contains 2,484 ranges. The full-memory declaration does not guarantee every analysis prerequisite is supported.</td></tr>
+</tbody></table></div>
+<p class="note">The exception facts above are captured-point observations. They establish no earlier instruction route, producer of the invalid address, actual last writer, or crash root cause. Module-relative locations avoid inventing symbol names.</p>
+</section>
+
+<section id="graph"><h2>What structure survived?</h2>
+<figure><div class="diagram-wrap"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" role="img" aria-labelledby="flow-title flow-desc">
+<title id="flow-title">Recovered prefix and unavailable frame anchors</title><desc id="flow-desc">The caller frame is unavailable because its unwind step encounters unsupported operation 8. Frame zero contains eight push instructions and one stack subtraction. The edge toward MOVAPS is retained as context, and its alignment guard is unresolved. The captured fault PC lies outside this recovered prefix. No cross-frame call edge is admitted.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#718d9c"/></marker></defs>
+<rect x="25" y="25" width="285" height="190" rx="12" fill="#fff8e9" stroke="#be9655" stroke-dasharray="6 5"/>
+<text x="46" y="60" class="diagram-label">Frame 1 · unavailable</text><text x="46" y="91" class="diagram-sub">No recovered caller PC / stack frame</text><text x="46" y="118" class="diagram-sub">No verified active-call site</text><text x="46" y="158" class="diagram-code">unsupported-unwind-operation</text><text x="46" y="189" class="diagram-small">First unsupported rule: op 8, XMM6 save</text>
+<path d="M312 115 H370" stroke="#b6a381" stroke-width="2" stroke-dasharray="5 5" fill="none"/><text x="324" y="105" class="diagram-small">?</text>
+<rect x="375" y="25" width="600" height="448" rx="12" fill="#f0f7fa" stroke="#a7c4d3"/>
+<text x="397" y="60" class="diagram-label">Frame 0 · captured activation</text>
+<rect x="400" y="85" width="548" height="70" rx="8" fill="white" stroke="#8db0c2"/><text x="420" y="111" class="diagram-code">0x7ff77501e110 … 0x7ff77501e11b</text><text x="420" y="138" class="diagram-sub">Eight admitted push instructions</text>
+<path d="M674 155 V181" stroke="#718d9c" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="400" y="184" width="548" height="62" rx="8" fill="white" stroke="#8db0c2"/><text x="420" y="210" class="diagram-code">0x7ff77501e11c · sub rsp, 0x2a8</text><text x="420" y="233" class="diagram-sub">Ninth admitted instruction</text>
+<path d="M674 247 V274" stroke="#b59150" stroke-width="2" stroke-dasharray="5 4"/><text x="690" y="267" class="diagram-small">retained context edge</text>
+<rect x="400" y="279" width="548" height="70" rx="8" fill="#fff5df" stroke="#bb8a37"/><text x="420" y="306" class="diagram-code">0x7ff77501e123 · MOVAPS alignment guard</text><text x="420" y="333" class="diagram-sub">Unknown; continuation not admitted</text>
+<text x="420" y="380" class="diagram-small">Unrecovered function region; no path is asserted across this gap.</text>
+<rect x="400" y="399" width="548" height="52" rx="8" fill="white" stroke="#849faa" stroke-dasharray="5 4"/><text x="420" y="431" class="diagram-code">0x7ff77501e620 · captured fault PC</text>
+<text x="32" y="282" class="diagram-label">Graph G</text><text x="32" y="312" class="diagram-sub">9 nodes · 8 traversal edges</text><text x="32" y="340" class="diagram-sub">1 context edge · 1 unresolved frontier</text><text x="32" y="382" class="diagram-sub">9 singleton SCCs</text><text x="32" y="410" class="diagram-sub">No cycles in this represented prefix</text>
+</svg></div><figcaption>This diagram summarizes the actual baseline report. The dotted caller link and unrecovered region denote missing evidence; they supply no graph path. The extra edge into the guard is retained as context.</figcaption></figure>
+
+<div class="inspector"><h3>Inspect an actual site from the result</h3><label for="site-select">Choose an admitted instruction, frontier, candidate, or captured point</label><select id="site-select"><option value="0">0x00007ff77501e110 · push r15</option><option value="1">0x00007ff77501e112 · push r14</option><option value="2">0x00007ff77501e114 · push r13</option><option value="3">0x00007ff77501e116 · push r12</option><option value="4">0x00007ff77501e118 · push rsi</option><option value="5">0x00007ff77501e119 · push rdi</option><option value="6">0x00007ff77501e11a · push rbp</option><option value="7">0x00007ff77501e11b · push rbx</option><option value="8">0x00007ff77501e11c · sub rsp, 0x2a8</option><option value="9">0x00007ff77501e123 · movaps [rsp + 0x290], xmm10</option><option value="10">0x00007ff77501e12c · movapd [rsp + 0x280], xmm9</option><option value="11">0x00007ff77501e620 · Captured fault point; no graph-node admission</option></select>
+<div class="readout" aria-live="polite"><div><small>Evidence role</small><strong id="site-role"></strong></div><div><small>Explanatory type</small><strong id="site-type"></strong></div><div><small>Instruction bytes / captured prefix</small><strong id="site-bytes"></strong></div><div><small>Successor or boundary</small><strong id="site-next"></strong></div></div><p id="site-detail"></p><p class="note">This control displays retained results. It performs no new analysis and adds no assumptions.</p></div>
+<details><summary>All nine admitted instructions and the nearby unresolved locations</summary><div class="table-wrap"><table><thead><tr><th>Site</th><th>Instruction / observation</th><th>Role</th></tr></thead><tbody><tr><td><code>0x00007ff77501e110</code></td><td><code>push r15</code></td><td>Admitted instruction node</td></tr>
+<tr><td><code>0x00007ff77501e112</code></td><td><code>push r14</code></td><td>Admitted instruction node</td></tr>
+<tr><td><code>0x00007ff77501e114</code></td><td><code>push r13</code></td><td>Admitted instruction node</td></tr>
+<tr><td><code>0x00007ff77501e116</code></td><td><code>push r12</code></td><td>Admitted instruction node</td></tr>
+<tr><td><code>0x00007ff77501e118</code></td><td><code>push rsi</code></td><td>Admitted instruction node</td></tr>
+<tr><td><code>0x00007ff77501e119</code></td><td><code>push rdi</code></td><td>Admitted instruction node</td></tr>
+<tr><td><code>0x00007ff77501e11a</code></td><td><code>push rbp</code></td><td>Admitted instruction node</td></tr>
+<tr><td><code>0x00007ff77501e11b</code></td><td><code>push rbx</code></td><td>Admitted instruction node</td></tr>
+<tr><td><code>0x00007ff77501e11c</code></td><td><code>sub rsp, 0x2a8</code></td><td>Admitted instruction node</td></tr>
+<tr><td><code>0x00007ff77501e123</code></td><td><code>movaps [rsp + 0x290], xmm10</code></td><td>Unresolved alignment frontier</td></tr>
+<tr><td><code>0x00007ff77501e12c</code></td><td><code>movapd [rsp + 0x280], xmm9</code></td><td>Opaque candidate barrier</td></tr>
+<tr><td><code>0x00007ff77501e620</code></td><td><code>Captured fault point; no graph-node admission</code></td><td>Captured point outside the recovered prefix</td></tr></tbody></table></div></details>
+<p><code>complete_for_represented_graph</code> says graph construction and SCC processing finished for those nine nodes. It does not mean the entire function or call stack was recovered. Likewise, the drained recovery queue and <code>chain.truncated=false</code> coexist with explicit unsupported boundaries.</p>
+</section>
+
+<section id="blockers"><h2>Why the requested path is unavailable</h2>
+<h3>1 · The first unwind rule is outside the current profile</h3>
+<p>The captured <code>UNWIND_INFO</code> at <code>0x00007ff77c9a8468</code> has header <code>01 41 14 00</code>: version 1, no flags, 65-byte prologue, 20 code slots. Its first operation has bytes <code>41 68 25 00</code>.</p>
+<pre><code>0x68 &amp; 0x0f = 8      → UWOP_SAVE_XMM128
+0x68 &gt;&gt; 4   = 6      → saved register XMM6
+0x0025 × 16 = 0x250  → stack offset 592 bytes</code></pre>
+<p>Microsoft defines operation 8 as saving a nonvolatile XMM register, with its scaled offset in the next slot. <a href="https://learn.microsoft.com/en-us/cpp/build/exception-handling-x64?view=msvc-170">Microsoft x64 unwind specification</a>.</p>
+<p>The baseline v1 <a href="../../src/investigation/frame_unwind.rs">unwind implementation</a> accepted operations 0–5 with its additional checks. It returns <code>unsupported-unwind-operation</code> for operation 8. Consequently frame 0 has no recovered return slot or return PC, and frame 1 cannot be admitted. The captured table also contains further XMM saves.</p>
+
+<h3>2 · An opaque candidate keeps the alignment proof open</h3>
+<p>Local recovery reaches the prologue but cannot admit the normal continuation of <code>movaps [rsp + 0x290], xmm10</code> at <code>0x00007ff77501e123</code>. The guard result is <code>unknown</code>, with residual <code>normal-or-alignment-fault-unresolved</code>.</p>
+<p>The following candidate at <code>0x00007ff77501e12c</code> is <code>MOVAPDmr</code>, with captured bytes <code>66 44 0f 29 8c 24 80 02 00 00</code>. Its encoding is outside the reviewed MOVAPS guard recognizer. It remains an opaque barrier with <code>control.complete=false</code> and transfer <code>opaque-rsp-havoc/v1</code>.</p>
+<pre><code>candidate collection: closure_complete = true
+coverage barrier:     0x00007ff77501e12c
+guard stop:           candidate-coverage-incomplete
+RSP residues:         0xffff  (all 16 residues remain possible)
+MOVAPS verdict:       unknown</code></pre>
+<p>The <a href="../../src/bap/guard_admission.rs">current coverage rule</a> rejects closed-coverage claims when any barrier remains, then widens RSP residue facts throughout the candidate region. This leaves the earlier MOVAPS unresolved even with a Windows call-entry premise. The result expresses an analysis coverage limit; it establishes no runtime misalignment.</p>
+<p><strong>Both blockers matter.</strong> Supporting this unwind operation would remove the first barrier to recovering the caller. Reaching the captured endpoint also requires resolving the local guard/coverage limit. Completing one of these alone would not establish the requested route.</p>
+</section>
+
+<section id="types"><h2>Read this concrete result in structural type language</h2>
+<pre><code>S = Snapshot(sha256 = "2135f6c965c3db1b7265915fe89f222c758d8f10f1eeef782099f5887a6b0265")
+
+capturedFault : CapturedPoint(S)
+capturedFault = { frame = 0, site = 0x7ff77501e620, moment = Before }
+
+recoveredEntry : NodeOf(G)
+recoveredEntry = { frame = 0, site = 0x7ff77501e110 }
+
+result ≈ {
+  recovered_frames = [0],
+  caller_start = None,
+  captured_endpoint = Some(capturedFault),
+  endpoint_is_node_of_G = false,
+  connection = UnavailableAnchors,
+  corridor_status = Unavailable,
+  examples_status = Unavailable,
+  examples = []
+}</code></pre>
+<p><code>S</code> identifies this exact captured snapshot. <code>site</code> is a semantic instruction address; <code>frame</code> identifies the activation. The captured fault point exists as evidence, while membership in the recovered graph requires separate admission. Here neither the caller’s start nor the endpoint membership needed for <code>Path(G, start, endpoint)</code> is available.</p>
+<p>This notation is an explanatory projection of the real records. The exact output uses the enum value <code>unavailable_anchors</code>. It supplies no <code>RefutedUnderModel</code> verdict and no model or execution witness. For the general vocabulary, see <a href="ariadne-frame-structure-type-theory-20261022.html#capabilities">the six-question structural type guide</a>.</p>
+<details><summary>Exact connection fields from the baseline publication</summary><pre><code>{
+  &quot;from_frame&quot;: 1,
+  &quot;to_frame&quot;: 0,
+  &quot;start&quot;: null,
+  &quot;endpoint&quot;: {
+    &quot;frame&quot;: 0,
+    &quot;site&quot;: &quot;0x00007ff77501e620&quot;
+  },
+  &quot;anchor_gaps&quot;: [
+    &quot;frame-1:frame-not-recovered&quot;,
+    &quot;frame-1:missing-frame-map&quot;,
+    &quot;frame-1:missing-admitted-active-link&quot;,
+    &quot;endpoint:anchor-not-admitted&quot;
+  ],
+  &quot;connection&quot;: &quot;unavailable_anchors&quot;,
+  &quot;graph_status&quot;: &quot;complete_for_represented_graph&quot;,
+  &quot;corridor_status&quot;: &quot;unavailable&quot;,
+  &quot;scc_status&quot;: &quot;complete_for_represented_graph&quot;,
+  &quot;examples_status&quot;: &quot;unavailable&quot;,
+  &quot;examples&quot;: []
+}</code></pre></details>
+</section>
+
+<section id="comparison"><h2>The explicit Windows-entry premise did not change the answer</h2>
+<p>A second fresh run added <code>--assume-windows-call-entry</code>. The source recorded the premise <code>RSP mod 16 = 8</code> at the function entry. That is an ABI premise at entry, separate from the captured crash-time register value.</p>
+<div class="table-wrap"><table><thead><tr><th>Result dimension</th><th>Baseline</th><th>With Windows-entry premise</th></tr></thead><tbody>
+<tr><th>Admitted nodes / edges</th><td>9 / 8</td><td>9 / 8</td></tr>
+<tr><th>Recovered frames</th><td>Frame 0 only</td><td>Frame 0 only</td></tr>
+<tr><th>Unwind stop</th><td><code>unsupported-unwind-operation</code></td><td>Same</td></tr>
+<tr><th>Guard coverage stop</th><td><code>candidate-coverage-incomplete</code></td><td>Same; the premise remains recorded</td></tr>
+<tr><th>Connection / examples</th><td><code>unavailable_anchors</code> / 0</td><td><code>unavailable_anchors</code> / 0</td></tr>
+<tr><th>Run elapsed time</th><td>28.992 seconds</td><td>29.537 seconds</td></tr>
+</tbody></table></div>
+<p>No connection-stage work or deadline stop is recorded in either run. The wall-clock times include loading this dump, preparation and publication; these individual runs establish no performance qualification.</p>
+<div class="callout"><p><strong>What would make a stronger answer possible?</strong> Extend and validate the saved-XMM unwind profile, address the opaque MOVAPD/guard-coverage boundary, then repeat this exact query. Further missing evidence may become visible as recovery progresses. These runs do not establish a root cause or an actual historical path.</p></div>
+</section>
+
+<section id="reproduce"><h2>Execution, sources and retained outputs</h2>
+<p>A fresh CLI was built from byte-identical current source at <code>758d7ef8a21e4607e01e68e988f7ec8b280afb8c</code>, using <code>cargo build --offline --locked --bin ariadne-minidump</code>. The build used an isolated sibling layout with the lockfile-compatible MirrorRust 1.0.0 revision; the main lockfile and sibling checkout were preserved.</p>
+<details><summary>Exact successful baseline command</summary><pre><code>LD_LIBRARY_PATH=/home/lsz/Codebase/Ariadne/target/mbt-work/llvm20/root/usr/lib/x86_64-linux-gnu \
+/home/lsz/Codebase/Ariadne/target/dump-5a5fe796-frame-example/build-target/debug/ariadne-minidump \
+  /home/lsz/Codebase/Ariadne/target/dump-5a5fe796-frame-example/original.dmp \
+  --decoder-reference /home/lsz/Codebase/Ariadne/target/ariadne-llvm-mc \
+  --bap-helper /home/lsz/Codebase/Ariadne/target/ariadne-bap-lift \
+  --bap-runtime /home/lsz/Codebase/Ariadne/target/dump-5a5fe796-frame-example/bap-runtime \
+  --frame-connections 1:0 \
+  --example-path-count-bound 3 \
+  --output-dir /home/lsz/Codebase/Ariadne/target/dump-5a5fe796-frame-example/connections-1-0-complete-runtime/report</code></pre><p>The second run adds <code>--assume-windows-call-entry</code> and uses a new output directory. <code>--example-path-count-bound 3</code> permits at most two examples. No explicit per-site alignment hypothesis or indirect-target-resolution option was added.</p></details>
+<div class="table-wrap"><table><thead><tr><th>Completed run</th><th>Local output</th><th>Publication binding</th></tr></thead><tbody><tr><th>Baseline</th><td><a href="../../target/dump-5a5fe796-frame-example/connections-1-0-complete-runtime/report/frame-connections.txt">Text</a> · <a href="../../target/dump-5a5fe796-frame-example/connections-1-0-complete-runtime/report/frame-connections.json">JSON</a> · <a href="../../target/dump-5a5fe796-frame-example/connections-1-0-complete-runtime/report/frame-connections.dot">DOT</a></td><td><code class="hash">8d0a14370f552d7e527416ca78ea4e1b0ed859bdf5fbbcc424f5ad40557d9dfb</code></td></tr><tr><th>Windows-entry premise</th><td><a href="../../target/dump-5a5fe796-frame-example/connections-1-0-windows-entry/report/frame-connections.txt">Text</a> · <a href="../../target/dump-5a5fe796-frame-example/connections-1-0-windows-entry/report/frame-connections.json">JSON</a> · <a href="../../target/dump-5a5fe796-frame-example/connections-1-0-windows-entry/report/frame-connections.dot">DOT</a></td><td><code class="hash">90f5092a0e9bb144dce94c113472a37a94241f25c625787ac628292acfc4cf95</code></td></tr></tbody></table></div>
+<p class="note">Raw publications, logs, downloaded bytes and build products live under ignored <code>target/dump-5a5fe796-frame-example/</code>. These local output links work while those run products are retained. This HTML is the maintained explanatory presentation.</p>
+<details><summary>Tool identity and resolved setup issues</summary>
+<div class="table-wrap"><table><tbody><tr><th>CLI SHA-256</th><td><code class="hash">bc64d3cc1574d1bc5425482bd374e036bb06147b4acf4c7cff41b50d3db2edd9</code></td></tr><tr><th>LLVM reference SHA-256</th><td><code class="hash">ef0556c1b567fe0764139a57d4bad52c97d89e6a61c272e249c9a5e1d394f774</code></td></tr><tr><th>BAP lifting helper SHA-256</th><td><code class="hash">8080fa65e7a3d6521289e277570a2666520983858fa9b8c247fbe3f470fe3615</code></td></tr><tr><th>Pinned BAP library SHA-256</th><td><code class="hash">fb03843b065556c791e909b2cd7d1a8e2ef736ed461b6d8979da3f3fd5d6612a</code></td></tr></tbody></table></div>
+<p>The first diagnostic attempt could not load LLVM 20; setting its existing runtime directory resolved that. A second attempt exposed missing <code>libtinfo.so.5</code> for BAP plugins. The official <a href="https://packages.ubuntu.com/jammy/amd64/libtinfo5/download">Ubuntu legacy runtime package</a> was checksum-verified and extracted into an isolated task runtime. The pinned BAP files were preserved. The two completed runs reported no helper errors.</p>
+<p>Those initial setup-limited attempts are kept in the ignored run directory and are excluded from the result comparison. These were environment repairs; no Ariadne source edits were made. No application tests or broader qualification campaign were run for this example.</p>
+</details>
+<ul class="sources"><li><a href="../../docs/Ariadne/investigation-design.md#structural-corridors-and-cycle-summaries">Canonical connection contract</a> — represented graphs, anchors, corridors, gaps and result meanings.</li><li><a href="../../src/investigation/frame_unwind.rs">Captured frame unwind adapter</a> — operation admission and explicit stop reasons.</li><li><a href="../../src/bap/guard_admission.rs">Guard admission implementation</a> — recognized instruction shape, region coverage and residue widening.</li><li><a href="../../src/investigation/frame_connections.rs">Connection consumer</a> — node admission, retained context edges and unavailable anchors.</li><li><a href="../../target/dump-5a5fe796-frame-example/build-provenance.json">Local build provenance</a> and <a href="../../target/dump-5a5fe796-frame-example/download-receipt.json">download receipt</a> — exact source/tool and input identities for this execution.</li></ul>
+</section>
+</div>
+<footer><h2>Context and follow-up</h2><p><strong>Status.</strong> Fresh local example on the specified DumpLedger capture, executed on 2026-10-22. This is a partial result with explicitly unavailable frame-to-frame anchors.</p><p><strong>Motivating problem.</strong> The user asked to apply current frame-to-frame analysis to a real dump and see what its types and unknowns mean in practice.</p><p><strong>Contribution.</strong> Two actual runs, preserved input and output identities, a recovered-prefix diagram, an instruction-evidence inspector, and source-grounded explanations of both remaining blockers.</p><p><strong>Origin and next reading.</strong> The <a href="ariadne-frame-structure-type-theory-20261022.html">structural type explanation</a> supplies the vocabulary. The <a href="../../docs/Ariadne/investigation-design.md">investigation design</a> owns the analysis contract and future extensions. Return to the <a href="ariadne-reports-index.html">archive index</a> for related presentations.</p><p><strong>Unresolved limits.</strong> The requested caller-to-fault path, its semantic feasibility, historical execution and root cause remain unestablished. Increasing output capacity cannot supply the missing unwind and coverage support. Browser launch is recorded separately from visual inspection.</p></footer>
+</main>
+<script id="site-data" type="application/json">[{"site": "0x00007ff77501e110", "bytes": "4157", "instruction": "push r15", "opcode": "PUSH64r", "membership": "Admitted instruction node", "type": "NodeOf(G) ⊆ Node(S)", "detail": "One of the nine recovered prologue instructions. Its node and outgoing structural edge retain captured-byte evidence.", "next": "0x00007ff77501e112"}, {"site": "0x00007ff77501e112", "bytes": "4156", "instruction": "push r14", "opcode": "PUSH64r", "membership": "Admitted instruction node", "type": "NodeOf(G) ⊆ Node(S)", "detail": "One of the nine recovered prologue instructions. Its node and outgoing structural edge retain captured-byte evidence.", "next": "0x00007ff77501e114"}, {"site": "0x00007ff77501e114", "bytes": "4155", "instruction": "push r13", "opcode": "PUSH64r", "membership": "Admitted instruction node", "type": "NodeOf(G) ⊆ Node(S)", "detail": "One of the nine recovered prologue instructions. Its node and outgoing structural edge retain captured-byte evidence.", "next": "0x00007ff77501e116"}, {"site": "0x00007ff77501e116", "bytes": "4154", "instruction": "push r12", "opcode": "PUSH64r", "membership": "Admitted instruction node", "type": "NodeOf(G) ⊆ Node(S)", "detail": "One of the nine recovered prologue instructions. Its node and outgoing structural edge retain captured-byte evidence.", "next": "0x00007ff77501e118"}, {"site": "0x00007ff77501e118", "bytes": "56", "instruction": "push rsi", "opcode": "PUSH64r", "membership": "Admitted instruction node", "type": "NodeOf(G) ⊆ Node(S)", "detail": "One of the nine recovered prologue instructions. Its node and outgoing structural edge retain captured-byte evidence.", "next": "0x00007ff77501e119"}, {"site": "0x00007ff77501e119", "bytes": "57", "instruction": "push rdi", "opcode": "PUSH64r", "membership": "Admitted instruction node", "type": "NodeOf(G) ⊆ Node(S)", "detail": "One of the nine recovered prologue instructions. Its node and outgoing structural edge retain captured-byte evidence.", "next": "0x00007ff77501e11a"}, {"site": "0x00007ff77501e11a", "bytes": "55", "instruction": "push rbp", "opcode": "PUSH64r", "membership": "Admitted instruction node", "type": "NodeOf(G) ⊆ Node(S)", "detail": "One of the nine recovered prologue instructions. Its node and outgoing structural edge retain captured-byte evidence.", "next": "0x00007ff77501e11b"}, {"site": "0x00007ff77501e11b", "bytes": "53", "instruction": "push rbx", "opcode": "PUSH64r", "membership": "Admitted instruction node", "type": "NodeOf(G) ⊆ Node(S)", "detail": "One of the nine recovered prologue instructions. Its node and outgoing structural edge retain captured-byte evidence.", "next": "0x00007ff77501e11c"}, {"site": "0x00007ff77501e11c", "bytes": "4881eca8020000", "instruction": "sub rsp, 0x2a8", "opcode": "SUB64ri32", "membership": "Admitted instruction node", "type": "NodeOf(G) ⊆ Node(S)", "detail": "One of the nine recovered prologue instructions. Its node and outgoing structural edge retain captured-byte evidence.", "next": "0x00007ff77501e123"}, {"site": "0x00007ff77501e123", "bytes": "440f29942490020000", "instruction": "movaps [rsp + 0x290], xmm10", "opcode": "MOVAPSmr", "membership": "Unresolved alignment frontier", "type": "UnresolvedBoundary(S)", "detail": "The alignment guard remains unknown. The incoming edge is retained as context; this instruction is absent from G.nodes.", "next": "No admitted traversal edge here"}, {"site": "0x00007ff77501e12c", "bytes": "66440f298c2480020000", "instruction": "movapd [rsp + 0x280], xmm9", "opcode": "MOVAPDmr", "membership": "Opaque candidate barrier", "type": "CandidateSite(S)", "detail": "Candidate preparation sees the bytes, but this encoding is outside the reviewed guard recognizer. It keeps candidate coverage open and causes global residue widening.", "next": "No admitted traversal edge here"}, {"site": "0x00007ff77501e620", "bytes": "49635718488b0515ad9d0748c1e203", "instruction": "Captured fault point; no graph-node admission", "opcode": "No recovered-node opcode", "membership": "Captured point outside the recovered prefix", "type": "CapturedPoint(S)", "detail": "The exception record supplies this PC and the read address 0x18. Local recovery has not reached it, so it cannot serve as an admitted path endpoint.", "next": "Unavailable"}]</script>
+<script>
+'use strict';
+const siteRecords=JSON.parse(document.getElementById('site-data').textContent);
+function selectedSite(index){if(!Number.isInteger(index)||index<0||index>=siteRecords.length)throw new Error('Invalid site selection');return siteRecords[index];}
+function showSite(){const record=selectedSite(Number(document.getElementById('site-select').value));for(const [id,key] of [['site-role','membership'],['site-type','type'],['site-bytes','bytes'],['site-next','next'],['site-detail','detail']])document.getElementById(id).textContent=record[key];}
+document.getElementById('site-select').addEventListener('change',showSite);showSite();
+</script></body></html>

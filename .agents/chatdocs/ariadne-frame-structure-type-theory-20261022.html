@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>What frame-to-frame analysis can answer — a structural type account</title>
+<style>
+:root{--ink:#19313f;--muted:#536b77;--line:#d7e2e7;--blue:#17668b;--teal:#136e5a;--amber:#925b14;--red:#a13b45;--paper:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:#edf2f4;color:var(--ink);font:17px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1160px;margin:32px auto;background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:hidden}header{padding:42px 48px 32px;background:linear-gradient(125deg,#edf7fa,#f5f8ef);border-bottom:1px solid var(--line)}
+.eyebrow{font-size:.75rem;font-weight:750;letter-spacing:.13em;text-transform:uppercase;color:var(--blue);margin:0 0 14px}h1{font-size:clamp(2rem,4.4vw,3.2rem);line-height:1.14;letter-spacing:-.035em;max-width:880px;margin:0 0 20px}.lead{max-width:850px;font-size:1.1rem;color:#3c5867;margin-bottom:20px}
+a{color:#075f89;text-underline-offset:3px}nav{display:flex;flex-wrap:wrap;gap:12px 22px;padding:16px 48px;border-bottom:1px solid var(--line);font-size:.86rem}nav a{font-weight:650;text-decoration:none}.content{padding:0 48px 40px}section{margin-top:38px}h2{font-size:1.43rem;line-height:1.3;margin:0 0 16px;letter-spacing:-.02em}h2 .num{font-size:.76rem;color:#657c89;margin-right:12px}h3{font-size:1.02rem;margin:0 0 10px}p{margin:0 0 15px}li{margin:7px 0}ul{padding-left:23px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{border:1px solid #bdd0d9;padding:5px 11px;border-radius:20px;font-size:.75rem;background:#fff;color:#415d6b}.callout{padding:18px 21px;border:1px solid #b8d8cf;border-left:4px solid var(--teal);border-radius:9px;background:#f2faf6;margin:22px 0}.callout p:last-child{margin-bottom:0}.note{color:var(--muted);font-size:.88rem}.cards{display:grid;grid-template-columns:1fr 1fr;gap:17px}.card{padding:21px;border:1px solid var(--line);border-radius:10px;background:#f8fbfc}.card p:last-child{margin-bottom:0}.card.semantic{background:#f5faf6;border-top:3px solid var(--teal)}.card.graph{border-top:3px solid var(--blue)}
+code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}code{font-size:.85em;background:#ecf2f5;border-radius:4px;padding:2px 4px}pre{background:#172f3e;color:#ecf4f7;padding:20px;border-radius:9px;font-size:.85rem;line-height:1.65;overflow:auto;margin:16px 0}pre code{background:none;padding:0;color:inherit;font-size:inherit}.math{font-family:"Cambria Math","Noto Sans Math",Georgia,serif;font-size:1.14rem;padding:17px 20px;border:1px solid var(--line);border-radius:9px;background:#fafcfd;overflow:auto;line-height:1.75}.math .small{font-size:.86rem;color:var(--muted);font-family:system-ui,sans-serif}.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:9px;margin:18px 0}table{border-collapse:collapse;width:100%;min-width:650px;font-size:.87rem}th,td{padding:12px 14px;border-top:1px solid var(--line);text-align:left;vertical-align:top}thead th{background:#f2f6f8;border-top:0;color:#385565}tbody th{font-weight:650;width:24%}.symbol{font-family:"Cambria Math",Georgia,serif;font-size:1.1rem;white-space:nowrap}
+figure{margin:20px 0}figure svg{display:block;width:100%;height:auto;background:#fbfcfd;border:1px solid var(--line);border-radius:10px}figcaption{font-size:.85rem;color:var(--muted);margin-top:10px}.frame-box{fill:#f0f6fa;stroke:#b4cbd7;stroke-width:1.5}.callee-box{fill:#f1f8f5;stroke:#accdbf;stroke-width:1.5}.graph-node rect,.graph-node polygon{fill:white;stroke:#7598ab;stroke-width:1.8}.graph-node text{fill:#183b4e;text-anchor:middle;font:14px system-ui,sans-serif}.graph-node .op{font:13px ui-monospace,monospace}.graph-node.selected rect{fill:#e2f0f8;stroke:#17668b;stroke-width:3}.graph-edge{fill:none;stroke:#8aa1af;stroke-width:2;marker-end:url(#graph-arrow)}.graph-edge.selected{stroke:#17668b;stroke-width:4}.edge-label{fill:#526c79;font:13px system-ui,sans-serif}.frame-label{fill:#385c71;font:600 15px system-ui,sans-serif}.proof-text{font:15px system-ui,sans-serif;fill:#193b4d;text-anchor:middle}.proof-sub{font:12px system-ui,sans-serif;fill:#536b77;text-anchor:middle}
+.demo{padding:24px;border:1px solid #b4cbd7;border-radius:12px;background:#f7fafc}.controls{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:20px 0}.field label{display:block;font-size:.85rem;font-weight:650;margin-bottom:7px}select{width:100%;padding:10px 12px;border:1px solid #9eb6c3;border-radius:6px;background:#fff;color:var(--ink);font:inherit;font-size:.88rem}.status-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.status{padding:17px;border:1px solid #cedde5;border-radius:8px;background:white}.status .label{font-size:.74rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.045em}.status strong{display:block;font-size:1.02rem;margin:7px 0}.status p{font-size:.84rem;margin:0}.status.good strong{color:var(--teal)}.status.bad strong{color:var(--red)}.status.unknown strong{color:var(--amber)}.path-readout{overflow-wrap:anywhere;font-family:ui-monospace,monospace;font-size:.79rem;background:#eaf1f5;padding:12px;border-radius:7px;margin-top:16px}.demo-note{margin:14px 0 0;font-size:.84rem;color:var(--muted)}
+details{padding:17px 20px;border:1px solid var(--line);border-radius:9px;margin:18px 0}summary{cursor:pointer;font-weight:650}details[open] summary{margin-bottom:15px}.sources li{font-size:.87rem}.sources code{overflow-wrap:anywhere}footer{padding:30px 48px;background:#f5f8fa;border-top:1px solid var(--line)}footer h2{font-size:1.17rem}footer p{font-size:.86rem;color:#405e6d;margin:10px 0}.nowrap{white-space:nowrap}:focus-visible{outline:3px solid #d59a2c;outline-offset:4px}
+@media(max-width:760px){main{margin:0;border:0;border-radius:0}header{padding:30px 22px 25px}nav{padding:15px 22px}.content{padding:0 22px 30px}footer{padding:25px 22px}.cards,.controls,.status-grid{grid-template-columns:1fr}.demo{padding:17px}pre{font-size:.77rem}.math{font-size:1rem}table{font-size:.8rem}.graph-wrap{overflow:auto}.graph-wrap svg{min-width:720px}}
+@media print{body,main{background:white}main{max-width:none;margin:0;border:0}nav,.controls{display:none}header,.content,footer{padding-left:12px;padding-right:12px}.card,.status,figure{break-inside:avoid}pre{white-space:pre-wrap;background:#f0f3f5;color:#183b4d}table{min-width:0}.demo{border-color:#999}.note{color:#3e5664}a{color:inherit}}
+</style>
+</head>
+<body>
+<main>
+<header>
+<p class="eyebrow">Ariadne · frame analysis through structural types</p>
+<h1>What can frame-to-frame<br>analysis answer today?</h1>
+<p class="lead">Six current questions, expressed through records, tagged sums, dependent indices and refinements. Start with the question catalogue, then inspect the evidence each answer carries and the unknowns it preserves.</p>
+<div class="chips"><span class="chip">22 October 2026</span><span class="chip">Source: 758d7ef</span><span class="chip">Records · sums · dependent indices · refinements</span><span class="chip">Explanatory notation</span></div>
+</header>
+<nav aria-label="Document sections"><a href="#capabilities">Six questions</a><a href="#sites">What is a site?</a><a href="#unknowns">Unknown answers</a><a href="#vocabulary">Vocabulary</a><a href="#graph-types">Graph types</a><a href="#path-types">Path judgments</a><a href="#refinements">Semantic refinements</a><a href="#demo">Interactive example</a><a href="#products">Result products</a><a href="#implementation">Implementation boundary</a><a href="#sources">Sources</a></nav>
+<div class="content">
+<section id="capabilities" aria-labelledby="capabilities-title">
+<h2 id="capabilities-title">Six questions the current implementation can answer</h2>
+<p>Ariadne starts from <strong>one immutable snapshot and one selected thread</strong>. Its frame-to-frame products connect captured activations through admitted control-flow edges. Its semantic questions add supported, local value reasoning to that source.</p>
+<div class="callout"><p><strong>Read the signatures as explanatory specifications.</strong> Records describe returned fields, sums describe alternatives, and refinements describe checks. The names below summarize the current contracts; they are not a new programming language, literal JSON schemas, or proofs that the Rust implementation satisfies every refinement. Actual entry points return <code>Result&lt;…, Error&gt;</code>; malformed evidence is an error.</p></div>
+<div class="table-wrap"><table><thead><tr><th>Question you can ask</th><th>Useful answer</th><th>Current selector</th></tr></thead><tbody>
+<tr><th><a href="#q-maps">1. What structure was recovered in these frames?</a></th><td>Per-frame instruction maps, typed edges, active-call links and unresolved boundaries.</td><td><code>--frame-structure N:M</code></td></tr>
+<tr><th><a href="#q-connections">2. Can the represented graph connect the two anchors?</a></th><td>A represented connection result and, when completed, its forward/backward corridor.</td><td><code>--frame-connections N:M</code></td></tr>
+<tr><th><a href="#q-cycles">3. Where are the cyclic regions?</a></th><td>Strongly connected components (SCCs), cyclic markers and the component graph.</td><td>The same connection report.</td></tr>
+<tr><th><a href="#q-routes">4. Which bounded instruction routes can be listed?</a></th><td>Typed structural paths with a strict count bound and explicit search limits.</td><td><code>--list-frame-paths N:M --path-count-bound NP</code></td></tr>
+<tr><th><a href="#q-alternative">5. Can this local branch satisfy a point constraint?</a></th><td>A model witness, scoped refutation, unknown, or conflicting premises.</td><td><code>--frame-question Q.json</code><br><code>kind: alternative</code></td></tr>
+<tr><th><a href="#q-dependencies">6. What contributes to this fault address, and which writers remain possible?</a></th><td>Separate value facts, candidate-origin assessments and obligations.</td><td><code>--frame-question Q.json</code><br><code>kind: fault_dependency</code></td></tr>
+</tbody></table></div>
+<p class="note">These are mode selectors, not complete shell commands. Live commands also need the dump, decoder reference and output options shown in the <a href="../../src/bin/ariadne-minidump.rs">CLI usage</a>. Questions 2 and 3 are fields of one product. Questions 5 and 6 share a source, but general value transport between frames is currently unavailable.</p>
+
+<details id="q-maps"><summary>1 · “What structure was recovered in frames N through M?”</summary>
+<pre><code>FrameRange = { N : Nat, M : Nat | N ≥ M }
+
+recoverStructure : Capture(S) × FrameRange × Limits
+                 → StructureSource(S, N, M)
+
+StructureSource(S, N, M) = {
+  frame_maps  : List&lt;FrameMap(S)&gt;,
+  call_links  : List&lt;FrameLink(S)&gt;,
+  diagnostics : List&lt;Diagnostic&gt;,
+  source_binding : CheckedBinding(S, N, M)
+}
+
+FrameMap(S) = {
+  frame : FrameIndex, entry : VA, pc : VA,
+  nodes : FiniteSet&lt;InstructionSite(S)&gt;,
+  edges : FiniteSet&lt;TypedEdge(S)&gt;,
+  gaps  : List&lt;UnresolvedBoundary&gt;
+}</code></pre>
+<p><strong>Answer:</strong> which instruction starts and local edges were recovered; which active-call relationships were admitted; where recovery is missing, unsupported, conditional or stopped. Link admission remains an explicit property of each link.</p>
+<p><strong>Scope:</strong> a structural source can be sealed from a recovery prefix before complete dataflow. The live unwind adapter currently supports a finite Windows AMD64 profile. Missing captured bytes and unsupported unwind cases remain visible. A successfully bound source can still be partial.</p>
+<p class="note">Field names here are descriptive projections. Concrete records: <a href="../../src/investigation/frame_structure.rs"><code>FrameStructureMap</code>, <code>FrameStructureLink</code>, <code>BoundFrameStructure</code></a>.</p>
+</details>
+
+<details id="q-connections" open><summary>2 · “Does the represented graph connect frame N to frame M?”</summary>
+<pre><code>connections : StructureSource(S, N, M) × Limits
+            → ConnectionReport(S, N, M)
+
+Connection = Found
+           + AbsentInRepresentedGraph
+           + UnknownWorkStopped
+           + UnavailableAnchors
+
+ConnectionReport = {
+  connection : Connection,
+  graph_status, corridor_status : GraphLayerStatus,
+  forward, backward, corridor : FiniteSet&lt;Node(S)&gt;,
+  frontiers : List&lt;UnresolvedBoundary&gt;,
+  receipts : WorkReceipts,
+  premises : Premises
+  …
+}
+
+corridor_status = CompleteForRepresentedGraph
+  ⇒ corridor = ReachableFrom(G, start)
+               ∩ CanReach(G, endpoint)</code></pre>
+<p><strong>Answer:</strong> whether a route exists in the admitted graph and which nodes can lie along connecting walks in that graph. The corridor can include cyclic detours; it is not limited to nodes appearing in the displayed loop-free examples.</p>
+<p><strong>Anchors:</strong> frame 0 is innermost. For <code>N &gt; M</code>, the start is frame N’s verified active call into N−1. The endpoint is frame 0’s captured PC when <code>M=0</code>, or frame M’s active call toward M−1 when <code>M&gt;0</code>. For <code>N=M</code>, a validated common anchor can give a zero-edge route.</p>
+<p><strong>Scope:</strong> <code>Found</code> establishes graph connectivity. <code>AbsentInRepresentedGraph</code> requires sufficient completed reachability work on the constructed graph; an unresolved continuation may still reconnect in the actual program. Missing or ambiguous anchors prevent a cross-frame answer.</p>
+<p class="note">The actual <code>connection</code> is a bare enum. Examples and receipts are separate fields; <code>Found</code> can be established by reachability even if no example was retained. <a href="../../src/investigation/frame_connections.rs">Implementation</a> · <a href="../../docs/Ariadne/investigation-design.md#corridor-frontiers-and-result-meanings">Meaning and limits</a>.</p>
+</details>
+
+<details id="q-cycles"><summary>3 · “Which regions can cycle, and how do those regions connect?”</summary>
+<pre><code>CycleView(G) = {
+  scc_status : CompleteForRepresentedGraph
+             + WorkStopped + Unavailable,
+  components : List&lt;{
+    id : ComponentId,
+    members : FiniteSet&lt;NodeOf(G)&gt;,
+    cyclic : Bool
+  }&gt;,
+  condensation : FiniteSet&lt;ComponentEdge&gt;,
+  receipt : WorkReceipt
+}
+
+cyclic(C) ⇔ |C.members| &gt; 1
+             ∨ HasSelfLoop(G, theSingleMember(C))</code></pre>
+<p><strong>Answer:</strong> mutually reachable regions in the represented graph, including regions outside the corridor, with a graph of transitions between components. The cyclic formula uses the self-loop term only for a singleton component.</p>
+<p><strong>Scope:</strong> this is a projection of <code>ConnectionReport</code>, with its own work status. SCCs summarize finite topology without unrolling every possible iteration. They provide no observed iteration count or proof that a loop terminated. Recursive activations remain distinct even when their instruction addresses match.</p>
+<p class="note"><a href="../../src/investigation/frame_connections.rs">Concrete component and condensation records</a> · <a href="../../Specs/AriadneFrameConnections.tla">Finite connection model</a>.</p>
+</details>
+
+<details id="q-routes"><summary>4 · “Show some instruction routes connecting those anchors.”</summary>
+<pre><code>listPaths : BoundPathSource(S) × FrameRange
+            × { NP : Nat | NP &gt; 0 } × SearchLimits
+          → PathListing(G, start, endpoint, NP)
+
+PathListing(G, u, v, NP) = {
+  paths : List&lt;Path(G, u, v)&gt;,
+  available : Bool,
+  coverage : Coverage,
+  enumeration_exhausted, truncated : Bool,
+  stop_reason : Reason,
+  gaps : List&lt;Gap&gt;,
+  counters : SearchCounters
+  …
+} refined by length(paths) &lt; NP</code></pre>
+<p><strong>Answer:</strong> a bounded list of instruction sequences, preserving frame identity, edge kinds, active-call transitions and opaque-summary markers.</p>
+<p><strong>Two interfaces:</strong> <code>--list-frame-paths</code> uses its separately bound path source and permits revisits within the declared visit/depth limits. <code>--frame-connections --example-path-count-bound NP</code> produces separately bounded, loop-free examples. The connection source can be a recovery prefix; it does not automatically satisfy every preparation requirement of the path-listing route.</p>
+<p><strong>Scope:</strong> <code>NP=10</code> retains at most nine paths; <code>NP=1</code> permits zero. NP must also satisfy the relevant API or policy cap. Exhaustion is meaningful only with the declared search restrictions and evidence gaps. A structural path may contain infeasible branches or opaque calls. Neither an empty partial list nor a writer missing from the samples justifies exclusion.</p>
+<p class="note"><a href="../../src/investigation/frame_paths.rs">Path source and listing</a> · <a href="../../docs/Ariadne/investigation-design.md#enumeration-and-resource-limits">Enumeration contract</a>.</p>
+</details>
+
+<details id="q-alternative"><summary>5 · “Can the selected branch satisfy this register constraint at this point?”</summary>
+<pre><code>Constraint64(S) = {
+  point : Point(S), bank : { n : Nat | n &lt; 16 },
+  width : {64}, mask : U64, value : U64
+} refined by mask ≠ 0 ∧ (value &amp; ~mask) = 0
+
+AlternativeQuery = {
+  frame : FrameIndex, site : VA, destination : VA,
+  edge_kind : EdgeKind,
+  endpoint : Constraint64(S)
+}
+
+askAlternative : BoundQuestionSource(S) × AlternativeQuery
+                 × List&lt;Constraint64(S)&gt; × Evidence(S) × Limits
+               → Assessment(S)
+
+Assessment(S) = {
+  verdict : Unknown + RefutedUnderModel
+            + PossibleUnderModel + PremiseConflict,
+  witness : Option&lt;ModelWitness(S)&gt;,
+  layers : QuestionLayers,
+  obligations : List&lt;Obligation&gt;,
+  premises : Premises
+  …
+}</code></pre>
+<p><strong>Answer:</strong> whether a selected alternative has a coherent model witness satisfying the declared point constraints, is refuted in the supported coverage scope, or remains unknown. Example: “Can the taken edge at <code>0x400306</code> still yield <code>RCX=0</code> before <code>0x400310</code> in frame 1?” The linked fixture defines those addresses.</p>
+<p><strong>Scope:</strong> endpoint and condition constraints must be in the selected activation for current value reasoning. Cross-frame constraints report <code>cross-frame-value-relation-unavailable</code>. Positive witnesses require supported exact transfers and a coherent loop-free prefix. Refutations require completed work, closed control coverage and acyclic represented value flow. Conditional sources currently emit no positive model witnesses.</p>
+<p><strong>Point constraints:</strong> a user-supplied register condition is a hypothesis. Captured registers constrain the captured point; they cannot simply be substituted for an earlier branch input. The current fault PC supplies a before-state boundary, with its successful normal after-state unavailable.</p>
+<p class="note">The real verdict enum carries no payload; <code>witness</code>, receipts and obligations are sibling fields. This is the public <code>alternative</code> question kind, not a general solver language. <a href="../../src/investigation/frame_question/model.rs">Types</a> · <a href="../../src/investigation/frame_question/alternative.rs">Decision procedure</a> · <a href="../../tests/input/frame_question_cli.rs">Fixture and controls</a>.</p>
+</details>
+
+<details id="q-dependencies"><summary>6 · “What feeds the fault address, and can this store be excluded for this load?”</summary>
+<pre><code>FaultDependencyQuery = {
+  frame : FrameIndex, site : VA, access : Nat,
+  load : Option&lt;VA&gt;, focus_writer : Option&lt;VA&gt;
+}
+
+askFaultDependency : BoundQuestionSource(S) × FaultDependencyQuery
+                     × Evidence(S) × Limits
+                   → Assessment(S)
+
+FaultView(Assessment) = {
+  values : List&lt;PointBoundValueFact&gt;,
+  origins : List&lt;{
+    load_site : Option&lt;VA&gt;, site : Option&lt;VA&gt;,
+    kind : OriginKind, disposition : Disposition,
+    reason : Reason, pairs : List&lt;AccessPairAssessment&gt;
+  }&gt;,
+  candidate_count : Option&lt;Nat&gt;,
+  candidate_universe_sha256 : Option&lt;Digest&gt;,
+  value_receipt, origin_receipt : QuestionReceipt,
+  obligations : List&lt;Obligation&gt;
+}</code></pre>
+<p><strong>Answer:</strong> observed fault-point inputs, supported backward value relations and potential reaching origins. Where the access/instance evidence suffices, a candidate store may be excluded for the selected load. Its alternatives and exclusion scope remain explicit.</p>
+<p><strong>Scope:</strong> numerical fault observations currently require frame 0 at the captured fault instruction. Origin collection needs a compatible completed local analysis, either reused or completed under its own budget. With no explicit <code>load</code>, the collector walks actual reaching definitions to contributing load boundaries; a load does not reveal earlier memory contents.</p>
+<p><strong>Candidate preservation:</strong> <code>focus_writer</code> focuses detail and does not remove competing writers. External interference and open control/effects remain unresolved when their evidence is absent. Incomplete collection leaves coverage or candidate count unavailable. The feasibility verdict is <code>Unknown</code>/not applicable for this question kind; inspect its separate value and origin layers.</p>
+<p class="note"><code>FaultView</code> is a descriptive projection; value/origin receipts live inside <code>layers</code> in the actual assessment. An excluded candidate is not identification of the actual last writer. <a href="../../src/investigation/frame_question/dependencies.rs">Dependency collector</a> · <a href="../../docs/Ariadne/frame-question-investigation-design.md#implemented-profile-and-usage">Usage and boundaries</a>.</p>
+</details>
+</section>
+
+<section id="sites" aria-labelledby="sites-title">
+<h2 id="sites-title">A site identifies an instruction location</h2>
+<pre><code>Node(S)  = { frame : FrameIndex(S), site : VA(S) }
+Point(S) = { frame : FrameIndex(S), site : VA(S),
+             moment : Before + After }
+
+{ frame = 1, site = 0x400306, moment = Before }
+  = “just before this instruction in captured activation 1”</code></pre>
+<p><code>site</code> is the instruction’s <strong>semantic virtual address</strong> in the captured process. <code>frame</code> distinguishes recursive activations using the same address. <code>moment</code> distinguishes before/after facts. The source supplies the snapshot and activation identities that these short records depend on.</p>
+<p>Repeated loop visits share a site. The pair <code>(frame, site)</code> does not identify a particular dynamic visit, historical iteration, file offset or source-code line. In an alternative query, <code>site</code> selects the edge’s source instruction and <code>destination</code> selects its target.</p>
+</section>
+
+<section id="unknowns" aria-labelledby="unknowns-title">
+<h2 id="unknowns-title">Unknown is part of the answer type</h2>
+<pre><code>QuestionReceipt = {
+  status : Finished + WorkStopped + Unavailable,
+  work : Nat, elapsed_ms : Nat, reason : Option&lt;Reason&gt;
+}
+
+UnknownAssessment ≈ {
+  verdict = Unknown,
+  layers : Product&lt;QuestionReceipt&gt;,
+  known_facts : Facts,
+  obligations : List&lt;{ frame, site?, kind, requirement, band }&gt;
+}</code></pre>
+<p>The second record is a conceptual view: actual facts are distributed among the bound source, values, origins and other assessment fields. An unknown verdict describes the question’s evidence and procedure scope. It does not prove that the problem is mathematically uncomputable.</p>
+<div class="table-wrap"><table><thead><tr><th>Result for an affected layer</th><th>Meaning</th><th>What could improve it?</th></tr></thead><tbody>
+<tr><th>Unknown + Finished</th><td>The implemented procedure finished but could not construct a witness or justified refutation.</td><td>More precise admitted semantics, a coherent witness, or a stronger coverage argument.</td></tr>
+<tr><th>Unknown + WorkStopped</th><td>A work limit or deadline interrupted the affected procedure.</td><td>More of the relevant budget, when evidence and supported semantics suffice.</td></tr>
+<tr><th>Unknown + Unavailable</th><td>A prerequisite or supported relation is missing.</td><td>The required captured evidence, compatible completed source, or implementation support.</td></tr>
+</tbody></table></div>
+<p>Unknown bit values are represented conservatively: <code>⊤64</code> denotes all 64-bit values, while known bits restrict that set. Unknown branch conditions retain represented alternatives in abstract search. Missing targets remain explicit frontiers, including frontiers outside the displayed corridor that might reconnect later.</p>
+<p>A useful structural result can coexist with unknown feasibility or origins. Finite graph reachability and SCCs handle cycles without enumerating execution histories; the current value checker has stricter cycle limits. A stopped search never supplies the missing premise for a refutation or writer exclusion.</p>
+<p class="note"><a href="../../src/bap/target_resolution/question_semantics.rs">Known-bit abstraction</a> · <a href="../../src/investigation/frame_question/model.rs">Independent layers and obligations</a> · <a href="../../src/investigation/frame_question/alternative.rs">Verdict rules</a>.</p>
+<div class="callout"><p><strong>Current answer boundary.</strong> These products explain represented connections and possible dependencies under their evidence and premises. Recovering the exact executed route, a historical loop count, the actual last writer, or the root cause requires additional evidence and contracts. General argument/value transport across activations is not implemented by the current question profile.</p></div>
+</section>
+
+<section id="vocabulary" aria-labelledby="vocabulary-title">
+<h2 id="vocabulary-title"><span class="num">01</span>Start with two meanings of “structure”</h2>
+<div class="cards">
+<article class="card graph"><h3>Graph structure</h3><p>The instructions, typed edges, captured activations, active-call links, cycles and unresolved frontiers recovered from one snapshot.</p><p><strong>A structural path follows those admitted connections.</strong></p></article>
+<article class="card semantic"><h3>Structural type notation</h3><p>Records describe the components of an object; tagged sums describe its alternatives. Dependent indices and refinements express which objects belong together and which checks they satisfy.</p><p><strong>We use this language to describe the graph and its evidence.</strong></p></article>
+</div>
+<p class="note">The type notation is an explanatory reconstruction of the current contracts. Rust uses nominal structs/enums, private constructors and runtime validation. The linked TLA+ specifications retain authority for the modeled behavior.</p>
+<div class="table-wrap"><table><thead><tr><th>Notation</th><th>Meaning</th><th>Example in this explanation</th></tr></thead><tbody>
+<tr><td class="symbol">{ field : T, … }</td><td>A record, or named product.</td><td><code>{ frame : FrameIndex, site : VA }</code></td></tr>
+<tr><td class="symbol">A × B</td><td>Both components are present.</td><td>A route together with its scoped validation evidence.</td></tr>
+<tr><td class="symbol">A + B</td><td>A tagged choice of alternatives.</td><td><code>Next + Taken + Fallthrough + Jump + Indirect + Summary + Call</code></td></tr>
+<tr><td class="symbol">{ x : T | P(x) }</td><td>The values of <span class="symbol">T</span> satisfying a refinement.</td><td>A path record whose successive nodes are joined by admitted edges.</td></tr>
+<tr><td class="symbol">Σ x : A. B(x)</td><td>A dependent pair: a chosen value and evidence indexed by that value.</td><td>A node sequence and checks for the edges of that exact sequence.</td></tr>
+<tr><td class="symbol">Γ ⊢ t : T</td><td>A typing/evidence judgment under an explicit context.</td><td>A validated structural path under the source’s identity and premises.</td></tr>
+</tbody></table></div>
+<p>Type-level <code>+</code> means a tagged sum here. Arithmetic addition, where needed, is written as an explicit operation. A correctly shaped record still needs its semantic and identity refinements checked.</p>
+<details><summary>A small structural-subtyping example</summary><pre><code>{ frame : Nat, site : VA, evidence : Evidence }
+    &lt;: { frame : Nat, site : VA }</code></pre><p>In a calculus with record width subtyping, a richer record can supply this narrower field view. Graph membership, snapshot binding and edge connectivity are additional refinements. The actual Rust API uses explicit views and validated bound objects.</p></details>
+</section>
+
+<section id="graph-types" aria-labelledby="graph-types-title">
+<h2 id="graph-types-title"><span class="num">02</span>Index the graph by its actual evidence</h2>
+<p>Let <code>S</code> identify the immutable snapshot, <code>Q</code> the selected thread/range question, <code>R</code> the immutable source revision, and <code>ΓG</code> the source’s admitted premises. These indices prevent facts from unrelated captures, activations or revisions from being joined.</p>
+<pre><code>RawNode = { frame : Nat, site : VA }
+
+Activation(S) = {
+  thread : ThreadId,
+  frame  : FrameIndex,
+  identity : ActivationIdentity,
+  unwind_and_call_evidence : Evidence
+}
+
+Node(S) = { activation : Activation(S), site : VA }
+
+Source(S, Q, R) = {
+  nodes     : FiniteSet&lt;Node(S)&gt;,
+  edges     : FiniteSet&lt;{ src : Node(S), dst : Node(S), kind : EdgeKind }&gt;,
+  context_edges : FiniteSet&lt;ContextEdge&gt;,
+  frontiers : List&lt;UnresolvedBoundary&gt;,
+  premises  : ΓG,
+  binding   : CheckedSourceBinding(S, Q, R)
+}</code></pre>
+<p>Here <code>G</code> is the derived route graph: its traversal edges are separated from retained context edges and unresolved frontiers. The actual <a href="../../src/investigation/frame_paths.rs"><code>FramePathNode</code></a> stores <code>frame</code> and <code>site</code>. Its surrounding bound source supplies snapshot, activation, proof and revision checks. The dependent indices above make those surrounding obligations visible.</p>
+<div class="callout"><p><strong>Recursion makes the index essential.</strong> <code>(activation₁, 0x400200)</code> and <code>(activation₀, 0x400200)</code> are different nodes even though the virtual address is equal. A record view that retains only <code>site</code> loses information needed for frame composition.</p></div>
+<pre><code>NodeOf(G) = { n : Node(S) | n ∈ G.nodes }
+
+EdgeOf(G, u, v) = {
+  e : G.edges |
+  e.src = u ∧ e.dst = v ∧ SourceAdmissionAccepts(e, ΓG)
+}</code></pre>
+<p>For a cross-frame <code>Call</code> edge, admission checks the active-call relationship: the caller’s call bytes and continuation, the child activation and the required unwind/ABI premises. Other calls can remain local opaque summary context. A structural call link carries a control relationship; transporting register values across that call requires additional evidence.</p>
+<p class="note">Source validation has an error result for malformed identities or proofs. Missing evidence can produce a valid partial source with explicit frontiers. A digest binds an identity; it does not by itself establish a branch outcome or capture authenticity.</p>
+</section>
+
+<section id="path-types" aria-labelledby="path-types-title">
+<h2 id="path-types-title"><span class="num">03</span>A path is a record refined by edge connectivity</h2>
+<pre><code>RawPath = {
+  nodes : List&lt;RawNode&gt;,
+  edges : List&lt;RawEdge&gt;
+}
+
+Path(G, u, v) = {
+  p : RawPath |
+  length(p.nodes) ≥ 1 ∧
+  length(p.edges) + 1 = length(p.nodes) ∧
+  AllNodesBelongTo(p, G) ∧
+  StartsAt(p, u) ∧ EndsAt(p, v) ∧
+  EverySuccessivePairHasItsRecordedEdge(p, G)
+}</code></pre>
+<p>Equivalently, describe a witness as a dependent package:</p>
+<div class="math">Path(G,u,v) = Σ k : ℕ. Σ ns : Vec(NodeOf(G), k+1).<br> StartsAt(ns,u) × EndsAt(ns,v) × ∏ i : Fin(k). EdgeOf(G, nsᵢ, nsᵢ₊₁)</div>
+<p class="note">The tags of the selected edges remain part of path identity. Two sequences using different parallel edge kinds are distinguishable. Nodes can repeat when a route crosses a cycle; the reported search policy bounds enumeration.</p>
+<details><summary>Read the two path-construction rules</summary>
+<pre><code>u : NodeOf(G)
+──────────────────────────────────────── EMPTY
+[]u : Path(G, u, u)
+
+edge : EdgeOf(G, u, w)     rest : Path(G, w, v)
+──────────────────────────────────────── CONS
+edge :: rest : Path(G, u, v)</code></pre>
+<p>The zero-edge witness <code>[]u</code> stores the single vertex <code>[u]</code> and zero edges. It still requires a valid endpoint. In Ariadne’s frame query, frame indices satisfy <code>N ≥ M ≥ 0</code>. Frame 0 is innermost. The older start is its verified active call; the end is frame 0’s captured PC, or an older end frame’s active call. An arbitrary saved return PC is a resume address and needs the active-call validation described by the <a href="../../docs/Ariadne/investigation-design.md#frame-evidence-and-instruction-anchors">anchor contract</a>.</p>
+</details>
+<p>In a calculus with refinement subtyping, <code>Path(G,u,v)</code> can be viewed as <code>RawPath</code> by forgetting its evidence. Constructing the stronger type requires connectivity and identity checks. Ordinary record field compatibility supplies only the raw shape.</p>
+<div class="callout"><p><strong>“Structural” describes what this witness establishes:</strong> every step belongs to the admitted graph, with the declared anchors and identities. It packages connectivity evidence; semantic feasibility has its own additional components.</p></div>
+<p>A missing route in a complete search of the represented graph establishes a statement about that graph. An unresolved frontier can hide additional program behavior, so the result retains its recovery and search scope.</p>
+</section>
+
+<section id="refinements" aria-labelledby="refinements-title">
+<h2 id="refinements-title"><span class="num">04</span>Semantic refinements need their own witnesses</h2>
+<p>For a local path in one activation, let <code>H</code> contain the question’s explicit hypotheses and <code>φ</code> its endpoint predicate. A semantic witness adds an admitted initial assignment and a checked replay:</p>
+<pre><code>FeasibleWitness(Ga, Γa, H, p, φ) = Σ ρ : AdmittedInitialState(Γa, H).
+  ReplayAllRequiredTransfers(Γa, p, ρ)
+  × SelectedBranchConditionsHold(p, ρ)
+  × EndpointSatisfies(ρ, p, φ)</code></pre>
+<p><code>Ga</code> is the graph restricted to the selected activation. The current endpoint predicate <code>φ</code> is an admitted masked GPR constraint at an explicit before/after point. A nonempty abstract value set can guide the search; a positive model witness requires a coherent concrete assignment and the necessary supported semantics.</p>
+<figure>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 245" role="img" aria-labelledby="proof-title proof-desc">
+<title id="proof-title">Three different evidence packages</title><desc id="proof-desc">A graph path enters a local semantic checker and can produce a feasible model witness. An execution record independently supplies observed event evidence. There is no automatic implication from a feasible model route to a recorded execution.</desc>
+<defs><marker id="proof-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#64899d"/></marker></defs>
+<rect x="25" y="35" width="230" height="72" rx="9" fill="#edf5fa" stroke="#8cb2c7"/><text class="proof-text" x="140" y="63">Path(G,u,v)</text><text class="proof-sub" x="140" y="87">admitted graph connectivity</text>
+<path d="M255 71 H330" fill="none" stroke="#64899d" stroke-width="2" marker-end="url(#proof-arrow)"/>
+<rect x="332" y="35" width="310" height="72" rx="9" fill="#f0f8f3" stroke="#8eb6a2"/><text class="proof-text" x="487" y="63">Local semantics + hypotheses</text><text class="proof-sub" x="487" y="87">supported transfers, branch and point checks</text>
+<path d="M642 71 H715" fill="none" stroke="#64899d" stroke-width="2" marker-end="url(#proof-arrow)"/>
+<rect x="717" y="35" width="255" height="72" rx="9" fill="#edf7f1" stroke="#80aa94"/><text class="proof-text" x="844" y="63">FeasibleWitness(local suffix)</text><text class="proof-sub" x="844" y="87">when the checker constructs one</text>
+<rect x="332" y="155" width="310" height="60" rx="9" fill="#f7f4ec" stroke="#b4a47c"/><text class="proof-text" x="487" y="181">Separate execution record</text><text class="proof-sub" x="487" y="201">events bound to the actual run</text>
+<path d="M642 185 H715" fill="none" stroke="#64899d" stroke-width="2" marker-end="url(#proof-arrow)"/>
+<rect x="717" y="155" width="255" height="60" rx="9" fill="#f7f4ec" stroke="#b4a47c"/><text class="proof-text" x="844" y="181">Observed-event witness</text><text class="proof-sub" x="844" y="201">requires its own validation</text>
+<text x="25" y="184" fill="#566c76" font-family="system-ui,sans-serif" font-size="13">Independent evidence source</text>
+</svg>
+<figcaption>The current frame-question profile checks supported local value relations. A cross-frame semantic witness additionally needs a certified call-value relation, which general caller-to-callee argument flow currently lacks.</figcaption>
+</figure>
+<pre><code>AlternativeAnswer =
+    PossibleUnderModel { local_witness : FeasibleWitness(...) }
+  + RefutedUnderModel  { scope : RefutationScope,
+                         evidence : CheckedNoWitnessWithin(scope) }
+  + Unknown            { obligations : List&lt;MissingEvidenceOrWork&gt; }
+  + PremiseConflict    { conflicting_hypotheses_or_observations : Evidence }</code></pre>
+<p>This evidence-carrying sum is explanatory notation. The actual verdict is a bare enum; witnesses, obligations and scoped receipts are separate assessment fields. A refutation retains its declared coverage and model scope. Budget exhaustion or unsupported semantics can leave <code>Unknown</code>. Conflicting well-formed premises produce <code>PremiseConflict</code> and retain the conflicting evidence.</p>
+<pre><code>ObservedAs(p, record) = {
+  event_mapping : CheckedMapping(record.events, p),
+  identity_and_interval_binding : Evidence
+}</code></pre>
+<p>A captured snapshot supplies bytes, stack data and point-specific observations. Those can support derived active-call relationships under the ABI premises. They supply no event-sequence witness for a complete historical instruction route. The current reports retain that execution-evidence limit explicitly.</p>
+</section>
+
+<section id="demo" aria-labelledby="demo-title">
+<h2 id="demo-title"><span class="num">05</span>Keep the structural route; vary the local question</h2>
+<div class="demo">
+<h3>A small illustrative program</h3>
+<p>The caller’s active call enters frame 0. Inside frame 0, a branch selects a constant assignment to RCX before point <code>p</code>. The initial RAX here is a local model input; this example assumes no recovered caller-to-callee argument transport.</p>
+<figure class="graph-wrap">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 510" role="img" aria-labelledby="graph-title graph-desc">
+<title id="graph-title">One active call and two structural routes inside its callee</title><desc id="graph-desc">Frame 1's verified active call links to entry a in frame 0. A branch on RAX equals zero selects b, assigning RCX zero, or c, assigning RCX one; both reach point p. The highlighted route follows the selected branch. Controls change the local hypothesis and evidence availability while preserving the graph edges.</desc>
+<defs><marker id="graph-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#64899d"/></marker></defs>
+<rect class="frame-box" x="20" y="30" width="230" height="450" rx="12"/><text class="frame-label" x="42" y="62">Frame 1 · older caller</text>
+<rect class="callee-box" x="285" y="30" width="690" height="450" rx="12"/><text class="frame-label" x="307" y="62">Frame 0 · selected callee</text>
+<path class="graph-edge selected" d="M223 216 C320 216 392 120 540 120"/><text class="edge-label" x="270" y="150">verified active call</text>
+<path class="graph-edge selected" d="M615 150 V185"/>
+<path id="edge-b-in" class="graph-edge selected" d="M575 215 L465 285"/><text class="edge-label" x="467" y="253">RAX = 0</text>
+<path id="edge-c-in" class="graph-edge" d="M655 215 L785 285"/><text class="edge-label" x="710" y="253">RAX ≠ 0</text>
+<path id="edge-b-out" class="graph-edge selected" d="M465 347 L580 400"/><path id="edge-c-out" class="graph-edge" d="M785 347 L650 400"/>
+<g class="graph-node"><rect x="47" y="181" width="176" height="70" rx="8"/><text x="135" y="208">c₁ · active call</text><text class="op" x="135" y="231">(frame 1, c₁)</text></g>
+<g class="graph-node"><rect x="540" y="90" width="150" height="60" rx="8"/><text x="615" y="114">a · entry</text><text class="op" x="615" y="136">(frame 0, a)</text></g>
+<g class="graph-node"><polygon points="615,185 655,215 615,245 575,215"/><text x="615" y="220">RAX=0?</text></g>
+<g id="node-b" class="graph-node selected"><rect x="378" y="285" width="174" height="62" rx="8"/><text x="465" y="309">b · frame 0</text><text id="node-b-op" class="op" x="465" y="331">RCX := 0</text></g>
+<g id="node-c" class="graph-node"><rect x="698" y="285" width="174" height="62" rx="8"/><text x="785" y="309">c · frame 0</text><text id="node-c-op" class="op" x="785" y="331">RCX := 1</text></g>
+<g class="graph-node"><rect x="540" y="400" width="150" height="60" rx="8"/><text x="615" y="424">p · before fault</text><text class="op" x="615" y="446">endpoint predicate</text></g>
+<text x="43" y="430" fill="#536b77" font-family="system-ui,sans-serif" font-size="12">A call link carries</text><text x="43" y="448" fill="#536b77" font-family="system-ui,sans-serif" font-size="12">control evidence.</text>
+</svg>
+<figcaption>Both branches remain structural edges. The semantic answer below applies to the suffix <code>a → branch → b/c → p</code> within frame 0.</figcaption>
+</figure>
+<div class="controls">
+<div class="field"><label for="route">Selected local route</label><select id="route"><option value="b">Through b: zero branch</option><option value="c">Through c: nonzero branch</option></select></div>
+<div class="field"><label for="endpoint">Hypothesis before p</label><select id="endpoint"><option value="0">RCX = 0</option><option value="1">RCX = 1</option><option value="any">No RCX constraint</option></select></div>
+<div class="field"><label for="semantics">B/C transfer evidence</label><select id="semantics"><option value="admitted">Admitted constant assignments</option><option value="unavailable">Transfer evidence unavailable</option></select></div>
+<div class="field"><label for="premises">Local RAX hypotheses</label><select id="premises"><option value="coherent">Coherent with the selected route</option><option value="conflicting">RAX = 0 and RAX = 1 at the same point</option></select></div>
+</div>
+<div class="status-grid" aria-live="polite" aria-atomic="true">
+<div class="status good"><span class="label">Frame 1 → 0 structure</span><strong>Path witness present</strong><p>Every displayed step belongs to this toy graph.</p></div>
+<div id="local-status" class="status good"><span class="label">Frame 0 local feasibility</span><strong id="local-answer">PossibleUnderModel</strong><p id="local-reason">Choose initial RAX = 0; b establishes RCX = 0 before p.</p></div>
+<div class="status unknown"><span class="label">Caller → callee value relation</span><strong>Unavailable</strong><p>The example supplies no certificate transporting arguments or registers across the call.</p></div>
+<div class="status unknown"><span class="label">Historical execution</span><strong>No event witness supplied</strong><p>A model assignment gives a conditional possibility; no event record identifies the executed route.</p></div>
+</div>
+<p class="path-readout" id="path-readout">Structural route: (1,c₁) → (0,a) → (0,branch) → (0,b) → (0,p)</p>
+<p class="demo-note">This is a hand-defined finite teaching example. The endpoint is an explicit hypothesis. Its controls evaluate a small truth table, rather than invoking Ariadne, BAP or a general solver.</p>
+<noscript><p>The static diagram shows both structural routes. With admitted transfers, route b yields RCX=0 and route c yields RCX=1. The opposite endpoint value is refuted in this toy model. Missing transfer evidence yields unknown; contradictory RAX hypotheses yield a premise conflict.</p></noscript>
+</div>
+</section>
+
+<section id="products" aria-labelledby="products-title">
+<h2 id="products-title"><span class="num">06</span>A frame result is a product of independently scoped layers</h2>
+<pre><code>Layer(T) =
+    Finished   { value : T, scope : Scope }
+  + WorkStopped{ partial : Option&lt;T&gt;, reason : Reason }
+  + Unavailable{ reason : Reason }
+
+FrameResult = {
+  frame_binding,
+  structural_recovery,
+  connections,
+  resolution,
+  feasibility,
+  values,
+  origins,
+  execution_evidence
+}</code></pre>
+<p>This is a conceptual packaging of payloads and progress. The product corresponds to the separate fields in <a href="../../src/investigation/frame_question/model.rs"><code>QuestionLayers</code></a>. Rust records the layer receipts there; the associated assessment holds witnesses, values and origin payloads. Each component retains its premises, point and work receipt. A useful graph can coexist with unresolved values. A stopped cycle-summary or example-search layer can coexist with useful local fault facts.</p>
+<div class="table-wrap"><table><thead><tr><th>Question</th><th>Type/evidence being requested</th><th>Current interpretation</th></tr></thead><tbody>
+<tr><th>Which connections exist?</th><td><code>Path(G,u,v)</code>, reachability sets, corridor and SCC membership.</td><td>Structural results over the represented graph and validated active-call links.</td></tr>
+<tr><th>Can this local alternative satisfy φ?</th><td><code>AlternativeAnswer</code> with local semantic evidence.</td><td>Supported scalar/GPR relations; positive witnesses use the admitted finite profile and coherent replay.</td></tr>
+<tr><th>What feeds this fault?</th><td>Value facts × candidate-origin assessments.</td><td>Local fault/callee evidence; writer focus preserves the full candidate universe. Feasibility is a separate, inapplicable/unknown layer for this question kind.</td></tr>
+<tr><th>Did this exact route execute?</th><td><code>ObservedAs(p,record)</code>.</td><td>Requires its own execution record and event mapping; the snapshot route result supplies no such witness.</td></tr>
+</tbody></table></div>
+<details><summary>Why an empty sample list proves so little</summary>
+<pre><code>SampledPaths(G,u,v,NP) = {
+  paths : List&lt;Path(G,u,v)&gt;,
+  count_check : NP &gt; 0 ∧ length(paths) &lt; NP,
+  search_scope : SearchPolicy,
+  status : SearchStatus
+}</code></pre>
+<p>Search policy retains deterministic edge order and the declared visit/work bounds. The list bound is strict: <code>NP=10</code> allows at most nine retained paths. With <code>NP=1</code>, capacity is zero even when a path exists. Scope, frontier and stop information determine what a completed search establishes. A returned sample count alone establishes neither infeasibility nor global completeness.</p>
+</details>
+</section>
+
+<section id="implementation" aria-labelledby="implementation-title">
+<h2 id="implementation-title"><span class="num">07</span>What the current implementation supports</h2>
+<div class="table-wrap"><table><thead><tr><th>Conceptual component</th><th>Concrete source</th><th>Boundary retained</th></tr></thead><tbody>
+<tr><th>Validated source and activation identity</th><td><a href="../../src/investigation/frame_structure.rs"><code>BoundFrameStructure</code></a>; <a href="../../src/investigation/frame_unwind.rs">captured frame recovery</a>.</td><td>Live frame binding has a finite Windows AMD64 unwind profile. Missing bytes or unsupported frame recipes remain explicit.</td></tr>
+<tr><th>Graph path and connection views</th><td><a href="../../src/investigation/frame_paths.rs"><code>FramePathNode</code>, <code>FramePathEdge</code></a>; <a href="../../src/investigation/frame_connections.rs"><code>BoundFrameConnections</code></a>.</td><td>Active call anchors, edge kinds, frontiers and finite work stay part of the result.</td></tr>
+<tr><th>Tagged question</th><td><a href="../../src/investigation/frame_question/model.rs"><code>Alternative + FaultDependency</code></a>.</td><td>One explicitly selected question, tied to an existing source and activation range.</td></tr>
+<tr><th>Local model witness/refutation</th><td><a href="../../src/investigation/frame_question/alternative.rs">alternative checker</a>.</td><td>General constraints across activations report <code>cross-frame-value-relation-unavailable</code>. Arbitrary caller-to-callee argument propagation remains outside the profile. Conditional structural sources currently emit no positive model witnesses.</td></tr>
+<tr><th>Fault values and possible writers</th><td><a href="../../src/investigation/frame_question/dependencies.rs">dependency collector</a>.</td><td>Current numerical fault observations bind the selected frame-0 fault point. Candidate collection needs compatible completed callee evidence; incomplete work retains unknowns.</td></tr>
+</tbody></table></div>
+<p>The explanatory <code>Σ</code>, <code>Π</code> and refinement predicates expose proof obligations that concrete code checks through ownership, privately constructed bound values, validation and replay. They introduce no new claim of universally proved Rust/native refinement. Pinned BAP lifting remains an explicit semantic premise.</p>
+</section>
+
+<section id="sources" aria-labelledby="sources-title">
+<h2 id="sources-title"><span class="num">08</span>Direct reading and source basis</h2>
+<ul class="sources">
+<li><a href="../../docs/Ariadne/investigation-design.md#bounded-frame-to-frame-path-listing">Frame-path contract</a> — anchors, strict count bound, structural meaning and completeness scope.</li>
+<li><a href="../../docs/Ariadne/investigation-design.md#structural-corridors-and-cycle-summaries">Frame-connection contract</a> — represented graph, corridors, cycles and unresolved boundaries.</li>
+<li><a href="../../docs/Ariadne/frame-question-investigation-design.md#implemented-profile-and-usage">Implemented question profile</a> — supported local constraints, independent value/origin layers and cross-activation limits.</li>
+<li><a href="../../Specs/AriadneFramePaths.tla">Frame-path model</a> and <a href="../../Specs/AriadneFrameQuestion.tla">frame-question model</a> — modeled contracts; the type notation on this page is explanatory.</li>
+<li><a href="../../tests/input/frame_question_cli.rs">Concrete branch-question controls</a> — model witness, refutation, stopped work and conflicting premises.</li>
+<li><a href="ariadne-resolver-structural-types-20261015.html">Earlier resolver explanation through structural types</a> — historical origin of the record/sum/refinement vocabulary.</li>
+<li><a href="ariadne-structural-type-model-20261020/model.pdf">Earlier full structural-type reconstruction (PDF)</a> — a wider, dated view of the analysis machine.</li>
+</ul>
+</section>
+</div>
+<footer id="context">
+<h2>Context and follow-up</h2>
+<p><strong>Status.</strong> HTML explanation based on source revision <code>758d7ef8a21e4607e01e68e988f7ec8b280afb8c</code>, read on 2026-10-22. Updated with the six-question catalogue and unknown-result explanation. The interactive graph is an illustrative local model.</p>
+<p><strong>Motivating problem.</strong> The user asks which current frame-to-frame questions are answerable, what a site identifies, and how incomplete or uncomputable relations appear. This page connects those questions to precise types, evidence and limits.</p>
+<p><strong>Contribution.</strong> Six capability signatures, a site/point glossary, unknown-result cases, path-construction judgments and an interactive local model explain the current frame-to-frame interfaces.</p>
+<p><strong>Origin and next reading.</strong> The <a href="ariadne-resolver-structural-types-20261015.html">earlier type vocabulary</a> motivates this focused account. The <a href="../../docs/Ariadne/frame-question-investigation-design.md">canonical question design</a> and <a href="../../docs/Ariadne/investigation-design.md">investigation contract</a> own operational behavior and later changes. Return to the <a href="ariadne-reports-index.html">chat-document archive</a> for related presentations.</p>
+<p><strong>Unresolved limits.</strong> General cross-activation argument/value transport, recovered execution history and actual-writer/root-cause claims require additional evidence and contracts. Presentation and toy calculations do not add implementation qualification. Browser launch and visual inspection are separate presentation checks.</p>
+</footer>
+</main>
+<script>
+'use strict';
+function assessToy(route, endpoint, semantics, premises) {
+  if (!['b','c'].includes(route) || !['0','1','any'].includes(endpoint) || !['admitted','unavailable'].includes(semantics) || !['coherent','conflicting'].includes(premises)) {
+    throw new Error('Invalid illustrative control value');
+  }
+  const rcx = route === 'b' ? 0 : 1;
+  if (premises === 'conflicting') return {kind:'PremiseConflict',tone:'bad',reason:'The local hypotheses require RAX = 0 and RAX = 1 at the same point. Retain the conflict.',structural:true};
+  if (semantics === 'unavailable') return {kind:'Unknown',tone:'unknown',reason:'A required local transfer relation is unavailable, so the checker has no validated semantic witness or refutation.',structural:true};
+  if (endpoint !== 'any' && Number(endpoint) !== rcx) return {kind:'RefutedUnderModel',tone:'bad',reason:'On local route '+route+', the admitted assignment establishes RCX = '+rcx+' before p, contradicting the selected endpoint in this complete toy scope.',structural:true};
+  return {kind:'PossibleUnderModel',tone:'good',reason:'Choose initial RAX = '+rcx+'; '+route+' establishes RCX = '+rcx+' before p. This witness covers the local frame-0 suffix.',structural:true};
+}
+function updateDemo() {
+  const get=id=>document.getElementById(id);
+  const route=get('route').value, endpoint=get('endpoint').value, semantics=get('semantics').value, premises=get('premises').value;
+  const result=assessToy(route,endpoint,semantics,premises);
+  get('local-answer').textContent=result.kind;
+  get('local-reason').textContent=result.reason;
+  get('local-status').className='status '+result.tone;
+  for (const branch of ['b','c']) {
+    const selected=branch===route;
+    get('node-'+branch).classList.toggle('selected',selected);
+    get('edge-'+branch+'-in').classList.toggle('selected',selected);
+    get('edge-'+branch+'-out').classList.toggle('selected',selected);
+  }
+  get('node-b-op').textContent=semantics==='admitted'?'RCX := 0':'transfer unavailable';
+  get('node-c-op').textContent=semantics==='admitted'?'RCX := 1':'transfer unavailable';
+  get('path-readout').textContent='Structural route: (1,c₁) → (0,a) → (0,branch) → (0,'+route+') → (0,p)';
+}
+if (typeof document !== 'undefined') {
+  for (const id of ['route','endpoint','semantics','premises']) document.getElementById(id).addEventListener('change',updateDemo);
+  updateDemo();
+}
+</script>
+</body>
+</html>

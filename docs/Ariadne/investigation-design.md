@@ -36,6 +36,9 @@ now covers both declared saved-source applications. The
 all four recommendation items, with question-directed resolution and local
 fault-dependency integration qualified within the finite scope of its
 [P0–P10 program](../../.agents/plans/frame-question-investigation.md).
+The current [saved-XMM unwind implementation](../../src/investigation/frame_unwind.rs)
+adds operation 8 to fresh frame recovery under profile v2. Historical v1
+publications keep their original replay rules and qualification scope.
 
 **Why this document exists.** The [real-capture slice](file-reader-design.md#historical-controlled-chromium-capture)
 provides possible origins but leaves their explanation to the investigator.
@@ -102,6 +105,8 @@ open. The bounded frame-path implementation admits a finite captured-unwind prof
 and separately bound instruction graphs; general unwinding and broader capture
 qualification remain open. Caller S6 and finite original-capture frame-path F4
 have separate completed qualifications. The structural report retains its separate scope.
+The v2 saved-XMM extension does not publish reconstructed vector-register values
+or extend those historical qualifications to the new profile.
 Full-memory capture alone does not supply a trace.
 Possible producers and numeric conclusions do not prove a UAF, executed
 path or general root cause.
@@ -1125,9 +1130,10 @@ inline or exceptional frames remain explicit gaps rather than guessed links.
 The [reader scope](file-reader-design.md#decision-and-supported-scope) now includes
 a finite opt-in Windows AMD64 captured-unwind adapter. General unwinding remains
 outside delivery. It reads captured PE32+ headers, complete sorted runtime tables,
-v1 ordinary-body PUSH_NONVOL, ALLOC_SMALL/LARGE, SET_FPREG and SAVE_NONVOL/FAR
-recipes and stack slots. Prologues, epilogues, chained/handler/XMM/machine-frame
-recipes and unmatched/JIT modules stop explicitly. Unannotated leaf recovery
+Windows `UNWIND_INFO` version-1 ordinary-body PUSH_NONVOL, ALLOC_SMALL/LARGE,
+SET_FPREG, SAVE_NONVOL/FAR and the bounded SAVE_XMM128 form described below.
+Prologues, epilogues, chained/handler/SAVE_XMM128_FAR/machine-frame recipes and
+unmatched/JIT modules stop explicitly. Unannotated leaf recovery
 uses the stated Windows ABI and complete-table premises. Essential missing
 thread/context records are input prerequisites, not zero-valued frames.
 
@@ -1146,6 +1152,59 @@ return address alone. An unknown call site or missing endpoint evidence makes
 that question unavailable, with the required evidence recorded. External
 symbol/unwind artifacts need the reader's explicit matching/trust contract;
 they cannot replace missing captured instruction bytes automatically.
+
+#### Saved-XMM unwind support (2026-10-22)
+
+Fresh recovery uses `captured-windows-amd64-unwind-v2`. It accepts operation 8
+(`UWOP_SAVE_XMM128`) for nonvolatile XMM6–XMM15, consumes both code slots and
+scales the unsigned 16-bit offset by 16. The save address uses the fixed frame
+base: captured RSP for a frame without a frame register, otherwise the frame
+register minus its declared scaled offset. With a frame register, the save
+must follow frame-register establishment in the prologue. The existing code
+ordering, truncated-operation, read-budget and capture-conflict checks remain
+applicable. See the [Microsoft unwind contract](https://learn.microsoft.com/en-us/cpp/build/exception-handling-x64?view=msvc-170).
+
+The admitted save slot must be 16-byte aligned and its complete 16-byte span
+must lie within the captured thread stack. Checked address arithmetic and
+the ordinary captured-byte reader retain the read and its provenance. This
+operation does not change RSP or any GPR. The public frame context remains
+GPR-only; saved XMM bytes are evidence for the accepted unwind recipe, without
+claiming a reconstructed vector-register context. Operation 9 remains outside
+this extension.
+
+Both standalone chain validation and validation against the owning snapshot
+dispatch on the recorded profile. Saved v1 chains therefore preserve their
+original stop before operation 8 and their original read sequence. Unknown
+profile identifiers are rejected. Fresh v2 chain identities differ even when
+their recovered frames agree with a v1 result; downstream evidence must bind
+the selected chain rather than mix profiles. The existing `runtime-v1` method
+label describes the Windows metadata version, not Ariadne's profile version.
+
+This extends the concrete adapter premise; it does not change the frame-path
+model's structural rules. The original-corpus checker retains its declared
+v1 scope. Build and real-capture application results for this extension are
+recorded separately from unexecuted test and qualification campaigns.
+
+**Application on 2026-10-22.** An offline locked CLI build and a fresh
+`--frame-connections 1:0 --example-path-count-bound 3` run on DumpLedger capture
+`dump_5A5FE7964BA24F2EAB465F164F` (SHA-256
+`2135f6c965c3db1b7265915fe89f222c758d8f10f1eeef782099f5887a6b0265`)
+recover 29 frame records instead of the v1 prefix of one. Sixteen captured
+16-byte saved-XMM slots are retained. Frame 0's return slot
+`0x000000ea38bfdb48` contains caller continuation `0x00007ff77501b14f`, and
+frame 1's stack pointer is `0x000000ea38bfdb50`. The later unwind stop is
+`unsupported-unwind-version-or-flags` at frame 28: header `09 0a 04 00`
+declares Windows unwind version 1 with handler flag 1.
+
+The selected graph now has 18 admitted nodes, 16 traversal edges and two
+unresolved guards, at `0x00007ff77501e123` and `0x00007ff775019d83`.
+Both caller and child maps exist, but the active call and fault endpoint are
+still unadmitted; the connection remains `unavailable_anchors`. This is one
+real-capture application with default bounds, not full v2 qualification.
+Automated tests, mutation/model campaigns and executable legacy replay were
+not run for this extension. V1 compatibility was reviewed at both replay
+dispatch sites; its runtime qualification remains separate. Disposable build
+and run products are under ignored `target/dump-5a5fe796-frame-example/`.
 
 ### Meaning of a listed path
 
@@ -1288,7 +1347,8 @@ caller graph admitted only nine instructions before stopping at
 `0x00007ff7744033b3` (`movaps [rsp+0x240],xmm6`). BAP projection reported
 `unmodeled architectural namespace/type: YMM6`; the graph could not establish
 the active call at `0x00007ff774404108`, independently observed in CDB. The
-caller unwind recipe also includes unsupported `UWOP_SAVE_XMM128`, preventing
+caller unwind recipe also includes `UWOP_SAVE_XMM128`, unsupported by that
+historical profile and preventing
 older-frame recovery. Both reports returned zero paths without starting search.
 This is missing admitted evidence, not proof of no path. The attempt exercises
 real-capture refusal behavior and does not pass F4 full-dump qualification.
@@ -1297,6 +1357,9 @@ admits YMM6 and re-runs the same query. Its
 [fresh record](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/bap-vector-registers/20261013/report.md)
 preserves the unchanged BIL identity and shows the remaining alignment-exception
 refusal, unchanged caller graph and unavailable active-call anchor.
+The [2026-10-22 unwind extension](#saved-xmm-unwind-support-2026-10-22) subsequently
+adds bounded operation-8 support for fresh v2 chains; the dated v1 results above
+remain unchanged.
 
 ## Acceptance
 

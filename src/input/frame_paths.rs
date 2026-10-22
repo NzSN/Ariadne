@@ -2,7 +2,8 @@
 use super::{AnalysisQuery, FilePreparedAnalysis, FileSnapshot, Platform, PrepareLimits};
 use crate::investigation::frame_unwind::{FrameModule, FrameSeed, hex, recover_frames};
 use crate::investigation::{
-    CapturedFrameChain, Contributor, Error, FrameMemoryEvidence, FrameRecoveryLimits, Span, invalid,
+    CapturedFrameChain, Contributor, Error, FRAME_UNWIND_PROFILE, FrameMemoryEvidence,
+    FrameRecoveryLimits, Span, invalid,
 };
 use std::path::Path;
 
@@ -152,7 +153,11 @@ impl FileSnapshot {
         {
             return Err(invalid("frame chain belongs to another capture"));
         }
-        let expected = self.recover_thread_frames(chain.thread_id, chain.limits.clone())?;
+        let expected = self.recover_thread_frames_with_profile(
+            chain.thread_id,
+            chain.limits.clone(),
+            &chain.profile,
+        )?;
         if expected != *chain {
             return Err(invalid("frame evidence differs from owning capture"));
         }
@@ -162,6 +167,14 @@ impl FileSnapshot {
         &self,
         thread_id: u32,
         limits: FrameRecoveryLimits,
+    ) -> Result<CapturedFrameChain, Error> {
+        self.recover_thread_frames_with_profile(thread_id, limits, FRAME_UNWIND_PROFILE)
+    }
+    fn recover_thread_frames_with_profile(
+        &self,
+        thread_id: u32,
+        limits: FrameRecoveryLimits,
+        profile: &str,
     ) -> Result<CapturedFrameChain, Error> {
         let stream = self
             .metadata
@@ -239,7 +252,7 @@ impl FileSnapshot {
                 })
                 .collect(),
         };
-        recover_frames(seed, limits, &mut |address, requested| {
+        recover_frames(seed, limits, profile, &mut |address, requested| {
             let read = self.read_prefix(address, requested)?;
             Ok(FrameMemoryEvidence {
                 address,

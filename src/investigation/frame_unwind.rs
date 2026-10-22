@@ -10,7 +10,29 @@ const BANKS: [&str; 16] = [
 fn nonvolatile(bank: usize) -> bool {
     [3, 5, 6, 7, 12, 13, 14, 15].contains(&bank)
 }
-pub const FRAME_UNWIND_PROFILE: &str = "captured-windows-amd64-unwind-v1";
+const LEGACY_FRAME_UNWIND_PROFILE: &str = "captured-windows-amd64-unwind-v1";
+pub const FRAME_UNWIND_PROFILE: &str = "captured-windows-amd64-unwind-v2";
+
+#[derive(Clone, Copy, PartialEq, Eq)]
+enum UnwindProfile {
+    V1,
+    V2,
+}
+impl UnwindProfile {
+    fn parse(profile: &str) -> Result<Self, Error> {
+        match profile {
+            LEGACY_FRAME_UNWIND_PROFILE => Ok(Self::V1),
+            FRAME_UNWIND_PROFILE => Ok(Self::V2),
+            _ => Err(invalid("unsupported-frame-unwind-profile")),
+        }
+    }
+    fn name(self) -> &'static str {
+        match self {
+            Self::V1 => LEGACY_FRAME_UNWIND_PROFILE,
+            Self::V2 => FRAME_UNWIND_PROFILE,
+        }
+    }
+}
 
 #[derive(Serialize, Deserialize)]
 #[serde(transparent)]
@@ -190,17 +212,22 @@ impl CapturedFrameChain {
     }
     pub fn validate(&self) -> Result<(), Error> {
         let mut at = 0;
-        let expected = recover_frames(self.seed.clone(), self.limits.clone(), &mut |va, n| {
-            let r = self
-                .reads
-                .get(at)
-                .ok_or_else(|| invalid("missing unwind read receipt"))?;
-            if r.address != va || r.requested != n {
-                return Err(invalid("unwind read sequence changed"));
-            }
-            at += 1;
-            Ok(r.clone())
-        })?;
+        let expected = recover_frames(
+            self.seed.clone(),
+            self.limits.clone(),
+            &self.profile,
+            &mut |va, n| {
+                let r = self
+                    .reads
+                    .get(at)
+                    .ok_or_else(|| invalid("missing unwind read receipt"))?;
+                if r.address != va || r.requested != n {
+                    return Err(invalid("unwind read sequence changed"));
+                }
+                at += 1;
+                Ok(r.clone())
+            },
+        )?;
         if at != self.reads.len() || expected != *self {
             return Err(invalid("frame chain recomputation mismatch"));
         }
@@ -250,11 +277,14 @@ impl<F: FnMut(u64, usize) -> Result<FrameMemoryEvidence, Error>> Reader<'_, F> {
         }
         Ok(b)
     }
-    fn stack(&mut self, va: u64, lo: u64, hi: u128) -> Result<u64, Error> {
-        if va < lo || u128::from(va) + 8 > hi {
+    fn stack_bytes(&mut self, va: u64, n: usize, lo: u64, hi: u128) -> Result<Vec<u8>, Error> {
+        if va < lo || u128::from(va) + n as u128 > hi {
             return Err(invalid("return-or-save-outside-thread-stack"));
         }
-        Ok(u64v(&self.bytes(va, 8)?, 0))
+        self.bytes(va, n)
+    }
+    fn stack(&mut self, va: u64, lo: u64, hi: u128) -> Result<u64, Error> {
+        Ok(u64v(&self.stack_bytes(va, 8, lo, hi)?, 0))
     }
 }
 #[derive(Clone)]
@@ -360,8 +390,10 @@ fn potential_epilogue(b: &[u8]) -> bool {
 pub(crate) fn recover_frames<F: FnMut(u64, usize) -> Result<FrameMemoryEvidence, Error>>(
     seed: FrameSeed,
     limits: FrameRecoveryLimits,
+    profile: &str,
     read: &mut F,
 ) -> Result<CapturedFrameChain, Error> {
+    let profile = UnwindProfile::parse(profile)?;
     if !super::validate::digest(&seed.artifact_sha256)
         || seed.snapshot_id != format!("minidump-captured-amd64-v1:{}", seed.artifact_sha256)
         || ![3, 6].contains(&seed.context_stream)
@@ -560,6 +592,7 @@ pub(crate) fn recover_frames<F: FnMut(u64, usize) -> Result<FrameMemoryEvidence,
                             1 if info == 1 => 3,
                             4 => 2,
                             5 => 3,
+                            8 if profile == UnwindProfile::V2 => 2,
                             _ => return Err(invalid("unsupported-unwind-operation")),
                         };
                         if at + slots > count {
@@ -620,6 +653,28 @@ pub(crate) fn recover_frames<F: FnMut(u64, usize) -> Result<FrameMemoryEvidence,
                                     .ok_or_else(|| invalid("saved register overflow"))?;
                                 registers.insert(BANKS[info].into(), r.stack(addr, lo, hi)?);
                                 restored.insert(BANKS[info].into(), addr);
+                            }
+                            8 => {
+                                if !(6..=15).contains(&info) {
+                                    return Err(invalid("invalid-saved-xmm-register"));
+                                }
+                                // Saves using a frame pointer must occur after its
+                                // establishment in the prologue, hence before its
+                                // SET_FPREG operation during reverse unwinding.
+                                if bank != 0 && set_frame {
+                                    return Err(invalid("xmm-save-before-frame-establishment"));
+                                }
+                                let offset = u64::from(u16v(&codes, pos + 2)) * 16;
+                                let addr = base
+                                    .checked_add(offset)
+                                    .ok_or_else(|| invalid("saved register overflow"))?;
+                                if addr % 16 != 0 {
+                                    return Err(invalid("unaligned-saved-xmm-slot"));
+                                }
+                                // The public context contains GPRs only. Preserve
+                                // all saved XMM bytes as checked capture evidence;
+                                // this operation changes neither RSP nor a GPR.
+                                r.stack_bytes(addr, 16, lo, hi)?;
                             }
                             _ => unreachable!(),
                         }
@@ -698,7 +753,7 @@ pub(crate) fn recover_frames<F: FnMut(u64, usize) -> Result<FrameMemoryEvidence,
         truncated = true;
     }
     let mut result = CapturedFrameChain {
-        profile: FRAME_UNWIND_PROFILE.into(),
+        profile: profile.name().into(),
         chain_id: String::new(),
         snapshot_id: seed.snapshot_id.clone(),
         artifact_sha256: seed.artifact_sha256.clone(),
