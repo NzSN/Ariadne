@@ -1112,3 +1112,95 @@ fn current_pending_guard_requires_complete_candidate_control_without_rewriting_l
         );
     }
 }
+
+#[test]
+fn exact_mandatory_counts_preserve_rsp_in_advanced_guard_replay_only() {
+    let contract: Value =
+        serde_json::from_str(include_str!("fixtures/bit-count/contract.json")).unwrap();
+    // Supplied typed data semantics isolate guard admission from the producer.
+    // The fresh-BIL numeric oracle separately checks the actual count lifts.
+    let bil = vec![Stmt::Move {
+        var: var("RAX", 64, false),
+        value: integer(0),
+    }];
+    for case in contract["cases"].as_array().unwrap() {
+        let encoded = case["bytes"].as_str().unwrap();
+        let next = 0x1000 + encoded.len() as u64 / 2;
+        let mut count = site(0x1000, &bil, ControlKind::Ordinary, &[next], &[]);
+        count.bytes_hex = encoded.into();
+        let mut i = input(vec![count, guard(next), terminal(next + 8)], &[0x1000]);
+        i.producer.projection = ADVANCED_PRODUCER_PROFILE.into();
+        i.policy = ADVANCED_PROFILE.into();
+        observe(&mut i, 0x1000, 0);
+        let report = certify_guards(&i).unwrap();
+        assert_eq!(report.guards.len(), 1);
+        assert_eq!(report.guards[0].verdict, Verdict::Aligned, "{encoded}");
+        assert_eq!(
+            report.transfers[0].relation,
+            (0..16).map(|r| 1u16 << r).collect::<Vec<_>>()
+        );
+        let saved: Report = serde_json::from_slice(&serde_json::to_vec(&report).unwrap()).unwrap();
+        replay_report(&saved.input, &saved).unwrap();
+        let mut changed = saved;
+        changed.input.sites[0].bytes_hex.push_str("90");
+        assert!(replay_report(&changed.input, &changed).is_err());
+
+        i.producer.projection = PRODUCER_PROFILE.into();
+        i.policy = PROFILE.into();
+        let old = certify_guards(&i).unwrap();
+        assert_ne!(
+            old.guards[0].verdict,
+            Verdict::Aligned,
+            "old profile admitted {encoded}"
+        );
+    }
+}
+
+#[test]
+#[ignore = "requires the pinned BAP runtime/helper"]
+fn fresh_mandatory_count_bil_preserves_rsp_in_saved_advanced_guard_replay() {
+    let contract: Value =
+        serde_json::from_str(include_str!("fixtures/bit-count/contract.json")).unwrap();
+    let cases = contract["cases"].as_array().unwrap();
+    let candidates = cases
+        .iter()
+        .enumerate()
+        .map(|(index, case)| {
+            let encoded = case["bytes"].as_str().unwrap();
+            let bytes = (0..encoded.len())
+                .step_by(2)
+                .map(|at| u8::from_str_radix(&encoded[at..at + 2], 16).unwrap())
+                .collect();
+            (0x1000 + index as u64 * 32, bytes)
+        })
+        .collect();
+    let mut session = super::Session::start(
+        &super::Config::from_env(),
+        "count-guard-replay",
+        "windows-amd64",
+    )
+    .unwrap();
+    let lifted = session.lift(&candidates).unwrap();
+    session.finish().unwrap();
+    for (index, case) in cases.iter().enumerate() {
+        let va = 0x1000 + index as u64 * 32;
+        let lift = &lifted[&va];
+        assert_eq!(lift.bytes, case["bytes"].as_str().unwrap());
+        let next = va + u64::from(lift.length);
+        let mut count = site(va, &lift.bil, ControlKind::Ordinary, &[next], &[]);
+        count.bytes_hex = lift.bytes.clone();
+        let mut i = input(vec![count, guard(next), terminal(next + 8)], &[va]);
+        i.producer.projection = ADVANCED_PRODUCER_PROFILE.into();
+        i.policy = ADVANCED_PROFILE.into();
+        observe(&mut i, va, 0);
+        let report = certify_guards(&i).unwrap();
+        assert_eq!(
+            report.guards[0].verdict,
+            Verdict::Aligned,
+            "{}",
+            case["name"]
+        );
+        let saved: Report = serde_json::from_slice(&serde_json::to_vec(&report).unwrap()).unwrap();
+        replay_report(&saved.input, &saved).unwrap();
+    }
+}

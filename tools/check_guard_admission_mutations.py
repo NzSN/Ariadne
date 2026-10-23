@@ -56,9 +56,9 @@ MUTATIONS = [
         "name": "ignore-source-control-barrier",
         "source": GUARD,
         "edits": [(
-            ") && !super::admission::ordinary_unknown(&bil, &b, &error)",
+            ") && !super::admission::ordinary_unknown_with_profile(",
             ") && false /* mutant: trust caller Ordinary despite raw source control */\n"
-            "            && !super::admission::ordinary_unknown(&bil, &b, &error)",
+            "            && !super::admission::ordinary_unknown_with_profile(",
         )],
         "tests": ["unreviewed_source_control_is_a_barrier_even_with_forged_ordinary_metadata"],
         "contract": "A later RSP reset cannot certify unknown source control.",
@@ -77,14 +77,36 @@ MUTATIONS = [
         "name": "pending-transfer-needs-normal-projection",
         "source": GUARD,
         "edits": [(
-            "let (rule, relation) = if pending.is_some() {",
-            "let (rule, relation) = if pending.is_some()\n"
-            "        && super::projection::project(\n"
-            "            &statements(&site.ast)?, \"MOVAPS-reviewed-store\", &b, address(&site.site)?\n"
-            "        ).is_ok() { // mutant: require admitted effects before independent pending transfer",
+            "let (rule, relation) = if let Some(pending) = pending {",
+            "let (rule, relation) = if let Some(pending) = pending.filter(|_|\n"
+            "        statements(&site.ast).is_ok_and(|bil| super::projection::project(\n"
+            "            &bil, \"MOVAPS-reviewed-store\", &b, 0\n"
+            "        ).is_ok())) { // mutant: require admitted effects before independent pending transfer",
         )],
         "tests": ["joined_paths_and_changing_loops_prevent_false_alignment"],
         "contract": "The checked candidate RSP relation precedes normal selection and permits identity-loop closure.",
+    },
+    {
+        "name": "mandatory-count-replay-loses-opcode",
+        "source": "src/bap/admission.rs",
+        "edits": [(
+            ".or_else(|| mandatory_count_opcode(bytes, profile))",
+            ".or_else(|| None) // mutant: discard mandatory opcode identity on saved replay",
+        )],
+        "tests": ["exact_mandatory_counts_preserve_rsp_in_advanced_guard_replay_only"],
+        "contract": "Exact advanced count forms retain typed RSP transfers during saved guard replay.",
+    },
+    {
+        "name": "advanced-original-control-loses-profile",
+        "source": "src/bap/composition.rs",
+        "observer": "tests/bap/composition_unit.rs",
+        "prefix": "bap::composition::tests::",
+        "edits": [(
+            "if super::advanced_projection(&input.producer.projection) {",
+            "if false { // mutant: replay advanced source control under the default profile",
+        )],
+        "tests": ["mandatory_count_original_control_is_replayed_under_its_declared_profile"],
+        "contract": "Composed original-control replay preserves the selected advanced prefix and state contract.",
     },
     {
         "name": "normal-store-kills-old-memory",
@@ -131,8 +153,8 @@ def apply_mutation(original, spec):
 
 
 def check_seams():
-    observer = (ROOT / OBSERVER).read_text()
     for spec in MUTATIONS:
+        observer = (ROOT / spec.get("observer", OBSERVER)).read_text()
         apply_mutation((ROOT / spec["source"]).read_text(), spec)
         for name in spec["tests"]:
             count = len(re.findall(rf"(?m)^fn {re.escape(name)}\(\)", observer))
@@ -142,7 +164,7 @@ def check_seams():
         "seamsUnique": True,
         "cargoInvoked": False,
         "mutations": [{"name": s["name"], "source": s["source"],
-                       "tests": [PREFIX + n for n in s["tests"]],
+                       "tests": [s.get("prefix", PREFIX) + n for n in s["tests"]],
                        "contract": s["contract"]} for s in MUTATIONS],
     }
 
@@ -294,7 +316,7 @@ def main():
             try:
                 seed_release_cache(build, seed)
                 for name in spec["tests"]:
-                    test = PREFIX + name
+                    test = spec.get("prefix", PREFIX) + name
                     # Refresh the package source timestamp so an optional copied
                     # cache cannot substitute a retained root executable for SUT.
                     target.write_bytes(original)

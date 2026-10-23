@@ -5,6 +5,10 @@ use serde::{Deserialize, Serialize};
 use serde_json::{Value, json};
 use std::collections::BTreeMap;
 
+#[cfg(test)]
+#[path = "../../tests/bap/composition_unit.rs"]
+mod tests;
+
 mod legacy;
 
 pub const LEGACY_PROFILE: &str = "captured-guarded-targets/v1";
@@ -531,8 +535,19 @@ fn validate_original_control(
         }
         return Ok(());
     }
-    let opcode = if bytes == [0x90] { "NOOP" } else { "" };
-    let projected = super::projection::project_with_destination(&bil, opcode, &bytes, site, None)?;
+    let projected = if super::advanced_projection(&input.producer.projection) {
+        super::projection::project_with_destination_profile(
+            &bil,
+            super::admission::replay_opcode(&bytes, &input.producer.projection),
+            &bytes,
+            site,
+            None,
+            &input.producer.projection,
+        )?
+    } else {
+        let opcode = if bytes == [0x90] { "NOOP" } else { "" };
+        super::projection::project_with_destination(&bil, opcode, &bytes, site, None)?
+    };
     let allowed: std::collections::BTreeSet<_> = control
         .targets
         .iter()

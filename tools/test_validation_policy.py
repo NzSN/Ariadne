@@ -54,6 +54,9 @@ class TestBasedValidationPolicy(unittest.TestCase):
         for path in (ROOT / "tools").glob("*.py"):
             with self.subTest(tool=path.name):
                 self.assertNotIn(prefix, path.read_text())
+        for path in (ROOT / "tests/bap").glob("*.ml"):
+            with self.subTest(native_driver=path.name):
+                self.assertNotIn(prefix, path.read_text())
         for path in (ROOT / "tests").rglob("*"):
             if not path.is_file() or "__pycache__" in path.parts:
                 continue

@@ -2,10 +2,12 @@
 
 ## Context and follow-up
 
-**Status.** Stopped at the user's request on 2026-10-22, after partial work on
-instruction inventory, broader semantics and advanced producer integration. The
-[stopped checkpoint](../../CHECKPOINTS.md#2026-10-22--amd64-items-13-stopped-at-user-request)
-is the current resume boundary. Full coverage is the target, not an achieved result. Initial implementation proceeds on both
+**Status.** Resumed at the user's request on 2026-10-23 from the
+[stopped checkpoint](../../CHECKPOINTS.md#2026-10-22--amd64-items-13-stopped-at-user-request).
+The [resume record](../../CHECKPOINTS.md#2026-10-23--amd64-guard-replay-and-composed-fixture-resumed)
+records source fixes, the approved native continuation and remaining gates. Instruction
+inventory, broader semantics and advanced producer integration remain partial.
+Full coverage is the target, not an achieved result. Implementation proceeds on both
 machine-instruction semantics and Windows unwind operations. A representative
 family survey is not an exhaustive instruction-form inventory.
 
@@ -89,9 +91,9 @@ operation-specific regressions at the baseline.
 | C0 | Link canonical contracts and define separate instruction/unwind coverage, gaps and compatibility. | Passed: linked contracts and plan navigation |
 | S0 | Executable family survey using actual instruction bytes; probe actual BAP lifting and Ariadne projection, preserve distinct outcomes and exact source/tool identities. | Passed finite survey: 49 families / 170 byte cases; not S1 completeness |
 | S1 | Expand S0 into a pinned exhaustive legal-form denominator across the declared AMD64 manuals/extensions; independent inventory completeness check. | Pending |
-| S2 | Close missing producer lifts in a reviewed BAP source build; pin and validate the replacement producer and retain existing semantic compatibility. | Partial: four plain flag forms integrated as explicit v9 opt-in; native/corpus/replay controls pass; all other producer gaps remain open |
-| S3 | Extend typed transport, state banks/aliases and width handling for all required SIMD, mask, x87, control/system and extended registers. | Pending |
-| S4 | Implement exact prefix distinctions and bounded loop summaries; preserve zero-iteration paths, conditional writes, faults and resource stops. | Pending |
+| S2 | Close missing producer lifts in a reviewed BAP source build; pin and validate the replacement producer and retain existing semantic compatibility. | Partial: recorded four-flag v9 delivery and current finite advanced matrix; exact historical v9 positive compatibility and other producer gaps remain open |
+| S3 | Extend typed transport, state banks/aliases and width handling for all required SIMD, mask, x87, control/system and extended registers. | Partial finite v10/v11 FP-control state and coarsened data projection; wider banks/widths remain pending |
+| S4 | Implement exact prefix distinctions and bounded loop summaries; preserve zero-iteration paths, conditional writes, faults and resource stops. | Partial eighteen exact mandatory-count forms and data-path joins; REP and general prefix/loop contracts remain pending |
 | S5 | Implement and qualify remaining floating-point, system, exception and special-operation contracts with explicit mode/environment premises. | Pending |
 | U0 | Preserve old v1/v2 receipts and add a separate new replay profile with conventional opcode tests. | Passed finite v4 tests, preserving v1/v2/v3 replay |
 | U1 | Complete near/far saved-vector operations and validated saved-register ordering, bounds, alignment and budget behavior. | Passed selected synthetic and Windows reference cases |
@@ -99,7 +101,7 @@ operation-specific regressions at the baseline.
 | U3 | Implement handler/chained metadata and partial-prologue execution with bounded chain/cycle and frame-establishment checks. | Passed selected metadata-v1 cases; chained operation restrictions remain explicit |
 | U4 | Implement documented epilog suffixes and Windows metadata v2 descriptors, with independent reference comparison. | Implemented finite v1/v2 scope: 53 focused tests and 103 Windows comparisons pass; sparse capture and malformed terminal contexts have separate controls |
 | U5 | Implement Windows v3/APX descriptor and extended-context support as its own versioned profile; do not reinterpret earlier formats. | Pending: extended-context/canonical-frame layouts and working V3 reference not admitted |
-| Q0 | Current-source native rebuild, independent per-operation expectations, Rust/native parity where applicable, focused mutations and models, capture and root regression checks. | Partial: checks below pass for delivered slices; complete ISA/model/capture/timing/release campaign not performed |
+| Q0 | Current-source native rebuild, independent per-operation expectations, Rust/native parity where applicable, focused mutations and models, capture and root regression checks. | Partial: selected advanced native/replay/model/mutation/root checks pass below; exact v9 runtime and complete ISA/capture/timing/release campaign remain pending |
 | Q1 | Every legal inventory row supported and exercised; all stage exits complete; document exact operation/form denominator and remaining environmental premises. | Pending |
 
 Stages may run in parallel when their source ownership does not overlap.
@@ -271,3 +273,89 @@ separately pinned advanced producer and versioned guard/target/refinement
 integration are saved with a failing native matrix and incomplete count replay,
 compatibility and mutation gates. Earlier ledger statuses are historical stage
 exits; none of S1, broader S2–S5 or Q1 is closed by this stopped snapshot.
+
+### Resume: guard replay and composed fixture
+
+2026-10-23: resumed from `3024fcb`. The empty guard report is reproducible with
+the packaged producer and CLD, without the source flag extension or native core.
+It is a `guard-closure-round-limit` stop: combined discovery advances the epoch
+on source/control changes, exceeding the default eight epochs. The advanced
+table fixture now explicitly selects 64 epochs and requires its MOVAPS guard.
+A separate actual-BAP/LLVM test checks both the default stopped result and the
+selected-budget aligned result. Production defaults and expected targets stay
+unchanged; empty reports remain valid stopped products.
+
+Saved guard replay now recovers opcode identity for the eighteen byte-exact
+mandatory-count forms already admitted under v10/v11. Previously its generic
+`typed-transfer` opcode caused a count/bytes mismatch and lost RSP facts. Both
+transfer derivation and coverage replay use the same scoped byte matcher. A
+portable regression checks all eighteen forms, old-profile refusal and hostile
+saved bytes; a fresh-BIL test checks their actual lifts and saved guard replay.
+An additional native integration test composes counts, CLC, MOVAPS and a rooted
+table with independent target expectations, full-state parity and saved replay;
+all eighteen forms now pass that actual native gate. A further downstream bug
+was exposed by it: composition's original-control replay used the default
+projection. Advanced sources now retain their declared profile there; legacy
+sources keep the previous path. The separate portable composition regression
+covers the same eighteen byte forms and altered-prefix/old-profile refusals.
+
+The unused default-profile wrapper is now test-only, and two test mutations
+replace boxed contents without allocating replacement boxes. Two stale guard
+mutation selectors are repaired, and count-replay/composition-profile mutants
+are added. All eight selectors are unique. Their optimized Rust campaigns
+detect eight mutants through nine named assertion rejections after passing
+controls, with independent source/build trees, restored source and unchanged
+observers. Seven qualify before the final observer-diagnostic refinement;
+the composition-profile case qualifies after a standard-assertion rerun.
+Production/checker sources remain frozen across these runs. The initial custom
+panic message, startup failures and interrupted serial attempt are uncredited.
+
+The local Cargo cache is `target/mbt-cargo-home`; the lockfile records the
+current sibling MirrorRust package version `0.1.0` in place of stale `1.0.0`.
+Packaged BAP loading was restored with libtinfo5. The exact LLVM 20.1.2 library
+and its libxml2 ABI dependency were extracted into ignored local work; no newer
+LLVM version was substituted. Fresh numeric oracles pass 4,020 count and 720
+repeated-string comparisons. REP production admission remains refused.
+
+The original SDK was located on `win10` at
+`/home/jlc/ariadne-p4-20261010/work/Repos/Ariadne/target/bap-core-sdk`.
+Its lock and both public dependency archive hashes match the current pins.
+Direct execution in the outer WSL distribution fails its tool/libc checks.
+The approved continuation instead reuses the original compatible isolated
+userspace; the unchanged SDK inventory and project/term/storage smoke pass.
+The current source/test bundle was transferred with approval and mounted
+read-only. Git history, generated evidence and the real Windows archive were
+excluded. Build, replay and mutation outputs remain disposable.
+
+Two independent advanced producer builds are byte-identical under that SDK.
+Their identity differs from the saved advanced pin, so only the advanced
+runtime lock is explicitly updated to the reproduced manifest/executable.
+The Basic v9 builder and lock remain immutable. Its exact old runtime is not
+available; a mismatching fresh Basic build is rejected, and positive v9
+producer compatibility remains unexercised.
+
+After source freeze and helper rebuild, all eight advanced tests pass: the
+eighteen count compositions and seven remaining guard/target/writer/codec
+tests. Legacy v7/v8 capture controls pass with one detected native dependency
+mutant. Current proof compatibility passes 88 controls and nine compiled
+checker mutants, with actual reader-produced v8 load/terminal wires and
+saved legacy/current proof units. The retired legacy driver's evidence path
+is replaced by the maintained small byte/BIL fixture and checked by policy.
+
+Generated native replay matches 168 core and 162 finite-stateflow observations;
+both wrong-digest controls reject with zero dispatch. Predicate oracles pass,
+and restored installed model-tool assets permit Apalache typechecking and all
+58 TLC configurations to pass safety/expected outcomes/fair termination. No
+TLA+ model body was changed. This does not establish universal refinement or
+ISA correctness. Inventory legality gaps, REP consumer contracts, broader
+S2–S5, U5, real-capture/timing/release qualification and Q1 remain open.
+
+Final local validation passes 424 default Rust tests (145 ignored), 64 core-only
+tests (22 ignored), strict Clippy, 46 BAP Python controls, 251 general Python
+controls, layout and navigation. Required root format/default/core-only/Clippy
+checks pass under the existing read-only MirrorRust snapshot workflow; only
+the copied `tests/protocol.rs` is formatted. The sibling checkout stays
+unchanged. Direct root formatting against that original sibling still reports
+its existing style differences. Core-only normal dependencies stay empty.
+Fresh count effects, eighteen actual guard replays and the two-budget packaged
+table control retain their separate exercised scopes.

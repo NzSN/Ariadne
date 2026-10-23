@@ -1,12 +1,12 @@
-(* Full legacy guard admission over conservative widening of an actual retained
-   source-bound fixture. Source instruction bytes/BIL remain unchanged. *)
+(* Full legacy guard admission over conservative widening of the small actual
+   byte/BIL input fixture. Source instruction bytes/BIL remain unchanged. *)
 open Recovery
 let replace=Legacy_guard.replace_field
 let map_rows field select change value=replace value field(`List(List.map(fun row->
   if select row then change row else row)(list(get value field))))
 let fixture()=
   let root=Sys.getenv "ARIADNE_CALLER_SOURCE_ROOT"in
-  Yojson.Safe.from_file(root^"/evidence/Ariadne/loop-aware-target-resolution/20261015/artifacts/validation-20261015T050857/passing-combined-wire.json")
+  Yojson.Safe.from_file(root^"/tests/bap/fixtures/loop-closure/native-wire.json")
 let derive projection=
   let original=fixture()in let report=get original "guard_admission"and capture=get original "capture"in
   let input=get report "input"and normalized=get original "normalized"in

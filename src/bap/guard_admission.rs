@@ -726,7 +726,7 @@ fn derive_transfer(
         let bil = statements(&site.ast)?;
         if super::admission::admit_with_profile(
             &bil,
-            super::admission::canonical_noop_opcode(&b, producer).unwrap_or("typed-transfer"),
+            super::admission::replay_opcode(&b, producer),
             &b,
             producer,
         )
@@ -1007,8 +1007,7 @@ fn coverage_closed(input: &GuardInput) -> Result<bool, Error> {
         let b = bytes(&site.bytes_hex)?;
         if let Err(error) = super::admission::admit_with_profile(
             &bil,
-            super::admission::canonical_noop_opcode(&b, &input.producer.projection)
-                .unwrap_or("typed-transfer"),
+            super::admission::replay_opcode(&b, &input.producer.projection),
             &b,
             &input.producer.projection,
         ) && !super::admission::ordinary_unknown_with_profile(

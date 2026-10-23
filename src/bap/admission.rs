@@ -462,6 +462,13 @@ pub(crate) fn canonical_noop_opcode(bytes: &[u8], profile: &str) -> Option<&'sta
         _ => None,
     }
 }
+/// Saved guard sources carry bytes and typed BIL, but no decoder opcode. Only
+/// byte-exact reviewed forms may supply an opcode required by admission replay.
+pub(crate) fn replay_opcode(bytes: &[u8], profile: &str) -> &'static str {
+    canonical_noop_opcode(bytes, profile)
+        .or_else(|| mandatory_count_opcode(bytes, profile))
+        .unwrap_or("typed-transfer")
+}
 pub(crate) fn admit(statements: &[Stmt], opcode: &str, bytes: &[u8]) -> Result<(), Error> {
     admit_with_profile(statements, opcode, bytes, super::PROJECTION)
 }
@@ -505,6 +512,7 @@ pub(crate) fn admit_with_profile(
     }
     Ok(())
 }
+#[cfg(test)]
 pub(crate) fn ordinary_unknown(statements: &[Stmt], bytes: &[u8], error: &Error) -> bool {
     ordinary_unknown_with_profile(statements, bytes, error, super::PROJECTION)
 }

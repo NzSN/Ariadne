@@ -262,8 +262,8 @@ fn actual_memory_width_and_address_mutations_are_rejected() {
             };
             match mutation {
                 0 => *width = if *width == 16 { 32 } else { 16 },
-                1 => *addr = Box::new(constant(0, 32)),
-                _ => *mem = Box::new(read("RAX", 64)),
+                1 => **addr = constant(0, 32),
+                _ => **mem = read("RAX", 64),
             }
             assert!(
                 admission::admit_with_profile(

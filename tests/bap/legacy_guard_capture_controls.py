@@ -2,7 +2,7 @@
 """Full legacy guard v7/v8 controls and one dependency-reversion mutant.
 
 Run only on the qualified remote SDK host. The source bytes/BIL come from the
-retained real BAP combined fixture. Its first ordinary transfer is widened to
+small actual BAP combined input fixture. Its first ordinary transfer is widened to
 opaque and all RSP facts conservatively widened; guard normal effects are then
 withdrawn. Changing only that capture row's projection to v8 must be rejected.
 """
@@ -47,7 +47,7 @@ def main():
     environment["ARIADNE_CALLER_SOURCE_ROOT"] = str(ROOT)
     compiler = sdk.PREFIX / "bin/ocamlfind"
     result = {"schema": "ariadne.legacy-guard-capture-dependency-controls/v1",
-              "scope": "Full Legacy_guard.admit, conservative widening of an actual retained source-bound BAP fixture.",
+              "scope": "Full Legacy_guard.admit, conservative widening of the small actual byte/BIL input fixture.",
               "source_sha256": sha(SOURCE), "driver_sha256": sha(DRIVER),
               "runner_sha256": sha(Path(__file__)), "fixture_sha256": sha(FIXTURE),
               "native_manifest_sha256": sha(native / "manifest.json"), "mutants": []}

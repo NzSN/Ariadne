@@ -83,7 +83,12 @@ fn setup(snapshot: &FileSnapshot, query: &AnalysisQuery) -> GuardPreparation {
     )
     .unwrap();
     GuardPreparation {
-        limits: guard::Limits::default(),
+        // Combined discovery advances the epoch for each newly prepared batch,
+        // not just resolver passes. This table needs more than the default 8.
+        limits: guard::Limits {
+            max_closure_rounds: 64,
+            ..guard::Limits::default()
+        },
         activation,
         roots,
         premises: vec![],
@@ -144,13 +149,19 @@ fn guard_roundtrip(prepared: &FilePreparedAnalysis) {
     let mut changed = saved.clone();
     changed.input.producer.projection = "bap-bit-provenance-v9".into();
     assert!(guard::replay_report(&changed.input, &changed).is_err());
-    let mut changed = saved;
-    changed.guards[0].verdict = if changed.guards[0].verdict == guard::Verdict::Aligned {
-        guard::Verdict::Misaligned
-    } else {
-        guard::Verdict::Aligned
-    };
+    let mut changed = saved.clone();
+    changed.candidate_graph_sha256 = "0".repeat(64);
     assert!(guard::replay_report(&changed.input, &changed).is_err());
+    for index in 0..saved.guards.len() {
+        let mut changed = saved.clone();
+        changed.guards[index].verdict = if changed.guards[index].verdict == guard::Verdict::Aligned
+        {
+            guard::Verdict::Misaligned
+        } else {
+            guard::Verdict::Aligned
+        };
+        assert!(guard::replay_report(&changed.input, &changed).is_err());
+    }
 }
 
 #[test]
@@ -314,6 +325,138 @@ fn table_sequence(flags: &[u8], combined: bool, opaque_call: bool) -> (Vec<u8>, 
 }
 
 #[test]
+#[ignore = "requires pinned BAP/LLVM; no source extension or native core"]
+fn packaged_table_preparation_keeps_the_movaps_guard() {
+    // CLD is supplied by the packaged lifter and leaves CF unknown. This
+    // isolates the shared rooted/composed fixture from source-built flags.
+    let (code, _, dispatch) = table_sequence(&[0xfc], true, false);
+    let snapshot = snapshot(&code, false);
+    let query = query(dispatch);
+    let mut config = Config::from_env();
+    config.source_extension = None;
+    config.source_extension_mode = crate::bap::SourceExtensionMode::Basic;
+    let mut bounded = setup(&snapshot, &query);
+    bounded.limits = guard::Limits::default();
+    let stopped = snapshot
+        .prepare_bap_guarded_targets(
+            &query,
+            &decoder(),
+            &config,
+            &PreparationOptions::default(),
+            PrepareLimits::default(),
+            bounded,
+            target::Limits::default(),
+        )
+        .unwrap();
+    assert_eq!(
+        stopped.guard_admission().unwrap().stop.as_deref(),
+        Some("guard-closure-round-limit")
+    );
+    assert!(stopped.guard_admission().unwrap().guards.is_empty());
+    assert_eq!(
+        stopped.prepared.request.instructions[&(ENTRY + 13)].kind,
+        InstructionKind::Stop
+    );
+    let prepared = snapshot
+        .prepare_bap_guarded_targets(
+            &query,
+            &decoder(),
+            &config,
+            &PreparationOptions::default(),
+            PrepareLimits::default(),
+            setup(&snapshot, &query),
+            target::Limits::default(),
+        )
+        .unwrap();
+    let report = prepared.guard_admission().unwrap();
+    assert_eq!(report.guards.len(), 1, "guard stop: {:?}", report.stop);
+    assert_eq!(
+        prepared.guard_admission().unwrap().guards[0].verdict,
+        guard::Verdict::Aligned
+    );
+    prepared.validate_guard_admission().unwrap();
+    prepared.validate_target_resolution().unwrap();
+}
+
+#[test]
+#[ignore = "requires advanced source BAP producer, LLVM and current native core"]
+fn native_mandatory_counts_replay_guarded_table_composition() {
+    let contract: serde_json::Value =
+        serde_json::from_str(include_str!("../bap/fixtures/bit-count/contract.json")).unwrap();
+    for case in contract["cases"].as_array().unwrap() {
+        let text = case["bytes"].as_str().unwrap();
+        let bytes: Vec<_> = (0..text.len())
+            .step_by(2)
+            .map(|at| u8::from_str_radix(&text[at..at + 2], 16).unwrap())
+            .collect();
+        let (mut code, _, dispatch) = table_sequence(&[0xf8], true, false);
+        // Count after setting RSP, before MOV EAX,ECX and CLC. The later
+        // table index and branch flag have independent expected definitions.
+        code.splice(10..10, bytes.iter().copied());
+        let snapshot = snapshot(&code, false);
+        let query = query(dispatch + bytes.len() as u64);
+        let prepared = snapshot
+            .prepare_bap_guarded_targets(
+                &query,
+                &decoder(),
+                &config(),
+                &PreparationOptions::default(),
+                PrepareLimits::default(),
+                setup(&snapshot, &query),
+                target::Limits::default(),
+            )
+            .unwrap_or_else(|error| panic!("{}: {error}", case["name"]));
+        let instruction = &prepared.prepared.request.instructions[&(ENTRY + 10)];
+        assert_eq!(
+            instruction.kind,
+            InstructionKind::Ordinary,
+            "{}",
+            case["name"]
+        );
+        let guards = prepared.guard_admission().unwrap();
+        assert_eq!(
+            guards.guards.len(),
+            1,
+            "{}: {:?}",
+            case["name"],
+            guards.stop
+        );
+        assert_eq!(
+            guards.guards[0].verdict,
+            guard::Verdict::Aligned,
+            "{}",
+            case["name"]
+        );
+        let resolution = prepared
+            .target_resolution()
+            .unwrap()
+            .resolutions
+            .iter()
+            .find(|row| row.site == format!("0x{:016x}", dispatch + bytes.len() as u64))
+            .unwrap();
+        assert!(
+            resolution.complete,
+            "{}: {:?}",
+            case["name"], resolution.unresolved
+        );
+        assert_eq!(resolution.targets, vec![format!("0x{LEFT:016x}")]);
+        guard_roundtrip(&prepared);
+        prepared.validate_target_resolution().unwrap();
+        prepared.validate_composition().unwrap();
+        let (rust, _) = parity(&prepared, &query, case["name"].as_str().unwrap());
+        let saved = crate::input::report::render_bound(
+            &prepared,
+            &rust,
+            crate::input::report::ReportFormat::Json,
+            false,
+        )
+        .unwrap();
+        crate::input::report::validate_saved_composition(saved.as_bytes(), 16 * 1024 * 1024)
+            .unwrap();
+    }
+}
+
+#[test]
 #[ignore = "requires advanced source BAP producer, LLVM and current native core"]
 fn native_flag_branches_resolve_tables_with_versioned_saved_composition() {
     for (flags, expected) in [
@@ -430,6 +573,11 @@ fn native_flag_branches_resolve_tables_with_versioned_saved_composition() {
                 .bytes[0] ^= 1;
             assert!(changed.validate_target_resolution().is_err());
             if combined {
+                assert_eq!(
+                    prepared.guard_admission().unwrap().guards.len(),
+                    1,
+                    "combined fixture must exercise its MOVAPS guard"
+                );
                 guard_roundtrip(&prepared);
                 prepared.validate_composition().unwrap();
                 assert_eq!(

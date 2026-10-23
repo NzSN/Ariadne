@@ -20,6 +20,82 @@ For the wider context, see the optional [documentation map](docs/documentation-m
 Current validation follows the [executable test matrix](tests/README.md). Dated run
 results below are historical; their Git links do not establish a current pass.
 
+## 2026-10-23 — AMD64 guard replay and composed fixture resumed
+
+**Status: resumed; finite native integration passes, overall qualification remains open.** Work resumes
+from `3024fcb` under the existing
+[operation plan](.agents/plans/amd64-operation-coverage.md#resume-guard-replay-and-composed-fixture).
+The [canonical design](docs/Ariadne/bap-analysis-core-design.md#pinned-form-inventory-and-advanced-producer)
+retains the versioned contracts and limits.
+
+The empty guard report is now reproduced independently of the advanced producer:
+the rooted table exceeds the default eight candidate epochs and correctly stops
+with `guard-closure-round-limit`. Its test now selects a finite 64-epoch allowance
+and requires the actual MOVAPS guard. A packaged BAP/LLVM regression passes both
+the default stopped case and the explicitly selected aligned case. Production
+defaults, source recognition and strict expected target sets are unchanged.
+
+Saved guard replay now supplies the reviewed opcode identity for the eighteen
+exact POPCNT/LZCNT/TZCNT forms already admitted by v10/v11. Portable hostile-byte
+and old-profile controls pass, as does replay over fresh actual BAP lifts for
+all eighteen forms. Fresh numeric oracles pass 4,020 count and 720 repeated-string
+comparisons. The latter still grants no REP production admission. Composed
+original-control replay also uses the declared advanced projection instead of
+the default profile; its legacy branch stays unchanged. A portable regression
+checks all eighteen forms and refuses altered prefixes and old profiles.
+
+After the approved source/test handoff, the original compatible isolated
+userspace passes the SDK inventory and smoke checks. Two independent advanced
+producer builds reproduce identical manifest/executable bytes. They establish
+a source/SDK-bound dependency identity different from the saved lock, so the
+[advanced lock](native/bap/source-coverage/advanced.runtime.lock.json) is explicitly
+re-pinned; mismatching candidates were rejected before this change. The Basic
+v9 builder and lock remain unchanged.
+
+All eight advanced native tests now pass, including eighteen actual count
+compositions, rooted flag tables, MOVAPS guards, alternate roots/calls, writer
+refinement, native/Rust full-state equality and hostile saved-proof controls.
+The separate legacy v7/v8 capture pair passes and detects its compiled
+dependency-reversion mutant. Current native proof compatibility passes 88
+controls and detects nine compiled checker mutants. Generated native replay
+matches 330 core/stateflow observations; both wrong-digest controls reject before
+dispatch. These are finite declared corpora, not general advanced qualification.
+
+The three recorded Clippy failures are fixed. Two stale guard mutation selectors
+are repaired, count-replay and composition-profile mutants are added, and all
+eight selectors are unique. All eight optimized Rust mutants are detected by
+nine named assertion rejections after passing controls, with restored SUT
+sources and unchanged observers. A nonstandard assertion message initially
+failed qualification; its standard-assertion rerun qualifies separately. Startup,
+compile and interrupted attempts receive no behavioral credit. The optional
+legacy native driver now reads the maintained small byte/BIL input instead of
+the removed evidence collection; its path-policy regression passes.
+Local dependencies are available through the ignored
+`target/mbt-cargo-home` cache. The lockfile reflects the current sibling MirrorRust
+package version. Transferred inputs exclude Git history, generated evidence and
+the real Windows capture archive. Run products remain disposable.
+
+Current local checks pass 424 default Rust tests (145 ignored), 64 core-only
+tests (22 ignored), strict all-feature/all-target Clippy, 46 BAP Python controls,
+251 general Python controls, Rust layout and documentation links. The required
+root format/default/core-only/Clippy checks also pass under the existing
+read-only MirrorRust snapshot workflow. Only `tests/protocol.rs` is formatted in
+that private dependency copy; the sibling checkout remains untouched. Direct
+format checking against the original sibling still reports its existing style
+differences. Core-only normal dependencies remain empty.
+
+The initial direct-host SDK failure is resolved by its original isolated
+userspace: the outer WSL distribution still lacks the required tools/libc and
+must not be substituted. After restoring the installed TLC launcher's unchanged
+jar, predicate oracles, Apalache typechecking and all 58 finite TLC configurations
+pass safety/expected outcomes/fair termination. No TLA+ model body was changed.
+
+The exact historical Basic v9 runtime remains unavailable. A fresh build has a
+different identity and is rejected by its unchanged lock; positive v9 producer
+compatibility is therefore unexercised. Inventory legality gaps and wider S2–S5/U5/Q1
+objectives remain open. These scoped native/model results do not refresh wider
+capture, performance or release qualifications.
+
 ## 2026-10-22 — AMD64 items 1–3 stopped at user request
 
 **Status: stopped, partial implementation; not accepted as complete.** The user

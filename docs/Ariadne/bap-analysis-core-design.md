@@ -262,11 +262,15 @@ extension does not establish general AMD64 coverage.
 
 #### Pinned form inventory and advanced producer
 
-**Stopped checkpoint, 2026-10-22.** The user stopped implementation and requested
-publication of the partial source. The [checkpoint](../../CHECKPOINTS.md#2026-10-22--amd64-items-13-stopped-at-user-request)
-records the failed native integration tests and unexercised compatibility gates.
-The advanced versions below describe saved implementation, not general
-qualification. Mandatory-count guard/native replay wiring is unfinished, and
+**Resumed, 2026-10-23.** The [stopped checkpoint](../../CHECKPOINTS.md#2026-10-22--amd64-items-13-stopped-at-user-request)
+records the saved partial implementation and failed native matrix. The
+[resume record](../../CHECKPOINTS.md#2026-10-23--amd64-guard-replay-and-composed-fixture-resumed)
+and [execution plan](../../.agents/plans/amd64-operation-coverage.md#resume-guard-replay-and-composed-fixture)
+track the source fixes and approved native continuation. The advanced versions
+below remain unqualified for general use. All eight finite advanced native
+integration tests pass, including eighteen mandatory-count compositions; the
+exact historical Basic v9 producer compatibility and remaining qualification
+clauses stay open.
 REP production admission remains explicitly refused.
 
 The [inventory extractor](../../tools/amd64_inventory.py) and its
@@ -327,6 +331,40 @@ forms: 16/32/64-bit register and memory operands. It checks numeric results,
 defined flags, partial/zero-extended destinations and unaffected state; undefined
 flags remain outside the numeric comparison. Its passing 4,020 comparisons do
 not establish other operand/prefix forms or full ISA correctness.
+
+Saved guard sources contain bytes and BIL rather than decoder opcode text.
+Replay recovers only the exact reviewed count or canonical NOP opcode from
+those bytes under the selected profile; other transfers keep generic typed
+admission. This preserves count-independent RSP facts without granting generic
+F3 permission. The composed table fixture explicitly selects a finite 64-epoch
+guard budget: candidate discovery itself exceeds the default eight epochs.
+A packaged-producer control verifies the default stopped report and the
+selected-budget actual MOVAPS guard. No production budget was increased.
+Composition's original-control checker also replays advanced sources with their
+declared projection; its legacy path retains the previous interpretation. The
+[portable composition regression](../../tests/bap/composition_unit.rs) covers all
+eighteen count forms, altered-prefix rejection and old-profile refusal.
+
+The 2026-10-23 approved native continuation restores the original compatible
+isolated SDK userspace. Two independent advanced builds reproduce manifest
+`1bd4a1dc59b9e71077ef6562d6104563ec9ee5dacf985c8e788a5cd62f92baaf`
+and executable
+`9ad0d7f247ddc67ea6f0eeeb5008e35b45a6d1361eda6c23f73e9057ad31110c`;
+the explicit advanced lock now selects this source/SDK-bound candidate. The
+previous saved advanced identity is not claimed reproduced. Basic v9's
+immutable lock is unchanged, and a mismatching fresh Basic build remains
+rejected. The eight-test advanced matrix and numeric source controls do not
+replace that historical producer compatibility gate or broader qualification.
+
+The same continuation passes 88 native proof controls, ten compiled native
+checker/dependency mutants, eight optimized Rust mutants (nine assertion
+rejections after passing controls), 330 generated native core/stateflow
+observations and wrong-digest rejection. Independent predicate oracles,
+Apalache typechecking and 58 finite TLC configurations pass without changing
+model bodies. Local validation passes 424 default/64 core-only Rust tests,
+strict Clippy and root formatting under the read-only dependency-snapshot
+workflow. These results have their named finite corpora; exact old-v9 producer,
+broader architecture, actual-capture, timing and release clauses stay open.
 
 The [repeated-string oracle](../../tools/check_bap_repeated_string_oracle.py)
 compares the exact `F3 A4`, `F3 AA` and `F3 A6` BIL with sequential byte-copy,
