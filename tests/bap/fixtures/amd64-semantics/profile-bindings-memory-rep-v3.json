@@ -34,7 +34,7 @@
     "src/bap/lods_source.rs": "082ba2508e3acb1351d85aff60eab1358e52bd77151bb595b10e28dda09a76e3",
     "src/bap/mod.rs": "04e3a818fad0f82eedba5fb29e3cfe8db3cd7dd7d5ea8dda99647374819f423e",
     "src/bap/prepare.rs": "3879f0a084421f07eb3cc055463b81544af1a717f32e08aaea63ea10aa9902c6",
-    "src/bap/projection.rs": "46bfea567c2f74a218e177970839848429ea6afe171b734899a1add8ac1bd8b3",
+    "src/bap/projection.rs": "0ab21fc3518cd6f94bf22e0a06a3f94d4d5618f4496642a646a94b8056137a46",
     "src/bap/refinement.rs": "99df3bdccfb2e311666c0df4318488cfed91d3fa7eb33d5a241c2d916983e816",
     "src/bap/registers.rs": "5c3d70b3dcd7f6620b9361f9f3937961268311cfe054c9ea12339617b50d0951",
     "src/bap/rep_address_source.rs": "fbe655c0a24d91701f7edc61530edbe8a3532ff238b4952d69c93081348176b4",
@@ -66,7 +66,7 @@
   },
   "producerPins": {
     "base": {
-      "helperSha256": "8080fa65e7a3d6521289e277570a2666520983858fa9b8c247fbe3f470fe3615",
+      "helperSha256": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
       "runtimeLockPath": "native/bap/toolchain.lock.json",
       "runtimeLockSha256": "23dac7be3de321d80fb806b8a9ba4cb64a51f5c75c3c20f3ede77ea348de5382"
     },

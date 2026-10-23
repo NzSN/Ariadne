@@ -3504,11 +3504,11 @@
         "pdf:351:cell:4": "c813330be2d9251490a6201944bfc2a83cf8aa135a7c7fd68cf28e91feb36d51"
       },
       "boundaryCells": [],
-      "decision": "continuation",
-      "rule": "same-section-complete-row-series/v1",
-      "rationale": "The actual instruction-section heading spans this boundary; identical named columns and complete local endpoint rows are separated only by exhaustively accounted document/page material. This table-row series grants no opcode, operand, merged-cell or footnote inheritance.",
+      "decision": "independent-table",
+      "rule": "complete-distinct-evex-element-size-tables/v1",
+      "rationale": "The separately headed VMOVDQU8 and VMOVDQU16 tables each explicitly contain all three vector lengths in both directions. Their named mnemonics and W fields differ, so the complete local tables remain independent despite sharing the instruction section and column labels. No cell or footnote is inherited.",
       "structure": {
-        "kind": "same-section-complete-row-series",
+        "kind": "distinct-complete-evex-element-size-tables",
         "ownerEntry": {
           "chapter": "2 Instruction Reference",
           "chapterOrdinal": 125,
@@ -3646,6 +3646,41 @@
           "pdf:350:cell:43",
           "pdf:350:cell:44",
           "pdf:350:cell:45",
+          "pdf:350:cell:46",
+          "pdf:350:cell:47",
+          "pdf:350:cell:48",
+          "pdf:350:cell:49",
+          "pdf:350:cell:50",
+          "pdf:350:cell:51",
+          "pdf:350:cell:52",
+          "pdf:350:cell:53",
+          "pdf:350:cell:54",
+          "pdf:350:cell:55",
+          "pdf:350:cell:56",
+          "pdf:350:cell:57",
+          "pdf:350:cell:58",
+          "pdf:350:cell:59",
+          "pdf:350:cell:60",
+          "pdf:350:cell:61",
+          "pdf:350:cell:62",
+          "pdf:350:cell:63",
+          "pdf:350:cell:64",
+          "pdf:350:cell:65",
+          "pdf:350:cell:66",
+          "pdf:350:cell:67",
+          "pdf:350:cell:68",
+          "pdf:350:cell:69",
+          "pdf:350:cell:70",
+          "pdf:350:cell:71",
+          "pdf:350:cell:72",
+          "pdf:350:cell:73",
+          "pdf:350:cell:74",
+          "pdf:350:cell:75",
+          "pdf:350:cell:76",
+          "pdf:350:cell:77",
+          "pdf:350:cell:78",
+          "pdf:350:cell:79",
+          "pdf:350:cell:80",
           "pdf:350:cell:81",
           "pdf:350:cell:82",
           "pdf:350:cell:83",
@@ -3664,10 +3699,45 @@
           "pdf:351:cell:13",
           "pdf:351:cell:14",
           "pdf:351:cell:15",
+          "pdf:351:cell:16",
+          "pdf:351:cell:17",
+          "pdf:351:cell:18",
+          "pdf:351:cell:19",
           "pdf:351:cell:2",
+          "pdf:351:cell:20",
+          "pdf:351:cell:21",
+          "pdf:351:cell:22",
+          "pdf:351:cell:23",
+          "pdf:351:cell:24",
+          "pdf:351:cell:25",
+          "pdf:351:cell:26",
+          "pdf:351:cell:27",
+          "pdf:351:cell:28",
+          "pdf:351:cell:29",
           "pdf:351:cell:3",
+          "pdf:351:cell:30",
+          "pdf:351:cell:31",
+          "pdf:351:cell:32",
+          "pdf:351:cell:33",
+          "pdf:351:cell:34",
+          "pdf:351:cell:35",
+          "pdf:351:cell:36",
+          "pdf:351:cell:37",
+          "pdf:351:cell:38",
+          "pdf:351:cell:39",
           "pdf:351:cell:4",
+          "pdf:351:cell:40",
+          "pdf:351:cell:41",
+          "pdf:351:cell:42",
+          "pdf:351:cell:43",
+          "pdf:351:cell:44",
+          "pdf:351:cell:45",
+          "pdf:351:cell:46",
+          "pdf:351:cell:47",
+          "pdf:351:cell:48",
+          "pdf:351:cell:49",
           "pdf:351:cell:5",
+          "pdf:351:cell:50",
           "pdf:351:cell:6",
           "pdf:351:cell:7",
           "pdf:351:cell:8",
@@ -3711,13 +3781,433 @@
           "pdf:351:cell:6": "33e4e25a589a684f145ba1ac3a1ec3db6d5860655bcdf51e30c75b8294fa2b75",
           "pdf:351:cell:7": "bc4c5dabcd0965873826abbdd6ecf5a6b7078e27de888788494609bb355e2a21",
           "pdf:351:cell:8": "0ca18fc29c5d8961a0639542fabad9d0b1f204a9a4e4017b321c2f6d803cbc29",
-          "pdf:351:cell:9": "a9c4617833379d4dd52ccf4df943a100a524e79b92373d5e6d39011a6fdb14dc"
+          "pdf:351:cell:9": "a9c4617833379d4dd52ccf4df943a100a524e79b92373d5e6d39011a6fdb14dc",
+          "pdf:350:cell:46": "e826ca7a847e73f0b343284d528633a0fbdff9cedc8315d1dafe48cd5a5b002c",
+          "pdf:350:cell:47": "4da4991e7bf515eae81bbdd26862d1d8fded7bb2413b28649b251811d2411fa6",
+          "pdf:350:cell:48": "db375c3268fca33d4eb8b7b5d213acc6669a87a37864a5501e0301f531506230",
+          "pdf:350:cell:49": "a7f6e3a207b862d5465dd5fe8179ba45f9384d2d3652334855ba1eaac9eabf17",
+          "pdf:350:cell:50": "36500ded6d9444ed07cdbbef055e134da8dc5dd136de25eeab5db499b7ea93e1",
+          "pdf:350:cell:51": "89ba8c16ff9462d04c0d8a47053b574e4ea50b1a912559e0630cc0da58988686",
+          "pdf:350:cell:52": "751be7df6f5846275316db5b1f94da40ad5e6f0bb34dbb0429c2efc19a986622",
+          "pdf:350:cell:53": "4d2f4a29cbafc8364ffa28f04fa366c046ef842fdf746b9e6e356effb3f08ec1",
+          "pdf:350:cell:54": "566e2f072243fd52c03e913da5e1b5a60e7de4cb3887c9d6afda81b544feb880",
+          "pdf:350:cell:55": "f07d4d03cabed62901e2ab246e3a8fa2a2cc7cbe1cb3ec57bd8964e47239d854",
+          "pdf:350:cell:56": "305415dc827c01e619a306b879172b6bffe7899e409cd2eb163fc8f23925f6d7",
+          "pdf:350:cell:57": "ed6372e6753547b1db15aa4e3ba5c49766072f7d45caf8edbab3495f54a3cb24",
+          "pdf:350:cell:58": "fa1799a1334835d925ef8325678802fc150567cd605ad5a226079a16050248bf",
+          "pdf:350:cell:59": "d87a8b008e6437f3373df4eaf45022ce8d31b99920851591b074986211b46014",
+          "pdf:350:cell:60": "dcf501f2d5f23317688456028a963fa114ef3d639d5ab16e3e3faf6e045929ec",
+          "pdf:350:cell:61": "5397a5ec8c96e43270c3f29588799adff955c99d3ac9958afd2bcd3d79bf368d",
+          "pdf:350:cell:62": "71152ea740c121744383b0d57dceb4b6b89c08d0e998d64488cb1001d60069ff",
+          "pdf:350:cell:63": "14288f5b75758b5d51290785dc8f15374b1682e9a8bfe1bebb1de68defe9d1a6",
+          "pdf:350:cell:64": "65c027e88ac7ac26a6ce8d5bb0e7baa24950e83180511c3e9889035f2b6ee3eb",
+          "pdf:350:cell:65": "aa26c4b2a34086b3c0e82e6c8ef773cd7e858e8a871965173ece4d826c5f2922",
+          "pdf:350:cell:66": "5a9eb51bec66c500badadfb86330049e8c8afa600c0a2b608b5afcb276159d32",
+          "pdf:350:cell:67": "e14c2463652be8f5aadc39916a3e51de7be0634fb96288e1981cf15bbde8422e",
+          "pdf:350:cell:68": "fd12721b9a2b51fac4496ef1ea3c4d0466e863528465e5289181345b39721e3a",
+          "pdf:350:cell:69": "52383d2a2e6a60764263cabfdf22b99b968ad3fbd0c9b8542d5d41937cff6129",
+          "pdf:350:cell:70": "76f6fedf069434486f847aa87e1ace85e590cd832d12e09fd39330b00584f03a",
+          "pdf:350:cell:71": "ceea8d282e1bff49a0bdfc685048670980eedbc69b82c68f186de606bfd58bcd",
+          "pdf:350:cell:72": "b320e39119c6fc3fbea136c53e95001fd81157e94f66126b397d8cc4a0b67814",
+          "pdf:350:cell:73": "971d9cf37075d600c5cac3b8c01acfb05f2e42008240098c30b99437d028d29e",
+          "pdf:350:cell:74": "0e0fe3a1a7349567bb2cb0f47af2419a07f93ea87ec9dff72c091ce905ed6a98",
+          "pdf:350:cell:75": "d3521abc1cacd06e86584e780362c92b954df0a8a2d75f998131c5a6159eebbc",
+          "pdf:350:cell:76": "354eec52fa95903926add15d199b0b610a65f54a5f4887246beba800d32dbf79",
+          "pdf:350:cell:77": "75887d2be2b1a3b339d7b81f0b5a3d00dd8d2b287d95aa39353913e4badfbdc9",
+          "pdf:350:cell:78": "245526b9e715f7e7b15d0de8803bf04b100d4308817fb6c114f2d3374354e0cc",
+          "pdf:350:cell:79": "cb0411a47c3cc477939ffe29a1ef5dfa5b7a0978977721d9016072f14515546d",
+          "pdf:350:cell:80": "95ccacd11b359b5a921a9117454f50818b35902de385001ebfef25621e6ddde2",
+          "pdf:351:cell:16": "69cc41a461608c678b8add4846b758af19e1b4325b3c525e872996f078877f45",
+          "pdf:351:cell:17": "a60431323ee56e9e7924fff1498048ae024b59b6bf19ef1817bf722e40a5d5bf",
+          "pdf:351:cell:18": "1a49ced20e4a8275faad61852a1279d9ad648e35cf523039ba119277d17110d1",
+          "pdf:351:cell:19": "3deb3448056ca8efb1c174038439905e04cee74fb41687e9fe0c99047f784466",
+          "pdf:351:cell:20": "2457f3027fce566f6b17a565114c5d23e4d56235cc68bc344f85305241db071c",
+          "pdf:351:cell:21": "bf5c09e931b43e554a848104fa441bd1eb737d1f50e5aa80b0b5c9549ed47636",
+          "pdf:351:cell:22": "0a86ba710c463618544ec005a6824afc710d8da5c4d6766646e764214c0902a3",
+          "pdf:351:cell:23": "c9f54072ed2a99a94778579e1d7a8094d625b4482162fb1338addb93aa63e5c3",
+          "pdf:351:cell:24": "6220ba70a4b7e5cd192b5b9088925ef9623f67a484af9d0a69dfe34b6239d3d4",
+          "pdf:351:cell:25": "1c269a2d15ec2acd650c22fbb1ae1604132c2f21c0a7592824d7422b99f58aba",
+          "pdf:351:cell:26": "9756d24ab286ac13a397d3fa4d9c524984e3adef2dc1a8ee9f607c3261527491",
+          "pdf:351:cell:27": "c457baa61d198f548cfc8de9581d24ea467b95e654882a78ba414a0de6cc04f7",
+          "pdf:351:cell:28": "7adfd266487189976756d78eaead513cb28ec45ee012179eccb34cf16fc53cb7",
+          "pdf:351:cell:29": "9dad48f5d5f8e3abfcfb31aa27b4bfad25944a2f84b2b1b729ed602935dd98ee",
+          "pdf:351:cell:30": "b7fb1f40b31601e32eba14a58ae2f65f6a42f1dca2ab44bb87939f70974fdc69",
+          "pdf:351:cell:31": "6cbec33998d5614d2d7c3d3e59bd12022303b459c2198094cfa51f3daa672b80",
+          "pdf:351:cell:32": "912cc617e8233153e806ca401fe54ec257e757b05fef2b1e880c2096ea27c0b9",
+          "pdf:351:cell:33": "228a406c6299e884f96bff4c67a8d355df61d8e7bc61428571e9fb7b9bd3e674",
+          "pdf:351:cell:34": "c582ec465a3a9eacbe1c67e7cc600d6d3087c7e3e5fe68029dad0778d271f497",
+          "pdf:351:cell:35": "cfe5a606b5ef2333ad6b285d764fc3dad4bb25cd44135516329aeadddd88ea07",
+          "pdf:351:cell:36": "0f8fa19b587e6c06920070bc130bd3521fabe907c93af88cdab9b994814e2619",
+          "pdf:351:cell:37": "18946646891b7c63356dab6f4d9df8395b627b823fb1b8d5e58770a97b440ef5",
+          "pdf:351:cell:38": "9846b7e06727919aef4eaf4dc4e6280c24f8b6ca54213ee4aa94ea2188b15275",
+          "pdf:351:cell:39": "6ab9c85aa56df437889339ba6ae5194cdb844824a91027885c5df9735b4f0ca6",
+          "pdf:351:cell:40": "48c6dea45b95d0e2c798802d4fcbfd654c2b8b281fe21f78fdf3940a8a33a62b",
+          "pdf:351:cell:41": "81236251a8b919e5f22fe24dc095c9d00c5e78ae4bc90981fcdbe71282095fae",
+          "pdf:351:cell:42": "2e2819e3400efb41488fc6864a19e884f77a34580d9440434f9d16dea5b2e12f",
+          "pdf:351:cell:43": "3b746ac92e0bfe5244b1a8746eb2e6ac1349b01e89e6b988402628a9094f65c4",
+          "pdf:351:cell:44": "017cdc9468b3ef75b0477ce19bc1e7d6153ebbd64dbe4fddf3525c9c8aaf890d",
+          "pdf:351:cell:45": "52663620d442e0540bda5697ccbbee4935d5c7ba514fc8559b19726932cd44f4",
+          "pdf:351:cell:46": "1127c7241bbd4f745c316a9f5910f868737d642a0b775f75277a597a26251741",
+          "pdf:351:cell:47": "7cfd0567f693cbdbacbef76f119e67c08833b5147fcd8b697acfc73c084b3bbc",
+          "pdf:351:cell:48": "2935f6b98823c8ff33ee6f8299670fc40b2e273ee02696be136706e63b50b44a",
+          "pdf:351:cell:49": "24039f872793067688d0ea53b8413cf0dd9d2e6a957b2f48507bdac251dddbaa",
+          "pdf:351:cell:50": "7ceb142bee6617ab6a51223a58da263514a5d132dc6c233ad2ce4360198ac021"
         },
         "inheritsOpcodes": false,
         "inheritsOperands": false,
         "inheritsMergedCells": false,
         "inheritsFootnotes": false,
-        "constraintsParsed": false
+        "constraintsParsed": false,
+        "groups": [
+          {
+            "mnemonic": "VMOVDQU8",
+            "rows": [
+              {
+                "allCells": [
+                  "pdf:350:cell:46",
+                  "pdf:350:cell:47",
+                  "pdf:350:cell:48",
+                  "pdf:350:cell:49",
+                  "pdf:350:cell:50",
+                  "pdf:350:cell:51",
+                  "pdf:350:cell:52"
+                ],
+                "encodingCells": [
+                  "pdf:350:cell:48",
+                  "pdf:350:cell:49",
+                  "pdf:350:cell:50",
+                  "pdf:350:cell:51",
+                  "pdf:350:cell:52"
+                ],
+                "entryId": "amd-entry:0125",
+                "headCells": [
+                  "pdf:350:cell:46"
+                ],
+                "inheritsCells": false,
+                "kind": "explicit-local-encoding-row",
+                "operandCells": [
+                  "pdf:350:cell:47"
+                ],
+                "row": "geometry-row:350:488"
+              },
+              {
+                "allCells": [
+                  "pdf:350:cell:53",
+                  "pdf:350:cell:54",
+                  "pdf:350:cell:55",
+                  "pdf:350:cell:56",
+                  "pdf:350:cell:57",
+                  "pdf:350:cell:58",
+                  "pdf:350:cell:59"
+                ],
+                "encodingCells": [
+                  "pdf:350:cell:55",
+                  "pdf:350:cell:56",
+                  "pdf:350:cell:57",
+                  "pdf:350:cell:58",
+                  "pdf:350:cell:59"
+                ],
+                "entryId": "amd-entry:0125",
+                "headCells": [
+                  "pdf:350:cell:53"
+                ],
+                "inheritsCells": false,
+                "kind": "explicit-local-encoding-row",
+                "operandCells": [
+                  "pdf:350:cell:54"
+                ],
+                "row": "geometry-row:350:489"
+              },
+              {
+                "allCells": [
+                  "pdf:350:cell:60",
+                  "pdf:350:cell:61",
+                  "pdf:350:cell:62",
+                  "pdf:350:cell:63",
+                  "pdf:350:cell:64",
+                  "pdf:350:cell:65",
+                  "pdf:350:cell:66"
+                ],
+                "encodingCells": [
+                  "pdf:350:cell:62",
+                  "pdf:350:cell:63",
+                  "pdf:350:cell:64",
+                  "pdf:350:cell:65",
+                  "pdf:350:cell:66"
+                ],
+                "entryId": "amd-entry:0125",
+                "headCells": [
+                  "pdf:350:cell:60"
+                ],
+                "inheritsCells": false,
+                "kind": "explicit-local-encoding-row",
+                "operandCells": [
+                  "pdf:350:cell:61"
+                ],
+                "row": "geometry-row:350:490"
+              },
+              {
+                "allCells": [
+                  "pdf:350:cell:67",
+                  "pdf:350:cell:68",
+                  "pdf:350:cell:69",
+                  "pdf:350:cell:70",
+                  "pdf:350:cell:71",
+                  "pdf:350:cell:72",
+                  "pdf:350:cell:73"
+                ],
+                "encodingCells": [
+                  "pdf:350:cell:69",
+                  "pdf:350:cell:70",
+                  "pdf:350:cell:71",
+                  "pdf:350:cell:72",
+                  "pdf:350:cell:73"
+                ],
+                "entryId": "amd-entry:0125",
+                "headCells": [
+                  "pdf:350:cell:67"
+                ],
+                "inheritsCells": false,
+                "kind": "explicit-local-encoding-row",
+                "operandCells": [
+                  "pdf:350:cell:68"
+                ],
+                "row": "geometry-row:350:491"
+              },
+              {
+                "allCells": [
+                  "pdf:350:cell:74",
+                  "pdf:350:cell:75",
+                  "pdf:350:cell:76",
+                  "pdf:350:cell:77",
+                  "pdf:350:cell:78",
+                  "pdf:350:cell:79",
+                  "pdf:350:cell:80"
+                ],
+                "encodingCells": [
+                  "pdf:350:cell:76",
+                  "pdf:350:cell:77",
+                  "pdf:350:cell:78",
+                  "pdf:350:cell:79",
+                  "pdf:350:cell:80"
+                ],
+                "entryId": "amd-entry:0125",
+                "headCells": [
+                  "pdf:350:cell:74"
+                ],
+                "inheritsCells": false,
+                "kind": "explicit-local-encoding-row",
+                "operandCells": [
+                  "pdf:350:cell:75"
+                ],
+                "row": "geometry-row:350:492"
+              },
+              {
+                "allCells": [
+                  "pdf:350:cell:81",
+                  "pdf:350:cell:82",
+                  "pdf:350:cell:83",
+                  "pdf:350:cell:84",
+                  "pdf:350:cell:85",
+                  "pdf:350:cell:86",
+                  "pdf:350:cell:87"
+                ],
+                "encodingCells": [
+                  "pdf:350:cell:83",
+                  "pdf:350:cell:84",
+                  "pdf:350:cell:85",
+                  "pdf:350:cell:86",
+                  "pdf:350:cell:87"
+                ],
+                "entryId": "amd-entry:0125",
+                "headCells": [
+                  "pdf:350:cell:81"
+                ],
+                "inheritsCells": false,
+                "kind": "explicit-local-encoding-row",
+                "operandCells": [
+                  "pdf:350:cell:82"
+                ],
+                "row": "geometry-row:350:493"
+              }
+            ],
+            "table": "amd-table:0262"
+          },
+          {
+            "mnemonic": "VMOVDQU16",
+            "rows": [
+              {
+                "allCells": [
+                  "pdf:351:cell:10",
+                  "pdf:351:cell:11",
+                  "pdf:351:cell:12",
+                  "pdf:351:cell:13",
+                  "pdf:351:cell:14",
+                  "pdf:351:cell:15",
+                  "pdf:351:cell:9"
+                ],
+                "encodingCells": [
+                  "pdf:351:cell:11",
+                  "pdf:351:cell:12",
+                  "pdf:351:cell:13",
+                  "pdf:351:cell:14",
+                  "pdf:351:cell:15"
+                ],
+                "entryId": "amd-entry:0125",
+                "headCells": [
+                  "pdf:351:cell:9"
+                ],
+                "inheritsCells": false,
+                "kind": "explicit-local-encoding-row",
+                "operandCells": [
+                  "pdf:351:cell:10"
+                ],
+                "row": "geometry-row:351:494"
+              },
+              {
+                "allCells": [
+                  "pdf:351:cell:16",
+                  "pdf:351:cell:17",
+                  "pdf:351:cell:18",
+                  "pdf:351:cell:19",
+                  "pdf:351:cell:20",
+                  "pdf:351:cell:21",
+                  "pdf:351:cell:22"
+                ],
+                "encodingCells": [
+                  "pdf:351:cell:18",
+                  "pdf:351:cell:19",
+                  "pdf:351:cell:20",
+                  "pdf:351:cell:21",
+                  "pdf:351:cell:22"
+                ],
+                "entryId": "amd-entry:0125",
+                "headCells": [
+                  "pdf:351:cell:16"
+                ],
+                "inheritsCells": false,
+                "kind": "explicit-local-encoding-row",
+                "operandCells": [
+                  "pdf:351:cell:17"
+                ],
+                "row": "geometry-row:351:495"
+              },
+              {
+                "allCells": [
+                  "pdf:351:cell:23",
+                  "pdf:351:cell:24",
+                  "pdf:351:cell:25",
+                  "pdf:351:cell:26",
+                  "pdf:351:cell:27",
+                  "pdf:351:cell:28",
+                  "pdf:351:cell:29"
+                ],
+                "encodingCells": [
+                  "pdf:351:cell:25",
+                  "pdf:351:cell:26",
+                  "pdf:351:cell:27",
+                  "pdf:351:cell:28",
+                  "pdf:351:cell:29"
+                ],
+                "entryId": "amd-entry:0125",
+                "headCells": [
+                  "pdf:351:cell:23"
+                ],
+                "inheritsCells": false,
+                "kind": "explicit-local-encoding-row",
+                "operandCells": [
+                  "pdf:351:cell:24"
+                ],
+                "row": "geometry-row:351:496"
+              },
+              {
+                "allCells": [
+                  "pdf:351:cell:30",
+                  "pdf:351:cell:31",
+                  "pdf:351:cell:32",
+                  "pdf:351:cell:33",
+                  "pdf:351:cell:34",
+                  "pdf:351:cell:35",
+                  "pdf:351:cell:36"
+                ],
+                "encodingCells": [
+                  "pdf:351:cell:32",
+                  "pdf:351:cell:33",
+                  "pdf:351:cell:34",
+                  "pdf:351:cell:35",
+                  "pdf:351:cell:36"
+                ],
+                "entryId": "amd-entry:0125",
+                "headCells": [
+                  "pdf:351:cell:30"
+                ],
+                "inheritsCells": false,
+                "kind": "explicit-local-encoding-row",
+                "operandCells": [
+                  "pdf:351:cell:31"
+                ],
+                "row": "geometry-row:351:497"
+              },
+              {
+                "allCells": [
+                  "pdf:351:cell:37",
+                  "pdf:351:cell:38",
+                  "pdf:351:cell:39",
+                  "pdf:351:cell:40",
+                  "pdf:351:cell:41",
+                  "pdf:351:cell:42",
+                  "pdf:351:cell:43"
+                ],
+                "encodingCells": [
+                  "pdf:351:cell:39",
+                  "pdf:351:cell:40",
+                  "pdf:351:cell:41",
+                  "pdf:351:cell:42",
+                  "pdf:351:cell:43"
+                ],
+                "entryId": "amd-entry:0125",
+                "headCells": [
+                  "pdf:351:cell:37"
+                ],
+                "inheritsCells": false,
+                "kind": "explicit-local-encoding-row",
+                "operandCells": [
+                  "pdf:351:cell:38"
+                ],
+                "row": "geometry-row:351:498"
+              },
+              {
+                "allCells": [
+                  "pdf:351:cell:44",
+                  "pdf:351:cell:45",
+                  "pdf:351:cell:46",
+                  "pdf:351:cell:47",
+                  "pdf:351:cell:48",
+                  "pdf:351:cell:49",
+                  "pdf:351:cell:50"
+                ],
+                "encodingCells": [
+                  "pdf:351:cell:46",
+                  "pdf:351:cell:47",
+                  "pdf:351:cell:48",
+                  "pdf:351:cell:49",
+                  "pdf:351:cell:50"
+                ],
+                "entryId": "amd-entry:0125",
+                "headCells": [
+                  "pdf:351:cell:44"
+                ],
+                "inheritsCells": false,
+                "kind": "explicit-local-encoding-row",
+                "operandCells": [
+                  "pdf:351:cell:45"
+                ],
+                "row": "geometry-row:351:499"
+              }
+            ],
+            "table": "amd-table:0263"
+          }
+        ]
       }
     },
     {

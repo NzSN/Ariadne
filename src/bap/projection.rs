@@ -1007,3 +1007,11 @@ mod repeated_string_binding_observer;
 #[cfg(test)]
 #[path = "../../tests/bap/mov8_domain_binding_observer.rs"]
 mod mov8_domain_binding_observer;
+
+#[cfg(all(test, feature = "input"))]
+#[path = "../../tests/bap/mov8_native_consumer.rs"]
+mod mov8_native_consumer;
+
+#[cfg(test)]
+#[path = "../../tests/bap/mov8_memory_domain_binding_observer.rs"]
+mod mov8_memory_domain_binding_observer;

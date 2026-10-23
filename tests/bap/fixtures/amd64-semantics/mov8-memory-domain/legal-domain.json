@@ -1,0 +1,2165 @@
+{
+  "schema": "ariadne.amd64-finite-domain/v5",
+  "scope": {
+    "id": "amd-long64-bounded-mov8-memory/v1",
+    "environmentAxes": {
+      "vendor": [
+        "AMD"
+      ],
+      "mode": [
+        64
+      ],
+      "operandBits": [
+        8
+      ],
+      "addressBits": [
+        32,
+        64
+      ],
+      "segmentModel": [
+        "flat-ds-ss"
+      ]
+    },
+    "prefixPolicy": "optional-67-then-optional-single-rex-w0",
+    "outcome": "normal-completion",
+    "exclusions": [
+      "register-direct-operands",
+      "other-opcodes",
+      "noncanonical-or-repeated-prefixes",
+      "legacy-prefixes-other-than-single-address-override",
+      "rex-w-set",
+      "other-modrm-register-or-rm-fields",
+      "other-sib-fields",
+      "other-displacement-values",
+      "non-amd-or-non-long64",
+      "nonzero-ds-or-ss-base",
+      "exceptional-or-interrupted-outcomes"
+    ],
+    "sourceComplete": false,
+    "vendorFullDenominator": false
+  },
+  "sourcePacks": [
+    {
+      "path": "tests/bap/fixtures/amd64-semantics/mov8-domain/source-constraints.json",
+      "sha256": "06aac5e9dee748f78193837341d2db09481a92794102b372921a081519fa0265"
+    },
+    {
+      "path": "tests/bap/fixtures/amd64-semantics/architecture-constraints-v1.json",
+      "sha256": "aed1f7b46db1a5487d18ab266a33955533f7d39084f9a365ecffd7f026437f8a"
+    }
+  ],
+  "forms": [
+    {
+      "id": "mov8-memory-store-88",
+      "meaning": "mov8-memory-store",
+      "sourceRules": [
+        "address-size-override",
+        "address-size-truncation",
+        "byte-register-alias-preservation",
+        "flags-unmodified",
+        "flat-data-segments",
+        "modrm-fields",
+        "modrm-memory-displacements",
+        "mov-copy-width",
+        "mov8-direction-88",
+        "register-code-map",
+        "rex-base-extension",
+        "rex-high-byte-exclusion",
+        "rex-index-extension",
+        "rex-register-extension",
+        "rip-relative-next-ip",
+        "rip-relative-selector",
+        "sib-address-equation",
+        "sib-base5-no-base",
+        "sib-fields-scale",
+        "sib-index4-no-index",
+        "sib-presence",
+        "signed-displacement"
+      ],
+      "alternatives": [
+        {
+          "environment": {
+            "addressBits": [
+              32
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "6788"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              32
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "674088"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              32
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "674188"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              32
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "674288"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              32
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "674388"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              32
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "674488"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              32
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "674588"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              32
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "674688"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              32
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "674788"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              64
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "88"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              64
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "4088"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              64
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "4188"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              64
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "4288"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              64
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "4388"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              64
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "4488"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              64
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "4588"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              64
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "4688"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              64
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "4788"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mov8-memory-load-8a",
+      "meaning": "mov8-memory-load",
+      "sourceRules": [
+        "address-size-override",
+        "address-size-truncation",
+        "byte-register-alias-preservation",
+        "flags-unmodified",
+        "flat-data-segments",
+        "modrm-fields",
+        "modrm-memory-displacements",
+        "mov-copy-width",
+        "mov8-direction-8a",
+        "register-code-map",
+        "rex-base-extension",
+        "rex-high-byte-exclusion",
+        "rex-index-extension",
+        "rex-register-extension",
+        "rip-relative-next-ip",
+        "rip-relative-selector",
+        "sib-address-equation",
+        "sib-base5-no-base",
+        "sib-fields-scale",
+        "sib-index4-no-index",
+        "sib-presence",
+        "signed-displacement"
+      ],
+      "alternatives": [
+        {
+          "environment": {
+            "addressBits": [
+              32
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "678a"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              32
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "67408a"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              32
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "67418a"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              32
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "67428a"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              32
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "67438a"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              32
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "67448a"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              32
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "67458a"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              32
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "67468a"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              32
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "67478a"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              64
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "8a"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              64
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "408a"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              64
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "418a"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              64
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "428a"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              64
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "438a"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              64
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "448a"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              64
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "458a"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              64
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "468a"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "environment": {
+            "addressBits": [
+              64
+            ]
+          },
+          "sequence": [
+            {
+              "kind": "literal",
+              "bytes": "478a"
+            },
+            {
+              "kind": "modrm-sib-displacement",
+              "name": "address",
+              "mod": [
+                0,
+                1,
+                2
+              ],
+              "reg": [
+                0,
+                4
+              ],
+              "rm": [
+                0,
+                4,
+                5
+              ],
+              "sib": {
+                "scale": [
+                  0,
+                  3
+                ],
+                "index": [
+                  0,
+                  4
+                ],
+                "base": [
+                  0,
+                  5
+                ]
+              },
+              "displacements": {
+                "8": [
+                  -128,
+                  0,
+                  127
+                ],
+                "32": [
+                  -2147483648,
+                  0,
+                  2147483647
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

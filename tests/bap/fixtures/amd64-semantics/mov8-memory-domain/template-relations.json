@@ -1,0 +1,28 @@
+{
+  "schema": "ariadne.amd64-template-relations/v2",
+  "domainSha256": "c85e9bc28667bd3e0af239c90f1c5faff9ea245224776083beb4b4302e4abe89",
+  "sourcePacksSha256": "f3484a1778bbab84b6b54aa94b133993591111b88174cfb8f786b5fddad9803a",
+  "xedLockSha256": "10991873887a9b3d8bc799dbddf86226f6b72de5e2baf647d22ab391affa7542",
+  "xedRecordsSha256": "1f62f4da85d77353dbab13f85a06fa8732477de2cfe10877f73742fc0934cc48",
+  "sourceOnlyObligations": [],
+  "relations": [
+    {
+      "id": "mov8-memory-store-88-finite-xed",
+      "form": "mov8-memory-store-88",
+      "candidate": "xed:0dbf63812e034614081608a43038fa54efc2448bc96770c3bb38a4c7c2d4644c:1",
+      "kind": "partial-finite-domain",
+      "sourceRule": "mov8-direction-88",
+      "candidateRemainder": "unresolved",
+      "completeTemplateDomain": false
+    },
+    {
+      "id": "mov8-memory-load-8a-finite-xed",
+      "form": "mov8-memory-load-8a",
+      "candidate": "xed:f44bf67b38fc1f2fafc876a5db2d02394a2e22ed808f94b860723e1603c72f11:1",
+      "kind": "partial-finite-domain",
+      "sourceRule": "mov8-direction-8a",
+      "candidateRemainder": "unresolved",
+      "completeTemplateDomain": false
+    }
+  ]
+}

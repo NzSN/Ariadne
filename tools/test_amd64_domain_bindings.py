@@ -114,6 +114,40 @@ class FiniteBindingControls(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "stale reference"):
                 binding.validate_reference(record, {"referencePin": pins})
 
+    def test_producer_batch_frames_bind_typed_ids_counts_and_complete_sequence(self):
+        ready = dict(schema="ariadne.bap-ready/v1", snapshot="snapshot", target="windows-amd64",
+                     version="2.5.0-alpha", lifter="legacy")
+        points = [{"index": index} for index in range(640)]
+        frames = [ready]
+        for batch, start in enumerate(range(0, len(points), 256)):
+            block = points[start:start + 256]
+            frames.extend(block)
+            frames.append(dict(schema="ariadne.bap-batch/v1", batch=batch, count=len(block)))
+        self.assertEqual(binding.producer_rows(frames, "windows-amd64", "snapshot", 640), points)
+        for attack in ("bool-batch", "float-batch", "float-count", "wrong-count", "wrong-target",
+                       "wrong-snapshot", "missing-boundary", "missing-row", "extra-frame"):
+            altered = copy.deepcopy(frames)
+            if attack == "bool-batch":
+                altered[257]["batch"] = False
+            elif attack == "float-batch":
+                altered[257]["batch"] = 0.0
+            elif attack == "float-count":
+                altered[257]["count"] = 256.0
+            elif attack == "wrong-count":
+                altered[257]["count"] = 255
+            elif attack == "wrong-target":
+                altered[0]["target"] = "linux-amd64"
+            elif attack == "wrong-snapshot":
+                altered[0]["snapshot"] = "substituted"
+            elif attack == "missing-boundary":
+                altered.pop()
+            elif attack == "missing-row":
+                altered.pop(1)
+            else:
+                altered.append(copy.deepcopy(altered[-1]))
+            with self.subTest(attack=attack), self.assertRaises(ValueError):
+                binding.producer_rows(altered, "windows-amd64", "snapshot", 640)
+
     def test_partial_or_duplicate_actual_inputs_cannot_supply_complete_observations(self):
         points, classified = self.check_inputs()
         index = {point["bytes"]: (i, point) for i, point in enumerate(points)}
@@ -141,7 +175,13 @@ class FiniteBindingControls(unittest.TestCase):
                 mock.patch.object(binding, "validate_producer"), mock.patch.object(binding, "validate_reference"), \
                 mock.patch.object(binding.legacy, "sha", return_value="0" * 64):
             observations["implementationSources"] = binding.sources()
-            for attack in ("partial", "duplicate", "snapshot", "bool-batch", "wrong-byte", "false-flags"):
+            attacks = {"partial": "missing supported observations",
+                       "duplicate": "omitted, duplicate or wrong domain observation",
+                       "snapshot": "producer request/extent identity",
+                       "bool-batch": "producer request/extent identity",
+                       "wrong-byte": "producer request/extent identity",
+                       "false-flags": "register MOV control/memory properties"}
+            for attack, expected_error in attacks.items():
                 altered = copy.deepcopy(observations)
                 if attack == "duplicate":
                     altered["rows"].append(copy.deepcopy(altered["rows"][0]))
@@ -153,7 +193,7 @@ class FiniteBindingControls(unittest.TestCase):
                     altered["rows"][0]["response"]["bytes"] = "90"
                 elif attack == "false-flags":
                     altered["rows"][0]["response"]["properties"]["jump"] = 0
-                with self.subTest(attack=attack), self.assertRaises(ValueError):
+                with self.subTest(attack=attack), self.assertRaisesRegex(ValueError, expected_error):
                     binding.validate_observations(altered, self.domain, self.constraints, self.bindings,
                                                   "pdf", "bbox", require_rust=False)
 

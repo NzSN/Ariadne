@@ -1,0 +1,482 @@
+{
+  "schema": "ariadne.mov8-memory-small-actual-inputs/v1",
+  "cases": [
+    {
+      "bytes": "8800",
+      "va": "0x000000020042b800",
+      "opcode": "MOV8mr",
+      "bil": [
+        {
+          "kind": "move",
+          "var": {
+            "name": "mem",
+            "index": 0,
+            "virtual": false,
+            "width": 0,
+            "type": "mem"
+          },
+          "value": {
+            "kind": "store",
+            "width": 8,
+            "mem": {
+              "kind": "var",
+              "var": {
+                "name": "mem",
+                "index": 0,
+                "virtual": false,
+                "width": 0,
+                "type": "mem"
+              }
+            },
+            "addr": {
+              "kind": "var",
+              "var": {
+                "name": "RAX",
+                "index": 0,
+                "virtual": false,
+                "width": 64,
+                "type": "imm"
+              }
+            },
+            "value": {
+              "kind": "cast",
+              "op": 0,
+              "width": 8,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "reference": "v2 MOV8mr 6 r:RAX i:1 r:NONE i:0 r:NONE r:AL 0 2 0 0 -1 -1 -1 -1 -1 -1 8594307072 ok 2 ordinary -"
+    },
+    {
+      "bytes": "8a00",
+      "va": "0x000000020042cc00",
+      "opcode": "MOV8rm",
+      "bil": [
+        {
+          "kind": "move",
+          "var": {
+            "name": "RAX",
+            "index": 0,
+            "virtual": false,
+            "width": 64,
+            "type": "imm"
+          },
+          "value": {
+            "kind": "concat",
+            "lhs": {
+              "kind": "extract",
+              "hi": 63,
+              "lo": 8,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            },
+            "rhs": {
+              "kind": "load",
+              "width": 8,
+              "mem": {
+                "kind": "var",
+                "var": {
+                  "name": "mem",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 0,
+                  "type": "mem"
+                }
+              },
+              "addr": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "reference": "v2 MOV8rm 6 r:AL r:RAX i:1 r:NONE i:0 r:NONE 1 1 0 0 -1 -1 -1 -1 -1 -1 8594312192 ok 2 ordinary -"
+    },
+    {
+      "bytes": "8a0500000080",
+      "va": "0x000000020042ce40",
+      "opcode": "MOV8rm",
+      "bil": [
+        {
+          "kind": "move",
+          "var": {
+            "name": "RAX",
+            "index": 0,
+            "virtual": false,
+            "width": 64,
+            "type": "imm"
+          },
+          "value": {
+            "kind": "concat",
+            "lhs": {
+              "kind": "extract",
+              "hi": 63,
+              "lo": 8,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            },
+            "rhs": {
+              "kind": "load",
+              "width": 8,
+              "mem": {
+                "kind": "var",
+                "var": {
+                  "name": "mem",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 0,
+                  "type": "mem"
+                }
+              },
+              "addr": {
+                "kind": "int",
+                "value": "0x18042CE46:64u"
+              }
+            }
+          }
+        }
+      ],
+      "reference": "v2 MOV8rm 6 r:AL r:RIP i:1 r:NONE i:-2147483648 r:NONE 1 1 0 0 -1 -1 -1 -1 -1 -1 8594312768 ok 6 ordinary -"
+    },
+    {
+      "bytes": "8a042500000080",
+      "va": "0x000000020042cce0",
+      "opcode": "MOV8rm",
+      "bil": [
+        {
+          "kind": "move",
+          "var": {
+            "name": "RAX",
+            "index": 0,
+            "virtual": false,
+            "width": 64,
+            "type": "imm"
+          },
+          "value": {
+            "kind": "concat",
+            "lhs": {
+              "kind": "extract",
+              "hi": 63,
+              "lo": 8,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            },
+            "rhs": {
+              "kind": "load",
+              "width": 8,
+              "mem": {
+                "kind": "var",
+                "var": {
+                  "name": "mem",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 0,
+                  "type": "mem"
+                }
+              },
+              "addr": {
+                "kind": "int",
+                "value": "0xFFFFFFFF80000000:64u"
+              }
+            }
+          }
+        }
+      ],
+      "reference": "v2 MOV8rm 6 r:AL r:NONE i:1 r:NONE i:-2147483648 r:NONE 1 1 0 0 -1 -1 -1 -1 -1 -1 8594312416 ok 7 ordinary -"
+    },
+    {
+      "bytes": "428a042500000000",
+      "va": "0x00000002004074c0",
+      "opcode": "MOV8rm",
+      "bil": [
+        {
+          "kind": "move",
+          "var": {
+            "name": "RAX",
+            "index": 0,
+            "virtual": false,
+            "width": 64,
+            "type": "imm"
+          },
+          "value": {
+            "kind": "concat",
+            "lhs": {
+              "kind": "extract",
+              "hi": 63,
+              "lo": 8,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            },
+            "rhs": {
+              "kind": "load",
+              "width": 8,
+              "mem": {
+                "kind": "var",
+                "var": {
+                  "name": "mem",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 0,
+                  "type": "mem"
+                }
+              },
+              "addr": {
+                "kind": "var",
+                "var": {
+                  "name": "R12",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "reference": "v2 MOV8rm 6 r:AL r:NONE i:1 r:R12 i:0 r:NONE 1 1 0 0 -1 -1 -1 -1 -1 -1 8594158784 ok 8 ordinary -"
+    },
+    {
+      "bytes": "678a0500000000",
+      "va": "0x000000020042a620",
+      "opcode": "MOV8rm",
+      "bil": [
+        {
+          "kind": "move",
+          "var": {
+            "name": "RAX",
+            "index": 0,
+            "virtual": false,
+            "width": 64,
+            "type": "imm"
+          },
+          "value": {
+            "kind": "concat",
+            "lhs": {
+              "kind": "extract",
+              "hi": 63,
+              "lo": 8,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            },
+            "rhs": {
+              "kind": "load",
+              "width": 8,
+              "mem": {
+                "kind": "var",
+                "var": {
+                  "name": "mem",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 0,
+                  "type": "mem"
+                }
+              },
+              "addr": {
+                "kind": "int",
+                "value": "0x20042A627:64u"
+              }
+            }
+          }
+        }
+      ],
+      "reference": "v2 MOV8rm 6 r:AL r:EIP i:1 r:NONE i:0 r:NONE 1 1 0 0 -1 -1 -1 -1 -1 -1 8594302496 ok 7 ordinary -"
+    },
+    {
+      "bytes": "678a0400",
+      "va": "0x000000020042a420",
+      "opcode": "MOV8rm",
+      "bil": [
+        {
+          "kind": "move",
+          "var": {
+            "name": "RAX",
+            "index": 0,
+            "virtual": false,
+            "width": 64,
+            "type": "imm"
+          },
+          "value": {
+            "kind": "concat",
+            "lhs": {
+              "kind": "extract",
+              "hi": 63,
+              "lo": 8,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            },
+            "rhs": {
+              "kind": "load",
+              "width": 8,
+              "mem": {
+                "kind": "var",
+                "var": {
+                  "name": "mem",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 0,
+                  "type": "mem"
+                }
+              },
+              "addr": {
+                "kind": "binop",
+                "op": 18,
+                "lhs": {
+                  "kind": "var",
+                  "var": {
+                    "name": "RAX",
+                    "index": 0,
+                    "virtual": false,
+                    "width": 64,
+                    "type": "imm"
+                  }
+                },
+                "rhs": {
+                  "kind": "var",
+                  "var": {
+                    "name": "RAX",
+                    "index": 0,
+                    "virtual": false,
+                    "width": 64,
+                    "type": "imm"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "reference": "v2 MOV8rm 6 r:AL r:EAX i:1 r:EAX i:0 r:NONE 1 1 0 0 -1 -1 -1 -1 -1 -1 8594301984 ok 4 ordinary -"
+    },
+    {
+      "bytes": "678a042500000080",
+      "va": "0x000000020042a4e0",
+      "opcode": "MOV8rm",
+      "bil": [
+        {
+          "kind": "move",
+          "var": {
+            "name": "RAX",
+            "index": 0,
+            "virtual": false,
+            "width": 64,
+            "type": "imm"
+          },
+          "value": {
+            "kind": "concat",
+            "lhs": {
+              "kind": "extract",
+              "hi": 63,
+              "lo": 8,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            },
+            "rhs": {
+              "kind": "load",
+              "width": 8,
+              "mem": {
+                "kind": "var",
+                "var": {
+                  "name": "mem",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 0,
+                  "type": "mem"
+                }
+              },
+              "addr": {
+                "kind": "int",
+                "value": "0xFFFFFFFF80000000:64u"
+              }
+            }
+          }
+        }
+      ],
+      "reference": "v2 MOV8rm 6 r:AL r:NONE i:1 r:NONE i:-2147483648 r:NONE 1 1 0 0 -1 -1 -1 -1 -1 -1 8594302176 ok 8 ordinary -"
+    }
+  ],
+  "producerPin": {
+    "helperSha256": "6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf",
+    "runtimeLockSha256": "23dac7be3de321d80fb806b8a9ba4cb64a51f5c75c3c20f3ede77ea348de5382"
+  },
+  "referencePin": {
+    "helperSha256": "56a0ace11986a3f49250bc82079d40fddd383730e892a6a18891a05051dd2973",
+    "librarySha256": "3fdd6ebc0b2b54d89e0a69e14d10403e0826fc3b6a7af742684a76ee5c6d23a0",
+    "version": "ariadne-llvm-mc 20.1.2 protocol 2"
+  },
+  "scope": "Eight small actual source inputs, including refused address32 counterexamples; not a qualification receipt."
+}

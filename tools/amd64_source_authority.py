@@ -18,6 +18,7 @@ from urllib.parse import urlparse
 import amd64_manual_geometry as geometry
 import amd64_source_corpus as corpus
 from amd64_inventory_xed import canonical, digest
+from run_output import run_output
 
 ROOT = Path(__file__).resolve().parents[1]
 INPUT = ROOT / "tests/bap/fixtures/source-authority/adjudications-v1.json"
@@ -102,6 +103,8 @@ def _reproduce(value, root):
     lock = corpus.strict_json((ROOT / value["extractorLock"]["path"]).read_bytes())
     executables = {"pdftotext": ROOT / "target/rep-pdf-tools/root/usr/bin/pdftotext",
                    "mutool": ROOT / "target/rep-pdf-tools/root/usr/bin/mutool", "python": Path(sys.executable)}
+    missing = [name for name, executable in executables.items() if not executable.is_file()]
+    require(not missing, "missing pinned extraction runtime: " + ", ".join(missing))
     env = corpus.environment(ROOT / "target/rep-pdf-tools/root/usr/lib/x86_64-linux-gnu")
     corpus.check_runtime(lock, executables, env)
     wanted = {}
@@ -165,6 +168,18 @@ def _row(head, cells):
     require(all(left["rect"][2] < right["rect"][0] for left, right in zip(ordered, ordered[1:])), "source row column order")
 
 
+def _continuation(head, tail, max_baseline=18):
+    require(tail["pdfPage"] == head["pdfPage"]
+            and 0 < tail["rect"][1] - head["rect"][1] <= max_baseline
+            and head["rect"][0] - 1 <= tail["rect"][0] < head["rect"][2],
+            "source continuation page, baseline or column mismatch")
+
+
+def _one_source(issue, roles):
+    require(len({reference["source"] for role in roles for reference in issue["anchors"][role]}) == 1,
+            "source proof relation crosses publications")
+
+
 def _map(facts, kind, map_number, high, low, pp, mnemonic, operands):
     title = _one(facts, "mapTitle")
     require(title["text"].startswith(f"{kind} Opcode Map {map_number}"), "opcode map selection")
@@ -223,10 +238,10 @@ def _adjudicate(value, old_source_bundle, checked):
         name = issue["id"]
         if name == "vaddpd-evex128-operand":
             require(set(facts) == {"newHead", "newOperand", "newEncoding"}, "VADDPD proof roles")
+            _one_source(issue, facts)
             head = _one(facts, "newHead", "VADDPD xmm1 {k}{z}, xmm2,")
             operand = _one(facts, "newOperand", "xmm3/mem128/mem64bcst")
-            require(operand["pdfPage"] == head["pdfPage"] and 0 < operand["rect"][1] - head["rect"][1] <= 12,
-                    "VADDPD operand continuation")
+            _continuation(head, operand, 12)
             _row(head, facts["newEncoding"])
             encoding = [cell["text"] for cell in facts["newEncoding"]]
             require(encoding == ["62", "RXBR'.1", "1.vvvv.01", "z.00.b.V'.aaa", "58 /r"]
@@ -237,16 +252,20 @@ def _adjudicate(value, old_source_bundle, checked):
             resolution = "corrected-in-publisher-revision"
         elif name == "sha256msg2-mnemonic":
             require(set(facts) == {"newHead", "newOpcode", "newDescription", "newSupport"}, "SHA proof roles")
+            _one_source(issue, facts)
             head = _one(facts, "newHead", "SHA256MSG2 xmm1, xmm2/m128")
             opcode = _one(facts, "newOpcode", "0F 38 CD /r")
             description = _one(facts, "newDescription", "Calculate Message Intermediate 2")
-            _one(facts, "newSupport", "SHA256MSG2")
+            support = _one(facts, "newSupport", "SHA256MSG2")
+            require(support["pdfPage"] == head["pdfPage"] and support["rect"][1] < head["rect"][1],
+                    "SHA support belongs to another source section")
             _row(head, [opcode, description])
             require(len(rows) == 1 and rows[0][1:] == ("SHA256MSG1 xmm1, xmm2/m128", [opcode["text"]]), "SHA original row mismatch")
             correction = dict(field="mnemonic", literal="SHA256MSG1", replacement="SHA256MSG2")
             resolution = "corrected-in-publisher-revision"
         elif name in {"vpmovmskb-mnemonic", "vpmadcswd-mnemonic"}:
             require(set(facts) == {"mapTitle", "mapLow", "mapHigh", "mapPrefix", "mapName", "mapOperands"}, "map proof roles")
+            _one_source(issue, facts)
             if name == "vpmovmskb-mnemonic":
                 _map(facts, "VEX", "1,", "D", "7", "01", "VPMOVMSKB", "Gw, Ux")
                 require(len(rows) == 2 and {(head, tuple(code)) for _, head, code in rows} == {
@@ -261,22 +280,31 @@ def _adjudicate(value, old_source_bundle, checked):
             resolution = "adjudicated-by-publisher-encoding-map"
         elif name == "vpmovzxwd-vex-field":
             require(set(facts) == {"newHead", "newPrefix", "newField", "newOpcode", "newFieldHeader", "exceptionHeading", "vvvvConstraint", "lengthRule"}, "VEX field proof roles")
+            _one_source(issue, set(facts) - {"lengthRule"})
+            _one_source(issue, {"lengthRule"})
             head = _one(facts, "newHead", "VPMOVZXWD ymm1, xmm2/mem128")
             require([cell["text"] for cell in facts["newPrefix"]] == ["C4", "RXB.02"]
                     and [cell["text"] for cell in facts["newField"]] == ["X.1323r33111.", "1.01"], "changed VEX source field")
             opcode = _one(facts, "newOpcode", "33 /r")
             _row(head, facts["newPrefix"] + [facts["newField"][0], opcode])
-            _one(facts, "newFieldHeader", "VEX RXB.map_select W.vvvv.L.pp Opcode")
+            _continuation(*facts["newField"], max_baseline=12)
+            header = _one(facts, "newFieldHeader", "VEX RXB.map_select W.vvvv.L.pp Opcode")
+            require(header["pdfPage"] == head["pdfPage"] and header["rect"][1] < head["rect"][1]
+                    and header["rect"][0] <= facts["newPrefix"][0]["rect"][0]
+                    and header["rect"][2] >= opcode["rect"][2], "foreign VEX field header")
             require([cell["text"] for cell in facts["exceptionHeading"]] == ["Exceptions", "Invalid opcode, #UD"], "missing invalid-opcode premise")
             constraint = _one(facts, "vvvvConstraint", "VEX.vvvv ! = 1111b.")
-            require(constraint["pdfPage"] == head["pdfPage"]
-                    and facts["exceptionHeading"][0]["rect"][1] < constraint["rect"][1], "foreign VEX constraint")
+            exception, invalid = facts["exceptionHeading"]
+            require(all(cell["pdfPage"] == head["pdfPage"] for cell in (exception, invalid, constraint))
+                    and head["rect"][1] < exception["rect"][1] < invalid["rect"][1] < constraint["rect"][1]
+                    and invalid["rect"][2] < constraint["rect"][0], "foreign VEX constraint")
             length = " ".join(cell["text"] for cell in facts["lengthRule"])
             require(len(facts["lengthRule"]) == 2
                     and facts["lengthRule"][0]["text"].startswith("VEX/XOP.L (Bit 2).")
                     and "L=1 specifies 256-bit vector length (YMM registers/256-bit memory locations)." in length
                     and len(rows) == 1 and rows[0][1:] == (head["text"], ["C4", "RXB.02", "X.1323r33111.", "1.01", "33 /r"]),
                     "VEX vector-length/source relation")
+            _continuation(*facts["lengthRule"])
             correction = dict(field="W.vvvv.L.pp", literal="X.1323r33111. 1.01", replacement="X.1111.1.01")
             resolution = "adjudicated-by-explicit-publisher-field-constraints"
         else:
@@ -296,7 +324,7 @@ def validate_adjudications(old_source_bundle, source_inputs):
     """Validate reviewed inputs and compute one result per immutable old gap ID."""
     fields(source_inputs, {"manifest", "root"}, "source inputs")
     value = _manifest(source_inputs["manifest"])
-    root = Path(source_inputs["root"])
+    root = run_output(source_inputs["root"])
     require(root.is_dir(), "missing source-authority work directory")
     before = authority_sources()
     result = _adjudicate(value, old_source_bundle, _reproduce(value, root))
@@ -311,11 +339,12 @@ def main():
     parser.add_argument("--inputs", type=Path, default=INPUT)
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
+    output = run_output(args.output)
     old = corpus.strict_json(args.old_geometry.read_bytes())
     result = validate_adjudications({old["publication"]: old},
         dict(manifest=corpus.strict_json(args.inputs.read_bytes()), root=args.source_dir))
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_bytes(canonical(dict(schema="ariadne.amd64-source-adjudications/v1", records=result,
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_bytes(canonical(dict(schema="ariadne.amd64-source-adjudications/v1", records=result,
                                          corpusAdoption=False, sources=authority_sources())) + b"\n")
     print(json.dumps({"adjudications": len(result), "corpusAdoption": False}))
 

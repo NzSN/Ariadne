@@ -192,6 +192,28 @@ def rust_input(observations):
     return {"rows": observations["rows"]}
 
 
+def producer_rows(frames, target, snapshot, total):
+    """Validate every frame before associating BIL with the requested points."""
+    require(isinstance(frames, list) and frames and type(total) is int and total > 0,
+            "producer frame sequence")
+    require(frames[0] == {"schema": "ariadne.bap-ready/v1", "snapshot": snapshot, "target": target,
+                           "version": "2.5.0-alpha", "lifter": "legacy"}, "producer ready identity")
+    lifted, cursor = [], 1
+    for batch, start in enumerate(range(0, total, 256)):
+        count = min(256, total - start)
+        require(cursor + count < len(frames), "missing producer batch boundary")
+        lifted += frames[cursor:cursor + count]
+        cursor += count
+        boundary = frames[cursor]
+        fields(boundary, {"schema", "batch", "count"}, "producer batch boundary")
+        require(type(boundary["batch"]) is int and type(boundary["count"]) is int
+                and boundary == {"schema": "ariadne.bap-batch/v1", "batch": batch, "count": count},
+                "producer batch boundary identity/types")
+        cursor += 1
+    require(cursor == len(frames), "unexpected producer frames")
+    return lifted
+
+
 def validate_observations(observations, domain, constraints, bindings, pdf, bbox, root=ROOT, require_rust=True):
     points, classified = validate_inputs(domain, constraints, bindings, pdf, bbox, root)
     fields(observations, {"schema", "domainSha256", "constraintsSha256", "bindingsSha256", "implementationSources",
@@ -275,16 +297,7 @@ def build(domain, constraints, bindings, pdf, bbox, helper, runtime, reference, 
                                  text=True, capture_output=True, env=env, timeout=300)
         require(process.returncode == 0, "fresh producer failed: " + process.stderr[-2000:])
         frames = [strict_json(line) for line in process.stdout.splitlines()]
-        require(frames and frames[0] == {"schema": "ariadne.bap-ready/v1", "snapshot": snapshot, "target": target,
-                                        "version": "2.5.0-alpha", "lifter": "legacy"}, "producer ready identity")
-        lifted, cursor = [], 1
-        for batch, start in enumerate(range(0, len(points), 256)):
-            count = min(256, len(points) - start)
-            lifted += frames[cursor:cursor + count]
-            cursor += count
-            require(cursor < len(frames) and frames[cursor] == {"schema": "ariadne.bap-batch/v1", "batch": batch, "count": count}, "producer batch boundary")
-            cursor += 1
-        require(cursor == len(frames), "unexpected producer frames")
+        lifted = producer_rows(frames, target, snapshot, len(points))
         command = "".join(f"{0x401000 + i * 32} {point['bytes']}\n" for i, point in enumerate(points))
         option = "--protocol=2-checked" + ("-linux" if target == "linux-amd64" else "")
         process = subprocess.run([str(reference), option], input=command, text=True, capture_output=True,
@@ -321,7 +334,15 @@ def main():
     parser.add_argument("--reference-library", type=Path, default=ROOT / "target/resume-llvm20/usr/lib/x86_64-linux-gnu/libLLVM.so.20.1")
     args = parser.parse_args()
     common = [read(args.domain), read(args.constraints), read(args.bindings), args.pdf, args.bbox]
-    if args.action == "build":
+    if common[0].get("schema") == "ariadne.amd64-finite-domain/v5":
+        import amd64_memory_bindings as memory
+        if args.action == "build":
+            result = memory.build(*common, args.helper, args.runtime, args.reference, args.reference_library,
+                                  work_dir=run_output(args.output).parent)
+        else:
+            require(args.observations is not None, "check requires observations")
+            result = memory.validate_observations(read(args.observations), *common)
+    elif args.action == "build":
         result = build(*common, args.helper, args.runtime, args.reference, args.reference_library)
     else:
         require(args.observations is not None, "check requires observations")

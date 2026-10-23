@@ -2,11 +2,13 @@
 
 ## Context and follow-up
 
-**Current continuation: stopped at the user's request, 2026-10-23.** The
-[stopped-work checkpoint](../../CHECKPOINTS.md#2026-10-23--remaining-amd64-plan-execution-stopped-at-user-request)
-records additive source-obligation/authority tooling, the finite MOV8 pilot,
-unfinished integration and stale binding identities. The earlier qualified
-results below retain their source scope; this WIP does not renew them.
+**Current continuation: stopped for publication at the user's request,
+2026-10-24.** The [stopped checkpoint](../../CHECKPOINTS.md#2026-10-24--amd64-constraint-and-mov8-continuation-stopped-for-publication)
+records the publisher comparison, architectural constraint pack, memory domain,
+register-native qualification and one unfinished source-rule mapping requirement.
+[Current execution and prerequisites](../../.agents/plans/amd64-operation-coverage.md#resumed-source-review-and-local-native-checks)
+separate the renewed finite binding/native gates from remaining full coverage.
+Earlier qualifications retain their source scope.
 
 **Status.** Completion design with finite source/domain implementation, 2026-10-23.
 The working tree based on `6c3fa96` implements separately selected v12/v13/v14 REP scopes
@@ -15,9 +17,9 @@ corpus, historical-gap accounting and v2/v3 finite legal-domain/binding registri
 distinguishes exercised clauses from the remaining full-stage exits. The broader
 encoding grammar, source completeness and consumer expansions remain open;
 the finite plain-dependency profiles do not grant proof-consumer admission.
-The v15 producer, projection and local capture gates pass; its current native
-core handoff is awaiting specific approval after automatic review rejected the
-changed payload.
+The dated v15 gates below retain their recorded inputs. The recovery continuation
+qualifies the current finite gate with recovered producer artifacts, the
+reviewed helper builds, 341 refusal controls and 448 native parity instances.
 
 **Why this document exists.** The [current BAP integration](bap-analysis-core-design.md#plain-repeated-string-profile-and-coverage-accounting)
 owns the original three-form v12 contract; this design records its separately versioned memory-string successors and remaining obligations.
@@ -44,7 +46,7 @@ The [execution HTML](../../.agents/chatdocs/ariadne-amd64-coverage-execution-202
 is the current dated reading view; the [original proposal](../../.agents/chatdocs/ariadne-amd64-coverage-design-20261023/index.html)
 preserves the pre-execution version.
 
-**What remains unresolved.** The legal-form denominator, source conflicts and unparsed constraints, wider REP
+**What remains unresolved.** The legal-form denominator, corpus migration/adoption and unparsed constraints, wider REP
 semantics, architectural state and proof consumers remain incomplete. Official
 byte identity for the pinned AMD Volumes 4/5 is unverified. Universal ISA
 execution correctness and Rust refinement remain separate obligations.
@@ -88,12 +90,12 @@ cannot establish those stronger claims.
 | --- | --- | --- |
 | XED source | 10,994 symbolic records: 10,569 long-mode candidates, 425 exclusions | A frozen candidate grammar, not a legal AMD instruction count. |
 | Manual transcription | Historical v1 has 4,118 rows and 2,657 gap records; every old gap now has a source-backed disposition, with zero unassigned gaps and seven explicit source-conflict records | The old lock remains unchanged. Conflict and material dispositions retain unparsed constraints; historical backlog closure does not establish complete source/constraint coverage or a legal encoding. |
-| Source provenance | Fresh publisher bytes match Vol1 r3.25, Vol2 r3.45 and Vol3 r3.38; indexed official Vol4 r3.26 and Vol5 r3.16 URLs return HTTP 404 | Vol4/5 remain pinned archive copies with unverified publisher-byte identity. |
+| Source provenance | Earlier publisher retrieval matched Vol1 r3.25, Vol2 r3.45 and Vol3 r3.38. The resumed review retrieves official Vol4 r3.27 and Vol5 r3.16 bytes matching the separate authority inputs, but differing from the old corpus pins. | Old Vol4/5 locks remain unchanged; bounded corrections do not establish corpus migration or adoption. |
 | Current extraction | Candidate v2 reproduces all five volumes under pinned `pdftotext` 26.01, MuPDF 1.27 and Python 3.14.4; Vol3–5 normalized content matches v1 while full-layout hashes differ | Existing strict v1 pins remain active. Equal normalized content does not authorize migration or close previously unparsed source regions. |
 | Representative v12 survey | 171 exact byte cases: 57 projected, 8 conservative unknowns, 106 remaining gaps | These samples do not bind any symbolic form authoritatively. Nine independent expectations match. |
 | REP v12 | Exact `F3 A4`, `F3 AA`, `F3 A6`; plain dependency analysis only | Its three-form admission remains frozen. |
-| REP v13/v14 | v13 selects 24 nonempty default-address producer forms; v14 adds four exact LODS forms from a separate pinned BAP source bundle | Both remain plain dependency profiles; address overrides, I/O and guard/target/refinement/composition proof transports remain refused. The recorded R1 source boundary passed 416 native parity instances and 259 refusal controls; the current v15 native policy has a separate pending gate. |
-| AMD REP v15 | 56 canonical memory-REP tuples: 28 default-address plus 28 address-32; the new source bundle supplies 32 exact sequences | 178,080 numeric comparisons, 64 actual transport/projection cases and 448 local capture instances pass under an explicit AMD premise. Current native parity/refusal controls remain pending. |
+| REP v13/v14 | v13 selects 24 nonempty default-address producer forms; v14 adds four exact LODS forms from a separate pinned BAP source bundle | Both remain plain dependency profiles; address overrides, I/O and guard/target/refinement/composition proof transports remain refused. The recorded R1 boundary passed 416 native parity instances and 259 refusal controls; the recovered v15 environment has its separately qualified finite gate. |
+| AMD REP v15 | 56 canonical memory-REP tuples: 28 default-address plus 28 address-32; the source bundle supplies 32 exact sequences | The original local record covers 178,080 numeric comparisons, 64 transport/projection cases and 448 capture instances. Current helper-build migration v1 passes fresh bindings, 448 native parity instances, 341 refusal controls and compatibility under the explicit AMD premise. |
 | Accounting v1 | Candidate-only associations remain unchanged | The frozen 10,569 candidates still lack vendor-wide authoritative legal-form bindings. |
 | Legal-domain/binding v2 pilot | Three source-derived F3 MOVS/STOS/CMPS families enumerate 24 canonical byte/environment points: 3 supported and 21 explicitly unsupported for v12 | Total disposition of this pilot does not close implementation, source completeness or the vendor denominator; fresh source-bound BIL, numeric and Rust admission checks pass for this pilot. |
 | Legal-domain/binding v3 | 56 canonical AMD points, 516 source anchors and 111 fresh profile observations; v15 covers all points in this finite domain | Earlier profiles retain explicit unsupported points. Full source/vendor completeness and all 10,569 symbolic-domain bindings remain open. |
@@ -161,8 +163,9 @@ Deleting a gap, suppressing a line class, or moving text outside a table does
 not resolve an obligation. The implemented [geometry extractor](../../tools/amd64_manual_geometry.py)
 now preserves those identities and reconstructs word-coordinate ownership;
 [its finite execution](#102-geometry-and-source-region-execution-c2) accounts
-for every historical gap while leaving seven source-conflict records, candidate
-cross-page relations and unparsed constraints open.
+for every historical gap. Later source replay adjudicates the seven conflict
+records and all 33 table relations while preserving the original transcriptions.
+Corpus adoption and unparsed constraints remain open.
 
 ### 4.3 Establish source completeness separately
 
@@ -903,15 +906,14 @@ uses, possible writes, empty definite writes, entry/REP origins, unknown
 iteration-dependent addresses and investigation binding all pass. The three
 portable API/configuration controls pass, including early proof refusal.
 
-The current native source/control payload contains 25 files with SHA256
+The earlier native source/control payload contains 25 files with SHA256
 `ac080543a2951b6606e87d63d3085f6f5df9d2c829553182443b970cfdae2440`.
 Automatic approval review rejected this changed v15 payload because the earlier
-approval covered the previous handoff. Specific approval has been requested.
-The remaining gate is a fresh current core build, 125 direct plus 216 framed
-refusal controls, and the 448-instance native parity matrix. These results are
-unexercised; older helpers or the local-only matrix supply no replacement credit.
-The [pending native stage](../../.agents/plans/amd64-operation-coverage.md#native-amd-address-size-qualification-pending-approval)
-records the exact payload and commands.
+approval covered the previous handoff. At that checkpoint a fresh core build,
+125 direct plus 216 framed controls and 448 native parity instances remained
+unexercised. The later [local helper-build migration](#1012-helper-build-migration-v1-and-renewed-finite-qualification)
+now passes these gates without a source transfer. The [historical handoff proposal](../../.agents/plans/amd64-operation-coverage.md#native-amd-address-size-qualification-pending-approval)
+preserves the original payload and commands.
 
 ### 10.8 Expanded source-to-consumer bindings: C3/C4
 
@@ -975,3 +977,357 @@ and five-volume region checks, both actual BAP/Rust binding campaigns, Rust
 layout and documentation links. The Rust suite and mutation counts in the
 preceding paragraph belong to the recorded v15 source campaign; this
 continuation reruns the two affected Rust binding observers.
+
+### 10.10 Resumed source review and validation
+
+2026-10-23: execution resumes from stopped commit `43588f9`. The
+[P0–P4/N execution ledger](../../.agents/plans/amd64-operation-coverage.md#resumed-source-review-and-local-native-checks)
+owns the next steps. This continuation changes validation tooling, reviewed
+table inputs and the root dependency lock; production projection semantics are
+unchanged.
+
+The obligation checker optionally calls the authority validator with
+`--authority-source-dir`. It computes bounded corrections from freshly
+reproduced publisher inputs on every extraction/check, requires exactly the
+seven immutable conflict IDs and binds the validator and reviewed inputs.
+Serialized adjudication reports cannot replace replay. Corpus adoption,
+constraint completeness and P1 completion remain separate false fields.
+Source-proof checks now reject cross-publication relations, displaced operand
+continuations, foreign headers and detached VEX exception/length premises.
+
+Visual table sampling found that Vol4 PDF350→351 contains separately complete
+VMOVDQU8 and VMOVDQU16 tables. A bounded structural rule checks all twelve
+explicit rows, including mnemonic, operands, W field, vector length and
+load/store opcode. Sixty additional actual geometry cells support the small
+regression fixture. The 33 reviewed relations now comprise 26 local-row series
+and seven independent tables, with no inherited encoding cells. Twenty-one
+obligation controls and fifteen authority controls pass; these input-level
+checks do not replace the full pinned reconstruction below.
+All 33 decisions were also checked against fresh host-extracted full Vol3/4
+page cells, matching 984/248 reviewed cell identities. That review reuses the
+small table/row metadata and 117 historical excerpt records; it does not replay
+all 2,657 historical gaps or qualify the pinned extraction runtime. Twenty
+rendered pages were sampled for table boundaries, separately from the eleven
+conflict/authority pages reviewed below.
+
+Independent visual review covers all five old conflict locations and their
+publisher correction/map/rule pages. Official Vol4 r3.27 and Vol5 r3.16 downloads
+match the separate authority-input hashes, while Vol3 matches its existing pin.
+The review corroborates the seven proposed bounded corrections. The exact
+source-corpus runtime is unavailable here: its Poppler 26.01, MuPDF 1.27,
+Python 3.14.4 and native-library identities differ from the available tools.
+Consequently the final pinned authority replay and full source-ledger
+extraction/check remain unexercised. Rendering or extracting selected pages with
+the available tools supplies independent review only.
+
+The MOV8 producer parser rejects boolean or floating-point batch/count fields,
+missing/extra frames and wrong ready identities. The finite domain enumerates
+640 register-byte points; reconciliation of the full pinned XED inventory
+retains 10,994 records, 10,569 long-mode candidates, 425 mode exclusions, two
+partial relations and zero complete bindings. These checks do not replay the
+source clauses. Existing v2/v3 and MOV8 implementation identities remain stale;
+the available BAP/LLVM helper binaries do not match their pins, and fresh v2/v3
+binding checks reject the source drift. No registry is resealed without its
+fresh source/BAP/oracle/Rust campaign.
+
+The local BAP SDK and source archive are available and pass their inventory
+check, superseding the stopped host's missing-SDK prerequisite. A fresh core
+build passes its fourteen-source and seventeen-field SDK/compiler/model/engine
+audit, plus 125 direct and 216 framed refusal controls. Two independent local
+REP-address producer builds agree with one another but differ from the
+unchanged v15 manifest/executable pins. The available advanced producer also
+differs from its pin. Parity and compatibility tests fail at pin admission,
+before semantic comparison; the 448-instance native matrix and named
+compatibility clauses remain unexercised. N remains incomplete. No private
+source transfer occurred.
+
+The root lock's MirrorRust package version is corrected from `0.1.0` to `1.0.0`
+to match the actual dependency and existing verified snapshots; all other
+locked packages are unchanged. Root validation uses the read-only I5b snapshot
+with manifest SHA256
+`a087ecfb136795d30f6c3861d9e4003f0ed9f457db2b17561f0417551bf97854`.
+Default Rust tests pass 472 with 160 ignored; core-only tests pass 64 with 22
+ignored. Strict all-feature/all-target Clippy and formatting pass. Ignored
+native tests supply no qualification credit. All 399 tooling controls and 145
+BAP Python controls pass, including the 35 constraint/domain/reconciliation/
+MOV8 checks. Rust layout and documentation navigation remain root checks.
+
+The next required step is recovering the exact extraction and producer
+artifacts, or preparing a separately reviewed versioned migration. Then replay
+the full source/authority ledger, freeze the implementation, refresh the three
+binding campaigns and complete native parity/compatibility. Wider P2–P8 source,
+domain, architecture and consumer exits remain open. Maintained files contain
+code, reviewed decisions and small actual-input fixtures; all generated review,
+build and test products remain ignored under `target/`.
+
+### 10.11 Pinned tool recovery and current-source replay
+
+2026-10-23: the user approved recovery of the exact missing tools. Official
+Ubuntu packages restore the existing PDF-runtime pins without changing any
+executable or lock. The isolated root is `target/rep-pdf-tools/root`; a scoped
+read-only loader mount leaves installed system tools intact. All three tools,
+71 unique shared-library identities and 89 per-tool dependency entries match.
+
+| Recovered package group | Exact package version |
+| --- | --- |
+| Poppler utilities and library | `26.01.0-2ubuntu0.3` |
+| MuPDF tools and library | `1.27.0+ds1-3ubuntu2` |
+| Python | `3.14.4-1ubuntu0.2` |
+| glibc | `2.43-2ubuntu2.4` |
+| zlib | `1:1.3.dfsg+really1.3.1-1ubuntu3.1` |
+
+The current zlib update differs from the pin; the preceding official package
+supplies the exact required bytes. The ignored recovery manifest records the
+effective 129 packages, their official URLs and archive hashes. The runtime
+can be checked with the recovered launcher:
+
+```sh
+python3 target/tool-recovery/source-replay/run_pinned.py target/tool-recovery/pdf/check_runtime.py
+```
+
+The fresh source campaign runs five-volume `reproduce`/`check-products
+--require-all`, all three instruction-volume geometry extraction/checks,
+five-volume region checks, and integrated authority/obligation extraction plus
+an independent reconstruction check. All thirteen campaign stages pass.
+Every original gap object, ordinal and stable ID is verified against its
+immutable baseline: 159 Vol3, 1,987 Vol4 and 511 Vol5 records, 2,657 total.
+Region accounting covers all 4,128 pages and eleven required clauses.
+
+The full ledger now computes seven bounded publisher adjudications for the
+five issues and checks all 33 relations: 26 local-row series and seven
+independent tables. Original conflict transcriptions and disposition records
+remain intact. Its content SHA256 is
+`1f58249f67ba7ed6ba79d3c6ba6fdbbb8088165ce544bcd9bfed8d08ecd2e78c`.
+Forty-one unresolved graph nodes remain: corpus authority/adoption, extension
+scope and unparsed constraint regions. P1, C2 and full legal-domain completion
+remain false. These fresh results supersede the initial resume's unavailable
+pinned-source replay; they do not promote the whole source-coverage program.
+
+The MOV8 source pack also passes fresh replay of 292 anchors and nine typed
+clauses against the recovered Vol3 geometry. Official archive recovery finds
+the exact LLVM 20.1.2 library. Full v2/v3/MOV8 binding claims still require
+the separately pinned BAP/LLVM executable helpers and new observations.
+
+All three advanced, LODS and REP-address producer bundles are recovered exactly.
+Each manifest and executable matches its unchanged maintained runtime lock.
+The historical SDK digest is independently recorded in an older native-helper
+manifest. That digest plus the unchanged source/compiler bindings reconstructs
+the exact producer manifests and derived build IDs. The available SDK's C++
+disassembly stub was built with Chromium Clang 24 and GCC 14 headers; first
+reproducing that object establishes the source/flag recipe. Recompiling the
+unchanged source with official Ubuntu Clang 20.1.2 and explicit GCC 13 headers
+reconstructs the required static stub. A child-only read-only library overlay
+then produces all three exact executable hashes.
+
+The recovered bundles are under
+`target/tool-recovery/producers/{advanced,lods,rep-address}-clang20-gcc13/runtime`.
+Independent review verifies all six artifact hashes, sixteen maintained source
+bindings, upstream/patched modules, build IDs and compiler/archive/SDK-lock
+identities. The physical SDK remains unchanged and passes its inventory check.
+The original complete SDK manifest and compiler/header environment are not
+recovered; exact producer bytes establish artifact identity without claiming
+whole historical SDK recovery or independent ISA correctness.
+
+Generated packages, runtime files, manifests, build attempts, native test
+outputs and source outputs remain ignored. The helper-build migration below
+resolves the two executable prerequisites through separately reviewed current
+builds; their old binary identities were not recovered.
+
+### 10.12 Helper-build migration v1 and renewed finite qualification
+
+**Migration `ariadne.helper-build-migration/v1`, 2026-10-23.** The approved
+recovery found the exact PDF tools, LLVM library and three source-producer
+bundles. The original two helper executable hashes could not be reproduced
+from the evidenced build recipes or found among 1,764 cached ELF candidates.
+Current-source replacements therefore receive an explicit versioned review
+and fresh qualification before promotion. This is a helper-build migration,
+not recovery of the two historical executable files.
+
+| Helper | Previous SHA256 | Adopted SHA256 |
+| --- | --- | --- |
+| BAP transport helper | `8080fa65e7a3d6521289e277570a2666520983858fa9b8c247fbe3f470fe3615` | `6d910bf619f6ece729e85e857b60d7a22953bb633a4a43ffd99c5a5919ecc1cf` |
+| LLVM MC helper | `ef0556c1b567fe0764139a57d4bad52c97d89e6a61c272e249c9a5e1d394f774` | `56a0ace11986a3f49250bc82079d40fddd383730e892a6a18891a05051dd2973` |
+
+The [previous registry inputs](https://github.com/NzSN/Ariadne/tree/43588f9ed3659cd9a726328b3729b4cbcbe3f79a/tests/bap/fixtures/amd64-semantics)
+retain the historical identities and source bindings at immutable revision
+`43588f9ed3659cd9a726328b3729b4cbcbe3f79a`. The active v2/v3/MOV8 registries
+change only these two helper identities and current implementation-source
+hashes. Legal domains, source clauses, contracts, consumer profiles,
+disposition partitions, BAP runtime and advanced/LODS/REP-address locks are
+unchanged. Basic v9's immutable lock is unchanged and its separate historical
+producer-compatibility limitation remains.
+
+The replacement BAP helper is built from current `native/bap/lift.cpp` with
+the existing pinned packaged runtime. The replacement LLVM helper is built
+from current `native/llvm_mc/decode.cpp`, GCC 13 and LLVM 20.1.2 headers, linked
+to the recovered library SHA256
+`3fdd6ebc0b2b54d89e0a69e14d10403e0826fc3b6a7af742684a76ee5c6d23a0`.
+Loaded-library identities are recorded and rechecked. The default ignored
+LLVM helper is backed up before installing the qualified executable; the
+default BAP helper already has the qualified bytes.
+
+Qualification first uses three read-only registry overlays, a separate Cargo
+build directory and the verified read-only I5b MirrorRust snapshot. Independent
+review checks source closures, unchanged contract fields, artifact hashes,
+observation seals and before/after stability. All eight binding campaign steps
+and 35 negative controls pass:
+
+- v2 checks 24 points, three fresh supported BAP/Rust observations and 720
+  numeric comparisons. Three points remain supported and 21 unsupported;
+  `--require-implementation` correctly exits 3.
+- v3 checks 56 AMD points and 111 fresh observations. Supported counts remain
+  3/24/28/56 for v12/v13/v14/v15; the latest profile completes this finite
+  plain-dependency domain. All 10,569 full symbolic candidate bindings remain
+  open.
+- MOV8 checks 640 points, 1,280 fresh BAP/LLVM observations across both target
+  labels, 10,240 numeric cases and the Rust byte-origin observer. Finite
+  projection is checked; native-consumer and full implementation completeness
+  remain false.
+
+The final native campaign uses the same selected helper builds, exact recovered
+producers, audited current native core and recorded loaded-library identities.
+All six named release-profile tests pass: both producer transports, 448
+native/Rust v15 parity instances, v12 saved-capture roundtrip/tampering, and
+advanced composition positive/tampering compatibility. Every original test
+case, assertion and work limit is retained. The earlier debug diagnostic using
+the stale LLVM helper was interrupted and receives no aggregate passing credit.
+The current helper and fourteen native sources remain unchanged from the 341
+passing refusal controls; the seventeen-field identity audit passes again.
+This closes N's finite gate for the selected migrated helper environment.
+
+After qualification and independent review, the three tested registry inputs
+are promoted byte-for-byte. Previous input/default-helper bytes are backed up
+under ignored `target/tool-recovery/helper-candidate-v1/promotion-v1/previous/`.
+The original candidate reports retain their pre-promotion scope. Current
+filesystem checks against the freshly qualified observations verify the
+promoted inputs separately; no candidate result is relabeled as validation
+under the old helper identities.
+All 399 tooling and 145 BAP Python controls pass after promotion, alongside
+formatting, Rust layout and documentation-link checks. Default/core-only Rust
+and strict Clippy results from section 10.10 retain the same Rust source; the
+three binding observers and six native release tests are additionally fresh.
+
+The qualified LLVM library directory must be selected when executing native
+checks:
+
+```sh
+export LD_LIBRARY_PATH="$PWD/target/tool-recovery/helpers/llvm20-plucky/usr/lib/x86_64-linux-gnu"
+export ARIADNE_BAP_CORE_DIR="$PWD/target/resume-native-v15/core"
+export ARIADNE_BAP_ADVANCED_SOURCE_EXTENSION="$PWD/target/tool-recovery/producers/advanced-clang20-gcc13/runtime"
+export ARIADNE_BAP_LODS_SOURCE_EXTENSION="$PWD/target/tool-recovery/producers/lods-clang20-gcc13/runtime"
+export ARIADNE_BAP_REP_ADDRESS_SOURCE_EXTENSION="$PWD/target/tool-recovery/producers/rep-address-clang20-gcc13/runtime"
+cargo test --offline --locked --release --lib native_amd_address_memory_rep_recipe_matrix_preserves_roots_effects_and_origins -- --ignored --test-threads=1
+```
+
+These finite results do not complete corpus adoption, global constraint
+parsing, full legal-domain reconciliation, broader REP consumers, MOV8 native
+consumer qualification or full AMD64 coverage. The next execution stages are
+the remaining P0–P8 obligations in the linked plan.
+
+### 10.13 Constraint and MOV8 continuation stopped for publication
+
+**2026-10-24: stopped at the user's request.** The
+[execution boundary](../../.agents/plans/amd64-operation-coverage.md#continuation-stopped-for-publication-2026-10-24)
+preserves completed campaigns and an unapplied per-form source-rule mapping
+requirement. No further implementation, resealing or qualification follows the
+stop; publication records the tested source and its remaining limitations.
+
+The additive [corpus migration checker](../../tools/amd64_corpus_migration.py)
+reproduces five predecessor PDFs and two publisher replacements. Eleven
+comparison dimensions retain PDF identities, every raw line and word box,
+recursive outlines, page regions, entries, rows, constraint references, gaps and
+scope deltas. Exact historical IDs, ordinals and objects are preserved for all
+2,657 gaps. Sixteen controls cover duplicate occurrences, source movement,
+line-ending preservation, missing/resealed products, symlinks and false adoption.
+Fresh extraction and independent reconstruction both pass.
+
+| Replacement | Pages | Instruction entries | Legacy rows |
+| --- | --- | --- | --- |
+| Vol4 r3.26 → r3.27 | 1,761 → 1,973 | 679 → 779 | 2,818 → 3,224 |
+| Vol5 r3.16, different publisher bytes | 368 → 368 | 160 → 160 | 263 → 263 |
+
+Vol4 adds 105 titles and removes five, including renamed sections. All new
+pages and entries remain in the candidate. Vol5's unchanged normalized rows
+and 1,177 selected constraint references do not hide its raw representation
+differences or public-use versus confidential/NDA markings. The candidate
+retains 115 review obligations and is not adopted. Publisher identity and
+representation comparison do not establish complete semantics or scope review.
+
+The [architectural constraint pack](../../tests/bap/fixtures/amd64-semantics/architecture-constraints-v1.json)
+adds 24 typed clauses and 1,118 exact Vol1/Vol3 anchors for prefix, size, REX,
+ModRM, SIB, displacement and address arithmetic rules. Twenty-six references
+have explicit states: sixteen source locations resolved, ten applicability or
+source-scope questions unresolved. Footnote qualifiers and the prefix-table
+scope discrepancy stay visible. All 516 unparsed selected cells remain
+obligations. Seventeen constraint and 25 ledger controls pass, with fresh source
+replay, visual sampling and independent rule review.
+
+The full source ledger now integrates those clauses/references/cells plus an
+optional publisher-candidate branch with 115 conditional review obligations.
+The original 41 foundation obligations remain. All 2,657 historical records,
+seven bounded adjudications and 33 checked table relations remain intact.
+Fresh extraction/check passes with content SHA256
+`5de99d9ae5254fc6a5f7cb6e45c77589084f4da7ea41207dc24b2d439713e1bd`.
+Its 683 unresolved graph nodes combine different obligation kinds; that count
+is neither an instruction denominator nor a coverage percentage. P1/C2,
+global authority/adoption, constraint and legal-domain completeness remain false.
+
+The additive memory-domain schema in [amd64_domains.py](../../tools/amd64_domains.py)
+enumerates dependent ModRM/SIB/displacement tails. Its reviewed slice has
+5,760 points: opcodes 88/8A, address-64 or canonical 67 address-32, no REX or
+W=0 REX 40–47, selected register/SIB fields and signed displacement boundary
+values. It includes IP-relative and no-base forms, REX extension/alias rules,
+consumed length and address wrapping. Other field values, prefixes and outcomes
+remain explicitly outside this finite selection. The legacy register grammar
+is unchanged. Independent domain construction, address decoding, source-rule
+checks and native LLVM observations reject narrowed or substituted domains.
+
+The [memory binding checker](../../tools/amd64_memory_bindings.py) obtains 11,520
+fresh BAP/LLVM observations across both target labels. All 2,880 address-64
+points are supported for the selected plain-dependency contract; all 2,880
+address-32 points remain unsupported by the existing prefix policy. There are
+6,280 numerically matching observations and 5,240 mismatches, with 57,184
+executed numeric scenarios including counterexample discovery. The 520 matching
+address-32 observations do not grant admission. The Rust observer checks effects,
+byte origins and prefix refusals. Memory native-consumer validation remains
+false. Two XED relations remain partial; all 10,569 whole candidate domains stay
+open.
+
+The separate [register-MOV8 native checker](../../tools/check_amd64_mov8_native.py)
+executes four exact named release tests afresh; it refuses saved-pass inputs,
+zero/ignored/wrong tests, changed counters, stale sources/tools and changed test
+binaries. Its successful stopped-source run binds 755 source files, the active
+sealed MirrorRust view, current inputs/helpers and actual linked libraries.
+The gate exercises 640 encodings across Windows/Linux target labels: 1,280
+instruction instances in twenty synthetic minidump/native-analysis batches,
+with independent expected byte origins and full native/Rust state equality.
+There are 24 host refusals and 120 direct native structural refusals. The native
+capture boundary still trusts reader-normalized semantics; this does not add
+native independent decoding or ISA validation.
+
+The [address-size regression](../../tests/bap/mov8_address_size_guard.rs)
+reproduces six wrong BAP address-32 lifts and checks 78 profile refusals and
+eighteen stopped instances in six native queries. Existing admission rejects
+these forms before precise addresses, target transfers or refinement receipts
+are produced. These remain stop barriers, with conservative origins and empty
+definite writes. No production rule was changed or substituted with LLVM
+semantics. Register native qualification is a separate assessment; the earlier
+v4 projection check keeps its original projection-only native flag.
+
+All four registries were resealed with fresh source/BAP/oracle/Rust campaigns;
+twelve final campaign steps pass, including expected incomplete-gate exits and
+89 focused controls. Default Rust tests pass 473/164 ignored; strict Clippy,
+formatting, layout, 459 tooling tests and 145 BAP Python tests pass. The core-only
+suite was not rerun during this continuation. Generated observations, PDF
+products, candidate corpora, test binaries and reports remain ignored under
+`target/coverage-20261024/`.
+
+**Unfinished review requirement.** The memory forms bind and replay the full
+architecture pack, but their explicit `sourceRules` lists have not yet added
+`prefix-group-order`, `legacy-prefix-byte-groups`, `rex-placement-count`,
+`instruction-length-limit` and `operand-size-override`. The requested mapping
+adjustment was not applied before the stop. Completed campaigns cover the
+preserved pre-adjustment source; they do not close that requirement. After a
+new resume instruction, make and review the mapping change, then refresh its
+affected source seals and campaigns before progressing to remaining scope,
+constraint, domain, consumer and instruction-family work.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Strict finite byte domains; no dependent-field or SMT completeness claim.
+"""Strict finite byte domains with a bounded dependent address grammar.
 
 The generic enumerator establishes only the domain written in its input. The
 separate reviewed MOV8 validator prevents a narrowed grammar from becoming a
@@ -14,6 +14,7 @@ import re
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA = "ariadne.amd64-finite-domain/v4"
+MEMORY_SCHEMA = "ariadne.amd64-finite-domain/v5"
 MOV8_SCOPE = "amd-long64-canonical-mov8-register/v1"
 PACK_PATH = "tests/bap/fixtures/amd64-semantics/mov8-domain/source-constraints.json"
 DOMAIN_PATH = "tests/bap/fixtures/amd64-semantics/mov8-domain/legal-domain.json"
@@ -21,6 +22,18 @@ MOV8_ENVIRONMENT = {"vendor": "AMD", "mode": 64, "operandBits": 8, "addressBits"
 MOV8_FORMS = {"mov8-register-88": "88", "mov8-register-8a": "8a"}
 MOV8_EXCLUSIONS = ["memory-operands", "other-opcodes", "legacy-prefixes", "repeated-prefixes",
                    "rex-w-or-x-set", "non-amd-or-non-long64", "exceptional-or-interrupted-outcomes"]
+MEMORY_SCOPE = "amd-long64-bounded-mov8-memory/v1"
+ARCHITECTURE_PACK_PATH = "tests/bap/fixtures/amd64-semantics/architecture-constraints-v1.json"
+MEMORY_FORMS = {"mov8-memory-store-88": "88", "mov8-memory-load-8a": "8a"}
+MEMORY_RULES = {"address-size-override", "address-size-truncation", "modrm-fields",
+    "modrm-memory-displacements", "sib-presence", "sib-fields-scale", "sib-address-equation",
+    "rex-register-extension", "rex-index-extension", "rex-base-extension", "rex-high-byte-exclusion",
+    "rip-relative-selector", "rip-relative-next-ip", "sib-base5-no-base", "sib-index4-no-index",
+    "signed-displacement", "flat-data-segments"}
+MEMORY_EXCLUSIONS = ["register-direct-operands", "other-opcodes", "noncanonical-or-repeated-prefixes",
+    "legacy-prefixes-other-than-single-address-override", "rex-w-set", "other-modrm-register-or-rm-fields",
+    "other-sib-fields", "other-displacement-values", "non-amd-or-non-long64",
+    "nonzero-ds-or-ss-base", "exceptional-or-interrupted-outcomes"]
 
 
 class DomainUnknown(ValueError):
@@ -91,12 +104,47 @@ def _values(values, bits):
     return values
 
 
-def _node(node, names, budget):
+def _address_node(node, budget):
+    """Emit complete memory addressing tails for the explicitly selected fields."""
+    fields(node, {"kind", "name", "mod", "reg", "rm", "sib", "displacements"}, "dependent address")
+    mods, regs, rms = _values(node["mod"], 2), _values(node["reg"], 3), _values(node["rm"], 3)
+    require(set(mods) <= {0, 1, 2}, "dependent address node excludes register-direct operands")
+    fields(node["sib"], {"scale", "index", "base"}, "dependent SIB")
+    scales, indices, bases = (_values(node["sib"][name], bits)
+                              for name, bits in (("scale", 2), ("index", 3), ("base", 3)))
+    fields(node["displacements"], {"8", "32"}, "dependent displacements")
+    for width in (8, 32):
+        values = node["displacements"][str(width)]
+        require(isinstance(values, list) and values and all(type(value) is int
+                and -(1 << (width - 1)) <= value < (1 << (width - 1)) for value in values)
+                and len(set(values)) == len(values), "signed displacement values")
+    result = []
+    for mod, reg, rm in itertools.product(mods, regs, rms):
+        sibs = [None] if rm != 4 else list(itertools.product(scales, indices, bases))
+        for sib in sibs:
+            width = 8 if mod == 1 else 32 if mod == 2 or mod == 0 and (
+                rm == 5 or sib is not None and sib[2] == 5) else 0
+            displacements = node["displacements"][str(width)] if width else [0]
+            for displacement in displacements:
+                budget.consume()
+                prefix = bytes([(mod << 6) | (reg << 3) | rm])
+                if sib is not None:
+                    prefix += bytes([(sib[0] << 6) | (sib[1] << 3) | sib[2]])
+                result.append(prefix + (displacement.to_bytes(width // 8, "little", signed=True) if width else b""))
+    return result
+
+
+def _node(node, names, budget, *, dependent=False):
     require(isinstance(node, dict) and isinstance(node.get("kind"), str), "domain node")
     kind = node["kind"]
     if kind == "literal":
         fields(node, {"kind", "bytes"}, "literal")
         return [_bytes(node["bytes"])]
+    if kind == "modrm-sib-displacement" and dependent:
+        require(isinstance(node.get("name"), str) and node["name"] and node["name"] not in names,
+                "duplicate/invalid field name")
+        names.add(node["name"])
+        return _address_node(node, budget)
     if kind not in {"byte-fields", "uint-le"}:
         raise DomainUnknown("unsupported finite domain node: " + kind)
     require(isinstance(node.get("name"), str) and node["name"] and node["name"] not in names, "duplicate/invalid field name")
@@ -151,8 +199,9 @@ def _environments(axes, predicate, budget):
 
 def enumerate_domain(document, *, budget=100000):
     """Return complete sorted points or raise; never return a truncated domain."""
-    fields(document, {"schema", "scope", "sourcePack", "forms"}, "finite domain")
-    require(document["schema"] == SCHEMA, "finite domain schema")
+    require(isinstance(document, dict) and document.get("schema") in {SCHEMA, MEMORY_SCHEMA}, "finite domain schema")
+    dependent = document["schema"] == MEMORY_SCHEMA
+    fields(document, {"schema", "scope", "sourcePacks" if dependent else "sourcePack", "forms"}, "finite domain")
     scope = document["scope"]
     fields(scope, {"id", "environmentAxes", "prefixPolicy", "outcome", "exclusions", "sourceComplete", "vendorFullDenominator"}, "scope")
     require(isinstance(scope["id"], str) and scope["id"] and scope["sourceComplete"] is False
@@ -161,9 +210,13 @@ def enumerate_domain(document, *, budget=100000):
             and isinstance(scope["outcome"], str) and scope["outcome"]
             and isinstance(scope["exclusions"], list) and all(isinstance(value, str) and value for value in scope["exclusions"])
             and len(set(scope["exclusions"])) == len(scope["exclusions"]), "scope prefix/outcome/exclusion declarations")
-    fields(document["sourcePack"], {"path", "sha256"}, "source-pack identity")
-    require(isinstance(document["sourcePack"]["path"], str) and bool(document["sourcePack"]["path"])
-            and re.fullmatch(r"[0-9a-f]{64}", document["sourcePack"]["sha256"] or ""), "source-pack digest")
+    packs = document["sourcePacks"] if dependent else [document["sourcePack"]]
+    require(isinstance(packs, list) and packs, "source-pack identities")
+    for pack in packs:
+        fields(pack, {"path", "sha256"}, "source-pack identity")
+        require(isinstance(pack["path"], str) and bool(pack["path"])
+                and isinstance(pack["sha256"], str) and re.fullmatch(r"[0-9a-f]{64}", pack["sha256"]), "source-pack digest")
+    require(len({pack["path"] for pack in packs}) == len(packs), "duplicate source pack")
     require(isinstance(document["forms"], list) and document["forms"], "empty finite legal domain")
     work, identities, seen, result = Budget(budget), set(), set(), []
     for form in document["forms"]:
@@ -179,7 +232,7 @@ def enumerate_domain(document, *, budget=100000):
             require(isinstance(alternative["sequence"], list) and alternative["sequence"], "empty byte sequence")
             names, parts, product = set(), [], 1
             for node in alternative["sequence"]:
-                values = _node(node, names, work)
+                values = _node(node, names, work, dependent=dependent)
                 parts.append(values)
                 product *= len(values)
             envs = _environments(scope["environmentAxes"], alternative["environment"], work)
@@ -244,6 +297,120 @@ def decode_mov8_expectation(code):
                 flags="unchanged", memory="none", nonDestinationBits="preserved")
 
 
+def memory_mov8_scope():
+    return dict(id=MEMORY_SCOPE, environmentAxes={"vendor": ["AMD"], "mode": [64],
+        "operandBits": [8], "addressBits": [32, 64], "segmentModel": ["flat-ds-ss"]},
+        prefixPolicy="optional-67-then-optional-single-rex-w0", outcome="normal-completion",
+        exclusions=MEMORY_EXCLUSIONS, sourceComplete=False, vendorFullDenominator=False)
+
+
+def memory_mov8_points():
+    """Independent complete denominator for this selected field-value slice.
+
+    The 5,760 members do not exhaust register fields, SIB fields or displacement
+    values. This direct construction does not consume the supplied grammar.
+    """
+    result = []
+    for address_bits, rex, (form, opcode), reg, mod, rm in itertools.product(
+            (32, 64), (None, *range(0x40, 0x48)), MEMORY_FORMS.items(), (0, 4), (0, 1, 2), (0, 4, 5)):
+        for sib in ([None] if rm != 4 else (0x00, 0x05, 0x20, 0x25, 0xc0, 0xc5, 0xe0, 0xe5)):
+            width = 1 if mod == 1 else 4 if mod == 2 or mod == 0 and (
+                rm == 5 or sib is not None and sib & 7 == 5) else 0
+            displacements = (-128, 0, 127) if width == 1 else (-2147483648, 0, 2147483647) if width == 4 else (0,)
+            for displacement in displacements:
+                code = (b"\x67" if address_bits == 32 else b"") + (bytes([rex]) if rex is not None else b"")
+                code += bytes([int(opcode, 16), mod * 64 + reg * 8 + rm])
+                if sib is not None:
+                    code += bytes([sib])
+                if width:
+                    code += displacement.to_bytes(width, "little", signed=True)
+                result.append(dict(form=form, bytes=code.hex(), environment=dict(vendor="AMD", mode=64,
+                    operandBits=8, addressBits=address_bits, segmentModel="flat-ds-ss")))
+    return sorted(result, key=lambda point: (point["bytes"], canonical(point["environment"]), point["form"]))
+
+
+def validate_memory_mov8_domain(document, *, root=ROOT, budget=100000):
+    from amd64_source_constraints import validate_pack_structure, validate_architecture_pack_structure
+    root = Path(root)
+    expected_packs = [{"path": name, "sha256": sha(root / name)}
+                      for name in (PACK_PATH, ARCHITECTURE_PACK_PATH)]
+    require(document.get("schema") == MEMORY_SCHEMA and document.get("sourcePacks") == expected_packs,
+            "stale memory MOV8 source packs")
+    instruction = read(root / PACK_PATH)
+    architecture = read(root / ARCHITECTURE_PACK_PATH)
+    validate_pack_structure(instruction, root=root)
+    validate_architecture_pack_structure(architecture, root=root)
+    require(MEMORY_RULES <= {clause["id"] for clause in architecture["clauses"]},
+            "memory MOV8 architectural rule reference is unresolved")
+    require(canonical(document["scope"]) == canonical(memory_mov8_scope()), "memory MOV8 reviewed scope differs")
+    require(len(document["forms"]) == 2 and {form["id"] for form in document["forms"]} == set(MEMORY_FORMS),
+            "memory MOV8 form omission/duplication")
+    for form in document["forms"]:
+        opcode = MEMORY_FORMS[form["id"]]
+        rules = MEMORY_RULES | {"mov8-direction-" + opcode, "mov-copy-width", "register-code-map",
+                                "byte-register-alias-preservation", "flags-unmodified"}
+        require(form["meaning"] == "mov8-memory-" + ("store" if opcode == "88" else "load")
+                and set(form["sourceRules"]) == rules, "memory MOV8 source derivation differs")
+    points = enumerate_domain(document, budget=budget)
+    require(points == memory_mov8_points(), "memory MOV8 finite selection omission/extra/overlap")
+    return points
+
+
+def decode_memory_mov8(code):
+    """Independent membership/address decoder for the bounded memory slice.
+
+    A rejection means outside this finite selection, not architectural invalidity.
+    RIP/EIP bases are resolved from the exact instruction VA and consumed length.
+    """
+    raw = _bytes(code)
+    cursor, address_bits = (1, 32) if raw[0] == 0x67 else (0, 64)
+    require(cursor < len(raw), "truncated memory MOV8 prefix")
+    rex = raw[cursor] if 0x40 <= raw[cursor] <= 0x47 else None
+    cursor += rex is not None
+    require(cursor + 2 <= len(raw), "truncated memory MOV8 opcode/ModRM")
+    opcode, modrm = raw[cursor:cursor + 2]
+    cursor += 2
+    mod, reg, rm = modrm >> 6, (modrm >> 3) & 7, modrm & 7
+    require(opcode in {0x88, 0x8a} and mod in {0, 1, 2} and reg in {0, 4} and rm in {0, 4, 5},
+            "outside finite memory MOV8 opcode/ModRM selection")
+    sib = None
+    if rm == 4:
+        require(cursor < len(raw), "missing dependent SIB")
+        sib = raw[cursor]
+        cursor += 1
+        require(sib >> 6 in {0, 3} and (sib >> 3) & 7 in {0, 4} and sib & 7 in {0, 5},
+                "outside finite memory MOV8 SIB selection")
+    width = 1 if mod == 1 else 4 if mod == 2 or mod == 0 and (rm == 5 or sib is not None and sib & 7 == 5) else 0
+    require(len(raw) == cursor + width, "memory MOV8 dependent displacement/consumed extent")
+    displacement = int.from_bytes(raw[cursor:], "little", signed=True) if width else 0
+    require(not width or displacement in ((-128, 0, 127) if width == 1 else (-2147483648, 0, 2147483647)),
+            "outside finite memory MOV8 displacement selection")
+    extension = rex or 0
+    data_bank = reg + (8 if extension & 4 else 0)
+    data_offset = 0
+    if rex is None and reg == 4:
+        data_bank, data_offset = 0, 1
+    ip_relative = mod == 0 and rm == 5
+    no_base = sib is not None and mod == 0 and sib & 7 == 5
+    base = None if ip_relative or no_base else ((sib & 7) if sib is not None else rm) + (8 if extension & 1 else 0)
+    index_field = (sib >> 3) & 7 if sib is not None else None
+    index = None if index_field is None or index_field == 4 and not extension & 2 else index_field + (8 if extension & 2 else 0)
+    return dict(operation="store" if opcode == 0x88 else "load", dataBank=data_bank, dataByte=data_offset,
+        addressBits=address_bits, base=base, index=index, ipRelative=ip_relative, noBase=no_base,
+        scale=1 << (sib >> 6) if sib is not None else 1, displacement=displacement,
+        displacementBytes=width, consumedLength=len(raw), flags="unchanged", segmentModel="flat-ds-ss")
+
+
+def memory_mov8_address(decoded, registers, va):
+    """EA = truncate(base + index * scale + signed displacement), then zero extend."""
+    require(type(va) is int and 0 <= va < 1 << 64 and len(registers) == 16
+            and all(type(value) is int and 0 <= value < 1 << 64 for value in registers), "address input values")
+    base = va + decoded["consumedLength"] if decoded["ipRelative"] else (
+        registers[decoded["base"]] if decoded["base"] is not None else 0)
+    index = registers[decoded["index"]] if decoded["index"] is not None else 0
+    return (base + index * decoded["scale"] + decoded["displacement"]) & ((1 << decoded["addressBits"]) - 1)
+
+
 def validate_partitions(points, partitions):
     """Check disjoint S/U/X accounting separately from implementation evidence."""
     require(isinstance(partitions, list), "partitions must be a list")
@@ -273,7 +440,9 @@ def main():
     parser.add_argument("--budget", type=int, default=100000)
     args = parser.parse_args()
     try:
-        points = validate_mov8_domain(read(args.domain), budget=args.budget)
+        document = read(args.domain)
+        validator = validate_memory_mov8_domain if document.get("schema") == MEMORY_SCHEMA else validate_mov8_domain
+        points = validator(document, budget=args.budget)
     except DomainUnknown as error:
         print(canonical(dict(status="unknown", reason=str(error), fullAmd64Coverage=False)))
         return 1

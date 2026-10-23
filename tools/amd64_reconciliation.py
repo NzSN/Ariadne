@@ -9,8 +9,9 @@ import argparse
 from pathlib import Path
 
 import amd64_inventory as inventory_tool
-from amd64_domains import (ROOT, MOV8_FORMS, canonical, digest, fields, read, require,
-                           sha, validate_mov8_domain)
+from amd64_domains import (ROOT, MOV8_FORMS, MEMORY_FORMS, MEMORY_SCHEMA, canonical, digest,
+                           fields, read, require, sha, validate_mov8_domain,
+                           validate_memory_mov8_domain, decode_memory_mov8)
 from run_output import run_output
 
 SCHEMA = "ariadne.amd64-template-relations/v1"
@@ -28,13 +29,28 @@ OPERANDS = {
     "mov8-register-88": "REG0=GPR8_B():w REG1=GPR8_R():r",
     "mov8-register-8a": "REG0=GPR8_R():w REG1=GPR8_B():r",
 }
+MEMORY_CANDIDATES = {
+    "mov8-memory-store-88": "xed:0dbf63812e034614081608a43038fa54efc2448bc96770c3bb38a4c7c2d4644c:1",
+    "mov8-memory-load-8a": "xed:f44bf67b38fc1f2fafc876a5db2d02394a2e22ed808f94b860723e1603c72f11:1",
+}
+MEMORY_PATTERNS = {name: f"0x{opcode.upper()} MOD[mm] MOD!=3 REG[rrr] RM[nnn] MODRM()"
+                   for name, opcode in MEMORY_FORMS.items()}
+MEMORY_OPERANDS = {"mov8-memory-store-88": "MEM0:w:b REG0=GPR8_R():r",
+                   "mov8-memory-load-8a": "REG0=GPR8_R():w MEM0:r:b"}
 
 
 def validate_relation_claims(document, points, relations, xed, *, root=ROOT):
     """Validate the finite relationships; caller separately pins full XED input."""
-    fields(relations, {"schema", "domainSha256", "sourcePackSha256", "xedLockSha256", "xedRecordsSha256", "relations", "sourceOnlyObligations"}, "template relations")
-    require(relations["schema"] == SCHEMA and relations["domainSha256"] == digest(document)
-            and relations["sourcePackSha256"] == document["sourcePack"]["sha256"]
+    memory = document.get("schema") == MEMORY_SCHEMA
+    source_key = "sourcePacksSha256" if memory else "sourcePackSha256"
+    source_digest = digest(document["sourcePacks"]) if memory else document["sourcePack"]["sha256"]
+    form_opcodes = MEMORY_FORMS if memory else MOV8_FORMS
+    candidate_ids = MEMORY_CANDIDATES if memory else MOV8_CANDIDATES
+    patterns, operands = (MEMORY_PATTERNS, MEMORY_OPERANDS) if memory else (PATTERNS, OPERANDS)
+    fields(relations, {"schema", "domainSha256", source_key, "xedLockSha256", "xedRecordsSha256", "relations", "sourceOnlyObligations"}, "template relations")
+    require(relations["schema"] == ("ariadne.amd64-template-relations/v2" if memory else SCHEMA)
+            and relations["domainSha256"] == digest(document)
+            and relations[source_key] == source_digest
             and relations["xedLockSha256"] == sha(Path(root) / XED_LOCK)
             and relations["xedRecordsSha256"] == xed["recordsSha256"], "stale source/domain/XED relations")
     require(isinstance(relations["relations"], list) and isinstance(relations["sourceOnlyObligations"], list), "relation arrays")
@@ -47,17 +63,23 @@ def validate_relation_claims(document, points, relations, xed, *, root=ROOT):
         name, candidate = relation["form"], relation["candidate"]
         require(isinstance(relation["id"], str) and relation["id"] and relation["id"] not in seen, "duplicate relation identity")
         seen.add(relation["id"])
-        require(name in forms and name not in covered and candidate in candidates and candidate == MOV8_CANDIDATES.get(name), "orphan/duplicate/wrong MOV8 relation")
+        require(name in forms and name not in covered and candidate in candidates and candidate == candidate_ids.get(name), "orphan/duplicate/wrong MOV8 relation")
         require(relation["kind"] == "partial-finite-domain" and relation["completeTemplateDomain"] is False
                 and relation["candidateRemainder"] == "unresolved"
-                and relation["sourceRule"] == "mov8-direction-" + MOV8_FORMS[name]
+                and relation["sourceRule"] == "mov8-direction-" + form_opcodes[name]
                 and relation["sourceRule"] in forms[name]["sourceRules"], "finite witness cannot promote complete symbolic domain")
         row = candidates[candidate]
-        require(64 in row["modeDomain"] and row["source"]["pattern"] == PATTERNS[name]
-                and row["source"]["operands"] == OPERANDS[name], "candidate opcode/ModRM/operand direction differs")
+        require(64 in row["modeDomain"] and row["source"]["pattern"] == patterns[name]
+                and row["source"]["operands"] == operands[name], "candidate opcode/ModRM/operand direction differs")
         selected = [point for point in points if point["form"] == name]
         require(bool(selected), "empty related finite domain")
         for point in selected:
+            if memory:
+                decoded = decode_memory_mov8(point["bytes"])
+                require(decoded["operation"] == ("store" if form_opcodes[name] == "88" else "load")
+                        and decoded["addressBits"] == point["environment"]["addressBits"],
+                        "finite memory point differs from related candidate")
+                continue
             code = bytes.fromhex(point["bytes"])
             require(len(code) in {2, 3} and code[-2] == int(MOV8_FORMS[name], 16)
                     and code[-1] & 0xc0 == 0xc0 and (len(code) == 2 or code[0] in {0x40, 0x41, 0x44, 0x45}),
@@ -100,22 +122,27 @@ def reconciliation_report(document, points, relations, xed, *, root=ROOT):
             sourceOnlyObligation=source_only.get(name), unmatchedTemplateProducerDecoderObligation=not bool(matches),
             producerConsumerBindingEstablished=False,
             remainingObligations=["producer-consumer-binding", "whole-symbolic-domain-reconciliation"]))
-    return dict(schema=WORKLIST, inputs=dict(domainSha256=digest(document), relationsSha256=digest(relations),
-        xedRecordsSha256=xed["recordsSha256"], sourcePackSha256=document["sourcePack"]["sha256"]),
+    memory = document.get("schema") == MEMORY_SCHEMA
+    identities = dict(domainSha256=digest(document), relationsSha256=digest(relations), xedRecordsSha256=xed["recordsSha256"])
+    identities.update({"sourcePacksSha256": digest(document["sourcePacks"])} if memory else
+                      {"sourcePackSha256": document["sourcePack"]["sha256"]})
+    return dict(schema="ariadne.amd64-domain-reconciliation/v2" if memory else WORKLIST, inputs=identities,
         counts=dict(symbolicTemplates=len(xed["records"]), longModeCandidates=len(candidate_rows),
                     modeExcluded=len(mode_excluded), finiteLegalForms=len(source_rows), finitePoints=len(points),
                     partialCandidateRelations=len(links), sourceOnlyObligations=len(source_only),
                     candidateFullDomainBindings=0, remainingCandidateFullDomains=len(candidate_rows)),
         candidateWorklist=candidate_rows, sourceFormWorklist=source_rows, modeExclusions=mode_excluded,
         sourceComplete=False, vendorFullDenominator=False, fullDomainReconciliation=False, fullAmd64Coverage=False,
-        proofMethod="exact finite membership in two explicitly reviewed XED patterns; no SMT or complete XED-prefix translation",
+        proofMethod=("exact finite membership in two explicitly reviewed XED patterns; no SMT or complete XED-prefix/address/displacement translation"
+                     if memory else "exact finite membership in two explicitly reviewed XED patterns; no SMT or complete XED-prefix translation"),
         absenceMeaning="No matching relation leaves a source obligation; incomplete manual domains never prove a candidate invalid.")
 
 
 def reconcile(document, relations, xed, *, root=ROOT, budget=100000):
     root = Path(root)
     inventory_tool.validate_inventory(xed, inventory_tool.load_lock(root / XED_LOCK))
-    points = validate_mov8_domain(document, root=root, budget=budget)
+    validator = validate_memory_mov8_domain if document.get("schema") == MEMORY_SCHEMA else validate_mov8_domain
+    points = validator(document, root=root, budget=budget)
     return reconciliation_report(document, points, relations, xed, root=root)
 
 

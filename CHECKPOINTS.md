@@ -22,6 +22,174 @@ For the wider context, see the optional [documentation map](docs/documentation-m
 Current validation follows the [executable test matrix](tests/README.md). Dated run
 results below are historical; their Git links do not establish a current pass.
 
+## 2026-10-24 — AMD64 constraint and MOV8 continuation stopped for publication
+
+**Status: stopped at the user's request; completed work and the unfinished
+review requirement are preserved for commit and push.** All worker campaigns
+are stopped. The [canonical continuation record](docs/Ariadne/amd64-coverage-design.md#1013-constraint-and-mov8-continuation-stopped-for-publication)
+and [execution plan](.agents/plans/amd64-operation-coverage.md#continuation-stopped-for-publication-2026-10-24)
+define this boundary. Full AMD64 coverage remains incomplete.
+
+- P1 adds executable publisher-corpus comparison across eleven dimensions.
+  Fresh extraction and independent replay cover five predecessor PDFs and two
+  replacements; all 2,657 historical gap IDs, ordinals and objects are preserved.
+  Volume 4 expands from 1,761 to 1,973 pages and 679 to 779 instruction entries
+  (105 added/five removed titles). Volume 5 keeps its legacy rows and selected
+  constraint references but has different raw representations and source-status
+  markings. The candidate retains 115 review obligations and is not adopted.
+  Sixteen controls pass, including source/output omissions and forged adoption.
+- P2 adds 24 typed architectural clauses with 1,118 anchors and 26 references:
+  sixteen source locations resolved, ten applicability/scope references open.
+  All 516 unparsed selected cells remain visible. The full integrated ledger
+  passes extraction/check with all historical records and seven adjudications,
+  plus an optional publisher-candidate branch. Its 683 unresolved nodes are
+  graph obligations, not an instruction count or coverage percentage. P1/C2,
+  corpus adoption, complete constraints and full legal-domain flags remain false.
+- P3/P4 adds a bounded dependent ModRM/SIB/displacement grammar and a separate
+  5,760-point memory-MOV8 domain. Fresh BAP/LLVM observations cover both target
+  labels: 2,880 address-64 points are supported and 2,880 address-32 points stay
+  refused by the existing prefix policy. Numeric probes expose 5,240 address-32
+  mismatching observations; the 520 matching address-32 observations do not
+  override that refusal. All address-64 observations pass their numeric checks.
+  The independent Rust observer and full-source binding checks pass. Memory-MOV8
+  native-consumer validation and complete symbolic-domain bindings remain open.
+- The separate register-MOV8 native gate passes four exact named release tests:
+  640 encodings across two targets, 1,280 instruction instances in twenty
+  synthetic minidump/native-analysis batches, independent byte-origin checks,
+  24 host and 120 native structural refusals. Six actual bad address-32 lifts
+  remain behind existing guards across 78 profile refusals and eighteen stopped
+  instances. No production behavior or LLVM semantic fallback was introduced.
+  The fresh checker binds source/tool/input identities and the executed test
+  binary; its current stopped-source assessment passes.
+- All four binding registries were resealed only with fresh source/BAP/oracle/
+  Rust campaigns. Twelve final steps pass, including expected incomplete-gate
+  exits and 89 focused controls. Default Rust tests pass 473/164 ignored;
+  all-feature/all-target Clippy, formatting, layout, 459 tooling tests and 145
+  BAP Python tests pass. No new core-only run was completed in this continuation;
+  its earlier result retains its own scope.
+
+**Unfinished at stop:** the requested five additional per-form source-rule
+links (`prefix-group-order`, `legacy-prefix-byte-groups`, `rex-placement-count`,
+`instruction-length-limit`, `operand-size-override`) were not applied. Those
+facts already belong to the bound architecture pack, but the explicit form
+dependency mapping remains a review requirement. No reseal or rerun after that
+proposed change occurred. The completed campaigns qualify the preserved
+pre-adjustment sources; they do not satisfy this outstanding mapping requirement.
+
+**Resume only after a new instruction.** Apply and review the missing mapping,
+then refresh its affected ledger/binding/native source seals and campaigns.
+Continue corpus adoption/scope, unparsed constraints, wider domains, consumer
+and implementation stages afterward. Generated products stay under ignored
+`target/coverage-20261024/`; maintained files contain code, small actual inputs,
+reviewed constraints and executable tests.
+
+## 2026-10-23 — Pinned tool recovery and current-source replay
+
+**Status: tools restored; helper-build migration v1 adopted and finite gates pass.**
+The user approved recovery of the artifacts missing from the preceding resume.
+The [canonical recovery record](docs/Ariadne/amd64-coverage-design.md#1011-pinned-tool-recovery-and-current-source-replay)
+gives package versions and scope; the [execution plan](.agents/plans/amd64-operation-coverage.md#resumed-source-review-and-local-native-checks)
+retains the remaining binding/native exits.
+
+- Official packages reproduce all three pinned PDF tools, 71 unique shared
+  libraries and 89 per-tool dependency entries. A scoped launcher uses the
+  recovered read-only root; installed system binaries and maintained pins are
+  unchanged. The prior PDF-runtime prerequisite is resolved.
+- Thirteen fresh campaign stages pass: five-volume reproduction/check, three
+  full geometry extraction/checks, five-volume region checks and integrated
+  authority/obligation extraction plus independent reconstruction. All 2,657
+  original gap objects, ordinals and stable IDs are preserved. The corpus has
+  4,128 pages and eleven required region clauses.
+- Seven conflict records receive checked bounded adjudications across five
+  source issues; all 33 table relations pass as 26 local-row series and seven
+  independent tables. The immutable raw conflicts remain visible. Forty-one
+  unresolved graph nodes retain corpus authority/adoption, extension-scope and
+  constraint work; P1/C2/full legal-domain completion remain false.
+- MOV8 source replay verifies all 292 anchors and nine typed clauses. The exact
+  LLVM 20.1.2 library is recovered from the official archive. All three advanced,
+  LODS and REP-address producer manifests/executables now match their unchanged
+  pins. Isolated reconstruction restores the original Clang 20/GCC 13
+  disassembly stub; independent review verifies all six artifact hashes and
+  source bindings. The physical SDK is unchanged. Its complete historical
+  manifest remains unrecovered, so this is exact producer-artifact recovery.
+  The two historical BAP/LLVM helper binaries remain unrecovered. The
+  [versioned helper-build migration v1](docs/Ariadne/amd64-coverage-design.md#1012-helper-build-migration-v1-and-renewed-finite-qualification)
+  qualifies and promotes current-source replacements, retaining old identities
+  at immutable `43588f9` and backups under ignored work. Semantic profiles,
+  domains, BAP runtime and all three producer locks are unchanged.
+- Fresh v2/v3/MOV8 source/BAP/oracle/Rust campaigns pass with those helper
+  builds. v2 retains 3 supported/21 unsupported points; v3 checks 56 AMD points
+  and 111 observations, with v15 covering its finite domain. MOV8 checks 640
+  points, 1,280 BAP/LLVM observations and 10,240 numeric cases, while its native
+  consumer remains unqualified. Independent review verifies source closures,
+  unchanged contracts and before/after identities. The three tested registries
+  are promoted byte-for-byte; normal-filesystem checks without overlays and 83
+  affected controls pass afterward.
+- The final native release suite passes all six named tests, including 448
+  native/Rust parity instances, v12 saved-capture roundtrip/tampering and
+  advanced composition positive/tampering compatibility. The same audited
+  current core retains all 341 passing refusal controls, fourteen source
+  hashes and seventeen SDK/compiler/model/engine identity fields. Helpers,
+  loaded libraries and recovered producers are verified stable. N's finite
+  gate passes for this migrated environment. The earlier debug diagnostic
+  under the stale LLVM helper was interrupted and receives no aggregate pass.
+
+Recovery and campaign products are ignored under `target/tool-recovery/` and
+`target/rep-pdf-tools/`. No generated result replaces an executable gate.
+The tool prerequisite boundary is closed for this environment. Corpus
+adoption, constraint completeness, broader domains/consumers and full AMD64
+coverage remain open; all 10,569 full symbolic candidate bindings remain open.
+
+## 2026-10-23 — AMD64 source review and native refusal checks resumed
+
+**Status: resumed from `43588f9`; validation improvements delivered, full
+source/binding/native gates remain incomplete.** The user's new resume
+instruction supersedes the stop below. The [canonical record](docs/Ariadne/amd64-coverage-design.md#1010-resumed-source-review-and-validation)
+and [execution ledger](.agents/plans/amd64-operation-coverage.md#resumed-source-review-and-local-native-checks)
+describe the changes and next executable boundary.
+
+- P0/P1 now integrates fresh authority replay into obligation extraction/check.
+  Corrections require exactly the seven immutable conflict IDs; saved pass
+  reports cannot replace publisher-source replay. Proof checks reject foreign
+  publications, misplaced cells, headers and detached VEX premises. Independent
+  visual review corroborates all five source issues. Fresh official Vol4 r3.27
+  and Vol5 r3.16 PDFs match the separate authority inputs; old corpus locks
+  remain unchanged and corpus migration/adoption remain open.
+- Table review corrects Vol4 PDF350→351: complete VMOVDQU8 and VMOVDQU16 tables
+  are independent, with all twelve explicit rows checked. Reviewed source
+  decisions now contain 26 complete-local-row series and seven independent
+  tables. Small actual geometry inputs and rejection controls preserve every
+  historical gap and table identity. The full pinned source reconstruction is
+  still required before promoting this result to final-source qualification.
+- P2/P3 retains the 640-point MOV8 domain, 10,994 XED records, 10,569 long-mode
+  candidate obligations, 425 mode exclusions and two partial relations. P4
+  rejects noninteger batch/count fields, missing/extra frames and wrong ready
+  identities. Zero complete candidate bindings remain. v2/v3 binding checks
+  correctly reject stale sources; v2/v3/MOV8 pins were not resealed.
+- The compatible SDK is available on this host. A fresh local native core
+  passes fourteen source checks, seventeen SDK/compiler/model/engine identity
+  checks and all 341 refusal controls (125 direct, 216 framed). Two independent
+  REP producer builds agree but differ from the existing pin; available
+  advanced/BAP/LLVM artifacts also differ from their required pins. Native
+  parity and compatibility attempts fail before semantic comparison. The 448
+  required parity instances remain unexercised; N remains incomplete. No
+  private-source handoff occurred.
+- Root validation passes 472 default Rust tests/160 ignored, 64 core-only/22
+  ignored, all-feature/all-target Clippy and formatting. All 399 tooling and
+  145 BAP Python tests pass. The root lock changes only MirrorRust's package
+  version from `0.1.0` to the actual `1.0.0`; tests use the verified read-only
+  I5b snapshot, preserving sibling edits. Native tests and unavailable source
+  campaigns are not credited by these portable results.
+
+**Next:** recover the pinned Poppler 26.01/MuPDF 1.27/Python 3.14.4 and native
+library closure plus exact producer/reference artifacts, or prepare a separately
+reviewed versioned migration. Reproduce the corpus, finish authority/ledger
+extraction/check, freeze sources, refresh v2/v3/MOV8 with fresh
+source/BAP/oracle/Rust observations, then complete native parity/compatibility.
+Do not promote visual review, stale bindings or a refusal-only pass into these
+gates. Broader P0–P8/N remains incomplete. Generated PDFs, review output,
+builds and diagnostics remain ignored under `target/`.
+
 ## 2026-10-23 — Remaining AMD64 plan execution stopped at user request
 
 **Status: stopped; work in progress is preserved for commit and push.** The

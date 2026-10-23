@@ -3,6 +3,9 @@
 ## Context and follow-up
 
 **Status.** Current delivery direction; dated qualifications remain scoped.
+The [2026-10-24 AMD64 continuation](CHECKPOINTS.md#2026-10-24--amd64-constraint-and-mov8-continuation-stopped-for-publication)
+is stopped at the user's request for publication, with one per-form source-rule
+mapping requirement unfinished. Resume implementation only after a new instruction.
 
 **Why this document exists.** [Project overview](README.md) sets the snapshot-based crash-investigation goal.
 
@@ -107,10 +110,23 @@ accounts for all 2,657 historical manual gaps (zero unassigned, seven explicit
 source-conflict records), while broader source constraints remain unparsed. It adds
 a 56-point AMD memory-REP binding registry and separately selected v13/v14/v15
 profiles. The R1 source boundary passed 416 native parity instances and 259
-refusal controls. The AMD-specific v15 address-size successor passes local
-producer, binding and 448-instance capture checks; its new native handoff is
-awaiting specific approval. Source completeness, broader REP consumers and
-full AMD64 coverage remain open.
+refusal controls. The AMD-specific v15 address-size successor has dated local
+producer, binding and 448-instance capture checks. The [current resume](docs/Ariadne/amd64-coverage-design.md#1010-resumed-source-review-and-validation)
+integrates bounded source adjudications, tightens MOV8 validation and passes
+341 refusal controls with a fresh local native core. The [approved tool recovery](docs/Ariadne/amd64-coverage-design.md#1011-pinned-tool-recovery-and-current-source-replay)
+restores exact PDF extraction and source producers, and passes full
+source/authority replay. A [reviewed helper-build migration](docs/Ariadne/amd64-coverage-design.md#1012-helper-build-migration-v1-and-renewed-finite-qualification)
+qualifies the two rebuilt executables, refreshes v2/v3/MOV8 bindings and passes
+448 native v15 parity instances plus compatibility checks. Source completeness, broader
+REP consumers and full AMD64 coverage remain open.
+
+The [stopped 2026-10-24 continuation](docs/Ariadne/amd64-coverage-design.md#1013-constraint-and-mov8-continuation-stopped-for-publication)
+adds an unadopted publisher-corpus comparison, 24 typed architectural clauses,
+a 5,760-point dependent memory-MOV8 domain and separate register-MOV8 native
+qualification. It preserves 115 candidate-migration reviews, unresolved source
+references/cells and 2,880 unsupported address-32 memory points. Fresh campaigns
+pass for the stopped sources; the requested five-rule mapping adjustment and
+its subsequent reseals/reruns remain unperformed.
 
 Current validation follows the [executable test matrix](tests/README.md). Dated run
 results below are historical; their Git links do not establish a current pass.

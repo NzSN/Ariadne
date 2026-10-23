@@ -10,18 +10,17 @@ import amd64_source_authority as authority
 
 def fixture():
     manifest = json.loads(authority.INPUT.read_text())
-    cells, records, checked = {}, [], {}
+    # The old cells/records come from the separately maintained geometry
+    # excerpt, rather than being manufactured from the expected adjudication.
+    bundle = json.loads((authority.ROOT / "tests/bap/fixtures/source-obligations/source-bundle-excerpt.json").read_text())
+    old = bundle["geometries"][manifest["oldSource"]["publication"]]
+    document = next(row for row in bundle["corpusLock"]["documents"] if row["publication"] == old["publication"])
+    old["revision"] = document["revision"]
+    checked = {}
     for issue in manifest["issues"]:
-        cells.update({cell["id"]: copy.deepcopy(cell) for cell in issue["oldCells"]})
-        for expected in issue["oldRecords"]:
-            records.append(dict(oldGapId=expected["oldGapId"], ordinal=expected["ordinal"],
-                originalGap=copy.deepcopy(expected["originalGap"]), disposition="source-conflict",
-                cells=[cell["id"] for cell in issue["oldCells"]],
-                evidence=dict(headCells=expected["headCells"][:], encodingCells=expected["encodingCells"][:])))
         for references in issue["anchors"].values():
             for reference in references:
                 checked.setdefault(reference["source"], {})[reference["cell"]["id"]] = copy.deepcopy(reference["cell"])
-    old = dict(manifest["oldSource"], content=dict(sourceCells=list(cells.values()), oldGapDispositions=records))
     return manifest, {old["publication"]: old}, checked
 
 
@@ -123,6 +122,56 @@ class SourceAuthorityControls(unittest.TestCase):
             with self.subTest(role=role), self.assertRaises(ValueError):
                 authority._adjudicate(manifest, old, checked)
 
+    def test_field_constraints_require_same_section_and_contiguous_field_and_rule(self):
+        for role, index, attack in (("newField", 1, "page"), ("newField", 1, "column"),
+                                   ("newField", 1, "baseline"), ("newFieldHeader", 0, "page"),
+                                   ("exceptionHeading", 1, "page"), ("exceptionHeading", 1, "baseline"),
+                                   ("lengthRule", 1, "page"), ("lengthRule", 1, "baseline")):
+            manifest, old, checked = fixture()
+            issue = next(item for item in manifest["issues"] if item["id"] == "vpmovzxwd-vex-field")
+            reference = issue["anchors"][role][index]
+            cell = reference["cell"]
+            if attack == "page":
+                cell["pdfPage"] += 1
+            elif attack == "column":
+                cell["rect"][0] = 530
+                cell["rect"][2] = 550
+            else:
+                cell["rect"][1] += 300
+                cell["rect"][3] += 300
+            checked[reference["source"]][cell["id"]] = copy.deepcopy(cell)
+            with self.subTest(role=role, attack=attack), self.assertRaises(ValueError):
+                authority._adjudicate(manifest, old, checked)
+
+    def test_corrected_revision_requires_local_operand_and_support(self):
+        for issue_id, role, attack in (("vaddpd-evex128-operand", "newOperand", "column"),
+                                       ("sha256msg2-mnemonic", "newSupport", "page"),
+                                       ("sha256msg2-mnemonic", "newSupport", "baseline")):
+            manifest, old, checked = fixture()
+            def change(cell):
+                if attack == "page":
+                    cell["pdfPage"] += 1
+                else:
+                    axis = 0 if attack == "column" else 1
+                    cell["rect"][axis] += 400
+                    cell["rect"][axis + 2] += 400
+            damage_anchor(manifest, checked, issue_id, role, change)
+            with self.subTest(issue=issue_id, role=role), self.assertRaises(ValueError):
+                authority._adjudicate(manifest, old, checked)
+
+    def test_source_relations_cannot_join_cells_from_different_publications(self):
+        for issue_id, role in (("vaddpd-evex128-operand", "newOperand"),
+                               ("vpmovmskb-mnemonic", "mapPrefix"),
+                               ("vpmovzxwd-vex-field", "vvvvConstraint"),
+                               ("sha256msg2-mnemonic", "newOpcode")):
+            manifest, old, checked = fixture()
+            issue = next(item for item in manifest["issues"] if item["id"] == issue_id)
+            reference = issue["anchors"][role][0]
+            reference["source"] = "vol5-r3.16-official"
+            checked.setdefault(reference["source"], {})[reference["cell"]["id"]] = copy.deepcopy(reference["cell"])
+            with self.subTest(issue=issue_id, role=role), self.assertRaises(ValueError):
+                authority._adjudicate(manifest, old, checked)
+
     def test_unchanged_literals_and_authority_are_not_promoted_to_corpus_adoption(self):
         manifest, old, checked = fixture()
         result = authority._adjudicate(manifest, old, checked)
@@ -160,6 +209,11 @@ class SourceAuthorityControls(unittest.TestCase):
             (root / "link.pdf").symlink_to(root / "target.pdf")
             with self.assertRaises(ValueError):
                 authority._local(root, "link.pdf")
+
+    def test_replay_products_cannot_be_written_into_maintained_source(self):
+        manifest, old, _ = fixture()
+        with self.assertRaisesRegex(ValueError, "test output must be under target/"):
+            authority.validate_adjudications(old, dict(manifest=manifest, root=authority.INPUT.parent))
 
     def test_dependency_closure_binds_fixture_and_geometry_recovery(self):
         sources = authority.authority_sources()

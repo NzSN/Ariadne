@@ -2,11 +2,18 @@
 
 ## Context and follow-up
 
-**Current execution: stopped at the user's request, 2026-10-23.** The
-[stopped-work checkpoint](../../CHECKPOINTS.md#2026-10-23--remaining-amd64-plan-execution-stopped-at-user-request)
-records the preserved P0–P4 work, incomplete integration, stale binding hashes
-and unexercised native gate. Resume implementation only after a new instruction.
-The dated results below retain their original scopes.
+**Current execution: stopped at the user's request, 2026-10-24.** The
+[stopped checkpoint](../../CHECKPOINTS.md#2026-10-24--amd64-constraint-and-mov8-continuation-stopped-for-publication)
+records the tested continuation and the unapplied five-rule per-form mapping.
+All campaigns are stopped; resume implementation only after a new instruction.
+The previous recovery remains complete for its finite scope. The
+[recovery checkpoint](../../CHECKPOINTS.md#2026-10-23--pinned-tool-recovery-and-current-source-replay)
+records exact PDF/producer recovery, full source/authority replay and the
+reviewed helper-build migration v1. The [migration record](../../docs/Ariadne/amd64-coverage-design.md#1012-helper-build-migration-v1-and-renewed-finite-qualification)
+qualifies refreshed v2/v3/MOV8 bindings and N's finite native gate. Seven bounded
+adjudications and 33 checked table relations retain the wider source/constraint
+limits. The earlier resume,
+stopped entry and dated results retain their original scopes.
 
 **Status.** Resumed at the user's request on 2026-10-23 from the
 [stopped checkpoint](../../CHECKPOINTS.md#2026-10-22--amd64-items-13-stopped-at-user-request).
@@ -24,8 +31,9 @@ legal-domain/binding registries; their full C1–C4 exits remain open. S4/Q0 rem
 The [memory-string successors](../../docs/Ariadne/amd64-coverage-design.md#104-default-address-memory-rep-execution-r1)
 add finite v13/v14 plain dependency scopes with separate source and qualification
 gates; the R1 source boundary passes 416 native parity instances and 259 refusal
-controls. The AMD-specific v15 successor adds canonical address-32 forms and
-passes its local gates; its changed native payload is awaiting specific approval.
+controls. The AMD-specific v15 successor adds canonical address-32 forms. Its current
+finite native gate now passes locally with recovered producers and the reviewed
+helper-build migration; no private-source handoff was needed.
 Full coverage is the target, not an achieved result. Implementation proceeds on both
 machine-instruction semantics and Windows unwind operations. A representative
 family survey is not an exhaustive instruction-form inventory.
@@ -62,11 +70,15 @@ No unknown, unexercised or merely decoded operation counts as semantic coverage.
 
 ## Remaining coverage execution plan
 
-**Execution status: stopped; partial implementation is unqualified as a full
-delivery.** Consult the current checkpoint above before running the next stage.
-The source ledger and authority checker still need integration/final replay;
-the MOV8 source/binding closure must be resealed and re-exercised after source
-freeze. Preparing or stopping this work does not close P0–P8/N acceptance.
+**Execution status: stopped for publication; partial implementation is
+unqualified as a full delivery.** The 2026-10-24 continuation and its remaining
+mapping requirement are recorded below. The recovered pinned PDF runtime now passes full source-ledger and
+authority extraction/check. Table decisions and MOV8 framing have additional
+rejection controls. The reviewed helper-build migration now passes fresh
+source/BAP/oracle/Rust binding campaigns and N's native parity/compatibility
+gates. Broader source, domain and consumer completion remains open.
+The [resume record](#resumed-source-review-and-local-native-checks) separates
+completed checks from the remaining P0–P8/N exits.
 
 **Planning baseline: 2026-10-23, `08dcab92aabb1695c4f2b6748bb23f1ec822d72e`.**
 This continuation addresses the open instruction-coverage items from the
@@ -88,12 +100,12 @@ P0–P3 expose the complete constraint and implementation worklists.
 | Counter | Current state | What must change |
 | --- | --- | --- |
 | Historical extraction records | 2,657 assigned; zero unassigned | Preserve all original IDs and objects. This completed counter stays separate from source completeness. |
-| Source conflicts | Seven records representing five source issues | Add checked authoritative adjudications; identifying a conflict does not resolve it. |
-| Cross-page table relations | 33 unreviewed candidates: 25 Vol3, eight Vol4 | Decide continuation, independent table, or unresolved using actual source structure. These are not 33 confirmed broken tables. |
+| Source conflicts | Seven records/five issues have checked bounded publisher adjudications; original raw records remain preserved | Complete the separate corpus-identity/adoption and scope review. |
+| Cross-page table relations | All 33 checked: 26 local-row series and seven independent tables | Preserve the checked ownership and original identities while expanding constraint extraction. |
 | Source scope and constraints | Five documents/4,128 pages/eleven required region clauses accounted; constraints and supplementary scope incomplete | Establish authority, enumerate every selected constraint and resolve its references. Page counts alone cannot close this work. |
 | Full symbolic-domain bindings | 10,569 candidates; zero complete authoritative candidate bindings | Reconcile whole legal domains, retaining AMD forms absent from XED and justified exclusions. |
 | Finite memory-REP support | 56 AMD byte/environment points and 111 profile observations | Preserve this qualified finite domain while adding independently checked domains and consumer contracts. |
-| Current v15 native gate | Local gates passed; native handoff pending | Complete N with the current source, runtime and native helper. |
+| Current v15 native gate | Complete for the migrated finite environment: current core audit, 341 refusal controls, 448 parity instances and compatibility pass | Preserve these identities; wider domains/consumers retain separate P6/P7/P8 gates. |
 
 ### P0 — Baseline and obligations
 
@@ -112,8 +124,8 @@ constraints even when their containing text is classified as non-encoding.
 
 **Files.** Extend the existing source/geometry inputs. Proposed new files are
 `tools/amd64_source_obligations.py`, its tooling tests and reviewed decision
-inputs under `tests/bap/fixtures/amd64-semantics/`. These are planned files,
-not existing implementation. Keep generated ledgers and checker results under
+inputs under `tests/bap/fixtures/amd64-semantics/`. These files now exist;
+the final full-source extraction/check now passes after exact runtime recovery. Keep generated ledgers and checker results under
 ignored `target/`; maintain schemas, source-decision inputs and small fixtures.
 
 **Exit.** Every initial obligation has a stable ID, exact source references,
@@ -213,15 +225,16 @@ exclusion` or `unresolved` disposition. Absence from the current manual-derived
 domain is unresolved unless authoritative evidence establishes exclusion or
 invalidity. Missing source coverage cannot shrink the denominator.
 
-**First vertical slice.** Propose register-only byte MOV with opcodes 88/8A,
-ModRM.MOD=3 and no prefix or one REX from 40/41/44/45. The planned enumeration
-is 640 byte points: two opcodes × (64 no-REX + four × 64 REX combinations).
-Review Vol3 PDF282 source rows and prefix rules first. This exercises operand
-direction, extended registers, high-byte/REX low-byte aliases and partial writes
-through existing scalar state. It is a proposed finite slice, not an already
-qualified domain or a complete binding of either XED candidate. Preserve all
-other prefix regions as obligations. Follow with memory addressing and a
-source-reviewed feature-alias slice.
+**First vertical slice: source/projection qualified.** Register-only byte MOV
+with opcodes 88/8A, ModRM.MOD=3 and no prefix or one REX from 40/41/44/45
+has 640 byte points: two opcodes × (64 no-REX + four × 64 REX combinations).
+The reviewed Vol3 source pack checks 292 anchors/nine clauses. Fresh BAP/LLVM
+observations and the Rust byte-origin observer exercise operand direction,
+extended registers, high-byte/REX low-byte aliases and partial writes. Native
+consumer qualification remains a separate active gate. Neither XED candidate
+has a complete full-domain binding. Preserve all other prefix regions as
+obligations. The active successor adds dependent memory addressing; a
+source-reviewed feature-alias slice follows separately.
 
 **Exit.** Source/domain membership, complete reconciliation and overlap/alias
 rules pass independent checks across the declared scope. Domain narrowing,
@@ -258,13 +271,15 @@ implementation support and exercised validation separately.
 
 ### N — Current v15 native qualification
 
-Execute the [prepared native stage](#native-amd-address-size-qualification-pending-approval)
-in parallel once its existing source-handoff approval is obtained. The earlier
-automatic review rejected the changed 25-file payload; this plan does not
-change that recorded boundary. Revalidate the exact payload/current source,
-build a fresh core, audit fourteen native source hashes plus SDK/model/engine
-identities, and require 341 refusal controls, 448 native/Rust parity instances
-and the named compatibility regressions with the same helper.
+**Completed finite gate, 2026-10-23.** The [helper-build migration](../../docs/Ariadne/amd64-coverage-design.md#1012-helper-build-migration-v1-and-renewed-finite-qualification)
+uses exact recovered producers and separately reviewed current-source BAP/LLVM
+helper builds. A fresh local core passes fourteen native-source and seventeen
+SDK/compiler/model/engine identity checks, 341 refusal controls, 448 native/Rust
+parity instances and all named compatibility regressions. The final six-test
+suite uses release optimization with unchanged cases/assertions/work limits.
+The earlier [remote handoff proposal](#native-amd-address-size-qualification-pending-approval)
+retains its historical boundary; recovery supplied the local alternative and
+no private-source transfer occurred.
 
 **Exit.** Current-source native and local behavior match across the finite
 v15 domain, with final artifact/source stability checked. Close this baseline
@@ -362,14 +377,16 @@ establish a universal ISA or Rust proof.
 
 ### Delivery order, parallel work and checkpoints
 
-1. **Next delivery:** P0 ledger/schema and P1 review of all seven conflict
-   records/five issues plus 33 table relations. Recheck official Vol4/5 sources
-   in parallel; retain unresolved answers explicitly.
-2. **Following delivery:** P2 prefix/size/register constraint pack and the P3
-   byte-MOV pilot, each with exact source derivation and omission controls.
+1. **Current source delivery:** complete the remaining P0/P1 corpus-identity,
+   migration/adoption and extension-scope work. The ledger, seven bounded
+   adjudications and 33 table relations already pass their full source replay.
+2. **Current constraint/domain delivery:** broaden P2 prefix/size/register and
+   addressing constraints; follow the qualified register-byte MOV pilot with
+   dependent memory-address forms and its separate native-consumer gate.
    Finish general constraint/reconciliation coverage iteratively by family.
-3. **Next integration:** P4 general binding/report path, preserving old reports
-   and proving that partial pilots cannot increment complete candidate counts.
+3. **Current integration:** expand the P4 binding/report path while preserving
+   existing schemas and proving partial pilots cannot increment complete
+   candidate counts.
 4. **Parallel execution:** a source lane owns corpus/constraint tooling; a
    domain lane owns grammar/reconciliation/bindings; runtime lanes own producer,
    state, REP and consumers in disjoint modules. N uses an isolated native build.
@@ -383,6 +400,105 @@ establish a universal ISA or Rust proof.
 The plan can be reviewed and implemented in these bounded deliveries. Seven
 adjudicated conflicts or a passing 640-point pilot must never be reported as
 completion of the entire source or AMD64 domain.
+
+### Resumed source review and local native checks
+
+2026-10-23: resumed from `43588f9`; the [canonical validation record](../../docs/Ariadne/amd64-coverage-design.md#1010-resumed-source-review-and-validation)
+owns implementation details, source review and check results. The following
+bullets describe the initial resume boundary; approved recovery and migration
+below supersede its missing-tool and stale-binding clauses.
+
+- P0/P1 integration computes authority corrections afresh from publisher
+  PDFs, preserves all original conflict objects and refuses serialized pass
+  reports. Independent visual review corroborates all five source issues.
+  Full pinned replay and ledger extraction/check remain unavailable because
+  the exact Poppler/MuPDF/Python/native-library closure is missing.
+- Table review adds an explicit distinction between separately complete EVEX
+  element-width tables and local row series. These source decisions do not
+  establish complete architectural constraint parsing.
+- P2/P3 retains the 640-point MOV8 pilot and all 10,994 XED records, including
+  10,569 candidate obligations. P4 now rejects malformed numeric completion
+  fields and missing/extra producer frames. Zero complete candidate bindings
+  remain; v2/v3/MOV8 source identities have not been resealed.
+- The verified SDK on this host supports a fresh local native core build.
+  Fourteen source hashes and seventeen SDK/compiler/model/engine fields pass
+  audit, and all 341 refusal controls pass. Two reproduced REP-address bundles
+  agree with one another but differ from the original v15 pin; the available
+  advanced bundle also differs from its pin. Native parity and compatibility
+  tests stop at pin admission. N remains incomplete; no source transfer occurs.
+- The root lock corrects only MirrorRust package metadata to the actual
+  `1.0.0` source. The existing read-only I5b dependency snapshot supports
+  passing default/core-only Rust tests, strict Clippy and formatting. The
+  sibling checkout and its edits remain intact.
+
+**Approved recovery follow-up.** All three PDF executables and 71 unique
+libraries now match their existing pins. Thirteen fresh full-source campaign
+stages pass, preserving all 2,657 historical records and checking seven bounded
+adjudications plus all 33 table relations. The MOV8 source pack replays 292
+anchors/nine clauses. P1/C2/global source completeness remain false, with 41
+unresolved graph nodes; see the canonical recovery record above.
+
+**Helper-build migration v1 completed.** Exact advanced/LODS/REP-address
+producer manifests and executables are recovered. The two historical helper
+binaries remain unrecovered; current-source BAP/LLVM builds pass an explicitly
+versioned independent review and all three fresh binding campaigns. Old
+identities remain at immutable `43588f9` and in the canonical migration record.
+The tested registry inputs are promoted byte-for-byte and pass normal-filesystem
+checks afterward. Domains/contracts/profiles, BAP runtime and producer locks
+remain unchanged. N passes all 448 parity instances, named compatibility and
+341 refusal controls with the same audited core and migrated helper environment.
+
+**Next executable boundary.** Continue the unresolved corpus-adoption/scope and
+P2 constraint work, then widen the P3/P4 domain/consumer worklists. MOV8 native
+consumer validation, broader REP policies and P5–P8 implementation remain open.
+Finite source, binding and native results do not close full AMD64 coverage.
+
+### Continuation stopped for publication: 2026-10-24
+
+The user requested stopping current work, then committing and pushing. All
+workers and campaigns are stopped. The [canonical continuation record](../../docs/Ariadne/amd64-coverage-design.md#1013-constraint-and-mov8-continuation-stopped-for-publication)
+owns source/algorithm details, exact validation scopes and remaining limits.
+
+- P1: additive eleven-dimension comparison freshly reconstructs five old PDFs
+  and two publisher replacements, preserving all 2,657 historical gap identities.
+  Volume 4 adds 105/removes five titles; Volume 5 retains a source-status marking
+  conflict despite equal normalized rows. The candidate is unadopted, with 115
+  explicit migration-review obligations. Sixteen controls pass.
+- P2: 24 architectural clauses/1,118 anchors, 26 references (sixteen located,
+  ten unresolved) and 516 unparsed cells are integrated into the source ledger.
+  The optional publisher branch remains separate from mandatory corpus adoption.
+  Full ledger extraction/check passes; 17 constraint and 25 ledger controls pass.
+  P1/C2/global source completeness remain false.
+- P3/P4: a separate dependent ModRM/SIB/displacement grammar covers 5,760 selected
+  memory-MOV8 points. Fresh 11,520 BAP/LLVM observations and the Rust observer
+  pass the declared 2,880 supported address-64/2,880 refused address-32 partition.
+  Existing prefix barriers protect the discovered address-32 producer errors.
+  Memory native-consumer and whole-candidate domain coverage remain open.
+- Register-MOV8 native qualification passes four exact named release tests:
+  1,280 instruction instances in twenty minidump analysis batches, independent
+  byte-origin assertions, host/native boundary refusals and guarded bad-lift
+  regressions. The plain native consumer continues to trust reader-normalized
+  semantics; no independent native ISA validation is claimed.
+- All four registries have fresh source/BAP/oracle/Rust build/check campaigns.
+  The twelve final steps and source stability pass, including expected
+  incomplete-gate exits and 89 focused controls. Default Rust passes 473/164
+  ignored; strict Clippy, format/layout, 459 tooling and 145 BAP Python tests
+  pass. No new core-only run was completed during this continuation.
+
+**Unfinished at stop.** The five additional per-form dependency links
+`prefix-group-order`, `legacy-prefix-byte-groups`, `rex-placement-count`,
+`instruction-length-limit` and `operand-size-override` were requested but not
+applied. These facts already reside in the bound/replayed architecture pack;
+the explicit form mapping still needs review completion. No subsequent reseal
+or rerun occurred. Existing passing campaigns cover the preserved source and
+do not satisfy that pending requirement.
+
+**Next resume boundary.** Apply and review the mapping change, freeze its
+sources and refresh affected ledger/binding/native campaigns. Then continue
+corpus adoption/scope, remaining constraints, wider domains and implementation/
+consumer stages. Full AMD64 coverage remains open. Generated outputs stay
+ignored under `target/coverage-20261024/`; publication includes only code,
+reviewed inputs, small actual fixtures and documentation.
 
 ## Completion contract
 
@@ -444,10 +560,10 @@ operation-specific regressions at the baseline.
 | --- | --- | --- |
 | C0 | Link canonical contracts and define separate instruction/unwind coverage, gaps and compatibility. | Passed: linked contracts and plan navigation |
 | S0 | Executable family survey using actual instruction bytes; probe actual BAP lifting and Ariadne projection, preserve distinct outcomes and exact source/tool identities. | Passed finite survey: 49 families / 170 byte cases; not S1 completeness |
-| S1 | Expand S0 into a pinned exhaustive legal-form denominator across the declared AMD64 manuals/extensions; independent inventory completeness check. | Partial: five-volume candidate corpus, all 2,657 historical gap dispositions and 56-point AMD legal/binding registry; seven source-conflict records, source authority, constraints and full grammar remain open |
+| S1 | Expand S0 into a pinned exhaustive legal-form denominator across the declared AMD64 manuals/extensions; independent inventory completeness check. | Partial: five-volume candidate corpus, all 2,657 historical gap dispositions and 56-point AMD legal/binding registry; seven bounded source-conflict adjudications and all 33 table relations pass; corpus authority/adoption, constraints and full grammar remain open |
 | S2 | Close missing producer lifts in a reviewed BAP source build; pin and validate the replacement producer and retain existing semantic compatibility. | Partial: finite advanced/Basic candidate checks, frozen LODS producer and separate AMD address-size producer pass their scoped checks; Basic adoption, historical identity and other producer gaps remain open |
 | S3 | Extend typed transport, state banks/aliases and width handling for all required SIMD, mask, x87, control/system and extended registers. | Partial finite v10/v11 FP-control state and coarsened data projection; wider banks/widths remain pending |
-| S4 | Implement exact prefix distinctions and bounded loop summaries; preserve zero-iteration paths, conditional writes, faults and resource stops. | Partial: R1's 28 default-address tuples pass at their recorded native boundary; AMD v15 adds 28 canonical address-32 tuples with local gates passing. Current native v15, wider prefixes, proof consumers and partial faults remain open |
+| S4 | Implement exact prefix distinctions and bounded loop summaries; preserve zero-iteration paths, conditional writes, faults and resource stops. | Partial: R1's 28 default-address tuples pass at their recorded native boundary; AMD v15 adds 28 canonical address-32 tuples with local gates passing. Current finite v15 native qualification passes under helper-build migration v1; wider prefixes, proof consumers and partial faults remain open |
 | S5 | Implement and qualify remaining floating-point, system, exception and special-operation contracts with explicit mode/environment premises. | Pending |
 | U0 | Preserve old v1/v2 receipts and add a separate new replay profile with conventional opcode tests. | Passed finite v4 tests, preserving v1/v2/v3 replay |
 | U1 | Complete near/far saved-vector operations and validated saved-register ordering, bounds, alignment and budget behavior. | Passed selected synthetic and Windows reference cases |
@@ -455,7 +571,7 @@ operation-specific regressions at the baseline.
 | U3 | Implement handler/chained metadata and partial-prologue execution with bounded chain/cycle and frame-establishment checks. | Passed selected metadata-v1 cases; chained operation restrictions remain explicit |
 | U4 | Implement documented epilog suffixes and Windows metadata v2 descriptors, with independent reference comparison. | Implemented finite v1/v2 scope: 53 focused tests and 103 Windows comparisons pass; sparse capture and malformed terminal contexts have separate controls |
 | U5 | Implement Windows v3/APX descriptor and extended-context support as its own versioned profile; do not reinterpret earlier formats. | Pending: extended-context/canonical-frame layouts and working V3 reference not admitted |
-| Q0 | Current-source native rebuild, independent per-operation expectations, Rust/native parity where applicable, focused mutations and models, capture and root regression checks. | Partial: R1 records 416 native parity instances and 259 controls. Current v15 local gates and four compiled mutants pass; its fresh native handoff/parity/refusal gate is pending approval. Broader qualification remains open |
+| Q0 | Current-source native rebuild, independent per-operation expectations, Rust/native parity where applicable, focused mutations and models, capture and root regression checks. | Partial: R1 records 416 native parity instances and 259 controls. The current v15 helper-build migration passes 448 native parity instances, 341 refusal controls and compatibility. The earlier four compiled mutants retain their source scope; broader qualification remains open |
 | Q1 | Every legal inventory row supported and exercised; all stage exits complete; document exact operation/form denominator and remaining environmental premises. | Pending |
 
 Stages may run in parallel when their source ownership does not overlap.
@@ -851,18 +967,18 @@ remain separate under their existing owner.
 
 | Slice | Program stage | Concrete exit | Status |
 | --- | --- | --- | --- |
-| C1 — Source scope | S1 | Freeze vendor/publication/extension and mode scope; resolve official Vol4/5 identities or explicitly adopt a reviewed replacement corpus/toolchain. | Partial: candidate v2 reproduces all five volumes; fresh official V1–3 bytes match. V4/5 HTTP 404, reviewed adoption and extension/global-rule audits remain open. |
-| C2 — Transcription | S1 | Account for selected global rules/appendices and every source region; give each old gap a source-backed disposition with geometry/continuation/footnote ownership. | Historical backlog accounted: 2,657 source-backed dispositions, zero unassigned and seven explicit source-conflict records. All 4,128 pages/11 required region clauses accounted. C2 remains partial for source conflicts, diagram constraints, global rules, footnotes and continuation ownership. |
+| C1 — Source scope | S1 | Freeze vendor/publication/extension and mode scope; resolve official Vol4/5 identities or explicitly adopt a reviewed replacement corpus/toolchain. | Partial: candidate v2 reproduces all five volumes; fresh official V1–3 bytes match. Separate official V4r3.27/V5r3.16 inputs now support bounded adjudications; old-pin identity, reviewed adoption and extension/global-rule audits remain open. |
+| C2 — Transcription | S1 | Account for selected global rules/appendices and every source region; give each old gap a source-backed disposition with geometry/continuation/footnote ownership. | Historical backlog accounted: 2,657 source-backed dispositions, zero unassigned and seven explicit source-conflict records. All 4,128 pages/11 required region clauses accounted. Seven bounded adjudications and all 33 table relations now pass full source replay. C2 remains partial for corpus adoption, diagram constraints, global rules and footnotes. |
 | C3 — Legal domains | S1 | Reviewed legal-form grammar and bidirectional manual/XED dispositions, including AMD forms absent from XED and feature-dependent aliases. | Partial: v3 memory-REP domain enumerates 56 canonical AMD points from 516 source anchors. Vendor denominator, XED reconciliation and wider grammar remain open. |
 | C4 — Binding checker | S1/Q0 | Separate authoritative schema; checked domain totality, overlaps and dispatch; solver unknowns and unbound required domains remain open. | Partial: v3 validates 111 fresh profile observations; supported counts are 3/24/28/56 for v12–v15. v15 completes this finite plain-dependency domain; all 10,569 full symbolic-domain bindings remain open. |
 | R1 — Memory REP | S2/S4 | Review recipes and fresh BIL for the remaining default-address memory-string tuples; qualify a successor profile while freezing v12. The 28-tuple planning matrix is not an encoding denominator. | Complete for the finite 28-tuple scope: v13/v14 producer/oracle/transport gates, 416 native parity instances, 259 native refusal controls and compatibility regressions pass. Full encoding, fault and proof-consumer coverage remain separate. |
-| R2 — Address/prefix variants | S3/S4 | Source-backed address-size, segment and prefix domains with zero-count/upper-lane/width/wrap controls. | Partial implementation: AMD v15 covers 28 default and 28 canonical address-32 tuples; 178,080 oracle comparisons and 448 local capture instances pass. New native qualification awaits source-handoff approval; segment/redundant/reordered prefix domains remain open. |
+| R2 — Address/prefix variants | S3/S4 | Source-backed address-size, segment and prefix domains with zero-count/upper-lane/width/wrap controls. | Partial implementation: AMD v15 covers 28 default and 28 canonical address-32 tuples; 178,080 oracle comparisons and 448 local capture instances pass. Helper-build migration v1 now passes 448 native parity instances, 341 refusal controls and compatibility; segment/redundant/reordered prefix domains remain open. |
 | R3 — Proof consumers | S4/Q0 | Versioned guard/target/refinement/composition capabilities, outcome premises, direct/native replay and refusal controls for empty/all-null domains. | Proposed; open |
 | R4 — I/O and faults | S3/S5 | Explicit external I/O state, privilege and partial-completion/restart contracts with independent controls; no normal-only oracle substitution. | Proposed; open |
 | A1 — Architecture families | S2–S5 | Close producer/transport/state/projection/control/consumer gaps by legal-form domain, with implementation rules and independently exercised partitions. | Proposed; open |
 | Q1 — Scoped full coverage | Q1 | Required source/domain, implementation, consumer and current validation obligations all close for the frozen scope; proof/environmental limits remain stated. | Pending |
 
-Continue the remaining C1/C2 source audit and the pending R2 native gate. Keep missing legal
+Continue the remaining C1/C2 source audit and wider R2 domains after the qualified finite native gate. Keep missing legal
 authority distinct from a missing producer lift or an unavailable test runtime.
 Do not enable generic F2/F3/While admission or populate mnemonic-only bindings
 as a substitute for these exits. Source/tool migrations retain old locks and
@@ -1056,12 +1172,21 @@ boundary; the current v15 native policy needs the fresh gate below.
   Four optimized loop mutants are detected after passing unchanged controls;
   source restoration, observer identity and the frozen source inventory verify.
 
-### Native AMD address-size qualification: pending approval
+<a id="native-amd-address-size-qualification-pending-approval"></a>
 
-Automatic approval review rejected the changed v15 source/control payload,
-stating that prior approval covered the earlier handoff. Specific approval has
-been requested for the same isolated `win10` destination and native tests.
-Local qualification above is complete; the native gates remain unexercised.
+### Native AMD address-size qualification: finite gate completed
+
+**Completed local successor:** the [reviewed helper-build migration](../../docs/Ariadne/amd64-coverage-design.md#1012-helper-build-migration-v1-and-renewed-finite-qualification)
+closes the finite gate with current core identity audit, 341 refusal controls,
+448 native parity instances and named compatibility. The remote handoff below
+is the earlier unexecuted proposal, superseded by local recovery; no transfer
+was needed. Its historical approval discussion does not block this local gate.
+
+At the earlier checkpoint, automatic approval review rejected the changed v15
+source/control payload because prior approval covered the earlier handoff.
+Specific approval was requested for the isolated `win10` destination. The
+following procedure was pending then; the local successor above now supplies
+native qualification without executing that transfer.
 
 1. After approval, verify `target/rep-native-handoff/address-policy.tar.gz`
    SHA256 `ac080543a2951b6606e87d63d3085f6f5df9d2c829553182443b970cfdae2440`

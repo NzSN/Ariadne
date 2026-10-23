@@ -1,0 +1,70 @@
+{
+  "schema": "ariadne.amd64-corpus-migration-review-input/v1",
+  "predecessor": {
+    "path": "tests/bap/fixtures/amd64-semantics/source-corpus-v2.lock.json",
+    "sha256": "1cd2277043422b6c9619cf6ae6955ace72d0cf84bf3995dedc35bb729d06c828"
+  },
+  "publisherInputs": {
+    "path": "tests/bap/fixtures/source-authority/adjudications-v1.json",
+    "sha256": "492e589a16667632209e8b754444e143bc727036f58101f8236e5debc507fcc8"
+  },
+  "extentPolicy": "retain-every-publisher-page-and-outline-entry",
+  "decision": "compare-and-retain-unresolved-candidate",
+  "replacements": [
+    {
+      "publication": "26568",
+      "publisherSource": "vol4-r3.27",
+      "reviewObligations": [
+        "new-and-removed-instruction-entry-review",
+        "changed-source-text-and-encoding-review",
+        "expanded-extension-and-constraint-review"
+      ]
+    },
+    {
+      "publication": "26569",
+      "publisherSource": "vol5-r3.16-official",
+      "reviewObligations": [
+        "publisher-source-status-review",
+        "changed-source-text-and-encoding-review"
+      ]
+    }
+  ],
+  "sourceStatusConflict": {
+    "publication": "26569",
+    "kind": "public-use-versus-confidential-nda-marking",
+    "oldCell": {
+      "id": "pdf:1:cell:14",
+      "pdfPage": 1,
+      "rect": [
+        241.747009,
+        744.47078,
+        370.247009,
+        772.33078
+      ],
+      "wordSpan": [
+        25,
+        28
+      ],
+      "wordBoxesSha256": "f30d12229791ea0e3864dc4b97ce9ed1307e9b5284372741c55917e024ea68e6",
+      "unicodeSha256": "cb9a32cb7cda694a9471249208941a694cc0a803969c2bac64dd553086c94897",
+      "text": "[AMD Public Use]"
+    },
+    "newCell": {
+      "id": "pdf:1:cell:14",
+      "pdfPage": 1,
+      "rect": [
+        153.0,
+        745.41066,
+        458.998541,
+        768.54407
+      ],
+      "wordSpan": [
+        25,
+        31
+      ],
+      "wordBoxesSha256": "5a83ca3c0b22ebe7d8d5bf6f51099aa390502befeed7f3438175b1a68b79ca62",
+      "unicodeSha256": "43a0239fb4a64232c7e07dc51116ba3fc8f79246b5f0bc6b9dde61053ef16019",
+      "text": "[AMD Confidential - Distribution with NDA]"
+    }
+  }
+}

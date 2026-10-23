@@ -17,6 +17,9 @@ from amd64_inventory import strict_json
 from amd64_inventory_xed import canonical, digest
 import amd64_manual_geometry as geometry
 import amd64_source_corpus as corpus
+import amd64_source_authority as authority
+import amd64_source_constraints as constraints
+import amd64_corpus_migration as migration
 from run_output import run_output
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -40,6 +43,11 @@ def source_closure(root=ROOT):
     result = geometry.extractor_sources(root)
     for name in ('amd64_source_obligations.py', 'amd64_manual_outline.js'):
         result['tools/' + name] = corpus.sha_file(Path(root) / 'tools' / name)
+    for name in authority.authority_sources():
+        result[name] = corpus.sha_file(Path(root) / name)
+    result.update(constraints.architecture_source_closure(root))
+    for name in migration.implementation_sources():
+        result[name] = corpus.sha_file(Path(root) / name)
     return result
 
 
@@ -193,11 +201,13 @@ def _column_signature(table, cells):
             tuple(' '.join(cell['text'] for cell in ordered).split()))
 
 
-def _local_row(document, table, side, cells):
+def _local_row(document, table, side, cells, row_id=None):
     """Select an actual locally complete boundary row; never inherit a cell."""
     if table['rows']:
         rows = {row['id']: row for row in document['content']['rows']}
-        row = rows[table['rows'][-1 if side == 'left' else 0]]
+        if row_id is not None and row_id not in table['rows']:
+            raise ValueError('local row is outside its source table')
+        row = rows[row_id if row_id is not None else table['rows'][-1 if side == 'left' else 0]]
         heads, encoded = list(row['headCells']), list(row['encodingCells'])
         operands = [key for part in row['operandContinuations'] for key in part['cells']]
         if not encoded:
@@ -355,6 +365,52 @@ def structural_evidence(bundle, candidate):
         constraintsParsed=False)
 
 
+def distinct_evex_table_evidence(bundle, candidate):
+    """Check two whole local encoding tables, each for a distinct element size.
+
+    VMOVDQU8 and VMOVDQU16 each explicitly repeat all three vector sizes in both
+    directions. Their identical columns do not turn the latter into a continued
+    table. This is a source-structure decision, not a legal-domain derivation.
+    """
+    proof = structural_evidence(bundle, candidate)
+    document = bundle['geometries'][candidate['identity']['publication']]
+    cells = _cell_index(document)
+    groups = []
+    for table, element_size, w in ((candidate['first'], 8, '0'), (candidate['second'], 16, '1')):
+        if len(table['rows']) != 6:
+            raise ValueError('distinct EVEX table omits or duplicates a complete local row')
+        expected = {}
+        for register, width, length in (('xmm', 128, '00'), ('ymm', 256, '01'), ('zmm', 512, '10')):
+            mnemonic = 'VMOVDQU' + str(element_size)
+            expected[f'{mnemonic} {register}1 {{k}}{{z}}, {register}2/mem{width}'] = [
+                '62', "RXBR'.1", w + '.1111.11', 'z.' + length + '.0.1.aaa', '6F /r']
+            expected[f'{mnemonic} {register}1 {{k}}{{z}}/mem{width} {{k}}, {register}2'] = [
+                '62', "RXBR'.1", w + '.1111.11', '0.' + length + '.0.1.aaa', '7F /r']
+        rows, actual = [], {}
+        for row_id in table['rows']:
+            row = _local_row(document, table, 'right', cells, row_id)
+            if row['entryId'] != proof['ownerEntry']['id']:
+                raise ValueError('distinct EVEX table changes source ownership')
+            if (len(row['headCells']) != 1 or any(abs(cells[key]['rect'][1] -
+                    cells[row['headCells'][0]]['rect'][1]) > 1.2 for key in row['encodingCells'])):
+                raise ValueError('distinct EVEX table borrows another source row encoding')
+            syntax = ' '.join(cells[key]['text'] for key in row['headCells'] + row['operandCells'])
+            encoding = [cells[key]['text'] for key in sorted(row['encodingCells'],
+                        key=lambda key: (cells[key]['rect'][0], cells[key]['rect'][1]))]
+            if syntax in actual:
+                raise ValueError('distinct EVEX table duplicates a local form')
+            actual[syntax] = encoding
+            rows.append(row)
+        if actual != expected:
+            raise ValueError('distinct EVEX table lacks its complete explicit element-size partition')
+        groups.append(dict(table=table['id'], mnemonic=mnemonic, rows=rows))
+    evidence_cells = sorted(set(proof['evidenceCells']) |
+                            {key for group in groups for row in group['rows'] for key in row['allCells']})
+    return dict(proof, kind='distinct-complete-evex-element-size-tables', groups=groups,
+                evidenceCells=evidence_cells,
+                sourceCellIdentities={key: digest(source_cell_identity(cells[key])) for key in evidence_cells})
+
+
 def _decision(candidate, review, cells, bundle):
     _fields(review, {'id', 'identity', 'historicalEntryIds', 'fromHeaderCells', 'toHeaderCells',
                      'sourceCellIdentities', 'boundaryCells', 'decision', 'rule', 'rationale', 'structure'}, 'table decision')
@@ -373,14 +429,21 @@ def _decision(candidate, review, cells, bundle):
         if digest(source_cell_identity(cells[key])) != review['sourceCellIdentities'][key]:
             raise ValueError('reviewed source text, geometry or PDF identity drift')
     source_kind, target_kind = _header_kind(a), _header_kind(b)
-    if review['decision'] != 'continuation' and review['structure'] is not None:
+    distinct_rule = 'complete-distinct-evex-element-size-tables/v1'
+    if (review['decision'] != 'continuation' and review['rule'] != distinct_rule
+            and review['structure'] is not None):
         raise ValueError('only a checked table-series decision may carry structural evidence')
     if review['decision'] == 'unresolved':
         if review['rule'] != 'no-independent-structural-proof/v1' or review['boundaryCells']:
             raise ValueError('unresolved relation cannot import an adjudication')
         state = 'accounted'
     elif review['decision'] == 'independent-table':
-        if review['rule'] == 'different-explicit-prefix-field-columns/v1':
+        if review['rule'] == distinct_rule:
+            if review['boundaryCells']:
+                raise ValueError('distinct EVEX tables require their complete structural evidence')
+            if canonical(review['structure']) != canonical(distinct_evex_table_evidence(bundle, candidate)):
+                raise ValueError('distinct EVEX table source evidence differs')
+        elif review['rule'] == 'different-explicit-prefix-field-columns/v1':
             expected_fields = first.get('columnHeaderCells', []) + second.get('columnHeaderCells', [])
             from_signature, to_signature = _column_signature(first, cells), _column_signature(second, cells)
             if (source_kind != 'structured-encoding' or target_kind != 'structured-encoding'
@@ -410,6 +473,11 @@ def _decision(candidate, review, cells, bundle):
         if review['rule'] != 'same-section-complete-row-series/v1' or review['boundaryCells']:
             raise ValueError('unproved table continuation rule')
         actual_structure = structural_evidence(bundle, candidate)
+        if source_kind == 'structured-encoding':
+            names = [cells[actual_structure[side]['headCells'][0]]['text'].split()[0]
+                     for side in ('leftRow', 'rightRow')]
+            if names[0] != names[1]:
+                raise ValueError('structured encoding table changes explicit mnemonic group')
         if canonical(review['structure']) != canonical(actual_structure):
             raise ValueError('table-series source boundary or local-row evidence differs')
         state = 'adjudicated'
@@ -434,11 +502,16 @@ def _validate_review(bundle, reviewed):
         raise ValueError('reviewed scope identity drift')
 
 
-def build_ledger(bundle, reviewed):
-    """Pure graph derivation from a load_sources() bundle and reviewed decisions.
+def build_ledger(bundle, reviewed, authority_source_inputs=None, architecture_source_inputs=None,
+                 corpus_migration_inputs=None):
+    """Derive the graph, optionally replaying publisher inputs through PDF I/O.
 
-    Small tests supply source excerpts directly to this pure layer. CLI and
-    production callers use load_sources() to establish the full input contract.
+    Without optional source inputs this is a pure derivation suitable for small source
+    excerpts. CLI and production callers use load_sources() to establish the
+    full input contract.
+    Publisher adjudications, architectural clauses and candidate migrations are
+    recomputed from their source inputs on every call. Serialized passing
+    reports are never inputs that can confer source authority.
     """
     _validate_review(bundle, reviewed)
     lock = bundle['corpusLock']
@@ -452,6 +525,62 @@ def build_ledger(bundle, reviewed):
         for key, record in records.items():
             if record['disposition'] == 'source-conflict':
                 actual_conflicts[key] = (publication, record)
+    adjudications, authority_provenance = {}, None
+    if authority_source_inputs is not None:
+        authority_before = authority.authority_sources()
+        adjudications = authority.validate_adjudications(bundle['geometries'], authority_source_inputs)
+        if set(adjudications) != set(actual_conflicts):
+            raise ValueError('authority replay omits or introduces source-conflict identities')
+        for correction in adjudications.values():
+            if (not correction['evidenceCells'] or correction['sourceAuthorityBound'] is not True
+                    or correction['originalSourceRetained'] is not True
+                    or correction['corpusAdoption'] is not False
+                    or correction['legalDomainComplete'] is not False
+                    or correction['constraintsParsed'] is not False):
+                raise ValueError('authority replay exceeds bounded source-correction scope')
+        authority_provenance = dict(reviewedManifestSha256=digest(authority_source_inputs['manifest']),
+                                    sources=authority_before)
+    architecture, architecture_provenance = None, None
+    if architecture_source_inputs is not None:
+        _fields(architecture_source_inputs, {'pack', 'pdf', 'bbox'}, 'architectural source inputs')
+        architecture_before = constraints.architecture_source_closure()
+        architecture = constraints.validate_architecture_pack(architecture_source_inputs['pack'],
+            architecture_source_inputs['pdf'], architecture_source_inputs['bbox'])
+        if (architecture['status'] != 'checked'
+                or architecture['clauses'] != constraints.architecture_clauses()
+                or architecture['references'] != constraints.architecture_references()
+                or any(architecture[field] is not False for field in
+                       ('sourceComplete', 'allArchitecturalConstraintsParsed', 'sourceCellsParsedCompletely',
+                        'fullAmd64Coverage', 'corpusAdoption'))):
+            raise ValueError('architectural constraint replay exceeds selected reviewed scope')
+        architecture_provenance = dict(reviewedPackSha256=digest(architecture_source_inputs['pack']),
+                                       sources=architecture_before)
+    candidate_migration, migration_provenance = None, None
+    if corpus_migration_inputs is not None:
+        _fields(corpus_migration_inputs, {'old_cache', 'publisher_cache', 'output'}, 'corpus migration inputs')
+        migration_before = migration.implementation_sources()
+        candidate_migration = migration.check(**corpus_migration_inputs)
+        if (candidate_migration['schema'] != migration.SCHEMA
+                or candidate_migration['predecessorLockSha256'] != bundle['provenance']['corpusLockSha256']
+                or candidate_migration['historicalGapRecords'] != sum(len(rows) for rows in historical.values())
+                or candidate_migration['comparisonComplete'] is not True
+                or any(candidate_migration[field] is not False for field in
+                       ('sourceAdoption', 'constraintsParsed', 'legalDomainComplete'))):
+            raise ValueError('candidate migration differs from original source scope or grants adoption')
+        documents = _unique(candidate_migration['documents'], 'publication', 'migration publication')
+        if set(documents) != {'26568', '26569'}:
+            raise ValueError('candidate migration publication omission or substitution')
+        for publication, document in documents.items():
+            original = next(row for row in lock['documents'] if row['publication'] == publication)
+            expected_old = dict(revision=original['revision'], pdfSha256=original['pdfSha256'], pages=original['pdfPages'])
+            if (document['oldSource'] != expected_old or any(document[field] is not False for field in
+                    ('sourceAdoption', 'constraintsParsed', 'legalDomainComplete'))):
+                raise ValueError('candidate migration changed predecessor or promoted its source branch')
+            obligations = _unique(document['obligations'], 'id', 'candidate migration review')
+            if not obligations or any(row['state'] != 'unresolved' for row in obligations.values()):
+                raise ValueError('candidate migration review cannot self-adjudicate source adoption')
+        migration_provenance = dict(replayedMigrationSha256=digest(candidate_migration), sources=migration_before,
+            productsDirectory=str(Path(corpus_migration_inputs['output']).resolve()))
     nodes, edges = [], []
     scope_id = stable_id('coverage-scope', lock['scope'])
     nodes.append(dict(id=scope_id, kind='coverage-scope', state='accounted', resolution='unresolved',
@@ -470,6 +599,25 @@ def build_ledger(bundle, reviewed):
         nodes.append(dict(id=key, kind='extension-scope', state='accounted', resolution='unresolved',
                           originalCandidate=extension, supplementaryDiscovery='open'))
         edges.append(dict(source=scope_id, target=key, relation='requires-scope-adjudication'))
+    if candidate_migration is not None:
+        candidate_id = stable_id('source-corpus-candidate', dict(
+            predecessorLockSha256=candidate_migration['predecessorLockSha256'],
+            replacements=[dict(publication=d['publication'], newSource=d['newSource']) for d in candidate_migration['documents']]))
+        nodes.append(dict(id=candidate_id, kind='source-corpus-candidate', state='accounted', resolution='unresolved',
+            sourceAdoption=False, mandatoryAdoption=False, representationComparisonComplete=True,
+            candidateArtifact=candidate_migration['candidate'], documents=candidate_migration['documents']))
+        edges.append(dict(source=scope_id, target=candidate_id, relation='has-candidate-source-branch'))
+        for document in candidate_migration['documents']:
+            publication = document['publication']
+            edges.append(dict(source=authority_ids[publication], target=candidate_id,
+                              relation='has-compared-publisher-candidate'))
+            for obligation in document['obligations']:
+                key = stable_id('candidate-source-review', dict(candidate=candidate_id, obligation=obligation['id']))
+                nodes.append(dict(id=key, kind='candidate-source-review', state='accounted', resolution='unresolved',
+                    publication=publication, candidateObligation=obligation, requiredIfCandidateSelected=True,
+                    mandatoryAdoption=False))
+                edges.extend([dict(source=candidate_id, target=key, relation='requires-review-if-selected'),
+                              dict(source=key, target=authority_ids[publication], relation='concerns-source-authority')])
     issue_rows = _unique(reviewed['conflictIssues'], 'id', 'source issue')
     assigned = set()
     for issue in issue_rows.values():
@@ -482,16 +630,22 @@ def build_ledger(bundle, reviewed):
                 or issue['id'] != stable_id('source-issue', sorted(ids))):
             raise ValueError('source issue omits, duplicates or substitutes a conflict record')
         assigned.update(ids)
-        nodes.append(dict(id=issue['id'], kind='source-issue', state='accounted', resolution='unresolved',
-            title=issue['title'], oldGapIds=ids, requiredAuthority=issue['requiredAuthority'], correction=None))
+        corrections = {key: adjudications[key] for key in ids if key in adjudications}
+        resolved = len(corrections) == len(ids)
+        nodes.append(dict(id=issue['id'], kind='source-issue', state='adjudicated' if resolved else 'accounted',
+            resolution='bounded-publisher-adjudication' if resolved else 'unresolved',
+            title=issue['title'], oldGapIds=ids, requiredAuthority=issue['requiredAuthority'],
+            correction=corrections or None))
         for key in ids:
             publication, record = actual_conflicts[key]
             if digest(record) != issue['recordDigests'][key]:
                 raise ValueError('source-conflict object or disposition differs from reviewed input')
             if not set(record['cells']) <= cells[publication].keys():
                 raise ValueError('source-conflict references absent source cells')
-            nodes.append(dict(id=key, kind='source-conflict', state='accounted', resolution='unresolved',
-                publication=publication, originalRecord=record, constraintsParsed=False, authoritativeCorrection=None))
+            correction = adjudications.get(key)
+            nodes.append(dict(id=key, kind='source-conflict', state='adjudicated' if correction else 'accounted',
+                resolution=correction['resolution'] if correction else 'unresolved',
+                publication=publication, originalRecord=record, constraintsParsed=False, authoritativeCorrection=correction))
             edges.extend([dict(source=issue['id'], target=key, relation='groups-source-record'),
                           dict(source=key, target=authority_ids[publication], relation='requires-source-authority')])
     if assigned != actual_conflicts.keys():
@@ -526,6 +680,42 @@ def build_ledger(bundle, reviewed):
                               'independent-source-omission-review']))
             edges.extend([dict(source=scope_id, target=key, relation='requires-constraint-coverage'),
                           dict(source=key, target=authority_ids[publication], relation='uses-source-corpus')])
+    if architecture is not None:
+        clause_ids, reference_ids = {}, {}
+        for clause in architecture['clauses']:
+            key = stable_id('typed-source-constraint', dict(scope=architecture['scope'],
+                            clause=clause['id'], sourceCells=clause['sourceCells']))
+            clause_ids[clause['id']] = key
+            nodes.append(dict(id=key, kind='typed-source-constraint', state='validated',
+                resolution='reviewed-selected-clause', clause=clause,
+                selectedClauseParsed=True, completeSourceCellsParsed=False))
+            edges.append(dict(source=scope_id, target=key, relation='has-reviewed-constraint'))
+            for publication in sorted({cell.split('/')[0] for cell in clause['sourceCells']}):
+                edges.append(dict(source=key, target=authority_ids[publication], relation='uses-source-corpus'))
+        for reference in architecture['references']:
+            key = stable_id('source-reference', dict(scope=architecture['scope'], reference=reference['id'],
+                            sourceCells=reference['sourceCells'], targetCells=reference['targetCells']))
+            reference_ids[reference['id']] = key
+            resolved = reference['status'] == 'resolved-location'
+            nodes.append(dict(id=key, kind='source-reference', state='adjudicated' if resolved else 'accounted',
+                resolution='resolved-location' if resolved else 'unresolved', reference=reference,
+                completeConstraintSemantics=False))
+            edges.append(dict(source=scope_id, target=key, relation='requires-source-reference-accounting'))
+            for publication in sorted({cell.split('/')[0] for cell in reference['sourceCells'] + reference['targetCells']}):
+                edges.append(dict(source=key, target=authority_ids[publication], relation='uses-source-corpus'))
+        dependencies = {**clause_ids, **reference_ids}
+        for clause in architecture['clauses']:
+            for dependency in clause['dependencies']:
+                edges.append(dict(source=clause_ids[clause['id']], target=dependencies[dependency],
+                                  relation='requires-constraint-premise'))
+        for source_cell in architecture['unparsedSourceCells']:
+            publication = source_cell['sourceCell'].split('/')[0]
+            key = stable_id('unparsed-source-constraint', dict(scope=architecture['scope'],
+                            sourceCell=source_cell['sourceCell'], pdfSha256=constraints.ARCHITECTURE_SOURCES[publication]['pdfSha256']))
+            nodes.append(dict(id=key, kind='unparsed-source-constraint', state='accounted', resolution='unresolved',
+                              sourceCell=source_cell, constraintsParsed=False))
+            edges.extend([dict(source=scope_id, target=key, relation='requires-constraint-parsing'),
+                          dict(source=key, target=authority_ids[publication], relation='uses-source-corpus')])
     node_map = _unique(nodes, 'id', 'graph node')
     if any(edge['source'] not in node_map or edge['target'] not in node_map for edge in edges):
         raise ValueError('obligation graph contains a dangling dependency')
@@ -535,13 +725,29 @@ def build_ledger(bundle, reviewed):
     counts = dict(nodeKinds=dict(sorted(Counter(node['kind'] for node in nodes).items())),
         historicalGapRecords=sum(len(rows) for rows in historical.values()),
         sourceConflictRecords=len(actual_conflicts), sourceIssues=len(issue_rows), tableCandidates=len(candidates),
+        sourceConflictsAdjudicated=len(adjudications),
+        typedConstraintClauses=0 if architecture is None else architecture['typedClauses'],
+        constraintReferences=0 if architecture is None else len(architecture['references']),
+        unresolvedConstraintReferences=0 if architecture is None else len(architecture['unresolvedReferences']),
+        unparsedSelectedSourceCells=0 if architecture is None else len(architecture['unparsedSourceCells']),
+        sourceCorpusCandidates=int(candidate_migration is not None),
+        candidateMigrationReviewObligations=0 if candidate_migration is None else sum(
+            len(document['obligations']) for document in candidate_migration['documents']),
         tableResolutions=dict(sorted(Counter(node['resolution'] for node in nodes if node['kind'] == 'table-relation').items())),
         unresolvedNodes=sum(node['resolution'] == 'unresolved' for node in nodes))
-    return dict(schema=SCHEMA, provenance=bundle['provenance'], reviewedInputSha256=digest(reviewed),
+    if authority_provenance is not None and authority.authority_sources() != authority_provenance['sources']:
+        raise ValueError('authority implementation or reviewed input changed during ledger derivation')
+    if architecture_provenance is not None and constraints.architecture_source_closure() != architecture_provenance['sources']:
+        raise ValueError('architectural constraint implementation or reviewed pack changed during ledger derivation')
+    if migration_provenance is not None and migration.implementation_sources() != migration_provenance['sources']:
+        raise ValueError('corpus migration implementation or reviewed input changed during ledger derivation')
+    return dict(schema=SCHEMA, provenance=dict(bundle['provenance'], sourceAdjudicationInputs=authority_provenance,
+        architectureConstraintInputs=architecture_provenance, corpusMigrationInputs=migration_provenance),
+        reviewedInputSha256=digest(reviewed),
         content=content, contentSha256=digest(content), counts=counts,
         acceptance=dict(initialObligationsAccounted=True,
                         structuralRelationsAdjudicated=all(node['resolution'] != 'unresolved' for node in nodes if node['kind'] == 'table-relation'),
-                        sourceConflictsAdjudicated=not actual_conflicts,
+                        sourceConflictsAdjudicated=set(adjudications) == set(actual_conflicts),
                         sourceAuthorityEstablished=False, selectedConstraintsParsed=False, p1Complete=False, c2Complete=False,
                         legalEncodingCompletenessEstablished=False))
 
@@ -561,6 +767,12 @@ def main(argv=None):
     parser.add_argument('--baseline', action='append', required=True, help='PUBLICATION=directory containing inventory.json/layout.txt')
     parser.add_argument('--corpus-lock', type=Path, default=corpus.LOCK)
     parser.add_argument('--review', type=Path, default=REVIEW)
+    parser.add_argument('--authority-source-dir', type=Path,
+                        help='replay maintained publisher adjudications from exact PDFs/products in this directory')
+    parser.add_argument('--architecture-pack', type=Path, default=constraints.ARCHITECTURE_PACK,
+                        help='selected architectural clauses and unresolved source-reference obligations')
+    parser.add_argument('--corpus-migration-dir', type=Path,
+                        help='freshly recheck compared publisher candidates; preserve conditional review obligations without adoption')
     parser.add_argument('--pdftotext', type=Path, required=True)
     parser.add_argument('--mutool', type=Path, required=True)
     parser.add_argument('--tool-libdir', type=Path)
@@ -571,7 +783,16 @@ def main(argv=None):
     sources = load_sources(args.corpus, args.pdf_cache, _maps(args.geometry), _maps(args.baseline),
         dict(pdftotext=args.pdftotext, mutool=args.mutool, python=Path(sys.executable)),
         corpus.environment(args.tool_libdir), args.corpus_lock)
-    expected = build_ledger(sources, reviewed)
+    authority_inputs = (dict(manifest=strict_json(authority.INPUT.read_bytes()), root=args.authority_source_dir)
+                        if args.authority_source_dir is not None else None)
+    architecture_inputs = dict(pack=strict_json(args.architecture_pack.read_bytes()),
+        pdf=args.pdf_cache / constraints.ARCHITECTURE_SOURCES['24594']['filename'],
+        bbox=args.corpus / '24594' / 'bbox.html')
+    if args.corpus_migration_dir is not None and args.authority_source_dir is None:
+        raise ValueError('corpus migration replay requires --authority-source-dir for publisher inputs')
+    migration_inputs = (dict(old_cache=args.pdf_cache, publisher_cache=args.authority_source_dir, output=args.corpus_migration_dir)
+                        if args.corpus_migration_dir is not None else None)
+    expected = build_ledger(sources, reviewed, authority_inputs, architecture_inputs, migration_inputs)
     if before_review != corpus.sha_file(args.review) or sources['provenance']['extractorSources'] != source_closure():
         raise ValueError('reviewed decisions or implementation changed during ledger derivation')
     output = run_output(args.output)
