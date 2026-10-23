@@ -3,6 +3,24 @@ open Recovery
 let hex s = string_all (fun c -> (c>='0' && c<='9') || (c>='a' && c<='f')) s
 let digest s = require (String.length s=64 && hex s) "capture digest"
 let integer = function `Int n when n>=0 -> n | _ -> raise (Invalid "capture nonnegative integer")
+(* A source generation is bound even when no decoded site supplies a row.
+   Exact colon-delimited components prevent v12suffix/v120 from matching v12. *)
+let has_projection capture wanted =
+  let semantic_profile=match List.assoc_opt "semantic_profile" (fields capture) with
+    | Some (`String profile) -> List.mem wanted (String.split_on_char ':' profile)
+    | _ -> false in
+  semantic_profile || List.exists (fun row -> get row "projection"=`String wanted)
+    (list(get capture "sites"))
+let composed_refusal =
+  "repeated-string source extension does not admit composed proof transport"
+let has_repeated_projection capture =
+  has_projection capture "bap-bit-provenance-v12" ||
+  has_projection capture "bap-bit-provenance-v13" ||
+  has_projection capture "bap-bit-provenance-v14" ||
+  has_projection capture "bap-bit-provenance-v15"
+let reject_composed input =
+  require (not(has_repeated_projection (get input "capture")))
+    composed_refusal
 let admit j snapshot =
   exact j ["normalized";"capture"];
   let normalized=get j "normalized" in
@@ -34,7 +52,7 @@ let admit j snapshot =
         let instruction=M.find a i.instructions in
         let next=Printf.sprintf "0x%016Lx" (Int64.add (Int64.of_string a)
             (Int64.of_int (String.length bytes / 2))) in
-        require (List.mem (get row "projection") [`String "bap-bit-provenance-v3"; `String "bap-bit-provenance-v4"; `String "bap-bit-provenance-v5"; `String "bap-bit-provenance-v6"; `String "bap-bit-provenance-v7"; `String "bap-bit-provenance-v8"; `String "bap-bit-provenance-v9"; `String "bap-bit-provenance-v10"; `String "bap-bit-provenance-v11"]
+        require (List.mem (get row "projection") [`String "bap-bit-provenance-v3"; `String "bap-bit-provenance-v4"; `String "bap-bit-provenance-v5"; `String "bap-bit-provenance-v6"; `String "bap-bit-provenance-v7"; `String "bap-bit-provenance-v8"; `String "bap-bit-provenance-v9"; `String "bap-bit-provenance-v10"; `String "bap-bit-provenance-v11"; `String "bap-bit-provenance-v12"; `String "bap-bit-provenance-v13"; `String "bap-bit-provenance-v14"; `String "bap-bit-provenance-v15"]
                  && get row "ast_sha256"<>`Null && string row "quality"="opaque"
                  && S.mem a i.decodable && instruction.kind="ordinary"
                  && S.equal instruction.fall (S.singleton next)
@@ -252,6 +270,15 @@ let rec tlift depth env site expr =
   | _ -> tunknown 64
 let banks=["RAX";"RCX";"RDX";"RBX";"RSP";"RBP";"RSI";"RDI";
   "R8";"R9";"R10";"R11";"R12";"R13";"R14";"R15"]
+let rec loop_writes writes statements =
+  List.fold_left (fun writes stmt -> match string stmt "kind" with
+    | "move" -> let var=get stmt "var" in
+      let w=integer(get var "width") in
+      if string var "type"="imm" && w>=1 && w<=64 then
+        M.add (tkey var) var writes else writes
+    | "if" -> loop_writes (loop_writes writes (list(get stmt "yes"))) (list(get stmt "no"))
+    | "while" -> loop_writes writes (list(get stmt "body"))
+    | _ -> writes) writes statements
 let transfer_from_bil site ast =
   let env=ref M.empty and outputs=ref S.empty and jump=ref `Null and condition=ref `Null in
   List.iter (fun stmt -> match string stmt "kind" with
@@ -270,6 +297,14 @@ let transfer_from_bil site ast =
       if list(get stmt "no")=[] && List.length yes=1 &&
         string(List.hd yes)"kind"="jump" then
         condition:=tlift 0 !env site (get stmt "condition")
+    | "while" ->
+      M.iter (fun key var ->
+        let w=integer(get var "width") in
+        env:=M.add key (tunknown w) !env;
+        if not(boolean(get var "virtual")) &&
+          (List.mem (string var "name") banks || List.mem (string var "name") ["CF";"ZF"])
+        then outputs:=S.add key !outputs
+      ) (loop_writes M.empty (list(get stmt "body")))
     | _ -> ()) (list ast);
   `Assoc(S.elements !outputs |> List.map (fun key -> key,M.find key !env)),!jump,!condition
 let clobbered key killed =
@@ -397,6 +432,7 @@ let rec memory_write_bil statements = List.exists (fun stmt -> match string stmt
 let rec writes_address_bil keys statements = List.exists (fun stmt -> match string stmt "kind" with
   | "move" -> let var=get stmt "var" in not(boolean(get var "virtual")) && S.mem(tkey var) keys
   | "if" -> writes_address_bil keys (list(get stmt "yes")) || writes_address_bil keys (list(get stmt "no"))
+  | "while" -> writes_address_bil keys (list(get stmt "body"))
   | _ -> false) statements
 let rec address_inputs inside t keys = match opname t with
   | "input" when inside -> S.add(string(kind t)"key") keys
@@ -680,6 +716,8 @@ let admit_resolved ?loop_checker ?(advanced=false) j snapshot =
   require (List.for_all (fun row -> get row "projection" <> `String "bap-bit-provenance-v9")
       (list (get (get j "capture") "sites")))
     "source flag extension does not admit target resolution";
+  require (not(has_repeated_projection (get j "capture")))
+    "repeated-string source extension does not admit target resolution";
   let source_profiles=List.filter_map (fun row -> match get row "projection" with
       | `Null -> None | value -> Some(str value)) (list(get(get j "capture")"sites")) in
   require (List.for_all (fun profile ->

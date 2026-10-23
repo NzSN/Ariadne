@@ -1,0 +1,576 @@
+{
+  "schema": "ariadne.amd64-profile-bindings/v2",
+  "legalFormsSha256": "1d236bef3b16df3dcb1f84279adff60ca920cc9171b08aecb04076515b987c61",
+  "consumer": {
+    "profile": "bap-bit-provenance-v12",
+    "capability": "plain-dependencies"
+  },
+  "implementationRule": "exact-v12-byte-rep-projection/v1",
+  "implementationSources": {
+    "native/bap/build.sh": "f72aded5f3f758d5d13aa3b931eb0674486df8d638c76e4e236464126943c748",
+    "native/bap/lift.cpp": "a5654006059aeefa83dbb9156853b2cec56bfdfadd9b8029700db333d54c9fba",
+    "src/bap/address.rs": "7a8f7a3605ef8b5c43668e6f345618cad938ea773b5609d301b3e1496ec22409",
+    "src/bap/admission.rs": "854bd4e8a6ff784d3590c5a7f5729f23ee7ed02f6e619ceb81cb28b9b1e8f7ce",
+    "src/bap/alignment_hypothesis.rs": "6d69a628a5f093f2729d108e5233d56ad9a709cc5ac0b545691e6518e90e54e5",
+    "src/bap/ast.rs": "e03169007ec2469ad0a006faf044d956aeacf468a2ad19ce810e9153a52ccafb",
+    "src/bap/composition.rs": "000239ab273531fe31fe3767062bb45a6b7838e7dfa2afb58e21bcfb6ad1e43e",
+    "src/bap/core_adapter.rs": "26f54a6c727a568e8a2777a6a380745a915ee3e1c4f2187d458441859c745a65",
+    "src/bap/core_protocol.rs": "9a3f4a5153dc38cd4e6806b2dbe3eb6034380e6cce945cf645dec36f305f53aa",
+    "src/bap/core_session.rs": "95592334c44d815738dcec39ab96ad8f886bfc572cf5bfbddbb3e6b18e20abd3",
+    "src/bap/guard_admission.rs": "b94810914cb3fa1ecde65e58d7e291cce9499759080f82806d6e79a7f7087705",
+    "src/bap/lods_source.rs": "082ba2508e3acb1351d85aff60eab1358e52bd77151bb595b10e28dda09a76e3",
+    "src/bap/mod.rs": "04e3a818fad0f82eedba5fb29e3cfe8db3cd7dd7d5ea8dda99647374819f423e",
+    "src/bap/prepare.rs": "3879f0a084421f07eb3cc055463b81544af1a717f32e08aaea63ea10aa9902c6",
+    "src/bap/projection.rs": "46bfea567c2f74a218e177970839848429ea6afe171b734899a1add8ac1bd8b3",
+    "src/bap/refinement.rs": "99df3bdccfb2e311666c0df4318488cfed91d3fa7eb33d5a241c2d916983e816",
+    "src/bap/registers.rs": "5c3d70b3dcd7f6620b9361f9f3937961268311cfe054c9ea12339617b50d0951",
+    "src/bap/rep_address_source.rs": "fbe655c0a24d91701f7edc61530edbe8a3532ff238b4952d69c93081348176b4",
+    "src/bap/repeated_strings.rs": "9edf4b6d7430a5170f5717ccc4bf13b5e8e29b33c16999943e6f194f5073d433",
+    "src/bap/session.rs": "1b9bb7c857ab31728f7b9976366d560bbcda3f1d2e79edda82c63d97c13884da",
+    "src/bap/source_extension.rs": "d6768f4eee0c296b332cb746f29886475b9f83e83276887ef29598060201bcb1",
+    "src/bap/stateflow_adapter.rs": "0d40a3a3dde5c49daf3bdec191168a1572ca854acdd0fb1051cfb78f7d1a5a6b",
+    "src/bap/target_resolution.rs": "fae46e6adb6bc7f6bd22108a10c851808f0e91b77177b79986ffba5e48828a78",
+    "src/bap/terminal_control.rs": "572dc4a3ad5c32fe52de7d0cf2e6d9a84eedeb6994c72db7b12428ab4da49f43",
+    "src/bap/work_schedule.rs": "c4d91be61bea97225171eaec3a1f5179fc53c53361937d1de51f2f0f3edf5124",
+    "tests/bap/repeated_string_projection.rs": "1e30d20ef23f1d7dba1db367acd916b6298327e33806e9d944bd90490bb46e04",
+    "tools/amd64_legal_forms.py": "a6727a9aa1495246a5b36e32d2981c4eda4f200eb76f5a5bd16198f4d4f397e9",
+    "tools/amd64_manual_geometry.py": "c4a747f90624bfa11a6c16bbebba99400b20b8dd0d9c43907cb1853f6f4e78db",
+    "tools/check_bap_admission_oracle.py": "7e43ca1f0873cc94e302c2aec6f6df3e4156640273178a3cb7c8bdbf3f6ff1a1",
+    "tools/check_bap_bit_count_oracle.py": "ecd912e714783ffea943d53a0059bb109a39b4ca2ee69b15e3a715ce5f998ffc",
+    "tools/check_bap_repeated_string_oracle.py": "3a1bef267f40aeb7e1cf4bb25e5416ff1a00459f5950f929e72720322a52f860"
+  },
+  "producerPin": {
+    "helperSha256": "8080fa65e7a3d6521289e277570a2666520983858fa9b8c247fbe3f470fe3615",
+    "runtimeLockSha256": "23dac7be3de321d80fb806b8a9ba4cb64a51f5c75c3c20f3ede77ea348de5382"
+  },
+  "partitions": [
+    {
+      "id": "amd-canonical-f3-movs-s",
+      "form": "amd-canonical-f3-movs",
+      "disposition": "S",
+      "grammar": {
+        "alternatives": [
+          {
+            "prefixes": [
+              "f3"
+            ],
+            "opcode": "a4",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                64
+              ],
+              "operandBits": [
+                8
+              ]
+            }
+          }
+        ]
+      },
+      "reason": "Exact v12 plain-dependency byte-string rule; current fresh BIL and Rust dispatch observations required.",
+      "observationIds": [
+        "amd-canonical-f3-movs-s-current"
+      ]
+    },
+    {
+      "id": "amd-canonical-f3-movs-u",
+      "form": "amd-canonical-f3-movs",
+      "disposition": "U",
+      "grammar": {
+        "alternatives": [
+          {
+            "prefixes": [
+              "f3",
+              "67"
+            ],
+            "opcode": "a4",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                32
+              ],
+              "operandBits": [
+                8
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "67",
+              "66"
+            ],
+            "opcode": "a5",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                32
+              ],
+              "operandBits": [
+                16
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "66"
+            ],
+            "opcode": "a5",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                64
+              ],
+              "operandBits": [
+                16
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "67"
+            ],
+            "opcode": "a5",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                32
+              ],
+              "operandBits": [
+                32
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3"
+            ],
+            "opcode": "a5",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                64
+              ],
+              "operandBits": [
+                32
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "67",
+              "48"
+            ],
+            "opcode": "a5",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                32
+              ],
+              "operandBits": [
+                64
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "48"
+            ],
+            "opcode": "a5",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                64
+              ],
+              "operandBits": [
+                64
+              ]
+            }
+          }
+        ]
+      },
+      "reason": "Explicitly unsupported by the requested v12 consumer; this disposition makes no claim about other profiles, including v13.",
+      "observationIds": []
+    },
+    {
+      "id": "amd-canonical-f3-stos-s",
+      "form": "amd-canonical-f3-stos",
+      "disposition": "S",
+      "grammar": {
+        "alternatives": [
+          {
+            "prefixes": [
+              "f3"
+            ],
+            "opcode": "aa",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                64
+              ],
+              "operandBits": [
+                8
+              ]
+            }
+          }
+        ]
+      },
+      "reason": "Exact v12 plain-dependency byte-string rule; current fresh BIL and Rust dispatch observations required.",
+      "observationIds": [
+        "amd-canonical-f3-stos-s-current"
+      ]
+    },
+    {
+      "id": "amd-canonical-f3-stos-u",
+      "form": "amd-canonical-f3-stos",
+      "disposition": "U",
+      "grammar": {
+        "alternatives": [
+          {
+            "prefixes": [
+              "f3",
+              "67"
+            ],
+            "opcode": "aa",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                32
+              ],
+              "operandBits": [
+                8
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "67",
+              "66"
+            ],
+            "opcode": "ab",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                32
+              ],
+              "operandBits": [
+                16
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "66"
+            ],
+            "opcode": "ab",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                64
+              ],
+              "operandBits": [
+                16
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "67"
+            ],
+            "opcode": "ab",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                32
+              ],
+              "operandBits": [
+                32
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3"
+            ],
+            "opcode": "ab",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                64
+              ],
+              "operandBits": [
+                32
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "67",
+              "48"
+            ],
+            "opcode": "ab",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                32
+              ],
+              "operandBits": [
+                64
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "48"
+            ],
+            "opcode": "ab",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                64
+              ],
+              "operandBits": [
+                64
+              ]
+            }
+          }
+        ]
+      },
+      "reason": "Explicitly unsupported by the requested v12 consumer; this disposition makes no claim about other profiles, including v13.",
+      "observationIds": []
+    },
+    {
+      "id": "amd-canonical-f3-cmps-s",
+      "form": "amd-canonical-f3-cmps",
+      "disposition": "S",
+      "grammar": {
+        "alternatives": [
+          {
+            "prefixes": [
+              "f3"
+            ],
+            "opcode": "a6",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                64
+              ],
+              "operandBits": [
+                8
+              ]
+            }
+          }
+        ]
+      },
+      "reason": "Exact v12 plain-dependency byte-string rule; current fresh BIL and Rust dispatch observations required.",
+      "observationIds": [
+        "amd-canonical-f3-cmps-s-current"
+      ]
+    },
+    {
+      "id": "amd-canonical-f3-cmps-u",
+      "form": "amd-canonical-f3-cmps",
+      "disposition": "U",
+      "grammar": {
+        "alternatives": [
+          {
+            "prefixes": [
+              "f3",
+              "67"
+            ],
+            "opcode": "a6",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                32
+              ],
+              "operandBits": [
+                8
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "67",
+              "66"
+            ],
+            "opcode": "a7",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                32
+              ],
+              "operandBits": [
+                16
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "66"
+            ],
+            "opcode": "a7",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                64
+              ],
+              "operandBits": [
+                16
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "67"
+            ],
+            "opcode": "a7",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                32
+              ],
+              "operandBits": [
+                32
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3"
+            ],
+            "opcode": "a7",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                64
+              ],
+              "operandBits": [
+                32
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "67",
+              "48"
+            ],
+            "opcode": "a7",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                32
+              ],
+              "operandBits": [
+                64
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "48"
+            ],
+            "opcode": "a7",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                64
+              ],
+              "operandBits": [
+                64
+              ]
+            }
+          }
+        ]
+      },
+      "reason": "Explicitly unsupported by the requested v12 consumer; this disposition makes no claim about other profiles, including v13.",
+      "observationIds": []
+    }
+  ]
+}

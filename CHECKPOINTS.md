@@ -13,6 +13,7 @@
 - [Plan index](.agents/plans/README.md) — identifies what is still open after the recorded deliveries.
 - [Evidence guide](tests/README.md) — explains how to interpret retained results without treating them as fresh qualification.
 - [Basic v9 candidate check](docs/Ariadne/bap-analysis-core-design.md#current-basic-v9-candidate-compatibility) — separates tested replacement behavior from the unchanged production pin and historical runtime identity.
+- [Plain REP and coverage accounting](docs/Ariadne/bap-analysis-core-design.md#plain-repeated-string-profile-and-coverage-accounting) — defines the separate v12 three-form contract and the unmet full-coverage obligations.
 
 **What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Retired ISA milestones in older entries are no longer active work.
 
@@ -20,6 +21,244 @@ For the wider context, see the optional [documentation map](docs/documentation-m
 
 Current validation follows the [executable test matrix](tests/README.md). Dated run
 results below are historical; their Git links do not establish a current pass.
+
+## 2026-10-23 — AMD address-size REP and coverage bindings advanced
+
+**Status: current local v15 gates pass; native v15 and full AMD64 remain open.**
+The [v15 source contract](docs/Ariadne/amd64-coverage-design.md#107-amd-address-size-rep-implementation-r2)
+and [expanded binding registry](docs/Ariadne/amd64-coverage-design.md#108-expanded-source-to-consumer-bindings-c3c4)
+advance the coverage program from the completed R1 boundary below.
+
+- C2 adds 350 source-backed dispositions: 2,076 total and 581 unresolved,
+  preserving all 2,657 original gap IDs/objects without regressions. The delta
+  includes exact table ownership and diagram classification; diagram constraints,
+  global rules, footnotes, 33 cross-page ambiguities and the AES owner mismatch
+  remain open. Fresh three-volume extraction/check and five-volume region checks
+  pass; 23 geometry and thirteen historical extraction controls pass.
+- AMD-specific v15 selects 56 canonical memory-REP tuples, adding 28 address-32
+  cases. A separate source bundle replaces four incorrect nonempty MOVS lifts
+  and supplies missing exact lifts. Two independent builds match manifest
+  `815fc8842899d05f6db51aa53cf21b4c82fd50fdae42200b43df4e6735cf48d4`
+  and executable `e834c5e9e25a4b2f93de448a01326482493a93430ea1ce43428289b2685c727e`.
+  Earlier producer pins and default-address behavior remain unchanged.
+- Fresh AMD Ryzen 9 7950X and Intel Core 5 220H probes show different zero-count
+  upper-lane behavior. v15 explicitly binds AMD semantics and records the premise
+  in address-32 evidence; the AMD64 architecture label does not establish vendor.
+  The source oracle passes 178,080 comparisons, the transport passes all 64
+  form/target cases, and all 448 local capture instances pass.
+- C3/C4's separate v3 registry validates 56 AMD points from 516 exact source
+  anchors and 111 fresh producer/profile observations. Supported counts remain
+  profile-specific: 3/24/28/56 for v12–v15. The Rust observer and 47 checker
+  controls pass. The refreshed v2 pilot keeps its original 3/21 result.
+
+Current checks pass 472 default Rust tests/159 ignored, 64 core-only/22 ignored,
+Clippy, formatting, layout, 107 BAP Python controls and 327 tooling controls.
+Four current optimized loop mutants are detected after passing exact controls;
+source restoration, unchanged observers and current source hashes verify.
+The dependency uses the existing read-only MirrorRust snapshot. Generated run
+products stay ignored; only small executable inputs, fixtures and pins are maintained.
+
+Automatic approval review rejected the new 25-file v15 native source/control
+payload, saying prior approval covered the earlier handoff. Specific approval
+has been requested. The [prepared native stage](.agents/plans/amd64-operation-coverage.md#native-amd-address-size-qualification-pending-approval)
+requires a fresh core build, 341 native refusal controls and 448 native parity
+instances; none is claimed from older helpers or local-only checks.
+
+All 10,569 candidate full-domain bindings remain open. C1–C4 broader exits,
+other prefixes/segments, proof consumers, faults/I/O, architecture families and
+full AMD64 coverage remain incomplete. The previous R1-qualified HTML view is
+preserved separately and the [current execution view](.agents/chatdocs/ariadne-amd64-coverage-execution-20261023/index.html)
+is refreshed with these scopes.
+The user requested checkpoint publication followed by commit and push for this
+continuation; the native gate remains explicitly pending in that publication.
+
+## 2026-10-23 — Memory REP native qualification completed
+
+**Status: R1 complete for its finite 28 default-address tuples; full AMD64 remains open.**
+After explicit user approval, the prepared 25-file source-only payload was
+verified and transferred to the isolated `win10` workspace. Thirteen existing
+Rust/model/legacy inputs matched before installation. The original SDK inventory
+verified and built a fresh native core with executable SHA256
+`b01c3bf697eb53c355c88716b4ee41a0010809bd71c501fbb3ac9be86698a7bf`.
+
+The retrieved helper passes an explicit audit of fourteen native source hashes,
+the SDK lock and seventeen SDK/compiler/model/engine identity fields. All 259
+native refusal controls pass: 97 direct and 162 framed. Both native parity tests
+pass, covering 192 v13 and 224 v14 tuple instances across sixteen synthetic
+Windows/Linux capture queries. Full Rust/native state equality and every
+effects, weak-write, origin, seed/root, memory-gap and investigation assertion
+hold. The v12 saved-capture/tampering and older advanced-composition
+positive/tampering regressions also pass with the same helper. Source and
+artifact identities are rechecked after execution.
+
+The corrected common test filter includes both matrices; the older
+`native_memory_rep_recipe_matrix` prefix alone would skip the LODS/v14 test.
+The [canonical findings](docs/Ariadne/amd64-coverage-design.md#106-current-root-checks-and-remaining-qualification)
+and [executed native gates](.agents/plans/amd64-operation-coverage.md#native-memory-rep-qualification)
+record the scoped result. The [HTML execution view](.agents/chatdocs/ariadne-amd64-coverage-execution-20261023/index.html)
+is refreshed while its pre-native version is preserved. No code or test sources
+changed during this continuation; the previously passing root checks and four
+compiled mutations retain their exact source scope. No commit or push performed.
+
+At this R1 boundary, 931 manual gaps, 10,569 candidate bindings, broader address-size,
+proof-consumer, fault/I/O and architecture-family gates remain open. This finite
+qualification does not establish full instruction-domain or hardware correctness.
+
+## 2026-10-23 — Coverage plan source/domain and memory REP execution
+
+**Status: finite implementation and local gates exercised; full coverage remains open.**
+The [completion design](docs/Ariadne/amd64-coverage-design.md#10-source-review-and-validation-status)
+and [execution ledger](.agents/plans/amd64-operation-coverage.md#coverage-completion-design-stages)
+record the current continuation from `e44ce2b` plus uncommitted prior REP work.
+The [execution reading view](.agents/chatdocs/ariadne-amd64-coverage-execution-20261023/index.html)
+preserves the current design and findings alongside the original proposal.
+
+- C1 reproduces all five pinned APM volumes with candidate v2 tooling.
+  Fresh official V1–3 bytes match; indexed official V4/5 endpoints return 404.
+  Scope/extension/global-rule audits and reviewed corpus adoption remain open.
+- C2 retains all 2,657 historical gap IDs: 1,726 have source-backed
+  dispositions and 931 remain unresolved. All 4,128 pages and eleven required
+  region clauses are enumerated. Footnotes, constraints, merged/cross-page
+  semantics and the AES bookmark-owner mismatch remain open.
+- C3/C4 implement a separate source-derived 24-point legal-domain pilot with
+  3 supported/21 unsupported v12 points. Fresh source-bound BIL, 720 numeric
+  comparisons and the exact-lift Rust observer pass. Pilot total disposition
+  and current bindings pass; full source, grammar and implementation do not.
+- R1 selects 24 original producer memory-string forms under v13 and adds four
+  actual source-built LODS forms under v14. v12 and earlier source pins remain
+  frozen. Two new LODS builds match, with 14,400 independent comparisons;
+  the original 24-form oracle passes 43,200 comparisons. Thirteen Rust transport
+  tests include actual four-form/two-target projection. These plain profiles
+  refuse proof transports, address overrides, I/O and partial-fault claims.
+- R2's fresh 504 BAP/LLVM observations expose four address-32 MOVS lifts with
+  wrong 64-bit count/pointers and 32 concrete counterexamples; the other 24
+  canonical forms have empty BIL. No prefix admission broadens.
+
+Local captured-input matrices pass 192 v13 and 224 v14 instances. The final
+serial default suite passes 457 Rust tests/155 ignored, core-only 64/22, plus
+strict Clippy, formatting, layout and links. An earlier concurrent run hit an
+existing guard deadline and receives no passing credit. The MirrorRust
+dependency uses the existing read-only pinned snapshot; core-only retains no
+normal external dependencies. Native LODS transport and numeric tests are
+separate from the native-core parity gate recorded above.
+All 81 BAP-side Python controls and 304 tooling controls pass.
+Four optimized compiled loop mutants are detected after passing exact unchanged
+controls; private SUTs/builds, current source identity, source restoration and
+unchanged observers are verified. This is Rust-loop evidence, not a substitute
+for the separately exercised native-core campaign.
+
+Specific user approval resolved the earlier automatic approval-review rejection
+of the native source payload. The [native follow-up](#2026-10-23--memory-rep-native-qualification-completed)
+supersedes this entry's initial pending v13/v14 parity and native-refusal gates.
+The 10,569 symbolic candidates still lack vendor-wide authoritative bindings;
+R2–R4, architecture families and Q1 remain open. No commit or push performed.
+
+## 2026-10-23 — REP and AMD64 completion design proposed
+
+**Status: design only; implementation and full-coverage gates remain partial.**
+The [canonical completion design](docs/Ariadne/amd64-coverage-design.md)
+defines source-region recovery, legal-form grammars, authoritative bindings,
+remaining REP families and versioned consumer/outcome contracts. Its
+[execution stages](.agents/plans/amd64-operation-coverage.md#coverage-completion-design-stages)
+keep source/legality, implementation and current validation exits separate.
+The [HTML presentation](.agents/chatdocs/ariadne-amd64-coverage-design-20261023/index.html)
+includes the architecture diagram. Creating these documents supplies no new
+instruction admission or runtime qualification; the finite v12 implementation
+and its validation remain recorded below.
+
+## 2026-10-23 — Plain REP dependency projection and coverage accounting
+
+**Status: finite v12 implementation and native checks pass; S4/Q0 remain partial.**
+This continuation starts from `e44ce2b` and processes the open REP/full AMD64
+item under the [execution stage](.agents/plans/amd64-operation-coverage.md#resume-plain-rep-and-coverage-accounting)
+and [canonical contract](docs/Ariadne/bap-analysis-core-design.md#plain-repeated-string-profile-and-coverage-accounting).
+The earlier REP-refusal statements retain their v10/v11 historical scope.
+
+Explicit `Config::with_repeated_strings(dir)` or environment mode
+`ARIADNE_BAP_SOURCE_EXTENSION_MODE=repeated-strings` selects plain producer
+`bap-bit-provenance-v12` using the unchanged pinned advanced flag bundle.
+The environment also requires `ARIADNE_BAP_SOURCE_EXTENSION=dir`. Only exact
+`F3 A4` MOVSB, `F3 AA` STOSB and `F3 A6` REPE CMPSB are admitted, with one
+top-level typed loop and definite virtual bindings. Nested/extra loops,
+external control, RIP writes and unreviewed prefixes remain refused. Existing
+packaged/default, Basic v9 and advanced v10/v11 pins and interpretations stay
+unchanged.
+
+The zero-or-more dependency closure preserves entry origins, loop-carried
+origins and possible body writes; weak `memory:any` updates do not kill earlier
+memory origins. Work is bounded by 262,144 steps and 4,096 fixed-point rounds,
+with explicit resource errors. Loop access addresses remain unknown and
+iteration-dependent, and target/native scalar transfers havoc loop-written
+architectural and virtual outputs. Guard, captured-target and refinement proof
+modes refuse v12 before helper dispatch, including requests with no roots.
+The native dispatch/direct-proof boundary recognizes the exact colon-delimited
+v12 token from overall `semantic_profile` or site projection across all nine
+proof transports, including empty/all-null sites. Recovery separately refuses
+empty analysis domains.
+Plain saved-capture replay trusts validated reader-supplied normalized effects,
+bound to captured bytes, profile and query evidence, and rejects tampering.
+It does not independently replay raw REP BIL/effect semantics; the existing
+capture trust boundary is unchanged. Hardware partial faults, general REP and ISA correctness remain
+outside this finite contract.
+
+Eight portable projection tests, six consumer tests and one early refusal test
+pass. Fresh BIL covers six Windows/Linux form/target pairs, 54 prefix-negative
+controls and old-profile v10/v11 refusal. Before final native identity-boundary
+hardening, three plain REP native integration tests pass, including 24
+Windows/Linux sequences, full native/Rust state equality and saved-capture
+tampering; all eight existing advanced regressions also pass at that source
+boundary. The final rebuilt native helper passes 41 compiled direct controls
+and 54 framed-dispatch controls, 95 total, superseding the earlier nine-control
+check. Its three plain REP integration tests and one positive old-advanced
+composition/tampering regression also pass. The latter is a compatibility
+recheck, not a ninth distinct advanced test. All 14 source hashes bound by the
+final native helper match the current checkout.
+The numeric oracle passes 720 comparisons.
+Current root checks pass 439 default Rust tests (149 ignored), 64 core-only tests
+(22 ignored), strict all-feature/all-target Clippy, formatting and the
+213-source Rust layout check. All four optimized Rust mutants are detected by
+exact named assertions after passing controls; selected observers and SUT
+sources are restored and the completed campaign verifies source stability.
+The mutation campaign completed before final native proof-policy hardening;
+its Rust SUT and selected observers remain byte-identical. The later native
+policy is checked separately by the 95 native controls, three REP integration
+tests and positive old-advanced proof recheck against the final helper.
+An old negative test that used
+v12 as an unknown profile now uses unassigned v999; the existing guard deadline
+passes its serial rerun. The first mutation attempt was interrupted to correct
+that fixture and receives no completed-campaign credit. Failed attempts receive
+no passing credit.
+
+The completed current v12 native survey covers all 171 representative byte
+cases: 57 supported projections, eight conservative unknowns, 75 missing
+producer lifts, 28 unsupported control/semantics, two encoding disagreements
+and one query error. All nine independent expectations match. PUSHFQ (`9C`)
+reproduces `BIL AST budget exceeded` in direct fresh lifting and remains a query
+error. The first local survey's decoder-EOF failures lacked the exact LLVM
+library path and earn no semantic credit; the completed rerun uses unchanged
+LLVM 20.1.2 and its matching libxml2 library.
+
+The new [accounting gate](tools/amd64_coverage.py) separates symbolic templates,
+unresolved manual legality, exact byte observations and absent authoritative
+form-to-byte bindings. Actual pinned XED accounting reproduces 10,994 templates,
+10,569 long-mode candidates and 425 exclusions; all 10,569 candidates remain
+without authoritative bindings. Fifteen new accounting controls and 31 existing
+inventory/manual/survey controls pass. Candidate sample associations, name
+matches, old passing flags and aggregate counts cannot establish full support;
+`--require-full` writes its worklist then fails while any acceptance gate is
+unmet. Current exact-byte accounting records 57 supported, eight opaque and
+106 missing cases and returns strict exit 2 as intended.
+
+The three pinned public PDFs reproduce outline/content/counts and still contain
+2,657 transcription gaps. Their new `pdftotext` 26.01 full-layout hash differs
+from the historical pin, so strict manual validation rejects the regenerated
+products; locks remain unchanged. Accepted manual products are omitted and stay
+explicit obligations. Pinned denominator fields retain all 4,118 manual rows
+and 2,657 gaps even when those products are omitted. Official-download identity
+for Volumes 4/5, complete vendor legality,
+concrete-domain expansion, wider S1/S2–S5/U5 and Q1 remain open. No full AMD64,
+real-capture, timing or release acceptance is claimed. Reports, transcripts,
+raw logs, copied sources and generated products remain ignored disposable work.
 
 ## 2026-10-23 — Current Basic v9 candidate compatibility checked
 

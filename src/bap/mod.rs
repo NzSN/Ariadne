@@ -8,9 +8,12 @@ pub mod core_adapter;
 pub mod core_protocol;
 pub mod core_session;
 pub mod guard_admission;
+mod lods_source;
 mod prepare;
 pub(crate) mod projection;
 mod registers;
+mod rep_address_source;
+pub(crate) mod repeated_strings;
 pub(crate) mod terminal_control;
 pub(crate) const PROJECTION: &str = "bap-bit-provenance-v6";
 pub(crate) const OPAQUE_ORDINARY_RULE: &str = "bap-opaque-ordinary-v4";
@@ -24,6 +27,10 @@ pub(crate) fn known_projection(profile: &str) -> bool {
             | source_extension::PROFILE
             | source_extension::ADVANCED_PROFILE
             | source_extension::ADVANCED_GUARDED_PROFILE
+            | repeated_strings::PROFILE
+            | repeated_strings::PROFILE13
+            | repeated_strings::PROFILE14
+            | repeated_strings::PROFILE15
             | guard_admission::LEGACY_PRODUCER_PROFILE
             | guard_admission::PRODUCER_PROFILE
     )
@@ -50,6 +57,16 @@ pub(crate) fn advanced_projection(profile: &str) -> bool {
     matches!(
         profile,
         source_extension::ADVANCED_PROFILE | source_extension::ADVANCED_GUARDED_PROFILE
+    )
+}
+pub(crate) fn ordinary_only_projection(profile: &str) -> bool {
+    matches!(
+        profile,
+        source_extension::PROFILE
+            | repeated_strings::PROFILE
+            | repeated_strings::PROFILE13
+            | repeated_strings::PROFILE14
+            | repeated_strings::PROFILE15
     )
 }
 pub type Error = Box<dyn std::error::Error>;

@@ -2,3 +2,6 @@
 native/bap-core/sdk-packages.export whitespace=-blank-at-eol
 Specs/Apalache.tla whitespace=-blank-at-eol
 Specs/Apalache.LICENSE whitespace=-blank-at-eol,-blank-at-eof
+# Unified-diff blank context lines are significant in these pinned patches.
+native/bap/source-coverage/lods.patch whitespace=-blank-at-eol,-blank-at-eof
+native/bap/source-coverage/rep_address.patch whitespace=-blank-at-eol,-blank-at-eof

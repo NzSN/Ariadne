@@ -4,7 +4,15 @@ use super::ast::Var;
 /// These capabilities belong only to the explicitly selected advanced producer
 /// profiles. Saved older projections retain their original namespace.
 pub(crate) fn advanced_profile(profile: &str) -> bool {
-    matches!(profile, "bap-bit-provenance-v10" | "bap-bit-provenance-v11")
+    matches!(
+        profile,
+        "bap-bit-provenance-v10"
+            | "bap-bit-provenance-v11"
+            | super::repeated_strings::PROFILE
+            | super::repeated_strings::PROFILE13
+            | super::repeated_strings::PROFILE14
+            | super::repeated_strings::PROFILE15
+    )
 }
 
 /// Canonical application FP-control variables emitted by the pinned producer.

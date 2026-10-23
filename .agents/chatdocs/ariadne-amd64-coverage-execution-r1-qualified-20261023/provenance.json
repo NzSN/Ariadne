@@ -1,0 +1,69 @@
+{
+  "schema": "ariadne-chatdoc-frozen-reading-view-v1",
+  "frozen_at": "2026-10-23T09:14:06.186248+00:00",
+  "source_directory": "ariadne-amd64-coverage-execution-20261023",
+  "status": "Historical R1-qualified execution reading view: v13/v14 finite native gate complete (416 parity instances, 259 refusal controls), with 1726 old manual gaps assigned dispositions and 931 unresolved at this version.",
+  "preservation": "index.html, architecture.svg and render.py copied byte-for-byte from the actual archived R1-qualified view. Recorded canonical source hashes and original launch metadata are retained below. The changing canonical document was not used to regenerate this historical version; freezing adds no qualification or browser launch.",
+  "renderer_policy": "The preserved renderer is historical source. Do not run it in this frozen directory: it reads the changing canonical document. Refresh the current execution reading view instead.",
+  "files": {
+    "index.html": {
+      "bytes": 76731,
+      "sha256": "5325982cb054fd7e3a135fe39e9ef292e8fca6d8feb71414434965182f7acdd6"
+    },
+    "architecture.svg": {
+      "bytes": 13093,
+      "sha256": "4052be717db79aa892c73728b600c64430c55e311e2b156135a530c992c0b612"
+    },
+    "render.py": {
+      "bytes": 17727,
+      "sha256": "825015a13ba1022b55e69a6b30aaf3a0bbb2150b75b22cbb35670ef4137c3249"
+    }
+  },
+  "original_source_review_document": {
+    "html": "ariadne-amd64-coverage-execution-20261023/index.html",
+    "previous_index_sha256": {
+      "ariadne-reports-index.html": "e062d8b0d7b0638dde65dfc4dc411090bb71b3b729191d2d6446a09b83349c0b",
+      "ariadne-reports-index.md": "93b53ff37a8d4b7e50a55eeda9b499d85408e4b95cce42068dba6de4669709b0"
+    },
+    "date": "2026-10-23",
+    "source_revision": "e44ce2be16dcf2c9e9ba30dc1999280e2935270e",
+    "source_state": "current uncommitted C1–C4 implementation and completed finite v13/v14 native REP qualification",
+    "scope": "Presentation of current canonical finite R1 native qualification (416 parity instances and 259 refusal controls), partial C1–C4 implementation and open source/domain/full-coverage gates; rendering adds no qualification.",
+    "canonical_source": "docs/Ariadne/amd64-coverage-design.md",
+    "canonical_source_sha256": {
+      "docs/Ariadne/amd64-coverage-design.md": "f6fc0a7207d3833657f6c67ab2a173cc96fdfb0cef856ea053b5335207d338da",
+      "docs/Ariadne/amd64-coverage-architecture.svg": "4052be717db79aa892c73728b600c64430c55e311e2b156135a530c992c0b612"
+    },
+    "renderer": "ariadne-amd64-coverage-execution-20261023/render.py",
+    "validation": {
+      "html_documents_checked": 2,
+      "markdown_indexes_checked": 1,
+      "local_references_checked": 242,
+      "new_page_unique_ids": 33,
+      "inline_svg_xml_validated": 1,
+      "standalone_svg_xml_validated": 1,
+      "standalone_svg_portable_attributes": true,
+      "browser_rendering_inspected": false,
+      "application_tests_run": false
+    },
+    "diagram_derivation": "Current canonical architecture SVG copied byte-for-byte; historical proposal and pre-native execution SVGs remain preserved in distinct archive directories.",
+    "presentation": {
+      "requested": "wslview",
+      "state": "launched",
+      "launch_succeeded": true,
+      "launch_exit_code": 0,
+      "visual_inspection": false,
+      "diagram_visual_inspection": true,
+      "visual_inspection_limit": "Refreshed HTML and SVG have not been visually inspected. Historical launch metadata belongs to the preserved pre-native version.",
+      "launch_completed_at": "2026-10-23T08:22:29+00:00"
+    },
+    "predecessor": {
+      "html": "ariadne-amd64-coverage-execution-pre-native-20261023/index.html",
+      "purpose": "Preserved pre-native-qualification execution reading view."
+    }
+  },
+  "successor": {
+    "html": "../ariadne-amd64-coverage-execution-20261023/index.html",
+    "purpose": "Current execution reading view for subsequent AMD64 coverage progress."
+  }
+}

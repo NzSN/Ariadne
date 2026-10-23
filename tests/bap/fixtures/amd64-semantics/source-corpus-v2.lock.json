@@ -1,0 +1,544 @@
+{
+  "schema": "ariadne.amd64-source-corpus-lock/v2",
+  "corpusVersion": 2,
+  "decision": "candidate-proposed-unreviewed",
+  "predecessors": [
+    {
+      "path": "tests/bap/fixtures/amd64-semantics/manual-inventory.lock.json",
+      "schema": "ariadne.amd-manual-inventory-lock/v1",
+      "sha256": "63d961e986dd5fbf4df59c4f9771dda615708c30e7f1d18ebb0b745f34eb3434"
+    },
+    {
+      "path": "tests/bap/fixtures/amd-manuals.lock.json",
+      "schema": "amd-manuals/schema_version=1",
+      "sha256": "eb8e6fea525e43a1f2740e97f4bff0dede564cac1fda64c5a5e2e9a46a6699f3"
+    }
+  ],
+  "scope": {
+    "vendor": "AMD",
+    "executionModes": [
+      "long-64"
+    ],
+    "softwareDomains": [
+      "application",
+      "privileged-system"
+    ],
+    "architecturalSubsets": [
+      "general-purpose",
+      "system",
+      "media-128-256-512",
+      "media-64",
+      "x87"
+    ],
+    "candidateDispositions": [
+      "intel-only",
+      "future",
+      "undocumented",
+      "unresolved"
+    ],
+    "extensionManifest": {
+      "status": "open",
+      "policy": "Every documented AMD long-mode form in the selected publications remains an obligation; missing CPUID, privilege or captured state cannot delete a form. These family names are discovery candidates, not a complete feature/CPUID binding or a reviewed extension boundary.",
+      "entries": [
+        {
+          "name": "SSE",
+          "disposition": "source-listed-candidate",
+          "sourcePublications": [
+            "26568"
+          ]
+        },
+        {
+          "name": "SSE2",
+          "disposition": "source-listed-candidate",
+          "sourcePublications": [
+            "26568"
+          ]
+        },
+        {
+          "name": "SSE3",
+          "disposition": "source-listed-candidate",
+          "sourcePublications": [
+            "26568"
+          ]
+        },
+        {
+          "name": "SSSE3",
+          "disposition": "source-listed-candidate",
+          "sourcePublications": [
+            "26568"
+          ]
+        },
+        {
+          "name": "SSE4.1",
+          "disposition": "source-listed-candidate",
+          "sourcePublications": [
+            "26568"
+          ]
+        },
+        {
+          "name": "SSE4.2",
+          "disposition": "source-listed-candidate",
+          "sourcePublications": [
+            "26568"
+          ]
+        },
+        {
+          "name": "SSE4A",
+          "disposition": "source-listed-candidate",
+          "sourcePublications": [
+            "26568"
+          ]
+        },
+        {
+          "name": "AVX",
+          "disposition": "source-listed-candidate",
+          "sourcePublications": [
+            "26568"
+          ]
+        },
+        {
+          "name": "AVX2",
+          "disposition": "source-listed-candidate",
+          "sourcePublications": [
+            "26568"
+          ]
+        },
+        {
+          "name": "AVX512",
+          "disposition": "source-listed-candidate",
+          "sourcePublications": [
+            "26568"
+          ]
+        },
+        {
+          "name": "FMA",
+          "disposition": "source-listed-candidate",
+          "sourcePublications": [
+            "26568"
+          ]
+        },
+        {
+          "name": "FMA4",
+          "disposition": "source-listed-candidate",
+          "sourcePublications": [
+            "26568"
+          ]
+        },
+        {
+          "name": "XOP",
+          "disposition": "source-listed-candidate",
+          "sourcePublications": [
+            "26568"
+          ]
+        },
+        {
+          "name": "AES",
+          "disposition": "source-listed-candidate",
+          "sourcePublications": [
+            "26568"
+          ]
+        },
+        {
+          "name": "CLMUL",
+          "disposition": "source-listed-candidate",
+          "sourcePublications": [
+            "26568"
+          ]
+        },
+        {
+          "name": "GFNI",
+          "disposition": "source-listed-candidate",
+          "sourcePublications": [
+            "26568"
+          ]
+        },
+        {
+          "name": "BMI",
+          "disposition": "source-listed-candidate",
+          "sourcePublications": [
+            "24594"
+          ]
+        },
+        {
+          "name": "BMI2",
+          "disposition": "source-listed-candidate",
+          "sourcePublications": [
+            "24594"
+          ]
+        },
+        {
+          "name": "TBM",
+          "disposition": "source-listed-candidate",
+          "sourcePublications": [
+            "24594"
+          ]
+        },
+        {
+          "name": "CET",
+          "disposition": "source-listed-candidate",
+          "sourcePublications": [
+            "24594"
+          ]
+        },
+        {
+          "name": "SEV/SNP",
+          "disposition": "source-listed-candidate",
+          "sourcePublications": [
+            "24594"
+          ]
+        },
+        {
+          "name": "MMX",
+          "disposition": "source-listed-candidate",
+          "sourcePublications": [
+            "26569"
+          ]
+        },
+        {
+          "name": "3DNow!",
+          "disposition": "source-listed-candidate",
+          "sourcePublications": [
+            "26569"
+          ]
+        },
+        {
+          "name": "x87",
+          "disposition": "source-listed-candidate",
+          "sourcePublications": [
+            "26569"
+          ]
+        }
+      ],
+      "unresolved": [
+        "Audit every feature/CPUID and extension reference across all five volumes and cross-referenced AMD publications.",
+        "Discover and pin supplementary AMD extension publications; unknown publication/extension obligations remain open.",
+        "Resolve every selected XED ISA-set/vendor/undocumented/future record against AMD sources; never silently exclude unclassified records."
+      ]
+    },
+    "sourceRegionAudit": {
+      "status": "open",
+      "required": "Every PDF page and cross-referenced global rule, instruction section, opcode appendix and feature/state constraint requires explicit ownership or a source-backed exclusion; existing instruction-row counts cannot close this audit."
+    }
+  },
+  "documents": [
+    {
+      "volume": 1,
+      "publication": "24592",
+      "revision": "3.25",
+      "publisher": "Advanced Micro Devices",
+      "filename": "24592_3.25_APM_Vol1_PUB.pdf",
+      "pdfSha256": "aed9236b718ae86cdb49f7d628f4ebb1a4bdce1a012df6cf6aad6735776c8a38",
+      "bytes": 4774887,
+      "pdfPages": 396,
+      "retrievalUrl": "https://docs.amd.com/api/khub/documents/OdDzCKsU4uf~KbI1htdPvA/content",
+      "officialIdentity": {
+        "byteStatus": "repository-official-pin",
+        "contentUrl": "https://docs.amd.com/api/khub/documents/OdDzCKsU4uf~KbI1htdPvA/content",
+        "metadataStatus": "repository-publisher-metadata-pin",
+        "metadataUrl": "https://docs.amd.com/v/u/en-US/24592_3.25_APM_Vol1_PUB"
+      },
+      "requiredRegions": [
+        {
+          "kind": "global-rules",
+          "selector": "entire-document: architecture, mode, state, privilege, addressing and exception rules; ownership audit pending",
+          "status": "unmapped"
+        }
+      ]
+    },
+    {
+      "volume": 2,
+      "publication": "24593",
+      "revision": "3.45",
+      "publisher": "Advanced Micro Devices",
+      "filename": "24593_3.45_APM_Vol2_PUB.pdf",
+      "pdfSha256": "7257d41d3584822edb7934e2c630c7d3865eea30c0ab95b8de4e546088d5ea9a",
+      "bytes": 11394894,
+      "pdfPages": 875,
+      "retrievalUrl": "https://docs.amd.com/api/khub/documents/LNBl5evreogi0r25VIFF2g/content",
+      "officialIdentity": {
+        "byteStatus": "repository-official-pin",
+        "contentUrl": "https://docs.amd.com/api/khub/documents/LNBl5evreogi0r25VIFF2g/content",
+        "metadataStatus": "repository-publisher-metadata-pin",
+        "metadataUrl": "https://docs.amd.com/v/u/en-US/24593_3.45_APM_Vol2_PUB"
+      },
+      "requiredRegions": [
+        {
+          "kind": "global-rules",
+          "selector": "entire-document: architecture, mode, state, privilege, addressing and exception rules; ownership audit pending",
+          "status": "unmapped"
+        }
+      ]
+    },
+    {
+      "volume": 3,
+      "publication": "24594",
+      "revision": "3.38",
+      "publisher": "Advanced Micro Devices",
+      "filename": "24594_3.38_APM_Vol3_PUB.pdf",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "bytes": 31234038,
+      "pdfPages": 728,
+      "retrievalUrl": "https://docs.amd.com/api/khub/documents/BqEoC2FadIAgbrUdEzDJIg/content",
+      "officialIdentity": {
+        "byteStatus": "repository-official-pin",
+        "contentUrl": "https://docs.amd.com/api/khub/documents/BqEoC2FadIAgbrUdEzDJIg/content",
+        "metadataStatus": "repository-publisher-metadata-pin",
+        "metadataUrl": "https://docs.amd.com/v/u/en-US/24594_3.38_APM_Vol3_PUB"
+      },
+      "requiredRegions": [
+        {
+          "kind": "global-rules",
+          "selector": "entire-document: architecture, mode, state, privilege, addressing and exception rules; ownership audit pending",
+          "status": "unmapped"
+        },
+        {
+          "kind": "instruction-reference",
+          "selector": "3 General-Purpose Instruction Reference",
+          "status": "unmapped"
+        },
+        {
+          "kind": "instruction-reference",
+          "selector": "4 System Instruction Reference",
+          "status": "unmapped"
+        },
+        {
+          "kind": "global-encoding-and-appendices",
+          "selector": "all chapters outside selected instruction references, including prefix/opcode rules, appendix maps and CPUID applicability",
+          "status": "unmapped"
+        }
+      ]
+    },
+    {
+      "volume": 4,
+      "publication": "26568",
+      "revision": "3.26",
+      "publisher": "Advanced Micro Devices",
+      "filename": "mirror4.pdf",
+      "pdfSha256": "5fec87806a5d03418bef588bfbe3f466c129c2f784369fe1e11dd0b6dd8213f0",
+      "bytes": 6359631,
+      "pdfPages": 1761,
+      "retrievalUrl": "https://kib.kiev.ua/x86docs/AMD/AMD64/26568_APM_v4-r3.26.pdf",
+      "officialIdentity": {
+        "byteStatus": "unverified",
+        "contentUrl": "https://docs.amd.com/api/khub/documents/ioQiNhSqxlMkRaU~IyGQYQ/content",
+        "metadataStatus": "publisher-search-index-revision; direct-content-returned-404-2026-10-23",
+        "metadataUrl": "https://docs.amd.com/v/u/en-US/26568_3.26_APM_Vol4"
+      },
+      "requiredRegions": [
+        {
+          "kind": "instruction-reference",
+          "selector": "2 Instruction Reference",
+          "status": "unmapped"
+        },
+        {
+          "kind": "global-encoding-and-appendices",
+          "selector": "all chapters, cross-reference rules and appendices outside instruction references; source ownership pending",
+          "status": "unmapped"
+        }
+      ]
+    },
+    {
+      "volume": 5,
+      "publication": "26569",
+      "revision": "3.16",
+      "publisher": "Advanced Micro Devices",
+      "filename": "mirror5.pdf",
+      "pdfSha256": "8c8c63c5e285c50faac2e7d474cf5046f5fcccb54673f464f57a8cb171ef0767",
+      "bytes": 1129228,
+      "pdfPages": 368,
+      "retrievalUrl": "https://kib.kiev.ua/x86docs/AMD/AMD64/26569_APM_v5-r3.16.pdf",
+      "officialIdentity": {
+        "byteStatus": "unverified",
+        "contentUrl": "https://docs.amd.com/api/khub/documents/w13cmcpL4f9MCT4WPN6eDg/content",
+        "metadataStatus": "publisher-search-index-revision; direct-content-returned-404-2026-10-23",
+        "metadataUrl": "https://docs.amd.com/v/u/en-US/26569"
+      },
+      "requiredRegions": [
+        {
+          "kind": "instruction-reference",
+          "selector": "1 64-Bit Media Instruction Reference",
+          "status": "unmapped"
+        },
+        {
+          "kind": "instruction-reference",
+          "selector": "2 x87 Floating-Point Instruction Reference",
+          "status": "unmapped"
+        },
+        {
+          "kind": "global-encoding-and-appendices",
+          "selector": "all chapters, cross-reference rules and appendices outside instruction references; source ownership pending",
+          "status": "unmapped"
+        }
+      ]
+    }
+  ],
+  "extractor": {
+    "schema": "ariadne.amd64-source-corpus-products/v2",
+    "normalizationSchema": "ariadne.amd-manual-inventory/v1",
+    "environment": {
+      "LC_ALL": "C",
+      "LANG": "C",
+      "TZ": "UTC"
+    },
+    "sources": {
+      "tools/amd64_source_corpus.py": "647aee93a5bf9ea97302aeed26da879ba0b88160f2f4632b4f66246f795483d7",
+      "tools/amd64_manual_inventory.py": "ce5a5a7f4c6de641ec1e373c61a900c0093e966df2618b5b0045433c6bb71b63",
+      "tools/amd64_manual_outline.js": "5398b29399de38f0a4d70ff52616b9d3b0024a5558df1ceda75a7380a3908042",
+      "tools/amd64_inventory.py": "22e3ece91dc7f55ff1d50000b419482e23d4c169da3cfa33fa24a83550efc4ca",
+      "tools/amd64_inventory_xed.py": "c36fe9eba34ed08cb886cf182831f4e25851b6f41c11724f55bbb9fb613705ef",
+      "tools/run_output.py": "0f815359fe0e9b3a5c6216e36c652bac71e1e4678ce962db1ebbc23e2486e286"
+    },
+    "tools": {
+      "pdftotext": {
+        "sha256": "4f7ead0d77e5ed9016f7af415eabf65a3a9ff20d72e51c6d1437677895f3100f",
+        "version": "pdftotext version 26.01.0",
+        "versionArgs": [
+          "-v"
+        ],
+        "libraries": {
+          "libpoppler.so.156": "947213c32960198a957552383a924c5b6cbd513ab8ea95d9a414f0a0c54581cd",
+          "libstdc++.so.6": "5bb0d21308f123b6ad46c6f35b42cedfcb8d6d439a53aa3dae04d880aaffdde3",
+          "libc.so.6": "85e64f97e348786a8fb4d9f3d52fec289e2fb86bba20f0731dfe61990525e0f7",
+          "libfreetype.so.6": "36be278a8138d3e5773eb3f8491ff3fe73122a3051a9b36d1f86457ce0fad22d",
+          "libz.so.1": "47b61967895b30e8c0c6818dd633ffeb87711cf637c688f981896f0dd84ce23b",
+          "libfontconfig.so.1": "cabcdfea3d61540e8aa7f93a29642da1d1e35c8f5fd13549f4b8ee2ee0ab28f0",
+          "libjpeg.so.8": "90a1eebead4d7c1abc46cf9c66c5392c60fc2c16f038af20fc7efbd0d8dd427f",
+          "libcurl-gnutls.so.4": "4ec6c148167d43b75ce9f3b6b271d0e048848e7d53ff1935e25150fdb4fe22eb",
+          "libgpgmepp.so.7": "79d799f07547309334a48360a4344cd6e570068d0f2eec6f88c1209facc9448b",
+          "libopenjp2.so.7": "267df1e339d524b501ef4b3567b8ab7ba9eb0bfdfe26adbaff149b54aaf03259",
+          "liblcms2.so.2": "046e89ccd894994728028a8f00c2424b79cff4e3d9832530f964edddf1078d1b",
+          "libpng16.so.16": "2a570998f08a406b4083b06888e528fa0c5d6cc3bef77b40026d661c91cbfb90",
+          "libtiff.so.6": "d65b506791e2469e886c716a7993b5e65ce40015aef1d15a678804a9fc3c4844",
+          "libnss3.so": "a8ed17ad5523dbbc92484feba50fe1883a0bbd653517dffcc8e8ff172d4633c8",
+          "libsmime3.so": "c36cfd9281d9767f18ff17544454b76aec9aaa0f606f1cdd3f0299d13ebe8068",
+          "libplc4.so": "7ea65b5a584b357bf118bd86f465cff4b694b392dd80b3ace736b70bcae445ea",
+          "libnspr4.so": "a10c172b4eecc3b7fd6a2fbca9d3c516e0d951dce21cc91d9fc4e1d68136f7d9",
+          "libm.so.6": "1c488db6f4fe8cecb72456bc018de000b7a9b539c2994864b0416b5e8371b3d8",
+          "ld-linux-x86-64.so.2": "bda779ea9e9ad234f60315477d7cfd0bdde861cd8ddd9df8cdaf62f18c4cec14",
+          "libgcc_s.so.1": "9d339ecb409578d6a5d587e6c537a8f9589b8a13fefba30d167433a4b5758bee",
+          "libbz2.so.1.0": "7138aeb748f73c150b1d34d67de69139a441910cd7b269076ba3c8b986dea9a7",
+          "libbrotlidec.so.1": "eb8768f85e9c367cd74772919b5668bbe0045cb71b65d75aafc32828e7acb1b7",
+          "libexpat.so.1": "2e5f66e2784c2746775567ff9916f6e7503182a8f1f2deb8ca729dfc1463849f",
+          "libnghttp2.so.14": "2655558fee787cb4724ad59c72ce75b20847efc92a1c52fc202aea1d812c9b20",
+          "libidn2.so.0": "cdb48484c43a795c3722e286c31eb6238b4b7c3780043895dd9fa6b6041f78da",
+          "librtmp.so.1": "fceac319eac32ab0d6e9d6d641f0abf2f4aa097aa1a1355ea9e7419e81d45b62",
+          "libldap.so.2": "0aa894b6d72690723015f6056bb6730a1cca41a2fac8224ef38cd7880c8e7860",
+          "liblber.so.2": "e2f9e23d75b37be7bdcdc39d2f74e2355a68f2ccd86e7f6534969ad8b359834b",
+          "libssh2.so.1": "34287a1e8942e6fdf1c154e8c615a8dab7a69dc6a4e8d76913afb323fdc6fd6f",
+          "libpsl.so.5": "18d125c725a498d66f971ceb60bfc7cf660f6a0149b54e5caa3f4651c3d2b3c6",
+          "libnettle.so.8": "68c2f760d329a85ce1aa5cfc5e48ffece235258159005726798ad14e6f96a789",
+          "libgnutls.so.30": "ebcc6a4dfae904dc956feb61cef5c36917cf36c19c5718d3c2be7e377ac65d27",
+          "libgssapi_krb5.so.2": "18e2ba0b2f421b780e7265337e52996f382857df63d0f9e63f391a75a14cdbe7",
+          "libzstd.so.1": "060eeb79531d435306665fd78329d8a9dd579f95876c5960bb67937825362a80",
+          "libgpgme.so.45": "caece624998149737441172de399b6927b93b303e55fdd0123ae20904df1234b",
+          "libwebp.so.7": "0b477702bb43d90a1205813a9c211faa8dfef025a258b9d60663b37311b87c08",
+          "liblzma.so.5": "515749273a91ca5e3b273b4025dc2c1f8827f90005baea0ab85ffb594e74f72f",
+          "libLerc.so.4": "b7c1fe626e31e8c3ecb80d428ffb3a8824fd241ec55c6edc8b12437412206060",
+          "libjbig.so.0": "19ae16694b0f2c442b367fd9dfecf8da68c9b8ded0bc9029c1d53a9ba91a4151",
+          "libdeflate.so.0": "0e33bbae9bd7f62fd4172ac04d9088736defa499491aacae723732ce4e905f94",
+          "libnssutil3.so": "98003226b72187f39454e750091ce560232a43e91789c712b9a31ccccbc0b723",
+          "libplds4.so": "e716d44af5086d565d644a1fbf31d51fcac629e7dd3794eaa8e7d5779150218d",
+          "libbrotlicommon.so.1": "fb353cab2ea4ecd90814b46f872c21e1034c92bd86c3c677415748b4d16b5ad1",
+          "libunistring.so.5": "c762a289c02f716a12549d544a811715126067b9a6377057671d3fad9453a1fc",
+          "libhogweed.so.6": "67bdc12f1ffe643142d5e185a6a8f654fd38cd14e77bae68201cf9aa71b00b61",
+          "libgmp.so.10": "fda9699eef15deda5f1c626e9140377a7f5d88c41516a54278ac02429cb20fa5",
+          "libsasl2.so.2": "25163eb0a23ffe7d4170f9e219886dfdb831bbb1031a2cfac2227284a7f51e02",
+          "libssl.so.3": "63b47f444efa588e291e9b650a5ba2ab02f856356f2d50f13a2e477db9119e09",
+          "libcrypto.so.3": "5385f0436ac2e284ba8c5fb1488874057c29c04be72dea32add832694f381e28",
+          "libp11-kit.so.0": "2611eeb039dbed48839d90afe3d9ad3e5bd9edca2989af05dc62a93c3ff41fed",
+          "libtasn1.so.6": "1255353abfae7b9f52aedb0264876cd4c852f13c2acf3e2203ebd2aab79bce02",
+          "libkrb5.so.3": "aca607790a4349c5053390fa22b24e717b2c5ea101d7b468ece6507140c6ff7b",
+          "libk5crypto.so.3": "ee77156da39841edfaa7c5fcdca4cf98ae34d60323095617b484188a4d9965e3",
+          "libcom_err.so.2": "6fb3115b11fe7e14c26f3e086c4dc1fb41061130869a66c976e0ea69fdb912d6",
+          "libkrb5support.so.0": "8cc61cecc016710e7134c1621b5a6537c55eea91d2a074f6f05fa6f6e36ec8d6",
+          "libassuan.so.9": "d7c8d77ad9454b6617f2d3150cc5758b48c11a08b22327653f1269589975f001",
+          "libgpg-error.so.0": "406246f1b22422bac96081fcf655ce2746e6ebcd72268497083eab9f57ddafa0",
+          "libsharpyuv.so.0": "fced0bf76ec62fcce9b2cea1a91a9c61fbf6828e9e66b194cc6d779798907ff2",
+          "libffi.so.8": "1a0dc86f787f73e025a6e521056360afcbe70f2a82cd808132fefc2b4ee95daa",
+          "libkeyutils.so.1": "c0c8f8d5adec4abe76fa462d8ad7c010f50c61e2b67b9feaa6f44e462c12cf41",
+          "libresolv.so.2": "6b99ecf94bcb81732ed1e81615084a5cfe7383eb89ce83106fa51077409ce609"
+        }
+      },
+      "mutool": {
+        "sha256": "1ac6c3565ea6269f01491e95a824d48e7c02d8b438a8b1381ebb3ecf07932c04",
+        "version": "mutool version 1.27.0",
+        "versionArgs": [
+          "-v"
+        ],
+        "libraries": {
+          "libmupdf.so.27.0": "8a1a1f8a78f235161b0a650164c509f9f289ff9b3ae6b0ad12c54002c1ab53a4",
+          "libmujs.so.3": "c379a67d957edf9194c26676eda11d2bfe85e8e5c137d6370837a725d83cb997",
+          "libcrypto.so.3": "5385f0436ac2e284ba8c5fb1488874057c29c04be72dea32add832694f381e28",
+          "libc.so.6": "85e64f97e348786a8fb4d9f3d52fec289e2fb86bba20f0731dfe61990525e0f7",
+          "libbrotlidec.so.1": "eb8768f85e9c367cd74772919b5668bbe0045cb71b65d75aafc32828e7acb1b7",
+          "libbrotlienc.so.1": "82dd80ab6b6504637b55d32985cf5826de56caac7031ed0f04b93b03051a02f4",
+          "libfreetype.so.6": "36be278a8138d3e5773eb3f8491ff3fe73122a3051a9b36d1f86457ce0fad22d",
+          "libgumbo.so.3": "e8c6b5506b4ea0eab999604c22056bb3ce61965ec3f738cd23bb47533c4d8327",
+          "libharfbuzz.so.0": "b330ca2b82b22fbce5e1a15dabfeffdd97e9976c3a3e48a2696628bfd34526d5",
+          "libjpeg.so.8": "90a1eebead4d7c1abc46cf9c66c5392c60fc2c16f038af20fc7efbd0d8dd427f",
+          "libm.so.6": "1c488db6f4fe8cecb72456bc018de000b7a9b539c2994864b0416b5e8371b3d8",
+          "libz.so.1": "47b61967895b30e8c0c6818dd633ffeb87711cf637c688f981896f0dd84ce23b",
+          "libjbig2dec.so.0": "fdee9556ebf4205bcdab2a52c8d18eba94e8e08c6156f8252b7f6cdf484658f4",
+          "libopenjp2.so.7": "267df1e339d524b501ef4b3567b8ab7ba9eb0bfdfe26adbaff149b54aaf03259",
+          "libzstd.so.1": "060eeb79531d435306665fd78329d8a9dd579f95876c5960bb67937825362a80",
+          "ld-linux-x86-64.so.2": "bda779ea9e9ad234f60315477d7cfd0bdde861cd8ddd9df8cdaf62f18c4cec14",
+          "libbrotlicommon.so.1": "fb353cab2ea4ecd90814b46f872c21e1034c92bd86c3c677415748b4d16b5ad1",
+          "libbz2.so.1.0": "7138aeb748f73c150b1d34d67de69139a441910cd7b269076ba3c8b986dea9a7",
+          "libpng16.so.16": "2a570998f08a406b4083b06888e528fa0c5d6cc3bef77b40026d661c91cbfb90",
+          "libglib-2.0.so.0": "3cc1aeae827f436a296ec488b80e6c45c150dccfb4525e7db275cc08772d322f",
+          "libgraphite2.so.3": "3f1376e8965733a4d31386d5de99c829b7704beba3b07987da9220d53f192da2",
+          "libatomic.so.1": "eac440708f874c4d446671efb5353cebeaa829bd1f18cd8d5065cd6efefa387b",
+          "libpcre2-8.so.0": "4a6b6b2078685b074869d75cb068664d7da6b3036df7bca0442b1bbbd4ac7e65"
+        }
+      },
+      "python": {
+        "sha256": "52e0a13e60a981d8c4b6478be2ba5176f69da07948a056bf49cf6f077e30cb41",
+        "version": "Python 3.14.4",
+        "versionArgs": [
+          "--version"
+        ],
+        "libraries": {
+          "libm.so.6": "1c488db6f4fe8cecb72456bc018de000b7a9b539c2994864b0416b5e8371b3d8",
+          "libz.so.1": "47b61967895b30e8c0c6818dd633ffeb87711cf637c688f981896f0dd84ce23b",
+          "libexpat.so.1": "2e5f66e2784c2746775567ff9916f6e7503182a8f1f2deb8ca729dfc1463849f",
+          "libc.so.6": "85e64f97e348786a8fb4d9f3d52fec289e2fb86bba20f0731dfe61990525e0f7",
+          "ld-linux-x86-64.so.2": "bda779ea9e9ad234f60315477d7cfd0bdde861cd8ddd9df8cdaf62f18c4cec14"
+        }
+      }
+    },
+    "commands": {
+      "layout": [
+        "pdftotext",
+        "-layout",
+        "-enc",
+        "UTF-8",
+        "{pdf}",
+        "{output}"
+      ],
+      "geometry": [
+        "pdftotext",
+        "-bbox-layout",
+        "-enc",
+        "UTF-8",
+        "{pdf}",
+        "{output}"
+      ],
+      "outline": [
+        "mutool",
+        "run",
+        "tools/amd64_manual_outline.js",
+        "{pdf}"
+      ]
+    }
+  },
+  "migrationPolicy": [
+    "pdf-identity",
+    "full-text",
+    "geometry",
+    "outline",
+    "source-regions",
+    "normalized-rows",
+    "encoding-constraints",
+    "extensions-and-scope"
+  ]
+}

@@ -1,0 +1,953 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Implementation progress for AMD64 source reconstruction, finite legal domains, v13/v14 REP profiles and remaining native and full-coverage gates."><title>Completing REP and AMD64 operation coverage · Implementation progress</title><style>
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:#f4f7fa;color:#1d2b3b;font:17px/1.7 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:#075b9b;text-underline-offset:3px}a:hover{color:#053b67}a:focus-visible,[tabindex]:focus-visible{outline:3px solid #c7871d;outline-offset:4px}.top{background:#102d47;color:#eef6fe;padding:20px max(24px,calc((100vw - 1390px)/2))}.top strong{font-size:1.1rem;letter-spacing:.3px}.top nav{display:flex;gap:24px;flex-wrap:wrap;margin-top:7px}.top a{color:#b9ddfa;font-size:.91rem}.layout{display:grid;grid-template-columns:260px minmax(0,1fr);gap:38px;max-width:1390px;margin:0 auto;padding:30px 24px 70px}.toc{position:sticky;top:24px;align-self:start;max-height:calc(100vh - 48px);overflow:auto;padding:4px 18px 20px 0}.toc strong{display:block;font-size:.88rem;text-transform:uppercase;letter-spacing:.8px;color:#52667a;margin-bottom:12px}.toc ul{list-style:none;margin:0;padding:0}.toc li{margin:5px 0;font-size:.87rem;line-height:1.45}.toc li.h3{padding-left:15px;font-size:.81rem}.toc a{color:#465c70;text-decoration:none;display:block;padding:3px 0}.toc a:hover{text-decoration:underline}article{min-width:0;background:white;border:1px solid #d7e1e9;border-radius:12px;padding:35px 44px 60px;box-shadow:0 3px 14px #132f4610}.provenance{background:#edf4fb;border:1px solid #c2d5e6;border-radius:7px;padding:15px 19px;margin:0 0 28px;font-size:.9rem;line-height:1.55}.provenance p{margin:5px 0}.label{color:#315674;text-transform:uppercase;letter-spacing:.8px;font-size:.78rem;font-weight:700}h1{font-size:2.15rem;line-height:1.2;letter-spacing:-.7px;margin:0 0 26px;color:#142d44}h2{font-size:1.55rem;line-height:1.3;margin:50px 0 18px;padding-top:18px;border-top:1px solid #dbe4eb;color:#183f5e}h3{font-size:1.15rem;line-height:1.4;margin:30px 0 12px;color:#244b69}p,ul,ol{margin:15px 0}li{padding-left:3px;margin:6px 0}code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}code{font-size:.85em;background:#f0f4f7;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}pre{white-space:pre;overflow:auto;font-size:.84rem;line-height:1.6;padding:18px 20px;background:#f3f6f9;border:1px solid #dbe4ed;border-radius:7px}pre code{background:none;padding:0;overflow-wrap:normal}blockquote{border-left:4px solid #bd8d30;background:#fff9ed;padding:4px 20px;margin:24px 0}.table-scroll{overflow:auto;max-width:100%;margin:24px 0;border:1px solid #d4dfe8;border-radius:7px}table{border-collapse:collapse;width:100%;font-size:.88rem;line-height:1.55}th,td{text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid #dbe4eb}th{background:#edf3f8;font-weight:650}tr:last-child td{border-bottom:none}td:nth-child(1){font-weight:550}img,svg{max-width:100%;height:auto}.diagram{margin:24px 0}.diagram-scroll{overflow:auto;border:1px solid #d4dfe8;border-radius:9px}.diagram-scroll svg{min-width:1200px;max-width:none;width:100%;margin:0;border:0;border-radius:0}figcaption{font-size:.84rem;color:#52667a;margin-top:8px}svg{display:block;border:1px solid #d4dfe8;border-radius:9px;margin:22px 0}.foot{margin-top:45px;padding-top:20px;border-top:1px solid #dbe4eb;font-size:.84rem;color:#52667a}.hash{display:block;word-break:break-all;font-family:ui-monospace,Consolas,monospace;font-size:.76rem}strong{font-weight:650}hr{border:0;border-top:1px solid #dbe4eb;margin:35px 0}@media(max-width:1050px){.layout{grid-template-columns:205px minmax(0,1fr);gap:24px}article{padding:28px}.toc{padding-right:0}}@media(max-width:800px){.layout{display:block;padding:16px 14px 45px}.toc{position:static;max-height:none;padding:12px 10px 20px}.toc ul{columns:2;column-gap:24px}.toc li{break-inside:avoid}.toc li.h3{display:none}article{padding:25px 20px;border-radius:8px}h1{font-size:1.75rem}h2{font-size:1.35rem}.top{padding:17px 23px}}@media(max-width:480px){.toc ul{columns:1}body{font-size:16px}.top nav{gap:14px}.table-scroll{font-size:.83rem}th,td{padding:10px}}@media print{body{background:white;font-size:10pt}.top,.toc{display:none}.layout{display:block;padding:0;max-width:none}article{border:0;padding:0;box-shadow:none}.provenance{break-inside:avoid}h2,h3{break-after:avoid}table,svg{break-inside:avoid}.diagram-scroll{overflow:visible}.diagram-scroll svg{min-width:0;max-width:100%}a{color:inherit}}
+</style></head>
+<body><header class="top"><strong>Ariadne · implementation progress</strong><nav aria-label="Document navigation"><a href="../ariadne-reports-index.html">Report archive</a><a href="../../../docs/Ariadne/amd64-coverage-design.md">Canonical design</a><a href="architecture.svg">Full architecture diagram</a><a href="../ariadne-amd64-coverage-design-20261023/index.html">Original proposal</a></nav></header>
+<div class="layout"><aside class="toc"><nav aria-label="Table of contents"><strong>Contents</strong><ul><li class="h2"><a href="#context-and-follow-up">Context and follow-up</a></li>
+<li class="h2"><a href="#1-problem-and-completion-target">1. Problem and completion target</a></li>
+<li class="h2"><a href="#2-current-boundary">2. Current boundary</a></li>
+<li class="h2"><a href="#3-architecture">3. Architecture</a></li>
+<li class="h2"><a href="#4-source-reconstruction-and-manual-gaps">4. Source reconstruction and manual gaps</a></li>
+<li class="h3"><a href="#41-freeze-a-reproducible-source-corpus">4.1 Freeze a reproducible source corpus</a></li>
+<li class="h3"><a href="#42-recover-geometry-and-ownership">4.2 Recover geometry and ownership</a></li>
+<li class="h3"><a href="#43-establish-source-completeness-separately">4.3 Establish source completeness separately</a></li>
+<li class="h2"><a href="#5-legal-forms-and-authoritative-bindings">5. Legal forms and authoritative bindings</a></li>
+<li class="h3"><a href="#51-keep-identities-separate">5.1 Keep identities separate</a></li>
+<li class="h3"><a href="#52-specify-a-restricted-encoding-grammar">5.2 Specify a restricted encoding grammar</a></li>
+<li class="h3"><a href="#53-check-totality-and-overlap">5.3 Check totality and overlap</a></li>
+<li class="h3"><a href="#54-version-the-authoritative-path">5.4 Version the authoritative path</a></li>
+<li class="h2"><a href="#6-remaining-rep-design">6. Remaining REP design</a></li>
+<li class="h3"><a href="#61-expand-operation-dimensions-explicitly">6.1 Expand operation dimensions explicitly</a></li>
+<li class="h3"><a href="#62-preserve-the-abstract-loop-contract">6.2 Preserve the abstract loop contract</a></li>
+<li class="h3"><a href="#63-separate-normal-completion-and-faultrestart-semantics">6.3 Separate normal completion and fault/restart semantics</a></li>
+<li class="h3"><a href="#64-version-every-consumer-capability">6.4 Version every consumer capability</a></li>
+<li class="h2"><a href="#7-close-the-rest-of-amd64-by-contract-family">7. Close the rest of AMD64 by contract family</a></li>
+<li class="h2"><a href="#8-validation-and-acceptance">8. Validation and acceptance</a></li>
+<li class="h2"><a href="#9-delivery-sequence-and-stop-rules">9. Delivery sequence and stop rules</a></li>
+<li class="h2"><a href="#10-source-review-and-validation-status">10. Source review and validation status</a></li>
+<li class="h3"><a href="#101-source-corpus-execution-c1">10.1 Source-corpus execution: C1</a></li>
+<li class="h3"><a href="#102-geometry-and-source-region-execution-c2">10.2 Geometry and source-region execution: C2</a></li>
+<li class="h3"><a href="#103-finite-legal-domain-and-binding-execution-c3c4">10.3 Finite legal-domain and binding execution: C3/C4</a></li>
+<li class="h3"><a href="#104-default-address-memory-rep-execution-r1">10.4 Default-address memory REP execution: R1</a></li>
+<li class="h3"><a href="#105-address-size-assessment-r2">10.5 Address-size assessment: R2</a></li>
+<li class="h3"><a href="#106-current-root-checks-and-remaining-qualification">10.6 Current root checks and remaining qualification</a></li></ul></nav></aside><article><div class="provenance"><span class="label">Implementation progress · 2026-10-23</span><p>Canonical source: <a href="../../../docs/Ariadne/amd64-coverage-design.md"><code>docs/Ariadne/amd64-coverage-design.md</code></a>.</p><p>Baseline: <strong>e44ce2b plus current uncommitted C1–C4 and v13/v14 REP execution</strong>. This dated reading view records finite implementation results and unresolved source/native qualification gates. Rendering it does not execute validation.</p></div><h1 id="completing-rep-and-amd64-operation-coverage">Completing REP and AMD64 operation coverage</h1>
+<h2 id="context-and-follow-up">Context and follow-up</h2>
+<p><strong>Status.</strong> Completion design with finite source/domain implementation, 2026-10-23.
+The working tree based on <code>e44ce2b</code> implements separately selected v12/v13/v14 REP scopes,
+a candidate five-volume source corpus, partial geometry recovery and a restricted
+v2 legal-domain/binding pilot. The <a href="../../plans/amd64-operation-coverage.md#source-and-domain-execution-c1c4">dated stage execution</a>
+distinguishes exercised clauses from the remaining full-stage exits. The broader
+encoding grammar, source completeness and consumer expansions remain open;
+the finite plain-dependency profiles do not grant proof-consumer admission.</p>
+<p><strong>Why this document exists.</strong> The <a href="../../../docs/Ariadne/bap-analysis-core-design.md#plain-repeated-string-profile-and-coverage-accounting">current BAP integration</a>
+owns the original three-form v12 contract; this design records its separately versioned memory-string successors and remaining obligations.
+The <a href="../../../CHECKPOINTS.md#2026-10-23--plain-rep-dependency-projection-and-coverage-accounting">latest checkpoint</a>
+records the starting 10,569 unbound symbolic candidates and 2,657 manual
+extraction gaps. Geometry now gives 1,726 of those old gaps source-backed
+dispositions and retains 931 unresolved. Neither the candidate count nor a
+transcription-gap count is a count of unsupported legal AMD instructions.</p>
+<p><strong>What this document establishes.</strong> This is the canonical design for closing
+source, encoding-domain, implementation and consumer coverage. The BAP design
+continues to own the implemented semantic interface and profile contracts.
+This document owns the completion data model, algorithms, dated finite
+implementation findings and remaining exits.</p>
+<p><strong>Where to go next.</strong> Read the <a href="../../plans/amd64-operation-coverage.md#coverage-completion-design-stages">completion stages</a>
+for execution order, the <a href="../../../tests/README.md">test matrix</a> for executable
+validation, and the <a href="../../../docs/Ariadne/semantic-assurance.md">BAP trust boundary</a> for what testing
+can establish. The <a href="index.html">execution HTML</a>
+is the current dated reading view; the <a href="../ariadne-amd64-coverage-design-20261023/index.html">original proposal</a>
+preserves the pre-execution version.</p>
+<p><strong>What remains unresolved.</strong> The legal-form denominator, source gaps, wider REP
+semantics, architectural state and proof consumers remain incomplete. Official
+byte identity for the pinned AMD Volumes 4/5 is unverified. Universal ISA
+execution correctness and Rust refinement remain separate obligations.
+Windows unwind coverage remains with the <a href="../../../docs/Ariadne/investigation-design.md#amd64-unwind-coverage-program">investigation design</a>.</p>
+<h2 id="1-problem-and-completion-target">1. Problem and completion target</h2>
+<p>The work has three distinct deliverables:</p>
+<ol>
+<li>A complete, source-backed inventory of legal forms within an explicit
+architecture scope, with checked encoding domains and exclusions.</li>
+<li>Versioned bindings from those domains to implemented BAP transport,
+projection and consumer contracts.</li>
+<li>Executable validation of every required form and contract partition, with
+gaps, tool failures and environmental premises remaining visible.</li>
+</ol>
+<p>The proposed initial source scope is documented AMD64 long mode, including
+application and privileged/system operations, the five architectural subsets
+already named by the program, and an explicit extension manifest. Each release
+must freeze vendor, publication revisions, extensions and execution modes.
+Intel-only, future and undocumented XED records retain explicit dispositions;
+they are not silently promoted into the AMD denominator or silently dropped.
+A combined AMD/Intel claim needs its own pinned Intel source and extension set.
+The scope freeze is an implementation gate, not a scope decision already accepted
+by this proposal.</p>
+<p>All documented forms inside the selected scope remain obligations. Missing
+capture state, privilege, CPUID or operating-system state can produce explicit
+conditional outcomes; they cannot justify removing a difficult instruction
+from the denominator. A later scope change creates a new manifest and a visible
+delta. It cannot turn an old incomplete campaign into a complete one.</p>
+<p>“Full coverage” here means implementation and validation coverage of that
+declared domain. It does not mean every concrete instruction execution has been
+tested or that BAP has an independent ISA-correctness proof. A finite sample
+cannot establish those stronger claims.</p>
+<h2 id="2-current-boundary">2. Current boundary</h2>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Scrollable table"><table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Current state</th>
+<th>Consequence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>XED source</td>
+<td>10,994 symbolic records: 10,569 long-mode candidates, 425 exclusions</td>
+<td>A frozen candidate grammar, not a legal AMD instruction count.</td>
+</tr>
+<tr>
+<td>Manual transcription</td>
+<td>Historical v1 has 4,118 rows and 2,657 gap records; geometry accounts for every old gap ID with 1,726 source-backed dispositions and 931 unresolved</td>
+<td>The old lock remains unchanged. A disposition is scoped to the affected source cells; complete source/constraint coverage remains open.</td>
+</tr>
+<tr>
+<td>Source provenance</td>
+<td>Fresh publisher bytes match Vol1 r3.25, Vol2 r3.45 and Vol3 r3.38; indexed official Vol4 r3.26 and Vol5 r3.16 URLs return HTTP 404</td>
+<td>Vol4/5 remain pinned archive copies with unverified publisher-byte identity.</td>
+</tr>
+<tr>
+<td>Current extraction</td>
+<td>Candidate v2 reproduces all five volumes under pinned <code>pdftotext</code> 26.01, MuPDF 1.27 and Python 3.14.4; Vol3–5 normalized content matches v1 while full-layout hashes differ</td>
+<td>Existing strict v1 pins remain active. Equal normalized content does not authorize migration or close previously unparsed source regions.</td>
+</tr>
+<tr>
+<td>Representative survey</td>
+<td>171 exact byte cases: 57 projected, 8 conservative unknowns, 106 remaining gaps</td>
+<td>These samples do not bind any symbolic form authoritatively. Nine independent expectations match.</td>
+</tr>
+<tr>
+<td>REP v12</td>
+<td>Exact <code>F3 A4</code>, <code>F3 AA</code>, <code>F3 A6</code>; plain dependency analysis only</td>
+<td>Its three-form admission remains frozen.</td>
+</tr>
+<tr>
+<td>REP v13/v14</td>
+<td>v13 selects 24 nonempty default-address producer forms; v14 adds four exact LODS forms from a separate pinned BAP source bundle</td>
+<td>Both remain plain dependency profiles; address overrides, I/O and guard/target/refinement/composition proof transports remain refused. Current native-core integration requires its separate gate.</td>
+</tr>
+<tr>
+<td>Accounting v1</td>
+<td>Candidate-only associations remain unchanged</td>
+<td>The frozen 10,569 candidates still lack vendor-wide authoritative legal-form bindings.</td>
+</tr>
+<tr>
+<td>Legal-domain/binding v2 pilot</td>
+<td>Three source-derived F3 MOVS/STOS/CMPS families enumerate 24 canonical byte/environment points: 3 supported and 21 explicitly unsupported for v12</td>
+<td>Total disposition of this pilot does not close implementation, source completeness or the vendor denominator; fresh source-bound BIL, numeric and Rust admission checks pass for this pilot.</td>
+</tr>
+</tbody>
+</table></div>
+<p>The survey's 106 remaining cases comprise 75 missing producer lifts, 28
+unsupported control/semantics outcomes, two encoding disagreements and one
+query error. The latter is PUSHFQ (<code>9C</code>), whose fresh lift exceeds the helper's
+BIL AST budget. These are measured outcomes for selected bytes, not estimates
+of how many legal forms remain.</p>
+<h2 id="3-architecture">3. Architecture</h2>
+<figure class="diagram"><div class="diagram-scroll" tabindex="0" role="region" aria-label="Scrollable architecture diagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1050" role="img" aria-labelledby="coverage-title coverage-desc">
+  <title id="coverage-title">AMD64 coverage and REP qualification architecture</title>
+  <desc id="coverage-desc">The inventory lane reconciles authoritative manuals and PDF geometry with separately defined legal form domains and reviewed form bindings. The execution lane takes captured bytes through the trusted BAP producer, typed projection and consumer proof modes, then fresh tests and qualification gates. Both lanes feed a coverage report with independent denominators. XED supplies candidate encoding templates and grammar and LLVM supplies independent decode and control facts; neither supplies replacement production semantics. The 10,569 unbound XED candidates and 2,657 manual gaps belong to separate inventories and cannot be added.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#43576c" stroke="none" />
+    </marker>
+    <marker id="candidate-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#806a44" stroke="none" />
+    </marker>
+  </defs>
+  <rect width="1440" height="1050" fill="#fff" stroke="none" />
+  <text x="42" y="48" font-family="DejaVu Sans, Arial, sans-serif" font-size="28" font-weight="700" fill="#162b3e">AMD64 coverage: separate the legal domain from demonstrated support</text>
+  <text x="42" y="79" font-family="DejaVu Sans, Arial, sans-serif" font-size="17" font-weight="400" fill="#4b6175">Completion architecture • finite source/domain and v13/v14 memory REP implementation • 2026-10-23</text>
+  <rect x="24" y="103" width="1392" height="310" rx="16" fill="#f3f7fb" stroke="none" />
+  <text x="44" y="136" font-family="DejaVu Sans, Arial, sans-serif" font-size="18" font-weight="700" fill="#162b3e" letter-spacing=".6">1 · INVENTORY, LEGALITY AND BINDINGS</text>
+  <rect x="44" y="158" width="350" height="137" fill="#edf4fb" stroke="#7293b1" stroke-width="1.7" rx="12" />
+  <text x="64" y="188" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" fill="#162b3e">Source corpus</text>
+  <text x="64" y="218" font-family="DejaVu Sans, Arial, sans-serif" font-size="16" font-weight="400" fill="#162b3e">Manual identities + PDF geometry</text>
+  <text x="64" y="245" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">XED candidates: 10,569 unbound</text>
+  <text x="64" y="271" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Original gaps: 2,657; unresolved: 931</text>
+  <path d="M394 226 H438" stroke="#43576c" fill="none" stroke-width="2.4" />
+  <path d="M438.0,226.0 L429.0,221.5 L429.0,230.5 Z" fill="#43576c" stroke="none" />
+  <rect x="450" y="158" width="358" height="137" fill="#eef7f3" stroke="#75a18c" stroke-width="1.7" rx="12" />
+  <text x="470" y="188" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" fill="#162b3e">Explicit legal form domains</text>
+  <text x="470" y="218" font-family="DejaVu Sans, Arial, sans-serif" font-size="16" font-weight="400" fill="#162b3e">Mode, feature, prefix, operand rules</text>
+  <text x="470" y="245" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Review identities; retain disagreements</text>
+  <text x="470" y="271" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Explicit denominators and exclusions</text>
+  <path d="M808 226 H852" stroke="#43576c" fill="none" stroke-width="2.4" />
+  <path d="M852.0,226.0 L843.0,221.5 L843.0,230.5 Z" fill="#43576c" stroke="none" />
+  <rect x="864" y="158" width="527" height="137" fill="#eef7f3" stroke="#75a18c" stroke-width="1.7" rx="12" />
+  <text x="884" y="188" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" fill="#162b3e">Reviewed bindings + profile registry</text>
+  <text x="884" y="218" font-family="DejaVu Sans, Arial, sans-serif" font-size="16" font-weight="400" fill="#162b3e">Legal form → encoding domain → implementation rule</text>
+  <text x="884" y="245" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Consumer-specific capability; versioned refusal reasons</text>
+  <text x="884" y="271" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Immutable old pins; explicit new-profile promotion</text>
+  <rect x="44" y="316" width="350" height="72" fill="#fff6e6" stroke="#c4a15e" stroke-width="1.7" rx="12" />
+  <text x="64" y="345" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" fill="#162b3e">Candidate lane: XED</text>
+  <text x="64" y="371" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Encoding templates; review required</text>
+  <path d="M394 352 H629 V306" stroke="#806a44" fill="none" stroke-width="2.2" stroke-dasharray="7 5" />
+  <path d="M629.0,306.0 L624.5,315.0 L633.5,315.0 Z" fill="#806a44" stroke="none" />
+  <text x="682" y="344" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Counts use different source domains.</text>
+  <text x="682" y="370" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Do not sum them or treat a mnemonic match as a binding.</text>
+  <rect x="24" y="435" width="1392" height="352" rx="16" fill="#f1f7f4" stroke="none" />
+  <text x="44" y="468" font-family="DejaVu Sans, Arial, sans-serif" font-size="18" font-weight="700" fill="#162b3e" letter-spacing=".6">2 · EXECUTION, PROJECTION AND CONSUMER QUALIFICATION</text>
+  <rect x="44" y="494" width="205" height="137" fill="#edf4fb" stroke="#7293b1" stroke-width="1.7" rx="12" />
+  <text x="64" y="524" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" fill="#162b3e">Captured bytes</text>
+  <text x="64" y="554" font-family="DejaVu Sans, Arial, sans-serif" font-size="16" font-weight="400" fill="#162b3e">Immutable snapshot</text>
+  <text x="64" y="581" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Semantic addresses</text>
+  <text x="64" y="607" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Holes and conflicts</text>
+  <path d="M249 562 H279" stroke="#43576c" fill="none" stroke-width="2.4" />
+  <path d="M279.0,562.0 L270.0,557.5 L270.0,566.5 Z" fill="#43576c" stroke="none" />
+  <rect x="291" y="494" width="252" height="137" fill="#edf4fb" stroke="#7293b1" stroke-width="1.7" rx="12" />
+  <text x="311" y="524" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" fill="#162b3e">BAP producer</text>
+  <text x="311" y="554" font-family="DejaVu Sans, Arial, sans-serif" font-size="16" font-weight="400" fill="#162b3e">Pinned trusted lifting</text>
+  <text x="311" y="581" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Production semantics</text>
+  <text x="311" y="607" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Typed BIL or unsupported</text>
+  <path d="M543 562 H573" stroke="#43576c" fill="none" stroke-width="2.4" />
+  <path d="M573.0,562.0 L564.0,557.5 L564.0,566.5 Z" fill="#43576c" stroke="none" />
+  <rect x="585" y="494" width="262" height="137" fill="#eef7f3" stroke="#75a18c" stroke-width="1.7" rx="12" />
+  <text x="605" y="524" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" fill="#162b3e">Ariadne projection</text>
+  <text x="605" y="554" font-family="DejaVu Sans, Arial, sans-serif" font-size="16" font-weight="400" fill="#162b3e">Effects + loop summaries</text>
+  <text x="605" y="581" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">May-writes; justified kills</text>
+  <text x="605" y="607" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Zero or many iterations</text>
+  <path d="M847 562 H877" stroke="#43576c" fill="none" stroke-width="2.4" />
+  <path d="M877.0,562.0 L868.0,557.5 L868.0,566.5 Z" fill="#43576c" stroke="none" />
+  <rect x="889" y="494" width="502" height="137" fill="#eef7f3" stroke="#75a18c" stroke-width="1.7" rx="12" />
+  <text x="909" y="524" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" fill="#162b3e">Consumer-specific proofs and refusals</text>
+  <text x="909" y="554" font-family="DejaVu Sans, Arial, sans-serif" font-size="16" font-weight="400" fill="#162b3e">Dependency analysis, guards, targets, composition</text>
+  <text x="909" y="581" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">REP dependency support does not qualify proof modes</text>
+  <text x="909" y="607" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Bind every claim to its profile, query and evidence</text>
+  <path d="M1127 295 V482" stroke="#43576c" fill="none" stroke-width="2.4" />
+  <path d="M1127.0,482.0 L1122.5,473.0 L1131.5,473.0 Z" fill="#43576c" stroke="none" />
+  <text x="1143" y="439" font-family="DejaVu Sans, Arial, sans-serif" font-size="14" font-weight="400" fill="#4b6175">admitted scope</text>
+  <rect x="44" y="664" width="350" height="91" fill="#fff6e6" stroke="#c4a15e" stroke-width="1.7" rx="12" />
+  <text x="64" y="693" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" fill="#162b3e">LLVM MC reference</text>
+  <text x="64" y="720" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Decode / control; no effect fallback</text>
+  <text x="64" y="743" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Independent facts; BAP lifts semantics</text>
+  <path d="M394 711 H444" stroke="#806a44" fill="none" stroke-width="2.2" stroke-dasharray="7 5" />
+  <path d="M444.0,711.0 L435.0,706.5 L435.0,715.5 Z" fill="#806a44" stroke="none" />
+  <rect x="456" y="664" width="935" height="91" fill="#eef7f3" stroke="#75a18c" stroke-width="1.7" rx="12" />
+  <text x="476" y="693" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" fill="#162b3e">Fresh tests and promotion gates</text>
+  <text x="476" y="721" font-family="DejaVu Sans, Arial, sans-serif" font-size="16" font-weight="400" fill="#162b3e">Boundary / negative cases · native parity · saved replay · compiled mutants · analysis MBT</text>
+  <text x="476" y="745" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Exercise pinned producer, projector and every claimed consumer; retain limits and exact runtime identities</text>
+  <path d="M1140 631 V652" stroke="#43576c" fill="none" stroke-width="2.4" />
+  <path d="M1140.0,652.0 L1135.5,643.0 L1144.5,643.0 Z" fill="#43576c" stroke="none" />
+  <path d="M629 295 V426 H1428 V819 H1125 V837" stroke="#43576c" fill="none" stroke-width="2.4" />
+  <path d="M1125.0,837.0 L1120.5,828.0 L1129.5,828.0 Z" fill="#43576c" stroke="none" />
+  <text x="1004" y="817" font-family="DejaVu Sans, Arial, sans-serif" font-size="14" font-weight="400" fill="#4b6175">separate denominators</text>
+  <path d="M770 755 V837" stroke="#43576c" fill="none" stroke-width="2.4" />
+  <path d="M770.0,837.0 L765.5,828.0 L774.5,828.0 Z" fill="#43576c" stroke="none" />
+  <text x="470" y="816" font-family="DejaVu Sans, Arial, sans-serif" font-size="14" font-weight="400" fill="#4b6175">demonstrated capabilities + refusals</text>
+  <rect x="44" y="849" width="1347" height="98" fill="#eef7f3" stroke="#75a18c" stroke-width="1.7" rx="12" />
+  <text x="64" y="880" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" fill="#162b3e">Coverage report: source domain × legal form × profile × consumer × executable evidence</text>
+  <text x="64" y="909" font-family="DejaVu Sans, Arial, sans-serif" font-size="16" font-weight="400" fill="#162b3e">Distinguish bound, supported, conservatively modeled, refused, untested and unresolved. Publish every uncovered clause.</text>
+  <text x="64" y="934" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Full coverage requires implemented support and validation across the legal domain and every required consumer.</text>
+  <text x="44" y="989" font-family="DejaVu Sans, Arial, sans-serif" font-size="17" font-weight="400" fill="#4b6175">v12 stays frozen; v13 covers 24 forms and v14 adds four LODS forms. Source completeness and native/full-domain gates remain open.</text>
+  <text x="44" y="1020" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">This diagram describes architecture and acceptance boundaries; it does not establish new implementation qualification.</text>
+</svg></div><figcaption>Two lanes connect source obligations with consumer qualification. Scroll horizontally for readable labels, or <a href="architecture.svg">open the full diagram</a>.</figcaption></figure>
+<p>The source lane establishes encoding membership and applicability. The semantic
+lane implements analysis behavior under pinned BAP lifting. Their join is a
+versioned binding registry; the coverage validator checks their common domains
+and current validation inputs. XED and LLVM provide independent encoding and
+control checks. Neither supplies a substitute instruction-effect implementation.</p>
+<p>Maintain source pins, compact grammar/rule definitions, reviewed correction
+patches, generators and small regressions in the repository. Reconstruct PDFs,
+full layout/geometry products, expanded inventories, solver products, reports
+and copied build trees under ignored <code>target/</code> or temporary work. Do not restore
+a retained qualification-evidence collection.</p>
+<h2 id="4-source-reconstruction-and-manual-gaps">4. Source reconstruction and manual gaps</h2>
+<h3 id="41-freeze-a-reproducible-source-corpus">4.1 Freeze a reproducible source corpus</h3>
+<p>The implemented candidate <a href="../../../tests/bap/fixtures/amd64-semantics/source-corpus-v2.lock.json"><code>source-corpus/v2</code> lock</a>
+identifies publication, revision, publisher, retrieval origin, exact PDF
+size/digest, selected chapters, appendices and global encoding-rule obligations.
+The <a href="../../../tools/amd64_source_corpus.py">source-corpus tool</a> binds extractor
+sources, executable and shared-library hashes, versions, options, locale and
+normalization schema. Its decision remains <code>candidate-proposed-unreviewed</code>;
+24 source-listed extension-family candidates are discovery inputs with explicit
+unresolved supplementary-publication and CPUID/vendor audits. A live URL alone
+is not a reproducible source identity.</p>
+<p>Preserve the existing corpus lock. A new extraction toolchain produces a
+separate candidate lock. Review PDF identity, full-text/geometry differences,
+source-region coverage and normalized row/constraint differences before adopting
+it. Reusing the old content digest is insufficient if changed source regions
+were never represented by the old extractor.</p>
+<h3 id="42-recover-geometry-and-ownership">4.2 Recover geometry and ownership</h3>
+<p>Use PDF word/glyph coordinates, table boundaries and outline ownership to build
+source cells. A <code>sourceCell</code> has a PDF digest/page, rectangle, glyph span/digest,
+table/row/column identity, owning instruction sections, continuation links and
+footnote references. Printed page labels are useful annotations; PDF page
+indices remain unambiguous source addresses.</p>
+<p>The parser must track tables across pages and represent merged cells explicitly.
+A spanning encoding cell can cover several operand rows only when geometry and
+source structure justify that span. Never fill down a previous opcode merely
+because the current cell is blank. Preserve alternative interpretations as
+unresolved records.</p>
+<p>Every old gap receives a source-backed disposition: resolved cell, justified
+continuation, non-encoding material, duplicate/alias, or unresolved. Record the
+original gap ID, affected source cells, correction rule and review rationale.
+Deleting a gap, suppressing a line class, or moving text outside a table does
+not resolve an obligation. The implemented <a href="../../../tools/amd64_manual_geometry.py">geometry extractor</a>
+now preserves those identities and reconstructs word-coordinate ownership;
+<a href="#102-geometry-and-source-region-execution-c2">its finite execution</a> leaves
+ambiguous cells, cross-page continuations and unparsed constraints open.</p>
+<h3 id="43-establish-source-completeness-separately">4.3 Establish source completeness separately</h3>
+<p>Account for every selected source region, including prefix rules, operand-size
+rules, exception/applicability notes, appendix maps and extension updates.
+“All 2,657 gaps resolved” closes the old transcription backlog only. It does not
+prove that the previous 4,118 rows contained all instruction forms or all global
+constraints. Source-region coverage and legal-form derivation require their own
+reviews and executable omission controls.</p>
+<h2 id="5-legal-forms-and-authoritative-bindings">5. Legal forms and authoritative bindings</h2>
+<h3 id="51-keep-identities-separate">5.1 Keep identities separate</h3>
+<p>These records define the completion target. The restricted
+<a href="../../../tests/bap/fixtures/amd64-semantics/legal-forms-pilot-v2.json"><code>legal-forms/v2</code> pilot</a>
+and <a href="../../../tests/bap/fixtures/amd64-semantics/profile-bindings-pilot-v2.json"><code>profile-bindings/v2</code> pilot</a>
+now implement a finite subset; the wider source/domain and semantic-contract
+records remain to be completed:</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Scrollable table"><table>
+<thead>
+<tr>
+<th>Entity</th>
+<th>Required identity and content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CoverageScope</code></td>
+<td>Vendor/publication/extension set, modes, environment axes, required semantic profiles/consumers and digest.</td>
+</tr>
+<tr>
+<td><code>SourceCell</code></td>
+<td>Exact source location, ownership, transcription/constraint role and reviewed disposition.</td>
+</tr>
+<tr>
+<td><code>LegalForm</code></td>
+<td>Source references, operation/operand roles, byte grammar, effective-size rules, prefix constraints and applicability predicates.</td>
+</tr>
+<tr>
+<td><code>TemplateRelation</code></td>
+<td>Legal-form IDs, frozen XED IDs, relation kind and source-backed explanation for equivalence, splitting, aliasing, overlap or absence.</td>
+</tr>
+<tr>
+<td><code>SemanticContract</code></td>
+<td>State reads/writes, normal/exceptional outcomes, memory/order/environment effects and conservative-analysis obligations.</td>
+</tr>
+<tr>
+<td><code>ProfileBinding</code></td>
+<td>Legal-form domain, producer and implementation rule IDs, semantic-contract ID, profile/consumer capabilities, source/ABI digests and validation obligations.</td>
+</tr>
+<tr>
+<td><code>ByteCase</code></td>
+<td>Exact consumed bytes, decode environment, binding/form IDs, independent expectations and current observations.</td>
+</tr>
+</tbody>
+</table></div>
+<p>A manual row can describe several legal forms, and several rows can describe
+one form. One XED template can intersect multiple forms, and several templates
+can cover one form. Store these relations explicitly; mnemonic and IFORM name
+agreement is only a search aid.</p>
+<p>Source-backed AMD forms absent from XED remain first-class obligations. Their
+absence triggers a decoder/producer gap or a reviewed alternate encoding
+reference; it must not remove them from the legal inventory. Conversely, each
+XED candidate needs an explicit vendor/scope/alias/undocumented/future/unresolved
+disposition.</p>
+<h3 id="52-specify-a-restricted-encoding-grammar">5.2 Specify a restricted encoding grammar</h3>
+<p>Represent consumed instruction bytes, limited to 15 bytes, with declarative
+constraints over opcode maps, prefixes and ordering, operand/address size,
+REX/VEX/EVEX/XOP fields, ModRM/SIB, displacement, immediate and extension fields.
+Preserve operand roles and register restrictions, including high-byte/REX
+conflicts and reserved fields. Stream bytes after the consumed instruction are
+separate input, not part of its identity.</p>
+<p>Keep these predicates distinct:</p>
+<pre><code class="language-text">encoding_member(form, bytes, decode_environment)
+instruction_applicability(form, architectural_environment)
+profile_admission(binding, consumed_bytes, decode_environment,
+                  pinned_producer_identity, typed_BIL, requested_consumers)
+</code></pre>
+<p>A recognized encoding can require an architectural exception in a particular
+environment. It is not necessarily undecodable. Feature-dependent opcode
+aliases need guarded resolution; a disabled feature must not automatically be
+treated as either “not in scope” or a generic invalid opcode.
+Admission must validate the entire chain from captured consumed bytes through
+the legal-form match to the exact producer query/BIL and consumer selection.
+Bind snapshot/VA, bytes/extent, target/environment, helper/runtime identity and
+AST digest; a well-typed BIL shape for different bytes is insufficient. When a
+feature-dependent alias cannot be selected from justified premises, retain the
+alternatives under a reviewed join or report the unresolved applicability.</p>
+<h3 id="53-check-totality-and-overlap">5.3 Check totality and overlap</h3>
+<p>For a legal form <code>f</code>, let <code>D(f)</code> be its declared byte/environment domain. Each
+point must have a checked disposition: implemented binding, architectural alias
+or exception contract, explicit unsupported obligation, or unresolved region.
+Aliases and exception outcomes count as supported only through their own
+implemented contracts. Scope exclusions are accounted before constructing
+<code>D(f)</code>; removing a point already inside it requires a new reviewed scope manifest.</p>
+<p>The validator checks:</p>
+<pre><code class="language-text">S(f) union U(f) union X(f) = D(f)       # total disposition accounting
+S(f) = D(f), U(f) = X(f) = empty       # implementation completeness
+binding_domain is a subset of its referenced legal-form domains
+overlaps have identical meaning or a checked, source-backed dispatch rule
+</code></pre>
+<p>Here <code>S</code> is the union of implemented binding domains, <code>U</code> is explicitly
+unsupported, and <code>X</code> is unresolved. Covering a region with an unsupported record
+completes its accounting, not its implementation.</p>
+<p>Use finite enumeration for small fields and a restricted constraint solver for
+larger symbolic products. A solver timeout, unsupported constraint or unknown
+answer leaves the obligation open. Do not assign success after a work cap.
+Independently replay satisfying witnesses and counterexamples; use separate
+checks for table/grammar derivation, partition coverage and implementation
+dispatch. The grammar and its translation remain reviewed trust premises.</p>
+<p>A byte recipe is a witness to membership, not proof of totality. A collection
+of passing examples cannot certify <code>S(f) = D(f)</code>. Conversely, domain totality
+does not prove instruction execution semantics; that remains under the BAP
+trust boundary and separately exercised analysis contracts.</p>
+<h3 id="54-version-the-authoritative-path">5.4 Version the authoritative path</h3>
+<p>Keep <code>ariadne.amd64-form-case-associations/v1</code> candidate-only and preserve
+<code>coverage/v1</code> behavior. The separate <a href="../../../tools/amd64_legal_forms.py">v2 legal-domain checker</a>
+implements <code>legal-forms/v2</code>, <code>profile-bindings/v2</code> and <code>coverage-assessment/v2</code>
+for the restricted pilot. It rejects unknown fields, duplicate identities,
+orphan references, inconsistent aliases and stale source, producer, grammar or
+consumer digests. Unsupported grammar and exhausted enumeration return an
+unknown outcome; the pilot supplies no wider solver or source-completeness claim.</p>
+<p>No <code>authoritative: true</code> switch may promote an existing association. The new
+checker must validate the source derivation and domain obligations. Digests bind
+the reviewed inputs; hashing a claim does not establish its authority.</p>
+<h2 id="6-remaining-rep-design">6. Remaining REP design</h2>
+<h3 id="61-expand-operation-dimensions-explicitly">6.1 Expand operation dimensions explicitly</h3>
+<p>The proposed memory-string progression is:</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Scrollable table"><table>
+<thead>
+<tr>
+<th>Family</th>
+<th>Repeat condition</th>
+<th>Element widths</th>
+<th>Address-size work</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MOVS, STOS, LODS</td>
+<td>F3 count-controlled</td>
+<td>8 / 16 / 32 / 64</td>
+<td>Default 64-bit addressing, then separately reviewed 32-bit addressing.</td>
+</tr>
+<tr>
+<td>CMPS, SCAS</td>
+<td>F3 while equal; F2 while not equal</td>
+<td>8 / 16 / 32 / 64</td>
+<td>Same independent address-size progression.</td>
+</tr>
+<tr>
+<td>INS, OUTS</td>
+<td>Separately reviewed F3 I/O repetition</td>
+<td>8 / 16 / 32</td>
+<td>Separate external-state, privilege and exceptional-completion contracts.</td>
+</tr>
+</tbody>
+</table></div>
+<p>R1 implements the default-address portion through two successor profiles: v13
+for 24 nonempty original producer lifts, and v14 for those forms plus four LODS
+lifts from a separate BAP source bundle. See the dated execution below for
+producer, projection and consumer-validation scopes.</p>
+<p>These family/condition/element choices give 28 memory-string planning tuples
+at default address size, including the current three, or 56 after adding the
+second address-size choice. They are planning tuples, not legal-form or
+exhaustive-encoding counts. Prefix/segment variants and environmental domains
+still require source-derived bindings. <a href="https://docs.amd.com/api/khub/documents/BqEoC2FadIAgbrUdEzDJIg/content#page=54">AMD repeat-prefix tables</a>
+are the source starting point.</p>
+<p>Each recipe records operation, element width, address/count/index width,
+repeat condition, applicable source-segment selection, exact prefix constraints
+and environment predicates. A MOVSD string encoding must never be selected by
+the ambiguous mnemonic alone. Extra prefixes, prefix order, repeated prefixes
+and feature modifiers remain unreviewed until their particular domains are
+established; F2/F3 never become generic permission bits.</p>
+<p>For comparison/scanning repetition, the newly produced ZF controls continuation
+after the first iteration. Tests must distinguish an initial ZF from the first
+comparison's result. Element size and address/count size are independent.
+<a href="https://cdrdv2.intel.com/v1/dl/getContent/671241#page=573">Intel's repeat-operation reference</a>
+provides an independent primary cross-check.</p>
+<h3 id="62-preserve-the-abstract-loop-contract">6.2 Preserve the abstract loop contract</h3>
+<p>Retain the v12 zero-or-more dependency fixed point as the minimum conservative
+contract. Entry origins survive the zero-iteration alternative; possible body
+writes do not become definite kills. LODS/SCAS add accumulator lane and flag
+obligations. Element-width changes add multi-byte memory, overlap and arithmetic
+wrap cases. Address-size changes add count/index lane rules and upper-half
+behavior; test nonzero upper halves with both zero and nonzero effective counts.
+Do not infer zero-count upper-lane behavior from a generic register-write rule.</p>
+<p>Recognize a reviewed producer loop structure with bound temporaries, typed
+conditions and no unreviewed external control. Do not synthesize effects from
+an opcode when BAP lacks the lift. A larger legitimate BIL tree needs a reviewed
+transport/resource contract; raising an AST limit alone does not implement a
+missing architectural state bank.</p>
+<p>Preserve bounded work and explicit exhaustion. A more precise range or
+closed-form optimization must conservatively refine the established loop
+summary and pass the same zero-iteration and loop-carried-origin controls.
+Do not concretely iterate a captured RCX value: the snapshot does not establish
+the instruction's entry count or earlier executed iterations.</p>
+<h3 id="63-separate-normal-completion-and-faultrestart-semantics">6.3 Separate normal completion and fault/restart semantics</h3>
+<p>Extend the semantic outcome model before claiming fault-sensitive REP support.
+Represent normal completion, a possible completed-iteration prefix followed by
+a fault, and interruption/restart boundaries under their architectural premises.
+Do not make a partial prefix imply the final normal result or attach a
+normal-completion guard to a fault outcome. Memory accesses need conditional
+width/progress/ordering information, not a first-iteration affine address
+reused for the entire operation.</p>
+<p>I/O repetition requires explicit external I/O state and side effects; it cannot
+be implemented by a <code>memory:any</code> rule. A port read can precede a later memory
+fault. The <a href="https://cdrdv2.intel.com/v1/dl/getContent/671241#page=572">Intel REP INS reference</a>
+and <a href="https://cdrdv2.intel.com/v1/dl/getContent/671241#page=574">comparison fault behavior</a>
+must be reconciled with the selected AMD contracts before admission. A
+normal-completion numeric oracle does not close those gates.</p>
+<h3 id="64-version-every-consumer-capability">6.4 Version every consumer capability</h3>
+<p>Freeze v12's current meaning. Allocate successor semantic profiles and, where
+needed, new receipt/checker generations; numeric version IDs are assigned at
+implementation time. Reusing the same producer binary does not make a new
+projection or proof contract equivalent to an old one.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Scrollable table"><table>
+<thead>
+<tr>
+<th>Consumer</th>
+<th>Required expansion contract</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Plain dependency projection</td>
+<td>Exact recipe admission, bounded closure, lane/flag/memory effects and explicit outcomes.</td>
+</tr>
+<tr>
+<td>Address evidence</td>
+<td>Retain every possible access; iteration-dependent addresses stay unknown unless a separate range contract is validated.</td>
+</tr>
+<tr>
+<td>Guard admission</td>
+<td>Derive transfers over the whole loop; preserve an unaffected register only after checking all writes; no assumption of nonzero count or normal completion.</td>
+</tr>
+<tr>
+<td>Captured targets</td>
+<td>Havoc every possibly written binding or validate a loop summary; preserve original edges, candidates and coverage obligations.</td>
+</tr>
+<tr>
+<td>Memory refinement</td>
+<td>Treat all potentially reached writes as barriers unless a checked footprint proves exclusion; no first-iteration disjointness shortcut.</td>
+</tr>
+<tr>
+<td>Composition/native replay</td>
+<td>Replay the same profile, outcomes, query and proof premises; invalidate receipts when any bound rule changes.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Use explicit capabilities per profile and consumer. During migration, a
+consumer continues to refuse unsupported recipes before work, including empty
+and all-null source domains and direct checker entry points. Bind the overall
+semantic identity as well as site identities. Old/current transport mixing and
+substring lookalikes must remain negative controls.</p>
+<h2 id="7-close-the-rest-of-amd64-by-contract-family">7. Close the rest of AMD64 by contract family</h2>
+<p>After the denominator is available, generate work by missing capability rather
+than selecting convenient mnemonic examples. BAP source gaps, transport gaps,
+state-bank gaps, projection gaps and consumer gaps are separate classifications.
+PUSHFQ's AST-budget failure belongs to transport/producer assessment until a
+reviewed lift is transported; it does not count as supported after a counter
+is increased.</p>
+<p>Architecture-state stages need explicit alias and partial-write rules for
+wider vectors/masks, x87/MMX relationships, control/status state, segment bases,
+system registers and external state. Atomic/order effects and system or
+exceptional control require contracts beyond ordinary scalar writes. Coarse
+<code>state:other</code> writes cannot justify killing unrelated aggregate origins.</p>
+<p>Each family slice must connect source legality, actual producer BIL, normalized
+effects, required consumers, independent tests and an exact profile identity.
+An implemented conservative contract may legitimately retain environmental
+unknowns. An unimplemented operation cannot close its row by emitting generic
+unknown effects. BAP remains the semantic dependency; LLVM remains the
+independent decode/control reference. Supplied LLVM IR and abstract stateflow
+remain separate APIs.</p>
+<h2 id="8-validation-and-acceptance">8. Validation and acceptance</h2>
+<p>Track four independent axes for every binding:</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Scrollable table"><table>
+<thead>
+<tr>
+<th>Axis</th>
+<th>States and required evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source/domain</td>
+<td>Unresolved, reviewed member/alias, justified exclusion; source-backed grammar and totality/overlap checks.</td>
+</tr>
+<tr>
+<td>Implementation</td>
+<td>Missing producer/transport/state/projection/consumer, or implemented named contract; no credit from decoding alone.</td>
+</tr>
+<tr>
+<td>Execution</td>
+<td>Unexercised, passed, failed or blocked by prerequisite; exact current source, tools, profile, query and corpus.</td>
+</tr>
+<tr>
+<td>Capability</td>
+<td>Explicit support/refusal for each required consumer and outcome; approved conservative behavior has a stated invariant and precision limit.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Do not overload one Boolean “supported” with all four meanings. Report source
+coverage, binding-domain coverage, tested partitions and semantic outcomes
+separately. A full claim names its scope and required consumer set, and requires
+all of their obligations. A narrower plain-projection release can state its
+own finite support while program-wide Q1 remains open.</p>
+<p>The validation suite must include:</p>
+<ul>
+<li>Independent source-region omission and merged/continued-cell regressions;
+legal AMD forms absent from XED; overlapping feature-dependent aliases.</li>
+<li>Exact-byte positives and negatives for widths, address size, prefix fields,
+register restrictions, reserved encodings, length boundaries and trailing
+stream bytes; wrong-byte/environment/producer bindings despite valid typed
+BIL. Unsupported is distinct from architecturally invalid.</li>
+<li>REP zero/one/many counts, both directions, initial/opposite ZF, first/late
+mismatch, overlap, pointer wrap, lane preservation, segment-state uncertainty,
+later-iteration writes, virtual bindings and resource exhaustion.</li>
+<li>Actual fresh BAP BIL with independently supplied numeric/flag/memory
+expectations, Rust/native full-state comparisons and saved-proof tampering.</li>
+<li>Compiled mutants for dropped source regions, narrowed domains, omitted entry
+joins, single-pass loop summaries, stale output equations, first-iteration
+alias exclusion and omitted overall-profile checks.</li>
+<li>Applicable analysis-model/replay checks and root format/default/core-only/
+strict-Clippy/layout checks. New analysis contracts need their owning model
+changes and qualification; an encoding inventory does not replace them.</li>
+</ul>
+<p>Mutant credit requires a passing exact control, a compiled changed SUT, the
+intended unchanged observer's behavioral rejection, private build outputs and
+restored source/observer checks. Missing runtimes, solver unknowns, timeouts,
+compile failures, ignored tests and old reports never supply positive credit.
+Keep a small actual regression for each closed failure class; regenerate the
+large campaigns instead of maintaining their logs or passing flags.</p>
+<h2 id="9-delivery-sequence-and-stop-rules">9. Delivery sequence and stop rules</h2>
+<p>The <a href="../../plans/amd64-operation-coverage.md#coverage-completion-design-stages">linked execution stages</a>
+own scheduling and status. Source and REP work may proceed in parallel, but a
+REP slice does not close the inventory gate, and inventory closure does not
+qualify a producer or consumer.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Scrollable table"><table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Exit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C1 — Source scope</td>
+<td>Freeze corpus, vendor/extension boundaries and official source identities.</td>
+</tr>
+<tr>
+<td>C2 — Transcription</td>
+<td>Account for all selected regions and resolve each old gap with a source-backed disposition.</td>
+</tr>
+<tr>
+<td>C3 — Legal domains</td>
+<td>Complete reviewed grammar, manual/XED reconciliation, aliases and counterexamples.</td>
+</tr>
+<tr>
+<td>C4 — Binding checker</td>
+<td>Versioned authoritative schema; checked totality, overlap and dispatch; no unresolved domain silently omitted.</td>
+</tr>
+<tr>
+<td>R1 — Memory REP</td>
+<td>Review and qualify remaining default-address memory-string tuples under a new profile.</td>
+</tr>
+<tr>
+<td>R2 — Address/prefix variants</td>
+<td>Qualify address-size, segment and prefix domains with lane/zero-count controls.</td>
+</tr>
+<tr>
+<td>R3 — Proof consumers</td>
+<td>Implement each required guard/target/refinement/composition contract and native replay generation.</td>
+</tr>
+<tr>
+<td>R4 — I/O and faults</td>
+<td>Implement environmental and partial-completion/restart contracts; retain explicit gaps until qualified.</td>
+</tr>
+<tr>
+<td>A1 — Architecture families</td>
+<td>Close producer/state/projection/control gaps for every legal form and required consumer.</td>
+</tr>
+<tr>
+<td>Q1 — Scoped full coverage</td>
+<td>All previous required exits and current validation obligations pass for the frozen scope; report proof and environmental limits.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Immediate next work is C1/C2 source reproducibility and R1 recipe/lift assessment.
+Do not first add thousands of name associations or enable generic loop/prefix
+admission. If the source corpus, domain solver or semantic producer cannot meet
+an exit, retain the specific blocker and continue independent stages without
+changing the acceptance predicate.</p>
+<h2 id="10-source-review-and-validation-status">10. Source review and validation status</h2>
+<p>The implementation seams reviewed for this design are the
+<a href="../../../tools/amd64_inventory.py">XED extractor</a>,
+<a href="../../../tools/amd64_manual_inventory.py">manual extractor</a>,
+<a href="../../../tools/amd64_source_corpus.py">source-corpus candidate tool</a>,
+<a href="../../../tools/amd64_manual_geometry.py">geometry reconstruction</a>,
+<a href="../../../tools/amd64_legal_forms.py">finite legal-domain checker</a>,
+<a href="../../../tools/amd64_coverage.py">candidate accountant</a>,
+<a href="../../../src/bap/repeated_strings.rs">v12 matcher</a>,
+<a href="../../../src/bap/admission.rs">typed admission</a>,
+<a href="../../../src/bap/projection.rs">dependency projector</a>,
+<a href="../../../src/bap/address.rs">address evidence</a>,
+<a href="../../../src/bap/target_resolution.rs">target transfers</a> and
+<a href="../../../native/bap-core/capture.ml">native capture boundary</a>.</p>
+<p>The <a href="../../../CHECKPOINTS.md#2026-10-23--plain-rep-dependency-projection-and-coverage-accounting">current checkpoint</a>
+records the prior finite validation. The initial design publication ran only
+document/link/SVG checks. The execution below adds independently scoped
+source-reconstruction and finite-domain tests; it does not convert the remaining
+proposals into accepted source, encoding or semantic coverage. Current helper,
+source and observer identity checks remain required after further implementation
+changes.</p>
+<p>Primary source entry points are the pinned
+<a href="https://docs.amd.com/v/u/en-US/24594_3.38_APM_Vol3_PUB">AMD Volume 3 revision 3.38</a>,
+the repository's <a href="../../../tests/bap/fixtures/amd64-semantics/manual-inventory.lock.json">manual source pins</a>
+and <a href="../../../tests/bap/fixtures/amd64-semantics/inventory.lock.json">XED source/selection pins</a>.
+The Intel cross-checks cited in section 6 are references to review, not a newly
+adopted source corpus. They require explicit source pinning before becoming
+denominator authority.</p>
+<h3 id="101-source-corpus-execution-c1">10.1 Source-corpus execution: C1</h3>
+<p>2026-10-23: the new candidate lock covers all five APM volumes, AMD long-64
+application and privileged/system operations, and the five architectural
+subsets. Supplementary AMD publications and source-listed extension families
+retain explicit unresolved obligations; the candidate cannot self-assert
+reviewed adoption. Vol1/2 global rules and every non-reference chapter/appendix
+remain required source regions.</p>
+<p>Fresh publisher retrieval matches the exact repository PDF sizes and SHA256
+pins for Vol1 r3.25, Vol2 r3.45 and Vol3 r3.38. AMD's indexed
+<a href="https://docs.amd.com/api/khub/documents/ioQiNhSqxlMkRaU~IyGQYQ/content">Vol4 r3.26 content URL</a>
+and <a href="https://docs.amd.com/api/khub/documents/w13cmcpL4f9MCT4WPN6eDg/content">Vol5 r3.16 content URL</a>
+return HTTP 404 during the current check. Search-index revision metadata does
+not establish equality with the pinned archive bytes. Those two byte-identity
+clauses remain open.</p>
+<p>A bounded follow-up against AMD's static <code>26568.pdf</code> and <code>26569.pdf</code>
+download endpoints also times out without verified PDF bytes. That result
+neither disproves availability nor establishes equality with the archive pins.</p>
+<p>The candidate pins <code>pdftotext</code> 26.01.0, MuPDF 1.27.0 and Python 3.14.4,
+their executables and 89 runtime-library identities, extractor source hashes,
+UTF-8/layout/bounding-box options, <code>LC_ALL=C</code>, <code>LANG=C</code>, <code>TZ=UTC</code> and the
+normalization schema. Fresh <code>reproduce</code> and <code>check-products --require-all</code>
+exercise all five PDFs. Vol3–5 normalized content hashes match the historical
+v1 content, while all three full-layout hashes differ; historical locks are
+unchanged. Fourteen source-corpus controls reject missing identities, false
+adoption/completion fields, changed tools/libraries/options/locale, altered
+PDFs/products, unsafe origins and incomplete or stale migration reviews.</p>
+<p>A fresh validation campaign starts with <code>reproduce</code> against the pinned PDFs
+and tools, then runs <code>check-products</code>. The latter verifies current identities
+and generated bytes; it does not rerun PDF extraction. Resealing an altered
+intermediate manifest cannot replace the fresh extraction premise. Migration
+checks bind explicit review inputs and comparison artifacts but never establish
+corpus adoption by themselves. C1 remains open pending reviewed scope/extension
+boundaries, complete source-region/global-rule coverage, migration review and
+official Vol4/5 byte identity.</p>
+<h3 id="102-geometry-and-source-region-execution-c2">10.2 Geometry and source-region execution: C2</h3>
+<p>2026-10-23: current geometry extraction reconstructs source cells from exact
+PDF word coordinates, verifies immutable outline/entry ownership and retains
+all 2,657 historical gap IDs. It recognizes explicit encoding cells and
+geometrically justified operand continuations without opcode fill-down.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Scrollable table"><table>
+<thead>
+<tr>
+<th>Publication</th>
+<th style="text-align:right">Original gaps</th>
+<th style="text-align:right">Source-backed dispositions</th>
+<th style="text-align:right">Unresolved</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vol3, 24594</td>
+<td style="text-align:right">159</td>
+<td style="text-align:right">10</td>
+<td style="text-align:right">149</td>
+</tr>
+<tr>
+<td>Vol4, 26568</td>
+<td style="text-align:right">1,987</td>
+<td style="text-align:right">1,716</td>
+<td style="text-align:right">271</td>
+</tr>
+<tr>
+<td>Vol5, 26569</td>
+<td style="text-align:right">511</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">511</td>
+</tr>
+<tr>
+<td>Total</td>
+<td style="text-align:right">2,657</td>
+<td style="text-align:right">1,726</td>
+<td style="text-align:right">931</td>
+</tr>
+</tbody>
+</table></div>
+<p>Vol4's unparsed table lines fall from 1,955 to 241. These are source-location
+and continuation dispositions, not new legal-form or semantic-support counts.
+Sixteen new geometry controls and thirteen historical extraction controls pass,
+including minimized actual ADDPD, CMOV and AES source fixtures. The AES fixture
+preserves an outline owner named <code>AESDECLAST VAESDECLAST</code> over a cell naming
+<code>AESENC</code>; the mismatch remains unresolved rather than assigning that cell to a
+convenient instruction name.</p>
+<p>Fresh <code>extract</code>/<code>check</code> cover all three historical instruction-reference
+publications. Five-volume <code>regions</code>/<code>check-regions</code> enumerate all 4,128 PDF
+pages and eleven required source-region clauses. Enumeration preserves
+unresolved global rules and constraints; it does not establish that they were
+parsed completely. Footnotes, merged-cell semantics and 33 candidate cross-page
+continuations remain unresolved, including 25 in Vol3 and eight in Vol4.
+Geometry is word-based and depends on fresh C1 extraction from pinned PDF bytes.
+C2, the old-gap backlog and source completeness remain open.</p>
+<h3 id="103-finite-legal-domain-and-binding-execution-c3c4">10.3 Finite legal-domain and binding execution: C3/C4</h3>
+<p>2026-10-23: the separate v2 pilot derives canonical F3 MOVS, STOS and CMPS
+families from exact Vol3 r3.38 source cells and enumerates element widths
+8/16/32/64 with address widths 32/64. The predeclared scope excludes other
+families, alternate prefix order and redundant/segment prefixes before domain
+construction. Its 24 byte/environment points partition into three supported
+v12 plain-dependency points (<code>F3 A4</code>, <code>F3 AA</code>, <code>F3 A6</code>) and 21 explicit v12
+unsupported points. Unsupported points remain obligations for that consumer;
+they do not deny another profile's separately qualified capability.</p>
+<p>The checker validates total disposition, binding-domain inclusion, disjoint
+S/U/X partitions, holes, aliases, exact consumed bytes/environment and source,
+producer, typed-BIL and consumer identity. Twenty-four portable controls exercise
+missing/narrowed domains, overlaps, wrong bytes, stale inputs, forged claims,
+unknown grammar and exhausted work budgets. A total disposition result does
+not satisfy implementation completeness while 21 points remain unsupported.
+This pilot neither binds the 10,569 XED candidates nor establishes a full AMD
+legal-form denominator. Source derivation and the restricted grammar remain
+reviewed trust premises; a general constraint solver is still unimplemented.</p>
+<p>The final source-frozen campaign reseals thirty implementation identities and
+obtains three fresh producer BIL observations, 720 independent numeric
+comparisons and the passing exact-lift Rust observer
+<code>fresh_producer_loops_project_under_only_the_repeated_string_profile</code>.
+Fresh <code>build</code> without <code>--skip-rust-admission</code> and <code>check --require-bindings</code>
+both pass. <code>totalDisposition</code> and <code>profileBindingsValidated</code> are true only for
+this pilot; implementation, source completeness, vendor-wide totality and full
+AMD64 support remain false. The final binding digest is
+<code>556931c27791c02948c024cf9126a8a59887e715765d84d0c1b196dc5e67cf1d</code>.
+Further bound source changes require another fresh producer/oracle/Rust
+campaign. C3/C4 remain partial.</p>
+<h3 id="104-default-address-memory-rep-execution-r1">10.4 Default-address memory REP execution: R1</h3>
+<p>2026-10-23: the 28-tuple recipe contract freezes MOVS/STOS/LODS at four
+widths and CMPS/SCAS at four widths and both repeat conditions. The maintained
+<code>memory-recipes-v2.json</code> records the original producer's four empty LODS lifts
+explicitly. It remains a v13 availability contract; selecting v14 requires a
+separate actual producer, rather than changing those old observations.</p>
+<p><code>Config::with_memory_repeated_strings(flags)</code> selects
+<code>bap-bit-provenance-v13</code> and the unchanged advanced flag bundle. It admits
+24 exact canonical byte sequences: MOVS/STOS B/W/L/Q under F3, and CMPS/SCAS
+B/W/L/Q under F3 or F2. The pinned BAP names 32-bit string forms with L.
+Word forms require 66 before F2/F3; REX.W follows F2/F3. Extra, reordered,
+segment and address-size prefixes remain refused. v12's three byte forms and
+the older packaged/Basic/advanced contracts stay frozen.</p>
+<p><code>Config::with_memory_repeated_strings_and_lods(flags, lods)</code> selects
+<code>bap-bit-provenance-v14</code>. Environment selection requires
+<code>ARIADNE_BAP_SOURCE_EXTENSION_MODE=memory-repeated-strings-with-lods</code>,
+<code>ARIADNE_BAP_SOURCE_EXTENSION=flags</code> and
+<code>ARIADNE_BAP_LODS_SOURCE_EXTENSION=lods</code>. v13 uses mode
+<code>memory-repeated-strings</code> and only the flag directory. A missing or mismatched
+LODS directory fails configuration validation. Older builder methods clear that
+additional directory when selecting their own contract.</p>
+<p>The separate LODS patch extends the pinned upstream BAP parser/type/lifter
+for exact F3 AC, 66 F3 AD, F3 AD and F3 48 AD in long mode. It produces actual
+typed BIL: an initialized virtual loop flag followed by one nonempty loop.
+The transport validates that structure, architectural namespace and types,
+source/SDK/build/executable identity, exact target/snapshot/VA/bytes/extent,
+response/AST/time limits and artifact stability before and after a query.
+Only an empty original lift with matching independent decode/control facts can
+select this producer. BAP remains the sole semantic source; the adapter builds
+no opcode effects. Combined runtime identity includes both source bundles.</p>
+<p>With the original checked SDK in its compatible build environment, reproduce
+the two isolated bundles with:</p>
+<pre><code class="language-sh">python3 native/bap/source-coverage/lods_build.py --output target/lods-source-a
+python3 native/bap/source-coverage/lods_build.py --output target/lods-source-b
+cmp target/lods-source-a/runtime/manifest.json target/lods-source-b/runtime/manifest.json
+cmp target/lods-source-a/runtime/lods-lift target/lods-source-b/runtime/lods-lift
+</code></pre>
+<p>Run the selected-bundle Rust transport test with
+<code>ARIADNE_BAP_LODS_SOURCE_EXTENSION=target/lods-source-a/runtime</code> and
+<code>cargo test --offline --locked --lib native_pinned_bundle_transports_actual_typed_loops_for_both_targets -- --ignored</code>.
+The two <code>memory_rep_recipe_materialization_v13</code>/<code>v14</code> ignored tests also need
+the pinned BAP/LLVM helpers and <code>ARIADNE_BAP_ADVANCED_SOURCE_EXTENSION</code>.
+Their <code>native_memory_rep_recipe_matrix</code> counterparts additionally require the
+current source-matching <code>ARIADNE_BAP_CORE_DIR</code>; a missing or stale native core
+is an unexercised prerequisite, not a passing local substitute.</p>
+<p>Two independent corrected builds have identical manifest SHA256
+<code>8565bd4ab05e3592ea6372fe1cceec230b131538836a61800a6f5ea3f17e4d35</code>
+and executable SHA256
+<code>bba596dc1f599090e20259a0d6880ec66cd5c472276678aeb17d1ce2e0b38466</code>.
+These are adopted only in the new <code>lods.runtime.lock.json</code>; earlier locks are
+unchanged. Each build checks four typed new forms, 38 refused prefix neighbors,
+four trailing sequences and ten unchanged baseline observations. The serializer
+uses the pinned C API casts LOW=0/HIGH=1/SIGNED=2/UNSIGNED=3; a dedicated control
+rejects accidental constructor-order serialization. Earlier wrong-cast builds
+and transient compilation failures receive no qualification credit.</p>
+<p>Fresh independent equations pass 43,200 comparisons for the 24 v13 forms and
+14,400 for the four LODS forms, covering zero/multiple counts, both DF values,
+initial flags, comparison termination, overlap, multi-byte elements, accumulator
+lanes and supplied memory/address wrap. These finite normal-completion tests
+compare all represented registers/flags and complete supplied memory. Five
+source/oracle controls and twelve portable transport controls pass. One ignored
+Rust test exercises all four actual source lifts on both OS targets, validates
+v14 projection and verifies that v13 still refuses them.</p>
+<p>The shared zero-or-more dependency fixed point retains entry origins and
+weak writes with empty <code>must_defs</code>. Iteration-dependent memory addresses stay
+explicitly unknown. The two local captured-input matrices pass 192 v13 and 224 v14 tuple
+instances across both OS targets, zero/nonzero setup counts and both DF
+values. They validate unchanged roots/seeds, exact uses/may-writes, empty
+must-writes, unknown iteration-dependent memory evidence, retained entry/REP
+origins and investigation binding. Portable proof APIs refuse both profiles
+before helper/decode work, including empty roots. Rust/native parity, native
+proof refusal and compiled loop mutations retain separate gates. A normal-completion numeric pass supplies no partial-fault,
+restart, I/O, address-override or general ISA guarantee. R1's current native-core
+integration is awaiting approval for its source handoff; R2–R4, A1 and Q1 remain
+open.</p>
+<h3 id="105-address-size-assessment-r2">10.5 Address-size assessment: R2</h3>
+<p>2026-10-23: fresh original BAP and LLVM probes cover 28 recipe families,
+nine prefix scopes and two target labels: 504 observations. All 28 canonical
+67-prefixed forms have matching decoder extents. Four MOVS widths produce
+nonempty BIL, but use RCX/RSI/RDI at 64 bits; the other 24 canonical forms have
+empty BIL. Thirty-two concrete counterexamples establish incorrect low-32
+zero-count loop entry, high-index address behavior and both 32-bit wrap
+directions for those MOVS lifts. The zero-count control evaluates loop entry
+without concretely iterating a huge count. Three portable equation controls pass.</p>
+<p>Seven neighboring prefix families retain raw observations: FS, LOCK,
+duplicate address/repeat prefixes, reordered address prefixes, extra REX and
+trailing bytes. Decoding a neighbor grants no semantic admission. The report
+binds current helpers, libraries, source and actual BIL; its implementation,
+full-acceptance and broadened-profile flags remain false. R2 needs a separately
+reviewed BAP source correction for count/index/address widths and upper-lane
+behavior before any new prefix can be selected. v12/v13/v14 remain unchanged.</p>
+<h3 id="106-current-root-checks-and-remaining-qualification">10.6 Current root checks and remaining qualification</h3>
+<p>2026-10-23: the final serial default suite passes 457 Rust tests with 155 ignored;
+core-only passes 64 with 22 ignored. Strict all-feature/all-target Clippy,
+formatting, Rust layout and document navigation pass. The root commands use
+the existing read-only, hash-pinned MirrorRust snapshot; the sibling checkout
+is unchanged and core-only normal dependencies remain empty. An earlier
+concurrent default run exceeded an existing guard publication deadline; it
+receives no passing credit. The same frozen source passes the serial run.
+All 81 BAP-side Python controls and 304 tooling controls pass, including the
+new source, geometry, legal-domain, recipe, LODS and address-size checks.
+Four optimized compiled loop mutants are detected at the intended named
+assertions after their exact unchanged controls pass: omit zero-iteration entry,
+stop after one body application, omit target havoc and permit nested loops.
+Each uses a private SUT/build directory; source restoration, unchanged observers,
+current source identities and the pinned MirrorRust dependency are verified.
+Compile failures and timeouts earn no mutation credit. This Rust campaign
+does not replace the outstanding native-core controls.</p>
+<p>All 416 local memory-REP materialization instances and the separate native
+LODS source/transport tests pass in their declared scopes. The updated native
+core still needs a fresh source handoff/build, 192/224-instance parity matrices
+and 259 direct/protocol profile-refusal controls. Automatic approval review
+rejected the new source payload to <code>win10</code> for lack of specific authorization;
+the user has been asked to approve that handoff. Existing binaries or earlier
+v12 native results do not satisfy this current v13/v14 gate. Source-corpus,
+legal-domain, architecture-family and full AMD64 exits remain open.
+The <a href="../../plans/amd64-operation-coverage.md#native-memory-rep-qualification-pending-source-approval">pending native campaign</a>
+records the prepared payload, isolated environment and exact remaining gates.</p>
+<footer class="foot"><p>This HTML is a presentation of the canonical Markdown, with relative links adapted for the archive. Edit the canonical source and run <code>render.py</code> to refresh it.</p><p>Canonical source SHA-256:<span class="hash">4539845cb8bb2eca89b0174c1ec89dc5d326d69f68801b84a4a51d06f7826376</span></p></footer></article></div></body></html>

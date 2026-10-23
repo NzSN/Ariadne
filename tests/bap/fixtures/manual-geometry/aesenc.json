@@ -1,0 +1,521 @@
+{
+  "schema": "ariadne.amd-geometry-minimized-fixture/v1",
+  "publication": "26568",
+  "pdfSha256": "5fec87806a5d03418bef588bfbe3f466c129c2f784369fe1e11dd0b6dd8213f0",
+  "pdfPage": 104,
+  "bboxProductSha256": "44e5d68bbe69d7a74456956ecaa2c426522342cdcae596b5d98eee5813428bee",
+  "selection": "Exact minimized encoding-table lines; original page-local word spans and rectangles retained. Blank lines preserve physical v1 line addresses.",
+  "baseline": {
+    "entries": [
+      {
+        "chapter": "2 Instruction Reference",
+        "chapterOrdinal": 7,
+        "id": "amd-entry:0007",
+        "pdfEndPage": 105,
+        "pdfPage": 100,
+        "subsections": [],
+        "tableIds": [
+          "amd-table:0019",
+          "amd-table:0020",
+          "amd-table:0021",
+          "amd-table:0022",
+          "amd-table:0023",
+          "amd-table:0024"
+        ],
+        "title": "AESDECLAST VAESDECLAST",
+        "uri": "#nameddest=G8.3137002"
+      }
+    ],
+    "tables": [
+      {
+        "entryIds": [
+          "amd-entry:0007"
+        ],
+        "header": "Mnemonic                               Opcode                      Description",
+        "headerLine": 8,
+        "id": "amd-table:0022",
+        "lines": [
+          {
+            "classification": "unparsed",
+            "line": 9,
+            "pdfPage": 104,
+            "textSha256": "18522a449ae45cdad8ef021e18d4c6afc90b0ae3bec88369cc735c3503b85816"
+          },
+          {
+            "classification": "description-or-encoding-continuation",
+            "line": 10,
+            "pdfPage": 104,
+            "textSha256": "a89cdcce20ec54167b74086541518ec93e9f176fe21977e20044fd6bdac227d0"
+          },
+          {
+            "classification": "description-or-encoding-continuation",
+            "line": 11,
+            "pdfPage": 104,
+            "textSha256": "a4c2a03941825ab01db19c803d8d309e7c3205db95338558e2dcd4b5c01a77db"
+          }
+        ],
+        "pdfPage": 104
+      }
+    ],
+    "rows": [],
+    "gaps": [
+      {
+        "kind": "unparsed-table-line",
+        "source": {
+          "line": 9,
+          "pdfPage": 104,
+          "textSha256": "18522a449ae45cdad8ef021e18d4c6afc90b0ae3bec88369cc735c3503b85816"
+        },
+        "sourceText": "AESENC xmm1, xmm2/mem128          66 0F 38 DC /r Performs one encryption round on a state value",
+        "table": "amd-table:0022"
+      }
+    ]
+  },
+  "layoutPage": "\n\n\n\n\n\n\nMnemonic                               Opcode                      Description\nAESENC xmm1, xmm2/mem128          66 0F 38 DC /r Performs one encryption round on a state value\n                                                 in xmm1 using the key value in xmm2 or\n                                                 mem128. Writes results to xmm1.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+  "cells": [
+    {
+      "id": "pdf:104:cell:4",
+      "pdfPage": 104,
+      "rect": [
+        64.98,
+        111.6462,
+        114.40152,
+        122.76156
+      ],
+      "wordSpan": [
+        10,
+        11
+      ],
+      "wordBoxesSha256": "0efc7af483756e73774204e6466166be0862fa38f07e60b39f464eb26519bb9b",
+      "unicodeSha256": "761a18b82619631f2cb0ec62be463b62961fbabad6175e5fcfa4503d59eec265",
+      "text": "Mnemonic",
+      "wordBoxes": [
+        {
+          "text": "Mnemonic",
+          "rect": [
+            64.98,
+            111.6462,
+            114.40152,
+            122.76156
+          ]
+        }
+      ],
+      "glyphSpan": null,
+      "glyphEvidence": "not-extracted: source is Unicode word boxes"
+    },
+    {
+      "id": "pdf:104:cell:5",
+      "pdfPage": 104,
+      "rect": [
+        270.2058,
+        111.6462,
+        307.354608,
+        122.76156
+      ],
+      "wordSpan": [
+        11,
+        12
+      ],
+      "wordBoxesSha256": "89a77c2d8bad0bf17758f3ce89983f94bb49275cea8f1a43fb2c265f95b90f70",
+      "unicodeSha256": "c37ef4ad36a525a861229404a96b57eb0536b459772ff0f62bbcc82263a46c0c",
+      "text": "Opcode",
+      "wordBoxes": [
+        {
+          "text": "Opcode",
+          "rect": [
+            270.2058,
+            111.6462,
+            307.354608,
+            122.76156
+          ]
+        }
+      ],
+      "glyphSpan": null,
+      "glyphEvidence": "not-extracted: source is Unicode word boxes"
+    },
+    {
+      "id": "pdf:104:cell:6",
+      "pdfPage": 104,
+      "rect": [
+        64.98996,
+        126.64596,
+        210.56532,
+        137.76132
+      ],
+      "wordSpan": [
+        12,
+        15
+      ],
+      "wordBoxesSha256": "dd5ee068d386f7af26aa20c753b78025208f895ba7828f6542c61b23e53197c7",
+      "unicodeSha256": "83b14105c845dc8ab55f13f9e15d1513148f929d6f4c58f2d1d0cff688af62f5",
+      "text": "AESENC xmm1, xmm2/mem128",
+      "wordBoxes": [
+        {
+          "text": "AESENC",
+          "rect": [
+            64.98996,
+            126.64596,
+            106.073964,
+            137.76132
+          ]
+        },
+        {
+          "text": "xmm1,",
+          "rect": [
+            108.8538,
+            126.64596,
+            138.86328,
+            137.76132
+          ]
+        },
+        {
+          "text": "xmm2/mem128",
+          "rect": [
+            141.672,
+            126.64596,
+            210.56532,
+            137.76132
+          ]
+        }
+      ],
+      "glyphSpan": null,
+      "glyphEvidence": "not-extracted: source is Unicode word boxes"
+    },
+    {
+      "id": "pdf:104:cell:7",
+      "pdfPage": 104,
+      "rect": [
+        411.1398,
+        111.6462,
+        466.130952,
+        122.76156
+      ],
+      "wordSpan": [
+        15,
+        16
+      ],
+      "wordBoxesSha256": "64d9a0074784dc15d360bf9dfc12c865916471ead4a13991742ae83a11988587",
+      "unicodeSha256": "526e0087cc3f254d9f86f6c7d8e23d954c4dfda2b312efc29194ae8a860106ba",
+      "text": "Description",
+      "wordBoxes": [
+        {
+          "text": "Description",
+          "rect": [
+            411.1398,
+            111.6462,
+            466.130952,
+            122.76156
+          ]
+        }
+      ],
+      "glyphSpan": null,
+      "glyphEvidence": "not-extracted: source is Unicode word boxes"
+    },
+    {
+      "id": "pdf:104:cell:8",
+      "pdfPage": 104,
+      "rect": [
+        256.03272,
+        126.64596,
+        540.786132,
+        137.76132
+      ],
+      "wordSpan": [
+        16,
+        29
+      ],
+      "wordBoxesSha256": "a32e50ff3d2ca9743370edec0e2fe21c43c6a2081c8e8477629ad2db5fe7d63e",
+      "unicodeSha256": "e2523d381082613d34e8861fd4306c55992dd7fb4b848c8ae1237c743a70ab44",
+      "text": "66 0F 38 DC /r Performs one encryption round on a state value",
+      "wordBoxes": [
+        {
+          "text": "66",
+          "rect": [
+            256.03272,
+            126.64596,
+            267.089316,
+            137.76132
+          ]
+        },
+        {
+          "text": "0F",
+          "rect": [
+            269.89206,
+            126.64596,
+            281.54526,
+            137.76132
+          ]
+        },
+        {
+          "text": "38",
+          "rect": [
+            284.343024,
+            126.64596,
+            295.39962,
+            137.76132
+          ]
+        },
+        {
+          "text": "DC",
+          "rect": [
+            298.202364,
+            126.64596,
+            312.614484,
+            137.76132
+          ]
+        },
+        {
+          "text": "/r",
+          "rect": [
+            315.406272,
+            126.64596,
+            321.521712,
+            137.76132
+          ]
+        },
+        {
+          "text": "Performs",
+          "rect": [
+            330.2646,
+            126.64596,
+            370.798812,
+            137.76132
+          ]
+        },
+        {
+          "text": "one",
+          "rect": [
+            373.5906,
+            126.64596,
+            390.214836,
+            137.76132
+          ]
+        },
+        {
+          "text": "encryption",
+          "rect": [
+            393.006624,
+            126.64596,
+            439.095528,
+            137.76132
+          ]
+        },
+        {
+          "text": "round",
+          "rect": [
+            441.887316,
+            126.64596,
+            467.376948,
+            137.76132
+          ]
+        },
+        {
+          "text": "on",
+          "rect": [
+            470.168736,
+            126.64596,
+            481.274136,
+            137.76132
+          ]
+        },
+        {
+          "text": "a",
+          "rect": [
+            484.065924,
+            126.64596,
+            489.603684,
+            137.76132
+          ]
+        },
+        {
+          "text": "state",
+          "rect": [
+            492.406428,
+            126.64596,
+            514.119228,
+            137.76132
+          ]
+        },
+        {
+          "text": "value",
+          "rect": [
+            516.911016,
+            126.64596,
+            540.786132,
+            137.76132
+          ]
+        }
+      ],
+      "glyphSpan": null,
+      "glyphEvidence": "not-extracted: source is Unicode word boxes"
+    },
+    {
+      "id": "pdf:104:cell:9",
+      "pdfPage": 104,
+      "rect": [
+        330.25464,
+        136.66572,
+        508.532664,
+        147.78108
+      ],
+      "wordSpan": [
+        29,
+        38
+      ],
+      "wordBoxesSha256": "c55eb6b0bc51c7f2a0387293d2d7c14a8183bcb743b7a39f0ce6b3baa049979a",
+      "unicodeSha256": "aae625a9333d5762897370a9e434ae5db229346e333dd3c9ada7e3b99956e9ea",
+      "text": "in xmm1 using the key value in xmm2 or",
+      "wordBoxes": [
+        {
+          "text": "in",
+          "rect": [
+            330.25464,
+            136.66572,
+            338.027424,
+            147.78108
+          ]
+        },
+        {
+          "text": "xmm1",
+          "rect": [
+            340.81224,
+            136.66572,
+            368.018976,
+            147.78108
+          ]
+        },
+        {
+          "text": "using",
+          "rect": [
+            370.812756,
+            136.66572,
+            394.721736,
+            147.78108
+          ]
+        },
+        {
+          "text": "the",
+          "rect": [
+            397.498584,
+            136.66572,
+            411.376848,
+            147.78108
+          ]
+        },
+        {
+          "text": "key",
+          "rect": [
+            414.153696,
+            136.66572,
+            429.681336,
+            147.78108
+          ]
+        },
+        {
+          "text": "value",
+          "rect": [
+            432.517944,
+            136.66572,
+            456.382104,
+            147.78108
+          ]
+        },
+        {
+          "text": "in",
+          "rect": [
+            459.158952,
+            136.66572,
+            466.922772,
+            147.78108
+          ]
+        },
+        {
+          "text": "xmm2",
+          "rect": [
+            469.69962,
+            136.66572,
+            496.906356,
+            147.78108
+          ]
+        },
+        {
+          "text": "or",
+          "rect": [
+            499.697148,
+            136.66572,
+            508.532664,
+            147.78108
+          ]
+        }
+      ],
+      "glyphSpan": null,
+      "glyphEvidence": "not-extracted: source is Unicode word boxes"
+    },
+    {
+      "id": "pdf:104:cell:10",
+      "pdfPage": 104,
+      "rect": [
+        330.25464,
+        146.62572,
+        478.945488,
+        157.74108
+      ],
+      "wordSpan": [
+        38,
+        43
+      ],
+      "wordBoxesSha256": "1fd9aedd830b2549eea00045fb0059f1abe1b4139d31c48bd4d3fdd94a69c6b9",
+      "unicodeSha256": "db294c0c3cb58fbd3cd0894884adac2b0c9545273ab5cda1a8f1c5a4edc79e54",
+      "text": "mem128. Writes results to xmm1.",
+      "wordBoxes": [
+        {
+          "text": "mem128.",
+          "rect": [
+            330.25464,
+            146.62572,
+            371.90736,
+            157.74108
+          ]
+        },
+        {
+          "text": "Writes",
+          "rect": [
+            374.725044,
+            146.62572,
+            402.869016,
+            157.74108
+          ]
+        },
+        {
+          "text": "results",
+          "rect": [
+            405.690684,
+            146.62572,
+            434.99898,
+            157.74108
+          ]
+        },
+        {
+          "text": "to",
+          "rect": [
+            437.820648,
+            146.62572,
+            446.123304,
+            157.74108
+          ]
+        },
+        {
+          "text": "xmm1.",
+          "rect": [
+            448.938,
+            146.62572,
+            478.945488,
+            157.74108
+          ]
+        }
+      ],
+      "glyphSpan": null,
+      "glyphEvidence": "not-extracted: source is Unicode word boxes"
+    }
+  ]
+}

@@ -32,7 +32,7 @@ impl Bit {
         }
     }
 }
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 enum Value {
     Bits(Vec<Bit>),
     Memory,
@@ -109,6 +109,7 @@ struct State {
     vector_write: bool,
     fp_control_write: bool,
     advanced: bool,
+    repeated_strings: bool,
     join_data_paths: bool,
     gaps: Vec<String>,
     jumps: Vec<Option<u64>>,
@@ -582,8 +583,9 @@ fn run(
                     }
                 }
                 Stmt::While { condition, body } => {
-                    let _ = (condition, body);
-                    return Err(invalid("unreviewed loop semantics"));
+                    next.push(run_repeated_string_loop(
+                        condition, body, state, va, depth, budget,
+                    )?);
                 }
                 Stmt::Exception { number } => {
                     return Err(invalid(format!("unreviewed exception semantics {number}")));
@@ -611,6 +613,7 @@ fn run(
     Ok(states)
 }
 const ADVANCED_PROJECTION_WORK_LIMIT: usize = 262_144;
+const REPEATED_STRING_FIXED_POINT_LIMIT: usize = 4096;
 struct ProjectionBudget {
     remaining: Option<usize>,
 }
@@ -626,6 +629,68 @@ impl ProjectionBudget {
         }
         Ok(())
     }
+}
+fn same_data_state(left: &State, right: &State) -> bool {
+    left.env == right.env
+        && left.arch.keys().eq(right.arch.keys())
+        && left.forced_uses == right.forced_uses
+        && left.memory_write == right.memory_write
+        && left.vector_write == right.vector_write
+        && left.fp_control_write == right.fp_control_write
+        && left.gaps == right.gaps
+        && left.jumps == right.jumps
+}
+fn run_repeated_string_loop(
+    condition: &Expr,
+    body: &[Stmt],
+    mut head: State,
+    va: u64,
+    depth: usize,
+    budget: &mut ProjectionBudget,
+) -> Result<State, Error> {
+    if !head.repeated_strings {
+        return Err(invalid("unreviewed loop semantics"));
+    }
+    let condition_value = eval(condition, &mut head, va, 0)?;
+    head.forced_uses.extend(condition_value.deps());
+    if condition_value.constant() == Some(0) {
+        return Ok(head);
+    }
+    head.gaps
+        .push("repeated-string-loop:zero-or-more-iterations:possible-origin-union".into());
+    head.gaps.sort();
+    head.gaps.dedup();
+    // Retain the entry state in every join. A body write is only a possible
+    // write because the count can be zero. Reapplying the body to the growing
+    // head is necessary: later iterations can carry an earlier value into a
+    // different register, a guard, or a store. The finite bit/dependency lattice
+    // is monotone under this join; resource exhaustion is an explicit error.
+    for _ in 0..REPEATED_STRING_FIXED_POINT_LIMIT {
+        budget.step()?;
+        let mut iteration = head.clone();
+        let condition_value = eval(condition, &mut iteration, va, 0)?;
+        iteration.forced_uses.extend(condition_value.deps());
+        let outputs = if condition_value.constant() == Some(0) {
+            vec![iteration]
+        } else {
+            run(body, vec![iteration], va, depth + 1, budget)?
+        };
+        let mut outputs = outputs.into_iter();
+        let first = outputs
+            .next()
+            .ok_or_else(|| invalid("repeated-string loop omitted body state"))?;
+        let body_output =
+            outputs.try_fold(first, |left, right| merge_data_states(left, right, va))?;
+        let joined = merge_data_states(head.clone(), body_output, va)?;
+        if same_data_state(&head, &joined) {
+            return Ok(joined);
+        }
+        head = joined;
+    }
+    Err(crate::bap::admission::failure(
+        crate::bap::admission::FailureKind::Resource,
+        "repeated-string dependency fixed-point limit",
+    ))
 }
 fn merge_data_states(mut left: State, mut right: State, va: u64) -> Result<State, Error> {
     if !left.jumps.is_empty() || !right.jumps.is_empty() {
@@ -673,6 +738,7 @@ fn merge_data_states(mut left: State, mut right: State, va: u64) -> Result<State
         vector_write: left.vector_write || right.vector_write,
         fp_control_write: left.fp_control_write || right.fp_control_write,
         advanced: left.advanced,
+        repeated_strings: left.repeated_strings,
         join_data_paths: true,
         gaps,
         jumps: Vec::new(),
@@ -737,6 +803,7 @@ pub(crate) fn project_with_destination_profile(
         statements,
         vec![State {
             advanced,
+            repeated_strings: super::repeated_strings::is_profile(profile),
             join_data_paths,
             ..State::default()
         }],
@@ -838,6 +905,14 @@ mod broader_semantics_tests;
 mod broader_semantics_prefix_tests;
 
 #[cfg(test)]
+#[path = "../../tests/bap/repeated_string_projection.rs"]
+mod repeated_string_tests;
+
+#[cfg(test)]
+#[path = "../../tests/bap/repeated_string_extended.rs"]
+mod repeated_string_extended_tests;
+
+#[cfg(test)]
 mod tests {
     use super::*;
     #[test]
@@ -924,3 +999,7 @@ mod tests {
         }
     }
 }
+
+#[cfg(test)]
+#[path = "../../tests/bap/repeated_string_binding_observer.rs"]
+mod repeated_string_binding_observer;

@@ -1,0 +1,1308 @@
+{
+  "schema": "ariadne.amd64-legal-forms/v2",
+  "scope": {
+    "id": "amd-long64-canonical-rep-pilot/v2",
+    "vendor": "AMD",
+    "environmentAxes": {
+      "mode": [
+        64
+      ],
+      "addressBits": [
+        32,
+        64
+      ],
+      "operandBits": [
+        8,
+        16,
+        32,
+        64
+      ]
+    },
+    "prefixPolicy": "repeat-address-operand-canonical-only",
+    "sourceComplete": false,
+    "vendorFullDenominator": false,
+    "exclusions": [
+      {
+        "id": "outside-other-families",
+        "kind": "other-families",
+        "beforeDomainConstruction": true,
+        "reason": "Only F3 MOVS/STOS/CMPS family domains are in this pilot; all other forms remain broader source obligations."
+      },
+      {
+        "id": "outside-other-prefix-order",
+        "kind": "other-prefix-order",
+        "beforeDomainConstruction": true,
+        "reason": "Canonical repeat,address,operand ordering is a predeclared pilot slice; alternative legal prefix orders remain outside this denominator."
+      },
+      {
+        "id": "outside-redundant-prefixes",
+        "kind": "redundant-prefixes",
+        "beforeDomainConstruction": true,
+        "reason": "No redundant, segment, null or ignored prefixes in this finite pilot; these remain vendor obligations."
+      },
+      {
+        "id": "outside-other-vendors",
+        "kind": "other-vendors",
+        "beforeDomainConstruction": true,
+        "reason": "This source rule references AMD 24594 revision3.38 only; Intel-only and future sources remain unbound."
+      }
+    ]
+  },
+  "sourcePins": [
+    {
+      "id": "amd-vol3-3.38",
+      "lockPath": "tests/bap/fixtures/amd64-semantics/manual-inventory.lock.json",
+      "lockSha256": "63d961e986dd5fbf4df59c4f9771dda615708c30e7f1d18ebb0b745f34eb3434",
+      "publication": "24594",
+      "revision": "3.38",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee"
+    }
+  ],
+  "sourceCells": [
+    {
+      "id": "pdf:50:cell:9",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 50,
+      "rect": [
+        202.7874,
+        205.319,
+        405.7146,
+        222.503
+      ],
+      "wordSpan": [
+        75,
+        79
+      ],
+      "unicodeSha256": "053163f9eb1f56d87e322462e0e5676008faa84296e61b46c9849fecedd323a5",
+      "wordBoxesSha256": "8d1c33c14036492eab1628d68cfbf997a1e3b9f96a8c0c826e521c833e66f6f7"
+    },
+    {
+      "id": "pdf:50:cell:67",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 50,
+      "rect": [
+        62.9874,
+        521.5236,
+        548.9778,
+        537.6876
+      ],
+      "wordSpan": [
+        186,
+        203
+      ],
+      "unicodeSha256": "3e85054e525e1b529a3b35b91236f0f0dd749b4798cfde5a6e5dc9006011cdad",
+      "wordBoxesSha256": "0c2312766c79bf02d2faa6849680bc32e7d695e365434943147ee9db48d77897"
+    },
+    {
+      "id": "pdf:50:cell:68",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 50,
+      "rect": [
+        62.9874,
+        535.5276,
+        548.8698,
+        551.6916
+      ],
+      "wordSpan": [
+        203,
+        222
+      ],
+      "unicodeSha256": "cafa804e196c11183ff19c8b4e733b5513b5cac672180e744ac298ef34d4b3fa",
+      "wordBoxesSha256": "2f85758be4258b643a633af5dc1448c8037c98e456b671737c52f8249db91d95"
+    },
+    {
+      "id": "pdf:51:cell:12",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 51,
+      "rect": [
+        62.9695,
+        246.8527,
+        548.7583,
+        263.0167
+      ],
+      "wordSpan": [
+        115,
+        130
+      ],
+      "unicodeSha256": "73cac3b9ddf97dd303f67a7eefcfca65a5e8b97bbc657f705e891fdfda1f3dab",
+      "wordBoxesSha256": "6c424cb7510b263b382127502db582d887ff87ad0b4ad2c6fb3bc8e471b675d2"
+    },
+    {
+      "id": "pdf:51:cell:21",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 51,
+      "rect": [
+        203.4295,
+        399.6967,
+        257.6815,
+        416.8807
+      ],
+      "wordSpan": [
+        246,
+        248
+      ],
+      "unicodeSha256": "7f904945339101b8b3da7348d7dc3887be181b72d7f49e14d9115755dcdc0c44",
+      "wordBoxesSha256": "7585c2319bd95ea09a32eb21ae539d50a8192d9e1c20d447b602e6411a1e4aaf"
+    },
+    {
+      "id": "pdf:51:cell:69",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 51,
+      "rect": [
+        62.9695,
+        671.5447,
+        548.8471,
+        687.7087
+      ],
+      "wordSpan": [
+        316,
+        337
+      ],
+      "unicodeSha256": "e567d3cfb0dadd74f3a63bed2c6595e0138fb85eaac46fe37e37bd677a56790a",
+      "wordBoxesSha256": "05dbe524e0b21301a9896392dec1b74ef2d61a4397bc52097eae9ffa1375f7b4"
+    },
+    {
+      "id": "pdf:51:cell:70",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 51,
+      "rect": [
+        62.9695,
+        685.5487,
+        549.0007,
+        701.7127
+      ],
+      "wordSpan": [
+        337,
+        353
+      ],
+      "unicodeSha256": "8389a758bd76652fb755c80dea85d27c7c057888f6104d73f798b8ab2eb0c315",
+      "wordBoxesSha256": "1a0c7a379bb1f0866cd7e85028b41cc55692893e292bf53e1a5475297112e5e8"
+    },
+    {
+      "id": "pdf:52:cell:9",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 52,
+      "rect": [
+        109.3674,
+        205.3356,
+        499.2474,
+        222.5196
+      ],
+      "wordSpan": [
+        91,
+        101
+      ],
+      "unicodeSha256": "6dd0014cfc883b4e920a8d27f7188c306e7ce7b25971e6569a0c09f4a317984e",
+      "wordBoxesSha256": "e315375c83363f7ab8b406e46534db69858d3b33bcf4a89ccbf31199f1a7e311"
+    },
+    {
+      "id": "pdf:52:cell:16",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 52,
+      "rect": [
+        128.9759,
+        271.0898,
+        246.1459,
+        285.4098
+      ],
+      "wordSpan": [
+        111,
+        114
+      ],
+      "unicodeSha256": "1339c0851f44081f15633f803757ce98062f66ee9541ddc300ad8e0d524b9c58",
+      "wordBoxesSha256": "d0a912fcb99a7945c6a319a8b16e04528fe2cba2aa7d3a6fecc0981eee6308b0"
+    },
+    {
+      "id": "pdf:52:cell:41",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 52,
+      "rect": [
+        128.9759,
+        435.0898,
+        247.8259,
+        449.4098
+      ],
+      "wordSpan": [
+        162,
+        165
+      ],
+      "unicodeSha256": "932e0b9727aa3980b0feea6d3d68aead17c1fc8693dee3a90cf8ac92ffcfad8e",
+      "wordBoxesSha256": "576af4c4101fedc59ad4cd64a417fcbb6fb1eff1398f0277bfd885d9a5a94af8"
+    },
+    {
+      "id": "pdf:52:cell:59",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 52,
+      "rect": [
+        128.9759,
+        571.0898,
+        240.6359,
+        585.4098
+      ],
+      "wordSpan": [
+        197,
+        200
+      ],
+      "unicodeSha256": "c2629477c7930c80baeed417762ae57b33faf561484a785c1e425cebbb13fcae",
+      "wordBoxesSha256": "894d31b96fa504c71f01bd8072a7ba895ff436b317e736a107a942afa8500b71"
+    },
+    {
+      "id": "pdf:54:cell:37",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 54,
+      "rect": [
+        128.9972,
+        539.5828,
+        245.3162,
+        553.2328
+      ],
+      "wordSpan": [
+        230,
+        234
+      ],
+      "unicodeSha256": "6637dbb58c50c17ba8d37c7f7b1107dfab913e5d4b67072fb7122c218296e63a",
+      "wordBoxesSha256": "9b4b88f09b712b58c7dc2875d121cd9b0ffaed13246f24f9788677a1e1912fe4"
+    },
+    {
+      "id": "pdf:54:cell:38",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 54,
+      "rect": [
+        128.9972,
+        553.5828,
+        188.2252,
+        567.2328
+      ],
+      "wordSpan": [
+        234,
+        236
+      ],
+      "unicodeSha256": "59ca89229f7dd9e8a1cb89df1244ebf5673a14990cb10bd0d2954197628dfc15",
+      "wordBoxesSha256": "d57982491ac63d2196bb5483eda3b8b2ab5e6e17752a3dcc259556e67de784db"
+    },
+    {
+      "id": "pdf:54:cell:39",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 54,
+      "rect": [
+        339.6872,
+        546.5828,
+        365.8862,
+        560.2328
+      ],
+      "wordSpan": [
+        236,
+        238
+      ],
+      "unicodeSha256": "8815929814672c843640dbb608f52b05683744efc7bab244d2771da88dc53d18",
+      "wordBoxesSha256": "d8f86ebb91f9e2479ea267c7f40463bb6f132a0b9f82e152a92615c82b01de42"
+    },
+    {
+      "id": "pdf:54:cell:40",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 54,
+      "rect": [
+        128.9972,
+        569.5828,
+        312.0252,
+        583.2328
+      ],
+      "wordSpan": [
+        238,
+        242
+      ],
+      "unicodeSha256": "9ea9a9808b07c4e01affad4eec81f097eacbcb966bdd47db5108ab15af9b3c34",
+      "wordBoxesSha256": "e0a78b561250aa3418aa5b0cfebb1177335fd31493332e26303e2a346e57ddce"
+    },
+    {
+      "id": "pdf:54:cell:41",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 54,
+      "rect": [
+        129.0072,
+        583.5828,
+        191.0052,
+        597.2328
+      ],
+      "wordSpan": [
+        242,
+        244
+      ],
+      "unicodeSha256": "ed74ace18e8025d4ebfa47894589e2faf010ac5213dd044293e2770623bf836f",
+      "wordBoxesSha256": "df06d0ec67195fb5a5d10c8b10f8a6949de5cb8d950de7b9e97825e61f3889fd"
+    },
+    {
+      "id": "pdf:54:cell:42",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 54,
+      "rect": [
+        129.0072,
+        597.5828,
+        188.7852,
+        611.2328
+      ],
+      "wordSpan": [
+        244,
+        246
+      ],
+      "unicodeSha256": "9009de4328e95a1d34328879a43f76bcedcab3d438442be364c90c1e69293814",
+      "wordBoxesSha256": "728c0c9b7a01db6b2a1c7ab7c31212b8792ddd9562e90a104db3b308d8a10dfa"
+    },
+    {
+      "id": "pdf:54:cell:43",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 54,
+      "rect": [
+        129.0072,
+        611.5828,
+        189.3452,
+        625.2328
+      ],
+      "wordSpan": [
+        246,
+        248
+      ],
+      "unicodeSha256": "e6c674a9282cee8bc4c82a41d725aa2adfab6268c67ab4b24490d308235dd88c",
+      "wordBoxesSha256": "06d209ed4a30f9e7898bdec05c31d34e383b8f6b4fd5392445c2a3db06532e10"
+    },
+    {
+      "id": "pdf:54:cell:44",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 54,
+      "rect": [
+        339.6972,
+        590.5828,
+        365.8962,
+        604.2328
+      ],
+      "wordSpan": [
+        248,
+        250
+      ],
+      "unicodeSha256": "f4bfa6ea7f02fd99e01235bbe338d5883b0f35df701a6b186a6de507f99fb8dc",
+      "wordBoxesSha256": "3615914e67479b8f466a0e73bc3586a1febb1e3003496b60ab4cb4ee16631da4"
+    },
+    {
+      "id": "pdf:55:cell:10",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 55,
+      "rect": [
+        128.9872,
+        176.2501,
+        209.5862,
+        189.9001
+      ],
+      "wordSpan": [
+        26,
+        29
+      ],
+      "unicodeSha256": "6a50991a863cd6229574fe975a6337c676a3a30185cee101cdbef1de6d5f8705",
+      "wordBoxesSha256": "8047f200c3e00d48eb706115b80309020ec2dffc1d4a904cb61f303de5c46abb"
+    },
+    {
+      "id": "pdf:55:cell:11",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 55,
+      "rect": [
+        128.9872,
+        190.2501,
+        185.8152,
+        203.9001
+      ],
+      "wordSpan": [
+        29,
+        31
+      ],
+      "unicodeSha256": "28557b9266060b0bb31ac1094b6a0c365992f3a271add35a8102856674183925",
+      "wordBoxesSha256": "3bbe31c19887b97188cac8b5eb8e5f3c85a3857fb95bac486dcef3fe14f10676"
+    },
+    {
+      "id": "pdf:55:cell:12",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 55,
+      "rect": [
+        339.6772,
+        183.2501,
+        366.9862,
+        196.9001
+      ],
+      "wordSpan": [
+        31,
+        33
+      ],
+      "unicodeSha256": "917475bab14d144aa94e1fc0222986233d9ee47f1d50a47b011ed46ed05a8c36",
+      "wordBoxesSha256": "3ae3fe35526d1f307fb5e00ca9ff922ae7300fd0e1e1083e7194cb6a9f8a49ab"
+    },
+    {
+      "id": "pdf:55:cell:13",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 55,
+      "rect": [
+        128.9872,
+        206.2501,
+        242.9452,
+        219.9001
+      ],
+      "wordSpan": [
+        33,
+        36
+      ],
+      "unicodeSha256": "a84d3055707f8ed6a5f66782824c94c92bceb3de63721ca09e6e8361fbe7e3fe",
+      "wordBoxesSha256": "46c925db1cbdb8982067f65bf0210828e78e8209ea81af08e3b473c6ba8f5d63"
+    },
+    {
+      "id": "pdf:55:cell:14",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 55,
+      "rect": [
+        128.9872,
+        220.2501,
+        188.5852,
+        233.9001
+      ],
+      "wordSpan": [
+        36,
+        38
+      ],
+      "unicodeSha256": "cbfb05ce965a9f625cdb2b9af15e44c2db2bf9efe7af5fbec7a545084d41605a",
+      "wordBoxesSha256": "e534c5b2eb84d6a04bb05d335d06904b423e105818df5267b16468e15decae3c"
+    },
+    {
+      "id": "pdf:55:cell:15",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 55,
+      "rect": [
+        128.9872,
+        234.2501,
+        186.3652,
+        247.9001
+      ],
+      "wordSpan": [
+        38,
+        40
+      ],
+      "unicodeSha256": "a2f25f371c234b5921184293053be7d4985e97c55170123a09fff459b06efa70",
+      "wordBoxesSha256": "d3c595da9130abe723cf0f87b123b3d6b38f23177f8ff27dbb9a8f61b56a956f"
+    },
+    {
+      "id": "pdf:55:cell:16",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 55,
+      "rect": [
+        128.9872,
+        248.2501,
+        186.9252,
+        261.9001
+      ],
+      "wordSpan": [
+        40,
+        42
+      ],
+      "unicodeSha256": "60fdf896fd2133250dd1327340b5714d5484c707761a2a93035514cf5747cfd2",
+      "wordBoxesSha256": "57f1f29addab31dd25700b73fa43f07a39e95b6a89ff091e30a19d698d4e1b99"
+    },
+    {
+      "id": "pdf:55:cell:17",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 55,
+      "rect": [
+        339.6772,
+        227.2501,
+        366.9862,
+        240.9001
+      ],
+      "wordSpan": [
+        42,
+        44
+      ],
+      "unicodeSha256": "dd4ab281aba2639a15e939d768f6367c12f253152b46ac1b4466d305c645f92d",
+      "wordBoxesSha256": "c6ea7dd8a17a4c2291452be9bd47e2aa2bc0573600501b59b1566cd706186c0d"
+    },
+    {
+      "id": "pdf:55:cell:26",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 55,
+      "rect": [
+        128.9872,
+        397.5826,
+        250.1662,
+        411.2326
+      ],
+      "wordSpan": [
+        132,
+        136
+      ],
+      "unicodeSha256": "86ef83da66828df9c802a2b881c82cb6d2b6f4c9b7398ee779a709391f738faa",
+      "wordBoxesSha256": "d0c95a9e6377f7a35bb5ea4a996e5b127819168c7a461d3456f4a2bcdfcbca54"
+    },
+    {
+      "id": "pdf:55:cell:27",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 55,
+      "rect": [
+        128.9872,
+        411.5826,
+        193.0152,
+        425.2326
+      ],
+      "wordSpan": [
+        136,
+        138
+      ],
+      "unicodeSha256": "b04d6db592358884cfb66a1cc0cc8d0300e04d5f72b0c9f167fe7e4288fbd439",
+      "wordBoxesSha256": "d191864d4e5826c39f515586394eff9b1f5ff3841a8a745bb040a49c899d7ed8"
+    },
+    {
+      "id": "pdf:55:cell:28",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 55,
+      "rect": [
+        338.8672,
+        404.5826,
+        364.8262,
+        418.2326
+      ],
+      "wordSpan": [
+        138,
+        140
+      ],
+      "unicodeSha256": "99f2921169bdcddecc1297876e1df0201dbef0b3cf23460c0c8c240f00bb6ca6",
+      "wordBoxesSha256": "4b5ef232e08e7ef502cfc546571de34a88b074fa145986e487ae199b9bd553ad"
+    },
+    {
+      "id": "pdf:55:cell:29",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 55,
+      "rect": [
+        128.9872,
+        427.5826,
+        316.6252,
+        441.2326
+      ],
+      "wordSpan": [
+        140,
+        144
+      ],
+      "unicodeSha256": "878efcfe16996c9a946afb980e3f1635044f8e13d645b9beca3003ed68c31793",
+      "wordBoxesSha256": "120914a4e81785d5fc6878b17798705f05aeeec4484aaacaf2bb847e6520556b"
+    },
+    {
+      "id": "pdf:55:cell:30",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 55,
+      "rect": [
+        128.9872,
+        441.5826,
+        195.7852,
+        455.2326
+      ],
+      "wordSpan": [
+        144,
+        146
+      ],
+      "unicodeSha256": "a7a19532cd4dcd01525529a9141440eefeb6935eb65cf69662394ed43e7e7ed5",
+      "wordBoxesSha256": "1b57df2db3d150e1c8da8430212c9de311e81b4e154369395e5b23083f5cffc8"
+    },
+    {
+      "id": "pdf:55:cell:31",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 55,
+      "rect": [
+        128.9872,
+        455.5826,
+        193.5652,
+        469.2326
+      ],
+      "wordSpan": [
+        146,
+        148
+      ],
+      "unicodeSha256": "9f3fa995aa0e25da8c3b17b7bebd7a8571c3e75b5c2d65081ad858796b375445",
+      "wordBoxesSha256": "b01015fbde6f88fca21a047e9d5407ed5a0c47eaead6cc593ab31459e2020e3f"
+    },
+    {
+      "id": "pdf:55:cell:32",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 55,
+      "rect": [
+        128.9872,
+        469.5826,
+        194.1252,
+        483.2326
+      ],
+      "wordSpan": [
+        148,
+        150
+      ],
+      "unicodeSha256": "ee1cba0574ae79b9ee0ff1fafa5b3f735e7f7c1a00cfe3cc8c236b4f3312db67",
+      "wordBoxesSha256": "87d07580e3ce6e16b9877e6d02b80ebedde37d08d8321ebe2bddb51fbd38823a"
+    },
+    {
+      "id": "pdf:55:cell:33",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 55,
+      "rect": [
+        338.8672,
+        448.5826,
+        364.8262,
+        462.2326
+      ],
+      "wordSpan": [
+        150,
+        152
+      ],
+      "unicodeSha256": "ad1d9d9aa66d3754f41cbc0b04976c55915677ef78174d2feab466ad259d8f4a",
+      "wordBoxesSha256": "47253c14fd551ce8af107979ed792d84fc71c104647a318509edb653808244fa"
+    }
+  ],
+  "reviewedRules": [
+    {
+      "id": "reviewed-movs-f3-canonical",
+      "sourcePin": "amd-vol3-3.38",
+      "pdfPages": [
+        50,
+        51,
+        52,
+        54,
+        55,
+        56
+      ],
+      "kind": "rep-memory-string/v1",
+      "operation": "movs",
+      "elementBits": [
+        8,
+        16,
+        32,
+        64
+      ],
+      "addressBits": [
+        32,
+        64
+      ],
+      "sourceCells": [
+        "pdf:50:cell:9",
+        "pdf:50:cell:67",
+        "pdf:50:cell:68",
+        "pdf:51:cell:12",
+        "pdf:51:cell:21",
+        "pdf:51:cell:69",
+        "pdf:51:cell:70",
+        "pdf:52:cell:9",
+        "pdf:52:cell:16",
+        "pdf:52:cell:41",
+        "pdf:52:cell:59",
+        "pdf:54:cell:37",
+        "pdf:54:cell:38",
+        "pdf:54:cell:39",
+        "pdf:54:cell:40",
+        "pdf:54:cell:41",
+        "pdf:54:cell:42",
+        "pdf:54:cell:43",
+        "pdf:54:cell:44"
+      ],
+      "review": {
+        "sourceAddress": "AMD 24594 r3.38 PDF pages 50-52,54-56; prefix, size, implicit-register and repeat tables",
+        "premises": [
+          "REP opcode cells join byte/wide encodings with explicitly listed operand widths; REPE applies to CMPS.",
+          "Table1-2 gives default32/66=16/REX.W=64 for wide general operands; byte opcodes select8.",
+          "Table1-3 and1-4 give default64/67=32 addressing and the corresponding implicit index/count registers."
+        ],
+        "limits": "Reviewed transcription and canonical-prefix derivation are trust premises. No full source-region, alternative-prefix, exception, hardware or whole-ISA proof is claimed."
+      }
+    },
+    {
+      "id": "reviewed-stos-f3-canonical",
+      "sourcePin": "amd-vol3-3.38",
+      "pdfPages": [
+        50,
+        51,
+        52,
+        54,
+        55,
+        56
+      ],
+      "kind": "rep-memory-string/v1",
+      "operation": "stos",
+      "elementBits": [
+        8,
+        16,
+        32,
+        64
+      ],
+      "addressBits": [
+        32,
+        64
+      ],
+      "sourceCells": [
+        "pdf:50:cell:9",
+        "pdf:50:cell:67",
+        "pdf:50:cell:68",
+        "pdf:51:cell:12",
+        "pdf:51:cell:21",
+        "pdf:51:cell:69",
+        "pdf:51:cell:70",
+        "pdf:52:cell:9",
+        "pdf:52:cell:16",
+        "pdf:52:cell:41",
+        "pdf:52:cell:59",
+        "pdf:55:cell:10",
+        "pdf:55:cell:11",
+        "pdf:55:cell:12",
+        "pdf:55:cell:13",
+        "pdf:55:cell:14",
+        "pdf:55:cell:15",
+        "pdf:55:cell:16",
+        "pdf:55:cell:17"
+      ],
+      "review": {
+        "sourceAddress": "AMD 24594 r3.38 PDF pages 50-52,54-56; prefix, size, implicit-register and repeat tables",
+        "premises": [
+          "REP opcode cells join byte/wide encodings with explicitly listed operand widths; REPE applies to CMPS.",
+          "Table1-2 gives default32/66=16/REX.W=64 for wide general operands; byte opcodes select8.",
+          "Table1-3 and1-4 give default64/67=32 addressing and the corresponding implicit index/count registers."
+        ],
+        "limits": "Reviewed transcription and canonical-prefix derivation are trust premises. No full source-region, alternative-prefix, exception, hardware or whole-ISA proof is claimed."
+      }
+    },
+    {
+      "id": "reviewed-cmps-f3-canonical",
+      "sourcePin": "amd-vol3-3.38",
+      "pdfPages": [
+        50,
+        51,
+        52,
+        54,
+        55,
+        56
+      ],
+      "kind": "rep-memory-string/v1",
+      "operation": "cmps",
+      "elementBits": [
+        8,
+        16,
+        32,
+        64
+      ],
+      "addressBits": [
+        32,
+        64
+      ],
+      "sourceCells": [
+        "pdf:50:cell:9",
+        "pdf:50:cell:67",
+        "pdf:50:cell:68",
+        "pdf:51:cell:12",
+        "pdf:51:cell:21",
+        "pdf:51:cell:69",
+        "pdf:51:cell:70",
+        "pdf:52:cell:9",
+        "pdf:52:cell:16",
+        "pdf:52:cell:41",
+        "pdf:52:cell:59",
+        "pdf:55:cell:26",
+        "pdf:55:cell:27",
+        "pdf:55:cell:28",
+        "pdf:55:cell:29",
+        "pdf:55:cell:30",
+        "pdf:55:cell:31",
+        "pdf:55:cell:32",
+        "pdf:55:cell:33"
+      ],
+      "review": {
+        "sourceAddress": "AMD 24594 r3.38 PDF pages 50-52,54-56; prefix, size, implicit-register and repeat tables",
+        "premises": [
+          "REP opcode cells join byte/wide encodings with explicitly listed operand widths; REPE applies to CMPS.",
+          "Table1-2 gives default32/66=16/REX.W=64 for wide general operands; byte opcodes select8.",
+          "Table1-3 and1-4 give default64/67=32 addressing and the corresponding implicit index/count registers."
+        ],
+        "limits": "Reviewed transcription and canonical-prefix derivation are trust premises. No full source-region, alternative-prefix, exception, hardware or whole-ISA proof is claimed."
+      }
+    }
+  ],
+  "forms": [
+    {
+      "id": "amd-canonical-f3-movs",
+      "meaning": "rep-movs",
+      "reviewedRule": "reviewed-movs-f3-canonical",
+      "grammar": {
+        "alternatives": [
+          {
+            "prefixes": [
+              "f3",
+              "67"
+            ],
+            "opcode": "a4",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                32
+              ],
+              "operandBits": [
+                8
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3"
+            ],
+            "opcode": "a4",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                64
+              ],
+              "operandBits": [
+                8
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "67",
+              "66"
+            ],
+            "opcode": "a5",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                32
+              ],
+              "operandBits": [
+                16
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "66"
+            ],
+            "opcode": "a5",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                64
+              ],
+              "operandBits": [
+                16
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "67"
+            ],
+            "opcode": "a5",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                32
+              ],
+              "operandBits": [
+                32
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3"
+            ],
+            "opcode": "a5",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                64
+              ],
+              "operandBits": [
+                32
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "67",
+              "48"
+            ],
+            "opcode": "a5",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                32
+              ],
+              "operandBits": [
+                64
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "48"
+            ],
+            "opcode": "a5",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                64
+              ],
+              "operandBits": [
+                64
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "amd-canonical-f3-stos",
+      "meaning": "rep-stos",
+      "reviewedRule": "reviewed-stos-f3-canonical",
+      "grammar": {
+        "alternatives": [
+          {
+            "prefixes": [
+              "f3",
+              "67"
+            ],
+            "opcode": "aa",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                32
+              ],
+              "operandBits": [
+                8
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3"
+            ],
+            "opcode": "aa",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                64
+              ],
+              "operandBits": [
+                8
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "67",
+              "66"
+            ],
+            "opcode": "ab",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                32
+              ],
+              "operandBits": [
+                16
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "66"
+            ],
+            "opcode": "ab",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                64
+              ],
+              "operandBits": [
+                16
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "67"
+            ],
+            "opcode": "ab",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                32
+              ],
+              "operandBits": [
+                32
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3"
+            ],
+            "opcode": "ab",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                64
+              ],
+              "operandBits": [
+                32
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "67",
+              "48"
+            ],
+            "opcode": "ab",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                32
+              ],
+              "operandBits": [
+                64
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "48"
+            ],
+            "opcode": "ab",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                64
+              ],
+              "operandBits": [
+                64
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "amd-canonical-f3-cmps",
+      "meaning": "rep-cmps",
+      "reviewedRule": "reviewed-cmps-f3-canonical",
+      "grammar": {
+        "alternatives": [
+          {
+            "prefixes": [
+              "f3",
+              "67"
+            ],
+            "opcode": "a6",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                32
+              ],
+              "operandBits": [
+                8
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3"
+            ],
+            "opcode": "a6",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                64
+              ],
+              "operandBits": [
+                8
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "67",
+              "66"
+            ],
+            "opcode": "a7",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                32
+              ],
+              "operandBits": [
+                16
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "66"
+            ],
+            "opcode": "a7",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                64
+              ],
+              "operandBits": [
+                16
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "67"
+            ],
+            "opcode": "a7",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                32
+              ],
+              "operandBits": [
+                32
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3"
+            ],
+            "opcode": "a7",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                64
+              ],
+              "operandBits": [
+                32
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "67",
+              "48"
+            ],
+            "opcode": "a7",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                32
+              ],
+              "operandBits": [
+                64
+              ]
+            }
+          },
+          {
+            "prefixes": [
+              "f3",
+              "48"
+            ],
+            "opcode": "a7",
+            "fields": [],
+            "environment": {
+              "mode": [
+                64
+              ],
+              "addressBits": [
+                64
+              ],
+              "operandBits": [
+                64
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "overlapRules": []
+}

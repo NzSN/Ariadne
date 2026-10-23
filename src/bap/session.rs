@@ -16,6 +16,16 @@ pub enum SourceExtensionMode {
     #[default]
     Basic,
     Advanced,
+    /// Plain dependency analysis with the reviewed repeated-byte operations.
+    /// Guard, target and refinement proofs remain separately refused.
+    RepeatedStrings,
+    /// Reviewed default-address memory-string recipes under a successor
+    /// dependency profile. Earlier repeated-byte admission stays frozen.
+    MemoryRepeatedStrings,
+    /// v14 additionally requires a separately pinned BAP LODS producer.
+    MemoryRepeatedStringsWithLods,
+    /// v15 selects the separately pinned AMD address-size REP contract.
+    AmdMemoryRepeatedStringsAddressSize,
     #[doc(hidden)]
     Invalid,
 }
@@ -28,6 +38,8 @@ pub struct Config {
     /// Explicit narrow source-built flag producer. Guard admission, target
     /// resolution and refinement require separate qualification and are refused.
     pub source_extension: Option<PathBuf>,
+    pub lods_source_extension: Option<PathBuf>,
+    pub rep_address_source_extension: Option<PathBuf>,
     pub source_extension_mode: SourceExtensionMode,
 }
 impl Config {
@@ -43,9 +55,21 @@ impl Config {
         );
         config.source_extension =
             std::env::var_os("ARIADNE_BAP_SOURCE_EXTENSION").map(PathBuf::from);
+        config.lods_source_extension =
+            std::env::var_os("ARIADNE_BAP_LODS_SOURCE_EXTENSION").map(PathBuf::from);
+        config.rep_address_source_extension =
+            std::env::var_os("ARIADNE_BAP_REP_ADDRESS_SOURCE_EXTENSION").map(PathBuf::from);
         config.source_extension_mode =
             match std::env::var("ARIADNE_BAP_SOURCE_EXTENSION_MODE").as_deref() {
                 Ok("advanced") => SourceExtensionMode::Advanced,
+                Ok("repeated-strings") => SourceExtensionMode::RepeatedStrings,
+                Ok("memory-repeated-strings") => SourceExtensionMode::MemoryRepeatedStrings,
+                Ok("memory-repeated-strings-with-lods") => {
+                    SourceExtensionMode::MemoryRepeatedStringsWithLods
+                }
+                Ok("amd-memory-repeated-strings-address-size") => {
+                    SourceExtensionMode::AmdMemoryRepeatedStringsAddressSize
+                }
                 Ok("basic") | Err(std::env::VarError::NotPresent) => SourceExtensionMode::Basic,
                 _ => SourceExtensionMode::Invalid,
             };
@@ -57,10 +81,14 @@ impl Config {
             runtime,
             timeout: Duration::from_secs(10),
             source_extension: None,
+            lods_source_extension: None,
+            rep_address_source_extension: None,
             source_extension_mode: SourceExtensionMode::Basic,
         }
     }
     pub fn with_source_extension(mut self, directory: PathBuf) -> Self {
+        self.rep_address_source_extension = None;
+        self.lods_source_extension = None;
         self.source_extension = Some(directory);
         self.source_extension_mode = SourceExtensionMode::Basic;
         self
@@ -68,17 +96,70 @@ impl Config {
     /// Select the separately pinned producer for guard, target and memory
     /// refinement integration. The historical basic v9 mode stays unchanged.
     pub fn with_advanced_source_extension(mut self, directory: PathBuf) -> Self {
+        self.rep_address_source_extension = None;
+        self.lods_source_extension = None;
         self.source_extension = Some(directory);
         self.source_extension_mode = SourceExtensionMode::Advanced;
         self
     }
+    /// Select v12 dependency projection using the pinned advanced flag bundle.
+    /// The existing v10/v11 projections and proof modes retain their contracts.
+    pub fn with_repeated_strings(mut self, directory: PathBuf) -> Self {
+        self.rep_address_source_extension = None;
+        self.lods_source_extension = None;
+        self.source_extension = Some(directory);
+        self.source_extension_mode = SourceExtensionMode::RepeatedStrings;
+        self
+    }
+    /// Select the separately versioned memory-string recipe profile.
+    /// This does not enable guarded, target or refinement proof transports.
+    pub fn with_memory_repeated_strings(mut self, directory: PathBuf) -> Self {
+        self.rep_address_source_extension = None;
+        self.lods_source_extension = None;
+        self.source_extension = Some(directory);
+        self.source_extension_mode = SourceExtensionMode::MemoryRepeatedStrings;
+        self
+    }
+    /// Select v14 with both independently pinned producer dependencies.
+    pub fn with_memory_repeated_strings_and_lods(mut self, flags: PathBuf, lods: PathBuf) -> Self {
+        self.rep_address_source_extension = None;
+        self.source_extension = Some(flags);
+        self.lods_source_extension = Some(lods);
+        self.source_extension_mode = SourceExtensionMode::MemoryRepeatedStringsWithLods;
+        self
+    }
+    /// Select v15 under the AMD long-mode REP contract. Address-32 zero-count
+    /// upper-lane behavior is an explicit semantic premise, not inferred from
+    /// the snapshot's AMD64 architecture label. Proof transports stay refused.
+    pub fn with_amd_memory_repeated_strings_address_size(
+        mut self,
+        flags: PathBuf,
+        source: PathBuf,
+    ) -> Self {
+        self.source_extension = Some(flags);
+        self.lods_source_extension = None;
+        self.rep_address_source_extension = Some(source);
+        self.source_extension_mode = SourceExtensionMode::AmdMemoryRepeatedStringsAddressSize;
+        self
+    }
     pub(crate) fn validate_source_mode(&self) -> Result<(), Error> {
         if self.source_extension_mode == SourceExtensionMode::Invalid
-            || (self.source_extension_mode == SourceExtensionMode::Advanced
-                && self.source_extension.is_none())
+            || (matches!(
+                self.source_extension_mode,
+                SourceExtensionMode::Advanced
+                    | SourceExtensionMode::RepeatedStrings
+                    | SourceExtensionMode::MemoryRepeatedStrings
+                    | SourceExtensionMode::MemoryRepeatedStringsWithLods
+                    | SourceExtensionMode::AmdMemoryRepeatedStringsAddressSize
+            ) && self.source_extension.is_none())
+            || (self.source_extension_mode == SourceExtensionMode::MemoryRepeatedStringsWithLods)
+                != self.lods_source_extension.is_some()
+            || (self.source_extension_mode
+                == SourceExtensionMode::AmdMemoryRepeatedStringsAddressSize)
+                != self.rep_address_source_extension.is_some()
         {
             return Err(invalid(
-                "source extension mode must be basic or advanced; advanced requires an explicit source directory",
+                "source extension mode must be basic, advanced, repeated-strings, memory-repeated-strings, memory-repeated-strings-with-lods or amd-memory-repeated-strings-address-size; advanced modes require an explicit source directory and v14/v15 require their matching additional producer directory",
             ));
         }
         Ok(())
@@ -90,6 +171,15 @@ impl Config {
             super::source_extension::SourceExtension::load_with_mode(
                 directory,
                 self.source_extension_mode,
+            )?;
+        }
+        if let Some(directory) = &self.lods_source_extension {
+            super::lods_source::LodsSource::load(directory, super::lods_source::LOCK)?;
+        }
+        if let Some(directory) = &self.rep_address_source_extension {
+            super::rep_address_source::RepAddressSource::load(
+                directory,
+                super::rep_address_source::LOCK,
             )?;
         }
         Ok(())

@@ -65,7 +65,14 @@ impl SourceExtension {
         directory: &Path,
         mode: super::SourceExtensionMode,
     ) -> Result<Self, Error> {
-        let advanced = mode == super::SourceExtensionMode::Advanced;
+        let advanced = matches!(
+            mode,
+            super::SourceExtensionMode::Advanced
+                | super::SourceExtensionMode::RepeatedStrings
+                | super::SourceExtensionMode::MemoryRepeatedStrings
+                | super::SourceExtensionMode::MemoryRepeatedStringsWithLods
+                | super::SourceExtensionMode::AmdMemoryRepeatedStringsAddressSize
+        );
         if mode == super::SourceExtensionMode::Invalid {
             return Err(invalid("invalid source extension mode"));
         }

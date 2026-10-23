@@ -30,6 +30,12 @@ mod composition_tests;
 #[path = "../../tests/input/guard_admission.rs"]
 mod guard_admission_tests;
 #[cfg(test)]
+#[path = "../../tests/input/repeated_strings_memory.rs"]
+mod repeated_string_memory_tests;
+#[cfg(test)]
+#[path = "../../tests/input/repeated_strings.rs"]
+mod repeated_string_tests;
+#[cfg(test)]
 #[path = "../../tests/input/target_resolution_unit.rs"]
 mod target_resolution_tests;
 #[derive(Clone, Debug, PartialEq, Eq, serde::Serialize)]
@@ -381,11 +387,11 @@ impl FilePreparedAnalysis {
             }
             return Ok(());
         };
-        if self.prepared.identity.ruleset == "bap-bit-provenance-v9"
+        if crate::bap::ordinary_only_projection(&self.prepared.identity.ruleset)
             || self.prepared.instructions.values().any(|site| {
-                site.semantic
-                    .as_ref()
-                    .is_some_and(|semantic| semantic.projection == "bap-bit-provenance-v9")
+                site.semantic.as_ref().is_some_and(|semantic| {
+                    crate::bap::ordinary_only_projection(&semantic.projection)
+                })
             })
         {
             return Err("source flag extension does not admit target resolution".into());

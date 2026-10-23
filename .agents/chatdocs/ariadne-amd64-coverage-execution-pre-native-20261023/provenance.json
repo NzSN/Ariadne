@@ -1,0 +1,69 @@
+{
+  "schema": "ariadne-chatdoc-frozen-reading-view-v1",
+  "frozen_at": "2026-10-23T08:12:32.148824+00:00",
+  "source_directory": "ariadne-amd64-coverage-execution-20261023",
+  "status": "Historical pre-native-qualification execution reading view. Native integration remained pending in this version.",
+  "preservation": "index.html, architecture.svg and render.py copied byte-for-byte. Historical source hashes, validation and original launch metadata are retained below; freezing is not fresh qualification or a browser launch.",
+  "renderer_policy": "The preserved renderer is historical source. Do not run it in this frozen directory: it reads the changing canonical document. Refresh the current execution reading view instead.",
+  "files": {
+    "index.html": {
+      "bytes": 74660,
+      "sha256": "1e3d51d4ba129bca4f552e6af67942384f5110f425592a121c1d7c9e6797dc76"
+    },
+    "architecture.svg": {
+      "bytes": 13073,
+      "sha256": "041fa00e6b224f53a2094dda32f51ef2e34feef03110ca3f7348e764b1a80e2a"
+    },
+    "render.py": {
+      "bytes": 17114,
+      "sha256": "b7d8e577a0e1041340ac0f6e3194ce41837d91622894040b271a9dd7812f330d"
+    }
+  },
+  "original_source_review_document": {
+    "html": "ariadne-amd64-coverage-execution-20261023/index.html",
+    "previous_index_sha256": {
+      "ariadne-reports-index.html": "e062d8b0d7b0638dde65dfc4dc411090bb71b3b729191d2d6446a09b83349c0b",
+      "ariadne-reports-index.md": "93b53ff37a8d4b7e50a55eeda9b499d85408e4b95cce42068dba6de4669709b0"
+    },
+    "date": "2026-10-23",
+    "source_revision": "e44ce2be16dcf2c9e9ba30dc1999280e2935270e",
+    "source_state": "current uncommitted source/domain C1–C4 and v13/v14 REP execution",
+    "scope": "Presentation of current canonical finite implementation findings and open source/native/full-coverage gates; rendering adds no qualification.",
+    "canonical_source": "docs/Ariadne/amd64-coverage-design.md",
+    "canonical_source_sha256": {
+      "docs/Ariadne/amd64-coverage-design.md": "4539845cb8bb2eca89b0174c1ec89dc5d326d69f68801b84a4a51d06f7826376",
+      "docs/Ariadne/amd64-coverage-architecture.svg": "041fa00e6b224f53a2094dda32f51ef2e34feef03110ca3f7348e764b1a80e2a"
+    },
+    "renderer": "ariadne-amd64-coverage-execution-20261023/render.py",
+    "validation": {
+      "html_documents_checked": 2,
+      "markdown_indexes_checked": 1,
+      "local_references_checked": 235,
+      "new_page_unique_ids": 33,
+      "inline_svg_xml_validated": 1,
+      "standalone_svg_xml_validated": 1,
+      "standalone_svg_portable_attributes": true,
+      "browser_rendering_inspected": false,
+      "application_tests_run": false
+    },
+    "diagram_derivation": "Current canonical architecture SVG copied byte-for-byte; historical proposal SVG remains preserved in its original archive directory.",
+    "presentation": {
+      "requested": "wslview",
+      "state": "launched",
+      "launch_succeeded": true,
+      "launch_exit_code": 0,
+      "visual_inspection": false,
+      "diagram_raster_visual_inspection": true,
+      "diagram_rasterizer": "MuPDF 1.27",
+      "diagram_visual_inspection_sha256": "041fa00e6b224f53a2094dda32f51ef2e34feef03110ca3f7348e764b1a80e2a",
+      "visual_inspection_limit": "Standalone diagram raster inspected; full HTML browser rendering has not been inspected and wslview launch awaits final source refresh.",
+      "diagram_visual_inspection_source": "Current canonical SVG raster inspected during the execution; archive SVG is byte-identical.",
+      "launch_completed_at": "2026-10-23T07:58:04+00:00",
+      "diagram_visual_inspection": true
+    }
+  },
+  "successor": {
+    "html": "../ariadne-amd64-coverage-execution-20261023/index.html",
+    "purpose": "Current execution reading view, refreshed after approved native qualification."
+  }
+}

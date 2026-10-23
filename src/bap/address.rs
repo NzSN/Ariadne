@@ -9,7 +9,7 @@ const BANKS: [&str; 16] = [
     "RAX", "RCX", "RDX", "RBX", "RSP", "RBP", "RSI", "RDI", "R8", "R9", "R10", "R11", "R12", "R13",
     "R14", "R15",
 ];
-#[derive(Clone)]
+#[derive(Clone, PartialEq, Eq)]
 struct Value {
     affine: Option<AddressExpression>,
     width: usize,
@@ -40,6 +40,73 @@ struct Walker {
     accesses: Vec<MemoryAccessEvidence>,
     va: u64,
     nodes: usize,
+    loop_inputs: Option<LocationSet>,
+}
+
+fn expression_variables(e: &Expr, variables: &mut BTreeMap<String, Var>) {
+    match e {
+        Expr::Var { var } => {
+            variables.insert(var.key(), var.clone());
+        }
+        Expr::Load { mem, addr, .. }
+        | Expr::Binop {
+            lhs: mem,
+            rhs: addr,
+            ..
+        }
+        | Expr::Concat {
+            lhs: mem,
+            rhs: addr,
+        } => {
+            expression_variables(mem, variables);
+            expression_variables(addr, variables);
+        }
+        Expr::Store {
+            mem, addr, value, ..
+        } => {
+            expression_variables(mem, variables);
+            expression_variables(addr, variables);
+            expression_variables(value, variables);
+        }
+        Expr::Unop { arg, .. } | Expr::Cast { arg, .. } | Expr::Extract { arg, .. } => {
+            expression_variables(arg, variables);
+        }
+        Expr::Ite { condition, yes, no } => {
+            expression_variables(condition, variables);
+            expression_variables(yes, variables);
+            expression_variables(no, variables);
+        }
+        Expr::Let { value, body, .. } => {
+            expression_variables(value, variables);
+            expression_variables(body, variables);
+        }
+        _ => {}
+    }
+}
+fn statement_variables(
+    statements: &[Stmt],
+    reads: &mut BTreeMap<String, Var>,
+    writes: &mut BTreeMap<String, Var>,
+) {
+    for statement in statements {
+        match statement {
+            Stmt::Move { var, value } => {
+                writes.insert(var.key(), var.clone());
+                expression_variables(value, reads);
+            }
+            Stmt::Jump { target } => expression_variables(target, reads),
+            Stmt::If { condition, yes, no } => {
+                expression_variables(condition, reads);
+                statement_variables(yes, reads, writes);
+                statement_variables(no, reads, writes);
+            }
+            Stmt::While { condition, body } => {
+                expression_variables(condition, reads);
+                statement_variables(body, reads, writes);
+            }
+            _ => {}
+        }
+    }
 }
 impl Walker {
     fn initial(&self, v: &Var) -> Value {
@@ -72,12 +139,18 @@ impl Walker {
         Value::unknown(v.width, "unsupported-address-variable")
     }
     fn access(&mut self, role: MemoryAccessRole, width: usize, v: &Value, path: &str) {
-        let expression = v
+        let mut expression = v
             .affine
             .as_ref()
             .filter(|e| v.width == 64 && e.validate())
             .cloned();
         let mut gaps = v.gaps.clone();
+        let mut address_inputs = v.inputs.clone();
+        if let Some(inputs) = &self.loop_inputs {
+            expression = None;
+            address_inputs.extend(inputs.iter().cloned());
+            gaps.push("iteration-dependent-memory-access".into());
+        }
         if expression.is_none() && gaps.is_empty() {
             gaps.push("unsupported-address-expression".into());
         }
@@ -87,7 +160,7 @@ impl Walker {
             access_width: width as u16,
             address_width: v.width as u16,
             expression,
-            address_inputs: v.inputs.clone(),
+            address_inputs,
             attribution: path.into(),
             gaps,
         });
@@ -319,11 +392,80 @@ impl Walker {
                     let env = self.env.clone();
                     let start = self.accesses.len();
                     self.statements(yes, &format!("{path}.yes"), depth + 1);
+                    let yes_env = self.env.clone();
                     self.env = env.clone();
                     self.statements(no, &format!("{path}.no"), depth + 1);
+                    let no_env = self.env.clone();
                     self.env = env;
+                    // A loop inside either branch can change bindings after the
+                    // conditional too. Join both branch states rather than
+                    // reviving a stale before-branch affine expression.
+                    let mut reads = BTreeMap::new();
+                    let mut writes = BTreeMap::new();
+                    statement_variables(yes, &mut reads, &mut writes);
+                    statement_variables(no, &mut reads, &mut writes);
+                    for (key, var) in writes {
+                        let a = yes_env
+                            .get(&key)
+                            .cloned()
+                            .unwrap_or_else(|| self.initial(&var));
+                        let b = no_env
+                            .get(&key)
+                            .cloned()
+                            .unwrap_or_else(|| self.initial(&var));
+                        let merged = if a == b {
+                            a
+                        } else {
+                            let mut v = Value::unknown(var.width, "conditional-address-value");
+                            v.inputs = a.inputs.union(&b.inputs).cloned().collect();
+                            v
+                        };
+                        self.env.insert(key, merged);
+                    }
                     for a in &mut self.accesses[start..] {
                         a.gaps.push("conditional-memory-access".into());
+                    }
+                }
+                Stmt::While { condition, body } => {
+                    let mut reads = BTreeMap::new();
+                    let mut writes = BTreeMap::new();
+                    expression_variables(condition, &mut reads);
+                    statement_variables(body, &mut reads, &mut writes);
+                    let mut inputs = self.loop_inputs.clone().unwrap_or_default();
+                    // Include the original value of every possible write:
+                    // zero iterations remains possible, as do loop-carried uses.
+                    for var in reads.values().chain(writes.values()) {
+                        let value = self
+                            .env
+                            .get(&var.key())
+                            .cloned()
+                            .unwrap_or_else(|| self.initial(var));
+                        inputs.extend(value.inputs);
+                        if !var.virtual_ && var.type_ == "mem" {
+                            inputs.insert("memory:any".into());
+                        } else if !var.virtual_
+                            && var.width == 1
+                            && ["CF", "PF", "AF", "ZF", "SF", "OF", "DF"]
+                                .contains(&var.name.as_str())
+                        {
+                            inputs.insert(format!("flag:{}", var.name.to_ascii_lowercase()));
+                        }
+                    }
+                    let before = self.env.clone();
+                    for (key, var) in &writes {
+                        let mut value = Value::unknown(var.width, "loop-dependent-address-value");
+                        value.inputs = inputs.clone();
+                        self.env.insert(key.clone(), value);
+                    }
+                    let outer_loop = self.loop_inputs.replace(inputs.clone());
+                    self.eval(condition, &format!("{path}.condition"), 0);
+                    self.statements(body, &format!("{path}.body"), depth + 1);
+                    self.loop_inputs = outer_loop;
+                    self.env = before;
+                    for (key, var) in writes {
+                        let mut value = Value::unknown(var.width, "loop-dependent-address-value");
+                        value.inputs = inputs.clone();
+                        self.env.insert(key, value);
                     }
                 }
                 _ => {}
@@ -337,6 +479,7 @@ pub(crate) fn extract(statements: &[Stmt], va: u64) -> Vec<MemoryAccessEvidence>
         accesses: Vec::new(),
         va,
         nodes: 0,
+        loop_inputs: None,
     };
     w.statements(statements, "bil", 0);
     w.accesses

@@ -19,7 +19,9 @@ and the [core replay guide](../mbt/README.md) for model-generated observations.
 **What remains unresolved.** Finite generated tests are not universal proofs.
 Native helpers, external real captures and model-checker runtimes are prerequisites
 of their named tests. Unavailable prerequisites remain unexercised; deleted old
-reports cannot supply a passing result.
+reports cannot supply a passing result. The [plain REP/accounting contract](../docs/Ariadne/bap-analysis-core-design.md#plain-repeated-string-profile-and-coverage-accounting)
+defines a finite v12 three-form dependency scope; full AMD64 legality and
+concrete-form coverage remain open.
 
 ## Test matrix
 
@@ -34,7 +36,11 @@ reports cannot supply a passing result.
 | Scalar BIL equations | `python3 tools/check_bap_admission_oracle.py --output target/scalar-oracle.json` | Fresh helper lifting against independent arithmetic/flag equations; requires the BAP helper/runtime. |
 | AMD64 family survey and explicit flag producer | `python3 tools/probe_amd64_semantics.py --native --output target/new-semantics-survey`; `python3 -m unittest discover -s tests/bap -p 'test_*.py'` | Finite actual-byte inventory and strict accounting. The source-built flag extension has a separate build/opt-in contract; unknown rows do not count as full coverage. |
 | Pinned instruction inventory | `python3 tools/amd64_inventory.py generate --output target/new-inventory`; `python3 tools/amd64_inventory.py check target/new-inventory/inventory.json` | Requires fetched pinned XED inputs. Complete extraction of its symbolic templates; AMD legality reconciliation remains separate. |
+| AMD64 full-coverage obligations | `python3 tools/amd64_coverage.py --xed target/new-inventory/inventory.json --output target/new-accounting --require-full`; `python3 -m unittest discover -s tools -p 'test_amd64_coverage.py'` | Deterministic symbolic-form, manual-gap and exact-byte worklists. Add accepted `--manual` products and a current-source `--survey` explicitly. Pinned manual rows/gaps remain visible when products are omitted. Missing inputs, opaque/unexercised cases and absent authoritative bindings keep full support false; strict mode exits nonzero. |
 | Advanced source producer | Build and run the [advanced integration commands](../docs/Ariadne/bap-analysis-core-design.md#pinned-form-inventory-and-advanced-producer); `python3 tools/check_bap_bit_count_oracle.py --output target/new-bit-count/report.json` | Explicit v10/v11 selection; actual BAP sequences, native/reference equality, saved-proof controls and independent numeric equations. |
+| Plain repeated-string dependencies | Follow the [v12 setup and commands](../docs/Ariadne/bap-analysis-core-design.md#plain-repeated-string-profile-and-coverage-accounting); `cargo test --offline --locked --lib repeated_string`; `python3 tools/check_bap_repeated_string_oracle.py --output target/new-rep-oracle/report.json` | Exact F3 A4/AA/A6 projection and loop-aware consumers; ignored native tests require pinned advanced producer/current native helper. Nine proof transports/direct entry points refuse the exact v12 token from overall semantic identity or site projection, including empty/all-null sites. Native capture trusts validated reader-supplied normalized effects bound to byte/profile/query evidence; it does not independently replay raw REP BIL. Numeric equations do not qualify hardware partial faults or general REP. |
+| Memory REP successors | Follow the [v13/v14 recipe and source-bundle contract](../docs/Ariadne/amd64-coverage-design.md#104-default-address-memory-rep-execution-r1); `cargo test --offline --locked --lib lods_source`; `python3 tools/check_bap_repeated_string_oracle.py --recipes tests/bap/fixtures/repeated-string/memory-recipes-v2.json --output target/new-memory-rep/report.json`; `python3 -m unittest discover -s tests/bap -p 'test_lods_source.py'` | v13 selects 24 original nonempty default-address forms; v14 adds four actual BAP source LODS lifts under its own lock. Ignored materialization/native matrices exercise 192/224 tuple instances; LODS source tests require its selected pinned bundle. Proof transports remain refused for v12/v13/v14; numeric normal completion does not qualify partial faults or address overrides. |
+| AMD address-size REP and bindings | Follow the [v15 contract](../docs/Ariadne/amd64-coverage-design.md#107-amd-address-size-rep-implementation-r2) and [56-point registry](../docs/Ariadne/amd64-coverage-design.md#108-expanded-source-to-consumer-bindings-c3c4); `cargo test --offline --locked --lib rep_address_source`; `python3 -m unittest discover -s tests/bap -p 'test_rep_address_*.py'`; `python3 -m unittest discover -s tools -p 'test_amd64_legal_forms.py'` | Explicit AMD zero-count premise; 56 canonical tuples with a 32-case replacement producer. Ignored local/native v15 matrices each cover 448 instances; new native helper/refusal gates are required separately. Source-cell/producer/Rust bindings prove only this finite domain, not the full 10,569 symbolic domains. Optional hardware C probes retain their CPU-specific scope. |
 | Conventional Windows unwind operations | `cargo test --offline --locked --test input_frame_paths`; `python3 tools/check_amd64_unwind_windows.py --cases target/new-unwind-inputs --output target/new-unwind-reference` | Independent synthetic metadata/stack controls and fresh Windows RtlVirtualUnwind comparisons. Export inputs using the ignored test documented in the investigation design. Windows v3/APX remains separate. |
 | Loop fixture arithmetic and source compatibility | `python3 tests/bap/fixtures/loop-closure/extract.py --check` | Compact source inputs, signed table targets and region edges; no archived product output. |
 | Active formal models | Named `Specs/check-*.sh` commands in the model guide | Declared finite configurations and independent oracles; run on an authorized qualification host. |
@@ -44,6 +50,13 @@ Root formatting, all-feature/all-target Clippy, `tools/check_rust_layout.py` and
 `tools/check_doc_links.py` remain required checks. Under CPU contention the default
 suite's existing guard deadlines may require `RUST_TEST_THREADS=1`; thresholds
 must not be relaxed to manufacture a pass.
+
+The [2026-10-23 plain REP stage](../.agents/plans/amd64-operation-coverage.md#resume-plain-rep-and-coverage-accounting)
+records completed finite projection/consumer, final-helper integration and proof
+refusal checks. Its four Rust mutants use unchanged Rust SUT/observers from
+before final native policy hardening; the final native policy has separate
+compiled/dispatch controls and current-helper integration checks. These finite
+results do not close general REP or full AMD64 coverage.
 
 ## Fixtures and generated products
 

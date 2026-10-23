@@ -443,6 +443,23 @@ impl Transfer {
         self.outputs.is_empty() && self.jump.is_none() && self.condition.is_none()
     }
 }
+fn loop_writes(statements: &[Stmt], writes: &mut BTreeMap<String, super::ast::Var>) {
+    for statement in statements {
+        match statement {
+            Stmt::Move { var, .. } => {
+                if var.type_ == "imm" && (1..=64).contains(&var.width) {
+                    writes.insert(var.key(), var.clone());
+                }
+            }
+            Stmt::If { yes, no, .. } => {
+                loop_writes(yes, writes);
+                loop_writes(no, writes);
+            }
+            Stmt::While { body, .. } => loop_writes(body, writes),
+            _ => {}
+        }
+    }
+}
 pub(crate) fn extract(statements: &[Stmt], site: u64, bytes: &[u8]) -> Result<Transfer, Error> {
     let mut env = BTreeMap::new();
     let mut outputs = BTreeSet::new();
@@ -474,6 +491,21 @@ pub(crate) fn extract(statements: &[Stmt], site: u64, bytes: &[u8]) -> Result<Tr
                 no,
             } if no.is_empty() && yes.len() == 1 && matches!(yes[0], Stmt::Jump { .. }) => {
                 condition = Some(lift_expr(c, &env, site, 0))
+            }
+            Stmt::While { body, .. } => {
+                let mut writes = BTreeMap::new();
+                loop_writes(body, &mut writes);
+                for (key, var) in writes {
+                    // The body may execute zero or many times. Neither an
+                    // earlier constant nor one execution is a post-loop fact.
+                    env.insert(key.clone(), Term::unknown(var.width as u8));
+                    if !var.virtual_
+                        && (BANKS.contains(&var.name.as_str())
+                            || ["CF", "ZF"].contains(&var.name.as_str()))
+                    {
+                        outputs.insert(key);
+                    }
+                }
             }
             _ => {}
         }
@@ -941,6 +973,7 @@ fn writes_address_bil(statements: &[Stmt], keys: &BTreeSet<String>) -> bool {
     statements.iter().any(|stmt| match stmt {
         Stmt::Move { var, .. } => !var.virtual_ && keys.contains(&var.key()),
         Stmt::If { yes, no, .. } => writes_address_bil(yes, keys) || writes_address_bil(no, keys),
+        Stmt::While { body, .. } => writes_address_bil(body, keys),
         _ => false,
     })
 }
@@ -1994,6 +2027,9 @@ pub(crate) fn validate(
 #[cfg(test)]
 #[path = "../../tests/bap/loop_closure_unit.rs"]
 mod loop_tests;
+#[cfg(test)]
+#[path = "../../tests/bap/repeated_string_consumers.rs"]
+mod repeated_string_consumers;
 #[cfg(test)]
 #[path = "../../tests/bap/target_resolution_unit.rs"]
 mod tests;

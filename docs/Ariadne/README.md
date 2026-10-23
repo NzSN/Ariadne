@@ -23,6 +23,8 @@ supporting narrative. [Plans](../../.agents/plans/README.md) own execution stage
 - [Input](file-reader-design.md) — reader API, CLI setup and captured-case evidence.
 - [BAP integration](bap-analysis-core-design.md) — semantic/native setup,
   projection, analysis, source review and qualification.
+- [AMD64 coverage completion](amd64-coverage-design.md) — proposed source-gap
+  recovery, authoritative form bindings and remaining REP/consumer stages.
 - [Investigation](investigation-design.md) — possible-origin questions and their
   binding, reporting and completeness contracts.
 - [Question-directed frame investigation](frame-question-investigation-design.md) —
@@ -49,6 +51,7 @@ current validation uses executable tests and disposable run products.
 | Captured indirect control targets | [Indirect-target resolution](indirect-target-resolution.md) | Opt-in pointer-slot/table resolver and corrections; portable/root, pinned-native and original-dump retry pass with full-state/CLI parity. Individual timing samples pass; full mutation/replay qualification remains open, and explanation output stays partial/truncated. |
 | Guarded target closure | [Guarded target composition](guarded-target-resolution-design.md) | Joint candidate/guard preparation and scoped qualification; proposed local-region induction and the linked L0–L6 plan address the remaining cyclic target certificates. |
 | Instruction semantics and native analysis | [BAP integration](bap-analysis-core-design.md) | Setup, lift/projection/admission and analysis contracts, source review, replay and qualification history. |
+| AMD64 operation coverage completion | [Coverage design](amd64-coverage-design.md) | Proposed source/encoding-domain authority, manual-gap recovery, REP expansion, consumer capabilities and acceptance gates. |
 | Fault-address dependencies | [Investigation](investigation-design.md) | Bound completed analysis, possible origins, explanation API, validation history and the bounded frame-path implementation and its finite qualification scope. |
 | Question-directed frame investigation | [Section-5 integration](frame-question-investigation-design.md) | Existing 5.1/5.2 reuse; implemented 5.3/5.4 coordinator, fair work, feasibility and local fault dependencies with P0–P10 gates. |
 | Fault-time zero address | [Zero-address assessment](zero-address-design.md) | Predicate, admission, CLI, source review and controlled-capture qualification. |

@@ -41,7 +41,13 @@ pub(crate) fn validate_opaque_ordinary(
                         | "bap-bit-provenance-v8"
                         | "bap-bit-provenance-v9"
                         | "bap-bit-provenance-v10"
-                        | "bap-bit-provenance-v11" => crate::bap::OPAQUE_ORDINARY_RULE,
+                        | "bap-bit-provenance-v11"
+                        | crate::bap::repeated_strings::PROFILE
+                        | crate::bap::repeated_strings::PROFILE13
+                        | crate::bap::repeated_strings::PROFILE14
+                        | crate::bap::repeated_strings::PROFILE15 => {
+                            crate::bap::OPAQUE_ORDINARY_RULE
+                        }
                         _ => "",
                     })
                 || e.length == 0

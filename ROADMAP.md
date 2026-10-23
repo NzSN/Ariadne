@@ -102,6 +102,14 @@ the [semantic assurance decision](docs/Ariadne/semantic-assurance.md). The later
 [operation program](.agents/plans/amd64-operation-coverage.md) reopens full
 implementation coverage, with inventory and finite advanced-producer work in
 progress; this does not restore the retired proof project.
+Its [current finite execution](docs/Ariadne/amd64-coverage-design.md#10-source-review-and-validation-status)
+adds partial source reconstruction (2,076 dispositions, 581 unresolved gaps),
+a 56-point AMD memory-REP binding registry and separately selected v13/v14/v15
+profiles. The R1 source boundary passed 416 native parity instances and 259
+refusal controls. The AMD-specific v15 address-size successor passes local
+producer, binding and 448-instance capture checks; its new native handoff is
+awaiting specific approval. Source completeness, broader REP consumers and
+full AMD64 coverage remain open.
 
 Current validation follows the [executable test matrix](tests/README.md). Dated run
 results below are historical; their Git links do not establish a current pass.

@@ -40,6 +40,8 @@ struct Check {
     control: bool,
     nodes: usize,
     advanced: bool,
+    repeated_strings: bool,
+    loop_depth: usize,
 }
 pub(crate) struct Capabilities {
     pub ordinary_data_only: bool,
@@ -324,6 +326,12 @@ impl Check {
             match s {
                 Stmt::Move { var, value } => {
                     let ty = var_type(var, self.advanced)?;
+                    if self.repeated_strings
+                        && var.virtual_
+                        && self.env.get(&var.key()).is_some_and(|bound| *bound != ty)
+                    {
+                        return Err(malformed("BIL loop-carried binding type mismatch"));
+                    }
                     if matches!(ty, Type::Bits(w) if w>1) && unknown_value(value) {
                         self.unsupported_data = true;
                     }
@@ -343,6 +351,12 @@ impl Check {
                     self.env.insert(var.key(), ty);
                 }
                 Stmt::Jump { target } => {
+                    if self.loop_depth != 0 {
+                        return Err(failure(
+                            FailureKind::UnsupportedControl,
+                            "control transfer in repeated-string loop",
+                        ));
+                    }
                     if scalar(self.expr(target, depth + 1)?)? != Some(64) {
                         return Err(failure(
                             FailureKind::UnsupportedControl,
@@ -361,6 +375,24 @@ impl Check {
                     self.env = before;
                     self.statements(no, depth + 1)?;
                     self.env.retain(|key, ty| after_yes.get(key) == Some(ty));
+                }
+                Stmt::While { condition, body } if self.repeated_strings => {
+                    if scalar(self.expr(condition, depth + 1)?)? != Some(1) {
+                        return Err(malformed("BIL loop condition width"));
+                    }
+                    let before = self.env.clone();
+                    self.loop_depth += 1;
+                    self.statements(body, depth + 1)?;
+                    self.loop_depth -= 1;
+                    // The body can execute zero times. A temporary first
+                    // defined there is unavailable after the loop, and a
+                    // carried temporary must retain its entry type.
+                    for (key, ty) in &before {
+                        if self.env.get(key).is_some_and(|after| after != ty) {
+                            return Err(malformed("BIL loop-carried binding type mismatch"));
+                        }
+                    }
+                    self.env = before;
                 }
                 Stmt::While { .. } | Stmt::Exception { .. } | Stmt::Special | Stmt::Unsupported => {
                     return Err(failure(
@@ -420,7 +452,9 @@ pub(crate) fn mandatory_count_opcode(bytes: &[u8], profile: &str) -> Option<&'st
     }
 }
 pub(crate) fn guarded_prefix_with_profile(bytes: &[u8], profile: &str) -> bool {
-    mandatory_count_opcode(bytes, profile).is_none() && guarded_prefix(bytes)
+    mandatory_count_opcode(bytes, profile).is_none()
+        && super::repeated_strings::opcode(bytes, profile).is_none()
+        && guarded_prefix(bytes)
 }
 pub(crate) fn capabilities(statements: &[Stmt]) -> Result<Capabilities, Error> {
     capabilities_with_profile(statements, super::PROJECTION)
@@ -431,6 +465,7 @@ pub(crate) fn capabilities_with_profile(
 ) -> Result<Capabilities, Error> {
     let mut check = Check {
         advanced: super::registers::advanced_profile(profile),
+        repeated_strings: super::repeated_strings::is_profile(profile),
         ..Check::default()
     };
     check.statements(statements, 0)?;
@@ -467,6 +502,7 @@ pub(crate) fn canonical_noop_opcode(bytes: &[u8], profile: &str) -> Option<&'sta
 pub(crate) fn replay_opcode(bytes: &[u8], profile: &str) -> &'static str {
     canonical_noop_opcode(bytes, profile)
         .or_else(|| mandatory_count_opcode(bytes, profile))
+        .or_else(|| super::repeated_strings::opcode(bytes, profile))
         .unwrap_or("typed-transfer")
 }
 pub(crate) fn admit(statements: &[Stmt], opcode: &str, bytes: &[u8]) -> Result<(), Error> {
@@ -478,11 +514,71 @@ pub(crate) fn admit_with_profile(
     bytes: &[u8],
     profile: &str,
 ) -> Result<(), Error> {
+    fn loop_or_control(
+        statements: &[Stmt],
+        repeated_form: bool,
+        depth: usize,
+    ) -> Result<bool, Error> {
+        if depth > 64 {
+            return Err(failure(FailureKind::Resource, "BIL admission depth limit"));
+        }
+        let mut has_loop = false;
+        for statement in statements {
+            match statement {
+                Stmt::While { body, .. } => {
+                    if depth != 0 || has_loop {
+                        return Err(failure(
+                            FailureKind::UnsupportedControl,
+                            "repeated-string lift requires one top-level loop",
+                        ));
+                    }
+                    has_loop = true;
+                    loop_or_control(body, repeated_form, depth + 1)?;
+                }
+                Stmt::If { yes, no, .. } => {
+                    has_loop |= loop_or_control(yes, repeated_form, depth + 1)?;
+                    has_loop |= loop_or_control(no, repeated_form, depth + 1)?;
+                }
+                Stmt::Jump { .. } | Stmt::Exception { .. } | Stmt::Special | Stmt::Unsupported
+                    if repeated_form =>
+                {
+                    return Err(failure(
+                        FailureKind::UnsupportedControl,
+                        "control/special semantics in repeated-string lift",
+                    ));
+                }
+                _ => {}
+            }
+        }
+        Ok(has_loop)
+    }
     if guarded_prefix_with_profile(bytes, profile) {
         return Err(failure(
             FailureKind::UnsupportedControl,
             "unmodeled instruction prefix",
         ));
+    }
+    if super::repeated_strings::is_profile(profile) {
+        let repeated_opcode = super::repeated_strings::opcode(bytes, profile);
+        let has_loop = loop_or_control(statements, repeated_opcode.is_some(), 0)?;
+        if has_loop && repeated_opcode != Some(opcode) {
+            return Err(failure(
+                FailureKind::UnsupportedControl,
+                "BIL loop requires exact reviewed repeated-string bytes and opcode",
+            ));
+        }
+        if repeated_opcode.is_some_and(|expected| expected != opcode) {
+            return Err(failure(
+                FailureKind::UnsupportedControl,
+                "repeated-string opcode/bytes mismatch",
+            ));
+        }
+        if repeated_opcode.is_some() && !has_loop {
+            return Err(failure(
+                FailureKind::UnsupportedControl,
+                "repeated-string lift omitted its loop",
+            ));
+        }
     }
     if mandatory_count_opcode(bytes, profile).is_some_and(|expected| expected != opcode) {
         return Err(failure(
@@ -504,6 +600,13 @@ pub(crate) fn admit_with_profile(
     } else {
         capabilities(statements)?
     };
+    if super::repeated_strings::opcode(bytes, profile).is_some() && !capabilities.ordinary_data_only
+    {
+        return Err(failure(
+            FailureKind::UnsupportedControl,
+            "control transfer in repeated-string lift",
+        ));
+    }
     if capabilities.unsupported_data {
         return Err(failure(
             FailureKind::UnsupportedData,

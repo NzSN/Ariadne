@@ -146,6 +146,8 @@ let () =
         if !target_profile then Gc.set {(Gc.get ()) with minor_heap_size=2097152};
         let input_json = get payload "input" in
         let state = try Some (if family="recovery" then begin
+            if profile<>"normalized-fixed-input/v1" && profile<>"captured-fixed-input/v1" then
+              Capture.reject_composed input_json;
             let input,sites=if profile="captured-guarded-targets/v1" ||
                 profile="captured-guarded-targets/v2" || profile="captured-guarded-targets/v3" || profile="captured-guarded-targets/v4" then begin
                 require(string(get input_json "composition")"profile"=profile)
@@ -172,7 +174,8 @@ let () =
               profile="captured-guarded-targets/v1" || profile="captured-guarded-targets/v2" ||
               profile="captured-guarded-input/v2" || profile="captured-guarded-targets/v3" ||
               profile="captured-guarded-input/v3" || profile="captured-guarded-targets/v4" ||
-              profile="captured-indirect-targets/v2" ->
+              profile="captured-indirect-targets/v2" ||
+              (profile="captured-indirect-targets/v1" && reason=Capture.composed_refusal) ->
             if Sys.getenv_opt "ARIADNE_TARGET_DIAGNOSTICS"<>None then
               Printf.eprintf "guarded native admission rejected: %s\n%!" reason;
             let empty=`Assoc ["phase",js "recover";"pending",`List [];

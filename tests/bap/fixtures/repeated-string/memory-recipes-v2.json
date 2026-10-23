@@ -1,0 +1,603 @@
+{
+  "schema": "ariadne.amd64-memory-rep-recipes/v2",
+  "scope": "Exactly 28 default-64-bit-address memory-string planning tuples; exact selected encodings only, not an encoding denominator. No segment override, 67, extra/reordered prefixes, I/O, hardware faults or restart semantics.",
+  "sources": {
+    "amd-24594-r3.38": {
+      "url": "https://docs.amd.com/api/khub/documents/BqEoC2FadIAgbrUdEzDJIg/content",
+      "publication": "24594",
+      "revision": "3.38",
+      "sha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "repeatPrefixPdfPages": [
+        54,
+        55,
+        56
+      ],
+      "repeatPrefixTables": [
+        "1-6",
+        "1-7",
+        "1-8"
+      ],
+      "pageNumbering": "one-based PDF pages, not printed page numbers"
+    }
+  },
+  "environment": {
+    "mode": "long-64",
+    "flatDefaultSegments": true,
+    "outcomes": "finite-normal-completion-only",
+    "prefixOrder": "66 before F2/F3; REX.W after F2/F3",
+    "excludedPrefixes": [
+      "address-size-67",
+      "segment-override",
+      "lock",
+      "duplicate",
+      "extra",
+      "alternative-order"
+    ]
+  },
+  "cases": [
+    {
+      "name": "rep-movsb",
+      "family": "movs",
+      "operation": "movs",
+      "elementBits": 8,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "count",
+      "bytes": "f3a4",
+      "bapOpcode": "MOVSB",
+      "sourceSegment": "default-flat-ds",
+      "destinationSegment": "default-flat-es",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        301,
+        302
+      ],
+      "profile": "bap-bit-provenance-v13"
+    },
+    {
+      "name": "rep-movsw",
+      "family": "movs",
+      "operation": "movs",
+      "elementBits": 16,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "count",
+      "bytes": "66f3a5",
+      "bapOpcode": "MOVSW",
+      "sourceSegment": "default-flat-ds",
+      "destinationSegment": "default-flat-es",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        301,
+        302
+      ],
+      "profile": "bap-bit-provenance-v13"
+    },
+    {
+      "name": "rep-movsd",
+      "family": "movs",
+      "operation": "movs",
+      "elementBits": 32,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "count",
+      "bytes": "f3a5",
+      "bapOpcode": "MOVSL",
+      "sourceSegment": "default-flat-ds",
+      "destinationSegment": "default-flat-es",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        301,
+        302
+      ],
+      "profile": "bap-bit-provenance-v13"
+    },
+    {
+      "name": "rep-movsq",
+      "family": "movs",
+      "operation": "movs",
+      "elementBits": 64,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "count",
+      "bytes": "f348a5",
+      "bapOpcode": "MOVSQ",
+      "sourceSegment": "default-flat-ds",
+      "destinationSegment": "default-flat-es",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        301,
+        302
+      ],
+      "profile": "bap-bit-provenance-v13"
+    },
+    {
+      "name": "rep-stosb",
+      "family": "stos",
+      "operation": "stos",
+      "elementBits": 8,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "count",
+      "bytes": "f3aa",
+      "bapOpcode": "STOSB",
+      "sourceSegment": "none",
+      "destinationSegment": "default-flat-es",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        396,
+        397
+      ],
+      "profile": "bap-bit-provenance-v13"
+    },
+    {
+      "name": "rep-stosw",
+      "family": "stos",
+      "operation": "stos",
+      "elementBits": 16,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "count",
+      "bytes": "66f3ab",
+      "bapOpcode": "STOSW",
+      "sourceSegment": "none",
+      "destinationSegment": "default-flat-es",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        396,
+        397
+      ],
+      "profile": "bap-bit-provenance-v13"
+    },
+    {
+      "name": "rep-stosd",
+      "family": "stos",
+      "operation": "stos",
+      "elementBits": 32,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "count",
+      "bytes": "f3ab",
+      "bapOpcode": "STOSL",
+      "sourceSegment": "none",
+      "destinationSegment": "default-flat-es",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        396,
+        397
+      ],
+      "profile": "bap-bit-provenance-v13"
+    },
+    {
+      "name": "rep-stosq",
+      "family": "stos",
+      "operation": "stos",
+      "elementBits": 64,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "count",
+      "bytes": "f348ab",
+      "bapOpcode": "STOSQ",
+      "sourceSegment": "none",
+      "destinationSegment": "default-flat-es",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        396,
+        397
+      ],
+      "profile": "bap-bit-provenance-v13"
+    },
+    {
+      "name": "rep-lodsb",
+      "family": "lods",
+      "operation": "lods",
+      "elementBits": 8,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "count",
+      "bytes": "f3ac",
+      "bapOpcode": "LODSB",
+      "sourceSegment": "default-flat-ds",
+      "destinationSegment": "none",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        267,
+        268
+      ],
+      "profile": null,
+      "unsupportedReason": "pinned-legacy-producer-empty-bil"
+    },
+    {
+      "name": "rep-lodsw",
+      "family": "lods",
+      "operation": "lods",
+      "elementBits": 16,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "count",
+      "bytes": "66f3ad",
+      "bapOpcode": "LODSW",
+      "sourceSegment": "default-flat-ds",
+      "destinationSegment": "none",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        267,
+        268
+      ],
+      "profile": null,
+      "unsupportedReason": "pinned-legacy-producer-empty-bil"
+    },
+    {
+      "name": "rep-lodsd",
+      "family": "lods",
+      "operation": "lods",
+      "elementBits": 32,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "count",
+      "bytes": "f3ad",
+      "bapOpcode": "LODSL",
+      "sourceSegment": "default-flat-ds",
+      "destinationSegment": "none",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        267,
+        268
+      ],
+      "profile": null,
+      "unsupportedReason": "pinned-legacy-producer-empty-bil"
+    },
+    {
+      "name": "rep-lodsq",
+      "family": "lods",
+      "operation": "lods",
+      "elementBits": 64,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "count",
+      "bytes": "f348ad",
+      "bapOpcode": "LODSQ",
+      "sourceSegment": "default-flat-ds",
+      "destinationSegment": "none",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        267,
+        268
+      ],
+      "profile": null,
+      "unsupportedReason": "pinned-legacy-producer-empty-bil"
+    },
+    {
+      "name": "repe-cmpsb",
+      "family": "cmps",
+      "operation": "cmps",
+      "elementBits": 8,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "equal",
+      "bytes": "f3a6",
+      "bapOpcode": "CMPSB",
+      "sourceSegment": "default-flat-ds",
+      "destinationSegment": "default-flat-es",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        207,
+        208
+      ],
+      "profile": "bap-bit-provenance-v13"
+    },
+    {
+      "name": "repe-cmpsw",
+      "family": "cmps",
+      "operation": "cmps",
+      "elementBits": 16,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "equal",
+      "bytes": "66f3a7",
+      "bapOpcode": "CMPSW",
+      "sourceSegment": "default-flat-ds",
+      "destinationSegment": "default-flat-es",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        207,
+        208
+      ],
+      "profile": "bap-bit-provenance-v13"
+    },
+    {
+      "name": "repe-cmpsd",
+      "family": "cmps",
+      "operation": "cmps",
+      "elementBits": 32,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "equal",
+      "bytes": "f3a7",
+      "bapOpcode": "CMPSL",
+      "sourceSegment": "default-flat-ds",
+      "destinationSegment": "default-flat-es",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        207,
+        208
+      ],
+      "profile": "bap-bit-provenance-v13"
+    },
+    {
+      "name": "repe-cmpsq",
+      "family": "cmps",
+      "operation": "cmps",
+      "elementBits": 64,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "equal",
+      "bytes": "f348a7",
+      "bapOpcode": "CMPSQ",
+      "sourceSegment": "default-flat-ds",
+      "destinationSegment": "default-flat-es",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        207,
+        208
+      ],
+      "profile": "bap-bit-provenance-v13"
+    },
+    {
+      "name": "repne-cmpsb",
+      "family": "cmps",
+      "operation": "cmps",
+      "elementBits": 8,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "not-equal",
+      "bytes": "f2a6",
+      "bapOpcode": "CMPSB",
+      "sourceSegment": "default-flat-ds",
+      "destinationSegment": "default-flat-es",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        207,
+        208
+      ],
+      "profile": "bap-bit-provenance-v13"
+    },
+    {
+      "name": "repne-cmpsw",
+      "family": "cmps",
+      "operation": "cmps",
+      "elementBits": 16,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "not-equal",
+      "bytes": "66f2a7",
+      "bapOpcode": "CMPSW",
+      "sourceSegment": "default-flat-ds",
+      "destinationSegment": "default-flat-es",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        207,
+        208
+      ],
+      "profile": "bap-bit-provenance-v13"
+    },
+    {
+      "name": "repne-cmpsd",
+      "family": "cmps",
+      "operation": "cmps",
+      "elementBits": 32,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "not-equal",
+      "bytes": "f2a7",
+      "bapOpcode": "CMPSL",
+      "sourceSegment": "default-flat-ds",
+      "destinationSegment": "default-flat-es",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        207,
+        208
+      ],
+      "profile": "bap-bit-provenance-v13"
+    },
+    {
+      "name": "repne-cmpsq",
+      "family": "cmps",
+      "operation": "cmps",
+      "elementBits": 64,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "not-equal",
+      "bytes": "f248a7",
+      "bapOpcode": "CMPSQ",
+      "sourceSegment": "default-flat-ds",
+      "destinationSegment": "default-flat-es",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        207,
+        208
+      ],
+      "profile": "bap-bit-provenance-v13"
+    },
+    {
+      "name": "repe-scasb",
+      "family": "scas",
+      "operation": "scas",
+      "elementBits": 8,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "equal",
+      "bytes": "f3ae",
+      "bapOpcode": "SCASB",
+      "sourceSegment": "none",
+      "destinationSegment": "default-flat-es",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        376,
+        377
+      ],
+      "profile": "bap-bit-provenance-v13"
+    },
+    {
+      "name": "repe-scasw",
+      "family": "scas",
+      "operation": "scas",
+      "elementBits": 16,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "equal",
+      "bytes": "66f3af",
+      "bapOpcode": "SCASW",
+      "sourceSegment": "none",
+      "destinationSegment": "default-flat-es",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        376,
+        377
+      ],
+      "profile": "bap-bit-provenance-v13"
+    },
+    {
+      "name": "repe-scasd",
+      "family": "scas",
+      "operation": "scas",
+      "elementBits": 32,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "equal",
+      "bytes": "f3af",
+      "bapOpcode": "SCASL",
+      "sourceSegment": "none",
+      "destinationSegment": "default-flat-es",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        376,
+        377
+      ],
+      "profile": "bap-bit-provenance-v13"
+    },
+    {
+      "name": "repe-scasq",
+      "family": "scas",
+      "operation": "scas",
+      "elementBits": 64,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "equal",
+      "bytes": "f348af",
+      "bapOpcode": "SCASQ",
+      "sourceSegment": "none",
+      "destinationSegment": "default-flat-es",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        376,
+        377
+      ],
+      "profile": "bap-bit-provenance-v13"
+    },
+    {
+      "name": "repne-scasb",
+      "family": "scas",
+      "operation": "scas",
+      "elementBits": 8,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "not-equal",
+      "bytes": "f2ae",
+      "bapOpcode": "SCASB",
+      "sourceSegment": "none",
+      "destinationSegment": "default-flat-es",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        376,
+        377
+      ],
+      "profile": "bap-bit-provenance-v13"
+    },
+    {
+      "name": "repne-scasw",
+      "family": "scas",
+      "operation": "scas",
+      "elementBits": 16,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "not-equal",
+      "bytes": "66f2af",
+      "bapOpcode": "SCASW",
+      "sourceSegment": "none",
+      "destinationSegment": "default-flat-es",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        376,
+        377
+      ],
+      "profile": "bap-bit-provenance-v13"
+    },
+    {
+      "name": "repne-scasd",
+      "family": "scas",
+      "operation": "scas",
+      "elementBits": 32,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "not-equal",
+      "bytes": "f2af",
+      "bapOpcode": "SCASL",
+      "sourceSegment": "none",
+      "destinationSegment": "default-flat-es",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        376,
+        377
+      ],
+      "profile": "bap-bit-provenance-v13"
+    },
+    {
+      "name": "repne-scasq",
+      "family": "scas",
+      "operation": "scas",
+      "elementBits": 64,
+      "addressBits": 64,
+      "countBits": 64,
+      "indexBits": 64,
+      "repeatCondition": "not-equal",
+      "bytes": "f248af",
+      "bapOpcode": "SCASQ",
+      "sourceSegment": "none",
+      "destinationSegment": "default-flat-es",
+      "manualSource": "amd-24594-r3.38",
+      "manualPdfPages": [
+        376,
+        377
+      ],
+      "profile": "bap-bit-provenance-v13"
+    }
+  ]
+}

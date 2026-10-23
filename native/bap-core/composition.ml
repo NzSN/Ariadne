@@ -283,6 +283,7 @@ let transport_query snapshot input =
   | 2->Legacy_composition_v2.transport_query snapshot input
   | _->transport_query_current snapshot input
 let admit input snapshot =
+  Capture.reject_composed input;
   match generation input with
   | 1->Legacy_composition.admit input snapshot
   | 2->Legacy_composition_v2.admit input snapshot

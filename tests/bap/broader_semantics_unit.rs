@@ -112,7 +112,7 @@ fn old_and_unknown_profiles_keep_fp_control_namespace_refusal() {
             "bap-bit-provenance-v7",
             "bap-bit-provenance-v8",
             "bap-bit-provenance-v9",
-            "bap-bit-provenance-v12",
+            "bap-bit-provenance-v999",
             "unknown",
         ] {
             let error = admission::admit_with_profile(&bil, &opcode, &[0x90], profile).unwrap_err();

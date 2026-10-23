@@ -34,6 +34,8 @@ pub struct Backend {
     runtime_hash: String,
     helper_hash: String,
     source_extension: Option<super::source_extension::SourceExtension>,
+    lods_source: Option<super::lods_source::LodsSource>,
+    rep_address_source: Option<super::rep_address_source::RepAddressSource>,
     source_extension_failed: bool,
     metrics: Metrics,
     retain_refinement: bool,
@@ -218,6 +220,12 @@ impl Backend {
         if let Some(extension) = &self.source_extension {
             extension.validate()?;
         }
+        if let Some(extension) = &self.lods_source {
+            extension.validate()?;
+        }
+        if let Some(extension) = &self.rep_address_source {
+            extension.validate()?;
+        }
         if crate::reports::sha256(&std::fs::read(&self.decoder)?) != self.decoder_hash {
             return Err(invalid(
                 "decode reference changed during snapshot preparation",
@@ -230,6 +238,12 @@ impl Backend {
             s.finish()?;
         }
         if let Some(extension) = &self.source_extension {
+            extension.validate()?;
+        }
+        if let Some(extension) = &self.lods_source {
+            extension.validate()?;
+        }
+        if let Some(extension) = &self.rep_address_source {
             extension.validate()?;
         }
         Ok(())
@@ -252,6 +266,31 @@ impl Backend {
             || packaged_runtime_hash.clone(),
             |extension| extension.runtime_identity(&packaged_runtime_hash),
         );
+        let lods_source = config
+            .lods_source_extension
+            .as_deref()
+            .map(|directory| {
+                super::lods_source::LodsSource::load(directory, super::lods_source::LOCK)
+            })
+            .transpose()?;
+        let runtime_hash = lods_source.as_ref().map_or_else(
+            || runtime_hash.clone(),
+            |extension| extension.runtime_identity(&runtime_hash),
+        );
+        let rep_address_source = config
+            .rep_address_source_extension
+            .as_deref()
+            .map(|directory| {
+                super::rep_address_source::RepAddressSource::load(
+                    directory,
+                    super::rep_address_source::LOCK,
+                )
+            })
+            .transpose()?;
+        let runtime_hash = rep_address_source.as_ref().map_or_else(
+            || runtime_hash.clone(),
+            |extension| extension.runtime_identity(&runtime_hash),
+        );
         let helper_hash = crate::bap::helper_identity(&config.helper)?;
         Ok(Self {
             config,
@@ -264,6 +303,8 @@ impl Backend {
             runtime_hash,
             helper_hash,
             source_extension,
+            lods_source,
+            rep_address_source,
             source_extension_failed: false,
             metrics: Metrics {
                 runtime_validation: start.elapsed(),
@@ -308,6 +349,12 @@ impl Backend {
         options: &PreparationOptions,
         target: DecoderTarget,
     ) -> Result<PreparedBatch, Error> {
+        if let Some(extension) = &self.lods_source {
+            extension.validate()?;
+        }
+        if let Some(extension) = &self.rep_address_source {
+            extension.validate()?;
+        }
         if self.source_extension.is_some()
             && self.config.source_extension_mode != super::SourceExtensionMode::Advanced
             && (self.retain_guards || self.retain_targets || self.retain_refinement)
@@ -348,7 +395,23 @@ impl Backend {
                 super::guard_admission::PRODUCER_PROFILE
             }
         } else if self.source_extension.is_some() {
-            if self.config.source_extension_mode == super::SourceExtensionMode::Advanced {
+            if self.config.source_extension_mode
+                == super::SourceExtensionMode::AmdMemoryRepeatedStringsAddressSize
+            {
+                super::repeated_strings::PROFILE15
+            } else if self.config.source_extension_mode
+                == super::SourceExtensionMode::MemoryRepeatedStringsWithLods
+            {
+                super::repeated_strings::PROFILE14
+            } else if self.config.source_extension_mode
+                == super::SourceExtensionMode::MemoryRepeatedStrings
+            {
+                super::repeated_strings::PROFILE13
+            } else if self.config.source_extension_mode
+                == super::SourceExtensionMode::RepeatedStrings
+            {
+                super::repeated_strings::PROFILE
+            } else if self.config.source_extension_mode == super::SourceExtensionMode::Advanced {
                 super::source_extension::ADVANCED_PROFILE
             } else {
                 super::source_extension::PROFILE
@@ -411,6 +474,7 @@ impl Backend {
         self.metrics.lift_and_protocol += start.elapsed();
         let start = Instant::now();
         for (va, mut lift) in lifts {
+            let mut amd_address_premise = false;
             let site = batch
                 .sites
                 .get_mut(&va)
@@ -439,6 +503,69 @@ impl Backend {
                 )?;
                 lift.validate_ast()?;
             }
+            if let Some(extension) = &self.lods_source
+                && lift.status == "decoded"
+                && lift.bil.is_empty()
+                && usize::from(lift.length) == site.evidence.bytes.len()
+                && usize::from(site.evidence.length) == site.evidence.bytes.len()
+                && super::lods_source::LodsSource::supports(&site.evidence.bytes)
+                && lift.bytes
+                    == site
+                        .evidence
+                        .bytes
+                        .iter()
+                        .map(|b| format!("{b:02x}"))
+                        .collect::<String>()
+                && site.instruction.kind == InstructionKind::Ordinary
+                && lift.properties.as_ref().is_some_and(|p| {
+                    !p.jump && !p.conditional && !p.indirect && !p.call && !p.return_ && !p.control
+                })
+            {
+                lift.bil = extension.lift(
+                    match target {
+                        DecoderTarget::WindowsAmd64 => "windows-amd64",
+                        DecoderTarget::LinuxAmd64 => "linux-amd64",
+                    },
+                    snapshot,
+                    va,
+                    &site.evidence.bytes,
+                    self.config.timeout,
+                )?;
+                lift.validate_ast()?;
+            }
+            // This explicit successor producer replaces the four known-wrong
+            // nonempty address-32 MOVS lifts as well as the missing exact lifts.
+            // Independent decode/control/extent agreement remains required.
+            if let Some(extension) = &self.rep_address_source
+                && lift.status == "decoded"
+                && usize::from(lift.length) == site.evidence.bytes.len()
+                && usize::from(site.evidence.length) == site.evidence.bytes.len()
+                && super::rep_address_source::RepAddressSource::supports(&site.evidence.bytes)
+                && lift.bytes
+                    == site
+                        .evidence
+                        .bytes
+                        .iter()
+                        .map(|b| format!("{b:02x}"))
+                        .collect::<String>()
+                && site.instruction.kind == InstructionKind::Ordinary
+                && lift.properties.as_ref().is_some_and(|p| {
+                    !p.jump && !p.conditional && !p.indirect && !p.call && !p.return_ && !p.control
+                })
+            {
+                lift.bil = extension.lift(
+                    match target {
+                        DecoderTarget::WindowsAmd64 => "windows-amd64",
+                        DecoderTarget::LinuxAmd64 => "linux-amd64",
+                    },
+                    snapshot,
+                    va,
+                    &site.evidence.bytes,
+                    self.config.timeout,
+                )?;
+                lift.validate_ast()?;
+                amd_address_premise = site.evidence.bytes.first() == Some(&0x67);
+            }
             let ast = serde_json::to_vec(&lift.bil)?;
             let mut semantic = SemanticEvidence {
                 backend: "bap-x86-legacy".into(),
@@ -448,7 +575,11 @@ impl Backend {
                 status: "opaque-unsupported".into(),
                 ast_sha256: Some(crate::reports::sha256(&ast)),
                 fallback: None,
-                gaps: Vec::new(),
+                gaps: if amd_address_premise {
+                    vec!["amd-address32-zero-count-semantics-premise".into()]
+                } else {
+                    Vec::new()
+                },
                 memory_accesses: Vec::new(),
             };
             if lift.status == "invalid" && site.evidence.length == 0 {

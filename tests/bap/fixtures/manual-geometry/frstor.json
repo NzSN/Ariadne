@@ -1,0 +1,390 @@
+{
+  "publication": "26569",
+  "pdfPage": 50,
+  "pdfSha256": "8c8c63c5e285c50faac2e7d474cf5046f5fcccb54673f464f57a8cb171ef0767",
+  "sourceProducts": "source-corpus-v2 pinned products; exact table/diagram cells, original IDs, word spans and page layout retained",
+  "layoutPage": "AMD64 Technology                                                               26569\u2014Rev. 3.16\u2014November 2021\n\n\n\n\nFRSTOR                                  Floating-Point Restore x87 and MMX\u2122 State\nRestores the complete x87 state from memory starting at the specified address, as stored by a previous\ncall to FNSAVE. The x87 state occupies 94 or 108 bytes of memory depending on whether the\nprocessor is operating in real or protected mode and whether the operand-size attribute is 16-bit or 32-\nbit. Because the MMX registers are mapped onto the low 64 bits of the x87 floating-point registers,\nthis operation also restores the MMX state.\nIf FRSTOR results in set exception flags in the loaded x87 status word register, and these exceptions\nare unmasked in the x87 control word register, a floating-point exception occurs when the next\nfloating-point instruction is executed (except for the no-wait floating-point instructions).\nTo avoid generating exceptions when loading a new environment, use the FCLEX or FNCLEX\ninstruction to clear the exception flags in the x87 status word before storing that environment.\nFor details about the memory image restored by FRSTOR, see \u201cMedia and x87 Processor State\u201d in\nVolume 2.\n\nMnemonic                       Opcode                  Description\n FRSTOR                         DD /4                   Load the x87 state from mem94/108env.\n mem94/108env\n\nRelated Instructions\nFSAVE, FNSAVE, FXSAVE, FXRSTOR\n\nrFLAGS Affected\nNone\n\nx87 Condition Code\n  x87 Condition Code             Value                                        Description\n\n              C0                    M        Loaded from memory.\n\n              C1                    M        Loaded from memory.\n\n              C2                    M        Loaded from memory.\n\n              C3                    M        Loaded from memory.\n     Note: A flag set to 1 or cleared to 0 is M (modified). Unaffected flags are blank. Undefined flags are U.\n\n\n\n\n                                               [AMD Public Use]\n20                                                        FRSTOR                                           64-Bit Media\n                                                                                                 Instruction Reference\n",
+  "cells": [
+    {
+      "id": "pdf:50:cell:16",
+      "pdfPage": 50,
+      "rect": [
+        64.98,
+        342.52872,
+        114.3816,
+        351.74172
+      ],
+      "wordSpan": [
+        176,
+        177
+      ],
+      "wordBoxesSha256": "4c84090c58f8c44a8ecfa378355455c04908eb520e62d900d8f92c9ef2247d73",
+      "unicodeSha256": "761a18b82619631f2cb0ec62be463b62961fbabad6175e5fcfa4503d59eec265",
+      "text": "Mnemonic",
+      "wordBoxes": [
+        {
+          "text": "Mnemonic",
+          "rect": [
+            64.98,
+            342.52872,
+            114.3816,
+            351.74172
+          ]
+        }
+      ],
+      "glyphSpan": null,
+      "glyphEvidence": "not-extracted: source is Unicode word boxes"
+    },
+    {
+      "id": "pdf:50:cell:17",
+      "pdfPage": 50,
+      "rect": [
+        181.263,
+        342.52872,
+        218.464596,
+        351.74172
+      ],
+      "wordSpan": [
+        177,
+        178
+      ],
+      "wordBoxesSha256": "cf85cfdf2ac81d58239f0105626edd64e00a63a5755f4aabbf9e61aefc4a6cf8",
+      "unicodeSha256": "c37ef4ad36a525a861229404a96b57eb0536b459772ff0f62bbcc82263a46c0c",
+      "text": "Opcode",
+      "wordBoxes": [
+        {
+          "text": "Opcode",
+          "rect": [
+            181.263,
+            342.52872,
+            218.464596,
+            351.74172
+          ]
+        }
+      ],
+      "glyphSpan": null,
+      "glyphEvidence": "not-extracted: source is Unicode word boxes"
+    },
+    {
+      "id": "pdf:50:cell:18",
+      "pdfPage": 50,
+      "rect": [
+        273.40296,
+        342.52872,
+        328.433952,
+        351.74172
+      ],
+      "wordSpan": [
+        178,
+        179
+      ],
+      "wordBoxesSha256": "09c276d707fcb2cc225a8ef14b675e535a0a81b695c168e023b4584f4425e2bb",
+      "unicodeSha256": "526e0087cc3f254d9f86f6c7d8e23d954c4dfda2b312efc29194ae8a860106ba",
+      "text": "Description",
+      "wordBoxes": [
+        {
+          "text": "Description",
+          "rect": [
+            273.40296,
+            342.52872,
+            328.433952,
+            351.74172
+          ]
+        }
+      ],
+      "glyphSpan": null,
+      "glyphEvidence": "not-extracted: source is Unicode word boxes"
+    },
+    {
+      "id": "pdf:50:cell:19",
+      "pdfPage": 50,
+      "rect": [
+        69.00384,
+        360.52644,
+        109.896612,
+        369.73944
+      ],
+      "wordSpan": [
+        179,
+        180
+      ],
+      "wordBoxesSha256": "485d1f27d48934e095e5b658a0fc55303aa8f80bd814ecb06782704cd3194dc6",
+      "unicodeSha256": "4260fab2fd11ecb58d799849ac1e0a36ba2542144cf62a5fe3fb872b1dc24af8",
+      "text": "FRSTOR",
+      "wordBoxes": [
+        {
+          "text": "FRSTOR",
+          "rect": [
+            69.00384,
+            360.52644,
+            109.896612,
+            369.73944
+          ]
+        }
+      ],
+      "glyphSpan": null,
+      "glyphEvidence": "not-extracted: source is Unicode word boxes"
+    },
+    {
+      "id": "pdf:50:cell:20",
+      "pdfPage": 50,
+      "rect": [
+        69.00384,
+        370.48644,
+        137.87724,
+        379.69944
+      ],
+      "wordSpan": [
+        180,
+        181
+      ],
+      "wordBoxesSha256": "126c97058fc8ac851f6c93d1e03164143b046e841af2544fce0ca0ef3194df4e",
+      "unicodeSha256": "2459237f9fb12a7da21f2ed82d688704eb5e4d7f0aee2a1f62ac8ef44cea350a",
+      "text": "mem94/108env",
+      "wordBoxes": [
+        {
+          "text": "mem94/108env",
+          "rect": [
+            69.00384,
+            370.48644,
+            137.87724,
+            379.69944
+          ]
+        }
+      ],
+      "glyphSpan": null,
+      "glyphEvidence": "not-extracted: source is Unicode word boxes"
+    },
+    {
+      "id": "pdf:50:cell:21",
+      "pdfPage": 50,
+      "rect": [
+        185.28684,
+        365.50644,
+        210.875076,
+        374.71944
+      ],
+      "wordSpan": [
+        181,
+        183
+      ],
+      "wordBoxesSha256": "988c83afdaa75976f790554634b096a935146c20ecfc694d451ce1b5c581f397",
+      "unicodeSha256": "714be95e7c672c2c32cfcb13180eb066ab9955fc08ede2127b8662b01624f3d8",
+      "text": "DD /4",
+      "wordBoxes": [
+        {
+          "text": "DD",
+          "rect": [
+            185.28684,
+            365.50644,
+            199.694976,
+            374.71944
+          ]
+        },
+        {
+          "text": "/4",
+          "rect": [
+            202.54254,
+            365.50644,
+            210.875076,
+            374.71944
+          ]
+        }
+      ],
+      "glyphSpan": null,
+      "glyphEvidence": "not-extracted: source is Unicode word boxes"
+    },
+    {
+      "id": "pdf:50:cell:22",
+      "pdfPage": 50,
+      "rect": [
+        277.51644,
+        365.50644,
+        456.8562,
+        374.71944
+      ],
+      "wordSpan": [
+        183,
+        189
+      ],
+      "wordBoxesSha256": "76d45aa787b8e8674a683e297992c6e2e0c9e4a544caf3bce2a77f7ddd307e33",
+      "unicodeSha256": "817ee06a0b83b112a5c2ebbfed009c0c410932f6deb7ca92252cb77c6a6161bf",
+      "text": "Load the x87 state from mem94/108env.",
+      "wordBoxes": [
+        {
+          "text": "Load",
+          "rect": [
+            277.51644,
+            365.50644,
+            299.700348,
+            374.71944
+          ]
+        },
+        {
+          "text": "the",
+          "rect": [
+            302.503092,
+            365.50644,
+            316.399284,
+            374.71944
+          ]
+        },
+        {
+          "text": "x87",
+          "rect": [
+            319.142268,
+            365.50644,
+            335.20476,
+            374.71944
+          ]
+        },
+        {
+          "text": "state",
+          "rect": [
+            337.992564,
+            365.50644,
+            359.689428,
+            374.71944
+          ]
+        },
+        {
+          "text": "from",
+          "rect": [
+            362.492172,
+            365.50644,
+            382.44504,
+            374.71944
+          ]
+        },
+        {
+          "text": "mem94/108env.",
+          "rect": [
+            385.20396,
+            365.50644,
+            456.8562,
+            374.71944
+          ]
+        }
+      ],
+      "glyphSpan": null,
+      "glyphEvidence": "not-extracted: source is Unicode word boxes"
+    },
+    {
+      "id": "pdf:50:cell:23",
+      "pdfPage": 50,
+      "rect": [
+        63.0,
+        396.384,
+        178.2456,
+        407.484
+      ],
+      "wordSpan": [
+        189,
+        191
+      ],
+      "wordBoxesSha256": "d25dd5b426f2bdd24ecf974539fc9ef100d75c0e6b9f8fc34a4dc8041664c0a8",
+      "unicodeSha256": "4b488ba4e1f6a06e02d2fbf07b7540534e97045b4c7fcfb7fc04e04f68372af7",
+      "text": "Related Instructions",
+      "wordBoxes": [
+        {
+          "text": "Related",
+          "rect": [
+            63.0,
+            396.384,
+            106.3296,
+            407.484
+          ]
+        },
+        {
+          "text": "Instructions",
+          "rect": [
+            109.6296,
+            396.384,
+            178.2456,
+            407.484
+          ]
+        }
+      ],
+      "glyphSpan": null,
+      "glyphEvidence": "not-extracted: source is Unicode word boxes"
+    }
+  ],
+  "baseline": {
+    "entries": [
+      {
+        "chapter": "1 64-Bit Media Instruction Reference",
+        "chapterOrdinal": 8,
+        "id": "amd-entry:0008",
+        "pdfEndPage": 51,
+        "pdfPage": 50,
+        "subsections": [],
+        "tableIds": [
+          "amd-table:0008"
+        ],
+        "title": "FRSTOR",
+        "uri": "#nameddest=G7.2309158"
+      }
+    ],
+    "tables": [
+      {
+        "entryIds": [
+          "amd-entry:0008"
+        ],
+        "header": "Mnemonic                       Opcode                  Description",
+        "headerLine": 20,
+        "id": "amd-table:0008",
+        "lines": [
+          {
+            "classification": "row",
+            "line": 21,
+            "pdfPage": 50,
+            "textSha256": "167e1a92af513b7e6de041d0ef0783a5f13968cd64ff70820f7e31f922f27593"
+          },
+          {
+            "classification": "unparsed",
+            "line": 22,
+            "pdfPage": 50,
+            "textSha256": "cdb2db48887f71328d09ab9aa119c349544b75dbb1237908f685037da3b63d33"
+          },
+          {
+            "classification": "blank",
+            "line": 23,
+            "pdfPage": 50,
+            "textSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ],
+        "pdfPage": 50
+      }
+    ],
+    "rows": [
+      {
+        "encodingCells": [
+          "DD /4"
+        ],
+        "entryIds": [
+          "amd-entry:0008"
+        ],
+        "id": "amd-row:00008",
+        "mnemonic": "FRSTOR",
+        "source": {
+          "line": 21,
+          "pdfPage": 50,
+          "textSha256": "167e1a92af513b7e6de041d0ef0783a5f13968cd64ff70820f7e31f922f27593"
+        },
+        "table": "amd-table:0008"
+      }
+    ],
+    "gaps": [
+      {
+        "kind": "unparsed-table-line",
+        "source": {
+          "line": 22,
+          "pdfPage": 50,
+          "textSha256": "cdb2db48887f71328d09ab9aa119c349544b75dbb1237908f685037da3b63d33"
+        },
+        "sourceText": "mem94/108env",
+        "table": "amd-table:0008"
+      }
+    ]
+  }
+}

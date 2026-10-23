@@ -1059,6 +1059,7 @@ let admit_current j snapshot =
   i,capture_sites
 
 let admit input snapshot=
+  Capture.reject_composed input;
   if string(get input "guard_admission")"schema"="ariadne.guard-admission/v1" then
     Legacy_guard.admit input snapshot
   else

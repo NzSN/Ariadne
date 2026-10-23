@@ -16,6 +16,9 @@ a finite XMM/YMM namespace under producer profile v4; its fresh validation is
 separate from the accepted v3 records.
 The current Basic v9 rebuild passes three native candidate tests under an
 isolated pin; its production pin and missing historical identity remain unchanged.
+The separately selected [plain v12 repeated-string stage](../../.agents/plans/amd64-operation-coverage.md#resume-plain-rep-and-coverage-accounting)
+adds conservative dependency projection for three exact byte forms. Its proof
+modes remain refused, and full instruction coverage remains open.
 
 **Why this document exists.** The [effect design](operand-effects-design.md)
 exposes the coverage and maintenance costs of local instruction rules. BAP
@@ -37,6 +40,13 @@ scopes. Contract validation does not prove an arbitrary lifter or pass correct.
 - [AMD64 operation coverage program](../../.agents/plans/amd64-operation-coverage.md) —
   active instruction-family inventory, producer-gap closure and architectural
   admission expansion; full instruction coverage remains an open stage exit.
+
+- [AMD64 coverage completion design](amd64-coverage-design.md) — proposed
+  source reconstruction, authoritative encoding-domain bindings and remaining
+  REP/consumer expansion; this integration document retains implemented contracts.
+- [Plain REP and accounting stage S4/Q0](../../.agents/plans/amd64-operation-coverage.md#resume-plain-rep-and-coverage-accounting) —
+  exact v12 scope, consumer refusals, executable denominator accounting and
+  remaining qualification gates.
 
 - [Completed native request-budget plan](../../.agents/plans/completed/native-request-budget.md) records caller-selected inbound frames, paired capability checks and fresh native qualification.
 
@@ -198,6 +208,11 @@ unsupported constructs and generic unknown values conservatively.
 
 ### AMD64 operation coverage program
 
+The [completion design](amd64-coverage-design.md) owns the proposed source-gap,
+legal-form binding and wider REP architecture. Its
+[execution stages](../../.agents/plans/amd64-operation-coverage.md#coverage-completion-design-stages)
+separate those obligations from the finite implementation described here.
+
 The user-requested [coverage program](../../.agents/plans/amd64-operation-coverage.md)
 extends this design's production semantic boundary across AMD64 operations.
 It separately tracks an executable family survey, a complete versioned legal-form
@@ -306,7 +321,8 @@ below remain unqualified for general use. All eight finite advanced native
 integration tests pass, including eighteen mandatory-count compositions; the
 exact historical Basic v9 producer compatibility and remaining qualification
 clauses stay open.
-REP production admission remains explicitly refused.
+REP remains refused under v10/v11; the later [plain v12 stage](#plain-repeated-string-profile-and-coverage-accounting)
+admits three reviewed forms under a separate dependency contract.
 
 The [inventory extractor](../../tools/amd64_inventory.py) and its
 [lock](../../tests/bap/fixtures/amd64-semantics/inventory.lock.json) enumerate
@@ -409,8 +425,8 @@ byte-store and repeat-while-equal byte-comparison equations. Its 720 finite
 comparisons include zero count, both directions, early mismatch, overlapping
 buffers and pointer wrap, checking complete registers, flags and memory.
 Hardware exception and partial-fault behavior are separate from this concrete
-BIL comparison. Production loop admission also requires conservative projection
-and every downstream consumer to handle loop writes.
+BIL comparison. The plain v12 profile below implements conservative projection
+and loop-aware downstream transfers while refusing proof modes.
 
 ```sh
 python3 native/bap/source-coverage/advanced_build.py --output target/new-source-advanced
@@ -442,6 +458,151 @@ rows. A missing expected flag effect makes the baseline survey fail its coverage
 expectation while preserving the measured reason; this does not turn a known
 producer gap into a successful result. Full legal-form completeness remains S1.
 
+##### Plain repeated-string profile and coverage accounting
+
+**Finite S4/Q0 continuation, 2026-10-23, baseline `e44ce2b`.** The
+[execution stage](../../.agents/plans/amd64-operation-coverage.md#resume-plain-rep-and-coverage-accounting)
+records implementation and current validation. `Config::with_repeated_strings(dir)`
+selects `bap-bit-provenance-v12` with the unchanged pinned advanced flag bundle.
+Environment selection requires both `ARIADNE_BAP_SOURCE_EXTENSION=dir` and
+`ARIADNE_BAP_SOURCE_EXTENSION_MODE=repeated-strings`. The packaged default,
+Basic v9 and advanced v10/v11 profiles and pins keep their existing meanings.
+An existing v10/v11 source is never replayed as v12.
+
+Only exact long-mode `F3 A4` (REP MOVSB), `F3 AA` (REP STOSB) and `F3 A6`
+(REPE CMPSB) are admitted by the new
+[byte matcher](../../src/bap/repeated_strings.rs). Admission requires exactly
+one top-level typed `While`; nested, sequential or conditionally entered loops,
+external control, RIP assignments and special semantics are refused. Typed
+virtual reads still require definite bindings. Other REP widths, prefixes and
+string operations receive no permission from this selection.
+
+The separately selected [memory-string successors](amd64-coverage-design.md#104-default-address-memory-rep-execution-r1)
+extend plain dependencies under v13/v14. Their recipe, additional LODS producer,
+source pins and current qualification remain with that canonical completion
+design. They do not broaden this v12 contract or grant proof-consumer admission.
+
+The [projection](../../src/bap/projection.rs) computes a zero-or-more-iteration
+dependency closure, retaining the entry state at every join and repeating the
+body until possible origins stabilize. This preserves initial origins and
+loop-carried dependencies. Body writes are possible writes; they do not become
+definite kills solely because the loop body assigns them. Stores weakly update
+`memory:any` without killing its old origins. The existing 262,144-step work
+budget and a 4,096-round dependency fixed-point cap produce explicit `Resource`
+errors when exhausted; exhaustion cannot publish an incomplete projection.
+
+Memory accesses inside the loop carry unknown iteration-dependent addresses;
+first-iteration addresses cannot certify all accesses. Rust target-transfer and
+native capture extraction havoc architectural and virtual loop outputs before
+later scalar use. Guard, captured-target and memory-refinement preparation are
+explicitly refused for v12, including requests with no entry points, before
+helper/proof dispatch. Native dispatch and direct proof entry points recognize
+the exact colon-delimited `bap-bit-provenance-v12` token in the overall
+`semantic_profile` or a site's projection. Refusal therefore does not depend
+on populated site rows: empty or all-null site collections still receive the
+same profile refusal across all nine proof transports. This strengthens the
+identity boundary; recovery separately rejects empty analysis domains.
+Plain capture/replay accepts v12 using validated
+reader-supplied normalized effects, bound to captured bytes, profile and query
+evidence. It does not independently replay raw REP BIL/effect semantics; the
+existing capture trust boundary is unchanged. Hostile saved captures are
+rejected. This contract
+does not qualify hardware partial faults, general REP, execution history or ISA
+correctness. It supplies no concrete values for the loop's abstract outputs.
+
+The following results record the v12-stage source boundary. The later
+[memory-string native campaign](amd64-coverage-design.md#106-current-root-checks-and-remaining-qualification)
+supersedes current-helper claims with 259 refusal controls, 416 v13/v14 parity
+instances and positive v12/advanced compatibility checks; v12's contract stays
+unchanged.
+
+The v12-stage finite checks pass eight portable projection tests, six consumer tests
+and the early proof-refusal test. Fresh actual BIL checks cover all three forms
+on Windows and Linux, 54 altered-prefix controls and v10/v11 refusal. Before
+the final native identity-boundary hardening, three plain REP native integration
+tests pass, including 24 Windows/Linux sequences with native/Rust state equality
+and saved-capture tampering; all eight existing advanced native regressions also
+pass at that source boundary. The final rebuilt native helper passes 41 compiled
+direct controls and 54 framed-dispatch controls, 95 in total, superseding the
+earlier nine-control check. Its three plain REP integration tests and one positive
+old-advanced composition/tampering regression also pass. The latter rechecks
+compatibility and is not a ninth distinct advanced test. All 14 source hashes
+bound by that final v12-stage native helper matched that recorded checkout.
+The independent numeric
+oracle passes 720 comparisons. Root checks at that boundary passed 439 default Rust tests
+(149 ignored), 64 core-only tests (22 ignored), strict all-feature/all-target
+Clippy, formatting and the 213-source Rust layout check. The earlier guard
+deadline passes on its serial rerun. All four optimized Rust mutants are
+detected by exact named assertions after passing controls; selected observers
+and SUT sources are restored and the completed campaign records stable sources.
+That campaign completed before the final native proof-policy hardening; its Rust
+SUT and selected observers remain byte-identical. The later native policy is
+checked separately by the 95 controls, three REP integration tests and positive
+old-advanced proof recheck against the current helper.
+The initial interrupted attempt to correct an old unknown-profile fixture to
+sentinel v999 earns no completed-campaign credit. No result is inferred from
+startup or an earlier profile's pass.
+
+The completed current v12 native survey covers 171 byte cases: 57 supported
+projections, eight conservative unknowns, 75 missing producer lifts, 28
+unsupported-control/semantics outcomes, two encoding disagreements and one
+query error. All nine independent expectations match. PUSHFQ (`9C`) reproduces
+`BIL AST budget exceeded` with direct fresh lifting and stays a query error.
+The first local survey's 171 decoder-EOF failures lacked the exact LLVM library
+path and receive no semantic credit; the successful rerun uses the unchanged
+LLVM 20.1.2 and matching libxml2 library path.
+
+```sh
+ARIADNE_BAP_ADVANCED_SOURCE_EXTENSION=target/new-source-advanced/runtime \
+ARIADNE_BAP_CORE_DIR=target/new-core-advanced \
+  cargo test --offline --locked --lib repeated_string_tests \
+  -- --ignored --test-threads=1
+python3 tests/bap/rep_transfer_native_controls.py \
+  --native-dir target/new-core-advanced --output target/new-rep-native-controls
+python3 tools/check_bap_repeated_string_oracle.py --output target/new-rep-oracle/report.json
+python3 tools/check_repeated_string_mutations.py --help
+```
+
+The [coverage accountant](../../tools/amd64_coverage.py) validates the pinned
+XED/manual extractor products and the exact catalogue; optional native surveys
+are rebound to their observations, helper identity and current source before
+classification is recomputed. It emits separate symbolic-form, manual-row,
+transcription-gap and exact-byte worklists. Exact byte cases retain supported,
+opaque, missing and unexercised outcomes. Candidate form/case associations must
+name the exact form ID, case ID, bytes and inventory/catalogue identities; even
+a supported associated sample establishes neither vendor legality nor exhaustive
+coverage of that symbolic template. Names, old pass flags and aggregate counts
+cannot close those obligations. Malformed, duplicate, changed or incomplete
+bound inputs are rejected. `--require-full` writes the report and exits nonzero
+while any full-coverage gate remains unmet.
+
+The actual XED run reproduces 10,994 symbolic templates, 10,569 long-mode
+candidates and 425 exclusions; all 10,569 candidates currently lack authoritative
+form-to-byte bindings. Fifteen accounting controls and 31 existing inventory,
+manual and survey controls pass. The three pinned public PDFs reproduce their
+outline/content/counts, including 2,657 unresolved transcription gaps. The newer
+`pdftotext` 26.01 layout hash differs from the historical full-text pin, so
+strict manual validation rejects those regenerated products; the pins remain
+unchanged. Accepted manual products are omitted from the current accounting
+run and remain explicit obligations. Pinned-denominator fields still report
+4,118 manual rows and 2,657 gaps, so omitted products cannot look gap-free.
+With the fresh survey, accounting records 57 supported, eight opaque and 106
+missing byte cases. Its `--require-full` exit is 2, as intended.
+Official-download byte identity for Volumes 4/5, complete vendor legality,
+concrete-domain expansion, wider S1/S2–S5 and Q1 remain open. Generated reports,
+transcripts, raw logs and copied source trees remain disposable ignored output.
+
+```sh
+python3 tools/amd64_coverage.py --xed target/new-amd64-inventory/inventory.json \
+  --output target/new-amd64-accounting --require-full
+python3 -m unittest discover -s tools -p 'test_amd64_coverage.py'
+```
+
+Add repeated `--manual` paths only for products accepted under the unchanged
+manual lock, and `--survey` only for a fresh current-source report. An omitted
+input stays visibly missing or unexercised; this command cannot currently
+establish full AMD64 acceptance.
+
 Use a bounded abstract bit-provenance interpreter for supported BIL nodes.
 Initial architectural bits refer to canonical GPR byte/flag cells and the
 coarse `state:other` vector location; virtual
@@ -466,8 +627,9 @@ finite regression corpus has 58 exact cases and 37 projected forms, including
 the four observed parser forms and paired short/long control encodings. These
 are exercised cases, not a new exhaustive permission list or an ISA proof.
 
-LOCK, REP, segment/address-size overrides, unmodeled architectural state and
-control/special/loop semantics remain explicit exclusions. The exact `90` NOP
+For the retained v3/v4 contract, LOCK, REP, segment/address-size overrides,
+unmodeled architectural state and control/special/loop semantics remain explicit
+exclusions. The exact `90` NOP
 is the reviewed empty-BIL exception. Empty CLC remains unsupported despite its
 known hardware effect. Malformed type/width/binding and resource failures abort
 the query; unavailable/control-uncertain semantics stop conservatively.
@@ -585,7 +747,7 @@ policy rather than deriving callee behavior from their BIL.
 | Valid supported BIL and compatible control/operands | Projected effects; unknown output values retain dependencies, possible writes and explicit gaps. |
 | Valid ordinary control, known architectural namespace and typed data-only BIL with an unsupported scalar operation | `opaque-ordinary`; keep the decoded structural continuation, all tracked uses/may-defs, no must-defs and a data-effect gap. |
 | Empty lift except exact `90` | Stop with an unavailable-semantics gap. |
-| Unmodeled architectural state, RIP assignment, jump/exception/special/loop uncertainty or control disagreement | Stop; no ordinary continuation. |
+| Unmodeled architectural state, RIP assignment, jump/exception/special uncertainty, unreviewed loop semantics or control disagreement | Stop; no ordinary continuation. Only the separately selected plain v12 three-form contract admits its reviewed loops. |
 | Guarded LOCK/REP/segment/address-size semantics | Stop with a specific prefix gap. |
 | Malformed AST/type/width, unbound virtual read or invalid extraction | Query failure; no incomplete result publication. |
 | Operand or consumed-byte disagreement | Explicit disagreement stop; never opaque ordinary continuation. |

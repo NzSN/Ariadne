@@ -281,7 +281,10 @@ impl TransferReceipt {
             } else {
                 PROFILE
             }
-            || site.projection.as_deref() == Some(super::source_extension::PROFILE)
+            || site
+                .projection
+                .as_deref()
+                .is_some_and(super::ordinary_only_projection)
             || self.site != site.va
             || self.bytes_hex != site.bytes_hex
             || site.semantic_status.as_deref() != Some("projected")
