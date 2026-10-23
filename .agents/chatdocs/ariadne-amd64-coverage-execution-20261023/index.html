@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Implementation progress for AMD64 source reconstruction, finite legal-domain bindings and locally validated AMD v15 address-size REP; current native qualification and broader coverage gates remain pending."><title>Completing REP and AMD64 operation coverage · Implementation progress</title><style>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="All 2657 historical AMD manual gaps now have source-backed dispositions, with zero unassigned and seven explicit source conflicts. Complete source constraints, legal encodings, v15 native qualification and full AMD64 coverage remain open."><title>Completing REP and AMD64 operation coverage · Implementation progress</title><style>
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:#f4f7fa;color:#1d2b3b;font:17px/1.7 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:#075b9b;text-underline-offset:3px}a:hover{color:#053b67}a:focus-visible,[tabindex]:focus-visible{outline:3px solid #c7871d;outline-offset:4px}.top{background:#102d47;color:#eef6fe;padding:20px max(24px,calc((100vw - 1390px)/2))}.top strong{font-size:1.1rem;letter-spacing:.3px}.top nav{display:flex;gap:24px;flex-wrap:wrap;margin-top:7px}.top a{color:#b9ddfa;font-size:.91rem}.layout{display:grid;grid-template-columns:260px minmax(0,1fr);gap:38px;max-width:1390px;margin:0 auto;padding:30px 24px 70px}.toc{position:sticky;top:24px;align-self:start;max-height:calc(100vh - 48px);overflow:auto;padding:4px 18px 20px 0}.toc strong{display:block;font-size:.88rem;text-transform:uppercase;letter-spacing:.8px;color:#52667a;margin-bottom:12px}.toc ul{list-style:none;margin:0;padding:0}.toc li{margin:5px 0;font-size:.87rem;line-height:1.45}.toc li.h3{padding-left:15px;font-size:.81rem}.toc a{color:#465c70;text-decoration:none;display:block;padding:3px 0}.toc a:hover{text-decoration:underline}article{min-width:0;background:white;border:1px solid #d7e1e9;border-radius:12px;padding:35px 44px 60px;box-shadow:0 3px 14px #132f4610}.provenance{background:#edf4fb;border:1px solid #c2d5e6;border-radius:7px;padding:15px 19px;margin:0 0 28px;font-size:.9rem;line-height:1.55}.provenance p{margin:5px 0}.label{color:#315674;text-transform:uppercase;letter-spacing:.8px;font-size:.78rem;font-weight:700}h1{font-size:2.15rem;line-height:1.2;letter-spacing:-.7px;margin:0 0 26px;color:#142d44}h2{font-size:1.55rem;line-height:1.3;margin:50px 0 18px;padding-top:18px;border-top:1px solid #dbe4eb;color:#183f5e}h3{font-size:1.15rem;line-height:1.4;margin:30px 0 12px;color:#244b69}p,ul,ol{margin:15px 0}li{padding-left:3px;margin:6px 0}code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}code{font-size:.85em;background:#f0f4f7;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}pre{white-space:pre;overflow:auto;font-size:.84rem;line-height:1.6;padding:18px 20px;background:#f3f6f9;border:1px solid #dbe4ed;border-radius:7px}pre code{background:none;padding:0;overflow-wrap:normal}blockquote{border-left:4px solid #bd8d30;background:#fff9ed;padding:4px 20px;margin:24px 0}.table-scroll{overflow:auto;max-width:100%;margin:24px 0;border:1px solid #d4dfe8;border-radius:7px}table{border-collapse:collapse;width:100%;font-size:.88rem;line-height:1.55}th,td{text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid #dbe4eb}th{background:#edf3f8;font-weight:650}tr:last-child td{border-bottom:none}td:nth-child(1){font-weight:550}img,svg{max-width:100%;height:auto}.diagram{margin:24px 0}.diagram-scroll{overflow:auto;border:1px solid #d4dfe8;border-radius:9px}.diagram-scroll svg{min-width:1200px;max-width:none;width:100%;margin:0;border:0;border-radius:0}figcaption{font-size:.84rem;color:#52667a;margin-top:8px}svg{display:block;border:1px solid #d4dfe8;border-radius:9px;margin:22px 0}.foot{margin-top:45px;padding-top:20px;border-top:1px solid #dbe4eb;font-size:.84rem;color:#52667a}.hash{display:block;word-break:break-all;font-family:ui-monospace,Consolas,monospace;font-size:.76rem}strong{font-weight:650}hr{border:0;border-top:1px solid #dbe4eb;margin:35px 0}@media(max-width:1050px){.layout{grid-template-columns:205px minmax(0,1fr);gap:24px}article{padding:28px}.toc{padding-right:0}}@media(max-width:800px){.layout{display:block;padding:16px 14px 45px}.toc{position:static;max-height:none;padding:12px 10px 20px}.toc ul{columns:2;column-gap:24px}.toc li{break-inside:avoid}.toc li.h3{display:none}article{padding:25px 20px;border-radius:8px}h1{font-size:1.75rem}h2{font-size:1.35rem}.top{padding:17px 23px}}@media(max-width:480px){.toc ul{columns:1}body{font-size:16px}.top nav{gap:14px}.table-scroll{font-size:.83rem}th,td{padding:10px}}@media print{body{background:white;font-size:10pt}.top,.toc{display:none}.layout{display:block;padding:0;max-width:none}article{border:0;padding:0;box-shadow:none}.provenance{break-inside:avoid}h2,h3{break-after:avoid}table,svg{break-inside:avoid}.diagram-scroll{overflow:visible}.diagram-scroll svg{min-width:0;max-width:100%}a{color:inherit}}
 </style></head>
-<body><header class="top"><strong>Ariadne · implementation progress</strong><nav aria-label="Document navigation"><a href="../ariadne-reports-index.html">Report archive</a><a href="../../../docs/Ariadne/amd64-coverage-design.md">Canonical design</a><a href="architecture.svg">Full architecture diagram</a><a href="../ariadne-amd64-coverage-execution-r1-qualified-20261023/index.html">Qualified R1 version</a><a href="../ariadne-amd64-coverage-design-20261023/index.html">Original proposal</a></nav></header>
+<body><header class="top"><strong>Ariadne · implementation progress</strong><nav aria-label="Document navigation"><a href="../ariadne-reports-index.html">Report archive</a><a href="../../../docs/Ariadne/amd64-coverage-design.md">Canonical design</a><a href="architecture.svg">Full architecture diagram</a><a href="../ariadne-amd64-coverage-execution-gap581-20261023/index.html">Previous 581-gap version</a><a href="../ariadne-amd64-coverage-execution-r1-qualified-20261023/index.html">Qualified R1 version</a><a href="../ariadne-amd64-coverage-design-20261023/index.html">Original proposal</a></nav></header>
 <div class="layout"><aside class="toc"><nav aria-label="Table of contents"><strong>Contents</strong><ul><li class="h2"><a href="#context-and-follow-up">Context and follow-up</a></li>
 <li class="h2"><a href="#1-problem-and-completion-target">1. Problem and completion target</a></li>
 <li class="h2"><a href="#2-current-boundary">2. Current boundary</a></li>
@@ -33,12 +33,12 @@
 <li class="h3"><a href="#106-current-root-checks-and-remaining-qualification">10.6 Current root checks and remaining qualification</a></li>
 <li class="h3"><a href="#107-amd-address-size-rep-implementation-r2">10.7 AMD address-size REP implementation: R2</a></li>
 <li class="h3"><a href="#108-expanded-source-to-consumer-bindings-c3c4">10.8 Expanded source-to-consumer bindings: C3/C4</a></li>
-<li class="h3"><a href="#109-current-continuation-checks">10.9 Current continuation checks</a></li></ul></nav></aside><article><div class="provenance"><span class="label">Implementation progress · 2026-10-23</span><p>Canonical source: <a href="../../../docs/Ariadne/amd64-coverage-design.md"><code>docs/Ariadne/amd64-coverage-design.md</code></a>.</p><p>Baseline: <strong>e44ce2b plus current uncommitted C1–C4 progress and AMD v15 address-size REP implementation</strong>. This dated reading view records 56 canonical memory-REP tuples under an explicit AMD v15 premise, with 178,080 numeric comparisons and 448 local capture instances passing. Current v15 native qualification awaits specific source-handoff approval after automatic review rejected the changed payload. Source completeness, broader domains and full AMD64 coverage remain open. Earlier R1 native results retain their historical scope. Rendering it does not execute validation.</p></div><h1 id="completing-rep-and-amd64-operation-coverage">Completing REP and AMD64 operation coverage</h1>
+<li class="h3"><a href="#109-current-continuation-checks">10.9 Current continuation checks</a></li></ul></nav></aside><article><div class="provenance"><span class="label">Implementation progress · 2026-10-23</span><p>Canonical source: <a href="../../../docs/Ariadne/amd64-coverage-design.md"><code>docs/Ariadne/amd64-coverage-design.md</code></a>.</p><p>Baseline: <strong>6c3fa96 plus current manual transcription work; AMD v15 native qualification remains pending</strong>. All 2,657 historical gaps now have source-backed dispositions: zero are unassigned, and seven retain explicit source conflicts. The final 581 assignments preserve every original obligation and all 2,076 earlier dispositions. Complete source constraints, legal encoding coverage and full AMD64 coverage remain open. Fresh v2/v3 producer and Rust binding campaigns preserve their finite 24/56-point scopes. Current v15 native qualification retains its pending status; earlier REP validation keeps its recorded scope. Rendering this reading view does not execute validation.</p></div><h1 id="completing-rep-and-amd64-operation-coverage">Completing REP and AMD64 operation coverage</h1>
 <h2 id="context-and-follow-up">Context and follow-up</h2>
 <p><strong>Status.</strong> Completion design with finite source/domain implementation, 2026-10-23.
-The working tree based on <code>e44ce2b</code> implements separately selected v12/v13/v14 REP scopes
+The working tree based on <code>6c3fa96</code> implements separately selected v12/v13/v14 REP scopes
 and an AMD-specific v15 address-size successor, a candidate five-volume source
-corpus, partial geometry recovery and v2/v3 finite legal-domain/binding registries. The <a href="../../plans/amd64-operation-coverage.md#source-and-domain-execution-c1c4">dated stage execution</a>
+corpus, historical-gap accounting and v2/v3 finite legal-domain/binding registries. The <a href="../../plans/amd64-operation-coverage.md#source-and-domain-execution-c1c4">dated stage execution</a>
 distinguishes exercised clauses from the remaining full-stage exits. The broader
 encoding grammar, source completeness and consumer expansions remain open;
 the finite plain-dependency profiles do not grant proof-consumer admission.
@@ -47,10 +47,10 @@ core handoff is awaiting specific approval after automatic review rejected the
 changed payload.</p>
 <p><strong>Why this document exists.</strong> The <a href="../../../docs/Ariadne/bap-analysis-core-design.md#plain-repeated-string-profile-and-coverage-accounting">current BAP integration</a>
 owns the original three-form v12 contract; this design records its separately versioned memory-string successors and remaining obligations.
-The <a href="../../../CHECKPOINTS.md#2026-10-23--plain-rep-dependency-projection-and-coverage-accounting">latest checkpoint</a>
+The <a href="../../../CHECKPOINTS.md#2026-10-23--plain-rep-dependency-projection-and-coverage-accounting">origin checkpoint</a>
 records the starting 10,569 unbound symbolic candidates and 2,657 manual
-extraction gaps. Geometry now gives 2,076 of those old gaps source-backed
-dispositions and retains 581 unresolved. Neither the candidate count nor a
+extraction gaps. Geometry now gives all 2,657 old gaps source-backed
+dispositions, including explicit source conflicts; none lacks a disposition. Neither the candidate count nor a
 transcription-gap count is a count of unsupported legal AMD instructions.</p>
 <p><strong>What this document establishes.</strong> This is the canonical design for closing
 source, encoding-domain, implementation and consumer coverage. The BAP design
@@ -63,7 +63,7 @@ validation, and the <a href="../../../docs/Ariadne/semantic-assurance.md">BAP tr
 can establish. The <a href="index.html">execution HTML</a>
 is the current dated reading view; the <a href="../ariadne-amd64-coverage-design-20261023/index.html">original proposal</a>
 preserves the pre-execution version.</p>
-<p><strong>What remains unresolved.</strong> The legal-form denominator, source gaps, wider REP
+<p><strong>What remains unresolved.</strong> The legal-form denominator, source conflicts and unparsed constraints, wider REP
 semantics, architectural state and proof consumers remain incomplete. Official
 byte identity for the pinned AMD Volumes 4/5 is unverified. Universal ISA
 execution correctness and Rust refinement remain separate obligations.
@@ -113,8 +113,8 @@ cannot establish those stronger claims.</p>
 </tr>
 <tr>
 <td>Manual transcription</td>
-<td>Historical v1 has 4,118 rows and 2,657 gap records; geometry accounts for every old gap ID with 2,076 source-backed dispositions and 581 unresolved</td>
-<td>The old lock remains unchanged. A disposition is scoped to the affected source cells; diagram classification retains unparsed constraints, and complete source/constraint coverage remains open.</td>
+<td>Historical v1 has 4,118 rows and 2,657 gap records; every old gap now has a source-backed disposition, with zero unassigned gaps and seven explicit source-conflict records</td>
+<td>The old lock remains unchanged. Conflict and material dispositions retain unparsed constraints; historical backlog closure does not establish complete source/constraint coverage or a legal encoding.</td>
 </tr>
 <tr>
 <td>Source provenance</td>
@@ -189,7 +189,7 @@ of how many legal forms remain.</p>
   <text x="64" y="188" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" fill="#162b3e">Source corpus</text>
   <text x="64" y="218" font-family="DejaVu Sans, Arial, sans-serif" font-size="16" font-weight="400" fill="#162b3e">Manual identities + PDF geometry</text>
   <text x="64" y="245" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">XED candidates: 10,569 unbound</text>
-  <text x="64" y="271" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Original gaps: 2,657; unresolved: 581</text>
+  <text x="64" y="271" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">2,657 accounted; 7 source conflicts</text>
   <path d="M394 226 H438" stroke="#43576c" fill="none" stroke-width="2.4" />
   <path d="M438.0,226.0 L429.0,221.5 L429.0,230.5 Z" fill="#43576c" stroke="none" />
   <rect x="450" y="158" width="358" height="137" fill="#eef7f3" stroke="#75a18c" stroke-width="1.7" rx="12" />
@@ -767,10 +767,10 @@ boundaries, complete source-region/global-rule coverage, migration review and
 official Vol4/5 byte identity.</p>
 <h3 id="102-geometry-and-source-region-execution-c2">10.2 Geometry and source-region execution: C2</h3>
 <p>2026-10-23: the first geometry pass established 1,726 source-backed dispositions
-and 931 unresolved gaps. The follow-up adds 350 dispositions, reconstructing
-source cells from exact PDF word coordinates and checking immutable
-outline/entry ownership. All 2,657 historical gap IDs and original gap objects
-remain present; no previously resolved gap regresses.</p>
+and 931 unresolved gaps; the next pass added 350 dispositions. The final
+historical-backlog pass accounts for the remaining 581 obligations. All 2,657
+gap IDs, ordinals, original objects and legacy source addresses remain present,
+and all 2,076 earlier dispositions remain byte-for-byte equivalent as JSON data.</p>
 <div class="table-scroll" tabindex="0" role="region" aria-label="Scrollable table"><table>
 <thead>
 <tr>
@@ -784,55 +784,83 @@ remain present; no previously resolved gap regresses.</p>
 <tr>
 <td>Vol3, 24594</td>
 <td style="text-align:right">159</td>
-<td style="text-align:right">14</td>
-<td style="text-align:right">145</td>
+<td style="text-align:right">159</td>
+<td style="text-align:right">0</td>
 </tr>
 <tr>
 <td>Vol4, 26568</td>
 <td style="text-align:right">1,987</td>
-<td style="text-align:right">1,718</td>
-<td style="text-align:right">269</td>
+<td style="text-align:right">1,987</td>
+<td style="text-align:right">0</td>
 </tr>
 <tr>
 <td>Vol5, 26569</td>
 <td style="text-align:right">511</td>
-<td style="text-align:right">344</td>
-<td style="text-align:right">167</td>
+<td style="text-align:right">511</td>
+<td style="text-align:right">0</td>
 </tr>
 <tr>
 <td>Total</td>
 <td style="text-align:right">2,657</td>
-<td style="text-align:right">2,076</td>
-<td style="text-align:right">581</td>
+<td style="text-align:right">2,657</td>
+<td style="text-align:right">0</td>
 </tr>
 </tbody>
 </table></div>
-<p>The follow-up contributes 41 centered mnemonic/operand/opcode dispositions,
-39 dispositions for literal wrapped <code>0F 0F /r</code> plus trailing-byte encodings,
-and 270 classifications of diagram material. Centered and wrapped rows require
-one source-owned mnemonic, explicit opcode-column geometry and all encoding
-cells; they do not fill down a missing opcode. Diagram boundaries require
-register/bit geometry and a source-owned EPS label. Their operations and
-constraints remain explicitly unparsed. These dispositions therefore establish
-source locations and material kinds, not new legal-form or semantic-support
-counts. Vol4 retains 241 unparsed table-line gaps.</p>
-<p>Twenty-three geometry controls and thirteen historical extraction controls
-pass. Actual minimized fixtures now include CVTPS2PI, FRSTOR, PADDB, PFACC and
-PF2ID alongside ADDPD, CMOV and AES. Controls reject missing or duplicated
-bytes, moved or wrong-column cells, additional mnemonic heads, wrong owners,
-missing or wrong diagram labels, inserted notes/opcodes and ambiguous geometry.
-The AES fixture preserves an outline owner named <code>AESDECLAST VAESDECLAST</code>
-over a cell naming <code>AESENC</code>; that mismatch remains unresolved.</p>
+<p>The last 581 dispositions have distinct source obligations:</p>
+<ul>
+<li>Vol3 accounts for 60 CMOV width-group gaps, 34 SETcc alias-group gaps,
+five wrapped opcode fragments, one literal <code>F2/F3</code> encoding and 45 explanatory
+material records. Shared cells require exact named columns, tightly spaced
+and isolated source-owned groups, and a unique centered opcode. Literal
+MOVDIRI/MOVDIR64B <code>3B</code> bytes remain unchanged.</li>
+<li>Vol4 accounts for 269 records through explicit notes, footers, semantic/alias
+tables, source headings/prototypes, superscript geometry, named column bounds
+and retained word-box spans for combined cells. AESENC's actual heading
+supplies an ownership overlay while preserving its incorrect historical
+<code>AESDECLAST VAESDECLAST</code> bookmark association. Seven records retain
+<code>source-conflict</code>: malformed operands/bitfields or disagreements between a
+printed mnemonic and its section heading. Examples include
+<code>xmmVGETEXPPD2</code>, <code>X.1323r33111.</code> and SHA256MSG1 within the SHA256MSG2 section.
+No intended correction or authoritative legal binding is inferred.</li>
+<li>Vol5 accounts for 166 material records and one FNSTENV operand continuation.
+Owned EPS labels, immediate-field captions, before/after stack labels and
+numeric-result headers bound the material. Repeated and staggered text
+requires unique neighboring anchors, increasing source order and distinct
+source-cell assignments; one PDF cell cannot discharge two historical lines.</li>
+</ul>
+<p>Material and conflict records retain <code>constraintsParsed=false</code>. Their
+disposition establishes where the old parser overreached or what source text
+it missed; it does not validate a legal encoding or parse a diagram's operation.
+Recovered bindings live in explicit disposition evidence, leaving the historical
+inventory and existing derived rows intact. The old generic CMOV/AES refusal
+controls remain active; the new rules require additional structural evidence.</p>
+<p>The <a href="../../../tools/amd64_manual_geometry.py">geometry extractor</a> dispatches pure
+per-volume recovery passes after the original parser. Integration checks reject
+mutated context, rewritten IDs or prior dispositions, absent/foreign source
+cells, lost legacy source lines and invented entry/row identities. Its
+<code>extractorSources</code> map binds all nine extraction/dependency modules in both
+geometry and region products. The v2/v3 binding registries inherit that closure;
+editing any volume helper invalidates both registries. <code>check</code> reconstructs the
+whole expected output, so resealing an omitted gap or altered owner cannot pass.</p>
+<p>Sixty-one geometry controls and thirteen historical extraction controls pass.
+Actual PDF excerpts and negative controls exercise missing, duplicated, moved
+and wrong-column cells, foreign heads, misplaced superscripts, conflicting
+owners, new notes/opcodes and repeated-line aliasing. The complete BAP-side
+Python suite passes 145 tests and the tooling suite passes 328. The checked main
+extractor SHA-256 is
+<code>f98ac07ecbda55e32d2e2190bd4a216c44bbe28b11462bf783580d2b458ad257</code>;
+its output also binds the eight dependency/helper identities.</p>
 <p>Fresh <code>extract</code>/<code>check</code> cover all three historical instruction-reference
 publications. Five-volume <code>regions</code>/<code>check-regions</code> enumerate all 4,128 PDF
-pages and eleven required source-region clauses. Enumeration preserves
-unresolved global rules and constraints; it does not establish that they were
-parsed completely. Footnotes, merged-cell semantics and 33 candidate cross-page
-continuations remain unresolved, including 25 in Vol3 and eight in Vol4.
-Geometry is word-based and depends on fresh C1 extraction from pinned PDF bytes.
-The checked extractor source SHA-256 is
-<code>c4a747f90624bfa11a6c16bbebba99400b20b8dd0d9c43907cb1853f6f4e78db</code>.
-C2, the old-gap backlog and source completeness remain open.</p>
+pages and eleven required source-region clauses. The pinned C1 products and
+their fresh-extraction premise remain required inputs. Enumeration does not
+establish complete parsing of global rules, footnotes, semantic constraints or
+the 33 candidate cross-page continuations (25 in Vol3 and eight in Vol4).
+<code>oldGapBacklogClosed</code> is true; <code>allSelectedSourceConstraintsParsed</code>,
+<code>sourceCompletenessEstablished</code>, <code>legalEncodingCompletenessEstablished</code> and
+<code>c2Complete</code> remain false. The historical backlog is accounted for; C2's wider
+source contract remains open.</p>
 <h3 id="103-finite-legal-domain-and-binding-execution-c3c4">10.3 Finite legal-domain and binding execution: C3/C4</h3>
 <p>2026-10-23: the separate v2 pilot derives canonical F3 MOVS, STOS and CMPS
 families from exact Vol3 r3.38 source cells and enumerates element widths
@@ -851,7 +879,7 @@ not satisfy implementation completeness while 21 points remain unsupported.
 This pilot neither binds the 10,569 XED candidates nor establishes a full AMD
 legal-form denominator. Source derivation and the restricted grammar remain
 reviewed trust premises; a general constraint solver is still unimplemented.</p>
-<p>The final source-frozen campaign reseals thirty-one implementation identities and
+<p>The historical-gap continuation reseals thirty-nine implementation identities and
 obtains three fresh producer BIL observations, 720 independent numeric
 comparisons and the passing exact-lift Rust observer
 <code>fresh_producer_loops_project_under_only_the_repeated_string_profile</code>.
@@ -859,7 +887,7 @@ Fresh <code>build</code> without <code>--skip-rust-admission</code> and <code>ch
 both pass. <code>totalDisposition</code> and <code>profileBindingsValidated</code> are true only for
 this pilot; implementation, source completeness, vendor-wide totality and full
 AMD64 support remain false. The final binding digest is
-<code>0dd9bf47622ef2f3533a6d59383aa11b4cc02d67922fd3a06c02f1594844fa0d</code>.
+<code>e303967b3d22daf32a32a4b8dbc2bb389d341117343b43e6a2c80b15ee0f944f</code>.
 Further bound source changes require another fresh producer/oracle/Rust
 campaign. C3/C4 remain partial.</p>
 <h3 id="104-default-address-memory-rep-execution-r1">10.4 Default-address memory REP execution: R1</h3>
@@ -1126,15 +1154,19 @@ manifest, executable, bytes, environment and typed BIL. Fresh execution yields
 111 profile observations: 75 packaged-producer queries, four v14 LODS queries
 and 32 new-producer queries, representing 60 distinct producer/byte pairs.
 The Rust observer checks actual supplied BIL admission across all four profiles.
-Forty-seven portable controls pass, including holes, overlaps, wrong source
+Forty-eight portable controls pass, including holes, overlaps, wrong source
 cells, stale artifacts, rehashed vendor/premise changes and exact JSON-type
-identity. Missing observations or a skipped Rust observer keep binding validation
+identity and stale per-volume recovery helpers in both registries. Missing observations or a skipped Rust observer keep binding validation
 false. Fresh <code>--require-bindings --require-implementation</code> passes for this
 registry's v15 plain-dependency domain; older profiles remain incomplete in
 that larger domain as the table shows.</p>
 <p>The original 24-point v2 contract is unchanged. Only its current implementation
 source digests were resealed; a fresh three-row BAP/oracle/Rust campaign and
 <code>--require-bindings</code> pass with the same 3 supported/21 unsupported result.
+After the historical-gap pass, the v3 registry binds 61 implementation sources
+and repeats the complete fresh producer/source-cell/Rust observer campaign.
+Its binding digest is
+<code>f74166126ea43d855c7e6cafae61186fda365cd0d6bce41885294c9587c188db</code>.
 The v3 finite domain establishes no complete vendor denominator or full symbolic
 binding: <code>sourceComplete</code>, <code>vendorFullDenominator</code> and <code>fullAmd64Coverage</code> remain
 false, and <code>candidateFullDomainBindings</code> remains zero. All 10,569 candidate
@@ -1149,4 +1181,11 @@ at the intended assertions after passing exact unchanged controls; restored
 sources, unchanged observers and the final source inventory are verified.
 Native v15 qualification is pending the specific source-handoff approval above.
 Earlier R1 results retain their recorded source scope.</p>
-<footer class="foot"><p>This HTML is a presentation of the canonical Markdown, with relative links adapted for the archive. Edit the canonical source and run <code>render.py</code> to refresh it.</p><p>Canonical source SHA-256:<span class="hash">d9b0dc77b3120053913d5c61e02e5cf5350ac9ea36dcbc3ab80882070adaab4f</span></p></footer></article></div></body></html>
+<p>The subsequent historical-gap continuation changes Python extraction and
+binding provenance, with no Rust behavior change. Its fresh checks pass all
+145 BAP Python controls, 328 tooling controls, the three-volume reconstruction
+and five-volume region checks, both actual BAP/Rust binding campaigns, Rust
+layout and documentation links. The Rust suite and mutation counts in the
+preceding paragraph belong to the recorded v15 source campaign; this
+continuation reruns the two affected Rust binding observers.</p>
+<footer class="foot"><p>This HTML is a presentation of the canonical Markdown, with relative links adapted for the archive. Edit the canonical source and run <code>render.py</code> to refresh it.</p><p>Canonical source SHA-256:<span class="hash">50ac6544e77b16955932aa9cbadc5eddf3700fc5c49cc5c79b4ed10d55037152</span></p></footer></article></div></body></html>

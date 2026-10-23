@@ -33,11 +33,19 @@
     "src/bap/terminal_control.rs": "572dc4a3ad5c32fe52de7d0cf2e6d9a84eedeb6994c72db7b12428ab4da49f43",
     "src/bap/work_schedule.rs": "c4d91be61bea97225171eaec3a1f5179fc53c53361937d1de51f2f0f3edf5124",
     "tests/bap/repeated_string_projection.rs": "1e30d20ef23f1d7dba1db367acd916b6298327e33806e9d944bd90490bb46e04",
-    "tools/amd64_legal_forms.py": "a6727a9aa1495246a5b36e32d2981c4eda4f200eb76f5a5bd16198f4d4f397e9",
-    "tools/amd64_manual_geometry.py": "c4a747f90624bfa11a6c16bbebba99400b20b8dd0d9c43907cb1853f6f4e78db",
+    "tools/amd64_inventory.py": "22e3ece91dc7f55ff1d50000b419482e23d4c169da3cfa33fa24a83550efc4ca",
+    "tools/amd64_inventory_xed.py": "c36fe9eba34ed08cb886cf182831f4e25851b6f41c11724f55bbb9fb613705ef",
+    "tools/amd64_legal_forms.py": "fa5c531c720d5d293437831e057d498b00b72e477a9bef119f6199a7fe1ed085",
+    "tools/amd64_manual_gap_vol3.py": "7fc2320400e8c42008974ab11736bb57b65784f226fe7104f41ce428d0a6aa8f",
+    "tools/amd64_manual_gap_vol4.py": "d44a132a67c167b39297fc39656f9cd479bf40367ebaf0a41c996a025e003c9a",
+    "tools/amd64_manual_gap_vol5.py": "cb33c5e6ee482427d42fa218d17ac5e805f03ffff859f2ec155139e08d667180",
+    "tools/amd64_manual_geometry.py": "f98ac07ecbda55e32d2e2190bd4a216c44bbe28b11462bf783580d2b458ad257",
+    "tools/amd64_manual_inventory.py": "ce5a5a7f4c6de641ec1e373c61a900c0093e966df2618b5b0045433c6bb71b63",
+    "tools/amd64_source_corpus.py": "647aee93a5bf9ea97302aeed26da879ba0b88160f2f4632b4f66246f795483d7",
     "tools/check_bap_admission_oracle.py": "7e43ca1f0873cc94e302c2aec6f6df3e4156640273178a3cb7c8bdbf3f6ff1a1",
     "tools/check_bap_bit_count_oracle.py": "ecd912e714783ffea943d53a0059bb109a39b4ca2ee69b15e3a715ce5f998ffc",
-    "tools/check_bap_repeated_string_oracle.py": "3a1bef267f40aeb7e1cf4bb25e5416ff1a00459f5950f929e72720322a52f860"
+    "tools/check_bap_repeated_string_oracle.py": "3a1bef267f40aeb7e1cf4bb25e5416ff1a00459f5950f929e72720322a52f860",
+    "tools/run_output.py": "0f815359fe0e9b3a5c6216e36c652bac71e1e4678ce962db1ebbc23e2486e286"
   },
   "producerPin": {
     "helperSha256": "8080fa65e7a3d6521289e277570a2666520983858fa9b8c247fbe3f470fe3615",

@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 1050" role="img" aria-labelledby="coverage-title coverage-desc">
+  <title id="coverage-title">AMD64 coverage and REP qualification architecture</title>
+  <desc id="coverage-desc">The inventory lane reconciles authoritative manuals and PDF geometry with separately defined legal form domains and reviewed form bindings. The execution lane takes captured bytes through the trusted BAP producer, typed projection and consumer proof modes, then fresh tests and qualification gates. Both lanes feed a coverage report with independent denominators. XED supplies candidate encoding templates and grammar and LLVM supplies independent decode and control facts; neither supplies replacement production semantics. The 10,569 unbound XED candidates and 2,657 manual gaps belong to separate inventories and cannot be added.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#43576c" stroke="none" />
+    </marker>
+    <marker id="candidate-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#806a44" stroke="none" />
+    </marker>
+  </defs>
+  <rect width="1440" height="1050" fill="#fff" stroke="none" />
+  <text x="42" y="48" font-family="DejaVu Sans, Arial, sans-serif" font-size="28" font-weight="700" fill="#162b3e">AMD64 coverage: separate the legal domain from demonstrated support</text>
+  <text x="42" y="79" font-family="DejaVu Sans, Arial, sans-serif" font-size="17" font-weight="400" fill="#4b6175">Completion architecture • finite source/domain and AMD v15 memory REP implementation • 2026-10-23</text>
+  <rect x="24" y="103" width="1392" height="310" rx="16" fill="#f3f7fb" stroke="none" />
+  <text x="44" y="136" font-family="DejaVu Sans, Arial, sans-serif" font-size="18" font-weight="700" fill="#162b3e" letter-spacing=".6">1 · INVENTORY, LEGALITY AND BINDINGS</text>
+  <rect x="44" y="158" width="350" height="137" fill="#edf4fb" stroke="#7293b1" stroke-width="1.7" rx="12" />
+  <text x="64" y="188" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" fill="#162b3e">Source corpus</text>
+  <text x="64" y="218" font-family="DejaVu Sans, Arial, sans-serif" font-size="16" font-weight="400" fill="#162b3e">Manual identities + PDF geometry</text>
+  <text x="64" y="245" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">XED candidates: 10,569 unbound</text>
+  <text x="64" y="271" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Original gaps: 2,657; unresolved: 581</text>
+  <path d="M394 226 H438" stroke="#43576c" fill="none" stroke-width="2.4" />
+  <path d="M438.0,226.0 L429.0,221.5 L429.0,230.5 Z" fill="#43576c" stroke="none" />
+  <rect x="450" y="158" width="358" height="137" fill="#eef7f3" stroke="#75a18c" stroke-width="1.7" rx="12" />
+  <text x="470" y="188" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" fill="#162b3e">Explicit legal form domains</text>
+  <text x="470" y="218" font-family="DejaVu Sans, Arial, sans-serif" font-size="16" font-weight="400" fill="#162b3e">Mode, feature, prefix, operand rules</text>
+  <text x="470" y="245" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Review identities; retain disagreements</text>
+  <text x="470" y="271" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Explicit denominators and exclusions</text>
+  <path d="M808 226 H852" stroke="#43576c" fill="none" stroke-width="2.4" />
+  <path d="M852.0,226.0 L843.0,221.5 L843.0,230.5 Z" fill="#43576c" stroke="none" />
+  <rect x="864" y="158" width="527" height="137" fill="#eef7f3" stroke="#75a18c" stroke-width="1.7" rx="12" />
+  <text x="884" y="188" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" fill="#162b3e">Reviewed bindings + profile registry</text>
+  <text x="884" y="218" font-family="DejaVu Sans, Arial, sans-serif" font-size="16" font-weight="400" fill="#162b3e">Legal form → encoding domain → implementation rule</text>
+  <text x="884" y="245" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Consumer-specific capability; versioned refusal reasons</text>
+  <text x="884" y="271" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Immutable old pins; explicit new-profile promotion</text>
+  <rect x="44" y="316" width="350" height="72" fill="#fff6e6" stroke="#c4a15e" stroke-width="1.7" rx="12" />
+  <text x="64" y="345" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" fill="#162b3e">Candidate lane: XED</text>
+  <text x="64" y="371" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Encoding templates; review required</text>
+  <path d="M394 352 H629 V306" stroke="#806a44" fill="none" stroke-width="2.2" stroke-dasharray="7 5" />
+  <path d="M629.0,306.0 L624.5,315.0 L633.5,315.0 Z" fill="#806a44" stroke="none" />
+  <text x="682" y="344" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Counts use different source domains.</text>
+  <text x="682" y="370" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Do not sum them or treat a mnemonic match as a binding.</text>
+  <rect x="24" y="435" width="1392" height="352" rx="16" fill="#f1f7f4" stroke="none" />
+  <text x="44" y="468" font-family="DejaVu Sans, Arial, sans-serif" font-size="18" font-weight="700" fill="#162b3e" letter-spacing=".6">2 · EXECUTION, PROJECTION AND CONSUMER QUALIFICATION</text>
+  <rect x="44" y="494" width="205" height="137" fill="#edf4fb" stroke="#7293b1" stroke-width="1.7" rx="12" />
+  <text x="64" y="524" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" fill="#162b3e">Captured bytes</text>
+  <text x="64" y="554" font-family="DejaVu Sans, Arial, sans-serif" font-size="16" font-weight="400" fill="#162b3e">Immutable snapshot</text>
+  <text x="64" y="581" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Semantic addresses</text>
+  <text x="64" y="607" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Holes and conflicts</text>
+  <path d="M249 562 H279" stroke="#43576c" fill="none" stroke-width="2.4" />
+  <path d="M279.0,562.0 L270.0,557.5 L270.0,566.5 Z" fill="#43576c" stroke="none" />
+  <rect x="291" y="494" width="252" height="137" fill="#edf4fb" stroke="#7293b1" stroke-width="1.7" rx="12" />
+  <text x="311" y="524" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" fill="#162b3e">BAP producer</text>
+  <text x="311" y="554" font-family="DejaVu Sans, Arial, sans-serif" font-size="16" font-weight="400" fill="#162b3e">Pinned trusted lifting</text>
+  <text x="311" y="581" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Production semantics</text>
+  <text x="311" y="607" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Typed BIL or unsupported</text>
+  <path d="M543 562 H573" stroke="#43576c" fill="none" stroke-width="2.4" />
+  <path d="M573.0,562.0 L564.0,557.5 L564.0,566.5 Z" fill="#43576c" stroke="none" />
+  <rect x="585" y="494" width="262" height="137" fill="#eef7f3" stroke="#75a18c" stroke-width="1.7" rx="12" />
+  <text x="605" y="524" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" fill="#162b3e">Ariadne projection</text>
+  <text x="605" y="554" font-family="DejaVu Sans, Arial, sans-serif" font-size="16" font-weight="400" fill="#162b3e">Effects + loop summaries</text>
+  <text x="605" y="581" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">May-writes; justified kills</text>
+  <text x="605" y="607" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Zero or many iterations</text>
+  <path d="M847 562 H877" stroke="#43576c" fill="none" stroke-width="2.4" />
+  <path d="M877.0,562.0 L868.0,557.5 L868.0,566.5 Z" fill="#43576c" stroke="none" />
+  <rect x="889" y="494" width="502" height="137" fill="#eef7f3" stroke="#75a18c" stroke-width="1.7" rx="12" />
+  <text x="909" y="524" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" fill="#162b3e">Consumer-specific proofs and refusals</text>
+  <text x="909" y="554" font-family="DejaVu Sans, Arial, sans-serif" font-size="16" font-weight="400" fill="#162b3e">Dependency analysis, guards, targets, composition</text>
+  <text x="909" y="581" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">REP dependency support does not qualify proof modes</text>
+  <text x="909" y="607" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Bind every claim to its profile, query and evidence</text>
+  <path d="M1127 295 V482" stroke="#43576c" fill="none" stroke-width="2.4" />
+  <path d="M1127.0,482.0 L1122.5,473.0 L1131.5,473.0 Z" fill="#43576c" stroke="none" />
+  <text x="1143" y="439" font-family="DejaVu Sans, Arial, sans-serif" font-size="14" font-weight="400" fill="#4b6175">admitted scope</text>
+  <rect x="44" y="664" width="350" height="91" fill="#fff6e6" stroke="#c4a15e" stroke-width="1.7" rx="12" />
+  <text x="64" y="693" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" fill="#162b3e">LLVM MC reference</text>
+  <text x="64" y="720" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Decode / control; no effect fallback</text>
+  <text x="64" y="743" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Independent facts; BAP lifts semantics</text>
+  <path d="M394 711 H444" stroke="#806a44" fill="none" stroke-width="2.2" stroke-dasharray="7 5" />
+  <path d="M444.0,711.0 L435.0,706.5 L435.0,715.5 Z" fill="#806a44" stroke="none" />
+  <rect x="456" y="664" width="935" height="91" fill="#eef7f3" stroke="#75a18c" stroke-width="1.7" rx="12" />
+  <text x="476" y="693" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" fill="#162b3e">Fresh tests and promotion gates</text>
+  <text x="476" y="721" font-family="DejaVu Sans, Arial, sans-serif" font-size="16" font-weight="400" fill="#162b3e">Boundary / negative cases · native parity · saved replay · compiled mutants · analysis MBT</text>
+  <text x="476" y="745" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Exercise pinned producer, projector and every claimed consumer; retain limits and exact runtime identities</text>
+  <path d="M1140 631 V652" stroke="#43576c" fill="none" stroke-width="2.4" />
+  <path d="M1140.0,652.0 L1135.5,643.0 L1144.5,643.0 Z" fill="#43576c" stroke="none" />
+  <path d="M629 295 V426 H1428 V819 H1125 V837" stroke="#43576c" fill="none" stroke-width="2.4" />
+  <path d="M1125.0,837.0 L1120.5,828.0 L1129.5,828.0 Z" fill="#43576c" stroke="none" />
+  <text x="1004" y="817" font-family="DejaVu Sans, Arial, sans-serif" font-size="14" font-weight="400" fill="#4b6175">separate denominators</text>
+  <path d="M770 755 V837" stroke="#43576c" fill="none" stroke-width="2.4" />
+  <path d="M770.0,837.0 L765.5,828.0 L774.5,828.0 Z" fill="#43576c" stroke="none" />
+  <text x="470" y="816" font-family="DejaVu Sans, Arial, sans-serif" font-size="14" font-weight="400" fill="#4b6175">demonstrated capabilities + refusals</text>
+  <rect x="44" y="849" width="1347" height="98" fill="#eef7f3" stroke="#75a18c" stroke-width="1.7" rx="12" />
+  <text x="64" y="880" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" fill="#162b3e">Coverage report: source domain × legal form × profile × consumer × executable evidence</text>
+  <text x="64" y="909" font-family="DejaVu Sans, Arial, sans-serif" font-size="16" font-weight="400" fill="#162b3e">Distinguish bound, supported, conservatively modeled, refused, untested and unresolved. Publish every uncovered clause.</text>
+  <text x="64" y="934" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Full coverage requires implemented support and validation across the legal domain and every required consumer.</text>
+  <text x="44" y="989" font-family="DejaVu Sans, Arial, sans-serif" font-size="17" font-weight="400" fill="#4b6175">AMD v15 selects 56 canonical memory REP tuples. Local gates pass; current native qualification and full-domain gates remain open.</text>
+  <text x="44" y="1020" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">This diagram describes architecture and acceptance boundaries; it does not establish new implementation qualification.</text>
+</svg>

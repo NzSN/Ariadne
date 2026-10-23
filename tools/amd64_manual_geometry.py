@@ -15,6 +15,7 @@ import itertools
 from pathlib import Path
 import re
 import sys
+from types import MappingProxyType
 import xml.etree.ElementTree as ET
 
 from amd64_inventory_xed import canonical, digest
@@ -24,6 +25,11 @@ from run_output import run_output
 
 SCHEMA = "ariadne.amd-manual-geometry/v2"
 RULES = "ariadne.amd-geometry-rules/v2"
+EXTRACTOR_FILES = (
+    "amd64_manual_geometry.py", "amd64_manual_inventory.py", "amd64_source_corpus.py",
+    "amd64_inventory.py", "amd64_inventory_xed.py", "run_output.py",
+    "amd64_manual_gap_vol3.py", "amd64_manual_gap_vol4.py", "amd64_manual_gap_vol5.py",
+)
 STOP = re.compile(r"^(?:Related Instructions?|rFLAGS Affected|Flags Affected|Exceptions|Action|Operation)$")
 CODE_START = re.compile(r"^(?:[0-9A-F]{2}(?:\b|\+)|NP\b|REX\b|VEX\b|EVEX\b|XOP\b)")
 CODE_TOKEN = re.compile(r"^(?:[0-9A-F]{2}(?:\+[ri])?|/[0-7r]|[ic][bwdq]|[0-9A-F]{2}h|"
@@ -34,6 +40,12 @@ OPERAND = re.compile(r"^(?:[xyz]mm[0-9]*|mmx?[0-9]*|imm[0-9]*|reg(?:/mem)?[0-9]*
 COLUMN_HEADERS = {"Opcode", "VEX", "XOP", "EVEX", "Prefix", "Legacy", "REX",
                   "RXB.map_select", "W.vvvv.L.pp", "R'X'B'R.00mm", "W.vvvv.1.pp",
                   "z.L'L.b.V'.aaa", "P0", "P1", "P2"}
+
+
+def extractor_sources(root=None):
+    """Bind the complete local extraction dependency closure, including recovery."""
+    root = Path(root) if root is not None else Path(__file__).resolve().parents[1]
+    return {"tools/" + name: sha_file(root / "tools" / name) for name in EXTRACTOR_FILES}
 
 
 def norm(text):
@@ -456,7 +468,7 @@ def old_gap_id(publication, ordinal, gap):
     return f"amd-gap:{publication}:" + digest(dict(ordinal=ordinal, gap=gap))
 
 
-def dispositions(publication, baseline, layout_pages, tables, rows, groups_by_page):
+def legacy_dispositions(publication, baseline, layout_pages, tables, rows, groups_by_page):
     old_tables = {item["id"]: item for item in baseline["tables"]}
     old_rows = {item["id"]: item for item in baseline["rows"]}
     table_map = {item["id"]: item for item in tables}
@@ -537,6 +549,62 @@ def dispositions(publication, baseline, layout_pages, tables, rows, groups_by_pa
     return result
 
 
+def dispositions(publication, baseline, layout_pages, tables, rows, groups_by_page, *, recover=True):
+    """Add narrow source-backed recovery without rewriting historical obligations.
+
+    Helpers classify source material and attach transcription evidence; they do
+    not extend the legal-form grammar or silently repair publisher defects.
+    The lower-level pass remains separately exercisable by its refusal controls.
+    """
+    records = legacy_dispositions(publication, baseline, layout_pages, tables, rows, groups_by_page)
+    if not recover:
+        return records
+    from amd64_manual_gap_vol3 import resolve_all as vol3
+    from amd64_manual_gap_vol4 import resolve_all as vol4
+    from amd64_manual_gap_vol5 import resolve_all as vol5
+    resolver = {"24594": vol3, "26568": vol4, "26569": vol5}.get(publication)
+    if resolver is None:
+        return records
+    context = dict(publication=publication, baseline=baseline, layout_pages=layout_pages,
+                   tables=tables, rows=rows, groups_by_page=groups_by_page, records=records,
+                   funcs=MappingProxyType(globals().copy()))
+    # The context is read-only by contract. Hash the data around a helper call
+    # so accidental mutation cannot erase an old refusal or alter source facts.
+    before = digest({key: value for key, value in context.items() if key != "funcs"})
+    patches = resolver(context)
+    if before != digest({key: value for key, value in context.items() if key != "funcs"}):
+        raise ValueError("gap recovery mutated its immutable source context")
+    if not isinstance(patches, dict):
+        raise ValueError("gap recovery must return an ordinal-to-evidence map")
+    allowed = {"disposition", "cells", "rule", "rationale", "entryId", "evidence", "constraintsParsed", "row"}
+    cells = {cell["id"]: cell for groups in groups_by_page.values() for group in groups for cell in group["cells"]}
+    entries = {entry["id"] for entry in baseline["entries"]}
+    row_ids = {row["id"] for row in rows}
+    for ordinal, patch in patches.items():
+        if (type(ordinal) is not int or not 0 <= ordinal < len(records)
+                or not isinstance(patch, dict) or records[ordinal]["disposition"] != "unresolved"
+                or not set(patch) <= allowed):
+            raise ValueError("gap recovery rewrites an identity or a previously resolved obligation")
+        if (patch.get("disposition") not in {"resolved-cell", "justified-continuation", "non-encoding-material", "source-conflict"}
+                or not isinstance(patch.get("cells"), list) or not patch["cells"]
+                or not set(patch["cells"]) <= cells.keys()
+                or len(patch["cells"]) != len(set(patch["cells"]))
+                or not patch.get("rule") or not patch.get("rationale")):
+            raise ValueError("gap recovery lacks exact source cells and an explicit classification rule")
+        source_page = records[ordinal].get("legacySource", {}).get("pdfPage")
+        if (not set(records[ordinal]["cells"]) <= set(patch["cells"])
+                or not any(cells[key]["pdfPage"] == source_page for key in patch["cells"])
+                or ("entryId" in patch and patch["entryId"] not in entries)
+                or ("row" in patch and patch["row"] not in row_ids)
+                or patch.get("constraintsParsed") is True):
+            raise ValueError("gap recovery loses its source line, invents an owner or claims parsed constraints")
+        if (patch["disposition"] in {"non-encoding-material", "source-conflict"}
+                and patch.get("constraintsParsed") is not False):
+            raise ValueError("material or source-conflict recovery must retain unparsed constraints")
+        records[ordinal].update(patch)
+    return records
+
+
 def region_accounting(outline, entries):
     """Account for the entire PDF, including unparsed rules/maps/appendices."""
     regions = []
@@ -604,11 +672,13 @@ def derive(publication, pin, baseline, layout, outline, pages, inputs):
     counts = dict(pdfPages=len(pages), sourceCells=len(cells), geometryRows=len(rows),
                   explicitEncodingRows=sum(bool(row["encodingCells"]) for row in rows),
                   oldGaps=len(gap_records), dispositions=dict(sorted(Counter(item["disposition"] for item in gap_records).items())),
+                  sourceConflicts=sum(item["disposition"] == "source-conflict" for item in gap_records),
                   unresolvedSourceRegions=len(content["sourceRegions"]),
                   ambiguousCrossPageContinuations=sum(len(table["continuations"]) for table in tables))
     return dict(schema=SCHEMA, rules=RULES, publication=publication, revision=pin["revision"],
                 sourceProvenance=pin["sourceProvenance"], pdfSha256=pin["pdfSha256"], inputs=inputs,
                 historicalBaselineContentSha256=pin["contentSha256"], extractorSha256=sha_file(__file__),
+                extractorSources=extractor_sources(),
                 content=content, contentSha256=digest(content), counts=counts,
                 acceptance=dict(oldGapBacklogClosed=counts["dispositions"].get("unresolved", 0) == 0,
                                 allPdfPagesAccounted=True, allSelectedSourceConstraintsParsed=False,
@@ -669,6 +739,7 @@ def audit_regions(corpus, corpus_lock):
     content = dict(documents=documents)
     return dict(schema="ariadne.amd-source-region-accounting/v2", corpusSha256=digest(lock),
                 sourceProductsSha256=sha_file(manifest_path), extractorSha256=sha_file(__file__),
+                extractorSources=extractor_sources(),
                 content=content, contentSha256=digest(content),
                 counts=dict(documents=len(documents), pdfPages=sum(len(row["pages"]) for row in documents),
                             requiredRegionClauses=sum(len(row["requiredRegions"]) for row in documents)),

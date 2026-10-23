@@ -1,0 +1,508 @@
+{
+  "publication": "26569",
+  "pdfSha256": "8c8c63c5e285c50faac2e7d474cf5046f5fcccb54673f464f57a8cb171ef0767",
+  "sourceProducts": {
+    "layoutSha256": "537cbba9c89b5d12ca7056c0453cdcd3bbf524797d1bc2ee8cffa7146ed5097e",
+    "bboxSha256": "3646b5abfe4c5d0e3598d10caeb44b6619c2238bba68fef41a12085a9a87e38d",
+    "outlineSha256": "4669b5e49e2d15f31acc10745b5514cd01a9a3abedc907c97bb155434d5d123d"
+  },
+  "pages": [
+    {
+      "pdfPage": 336,
+      "layoutPage": "AMD64 Technology                                                 26569—Rev. 3.16—November 2021\n\n\n\n\nFSTENV                                           Floating-Point Store Environment\n(FNSTENV)\nStores the current x87 environment to memory starting at the specified address, and then masks all\nfloating-point exceptions. The x87 environment consists of the x87 control, status, and tag word\nregisters, the last non-control x87 instruction pointer, the last x87 data pointer, and the opcode of the\nlast completed non-control x87 instruction.\nThe FSTENV instruction takes a memory operand that specifies the start of either a 14-byte or 28-byte\narea in memory. The 14-byte operand is required for a 16-bit operand-size; the 28-byte memory area is\nrequired for both 32-bit and 64-bit operand sizes. The layout of the saved x87 environment within the\nspecified memory area depends on whether the processor is operating in protected or real mode. See\n“Media and x87 Processor State” in Volume 2 for details on how this instruction stores the x87\nenvironment in memory. (Because FLDENV/FSTENV do not save the full 64-bit data and instruction\npointers, 64-bit applications should use FXSAVE/FXRSTOR, rather than FLDENV/FSTENV.)\nThe FNSTENV instruction does not check for possible floating-point exceptions before storing the\nenvironment.\nAssemblers usually provide an FSTENV macro that expands into the instruction sequence\n       WAIT                           ; Opcode 9B\n       FNSTENV destination            ; Opcode D9 /6\n\nThe WAIT (9Bh) instruction checks for pending x87 exceptions and calls an exception handler if\nnecessary. The FNSTENV instruction then stores the state of the x87 environment to the specified\ndestination.\nException handlers often use these instructions because they provide access to the x87 instruction and\ndata pointers. An exception handler typically saves the environment on the stack. The instructions\nmask all floating-point exceptions after saving the environment to prevent those exceptions from\ninterrupting the exception handler.\n\nMnemonic                 Opcode              Description\n                                              Perform a WAIT (9B) to check for pending floating-point\n FSTENV\n mem14/28env              9B D9 /6            exceptions, then copy the x87 environment to mem14/28env\n                                              and mask the floating-point exceptions.\n                                              Copy the x87 environment to mem14/28env without\n FNSTENV\n                          D9 /6               checking for pending floating-point exceptions, and mask\n mem14/28env\n                                              the exceptions.\n\nRelated Instructions\nFLDENV, FSTSW, FNSTSW, FSTCW, FNSTCW\n\n\n\n\n                                      [AMD Public Use]\n306                                      FSTENV (FNSTENV)                            x87 Floating-Point\n                                                                                 Instruction Reference\n",
+      "cells": [
+        {
+          "id": "pdf:336:cell:30",
+          "pdfPage": 336,
+          "rect": [
+            64.98,
+            545.50872,
+            114.3816,
+            554.72172
+          ],
+          "wordSpan": [
+            282,
+            283
+          ],
+          "wordBoxesSha256": "d3557d1859cfff3191a3a73a569cf93e8dd9f6408953826bec2484fce597d9c0",
+          "unicodeSha256": "761a18b82619631f2cb0ec62be463b62961fbabad6175e5fcfa4503d59eec265",
+          "text": "Mnemonic",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:336:cell:31",
+          "pdfPage": 336,
+          "rect": [
+            181.263,
+            545.50872,
+            218.464596,
+            554.72172
+          ],
+          "wordSpan": [
+            283,
+            284
+          ],
+          "wordBoxesSha256": "e69ec239526b87917c8cb9c4014cfcc9c9a6563c5a555b8ea78c93b47a20b42d",
+          "unicodeSha256": "c37ef4ad36a525a861229404a96b57eb0536b459772ff0f62bbcc82263a46c0c",
+          "text": "Opcode",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:336:cell:32",
+          "pdfPage": 336,
+          "rect": [
+            273.40296,
+            545.50872,
+            328.433952,
+            554.72172
+          ],
+          "wordSpan": [
+            284,
+            285
+          ],
+          "wordBoxesSha256": "bd0e172cf1445fb71b87c77a953d37fd321fb6c7206a3963e47bd6c56c325f44",
+          "unicodeSha256": "526e0087cc3f254d9f86f6c7d8e23d954c4dfda2b312efc29194ae8a860106ba",
+          "text": "Description",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:336:cell:33",
+          "pdfPage": 336,
+          "rect": [
+            69.00384,
+            568.5462,
+            108.4056,
+            577.7592
+          ],
+          "wordSpan": [
+            285,
+            286
+          ],
+          "wordBoxesSha256": "dfec6b67196a6f154694545bfc50d25079148224ff24ec4b56b761bca19f3c86",
+          "unicodeSha256": "31c4baffbe805910ec82f99d9aecbc3ea21b34856eb80a1fbb98fe21dfd6b204",
+          "text": "FSTENV",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:336:cell:34",
+          "pdfPage": 336,
+          "rect": [
+            69.00384,
+            578.5062,
+            132.297648,
+            587.7192
+          ],
+          "wordSpan": [
+            286,
+            287
+          ],
+          "wordBoxesSha256": "22b7847cc83085330a004b2af212993e536188f93710e79252f142372b8d94d7",
+          "unicodeSha256": "bd962c5b613fbaba0fc7c6b8bfef6a8b0e18630efcfec213c5bb957fd75c9707",
+          "text": "mem14/28env",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:336:cell:35",
+          "pdfPage": 336,
+          "rect": [
+            185.28684,
+            573.5262,
+            224.09598,
+            582.7392
+          ],
+          "wordSpan": [
+            287,
+            290
+          ],
+          "wordBoxesSha256": "a1a1c9d1f0827b8d1909dcbbc9a1d80c25c4ec52a4824e9592a17d9b9cef397c",
+          "unicodeSha256": "7784d201f3ff1e8049f8c78a3222117c7630a9c82e77fe30adf49adc70a6ef3b",
+          "text": "9B D9 /6",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:336:cell:36",
+          "pdfPage": 336,
+          "rect": [
+            277.44672,
+            563.50644,
+            522.918888,
+            572.71944
+          ],
+          "wordSpan": [
+            290,
+            299
+          ],
+          "wordBoxesSha256": "1584e66a471178372306e1d953f4c15da074ae2a622818df7c67d371c33247a7",
+          "unicodeSha256": "2102a04378c8d314d4091e832bd4b505b00d91987271a24530acc6150eff3592",
+          "text": "Perform a WAIT (9B) to check for pending floating-point",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:336:cell:37",
+          "pdfPage": 336,
+          "rect": [
+            277.44672,
+            573.5262,
+            540.787128,
+            582.7392
+          ],
+          "wordSpan": [
+            299,
+            307
+          ],
+          "wordBoxesSha256": "a7713ee515296a1522e3989fa08f8035e196ff9ab7facfe1de98dcd5cf8ed6e7",
+          "unicodeSha256": "d9e27472ad073493a236f5c9aa6ec59898b292cc320c6fec7a06e7757e34caff",
+          "text": "exceptions, then copy the x87 environment to mem14/28env",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:336:cell:38",
+          "pdfPage": 336,
+          "rect": [
+            277.43676,
+            583.54596,
+            450.726816,
+            592.75896
+          ],
+          "wordSpan": [
+            307,
+            312
+          ],
+          "wordBoxesSha256": "6ae9f8edc598d8732221f062ef2b7f0bf5a1943957572ae4e83dc7b216981ce3",
+          "unicodeSha256": "aa8a6f54ef377d05e04a884de4d50c67ab57f0f871c996432ae385a5c2ebb58c",
+          "text": "and mask the floating-point exceptions.",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:336:cell:39",
+          "pdfPage": 336,
+          "rect": [
+            68.99388,
+            606.52368,
+            115.590744,
+            615.73668
+          ],
+          "wordSpan": [
+            312,
+            313
+          ],
+          "wordBoxesSha256": "008689719386da1af9b5f0000d766635ec52d3523c709643366967fb5cac3e50",
+          "unicodeSha256": "358ab4b3d5e785497f06fd1fb7dd63c5cfba43a9eb036bc568a45995790cfe00",
+          "text": "FNSTENV",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:336:cell:40",
+          "pdfPage": 336,
+          "rect": [
+            68.99388,
+            616.54344,
+            132.287688,
+            625.75644
+          ],
+          "wordSpan": [
+            313,
+            314
+          ],
+          "wordBoxesSha256": "a013bebfc7bfacf1d50ff9302b3c10e23d609d701225a6a839edf4da3982de99",
+          "unicodeSha256": "bd962c5b613fbaba0fc7c6b8bfef6a8b0e18630efcfec213c5bb957fd75c9707",
+          "text": "mem14/28env",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:336:cell:41",
+          "pdfPage": 336,
+          "rect": [
+            185.27688,
+            611.50368,
+            209.089248,
+            620.71668
+          ],
+          "wordSpan": [
+            314,
+            316
+          ],
+          "wordBoxesSha256": "05add9b55c7625e3a10d27827347afb579a013f2da875eb17b24cf7f142e221d",
+          "unicodeSha256": "f9d0394ed2f6f1dff3d70a03a8f3487a3a3b5c7f834757eebbec43f3388be53d",
+          "text": "D9 /6",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:336:cell:42",
+          "pdfPage": 336,
+          "rect": [
+            277.43676,
+            601.54368,
+            505.753824,
+            610.75668
+          ],
+          "wordSpan": [
+            316,
+            323
+          ],
+          "wordBoxesSha256": "28d27eabd92094abdcd5c105de62459b6adb8abc8d6034e8e809d16411d3063a",
+          "unicodeSha256": "71144765b5108feb13d80112e08aac9b1ccbc6d38f9d2ec70f736465992032ea",
+          "text": "Copy the x87 environment to mem14/28env without",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:336:cell:43",
+          "pdfPage": 336,
+          "rect": [
+            277.4268,
+            611.50368,
+            529.043292,
+            620.71668
+          ],
+          "wordSpan": [
+            323,
+            330
+          ],
+          "wordBoxesSha256": "417059ac2d8a99919b790332f45c86ef7df6a957aea445bf0d07ded7f8cb6bb8",
+          "unicodeSha256": "e6b2aa8457a2ca419c4381027c51757ee6e9cf0b9c72235abc4cefeb87e44cf3",
+          "text": "checking for pending floating-point exceptions, and mask",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:336:cell:44",
+          "pdfPage": 336,
+          "rect": [
+            277.4268,
+            621.52344,
+            344.623932,
+            630.73644
+          ],
+          "wordSpan": [
+            330,
+            332
+          ],
+          "wordBoxesSha256": "0146e52d31d4520f4e8b217292291b617f3675c99aaa0f14bb6bc8d9c9a5a1e8",
+          "unicodeSha256": "87171648a548fb5f3df7284b6c966463da0abdffe41ff1253a3f795e14f1d41b",
+          "text": "the exceptions.",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:336:cell:45",
+          "pdfPage": 336,
+          "rect": [
+            63.0,
+            646.404,
+            178.2456,
+            657.504
+          ],
+          "wordSpan": [
+            332,
+            334
+          ],
+          "wordBoxesSha256": "ae80ec0e3cd9a1abdcdc5cfdb3bc28fe4d4672656c29a2aa4d7fbe9cda7e1232",
+          "unicodeSha256": "4b488ba4e1f6a06e02d2fbf07b7540534e97045b4c7fcfb7fc04e04f68372af7",
+          "text": "Related Instructions",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:336:cell:46",
+          "pdfPage": 336,
+          "rect": [
+            63.0,
+            669.804,
+            302.7384,
+            680.604
+          ],
+          "wordSpan": [
+            334,
+            339
+          ],
+          "wordBoxesSha256": "c5566b48397b7aea7da8532e273227746b8d87bf57442ac158a465100f8ca743",
+          "unicodeSha256": "612f38084ae93228a5fd8bfca5d4c4af559514421b12aa81dba78c384dbd0c5b",
+          "text": "FLDENV, FSTSW, FNSTSW, FSTCW, FNSTCW",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:336:cell:47",
+          "pdfPage": 336,
+          "rect": [
+            63.0,
+            747.45636,
+            81.27621,
+            757.61286
+          ],
+          "wordSpan": [
+            339,
+            340
+          ],
+          "wordBoxesSha256": "94b3da46937415a09913ffaecd0109e3bc1b7cd75a34d13dd7ff373630864f60",
+          "unicodeSha256": "38b83caefa1ef26940f1d07bd4ec94c60809b0f88f2118e82ef8ec2d98938a84",
+          "text": "306",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:336:cell:48",
+          "pdfPage": 336,
+          "rect": [
+            241.747009,
+            744.47078,
+            370.247009,
+            772.33078
+          ],
+          "wordSpan": [
+            340,
+            343
+          ],
+          "wordBoxesSha256": "f30d12229791ea0e3864dc4b97ce9ed1307e9b5284372741c55917e024ea68e6",
+          "unicodeSha256": "cb9a32cb7cda694a9471249208941a694cc0a803969c2bac64dd553086c94897",
+          "text": "[AMD Public Use]",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:336:cell:49",
+          "pdfPage": 336,
+          "rect": [
+            253.49202,
+            747.45636,
+            358.527798,
+            757.61286
+          ],
+          "wordSpan": [
+            343,
+            345
+          ],
+          "wordBoxesSha256": "8a8457ae4a8d98ee7db99be8547f835a14002639e2033ff62f0eea8a8c25f7d8",
+          "unicodeSha256": "84d38b7c9da130814026ae7d2adbba01dca28386cd4760e0c079fef030ce5f23",
+          "text": "FSTENV (FNSTENV)",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:336:cell:50",
+          "pdfPage": 336,
+          "rect": [
+            453.82212,
+            747.45636,
+            549.020916,
+            757.61286
+          ],
+          "wordSpan": [
+            345,
+            347
+          ],
+          "wordBoxesSha256": "0e1d3634f30474eb5738968c6b7c25e5282a6930d8d90555b0d5e8712eb8db51",
+          "unicodeSha256": "84daffb3458fe5f6e9b5a9f80666e0eda5f0c8d5a6dd513fac3959563b9ee112",
+          "text": "x87 Floating-Point",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:336:cell:51",
+          "pdfPage": 336,
+          "rect": [
+            436.08942,
+            760.47864,
+            549.03519,
+            770.63514
+          ],
+          "wordSpan": [
+            347,
+            349
+          ],
+          "wordBoxesSha256": "e572eaef51193f4605226fbadfe254a50305109563264525acebc7c06051b82a",
+          "unicodeSha256": "8b58656c57d63c3ed9f4749f0b51bcea085c2cd71d09d39c4ae8b88ada841c60",
+          "text": "Instruction Reference",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        }
+      ]
+    }
+  ],
+  "gapOrdinals": [
+    510
+  ],
+  "baseline": {
+    "entries": [
+      {
+        "chapter": "2 x87 Floating-Point Instruction Reference",
+        "chapterOrdinal": 46,
+        "id": "amd-entry:0147",
+        "pdfEndPage": 337,
+        "pdfPage": 336,
+        "subsections": [],
+        "tableIds": [
+          "amd-table:0147"
+        ],
+        "title": "FSTENV (FNSTENV)",
+        "uri": "#nameddest=G8.2435052"
+      }
+    ],
+    "tables": [
+      {
+        "entryIds": [
+          "amd-entry:0147"
+        ],
+        "header": "Mnemonic                 Opcode              Description",
+        "headerLine": 33,
+        "id": "amd-table:0147",
+        "pdfPage": 336
+      }
+    ],
+    "rows": [
+      {
+        "encodingCells": [],
+        "entryIds": [
+          "amd-entry:0147"
+        ],
+        "id": "amd-row:00226",
+        "mnemonic": "FSTENV",
+        "source": {
+          "line": 35,
+          "pdfPage": 336,
+          "textSha256": "7c29d762fd4be1114a6953d27d6ee857272110fcd770621b9799061d30a57d12"
+        },
+        "table": "amd-table:0147"
+      },
+      {
+        "encodingCells": [],
+        "entryIds": [
+          "amd-entry:0147"
+        ],
+        "id": "amd-row:00227",
+        "mnemonic": "FNSTENV",
+        "source": {
+          "line": 39,
+          "pdfPage": 336,
+          "textSha256": "6a0ca0efcdee82624e99ea477a043b9f60e1c4d1534e7bb70c0066f4ade9b5fc"
+        },
+        "table": "amd-table:0147"
+      }
+    ],
+    "gaps": [
+      {
+        "kind": "unparsed-table-line",
+        "source": {
+          "line": 41,
+          "pdfPage": 336,
+          "textSha256": "e2d0a5420fbe8973bbf9721c28364674a23ba887f3ad9ee2f068c524a49c4fd7"
+        },
+        "sourceText": "mem14/28env",
+        "table": "amd-table:0147"
+      }
+    ]
+  }
+}

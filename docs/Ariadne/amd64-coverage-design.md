@@ -3,9 +3,9 @@
 ## Context and follow-up
 
 **Status.** Completion design with finite source/domain implementation, 2026-10-23.
-The working tree based on `e44ce2b` implements separately selected v12/v13/v14 REP scopes
+The working tree based on `6c3fa96` implements separately selected v12/v13/v14 REP scopes
 and an AMD-specific v15 address-size successor, a candidate five-volume source
-corpus, partial geometry recovery and v2/v3 finite legal-domain/binding registries. The [dated stage execution](../../.agents/plans/amd64-operation-coverage.md#source-and-domain-execution-c1c4)
+corpus, historical-gap accounting and v2/v3 finite legal-domain/binding registries. The [dated stage execution](../../.agents/plans/amd64-operation-coverage.md#source-and-domain-execution-c1c4)
 distinguishes exercised clauses from the remaining full-stage exits. The broader
 encoding grammar, source completeness and consumer expansions remain open;
 the finite plain-dependency profiles do not grant proof-consumer admission.
@@ -15,10 +15,10 @@ changed payload.
 
 **Why this document exists.** The [current BAP integration](bap-analysis-core-design.md#plain-repeated-string-profile-and-coverage-accounting)
 owns the original three-form v12 contract; this design records its separately versioned memory-string successors and remaining obligations.
-The [latest checkpoint](../../CHECKPOINTS.md#2026-10-23--plain-rep-dependency-projection-and-coverage-accounting)
+The [origin checkpoint](../../CHECKPOINTS.md#2026-10-23--plain-rep-dependency-projection-and-coverage-accounting)
 records the starting 10,569 unbound symbolic candidates and 2,657 manual
-extraction gaps. Geometry now gives 2,076 of those old gaps source-backed
-dispositions and retains 581 unresolved. Neither the candidate count nor a
+extraction gaps. Geometry now gives all 2,657 old gaps source-backed
+dispositions, including explicit source conflicts; none lacks a disposition. Neither the candidate count nor a
 transcription-gap count is a count of unsupported legal AMD instructions.
 
 **What this document establishes.** This is the canonical design for closing
@@ -34,7 +34,7 @@ can establish. The [execution HTML](../../.agents/chatdocs/ariadne-amd64-coverag
 is the current dated reading view; the [original proposal](../../.agents/chatdocs/ariadne-amd64-coverage-design-20261023/index.html)
 preserves the pre-execution version.
 
-**What remains unresolved.** The legal-form denominator, source gaps, wider REP
+**What remains unresolved.** The legal-form denominator, source conflicts and unparsed constraints, wider REP
 semantics, architectural state and proof consumers remain incomplete. Official
 byte identity for the pinned AMD Volumes 4/5 is unverified. Universal ISA
 execution correctness and Rust refinement remain separate obligations.
@@ -77,7 +77,7 @@ cannot establish those stronger claims.
 | Domain | Current state | Consequence |
 | --- | --- | --- |
 | XED source | 10,994 symbolic records: 10,569 long-mode candidates, 425 exclusions | A frozen candidate grammar, not a legal AMD instruction count. |
-| Manual transcription | Historical v1 has 4,118 rows and 2,657 gap records; geometry accounts for every old gap ID with 2,076 source-backed dispositions and 581 unresolved | The old lock remains unchanged. A disposition is scoped to the affected source cells; diagram classification retains unparsed constraints, and complete source/constraint coverage remains open. |
+| Manual transcription | Historical v1 has 4,118 rows and 2,657 gap records; every old gap now has a source-backed disposition, with zero unassigned gaps and seven explicit source-conflict records | The old lock remains unchanged. Conflict and material dispositions retain unparsed constraints; historical backlog closure does not establish complete source/constraint coverage or a legal encoding. |
 | Source provenance | Fresh publisher bytes match Vol1 r3.25, Vol2 r3.45 and Vol3 r3.38; indexed official Vol4 r3.26 and Vol5 r3.16 URLs return HTTP 404 | Vol4/5 remain pinned archive copies with unverified publisher-byte identity. |
 | Current extraction | Candidate v2 reproduces all five volumes under pinned `pdftotext` 26.01, MuPDF 1.27 and Python 3.14.4; Vol3–5 normalized content matches v1 while full-layout hashes differ | Existing strict v1 pins remain active. Equal normalized content does not authorize migration or close previously unparsed source regions. |
 | Representative v12 survey | 171 exact byte cases: 57 projected, 8 conservative unknowns, 106 remaining gaps | These samples do not bind any symbolic form authoritatively. Nine independent expectations match. |
@@ -539,46 +539,75 @@ official Vol4/5 byte identity.
 ### 10.2 Geometry and source-region execution: C2
 
 2026-10-23: the first geometry pass established 1,726 source-backed dispositions
-and 931 unresolved gaps. The follow-up adds 350 dispositions, reconstructing
-source cells from exact PDF word coordinates and checking immutable
-outline/entry ownership. All 2,657 historical gap IDs and original gap objects
-remain present; no previously resolved gap regresses.
+and 931 unresolved gaps; the next pass added 350 dispositions. The final
+historical-backlog pass accounts for the remaining 581 obligations. All 2,657
+gap IDs, ordinals, original objects and legacy source addresses remain present,
+and all 2,076 earlier dispositions remain byte-for-byte equivalent as JSON data.
 
 | Publication | Original gaps | Source-backed dispositions | Unresolved |
 | --- | ---: | ---: | ---: |
-| Vol3, 24594 | 159 | 14 | 145 |
-| Vol4, 26568 | 1,987 | 1,718 | 269 |
-| Vol5, 26569 | 511 | 344 | 167 |
-| Total | 2,657 | 2,076 | 581 |
+| Vol3, 24594 | 159 | 159 | 0 |
+| Vol4, 26568 | 1,987 | 1,987 | 0 |
+| Vol5, 26569 | 511 | 511 | 0 |
+| Total | 2,657 | 2,657 | 0 |
 
-The follow-up contributes 41 centered mnemonic/operand/opcode dispositions,
-39 dispositions for literal wrapped `0F 0F /r` plus trailing-byte encodings,
-and 270 classifications of diagram material. Centered and wrapped rows require
-one source-owned mnemonic, explicit opcode-column geometry and all encoding
-cells; they do not fill down a missing opcode. Diagram boundaries require
-register/bit geometry and a source-owned EPS label. Their operations and
-constraints remain explicitly unparsed. These dispositions therefore establish
-source locations and material kinds, not new legal-form or semantic-support
-counts. Vol4 retains 241 unparsed table-line gaps.
+The last 581 dispositions have distinct source obligations:
 
-Twenty-three geometry controls and thirteen historical extraction controls
-pass. Actual minimized fixtures now include CVTPS2PI, FRSTOR, PADDB, PFACC and
-PF2ID alongside ADDPD, CMOV and AES. Controls reject missing or duplicated
-bytes, moved or wrong-column cells, additional mnemonic heads, wrong owners,
-missing or wrong diagram labels, inserted notes/opcodes and ambiguous geometry.
-The AES fixture preserves an outline owner named `AESDECLAST VAESDECLAST`
-over a cell naming `AESENC`; that mismatch remains unresolved.
+- Vol3 accounts for 60 CMOV width-group gaps, 34 SETcc alias-group gaps,
+  five wrapped opcode fragments, one literal `F2/F3` encoding and 45 explanatory
+  material records. Shared cells require exact named columns, tightly spaced
+  and isolated source-owned groups, and a unique centered opcode. Literal
+  MOVDIRI/MOVDIR64B `3B` bytes remain unchanged.
+- Vol4 accounts for 269 records through explicit notes, footers, semantic/alias
+  tables, source headings/prototypes, superscript geometry, named column bounds
+  and retained word-box spans for combined cells. AESENC's actual heading
+  supplies an ownership overlay while preserving its incorrect historical
+  `AESDECLAST VAESDECLAST` bookmark association. Seven records retain
+  `source-conflict`: malformed operands/bitfields or disagreements between a
+  printed mnemonic and its section heading. Examples include
+  `xmmVGETEXPPD2`, `X.1323r33111.` and SHA256MSG1 within the SHA256MSG2 section.
+  No intended correction or authoritative legal binding is inferred.
+- Vol5 accounts for 166 material records and one FNSTENV operand continuation.
+  Owned EPS labels, immediate-field captions, before/after stack labels and
+  numeric-result headers bound the material. Repeated and staggered text
+  requires unique neighboring anchors, increasing source order and distinct
+  source-cell assignments; one PDF cell cannot discharge two historical lines.
+
+Material and conflict records retain `constraintsParsed=false`. Their
+disposition establishes where the old parser overreached or what source text
+it missed; it does not validate a legal encoding or parse a diagram's operation.
+Recovered bindings live in explicit disposition evidence, leaving the historical
+inventory and existing derived rows intact. The old generic CMOV/AES refusal
+controls remain active; the new rules require additional structural evidence.
+
+The [geometry extractor](../../tools/amd64_manual_geometry.py) dispatches pure
+per-volume recovery passes after the original parser. Integration checks reject
+mutated context, rewritten IDs or prior dispositions, absent/foreign source
+cells, lost legacy source lines and invented entry/row identities. Its
+`extractorSources` map binds all nine extraction/dependency modules in both
+geometry and region products. The v2/v3 binding registries inherit that closure;
+editing any volume helper invalidates both registries. `check` reconstructs the
+whole expected output, so resealing an omitted gap or altered owner cannot pass.
+
+Sixty-one geometry controls and thirteen historical extraction controls pass.
+Actual PDF excerpts and negative controls exercise missing, duplicated, moved
+and wrong-column cells, foreign heads, misplaced superscripts, conflicting
+owners, new notes/opcodes and repeated-line aliasing. The complete BAP-side
+Python suite passes 145 tests and the tooling suite passes 328. The checked main
+extractor SHA-256 is
+`f98ac07ecbda55e32d2e2190bd4a216c44bbe28b11462bf783580d2b458ad257`;
+its output also binds the eight dependency/helper identities.
 
 Fresh `extract`/`check` cover all three historical instruction-reference
 publications. Five-volume `regions`/`check-regions` enumerate all 4,128 PDF
-pages and eleven required source-region clauses. Enumeration preserves
-unresolved global rules and constraints; it does not establish that they were
-parsed completely. Footnotes, merged-cell semantics and 33 candidate cross-page
-continuations remain unresolved, including 25 in Vol3 and eight in Vol4.
-Geometry is word-based and depends on fresh C1 extraction from pinned PDF bytes.
-The checked extractor source SHA-256 is
-`c4a747f90624bfa11a6c16bbebba99400b20b8dd0d9c43907cb1853f6f4e78db`.
-C2, the old-gap backlog and source completeness remain open.
+pages and eleven required source-region clauses. The pinned C1 products and
+their fresh-extraction premise remain required inputs. Enumeration does not
+establish complete parsing of global rules, footnotes, semantic constraints or
+the 33 candidate cross-page continuations (25 in Vol3 and eight in Vol4).
+`oldGapBacklogClosed` is true; `allSelectedSourceConstraintsParsed`,
+`sourceCompletenessEstablished`, `legalEncodingCompletenessEstablished` and
+`c2Complete` remain false. The historical backlog is accounted for; C2's wider
+source contract remains open.
 
 ### 10.3 Finite legal-domain and binding execution: C3/C4
 
@@ -601,7 +630,7 @@ This pilot neither binds the 10,569 XED candidates nor establishes a full AMD
 legal-form denominator. Source derivation and the restricted grammar remain
 reviewed trust premises; a general constraint solver is still unimplemented.
 
-The final source-frozen campaign reseals thirty-one implementation identities and
+The historical-gap continuation reseals thirty-nine implementation identities and
 obtains three fresh producer BIL observations, 720 independent numeric
 comparisons and the passing exact-lift Rust observer
 `fresh_producer_loops_project_under_only_the_repeated_string_profile`.
@@ -609,7 +638,7 @@ Fresh `build` without `--skip-rust-admission` and `check --require-bindings`
 both pass. `totalDisposition` and `profileBindingsValidated` are true only for
 this pilot; implementation, source completeness, vendor-wide totality and full
 AMD64 support remain false. The final binding digest is
-`0dd9bf47622ef2f3533a6d59383aa11b4cc02d67922fd3a06c02f1594844fa0d`.
+`e303967b3d22daf32a32a4b8dbc2bb389d341117343b43e6a2c80b15ee0f944f`.
 Further bound source changes require another fresh producer/oracle/Rust
 campaign. C3/C4 remain partial.
 
@@ -892,9 +921,9 @@ manifest, executable, bytes, environment and typed BIL. Fresh execution yields
 111 profile observations: 75 packaged-producer queries, four v14 LODS queries
 and 32 new-producer queries, representing 60 distinct producer/byte pairs.
 The Rust observer checks actual supplied BIL admission across all four profiles.
-Forty-seven portable controls pass, including holes, overlaps, wrong source
+Forty-eight portable controls pass, including holes, overlaps, wrong source
 cells, stale artifacts, rehashed vendor/premise changes and exact JSON-type
-identity. Missing observations or a skipped Rust observer keep binding validation
+identity and stale per-volume recovery helpers in both registries. Missing observations or a skipped Rust observer keep binding validation
 false. Fresh `--require-bindings --require-implementation` passes for this
 registry's v15 plain-dependency domain; older profiles remain incomplete in
 that larger domain as the table shows.
@@ -902,6 +931,10 @@ that larger domain as the table shows.
 The original 24-point v2 contract is unchanged. Only its current implementation
 source digests were resealed; a fresh three-row BAP/oracle/Rust campaign and
 `--require-bindings` pass with the same 3 supported/21 unsupported result.
+After the historical-gap pass, the v3 registry binds 61 implementation sources
+and repeats the complete fresh producer/source-cell/Rust observer campaign.
+Its binding digest is
+`f74166126ea43d855c7e6cafae61186fda365cd0d6bce41885294c9587c188db`.
 The v3 finite domain establishes no complete vendor denominator or full symbolic
 binding: `sourceComplete`, `vendorFullDenominator` and `fullAmd64Coverage` remain
 false, and `candidateFullDomainBindings` remains zero. All 10,569 candidate
@@ -918,3 +951,11 @@ at the intended assertions after passing exact unchanged controls; restored
 sources, unchanged observers and the final source inventory are verified.
 Native v15 qualification is pending the specific source-handoff approval above.
 Earlier R1 results retain their recorded source scope.
+
+The subsequent historical-gap continuation changes Python extraction and
+binding provenance, with no Rust behavior change. Its fresh checks pass all
+145 BAP Python controls, 328 tooling controls, the three-volume reconstruction
+and five-volume region checks, both actual BAP/Rust binding campaigns, Rust
+layout and documentation links. The Rust suite and mutation counts in the
+preceding paragraph belong to the recorded v15 source campaign; this
+continuation reruns the two affected Rust binding observers.

@@ -1,0 +1,916 @@
+{
+  "publication": "26569",
+  "pdfSha256": "8c8c63c5e285c50faac2e7d474cf5046f5fcccb54673f464f57a8cb171ef0767",
+  "sourceProducts": {
+    "layoutSha256": "537cbba9c89b5d12ca7056c0453cdcd3bbf524797d1bc2ee8cffa7146ed5097e",
+    "bboxSha256": "3646b5abfe4c5d0e3598d10caeb44b6619c2238bba68fef41a12085a9a87e38d",
+    "outlineSha256": "4669b5e49e2d15f31acc10745b5514cd01a9a3abedc907c97bb155434d5d123d"
+  },
+  "pages": [
+    {
+      "pdfPage": 116,
+      "layoutPage": "AMD64 Technology                                                         26569—Rev. 3.16—November 2021\n\n\n\n\nPEXTRW                                                                       Extract Packed Word\nExtracts a 16-bit value from an MMX register, as selected by the immediate byte operand (as shown in\nTable 1-1) and writes it to the low-order word of a 32-bit general-purpose register, with zero-extension\nto 32 bits.\nThe PEXTRW instruction is a member of both the AMD MMX™ extensions and the SSE1 instruction\nset. Support for the SSE1 instruction subset is indicated by CPUID Fn0000_0001_EDX[SSE] = 1.\nSupport for AMD’s extensions to the MMX instruction subset is indicated by CPUID\nFn8000_0001_EDX[MmxExt] = 1. See “CPUID” in Volume 3 for more information about the CPUID\ninstruction.\n\nMnemonic                            Opcode                 Description\n                                                            Extracts a 16-bit value from an MMX register and\n PEXTRW reg32, mmx, imm8            0F C5 /r ib             writes it to low-order 16 bits of a general-purpose\n                                                            register.\n\n\n\n                            reg32                                                  mmx\n\n                   31          15          0                              63 48 47 32 31 16 15       0\n                        0\n\n                                               imm8\n                                               7 0\n\n\n\n                                                                            mux\n\n                                                                                          pextrw-64.eps\n\n\n\n\nTable 1-1. Immediate-Byte Operand Encoding for 64-Bit PEXTRW\n       Immediate-Byte\n          Bit Field                          Value of Bit Field                   Source Bits Extracted\n                                                      0                                     15–0\n                                                      1                                    31–16\n             1–0\n                                                      2                                    47–32\n                                                      3                                    63–48\n\nRelated Instructions\nPINSRW\n\nrFLAGS Affected\n\n\n\n\n                                          [AMD Public Use]\n86                                                    PEXTRW                                       64-Bit Media\n                                                                                         Instruction Reference\n",
+      "cells": [
+        {
+          "id": "pdf:116:cell:12",
+          "pdfPage": 116,
+          "rect": [
+            64.98,
+            268.48872,
+            114.3816,
+            277.70172
+          ],
+          "wordSpan": [
+            104,
+            105
+          ],
+          "wordBoxesSha256": "b88f7a97e5779ad169cfb29de7c64d8d2557f5188570c255b9bc1b30ba9ac61f",
+          "unicodeSha256": "761a18b82619631f2cb0ec62be463b62961fbabad6175e5fcfa4503d59eec265",
+          "text": "Mnemonic",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:13",
+          "pdfPage": 116,
+          "rect": [
+            209.34024,
+            268.48872,
+            246.541836,
+            277.70172
+          ],
+          "wordSpan": [
+            105,
+            106
+          ],
+          "wordBoxesSha256": "3cdd57b133e35c463aa7e9abe5e350d7731f2bd85c273c95650ccd28041037cd",
+          "unicodeSha256": "c37ef4ad36a525a861229404a96b57eb0536b459772ff0f62bbcc82263a46c0c",
+          "text": "Opcode",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:14",
+          "pdfPage": 116,
+          "rect": [
+            310.12548,
+            268.48872,
+            365.156472,
+            277.70172
+          ],
+          "wordSpan": [
+            106,
+            107
+          ],
+          "wordBoxesSha256": "37dd642b5eeaffc3930ad3fe00ac33e23c170ed22258fdb18dabe906da114a4e",
+          "unicodeSha256": "526e0087cc3f254d9f86f6c7d8e23d954c4dfda2b312efc29194ae8a860106ba",
+          "text": "Description",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:15",
+          "pdfPage": 116,
+          "rect": [
+            69.00384,
+            296.5062,
+            197.076492,
+            305.7192
+          ],
+          "wordSpan": [
+            107,
+            111
+          ],
+          "wordBoxesSha256": "f1019bfb326e35e48ca9888271cbe5760565c41248993e25447850d38b31b36d",
+          "unicodeSha256": "dcc73571048dbbf7ea05c86121a6a1cfcf3f2ce958c31b00047512ddeee7fd99",
+          "text": "PEXTRW reg32, mmx, imm8",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:16",
+          "pdfPage": 116,
+          "rect": [
+            213.35412,
+            296.5062,
+            259.97688,
+            305.7192
+          ],
+          "wordSpan": [
+            111,
+            115
+          ],
+          "wordBoxesSha256": "00285cc75506f5cc660848a475bca47fe3462cab8761ebf3e12b6545614ee6ea",
+          "unicodeSha256": "15a71be75abfc61a0fee88a0dcb772ec7073b870f4bb0ff654b9efb94ff60ddc",
+          "text": "0F C5 /r ib",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:17",
+          "pdfPage": 116,
+          "rect": [
+            314.14932,
+            286.48644,
+            531.334092,
+            295.69944
+          ],
+          "wordSpan": [
+            115,
+            124
+          ],
+          "wordBoxesSha256": "b8faceb0256a0651c2356db2347b40c7e97a3953ab0ed7191f4cce4786a99533",
+          "unicodeSha256": "00f375f25ebceda9296806f6e5d39ee3c4076a87cc76d9ac34d324c7927804f1",
+          "text": "Extracts a 16-bit value from an MMX register and",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:18",
+          "pdfPage": 116,
+          "rect": [
+            314.14932,
+            296.5062,
+            530.803224,
+            305.7192
+          ],
+          "wordSpan": [
+            124,
+            133
+          ],
+          "wordBoxesSha256": "14b45811bd9c4f9fe4c1dbf1a9f6a2e38aa4a1fd37a466f48be89c4a5a8a998f",
+          "unicodeSha256": "e4551d747d420755d0a2ee617c63eeb028cb90ac1981936c3f2f9dd83ab255f1",
+          "text": "writes it to low-order 16 bits of a general-purpose",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:19",
+          "pdfPage": 116,
+          "rect": [
+            314.14932,
+            306.52596,
+            349.688592,
+            315.73896
+          ],
+          "wordSpan": [
+            133,
+            134
+          ],
+          "wordBoxesSha256": "87702c38a694f4b98df9b13a866f393870c5fc6e687f2fbf50fb148f7a680634",
+          "unicodeSha256": "45bfa48e1278ce344c45119f9127613e9a24997f5e3844b559c83f246d71af54",
+          "text": "register.",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:20",
+          "pdfPage": 116,
+          "rect": [
+            186.647,
+            346.351094,
+            207.677841,
+            356.141485
+          ],
+          "wordSpan": [
+            134,
+            135
+          ],
+          "wordBoxesSha256": "b9ca49d612e5f00b3177bcd386dece9b35b1fc72f7dcfdac8c6872efd993bfdc",
+          "unicodeSha256": "8bebafcdb40df9fe77b151de09da0230b8e1f653c4b14c273ffb3f17be557e16",
+          "text": "reg32",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:21",
+          "pdfPage": 116,
+          "rect": [
+            199.336807,
+            371.74877,
+            206.329069,
+            379.525062
+          ],
+          "wordSpan": [
+            135,
+            136
+          ],
+          "wordBoxesSha256": "fb0a94778d2a1904ab8cd7c2ad69cc84592305c44efdfb2a82b9272bb857a84c",
+          "unicodeSha256": "e629fa6598d732768f7c726b4b621285f9c3b85303900aa912017db7617d8bdb",
+          "text": "15",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:22",
+          "pdfPage": 116,
+          "rect": [
+            150.1648,
+            371.89867,
+            157.157062,
+            379.674962
+          ],
+          "wordSpan": [
+            136,
+            137
+          ],
+          "wordBoxesSha256": "be43386bf8f6cf55d95a50c5861935e806c6b6a15832966594c9363193b2dc92",
+          "unicodeSha256": "eb1e33e8a81b697b75855af6bfcdbcbf7cbbde9f94962ceaec1ed8af21f5a50f",
+          "text": "31",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:23",
+          "pdfPage": 116,
+          "rect": [
+            413.176061,
+            346.351094,
+            431.506794,
+            356.141485
+          ],
+          "wordSpan": [
+            137,
+            138
+          ],
+          "wordBoxesSha256": "55cd90504e747cd8a72ace95ecbed879182a4f7032e7f471ea63bba24b4b7836",
+          "unicodeSha256": "5da9a18734ebf2338afe5a44000e6b65084a86f27566098296c6cb02f16fe6a6",
+          "text": "mmx",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:24",
+          "pdfPage": 116,
+          "rect": [
+            244.002481,
+            371.74877,
+            247.498613,
+            379.525062
+          ],
+          "wordSpan": [
+            138,
+            139
+          ],
+          "wordBoxesSha256": "9e0b1fe446152b73ab9d6f57657f8ab5a93d6447fde64dec96b67fb169bf0a6e",
+          "unicodeSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "text": "0",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:25",
+          "pdfPage": 116,
+          "rect": [
+            374.007356,
+            371.74877,
+            455.506413,
+            379.525062
+          ],
+          "wordSpan": [
+            139,
+            146
+          ],
+          "wordBoxesSha256": "68b22b37befa6e9cbd5c313965281893e8b3a66ec2f2860a121750832bbf8621",
+          "unicodeSha256": "95f36c6c610f55c46c018e501fae7d61f13aceab249d7e40947fe6a31da60fe0",
+          "text": "63 48 47 32 31 16 15",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:26",
+          "pdfPage": 116,
+          "rect": [
+            468.5069,
+            371.74877,
+            472.003031,
+            379.525062
+          ],
+          "wordSpan": [
+            146,
+            147
+          ],
+          "wordBoxesSha256": "c4d2951fdbf419c956706cf02276f92cad692f116e743f0a8426e449f2336bd3",
+          "unicodeSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "text": "0",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:27",
+          "pdfPage": 116,
+          "rect": [
+            172.1947,
+            386.285094,
+            176.127875,
+            395.033482
+          ],
+          "wordSpan": [
+            147,
+            148
+          ],
+          "wordBoxesSha256": "8a3e60bcbb7dc4f5e58a199800eaec372d8acbb60e8ad62767a169c433691fb9",
+          "unicodeSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "text": "0",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:28",
+          "pdfPage": 116,
+          "rect": [
+            250.049536,
+            409.853634,
+            271.290386,
+            419.644025
+          ],
+          "wordSpan": [
+            148,
+            149
+          ],
+          "wordBoxesSha256": "339c10aa18fea627e783a7defb20ecd2cb1370af44e074b4e838360707a94aea",
+          "unicodeSha256": "0077281fe29d1c69dac5cd795331ae9fecba40adf7bccc6d2e28d44409f28957",
+          "text": "imm8",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:29",
+          "pdfPage": 116,
+          "rect": [
+            253.6689,
+            421.22637,
+            267.665425,
+            429.002662
+          ],
+          "wordSpan": [
+            149,
+            151
+          ],
+          "wordBoxesSha256": "598004b165618089f30a0e094e5766381ba287c67eafbc68969c7fa8acd375a8",
+          "unicodeSha256": "9fc5a7d9f8ce0cd9160cd957b850ac145851c8f3754519255778a96c918588ab",
+          "text": "7 0",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:30",
+          "pdfPage": 116,
+          "rect": [
+            384.5921,
+            456.879694,
+            398.0837,
+            465.628082
+          ],
+          "wordSpan": [
+            151,
+            152
+          ],
+          "wordBoxesSha256": "3320caab15f6677d0029d3c5c37433ddacdaba2f701daab209ac0d666e870522",
+          "unicodeSha256": "99830b20a923a7b295564b49dbf0874adbdfc4710c7551cc56e69baee3ce667e",
+          "text": "mux",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:31",
+          "pdfPage": 116,
+          "rect": [
+            443.1152,
+            478.181447,
+            472.480179,
+            484.013641
+          ],
+          "wordSpan": [
+            152,
+            153
+          ],
+          "wordBoxesSha256": "f3a46d76f3176144ccf0ad7c32b53af7b3418980d37ab192cfe838957e11853b",
+          "unicodeSha256": "679a82499eb70333146ce664a098ead330b5b5d9ed9b5253502a020fcf7851eb",
+          "text": "pextrw-64.eps",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:32",
+          "pdfPage": 116,
+          "rect": [
+            63.0,
+            522.924,
+            439.74,
+            534.024
+          ],
+          "wordSpan": [
+            153,
+            161
+          ],
+          "wordBoxesSha256": "c1ef1cf447ef180c0a72aaebffece7f9aa2942f7693bc1c2b457f84e47e4c82f",
+          "unicodeSha256": "92acf8198882c63650e49bc5446500e0e36f73982401036934b6ff4a18a44139",
+          "text": "Table 1-1. Immediate-Byte Operand Encoding for 64-Bit PEXTRW",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:33",
+          "pdfPage": 116,
+          "rect": [
+            96.96,
+            544.00872,
+            171.342276,
+            553.22172
+          ],
+          "wordSpan": [
+            161,
+            162
+          ],
+          "wordBoxesSha256": "a8ec347c590fac5bc5d37b26abc7bcb871adf4f32a392d53b361492d23e600d3",
+          "unicodeSha256": "acd24409ba434eb9687fd18eaf8e593412ecd8ca867a736dde734a2de6df261a",
+          "text": "Immediate-Byte",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:34",
+          "pdfPage": 116,
+          "rect": [
+            114.47964,
+            556.01052,
+            153.925224,
+            565.22352
+          ],
+          "wordSpan": [
+            162,
+            164
+          ],
+          "wordBoxesSha256": "f943fc6e5e0e28f4f93e5260c941b8d614a27e138439414430b94e19f59f05cb",
+          "unicodeSha256": "ef6df93d2b7e1155b8b26ebe494777563b863d4c3639c20ef05fabd1d5a5766a",
+          "text": "Bit Field",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:35",
+          "pdfPage": 116,
+          "rect": [
+            125.88384,
+            596.0298,
+            142.519032,
+            605.2428
+          ],
+          "wordSpan": [
+            164,
+            165
+          ],
+          "wordBoxesSha256": "c9b45761d389fd9489b0c552d272569ba9f3070213b96e42041536957281b34c",
+          "unicodeSha256": "a7194d63e358dac3b84be5eb0d6f15c8d81d1c67bcdd8fb92d08620835a15f55",
+          "text": "1–0",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:36",
+          "pdfPage": 116,
+          "rect": [
+            246.781308,
+            556.01052,
+            327.269064,
+            565.22352
+          ],
+          "wordSpan": [
+            165,
+            169
+          ],
+          "wordBoxesSha256": "dbb9b56c6c99d89ed607bfd599d013dae2f9e0c230207a7e1636238ad96d8fbd",
+          "unicodeSha256": "e94bed3b1c7cb17523c469f15559e5cae8d9f6f9acd6fdc4e21a714d25fd1072",
+          "text": "Value of Bit Field",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:37",
+          "pdfPage": 116,
+          "rect": [
+            406.8654,
+            556.01052,
+            510.705372,
+            565.22352
+          ],
+          "wordSpan": [
+            169,
+            172
+          ],
+          "wordBoxesSha256": "be5a7c3d8f81fc28e23355d7a54504421fcd57da6210c1811d2e29e6e761fe58",
+          "unicodeSha256": "bcac7b844d2dcb921b4724ea9ff05c335d9a138050beb4944a3c00d217dfbe66",
+          "text": "Source Bits Extracted",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:38",
+          "pdfPage": 116,
+          "rect": [
+            284.22792,
+            572.0262,
+            289.76568,
+            581.2392
+          ],
+          "wordSpan": [
+            172,
+            173
+          ],
+          "wordBoxesSha256": "b03b6163c5989644e47947b15fdee0bd266561eae636b7ad84dfc852d1a3b0cf",
+          "unicodeSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "text": "0",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:39",
+          "pdfPage": 116,
+          "rect": [
+            447.7263,
+            572.0262,
+            469.940088,
+            581.2392
+          ],
+          "wordSpan": [
+            173,
+            174
+          ],
+          "wordBoxesSha256": "a020f4a22b07402bea256c233ba650d0362f00dee56869f8454fe66009d3fe88",
+          "unicodeSha256": "e1c418b1b3754a4e7123936b55929e53ac0bb01435d490ac39112dbf9ecda26b",
+          "text": "15–0",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:40",
+          "pdfPage": 116,
+          "rect": [
+            284.22792,
+            588.04188,
+            289.76568,
+            597.25488
+          ],
+          "wordSpan": [
+            174,
+            175
+          ],
+          "wordBoxesSha256": "806a34767b68d0d86058be71dd830d80e2d120f8bbd7dc810f1768f113597ec2",
+          "unicodeSha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+          "text": "1",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:41",
+          "pdfPage": 116,
+          "rect": [
+            444.906624,
+            588.04188,
+            472.699008,
+            597.25488
+          ],
+          "wordSpan": [
+            175,
+            176
+          ],
+          "wordBoxesSha256": "01e5497dff5ed5f4c40e96158c6bf89102bce41cc02b77500a10a87713648ef1",
+          "unicodeSha256": "9d38ae428a624febca435eb0b8d4a4ad6a3b8765f986a3f366aec13cc3aa0f5f",
+          "text": "31–16",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:42",
+          "pdfPage": 116,
+          "rect": [
+            284.22792,
+            603.9978,
+            289.76568,
+            613.2108
+          ],
+          "wordSpan": [
+            176,
+            177
+          ],
+          "wordBoxesSha256": "3af0cbae7b4e8227a7572cb37f4b69a994b9c8e43236c632b7a8be1fe39bcf1b",
+          "unicodeSha256": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+          "text": "2",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:43",
+          "pdfPage": 116,
+          "rect": [
+            444.906624,
+            603.9978,
+            472.699008,
+            613.2108
+          ],
+          "wordSpan": [
+            177,
+            178
+          ],
+          "wordBoxesSha256": "f3b9977f034d6b56a20edffcbe452eab2ebf0daf5f372b675d8fe4ceb6547bf7",
+          "unicodeSha256": "769447de791587ddbec907775aadf1b0687f738cb307636108df55ceef9acd08",
+          "text": "47–32",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:44",
+          "pdfPage": 116,
+          "rect": [
+            284.22792,
+            620.01348,
+            289.76568,
+            629.22648
+          ],
+          "wordSpan": [
+            178,
+            179
+          ],
+          "wordBoxesSha256": "3865587c1821b49670936b2e399f0abbd48e28445540f256b08637829cefc09e",
+          "unicodeSha256": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+          "text": "3",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:45",
+          "pdfPage": 116,
+          "rect": [
+            444.906624,
+            620.01348,
+            472.699008,
+            629.22648
+          ],
+          "wordSpan": [
+            179,
+            180
+          ],
+          "wordBoxesSha256": "7334bf05c1b7c7c7284602e459bcc972e4c8f3fd8cba739b0fa0b9d1e8dac24d",
+          "unicodeSha256": "67150eb36bd2ef021bc3fabd15496ce1c4666e52e12e43e47e1c2d69590c99b6",
+          "text": "63–48",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:46",
+          "pdfPage": 116,
+          "rect": [
+            63.0,
+            645.924,
+            178.2456,
+            657.024
+          ],
+          "wordSpan": [
+            180,
+            182
+          ],
+          "wordBoxesSha256": "2ca28feb56def28a70001eee7aff0a6b02db86fa597125b4c90787d431bfad3e",
+          "unicodeSha256": "4b488ba4e1f6a06e02d2fbf07b7540534e97045b4c7fcfb7fc04e04f68372af7",
+          "text": "Related Instructions",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:47",
+          "pdfPage": 116,
+          "rect": [
+            63.0,
+            669.324,
+            107.6184,
+            680.124
+          ],
+          "wordSpan": [
+            182,
+            183
+          ],
+          "wordBoxesSha256": "399f1803ed43ed81386955d8483d20e95529f85897cc5d6ccc21a4944e4c5701",
+          "unicodeSha256": "4bfa31300a9399440398775c4f762058d462820254c88d663efddac098633b4a",
+          "text": "PINSRW",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:48",
+          "pdfPage": 116,
+          "rect": [
+            63.0,
+            694.884,
+            159.234,
+            705.984
+          ],
+          "wordSpan": [
+            183,
+            185
+          ],
+          "wordBoxesSha256": "d04dd97fb40da467e57b7ff45842b437a3061f266e637f242c0ae7a0902f4c15",
+          "unicodeSha256": "cb0d400d83fc8e80ba4390392a83543a065255628d3192e1569f784c44ccc1ef",
+          "text": "rFLAGS Affected",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:49",
+          "pdfPage": 116,
+          "rect": [
+            63.0,
+            747.45636,
+            75.210858,
+            757.61286
+          ],
+          "wordSpan": [
+            185,
+            186
+          ],
+          "wordBoxesSha256": "91fc1d7198e736b813562db9aa62cc77a5849f2e67045aea6dfaec63276f521a",
+          "unicodeSha256": "434c9b5ae514646bbd91b50032ca579efec8f22bf0b4aac12e65997c418e0dd6",
+          "text": "86",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:50",
+          "pdfPage": 116,
+          "rect": [
+            241.747009,
+            744.47078,
+            370.247009,
+            772.33078
+          ],
+          "wordSpan": [
+            186,
+            189
+          ],
+          "wordBoxesSha256": "f30d12229791ea0e3864dc4b97ce9ed1307e9b5284372741c55917e024ea68e6",
+          "unicodeSha256": "cb9a32cb7cda694a9471249208941a694cc0a803969c2bac64dd553086c94897",
+          "text": "[AMD Public Use]",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:51",
+          "pdfPage": 116,
+          "rect": [
+            282.58902,
+            747.45636,
+            329.375898,
+            757.61286
+          ],
+          "wordSpan": [
+            189,
+            190
+          ],
+          "wordBoxesSha256": "f9ee0306ac74928f1e5189b11a65c104f05a9db455c69f5f3bc3a698019ec4b0",
+          "unicodeSha256": "06cd6ba1e0c2c38c3d8272ec639a4a1451c984d9c68bbb73682666933b2f5cdb",
+          "text": "PEXTRW",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:52",
+          "pdfPage": 116,
+          "rect": [
+            484.31358,
+            747.45636,
+            549.006642,
+            757.61286
+          ],
+          "wordSpan": [
+            190,
+            192
+          ],
+          "wordBoxesSha256": "91215b4301b7f66251bdf97c2c68ab1801f46f4531c6f0e05c4d44e2922b85f2",
+          "unicodeSha256": "559cd422c8eb616d60f7ec3931d6009718a31469d2b6943e412cb842f6c1989d",
+          "text": "64-Bit Media",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:116:cell:53",
+          "pdfPage": 116,
+          "rect": [
+            436.08942,
+            760.47864,
+            549.03519,
+            770.63514
+          ],
+          "wordSpan": [
+            192,
+            194
+          ],
+          "wordBoxesSha256": "e572eaef51193f4605226fbadfe254a50305109563264525acebc7c06051b82a",
+          "unicodeSha256": "8b58656c57d63c3ed9f4749f0b51bcea085c2cd71d09d39c4ae8b88ada841c60",
+          "text": "Instruction Reference",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        }
+      ]
+    }
+  ],
+  "gapOrdinals": [
+    131,
+    132,
+    133,
+    134
+  ],
+  "baseline": {
+    "entries": [
+      {
+        "chapter": "1 64-Bit Media Instruction Reference",
+        "chapterOrdinal": 40,
+        "id": "amd-entry:0040",
+        "pdfEndPage": 117,
+        "pdfPage": 116,
+        "subsections": [],
+        "tableIds": [
+          "amd-table:0040"
+        ],
+        "title": "PEXTRW",
+        "uri": "#nameddest=G7.2310112"
+      }
+    ],
+    "tables": [
+      {
+        "entryIds": [
+          "amd-entry:0040"
+        ],
+        "header": "Mnemonic                            Opcode                 Description",
+        "headerLine": 16,
+        "id": "amd-table:0040",
+        "pdfPage": 116
+      }
+    ],
+    "rows": [
+      {
+        "encodingCells": [
+          "0F C5 /r ib"
+        ],
+        "entryIds": [
+          "amd-entry:0040"
+        ],
+        "id": "amd-row:00045",
+        "mnemonic": "PEXTRW reg32, mmx, imm8 reg32",
+        "source": {
+          "line": 18,
+          "pdfPage": 116,
+          "textSha256": "4649b5a2c0c2876d7add88a7995c036b410dbab9b01d72ca1bc462d4529a3f1f"
+        },
+        "sourceContinuations": [
+          {
+            "line": 23,
+            "pdfPage": 116,
+            "textSha256": "1475dce260a745e2626547a606a377d362e15f354e5913788be48f1b576bba02"
+          }
+        ],
+        "table": "amd-table:0040"
+      }
+    ],
+    "gaps": [
+      {
+        "kind": "unparsed-table-line",
+        "source": {
+          "line": 40,
+          "pdfPage": 116,
+          "textSha256": "92acf8198882c63650e49bc5446500e0e36f73982401036934b6ff4a18a44139"
+        },
+        "sourceText": "Table 1-1. Immediate-Byte Operand Encoding for 64-Bit PEXTRW",
+        "table": "amd-table:0040"
+      },
+      {
+        "kind": "unparsed-table-line",
+        "source": {
+          "line": 41,
+          "pdfPage": 116,
+          "textSha256": "7a569a97a07e128e2993a92da17a85ab3c3384485b4ef3a5ae5ae382b3d3b735"
+        },
+        "sourceText": "Immediate-Byte",
+        "table": "amd-table:0040"
+      },
+      {
+        "kind": "unparsed-table-line",
+        "source": {
+          "line": 42,
+          "pdfPage": 116,
+          "textSha256": "7f5c572e80c9aef951c59513d098bd5d36e7fc6de62bfc700c145fabb4721c77"
+        },
+        "sourceText": "Bit Field                          Value of Bit Field                   Source Bits Extracted",
+        "table": "amd-table:0040"
+      },
+      {
+        "kind": "unparsed-table-line",
+        "source": {
+          "line": 45,
+          "pdfPage": 116,
+          "textSha256": "7c00cb279d248435e5edb77555a94f05406daeca39b859f7ccd7aa2813f8d1b1"
+        },
+        "sourceText": "1–0",
+        "table": "amd-table:0040"
+      }
+    ]
+  }
+}

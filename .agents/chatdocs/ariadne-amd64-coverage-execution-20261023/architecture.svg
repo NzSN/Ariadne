@@ -18,7 +18,7 @@
   <text x="64" y="188" font-family="DejaVu Sans, Arial, sans-serif" font-size="19" font-weight="700" fill="#162b3e">Source corpus</text>
   <text x="64" y="218" font-family="DejaVu Sans, Arial, sans-serif" font-size="16" font-weight="400" fill="#162b3e">Manual identities + PDF geometry</text>
   <text x="64" y="245" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">XED candidates: 10,569 unbound</text>
-  <text x="64" y="271" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">Original gaps: 2,657; unresolved: 581</text>
+  <text x="64" y="271" font-family="DejaVu Sans, Arial, sans-serif" font-size="15" font-weight="400" fill="#4b6175">2,657 accounted; 7 source conflicts</text>
   <path d="M394 226 H438" stroke="#43576c" fill="none" stroke-width="2.4" />
   <path d="M438.0,226.0 L429.0,221.5 L429.0,230.5 Z" fill="#43576c" stroke="none" />
   <rect x="450" y="158" width="358" height="137" fill="#eef7f3" stroke="#75a18c" stroke-width="1.7" rx="12" />

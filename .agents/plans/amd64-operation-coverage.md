@@ -109,7 +109,7 @@ operation-specific regressions at the baseline.
 | --- | --- | --- |
 | C0 | Link canonical contracts and define separate instruction/unwind coverage, gaps and compatibility. | Passed: linked contracts and plan navigation |
 | S0 | Executable family survey using actual instruction bytes; probe actual BAP lifting and Ariadne projection, preserve distinct outcomes and exact source/tool identities. | Passed finite survey: 49 families / 170 byte cases; not S1 completeness |
-| S1 | Expand S0 into a pinned exhaustive legal-form denominator across the declared AMD64 manuals/extensions; independent inventory completeness check. | Partial: five-volume candidate corpus, 2,076 gap dispositions and 56-point AMD legal/binding registry; source authority, 581 gaps and full grammar remain open |
+| S1 | Expand S0 into a pinned exhaustive legal-form denominator across the declared AMD64 manuals/extensions; independent inventory completeness check. | Partial: five-volume candidate corpus, all 2,657 historical gap dispositions and 56-point AMD legal/binding registry; seven source-conflict records, source authority, constraints and full grammar remain open |
 | S2 | Close missing producer lifts in a reviewed BAP source build; pin and validate the replacement producer and retain existing semantic compatibility. | Partial: finite advanced/Basic candidate checks, frozen LODS producer and separate AMD address-size producer pass their scoped checks; Basic adoption, historical identity and other producer gaps remain open |
 | S3 | Extend typed transport, state banks/aliases and width handling for all required SIMD, mask, x87, control/system and extended registers. | Partial finite v10/v11 FP-control state and coarsened data projection; wider banks/widths remain pending |
 | S4 | Implement exact prefix distinctions and bounded loop summaries; preserve zero-iteration paths, conditional writes, faults and resource stops. | Partial: R1's 28 default-address tuples pass at their recorded native boundary; AMD v15 adds 28 canonical address-32 tuples with local gates passing. Current native v15, wider prefixes, proof consumers and partial faults remain open |
@@ -517,7 +517,7 @@ remain separate under their existing owner.
 | Slice | Program stage | Concrete exit | Status |
 | --- | --- | --- | --- |
 | C1 — Source scope | S1 | Freeze vendor/publication/extension and mode scope; resolve official Vol4/5 identities or explicitly adopt a reviewed replacement corpus/toolchain. | Partial: candidate v2 reproduces all five volumes; fresh official V1–3 bytes match. V4/5 HTTP 404, reviewed adoption and extension/global-rule audits remain open. |
-| C2 — Transcription | S1 | Account for selected global rules/appendices and every source region; give each old gap a source-backed disposition with geometry/continuation/footnote ownership. | Partial: 2,076 source-backed dispositions, 581 unresolved old gaps; all 4,128 pages/11 required region clauses accounted. Diagram constraints, global rules, footnotes and continuation ownership remain open. |
+| C2 — Transcription | S1 | Account for selected global rules/appendices and every source region; give each old gap a source-backed disposition with geometry/continuation/footnote ownership. | Historical backlog accounted: 2,657 source-backed dispositions, zero unassigned and seven explicit source-conflict records. All 4,128 pages/11 required region clauses accounted. C2 remains partial for source conflicts, diagram constraints, global rules, footnotes and continuation ownership. |
 | C3 — Legal domains | S1 | Reviewed legal-form grammar and bidirectional manual/XED dispositions, including AMD forms absent from XED and feature-dependent aliases. | Partial: v3 memory-REP domain enumerates 56 canonical AMD points from 516 source anchors. Vendor denominator, XED reconciliation and wider grammar remain open. |
 | C4 — Binding checker | S1/Q0 | Separate authoritative schema; checked domain totality, overlaps and dispatch; solver unknowns and unbound required domains remain open. | Partial: v3 validates 111 fresh profile observations; supported counts are 3/24/28/56 for v12–v15. v15 completes this finite plain-dependency domain; all 10,569 full symbolic-domain bindings remain open. |
 | R1 — Memory REP | S2/S4 | Review recipes and fresh BIL for the remaining default-address memory-string tuples; qualify a successor profile while freezing v12. The 28-tuple planning matrix is not an encoding denominator. | Complete for the finite 28-tuple scope: v13/v14 producer/oracle/transport gates, 416 native parity instances, 259 native refusal controls and compatibility regressions pass. Full encoding, fault and proof-consumer coverage remain separate. |
@@ -552,24 +552,27 @@ transcriptions, observations and reports remain ignored run products.
    controls pass. Scope/extension review, supplementary publications, global
    rules and versioned migration review remain open; candidate adoption is
    never inferred from equal normalized hashes or a passing products check.
-2. **C2 geometry and source ownership.** Fresh extraction/check reconstructs
-   all three historical instruction-reference publications. The first
-   2026-10-23 pass gave 1,726 dispositions/931 unresolved; the follow-up adds
-   350 dispositions with every original gap ID/object retained and no
-   regression. Current Vol3 counts are 14 dispositions/145 unresolved, Vol4
-   1,718/269 and Vol5 344/167: 2,076 dispositions and 581 unresolved overall.
-   The additions comprise 41 centered mnemonic/operand/opcode dispositions,
-   39 literal wrapped 3DNow encoding dispositions and 270 source-owned
-   diagram classifications. Diagram operations and constraints remain
-   explicitly unparsed. Twenty-three geometry plus thirteen historical
-   extraction controls pass, including actual ADDPD/CMOV/AES and five new
-   Vol5 fixtures, byte/column/owner ambiguity controls and the refused AES
-   outline-owner mismatch. Vol4 retains 241 unparsed table-line gaps.
+2. **C2 geometry and source ownership.** The first 2026-10-23 pass gave
+   1,726 dispositions/931 unresolved; the next added 350. The historical-gap
+   completion pass adds the remaining 581: 145 Vol3, 269 Vol4 and 167 Vol5.
+   Fresh extraction/check preserves every original ID, ordinal, object and
+   source address, with all earlier dispositions unchanged. Current totals
+   are 159/1,987/511 dispositions and zero unassigned records. Seven Vol4
+   records explicitly retain source conflicts; no intended encoding correction
+   is invented. Grouped CMOV/SETcc cells, literal fragments, heading overlays,
+   word-box splitting and repeated-line assignments have narrowly bounded
+   rules. Material records retain unparsed constraints. Actual fixtures and
+   adversarial controls cover all these rules, including omitted/duplicated
+   source occurrences and foreign column material. The generic parser's
+   refusal controls remain separately exercised.
+   Geometry and region products bind the nine-module extraction dependency
+   closure; editing a recovery helper invalidates both finite binding registries.
    All five volumes' 4,128 pages and eleven required region clauses pass
-   fresh region enumeration/checking; complete constraint parsing, footnotes,
-   merged cells and all 33 cross-page continuation candidates remain open.
-   The canonical design records the checked extractor source identity;
-   C2 and source completeness remain incomplete.
+   region enumeration/checking. Complete constraint parsing, source conflicts,
+   footnotes and all 33 cross-page continuation candidates remain open.
+   [Canonical C2 findings](../../docs/Ariadne/amd64-coverage-design.md#102-geometry-and-source-region-execution-c2)
+   distinguish `oldGapBacklogClosed` from the still-false C2/source-completeness
+   gates. Continue those wider audits, not a deleted or renumbered backlog.
 3. **C3/C4 finite legal-domain pilot.** Versioned legal-form/profile-binding
    fixtures enumerate 24 canonical F3 MOVS/STOS/CMPS byte/environment points,
    with three supported and 21 explicit unsupported points for v12 plain
@@ -577,11 +580,20 @@ transcriptions, observations and reports remain ignored run products.
    unknown grammar/budgets, malformed provenance and stale bindings. Initial
    source-bound producer observations pass 720 independent comparisons and
    the exact-lift Rust admission observer. After source freeze, the final
-   campaign reseals thirty implementation identities, obtains fresh BIL and
+   historical-gap campaign reseals thirty-nine implementation identities, obtains fresh BIL and
    reruns the oracle/Rust observer; `check --require-bindings` passes. Further
    bound source changes require that fresh campaign again. Full
    source grammar, bidirectional XED reconciliation and implementation remain
    open, and the pilot establishes no vendor-wide coverage percentage.
+
+The historical-gap continuation passes 61 geometry controls, thirteen original
+extraction controls, 145 BAP Python tests and 328 tooling tests. Both finite
+binding campaigns are rerun with actual BAP and Rust observers after source
+freeze: v2 binds 39 implementation sources and v3 binds 61, including all three
+volume helpers. The v3 domain remains 56 points/111 profile observations.
+The current reading view is refreshed; the preceding 581-gap view is preserved
+as a distinct archive version. Record this scoped result in `CHECKPOINTS.md`
+and commit/push the continuation under the user's publication instruction.
 
 Run a fresh `tools/amd64_source_corpus.py reproduce` campaign before
 `check-products --require-all`; checking a stored product set does not rerun

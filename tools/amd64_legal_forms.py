@@ -117,9 +117,13 @@ def point_key(byte_string, environment):
 
 
 def current_sources(root=ROOT):
+    from amd64_manual_geometry import extractor_sources
+
+    root = Path(root)
     names = set(IMPLEMENTATION_SOURCES)
-    names.update(str(path.relative_to(root)) for path in (Path(root) / "src/bap").glob("*.rs"))
-    return {name: sha(Path(root) / name) for name in sorted(names)}
+    names.update(extractor_sources(root))
+    names.update(str(path.relative_to(root)) for path in (root / "src/bap").glob("*.rs"))
+    return {name: sha(root / name) for name in sorted(names)}
 
 
 def validate_axes(axes):

@@ -1,7 +1,7 @@
 {
   "archived": "2026-10-16",
   "scope": "Conversation presentation archive; canonical designs stay in docs/ and plan owners now live in .agents/plans/. No new analysis or qualification.",
-  "report_count": 48,
+  "report_count": 49,
   "markdown_html_pairs_including_index": 21,
   "source_session": "01a12ddc-4e59-7cb2-b5aa-67a8e522c597",
   "recovered_reports": [
@@ -840,12 +840,12 @@
       "sha256": "2667f3af9200452de3e195dc17664344a094f718310fb48d7527f5a02999ac33"
     },
     "ariadne-reports-index.html": {
-      "bytes": 20087,
-      "sha256": "0cea5ea19f36452e29f7e8ea9a1855af73bb13b5ee7d9e869d0cd5a64a6f02ba"
+      "bytes": 20668,
+      "sha256": "dd810f9499596623f47e8c03ab356f92deadda0ce5de5a8bfaa6541f5a60a077"
     },
     "ariadne-reports-index.md": {
-      "bytes": 13417,
-      "sha256": "0d7a119bd14977266b02c673f11545f2dc39ca14275fc7b08075c4e5e7cf5794"
+      "bytes": 13939,
+      "sha256": "2ffd5db7e80af250643f1ad19d73c3513dbe92f314508357722263b3f7655f54"
     },
     "ariadne-resolver-structural-types-20261015.html": {
       "bytes": 32858,
@@ -1032,16 +1032,16 @@
       "sha256": "cf8c808abd8b96ff3ee9091d7c3b50e5b5df9427cd33060b7d9f5be16791d881"
     },
     "ariadne-amd64-coverage-execution-20261023/index.html": {
-      "bytes": 88845,
-      "sha256": "abb07ab7d97882121da9bb67ba7807141cb7f8f245cb35e1a39f42e084363436"
+      "bytes": 92085,
+      "sha256": "50ac362b16d3b46538f4bf6a6d5ba3e4be618778735c11993058f920c2e02e19"
     },
     "ariadne-amd64-coverage-execution-20261023/architecture.svg": {
-      "bytes": 13073,
-      "sha256": "d826d28a607da2d4bb71b3e232de8d40c0da9a91776965ce64bc3670b4f8086e"
+      "bytes": 13071,
+      "sha256": "f85eeb2f70c889906ea618369569f4cf75e58c3ae54c54539c16c95681a70704"
     },
     "ariadne-amd64-coverage-execution-20261023/render.py": {
-      "bytes": 18220,
-      "sha256": "358fd6eec091a7a153b9bc9e15b54013e57f65aa01759dd3b2dc8f06127f9fb5"
+      "bytes": 18544,
+      "sha256": "19fb7922352f249c530b491306d2df38e840b38589ca3fa244607ff6bf06e686"
     },
     "ariadne-amd64-coverage-execution-pre-native-20261023/render.py": {
       "bytes": 17114,
@@ -1074,10 +1074,26 @@
     "ariadne-amd64-coverage-execution-r1-qualified-20261023/index.html": {
       "bytes": 76731,
       "sha256": "5325982cb054fd7e3a135fe39e9ef292e8fca6d8feb71414434965182f7acdd6"
+    },
+    "ariadne-amd64-coverage-execution-gap581-20261023/render.py": {
+      "bytes": 18220,
+      "sha256": "358fd6eec091a7a153b9bc9e15b54013e57f65aa01759dd3b2dc8f06127f9fb5"
+    },
+    "ariadne-amd64-coverage-execution-gap581-20261023/provenance.json": {
+      "bytes": 4260,
+      "sha256": "7992a34de22ac32157375ab5aa5d2bb0789c46771c4a224427479b5f7f9315ca"
+    },
+    "ariadne-amd64-coverage-execution-gap581-20261023/architecture.svg": {
+      "bytes": 13073,
+      "sha256": "d826d28a607da2d4bb71b3e232de8d40c0da9a91776965ce64bc3670b4f8086e"
+    },
+    "ariadne-amd64-coverage-execution-gap581-20261023/index.html": {
+      "bytes": 88845,
+      "sha256": "abb07ab7d97882121da9bb67ba7807141cb7f8f245cb35e1a39f42e084363436"
     }
   },
   "directory": ".agents/chatdocs/",
-  "html_documents_including_index": 49,
+  "html_documents_including_index": 50,
   "markdown_documents_including_index": 22,
   "source_review_documents": [
     {
@@ -1954,40 +1970,56 @@
         "ariadne-reports-index.md": "93b53ff37a8d4b7e50a55eeda9b499d85408e4b95cce42068dba6de4669709b0"
       },
       "date": "2026-10-23",
-      "source_revision": "e44ce2be16dcf2c9e9ba30dc1999280e2935270e",
-      "source_state": "current uncommitted C1\u2013C4 progress and locally validated AMD v15 address-size REP; current v15 native gate pending specific handoff approval",
-      "scope": "Presentation of 2076 manual-gap dispositions with 581 unresolved, 56 AMD-premise canonical REP tuples, 178080 numeric comparisons, 448 local capture instances and 111 finite binding observations; current v15 native qualification and broader source/domain/full-coverage gates remain open. Earlier R1 native results keep their historical scope; rendering adds no qualification.",
+      "source_revision": "6c3fa964ce327874c24dbcc0906fd7cff2acfa9c",
+      "source_state": "6c3fa96 plus current historical manual-gap transcription work; current v15 native gate retains its earlier pending status",
+      "scope": "All 2657 historical gaps have source-backed dispositions, including seven explicit source conflicts and zero unassigned records. The final 581 assignments preserve every original obligation and all 2076 prior dispositions. Fresh reconstruction, 61 geometry controls and finite v2/v3 BAP/Rust binding campaigns pass; source/constraint/encoding completeness, v15 native qualification and full AMD64 coverage remain open. Rendering adds no qualification.",
       "canonical_source": "docs/Ariadne/amd64-coverage-design.md",
       "canonical_source_sha256": {
-        "docs/Ariadne/amd64-coverage-design.md": "d9b0dc77b3120053913d5c61e02e5cf5350ac9ea36dcbc3ab80882070adaab4f",
-        "docs/Ariadne/amd64-coverage-architecture.svg": "d826d28a607da2d4bb71b3e232de8d40c0da9a91776965ce64bc3670b4f8086e"
+        "docs/Ariadne/amd64-coverage-design.md": "50ac6544e77b16955932aa9cbadc5eddf3700fc5c49cc5c79b4ed10d55037152",
+        "docs/Ariadne/amd64-coverage-architecture.svg": "f85eeb2f70c889906ea618369569f4cf75e58c3ae54c54539c16c95681a70704"
       },
       "renderer": "ariadne-amd64-coverage-execution-20261023/render.py",
       "validation": {
         "html_documents_checked": 2,
         "markdown_indexes_checked": 1,
-        "local_references_checked": 252,
+        "local_references_checked": 260,
         "new_page_unique_ids": 36,
         "inline_svg_xml_validated": 1,
         "standalone_svg_xml_validated": 1,
         "standalone_svg_portable_attributes": true,
         "browser_rendering_inspected": false,
-        "application_tests_run": false
+        "application_tests_run": false,
+        "svg_raster_inspected": true,
+        "svg_raster_sha256": "f85eeb2f70c889906ea618369569f4cf75e58c3ae54c54539c16c95681a70704"
       },
-      "diagram_derivation": "Current canonical architecture SVG copied byte-for-byte; historical proposal, pre-native execution and R1-qualified execution SVGs remain preserved in distinct archive directories.",
+      "diagram_derivation": "Current canonical architecture SVG copied byte-for-byte; historical proposal, pre-native, R1-qualified and published 581-gap execution SVGs remain preserved in distinct archive directories.",
       "presentation": {
         "requested": "wslview",
         "state": "launched",
         "launch_succeeded": true,
         "launch_exit_code": 0,
+        "launch_completed_at": "2026-10-23T11:19:06.880652+00:00",
+        "launch_attempts": [
+          {
+            "environment": "sandbox",
+            "exit_code": 1,
+            "result": "Windows interop unavailable in sandbox: stale WSL_INTEROP"
+          },
+          {
+            "environment": "approved host execution",
+            "exit_code": 0,
+            "result": "wslview launch succeeded"
+          }
+        ],
         "visual_inspection": false,
         "diagram_visual_inspection": true,
-        "visual_inspection_limit": "Refreshed HTML and SVG have not been visually inspected. Historical launch metadata belongs to the preserved R1-qualified and pre-native versions.",
-        "launch_completed_at": "2026-10-23T10:11:39+00:00"
+        "diagram_visual_inspection_sha256": "f85eeb2f70c889906ea618369569f4cf75e58c3ae54c54539c16c95681a70704",
+        "diagram_visual_inspection_source": "Parent agent inspected a raster of the current canonical SVG; archived SVG is byte-identical.",
+        "visual_inspection_limit": "Full HTML browser rendering was not inspected. wslview exit 0 confirms launch only; the standalone SVG was inspected separately."
       },
       "predecessor": {
-        "html": "ariadne-amd64-coverage-execution-r1-qualified-20261023/index.html",
-        "purpose": "Preserved completed finite R1 native qualification before R2/v15 work."
+        "html": "ariadne-amd64-coverage-execution-gap581-20261023/index.html",
+        "purpose": "Preserved published 581-gap view before the next manual transcription pass."
       }
     },
     {
@@ -2121,6 +2153,72 @@
         "visual_inspection": false,
         "note": "Original launch metadata retained in original_presentation; no launch occurred while freezing."
       }
+    },
+    {
+      "html": "ariadne-amd64-coverage-execution-gap581-20261023/index.html",
+      "previous_index_sha256": {
+        "ariadne-reports-index.html": "e062d8b0d7b0638dde65dfc4dc411090bb71b3b729191d2d6446a09b83349c0b",
+        "ariadne-reports-index.md": "93b53ff37a8d4b7e50a55eeda9b499d85408e4b95cce42068dba6de4669709b0"
+      },
+      "date": "2026-10-23",
+      "source_revision": "6c3fa964ce327874c24dbcc0906fd7cff2acfa9c",
+      "source_state": "Historical published C1-C4 and AMD v15 local-validation progress before the remaining 581 transcription gaps were processed.",
+      "scope": "Frozen published reading view with 2076 dispositions and 581 unresolved manual gaps, 56 AMD-premise REP tuples, and v15 local qualification with native handoff pending; byte-preserved presentation and provenance add no qualification.",
+      "canonical_source": "docs/Ariadne/amd64-coverage-design.md",
+      "canonical_source_sha256": {
+        "docs/Ariadne/amd64-coverage-design.md": "d9b0dc77b3120053913d5c61e02e5cf5350ac9ea36dcbc3ab80882070adaab4f",
+        "docs/Ariadne/amd64-coverage-architecture.svg": "d826d28a607da2d4bb71b3e232de8d40c0da9a91776965ce64bc3670b4f8086e"
+      },
+      "renderer": "ariadne-amd64-coverage-execution-gap581-20261023/render.py",
+      "validation": {
+        "html_documents_checked": 2,
+        "markdown_indexes_checked": 1,
+        "local_references_checked": 252,
+        "new_page_unique_ids": 36,
+        "inline_svg_xml_validated": 1,
+        "standalone_svg_xml_validated": 1,
+        "standalone_svg_portable_attributes": true,
+        "browser_rendering_inspected": false,
+        "application_tests_run": false
+      },
+      "diagram_derivation": "Current canonical architecture SVG copied byte-for-byte; historical proposal, pre-native execution and R1-qualified execution SVGs remain preserved in distinct archive directories.",
+      "presentation": {
+        "state": "not-launched",
+        "launch_succeeded": null,
+        "visual_inspection": false,
+        "note": "Original launch metadata retained in original_presentation; no launch occurred while freezing."
+      },
+      "predecessor": {
+        "html": "ariadne-amd64-coverage-execution-r1-qualified-20261023/index.html",
+        "purpose": "Preserved completed finite R1 native qualification before R2/v15 work."
+      },
+      "provenance": "ariadne-amd64-coverage-execution-gap581-20261023/provenance.json",
+      "frozen_from": "ariadne-amd64-coverage-execution-20261023/index.html",
+      "freeze_validation": {
+        "html_documents_checked": 2,
+        "markdown_indexes_checked": 1,
+        "local_references_checked": 258,
+        "new_page_unique_ids": 36,
+        "inline_svg_xml_validated": 1,
+        "standalone_svg_xml_validated": 1,
+        "standalone_svg_portable_attributes": true,
+        "browser_rendering_inspected": false,
+        "application_tests_run": false
+      },
+      "successor": {
+        "html": "ariadne-amd64-coverage-execution-20261023/index.html",
+        "purpose": "Current execution reading view for subsequent manual transcription and coverage progress."
+      },
+      "original_presentation": {
+        "requested": "wslview",
+        "state": "launched",
+        "launch_succeeded": true,
+        "launch_exit_code": 0,
+        "visual_inspection": false,
+        "diagram_visual_inspection": true,
+        "visual_inspection_limit": "Refreshed HTML and SVG have not been visually inspected. Historical launch metadata belongs to the preserved R1-qualified and pre-native versions.",
+        "launch_completed_at": "2026-10-23T10:11:39+00:00"
+      }
     }
   ],
   "plan_directory_relocation": {
@@ -2213,9 +2311,9 @@
   "latest_amd64_execution": {
     "date": "2026-10-23",
     "html": "ariadne-amd64-coverage-execution-20261023/index.html",
-    "source_revision": "e44ce2be16dcf2c9e9ba30dc1999280e2935270e",
-    "source_state": "current uncommitted C1\u2013C4 progress and locally validated AMD v15 address-size REP; current v15 native gate pending specific handoff approval",
-    "scope": "Presentation of 2076 manual-gap dispositions with 581 unresolved, 56 AMD-premise canonical REP tuples, 178080 numeric comparisons, 448 local capture instances and 111 finite binding observations; current v15 native qualification and broader source/domain/full-coverage gates remain open. Earlier R1 native results keep their historical scope; rendering adds no qualification.",
+    "source_revision": "6c3fa964ce327874c24dbcc0906fd7cff2acfa9c",
+    "source_state": "6c3fa96 plus current historical manual-gap transcription work; current v15 native gate retains its earlier pending status",
+    "scope": "All 2657 historical gaps have source-backed dispositions, including seven explicit source conflicts and zero unassigned records. The final 581 assignments preserve every original obligation and all 2076 prior dispositions. Fresh reconstruction, 61 geometry controls and finite v2/v3 BAP/Rust binding campaigns pass; source/constraint/encoding completeness, v15 native qualification and full AMD64 coverage remain open. Rendering adds no qualification.",
     "canonical_source": "docs/Ariadne/amd64-coverage-design.md"
   }
 }

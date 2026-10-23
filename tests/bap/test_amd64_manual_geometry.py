@@ -6,6 +6,7 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools"))
@@ -23,7 +24,7 @@ def analyze(item):
     layout[-1] = item["layoutPage"]
     tables, rows, groups = geometry.table_geometry(item["baseline"], layout,
         [dict(pdfPage=item["pdfPage"], cells=item["cells"])])
-    records = geometry.dispositions(item["publication"], item["baseline"], layout, tables, rows, groups)
+    records = geometry.dispositions(item["publication"], item["baseline"], layout, tables, rows, groups, recover=False)
     return dict(content=dict(sourceCells=item["cells"], tables=tables, rows=rows, oldGapDispositions=records),
                 contentSha256=geometry.digest(dict(tables=tables, rows=rows, dispositions=records)))
 
@@ -242,6 +243,27 @@ class ManualGeometryControls(unittest.TestCase):
         self.assertEqual(first, geometry.old_gap_id("24594", 0, copy.deepcopy(gap)))
         self.assertNotEqual(first, geometry.old_gap_id("24594", 1, gap))
         self.assertNotEqual(first, geometry.old_gap_id("26568", 0, gap))
+
+    def test_recovery_cannot_rewrite_source_obligations_or_claim_missing_evidence(self):
+        item = fixture("cmov")
+        layout = [""] * item["pdfPage"]
+        layout[-1] = item["layoutPage"]
+        tables, rows, groups = geometry.table_geometry(item["baseline"], layout,
+            [dict(pdfPage=item["pdfPage"], cells=item["cells"])])
+        patch = dict(disposition="resolved-cell", cells=[item["cells"][0]["id"]],
+                     rule="test-only-recovery", rationale="Synthetic integration attack control.")
+        for attack in (dict(originalGap={}), dict(ordinal=500), dict(cells=["absent-cell"]),
+                       dict(disposition="non-encoding-material", constraintsParsed=True)):
+            with mock.patch("amd64_manual_gap_vol3.resolve_all", return_value={0: patch | attack}):
+                with self.assertRaises(ValueError):
+                    geometry.dispositions(item["publication"], item["baseline"], layout, tables, rows, groups)
+        def mutate_source(context):
+            context["baseline"]["gaps"].pop()
+            return {}
+        with mock.patch("amd64_manual_gap_vol3.resolve_all", side_effect=mutate_source):
+            with self.assertRaisesRegex(ValueError, "immutable source context"):
+                geometry.dispositions(item["publication"], copy.deepcopy(item["baseline"]), layout,
+                                      tables, rows, groups)
 
     def test_geometry_preserves_xml_invalid_source_control_scalar(self):
         xml = '<doc><page width="200" height="100"><line><word xMin="10" yMin="20" xMax="30" yMax="30">x\x03y</word></line></page></doc>'

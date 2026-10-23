@@ -1,0 +1,612 @@
+{
+  "publication": "26569",
+  "pdfSha256": "8c8c63c5e285c50faac2e7d474cf5046f5fcccb54673f464f57a8cb171ef0767",
+  "sourceProducts": {
+    "layoutSha256": "537cbba9c89b5d12ca7056c0453cdcd3bbf524797d1bc2ee8cffa7146ed5097e",
+    "bboxSha256": "3646b5abfe4c5d0e3598d10caeb44b6619c2238bba68fef41a12085a9a87e38d",
+    "outlineSha256": "4669b5e49e2d15f31acc10745b5514cd01a9a3abedc907c97bb155434d5d123d"
+  },
+  "pages": [
+    {
+      "pdfPage": 61,
+      "layoutPage": "26569—Rev. 3.16—November 2021                                                      AMD64 Technology\n\n\n\n\nMOVD                                                 Move Doubleword or Quadword\nMoves a 32-bit or 64-bit value in one of the following ways:\n•     from a 32-bit or 64-bit general-purpose register or memory location to the low-order 32 or 64 bits\n      of an XMM register, with zero-extension to 128 bits\n•     from the low-order 32 or 64 bits of an XMM to a 32-bit or 64-bit general-purpose register or\n      memory location\n•     from a 32-bit or 64-bit general-purpose register or memory location to the low-order 32 bits (with\n      zero-extension to 64 bits) or the full 64 bits of an MMX register\n•     from the low-order 32 or the full 64 bits of an MMX register to a 32-bit or 64-bit general-purpose\n      register or memory location.\nThe MOVD instruction is a member of both the MMX and the SSE2 instruction sets. The presence of\nthis instruction set is indicated by EDX[MMX] = 1 returned by CPUID Fn0000_0001 or\nCPUID Fn8000_0001. See “CPUID” in Volume 3 for more information about the CPUID instruction.\n\nMnemonic                           Opcode         Description\n\n    MOVD mmx, reg/mem32            0F 6E /r       Move 32-bit value from a general-purpose register or\n                                                  32-bit memory location to an MMX register.\n                                                  Move 64-bit value from a general-purpose register or\n    MOVD mmx, reg/mem64            0F 6E /r       64-bit memory location to an MMX register.\n                                                  Move 32-bit value from an MMX register to a 32-bit\n    MOVD reg/mem32, mmx            0F 7E /r\n                                                  general-purpose register or memory location.\n\n    MOVD reg/mem64, mmx            0F 7E /r       Move 64-bit value from an MMX register to a 64-bit\n                                                  general-purpose register or memory location.\n\nThe following diagrams illustrate the operation of the MOVD instruction.\n\n\n\n\n                                       [AMD Public Use]\n64-Bit Media                                     MOVD                                                    31\nInstruction Reference\n",
+      "cells": [
+        {
+          "id": "pdf:61:cell:20",
+          "pdfPage": 61,
+          "rect": [
+            64.98,
+            342.52872,
+            114.41646,
+            351.74172
+          ],
+          "wordSpan": [
+            170,
+            171
+          ],
+          "wordBoxesSha256": "11d86e6bd75c7bdf0d5cd15738c0a16e5011adda5c688be6d1d36d8e018bae58",
+          "unicodeSha256": "761a18b82619631f2cb0ec62be463b62961fbabad6175e5fcfa4503d59eec265",
+          "text": "Mnemonic",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:61:cell:21",
+          "pdfPage": 61,
+          "rect": [
+            219.81816,
+            342.52872,
+            257.040672,
+            351.74172
+          ],
+          "wordSpan": [
+            171,
+            172
+          ],
+          "wordBoxesSha256": "0198cc27abf46f76aa8970472b0ff36a4acb255fadab1d124c424769bb8934fc",
+          "unicodeSha256": "c37ef4ad36a525a861229404a96b57eb0536b459772ff0f62bbcc82263a46c0c",
+          "text": "Opcode",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:61:cell:22",
+          "pdfPage": 61,
+          "rect": [
+            291.820992,
+            342.52872,
+            346.807164,
+            351.74172
+          ],
+          "wordSpan": [
+            172,
+            173
+          ],
+          "wordBoxesSha256": "c20bc28c9345c4208400930b3468dc70d33de8db4697eed5abac16496063e4ec",
+          "unicodeSha256": "526e0087cc3f254d9f86f6c7d8e23d954c4dfda2b312efc29194ae8a860106ba",
+          "text": "Description",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:61:cell:23",
+          "pdfPage": 61,
+          "rect": [
+            69.00384,
+            365.50644,
+            179.479164,
+            374.71944
+          ],
+          "wordSpan": [
+            173,
+            176
+          ],
+          "wordBoxesSha256": "97db8982000bfe13f76bb6396762e8d0a3089a1bb3f1b7b359946dae8c1beb22",
+          "unicodeSha256": "afd1c5051fd5d838731239482f3539056798b454798924f7fe6063b343d7f07c",
+          "text": "MOVD mmx, reg/mem32",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:61:cell:24",
+          "pdfPage": 61,
+          "rect": [
+            223.80216,
+            365.50644,
+            259.342428,
+            374.71944
+          ],
+          "wordSpan": [
+            176,
+            179
+          ],
+          "wordBoxesSha256": "17fb3d7c32be2406f3aed5bfba8333f0a66011028b814c2e7ab407ca066d38ab",
+          "unicodeSha256": "74d000ab7a63b326d2ca997b2fb4cb0a5e1c70901f78a1ed8e38fba8c43115ef",
+          "text": "0F 6E /r",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:61:cell:25",
+          "pdfPage": 61,
+          "rect": [
+            295.803,
+            360.52644,
+            529.103052,
+            369.73944
+          ],
+          "wordSpan": [
+            179,
+            187
+          ],
+          "wordBoxesSha256": "c9e931356ce9ec971ba4bab61359db2499ca0272a0a9f561622d6f0255b6b67b",
+          "unicodeSha256": "34c3f0a3eafadf04e7ff2852d3682dc7c1a70ba3620ef327fff76f5d2868a5d3",
+          "text": "Move 32-bit value from a general-purpose register or",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:61:cell:26",
+          "pdfPage": 61,
+          "rect": [
+            295.803,
+            370.48644,
+            486.254136,
+            379.69944
+          ],
+          "wordSpan": [
+            187,
+            194
+          ],
+          "wordBoxesSha256": "27807cf1c07d3fbe4232109184d823de8d8c5ab314c031e88fddcad63fd4e1ab",
+          "unicodeSha256": "565ed3e1193697273bad67d5ee932692ef7318918d89be00dab9b3b138d23fbc",
+          "text": "32-bit memory location to an MMX register.",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:61:cell:27",
+          "pdfPage": 61,
+          "rect": [
+            69.00384,
+            393.52392,
+            179.479164,
+            402.73692
+          ],
+          "wordSpan": [
+            194,
+            197
+          ],
+          "wordBoxesSha256": "57929182161d4603cb472aacb23106d742ce852654931186924ab5b37d959503",
+          "unicodeSha256": "a362c6f8b0ab14e439e179b16c1b1736b88059906bf0e22d1e9f97c079d6b785",
+          "text": "MOVD mmx, reg/mem64",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:61:cell:28",
+          "pdfPage": 61,
+          "rect": [
+            223.80216,
+            393.52392,
+            259.342428,
+            402.73692
+          ],
+          "wordSpan": [
+            197,
+            200
+          ],
+          "wordBoxesSha256": "b98f261de52a510667e25785c0095ac606e5029c82c1f9df00a4201e665286df",
+          "unicodeSha256": "74d000ab7a63b326d2ca997b2fb4cb0a5e1c70901f78a1ed8e38fba8c43115ef",
+          "text": "0F 6E /r",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:61:cell:29",
+          "pdfPage": 61,
+          "rect": [
+            295.803,
+            388.48416,
+            529.103052,
+            397.69716
+          ],
+          "wordSpan": [
+            200,
+            208
+          ],
+          "wordBoxesSha256": "f18faa04f59a3bfa566d6da845d69eaa0e175aab325498fbd0a0f8b68687fb9e",
+          "unicodeSha256": "b065e503799519e4ffe5730fd3455923dec31f64e6e888497e8cb4376708e991",
+          "text": "Move 64-bit value from a general-purpose register or",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:61:cell:30",
+          "pdfPage": 61,
+          "rect": [
+            295.803,
+            398.50392,
+            486.254136,
+            407.71692
+          ],
+          "wordSpan": [
+            208,
+            215
+          ],
+          "wordBoxesSha256": "5c346bdbae37948078849d45e6748a2e4bf798e003ca10cf1e85aec89f7b9fae",
+          "unicodeSha256": "3a99c415c3ad2c08187640e708742b4375d5b56d1722415b2b26cfdc0124fbb2",
+          "text": "64-bit memory location to an MMX register.",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:61:cell:31",
+          "pdfPage": 61,
+          "rect": [
+            69.00384,
+            421.48164,
+            179.456256,
+            430.69464
+          ],
+          "wordSpan": [
+            215,
+            218
+          ],
+          "wordBoxesSha256": "c5e490c71cffe222ca5294be1aa0886b05e26a376b95cf10cc2846317f0edb5f",
+          "unicodeSha256": "850b2e2ed4a0b4368973950cb6fccfd14072ad1c7662adcee26a826bc667023e",
+          "text": "MOVD reg/mem32, mmx",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:61:cell:32",
+          "pdfPage": 61,
+          "rect": [
+            223.7922,
+            421.48164,
+            259.332468,
+            430.69464
+          ],
+          "wordSpan": [
+            218,
+            221
+          ],
+          "wordBoxesSha256": "b4ac8c090625af1ca92c7b208526491156a3e73818eac79d1a1b361f41595755",
+          "unicodeSha256": "ffdc8847d6ae854bdeab9299e60f256ebee07fb5a71dc64bc50f13ed83d7f7c9",
+          "text": "0F 7E /r",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:61:cell:33",
+          "pdfPage": 61,
+          "rect": [
+            295.79304,
+            416.50164,
+            520.788444,
+            425.71464
+          ],
+          "wordSpan": [
+            221,
+            231
+          ],
+          "wordBoxesSha256": "aa1dcb8c1630afe97a07d1f717df308be8a59c1dd1cf2f4e212afe6701676da7",
+          "unicodeSha256": "2d2d4cb8220d5682422f1c7d5b6fbc2cba41134e21665409741e7d7229256f38",
+          "text": "Move 32-bit value from an MMX register to a 32-bit",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:61:cell:34",
+          "pdfPage": 61,
+          "rect": [
+            295.79304,
+            426.5214,
+            495.125508,
+            435.7344
+          ],
+          "wordSpan": [
+            231,
+            236
+          ],
+          "wordBoxesSha256": "a9a18510cdab3bf0f56e0dea9ee245393f5384047656f3f1bbd035d25490d169",
+          "unicodeSha256": "40b82bb40d15c4c163a266b0402b71082d5895f19eaeca5b4e609b18ab2bea3f",
+          "text": "general-purpose register or memory location.",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:61:cell:35",
+          "pdfPage": 61,
+          "rect": [
+            68.99388,
+            449.49912,
+            179.446296,
+            458.71212
+          ],
+          "wordSpan": [
+            236,
+            239
+          ],
+          "wordBoxesSha256": "e200219c0e25a1dfd3b46d8a2ddd7f62210880b842ec3842127aec0ce57d7aa2",
+          "unicodeSha256": "9b0122682b7a17f573bca7ddf87cf22d28d57bd7bd059cf3593fa97c78d8bdf2",
+          "text": "MOVD reg/mem64, mmx",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:61:cell:36",
+          "pdfPage": 61,
+          "rect": [
+            223.78224,
+            449.49912,
+            259.322508,
+            458.71212
+          ],
+          "wordSpan": [
+            239,
+            242
+          ],
+          "wordBoxesSha256": "d029311fb78b828fa8c070605f586d83de5e36bd1b8cf1e13671117cc33bfaf3",
+          "unicodeSha256": "ffdc8847d6ae854bdeab9299e60f256ebee07fb5a71dc64bc50f13ed83d7f7c9",
+          "text": "0F 7E /r",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:61:cell:37",
+          "pdfPage": 61,
+          "rect": [
+            295.78308,
+            444.51912,
+            520.778484,
+            453.73212
+          ],
+          "wordSpan": [
+            242,
+            252
+          ],
+          "wordBoxesSha256": "84f713410265143a3cfa6a308a8700ff273466ddbcea19f4aa3596bfd2e792c2",
+          "unicodeSha256": "095194904ceab7de270412746b312611f220eba6952ac01d568cf3baa56174a8",
+          "text": "Move 64-bit value from an MMX register to a 64-bit",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:61:cell:38",
+          "pdfPage": 61,
+          "rect": [
+            295.78308,
+            454.47912,
+            495.115548,
+            463.69212
+          ],
+          "wordSpan": [
+            252,
+            257
+          ],
+          "wordBoxesSha256": "6d5f690b547c2dd2e4bef2c3f38fb550f955658ce6ad45c463516830235da8d5",
+          "unicodeSha256": "40b82bb40d15c4c163a266b0402b71082d5895f19eaeca5b4e609b18ab2bea3f",
+          "text": "general-purpose register or memory location.",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:61:cell:39",
+          "pdfPage": 61,
+          "rect": [
+            63.0,
+            480.804,
+            414.06,
+            491.604
+          ],
+          "wordSpan": [
+            257,
+            267
+          ],
+          "wordBoxesSha256": "2badba0042ffa622a0f9466b6e0465bce6adebb46ae46beec0486289d8abb58a",
+          "unicodeSha256": "9f2720fe21b8fcbc33d77b81f081c737997a9f2ed16655fefbbf300dedcbf78f",
+          "text": "The following diagrams illustrate the operation of the MOVD instruction.",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:61:cell:40",
+          "pdfPage": 61,
+          "rect": [
+            63.0,
+            747.45636,
+            127.676592,
+            757.61286
+          ],
+          "wordSpan": [
+            267,
+            269
+          ],
+          "wordBoxesSha256": "640925f85f9df846f3cf76c26a82fd416e075cc0484e2bb41fd36ddd8cc25e5f",
+          "unicodeSha256": "559cd422c8eb616d60f7ec3931d6009718a31469d2b6943e412cb842f6c1989d",
+          "text": "64-Bit Media",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:61:cell:41",
+          "pdfPage": 61,
+          "rect": [
+            63.0,
+            760.47864,
+            175.94577,
+            770.63514
+          ],
+          "wordSpan": [
+            269,
+            271
+          ],
+          "wordBoxesSha256": "10062a6125c333003deecc250aaebc57c882c3c52ae058447afbb1c3b6d56b7b",
+          "unicodeSha256": "8b58656c57d63c3ed9f4749f0b51bcea085c2cd71d09d39c4ae8b88ada841c60",
+          "text": "Instruction Reference",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:61:cell:42",
+          "pdfPage": 61,
+          "rect": [
+            241.747009,
+            744.47078,
+            370.247009,
+            772.33078
+          ],
+          "wordSpan": [
+            271,
+            274
+          ],
+          "wordBoxesSha256": "f30d12229791ea0e3864dc4b97ce9ed1307e9b5284372741c55917e024ea68e6",
+          "unicodeSha256": "cb9a32cb7cda694a9471249208941a694cc0a803969c2bac64dd553086c94897",
+          "text": "[AMD Public Use]",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:61:cell:43",
+          "pdfPage": 61,
+          "rect": [
+            289.45152,
+            747.45636,
+            322.449714,
+            757.61286
+          ],
+          "wordSpan": [
+            274,
+            275
+          ],
+          "wordBoxesSha256": "841f412a6f7094bec203c20c7cae6b1b318e4cb0cf39b5e5f6ca9c56aeb036aa",
+          "unicodeSha256": "968c7796eeaea71b6ee78fc308c7480f7e2adce07257ec56ec5ea36510fc05d2",
+          "text": "MOVD",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        },
+        {
+          "id": "pdf:61:cell:44",
+          "pdfPage": 61,
+          "rect": [
+            536.81994,
+            747.45636,
+            548.983584,
+            757.61286
+          ],
+          "wordSpan": [
+            275,
+            276
+          ],
+          "wordBoxesSha256": "b2e96340abdc6404182d420624a2f8a88dee364241c86ec17582df48fafa7836",
+          "unicodeSha256": "eb1e33e8a81b697b75855af6bfcdbcbf7cbbde9f94962ceaec1ed8af21f5a50f",
+          "text": "31",
+          "glyphSpan": null,
+          "glyphEvidence": "not-extracted: source is Unicode word boxes"
+        }
+      ]
+    }
+  ],
+  "gapOrdinals": [
+    18,
+    19
+  ],
+  "baseline": {
+    "entries": [
+      {
+        "chapter": "1 64-Bit Media Instruction Reference",
+        "chapterOrdinal": 13,
+        "id": "amd-entry:0013",
+        "pdfEndPage": 63,
+        "pdfPage": 61,
+        "subsections": [],
+        "tableIds": [
+          "amd-table:0013"
+        ],
+        "title": "MOVD",
+        "uri": "#nameddest=G7.2309360"
+      }
+    ],
+    "tables": [
+      {
+        "entryIds": [
+          "amd-entry:0013"
+        ],
+        "header": "Mnemonic                           Opcode         Description",
+        "headerLine": 20,
+        "id": "amd-table:0013",
+        "pdfPage": 61
+      }
+    ],
+    "rows": [
+      {
+        "encodingCells": [
+          "0F 6E /r"
+        ],
+        "entryIds": [
+          "amd-entry:0013"
+        ],
+        "id": "amd-row:00014",
+        "mnemonic": "MOVD mmx, reg/mem32",
+        "source": {
+          "line": 22,
+          "pdfPage": 61,
+          "textSha256": "69e39b258ab4b5f5583292442dc9a0e06704b65445b35e9f87e0ac6543f83035"
+        },
+        "table": "amd-table:0013"
+      },
+      {
+        "encodingCells": [
+          "0F 6E /r"
+        ],
+        "entryIds": [
+          "amd-entry:0013"
+        ],
+        "id": "amd-row:00015",
+        "mnemonic": "MOVD mmx, reg/mem64",
+        "source": {
+          "line": 25,
+          "pdfPage": 61,
+          "textSha256": "0fe0c6b37aaba822c339e2620b742ac0e6c362654edefae1e8e013445f1223a4"
+        },
+        "table": "amd-table:0013"
+      },
+      {
+        "encodingCells": [
+          "0F 7E /r"
+        ],
+        "entryIds": [
+          "amd-entry:0013"
+        ],
+        "id": "amd-row:00016",
+        "mnemonic": "MOVD reg/mem32, mmx",
+        "source": {
+          "line": 27,
+          "pdfPage": 61,
+          "textSha256": "aa2ee9627bb103ccf9de3f7b24bf84bc44382f25dbc94f76ce15c1e081877acb"
+        },
+        "table": "amd-table:0013"
+      },
+      {
+        "encodingCells": [
+          "0F 7E /r"
+        ],
+        "entryIds": [
+          "amd-entry:0013"
+        ],
+        "id": "amd-row:00017",
+        "mnemonic": "MOVD reg/mem64, mmx",
+        "source": {
+          "line": 30,
+          "pdfPage": 61,
+          "textSha256": "f8d945981bc1f8e744e3ddcbcec1f4fc4606798cc521924cabba63f6b342f558"
+        },
+        "table": "amd-table:0013"
+      }
+    ],
+    "gaps": [
+      {
+        "kind": "unparsed-table-line",
+        "source": {
+          "line": 33,
+          "pdfPage": 61,
+          "textSha256": "9f2720fe21b8fcbc33d77b81f081c737997a9f2ed16655fefbbf300dedcbf78f"
+        },
+        "sourceText": "The following diagrams illustrate the operation of the MOVD instruction.",
+        "table": "amd-table:0013"
+      },
+      {
+        "kind": "unparsed-table-line",
+        "source": {
+          "line": 39,
+          "pdfPage": 61,
+          "textSha256": "b35252036889bdc99ff79535d54aa3c2fc09cd55be7b353e439d861b1ac9a724"
+        },
+        "sourceText": "64-Bit Media                                     MOVD                                                    31",
+        "table": "amd-table:0013"
+      }
+    ]
+  }
+}

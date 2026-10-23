@@ -1,0 +1,70 @@
+{
+  "schema": "ariadne-chatdoc-frozen-reading-view-v1",
+  "frozen_at": "2026-10-23T11:04:19.185504+00:00",
+  "source_directory": "ariadne-amd64-coverage-execution-20261023",
+  "published_source_revision": "6c3fa964ce327874c24dbcc0906fd7cff2acfa9c",
+  "status": "Historical published 581-gap reading view: 2076 manual-gap dispositions, 581 unresolved, and 56 AMD-premise REP tuples with v15 local validation; current v15 native qualification remained pending.",
+  "preservation": "index.html, architecture.svg and render.py copied byte-for-byte from the actual published execution view. Original canonical hashes and launch metadata remain below; the changing canonical document was not used to regenerate this version. Preservation adds no qualification or browser launch.",
+  "renderer_policy": "The preserved renderer is historical source. Do not run it in this frozen directory: it reads the changing canonical document. Refresh the current execution reading view instead.",
+  "files": {
+    "index.html": {
+      "bytes": 88845,
+      "sha256": "abb07ab7d97882121da9bb67ba7807141cb7f8f245cb35e1a39f42e084363436"
+    },
+    "architecture.svg": {
+      "bytes": 13073,
+      "sha256": "d826d28a607da2d4bb71b3e232de8d40c0da9a91776965ce64bc3670b4f8086e"
+    },
+    "render.py": {
+      "bytes": 18220,
+      "sha256": "358fd6eec091a7a153b9bc9e15b54013e57f65aa01759dd3b2dc8f06127f9fb5"
+    }
+  },
+  "original_source_review_document": {
+    "html": "ariadne-amd64-coverage-execution-20261023/index.html",
+    "previous_index_sha256": {
+      "ariadne-reports-index.html": "e062d8b0d7b0638dde65dfc4dc411090bb71b3b729191d2d6446a09b83349c0b",
+      "ariadne-reports-index.md": "93b53ff37a8d4b7e50a55eeda9b499d85408e4b95cce42068dba6de4669709b0"
+    },
+    "date": "2026-10-23",
+    "source_revision": "e44ce2be16dcf2c9e9ba30dc1999280e2935270e",
+    "source_state": "current uncommitted C1\u2013C4 progress and locally validated AMD v15 address-size REP; current v15 native gate pending specific handoff approval",
+    "scope": "Presentation of 2076 manual-gap dispositions with 581 unresolved, 56 AMD-premise canonical REP tuples, 178080 numeric comparisons, 448 local capture instances and 111 finite binding observations; current v15 native qualification and broader source/domain/full-coverage gates remain open. Earlier R1 native results keep their historical scope; rendering adds no qualification.",
+    "canonical_source": "docs/Ariadne/amd64-coverage-design.md",
+    "canonical_source_sha256": {
+      "docs/Ariadne/amd64-coverage-design.md": "d9b0dc77b3120053913d5c61e02e5cf5350ac9ea36dcbc3ab80882070adaab4f",
+      "docs/Ariadne/amd64-coverage-architecture.svg": "d826d28a607da2d4bb71b3e232de8d40c0da9a91776965ce64bc3670b4f8086e"
+    },
+    "renderer": "ariadne-amd64-coverage-execution-20261023/render.py",
+    "validation": {
+      "html_documents_checked": 2,
+      "markdown_indexes_checked": 1,
+      "local_references_checked": 252,
+      "new_page_unique_ids": 36,
+      "inline_svg_xml_validated": 1,
+      "standalone_svg_xml_validated": 1,
+      "standalone_svg_portable_attributes": true,
+      "browser_rendering_inspected": false,
+      "application_tests_run": false
+    },
+    "diagram_derivation": "Current canonical architecture SVG copied byte-for-byte; historical proposal, pre-native execution and R1-qualified execution SVGs remain preserved in distinct archive directories.",
+    "presentation": {
+      "requested": "wslview",
+      "state": "launched",
+      "launch_succeeded": true,
+      "launch_exit_code": 0,
+      "visual_inspection": false,
+      "diagram_visual_inspection": true,
+      "visual_inspection_limit": "Refreshed HTML and SVG have not been visually inspected. Historical launch metadata belongs to the preserved R1-qualified and pre-native versions.",
+      "launch_completed_at": "2026-10-23T10:11:39+00:00"
+    },
+    "predecessor": {
+      "html": "ariadne-amd64-coverage-execution-r1-qualified-20261023/index.html",
+      "purpose": "Preserved completed finite R1 native qualification before R2/v15 work."
+    }
+  },
+  "successor": {
+    "html": "../ariadne-amd64-coverage-execution-20261023/index.html",
+    "purpose": "Current manual transcription progress and remaining full AMD64 coverage limits."
+  }
+}

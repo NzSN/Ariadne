@@ -22,6 +22,57 @@ For the wider context, see the optional [documentation map](docs/documentation-m
 Current validation follows the [executable test matrix](tests/README.md). Dated run
 results below are historical; their Git links do not establish a current pass.
 
+## 2026-10-23 — Historical AMD manual-gap backlog accounted for
+
+**Status: all 581 remaining historical gaps have source-backed dispositions;
+full AMD64 coverage remains open.** The [C2 source reconstruction contract](docs/Ariadne/amd64-coverage-design.md#102-geometry-and-source-region-execution-c2)
+and its [execution plan](.agents/plans/amd64-operation-coverage.md#source-and-domain-execution-c1c4)
+record the completed historical-backlog slice.
+
+- Fresh extraction/check accounts for the remaining 145 Vol3, 269 Vol4 and
+  167 Vol5 records. The totals are now 159/1,987/511: all 2,657 original gaps
+  have a disposition, with zero unassigned records. Every original ID, ordinal,
+  gap object and legacy source address is preserved, and all 2,076 previous
+  dispositions remain unchanged. The historical v1 lock and inventory remain
+  intact.
+- The delta contains 140 resolved-cell records, twelve continuations, 422
+  non-encoding material records and seven explicit source-conflict records.
+  Narrow geometry rules cover centered CMOV/SETcc groups, wrapped encodings,
+  superscripts, combined cells, actual heading/prototype overlays and source
+  diagrams/tables/footers. Literal malformed operands, bitfields and mnemonic
+  disagreements remain visible; material/conflict constraints stay unparsed.
+  A repeated-cell assignment defect found during review is fixed and covered
+  by missing-occurrence and shared-cell rejection controls.
+- All 61 geometry controls, thirteen historical extraction controls, 145 BAP
+  Python tests and 328 tooling tests pass. Full three-volume reconstruction and
+  five-volume region checking pass, accounting for 4,128 pages and eleven
+  required region clauses. Negative controls reject lost, duplicate, moved or
+  foreign cells, conflicting owners and resealed output omissions. The nine
+  extractor/dependency identities are bound transitively in both output kinds.
+- Both finite binding registries now bind the helper closure. Fresh actual
+  BAP/source-cell/oracle/Rust campaigns pass after source freeze: v2 retains
+  24 points with three supported/21 unsupported and 39 source identities; v3
+  retains 56 AMD points, 111 profile observations and 61 source identities.
+  The 48 binding controls include independent helper-drift rejection for both
+  registries. No Rust behavior changed; the two affected Rust observers reran.
+- Rust layout and documentation-link checks pass. The canonical design, stage
+  ledger, roadmap, test matrix and architecture diagram are synchronized. The
+  [previous 581-gap reading view](.agents/chatdocs/ariadne-amd64-coverage-execution-gap581-20261023/index.html)
+  is preserved separately before refreshing the current execution view.
+  Generated corpus products, validation outputs and logs remain ignored.
+
+`oldGapBacklogClosed` is true, but source completeness, complete constraint
+parsing, legal encoding completeness and C2 completion remain false. Seven
+source-conflict records, global rules/footnotes/diagram semantics and 33
+cross-page continuation candidates remain separate obligations. Official
+Vol4/5 byte identity, all 10,569 full symbolic-domain bindings, broader
+consumers/architecture families and full AMD64 coverage remain open. The v15
+native handoff retains its earlier pending status; this source-accounting work
+does not qualify that gate.
+
+This continuation follows the request to fill the remaining 581 gaps and the
+standing instruction to record completed work here, then commit and push.
+
 ## 2026-10-23 — AMD address-size REP and coverage bindings advanced
 
 **Status: current local v15 gates pass; native v15 and full AMD64 remain open.**

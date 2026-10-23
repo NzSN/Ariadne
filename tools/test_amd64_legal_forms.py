@@ -3,6 +3,7 @@
 import copy
 import json
 from pathlib import Path
+import shutil
 import sys
 import tempfile
 import unittest
@@ -12,6 +13,44 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import amd64_legal_forms as legal
 
 FIXTURES = legal.ROOT / "tests/bap/fixtures/amd64-semantics"
+
+
+class GeometrySourceBinding(unittest.TestCase):
+    def test_changed_volume_helper_invalidates_both_binding_registries(self):
+        pilots = []
+        for suffix, sources, validate_legal, validate_bindings in (
+            ("pilot-v2", legal.current_sources, legal.validate_legal, legal.validate_bindings),
+            ("memory-rep-v3", legal.current_memory_sources,
+             legal.validate_memory_legal, legal.validate_memory_bindings),
+        ):
+            forms = legal.read(FIXTURES / ("legal-forms-" + suffix + ".json"))
+            bindings = legal.read(FIXTURES / ("profile-bindings-" + suffix + ".json"))
+            _, domains = validate_legal(forms)
+            pilots.append((suffix, forms, bindings, domains, sources, validate_bindings))
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            names = set(legal.current_memory_sources()) | {"native/bap/toolchain.lock.json"}
+            for name in names:
+                destination = root / name
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(legal.ROOT / name, destination)
+            # Bind the actual copied sources once. Later helper edits must fail
+            # against these frozen registries even though the main file is intact.
+            for _, forms, bindings, domains, sources, validate_bindings in pilots:
+                bindings["implementationSources"] = sources(root)
+                validate_bindings(bindings, forms, domains, root)
+            for volume in (3, 4, 5):
+                name = f"tools/amd64_manual_gap_vol{volume}.py"
+                helper = root / name
+                original = helper.read_bytes()
+                helper.write_bytes(original + b"\n# changed source ownership rule\n")
+                for suffix, forms, bindings, domains, sources, validate_bindings in pilots:
+                    with self.subTest(volume=volume, registry=suffix):
+                        self.assertIn(name, bindings["implementationSources"])
+                        self.assertNotEqual(bindings["implementationSources"][name], sources(root)[name])
+                        with self.assertRaisesRegex(ValueError, "stale .*source"):
+                            validate_bindings(bindings, forms, domains, root)
+                helper.write_bytes(original)
 
 
 class LegalDomains(unittest.TestCase):

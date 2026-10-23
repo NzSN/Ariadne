@@ -103,7 +103,8 @@ the [semantic assurance decision](docs/Ariadne/semantic-assurance.md). The later
 implementation coverage, with inventory and finite advanced-producer work in
 progress; this does not restore the retired proof project.
 Its [current finite execution](docs/Ariadne/amd64-coverage-design.md#10-source-review-and-validation-status)
-adds partial source reconstruction (2,076 dispositions, 581 unresolved gaps),
+accounts for all 2,657 historical manual gaps (zero unassigned, seven explicit
+source-conflict records), while broader source constraints remain unparsed. It adds
 a 56-point AMD memory-REP binding registry and separately selected v13/v14/v15
 profiles. The R1 source boundary passed 416 native parity instances and 259
 refusal controls. The AMD-specific v15 address-size successor passes local
