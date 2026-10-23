@@ -7,6 +7,9 @@
 The [resume record](../../CHECKPOINTS.md#2026-10-23--amd64-guard-replay-and-composed-fixture-resumed)
 records source fixes, the approved native continuation and remaining gates. Instruction
 inventory, broader semantics and advanced producer integration remain partial.
+The [Basic candidate follow-up](../../CHECKPOINTS.md#2026-10-23--current-basic-v9-candidate-compatibility-checked)
+passes three native tests under an isolated candidate pin; production adoption
+and historical identity remain separate.
 Full coverage is the target, not an achieved result. Implementation proceeds on both
 machine-instruction semantics and Windows unwind operations. A representative
 family survey is not an exhaustive instruction-form inventory.
@@ -91,7 +94,7 @@ operation-specific regressions at the baseline.
 | C0 | Link canonical contracts and define separate instruction/unwind coverage, gaps and compatibility. | Passed: linked contracts and plan navigation |
 | S0 | Executable family survey using actual instruction bytes; probe actual BAP lifting and Ariadne projection, preserve distinct outcomes and exact source/tool identities. | Passed finite survey: 49 families / 170 byte cases; not S1 completeness |
 | S1 | Expand S0 into a pinned exhaustive legal-form denominator across the declared AMD64 manuals/extensions; independent inventory completeness check. | Pending |
-| S2 | Close missing producer lifts in a reviewed BAP source build; pin and validate the replacement producer and retain existing semantic compatibility. | Partial: recorded four-flag v9 delivery and current finite advanced matrix; exact historical v9 positive compatibility and other producer gaps remain open |
+| S2 | Close missing producer lifts in a reviewed BAP source build; pin and validate the replacement producer and retain existing semantic compatibility. | Partial: finite advanced matrix and three Basic v9 candidate tests pass; Basic candidate adoption, historical identity and other producer gaps remain open |
 | S3 | Extend typed transport, state banks/aliases and width handling for all required SIMD, mask, x87, control/system and extended registers. | Partial finite v10/v11 FP-control state and coarsened data projection; wider banks/widths remain pending |
 | S4 | Implement exact prefix distinctions and bounded loop summaries; preserve zero-iteration paths, conditional writes, faults and resource stops. | Partial eighteen exact mandatory-count forms and data-path joins; REP and general prefix/loop contracts remain pending |
 | S5 | Implement and qualify remaining floating-point, system, exception and special-operation contracts with explicit mode/environment premises. | Pending |
@@ -101,7 +104,7 @@ operation-specific regressions at the baseline.
 | U3 | Implement handler/chained metadata and partial-prologue execution with bounded chain/cycle and frame-establishment checks. | Passed selected metadata-v1 cases; chained operation restrictions remain explicit |
 | U4 | Implement documented epilog suffixes and Windows metadata v2 descriptors, with independent reference comparison. | Implemented finite v1/v2 scope: 53 focused tests and 103 Windows comparisons pass; sparse capture and malformed terminal contexts have separate controls |
 | U5 | Implement Windows v3/APX descriptor and extended-context support as its own versioned profile; do not reinterpret earlier formats. | Pending: extended-context/canonical-frame layouts and working V3 reference not admitted |
-| Q0 | Current-source native rebuild, independent per-operation expectations, Rust/native parity where applicable, focused mutations and models, capture and root regression checks. | Partial: selected advanced native/replay/model/mutation/root checks pass below; exact v9 runtime and complete ISA/capture/timing/release campaign remain pending |
+| Q0 | Current-source native rebuild, independent per-operation expectations, Rust/native parity where applicable, focused mutations and models, capture and root regression checks. | Partial: selected advanced/native/replay/model/mutation/root checks and isolated Basic candidate tests pass; historical v9 identity, candidate adoption and complete ISA/capture/timing/release campaign remain pending |
 | Q1 | Every legal inventory row supported and exercised; all stage exits complete; document exact operation/form denominator and remaining environmental premises. | Pending |
 
 Stages may run in parallel when their source ownership does not overlap.
@@ -332,7 +335,8 @@ Their identity differs from the saved advanced pin, so only the advanced
 runtime lock is explicitly updated to the reproduced manifest/executable.
 The Basic v9 builder and lock remain immutable. Its exact old runtime is not
 available; a mismatching fresh Basic build is rejected, and positive v9
-producer compatibility remains unexercised.
+producer compatibility under the historical pin remains unexercised. The
+candidate check below separately exercises the available Basic build.
 
 After source freeze and helper rebuild, all eight advanced tests pass: the
 eighteen count compositions and seven remaining guard/target/writer/codec
@@ -359,3 +363,34 @@ unchanged. Direct root formatting against that original sibling still reports
 its existing style differences. Core-only normal dependencies stay empty.
 Fresh count effects, eighteen actual guard replays and the two-budget packaged
 table control retain their separate exercised scopes.
+
+### Current Basic v9 candidate check
+
+2026-10-23, source `faf75f7`: the follow-up tests the available Basic runtime
+under the v9 contract. The [canonical candidate contract](../../docs/Ariadne/bap-analysis-core-design.md#current-basic-v9-candidate-compatibility)
+records its manifest/executable identities and the
+[checkpoint](../../CHECKPOINTS.md#2026-10-23--current-basic-v9-candidate-compatibility-checked)
+records the result.
+
+1. Verify the current shared inputs: 647 source/test/native and Cargo files
+   match the checkout. The unrelated real Windows archive is not transferred.
+2. Run the three existing native v9 tests against each available bundle with
+   the unchanged Basic lock. Both Basic and advanced bundles are rejected at
+   the manifest hash check before semantic dispatch, as required.
+3. Compare their actual typed BIL for F5/F8/F9/FD on Windows and Linux. All eight
+   cases agree apart from the separately bound build IDs.
+4. Copy the current sources to disposable work, change only the copied Basic
+   pin to the genuine current Basic manifest/executable, and run
+   `bap::source_extension::tests::native_` with default features and
+   `--ignored --test-threads=1`. All three tests pass: four flags/unchanged corpus,
+   forbidden composed modes/tamper poisoning, and synthetic Windows/Linux
+   capture/native parity with opaque-site and target-resolution refusal checks.
+5. Restore the copied lock and verify the original source identity, production
+   lock and candidate artifacts are unchanged. Reports, logs and copied trees
+   remain ignored run products.
+
+This establishes the candidate's tested Basic v9 behavior under its own pin.
+It does not adopt that pin or reproduce the historical artifact. A separate
+explicit Basic pin review is the adoption step; historical identity still needs
+the original artifact or a matching build. Wider S2–S5/U5/Q1 and real-capture,
+timing and release gates remain open.

@@ -12,6 +12,7 @@
 
 - [Plan index](.agents/plans/README.md) — identifies what is still open after the recorded deliveries.
 - [Evidence guide](tests/README.md) — explains how to interpret retained results without treating them as fresh qualification.
+- [Basic v9 candidate check](docs/Ariadne/bap-analysis-core-design.md#current-basic-v9-candidate-compatibility) — separates tested replacement behavior from the unchanged production pin and historical runtime identity.
 
 **What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Retired ISA milestones in older entries are no longer active work.
 
@@ -19,6 +20,36 @@ For the wider context, see the optional [documentation map](docs/documentation-m
 
 Current validation follows the [executable test matrix](tests/README.md). Dated run
 results below are historical; their Git links do not establish a current pass.
+
+## 2026-10-23 — Current Basic v9 candidate compatibility checked
+
+**Status: three native candidate tests pass; production Basic pin unchanged.**
+The follow-up to `faf75f7` checks whether the available runtime can exercise the
+Basic v9 contract despite the unavailable historical artifact. The
+[canonical design](docs/Ariadne/bap-analysis-core-design.md#current-basic-v9-candidate-compatibility)
+records the candidate identity and [execution plan](.agents/plans/amd64-operation-coverage.md#current-basic-v9-candidate-check)
+records the remaining adoption boundary.
+
+All three existing [native v9 tests](tests/bap/source_extension.rs) pass in a
+disposable source copy with an explicit pin for the current Basic build. They
+cover actual four-flag BIL and the unchanged corpus, composed-mode refusal and
+tamper poisoning, and synthetic Windows/Linux minidump preparation with complete
+native/Rust state equality, opaque-site binding and target-resolution refusal.
+The run verifies 647 shared source/test/native and Cargo files against the
+current checkout; the unrelated real Windows capture archive remains excluded.
+
+With the unchanged production lock, both the current Basic build and the
+advanced bundle fail all three tests at the manifest identity check. Their
+typed BIL agrees for F5/F8/F9/FD on both Windows and Linux in eight direct
+comparisons, apart from their separately bound build IDs. That finite agreement
+does not make the advanced bundle a Basic v9 artifact.
+
+The current Basic rebuild therefore supports the tested behavior under its own
+pin. Adopting it requires a separate explicit Basic pin review; reproducing the
+historical identity still requires the original artifact or a matching build.
+Production sources and locks remain unchanged, and the scratch lock is restored
+after testing. Reports, logs and copied sources remain ignored run products.
+This check adds no real-capture, full-ISA, timing or release qualification.
 
 ## 2026-10-23 — AMD64 guard replay and composed fixture resumed
 
@@ -92,7 +123,9 @@ pass safety/expected outcomes/fair termination. No TLA+ model body was changed.
 
 The exact historical Basic v9 runtime remains unavailable. A fresh build has a
 different identity and is rejected by its unchanged lock; positive v9 producer
-compatibility is therefore unexercised. Inventory legality gaps and wider S2–S5/U5/Q1
+compatibility under that historical pin is therefore unexercised. The later
+candidate check above separately exercises replacement behavior under its own
+isolated pin. Inventory legality gaps and wider S2–S5/U5/Q1
 objectives remain open. These scoped native/model results do not refresh wider
 capture, performance or release qualifications.
 

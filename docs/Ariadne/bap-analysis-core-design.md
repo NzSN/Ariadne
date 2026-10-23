@@ -14,6 +14,8 @@ separate evidence; this consolidated design does not renew qualification.
 The [vector admission extension](../../.agents/plans/completed/bap-vector-registers.md) implements
 a finite XMM/YMM namespace under producer profile v4; its fresh validation is
 separate from the accepted v3 records.
+The current Basic v9 rebuild passes three native candidate tests under an
+isolated pin; its production pin and missing historical identity remain unchanged.
 
 **Why this document exists.** The [effect design](operand-effects-design.md)
 exposes the coverage and maintenance costs of local instruction rules. BAP
@@ -260,6 +262,39 @@ zero-work requests and their saved/native replay boundaries, until their
 operation-dependent proofs have separate qualification. This four-operation
 extension does not establish general AMD64 coverage.
 
+##### Current Basic v9 candidate compatibility
+
+**Checked, 2026-10-23, at source `faf75f7`.** The
+[checkpoint](../../CHECKPOINTS.md#2026-10-23--current-basic-v9-candidate-compatibility-checked)
+and [candidate-check plan stage](../../.agents/plans/amd64-operation-coverage.md#current-basic-v9-candidate-check)
+distinguish functional testing of the available Basic rebuild from reproducing
+the missing historical producer. The current candidate has manifest SHA-256
+`9cfd9760026352d98bd14ef42a12b4a6d39d56ae5f3957174062c482c372f8ac`
+and executable SHA-256
+`d0876132843e3a9ace0a6d5e6254f4da7f6a0e29024c575db16367fc7332f941`.
+It retains the Basic v9 schema, four-operation scope and source/SDK bindings.
+These hashes are candidate identifiers, not an adopted production pin.
+
+All three existing [native source-extension tests](../../tests/bap/source_extension.rs)
+pass against this candidate in a disposable source copy whose only source change
+is an explicit candidate pin. The tests exercise actual four-flag BIL and the
+unchanged corpus; refusal of guarded/target/refinement modes and tamper poisoning;
+and synthetic Windows/Linux captures with full native/Rust state equality,
+opaque-site binding and forbidden target-resolution replay. All 647 shared
+source/test/native and Cargo files match the current checkout before that pin
+change; the unrelated real Windows capture archive is excluded. The copied lock
+is restored and both source trees are rechecked after the run.
+
+The unchanged production Basic lock rejects both the current Basic candidate and
+the advanced runtime at the manifest hash check before semantic dispatch. Direct
+typed-BIL comparisons agree for the four flag bytes on both supported targets
+(eight cases), apart from separately bound build IDs. This does not authorize
+the advanced schema/profiles as Basic v9. Functional testing can use the current
+Basic rebuild with its own explicit pin; adopting that pin needs separate review.
+The original identity remains unreproduced, and no production lock is changed by
+this check. Run products stay outside maintained source. Broader producer,
+real-capture, performance and release qualification remain separate.
+
 #### Pinned form inventory and advanced producer
 
 **Resumed, 2026-10-23.** The [stopped checkpoint](../../CHECKPOINTS.md#2026-10-22--amd64-items-13-stopped-at-user-request)
@@ -353,7 +388,9 @@ and executable
 the explicit advanced lock now selects this source/SDK-bound candidate. The
 previous saved advanced identity is not claimed reproduced. Basic v9's
 immutable lock is unchanged, and a mismatching fresh Basic build remains
-rejected. The eight-test advanced matrix and numeric source controls do not
+rejected. The [later Basic candidate check](#current-basic-v9-candidate-compatibility)
+passes three native tests under an isolated candidate pin. Neither that result
+nor the eight-test advanced matrix and numeric source controls
 replace that historical producer compatibility gate or broader qualification.
 
 The same continuation passes 88 native proof controls, ten compiled native
