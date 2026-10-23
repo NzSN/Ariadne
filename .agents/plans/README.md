@@ -44,7 +44,7 @@ current validation uses executable tests and disposable run products.
 
 | Active plan | Remaining work |
 | --- | --- |
-| [AMD64 operation coverage](amd64-operation-coverage.md) | Active machine-instruction and unwind program: actual-byte survey, producer and architectural-state gaps, conventional/exceptional unwind recovery and versioned replay. Full operation coverage remains pending. |
+| [AMD64 operation coverage](amd64-operation-coverage.md) | Active machine-instruction and unwind program. The [remaining coverage plan](amd64-operation-coverage.md#remaining-coverage-execution-plan) orders source conflicts/constraints, legal domains/bindings, architecture families, REP/consumers and final validation after historical-gap accounting. Full operation coverage remains pending. |
 | [Generated validation and retention](generated-validation-retention.md) | T0–T5 complete: retained collection removed; PBT, core/stateflow/IR replay, compiled mutants and root checks pass. Full native-core/capture, timing and release prerequisites remain explicit. |
 | [Explicit alignment hypotheses](alignment-hypotheses.md) | H0–H5 complete within the 2026-10-16 structural-only reviewed MOVAPS profile; conditional v2 and actual v1/v2 replay qualified. Caller S6 and frame-path F4 remain separate. |
 | [Complete section-5 frame investigation](frame-question-investigation.md) | P0–P10 pass the 2026-10-19 remote finite profile, including applicable FC5/M4 imports. General SMT, F4 and release remain separate; caller S6 now has its own completed qualification. |

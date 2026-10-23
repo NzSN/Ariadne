@@ -1,7 +1,7 @@
 {
   "archived": "2026-10-16",
   "scope": "Conversation presentation archive; canonical designs stay in docs/ and plan owners now live in .agents/plans/. No new analysis or qualification.",
-  "report_count": 49,
+  "report_count": 50,
   "markdown_html_pairs_including_index": 21,
   "source_session": "01a12ddc-4e59-7cb2-b5aa-67a8e522c597",
   "recovered_reports": [
@@ -840,12 +840,12 @@
       "sha256": "2667f3af9200452de3e195dc17664344a094f718310fb48d7527f5a02999ac33"
     },
     "ariadne-reports-index.html": {
-      "bytes": 20668,
-      "sha256": "dd810f9499596623f47e8c03ab356f92deadda0ce5de5a8bfaa6541f5a60a077"
+      "bytes": 21640,
+      "sha256": "320f84f2e02d20280674b60c33bf687fb7b8a6a53c37e4092e40f53c5be243a5"
     },
     "ariadne-reports-index.md": {
-      "bytes": 13939,
-      "sha256": "2ffd5db7e80af250643f1ad19d73c3513dbe92f314508357722263b3f7655f54"
+      "bytes": 14822,
+      "sha256": "d35ec6cfc173ac9c2cee7ed8e44706b683f0e116deb0c6b3b1c629edb32c5df7"
     },
     "ariadne-resolver-structural-types-20261015.html": {
       "bytes": 32858,
@@ -1090,10 +1090,22 @@
     "ariadne-amd64-coverage-execution-gap581-20261023/index.html": {
       "bytes": 88845,
       "sha256": "abb07ab7d97882121da9bb67ba7807141cb7f8f245cb35e1a39f42e084363436"
+    },
+    "ariadne-amd64-coverage-remaining-plan-20261023/index.html": {
+      "bytes": 37976,
+      "sha256": "623cfb24a723f705780d7822a942744f1af09a75e97e57c5efae66ce8284c56a"
+    },
+    "ariadne-amd64-coverage-remaining-plan-20261023/dependencies.svg": {
+      "bytes": 7234,
+      "sha256": "e31b202c1cffb1f98486e8fd62627ac2d46211461060de75b567c5a4af422486"
+    },
+    "ariadne-amd64-coverage-remaining-plan-20261023/render.py": {
+      "bytes": 18366,
+      "sha256": "6c76602150d03d77eacdb2dd7a19ce134db16482e60e5bbe1c5a7e212ad76614"
     }
   },
   "directory": ".agents/chatdocs/",
-  "html_documents_including_index": 50,
+  "html_documents_including_index": 51,
   "markdown_documents_including_index": 22,
   "source_review_documents": [
     {
@@ -2219,6 +2231,52 @@
         "visual_inspection_limit": "Refreshed HTML and SVG have not been visually inspected. Historical launch metadata belongs to the preserved R1-qualified and pre-native versions.",
         "launch_completed_at": "2026-10-23T10:11:39+00:00"
       }
+    },
+    {
+      "html": "ariadne-amd64-coverage-remaining-plan-20261023/index.html",
+      "previous_index_sha256": {
+        "ariadne-reports-index.html": "dd810f9499596623f47e8c03ab356f92deadda0ce5de5a8bfaa6541f5a60a077",
+        "ariadne-reports-index.md": "2ffd5db7e80af250643f1ad19d73c3513dbe92f314508357722263b3f7655f54"
+      },
+      "date": "2026-10-23",
+      "source_revision": "08dcab92aabb1695c4f2b6748bb23f1ec822d72e",
+      "source_state": "Proposed remaining AMD64 coverage plan based on published historical-gap accounting; no new implementation or qualification.",
+      "scope": "Section-only presentation of proposed stages P0-P8 and parallel native gate N: source authority, constraints, legal domains, authoritative bindings, instruction families, wider REP, consumers and integrated full-coverage acceptance.",
+      "canonical_source": ".agents/plans/amd64-operation-coverage.md",
+      "canonical_section": "Remaining coverage execution plan; ends before Completion contract",
+      "canonical_source_sha256": {
+        ".agents/plans/amd64-operation-coverage.md": "0bae6f906712c668001f6011ebe97570651ced035b1ad9ac620ef2f69d840138"
+      },
+      "canonical_section_sha256": "463285a8af31218fc22808173ab15affe617ba4da323612ffd309e3d7c044552",
+      "renderer": "ariadne-amd64-coverage-remaining-plan-20261023/render.py",
+      "validation": {
+        "html_documents_checked": 2,
+        "markdown_indexes_checked": 1,
+        "local_references_checked": 218,
+        "new_page_unique_ids": 15,
+        "inline_svg_xml_validated": 1,
+        "standalone_svg_xml_validated": 1,
+        "standalone_svg_portable_attributes": true,
+        "browser_rendering_inspected": false,
+        "application_tests_run": false,
+        "svg_raster_inspected": true,
+        "svg_raster_sha256": "e31b202c1cffb1f98486e8fd62627ac2d46211461060de75b567c5a4af422486",
+        "implementation_or_qualification_performed": false,
+        "prior_amd64_archive_files_byte_unchanged": 18
+      },
+      "diagram_derivation": "Portable SVG illustrates the proposed P0-P8 promotion dependencies and parallel native gate N; it adds no implementation or qualification evidence.",
+      "presentation": {
+        "requested": "wslview",
+        "state": "launched",
+        "launch_succeeded": true,
+        "launch_exit_code": 0,
+        "launch_completed_at": "2026-10-23T11:38:28.022517+00:00",
+        "visual_inspection": false,
+        "diagram_visual_inspection": true,
+        "diagram_visual_inspection_sha256": "e31b202c1cffb1f98486e8fd62627ac2d46211461060de75b567c5a4af422486",
+        "diagram_rasterizer": "MuPDF 1.27",
+        "visual_inspection_limit": "The portable SVG was rasterized and visually inspected. Full HTML browser rendering was not inspected; wslview exit 0 confirms launch only."
+      }
     }
   ],
   "plan_directory_relocation": {
@@ -2315,5 +2373,14 @@
     "source_state": "6c3fa96 plus current historical manual-gap transcription work; current v15 native gate retains its earlier pending status",
     "scope": "All 2657 historical gaps have source-backed dispositions, including seven explicit source conflicts and zero unassigned records. The final 581 assignments preserve every original obligation and all 2076 prior dispositions. Fresh reconstruction, 61 geometry controls and finite v2/v3 BAP/Rust binding campaigns pass; source/constraint/encoding completeness, v15 native qualification and full AMD64 coverage remain open. Rendering adds no qualification.",
     "canonical_source": "docs/Ariadne/amd64-coverage-design.md"
+  },
+  "latest_amd64_remaining_plan": {
+    "date": "2026-10-23",
+    "html": "ariadne-amd64-coverage-remaining-plan-20261023/index.html",
+    "source_revision": "08dcab92aabb1695c4f2b6748bb23f1ec822d72e",
+    "source_state": "Proposed remaining AMD64 coverage plan based on published historical-gap accounting; no new implementation or qualification.",
+    "scope": "Section-only presentation of proposed stages P0-P8 and parallel native gate N: source authority, constraints, legal domains, authoritative bindings, instruction families, wider REP, consumers and integrated full-coverage acceptance.",
+    "canonical_source": ".agents/plans/amd64-operation-coverage.md",
+    "canonical_section": "Remaining coverage execution plan; ends before Completion contract"
   }
 }

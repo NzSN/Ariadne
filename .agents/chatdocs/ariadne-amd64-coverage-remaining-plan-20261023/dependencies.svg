@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1380" height="790" viewBox="0 0 1380 790" role="img" aria-labelledby="plan-title plan-description">
+  <title id="plan-title">Remaining AMD64 coverage: proposed stage dependencies</title>
+  <desc id="plan-description">P0 baseline and obligations precedes P1 source authority, P2 architectural constraints, P3 legal domains and P4 bindings. P4 feeds P5 instruction families, P6 wider REP and P7 consumers. P5, P6, P7 and parallel native qualification N feed P8 integrated qualification. P6 and P7 synchronize outcome contracts. The diagram presents proposed work, not completed gates.</desc>
+  <rect x="0" y="0" width="1380" height="790" fill="#f7fafc"/>
+  <text x="30" y="34" font-family="DejaVu Sans,sans-serif" font-size="19" font-weight="bold" fill="#1b3d57">Proposed promotion dependencies</text>
+  <text x="1350" y="34" text-anchor="end" font-family="DejaVu Sans,sans-serif" font-size="14" fill="#5a6e7f">Published base 08dcab92 · no new qualification</text>
+
+  <g stroke="#58758c" stroke-width="2.4" fill="none">
+    <path d="M250 144 H291"/><path d="M525 144 H566"/>
+    <path d="M800 144 H841"/><path d="M1075 144 H1116"/>
+    <path d="M1240 220 V270 H450 V326"/>
+    <path d="M750 270 V326"/><path d="M1050 270 V326"/>
+    <path d="M150 480 V550 H1190 V596"/>
+    <path d="M450 480 V550"/><path d="M750 480 V550"/><path d="M1050 480 V550"/>
+  </g>
+  <g fill="#58758c">
+    <polygon points="305,144 291,137 291,151"/><polygon points="580,144 566,137 566,151"/>
+    <polygon points="855,144 841,137 841,151"/><polygon points="1130,144 1116,137 1116,151"/>
+    <polygon points="450,340 443,326 457,326"/><polygon points="750,340 743,326 757,326"/>
+    <polygon points="1050,340 1043,326 1057,326"/><polygon points="1190,610 1183,596 1197,596"/>
+  </g>
+
+  <g font-family="DejaVu Sans,sans-serif">
+    <rect x="30" y="70" width="220" height="150" rx="9" fill="#edf5fb" stroke="#779bb8" stroke-width="1.5"/>
+    <text x="48" y="100" font-size="21" font-weight="bold" fill="#174e76">P0</text>
+    <text x="48" y="133" font-size="18" fill="#233b4f">Baseline and</text>
+    <text x="48" y="159" font-size="18" fill="#233b4f">obligations</text>
+    <text x="48" y="195" font-size="13" fill="#586f82">Freeze the starting scope</text>
+
+    <rect x="305" y="70" width="220" height="150" rx="9" fill="#edf5fb" stroke="#779bb8" stroke-width="1.5"/>
+    <text x="323" y="100" font-size="21" font-weight="bold" fill="#174e76">P1</text>
+    <text x="323" y="133" font-size="18" fill="#233b4f">Source authority and</text>
+    <text x="323" y="159" font-size="18" fill="#233b4f">structural conflicts</text>
+    <text x="323" y="195" font-size="13" fill="#586f82">Publisher identity + ownership</text>
+
+    <rect x="580" y="70" width="220" height="150" rx="9" fill="#edf5fb" stroke="#779bb8" stroke-width="1.5"/>
+    <text x="598" y="100" font-size="21" font-weight="bold" fill="#174e76">P2</text>
+    <text x="598" y="133" font-size="18" fill="#233b4f">Architectural</text>
+    <text x="598" y="159" font-size="18" fill="#233b4f">constraints</text>
+    <text x="598" y="195" font-size="13" fill="#586f82">Global and instruction rules</text>
+
+    <rect x="855" y="70" width="220" height="150" rx="9" fill="#edf5fb" stroke="#779bb8" stroke-width="1.5"/>
+    <text x="873" y="100" font-size="21" font-weight="bold" fill="#174e76">P3</text>
+    <text x="873" y="133" font-size="18" fill="#233b4f">Legal domains and</text>
+    <text x="873" y="159" font-size="18" fill="#233b4f">XED reconciliation</text>
+    <text x="873" y="195" font-size="13" fill="#586f82">Define the legal denominator</text>
+
+    <rect x="1130" y="70" width="220" height="150" rx="9" fill="#edf5fb" stroke="#779bb8" stroke-width="1.5"/>
+    <text x="1148" y="100" font-size="21" font-weight="bold" fill="#174e76">P4</text>
+    <text x="1148" y="131" font-size="17" fill="#233b4f">Authoritative bindings</text>
+    <text x="1148" y="156" font-size="17" fill="#233b4f">and coverage reports</text>
+    <text x="1148" y="195" font-size="13" fill="#586f82">Bind domains to consumers</text>
+
+    <rect x="30" y="340" width="240" height="140" rx="9" fill="#fff7e9" stroke="#b79455" stroke-width="1.5"/>
+    <text x="48" y="371" font-size="21" font-weight="bold" fill="#805a1e">N · parallel</text>
+    <text x="48" y="404" font-size="18" fill="#56452c">Current v15 native</text>
+    <text x="48" y="430" font-size="18" fill="#56452c">qualification</text>
+    <text x="48" y="460" font-size="12.5" fill="#756347">Existing handoff approval pending</text>
+
+    <rect x="320" y="340" width="260" height="140" rx="9" fill="#f0f5f8" stroke="#829eb1" stroke-width="1.5"/>
+    <text x="338" y="371" font-size="21" font-weight="bold" fill="#274e69">P5</text>
+    <text x="338" y="404" font-size="18" fill="#233b4f">Instruction-family</text>
+    <text x="338" y="430" font-size="18" fill="#233b4f">implementation</text>
+    <text x="338" y="460" font-size="13" fill="#586f82">Scoped implementation waves</text>
+
+    <rect x="620" y="340" width="260" height="140" rx="9" fill="#f0f5f8" stroke="#829eb1" stroke-width="1.5"/>
+    <text x="638" y="371" font-size="21" font-weight="bold" fill="#274e69">P6</text>
+    <text x="638" y="404" font-size="18" fill="#233b4f">Wider REP and</text>
+    <text x="638" y="430" font-size="18" fill="#233b4f">fault/I/O outcomes</text>
+    <text x="638" y="460" font-size="13" fill="#586f82">Explicit outcome semantics</text>
+
+    <rect x="920" y="340" width="260" height="140" rx="9" fill="#f0f5f8" stroke="#829eb1" stroke-width="1.5"/>
+    <text x="938" y="371" font-size="21" font-weight="bold" fill="#274e69">P7</text>
+    <text x="938" y="404" font-size="18" fill="#233b4f">Consumer contracts</text>
+    <text x="938" y="430" font-size="18" fill="#233b4f">and proof admission</text>
+    <text x="938" y="460" font-size="13" fill="#586f82">Capabilities qualified separately</text>
+
+    <path d="M889 410 H911" stroke="#a27a35" stroke-width="2" stroke-dasharray="5 4" fill="none"/>
+    <polygon points="880,410 889,405 889,415" fill="#a27a35"/>
+    <polygon points="920,410 911,405 911,415" fill="#a27a35"/>
+
+    <rect x="1030" y="610" width="320" height="120" rx="9" fill="#eaf4ed" stroke="#71967d" stroke-width="1.7"/>
+    <text x="1050" y="641" font-size="21" font-weight="bold" fill="#2c5a3c">P8</text>
+    <text x="1050" y="675" font-size="19" fill="#284d35">Integrated full-coverage gate</text>
+    <text x="1050" y="707" font-size="13" fill="#52735d">Exact frozen scope and current evidence</text>
+
+    <text x="30" y="613" font-size="15" font-weight="bold" fill="#496278">Parallel work and synchronization</text>
+    <text x="30" y="643" font-size="15" fill="#496278">P6 and P7 share outcome contracts; their design work can run in parallel.</text>
+    <text x="30" y="671" font-size="15" fill="#496278">Close N before changing the current native REP proof policy.</text>
+    <text x="30" y="699" font-size="15" fill="#496278">Frozen-input pilots may start early; promotion still requires the preceding exits.</text>
+    <text x="30" y="759" font-size="14" fill="#637989">P0–P8 are proposed stages. Read the canonical ledger for exact deliverables, validation and unresolved limits.</text>
+  </g>
+</svg>

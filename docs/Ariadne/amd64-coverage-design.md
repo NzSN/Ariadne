@@ -30,7 +30,11 @@ implementation findings and remaining exits.
 **Where to go next.** Read the [completion stages](../../.agents/plans/amd64-operation-coverage.md#coverage-completion-design-stages)
 for execution order, the [test matrix](../../tests/README.md) for executable
 validation, and the [BAP trust boundary](semantic-assurance.md) for what testing
-can establish. The [execution HTML](../../.agents/chatdocs/ariadne-amd64-coverage-execution-20261023/index.html)
+can establish. The [remaining coverage execution plan](../../.agents/plans/amd64-operation-coverage.md#remaining-coverage-execution-plan)
+breaks the work after historical-gap accounting into P0–P8 and the parallel
+native gate, with concrete deliveries and exit checks. The [plan reading view](../../.agents/chatdocs/ariadne-amd64-coverage-remaining-plan-20261023/index.html)
+presents proposed work from `08dcab9`; it adds no implementation acceptance.
+The [execution HTML](../../.agents/chatdocs/ariadne-amd64-coverage-execution-20261023/index.html)
 is the current dated reading view; the [original proposal](../../.agents/chatdocs/ariadne-amd64-coverage-design-20261023/index.html)
 preserves the pre-execution version.
 
@@ -145,13 +149,14 @@ because the current cell is blank. Preserve alternative interpretations as
 unresolved records.
 
 Every old gap receives a source-backed disposition: resolved cell, justified
-continuation, non-encoding material, duplicate/alias, or unresolved. Record the
+continuation, non-encoding material, source conflict, duplicate/alias, or unresolved. Record the
 original gap ID, affected source cells, correction rule and review rationale.
 Deleting a gap, suppressing a line class, or moving text outside a table does
 not resolve an obligation. The implemented [geometry extractor](../../tools/amd64_manual_geometry.py)
 now preserves those identities and reconstructs word-coordinate ownership;
-[its finite execution](#102-geometry-and-source-region-execution-c2) leaves
-ambiguous cells, cross-page continuations and unparsed constraints open.
+[its finite execution](#102-geometry-and-source-region-execution-c2) accounts
+for every historical gap while leaving seven source-conflict records, candidate
+cross-page relations and unparsed constraints open.
 
 ### 4.3 Establish source completeness separately
 
@@ -441,6 +446,11 @@ The [linked execution stages](../../.agents/plans/amd64-operation-coverage.md#co
 own scheduling and status. Source and REP work may proceed in parallel, but a
 REP slice does not close the inventory gate, and inventory closure does not
 qualify a producer or consumer.
+The [post-backlog execution plan](../../.agents/plans/amd64-operation-coverage.md#remaining-coverage-execution-plan)
+orders the remaining C1–C4, R2–R4, A1 and Q1 work into source adjudication,
+constraint extraction, legal-domain construction, bindings, implementation and
+integrated validation. Its first delivery tracks all seven conflicts and 33
+table relations; its proposed first new domain pilot is register-only byte MOV.
 
 | Stage | Exit |
 | --- | --- |

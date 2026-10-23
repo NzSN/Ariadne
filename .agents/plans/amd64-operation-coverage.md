@@ -13,7 +13,7 @@ and historical identity remain separate.
 The [plain REP and accounting contract](../../docs/Ariadne/bap-analysis-core-design.md#plain-repeated-string-profile-and-coverage-accounting)
 adds a separately selected v12 three-form dependency contract and executable
 full-coverage obligations. The [source/domain findings](../../docs/Ariadne/amd64-coverage-design.md#101-source-corpus-execution-c1)
-adds a five-volume candidate corpus, partial geometry recovery and finite v2/v3
+adds a five-volume candidate corpus, historical-gap accounting and finite v2/v3
 legal-domain/binding registries; their full C1–C4 exits remain open. S4/Q0 remain partial.
 The [memory-string successors](../../docs/Ariadne/amd64-coverage-design.md#104-default-address-memory-rep-execution-r1)
 add finite v13/v14 plain dependency scopes with separate source and qualification
@@ -23,6 +23,11 @@ passes its local gates; its changed native payload is awaiting specific approval
 Full coverage is the target, not an achieved result. Implementation proceeds on both
 machine-instruction semantics and Windows unwind operations. A representative
 family survey is not an exhaustive instruction-form inventory.
+The [historical-gap checkpoint](../../CHECKPOINTS.md#2026-10-23--historical-amd-manual-gap-backlog-accounted-for)
+records all 2,657 assigned records with seven explicit source conflicts. The
+remaining execution plan below starts
+from published `08dcab9` and defines the next source, domain and implementation
+deliveries. It is proposed work; preparing it adds no qualification result.
 
 **Why this document exists.** The [BAP semantic design](../../docs/Ariadne/bap-analysis-core-design.md#amd64-operation-coverage-program)
 and [frame investigation design](../../docs/Ariadne/investigation-design.md#amd64-unwind-coverage-program)
@@ -38,7 +43,7 @@ separately testable tracks. It defines the meaning of support, implementation
 order, compatibility boundaries and the gates required before claiming full
 coverage. Existing designs remain the canonical contract owners.
 
-**Where to go next.** Read the [plain REP/accounting contract](../../docs/Ariadne/bap-analysis-core-design.md#plain-repeated-string-profile-and-coverage-accounting),
+**Where to go next.** Start with the remaining execution plan below, then read the [plain REP/accounting contract](../../docs/Ariadne/bap-analysis-core-design.md#plain-repeated-string-profile-and-coverage-accounting),
 [coverage completion design](../../docs/Ariadne/amd64-coverage-design.md),
 [test matrix](../../tests/README.md),
 [BAP trust boundary](../../docs/Ariadne/semantic-assurance.md), and the two design
@@ -48,6 +53,324 @@ sections above before implementing a stage.
 current projection excludes architectural state and control constructs. Windows
 unwind metadata versions and exceptional transitions also need separate work.
 No unknown, unexercised or merely decoded operation counts as semantic coverage.
+
+## Remaining coverage execution plan
+
+**Planning baseline: 2026-10-23, `08dcab92aabb1695c4f2b6748bb23f1ec822d72e`.**
+This continuation addresses the open instruction-coverage items from the
+[current checkpoint](../../CHECKPOINTS.md#2026-10-23--historical-amd-manual-gap-backlog-accounted-for).
+The [canonical design](../../docs/Ariadne/amd64-coverage-design.md) owns the
+contracts. The [HTML plan](../chatdocs/ariadne-amd64-coverage-remaining-plan-20261023/index.html)
+presents this section. Windows unwind work keeps its separate stage ledger.
+
+The first delivery is a checked source-obligation ledger. The main promotion
+sequence is **P0 → P1 → P2 → P3 → P4 → P5/P6/P7 → P8**. The current native
+qualification **N** runs independently of the source audit and joins P8.
+Pilot implementation can start once its own source inputs are reviewed; it
+does not require waiting for every family. Full-stage completion requires the
+whole declared scope. No calendar estimate for full AMD64 is justified before
+P0–P3 expose the complete constraint and implementation worklists.
+
+### Starting counters and completion meanings
+
+| Counter | Current state | What must change |
+| --- | --- | --- |
+| Historical extraction records | 2,657 assigned; zero unassigned | Preserve all original IDs and objects. This completed counter stays separate from source completeness. |
+| Source conflicts | Seven records representing five source issues | Add checked authoritative adjudications; identifying a conflict does not resolve it. |
+| Cross-page table relations | 33 unreviewed candidates: 25 Vol3, eight Vol4 | Decide continuation, independent table, or unresolved using actual source structure. These are not 33 confirmed broken tables. |
+| Source scope and constraints | Five documents/4,128 pages/eleven required region clauses accounted; constraints and supplementary scope incomplete | Establish authority, enumerate every selected constraint and resolve its references. Page counts alone cannot close this work. |
+| Full symbolic-domain bindings | 10,569 candidates; zero complete authoritative candidate bindings | Reconcile whole legal domains, retaining AMD forms absent from XED and justified exclusions. |
+| Finite memory-REP support | 56 AMD byte/environment points and 111 profile observations | Preserve this qualified finite domain while adding independently checked domains and consumer contracts. |
+| Current v15 native gate | Local gates passed; native handoff pending | Complete N with the current source, runtime and native helper. |
+
+### P0 — Baseline and obligations
+
+**Work.** Freeze the intended AMD long-mode scope, selected publications,
+extension/mode/environment axes and required consumer set. Use the existing
+application and privileged/system scope; record the 24 extension-family
+discovery candidates and their supplementary-source decisions. Intel-specific
+forms need separate vendor dispositions. Scope exclusions must be justified
+before constructing domains, and later changes must be versioned visibly.
+
+Create a stable obligation graph linking source cells, conflicts, table pairs,
+constraints, legal forms, XED relations, bindings and required validation. Seed
+it with all seven conflict records and all 33 table candidates. Distinguish
+`accounted`, `adjudicated`, `implemented` and `validated`; retain unresolved
+constraints even when their containing text is classified as non-encoding.
+
+**Files.** Extend the existing source/geometry inputs. Proposed new files are
+`tools/amd64_source_obligations.py`, its tooling tests and reviewed decision
+inputs under `tests/bap/fixtures/amd64-semantics/`. These are planned files,
+not existing implementation. Keep generated ledgers and checker results under
+ignored `target/`; maintain schemas, source-decision inputs and small fixtures.
+
+**Exit.** Every initial obligation has a stable ID, exact source references,
+dependencies, an explicit current state and an executable check to close it.
+Deletion, duplicate identity, wrong ownership and source/hash drift controls
+fail. A generated ledger cannot grant itself acceptance through stored flags.
+
+### P1 — Source authority and structural conflicts
+
+**Work.** Recheck publisher availability for the pinned Vol4/5 revisions;
+the recorded HTTP failures are historical. Establish exact official-byte
+identity, or prepare a separately pinned replacement corpus and review its
+PDF/text/geometry/outline/row/constraint/scope migration. Preserve every old
+lock. Local structural work can proceed while source adoption is unresolved.
+
+Adjudicate these five issues using authoritative AMD revisions, errata or
+explicit source rules. Preserve the raw literals and all seven old-gap IDs.
+
+| Vol4 issue | PDF page | Original gap ordinals |
+| --- | ---: | --- |
+| VADDPD contains `xmmVGETEXPPD2,` and a dependent operand continuation | 78 | 1, 2 |
+| `VMOVMSKB` rows disagree with PMOVMSKB/VPMOVMSKB section headings | 612 | 542, 543 |
+| VPMOVZXWD has literal malformed field `X.1323r33111.` | 645 | 574 |
+| `SHA256MSG1` row appears in the SHA256MSG2 section | 807 | 744 |
+| `PMADCSWD` row appears in the VPMADCSWD section | 1350 | 1603 |
+
+Store adjudication separately from the immutable transcription. Heading
+similarity, XED/LLVM agreement or hardware accepting one witness cannot alone
+establish an intended manual correction or a complete AMD legal domain.
+
+For every cross-page pair, compare section headings, column meanings,
+intervening material, explicit continuation markers and complete local rows.
+Vol4 includes apparent semantic-table-to-encoding-table transitions at PDF
+138→139, 142→143, 487→488 and 903→904; check them as independent-table
+candidates. Do not invent a continuation to eliminate a counter.
+
+**Exit.** All seven conflict records have checked adjudications and all 33
+relations have justified non-unresolved outcomes. Accepted corpus identities
+and scope migration are independently checked. A missing authoritative answer
+keeps that obligation open while other records continue. This exit closes
+structural/source-authority work; P2 still owns constraint completeness.
+
+### P2 — Architectural constraints
+
+**Work.** Add typed source-constraint and cross-reference extraction. Current
+`region_accounting()` only enumerates pages; source cells have unresolved
+footnote parsing. Replace that limitation with explicit obligations for:
+
+1. Prefix precedence/order/repetition, operand/address size, REX/high-byte
+   registers and ModRM/SIB/displacement/immediate restrictions.
+2. VEX/EVEX/XOP fields, reserved combinations, CPUID/mode/privilege/OS-state
+   applicability and feature-dependent aliases.
+3. Exception/outcome conditions, memory/order premises, diagram-derived
+   effects and other selected architectural constraints.
+4. Footnotes, cross-volume references, opcode maps and supplementary sources.
+
+**Files.** Proposed `tools/amd64_source_constraints.py` and tests; source-rule
+inputs under `tests/bap/fixtures/amd64-semantics/`; integrate with the corpus,
+geometry and obligation tools. Every typed clause retains exact source cells,
+its applicable owner/domain and referenced rules. Review the clause inventory
+independently from the parser's own output.
+
+**Exit.** Every selected region and clause has a checked disposition, all
+required references resolve, and no required constraint remains unparsed.
+Omitted notes, swapped footnote targets, mislabeled diagrams, stale ownership
+and unknown clauses classified as harmless must fail. Reproduce the pinned
+corpus before `check-products --require-all`, then reconstruct geometry and
+regions. C1/C2 completeness requires this clause-level result as well as P1.
+
+### P3 — Legal domains and XED reconciliation
+
+**Work.** Introduce a general domain/relationship path alongside the frozen
+v2/v3 REP registries. The existing enumerator handles finite literal prefixes,
+opcodes and independent fields; it has no general dependent ModRM/SIB grammar.
+Proposed modules are `tools/amd64_domains.py` and
+`tools/amd64_reconciliation.py`, with schema and executable tests.
+
+Implement grammar in increasing complexity: finite prefix/opcode/register
+fields; dependent ModRM/SIB/address/displacement/immediate fields; then
+VEX/EVEX/XOP and applicability/alias predicates. Exhaustively enumerate small
+domains. For larger domains, add a restricted symbolic checker with explicit
+budgets and independently replayable witnesses/counterexamples. Unsupported
+constraints, timeouts and solver unknowns remain unresolved.
+Witness replay checks satisfying cases; it cannot establish that no hole or
+overlap exists. Bind each symbolic query to the grammar/translation, solver,
+compiler and configuration identities and execute it freshly. Require checked
+UNSAT certificates where supported, or explicitly review and state the trusted
+solver boundary. A self-reported absence of counterexamples cannot supply
+unqualified totality evidence.
+
+Reconcile in both directions: each frozen XED candidate gets a source-backed
+relation, and every selected AMD legal form gets an obligation even when XED
+has no matching record. Relations may split, merge or alias domains. Keep
+encoding membership, architectural applicability and profile admission separate.
+Each candidate region needs an explicit `in-scope legal`, `justified scope/vendor
+exclusion` or `unresolved` disposition. Absence from the current manual-derived
+domain is unresolved unless authoritative evidence establishes exclusion or
+invalidity. Missing source coverage cannot shrink the denominator.
+
+**First vertical slice.** Propose register-only byte MOV with opcodes 88/8A,
+ModRM.MOD=3 and no prefix or one REX from 40/41/44/45. The planned enumeration
+is 640 byte points: two opcodes × (64 no-REX + four × 64 REX combinations).
+Review Vol3 PDF282 source rows and prefix rules first. This exercises operand
+direction, extended registers, high-byte/REX low-byte aliases and partial writes
+through existing scalar state. It is a proposed finite slice, not an already
+qualified domain or a complete binding of either XED candidate. Preserve all
+other prefix regions as obligations. Follow with memory addressing and a
+source-reviewed feature-alias slice.
+
+**Exit.** Source/domain membership, complete reconciliation and overlap/alias
+rules pass independent checks across the declared scope. Domain narrowing,
+omitted AMD-only forms, lost ModRM/REX combinations and unaccounted aliases
+produce concrete failures or explicit unknowns. Passing the first slice earns
+only that slice's result; full P3 requires the entire legal denominator.
+
+### P4 — Authoritative bindings and coverage reports
+
+**Work.** Add a versioned general registry and report path without changing
+candidate-only `coverage/v1` or the finite v2/v3 contracts. The current
+`amd64_coverage.py` deliberately reports zero authoritative full-domain
+bindings; do not replace that with a name-association count. Reuse strict
+identity/partition checking from `amd64_legal_forms.py`, but generalize rule
+dispatch, source derivation and required consumer/outcome capabilities.
+
+Each binding connects a legal domain to a named semantic contract, exact
+producer/BIL query, implementation rule, profile/consumer set and current
+validation obligations. Require `S ∪ U ∪ X = D` with disjoint disposition
+partitions and binding-domain inclusion: S is an implemented named contract,
+U is explicitly unsupported and X is unresolved. A contract may include both
+normal and possible fault outcomes; those architectural alternatives are not
+the S/U/X partitions. Complete implementation separately requires
+`S = D` and empty unsupported/unresolved partitions. Architectural aliases and
+exceptions count as supported only through implemented contracts.
+
+**Exit.** Every required domain has checked total accounting, and every
+supported partition has actual current producer and Rust/native observations.
+Replaying satisfying examples supplements domain checking; it cannot establish
+totality. Reject wrong bytes/extent/environment/VA/snapshot, stale source or
+producer, missing consumer capability, unjustified overlaps and solver unknown
+promoted to success. Report source coverage, authoritative domain bindings,
+implementation support and exercised validation separately.
+
+### N — Current v15 native qualification
+
+Execute the [prepared native stage](#native-amd-address-size-qualification-pending-approval)
+in parallel once its existing source-handoff approval is obtained. The earlier
+automatic review rejected the changed 25-file payload; this plan does not
+change that recorded boundary. Revalidate the exact payload/current source,
+build a fresh core, audit fourteen native source hashes plus SDK/model/engine
+identities, and require 341 refusal controls, 448 native/Rust parity instances
+and the named compatibility regressions with the same helper.
+
+**Exit.** Current-source native and local behavior match across the finite
+v15 domain, with final artifact/source stability checked. Close this baseline
+before promoting native REP proof-policy changes. N closes the existing finite
+gate; wider REP domains and consumers still have P6/P7 obligations.
+
+### P5 — Instruction-family implementation
+
+Generate the implementation queue from P3/P4 gaps, distinguishing missing BAP
+lifts, transport types/resources, architectural state, projection/control and
+consumer support. Start the queue early; its complete acceptance depends on
+the completed denominator. Prioritize shared capabilities: scalar/control/flags,
+atomic and ordering behavior, x87/MMX aliases and FP state, wider SIMD/masks,
+then system/privileged/exceptional and remaining extension families. Retain
+every discovered family even when implementation is difficult.
+
+**Files.** Pinned producers under `native/bap/source-coverage/`; transport/state
+and effects in `src/bap/{ast,admission,registers,projection}.rs`; control and
+matching native/checker modules as required. Wider vectors require typed state
+and alias contracts; raising a byte/tree limit alone cannot provide them.
+BAP supplies actual production semantics; LLVM remains decode/control reference.
+
+**Exit per family.** Source legality → actual BAP BIL → named effect/control
+contract → required consumers → exact-byte and independent behavioral tests →
+current native parity are all connected. Missing lifts and generic unknown
+effects remain implementation gaps. An implemented conservative contract may
+retain justified environmental unknowns, with its invariant and limits tested.
+
+### P6 — Wider REP and fault/I/O outcomes
+
+Implement separately versioned source-derived domains for prefix ordering,
+redundancy, segment selection and ignored/reserved combinations while freezing
+v12–v15. Preserve zero-iteration origins, weak writes, lane rules, overlap,
+iteration-dependent addresses, pointer wrapping and explicit exhaustion.
+
+Before fault-sensitive or I/O admission, extend the outcome contract to normal
+completion, possible completed-iteration prefixes, faults and restart boundaries.
+Represent external I/O state and ordering explicitly. Coordinate transport,
+effects, investigation/report consumers and native replay; a normal-completion
+oracle cannot qualify partial effects. The current narrow terminal-control
+contract cannot simply be relabeled as general REP restart support.
+
+**Exit.** Each required prefix/outcome domain passes legal-domain checks,
+fresh BAP and independent behavior checks, transport/refusal controls and
+current Rust/native parity. Fault and I/O domains need dedicated observers and
+fixtures that exercise partial completion and external side effects. Unsupported
+domains remain visible until their own gates pass.
+
+### P7 — Consumer contracts and proof admission
+
+Freeze the shared loop/outcome premises with P6, then implement guard admission,
+captured targets, memory refinement and composition as independently versioned
+capabilities. Start with conservative whole-loop transfers: preserve entry
+origins, havoc every possibly written architectural/virtual binding, and treat
+possibly reached stores as barriers unless a checked footprint excludes them.
+Keep structural CFG edges and snapshot/query identity throughout.
+
+**Files and models.** `src/bap/{guard_admission,target_resolution,refinement,composition,core_protocol}.rs`
+and matching native code; the owning predicate-admission, target-resolution,
+loop-target-closure, memory-refinement and guarded-target TLA+ models. Update
+input/effects/core models when their contracts change. The retired instruction-step
+ISA proof track stays retired.
+
+**Exit per consumer.** Model checks, model-derived replay, actual Rust/native
+parity and saved-proof tampering pass under the new profile/receipt generation.
+Direct and framed entry points reject unsupported profiles, including empty
+and all-null domains, lookalike tokens and overall/site identity disagreement.
+Later-iteration writes, zero count and partial outcomes cannot inherit a
+first-iteration or normal-only proof. Whole-loop memory/target soundness must
+be exercised by behavioral mutations with unchanged observers.
+
+### P8 — Integrated full-coverage gate
+
+Freeze the final scope, domains, source closure, producers, profiles, consumers
+and workload partitions. Run applicable affected tests and root formatting,
+default/core-only tests, strict Clippy and layout checks. Execute owning
+analysis-model checks, generated replay, compiled mutations, actual producer
+and native comparisons, and the declared capture/compatibility/resource suites.
+Keep each replay/mutation build in its own ignored directory.
+
+Require a passing unchanged control before mutant credit; a changed SUT must
+compile and fail the intended unchanged observer. Recheck restored source,
+observer and helper identities. Missing prerequisites, skipped/ignored tests,
+solver unknowns, stale reports, timeouts and compilation failures supply no
+positive qualification credit. Maintain executable tests and small inputs;
+keep generated campaigns and acceptance outputs outside maintained source.
+
+**Exit.** C1/C2 source and constraint completeness, C3 domain/reconciliation,
+C4 bindings, all required P5/P6/P7 capabilities and current N/P8 validation pass
+for the frozen scope. Required domains have no unsupported or unresolved
+implementation partitions. Only then may scoped full AMD64 coverage become
+true. The claim remains conditional on trusted BAP lifting, reviewed
+grammar/solver boundaries and stated environmental premises; it does not
+establish a universal ISA or Rust proof.
+
+### Delivery order, parallel work and checkpoints
+
+1. **Next delivery:** P0 ledger/schema and P1 review of all seven conflict
+   records/five issues plus 33 table relations. Recheck official Vol4/5 sources
+   in parallel; retain unresolved answers explicitly.
+2. **Following delivery:** P2 prefix/size/register constraint pack and the P3
+   byte-MOV pilot, each with exact source derivation and omission controls.
+   Finish general constraint/reconciliation coverage iteratively by family.
+3. **Next integration:** P4 general binding/report path, preserving old reports
+   and proving that partial pilots cannot increment complete candidate counts.
+4. **Parallel execution:** a source lane owns corpus/constraint tooling; a
+   domain lane owns grammar/reconciliation/bindings; runtime lanes own producer,
+   state, REP and consumers in disjoint modules. N uses an isolated native build.
+   Coordinate shared outcome/schema changes before integration and serialize
+   native source freezes and final qualification.
+5. **Every completed slice:** preserve exact scope, executable regressions and
+   counter deltas; update the canonical design, this ledger and `CHECKPOINTS.md`.
+   Re-run source-bound binding campaigns after relevant source changes.
+   Publication follows the user's commit/push instruction for that delivery.
+
+The plan can be reviewed and implemented in these bounded deliveries. Seven
+adjudicated conflicts or a passing 640-point pilot must never be reported as
+completion of the entire source or AMD64 domain.
 
 ## Completion contract
 
