@@ -1,0 +1,332 @@
+{
+  "schema": "ariadne.actual-mov8-bil-inputs/v1",
+  "producerPin": {
+    "helperSha256": "8080fa65e7a3d6521289e277570a2666520983858fa9b8c247fbe3f470fe3615",
+    "runtimeLockSha256": "23dac7be3de321d80fb806b8a9ba4cb64a51f5c75c3c20f3ede77ea348de5382"
+  },
+  "cases": [
+    {
+      "bytes": "4088e0",
+      "bil": [
+        {
+          "kind": "move",
+          "var": {
+            "name": "RAX",
+            "index": 0,
+            "virtual": false,
+            "width": 64,
+            "type": "imm"
+          },
+          "value": {
+            "kind": "concat",
+            "lhs": {
+              "kind": "extract",
+              "hi": 63,
+              "lo": 8,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            },
+            "rhs": {
+              "kind": "cast",
+              "op": 0,
+              "width": 8,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "RSP",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "opcode": "MOV8rr",
+      "reference": "v2 MOV8rr 2 r:AL r:SPL 1 0 0 0 -1 -1 4199424 ok 3 ordinary -"
+    },
+    {
+      "bytes": "4588c1",
+      "bil": [
+        {
+          "kind": "move",
+          "var": {
+            "name": "R9",
+            "index": 0,
+            "virtual": false,
+            "width": 64,
+            "type": "imm"
+          },
+          "value": {
+            "kind": "concat",
+            "lhs": {
+              "kind": "extract",
+              "hi": 63,
+              "lo": 8,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "R9",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            },
+            "rhs": {
+              "kind": "cast",
+              "op": 0,
+              "width": 8,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "R8",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "opcode": "MOV8rr",
+      "reference": "v2 MOV8rr 2 r:R9B r:R8B 1 0 0 0 -1 -1 4210720 ok 3 ordinary -"
+    },
+    {
+      "bytes": "458ac1",
+      "bil": [
+        {
+          "kind": "move",
+          "var": {
+            "name": "R8",
+            "index": 0,
+            "virtual": false,
+            "width": 64,
+            "type": "imm"
+          },
+          "value": {
+            "kind": "concat",
+            "lhs": {
+              "kind": "extract",
+              "hi": 63,
+              "lo": 8,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "R8",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            },
+            "rhs": {
+              "kind": "cast",
+              "op": 0,
+              "width": 8,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "R9",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "opcode": "MOV8rr_REV",
+      "reference": "v2 MOV8rr_REV 2 r:R8B r:R9B 1 0 0 0 -1 -1 4212768 ok 3 ordinary -"
+    },
+    {
+      "bytes": "88c0",
+      "bil": [
+        {
+          "kind": "move",
+          "var": {
+            "name": "RAX",
+            "index": 0,
+            "virtual": false,
+            "width": 64,
+            "type": "imm"
+          },
+          "value": {
+            "kind": "concat",
+            "lhs": {
+              "kind": "extract",
+              "hi": 63,
+              "lo": 8,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            },
+            "rhs": {
+              "kind": "cast",
+              "op": 0,
+              "width": 8,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "opcode": "MOV8rr",
+      "reference": "v2 MOV8rr 2 r:AL r:AL 1 0 0 0 -1 -1 4214784 ok 2 ordinary -"
+    },
+    {
+      "bytes": "88e0",
+      "bil": [
+        {
+          "kind": "move",
+          "var": {
+            "name": "RAX",
+            "index": 0,
+            "virtual": false,
+            "width": 64,
+            "type": "imm"
+          },
+          "value": {
+            "kind": "concat",
+            "lhs": {
+              "kind": "extract",
+              "hi": 63,
+              "lo": 8,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            },
+            "rhs": {
+              "kind": "cast",
+              "op": 1,
+              "width": 8,
+              "arg": {
+                "kind": "cast",
+                "op": 0,
+                "width": 16,
+                "arg": {
+                  "kind": "var",
+                  "var": {
+                    "name": "RAX",
+                    "index": 0,
+                    "virtual": false,
+                    "width": 64,
+                    "type": "imm"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "opcode": "MOV8rr",
+      "reference": "v2 MOV8rr 2 r:AL r:AH 1 0 0 0 -1 -1 4215808 ok 2 ordinary -"
+    },
+    {
+      "bytes": "8ae0",
+      "bil": [
+        {
+          "kind": "move",
+          "var": {
+            "name": "RAX",
+            "index": 0,
+            "virtual": false,
+            "width": 64,
+            "type": "imm"
+          },
+          "value": {
+            "kind": "concat",
+            "lhs": {
+              "kind": "extract",
+              "hi": 63,
+              "lo": 16,
+              "arg": {
+                "kind": "var",
+                "var": {
+                  "name": "RAX",
+                  "index": 0,
+                  "virtual": false,
+                  "width": 64,
+                  "type": "imm"
+                }
+              }
+            },
+            "rhs": {
+              "kind": "concat",
+              "lhs": {
+                "kind": "cast",
+                "op": 0,
+                "width": 8,
+                "arg": {
+                  "kind": "var",
+                  "var": {
+                    "name": "RAX",
+                    "index": 0,
+                    "virtual": false,
+                    "width": 64,
+                    "type": "imm"
+                  }
+                }
+              },
+              "rhs": {
+                "kind": "extract",
+                "hi": 7,
+                "lo": 0,
+                "arg": {
+                  "kind": "var",
+                  "var": {
+                    "name": "RAX",
+                    "index": 0,
+                    "virtual": false,
+                    "width": 64,
+                    "type": "imm"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "opcode": "MOV8rr_REV",
+      "reference": "v2 MOV8rr_REV 2 r:AH r:AL 1 0 0 0 -1 -1 4217856 ok 2 ordinary -"
+    }
+  ]
+}

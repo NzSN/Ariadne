@@ -2,6 +2,12 @@
 
 ## Context and follow-up
 
+**Current execution: stopped at the user's request, 2026-10-23.** The
+[stopped-work checkpoint](../../CHECKPOINTS.md#2026-10-23--remaining-amd64-plan-execution-stopped-at-user-request)
+records the preserved P0–P4 work, incomplete integration, stale binding hashes
+and unexercised native gate. Resume implementation only after a new instruction.
+The dated results below retain their original scopes.
+
 **Status.** Resumed at the user's request on 2026-10-23 from the
 [stopped checkpoint](../../CHECKPOINTS.md#2026-10-22--amd64-items-13-stopped-at-user-request).
 The [resume record](../../CHECKPOINTS.md#2026-10-23--amd64-guard-replay-and-composed-fixture-resumed)
@@ -55,6 +61,12 @@ unwind metadata versions and exceptional transitions also need separate work.
 No unknown, unexercised or merely decoded operation counts as semantic coverage.
 
 ## Remaining coverage execution plan
+
+**Execution status: stopped; partial implementation is unqualified as a full
+delivery.** Consult the current checkpoint above before running the next stage.
+The source ledger and authority checker still need integration/final replay;
+the MOV8 source/binding closure must be resealed and re-exercised after source
+freeze. Preparing or stopping this work does not close P0–P8/N acceptance.
 
 **Planning baseline: 2026-10-23, `08dcab92aabb1695c4f2b6748bb23f1ec822d72e`.**
 This continuation addresses the open instruction-coverage items from the

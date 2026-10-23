@@ -1,0 +1,28 @@
+{
+  "domainSha256": "417846bf0462c9b6b6ce5e9b32ff72f14feb6df8d0d25c478177510277da665f",
+  "relations": [
+    {
+      "candidate": "xed:fbf4d5ee2e910cb571d6336c65078f0c9771b337d9174e52f11dc930f304c795:1",
+      "candidateRemainder": "unresolved",
+      "completeTemplateDomain": false,
+      "form": "mov8-register-88",
+      "id": "mov8-88-to-xed-register",
+      "kind": "partial-finite-domain",
+      "sourceRule": "mov8-direction-88"
+    },
+    {
+      "candidate": "xed:cdbff980cfe27f2447fd04d5f0dc9a9414714d015d0ff265254217927d87fe9b:1",
+      "candidateRemainder": "unresolved",
+      "completeTemplateDomain": false,
+      "form": "mov8-register-8a",
+      "id": "mov8-8a-to-xed-register",
+      "kind": "partial-finite-domain",
+      "sourceRule": "mov8-direction-8a"
+    }
+  ],
+  "schema": "ariadne.amd64-template-relations/v1",
+  "sourceOnlyObligations": [],
+  "sourcePackSha256": "06aac5e9dee748f78193837341d2db09481a92794102b372921a081519fa0265",
+  "xedLockSha256": "10991873887a9b3d8bc799dbddf86226f6b72de5e2baf647d22ab391affa7542",
+  "xedRecordsSha256": "1f62f4da85d77353dbab13f85a06fa8732477de2cfe10877f73742fc0934cc48"
+}

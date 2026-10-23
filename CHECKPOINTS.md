@@ -22,6 +22,67 @@ For the wider context, see the optional [documentation map](docs/documentation-m
 Current validation follows the [executable test matrix](tests/README.md). Dated run
 results below are historical; their Git links do not establish a current pass.
 
+## 2026-10-23 — Remaining AMD64 plan execution stopped at user request
+
+**Status: stopped; work in progress is preserved for commit and push.** The
+user explicitly requested stopping current work before publication. All worker
+campaigns are stopped; no native source transfer occurred. This entry does not
+promote any remaining full-coverage gate.
+
+Work started from the [published remaining plan](.agents/plans/amd64-operation-coverage.md#remaining-coverage-execution-plan)
+at `e3d86db`. The following implementation and small test inputs are preserved:
+
+- P0/P1 adds `amd64_source_obligations.py`, reviewed obligation inputs and
+  sixteen passing unit controls. Fresh five-PDF reproduction completed. Pure
+  derivation over actual geometry accounts for 33 table relations as 27
+  complete-local-row series and six independent tables, preserving all 2,657
+  historical records. The final current-module extraction/check and visual
+  sampling of the new boundary proofs were not completed. Authority-validator
+  integration is unfinished; this ledger still leaves all seven conflicts
+  unresolved.
+- The separate authority checker and eleven unit controls are present. Fresh
+  official downloads found Vol4 r3.27 and Vol5 r3.16 with different bytes from
+  the old pins; no old lock was replaced or corpus adoption claimed. An
+  actual-source replay computed candidate adjudications for all seven conflict
+  records, but preceded the final VEX.L heading guard. Final full replay and
+  independent review remain unfinished. Public PDFs/products are ignored
+  under `target/p1-authority/`.
+- P2/P3 adds source-constraint, finite-domain and reconciliation modules with
+  24 passing controls and independent review. Actual source replay checked
+  292 anchors/nine typed MOV8 clauses. The finite domain has 640 byte points.
+  Reconciliation retains 10,994 XED records, 10,569 long-mode candidate
+  obligations, 425 mode exclusions and two partial relations, with zero
+  complete authoritative candidate bindings. General dependent fields, SMT,
+  alias dispatch and full constraint coverage remain open.
+- The additive MOV8 binding tool, ten unit controls and an ignored Rust
+  observer are present. An initial campaign exercised 1,280 fresh BAP/LLVM
+  observations across Windows/Linux target labels and passed the actual Rust
+  byte-origin observer. Subsequent domain/source hardening changed bound
+  sources; the later checker correctly rejected the saved binding as stale.
+  This earlier campaign is not final-source qualification. The assessment
+  separates finite projection from unexercised native-consumer validation.
+- The only Rust change is a test-module hook and its observer; production
+  projection behavior was not changed. Existing v2/v3 implementation hashes
+  are also stale after this source change and have not been resealed. Full
+  default/core-only/Clippy/format qualification was not completed for this WIP.
+- N's 25-file payload and thirteen existing bound inputs were verified, and
+  local audit/qualification runners were prepared under ignored `target/`.
+  Portable checks passed 22 Python and three Rust tests; native tests remain
+  unexercised. Automatic review rejected private-source transfer without
+  specific payload/destination approval. A local alternative was investigated:
+  only the SDK manifest is available; the compiler/findlib, SDK prefix,
+  compatible rootfs and pinned source archive are missing. No native build
+  started. The pending transfer request does not override this stop instruction.
+
+**Resume only after a new user instruction.** Finish authority review and ledger
+integration, complete the table-boundary visual/source checks, then freeze the
+code and rerun the current extraction/check campaigns. Reseal v2/v3/MOV8
+binding inputs only together with fresh source/BAP/oracle/Rust campaigns.
+Native qualification still needs its compatible environment and authorization
+for any private-source handoff. The broader P0–P8/N plan remains incomplete.
+Generated PDFs, transcripts, observations, reports and build products remain
+ignored; maintained files contain implementation, reviewed inputs and tests.
+
 ## 2026-10-23 — Historical AMD manual-gap backlog accounted for
 
 **Status: all 581 remaining historical gaps have source-backed dispositions;

@@ -1,0 +1,633 @@
+{
+  "forms": [
+    {
+      "alternatives": [
+        {
+          "environment": {},
+          "sequence": [
+            {
+              "bytes": "88",
+              "kind": "literal"
+            },
+            {
+              "kind": "byte-fields",
+              "name": "modrm",
+              "parts": [
+                {
+                  "lsb": 6,
+                  "name": "mod",
+                  "values": [
+                    3
+                  ],
+                  "width": 2
+                },
+                {
+                  "lsb": 3,
+                  "name": "reg",
+                  "values": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "width": 3
+                },
+                {
+                  "lsb": 0,
+                  "name": "rm",
+                  "values": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "width": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "environment": {},
+          "sequence": [
+            {
+              "bytes": "40",
+              "kind": "literal"
+            },
+            {
+              "bytes": "88",
+              "kind": "literal"
+            },
+            {
+              "kind": "byte-fields",
+              "name": "modrm",
+              "parts": [
+                {
+                  "lsb": 6,
+                  "name": "mod",
+                  "values": [
+                    3
+                  ],
+                  "width": 2
+                },
+                {
+                  "lsb": 3,
+                  "name": "reg",
+                  "values": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "width": 3
+                },
+                {
+                  "lsb": 0,
+                  "name": "rm",
+                  "values": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "width": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "environment": {},
+          "sequence": [
+            {
+              "bytes": "41",
+              "kind": "literal"
+            },
+            {
+              "bytes": "88",
+              "kind": "literal"
+            },
+            {
+              "kind": "byte-fields",
+              "name": "modrm",
+              "parts": [
+                {
+                  "lsb": 6,
+                  "name": "mod",
+                  "values": [
+                    3
+                  ],
+                  "width": 2
+                },
+                {
+                  "lsb": 3,
+                  "name": "reg",
+                  "values": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "width": 3
+                },
+                {
+                  "lsb": 0,
+                  "name": "rm",
+                  "values": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "width": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "environment": {},
+          "sequence": [
+            {
+              "bytes": "44",
+              "kind": "literal"
+            },
+            {
+              "bytes": "88",
+              "kind": "literal"
+            },
+            {
+              "kind": "byte-fields",
+              "name": "modrm",
+              "parts": [
+                {
+                  "lsb": 6,
+                  "name": "mod",
+                  "values": [
+                    3
+                  ],
+                  "width": 2
+                },
+                {
+                  "lsb": 3,
+                  "name": "reg",
+                  "values": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "width": 3
+                },
+                {
+                  "lsb": 0,
+                  "name": "rm",
+                  "values": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "width": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "environment": {},
+          "sequence": [
+            {
+              "bytes": "45",
+              "kind": "literal"
+            },
+            {
+              "bytes": "88",
+              "kind": "literal"
+            },
+            {
+              "kind": "byte-fields",
+              "name": "modrm",
+              "parts": [
+                {
+                  "lsb": 6,
+                  "name": "mod",
+                  "values": [
+                    3
+                  ],
+                  "width": 2
+                },
+                {
+                  "lsb": 3,
+                  "name": "reg",
+                  "values": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "width": 3
+                },
+                {
+                  "lsb": 0,
+                  "name": "rm",
+                  "values": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "width": 3
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "id": "mov8-register-88",
+      "meaning": "mov8-register-copy-opcode-88",
+      "sourceRules": [
+        "byte-register-alias-preservation",
+        "flags-unmodified",
+        "modrm-register-direct",
+        "mov-copy-width",
+        "mov8-direction-88",
+        "register-code-map",
+        "rex-placement-bits",
+        "rex-register-extensions"
+      ]
+    },
+    {
+      "alternatives": [
+        {
+          "environment": {},
+          "sequence": [
+            {
+              "bytes": "8a",
+              "kind": "literal"
+            },
+            {
+              "kind": "byte-fields",
+              "name": "modrm",
+              "parts": [
+                {
+                  "lsb": 6,
+                  "name": "mod",
+                  "values": [
+                    3
+                  ],
+                  "width": 2
+                },
+                {
+                  "lsb": 3,
+                  "name": "reg",
+                  "values": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "width": 3
+                },
+                {
+                  "lsb": 0,
+                  "name": "rm",
+                  "values": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "width": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "environment": {},
+          "sequence": [
+            {
+              "bytes": "40",
+              "kind": "literal"
+            },
+            {
+              "bytes": "8a",
+              "kind": "literal"
+            },
+            {
+              "kind": "byte-fields",
+              "name": "modrm",
+              "parts": [
+                {
+                  "lsb": 6,
+                  "name": "mod",
+                  "values": [
+                    3
+                  ],
+                  "width": 2
+                },
+                {
+                  "lsb": 3,
+                  "name": "reg",
+                  "values": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "width": 3
+                },
+                {
+                  "lsb": 0,
+                  "name": "rm",
+                  "values": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "width": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "environment": {},
+          "sequence": [
+            {
+              "bytes": "41",
+              "kind": "literal"
+            },
+            {
+              "bytes": "8a",
+              "kind": "literal"
+            },
+            {
+              "kind": "byte-fields",
+              "name": "modrm",
+              "parts": [
+                {
+                  "lsb": 6,
+                  "name": "mod",
+                  "values": [
+                    3
+                  ],
+                  "width": 2
+                },
+                {
+                  "lsb": 3,
+                  "name": "reg",
+                  "values": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "width": 3
+                },
+                {
+                  "lsb": 0,
+                  "name": "rm",
+                  "values": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "width": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "environment": {},
+          "sequence": [
+            {
+              "bytes": "44",
+              "kind": "literal"
+            },
+            {
+              "bytes": "8a",
+              "kind": "literal"
+            },
+            {
+              "kind": "byte-fields",
+              "name": "modrm",
+              "parts": [
+                {
+                  "lsb": 6,
+                  "name": "mod",
+                  "values": [
+                    3
+                  ],
+                  "width": 2
+                },
+                {
+                  "lsb": 3,
+                  "name": "reg",
+                  "values": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "width": 3
+                },
+                {
+                  "lsb": 0,
+                  "name": "rm",
+                  "values": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "width": 3
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "environment": {},
+          "sequence": [
+            {
+              "bytes": "45",
+              "kind": "literal"
+            },
+            {
+              "bytes": "8a",
+              "kind": "literal"
+            },
+            {
+              "kind": "byte-fields",
+              "name": "modrm",
+              "parts": [
+                {
+                  "lsb": 6,
+                  "name": "mod",
+                  "values": [
+                    3
+                  ],
+                  "width": 2
+                },
+                {
+                  "lsb": 3,
+                  "name": "reg",
+                  "values": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "width": 3
+                },
+                {
+                  "lsb": 0,
+                  "name": "rm",
+                  "values": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7
+                  ],
+                  "width": 3
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "id": "mov8-register-8a",
+      "meaning": "mov8-register-copy-opcode-8a",
+      "sourceRules": [
+        "byte-register-alias-preservation",
+        "flags-unmodified",
+        "modrm-register-direct",
+        "mov-copy-width",
+        "mov8-direction-8a",
+        "register-code-map",
+        "rex-placement-bits",
+        "rex-register-extensions"
+      ]
+    }
+  ],
+  "schema": "ariadne.amd64-finite-domain/v4",
+  "scope": {
+    "environmentAxes": {
+      "addressBits": [
+        64
+      ],
+      "mode": [
+        64
+      ],
+      "operandBits": [
+        8
+      ],
+      "vendor": [
+        "AMD"
+      ]
+    },
+    "exclusions": [
+      "memory-operands",
+      "other-opcodes",
+      "legacy-prefixes",
+      "repeated-prefixes",
+      "rex-w-or-x-set",
+      "non-amd-or-non-long64",
+      "exceptional-or-interrupted-outcomes"
+    ],
+    "id": "amd-long64-canonical-mov8-register/v1",
+    "outcome": "normal-completion",
+    "prefixPolicy": "none-or-single-rex-w0-x0",
+    "sourceComplete": false,
+    "vendorFullDenominator": false
+  },
+  "sourcePack": {
+    "path": "tests/bap/fixtures/amd64-semantics/mov8-domain/source-constraints.json",
+    "sha256": "06aac5e9dee748f78193837341d2db09481a92794102b372921a081519fa0265"
+  }
+}

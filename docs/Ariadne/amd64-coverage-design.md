@@ -2,6 +2,12 @@
 
 ## Context and follow-up
 
+**Current continuation: stopped at the user's request, 2026-10-23.** The
+[stopped-work checkpoint](../../CHECKPOINTS.md#2026-10-23--remaining-amd64-plan-execution-stopped-at-user-request)
+records additive source-obligation/authority tooling, the finite MOV8 pilot,
+unfinished integration and stale binding identities. The earlier qualified
+results below retain their source scope; this WIP does not renew them.
+
 **Status.** Completion design with finite source/domain implementation, 2026-10-23.
 The working tree based on `6c3fa96` implements separately selected v12/v13/v14 REP scopes
 and an AMD-specific v15 address-size successor, a candidate five-volume source

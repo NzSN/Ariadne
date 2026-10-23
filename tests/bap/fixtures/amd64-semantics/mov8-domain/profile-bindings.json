@@ -1,0 +1,89 @@
+{
+  "schema": "ariadne.amd64-finite-bindings/v4",
+  "domainSha256": "417846bf0462c9b6b6ce5e9b32ff72f14feb6df8d0d25c478177510277da665f",
+  "constraintsSha256": "591b9b0d039c919e31dd8385cc44d8787c6f8006f8750bb547580d9c86d16abd",
+  "profile": "bap-bit-provenance-v6",
+  "consumer": "plain-dependencies",
+  "contract": "mov8-register-byte-origins/v1",
+  "requiredTargets": [
+    "windows-amd64",
+    "linux-amd64"
+  ],
+  "implementationSources": {
+    "native/bap/build.sh": "f72aded5f3f758d5d13aa3b931eb0674486df8d638c76e4e236464126943c748",
+    "native/bap/lift.cpp": "a5654006059aeefa83dbb9156853b2cec56bfdfadd9b8029700db333d54c9fba",
+    "native/llvm_mc/decode.cpp": "6f535c6a5e0c12d16e6ff2418c4cdac07f3333c864bdf626a9a1d55c082dc686",
+    "src/bap/address.rs": "7a8f7a3605ef8b5c43668e6f345618cad938ea773b5609d301b3e1496ec22409",
+    "src/bap/admission.rs": "854bd4e8a6ff784d3590c5a7f5729f23ee7ed02f6e619ceb81cb28b9b1e8f7ce",
+    "src/bap/alignment_hypothesis.rs": "6d69a628a5f093f2729d108e5233d56ad9a709cc5ac0b545691e6518e90e54e5",
+    "src/bap/ast.rs": "e03169007ec2469ad0a006faf044d956aeacf468a2ad19ce810e9153a52ccafb",
+    "src/bap/composition.rs": "000239ab273531fe31fe3767062bb45a6b7838e7dfa2afb58e21bcfb6ad1e43e",
+    "src/bap/core_adapter.rs": "26f54a6c727a568e8a2777a6a380745a915ee3e1c4f2187d458441859c745a65",
+    "src/bap/core_protocol.rs": "9a3f4a5153dc38cd4e6806b2dbe3eb6034380e6cce945cf645dec36f305f53aa",
+    "src/bap/core_session.rs": "95592334c44d815738dcec39ab96ad8f886bfc572cf5bfbddbb3e6b18e20abd3",
+    "src/bap/guard_admission.rs": "b94810914cb3fa1ecde65e58d7e291cce9499759080f82806d6e79a7f7087705",
+    "src/bap/lods_source.rs": "082ba2508e3acb1351d85aff60eab1358e52bd77151bb595b10e28dda09a76e3",
+    "src/bap/mod.rs": "04e3a818fad0f82eedba5fb29e3cfe8db3cd7dd7d5ea8dda99647374819f423e",
+    "src/bap/prepare.rs": "3879f0a084421f07eb3cc055463b81544af1a717f32e08aaea63ea10aa9902c6",
+    "src/bap/projection.rs": "f847918d2075af6c3eef5a6b969232405b6d3c1b5f5fa1a0610a63b586573085",
+    "src/bap/refinement.rs": "99df3bdccfb2e311666c0df4318488cfed91d3fa7eb33d5a241c2d916983e816",
+    "src/bap/registers.rs": "5c3d70b3dcd7f6620b9361f9f3937961268311cfe054c9ea12339617b50d0951",
+    "src/bap/rep_address_source.rs": "fbe655c0a24d91701f7edc61530edbe8a3532ff238b4952d69c93081348176b4",
+    "src/bap/repeated_strings.rs": "9edf4b6d7430a5170f5717ccc4bf13b5e8e29b33c16999943e6f194f5073d433",
+    "src/bap/session.rs": "1b9bb7c857ab31728f7b9976366d560bbcda3f1d2e79edda82c63d97c13884da",
+    "src/bap/source_extension.rs": "d6768f4eee0c296b332cb746f29886475b9f83e83276887ef29598060201bcb1",
+    "src/bap/stateflow_adapter.rs": "0d40a3a3dde5c49daf3bdec191168a1572ca854acdd0fb1051cfb78f7d1a5a6b",
+    "src/bap/target_resolution.rs": "fae46e6adb6bc7f6bd22108a10c851808f0e91b77177b79986ffba5e48828a78",
+    "src/bap/terminal_control.rs": "572dc4a3ad5c32fe52de7d0cf2e6d9a84eedeb6994c72db7b12428ab4da49f43",
+    "src/bap/work_schedule.rs": "c4d91be61bea97225171eaec3a1f5179fc53c53361937d1de51f2f0f3edf5124",
+    "src/effects/locations.rs": "b890a4895a4b48841b075d4c11e17ed3ba8cd63d5bd2f1f83d777df64df8c2f4",
+    "src/llvm_mc/protocol.rs": "20dd034b788b4e1a5567e75ac89383532531693dd32b5df8827659c9baea55d6",
+    "src/reports/codecs.rs": "a5b458104fe54a13a22355365e818d10c4580eef2bddcf9a1f671356defec1da",
+    "tests/bap/fixtures/admission/oracle.py": "9ba5366bdd3c2c6b45d411c067bc8389c518858a069ff6c6cc7c4f4f0b0b08b5",
+    "tests/bap/mov8_domain_binding_observer.rs": "dd9dd9782debc43e2a3f4175b13c283bb6da63a50bef20052177f8be56a0426f",
+    "tests/bap/repeated_string_projection.rs": "1e30d20ef23f1d7dba1db367acd916b6298327e33806e9d944bd90490bb46e04",
+    "tools/amd64_domain_bindings.py": "b560628cb7bc4817e535da54a84d4c180463413f53f47c0196568aeb8b1f240f",
+    "tools/amd64_domains.py": "b5fdb55be13d1d4f00d0aaaefbab9dc1f86981c36a653aa4516a587e3c4d7a8f",
+    "tools/amd64_inventory.py": "22e3ece91dc7f55ff1d50000b419482e23d4c169da3cfa33fa24a83550efc4ca",
+    "tools/amd64_inventory_xed.py": "c36fe9eba34ed08cb886cf182831f4e25851b6f41c11724f55bbb9fb613705ef",
+    "tools/amd64_legal_forms.py": "fa5c531c720d5d293437831e057d498b00b72e477a9bef119f6199a7fe1ed085",
+    "tools/amd64_manual_gap_vol3.py": "7fc2320400e8c42008974ab11736bb57b65784f226fe7104f41ce428d0a6aa8f",
+    "tools/amd64_manual_gap_vol4.py": "d44a132a67c167b39297fc39656f9cd479bf40367ebaf0a41c996a025e003c9a",
+    "tools/amd64_manual_gap_vol5.py": "cb33c5e6ee482427d42fa218d17ac5e805f03ffff859f2ec155139e08d667180",
+    "tools/amd64_manual_geometry.py": "f98ac07ecbda55e32d2e2190bd4a216c44bbe28b11462bf783580d2b458ad257",
+    "tools/amd64_manual_inventory.py": "ce5a5a7f4c6de641ec1e373c61a900c0093e966df2618b5b0045433c6bb71b63",
+    "tools/amd64_reconciliation.py": "d0c183cce51e494c76ef8709adfb3fbe578401be6d769eb97f976c557e87c7d0",
+    "tools/amd64_source_constraints.py": "c607c62b83f646a48370ea76559c60af78d1c33070dc122460a143732184154a",
+    "tools/amd64_source_corpus.py": "647aee93a5bf9ea97302aeed26da879ba0b88160f2f4632b4f66246f795483d7",
+    "tools/check_bap_admission_oracle.py": "7e43ca1f0873cc94e302c2aec6f6df3e4156640273178a3cb7c8bdbf3f6ff1a1",
+    "tools/check_bap_bit_count_oracle.py": "ecd912e714783ffea943d53a0059bb109a39b4ca2ee69b15e3a715ce5f998ffc",
+    "tools/check_bap_repeated_string_oracle.py": "3a1bef267f40aeb7e1cf4bb25e5416ff1a00459f5950f929e72720322a52f860",
+    "tools/i5a_native_contract.py": "ec384b87302415d78e70a7149b5601595ee4eb6c9c52fa0598ca30a5ba57289e",
+    "tools/run_output.py": "0f815359fe0e9b3a5c6216e36c652bac71e1e4678ce962db1ebbc23e2486e286"
+  },
+  "producerPin": {
+    "helperSha256": "8080fa65e7a3d6521289e277570a2666520983858fa9b8c247fbe3f470fe3615",
+    "runtimeLockSha256": "23dac7be3de321d80fb806b8a9ba4cb64a51f5c75c3c20f3ede77ea348de5382"
+  },
+  "referencePin": {
+    "helperSha256": "ef0556c1b567fe0764139a57d4bad52c97d89e6a61c272e249c9a5e1d394f774",
+    "librarySha256": "3fdd6ebc0b2b54d89e0a69e14d10403e0826fc3b6a7af742684a76ee5c6d23a0",
+    "version": "ariadne-llvm-mc 20.1.2 protocol 2"
+  },
+  "partitions": [
+    {
+      "id": "mov8-register-88-v6",
+      "form": "mov8-register-88",
+      "bytes": "all",
+      "disposition": "S",
+      "reason": "Existing v6 exact byte uses and possible writes; reverse-encoding self moves retain conservative no-kill behavior. Fresh BAP/numeric/Rust observations required."
+    },
+    {
+      "id": "mov8-register-8a-v6",
+      "form": "mov8-register-8a",
+      "bytes": "all",
+      "disposition": "S",
+      "reason": "Existing v6 exact byte uses and possible writes; reverse-encoding self moves retain conservative no-kill behavior. Fresh BAP/numeric/Rust observations required."
+    }
+  ]
+}

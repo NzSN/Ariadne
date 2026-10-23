@@ -1003,3 +1003,7 @@ mod tests {
 #[cfg(test)]
 #[path = "../../tests/bap/repeated_string_binding_observer.rs"]
 mod repeated_string_binding_observer;
+
+#[cfg(test)]
+#[path = "../../tests/bap/mov8_domain_binding_observer.rs"]
+mod mov8_domain_binding_observer;
