@@ -237,7 +237,8 @@ def test_artifact(process, cargo_target):
     return dict(path=str(path.resolve()), sha256=sha(path))
 
 
-def qualify(config, *, runner=subprocess.run, inspect=inventory):
+def qualify(config, *, runner=subprocess.run, inspect=inventory, tests=TESTS, result_fields=None):
+    require(bool(tests), "native qualification must select named tests")
     require(math.isfinite(config.timeout) and config.timeout > 0, "native timeout must be finite and positive")
     output = run_output(config.output)
     require(not output.exists(), "native qualification requires a fresh output directory")
@@ -247,7 +248,7 @@ def qualify(config, *, runner=subprocess.run, inspect=inventory):
         before = inspect(config)
         cargo = before["toolchain"]["cargo"]["path"]
         env = execution_environment(config, output / "cargo", before["toolchain"]["rustc"]["path"])
-        for label, name, marker in TESTS:
+        for label, name, marker in tests:
             command = [cargo, "test", "--offline", "--locked", "--release", "--lib", name,
                        "--", "--exact", "--include-ignored", "--show-output", "--test-threads=1"]
             start = time.monotonic()
@@ -270,7 +271,7 @@ def qualify(config, *, runner=subprocess.run, inspect=inventory):
         artifact_stable = True
     except (ValueError, KeyError, TypeError, OSError, subprocess.SubprocessError) as failure:
         error = str(failure)
-    passed = error is None and len(gates) == len(TESTS) and all(gate["validated"] for gate in gates)
+    passed = error is None and bool(tests) and len(gates) == len(tests) and all(gate["validated"] for gate in gates)
     result = dict(schema=SCHEMA, recordedUtc=datetime.now(timezone.utc).isoformat(),
         nativeConsumerValidated=passed, sourcesStable=before is not None and before == after,
         testArtifactStable=artifact_stable,
@@ -283,6 +284,8 @@ def qualify(config, *, runner=subprocess.run, inspect=inventory):
         limits=["BAP instruction lifting and reader-normalized effects remain trusted inputs.",
                 "Native structural refusals do not independently decode or reject self-consistent forged effects.",
                 "The v4 projection assessment and its flags are unchanged; memory forms and full XED/AMD coverage are separate."])
+    if result_fields is not None:
+        result.update(result_fields(passed))
     (output / "assessment.json").write_text(json.dumps(result, indent=2) + "\n")
     return result
 

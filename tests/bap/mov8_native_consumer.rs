@@ -33,6 +33,9 @@ mod common;
 #[path = "mov8_address_size_guard.rs"]
 mod address_size_guard;
 
+#[path = "mov8_memory_native_consumer.rs"]
+mod memory;
+
 const BANKS: [&str; 16] = [
     "rax", "rcx", "rdx", "rbx", "rsp", "rbp", "rsi", "rdi", "r8", "r9", "r10", "r11", "r12", "r13",
     "r14", "r15",

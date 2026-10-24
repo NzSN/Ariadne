@@ -1,0 +1,3954 @@
+{
+  "boundaries": {
+    "ph-legacy-denormal-scope": {
+      "kind": "source-conflict",
+      "meaning": "A legacy no-denormal prose claim and a F16C-labelled denormal exception row require adjudication.",
+      "rules": [
+        "ph-base-denormal-prose",
+        "ph-f16c-denormal-table"
+      ]
+    },
+    "ph-ymm-clear-overlap": {
+      "kind": "source-conflict",
+      "meaning": "The stated clear range overlaps the upper half of the declared eight-lane result; do not generate definite writes.",
+      "rules": [
+        "ph-lane-payload",
+        "ph-ymm-clear-statement"
+      ]
+    },
+    "psx-feature-width-scope": {
+      "kind": "unresolved-reference",
+      "meaning": "The aggregate feature row does not separately identify its width-dependent applicability.",
+      "rules": [
+        "psx-feature-table"
+      ]
+    },
+    "psx-rounding-er-scope": {
+      "kind": "unresolved-reference",
+      "meaning": "Resolve embedded-rounding applicability before treating the always-MXCSR prose as universal.",
+      "rules": [
+        "psx-rounding-prose",
+        "psx-er-encoding-row"
+      ]
+    }
+  },
+  "clauses": {
+    "ph-base-broadcast": {
+      "parameters": {
+        "memoryBroadcast": false
+      },
+      "requiredTerms": [
+        "VCVTPH2PSX",
+        "VCVTPH2PS"
+      ],
+      "sourceCells": [
+        "pdf:943:cell:13"
+      ],
+      "subjects": [
+        "VCVTPH2PS"
+      ]
+    },
+    "ph-base-denormal-prose": {
+      "parameters": {
+        "denormalException": false
+      },
+      "requiredTerms": [
+        "VCVTPH2PS",
+        "denormal"
+      ],
+      "sourceCells": [
+        "pdf:942:cell:8",
+        "pdf:942:cell:9",
+        "pdf:943:cell:14"
+      ],
+      "subjects": [
+        "VCVTPH2PS"
+      ]
+    },
+    "ph-daz": {
+      "parameters": {
+        "dazIgnored": true
+      },
+      "requiredTerms": [
+        "MXCSR.DAZ",
+        "ignored"
+      ],
+      "sourceCells": [
+        "pdf:942:cell:8",
+        "pdf:942:cell:9"
+      ],
+      "subjects": [
+        "VCVTPH2PS",
+        "VCVTPH2PSX"
+      ]
+    },
+    "ph-encoding-map": {
+      "parameters": {
+        "legacyEvexMap": 2,
+        "opcode": "13",
+        "xEvexMap": 6
+      },
+      "requiredTerms": [
+        "RXBR'.2",
+        "RXBR'.6",
+        "13 /r"
+      ],
+      "sourceCells": [
+        "pdf:944:cell:21",
+        "pdf:944:cell:22",
+        "pdf:944:cell:23",
+        "pdf:944:cell:24",
+        "pdf:944:cell:25",
+        "pdf:944:cell:26",
+        "pdf:944:cell:27",
+        "pdf:944:cell:28",
+        "pdf:944:cell:29",
+        "pdf:944:cell:30",
+        "pdf:944:cell:31",
+        "pdf:944:cell:32",
+        "pdf:944:cell:33",
+        "pdf:944:cell:34",
+        "pdf:944:cell:35",
+        "pdf:944:cell:36",
+        "pdf:944:cell:37",
+        "pdf:944:cell:38",
+        "pdf:944:cell:39",
+        "pdf:944:cell:40",
+        "pdf:944:cell:45",
+        "pdf:944:cell:46",
+        "pdf:944:cell:47",
+        "pdf:944:cell:48",
+        "pdf:944:cell:49",
+        "pdf:944:cell:50",
+        "pdf:944:cell:51",
+        "pdf:944:cell:52",
+        "pdf:944:cell:53",
+        "pdf:944:cell:54",
+        "pdf:944:cell:55",
+        "pdf:944:cell:56",
+        "pdf:944:cell:57",
+        "pdf:944:cell:58",
+        "pdf:944:cell:59",
+        "pdf:944:cell:60",
+        "pdf:944:cell:61",
+        "pdf:944:cell:62",
+        "pdf:944:cell:63",
+        "pdf:944:cell:64",
+        "pdf:944:cell:65",
+        "pdf:944:cell:66",
+        "pdf:944:cell:67",
+        "pdf:944:cell:68",
+        "pdf:944:cell:69",
+        "pdf:944:cell:70",
+        "pdf:944:cell:71",
+        "pdf:944:cell:72",
+        "pdf:944:cell:73",
+        "pdf:944:cell:74",
+        "pdf:944:cell:75",
+        "pdf:944:cell:76",
+        "pdf:944:cell:77",
+        "pdf:944:cell:78",
+        "pdf:944:cell:79",
+        "pdf:944:cell:80",
+        "pdf:944:cell:81"
+      ],
+      "subjects": [
+        "VCVTPH2PS",
+        "VCVTPH2PSX"
+      ]
+    },
+    "ph-exact-conversion-prose": {
+      "parameters": {
+        "roundingApplicable": false
+      },
+      "requiredTerms": [
+        "exactly",
+        "rounding"
+      ],
+      "sourceCells": [
+        "pdf:942:cell:10",
+        "pdf:942:cell:11",
+        "pdf:942:cell:12"
+      ],
+      "subjects": [
+        "VCVTPH2PS",
+        "VCVTPH2PSX"
+      ]
+    },
+    "ph-f16c-denormal-table": {
+      "parameters": {
+        "applicabilityLabel": "F16C",
+        "denormalExceptionRow": true
+      },
+      "requiredTerms": [
+        "(DE)",
+        "denormal",
+        "F16C"
+      ],
+      "sourceCells": [
+        "pdf:945:cell:96",
+        "pdf:945:cell:97",
+        "pdf:945:cell:98",
+        "pdf:945:cell:99",
+        "pdf:945:cell:109"
+      ],
+      "subjects": [
+        "VCVTPH2PS"
+      ]
+    },
+    "ph-lane-payload": {
+      "parameters": {
+        "lanes": {
+          "128": 4,
+          "256": 8,
+          "512": 16
+        },
+        "resultElementBits": 32,
+        "sourceElementBits": 16
+      },
+      "requiredTerms": [
+        "four",
+        "eight",
+        "sixteen"
+      ],
+      "sourceCells": [
+        "pdf:942:cell:67",
+        "pdf:942:cell:68",
+        "pdf:942:cell:69",
+        "pdf:942:cell:70",
+        "pdf:942:cell:71",
+        "pdf:943:cell:4",
+        "pdf:943:cell:5",
+        "pdf:943:cell:6",
+        "pdf:943:cell:7",
+        "pdf:943:cell:8",
+        "pdf:943:cell:9",
+        "pdf:943:cell:10",
+        "pdf:943:cell:11"
+      ],
+      "subjects": [
+        "VCVTPH2PS",
+        "VCVTPH2PSX"
+      ]
+    },
+    "ph-mask": {
+      "parameters": {
+        "maskElementBits": 32,
+        "memoryFaultSuppression": true
+      },
+      "requiredTerms": [
+        "32-bit",
+        "suppression"
+      ],
+      "sourceCells": [
+        "pdf:943:cell:15",
+        "pdf:943:cell:16"
+      ],
+      "subjects": [
+        "VCVTPH2PS",
+        "VCVTPH2PSX"
+      ]
+    },
+    "ph-ymm-clear-statement": {
+      "parameters": {
+        "clearHighBit": 511,
+        "clearLowBit": 128,
+        "resultBits": 256
+      },
+      "requiredTerms": [
+        "eight",
+        "[511:128]",
+        "cleared"
+      ],
+      "sourceCells": [
+        "pdf:943:cell:4",
+        "pdf:943:cell:5",
+        "pdf:943:cell:6",
+        "pdf:943:cell:7"
+      ],
+      "subjects": [
+        "VCVTPH2PS",
+        "VCVTPH2PSX"
+      ]
+    },
+    "phx-broadcast": {
+      "parameters": {
+        "memoryBroadcastBits": 16
+      },
+      "requiredTerms": [
+        "broadcast",
+        "16-bit"
+      ],
+      "sourceCells": [
+        "pdf:942:cell:68",
+        "pdf:942:cell:69",
+        "pdf:943:cell:10",
+        "pdf:943:cell:11",
+        "pdf:943:cell:12",
+        "pdf:943:cell:13"
+      ],
+      "subjects": [
+        "VCVTPH2PSX"
+      ]
+    },
+    "phx-denormal-prose": {
+      "parameters": {
+        "denormalException": true
+      },
+      "requiredTerms": [
+        "VCVTPH2PSX",
+        "denormal"
+      ],
+      "sourceCells": [
+        "pdf:943:cell:14"
+      ],
+      "subjects": [
+        "VCVTPH2PSX"
+      ]
+    },
+    "phx-feature-table": {
+      "parameters": {
+        "width128and256": [
+          "AVX512VL",
+          "AVX512_FP16"
+        ],
+        "width512": [
+          "AVX512_FP16"
+        ]
+      },
+      "requiredTerms": [
+        "128,256",
+        "512",
+        "AVX512_FP16"
+      ],
+      "sourceCells": [
+        "pdf:943:cell:19",
+        "pdf:943:cell:20",
+        "pdf:943:cell:21",
+        "pdf:943:cell:22",
+        "pdf:943:cell:23",
+        "pdf:943:cell:24",
+        "pdf:943:cell:25",
+        "pdf:943:cell:26",
+        "pdf:943:cell:27",
+        "pdf:943:cell:28",
+        "pdf:943:cell:29",
+        "pdf:943:cell:30"
+      ],
+      "subjects": [
+        "VCVTPH2PSX"
+      ]
+    },
+    "ps-base-memory": {
+      "parameters": {
+        "memoryLoad": false,
+        "memoryStore": true
+      },
+      "requiredTerms": [
+        "VCVTPS2PH",
+        "store",
+        "load"
+      ],
+      "sourceCells": [
+        "pdf:956:cell:70",
+        "pdf:956:cell:71",
+        "pdf:956:cell:72"
+      ],
+      "subjects": [
+        "VCVTPS2PH"
+      ]
+    },
+    "ps-encoding-map": {
+      "parameters": {
+        "legacyEvexMap": 3,
+        "opcode": "1D",
+        "xEvexMap": 5
+      },
+      "requiredTerms": [
+        "RXBR'.3",
+        "RXBR'.5",
+        "1D /r"
+      ],
+      "sourceCells": [
+        "pdf:958:cell:38",
+        "pdf:958:cell:39",
+        "pdf:958:cell:40",
+        "pdf:958:cell:41",
+        "pdf:958:cell:42",
+        "pdf:958:cell:43",
+        "pdf:958:cell:44",
+        "pdf:958:cell:45",
+        "pdf:958:cell:54",
+        "pdf:958:cell:55",
+        "pdf:958:cell:56",
+        "pdf:958:cell:57",
+        "pdf:958:cell:58",
+        "pdf:958:cell:59",
+        "pdf:958:cell:60",
+        "pdf:958:cell:61",
+        "pdf:958:cell:62",
+        "pdf:958:cell:63",
+        "pdf:958:cell:64",
+        "pdf:958:cell:65",
+        "pdf:958:cell:66",
+        "pdf:958:cell:67",
+        "pdf:958:cell:68",
+        "pdf:958:cell:69",
+        "pdf:958:cell:70",
+        "pdf:958:cell:71",
+        "pdf:958:cell:72",
+        "pdf:958:cell:73",
+        "pdf:958:cell:74",
+        "pdf:958:cell:75",
+        "pdf:958:cell:76",
+        "pdf:958:cell:77",
+        "pdf:958:cell:78",
+        "pdf:958:cell:79",
+        "pdf:958:cell:80",
+        "pdf:958:cell:81",
+        "pdf:958:cell:82",
+        "pdf:958:cell:83",
+        "pdf:958:cell:84",
+        "pdf:958:cell:85",
+        "pdf:958:cell:86",
+        "pdf:958:cell:87",
+        "pdf:958:cell:88",
+        "pdf:958:cell:89",
+        "pdf:958:cell:90"
+      ],
+      "subjects": [
+        "VCVTPS2PH",
+        "VCVTPS2PHX"
+      ]
+    },
+    "ps-ftz": {
+      "parameters": {
+        "ftzIgnored": true,
+        "halfDenormalsProduced": true
+      },
+      "requiredTerms": [
+        "MXCSR[FTZ]",
+        "denormals"
+      ],
+      "sourceCells": [
+        "pdf:957:cell:38",
+        "pdf:957:cell:39"
+      ],
+      "subjects": [
+        "VCVTPS2PH",
+        "VCVTPS2PHX"
+      ]
+    },
+    "ps-immediate-rounding": {
+      "parameters": {
+        "immediateModes": [
+          "nearest",
+          "down",
+          "up",
+          "truncate"
+        ],
+        "modeBits": [
+          1,
+          0
+        ],
+        "selectorBit": 2
+      },
+      "requiredTerms": [
+        "MXCSR.RC",
+        "Nearest",
+        "Down",
+        "Up",
+        "Truncate"
+      ],
+      "sourceCells": [
+        "pdf:957:cell:3",
+        "pdf:957:cell:4",
+        "pdf:957:cell:5",
+        "pdf:957:cell:6",
+        "pdf:957:cell:7",
+        "pdf:957:cell:8",
+        "pdf:957:cell:9",
+        "pdf:957:cell:10",
+        "pdf:957:cell:11",
+        "pdf:957:cell:12",
+        "pdf:957:cell:13",
+        "pdf:957:cell:14",
+        "pdf:957:cell:15",
+        "pdf:957:cell:16",
+        "pdf:957:cell:17",
+        "pdf:957:cell:18",
+        "pdf:957:cell:19",
+        "pdf:957:cell:20",
+        "pdf:957:cell:21",
+        "pdf:957:cell:22",
+        "pdf:957:cell:23",
+        "pdf:957:cell:24",
+        "pdf:957:cell:25",
+        "pdf:957:cell:26",
+        "pdf:957:cell:27",
+        "pdf:957:cell:28",
+        "pdf:957:cell:29",
+        "pdf:957:cell:30",
+        "pdf:957:cell:31",
+        "pdf:957:cell:32",
+        "pdf:957:cell:33",
+        "pdf:957:cell:34",
+        "pdf:957:cell:35",
+        "pdf:957:cell:36",
+        "pdf:957:cell:37"
+      ],
+      "subjects": [
+        "VCVTPS2PH"
+      ]
+    },
+    "ps-lane-payload": {
+      "parameters": {
+        "lanes": {
+          "128": 4,
+          "256": 8,
+          "512": 16
+        },
+        "resultElementBits": 16,
+        "sourceElementBits": 32
+      },
+      "requiredTerms": [
+        "four",
+        "eight",
+        "sixteen"
+      ],
+      "sourceCells": [
+        "pdf:957:cell:42",
+        "pdf:957:cell:43",
+        "pdf:957:cell:44",
+        "pdf:957:cell:45",
+        "pdf:957:cell:46",
+        "pdf:957:cell:47",
+        "pdf:957:cell:48",
+        "pdf:957:cell:49",
+        "pdf:957:cell:50",
+        "pdf:957:cell:51",
+        "pdf:957:cell:52",
+        "pdf:957:cell:53"
+      ],
+      "subjects": [
+        "VCVTPS2PH",
+        "VCVTPS2PHX"
+      ]
+    },
+    "ps-mask": {
+      "parameters": {
+        "maskElementBits": 16,
+        "memoryFaultSuppression": true
+      },
+      "requiredTerms": [
+        "16-bit",
+        "suppression"
+      ],
+      "sourceCells": [
+        "pdf:957:cell:54",
+        "pdf:957:cell:55"
+      ],
+      "subjects": [
+        "VCVTPS2PH",
+        "VCVTPS2PHX"
+      ]
+    },
+    "psx-er-encoding-row": {
+      "parameters": {
+        "registerDecoration": "er",
+        "vectorBits": 512
+      },
+      "requiredTerms": [
+        "{er}",
+        "z.rc.1.1.aaa"
+      ],
+      "sourceCells": [
+        "pdf:958:cell:38",
+        "pdf:958:cell:39",
+        "pdf:958:cell:71",
+        "pdf:958:cell:72",
+        "pdf:958:cell:73",
+        "pdf:958:cell:74",
+        "pdf:958:cell:75"
+      ],
+      "subjects": [
+        "VCVTPS2PHX"
+      ]
+    },
+    "psx-feature-table": {
+      "parameters": {
+        "listedFeatures": [
+          "AVX512VL",
+          "AVX512_FP16"
+        ],
+        "variantWidthNotExplicit": true
+      },
+      "requiredTerms": [
+        "VCVTPS2PHX",
+        "AVX512VL, AVX512_FP16"
+      ],
+      "sourceCells": [
+        "pdf:958:cell:5",
+        "pdf:958:cell:6",
+        "pdf:958:cell:7",
+        "pdf:958:cell:8",
+        "pdf:958:cell:9",
+        "pdf:958:cell:10",
+        "pdf:958:cell:11"
+      ],
+      "subjects": [
+        "VCVTPS2PHX"
+      ]
+    },
+    "psx-memory": {
+      "parameters": {
+        "memoryBroadcastBits": 32,
+        "memoryLoad": true,
+        "memoryStore": false
+      },
+      "requiredTerms": [
+        "VCVTPS2PHX",
+        "mem32bcst"
+      ],
+      "sourceCells": [
+        "pdf:956:cell:70",
+        "pdf:956:cell:71",
+        "pdf:956:cell:72",
+        "pdf:958:cell:40",
+        "pdf:958:cell:41",
+        "pdf:958:cell:42",
+        "pdf:958:cell:43",
+        "pdf:958:cell:44",
+        "pdf:958:cell:45"
+      ],
+      "subjects": [
+        "VCVTPS2PHX"
+      ]
+    },
+    "psx-rounding-prose": {
+      "parameters": {
+        "claimAlways": true,
+        "roundingSourceClaim": "MXCSR.RC"
+      },
+      "requiredTerms": [
+        "VCVTPS2PHX",
+        "MXCSR.RC"
+      ],
+      "sourceCells": [
+        "pdf:956:cell:73",
+        "pdf:956:cell:74"
+      ],
+      "subjects": [
+        "VCVTPS2PHX"
+      ]
+    }
+  },
+  "entryReviewInput": {
+    "path": "tests/bap/fixtures/source-migration/entry-review-v1.json",
+    "sha256": "22408d55b7c0d2a9dfb9d849469cea880a20e8114dee7c5bc7677d1b7e9dd9de"
+  },
+  "owners": {
+    "ph": {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0353",
+      "pdfEndPage": 945,
+      "pdfPage": 942,
+      "title": "VCVTPH2PS VCVTPH2PSX"
+    },
+    "ps": {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0359",
+      "pdfEndPage": 960,
+      "pdfPage": 956,
+      "title": "VCVTPS2PH VCVTPS2PHX"
+    }
+  },
+  "publisherSource": {
+    "id": "vol4-r3.27",
+    "pdfSha256": "209c0ebfa2b4f5bebf7b41ad7f7c5841026166b63b43f0aeb4d9f669f43806f9",
+    "publication": "26568"
+  },
+  "schema": "ariadne.amd64-conversion-source-constraints/v1",
+  "sourceCells": {
+    "pdf:942:cell:10": {
+      "id": "pdf:942:cell:10",
+      "pdfPage": 942,
+      "rect": [
+        62.9874,
+        183.4954,
+        523.3422,
+        199.6594
+      ],
+      "unicodeSha256": "356abba7a06516ea45d2227fb8199493580411787e8da7b102362ac6cb8d1d4a",
+      "wordBoxesSha256": "f8281cbd13149b4428147febc08f0a096b66b9505fa3089838baf07827cc7b2f",
+      "wordSpan": [
+        52,
+        65
+      ]
+    },
+    "pdf:942:cell:11": {
+      "id": "pdf:942:cell:11",
+      "pdfPage": 942,
+      "rect": [
+        62.9874,
+        195.4954,
+        549.0246,
+        211.6594
+      ],
+      "unicodeSha256": "f207ab5629b537fc3e0eade627ec190483afa2f2f001f92c1c433d4d74dd216f",
+      "wordBoxesSha256": "7a4b809d9db50785b03141c8d4639624c15f76dfc3dcafe739021bd3a95c9d96",
+      "wordSpan": [
+        65,
+        77
+      ]
+    },
+    "pdf:942:cell:12": {
+      "id": "pdf:942:cell:12",
+      "pdfPage": 942,
+      "rect": [
+        62.9874,
+        211.4914,
+        133.665,
+        227.6554
+      ],
+      "unicodeSha256": "31e4410fff6f996711caa255cfa108b32af1132f74f895f27747fee88f496bf9",
+      "wordBoxesSha256": "7e827444c6e4f88c3216c2d7c062de58b3429d18550a3108fe8e7965f47da709",
+      "wordSpan": [
+        77,
+        79
+      ]
+    },
+    "pdf:942:cell:67": {
+      "id": "pdf:942:cell:67",
+      "pdfPage": 942,
+      "rect": [
+        62.9874,
+        627.7527,
+        514.5258,
+        643.9167
+      ],
+      "unicodeSha256": "6481cc95bfdf39272413e598614bf54c95e85824f51763a4290592383c917097",
+      "wordBoxesSha256": "84c3a7b70f15a31ec7b0a33955d3f7d41c900ac6c6644d3b9ba0dc8d6e62f393",
+      "wordSpan": [
+        183,
+        197
+      ]
+    },
+    "pdf:942:cell:68": {
+      "id": "pdf:942:cell:68",
+      "pdfPage": 942,
+      "rect": [
+        62.9874,
+        639.7527,
+        535.509,
+        655.9167
+      ],
+      "unicodeSha256": "7a032e8c0a40e366490c2f604a9f91794dd621890417db5f37b95d7f423ce78d",
+      "wordBoxesSha256": "5d9b41906a2aee292b7c78086c5d4f9b9f09b0cadf22a984de276d1034ced87d",
+      "wordSpan": [
+        197,
+        212
+      ]
+    },
+    "pdf:942:cell:69": {
+      "id": "pdf:942:cell:69",
+      "pdfPage": 942,
+      "rect": [
+        62.9874,
+        651.7527,
+        519.699,
+        667.9167
+      ],
+      "unicodeSha256": "70ffba56bd356873ecca103802906a43c8e80f931ac7fee4a1fb669163d0966b",
+      "wordBoxesSha256": "a6d1849e211fb6e9ca00cd96bc7c6c71b3d3bfe01a2b690ecab47971d6a1d80e",
+      "wordSpan": [
+        212,
+        224
+      ]
+    },
+    "pdf:942:cell:70": {
+      "id": "pdf:942:cell:70",
+      "pdfPage": 942,
+      "rect": [
+        62.9874,
+        663.7527,
+        499.5126,
+        679.9167
+      ],
+      "unicodeSha256": "c217b02fb4dd16c32d855016ab29ca339812f46ce0a88bd2daa9d49a9acee224",
+      "wordBoxesSha256": "6e78a427c81006386c714b1fb2ca19bbe6f63a4f2ab1851240c42f8c1c080bcc",
+      "wordSpan": [
+        224,
+        239
+      ]
+    },
+    "pdf:942:cell:71": {
+      "id": "pdf:942:cell:71",
+      "pdfPage": 942,
+      "rect": [
+        62.9874,
+        675.7527,
+        264.9414,
+        691.9167
+      ],
+      "unicodeSha256": "0541ba423dc7585e76b9ddae5b7a13af38e92f27a2563c1437ec2a0a7af80452",
+      "wordBoxesSha256": "15a93aea457bf8c11f05acda1e5abab1e94048f117d5e23df322ab8d01f74db0",
+      "wordSpan": [
+        239,
+        245
+      ]
+    },
+    "pdf:942:cell:8": {
+      "id": "pdf:942:cell:8",
+      "pdfPage": 942,
+      "rect": [
+        62.9874,
+        155.4994,
+        543.3486,
+        171.6634
+      ],
+      "unicodeSha256": "0d09ca4d089e96d1be5c8b7d46c09888564da5368e11dba86028457424bca6c1",
+      "wordBoxesSha256": "07d3044f99b4b4efb07a6975254549a65e94937843c136084c029539d8aa3a52",
+      "wordSpan": [
+        28,
+        43
+      ]
+    },
+    "pdf:942:cell:9": {
+      "id": "pdf:942:cell:9",
+      "pdfPage": 942,
+      "rect": [
+        62.9874,
+        167.4994,
+        364.5402,
+        183.6634
+      ],
+      "unicodeSha256": "cf2649ea6fe83520e032f5680fdf381327fd6e34f68fd31f762df5034d177d1e",
+      "wordBoxesSha256": "2e8974e744e435c9b1333d727d72880e2f56e32abcdefd321ae088a6e9532d1f",
+      "wordSpan": [
+        43,
+        52
+      ]
+    },
+    "pdf:943:cell:10": {
+      "id": "pdf:943:cell:10",
+      "pdfPage": 943,
+      "rect": [
+        62.9874,
+        185.5033,
+        522.0102,
+        201.6673
+      ],
+      "unicodeSha256": "0f252f8a9a2a3eb25093f2b704ad1527ad4c07706a8d62c0d9ca6c686f5fe229",
+      "wordBoxesSha256": "15c59a1e435062d0c2f5f711c0f6189cfa22d0c5ed37095bfb5ace7307326ecf",
+      "wordSpan": [
+        75,
+        88
+      ]
+    },
+    "pdf:943:cell:11": {
+      "id": "pdf:943:cell:11",
+      "pdfPage": 943,
+      "rect": [
+        62.9874,
+        197.5033,
+        526.9914,
+        213.6673
+      ],
+      "unicodeSha256": "dd2b53a79726315418b696cba26b4b8d6343746592049dac6bb1187127d79d30",
+      "wordBoxesSha256": "68386a990b3fd4e261acd6b5063aab0ba74dff9f97579bea9f34337c04eabd4e",
+      "wordSpan": [
+        88,
+        101
+      ]
+    },
+    "pdf:943:cell:12": {
+      "id": "pdf:943:cell:12",
+      "pdfPage": 943,
+      "rect": [
+        62.9874,
+        213.4993,
+        519.6702,
+        229.6633
+      ],
+      "unicodeSha256": "d3dc42b6ebba905284579c960f9772b629df7d429af63aa06ee689406a34ff04",
+      "wordBoxesSha256": "24147d8d97165e79bacb304e286cf86a7387dc9b748fb40901587a24d947aae8",
+      "wordSpan": [
+        101,
+        114
+      ]
+    },
+    "pdf:943:cell:13": {
+      "id": "pdf:943:cell:13",
+      "pdfPage": 943,
+      "rect": [
+        62.9874,
+        225.4993,
+        379.4166,
+        241.6633
+      ],
+      "unicodeSha256": "ceafe4da88b555208683e2e7166c961d89290412171a2a82c70d1f2e9631a0c8",
+      "wordBoxesSha256": "2bb9d615ccf41447bec10ba047372a92bfa250891901a7cc0df54ec780ee766a",
+      "wordSpan": [
+        114,
+        123
+      ]
+    },
+    "pdf:943:cell:14": {
+      "id": "pdf:943:cell:14",
+      "pdfPage": 943,
+      "rect": [
+        62.9874,
+        239.5033,
+        432.9354,
+        255.6673
+      ],
+      "unicodeSha256": "bbee390c2c333e06c6ee339137ab08272512980ddfccea35b768ca58087710f4",
+      "wordBoxesSha256": "f08e4ba74174e7687fb931ff62585cb6aa4296fb7c5f5168fb4b9988dc1f9ee1",
+      "wordSpan": [
+        123,
+        133
+      ]
+    },
+    "pdf:943:cell:15": {
+      "id": "pdf:943:cell:15",
+      "pdfPage": 943,
+      "rect": [
+        62.9874,
+        257.5033,
+        546.1002,
+        273.6673
+      ],
+      "unicodeSha256": "211451aef63d4ad4cb54faf77ec394f21a9a7a5555640ab21e7e71e7e2bf2105",
+      "wordBoxesSha256": "8bb5eefc1433aa5a14ec9a39b7a027d2c482152473fc7450452c450f7939bf4b",
+      "wordSpan": [
+        133,
+        150
+      ]
+    },
+    "pdf:943:cell:16": {
+      "id": "pdf:943:cell:16",
+      "pdfPage": 943,
+      "rect": [
+        62.9874,
+        269.5033,
+        340.6122,
+        285.6673
+      ],
+      "unicodeSha256": "0cecbadc877a9a7b2b04eb0816d726807eb5c27d23259a72315a39a58d9b16e4",
+      "wordBoxesSha256": "e3e435a3e3be33a85d4eb9b6c3c86e1877175c18c60880cc6254479b3e72f986",
+      "wordSpan": [
+        150,
+        158
+      ]
+    },
+    "pdf:943:cell:19": {
+      "id": "pdf:943:cell:19",
+      "pdfPage": 943,
+      "rect": [
+        133.5659,
+        325.2496,
+        238.7219,
+        338.8996
+      ],
+      "unicodeSha256": "1c8761e7f3e1dd912f73cb019f39ba855122f927c492f3986f66e707960bba2e",
+      "wordBoxesSha256": "5bf4e4c4c19c9be133d3f03f1e1385803bc54140f2f6710ee5e03d54a6a3b8ee",
+      "wordSpan": [
+        161,
+        163
+      ]
+    },
+    "pdf:943:cell:20": {
+      "id": "pdf:943:cell:20",
+      "pdfPage": 943,
+      "rect": [
+        143.2959,
+        340.2496,
+        228.7729,
+        353.8996
+      ],
+      "unicodeSha256": "68d4c0c6577a2c13d46790a525f99ea6ce55a82096540b8cdc7d9069f6911eec",
+      "wordBoxesSha256": "099de3b114324d39bb875cae64da98122d1853296413efd1a027ea99a2782fa1",
+      "wordSpan": [
+        163,
+        165
+      ]
+    },
+    "pdf:943:cell:21": {
+      "id": "pdf:943:cell:21",
+      "pdfPage": 943,
+      "rect": [
+        144.9659,
+        355.2496,
+        227.2329,
+        368.8996
+      ],
+      "unicodeSha256": "7222e6ac079d0e4c5b20e6518c91b56352f5a589c46ae223e7e590a2076f1b95",
+      "wordBoxesSha256": "587a16d566c386b7224a272249de09e88e2f96ef5c7ef240cd2c2aee4fa33315",
+      "wordSpan": [
+        165,
+        167
+      ]
+    },
+    "pdf:943:cell:22": {
+      "id": "pdf:943:cell:22",
+      "pdfPage": 943,
+      "rect": [
+        124.9659,
+        370.2496,
+        247.0949,
+        383.8996
+      ],
+      "unicodeSha256": "44f62a6cbf3dc2241400d85b5928a99ca595312aec1228304f2d0b937f9b2f43",
+      "wordBoxesSha256": "a9f6af9d6a26bca8a26521c23e0523a5c7d8223a5fd88df561684f1229686247",
+      "wordSpan": [
+        167,
+        170
+      ]
+    },
+    "pdf:943:cell:23": {
+      "id": "pdf:943:cell:23",
+      "pdfPage": 943,
+      "rect": [
+        124.9659,
+        383.2496,
+        247.2609,
+        396.8996
+      ],
+      "unicodeSha256": "b226f8fc48b0cb0facb9b023b16a17f42cda8db1b99d983fefe3d947b1b4c981",
+      "wordBoxesSha256": "922cdc6f1a23b9fe6333119ea9e0b9368c631390a4e76d00c24d6b3220458e89",
+      "wordSpan": [
+        170,
+        173
+      ]
+    },
+    "pdf:943:cell:24": {
+      "id": "pdf:943:cell:24",
+      "pdfPage": 943,
+      "rect": [
+        124.9659,
+        398.2496,
+        247.2609,
+        411.8996
+      ],
+      "unicodeSha256": "370515f58016b8f63baa65214f08c970501561cf7e6b09945374a3b396915ac7",
+      "wordBoxesSha256": "047420c9c296e579857644284fbb67833825c13ac0cd9dc16fff81045252a9c5",
+      "wordSpan": [
+        173,
+        176
+      ]
+    },
+    "pdf:943:cell:25": {
+      "id": "pdf:943:cell:25",
+      "pdfPage": 943,
+      "rect": [
+        412.5459,
+        310.0896,
+        445.8749,
+        324.4096
+      ],
+      "unicodeSha256": "4ff7d8cc72dd8dcb30102d8fe1c43727bed4720151aae8f245c7733e4403d72c",
+      "wordBoxesSha256": "dabd47aa60a79092b10c43e05be3bcde18394c37e6b33f64888fb881e953b4fe",
+      "wordSpan": [
+        176,
+        177
+      ]
+    },
+    "pdf:943:cell:26": {
+      "id": "pdf:943:cell:26",
+      "pdfPage": 943,
+      "rect": [
+        371.5159,
+        325.2496,
+        486.7509,
+        338.8996
+      ],
+      "unicodeSha256": "ade7b53a111a555713172cfe1712547451369a26d7f829512e60159d97092ea2",
+      "wordBoxesSha256": "ad081aeea5be50e5dd150447af0bdf315be5d18ce8587ee2689dc2fe2c72dc87",
+      "wordSpan": [
+        177,
+        179
+      ]
+    },
+    "pdf:943:cell:27": {
+      "id": "pdf:943:cell:27",
+      "pdfPage": 943,
+      "rect": [
+        396.5259,
+        340.2496,
+        461.8439,
+        353.8996
+      ],
+      "unicodeSha256": "5ee2019513f6201072a789a4a742a4afe08f6ce5ead2bef036c2d2f1b7cf0bf0",
+      "wordBoxesSha256": "179f9abcef9f6f99d14e51aee2a2db12bdfb62e669539913f9a0ff34a5814462",
+      "wordSpan": [
+        179,
+        180
+      ]
+    },
+    "pdf:943:cell:28": {
+      "id": "pdf:943:cell:28",
+      "pdfPage": 943,
+      "rect": [
+        416.9959,
+        355.2496,
+        441.4949,
+        368.8996
+      ],
+      "unicodeSha256": "8648489148b8f9f9f3f6f0a00e15acd9fc4556c6150751c3d8b292e8ffd58b4e",
+      "wordBoxesSha256": "54b9af28c517b4b48431ffba1f17531ae70cc22681749c2d71a54c697574fe8c",
+      "wordSpan": [
+        180,
+        181
+      ]
+    },
+    "pdf:943:cell:29": {
+      "id": "pdf:943:cell:29",
+      "pdfPage": 943,
+      "rect": [
+        381.6159,
+        376.7496,
+        476.8149,
+        390.3996
+      ],
+      "unicodeSha256": "e1c6f43c6a534520e6b1886ac5da1e7a2511af03b333a7b3eae8f0fb85fcd6ce",
+      "wordBoxesSha256": "108d136674c3741bcf28e4e11890e0076fa737c17419e66d9bf47a15fa739253",
+      "wordSpan": [
+        181,
+        183
+      ]
+    },
+    "pdf:943:cell:30": {
+      "id": "pdf:943:cell:30",
+      "pdfPage": 943,
+      "rect": [
+        408.1959,
+        398.2496,
+        450.0649,
+        411.8996
+      ],
+      "unicodeSha256": "d5eb215c3e962f4c2f4ae30db4b06ff8f4f22a1c688a528a25da3a81a894511d",
+      "wordBoxesSha256": "378ba0ab34af3683e69bd1394d3d82df9949dfcb12921f0910e3981e5f4032a0",
+      "wordSpan": [
+        183,
+        184
+      ]
+    },
+    "pdf:943:cell:4": {
+      "id": "pdf:943:cell:4",
+      "pdfPage": 943,
+      "rect": [
+        62.9874,
+        107.5035,
+        546.3834,
+        123.6675
+      ],
+      "unicodeSha256": "39710732a273df8990e828b4339ada00831e97111b4257379cf422bcbdf8ebbd",
+      "wordBoxesSha256": "c1fb80d673589accf002469157496b0fa1dc6b7ee5348d1298a602d1479aac7b",
+      "wordSpan": [
+        10,
+        28
+      ]
+    },
+    "pdf:943:cell:5": {
+      "id": "pdf:943:cell:5",
+      "pdfPage": 943,
+      "rect": [
+        62.9874,
+        119.5035,
+        511.1046,
+        135.6675
+      ],
+      "unicodeSha256": "0b7464a1f5241a2b8e534e26ded1b69baca049505e2cec01102d91dfb4fe4d68",
+      "wordBoxesSha256": "67eac493ff3275719ab6b30458adde8d64dc73e14cb77ec7e1de75f551785358",
+      "wordSpan": [
+        28,
+        40
+      ]
+    },
+    "pdf:943:cell:6": {
+      "id": "pdf:943:cell:6",
+      "pdfPage": 943,
+      "rect": [
+        62.9874,
+        131.5035,
+        546.4782,
+        147.6675
+      ],
+      "unicodeSha256": "0abb1c8046b095294b3f0eb12cc6ea5f67c8ba5156d58178e8f7e3ad129dff8b",
+      "wordBoxesSha256": "6097e59eec689e7ed229f20176337f91df7b60ad16a510b719530993fd1d98a0",
+      "wordSpan": [
+        40,
+        55
+      ]
+    },
+    "pdf:943:cell:7": {
+      "id": "pdf:943:cell:7",
+      "pdfPage": 943,
+      "rect": [
+        62.9874,
+        143.5035,
+        203.805,
+        159.6675
+      ],
+      "unicodeSha256": "02ab268872ab147d2d3f4f439f6a100dd470b0585add582aafb61aa9ec2d3212",
+      "wordBoxesSha256": "646643b2a1fb06076c631a74341abb2d27e0eba29723b6bc64e46ed0ab279af7",
+      "wordSpan": [
+        55,
+        60
+      ]
+    },
+    "pdf:943:cell:8": {
+      "id": "pdf:943:cell:8",
+      "pdfPage": 943,
+      "rect": [
+        62.9874,
+        161.09,
+        134.1344,
+        175.41
+      ],
+      "unicodeSha256": "3a743dba4db54f0f45efd1f64f63950a197c5272e7c3da95a95d581cabd61517",
+      "wordBoxesSha256": "c8b75d2f1a630724e53430e61f9fc39eba63cc0c762d49969e752704a625694d",
+      "wordSpan": [
+        60,
+        62
+      ]
+    },
+    "pdf:943:cell:9": {
+      "id": "pdf:943:cell:9",
+      "pdfPage": 943,
+      "rect": [
+        62.9874,
+        173.5033,
+        536.1102,
+        189.6673
+      ],
+      "unicodeSha256": "c6c3d3d298ac831e050bdca62300b6d7837cca7f51f949a9b435ba3cc1d354df",
+      "wordBoxesSha256": "736656b40bf3f1db7de144e39ee2ad521fbb3cd92364ef9bad66c24e3ac57642",
+      "wordSpan": [
+        62,
+        75
+      ]
+    },
+    "pdf:944:cell:21": {
+      "id": "pdf:944:cell:21",
+      "pdfPage": 944,
+      "rect": [
+        64.9934,
+        226.67,
+        219.8274,
+        239.9
+      ],
+      "unicodeSha256": "3ea80d235c95850ba7f445b9c455d4fc7f02c0d59e12356412847dd3be7bfbd1",
+      "wordBoxesSha256": "700b3f8e6a0d26ec8c7c742d998c758dc15cee0b28fdd722340b805eb528b68f",
+      "wordSpan": [
+        33,
+        37
+      ]
+    },
+    "pdf:944:cell:22": {
+      "id": "pdf:944:cell:22",
+      "pdfPage": 944,
+      "rect": [
+        82.9934,
+        236.67,
+        105.7724,
+        249.9
+      ],
+      "unicodeSha256": "93964f315a03bb361dece351743d958d872b23d0c588f11d5afc02a166d7f75d",
+      "wordBoxesSha256": "4b281c4995f993bb43e3219e9a28dfc468a871cc28f8b79a4aed86fd63d0d089",
+      "wordSpan": [
+        37,
+        38
+      ]
+    },
+    "pdf:944:cell:23": {
+      "id": "pdf:944:cell:23",
+      "pdfPage": 944,
+      "rect": [
+        64.9934,
+        251.67,
+        189.9284,
+        264.9
+      ],
+      "unicodeSha256": "2ff6698f79ed8d68f8f1d5310bae7b6b51646ba42cb7ab286c4b0d08994f9691",
+      "wordBoxesSha256": "9b53ab36110f5eddef9fb430f2923990ff87d91e324663050082ef7ef4fc6e6a",
+      "wordSpan": [
+        38,
+        41
+      ]
+    },
+    "pdf:944:cell:24": {
+      "id": "pdf:944:cell:24",
+      "pdfPage": 944,
+      "rect": [
+        82.9934,
+        261.67,
+        200.7284,
+        274.9
+      ],
+      "unicodeSha256": "40f376fee8308b4d1578bbb03a903d5ee9f36a5e56218ae32d397f586f2b2cf7",
+      "wordBoxesSha256": "33be7ab4bbad2162420b88e9b2f9564bcf48af950876ad1a955c1e9b29a51159",
+      "wordSpan": [
+        41,
+        42
+      ]
+    },
+    "pdf:944:cell:25": {
+      "id": "pdf:944:cell:25",
+      "pdfPage": 944,
+      "rect": [
+        64.9834,
+        276.67,
+        189.9184,
+        289.9
+      ],
+      "unicodeSha256": "aaaa10c5b02f86c0a89857558a9f350132d5727892a80650fad887528c2af1db",
+      "wordBoxesSha256": "3280dd03ed3a5b39171c38bc9b1f0685decc88a75b53e803e56e5928c2ae3fdb",
+      "wordSpan": [
+        42,
+        45
+      ]
+    },
+    "pdf:944:cell:26": {
+      "id": "pdf:944:cell:26",
+      "pdfPage": 944,
+      "rect": [
+        82.9834,
+        286.67,
+        206.2384,
+        299.9
+      ],
+      "unicodeSha256": "35db9d1de0818b553b078e68d33d64de83565a32e54a417437ca74630b9dce8b",
+      "wordBoxesSha256": "2af5a2d4dc206f594436f4ddc4ecc4f400b79dd53c9c4240c8372f97bc802f29",
+      "wordSpan": [
+        45,
+        46
+      ]
+    },
+    "pdf:944:cell:27": {
+      "id": "pdf:944:cell:27",
+      "pdfPage": 944,
+      "rect": [
+        64.9734,
+        301.67,
+        189.9084,
+        314.9
+      ],
+      "unicodeSha256": "73d5e914de70414b5e3166bf8ed0dbf684c4e1cde62c01578ce0e92ca9cce02d",
+      "wordBoxesSha256": "5fda2baf9115d76af3cb32f312603583003b7deb339cc13ceeda4b4f1c1d1fa4",
+      "wordSpan": [
+        46,
+        49
+      ]
+    },
+    "pdf:944:cell:28": {
+      "id": "pdf:944:cell:28",
+      "pdfPage": 944,
+      "rect": [
+        82.9734,
+        311.67,
+        206.2284,
+        324.9
+      ],
+      "unicodeSha256": "ff9b777104fc2fc6275d0f1ce9e3ef5e5fac800181fb1e4dc9781455e900c5eb",
+      "wordBoxesSha256": "a08f756a5a150ccec087813bb20c8bd6e864b51c6ef02a1b218b8d9114196398",
+      "wordSpan": [
+        49,
+        50
+      ]
+    },
+    "pdf:944:cell:29": {
+      "id": "pdf:944:cell:29",
+      "pdfPage": 944,
+      "rect": [
+        64.9634,
+        326.67,
+        213.0774,
+        339.9
+      ],
+      "unicodeSha256": "4ba9f842a6bb11bc1f92c5755d232cf15332ecdc8a14770723da3bd99c4f2d0b",
+      "wordBoxesSha256": "ee0126b4485d77deeb2148fdce949db85c11ab2a7cbd578799c663ba16dc7ef4",
+      "wordSpan": [
+        50,
+        54
+      ]
+    },
+    "pdf:944:cell:30": {
+      "id": "pdf:944:cell:30",
+      "pdfPage": 944,
+      "rect": [
+        82.9634,
+        336.67,
+        105.7424,
+        349.9
+      ],
+      "unicodeSha256": "93964f315a03bb361dece351743d958d872b23d0c588f11d5afc02a166d7f75d",
+      "wordBoxesSha256": "390d234504b240d0d4e242122de22002e956faddf50cc2e0269b3fcf3bb2b789",
+      "wordSpan": [
+        54,
+        55
+      ]
+    },
+    "pdf:944:cell:31": {
+      "id": "pdf:944:cell:31",
+      "pdfPage": 944,
+      "rect": [
+        64.9634,
+        351.67,
+        183.1784,
+        364.9
+      ],
+      "unicodeSha256": "f8dbab3106032a31bc45dddf045b742e7014365d09ce4364dec19ef3abdca13c",
+      "wordBoxesSha256": "9d5f09105ac6789ba655a47867fe02dfe7eff542f85f373723cba05a868d1d21",
+      "wordSpan": [
+        55,
+        58
+      ]
+    },
+    "pdf:944:cell:32": {
+      "id": "pdf:944:cell:32",
+      "pdfPage": 944,
+      "rect": [
+        82.9634,
+        361.67,
+        146.1214,
+        374.9
+      ],
+      "unicodeSha256": "42cdfa7b307dc3c05432ab99190bc022af8d7619450971013033fa20b44a3f06",
+      "wordBoxesSha256": "2d825cc06013acfd3aa04099d6398895d57c988f9e683d978d6cdd1c4e6709a2",
+      "wordSpan": [
+        58,
+        59
+      ]
+    },
+    "pdf:944:cell:33": {
+      "id": "pdf:944:cell:33",
+      "pdfPage": 944,
+      "rect": [
+        64.9634,
+        376.67,
+        183.1784,
+        389.9
+      ],
+      "unicodeSha256": "1acc1aca04ebe13a89acf892137209b39f4e947041fe42192bdb5ab04eccc0dd",
+      "wordBoxesSha256": "d9e654ee60dbfc37ed201d4f477686825676db16c41a793e772cec6af98a4c33",
+      "wordSpan": [
+        59,
+        62
+      ]
+    },
+    "pdf:944:cell:34": {
+      "id": "pdf:944:cell:34",
+      "pdfPage": 944,
+      "rect": [
+        82.9634,
+        386.67,
+        151.6404,
+        399.9
+      ],
+      "unicodeSha256": "97bfea29f9338916b1970c7aba4c5cb58f3b5a0e78269134d466fad5be44c31f",
+      "wordBoxesSha256": "36e4a0d59296a0d836a8ccec6c0f497641a62ff7818b3c4fa62ab6e78f75953c",
+      "wordSpan": [
+        62,
+        63
+      ]
+    },
+    "pdf:944:cell:35": {
+      "id": "pdf:944:cell:35",
+      "pdfPage": 944,
+      "rect": [
+        64.9634,
+        401.67,
+        183.1784,
+        414.9
+      ],
+      "unicodeSha256": "d13c8adbafe451578cdfa91535412c1a07c7e4dc0111866d43b491441defbc03",
+      "wordBoxesSha256": "253fb763be1a504c5692e709516ddb87a4138b2016bb10ef0ff5a61b3e5b50c0",
+      "wordSpan": [
+        63,
+        66
+      ]
+    },
+    "pdf:944:cell:36": {
+      "id": "pdf:944:cell:36",
+      "pdfPage": 944,
+      "rect": [
+        82.9634,
+        411.67,
+        151.6404,
+        424.9
+      ],
+      "unicodeSha256": "3d8204a72c62aaf51bff60e67b34ec64909c46e6a31ccf48b452448bfd054c0b",
+      "wordBoxesSha256": "ff47a55651e64ca4627467e7d451d8b3530dca55a54d3a585e05c8cf4bdd1502",
+      "wordSpan": [
+        66,
+        67
+      ]
+    },
+    "pdf:944:cell:37": {
+      "id": "pdf:944:cell:37",
+      "pdfPage": 944,
+      "rect": [
+        395.7134,
+        196.09,
+        441.1814,
+        210.41
+      ],
+      "unicodeSha256": "4d25a47625ceaa596a02112e807209e5248a4a3bc61cd07d9191a9547a182550",
+      "wordBoxesSha256": "102c8d94887ddec3a240f17ed72efa17feb70beb0a976ab7e2ddf54a4606e939",
+      "wordSpan": [
+        67,
+        68
+      ]
+    },
+    "pdf:944:cell:38": {
+      "id": "pdf:944:cell:38",
+      "pdfPage": 944,
+      "rect": [
+        371.9134,
+        211.09,
+        420.0214,
+        225.41
+      ],
+      "unicodeSha256": "21ac15c6e37a1591df7e4cfc059349315eafcab8933d2460b6bf265a123fdf8b",
+      "wordBoxesSha256": "0749dbe61baebdffbb1e0dfb2dbba074ab600c94f576baa4a17ff929da1c6591",
+      "wordSpan": [
+        68,
+        69
+      ]
+    },
+    "pdf:944:cell:39": {
+      "id": "pdf:944:cell:39",
+      "pdfPage": 944,
+      "rect": [
+        436.7234,
+        211.09,
+        545.1224,
+        225.41
+      ],
+      "unicodeSha256": "9ef775cf8b21aa0e5bf6a25350ab62f5caee043c6c2e89fdc7947fe5517d96c2",
+      "wordBoxesSha256": "980d289153a5bc1a9e9f2ee3679427e62c2764cdeacf8deaf58fd89972f34748",
+      "wordSpan": [
+        69,
+        71
+      ]
+    },
+    "pdf:944:cell:40": {
+      "id": "pdf:944:cell:40",
+      "pdfPage": 944,
+      "rect": [
+        374.8634,
+        226.25,
+        417.1134,
+        239.9
+      ],
+      "unicodeSha256": "479374b79f4107d735953b13597398c116c8e56f52e2802ab05c11f8c757a0c6",
+      "wordBoxesSha256": "b40b786488b51fcf26af1dfe00ca4bfcfe5df1415532107db75638d56962ba20",
+      "wordSpan": [
+        71,
+        72
+      ]
+    },
+    "pdf:944:cell:45": {
+      "id": "pdf:944:cell:45",
+      "pdfPage": 944,
+      "rect": [
+        297.2534,
+        211.09,
+        350.8814,
+        225.41
+      ],
+      "unicodeSha256": "714a451faf956f9a0335f19e39383cb0ad2377da4ac43f95082eed420d93d94c",
+      "wordBoxesSha256": "508cba2ae8a1bec33d3ab9674fa3509d3957c58333357e2806732b52b0ed2ea0",
+      "wordSpan": [
+        77,
+        78
+      ]
+    },
+    "pdf:944:cell:46": {
+      "id": "pdf:944:cell:46",
+      "pdfPage": 944,
+      "rect": [
+        304.9834,
+        226.25,
+        342.9934,
+        239.9
+      ],
+      "unicodeSha256": "ca40662e1fa834f78187edc605d0a34f0b653c47d8bb7e5c081b321be6b1f969",
+      "wordBoxesSha256": "ac662f6e106ea955f973d0b28004c0aa5126daa0808867872c80f3e33395e14e",
+      "wordSpan": [
+        78,
+        79
+      ]
+    },
+    "pdf:944:cell:47": {
+      "id": "pdf:944:cell:47",
+      "pdfPage": 944,
+      "rect": [
+        255.4334,
+        251.25,
+        266.5134,
+        264.9
+      ],
+      "unicodeSha256": "81b8a03f97e8787c53fe1a86bda042b6f0de9b0ec9c09357e107c99ba4d6948a",
+      "wordBoxesSha256": "e0a82e4398da08e8f2109eb36f08e359971a9bb4218fef7e6ca1df9163cc68ff",
+      "wordSpan": [
+        79,
+        80
+      ]
+    },
+    "pdf:944:cell:48": {
+      "id": "pdf:944:cell:48",
+      "pdfPage": 944,
+      "rect": [
+        304.9834,
+        251.25,
+        342.9934,
+        264.9
+      ],
+      "unicodeSha256": "ca40662e1fa834f78187edc605d0a34f0b653c47d8bb7e5c081b321be6b1f969",
+      "wordBoxesSha256": "41f76df31525bfdb14ef9be25fe0fa650f3437d0db0854d5dfb7fb30a4a8f133",
+      "wordSpan": [
+        80,
+        81
+      ]
+    },
+    "pdf:944:cell:49": {
+      "id": "pdf:944:cell:49",
+      "pdfPage": 944,
+      "rect": [
+        374.8634,
+        251.25,
+        417.1424,
+        264.9
+      ],
+      "unicodeSha256": "479374b79f4107d735953b13597398c116c8e56f52e2802ab05c11f8c757a0c6",
+      "wordBoxesSha256": "a0f176b645c510056a36d846d488112a2eb124bd7e1221baa879a642a1c70251",
+      "wordSpan": [
+        81,
+        82
+      ]
+    },
+    "pdf:944:cell:50": {
+      "id": "pdf:944:cell:50",
+      "pdfPage": 944,
+      "rect": [
+        440.4734,
+        251.25,
+        495.4714,
+        264.9
+      ],
+      "unicodeSha256": "6721b4d48bad36d94c6ea66839c2f886e3bd825887e8e914a3d446620a2c32bd",
+      "wordBoxesSha256": "bc15da8c37ed5a556a535d8ef215a4c35f17fd5d4eeca27fe769200d2403d6a3",
+      "wordSpan": [
+        82,
+        83
+      ]
+    },
+    "pdf:944:cell:51": {
+      "id": "pdf:944:cell:51",
+      "pdfPage": 944,
+      "rect": [
+        516.4834,
+        251.25,
+        536.4434,
+        264.9
+      ],
+      "unicodeSha256": "e525d289fa8b4c31e3af15d9012ef13324f3b40c6eb613d9797292ab70de9f37",
+      "wordBoxesSha256": "6816893318e4bf8bc0a9c315eab747cffbe5e2e8df9662b6fb742e5c422e2182",
+      "wordSpan": [
+        83,
+        85
+      ]
+    },
+    "pdf:944:cell:52": {
+      "id": "pdf:944:cell:52",
+      "pdfPage": 944,
+      "rect": [
+        255.4234,
+        276.25,
+        266.5034,
+        289.9
+      ],
+      "unicodeSha256": "81b8a03f97e8787c53fe1a86bda042b6f0de9b0ec9c09357e107c99ba4d6948a",
+      "wordBoxesSha256": "81e1417813a8ad851261f4a4ac6cca94d30613cf71bdedc7ea0a859158399220",
+      "wordSpan": [
+        85,
+        86
+      ]
+    },
+    "pdf:944:cell:53": {
+      "id": "pdf:944:cell:53",
+      "pdfPage": 944,
+      "rect": [
+        304.9734,
+        276.25,
+        342.9834,
+        289.9
+      ],
+      "unicodeSha256": "ca40662e1fa834f78187edc605d0a34f0b653c47d8bb7e5c081b321be6b1f969",
+      "wordBoxesSha256": "7f44044afc81bade45977f10dfebd0ecbb3e56e636ccd3710c5ee24611068e65",
+      "wordSpan": [
+        86,
+        87
+      ]
+    },
+    "pdf:944:cell:54": {
+      "id": "pdf:944:cell:54",
+      "pdfPage": 944,
+      "rect": [
+        374.8534,
+        276.25,
+        417.1324,
+        289.9
+      ],
+      "unicodeSha256": "479374b79f4107d735953b13597398c116c8e56f52e2802ab05c11f8c757a0c6",
+      "wordBoxesSha256": "55c978a2673c7d7f739dc2cde72a5d8520ab67eccdfb0c11944aab8f152aa979",
+      "wordSpan": [
+        87,
+        88
+      ]
+    },
+    "pdf:944:cell:55": {
+      "id": "pdf:944:cell:55",
+      "pdfPage": 944,
+      "rect": [
+        440.4634,
+        276.25,
+        495.4614,
+        289.9
+      ],
+      "unicodeSha256": "ff211f22a37f79f70a2319d6b6f39dc445bf779fe5efb8f81061d75c12e20834",
+      "wordBoxesSha256": "12cd7be97ded8ccc0a16edeec1c4bec978c70947d43c1bb46adc3af2b2573505",
+      "wordSpan": [
+        88,
+        89
+      ]
+    },
+    "pdf:944:cell:56": {
+      "id": "pdf:944:cell:56",
+      "pdfPage": 944,
+      "rect": [
+        516.4734,
+        276.25,
+        536.4334,
+        289.9
+      ],
+      "unicodeSha256": "e525d289fa8b4c31e3af15d9012ef13324f3b40c6eb613d9797292ab70de9f37",
+      "wordBoxesSha256": "898b9f37007b2a9f770ab4bf43064208635f0cd720bdb18accc26059f81f19c1",
+      "wordSpan": [
+        89,
+        91
+      ]
+    },
+    "pdf:944:cell:57": {
+      "id": "pdf:944:cell:57",
+      "pdfPage": 944,
+      "rect": [
+        255.4134,
+        301.25,
+        266.4934,
+        314.9
+      ],
+      "unicodeSha256": "81b8a03f97e8787c53fe1a86bda042b6f0de9b0ec9c09357e107c99ba4d6948a",
+      "wordBoxesSha256": "7d4aa3a88d8b021e5e4dde6e6302e56b9c7b222446013fe02ef7e16950bb4135",
+      "wordSpan": [
+        91,
+        92
+      ]
+    },
+    "pdf:944:cell:58": {
+      "id": "pdf:944:cell:58",
+      "pdfPage": 944,
+      "rect": [
+        304.9634,
+        301.25,
+        342.9734,
+        314.9
+      ],
+      "unicodeSha256": "ca40662e1fa834f78187edc605d0a34f0b653c47d8bb7e5c081b321be6b1f969",
+      "wordBoxesSha256": "64aacf3b21b6f556a4e4ce146553f1eb7d0f1ff4cc051ac38aef51bcd0fd0d48",
+      "wordSpan": [
+        92,
+        93
+      ]
+    },
+    "pdf:944:cell:59": {
+      "id": "pdf:944:cell:59",
+      "pdfPage": 944,
+      "rect": [
+        374.8434,
+        301.25,
+        417.1224,
+        314.9
+      ],
+      "unicodeSha256": "479374b79f4107d735953b13597398c116c8e56f52e2802ab05c11f8c757a0c6",
+      "wordBoxesSha256": "7452eb5e8c5e01bfd8b740b46ff552338427a9552207eae5b3e4c28ce736d52a",
+      "wordSpan": [
+        93,
+        94
+      ]
+    },
+    "pdf:944:cell:60": {
+      "id": "pdf:944:cell:60",
+      "pdfPage": 944,
+      "rect": [
+        440.4534,
+        301.25,
+        495.4514,
+        314.9
+      ],
+      "unicodeSha256": "4cbbf3579558f3c136af559aafebe6eab71d68f75826d82fa9ebd5713cd6f7eb",
+      "wordBoxesSha256": "0611d3c5b9cd63aeb32d934036a5cea6109cc2582bfbf4d60eb796acced3e1ed",
+      "wordSpan": [
+        94,
+        95
+      ]
+    },
+    "pdf:944:cell:61": {
+      "id": "pdf:944:cell:61",
+      "pdfPage": 944,
+      "rect": [
+        516.4634,
+        301.25,
+        536.4234,
+        314.9
+      ],
+      "unicodeSha256": "e525d289fa8b4c31e3af15d9012ef13324f3b40c6eb613d9797292ab70de9f37",
+      "wordBoxesSha256": "4e174c15c8ffcba54dd2c3a00f0e22ab2c0983cc9c45a86222e8fa3fb1fcbae5",
+      "wordSpan": [
+        95,
+        97
+      ]
+    },
+    "pdf:944:cell:62": {
+      "id": "pdf:944:cell:62",
+      "pdfPage": 944,
+      "rect": [
+        255.4034,
+        326.25,
+        266.4834,
+        339.9
+      ],
+      "unicodeSha256": "81b8a03f97e8787c53fe1a86bda042b6f0de9b0ec9c09357e107c99ba4d6948a",
+      "wordBoxesSha256": "edb4e4e773f121846b71825e6b607cbae8a672a9a55ab381cd7eb3bdb2df0712",
+      "wordSpan": [
+        97,
+        98
+      ]
+    },
+    "pdf:944:cell:63": {
+      "id": "pdf:944:cell:63",
+      "pdfPage": 944,
+      "rect": [
+        304.9534,
+        326.25,
+        342.9634,
+        339.9
+      ],
+      "unicodeSha256": "266f88f9839705e7da09743c1c477fd040a8a713f191c940ad229e1635fa3f3c",
+      "wordBoxesSha256": "d303f9c576a8480fe663d08e82d9e89c7cf7b56e2199a8087ba7fb166ee364fc",
+      "wordSpan": [
+        98,
+        99
+      ]
+    },
+    "pdf:944:cell:64": {
+      "id": "pdf:944:cell:64",
+      "pdfPage": 944,
+      "rect": [
+        374.8334,
+        326.25,
+        417.0834,
+        339.9
+      ],
+      "unicodeSha256": "479374b79f4107d735953b13597398c116c8e56f52e2802ab05c11f8c757a0c6",
+      "wordBoxesSha256": "1525db0b64fb4450d5d56580f7fc1e487b284987322ec993e3ee1e83300acdc4",
+      "wordSpan": [
+        99,
+        100
+      ]
+    },
+    "pdf:944:cell:65": {
+      "id": "pdf:944:cell:65",
+      "pdfPage": 944,
+      "rect": [
+        441.8534,
+        326.25,
+        493.9714,
+        339.9
+      ],
+      "unicodeSha256": "0a3b29c0690cd36751af90a82dff5abcc48f4ff12844ed28a82f7e93a70efa1f",
+      "wordBoxesSha256": "91ba8abd597f059c79bf8ea5dec645ba36007ac104ab842f0af6fe03b7651913",
+      "wordSpan": [
+        100,
+        101
+      ]
+    },
+    "pdf:944:cell:66": {
+      "id": "pdf:944:cell:66",
+      "pdfPage": 944,
+      "rect": [
+        516.4634,
+        326.25,
+        536.4234,
+        339.9
+      ],
+      "unicodeSha256": "e525d289fa8b4c31e3af15d9012ef13324f3b40c6eb613d9797292ab70de9f37",
+      "wordBoxesSha256": "2fde8eb16487b1edd947dbe3aeab7f316df2a48a5de84bd87b7bf84176228451",
+      "wordSpan": [
+        101,
+        103
+      ]
+    },
+    "pdf:944:cell:67": {
+      "id": "pdf:944:cell:67",
+      "pdfPage": 944,
+      "rect": [
+        255.4034,
+        351.25,
+        266.4834,
+        364.9
+      ],
+      "unicodeSha256": "81b8a03f97e8787c53fe1a86bda042b6f0de9b0ec9c09357e107c99ba4d6948a",
+      "wordBoxesSha256": "f6e06f9bfa212ea7293d621df6f31b18a02e4134efb40cdbc59d54b66c7f39c6",
+      "wordSpan": [
+        103,
+        104
+      ]
+    },
+    "pdf:944:cell:68": {
+      "id": "pdf:944:cell:68",
+      "pdfPage": 944,
+      "rect": [
+        304.9534,
+        351.25,
+        342.9634,
+        364.9
+      ],
+      "unicodeSha256": "266f88f9839705e7da09743c1c477fd040a8a713f191c940ad229e1635fa3f3c",
+      "wordBoxesSha256": "960283b21f0a228e8a529b081f29bd2b486c29c5b048146d4261c1b5590f5b27",
+      "wordSpan": [
+        104,
+        105
+      ]
+    },
+    "pdf:944:cell:69": {
+      "id": "pdf:944:cell:69",
+      "pdfPage": 944,
+      "rect": [
+        374.8334,
+        351.25,
+        417.0834,
+        364.9
+      ],
+      "unicodeSha256": "479374b79f4107d735953b13597398c116c8e56f52e2802ab05c11f8c757a0c6",
+      "wordBoxesSha256": "4aeb692434767b1064fe3a49468ed9239d91df41215689c2f5ca56e3d5cfab23",
+      "wordSpan": [
+        105,
+        106
+      ]
+    },
+    "pdf:944:cell:70": {
+      "id": "pdf:944:cell:70",
+      "pdfPage": 944,
+      "rect": [
+        440.4534,
+        351.25,
+        495.4514,
+        364.9
+      ],
+      "unicodeSha256": "e43f1054516a2c020bd25ea27ff4b0a5c2e41dd8d11f3eb8ec083fa17135db23",
+      "wordBoxesSha256": "66e0f540e2f21e2684d87391e487d3bf4fa7acb533fc96b9b2c4251e2bd62cdb",
+      "wordSpan": [
+        106,
+        107
+      ]
+    },
+    "pdf:944:cell:71": {
+      "id": "pdf:944:cell:71",
+      "pdfPage": 944,
+      "rect": [
+        516.4634,
+        351.25,
+        536.4234,
+        364.9
+      ],
+      "unicodeSha256": "e525d289fa8b4c31e3af15d9012ef13324f3b40c6eb613d9797292ab70de9f37",
+      "wordBoxesSha256": "3f89392021fdeb0247a8a05c764f66e41f4dde76117c03d3d6129654442009f4",
+      "wordSpan": [
+        107,
+        109
+      ]
+    },
+    "pdf:944:cell:72": {
+      "id": "pdf:944:cell:72",
+      "pdfPage": 944,
+      "rect": [
+        255.4034,
+        376.25,
+        266.4834,
+        389.9
+      ],
+      "unicodeSha256": "81b8a03f97e8787c53fe1a86bda042b6f0de9b0ec9c09357e107c99ba4d6948a",
+      "wordBoxesSha256": "8f68dd87ed62f24a28856568db9b5f4ad8d74d09c80892825a4ca679d416f62d",
+      "wordSpan": [
+        109,
+        110
+      ]
+    },
+    "pdf:944:cell:73": {
+      "id": "pdf:944:cell:73",
+      "pdfPage": 944,
+      "rect": [
+        304.9534,
+        376.25,
+        342.9634,
+        389.9
+      ],
+      "unicodeSha256": "266f88f9839705e7da09743c1c477fd040a8a713f191c940ad229e1635fa3f3c",
+      "wordBoxesSha256": "38c9a39d01901bedc58c944748f2b49395fe41c258d3c5880afe30ab2f03acc0",
+      "wordSpan": [
+        110,
+        111
+      ]
+    },
+    "pdf:944:cell:74": {
+      "id": "pdf:944:cell:74",
+      "pdfPage": 944,
+      "rect": [
+        374.8334,
+        376.25,
+        417.0834,
+        389.9
+      ],
+      "unicodeSha256": "479374b79f4107d735953b13597398c116c8e56f52e2802ab05c11f8c757a0c6",
+      "wordBoxesSha256": "860070fc41f77e672feda18be4350d6ddf767ac15f9f85dfb093cae272532295",
+      "wordSpan": [
+        111,
+        112
+      ]
+    },
+    "pdf:944:cell:75": {
+      "id": "pdf:944:cell:75",
+      "pdfPage": 944,
+      "rect": [
+        440.4534,
+        376.25,
+        495.4514,
+        389.9
+      ],
+      "unicodeSha256": "578c40e01e06aca3bcd5f16f8b41c6104c56e863df5f5fd5b4859a8b56116a6b",
+      "wordBoxesSha256": "b32983e5c20d18da1ac1e6a487904df77b7f0ac2beac800c06b02747018df50c",
+      "wordSpan": [
+        112,
+        113
+      ]
+    },
+    "pdf:944:cell:76": {
+      "id": "pdf:944:cell:76",
+      "pdfPage": 944,
+      "rect": [
+        516.4634,
+        376.25,
+        536.4234,
+        389.9
+      ],
+      "unicodeSha256": "e525d289fa8b4c31e3af15d9012ef13324f3b40c6eb613d9797292ab70de9f37",
+      "wordBoxesSha256": "c3b913ad76b5853dfde858e36b6cc0a77d867a19751d7649b89e4ceda9428dfc",
+      "wordSpan": [
+        113,
+        115
+      ]
+    },
+    "pdf:944:cell:77": {
+      "id": "pdf:944:cell:77",
+      "pdfPage": 944,
+      "rect": [
+        255.4034,
+        401.25,
+        266.4834,
+        414.9
+      ],
+      "unicodeSha256": "81b8a03f97e8787c53fe1a86bda042b6f0de9b0ec9c09357e107c99ba4d6948a",
+      "wordBoxesSha256": "32fde9c36a610dc07369836b8df14fb90a740782ab08ebc69fa1fd9448b97624",
+      "wordSpan": [
+        115,
+        116
+      ]
+    },
+    "pdf:944:cell:78": {
+      "id": "pdf:944:cell:78",
+      "pdfPage": 944,
+      "rect": [
+        304.9534,
+        401.25,
+        342.9634,
+        414.9
+      ],
+      "unicodeSha256": "266f88f9839705e7da09743c1c477fd040a8a713f191c940ad229e1635fa3f3c",
+      "wordBoxesSha256": "ec1fbdb311c4143819c06625d3dae31b85fdd8faf271c066de82c50ca1bf7ae6",
+      "wordSpan": [
+        116,
+        117
+      ]
+    },
+    "pdf:944:cell:79": {
+      "id": "pdf:944:cell:79",
+      "pdfPage": 944,
+      "rect": [
+        374.8334,
+        401.25,
+        417.0834,
+        414.9
+      ],
+      "unicodeSha256": "479374b79f4107d735953b13597398c116c8e56f52e2802ab05c11f8c757a0c6",
+      "wordBoxesSha256": "aebcb69133aba85794482bd7ed1cb859e77ffde3c955cd9baa332ae7248c0f4b",
+      "wordSpan": [
+        117,
+        118
+      ]
+    },
+    "pdf:944:cell:80": {
+      "id": "pdf:944:cell:80",
+      "pdfPage": 944,
+      "rect": [
+        440.4534,
+        401.25,
+        495.4514,
+        414.9
+      ],
+      "unicodeSha256": "db6f6428d8d086cd5e9bd5813e6583f2b971ff103917ea7231c190e1d40ea757",
+      "wordBoxesSha256": "cb226672729fe383c9c7adfb1fc85f3e69171e51536a8a313b70f51bcd129ad7",
+      "wordSpan": [
+        118,
+        119
+      ]
+    },
+    "pdf:944:cell:81": {
+      "id": "pdf:944:cell:81",
+      "pdfPage": 944,
+      "rect": [
+        516.4634,
+        401.25,
+        536.4234,
+        414.9
+      ],
+      "unicodeSha256": "e525d289fa8b4c31e3af15d9012ef13324f3b40c6eb613d9797292ab70de9f37",
+      "wordBoxesSha256": "7432c5439b70a19cd29b5414191b207b38f3ca271539b7c7f4f7fae65bb7b3a6",
+      "wordSpan": [
+        119,
+        121
+      ]
+    },
+    "pdf:945:cell:109": {
+      "id": "pdf:945:cell:109",
+      "pdfPage": 945,
+      "rect": [
+        66.9874,
+        655.0212,
+        151.8061,
+        666.9282
+      ],
+      "unicodeSha256": "fe021eb274610e461437ae21dc9c6e6dd523ab500d3f2843e4d159de89523e47",
+      "wordBoxesSha256": "82dd17673b34dc94703700d0ff7887a08b9f67b7a45b7d03444aa98cb3a6e400",
+      "wordSpan": [
+        308,
+        312
+      ]
+    },
+    "pdf:945:cell:96": {
+      "id": "pdf:945:cell:96",
+      "pdfPage": 945,
+      "rect": [
+        66.9874,
+        585.6312,
+        158.3878,
+        597.9162
+      ],
+      "unicodeSha256": "5dcfe5c1cff264d303b66d129a6bf1952453a2e07d03c4d9607be112a4823476",
+      "wordBoxesSha256": "b888be988b6f3de0063bd0689fc2464d0a38841f20a2ef96a3c2d6340f878c91",
+      "wordSpan": [
+        248,
+        249
+      ]
+    },
+    "pdf:945:cell:97": {
+      "id": "pdf:945:cell:97",
+      "pdfPage": 945,
+      "rect": [
+        66.9874,
+        594.6312,
+        126.3856,
+        606.9162
+      ],
+      "unicodeSha256": "3dee4814fc9ed837dbf5256805689fdcea8ba84e8e6f2bfcd73f497bc30a0ade",
+      "wordBoxesSha256": "c9a198b84735bf542931ae13a8826ebae6dd22aebacc0a6f604b40e2d613daf5",
+      "wordSpan": [
+        249,
+        251
+      ]
+    },
+    "pdf:945:cell:98": {
+      "id": "pdf:945:cell:98",
+      "pdfPage": 945,
+      "rect": [
+        236.4304,
+        590.1312,
+        241.9294,
+        602.4162
+      ],
+      "unicodeSha256": "f67ab10ad4e4c53121b6a5fe4da9c10ddee905b978d3788d2723d7bfacbe28a9",
+      "wordBoxesSha256": "60871a8c105a1c9455e3725e07eb2736c39722c5c0b19db9e036b3543cf4070f",
+      "wordSpan": [
+        251,
+        252
+      ]
+    },
+    "pdf:945:cell:99": {
+      "id": "pdf:945:cell:99",
+      "pdfPage": 945,
+      "rect": [
+        255.1774,
+        590.1312,
+        417.9928,
+        602.4162
+      ],
+      "unicodeSha256": "90e89efbdd5583cac1c5bceb25920dd80f0d3926521e977fee823898ddade5c2",
+      "wordBoxesSha256": "640808e75b75975304b9f467841b5889a20322ea2b6fc497ff31891462214c16",
+      "wordSpan": [
+        252,
+        259
+      ]
+    },
+    "pdf:956:cell:70": {
+      "id": "pdf:956:cell:70",
+      "pdfPage": 956,
+      "rect": [
+        62.9874,
+        616.9954,
+        499.5102,
+        633.1594
+      ],
+      "unicodeSha256": "4b9756542c540fc376427ce83664ad2e8dd792237594ceab8896981b5f6f872f",
+      "wordBoxesSha256": "e0e3e48cf00577e56f3071650c767d32d86f0581acc29955f8343d7171b0a558",
+      "wordSpan": [
+        142,
+        153
+      ]
+    },
+    "pdf:956:cell:71": {
+      "id": "pdf:956:cell:71",
+      "pdfPage": 956,
+      "rect": [
+        62.9874,
+        628.9954,
+        529.989,
+        645.1594
+      ],
+      "unicodeSha256": "718603106e884c947225b98a1c6558927ec11332754007357e76a21270606a2e",
+      "wordBoxesSha256": "fcd96932898245638e7eea2a15344b6ffbfa2b0a5494a4298710a0a16d75f10c",
+      "wordSpan": [
+        153,
+        168
+      ]
+    },
+    "pdf:956:cell:72": {
+      "id": "pdf:956:cell:72",
+      "pdfPage": 956,
+      "rect": [
+        80.9874,
+        642.9994,
+        332.859,
+        659.1634
+      ],
+      "unicodeSha256": "1e0e055b8ba273353b4abd5c8013d9fa98e3d752808cd576114d44db420a41ae",
+      "wordBoxesSha256": "17e761ec7be875e0fcecab54004013f4c4103f9bb094d7cc27f7b93f44b2a466",
+      "wordSpan": [
+        168,
+        175
+      ]
+    },
+    "pdf:956:cell:73": {
+      "id": "pdf:956:cell:73",
+      "pdfPage": 956,
+      "rect": [
+        62.9874,
+        657.0034,
+        481.899,
+        673.1674
+      ],
+      "unicodeSha256": "5511b70c94ad0bb14418a026ae00eca8ed3109aa5852fcd1c3dd52c01d65a72a",
+      "wordBoxesSha256": "ecfde11de6ac010a330c49c94d1ff846151b93543ecf518cb67691e21c1328ac",
+      "wordSpan": [
+        175,
+        189
+      ]
+    },
+    "pdf:956:cell:74": {
+      "id": "pdf:956:cell:74",
+      "pdfPage": 956,
+      "rect": [
+        80.9874,
+        671.0074,
+        418.779,
+        687.1714
+      ],
+      "unicodeSha256": "3fd989c51949fbb6954f15c0878db1b7215da620176a4dacd799e25e50b49c10",
+      "wordBoxesSha256": "1fd401684189b41a1217fbd958faa5012b0cc8f339f9e113c5566fa95dd8f0ed",
+      "wordSpan": [
+        189,
+        198
+      ]
+    },
+    "pdf:957:cell:10": {
+      "id": "pdf:957:cell:10",
+      "pdfPage": 957,
+      "rect": [
+        99.2848,
+        217.0898,
+        112.4548,
+        231.4098
+      ],
+      "unicodeSha256": "869360a6f4f268964b8cb8f0204924f6e2bbeb50979619ba791f0b62f295c228",
+      "wordBoxesSha256": "cd86e6c1631d2accdba73e52f7c5678bf04a0220250b1b12168f8d10bcfdd45f",
+      "wordSpan": [
+        38,
+        39
+      ]
+    },
+    "pdf:957:cell:11": {
+      "id": "pdf:957:cell:11",
+      "pdfPage": 957,
+      "rect": [
+        176.1271,
+        217.0898,
+        181.6871,
+        231.4098
+      ],
+      "unicodeSha256": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+      "wordBoxesSha256": "a09d7e60d335605a10b4aff115cb5eac4fac49dc60bfe775826a5bcef626146b",
+      "wordSpan": [
+        39,
+        40
+      ]
+    },
+    "pdf:957:cell:12": {
+      "id": "pdf:957:cell:12",
+      "pdfPage": 957,
+      "rect": [
+        176.1332,
+        267.2498,
+        181.6932,
+        280.8998
+      ],
+      "unicodeSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "wordBoxesSha256": "bac4342a9132c5fb6dc0da3e39f060d48960196e2b51e72c170c16ebc88b1a4f",
+      "wordSpan": [
+        40,
+        41
+      ]
+    },
+    "pdf:957:cell:13": {
+      "id": "pdf:957:cell:13",
+      "pdfPage": 957,
+      "rect": [
+        176.1432,
+        323.2498,
+        181.7032,
+        336.8998
+      ],
+      "unicodeSha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "wordBoxesSha256": "789ee5a2135ac9af6f821712892c434858929e6c1bc57269d5335f2d6b1e38a9",
+      "wordSpan": [
+        41,
+        42
+      ]
+    },
+    "pdf:957:cell:14": {
+      "id": "pdf:957:cell:14",
+      "pdfPage": 957,
+      "rect": [
+        92.9032,
+        329.0898,
+        119.1022,
+        343.4098
+      ],
+      "unicodeSha256": "8e37953d23daca5ff01b8282c33f4e0a2152f1d1885f94c06418617e3ee1d24e",
+      "wordBoxesSha256": "8970abdaa0e75b840165ae6c2c45131ee0b861911295878753904e06d1a153e5",
+      "wordSpan": [
+        42,
+        43
+      ]
+    },
+    "pdf:957:cell:15": {
+      "id": "pdf:957:cell:15",
+      "pdfPage": 957,
+      "rect": [
+        231.1348,
+        185.0898,
+        315.9918,
+        199.4098
+      ],
+      "unicodeSha256": "a2f8f02bc77fc72160910b9b8aea9a442c1f8f4868b9d41fb74da52f0d972146",
+      "wordBoxesSha256": "596ccfa36b594e4faa02911094e7344efe76e4f9a118910e15ae33dfc5652386",
+      "wordSpan": [
+        43,
+        45
+      ]
+    },
+    "pdf:957:cell:16": {
+      "id": "pdf:957:cell:16",
+      "pdfPage": 957,
+      "rect": [
+        263.0648,
+        197.0898,
+        284.1538,
+        211.4098
+      ],
+      "unicodeSha256": "6e1215c1b2a0375269d07b511a4eaa04aeba3f677692d381d275a854d006f6af",
+      "wordBoxesSha256": "13652e2f5c536ac244507c2407204e47944e12a3db81e43ee917d4e714e5c0c7",
+      "wordSpan": [
+        45,
+        46
+      ]
+    },
+    "pdf:957:cell:17": {
+      "id": "pdf:957:cell:17",
+      "pdfPage": 957,
+      "rect": [
+        239.2652,
+        217.0898,
+        244.8252,
+        231.4098
+      ],
+      "unicodeSha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "wordBoxesSha256": "081aaa6ef4df4eebad86aad270a3db7872a81bae07b024de321dee6eaa96befd",
+      "wordSpan": [
+        46,
+        47
+      ]
+    },
+    "pdf:957:cell:18": {
+      "id": "pdf:957:cell:18",
+      "pdfPage": 957,
+      "rect": [
+        302.4032,
+        217.0898,
+        307.9632,
+        231.4098
+      ],
+      "unicodeSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "wordBoxesSha256": "b2a379e572fe3bec337d4b3e0e7b8e936f11048558517a1eb23fa305e5851629",
+      "wordSpan": [
+        47,
+        48
+      ]
+    },
+    "pdf:957:cell:19": {
+      "id": "pdf:957:cell:19",
+      "pdfPage": 957,
+      "rect": [
+        361.9148,
+        217.0898,
+        416.9828,
+        231.4098
+      ],
+      "unicodeSha256": "526e0087cc3f254d9f86f6c7d8e23d954c4dfda2b312efc29194ae8a860106ba",
+      "wordBoxesSha256": "beadebb9231b5d14141c2eeb6d2f44d04acbdc8050dd7080c6d89b2bb1a7e87d",
+      "wordSpan": [
+        48,
+        49
+      ]
+    },
+    "pdf:957:cell:20": {
+      "id": "pdf:957:cell:20",
+      "pdfPage": 957,
+      "rect": [
+        239.2732,
+        237.2498,
+        244.8332,
+        250.8998
+      ],
+      "unicodeSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "wordBoxesSha256": "289c22d8671f62e79a6f0cad8bfa375c9179f23e087a1d46b91f6eee39e2b03e",
+      "wordSpan": [
+        49,
+        50
+      ]
+    },
+    "pdf:957:cell:21": {
+      "id": "pdf:957:cell:21",
+      "pdfPage": 957,
+      "rect": [
+        302.4132,
+        237.2498,
+        307.9732,
+        250.8998
+      ],
+      "unicodeSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "wordBoxesSha256": "d817d6fbc50ca2d01ba64fa21439b1b1f9de3e7edf4f468f2c7f9781ddf409b0",
+      "wordSpan": [
+        50,
+        51
+      ]
+    },
+    "pdf:957:cell:22": {
+      "id": "pdf:957:cell:22",
+      "pdfPage": 957,
+      "rect": [
+        371.9232,
+        237.2498,
+        406.8622,
+        250.8998
+      ],
+      "unicodeSha256": "7e704c0b0be54024475e365195cef11f85e29b48fda2fcc964d5a1169162917d",
+      "wordBoxesSha256": "2cc66d26c9f1acb00664baa1e58e37619ec3ddb5519d586e8d8dd5a60f293f0a",
+      "wordSpan": [
+        51,
+        52
+      ]
+    },
+    "pdf:957:cell:23": {
+      "id": "pdf:957:cell:23",
+      "pdfPage": 957,
+      "rect": [
+        239.2732,
+        257.2498,
+        244.8332,
+        270.8998
+      ],
+      "unicodeSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "wordBoxesSha256": "1e6367c745785e8efc0baaf90dfc60680c6bd4f1f99a4da5a00947f2366ad373",
+      "wordSpan": [
+        52,
+        53
+      ]
+    },
+    "pdf:957:cell:24": {
+      "id": "pdf:957:cell:24",
+      "pdfPage": 957,
+      "rect": [
+        302.4132,
+        257.2498,
+        307.9732,
+        270.8998
+      ],
+      "unicodeSha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "wordBoxesSha256": "550e360829b1e3f2fb27e52f0817d5bded025ddfbd48f04bb4de60e2ca6535fe",
+      "wordSpan": [
+        53,
+        54
+      ]
+    },
+    "pdf:957:cell:25": {
+      "id": "pdf:957:cell:25",
+      "pdfPage": 957,
+      "rect": [
+        376.6532,
+        257.2498,
+        402.1322,
+        270.8998
+      ],
+      "unicodeSha256": "b86d11af79188e58af384b421f2799b08bfb151939b4404679d948aae2720b0b",
+      "wordBoxesSha256": "47fa9ef78b69492c3cf04bfb12a8f621aa24b654b1a91cf04b00ce5740d99ee0",
+      "wordSpan": [
+        54,
+        55
+      ]
+    },
+    "pdf:957:cell:26": {
+      "id": "pdf:957:cell:26",
+      "pdfPage": 957,
+      "rect": [
+        239.2832,
+        277.2498,
+        244.8432,
+        290.8998
+      ],
+      "unicodeSha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "wordBoxesSha256": "b544df01102231f287dcf6c8d30cc3105d6c1cd974d40a7250cd12c1b0e7e6cc",
+      "wordSpan": [
+        55,
+        56
+      ]
+    },
+    "pdf:957:cell:27": {
+      "id": "pdf:957:cell:27",
+      "pdfPage": 957,
+      "rect": [
+        302.4232,
+        277.2498,
+        307.9832,
+        290.8998
+      ],
+      "unicodeSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "wordBoxesSha256": "42c1a7c539ad75bba036fd9f00a1945a79fdb22303afd80524a7b8a70724fbb1",
+      "wordSpan": [
+        56,
+        57
+      ]
+    },
+    "pdf:957:cell:28": {
+      "id": "pdf:957:cell:28",
+      "pdfPage": 957,
+      "rect": [
+        383.0432,
+        277.2498,
+        395.8032,
+        290.8998
+      ],
+      "unicodeSha256": "55490a4bf3a8e8cb5eed69720293a700ff01ef7da2bfc749f332f626cb584916",
+      "wordBoxesSha256": "65e32053c4aad358ac0b7f5863b40edc630924529f0faa79eef14d5e9f4a1a59",
+      "wordSpan": [
+        57,
+        58
+      ]
+    },
+    "pdf:957:cell:29": {
+      "id": "pdf:957:cell:29",
+      "pdfPage": 957,
+      "rect": [
+        239.2832,
+        297.2498,
+        244.8432,
+        310.8998
+      ],
+      "unicodeSha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "wordBoxesSha256": "e922b62c00ebb10109aa59ec46040b551055b62f88f5a20e6d28243289c5fbbf",
+      "wordSpan": [
+        58,
+        59
+      ]
+    },
+    "pdf:957:cell:3": {
+      "id": "pdf:957:cell:3",
+      "pdfPage": 957,
+      "rect": [
+        64.5714,
+        111.8341,
+        546.4782,
+        127.9981
+      ],
+      "unicodeSha256": "34297a27f12d4000d19a056d216d5989496d95d5ecf04adceb1d9d3d6134e437",
+      "wordBoxesSha256": "47fea8fd5143c0d2ea50b6871c9d42fe0af2c3bcab3b47a0584aaf18ceee750b",
+      "wordSpan": [
+        8,
+        25
+      ]
+    },
+    "pdf:957:cell:30": {
+      "id": "pdf:957:cell:30",
+      "pdfPage": 957,
+      "rect": [
+        302.4232,
+        297.2498,
+        307.9832,
+        310.8998
+      ],
+      "unicodeSha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+      "wordBoxesSha256": "5520de24c002bb8751714ce5d9724edbe3c08f822a8e1e85fb900706441e41b7",
+      "wordSpan": [
+        59,
+        60
+      ]
+    },
+    "pdf:957:cell:31": {
+      "id": "pdf:957:cell:31",
+      "pdfPage": 957,
+      "rect": [
+        369.8932,
+        297.2498,
+        409.0522,
+        310.8998
+      ],
+      "unicodeSha256": "a24ba93b70b504f485cf66eac96d6bf81c6af508e9496c0f785dc5005ccb56fc",
+      "wordBoxesSha256": "8c5a9a8435b818b0058aa4245118fbee3efbf064c5b45eddd45ce1aada6712da",
+      "wordSpan": [
+        60,
+        61
+      ]
+    },
+    "pdf:957:cell:32": {
+      "id": "pdf:957:cell:32",
+      "pdfPage": 957,
+      "rect": [
+        238.7232,
+        323.2498,
+        245.3932,
+        336.8998
+      ],
+      "unicodeSha256": "4b68ab3847feda7d6c62c1fbcbeebfa35eab7351ed5e78f4ddadea5df64b8015",
+      "wordBoxesSha256": "50332d9265a1f201768d4b22d5ea7d3f7b0b91fed6d1b9eca14b30255e65aab6",
+      "wordSpan": [
+        61,
+        62
+      ]
+    },
+    "pdf:957:cell:33": {
+      "id": "pdf:957:cell:33",
+      "pdfPage": 957,
+      "rect": [
+        301.8632,
+        323.2498,
+        308.5332,
+        336.8998
+      ],
+      "unicodeSha256": "4b68ab3847feda7d6c62c1fbcbeebfa35eab7351ed5e78f4ddadea5df64b8015",
+      "wordBoxesSha256": "97e37a900bd41aa130aa04f2a6a809b515f817cdc545b3ce096e531d7a6bf5c0",
+      "wordSpan": [
+        62,
+        63
+      ]
+    },
+    "pdf:957:cell:34": {
+      "id": "pdf:957:cell:34",
+      "pdfPage": 957,
+      "rect": [
+        345.2832,
+        317.2498,
+        433.8102,
+        330.8998
+      ],
+      "unicodeSha256": "b760070d7bcc594e7edba533d9f516e7182480106ea7cb351f2dc57101624a22",
+      "wordBoxesSha256": "0bcb6b292fce4d48be3d48356f4c6b2ad44fc47dd3f8d24f8b637d9acef0b668",
+      "wordSpan": [
+        63,
+        66
+      ]
+    },
+    "pdf:957:cell:35": {
+      "id": "pdf:957:cell:35",
+      "pdfPage": 957,
+      "rect": [
+        368.5932,
+        329.2498,
+        410.2512,
+        342.8998
+      ],
+      "unicodeSha256": "38f8a820118bbc05be9c32b81d522dd347460b7277e40832b285e7b60de5e70d",
+      "wordBoxesSha256": "1951822894b809135e07c430884bc5fba17384f05400d022040cb1ea6b0d690b",
+      "wordSpan": [
+        66,
+        67
+      ]
+    },
+    "pdf:957:cell:36": {
+      "id": "pdf:957:cell:36",
+      "pdfPage": 957,
+      "rect": [
+        480.8448,
+        217.0898,
+        508.7238,
+        231.4098
+      ],
+      "unicodeSha256": "8a7525b1492fb84833f5c4a69b30f4bfbb134f9b666b61a2c1872d63d234c085",
+      "wordBoxesSha256": "c27d36924b1a03ea17278ba4ec0f364cfb25f6e5c26f2094d551de32fd504146",
+      "wordSpan": [
+        67,
+        68
+      ]
+    },
+    "pdf:957:cell:37": {
+      "id": "pdf:957:cell:37",
+      "pdfPage": 957,
+      "rect": [
+        451.1432,
+        267.2498,
+        538.1592,
+        280.8998
+      ],
+      "unicodeSha256": "5473f560c8fb7003ad230d2a631d7c73d3eccc048dcaf9d0c9e82712741da895",
+      "wordBoxesSha256": "e337551969817546a69a74c6334d9c3f3bbab0558451f13cdd75a1b8ae7bb58f",
+      "wordSpan": [
+        68,
+        70
+      ]
+    },
+    "pdf:957:cell:38": {
+      "id": "pdf:957:cell:38",
+      "pdfPage": 957,
+      "rect": [
+        62.9874,
+        367.5025,
+        536.5122,
+        383.6665
+      ],
+      "unicodeSha256": "477474e21518dee6777b6a582a6b47eb0fdeca004f691f95cf700eb82fe76ce5",
+      "wordBoxesSha256": "5e90dcf1c87716c73ffe3ab2b6990bde06ec9dc27460aecd44bbdaaaac0d0609",
+      "wordSpan": [
+        70,
+        83
+      ]
+    },
+    "pdf:957:cell:39": {
+      "id": "pdf:957:cell:39",
+      "pdfPage": 957,
+      "rect": [
+        62.9874,
+        379.5025,
+        274.5438,
+        395.6665
+      ],
+      "unicodeSha256": "f667eaacf37c2730370cd03e3153653ff8e3950e3c2bffe5ef4b459eac50896d",
+      "wordBoxesSha256": "1f2323ff6fc16778bf3dcdd3f9242da9b4244f1fa095e8b13894fc92897904ae",
+      "wordSpan": [
+        83,
+        88
+      ]
+    },
+    "pdf:957:cell:4": {
+      "id": "pdf:957:cell:4",
+      "pdfPage": 957,
+      "rect": [
+        64.5714,
+        124.8301,
+        158.0478,
+        140.9941
+      ],
+      "unicodeSha256": "f876a3440acfd366a4128eea291287acda3b87d1ed5ab9a62dd7f3a0eb104fa9",
+      "wordBoxesSha256": "cc0590e91183cc4bb835cded1921602b9fc68970a04b6f339614324768cce2e3",
+      "wordSpan": [
+        25,
+        28
+      ]
+    },
+    "pdf:957:cell:42": {
+      "id": "pdf:957:cell:42",
+      "pdfPage": 957,
+      "rect": [
+        62.9874,
+        425.5024,
+        546.3078,
+        441.6664
+      ],
+      "unicodeSha256": "4eee5f71738060ddf0db2a0b0d3cf1e5cf1655be0375a661cc44740340dbf21b",
+      "wordBoxesSha256": "4426cdc7f00ca8a6cb1b9d1587b7c0f2e20d7864fea3949bdf7b762cdd659ba8",
+      "wordSpan": [
+        99,
+        113
+      ]
+    },
+    "pdf:957:cell:43": {
+      "id": "pdf:957:cell:43",
+      "pdfPage": 957,
+      "rect": [
+        62.9874,
+        437.5024,
+        546.3858,
+        453.6664
+      ],
+      "unicodeSha256": "e4b70df13f97cd09e5bbce5378fd94b0350af13b3914c446c0a388ebd0272100",
+      "wordBoxesSha256": "595cef25b62152e024210935834644771af610e7ca5bf1629d7615342ac0d6b8",
+      "wordSpan": [
+        113,
+        130
+      ]
+    },
+    "pdf:957:cell:44": {
+      "id": "pdf:957:cell:44",
+      "pdfPage": 957,
+      "rect": [
+        62.9874,
+        449.5024,
+        423.0942,
+        465.6664
+      ],
+      "unicodeSha256": "a9f26546856d94429278693200453c171b247f118a11121c43de2673bc167ee0",
+      "wordBoxesSha256": "6cc47815b1e6e20d061502e7090e5fdffa430b97507ee081bdd7912d58c25d1e",
+      "wordSpan": [
+        130,
+        139
+      ]
+    },
+    "pdf:957:cell:45": {
+      "id": "pdf:957:cell:45",
+      "pdfPage": 957,
+      "rect": [
+        62.9874,
+        467.0889,
+        134.6144,
+        481.4089
+      ],
+      "unicodeSha256": "e1db109e9a4dd712f6b59851f8486d079517606c3e5c56824e0744f1579dbbae",
+      "wordBoxesSha256": "9d38655010076607605cd105c6623ba7b2aac111bb8cd49ddaf5002d87bc4d71",
+      "wordSpan": [
+        139,
+        141
+      ]
+    },
+    "pdf:957:cell:46": {
+      "id": "pdf:957:cell:46",
+      "pdfPage": 957,
+      "rect": [
+        62.9874,
+        479.5022,
+        540.0102,
+        495.6662
+      ],
+      "unicodeSha256": "2a17d385db0c3c6abfbc52c3db2b0bf7c5597983153a35f1432052c53adf3023",
+      "wordBoxesSha256": "08c11c9628b9efe22b42cb95fe68301381ff0a12fd8dc20840d2c3d8d4a8decb",
+      "wordSpan": [
+        141,
+        155
+      ]
+    },
+    "pdf:957:cell:47": {
+      "id": "pdf:957:cell:47",
+      "pdfPage": 957,
+      "rect": [
+        62.9874,
+        491.5022,
+        546.1434,
+        507.6662
+      ],
+      "unicodeSha256": "d2e198edaade029bc1bdc43b5d78823bcdf21781fba4d6b67f690b9738cd64aa",
+      "wordBoxesSha256": "59e3957acd5fe302d8ae38613ddcfb9b3c7049d9bbde18cfe1b2c594f1d564fb",
+      "wordSpan": [
+        155,
+        172
+      ]
+    },
+    "pdf:957:cell:48": {
+      "id": "pdf:957:cell:48",
+      "pdfPage": 957,
+      "rect": [
+        62.9874,
+        503.5022,
+        457.173,
+        519.6662
+      ],
+      "unicodeSha256": "46be43fe808e4f8d1982614cd1c77615ed5a5dab77aeed7c209633dc125e5bac",
+      "wordBoxesSha256": "df8f24db00f68c92153cfc6e620d9b32a4f429d8f8eb2e52de791510662eb1a1",
+      "wordSpan": [
+        172,
+        185
+      ]
+    },
+    "pdf:957:cell:49": {
+      "id": "pdf:957:cell:49",
+      "pdfPage": 957,
+      "rect": [
+        62.9874,
+        521.0887,
+        134.1344,
+        535.4087
+      ],
+      "unicodeSha256": "3a743dba4db54f0f45efd1f64f63950a197c5272e7c3da95a95d581cabd61517",
+      "wordBoxesSha256": "b008ef4c549a16940ee0f49b984a1c56845c49d7de229f0757a7328c3a23f0ca",
+      "wordSpan": [
+        185,
+        187
+      ]
+    },
+    "pdf:957:cell:5": {
+      "id": "pdf:957:cell:5",
+      "pdfPage": 957,
+      "rect": [
+        64.5757,
+        150.1187,
+        315.3823,
+        165.4527
+      ],
+      "unicodeSha256": "477a870048dcfeed83be42a66f009c1ae9f4b76f3c0a52afe4c28feaef65c7c3",
+      "wordBoxesSha256": "8d25fd8718ba726f98a39f69e8af74d8e592c08b3984c20d78b6704bc1a3ab36",
+      "wordSpan": [
+        28,
+        34
+      ]
+    },
+    "pdf:957:cell:50": {
+      "id": "pdf:957:cell:50",
+      "pdfPage": 957,
+      "rect": [
+        62.9874,
+        533.5021,
+        512.7162,
+        549.6661
+      ],
+      "unicodeSha256": "4b04b8c65ca8dabd2909d78f0a4584ba19fd3514085b633d0b2f511ca99ea55c",
+      "wordBoxesSha256": "d0074032f5acf572e9b57fbfb9b1c0a5373266e714dfc01ac1da74febd8d4f06",
+      "wordSpan": [
+        187,
+        200
+      ]
+    },
+    "pdf:957:cell:51": {
+      "id": "pdf:957:cell:51",
+      "pdfPage": 957,
+      "rect": [
+        62.9874,
+        545.5021,
+        546.3846,
+        561.6661
+      ],
+      "unicodeSha256": "0ea3fb15f610421a6bf54096f542a8bf81abb3306feb3775a73d56be67fe8af7",
+      "wordBoxesSha256": "04efee60c4f34e1c98d38b8f5deb21f38c35adaefd2d8036fc96fd0f1229585b",
+      "wordSpan": [
+        200,
+        215
+      ]
+    },
+    "pdf:957:cell:52": {
+      "id": "pdf:957:cell:52",
+      "pdfPage": 957,
+      "rect": [
+        62.9874,
+        557.5021,
+        546.3354,
+        573.6661
+      ],
+      "unicodeSha256": "d97bf3d200b653b4e5d032c0a26fa2a2a43e44db22be241b91e7e391e13f9852",
+      "wordBoxesSha256": "9d2ae04f50814948d0ffce068d84f3d296c8abce97233603ceca46d5b1518ef5",
+      "wordSpan": [
+        215,
+        233
+      ]
+    },
+    "pdf:957:cell:53": {
+      "id": "pdf:957:cell:53",
+      "pdfPage": 957,
+      "rect": [
+        62.9874,
+        569.5021,
+        118.305,
+        585.6661
+      ],
+      "unicodeSha256": "0d59e08b297ead1549427a66d94c58817c8494719e2ffbd1723ce7871194da02",
+      "wordBoxesSha256": "27b2f5da66af28ee7d0d1a8aa3576c3d8f46a18d7a908301288a0492b257adc4",
+      "wordSpan": [
+        233,
+        235
+      ]
+    },
+    "pdf:957:cell:54": {
+      "id": "pdf:957:cell:54",
+      "pdfPage": 957,
+      "rect": [
+        62.9874,
+        585.4981,
+        546.1002,
+        601.6621
+      ],
+      "unicodeSha256": "211451aef63d4ad4cb54faf77ec394f21a9a7a5555640ab21e7e71e7e2bf2105",
+      "wordBoxesSha256": "0fd3082633e3c4002cc11acb67b5d88fd2818aa719a5a4c76f80205ad49cb0bf",
+      "wordSpan": [
+        235,
+        252
+      ]
+    },
+    "pdf:957:cell:55": {
+      "id": "pdf:957:cell:55",
+      "pdfPage": 957,
+      "rect": [
+        62.9874,
+        597.4981,
+        340.7802,
+        613.6621
+      ],
+      "unicodeSha256": "d458678922191cb1bdce5cf78a7df4cdb4a6e9612227408f92c1ebbc8a608c1f",
+      "wordBoxesSha256": "57be4eb7a4e3afd178965866f8bf40366984e6c29f542e5cc7d4dbb6034b7ec6",
+      "wordSpan": [
+        252,
+        260
+      ]
+    },
+    "pdf:957:cell:6": {
+      "id": "pdf:957:cell:6",
+      "pdfPage": 957,
+      "rect": [
+        81.2448,
+        197.0898,
+        130.7228,
+        211.4098
+      ],
+      "unicodeSha256": "761a18b82619631f2cb0ec62be463b62961fbabad6175e5fcfa4503d59eec265",
+      "wordBoxesSha256": "a2ad87dbfe1b46548bf20b6281eda6ac75b9643f4a98798bf792cf2dbdc5b918",
+      "wordSpan": [
+        34,
+        35
+      ]
+    },
+    "pdf:957:cell:7": {
+      "id": "pdf:957:cell:7",
+      "pdfPage": 957,
+      "rect": [
+        155.5848,
+        173.0898,
+        202.2528,
+        187.4098
+      ],
+      "unicodeSha256": "3cd2f4711cba9a7ea4aec58796a658dfbd24716bad86e24a46273d953e41c331",
+      "wordBoxesSha256": "f530a5f1adab0e9777694711242f17e551ac65083e2a46ca7d377e9f864cfda3",
+      "wordSpan": [
+        35,
+        36
+      ]
+    },
+    "pdf:957:cell:8": {
+      "id": "pdf:957:cell:8",
+      "pdfPage": 957,
+      "rect": [
+        161.9648,
+        185.0898,
+        195.8438,
+        199.4098
+      ],
+      "unicodeSha256": "0e570ca6fabe24f94e52c1833f3ffd25567022beb826fa16891f3322051bc221",
+      "wordBoxesSha256": "a7c0147b0437861ec3290bcc436282d69b767c28ba06c33da97246264ab2f6a7",
+      "wordSpan": [
+        36,
+        37
+      ]
+    },
+    "pdf:957:cell:9": {
+      "id": "pdf:957:cell:9",
+      "pdfPage": 957,
+      "rect": [
+        168.6348,
+        197.0898,
+        189.2438,
+        211.4098
+      ],
+      "unicodeSha256": "bd30e3f6bf1d71beb376f944a8290ca6ea14ffe57736e306b5e079b2560cafb3",
+      "wordBoxesSha256": "227d8d959447ed4bb9213986bbbe9b3dc0ff2a68110371d74ef96166dcfa83d7",
+      "wordSpan": [
+        37,
+        38
+      ]
+    },
+    "pdf:958:cell:10": {
+      "id": "pdf:958:cell:10",
+      "pdfPage": 958,
+      "rect": [
+        407.9558,
+        142.2501,
+        449.8248,
+        155.9001
+      ],
+      "unicodeSha256": "d5eb215c3e962f4c2f4ae30db4b06ff8f4f22a1c688a528a25da3a81a894511d",
+      "wordBoxesSha256": "0252dab6af0a0ff9d9356da311676b99f6054f027978cf52aa23e347ee1964dc",
+      "wordSpan": [
+        22,
+        23
+      ]
+    },
+    "pdf:958:cell:11": {
+      "id": "pdf:958:cell:11",
+      "pdfPage": 958,
+      "rect": [
+        369.7058,
+        157.2501,
+        488.3008,
+        170.9001
+      ],
+      "unicodeSha256": "4ac58ee04c63b25f02c04eb05a52ca22f3745c8938107ddea142d88a4d29bc24",
+      "wordBoxesSha256": "42ea8ba8130bd5663b4ce3b52927db476d4306fa3cdd0256d6bb37194b2aad61",
+      "wordSpan": [
+        23,
+        25
+      ]
+    },
+    "pdf:958:cell:38": {
+      "id": "pdf:958:cell:38",
+      "pdfPage": 958,
+      "rect": [
+        64.9656,
+        445.5095,
+        219.7996,
+        458.7395
+      ],
+      "unicodeSha256": "36c500ab3de3052ba60f37b8bf6f27e03e0cc1ccb77a9c256d351bdfe7156be4",
+      "wordBoxesSha256": "91bd98378b41eb6c1a5daf4a822be92b28c96720deb806405439309bc611b3b8",
+      "wordSpan": [
+        97,
+        101
+      ]
+    },
+    "pdf:958:cell:39": {
+      "id": "pdf:958:cell:39",
+      "pdfPage": 958,
+      "rect": [
+        82.9656,
+        455.5095,
+        98.5456,
+        468.7395
+      ],
+      "unicodeSha256": "3c92afdfe9f4c8a7ec21561dcc7b1571b4895920673e13da21ad66fe9e165534",
+      "wordBoxesSha256": "ccc979b18c71d73959e8186ac2adfb199a3b7fccfddf41007a5e25e1589f05ca",
+      "wordSpan": [
+        101,
+        102
+      ]
+    },
+    "pdf:958:cell:40": {
+      "id": "pdf:958:cell:40",
+      "pdfPage": 958,
+      "rect": [
+        64.9656,
+        470.5095,
+        189.9006,
+        483.7395
+      ],
+      "unicodeSha256": "f677e7a7b24ead9c33e74ffb198df0b3252f8c736837a2bfb9815eb62374a294",
+      "wordBoxesSha256": "a868a56f2fdd430b7ddcb3bad189f0f8e4bd6e5208cf37b4f77c2e020ff3cbce",
+      "wordSpan": [
+        102,
+        105
+      ]
+    },
+    "pdf:958:cell:41": {
+      "id": "pdf:958:cell:41",
+      "pdfPage": 958,
+      "rect": [
+        82.9656,
+        480.5095,
+        206.2206,
+        493.7395
+      ],
+      "unicodeSha256": "3fe082d56c9adf01159ef0cf13446773e8098abfe3b34373010e383b9e218ea8",
+      "wordBoxesSha256": "7ff17b44ce9c7912801038780deb5c0d982d257ba2e69ee89109d73406cff234",
+      "wordSpan": [
+        105,
+        106
+      ]
+    },
+    "pdf:958:cell:42": {
+      "id": "pdf:958:cell:42",
+      "pdfPage": 958,
+      "rect": [
+        64.9656,
+        495.5095,
+        189.9006,
+        508.7395
+      ],
+      "unicodeSha256": "f677e7a7b24ead9c33e74ffb198df0b3252f8c736837a2bfb9815eb62374a294",
+      "wordBoxesSha256": "9d2fa023d9c7d55157a0c3c241a42bdcf278734915e61b7aa079b771d69a5a05",
+      "wordSpan": [
+        106,
+        109
+      ]
+    },
+    "pdf:958:cell:43": {
+      "id": "pdf:958:cell:43",
+      "pdfPage": 958,
+      "rect": [
+        82.9656,
+        505.5095,
+        206.2206,
+        518.7395
+      ],
+      "unicodeSha256": "36c6b44c951761ffdc0fe1a42b383ebf0c763a8bf9cc8a16b931334b1a8b68bd",
+      "wordBoxesSha256": "de9026aafaa48a79f481b0f42f166a0d31cd4c096274189b91b2c619b45f57d0",
+      "wordSpan": [
+        109,
+        110
+      ]
+    },
+    "pdf:958:cell:44": {
+      "id": "pdf:958:cell:44",
+      "pdfPage": 958,
+      "rect": [
+        64.9656,
+        520.5095,
+        189.9006,
+        533.7395
+      ],
+      "unicodeSha256": "476cd8ffda877effe9edadfe71b7f9e801e248c6a0b918bcfcd9163a65d43dee",
+      "wordBoxesSha256": "ae906ed6fe427b59346b4bfa913694baf0390cca7df467d1dc67b1711953aa5c",
+      "wordSpan": [
+        110,
+        113
+      ]
+    },
+    "pdf:958:cell:45": {
+      "id": "pdf:958:cell:45",
+      "pdfPage": 958,
+      "rect": [
+        82.9656,
+        530.5095,
+        206.2206,
+        543.7395
+      ],
+      "unicodeSha256": "af00542f1f269004e089ffe6fa3027fd6b73c932fbc1891a01c29e02c2225d9c",
+      "wordBoxesSha256": "93df3aee07ec5ca00656f7750084f9163ffd66fe77cfc75b2c98ba64a223fe0d",
+      "wordSpan": [
+        113,
+        114
+      ]
+    },
+    "pdf:958:cell:5": {
+      "id": "pdf:958:cell:5",
+      "pdfPage": 958,
+      "rect": [
+        124.8858,
+        114.2501,
+        247.2548,
+        127.9001
+      ],
+      "unicodeSha256": "4c758e3f92718e0e59640a53f181c194b9dc07d66a394bbc4fa6dbdf0bb3232d",
+      "wordBoxesSha256": "7e5b3b7134a54b05c0b3417f9877dde037c8db940e5dc3c97235783a3baed49a",
+      "wordSpan": [
+        10,
+        13
+      ]
+    },
+    "pdf:958:cell:54": {
+      "id": "pdf:958:cell:54",
+      "pdfPage": 958,
+      "rect": [
+        297.2556,
+        329.9295,
+        350.8836,
+        344.2495
+      ],
+      "unicodeSha256": "714a451faf956f9a0335f19e39383cb0ad2377da4ac43f95082eed420d93d94c",
+      "wordBoxesSha256": "25247b4563b06b370af1c6d5dd6b3dfbb44fa10f36336fdd2da4b1b07c0553b1",
+      "wordSpan": [
+        125,
+        126
+      ]
+    },
+    "pdf:958:cell:55": {
+      "id": "pdf:958:cell:55",
+      "pdfPage": 958,
+      "rect": [
+        304.9856,
+        345.0895,
+        342.9956,
+        358.7395
+      ],
+      "unicodeSha256": "eaa17d944a8f91a7812f21bface2046e406b030afe55532d24a27f201c2e32bf",
+      "wordBoxesSha256": "4b63ccddaaf2accb78b49525b725b0aca356cae7ae103150baa593c5ba6d76eb",
+      "wordSpan": [
+        126,
+        127
+      ]
+    },
+    "pdf:958:cell:56": {
+      "id": "pdf:958:cell:56",
+      "pdfPage": 958,
+      "rect": [
+        255.4056,
+        370.0895,
+        266.4856,
+        383.7395
+      ],
+      "unicodeSha256": "81b8a03f97e8787c53fe1a86bda042b6f0de9b0ec9c09357e107c99ba4d6948a",
+      "wordBoxesSha256": "a002bd0e309fa2716a2a5c1b0911b79ab75ebe3884b5d1a1f41dca3bf5d884ef",
+      "wordSpan": [
+        127,
+        128
+      ]
+    },
+    "pdf:958:cell:57": {
+      "id": "pdf:958:cell:57",
+      "pdfPage": 958,
+      "rect": [
+        304.9556,
+        370.0895,
+        342.9146,
+        383.7395
+      ],
+      "unicodeSha256": "eaa17d944a8f91a7812f21bface2046e406b030afe55532d24a27f201c2e32bf",
+      "wordBoxesSha256": "1f57bf406b413740c70ca697a1f8ce9306b14903d78a280527fea26ceb14b73f",
+      "wordSpan": [
+        128,
+        129
+      ]
+    },
+    "pdf:958:cell:58": {
+      "id": "pdf:958:cell:58",
+      "pdfPage": 958,
+      "rect": [
+        374.8456,
+        370.0895,
+        417.1246,
+        383.7395
+      ],
+      "unicodeSha256": "479374b79f4107d735953b13597398c116c8e56f52e2802ab05c11f8c757a0c6",
+      "wordBoxesSha256": "eacff72dc04197c388d39da8ba255ad92015c3920b259e27992d3b067d6a6f56",
+      "wordSpan": [
+        129,
+        130
+      ]
+    },
+    "pdf:958:cell:59": {
+      "id": "pdf:958:cell:59",
+      "pdfPage": 958,
+      "rect": [
+        440.1756,
+        370.0895,
+        495.6536,
+        383.7395
+      ],
+      "unicodeSha256": "0c71bef20bf83796f86ace92f101881516bfc3a5286e6526191e5b3be6a10e64",
+      "wordBoxesSha256": "fa6fa3ddf30f3a4b2b497e0364d6abe12250ad5aa5558eeda2c37e421193b5f4",
+      "wordSpan": [
+        130,
+        131
+      ]
+    },
+    "pdf:958:cell:6": {
+      "id": "pdf:958:cell:6",
+      "pdfPage": 958,
+      "rect": [
+        124.8858,
+        127.2501,
+        247.2548,
+        140.9001
+      ],
+      "unicodeSha256": "20e81e23e2f4256795fe6d0b6301196f757d7695aba78aae44c5b070e30b9925",
+      "wordBoxesSha256": "5d8722586672b7a82a712bf2536f5a49709c815ff6f8728ba098044daf3e4ff7",
+      "wordSpan": [
+        13,
+        16
+      ]
+    },
+    "pdf:958:cell:60": {
+      "id": "pdf:958:cell:60",
+      "pdfPage": 958,
+      "rect": [
+        510.3556,
+        370.0895,
+        542.7946,
+        383.7395
+      ],
+      "unicodeSha256": "d8f9542f3e2e44daed1ba285a295819c0942db020ce5ad23fe1832e623ed6855",
+      "wordBoxesSha256": "52a9ea5ccbcd6eb100269c9d6c49205f3619e73635e39233c639a317607b4508",
+      "wordSpan": [
+        131,
+        134
+      ]
+    },
+    "pdf:958:cell:61": {
+      "id": "pdf:958:cell:61",
+      "pdfPage": 958,
+      "rect": [
+        255.4056,
+        395.0895,
+        266.4856,
+        408.7395
+      ],
+      "unicodeSha256": "81b8a03f97e8787c53fe1a86bda042b6f0de9b0ec9c09357e107c99ba4d6948a",
+      "wordBoxesSha256": "3c8fc31b99dab7098f04c42ce360e0c733d5eb95e73456f7fdd9ad917c7e3e2a",
+      "wordSpan": [
+        134,
+        135
+      ]
+    },
+    "pdf:958:cell:62": {
+      "id": "pdf:958:cell:62",
+      "pdfPage": 958,
+      "rect": [
+        304.9556,
+        395.0895,
+        342.9146,
+        408.7395
+      ],
+      "unicodeSha256": "eaa17d944a8f91a7812f21bface2046e406b030afe55532d24a27f201c2e32bf",
+      "wordBoxesSha256": "4dad77ff452b4af1140b6450dbf1c8e58aa64c4e0a897665212d574914c320a3",
+      "wordSpan": [
+        135,
+        136
+      ]
+    },
+    "pdf:958:cell:63": {
+      "id": "pdf:958:cell:63",
+      "pdfPage": 958,
+      "rect": [
+        374.8456,
+        395.0895,
+        417.1246,
+        408.7395
+      ],
+      "unicodeSha256": "479374b79f4107d735953b13597398c116c8e56f52e2802ab05c11f8c757a0c6",
+      "wordBoxesSha256": "cb9105f6e580d436f23fa80e968849eb6bdf5d7b1cd54686bf7493e59288dde1",
+      "wordSpan": [
+        136,
+        137
+      ]
+    },
+    "pdf:958:cell:64": {
+      "id": "pdf:958:cell:64",
+      "pdfPage": 958,
+      "rect": [
+        440.1756,
+        395.0895,
+        495.6646,
+        408.7395
+      ],
+      "unicodeSha256": "0f7dfba83bc54745bab661f1cf5dc73c249a794bd84989b7cef60e8d9a1e49e7",
+      "wordBoxesSha256": "6d65d92ec1b0507422db341c5060eac84b7fdd9a649cd0cc2f1e4090772cdba5",
+      "wordSpan": [
+        137,
+        138
+      ]
+    },
+    "pdf:958:cell:65": {
+      "id": "pdf:958:cell:65",
+      "pdfPage": 958,
+      "rect": [
+        510.3556,
+        395.0895,
+        542.7946,
+        408.7395
+      ],
+      "unicodeSha256": "d8f9542f3e2e44daed1ba285a295819c0942db020ce5ad23fe1832e623ed6855",
+      "wordBoxesSha256": "3d27ceb54da9d865b6484380944ea1461c50fccf1d56612251399d7954fc7f6b",
+      "wordSpan": [
+        138,
+        141
+      ]
+    },
+    "pdf:958:cell:66": {
+      "id": "pdf:958:cell:66",
+      "pdfPage": 958,
+      "rect": [
+        255.4056,
+        420.0895,
+        266.4856,
+        433.7395
+      ],
+      "unicodeSha256": "81b8a03f97e8787c53fe1a86bda042b6f0de9b0ec9c09357e107c99ba4d6948a",
+      "wordBoxesSha256": "77d2be8153ccd7c8e53a733d6ca408ba73e6ad6a812f3ab6619e4b5fce44a58e",
+      "wordSpan": [
+        141,
+        142
+      ]
+    },
+    "pdf:958:cell:67": {
+      "id": "pdf:958:cell:67",
+      "pdfPage": 958,
+      "rect": [
+        304.9556,
+        420.0895,
+        342.9146,
+        433.7395
+      ],
+      "unicodeSha256": "eaa17d944a8f91a7812f21bface2046e406b030afe55532d24a27f201c2e32bf",
+      "wordBoxesSha256": "9e4895b85cdb54eeeb9aac5762e7d984c55fde270917d73f28a7ca9eacce08f5",
+      "wordSpan": [
+        142,
+        143
+      ]
+    },
+    "pdf:958:cell:68": {
+      "id": "pdf:958:cell:68",
+      "pdfPage": 958,
+      "rect": [
+        374.8456,
+        420.0895,
+        417.1246,
+        433.7395
+      ],
+      "unicodeSha256": "479374b79f4107d735953b13597398c116c8e56f52e2802ab05c11f8c757a0c6",
+      "wordBoxesSha256": "b1b8ef034aa7ba0ad5dcf002bb88ace1cc30a357558e90bc2cf57a5e9991b6d8",
+      "wordSpan": [
+        143,
+        144
+      ]
+    },
+    "pdf:958:cell:69": {
+      "id": "pdf:958:cell:69",
+      "pdfPage": 958,
+      "rect": [
+        440.1756,
+        420.0895,
+        495.6536,
+        433.7395
+      ],
+      "unicodeSha256": "986cc4a4b508d0634f312889b3f5a6e07aa9fead0e341db91cee3f5e43b29f89",
+      "wordBoxesSha256": "e336357db66c266197c44453a0597284aa54ca99396b436d8ff1c4a946811f85",
+      "wordSpan": [
+        144,
+        145
+      ]
+    },
+    "pdf:958:cell:7": {
+      "id": "pdf:958:cell:7",
+      "pdfPage": 958,
+      "rect": [
+        124.8758,
+        142.2501,
+        247.2448,
+        155.9001
+      ],
+      "unicodeSha256": "dc003e1f4ce10cf91545a16ae4be3d54d679510320c73b702a62066c2a3964de",
+      "wordBoxesSha256": "a532b2707d60ceadd38a98c032b9fbc626af6db9086b5d7c07d23177c5022dae",
+      "wordSpan": [
+        16,
+        19
+      ]
+    },
+    "pdf:958:cell:70": {
+      "id": "pdf:958:cell:70",
+      "pdfPage": 958,
+      "rect": [
+        510.3556,
+        420.0895,
+        542.7946,
+        433.7395
+      ],
+      "unicodeSha256": "d8f9542f3e2e44daed1ba285a295819c0942db020ce5ad23fe1832e623ed6855",
+      "wordBoxesSha256": "780cc2cbb2c2a6ac990eec720a18b172694561204cc92d8233656b10d897de9f",
+      "wordSpan": [
+        145,
+        148
+      ]
+    },
+    "pdf:958:cell:71": {
+      "id": "pdf:958:cell:71",
+      "pdfPage": 958,
+      "rect": [
+        255.4056,
+        445.0895,
+        266.4856,
+        458.7395
+      ],
+      "unicodeSha256": "81b8a03f97e8787c53fe1a86bda042b6f0de9b0ec9c09357e107c99ba4d6948a",
+      "wordBoxesSha256": "dda5324c861b24d9f411ffb70798bdbcb64d9226b9e210d4137c519a4d4a375d",
+      "wordSpan": [
+        148,
+        149
+      ]
+    },
+    "pdf:958:cell:72": {
+      "id": "pdf:958:cell:72",
+      "pdfPage": 958,
+      "rect": [
+        304.9556,
+        445.0895,
+        342.9146,
+        458.7395
+      ],
+      "unicodeSha256": "2f6634ef8d1bf0f282a1d6401693adfc6f4c9db0fed825da0c0c2ef6f3d9cc45",
+      "wordBoxesSha256": "26e5f9d9a4c9966df5b12c679f48cd600356aef3a28ad87564388fd052ba3d8b",
+      "wordSpan": [
+        149,
+        150
+      ]
+    },
+    "pdf:958:cell:73": {
+      "id": "pdf:958:cell:73",
+      "pdfPage": 958,
+      "rect": [
+        374.8456,
+        445.0895,
+        417.1246,
+        458.7395
+      ],
+      "unicodeSha256": "479374b79f4107d735953b13597398c116c8e56f52e2802ab05c11f8c757a0c6",
+      "wordBoxesSha256": "3187bd1e6e36863a30e8e7425014f015a0e9583fa11ba36fd14c236b72595eb6",
+      "wordSpan": [
+        150,
+        151
+      ]
+    },
+    "pdf:958:cell:74": {
+      "id": "pdf:958:cell:74",
+      "pdfPage": 958,
+      "rect": [
+        441.8556,
+        445.0895,
+        493.9736,
+        458.7395
+      ],
+      "unicodeSha256": "0a3b29c0690cd36751af90a82dff5abcc48f4ff12844ed28a82f7e93a70efa1f",
+      "wordBoxesSha256": "cd0c518b35c7363ebdd09638aad6c9f1d796ea491da82d1a051c037cdbd429b6",
+      "wordSpan": [
+        151,
+        152
+      ]
+    },
+    "pdf:958:cell:75": {
+      "id": "pdf:958:cell:75",
+      "pdfPage": 958,
+      "rect": [
+        515.6356,
+        445.0895,
+        537.4446,
+        458.7395
+      ],
+      "unicodeSha256": "3bd88ebe81e07cc03acef87c2f191f5965d5715336ecc2c2190d8eb6d95493a0",
+      "wordBoxesSha256": "6a7882b89b48c4bbcf0ceb3171a0399e6dd80da02390be32de491bcc41b3cd38",
+      "wordSpan": [
+        152,
+        154
+      ]
+    },
+    "pdf:958:cell:76": {
+      "id": "pdf:958:cell:76",
+      "pdfPage": 958,
+      "rect": [
+        255.4056,
+        470.0895,
+        266.4856,
+        483.7395
+      ],
+      "unicodeSha256": "81b8a03f97e8787c53fe1a86bda042b6f0de9b0ec9c09357e107c99ba4d6948a",
+      "wordBoxesSha256": "372b35da82932da6c265174cb066705a4c6f05c968f4fcb4ae6e091d0ae3ba9b",
+      "wordSpan": [
+        154,
+        155
+      ]
+    },
+    "pdf:958:cell:77": {
+      "id": "pdf:958:cell:77",
+      "pdfPage": 958,
+      "rect": [
+        304.9556,
+        470.0895,
+        342.9146,
+        483.7395
+      ],
+      "unicodeSha256": "2f6634ef8d1bf0f282a1d6401693adfc6f4c9db0fed825da0c0c2ef6f3d9cc45",
+      "wordBoxesSha256": "271c1db065d9dafacf3c2dd7aaacf077e05d71cf45cac947708c5790f941c452",
+      "wordSpan": [
+        155,
+        156
+      ]
+    },
+    "pdf:958:cell:78": {
+      "id": "pdf:958:cell:78",
+      "pdfPage": 958,
+      "rect": [
+        374.8456,
+        470.0895,
+        417.1246,
+        483.7395
+      ],
+      "unicodeSha256": "479374b79f4107d735953b13597398c116c8e56f52e2802ab05c11f8c757a0c6",
+      "wordBoxesSha256": "9d9073cd38003af9978f1270b7d2cba88bfd275d170509e58481091cd45141be",
+      "wordSpan": [
+        156,
+        157
+      ]
+    },
+    "pdf:958:cell:79": {
+      "id": "pdf:958:cell:79",
+      "pdfPage": 958,
+      "rect": [
+        440.4556,
+        470.0895,
+        495.4536,
+        483.7395
+      ],
+      "unicodeSha256": "6721b4d48bad36d94c6ea66839c2f886e3bd825887e8e914a3d446620a2c32bd",
+      "wordBoxesSha256": "9cc4280197fefd5f653712e1533eb777d2cec642bcf647f9c3b1f1fe03f8a94e",
+      "wordSpan": [
+        157,
+        158
+      ]
+    },
+    "pdf:958:cell:8": {
+      "id": "pdf:958:cell:8",
+      "pdfPage": 958,
+      "rect": [
+        152.9258,
+        157.2501,
+        219.1138,
+        170.9001
+      ],
+      "unicodeSha256": "23e0121cee396dcac0da26ec5a39ac3d833f12c2e4e4cf52a3f321536126fcaf",
+      "wordBoxesSha256": "8db3410e33dcdf63951f9b496ba67644434706339fd5facec29fa183985bc365",
+      "wordSpan": [
+        19,
+        20
+      ]
+    },
+    "pdf:958:cell:80": {
+      "id": "pdf:958:cell:80",
+      "pdfPage": 958,
+      "rect": [
+        515.6356,
+        470.0895,
+        537.4446,
+        483.7395
+      ],
+      "unicodeSha256": "3bd88ebe81e07cc03acef87c2f191f5965d5715336ecc2c2190d8eb6d95493a0",
+      "wordBoxesSha256": "c530f9a89ae6f3e6acc05be04517654e2db593f817dfa415ccd65f35d6080e59",
+      "wordSpan": [
+        158,
+        160
+      ]
+    },
+    "pdf:958:cell:81": {
+      "id": "pdf:958:cell:81",
+      "pdfPage": 958,
+      "rect": [
+        255.4056,
+        495.0895,
+        266.4856,
+        508.7395
+      ],
+      "unicodeSha256": "81b8a03f97e8787c53fe1a86bda042b6f0de9b0ec9c09357e107c99ba4d6948a",
+      "wordBoxesSha256": "5ab632de7515e76198eff1bfac96569bf3397d6fffcf725dc7716ae94c9fbad8",
+      "wordSpan": [
+        160,
+        161
+      ]
+    },
+    "pdf:958:cell:82": {
+      "id": "pdf:958:cell:82",
+      "pdfPage": 958,
+      "rect": [
+        304.9556,
+        495.0895,
+        342.9146,
+        508.7395
+      ],
+      "unicodeSha256": "2f6634ef8d1bf0f282a1d6401693adfc6f4c9db0fed825da0c0c2ef6f3d9cc45",
+      "wordBoxesSha256": "5ef4f99fb9f6793a2a3c9e4c0208178a19a7476b19279209465a7cd862d8c9fc",
+      "wordSpan": [
+        161,
+        162
+      ]
+    },
+    "pdf:958:cell:83": {
+      "id": "pdf:958:cell:83",
+      "pdfPage": 958,
+      "rect": [
+        374.8456,
+        495.0895,
+        417.1246,
+        508.7395
+      ],
+      "unicodeSha256": "479374b79f4107d735953b13597398c116c8e56f52e2802ab05c11f8c757a0c6",
+      "wordBoxesSha256": "a46c1960144847895a4da93515cef5bbbfe4bf7da198af834332d2ff9584a266",
+      "wordSpan": [
+        162,
+        163
+      ]
+    },
+    "pdf:958:cell:84": {
+      "id": "pdf:958:cell:84",
+      "pdfPage": 958,
+      "rect": [
+        440.4556,
+        495.0895,
+        495.4536,
+        508.7395
+      ],
+      "unicodeSha256": "ff211f22a37f79f70a2319d6b6f39dc445bf779fe5efb8f81061d75c12e20834",
+      "wordBoxesSha256": "0bbd29d9dd3682818d27be044ce3f4d89326fefb2ba154872ea58fa6b2ebe622",
+      "wordSpan": [
+        163,
+        164
+      ]
+    },
+    "pdf:958:cell:85": {
+      "id": "pdf:958:cell:85",
+      "pdfPage": 958,
+      "rect": [
+        515.6356,
+        495.0895,
+        537.4446,
+        508.7395
+      ],
+      "unicodeSha256": "3bd88ebe81e07cc03acef87c2f191f5965d5715336ecc2c2190d8eb6d95493a0",
+      "wordBoxesSha256": "a3b9e60c5b58ac98182bee9f204f5a3c9983b01bc36f9bf31b4fddb830268d2f",
+      "wordSpan": [
+        164,
+        166
+      ]
+    },
+    "pdf:958:cell:86": {
+      "id": "pdf:958:cell:86",
+      "pdfPage": 958,
+      "rect": [
+        255.4056,
+        520.0895,
+        266.4856,
+        533.7395
+      ],
+      "unicodeSha256": "81b8a03f97e8787c53fe1a86bda042b6f0de9b0ec9c09357e107c99ba4d6948a",
+      "wordBoxesSha256": "fd6d1213f93b324b4be78cbeecb357b96c5f2e8ee50f62e0335e7f49b8622fa5",
+      "wordSpan": [
+        166,
+        167
+      ]
+    },
+    "pdf:958:cell:87": {
+      "id": "pdf:958:cell:87",
+      "pdfPage": 958,
+      "rect": [
+        304.9556,
+        520.0895,
+        342.9146,
+        533.7395
+      ],
+      "unicodeSha256": "2f6634ef8d1bf0f282a1d6401693adfc6f4c9db0fed825da0c0c2ef6f3d9cc45",
+      "wordBoxesSha256": "7c349ee6fa5e4d125809fbdb99601b6b219cec47a40e0c5ac910734298edc156",
+      "wordSpan": [
+        167,
+        168
+      ]
+    },
+    "pdf:958:cell:88": {
+      "id": "pdf:958:cell:88",
+      "pdfPage": 958,
+      "rect": [
+        374.8456,
+        520.0895,
+        417.1246,
+        533.7395
+      ],
+      "unicodeSha256": "479374b79f4107d735953b13597398c116c8e56f52e2802ab05c11f8c757a0c6",
+      "wordBoxesSha256": "cece2f9c6902611bac8729f1cb71d380844726b1c977c20c4bb383217b4913fd",
+      "wordSpan": [
+        168,
+        169
+      ]
+    },
+    "pdf:958:cell:89": {
+      "id": "pdf:958:cell:89",
+      "pdfPage": 958,
+      "rect": [
+        440.4556,
+        520.0895,
+        495.4536,
+        533.7395
+      ],
+      "unicodeSha256": "4cbbf3579558f3c136af559aafebe6eab71d68f75826d82fa9ebd5713cd6f7eb",
+      "wordBoxesSha256": "8010292db394102583e2c4c434397d9d0e727a129bd3f4ff57d441689189ba5b",
+      "wordSpan": [
+        169,
+        170
+      ]
+    },
+    "pdf:958:cell:9": {
+      "id": "pdf:958:cell:9",
+      "pdfPage": 958,
+      "rect": [
+        381.3858,
+        120.7501,
+        476.5848,
+        134.4001
+      ],
+      "unicodeSha256": "e1c6f43c6a534520e6b1886ac5da1e7a2511af03b333a7b3eae8f0fb85fcd6ce",
+      "wordBoxesSha256": "9e7a67353bc248e5a7faf6cdda90b6503c2eebac91fffdd83bd116893bad0770",
+      "wordSpan": [
+        20,
+        22
+      ]
+    },
+    "pdf:958:cell:90": {
+      "id": "pdf:958:cell:90",
+      "pdfPage": 958,
+      "rect": [
+        515.6356,
+        520.0895,
+        537.4446,
+        533.7395
+      ],
+      "unicodeSha256": "3bd88ebe81e07cc03acef87c2f191f5965d5715336ecc2c2190d8eb6d95493a0",
+      "wordBoxesSha256": "2f167990e7cba02bf167ceb8ce6603555391f2365338b102387780972b02bb15",
+      "wordSpan": [
+        170,
+        172
+      ]
+    }
+  }
+}

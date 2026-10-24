@@ -2,8 +2,19 @@
 
 ## Context and follow-up
 
-**Current continuation: stopped for publication at the user's request,
-2026-10-24.** The [stopped checkpoint](../../CHECKPOINTS.md#2026-10-24--amd64-constraint-and-mov8-continuation-stopped-for-publication)
+**Current continuation: resumed at the user's request, 2026-10-24.** The
+[per-form mapping continuation](../../.agents/plans/amd64-operation-coverage.md#per-form-source-rule-mapping-resumed-2026-10-24)
+closes the explicit source-rule dependency omission with fresh affected
+campaigns. The
+[memory-native continuation](../../.agents/plans/amd64-operation-coverage.md#memory-mov8-native-consumer-continuation-2026-10-24)
+adds a qualified finite address-64 consumer/address-32 refusal gate. Wider
+coverage remains incomplete. The
+[publisher entry-review continuation](../../.agents/plans/amd64-operation-coverage.md#publisher-migration-entry-review-2026-10-24)
+now maps the source migration through a completed structural subgate without
+adopting it. The
+[conversion constraint continuation](../../.agents/plans/amd64-operation-coverage.md#conversion-family-source-constraints-2026-10-24)
+validates selected source claims and retains conflicts without runtime admission.
+The [stopped checkpoint](../../CHECKPOINTS.md#2026-10-24--amd64-constraint-and-mov8-continuation-stopped-for-publication)
 records the publisher comparison, architectural constraint pack, memory domain,
 register-native qualification and one unfinished source-rule mapping requirement.
 [Current execution and prerequisites](../../.agents/plans/amd64-operation-coverage.md#resumed-source-review-and-local-native-checks)
@@ -99,6 +110,7 @@ cannot establish those stronger claims.
 | Accounting v1 | Candidate-only associations remain unchanged | The frozen 10,569 candidates still lack vendor-wide authoritative legal-form bindings. |
 | Legal-domain/binding v2 pilot | Three source-derived F3 MOVS/STOS/CMPS families enumerate 24 canonical byte/environment points: 3 supported and 21 explicitly unsupported for v12 | Total disposition of this pilot does not close implementation, source completeness or the vendor denominator; fresh source-bound BIL, numeric and Rust admission checks pass for this pilot. |
 | Legal-domain/binding v3 | 56 canonical AMD points, 516 source anchors and 111 fresh profile observations; v15 covers all points in this finite domain | Earlier profiles retain explicit unsupported points. Full source/vendor completeness and all 10,569 symbolic-domain bindings remain open. |
+| Memory-MOV8 native consumption | 2,880 address-64 encodings × two targets plus all 2,880 address-32 refusals × two targets; seven named tests with current source/tool/test-artifact binding | Loads preserve untouched bytes, stores keep prior `memory:any` origins and refused roots stop before consumers. Synthetic normalized-analysis validation; full grammar, source completeness, ISA truth and execution history remain separate. |
 
 The survey's 106 remaining cases comprise 75 missing producer lifts, 28
 unsupported control/semantics outcomes, two encoding disagreements and one
@@ -1331,3 +1343,261 @@ preserved pre-adjustment source; they do not close that requirement. After a
 new resume instruction, make and review the mapping change, then refresh its
 affected source seals and campaigns before progressing to remaining scope,
 constraint, domain, consumer and instruction-family work.
+
+### 10.14 Per-form source-rule mapping resumed
+
+2026-10-24: resumed from `8317f4d`. The two memory-MOV8 forms now name all five
+previously omitted prefix/order/REX/length/operand-size dependencies. The strict
+validator requires those links, and ten removal controls reject an omission
+from either form. Source review checks the architectural clauses: canonical
+prefix groups, at most one immediately preceding REX, the fifteen-byte bound,
+and operand-size prefixes having no effect on byte operands. This mapping does
+not admit additional prefixes or resolve the ten open architectural references.
+
+Independent enumeration confirms the identical 5,760 encoding/environment
+points and the existing 2,880 address-64/2,880 refused address-32 split. Only
+per-form dependency links and their source/domain bindings change. Candidate
+registries and fresh ledger/binding/native run products stay under ignored
+`target/coverage-20261024/mapping-resume-01/`. Fresh source-ledger extraction/check
+and all six binding/reconciliation steps pass; the incomplete full-domain gate
+still exits nonzero as required. The 640-point register domain has 1,280 fresh
+observations; the memory domain has 11,520. Its 6,280 numeric matches and 5,240
+mismatches preserve the original address-size partition: matching address-32
+samples still receive no admission. Both affected binding inputs are promoted
+byte-for-byte after the campaigns. Maintained-path checks pass and reject the
+old pre-adjustment observations; v2/v3 bindings remain untouched and current.
+
+The native register gate runs again after promotion and passes its four named
+release tests: 1,280 instances in twenty synthetic capture/native-analysis
+batches, structural refusals and address-32 bad-lift barriers. Its 755 source
+bindings and executed test artifact remain stable. This is register-native
+consumption under trusted reader-normalized effects; memory-native validation,
+hardware correctness and actual execution history remain separate.
+
+Root checks pass 473 default Rust tests/164 ignored, 64 core-only/22 ignored,
+strict Clippy, format/layout, 209 focused controls, all 460 tooling and 145 BAP
+Python tests. Full source/legal-domain flags remain false: 115 corpus review
+obligations, ten unresolved architectural references, 516 unparsed selected
+cells and zero complete symbolic candidate bindings remain. Corpus adoption,
+memory-native consumption and wider architecture/consumer coverage are next
+work, rather than consequences of adding five source links. Old passing results
+retain their pre-adjustment identities.
+The [execution ledger](../../.agents/plans/amd64-operation-coverage.md#per-form-source-rule-mapping-resumed-2026-10-24)
+tracks the remaining gate boundary.
+
+### 10.15 Memory-MOV8 native-consumer continuation
+
+2026-10-24: the user resumed the next open consumer gate after the five-rule
+mapping refresh. The finite gate is implemented and passes under the
+[execution plan](../../.agents/plans/amd64-operation-coverage.md#memory-mov8-native-consumer-continuation-2026-10-24).
+The finite denominator remains 5,760 byte/environment points. This additional
+gate checks address-64 native consumption and the address-32 refusal boundary;
+the existing producer/projection assessment is not rewritten as a native pass.
+
+Each supported memory instruction has an independent captured root, a register
+or memory consumer and RET. Expected origins come from raw encoding fields;
+native/Rust equality supplements those independent checks. Loads replace only
+their encoded destination byte. Stores may-write `memory:any`, keep its unknown
+entry origin and never turn a one-byte store into a whole-memory must-write.
+Unsupported address-32 roots stop before consumers, with no invented slice root
+or precise address evidence. Both Windows/Linux target labels are exercised
+using synthetic minidumps, not claimed real program executions.
+
+The checker must bind the source closure, actual helpers/libraries, domain and
+binding inputs, selected dependency snapshot and executed Rust test binary.
+Wrong names/counts, skipped tests, missing markers, stale identities and partial
+output are failures. Qualification is limited to normalized native analysis;
+trusted lifting, hardware correctness, broader architectural constraints,
+actual executed writers and full AMD64 coverage remain separate.
+
+The test-only observer lives in
+[`mov8_memory_native_consumer.rs`](../../tests/bap/mov8_memory_native_consumer.rs),
+as a child of the existing register-native test module. It adds no production
+projection hook or semantic fallback. The
+[`memory-native checker`](../../tools/check_amd64_mov8_memory_native.py) validates
+the exact domain and source inputs, then reuses the register checker's strict
+process/test-artifact lifecycle. Its seven-test freeze includes all four
+register/barrier tests and has separately named memory success/refusal counters.
+
+```sh
+python3 tools/with_mirrorrust_snapshot.py run \
+  --snapshot target/i5b-dependency-snapshot \
+  --sha256 a087ecfb136795d30f6c3861d9e4003f0ed9f457db2b17561f0417551bf97854 \
+  -- python3 tools/check_amd64_mov8_memory_native.py \
+     --output target/memory-mov8-native-current
+```
+
+The portable domain test and 24 checker/lifecycle controls pass. The final
+native run exercises all seven exact named tests with stable input/source/
+helper/library and executed-test-binary identities. It checks 5,760 address-64
+instances in ninety independent-root batches, including 2,880 loads and 2,880
+weak memory stores. Another ninety batches stop every one of the 5,760
+address-32 instances before its consumer, with empty precise-address evidence,
+no definite writes and no invented slice roots. The existing register suite
+rechecks its 1,280 instances and host/native structural and bad-lift barriers
+within that same final source/tool/artifact freeze.
+
+Explicit target identities and retained entry/seed sets are asserted for both
+Windows/Linux prepared snapshots. The test-only observer extends no production
+admission and leaves all four producer/projection source seals current. Root
+tests pass 474 default/166 ignored and 64 core-only/22 ignored; 467 tooling,
+145 BAP Python tests, strict Clippy, format/layout and documentation checks pass.
+The first native run preceded the extra prepared-identity assertions; final
+qualification uses the second run's exact test source. Run products remain
+ignored under `target/coverage-20261024/memory-native-02/` and
+`memory-native-checks-01/`. No acceptance report or copied source tree is retained
+in maintained source.
+
+The producer/projection assessment keeps its own `nativeConsumerValidated=false`
+scope; the new native-consumer assessment has a separate schema and contract.
+The address-32 producer remains unqualified and refused. Corpus adoption/scope,
+115 review obligations, ten unresolved architectural references, 516 unparsed
+selected cells and all full symbolic domains remain open. These finite results
+do not change source-complete, vendor-wide or full-AMD64 flags.
+
+### 10.16 Publisher migration entry review
+
+2026-10-24: the user selected the source-corpus review/adoption continuation.
+The [execution plan](../../.agents/plans/amd64-operation-coverage.md#publisher-migration-entry-review-2026-10-24)
+first rechecks publisher identity and maps every entry change against both
+actual source bodies. The 115 review obligations comprise 110 added/removed
+entry records and five broader items. Five removed headings have explicit
+replacement-family counterparts; the other added sections remain additional
+source scope, never silently excluded from the future implementation queue.
+
+This review must preserve the differences it discovers. A changed outline name
+does not establish identical encoding tables or behavior. The old GF2 inverse
+affine section has inconsistent running headings, and the new VCVT sections
+include additional variants and changed prose. Legacy normalized row extraction
+is incomplete, so equal extracted rows cannot prove whole-section equivalence.
+Bind raw section pages, geometry, source/status markings and the original
+obligation objects in addition to normalized observations.
+
+The intended result is an executable structural source-entry review, with
+complete coverage of the 110 entry records and explicit prior-family/new-source
+ownership. Corpus adoption, semantic/constraint migration and full legal domains
+stay separate. The original locks, publisher comparison and 115 unresolved
+obligations remain immutable. Generated review products belong under ignored
+`target/coverage-20261024/corpus-review-01/`.
+
+The [review tool](../../tools/amd64_corpus_entry_review.py) reconstructs the
+source comparison before consuming its obligations. Its
+[reviewed input](../../tests/bap/fixtures/source-migration/entry-review-v1.json)
+links five predecessor/replacement families and names every additional section.
+Every mapped section binds its full raw page text, word geometry, normalized
+rows and constraint observations. The original obligation objects and the Vol5
+marking conflict remain explicit. Ten new unit controls and the sixteen
+existing migration controls pass. Fresh extraction and independent reconstruction
+also pass on the actual PDFs. The resulting map covers five prior-family links
+and 100 additional sections, with all 110 original entry records preserved.
+It requests both predecessor/replacement bodies for every family link; no
+removed entry disappears as a cosmetic title normalization.
+
+The five pairs have old/new extracted row counts of 3/4, 12/12, 6/10, 6/10 and
+8/11. These are incomplete lexical observations. The raw section hashes and
+geometry retain source differences even when row counts agree. New conversion
+variants and corrected headings do not imply identical behavior, a parsed legal
+domain or implemented instruction support.
+
+Both official replacement URLs were fetched anew with HTTP 200 and byte-for-byte
+pin matches. The Vol5 same-revision document still carries the recorded
+confidential/NDA marking where the predecessor carries the public-use marking.
+That source-status conflict is retained, not silently normalized or treated as
+a resolved publication decision. All 115 original semantic/adoption obligations
+stay unresolved, including the five broader review items. This delivers the P1
+structural entry map only; full semantic/constraint migration and corpus adoption
+remain separate work.
+
+All 477 tooling tests, 145 BAP Python tests, formatting, layout and documentation
+checks pass. This source-only slice changes no Rust/native runtime, original
+source lock, publisher pin or production admission. It adds no current native,
+model, capture or release qualification. Current source-stage products remain
+disposable under the ignored review directory.
+
+With the recovered pinned extractor environment and exact source caches:
+
+```sh
+python3 target/tool-recovery/source-replay/run_pinned.py \
+  tools/amd64_corpus_entry_review.py extract \
+  --old-cache target/amd-manual-inventory --publisher-cache target/p1-authority \
+  --output target/current-corpus-entry-review
+python3 target/tool-recovery/source-replay/run_pinned.py \
+  tools/amd64_corpus_entry_review.py check \
+  --old-cache target/amd-manual-inventory --publisher-cache target/p1-authority \
+  --output target/current-corpus-entry-review
+```
+
+The checker reconstructs source products again; a saved structural result or
+changed Boolean flag cannot replace fresh source replay.
+
+### 10.17 Conversion-family source constraints
+
+The user continued the five-family review on 2026-10-24. The first semantic/
+constraint slice covers VCVTPH2PS/VCVTPH2PSX and VCVTPS2PH/VCVTPS2PHX in the
+exact publisher Vol4 r3.27 sections. Its
+[execution plan](../../.agents/plans/amd64-operation-coverage.md#conversion-family-source-constraints-2026-10-24)
+requires source-anchored typed facts and preserved conflicts before any future
+legality or implementation binding. Production admission remains unchanged.
+
+The selected source distinguishes load/store directions, 16/32-bit broadcast
+elements, denormal-exception statements, immediate/MXCSR rounding, masking and
+encoding maps. It also contains statements that cannot be safely combined:
+the PH2PS YMM clear range overlaps the declared result, a generic F16C denormal
+row conflicts with a legacy no-denormal statement, and PS2PHX's always-MXCSR
+prose needs reconciliation with its explicit embedded-rounding encoding row.
+Feature-table width applicability is retained as another unresolved boundary.
+
+Keep these as separate source claims with exact physical anchors, not guessed
+hardware corrections. Small query kernels may expose payload widths, memory
+roles and the reviewed immediate selector; blocked interpretations remain
+unknown. This slice does not implement numerical floating-point conversion,
+producer lifting, a complete encoding grammar, exception execution, vector
+must-defs or source-corpus adoption. Original source gaps and all 115 migration
+obligations remain explicit. The selected source-only gate now passes; whole
+section semantics, corpus adoption and implementation remain open.
+
+The [source tool](../../tools/amd64_conversion_constraints.py) validates a
+separate [reviewed pack](../../tests/bap/fixtures/source-migration/conversion-constraints-v1.json)
+against the exact publisher section owners and 205 anchored word spans. The
+pack contains source/geometry identities and typed statements, not a passing
+qualification record or a copy of full source text. Rule parameters, source
+owners, anchor membership and all four unresolved boundaries must match.
+
+`payload_shape` describes only selected lane counts, payload widths, operand
+direction and broadcast elements. It retains the YMM-clear and denormal
+boundaries and never returns a must-def or a legal/admitted instruction verdict.
+`rounding_selector` describes the reviewed immediate selector; a PS2PHX query
+with embedded rounding stops as unknown instead of guessing a mode. Higher
+immediate bits here are not certified legal encoding bits.
+
+Fresh source checking reconstructs the original seven-PDF entry review before
+validating the candidate rules and independently repeats all products:
+
+```sh
+python3 target/tool-recovery/source-replay/run_pinned.py \
+  tools/amd64_conversion_constraints.py extract \
+  --old-cache target/amd-manual-inventory --publisher-cache target/p1-authority \
+  --output target/current-conversion-source
+python3 target/tool-recovery/source-replay/run_pinned.py \
+  tools/amd64_conversion_constraints.py check \
+  --old-cache target/amd-manual-inventory --publisher-cache target/p1-authority \
+  --output target/current-conversion-source
+```
+
+The ten focused controls pass, including all 1,024 immediate/MXCSR selector
+combinations, payload/memory/broadcast roles and malformed source/rule/anchor/
+owner/boundary rejection. Fresh seven-PDF reconstruction and independent output
+replay pass with the exact source pack and implementation bindings. All 487
+tooling and 145 BAP Python tests, format/layout and documentation checks pass.
+No Rust/native behavior, source lock, publisher pin, semantic profile or runtime
+admission changes occur in this slice. Run products remain ignored under
+`target/coverage-20261024/conversion-constraints-01/`.
+
+This candidate pack reports two source-conflict nodes and two unresolved-scope
+nodes separately from the existing ten architectural references. It does not
+subtract any of the 516 original unparsed cells or mark any of the 115 original
+migration obligations resolved. Further review must cover the other paired
+families, added source sections, feature/exception applicability, ambiguity
+adjudication and legal-domain translation. Original corpus adoption and runtime/
+native claims are not inherited from the query kernels; IEEE arithmetic,
+exception execution and universal ISA correspondence remain unestablished.

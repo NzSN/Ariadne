@@ -1,0 +1,843 @@
+{
+  "schema": "ariadne.amd64-entry-migration-review-input/v1",
+  "migrationInput": {
+    "path": "tests/bap/fixtures/source-migration/publisher-replacements-v1.json",
+    "sha256": "f729dd291495c179480aca705f2e9872f6d7ba3e0cce9911ccb7ee18582b4783"
+  },
+  "publication": "26568",
+  "oldPdfSha256": "5fec87806a5d03418bef588bfbe3f466c129c2f784369fe1e11dd0b6dd8213f0",
+  "newPdfSha256": "209c0ebfa2b4f5bebf7b41ad7f7c5841026166b63b43f0aeb4d9f669f43806f9",
+  "decision": "map-source-entry-changes-without-semantic-adoption",
+  "pairedFamilies": [
+    {
+      "old": {
+        "id": "amd-entry:0049",
+        "chapter": "2 Instruction Reference",
+        "title": "VGF2P8AFFINEINVQB",
+        "pdfPage": 226,
+        "pdfEndPage": 228
+      },
+      "new": {
+        "id": "amd-entry:0049",
+        "chapter": "2 Instruction Reference",
+        "title": "GF2P8AFFINEINVQB VGF2P8AFFINEINVQB",
+        "pdfPage": 228,
+        "pdfEndPage": 230
+      },
+      "reason": "Outline/running-heading ownership repair; actual source/table differences remain review obligations.",
+      "requiredOldText": [
+        "GF2P8AFFINEINVQB",
+        "HADDPD, VHADDPD"
+      ],
+      "requiredNewText": [
+        "GF2P8AFFINEINVQB",
+        "Instruction Encoding"
+      ]
+    },
+    {
+      "old": {
+        "id": "amd-entry:0122",
+        "chapter": "2 Instruction Reference",
+        "title": "MOVD, VMOVD",
+        "pdfPage": 339,
+        "pdfEndPage": 341
+      },
+      "new": {
+        "id": "amd-entry:0122",
+        "chapter": "2 Instruction Reference",
+        "title": "MOVD VMOVD",
+        "pdfPage": 341,
+        "pdfEndPage": 343
+      },
+      "reason": "Prior MOVD family with punctuation/footnote-layout differences; no semantic-equivalence claim.",
+      "requiredOldText": [
+        "MOVD, VMOVD"
+      ],
+      "requiredNewText": [
+        "MOVD",
+        "VMOVD"
+      ]
+    },
+    {
+      "old": {
+        "id": "amd-entry:0334",
+        "chapter": "2 Instruction Reference",
+        "title": "VCVTPH2PS",
+        "pdfPage": 899,
+        "pdfEndPage": 901
+      },
+      "new": {
+        "id": "amd-entry:0353",
+        "chapter": "2 Instruction Reference",
+        "title": "VCVTPH2PS VCVTPH2PSX",
+        "pdfPage": 942,
+        "pdfEndPage": 945
+      },
+      "reason": "Prior conversion family expands with PH2PSX source; variants, exceptions and constraints need semantic review.",
+      "requiredOldText": [
+        "VCVTPH2PS"
+      ],
+      "requiredNewText": [
+        "VCVTPH2PSX"
+      ]
+    },
+    {
+      "old": {
+        "id": "amd-entry:0335",
+        "chapter": "2 Instruction Reference",
+        "title": "VCVTPS2PH",
+        "pdfPage": 902,
+        "pdfEndPage": 905
+      },
+      "new": {
+        "id": "amd-entry:0359",
+        "chapter": "2 Instruction Reference",
+        "title": "VCVTPS2PH VCVTPS2PHX",
+        "pdfPage": 956,
+        "pdfEndPage": 960
+      },
+      "reason": "Prior conversion family expands with PS2PHX source; load/store and rounding differences stay visible.",
+      "requiredOldText": [
+        "VCVTPS2PH"
+      ],
+      "requiredNewText": [
+        "VCVTPS2PHX"
+      ]
+    },
+    {
+      "old": {
+        "id": "amd-entry:0390",
+        "chapter": "2 Instruction Reference",
+        "title": "VFNMADDSS VFNMADD132SS VFNMADD213SS VFNMADD213SS",
+        "pdfPage": 1043,
+        "pdfEndPage": 1046
+      },
+      "new": {
+        "id": "amd-entry:0453",
+        "chapter": "2 Instruction Reference",
+        "title": "VFNMADDSS VFNMADD132SS VFNMADD213SS VFNMADD231SS",
+        "pdfPage": 1173,
+        "pdfEndPage": 1175
+      },
+      "reason": "Prior negative-multiply family with corrected heading variant; changed extracted rows do not establish a new complete domain.",
+      "requiredOldText": [
+        "VFNMADD213SS"
+      ],
+      "requiredNewText": [
+        "VFNMADD231SS"
+      ]
+    }
+  ],
+  "additionalSections": [
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0309",
+      "pdfEndPage": 862,
+      "pdfPage": 861,
+      "title": "VADDPH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0310",
+      "pdfEndPage": 864,
+      "pdfPage": 863,
+      "title": "VADDSH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0313",
+      "pdfEndPage": 870,
+      "pdfPage": 869,
+      "title": "VBCSTNEBF162PS"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0314",
+      "pdfEndPage": 872,
+      "pdfPage": 871,
+      "title": "VBCSTNESH2PS"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0315",
+      "pdfEndPage": 874,
+      "pdfPage": 873,
+      "title": "VBITREV"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0318",
+      "pdfEndPage": 880,
+      "pdfPage": 879,
+      "title": "VBMACOR16X16X16"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0319",
+      "pdfEndPage": 882,
+      "pdfPage": 881,
+      "title": "VBMACXOR16X16X16"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0334",
+      "pdfEndPage": 904,
+      "pdfPage": 902,
+      "title": "VCMPPH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0335",
+      "pdfEndPage": 907,
+      "pdfPage": 905,
+      "title": "VCMPSH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0336",
+      "pdfEndPage": 909,
+      "pdfPage": 908,
+      "title": "VCOMISH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0339",
+      "pdfEndPage": 915,
+      "pdfPage": 914,
+      "title": "VCVTDQ2PH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0341",
+      "pdfEndPage": 919,
+      "pdfPage": 918,
+      "title": "VCVTNEBF162PS"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0342",
+      "pdfEndPage": 921,
+      "pdfPage": 920,
+      "title": "VCVTNEEBF162PS"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0343",
+      "pdfEndPage": 923,
+      "pdfPage": 922,
+      "title": "VCVTNEEPH2PS"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0344",
+      "pdfEndPage": 925,
+      "pdfPage": 924,
+      "title": "VCVTNEOBF162PS"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0345",
+      "pdfEndPage": 927,
+      "pdfPage": 926,
+      "title": "VCVTNEOPH2PS"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0347",
+      "pdfEndPage": 931,
+      "pdfPage": 930,
+      "title": "VCVTPD2PH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0351",
+      "pdfEndPage": 939,
+      "pdfPage": 938,
+      "title": "VCVTPH2DQ"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0352",
+      "pdfEndPage": 941,
+      "pdfPage": 940,
+      "title": "VCVTPH2PD"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0354",
+      "pdfEndPage": 947,
+      "pdfPage": 946,
+      "title": "VCVTPH2QQ"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0355",
+      "pdfEndPage": 949,
+      "pdfPage": 948,
+      "title": "VCVTPH2UDQ"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0356",
+      "pdfEndPage": 951,
+      "pdfPage": 950,
+      "title": "VCVTPH2UQQ"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0357",
+      "pdfEndPage": 953,
+      "pdfPage": 952,
+      "title": "VCVTPH2UW"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0358",
+      "pdfEndPage": 955,
+      "pdfPage": 954,
+      "title": "VCVTPH2W"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0364",
+      "pdfEndPage": 970,
+      "pdfPage": 969,
+      "title": "VCVTQQ2PH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0366",
+      "pdfEndPage": 974,
+      "pdfPage": 973,
+      "title": "VCVTSD2SH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0368",
+      "pdfEndPage": 977,
+      "pdfPage": 977,
+      "title": "VCVTSH2SD"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0369",
+      "pdfEndPage": 979,
+      "pdfPage": 978,
+      "title": "VCVTSH2SI"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0370",
+      "pdfEndPage": 980,
+      "pdfPage": 980,
+      "title": "VCVTSH2SS"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0371",
+      "pdfEndPage": 982,
+      "pdfPage": 981,
+      "title": "VCVTSH2USI"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0372",
+      "pdfEndPage": 984,
+      "pdfPage": 983,
+      "title": "VCVTSI2SH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0373",
+      "pdfEndPage": 986,
+      "pdfPage": 985,
+      "title": "VCVTSS2SH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0378",
+      "pdfEndPage": 996,
+      "pdfPage": 995,
+      "title": "VCVTTPH2DQ"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0379",
+      "pdfEndPage": 998,
+      "pdfPage": 997,
+      "title": "VCVTTPH2QQ"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0380",
+      "pdfEndPage": 1000,
+      "pdfPage": 999,
+      "title": "VCVTTPH2UDQ"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0381",
+      "pdfEndPage": 1002,
+      "pdfPage": 1001,
+      "title": "VCVTTPH2UQQ"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0382",
+      "pdfEndPage": 1004,
+      "pdfPage": 1003,
+      "title": "VCVTTPH2UW"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0383",
+      "pdfEndPage": 1006,
+      "pdfPage": 1005,
+      "title": "VCVTTPH2W"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0388",
+      "pdfEndPage": 1016,
+      "pdfPage": 1015,
+      "title": "VCVTTSH2SI"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0389",
+      "pdfEndPage": 1018,
+      "pdfPage": 1017,
+      "title": "VCVTTSH2USI"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0392",
+      "pdfEndPage": 1024,
+      "pdfPage": 1023,
+      "title": "VCVTUDQ2PH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0395",
+      "pdfEndPage": 1030,
+      "pdfPage": 1029,
+      "title": "VCVTUQQ2PH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0398",
+      "pdfEndPage": 1036,
+      "pdfPage": 1035,
+      "title": "VCVTUSI2SH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0400",
+      "pdfEndPage": 1040,
+      "pdfPage": 1039,
+      "title": "VCVTUW2PH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0401",
+      "pdfEndPage": 1042,
+      "pdfPage": 1041,
+      "title": "VCVTW2PH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0403",
+      "pdfEndPage": 1046,
+      "pdfPage": 1045,
+      "title": "VDIVPH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0404",
+      "pdfEndPage": 1047,
+      "pdfPage": 1047,
+      "title": "VDIVSH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0418",
+      "pdfEndPage": 1071,
+      "pdfPage": 1070,
+      "title": "VFCMADDCPH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0419",
+      "pdfEndPage": 1073,
+      "pdfPage": 1072,
+      "title": "VFCMADDCSH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0420",
+      "pdfEndPage": 1075,
+      "pdfPage": 1074,
+      "title": "VFCMULCPH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0421",
+      "pdfEndPage": 1077,
+      "pdfPage": 1076,
+      "title": "VFCMULCSH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0426",
+      "pdfEndPage": 1088,
+      "pdfPage": 1087,
+      "title": "VFMADDCPH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0427",
+      "pdfEndPage": 1090,
+      "pdfPage": 1089,
+      "title": "VFMADDCSH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0429",
+      "pdfEndPage": 1096,
+      "pdfPage": 1095,
+      "title": "VFMADD132PH VFMADD213PH VFMADD231PH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0430",
+      "pdfEndPage": 1098,
+      "pdfPage": 1097,
+      "title": "VFMADD132SH VFMADD213SH VFMADD231SH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0434",
+      "pdfEndPage": 1113,
+      "pdfPage": 1111,
+      "title": "VFMADDSUB132PH VFMADDSUB213PH VFMADDSUB231PH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0440",
+      "pdfEndPage": 1138,
+      "pdfPage": 1137,
+      "title": "VFMSUB132PH VFMSUB213PH VFMSUB231PH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0443",
+      "pdfEndPage": 1147,
+      "pdfPage": 1146,
+      "title": "VFMSUB132SH VFMSUB213SH VFMSUB231SH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0444",
+      "pdfEndPage": 1150,
+      "pdfPage": 1148,
+      "title": "VFMSUBADD132PH VFMSUBADD213PH VFMSUBADD231PH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0446",
+      "pdfEndPage": 1155,
+      "pdfPage": 1154,
+      "title": "VFMULCPH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0447",
+      "pdfEndPage": 1157,
+      "pdfPage": 1156,
+      "title": "VFMULCSH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0449",
+      "pdfEndPage": 1163,
+      "pdfPage": 1162,
+      "title": "VFNMADD132PH VFNMADD213PH VFNMADD231PH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0450",
+      "pdfEndPage": 1165,
+      "pdfPage": 1164,
+      "title": "VFNMADD132SH VFNMADD213SH VFNMADD231SH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0455",
+      "pdfEndPage": 1182,
+      "pdfPage": 1180,
+      "title": "VFNMSUB132PH VFNMSUB213PH VFNMSUB231PH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0456",
+      "pdfEndPage": 1184,
+      "pdfPage": 1183,
+      "title": "VFNMSUB132SH VFNMSUB213SH VFNMSUB231SH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0461",
+      "pdfEndPage": 1198,
+      "pdfPage": 1197,
+      "title": "VFPCLASSPH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0462",
+      "pdfEndPage": 1199,
+      "pdfPage": 1199,
+      "title": "VFPCLASSSH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0475",
+      "pdfEndPage": 1227,
+      "pdfPage": 1226,
+      "title": "VGETEXPPH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0478",
+      "pdfEndPage": 1233,
+      "pdfPage": 1232,
+      "title": "VGETEXPSH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0481",
+      "pdfEndPage": 1241,
+      "pdfPage": 1239,
+      "title": "VGETMANTPH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0484",
+      "pdfEndPage": 1250,
+      "pdfPage": 1248,
+      "title": "VGETMANTSH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0498",
+      "pdfEndPage": 1271,
+      "pdfPage": 1270,
+      "title": "VMAXPH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0499",
+      "pdfEndPage": 1273,
+      "pdfPage": 1272,
+      "title": "VMAXSH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0500",
+      "pdfEndPage": 1275,
+      "pdfPage": 1274,
+      "title": "VMINPH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0501",
+      "pdfEndPage": 1277,
+      "pdfPage": 1276,
+      "title": "VMINSH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0502",
+      "pdfEndPage": 1278,
+      "pdfPage": 1278,
+      "title": "VMOVSH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0503",
+      "pdfEndPage": 1279,
+      "pdfPage": 1279,
+      "title": "VMOVW"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0504",
+      "pdfEndPage": 1281,
+      "pdfPage": 1280,
+      "title": "VMULPH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0505",
+      "pdfEndPage": 1282,
+      "pdfPage": 1282,
+      "title": "VMULSH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0547",
+      "pdfEndPage": 1369,
+      "pdfPage": 1368,
+      "title": "VPDPBSSD"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0548",
+      "pdfEndPage": 1371,
+      "pdfPage": 1370,
+      "title": "VPDPBSSDS"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0549",
+      "pdfEndPage": 1373,
+      "pdfPage": 1372,
+      "title": "VPDPBSUD"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0550",
+      "pdfEndPage": 1375,
+      "pdfPage": 1374,
+      "title": "VPDPBSUDS"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0553",
+      "pdfEndPage": 1381,
+      "pdfPage": 1380,
+      "title": "VPDPBUUD"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0554",
+      "pdfEndPage": 1383,
+      "pdfPage": 1382,
+      "title": "VPDPBUUDS"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0726",
+      "pdfEndPage": 1736,
+      "pdfPage": 1735,
+      "title": "VRCPPH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0727",
+      "pdfEndPage": 1738,
+      "pdfPage": 1737,
+      "title": "VRCPSH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0729",
+      "pdfEndPage": 1742,
+      "pdfPage": 1741,
+      "title": "VREDUCEPH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0732",
+      "pdfEndPage": 1748,
+      "pdfPage": 1747,
+      "title": "VREDUCESH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0735",
+      "pdfEndPage": 1754,
+      "pdfPage": 1753,
+      "title": "VRNDSCALEPH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0738",
+      "pdfEndPage": 1760,
+      "pdfPage": 1759,
+      "title": "VRNDSCALESH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0744",
+      "pdfEndPage": 1770,
+      "pdfPage": 1769,
+      "title": "VRSQRTPH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0745",
+      "pdfEndPage": 1772,
+      "pdfPage": 1771,
+      "title": "VRSQRTSH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0747",
+      "pdfEndPage": 1776,
+      "pdfPage": 1775,
+      "title": "VSCALEFPH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0750",
+      "pdfEndPage": 1782,
+      "pdfPage": 1781,
+      "title": "VSCALEFSH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0760",
+      "pdfEndPage": 1802,
+      "pdfPage": 1801,
+      "title": "VSQRTPH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0761",
+      "pdfEndPage": 1804,
+      "pdfPage": 1803,
+      "title": "VSQRTSH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0762",
+      "pdfEndPage": 1806,
+      "pdfPage": 1805,
+      "title": "VSUBPH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0763",
+      "pdfEndPage": 1808,
+      "pdfPage": 1807,
+      "title": "VSUBSH"
+    },
+    {
+      "chapter": "2 Instruction Reference",
+      "id": "amd-entry:0766",
+      "pdfEndPage": 1814,
+      "pdfPage": 1813,
+      "title": "VUCOMISH"
+    }
+  ],
+  "expectedCounts": {
+    "added": 105,
+    "removed": 5,
+    "priorFamilies": 5,
+    "additionalSections": 100,
+    "entryObligations": 110,
+    "originalObligations": 115,
+    "historicalGaps": 2657
+  },
+  "scopePolicy": "retain-every-original-obligation-and-every-added-source-section"
+}

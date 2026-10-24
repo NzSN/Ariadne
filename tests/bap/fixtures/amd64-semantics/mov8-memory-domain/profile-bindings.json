@@ -1,6 +1,6 @@
 {
   "schema": "ariadne.amd64-memory-bindings/v1",
-  "domainSha256": "c85e9bc28667bd3e0af239c90f1c5faff9ea245224776083beb4b4302e4abe89",
+  "domainSha256": "e277a5f2b8b042549db4355ea53e98a6688de613a93ffe4ad9ec8ae038118817",
   "sourcePacksSha256": "f3484a1778bbab84b6b54aa94b133993591111b88174cfb8f786b5fddad9803a",
   "profile": "bap-bit-provenance-v6",
   "consumer": "plain-dependencies",
@@ -40,7 +40,7 @@
     "tests/bap/mov8_memory_domain_binding_observer.rs": "5a12964167d867571c05d1598f0fd617d8163f1e9c859d29e0d1f81e3fa16baf",
     "tests/bap/repeated_string_projection.rs": "1e30d20ef23f1d7dba1db367acd916b6298327e33806e9d944bd90490bb46e04",
     "tools/amd64_domain_bindings.py": "b487a1a32a4f5bd4d66a99176bf4e3e618ce53788e4bae9cf255ad9c0cff8a81",
-    "tools/amd64_domains.py": "cfdda69ed2466176d5edafd1b7fb43cc39193d0d5f04d9fab5cd42e63e509dd8",
+    "tools/amd64_domains.py": "d88ec3cdc5f3da3a31b6bbab7050b822d84726465f670dde4fa271c1ce650938",
     "tools/amd64_inventory.py": "22e3ece91dc7f55ff1d50000b419482e23d4c169da3cfa33fa24a83550efc4ca",
     "tools/amd64_inventory_xed.py": "c36fe9eba34ed08cb886cf182831f4e25851b6f41c11724f55bbb9fb613705ef",
     "tools/amd64_legal_forms.py": "fa5c531c720d5d293437831e057d498b00b72e477a9bef119f6199a7fe1ed085",

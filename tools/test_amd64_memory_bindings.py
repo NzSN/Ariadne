@@ -48,6 +48,23 @@ class MemoryBindingControls(unittest.TestCase):
             with self.subTest(attack=attack), self.assertRaises(ValueError):
                 domain.validate_memory_mov8_domain(document)
 
+    def test_every_memory_form_requires_the_reviewed_prefix_and_length_rules(self):
+        required = {"prefix-group-order", "legacy-prefix-byte-groups", "rex-placement-count",
+                    "instruction-length-limit", "operand-size-override"}
+        clauses = {clause["id"] for clause in self.constraints["clauses"]}
+        self.assertTrue(required <= clauses)
+        points = domain.validate_memory_mov8_domain(self.document)
+        self.assertEqual(len(points), 5760)
+        self.assertEqual(sum(point["environment"]["addressBits"] == 64 for point in points), 2880)
+        for index, form in enumerate(self.document["forms"]):
+            self.assertTrue(required <= set(form["sourceRules"]))
+            for rule in sorted(required):
+                item = copy.deepcopy(self.document)
+                item["forms"][index]["sourceRules"].remove(rule)
+                with self.subTest(form=form["id"], missing=rule), self.assertRaisesRegex(
+                        ValueError, "memory MOV8 source derivation differs"):
+                    domain.validate_memory_mov8_domain(item)
+
     def test_partition_holes_overlap_types_and_unreviewed_admission_fail(self):
         baseline = copy.deepcopy(self.bindings)
         for attack in ("hole", "overlap", "boolean", "admit32", "native", "stale"):

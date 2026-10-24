@@ -1,6 +1,6 @@
 {
   "schema": "ariadne.amd64-template-relations/v2",
-  "domainSha256": "c85e9bc28667bd3e0af239c90f1c5faff9ea245224776083beb4b4302e4abe89",
+  "domainSha256": "e277a5f2b8b042549db4355ea53e98a6688de613a93ffe4ad9ec8ae038118817",
   "sourcePacksSha256": "f3484a1778bbab84b6b54aa94b133993591111b88174cfb8f786b5fddad9803a",
   "xedLockSha256": "10991873887a9b3d8bc799dbddf86226f6b72de5e2baf647d22ab391affa7542",
   "xedRecordsSha256": "1f62f4da85d77353dbab13f85a06fa8732477de2cfe10877f73742fc0934cc48",

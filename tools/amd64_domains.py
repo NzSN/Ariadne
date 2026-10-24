@@ -25,7 +25,9 @@ MOV8_EXCLUSIONS = ["memory-operands", "other-opcodes", "legacy-prefixes", "repea
 MEMORY_SCOPE = "amd-long64-bounded-mov8-memory/v1"
 ARCHITECTURE_PACK_PATH = "tests/bap/fixtures/amd64-semantics/architecture-constraints-v1.json"
 MEMORY_FORMS = {"mov8-memory-store-88": "88", "mov8-memory-load-8a": "8a"}
-MEMORY_RULES = {"address-size-override", "address-size-truncation", "modrm-fields",
+MEMORY_RULES = {"prefix-group-order", "legacy-prefix-byte-groups", "rex-placement-count",
+    "instruction-length-limit", "operand-size-override",
+    "address-size-override", "address-size-truncation", "modrm-fields",
     "modrm-memory-displacements", "sib-presence", "sib-fields-scale", "sib-address-equation",
     "rex-register-extension", "rex-index-extension", "rex-base-extension", "rex-high-byte-exclusion",
     "rip-relative-selector", "rip-relative-next-ip", "sib-base5-no-base", "sib-index4-no-index",

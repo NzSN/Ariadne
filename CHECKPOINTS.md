@@ -22,6 +22,102 @@ For the wider context, see the optional [documentation map](docs/documentation-m
 Current validation follows the [executable test matrix](tests/README.md). Dated run
 results below are historical; their Git links do not establish a current pass.
 
+## 2026-10-24 — Selected conversion source constraints
+
+The [canonical constraint slice](docs/Ariadne/amd64-coverage-design.md#1017-conversion-family-source-constraints)
+and [execution ledger](.agents/plans/amd64-operation-coverage.md#conversion-family-source-constraints-2026-10-24)
+add a separately reviewed candidate source pack for PH2PS/PS2PH base/X variants.
+All 22 typed claims validate against 205 physical anchors; fresh seven-PDF
+reconstruction and independent output replay pass. Descriptive lane/memory/
+broadcast/rounding kernels grant no production admission or vector must-defs.
+
+Two source conflicts and two unresolved-scope boundaries remain explicit:
+PH2PS YMM clearing overlaps 128 declared result bits; legacy denormal prose and
+the generic F16C table disagree; PS2PHX embedded-rounding and aggregate feature-
+width scope need resolution. The code does not guess a hardware correction.
+Ten focused tests include 1,024 immediate/MXCSR selector combinations. All 487
+tooling and 145 BAP Python tests, format/layout/navigation checks pass.
+
+This is a selected source-only gate, not completed family semantics or P2.
+All 115 migration obligations, ten earlier architectural references and 516
+unparsed cells remain unchanged. Other families/source sections, ambiguity
+adjudication, corpus adoption, legality and runtime support remain open. No
+source/producer pin, Rust/native behavior or full-coverage flag changes. Products
+stay ignored under `target/coverage-20261024/conversion-constraints-01/`.
+
+## 2026-10-24 — Publisher migration structural entry review
+
+The [canonical P1 review](docs/Ariadne/amd64-coverage-design.md#1016-publisher-migration-entry-review)
+and [execution ledger](.agents/plans/amd64-operation-coverage.md#publisher-migration-entry-review-2026-10-24)
+add a fresh source-entry review tool and explicit reviewed title/extent links.
+Both official replacement downloads return HTTP 200 and match their existing
+pins. Actual seven-PDF extraction and independent output reconstruction pass.
+All 110 entry records map to five prior-family links and 100 additional source
+sections, with complete raw section/word-geometry bindings and retained row/
+constraint observations. All 2,657 historical gaps remain intact.
+
+Twenty-six focused controls, 477 tooling tests, 145 BAP Python tests and
+format/layout/navigation pass. No runtime, source-lock, publisher/producer pin
+or admission changes occur in this source-only slice. Generated review products
+stay ignored under `target/coverage-20261024/corpus-review-01/`.
+
+This completes a structural P1 subgate, not semantic migration or adoption.
+All 115 original obligations remain unresolved: mapped source families can
+still differ in behavior/encoding/constraints; whole-text/extension review and
+the Vol5 publication-marking conflict remain open. Parsed-constraint, source-
+adoption, legal-domain and full-AMD64 flags stay false. Earlier native/model/
+capture results retain their exact dated source scopes.
+
+## 2026-10-24 — Finite memory-MOV8 native consumer completed
+
+The [canonical consumer contract](docs/Ariadne/amd64-coverage-design.md#1015-memory-mov8-native-consumer-continuation)
+and [execution ledger](.agents/plans/amd64-operation-coverage.md#memory-mov8-native-consumer-continuation-2026-10-24)
+now add test-only native observers and a strict separate checker. Seven exact
+named release tests pass under the final source/tool/input/test-artifact freeze:
+5,760 address-64 instances in ninety synthetic Windows/Linux minidump batches,
+5,760 address-32 refusals in ninety batches and the four register/barrier
+regressions with 1,280 instances. Independent raw-byte expectations check partial
+register writes and preserved memory origins; actual target/root/seed identities
+and complete native/Rust observations agree. Refused roots provide no precise
+address, definite write or consumer traversal.
+
+The portable domain test, 24 checker/lifecycle controls, 474 default Rust tests/
+166 ignored, 64 core-only/22 ignored, 467 tooling and 145 BAP Python tests,
+strict Clippy and format/layout/navigation checks pass. Production projection,
+helper pins and all four producer/projection source seals remain unchanged in
+this extension. The final `memory-native-02` run supersedes the first test source
+for this gate; disposable products remain ignored under `target/coverage-20261024/`.
+
+This closes the finite memory-native consumer boundary only. The source corpus,
+115 review obligations, ten unresolved architectural references, 516 unparsed
+cells, wider domains/consumers, real execution history and full AMD64 coverage
+remain open. Existing producer/projection assessment flags retain their scope.
+
+## 2026-10-24 — Per-form source-rule mapping resumed
+
+Resumed from `8317f4d` under the user's new instruction. The
+[canonical continuation](docs/Ariadne/amd64-coverage-design.md#1014-per-form-source-rule-mapping-resumed)
+and [execution ledger](.agents/plans/amd64-operation-coverage.md#per-form-source-rule-mapping-resumed-2026-10-24)
+supersede the stop below. Both memory-MOV8 forms now require the five missing
+prefix/order/REX/length/operand-size source links; ten removal controls pass.
+Independent enumeration preserves all 5,760 points and the existing address-size
+dispositions. No production semantics or prefix policy changes.
+
+Fresh ledger extraction/check and six binding/reconciliation steps pass. Both
+affected registry candidates are promoted byte-for-byte after fresh source/BAP/
+LLVM/numeric/Rust campaigns. Maintained-path checks pass and reject the old
+observations. The register-native gate is rerun after promotion: all four named
+tests, 1,280 instances/twenty batches, refusal controls and stable 755-source/
+test-artifact identities pass. Unaffected v2/v3 seals remain current and unchanged.
+
+Root tests pass 473 default/164 ignored and 64 core-only/22 ignored; strict
+Clippy, format/layout, 209 focused controls, 460 tooling and 145 BAP Python
+tests pass. Wider coverage remains incomplete: memory-native consumption,
+115 corpus-review obligations, ten unresolved architectural references, 516
+unparsed selected cells and complete symbolic candidate domains remain open.
+No production semantics, prefix policy or producer/helper pins change. Disposable
+products stay ignored under `target/coverage-20261024/mapping-resume-01/`.
+
 ## 2026-10-24 — AMD64 constraint and MOV8 continuation stopped for publication
 
 **Status: stopped at the user's request; completed work and the unfinished
