@@ -1,5 +1,11 @@
 # Ariadne chat document archive
 
+**P1 completed, 2026-10-24.** The [completion report](ariadne-amd64-p1-complete-20261024/index.html) records the accepted sources and checked P1 exit. P2–P8 remain separate.
+
+**Section-5 execution, 2026-10-24.** The [execution follow-up](ariadne-amd64-section5-execution-20261024/index.html) records delivered source tooling, the frame-path repair, passing portable/replay checks and remaining full-stage exits.
+
+**AMD64 open-gate explanation, 2026-10-24.** The [current checkpoint report](ariadne-amd64-open-gates-20261024/index.html) explains the unchanged 115 migration records, selected source progress, concrete conflicts and P1–P8 closure requirements. Historical reports retain their dated scope.
+
 Chat reports and their browser renderings are kept in `.agents/chatdocs/`. This archive was assembled on **2026-10-16** from retained files, the original conversation records and recorded evidence. Statements such as “current”, “latest” and “fresh” in a report refer to its original date. Archiving does not rerun analysis, builds or qualification.
 
 **Archive update, 2026-10-18.** The new controlled Windows Crashpad report preserves its fresh capture and analysis receipts, with partial dependency/path coverage and an interactive explorer.
@@ -24,6 +30,9 @@ Canonical documents under `docs/` remain in place. The two 2026-10-12 design/pla
 
 | Chat document | View | Source |
 | --- | --- | --- |
+| P1 source selection complete (2026-10-24) | [Open completion](ariadne-amd64-p1-complete-20261024/index.html) | HTML presentation; [canonical contract](../../docs/Ariadne/amd64-coverage-design.md#1020-p1-source-selection-and-structural-migration-completed) |
+| AMD64 section-5 execution (2026-10-24; full P1–P8 incomplete) | [Open execution follow-up](ariadne-amd64-section5-execution-20261024/index.html) | HTML presentation; [canonical execution](../../docs/Ariadne/amd64-coverage-design.md#1019-section-5-execution-and-current-exit-gates) |
+| Why AMD64 coverage remains open (2026-10-24; latest selected source gate) | [Open checkpoint report](ariadne-amd64-open-gates-20261024/index.html) | HTML explanation; [canonical source contract](../../docs/Ariadne/amd64-coverage-design.md#1018-remaining-paired-family-source-constraints); [source identities](ariadne-amd64-open-gates-20261024/provenance.json) |
 | Remaining AMD64 coverage execution plan (2026-10-23; proposed P0–P8 and parallel N) | [Open plan](ariadne-amd64-coverage-remaining-plan-20261023/index.html) | HTML presentation of the [canonical remaining-plan section](../plans/amd64-operation-coverage.md#remaining-coverage-execution-plan); [dependency diagram](ariadne-amd64-coverage-remaining-plan-20261023/dependencies.svg) |
 | AMD64 manual-gap accounting (2026-10-23; 2,657 assigned, seven source conflicts; full coverage open) | [Open execution](ariadne-amd64-coverage-execution-20261023/index.html) | HTML presentation; [canonical design and findings](../../docs/Ariadne/amd64-coverage-design.md); [previous 581-gap version](ariadne-amd64-coverage-execution-gap581-20261023/index.html) |
 | AMD64 581-gap execution (2026-10-23; frozen published 6c3fa96 view) | [Open 581-gap version](ariadne-amd64-coverage-execution-gap581-20261023/index.html) | Preserves 2,076 dispositions, 581 unresolved gaps and the v15 local-pass/native-pending view with [provenance](ariadne-amd64-coverage-execution-gap581-20261023/provenance.json); [current execution](ariadne-amd64-coverage-execution-20261023/index.html) |

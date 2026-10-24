@@ -6,6 +6,9 @@
 for the strict `returned_count < NP` question, declared Windows captured-unwind
 profile and original physical-frame 1→0 query. The source/API/CLI and earlier
 fixture/native checks retain their historical source identities.
+The [2026-10-24 output repair](../../docs/Ariadne/investigation-design.md#frame-path-final-output-budget-repair)
+adds final serialized-size enforcement after a generated counterexample;
+its current portable checks retain separate native/capture limits.
 The [2026-10-13 dump03958 application attempt](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/dump03958-20261013/report.md)
 ran the CLI and an explicitly larger-budget API probe; both returned unavailable.
 
@@ -209,3 +212,27 @@ expected report identity. Archive SHA-256: `42feba66c6445de674ddaf0aa7f3ec3d63ca
 This closes F4 only within the recorded finite model/mutation/original-capture
 profile; general unwind support, full path feasibility/history, release and
 universal refinement remain outside the acceptance claim.
+
+## Final-output budget repair: 2026-10-24
+
+The user-requested AMD64 section-5 P8 validation exercises the full generated
+suite and finds an oversized successful frame-path report. The
+[canonical repair](../../docs/Ariadne/investigation-design.md#frame-path-final-output-budget-repair)
+owns the cause and observable contract. The
+[AMD64 ledger](amd64-operation-coverage.md#section-5-execution-and-exit-gates-2026-10-24)
+owns the broader requested execution and remaining full-coverage gates.
+
+The implementation puts exact final JSON-size enforcement outside the
+enumerator so all early returns and final metadata pass it. Retain the shrunk
+three-node/NP=1/18,905-byte Proptest case and a default unit test covering caps
+near final serialized sizes across all major return classes. Do not relax the
+configured limit or the independent property assertion.
+
+The repaired-source run passes all 23 focused frame-path tests, including the
+ten properties; all seven full generated-validation suites pass, with 3,200
+configured generated cases, core replay and Stage E replay/mutations. Root
+checks pass 475 default tests/166 ignored, 64 core-only/22 ignored, formatting
+and strict Clippy through the verified read-only MirrorRust 1.0.0 snapshot.
+The lockfile and live sibling dependency remain unchanged. The earlier failing
+campaign retains its failed scope. Native/capture F4 and later full-stage
+qualification are not rerun or inferred from this portable repair.

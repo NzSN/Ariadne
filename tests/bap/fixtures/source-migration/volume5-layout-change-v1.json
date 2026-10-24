@@ -1,0 +1,12 @@
+{
+  "schema": "ariadne.amd64-reviewed-word-relocations/v1",
+  "publication": "26569",
+  "pdfPage": 29,
+  "scope": "Four unchanged words in the bibliography's Addison Wesley reference; exact horizontal positions differ by 0.0036 PDF points.",
+  "moves": [
+    {"old": {"text": "Addison", "rect": [327.96, 668.844, 368.6496, 679.644]}, "new": {"text": "Addison", "rect": [327.9636, 668.844, 368.6532, 679.644]}},
+    {"old": {"text": "Wesley,", "rect": [371.1732, 668.844, 408.3408, 679.644]}, "new": {"text": "Wesley,", "rect": [371.1768, 668.844, 408.3444, 679.644]}},
+    {"old": {"text": "NY,", "rect": [411.0444, 668.844, 429.7896, 679.644]}, "new": {"text": "NY,", "rect": [411.048, 668.844, 429.7932, 679.644]}},
+    {"old": {"text": "1996.", "rect": [432.4932, 668.844, 459.5076, 679.644]}, "new": {"text": "1996.", "rect": [432.4968, 668.844, 459.5112, 679.644]}}
+  ]
+}

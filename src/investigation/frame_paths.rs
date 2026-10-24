@@ -1328,6 +1328,18 @@ fn list(
     limits: FramePathLimits,
     replay_deadline: Option<usize>,
 ) -> Result<FramePathListing, Error> {
+    let result = enumerate_frame_paths(input, q, limits, replay_deadline)?;
+    if serde_json::to_vec(&result)?.len() > result.limits.max_output_bytes {
+        return Err(invalid("frame-output-byte-budget"));
+    }
+    Ok(result)
+}
+fn enumerate_frame_paths(
+    input: Input,
+    q: FramePathQuestion,
+    limits: FramePathLimits,
+    replay_deadline: Option<usize>,
+) -> Result<FramePathListing, Error> {
     if q.np == 0 || q.np > 4097 || q.from_frame < q.to_frame {
         return Err(invalid("invalid NP or frame indices"));
     }

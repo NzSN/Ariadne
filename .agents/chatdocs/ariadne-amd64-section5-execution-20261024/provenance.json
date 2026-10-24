@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-24",
+  "purpose": "Explanatory presentation; generated campaign receipts are not retained here.",
+  "baseRevision": "3d332730a15667ac02a760b5607765a3b30012b7",
+  "workingTree": "Includes uncommitted section-5 continuation.",
+  "sources": {
+    "CHECKPOINTS.md": "fd4c60b1ea955f59b36e8fea138122aa16b2503613a349a7c3de9fe9ace48f0c",
+    "ROADMAP.md": "7cab16344d1702f467c9fc6719288b07b794586fe8aa499a4521b3cfe73083be",
+    ".agents/plans/amd64-operation-coverage.md": "85a3593078eca68823b3a13ac4a4ea21a95e10efa632f70d5581df95229c6543",
+    ".agents/plans/frame-path-enumeration.md": "3a62dbfdf52a773abe0929eced1ead75b78905e8f3bf1f74e1b09f61b49f7354",
+    "docs/Ariadne/amd64-coverage-design.md": "a859b792dce97a2c851372638c16e83e42464d0afc9451de11a40b3580aa27a2",
+    "docs/Ariadne/investigation-design.md": "f58b5341d031290104beff1080cf771a3fbcb6ad4bd44334a506c6d32830e375",
+    "src/investigation/frame_paths.rs": "53de32795099c1700f317d6cb7786a4f141be3b40a5798e844cfc84d540ef394",
+    "tests/investigation/frame_paths_unit.rs": "11fbe3d62d6663bc717f0cede042aaf48164cea6066ae70c640b2e43cd4b2507",
+    "tests/investigation/frame_paths.proptest-regressions": "89c5cb9e6e0036cdfd98671d9b63513ed2f19236212dc0d19dbb66daa6b80ca0",
+    "tools/amd64_migration_dispositions.py": "b2eabebb05c00db85cdb01703f84cf0656bd12060e357e19bcca019fc4fd9189",
+    "tools/amd64_extended_constraints.py": "c6ced7ed26959d7bea508fce77666563bb9b850db0a36cdb867d2805dcc81735",
+    "tests/bap/fixtures/source-migration/extended-constraints-v1.json": "d21131c14888e2f2ddb2c4a8ea9f070a83a0bb11d3d853a43eb7de4cfc961507",
+    "tests/README.md": "081936cd0eb201e2fed1b26e31e85ecf9e05741f8d09d3269bdbf1be45fbe70f"
+  }
+}

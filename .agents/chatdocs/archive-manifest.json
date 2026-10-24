@@ -1,7 +1,7 @@
 {
   "archived": "2026-10-16",
   "scope": "Conversation presentation archive; canonical designs stay in docs/ and plan owners now live in .agents/plans/. No new analysis or qualification.",
-  "report_count": 50,
+  "report_count": 53,
   "markdown_html_pairs_including_index": 21,
   "source_session": "01a12ddc-4e59-7cb2-b5aa-67a8e522c597",
   "recovered_reports": [
@@ -840,12 +840,12 @@
       "sha256": "2667f3af9200452de3e195dc17664344a094f718310fb48d7527f5a02999ac33"
     },
     "ariadne-reports-index.html": {
-      "bytes": 21640,
-      "sha256": "320f84f2e02d20280674b60c33bf687fb7b8a6a53c37e4092e40f53c5be243a5"
+      "bytes": 23816,
+      "sha256": "1a279690442d806a7379ce3b2e31ba4ffc9f9e17f45a6ba854121916337cc291"
     },
     "ariadne-reports-index.md": {
-      "bytes": 14822,
-      "sha256": "d35ec6cfc173ac9c2cee7ed8e44706b683f0e116deb0c6b3b1c629edb32c5df7"
+      "bytes": 16442,
+      "sha256": "ea854aba7364253a33788bfbed1c481c663f5c1ee0164ee87307c46c2596bdd1"
     },
     "ariadne-resolver-structural-types-20261015.html": {
       "bytes": 32858,
@@ -1102,10 +1102,34 @@
     "ariadne-amd64-coverage-remaining-plan-20261023/render.py": {
       "bytes": 18366,
       "sha256": "6c76602150d03d77eacdb2dd7a19ce134db16482e60e5bbe1c5a7e212ad76614"
+    },
+    "ariadne-amd64-open-gates-20261024/index.html": {
+      "bytes": 35329,
+      "sha256": "db00d4c9777f1194b2dcd44c19f1b474cc8bd39d1188a7a3a800542a8e0a0324"
+    },
+    "ariadne-amd64-open-gates-20261024/provenance.json": {
+      "bytes": 1649,
+      "sha256": "089f813d9f656f6032edabb771b3a76a3af93c7f0f4b6f6ac9bf40db10250672"
+    },
+    "ariadne-amd64-section5-execution-20261024/index.html": {
+      "bytes": 16183,
+      "sha256": "f3b6d31414abe6c84f6273cb0a436fe3a2ea76e5688c4722c3c312312f34ba8f"
+    },
+    "ariadne-amd64-section5-execution-20261024/provenance.json": {
+      "bytes": 1705,
+      "sha256": "d9de80200643b04a2f4e4393a36dfa8c23c1c2575bf49e7cfe8a8fd6c63545b9"
+    },
+    "ariadne-amd64-p1-complete-20261024/index.html": {
+      "bytes": 11592,
+      "sha256": "9595e71084f42b0ab6ba3e078e10a29628d13090e24db0b194d655ac4abd221e"
+    },
+    "ariadne-amd64-p1-complete-20261024/provenance.json": {
+      "bytes": 1442,
+      "sha256": "fe7c9d6b37dabe64ca7dd476148fb5de32a05ff06d83428b1f19eebb52c07936"
     }
   },
   "directory": ".agents/chatdocs/",
-  "html_documents_including_index": 51,
+  "html_documents_including_index": 54,
   "markdown_documents_including_index": 22,
   "source_review_documents": [
     {
@@ -1135,13 +1159,13 @@
       "canonical_markdown": ".agents/plans/frame-structure-report.md",
       "canonical_sha256": "7866d392580c883b1cece1438eb29476cfb0485f1a880c6f6ac7877a43b14a76",
       "source_revision": "6192dee19a5b2f133177a21187952e28d603c2d9",
-      "scope": "Planning only; canonical investigation design and SF0\u2013SF6 plan linked, all implementation/qualification pending. No runtime or model code built or changed.",
+      "scope": "Planning only; canonical investigation design and SF0–SF6 plan linked, all implementation/qualification pending. No runtime or model code built or changed.",
       "validation": "74 connected documents, 73 context sections, 2148 local links; scoped diff hygiene and rendered local links/source hash checked.",
       "original_canonical_markdown": "Plans/frame-structure-report.md",
       "original_canonical_sha256": "02bbd14e9f735c7faea0fc97196a3674c2dd14900f6e2539e3d47712bbe86dfa",
       "current_canonical_sha256": "3b4e80b5f492d5563a2e8775691ad313c220b04dd96ca1e81b6a174fc731e53c",
       "canonical_updated": "2026-10-16",
-      "canonical_status": "SF0\u2013SF6 complete in the recorded finite scope. canonical_sha256 remains the historical presentation-source hash."
+      "canonical_status": "SF0–SF6 complete in the recorded finite scope. canonical_sha256 remains the historical presentation-source hash."
     },
     {
       "html": "ariadne-structural-plan-hard-cases-20261016.html",
@@ -1149,7 +1173,7 @@
       "source_revision": "6192dee19a5b2f133177a21187952e28d603c2d9",
       "plan": ".agents/plans/frame-structure-report.md",
       "plan_sha256": "7866d392580c883b1cece1438eb29476cfb0485f1a880c6f6ac7877a43b14a76",
-      "scope": "Explanation of planned finite recovery, unknowns and failure limits. SF0\u2013SF6 remain pending; no source/model/build/dump execution changes.",
+      "scope": "Explanation of planned finite recovery, unknowns and failure limits. SF0–SF6 remain pending; no source/model/build/dump execution changes.",
       "validation": "Local links/anchors and unique HTML IDs checked.",
       "original_plan": "Plans/frame-structure-report.md",
       "original_plan_sha256": "02bbd14e9f735c7faea0fc97196a3674c2dd14900f6e2539e3d47712bbe86dfa",
@@ -1247,7 +1271,7 @@
       },
       "qualification": "evidence/Ariadne/frame-question/20261019/README.md",
       "qualification_archive_sha256": "3a051719957d3c373b074e4187e557a822e475b2a3dba65ae85f716139bebdf0",
-      "scope": "Presentation refresh only: seven unfinished ledgers, five completed-stage ledgers including Stage 5.2 FC0\u2013FC6, and the separate fresh-source guard-coverage follow-up. Earlier snapshots and qualification evidence remain unchanged.",
+      "scope": "Presentation refresh only: seven unfinished ledgers, five completed-stage ledgers including Stage 5.2 FC0–FC6, and the separate fresh-source guard-coverage follow-up. Earlier snapshots and qualification evidence remain unchanged.",
       "validation": "165 local references and fragments in four presentation/index files resolve. Current HTML IDs are unique; seven open and five completed plan hashes match local commit feecc34. Historical qualification and prequalification snapshot bytes are preserved. No external HTTP reachability, visual inspection or new runtime qualification is claimed.",
       "completed_plan_count": 5,
       "completed_plan_sha256": {
@@ -1481,7 +1505,7 @@
       "html": "ariadne-open-plans-20261019/index.html",
       "date": "2026-10-21",
       "source_revision": "12673307f5939f3a982877423c2606bdf7572c47",
-      "source_state": "Uncommitted working-tree navigation after published S3 and I5c W0\u2013W3 records; no commit/push, remote parity or new validation credit.",
+      "source_state": "Uncommitted working-tree navigation after published S3 and I5c W0–W3 records; no commit/push, remote parity or new validation credit.",
       "canonical_plan_index": ".agents/plans/README.md",
       "canonical_plan_index_sha256": "98a4f7819bc53d32bdd80d77989e19f17a751daa98ca1f24418c1eebeba45cd3",
       "open_plan_count": 2,
@@ -2042,7 +2066,7 @@
       },
       "date": "2026-10-23",
       "source_revision": "e44ce2be16dcf2c9e9ba30dc1999280e2935270e",
-      "source_state": "historical uncommitted C1\u2013C4 and v13/v14 REP execution before native qualification",
+      "source_state": "historical uncommitted C1–C4 and v13/v14 REP execution before native qualification",
       "scope": "Frozen historical pending-native reading view; byte-preserved presentation and provenance, with no new analysis or qualification.",
       "canonical_source": "docs/Ariadne/amd64-coverage-design.md",
       "canonical_source_sha256": {
@@ -2108,7 +2132,7 @@
       },
       "date": "2026-10-23",
       "source_revision": "e44ce2be16dcf2c9e9ba30dc1999280e2935270e",
-      "source_state": "historical uncommitted C1\u2013C4 implementation and completed finite v13/v14 R1 native qualification before R2/v15 work",
+      "source_state": "historical uncommitted C1–C4 implementation and completed finite v13/v14 R1 native qualification before R2/v15 work",
       "scope": "Frozen historical R1-qualified reading view: 416 native parity instances, 259 refusal controls, 1726 gap dispositions and 931 unresolved; byte-preserved presentation and provenance, with no new qualification.",
       "canonical_source": "docs/Ariadne/amd64-coverage-design.md",
       "canonical_source_sha256": {
@@ -2382,5 +2406,25 @@
     "scope": "Section-only presentation of proposed stages P0-P8 and parallel native gate N: source authority, constraints, legal domains, authoritative bindings, instruction families, wider REP, consumers and integrated full-coverage acceptance.",
     "canonical_source": ".agents/plans/amd64-operation-coverage.md",
     "canonical_section": "Remaining coverage execution plan; ends before Completion contract"
+  },
+  "latest_amd64_open_gate_explanation": {
+    "date": "2026-10-24",
+    "html": "ariadne-amd64-open-gates-20261024/index.html",
+    "canonical_source": "docs/Ariadne/amd64-coverage-design.md#1018-remaining-paired-family-source-constraints",
+    "source_state": "3d33273 plus uncommitted paired-family continuation",
+    "scope": "Explanation of selected source delivery, immutable migration-ledger counts, substantive incomplete gates and separate build prerequisites. No new qualification run."
+  },
+  "latest_amd64_section5_execution": {
+    "date": "2026-10-24",
+    "html": "ariadne-amd64-section5-execution-20261024/index.html",
+    "canonical_source": "docs/Ariadne/amd64-coverage-design.md#1019-section-5-execution-and-current-exit-gates",
+    "source_state": "3d33273 plus uncommitted section-5 execution",
+    "scope": "Delivered dispositions, extended constraints and frame-path output cap repair; passing scoped portable/replay checks and explicit incomplete full-stage exits. Rendering adds no qualification."
+  },
+  "latest_amd64_p1_completion": {
+    "date": "2026-10-24",
+    "html": "ariadne-amd64-p1-complete-20261024/index.html",
+    "canonical_source": "docs/Ariadne/amd64-coverage-design.md#1020-p1-source-selection-and-structural-migration-completed",
+    "scope": "P1 source selection and structural migration completed; later constraint/domain/runtime stages remain separate. Rendering adds no qualification."
   }
 }

@@ -3,9 +3,16 @@
 ## Context and follow-up
 
 **Status.** Current delivery direction; dated qualifications remain scoped.
-The [2026-10-24 AMD64 continuation](CHECKPOINTS.md#2026-10-24--amd64-constraint-and-mov8-continuation-stopped-for-publication)
-is stopped at the user's request for publication, with one per-form source-rule
-mapping requirement unfinished. Resume implementation only after a new instruction.
+The [2026-10-24 mapping continuation](CHECKPOINTS.md#2026-10-24--per-form-source-rule-mapping-resumed)
+supersedes the earlier publication stop and completes the missing five-rule
+mapping. The [paired-family source continuation](docs/Ariadne/amd64-coverage-design.md#1018-remaining-paired-family-source-constraints)
+resumes selected source review after the conversion slice. The later
+[section-5 execution](docs/Ariadne/amd64-coverage-design.md#1019-section-5-execution-and-current-exit-gates)
+adds checked dispositions, a cross-volume scaling rule and a generated
+frame-path output-cap repair. The subsequent
+[P1 completion](docs/Ariadne/amd64-coverage-design.md#1020-p1-source-selection-and-structural-migration-completed)
+accepts the exact five-edition source pool and completes structural migration.
+P2 constraint completeness, P3 legal domains and full AMD64 coverage remain open.
 
 **Why this document exists.** [Project overview](README.md) sets the snapshot-based crash-investigation goal.
 
@@ -120,13 +127,16 @@ qualifies the two rebuilt executables, refreshes v2/v3/MOV8 bindings and passes
 448 native v15 parity instances plus compatibility checks. Source completeness, broader
 REP consumers and full AMD64 coverage remain open.
 
-The [stopped 2026-10-24 continuation](docs/Ariadne/amd64-coverage-design.md#1013-constraint-and-mov8-continuation-stopped-for-publication)
-adds an unadopted publisher-corpus comparison, 24 typed architectural clauses,
-a 5,760-point dependent memory-MOV8 domain and separate register-MOV8 native
-qualification. It preserves 115 candidate-migration reviews, unresolved source
-references/cells and 2,880 unsupported address-32 memory points. Fresh campaigns
-pass for the stopped sources; the requested five-rule mapping adjustment and
-its subsequent reseals/reruns remain unperformed.
+The [2026-10-24 mapping continuation](docs/Ariadne/amd64-coverage-design.md#1014-per-form-source-rule-mapping-resumed)
+completes the five-rule mapping and affected reseals/reruns. The later
+[memory-native gate](docs/Ariadne/amd64-coverage-design.md#1015-memory-mov8-native-consumer-continuation)
+qualifies its finite address-64 consumer and address-32 refusals. The
+[publisher entry review](docs/Ariadne/amd64-coverage-design.md#1016-publisher-migration-entry-review)
+and selected source-constraint packs retain all 115 migration obligations,
+ten architectural references and 516 unparsed cells. The
+[remaining paired-family review](docs/Ariadne/amd64-coverage-design.md#1018-remaining-paired-family-source-constraints)
+adds bounded claims for GF2 inverse affine, MOVD and scalar negative multiply-add;
+source contradictions and whole-section review remain explicit.
 
 Current validation follows the [executable test matrix](tests/README.md). Dated run
 results below are historical; their Git links do not establish a current pass.

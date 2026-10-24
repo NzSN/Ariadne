@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-24",
+  "purpose": "Explanatory presentation of open AMD64 gates; no new qualification.",
+  "baseRevision": "3d332730a15667ac02a760b5607765a3b30012b7",
+  "workingTree": "Includes uncommitted paired-family source continuation.",
+  "canonicalSource": "docs/Ariadne/amd64-coverage-design.md#1018-remaining-paired-family-source-constraints",
+  "sources": {
+    "CHECKPOINTS.md": "875cda2bc1c7bed1b04f0e850e4c0b64eb9b00be66d04a3c10e5cac42ffda050",
+    "ROADMAP.md": "07846199f7aff9d71c360f0542d4bfc61092e37e80a9c803e50bc2670a69d470",
+    ".agents/plans/amd64-operation-coverage.md": "0cf64625cb4ed6584ea9110586a4c0e09f217301cf8bd18514551774354b2ac0",
+    "docs/Ariadne/amd64-coverage-design.md": "cf41c79a38de93ccf0b59794474e8f691706a376ce7ddf6965c742c5805c7ce7",
+    "tests/README.md": "4121846da0879d60135065aff108a540052c3e359641344579e40079625bdc31",
+    "tools/amd64_corpus_entry_review.py": "95a6e4b35263074d448ce3091edc2b10cae50906cd021b66afe02542a8e37bdd",
+    "tools/amd64_paired_constraints.py": "9daf0bd1ba63dd623fdca64a6fd7b02ae12f5a6bba6d3814ab3aff131ff5e33e",
+    "tests/bap/fixtures/source-migration/entry-review-v1.json": "22408d55b7c0d2a9dfb9d849469cea880a20e8114dee7c5bc7677d1b7e9dd9de",
+    "tests/bap/fixtures/source-migration/conversion-constraints-v1.json": "3061669c9f3385d6d105babed672b7e9bed4358926171015a2aae19e66b0d331",
+    "tests/bap/fixtures/source-migration/paired-constraints-v1.json": "d366e00d3aa78eafd1053c923f1906ea98d63de3f86d949c6053935f2a6bdb41",
+    "tests/bap/fixtures/amd64-semantics/architecture-constraints-v1.json": "aed1f7b46db1a5487d18ab266a33955533f7d39084f9a365ecffd7f026437f8a"
+  }
+}

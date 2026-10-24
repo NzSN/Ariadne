@@ -14,6 +14,7 @@
 - [Evidence guide](tests/README.md) — explains how to interpret retained results without treating them as fresh qualification.
 - [Basic v9 candidate check](docs/Ariadne/bap-analysis-core-design.md#current-basic-v9-candidate-compatibility) — separates tested replacement behavior from the unchanged production pin and historical runtime identity.
 - [Plain REP and coverage accounting](docs/Ariadne/bap-analysis-core-design.md#plain-repeated-string-profile-and-coverage-accounting) — defines the separate v12 three-form contract and the unmet full-coverage obligations.
+- [Paired-family source continuation](docs/Ariadne/amd64-coverage-design.md#1018-remaining-paired-family-source-constraints) — latest selected source gate and remaining adoption/constraint boundaries.
 
 **What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Retired ISA milestones in older entries are no longer active work.
 
@@ -21,6 +22,136 @@ For the wider context, see the optional [documentation map](docs/documentation-m
 
 Current validation follows the [executable test matrix](tests/README.md). Dated run
 results below are historical; their Git links do not establish a current pass.
+
+## 2026-10-24 — P1 source authority and migration completed
+
+**P1 is complete.** The user requested finishing the source-authority and
+structural-migration stage. The [canonical completion](docs/Ariadne/amd64-coverage-design.md#1020-p1-source-selection-and-structural-migration-completed)
+and [execution ledger](.agents/plans/amd64-operation-coverage.md#p1-source-selection-completed-2026-10-24)
+replace the earlier unimplemented `whole-required-source-review` condition
+with executable P1 criteria. Detailed clauses and legal domains remain P2/P3.
+
+The reviewed version-3 selection chooses the exact official Vol1–5 editions
+3.25/3.45/3.38/3.27/3.16, totaling 4,340 pages. Fresh retrieval from all five
+publisher URLs returns HTTP 200 and matches the pinned bytes and sizes.
+All historical locks, raw source literals and 2,657 gap objects are preserved.
+
+The Volume 5 marking difference receives a bounded source-selection decision:
+prefer the publisher-delivered edition and preserve both markings. All 368
+pages and 85,023 non-marking words/positions are checked. Only the exact marking
+words and four unchanged bibliography words moved by 0.0036 PDF points differ.
+No footer region or unreviewed source text is ignored; no publisher error or
+intent is inferred from the differing markings.
+
+Fresh source reconstruction, the owning publisher adjudicator and rederived
+historical geometry verify all seven original adjudications and all 33 table
+relations: 26 continuations and seven independent tables. All 115 migration
+records have explicit P1 dispositions under their unchanged original IDs and
+digests. The 100 added sections and detailed source/encoding questions retain
+their mandatory P2/P3 follow-ups.
+
+Both adoption extraction/independent replay and integrated disposition
+extraction/strict replay pass; `--require-adoption` now exits 0. Schema v2
+explicitly limits acceptance to P1 source selection and representation review.
+All 527 tooling and 145 BAP Python tests, formatting, layout and navigation pass.
+No Rust/native behavior or producer/helper/profile pin changes occur in this
+source-only continuation. Products stay ignored under
+`target/p1-completion-20261024/`.
+
+P2's nine current reference scopes, 516 original unparsed cells and retained
+clause conflicts remain open. P3–P8 and full AMD64 coverage remain separate;
+P1 sets no constraint, legality or runtime/full-coverage completion flag.
+
+## 2026-10-24 — Section-5 stages executed to current acceptance gates
+
+The user requested performing the remaining P1–P8 stages in section 5 of the
+[open-gate report](.agents/chatdocs/ariadne-amd64-open-gates-20261024/index.html#next).
+The [canonical execution](docs/Ariadne/amd64-coverage-design.md#1019-section-5-execution-and-current-exit-gates)
+and [stage ledger](.agents/plans/amd64-operation-coverage.md#section-5-execution-and-exit-gates-2026-10-24)
+record delivered work and exact incomplete exits. This is progress through the
+available gates, not completion of the requested full program.
+
+- P1 adds current requirement/blocker dispositions under every immutable
+  original ID. Fresh seven-PDF extraction and independent reconstruction pass;
+  all 115 original acceptance records remain open, with structural facets and
+  selected clauses reported separately. Strict adoption exits 2.
+- P2 adds nine cross-volume clauses/53 anchors, signed EVEX displacement
+  scaling and displacement-choice kernels. Source reconstruction/check and
+  18 combined focused controls pass, including 1,792 byte/size cases and
+  458,752 signed-16 choices. A derived source-rule disposition resolves the
+  scaling reference under supplied access-shape premises; nine earlier scopes
+  and all 516 unparsed cells remain. Original packs/records are unchanged.
+- P3 strict memory reconciliation accounts for 5,760 finite points/two partial
+  relations and exits 1, retaining all 10,569 candidate full-domain obligations
+  and zero complete authoritative bindings.
+- P4 native preflight refuses stale helper/decoder pins. The exact adopted
+  BAP helper is recovered from the existing host without source/capture upload;
+  the adopted decoder/core pins remain unavailable among inspected candidates.
+  No named memory-native test runs or new native acceptance follow.
+- P5/P6's final opt-in advanced survey exercises 171 cases/49 families, passes
+  all nine declared effect expectations and reports 54 supported projections,
+  75 missing lifts, 31 control/semantic refusals, eight conservative unknowns,
+  two encoding disagreements and one explicit query error. The decoder retains
+  its older identity; this is not the newer binding/native pin qualification.
+  It does not complete family semantics, partial-fault/restart or I/O behavior.
+- P7/P8's full generated run finds and fixes an oversized successful frame-path
+  report. The [common publication boundary](docs/Ariadne/investigation-design.md#frame-path-final-output-budget-repair)
+  now checks final serialized metadata on every return. A minimized property
+  case and default regression are retained. The repaired-source full generated
+  campaign passes all seven suites/3,200 configured cases, core replay and
+  Stage E replay/mutations with stable source/tool inventories.
+
+Current root checks pass 475 default Rust tests/166 ignored, 64 core-only/22
+ignored, 23 focused frame-path tests, strict Clippy, workspace formatting,
+517 tooling and 145 BAP Python tests, layout and documentation navigation.
+These use the existing populated Cargo cache and a read-only MirrorRust 1.0.0
+snapshot matching the unchanged lock; the live 0.1.0 sibling is untouched.
+The initial property and loader failures remain failed attempts. No missing
+native/capture prerequisites are inferred from portable passes.
+
+Full P1/P2 source/constraint closure, complete P3/P4 domains/bindings, missing
+family/REP/outcome semantics and expanded/native consumer qualification remain
+open. Producer/source pins and admission/full-coverage flags are unchanged.
+Products remain ignored under `target/coverage-20261024/section5-*`; continue
+from the ledger's named missing premises and artifact requirements.
+
+## 2026-10-24 — Remaining paired-family source constraints
+
+Resumed from `3d33273` at the user's request. The
+[canonical source contract](docs/Ariadne/amd64-coverage-design.md#1018-remaining-paired-family-source-constraints)
+and [execution ledger](.agents/plans/amd64-operation-coverage.md#remaining-paired-family-source-constraints-2026-10-24)
+add selected constraints for the other three paired families: GF2 inverse
+affine, MOVD and scalar negative multiply-add. All 24 selected clauses validate
+against 328 physical anchors across both exact Vol4 revisions. Nineteen
+selected text comparisons agree and five differ; these are clause-text results,
+not whole-section semantic equivalence. Fresh seven-PDF extraction and
+independent reconstruction pass, including the preceding conversion pack and
+all 2,657 historical gaps and 115 original unresolved migration obligations.
+
+Four source conflicts remain literal: MOVD's non-64-bit VEX store opcode,
+scalar FMA W prose versus encoding rows, scalar/vector scope and the clear
+range including bit 512. Two cross-reference scopes and the full GF inverse
+table remain open. Rendered publisher-page inspection confirms the selected
+table/prose observations. No intended opcode, arithmetic or register-write
+correction is inferred. The roadmap's stale stopped/missing-mapping wording is
+updated to reflect the later completed mapping and memory-native gates.
+
+The exact pre-upgrade zlib is recovered into the isolated PDF tool root from
+Ubuntu's official snapshot archive; all three tool/library pins pass unchanged.
+Twelve focused controls, all 499 tooling and 145 BAP Python tests, Ariadne
+formatting, layout and navigation checks pass. Workspace-wide formatting fails
+in unchanged MirrorRust tests. Default offline strict Clippy lacks `minidump`;
+the alternate local cache requires a lock refresh rejected by `--locked`.
+These checks remain unpassed; source/lock files are not changed to bypass them.
+No new Rust/native/model/capture qualification is claimed.
+
+This completes a selected source-only gate. All 115 migration obligations,
+ten earlier architectural references, 516 unparsed cells and the conversion
+pack's four boundaries remain unchanged. Whole-section review, 100 additional
+source sections, whole-document constraints, conflict adjudication, adoption
+and wider legal domains remain open. No runtime/admission or source/producer
+pin changes. Products stay ignored under
+`target/coverage-20261024/paired-constraints-01/`.
 
 ## 2026-10-24 — Selected conversion source constraints
 

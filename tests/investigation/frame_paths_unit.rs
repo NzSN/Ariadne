@@ -404,6 +404,41 @@ fn closed_no_path_and_missing_frame_evidence_are_distinct() {
     assert_eq!(r.coverage, "partial");
 }
 #[test]
+fn every_publication_checks_final_metadata_against_the_output_cap() {
+    let edges = [(0, 1), (1, 0), (1, 3)];
+    let mut policies = vec![limits()];
+    for stop in 0..4 {
+        let mut policy = limits();
+        match stop {
+            0 => policy.max_graph_nodes = 0,
+            1 => policy.max_path_steps = 0,
+            2 => policy.max_frontier_bytes = 0,
+            _ => policy.max_search_states = 0,
+        }
+        policies.push(policy);
+    }
+    for unavailable in [false, true] {
+        let mut source = input(&edges);
+        if unavailable {
+            source.graphs.pop();
+        }
+        for policy in &policies {
+            let baseline = list(source.clone(), q(1), policy.clone(), Some(usize::MAX)).unwrap();
+            let full_bytes = serde_json::to_vec(&baseline).unwrap().len();
+            // Exercise caps around the point where final stop/gap metadata grows
+            // beyond the initially empty envelope, including early returns.
+            for budget in full_bytes.saturating_sub(128)..=full_bytes + 1 {
+                let mut bounded = policy.clone();
+                bounded.max_output_bytes = budget;
+                if let Ok(report) = list(source.clone(), q(1), bounded, Some(usize::MAX)) {
+                    assert!(serde_json::to_vec(&report).unwrap().len() <= budget);
+                    report.validate().unwrap();
+                }
+            }
+        }
+    }
+}
+#[test]
 fn invalid_questions_and_evidence_never_pass_under_zero_work_budgets() {
     let mut l = limits();
     l.max_search_states = 0;

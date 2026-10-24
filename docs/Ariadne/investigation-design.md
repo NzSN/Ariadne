@@ -14,6 +14,9 @@ bounded frame-path contract below is qualified within the finite Windows AMD64
 captured-unwind and original physical-frame 1→0 scope. The
 [2026-10-20 F4 evidence](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/20261020/README.md)
 records model, mutation, native/reference, original-capture and saved-replay gates. The later [S3 finite model suite](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/specification-sync/20261020/README.md) independently qualifies the declared model scripts and preserved bounds; it adds no new runtime or capture acceptance.
+The [2026-10-24 final-output repair](../../.agents/plans/frame-path-enumeration.md#final-output-budget-repair-2026-10-24)
+fixes a generated publication-cap failure; its portable checks do not refresh
+the earlier native/capture qualification.
 The [2026-10-13 full-dump application attempt](https://github.com/NzSN/Ariadne/blob/32fbda931177184f429eae37920a5d228d63e31f/evidence/Ariadne/frame-paths/dump03958-20261013/report.md)
 returned unavailable for physical frames 1→0: a runtime-table budget and then
 unsupported vector semantics prevented an admitted active-call anchor.
@@ -1607,6 +1610,34 @@ and 1 MiB requested read evidence. Opening/preparation and helper timeouts
 remain separate bounds. These limits do not constitute a process RSS or
 hard real-time guarantee. Too-small output budgets reject publication, including
 formatted output larger than its byte cap.
+
+### Frame-path final-output budget repair
+
+2026-10-24: the full generated campaign in the
+[AMD64 section-5 execution](../../.agents/plans/amd64-operation-coverage.md#section-5-execution-and-exit-gates-2026-10-24)
+finds a concrete violation of the publication contract above. The minimized
+three-node graph with NP=1 and an 18,905-byte output cap can return a JSON
+listing larger than that cap. The initial size check measures an empty report
+envelope; later stop reasons, gaps and counters grow it even when no path is
+published. Estimated retained-path overhead does not protect those returns.
+
+The common `list` boundary now checks the complete serialized result from
+`enumerate_frame_paths`, covering ordinary completion and every early return.
+An oversized final listing returns `frame-output-byte-budget` instead of an
+invalid successful report. Existing schema, graph/identity, path-count, origin,
+coverage and deadline contracts remain unchanged. The initial envelope check
+still refuses inputs that cannot fit before search starts.
+
+The [execution follow-up](../../.agents/plans/frame-path-enumeration.md#final-output-budget-repair-2026-10-24)
+records validation. A default unit regression sweeps caps around complete
+serialized sizes for ordinary, unavailable, graph/depth/frontier/search-budget
+results. The minimized Proptest seed remains a small executable regression in
+`tests/investigation/frame_paths.proptest-regressions`. All 23 focused frame-path
+unit/property tests and the full 3,200-case generated/replay campaign pass on
+the repaired source, with the declared source/tool freeze. Root default,
+core-only and strict Clippy checks also pass in the selected read-only dependency
+environment. No new original-capture, native-consumer, release or universal
+refinement qualification follows from this concrete byte-accounting repair.
 
 The independent pre-runtime freeze covers 64 graph instances and exhaustive
 sequence oracles. Fourteen synthetic PE/unwind/stack encodings cover recursion,
