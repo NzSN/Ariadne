@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-24",
+  "purpose": "Detailed explanation of the preserved native64 near-branch source conflict; conditional arithmetic illustration, no instruction execution or acceptance change.",
+  "baseRevision": "341099b438e1241121dffb1e1260855022f88c2d",
+  "sources": {
+    "CHECKPOINTS.md": "4d1701eb756365bd4ece74de8058a05de89f3fbf4dc9f07c666d052911957fc9",
+    "ROADMAP.md": "f7cde91d2ccd4122b630bad13d923b629772c028dbd6fee4d0a0edf405063237",
+    "docs/Ariadne/amd64-coverage-design.md": "9a9caf3b8314d039e23a07a23684fe814c5bbe9607a52135057701c628fa6e65",
+    "docs/Ariadne/semantic-assurance.md": "90ca7bb3e86a1c569a1805b4ff8755f56b1e2e707c65ba0df2b12bc95faa10b1",
+    ".agents/plans/amd64-operation-coverage.md": "280799d90d6812535f07aabae8fa4ba87c5428c1a6c3b616708778a47759ac40",
+    "tools/amd64_p2_native64.py": "c8789304d730291983444ed45c9850db74c0ab83420516346e748aeb93a82678",
+    "tools/test_amd64_p2_native64.py": "05095a47ecb8c69e6c9f3c0a35f4c67dbe69281f19f1077d78c6f3fbd1511bbb",
+    "tests/bap/fixtures/source-migration/p2-native64-inventory-v1.json": "502c6ff5df3e12aa063696ad1cdb6ec318709beda3724ad7f76a0e0d51e6d976",
+    "tests/bap/fixtures/source-migration/p1-source-policy-v1.json": "d1caf84927162bb696185eed4880007aa92ded2260738c940cdeb935ee8a1840"
+  },
+  "publisherSources": [
+    {
+      "publication": "24592",
+      "revision": "3.25",
+      "officialUrl": "https://docs.amd.com/api/khub/documents/OdDzCKsU4uf~KbI1htdPvA/content",
+      "pdfSha256": "aed9236b718ae86cdb49f7d628f4ebb1a4bdce1a012df6cf6aad6735776c8a38",
+      "pdfPages": [
+        114,
+        128,
+        129
+      ]
+    },
+    {
+      "publication": "24594",
+      "revision": "3.38",
+      "officialUrl": "https://docs.amd.com/api/khub/documents/BqEoC2FadIAgbrUdEzDJIg/content",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPages": [
+        178,
+        249,
+        269,
+        655
+      ]
+    }
+  ]
+}

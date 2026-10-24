@@ -1,7 +1,7 @@
 {
   "archived": "2026-10-16",
   "scope": "Conversation presentation archive; canonical designs stay in docs/ and plan owners now live in .agents/plans/. No new analysis or qualification.",
-  "report_count": 58,
+  "report_count": 59,
   "markdown_html_pairs_including_index": 21,
   "source_session": "01a12ddc-4e59-7cb2-b5aa-67a8e522c597",
   "recovered_reports": [
@@ -840,12 +840,12 @@
       "sha256": "2667f3af9200452de3e195dc17664344a094f718310fb48d7527f5a02999ac33"
     },
     "ariadne-reports-index.html": {
-      "bytes": 26908,
-      "sha256": "c97453d45b2e160c4f6584519490e1dd6404215160ff000785816e96b30f6fc9"
+      "bytes": 27589,
+      "sha256": "3c4d99f4d8ae8df2db12bb341e403d6273b52e5eb54b8edc35dd204efea3f040"
     },
     "ariadne-reports-index.md": {
-      "bytes": 18877,
-      "sha256": "ddbcaae88b33182bf242f7fafdad9c54d21e9ea8397fc0e96cb2d0b820c99d48"
+      "bytes": 19424,
+      "sha256": "dd1bb5db0b1e8d7695ed13f50a16275ebc00ccd9c3f2744d3816bb9d592e6f03"
     },
     "ariadne-resolver-structural-types-20261015.html": {
       "bytes": 32858,
@@ -1166,10 +1166,18 @@
     "ariadne-amd64-p2-h64-execution-20261024/provenance.json": {
       "bytes": 1698,
       "sha256": "312fc386e750d9cbc6faa937cf75f1d28d49c1bf4f191316445944b7516f0047"
+    },
+    "ariadne-amd64-near-branch-source-conflict-20261024/index.html": {
+      "bytes": 24359,
+      "sha256": "b4457c1be039fd263a693b26ab09c2b85bfd4e0f05c4dcf8f6f8451d8764dafd"
+    },
+    "ariadne-amd64-near-branch-source-conflict-20261024/provenance.json": {
+      "bytes": 1961,
+      "sha256": "41fabd3b8929a8725d89cc1ff03326bf54139a1e1211492a926b327ae67de0d4"
     }
   },
   "directory": ".agents/chatdocs/",
-  "html_documents_including_index": 59,
+  "html_documents_including_index": 60,
   "markdown_documents_including_index": 22,
   "source_review_documents": [
     {
@@ -2498,5 +2506,11 @@
     "html": "ariadne-amd64-p2-h64-execution-20261024/index.html",
     "canonical_source": "docs/Ariadne/amd64-coverage-design.md#1024-h64-source-projection-and-native64-inventories",
     "scope": "Finite H64 source projection and inventories; full P2 incomplete."
+  },
+  "latest_amd64_near_branch_explanation": {
+    "date": "2026-10-24",
+    "html": "ariadne-amd64-near-branch-source-conflict-20261024/index.html",
+    "canonical_source": "docs/Ariadne/amd64-coverage-design.md#1024-h64-source-projection-and-native64-inventories",
+    "scope": "Detailed near-branch source-conflict explanation at 341099b; no implementation or acceptance changes."
   }
 }

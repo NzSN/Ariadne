@@ -1,5 +1,7 @@
 # Ariadne chat document archive
 
+**AMD near-branch rules explained, 2026-10-24.** The [detailed explanation](ariadne-amd64-near-branch-source-conflict-20261024/index.html) compares the contradictory override rules, separates four widths and shows their conditional effects on P2-C.
+
 **P2 H64 execution, 2026-10-24.** The [resumed report](ariadne-amd64-p2-h64-execution-20261024/index.html) covers the checked mode exclusion, native-64 size/LOCK/REP inventories and remaining source questions. P2 remains incomplete.
 
 **H64 hypothesis, 2026-10-24.** The [scope summary](ariadne-amd64-h64-hypothesis-20261024/index.html) clarifies native AMD64 execution-only support, retained smaller operands and the conditional MOVD mode exclusion. Counts are unchanged.
@@ -40,6 +42,7 @@ Canonical documents under `docs/` remain in place. The two 2026-10-12 design/pla
 
 | Chat document | View | Source |
 | --- | --- | --- |
+| AMD near-branch source conflict explained (2026-10-24) | [Open detailed explanation](ariadne-amd64-near-branch-source-conflict-20261024/index.html) | HTML explanation; [canonical source question](../../docs/Ariadne/amd64-coverage-design.md#1024-h64-source-projection-and-native64-inventories) |
 | P2 H64 projection and source inventories (2026-10-24) | [Open execution report](ariadne-amd64-p2-h64-execution-20261024/index.html) | HTML reading view; [canonical execution](../../docs/Ariadne/amd64-coverage-design.md#1024-h64-source-projection-and-native64-inventories) |
 | H64 native AMD64-only hypothesis (2026-10-24) | [Open scope summary](ariadne-amd64-h64-hypothesis-20261024/index.html) | HTML explanation; [canonical hypothesis](../../docs/Ariadne/amd64-coverage-design.md#1023-h64-native-amd64-execution-only) |
 | P2-C architectural source inventories explained (2026-10-24) | [Open C explanation](ariadne-amd64-p2-c-explained-20261024/index.html) | HTML explanation; [canonical C breakdown](../plans/amd64-operation-coverage.md#p2-c-architectural-source-inventory-details) |

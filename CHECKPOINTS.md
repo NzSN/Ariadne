@@ -15,6 +15,7 @@
 - [Basic v9 candidate check](docs/Ariadne/bap-analysis-core-design.md#current-basic-v9-candidate-compatibility) — separates tested replacement behavior from the unchanged production pin and historical runtime identity.
 - [Plain REP and coverage accounting](docs/Ariadne/bap-analysis-core-design.md#plain-repeated-string-profile-and-coverage-accounting) — defines the separate v12 three-form contract and the unmet full-coverage obligations.
 - [H64 source projection and inventories](docs/Ariadne/amd64-coverage-design.md#1024-h64-source-projection-and-native64-inventories) — checked mode exclusion, native-64 size/LOCK/REP inventories and remaining source interpretations.
+- [Near-branch source-conflict explanation](.agents/chatdocs/ariadne-amd64-near-branch-source-conflict-20261024/index.html) — detailed comparison of the unresolved AMD override rules and their P2-C implications.
 
 **What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Retired ISA milestones in older entries are no longer active work.
 
@@ -22,6 +23,61 @@ For the wider context, see the optional [documentation map](docs/documentation-m
 
 Current validation follows the [executable test matrix](tests/README.md). Dated run
 results below are historical; their Git links do not establish a current pass.
+
+## 2026-10-24 — Near-branch source-conflict explanation and P2 handoff
+
+The P2/H64 implementation is published in
+[`341099b`](https://github.com/NzSN/Ariadne/commit/341099b438e1241121dffb1e1260855022f88c2d).
+The user then requested a detailed browser explanation of the conflicting
+AMD near-branch rules. The [HTML explanation](.agents/chatdocs/ariadne-amd64-near-branch-source-conflict-20261024/index.html)
+and its [source identities](.agents/chatdocs/ariadne-amd64-near-branch-source-conflict-20261024/provenance.json)
+preserve that implementation snapshot. Both archive indexes and the manifest
+include the report. The [canonical interpretation](docs/Ariadne/amd64-coverage-design.md#1024-h64-source-projection-and-native64-inventories)
+and [execution ledger](.agents/plans/amd64-operation-coverage.md#h64-source-projection-and-c-inventory-execution)
+continue to own the design and unfinished work.
+
+Selected Vol1 revision 3.25 Table 3-9, PDF 128 (printed 90), permits a
+16-bit operand override for its seven near-branch groups. PDF 129 (printed
+91) then fixes the operand size and listed actions at 64 bits. The report
+compares these exact locations with the earlier override discussion and
+Vol3's default-size rules. The current publisher Vol1 was opened again;
+cached Vol1/Vol3 PDF hashes match the selected pins and both adjacent Vol1
+page renders were inspected. Vol3 was reviewed from its pinned local
+extraction because the web reader could not ingest the larger PDF.
+
+The explanation separates execution mode, operand size, address size and
+encoded displacement size. It distinguishes 66h applicability from the 67h
+address-sized LOOP/JrCXZ count rule and illustrates how candidate CALL width
+contracts could imply different targets and two-byte/eight-byte return slots.
+That numerical example is conditional arithmetic, not decoded-byte or CPU
+execution evidence. No interpretation was adopted, no publisher correction
+was inferred and no new machine-adjudicated conflict ID was introduced.
+
+**Validation for this documentation delivery.** The report/index checks pass
+for 266 local references, presentation source identities, changed manifest
+entries/counts, SVG XML, unique IDs and example arithmetic. Repository
+documentation navigation and whitespace checks pass. `wslview` returned 0
+when opening the report; that confirms launch rather than browser rendering
+inspection. No new native instruction campaign or Rust behavior change is
+part of this delivery. Report provenance identifies the source files at
+`341099b`; this subsequent checkpoint does not rewrite that earlier snapshot.
+
+**Resume boundary.** P2 remains incomplete. Current executable/input hashes
+still match the validated H64 run: two original conflict cells, five
+architectural reference roots, six new and 12 inherited unresolved boundaries,
+100 added sections and 4,339 not-complete source regions. Categories overlap.
+The 52 focused controls, 579 tooling tests, 145 BAP tests and strict replay
+exit 2 belong to the implementation validation recorded below; creating this
+explanation does not re-exercise or promote those gates.
+
+Continue C.2's exact near-branch form/66h review with an authoritative source
+interpretation or an explicitly accepted conditional source-precedence
+hypothesis. The records retain
+`operand16="summary-66h-rule;requires-form-qualification"`. H64 still includes
+applicable smaller operands and address-32 forms. The GF inverse question is
+a separate source-authority dependency; remaining per-form B-1,
+mandatory-prefix, added-section and whole-region reviews remain local work.
+No runtime, source/producer/helper pin or acceptance flag changes occur here.
 
 ## 2026-10-24 — H64 projection and P2-C inventories resumed
 
