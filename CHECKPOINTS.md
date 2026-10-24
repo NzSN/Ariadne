@@ -16,6 +16,7 @@
 - [Plain REP and coverage accounting](docs/Ariadne/bap-analysis-core-design.md#plain-repeated-string-profile-and-coverage-accounting) — defines the separate v12 three-form contract and the unmet full-coverage obligations.
 - [H64 source projection and inventories](docs/Ariadne/amd64-coverage-design.md#1024-h64-source-projection-and-native64-inventories) — checked mode exclusion, native-64 size/LOCK/REP inventories and remaining source interpretations.
 - [Near-branch source-conflict explanation](.agents/chatdocs/ariadne-amd64-near-branch-source-conflict-20261024/index.html) — detailed comparison of the unresolved AMD override rules and their P2-C implications.
+- [Accepted fixed-64 near-branch hypothesis](docs/Ariadne/amd64-coverage-design.md#1025-selected-fixed64-near-branch-hypothesis) — current user-selected case and pending checker projection.
 
 **What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Retired ISA milestones in older entries are no longer active work.
 
@@ -23,6 +24,43 @@ For the wider context, see the optional [documentation map](docs/documentation-m
 
 Current validation follows the [executable test matrix](tests/README.md). Dated run
 results below are historical; their Git links do not establish a current pass.
+
+## 2026-10-24 — Fixed-64 near-branch hypothesis accepted; implementation pending
+
+After reviewing Table 3-9 note 1, the user selected the fixed-64 near-branch
+case and instructed that possible 16-bit operand overrides be ignored for
+that case. The [canonical decision](docs/Ariadne/amd64-coverage-design.md#1025-selected-fixed64-near-branch-hypothesis)
+and [ordered implementation follow-up](.agents/plans/amd64-operation-coverage.md#fixed64-near-branch-hypothesis-follow-up)
+supersede the earlier requirement to obtain an external interpretation before
+continuing this selected case. The source disagreement remains preserved.
+
+The decision applies to CALL near, Jcc, JrCXZ, JMP near, LOOP, LOOPcc and
+RET near in the existing native `long-64` scope. Applicable address-32 forms,
+address-sized counters, encoded displacement widths and other instructions'
+smaller operands remain separate. It does not establish that a 66h byte can
+be removed or automatically admitted, and it does not add compatibility-mode
+support or select fixed-64 operands for every instruction.
+
+The user then requested recording, committing and pushing. The preceding
+implementation turn performed read-only inspection; no checker, input or
+runtime changes were made for the new hypothesis. Existing qualifications
+still contain `operand16="summary-66h-rule;requires-form-qualification"`.
+The next implementation must add an explicit current-scope projection and
+controls, preserve original records, and execute fresh source replay before
+claiming that the checker enforces the decision.
+
+**Resume boundary.** Implement the linked fixed-64 projection first, then
+continue the remaining P2-C inventories and P2-F/G reviews. The near-branch
+operand-16 source question no longer blocks that selected scope under the
+user's hypothesis. GF remains a separate source-authority question. No P2
+reference, boundary, section or region was newly closed by this documentation
+update; full P2 remains incomplete. Earlier tests and strict replay results
+retain their original implementation scope.
+
+**Validation.** Documentation navigation and whitespace checks apply to this
+record-only update. Frozen source manifests, source literals, runtime behavior,
+producer/helper pins and acceptance flags are unchanged. The earlier browser
+explanation remains a dated snapshot from before this decision.
 
 ## 2026-10-24 — Near-branch source-conflict explanation and P2 handoff
 

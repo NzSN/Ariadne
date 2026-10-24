@@ -2,8 +2,12 @@
 
 ## Context and follow-up
 
-**Current execution: resumed at the user's request, 2026-10-24.** The
-latest [native-64 execution](../../docs/Ariadne/amd64-coverage-design.md#1024-h64-source-projection-and-native64-inventories)
+**Current checkpoint: fixed-64 near-branch hypothesis accepted, 2026-10-24.**
+The [selected contract](../../docs/Ariadne/amd64-coverage-design.md#1025-selected-fixed64-near-branch-hypothesis)
+considers fixed-64 near branches and excludes their possible operand-16
+alternatives. Its checker projection remains pending. Other smaller operands
+and address-size rules remain required. The preceding
+[native-64 execution](../../docs/Ariadne/amd64-coverage-design.md#1024-h64-source-projection-and-native64-inventories)
 implements the source-checked non-64-only MOVD exclusion and native-64
 size/LOCK/REP inventories. Smaller operands, address-32 forms and legacy
 encodings valid in 64-bit mode remain required. The
@@ -1020,6 +1024,43 @@ near-branch groups, or explicitly select a conditional source-precedence
 hypothesis. Existing records keep per-form 66h qualification pending; no new
 source correction or machine-adjudicated boundary is claimed. Other C/F/G
 local work remains unfinished rather than externally blocked.
+
+The [following user decision](#fixed64-near-branch-hypothesis-follow-up)
+selects the fixed-64 case, so this broader source question no longer prevents
+continuation under that hypothesis.
+
+### Fixed64 near-branch hypothesis follow-up
+
+The user selected fixed-64 operands for the seven near-branch groups and
+instructed that the possible operand-16 overrides be ignored for that case.
+The [canonical contract](../../docs/Ariadne/amd64-coverage-design.md#1025-selected-fixed64-near-branch-hypothesis)
+owns the scope and limits. The next user instruction was to record, commit
+and push; no checker or input changes have been made for this hypothesis.
+
+Resume in this order:
+
+1. Add a versioned current-scope projection for CALL near, Jcc, JrCXZ, JMP
+   near, LOOP, LOOPcc and RET near: selected operand size 64 and excluded
+   operand-16 alternatives. Bind it to native `long-64`, exact owners and the
+   accepted user hypothesis. Preserve the frozen source manifest, original
+   records and conflicting table/prose observations.
+2. Annotate the current near-branch qualifications without presenting the
+   old unresolved source property as a source correction. Keep address-32,
+   implicit-count width, displacement width and other instruction families'
+   smaller operands separate. Do not treat this scope decision as authority
+   to strip or automatically admit a 66h byte prefix.
+3. Add controls for wrong modes/owners, blanket smaller-operand exclusions,
+   conflated operand/address/count sizes and false prefix admission. Verify
+   the chosen fixed-64 case and preservation of every original obligation.
+4. Replay the actual sources and current dispositions after implementation,
+   run the affected checks and evaluate the strict P2 gate. Close only the
+   scoped obligations actually satisfied; full reference/section/page review
+   and GF source interpretation remain separate.
+
+The source conflict remains recorded, but an external answer about the
+excluded operand-16 alternative is not required to begin this selected case.
+The current checker remains at the earlier implementation snapshot until
+steps 1–4 execute. This documentation publication creates no new acceptance.
 
 ### Continuation stopped for publication: 2026-10-24
 

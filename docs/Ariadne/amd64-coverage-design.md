@@ -2,8 +2,13 @@
 
 ## Context and follow-up
 
-**Current continuation: resumed at the user's request, 2026-10-24.** The
-latest [H64 execution](../../.agents/plans/amd64-operation-coverage.md#h64-source-projection-and-c-inventory-execution)
+**Current checkpoint: fixed-64 near-branch hypothesis accepted, 2026-10-24.**
+The user selected the fixed-64 near-branch case and excluded the possible
+16-bit operand overrides from that case. The
+[implementation follow-up](../../.agents/plans/amd64-operation-coverage.md#fixed64-near-branch-hypothesis-follow-up)
+records the pending checker projection and controls. This refines the selected
+native `long-64` scope; other smaller operands and address-size rules remain
+required. The preceding [H64 execution](../../.agents/plans/amd64-operation-coverage.md#h64-source-projection-and-c-inventory-execution)
 implements the checked non-64-only MOVD disposition and native-64 source
 inventories under the [H64 hypothesis](../../.agents/plans/amd64-operation-coverage.md#h64-native-amd64-execution-only),
 which limits the proposed support target to native AMD64 64-bit execution. The
@@ -2414,6 +2419,11 @@ reference roots already remain open. Instruction inventory, mandatory-prefix
 review and P2-F/G work outside this source question remain unfinished local
 work. GF remains the separate external source question for D/E/H.
 
+The [subsequent fixed-64 decision](#1025-selected-fixed64-near-branch-hypothesis)
+selects the fixed-64 case for continued work. The broader source disagreement
+remains preserved; it no longer requires an external answer before work on
+that selected case can proceed.
+
 **Validation.** All 52 focused source/mutation controls, 579 tooling tests and
 145 BAP Python tests pass. Fresh complete source extraction passes with its
 current implementation/input seal. Independent strict replay reconstructs all
@@ -2423,3 +2433,48 @@ obligations: two original conflict cells, five reference roots, six new and
 These categories overlap. Layout, documentation navigation and original
 object digests also pass. No Rust/runtime,
 producer/helper pin or production-admission changes occur in this continuation.
+
+### 10.25 Selected fixed64 near-branch hypothesis
+
+2026-10-24: after reviewing Table 3-9 and its note 1, the user instructed:
+assume the selected execution mode, ignore the possible 16-bit near-branch
+overrides and consider the fixed-64 case. This is an accepted working-scope
+decision for the seven near-branch groups: CALL near, Jcc, JrCXZ, JMP near,
+LOOP, LOOPcc and RET near. The selected execution mode remains native
+`long-64`; compatibility-mode support is not added by the term "Long Mode"
+in this decision. The [implementation plan](../../.agents/plans/amd64-operation-coverage.md#fixed64-near-branch-hypothesis-follow-up)
+defines the next changes.
+
+| Property | Selected contract |
+| --- | --- |
+| Near-branch operand-size case | Fixed 64 bits under the user's hypothesis. |
+| Possible 16-bit near-branch operand override | Outside this selected case; preserve the source row and its original meaning. |
+| 32-bit operand override | Not selected; Table 3-9 note 1 says no such prefix is available in 64-bit mode. |
+| Address size and implicit counters | Separate: retain applicable address-64/address-32 cases and address-sized LOOP/JrCXZ counters. |
+| Encoded relative displacement | Keep the form-specific width, including applicable 8/32-bit fields; fixed-64 operands do not create a 64-bit displacement. |
+| Other instruction families | Their applicable smaller operands and override rules remain required. This does not select fixed-64 operands for all instructions. |
+
+This decision supplies the explicit hypothesis that the earlier C.2 review
+was waiting for. The contradictory source statements and historical browser
+explanation remain unchanged as evidence of the broader source question.
+Their reconciliation is no longer an external prerequisite for continuing
+the selected fixed-64 case. The decision establishes neither a publisher
+correction nor a statement about all physical CPUs or all prefixed forms.
+
+Ignoring the alternative operand-16 case does not authorize silently dropping
+66h from instruction bytes. Prefix legality, interpretation and admission
+still require the exact form's encoding and semantic contract. A future
+projection must identify selected fixed-64 forms and excluded operand-16
+alternatives explicitly, preserving original source records. It must keep
+address-32/count-width cases distinct from operand-32 overrides.
+
+**Status at publication.** Hypothesis recorded; checker/input implementation
+has not started. The user requested recording, committing and pushing before
+that implementation. Existing source records still contain
+`operand16="summary-66h-rule;requires-form-qualification"`; the next change
+must add the current scoped disposition rather than claiming that the old
+field already implements this decision. Frozen source manifests, source
+literals, runtime behavior, producer/helper pins and acceptance flags are
+unchanged. Full P2, GF interpretation and the other incomplete local reviews
+remain open. Documentation/navigation checks validate this update; no new
+source reconstruction or runtime qualification is claimed.

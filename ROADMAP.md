@@ -33,6 +33,11 @@ implements the checked non-64-only MOVD disposition and adds native-64
 Appendix B/default-size and LOCK/REP source inventories. Complete per-form
 size/prefix qualifications, section/region reviews and source questions remain
 open; no runtime or full-stage acceptance follows.
+The [accepted fixed-64 near-branch hypothesis](docs/Ariadne/amd64-coverage-design.md#1025-selected-fixed64-near-branch-hypothesis)
+selects that operand-size case and excludes its possible 16-bit override
+alternatives. It permits continuation without reconciling the excluded case;
+the current-scope checker projection is the next implementation task. Other
+smaller operands, address-size rules and source questions remain separate.
 
 **Why this document exists.** [Project overview](README.md) sets the snapshot-based crash-investigation goal.
 
