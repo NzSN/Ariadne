@@ -1,7 +1,7 @@
 {
   "archived": "2026-10-16",
   "scope": "Conversation presentation archive; canonical designs stay in docs/ and plan owners now live in .agents/plans/. No new analysis or qualification.",
-  "report_count": 53,
+  "report_count": 58,
   "markdown_html_pairs_including_index": 21,
   "source_session": "01a12ddc-4e59-7cb2-b5aa-67a8e522c597",
   "recovered_reports": [
@@ -840,12 +840,12 @@
       "sha256": "2667f3af9200452de3e195dc17664344a094f718310fb48d7527f5a02999ac33"
     },
     "ariadne-reports-index.html": {
-      "bytes": 23816,
-      "sha256": "1a279690442d806a7379ce3b2e31ba4ffc9f9e17f45a6ba854121916337cc291"
+      "bytes": 26908,
+      "sha256": "c97453d45b2e160c4f6584519490e1dd6404215160ff000785816e96b30f6fc9"
     },
     "ariadne-reports-index.md": {
-      "bytes": 16442,
-      "sha256": "ea854aba7364253a33788bfbed1c481c663f5c1ee0164ee87307c46c2596bdd1"
+      "bytes": 18877,
+      "sha256": "ddbcaae88b33182bf242f7fafdad9c54d21e9ea8397fc0e96cb2d0b820c99d48"
     },
     "ariadne-resolver-structural-types-20261015.html": {
       "bytes": 32858,
@@ -1126,10 +1126,50 @@
     "ariadne-amd64-p1-complete-20261024/provenance.json": {
       "bytes": 1442,
       "sha256": "fe7c9d6b37dabe64ca7dd476148fb5de32a05ff06d83428b1f19eebb52c07936"
+    },
+    "ariadne-amd64-p2-open-causes-20261024/index.html": {
+      "bytes": 13330,
+      "sha256": "443fdeed60709ccf5490f22550fc88f3f2af482002e31e542a81dcd17cff822e"
+    },
+    "ariadne-amd64-p2-open-causes-20261024/provenance.json": {
+      "bytes": 1067,
+      "sha256": "9f61b78959ebcae6e40dbfb6695abfe569bd5f1f0da5d4a3bcbcfc14505a32ab"
+    },
+    "ariadne-amd64-p2-tasks-and-source-blocker-20261024/index.html": {
+      "bytes": 12838,
+      "sha256": "7d37bf7d0d4d4710c278b757e98e3b791e6a251b95ee922875467a18cc8b6827"
+    },
+    "ariadne-amd64-p2-tasks-and-source-blocker-20261024/provenance.json": {
+      "bytes": 1937,
+      "sha256": "afc8fef38d0a472a68397b0854efb7474f5e626e2a9326e1be02e284b1d73945"
+    },
+    "ariadne-amd64-p2-c-explained-20261024/index.html": {
+      "bytes": 14545,
+      "sha256": "8d61ac45666111acd2c188a23f20284c0a8ac12cc390b41f252629212c95416b"
+    },
+    "ariadne-amd64-p2-c-explained-20261024/provenance.json": {
+      "bytes": 1040,
+      "sha256": "249adc097d8ca12bd1b2c6e00d83edbff7082b79b2649e7777f74c5457f804c8"
+    },
+    "ariadne-amd64-h64-hypothesis-20261024/index.html": {
+      "bytes": 8790,
+      "sha256": "e2d33c83b5994f3f63172272ed79c8d79324f80167af523f8a6fc1be6750d6c3"
+    },
+    "ariadne-amd64-h64-hypothesis-20261024/provenance.json": {
+      "bytes": 1205,
+      "sha256": "6ca75cf109d03bd051a72d2767c24e02bb1e830beff86cb31d97f029d33fbc5a"
+    },
+    "ariadne-amd64-p2-h64-execution-20261024/index.html": {
+      "bytes": 10958,
+      "sha256": "446f3bdf04843decba6ffedf955157976366cf2f712a78bb7d36cf289580ffaf"
+    },
+    "ariadne-amd64-p2-h64-execution-20261024/provenance.json": {
+      "bytes": 1698,
+      "sha256": "312fc386e750d9cbc6faa937cf75f1d28d49c1bf4f191316445944b7516f0047"
     }
   },
   "directory": ".agents/chatdocs/",
-  "html_documents_including_index": 54,
+  "html_documents_including_index": 59,
   "markdown_documents_including_index": 22,
   "source_review_documents": [
     {
@@ -2426,5 +2466,37 @@
     "html": "ariadne-amd64-p1-complete-20261024/index.html",
     "canonical_source": "docs/Ariadne/amd64-coverage-design.md#1020-p1-source-selection-and-structural-migration-completed",
     "scope": "P1 source selection and structural migration completed; later constraint/domain/runtime stages remain separate. Rendering adds no qualification."
+  },
+  "latest_amd64_p2_open_causes": {
+    "date": "2026-10-24",
+    "html": "ariadne-amd64-p2-open-causes-20261024/index.html",
+    "canonical_source": "docs/Ariadne/amd64-coverage-design.md#1021-p2-clause-and-reference-execution",
+    "source_revision": "e7a594b6ab9b99d52e91a2f6d89e758d08589f6d",
+    "scope": "Explanation of unfinished P2 clause coverage, literal conflicts, unconditional open states and inherited accounting limits; rendering adds no acceptance."
+  },
+  "latest_amd64_p2_task_execution": {
+    "date": "2026-10-24",
+    "html": "ariadne-amd64-p2-tasks-and-source-blocker-20261024/index.html",
+    "canonical_source": "docs/Ariadne/amd64-coverage-design.md#1022-p2-completion-task-execution",
+    "source_revision": "e7a594b6ab9b99d52e91a2f6d89e758d08589f6d",
+    "scope": "Implemented current review dispositions and scoped resolutions; full P2 remains incomplete with a concrete GF source-authority question. Rendering adds no acceptance."
+  },
+  "latest_amd64_p2_c_explanation": {
+    "date": "2026-10-24",
+    "html": "ariadne-amd64-p2-c-explained-20261024/index.html",
+    "canonical_source": ".agents/plans/amd64-operation-coverage.md#p2-c-architectural-source-inventory-details",
+    "scope": "Explanation of pending P2-C work; no implementation or qualification."
+  },
+  "latest_amd64_h64_hypothesis": {
+    "date": "2026-10-24",
+    "html": "ariadne-amd64-h64-hypothesis-20261024/index.html",
+    "canonical_source": "docs/Ariadne/amd64-coverage-design.md#1023-h64-native-amd64-execution-only",
+    "scope": "Native AMD64 execution-only hypothesis; no source-pin, runtime or acceptance change."
+  },
+  "latest_amd64_p2_h64_execution": {
+    "date": "2026-10-24",
+    "html": "ariadne-amd64-p2-h64-execution-20261024/index.html",
+    "canonical_source": "docs/Ariadne/amd64-coverage-design.md#1024-h64-source-projection-and-native64-inventories",
+    "scope": "Finite H64 source projection and inventories; full P2 incomplete."
   }
 }

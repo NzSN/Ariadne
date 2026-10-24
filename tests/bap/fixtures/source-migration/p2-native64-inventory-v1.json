@@ -1,0 +1,1624 @@
+{
+  "default64Qualifications": [
+    {
+      "clauses": [
+        {
+          "cells": [
+            "pdf:178:cell:16",
+            "pdf:178:cell:17",
+            "pdf:178:cell:18"
+          ],
+          "text": "For near calls in 64-bit mode, the operand size defaults to 64 bits. The E8 opcode results in RIP = RIP + 32-bit signed displacement and the FF /2 opcode results in RIP = 64-bit offset from register or memory. No prefix is available to encode a 32-bit operand size in 64-bit mode."
+        }
+      ],
+      "mnemonic": "CALL",
+      "owner": "amd-entry:0031",
+      "ownerPages": [
+        178,
+        180
+      ],
+      "properties": {
+        "defaultOperandBits": 64,
+        "definiteGprWrites": "not-derived-from-size-table",
+        "operand16": "summary-66h-rule;requires-form-qualification",
+        "operand32Encoding": "unavailable",
+        "requiresRexForDefault64": false
+      }
+    },
+    {
+      "clauses": [
+        {
+          "cells": [
+            "pdf:224:cell:23",
+            "pdf:224:cell:24"
+          ],
+          "text": "In 64-bit mode, the operand size of ENTER defaults to 64 bits, and there is no prefix available for encoding a 32-bit operand size."
+        }
+      ],
+      "mnemonic": "ENTER",
+      "owner": "amd-entry:0053",
+      "ownerPages": [
+        224,
+        225
+      ],
+      "properties": {
+        "defaultOperandBits": 64,
+        "definiteGprWrites": "not-derived-from-size-table",
+        "operand16": "summary-66h-rule;requires-form-qualification",
+        "operand32Encoding": "unavailable",
+        "requiresRexForDefault64": false
+      }
+    },
+    {
+      "clauses": [
+        {
+          "cells": [
+            "pdf:245:cell:18",
+            "pdf:245:cell:19",
+            "pdf:245:cell:20"
+          ],
+          "text": "In 64-bit mode, the operand size defaults to 64 bits. The processor sign-extends the 8-bit or 32-bit displacement value to 64 bits before adding it to the RIP. These instructions cannot perform far jumps (to other code segments). To create a far-conditional-"
+        }
+      ],
+      "mnemonic": "Jcc",
+      "owner": "amd-entry:0061",
+      "ownerPages": [
+        245,
+        248
+      ],
+      "properties": {
+        "defaultOperandBits": 64,
+        "definiteGprWrites": "not-derived-from-size-table",
+        "operand16": "summary-66h-rule;requires-form-qualification",
+        "operand32Encoding": "not-defined-by-instruction-prose;summary-prohibits",
+        "requiresRexForDefault64": false
+      }
+    },
+    {
+      "clauses": [
+        {
+          "cells": [
+            "pdf:249:cell:10",
+            "pdf:249:cell:11",
+            "pdf:249:cell:12"
+          ],
+          "text": "The size of the count register (CX, ECX, or RCX) depends on the address-size attribute of the JrCXZ instruction. Therefore, JRCXZ can only be executed in 64-bit mode and JCXZ cannot be executed in 64-bit mode."
+        },
+        {
+          "cells": [
+            "pdf:249:cell:15",
+            "pdf:249:cell:16"
+          ],
+          "text": "In 64-bit mode, the operand size defaults to 64 bits. The processor sign-extends the 8-bit displacement value to 64 bits before adding it to the RIP."
+        }
+      ],
+      "mnemonic": "JrCXZ",
+      "owner": "amd-entry:0062",
+      "ownerPages": [
+        249,
+        249
+      ],
+      "properties": {
+        "countBits": "address-size:64-or-32;separate-from-operand-size",
+        "defaultOperandBits": 64,
+        "definiteGprWrites": "not-derived-from-size-table",
+        "displacementBits": 8,
+        "excludedAlias": "JCXZ:address16-unavailable",
+        "operand16": "summary-66h-rule;requires-form-qualification",
+        "operand32Encoding": "not-defined-by-instruction-prose;summary-prohibits",
+        "requiresRexForDefault64": false
+      }
+    },
+    {
+      "clauses": [
+        {
+          "cells": [
+            "pdf:250:cell:14",
+            "pdf:250:cell:15",
+            "pdf:250:cell:16"
+          ],
+          "text": "For near jumps in 64-bit mode, the operand size defaults to 64 bits. The E9 opcode results in RIP = RIP + 32-bit signed displacement, and the FF /4 opcode results in RIP = 64-bit offset from register or memory. No prefix is available to encode a 32-bit operand size in 64-bit mode."
+        }
+      ],
+      "mnemonic": "JMP",
+      "owner": "amd-entry:0063",
+      "ownerPages": [
+        250,
+        251
+      ],
+      "properties": {
+        "defaultOperandBits": 64,
+        "definiteGprWrites": "not-derived-from-size-table",
+        "operand16": "summary-66h-rule;requires-form-qualification",
+        "operand32Encoding": "unavailable",
+        "requiresRexForDefault64": false
+      }
+    },
+    {
+      "clauses": [
+        {
+          "cells": [
+            "pdf:262:cell:13",
+            "pdf:262:cell:14"
+          ],
+          "text": "In 64-bit mode, the LEAVE operand size defaults to 64 bits, and there is no prefix available for encoding a 32-bit operand size."
+        }
+      ],
+      "mnemonic": "LEAVE",
+      "owner": "amd-entry:0068",
+      "ownerPages": [
+        262,
+        262
+      ],
+      "properties": {
+        "defaultOperandBits": 64,
+        "definiteGprWrites": "not-derived-from-size-table",
+        "operand16": "summary-66h-rule;requires-form-qualification",
+        "operand32Encoding": "unavailable",
+        "requiresRexForDefault64": false
+      }
+    },
+    {
+      "clauses": [
+        {
+          "cells": [
+            "pdf:269:cell:12",
+            "pdf:269:cell:13",
+            "pdf:269:cell:14",
+            "pdf:269:cell:15",
+            "pdf:269:cell:16",
+            "pdf:269:cell:17",
+            "pdf:269:cell:18",
+            "pdf:269:cell:19",
+            "pdf:269:cell:20"
+          ],
+          "text": "The size of the count register used (CX, ECX, or RCX) depends on the address-size attribute of the LOOPcc instruction. The LOOP instruction ignores the state of the ZF flag. The LOOPE and LOOPZ instructions jump if rCX is not 0 and the ZF flag is set to 1. In other words, the instruction exits the loop (falls through to the next instruction) if rCX becomes 0 or ZF = 0. The LOOPNE and LOOPNZ instructions jump if rCX is not 0 and ZF flag is cleared to 0. In other words, the instruction exits the loop if rCX becomes 0 or ZF = 1. The LOOPcc instruction does not change the state of the ZF flag. Typically, the loop contains a compare instruction to set or clear the ZF flag."
+        },
+        {
+          "cells": [
+            "pdf:269:cell:23",
+            "pdf:269:cell:24"
+          ],
+          "text": "In 64-bit mode, the operand size defaults to 64 bits without the need for a REX prefix, and the processor sign-extends the 8-bit offset before adding it to the RIP."
+        }
+      ],
+      "mnemonic": "LOOP",
+      "owner": "amd-entry:0072",
+      "ownerPages": [
+        269,
+        270
+      ],
+      "properties": {
+        "countBits": "address-size:64-or-32;separate-from-operand-size",
+        "defaultOperandBits": 64,
+        "definiteGprWrites": "not-derived-from-size-table",
+        "displacementBits": 8,
+        "operand16": "summary-66h-rule;requires-form-qualification",
+        "operand32Encoding": "not-defined-by-instruction-prose;summary-prohibits",
+        "requiresRexForDefault64": false,
+        "zf": "ignored-by-LOOP;tested-but-not-written-by-LOOPE-LOOPNE"
+      }
+    },
+    {
+      "clauses": [
+        {
+          "cells": [
+            "pdf:269:cell:12",
+            "pdf:269:cell:13",
+            "pdf:269:cell:14",
+            "pdf:269:cell:15",
+            "pdf:269:cell:16",
+            "pdf:269:cell:17",
+            "pdf:269:cell:18",
+            "pdf:269:cell:19",
+            "pdf:269:cell:20"
+          ],
+          "text": "The size of the count register used (CX, ECX, or RCX) depends on the address-size attribute of the LOOPcc instruction. The LOOP instruction ignores the state of the ZF flag. The LOOPE and LOOPZ instructions jump if rCX is not 0 and the ZF flag is set to 1. In other words, the instruction exits the loop (falls through to the next instruction) if rCX becomes 0 or ZF = 0. The LOOPNE and LOOPNZ instructions jump if rCX is not 0 and ZF flag is cleared to 0. In other words, the instruction exits the loop if rCX becomes 0 or ZF = 1. The LOOPcc instruction does not change the state of the ZF flag. Typically, the loop contains a compare instruction to set or clear the ZF flag."
+        },
+        {
+          "cells": [
+            "pdf:269:cell:23",
+            "pdf:269:cell:24"
+          ],
+          "text": "In 64-bit mode, the operand size defaults to 64 bits without the need for a REX prefix, and the processor sign-extends the 8-bit offset before adding it to the RIP."
+        }
+      ],
+      "mnemonic": "LOOPcc",
+      "owner": "amd-entry:0072",
+      "ownerPages": [
+        269,
+        270
+      ],
+      "properties": {
+        "countBits": "address-size:64-or-32;separate-from-operand-size",
+        "defaultOperandBits": 64,
+        "definiteGprWrites": "not-derived-from-size-table",
+        "displacementBits": 8,
+        "operand16": "summary-66h-rule;requires-form-qualification",
+        "operand32Encoding": "not-defined-by-instruction-prose;summary-prohibits",
+        "requiresRexForDefault64": false,
+        "zf": "ignored-by-LOOP;tested-but-not-written-by-LOOPE-LOOPNE"
+      }
+    },
+    {
+      "clauses": [
+        {
+          "cells": [
+            "pdf:327:cell:7",
+            "pdf:327:cell:8",
+            "pdf:327:cell:9",
+            "pdf:327:cell:10",
+            "pdf:327:cell:11",
+            "pdf:327:cell:12",
+            "pdf:327:cell:13",
+            "pdf:327:cell:14",
+            "pdf:327:cell:15",
+            "pdf:327:cell:16",
+            "pdf:327:cell:17",
+            "pdf:327:cell:18",
+            "pdf:327:cell:19"
+          ],
+          "text": "The operand-size attribute determines the amount by which the stack pointer is incremented (2, 4 or 8 bytes). The stack-size attribute determines whether SP, ESP, or RSP is incremented. For forms of the instruction that load a segment register (POP DS, POP ES, POP FS, POP GS, POP SS), the source operand must be a valid segment selector. When a segment selector is popped into a segment register, the processor also loads all associated descriptor information into the hidden part of the register and validates it. It is possible to pop a null segment selector value (0000\u20130003h) into the DS, ES, FS, or GS register. This action does not cause a general protection fault, but a subsequent reference to such a segment does cause a #GP exception. For more information about segment selectors, see \u201cSegment Selectors and Registers\u201d in APM Volume 2. In 64-bit mode, the POP operand size defaults to 64 bits and there is no prefix available to encode a 32- bit operand size. Using POP DS, POP ES, or POP SS instruction in 64-bit mode generates an invalid- opcode exception."
+        }
+      ],
+      "mnemonic": "POP reg/mem",
+      "owner": "amd-entry:0103",
+      "ownerPages": [
+        327,
+        328
+      ],
+      "properties": {
+        "defaultOperandBits": 64,
+        "definiteGprWrites": "not-derived-from-size-table",
+        "operand16": "summary-66h-rule;requires-form-qualification",
+        "operand32Encoding": "unavailable",
+        "requiresRexForDefault64": false
+      }
+    },
+    {
+      "clauses": [
+        {
+          "cells": [
+            "pdf:327:cell:7",
+            "pdf:327:cell:8",
+            "pdf:327:cell:9",
+            "pdf:327:cell:10",
+            "pdf:327:cell:11",
+            "pdf:327:cell:12",
+            "pdf:327:cell:13",
+            "pdf:327:cell:14",
+            "pdf:327:cell:15",
+            "pdf:327:cell:16",
+            "pdf:327:cell:17",
+            "pdf:327:cell:18",
+            "pdf:327:cell:19"
+          ],
+          "text": "The operand-size attribute determines the amount by which the stack pointer is incremented (2, 4 or 8 bytes). The stack-size attribute determines whether SP, ESP, or RSP is incremented. For forms of the instruction that load a segment register (POP DS, POP ES, POP FS, POP GS, POP SS), the source operand must be a valid segment selector. When a segment selector is popped into a segment register, the processor also loads all associated descriptor information into the hidden part of the register and validates it. It is possible to pop a null segment selector value (0000\u20130003h) into the DS, ES, FS, or GS register. This action does not cause a general protection fault, but a subsequent reference to such a segment does cause a #GP exception. For more information about segment selectors, see \u201cSegment Selectors and Registers\u201d in APM Volume 2. In 64-bit mode, the POP operand size defaults to 64 bits and there is no prefix available to encode a 32- bit operand size. Using POP DS, POP ES, or POP SS instruction in 64-bit mode generates an invalid- opcode exception."
+        }
+      ],
+      "mnemonic": "POP reg",
+      "owner": "amd-entry:0103",
+      "ownerPages": [
+        327,
+        328
+      ],
+      "properties": {
+        "defaultOperandBits": 64,
+        "definiteGprWrites": "not-derived-from-size-table",
+        "operand16": "summary-66h-rule;requires-form-qualification",
+        "operand32Encoding": "unavailable",
+        "requiresRexForDefault64": false
+      }
+    },
+    {
+      "clauses": [
+        {
+          "cells": [
+            "pdf:327:cell:7",
+            "pdf:327:cell:8",
+            "pdf:327:cell:9",
+            "pdf:327:cell:10",
+            "pdf:327:cell:11",
+            "pdf:327:cell:12",
+            "pdf:327:cell:13",
+            "pdf:327:cell:14",
+            "pdf:327:cell:15",
+            "pdf:327:cell:16",
+            "pdf:327:cell:17",
+            "pdf:327:cell:18",
+            "pdf:327:cell:19"
+          ],
+          "text": "The operand-size attribute determines the amount by which the stack pointer is incremented (2, 4 or 8 bytes). The stack-size attribute determines whether SP, ESP, or RSP is incremented. For forms of the instruction that load a segment register (POP DS, POP ES, POP FS, POP GS, POP SS), the source operand must be a valid segment selector. When a segment selector is popped into a segment register, the processor also loads all associated descriptor information into the hidden part of the register and validates it. It is possible to pop a null segment selector value (0000\u20130003h) into the DS, ES, FS, or GS register. This action does not cause a general protection fault, but a subsequent reference to such a segment does cause a #GP exception. For more information about segment selectors, see \u201cSegment Selectors and Registers\u201d in APM Volume 2. In 64-bit mode, the POP operand size defaults to 64 bits and there is no prefix available to encode a 32- bit operand size. Using POP DS, POP ES, or POP SS instruction in 64-bit mode generates an invalid- opcode exception."
+        }
+      ],
+      "mnemonic": "POP FS",
+      "owner": "amd-entry:0103",
+      "ownerPages": [
+        327,
+        328
+      ],
+      "properties": {
+        "defaultOperandBits": 64,
+        "definiteGprWrites": "not-derived-from-size-table",
+        "operand16": "summary-66h-rule;requires-form-qualification",
+        "operand32Encoding": "unavailable",
+        "requiresRexForDefault64": false
+      }
+    },
+    {
+      "clauses": [
+        {
+          "cells": [
+            "pdf:327:cell:7",
+            "pdf:327:cell:8",
+            "pdf:327:cell:9",
+            "pdf:327:cell:10",
+            "pdf:327:cell:11",
+            "pdf:327:cell:12",
+            "pdf:327:cell:13",
+            "pdf:327:cell:14",
+            "pdf:327:cell:15",
+            "pdf:327:cell:16",
+            "pdf:327:cell:17",
+            "pdf:327:cell:18",
+            "pdf:327:cell:19"
+          ],
+          "text": "The operand-size attribute determines the amount by which the stack pointer is incremented (2, 4 or 8 bytes). The stack-size attribute determines whether SP, ESP, or RSP is incremented. For forms of the instruction that load a segment register (POP DS, POP ES, POP FS, POP GS, POP SS), the source operand must be a valid segment selector. When a segment selector is popped into a segment register, the processor also loads all associated descriptor information into the hidden part of the register and validates it. It is possible to pop a null segment selector value (0000\u20130003h) into the DS, ES, FS, or GS register. This action does not cause a general protection fault, but a subsequent reference to such a segment does cause a #GP exception. For more information about segment selectors, see \u201cSegment Selectors and Registers\u201d in APM Volume 2. In 64-bit mode, the POP operand size defaults to 64 bits and there is no prefix available to encode a 32- bit operand size. Using POP DS, POP ES, or POP SS instruction in 64-bit mode generates an invalid- opcode exception."
+        }
+      ],
+      "mnemonic": "POP GS",
+      "owner": "amd-entry:0103",
+      "ownerPages": [
+        327,
+        328
+      ],
+      "properties": {
+        "defaultOperandBits": 64,
+        "definiteGprWrites": "not-derived-from-size-table",
+        "operand16": "summary-66h-rule;requires-form-qualification",
+        "operand32Encoding": "unavailable",
+        "requiresRexForDefault64": false
+      }
+    },
+    {
+      "clauses": [
+        {
+          "cells": [
+            "pdf:332:cell:15",
+            "pdf:332:cell:16"
+          ],
+          "text": "In 64-bit mode, this instruction defaults to a 64-bit operand size; there is no prefix available to encode a 32-bit operand size."
+        },
+        {
+          "cells": [
+            "pdf:332:cell:20",
+            "pdf:332:cell:21",
+            "pdf:332:cell:22",
+            "pdf:332:cell:23",
+            "pdf:332:cell:24",
+            "pdf:332:cell:25",
+            "pdf:332:cell:26",
+            "pdf:332:cell:27",
+            "pdf:332:cell:28",
+            "pdf:332:cell:29"
+          ],
+          "text": "POPF 9D Pop a word from the stack into the FLAGS register. POPFD 9D Pop a double word from the stack into the EFLAGS register. (No prefix for encoding this in 64-bit mode.) POPFQ 9D Pop a quadword from the stack to the RFLAGS register."
+        }
+      ],
+      "mnemonic": "POPF, POPFD, POPFQ",
+      "owner": "amd-entry:0106",
+      "ownerPages": [
+        332,
+        334
+      ],
+      "properties": {
+        "defaultOperandBits": 64,
+        "definiteGprWrites": "not-derived-from-size-table",
+        "operand16": "summary-66h-rule;requires-form-qualification",
+        "operand32Encoding": "unavailable",
+        "requiresRexForDefault64": false
+      }
+    },
+    {
+      "clauses": [
+        {
+          "cells": [
+            "pdf:339:cell:7",
+            "pdf:339:cell:8",
+            "pdf:339:cell:9",
+            "pdf:339:cell:10"
+          ],
+          "text": "SS:rSP). The operand-size attribute determines the number of bytes pushed to the stack. The stack-size attribute determines whether SP, ESP, or RSP is the stack pointer. The address-size attribute is used only to locate the memory operand when pushing a memory operand to the stack."
+        },
+        {
+          "cells": [
+            "pdf:339:cell:15",
+            "pdf:339:cell:16",
+            "pdf:339:cell:17"
+          ],
+          "text": "In 64-bit mode, the operand size of all PUSH instructions defaults to 64 bits, and there is no prefix available to encode a 32-bit operand size. Using the PUSH CS, PUSH DS, PUSH ES, or PUSH SS instructions in 64-bit mode generates an invalid-opcode exception."
+        },
+        {
+          "cells": [
+            "pdf:339:cell:46",
+            "pdf:339:cell:47",
+            "pdf:339:cell:48",
+            "pdf:339:cell:49",
+            "pdf:339:cell:50",
+            "pdf:339:cell:51",
+            "pdf:339:cell:52",
+            "pdf:339:cell:53",
+            "pdf:339:cell:54",
+            "pdf:339:cell:55",
+            "pdf:339:cell:56",
+            "pdf:339:cell:57",
+            "pdf:339:cell:58",
+            "pdf:339:cell:59",
+            "pdf:339:cell:60"
+          ],
+          "text": "PUSH imm8 6A ib Push an 8-bit immediate value (sign-extended to 16, 32, or 64 bits) onto the stack. PUSH imm16 68 iw Push a 16-bit immediate value onto the stack. PUSH imm32 68 id Push a 32-bit immediate value onto the stack. (No prefix for encoding this in 64-bit mode.) PUSH imm64 68 id Push a sign-extended 32-bit immediate value onto the stack."
+        }
+      ],
+      "mnemonic": "PUSH imm8",
+      "owner": "amd-entry:0109",
+      "ownerPages": [
+        339,
+        340
+      ],
+      "properties": {
+        "addressSize": "explicit-memory-location;not-stack-payload-width",
+        "defaultOperandBits": 64,
+        "definiteGprWrites": "not-derived-from-size-table",
+        "immediateEncoding": "8-bit-sign-extended-to-operand-width",
+        "operand16": "summary-66h-rule;requires-form-qualification",
+        "operand32Encoding": "unavailable",
+        "requiresRexForDefault64": false
+      }
+    },
+    {
+      "clauses": [
+        {
+          "cells": [
+            "pdf:339:cell:7",
+            "pdf:339:cell:8",
+            "pdf:339:cell:9",
+            "pdf:339:cell:10"
+          ],
+          "text": "SS:rSP). The operand-size attribute determines the number of bytes pushed to the stack. The stack-size attribute determines whether SP, ESP, or RSP is the stack pointer. The address-size attribute is used only to locate the memory operand when pushing a memory operand to the stack."
+        },
+        {
+          "cells": [
+            "pdf:339:cell:15",
+            "pdf:339:cell:16",
+            "pdf:339:cell:17"
+          ],
+          "text": "In 64-bit mode, the operand size of all PUSH instructions defaults to 64 bits, and there is no prefix available to encode a 32-bit operand size. Using the PUSH CS, PUSH DS, PUSH ES, or PUSH SS instructions in 64-bit mode generates an invalid-opcode exception."
+        },
+        {
+          "cells": [
+            "pdf:339:cell:46",
+            "pdf:339:cell:47",
+            "pdf:339:cell:48",
+            "pdf:339:cell:49",
+            "pdf:339:cell:50",
+            "pdf:339:cell:51",
+            "pdf:339:cell:52",
+            "pdf:339:cell:53",
+            "pdf:339:cell:54",
+            "pdf:339:cell:55",
+            "pdf:339:cell:56",
+            "pdf:339:cell:57",
+            "pdf:339:cell:58",
+            "pdf:339:cell:59",
+            "pdf:339:cell:60"
+          ],
+          "text": "PUSH imm8 6A ib Push an 8-bit immediate value (sign-extended to 16, 32, or 64 bits) onto the stack. PUSH imm16 68 iw Push a 16-bit immediate value onto the stack. PUSH imm32 68 id Push a 32-bit immediate value onto the stack. (No prefix for encoding this in 64-bit mode.) PUSH imm64 68 id Push a sign-extended 32-bit immediate value onto the stack."
+        }
+      ],
+      "mnemonic": "PUSH imm32",
+      "owner": "amd-entry:0109",
+      "ownerPages": [
+        339,
+        340
+      ],
+      "properties": {
+        "addressSize": "explicit-memory-location;not-stack-payload-width",
+        "defaultOperandBits": 64,
+        "definiteGprWrites": "not-derived-from-size-table",
+        "immediateEncoding": "32-bit-sign-extended-to-default-64;16-bit-under-66h",
+        "operand16": "summary-66h-rule;requires-form-qualification",
+        "operand32Encoding": "unavailable",
+        "requiresRexForDefault64": false
+      }
+    },
+    {
+      "clauses": [
+        {
+          "cells": [
+            "pdf:339:cell:7",
+            "pdf:339:cell:8",
+            "pdf:339:cell:9",
+            "pdf:339:cell:10"
+          ],
+          "text": "SS:rSP). The operand-size attribute determines the number of bytes pushed to the stack. The stack-size attribute determines whether SP, ESP, or RSP is the stack pointer. The address-size attribute is used only to locate the memory operand when pushing a memory operand to the stack."
+        },
+        {
+          "cells": [
+            "pdf:339:cell:15",
+            "pdf:339:cell:16",
+            "pdf:339:cell:17"
+          ],
+          "text": "In 64-bit mode, the operand size of all PUSH instructions defaults to 64 bits, and there is no prefix available to encode a 32-bit operand size. Using the PUSH CS, PUSH DS, PUSH ES, or PUSH SS instructions in 64-bit mode generates an invalid-opcode exception."
+        },
+        {
+          "cells": [
+            "pdf:339:cell:46",
+            "pdf:339:cell:47",
+            "pdf:339:cell:48",
+            "pdf:339:cell:49",
+            "pdf:339:cell:50",
+            "pdf:339:cell:51",
+            "pdf:339:cell:52",
+            "pdf:339:cell:53",
+            "pdf:339:cell:54",
+            "pdf:339:cell:55",
+            "pdf:339:cell:56",
+            "pdf:339:cell:57",
+            "pdf:339:cell:58",
+            "pdf:339:cell:59",
+            "pdf:339:cell:60"
+          ],
+          "text": "PUSH imm8 6A ib Push an 8-bit immediate value (sign-extended to 16, 32, or 64 bits) onto the stack. PUSH imm16 68 iw Push a 16-bit immediate value onto the stack. PUSH imm32 68 id Push a 32-bit immediate value onto the stack. (No prefix for encoding this in 64-bit mode.) PUSH imm64 68 id Push a sign-extended 32-bit immediate value onto the stack."
+        }
+      ],
+      "mnemonic": "PUSH reg/mem",
+      "owner": "amd-entry:0109",
+      "ownerPages": [
+        339,
+        340
+      ],
+      "properties": {
+        "addressSize": "explicit-memory-location;not-stack-payload-width",
+        "defaultOperandBits": 64,
+        "definiteGprWrites": "not-derived-from-size-table",
+        "operand16": "summary-66h-rule;requires-form-qualification",
+        "operand32Encoding": "unavailable",
+        "requiresRexForDefault64": false
+      }
+    },
+    {
+      "clauses": [
+        {
+          "cells": [
+            "pdf:339:cell:7",
+            "pdf:339:cell:8",
+            "pdf:339:cell:9",
+            "pdf:339:cell:10"
+          ],
+          "text": "SS:rSP). The operand-size attribute determines the number of bytes pushed to the stack. The stack-size attribute determines whether SP, ESP, or RSP is the stack pointer. The address-size attribute is used only to locate the memory operand when pushing a memory operand to the stack."
+        },
+        {
+          "cells": [
+            "pdf:339:cell:15",
+            "pdf:339:cell:16",
+            "pdf:339:cell:17"
+          ],
+          "text": "In 64-bit mode, the operand size of all PUSH instructions defaults to 64 bits, and there is no prefix available to encode a 32-bit operand size. Using the PUSH CS, PUSH DS, PUSH ES, or PUSH SS instructions in 64-bit mode generates an invalid-opcode exception."
+        },
+        {
+          "cells": [
+            "pdf:339:cell:46",
+            "pdf:339:cell:47",
+            "pdf:339:cell:48",
+            "pdf:339:cell:49",
+            "pdf:339:cell:50",
+            "pdf:339:cell:51",
+            "pdf:339:cell:52",
+            "pdf:339:cell:53",
+            "pdf:339:cell:54",
+            "pdf:339:cell:55",
+            "pdf:339:cell:56",
+            "pdf:339:cell:57",
+            "pdf:339:cell:58",
+            "pdf:339:cell:59",
+            "pdf:339:cell:60"
+          ],
+          "text": "PUSH imm8 6A ib Push an 8-bit immediate value (sign-extended to 16, 32, or 64 bits) onto the stack. PUSH imm16 68 iw Push a 16-bit immediate value onto the stack. PUSH imm32 68 id Push a 32-bit immediate value onto the stack. (No prefix for encoding this in 64-bit mode.) PUSH imm64 68 id Push a sign-extended 32-bit immediate value onto the stack."
+        }
+      ],
+      "mnemonic": "PUSH reg",
+      "owner": "amd-entry:0109",
+      "ownerPages": [
+        339,
+        340
+      ],
+      "properties": {
+        "addressSize": "explicit-memory-location;not-stack-payload-width",
+        "defaultOperandBits": 64,
+        "definiteGprWrites": "not-derived-from-size-table",
+        "operand16": "summary-66h-rule;requires-form-qualification",
+        "operand32Encoding": "unavailable",
+        "requiresRexForDefault64": false
+      }
+    },
+    {
+      "clauses": [
+        {
+          "cells": [
+            "pdf:339:cell:7",
+            "pdf:339:cell:8",
+            "pdf:339:cell:9",
+            "pdf:339:cell:10"
+          ],
+          "text": "SS:rSP). The operand-size attribute determines the number of bytes pushed to the stack. The stack-size attribute determines whether SP, ESP, or RSP is the stack pointer. The address-size attribute is used only to locate the memory operand when pushing a memory operand to the stack."
+        },
+        {
+          "cells": [
+            "pdf:339:cell:15",
+            "pdf:339:cell:16",
+            "pdf:339:cell:17"
+          ],
+          "text": "In 64-bit mode, the operand size of all PUSH instructions defaults to 64 bits, and there is no prefix available to encode a 32-bit operand size. Using the PUSH CS, PUSH DS, PUSH ES, or PUSH SS instructions in 64-bit mode generates an invalid-opcode exception."
+        },
+        {
+          "cells": [
+            "pdf:339:cell:46",
+            "pdf:339:cell:47",
+            "pdf:339:cell:48",
+            "pdf:339:cell:49",
+            "pdf:339:cell:50",
+            "pdf:339:cell:51",
+            "pdf:339:cell:52",
+            "pdf:339:cell:53",
+            "pdf:339:cell:54",
+            "pdf:339:cell:55",
+            "pdf:339:cell:56",
+            "pdf:339:cell:57",
+            "pdf:339:cell:58",
+            "pdf:339:cell:59",
+            "pdf:339:cell:60"
+          ],
+          "text": "PUSH imm8 6A ib Push an 8-bit immediate value (sign-extended to 16, 32, or 64 bits) onto the stack. PUSH imm16 68 iw Push a 16-bit immediate value onto the stack. PUSH imm32 68 id Push a 32-bit immediate value onto the stack. (No prefix for encoding this in 64-bit mode.) PUSH imm64 68 id Push a sign-extended 32-bit immediate value onto the stack."
+        }
+      ],
+      "mnemonic": "PUSH FS",
+      "owner": "amd-entry:0109",
+      "ownerPages": [
+        339,
+        340
+      ],
+      "properties": {
+        "addressSize": "explicit-memory-location;not-stack-payload-width",
+        "defaultOperandBits": 64,
+        "definiteGprWrites": "not-derived-from-size-table",
+        "operand16": "summary-66h-rule;requires-form-qualification",
+        "operand32Encoding": "unavailable",
+        "requiresRexForDefault64": false
+      }
+    },
+    {
+      "clauses": [
+        {
+          "cells": [
+            "pdf:339:cell:7",
+            "pdf:339:cell:8",
+            "pdf:339:cell:9",
+            "pdf:339:cell:10"
+          ],
+          "text": "SS:rSP). The operand-size attribute determines the number of bytes pushed to the stack. The stack-size attribute determines whether SP, ESP, or RSP is the stack pointer. The address-size attribute is used only to locate the memory operand when pushing a memory operand to the stack."
+        },
+        {
+          "cells": [
+            "pdf:339:cell:15",
+            "pdf:339:cell:16",
+            "pdf:339:cell:17"
+          ],
+          "text": "In 64-bit mode, the operand size of all PUSH instructions defaults to 64 bits, and there is no prefix available to encode a 32-bit operand size. Using the PUSH CS, PUSH DS, PUSH ES, or PUSH SS instructions in 64-bit mode generates an invalid-opcode exception."
+        },
+        {
+          "cells": [
+            "pdf:339:cell:46",
+            "pdf:339:cell:47",
+            "pdf:339:cell:48",
+            "pdf:339:cell:49",
+            "pdf:339:cell:50",
+            "pdf:339:cell:51",
+            "pdf:339:cell:52",
+            "pdf:339:cell:53",
+            "pdf:339:cell:54",
+            "pdf:339:cell:55",
+            "pdf:339:cell:56",
+            "pdf:339:cell:57",
+            "pdf:339:cell:58",
+            "pdf:339:cell:59",
+            "pdf:339:cell:60"
+          ],
+          "text": "PUSH imm8 6A ib Push an 8-bit immediate value (sign-extended to 16, 32, or 64 bits) onto the stack. PUSH imm16 68 iw Push a 16-bit immediate value onto the stack. PUSH imm32 68 id Push a 32-bit immediate value onto the stack. (No prefix for encoding this in 64-bit mode.) PUSH imm64 68 id Push a sign-extended 32-bit immediate value onto the stack."
+        }
+      ],
+      "mnemonic": "PUSH GS",
+      "owner": "amd-entry:0109",
+      "ownerPages": [
+        339,
+        340
+      ],
+      "properties": {
+        "addressSize": "explicit-memory-location;not-stack-payload-width",
+        "defaultOperandBits": 64,
+        "definiteGprWrites": "not-derived-from-size-table",
+        "operand16": "summary-66h-rule;requires-form-qualification",
+        "operand32Encoding": "unavailable",
+        "requiresRexForDefault64": false
+      }
+    },
+    {
+      "clauses": [
+        {
+          "cells": [
+            "pdf:342:cell:9",
+            "pdf:342:cell:10",
+            "pdf:342:cell:11"
+          ],
+          "text": "The instruction pushes 2, 4, or 8 bytes, depending on the operand size. In 64-bit mode, this instruction defaults to a 64-bit operand size and there is no prefix available to encode a 32-bit operand size."
+        },
+        {
+          "cells": [
+            "pdf:342:cell:18",
+            "pdf:342:cell:19",
+            "pdf:342:cell:20",
+            "pdf:342:cell:21",
+            "pdf:342:cell:22",
+            "pdf:342:cell:23",
+            "pdf:342:cell:24",
+            "pdf:342:cell:25",
+            "pdf:342:cell:26",
+            "pdf:342:cell:27"
+          ],
+          "text": "PUSHF 9C Push the FLAGS word onto the stack. PUSHFD 9C Push the EFLAGS doubleword onto stack. (No prefix encoding this in 64-bit mode.) PUSHFQ 9C Push the RFLAGS quadword onto stack."
+        }
+      ],
+      "mnemonic": "PUSHF, PUSHFD, PUSHFQ",
+      "owner": "amd-entry:0111",
+      "ownerPages": [
+        342,
+        343
+      ],
+      "properties": {
+        "defaultOperandBits": 64,
+        "definiteGprWrites": "not-derived-from-size-table",
+        "operand16": "summary-66h-rule;requires-form-qualification",
+        "operand32Encoding": "unavailable",
+        "requiresRexForDefault64": false
+      }
+    },
+    {
+      "clauses": [
+        {
+          "cells": [
+            "pdf:353:cell:11",
+            "pdf:353:cell:12"
+          ],
+          "text": "In 64-bit mode, the operand size defaults to 64 bits (eight bytes) without the need for a REX prefix. No prefix is available to encode a 32-bit operand size in 64-bit mode."
+        }
+      ],
+      "mnemonic": "RET",
+      "owner": "amd-entry:0119",
+      "ownerPages": [
+        353,
+        354
+      ],
+      "properties": {
+        "defaultOperandBits": 64,
+        "definiteGprWrites": "not-derived-from-size-table",
+        "operand16": "summary-66h-rule;requires-form-qualification",
+        "operand32Encoding": "unavailable",
+        "requiresRexForDefault64": false
+      }
+    }
+  ],
+  "executionModes": [
+    "long-64"
+  ],
+  "pages": {
+    "178": "2c2f1c623658a0e7ec28669f374d14a3f530b3d00f099d38c879dff700cfcc90",
+    "179": "a870c1ca489c86c9d16e123ac8af519a069481843363b08fd4da394d1ac827ab",
+    "180": "a8635f68b202c3724f5fbca0f6013541dfb4915d38679d3fb2a1b641c0928447",
+    "224": "d6d857c8f833631d700ae671509184a0ed51bc67e0829d878647786a37c64474",
+    "225": "a341b1e719a0112023b5f830536d77058439fa5c4ed5387ac096cefd2978c5d3",
+    "245": "0b3facee4af7f6a6a9eb9f85d87e546f85b0abc8552e8361e505d5ccb573ae85",
+    "246": "8a89fce43bff1401424f4487845966010603ff99f501cd5845c42ad107416827",
+    "247": "656ed0a209bd4573881ad434973c38842125cf004d848bd81466eec607f2fbcc",
+    "248": "52f877e2fd60ff216656037a84b39d96ed3133ed3dda7009a723a4d4fa20f99c",
+    "249": "8e85b56ae1bfff29d6a4320efcd1a2be3f5b1bac37d6d84ee25bbd28469a7822",
+    "250": "a2c008df186a227aa1759cfacc013758528d8e01ac307ef2f4a80c4aa78bd750",
+    "251": "c8e1ebd433f17727ebab072685fc1e29c95f0d872f40a8826b2d02a6f6b7c34b",
+    "262": "4c6c63d872d44a2125d48149717b8ce5775f306b6d6f73534217367b8701af30",
+    "269": "c86420905b66203ca9c4462d205b4f0920d3c86cafee29ae427c903e746c3341",
+    "270": "0102bf93e35345185ba5ce800a2f9b44c684a2de1231c6ec3c6da4d3e3797fbf",
+    "327": "31168f0f814ef14967ba1219f4d07a2ee256c8cb917038f6f1e505a3e54b3f1c",
+    "328": "3da928f6d230a468836f7cdc5778d1ed3a2b34c1bf7892a72163652655662870",
+    "332": "e85a2e443959b0b8e63912c672aaa60755d16e51ef20d8796868b640f750deab",
+    "333": "2ddfbd64da439de68fdb775279ef2053b957b1c3c732f00d6075fb4ecb5a8778",
+    "334": "ce77d27c7fa8de26e261f487841b8af475bc5c45bcca72aea53375692748b944",
+    "339": "ba6df505c784d62030b440d0ca46da2823dc2624a73204c9c8ce92c585150edc",
+    "340": "17e7506c97dc382acc518fddf5d4f4a30f1de22ed402fa521825d9355ed50490",
+    "342": "b5d0e58aea33803614b91df939386657d4a015066a472cb209538f177ff17a4f",
+    "343": "633bc2a6467b9e0f9d48a9c14b40f98edb9c2e5009c4c8b754337f944a26e6aa",
+    "353": "d34bbe2196b356848535fd04fd31d72313b851619b0d85ca3d5bc96ca2a49223",
+    "354": "19abd91e4da54e5f57c8314388a3f166040b628a80350ed57042c5d32c5ec058",
+    "627": "364d0666413f1ad8db7c4792d4140c6eb32e6c1c8335fcf77a11a4b457bbb983",
+    "628": "a217634b5cbf669131b9b8536f297257a3fa5e29d5c0f9026cf5a9d34feacc3f",
+    "629": "870e434a5a289b0eabc1e58b35654d74caeb5cfcd1c8428cee658992e26da2ad",
+    "630": "99c1791c21eef4ddf09afb775522b2716f7598840a378c9ebe8a1b993ae7777f",
+    "631": "2703b6f40c8e069ce8d852495bc244f2c8b6b06c4a7edaa118afcbe1316c8ba5",
+    "632": "2c3afec6416c785e3eda85107030dc85e55e3f20fb40176c7680f6b1e882964d",
+    "633": "ef5032a3fcd9482ffb9eec4b6621d21bc334e3e779acb785c4be389d5985856b",
+    "634": "da36f5aeb39c14b23c2eefb87bcd1a7baf7f7ac8b6b4c17abc1c2639b8461b46",
+    "635": "5af066b1a89d7d69ee598591f71828f2444cb8c4aef6da8773dd5d5dd669e99e",
+    "636": "95d6b8487000da078fc017544c4d8b27538a15de436a85c26805397bf8e5afdd",
+    "637": "b373dd763051d2724bee9547d486d5db0b806c2482ac21ca14c3da548a15fb7f",
+    "638": "309a50c1fe8ae4c5cd9412cdbf107e44e87f2bb58d5c276f7442216430d583f8",
+    "639": "67655c826dc0258f8a27967c6ddad3dcf6075930908a9a770ed7937d12ad43be",
+    "640": "ad44384e58f9884092e57874250e54e57e7bacb571d94e68610dfa545436282e",
+    "641": "af3aacc9844ce8806c57633ea8443c9faa9f6e755c5515ead7ffce9d2ce73f93",
+    "642": "10acb2f07dc90fcc90ebae3f9f2f6fabaeb713a59cfddec65e96dbd21af09aa2",
+    "643": "67259bd844fa552a93f1df2e2bb5b2ddffca3dcd54c81048f9fb256f78963618",
+    "644": "67bb00a37a836ba64b23025fdcad359ad3b4f32555b6e0cd7567491afc5eb545",
+    "645": "2560587dc316baf89f7eeabb3a729357f67453594bab3a4243adc42b0ec25e1a",
+    "646": "04f0a3e79a8740d6fc3a1e22587449e8ef67594edf7366e694990b742b33c05a",
+    "647": "9aba864ca8a1295932efbcc361a06aa3509d9c5a3f2ff43526dc5b5951397835",
+    "648": "df754e56f4762d120d6bce8b4cdab84f3110e0ac0989e8d06003332c0178e6b6",
+    "649": "691739a40ad083a24d08190eeb2740bd9d2950d917d414e4c8765a7af6587079",
+    "650": "9c6abf96cc803b843a3eeba805e2f0d4a8af8557ddb9e1197153131443053478",
+    "651": "20441eecc67bfbd210a8e04589b4742d48413c6d69618f02d79017d4c1eefd18",
+    "652": "8df5f2ad032a74106a81d46c49e63f28fb2f3c79b0658f54ed3e3485a3a5b4f4",
+    "653": "e928fe943b06296b301e0d37b9e99309bedd510ff0a66995b10beba7598ae8af",
+    "654": "31e0fdc3e7a2ed4639a57ac2471ab5ddb96355fc6dd63325a898cebd8db4cc02",
+    "655": "c42d2dc90d7f4f7b32985c30c0933a5a5ea3ab58726add53f3411e9d4d622c8c",
+    "656": "46027b291885b3b925aa4528cba37f84b7a8b8cf02f750b9e10b806e071281d8"
+  },
+  "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+  "publication": "24594",
+  "schema": "ariadne.amd64-native64-inventory/v1",
+  "sizeTableHeadings": {
+    "628": [
+      {
+        "id": "pdf:628:cell:23",
+        "text": "AAA - ASCII Adjust after Addition"
+      },
+      {
+        "id": "pdf:628:cell:25",
+        "text": "AAD - ASCII Adjust AX before Division"
+      },
+      {
+        "id": "pdf:628:cell:27",
+        "text": "AAM - ASCII Adjust AX after Multiply"
+      },
+      {
+        "id": "pdf:628:cell:29",
+        "text": "AAS - ASCII Adjust AL after Subtraction"
+      }
+    ],
+    "629": [
+      {
+        "id": "pdf:629:cell:34",
+        "text": "ADC\u2014Add with Carry"
+      },
+      {
+        "id": "pdf:629:cell:40",
+        "text": "ADD\u2014Signed or Unsigned Add"
+      },
+      {
+        "id": "pdf:629:cell:46",
+        "text": "AND\u2014Logical AND"
+      },
+      {
+        "id": "pdf:629:cell:52",
+        "text": "ARPL - Adjust Requestor Privilege Level"
+      },
+      {
+        "id": "pdf:629:cell:54",
+        "text": "BOUND - Check Array Against Bounds"
+      },
+      {
+        "id": "pdf:629:cell:56",
+        "text": "BSF\u2014Bit Scan Forward"
+      }
+    ],
+    "630": [
+      {
+        "id": "pdf:630:cell:7",
+        "text": "BSR\u2014Bit Scan Reverse"
+      },
+      {
+        "id": "pdf:630:cell:9",
+        "text": "BSWAP\u2014Byte Swap"
+      },
+      {
+        "id": "pdf:630:cell:11",
+        "text": "BT\u2014Bit Test"
+      },
+      {
+        "id": "pdf:630:cell:14",
+        "text": "BTC\u2014Bit Test and Complement"
+      },
+      {
+        "id": "pdf:630:cell:17",
+        "text": "BTR\u2014Bit Test and Reset"
+      },
+      {
+        "id": "pdf:630:cell:20",
+        "text": "BTS\u2014Bit Test and Set"
+      },
+      {
+        "id": "pdf:630:cell:23",
+        "text": "CALL\u2014Procedure Call Near"
+      }
+    ],
+    "631": [
+      {
+        "id": "pdf:631:cell:7",
+        "text": "CALL\u2014Procedure Call Far"
+      },
+      {
+        "id": "pdf:631:cell:10",
+        "text": "CBW, CWDE, CDQE\u2014Convert Byte to"
+      },
+      {
+        "id": "pdf:631:cell:41",
+        "text": "CDQ"
+      },
+      {
+        "id": "pdf:631:cell:43",
+        "text": "CDQE (new mnemonic)"
+      },
+      {
+        "id": "pdf:631:cell:45",
+        "text": "CDWE"
+      },
+      {
+        "id": "pdf:631:cell:47",
+        "text": "CLC\u2014Clear Carry Flag"
+      },
+      {
+        "id": "pdf:631:cell:49",
+        "text": "CLD\u2014Clear Direction Flag"
+      },
+      {
+        "id": "pdf:631:cell:51",
+        "text": "CLFLUSH\u2014Cache Line Invalidate"
+      },
+      {
+        "id": "pdf:631:cell:53",
+        "text": "CLGI\u2014Clear Global Interrupt"
+      },
+      {
+        "id": "pdf:631:cell:55",
+        "text": "CLI\u2014Clear Interrupt Flag"
+      }
+    ],
+    "632": [
+      {
+        "id": "pdf:632:cell:7",
+        "text": "CLTS\u2014Clear Task-Switched Flag in"
+      },
+      {
+        "id": "pdf:632:cell:10",
+        "text": "CMC\u2014Complement Carry Flag"
+      },
+      {
+        "id": "pdf:632:cell:25",
+        "text": "CMOVcc\u2014Conditional Move"
+      },
+      {
+        "id": "pdf:632:cell:44",
+        "text": "CMP\u2014Compare"
+      },
+      {
+        "id": "pdf:632:cell:50",
+        "text": "CMPS, CMPSW, CMPSD, CMPSQ\u2014"
+      },
+      {
+        "id": "pdf:632:cell:53",
+        "text": "CMPXCHG\u2014Compare and Exchange"
+      }
+    ],
+    "633": [
+      {
+        "id": "pdf:633:cell:7",
+        "text": "CMPXCHG8B\u2014Compare and"
+      },
+      {
+        "id": "pdf:633:cell:10",
+        "text": "CPUID\u2014Processor Identification"
+      },
+      {
+        "id": "pdf:633:cell:18",
+        "text": "CQO (new mnemonic)"
+      },
+      {
+        "id": "pdf:633:cell:19",
+        "text": "CWD, CDQ, CQO\u2014Convert Word to"
+      },
+      {
+        "id": "pdf:633:cell:49",
+        "text": "DAA - Decimal Adjust AL after Addition"
+      },
+      {
+        "id": "pdf:633:cell:24",
+        "text": "DAS - Decimal Adjust AL after"
+      }
+    ],
+    "634": [
+      {
+        "id": "pdf:634:cell:7",
+        "text": "DEC\u2014Decrement by 1"
+      },
+      {
+        "id": "pdf:634:cell:24",
+        "text": "DIV\u2014Unsigned Divide"
+      },
+      {
+        "id": "pdf:634:cell:26",
+        "text": "ENTER\u2014Create Procedure Stack"
+      },
+      {
+        "id": "pdf:634:cell:29",
+        "text": "HLT\u2014Halt"
+      },
+      {
+        "id": "pdf:634:cell:50",
+        "text": "IDIV\u2014Signed Divide"
+      }
+    ],
+    "635": [
+      {
+        "id": "pdf:635:cell:14",
+        "text": "IMUL - Signed Multiply"
+      },
+      {
+        "id": "pdf:635:cell:35",
+        "text": "IN\u2014Input From Port"
+      },
+      {
+        "id": "pdf:635:cell:38",
+        "text": "INC\u2014Increment by 1"
+      },
+      {
+        "id": "pdf:635:cell:41",
+        "text": "INS, INSW, INSD\u2014Input String"
+      },
+      {
+        "id": "pdf:635:cell:66",
+        "text": "INT n\u2014Interrupt to Vector"
+      },
+      {
+        "id": "pdf:635:cell:68",
+        "text": "INT3\u2014Interrupt to Debug Vector"
+      },
+      {
+        "id": "pdf:635:cell:72",
+        "text": "INTO - Interrupt to Overflow Vector"
+      }
+    ],
+    "636": [
+      {
+        "id": "pdf:636:cell:7",
+        "text": "INVD\u2014Invalidate Internal Caches"
+      },
+      {
+        "id": "pdf:636:cell:9",
+        "text": "INVLPG\u2014Invalidate TLB Entry"
+      },
+      {
+        "id": "pdf:636:cell:11",
+        "text": "INVLPGA\u2014Invalidate TLB Entry in a"
+      },
+      {
+        "id": "pdf:636:cell:58",
+        "text": "IRET, IRETD, IRETQ\u2014Interrupt Return"
+      },
+      {
+        "id": "pdf:636:cell:18",
+        "text": "Jcc\u2014Jump Conditional"
+      },
+      {
+        "id": "pdf:636:cell:51",
+        "text": "JCXZ, JECXZ, JRCXZ\u2014Jump on"
+      }
+    ],
+    "637": [
+      {
+        "id": "pdf:637:cell:7",
+        "text": "JMP\u2014Jump Near"
+      },
+      {
+        "id": "pdf:637:cell:44",
+        "text": "JMP\u2014Jump Far"
+      },
+      {
+        "id": "pdf:637:cell:28",
+        "text": "LAHF - Load Status Flags into AH"
+      },
+      {
+        "id": "pdf:637:cell:31",
+        "text": "LAR\u2014Load Access Rights Byte"
+      },
+      {
+        "id": "pdf:637:cell:33",
+        "text": "LDS - Load DS Far Pointer"
+      }
+    ],
+    "638": [
+      {
+        "id": "pdf:638:cell:25",
+        "text": "LEA\u2014Load Effective Address"
+      },
+      {
+        "id": "pdf:638:cell:18",
+        "text": "LEAVE\u2014Delete Procedure Stack Frame Promoted to"
+      },
+      {
+        "id": "pdf:638:cell:27",
+        "text": "LES - Load ES Far Pointer"
+      },
+      {
+        "id": "pdf:638:cell:29",
+        "text": "LFENCE\u2014Load Fence"
+      },
+      {
+        "id": "pdf:638:cell:31",
+        "text": "LFS\u2014Load FS Far Pointer"
+      },
+      {
+        "id": "pdf:638:cell:33",
+        "text": "LGDT\u2014Load Global Descriptor Table"
+      },
+      {
+        "id": "pdf:638:cell:36",
+        "text": "LGS\u2014Load GS Far Pointer"
+      },
+      {
+        "id": "pdf:638:cell:38",
+        "text": "LIDT\u2014Load Interrupt Descriptor Table"
+      },
+      {
+        "id": "pdf:638:cell:41",
+        "text": "LLDT\u2014Load Local Descriptor Table"
+      },
+      {
+        "id": "pdf:638:cell:44",
+        "text": "LMSW\u2014Load Machine Status Word"
+      }
+    ],
+    "639": [
+      {
+        "id": "pdf:639:cell:12",
+        "text": "LODS, LODSW, LODSD, LODSQ\u2014"
+      },
+      {
+        "id": "pdf:639:cell:35",
+        "text": "LOOP\u2014Loop"
+      },
+      {
+        "id": "pdf:639:cell:37",
+        "text": "LOOPZ, LOOPE\u2014Loop if Zero/Equal"
+      },
+      {
+        "id": "pdf:639:cell:39",
+        "text": "LOOPNZ, LOOPNE\u2014Loop if Not"
+      },
+      {
+        "id": "pdf:639:cell:51",
+        "text": "LSL\u2014Load Segment Limit"
+      },
+      {
+        "id": "pdf:639:cell:53",
+        "text": "LSS \u2014Load SS Segment Register"
+      },
+      {
+        "id": "pdf:639:cell:55",
+        "text": "LTR\u2014Load Task Register"
+      },
+      {
+        "id": "pdf:639:cell:73",
+        "text": "LZCNT\u2014Count Leading Zeros"
+      },
+      {
+        "id": "pdf:639:cell:77",
+        "text": "MFENCE\u2014Memory Fence"
+      },
+      {
+        "id": "pdf:639:cell:82",
+        "text": "MONITOR\u2014Setup Monitor Address"
+      }
+    ],
+    "640": [
+      {
+        "id": "pdf:640:cell:16",
+        "text": "MOV\u2014Move"
+      },
+      {
+        "id": "pdf:640:cell:37",
+        "text": "MOV\u2014Move to/from Segment Registers"
+      },
+      {
+        "id": "pdf:640:cell:40",
+        "text": "MOV(CRn)\u2014Move to/from Control"
+      },
+      {
+        "id": "pdf:640:cell:75",
+        "text": "MOV(DRn)\u2014Move to/from Debug"
+      }
+    ],
+    "641": [
+      {
+        "id": "pdf:641:cell:12",
+        "text": "MOVD\u2014Move Doubleword or"
+      },
+      {
+        "id": "pdf:641:cell:27",
+        "text": "MOVNTI\u2014Move Non-Temporal"
+      },
+      {
+        "id": "pdf:641:cell:30",
+        "text": "MOVS, MOVSW, MOVSD, MOVSQ\u2014"
+      },
+      {
+        "id": "pdf:641:cell:58",
+        "text": "MOVSX\u2014Move with Sign-Extend"
+      }
+    ],
+    "642": [
+      {
+        "id": "pdf:642:cell:7",
+        "text": "MOVSXD\u2014Move with Sign-Extend"
+      },
+      {
+        "id": "pdf:642:cell:49",
+        "text": "MOVZX\u2014Move with Zero-Extend"
+      },
+      {
+        "id": "pdf:642:cell:54",
+        "text": "MUL\u2014Multiply Unsigned"
+      },
+      {
+        "id": "pdf:642:cell:56",
+        "text": "MWAIT\u2014Monitor Wait"
+      },
+      {
+        "id": "pdf:642:cell:58",
+        "text": "NEG\u2014Negate Two\u2019s Complement"
+      },
+      {
+        "id": "pdf:642:cell:60",
+        "text": "NOP\u2014No Operation"
+      },
+      {
+        "id": "pdf:642:cell:62",
+        "text": "NOT\u2014Negate One\u2019s Complement"
+      }
+    ],
+    "643": [
+      {
+        "id": "pdf:643:cell:29",
+        "text": "OR\u2014Logical OR"
+      },
+      {
+        "id": "pdf:643:cell:35",
+        "text": "OUT\u2014Output to Port"
+      },
+      {
+        "id": "pdf:643:cell:38",
+        "text": "OUTS, OUTSW, OUTSD\u2014Output String"
+      },
+      {
+        "id": "pdf:643:cell:40",
+        "text": "PAUSE\u2014Pause"
+      },
+      {
+        "id": "pdf:643:cell:42",
+        "text": "POP\u2014Pop Stack"
+      },
+      {
+        "id": "pdf:643:cell:45",
+        "text": "POP\u2014Pop (segment register from)"
+      }
+    ],
+    "644": [
+      {
+        "id": "pdf:644:cell:7",
+        "text": "POPA, POPAD\u2014Pop All to GPR Words"
+      },
+      {
+        "id": "pdf:644:cell:20",
+        "text": "POPCNT\u2014Bit Population Count"
+      },
+      {
+        "id": "pdf:644:cell:36",
+        "text": "POPF, POPFD, POPFQ\u2014Pop to"
+      },
+      {
+        "id": "pdf:644:cell:39",
+        "text": "PREFETCH\u2014Prefetch L1 Data-Cache"
+      },
+      {
+        "id": "pdf:644:cell:42",
+        "text": "PREFETCHlevel\u2014Prefetch Data to"
+      },
+      {
+        "id": "pdf:644:cell:54",
+        "text": "PREFETCHW\u2014Prefetch L1 Data-Cache"
+      },
+      {
+        "id": "pdf:644:cell:60",
+        "text": "PUSH\u2014Push onto Stack"
+      }
+    ],
+    "645": [
+      {
+        "id": "pdf:645:cell:7",
+        "text": "PUSH\u2014Push (segment register) onto"
+      },
+      {
+        "id": "pdf:645:cell:29",
+        "text": "PUSHA, PUSHAD - Push All to GPR"
+      },
+      {
+        "id": "pdf:645:cell:33",
+        "text": "PUSHF, PUSHFD, PUSHFQ\u2014Push"
+      },
+      {
+        "id": "pdf:645:cell:55",
+        "text": "RCL\u2014Rotate Through Carry Left"
+      },
+      {
+        "id": "pdf:645:cell:59",
+        "text": "RCR\u2014Rotate Through Carry Right"
+      },
+      {
+        "id": "pdf:645:cell:63",
+        "text": "RDMSR\u2014Read Model-Specific Register"
+      }
+    ],
+    "646": [
+      {
+        "id": "pdf:646:cell:7",
+        "text": "RDPMC\u2014Read Performance-"
+      },
+      {
+        "id": "pdf:646:cell:10",
+        "text": "RDTSC\u2014Read Time-Stamp Counter"
+      },
+      {
+        "id": "pdf:646:cell:12",
+        "text": "RDTSCP\u2014Read Time-Stamp Counter"
+      },
+      {
+        "id": "pdf:646:cell:15",
+        "text": "REP INS\u2014Repeat Input String"
+      },
+      {
+        "id": "pdf:646:cell:17",
+        "text": "REP LODS\u2014Repeat Load String"
+      },
+      {
+        "id": "pdf:646:cell:19",
+        "text": "REP MOVS\u2014Repeat Move String"
+      },
+      {
+        "id": "pdf:646:cell:21",
+        "text": "REP OUTS\u2014Repeat Output String to"
+      },
+      {
+        "id": "pdf:646:cell:24",
+        "text": "REP STOS\u2014Repeat Store String"
+      },
+      {
+        "id": "pdf:646:cell:26",
+        "text": "REPx CMPS \u2014Repeat Compare String"
+      }
+    ],
+    "647": [
+      {
+        "id": "pdf:647:cell:7",
+        "text": "REPx SCAS \u2014Repeat Scan String"
+      },
+      {
+        "id": "pdf:647:cell:9",
+        "text": "RET\u2014Return from Call Near"
+      },
+      {
+        "id": "pdf:647:cell:12",
+        "text": "RET\u2014Return from Call Far"
+      },
+      {
+        "id": "pdf:647:cell:76",
+        "text": "ROL\u2014Rotate Left"
+      },
+      {
+        "id": "pdf:647:cell:66",
+        "text": "ROR\u2014Rotate Right"
+      },
+      {
+        "id": "pdf:647:cell:53",
+        "text": "RSM\u2014Resume from System"
+      },
+      {
+        "id": "pdf:647:cell:56",
+        "text": "SAHF\u2014Store AH into Flags"
+      },
+      {
+        "id": "pdf:647:cell:61",
+        "text": "SAL\u2014Shift Arithmetic Left"
+      }
+    ],
+    "648": [
+      {
+        "id": "pdf:648:cell:27",
+        "text": "SAR\u2014Shift Arithmetic Right"
+      },
+      {
+        "id": "pdf:648:cell:33",
+        "text": "SBB\u2014Subtract with Borrow"
+      },
+      {
+        "id": "pdf:648:cell:39",
+        "text": "SCAS, SCASW, SCASD, SCASQ\u2014"
+      },
+      {
+        "id": "pdf:648:cell:52",
+        "text": "SFENCE\u2014Store Fence"
+      },
+      {
+        "id": "pdf:648:cell:54",
+        "text": "SGDT\u2014Store Global Descriptor Table"
+      },
+      {
+        "id": "pdf:648:cell:69",
+        "text": "SHL\u2014Shift Left"
+      }
+    ],
+    "649": [
+      {
+        "id": "pdf:649:cell:7",
+        "text": "SHLD\u2014Shift Left Double"
+      },
+      {
+        "id": "pdf:649:cell:38",
+        "text": "SHR\u2014Shift Right"
+      },
+      {
+        "id": "pdf:649:cell:42",
+        "text": "SHRD\u2014Shift Right Double"
+      },
+      {
+        "id": "pdf:649:cell:45",
+        "text": "SIDT\u2014Store Interrupt Descriptor Table"
+      },
+      {
+        "id": "pdf:649:cell:48",
+        "text": "SKINIT\u2014Secure Init and Jump with"
+      },
+      {
+        "id": "pdf:649:cell:51",
+        "text": "SLDT\u2014Store Local Descriptor Table"
+      },
+      {
+        "id": "pdf:649:cell:54",
+        "text": "SMSW\u2014Store Machine Status Word"
+      },
+      {
+        "id": "pdf:649:cell:56",
+        "text": "STC\u2014Set Carry Flag"
+      },
+      {
+        "id": "pdf:649:cell:58",
+        "text": "STD\u2014Set Direction Flag"
+      }
+    ],
+    "650": [
+      {
+        "id": "pdf:650:cell:7",
+        "text": "STGI\u2014Set Global Interrupt Flag"
+      },
+      {
+        "id": "pdf:650:cell:9",
+        "text": "STI - Set Interrupt Flag"
+      },
+      {
+        "id": "pdf:650:cell:11",
+        "text": "STOS, STOSW, STOSD, STOSQ- Store"
+      },
+      {
+        "id": "pdf:650:cell:14",
+        "text": "STR\u2014Store Task Register"
+      },
+      {
+        "id": "pdf:650:cell:52",
+        "text": "SUB\u2014Subtract"
+      },
+      {
+        "id": "pdf:650:cell:61",
+        "text": "SWAPGS\u2014Swap GS Register with"
+      },
+      {
+        "id": "pdf:650:cell:64",
+        "text": "SYSCALL\u2014Fast System Call"
+      }
+    ],
+    "651": [
+      {
+        "id": "pdf:651:cell:7",
+        "text": "SYSENTER\u2014System Call"
+      },
+      {
+        "id": "pdf:651:cell:9",
+        "text": "SYSEXIT\u2014System Return"
+      },
+      {
+        "id": "pdf:651:cell:11",
+        "text": "SYSRET\u2014Fast System Return"
+      },
+      {
+        "id": "pdf:651:cell:34",
+        "text": "TEST\u2014Test Bits"
+      },
+      {
+        "id": "pdf:651:cell:38",
+        "text": "UD2\u2014Undefined Operation"
+      },
+      {
+        "id": "pdf:651:cell:40",
+        "text": "VERR\u2014Verify Segment for Reads"
+      },
+      {
+        "id": "pdf:651:cell:42",
+        "text": "VERW\u2014Verify Segment for Writes"
+      },
+      {
+        "id": "pdf:651:cell:44",
+        "text": "VMLOAD\u2014Load State from VMCB"
+      },
+      {
+        "id": "pdf:651:cell:46",
+        "text": "VMMCALL\u2014Call VMM"
+      },
+      {
+        "id": "pdf:651:cell:48",
+        "text": "VMRUN\u2014Run Virtual Machine"
+      },
+      {
+        "id": "pdf:651:cell:50",
+        "text": "VMSAVE\u2014Save State to VMCB"
+      }
+    ],
+    "652": [
+      {
+        "id": "pdf:652:cell:7",
+        "text": "WAIT\u2014Wait for Interrupt"
+      },
+      {
+        "id": "pdf:652:cell:9",
+        "text": "WBINVD\u2014Writeback and Invalidate All"
+      },
+      {
+        "id": "pdf:652:cell:12",
+        "text": "WRMSR\u2014Write to Model-Specific"
+      },
+      {
+        "id": "pdf:652:cell:15",
+        "text": "XADD\u2014Exchange and Add"
+      },
+      {
+        "id": "pdf:652:cell:17",
+        "text": "XCHG\u2014Exchange Register/Memory"
+      },
+      {
+        "id": "pdf:652:cell:59",
+        "text": "XOR\u2014Logical Exclusive OR"
+      }
+    ]
+  },
+  "sourcePolicySha256": "d1caf84927162bb696185eed4880007aa92ded2260738c940cdeb935ee8a1840"
+}

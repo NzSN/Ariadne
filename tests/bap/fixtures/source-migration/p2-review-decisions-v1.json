@@ -1,0 +1,1494 @@
+{
+  "boundaryDispositions": {
+    "conversion:ph-legacy-denormal-scope": {
+      "checks": [],
+      "originalSha256": "498cf3c592a5194d5db3e6cb916b5eb3de2f2b85a08a1be2b061034d229ced4f",
+      "reason": "A legacy no-denormal prose claim and a F16C-labelled denormal exception row require adjudication.",
+      "rules": [],
+      "state": "unresolved"
+    },
+    "conversion:ph-ymm-clear-overlap": {
+      "checks": [],
+      "originalSha256": "cf332761becbad0c1db236dbaaf71c18166c63d132eeaa2ec98e1e5967ac6c11",
+      "reason": "The stated clear range overlaps the upper half of the declared eight-lane result; do not generate definite writes.",
+      "rules": [],
+      "state": "unresolved"
+    },
+    "conversion:psx-feature-width-scope": {
+      "checks": [],
+      "originalSha256": "ca0361942b7da6195a209d1e7eaec59b3cc1a939d9f8f750fd8b66e115b7a237",
+      "reason": "The aggregate feature row does not separately identify its width-dependent applicability.",
+      "rules": [],
+      "state": "unresolved"
+    },
+    "conversion:psx-rounding-er-scope": {
+      "checks": [],
+      "originalSha256": "89b03ad2fb37f619c9b5af856ce9767a96dd88eb2645d5304112a4d19c4df1f4",
+      "reason": "Resolve embedded-rounding applicability before treating the always-MXCSR prose as universal.",
+      "rules": [],
+      "state": "unresolved"
+    },
+    "extended:memory-shape-admission": {
+      "checks": [],
+      "originalSha256": "a083fee96e4e2c6a184644b0cc0848ca33fc246461be11b5a19ad0bfad7da115",
+      "reason": "The caller must establish the actual instruction/operand memory-access size and EVEX applicability; this kernel supplies neither tuple decoding nor legality.",
+      "rules": [],
+      "state": "unresolved"
+    },
+    "extended:mov-displacement-reference-mismatch": {
+      "checks": [
+        "p2-source-rules"
+      ],
+      "originalSha256": "ebcb25a38846fd503c196f911d61172ae8de87e4a1d977cc44adec5378b28023",
+      "reason": "The explicit MOV instruction prose and A0-A3 rows now supply the address-sized moffset rule. The old immediate-section cross-reference is retained as historical evidence; no correction to it is inferred.",
+      "rules": [
+        "p2:mov-moffset"
+      ],
+      "state": "resolved-source-rule"
+    },
+    "extended:specific-er-prose-conflict": {
+      "checks": [],
+      "originalSha256": "eb329dc73a78c823a623deee0b3ab1ed7e7629effe09971af45d6ebd11d57d53",
+      "reason": "The generic embedded-rounding rule locates the mechanism; conflicting instruction-specific always-MXCSR prose still needs a reviewed scope/adjudication.",
+      "rules": [],
+      "state": "unresolved"
+    },
+    "p2:lock-list-disagreement": {
+      "checks": [],
+      "originalSha256": "57aa3473a62ada68f101e131db02f04fb3bacad803b285671feaf0f498d56d70",
+      "reason": "Vol3 includes CMPXCHG16B in its exclusive LOCK list; Vol1's exclusive list omits it. The source-specific lists are checked separately.",
+      "rules": [],
+      "state": "unresolved"
+    },
+    "p2:null-selector-disagreement": {
+      "checks": [],
+      "originalSha256": "299b0bb818f60045510312e05a4445350491efbc72559d114076411c73d49b91",
+      "reason": "The FS/GS subsection unconditionally preserves hidden state on null load; the selector subsection gives feature-dependent clear/undefined behavior. No earlier base is inferred.",
+      "rules": [],
+      "state": "unresolved"
+    },
+    "p2:opcode-applicability": {
+      "checks": [],
+      "originalSha256": "087f360a961e98a3bcac7ab9811af2add9cb45e8f7874d047100bde6a7a064d1",
+      "reason": "Complete mandatory-prefix, fixed-size, default-size and opcode-specific exception inventories still require instruction-level review.",
+      "rules": [],
+      "state": "unresolved"
+    },
+    "p2:repeat-note-disagreement": {
+      "checks": [],
+      "originalSha256": "a524f32b93004ea76ec74b893bb08ef0e016bdf8227a6dfc9877e375fad064ef",
+      "reason": "Table 1-1 note 6 narrows repeat use to compare/scan, while the dedicated REP section also names count-only strings.",
+      "rules": [],
+      "state": "unresolved"
+    },
+    "p2:rex-diagram-field-selector": {
+      "checks": [],
+      "originalSha256": "43c4ba4e129c9b1ddae7d1bdffb7ad0cdbbfe876cb23f7ce80ee32b523e89eff",
+      "reason": "Figure 1-6 case 2 says ModRM reg field != 100 for memory without SIB; the SIB-presence table selects on r/m. The reg/rm selector conflict is not corrected or used for legality.",
+      "rules": [],
+      "state": "unresolved"
+    },
+    "p2:sib-base-byte-labels": {
+      "checks": [],
+      "originalSha256": "8d56d3ca765561c6381ef22b7f99e8ec885b959267e6ce54e374050198ba7802",
+      "reason": "Table 1-12 base rows 110/111 literally include DH/BH byte-register labels. Preserve them; do not derive an address base from these labels.",
+      "rules": [],
+      "state": "unresolved"
+    },
+    "p2:special-rex-x-label": {
+      "checks": [
+        "p2-source-rules"
+      ],
+      "originalSha256": "effdfba0c79349f9c6b2129a6f52736bb9dd6d22f72bb661cebefa46bbd0ad50",
+      "reason": "Table 1-17 note 1 explicitly defines lowercase x in the ModRM r/m field as an undecoded extension placeholder, contrasted with uppercase B. It is not a claim naming the physical REX.X field. The raw table literal is preserved.",
+      "rules": [
+        "p2:rex-ignored-placeholder-notation"
+      ],
+      "state": "resolved-source-rule"
+    },
+    "paired:fma-clear-range": {
+      "checks": [],
+      "originalSha256": "dbe887ebfa74c29a3c22ba474dd62aad8ef921fcd37759fd9fc2e0873eceffcc",
+      "reason": "The literal upper clear range includes bit 512, outside a 512-bit register; it supplies no must-def.",
+      "rules": [],
+      "state": "unresolved"
+    },
+    "paired:fma-exception-scope": {
+      "checks": [],
+      "originalSha256": "0489a141074e82f5e93d3058c650d0d2084154c084a42a080b004e77d41c137d",
+      "reason": "IEEE arithmetic, NaN/exception behavior and complete embedded-rounding applicability remain unreviewed.",
+      "rules": [],
+      "state": "unresolved"
+    },
+    "paired:fma-vector-scope": {
+      "checks": [],
+      "originalSha256": "8eb8e6823f91724cd5b72342bfad25a492cd13203f65d028e0f5864c415e10d5",
+      "reason": "YMM/ZMM vector prose and broadcast claims require reconciliation with scalar XMM/mem32 encoding rows.",
+      "rules": [],
+      "state": "unresolved"
+    },
+    "paired:fma-w": {
+      "checks": [],
+      "originalSha256": "ce553574d9c75ea82975991d5b6b2c17f01f45f43a9b74baf85e8893d6764802",
+      "reason": "Three-operand prose says W=1 while VEX and EVEX encoding rows literally specify W=0.",
+      "rules": [],
+      "state": "unresolved"
+    },
+    "paired:gf-exception-scope": {
+      "checks": [],
+      "originalSha256": "587a03cc2bb641e9f12deda014fab4b17116da4850832655a19214ade32137a1",
+      "reason": "Whole exception and CPUID cross-reference applicability remains outside this selected pack.",
+      "rules": [],
+      "state": "unresolved"
+    },
+    "paired:gf-inverse-table": {
+      "checks": [],
+      "originalSha256": "aa8baaada66e3ce9b754bcaaec2ded42620563b22705c0311980874dc4a0d99f",
+      "reason": "All 256 literal table values are now geometrically replayed in both Vol4 revisions. The source maps nonzero inputs F0 and F1 to the same value 5B. For F1, multiplication by the listed 5B in the adjacent documented polynomial-011B field gives 5A rather than 01; field inversion gives 23. A publisher clarification or explicit authoritative source rule is required before replacing the literal or claiming inverse semantics.",
+      "rules": [],
+      "state": "unresolved"
+    },
+    "paired:movd-store-opcode": {
+      "checks": [
+        "paired-source-rules",
+        "h64-movd-mode-proof"
+      ],
+      "originalSha256": "def4df617b8bd25564c1e71980a34371d6c647f0c54e2eb05d7a24a6528b0df3",
+      "reason": "H64 selects native AMD64 long-64 execution. Both source editions explicitly attach note 2 (non-64-only) to the conflicting 6E store row. The separate note-1 native-64 7E store row remains required, including its 32-bit data operand. The original conflict/literal are preserved; no cross-mode correction or equivalence is inferred.",
+      "rules": [
+        "paired:movd-mode-notes",
+        "paired:movd-64-vex-store-row",
+        "paired:movd-non64-vex-store-row"
+      ],
+      "state": "excluded-selected-execution-mode"
+    }
+  },
+  "executionModes": [
+    "long-64"
+  ],
+  "p2PackSha256": "2ca9a35a4c947a56bf9a62aba131607e73ffd68c66a18f9ac685c1aec65dc1fd",
+  "reviewedPages": [
+    {
+      "inventory": [
+        "architecture:address-size-truncation",
+        "architecture:rex-high-byte-exclusion",
+        "p2:rex-special-aliases"
+      ],
+      "pdfPage": 68,
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "publication": "24594",
+      "roles": [
+        {
+          "cells": [
+            "pdf:68:cell:0"
+          ],
+          "role": "furniture",
+          "targets": []
+        },
+        {
+          "cells": [
+            "pdf:68:cell:1"
+          ],
+          "role": "furniture",
+          "targets": []
+        },
+        {
+          "cells": [
+            "pdf:68:cell:2"
+          ],
+          "role": "furniture",
+          "targets": []
+        },
+        {
+          "cells": [
+            "pdf:68:cell:3"
+          ],
+          "role": "clause",
+          "targets": [
+            "architecture:address-size-truncation"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:68:cell:4"
+          ],
+          "role": "clause",
+          "targets": [
+            "architecture:address-size-truncation"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:68:cell:5"
+          ],
+          "role": "context",
+          "targets": [
+            "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee/pdf:68:cell:5"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:68:cell:6"
+          ],
+          "role": "context",
+          "targets": [
+            "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee/pdf:68:cell:6"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:68:cell:7"
+          ],
+          "role": "reference",
+          "targets": [
+            "rex-addressing-examples"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:68:cell:8"
+          ],
+          "role": "reference",
+          "targets": [
+            "rex-addressing-examples"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:68:cell:9"
+          ],
+          "role": "reference",
+          "targets": [
+            "rex-addressing-examples"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:68:cell:10"
+          ],
+          "role": "context",
+          "targets": [
+            "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee/pdf:68:cell:10"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:68:cell:11"
+          ],
+          "role": "context",
+          "targets": [
+            "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee/pdf:68:cell:11"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:68:cell:12"
+          ],
+          "role": "clause",
+          "targets": [
+            "architecture:rex-high-byte-exclusion"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:68:cell:13"
+          ],
+          "role": "clause",
+          "targets": [
+            "architecture:rex-high-byte-exclusion"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:68:cell:14"
+          ],
+          "role": "clause",
+          "targets": [
+            "architecture:rex-high-byte-exclusion"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:68:cell:15"
+          ],
+          "role": "clause",
+          "targets": [
+            "architecture:rex-high-byte-exclusion"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:68:cell:16"
+          ],
+          "role": "clause",
+          "targets": [
+            "architecture:rex-high-byte-exclusion"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:68:cell:17"
+          ],
+          "role": "clause",
+          "targets": [
+            "architecture:rex-high-byte-exclusion"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:68:cell:18"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:rex-special-aliases"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:68:cell:19"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:rex-special-aliases"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:68:cell:20"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:rex-special-aliases"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:68:cell:21"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:rex-special-aliases"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:68:cell:22"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:rex-special-aliases"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:68:cell:23"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:rex-special-aliases"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:68:cell:24"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:rex-special-aliases"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:68:cell:25"
+          ],
+          "role": "furniture",
+          "targets": []
+        },
+        {
+          "cells": [
+            "pdf:68:cell:26"
+          ],
+          "role": "furniture",
+          "targets": []
+        }
+      ],
+      "sourceCellsSha256": "2f56f40416d7b6d0050b3ca0766a62b5718802bd8bfd4d25997b5699eb7a16de"
+    },
+    {
+      "inventory": [
+        "architecture:flat-data-segments",
+        "p2:gpr-diagram",
+        "p2:rip-rflags-diagram"
+      ],
+      "pdfPage": 85,
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "publication": "24594",
+      "roles": [
+        {
+          "cells": [
+            "pdf:85:cell:0"
+          ],
+          "role": "furniture",
+          "targets": []
+        },
+        {
+          "cells": [
+            "pdf:85:cell:1"
+          ],
+          "role": "furniture",
+          "targets": []
+        },
+        {
+          "cells": [
+            "pdf:85:cell:2"
+          ],
+          "role": "furniture",
+          "targets": []
+        },
+        {
+          "cells": [
+            "pdf:85:cell:3"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:rip-rflags-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:4"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:rip-rflags-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:5"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:6"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:7"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:8"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:9"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:10"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:11"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:12"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:13"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:14"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:15"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:16"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:17"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:18"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:19"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:20"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:21"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:22"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:23"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:24"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:25"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:26"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:27"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:28"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:29"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:30"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:31"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:32"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:33"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:34"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:35"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:36"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:37"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:38"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:39"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:40"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:41"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:42"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:43"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:44"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:45"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:46"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:47"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:48"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:49"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:50"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:51"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:52"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:53"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:54"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:55"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:56"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:57"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:58"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:59"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:60"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:61"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:62"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:63"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:64"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:65"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:66"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:67"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:68"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:69"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:70"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:71"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:72"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:73"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:74"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:75"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:76"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:77"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:78"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:79"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:80"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:81"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:82"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:83"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:84"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:85"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:86"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:87"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:88"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:89"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:90"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:91"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:92"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:93"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:94"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:95"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:96"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:97"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:98"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:99"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:100"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:101"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:102"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:103"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:104"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:rip-rflags-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:105"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:rip-rflags-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:106"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:rip-rflags-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:107"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:rip-rflags-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:108"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:rip-rflags-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:109"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:rip-rflags-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:110"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:111"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:112"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:113"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:114"
+          ],
+          "role": "clause",
+          "targets": [
+            "p2:gpr-diagram"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:115"
+          ],
+          "role": "clause",
+          "targets": [
+            "architecture:flat-data-segments"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:116"
+          ],
+          "role": "clause",
+          "targets": [
+            "architecture:flat-data-segments"
+          ]
+        },
+        {
+          "cells": [
+            "pdf:85:cell:117"
+          ],
+          "role": "furniture",
+          "targets": []
+        },
+        {
+          "cells": [
+            "pdf:85:cell:118"
+          ],
+          "role": "furniture",
+          "targets": []
+        }
+      ],
+      "sourceCellsSha256": "cd8a8d54c664d9adba1c15b55e812617715d1f2bad23bb5f34c96dabeeb7ac90"
+    }
+  ],
+  "schema": "ariadne.amd64-p2-review-decisions/v2",
+  "sourcePolicySha256": "d1caf84927162bb696185eed4880007aa92ded2260738c940cdeb935ee8a1840"
+}

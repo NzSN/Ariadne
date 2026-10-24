@@ -1,0 +1,1857 @@
+{
+  "commonClauses": {
+    "address-size": {
+      "cells": [
+        "pdf:51:cell:21",
+        "pdf:51:cell:22",
+        "pdf:51:cell:23",
+        "pdf:51:cell:24",
+        "pdf:51:cell:25",
+        "pdf:51:cell:26",
+        "pdf:51:cell:27",
+        "pdf:51:cell:28",
+        "pdf:51:cell:29",
+        "pdf:51:cell:30",
+        "pdf:51:cell:31",
+        "pdf:51:cell:32",
+        "pdf:51:cell:33",
+        "pdf:51:cell:34",
+        "pdf:51:cell:35",
+        "pdf:51:cell:36",
+        "pdf:51:cell:37",
+        "pdf:51:cell:38",
+        "pdf:51:cell:39",
+        "pdf:51:cell:40",
+        "pdf:51:cell:41",
+        "pdf:51:cell:42",
+        "pdf:51:cell:43",
+        "pdf:51:cell:44",
+        "pdf:51:cell:45",
+        "pdf:51:cell:46",
+        "pdf:51:cell:47",
+        "pdf:51:cell:48",
+        "pdf:51:cell:49",
+        "pdf:51:cell:50",
+        "pdf:51:cell:51",
+        "pdf:51:cell:52",
+        "pdf:51:cell:53",
+        "pdf:51:cell:54",
+        "pdf:51:cell:55",
+        "pdf:51:cell:56",
+        "pdf:51:cell:57",
+        "pdf:51:cell:58",
+        "pdf:51:cell:59",
+        "pdf:51:cell:60",
+        "pdf:51:cell:61",
+        "pdf:51:cell:62",
+        "pdf:51:cell:63",
+        "pdf:51:cell:64",
+        "pdf:51:cell:65",
+        "pdf:51:cell:66"
+      ],
+      "text": "Table 1-3. Address-Size Overrides Operating Mode Default Address Size (Bits) 64-Bit Mode 64 Long Mode Compatibility Mode Legacy Mode (Protected, Virtual-8086, or Real Mode) Address- Effective Size Prefix Address Size (67h) 1 (Bits) Required? 32 16 32 16 64 no 32 yes 32 no 16 yes 32 yes 16 no 32 no 16 yes 32 yes 16 no"
+    },
+    "lock-list": {
+      "cells": [
+        "pdf:54:cell:3",
+        "pdf:54:cell:4",
+        "pdf:54:cell:5",
+        "pdf:54:cell:6"
+      ],
+      "text": "The LOCK prefix can only be used with forms of the following instructions that write a memory operand: ADC, ADD, AND, BTC, BTR, BTS, CMPXCHG, CMPXCHG8B, CMPXCHG16B, DEC, INC, NEG, NOT, OR, SBB, SUB, XADD, XCHG, and XOR. An invalid-opcode exception occurs if the LOCK prefix is used with any other instruction."
+    },
+    "repe": {
+      "cells": [
+        "pdf:55:cell:18",
+        "pdf:55:cell:19",
+        "pdf:55:cell:20",
+        "pdf:55:cell:21",
+        "pdf:55:cell:22"
+      ],
+      "text": "REPE and REPZ. REPE and REPZ are synonyms and have identical opcodes. These prefixes repeat their associated string instruction the number of times specified in the counter register (rCX). The repetition terminates when the value in rCX reaches 0 or when the zero flag (ZF) is cleared to 0. The REPE and REPZ prefixes can be used with the CMPS, CMPSB, CMPSD, CMPSW, SCAS, SCASB, SCASD, and SCASW instructions. Table 1-7 shows the valid REPE and REPZ prefix opcodes."
+    },
+    "repeat-count": {
+      "cells": [
+        "pdf:54:cell:9",
+        "pdf:54:cell:10",
+        "pdf:54:cell:11",
+        "pdf:54:cell:12",
+        "pdf:54:cell:13",
+        "pdf:54:cell:14",
+        "pdf:54:cell:15",
+        "pdf:54:cell:16",
+        "pdf:54:cell:17"
+      ],
+      "text": "The repeat prefixes cause repetition of certain instructions that load, store, move, input, or output strings. The prefixes should only be used with such string instructions. Two pairs of repeat prefixes, REPE/REPZ and REPNE/REPNZ, perform the same repeat functions for certain compare-string and scan-string instructions. The repeat function uses rCX as a count register. The size of rCX is based on address size, as shown in Table 1-4 on page 10. REP. The REP prefix repeats its associated string instruction the number of times specified in the counter register (rCX). It terminates the repetition when the value in rCX reaches 0. The prefix can be used with the INS, LODS, MOVS, OUTS, and STOS instructions. Table 1-6 shows the valid REP prefix opcodes."
+    },
+    "repne": {
+      "cells": [
+        "pdf:55:cell:42",
+        "pdf:55:cell:43",
+        "pdf:55:cell:44",
+        "pdf:55:cell:45",
+        "pdf:55:cell:46",
+        "pdf:55:cell:47"
+      ],
+      "text": "REPNE and REPNZ. REPNE and REPNZ are synonyms and have identical opcodes. These prefixes repeat their associated string instruction the number of times specified in the counter register (rCX). The repetition terminates when the value in rCX reaches 0 or when the zero flag (ZF) is set to 1. The REPNE and REPNZ prefixes can be used with the CMPS, CMPSB, CMPSD, CMPSW, SCAS, SCASB, SCASD, and SCASW instructions. Table 1-8 on page 14 shows the valid REPNE and REPNZ prefix opcodes."
+    }
+  },
+  "executionModes": [
+    "long-64"
+  ],
+  "lock": {
+    "ADC": {
+      "clause": {
+        "cells": [
+          "pdf:127:cell:17",
+          "pdf:127:cell:18"
+        ],
+        "text": "The forms of the ADC instruction that write to memory support the LOCK prefix. For details about the LOCK prefix, see \u201cLock Prefix\u201d on page 11."
+      },
+      "forms": [
+        {
+          "memoryPositions": [],
+          "selector": "ADC AL, imm8",
+          "sourceCell": "pdf:127:cell:22"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "ADC AX, imm16",
+          "sourceCell": "pdf:127:cell:25"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "ADC EAX, imm32",
+          "sourceCell": "pdf:127:cell:28"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "ADC RAX, imm32",
+          "sourceCell": "pdf:127:cell:31"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "ADC reg/mem8, imm8",
+          "sourceCell": "pdf:127:cell:34"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "ADC reg/mem16, imm16",
+          "sourceCell": "pdf:127:cell:37"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "ADC reg/mem32, imm32",
+          "sourceCell": "pdf:127:cell:40"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "ADC reg/mem64, imm32",
+          "sourceCell": "pdf:127:cell:43"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "ADC reg/mem16, imm8",
+          "sourceCell": "pdf:127:cell:46"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "ADC reg/mem32, imm8",
+          "sourceCell": "pdf:127:cell:49"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "ADC reg/mem64, imm8",
+          "sourceCell": "pdf:127:cell:52"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "ADC reg/mem8, reg8",
+          "sourceCell": "pdf:127:cell:55"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "ADC reg/mem16, reg16",
+          "sourceCell": "pdf:127:cell:58"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "ADC reg/mem32, reg32",
+          "sourceCell": "pdf:127:cell:61"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "ADC reg/mem64, reg64",
+          "sourceCell": "pdf:127:cell:64"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "ADC reg8, reg/mem8",
+          "sourceCell": "pdf:127:cell:67"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "ADC reg16, reg/mem16",
+          "sourceCell": "pdf:127:cell:70"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "ADC reg32, reg/mem32",
+          "sourceCell": "pdf:128:cell:6"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "ADC reg64, reg/mem64",
+          "sourceCell": "pdf:128:cell:9"
+        }
+      ],
+      "owner": "amd-entry:0004"
+    },
+    "ADD": {
+      "clause": {
+        "cells": [
+          "pdf:131:cell:14",
+          "pdf:131:cell:15"
+        ],
+        "text": "The forms of the ADD instruction that write to memory support the LOCK prefix. For details about the LOCK prefix, see \u201cLock Prefix\u201d on page 11."
+      },
+      "forms": [
+        {
+          "memoryPositions": [],
+          "selector": "ADD AL, imm8",
+          "sourceCell": "pdf:131:cell:19"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "ADD AX, imm16",
+          "sourceCell": "pdf:131:cell:22"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "ADD EAX, imm32",
+          "sourceCell": "pdf:131:cell:25"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "ADD RAX, imm32",
+          "sourceCell": "pdf:131:cell:28"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "ADD reg/mem8, imm8",
+          "sourceCell": "pdf:131:cell:31"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "ADD reg/mem16, imm16",
+          "sourceCell": "pdf:131:cell:34"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "ADD reg/mem32, imm32",
+          "sourceCell": "pdf:131:cell:37"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "ADD reg/mem64, imm32",
+          "sourceCell": "pdf:131:cell:40"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "ADD reg/mem16, imm8",
+          "sourceCell": "pdf:131:cell:43"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "ADD reg/mem32, imm8",
+          "sourceCell": "pdf:131:cell:46"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "ADD reg/mem64, imm8",
+          "sourceCell": "pdf:131:cell:49"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "ADD reg/mem8, reg8",
+          "sourceCell": "pdf:131:cell:52"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "ADD reg/mem16, reg16",
+          "sourceCell": "pdf:131:cell:55"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "ADD reg/mem32, reg32",
+          "sourceCell": "pdf:131:cell:58"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "ADD reg/mem64, reg64",
+          "sourceCell": "pdf:131:cell:61"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "ADD reg8, reg/mem8",
+          "sourceCell": "pdf:131:cell:64"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "ADD reg16, reg/mem16",
+          "sourceCell": "pdf:131:cell:67"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "ADD reg32, reg/mem32",
+          "sourceCell": "pdf:131:cell:70"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "ADD reg64, reg/mem64",
+          "sourceCell": "pdf:131:cell:73"
+        }
+      ],
+      "owner": "amd-entry:0006"
+    },
+    "AND": {
+      "clause": {
+        "cells": [
+          "pdf:135:cell:27",
+          "pdf:135:cell:28"
+        ],
+        "text": "The forms of the AND instruction that write to memory support the LOCK prefix. For details about the LOCK prefix, see \u201cLock Prefix\u201d on page 11."
+      },
+      "forms": [
+        {
+          "memoryPositions": [],
+          "selector": "AND AL, imm8",
+          "sourceCell": "pdf:135:cell:32"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "AND AX, imm16",
+          "sourceCell": "pdf:135:cell:36"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "AND EAX, imm32",
+          "sourceCell": "pdf:135:cell:40"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "AND RAX, imm32",
+          "sourceCell": "pdf:135:cell:43"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "AND reg/mem8, imm8",
+          "sourceCell": "pdf:135:cell:47"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "AND reg/mem16, imm16",
+          "sourceCell": "pdf:135:cell:50"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "AND reg/mem32, imm32",
+          "sourceCell": "pdf:135:cell:52"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "AND reg/mem64, imm32",
+          "sourceCell": "pdf:135:cell:54"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "AND reg/mem16, imm8",
+          "sourceCell": "pdf:135:cell:56"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "AND reg/mem32, imm8",
+          "sourceCell": "pdf:135:cell:58"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "AND reg/mem64, imm8",
+          "sourceCell": "pdf:135:cell:60"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "AND reg/mem8, reg8",
+          "sourceCell": "pdf:136:cell:6"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "AND reg/mem16, reg16",
+          "sourceCell": "pdf:136:cell:10"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "AND reg/mem32, reg32",
+          "sourceCell": "pdf:136:cell:14"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "AND reg/mem64, reg64",
+          "sourceCell": "pdf:136:cell:18"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "AND reg8, reg/mem8",
+          "sourceCell": "pdf:136:cell:22"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "AND reg16, reg/mem16",
+          "sourceCell": "pdf:136:cell:26"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "AND reg32, reg/mem32",
+          "sourceCell": "pdf:136:cell:30"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "AND reg64, reg/mem64",
+          "sourceCell": "pdf:136:cell:34"
+        }
+      ],
+      "owner": "amd-entry:0008"
+    },
+    "BTC": {
+      "clause": {
+        "cells": [
+          "pdf:170:cell:15",
+          "pdf:170:cell:16",
+          "pdf:170:cell:17"
+        ],
+        "text": "This instruction is useful for implementing semaphores in concurrent operating systems. Such an application should precede this instruction with the LOCK prefix. For details about the LOCK prefix, see \u201cLock Prefix\u201d on page 11."
+      },
+      "forms": [
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "BTC reg/mem16, reg16",
+          "sourceCell": "pdf:170:cell:21"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "BTC reg/mem32, reg32",
+          "sourceCell": "pdf:170:cell:25"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "BTC reg/mem64, reg64",
+          "sourceCell": "pdf:170:cell:29"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "BTC reg/mem16, imm8",
+          "sourceCell": "pdf:170:cell:33"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "BTC reg/mem32, imm8",
+          "sourceCell": "pdf:170:cell:37"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "BTC reg/mem64, imm8",
+          "sourceCell": "pdf:170:cell:41"
+        }
+      ],
+      "owner": "amd-entry:0027"
+    },
+    "BTR": {
+      "clause": {
+        "cells": [
+          "pdf:172:cell:15",
+          "pdf:172:cell:16",
+          "pdf:172:cell:17"
+        ],
+        "text": "This instruction is useful for implementing semaphores in concurrent operating systems. Such applications should precede this instruction with the LOCK prefix. For details about the LOCK prefix, see \u201cLock Prefix\u201d on page 11."
+      },
+      "forms": [
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "BTR reg/mem16, reg16",
+          "sourceCell": "pdf:172:cell:21"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "BTR reg/mem32, reg32",
+          "sourceCell": "pdf:172:cell:25"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "BTR reg/mem64, reg64",
+          "sourceCell": "pdf:172:cell:29"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "BTR reg/mem16, imm8",
+          "sourceCell": "pdf:172:cell:33"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "BTR reg/mem32, imm8",
+          "sourceCell": "pdf:172:cell:37"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "BTR reg/mem64, imm8",
+          "sourceCell": "pdf:172:cell:41"
+        }
+      ],
+      "owner": "amd-entry:0028"
+    },
+    "BTS": {
+      "clause": {
+        "cells": [
+          "pdf:174:cell:15",
+          "pdf:174:cell:16",
+          "pdf:174:cell:17"
+        ],
+        "text": "This instruction is useful for implementing semaphores in concurrent operating systems. Such applications should precede this instruction with the LOCK prefix. For details about the LOCK prefix, see \u201cLock Prefix\u201d on page 11."
+      },
+      "forms": [
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "BTS reg/mem16, reg16",
+          "sourceCell": "pdf:174:cell:21"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "BTS reg/mem32, reg32",
+          "sourceCell": "pdf:174:cell:25"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "BTS reg/mem64, reg64",
+          "sourceCell": "pdf:174:cell:29"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "BTS reg/mem16, imm8",
+          "sourceCell": "pdf:174:cell:33"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "BTS reg/mem32, imm8",
+          "sourceCell": "pdf:174:cell:37"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "BTS reg/mem64, imm8",
+          "sourceCell": "pdf:174:cell:41"
+        }
+      ],
+      "owner": "amd-entry:0029"
+    },
+    "CMPXCHG": {
+      "clause": {
+        "cells": [
+          "pdf:209:cell:13",
+          "pdf:209:cell:14"
+        ],
+        "text": "The forms of the CMPXCHG instruction that write to memory support the LOCK prefix. For details about the LOCK prefix, see \u201cLock Prefix\u201d on page 11."
+      },
+      "forms": [
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "CMPXCHG reg/mem8, reg8",
+          "sourceCell": "pdf:209:cell:18"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "CMPXCHG reg/mem16, reg16",
+          "sourceCell": "pdf:209:cell:23"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "CMPXCHG reg/mem32, reg32",
+          "sourceCell": "pdf:209:cell:28"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "CMPXCHG reg/mem64, reg64",
+          "sourceCell": "pdf:209:cell:33"
+        }
+      ],
+      "owner": "amd-entry:0045"
+    },
+    "CMPXCHG8B CMPXCHG16B": {
+      "clause": {
+        "cells": [
+          "pdf:211:cell:18",
+          "pdf:211:cell:19"
+        ],
+        "text": "The CMPXCHG8B and CMPXCHG16B instructions support the LOCK prefix. For details about the LOCK prefix, see \u201cLock Prefix\u201d on page 11."
+      },
+      "forms": [
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "CMPXCHG8B mem64",
+          "sourceCell": "pdf:211:cell:30"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "CMPXCHG16B mem128",
+          "sourceCell": "pdf:211:cell:31"
+        }
+      ],
+      "owner": "amd-entry:0046"
+    },
+    "DEC": {
+      "clause": {
+        "cells": [
+          "pdf:220:cell:8",
+          "pdf:220:cell:9"
+        ],
+        "text": "The forms of the DEC instruction that write to memory support the LOCK prefix. For details about the LOCK prefix, see \u201cLock Prefix\u201d on page 11."
+      },
+      "forms": [
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "DEC reg/mem8",
+          "sourceCell": "pdf:220:cell:15"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "DEC reg/mem16",
+          "sourceCell": "pdf:220:cell:19"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "DEC reg/mem32",
+          "sourceCell": "pdf:220:cell:23"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "DEC reg/mem64",
+          "sourceCell": "pdf:220:cell:27"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "DEC reg16",
+          "sourceCell": "pdf:220:cell:31"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "DEC reg32",
+          "sourceCell": "pdf:220:cell:35"
+        }
+      ],
+      "owner": "amd-entry:0051"
+    },
+    "INC": {
+      "clause": {
+        "cells": [
+          "pdf:232:cell:9",
+          "pdf:232:cell:10"
+        ],
+        "text": "The forms of the INC instruction that write to memory support the LOCK prefix. For details about the LOCK prefix, see \u201cLock Prefix\u201d on page 11."
+      },
+      "forms": [
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "INC reg/mem8",
+          "sourceCell": "pdf:232:cell:16"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "INC reg/mem16",
+          "sourceCell": "pdf:232:cell:20"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "INC reg/mem32",
+          "sourceCell": "pdf:232:cell:24"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "INC reg/mem64",
+          "sourceCell": "pdf:232:cell:28"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "INC reg16",
+          "sourceCell": "pdf:232:cell:32"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "INC reg32",
+          "sourceCell": "pdf:232:cell:37"
+        }
+      ],
+      "owner": "amd-entry:0057"
+    },
+    "NEG": {
+      "clause": {
+        "cells": [
+          "pdf:312:cell:9",
+          "pdf:312:cell:10"
+        ],
+        "text": "The forms of the NEG instruction that write to memory support the LOCK prefix. For details about the LOCK prefix, see \u201cLock Prefix\u201d on page 11."
+      },
+      "forms": [
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "NEG reg/mem8",
+          "sourceCell": "pdf:312:cell:14"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "NEG reg/mem16",
+          "sourceCell": "pdf:312:cell:18"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "NEG reg/mem32",
+          "sourceCell": "pdf:312:cell:22"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "NEG reg/mem64",
+          "sourceCell": "pdf:312:cell:26"
+        }
+      ],
+      "owner": "amd-entry:0094"
+    },
+    "NOT": {
+      "clause": {
+        "cells": [
+          "pdf:315:cell:7",
+          "pdf:315:cell:8"
+        ],
+        "text": "The memory-operand forms of the NOT instruction support the LOCK prefix. For details about the LOCK prefix, see \u201cLock Prefix\u201d on page 11."
+      },
+      "forms": [
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "NOT reg/mem8",
+          "sourceCell": "pdf:315:cell:12"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "NOT reg/mem16",
+          "sourceCell": "pdf:315:cell:16"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "NOT reg/mem32",
+          "sourceCell": "pdf:315:cell:20"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "NOT reg/mem64",
+          "sourceCell": "pdf:315:cell:24"
+        }
+      ],
+      "owner": "amd-entry:0096"
+    },
+    "OR": {
+      "clause": {
+        "cells": [
+          "pdf:316:cell:10",
+          "pdf:316:cell:11"
+        ],
+        "text": "The forms of the OR instruction that write to memory support the LOCK prefix. For details about the LOCK prefix, see \u201cLock Prefix\u201d on page 11."
+      },
+      "forms": [
+        {
+          "memoryPositions": [],
+          "selector": "OR AL, imm8",
+          "sourceCell": "pdf:316:cell:15"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "OR AX, imm16",
+          "sourceCell": "pdf:316:cell:18"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "OR EAX, imm32",
+          "sourceCell": "pdf:316:cell:20"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "OR RAX, imm32",
+          "sourceCell": "pdf:316:cell:22"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "OR reg/mem8, imm8",
+          "sourceCell": "pdf:316:cell:25"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "OR reg/mem16, imm16",
+          "sourceCell": "pdf:316:cell:28"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "OR reg/mem32, imm32",
+          "sourceCell": "pdf:316:cell:31"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "OR reg/mem64, imm32",
+          "sourceCell": "pdf:316:cell:34"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "OR reg/mem16, imm8",
+          "sourceCell": "pdf:316:cell:37"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "OR reg/mem32, imm8",
+          "sourceCell": "pdf:316:cell:40"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "OR reg/mem64, imm8",
+          "sourceCell": "pdf:316:cell:43"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "OR reg/mem8, reg8",
+          "sourceCell": "pdf:316:cell:46"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "OR reg/mem16, reg16",
+          "sourceCell": "pdf:316:cell:49"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "OR reg/mem32, reg32",
+          "sourceCell": "pdf:316:cell:52"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "OR reg/mem64, reg64",
+          "sourceCell": "pdf:316:cell:55"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "OR reg8, reg/mem8",
+          "sourceCell": "pdf:317:cell:6"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "OR reg16, reg/mem16",
+          "sourceCell": "pdf:317:cell:9"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "OR reg32, reg/mem32",
+          "sourceCell": "pdf:317:cell:12"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "OR reg64, reg/mem64",
+          "sourceCell": "pdf:317:cell:15"
+        }
+      ],
+      "owner": "amd-entry:0097"
+    },
+    "SBB": {
+      "clause": {
+        "cells": [
+          "pdf:374:cell:14",
+          "pdf:374:cell:15"
+        ],
+        "text": "The forms of the SBB instruction that write to memory support the LOCK prefix. For details about the LOCK prefix, see \u201cLock Prefix\u201d on page 11."
+      },
+      "forms": [
+        {
+          "memoryPositions": [],
+          "selector": "SBB AL, imm8",
+          "sourceCell": "pdf:374:cell:19"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "SBB AX, imm16",
+          "sourceCell": "pdf:374:cell:23"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "SBB EAX, imm32",
+          "sourceCell": "pdf:374:cell:27"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "SBB RAX, imm32",
+          "sourceCell": "pdf:374:cell:31"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "SBB reg/mem8, imm8",
+          "sourceCell": "pdf:374:cell:35"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "SBB reg/mem16, imm16",
+          "sourceCell": "pdf:374:cell:39"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "SBB reg/mem32, imm32",
+          "sourceCell": "pdf:374:cell:43"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "SBB reg/mem64, imm32",
+          "sourceCell": "pdf:374:cell:47"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "SBB reg/mem16, imm8",
+          "sourceCell": "pdf:374:cell:51"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "SBB reg/mem32, imm8",
+          "sourceCell": "pdf:374:cell:55"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "SBB reg/mem64, imm8",
+          "sourceCell": "pdf:374:cell:59"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "SBB reg/mem8, reg8",
+          "sourceCell": "pdf:374:cell:63"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "SBB reg/mem16, reg16",
+          "sourceCell": "pdf:374:cell:67"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "SBB reg/mem32, reg32",
+          "sourceCell": "pdf:375:cell:6"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "SBB reg/mem64, reg64",
+          "sourceCell": "pdf:375:cell:10"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "SBB reg8, reg/mem8",
+          "sourceCell": "pdf:375:cell:14"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "SBB reg16, reg/mem16",
+          "sourceCell": "pdf:375:cell:19"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "SBB reg32, reg/mem32",
+          "sourceCell": "pdf:375:cell:24"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "SBB reg64, reg/mem64",
+          "sourceCell": "pdf:375:cell:29"
+        }
+      ],
+      "owner": "amd-entry:0128"
+    },
+    "SUB": {
+      "clause": {
+        "cells": [
+          "pdf:398:cell:11",
+          "pdf:398:cell:12"
+        ],
+        "text": "The forms of the SUB instruction that write to memory support the LOCK prefix. For details about the LOCK prefix, see \u201cLock Prefix\u201d on page 11."
+      },
+      "forms": [
+        {
+          "memoryPositions": [],
+          "selector": "SUB AL, imm8",
+          "sourceCell": "pdf:398:cell:16"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "SUB AX, imm16",
+          "sourceCell": "pdf:398:cell:20"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "SUB EAX, imm32",
+          "sourceCell": "pdf:398:cell:24"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "SUB RAX, imm32",
+          "sourceCell": "pdf:398:cell:28"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "SUB reg/mem8, imm8",
+          "sourceCell": "pdf:398:cell:32"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "SUB reg/mem16, imm16",
+          "sourceCell": "pdf:398:cell:36"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "SUB reg/mem32, imm32",
+          "sourceCell": "pdf:398:cell:40"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "SUB reg/mem64, imm32",
+          "sourceCell": "pdf:398:cell:44"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "SUB reg/mem16, imm8",
+          "sourceCell": "pdf:398:cell:48"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "SUB reg/mem32, imm8",
+          "sourceCell": "pdf:398:cell:52"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "SUB reg/mem64, imm8",
+          "sourceCell": "pdf:398:cell:56"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "SUB reg/mem8, reg8",
+          "sourceCell": "pdf:398:cell:60"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "SUB reg/mem16, reg16",
+          "sourceCell": "pdf:398:cell:64"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "SUB reg/mem32, reg32",
+          "sourceCell": "pdf:398:cell:68"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "SUB reg/mem64, reg64",
+          "sourceCell": "pdf:398:cell:72"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "SUB reg8, reg/mem8",
+          "sourceCell": "pdf:399:cell:6"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "SUB reg16, reg/mem16",
+          "sourceCell": "pdf:399:cell:10"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "SUB reg32, reg/mem32",
+          "sourceCell": "pdf:399:cell:14"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "SUB reg64, reg/mem64",
+          "sourceCell": "pdf:399:cell:18"
+        }
+      ],
+      "owner": "amd-entry:0142"
+    },
+    "XADD": {
+      "clause": {
+        "cells": [
+          "pdf:410:cell:8",
+          "pdf:410:cell:9"
+        ],
+        "text": "The forms of the XADD instruction that write to memory support the LOCK prefix. For details about the LOCK prefix, see \u201cLock Prefix\u201d on page 11."
+      },
+      "forms": [
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "XADD reg/mem8, reg8",
+          "sourceCell": "pdf:410:cell:13"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "XADD reg/mem16, reg16",
+          "sourceCell": "pdf:410:cell:18"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "XADD reg/mem32, reg32",
+          "sourceCell": "pdf:410:cell:23"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "XADD reg/mem64, reg64",
+          "sourceCell": "pdf:410:cell:28"
+        }
+      ],
+      "owner": "amd-entry:0149"
+    },
+    "XCHG": {
+      "clause": {
+        "cells": [
+          "pdf:412:cell:5",
+          "pdf:412:cell:6",
+          "pdf:412:cell:7",
+          "pdf:412:cell:8"
+        ],
+        "text": "Exchanges the contents of the two operands. The operands can be two general-purpose registers or a register and a memory location. If either operand references memory, the processor locks automatically, whether or not the LOCK prefix is used and independently of the value of IOPL. For details about the LOCK prefix, see \u201cLock Prefix\u201d on page 11."
+      },
+      "forms": [
+        {
+          "memoryPositions": [],
+          "selector": "XCHG AX, reg16",
+          "sourceCell": "pdf:412:cell:18"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "XCHG reg16, AX",
+          "sourceCell": "pdf:412:cell:22"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "XCHG EAX, reg32",
+          "sourceCell": "pdf:412:cell:26"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "XCHG reg32, EAX",
+          "sourceCell": "pdf:412:cell:30"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "XCHG RAX, reg64",
+          "sourceCell": "pdf:412:cell:34"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "XCHG reg64, RAX",
+          "sourceCell": "pdf:412:cell:38"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "XCHG reg/mem8, reg8",
+          "sourceCell": "pdf:412:cell:42"
+        },
+        {
+          "memoryPositions": [
+            1
+          ],
+          "selector": "XCHG reg8, reg/mem8",
+          "sourceCell": "pdf:412:cell:46"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "XCHG reg/mem16, reg16",
+          "sourceCell": "pdf:412:cell:50"
+        },
+        {
+          "memoryPositions": [
+            1
+          ],
+          "selector": "XCHG reg16, reg/mem16",
+          "sourceCell": "pdf:412:cell:54"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "XCHG reg/mem32, reg32",
+          "sourceCell": "pdf:412:cell:58"
+        },
+        {
+          "memoryPositions": [
+            1
+          ],
+          "selector": "XCHG reg32, reg/mem32",
+          "sourceCell": "pdf:412:cell:62"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "XCHG reg/mem64, reg64",
+          "sourceCell": "pdf:412:cell:66"
+        },
+        {
+          "memoryPositions": [
+            1
+          ],
+          "selector": "XCHG reg64, reg/mem64",
+          "sourceCell": "pdf:412:cell:70"
+        }
+      ],
+      "owner": "amd-entry:0150"
+    },
+    "XOR": {
+      "clause": {
+        "cells": [
+          "pdf:415:cell:8",
+          "pdf:415:cell:9"
+        ],
+        "text": "The forms of the XOR instruction that write to memory support the LOCK prefix. For details about the LOCK prefix, see \u201cLock Prefix\u201d on page 11."
+      },
+      "forms": [
+        {
+          "memoryPositions": [],
+          "selector": "XOR AL, imm8",
+          "sourceCell": "pdf:415:cell:29"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "XOR AX, imm16",
+          "sourceCell": "pdf:415:cell:33"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "XOR EAX, imm32",
+          "sourceCell": "pdf:415:cell:37"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "XOR RAX, imm32",
+          "sourceCell": "pdf:415:cell:41"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "XOR reg/mem8, imm8",
+          "sourceCell": "pdf:415:cell:45"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "XOR reg/mem16, imm16",
+          "sourceCell": "pdf:415:cell:50"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "XOR reg/mem32, imm32",
+          "sourceCell": "pdf:415:cell:55"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "XOR reg/mem64, imm32",
+          "sourceCell": "pdf:415:cell:60"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "XOR reg/mem16, imm8",
+          "sourceCell": "pdf:415:cell:65"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "XOR reg/mem32, imm8",
+          "sourceCell": "pdf:416:cell:6"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "XOR reg/mem64, imm8",
+          "sourceCell": "pdf:416:cell:11"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "XOR reg/mem8, reg8",
+          "sourceCell": "pdf:416:cell:16"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "XOR reg/mem16, reg16",
+          "sourceCell": "pdf:416:cell:21"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "XOR reg/mem32, reg32",
+          "sourceCell": "pdf:416:cell:26"
+        },
+        {
+          "memoryPositions": [
+            0
+          ],
+          "selector": "XOR reg/mem64, reg64",
+          "sourceCell": "pdf:416:cell:31"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "XOR reg8, reg/mem8",
+          "sourceCell": "pdf:416:cell:36"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "XOR reg16, reg/mem16",
+          "sourceCell": "pdf:416:cell:41"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "XOR reg32, reg/mem32",
+          "sourceCell": "pdf:416:cell:46"
+        },
+        {
+          "memoryPositions": [],
+          "selector": "XOR reg64, reg/mem64",
+          "sourceCell": "pdf:416:cell:51"
+        }
+      ],
+      "owner": "amd-entry:0153"
+    }
+  },
+  "pages": {
+    "127": "ad8836e9a46486abc97ff861efe55e3d12d1759a12877400cc1444ec2e82f01a",
+    "128": "e5ba9e3288e67164e2c340a3eef174d5c8558bb1609bd049e99848ece95eebea",
+    "131": "1eb9d18897854be940b2e6c247851fdcb576ad2f89b4228d779037435956965e",
+    "132": "2249673bf18d0307c26466811079b9a8a981950ffb8565e029098be34d70dbf6",
+    "135": "21b1cb860e506d73dbcfa2bbfa8f44917291e3abd3a3be909446ebecc8bec7de",
+    "136": "fe4113bd9fdb76546629b54bec72e9a8e1c559a370bb732dda96ba91925c35bc",
+    "170": "fe7f0592043598f57b29d9f405f5abe36d6871a3a60220b9e2e0481bdca4916e",
+    "171": "fda7358c83ff9c6bc7d72871751b7a83d9e6a6539925f226518dd4a0ed4c5f19",
+    "172": "25c3b89be04a118e2c8b3503667c2641c8053309b0f60d24ddf0be52e4151127",
+    "173": "5f6a5a04c0bf98bd678989eb0e790845cd51044962997e00401010fb9e3ee0af",
+    "174": "5ca4f24182a1b381c0ee3ea40bad4971734590547badd82d7cb86ae1df8164fb",
+    "175": "ddb42bff9a4b92c75a1351f4029035ee9e15b684a1a4e46796c0044abc09a42f",
+    "207": "4686dbafaa04a15144d87f06e85cb2c19b576d26d3618cfca49bd203b32fc877",
+    "208": "fdd57df0041f8813e1eaeb0f19f6de4b4c2d7df6440fb8ba836cf54a98e0a029",
+    "209": "05da957ac778d1f9b38be7f134b5769faa940452200088e12159f9566bf0255c",
+    "210": "214e986e7b371bed13a2342a80dae0e0460a8a973f200e53e93aae641a6cf865",
+    "211": "eede979ac0647dbd1a938e32282459097069c1172ff8ce2de7c8e849cb3a9d85",
+    "212": "96890c8136d1302313db5d0a2b7bed2afc2871a05afd1853e6af2552cfe663fb",
+    "220": "1b5e32e81d1e52fbde601e74e4b7a608f4190b1f30725257686e624ec938c4de",
+    "221": "39d542b46fbdb75aa40d863e82f78b12a4dd99452831d704a624083a4e1bde6c",
+    "232": "e20d99d8b9f54278d0f1eede736cd023d2991bd6973d381fd28e713fc0f3dc54",
+    "233": "361926609a8d696d922766f7d27715918b87d177ed99599eccc30d079bdb4bff",
+    "234": "93ac3c6943a056fa01b2ae17fc1c5ba2ae08f7676c05e795f758c2d1912a5829",
+    "235": "b7c3c7b997c2d8b8ad568702b4ccb1d35d77ea4a9b396dd43fe2ba9c8e672a0a",
+    "267": "0d616ca31ea6ab0140a6cf2b3bc439cc7421e0512d34c0ff83bd91d430656e92",
+    "268": "941549ecbfa4cf78066af65421d20f87a726dcb94b6613a30938c1046e770fd5",
+    "301": "d361dfda0bb4edee6adac0ba904407c245938fd3b639cf433763d7c7c130360d",
+    "302": "a7d3251c1f9e71f8eab4e9d5ba3fea7b692301a46fe6f447b3deed98f45e59ba",
+    "312": "c1e17f60755c4174a6e9b9aaba83e9ccf70fec91b8a25069d58423e87cb15122",
+    "313": "0d593dfb5a9095843cc942d7f00b8a41f390fff1f62beef6102de6ce8848995b",
+    "315": "65d08725982ce02a20ae52da5212531a65e164583a6b9d05a75cc1f42d697548",
+    "316": "3c33b80b684e57f6ff07dcb6440786ff2321e21067fb1e9072296b0b517fbd9e",
+    "317": "a28f87af36ddb37a7008bd977d379200164e51742a6dfdd20b84a88d8a0b3863",
+    "318": "1c9b99ed915ac813b57bf23fdb947ce35b401daa2eefbcf81f0e347eb4b9ee0b",
+    "320": "1cf8b64af4ff94e09442b4d79ac6ab336470d939dafb56f73182e75b73b79e8f",
+    "321": "41e46b2a34730a23e0e7eab447abd5184eddba78c4744f9e3fc3e7eea4b2065b",
+    "374": "a30315615ca74e975b3ccad16199d4ef4c15cc5f7634c88aa1ee9aa4cf89889a",
+    "375": "4dd6058fca2f3df60ca6f9dc5643beddacc3ea0cb4dc01d83a013240eb517840",
+    "376": "0e7de02e6045d5bcae548af9434e3785947741780ac4ca35414caffe99e4eacd",
+    "377": "20f8d464e99621079aea78869d3bccb6c5fbcdeee8c9a02606790eb225e0fedc",
+    "396": "faf64f91348ef1f121460486b98a61ac272a7d8e8eddb6ce61ad153dd663b53e",
+    "397": "553dcfe584a70786ffff5b92060d932d8256dfa8d0a95a9cb07493977176f871",
+    "398": "17c4f504142830634ef0f31c7099be677633e127021458fc2f156874bddddba0",
+    "399": "c1fa8b6bd1ba46a9ef5c4abfa3e3e49d5b47aa44c386c2d849fc83cb18652716",
+    "410": "725613c62080fc895f279a2a17352a63d4e3161549c758c91f3e5a06ac69832d",
+    "411": "5041bb9d039c9fd856fa5c45e345023c72921fc34265da1a8e5fb2a312e30c0d",
+    "412": "f74c55b5968caf39f58c2f24ebb83ede63aac7c9c0feb9fde56e33ab37f0a3ea",
+    "413": "32b790d1d6cd51f730e867511dd08d3b9d5ace2212ddfcf9f7e2acda727c3a12",
+    "415": "20e1584ab51f0c7b827c0499681849aec276af83f0ad203d6d418f6398765b62",
+    "416": "fffb86592229810bb346a86a5a54a462ad29bc69e0434e0f23e3b83b5300d6bc",
+    "417": "1889d4131cb42db9b1229e45a385ca304c0ddfc36324c7d9d3a366d9f7e9ad72",
+    "418": "43c4900e69024c52d883b529a16c24f159ab5658e609bc5e2d4632a92485c7a8",
+    "51": "cb23462d96470c84c3d095c26922660d3ad1259a158727c3e79e7da219795954",
+    "54": "387a445335fd9c484d13c25b646fb930b4eabb72c07462f32ab2d251b8abdc3b",
+    "55": "db1edb5ab3900a79578a3d7ac57e9b655508b5730d96f0ab27754667c5f1cc8a"
+  },
+  "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+  "publication": "24594",
+  "repeat": {
+    "CMPS": {
+      "clause": {
+        "cells": [
+          "pdf:207:cell:26",
+          "pdf:207:cell:27",
+          "pdf:207:cell:28"
+        ],
+        "text": "For block comparisons, the CMPS instruction supports the REPE or REPZ prefixes (they are synonyms) and the REPNE or REPNZ prefixes (they are synonyms). For details about the REP prefixes, see \u201cRepeat Prefixes\u201d on page 12. If a conditional jump instruction like JL follows a CMPSx"
+      },
+      "owner": "amd-entry:0044",
+      "properties": {
+        "countBits": [
+          64,
+          32
+        ],
+        "countSelectedBy": "address-size;not-operand-size",
+        "encodingRole": "repeat;not-media-opcode-selection",
+        "faultRestart": "requires-separate-contract",
+        "operandBits": [
+          8,
+          16,
+          32,
+          64
+        ],
+        "prefixes": [
+          "f3-repe-repz",
+          "f2-repne-repnz"
+        ],
+        "sourceScopeConflict": "p2:repeat-note-disagreement",
+        "zeroCountAndIteration": "requires-separate-contract",
+        "zf": "post-iteration-repeat-condition"
+      }
+    },
+    "INS": {
+      "clause": {
+        "cells": [
+          "pdf:234:cell:19",
+          "pdf:234:cell:20",
+          "pdf:234:cell:21",
+          "pdf:234:cell:22",
+          "pdf:234:cell:23",
+          "pdf:234:cell:24",
+          "pdf:234:cell:25",
+          "pdf:234:cell:26",
+          "pdf:234:cell:27"
+        ],
+        "text": "The INSB, INSW, and INSD instructions copy byte, word, and doubleword data, respectively, from the I/O port (0000h to FFFFh) specified in the DX register to the input buffer specified in the ES:rDI registers. If the operand size is 64-bits, the instruction behaves as if the operand size were 32-bits. If the CPL is higher than the IOPL or the mode is virtual mode, INSx checks the I/O permission bitmap in the TSS before allowing access to the I/O port. (See APM Volume 2 for details on the TSS I/O permission bitmap.) The INSx instructions support the REP prefix for block input of rCX bytes, words, or doublewords. For details about the REP prefix, see \u201cRepeat Prefixes\u201d on page 12."
+      },
+      "owner": "amd-entry:0058",
+      "properties": {
+        "countBits": [
+          64,
+          32
+        ],
+        "countSelectedBy": "address-size;not-operand-size",
+        "encodingRole": "repeat;not-media-opcode-selection",
+        "faultRestart": "requires-separate-contract",
+        "operandBits": [
+          8,
+          16,
+          32
+        ],
+        "prefixes": [
+          "f3-rep"
+        ],
+        "sourceScopeConflict": "p2:repeat-note-disagreement",
+        "zeroCountAndIteration": "requires-separate-contract",
+        "zf": "not-a-repeat-condition"
+      }
+    },
+    "LODS": {
+      "clause": {
+        "cells": [
+          "pdf:267:cell:20",
+          "pdf:267:cell:21",
+          "pdf:267:cell:22",
+          "pdf:267:cell:23",
+          "pdf:267:cell:24",
+          "pdf:267:cell:25"
+        ],
+        "text": "The LODSx instructions support the REP prefixes. For details about the REP prefixes, see \u201cRepeat Prefixes\u201d on page 12. More often, software uses the LODSx instruction inside a loop controlled by a LOOPcc instruction as a more efficient replacement for instructions like: mov eax, dword ptr ds:[esi] add esi, 4 The LODSQ instruction can only be used in 64-bit mode."
+      },
+      "owner": "amd-entry:0071",
+      "properties": {
+        "countBits": [
+          64,
+          32
+        ],
+        "countSelectedBy": "address-size;not-operand-size",
+        "encodingRole": "repeat;not-media-opcode-selection",
+        "faultRestart": "requires-separate-contract",
+        "operandBits": [
+          8,
+          16,
+          32,
+          64
+        ],
+        "prefixes": [
+          "f3-rep"
+        ],
+        "sourceScopeConflict": "p2:repeat-note-disagreement",
+        "zeroCountAndIteration": "requires-separate-contract",
+        "zf": "not-a-repeat-condition"
+      }
+    },
+    "MOVS": {
+      "clause": {
+        "cells": [
+          "pdf:301:cell:20",
+          "pdf:301:cell:21",
+          "pdf:301:cell:22",
+          "pdf:301:cell:23",
+          "pdf:301:cell:24"
+        ],
+        "text": "Do not confuse this MOVSD instruction with the same-mnemonic MOVSD (move scalar double- precision floating-point) instruction in the 128-bit media instruction set. Assemblers can distinguish the instructions by the number and type of operands. The MOVSx instructions support the REP prefixes. For details about the REP prefixes, see \u201cRepeat Prefixes\u201d on page 12."
+      },
+      "owner": "amd-entry:0087",
+      "properties": {
+        "countBits": [
+          64,
+          32
+        ],
+        "countSelectedBy": "address-size;not-operand-size",
+        "encodingRole": "repeat;not-media-opcode-selection",
+        "faultRestart": "requires-separate-contract",
+        "operandBits": [
+          8,
+          16,
+          32,
+          64
+        ],
+        "prefixes": [
+          "f3-rep"
+        ],
+        "sourceScopeConflict": "p2:repeat-note-disagreement",
+        "zeroCountAndIteration": "requires-separate-contract",
+        "zf": "not-a-repeat-condition"
+      }
+    },
+    "OUTS": {
+      "clause": {
+        "cells": [
+          "pdf:320:cell:19",
+          "pdf:320:cell:20",
+          "pdf:320:cell:21"
+        ],
+        "text": "The OUTSx instruction supports the REP prefix. For details about the REP prefix, see \u201cRepeat Prefixes\u201d on page 12. If the effective operand size is 64-bits, the instruction behaves as if the operand size were 32 bits."
+      },
+      "owner": "amd-entry:0099",
+      "properties": {
+        "countBits": [
+          64,
+          32
+        ],
+        "countSelectedBy": "address-size;not-operand-size",
+        "encodingRole": "repeat;not-media-opcode-selection",
+        "faultRestart": "requires-separate-contract",
+        "operandBits": [
+          8,
+          16,
+          32
+        ],
+        "prefixes": [
+          "f3-rep"
+        ],
+        "sourceScopeConflict": "p2:repeat-note-disagreement",
+        "zeroCountAndIteration": "requires-separate-contract",
+        "zf": "not-a-repeat-condition"
+      }
+    },
+    "SCAS": {
+      "clause": {
+        "cells": [
+          "pdf:376:cell:20",
+          "pdf:376:cell:21",
+          "pdf:376:cell:22",
+          "pdf:376:cell:23"
+        ],
+        "text": "For block comparisons, the SCASx instructions support the REPE or REPZ prefixes (they are synonyms) and the REPNE or REPNZ prefixes (they are synonyms). For details about the REP prefixes, see \u201cRepeat Prefixes\u201d on page 12. A SCASx instruction can also operate inside a loop controlled by the LOOPcc instruction."
+      },
+      "owner": "amd-entry:0129",
+      "properties": {
+        "countBits": [
+          64,
+          32
+        ],
+        "countSelectedBy": "address-size;not-operand-size",
+        "encodingRole": "repeat;not-media-opcode-selection",
+        "faultRestart": "requires-separate-contract",
+        "operandBits": [
+          8,
+          16,
+          32,
+          64
+        ],
+        "prefixes": [
+          "f3-repe-repz",
+          "f2-repne-repnz"
+        ],
+        "sourceScopeConflict": "p2:repeat-note-disagreement",
+        "zeroCountAndIteration": "requires-separate-contract",
+        "zf": "post-iteration-repeat-condition"
+      }
+    },
+    "STOS": {
+      "clause": {
+        "cells": [
+          "pdf:396:cell:17",
+          "pdf:396:cell:18"
+        ],
+        "text": "The STOSx instructions support the REP prefixes. For details about the REP prefixes, see \u201cRepeat Prefixes\u201d on page 12. The STOSx instructions can also operate inside a LOOPcc instruction."
+      },
+      "owner": "amd-entry:0141",
+      "properties": {
+        "countBits": [
+          64,
+          32
+        ],
+        "countSelectedBy": "address-size;not-operand-size",
+        "encodingRole": "repeat;not-media-opcode-selection",
+        "faultRestart": "requires-separate-contract",
+        "operandBits": [
+          8,
+          16,
+          32,
+          64
+        ],
+        "prefixes": [
+          "f3-rep"
+        ],
+        "sourceScopeConflict": "p2:repeat-note-disagreement",
+        "zeroCountAndIteration": "requires-separate-contract",
+        "zf": "not-a-repeat-condition"
+      }
+    }
+  },
+  "schema": "ariadne.amd64-lock-repeat-inventory/v1",
+  "sourcePolicySha256": "d1caf84927162bb696185eed4880007aa92ded2260738c940cdeb935ee8a1840",
+  "sourceRowsSha256": "03703dd1de58679a57e2340f5105f4f1c74f24dcd49d789a2ef3cf005f784c87"
+}

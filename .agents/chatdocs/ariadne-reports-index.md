@@ -1,5 +1,15 @@
 # Ariadne chat document archive
 
+**P2 H64 execution, 2026-10-24.** The [resumed report](ariadne-amd64-p2-h64-execution-20261024/index.html) covers the checked mode exclusion, native-64 size/LOCK/REP inventories and remaining source questions. P2 remains incomplete.
+
+**H64 hypothesis, 2026-10-24.** The [scope summary](ariadne-amd64-h64-hypothesis-20261024/index.html) clarifies native AMD64 execution-only support, retained smaller operands and the conditional MOVD mode exclusion. Counts are unchanged.
+
+**P2-C explained, 2026-10-24.** The [detailed explanation](ariadne-amd64-p2-c-explained-20261024/index.html) covers prefix/size applicability, the five open references, work packages and completion checks.
+
+**P2 task execution and source blocker, 2026-10-24.** The [task report](ariadne-amd64-p2-tasks-and-source-blocker-20261024/index.html) records implemented fixes, current source resolutions, passing checks and the GF inverse-table source question.
+
+**P2 open-status causes, 2026-10-24.** The [cause report](ariadne-amd64-p2-open-causes-20261024/index.html) separates unfinished complete-clause review, six source conflicts and inherited accounting gaps.
+
 **P1 completed, 2026-10-24.** The [completion report](ariadne-amd64-p1-complete-20261024/index.html) records the accepted sources and checked P1 exit. P2–P8 remain separate.
 
 **Section-5 execution, 2026-10-24.** The [execution follow-up](ariadne-amd64-section5-execution-20261024/index.html) records delivered source tooling, the frame-path repair, passing portable/replay checks and remaining full-stage exits.
@@ -30,6 +40,11 @@ Canonical documents under `docs/` remain in place. The two 2026-10-12 design/pla
 
 | Chat document | View | Source |
 | --- | --- | --- |
+| P2 H64 projection and source inventories (2026-10-24) | [Open execution report](ariadne-amd64-p2-h64-execution-20261024/index.html) | HTML reading view; [canonical execution](../../docs/Ariadne/amd64-coverage-design.md#1024-h64-source-projection-and-native64-inventories) |
+| H64 native AMD64-only hypothesis (2026-10-24) | [Open scope summary](ariadne-amd64-h64-hypothesis-20261024/index.html) | HTML explanation; [canonical hypothesis](../../docs/Ariadne/amd64-coverage-design.md#1023-h64-native-amd64-execution-only) |
+| P2-C architectural source inventories explained (2026-10-24) | [Open C explanation](ariadne-amd64-p2-c-explained-20261024/index.html) | HTML explanation; [canonical C breakdown](../plans/amd64-operation-coverage.md#p2-c-architectural-source-inventory-details) |
+| P2 tasks and GF source-authority blocker (2026-10-24; follow-up) | [Open task report](ariadne-amd64-p2-tasks-and-source-blocker-20261024/index.html) | HTML explanation; [canonical execution](../../docs/Ariadne/amd64-coverage-design.md#1022-p2-completion-task-execution) |
+| Why P2 remains open (2026-10-24) | [Open cause report](ariadne-amd64-p2-open-causes-20261024/index.html) | HTML presentation; [canonical P2 execution](../../docs/Ariadne/amd64-coverage-design.md#1021-p2-clause-and-reference-execution) |
 | P1 source selection complete (2026-10-24) | [Open completion](ariadne-amd64-p1-complete-20261024/index.html) | HTML presentation; [canonical contract](../../docs/Ariadne/amd64-coverage-design.md#1020-p1-source-selection-and-structural-migration-completed) |
 | AMD64 section-5 execution (2026-10-24; full P1–P8 incomplete) | [Open execution follow-up](ariadne-amd64-section5-execution-20261024/index.html) | HTML presentation; [canonical execution](../../docs/Ariadne/amd64-coverage-design.md#1019-section-5-execution-and-current-exit-gates) |
 | Why AMD64 coverage remains open (2026-10-24; latest selected source gate) | [Open checkpoint report](ariadne-amd64-open-gates-20261024/index.html) | HTML explanation; [canonical source contract](../../docs/Ariadne/amd64-coverage-design.md#1018-remaining-paired-family-source-constraints); [source identities](ariadne-amd64-open-gates-20261024/provenance.json) |

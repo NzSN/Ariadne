@@ -3,9 +3,21 @@
 ## Context and follow-up
 
 **Current execution: resumed at the user's request, 2026-10-24.** The
+latest [native-64 execution](../../docs/Ariadne/amd64-coverage-design.md#1024-h64-source-projection-and-native64-inventories)
+implements the source-checked non-64-only MOVD exclusion and native-64
+size/LOCK/REP inventories. Smaller operands, address-32 forms and legacy
+encodings valid in 64-bit mode remain required. The
+user subsequently requested a concrete P2 completion task list and continued
+execution until an actual external blocker. Follow the
+[P2 completion contract](../../docs/Ariadne/amd64-coverage-design.md#1022-p2-completion-task-execution); unfinished implementation
+and unreviewed source are work, not evidence of an external blocker. The
 [P1 completion](../../docs/Ariadne/amd64-coverage-design.md#1020-p1-source-selection-and-structural-migration-completed)
 now accepts the exact five-edition source pool and closes its structural
-migration/adoption gate. Detailed P2 clauses and P3 legal domains remain open.
+migration/adoption gate. The subsequent
+[P2 execution](../../docs/Ariadne/amd64-coverage-design.md#1021-p2-clause-and-reference-execution)
+adds architectural clauses, current cell/reference dispositions and accepted
+source/section review objects. Detailed P2 completeness and P3 legal domains
+remain open.
 The
 [per-form mapping continuation](../../docs/Ariadne/amd64-coverage-design.md#1014-per-form-source-rule-mapping-resumed)
 completes the five outstanding dependencies and the affected source,
@@ -778,6 +790,236 @@ by P3 legal domains and later implementation/consumer stages. The nine current
 reference scopes, 516 original unparsed cells and named semantic conflicts
 remain explicit. P1 completion does not mark any of those later exits complete.
 Run products stay ignored under `target/p1-completion-20261024/`.
+
+### P2 clause and reference execution: 2026-10-24
+
+The user requested executing P2 after P1 was published in `e7a594b`. The
+[canonical P2 contract](../../docs/Ariadne/amd64-coverage-design.md#1021-p2-clause-and-reference-execution)
+owns interpretation, executable commands, source conflicts and claim limits.
+
+1. Review the original 516 unparsed cells and nine reference scopes against
+   accepted editions, including rendered table/diagram pages. Preserve every
+   original object and digest.
+2. Add 30 reviewed clauses and 804 context/clause/conflict anchors for prefix/size/register tables,
+   diagrams, MOV offsets, UAI, segment bases and source-specific LOCK/REP lists.
+   Check kinds, owners, dependencies and physical identity. Keep applicability
+   and legal domains separate from descriptive source rules.
+3. Add current dispositions: 492 supporting named clauses, 16 individually
+   reviewed structural/context cells, five conflicting cells and three
+   unparsed figure-reference cells. Resolve four more reference scopes; retain
+   the earlier scaling resolution and five open scopes. Preserve six newly identified
+   conflicts and all inherited boundaries.
+4. Reconstruct seven actual PDFs and P1 adjudications before the P2 pass. Carry
+   all 100 added sections and 4,340 selected PDF pages into addressed
+   clause-review worklists. Checked anchors do not grant page completeness.
+5. Run independent fresh reconstruction, strict P2 exit, negative/arithmetic
+   controls, tooling/BAP regressions and documentation/navigation checks.
+   Record reconstruction separately from the incomplete stage exit.
+
+**Remaining exit:** five original references, three unparsed/five conflicting
+original cells, new/inherited boundaries, all 100 added-section complete clause
+reviews and whole-region completeness. The executable counts these objects.
+P2 is active
+and incomplete; P3–P8 retain their separate exits. Products stay ignored under
+`target/p2-execution-20261024/`.
+
+**Validation:** final extraction `run-04` passes. Independent strict `check`
+reconstructs the full source chain and matches all artifacts, then exits 2 for
+the incomplete P2 gate. Current source/input seals and original digests pass.
+All 13 focused P2 controls, 540 tooling and 145 BAP Python tests pass, as do
+layout/navigation checks. No Rust/native behavior changes require a new
+runtime campaign in this source-tooling continuation.
+
+### P2 completion tasks: 2026-10-24
+
+The user requested developing tasks to finish P2 and continuing until a blocker
+that cannot be resolved locally. The
+[canonical completion follow-up](../../docs/Ariadne/amd64-coverage-design.md#1022-p2-completion-task-execution)
+owns the data contract, implementation findings and dated validation.
+
+| Task | Concrete delivery and exit | Execution state |
+| --- | --- | --- |
+| P2-A — Review-disposition engine | Bind every selected cell/word and clause/reference to exact source ownership; derive section/page completion from validated dispositions. Reject missing cells, overlaps, wrong owners, fabricated context and saved completion flags. Replace unconditional open-state assignments. | Implemented. Tested page/section closure, exact population coverage and dependency refusal; source-reviewed page 85 closes, page 68 retains its diagram dependency. This completes the engine delivery, not the remaining page reviews. |
+| P2-B — Current obligation reconciliation | Preserve all original IDs/digests. Give each inherited boundary a current scoped resolution, still-open prerequisite or explicitly owned successor; derive counts from current dispositions. Link the three Figure 1-6 prose cells to their actual target without erasing its conflict. | Implemented for all 21 original boundary objects. Executed source-proof recipes close the old MOV-offset boundary and the alleged REX-x conflict. The three prose cells now have checked reference mappings. Nineteen source boundaries remain open under their original IDs. |
+| P2-C — Architectural source inventories | Complete the fixed/default-size and mandatory-prefix exception inventories behind the five remaining references; review Appendix B, instruction-specific clauses and cross-volume rules. Parse supported table/diagram constraints explicitly. | Partly implemented in the [H64 continuation](#h64-source-projection-and-c-inventory-execution): full Appendix B heading/note population, default-64 owned clauses, invalid/reassigned tables and LOCK/REP source selectors. Full B-1 per-form qualifications and mandatory-prefix inventories remain open. |
+| P2-D — Existing-family clause follow-ups | Replay the GF inverse table against its source definition; review conversion, MOVD and FMA reference/exception/encoding discrepancies. Reconcile each of the 14 inherited boundaries, retaining unresolved alternatives. | GF table replay implemented for all 256 entries in both Vol4 revisions. A noninvertible literal at input F1 requires an authoritative source answer. Other family follow-ups remain pending. |
+| P2-E — Source-conflict adjudication | Search the accepted editions, independent publisher editions and official errata for each new conflict. Require exact evidence for an interpretation; source disagreement is preserved if an authoritative or justified explicit source rule cannot resolve it. | Resolved REX lowercase-x meaning through Table 1-17 note 1. Fresh official Vol3, Vol4 and combined-manual retrievals match their pins. The combined manual repeats the GF F1 value; no correcting answer was found in the searched publisher index/results. The GF interpretation is externally blocked. |
+| P2-F — Added sections | For every one of the 100 added sections, build and independently review the complete clause/reference inventory, including feature, mode, privilege, OS-state, exceptions, memory and diagrams. No unmatched source material may disappear. | Pending source rules and P2-A. |
+| P2-G — Complete region review | Give all 4,340 accepted pages checked clause/context dispositions, including global rules, supplementary references and nonarchitectural material. A page count or selected anchor count cannot close this task. | Pending P2-A and clause inventories. |
+| P2-H — Final source and mutation replay | Reproduce actual pinned PDFs, replay every disposition and minimized omission/ownership/target/context mutation, run applicable tests and the strict exit. Complete P2 only if no required clause/reference is left unresolved. | Pending all required source interpretations. |
+
+An external blocker must name the exact unavailable source answer, artifact or
+decision, the attempts to obtain it and its affected tasks. Ordinary missing
+implementation, a large review population or failing code within local control
+does not qualify. Continue independent tasks while an answer is being sought.
+No production admission, P3 legality or later runtime qualification is implied.
+
+**Stopping condition encountered.** Vol4 revision 3.27 PDF page 228 and the
+publisher's combined revision 4.10 PDF page 2229 both define `inverse(F0)=5B`
+and `inverse(F1)=5B`. This is not an injective inverse on nonzero elements.
+For F1, multiplication by the listed 5B under the documented polynomial 011B
+gives 5A rather than 01; independent field inversion gives 23. Both predecessor
+and selected tables retain 5B. Full geometric reconstruction and rendered-page
+inspection confirm the literal; it is not a PDF extraction failure.
+
+Required external answer: an AMD correction or an authoritative interpretation
+reconciling the literal lookup with the claimed Galois inverse semantics.
+Replacing the published value with 23 is not source adjudication. P2-D/E and
+the full P2-H exit require that answer. P2-C/F/G still contain local inventory
+and review work; they are unfinished work, not additional external blockers.
+The user's stop condition is reached at this source-authority question.
+
+**Validation at the stopping point.** Final `run-02` extraction passes.
+Independent `check --require-complete` reconstructs all source products and
+matches every artifact, then exits 2 for current unresolved obligations.
+Current implementation/input seals, all 29 focused controls, 556 tooling
+tests and 145 BAP Python tests pass, as do layout/navigation checks. The first
+successful extraction is retained only as an intermediate source snapshot;
+the final run includes explicit Table 1-10 ownership for GPR byte codes.
+No Rust/native behavior changes or later qualification are claimed.
+
+### P2-C architectural source inventory details
+
+This describes C's full exit; the [later H64 execution](#h64-source-projection-and-c-inventory-execution)
+delivers part of it. Its purpose is to turn general prefix/size rules and their
+exceptions into exact instruction-form applicability records. Locating a note
+or reading a mnemonic list does not enumerate every form covered by that note.
+
+| Open reference | Required C inventory | Shared source question |
+| --- | --- | --- |
+| `prefix-note-2` | Classify when 66h is an operand-size override, an opcode selector, ignored or otherwise restricted, with exact instruction/form ownership. | Generic prefix rules do not enumerate SIMD and instruction-specific exceptions. |
+| `prefix-note-5` | Inventory LOCK-eligible forms and their memory-destination/applicability predicates, including the complete source-specific mnemonic lists. | Vol1 omits CMPXCHG16B while Vol3 includes it; its disposition also belongs to E. |
+| `prefix-note-6` | Separate count-only REP, ZF-conditioned REPE/REPNE and SIMD opcode-selector uses of F2/F3. | The table note and dedicated REP section differ in scope; its disposition also belongs to E. |
+| `operand-note-2` | Inventory exceptions to the typical 32-bit operand-size default. | Requires the actual Appendix B rows, definitions and notes. |
+| `default64-instruction-exceptions` | Bind the exact default/fixed-size forms and near-branch/implicit-stack qualifications. | Overlaps the previous reference; it is not a separate instruction population. |
+
+**C.1 — Source and ownership map.** Review selected Vol3 Chapter 1 prefix/size
+rules (especially PDF 49–56), Appendix B (PDF 627–656), the corresponding
+Vol1 branch/stack/operand-size rules and each relevant instruction's own
+section. Retain exact PDF identities, physical cells, table rows and footnote
+targets. Appendix B covers general-purpose instructions; mandatory-prefix
+exceptions in SIMD and other subsets require their own instruction sources.
+
+**C.2 — Default/fixed-size matrix.** Parse B.1 definitions, all applicable
+Table B-1 rows/notes, B.3 invalid/reassigned forms and B.4/Table B-5 default-64
+forms. Classify each form as fixed size, variable/promoted size, special
+default, unavailable in the selected mode or reassigned encoding. Keep operand,
+address, immediate, displacement and implicit-count widths separate. A
+no-REX-needed list is not itself a default-64 operand-size inventory.
+
+**C.3 — Prefix-role matrix.** For each relevant instruction form, record the
+role and applicability of 66h/F2h/F3h and the interaction with REX.W or an
+extended encoding's prefix selector. Required opcode selection, size override,
+ignored prefix and explicit invalid/undefined use are distinct source
+dispositions. General rules can be reused only after their premises apply to
+the form; instruction-specific exclusions remain explicit.
+
+**C.4 — LOCK/REP form inventories.** Bind each source-listed operation to its
+actual forms and predicates, rather than treating a mnemonic as sufficient.
+For LOCK, distinguish a memory-writing destination from a register destination.
+For REP, distinguish repetition from opcode selection, retain the count-width
+and ZF qualifications, and carry the two source disagreements into E. This
+inventory does not implement string loops or partial-fault/restart behavior.
+
+**C.5 — Typed source records and independent review.** Give each owned form
+selector its source clauses, mode/applicability predicates, size/prefix rules,
+exceptions, dependencies and current disposition. The selector identifies the
+source instruction form/opcode family; P3 later supplies the complete byte
+grammar. Preserve raw rows and repeated physical note occurrences while
+sharing semantic rule identities where justified. Independently compare the
+reviewed inventory against the manual, including unmatched material. Do not
+let a parser certify completeness merely by counting its own matches.
+
+**C.6 — Executable closure.** Reconstruct actual pinned products; replay rows,
+diagrams, notes and ownership; integrate the records with the A/B disposition
+engine. Omitted fixed/default-size rows, swapped prefix-note-2/operand-note-2
+targets, byte forms incorrectly promoted to 64 bits, false mandatory-prefix
+roles, register-only forms admitted to LOCK, stale source identities and
+unsupported clauses labeled harmless must fail. Close the five references only
+after their full required scopes have checked current dispositions. Passing
+selected-rule tests is insufficient.
+
+Current code explicitly retains `exhaustiveInstructionApplicability=False`,
+`instructionExceptions="required-separate-inventory"` and
+`fullOpcodeExceptionInventory=False` in its selected clauses. C supplies the
+missing inventories behind those limits; changing the flags does not supply
+the evidence. No complete reviewed C form count is currently established.
+
+The GF inverse-table question belongs to D/E and the full H exit. It does not
+prevent most of C.1–C.6 from proceeding with the available pinned sources.
+LOCK and repeat source-scope decisions are C's specific shared dependencies
+on E. C remains unfinished local review/implementation work.
+
+### H64: native AMD64 execution only
+
+The user proposed a 64-bit-only platform hypothesis. The
+[canonical H64 contract](../../docs/Ariadne/amd64-coverage-design.md#1023-h64-native-amd64-execution-only)
+interprets it as native AMD64 64-bit execution, excluding legacy/compatibility
+execution and 32-bit/WOW64 target execution. The source scope already selects
+`long-64`; do not mutate frozen manifests or delete historical evidence.
+
+1. **Mode ownership.** Distinguish explicitly 64-bit rows from explicitly
+   non-64-only rows. Preserve shared notes and cross-mode context needed to
+   interpret selected rows. Execution mode, operand/address width and encoding
+   family are separate properties.
+2. **Scoped dispositions.** Add an executable mode-evidence recipe for the
+   non-64-only MOVD store-row conflict, preserving its original ID and literal.
+   Keep the note-1 native-64 row required. Other source questions need their
+   own proven scope; do not exclude them by analogy.
+3. **P2-C under H64.** Review native-64 default/fixed-size rows, 8/16/32/64-bit
+   operands, 67h address-32 forms, applicable legacy/VEX/EVEX/XOP encodings and
+   prefix/LOCK/REP qualifications. Classify material out-of-selected-mode only
+   after exact source ownership establishes that restriction.
+4. **Controls.** Reject exclusions based only on 32-bit data, address-32,
+   a legacy-encoding label or a 64-bit host. Require the exact row/note mode
+   predicate and reject swapped note-1/note-2 ownership. Keep GF in scope.
+
+Status at the hypothesis checkpoint: documentation only. The
+[following execution](#h64-source-projection-and-c-inventory-execution)
+implements the exclusion and source inventories. H64 does not itself complete
+P2-C or the full P2 exit. Runtime handling, source locks and producer/helper
+pins remain unchanged.
+
+### H64 source projection and C inventory execution
+
+The user resumed P2 under H64. The [canonical source contract](../../docs/Ariadne/amd64-coverage-design.md#1024-h64-source-projection-and-native64-inventories)
+owns the implementation and its limits.
+
+- B/D: source-check the non-64-only MOVD row in both editions, bind the exact
+  `long-64` scope and use a distinct mode-exclusion disposition. Preserve all
+  original boundary objects, the raw 6E literal and the native-64 row.
+- C.1/C.2: replay Appendix B's 30 pages, 172 B-1 headings/3,910 body words and
+  150 physical notes. Reconstruct all 21 B-5 defaults, the separate 27-entry
+  no-REX relation and all 22/5/2 B-2/B-3/B-4 rows. These finite source
+  populations do not establish complete opcode semantics.
+- C.2/C.5: bind 21 default-64 records to their instruction-owned clauses and
+  extents. Separate counter/address size, stack payload, immediate and branch
+  displacement. Keep per-form 66h qualification explicit.
+- C.4/C.5: bind all 19 LOCK mnemonics/195 source selectors and seven REP
+  string families to exact source clauses. Require a memory-writing
+  alternative; retain XCHG's automatic memory lock and INS/OUTS data limits.
+- C.6/H: execute omission, geometry, target/owner, predicate-direction,
+  mode/width and source-reconstruction controls. Fresh extraction passes;
+  independent strict replay reconstructs the chain, matches every artifact
+  and exits 2 for the incomplete P2 gate. All 52 focused controls, 579 tooling
+  and 145 BAP tests pass, with current-source seals/layout/navigation passing.
+
+Remaining C work includes full per-form B-1 qualifications, mandatory media
+prefix roles and source-list adjudication. The literal PREFETCHlevel summary
+`/0-3, 7, 8` remains a source-review question alongside the instruction-owned
+`/6` and `/7` rows; no byte domain is generated from it. P2-F/G's section and
+whole-region reviews remain local work. The GF authority answer is still an
+external dependency of full P2 acceptance; it is not used to close these tasks.
+
+The subsequent C.2 review verifies an additional native-64 source conflict:
+Vol1 PDF 128's near-branch Table 3-9 permits operand-size 16, while PDF 129
+says the near-branch actions/operand size are forced/fixed at 64. Rendered
+pages and the current publisher PDF confirm both; targeted AMD searches found
+no correction. Required answer: reconcile the 66h behavior for the seven
+near-branch groups, or explicitly select a conditional source-precedence
+hypothesis. Existing records keep per-form 66h qualification pending; no new
+source correction or machine-adjudicated boundary is claimed. Other C/F/G
+local work remains unfinished rather than externally blocked.
 
 ### Continuation stopped for publication: 2026-10-24
 

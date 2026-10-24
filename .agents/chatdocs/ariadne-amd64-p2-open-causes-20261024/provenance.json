@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-24",
+  "purpose": "Presentation of P2 remaining-open causes, implementation gaps and current accounting limits; no qualification products retained.",
+  "baseRevision": "e7a594b6ab9b99d52e91a2f6d89e758d08589f6d",
+  "sourceState": "base revision plus uncommitted P2 work",
+  "sources": {
+    "CHECKPOINTS.md": "af271da7a3ca6d6b96cbe06a02cd41855aafafcc00eb8bfe1ac6814f07fd941f",
+    "ROADMAP.md": "ffb6a97503df943b69f8ac9cfe41eff6cf3772bc0a33dc50d5caa4e7d7a41ac4",
+    ".agents/plans/amd64-operation-coverage.md": "9fc94c11aa2cb22886a56889d41394a790ec84ce47777756d97529d748903bca",
+    "docs/Ariadne/amd64-coverage-design.md": "06dc53dfa41aaa4b164b8d036c1e7e153e1205258293260e1386ca9fbd4104c0",
+    "tools/amd64_p2_constraints.py": "54b0c8f41a7cb83ad7910e77bb56bf82e288e51c70d0915b2f2e777ae86c0ea1",
+    "tools/test_amd64_p2_constraints.py": "efadabec21f8f77a77371d21540725694baf9e299c86f0746ae6f0f71ab3bf90",
+    "tests/bap/fixtures/source-migration/p2-constraints-v1.json": "bf4f6ce5cbfa148faad6dd5a5ca8cf49235077eb73c383b4766ad3f048464e41"
+  }
+}

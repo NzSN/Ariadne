@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-24",
+  "purpose": "Detailed explanation of pending P2-C source-inventory work; rendering performs no implementation or qualification.",
+  "baseRevision": "e7a594b6ab9b99d52e91a2f6d89e758d08589f6d",
+  "sourceState": "base plus uncommitted P2 work and explanatory documentation",
+  "sources": {
+    ".agents/plans/amd64-operation-coverage.md": "29a69293bf0a68966b1b93cc93d4a4ff35e6b8efd2004dc4b61db976eed176ae",
+    "docs/Ariadne/amd64-coverage-design.md": "19b3ecae45b728fd7c995ef1cd22370a9698ca5b4e2e480f20b1760244d01b5c",
+    "tools/amd64_source_constraints.py": "2b24e3278baeb99593f26ac4b86071b1d2616d09ef0f52909bdf5f7879711345",
+    "tools/amd64_p2_constraints.py": "02ffea39367277541ceb690e9a892998c45350284ce9cbe854965ca0d2bc9e82",
+    "tests/bap/fixtures/source-migration/p2-constraints-v1.json": "2ca9a35a4c947a56bf9a62aba131607e73ffd68c66a18f9ac685c1aec65dc1fd",
+    "tests/bap/fixtures/amd64-semantics/architecture-constraints-v1.json": "aed1f7b46db1a5487d18ab266a33955533f7d39084f9a365ecffd7f026437f8a"
+  }
+}

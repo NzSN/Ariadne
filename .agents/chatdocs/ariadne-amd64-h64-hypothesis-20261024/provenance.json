@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-24",
+  "purpose": "H64 native AMD64-only hypothesis and conditional source-scope impact; no new qualification.",
+  "baseRevision": "e7a594b6ab9b99d52e91a2f6d89e758d08589f6d",
+  "sources": {
+    "CHECKPOINTS.md": "f4dfdcf5c07df652984a3a35906701d66192db569454286aebaaffcae7079a31",
+    "ROADMAP.md": "53b43b94b8e450b1e6379fcf6b144c480a1d4494227de8ecf14a62384a9576df",
+    ".agents/plans/amd64-operation-coverage.md": "0b1020f0bccdf79684cb4e1a461f926b862a684ae09a8adaabf77b9ce4c65ed5",
+    "docs/Ariadne/amd64-coverage-design.md": "ec78080eea54c4030efdc8bafd6c840cf274271c6f1d97baf8b06130a2a3e172",
+    "tests/bap/fixtures/amd64-semantics/source-corpus-v2.lock.json": "1cd2277043422b6c9619cf6ae6955ace72d0cf84bf3995dedc35bb729d06c828",
+    "tests/bap/fixtures/source-migration/p1-source-policy-v1.json": "d1caf84927162bb696185eed4880007aa92ded2260738c940cdeb935ee8a1840",
+    "tools/amd64_source_corpus.py": "647aee93a5bf9ea97302aeed26da879ba0b88160f2f4632b4f66246f795483d7",
+    "tools/amd64_paired_constraints.py": "9daf0bd1ba63dd623fdca64a6fd7b02ae12f5a6bba6d3814ab3aff131ff5e33e",
+    "src/input/minidump.rs": "b22270a422d8035aa430b5c4cb4c7f66d3e953b356821d9fb0d98278ebfd8d00"
+  }
+}

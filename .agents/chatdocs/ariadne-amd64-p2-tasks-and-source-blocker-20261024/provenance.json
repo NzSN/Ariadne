@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-24",
+  "purpose": "P2 task execution and exact source-authority stopping question; no qualification products retained.",
+  "baseRevision": "e7a594b6ab9b99d52e91a2f6d89e758d08589f6d",
+  "sourceState": "base revision plus uncommitted P2 work",
+  "sources": {
+    "CHECKPOINTS.md": "058d46017286ba1bba21714f1f463b4afd4463fa96bba522c8194776b6dd3e6c",
+    "ROADMAP.md": "5ed64dcf2ac147aefd9e0e1f64b513ef6046e13de7b15ef00cc99e147ac52f0d",
+    ".agents/plans/amd64-operation-coverage.md": "327f27ba4f30c698dc92c8638b109925c6b1effa4d03736e4110838e62a923fa",
+    "docs/Ariadne/amd64-coverage-design.md": "195810c02f844cc8e3c2695db338bb60c04f72e2143d5c789752d55c8f3b8086",
+    "tests/README.md": "7b39c949b3bef902ad97bbc227c2def34e6a7be7b88dca1afa030349a0793d91",
+    "tools/amd64_p2_constraints.py": "02ffea39367277541ceb690e9a892998c45350284ce9cbe854965ca0d2bc9e82",
+    "tools/amd64_p2_review.py": "504a30bbfb399d851485a5c95dbd2fe146ec9302715b5675d20e55723e74af50",
+    "tools/amd64_p2_gf.py": "f1c88449313f6fe5d79b19a29cd6f936da4533c019f28ef9e16b0d68bd883ab5",
+    "tools/test_amd64_p2_constraints.py": "b8684a48d62cf4db6a93604eed708f04702cf61a0cda460d1ba822d655dc71df",
+    "tools/test_amd64_p2_review.py": "ff880c39232d4f882aeac1794c46ce7d116b9fcb0492af24b4178c0cf63df52b",
+    "tools/test_amd64_p2_gf.py": "2318f8a101d114c56e1674e5638efe60c68ec19d6b8fb214664c06a29c8f6910",
+    "tests/bap/fixtures/source-migration/p2-constraints-v1.json": "2ca9a35a4c947a56bf9a62aba131607e73ffd68c66a18f9ac685c1aec65dc1fd",
+    "tests/bap/fixtures/source-migration/p2-review-decisions-v1.json": "c6e056845e7521189df57b9609819fad4efab3d602ce1814dc1ff76137c4175e",
+    "tests/bap/fixtures/source-migration/p2-gf-table-v1.json": "273044345f3b947e996c658fd6d161bff7662c159097ae9d00d3a8f0c701b249",
+    "tests/bap/fixtures/source-migration/p2-gf-table-excerpt.json": "1530f820f663ad3f7afda8b528a272af306b9a47aa19a7f6ddd6fe5f71fd396d"
+  }
+}

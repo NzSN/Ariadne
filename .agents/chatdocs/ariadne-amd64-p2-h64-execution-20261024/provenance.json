@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-24",
+  "purpose": "Explanatory reading view of finite H64 projection and source inventories; complete P2 remains open.",
+  "baseRevision": "e7a594b6ab9b99d52e91a2f6d89e758d08589f6d",
+  "sourceState": "base plus uncommitted P2 continuation",
+  "sources": {
+    "CHECKPOINTS.md": "4d1701eb756365bd4ece74de8058a05de89f3fbf4dc9f07c666d052911957fc9",
+    "ROADMAP.md": "f7cde91d2ccd4122b630bad13d923b629772c028dbd6fee4d0a0edf405063237",
+    ".agents/plans/amd64-operation-coverage.md": "280799d90d6812535f07aabae8fa4ba87c5428c1a6c3b616708778a47759ac40",
+    "docs/Ariadne/amd64-coverage-design.md": "9a9caf3b8314d039e23a07a23684fe814c5bbe9607a52135057701c628fa6e65",
+    "tests/README.md": "b7575d6822896fffdf8a5387ca51cab63e3138c75a7ca3b6ca2914df95d42418",
+    "tools/amd64_p2_constraints.py": "b761f48bd2438bfcee4363a0bf8aea0ccdd90ba5d05d2766cfbe44a798fbc84d",
+    "tools/amd64_p2_review.py": "ccd8329df5e9c33d3cc6ae4dd51b8e92792eb9d91383b737354b6806a80dc8d4",
+    "tools/amd64_p2_native64.py": "c8789304d730291983444ed45c9850db74c0ab83420516346e748aeb93a82678",
+    "tools/amd64_p2_prefixes.py": "71c9e13f374cec17386133be9d60cc0843001b02631360a53396daece4c30462",
+    "tools/amd64_p2_gf.py": "f1c88449313f6fe5d79b19a29cd6f936da4533c019f28ef9e16b0d68bd883ab5",
+    "tests/bap/fixtures/source-migration/p2-review-decisions-v1.json": "43be26f95e431893b2541313473c4cbdae11e1b885c58887b72c4084e8ce9ba2",
+    "tests/bap/fixtures/source-migration/p2-native64-inventory-v1.json": "502c6ff5df3e12aa063696ad1cdb6ec318709beda3724ad7f76a0e0d51e6d976",
+    "tests/bap/fixtures/source-migration/p2-lock-repeat-v1.json": "ce8ee65fa628f65a28e75a17f0c9f40e3ce49c8eafbde6cef430e1581fdcf88d"
+  }
+}

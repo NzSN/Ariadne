@@ -12,7 +12,27 @@ adds checked dispositions, a cross-volume scaling rule and a generated
 frame-path output-cap repair. The subsequent
 [P1 completion](docs/Ariadne/amd64-coverage-design.md#1020-p1-source-selection-and-structural-migration-completed)
 accepts the exact five-edition source pool and completes structural migration.
-P2 constraint completeness, P3 legal domains and full AMD64 coverage remain open.
+The subsequent [P2 execution](docs/Ariadne/amd64-coverage-design.md#1021-p2-clause-and-reference-execution)
+checks 30 more clauses, adds current dispositions for the original 516 cells,
+and reduces nine current architectural reference scopes to five. Newly
+identified conflicts and complete section/region clause reviews remain
+explicit. P2 completeness, P3 legal domains and full AMD64 coverage remain open.
+The later [P2 completion-task execution](docs/Ariadne/amd64-coverage-design.md#1022-p2-completion-task-execution)
+implements source-checked page/section dispositions and current boundary
+reconciliation, resolves the inherited MOV question and REX placeholder
+notation, and finds a concrete GF inverse-table source conflict. That requires
+an authoritative source answer; the remaining clause inventories and complete
+page/section reviews are still unfinished work.
+The [H64 hypothesis](docs/Ariadne/amd64-coverage-design.md#1023-h64-native-amd64-execution-only)
+clarifies a native AMD64 64-bit execution target, consistent with the existing
+`long-64` source scope. Non-64-only rows can be scoped out through checked
+dispositions; smaller operands, address-32 forms and legacy encodings valid
+in 64-bit mode remain required. This hypothesis adds no acceptance.
+The [H64 execution](docs/Ariadne/amd64-coverage-design.md#1024-h64-source-projection-and-native64-inventories)
+implements the checked non-64-only MOVD disposition and adds native-64
+Appendix B/default-size and LOCK/REP source inventories. Complete per-form
+size/prefix qualifications, section/region reviews and source questions remain
+open; no runtime or full-stage acceptance follows.
 
 **Why this document exists.** [Project overview](README.md) sets the snapshot-based crash-investigation goal.
 

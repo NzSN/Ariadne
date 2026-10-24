@@ -3,10 +3,23 @@
 ## Context and follow-up
 
 **Current continuation: resumed at the user's request, 2026-10-24.** The
+latest [H64 execution](../../.agents/plans/amd64-operation-coverage.md#h64-source-projection-and-c-inventory-execution)
+implements the checked non-64-only MOVD disposition and native-64 source
+inventories under the [H64 hypothesis](../../.agents/plans/amd64-operation-coverage.md#h64-native-amd64-execution-only),
+which limits the proposed support target to native AMD64 64-bit execution. The
+frozen source scope already selects `long-64`; this clarifies mode-specific
+dispositions without excluding smaller operands or legacy instruction
+encodings valid in 64-bit mode. The
 [P1 source-selection completion](../../.agents/plans/amd64-operation-coverage.md#p1-source-selection-completed-2026-10-24)
 accepts the exact five-edition publisher source pool under versioned policy,
-with fresh original adjudication and migration replay. P2 constraint and P3
-legal-domain completeness remain separate. The
+with fresh original adjudication and migration replay. The subsequent
+[P2 completion tasks](../../.agents/plans/amd64-operation-coverage.md#p2-completion-tasks-2026-10-24)
+now execute review-disposition handling, inherited-obligation reconciliation,
+clause inventories and source-conflict research under the user's instruction
+to continue until an actual external blocker. The earlier
+[P2 clause execution](../../.agents/plans/amd64-operation-coverage.md#p2-clause-and-reference-execution-2026-10-24)
+adds architectural clauses, cell/reference dispositions and complete accepted-source
+review worklists. P2 constraint and P3 legal-domain completeness remain separate. The
 [per-form mapping continuation](../../.agents/plans/amd64-operation-coverage.md#per-form-source-rule-mapping-resumed-2026-10-24)
 closes the explicit source-rule dependency omission with fresh affected
 campaigns. The
@@ -2000,3 +2013,413 @@ cells, all added-section clause work and retained source contradictions remain
 open. P3–P8 retain their domain, implementation and qualification requirements.
 `constraintsParsed`, `legalDomainComplete`, `productionAdmission` and
 `fullAmd64Coverage` remain false in the P1 assessment.
+
+### 10.21 P2 clause and reference execution
+
+This records the first P2 pass. The [completion-task follow-up](#1022-p2-completion-task-execution)
+supersedes its unconditional review states, inherited boundary counts, three
+unmapped figure-reference cells and alleged REX lowercase-x conflict.
+
+2026-10-24: execution continues from P1 at `e7a594b`. The
+[P2 execution ledger](../../.agents/plans/amd64-operation-coverage.md#p2-clause-and-reference-execution-2026-10-24)
+tracks the architectural-constraint exit. The additive
+[P2 checker](../../tools/amd64_p2_constraints.py) consumes a
+[reviewed clause input](../../tests/bap/fixtures/source-migration/p2-constraints-v1.json)
+independent of geometry extraction. Original architecture, conversion, paired,
+extended and P1 inputs remain unchanged.
+
+#### Reviewed clauses and ownership
+
+Thirty additional clauses and their context/conflicts bind 804 physical anchors in Vol1 revision 3.25,
+Vol2 revision 3.45 and Vol3 revision 3.38. Each clause has an explicit owner,
+source cells, typed parameters, kind and dependencies. The clauses cover prefix
+roles and sizes, ModRM/SIB tables, register/segment diagrams, the no-REX source
+list, MOV moffsets, source-specific LOCK/REP lists, UAI and FS/GS premises.
+A source table is not an instruction-domain grammar. The no-REX list includes
+fixed-size operations and is not a uniform operand-size override rule.
+
+Rendered Vol3 PDF pages 50, 51, 60, 62, 64, 67, 69, 70, 85 and 86 were also inspected.
+This distinguishes actual table/diagram literals from extraction artifacts.
+The checker binds text, span, rectangle and physical word-box digests. Diagrams
+retain their kind and explicit width/alias parameters; relabeling a diagram as
+prose fails the reviewed-input check.
+
+The descriptive UAI predicate requires a supplied address, implemented width
+(48 or 57), actual segment, active-UAI premise and implicit-system-reference
+classification. Active UAI excludes bits 63:57 from DS/ES canonicality checks;
+CS/SS/FS/GS and implicit IDT/GDT/LDT/TSS references retain normal checking.
+It never clears address bits, enables a feature or decides other memory-access
+exceptions. The separate base-addition kernel combines an already
+address-size-truncated offset with a supplied captured segment base, wrapping
+only at 64 bits. Neither kernel changes production analysis or establishes
+earlier machine state.
+
+#### Original cells, references and conflicts
+
+All 516 original unparsed objects survive with unchanged digests. Current
+dispositions identify 492 as support for named reviewed clauses, 16 as
+individually reviewed headings/context, five as conflicting source cells and
+three as still unparsed. Context dispositions name exact cells and roles;
+there is no regex that classifies unknown notes or diagrams as harmless. The
+three unparsed cells point to Figure 1-6, whose selector conflict is retained.
+Support for a selected
+clause does not establish that every possible clause in that cell or region is
+parsed. The original unparsed list remains separate from current dispositions.
+
+Four of the nine remaining reference scopes gain checked source-rule targets:
+the prefix-table UAI note, null-segment exception, MOV 64-bit offset exception,
+and segmented-memory/FS/GS base premises. The preceding signed `Disp8*N`
+resolution survives: five of the original ten references now have source-rule
+dispositions. The incorrect MOV immediate cross-reference is not rewritten;
+actual MOV moffset prose/rows independently establish address-sized A0–A3 offsets.
+
+The five open IDs are `prefix-note-2`, `prefix-note-5`, `prefix-note-6`,
+`operand-note-2` and `default64-instruction-exceptions`. They require complete
+mandatory-prefix/fixed-size/default-size opcode applicability and source
+adjudication for the LOCK and repeat-note disagreements.
+
+| Source | Preserved unresolved issue |
+| --- | --- |
+| Vol3 Table 1-12, PDF 62 | SIB base rows 110/111 include `DH`/`BH` labels. No byte-register address base is inferred. |
+| Vol3 Table 1-17, PDF 69 | The ModRM base row calls its extension bit `x`; the REX field definition uses `B`. |
+| Vol3 Figure 1-6, PDF 70 | Case 2 says `ModRM reg field != 100` for memory without SIB; SIB-presence rules select on `r/m`. The diagram is not silently corrected. |
+| Vol1 PDF 116 / Vol3 PDF 54 | Vol1's exclusive LOCK list omits CMPXCHG16B; Vol3's exclusive list includes it. Both lists remain source-specific. |
+| Vol3 PDF 49 / PDF 54 | Prefix-table note 6 restricts repeat use to compare/scan; the dedicated REP section includes count-only strings. |
+| Vol2 PDF 142 / PDF 145 | Null-selector prose gives feature-dependent clear/undefined state; the FS/GS subsection unconditionally preserves hidden state. No earlier base is inferred. |
+
+These six conflicts differ from P1's seven completed historical adjudications.
+P1 does not adjudicate newly encountered clause contradictions. Earlier
+conversion, paired and extended boundaries also survive.
+
+#### Executable exit and remaining population
+
+The public command first reconstructs P1 from all seven exact predecessor and
+publisher PDFs, including original geometry and adjudications. It replays the
+new clauses and prior architecture/extended packs, retains all 100 added
+sections with actual section/cell/reference identities, and creates addressed
+review objects for all 4,340 accepted PDF pages. Candidate reference matching
+never discards unmatched notes, diagrams or words. Whole-region and
+added-section clause reviews remain explicit obligations; selected anchors do
+not grant page completeness.
+
+`check` repeats the entire source construction in fresh output and compares
+all artifacts and bytes. `--require-complete` evaluates remaining cells,
+references, boundaries, added sections and regions. Saved flags cannot change
+the result. Missing sources or tools fail reconstruction rather than receiving
+historical P1 credit.
+
+```sh
+env LD_LIBRARY_PATH="$PWD/target/rep-pdf-tools/root/usr/lib/x86_64-linux-gnu" \
+  python3 tools/amd64_p2_constraints.py extract \
+  --old-cache target/rep-coverage-public-sources --publisher-cache target/p1-authority \
+  --baseline-root target --output target/current-p2-constraints
+env LD_LIBRARY_PATH="$PWD/target/rep-pdf-tools/root/usr/lib/x86_64-linux-gnu" \
+  python3 tools/amd64_p2_constraints.py check \
+  --old-cache target/rep-coverage-public-sources --publisher-cache target/p1-authority \
+  --baseline-root target --output target/current-p2-constraints --require-complete
+PYTHONPATH=tools python3 -m unittest test_amd64_p2_constraints
+```
+
+The final `run-04` extraction passes. Independent `check --require-complete`
+reconstructs the full chain and matches every artifact, then exits 2 for its
+concrete remaining obligations: eight original cell objects, five original
+references, seven new boundaries (six conflicts/one opcode inventory), 14
+inherited boundaries, 100 added sections and 4,340 whole-region clause reviews.
+These categories overlap and are not summed into an instruction or clause
+denominator. The source population has 264,219 cells and 1,308,000 word
+observations. The added-section observations retain their original owner and
+full page extents; boundary pages can supply context beyond an individual entry.
+
+All 13 focused P2 tests, 540 tooling tests and 145 BAP Python tests pass.
+The address controls exhaust all 131,072 sign/upper-bit patterns relevant to
+48-bit canonicality for each segment and UAI state, all 256 such patterns for
+57-bit canonicality, implicit-system exclusions and captured-base wrap cases.
+Layout, documentation navigation and current implementation/input seals pass.
+The initial miswired prerequisite call failed before extraction, was repaired
+and receives no reconstruction credit. Intermediate source versions are not
+the final seal; `run-04` and its independent check bind the current tools/input.
+
+Products stay ignored under `target/p2-execution-20261024/`. P2 remains open
+until concrete clause/region inventories and retained contradictions are
+discharged. Legal domains, runtime admission and full AMD64 coverage remain
+later requirements. No runtime, helper or producer pin changes here.
+
+### 10.22 P2 completion task execution
+
+2026-10-24: the user requested tasks to finish P2 and execution until a blocker
+that cannot be handled locally. The [P2-A through P2-H task ledger](../../.agents/plans/amd64-operation-coverage.md#p2-completion-tasks-2026-10-24)
+separates implementation/review work from missing external source answers.
+The [detailed P2-C breakdown](../../.agents/plans/amd64-operation-coverage.md#p2-c-architectural-source-inventory-details)
+explains its five reference roots, source/form inventories, typed records and
+executable closure. C is pending local work; the GF question does not prevent
+most of that inventory work from proceeding.
+Unconditional open states and inherited dictionary-length counts were
+implementation limitations, not external blockers. This follow-up implements
+checked source dispositions and retains every original obligation. The engine
+delivery and selected reviewed pages do not establish whole-source completeness.
+
+#### Review and reconciliation implementation
+
+[The review engine](../../tools/amd64_p2_review.py) consumes
+[independently reviewed decisions](../../tests/bap/fixtures/source-migration/p2-review-decisions-v1.json).
+For each reviewed page it checks the complete actual cell/word population,
+source PDF/page identity, exact source geometry digest, typed clause inventory,
+cell-to-clause/context/reference ownership and all unresolved dependencies.
+Unknown notes or diagram labels cannot be declared furniture. A complete
+section is derived from its required pages after all page decisions validate;
+an unreviewed page remains required. No saved passing flag can close a page.
+
+Actual Vol3 page 85 now has checked whole-page clause coverage. Page 68 has
+complete cell classification but retains the unresolved Figure 1-6 selector
+dependency. Thus one of 4,340 pages closes, one is reviewed with an open
+dependency, and 4,338 still need full review. All 100 added-section states are
+now derived from page coverage, rather than being permanently unchangeable.
+They remain open because their clause reviews have not been completed.
+
+Current boundary reconciliation preserves all 21 original objects and digests.
+Each has a reviewed current disposition. A resolution must match an explicit
+source-proof recipe and execute its owning source check; a caller cannot name
+an arbitrary passing rule to close an unrelated source question. Two current
+resolutions are checked:
+
+- The old MOV-offset boundary is resolved by the explicit MOV moffset prose
+  and A0–A3 source rows; its incorrect historical immediate cross-reference
+  remains unchanged.
+- The alleged REX `x` conflict resolves through Table 1-17 note 1: lowercase
+  `x` denotes an undecoded extension placeholder in the ModRM r/m field,
+  contrasted with uppercase `B`. It does not name the physical REX.X field.
+
+The three formerly unparsed page-68 prose cells now have source-checked
+reference mappings to the actual Figure 1-6 caption on page 70. The target's
+reg/rm selector issue remains explicit. The old 516-cell objects are preserved;
+current states are 492 clause support, 16 reviewed context, three reviewed
+source interpretations, three reviewed source references and two still
+conflicting SIB cells. Schema v2 adds the explicit reference records. The
+additive clause pack now contains 31 clauses and 810 physical anchors.
+
+#### GF source-table replay and the external stopping condition
+
+[The GF source checker](../../tools/amd64_p2_gf.py) checks the
+[reviewed literal lookup and source identities](../../tests/bap/fixtures/source-migration/p2-gf-table-v1.json)
+and a [small actual table-word fixture](../../tests/bap/fixtures/source-migration/p2-gf-table-excerpt.json).
+It locates all 256 entries from physical word rows/columns, including grouped
+cells and rotated labels. It does not infer table order from PDF reading order
+or a fixed cell-number stride. Both predecessor Vol4 page 226 and selected
+Vol4 page 228 reproduce the same literal values.
+
+All 65,536 byte products are tested against an independent shift/reduce
+implementation. All 255 nonzero field inverses and the lookup convention
+`inverse(0)=0` are checked against independently implemented exponentiation.
+The field's polynomial 011B is bound to the actual
+adjacent GF2P8MULB definition on selected Vol4 page 233. These are descriptive
+source-comparison kernels; they implement no production instruction semantics.
+
+The source table supplies `inverse(F0)=5B` and `inverse(F1)=5B`. The second
+entry is selected Vol4 `pdf:228:cell:67`, word 0; its predecessor is
+`pdf:226:cell:292`, word 0. Two distinct nonzero inputs having the same output
+cannot describe a multiplicative inverse function. Under the documented field,
+`F1 × 5B = 5A`, while inversion by search and by exponentiation both give 23
+for F1. All other 255 literal entries agree with the field comparison. The
+checker preserves the published 5B and emits the mismatch and duplicate-output
+witness; it does not replace the source with the mathematical value.
+
+The publisher index was queried for 24594, 26568, AMD64 errata,
+NullSelectorClearsBase, GF2P8AFFINEINVQB and VCVTPH2PS. Current official Vol3,
+Vol4 and combined PDFs were freshly fetched with HTTP 200 and matched these
+exact identities:
+
+| Publisher source | SHA256 | GF result |
+| --- | --- | --- |
+| [Vol4 revision 3.27](https://docs.amd.com/api/khub/documents/OCw3Z61a0v0jKvHJl_Qmtg/content) | `209c0ebfa2b4f5bebf7b41ad7f7c5841026166b63b43f0aeb4d9f669f43806f9` | PDF page 228 lists 5B for F1. |
+| [Combined revision 4.10](https://docs.amd.com/api/khub/documents/SLs_hsYJwsu9rrIjE0rGxA/content) | `b95c6db015807bf38daed8cc0c294c42e479c42c62cf25655661754d21f591db` | PDF page 2229 repeats the same table and value. |
+| [Vol3 revision 3.38](https://docs.amd.com/api/khub/documents/BqEoC2FadIAgbrUdEzDJIg/content) | `e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee` | Retains the accepted general/system source identity. |
+
+The index identifies the selected Vol4 and combined editions as latest in the
+returned metadata. Both table pages were visually inspected after rendering;
+MuPDF was used for the combined page after Poppler rendered that page blank.
+The same duplicate 5B values are visible. No correcting publisher answer was
+found in the searched results. This is a bounded search, not a claim that no
+erratum exists anywhere.
+
+**External answer required:** an AMD correction or authoritative interpretation
+reconciling the literal lookup with its claimed Galois inverse semantics.
+Numeric agreement with another implementation cannot itself establish a
+publisher correction. This blocks the GF interpretation in P2-D/E and the
+full P2-H exit. Local inventory/review tasks P2-C/F/G remain unfinished; they
+are not reclassified as external blockers. The user's instruction permits
+stopping at this unresolved source-authority question, after the delivered
+implementation and its checks are made reviewable.
+
+Products remain ignored under `target/p2-completion-20261024/`. No source lock,
+raw literal, producer/helper pin or production behavior changes. P2 remains
+incomplete and later-stage acceptance remains separate.
+
+Final extraction `run-02` passes. Independent strict checking reconstructs the
+entire source chain, matches every artifact and exits 2 for the remaining
+obligations: two original conflict cells, five original architectural
+references, six current new boundaries, 13 current inherited boundaries,
+100 added sections and 4,339 not-complete regions. These categories overlap.
+All 29 focused controls, 556 tooling and 145 BAP Python tests pass. Current
+source/input seals, Rust layout and documentation navigation pass. The final
+source snapshot also binds GPR byte-code parameters directly to Table 1-10;
+the earlier successful extraction is not the final implementation seal.
+
+### 10.23 H64: native AMD64 execution only
+
+2026-10-24: the user proposed “support 64bit platform only.” For this AMD64
+program, H64 means support for native 64-bit execution; real/protected legacy
+execution, compatibility-mode execution and 32-bit/WOW64 target execution are
+outside the proposed supported target. This is an execution-mode hypothesis,
+not a statement that every operand, address field or encoding is 64 bits.
+The [H64 task impact](../../.agents/plans/amd64-operation-coverage.md#h64-native-amd64-execution-only)
+defines the source-mode projection and required controls before counts change.
+
+The [frozen corpus scope](../../tests/bap/fixtures/amd64-semantics/source-corpus-v2.lock.json)
+already records `executionModes=["long-64"]`, and
+[its validator](../../tools/amd64_source_corpus.py) enforces that exact list.
+The P1 source pool preserves that scope. H64 chiefly makes the target and
+source-review exclusions explicit; it does not justify rewriting a source lock
+or accepting an old incomplete campaign.
+
+| Under H64 | Source/review disposition |
+| --- | --- |
+| Native AMD64 64-bit execution | Required selected mode. |
+| 8-, 16-, 32- and 64-bit operands available in that mode | Still required where the form permits them; the typical GPR default is often 32 bits. |
+| 67h address-size override selecting 32-bit explicit addresses | Still a 64-bit-mode form. Existing address-32 refusals remain unsupported gaps, not mode exclusions. |
+| Legacy instruction encodings, including applicable SSE/GFNI forms | Still required when valid in 64-bit mode. Encoding family is distinct from execution mode. |
+| Rows explicitly restricted to non-64-bit execution modes | May receive source-checked out-of-selected-mode dispositions; preserve their raw source and historical conflicts. |
+| Shared notes and mixed-mode tables | Retain the material needed to interpret selected 64-bit rows. Do not remove a page or clause by matching “legacy.” |
+
+One concrete conditional exclusion is `paired:movd-store-opcode`. Selected
+Vol4 page 342's store row at `pdf:342:cell:37` carries marker 2; cell 77
+explicitly restricts note-2 encodings to non-64-bit modes. Its literal opcode
+remains 6E. The separate note-1 store row at cell 27, with opcode 7E at cell
+31, remains a native-64 obligation under note 1 at cell 76. These are still
+32-bit MOVD data operands in 64-bit execution. H64 can exclude the non-64-only
+row from native-64 support requirements; it does not correct the publisher's
+row or establish cross-mode equivalence.
+
+At this hypothesis checkpoint the conditional exclusion had not been applied.
+The [subsequent execution](#1024-h64-source-projection-and-native64-inventories)
+implements its mode-evidence recipe and ownership/omission controls. Earlier
+strict results retain their original counts.
+
+P2-C still requires prefix-role and default/fixed-size inventories for the
+selected 64-bit-mode forms. All five reference roots remain relevant. H64
+does not remove the GF inverse question: byte operations and SIMD encodings
+also occur within 64-bit execution. Feature/privilege requirements and the
+application/system scope are unchanged by this hypothesis.
+
+Runtime target selection must use the input's target architecture/context;
+the analysis host being 64-bit does not establish native-64 execution for a
+32-bit target. The [input contract](file-reader-design.md#public-interface)
+and current reader require AMD64 system information and matching context
+types. This documentation update adds no runtime enforcement or qualification.
+No source/producer pin, original literal or acceptance flag changes. Only
+documentation/navigation checks apply to this documentation-only update.
+
+### 10.24 H64 source projection and native64 inventories
+
+2026-10-24: resumed execution under H64. The
+[stage ledger](../../.agents/plans/amd64-operation-coverage.md#h64-source-projection-and-c-inventory-execution)
+records this continuation of P2-B/C/D. Source locks, original obligations and
+raw literals remain unchanged. The execution-mode hypothesis does not remove
+smaller operands, address-32 forms or applicable legacy encodings.
+
+**Checked mode projection.** The current review input is schema v2 and binds
+`executionModes=["long-64"]` to both the frozen manifest and selected source
+pool. In both Vol4 editions, the MOVD source proof checks the exact store rows,
+their note markers and the corresponding 64-only/non-64-only notes. The
+non-64-only `paired:movd-store-opcode` boundary receives
+`excluded-selected-execution-mode`; it is not relabeled a semantic resolution.
+The native-64 row remains required despite its 32-bit data operand. Forged
+host-bitness, operand-size or legacy-encoding exclusions fail. The GF question
+has no mode-exclusion recipe.
+
+**Native-64 inventory.** [The owning module](../../tools/amd64_p2_native64.py)
+replays all 30 Appendix B source pages (PDF 627–656) against the selected Vol3
+pin, with independently reviewed heading identities. Its outputs separate:
+
+- Table B-5's 21 default-64 entries, including the wrapped PUSHF entry and the
+  RET cell that occurs late in PDF extraction order. Physical word positions,
+  rather than cell-number strides, establish rows and columns.
+- The 27-entry no-REX list: the same 21 entries, with explicit near-branch
+  aliases, plus six other fixed/system entries. A no-REX entry does not imply
+  a uniform default-size or override rule.
+- Table B-1's 25 pages, 172 source headings, 3,910 body-word observations and
+  all 150 repeated physical note occurrences. These are source populations,
+  not legal-form counts or completed instruction semantics. Physical bands
+  retain vertically merged cells without inferring semantic inheritance.
+- All 22 invalid-operation rows of Table B-2, five reassignment rows of
+  Table B-3 and two long-mode-invalid rows of Table B-4. Excluding the old
+  BOUND/LDS/LES operations does not exclude the EVEX/VEX encodings reusing
+  their leading bytes. The raw `82 /2` group row is retained without expansion
+  to a complete encoding domain.
+
+All 21 default-64 entries have explicit instruction-section ownership and
+checked qualifying clauses. Those records keep operand, immediate, branch
+displacement, address and count widths separate. JrCXZ/LOOP counters follow
+address size; native-64 PUSH with opcode 68 encodes a sign-extended 32-bit
+immediate for the default 64-bit stack operand. The generic 66h-to-16 rule
+still requires per-form qualification. No size-table statement generates a
+definite GPR write or a memory-access width.
+
+**LOCK/REP applicability.** [The prefix module](../../tools/amd64_p2_prefixes.py)
+binds all 19 source-listed LOCK mnemonics to 195 actual manual selectors and
+their instruction-owned clauses. Its reviewed selectors retain byte/word/
+doubleword/quadword forms, register alternatives, memory-source-only forms
+and the old single-byte INC/DEC forms now reassigned to REX. LOCK eligibility
+requires the actual memory-writing alternative; register operands do not
+qualify. XCHG's two operand-order spellings retain the automatic memory lock.
+The CMPXCHG16B normalized row's empty old encoding field stays empty; physical
+mnemonic ownership is checked without inventing bytes or feature legality.
+
+The seven REP string families have instruction-owned prefix qualifications,
+address-sized 64/32-bit counters and separate operand widths. INS/OUTS retain
+their 8/16/32-bit data widths under native-64 execution. CMPS/SCAS use the
+post-iteration ZF condition; count-only strings do not. Media F2/F3 opcode
+selection remains a different required inventory. The generic LOCK/REP and
+address-size clauses are checked alongside the instruction-owned clauses.
+
+**Unresolved limits.** All five architectural reference roots remain open.
+Full instruction-specific B-1 qualifications, mandatory-prefix applicability,
+the source-list disagreements, other inherited questions, 100 added-section
+reviews and whole-region review remain required. The Appendix B PREFETCHlevel
+summary visibly contains `0F 18 /0-3, 7, 8`, whereas the instruction's own
+PDF 337 lists PREFETCHIT1 at `/6` and PREFETCHIT0 at `/7`. The summary literal
+is retained; it is not expanded into a byte domain. This additional review
+item has no publisher correction or completed adjudication here. The known
+GF inverse source-authority question remains in scope under H64 and blocks
+the full P2 exit. Available local work is not labeled an external blocker.
+
+**C.2 native-64 source interpretation.** Continuing the per-form 66h review
+finds a conflict inside selected Vol1 revision 3.25, not material excluded by
+H64. Table 3-9 at PDF 128 (printed 90), cells 32–36, gives default 64 and
+possible override 16 for its seven near-branch groups. The next page, cells
+14–18, says the listed actions are forced to 64 bits and the near-branch
+operand size is fixed at 64. The earlier default-size text at PDF 114 and
+Vol3 Table B-5's following text at PDF 655 also permit 66h-to-16. The
+[current official Vol1](https://docs.amd.com/api/khub/documents/OdDzCKsU4uf~KbI1htdPvA/content)
+and both rendered pages confirm the wording and the shared table cell; this
+is not a word-order or superscript extraction error.
+
+No correction was found in the targeted AMD-site searches for the near-branch
+fixed/override wording and errata. These searches do not establish an exhaustive
+errata review. C.2 cannot claim a fully reconciled 66h applicability rule from
+these sources without an authoritative interpretation or an explicitly accepted
+source-precedence hypothesis. The affected records deliberately retain
+`operand16="summary-66h-rule;requires-form-qualification"`. This finding has
+not been presented as a new machine-adjudicated boundary: the five original
+reference roots already remain open. Instruction inventory, mandatory-prefix
+review and P2-F/G work outside this source question remain unfinished local
+work. GF remains the separate external source question for D/E/H.
+
+**Validation.** All 52 focused source/mutation controls, 579 tooling tests and
+145 BAP Python tests pass. Fresh complete source extraction passes with its
+current implementation/input seal. Independent strict replay reconstructs all
+source products, matches every artifact and exits 2 for the concrete remaining
+obligations: two original conflict cells, five reference roots, six new and
+12 inherited boundaries, 100 added sections and 4,339 not-complete regions.
+These categories overlap. Layout, documentation navigation and original
+object digests also pass. No Rust/runtime,
+producer/helper pin or production-admission changes occur in this continuation.
