@@ -16,7 +16,9 @@
 - [Plain REP and coverage accounting](docs/Ariadne/bap-analysis-core-design.md#plain-repeated-string-profile-and-coverage-accounting) — defines the separate v12 three-form contract and the unmet full-coverage obligations.
 - [H64 source projection and inventories](docs/Ariadne/amd64-coverage-design.md#1024-h64-source-projection-and-native64-inventories) — checked mode exclusion, native-64 size/LOCK/REP inventories and remaining source interpretations.
 - [Near-branch source-conflict explanation](.agents/chatdocs/ariadne-amd64-near-branch-source-conflict-20261024/index.html) — detailed comparison of the unresolved AMD override rules and their P2-C implications.
-- [Accepted fixed-64 near-branch hypothesis](docs/Ariadne/amd64-coverage-design.md#1025-selected-fixed64-near-branch-hypothesis) — current user-selected case and pending checker projection.
+- [Accepted fixed-64 near-branch hypothesis](docs/Ariadne/amd64-coverage-design.md#1025-selected-fixed64-near-branch-hypothesis) — user-selected case, now enforced by a separate checked projection.
+- [Vol3 precedence and XOR source rows](docs/Ariadne/amd64-coverage-design.md#1027-vol3-precedence-and-xor-source-rows) — selected XORPS/XORPD source rule, preserved original disagreement and remaining full-form review.
+- [Native-64 C completion follow-up](docs/Ariadne/amd64-coverage-design.md#1028-native64-p2-c-completion-follow-up) — validated partial source closure, a separate C gate and exact remaining work under the reaffirmed mode hypothesis.
 
 **What remains unresolved.** These results apply to the recorded sources, backend and workload. They do not qualify the current checkout without fresh or exact-source-verified evidence. Retired ISA milestones in older entries are no longer active work.
 
@@ -24,6 +26,156 @@ For the wider context, see the optional [documentation map](docs/documentation-m
 
 Current validation follows the [executable test matrix](tests/README.md). Dated run
 results below are historical; their Git links do not establish a current pass.
+
+## 2026-10-25 — Delegated native-64 P2-C review; partial closure qualified
+
+The user requested an Astra high-reasoning subagent to try resolving all
+remaining C blockers under AMD64 long-mode-only analysis. The
+[canonical follow-up](docs/Ariadne/amd64-coverage-design.md#1028-native64-p2-c-completion-follow-up)
+and [execution ledger](.agents/plans/amd64-operation-coverage.md#native64-p2-c-completion-follow-up)
+record delegated implementation and root's independent review/replay.
+
+The already selected native `long-64` scope remains unchanged. Thirteen whole
+old-operation owners now have explicit source-mode exclusion proofs; mixed
+owners, smaller data and address-32 forms remain required. This does not
+exclude native encodings that reuse old leading bytes.
+
+Instruction-owned evidence and Vol1's referral to Vol3 resolve the original
+LOCK-list disagreement; dedicated REP source rules resolve the scoped repeat
+note disagreement. `prefix-note-5` closes. The checked default64-attribute
+subproof covers 172 physical source rows across 20 owners, while the shared
+broader fixed/default and nonstandard-prefix requirements remain explicitly
+owned by the two open successor references. This is a scoped resolution of
+`default64-instruction-exceptions`, not a global fixed-size census.
+
+The continuation adds 176 x87/3DNow forms across 84 owners and 39 size-exception
+rows across 15 owners. Independent physical scans recover missing FCOMP/
+FCOMPP and LSL continuation rows; WAIT and its following no-wait operation
+retain distinct prefix ownership. All original source literals and IDs survive.
+
+**C remains incomplete.** Open references are `prefix-note-2`, `prefix-note-6`
+and `operand-note-2`. The B1 ledger qualifies or mode-excludes 56 of 172
+headings, with 116 remaining. Prefix review covers 86 of 1,163 raw source
+owners; after 13 whole-owner exclusions, 1,064 native-required owner reviews
+remain. These are overlapping source-review denominators, not unsupported
+instruction counts. The complete source-form denominator remains open.
+
+**Validation.** All 123 focused controls, 650 tooling tests and 145 BAP Python
+tests pass. Fresh seven-PDF extraction completes; the new C-specific gate exits
+2 for three open roots. Independent full-P2 strict replay reconstructs all
+products, matches every artifact and exits 2 for remaining wider obligations.
+The current 92-file source/input seal matches. Independent audit preserves
+516 original cell objects, 10 references, 21 boundaries and all 4,340 source
+region identities. Formatting, strict all-feature/all-target Clippy, layout,
+documentation navigation and whitespace checks pass. No native/runtime or
+production ISA qualification is added.
+
+Current wider obligations are cells 2, references 3, new boundaries 4,
+inherited boundaries 12, added sections 100 and regions 4,339; categories
+overlap. Original boundary dispositions are four resolved, one mode-excluded
+and 16 unresolved. Products stay ignored under `target/p2-c-astra-20261025/`.
+
+**Publication boundary.** The user requested committing and pushing this
+scoped source/fixture/documentation delivery and its browser explanation.
+The three C references and wider P2 obligations remain open; publication is
+not C or full-P2 acceptance. Generated source-campaign products remain ignored.
+
+## 2026-10-24 — Vol3 selected for XORPS/XORPD; checked current-scope projection
+
+The user instructed treating Vol3 as correct for the XORPS/XORPD prefix
+disagreement. The [canonical rule](docs/Ariadne/amd64-coverage-design.md#1027-vol3-precedence-and-xor-source-rows)
+and [execution ledger](.agents/plans/amd64-operation-coverage.md#vol3-precedence-and-xor-source-row-continuation)
+implement that decision for this case: legacy XORPS uses no mandatory prefix;
+legacy XORPD uses 66h. This does not select blanket precedence for other
+source questions.
+
+A new versioned policy binds the selected native `long-64` scope, original
+question/input hash, source-policy hash and exact Vol3 Table A-3 cells. The
+checker reconstructs the original source pages before producing a separate
+`resolved-source-rule` disposition. The old question identity, original
+assessment, both Vol4 XORPS literals and all source hashes survive.
+
+The C.3/C.5 continuation separately checks all twelve printed source rows in
+the two compared instruction encoding tables: two legacy, four VEX and six
+EVEX. The legacy selection does not rewrite the VEX/EVEX fields. Exact source
+ownership, pp/W/length and 32/64-bit broadcast-element distinctions are checked.
+These are source rows, not complete legal encoding domains or native ISA
+qualification. Missing sources, wrong authority/mode/question/owner, omitted
+rows, source-literal erasure and field/prefix/width promotion fail controls.
+
+Only the additive XORPS question closes. All 21 original boundaries, five
+architectural reference roots and the remaining C/P2 reviews retain their
+separate exits; GF is unaffected. P2-C remains incomplete.
+
+**Validation.** All 76 focused P2 controls, 603 tooling tests and 145 BAP
+Python tests pass. Fresh complete source extraction passes; independent
+strict replay reconstructs all products, matches every artifact and exits 2
+for the remaining P2 obligations. Current source/input seals match; old seals
+are not reused. Formatting, strict all-feature/all-target Clippy, layout,
+documentation navigation and whitespace checks pass. The browser comparison
+now marks the selected rule and retains its desktop/mobile/control checks.
+
+The additive XORPS question is resolved. Other derived obligations remain
+two original conflicting cells, five references, six original new boundaries,
+12 inherited boundaries, 100 added sections and 4,339 incomplete regions.
+Categories overlap. Original boundary dispositions remain two resolved, one
+mode-excluded and 18 unresolved. Products stay ignored under
+`target/p2-c-vol3-20261024/`. No runtime or production acceptance changes.
+
+## 2026-10-24 — P2-C projection and size-family continuation; XORPS question open
+
+The user requested completion of P2-C. The
+[canonical continuation](docs/Ariadne/amd64-coverage-design.md#1026-p2-c-continuation-and-prefix-question)
+and [execution ledger](.agents/plans/amd64-operation-coverage.md#p2-c-inventory-continuation)
+record the current implementation and unfinished full-form review. P2-C is
+not marked complete and its five architectural reference roots remain open.
+
+The fixed-64 near-branch scope now has a versioned, source-checked projection
+for the seven selected groups. All 21 original default-64 qualifications and
+their digests survive. Separate controls reject wrong modes/owners, blanket
+smaller-operand exclusions, counter/address/displacement conflation and false
+66h removal/admission. The preceding implementation-pending checkpoint is
+superseded by this delivery, rather than being rewritten.
+
+Typed size-family rules now bind all 172 B-1 headings and their physical
+source-word populations. They preserve byte opcodes, mixed subforms and
+instruction-specific limits; this is not full instruction-owned per-form
+qualification. A separate F0/CR8 check retains four source forms, including
+two native-64 forms under `AltMovCr8`, CPL 0 and register-only premises. This
+opcode-extension role does not widen memory-lock eligibility.
+
+Source review finds a separate XORPS prefix disagreement. Vol3 revision 3.38
+Table A-3, PDF 571, places XORPS in the no-prefix band and XORPD in the 66h
+band. Predecessor Vol4 PDF 1614 and selected Vol4 PDF 1822 print
+`66 0F 57 /r` for XORPS; selected Vol4 PDF 1819 prints the same encoding for
+XORPD. The selected map and XORPS pages were rendered and visually inspected.
+The new checker preserves these exact identities, words and geometric bands
+as `p2-c:xorps-legacy-prefix-disagreement`, counted by the strict P2 exit.
+No publisher correction or prefix precedence is inferred. The user has been
+asked whether to select a conditional Vol3 precedence rule for this case;
+the question remains pending until an answer is supplied.
+
+Full B-1 subform qualifications, the independently reviewed general/media
+prefix-role matrix, shared-cell ownership and LOCK/REP source-list
+interpretations remain required local work. The source interpretation above
+affects one C.3 question; it does not turn the remaining local work into an
+external blocker. GF remains the separate D/E/H authority dependency.
+
+**Validation.** All 69 focused P2 controls, 596 tooling tests and 145 BAP
+Python tests pass. Fresh complete source extraction passes; independent
+strict replay reconstructs all products, matches every artifact and exits 2
+for the open stage. Current source/input seals match. Formatting, strict
+all-feature/all-target Clippy, Rust layout, documentation navigation and
+whitespace checks pass. The initial exploratory run overlapped code edits
+and failed its drift check; it receives no qualification credit.
+
+The derived obligations are two original conflicting cells, five reference
+roots, six original new boundaries plus the additional XORPS question, 12
+inherited boundaries, 100 added sections and 4,339 incomplete regions.
+Categories overlap. All 21 original boundary objects remain: two resolved,
+one mode-excluded and 18 unresolved. Disposable products stay ignored under
+`target/p2-c-20261024/`. No runtime, source-pool, producer/helper pin or
+production acceptance change occurs here.
 
 ## 2026-10-24 — Fixed-64 near-branch hypothesis accepted; implementation pending
 

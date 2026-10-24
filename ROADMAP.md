@@ -3,6 +3,25 @@
 ## Context and follow-up
 
 **Status.** Current delivery direction; dated qualifications remain scoped.
+The [native-64 P2-C completion follow-up](docs/Ariadne/amd64-coverage-design.md#1028-native64-p2-c-completion-follow-up)
+delivers partial closure under the user's reaffirmed long-mode-only hypothesis.
+Source-specific LOCK/REP interpretations, the scoped normal default64 rule,
+new owned forms and a separate proof-derived C gate are validated. The three
+remaining C references still require full prefix/size-form inventories.
+The existing native `long-64` scope and applicable smaller-data/address-32
+forms are retained; full C is not accepted.
+The [latest validated P2-C continuation](docs/Ariadne/amd64-coverage-design.md#1027-vol3-precedence-and-xor-source-rows)
+implements the user's Vol3 choice for the XORPS/XORPD legacy-prefix
+disagreement and checks twelve instruction-owned source rows. Original
+source observations remain preserved; this one additive question now has a
+checked current rule. The five architectural reference roots and full P2-C
+remain open.
+The [preceding P2-C continuation](docs/Ariadne/amd64-coverage-design.md#1026-p2-c-continuation-and-prefix-question)
+implements the accepted fixed-64 projection, typed B-1 size-family records
+and the feature-qualified CR8 opcode-prefix exception. Full per-form/prefix
+qualification remains unfinished. Its independently checked XORPS prefix
+question is now resolved for the selected scope by the later Vol3 decision;
+it was separate from the earlier near-branch decision.
 The [2026-10-24 mapping continuation](CHECKPOINTS.md#2026-10-24--per-form-source-rule-mapping-resumed)
 supersedes the earlier publication stop and completes the missing five-rule
 mapping. The [paired-family source continuation](docs/Ariadne/amd64-coverage-design.md#1018-remaining-paired-family-source-constraints)
@@ -36,7 +55,7 @@ open; no runtime or full-stage acceptance follows.
 The [accepted fixed-64 near-branch hypothesis](docs/Ariadne/amd64-coverage-design.md#1025-selected-fixed64-near-branch-hypothesis)
 selects that operand-size case and excludes its possible 16-bit override
 alternatives. It permits continuation without reconciling the excluded case;
-the current-scope checker projection is the next implementation task. Other
+the current-scope checker projection is implemented by the continuation above. Other
 smaller operands, address-size rules and source questions remain separate.
 
 **Why this document exists.** [Project overview](README.md) sets the snapshot-based crash-investigation goal.

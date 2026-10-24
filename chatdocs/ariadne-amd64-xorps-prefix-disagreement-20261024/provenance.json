@@ -1,0 +1,151 @@
+{
+  "date": "2026-10-24",
+  "purpose": "Explain the preserved source disagreement and the later selected Vol3 rule; no publisher correction, source-literal rewrite or production admission.",
+  "baseRevision": "0ff0808fa50c6215569f32897a5ead547072943f",
+  "sourceState": "Original comparison dated 2026-10-24; current source hashes refreshed for the audited 2026-10-25 publication. Original presentation source hashes are retained separately. Base revision is the parent, not a claim that it contains the pending work.",
+  "sources": {
+    "CHECKPOINTS.md": "4e5782ca9f2ce21fc3016ef2089f4f7f8fb25a26c0ed4a14951d44aade152b6a",
+    "ROADMAP.md": "8b925dc03bf5a1b06257bd4d26a149a2a53b0674e3b958fb10734fce90a59be6",
+    "docs/Ariadne/amd64-coverage-design.md": "284b39a28559279846bba3447c202af7e5503a23fc0ebb9e7c20a2cffc30614f",
+    ".agents/plans/amd64-operation-coverage.md": "74edbf665d6c811900e69b024a6bf9dc7c32f8cd82be3e06cde3c6eb0174ba1e",
+    "tools/amd64_p2_media.py": "a932f4f665a030a01ff720534c06c6fb5ca8c35cdfd548e6b9539fe02d8916e1",
+    "tools/test_amd64_p2_media.py": "1e8e686c78ec7131266bbcc9e10cc66fdba36771faf40f88912f7c63a7b55df2",
+    "tests/bap/fixtures/source-migration/p2-media-prefix-question-v1.json": "22ebcd06ec0842828557147e9400e1b6016ec593fbeb237af3493d3b3d8b6391",
+    "tests/bap/fixtures/source-migration/p2-media-prefix-source-excerpt.json": "2be9243c8dede66fcaf9acebdd65cb4d9b2a4739d21d2a991515eab9247c387b",
+    "tests/bap/fixtures/source-migration/p1-source-policy-v1.json": "d1caf84927162bb696185eed4880007aa92ded2260738c940cdeb935ee8a1840",
+    "tests/bap/fixtures/source-migration/p2-media-source-precedence-v1.json": "ba772d5cc1627cf823f63009e8b3bd1d2ebaf5de3a426435b0493c3594b15a82",
+    "tests/bap/fixtures/source-migration/p2-xor-prefix-rows-v1.json": "81d87dd1f780ff1fb07032c54d9f3260a09430ead93d85e43635c1587eeaae4d"
+  },
+  "sourcePages": {
+    "map": {
+      "cellsSha256": "703c6b6139566384e1819410574e2ba48c0f39d09d26bcb2e2511ac5db6e777e",
+      "pdfPage": 571,
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "publication": "24594"
+    },
+    "old-xorps": {
+      "cellsSha256": "eae4d6aa03d84a512b74b0326f798fb7f659996f6fadd1d96afc9cfd8cfa2c51",
+      "pdfPage": 1614,
+      "pdfSha256": "5fec87806a5d03418bef588bfbe3f466c129c2f784369fe1e11dd0b6dd8213f0",
+      "publication": "26568"
+    },
+    "xorpd": {
+      "cellsSha256": "20a2ab52f6358191034a66c428dd3e5020e72baef15bcc439433041cac5f8ee4",
+      "pdfPage": 1819,
+      "pdfSha256": "209c0ebfa2b4f5bebf7b41ad7f7c5841026166b63b43f0aeb4d9f669f43806f9",
+      "publication": "26568"
+    },
+    "xorps": {
+      "cellsSha256": "ad0493f251eb3f6906a1915a661a0935553bce741049a9f5f32674356957e93e",
+      "pdfPage": 1822,
+      "pdfSha256": "209c0ebfa2b4f5bebf7b41ad7f7c5841026166b63b43f0aeb4d9f669f43806f9",
+      "publication": "26568"
+    }
+  },
+  "presentationImages": {
+    "map-prefix": {
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 571,
+      "pdfBox": [
+        62,
+        344,
+        90,
+        410
+      ],
+      "pixelBox": [
+        155,
+        860,
+        225,
+        1025
+      ],
+      "renderDpi": 180,
+      "width": 70,
+      "height": 165,
+      "sha256": "ce8446e2114c5b995d0d3ea66bbf7dbe44a44285c76f017cfd5fd42306eb9ed4",
+      "method": "Exact pixel crop of the pinned PDF rendering; no retouching. Intervening map columns are omitted explicitly."
+    },
+    "map-mnemonics": {
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "pdfPage": 571,
+      "pdfBox": [
+        500,
+        344,
+        544,
+        410
+      ],
+      "pixelBox": [
+        1250,
+        860,
+        1360,
+        1025
+      ],
+      "renderDpi": 180,
+      "width": 110,
+      "height": 165,
+      "sha256": "4809715221635794aa9f5b1eaa6cda6b94a46afe5fb0de424163e1e635deb656",
+      "method": "Exact pixel crop of the pinned PDF rendering; no retouching. Intervening map columns are omitted explicitly."
+    },
+    "xorps-row": {
+      "pdfSha256": "209c0ebfa2b4f5bebf7b41ad7f7c5841026166b63b43f0aeb4d9f669f43806f9",
+      "pdfPage": 1822,
+      "pdfBox": [
+        63,
+        124.5,
+        278,
+        142
+      ],
+      "pixelBox": [
+        158,
+        311,
+        695,
+        355
+      ],
+      "renderDpi": 180,
+      "width": 537,
+      "height": 44,
+      "sha256": "1d355042c9b8945d682a09a77b0d33b827b295152d355ddfd72488c8438dc987",
+      "method": "Exact pixel crop of the pinned PDF rendering; no retouching. Intervening map columns are omitted explicitly."
+    },
+    "xorpd-row": {
+      "pdfSha256": "209c0ebfa2b4f5bebf7b41ad7f7c5841026166b63b43f0aeb4d9f669f43806f9",
+      "pdfPage": 1819,
+      "pdfBox": [
+        63,
+        124.5,
+        278,
+        142
+      ],
+      "pixelBox": [
+        158,
+        311,
+        695,
+        355
+      ],
+      "renderDpi": 180,
+      "width": 537,
+      "height": 44,
+      "sha256": "a00402e56cfc90ecd60f12d78b596ceeec94f6623ec51a59941acc28ea420920",
+      "method": "Exact pixel crop of the pinned PDF rendering; no retouching. Intervening map columns are omitted explicitly."
+    }
+  },
+  "arithmeticIllustration": {
+    "a": "0123456789ABCDEF0123456789ABCDEF",
+    "b": "F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0F0",
+    "xor": "F1D3B597795B3D1FF1D3B597795B3D1F",
+    "scope": "Pure supplied-value Boolean illustration; no CPU execution."
+  },
+  "selectedInterpretation": "user-selected-vol3-xorps-xorpd-2026-10-24",
+  "originalPresentationSources": {
+    "CHECKPOINTS.md": "26a23f08954e12fffa30a66e6a54a8764ff59f94f474e3c1718dd255028d10ba",
+    "ROADMAP.md": "5304e5c7e0a9db3e63644b8768635e22bfac16d29907b27f155d29f19c123939",
+    "docs/Ariadne/amd64-coverage-design.md": "aa85b4ad2105b8eb08ac3b288b2a4a7d3b9b9051832217f100f58ce63a5d106c",
+    ".agents/plans/amd64-operation-coverage.md": "bba5c6a9fbd687c50d16070b80635d4dd77f95df140dba50c65dde4a4f0ee0a0",
+    "tools/amd64_p2_media.py": "9549ff7f44b8252db5a15285682e01903b929c5c140e9dfb9ac04e899ea8bd3c",
+    "tools/test_amd64_p2_media.py": "d3df1bf01513b415d9cb626e8190bcf7912d10243c73ce4f6f229e6ba0a57fbc",
+    "tests/bap/fixtures/source-migration/p2-media-prefix-question-v1.json": "22ebcd06ec0842828557147e9400e1b6016ec593fbeb237af3493d3b3d8b6391",
+    "tests/bap/fixtures/source-migration/p2-media-prefix-source-excerpt.json": "2be9243c8dede66fcaf9acebdd65cb4d9b2a4739d21d2a991515eab9247c387b",
+    "tests/bap/fixtures/source-migration/p1-source-policy-v1.json": "d1caf84927162bb696185eed4880007aa92ded2260738c940cdeb935ee8a1840"
+  },
+  "selectionScope": "Only the two compared legacy XORPS/XORPD selectors in native long-64; other source questions and VEX/EVEX admission are unchanged.",
+  "lastUpdated": "2026-10-25"
+}

@@ -1,0 +1,4198 @@
+{
+  "schema": "ariadne.amd64-size-exception-forms/v1",
+  "sourcePolicySha256": "d1caf84927162bb696185eed4880007aa92ded2260738c940cdeb935ee8a1840",
+  "publication": "24594",
+  "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+  "executionModes": [
+    "long-64"
+  ],
+  "owners": {
+    "BSWAP": {
+      "title": "BSWAP",
+      "owner": "amd-entry:0025",
+      "pages": [
+        167,
+        167
+      ],
+      "pageDigests": {
+        "167": "0b6959f97b6912b761affec26423e47631af986eb2db703b7ae380d05206d855"
+      },
+      "tables": [
+        {
+          "pdfPage": 167,
+          "header": "pdf:167:cell:13/word:0",
+          "sourceFieldWordsSha256": "e3e75d4ee4e44bf6444fe3bf77ec414a65b4a292ce6f2b5b10fd3ed1ed72f3be",
+          "rows": [
+            {
+              "pdfPage": 167,
+              "selector": "BSWAP reg32",
+              "sourceEncoding": "0F C8 +rd",
+              "selectorWords": [
+                {
+                  "text": "BSWAP",
+                  "rect": [
+                    68.9874,
+                    287.2497,
+                    104.6964,
+                    300.8997
+                  ],
+                  "sourceCell": "pdf:167:cell:16",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg32",
+                  "rect": [
+                    107.3174,
+                    287.6697,
+                    132.7964,
+                    300.8997
+                  ],
+                  "sourceCell": "pdf:167:cell:16",
+                  "wordIndex": 1
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    223.7874,
+                    287.2497,
+                    235.4174,
+                    300.8997
+                  ],
+                  "sourceCell": "pdf:167:cell:17",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "C8",
+                  "rect": [
+                    238.1864,
+                    287.2497,
+                    251.1864,
+                    300.8997
+                  ],
+                  "sourceCell": "pdf:167:cell:17",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "+rd",
+                  "rect": [
+                    253.7864,
+                    287.2497,
+                    268.2974,
+                    300.8997
+                  ],
+                  "sourceCell": "pdf:167:cell:17",
+                  "wordIndex": 2
+                }
+              ]
+            },
+            {
+              "pdfPage": 167,
+              "selector": "BSWAP reg64",
+              "sourceEncoding": "0F C8 +rq",
+              "selectorWords": [
+                {
+                  "text": "BSWAP",
+                  "rect": [
+                    68.9974,
+                    305.2497,
+                    104.7064,
+                    318.8997
+                  ],
+                  "sourceCell": "pdf:167:cell:19",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg64",
+                  "rect": [
+                    107.3274,
+                    305.6697,
+                    132.8064,
+                    318.8997
+                  ],
+                  "sourceCell": "pdf:167:cell:19",
+                  "wordIndex": 1
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    223.7974,
+                    305.2497,
+                    235.4274,
+                    318.8997
+                  ],
+                  "sourceCell": "pdf:167:cell:20",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "C8",
+                  "rect": [
+                    238.1964,
+                    305.2497,
+                    251.1964,
+                    318.8997
+                  ],
+                  "sourceCell": "pdf:167:cell:20",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "+rq",
+                  "rect": [
+                    253.7964,
+                    305.2497,
+                    268.3074,
+                    318.8997
+                  ],
+                  "sourceCell": "pdf:167:cell:20",
+                  "wordIndex": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "selector": "BSWAP reg32",
+          "sourceEncoding": "0F C8 +rd",
+          "sourceRowOrdinal": 0,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "byte-swap",
+            "defaultAttributeBits": 32,
+            "operandBits": 32,
+            "registerDataBits": 32,
+            "undefinedOperandBits": [
+              16
+            ],
+            "prefix66": "does-not-create-supported16-bit-swap",
+            "rexW": "select64;not-required-for32"
+          }
+        },
+        {
+          "selector": "BSWAP reg64",
+          "sourceEncoding": "0F C8 +rq",
+          "sourceRowOrdinal": 1,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "byte-swap",
+            "defaultAttributeBits": 32,
+            "operandBits": 64,
+            "registerDataBits": 64,
+            "undefinedOperandBits": [
+              16
+            ],
+            "prefix66": "does-not-create-supported16-bit-swap",
+            "rexW": "select64;not-required-for32"
+          }
+        }
+      ],
+      "clauses": {
+        "cells": [
+          "pdf:167:cell:5",
+          "pdf:167:cell:6",
+          "pdf:167:cell:7",
+          "pdf:167:cell:8",
+          "pdf:167:cell:9",
+          "pdf:167:cell:10",
+          "pdf:167:cell:11",
+          "pdf:167:cell:12"
+        ],
+        "text": "Reverses the byte order of the specified register. This action converts the contents of the register from little endian to big endian or vice versa. In a doubleword, bits 7:0 are exchanged with bits 31:24, and bits 15:8 are exchanged with bits 23:16. In a quadword, bits 7:0 are exchanged with bits 63:56, bits 15:8 with bits 55:48, bits 23:16 with bits 47:40, and bits 31:24 with bits 39:32. A subsequent use of the BSWAP instruction with the same operand restores the original value of the operand. The result of applying the BSWAP instruction to a 16-bit register is undefined. To swap the bytes of a 16-bit register, use the XCHG instruction and specify the respective byte halves of the 16-bit register as the two operands. For example, to swap the bytes of AX, use XCHG AL, AH."
+      }
+    },
+    "CMPXCHG8B CMPXCHG16B": {
+      "title": "CMPXCHG8B CMPXCHG16B",
+      "owner": "amd-entry:0046",
+      "pages": [
+        211,
+        212
+      ],
+      "pageDigests": {
+        "211": "eede979ac0647dbd1a938e32282459097069c1172ff8ce2de7c8e849cb3a9d85",
+        "212": "96890c8136d1302313db5d0a2b7bed2afc2871a05afd1853e6af2552cfe663fb"
+      },
+      "tables": [
+        {
+          "pdfPage": 211,
+          "header": "pdf:211:cell:29/word:0",
+          "sourceFieldWordsSha256": "452082f50c4036c88aede0cef6cb73fda71940aa9e9f526129d1b258ad9c66a3",
+          "rows": [
+            {
+              "pdfPage": 211,
+              "selector": "CMPXCHG8B mem64",
+              "sourceEncoding": "0F C7 /1 m64",
+              "selectorWords": [
+                {
+                  "text": "CMPXCHG8B",
+                  "rect": [
+                    68.9874,
+                    567.2489,
+                    132.2954,
+                    580.8989
+                  ],
+                  "sourceCell": "pdf:211:cell:30",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "mem64",
+                  "rect": [
+                    135.0674,
+                    567.6689,
+                    168.2264,
+                    580.8989
+                  ],
+                  "sourceCell": "pdf:211:cell:30",
+                  "wordIndex": 1
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    223.7874,
+                    567.2489,
+                    235.4174,
+                    580.8989
+                  ],
+                  "sourceCell": "pdf:211:cell:34",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "C7",
+                  "rect": [
+                    238.1864,
+                    567.2489,
+                    250.9464,
+                    580.8989
+                  ],
+                  "sourceCell": "pdf:211:cell:34",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/1",
+                  "rect": [
+                    253.5464,
+                    567.2489,
+                    261.7464,
+                    580.8989
+                  ],
+                  "sourceCell": "pdf:211:cell:34",
+                  "wordIndex": 2
+                },
+                {
+                  "text": "m64",
+                  "rect": [
+                    264.3474,
+                    567.6689,
+                    283.8264,
+                    580.8989
+                  ],
+                  "sourceCell": "pdf:211:cell:34",
+                  "wordIndex": 3
+                }
+              ]
+            },
+            {
+              "pdfPage": 211,
+              "selector": "CMPXCHG16B mem128",
+              "sourceEncoding": "0F C7 /1 m128",
+              "selectorWords": [
+                {
+                  "text": "CMPXCHG16B",
+                  "rect": [
+                    68.9874,
+                    625.2489,
+                    137.8144,
+                    638.8989
+                  ],
+                  "sourceCell": "pdf:211:cell:31",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "mem128",
+                  "rect": [
+                    140.6274,
+                    625.6689,
+                    179.5464,
+                    638.8989
+                  ],
+                  "sourceCell": "pdf:211:cell:31",
+                  "wordIndex": 1
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    223.7874,
+                    620.2489,
+                    235.4174,
+                    633.8989
+                  ],
+                  "sourceCell": "pdf:211:cell:40",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "C7",
+                  "rect": [
+                    238.1864,
+                    620.2489,
+                    251.1864,
+                    633.8989
+                  ],
+                  "sourceCell": "pdf:211:cell:40",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/1",
+                  "rect": [
+                    253.7864,
+                    620.2489,
+                    262.2264,
+                    633.8989
+                  ],
+                  "sourceCell": "pdf:211:cell:40",
+                  "wordIndex": 2
+                },
+                {
+                  "text": "m128",
+                  "rect": [
+                    223.7874,
+                    630.6689,
+                    248.7864,
+                    643.8989
+                  ],
+                  "sourceCell": "pdf:211:cell:41",
+                  "wordIndex": 0
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "selector": "CMPXCHG8B mem64",
+          "sourceEncoding": "0F C7 /1 m64",
+          "sourceRowOrdinal": 0,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [
+              64,
+              32
+            ],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "wide-compare-exchange",
+            "effectiveAttributeBits": [
+              16,
+              32
+            ],
+            "memoryDataBits": 64,
+            "gprComponentBits": 32,
+            "prefix66": "does-not-select-word-memory-data",
+            "rexW": "selects-CMPXCHG16B",
+            "featureRequired": "CPUID.CMPXCHG8B",
+            "requiredAlignmentBytes": null
+          }
+        },
+        {
+          "selector": "CMPXCHG16B mem128",
+          "sourceEncoding": "0F C7 /1 m128",
+          "sourceRowOrdinal": 1,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [
+              64,
+              32
+            ],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "wide-compare-exchange",
+            "effectiveAttributeBits": [
+              64
+            ],
+            "memoryDataBits": 128,
+            "gprComponentBits": 64,
+            "prefix66": "does-not-select-word-memory-data",
+            "rexW": "selects-CMPXCHG16B",
+            "featureRequired": "CPUID.CMPXCHG16B",
+            "requiredAlignmentBytes": 16
+          }
+        }
+      ],
+      "clauses": {
+        "cells": [
+          "pdf:211:cell:11",
+          "pdf:211:cell:12",
+          "pdf:211:cell:13",
+          "pdf:211:cell:14",
+          "pdf:211:cell:15",
+          "pdf:211:cell:16",
+          "pdf:211:cell:17",
+          "pdf:211:cell:18",
+          "pdf:211:cell:19",
+          "pdf:211:cell:20",
+          "pdf:211:cell:21",
+          "pdf:211:cell:22",
+          "pdf:211:cell:23",
+          "pdf:211:cell:24",
+          "pdf:211:cell:25",
+          "pdf:211:cell:26",
+          "pdf:211:cell:27",
+          "pdf:211:cell:28"
+        ],
+        "text": "If the effective operand size is 16-bit or 32-bit, the CMPXCHG8B instruction is used. This instruction uses the EDX:EAX and ECX:EBX register operands and a 64-bit memory operand. If the effective operand size is 64-bit, the CMPXCHG16B instruction is used; this instruction uses RDX:RAX register operands and a 128-bit memory operand. The CMPXCHG8B and CMPXCHG16B instructions always do a read-modify-write on the memory operand. If the compared operands were unequal, the instructions write the same value to the memory operand that was read. The CMPXCHG8B and CMPXCHG16B instructions support the LOCK prefix. For details about the LOCK prefix, see \u201cLock Prefix\u201d on page 11. Support for the CMPXCHG8B and CMPXCHG16B instructions is implementation dependent. Support for the CMPXCHG8B instruction is indicated by CPUID Fn0000_0001_EDX[CMPXCHG8B] or Fn8000_0001_EDX[CMPXCHG8B] = 1. Support for the CMPXCHG16B instruction is indicated by CPUID Fn0000_0001_ECX[CMPXCHG16B] = 1. For more information on using the CPUID instruction, see the instruction reference page for the CPUID instruction on page 171. For a description of all feature flags related to instruction subset support, see Appendix D, \u201cInstruction Subsets and CPUID Feature Flags,\u201d on page 617. The memory operand used by CMPXCHG16B must be 16-byte aligned or else a general-protection exception is generated."
+      }
+    },
+    "CPUID": {
+      "title": "CPUID",
+      "owner": "amd-entry:0047",
+      "pages": [
+        213,
+        215
+      ],
+      "pageDigests": {
+        "213": "73964bab1c30203a4c232c5679f188dfb3e52c16586cb28d05b4b8aef29ea206",
+        "214": "6a8c1d2f31420af8c211f475c8e9111159e18eba79299cb171f6a16a69ab909c",
+        "215": "0b4947acc6ebbe26eefd9b88672da68326622086782b705aba2c2e5cfc94cfc8"
+      },
+      "tables": [
+        {
+          "pdfPage": 213,
+          "header": "pdf:213:cell:23/word:0",
+          "sourceFieldWordsSha256": "a92a627ecad85c8272cb865baaaf063902d0ddfcb04f385499083668ca87f08d",
+          "rows": [
+            {
+              "pdfPage": 213,
+              "selector": "CPUID",
+              "sourceEncoding": "0F A2",
+              "selectorWords": [
+                {
+                  "text": "CPUID",
+                  "rect": [
+                    68.9874,
+                    473.2492,
+                    100.2064,
+                    486.8992
+                  ],
+                  "sourceCell": "pdf:213:cell:26",
+                  "wordIndex": 0
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    223.7874,
+                    473.2492,
+                    235.4174,
+                    486.8992
+                  ],
+                  "sourceCell": "pdf:213:cell:27",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "A2",
+                  "rect": [
+                    237.7074,
+                    473.2492,
+                    249.9864,
+                    486.8992
+                  ],
+                  "sourceCell": "pdf:213:cell:27",
+                  "wordIndex": 1
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "selector": "CPUID",
+          "sourceEncoding": "0F A2",
+          "sourceRowOrdinal": 0,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "fixed-implicit-data",
+            "implicitGprBits": {
+              "EAX": 32,
+              "EBX": 32,
+              "ECX": 32,
+              "EDX": 32
+            },
+            "prefix66": "does-not-resize-fixed-implicit-data",
+            "rexW": "does-not-promote-fixed-implicit-data"
+          }
+        }
+      ],
+      "clauses": {
+        "cells": [
+          "pdf:213:cell:5",
+          "pdf:213:cell:6",
+          "pdf:213:cell:7",
+          "pdf:213:cell:8"
+        ],
+        "text": "Provides information about the processor and its capabilities through a number of different functions. Software should load the number of the CPUID function to execute into the EAX register before executing the CPUID instruction. The processor returns information in the EAX, EBX, ECX, and EDX registers; the contents and format of these registers depend on the function."
+      }
+    },
+    "LAR": {
+      "title": "LAR",
+      "owner": "amd-entry:0169",
+      "pages": [
+        453,
+        454
+      ],
+      "pageDigests": {
+        "453": "09fe154a516190859f123335cd6a2f55e1d4336068b3e6a7101068f030bc15ad",
+        "454": "b83c588a4d9e773c953670a9742f4f80b99a312cc273da515d4e1a7791c61764"
+      },
+      "tables": [
+        {
+          "pdfPage": 454,
+          "header": "pdf:454:cell:8/word:0",
+          "sourceFieldWordsSha256": "af119cda7e5d047a81d4c620a27b1d5b511c721094265d71ba3b73c25b575955",
+          "rows": [
+            {
+              "pdfPage": 454,
+              "selector": "LAR reg16, reg/mem16",
+              "sourceEncoding": "0F 02 /r",
+              "selectorWords": [
+                {
+                  "text": "LAR",
+                  "rect": [
+                    68.9874,
+                    232.2499,
+                    88.4474,
+                    245.8999
+                  ],
+                  "sourceCell": "pdf:454:cell:11",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg16,",
+                  "rect": [
+                    91.2064,
+                    232.6699,
+                    119.5374,
+                    245.8999
+                  ],
+                  "sourceCell": "pdf:454:cell:11",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "reg/mem16",
+                  "rect": [
+                    122.3174,
+                    232.6699,
+                    172.9954,
+                    245.8999
+                  ],
+                  "sourceCell": "pdf:454:cell:11",
+                  "wordIndex": 2
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    189.4474,
+                    232.2499,
+                    201.0774,
+                    245.8999
+                  ],
+                  "sourceCell": "pdf:454:cell:12",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "02",
+                  "rect": [
+                    203.8464,
+                    232.2499,
+                    215.1664,
+                    245.8999
+                  ],
+                  "sourceCell": "pdf:454:cell:12",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/r",
+                  "rect": [
+                    217.7774,
+                    232.6699,
+                    223.9874,
+                    245.8999
+                  ],
+                  "sourceCell": "pdf:454:cell:12",
+                  "wordIndex": 2
+                }
+              ]
+            },
+            {
+              "pdfPage": 454,
+              "selector": "LAR reg32, reg/mem16",
+              "sourceEncoding": "0F 02 /r",
+              "selectorWords": [
+                {
+                  "text": "LAR",
+                  "rect": [
+                    68.9874,
+                    270.2499,
+                    88.4474,
+                    283.8999
+                  ],
+                  "sourceCell": "pdf:454:cell:16",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg32,",
+                  "rect": [
+                    91.2064,
+                    270.6699,
+                    119.5374,
+                    283.8999
+                  ],
+                  "sourceCell": "pdf:454:cell:16",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "reg/mem16",
+                  "rect": [
+                    122.3174,
+                    270.6699,
+                    172.9954,
+                    283.8999
+                  ],
+                  "sourceCell": "pdf:454:cell:16",
+                  "wordIndex": 2
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    189.4474,
+                    270.2499,
+                    201.0774,
+                    283.8999
+                  ],
+                  "sourceCell": "pdf:454:cell:17",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "02",
+                  "rect": [
+                    203.8464,
+                    270.2499,
+                    215.1664,
+                    283.8999
+                  ],
+                  "sourceCell": "pdf:454:cell:17",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/r",
+                  "rect": [
+                    217.7774,
+                    270.6699,
+                    223.9874,
+                    283.8999
+                  ],
+                  "sourceCell": "pdf:454:cell:17",
+                  "wordIndex": 2
+                }
+              ]
+            },
+            {
+              "pdfPage": 454,
+              "selector": "LAR reg64, reg/mem16",
+              "sourceEncoding": "0F 02 /r",
+              "selectorWords": [
+                {
+                  "text": "LAR",
+                  "rect": [
+                    68.9874,
+                    308.2499,
+                    88.4474,
+                    321.8999
+                  ],
+                  "sourceCell": "pdf:454:cell:21",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg64,",
+                  "rect": [
+                    91.2064,
+                    308.6699,
+                    119.5374,
+                    321.8999
+                  ],
+                  "sourceCell": "pdf:454:cell:21",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "reg/mem16",
+                  "rect": [
+                    122.3174,
+                    308.6699,
+                    172.9954,
+                    321.8999
+                  ],
+                  "sourceCell": "pdf:454:cell:21",
+                  "wordIndex": 2
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    189.4474,
+                    308.2499,
+                    201.0774,
+                    321.8999
+                  ],
+                  "sourceCell": "pdf:454:cell:22",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "02",
+                  "rect": [
+                    203.8464,
+                    308.2499,
+                    215.1664,
+                    321.8999
+                  ],
+                  "sourceCell": "pdf:454:cell:22",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/r",
+                  "rect": [
+                    217.7774,
+                    308.6699,
+                    223.9874,
+                    321.8999
+                  ],
+                  "sourceCell": "pdf:454:cell:22",
+                  "wordIndex": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "selector": "LAR reg16, reg/mem16",
+          "sourceEncoding": "0F 02 /r",
+          "sourceRowOrdinal": 0,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [
+              64,
+              32
+            ],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "descriptor-query",
+            "defaultAttributeBits": 32,
+            "sourceSelectorBits": 16,
+            "destinationRegisterBits": 16,
+            "operandAttributeBits": 16,
+            "prefix66": "selects16-bit-destination;not-source-selector-width",
+            "rexW": "selects64-bit-destination",
+            "destinationModification": "conditional-on-valid-descriptor"
+          }
+        },
+        {
+          "selector": "LAR reg32, reg/mem16",
+          "sourceEncoding": "0F 02 /r",
+          "sourceRowOrdinal": 1,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [
+              64,
+              32
+            ],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "descriptor-query",
+            "defaultAttributeBits": 32,
+            "sourceSelectorBits": 16,
+            "destinationRegisterBits": 32,
+            "operandAttributeBits": 32,
+            "prefix66": "selects16-bit-destination;not-source-selector-width",
+            "rexW": "selects64-bit-destination",
+            "destinationModification": "conditional-on-valid-descriptor"
+          }
+        },
+        {
+          "selector": "LAR reg64, reg/mem16",
+          "sourceEncoding": "0F 02 /r",
+          "sourceRowOrdinal": 2,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [
+              64,
+              32
+            ],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "descriptor-query",
+            "defaultAttributeBits": 32,
+            "sourceSelectorBits": 16,
+            "destinationRegisterBits": 64,
+            "operandAttributeBits": 64,
+            "prefix66": "selects16-bit-destination;not-source-selector-width",
+            "rexW": "selects64-bit-destination",
+            "destinationModification": "conditional-on-valid-descriptor"
+          }
+        }
+      ],
+      "clauses": {
+        "cells": [
+          "pdf:453:cell:5",
+          "pdf:453:cell:6",
+          "pdf:453:cell:7"
+        ],
+        "text": "Loads the access rights from the segment descriptor specified by a 16-bit source register or memory operand into a specified 16-bit, 32-bit, or 64-bit general-purpose register and sets the zero (ZF) flag in the rFLAGS register if successful. LAR clears the zero flag if the descriptor is invalid for any reason."
+      }
+    },
+    "LSL": {
+      "title": "LSL",
+      "owner": "amd-entry:0174",
+      "pages": [
+        462,
+        463
+      ],
+      "pageDigests": {
+        "462": "85baf07bbcb49fe5d3c9401fbe6559fea62f74557e961170cff4b9f809c9e0fb",
+        "463": "76c8d2f2a8c48ee140a9b20969dd662141724c56d4b739754bbba5a908b1afb4"
+      },
+      "tables": [
+        {
+          "pdfPage": 462,
+          "header": "pdf:462:cell:50/word:0",
+          "sourceFieldWordsSha256": "842efe14de13c618272cdc6fe62639ece346ad25c4ac37440b993fca6b57dc6a",
+          "rows": [
+            {
+              "pdfPage": 462,
+              "selector": "LSL reg16, reg/mem16",
+              "sourceEncoding": "0F 03 /r",
+              "selectorWords": [
+                {
+                  "text": "LSL",
+                  "rect": [
+                    68.9916,
+                    678.2494,
+                    86.7916,
+                    691.8994
+                  ],
+                  "sourceCell": "pdf:462:cell:53",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg16,",
+                  "rect": [
+                    89.1816,
+                    678.6694,
+                    117.5216,
+                    691.8994
+                  ],
+                  "sourceCell": "pdf:462:cell:53",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "reg/mem16",
+                  "rect": [
+                    120.3016,
+                    678.6694,
+                    170.7396,
+                    691.8994
+                  ],
+                  "sourceCell": "pdf:462:cell:53",
+                  "wordIndex": 2
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    186.7116,
+                    678.2494,
+                    198.3416,
+                    691.8994
+                  ],
+                  "sourceCell": "pdf:462:cell:54",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "03",
+                  "rect": [
+                    201.1106,
+                    678.2494,
+                    212.1906,
+                    691.8994
+                  ],
+                  "sourceCell": "pdf:462:cell:54",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/r",
+                  "rect": [
+                    215.0416,
+                    678.6694,
+                    221.0116,
+                    691.8994
+                  ],
+                  "sourceCell": "pdf:462:cell:54",
+                  "wordIndex": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "pdfPage": 463,
+          "header": null,
+          "sourceFieldWordsSha256": "a4470fd5c0fc30e5c77225475de6228c08ff09956bd12fca02057f9ab958b9de",
+          "rows": [
+            {
+              "pdfPage": 463,
+              "selector": "LSL reg32, reg/mem16",
+              "sourceEncoding": "0F 03 /r",
+              "selectorWords": [
+                {
+                  "text": "LSL",
+                  "rect": [
+                    68.9874,
+                    110.2502,
+                    86.7874,
+                    123.9002
+                  ],
+                  "sourceCell": "pdf:463:cell:3",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg32,",
+                  "rect": [
+                    89.1774,
+                    110.6702,
+                    117.5174,
+                    123.9002
+                  ],
+                  "sourceCell": "pdf:463:cell:3",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "reg/mem16",
+                  "rect": [
+                    120.2974,
+                    110.6702,
+                    170.7354,
+                    123.9002
+                  ],
+                  "sourceCell": "pdf:463:cell:3",
+                  "wordIndex": 2
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    186.7074,
+                    110.2502,
+                    198.3374,
+                    123.9002
+                  ],
+                  "sourceCell": "pdf:463:cell:4",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "03",
+                  "rect": [
+                    201.1074,
+                    110.2502,
+                    212.1864,
+                    123.9002
+                  ],
+                  "sourceCell": "pdf:463:cell:4",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/r",
+                  "rect": [
+                    215.0374,
+                    110.6702,
+                    221.0074,
+                    123.9002
+                  ],
+                  "sourceCell": "pdf:463:cell:4",
+                  "wordIndex": 2
+                }
+              ]
+            },
+            {
+              "pdfPage": 463,
+              "selector": "LSL reg64, reg/mem16",
+              "sourceEncoding": "0F 03 /r",
+              "selectorWords": [
+                {
+                  "text": "LSL",
+                  "rect": [
+                    68.9874,
+                    148.2502,
+                    86.7874,
+                    161.9002
+                  ],
+                  "sourceCell": "pdf:463:cell:8",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg64,",
+                  "rect": [
+                    89.1774,
+                    148.6702,
+                    117.5174,
+                    161.9002
+                  ],
+                  "sourceCell": "pdf:463:cell:8",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "reg/mem16",
+                  "rect": [
+                    120.2974,
+                    148.6702,
+                    170.7354,
+                    161.9002
+                  ],
+                  "sourceCell": "pdf:463:cell:8",
+                  "wordIndex": 2
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    186.7074,
+                    148.2502,
+                    198.3374,
+                    161.9002
+                  ],
+                  "sourceCell": "pdf:463:cell:9",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "03",
+                  "rect": [
+                    201.1074,
+                    148.2502,
+                    212.1864,
+                    161.9002
+                  ],
+                  "sourceCell": "pdf:463:cell:9",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/r",
+                  "rect": [
+                    215.0374,
+                    148.6702,
+                    221.0074,
+                    161.9002
+                  ],
+                  "sourceCell": "pdf:463:cell:9",
+                  "wordIndex": 2
+                }
+              ]
+            }
+          ],
+          "continuationOfHeader": "pdf:462:cell:50/word:0"
+        }
+      ],
+      "forms": [
+        {
+          "selector": "LSL reg16, reg/mem16",
+          "sourceEncoding": "0F 03 /r",
+          "sourceRowOrdinal": 0,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [
+              64,
+              32
+            ],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "descriptor-query",
+            "defaultAttributeBits": 32,
+            "sourceSelectorBits": 16,
+            "destinationRegisterBits": 16,
+            "operandAttributeBits": 16,
+            "prefix66": "selects16-bit-destination;not-source-selector-width",
+            "rexW": "selects64-bit-destination",
+            "destinationModification": "conditional-on-valid-descriptor",
+            "computedLimitBits": 32
+          }
+        },
+        {
+          "selector": "LSL reg32, reg/mem16",
+          "sourceEncoding": "0F 03 /r",
+          "sourceRowOrdinal": 1,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [
+              64,
+              32
+            ],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "descriptor-query",
+            "defaultAttributeBits": 32,
+            "sourceSelectorBits": 16,
+            "destinationRegisterBits": 32,
+            "operandAttributeBits": 32,
+            "prefix66": "selects16-bit-destination;not-source-selector-width",
+            "rexW": "selects64-bit-destination",
+            "destinationModification": "conditional-on-valid-descriptor",
+            "computedLimitBits": 32
+          }
+        },
+        {
+          "selector": "LSL reg64, reg/mem16",
+          "sourceEncoding": "0F 03 /r",
+          "sourceRowOrdinal": 2,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [
+              64,
+              32
+            ],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "descriptor-query",
+            "defaultAttributeBits": 32,
+            "sourceSelectorBits": 16,
+            "destinationRegisterBits": 64,
+            "operandAttributeBits": 64,
+            "prefix66": "selects16-bit-destination;not-source-selector-width",
+            "rexW": "selects64-bit-destination",
+            "destinationModification": "conditional-on-valid-descriptor",
+            "computedLimitBits": 32
+          }
+        }
+      ],
+      "clauses": {
+        "cells": [
+          "pdf:462:cell:5",
+          "pdf:462:cell:6",
+          "pdf:462:cell:7",
+          "pdf:462:cell:8",
+          "pdf:462:cell:9",
+          "pdf:462:cell:44",
+          "pdf:462:cell:45",
+          "pdf:462:cell:46",
+          "pdf:462:cell:47",
+          "pdf:462:cell:48",
+          "pdf:462:cell:49"
+        ],
+        "text": "Loads the segment limit from the segment descriptor specified by a 16-bit source register or memory operand into a specified 16-bit, 32-bit, or 64-bit general-purpose register and sets the zero (ZF) flag in the rFLAGS register if successful. LSL clears the zero flag if the descriptor is invalid for any reason. In 64-bit mode, for both 32-bit and 64-bit operand sizes, 32-bit register results are zero-extended to 64 bits. If the segment selector passes these checks and the segment limit is loaded into the destination general-purpose register, the instruction sets the zero flag of the rFLAGS register to 1. If the selector does not pass the checks, then LSL clears the zero flag to 0 and does not modify the destination. The instruction calculates the segment limit to 32 bits, taking the 20-bit limit and the granularity bit into account. When the operand size is 16 bits, it truncates the upper 16 bits of the 32-bit adjusted segment limit and loads the lower 16-bits into the target register."
+      }
+    },
+    "LMSW": {
+      "title": "LMSW",
+      "owner": "amd-entry:0173",
+      "pages": [
+        461,
+        461
+      ],
+      "pageDigests": {
+        "461": "f2bad753b92d26951cdcc6a2399af2c01308730414d9442c99c7c080494f2ea9"
+      },
+      "tables": [
+        {
+          "pdfPage": 461,
+          "header": "pdf:461:cell:12/word:0",
+          "sourceFieldWordsSha256": "464418b0166f8976799304e86ea0a72895a36e4d9903bb62f14e4315204af777",
+          "rows": [
+            {
+              "pdfPage": 461,
+              "selector": "LMSW reg/mem16",
+              "sourceEncoding": "0F 01 /6",
+              "selectorWords": [
+                {
+                  "text": "LMSW",
+                  "rect": [
+                    68.9874,
+                    287.2497,
+                    99.0664,
+                    300.8997
+                  ],
+                  "sourceCell": "pdf:461:cell:15",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg/mem16",
+                  "rect": [
+                    101.7474,
+                    287.6697,
+                    152.1854,
+                    300.8997
+                  ],
+                  "sourceCell": "pdf:461:cell:15",
+                  "wordIndex": 1
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    167.7974,
+                    287.2497,
+                    179.4274,
+                    300.8997
+                  ],
+                  "sourceCell": "pdf:461:cell:16",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "01",
+                  "rect": [
+                    182.1964,
+                    287.2497,
+                    193.2764,
+                    300.8997
+                  ],
+                  "sourceCell": "pdf:461:cell:16",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/6",
+                  "rect": [
+                    196.1164,
+                    287.2497,
+                    204.5564,
+                    300.8997
+                  ],
+                  "sourceCell": "pdf:461:cell:16",
+                  "wordIndex": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "selector": "LMSW reg/mem16",
+          "sourceEncoding": "0F 01 /6",
+          "sourceRowOrdinal": 0,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [
+              64,
+              32
+            ],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "fixed-explicit-word",
+            "operandBits": 16,
+            "prefix66": "does-not-resize-fixed-word",
+            "rexW": "does-not-promote-fixed-word",
+            "cr0SourceFieldBits": 4
+          }
+        }
+      ],
+      "clauses": {
+        "cells": [
+          "pdf:461:cell:5",
+          "pdf:461:cell:6",
+          "pdf:461:cell:7",
+          "pdf:461:cell:8",
+          "pdf:461:cell:9",
+          "pdf:461:cell:10",
+          "pdf:461:cell:11"
+        ],
+        "text": "Loads the lower four bits of the 16-bit register or memory operand into bits 3:0 of the machine status word in register CR0. Only the protection enabled (PE), monitor coprocessor (MP), emulation (EM), and task switched (TS) bits of CR0 are modified. Additionally, LMSW can set CR0.PE, but cannot clear it. The LMSW instruction can be used only when the current privilege level is 0. It is only provided for compatibility with early processors. Use the MOV CR0 instruction to load all 32 or 64 bits of CR0."
+      }
+    },
+    "MONITOR": {
+      "title": "MONITOR",
+      "owner": "amd-entry:0176",
+      "pages": [
+        466,
+        467
+      ],
+      "pageDigests": {
+        "466": "aa65d83cb66828d54495050fc44e5edeb47755cfe2ea936adaa439fe06d7208b",
+        "467": "3bf6da643a7c1f3dd9e0437aee5e30af4edc2dd15416000e75d4da700464745d"
+      },
+      "tables": [
+        {
+          "pdfPage": 467,
+          "header": "pdf:467:cell:3/word:0",
+          "sourceFieldWordsSha256": "4c47bf8e2a7248f0dc600ccb7c2475cb7066b7c467eb6f8d2e5501cdad2881b7",
+          "rows": [
+            {
+              "pdfPage": 467,
+              "selector": "MONITOR",
+              "sourceEncoding": "0F 01 C8",
+              "selectorWords": [
+                {
+                  "text": "MONITOR",
+                  "rect": [
+                    68.9874,
+                    148.2501,
+                    116.0454,
+                    161.9001
+                  ],
+                  "sourceCell": "pdf:467:cell:6",
+                  "wordIndex": 0
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    224.2474,
+                    148.2501,
+                    235.8774,
+                    161.9001
+                  ],
+                  "sourceCell": "pdf:467:cell:7",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "01",
+                  "rect": [
+                    238.6464,
+                    148.2501,
+                    249.9664,
+                    161.9001
+                  ],
+                  "sourceCell": "pdf:467:cell:7",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "C8",
+                  "rect": [
+                    252.5664,
+                    148.2501,
+                    265.3254,
+                    161.9001
+                  ],
+                  "sourceCell": "pdf:467:cell:7",
+                  "wordIndex": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "selector": "MONITOR",
+          "sourceEncoding": "0F 01 C8",
+          "sourceRowOrdinal": 0,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [
+              64,
+              32
+            ],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "fixed-implicit-data",
+            "implicitGprBits": {
+              "ECX": 32,
+              "EDX": 32
+            },
+            "prefix66": "does-not-resize-fixed-implicit-data",
+            "rexW": "does-not-promote-fixed-implicit-data",
+            "addressRegister": "rAX",
+            "addressSelectedBy": "address-size;not-fixed32-data-operands",
+            "monitoredRangeBytes": "CPUID-function5;not-an-operand-width",
+            "segmentationPagingCheckBytes": 1
+          }
+        }
+      ],
+      "clauses": {
+        "cells": [
+          "pdf:466:cell:13",
+          "pdf:466:cell:14",
+          "pdf:466:cell:15",
+          "pdf:466:cell:16",
+          "pdf:466:cell:17",
+          "pdf:466:cell:18",
+          "pdf:466:cell:19",
+          "pdf:466:cell:20",
+          "pdf:466:cell:21",
+          "pdf:466:cell:22",
+          "pdf:466:cell:23",
+          "pdf:466:cell:24",
+          "pdf:466:cell:25",
+          "pdf:466:cell:26",
+          "pdf:466:cell:27",
+          "pdf:466:cell:28",
+          "pdf:466:cell:29"
+        ],
+        "text": "The [rAX] register provides the effective address. The DS segment is the default segment used to create the linear address. Segment overrides may be used with the MONITOR instruction. The ECX register specifies optional extensions for the MONITOR instruction. There are currently no extensions defined and setting any bits in ECX will result in a #GP exception. The ECX register operand is implicitly 32-bits. The EDX register specifies optional hints for the MONITOR instruction. There are currently no hints defined and EDX is ignored by the processor. The EDX register operand is implicitly 32-bits. T he M O N I T O R i n s t r u c t i on c a n b e e x e c u t e d a t C P L 0 a nd i s a l l o w e d a t C P L > 0 only if MSR C001_0015h[MonMwaitUserEn] = 1. When MSR C001_0015h[MonMwaitUserEn] = 0, MONITOR generates #UD at CPL > 0. (See the BIOS and Kernel Developer\u2019s Guide applicable to your product for specific details on MSR C001_0015h.) MONITOR performs the same segmentation and paging checks as a 1-byte read. Support for the MONITOR instruction is indicated by CPUID Fn0000_0001_ECX[MONITOR] = 1. Software must check the CPUID bit once per program or library initialization before using the MONITOR instruction, or inconsistent behavior may result. Software designed to run at CPL greater than 0 must also check for availability by testing whether executing MONITOR causes a #UD exception."
+      }
+    },
+    "MWAIT": {
+      "title": "MWAIT",
+      "owner": "amd-entry:0179",
+      "pages": [
+        472,
+        473
+      ],
+      "pageDigests": {
+        "472": "e98935a14f7d2ce06944dca57e82a1a6ecaa3d3ffee2c1bf74ec694b8e8c3e90",
+        "473": "91dee65c2f788795dd7b5e2b83b4e2ccee275847934e22e351e6bb93e5d901b6"
+      },
+      "tables": [
+        {
+          "pdfPage": 473,
+          "header": "pdf:473:cell:19/word:0",
+          "sourceFieldWordsSha256": "5b138c3718ffd35523a508e1ed74f0e9ea83cdb573110647ab00c3746512d818",
+          "rows": [
+            {
+              "pdfPage": 473,
+              "selector": "MWAIT",
+              "sourceEncoding": "0F 01 C9",
+              "selectorWords": [
+                {
+                  "text": "MWAIT",
+                  "rect": [
+                    68.9874,
+                    389.2493,
+                    101.9764,
+                    402.8993
+                  ],
+                  "sourceCell": "pdf:473:cell:22",
+                  "wordIndex": 0
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    224.2474,
+                    389.2493,
+                    235.8774,
+                    402.8993
+                  ],
+                  "sourceCell": "pdf:473:cell:23",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "01",
+                  "rect": [
+                    238.6464,
+                    389.2493,
+                    249.9664,
+                    402.8993
+                  ],
+                  "sourceCell": "pdf:473:cell:23",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "C9",
+                  "rect": [
+                    252.5664,
+                    389.2493,
+                    265.3254,
+                    402.8993
+                  ],
+                  "sourceCell": "pdf:473:cell:23",
+                  "wordIndex": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "selector": "MWAIT",
+          "sourceEncoding": "0F 01 C9",
+          "sourceRowOrdinal": 0,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "fixed-implicit-data",
+            "implicitGprBits": {
+              "EAX": 32,
+              "ECX": 32
+            },
+            "prefix66": "does-not-resize-fixed-implicit-data",
+            "rexW": "does-not-promote-fixed-implicit-data"
+          }
+        }
+      ],
+      "clauses": {
+        "cells": [
+          "pdf:472:cell:20",
+          "pdf:472:cell:21",
+          "pdf:472:cell:22",
+          "pdf:472:cell:23",
+          "pdf:472:cell:24",
+          "pdf:472:cell:25",
+          "pdf:472:cell:26",
+          "pdf:472:cell:27",
+          "pdf:472:cell:28"
+        ],
+        "text": "EAX specifies optional hints for the MWAIT instruction. Optimized C-state request is communicated through EAX[7:4]. The processor C-state is EAX[7:4]+1, so to request C0 is to place the value F in EAX[7:4] and to request C1 is to place the value 0 in EAX[7:4]. All other components of EAX should be zero when making the C1 request. Setting a reserved bit in EAX is ignored by the processor. This is implicitly a 32-bit operand. ECX specifies optional extensions for the MWAIT instruction. The only extension currently defined is ECX bit 0, which allows interrupts to wake MWAIT, even when eFLAGS.IF = 0. Support for this extension is indicated by a feature flag returned by the CPUID instruction. Setting any unsupported bit in ECX results in a #GP exception. This is implicitly a 32-bit operand."
+      }
+    },
+    "SLDT": {
+      "title": "SLDT",
+      "owner": "amd-entry:0199",
+      "pages": [
+        516,
+        517
+      ],
+      "pageDigests": {
+        "516": "fbcd377be5e9966887485053f2653e259dd306c2ec6b555b06a71caa129961e0",
+        "517": "91da4918c13a7c5aecb186fcd76abc2a2b63c0c3f2119fdfe8db54b5a130d47d"
+      },
+      "tables": [
+        {
+          "pdfPage": 516,
+          "header": "pdf:516:cell:12/word:0",
+          "sourceFieldWordsSha256": "e7d34406c255015a2027df8d7856a4adb0678fe7264b459974b1597431f4afbd",
+          "rows": [
+            {
+              "pdfPage": 516,
+              "selector": "SLDT reg16",
+              "sourceEncoding": "0F 00 /0",
+              "selectorWords": [
+                {
+                  "text": "SLDT",
+                  "rect": [
+                    68.9974,
+                    296.2497,
+                    94.5464,
+                    309.8997
+                  ],
+                  "sourceCell": "pdf:516:cell:15",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg16",
+                  "rect": [
+                    97.1374,
+                    296.6697,
+                    122.6164,
+                    309.8997
+                  ],
+                  "sourceCell": "pdf:516:cell:15",
+                  "wordIndex": 1
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    237.8274,
+                    296.2497,
+                    249.4574,
+                    309.8997
+                  ],
+                  "sourceCell": "pdf:516:cell:16",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "00",
+                  "rect": [
+                    252.2264,
+                    296.2497,
+                    263.3064,
+                    309.8997
+                  ],
+                  "sourceCell": "pdf:516:cell:16",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/0",
+                  "rect": [
+                    266.1464,
+                    296.2497,
+                    274.3464,
+                    309.8997
+                  ],
+                  "sourceCell": "pdf:516:cell:16",
+                  "wordIndex": 2
+                }
+              ]
+            },
+            {
+              "pdfPage": 516,
+              "selector": "SLDT reg32",
+              "sourceEncoding": "0F 00 /0",
+              "selectorWords": [
+                {
+                  "text": "SLDT",
+                  "rect": [
+                    68.9974,
+                    324.2497,
+                    94.5464,
+                    337.8997
+                  ],
+                  "sourceCell": "pdf:516:cell:19",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg32",
+                  "rect": [
+                    97.1374,
+                    324.6697,
+                    122.6164,
+                    337.8997
+                  ],
+                  "sourceCell": "pdf:516:cell:19",
+                  "wordIndex": 1
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    237.8274,
+                    324.2497,
+                    249.4574,
+                    337.8997
+                  ],
+                  "sourceCell": "pdf:516:cell:20",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "00",
+                  "rect": [
+                    252.2264,
+                    324.2497,
+                    263.3064,
+                    337.8997
+                  ],
+                  "sourceCell": "pdf:516:cell:20",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/0",
+                  "rect": [
+                    266.1464,
+                    324.2497,
+                    274.3464,
+                    337.8997
+                  ],
+                  "sourceCell": "pdf:516:cell:20",
+                  "wordIndex": 2
+                }
+              ]
+            },
+            {
+              "pdfPage": 516,
+              "selector": "SLDT reg64",
+              "sourceEncoding": "0F 00 /0",
+              "selectorWords": [
+                {
+                  "text": "SLDT",
+                  "rect": [
+                    68.9974,
+                    352.2497,
+                    94.5464,
+                    365.8997
+                  ],
+                  "sourceCell": "pdf:516:cell:23",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg64",
+                  "rect": [
+                    97.1374,
+                    352.6697,
+                    122.6164,
+                    365.8997
+                  ],
+                  "sourceCell": "pdf:516:cell:23",
+                  "wordIndex": 1
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    237.8274,
+                    352.2497,
+                    249.4574,
+                    365.8997
+                  ],
+                  "sourceCell": "pdf:516:cell:24",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "00",
+                  "rect": [
+                    252.2264,
+                    352.2497,
+                    263.3064,
+                    365.8997
+                  ],
+                  "sourceCell": "pdf:516:cell:24",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/0",
+                  "rect": [
+                    266.1464,
+                    352.2497,
+                    274.3464,
+                    365.8997
+                  ],
+                  "sourceCell": "pdf:516:cell:24",
+                  "wordIndex": 2
+                }
+              ]
+            },
+            {
+              "pdfPage": 516,
+              "selector": "SLDT mem16",
+              "sourceEncoding": "0F 00 /0",
+              "selectorWords": [
+                {
+                  "text": "SLDT",
+                  "rect": [
+                    68.9974,
+                    385.2497,
+                    94.5464,
+                    398.8997
+                  ],
+                  "sourceCell": "pdf:516:cell:27",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "mem16",
+                  "rect": [
+                    97.1374,
+                    385.6697,
+                    130.2964,
+                    398.8997
+                  ],
+                  "sourceCell": "pdf:516:cell:27",
+                  "wordIndex": 1
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    237.8274,
+                    385.2497,
+                    249.4574,
+                    398.8997
+                  ],
+                  "sourceCell": "pdf:516:cell:28",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "00",
+                  "rect": [
+                    252.2264,
+                    385.2497,
+                    263.3064,
+                    398.8997
+                  ],
+                  "sourceCell": "pdf:516:cell:28",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/0",
+                  "rect": [
+                    266.1464,
+                    385.2497,
+                    274.3464,
+                    398.8997
+                  ],
+                  "sourceCell": "pdf:516:cell:28",
+                  "wordIndex": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "selector": "SLDT reg16",
+          "sourceEncoding": "0F 00 /0",
+          "sourceRowOrdinal": 0,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "selector-store",
+            "destinationKind": "register",
+            "destinationBits": 16,
+            "defaultAttributeBits": 32,
+            "operandAttributeBits": [
+              16
+            ],
+            "prefix66": "selects16-bit-register-result",
+            "rexW": "selects64-bit-register-result",
+            "sourceSelectorBits": 16
+          }
+        },
+        {
+          "selector": "SLDT reg32",
+          "sourceEncoding": "0F 00 /0",
+          "sourceRowOrdinal": 1,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "selector-store",
+            "destinationKind": "register",
+            "destinationBits": 32,
+            "defaultAttributeBits": 32,
+            "operandAttributeBits": [
+              32
+            ],
+            "prefix66": "selects16-bit-register-result",
+            "rexW": "selects64-bit-register-result",
+            "sourceSelectorBits": 16
+          }
+        },
+        {
+          "selector": "SLDT reg64",
+          "sourceEncoding": "0F 00 /0",
+          "sourceRowOrdinal": 2,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "selector-store",
+            "destinationKind": "register",
+            "destinationBits": 64,
+            "defaultAttributeBits": 32,
+            "operandAttributeBits": [
+              64
+            ],
+            "prefix66": "selects16-bit-register-result",
+            "rexW": "selects64-bit-register-result",
+            "sourceSelectorBits": 16
+          }
+        },
+        {
+          "selector": "SLDT mem16",
+          "sourceEncoding": "0F 00 /0",
+          "sourceRowOrdinal": 3,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [
+              64,
+              32
+            ],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "selector-store",
+            "destinationKind": "memory",
+            "destinationBits": 16,
+            "defaultAttributeBits": 32,
+            "operandAttributeBits": [
+              16,
+              32,
+              64
+            ],
+            "prefix66": "does-not-resize-memory-word",
+            "rexW": "does-not-resize-memory-word",
+            "sourceSelectorBits": 16
+          }
+        }
+      ],
+      "clauses": {
+        "cells": [
+          "pdf:516:cell:5",
+          "pdf:516:cell:6",
+          "pdf:516:cell:7",
+          "pdf:516:cell:8",
+          "pdf:516:cell:9",
+          "pdf:516:cell:10",
+          "pdf:516:cell:11"
+        ],
+        "text": "Stores the local descriptor table (LDT) selector to a register or memory destination operand. If the destination is a register, the selector is zero-extended into a 16-, 32-, or 64-bit general purpose register, depending on operand size. If the destination operand is a memory location, the segment selector is written to memory as a 16-bit value, regardless of operand size. This SLDT instruction can only be used in protected mode, but it can be executed at any privilege level."
+      }
+    },
+    "SMSW": {
+      "title": "SMSW",
+      "owner": "amd-entry:0200",
+      "pages": [
+        518,
+        518
+      ],
+      "pageDigests": {
+        "518": "85cb42c0c960e13aa35681447bb9310ec07e4990d4146842e268a0bd2552f564"
+      },
+      "tables": [
+        {
+          "pdfPage": 518,
+          "header": "pdf:518:cell:9/word:0",
+          "sourceFieldWordsSha256": "30ddeefb27cb5a12df4c3f6d880700087a405c5ffbcae44a39ff6a5aac86a75b",
+          "rows": [
+            {
+              "pdfPage": 518,
+              "selector": "SMSW reg16",
+              "sourceEncoding": "0F 01 /4",
+              "selectorWords": [
+                {
+                  "text": "SMSW",
+                  "rect": [
+                    68.9974,
+                    240.2498,
+                    100.2764,
+                    253.8998
+                  ],
+                  "sourceCell": "pdf:518:cell:12",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg16",
+                  "rect": [
+                    102.8674,
+                    240.6698,
+                    128.5864,
+                    253.8998
+                  ],
+                  "sourceCell": "pdf:518:cell:12",
+                  "wordIndex": 1
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    169.4374,
+                    240.2498,
+                    181.0674,
+                    253.8998
+                  ],
+                  "sourceCell": "pdf:518:cell:13",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "01",
+                  "rect": [
+                    183.8364,
+                    240.2498,
+                    194.9164,
+                    253.8998
+                  ],
+                  "sourceCell": "pdf:518:cell:13",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/4",
+                  "rect": [
+                    197.7564,
+                    240.2498,
+                    205.9564,
+                    253.8998
+                  ],
+                  "sourceCell": "pdf:518:cell:13",
+                  "wordIndex": 2
+                }
+              ]
+            },
+            {
+              "pdfPage": 518,
+              "selector": "SMSW reg32",
+              "sourceEncoding": "0F 01 /4",
+              "selectorWords": [
+                {
+                  "text": "SMSW",
+                  "rect": [
+                    69.0074,
+                    258.2498,
+                    100.2864,
+                    271.8998
+                  ],
+                  "sourceCell": "pdf:518:cell:15",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg32",
+                  "rect": [
+                    102.8774,
+                    258.6698,
+                    128.5964,
+                    271.8998
+                  ],
+                  "sourceCell": "pdf:518:cell:15",
+                  "wordIndex": 1
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    169.4474,
+                    258.2498,
+                    181.0774,
+                    271.8998
+                  ],
+                  "sourceCell": "pdf:518:cell:16",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "01",
+                  "rect": [
+                    183.8464,
+                    258.2498,
+                    194.9264,
+                    271.8998
+                  ],
+                  "sourceCell": "pdf:518:cell:16",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/4",
+                  "rect": [
+                    197.7664,
+                    258.2498,
+                    205.9664,
+                    271.8998
+                  ],
+                  "sourceCell": "pdf:518:cell:16",
+                  "wordIndex": 2
+                }
+              ]
+            },
+            {
+              "pdfPage": 518,
+              "selector": "SMSW reg64",
+              "sourceEncoding": "0F 01 /4",
+              "selectorWords": [
+                {
+                  "text": "SMSW",
+                  "rect": [
+                    69.0174,
+                    276.2498,
+                    100.2964,
+                    289.8998
+                  ],
+                  "sourceCell": "pdf:518:cell:18",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg64",
+                  "rect": [
+                    102.8874,
+                    276.6698,
+                    128.6064,
+                    289.8998
+                  ],
+                  "sourceCell": "pdf:518:cell:18",
+                  "wordIndex": 1
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    169.4574,
+                    276.2498,
+                    181.0874,
+                    289.8998
+                  ],
+                  "sourceCell": "pdf:518:cell:19",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "01",
+                  "rect": [
+                    183.8564,
+                    276.2498,
+                    194.9364,
+                    289.8998
+                  ],
+                  "sourceCell": "pdf:518:cell:19",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/4",
+                  "rect": [
+                    197.7764,
+                    276.2498,
+                    205.9764,
+                    289.8998
+                  ],
+                  "sourceCell": "pdf:518:cell:19",
+                  "wordIndex": 2
+                }
+              ]
+            },
+            {
+              "pdfPage": 518,
+              "selector": "SMSW mem16",
+              "sourceEncoding": "0F 01 /4",
+              "selectorWords": [
+                {
+                  "text": "SMSW",
+                  "rect": [
+                    69.0274,
+                    294.2498,
+                    100.3064,
+                    307.8998
+                  ],
+                  "sourceCell": "pdf:518:cell:21",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "mem16",
+                  "rect": [
+                    102.8974,
+                    294.6698,
+                    136.2964,
+                    307.8998
+                  ],
+                  "sourceCell": "pdf:518:cell:21",
+                  "wordIndex": 1
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    169.4674,
+                    294.2498,
+                    181.0974,
+                    307.8998
+                  ],
+                  "sourceCell": "pdf:518:cell:22",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "01",
+                  "rect": [
+                    183.8664,
+                    294.2498,
+                    194.9464,
+                    307.8998
+                  ],
+                  "sourceCell": "pdf:518:cell:22",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/4",
+                  "rect": [
+                    197.7864,
+                    294.2498,
+                    205.9864,
+                    307.8998
+                  ],
+                  "sourceCell": "pdf:518:cell:22",
+                  "wordIndex": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "selector": "SMSW reg16",
+          "sourceEncoding": "0F 01 /4",
+          "sourceRowOrdinal": 0,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "machine-status-store",
+            "destinationKind": "register",
+            "destinationBits": 16,
+            "defaultAttributeBits": 32,
+            "operandAttributeBits": [
+              16
+            ],
+            "prefix66": "selects16-bit-register-result",
+            "rexW": "selects64-bit-register-result",
+            "cr0SourceBits": 16
+          }
+        },
+        {
+          "selector": "SMSW reg32",
+          "sourceEncoding": "0F 01 /4",
+          "sourceRowOrdinal": 1,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "machine-status-store",
+            "destinationKind": "register",
+            "destinationBits": 32,
+            "defaultAttributeBits": 32,
+            "operandAttributeBits": [
+              32
+            ],
+            "prefix66": "selects16-bit-register-result",
+            "rexW": "selects64-bit-register-result",
+            "cr0SourceBits": 32
+          }
+        },
+        {
+          "selector": "SMSW reg64",
+          "sourceEncoding": "0F 01 /4",
+          "sourceRowOrdinal": 2,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "machine-status-store",
+            "destinationKind": "register",
+            "destinationBits": 64,
+            "defaultAttributeBits": 32,
+            "operandAttributeBits": [
+              64
+            ],
+            "prefix66": "selects16-bit-register-result",
+            "rexW": "selects64-bit-register-result",
+            "cr0SourceBits": 64
+          }
+        },
+        {
+          "selector": "SMSW mem16",
+          "sourceEncoding": "0F 01 /4",
+          "sourceRowOrdinal": 3,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [
+              64,
+              32
+            ],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "machine-status-store",
+            "destinationKind": "memory",
+            "destinationBits": 16,
+            "defaultAttributeBits": 32,
+            "operandAttributeBits": [
+              16,
+              32,
+              64
+            ],
+            "prefix66": "does-not-resize-memory-word",
+            "rexW": "does-not-resize-memory-word",
+            "cr0SourceBits": 16
+          }
+        }
+      ],
+      "clauses": {
+        "cells": [
+          "pdf:518:cell:5",
+          "pdf:518:cell:6",
+          "pdf:518:cell:7",
+          "pdf:518:cell:8",
+          "pdf:518:cell:12",
+          "pdf:518:cell:13",
+          "pdf:518:cell:14",
+          "pdf:518:cell:15",
+          "pdf:518:cell:16",
+          "pdf:518:cell:17",
+          "pdf:518:cell:18",
+          "pdf:518:cell:19",
+          "pdf:518:cell:20",
+          "pdf:518:cell:21",
+          "pdf:518:cell:22",
+          "pdf:518:cell:23"
+        ],
+        "text": "Stores the lower bits of the machine status word (CR0). The target can be a 16-, 32-, or 64-bit register or a 16-bit memory operand. This instruction is provided for compatibility with early processors. This instruction can be used at any privilege level (CPL). SMSW reg16 0F 01 /4 Store the low 16 bits of CR0 to a 16-bit register. SMSW reg32 0F 01 /4 Store the low 32 bits of CR0 to a 32-bit register. SMSW reg64 0F 01 /4 Store the entire 64-bit CR0 to a 64-bit register. SMSW mem16 0F 01 /4 Store the low 16 bits of CR0 to memory."
+      }
+    },
+    "STR": {
+      "title": "STR",
+      "owner": "amd-entry:0204",
+      "pages": [
+        523,
+        523
+      ],
+      "pageDigests": {
+        "523": "a09b81c13aefc415244fa601581762de84bb941d2999efc576c8a604ae1a538e"
+      },
+      "tables": [
+        {
+          "pdfPage": 523,
+          "header": "pdf:523:cell:11/word:0",
+          "sourceFieldWordsSha256": "160af397e8df931cdbe9eac38cd0339dd2e1097f12068eb41563d60435e1bb85",
+          "rows": [
+            {
+              "pdfPage": 523,
+              "selector": "STR reg16",
+              "sourceEncoding": "0F 00 /1",
+              "selectorWords": [
+                {
+                  "text": "STR",
+                  "rect": [
+                    68.9874,
+                    282.2498,
+                    88.9264,
+                    295.8998
+                  ],
+                  "sourceCell": "pdf:523:cell:14",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg16",
+                  "rect": [
+                    91.7574,
+                    282.6698,
+                    117.2364,
+                    295.8998
+                  ],
+                  "sourceCell": "pdf:523:cell:14",
+                  "wordIndex": 1
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    157.9074,
+                    282.2498,
+                    169.5374,
+                    295.8998
+                  ],
+                  "sourceCell": "pdf:523:cell:15",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "00",
+                  "rect": [
+                    172.3074,
+                    282.2498,
+                    183.3864,
+                    295.8998
+                  ],
+                  "sourceCell": "pdf:523:cell:15",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/1",
+                  "rect": [
+                    186.2264,
+                    282.2498,
+                    194.4264,
+                    295.8998
+                  ],
+                  "sourceCell": "pdf:523:cell:15",
+                  "wordIndex": 2
+                }
+              ]
+            },
+            {
+              "pdfPage": 523,
+              "selector": "STR reg32",
+              "sourceEncoding": "0F 00 /1",
+              "selectorWords": [
+                {
+                  "text": "STR",
+                  "rect": [
+                    68.9874,
+                    310.2498,
+                    88.9264,
+                    323.8998
+                  ],
+                  "sourceCell": "pdf:523:cell:18",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg32",
+                  "rect": [
+                    91.7574,
+                    310.6698,
+                    117.2364,
+                    323.8998
+                  ],
+                  "sourceCell": "pdf:523:cell:18",
+                  "wordIndex": 1
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    157.9074,
+                    310.2498,
+                    169.5374,
+                    323.8998
+                  ],
+                  "sourceCell": "pdf:523:cell:19",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "00",
+                  "rect": [
+                    172.3074,
+                    310.2498,
+                    183.3864,
+                    323.8998
+                  ],
+                  "sourceCell": "pdf:523:cell:19",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/1",
+                  "rect": [
+                    186.2264,
+                    310.2498,
+                    194.4264,
+                    323.8998
+                  ],
+                  "sourceCell": "pdf:523:cell:19",
+                  "wordIndex": 2
+                }
+              ]
+            },
+            {
+              "pdfPage": 523,
+              "selector": "STR reg64",
+              "sourceEncoding": "0F 00 /1",
+              "selectorWords": [
+                {
+                  "text": "STR",
+                  "rect": [
+                    68.9874,
+                    338.2498,
+                    88.9264,
+                    351.8998
+                  ],
+                  "sourceCell": "pdf:523:cell:22",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg64",
+                  "rect": [
+                    91.7574,
+                    338.6698,
+                    117.2364,
+                    351.8998
+                  ],
+                  "sourceCell": "pdf:523:cell:22",
+                  "wordIndex": 1
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    157.9074,
+                    338.2498,
+                    169.5374,
+                    351.8998
+                  ],
+                  "sourceCell": "pdf:523:cell:23",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "00",
+                  "rect": [
+                    172.3074,
+                    338.2498,
+                    183.3864,
+                    351.8998
+                  ],
+                  "sourceCell": "pdf:523:cell:23",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/1",
+                  "rect": [
+                    186.2264,
+                    338.2498,
+                    194.4264,
+                    351.8998
+                  ],
+                  "sourceCell": "pdf:523:cell:23",
+                  "wordIndex": 2
+                }
+              ]
+            },
+            {
+              "pdfPage": 523,
+              "selector": "STR mem16",
+              "sourceEncoding": "0F 00 /1",
+              "selectorWords": [
+                {
+                  "text": "STR",
+                  "rect": [
+                    68.9874,
+                    366.2498,
+                    88.9264,
+                    379.8998
+                  ],
+                  "sourceCell": "pdf:523:cell:26",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "mem16",
+                  "rect": [
+                    91.7574,
+                    366.6698,
+                    125.1564,
+                    379.8998
+                  ],
+                  "sourceCell": "pdf:523:cell:26",
+                  "wordIndex": 1
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    157.9074,
+                    366.2498,
+                    169.5374,
+                    379.8998
+                  ],
+                  "sourceCell": "pdf:523:cell:27",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "00",
+                  "rect": [
+                    172.3074,
+                    366.2498,
+                    183.3864,
+                    379.8998
+                  ],
+                  "sourceCell": "pdf:523:cell:27",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/1",
+                  "rect": [
+                    186.2264,
+                    366.2498,
+                    194.4264,
+                    379.8998
+                  ],
+                  "sourceCell": "pdf:523:cell:27",
+                  "wordIndex": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "selector": "STR reg16",
+          "sourceEncoding": "0F 00 /1",
+          "sourceRowOrdinal": 0,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "selector-store",
+            "destinationKind": "register",
+            "destinationBits": 16,
+            "defaultAttributeBits": 32,
+            "operandAttributeBits": [
+              16
+            ],
+            "prefix66": "selects16-bit-register-result",
+            "rexW": "selects64-bit-register-result",
+            "sourceSelectorBits": 16
+          }
+        },
+        {
+          "selector": "STR reg32",
+          "sourceEncoding": "0F 00 /1",
+          "sourceRowOrdinal": 1,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "selector-store",
+            "destinationKind": "register",
+            "destinationBits": 32,
+            "defaultAttributeBits": 32,
+            "operandAttributeBits": [
+              32
+            ],
+            "prefix66": "selects16-bit-register-result",
+            "rexW": "selects64-bit-register-result",
+            "sourceSelectorBits": 16
+          }
+        },
+        {
+          "selector": "STR reg64",
+          "sourceEncoding": "0F 00 /1",
+          "sourceRowOrdinal": 2,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "selector-store",
+            "destinationKind": "register",
+            "destinationBits": 64,
+            "defaultAttributeBits": 32,
+            "operandAttributeBits": [
+              64
+            ],
+            "prefix66": "selects16-bit-register-result",
+            "rexW": "selects64-bit-register-result",
+            "sourceSelectorBits": 16
+          }
+        },
+        {
+          "selector": "STR mem16",
+          "sourceEncoding": "0F 00 /1",
+          "sourceRowOrdinal": 3,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [
+              64,
+              32
+            ],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "selector-store",
+            "destinationKind": "memory",
+            "destinationBits": 16,
+            "defaultAttributeBits": 32,
+            "operandAttributeBits": [
+              16,
+              32,
+              64
+            ],
+            "prefix66": "does-not-resize-memory-word",
+            "rexW": "does-not-resize-memory-word",
+            "sourceSelectorBits": 16
+          }
+        }
+      ],
+      "clauses": {
+        "cells": [
+          "pdf:523:cell:5",
+          "pdf:523:cell:6",
+          "pdf:523:cell:7",
+          "pdf:523:cell:8",
+          "pdf:523:cell:9",
+          "pdf:523:cell:10"
+        ],
+        "text": "Stores the task register (TR) selector to a register or memory destination operand. If the destination is a register, the selector is zero-extended into a 16-, 32-, or 64-bit general purpose register, depending on the operand size. If the destination is a memory location, the segment selector is written to memory as a 16-bit value, regardless of operand size. The STR instruction can only be used in protected mode, but it can be used at any privilege level."
+      }
+    },
+    "VERR": {
+      "title": "VERR",
+      "owner": "amd-entry:0211",
+      "pages": [
+        539,
+        540
+      ],
+      "pageDigests": {
+        "539": "c1776e4368eb8675c0e0a2680e1026d47379b7a8f26a77eb8be029923e338521",
+        "540": "960b992faeb422383f75c67379cfda468d095b727d523546a9963583d893cc61"
+      },
+      "tables": [
+        {
+          "pdfPage": 539,
+          "header": "pdf:539:cell:19/word:0",
+          "sourceFieldWordsSha256": "54b5cc1b2b3af9facb4734445d7f28d8ea20ce16b6d04156d576410eafe802ac",
+          "rows": [
+            {
+              "pdfPage": 539,
+              "selector": "VERR reg/mem16",
+              "sourceEncoding": "0F 00 /4",
+              "selectorWords": [
+                {
+                  "text": "VERR",
+                  "rect": [
+                    68.9974,
+                    347.2495,
+                    96.8564,
+                    360.8995
+                  ],
+                  "sourceCell": "pdf:539:cell:22",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg/mem16",
+                  "rect": [
+                    99.6374,
+                    347.6695,
+                    150.0754,
+                    360.8995
+                  ],
+                  "sourceCell": "pdf:539:cell:22",
+                  "wordIndex": 1
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    223.4274,
+                    347.2495,
+                    235.0574,
+                    360.8995
+                  ],
+                  "sourceCell": "pdf:539:cell:23",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "00",
+                  "rect": [
+                    237.8264,
+                    347.2495,
+                    248.9064,
+                    360.8995
+                  ],
+                  "sourceCell": "pdf:539:cell:23",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/4",
+                  "rect": [
+                    251.7464,
+                    347.2495,
+                    259.9464,
+                    360.8995
+                  ],
+                  "sourceCell": "pdf:539:cell:23",
+                  "wordIndex": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "selector": "VERR reg/mem16",
+          "sourceEncoding": "0F 00 /4",
+          "sourceRowOrdinal": 0,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [
+              64,
+              32
+            ],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "fixed-explicit-word",
+            "operandBits": 16,
+            "prefix66": "does-not-resize-fixed-word",
+            "rexW": "does-not-promote-fixed-word",
+            "sourceSelectorBits": 16
+          }
+        }
+      ],
+      "clauses": {
+        "cells": [
+          "pdf:539:cell:5",
+          "pdf:539:cell:6",
+          "pdf:539:cell:7"
+        ],
+        "text": "Verifies whether a code or data segment specified by the segment selector in the 16-bit register or memory operand is readable from the current privilege level. The zero flag (ZF) is set to 1 if the specified segment is readable. Otherwise, ZF is cleared."
+      }
+    },
+    "VERW": {
+      "title": "VERW",
+      "owner": "amd-entry:0212",
+      "pages": [
+        541,
+        541
+      ],
+      "pageDigests": {
+        "541": "1acf2bbed1737ab8060d02584083452f80ccebe1ad7eaeb7d86bfc843ecd48c2"
+      },
+      "tables": [
+        {
+          "pdfPage": 541,
+          "header": "pdf:541:cell:18/word:0",
+          "sourceFieldWordsSha256": "374a22a19c2baff16d63fbebb5f5c555f0177c4f0830c17e969475380c978b87",
+          "rows": [
+            {
+              "pdfPage": 541,
+              "selector": "VERW reg/mem16",
+              "sourceEncoding": "0F 00 /5",
+              "selectorWords": [
+                {
+                  "text": "VERW",
+                  "rect": [
+                    68.9974,
+                    333.2496,
+                    98.8364,
+                    346.8996
+                  ],
+                  "sourceCell": "pdf:541:cell:21",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg/mem16",
+                  "rect": [
+                    101.6774,
+                    333.6696,
+                    152.1154,
+                    346.8996
+                  ],
+                  "sourceCell": "pdf:541:cell:21",
+                  "wordIndex": 1
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    223.4274,
+                    333.2496,
+                    235.0574,
+                    346.8996
+                  ],
+                  "sourceCell": "pdf:541:cell:22",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "00",
+                  "rect": [
+                    237.8264,
+                    333.2496,
+                    248.9064,
+                    346.8996
+                  ],
+                  "sourceCell": "pdf:541:cell:22",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/5",
+                  "rect": [
+                    251.7464,
+                    333.2496,
+                    259.9464,
+                    346.8996
+                  ],
+                  "sourceCell": "pdf:541:cell:22",
+                  "wordIndex": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "selector": "VERW reg/mem16",
+          "sourceEncoding": "0F 00 /5",
+          "sourceRowOrdinal": 0,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [
+              64,
+              32
+            ],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "fixed-explicit-word",
+            "operandBits": 16,
+            "prefix66": "does-not-resize-fixed-word",
+            "rexW": "does-not-promote-fixed-word",
+            "sourceSelectorBits": 16
+          }
+        }
+      ],
+      "clauses": {
+        "cells": [
+          "pdf:541:cell:5",
+          "pdf:541:cell:6",
+          "pdf:541:cell:7"
+        ],
+        "text": "Verifies whether a data segment specified by the segment selector in the 16-bit register or memory operand is writable from the current privilege level. The zero flag (ZF) is set to 1 if the specified segment is writable. Otherwise, ZF is cleared."
+      }
+    },
+    "LDS LES LFS LGS LSS": {
+      "title": "LDS LES LFS LGS LSS",
+      "owner": "amd-entry:0066",
+      "pages": [
+        258,
+        259
+      ],
+      "pageDigests": {
+        "258": "4dcb536f2f1b5815ddea68939d9e2aaa93c1f512a1badad47db56f27ffa2af59",
+        "259": "1dffe8133936559e53042108362916028790dba68353212f05da970b5f88209d"
+      },
+      "tables": [
+        {
+          "pdfPage": 258,
+          "header": "pdf:258:cell:16/word:0",
+          "sourceFieldWordsSha256": "b3a3d9b1a29ab97264ae848900d01332a13bfd8de49d5bcb2ad03f90aa2f149d",
+          "rows": [
+            {
+              "pdfPage": 258,
+              "selector": "LDS reg16, mem16:16",
+              "sourceEncoding": "C5 /r",
+              "selectorWords": [
+                {
+                  "text": "LDS",
+                  "rect": [
+                    68.9874,
+                    354.2495,
+                    88.3764,
+                    367.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:19",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg16,",
+                  "rect": [
+                    91.2064,
+                    354.6695,
+                    119.4254,
+                    367.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:19",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "mem16:16",
+                  "rect": [
+                    122.1654,
+                    354.6695,
+                    169.4834,
+                    367.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:19",
+                  "wordIndex": 2
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "C5",
+                  "rect": [
+                    223.7874,
+                    354.2495,
+                    236.5474,
+                    367.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:20",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "/r",
+                  "rect": [
+                    239.3374,
+                    354.6695,
+                    245.5474,
+                    367.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:20",
+                  "wordIndex": 1
+                }
+              ]
+            },
+            {
+              "pdfPage": 258,
+              "selector": "LDS reg32, mem16:32",
+              "sourceEncoding": "C5 /r",
+              "selectorWords": [
+                {
+                  "text": "LDS",
+                  "rect": [
+                    68.9874,
+                    382.2495,
+                    88.3764,
+                    395.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:23",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg32,",
+                  "rect": [
+                    91.2064,
+                    382.6695,
+                    119.4254,
+                    395.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:23",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "mem16:32",
+                  "rect": [
+                    122.1654,
+                    382.6695,
+                    169.4834,
+                    395.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:23",
+                  "wordIndex": 2
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "C5",
+                  "rect": [
+                    223.7874,
+                    382.2495,
+                    236.5474,
+                    395.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:24",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "/r",
+                  "rect": [
+                    239.3374,
+                    382.6695,
+                    245.5474,
+                    395.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:24",
+                  "wordIndex": 1
+                }
+              ]
+            },
+            {
+              "pdfPage": 258,
+              "selector": "LES reg16, mem16:16",
+              "sourceEncoding": "C4 /r",
+              "selectorWords": [
+                {
+                  "text": "LES",
+                  "rect": [
+                    68.9874,
+                    410.2495,
+                    87.8974,
+                    423.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:27",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg16,",
+                  "rect": [
+                    90.6574,
+                    410.6695,
+                    118.8764,
+                    423.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:27",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "mem16:16",
+                  "rect": [
+                    121.6164,
+                    410.6695,
+                    168.9344,
+                    423.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:27",
+                  "wordIndex": 2
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "C4",
+                  "rect": [
+                    223.7874,
+                    410.2495,
+                    236.5474,
+                    423.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:28",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "/r",
+                  "rect": [
+                    239.3374,
+                    410.6695,
+                    245.5474,
+                    423.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:28",
+                  "wordIndex": 1
+                }
+              ]
+            },
+            {
+              "pdfPage": 258,
+              "selector": "LES reg32, mem16:32",
+              "sourceEncoding": "C4 /r",
+              "selectorWords": [
+                {
+                  "text": "LES",
+                  "rect": [
+                    68.9874,
+                    438.2495,
+                    87.8974,
+                    451.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:31",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg32,",
+                  "rect": [
+                    90.6574,
+                    438.6695,
+                    118.8764,
+                    451.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:31",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "mem16:32",
+                  "rect": [
+                    121.6164,
+                    438.6695,
+                    168.9344,
+                    451.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:31",
+                  "wordIndex": 2
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "C4",
+                  "rect": [
+                    223.7874,
+                    438.2495,
+                    236.5474,
+                    451.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:32",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "/r",
+                  "rect": [
+                    239.3374,
+                    438.6695,
+                    245.5474,
+                    451.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:32",
+                  "wordIndex": 1
+                }
+              ]
+            },
+            {
+              "pdfPage": 258,
+              "selector": "LFS reg16, mem16:16",
+              "sourceEncoding": "0F B4 /r",
+              "selectorWords": [
+                {
+                  "text": "LFS",
+                  "rect": [
+                    68.9874,
+                    461.2495,
+                    87.4174,
+                    474.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:35",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg16,",
+                  "rect": [
+                    90.0974,
+                    461.6695,
+                    118.5564,
+                    474.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:35",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "mem16:16",
+                  "rect": [
+                    121.2964,
+                    461.6695,
+                    168.3744,
+                    474.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:35",
+                  "wordIndex": 2
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    223.7874,
+                    461.2495,
+                    235.4174,
+                    474.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:36",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "B4",
+                  "rect": [
+                    238.1864,
+                    461.2495,
+                    250.4664,
+                    474.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:36",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/r",
+                  "rect": [
+                    253.2274,
+                    461.6695,
+                    259.4374,
+                    474.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:36",
+                  "wordIndex": 2
+                }
+              ]
+            },
+            {
+              "pdfPage": 258,
+              "selector": "LFS reg32, mem16:32",
+              "sourceEncoding": "0F B4 /r",
+              "selectorWords": [
+                {
+                  "text": "LFS",
+                  "rect": [
+                    68.9874,
+                    479.2495,
+                    87.4174,
+                    492.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:38",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg32,",
+                  "rect": [
+                    90.0974,
+                    479.6695,
+                    118.5564,
+                    492.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:38",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "mem16:32",
+                  "rect": [
+                    121.2964,
+                    479.6695,
+                    168.3744,
+                    492.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:38",
+                  "wordIndex": 2
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    223.7874,
+                    479.2495,
+                    235.4174,
+                    492.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:39",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "B4",
+                  "rect": [
+                    238.1864,
+                    479.2495,
+                    250.4664,
+                    492.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:39",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/r",
+                  "rect": [
+                    253.2274,
+                    479.6695,
+                    259.4374,
+                    492.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:39",
+                  "wordIndex": 2
+                }
+              ]
+            },
+            {
+              "pdfPage": 258,
+              "selector": "LGS reg16, mem16:16",
+              "sourceEncoding": "0F B5 /r",
+              "selectorWords": [
+                {
+                  "text": "LGS",
+                  "rect": [
+                    68.9874,
+                    497.2495,
+                    89.0964,
+                    510.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:41",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg16,",
+                  "rect": [
+                    91.7674,
+                    497.6695,
+                    120.2264,
+                    510.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:41",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "mem16:16",
+                  "rect": [
+                    122.9664,
+                    497.6695,
+                    170.0444,
+                    510.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:41",
+                  "wordIndex": 2
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    223.7874,
+                    497.2495,
+                    235.4174,
+                    510.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:42",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "B5",
+                  "rect": [
+                    238.1864,
+                    497.2495,
+                    250.4664,
+                    510.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:42",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/r",
+                  "rect": [
+                    253.2274,
+                    497.6695,
+                    259.4374,
+                    510.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:42",
+                  "wordIndex": 2
+                }
+              ]
+            },
+            {
+              "pdfPage": 258,
+              "selector": "LGS reg32, mem16:32",
+              "sourceEncoding": "0F B5 /r",
+              "selectorWords": [
+                {
+                  "text": "LGS",
+                  "rect": [
+                    68.9874,
+                    515.2495,
+                    89.0964,
+                    528.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:44",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg32,",
+                  "rect": [
+                    91.7674,
+                    515.6695,
+                    120.2264,
+                    528.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:44",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "mem16:32",
+                  "rect": [
+                    122.9664,
+                    515.6695,
+                    170.0444,
+                    528.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:44",
+                  "wordIndex": 2
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    223.7874,
+                    515.2495,
+                    235.4174,
+                    528.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:45",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "B5",
+                  "rect": [
+                    238.1864,
+                    515.2495,
+                    250.4664,
+                    528.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:45",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/r",
+                  "rect": [
+                    253.2274,
+                    515.6695,
+                    259.4374,
+                    528.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:45",
+                  "wordIndex": 2
+                }
+              ]
+            },
+            {
+              "pdfPage": 258,
+              "selector": "LSS reg16, mem16:16",
+              "sourceEncoding": "0F B2 /r",
+              "selectorWords": [
+                {
+                  "text": "LSS",
+                  "rect": [
+                    68.9874,
+                    533.2495,
+                    87.8974,
+                    546.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:47",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg16,",
+                  "rect": [
+                    90.6574,
+                    533.6695,
+                    118.8764,
+                    546.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:47",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "mem16:16",
+                  "rect": [
+                    121.6164,
+                    533.6695,
+                    168.9344,
+                    546.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:47",
+                  "wordIndex": 2
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    223.7874,
+                    533.2495,
+                    235.4174,
+                    546.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:48",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "B2",
+                  "rect": [
+                    238.1864,
+                    533.2495,
+                    250.4664,
+                    546.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:48",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/r",
+                  "rect": [
+                    253.2274,
+                    533.6695,
+                    259.4374,
+                    546.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:48",
+                  "wordIndex": 2
+                }
+              ]
+            },
+            {
+              "pdfPage": 258,
+              "selector": "LSS reg32, mem16:32",
+              "sourceEncoding": "0F B2 /r",
+              "selectorWords": [
+                {
+                  "text": "LSS",
+                  "rect": [
+                    68.9974,
+                    551.2495,
+                    87.9074,
+                    564.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:50",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "reg32,",
+                  "rect": [
+                    90.6674,
+                    551.6695,
+                    118.8864,
+                    564.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:50",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "mem16:32",
+                  "rect": [
+                    121.6264,
+                    551.6695,
+                    168.9444,
+                    564.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:50",
+                  "wordIndex": 2
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "0F",
+                  "rect": [
+                    223.7974,
+                    551.2495,
+                    235.4274,
+                    564.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:51",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "B2",
+                  "rect": [
+                    238.1964,
+                    551.2495,
+                    250.4764,
+                    564.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:51",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "/r",
+                  "rect": [
+                    253.2374,
+                    551.6695,
+                    259.4474,
+                    564.8995
+                  ],
+                  "sourceCell": "pdf:258:cell:51",
+                  "wordIndex": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "selector": "LDS reg16, mem16:16",
+          "sourceEncoding": "C5 /r",
+          "sourceRowOrdinal": 0,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "excluded-selected-execution-mode",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [
+              64,
+              32
+            ],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "far-pointer-load",
+            "sourceSelectorBits": 16,
+            "offsetBits": 16,
+            "memoryPointerBits": 32,
+            "operandAttributeBits": 16,
+            "defaultAttributeBits": 32,
+            "operand64": "not-supported-by-owned-prose",
+            "prefix66": "selects16-bit-offset;not-address16",
+            "rexW": "does-not-supply-a-supported64-bit-offset-form",
+            "exclusion": "old-operation-reassigned-to-VEX-in-native64",
+            "replacementEncodingOwnersExcluded": false
+          }
+        },
+        {
+          "selector": "LDS reg32, mem16:32",
+          "sourceEncoding": "C5 /r",
+          "sourceRowOrdinal": 1,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "excluded-selected-execution-mode",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [
+              64,
+              32
+            ],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "far-pointer-load",
+            "sourceSelectorBits": 16,
+            "offsetBits": 32,
+            "memoryPointerBits": 48,
+            "operandAttributeBits": 32,
+            "defaultAttributeBits": 32,
+            "operand64": "not-supported-by-owned-prose",
+            "prefix66": "selects16-bit-offset;not-address16",
+            "rexW": "does-not-supply-a-supported64-bit-offset-form",
+            "exclusion": "old-operation-reassigned-to-VEX-in-native64",
+            "replacementEncodingOwnersExcluded": false
+          }
+        },
+        {
+          "selector": "LES reg16, mem16:16",
+          "sourceEncoding": "C4 /r",
+          "sourceRowOrdinal": 2,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "excluded-selected-execution-mode",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [
+              64,
+              32
+            ],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "far-pointer-load",
+            "sourceSelectorBits": 16,
+            "offsetBits": 16,
+            "memoryPointerBits": 32,
+            "operandAttributeBits": 16,
+            "defaultAttributeBits": 32,
+            "operand64": "not-supported-by-owned-prose",
+            "prefix66": "selects16-bit-offset;not-address16",
+            "rexW": "does-not-supply-a-supported64-bit-offset-form",
+            "exclusion": "old-operation-reassigned-to-VEX-in-native64",
+            "replacementEncodingOwnersExcluded": false
+          }
+        },
+        {
+          "selector": "LES reg32, mem16:32",
+          "sourceEncoding": "C4 /r",
+          "sourceRowOrdinal": 3,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "excluded-selected-execution-mode",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [
+              64,
+              32
+            ],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "far-pointer-load",
+            "sourceSelectorBits": 16,
+            "offsetBits": 32,
+            "memoryPointerBits": 48,
+            "operandAttributeBits": 32,
+            "defaultAttributeBits": 32,
+            "operand64": "not-supported-by-owned-prose",
+            "prefix66": "selects16-bit-offset;not-address16",
+            "rexW": "does-not-supply-a-supported64-bit-offset-form",
+            "exclusion": "old-operation-reassigned-to-VEX-in-native64",
+            "replacementEncodingOwnersExcluded": false
+          }
+        },
+        {
+          "selector": "LFS reg16, mem16:16",
+          "sourceEncoding": "0F B4 /r",
+          "sourceRowOrdinal": 4,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [
+              64,
+              32
+            ],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "far-pointer-load",
+            "sourceSelectorBits": 16,
+            "offsetBits": 16,
+            "memoryPointerBits": 32,
+            "operandAttributeBits": 16,
+            "defaultAttributeBits": 32,
+            "operand64": "not-supported-by-owned-prose",
+            "prefix66": "selects16-bit-offset;not-address16",
+            "rexW": "does-not-supply-a-supported64-bit-offset-form"
+          }
+        },
+        {
+          "selector": "LFS reg32, mem16:32",
+          "sourceEncoding": "0F B4 /r",
+          "sourceRowOrdinal": 5,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [
+              64,
+              32
+            ],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "far-pointer-load",
+            "sourceSelectorBits": 16,
+            "offsetBits": 32,
+            "memoryPointerBits": 48,
+            "operandAttributeBits": 32,
+            "defaultAttributeBits": 32,
+            "operand64": "not-supported-by-owned-prose",
+            "prefix66": "selects16-bit-offset;not-address16",
+            "rexW": "does-not-supply-a-supported64-bit-offset-form"
+          }
+        },
+        {
+          "selector": "LGS reg16, mem16:16",
+          "sourceEncoding": "0F B5 /r",
+          "sourceRowOrdinal": 6,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [
+              64,
+              32
+            ],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "far-pointer-load",
+            "sourceSelectorBits": 16,
+            "offsetBits": 16,
+            "memoryPointerBits": 32,
+            "operandAttributeBits": 16,
+            "defaultAttributeBits": 32,
+            "operand64": "not-supported-by-owned-prose",
+            "prefix66": "selects16-bit-offset;not-address16",
+            "rexW": "does-not-supply-a-supported64-bit-offset-form"
+          }
+        },
+        {
+          "selector": "LGS reg32, mem16:32",
+          "sourceEncoding": "0F B5 /r",
+          "sourceRowOrdinal": 7,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [
+              64,
+              32
+            ],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "far-pointer-load",
+            "sourceSelectorBits": 16,
+            "offsetBits": 32,
+            "memoryPointerBits": 48,
+            "operandAttributeBits": 32,
+            "defaultAttributeBits": 32,
+            "operand64": "not-supported-by-owned-prose",
+            "prefix66": "selects16-bit-offset;not-address16",
+            "rexW": "does-not-supply-a-supported64-bit-offset-form"
+          }
+        },
+        {
+          "selector": "LSS reg16, mem16:16",
+          "sourceEncoding": "0F B2 /r",
+          "sourceRowOrdinal": 8,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [
+              64,
+              32
+            ],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "far-pointer-load",
+            "sourceSelectorBits": 16,
+            "offsetBits": 16,
+            "memoryPointerBits": 32,
+            "operandAttributeBits": 16,
+            "defaultAttributeBits": 32,
+            "operand64": "not-supported-by-owned-prose",
+            "prefix66": "selects16-bit-offset;not-address16",
+            "rexW": "does-not-supply-a-supported64-bit-offset-form"
+          }
+        },
+        {
+          "selector": "LSS reg32, mem16:32",
+          "sourceEncoding": "0F B2 /r",
+          "sourceRowOrdinal": 9,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [
+              64,
+              32
+            ],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "far-pointer-load",
+            "sourceSelectorBits": 16,
+            "offsetBits": 32,
+            "memoryPointerBits": 48,
+            "operandAttributeBits": 32,
+            "defaultAttributeBits": 32,
+            "operand64": "not-supported-by-owned-prose",
+            "prefix66": "selects16-bit-offset;not-address16",
+            "rexW": "does-not-supply-a-supported64-bit-offset-form"
+          }
+        }
+      ],
+      "clauses": {
+        "cells": [
+          "pdf:258:cell:9",
+          "pdf:258:cell:10",
+          "pdf:258:cell:11",
+          "pdf:258:cell:12",
+          "pdf:258:cell:13",
+          "pdf:258:cell:14",
+          "pdf:258:cell:15",
+          "pdf:258:cell:19",
+          "pdf:258:cell:20",
+          "pdf:258:cell:21",
+          "pdf:258:cell:22",
+          "pdf:258:cell:23",
+          "pdf:258:cell:24",
+          "pdf:258:cell:25",
+          "pdf:258:cell:26",
+          "pdf:258:cell:27",
+          "pdf:258:cell:28",
+          "pdf:258:cell:29",
+          "pdf:258:cell:30",
+          "pdf:258:cell:31",
+          "pdf:258:cell:32",
+          "pdf:258:cell:33",
+          "pdf:258:cell:34"
+        ],
+        "text": "Loads a far pointer from a memory location (second operand) into a segment register (mnemonic) and general-purpose register (first operand). The instruction stores the 16-bit segment selector of the pointer into the segment register and the 16-bit or 32-bit offset portion into the general-purpose register. The operand-size attribute determines whether the pointer loaded is 32 or 48 bits in length. A 64-bit operand is not supported. These instructions load associated segment-descriptor information into the hidden portion of the specified segment register. LDS reg16, mem16:16 C5 /r Load DS:reg16 with a far pointer from memory. [Redefined as VEX (2-byte prefix) in 64-bit mode.] LDS reg32, mem16:32 C5 /r Load DS:reg32 with a far pointer from memory. [Redefined as VEX (2-byte prefix) in 64-bit mode.] LES reg16, mem16:16 C4 /r Load ES:reg16 with a far pointer from memory. [Redefined as VEX (3-byte prefix) in 64-bit mode.] LES reg32, mem16:32 C4 /r Load ES:reg32 with a far pointer from memory. [Redefined as VEX (3-byte prefix) in 64-bit mode.]"
+      }
+    },
+    "RDPID": {
+      "title": "RDPID",
+      "owner": "amd-entry:0115",
+      "pages": [
+        349,
+        349
+      ],
+      "pageDigests": {
+        "349": "a0d2d7760633240aa005c0ac29220b9f83aa423257e807bef57bd89ebf3a6282"
+      },
+      "tables": [
+        {
+          "pdfPage": 349,
+          "header": "pdf:349:cell:13/word:0",
+          "sourceFieldWordsSha256": "99ba6ebf3188ae475040b8defe7c8648d40159bd6a0fea4e9f8e52f274056de3",
+          "rows": [
+            {
+              "pdfPage": 349,
+              "selector": "RDPID",
+              "sourceEncoding": "F3 0F C7/7",
+              "selectorWords": [
+                {
+                  "text": "RDPID",
+                  "rect": [
+                    68.9874,
+                    315.2496,
+                    100.2064,
+                    328.8996
+                  ],
+                  "sourceCell": "pdf:349:cell:16",
+                  "wordIndex": 0
+                }
+              ],
+              "encodingWords": [
+                {
+                  "text": "F3",
+                  "rect": [
+                    223.7874,
+                    315.2496,
+                    235.5874,
+                    328.8996
+                  ],
+                  "sourceCell": "pdf:349:cell:17",
+                  "wordIndex": 0
+                },
+                {
+                  "text": "0F",
+                  "rect": [
+                    238.1864,
+                    315.2496,
+                    250.0564,
+                    328.8996
+                  ],
+                  "sourceCell": "pdf:349:cell:17",
+                  "wordIndex": 1
+                },
+                {
+                  "text": "C7/7",
+                  "rect": [
+                    252.8264,
+                    315.2496,
+                    273.7454,
+                    328.8996
+                  ],
+                  "sourceCell": "pdf:349:cell:17",
+                  "wordIndex": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "forms": [
+        {
+          "selector": "RDPID",
+          "sourceEncoding": "F3 0F C7/7",
+          "sourceRowOrdinal": 0,
+          "properties": {
+            "executionModes": [
+              "long-64"
+            ],
+            "state": "native64-source-form",
+            "extraPrefixAdmission": false,
+            "definiteWrites": "not-derived",
+            "addressBits": [],
+            "memoryAccessFootprint": "not-derived-from-register-result-or-operand-attribute",
+            "kind": "mode-fixed-update;not-B1-listed",
+            "currentDestinationRegisterBits": 64,
+            "non64SourceUpdateBits": 32,
+            "operandWidthSelectedBy": "execution-mode;not-66-or-REX.W",
+            "prefix66": "normal-operand-size-prefix-does-not-apply",
+            "prefixF3": "opcode-selector;not-repeat",
+            "rexW": "does-not-select-update-width",
+            "sourceValueBits": "not-derived-from-update-width",
+            "featureRequired": "CPUID.Fn0000_0007.ECX_x0.RDPID=1",
+            "sourceSelectorHasPrintedOperands": false
+          }
+        }
+      ],
+      "clauses": {
+        "cells": [
+          "pdf:349:cell:5",
+          "pdf:349:cell:6",
+          "pdf:349:cell:7",
+          "pdf:349:cell:8",
+          "pdf:349:cell:9",
+          "pdf:349:cell:10",
+          "pdf:349:cell:11",
+          "pdf:349:cell:12"
+        ],
+        "text": "RDPID reads the value of TSC_AUX MSR used by the RDTSCP instruction into the specified destination register. Normal operand size prefixes do not apply and the update is either 32 bit or 64 bit based on the current mode. The RDPID instruction can be used to access the TSC_AUX value at CPL > 0 in cases where the operating system has disabled unprivileged execution of the RDTSCP instruction. The content of the TSC_AUX MSR, including how and even whether it actually indicates a processor ID, is a matter of operating system convention. The RDPID instruction is supported if the feature flag CPUID Fn0000_0007_ECX_x0[RDPID]=1."
+      }
+    }
+  }
+}

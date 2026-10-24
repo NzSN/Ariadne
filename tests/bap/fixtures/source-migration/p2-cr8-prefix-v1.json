@@ -1,0 +1,81 @@
+{
+  "clauses": {
+    "feature": {
+      "cells": [
+        "pdf:468:cell:11",
+        "pdf:468:cell:12",
+        "pdf:468:cell:13",
+        "pdf:468:cell:14"
+      ],
+      "text": "CR8 can be read and written in 64-bit mode, using a REX prefix. CR8 can be read and written in all modes using a LOCK prefix instead of a REX prefix to specify the additional opcode bit. To verify whether the LOCK prefix can be used in this way, check for support of this feature. CPUID Fn8000_0001_ECX[AltMovCr8] = 1, indicates that this feature is supported."
+    },
+    "operands": {
+      "cells": [
+        "pdf:468:cell:19",
+        "pdf:468:cell:20",
+        "pdf:468:cell:21"
+      ],
+      "text": "This instruction is always treated as a register-to-register (MOD = 11) instruction, regardless of the encoding of the MOD field in the MODR/M byte. MOV CRn is a privileged instruction and must always be executed at CPL = 0."
+    },
+    "refusal": {
+      "cells": [
+        "pdf:469:cell:22",
+        "pdf:469:cell:23"
+      ],
+      "text": "The use of the LOCK prefix to read CR8 is not supported, as indicated by CPUID Fn8000_0001_ECX[AltMovCr8] = 0."
+    },
+    "width": {
+      "cells": [
+        "pdf:468:cell:6",
+        "pdf:468:cell:7"
+      ],
+      "text": "In 64-bit mode, the operand size is fixed at 64 bits without the need for a REX prefix. In non-64-bit mode, the operand size is fixed at 32 bits and the upper 32 bits of the destination are forced to 0."
+    }
+  },
+  "executionModes": [
+    "long-64"
+  ],
+  "forms": [
+    {
+      "dataBits": 32,
+      "disposition": "excluded-selected-execution-mode",
+      "encoding": "F0 0F 22/r",
+      "encodingCell": "pdf:468:cell:39",
+      "mnemonicCell": "pdf:468:cell:38",
+      "selector": "MOV CR8, reg32"
+    },
+    {
+      "dataBits": 64,
+      "disposition": "native64-source-form",
+      "encoding": "F0 0F 22/r",
+      "encodingCell": "pdf:468:cell:42",
+      "mnemonicCell": "pdf:468:cell:41",
+      "selector": "MOV CR8, reg64"
+    },
+    {
+      "dataBits": 32,
+      "disposition": "excluded-selected-execution-mode",
+      "encoding": "F0 0F 20/r",
+      "encodingCell": "pdf:468:cell:45",
+      "mnemonicCell": "pdf:468:cell:44",
+      "selector": "MOV reg32, CR8"
+    },
+    {
+      "dataBits": 64,
+      "disposition": "native64-source-form",
+      "encoding": "F0 0F 20/r",
+      "encodingCell": "pdf:468:cell:48",
+      "mnemonicCell": "pdf:468:cell:47",
+      "selector": "MOV reg64, CR8"
+    }
+  ],
+  "owner": "amd-entry:0177",
+  "pages": {
+    "468": "c330676ccba4fd92e7e129d83783d3a123475a6498a22b160335db67453dd3fc",
+    "469": "2dd9849eb112f769a806da338ef1e3fe38e6e341a354ff9efeec81be73c6fe86"
+  },
+  "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+  "publication": "24594",
+  "schema": "ariadne.amd64-cr8-prefix/v1",
+  "sourcePolicySha256": "d1caf84927162bb696185eed4880007aa92ded2260738c940cdeb935ee8a1840"
+}

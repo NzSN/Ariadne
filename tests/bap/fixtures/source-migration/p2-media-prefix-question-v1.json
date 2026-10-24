@@ -1,0 +1,33 @@
+{
+  "executionModes": [
+    "long-64"
+  ],
+  "pages": {
+    "map": {
+      "cellsSha256": "703c6b6139566384e1819410574e2ba48c0f39d09d26bcb2e2511ac5db6e777e",
+      "pdfPage": 571,
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "publication": "24594"
+    },
+    "old-xorps": {
+      "cellsSha256": "eae4d6aa03d84a512b74b0326f798fb7f659996f6fadd1d96afc9cfd8cfa2c51",
+      "pdfPage": 1614,
+      "pdfSha256": "5fec87806a5d03418bef588bfbe3f466c129c2f784369fe1e11dd0b6dd8213f0",
+      "publication": "26568"
+    },
+    "xorpd": {
+      "cellsSha256": "20a2ab52f6358191034a66c428dd3e5020e72baef15bcc439433041cac5f8ee4",
+      "pdfPage": 1819,
+      "pdfSha256": "209c0ebfa2b4f5bebf7b41ad7f7c5841026166b63b43f0aeb4d9f669f43806f9",
+      "publication": "26568"
+    },
+    "xorps": {
+      "cellsSha256": "ad0493f251eb3f6906a1915a661a0935553bce741049a9f5f32674356957e93e",
+      "pdfPage": 1822,
+      "pdfSha256": "209c0ebfa2b4f5bebf7b41ad7f7c5841026166b63b43f0aeb4d9f669f43806f9",
+      "publication": "26568"
+    }
+  },
+  "schema": "ariadne.amd64-media-prefix-question/v1",
+  "sourcePolicySha256": "d1caf84927162bb696185eed4880007aa92ded2260738c940cdeb935ee8a1840"
+}

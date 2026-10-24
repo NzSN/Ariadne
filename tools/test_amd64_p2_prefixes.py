@@ -83,6 +83,31 @@ class PrefixInventoryControls(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,"source owners"):
             prefix.assess(list(self.pages.values()),self.fixture["normalized"])
 
+    def test_cr8_opcode_extension_is_not_a_memory_lock(self):
+        pack = prefix.entry.read(prefix.CR8_INPUT)
+        source = prefix.entry.read(prefix.INPUT.parent/"p2-cr8-source-excerpt.json")
+        result = prefix.assess_cr8(pack,source["pages"],source["entries"])
+        self.assertIn("opcode-extension",result["prefixRole"])
+        self.assertFalse(result["memoryOperand"])
+        self.assertFalse(result["automaticallyLocked"])
+        self.assertEqual(result["featureRequired"],"CPUID.Fn8000_0001.ECX.AltMovCr8=1")
+        self.assertEqual(result["native64DataBits"],64)
+        self.assertEqual([f["dataBits"] for f in result["forms"] if f["disposition"] == "native64-source-form"],[64,64])
+        self.assertNotIn("MOV CRn",prefix.LOCK)
+
+    def test_cr8_mode_feature_clause_owner_and_width_forgery_fail(self):
+        source = prefix.entry.read(prefix.INPUT.parent/"p2-cr8-source-excerpt.json")
+        for attack in ("mode", "feature", "owner", "width", "omission", "atomic"):
+            pack = prefix.entry.read(prefix.CR8_INPUT)
+            if attack == "mode": pack["executionModes"] = ["host-64"]
+            elif attack == "feature": pack["clauses"]["feature"]["cells"].pop()
+            elif attack == "owner": pack["owner"] = "amd-entry:0178"
+            elif attack == "width": pack["forms"][0]["disposition"] = "native64-source-form"
+            elif attack == "omission": pack["forms"].pop()
+            else: pack["automaticallyLocked"] = True
+            with self.subTest(attack=attack),self.assertRaises(ValueError):
+                prefix.assess_cr8(pack,source["pages"],source["entries"])
+
 
 if __name__ == "__main__":
     unittest.main()

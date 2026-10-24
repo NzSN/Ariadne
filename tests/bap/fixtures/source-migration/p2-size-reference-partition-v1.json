@@ -1,0 +1,93 @@
+{
+  "schema": "ariadne.amd64-size-reference-partition/v1",
+  "sourcePolicySha256": "d1caf84927162bb696185eed4880007aa92ded2260738c940cdeb935ee8a1840",
+  "executionModes": [
+    "long-64"
+  ],
+  "originalReferencesSha256": {
+    "default64-instruction-exceptions": "cff0fccc94dc665063b4cecca9c75d6ff498dfa357c5b36700af658d3ac64a62",
+    "operand-note-2": "9c2b069698eaf44b6d35a38246fabd9e92e6e4fb4582186feb0b35a6c42209c0",
+    "prefix-note-2": "fc4d4370f1b31640f9eb67d83e97c46fbf0ef9847e1187dc4d776f28fc5bb69c"
+  },
+  "root": "default64-instruction-exceptions",
+  "coveredRequirement": {
+    "sourceCells": [
+      "24594/pdf:50:cell:67",
+      "24594/pdf:50:cell:68",
+      "24594/pdf:50:cell:69",
+      "24594/pdf:50:cell:70",
+      "24594/pdf:50:cell:71",
+      "24594/pdf:50:cell:72",
+      "24594/pdf:50:cell:73",
+      "24594/pdf:50:cell:74",
+      "24594/pdf:50:cell:75",
+      "24594/pdf:50:cell:76",
+      "24594/pdf:50:cell:77"
+    ],
+    "premise": "normal-operand-size-attribute;near-branches-under-accepted-fixed64-hypothesis",
+    "domain": "near-branches-and-implicit-RSP-operations-except-far-transfers",
+    "proof": "complete-owned-B5-and-Vol1-attribute-subproof"
+  },
+  "sharedRequirements": [
+    {
+      "owner": "operand-note-2",
+      "sourceCells": [
+        "24594/pdf:50:cell:64",
+        "24594/pdf:50:cell:65"
+      ],
+      "requirement": "complete-current-manual-default-and-fixed-size-form-qualification;Appendix-B-is-not-the-entire-current-census"
+    },
+    {
+      "owner": "prefix-note-2",
+      "sourceCells": [
+        "24594/pdf:49:cell:68",
+        "24594/pdf:49:cell:69",
+        "24594/pdf:49:cell:70"
+      ],
+      "domainPremiseCells": [
+        "24594/pdf:50:cell:78",
+        "24594/pdf:50:cell:79",
+        "24594/pdf:51:cell:3",
+        "24594/pdf:51:cell:4",
+        "24594/pdf:51:cell:5",
+        "24594/pdf:51:cell:6",
+        "24594/pdf:51:cell:7",
+        "24594/pdf:51:cell:8"
+      ],
+      "requirement": "nonstandard-prefix-and-fixed-size-applicability;no-generic-override-assumption"
+    }
+  ],
+  "locatedReference": {
+    "owner": "operand-note-3",
+    "sourceCells": [
+      "24594/pdf:50:cell:66"
+    ],
+    "state": "resolved-location"
+  },
+  "additionalCounterexample": {
+    "owner": "amd-entry:0115",
+    "title": "RDPID",
+    "publication": "24594",
+    "pdfPage": 349,
+    "clauseCells": [
+      "pdf:349:cell:5",
+      "pdf:349:cell:6",
+      "pdf:349:cell:7",
+      "pdf:349:cell:8",
+      "pdf:349:cell:9",
+      "pdf:349:cell:10",
+      "pdf:349:cell:11",
+      "pdf:349:cell:12"
+    ],
+    "encodingCell": "pdf:349:cell:17",
+    "currentSourceRule": "mode-fixed64-update;normal-size-prefixes-do-not-apply;F3-opcode-selector",
+    "requirementOwners": [
+      "operand-note-2",
+      "prefix-note-2"
+    ],
+    "inAppendixB": false
+  },
+  "globalDefaultFixedCensusComplete": false,
+  "wholeCComplete": false,
+  "productionAdmission": false
+}

@@ -1,0 +1,59 @@
+{
+  "authority": {
+    "mnemonicCells": [
+      "pdf:571:cell:117",
+      "pdf:571:cell:125"
+    ],
+    "pdfPage": 571,
+    "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+    "prefixCells": [
+      "pdf:571:cell:185",
+      "pdf:571:cell:187"
+    ],
+    "publication": "24594",
+    "revision": "3.38",
+    "table": "A-3"
+  },
+  "decision": "user-selected-vol3-xorps-xorpd-2026-10-24",
+  "executionModes": [
+    "long-64"
+  ],
+  "forms": [
+    {
+      "dataBits": 128,
+      "mandatoryPrefix": null,
+      "modrm": "/r",
+      "opcodeBytes": [
+        "0f",
+        "57"
+      ],
+      "otherPrefixAdmission": false,
+      "prefixRole": "opcode-selector;not-operand16",
+      "selector": "XORPS xmm1, xmm2/mem128"
+    },
+    {
+      "dataBits": 128,
+      "mandatoryPrefix": "66",
+      "modrm": "/r",
+      "opcodeBytes": [
+        "0f",
+        "57"
+      ],
+      "otherPrefixAdmission": false,
+      "prefixRole": "opcode-selector;not-operand16",
+      "selector": "XORPD xmm1, xmm2/mem128"
+    }
+  ],
+  "limits": {
+    "featureAdmission": "separate-instruction-owned-contract",
+    "otherSourceQuestions": "unchanged",
+    "productionAdmission": false,
+    "publisherCorrection": false,
+    "sourceLiterals": "preserved",
+    "vexEvex": "separate-form-contracts"
+  },
+  "question": "p2-c:xorps-legacy-prefix-disagreement",
+  "questionInputSha256": "22ebcd06ec0842828557147e9400e1b6016ec593fbeb237af3493d3b3d8b6391",
+  "schema": "ariadne.amd64-media-source-precedence/v1",
+  "sourcePolicySha256": "d1caf84927162bb696185eed4880007aa92ded2260738c940cdeb935ee8a1840"
+}

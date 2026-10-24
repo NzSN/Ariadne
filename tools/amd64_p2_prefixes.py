@@ -14,6 +14,7 @@ from amd64_inventory_xed import canonical, digest
 entry = native.entry
 ROOT = entry.ROOT
 INPUT = ROOT/"tests/bap/fixtures/source-migration/p2-lock-repeat-v1.json"
+CR8_INPUT = INPUT.parent/"p2-cr8-prefix-v1.json"
 require = entry.require
 # Exact owner, physical clause cells, and independently reviewed form counts.
 LOCK = {
@@ -176,3 +177,42 @@ def assess(pages, normalized):
         state="checked-instruction-owned-scope;source-list-conflicts-retained",
         remaining=["p2:lock-list-disagreement","p2:repeat-note-disagreement","media-mandatory-prefix-inventory"],
         completePrefixInventory=False, productionAdmission=False)
+
+
+def assess_cr8(pack, pages, entries):
+    """F0 can extend an opcode; the memory-lock list does not cover that role."""
+    require(set(pack) == {"schema", "publication", "pdfSha256", "sourcePolicySha256", "executionModes",
+                          "pages", "owner", "clauses", "forms"}, "CR8 prefix fields differ")
+    require(pack["schema"] == "ariadne.amd64-cr8-prefix/v1" and pack["publication"] == "24594" and
+            pack["pdfSha256"] == next(d["pdfSha256"] for d in native.adoption.selected_documents() if d["publication"] == "24594") and
+            pack["sourcePolicySha256"] == entry.migration.sha(native.adoption.INPUT) and
+            pack["executionModes"] == ["long-64"] and pack["owner"] == "amd-entry:0177",
+            "CR8 prefix source identity/mode/owner differs")
+    by_number = {p["pdfPage"]:p for p in pages}
+    require(len(by_number) == len(pages) and set(pack["pages"]) == {"468", "469"}, "CR8 source page population differs")
+    for key,pin in pack["pages"].items():
+        require(int(key) in by_number and digest(by_number[int(key)]["cells"]) == pin, "CR8 actual page differs")
+        native.words(by_number[int(key)])
+    owners = [e for e in entries if e["id"] == pack["owner"]]
+    require(len(owners) == 1 and owners[0]["title"] == "MOV CRn" and
+            [owners[0]["pdfPage"], owners[0]["pdfEndPage"]] == [468, 469], "CR8 instruction source owner differs")
+    wanted = {"width": (468,6,7), "feature": (468,11,14), "operands": (468,19,21), "refusal": (469,22,23)}
+    require(set(pack["clauses"]) == set(wanted), "CR8 prefix clause inventory differs")
+    checked = {name:clause(pack["clauses"][name], by_number, [f"pdf:{p}:cell:{i}" for i in range(first,last+1)])
+               for name,(p,first,last) in wanted.items()}
+    require("AltMovCr8" in " ".join(c["text"] for c in checked["feature"]) and
+            "CPL = 0" in " ".join(c["text"] for c in checked["operands"]), "CR8 feature/privilege premise differs")
+    specs = [(38,39,"MOV CR8, reg32","F0 0F 22/r",32), (41,42,"MOV CR8, reg64","F0 0F 22/r",64),
+             (44,45,"MOV reg32, CR8","F0 0F 20/r",32), (47,48,"MOV reg64, CR8","F0 0F 20/r",64)]
+    require(len(pack["forms"]) == len(specs), "CR8 prefix form population differs")
+    cells = {c["id"]:c for c in by_number[468]["cells"]}
+    for form,(m,e,selector,encoding,bits) in zip(pack["forms"],specs):
+        expected = dict(selector=selector, mnemonicCell=f"pdf:468:cell:{m}", encodingCell=f"pdf:468:cell:{e}",
+                        encoding=encoding, dataBits=bits,
+                        disposition="native64-source-form" if bits == 64 else "excluded-selected-execution-mode")
+        require(canonical(form) == canonical(expected) and cells[expected["mnemonicCell"]]["text"] == selector and
+                cells[expected["encodingCell"]]["text"] == encoding, "CR8 prefix form/width/source differs")
+    return dict(schema="ariadne.amd64-cr8-prefix-assessment/v1", owner=pack["owner"], sourceClauses=checked,
+                forms=copy.deepcopy(pack["forms"]), prefixRole="opcode-extension;not-atomic-memory-lock",
+                featureRequired="CPUID.Fn8000_0001.ECX.AltMovCr8=1", cplRequired=0,
+                native64DataBits=64, memoryOperand=False, automaticallyLocked=False, productionAdmission=False)

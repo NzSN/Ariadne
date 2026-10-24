@@ -1,0 +1,256 @@
+{
+  "schema": "ariadne.amd64-prefix-interpretations/v1",
+  "sourcePolicySha256": "d1caf84927162bb696185eed4880007aa92ded2260738c940cdeb935ee8a1840",
+  "executionModes": [
+    "long-64"
+  ],
+  "anchors": {
+    "vol1-lock": {
+      "publication": "24592",
+      "pdfSha256": "aed9236b718ae86cdb49f7d628f4ebb1a4bdce1a012df6cf6aad6735776c8a38",
+      "clause": {
+        "cells": [
+          "pdf:116:cell:22",
+          "pdf:116:cell:23",
+          "pdf:116:cell:24",
+          "pdf:116:cell:25",
+          "pdf:116:cell:26",
+          "pdf:116:cell:27",
+          "pdf:116:cell:28",
+          "pdf:116:cell:29",
+          "pdf:116:cell:30",
+          "pdf:116:cell:31",
+          "pdf:116:cell:32"
+        ],
+        "text": "3.5.1.3 Lock Prefix The LOCK prefix causes certain read-modify-write instructions that access memory to occur atomically. The mechanism for doing so is implementation-dependent (for example, the mechanism may involve locking of data-cache lines that contain copies of the referenced memory operands, and/or bus signaling or packet-messaging on the bus). The prefix is intended to give the processor exclusive use of shared memory operands in a multiprocessor system. The prefix can only be used with forms of the following instructions that write a memory operand: ADC, ADD, AND, BTC, BTR, BTS, CMPXCHG, CMPXCHG8B, DEC, INC, NEG, NOT, OR, SBB, SUB, XADD, XCHG, and XOR. An invalid-opcode exception occurs if LOCK is used with any other instruction. For further details on these prefixes, see \u201cLock Prefix\u201d in Volume 3."
+      }
+    },
+    "vol1-repeat": {
+      "publication": "24592",
+      "pdfSha256": "aed9236b718ae86cdb49f7d628f4ebb1a4bdce1a012df6cf6aad6735776c8a38",
+      "clause": {
+        "cells": [
+          "pdf:116:cell:33",
+          "pdf:116:cell:34",
+          "pdf:116:cell:35",
+          "pdf:116:cell:36",
+          "pdf:116:cell:37",
+          "pdf:116:cell:38",
+          "pdf:116:cell:39",
+          "pdf:116:cell:40",
+          "pdf:116:cell:41"
+        ],
+        "text": "3.5.1.4 Repeat Prefixes There are two repeat prefixes byte codes, F3h and F2h. Byte code F3h is the more general and is usually treated as two distinct instructions by assemblers. Byte code F2h is only used with CMPSx and SCASx instructions: \u2022 78 REP (F3h)\u2014This more generalized repeat prefix repeats its associated string instruction the number of times specified in the counter register (rCX). Repetition stops when the value in rCX reaches 0. This prefix is used with the INS, LODS, MOVS, OUTS, and STOS instructions."
+      }
+    },
+    "vol3-lock": {
+      "publication": "24594",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "clause": {
+        "cells": [
+          "pdf:54:cell:3",
+          "pdf:54:cell:4",
+          "pdf:54:cell:5",
+          "pdf:54:cell:6"
+        ],
+        "text": "The LOCK prefix can only be used with forms of the following instructions that write a memory operand: ADC, ADD, AND, BTC, BTR, BTS, CMPXCHG, CMPXCHG8B, CMPXCHG16B, DEC, INC, NEG, NOT, OR, SBB, SUB, XADD, XCHG, and XOR. An invalid-opcode exception occurs if the LOCK prefix is used with any other instruction."
+      }
+    },
+    "cmpxchg-wide-lock": {
+      "publication": "24594",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "clause": {
+        "cells": [
+          "pdf:211:cell:11",
+          "pdf:211:cell:12",
+          "pdf:211:cell:13",
+          "pdf:211:cell:14",
+          "pdf:211:cell:15",
+          "pdf:211:cell:16",
+          "pdf:211:cell:17",
+          "pdf:211:cell:18",
+          "pdf:211:cell:19",
+          "pdf:211:cell:20",
+          "pdf:211:cell:21",
+          "pdf:211:cell:22",
+          "pdf:211:cell:23",
+          "pdf:211:cell:24",
+          "pdf:211:cell:25",
+          "pdf:211:cell:26",
+          "pdf:211:cell:27",
+          "pdf:211:cell:28"
+        ],
+        "text": "If the effective operand size is 16-bit or 32-bit, the CMPXCHG8B instruction is used. This instruction uses the EDX:EAX and ECX:EBX register operands and a 64-bit memory operand. If the effective operand size is 64-bit, the CMPXCHG16B instruction is used; this instruction uses RDX:RAX register operands and a 128-bit memory operand. The CMPXCHG8B and CMPXCHG16B instructions always do a read-modify-write on the memory operand. If the compared operands were unequal, the instructions write the same value to the memory operand that was read. The CMPXCHG8B and CMPXCHG16B instructions support the LOCK prefix. For details about the LOCK prefix, see \u201cLock Prefix\u201d on page 11. Support for the CMPXCHG8B and CMPXCHG16B instructions is implementation dependent. Support for the CMPXCHG8B instruction is indicated by CPUID Fn0000_0001_EDX[CMPXCHG8B] or Fn8000_0001_EDX[CMPXCHG8B] = 1. Support for the CMPXCHG16B instruction is indicated by CPUID Fn0000_0001_ECX[CMPXCHG16B] = 1. For more information on using the CPUID instruction, see the instruction reference page for the CPUID instruction on page 171. For a description of all feature flags related to instruction subset support, see Appendix D, \u201cInstruction Subsets and CPUID Feature Flags,\u201d on page 617. The memory operand used by CMPXCHG16B must be 16-byte aligned or else a general-protection exception is generated."
+      }
+    },
+    "repeat-summary-note": {
+      "publication": "24594",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "clause": {
+        "cells": [
+          "pdf:49:cell:74",
+          "pdf:49:cell:75"
+        ],
+        "text": "6. This prefix should be used only with compare-string and scan-string instructions. When used in the encoding of SIMD and some other instructions, the prefix is repurposed to extend the opcode."
+      }
+    },
+    "repeat-count-rule": {
+      "publication": "24594",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "clause": {
+        "cells": [
+          "pdf:54:cell:9",
+          "pdf:54:cell:10",
+          "pdf:54:cell:11",
+          "pdf:54:cell:12",
+          "pdf:54:cell:13",
+          "pdf:54:cell:14",
+          "pdf:54:cell:15",
+          "pdf:54:cell:16",
+          "pdf:54:cell:17"
+        ],
+        "text": "The repeat prefixes cause repetition of certain instructions that load, store, move, input, or output strings. The prefixes should only be used with such string instructions. Two pairs of repeat prefixes, REPE/REPZ and REPNE/REPNZ, perform the same repeat functions for certain compare-string and scan-string instructions. The repeat function uses rCX as a count register. The size of rCX is based on address size, as shown in Table 1-4 on page 10. REP. The REP prefix repeats its associated string instruction the number of times specified in the counter register (rCX). It terminates the repetition when the value in rCX reaches 0. The prefix can be used with the INS, LODS, MOVS, OUTS, and STOS instructions. Table 1-6 shows the valid REP prefix opcodes."
+      }
+    },
+    "repeat-equal-rule": {
+      "publication": "24594",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "clause": {
+        "cells": [
+          "pdf:55:cell:18",
+          "pdf:55:cell:19",
+          "pdf:55:cell:20",
+          "pdf:55:cell:21",
+          "pdf:55:cell:22"
+        ],
+        "text": "REPE and REPZ. REPE and REPZ are synonyms and have identical opcodes. These prefixes repeat their associated string instruction the number of times specified in the counter register (rCX). The repetition terminates when the value in rCX reaches 0 or when the zero flag (ZF) is cleared to 0. The REPE and REPZ prefixes can be used with the CMPS, CMPSB, CMPSD, CMPSW, SCAS, SCASB, SCASD, and SCASW instructions. Table 1-7 shows the valid REPE and REPZ prefix opcodes."
+      }
+    },
+    "repeat-not-equal-rule": {
+      "publication": "24594",
+      "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+      "clause": {
+        "cells": [
+          "pdf:55:cell:42",
+          "pdf:55:cell:43",
+          "pdf:55:cell:44",
+          "pdf:55:cell:45",
+          "pdf:55:cell:46",
+          "pdf:55:cell:47"
+        ],
+        "text": "REPNE and REPNZ. REPNE and REPNZ are synonyms and have identical opcodes. These prefixes repeat their associated string instruction the number of times specified in the counter register (rCX). The repetition terminates when the value in rCX reaches 0 or when the zero flag (ZF) is set to 1. The REPNE and REPNZ prefixes can be used with the CMPS, CMPSB, CMPSD, CMPSW, SCAS, SCASB, SCASD, and SCASW instructions. Table 1-8 on page 14 shows the valid REPNE and REPNZ prefix opcodes."
+      }
+    }
+  },
+  "interpretations": {
+    "p2:lock-list-disagreement": {
+      "state": "resolved-source-rule",
+      "basis": "instruction-owned-qualification-of-summary-list",
+      "originalVol1Mnemonics": [
+        "ADC",
+        "ADD",
+        "AND",
+        "BTC",
+        "BTR",
+        "BTS",
+        "CMPXCHG",
+        "CMPXCHG8B",
+        "DEC",
+        "INC",
+        "NEG",
+        "NOT",
+        "OR",
+        "SBB",
+        "SUB",
+        "XADD",
+        "XCHG",
+        "XOR"
+      ],
+      "originalVol3Mnemonics": [
+        "ADC",
+        "ADD",
+        "AND",
+        "BTC",
+        "BTR",
+        "BTS",
+        "CMPXCHG",
+        "CMPXCHG8B",
+        "CMPXCHG16B",
+        "DEC",
+        "INC",
+        "NEG",
+        "NOT",
+        "OR",
+        "SBB",
+        "SUB",
+        "XADD",
+        "XCHG",
+        "XOR"
+      ],
+      "selectedMnemonics": [
+        "ADC",
+        "ADD",
+        "AND",
+        "BTC",
+        "BTR",
+        "BTS",
+        "CMPXCHG",
+        "CMPXCHG8B",
+        "CMPXCHG16B",
+        "DEC",
+        "INC",
+        "NEG",
+        "NOT",
+        "OR",
+        "SBB",
+        "SUB",
+        "XADD",
+        "XCHG",
+        "XOR"
+      ],
+      "qualification": {
+        "selector": "CMPXCHG16B mem128",
+        "memoryDestination": true,
+        "feature": "CPUID.Fn0000_0001.ECX.CMPXCHG16B=1",
+        "alignmentBytes": 16
+      },
+      "justification": "Vol1 explicitly refers to Vol3 for further details; Vol3's dedicated list and the owned CMPXCHG16B entry explicitly support LOCK.",
+      "publisherCorrection": false,
+      "productionAdmission": false
+    },
+    "p2:repeat-note-disagreement": {
+      "state": "resolved-source-rule",
+      "basis": "instruction-owned-qualification-of-summary-note",
+      "originalNoteScope": "compare-string-and-scan-string-only;also-opcode-extension",
+      "countOnly": {
+        "prefix": "f3",
+        "families": [
+          "INS",
+          "LODS",
+          "MOVS",
+          "OUTS",
+          "STOS"
+        ]
+      },
+      "zfConditioned": {
+        "prefixes": {
+          "f3": "ZF=1",
+          "f2": "ZF=0"
+        },
+        "families": [
+          "CMPS",
+          "SCAS"
+        ]
+      },
+      "countBits": [
+        64,
+        32
+      ],
+      "countSelectedBy": "address-size",
+      "mediaOpcodeSelection": "separate-inventory",
+      "justification": "Dedicated REP sections in Vol1 and Vol3, the source opcode tables and all seven instruction-owned clauses explicitly distinguish count-only from ZF-conditioned strings.",
+      "publisherCorrection": false,
+      "productionAdmission": false
+    }
+  }
+}

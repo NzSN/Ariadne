@@ -1,0 +1,280 @@
+{
+  "schema": "ariadne.amd64-native64-owner-exclusions/v1",
+  "publication": "24594",
+  "sourcePolicySha256": "d1caf84927162bb696185eed4880007aa92ded2260738c940cdeb935ee8a1840",
+  "pdfSha256": "e18bd39ad0ca19d2eb9b9ea25c2635144c5ab368e5d6fbdc7a08345515ea1aee",
+  "executionModes": [
+    "long-64"
+  ],
+  "owners": {
+    "AAA": {
+      "owner": "amd-entry:0000",
+      "title": "AAA",
+      "pages": [
+        123,
+        123
+      ],
+      "pageDigests": {
+        "123": "97348844f102491c6a009dbcb7c587a763b3c8d8dcbc02e80425e897f0cc70ca"
+      },
+      "clause": {
+        "cells": [
+          "pdf:123:cell:16"
+        ],
+        "text": "Using this instruction in 64-bit mode generates an invalid-opcode exception."
+      },
+      "sourceRowsSha256": "a899840eea479f034c1cc7f6d3eeaca7279984165ebf5a1b53d9c3892acfde81",
+      "modeTable": "invalid64",
+      "modeMnemonic": "AAA"
+    },
+    "AAD": {
+      "owner": "amd-entry:0001",
+      "title": "AAD",
+      "pages": [
+        124,
+        124
+      ],
+      "pageDigests": {
+        "124": "04947bace2cb0cef6760a5c94fe06f5bd7d44862ca993c9c7e90eb7dfed80b20"
+      },
+      "clause": {
+        "cells": [
+          "pdf:124:cell:16"
+        ],
+        "text": "Using this instruction in 64-bit mode generates an invalid-opcode exception."
+      },
+      "sourceRowsSha256": "9d567c049ce6eab23158cb719cac516c816689709f1f869b353f1be27bcf5f7e",
+      "modeTable": "invalid64",
+      "modeMnemonic": "AAD"
+    },
+    "AAM": {
+      "owner": "amd-entry:0002",
+      "title": "AAM",
+      "pages": [
+        125,
+        125
+      ],
+      "pageDigests": {
+        "125": "f3498bcc28c90a2e256d633b2a295a5350792907f4fad09164e0ca5d22d5eccb"
+      },
+      "clause": {
+        "cells": [
+          "pdf:125:cell:16"
+        ],
+        "text": "Using this instruction in 64-bit mode generates an invalid-opcode exception."
+      },
+      "sourceRowsSha256": "1813ea44930b1b8ca3d2cf4929c2eae043b4337a59d0586867a6c95b43d7e72a",
+      "modeTable": "invalid64",
+      "modeMnemonic": "AAM"
+    },
+    "AAS": {
+      "owner": "amd-entry:0003",
+      "title": "AAS",
+      "pages": [
+        126,
+        126
+      ],
+      "pageDigests": {
+        "126": "b63f831ef4a8ba879f28d124452f769d4625eca04482bb50252f0eed54edb7b4"
+      },
+      "clause": {
+        "cells": [
+          "pdf:126:cell:13"
+        ],
+        "text": "Using this instruction in 64-bit mode generates an invalid-opcode exception."
+      },
+      "sourceRowsSha256": "095587676cb89e5d2cda33237041038804f68e3b6fb015e9643118d6968b26b5",
+      "modeTable": "invalid64",
+      "modeMnemonic": "AAS"
+    },
+    "BOUND": {
+      "owner": "amd-entry:0022",
+      "title": "BOUND",
+      "pages": [
+        163,
+        164
+      ],
+      "pageDigests": {
+        "163": "d08f0e2769dcf3b497d2920e035500aefba52fba34d0d3a6233060e97800d8bd",
+        "164": "8f19be27bd529c94e7c49062e44a0c80ac41934d532b0ff16a6063e3cd457cc7"
+      },
+      "clause": {
+        "cells": [
+          "pdf:163:cell:25",
+          "pdf:163:cell:30"
+        ],
+        "text": "(Invalid in 64-bit mode.) (Invalid in 64-bit mode.)"
+      },
+      "sourceRowsSha256": "5b64a5412e2087aec3f3e751e591bdad7829bcae72bc0beeb11cf6203e8a1839",
+      "modeTable": "reassigned64",
+      "modeMnemonic": "BOUND"
+    },
+    "DAA": {
+      "owner": "amd-entry:0049",
+      "title": "DAA",
+      "pages": [
+        218,
+        218
+      ],
+      "pageDigests": {
+        "218": "d186a5c33e4de3f47ed92d8cb2be65dec599506bb10ed31f7bfa53a601f5af79"
+      },
+      "clause": {
+        "cells": [
+          "pdf:218:cell:14"
+        ],
+        "text": "Using this instruction in 64-bit mode generates an invalid-opcode (#UD) exception."
+      },
+      "sourceRowsSha256": "e412e02809bbca80ae165cd4ab81106d910613f161d1bed10c97c32d0bb1b7fd",
+      "modeTable": "invalid64",
+      "modeMnemonic": "DAA"
+    },
+    "DAS": {
+      "owner": "amd-entry:0050",
+      "title": "DAS",
+      "pages": [
+        219,
+        219
+      ],
+      "pageDigests": {
+        "219": "2746c324ab11581c456118e1a33e52aaec0145fd52cf5f541b6b2eb742b43def"
+      },
+      "clause": {
+        "cells": [
+          "pdf:219:cell:14"
+        ],
+        "text": "Using this instruction in 64-bit mode generates an invalid-opcode (#UD) exception."
+      },
+      "sourceRowsSha256": "53b6820c378925672e47e14defb7d2b9e8d5f0caa003534cf902c424e87a3256",
+      "modeTable": "invalid64",
+      "modeMnemonic": "DAS"
+    },
+    "INTO": {
+      "owner": "amd-entry:0060",
+      "title": "INTO",
+      "pages": [
+        244,
+        244
+      ],
+      "pageDigests": {
+        "244": "056caa4e0a6a33f4c347041b2b7bca1e4bb4ac39771a9a98e6c242fdd5d6823b"
+      },
+      "clause": {
+        "cells": [
+          "pdf:244:cell:9"
+        ],
+        "text": "Using this instruction in 64-bit mode generates an invalid-opcode exception."
+      },
+      "sourceRowsSha256": "9bf9ad79796077490828ac9e31eaa1aef3e497f1680e7bdbb60c77eb9828d343",
+      "modeTable": "invalid64",
+      "modeMnemonic": "INTO"
+    },
+    "POPA POPAD": {
+      "owner": "amd-entry:0104",
+      "title": "POPA POPAD",
+      "pages": [
+        329,
+        329
+      ],
+      "pageDigests": {
+        "329": "5f7d85ff2a35e8ade497e804561786b1cfc54e4c7f80f638285bb8b4a093b1ac"
+      },
+      "clause": {
+        "cells": [
+          "pdf:329:cell:9"
+        ],
+        "text": "Using the POPA or POPAD instructions in 64-bit mode generates an invalid-opcode exception."
+      },
+      "sourceRowsSha256": "6fdce3eaf3459c6828f53fadb637d71594f1fcdb2d65acefd05098ec6ea24345",
+      "modeTable": "invalid64",
+      "modeMnemonic": "POPA, POPAD"
+    },
+    "PUSHA PUSHAD": {
+      "owner": "amd-entry:0110",
+      "title": "PUSHA PUSHAD",
+      "pages": [
+        341,
+        341
+      ],
+      "pageDigests": {
+        "341": "c4020e6f0f7230a5bcc77e93531cf29b0194f5bd765687615f0b0cb5bf436e2b"
+      },
+      "clause": {
+        "cells": [
+          "pdf:341:cell:9"
+        ],
+        "text": "Using the PUSHA or PUSHAD instruction in 64-bit mode generates an invalid-opcode exception."
+      },
+      "sourceRowsSha256": "66fdd73d6d371724fbe2cd25b1b66efd9aaaa8d27fc66331e3f29fc48b6c6606",
+      "modeTable": "invalid64",
+      "modeMnemonic": "PUSHA, PUSHAD"
+    },
+    "ARPL": {
+      "owner": "amd-entry:0154",
+      "title": "ARPL",
+      "pages": [
+        421,
+        422
+      ],
+      "pageDigests": {
+        "421": "9ac288a5772b5e25cb0056ca5b11fae90921853a8769cf43d9b9b34bb74236c6",
+        "422": "4fc8d6a25b9d82576cad569006eec839db52eb0ccf6efff8795ce8356106a663"
+      },
+      "clause": {
+        "cells": [
+          "pdf:421:cell:21"
+        ],
+        "text": "In 64-bit mode, this opcode (63H) is used for the MOVSXD instruction."
+      },
+      "sourceRowsSha256": "ad01c844cc2ce457e885aaf6212271625e0abde3d9cab3586493d9f9971d5cb9",
+      "modeTable": "reassigned64",
+      "modeMnemonic": "ARPL"
+    },
+    "SYSENTER": {
+      "owner": "amd-entry:0207",
+      "title": "SYSENTER",
+      "pages": [
+        530,
+        531
+      ],
+      "pageDigests": {
+        "530": "cdf382e9a947517f67b13e1d01c3ad7c73b6e4c259f08e6691ddda6bd06677d2",
+        "531": "9043d138af24551e1c150f24da02cf652d281317e982cde629493bdc41e6d9ee"
+      },
+      "clause": {
+        "cells": [
+          "pdf:530:cell:5",
+          "pdf:530:cell:6",
+          "pdf:530:cell:7"
+        ],
+        "text": "Transfers control to a fixed entry point in an operating system. It is designed for use by system and application software implementing a flat-segment memory model. This instruction is valid only in legacy mode."
+      },
+      "sourceRowsSha256": "ec33e27fb0713ce869857766d39456551517391c676df42c1d99a05515df8f9e",
+      "modeTable": "invalidLongMode",
+      "modeMnemonic": "SYSENTER"
+    },
+    "SYSEXIT": {
+      "owner": "amd-entry:0208",
+      "title": "SYSEXIT",
+      "pages": [
+        532,
+        533
+      ],
+      "pageDigests": {
+        "532": "570cab282a9c8191dbb2761d0de6ffababc610508dc47aab48bcdfd32dd1ca70",
+        "533": "4928621e42a1c2eb20c0b7df0da5f43c1ef50320f3ef7b1ccef7d08a6e2a9fba"
+      },
+      "clause": {
+        "cells": [
+          "pdf:532:cell:7",
+          "pdf:532:cell:8",
+          "pdf:532:cell:9"
+        ],
+        "text": "This is a privileged instruction. The current privilege level must be zero to execute this instruction. An invalid-opcode exception occurs if this instruction is used in long mode. Software should use the SYSRET (and SYSCALL) instructions when running in long mode."
+      },
+      "sourceRowsSha256": "494eed3e12acbb8cedc91ba04acdaf1193d73cfba2a49ade3a88337e26baa50d",
+      "modeTable": "invalidLongMode",
+      "modeMnemonic": "SYSEXIT"
+    }
+  }
+}

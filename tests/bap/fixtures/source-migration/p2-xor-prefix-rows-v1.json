@@ -1,0 +1,400 @@
+{
+  "executionModes": [
+    "long-64"
+  ],
+  "precedenceInputSha256": "ba772d5cc1627cf823f63009e8b3bd1d2ebaf5de3a426435b0493c3594b15a82",
+  "questionInputSha256": "22ebcd06ec0842828557147e9400e1b6016ec593fbeb237af3493d3b3d8b6391",
+  "rows": [
+    {
+      "encodingCells": [
+        "pdf:1822:cell:7"
+      ],
+      "pdfPage": 1822,
+      "properties": {
+        "L": null,
+        "LL": null,
+        "W": null,
+        "broadcastElementBits": null,
+        "embeddedPp": null,
+        "encoding": "legacy",
+        "extraPrefixAdmission": false,
+        "family": "XORPS",
+        "mandatoryPrefix": null,
+        "modrm": "/r",
+        "opcode": "57",
+        "opcodeMap": "0f",
+        "prefix66Role": "opcode-selector;not-operand16",
+        "sourceRule": "selected-vol3-precedence",
+        "vectorBits": 128
+      },
+      "publication": "26568",
+      "selector": "XORPS xmm1, xmm2/mem128",
+      "selectorCells": [
+        "pdf:1822:cell:5"
+      ],
+      "sourceEncoding": "66 0F 57 /r"
+    },
+    {
+      "encodingCells": [
+        "pdf:1822:cell:28",
+        "pdf:1822:cell:29",
+        "pdf:1822:cell:26",
+        "pdf:1822:cell:27"
+      ],
+      "pdfPage": 1822,
+      "properties": {
+        "L": 0,
+        "LL": null,
+        "W": "X",
+        "broadcastElementBits": null,
+        "embeddedPp": "00",
+        "encoding": "VEX",
+        "extraPrefixAdmission": false,
+        "family": "XORPS",
+        "mandatoryPrefix": null,
+        "modrm": "/r",
+        "opcode": "57",
+        "opcodeMap": "0f",
+        "prefix66Role": "opcode-selector;not-operand16",
+        "sourceRule": "instruction-owned-vol4-fields",
+        "vectorBits": 128
+      },
+      "publication": "26568",
+      "selector": "VXORPS xmm1, xmm2, xmm3/mem128",
+      "selectorCells": [
+        "pdf:1822:cell:9"
+      ],
+      "sourceEncoding": "C4 RXB.01 X.src1.0.00 57 /r"
+    },
+    {
+      "encodingCells": [
+        "pdf:1822:cell:32",
+        "pdf:1822:cell:33",
+        "pdf:1822:cell:30",
+        "pdf:1822:cell:31"
+      ],
+      "pdfPage": 1822,
+      "properties": {
+        "L": 1,
+        "LL": null,
+        "W": "X",
+        "broadcastElementBits": null,
+        "embeddedPp": "00",
+        "encoding": "VEX",
+        "extraPrefixAdmission": false,
+        "family": "XORPS",
+        "mandatoryPrefix": null,
+        "modrm": "/r",
+        "opcode": "57",
+        "opcodeMap": "0f",
+        "prefix66Role": "opcode-selector;not-operand16",
+        "sourceRule": "instruction-owned-vol4-fields",
+        "vectorBits": 256
+      },
+      "publication": "26568",
+      "selector": "VXORPS ymm1, ymm2, ymm3/mem256",
+      "selectorCells": [
+        "pdf:1822:cell:10"
+      ],
+      "sourceEncoding": "C4 RXB.01 X.src1.1.00 57 /r"
+    },
+    {
+      "encodingCells": [
+        "pdf:1822:cell:13",
+        "pdf:1822:cell:38",
+        "pdf:1822:cell:39",
+        "pdf:1822:cell:40",
+        "pdf:1822:cell:41"
+      ],
+      "pdfPage": 1822,
+      "properties": {
+        "L": null,
+        "LL": "00",
+        "W": 0,
+        "broadcastElementBits": 32,
+        "embeddedPp": "00",
+        "encoding": "EVEX",
+        "extraPrefixAdmission": false,
+        "family": "XORPS",
+        "mandatoryPrefix": null,
+        "modrm": "/r",
+        "opcode": "57",
+        "opcodeMap": "0f",
+        "prefix66Role": "opcode-selector;not-operand16",
+        "sourceRule": "instruction-owned-vol4-fields",
+        "vectorBits": 128
+      },
+      "publication": "26568",
+      "selector": "VXORPS xmm1 {k}{z}, xmm2, xmm3/mem128/mem32bcst",
+      "selectorCells": [
+        "pdf:1822:cell:14",
+        "pdf:1822:cell:15"
+      ],
+      "sourceEncoding": "62 RXBR'.1 0.vvvv.00 z.00.b.V'.aaa 57 /r"
+    },
+    {
+      "encodingCells": [
+        "pdf:1822:cell:42",
+        "pdf:1822:cell:43",
+        "pdf:1822:cell:44",
+        "pdf:1822:cell:45",
+        "pdf:1822:cell:46"
+      ],
+      "pdfPage": 1822,
+      "properties": {
+        "L": null,
+        "LL": "01",
+        "W": 0,
+        "broadcastElementBits": 32,
+        "embeddedPp": "00",
+        "encoding": "EVEX",
+        "extraPrefixAdmission": false,
+        "family": "XORPS",
+        "mandatoryPrefix": null,
+        "modrm": "/r",
+        "opcode": "57",
+        "opcodeMap": "0f",
+        "prefix66Role": "opcode-selector;not-operand16",
+        "sourceRule": "instruction-owned-vol4-fields",
+        "vectorBits": 256
+      },
+      "publication": "26568",
+      "selector": "VXORPS ymm1 {k}{z}, ymm2, ymm3/mem256/mem32bcst",
+      "selectorCells": [
+        "pdf:1822:cell:16",
+        "pdf:1822:cell:17"
+      ],
+      "sourceEncoding": "62 RXBR'.1 0.vvvv.00 z.01.b.V'.aaa 57 /r"
+    },
+    {
+      "encodingCells": [
+        "pdf:1822:cell:47",
+        "pdf:1822:cell:48",
+        "pdf:1822:cell:49",
+        "pdf:1822:cell:50",
+        "pdf:1822:cell:51"
+      ],
+      "pdfPage": 1822,
+      "properties": {
+        "L": null,
+        "LL": "10",
+        "W": 0,
+        "broadcastElementBits": 32,
+        "embeddedPp": "00",
+        "encoding": "EVEX",
+        "extraPrefixAdmission": false,
+        "family": "XORPS",
+        "mandatoryPrefix": null,
+        "modrm": "/r",
+        "opcode": "57",
+        "opcodeMap": "0f",
+        "prefix66Role": "opcode-selector;not-operand16",
+        "sourceRule": "instruction-owned-vol4-fields",
+        "vectorBits": 512
+      },
+      "publication": "26568",
+      "selector": "VXORPS zmm1 {k}{z}, zmm2, zmm3/mem512/mem32bcst",
+      "selectorCells": [
+        "pdf:1822:cell:18",
+        "pdf:1822:cell:19"
+      ],
+      "sourceEncoding": "62 RXBR'.1 0.vvvv.00 z.10.b.V'.aaa 57 /r"
+    },
+    {
+      "encodingCells": [
+        "pdf:1819:cell:7"
+      ],
+      "pdfPage": 1819,
+      "properties": {
+        "L": null,
+        "LL": null,
+        "W": null,
+        "broadcastElementBits": null,
+        "embeddedPp": null,
+        "encoding": "legacy",
+        "extraPrefixAdmission": false,
+        "family": "XORPD",
+        "mandatoryPrefix": "66",
+        "modrm": "/r",
+        "opcode": "57",
+        "opcodeMap": "0f",
+        "prefix66Role": "opcode-selector;not-operand16",
+        "sourceRule": "selected-vol3-precedence",
+        "vectorBits": 128
+      },
+      "publication": "26568",
+      "selector": "XORPD xmm1, xmm2/mem128",
+      "selectorCells": [
+        "pdf:1819:cell:5"
+      ],
+      "sourceEncoding": "66 0F 57 /r"
+    },
+    {
+      "encodingCells": [
+        "pdf:1819:cell:28",
+        "pdf:1819:cell:29",
+        "pdf:1819:cell:26",
+        "pdf:1819:cell:27"
+      ],
+      "pdfPage": 1819,
+      "properties": {
+        "L": 0,
+        "LL": null,
+        "W": "X",
+        "broadcastElementBits": null,
+        "embeddedPp": "01",
+        "encoding": "VEX",
+        "extraPrefixAdmission": false,
+        "family": "XORPD",
+        "mandatoryPrefix": null,
+        "modrm": "/r",
+        "opcode": "57",
+        "opcodeMap": "0f",
+        "prefix66Role": "opcode-selector;not-operand16",
+        "sourceRule": "instruction-owned-vol4-fields",
+        "vectorBits": 128
+      },
+      "publication": "26568",
+      "selector": "VXORPD xmm1, xmm2, xmm3/mem128",
+      "selectorCells": [
+        "pdf:1819:cell:9"
+      ],
+      "sourceEncoding": "C4 RXB.01 X.src1.0.01 57 /r"
+    },
+    {
+      "encodingCells": [
+        "pdf:1819:cell:32",
+        "pdf:1819:cell:33",
+        "pdf:1819:cell:30",
+        "pdf:1819:cell:31"
+      ],
+      "pdfPage": 1819,
+      "properties": {
+        "L": 1,
+        "LL": null,
+        "W": "X",
+        "broadcastElementBits": null,
+        "embeddedPp": "01",
+        "encoding": "VEX",
+        "extraPrefixAdmission": false,
+        "family": "XORPD",
+        "mandatoryPrefix": null,
+        "modrm": "/r",
+        "opcode": "57",
+        "opcodeMap": "0f",
+        "prefix66Role": "opcode-selector;not-operand16",
+        "sourceRule": "instruction-owned-vol4-fields",
+        "vectorBits": 256
+      },
+      "publication": "26568",
+      "selector": "VXORPD ymm1, ymm2, ymm3/mem256",
+      "selectorCells": [
+        "pdf:1819:cell:10"
+      ],
+      "sourceEncoding": "C4 RXB.01 X.src1.1.01 57 /r"
+    },
+    {
+      "encodingCells": [
+        "pdf:1819:cell:13",
+        "pdf:1819:cell:38",
+        "pdf:1819:cell:39",
+        "pdf:1819:cell:40",
+        "pdf:1819:cell:41"
+      ],
+      "pdfPage": 1819,
+      "properties": {
+        "L": null,
+        "LL": "00",
+        "W": 1,
+        "broadcastElementBits": 64,
+        "embeddedPp": "01",
+        "encoding": "EVEX",
+        "extraPrefixAdmission": false,
+        "family": "XORPD",
+        "mandatoryPrefix": null,
+        "modrm": "/r",
+        "opcode": "57",
+        "opcodeMap": "0f",
+        "prefix66Role": "opcode-selector;not-operand16",
+        "sourceRule": "instruction-owned-vol4-fields",
+        "vectorBits": 128
+      },
+      "publication": "26568",
+      "selector": "VXORPD xmm1 {k}{z}, xmm2, xmm3/mem128/mem64bcst",
+      "selectorCells": [
+        "pdf:1819:cell:14",
+        "pdf:1819:cell:15"
+      ],
+      "sourceEncoding": "62 RXBR'.1 1.vvvv.01 z.00.b.V'.aaa 57 /r"
+    },
+    {
+      "encodingCells": [
+        "pdf:1819:cell:42",
+        "pdf:1819:cell:43",
+        "pdf:1819:cell:44",
+        "pdf:1819:cell:45",
+        "pdf:1819:cell:46"
+      ],
+      "pdfPage": 1819,
+      "properties": {
+        "L": null,
+        "LL": "01",
+        "W": 1,
+        "broadcastElementBits": 64,
+        "embeddedPp": "01",
+        "encoding": "EVEX",
+        "extraPrefixAdmission": false,
+        "family": "XORPD",
+        "mandatoryPrefix": null,
+        "modrm": "/r",
+        "opcode": "57",
+        "opcodeMap": "0f",
+        "prefix66Role": "opcode-selector;not-operand16",
+        "sourceRule": "instruction-owned-vol4-fields",
+        "vectorBits": 256
+      },
+      "publication": "26568",
+      "selector": "VXORPD ymm1 {k}{z}, ymm2, ymm3/mem256/mem64bcst",
+      "selectorCells": [
+        "pdf:1819:cell:16",
+        "pdf:1819:cell:17"
+      ],
+      "sourceEncoding": "62 RXBR'.1 1.vvvv.01 z.01.b.V'.aaa 57 /r"
+    },
+    {
+      "encodingCells": [
+        "pdf:1819:cell:47",
+        "pdf:1819:cell:48",
+        "pdf:1819:cell:49",
+        "pdf:1819:cell:50",
+        "pdf:1819:cell:51"
+      ],
+      "pdfPage": 1819,
+      "properties": {
+        "L": null,
+        "LL": "10",
+        "W": 1,
+        "broadcastElementBits": 64,
+        "embeddedPp": "01",
+        "encoding": "EVEX",
+        "extraPrefixAdmission": false,
+        "family": "XORPD",
+        "mandatoryPrefix": null,
+        "modrm": "/r",
+        "opcode": "57",
+        "opcodeMap": "0f",
+        "prefix66Role": "opcode-selector;not-operand16",
+        "sourceRule": "instruction-owned-vol4-fields",
+        "vectorBits": 512
+      },
+      "publication": "26568",
+      "selector": "VXORPD zmm1 {k}{z}, zmm2, zmm3/mem512/mem64bcst",
+      "selectorCells": [
+        "pdf:1819:cell:18",
+        "pdf:1819:cell:19"
+      ],
+      "sourceEncoding": "62 RXBR'.1 1.vvvv.01 z.10.b.V'.aaa 57 /r"
+    }
+  ],
+  "schema": "ariadne.amd64-xor-prefix-rows/v1"
+}

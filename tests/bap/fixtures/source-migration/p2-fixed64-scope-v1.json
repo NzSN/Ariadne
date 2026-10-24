@@ -1,0 +1,271 @@
+{
+  "contracts": [
+    {
+      "addressBits": [
+        64,
+        32
+      ],
+      "basis": "user-selected-fixed64-hypothesis;not-publisher-correction",
+      "countBits": [],
+      "countSelectedBy": "no-implicit-loop-counter",
+      "excludedOperandAlternatives": [
+        16
+      ],
+      "indirectTargetBits": 64,
+      "mnemonic": "CALL",
+      "operand32": "unavailable;not-address32",
+      "owner": "amd-entry:0031",
+      "ownerPages": [
+        178,
+        180
+      ],
+      "prefix66": "no-byte-removal-or-automatic-admission",
+      "relativeDisplacementBits": [
+        32
+      ],
+      "returnAddressStackBits": 64,
+      "selectedOperandBits": 64
+    },
+    {
+      "addressBits": [
+        64,
+        32
+      ],
+      "basis": "user-selected-fixed64-hypothesis;not-publisher-correction",
+      "countBits": [],
+      "countSelectedBy": "no-implicit-loop-counter",
+      "excludedOperandAlternatives": [
+        16
+      ],
+      "indirectTargetBits": null,
+      "mnemonic": "Jcc",
+      "operand32": "unavailable;not-address32",
+      "owner": "amd-entry:0061",
+      "ownerPages": [
+        245,
+        248
+      ],
+      "prefix66": "no-byte-removal-or-automatic-admission",
+      "relativeDisplacementBits": [
+        8,
+        32
+      ],
+      "returnAddressStackBits": null,
+      "selectedOperandBits": 64
+    },
+    {
+      "addressBits": [
+        64,
+        32
+      ],
+      "basis": "user-selected-fixed64-hypothesis;not-publisher-correction",
+      "countBits": [
+        64,
+        32
+      ],
+      "countSelectedBy": "address-size",
+      "excludedOperandAlternatives": [
+        16
+      ],
+      "indirectTargetBits": null,
+      "mnemonic": "JrCXZ",
+      "operand32": "unavailable;not-address32",
+      "owner": "amd-entry:0062",
+      "ownerPages": [
+        249,
+        249
+      ],
+      "prefix66": "no-byte-removal-or-automatic-admission",
+      "relativeDisplacementBits": [
+        8
+      ],
+      "returnAddressStackBits": null,
+      "selectedOperandBits": 64
+    },
+    {
+      "addressBits": [
+        64,
+        32
+      ],
+      "basis": "user-selected-fixed64-hypothesis;not-publisher-correction",
+      "countBits": [],
+      "countSelectedBy": "no-implicit-loop-counter",
+      "excludedOperandAlternatives": [
+        16
+      ],
+      "indirectTargetBits": 64,
+      "mnemonic": "JMP",
+      "operand32": "unavailable;not-address32",
+      "owner": "amd-entry:0063",
+      "ownerPages": [
+        250,
+        251
+      ],
+      "prefix66": "no-byte-removal-or-automatic-admission",
+      "relativeDisplacementBits": [
+        8,
+        32
+      ],
+      "returnAddressStackBits": null,
+      "selectedOperandBits": 64
+    },
+    {
+      "addressBits": [
+        64,
+        32
+      ],
+      "basis": "user-selected-fixed64-hypothesis;not-publisher-correction",
+      "countBits": [
+        64,
+        32
+      ],
+      "countSelectedBy": "address-size",
+      "excludedOperandAlternatives": [
+        16
+      ],
+      "indirectTargetBits": null,
+      "mnemonic": "LOOP",
+      "operand32": "unavailable;not-address32",
+      "owner": "amd-entry:0072",
+      "ownerPages": [
+        269,
+        270
+      ],
+      "prefix66": "no-byte-removal-or-automatic-admission",
+      "relativeDisplacementBits": [
+        8
+      ],
+      "returnAddressStackBits": null,
+      "selectedOperandBits": 64
+    },
+    {
+      "addressBits": [
+        64,
+        32
+      ],
+      "basis": "user-selected-fixed64-hypothesis;not-publisher-correction",
+      "countBits": [
+        64,
+        32
+      ],
+      "countSelectedBy": "address-size",
+      "excludedOperandAlternatives": [
+        16
+      ],
+      "indirectTargetBits": null,
+      "mnemonic": "LOOPcc",
+      "operand32": "unavailable;not-address32",
+      "owner": "amd-entry:0072",
+      "ownerPages": [
+        269,
+        270
+      ],
+      "prefix66": "no-byte-removal-or-automatic-admission",
+      "relativeDisplacementBits": [
+        8
+      ],
+      "returnAddressStackBits": null,
+      "selectedOperandBits": 64
+    },
+    {
+      "addressBits": [
+        64,
+        32
+      ],
+      "basis": "user-selected-fixed64-hypothesis;not-publisher-correction",
+      "countBits": [],
+      "countSelectedBy": "no-implicit-loop-counter",
+      "excludedOperandAlternatives": [
+        16
+      ],
+      "indirectTargetBits": 64,
+      "mnemonic": "RET",
+      "operand32": "unavailable;not-address32",
+      "owner": "amd-entry:0119",
+      "ownerPages": [
+        353,
+        354
+      ],
+      "prefix66": "no-byte-removal-or-automatic-admission",
+      "relativeDisplacementBits": [],
+      "returnAddressStackBits": 64,
+      "selectedOperandBits": 64
+    }
+  ],
+  "decision": "user-selected-fixed64-near-branches-2026-10-24",
+  "executionModes": [
+    "long-64"
+  ],
+  "schema": "ariadne.amd64-fixed64-scope/v1",
+  "sourceClauses": {
+    "pdf:128:cell:15": "3.7.9.1 Near Branches in 64-Bit Mode",
+    "pdf:128:cell:16": "The long-mode architecture expands the near-branch mechanisms to accommodate branches in the full",
+    "pdf:128:cell:17": "64-bit virtual-address space. In 64-bit mode, the operand size for all near branches defaults to 64 bits,",
+    "pdf:128:cell:18": "so these instructions update the full 64-bit RIP.",
+    "pdf:128:cell:19": "Table 3-9 lists the near-branch instructions.",
+    "pdf:128:cell:20": "Table 3-9. Near Branches in 64-Bit Mode",
+    "pdf:128:cell:21": "Operand Size (bits)",
+    "pdf:128:cell:22": "Mnemonic",
+    "pdf:128:cell:23": "CALL",
+    "pdf:128:cell:24": "Jcc",
+    "pdf:128:cell:25": "JCXZ",
+    "pdf:128:cell:26": "JECXZ",
+    "pdf:128:cell:27": "JRCXZ",
+    "pdf:128:cell:28": "JMP",
+    "pdf:128:cell:29": "Opcode (hex)",
+    "pdf:128:cell:30": "E8, FF /2",
+    "pdf:128:cell:31": "Description",
+    "pdf:128:cell:32": "Default",
+    "pdf:128:cell:33": "Possible",
+    "pdf:128:cell:34": "Overrides 1",
+    "pdf:128:cell:35": "64",
+    "pdf:128:cell:36": "16",
+    "pdf:128:cell:37": "Call Procedure Near",
+    "pdf:128:cell:38": "70 to 7F,",
+    "pdf:128:cell:39": "Jump Conditional",
+    "pdf:128:cell:40": "0F 80 to 0F 8F",
+    "pdf:128:cell:41": "E3",
+    "pdf:128:cell:42": "Jump on CX/ECX/RCX Zero",
+    "pdf:128:cell:43": "EB, E9, FF /4 Jump Near",
+    "pdf:128:cell:44": "LOOP",
+    "pdf:128:cell:45": "E2",
+    "pdf:128:cell:46": "Loop",
+    "pdf:128:cell:47": "LOOPcc",
+    "pdf:128:cell:48": "E0, E1",
+    "pdf:128:cell:49": "Loop if Zero/Equal or Not Zero/Equal",
+    "pdf:128:cell:50": "RET",
+    "pdf:128:cell:51": "C2, C3",
+    "pdf:128:cell:52": "Return From Call (near)",
+    "pdf:128:cell:53": "Note:",
+    "pdf:128:cell:54": "1. There is no 32-bit operand-size override prefix in 64-bit mode.",
+    "pdf:128:cell:55": "The default 64-bit operand size eliminates the need for a REX prefix with these instructions when",
+    "pdf:128:cell:56": "registers RAX\u2013RSP (the first set of eight GPRs) are used as operands. A REX prefix is still required if",
+    "pdf:129:cell:10": "\u2022",
+    "pdf:129:cell:11": "Size of a stack pop or push, resulting from a CALL or RET.",
+    "pdf:129:cell:12": "Size of a stack-pointer increment or decrement, resulting from a CALL or RET.",
+    "pdf:129:cell:13": "Indirect-branch operand size.",
+    "pdf:129:cell:14": "In 64-bit mode, all of the above actions are forced to 64 bits. However, the size of the displacement",
+    "pdf:129:cell:15": "field for relative branches is still limited to 32 bits.",
+    "pdf:129:cell:16": "The operand size of near branches is fixed at 64 bits without the need for a REX prefix. However, the",
+    "pdf:129:cell:17": "address size of near branches is not forced in 64-bit mode. Such addresses are 64 bits by default, but",
+    "pdf:129:cell:18": "they can be overridden to 32 bits by a prefix.",
+    "pdf:129:cell:3": "R8\u2013R15 (the extended set of eight GPRs) are used as operands, because the prefix is required to",
+    "pdf:129:cell:4": "address the extended registers.",
+    "pdf:129:cell:5": "The following aspects of near branches are controlled by the effective operand size:",
+    "pdf:129:cell:6": "\u2022",
+    "pdf:129:cell:7": "Truncation of the instruction pointer.",
+    "pdf:129:cell:8": "\u2022",
+    "pdf:129:cell:9": "\u2022"
+  },
+  "sourcePages": {
+    "128": {
+      "cellsSha256": "22da15a023dacf6295309b9a564f32523e63f40c949200eb86b53d4529ad5928",
+      "pdfSha256": "aed9236b718ae86cdb49f7d628f4ebb1a4bdce1a012df6cf6aad6735776c8a38"
+    },
+    "129": {
+      "cellsSha256": "c61b765f3ad3129e7297c8ef2c3cab651a3d3e6c46580e730b6ede8ef157510c",
+      "pdfSha256": "aed9236b718ae86cdb49f7d628f4ebb1a4bdce1a012df6cf6aad6735776c8a38"
+    }
+  },
+  "sourcePolicySha256": "d1caf84927162bb696185eed4880007aa92ded2260738c940cdeb935ee8a1840"
+}

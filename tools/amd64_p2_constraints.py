@@ -19,6 +19,11 @@ import amd64_p2_review as review
 import amd64_p2_gf as gf
 import amd64_p2_native64 as native64
 import amd64_p2_prefixes as prefixes
+import amd64_p2_scope as scope
+import amd64_p2_sizes as sizes
+import amd64_p2_media as media
+import amd64_p2_c as p2c
+import amd64_p2_legacy_media as legacy_media
 from amd64_inventory_xed import canonical, digest
 from run_output import run_output
 
@@ -423,6 +428,12 @@ def apply_current_reviews(result, directory, selected):
     checks = {"p2-source-rules": True, "paired-source-rules": True,
               "h64-movd-mode-proof": h64_movd_mode_proof(vector_pages, decisions["executionModes"])}
     dispositions = review.reconcile(original_boundaries(), decisions["boundaryDispositions"], clauses, checks, RESOLUTIONS)
+    result["boundaryDispositions"] = dispositions
+    p2c.apply_all(result,
+        {p: entry.migration.geometry.read_geometry(directory/"predecessor"/p/"bbox.html")
+         for p in ("24592", "24594")},
+        entry.read(directory/"predecessor/24594/normalized.json"), NO_REX)
+    dispositions = result["boundaryDispositions"]
     issues = {d["id"]: d for d in dispositions}
     for d in result["referenceDispositions"]:
         issues["architecture-reference:"+d["original"]["id"]] = dict(state=d["currentState"])
@@ -495,7 +506,8 @@ def incomplete_obligations(result):
     """Compute the strict exit from concrete obligations, never saved flags."""
     return dict(cells=sum(d["currentState"] not in {"reviewed-clause-support", "reviewed-source-context", "reviewed-source-reference", "reviewed-source-interpretation"} for d in result["cellDispositions"]),
         references=sum(r["currentState"] != "resolved-source-rule" for r in result["referenceDispositions"]),
-        boundaries=sum(d["id"].startswith("p2:") and d["state"] not in review.CLOSED_STATES for d in result["boundaryDispositions"]),
+        boundaries=sum(d["id"].startswith("p2:") and d["state"] not in review.CLOSED_STATES for d in result["boundaryDispositions"]) +
+                   sum(q["state"] not in review.CLOSED_STATES for q in result.get("cSourceQuestions", [])),
         inheritedBoundaries=sum(not d["id"].startswith("p2:") and d["state"] not in review.CLOSED_STATES for d in result["boundaryDispositions"]),
         addedSections=sum(s["state"] != "reviewed-all-required-clauses" for s in result["additionalSections"]),
         regions=sum(r["state"] != "reviewed-all-required-clauses" for r in result["sourceRegions"]))
@@ -515,7 +527,29 @@ def implementation_sources():
               native64.INPUT.parent/"p2-native64-source-excerpt.json"):
         result[str(p.relative_to(ROOT))] = entry.migration.sha(p)
     for p in (prefixes.INPUT, ROOT/"tools/amd64_p2_prefixes.py", ROOT/"tools/test_amd64_p2_prefixes.py",
-              prefixes.INPUT.parent/"p2-prefix-source-excerpt.json"):
+              prefixes.INPUT.parent/"p2-prefix-source-excerpt.json", prefixes.CR8_INPUT,
+              prefixes.INPUT.parent/"p2-cr8-source-excerpt.json"):
+        result[str(p.relative_to(ROOT))] = entry.migration.sha(p)
+    for p in (scope.INPUT, ROOT/"tools/amd64_p2_scope.py", ROOT/"tools/test_amd64_p2_scope.py",
+              scope.INPUT.parent/"p2-fixed64-source-excerpt.json"):
+        result[str(p.relative_to(ROOT))] = entry.migration.sha(p)
+    for p in (sizes.INPUT, ROOT/"tools/amd64_p2_sizes.py", ROOT/"tools/test_amd64_p2_sizes.py"):
+        result[str(p.relative_to(ROOT))] = entry.migration.sha(p)
+    for p in (media.INPUT, media.PRECEDENCE_INPUT, media.XOR_FORMS_INPUT, ROOT/"tools/amd64_p2_media.py", ROOT/"tools/test_amd64_p2_media.py",
+              media.INPUT.parent/"p2-media-prefix-source-excerpt.json"):
+        result[str(p.relative_to(ROOT))] = entry.migration.sha(p)
+    for p in (legacy_media.INPUT, ROOT/"tools/amd64_p2_legacy_media.py", ROOT/"tools/test_amd64_p2_legacy_media.py",
+              legacy_media.INPUT.parent/"p2-legacy-media-source-excerpt.json"):
+        result[str(p.relative_to(ROOT))] = entry.migration.sha(p)
+    for p in (p2c.size_forms.INPUT, ROOT/"tools/amd64_p2_size_forms.py", ROOT/"tools/test_amd64_p2_size_forms.py",
+              p2c.size_forms.INPUT.parent/"p2-size-exception-source-excerpt.json",p2c.PARTITION_INPUT):
+        result[str(p.relative_to(ROOT))] = entry.migration.sha(p)
+    for p in (p2c.default64.INPUT, ROOT/"tools/amd64_p2_default64.py", ROOT/"tools/test_amd64_p2_default64.py",
+              p2c.default64.INPUT.parent/"p2-default64-source-excerpt.json"):
+        result[str(p.relative_to(ROOT))] = entry.migration.sha(p)
+    for p in (p2c.INPUT, ROOT/"tools/amd64_p2_c.py", ROOT/"tools/test_amd64_p2_c.py",
+              p2c.INPUT.parent/"p2-prefix-interpretation-source-excerpt.json", p2c.MODE_INPUT,
+              p2c.INPUT.parent/"p2-native64-owner-source-excerpt.json"):
         result[str(p.relative_to(ROOT))] = entry.migration.sha(p)
     return dict(sorted(result.items()))
 
@@ -540,7 +574,25 @@ def reconstruct(old_cache, publisher_cache, baseline_root, output):
     result["gfTableReview"] = gf.assess(vector_pages)
     result["native64Inventory"] = native64.assess(pages["24594"], NO_REX,
         entry.read(base/"predecessor/24594/normalized.json")["entries"])
+    result["fixed64Projection"] = scope.assess(entry.read(scope.INPUT), pages["24592"],
+        result["native64Inventory"]["default64Qualifications"])
+    result["sizeRuleInventory"] = sizes.assess(entry.read(sizes.INPUT), result["native64Inventory"]["sizeTable"])
+    media_sources = {
+        "map": next(p for p in pages["24594"] if p["pdfPage"] == 571),
+        "old-xorps": next(p for p in vector_pages["predecessor"] if p["pdfPage"] == 1614),
+        "xorps": next(p for p in vector_pages["replacement"] if p["pdfPage"] == 1822),
+        "xorpd": next(p for p in vector_pages["replacement"] if p["pdfPage"] == 1819)}
+    result["cSourceQuestions"] = [media.project_current_scope(entry.read(media.INPUT), media_sources, entry.read(media.PRECEDENCE_INPUT))]
+    result["xorPrefixRows"] = media.assess_xor_forms(entry.read(media.XOR_FORMS_INPUT), media_sources, entry.read(media.PRECEDENCE_INPUT))
+    result["legacyMediaPrefixRows"] = legacy_media.assess(entry.read(legacy_media.INPUT),
+        entry.migration.geometry.read_geometry(base/"replacement/26569/bbox.html"),
+        entry.read(base/"replacement/26569/normalized.json")["entries"], pages["24594"])
     result["lockRepeatInventory"] = prefixes.assess(pages["24594"], entry.read(base/"predecessor/24594/normalized.json"))
+    result["cr8OpcodeExtension"] = prefixes.assess_cr8(entry.read(prefixes.CR8_INPUT), pages["24594"],
+        entry.read(base/"predecessor/24594/normalized.json")["entries"])
+    result["cSourceOwnerCoverage"] = p2c.source_owner_coverage(
+        {pub:entry.read(base/("predecessor" if pub=="24594" else "replacement")/pub/"normalized.json")
+         for pub in ("24594","26568","26569")},result["legacyMediaPrefixRows"],result["xorPrefixRows"],pages["24594"])
     review = entry.read(base/"migration.json")
     result["additionalSections"] = section_obligations(base, review)
     result["selectedSourcePool"] = copy.deepcopy(accepted["sourceSelection"])
@@ -579,10 +631,14 @@ def main():
     for name in ("old-cache", "publisher-cache", "baseline-root", "output"):
         parser.add_argument("--"+name, type=Path, required=True)
     parser.add_argument("--require-complete", action="store_true")
+    parser.add_argument("--require-c-complete", action="store_true",
+                        help="require P2-C inventories; full P2 review remains a separate exit")
     args = parser.parse_args()
     result = (reconstruct if args.action == "extract" else check)(args.old_cache, args.publisher_cache, args.baseline_root, args.output)
     print(json.dumps(dict(typedClauses=result["typedClauses"], sourceAnchors=result["sourceAnchors"], cellCounts=result["cellCounts"],
         remainingReferences=len(result["remainingArchitecturalReferences"]), additionalSections=len(result["additionalSections"]), p2Complete=result["p2Complete"]), sort_keys=True))
+    if args.require_c_complete and not result["p2C"]["complete"]:
+        raise SystemExit(2)
     if args.require_complete and not result["p2Complete"]:
         raise SystemExit(2)
 

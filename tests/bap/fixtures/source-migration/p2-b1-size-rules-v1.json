@@ -1,0 +1,3661 @@
+{
+  "executionModes": [
+    "long-64"
+  ],
+  "rows": [
+    {
+      "heading": {
+        "id": "pdf:628:cell:23",
+        "text": "AAA - ASCII Adjust after Addition"
+      },
+      "pdfPage": 628,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "unavailable-old-operation",
+        "prefixLegality": "separate-form-encoding-contract",
+        "reassignedLeadingBytesPreserved": true
+      },
+      "sourceWordsSha256": "e14970c155a2b65d4acbc113c50d340c1c095fe54ee5d75e5307d4c0d5a25466"
+    },
+    {
+      "heading": {
+        "id": "pdf:628:cell:25",
+        "text": "AAD - ASCII Adjust AX before Division"
+      },
+      "pdfPage": 628,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "unavailable-old-operation",
+        "prefixLegality": "separate-form-encoding-contract",
+        "reassignedLeadingBytesPreserved": true
+      },
+      "sourceWordsSha256": "8d302c451e07c0c7191b898bd60ac4f647c37d4de8ad7cf29c45708605b50885"
+    },
+    {
+      "heading": {
+        "id": "pdf:628:cell:27",
+        "text": "AAM - ASCII Adjust AX after Multiply"
+      },
+      "pdfPage": 628,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "unavailable-old-operation",
+        "prefixLegality": "separate-form-encoding-contract",
+        "reassignedLeadingBytesPreserved": true
+      },
+      "sourceWordsSha256": "a34bf92d94ef133878b427939472b35d344d5901b79926e40b5225147a48b521"
+    },
+    {
+      "heading": {
+        "id": "pdf:628:cell:29",
+        "text": "AAS - ASCII Adjust AL after Subtraction"
+      },
+      "pdfPage": 628,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "unavailable-old-operation",
+        "prefixLegality": "separate-form-encoding-contract",
+        "reassignedLeadingBytesPreserved": true
+      },
+      "sourceWordsSha256": "ee15b3dfa62d8707e61ee46a3e4a86d91d24ef084170ca68aad48555b2c722db"
+    },
+    {
+      "heading": {
+        "id": "pdf:629:cell:34",
+        "text": "ADC\u2014Add with Carry"
+      },
+      "pdfPage": 629,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "b461893642eab8d8d4105743becd49436df5db0eaad619af5e8e56c8f4694be7"
+    },
+    {
+      "heading": {
+        "id": "pdf:629:cell:40",
+        "text": "ADD\u2014Signed or Unsigned Add"
+      },
+      "pdfPage": 629,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "b15091bf42f744a647b7166db3b9ac56c47f640d7eff18e8a188bab3bd7f62f1"
+    },
+    {
+      "heading": {
+        "id": "pdf:629:cell:46",
+        "text": "AND\u2014Logical AND"
+      },
+      "pdfPage": 629,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "fcc6b84ace462c7c8adc20fbfceb15c40f4923609746ff9d02183ea984fffc37"
+    },
+    {
+      "heading": {
+        "id": "pdf:629:cell:52",
+        "text": "ARPL - Adjust Requestor Privilege Level"
+      },
+      "pdfPage": 629,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "unavailable-old-operation",
+        "prefixLegality": "separate-form-encoding-contract",
+        "reassignedLeadingBytesPreserved": true
+      },
+      "sourceWordsSha256": "c07927dfae0fc8f2ab4e026f4b2d53c87602a29e5ba42a720587bd7ea0b56484"
+    },
+    {
+      "heading": {
+        "id": "pdf:629:cell:54",
+        "text": "BOUND - Check Array Against Bounds"
+      },
+      "pdfPage": 629,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "unavailable-old-operation",
+        "prefixLegality": "separate-form-encoding-contract",
+        "reassignedLeadingBytesPreserved": true
+      },
+      "sourceWordsSha256": "762868198db523ae884d00cd284966d54966235f517681e94b747a57fdc5e324"
+    },
+    {
+      "heading": {
+        "id": "pdf:629:cell:56",
+        "text": "BSF\u2014Bit Scan Forward"
+      },
+      "pdfPage": 629,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "fd0d5c02c80162f09426adf09300f44453347a035cbeac778f6d735544e0fa23"
+    },
+    {
+      "heading": {
+        "id": "pdf:630:cell:7",
+        "text": "BSR\u2014Bit Scan Reverse"
+      },
+      "pdfPage": 630,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "be130bb17ad1845b94a53105848638028708e4cc1a010bb215441be04d7de1dd"
+    },
+    {
+      "heading": {
+        "id": "pdf:630:cell:9",
+        "text": "BSWAP\u2014Byte Swap"
+      },
+      "pdfPage": 630,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "byte-swap",
+        "operand16": "undefined;not-a-supported-word-swap",
+        "operandBits": [
+          32,
+          64
+        ],
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "653bd6319e161ad545e04fcbf6e5966d669a144d4f5a5bdae8cfe74d88cee3eb"
+    },
+    {
+      "heading": {
+        "id": "pdf:630:cell:11",
+        "text": "BT\u2014Bit Test"
+      },
+      "pdfPage": 630,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "0d73bd2f53fac7980b4328b39a18809010563bb2d3ed3425d42e7328ffb5931a"
+    },
+    {
+      "heading": {
+        "id": "pdf:630:cell:14",
+        "text": "BTC\u2014Bit Test and Complement"
+      },
+      "pdfPage": 630,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "82b8ceb3e680d907e3acc41000303cdad4cf7175b307a893c2b165c4baf5d244"
+    },
+    {
+      "heading": {
+        "id": "pdf:630:cell:17",
+        "text": "BTR\u2014Bit Test and Reset"
+      },
+      "pdfPage": 630,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "407bf30016eab89f725a3f1dfd65903de0d64b58a68aa342e45bc51d7294968e"
+    },
+    {
+      "heading": {
+        "id": "pdf:630:cell:20",
+        "text": "BTS\u2014Bit Test and Set"
+      },
+      "pdfPage": 630,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "f77432848f851cb8f00ee8c09fb93a146e472b86ae4e6c0ec4dce42320936968"
+    },
+    {
+      "heading": {
+        "id": "pdf:630:cell:23",
+        "text": "CALL\u2014Procedure Call Near"
+      },
+      "pdfPage": 630,
+      "properties": {
+        "address16": "unavailable",
+        "byteOpcodesPromoted": false,
+        "currentScope": {
+          "addressBits": [
+            64,
+            32
+          ],
+          "basis": "user-selected-fixed64-hypothesis;not-publisher-correction",
+          "countBits": [],
+          "countSelectedBy": "no-implicit-loop-counter",
+          "excludedOperandAlternatives": [
+            16
+          ],
+          "indirectTargetBits": 64,
+          "mnemonic": "CALL",
+          "operand32": "unavailable;not-address32",
+          "owner": "amd-entry:0031",
+          "ownerPages": [
+            178,
+            180
+          ],
+          "prefix66": "no-byte-removal-or-automatic-admission",
+          "relativeDisplacementBits": [
+            32
+          ],
+          "returnAddressStackBits": 64,
+          "selectedOperandBits": 64
+        },
+        "definiteWrites": "not-derived",
+        "kind": "selected-near-branch",
+        "originalOverrideNote": "preserved-outside-selected-case",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "2df6b7faeb8ede05f529ad6e787b070b724a503e9b2b81af32bba19ee8744850"
+    },
+    {
+      "heading": {
+        "id": "pdf:631:cell:7",
+        "text": "CALL\u2014Procedure Call Far"
+      },
+      "pdfPage": 631,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "directImmediate": "unavailable-native64",
+        "indirect": "instruction-owned-gate-and-pointer-rules",
+        "kind": "far-transfer-subforms",
+        "nearHypothesisApplies": false,
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "4201276d2ec72a23d034a39c5c71090ed5c0b1467e0c3ddfc2536fd866f3992d"
+    },
+    {
+      "heading": {
+        "id": "pdf:631:cell:10",
+        "text": "CBW, CWDE, CDQE\u2014Convert Byte to"
+      },
+      "pdfPage": 631,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "conversion-aliases",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "prefixLegality": "separate-form-encoding-contract",
+        "widths": "source-and-destination-distinct"
+      },
+      "sourceWordsSha256": "6c835f79924c9d7a9bf31784bb8607286dda05d718a4777d13a562b04dc88749"
+    },
+    {
+      "heading": {
+        "id": "pdf:631:cell:41",
+        "text": "CDQ"
+      },
+      "pdfPage": 631,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "source-alias-reference",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceSpellingPreserved": true,
+        "target": "CWD, CDQ, CQO"
+      },
+      "sourceWordsSha256": "608e4863877cd42052ac551dfec881be559281ddbc6632847c030f30452f7914"
+    },
+    {
+      "heading": {
+        "id": "pdf:631:cell:43",
+        "text": "CDQE (new mnemonic)"
+      },
+      "pdfPage": 631,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "source-alias-reference",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceSpellingPreserved": true,
+        "target": "CBW, CWDE, CDQE"
+      },
+      "sourceWordsSha256": "e268bb20956fa0605b10e322cd90ba783357e1f7bc549c23cacec2424d45bcb4"
+    },
+    {
+      "heading": {
+        "id": "pdf:631:cell:45",
+        "text": "CDWE"
+      },
+      "pdfPage": 631,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "source-alias-reference",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceSpellingPreserved": true,
+        "target": "CBW, CWDE, CDQE"
+      },
+      "sourceWordsSha256": "6192ad0d0c25fc7420401bbfbaaa587e14b432ab2a651bd1b930a33776daf777"
+    },
+    {
+      "heading": {
+        "id": "pdf:631:cell:47",
+        "text": "CLC\u2014Clear Carry Flag"
+      },
+      "pdfPage": 631,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "7a432e3bb8e42c9bff323d614990c54d1d904329b7eaa9e6b3a6284d5a15bd09"
+    },
+    {
+      "heading": {
+        "id": "pdf:631:cell:49",
+        "text": "CLD\u2014Clear Direction Flag"
+      },
+      "pdfPage": 631,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "ac9fc4509a4b60d0c7931fd4594f0d80ebde17f1ea3ff5763bd8d538677edbcb"
+    },
+    {
+      "heading": {
+        "id": "pdf:631:cell:51",
+        "text": "CLFLUSH\u2014Cache Line Invalidate"
+      },
+      "pdfPage": 631,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "16b905d9322e12bf94d01af9930b7ef083bd8ffc1735819201b46d3389713749"
+    },
+    {
+      "heading": {
+        "id": "pdf:631:cell:53",
+        "text": "CLGI\u2014Clear Global Interrupt"
+      },
+      "pdfPage": 631,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "1fa4fcd53029c46030f7f1c00dfb7eac33ea8bf8a7a8b529d82dca79637ddaf3"
+    },
+    {
+      "heading": {
+        "id": "pdf:631:cell:55",
+        "text": "CLI\u2014Clear Interrupt Flag"
+      },
+      "pdfPage": 631,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "7b0d1f6d44aee083e8b272bf44a0f0d45da6037560a7436d9b35176c2d7673be"
+    },
+    {
+      "heading": {
+        "id": "pdf:632:cell:7",
+        "text": "CLTS\u2014Clear Task-Switched Flag in"
+      },
+      "pdfPage": 632,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "c8195c5658ffc10f005be813390ddf1b28e5b21c79b742a8702c97e1cb1a1e83"
+    },
+    {
+      "heading": {
+        "id": "pdf:632:cell:10",
+        "text": "CMC\u2014Complement Carry Flag"
+      },
+      "pdfPage": 632,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "6f56368bb848d59c018ad6064916cc42b1d3c83a18ded3fb97aee4e54c5b1f50"
+    },
+    {
+      "heading": {
+        "id": "pdf:632:cell:25",
+        "text": "CMOVcc\u2014Conditional Move"
+      },
+      "pdfPage": 632,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "d7a4070720191978035af8b7bd5905ef030b46c6f22d4940797797631c4205fb"
+    },
+    {
+      "heading": {
+        "id": "pdf:632:cell:44",
+        "text": "CMP\u2014Compare"
+      },
+      "pdfPage": 632,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "46a9f782bab8166970a5fe51fd1e576faa86062142def44725e480def3667e3b"
+    },
+    {
+      "heading": {
+        "id": "pdf:632:cell:50",
+        "text": "CMPS, CMPSW, CMPSD, CMPSQ\u2014"
+      },
+      "pdfPage": 632,
+      "properties": {
+        "byteOpcodeOperandBits": 8,
+        "byteOpcodesPromoted": false,
+        "dataBits": [
+          8,
+          16,
+          32,
+          64
+        ],
+        "definiteWrites": "not-derived",
+        "kind": "string-subforms",
+        "pointerAndCountBits": [
+          64,
+          32
+        ],
+        "pointerAndCountSelectedBy": "address-size",
+        "prefixLegality": "separate-form-encoding-contract",
+        "repeated": "instruction-owned-prefix-rule;not-opcode-selector"
+      },
+      "sourceWordsSha256": "2a4aac18f516d7eb7c1dcde6093b3cd3f8c400b667018fd903dcdef3a7893d42"
+    },
+    {
+      "heading": {
+        "id": "pdf:632:cell:53",
+        "text": "CMPXCHG\u2014Compare and Exchange"
+      },
+      "pdfPage": 632,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "16875215877d880c03f89c946edbc564d4732283f1ccc26d893148284bb1ca68"
+    },
+    {
+      "heading": {
+        "id": "pdf:633:cell:7",
+        "text": "CMPXCHG8B\u2014Compare and"
+      },
+      "pdfPage": 633,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "dataBits": [
+          64,
+          128
+        ],
+        "definiteWrites": "not-derived",
+        "kind": "cmpxchg-wide-subforms",
+        "prefix66": "does-not-create-word-memory-compare-exchange",
+        "prefixLegality": "separate-form-encoding-contract",
+        "rexW": "selects-CMPXCHG16B"
+      },
+      "sourceWordsSha256": "04466e6c959576d181f96d35386ebd5142c45245e28216c645cc7779376c724e"
+    },
+    {
+      "heading": {
+        "id": "pdf:633:cell:10",
+        "text": "CPUID\u2014Processor Identification"
+      },
+      "pdfPage": 633,
+      "properties": {
+        "addressBits": [],
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "fixed-implicit-data",
+        "operandBits": [
+          32
+        ],
+        "operandOverride": "ignored",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "3edf7c73ae4af13612d24f7bc7740b382249b2c5c6905e730e03ab4b1fcb5e97"
+    },
+    {
+      "heading": {
+        "id": "pdf:633:cell:18",
+        "text": "CQO (new mnemonic)"
+      },
+      "pdfPage": 633,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "source-alias-reference",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceSpellingPreserved": true,
+        "target": "CWD, CDQ, CQO"
+      },
+      "sourceWordsSha256": "a96b139111abae3c19328e6ae8e4ef99b531919bb507edf8275b2a2d7547313a"
+    },
+    {
+      "heading": {
+        "id": "pdf:633:cell:19",
+        "text": "CWD, CDQ, CQO\u2014Convert Word to"
+      },
+      "pdfPage": 633,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "conversion-aliases",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "prefixLegality": "separate-form-encoding-contract",
+        "widths": "source-and-destination-distinct"
+      },
+      "sourceWordsSha256": "36da393a5f526b309630dc04f99f92689b78d0a6f5ec4158d268477adbf24ad4"
+    },
+    {
+      "heading": {
+        "id": "pdf:633:cell:49",
+        "text": "DAA - Decimal Adjust AL after Addition"
+      },
+      "pdfPage": 633,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "unavailable-old-operation",
+        "prefixLegality": "separate-form-encoding-contract",
+        "reassignedLeadingBytesPreserved": true
+      },
+      "sourceWordsSha256": "dbde19814dc1df27a524a0e3ab43ba6b38c5453d4ba2235a629cc5db5e5621e4"
+    },
+    {
+      "heading": {
+        "id": "pdf:633:cell:24",
+        "text": "DAS - Decimal Adjust AL after"
+      },
+      "pdfPage": 633,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "unavailable-old-operation",
+        "prefixLegality": "separate-form-encoding-contract",
+        "reassignedLeadingBytesPreserved": true
+      },
+      "sourceWordsSha256": "3818ea75b29fb971ebd93226e7d8ed255ab04aa8a5c6a1f17dec0b49d5993a06"
+    },
+    {
+      "heading": {
+        "id": "pdf:634:cell:7",
+        "text": "DEC\u2014Decrement by 1"
+      },
+      "pdfPage": 634,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "cec6c46973ebae640fbcb3d6aed830a00d544a982cd154bef80f539ee3cd1c96"
+    },
+    {
+      "heading": {
+        "id": "pdf:634:cell:24",
+        "text": "DIV\u2014Unsigned Divide"
+      },
+      "pdfPage": 634,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "1a52df11acdc16a07ba61712da229b1a4a5567c6de730c86de6c7f6315802bbd"
+    },
+    {
+      "heading": {
+        "id": "pdf:634:cell:26",
+        "text": "ENTER\u2014Create Procedure Stack"
+      },
+      "pdfPage": 634,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 64,
+        "definiteWrites": "not-derived",
+        "explicitNonStackAddressBits": [
+          64,
+          32
+        ],
+        "immediateBits": "opcode-specific;not-stack-payload-width",
+        "invalidSegments": [],
+        "kind": "default64-stack-subforms",
+        "operand32": "unavailable",
+        "operandBits": [
+          16,
+          64
+        ],
+        "prefixLegality": "separate-form-encoding-contract",
+        "stackAddressBits": 64
+      },
+      "sourceWordsSha256": "6e4db0d68e52004dfc700bc3a1a0ff9a3c6dd3b70ebe49898efeb31419fd7b31"
+    },
+    {
+      "heading": {
+        "id": "pdf:634:cell:29",
+        "text": "HLT\u2014Halt"
+      },
+      "pdfPage": 634,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "e4b6e9826ceb1dacbcdec4e12d438bd3cf6b86b6e6dd3bf8ffb406540634a972"
+    },
+    {
+      "heading": {
+        "id": "pdf:634:cell:50",
+        "text": "IDIV\u2014Signed Divide"
+      },
+      "pdfPage": 634,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "86b7890a4009bca5d92cacbf32d7ec81263f9656ec5ea45b35f981feaf995422"
+    },
+    {
+      "heading": {
+        "id": "pdf:635:cell:14",
+        "text": "IMUL - Signed Multiply"
+      },
+      "pdfPage": 635,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "f1d943289fa41790d8801aa8c62c748ae59714a7ec45f7122a1d1ac60a8afd1c"
+    },
+    {
+      "heading": {
+        "id": "pdf:635:cell:35",
+        "text": "IN\u2014Input From Port"
+      },
+      "pdfPage": 635,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "dataBits": [
+          8,
+          16,
+          32
+        ],
+        "definiteWrites": "not-derived",
+        "kind": "port-io-subforms",
+        "prefixLegality": "separate-form-encoding-contract",
+        "rexW": "does-not-create64-bit-port-data",
+        "stringCountAndPointerBits": []
+      },
+      "sourceWordsSha256": "9d249ec9f4223d8ddf21ddb84aaef43ccf1a4f45f8d6bca1cccdd6a73695deed"
+    },
+    {
+      "heading": {
+        "id": "pdf:635:cell:38",
+        "text": "INC\u2014Increment by 1"
+      },
+      "pdfPage": 635,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "6dd427b6c51fc6567e713b7df03ae8fbc64131b9aab2f2de5257e78ea8f9d9cf"
+    },
+    {
+      "heading": {
+        "id": "pdf:635:cell:41",
+        "text": "INS, INSW, INSD\u2014Input String"
+      },
+      "pdfPage": 635,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "dataBits": [
+          8,
+          16,
+          32
+        ],
+        "definiteWrites": "not-derived",
+        "kind": "port-io-subforms",
+        "prefixLegality": "separate-form-encoding-contract",
+        "rexW": "does-not-create64-bit-port-data",
+        "stringCountAndPointerBits": [
+          64,
+          32
+        ]
+      },
+      "sourceWordsSha256": "a8a5a3c575b8dca61d058fbaea4c9d9048d3df4bc1ed573b995f3efd5bdd5fc0"
+    },
+    {
+      "heading": {
+        "id": "pdf:635:cell:66",
+        "text": "INT n\u2014Interrupt to Vector"
+      },
+      "pdfPage": 635,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "cd5c46993f808d14c2faedc0e79318427e92d3dac583b3e372b18fbf4e03047f"
+    },
+    {
+      "heading": {
+        "id": "pdf:635:cell:68",
+        "text": "INT3\u2014Interrupt to Debug Vector"
+      },
+      "pdfPage": 635,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "1e6eb556caaf56abde84ace041984bdee652c2db64a7ea763b6c148f57ea2c04"
+    },
+    {
+      "heading": {
+        "id": "pdf:635:cell:72",
+        "text": "INTO - Interrupt to Overflow Vector"
+      },
+      "pdfPage": 635,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "unavailable-old-operation",
+        "prefixLegality": "separate-form-encoding-contract",
+        "reassignedLeadingBytesPreserved": true
+      },
+      "sourceWordsSha256": "d16f59e8642a9a09bd50ea23c68e63c1a524083805d011d6945cd4483b882af6"
+    },
+    {
+      "heading": {
+        "id": "pdf:636:cell:7",
+        "text": "INVD\u2014Invalidate Internal Caches"
+      },
+      "pdfPage": 636,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "f43311c5836bdb1deddc81cd82ccd98003478c4b5566296bad8bd441637d233e"
+    },
+    {
+      "heading": {
+        "id": "pdf:636:cell:9",
+        "text": "INVLPG\u2014Invalidate TLB Entry"
+      },
+      "pdfPage": 636,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "01eabf66643dfceca3672afc5bf21b22e99ab23f12a6644085cbb2b6ad718809"
+    },
+    {
+      "heading": {
+        "id": "pdf:636:cell:11",
+        "text": "INVLPGA\u2014Invalidate TLB Entry in a"
+      },
+      "pdfPage": 636,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "a8bce094684b23e6c5b36f0efa1f75b077219ad8966e1e496acbf9a99ed2a341"
+    },
+    {
+      "heading": {
+        "id": "pdf:636:cell:58",
+        "text": "IRET, IRETD, IRETQ\u2014Interrupt Return"
+      },
+      "pdfPage": 636,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "interrupt-return",
+        "nativeModeAdmission": "requires-volume2-interrupt-contract",
+        "nearHypothesisApplies": false,
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceAliases": [
+          "IRET",
+          "IRETD",
+          "IRETQ"
+        ],
+        "sourceOperandBits": [
+          16,
+          32,
+          64
+        ]
+      },
+      "sourceWordsSha256": "2fc9a882c96fc045d2a641e7f94b5d4f440ddf0dc62173e7551c7ea8d687ce78"
+    },
+    {
+      "heading": {
+        "id": "pdf:636:cell:18",
+        "text": "Jcc\u2014Jump Conditional"
+      },
+      "pdfPage": 636,
+      "properties": {
+        "address16": "unavailable",
+        "byteOpcodesPromoted": false,
+        "currentScope": {
+          "addressBits": [
+            64,
+            32
+          ],
+          "basis": "user-selected-fixed64-hypothesis;not-publisher-correction",
+          "countBits": [],
+          "countSelectedBy": "no-implicit-loop-counter",
+          "excludedOperandAlternatives": [
+            16
+          ],
+          "indirectTargetBits": null,
+          "mnemonic": "Jcc",
+          "operand32": "unavailable;not-address32",
+          "owner": "amd-entry:0061",
+          "ownerPages": [
+            245,
+            248
+          ],
+          "prefix66": "no-byte-removal-or-automatic-admission",
+          "relativeDisplacementBits": [
+            8,
+            32
+          ],
+          "returnAddressStackBits": null,
+          "selectedOperandBits": 64
+        },
+        "definiteWrites": "not-derived",
+        "kind": "selected-near-branch",
+        "originalOverrideNote": "preserved-outside-selected-case",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "62eff79ff19656c232735d82b7e8dea0475aedc035324169dcfe5de4eb287f5e"
+    },
+    {
+      "heading": {
+        "id": "pdf:636:cell:51",
+        "text": "JCXZ, JECXZ, JRCXZ\u2014Jump on"
+      },
+      "pdfPage": 636,
+      "properties": {
+        "address16": "unavailable",
+        "byteOpcodesPromoted": false,
+        "currentScope": {
+          "addressBits": [
+            64,
+            32
+          ],
+          "basis": "user-selected-fixed64-hypothesis;not-publisher-correction",
+          "countBits": [
+            64,
+            32
+          ],
+          "countSelectedBy": "address-size",
+          "excludedOperandAlternatives": [
+            16
+          ],
+          "indirectTargetBits": null,
+          "mnemonic": "JrCXZ",
+          "operand32": "unavailable;not-address32",
+          "owner": "amd-entry:0062",
+          "ownerPages": [
+            249,
+            249
+          ],
+          "prefix66": "no-byte-removal-or-automatic-admission",
+          "relativeDisplacementBits": [
+            8
+          ],
+          "returnAddressStackBits": null,
+          "selectedOperandBits": 64
+        },
+        "definiteWrites": "not-derived",
+        "kind": "selected-near-branch",
+        "originalOverrideNote": "preserved-outside-selected-case",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "e8e2342855ee7f943a9ce46fc57b3cc114d13a843b49a3adfd1967814cebaf4a"
+    },
+    {
+      "heading": {
+        "id": "pdf:637:cell:7",
+        "text": "JMP\u2014Jump Near"
+      },
+      "pdfPage": 637,
+      "properties": {
+        "address16": "unavailable",
+        "byteOpcodesPromoted": false,
+        "currentScope": {
+          "addressBits": [
+            64,
+            32
+          ],
+          "basis": "user-selected-fixed64-hypothesis;not-publisher-correction",
+          "countBits": [],
+          "countSelectedBy": "no-implicit-loop-counter",
+          "excludedOperandAlternatives": [
+            16
+          ],
+          "indirectTargetBits": 64,
+          "mnemonic": "JMP",
+          "operand32": "unavailable;not-address32",
+          "owner": "amd-entry:0063",
+          "ownerPages": [
+            250,
+            251
+          ],
+          "prefix66": "no-byte-removal-or-automatic-admission",
+          "relativeDisplacementBits": [
+            8,
+            32
+          ],
+          "returnAddressStackBits": null,
+          "selectedOperandBits": 64
+        },
+        "definiteWrites": "not-derived",
+        "kind": "selected-near-branch",
+        "originalOverrideNote": "preserved-outside-selected-case",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "a574c1a36cc4cd67f0b9a252d57a5b8dcaa20409e3484653fb78347f2b5dd2ff"
+    },
+    {
+      "heading": {
+        "id": "pdf:637:cell:44",
+        "text": "JMP\u2014Jump Far"
+      },
+      "pdfPage": 637,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "directImmediate": "unavailable-native64",
+        "indirect": "instruction-owned-gate-and-pointer-rules",
+        "kind": "far-transfer-subforms",
+        "nearHypothesisApplies": false,
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "9891d1b705badea660dc9a96b4f746226dc3153209597809d4dc314529518a76"
+    },
+    {
+      "heading": {
+        "id": "pdf:637:cell:28",
+        "text": "LAHF - Load Status Flags into AH"
+      },
+      "pdfPage": 637,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "2fabd54b566c4da79e634f5b7513d76adc530f36f61301218bf2f93304a8b4ff"
+    },
+    {
+      "heading": {
+        "id": "pdf:637:cell:31",
+        "text": "LAR\u2014Load Access Rights Byte"
+      },
+      "pdfPage": 637,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "destinationRegisterBits": [
+          16,
+          32,
+          64
+        ],
+        "kind": "descriptor-query",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceSelectorBits": 16
+      },
+      "sourceWordsSha256": "26e6ea48514cb6a8a125c21ef1fdb50f388d868e3c7ced9a257b014d6a2de79c"
+    },
+    {
+      "heading": {
+        "id": "pdf:637:cell:33",
+        "text": "LDS - Load DS Far Pointer"
+      },
+      "pdfPage": 637,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "unavailable-old-operation",
+        "prefixLegality": "separate-form-encoding-contract",
+        "reassignedLeadingBytesPreserved": true
+      },
+      "sourceWordsSha256": "5f0e363e702dd7956a144bb2236d04e62a343d94d7c20b94b187b4e98f51cdc7"
+    },
+    {
+      "heading": {
+        "id": "pdf:638:cell:25",
+        "text": "LEA\u2014Load Effective Address"
+      },
+      "pdfPage": 638,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "436af3685f756c83121e2bd437618c69bb736e3c9bf05b420ed8ae66adb2be4b"
+    },
+    {
+      "heading": {
+        "id": "pdf:638:cell:18",
+        "text": "LEAVE\u2014Delete Procedure Stack Frame Promoted to"
+      },
+      "pdfPage": 638,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 64,
+        "definiteWrites": "not-derived",
+        "explicitNonStackAddressBits": [
+          64,
+          32
+        ],
+        "immediateBits": "opcode-specific;not-stack-payload-width",
+        "invalidSegments": [],
+        "kind": "default64-stack-subforms",
+        "operand32": "unavailable",
+        "operandBits": [
+          16,
+          64
+        ],
+        "prefixLegality": "separate-form-encoding-contract",
+        "stackAddressBits": 64
+      },
+      "sourceWordsSha256": "75daf2f55c2b5bfc755e3154f8fa013873f4831726cfa9688cea6ee0f687aa25"
+    },
+    {
+      "heading": {
+        "id": "pdf:638:cell:27",
+        "text": "LES - Load ES Far Pointer"
+      },
+      "pdfPage": 638,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "unavailable-old-operation",
+        "prefixLegality": "separate-form-encoding-contract",
+        "reassignedLeadingBytesPreserved": true
+      },
+      "sourceWordsSha256": "178fc3fdfc347e22acac8b39a1d2b4a335a692536d030b6e44b215dcfea5e20d"
+    },
+    {
+      "heading": {
+        "id": "pdf:638:cell:29",
+        "text": "LFENCE\u2014Load Fence"
+      },
+      "pdfPage": 638,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "df602aded761778946f962aedfc4feef8b34dda18424af82dd59e12df8af65d4"
+    },
+    {
+      "heading": {
+        "id": "pdf:638:cell:31",
+        "text": "LFS\u2014Load FS Far Pointer"
+      },
+      "pdfPage": 638,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "far-pointer-load",
+        "offsetBits": [
+          16,
+          32
+        ],
+        "operand64": "not-supported-by-instruction-prose",
+        "prefixLegality": "separate-form-encoding-contract",
+        "selectorBits": 16,
+        "sourcePointerBits": [
+          32,
+          48
+        ]
+      },
+      "sourceWordsSha256": "e8ed433debd8e79b6adba9a5d499889a31b161a0f934ef317ce08150dcea9a65"
+    },
+    {
+      "heading": {
+        "id": "pdf:638:cell:33",
+        "text": "LGDT\u2014Load Global Descriptor Table"
+      },
+      "pdfPage": 638,
+      "properties": {
+        "baseBits": 64,
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "fixed-descriptor-base",
+        "limitBits": 16,
+        "memoryBytes": 10,
+        "operandOverride": "ignored",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "608da7cb81beec2725a90930cdc8fe72a8389515aaa0be801eed9a9af64e23fc"
+    },
+    {
+      "heading": {
+        "id": "pdf:638:cell:36",
+        "text": "LGS\u2014Load GS Far Pointer"
+      },
+      "pdfPage": 638,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "far-pointer-load",
+        "offsetBits": [
+          16,
+          32
+        ],
+        "operand64": "not-supported-by-instruction-prose",
+        "prefixLegality": "separate-form-encoding-contract",
+        "selectorBits": 16,
+        "sourcePointerBits": [
+          32,
+          48
+        ]
+      },
+      "sourceWordsSha256": "4532b86e9c278142ac309ea6466f6060f4aec8be1837a61a4d82a8e0bf2a29b1"
+    },
+    {
+      "heading": {
+        "id": "pdf:638:cell:38",
+        "text": "LIDT\u2014Load Interrupt Descriptor Table"
+      },
+      "pdfPage": 638,
+      "properties": {
+        "baseBits": 64,
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "fixed-descriptor-base",
+        "limitBits": 16,
+        "memoryBytes": 10,
+        "operandOverride": "ignored",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "9d2ffca0112115f6425026dd76216a30cab36d18717c90fc817498b307ee8a06"
+    },
+    {
+      "heading": {
+        "id": "pdf:638:cell:41",
+        "text": "LLDT\u2014Load Local Descriptor Table"
+      },
+      "pdfPage": 638,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "descriptorBaseBits": 64,
+        "kind": "fixed-explicit-selector-or-word",
+        "operandBits": [
+          16
+        ],
+        "operandOverride": "ignored",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "df2bcb8dea57dc8d8a275ac0e470079272bc83959ae3ff66ce478ea82cf71ba2"
+    },
+    {
+      "heading": {
+        "id": "pdf:638:cell:44",
+        "text": "LMSW\u2014Load Machine Status Word"
+      },
+      "pdfPage": 638,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "descriptorBaseBits": null,
+        "kind": "fixed-explicit-selector-or-word",
+        "operandBits": [
+          16
+        ],
+        "operandOverride": "ignored",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "87ad69b9b64a0d5aa507395d81f7934a2cbcded715e219454cf18cf7c0c71424"
+    },
+    {
+      "heading": {
+        "id": "pdf:639:cell:12",
+        "text": "LODS, LODSW, LODSD, LODSQ\u2014"
+      },
+      "pdfPage": 639,
+      "properties": {
+        "byteOpcodeOperandBits": 8,
+        "byteOpcodesPromoted": false,
+        "dataBits": [
+          8,
+          16,
+          32,
+          64
+        ],
+        "definiteWrites": "not-derived",
+        "kind": "string-subforms",
+        "pointerAndCountBits": [
+          64,
+          32
+        ],
+        "pointerAndCountSelectedBy": "address-size",
+        "prefixLegality": "separate-form-encoding-contract",
+        "repeated": "instruction-owned-prefix-rule;not-opcode-selector"
+      },
+      "sourceWordsSha256": "8c627dc9b451461847609f28456bd267ce5da644e86401ac8760154d81148664"
+    },
+    {
+      "heading": {
+        "id": "pdf:639:cell:35",
+        "text": "LOOP\u2014Loop"
+      },
+      "pdfPage": 639,
+      "properties": {
+        "address16": "unavailable",
+        "byteOpcodesPromoted": false,
+        "currentScope": {
+          "addressBits": [
+            64,
+            32
+          ],
+          "basis": "user-selected-fixed64-hypothesis;not-publisher-correction",
+          "countBits": [
+            64,
+            32
+          ],
+          "countSelectedBy": "address-size",
+          "excludedOperandAlternatives": [
+            16
+          ],
+          "indirectTargetBits": null,
+          "mnemonic": "LOOP",
+          "operand32": "unavailable;not-address32",
+          "owner": "amd-entry:0072",
+          "ownerPages": [
+            269,
+            270
+          ],
+          "prefix66": "no-byte-removal-or-automatic-admission",
+          "relativeDisplacementBits": [
+            8
+          ],
+          "returnAddressStackBits": null,
+          "selectedOperandBits": 64
+        },
+        "definiteWrites": "not-derived",
+        "kind": "selected-near-branch",
+        "originalOverrideNote": "preserved-outside-selected-case",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "efdfee12ae92de4370d75197bfaf61945d52e22d08ad28de1e650c752b91a4c8"
+    },
+    {
+      "heading": {
+        "id": "pdf:639:cell:37",
+        "text": "LOOPZ, LOOPE\u2014Loop if Zero/Equal"
+      },
+      "pdfPage": 639,
+      "properties": {
+        "address16": "unavailable",
+        "byteOpcodesPromoted": false,
+        "currentScope": {
+          "addressBits": [
+            64,
+            32
+          ],
+          "basis": "user-selected-fixed64-hypothesis;not-publisher-correction",
+          "countBits": [
+            64,
+            32
+          ],
+          "countSelectedBy": "address-size",
+          "excludedOperandAlternatives": [
+            16
+          ],
+          "indirectTargetBits": null,
+          "mnemonic": "LOOPcc",
+          "operand32": "unavailable;not-address32",
+          "owner": "amd-entry:0072",
+          "ownerPages": [
+            269,
+            270
+          ],
+          "prefix66": "no-byte-removal-or-automatic-admission",
+          "relativeDisplacementBits": [
+            8
+          ],
+          "returnAddressStackBits": null,
+          "selectedOperandBits": 64
+        },
+        "definiteWrites": "not-derived",
+        "kind": "selected-near-branch",
+        "originalOverrideNote": "preserved-outside-selected-case",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "d11e81584ecf4a5fc93a8563dadfcf9941fb843f33299f1c64ee45755cd1f303"
+    },
+    {
+      "heading": {
+        "id": "pdf:639:cell:39",
+        "text": "LOOPNZ, LOOPNE\u2014Loop if Not"
+      },
+      "pdfPage": 639,
+      "properties": {
+        "address16": "unavailable",
+        "byteOpcodesPromoted": false,
+        "currentScope": {
+          "addressBits": [
+            64,
+            32
+          ],
+          "basis": "user-selected-fixed64-hypothesis;not-publisher-correction",
+          "countBits": [
+            64,
+            32
+          ],
+          "countSelectedBy": "address-size",
+          "excludedOperandAlternatives": [
+            16
+          ],
+          "indirectTargetBits": null,
+          "mnemonic": "LOOPcc",
+          "operand32": "unavailable;not-address32",
+          "owner": "amd-entry:0072",
+          "ownerPages": [
+            269,
+            270
+          ],
+          "prefix66": "no-byte-removal-or-automatic-admission",
+          "relativeDisplacementBits": [
+            8
+          ],
+          "returnAddressStackBits": null,
+          "selectedOperandBits": 64
+        },
+        "definiteWrites": "not-derived",
+        "kind": "selected-near-branch",
+        "originalOverrideNote": "preserved-outside-selected-case",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "9908c225bafcde2efc2941dd9666eb6effccb45c07cc83ed5c01c7a65b7a8918"
+    },
+    {
+      "heading": {
+        "id": "pdf:639:cell:51",
+        "text": "LSL\u2014Load Segment Limit"
+      },
+      "pdfPage": 639,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "destinationRegisterBits": [
+          16,
+          32,
+          64
+        ],
+        "kind": "descriptor-query",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceSelectorBits": 16
+      },
+      "sourceWordsSha256": "1e43d71284fdbfe32fd66493de31987d52682182a7c58ee625b643079f5911ee"
+    },
+    {
+      "heading": {
+        "id": "pdf:639:cell:53",
+        "text": "LSS \u2014Load SS Segment Register"
+      },
+      "pdfPage": 639,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "far-pointer-load",
+        "offsetBits": [
+          16,
+          32
+        ],
+        "operand64": "not-supported-by-instruction-prose",
+        "prefixLegality": "separate-form-encoding-contract",
+        "selectorBits": 16,
+        "sourcePointerBits": [
+          32,
+          48
+        ]
+      },
+      "sourceWordsSha256": "b017d1ede99f73a54168c1e7ae4ad8ce020fac61e0c61efc50bc4ada14430b2d"
+    },
+    {
+      "heading": {
+        "id": "pdf:639:cell:55",
+        "text": "LTR\u2014Load Task Register"
+      },
+      "pdfPage": 639,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "descriptorBaseBits": 64,
+        "kind": "fixed-explicit-selector-or-word",
+        "operandBits": [
+          16
+        ],
+        "operandOverride": "ignored",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "c2b351b56fc15f79ba4cd3634016b5f8d295f4ee2eeb351f1d43babc2e97ae41"
+    },
+    {
+      "heading": {
+        "id": "pdf:639:cell:73",
+        "text": "LZCNT\u2014Count Leading Zeros"
+      },
+      "pdfPage": 639,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "fe071cbf14fa0a40e81b6574a34d330f27cc2d76053518f83cc8435fb5d67156"
+    },
+    {
+      "heading": {
+        "id": "pdf:639:cell:77",
+        "text": "MFENCE\u2014Memory Fence"
+      },
+      "pdfPage": 639,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "9c189b2d97eded047cdca101b65fc95eb67fd0e7596f1b47fb4cb5c1c5061608"
+    },
+    {
+      "heading": {
+        "id": "pdf:639:cell:82",
+        "text": "MONITOR\u2014Setup Monitor Address"
+      },
+      "pdfPage": 639,
+      "properties": {
+        "addressBits": [
+          64,
+          32
+        ],
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "fixed-implicit-data",
+        "operandBits": [
+          32
+        ],
+        "operandOverride": "ignored",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "16cc617084645b8d46ea6912e0c9d01874ebf30285264757561f22066468e7a2"
+    },
+    {
+      "heading": {
+        "id": "pdf:640:cell:16",
+        "text": "MOV\u2014Move"
+      },
+      "pdfPage": 640,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "c7Immediate64": "sign-extended32",
+        "c7ImmediateBits": [
+          16,
+          32
+        ],
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "immediate64": "B8-BF-only",
+        "kind": "mov-subforms",
+        "moffsetBits": [
+          64,
+          32
+        ],
+        "moffsetSelectedBy": "address-size",
+        "operandBits": [
+          8,
+          16,
+          32,
+          64
+        ],
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "8bd4fcc4615f0be3f13ccf963da20ea9235819bf7808bc0ebc7f63caf5a42ad2"
+    },
+    {
+      "heading": {
+        "id": "pdf:640:cell:37",
+        "text": "MOV\u2014Move to/from Segment Registers"
+      },
+      "pdfPage": 640,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "segment-register-subforms",
+        "loadOperandBits": [
+          16
+        ],
+        "override": "direction-and-operand-alternative-specific",
+        "prefixLegality": "separate-form-encoding-contract",
+        "selectorBits": 16,
+        "storeMemoryBits": 16,
+        "storeRegisterBits": [
+          16,
+          32,
+          64
+        ]
+      },
+      "sourceWordsSha256": "b8adb2e431b52a462513711685a8ec59cce26d685116ecd55084d28946e5be35"
+    },
+    {
+      "heading": {
+        "id": "pdf:640:cell:40",
+        "text": "MOV(CRn)\u2014Move to/from Control"
+      },
+      "pdfPage": 640,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "fixed-control-or-debug-transfer",
+        "operandBits": [
+          64
+        ],
+        "operandOverride": "ignored",
+        "prefixF0": "AltMovCr8-opcode-extension-not-memory-lock",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "b362e3fa0494532e4d43f2badd1186feeb758c537b2cd20d1c2bd2fd1f361948"
+    },
+    {
+      "heading": {
+        "id": "pdf:640:cell:75",
+        "text": "MOV(DRn)\u2014Move to/from Debug"
+      },
+      "pdfPage": 640,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "fixed-control-or-debug-transfer",
+        "operandBits": [
+          64
+        ],
+        "operandOverride": "ignored",
+        "prefixF0": "not-admitted",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "3ce97f0b82db7c482656cda3735f9f0c855efbe5c3663fd820929979a78687ff"
+    },
+    {
+      "heading": {
+        "id": "pdf:641:cell:12",
+        "text": "MOVD\u2014Move Doubleword or"
+      },
+      "pdfPage": 641,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "gprPayloadBits": [
+          32,
+          64
+        ],
+        "kind": "media-transfer-subforms",
+        "mediaRegisterBits": [
+          64,
+          128
+        ],
+        "prefix66": "opcode-selector;not16-bit-payload",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceModeNotes": "separate-selected-volume4-rows"
+      },
+      "sourceWordsSha256": "c20e29b538cac353ecbb50ed8a9e6d8e284135558ef7c13cab311af44706ab11"
+    },
+    {
+      "heading": {
+        "id": "pdf:641:cell:27",
+        "text": "MOVNTI\u2014Move Non-Temporal"
+      },
+      "pdfPage": 641,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "a4ea5de393267c198983b5c7b72070b754f4544941e711b8433396febc1e61e6"
+    },
+    {
+      "heading": {
+        "id": "pdf:641:cell:30",
+        "text": "MOVS, MOVSW, MOVSD, MOVSQ\u2014"
+      },
+      "pdfPage": 641,
+      "properties": {
+        "byteOpcodeOperandBits": 8,
+        "byteOpcodesPromoted": false,
+        "dataBits": [
+          8,
+          16,
+          32,
+          64
+        ],
+        "definiteWrites": "not-derived",
+        "kind": "string-subforms",
+        "pointerAndCountBits": [
+          64,
+          32
+        ],
+        "pointerAndCountSelectedBy": "address-size",
+        "prefixLegality": "separate-form-encoding-contract",
+        "repeated": "instruction-owned-prefix-rule;not-opcode-selector"
+      },
+      "sourceWordsSha256": "5afada563ca4f13404f72d4f23034203162cfc5767356d01621c5a0f2a9ba00d"
+    },
+    {
+      "heading": {
+        "id": "pdf:641:cell:58",
+        "text": "MOVSX\u2014Move with Sign-Extend"
+      },
+      "pdfPage": 641,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "1648bbb094349d7aeade1013e57dc1b7777f5c124ff936fcfb314e1884937227"
+    },
+    {
+      "heading": {
+        "id": "pdf:642:cell:7",
+        "text": "MOVSXD\u2014Move with Sign-Extend"
+      },
+      "pdfPage": 642,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "movsxd-subforms",
+        "operand16": "copies16-preserves-upper48",
+        "prefixLegality": "separate-form-encoding-contract",
+        "rexW": {
+          "destinationBits": 64,
+          "sourceBits": 32
+        },
+        "withoutRexW": "32-bit-copy-zero-extended"
+      },
+      "sourceWordsSha256": "cf7d854225028366dd7b852d2602ee0e3080e7e49faca950f63c93ed8cb8c7d2"
+    },
+    {
+      "heading": {
+        "id": "pdf:642:cell:49",
+        "text": "MOVZX\u2014Move with Zero-Extend"
+      },
+      "pdfPage": 642,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "78c720ae51795d8bca54b5f7707a4a27ade74d6ae57ec552b74013cc60f6238d"
+    },
+    {
+      "heading": {
+        "id": "pdf:642:cell:54",
+        "text": "MUL\u2014Multiply Unsigned"
+      },
+      "pdfPage": 642,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "243e55a65d0e431c0bf253770c451d02cff8f3193facaced030d3423c0b90898"
+    },
+    {
+      "heading": {
+        "id": "pdf:642:cell:56",
+        "text": "MWAIT\u2014Monitor Wait"
+      },
+      "pdfPage": 642,
+      "properties": {
+        "addressBits": [],
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "fixed-implicit-data",
+        "operandBits": [
+          32
+        ],
+        "operandOverride": "ignored",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "fad9da1bb7ed8356f120706369f2f922db1129216878c7ec68fd944585e7d4a1"
+    },
+    {
+      "heading": {
+        "id": "pdf:642:cell:58",
+        "text": "NEG\u2014Negate Two\u2019s Complement"
+      },
+      "pdfPage": 642,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "0d2107d5727327b1a471485a08dbaf52f0e9ee3d3c804b557d08eb69c8cb87bb"
+    },
+    {
+      "heading": {
+        "id": "pdf:642:cell:60",
+        "text": "NOP\u2014No Operation"
+      },
+      "pdfPage": 642,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "3f7ecae1aacec825d9b733f71ec3a8867a1547ca718453a46fab013877a5d9e1"
+    },
+    {
+      "heading": {
+        "id": "pdf:642:cell:62",
+        "text": "NOT\u2014Negate One\u2019s Complement"
+      },
+      "pdfPage": 642,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "cd9a351b3615414716d7ede70742812e89751a3b2aafd29fa39fcab429aed200"
+    },
+    {
+      "heading": {
+        "id": "pdf:643:cell:29",
+        "text": "OR\u2014Logical OR"
+      },
+      "pdfPage": 643,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "0367b9291dfcc8c5a9b0513e7bd2faa73e171ba8b68311a9883d1ea0dd61fd32"
+    },
+    {
+      "heading": {
+        "id": "pdf:643:cell:35",
+        "text": "OUT\u2014Output to Port"
+      },
+      "pdfPage": 643,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "dataBits": [
+          8,
+          16,
+          32
+        ],
+        "definiteWrites": "not-derived",
+        "kind": "port-io-subforms",
+        "prefixLegality": "separate-form-encoding-contract",
+        "rexW": "does-not-create64-bit-port-data",
+        "stringCountAndPointerBits": []
+      },
+      "sourceWordsSha256": "a5b4db13254c52d49dc1411343b132750e49b1aa33fece336120cff15097c90d"
+    },
+    {
+      "heading": {
+        "id": "pdf:643:cell:38",
+        "text": "OUTS, OUTSW, OUTSD\u2014Output String"
+      },
+      "pdfPage": 643,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "dataBits": [
+          8,
+          16,
+          32
+        ],
+        "definiteWrites": "not-derived",
+        "kind": "port-io-subforms",
+        "prefixLegality": "separate-form-encoding-contract",
+        "rexW": "does-not-create64-bit-port-data",
+        "stringCountAndPointerBits": [
+          64,
+          32
+        ]
+      },
+      "sourceWordsSha256": "f469d938b5db4da4cdeeb3e22db0eaa9ad2883664732bebe97c1633dd104b77e"
+    },
+    {
+      "heading": {
+        "id": "pdf:643:cell:40",
+        "text": "PAUSE\u2014Pause"
+      },
+      "pdfPage": 643,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "538964c91f7da376419cd44f90f3500a8671c0fcea12915d5d953053bb6040fd"
+    },
+    {
+      "heading": {
+        "id": "pdf:643:cell:42",
+        "text": "POP\u2014Pop Stack"
+      },
+      "pdfPage": 643,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 64,
+        "definiteWrites": "not-derived",
+        "explicitNonStackAddressBits": [
+          64,
+          32
+        ],
+        "immediateBits": "opcode-specific;not-stack-payload-width",
+        "invalidSegments": [
+          "DS",
+          "ES",
+          "SS"
+        ],
+        "kind": "default64-stack-subforms",
+        "operand32": "unavailable",
+        "operandBits": [
+          16,
+          64
+        ],
+        "prefixLegality": "separate-form-encoding-contract",
+        "stackAddressBits": 64
+      },
+      "sourceWordsSha256": "bc005d3324de6d35e4c04430cc8a88b5272831d4c584fc59de1ecf87a665c8c7"
+    },
+    {
+      "heading": {
+        "id": "pdf:643:cell:45",
+        "text": "POP\u2014Pop (segment register from)"
+      },
+      "pdfPage": 643,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 64,
+        "definiteWrites": "not-derived",
+        "explicitNonStackAddressBits": [
+          64,
+          32
+        ],
+        "immediateBits": "opcode-specific;not-stack-payload-width",
+        "invalidSegments": [
+          "DS",
+          "ES",
+          "SS"
+        ],
+        "kind": "default64-stack-subforms",
+        "operand32": "unavailable",
+        "operandBits": [
+          16,
+          64
+        ],
+        "prefixLegality": "separate-form-encoding-contract",
+        "stackAddressBits": 64
+      },
+      "sourceWordsSha256": "a8ef16a80adf298b25e33d08d41cb945bc328221f60e5c8f805d5c34f038d294"
+    },
+    {
+      "heading": {
+        "id": "pdf:644:cell:7",
+        "text": "POPA, POPAD\u2014Pop All to GPR Words"
+      },
+      "pdfPage": 644,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "unavailable-old-operation",
+        "prefixLegality": "separate-form-encoding-contract",
+        "reassignedLeadingBytesPreserved": true
+      },
+      "sourceWordsSha256": "135ab1235f2cdb592672f9abc75432c4b4b8ec399493d779f7df4d3f73174961"
+    },
+    {
+      "heading": {
+        "id": "pdf:644:cell:20",
+        "text": "POPCNT\u2014Bit Population Count"
+      },
+      "pdfPage": 644,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "ddf79625eda27a9311a52a0e5a17e4c8af4308fcfb2de6eca1f75b49490fd8ee"
+    },
+    {
+      "heading": {
+        "id": "pdf:644:cell:36",
+        "text": "POPF, POPFD, POPFQ\u2014Pop to"
+      },
+      "pdfPage": 644,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 64,
+        "definiteWrites": "not-derived",
+        "explicitNonStackAddressBits": [
+          64,
+          32
+        ],
+        "immediateBits": "opcode-specific;not-stack-payload-width",
+        "invalidSegments": [],
+        "kind": "default64-stack-subforms",
+        "operand32": "unavailable",
+        "operandBits": [
+          16,
+          64
+        ],
+        "prefixLegality": "separate-form-encoding-contract",
+        "stackAddressBits": 64
+      },
+      "sourceWordsSha256": "16eef530cf8912948e2359a59c3448b3b2d15f8982aac0e2125131b6cd1ecf99"
+    },
+    {
+      "heading": {
+        "id": "pdf:644:cell:39",
+        "text": "PREFETCH\u2014Prefetch L1 Data-Cache"
+      },
+      "pdfPage": 644,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "adff79bc9c915b130a62c82751c8c31e0aa8e939898c85738844a693293d97d2"
+    },
+    {
+      "heading": {
+        "id": "pdf:644:cell:42",
+        "text": "PREFETCHlevel\u2014Prefetch Data to"
+      },
+      "pdfPage": 644,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "f65bfef3688c6937297a8152aa6d0d67cb1bad697b38857b09d9706cf59972f9"
+    },
+    {
+      "heading": {
+        "id": "pdf:644:cell:54",
+        "text": "PREFETCHW\u2014Prefetch L1 Data-Cache"
+      },
+      "pdfPage": 644,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "3af688220ee2ea6b23dc9121abffce8331012e0a08821a62c111512b9f495f11"
+    },
+    {
+      "heading": {
+        "id": "pdf:644:cell:60",
+        "text": "PUSH\u2014Push onto Stack"
+      },
+      "pdfPage": 644,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 64,
+        "definiteWrites": "not-derived",
+        "explicitNonStackAddressBits": [
+          64,
+          32
+        ],
+        "immediateBits": "opcode-specific;not-stack-payload-width",
+        "invalidSegments": [
+          "DS",
+          "ES",
+          "SS",
+          "CS"
+        ],
+        "kind": "default64-stack-subforms",
+        "operand32": "unavailable",
+        "operandBits": [
+          16,
+          64
+        ],
+        "prefixLegality": "separate-form-encoding-contract",
+        "stackAddressBits": 64
+      },
+      "sourceWordsSha256": "dc687edd6a9415d7be4193243f5eb4c951e4009df9c308d9b8c9f96da319d1ff"
+    },
+    {
+      "heading": {
+        "id": "pdf:645:cell:7",
+        "text": "PUSH\u2014Push (segment register) onto"
+      },
+      "pdfPage": 645,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 64,
+        "definiteWrites": "not-derived",
+        "explicitNonStackAddressBits": [
+          64,
+          32
+        ],
+        "immediateBits": "opcode-specific;not-stack-payload-width",
+        "invalidSegments": [
+          "DS",
+          "ES",
+          "SS",
+          "CS"
+        ],
+        "kind": "default64-stack-subforms",
+        "operand32": "unavailable",
+        "operandBits": [
+          16,
+          64
+        ],
+        "prefixLegality": "separate-form-encoding-contract",
+        "stackAddressBits": 64
+      },
+      "sourceWordsSha256": "1f74960a2aac251064d42e505c7b3f7e25be3f9ebaf2be669c83a710119298c2"
+    },
+    {
+      "heading": {
+        "id": "pdf:645:cell:29",
+        "text": "PUSHA, PUSHAD - Push All to GPR"
+      },
+      "pdfPage": 645,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "unavailable-old-operation",
+        "prefixLegality": "separate-form-encoding-contract",
+        "reassignedLeadingBytesPreserved": true
+      },
+      "sourceWordsSha256": "8722a99cd0ba5ef3013876dcc3fed8e2cee82b98349e91fe901fe120f1d42fb0"
+    },
+    {
+      "heading": {
+        "id": "pdf:645:cell:33",
+        "text": "PUSHF, PUSHFD, PUSHFQ\u2014Push"
+      },
+      "pdfPage": 645,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 64,
+        "definiteWrites": "not-derived",
+        "explicitNonStackAddressBits": [
+          64,
+          32
+        ],
+        "immediateBits": "opcode-specific;not-stack-payload-width",
+        "invalidSegments": [],
+        "kind": "default64-stack-subforms",
+        "operand32": "unavailable",
+        "operandBits": [
+          16,
+          64
+        ],
+        "prefixLegality": "separate-form-encoding-contract",
+        "stackAddressBits": 64
+      },
+      "sourceWordsSha256": "966470e212bee5a694d261f83aac499ecba7e9edeeadee6d07e7c713e537ea3f"
+    },
+    {
+      "heading": {
+        "id": "pdf:645:cell:55",
+        "text": "RCL\u2014Rotate Through Carry Left"
+      },
+      "pdfPage": 645,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "1ed8cd7214b3efc0ff7e6b0b4d8ea420a700cb82b684891c73f75f8bc4d4bc6d"
+    },
+    {
+      "heading": {
+        "id": "pdf:645:cell:59",
+        "text": "RCR\u2014Rotate Through Carry Right"
+      },
+      "pdfPage": 645,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "6980d32698b1fb2daa0f898df88dc2bd099c835223098bd6c5be6769cbc4c25d"
+    },
+    {
+      "heading": {
+        "id": "pdf:645:cell:63",
+        "text": "RDMSR\u2014Read Model-Specific Register"
+      },
+      "pdfPage": 645,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "0096e718a9453330aeeb35ccc36f9badc225c2abb78a03173fdff60160efd965"
+    },
+    {
+      "heading": {
+        "id": "pdf:646:cell:7",
+        "text": "RDPMC\u2014Read Performance-"
+      },
+      "pdfPage": 646,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "630b3b31b34a258a1780e0422cd1c24b8a91ba71a7fd803ce8bde49a3b8b30b1"
+    },
+    {
+      "heading": {
+        "id": "pdf:646:cell:10",
+        "text": "RDTSC\u2014Read Time-Stamp Counter"
+      },
+      "pdfPage": 646,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "2627f438391fb5f85b37f877967bb5604118b4f608cdb82b94d311fa2686b8d1"
+    },
+    {
+      "heading": {
+        "id": "pdf:646:cell:12",
+        "text": "RDTSCP\u2014Read Time-Stamp Counter"
+      },
+      "pdfPage": 646,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "6eac1e07965281badb4f234b196fb7e739b694a2bad045a77f0c3357b89c4e3a"
+    },
+    {
+      "heading": {
+        "id": "pdf:646:cell:15",
+        "text": "REP INS\u2014Repeat Input String"
+      },
+      "pdfPage": 646,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "dataBits": [
+          8,
+          16,
+          32
+        ],
+        "definiteWrites": "not-derived",
+        "kind": "port-io-subforms",
+        "prefixLegality": "separate-form-encoding-contract",
+        "rexW": "does-not-create64-bit-port-data",
+        "stringCountAndPointerBits": [
+          64,
+          32
+        ]
+      },
+      "sourceWordsSha256": "e133c1c365dfbdf3120ac5c4d76b999f2222014be1eb10fa9cac176135e62e15"
+    },
+    {
+      "heading": {
+        "id": "pdf:646:cell:17",
+        "text": "REP LODS\u2014Repeat Load String"
+      },
+      "pdfPage": 646,
+      "properties": {
+        "byteOpcodeOperandBits": 8,
+        "byteOpcodesPromoted": false,
+        "dataBits": [
+          8,
+          16,
+          32,
+          64
+        ],
+        "definiteWrites": "not-derived",
+        "kind": "string-subforms",
+        "pointerAndCountBits": [
+          64,
+          32
+        ],
+        "pointerAndCountSelectedBy": "address-size",
+        "prefixLegality": "separate-form-encoding-contract",
+        "repeated": "instruction-owned-prefix-rule;not-opcode-selector"
+      },
+      "sourceWordsSha256": "4ee6051ed2b13e8bcb5a43a4fc8c3149b248c9880c3a55e010bb8149ba51f80e"
+    },
+    {
+      "heading": {
+        "id": "pdf:646:cell:19",
+        "text": "REP MOVS\u2014Repeat Move String"
+      },
+      "pdfPage": 646,
+      "properties": {
+        "byteOpcodeOperandBits": 8,
+        "byteOpcodesPromoted": false,
+        "dataBits": [
+          8,
+          16,
+          32,
+          64
+        ],
+        "definiteWrites": "not-derived",
+        "kind": "string-subforms",
+        "pointerAndCountBits": [
+          64,
+          32
+        ],
+        "pointerAndCountSelectedBy": "address-size",
+        "prefixLegality": "separate-form-encoding-contract",
+        "repeated": "instruction-owned-prefix-rule;not-opcode-selector"
+      },
+      "sourceWordsSha256": "600fccd67b16652dcb19d8a0d317beb147ef1bccdfbec3a3f5a2c8434b3169ca"
+    },
+    {
+      "heading": {
+        "id": "pdf:646:cell:21",
+        "text": "REP OUTS\u2014Repeat Output String to"
+      },
+      "pdfPage": 646,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "dataBits": [
+          8,
+          16,
+          32
+        ],
+        "definiteWrites": "not-derived",
+        "kind": "port-io-subforms",
+        "prefixLegality": "separate-form-encoding-contract",
+        "rexW": "does-not-create64-bit-port-data",
+        "stringCountAndPointerBits": [
+          64,
+          32
+        ]
+      },
+      "sourceWordsSha256": "6881cf5a1b0a4d3dbc49f25eb9d4d40bd4ac5bdc42809a6438decd3b202152a0"
+    },
+    {
+      "heading": {
+        "id": "pdf:646:cell:24",
+        "text": "REP STOS\u2014Repeat Store String"
+      },
+      "pdfPage": 646,
+      "properties": {
+        "byteOpcodeOperandBits": 8,
+        "byteOpcodesPromoted": false,
+        "dataBits": [
+          8,
+          16,
+          32,
+          64
+        ],
+        "definiteWrites": "not-derived",
+        "kind": "string-subforms",
+        "pointerAndCountBits": [
+          64,
+          32
+        ],
+        "pointerAndCountSelectedBy": "address-size",
+        "prefixLegality": "separate-form-encoding-contract",
+        "repeated": "instruction-owned-prefix-rule;not-opcode-selector"
+      },
+      "sourceWordsSha256": "e802885fe1d9491d17b78839558d5388c80f3a2256fcbbb5e77391682bcbe102"
+    },
+    {
+      "heading": {
+        "id": "pdf:646:cell:26",
+        "text": "REPx CMPS \u2014Repeat Compare String"
+      },
+      "pdfPage": 646,
+      "properties": {
+        "byteOpcodeOperandBits": 8,
+        "byteOpcodesPromoted": false,
+        "dataBits": [
+          8,
+          16,
+          32,
+          64
+        ],
+        "definiteWrites": "not-derived",
+        "kind": "string-subforms",
+        "pointerAndCountBits": [
+          64,
+          32
+        ],
+        "pointerAndCountSelectedBy": "address-size",
+        "prefixLegality": "separate-form-encoding-contract",
+        "repeated": "instruction-owned-prefix-rule;not-opcode-selector"
+      },
+      "sourceWordsSha256": "409735b74faa18cb04f79aff2d6e1b3ed9969d9d097f3000579fd3c79cee108b"
+    },
+    {
+      "heading": {
+        "id": "pdf:647:cell:7",
+        "text": "REPx SCAS \u2014Repeat Scan String"
+      },
+      "pdfPage": 647,
+      "properties": {
+        "byteOpcodeOperandBits": 8,
+        "byteOpcodesPromoted": false,
+        "dataBits": [
+          8,
+          16,
+          32,
+          64
+        ],
+        "definiteWrites": "not-derived",
+        "kind": "string-subforms",
+        "pointerAndCountBits": [
+          64,
+          32
+        ],
+        "pointerAndCountSelectedBy": "address-size",
+        "prefixLegality": "separate-form-encoding-contract",
+        "repeated": "instruction-owned-prefix-rule;not-opcode-selector"
+      },
+      "sourceWordsSha256": "7de3fdd67da5289be52022ff2cead80f481b83fd0f0f07c5b44201a7c11f5589"
+    },
+    {
+      "heading": {
+        "id": "pdf:647:cell:9",
+        "text": "RET\u2014Return from Call Near"
+      },
+      "pdfPage": 647,
+      "properties": {
+        "address16": "unavailable",
+        "byteOpcodesPromoted": false,
+        "currentScope": {
+          "addressBits": [
+            64,
+            32
+          ],
+          "basis": "user-selected-fixed64-hypothesis;not-publisher-correction",
+          "countBits": [],
+          "countSelectedBy": "no-implicit-loop-counter",
+          "excludedOperandAlternatives": [
+            16
+          ],
+          "indirectTargetBits": 64,
+          "mnemonic": "RET",
+          "operand32": "unavailable;not-address32",
+          "owner": "amd-entry:0119",
+          "ownerPages": [
+            353,
+            354
+          ],
+          "prefix66": "no-byte-removal-or-automatic-admission",
+          "relativeDisplacementBits": [],
+          "returnAddressStackBits": 64,
+          "selectedOperandBits": 64
+        },
+        "definiteWrites": "not-derived",
+        "kind": "selected-near-branch",
+        "originalOverrideNote": "preserved-outside-selected-case",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "689c0071a039887d195b9540e38fb709ed584d15921c2ac1c164d0d90ba98d4d"
+    },
+    {
+      "heading": {
+        "id": "pdf:647:cell:12",
+        "text": "RET\u2014Return from Call Far"
+      },
+      "pdfPage": 647,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "directImmediate": "unavailable-native64",
+        "indirect": "instruction-owned-gate-and-pointer-rules",
+        "kind": "far-transfer-subforms",
+        "nearHypothesisApplies": false,
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "879199652fb916d9cf5c8cb6a6f98dc75e776c243603aa49fe306129b6ef301d"
+    },
+    {
+      "heading": {
+        "id": "pdf:647:cell:76",
+        "text": "ROL\u2014Rotate Left"
+      },
+      "pdfPage": 647,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "89c81715c73312d63931fcce5d8591a388520a395c41824b30b1117604da2243"
+    },
+    {
+      "heading": {
+        "id": "pdf:647:cell:66",
+        "text": "ROR\u2014Rotate Right"
+      },
+      "pdfPage": 647,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "a934197992728ef40b98039e8ba1477069f55ef405fb12bf277cc1c5e1724ead"
+    },
+    {
+      "heading": {
+        "id": "pdf:647:cell:53",
+        "text": "RSM\u2014Resume from System"
+      },
+      "pdfPage": 647,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "026b43d179da620b004974cdeacb6940e2e2223dc6d92aecb9786d9f3b0593d4"
+    },
+    {
+      "heading": {
+        "id": "pdf:647:cell:56",
+        "text": "SAHF\u2014Store AH into Flags"
+      },
+      "pdfPage": 647,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "e78f8765241fea31d6b47b3a1c81d2449a404aea82a81461bea27925456b0dc0"
+    },
+    {
+      "heading": {
+        "id": "pdf:647:cell:61",
+        "text": "SAL\u2014Shift Arithmetic Left"
+      },
+      "pdfPage": 647,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "ab8586d32407a5def64894777187952774b63173bd3fee88023b494fdc02b259"
+    },
+    {
+      "heading": {
+        "id": "pdf:648:cell:27",
+        "text": "SAR\u2014Shift Arithmetic Right"
+      },
+      "pdfPage": 648,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "bb4228e4d940953e644bbb77bdd9e07ffac12485ecfa2faaa5fe5560c0f67cb2"
+    },
+    {
+      "heading": {
+        "id": "pdf:648:cell:33",
+        "text": "SBB\u2014Subtract with Borrow"
+      },
+      "pdfPage": 648,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "1f4b3f592cfecd1d5dcb00f21d386e4fa5f61f3820b224714851664879c56848"
+    },
+    {
+      "heading": {
+        "id": "pdf:648:cell:39",
+        "text": "SCAS, SCASW, SCASD, SCASQ\u2014"
+      },
+      "pdfPage": 648,
+      "properties": {
+        "byteOpcodeOperandBits": 8,
+        "byteOpcodesPromoted": false,
+        "dataBits": [
+          8,
+          16,
+          32,
+          64
+        ],
+        "definiteWrites": "not-derived",
+        "kind": "string-subforms",
+        "pointerAndCountBits": [
+          64,
+          32
+        ],
+        "pointerAndCountSelectedBy": "address-size",
+        "prefixLegality": "separate-form-encoding-contract",
+        "repeated": "instruction-owned-prefix-rule;not-opcode-selector"
+      },
+      "sourceWordsSha256": "a91f85a950658cbbef79b66a6e3d4f46d10f8a277709dc4c648611a43f8ed4bc"
+    },
+    {
+      "heading": {
+        "id": "pdf:648:cell:52",
+        "text": "SFENCE\u2014Store Fence"
+      },
+      "pdfPage": 648,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "d4d34f30389f5ce2b9a782f68c75c41140653d6581a2a9cb306b215bfd911371"
+    },
+    {
+      "heading": {
+        "id": "pdf:648:cell:54",
+        "text": "SGDT\u2014Store Global Descriptor Table"
+      },
+      "pdfPage": 648,
+      "properties": {
+        "baseBits": 64,
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "fixed-descriptor-base",
+        "limitBits": 16,
+        "memoryBytes": 10,
+        "operandOverride": "ignored",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "8c75d0f7669b9edf92a082410586e0e5072c26b7aeac78cc49b02b45746c166e"
+    },
+    {
+      "heading": {
+        "id": "pdf:648:cell:69",
+        "text": "SHL\u2014Shift Left"
+      },
+      "pdfPage": 648,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "ee63955cb91cc3853ecf0e400dad058381ea37cf769a0e1ff481baf175f9b12b"
+    },
+    {
+      "heading": {
+        "id": "pdf:649:cell:7",
+        "text": "SHLD\u2014Shift Left Double"
+      },
+      "pdfPage": 649,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "ed15d34a31ef0d53ff0137e92874ae0b51c138f23c5261f5ef5376f7f0e92467"
+    },
+    {
+      "heading": {
+        "id": "pdf:649:cell:38",
+        "text": "SHR\u2014Shift Right"
+      },
+      "pdfPage": 649,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "71e30f75df3e855387653ac927b2d0e167b80aea891089b709b022e9a38f2b41"
+    },
+    {
+      "heading": {
+        "id": "pdf:649:cell:42",
+        "text": "SHRD\u2014Shift Right Double"
+      },
+      "pdfPage": 649,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "126f391b99239534f0da735fd78b92072595c94930fdd914ecd5b3a5a2e9e2ba"
+    },
+    {
+      "heading": {
+        "id": "pdf:649:cell:45",
+        "text": "SIDT\u2014Store Interrupt Descriptor Table"
+      },
+      "pdfPage": 649,
+      "properties": {
+        "baseBits": 64,
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "fixed-descriptor-base",
+        "limitBits": 16,
+        "memoryBytes": 10,
+        "operandOverride": "ignored",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "b6b893d0538ee9e3af475d765475bcf5ce707993d26b04ce2359289545b00ac3"
+    },
+    {
+      "heading": {
+        "id": "pdf:649:cell:48",
+        "text": "SKINIT\u2014Secure Init and Jump with"
+      },
+      "pdfPage": 649,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "cf26d2fd9c8862288c5d6963421009246fa4a399cc34707e7df453948b553275"
+    },
+    {
+      "heading": {
+        "id": "pdf:649:cell:51",
+        "text": "SLDT\u2014Store Local Descriptor Table"
+      },
+      "pdfPage": 649,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "selector-store",
+        "memoryBits": 16,
+        "prefixLegality": "separate-form-encoding-contract",
+        "registerBits": [
+          16,
+          32,
+          64
+        ],
+        "selectorBits": 16
+      },
+      "sourceWordsSha256": "9aaa37c2f00e11d1cb456e68961296caaac8599e611226ddb288415f8435ef65"
+    },
+    {
+      "heading": {
+        "id": "pdf:649:cell:54",
+        "text": "SMSW\u2014Store Machine Status Word"
+      },
+      "pdfPage": 649,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "machine-status-store",
+        "memoryBits": 16,
+        "prefixLegality": "separate-form-encoding-contract",
+        "registerBits": [
+          16,
+          32,
+          64
+        ]
+      },
+      "sourceWordsSha256": "e4ae3761f3affb20ae9c746d30a485d784dcc811a73c544ab56902289a516d53"
+    },
+    {
+      "heading": {
+        "id": "pdf:649:cell:56",
+        "text": "STC\u2014Set Carry Flag"
+      },
+      "pdfPage": 649,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "1ce2483370c35964cad8f7e62e6747b702a14c11c51a6d4d6a195c96e52d8ef6"
+    },
+    {
+      "heading": {
+        "id": "pdf:649:cell:58",
+        "text": "STD\u2014Set Direction Flag"
+      },
+      "pdfPage": 649,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "292b12a8f070b455743e4f88ef25e97f03a1d9c8d8148384220159ba1020754c"
+    },
+    {
+      "heading": {
+        "id": "pdf:650:cell:7",
+        "text": "STGI\u2014Set Global Interrupt Flag"
+      },
+      "pdfPage": 650,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "2d555e5043980a4584b02a866f0e74773977d7913314491f225e57617956518a"
+    },
+    {
+      "heading": {
+        "id": "pdf:650:cell:9",
+        "text": "STI - Set Interrupt Flag"
+      },
+      "pdfPage": 650,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "ae8983124cab03f18ea9150f958918f017ef9e7a320da71a52c8992067cea89a"
+    },
+    {
+      "heading": {
+        "id": "pdf:650:cell:11",
+        "text": "STOS, STOSW, STOSD, STOSQ- Store"
+      },
+      "pdfPage": 650,
+      "properties": {
+        "byteOpcodeOperandBits": 8,
+        "byteOpcodesPromoted": false,
+        "dataBits": [
+          8,
+          16,
+          32,
+          64
+        ],
+        "definiteWrites": "not-derived",
+        "kind": "string-subforms",
+        "pointerAndCountBits": [
+          64,
+          32
+        ],
+        "pointerAndCountSelectedBy": "address-size",
+        "prefixLegality": "separate-form-encoding-contract",
+        "repeated": "instruction-owned-prefix-rule;not-opcode-selector"
+      },
+      "sourceWordsSha256": "55136d547f071ba679b2272c5b6bf4b0fdcddccd5171241b4dc5da0cdf1a007b"
+    },
+    {
+      "heading": {
+        "id": "pdf:650:cell:14",
+        "text": "STR\u2014Store Task Register"
+      },
+      "pdfPage": 650,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "selector-store",
+        "memoryBits": 16,
+        "prefixLegality": "separate-form-encoding-contract",
+        "registerBits": [
+          16,
+          32,
+          64
+        ],
+        "selectorBits": 16
+      },
+      "sourceWordsSha256": "4f785b6a510483896d3bba3b85837dd0f832e3c90c192237add5e6feb092941b"
+    },
+    {
+      "heading": {
+        "id": "pdf:650:cell:52",
+        "text": "SUB\u2014Subtract"
+      },
+      "pdfPage": 650,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "ae2b68fad109ff4360464e570327d478c65a688558504bff60f1e1740df231b4"
+    },
+    {
+      "heading": {
+        "id": "pdf:650:cell:61",
+        "text": "SWAPGS\u2014Swap GS Register with"
+      },
+      "pdfPage": 650,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "37f68812666efeabcfa7a24cc896ee3ea71a47ef0e541f7d8f1c0e0d9052d568"
+    },
+    {
+      "heading": {
+        "id": "pdf:650:cell:64",
+        "text": "SYSCALL\u2014Fast System Call"
+      },
+      "pdfPage": 650,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "320c3f8208684efa615ccdfbd712175cae4393c5b667e5fe8cdd82459daeb7ec"
+    },
+    {
+      "heading": {
+        "id": "pdf:651:cell:7",
+        "text": "SYSENTER\u2014System Call"
+      },
+      "pdfPage": 651,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "unavailable-old-operation",
+        "prefixLegality": "separate-form-encoding-contract",
+        "reassignedLeadingBytesPreserved": true
+      },
+      "sourceWordsSha256": "769681ecfc88153799af67a5e0b28cb307adc75d17b521f7d036faf5b1add3db"
+    },
+    {
+      "heading": {
+        "id": "pdf:651:cell:9",
+        "text": "SYSEXIT\u2014System Return"
+      },
+      "pdfPage": 651,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "unavailable-old-operation",
+        "prefixLegality": "separate-form-encoding-contract",
+        "reassignedLeadingBytesPreserved": true
+      },
+      "sourceWordsSha256": "161c79969be4e21c11f16ee91a0447957341cb5a214ca85ffb480bbd372cd8d2"
+    },
+    {
+      "heading": {
+        "id": "pdf:651:cell:11",
+        "text": "SYSRET\u2014Fast System Return"
+      },
+      "pdfPage": 651,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "system-return",
+        "nearHypothesisApplies": false,
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "prefixLegality": "separate-form-encoding-contract",
+        "returnMode": "64-only-with-operand64;otherwise-compatibility32"
+      },
+      "sourceWordsSha256": "9a2760108d8c7057f1ef4ee2cf7a46a1926dd75f7c3fc47db400804e6646baef"
+    },
+    {
+      "heading": {
+        "id": "pdf:651:cell:34",
+        "text": "TEST\u2014Test Bits"
+      },
+      "pdfPage": 651,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "17bb00c0cea9d45f6e104eadb027960bd3507faec6303ea462ccb663be7a7608"
+    },
+    {
+      "heading": {
+        "id": "pdf:651:cell:38",
+        "text": "UD2\u2014Undefined Operation"
+      },
+      "pdfPage": 651,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "3af4e566d57589f4377d0ef5a1d2d4b6218acb06cca3a1b284da966c3afae1f5"
+    },
+    {
+      "heading": {
+        "id": "pdf:651:cell:40",
+        "text": "VERR\u2014Verify Segment for Reads"
+      },
+      "pdfPage": 651,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "descriptorBaseBits": null,
+        "kind": "fixed-explicit-selector-or-word",
+        "operandBits": [
+          16
+        ],
+        "operandOverride": "ignored",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "81f4036a0eb348baaa74593fa1c2aa2c7791cf7c3948838bae1d78a9eba7d011"
+    },
+    {
+      "heading": {
+        "id": "pdf:651:cell:42",
+        "text": "VERW\u2014Verify Segment for Writes"
+      },
+      "pdfPage": 651,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "descriptorBaseBits": null,
+        "kind": "fixed-explicit-selector-or-word",
+        "operandBits": [
+          16
+        ],
+        "operandOverride": "ignored",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "38d336fa245d898b7e34af78f93dfceb363c96c739a6d6feef56c30f7682b67d"
+    },
+    {
+      "heading": {
+        "id": "pdf:651:cell:44",
+        "text": "VMLOAD\u2014Load State from VMCB"
+      },
+      "pdfPage": 651,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "77727d0c524942d2a80d0ddaa14b71d68c6ab0ed4eacff94442de98059bda595"
+    },
+    {
+      "heading": {
+        "id": "pdf:651:cell:46",
+        "text": "VMMCALL\u2014Call VMM"
+      },
+      "pdfPage": 651,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "6804f4ce72535728e423f92e0e3112e1919601ca1091c74ebbed8250bd4284a2"
+    },
+    {
+      "heading": {
+        "id": "pdf:651:cell:48",
+        "text": "VMRUN\u2014Run Virtual Machine"
+      },
+      "pdfPage": 651,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "dc0cdfa939d86bd9016c899f0a592c172af7bc750c213e0d7180e02ec6e96291"
+    },
+    {
+      "heading": {
+        "id": "pdf:651:cell:50",
+        "text": "VMSAVE\u2014Save State to VMCB"
+      },
+      "pdfPage": 651,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "1e90d5e0136940e50081fe11fa0ce0de25c81782f8e30f528aae4858659f61f7"
+    },
+    {
+      "heading": {
+        "id": "pdf:652:cell:7",
+        "text": "WAIT\u2014Wait for Interrupt"
+      },
+      "pdfPage": 652,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "e9adc1619ac8cb7c4cffb3364a05ac77a4a83641fb5a900584a21e0767dae912"
+    },
+    {
+      "heading": {
+        "id": "pdf:652:cell:9",
+        "text": "WBINVD\u2014Writeback and Invalidate All"
+      },
+      "pdfPage": 652,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "7aa82b1fda883430b8336d16bafa9bc1b34bf9719b10bc162d01b1a6c113adc7"
+    },
+    {
+      "heading": {
+        "id": "pdf:652:cell:12",
+        "text": "WRMSR\u2014Write to Model-Specific"
+      },
+      "pdfPage": 652,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "definiteWrites": "not-derived",
+        "kind": "no-generic-operand-size-selection",
+        "operandBits": "instruction-owned-implicit-and-memory-fields",
+        "operandOverride": "does-not-promote-implicit-data",
+        "prefixLegality": "separate-form-encoding-contract"
+      },
+      "sourceWordsSha256": "088beea5e727d529ed9906f3641fab70f7fd3fdd9faa30c681cfdbeaf029330e"
+    },
+    {
+      "heading": {
+        "id": "pdf:652:cell:15",
+        "text": "XADD\u2014Exchange and Add"
+      },
+      "pdfPage": 652,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "69bfc89c4aa97ccfdeffaa9a0b3f4972ee634962d014db5043a53bec41ec0191"
+    },
+    {
+      "heading": {
+        "id": "pdf:652:cell:17",
+        "text": "XCHG\u2014Exchange Register/Memory"
+      },
+      "pdfPage": 652,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "215c60d5798d4bf343d06ed783379dbb41590ac1b88b84aea568896853e7f943"
+    },
+    {
+      "heading": {
+        "id": "pdf:652:cell:59",
+        "text": "XOR\u2014Logical Exclusive OR"
+      },
+      "pdfPage": 652,
+      "properties": {
+        "byteOpcodesPromoted": false,
+        "defaultBits": 32,
+        "definiteWrites": "not-derived",
+        "kind": "promoted-nonbyte-subforms",
+        "operandBits": [
+          16,
+          32,
+          64
+        ],
+        "operandOverride": "66-to16;REX.W-precedes66",
+        "prefixLegality": "separate-form-encoding-contract",
+        "sourceWidth": "separate-for-extension-count-immediate-and-memory-subforms"
+      },
+      "sourceWordsSha256": "3bf5f78db380c7bc0de47b0c3afaff37ab0ac4aba8ad0135663a84b20077c05a"
+    }
+  ],
+  "schema": "ariadne.amd64-b1-size-rules/v1",
+  "sourcePolicySha256": "d1caf84927162bb696185eed4880007aa92ded2260738c940cdeb935ee8a1840"
+}
